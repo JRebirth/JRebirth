@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>jrebirth</artifactId>
+		<groupId>org</groupId>
+		<version>0.5.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<groupId>org.jrebirth</groupId>
+	<artifactId>analyzer</artifactId>
+
+	<name>JRebirth Analyzer</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>core</artifactId>
+			<version>0.5.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle.javafx</groupId>
+			<artifactId>jfxrt</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<!-- <JavaFX-Version>2.0</JavaFX-Version> -->
+							<Main-Class>org.jrebirth.analyzer.JRebirthAnalyzer</Main-Class>
+
+							<!-- implementation-vendor: I implementation-title: Jrebirth demo 
+								implementation-version: 1.0 JavaFX-Application-Class: org.jrebirth.demo.JRebirthDemo 
+								Created-By: Maven Packager Main-Class: com/javafx/main/Main -->
+						</manifestEntries>
+						<manifest>
+							<!-- <addDefaultImplementationEntries>true</addDefaultImplementationEntries> 
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries> -->
+							<addClasspath>true</addClasspath>
+
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+</project>

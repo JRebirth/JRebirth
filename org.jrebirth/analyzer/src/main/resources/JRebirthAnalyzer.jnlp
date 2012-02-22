@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="JRebirthAnalyzer.jnlp">
+  <information>
+    <title>JRebirth Analyzer</title>
+    <vendor>Sébastien Bordes</vendor>
+    <description>JRebirth Analyzer application.</description>
+    <offline-allowed/>
+  </information>
+<resources os="Windows" arch="x86">
+    <jfx:javafx-runtime version="2.0+" href="http://download.oracle.com/otn-pub/java/javafx/javafx-windows-i586__Vlatest.exe "/>
+</resources>
+<resources os="Windows" arch="x64">
+    <jfx:javafx-runtime version="2.0+" href="http://download.oracle.com/otn-pub/java/javafx/javafx-windows-x64__Vlatest.exe "/>
+</resources>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="org.jrebirth.analyzer-0.1.0-SNAPSHOT.jar" size="21310" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Demo" />
+  <jfx:javafx-desc  width="800" height="600" main-class="org.jrebirth.analyzer.JRebirthAnalyzer"  name="Demo" />
+  <update check="background"/>
+</jnlp>

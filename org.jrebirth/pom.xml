@@ -1,0 +1,290 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org</groupId>
+	<artifactId>jrebirth</artifactId>
+	<version>0.5.0-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+	<name>JRebirth Parent Project</name>
+	<description>The base classes for all projects</description>
+	<url>http://sites.jrebirth.org/org.jrebirth-${project.version}</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- Default Parameter for Sonar -->
+		<sonar.host.url>http://quality.jrebirth.org</sonar.host.url>
+		<sonar.jdbc.url>jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;characterEncoding=utf8</sonar.jdbc.url>
+		<sonar.jdbc.driver>com.mysql.jdbc.Driver</sonar.jdbc.driver>
+		<!--Parameters to add as arguments of the mvn command -->
+		<!--<sonar.jdbc.username></sonar.jdbc.username> -->
+		<!--<sonar.jdbc.password></sonar.jdbc.password> -->
+
+		<jrebirth-configuration.version>1.0.0</jrebirth-configuration.version>
+
+	</properties>
+
+	<modules>
+		<module>core</module>
+		<module>analyzer</module>
+		<module>distribution</module>
+	</modules>
+
+	<issueManagement>
+		<system>YouTrack</system>
+		<url>http://bugs.jrebirth.org</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>Jenkins</system>
+		<url>http://ci.jrebirth.org/job/JRebirth-Full-Trunk/</url>
+	</ciManagement>
+
+	<scm>
+		<connection>scm:svn:svn+ssh://source.jrebirth.org/var/svn/jrebirth/JRebirth/trunk/org.jrebirth</connection>
+		<developerConnection>scm:svn:svn+ssh://source.jrebirth.org/var/svn/jrebirth/JRebirth/trunk/org.jrebirth</developerConnection>
+	</scm>
+	
+	<scm>
+		<connection>scm:git:git://github.com/sbordes/JRebirth.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/sbordes/JRebirth.git</developerConnection>
+		<url>https://github.com/sbordes/JRebirth</url>
+	</scm>
+
+	<organization>
+		<name>JRebirth Open Group</name>
+		<url>http://www.jrebirth.org</url>
+	</organization>
+
+	<licenses>
+		<license>
+			<name>CeCILL-C</name>
+			<url>http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.html</url>
+			<distribution>repo</distribution>
+			<comments>CeCILL-C Free Software Licence</comments>
+		</license>
+	</licenses>
+
+	<mailingLists>
+		<mailingList>
+			<name>JRebirth Developers Google Group</name>
+			<archive>groups.google.com/group/jrebirth-developers</archive>
+			<subscribe>http://groups.google.com/group/jrebirth-developers/subscribe</subscribe>
+		</mailingList>
+		<mailingList>
+			<name>JRebirth Users Google Group</name>
+			<archive>groups.google.com/group/jrebirth-users</archive>
+			<subscribe>http://groups.google.com/group/jrebirth-users/subscribe</subscribe>
+		</mailingList>
+	</mailingLists>
+
+	<build>
+
+		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, 
+			it's not yet implemented: see MNG-2216 -->
+		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
+		<!-- <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName> -->
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.wagon</groupId>
+						<artifactId>wagon-ssh</artifactId>
+						<version>2.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<!-- Project Quality -->
+			<plugin>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-maven3-plugin</artifactId>
+				<version>2.12</version>
+			</plugin>
+
+			<!-- Code Style -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<configLocation>config/CheckStyle.xml</configLocation>
+					<headerLocation>config/LICENSE.txt</headerLocation>
+				</configuration>
+				<!--<dependencies> <dependency> <groupId>com.jrebirth</groupId> <artifactId>configuration</artifactId> 
+					<version>${jrebirth-configuration.version}</version> </dependency> </dependencies> -->
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>2.3.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>2.5</version>
+				<!--<configuration> <linkXref>true</linkXref> <minimumTokens>150</minimumTokens> 
+					<targetJdk>1.6</targetJdk> <rulesets> <ruleset>config/PMD.xml</ruleset> </rulesets> 
+					</configuration> <dependencies> <dependency> <groupId>org.jrebirth</groupId> 
+					<artifactId>configuration</artifactId> <version>1.0.0</version> </dependency> 
+					</dependencies> -->
+			</plugin>
+
+			<!-- Try qalab and stat-scm -->
+
+		</plugins>
+
+
+		<extensions>
+			<!--<extension> <groupId>com.jrebirth</groupId> <artifactId>configuration</artifactId> 
+				<version>${jrebirth-configuration.version}</version> </extension> -->
+			<!-- <extension> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-ssh</artifactId> 
+				<version>1.0-beta-7</version> </extension> <extension> <groupId>org.apache.maven.wagon</groupId> 
+				<artifactId>wagon-file</artifactId> </extension> -->
+		</extensions>
+	</build>
+
+	<reporting>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<links>
+						<link>http://download.oracle.com/javafx/2.0/api/</link>
+					</links>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.6</version>
+				<!--<configuration> <configLocation>config/CheckStyle.xml</configLocation> 
+					<headerLocation>config/LICENSE.txt</headerLocation> </configuration> -->
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>2.3.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>2.5</version>
+				<!--<configuration> <linkXref>true</linkXref> <minimumTokens>150</minimumTokens> 
+					<targetJdk>1.6</targetJdk> <rulesets> <ruleset>config/PMD.xml</ruleset> </rulesets> 
+					</configuration> -->
+			</plugin>
+		</plugins>
+	</reporting>
+
+
+	<distributionManagement>
+
+		<repository>
+			<id>JRebirth-Release</id>
+			<name>JRebirth Releases Repository</name>
+			<url>http://repo.jrebirth.org/jrebirth-release-local</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>JRebirth-Snapshot</id>
+			<name>JRebirth Snasphots Repository</name>
+			<url>http://repo.jrebirth.org/jrebirth-snapshot-local</url>
+		</snapshotRepository>
+
+		<site>
+			<id>JRebirth_Sites</id>
+			<name>JRebirth Sites</name>
+			<url>scp://source.jrebirth.org:2022/var/www/sites/org.jrebirth-${project.version}</url>
+			<!--<url>file:/var/www/sites/org.jrebirth-${project.version}</url> -->
+		</site>
+
+	</distributionManagement>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.oracle.javafx</groupId>
+				<artifactId>jfxrt</artifactId>
+				<version>2.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<developers>
+		<developer>
+			<id>jr1</id>
+			<name>Bordes Sébastien</name>
+			<email>sebastien.bordes@jrebirth.org</email>
+			<url>blog.webeo.fr</url>
+			<organization>JRebirth</organization>
+			<organizationUrl>www.jrebirth.org</organizationUrl>
+			<roles>
+				<role>JRebirth Project Leader</role>
+			</roles>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>Bordes Céline</name>
+			<email>celine.bordes@jrebirth.org</email>
+			<url>www.xoxi.fr</url>
+			<organization>JRebirth</organization>
+			<organizationUrl>www.jrebirth.org</organizationUrl>
+			<roles>
+				<role>Graphic Designer</role>
+			</roles>
+		</contributor>
+	</contributors>
+
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>releases</id>
+			<name>libs-release</name>
+			<url>http://repo.jrebirth.org/libs-release</url>
+		</repository>
+		<repository>
+			<snapshots />
+			<id>snapshots</id>
+			<name>libs-snapshot</name>
+			<url>http://repo.jrebirth.org/libs-snapshot</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>plugins-release</name>
+			<url>http://repo.jrebirth.org/plugins-release</url>
+		</pluginRepository>
+		<pluginRepository>
+			<snapshots />
+			<id>snapshots</id>
+			<name>plugins-snapshot</name>
+			<url>http://repo.jrebirth.org/plugins-snapshot</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>

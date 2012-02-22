@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>jrebirth</artifactId>
+		<groupId>org</groupId>
+		<version>0.5.0-SNAPSHOT</version>
+		<relativePath>../</relativePath>
+	</parent>
+	<groupId>org.jrebirth</groupId>
+	<artifactId>distribution</artifactId>
+	<version>0.5.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Distribution Module</name>
+
+	<description>Module used to package the full JRebirth distribution</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<id>package-all</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<finalName>JRebirth-${project.version}</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>src/main/assembly/all.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+
+	</build>
+	<dependencies>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>core</artifactId>
+			<version>0.5.0-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>analyzer</artifactId>
+			<version>0.5.0-SNAPSHOT</version>
+			<type>pom</type>
+			<scope>compile</scope>
+		</dependency>
+
+
+	</dependencies>
+</project>
