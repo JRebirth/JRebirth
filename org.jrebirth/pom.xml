@@ -39,16 +39,11 @@
 		<system>Jenkins</system>
 		<url>http://ci.jrebirth.org/job/JRebirth-Full-Trunk/</url>
 	</ciManagement>
-
-	<scm>
-		<connection>scm:svn:svn+ssh://source.jrebirth.org/var/svn/jrebirth/JRebirth/trunk/org.jrebirth</connection>
-		<developerConnection>scm:svn:svn+ssh://source.jrebirth.org/var/svn/jrebirth/JRebirth/trunk/org.jrebirth</developerConnection>
-	</scm>
 	
 	<scm>
-		<connection>scm:git:git://github.com/sbordes/JRebirth.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/sbordes/JRebirth.git</developerConnection>
-		<url>https://github.com/sbordes/JRebirth</url>
+		<connection>scm:git:git://github.com/JRebirth/JRebirth.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth.git</developerConnection>
+		<url>https://github.com/JRebirth/JRebirth</url>
 	</scm>
 
 	<organization>
