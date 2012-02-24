@@ -1,7 +1,5 @@
 package org.jrebirth.core.event;
 
-import java.io.OutputStream;
-
 import org.jrebirth.core.exception.CoreException;
 
 /**
@@ -22,15 +20,6 @@ public interface Recordable {
      * @return the file name to use
      */
     String getFileName();
-
-    /**
-     * Return an output stream used to save data.
-     * 
-     * @return the output stream
-     * 
-     * @throws CoreException if impossible to create an output stream
-     */
-    OutputStream getOutputStream() throws CoreException;
 
     /**
      * Write data into the output stream.
