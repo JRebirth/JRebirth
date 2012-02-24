@@ -9,16 +9,14 @@ import javafx.scene.Node;
  * 
  * @version $Revision$ $Author$
  * @since $Date$
- * 
- * @param <C> A class that extends FXMLController
  */
-public class FXMLComponent<C extends AbstractFXMLController> {
+public class FXMLComponent {
 
     /** The FXML node. */
     private final Node node;
 
     /** The controller of the FXML component. */
-    private final C controller;
+    private final FXMLController controller;
 
     /**
      * Default Constructor.
@@ -26,7 +24,7 @@ public class FXMLComponent<C extends AbstractFXMLController> {
      * @param node the loaded fxml node
      * @param controller the attached fxml controller
      */
-    public FXMLComponent(final Node node, final C controller) {
+    public FXMLComponent(final Node node, final FXMLController controller) {
         this.node = node;
         this.controller = controller;
     }
@@ -41,7 +39,7 @@ public class FXMLComponent<C extends AbstractFXMLController> {
     /**
      * @return Returns the controller.
      */
-    public C getController() {
+    public FXMLController getController() {
         return this.controller;
     }
 

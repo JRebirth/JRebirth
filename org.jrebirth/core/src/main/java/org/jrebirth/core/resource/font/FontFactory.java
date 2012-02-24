@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontBuilder;
 
+import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.resource.factory.AbstractResourceFactory;
 
 /**
@@ -18,6 +19,9 @@ import org.jrebirth.core.resource.factory.AbstractResourceFactory;
  * @since $Date$
  */
 public final class FontFactory extends AbstractResourceFactory<JRebirthFont, Font> {
+
+    /** The <code>TRUE_TYPE_FONT_EXT</code> field is used to dedine the file extension. */
+    private static final String TRUE_TYPE_FONT_EXT = ".ttf";
 
     /** The root folder that store all application fonts. */
     private static String fontsFolder = "font";
@@ -94,12 +98,11 @@ public final class FontFactory extends AbstractResourceFactory<JRebirthFont, Fon
         final List<String> fonts = Font.getFontNames(transformFontName(realFont.fontName().get()));
         if (fonts.isEmpty()) {
             final Font font = Font.loadFont(Thread.currentThread().getContextClassLoader()
-                    .getResourceAsStream(fontsFolder + "/" + transformFontName(realFont.fontName().get()) + ".ttf"), realFont.size());
+                    .getResourceAsStream(fontsFolder + "/" + transformFontName(realFont.fontName().get()) + TRUE_TYPE_FONT_EXT), realFont.size());
 
             if (font == null) {
-                // throw new CoreRuntimeException("Font not found " + transformFontName(realFont.fontName().get()));
+                throw new CoreRuntimeException("Font not found " + transformFontName(realFont.fontName().get()));
             }
-            // System.err.println(font != null ? font.getName() : " font null");
         }
     }
 }

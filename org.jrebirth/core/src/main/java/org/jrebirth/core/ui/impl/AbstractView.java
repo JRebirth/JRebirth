@@ -159,7 +159,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * 
      * @return a FXMLComponent object taht wrap a fxml node with its controller
      */
-    protected FXMLComponent<?> loadFXML(final String fxmlPath, final String bundlePath) {
+    protected FXMLComponent loadFXML(final String fxmlPath, final String bundlePath) {
 
         final FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(Thread.currentThread().getContextClassLoader().getResource(fxmlPath));
@@ -179,14 +179,15 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             }
 
         } catch (final IOException e) {
-            throw new CoreRuntimeException("The FXML node doesn't exist : " + fxmlPath);
+            throw new CoreRuntimeException("The FXML node doesn't exist : " + fxmlPath, e);
         }
 
         if (!error && !(fxmlLoader.getController() instanceof AbstractFXMLController)) {
             throw new CoreRuntimeException("The FXML controller must extends the FXMLController class : " + fxmlLoader.getController().getClass().getCanonicalName());
         }
 
-        final AbstractFXMLController fxmlController = (AbstractFXMLController) fxmlLoader.getController();
+        final FXMLController fxmlController = (FXMLController) fxmlLoader.getController();
+        fxmlController.setView(this);
 
         return new FXMLComponent(node, fxmlController);
     }

@@ -40,8 +40,6 @@ import javafx.scene.Scene;
 import javafx.scene.SceneBuilder;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -127,6 +125,22 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     }
 
     /**
+     * {@inheritDoc}
+     */
+    // @Override
+    @Override
+    public final void stop() throws CoreException {
+        try {
+            super.stop();
+            this.facade.stop();
+            this.facade = null;
+
+        } catch (final Exception e) {
+            throw new CoreException(e);
+        }
+    }
+
+    /**
      * Customize the primary Stage.
      * 
      * @param stage the primary stage to customize
@@ -154,60 +168,22 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
         final Stage currentStage = this.stage;
 
-        scene.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(final MouseEvent event) {
-                if (event.getButton() == MouseButton.PRIMARY) {
-                    // event.consume();
-                    getFacade().getLogger().error("primary filtered");
-                }
-            }
-        });
-        scene.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(final MouseEvent event) {
-                if (event.getButton() == MouseButton.PRIMARY) {
-                    // event.consume();
-                    getFacade().getLogger().error("primary handled");
-                }
-            }
-        });
-
         // Manage F11 button to switch full screen
-        scene.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+        scene.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
 
             @Override
             public void handle(final KeyEvent event) {
                 if (event.getCode() == KeyCode.F11) {
                     currentStage.setFullScreen(!currentStage.isFullScreen());
                     event.consume();
-                    // getFacade().getLogger().error("f11 filtered and consumed");
                 } else if (event.getCode() == KeyCode.F10) {
                     currentStage.setIconified(!currentStage.isIconified());
                     event.consume();
-                    // getFacade().getLogger().error("f10 filtered and consumed");
-                } else {
-                    // getFacade().getLogger().error(event.getCode() + " filtered");
                 }
 
             }
         });
-
-        scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
-
-            @Override
-            public void handle(final KeyEvent event) {
-                if (event.getCode() == KeyCode.F11) {
-                    // getFacade().getLogger().error("f11 handler");
-                } else {
-                    // getFacade().getLogger().error(event.getCode() + " handled");
-                }
-
-            }
-        });
-
+        // The call customize method to allow extension by sub class
         customizeScene(scene);
     }
 
@@ -256,8 +232,12 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * @throws CoreException if build fails
      */
     protected final Scene buildScene(final Stage primaryStage) throws CoreException {
-        return SceneBuilder.create().root(buildRootPane()).width(JRebirthApplication.DEFAULT_SCENE_WIDTH).height(JRebirthApplication.DEFAULT_SCENE_HEIGHT)
-                .fill(JRebirthApplication.DEFAULT_SCENE_BG_COLOR).build();
+        return SceneBuilder.create()
+                .root(buildRootPane())
+                .width(JRebirthApplication.DEFAULT_SCENE_WIDTH)
+                .height(JRebirthApplication.DEFAULT_SCENE_HEIGHT)
+                .fill(JRebirthApplication.DEFAULT_SCENE_BG_COLOR)
+                .build();
     }
 
     /**
@@ -306,22 +286,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     @Override
     public final boolean isEventTrackerEnabled() {
         return this.eventTrackerEnabled;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    // @Override
-    @Override
-    public final void stop() throws CoreException {
-        try {
-            super.stop();
-            this.facade.stop();
-            this.facade = null;
-
-        } catch (final Exception e) {
-            throw new CoreException(e);
-        }
     }
 
     /**
