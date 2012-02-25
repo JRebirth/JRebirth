@@ -1,5 +1,6 @@
 package org.jrebirth.core.event.impl;
 
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,15 @@ public class EventTracker extends AbstractRecord {
 
     /** The list of events tracked. */
     private final List<Event> eventList;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected OutputStream buildOutputStream() {
+        // Nothing to do yet
+        return null;
+    }
 
     /**
      * Default Constructor.
