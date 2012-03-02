@@ -27,6 +27,7 @@
 	<modules>
 		<module>core</module>
 		<module>analyzer</module>
+		<module>archetype</module>
 		<module>distribution</module>
 	</modules>
 

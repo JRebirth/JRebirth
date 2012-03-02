@@ -1,0 +1,225 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>${groupId}</groupId>
+	<artifactId>${artifactId}</artifactId>
+	<version>${version}</version>
+	<packaging>jar</packaging>
+
+	<name>A JavaFX 2.0 application built with JRebirth</name>
+	<url>http://www.jrebirth.org</url>
+	<description>A JRebirth Sample Application</description>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<organization>
+		<name>JRebirth</name>
+		<url>http://www.jrebirth.org</url>
+	</organization>
+
+	
+	<build>
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/java</directory>
+				<includes>
+					<include>**/*.fxml</include>
+					<include>**/*.txt</include>
+				</includes>
+			</resource>
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+		
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+
+				<!-- <executions> <execution> <goals> <goal>sign</goal> </goals> </execution> </executions> -->
+
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<JavaFX-Version>2.0</JavaFX-Version>
+							<Main-Class>org.jrebirth.sample.SampleApplication</Main-Class>
+							<implementation-vendor>You</implementation-vendor>
+							<implementation-title>SampleApplication</implementation-title>
+							<implementation-version>1.0</implementation-version>
+							<JavaFX-Application-Class>org.jrebirth.org.sample.SampleApplication</JavaFX-Application-Class>
+							<JavaFX-Class-Path>presentation-0.4.0-SNAPSHOT.jar core-0.4.0.jar</JavaFX-Class-Path>
+							<!-- implementation-vendor: I implementation-title: Jrebirth demo implementation-version: 1.0 JavaFX-Application-Class: org.jrebirth.demo.JRebirthDemo Created-By: 
+								Maven Packager Main-Class: com/javafx/main/Main -->
+						</manifestEntries>
+						<manifest>
+							<!-- <addDefaultImplementationEntries>true</addDefaultImplementationEntries> <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries> -->
+							<addClasspath>true</addClasspath>
+
+						</manifest>
+					</archive>
+					<!-- <keystore>jrebirth.jks</keystore> <alias>jrebirth</alias> <storepass>gojava</storepass> <signedjar>${project.build.directory}/signed/${project.build.finalName}.jar</signedjar> 
+						<verify>true</verify> -->
+
+				</configuration>
+			</plugin>
+
+			<!-- <plugin> <artifactId>maven-assembly-plugin</artifactId> <configuration> <archive> <manifest> <mainClass>org.jrebirth.presentation.Presentation</mainClass> 
+				</manifest> </archive> <descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> </descriptorRefs> </configuration> <executions> <execution> <id>make-my-jar-with-dependencies</id> 
+				<phase>package</phase> <goals> <goal>single</goal> </goals> </execution> </executions> </plugin> -->
+
+
+			<plugin>
+
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>webstart-maven-plugin</artifactId>
+				<version>1.0-beta-3-SNAPSHOT</version>
+
+				<!-- do not bind to install phase - - > <executions> <execution> <goals> <goal>package</goal> </goals> </execution> </executions> -->
+
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jnlp</goal> <!-- use jnlp, jnlp-inline or jnlp-single as appropriate -->
+						</goals>
+					</execution>
+				</executions>
+
+				<configuration>
+					<!--outputDirectory></outputDirectory --> <!-- not required?? -->
+
+					<!-- Set to true to exclude all transitive dependencies. Default is false. -->
+					<excludeTransitive>false</excludeTransitive>
+
+					<!-- The path where the libraries are stored within the jnlp structure. not required. by default the libraries are within the working directory -->
+					<!-- <libPath>lib</libPath> -->
+
+					<!-- [optional] transitive dependencies filter - if omitted, all transitive dependencies are included -->
+					<!-- <dependencies> Note that only groupId and artifactId must be specified here. because of a limitation of the Include/ExcludesArtifactFilter <includes> <include>org.jrebirth:presentation</include> 
+						<include>org.jrebirth:core</include> </includes> excludes> <exclude></exclude> <excludes </dependencies> -->
+
+					<!--resourcesDirectory>${project.basedir}/src/main/jnlp/resources</resourcesDirectory --> <!-- default value -->
+
+					<!-- JNLP generation -->
+					<jnlp>
+						<!-- default values -->
+						<!--inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath -->
+						<!--inputTemplate>src/main/jnlp/template.vm</inputTemplate --> <!-- relative to inputTemplateResourcePath -->
+						<outputFile>SampleApplication.jnlp</outputFile> <!-- defaults to launch.jnlp -->
+
+						<!-- used to automatically identify the jar containing the main class. -->
+						<!-- this is perhaps going to change -->
+						<mainClass>org.jrebirth.sample.SampleApplication</mainClass>
+					</jnlp>
+
+
+					<!-- SIGNING -->
+					<!-- defining this will automatically sign the jar and its dependencies, if necessary -->
+					<sign>
+						<keystore>${basedir}/yourkey.jks</keystore>
+						<keypass>acustompassword</keypass>  <!-- we need to override passwords easily from the command line. ${keypass} -->
+						<storepass>acustompassword</storepass> <!-- ${storepass} -->
+						<!--storetype>fillme</storetype -->
+						<alias>jrebirth</alias>
+
+						<!--validity>fillme</validity -->
+
+						<!-- only required for generating the keystore -->
+						<!--dnameCn>fillme</dnameCn> <dnameOu>fillme</dnameOu> <dnameO>fillme</dnameO> <dnameL>fillme</dnameL> <dnameSt>fillme</dnameSt> <dnameC>fillme</dnameC -->
+
+						<verify>true</verify> <!-- verify that the signing operation succeeded -->
+
+						<!-- KEYSTORE MANAGEMENT -->
+						<!-- <keystoreConfig> <delete>true</delete> delete the keystore <gen>true</gen> optional shortcut to generate the store. </keystoreConfig> -->
+					</sign>
+
+					<!-- BUILDING PROCESS -->
+
+					<pack200>false</pack200>
+					<gzip>false</gzip> <!-- default force when pack200 false, true when pack200 selected ?? -->
+
+					<!-- causes a version attribute to be output in each jar resource element, optional, default is false -->
+					<!-- <outputJarVersions>true</outputJarVersions> -->
+
+					<!--install>false</install --> <!-- not yet supported -->
+					<verbose>true</verbose>
+
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>core</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle.javafx</groupId>
+			<artifactId>jfxrt</artifactId>
+			<scope>provided</scope>
+			<version>2.0.2</version>
+		</dependency>
+		
+	</dependencies>
+
+
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>releases</id>
+			<name>libs-release</name>
+			<url>http://repo.jrebirth.org/libs-release</url>
+		</repository>
+		<repository>
+			<snapshots />
+			<id>snapshots</id>
+			<name>libs-snapshot</name>
+			<url>http://repo.jrebirth.org/libs-snapshot</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>plugins-release</name>
+			<url>http://repo.jrebirth.org/plugins-release</url>
+		</pluginRepository>
+		<pluginRepository>
+			<snapshots />
+			<id>snapshots</id>
+			<name>plugins-snapshot</name>
+			<url>http://repo.jrebirth.org/plugins-snapshot</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>
