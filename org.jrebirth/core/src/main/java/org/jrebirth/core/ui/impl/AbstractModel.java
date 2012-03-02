@@ -3,7 +3,6 @@ package org.jrebirth.core.ui.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.application.Platform;
 import javafx.scene.Node;
 
 import org.jrebirth.core.event.EventType;
@@ -60,13 +59,13 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
         // Initialize inner models (if any)
         initializeInnerModels();
 
-        Platform.runLater(new Runnable() {
-
-            @Override
-            public void run() {
-                getView().animate();
-            }
-        });
+        // Platform.runLater(new Runnable() {
+        //
+        // @Override
+        // public void run() {
+        getView().show();
+        // }
+        // });
 
     }
 
@@ -76,6 +75,9 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
      * @throws CoreException if the creation of the view fails
      */
     protected final void initialize() throws CoreException {
+        // Prepare the current view
+        getView().prepare();
+
         // Do custom stuff
         customInitialize();
     }
@@ -143,12 +145,12 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     /**
      * Create the view it was null.
      */
-    protected void prepareView() {
-        // Build the current view
+    private final void prepareView() {
+        // Build the current view by reflection
         try {
-            this.view = buildView();
+            this.view = (V) ClassUtility.buildGenericType(this.getClass(), 1, this);
         } catch (final CoreException e) {
-            throw new CoreRuntimeException("Failure while preparing the view for model " + getClass(), e);
+            throw new CoreRuntimeException("Failure while building the view for model " + getClass(), e);
         }
     }
 

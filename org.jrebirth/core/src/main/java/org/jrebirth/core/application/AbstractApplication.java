@@ -35,7 +35,6 @@ package org.jrebirth.core.application;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SceneBuilder;
 import javafx.scene.input.KeyCode;
@@ -44,9 +43,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.facade.GlobalFacade;
-import org.jrebirth.core.facade.impl.GlobalFacadeImpl;
-import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.util.ClassUtility;
 
 /**
@@ -64,9 +60,6 @@ import org.jrebirth.core.util.ClassUtility;
  */
 public abstract class AbstractApplication<P extends Pane> extends Application implements JRebirthApplication {
 
-    /** The Global Facade object that handle other sub facade. */
-    private transient GlobalFacade facade;
-
     /** The application primary stage. */
     private transient Stage stage;
 
@@ -79,6 +72,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     /** The eventTracker status. */
     private boolean eventTrackerEnabled = true;
 
+    private JRebirthThread jrebirthThread;
+
     /**
      * {@inheritDoc}
      */
@@ -87,9 +82,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     public final void init() throws CoreException {
         try {
             super.init();
-            // Build the global facade at startup
-            this.facade = new GlobalFacadeImpl(this);
         } catch (final Exception e) {
+            // getFacade().getLogger().error("Error while application init phase : " + e.getMessage());
             throw new CoreException(e);
         }
 
@@ -112,15 +106,14 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             // Customize the default scene previously created
             initializeScene(this.scene);
 
-            // Launch the first UI view
-            launchFirstView();
+            JRebirthThread.getThread().launch(this);
 
             // Attach the scene
             primaryStage.setScene(this.scene);
             primaryStage.show();
 
         } catch (final CoreException ce) {
-            getFacade().getLogger().error("Error while starting application : " + ce.getMessage());
+            // getFacade().getLogger().fatal("Error while starting application : " + ce.getMessage());
         }
     }
 
@@ -132,10 +125,11 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     public final void stop() throws CoreException {
         try {
             super.stop();
-            this.facade.stop();
-            this.facade = null;
+
+            this.jrebirthThread.interrupt();
 
         } catch (final Exception e) {
+            // getFacade().getLogger().error("Error while stoping application : " + e.getMessage());
             throw new CoreException(e);
         }
     }
@@ -195,25 +189,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     protected abstract void customizeScene(final Scene scene);
 
     /**
-     * Launch the first view by adding it into the root node.
-     * 
-     * @throws CoreException if the first class was not found
-     */
-    @SuppressWarnings("unchecked")
-    protected final void launchFirstView() throws CoreException {
-
-        final Class<? extends Model> first = getFirstModelClass();
-
-        if (first == null) {
-            throw new CoreException("No First Model Class defined.");
-        }
-        final Node firstNode = getFacade().getUiFacade().retrieve(first).getView().getRootNode();
-        ((P) this.scene.getRoot()).getChildren().add(firstNode);
-
-        firstNode.requestFocus();
-    }
-
-    /**
      * Return the application title.
      * 
      * @return the application title
@@ -252,13 +227,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     }
 
     /**
-     * This method must be implemented to declare which UI Model to display first.
-     * 
-     * @return the class of the first UI Model to launch
-     */
-    protected abstract Class<? extends Model> getFirstModelClass();
-
-    /**
      * @param loggerEnabled The loggerEnabled to set.
      */
     public final void setLoggerEnabled(final boolean loggerEnabled) {
@@ -286,13 +254,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     @Override
     public final boolean isEventTrackerEnabled() {
         return this.eventTrackerEnabled;
-    }
-
-    /**
-     * @return Returns the facade.
-     */
-    public final GlobalFacade getFacade() {
-        return this.facade;
     }
 
     /**

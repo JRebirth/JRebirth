@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jrebirth.core.application.JRebirthThread;
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
@@ -85,6 +86,58 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void send(final WaveType waveType, final WaveData... waveData) {
+        buildAndSendWave(WaveGroup.UNDEFINED, waveType, null, waveData);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void callCommand(final Class<? extends Command> commandClass, final WaveData... data) {
+        buildAndSendWave(WaveGroup.CALL_COMMAND, null, commandClass, data);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void returnData(final Class<? extends Command> serviceClass, final WaveData... data) {
+        buildAndSendWave(WaveGroup.RETURN_DATA, null, serviceClass, data);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void displayUi(final Class<? extends Model> modelClass, final WaveData... data) {
+        buildAndSendWave(WaveGroup.DISPLAY_UI, null, modelClass, data);
+    }
+
+    /**
+     * Build a new Wave Object and send it using the JRebirth Thread.
+     * 
+     * @param waveGroup the group of the wave
+     * @param waveType the type of the wave
+     * @param relatedClass the related class if any
+     * @param data wave data
+     */
+    private final void buildAndSendWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData... waveData) {
+
+        JRebirthThread.getThread().runAsap(
+                new Runnable() {
+
+                    @Override
+                    public void run() {
+                        getNotifier().sendWave(createWave(waveGroup, waveType, relatedClass, waveData));
+                    }
+                });
+    }
+
+    /**
      * Build a wave object.
      * 
      * @param waveGroup the group of the wave
@@ -107,38 +160,6 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
         getLocalFacade().getGlobalFacade().trackEvent(EventType.CREATE_WAVE, this.getClass(), wave.getClass());
 
         return wave;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void send(final WaveType waveType, final WaveData... waveData) {
-        getNotifier().sendWave(createWave(WaveGroup.UNDEFINED, waveType, null, waveData));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void callCommand(final Class<? extends Command> commandClass, final WaveData... data) {
-        getNotifier().sendWave(createWave(WaveGroup.CALL_COMMAND, null, commandClass, data));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void returnData(final Class<? extends Command> serviceClass, final WaveData... data) {
-        getNotifier().sendWave(createWave(WaveGroup.RETURN_DATA, null, serviceClass, data));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void displayUi(final Class<? extends Model> modelClass, final WaveData... data) {
-        getNotifier().sendWave(createWave(WaveGroup.DISPLAY_UI, null, modelClass, data));
     }
 
     /**

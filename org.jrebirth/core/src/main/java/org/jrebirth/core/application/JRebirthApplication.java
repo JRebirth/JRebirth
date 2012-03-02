@@ -4,6 +4,8 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import org.jrebirth.core.ui.Model;
+
 /**
  * The class <strong>JRebirthApplication</strong>.
  * 
@@ -46,5 +48,12 @@ public interface JRebirthApplication {
      * @return Returns the scene.
      */
     Scene getScene();
+
+    /**
+     * This method must be implemented to declare which UI Model to display first.
+     * 
+     * @return the class of the first UI Model to launch
+     */
+    Class<? extends Model> getFirstModelClass();
 
 }

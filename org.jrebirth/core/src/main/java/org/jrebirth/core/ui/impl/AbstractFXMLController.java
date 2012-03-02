@@ -22,7 +22,7 @@ public abstract class AbstractFXMLController implements FXMLController {
      * {@inheritDoc}
      */
     @Override
-    public void setView(View<?, ?, ?> view) {
+    public void setView(final View<?, ?, ?> view) {
         this.view = view;
     }
 

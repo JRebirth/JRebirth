@@ -62,6 +62,13 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
         // Manage components controller
         this.controller = buildController();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void prepare() throws CoreException {
 
         // Initialize view components
         initializeComponents();
@@ -74,7 +81,13 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * {@inheritDoc}
      */
     @Override
-    public abstract void animate();
+    public abstract void show();
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public abstract void hide();
 
     /**
      * Build the root node.

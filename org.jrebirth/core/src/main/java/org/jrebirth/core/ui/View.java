@@ -2,6 +2,8 @@ package org.jrebirth.core.ui;
 
 import javafx.scene.Node;
 
+import org.jrebirth.core.exception.CoreException;
+
 /**
  * 
  * The interface <strong>View</strong>.
@@ -41,8 +43,20 @@ public interface View<M extends Model, N extends Node, C extends Controller<?, ?
     C getController();
 
     /**
-     * Start the animation of the view..
+     * Prepare the view by creating all visual nodes.
+     * 
+     * @throws CoreException if the preparation fails
      */
-    void animate();
+    void prepare() throws CoreException;
+
+    /**
+     * Start the show animation of the view.
+     */
+    void show();
+
+    /**
+     * Start hide animation of the view.
+     */
+    void hide();
 
 }

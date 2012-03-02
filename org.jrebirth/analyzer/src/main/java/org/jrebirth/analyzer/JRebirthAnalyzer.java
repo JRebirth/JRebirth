@@ -34,7 +34,7 @@ public final class JRebirthAnalyzer extends AbstractApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    protected Class<? extends Model> getFirstModelClass() {
+    public Class<? extends Model> getFirstModelClass() {
         return WorkbenchModel.class;
     }
 

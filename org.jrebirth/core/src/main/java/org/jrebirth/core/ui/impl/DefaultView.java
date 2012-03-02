@@ -38,7 +38,15 @@ public class DefaultView<M extends Model, N extends Node, C extends Controller<?
      * {@inheritDoc}
      */
     @Override
-    public void animate() {
+    public void show() {
+        // Nothing to do generic
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void hide() {
         // Nothing to do generic
     }
 
