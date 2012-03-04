@@ -1,8 +1,10 @@
-package org.jrebirth.sample.service;
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+package ${package}.service;
 
-
-import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.service.impl.ServiceImpl;
+import ${groupId}.core.exception.CoreException;
+import ${groupId}.core.service.impl.ServiceImpl;
 
 /**
  * The class <strong>SampleService</strong>.

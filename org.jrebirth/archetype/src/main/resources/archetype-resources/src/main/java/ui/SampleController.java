@@ -1,14 +1,18 @@
-package org.jrebirth.sample.ui;
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+package ${package}.ui;
 
-import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.impl.AbstractController;
+import ${groupId}.core.exception.CoreException;
+import ${groupId}.core.ui.impl.AbstractController;
+
 
 /**
  * The class <strong>SampleController</strong>.
  * 
- * @author 
+ * @author
  * 
- * @version 
+ * @version
  * @since
  */
 public class SampleController extends AbstractController<SampleModel, SampleView> {
@@ -29,8 +33,6 @@ public class SampleController extends AbstractController<SampleModel, SampleView
      */
     @Override
     protected void customInitializeEventAdapters() throws CoreException {
-        super.customInitializeEventAdapters();
-
         // Attach event adapters
     }
 
@@ -39,11 +41,8 @@ public class SampleController extends AbstractController<SampleModel, SampleView
      */
     @Override
     protected void customInitializeEventHandlers() throws CoreException {
-        super.customInitializeEventHandlers();
-
         // Listen events
-        
-    }
 
+    }
 
 }

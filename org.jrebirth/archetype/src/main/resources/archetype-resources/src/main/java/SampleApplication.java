@@ -1,21 +1,24 @@
-package org.jrebirth.sample;
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+package ${package};
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import org.jrebirth.core.application.AbstractApplication;
-import org.jrebirth.core.ui.Model;
-import org.jrebirth.sample.ui.SampleModel;
+import ${groupId}.core.application.AbstractApplication;
+import ${groupId}.core.ui.Model;
+import ${package}.ui.SampleModel;
 
 /**
  * The class <strong>SampleApplication</strong>.
  * 
- * @author 
+ * @author
  * 
- * @version 
- * @since 
+ * @version
+ * @since
  */
 public final class SampleApplication extends AbstractApplication<StackPane> {
 
@@ -50,8 +53,8 @@ public final class SampleApplication extends AbstractApplication<StackPane> {
     @Override
     protected void customizeStage(final Stage stage) {
         stage.setFullScreen(false);
-        stage.setWidth(1040);
-        stage.setHeight(800);
+        stage.setWidth(800);
+        stage.setHeight(600);
     }
 
     /**
