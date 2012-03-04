@@ -83,19 +83,6 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     }
 
     /**
-     * Build the view controller.
-     * 
-     * @return the dedicated view controller
-     * 
-     * @throws CoreException if introspection fails
-     */
-    @SuppressWarnings("unchecked")
-    private V buildView() throws CoreException {
-        // Build the view by introspection
-        return (V) ClassUtility.buildGenericType(this.getClass(), 1, this);
-    }
-
-    /**
      * Initialize method to implement for adding custom processes.
      */
     protected abstract void customInitialize();
@@ -137,7 +124,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     @Override
     public final V getView() {
         if (this.view == null) {
-            prepareView();
+            createView();
         }
         return this.view;
     }
@@ -145,7 +132,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     /**
      * Create the view it was null.
      */
-    private final void prepareView() {
+    private void createView() {
         // Build the current view by reflection
         try {
             this.view = (V) ClassUtility.buildGenericType(this.getClass(), 1, this);

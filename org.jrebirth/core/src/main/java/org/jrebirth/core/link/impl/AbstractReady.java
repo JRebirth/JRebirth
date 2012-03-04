@@ -123,13 +123,13 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * @param waveGroup the group of the wave
      * @param waveType the type of the wave
      * @param relatedClass the related class if any
-     * @param data wave data
+     * @param waveData wave data to use
      */
-    private final void buildAndSendWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData... waveData) {
+    private void buildAndSendWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData... waveData) {
 
+        // Use the JRebirth Thread to manage Waves
         JRebirthThread.getThread().runAsap(
                 new Runnable() {
-
                     @Override
                     public void run() {
                         getNotifier().sendWave(createWave(waveGroup, waveType, relatedClass, waveData));
@@ -143,16 +143,16 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * @param waveGroup the group of the wave
      * @param waveType the type of the wave
      * @param relatedClass the related class if any
-     * @param data wave data
+     * @param waveData wave data to use
      * 
      * @return the wave built
      */
-    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData... data) {
+    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData... waveData) {
         final Wave wave = new WaveImpl();
         wave.setWaveGroup(waveGroup);
         wave.setWaveType(waveType);
         wave.setRelatedClass(relatedClass);
-        for (final WaveData wd : data) {
+        for (final WaveData wd : waveData) {
             wave.add(wd.getKey(), wd);
         }
 

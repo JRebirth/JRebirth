@@ -13,22 +13,25 @@ import org.jrebirth.core.facade.impl.GlobalFacadeImpl;
 import org.jrebirth.core.ui.Model;
 
 /**
- * The class <strong>JRebirthThread</strong>. TODO To complete
+ * The class <strong>JRebirthThread</strong>.
  * 
  * @author Sébastien Bordes
  * 
  * @version $Revision$ $Author$
  * @since $Date$
  */
-public class JRebirthThread extends Thread {
+public final class JRebirthThread extends Thread {
 
-    private static JRebirthThread jrebirthThread;
+    /** The unique instance of the current class. */
+    private static JRebirthThread JREBIRTH_THREAD;
 
     /** The Global Facade object that handle other sub facade. */
     private transient GlobalFacade facade;
 
+    /** The javaFX application that launch this thread. */
     private transient JRebirthApplication application;
 
+    /** The list of tasks to execute, MUST BE synchronized. */
     private final List<Runnable> tasks;
 
     /**
@@ -40,21 +43,31 @@ public class JRebirthThread extends Thread {
         this.tasks = new Vector<>();
     }
 
-    public synchronized void runAsap(final Runnable runnable) {
-        this.tasks.add(runnable);
+    /**
+     * Run this task as soon as possible. Enqueue the task to be run at the next event pulse.
+     * 
+     * @param runnable the task to run
+     */
+    public void runAsap(final Runnable runnable) {
+        // Synchronize the queue !
+        synchronized (this) {
+            this.tasks.add(runnable);
+        }
     }
 
     /**
+     * Launch the JRebirth thread.
      * 
-     * TODO To complete.
-     * 
-     * @param application
+     * @param application the javaFX application instance
      */
     public void launch(final JRebirthApplication application) {
+
+        // LInk the current application
         this.application = application;
         // Build the global facade at startup
         this.facade = new GlobalFacadeImpl(application);
 
+        // Start the thread (infinite loop)
         start();
     }
 
@@ -67,23 +80,30 @@ public class JRebirthThread extends Thread {
         try {
             launchFirstView();
         } catch (final CoreException e) {
-            // TODO Auto-generated catch block
+            this.facade.getLogger().error(e.getMessage());
             e.printStackTrace();
         }
 
         while (true) {
             try {
+
+                // Need to sort tasks to launch by priority
                 // Collections.sort(tasks);
 
+                // Synchronize the queue !
                 synchronized (this) {
+                    // Run all queued tasks
                     for (final Runnable r : this.tasks) {
                         r.run();
                     }
+                    // Remove all task processed
                     this.tasks.clear();
                 }
+                // Pause this thread during 20ms to let other thread adding some task into the queue
                 Thread.sleep(20);
+
             } catch (final InterruptedException e) {
-                // TODO Auto-generated catch block
+                this.facade.getLogger().error(e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -110,7 +130,6 @@ public class JRebirthThread extends Thread {
      * 
      * @throws CoreException if the first class was not found
      */
-    @SuppressWarnings("unchecked")
     protected final void launchFirstView() throws CoreException {
 
         final Class<? extends Model> first = this.application.getFirstModelClass();
@@ -118,8 +137,10 @@ public class JRebirthThread extends Thread {
         if (first == null) {
             throw new CoreException("No First Model Class defined.");
         }
+        // Build the first root node
         final Node firstNode = getFacade().getUiFacade().retrieve(first).getView().getRootNode();
 
+        // Add the scene's root node into the JavaFX Application Thread
         Platform.runLater(new Runnable() {
 
             @Override
@@ -133,15 +154,8 @@ public class JRebirthThread extends Thread {
     /**
      * @return Returns the application.
      */
-    protected JRebirthApplication getApplication() {
+    public JRebirthApplication getApplication() {
         return this.application;
-    }
-
-    /**
-     * @param application The application to set.
-     */
-    protected void setApplication(final JRebirthApplication application) {
-        this.application = application;
     }
 
     /**
@@ -152,13 +166,15 @@ public class JRebirthThread extends Thread {
     }
 
     /**
-     * TODO To complete.
+     * Return the JRebirthThread used to manage facades and waves.
+     * 
+     * @return the JRebirthThread
      */
     public static JRebirthThread getThread() {
-        if (jrebirthThread == null) {
-            jrebirthThread = new JRebirthThread();
+        if (JREBIRTH_THREAD == null) {
+            JREBIRTH_THREAD = new JRebirthThread();
         }
-        return jrebirthThread;
+        return JREBIRTH_THREAD;
     }
 
 }

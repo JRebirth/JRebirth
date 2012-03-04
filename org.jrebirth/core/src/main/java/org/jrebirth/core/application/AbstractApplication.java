@@ -72,8 +72,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     /** The eventTracker status. */
     private boolean eventTrackerEnabled = true;
 
-    private JRebirthThread jrebirthThread;
-
     /**
      * {@inheritDoc}
      */
@@ -113,6 +111,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             primaryStage.show();
 
         } catch (final CoreException ce) {
+            ce.printStackTrace();
             // getFacade().getLogger().fatal("Error while starting application : " + ce.getMessage());
         }
     }
@@ -126,7 +125,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         try {
             super.stop();
 
-            this.jrebirthThread.interrupt();
+            // Stop the JRebirthThread
+            JRebirthThread.getThread().interrupt();
 
         } catch (final Exception e) {
             // getFacade().getLogger().error("Error while stoping application : " + e.getMessage());

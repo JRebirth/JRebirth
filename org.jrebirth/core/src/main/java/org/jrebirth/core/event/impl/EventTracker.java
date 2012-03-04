@@ -23,21 +23,21 @@ public class EventTracker extends AbstractRecord {
     private final List<Event> eventList;
 
     /**
+     * Default Constructor.
+     */
+    public EventTracker() {
+        super();
+        // Create an empty list
+        this.eventList = new ArrayList<>();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     protected OutputStream buildOutputStream() {
         // Nothing to do yet
         return null;
-    }
-
-    /**
-     * Default Constructor.
-     */
-    public EventTracker() {
-        super();
-
-        this.eventList = new ArrayList<>();
     }
 
     /**

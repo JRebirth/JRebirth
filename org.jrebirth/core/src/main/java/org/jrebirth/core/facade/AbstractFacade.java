@@ -118,8 +118,9 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                 register(build(clazz, key), key);
             } catch (final CoreException ce) {
                 getGlobalFacade().getLogger().error(ce.getMessage());
-                getGlobalFacade().getLogger().error("Error while building " + clazz.getCanonicalName() + " instance");
-                throw new CoreRuntimeException("Error while building " + clazz.getCanonicalName() + " instance", ce);
+                final String msg = "Error while building " + clazz.getCanonicalName() + " instance";
+                getGlobalFacade().getLogger().error(msg);
+                throw new CoreRuntimeException(msg, ce);
             }
         }
         // retrieve the component from the right map
