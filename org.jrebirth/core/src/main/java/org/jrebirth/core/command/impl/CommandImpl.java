@@ -4,7 +4,7 @@ import org.jrebirth.core.command.Command;
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.link.Wave;
-import org.jrebirth.core.link.impl.AbstractReady;
+import org.jrebirth.core.link.impl.AbstractWaveReady;
 
 /**
  * 
@@ -17,7 +17,7 @@ import org.jrebirth.core.link.impl.AbstractReady;
  * @version $Revision: 254 $ $Author: sbordes $
  * @since $Date: 2011-12-18 22:59:18 +0100 (dim., 18 déc. 2011) $
  */
-public class CommandImpl extends AbstractReady<Command> implements Command {
+public class CommandImpl extends AbstractWaveReady<Command> implements Command {
 
     /**
      * {@inheritDoc}

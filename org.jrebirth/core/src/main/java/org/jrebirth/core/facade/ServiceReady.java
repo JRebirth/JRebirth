@@ -4,7 +4,7 @@ import org.jrebirth.core.service.Service;
 
 /**
  * 
- * The interface <strong>ServiceReady</strong>. TODO To complete
+ * The interface <strong>ServiceReady</strong>.
  * 
  * @author Sébastien Bordes
  * 

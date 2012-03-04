@@ -10,7 +10,7 @@ import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.facade.UniqueKey;
 import org.jrebirth.core.link.Wave;
-import org.jrebirth.core.link.impl.AbstractReady;
+import org.jrebirth.core.link.impl.AbstractWaveReady;
 import org.jrebirth.core.ui.InnerModels;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.ui.View;
@@ -30,7 +30,7 @@ import org.jrebirth.core.util.ClassUtility;
  * @param <M> the class type of the current model
  * @param <V> the class type of the view managed by this model
  */
-public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> extends AbstractReady<Model> implements Model {
+public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> extends AbstractWaveReady<Model> implements Model {
 
     /** The model object. */
     private transient UniqueKey modeObject;

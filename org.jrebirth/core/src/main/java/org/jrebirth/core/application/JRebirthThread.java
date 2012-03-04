@@ -1,7 +1,7 @@
 package org.jrebirth.core.application;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -23,7 +23,7 @@ import org.jrebirth.core.ui.Model;
 public final class JRebirthThread extends Thread {
 
     /** The unique instance of the current class. */
-    private static JRebirthThread JREBIRTH_THREAD;
+    private static volatile JRebirthThread jrebirthThread;
 
     /** The Global Facade object that handle other sub facade. */
     private transient GlobalFacade facade;
@@ -31,7 +31,7 @@ public final class JRebirthThread extends Thread {
     /** The javaFX application that launch this thread. */
     private transient JRebirthApplication application;
 
-    /** The list of tasks to execute, MUST BE synchronized. */
+    /** The list of tasks to execute, all access MUST BE synchronized. */
     private final List<Runnable> tasks;
 
     /**
@@ -39,8 +39,12 @@ public final class JRebirthThread extends Thread {
      */
     private JRebirthThread() {
         super("JRebirth Thread");
+
+        // Daemonize this thread, thus it will be killed with the main JavaFX thread
         setDaemon(true);
-        this.tasks = new Vector<>();
+
+        // Initialize the queue
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -130,7 +134,7 @@ public final class JRebirthThread extends Thread {
      * 
      * @throws CoreException if the first class was not found
      */
-    protected final void launchFirstView() throws CoreException {
+    protected void launchFirstView() throws CoreException {
 
         final Class<? extends Model> first = this.application.getFirstModelClass();
 
@@ -161,7 +165,7 @@ public final class JRebirthThread extends Thread {
     /**
      * @return Returns the facade.
      */
-    public final GlobalFacade getFacade() {
+    public GlobalFacade getFacade() {
         return this.facade;
     }
 
@@ -171,10 +175,10 @@ public final class JRebirthThread extends Thread {
      * @return the JRebirthThread
      */
     public static JRebirthThread getThread() {
-        if (JREBIRTH_THREAD == null) {
-            JREBIRTH_THREAD = new JRebirthThread();
+        if (jrebirthThread == null) {
+            jrebirthThread = new JRebirthThread();
         }
-        return JREBIRTH_THREAD;
+        return jrebirthThread;
     }
 
 }
