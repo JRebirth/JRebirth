@@ -1,7 +1,7 @@
 package org.jrebirth.analyzer.ui.editor;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.impl.DefaultController;
+import org.jrebirth.core.ui.DefaultController;
 
 /**
  * The class <strong>EditorController</strong>.

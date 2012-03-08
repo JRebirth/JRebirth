@@ -3,8 +3,8 @@ package org.jrebirth.core.facade;
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.link.Wave;
+import org.jrebirth.core.link.WaveData;
 import org.jrebirth.core.link.WaveType;
-import org.jrebirth.core.link.impl.WaveData;
 import org.jrebirth.core.ui.Model;
 
 /**

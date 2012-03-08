@@ -3,7 +3,7 @@ package org.jrebirth.analyzer.ui.editor.ball;
 import org.jrebirth.analyzer.ui.editor.EditorWave;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.link.Wave;
-import org.jrebirth.core.ui.impl.DefaultModel;
+import org.jrebirth.core.ui.DefaultModel;
 
 /**
  * The class <strong>BallModel</strong>.

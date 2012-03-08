@@ -3,8 +3,8 @@ package org.jrebirth.analyzer.ui.workbench;
 import javafx.event.ActionEvent;
 
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.ui.DefaultController;
 import org.jrebirth.core.ui.adapter.ActionAdapter;
-import org.jrebirth.core.ui.impl.DefaultController;
 
 /**
  * The class <strong>WorkbenchController</strong>.

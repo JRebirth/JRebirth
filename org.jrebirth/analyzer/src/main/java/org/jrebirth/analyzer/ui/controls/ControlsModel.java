@@ -1,6 +1,6 @@
 package org.jrebirth.analyzer.ui.controls;
 
-import org.jrebirth.core.ui.impl.DefaultModel;
+import org.jrebirth.core.ui.DefaultModel;
 
 /**
  * The class <strong>ControlsModel</strong>.

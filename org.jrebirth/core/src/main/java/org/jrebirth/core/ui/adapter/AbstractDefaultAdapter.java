@@ -1,6 +1,6 @@
 package org.jrebirth.core.ui.adapter;
 
-import org.jrebirth.core.ui.impl.AbstractController;
+import org.jrebirth.core.ui.AbstractController;
 
 /**
  * The class <strong>AbstractDefaultAdapter</strong>.

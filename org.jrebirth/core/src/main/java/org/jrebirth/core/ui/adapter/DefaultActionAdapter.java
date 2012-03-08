@@ -2,7 +2,7 @@ package org.jrebirth.core.ui.adapter;
 
 import javafx.event.ActionEvent;
 
-import org.jrebirth.core.ui.impl.AbstractController;
+import org.jrebirth.core.ui.AbstractController;
 
 /**
  * The class <strong>DefaultActionAdapter</strong>.

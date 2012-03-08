@@ -11,11 +11,12 @@ import javafx.stage.FileChooser;
 
 import org.jrebirth.analyzer.ui.editor.EditorWave;
 import org.jrebirth.analyzer.ui.editor.EditorWaveItem;
-import org.jrebirth.core.command.impl.CommandImpl;
+import org.jrebirth.core.command.AbstractUICommand;
+import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.event.Event;
-import org.jrebirth.core.event.impl.EventImpl;
+import org.jrebirth.core.event.EventImpl;
 import org.jrebirth.core.link.Wave;
-import org.jrebirth.core.link.impl.WaveData;
+import org.jrebirth.core.link.WaveData;
 
 /**
  * The class <strong>OpenEventTrackerFileCommand</strong>.
@@ -25,13 +26,13 @@ import org.jrebirth.core.link.impl.WaveData;
  * @version $Revision$ $Author$
  * @since $Date$
  */
-public final class OpenEventTrackerFileCommand extends CommandImpl {
+public final class OpenEventTrackerFileCommand extends DefaultUICommand {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void run(final Wave wave) {
+    public void execute(final Wave wave) {
         super.run(wave);
 
         final FileChooser fc = new FileChooser();

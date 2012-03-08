@@ -5,12 +5,10 @@ import org.jrebirth.core.facade.UniqueKey;
 /**
  * The interface <strong>InnerModels</strong>.
  * 
- * You may create an enumeration that implement this interface to manage inner models inside a root model.
+ * You may create an enumeration that implements this interface to manage inner models inside a root model.
  * 
  * @author Sébastien Bordes
  * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
 public interface InnerModels {
 

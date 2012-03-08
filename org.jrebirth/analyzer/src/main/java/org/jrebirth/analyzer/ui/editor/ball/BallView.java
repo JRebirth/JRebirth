@@ -12,7 +12,7 @@ import javafx.util.Duration;
 import org.jrebirth.analyzer.ui.editor.EditorModel;
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.impl.DefaultView;
+import org.jrebirth.core.ui.DefaultView;
 
 /**
  * 

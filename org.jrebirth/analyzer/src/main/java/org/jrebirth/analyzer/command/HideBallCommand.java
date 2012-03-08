@@ -2,7 +2,8 @@ package org.jrebirth.analyzer.command;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaveItem;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
-import org.jrebirth.core.command.impl.CommandImpl;
+import org.jrebirth.core.command.AbstractUICommand;
+import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.link.Wave;
 
@@ -14,13 +15,13 @@ import org.jrebirth.core.link.Wave;
  * @version $Revision$ $Author$
  * @since $Date$
  */
-public final class HideBallCommand extends CommandImpl {
+public final class HideBallCommand extends DefaultUICommand {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void run(final Wave wave) {
+    public void execute(final Wave wave) {
         super.run(wave);
 
         final Event event = (Event) wave.get(EditorWaveItem.EVENT).getValue();

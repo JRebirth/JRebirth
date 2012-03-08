@@ -3,7 +3,7 @@ package org.jrebirth.analyzer.ui.properties;
 import org.jrebirth.analyzer.ui.editor.EditorWave;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.link.Wave;
-import org.jrebirth.core.ui.impl.AbstractModel;
+import org.jrebirth.core.ui.AbstractModel;
 
 /**
  * The class <strong>PropertiesModel</strong>.

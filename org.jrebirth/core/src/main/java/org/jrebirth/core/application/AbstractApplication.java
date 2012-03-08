@@ -42,6 +42,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import org.jrebirth.core.concurent.JRebirthThread;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.util.ClassUtility;
 

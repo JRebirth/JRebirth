@@ -9,8 +9,8 @@ import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.service.Service;
+import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Model;
-import org.jrebirth.core.ui.impl.AbstractModel;
 
 /**
  * 

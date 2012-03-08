@@ -5,7 +5,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.impl.DefaultView;
+import org.jrebirth.core.ui.DefaultView;
 
 /**
  * 

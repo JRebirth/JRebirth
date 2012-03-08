@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.impl.DefaultView;
+import org.jrebirth.core.ui.DefaultView;
 
 /**
  * 

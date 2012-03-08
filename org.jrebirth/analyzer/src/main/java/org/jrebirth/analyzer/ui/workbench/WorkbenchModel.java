@@ -9,10 +9,10 @@ import java.util.List;
 import org.jrebirth.analyzer.ui.editor.EditorWave;
 import org.jrebirth.analyzer.ui.editor.EditorWaveItem;
 import org.jrebirth.core.event.Event;
-import org.jrebirth.core.event.impl.EventImpl;
+import org.jrebirth.core.event.EventImpl;
 import org.jrebirth.core.link.Wave;
-import org.jrebirth.core.link.impl.WaveData;
-import org.jrebirth.core.ui.impl.AbstractModel;
+import org.jrebirth.core.link.WaveData;
+import org.jrebirth.core.ui.AbstractModel;
 
 /**
  * The class <strong>WorkbenchModel</strong>.

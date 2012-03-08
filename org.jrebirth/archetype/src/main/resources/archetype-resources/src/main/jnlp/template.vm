@@ -7,7 +7,7 @@
 		<homepage href="${project.url}"/>
 		<description>${project.description}</description>
 		<description kind="short">Sample Application</description>
-		<!--<icon href="icon.png"/>-->
+		<icon href="http://www.jrebirth.org/uploads/images/JRebirth_32x32.png"/>
 		<offline-allowed/>
 	</information>
 
