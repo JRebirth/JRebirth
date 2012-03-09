@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-
 /**
  * 
  * The class <strong>WaveImpl</strong>.
@@ -31,7 +30,9 @@ public class WaveImpl implements Wave {
     /** The group of the wave used to dispatch the right event. */
     private WaveGroup waveGroup;
 
-    /** The type of the wave used to call the right method name of the receiver object. */
+    /**
+     * The type of the wave used to call the right method name of the receiver object.
+     */
     private WaveType waveType;
 
     /** The related class to used for create waves. */

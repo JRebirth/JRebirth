@@ -20,9 +20,9 @@ import org.jrebirth.core.link.Wave;
  */
 public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> implements Command {
 
-	/**
-	 * The field that indicate how this command must be launched.
-	 */
+    /**
+     * The field that indicate how this command must be launched.
+     */
     private final RunIntoType runInto;
 
     /**
@@ -50,7 +50,7 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
      */
     @Override
     protected abstract void processAction(final Wave wave);
-    
+
     /**
      * {@inheritDoc}
      */
@@ -58,7 +58,7 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     public final void run(final Wave wave) {
 
         // Create the runnable that will be run
-        JRebirthRunnable runnable = new JRebirthRunnable() {
+        final JRebirthRunnable runnable = new JRebirthRunnable() {
 
             @Override
             protected void runInto() throws JRebirthThreadException {
@@ -74,7 +74,7 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
      * @return Returns the runInto.
      */
     protected final RunIntoType getRunInto() {
-        return runInto;
+        return this.runInto;
     }
 
     /**

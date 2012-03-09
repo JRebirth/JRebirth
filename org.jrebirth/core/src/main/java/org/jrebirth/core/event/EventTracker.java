@@ -4,7 +4,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * The class <strong>EventTracker</strong>.
  * 

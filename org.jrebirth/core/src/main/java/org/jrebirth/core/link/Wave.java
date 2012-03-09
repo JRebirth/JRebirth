@@ -2,7 +2,6 @@ package org.jrebirth.core.link;
 
 import java.util.List;
 
-
 /**
  * The interface <strong>Wave</strong>.
  * 

@@ -32,7 +32,8 @@ public final class WorkbenchController extends DefaultController<WorkbenchModel,
      */
     @Override
     public void action(final ActionEvent actionEvent) {
-        // final RotateTransition rt = new RotateTransition(Duration.millis(3000), getView().getHelloButton());
+        // final RotateTransition rt = new
+        // RotateTransition(Duration.millis(3000), getView().getHelloButton());
         // rt.setByAngle(180);
         // rt.setCycleCount(4);
         // rt.setAutoReverse(true);

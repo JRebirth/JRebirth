@@ -18,5 +18,5 @@ public interface Command extends FacadeReady<Command> {
      * @param wave the wave that have triggered this command
      */
     void run(Wave wave);
-    
+
 }

@@ -3,7 +3,6 @@ package org.jrebirth.core.event;
 import java.io.IOException;
 import java.io.OutputStream;
 
-
 /**
  * The class <strong>JRebirthLogger</strong>.
  * 

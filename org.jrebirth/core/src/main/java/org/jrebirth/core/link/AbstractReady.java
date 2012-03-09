@@ -27,7 +27,9 @@ import org.jrebirth.core.ui.Model;
  */
 public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeReady<R>, ModelReady, CommandReady, ServiceReady {
 
-    /** The facade that manage same kind of object (from Service, Command and Model). */
+    /**
+     * The facade that manage same kind of object (from Service, Command and Model).
+     */
     private Facade<R> localFacade;
 
     /**

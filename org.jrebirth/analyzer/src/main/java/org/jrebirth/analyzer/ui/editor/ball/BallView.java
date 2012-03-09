@@ -85,38 +85,38 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
     public void setStyle(final EventType eventType) {
 
         switch (eventType) {
-            case CREATE_APPLICATION:
-                getRootNode().setFill(Color.AZURE);
-                break;
-            case CREATE_NOTIFIER:
-                getRootNode().setFill(Color.BISQUE);
-                break;
-            case CREATE_GLOBAL_FACADE:
-                getRootNode().setFill(Color.BLANCHEDALMOND);
-                break;
-            case CREATE_UI_FACADE:
-                getRootNode().setFill(Color.BLUEVIOLET);
-                break;
-            case CREATE_SERVICE_FACADE:
-                getRootNode().setFill(Color.CADETBLUE);
-                break;
-            case CREATE_COMMAND_FACADE:
-                getRootNode().setFill(Color.CORNFLOWERBLUE);
-                break;
-            case CREATE_SERVICE:
-                getRootNode().setFill(Color.CRIMSON);
-                break;
-            case CREATE_MODEL:
-                getRootNode().setFill(Color.DARKGREY);
-                break;
-            case CREATE_COMMAND:
-                getRootNode().setFill(Color.DARKRED);
-                break;
-            case CREATE_VIEW:
-                getRootNode().setFill(Color.GAINSBORO);
-                break;
-            default:
-                // Nothing to colorize
+        case CREATE_APPLICATION:
+            getRootNode().setFill(Color.AZURE);
+            break;
+        case CREATE_NOTIFIER:
+            getRootNode().setFill(Color.BISQUE);
+            break;
+        case CREATE_GLOBAL_FACADE:
+            getRootNode().setFill(Color.BLANCHEDALMOND);
+            break;
+        case CREATE_UI_FACADE:
+            getRootNode().setFill(Color.BLUEVIOLET);
+            break;
+        case CREATE_SERVICE_FACADE:
+            getRootNode().setFill(Color.CADETBLUE);
+            break;
+        case CREATE_COMMAND_FACADE:
+            getRootNode().setFill(Color.CORNFLOWERBLUE);
+            break;
+        case CREATE_SERVICE:
+            getRootNode().setFill(Color.CRIMSON);
+            break;
+        case CREATE_MODEL:
+            getRootNode().setFill(Color.DARKGREY);
+            break;
+        case CREATE_COMMAND:
+            getRootNode().setFill(Color.DARKRED);
+            break;
+        case CREATE_VIEW:
+            getRootNode().setFill(Color.GAINSBORO);
+            break;
+        default:
+            // Nothing to colorize
         }
 
     }
@@ -136,6 +136,7 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
     /**
      * Show the ball by using a nice transition.
      */
+    @Override
     public void show() {
         this.showTransition.play();
     }
@@ -143,6 +144,7 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
     /**
      * Hide the ball by using a nice reverse transition..
      */
+    @Override
     public void hide() {
 
         this.showTransition.setRate(-1);
@@ -150,7 +152,8 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
 
         // TranslateTransitionBuilder.create().duration(Duration.millis(500)).node(getRootNode()).byX(-50).byY(-40).build().play();
         //
-        // final ScaleTransition st = new ScaleTransition(Duration.millis(400), getRootNode());
+        // final ScaleTransition st = new ScaleTransition(Duration.millis(400),
+        // getRootNode());
         // st.setToX(0);
         // st.setToY(0);
         // st.setCycleCount(1);
@@ -190,22 +193,22 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
     private double getX() {
         double res;
         switch (getModel().getEventModel().getEventType()) {
-            case CREATE_APPLICATION:
-            case CREATE_COMMAND_FACADE:
-                res = 0;
-                break;
-            case CREATE_GLOBAL_FACADE:
-            case CREATE_NOTIFIER:
-                res = 70;
-                break;
-            case CREATE_SERVICE_FACADE:
-                res = -200 * Math.cos(Math.PI / 6);
-                break;
-            case CREATE_UI_FACADE:
-                res = 200 * Math.cos(Math.PI / 6);
-                break;
-            default:
-                res = 50;
+        case CREATE_APPLICATION:
+        case CREATE_COMMAND_FACADE:
+            res = 0;
+            break;
+        case CREATE_GLOBAL_FACADE:
+        case CREATE_NOTIFIER:
+            res = 70;
+            break;
+        case CREATE_SERVICE_FACADE:
+            res = -200 * Math.cos(Math.PI / 6);
+            break;
+        case CREATE_UI_FACADE:
+            res = 200 * Math.cos(Math.PI / 6);
+            break;
+        default:
+            res = 50;
         }
         return res;
     }
@@ -218,20 +221,20 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
     private double getY() {
         double res;
         switch (getModel().getEventModel().getEventType()) {
-            case CREATE_COMMAND_FACADE:
-                res = -200 * Math.sin(Math.PI / 2);
-                break;
-            case CREATE_GLOBAL_FACADE:
-            case CREATE_APPLICATION:
-            case CREATE_NOTIFIER:
-                res = 0;
-                break;
-            case CREATE_SERVICE_FACADE:
-            case CREATE_UI_FACADE:
-                res = +200 * Math.sin(Math.PI / 6);
-                break;
-            default:
-                res = 50;
+        case CREATE_COMMAND_FACADE:
+            res = -200 * Math.sin(Math.PI / 2);
+            break;
+        case CREATE_GLOBAL_FACADE:
+        case CREATE_APPLICATION:
+        case CREATE_NOTIFIER:
+            res = 0;
+            break;
+        case CREATE_SERVICE_FACADE:
+        case CREATE_UI_FACADE:
+            res = +200 * Math.sin(Math.PI / 6);
+            break;
+        default:
+            res = 50;
         }
         return res;
     }

@@ -3,7 +3,6 @@ package org.jrebirth.analyzer.command;
 import org.jrebirth.analyzer.ui.editor.EditorModel;
 import org.jrebirth.analyzer.ui.editor.EditorWaveItem;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
-import org.jrebirth.core.command.AbstractUICommand;
 import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.link.Wave;

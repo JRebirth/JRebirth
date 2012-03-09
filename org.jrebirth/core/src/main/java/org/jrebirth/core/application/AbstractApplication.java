@@ -82,7 +82,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         try {
             super.init();
         } catch (final Exception e) {
-            // getFacade().getLogger().error("Error while application init phase : " + e.getMessage());
+            // getFacade().getLogger().error("Error while application init phase : "
+            // + e.getMessage());
             throw new CoreException(e);
         }
 
@@ -113,7 +114,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
         } catch (final CoreException ce) {
             ce.printStackTrace();
-            // getFacade().getLogger().fatal("Error while starting application : " + ce.getMessage());
+            // getFacade().getLogger().fatal("Error while starting application : "
+            // + ce.getMessage());
         }
     }
 
@@ -130,7 +132,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             JRebirthThread.getThread().interrupt();
 
         } catch (final Exception e) {
-            // getFacade().getLogger().error("Error while stoping application : " + e.getMessage());
+            // getFacade().getLogger().error("Error while stoping application : "
+            // + e.getMessage());
             throw new CoreException(e);
         }
     }
@@ -208,12 +211,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * @throws CoreException if build fails
      */
     protected final Scene buildScene(final Stage primaryStage) throws CoreException {
-        return SceneBuilder.create()
-                .root(buildRootPane())
-                .width(JRebirthApplication.DEFAULT_SCENE_WIDTH)
-                .height(JRebirthApplication.DEFAULT_SCENE_HEIGHT)
-                .fill(JRebirthApplication.DEFAULT_SCENE_BG_COLOR)
-                .build();
+        return SceneBuilder.create().root(buildRootPane()).width(JRebirthApplication.DEFAULT_SCENE_WIDTH).height(JRebirthApplication.DEFAULT_SCENE_HEIGHT)
+                .fill(JRebirthApplication.DEFAULT_SCENE_BG_COLOR).build();
     }
 
     /**

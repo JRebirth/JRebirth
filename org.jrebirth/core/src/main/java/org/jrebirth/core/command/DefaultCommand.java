@@ -12,28 +12,28 @@ import org.jrebirth.core.link.Wave;
  */
 public class DefaultCommand extends AbstractCommand {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void ready() throws CoreException {
-		// Nothing to do yet
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void ready() throws CoreException {
+        // Nothing to do yet
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void execute(Wave wave) {
-		// Nothing to do yet
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void execute(final Wave wave) {
+        // Nothing to do yet
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void processAction(Wave wave) {
-		// Nothing to do yet
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void processAction(final Wave wave) {
+        // Nothing to do yet
+    }
 
 }

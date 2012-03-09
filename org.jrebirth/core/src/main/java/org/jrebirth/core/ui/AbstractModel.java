@@ -189,7 +189,8 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
             if (!this.innerModelMultitonMap.containsKey(innerModel)) {
                 this.innerModelMultitonMap.put(innerModel, new HashMap<UniqueKey, Model>());
             }
-            // Check if the class of the object is already stored into the multitonKey map
+            // Check if the class of the object is already stored into the
+            // multitonKey map
             if (!this.innerModelMultitonMap.get(innerModel).containsKey(key)) {
 
                 // Store the component into the multitonKey map

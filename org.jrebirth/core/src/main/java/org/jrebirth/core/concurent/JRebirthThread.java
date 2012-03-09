@@ -44,7 +44,8 @@ public final class JRebirthThread extends Thread {
     private JRebirthThread() {
         super(NAME);
 
-        // Daemonize this thread, thus it will be killed with the main JavaFX thread
+        // Daemonize this thread, thus it will be killed with the main JavaFX
+        // thread
         setDaemon(true);
 
         // Initialize the queue
@@ -107,7 +108,8 @@ public final class JRebirthThread extends Thread {
                     // Remove all task processed
                     this.tasks.clear();
                 }
-                // Pause this thread during 20ms to let other thread adding some task into the queue
+                // Pause this thread during 20ms to let other thread adding some
+                // task into the queue
                 Thread.sleep(20);
 
             } catch (final InterruptedException e) {
@@ -211,7 +213,7 @@ public final class JRebirthThread extends Thread {
      * 
      * @param jRebirthRunnable
      */
-    public static void runLater(JRebirthRunnable jRebirthRunnable) {
+    public static void runLater(final JRebirthRunnable jRebirthRunnable) {
         jrebirthThread.runAsap(jRebirthRunnable);
     }
 }

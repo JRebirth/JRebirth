@@ -52,13 +52,12 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         final WaveReady waveReady = this;
 
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJET(
-                new JRebirthRunnable() {
-                    @Override
-                    public void runInto() throws JRebirthThreadException {
-                        getNotifier().listen(waveReady, waveType);
-                    }
-                });
+        JRebirth.runIntoJET(new JRebirthRunnable() {
+            @Override
+            public void runInto() throws JRebirthThreadException {
+                getNotifier().listen(waveReady, waveType);
+            }
+        });
     }
 
     /**
@@ -70,14 +69,13 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         final WaveReady waveReady = this;
 
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJET(
-                new JRebirthRunnable() {
+        JRebirth.runIntoJET(new JRebirthRunnable() {
 
-                    @Override
-                    protected void runInto() throws JRebirthThreadException {
-                        getNotifier().unlisten(waveReady, waveType);
-                    }
-                });
+            @Override
+            protected void runInto() throws JRebirthThreadException {
+                getNotifier().unlisten(waveReady, waveType);
+            }
+        });
     }
 
     /**
@@ -123,13 +121,12 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     private void buildAndSendWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData... waveData) {
 
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJET(
-                new JRebirthRunnable() {
-                    @Override
-                    public void runInto() throws JRebirthThreadException {
-                        getNotifier().sendWave(createWave(waveGroup, waveType, relatedClass, waveData));
-                    }
-                });
+        JRebirth.runIntoJET(new JRebirthRunnable() {
+            @Override
+            public void runInto() throws JRebirthThreadException {
+                getNotifier().sendWave(createWave(waveGroup, waveType, relatedClass, waveData));
+            }
+        });
     }
 
     /**

@@ -19,17 +19,17 @@ public final class JRebirth {
         super();
     }
 
-    public static void run(RunIntoType runInto, JRebirthRunnable runnable) {
+    public static void run(final RunIntoType runInto, final JRebirthRunnable runnable) {
         switch (runInto) {
-            case JAT:
-                runIntoJAT(runnable);
-                break;
-            case JET:
-                runIntoJET(runnable);
-                break;
-            case THREAD_POOL:
-                runIntoThreadPool(runnable);
-                break;
+        case JAT:
+            runIntoJAT(runnable);
+            break;
+        case JET:
+            runIntoJET(runnable);
+            break;
+        case THREAD_POOL:
+            runIntoThreadPool(runnable);
+            break;
 
         }
     }
@@ -39,7 +39,7 @@ public final class JRebirth {
      * 
      * @param runnable
      */
-    public static void runIntoJAT(JRebirthRunnable jRebirthRunnable) {
+    public static void runIntoJAT(final JRebirthRunnable jRebirthRunnable) {
         Platform.runLater(jRebirthRunnable);
 
     }
@@ -49,7 +49,7 @@ public final class JRebirth {
      * 
      * @param runnable
      */
-    public static void runIntoJET(JRebirthRunnable jRebirthRunnable) {
+    public static void runIntoJET(final JRebirthRunnable jRebirthRunnable) {
         JRebirthThread.runLater(jRebirthRunnable);
 
     }
@@ -59,7 +59,7 @@ public final class JRebirth {
      * 
      * @param runnable
      */
-    public static void runIntoThreadPool(JRebirthRunnable runnable) {
+    public static void runIntoThreadPool(final JRebirthRunnable runnable) {
         // TODO
     }
 }

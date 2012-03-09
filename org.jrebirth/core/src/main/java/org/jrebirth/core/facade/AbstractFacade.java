@@ -51,7 +51,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
         // For Singleton Components, no key is provided
         if (key.length == 0) {
-            // Check if the class of the object is already stored into the singleton map
+            // Check if the class of the object is already stored into the
+            // singleton map
             if (!this.singletonMap.containsKey(readyObject.getClass())) {
 
                 // Attach the facade to allow to retrieve any components
@@ -68,7 +69,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             if (!this.singletonMap.containsKey(readyObject.getClass())) {
                 this.multitonMap.put((Class<E>) readyObject.getClass(), new HashMap<UniqueKey, R>());
             }
-            // Check if the class of the object is already stored into the multitonKey map
+            // Check if the class of the object is already stored into the
+            // multitonKey map
             if (!this.multitonMap.get(readyObject.getClass()).containsKey(key[0])) {
 
                 // Attach the facade to allow to retrieve any components

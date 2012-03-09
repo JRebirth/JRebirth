@@ -56,7 +56,8 @@ public final class ClassUtility {
             // Retrieve the right generic type we want to instantiate
             final Class<?> genericClass = (Class<?>) paramType.getActualTypeArguments()[index];
 
-            // Find the right constructor and use arguments to create a new instance
+            // Find the right constructor and use arguments to create a new
+            // instance
             return genericClass.getConstructor(parameterTypes).newInstance(parameters);
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException

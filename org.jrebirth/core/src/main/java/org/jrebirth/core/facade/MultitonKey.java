@@ -3,7 +3,6 @@ package org.jrebirth.core.facade;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * The class <strong>MultitonKey</strong>.
  * 

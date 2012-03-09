@@ -11,7 +11,6 @@ import javafx.stage.FileChooser;
 
 import org.jrebirth.analyzer.ui.editor.EditorWave;
 import org.jrebirth.analyzer.ui.editor.EditorWaveItem;
-import org.jrebirth.core.command.AbstractUICommand;
 import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.event.EventImpl;
@@ -36,7 +35,9 @@ public final class OpenEventTrackerFileCommand extends DefaultUICommand {
         super.run(wave);
 
         final FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("(etd)", "*.etd")); // to filter only xml files
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("(etd)", "*.etd")); // to filter
+                                                                                         // only xml
+                                                                                         // files
         final File selected = fc.showOpenDialog(null);
 
         if (selected != null) { // if nothing is selected

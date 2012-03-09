@@ -193,7 +193,8 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         }
 
         if (!error && !(fxmlLoader.getController() instanceof AbstractFXMLController)) {
-            throw new CoreRuntimeException("The FXML controller must extends the FXMLController class : " + fxmlLoader.getController().getClass().getCanonicalName());
+            throw new CoreRuntimeException("The FXML controller must extends the FXMLController class : "
+                    + fxmlLoader.getController().getClass().getCanonicalName());
         }
 
         final FXMLController fxmlController = (FXMLController) fxmlLoader.getController();

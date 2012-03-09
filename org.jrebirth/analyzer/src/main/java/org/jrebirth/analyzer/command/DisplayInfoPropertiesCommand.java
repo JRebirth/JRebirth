@@ -14,22 +14,22 @@ import org.jrebirth.core.link.Wave;
  */
 public class DisplayInfoPropertiesCommand extends AbstractUICommand {
 
-	@Override
-	public void ready() throws CoreException {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void ready() throws CoreException {
+        // TODO Auto-generated method stub
 
-	@Override
-	protected void execute(Wave wave) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	protected void processAction(Wave wave) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    protected void execute(final Wave wave) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    protected void processAction(final Wave wave) {
+        // TODO Auto-generated method stub
+
+    }
 
 }

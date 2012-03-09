@@ -1,6 +1,5 @@
 package org.jrebirth.core.link;
 
-
 /**
  * 
  * The class <strong>WaveData</strong>.
@@ -14,7 +13,9 @@ package org.jrebirth.core.link;
  */
 public final class WaveData implements Comparable<WaveData> {
 
-    /** The key property, must be set with an enumeration that implements WaveItem. */
+    /**
+     * The key property, must be set with an enumeration that implements WaveItem.
+     */
     private WaveItem waveItem;
 
     /** The value data. */
