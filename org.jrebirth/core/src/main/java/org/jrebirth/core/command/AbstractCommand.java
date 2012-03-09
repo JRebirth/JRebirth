@@ -9,13 +9,13 @@ import org.jrebirth.core.concurent.RunIntoType;
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractCommand extends AbstractBaseCommand implements Command {
+public abstract class AbstractCommand extends AbstractBaseCommand {
 
     /**
      * Default Constructor used to run this action into the JET.
      */
     public AbstractCommand() {
-        super(RunIntoType.JET);
+        super(RunIntoType.JIT);
     }
 
 }

@@ -3,14 +3,12 @@ package org.jrebirth.core.concurent;
 import org.jrebirth.core.exception.JRebirthThreadException;
 
 /**
- * The class <strong>JRebirthRunnable</strong>. TODO To complete
+ * The class <strong>AbstractJRebirthRunnable</strong>.
  * 
  * @author Sébastien Bordes
  * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
-public abstract class JRebirthRunnable implements Runnable {
+public class JRebirthRunnable implements Runnable {
 
     /**
      * {@inheritDoc}
@@ -30,6 +28,8 @@ public abstract class JRebirthRunnable implements Runnable {
      * 
      * @throws JRebirthThreadException it thread error
      */
-    protected abstract void runInto() throws JRebirthThreadException;
+    protected void runInto() throws JRebirthThreadException {
+        // Must be overridden
+    }
 
 }

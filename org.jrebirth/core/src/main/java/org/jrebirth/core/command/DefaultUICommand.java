@@ -17,7 +17,7 @@ public class DefaultUICommand extends AbstractUICommand {
      */
     @Override
     public void ready() throws CoreException {
-        // Nothing to do yet
+        // Nothing to do yet by the default UI command, must be overridden
     }
 
     /**
@@ -25,7 +25,7 @@ public class DefaultUICommand extends AbstractUICommand {
      */
     @Override
     protected void execute(final Wave wave) {
-        // Nothing to do yet
+        // Nothing to do yet by the default UI command, must be overridden
     }
 
     /**
@@ -33,7 +33,7 @@ public class DefaultUICommand extends AbstractUICommand {
      */
     @Override
     protected void processAction(final Wave wave) {
-        // Nothing to do yet
+        // Nothing to do yet by the default UI command, must be overridden
     }
 
 }

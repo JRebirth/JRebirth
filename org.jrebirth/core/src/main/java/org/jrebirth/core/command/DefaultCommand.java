@@ -17,7 +17,7 @@ public class DefaultCommand extends AbstractCommand {
      */
     @Override
     public void ready() throws CoreException {
-        // Nothing to do yet
+        // Nothing to do yet by the default command, must be overridden
     }
 
     /**
@@ -25,7 +25,7 @@ public class DefaultCommand extends AbstractCommand {
      */
     @Override
     protected void execute(final Wave wave) {
-        // Nothing to do yet
+        // Nothing to do yet by the default command, must be overridden
     }
 
     /**
@@ -33,7 +33,7 @@ public class DefaultCommand extends AbstractCommand {
      */
     @Override
     protected void processAction(final Wave wave) {
-        // Nothing to do yet
+        // Nothing to do yet by the default command, must be overridden
     }
 
 }

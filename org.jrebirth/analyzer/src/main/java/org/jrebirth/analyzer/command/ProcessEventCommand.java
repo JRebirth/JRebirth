@@ -43,25 +43,25 @@ public final class ProcessEventCommand extends DefaultUICommand {
      */
     private void createBallModel(final Event event) {
         switch (event.getEventType()) {
-        case CREATE_APPLICATION:
-        case CREATE_NOTIFIER:
-        case CREATE_GLOBAL_FACADE:
-        case CREATE_COMMAND_FACADE:
-        case CREATE_SERVICE_FACADE:
-        case CREATE_UI_FACADE:
-        case CREATE_COMMAND:
-        case CREATE_SERVICE:
-        case CREATE_MODEL:
-        case CREATE_VIEW:
-        case CREATE_CONTROLLER:
-            final BallModel ballModel = getModel(BallModel.class, event);
-            ballModel.setEventModel(event); // TODO do it automatically !!! see
-                                            // you track
-            getModel(EditorModel.class).register(ballModel);
-            callCommand(ShowBallCommand.class, new WaveData(EditorWaveItem.EVENT, event));
-            break;
-        case CREATE_WAVE:
-        default:
+            case CREATE_APPLICATION:
+            case CREATE_NOTIFIER:
+            case CREATE_GLOBAL_FACADE:
+            case CREATE_COMMAND_FACADE:
+            case CREATE_SERVICE_FACADE:
+            case CREATE_UI_FACADE:
+            case CREATE_COMMAND:
+            case CREATE_SERVICE:
+            case CREATE_MODEL:
+            case CREATE_VIEW:
+            case CREATE_CONTROLLER:
+                final BallModel ballModel = getModel(BallModel.class, event);
+                ballModel.setEventModel(event); // TODO do it automatically !!! see
+                                                // you track
+                getModel(EditorModel.class).register(ballModel);
+                callCommand(ShowBallCommand.class, new WaveData(EditorWaveItem.EVENT, event));
+                break;
+            case CREATE_WAVE:
+            default:
         }
 
     }
@@ -82,17 +82,17 @@ public final class ProcessEventCommand extends DefaultUICommand {
      */
     private void destroyBallModel(final Event event) {
         switch (event.getEventType()) {
-        case DESTROY_COMMAND:
-        case DESTROY_SERVICE:
-        case DESTROY_MODEL:
-        case DESTROY_VIEW:
-        case DESTROY_CONTROLLER:
-            final BallModel ballModel = getModel(BallModel.class, event);
-            callCommand(HideBallCommand.class, new WaveData(EditorWaveItem.EVENT, event));
-            getModel(EditorModel.class).unregister(ballModel);
-            break;
-        case DESTROY_WAVE:
-        default:
+            case DESTROY_COMMAND:
+            case DESTROY_SERVICE:
+            case DESTROY_MODEL:
+            case DESTROY_VIEW:
+            case DESTROY_CONTROLLER:
+                final BallModel ballModel = getModel(BallModel.class, event);
+                callCommand(HideBallCommand.class, new WaveData(EditorWaveItem.EVENT, event));
+                getModel(EditorModel.class).unregister(ballModel);
+                break;
+            case DESTROY_WAVE:
+            default:
         }
 
     }

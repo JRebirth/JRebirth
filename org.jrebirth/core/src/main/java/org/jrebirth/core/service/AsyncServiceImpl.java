@@ -7,7 +7,7 @@ import org.jrebirth.core.link.Wave;
 
 /**
  * 
- * The class <strong>ServiceImpl</strong>.
+ * The class <strong>AsyncServiceImpl</strong>.
  * 
  * Base implementation of the service.
  * 
@@ -23,8 +23,7 @@ public class AsyncServiceImpl extends AbstractWaveReady<Service> implements Serv
      */
     @Override
     public void ready() throws CoreException {
-        // getLocalFacade().getGlobalFacade().getServiceExecutor();
-
+        // Nothing to do yet by the AsyncServiceImpl, must be overridden
     }
 
     /**
@@ -32,7 +31,9 @@ public class AsyncServiceImpl extends AbstractWaveReady<Service> implements Serv
      */
     @Override
     protected void processAction(final Wave wave) {
+        // Nothing to do yet by the AsyncServiceImpl, must be overridden
         // Must be overridden to manage action handling by service
+        // Asynchronously
     }
 
     /**

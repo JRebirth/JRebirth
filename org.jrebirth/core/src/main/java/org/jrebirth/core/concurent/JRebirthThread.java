@@ -27,7 +27,7 @@ public final class JRebirthThread extends Thread {
     public static final String NAME = "JRebirth Thread";
 
     /** The unique instance of the current class. */
-    private static volatile JRebirthThread jrebirthThread;
+    private static JRebirthThread internalThread;
 
     /** The Global Facade object that handle other sub facade. */
     private transient GlobalFacade facade;
@@ -181,10 +181,12 @@ public final class JRebirthThread extends Thread {
      * @return the JRebirthThread
      */
     public static JRebirthThread getThread() {
-        if (jrebirthThread == null) {
-            jrebirthThread = new JRebirthThread();
+        synchronized (JRebirthThread.class) {
+            if (internalThread == null) {
+                internalThread = new JRebirthThread();
+            }
         }
-        return jrebirthThread;
+        return internalThread;
     }
 
     /**
@@ -209,11 +211,11 @@ public final class JRebirthThread extends Thread {
     }
 
     /**
-     * TODO To complete.
+     * Run a task as soon as possible.
      * 
-     * @param jRebirthRunnable
+     * @param runnable the runnable to run
      */
-    public static void runLater(final JRebirthRunnable jRebirthRunnable) {
-        jrebirthThread.runAsap(jRebirthRunnable);
+    public static void runLater(final Runnable runnable) {
+        internalThread.runAsap(runnable);
     }
 }

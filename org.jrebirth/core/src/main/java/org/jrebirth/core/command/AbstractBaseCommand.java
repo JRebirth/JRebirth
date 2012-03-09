@@ -23,15 +23,16 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     /**
      * The field that indicate how this command must be launched.
      */
-    private final RunIntoType runInto;
+    private final RunIntoType runIntoThread;
 
     /**
      * Default constructor.
      * 
-     * @param runInto the way to launch this command
+     * @param runIntoThread the way to launch this command
      */
-    public AbstractBaseCommand(final RunIntoType runInto) {
-        this.runInto = runInto;
+    public AbstractBaseCommand(final RunIntoType runIntoThread) {
+        super();
+        this.runIntoThread = runIntoThread;
     }
 
     /**
@@ -41,7 +42,9 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     public abstract void ready() throws CoreException;
 
     /**
-     * {@inheritDoc}
+     * Execute the command code.
+     * 
+     * @param wave the wave that contain data to be processed
      */
     protected abstract void execute(final Wave wave);
 
@@ -74,7 +77,7 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
      * @return Returns the runInto.
      */
     protected final RunIntoType getRunInto() {
-        return this.runInto;
+        return this.runIntoThread;
     }
 
     /**

@@ -38,7 +38,7 @@
 
 	<ciManagement>
 		<system>Jenkins</system>
-		<url>http://ci.jrebirth.org/job/JRebirth-Full-Trunk/</url>
+		<url>http://ci.jrebirth.org/job/JRebirth-Wip/</url>
 	</ciManagement>
 	
 	<scm>

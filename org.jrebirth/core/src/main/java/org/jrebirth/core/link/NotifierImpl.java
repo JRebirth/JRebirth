@@ -53,17 +53,17 @@ public class NotifierImpl extends AbstractGlobalReady implements Notifier {
 
         try {
             switch (wave.getWaveGroup()) {
-            case CALL_COMMAND:
-                callCommand(wave);
-                break;
-            case RETURN_DATA:
-                break;
-            case DISPLAY_UI:
-                displayUi(wave);
-                break;
-            case UNDEFINED:
-            default:
-                sendUndefinedWave(wave);
+                case CALL_COMMAND:
+                    callCommand(wave);
+                    break;
+                case RETURN_DATA:
+                    break;
+                case DISPLAY_UI:
+                    displayUi(wave);
+                    break;
+                case UNDEFINED:
+                default:
+                    sendUndefinedWave(wave);
             }
         } catch (final WaveException e) {
             getGlobalFacade().getLogger().error("Failed to send Wave");

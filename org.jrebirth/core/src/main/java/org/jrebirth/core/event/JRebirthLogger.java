@@ -23,7 +23,7 @@ public class JRebirthLogger extends AbstractRecord {
      */
     @Override
     protected OutputStream buildOutputStream() {
-        return new OutConsole();
+        return new OutConsole(System.out);
     }
 
     /**
@@ -94,18 +94,28 @@ public class JRebirthLogger extends AbstractRecord {
      * The class <strong>OutConsole</strong>.
      * 
      * @author Sébastien Bordes
-     * 
-     * @version $Revision$ $Author$
-     * @since $Date$
      */
     private static final class OutConsole extends OutputStream {
+
+        /** The inner output stream to used. */
+        private final OutputStream os;
+
+        /**
+         * Default Constructor.
+         * 
+         * @param os the system output stream
+         */
+        public OutConsole(final OutputStream os) {
+            super();
+            this.os = os;
+        }
 
         /**
          * {@inheritDoc}
          */
         @Override
         public void write(final int b) throws IOException {
-            System.out.println(b);
+            this.os.write(b);
         }
 
         /**
@@ -113,7 +123,7 @@ public class JRebirthLogger extends AbstractRecord {
          */
         @Override
         public void write(final byte[] b) throws IOException {
-            System.out.println(b);
+            this.os.write(b);
         }
 
         /**
@@ -121,7 +131,7 @@ public class JRebirthLogger extends AbstractRecord {
          */
         @Override
         public void write(final byte[] b, final int off, final int len) throws IOException {
-            System.out.println(b);
+            this.os.write(b, off, len);
         }
 
         /**
@@ -129,7 +139,7 @@ public class JRebirthLogger extends AbstractRecord {
          */
         @Override
         public void flush() throws IOException {
-            System.out.flush();
+            this.os.flush();
         }
     }
 
