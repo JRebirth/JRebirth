@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 import org.jrebirth.core.application.JRebirthApplication;
+import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.facade.GlobalFacade;
@@ -89,8 +90,7 @@ public final class JRebirthThread extends Thread {
         try {
             launchFirstView();
         } catch (final CoreException e) {
-            this.facade.getLogger().error(e.getMessage());
-            e.printStackTrace();
+            getFacade().getLogger().logException(e);
         }
 
         while (true) {
@@ -113,8 +113,7 @@ public final class JRebirthThread extends Thread {
                 Thread.sleep(20);
 
             } catch (final InterruptedException e) {
-                this.facade.getLogger().error(e.getMessage());
-                e.printStackTrace();
+                this.facade.getLogger().logException(e);
             }
         }
 
@@ -131,7 +130,7 @@ public final class JRebirthThread extends Thread {
             this.facade.stop();
             this.facade = null;
         } catch (final CoreException e) {
-            e.printStackTrace();
+            JRebirthLogger.getInstance().logException(e);
         }
     }
 

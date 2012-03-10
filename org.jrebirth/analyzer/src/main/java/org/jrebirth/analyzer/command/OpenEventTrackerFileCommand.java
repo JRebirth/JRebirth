@@ -21,9 +21,6 @@ import org.jrebirth.core.link.WaveData;
  * The class <strong>OpenEventTrackerFileCommand</strong>.
  * 
  * @author Sébastien Bordes
- * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
 public final class OpenEventTrackerFileCommand extends DefaultUICommand {
 

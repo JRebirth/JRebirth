@@ -195,7 +195,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             // Component Ready !
             return readyObject;
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
-            e.printStackTrace();
+            getGlobalFacade().getLogger().logException(e);
             throw new CoreException("Impossible to create the class " + clazz.getName(), e);
         }
     }

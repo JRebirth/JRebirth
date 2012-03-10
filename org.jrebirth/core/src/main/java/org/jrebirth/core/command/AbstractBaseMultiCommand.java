@@ -16,12 +16,12 @@ import org.jrebirth.core.exception.CoreException;
 public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand implements MultiCommand {
 
     /** The list of command that will be chained. */
-    private List<Command> commandList;
+    private final List<Command> commandList = new ArrayList<>();;
 
     /**
      * Default Constructor.
      * 
-     * @param runInto Th run into thread information
+     * @param runInto The run into thread type
      */
     public AbstractBaseMultiCommand(final RunIntoType runInto) {
         super(runInto);
@@ -32,7 +32,7 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
      */
     @Override
     public void ready() throws CoreException {
-        this.commandList = new ArrayList<>();
+        this.commandList.clear();
     }
 
     /**

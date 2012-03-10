@@ -6,17 +6,48 @@ import java.io.OutputStream;
 /**
  * The class <strong>JRebirthLogger</strong>.
  * 
- * Used to log string of a JRebirth application.
+ * Used to log string of a JRebirth application into the client console.
  * 
  * @author Sébastien Bordes
- * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
 public class JRebirthLogger extends AbstractRecord {
 
     /** The <code>LOG_SEPARATOR</code> field is used separate line content. */
     private static final String LOG_SEPARATOR = " - ";
+
+    /** The singleton to access from other thread. */
+    private static JRebirthLogger instance;
+
+    /** Check if the logger is enabled. */
+    private boolean enabled = true;
+
+    /**
+     * Return the singleton used to log into the client console.
+     * 
+     * @return the singleton
+     */
+    public static JRebirthLogger getInstance() {
+        synchronized (JRebirthLogger.class) {
+            if (instance == null) {
+                instance = new JRebirthLogger();
+            }
+            return instance;
+        }
+    }
+
+    /**
+     * @return Returns the enabled.
+     */
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    /**
+     * @param enabled The enabled to set.
+     */
+    public void setEnabled(final boolean enabled) {
+        this.enabled = enabled;
+    }
 
     /**
      * {@inheritDoc}
@@ -81,13 +112,27 @@ public class JRebirthLogger extends AbstractRecord {
     }
 
     /**
+     * Log the fatal message and print the stack trace.
+     * 
+     * @param e the exception to log
+     */
+    public void logException(final Exception e) {
+        fatal(e.toString());
+        for (final StackTraceElement ste : e.getStackTrace()) {
+            record(ste.toString());
+        }
+    }
+
+    /**
      * Log a new line.
      * 
      * @param logLevel the level to used
      * @param message the message to log
      */
     private void log(final LogLevel logLevel, final String message) {
-        record(logLevel.name() + LOG_SEPARATOR + message);
+        if (isEnabled()) {
+            record(logLevel.name() + LOG_SEPARATOR + message);
+        }
     }
 
     /**

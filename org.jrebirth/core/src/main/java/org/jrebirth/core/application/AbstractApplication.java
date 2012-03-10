@@ -43,6 +43,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import org.jrebirth.core.concurent.JRebirthThread;
+import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.util.ClassUtility;
 
@@ -113,9 +114,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             primaryStage.show();
 
         } catch (final CoreException ce) {
-            ce.printStackTrace();
-            // getFacade().getLogger().fatal("Error while starting application : "
-            // + ce.getMessage());
+            JRebirthLogger.getInstance().error("Error while starting application : ");
+            JRebirthLogger.getInstance().logException(ce);
         }
     }
 

@@ -1,8 +1,5 @@
 package org.jrebirth.core.facade;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import org.jrebirth.core.application.JRebirthApplication;
 import org.jrebirth.core.event.EventImpl;
 import org.jrebirth.core.event.EventTracker;
@@ -46,11 +43,8 @@ public class GlobalFacadeImpl implements GlobalFacade {
     /** The EventTracker to track application events. */
     private final transient EventTracker eventTracker;
 
-    /** The internal logger. */
-    private final transient JRebirthLogger logger;
-
     /** The default executor. */
-    private final ExecutorService executorService;
+    // private final ExecutorService executorService;
 
     /**
      * Default Constructor. Initialize all facades.
@@ -61,12 +55,12 @@ public class GlobalFacadeImpl implements GlobalFacade {
         super();
 
         // Launch the default executor
-        this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
+        // this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
 
         // this.executorService.
 
         // Manage internal logging
-        this.logger = application.isLoggerEnabled() ? new JRebirthLogger() : null;
+        JRebirthLogger.getInstance().setEnabled(application.isLoggerEnabled());
 
         // Manage internal event tracking
         this.eventTracker = application.isEventTrackerEnabled() ? new EventTracker() : null;
@@ -140,7 +134,7 @@ public class GlobalFacadeImpl implements GlobalFacade {
      */
     @Override
     public final JRebirthLogger getLogger() {
-        return this.logger;
+        return JRebirthLogger.getInstance();
     }
 
     /**

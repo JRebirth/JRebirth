@@ -1,5 +1,6 @@
 package org.jrebirth.core.concurent;
 
+import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.JRebirthThreadException;
 
 /**
@@ -18,7 +19,7 @@ public class JRebirthRunnable implements Runnable {
         try {
             runInto();
         } catch (final JRebirthThreadException jte) {
-            jte.printStackTrace();
+            JRebirthLogger.getInstance().logException(jte);
         }
 
     }
