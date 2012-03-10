@@ -16,9 +16,6 @@ import ${package}.ui.SampleModel;
  * The class <strong>SampleApplication</strong>.
  * 
  * @author
- * 
- * @version
- * @since
  */
 public final class SampleApplication extends AbstractApplication<StackPane> {
 

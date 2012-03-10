@@ -4,16 +4,12 @@
 package ${package}.ui;
 
 import ${groupId}.core.exception.CoreException;
-import ${groupId}.core.ui.impl.AbstractController;
-
+import ${groupId}.core.ui.AbstractController;
 
 /**
  * The class <strong>SampleController</strong>.
  * 
  * @author
- * 
- * @version
- * @since
  */
 public class SampleController extends AbstractController<SampleModel, SampleView> {
 

@@ -7,15 +7,12 @@ import javafx.scene.control.LabelBuilder;
 import javafx.scene.layout.BorderPane;
 
 import ${groupId}.core.exception.CoreException;
-import ${groupId}.core.ui.impl.AbstractView;
+import ${groupId}.core.ui.AbstractView;
 
 /**
  * The class <strong>SampleView</strong>.
  * 
  * @author
- * 
- * @version
- * @since
  */
 public class SampleView extends AbstractView<SampleModel, BorderPane, SampleController> {
 

@@ -3,28 +3,39 @@
 #set( $symbol_escape = '\' )
 package ${package}.service;
 
+import ${groupId}.core.command.AbstractUICommand;
 import ${groupId}.core.exception.CoreException;
-import ${groupId}.core.service.impl.ServiceImpl;
+import ${groupId}.core.link.Wave;
 
 /**
  * The class <strong>SampleService</strong>.
  * 
  * @author
- * 
- * @version
- * @since
  */
-public final class SampleService extends ServiceImpl {
+public final class SampleService extends AbstractUICommand {
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void ready() throws CoreException {
-        super.ready();
-
-        // Initialize the service
+        // Nothing to do yet
     }
 
-    // Provide service methods
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void execute(Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void processAction(Wave wave) {
+        // Nothing to do yet
+    }
+
 }

@@ -4,15 +4,12 @@
 package ${package}.ui;
 
 import ${groupId}.core.link.Wave;
-import ${groupId}.core.ui.impl.AbstractModel;
+import ${groupId}.core.ui.AbstractModel;
 
 /**
  * The class <strong>SampleModel</strong>.
  * 
  * @author
- * 
- * @version
- * @since
  */
 public class SampleModel extends AbstractModel<SampleModel, SampleView> {
 
