@@ -8,8 +8,8 @@ import org.jrebirth.analyzer.command.ProcessEventCommand;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.link.Wave;
-import org.jrebirth.core.link.impl.WaveData;
-import org.jrebirth.core.ui.impl.DefaultModel;
+import org.jrebirth.core.link.WaveData;
+import org.jrebirth.core.ui.DefaultModel;
 
 /**
  * The class <strong>EditorModel</strong>.

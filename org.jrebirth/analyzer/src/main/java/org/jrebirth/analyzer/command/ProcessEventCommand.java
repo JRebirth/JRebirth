@@ -3,10 +3,10 @@ package org.jrebirth.analyzer.command;
 import org.jrebirth.analyzer.ui.editor.EditorModel;
 import org.jrebirth.analyzer.ui.editor.EditorWaveItem;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
-import org.jrebirth.core.command.impl.CommandImpl;
+import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.link.Wave;
-import org.jrebirth.core.link.impl.WaveData;
+import org.jrebirth.core.link.WaveData;
 
 /**
  * The class <strong>ProcessEventCommand</strong>.
@@ -16,13 +16,13 @@ import org.jrebirth.core.link.impl.WaveData;
  * @version $Revision$ $Author$
  * @since $Date$
  */
-public final class ProcessEventCommand extends CommandImpl {
+public final class ProcessEventCommand extends DefaultUICommand {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void run(final Wave wave) {
+    public void execute(final Wave wave) {
         super.run(wave);
 
         final Event event = (Event) wave.get(EditorWaveItem.EVENT).getValue();
@@ -55,7 +55,8 @@ public final class ProcessEventCommand extends CommandImpl {
             case CREATE_VIEW:
             case CREATE_CONTROLLER:
                 final BallModel ballModel = getModel(BallModel.class, event);
-                ballModel.setEventModel(event); // TODO do it automatically !!! see you track
+                ballModel.setEventModel(event); // TODO do it automatically !!! see
+                                                // you track
                 getModel(EditorModel.class).register(ballModel);
                 callCommand(ShowBallCommand.class, new WaveData(EditorWaveItem.EVENT, event));
                 break;

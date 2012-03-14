@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.impl.DefaultView;
+import org.jrebirth.core.ui.DefaultView;
 
 /**
  * 

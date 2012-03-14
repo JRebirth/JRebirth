@@ -12,9 +12,6 @@ import org.jrebirth.core.exception.CoreException;
  * 
  * @author Sébastien Bordes
  * 
- * @version $Revision: 165 $ $Author: sbordes $
- * @since $Date: 2011-11-07 22:55:40 +0100 (lun., 07 nov. 2011) $
- * 
  * @param <M> class type which will be the model of the view controlled, it must implements the #Model interface
  * @param <V> class type which will be control this controller, it must implements the #View interface
  */

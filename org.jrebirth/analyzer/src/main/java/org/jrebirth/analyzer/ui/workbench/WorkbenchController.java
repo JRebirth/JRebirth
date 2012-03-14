@@ -3,8 +3,8 @@ package org.jrebirth.analyzer.ui.workbench;
 import javafx.event.ActionEvent;
 
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.ui.DefaultController;
 import org.jrebirth.core.ui.adapter.ActionAdapter;
-import org.jrebirth.core.ui.impl.DefaultController;
 
 /**
  * The class <strong>WorkbenchController</strong>.
@@ -32,7 +32,8 @@ public final class WorkbenchController extends DefaultController<WorkbenchModel,
      */
     @Override
     public void action(final ActionEvent actionEvent) {
-        // final RotateTransition rt = new RotateTransition(Duration.millis(3000), getView().getHelloButton());
+        // final RotateTransition rt = new
+        // RotateTransition(Duration.millis(3000), getView().getHelloButton());
         // rt.setByAngle(180);
         // rt.setCycleCount(4);
         // rt.setAutoReverse(true);

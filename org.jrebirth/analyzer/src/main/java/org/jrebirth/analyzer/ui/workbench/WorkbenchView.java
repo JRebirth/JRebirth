@@ -3,7 +3,7 @@ package org.jrebirth.analyzer.ui.workbench;
 import javafx.scene.layout.BorderPane;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.impl.DefaultView;
+import org.jrebirth.core.ui.DefaultView;
 
 /**
  * 
@@ -43,7 +43,8 @@ public final class WorkbenchView extends DefaultView<WorkbenchModel, BorderPane,
         // Attach the properties view to the right place of the root border pane
         getRootNode().setRight(getModel().getInnerModel(WorkbenchInnerModels.PROPERTIES).getRootNode());
 
-        // Attach the properties view to the center place of the root border pane
+        // Attach the properties view to the center place of the root border
+        // pane
         getRootNode().setCenter(getModel().getInnerModel(WorkbenchInnerModels.EDITOR).getRootNode());
     }
 

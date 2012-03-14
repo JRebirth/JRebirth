@@ -47,8 +47,10 @@ public abstract class AbstractRecord implements Recordable {
     @Override
     public final void record(final String data) {
         try {
-            getOutputStream().write(data.getBytes());
-            getOutputStream().flush();
+            if (getOutputStream() != null) {
+                getOutputStream().write(data.getBytes());
+                getOutputStream().flush();
+            }
         } catch (final IOException e) {
             // Nothing that we can do
             return;
@@ -61,7 +63,9 @@ public abstract class AbstractRecord implements Recordable {
     @Override
     public void closeOutputStream() throws CoreException {
         try {
-            getOutputStream().close();
+            if (getOutputStream() != null) {
+                getOutputStream().close();
+            }
         } catch (final IOException e) {
             throw new CoreException("Impossible to close the output stream", e);
         }

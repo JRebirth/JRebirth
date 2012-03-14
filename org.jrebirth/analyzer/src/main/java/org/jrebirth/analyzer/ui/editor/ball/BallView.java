@@ -12,7 +12,7 @@ import javafx.util.Duration;
 import org.jrebirth.analyzer.ui.editor.EditorModel;
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.impl.DefaultView;
+import org.jrebirth.core.ui.DefaultView;
 
 /**
  * 
@@ -136,6 +136,7 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
     /**
      * Show the ball by using a nice transition.
      */
+    @Override
     public void show() {
         this.showTransition.play();
     }
@@ -143,6 +144,7 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
     /**
      * Hide the ball by using a nice reverse transition..
      */
+    @Override
     public void hide() {
 
         this.showTransition.setRate(-1);
@@ -150,7 +152,8 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
 
         // TranslateTransitionBuilder.create().duration(Duration.millis(500)).node(getRootNode()).byX(-50).byY(-40).build().play();
         //
-        // final ScaleTransition st = new ScaleTransition(Duration.millis(400), getRootNode());
+        // final ScaleTransition st = new ScaleTransition(Duration.millis(400),
+        // getRootNode());
         // st.setToX(0);
         // st.setToY(0);
         // st.setCycleCount(1);

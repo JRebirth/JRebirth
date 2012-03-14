@@ -9,8 +9,8 @@ import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.service.Service;
+import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Model;
-import org.jrebirth.core.ui.impl.AbstractModel;
 
 /**
  * 
@@ -51,7 +51,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
         // For Singleton Components, no key is provided
         if (key.length == 0) {
-            // Check if the class of the object is already stored into the singleton map
+            // Check if the class of the object is already stored into the
+            // singleton map
             if (!this.singletonMap.containsKey(readyObject.getClass())) {
 
                 // Attach the facade to allow to retrieve any components
@@ -68,7 +69,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             if (!this.singletonMap.containsKey(readyObject.getClass())) {
                 this.multitonMap.put((Class<E>) readyObject.getClass(), new HashMap<UniqueKey, R>());
             }
-            // Check if the class of the object is already stored into the multitonKey map
+            // Check if the class of the object is already stored into the
+            // multitonKey map
             if (!this.multitonMap.get(readyObject.getClass()).containsKey(key[0])) {
 
                 // Attach the facade to allow to retrieve any components
@@ -118,8 +120,9 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                 register(build(clazz, key), key);
             } catch (final CoreException ce) {
                 getGlobalFacade().getLogger().error(ce.getMessage());
-                getGlobalFacade().getLogger().error("Error while building " + clazz.getCanonicalName() + " instance");
-                throw new CoreRuntimeException("Error while building " + clazz.getCanonicalName() + " instance", ce);
+                final String msg = "Error while building " + clazz.getCanonicalName() + " instance";
+                getGlobalFacade().getLogger().error(msg);
+                throw new CoreRuntimeException(msg, ce);
             }
         }
         // retrieve the component from the right map
@@ -192,7 +195,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             // Component Ready !
             return readyObject;
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
-            e.printStackTrace();
+            getGlobalFacade().getLogger().logException(e);
             throw new CoreException("Impossible to create the class " + clazz.getName(), e);
         }
     }

@@ -6,15 +6,11 @@ import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.facade.UniqueKey;
 
 /**
- * 
  * The interface <strong>Model</strong>.
  * 
  * The contract for the model layer.
  * 
  * @author Sébastien Bordes
- * 
- * @version $Revision: 173 $ $Author: sbordes $
- * @since $Date: 2011-11-14 22:28:08 +0100 (lun., 14 nov. 2011) $
  */
 public interface Model extends FacadeReady<Model> {
 

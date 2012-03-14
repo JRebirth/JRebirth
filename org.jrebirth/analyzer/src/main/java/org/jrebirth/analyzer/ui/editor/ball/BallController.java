@@ -6,9 +6,9 @@ import javafx.scene.input.MouseEvent;
 import org.jrebirth.analyzer.ui.editor.EditorWave;
 import org.jrebirth.analyzer.ui.properties.PropertiesWaveItem;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.link.impl.WaveData;
+import org.jrebirth.core.link.WaveData;
+import org.jrebirth.core.ui.DefaultController;
 import org.jrebirth.core.ui.adapter.MouseAdapter;
-import org.jrebirth.core.ui.impl.DefaultController;
 
 /**
  * The class <strong>BallController</strong>.
