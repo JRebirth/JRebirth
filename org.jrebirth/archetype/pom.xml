@@ -4,13 +4,13 @@
 	<parent>
 		<groupId>org</groupId>
 		<artifactId>jrebirth</artifactId>
-		<version>0.5.0</version>
+		<version>0.6.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
 	<groupId>org.jrebirth</groupId>
 	<artifactId>archetype</artifactId>
-	<version>0.5.0</version>
+	<version>0.6.0-SNAPSHOT</version>
 	
 	<name>JRebirth Application Archetype</name>
 	<description>JRebirth Archetype used to build a new fresh application</description>
