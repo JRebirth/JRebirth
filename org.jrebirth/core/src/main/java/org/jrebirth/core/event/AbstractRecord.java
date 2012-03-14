@@ -1,5 +1,6 @@
 package org.jrebirth.core.event;
 
+import java.io.IOException;
 import java.io.OutputStream;
 
 import org.jrebirth.core.exception.CoreException;
@@ -22,31 +23,36 @@ public abstract class AbstractRecord implements Recordable {
     private OutputStream outputStream;
 
     /**
-     * {@inheritDoc}
+     * Return the output stream.
+     * 
+     * @return the output stream
      */
-    @Override
-    public OutputStream getOutputStream() throws CoreException {
+    private OutputStream getOutputStream() {
         if (this.outputStream == null) {
-            /*
-             * try { //this.outputStream = new FileOutputStream("events.etd"); } catch (final FileNotFoundException e) { throw new CoreException("Impossible to create file", e); }
-             */
+            this.outputStream = buildOutputStream();
         }
         return this.outputStream;
     }
+
+    /**
+     * Build the Output Stream to use.
+     * 
+     * @return the OutputStream built
+     */
+    protected abstract OutputStream buildOutputStream();
 
     /**
      * {@inheritDoc}
      */
     @Override
     public final void record(final String data) {
-        // try {
-        // getOutputStream().write(data.getBytes());
-        // // getOutputStream().write("\r\n".getBytes());
-        // getOutputStream().flush();
-        // } catch (final IOException | CoreException e) {
-        // // Nothing to do yet FIXME CATCH GLOBAL EXCEPTION
-        // return;
-        // }
+        try {
+            getOutputStream().write(data.getBytes());
+            getOutputStream().flush();
+        } catch (final IOException e) {
+            // Nothing that we can do
+            return;
+        }
     }
 
     /**
@@ -54,11 +60,11 @@ public abstract class AbstractRecord implements Recordable {
      */
     @Override
     public void closeOutputStream() throws CoreException {
-        // try {
-        // getOutputStream().close();
-        // } catch (final IOException e) {
-        // throw new CoreException("Impossible to close the stream", e);
-        // }
+        try {
+            getOutputStream().close();
+        } catch (final IOException e) {
+            throw new CoreException("Impossible to close the output stream", e);
+        }
     }
 
     /**
