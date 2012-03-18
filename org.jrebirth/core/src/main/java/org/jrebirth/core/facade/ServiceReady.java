@@ -17,12 +17,12 @@ public interface ServiceReady {
      * Return the service singleton or part of multiton.
      * 
      * @param clazz the service class to find
-     * @param key the unique key (in option)
+     * @param keyPart the unique key (in option)
      * 
      * @param <S> a sub class of service
      * 
      * @return a service instance
      */
-    <S extends Service> S getService(final Class<S> clazz, final UniqueKey... key);
+    <S extends Service> S getService(final Class<S> clazz, final Object... keyPart);
 
 }

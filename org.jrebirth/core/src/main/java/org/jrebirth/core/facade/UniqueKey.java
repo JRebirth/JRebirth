@@ -15,7 +15,7 @@ public interface UniqueKey {
      * 
      * @return the unique key
      */
-    String getUniqueKey();
+    String getKey();
 
     /**
      * Return the unique object if any or null.

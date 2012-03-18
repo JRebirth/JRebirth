@@ -25,43 +25,43 @@ public interface Facade<R extends FacadeReady<R>> {
      * Register a new ready object component.
      * 
      * @param readyObject the component to register
-     * @param key the unique key for multiton FacadeReady element, could be omitted for singleton
+     * @param keyPart the unique key for multiton FacadeReady element, could be omitted for singleton
      * 
      * @param <E> the type of the ready object used
      */
-    <E extends R> void register(final E readyObject, UniqueKey... key);
+    <E extends R> void register(final E readyObject, Object... keyPart);
 
     /**
      * Unregister a new ready object component.
      * 
      * @param readyObject the component to unregister
-     * @param key the unique key for multiton FacadeReady element, could be omitted for singleton
+     * @param keyPart the unique key for multiton FacadeReady element, could be omitted for singleton
      * 
      * @param <E> the type of the ready object used
      */
-    <E extends R> void unregister(final E readyObject, UniqueKey... key);
+    <E extends R> void unregister(final E readyObject, Object... keyPart);
 
     /**
      * Retrieve a ready object component.<br />
      * May allow to build it if it hadn't been done previously
      * 
      * @param clazz the component class
-     * @param key the unique key for multiton FacadeReady element, could be omitted for singleton
+     * @param keyPart the unique key for multiton FacadeReady element, could be omitted for singleton
      * 
      * @return the singleton of the component
      * 
      * @param <E> the type of the ready object to retrieve
      */
-    <E extends R> E retrieve(final Class<E> clazz, UniqueKey... key);
+    <E extends R> E retrieve(final Class<E> clazz, Object... keyPart);
 
     /**
      * Check if the component has already been created and stored.
      * 
      * @param clazz the component class to check
-     * @param key the unique key for multiton FacadeReady element, could be omitted for singleton
+     * @param keyPart the unique key for multiton FacadeReady element, could be omitted for singleton
      * 
      * @return true if the component exists
      */
-    boolean exists(final Class<? extends R> clazz, UniqueKey... key);
+    boolean exists(final Class<? extends R> clazz, Object... keyPart);
 
 }

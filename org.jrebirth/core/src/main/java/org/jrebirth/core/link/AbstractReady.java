@@ -32,6 +32,9 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     private Facade<R> localFacade;
 
+    /** The key that is used to register this component. */
+    private UniqueKey key;
+
     /**
      * {@inheritDoc}
      */
@@ -52,27 +55,51 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
-    public final <S extends Service> S getService(final Class<S> clazz, final UniqueKey... key) {
+    public UniqueKey getKey() {
+        return this.key;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setKey(final UniqueKey key) {
+        this.key = key;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void release() {
+        this.key = null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final <S extends Service> S getService(final Class<S> clazz, final Object... keyPart) {
         getLocalFacade().getGlobalFacade().trackEvent(EventType.ACCESS_SERVICE, this.getClass(), clazz);
-        return getLocalFacade().getGlobalFacade().getServiceFacade().retrieve(clazz, key);
+        return getLocalFacade().getGlobalFacade().getServiceFacade().retrieve(clazz, keyPart);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final <C extends Command> C getCommand(final Class<C> clazz, final UniqueKey... key) {
+    public final <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart) {
         getLocalFacade().getGlobalFacade().trackEvent(EventType.ACCESS_COMMAND, this.getClass(), clazz);
-        return getLocalFacade().getGlobalFacade().getCommandFacade().retrieve(clazz, key);
+        return getLocalFacade().getGlobalFacade().getCommandFacade().retrieve(clazz, keyPart);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final <M extends Model> M getModel(final Class<M> clazz, final UniqueKey... key) {
+    public final <M extends Model> M getModel(final Class<M> clazz, final Object... keyPart) {
         getLocalFacade().getGlobalFacade().trackEvent(EventType.ACCESS_MODEL, this.getClass(), clazz);
-        return getLocalFacade().getGlobalFacade().getUiFacade().retrieve(clazz, key);
+        return getLocalFacade().getGlobalFacade().getUiFacade().retrieve(clazz, keyPart);
     }
 
     /**

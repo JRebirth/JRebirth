@@ -193,7 +193,7 @@ public final class EventImpl implements Event {
      * {@inheritDoc}
      */
     @Override
-    public String getUniqueKey() {
+    public String getKey() {
         return toString();
     }
 

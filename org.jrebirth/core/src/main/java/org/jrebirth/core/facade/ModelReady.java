@@ -17,12 +17,12 @@ public interface ModelReady {
      * Return the model singleton or part of multiton.
      * 
      * @param clazz the model class to find
-     * @param key the multiton key (in option)
+     * @param keyPart the multiton key (in option)
      * 
      * @param <M> a sub class of Model
      * 
      * @return a service instance
      */
-    <M extends Model> M getModel(final Class<M> clazz, final UniqueKey... key);
+    <M extends Model> M getModel(final Class<M> clazz, final Object... keyPart);
 
 }

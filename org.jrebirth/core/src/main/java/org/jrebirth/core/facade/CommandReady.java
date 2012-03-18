@@ -17,12 +17,12 @@ public interface CommandReady {
      * Return the command singleton or part of multiton.
      * 
      * @param clazz the service class to find
-     * @param key the unique key (in option)
+     * @param keyPart the unique key (in option)
      * 
      * @param <C> a sub class of command
      * 
      * @return a command instance
      */
-    <C extends Command> C getCommand(final Class<C> clazz, final UniqueKey... key);
+    <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart);
 
 }

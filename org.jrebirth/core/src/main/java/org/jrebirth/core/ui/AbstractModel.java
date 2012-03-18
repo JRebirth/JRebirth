@@ -27,7 +27,7 @@ import org.jrebirth.core.util.ClassUtility;
 public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> extends AbstractWaveReady<Model> implements Model {
 
     /** The model object. */
-    private transient UniqueKey modeObject;
+    private transient Object modeObject;
 
     /** The dedicated view component. */
     private transient V view;
@@ -93,14 +93,14 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     /**
      * @return Returns the modelObject.
      */
-    public UniqueKey getModelObject() {
+    public Object getModelObject() {
         return this.modeObject;
     }
 
     /**
      * @param modelObject The modelObject to set.
      */
-    public void setModelObject(final UniqueKey modelObject) {
+    public void setModelObject(final Object modelObject) {
         this.modeObject = modelObject;
     }
 

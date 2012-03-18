@@ -10,26 +10,27 @@ import java.util.List;
  * 
  * @author Sébastien Bordes
  * 
- * @version $$Revision$$
- * @since $$Date$$
  */
-public class MultitonKey implements UniqueKey {
+public class MultitonKey<C> extends ClassKey<C> {
 
     /** The key formatted into a string. */
     private String key;
 
     /** List of keys that are part of the main key. */
-    private final List<Object> keys = new ArrayList<>();
+    private final List<Object> keyPartList = new ArrayList<>();
 
     /**
      * Default Constructor.
      * 
-     * @param keys a list of immutable objects that guarantee component unicity
+     * @param classField the descriptive class object
+     * @param keyPart a list of immutable objects that guarantee component unicity
      */
-    public MultitonKey(final Object... keys) {
+    public MultitonKey(final Class<C> classField, final Object... keyPart) {
+        super(classField);
+
         // Store all keys
-        for (final Object k : keys) {
-            this.keys.add(k);
+        for (final Object k : keyPart) {
+            this.keyPartList.add(k);
         }
         rebuildKey();
     }
@@ -38,8 +39,11 @@ public class MultitonKey implements UniqueKey {
      * (Re)-Build the string key by reading the keys list content.
      */
     private void rebuildKey() {
+
         final StringBuffer sb = new StringBuffer();
-        for (final Object k : this.keys) {
+
+        sb.append(getClassField().getCanonicalName());
+        for (final Object k : this.keyPartList) {
             sb.append(k.toString()).append('|');
         }
         this.key = sb.toString();
@@ -50,7 +54,7 @@ public class MultitonKey implements UniqueKey {
      */
     @Override
     public boolean equals(final Object object) {
-        return object != null && this.key.equals(object.toString());
+        return object != null && this.toString().equals(object.toString());
     }
 
     /**
@@ -58,7 +62,7 @@ public class MultitonKey implements UniqueKey {
      */
     @Override
     public int hashCode() {
-        return getUniqueKey().hashCode();
+        return getKey().hashCode();
     }
 
     /**
@@ -66,14 +70,14 @@ public class MultitonKey implements UniqueKey {
      */
     @Override
     public String toString() {
-        return getUniqueKey();
+        return getKey();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getUniqueKey() {
+    public String getKey() {
         if (this.key == null) {
             rebuildKey();
         }
@@ -85,6 +89,6 @@ public class MultitonKey implements UniqueKey {
      */
     @Override
     public Object getValue() {
-        return this.keys.get(0); // TODO
+        return this.keyPartList.get(0); // TODO
     }
 }

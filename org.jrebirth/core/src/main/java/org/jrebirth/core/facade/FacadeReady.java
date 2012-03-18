@@ -37,4 +37,19 @@ public interface FacadeReady<R extends FacadeReady<R>> {
      */
     void setLocalFacade(Facade<R> localFacade);
 
+    /**
+     * @return Returns the key.
+     */
+    UniqueKey getKey();
+
+    /**
+     * @param key The key to set.
+     */
+    void setKey(UniqueKey key);
+
+    /**
+     * Release the component by deleting this key used by the WeakHashMap.
+     */
+    void release();
+
 }

@@ -3,6 +3,8 @@ package org.jrebirth.core.ui;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -72,6 +74,17 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
         // Activate the controller to listen all components (this+children)
         getController().activate();
+
+        getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
+
+            @Override
+            public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
+                if (newValue == null) {
+                    getModel().release();
+                }
+            }
+
+        });
     }
 
     /**
