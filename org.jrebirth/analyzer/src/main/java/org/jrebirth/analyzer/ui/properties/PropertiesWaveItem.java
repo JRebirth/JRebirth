@@ -13,9 +13,23 @@ import org.jrebirth.core.link.WaveItem;
 public enum PropertiesWaveItem implements WaveItem {
 
     /** The event object. */
-    EVENT_OBJECT,
+    EVENT_OBJECT() {
+
+        @Override
+        public Class<?> dataClass() {
+            return null;
+        }
+
+    },
 
     /** The type of the node. */
-    NODE_TYPE,
+    NODE_TYPE() {
+
+        @Override
+        public Class<?> dataClass() {
+            return null;
+        }
+
+    },
 
 }

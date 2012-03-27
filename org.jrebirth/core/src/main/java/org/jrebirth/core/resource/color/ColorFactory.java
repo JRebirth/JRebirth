@@ -14,25 +14,25 @@ import org.jrebirth.core.resource.factory.AbstractResourceFactory;
  * @version $Revision$ $Author$
  * @since $Date$
  */
-public final class ColorFactory extends AbstractResourceFactory<JRebirthColor, Color> {
+public final class ColorFactory extends AbstractResourceFactory<ColorEnum, ColorParams, Color> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected Color buildResource(final JRebirthColor jrColor) {
+    protected Color buildResource(final ColorParams cp) {
         Color color = null;
 
-        if (jrColor instanceof WebColor) {
-            color = buildWebColor((WebColor) jrColor);
-        } else if (jrColor instanceof RGB01Color) {
-            color = buildRGB01Color((RGB01Color) jrColor);
-        } else if (jrColor instanceof RGB255Color) {
-            color = buildRGB255Color((RGB255Color) jrColor);
-        } else if (jrColor instanceof HSBColor) {
-            color = buildHSBColor((HSBColor) jrColor);
-        } else if (jrColor instanceof GrayColor) {
-            color = buildGrayColor((GrayColor) jrColor);
+        if (cp instanceof WebColor) {
+            color = buildWebColor((WebColor) cp);
+        } else if (cp instanceof RGB01Color) {
+            color = buildRGB01Color((RGB01Color) cp);
+        } else if (cp instanceof RGB255Color) {
+            color = buildRGB255Color((RGB255Color) cp);
+        } else if (cp instanceof HSBColor) {
+            color = buildHSBColor((HSBColor) cp);
+        } else if (cp instanceof GrayColor) {
+            color = buildGrayColor((GrayColor) cp);
         }
         return color;
     }

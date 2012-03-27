@@ -13,9 +13,23 @@ import org.jrebirth.core.link.WaveItem;
 public enum EditorWaveItem implements WaveItem {
 
     /** The name of the events. */
-    EVENTS,
+    EVENTS() {
+
+        @Override
+        public Class<?> dataClass() {
+            return null;
+        }
+
+    },
 
     /** An event unserialized. */
-    EVENT
+    EVENT() {
+
+        @Override
+        public Class<?> dataClass() {
+            return null;
+        }
+
+    };
 
 }

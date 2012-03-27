@@ -65,11 +65,21 @@ public interface Wave {
     void setPriority(int priority);
 
     /**
+     * @return Returns the nextWave.
+     */
+    public Wave getNextWave();
+
+    /**
+     * @param nextWave The nextWave to set.
+     */
+    void setNextWave(Wave nextWave);
+
+    /**
      * Return all wave items sorted by order.
      * 
      * @return Returns the the wave items.
      */
-    List<WaveData> getWaveItems();
+    List<WaveData<?>> getWaveItems();
 
     /**
      * Store an object and indexize it.
@@ -78,7 +88,7 @@ public interface Wave {
      * @param waveData the object to store
      * 
      */
-    void add(WaveItem waveItem, WaveData waveData);
+    void add(WaveItem waveItem, WaveData<?> waveData);
 
     /**
      * Retrieve an object.
@@ -87,5 +97,14 @@ public interface Wave {
      * 
      * @return the waveData registered by the key
      */
-    WaveData get(WaveItem waveItem);
+    WaveData<?> get(WaveItem waveItem);
+
+    /**
+     * Check if an object exists.
+     * 
+     * @param waveItem the waveItem of the object to check
+     * 
+     * @return true if the waveData is registered
+     */
+    boolean contains(WaveItem waveItem);
 }

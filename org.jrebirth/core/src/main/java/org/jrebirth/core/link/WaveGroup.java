@@ -15,8 +15,8 @@ public enum WaveGroup {
     /** Used to call a command. */
     CALL_COMMAND,
 
-    /** Used to display an UI. */
-    DISPLAY_UI,
+    /** Used to attach an UI into a nodeProperty. */
+    ATTACH_UI,
 
     /** Used to return Data from Service. */
     RETURN_DATA,

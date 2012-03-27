@@ -31,7 +31,7 @@ public final class JRebirth {
             case JIT:
                 runIntoJIT(runnable);
                 break;
-            case THREAD_POOL:
+            case POOL:
                 runIntoThreadPool(runnable);
                 break;
             default:

@@ -5,29 +5,72 @@ package org.jrebirth.core.resource.color;
  * 
  * @author Sébastien Bordes
  * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
-public interface HSBColor extends JRebirthColor {
+public class HSBColor extends AbstractBaseColor {
+
+    /** The saturation value 0-255. */
+    private final double hue;
+
+    /** The saturation value 0-255. */
+    private final double saturation;
+
+    /** The brightness value 0-255. */
+    private final double brightness;
+
+    /**
+     * Default Constructor.
+     * 
+     * @param hue
+     * @param saturation
+     * @param brightness
+     */
+    public HSBColor(final double hue, final double saturation, final double brightness) {
+        super();
+        this.hue = hue;
+        this.saturation = saturation;
+        this.brightness = brightness;
+    }
+
+    /**
+     * Default Constructor.
+     * 
+     * @param hue
+     * @param saturation
+     * @param brightness
+     * @param opacity
+     */
+    public HSBColor(final double hue, final double saturation, final double brightness, final double opacity) {
+        super(opacity);
+        this.hue = hue;
+        this.saturation = saturation;
+        this.brightness = brightness;
+    }
 
     /**
      * Return the hue value 0.0-1.0.
      * 
-     * @return the hue value
+     * @return Returns the hue.
      */
-    double hue();
+    public double hue() {
+        return this.hue;
+    }
 
     /**
      * Return the saturation value 0.0-1.0.
      * 
-     * @return the saturation value
+     * @return Returns the saturation.
      */
-    double saturation();
+    public double saturation() {
+        return this.saturation;
+    }
 
     /**
      * Return the brightness value 0.0-1.0.
      * 
-     * @return the brightness value
+     * @return Returns the brightness.
      */
-    double brightness();
+    public double brightness() {
+        return this.brightness;
+    }
+
 }

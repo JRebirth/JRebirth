@@ -9,8 +9,6 @@ import org.jrebirth.core.resource.font.FontFactory;
  * 
  * @author Sébastien Bordes
  * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
 public enum ResourceFactories {
 
@@ -21,21 +19,21 @@ public enum ResourceFactories {
     FONT_FACTORY(new FontFactory());
 
     /** The factory singleton. */
-    private ResourceFactory<?, ?> factory;
+    private ResourceFactory<?, ?, ?> factory;
 
     /**
      * Private Constructor.
      * 
      * @param factory the singleton factory
      */
-    private ResourceFactories(final ResourceFactory<?, ?> factory) {
+    private ResourceFactories(final ResourceFactory<?, ?, ?> factory) {
         this.factory = factory;
     }
 
     /**
      * @return the singleton of the factory
      */
-    public ResourceFactory<?, ?> use() {
+    public ResourceFactory<?, ?, ?> use() {
         return this.factory;
     }
 }

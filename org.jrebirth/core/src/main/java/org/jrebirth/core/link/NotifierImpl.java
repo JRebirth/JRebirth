@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.concurent.JRebirth;
 import org.jrebirth.core.concurent.JRebirthRunnable;
@@ -16,6 +20,7 @@ import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.AbstractGlobalReady;
 import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.WaveReady;
+import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 
 /**
@@ -58,8 +63,9 @@ public class NotifierImpl extends AbstractGlobalReady implements Notifier {
                     callCommand(wave);
                     break;
                 case RETURN_DATA:
+                    returnData(wave);
                     break;
-                case DISPLAY_UI:
+                case ATTACH_UI:
                     displayUi(wave);
                     break;
                 case UNDEFINED:
@@ -91,11 +97,34 @@ public class NotifierImpl extends AbstractGlobalReady implements Notifier {
      * @param wave the wave that contain all information
      */
     @SuppressWarnings("unchecked")
-    private void displayUi(final Wave wave) {
-        final Model model = getGlobalFacade().getUiFacade().retrieve((Class<? extends Model>) wave.getRelatedClass());
-        model.getView().getRootNode();
+    private void returnData(final Wave wave) {
+        final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<? extends Service>) wave.getRelatedClass());
 
         // TODO parse arguments !!!!!!!!
+    }
+
+    /**
+     * Display dynamically an Ui model.
+     * 
+     * @param wave the wave that contain all information
+     */
+    @SuppressWarnings("unchecked")
+    private void displayUi(final Wave wave) {
+
+        // Build the new UI view
+        final Model model = getGlobalFacade().getUiFacade().retrieve((Class<? extends Model>) wave.getRelatedClass());
+
+        if (wave.contains(JRebirthWaveItem.attachUi)) {
+            // Add an Ui view into a the place holder provided
+            final ObjectProperty<Node> property = (ObjectProperty<Node>) wave.get(JRebirthWaveItem.attachUi).getValue();
+            property.setValue(model.getView().getRootNode());
+
+        } else if (wave.contains(JRebirthWaveItem.addUi)) {
+            // Add an Ui view into a children list of its parent container
+            final ObservableList<Node> list = (ObservableList<Node>) wave.get(JRebirthWaveItem.attachUi).getValue();
+            list.add(model.getView().getRootNode());
+        }
+
     }
 
     /**

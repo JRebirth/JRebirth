@@ -16,6 +16,6 @@ public enum RunIntoType {
     JIT,
 
     /** Queue in a Thread Pool and run it sequentially. */
-    THREAD_POOL;
+    POOL;
 
 }

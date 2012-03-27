@@ -82,7 +82,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public final void send(final WaveType waveType, final WaveData... waveData) {
+    public final void send(final WaveType waveType, final WaveData<?>... waveData) {
         buildAndSendWave(WaveGroup.UNDEFINED, waveType, null, waveData);
     }
 
@@ -90,7 +90,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public final void callCommand(final Class<? extends Command> commandClass, final WaveData... data) {
+    public final void callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data) {
         buildAndSendWave(WaveGroup.CALL_COMMAND, null, commandClass, data);
     }
 
@@ -98,7 +98,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public final void returnData(final Class<? extends Command> serviceClass, final WaveData... data) {
+    public final void returnData(final Class<? extends Command> serviceClass, final WaveData<?>... data) {
         buildAndSendWave(WaveGroup.RETURN_DATA, null, serviceClass, data);
     }
 
@@ -106,8 +106,8 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public final void displayUi(final Class<? extends Model> modelClass, final WaveData... data) {
-        buildAndSendWave(WaveGroup.DISPLAY_UI, null, modelClass, data);
+    public final void attachUi(final Class<? extends Model> modelClass, final WaveData<?>... data) {
+        buildAndSendWave(WaveGroup.ATTACH_UI, null, modelClass, data);
     }
 
     /**
@@ -118,7 +118,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * @param relatedClass the related class if any
      * @param waveData wave data to use
      */
-    private void buildAndSendWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData... waveData) {
+    private void buildAndSendWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData<?>... waveData) {
 
         // Use the JRebirth Thread to manage Waves
         JRebirth.runIntoJIT(new JRebirthRunnable() {
@@ -139,12 +139,12 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * 
      * @return the wave built
      */
-    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData... waveData) {
+    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData<?>... waveData) {
         final Wave wave = new WaveImpl();
         wave.setWaveGroup(waveGroup);
         wave.setWaveType(waveType);
         wave.setRelatedClass(relatedClass);
-        for (final WaveData wd : waveData) {
+        for (final WaveData<?> wd : waveData) {
             wave.add(wd.getKey(), wd);
         }
 
@@ -162,7 +162,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         try {
             // Build parameter list of the searched method
             final List<Object> parameterValues = new ArrayList<>();
-            for (final WaveData wd : wave.getWaveItems()) {
+            for (final WaveData<?> wd : wave.getWaveItems()) {
                 parameterValues.add(wd.getValue());
             }
             // Add the current wave to process

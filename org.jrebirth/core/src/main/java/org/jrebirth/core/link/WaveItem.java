@@ -7,9 +7,15 @@ package org.jrebirth.core.link;
  * 
  * @author Sébastien Bordes
  * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
 public interface WaveItem {
+
+    /**
+     * 
+     * TODO To complete.
+     * 
+     * @return
+     */
+    Class<?> dataClass();
 
 }

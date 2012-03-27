@@ -41,11 +41,14 @@ public class WaveImpl implements Wave {
     /** The priority used to process wave according to a custom order. */
     private int priority;
 
+    /** The next wave to process after this one, used to chain waves. */
+    private Wave nextWave;
+
     /** A map used to contain all data. */
-    private final Map<WaveItem, WaveData> waveItemsMap = new HashMap<>();
+    private final Map<WaveItem, WaveData<?>> waveItemsMap = new HashMap<>();
 
     /** A sortered list that contains all data. */
-    private final List<WaveData> waveItemsList = new ArrayList<>();
+    private final List<WaveData<?>> waveItemsList = new ArrayList<>();
 
     /**
      * Default Constructor.
@@ -126,7 +129,23 @@ public class WaveImpl implements Wave {
      * {@inheritDoc}
      */
     @Override
-    public List<WaveData> getWaveItems() {
+    public Wave getNextWave() {
+        return this.nextWave;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNextWave(final Wave nextWave) {
+        this.nextWave = nextWave;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<WaveData<?>> getWaveItems() {
         return this.waveItemsList;
     }
 
@@ -134,7 +153,7 @@ public class WaveImpl implements Wave {
      * {@inheritDoc}
      */
     @Override
-    public void add(final WaveItem waveItem, final WaveData waveData) {
+    public void add(final WaveItem waveItem, final WaveData<?> waveData) {
         // Init the order of the wave Data
         waveData.setOrder(getWaveItems().size());
         // Store intot the map to allow access by WaveItem
@@ -149,8 +168,16 @@ public class WaveImpl implements Wave {
      * {@inheritDoc}
      */
     @Override
-    public WaveData get(final WaveItem waveItem) {
+    public WaveData<?> get(final WaveItem waveItem) {
         return this.waveItemsMap.get(waveItem);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean contains(final WaveItem waveItem) {
+        return this.waveItemsMap.containsKey(waveItem);
     }
 
     /**

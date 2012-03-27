@@ -9,9 +9,26 @@ package org.jrebirth.core.resource.factory;
  * @since $Date$
  * 
  * @param <E> The enumeration used to wrap the resource
+ * @param <P> The params object that store primitive resources values
  * @param <R> The resource managed
  */
-public interface ResourceFactory<E, R> {
+public interface ResourceFactory<E, P, R> {
+
+    /**
+     * .
+     * 
+     * @param key
+     * @param params
+     */
+    void storeParams(E key, P params);
+
+    /**
+     * .
+     * 
+     * @param key
+     * @return
+     */
+    public P getParam(final E key);
 
     /**
      * Retrieve the resource. And build it if it didn't be done before.

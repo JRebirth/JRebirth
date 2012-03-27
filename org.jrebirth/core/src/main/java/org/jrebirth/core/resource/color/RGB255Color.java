@@ -5,29 +5,65 @@ package org.jrebirth.core.resource.color;
  * 
  * @author Sébastien Bordes
  * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
-public interface RGB255Color extends JRebirthColor {
+public final class RGB255Color extends AbstractBaseColor {
+
+    /** The green value 0-255. */
+    private final int red;
+
+    /** The green value 0-255. */
+    private final int green;
+
+    /** The blue value 0-255. */
+    private final int blue;
 
     /**
-     * Return the red value 0-255.
+     * Default Constructor.
      * 
-     * @return the red value
+     * @param red
+     * @param green
+     * @param blue
      */
-    int red();
+    public RGB255Color(final int red, final int green, final int blue) {
+        super();
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+    }
 
     /**
-     * Return the green value 0-255.
+     * Default Constructor.
      * 
-     * @return the green value
+     * @param red
+     * @param green
+     * @param blue
      */
-    int green();
+    public RGB255Color(final int red, final int green, final int blue, final double opacity) {
+        super(opacity);
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+    }
 
     /**
-     * Return the blue value 0-255.
-     * 
-     * @return the blue value
+     * @return Returns the red.
      */
-    int blue();
+    public int red() {
+        return this.red;
+    }
+
+    /**
+     * @return Returns the green.
+     */
+    public int green() {
+        return this.green;
+    }
+
+    /**
+     * @return Returns the blue.
+     */
+    public int blue() {
+        return this.blue;
+    }
+
 }

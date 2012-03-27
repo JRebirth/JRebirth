@@ -39,7 +39,7 @@ public interface WaveReady {
      * @param waveType the type of wave to send
      * @param waveData the data (key-value
      */
-    void send(WaveType waveType, WaveData... waveData);
+    void send(WaveType waveType, WaveData<?>... waveData);
 
     /**
      * Send a wave used to call a command.
@@ -47,7 +47,7 @@ public interface WaveReady {
      * @param commandClass the command class to call
      * @param data the data to transport
      */
-    void callCommand(final Class<? extends Command> commandClass, final WaveData... data);
+    void callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data);
 
     /**
      * Send a wave used to return data from a service.
@@ -55,7 +55,7 @@ public interface WaveReady {
      * @param serviceClass the service called
      * @param data the data to transport
      */
-    void returnData(final Class<? extends Command> serviceClass, final WaveData... data);
+    void returnData(final Class<? extends Command> serviceClass, final WaveData<?>... data);
 
     /**
      * Send a wave used to display an UI model.
@@ -63,14 +63,14 @@ public interface WaveReady {
      * @param modelClass the model class to display
      * @param data the data to transport
      */
-    void displayUi(final Class<? extends Model> modelClass, final WaveData... data);
+    void attachUi(final Class<? extends Model> modelClass, final WaveData<?>... data);
 
     /**
      * Process a wave.
      * 
      * @param wave the wave to process.
      * 
-     * @throws WaveException if an error occured while dispatching the wave
+     * @throws WaveException if an error occurred while dispatching the wave
      */
     void handle(Wave wave) throws WaveException;
 

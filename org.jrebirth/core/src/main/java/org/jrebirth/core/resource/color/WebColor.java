@@ -5,15 +5,40 @@ package org.jrebirth.core.resource.color;
  * 
  * @author Sébastien Bordes
  * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
-public interface WebColor extends JRebirthColor {
+public class WebColor extends AbstractBaseColor {
+
+    /** The hexadecimal string value (#FFFFFF). */
+    private final String hex;
 
     /**
-     * Return the web hexadecimal string.
+     * Default Constructor.
      * 
-     * @return the hexadecimal value.
+     * @param hex
      */
-    String hex();
+    public WebColor(final String hex) {
+        super();
+        this.hex = hex;
+    }
+
+    /**
+     * Default Constructor.
+     * 
+     * @param hex
+     * @param opacity
+     */
+    public WebColor(final String hex, final double opacity) {
+        super(opacity);
+        this.hex = hex;
+    }
+
+    /**
+     * Return the hexadecimal string value.
+     * 
+     * @return Returns the hexadecimal value.
+     */
+    public String hex() {
+        return this.hex;
+    }
+
 }

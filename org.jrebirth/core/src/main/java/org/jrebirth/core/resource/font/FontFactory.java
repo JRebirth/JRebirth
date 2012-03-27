@@ -18,7 +18,7 @@ import org.jrebirth.core.resource.factory.AbstractResourceFactory;
  * @version $Revision$ $Author$
  * @since $Date$
  */
-public final class FontFactory extends AbstractResourceFactory<JRebirthFont, Font> {
+public final class FontFactory extends AbstractResourceFactory<FontEnum, FontParams, Font> {
 
     /**
      * The <code>TRUE_TYPE_FONT_EXT</code> field is used to dedine the file extension.
@@ -32,7 +32,7 @@ public final class FontFactory extends AbstractResourceFactory<JRebirthFont, Fon
      * {@inheritDoc}
      */
     @Override
-    protected Font buildResource(final JRebirthFont jrFont) {
+    protected Font buildResource(final FontParams jrFont) {
         Font font = null;
         if (jrFont instanceof RealFont) {
             // Build the requested font
@@ -56,7 +56,7 @@ public final class FontFactory extends AbstractResourceFactory<JRebirthFont, Fon
      */
     private Font buildRealFont(final RealFont rFont) {
         checkFontStatus(rFont);
-        return FontBuilder.create().name(transformFontName(rFont.fontName().get())).size(rFont.size()).build();
+        return FontBuilder.create().name(transformFontName(rFont.name().get())).size(rFont.size()).build();
     }
 
     /**
@@ -97,15 +97,16 @@ public final class FontFactory extends AbstractResourceFactory<JRebirthFont, Fon
      */
     private void checkFontStatus(final RealFont realFont) {
 
-        final List<String> fonts = Font.getFontNames(transformFontName(realFont.fontName().get()));
+        final List<String> fonts = Font.getFontNames(transformFontName(realFont.name().get()));
         if (fonts.isEmpty()) {
             final Font font = Font.loadFont(
                     Thread.currentThread().getContextClassLoader()
-                            .getResourceAsStream(fontsFolder + "/" + transformFontName(realFont.fontName().get()) + TRUE_TYPE_FONT_EXT), realFont.size());
+                            .getResourceAsStream(fontsFolder + "/" + transformFontName(realFont.name().get()) + TRUE_TYPE_FONT_EXT), realFont.size());
 
             if (font == null) {
-                throw new CoreRuntimeException("Font not found " + transformFontName(realFont.fontName().get()));
+                throw new CoreRuntimeException("Font not found " + transformFontName(realFont.name().get()));
             }
         }
     }
+
 }
