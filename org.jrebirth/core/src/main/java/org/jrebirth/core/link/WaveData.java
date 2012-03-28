@@ -9,7 +9,7 @@ package org.jrebirth.core.link;
  * @author Sébastien Bordes
  * 
  */
-public final class WaveData<T> implements Comparable<WaveData<T>> {
+public final class WaveData<T> implements Comparable<WaveData<?>> {
 
     /**
      * The key property, must be set with an enumeration that implements WaveItem.
@@ -113,7 +113,7 @@ public final class WaveData<T> implements Comparable<WaveData<T>> {
      * {@inheritDoc}
      */
     @Override
-    public int compareTo(final WaveData<T> waveData) {
+    public int compareTo(final WaveData<?> waveData) {
         return getOrder() - waveData.getOrder();
     }
 }
