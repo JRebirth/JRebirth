@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.jrebirth.org/Presentation" xmlns:tns="http://www.jrebirth.org/Presentation"
+	elementFormDefault="qualified">
+
+	<element name="presentation" type="tns:Presentation" />
+
+	<complexType name="Presentation">
+
+		<all>
+			<element name="title" minOccurs="0" maxOccurs="1"></element>
+			<element name="date" minOccurs="0" maxOccurs="1"></element>
+			<element name="place" minOccurs="0" maxOccurs="1"></element>
+			<element name="event" minOccurs="0" maxOccurs="1"></element>
+			<element name="speakers" type="tns:SpeakerList" minOccurs="0" maxOccurs="1"></element>
+			<element name="slides" type="tns:SlideList" minOccurs="0" maxOccurs="1"></element>
+		</all>
+	</complexType>
+
+	<complexType name="SpeakerList">
+		<sequence>
+			<element name="speaker" type="tns:Speaker" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Speaker">
+		<attribute name="firstName" type="string" />
+		<attribute name="lastName" type="string" />
+		<attribute name="email" type="string" />
+		<attribute name="job" type="string" />
+	</complexType>
+
+	<complexType name="SlideList">
+		<sequence>
+			<element name="slide" type="tns:Slide" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Slide">
+		<sequence>
+			<element name="title" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="content" type="tns:SlideContent" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="modelClass" type="string" default="org.jrebirth.presentation.ui.classic.ClassicModel" />
+		<attribute name="style" type="string" use="optional" />
+		<attribute name="animation" type="tns:Animation" default="Fade"/>
+	</complexType>
+
+	<complexType name="SlideContent">
+		<sequence>
+			<element name="title" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="item" type="tns:SlideItem" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="name" type="string" />
+		<attribute name="style" type="string" />
+	</complexType>
+
+	<complexType name="SlideItem">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="level" type="integer" default="0" />
+				<attribute name="image" type="string" use="optional" />
+				<attribute name="style" type="string" use="optional" />
+				<attribute name="scale" type="double" use="optional" default="1.0"/>
+				<attribute name="html" type="boolean" use="optional" default="false"/>
+				<attribute name="link" type="boolean" use="optional" default="false"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+
+	<simpleType name="Animation">
+		<restriction base="string">
+			<enumeration value="Fade"/>
+			<enumeration value="Tile"/>
+			<enumeration value="Tile60k" />
+			<enumeration value="Move"/>
+		</restriction>
+	</simpleType>
+	
+</schema>

@@ -156,9 +156,9 @@ public class WaveImpl implements Wave {
     public void add(final WaveItem waveItem, final WaveData<?> waveData) {
         // Init the order of the wave Data
         waveData.setOrder(getWaveItems().size());
-        // Store intot the map to allow access by WaveItem
+        // Store into the map to allow access by WaveItem
         this.waveItemsMap.put(waveItem, waveData);
-        // Ad into the list to enbale sorting
+        // Ad into the list to enable sorting
         this.waveItemsList.add(waveData);
         // Sort the list
         Collections.sort(this.waveItemsList);

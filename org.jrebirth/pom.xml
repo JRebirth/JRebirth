@@ -29,6 +29,7 @@
 		<module>analyzer</module>
 		<module>archetype</module>
 		<module>distribution</module>
+		<module>presentation</module>
 	</modules>
 
 	<issueManagement>
