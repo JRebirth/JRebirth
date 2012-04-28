@@ -20,16 +20,16 @@ public enum PrezFonts implements FontEnum {
     PAGE(new RealFont(FontsLoader.DINk, 24)),
 
     /** The slide title font. */
-    SLIDE_TITLE(new RealFont(FontsLoader.Harabara, 36)),
+    SLIDE_TITLE(new RealFont(FontsLoader.Harabara, 30)),
 
     /** The slide subtitle font. */
-    SLIDE_SUBTITLE(new RealFont(FontsLoader.Harabara, 24)),
+    SLIDE_SUBTITLE(new RealFont(FontsLoader.Harabara, 20)),
 
     /** The typewriter font. */
     TYPEWRITER(new RealFont(FontsLoader.Segoe_UI, 72)),
 
     /** The splash font. */
-    SPLASH(new RealFont(FontsLoader.BorisBlackBloxx, 40));
+    SPLASH(new RealFont(FontsLoader.BorisBlackBloxx, 30));
 
     /**
      * Default Constructor.
