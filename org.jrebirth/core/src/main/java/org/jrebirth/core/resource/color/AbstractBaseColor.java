@@ -1,5 +1,8 @@
 package org.jrebirth.core.resource.color;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
 /**
  * The interface <strong>AbstractBaseColor</strong>.
  * 
@@ -8,8 +11,8 @@ package org.jrebirth.core.resource.color;
  */
 public abstract class AbstractBaseColor implements ColorParams {
 
-    /** The opacity of the color. */
-    private final Double opacity;
+    /** The property used to store the opacity of the color. */
+    private final SimpleDoubleProperty opacityProperty = new SimpleDoubleProperty();
 
     /**
      * Default Constructor.
@@ -25,14 +28,21 @@ public abstract class AbstractBaseColor implements ColorParams {
      */
     public AbstractBaseColor(final Double opacity) {
         super();
-        this.opacity = opacity;
+        this.opacityProperty.set(opacity);
     }
 
     /**
      * @return Returns the opacity.
      */
-    protected Double opacity() {
-        return this.opacity;
+    public Double opacity() {
+        return this.opacityProperty.get();
+    }
+
+    /**
+     * @return Returns the opacity.
+     */
+    public DoubleProperty opacityProperty() {
+        return this.opacityProperty;
     }
 
 }

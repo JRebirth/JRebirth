@@ -11,6 +11,7 @@ import javafx.scene.text.TextBuilder;
 import javafx.util.Duration;
 
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.presentation.PrezColors;
 import org.jrebirth.presentation.ui.base.AbstractSlideView;
 
 /**
@@ -53,7 +54,7 @@ public final class SplashView extends AbstractSlideView<SplashModel, BorderPane,
                 .textAlignment(TextAlignment.JUSTIFY)
                 .wrappingWidth(600)
                 .smooth(true)
-                .fill(Color.IVORY)
+                .fill(getModel().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get())
                 .scaleX(0)
                 .scaleY(0)
                 .build();

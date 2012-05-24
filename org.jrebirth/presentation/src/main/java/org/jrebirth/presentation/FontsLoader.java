@@ -22,7 +22,7 @@ public enum FontsLoader implements FontName {
     Harabara,
 
     /** . */
-    Segoe_UI,
+    Report_1942,
 
     /** . */
     arfmoochikncheez,

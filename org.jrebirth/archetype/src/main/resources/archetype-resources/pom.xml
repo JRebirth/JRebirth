@@ -61,14 +61,14 @@
 				<configuration>
 					<archive>
 						<manifestEntries>
-							<JavaFX-Version>2.0</JavaFX-Version>
+							<JavaFX-Version>2.1</JavaFX-Version>
 							<Main-Class>${groupId}.${artifactId}.SampleApplication</Main-Class>
-							<implementation-vendor>You</implementation-vendor>
+<!-- 							<implementation-vendor>You</implementation-vendor>
 							<implementation-title>SampleApplication</implementation-title>
 							<implementation-version>1.0</implementation-version>
 							<JavaFX-Application-Class>${groupId}.${artifactId}.SampleApplication</JavaFX-Application-Class>
 
-							<JavaFX-Class-Path>${artifactId}-${version}.jar core-0.4.0.jar</JavaFX-Class-Path>
+							<JavaFX-Class-Path>${artifactId}-${version}.jar core-0.6.0-SNAPSHOT.jar</JavaFX-Class-Path> -->
 						</manifestEntries>
 						<manifest>
 							<addClasspath>true</addClasspath>
@@ -178,20 +178,20 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.5.0-SNAPSHOT</version>
+			<version>0.6.0-SNAPSHOT</version>
 		</dependency>
 
-		<dependency>
+<!-- 		<dependency>
 			<groupId>com.oracle.javafx</groupId>
 			<artifactId>jfxrt</artifactId>
 			<scope>provided</scope>
-			<version>2.0.2</version>
-		</dependency>
+			<version>2.1</version>
+		</dependency> -->
 
 	</dependencies>
 
 
-	<repositories>
+<!-- 	<repositories>
 		<repository>
 			<snapshots>
 				<enabled>false</enabled>
@@ -222,6 +222,6 @@
 			<name>plugins-snapshot</name>
 			<url>http://repo.jrebirth.org/plugins-snapshot</url>
 		</pluginRepository>
-	</pluginRepositories>
+	</pluginRepositories> -->
 
 </project>

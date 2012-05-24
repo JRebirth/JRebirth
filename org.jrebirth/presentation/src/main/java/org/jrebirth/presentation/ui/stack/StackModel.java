@@ -85,8 +85,9 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
             final Class<Model> modelClass = (Class<Model>) Class.forName(slide.getModelClass());
             // Show current slide
 
+            slide.setPage(this.slidePosition);
             this.selectedSlideModel = (SlideModel<SlideStep>) getModel(modelClass, slide);
-            this.selectedSlideModel.setSlideNumber(this.slidePosition);
+            // this.selectedSlideModel.setSlideNumber(this.slidePosition);
             getView().getRootNode().getChildren().add(this.selectedSlideModel.getRootNode());
 
             // this.selectedSlideModel.getView().animate();
