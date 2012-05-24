@@ -26,7 +26,7 @@ public enum PrezFonts implements FontEnum {
     SLIDE_SUBTITLE(new RealFont(FontsLoader.Harabara, 20)),
 
     /** The typewriter font. */
-    TYPEWRITER(new RealFont(FontsLoader.Segoe_UI, 72)),
+    TYPEWRITER(new RealFont(FontsLoader.Report_1942, 72)),
 
     /** The splash font. */
     SPLASH(new RealFont(FontsLoader.BorisBlackBloxx, 30));

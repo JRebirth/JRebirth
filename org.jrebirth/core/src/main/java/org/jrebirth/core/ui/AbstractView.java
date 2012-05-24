@@ -231,7 +231,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * @param resourceName the name of the image
      * @return the image loaded
      */
-    protected Image loadImage(final String resourceName) {
+    public Image loadImage(final String resourceName) {
         return new Image(Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceName));
     }
 

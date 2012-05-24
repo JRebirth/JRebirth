@@ -172,7 +172,7 @@ public final class ImageSlideView extends
     }
 
     private Duration getRandomDuration() {
-        return Duration.millis(new Random().nextLong() % 900 + 600);
+        return Duration.millis(new Random().nextLong() % 900 + 300);
     }
 
 }

@@ -22,6 +22,9 @@
 
 		<jrebirth-configuration.version>1.0.0</jrebirth-configuration.version>
 
+
+		<!-- <javafx.home>C:/Program Files (x86)/Oracle/JavaFX 2.1 SDK</javafx.home> -->
+
 	</properties>
 
 	<modules>
@@ -30,6 +33,7 @@
 		<module>archetype</module>
 		<module>distribution</module>
 		<module>presentation</module>
+		<module>transition</module>
 	</modules>
 
 	<issueManagement>
@@ -41,7 +45,7 @@
 		<system>Jenkins</system>
 		<url>http://ci.jrebirth.org/job/JRebirth-Wip/</url>
 	</ciManagement>
-	
+
 	<scm>
 		<connection>scm:git:git://github.com/JRebirth/JRebirth.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth.git</developerConnection>
@@ -77,8 +81,7 @@
 
 	<build>
 
-		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, 
-			it's not yet implemented: see MNG-2216 -->
+		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, it's not yet implemented: see MNG-2216 -->
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
 		<!-- <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName> -->
 
@@ -160,10 +163,20 @@
 			<dependency>
 				<groupId>com.oracle.javafx</groupId>
 				<artifactId>jfxrt</artifactId>
-				<version>2.0</version>
+				<version>2.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.oracle.javafx</groupId>
+			<artifactId>jfxrt</artifactId>
+			<version>2.1</version>
+			<systemPath>${javafx.home}/rt/lib/jfxrt.jar</systemPath>
+			<scope>system</scope>
+		</dependency>
+	</dependencies>
 
 	<developers>
 		<developer>
@@ -191,37 +204,37 @@
 		</contributor>
 	</contributors>
 
-	<repositories>
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>releases</id>
-			<name>libs-release</name>
-			<url>http://repo.jrebirth.org/libs-release</url>
-		</repository>
-		<repository>
-			<snapshots />
-			<id>snapshots</id>
-			<name>libs-snapshot</name>
-			<url>http://repo.jrebirth.org/libs-snapshot</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>central</id>
-			<name>plugins-release</name>
-			<url>http://repo.jrebirth.org/plugins-release</url>
-		</pluginRepository>
-		<pluginRepository>
-			<snapshots />
-			<id>snapshots</id>
-			<name>plugins-snapshot</name>
-			<url>http://repo.jrebirth.org/plugins-snapshot</url>
-		</pluginRepository>
-	</pluginRepositories>
+	<!-- <repositories> <repository> <snapshots> <enabled>false</enabled> </snapshots> <id>releases</id> <name>libs-release</name> <url>http://repo.jrebirth.org/libs-release</url> 
+		</repository> <repository> <snapshots /> <id>snapshots</id> <name>libs-snapshot</name> <url>http://repo.jrebirth.org/libs-snapshot</url> </repository> </repositories> 
+		<pluginRepositories> <pluginRepository> <snapshots> <enabled>false</enabled> </snapshots> <id>central</id> <name>plugins-release</name> <url>http://repo.jrebirth.org/plugins-release</url> 
+		</pluginRepository> <pluginRepository> <snapshots /> <id>snapshots</id> <name>plugins-snapshot</name> <url>http://repo.jrebirth.org/plugins-snapshot</url> </pluginRepository> 
+		</pluginRepositories> -->
+
+	<profiles>
+
+		<profile>
+			<id>win32</id>
+			<activation>
+				<file>
+					<exists>C:/Program Files (x86)/Oracle/JavaFX 2.1 SDK</exists>
+				</file>
+			</activation>
+			<properties>
+				<javafx.home>C:/Program Files (x86)/Oracle/JavaFX 2.1 SDK</javafx.home>
+			</properties>
+		</profile>
+		<profile>
+			<id>win</id>
+			<activation>
+				<file>
+					<exists>C:/Program Files/Oracle/JavaFX 2.1 SDK</exists>
+				</file>
+			</activation>
+			<properties>
+				<javafx.home>C:/Program Files/Oracle/JavaFX 2.1 SDK</javafx.home>
+			</properties>
+		</profile>
+
+	</profiles>
 
 </project>

@@ -61,6 +61,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /** The sub title of this slide. */
     private Label subTitle;
+    private Label pageLabel;
 
     /**
      * Default Constructor.
@@ -110,6 +111,9 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      */
     @Override
     public void show() {
+
+        // FIXME MUST be refactored with property binding
+        // this.pageLabel.setText(String.valueOf(getModel().getSlideNumber()));
 
         // FadeTransitionBuilder.create()
         // .node(getRootNode().getTop())
@@ -239,15 +243,15 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * @return the footer panel
      */
     protected Node getFooterPanel() {
-        final Label page = LabelBuilder.create()
-                .text(String.valueOf(getModel().getSlideNumber()))
+        this.pageLabel = LabelBuilder.create()
+                .text(String.valueOf(getModel().getSlide().getPage()))
                 .font(PrezFonts.PAGE.get())
                 .build();
 
         final AnchorPane ap = AnchorPaneBuilder.create()
-                .children(page)
+                .children(this.pageLabel)
                 .build();
-        AnchorPane.setRightAnchor(page, 20.0);
+        AnchorPane.setRightAnchor(this.pageLabel, 20.0);
 
         final StackPane sp = StackPaneBuilder.create()
                 .styleClass("footer")

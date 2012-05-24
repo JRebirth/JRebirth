@@ -6,6 +6,7 @@ import org.jrebirth.core.resource.ResourceFactories;
 import org.jrebirth.core.resource.color.ColorEnum;
 import org.jrebirth.core.resource.color.ColorFactory;
 import org.jrebirth.core.resource.color.ColorParams;
+import org.jrebirth.core.resource.color.RGB255Color;
 import org.jrebirth.core.resource.color.WebColor;
 
 /**
@@ -25,7 +26,9 @@ public enum PrezColors implements ColorEnum {
 
     GRADIENT_1(new WebColor("#1AA2AC", 1.0)),
     GRADIENT_2(new WebColor("#F04F24", 1.0)),
-    GRADIENT_3(new WebColor("#FFF200", 1.0));
+    GRADIENT_3(new WebColor("#FFF200", 1.0)),
+
+    SPLASH_TEXT(new RGB255Color(60, 60, 70));
 
     /**
      * Private Constructor.

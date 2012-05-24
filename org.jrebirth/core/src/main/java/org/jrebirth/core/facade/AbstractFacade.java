@@ -20,18 +20,12 @@ import org.jrebirth.core.ui.Model;
  * 
  * @author Sébastien Bordes
  * 
- * @version $Revision: 36 $ $Author: sbordes $
- * @since $Date: 2011-10-10 23:17:57 +0200 (Mon, 10 Oct 2011) $
- * 
  * @param <R> A type that implements FacadeReady
  */
 public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractGlobalReady implements Facade<R> {
 
     /** The map that store FacadeReady singletons. */
     private final Map<ClassKey<? extends R>, R> singletonMap;
-
-    /** The map that store FacadeReady multitons. */
-    // private final Map<Class<? extends R>, Map<UniqueKey, R>> multitonMap;
 
     /**
      * Default Constructor.
@@ -42,8 +36,6 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         super(globalFacade);
         // Initialize the synchronized map for singletons
         this.singletonMap = Collections.synchronizedMap(new WeakHashMap<ClassKey<? extends R>, R>());
-        // Initialize the synchronized map for multitons
-        // this.multitonMap = Collections.synchronizedMap(new WeakHashMap<Class<? extends R>, Map<UniqueKey, R>>());
     }
 
     /**
@@ -53,10 +45,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     @SuppressWarnings("unchecked")
     public <E extends R> void register(final E readyObject, final Object... keyPart) {
 
-        // For Singleton Components, no key is provided
-        // if (key.length == 0) {
-
-        // Synchronize the registration, (setLocalFacade is costless)
+        // Synchronize the registration
         synchronized (this.singletonMap) {
 
             // Check if the class of the object is already stored into the singleton map
@@ -69,18 +58,6 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             this.singletonMap.put((ClassKey<E>) readyObject.getKey(), readyObject);
             // }
         }
-
-        /*
-         * } else {
-         * 
-         * // For Multiton Components // Check if the UniqueKey map exists for this component class if (!this.multitonMap.containsKey(readyObject.getClass())) { this.multitonMap.put((Class<E>)
-         * readyObject.getClass(), new HashMap<UniqueKey, R>()); } // Check if the class of the object is already stored into the multitonKey map if
-         * (!this.multitonMap.get(readyObject.getClass()).containsKey(key[0])) {
-         * 
-         * // Attach the facade to allow to retrieve any components readyObject.setLocalFacade(this);
-         * 
-         * // Store the component into the multitonKey map this.multitonMap.get(readyObject.getClass()).put(key[0], readyObject); } }
-         */
     }
 
     /**
@@ -91,18 +68,10 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         // Release the facade link
         readyObject.setLocalFacade(null);
 
-        // if (key.length == 0) {
-
         synchronized (this.singletonMap) {
             // Remove the component from the singleton map
             this.singletonMap.remove(buildKey((Class<? extends R>) readyObject.getClass(), keyPart));
         }
-
-        /*
-         * } else { // Remove the component from the multitonKey map this.multitonMap.get(readyObject.getClass()).remove(key[0]);
-         * 
-         * // Remove the multitonKey map if nothing is stored if (this.multitonMap.get(readyObject.getClass()).size() == 0) { this.multitonMap.remove(readyObject.getClass()); } }
-         */
     }
 
     /**
@@ -114,8 +83,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
         E readyObject;
 
-        // retrieve the component from the right map
-        // if (key.length == 0) {
+        // retrieve the component from the singleton map
         synchronized (this.singletonMap) {
 
             // If the component isn't contained into a map, create and register it

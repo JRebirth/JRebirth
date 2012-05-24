@@ -40,6 +40,7 @@
 			<element name="title" type="string" minOccurs="0" maxOccurs="1"></element>
 			<element name="content" type="tns:SlideContent" minOccurs="0" maxOccurs="unbounded" />
 		</sequence>
+		<attribute name="page" type="int" use="optional" />
 		<attribute name="modelClass" type="string" default="org.jrebirth.presentation.ui.classic.ClassicModel" />
 		<attribute name="style" type="string" use="optional" />
 		<attribute name="animation" type="tns:Animation" default="Fade"/>
@@ -57,7 +58,7 @@
 	<complexType name="SlideItem">
 		<simpleContent>
 			<extension base="string">
-				<attribute name="level" type="integer" default="0" />
+				<attribute name="level" type="int" default="0" />
 				<attribute name="image" type="string" use="optional" />
 				<attribute name="style" type="string" use="optional" />
 				<attribute name="scale" type="double" use="optional" default="1.0"/>
