@@ -43,7 +43,8 @@
 		<attribute name="page" type="int" use="optional" />
 		<attribute name="modelClass" type="string" default="org.jrebirth.presentation.ui.classic.ClassicModel" />
 		<attribute name="style" type="string" use="optional" />
-		<attribute name="animation" type="tns:Animation" default="Fade"/>
+		<attribute name="showAnimation" type="tns:AnimationType" default="None" />
+		<attribute name="hideAnimation" type="tns:AnimationType" default="None" />
 	</complexType>
 
 	<complexType name="SlideContent">
@@ -69,12 +70,27 @@
 	</complexType>
 
 
-	<simpleType name="Animation">
+	<simpleType name="AnimationType">
 		<restriction base="string">
-			<enumeration value="Fade"/>
-			<enumeration value="Tile"/>
-			<enumeration value="Tile60k" />
-			<enumeration value="Move"/>
+			<enumeration value="None" />
+			
+			<enumeration value="FadeIn" />
+			<enumeration value="FadeOut" />
+			
+			<enumeration value="MoveToLeft" />
+			<enumeration value="MoveToRight" />
+			<enumeration value="MoveToTop" />
+			<enumeration value="MoveToBottom" />
+			
+			<enumeration value="MoveFromLeft" />
+			<enumeration value="MoveFromRight" />
+			<enumeration value="MoveFromTop" />
+			<enumeration value="MoveFromBottom" />
+			
+			<enumeration value="TileIn"/>
+			<enumeration value="TileOut"/>
+			<enumeration value="TileIn60k" />
+			<enumeration value="TileOut60k" />
 		</restriction>
 	</simpleType>
 	
