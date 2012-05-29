@@ -4,8 +4,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.animation.Animation;
+import javafx.animation.FadeTransitionBuilder;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransitionBuilder;
+import javafx.animation.TimelineBuilder;
+import javafx.animation.TranslateTransitionBuilder;
+import javafx.scene.effect.MotionBlur;
+import javafx.scene.effect.MotionBlurBuilder;
+import javafx.util.Duration;
+
 import org.jrebirth.core.link.Wave;
 import org.jrebirth.core.ui.AbstractModel;
+import org.jrebirth.presentation.model.AnimationType;
 import org.jrebirth.presentation.model.Slide;
 import org.jrebirth.presentation.model.SlideContent;
 
@@ -181,4 +193,100 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      */
     @Override
     public abstract void showSlideStep(final S slideStep);
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Animation getHideAnimation() {
+        return buildAnimation(getSlide().getHideAnimation());
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param hideAnimation
+     * @return
+     */
+    private Animation buildAnimation(final AnimationType animationType) {
+        Animation animation = null;
+        switch (animationType) {
+
+            case MOVE_TO_RIGHT:
+                animation = buildHorizontalAnimation(0, 2000, 0, 0);
+                break;
+            case MOVE_TO_LEFT:
+                animation = buildHorizontalAnimation(0, -2000, 0, 0);
+                break;
+            case MOVE_TO_TOP:
+                animation = buildHorizontalAnimation(0, 0, 0, -1000);
+                break;
+            case MOVE_TO_BOTTOM:
+                animation = buildHorizontalAnimation(0, 0, 0, 1000);
+                break;
+
+            case MOVE_FROM_RIGHT:
+                animation = buildHorizontalAnimation(2000, 0, 0, 0);
+                break;
+            case MOVE_FROM_LEFT:
+                animation = buildHorizontalAnimation(-2000, 0, 0, 0);
+                break;
+            case MOVE_FROM_TOP:
+                animation = buildHorizontalAnimation(0, 0, -1000, 0);
+                break;
+            case MOVE_FROM_BOTTOM:
+                animation = buildHorizontalAnimation(0, 0, 1000, 0);
+                break;
+            case FADE_IN:
+                animation = FadeTransitionBuilder.create().node(getRootNode()).fromValue(0).toValue(1.0).duration(Duration.seconds(1)).build();
+                break;
+            case FADE_OUT:
+                animation = FadeTransitionBuilder.create().node(getRootNode()).fromValue(1.0).toValue(0.0).duration(Duration.seconds(1)).build();
+                break;
+            case TILE_IN:
+                break;
+            case TILE_OUT:
+                break;
+            case TILE_IN_60_K:
+                break;
+            case TILE_OUT_60_K:
+                break;
+
+            default:
+        }
+        return animation;
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @return
+     */
+    protected Animation buildHorizontalAnimation(final double fromX, final double toX, final double fromY, final double toY) {
+
+        final MotionBlur mb = MotionBlurBuilder.create().angle(180).build();
+        getRootNode().setEffect(mb);
+
+        return ParallelTransitionBuilder.create()
+                .children(
+                        TranslateTransitionBuilder.create().node(getRootNode()).fromX(fromX).toX(toX).fromY(fromY).toY(toY).duration(Duration.seconds(1)).build(),
+                        TimelineBuilder.create()
+                                .keyFrames(
+                                        new KeyFrame(Duration.millis(0), new KeyValue(mb.radiusProperty(), 0)),
+                                        new KeyFrame(Duration.millis(500), new KeyValue(mb.radiusProperty(), 60)),
+                                        new KeyFrame(Duration.millis(1000), new KeyValue(mb.radiusProperty(), 0))
+                                )
+                                .build()
+                )
+                .build();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Animation getShowAnimation() {
+        return buildAnimation(getSlide().getShowAnimation());
+    }
+
 }

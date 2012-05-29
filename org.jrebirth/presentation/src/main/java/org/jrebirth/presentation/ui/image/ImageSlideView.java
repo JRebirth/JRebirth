@@ -20,6 +20,7 @@ import javafx.scene.shape.RectangleBuilder;
 import javafx.util.Duration;
 
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.presentation.model.AnimationType;
 import org.jrebirth.presentation.ui.base.AbstractSlideView;
 
 /**
@@ -63,8 +64,8 @@ public final class ImageSlideView extends
 
         this.image = loadImage(getModel().getImage());
 
-        if (getModel().getSlide().getAnimation() == null || !"Tile".equalsIgnoreCase(getModel().getSlide().getAnimation().name())
-                && !"Tile_60_k".equalsIgnoreCase(getModel().getSlide().getAnimation().name())) {
+        if (getModel().getSlide().getShowAnimation() == null || !"Tile".equalsIgnoreCase(getModel().getSlide().getShowAnimation().name())
+                && !"Tile_60_k".equalsIgnoreCase(getModel().getSlide().getShowAnimation().name())) {
             getRootNode().getChildren().add(ImageViewBuilder.create().image(this.image).layoutX(0).layoutY(0).fitWidth(this.image.getWidth()).fitHeight(this.image.getHeight()).build());
         }
         getTileTransition();
@@ -82,13 +83,13 @@ public final class ImageSlideView extends
     @Override
     public void show() {
 
-        if (getModel().getSlide().getAnimation() != null && "Tile".equalsIgnoreCase(getModel().getSlide().getAnimation().name())) {
+        if (getModel().getSlide().getShowAnimation() != null && AnimationType.TILE_IN == getModel().getSlide().getShowAnimation()) {
             for (final Node n : getRootNode().getChildren()) {
                 n.setOpacity(0.0);
             }
             this.tilePerRow = 5;
             getTileTransition().play();
-        } else if (getModel().getSlide().getAnimation() != null && "Tile_60_k".equalsIgnoreCase(getModel().getSlide().getAnimation().name())) {
+        } else if (getModel().getSlide().getShowAnimation() != null && AnimationType.TILE_IN_60_K == getModel().getSlide().getShowAnimation()) {
             for (final Node n : getRootNode().getChildren()) {
                 n.setOpacity(0.0);
             }

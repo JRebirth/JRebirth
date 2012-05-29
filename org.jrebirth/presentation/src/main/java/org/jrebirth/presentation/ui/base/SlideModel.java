@@ -1,5 +1,7 @@
 package org.jrebirth.presentation.ui.base;
 
+import javafx.animation.Animation;
+
 import org.jrebirth.core.ui.Model;
 
 /**
@@ -36,4 +38,18 @@ public interface SlideModel<S extends SlideStep> extends Model {
      * @return true if no more steps are available
      */
     boolean previousStep();
+
+    /**
+     * TODO To complete.
+     * 
+     * @return
+     */
+    Animation getHideAnimation();
+
+    /**
+     * TODO To complete.
+     * 
+     * @return
+     */
+    Animation getShowAnimation();
 }

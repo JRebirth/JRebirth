@@ -2,6 +2,11 @@ package org.jrebirth.presentation.ui.stack;
 
 import java.util.List;
 
+import javafx.animation.Animation;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ParallelTransitionBuilder;
+import javafx.event.ActionEvent;
+
 import org.jrebirth.core.link.Wave;
 import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Model;
@@ -74,30 +79,62 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
      * 
      * @param slide the slide to display
      */
+    @SuppressWarnings("unchecked")
     private void displaySlide(final Slide slide) {
         try {
+
+            SlideModel<SlideStep> previousSlideModel = null;
+
             if (this.selectedSlide != null) {
-                final Class<Model> selectedModelClass = (Class<Model>) Class.forName(this.selectedSlide.getModelClass());
-                // Hide previous slide
-                getView().getRootNode().getChildren().removeAll(getModel(selectedModelClass, this.selectedSlide).getRootNode());
+                final Class<Model> previousClass = (Class<Model>) Class.forName(this.selectedSlide.getModelClass());
+                previousSlideModel = (SlideModel<SlideStep>) getModel(previousClass, this.selectedSlide);
             }
 
-            final Class<Model> modelClass = (Class<Model>) Class.forName(slide.getModelClass());
-            // Show current slide
-
+            // Define the slide number
             slide.setPage(this.slidePosition);
-            this.selectedSlideModel = (SlideModel<SlideStep>) getModel(modelClass, slide);
-            // this.selectedSlideModel.setSlideNumber(this.slidePosition);
+
+            final Class<Model> nextClass = (Class<Model>) Class.forName(slide.getModelClass());
+            this.selectedSlideModel = (SlideModel<SlideStep>) getModel(nextClass, slide);
+
+            // Show new slide
             getView().getRootNode().getChildren().add(this.selectedSlideModel.getRootNode());
 
-            // this.selectedSlideModel.getView().animate();
+            // Play the animation
+            final ParallelTransition slideAnimation = ParallelTransitionBuilder.create().build();
+            if (previousSlideModel != null) {
+                final Animation a = previousSlideModel.getHideAnimation();
+                if (a != null) {
+                    slideAnimation.getChildren().add(a);
+                }
+            }
+            if (this.selectedSlideModel != null) {
+                final Animation a = this.selectedSlideModel.getShowAnimation();
+                if (a != null) {
+                    slideAnimation.getChildren().add(this.selectedSlideModel.getShowAnimation());
+                }
+            }
 
+            final SlideModel<SlideStep> psm = previousSlideModel;
+            slideAnimation.setOnFinished(new javafx.event.EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(final ActionEvent arg0) {
+                    // Hide previous slide
+                    if (psm != null) {
+                        getView().getRootNode().getChildren().removeAll(psm.getRootNode());
+                    }
+                }
+            });
+
+            slideAnimation.play();
+
+            // Store the new default slide
             this.selectedSlide = slide;
+
             // Define the current position
             // setSlidePosition(slide.getPage().intValue());
 
         } catch (final ClassNotFoundException e) {
-            // TODO
             getLocalFacade().getGlobalFacade().getLogger();
         }
 
