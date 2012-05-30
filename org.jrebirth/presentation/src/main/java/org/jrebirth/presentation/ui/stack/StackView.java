@@ -62,7 +62,7 @@ public final class StackView extends AbstractView<StackModel, StackPane, StackCo
      * {@inheritDoc}
      */
     @Override
-    public void show() {
+    public void doStart() {
         // Nothing to do yet
     }
 
@@ -70,7 +70,16 @@ public final class StackView extends AbstractView<StackModel, StackPane, StackCo
      * {@inheritDoc}
      */
     @Override
-    public void hide() {
+    public void doHide() {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doReload() {
         // Nothing to do yet
 
     }

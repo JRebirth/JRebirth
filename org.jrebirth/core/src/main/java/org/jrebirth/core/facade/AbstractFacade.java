@@ -188,8 +188,10 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
             // Start the component initialization
             readyObject.ready();
+
             // Component Ready !
             return readyObject;
+
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
             e.printStackTrace();
             throw new CoreException("Impossible to create the class " + clazz.getName(), e);

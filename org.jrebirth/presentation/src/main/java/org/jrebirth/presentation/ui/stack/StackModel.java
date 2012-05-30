@@ -1,6 +1,8 @@
 package org.jrebirth.presentation.ui.stack;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
@@ -35,6 +37,8 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
     /** Store a strong reference to the service to avoid reloading. */
     private PresentationService presentationService;
 
+    private final Map<String, Double> animationRate = new HashMap<>();
+
     /**
      * {@inheritDoc}
      */
@@ -44,7 +48,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
         final List<Slide> slideList = getPresentationService().getPresentation().getSlides().getSlide();
         if (!slideList.isEmpty()) {
             this.slidePosition = 0;
-            displaySlide(slideList.get(this.slidePosition));
+            displaySlide(slideList.get(this.slidePosition), false);
         }
     }
 
@@ -80,7 +84,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
      * @param slide the slide to display
      */
     @SuppressWarnings("unchecked")
-    private void displaySlide(final Slide slide) {
+    private void displaySlide(final Slide slide, final boolean isReverse) {
         try {
 
             SlideModel<SlideStep> previousSlideModel = null;
@@ -96,37 +100,21 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
             final Class<Model> nextClass = (Class<Model>) Class.forName(slide.getModelClass());
             this.selectedSlideModel = (SlideModel<SlideStep>) getModel(nextClass, slide);
 
-            // Show new slide
+            // Add the new slide to the stack
             getView().getRootNode().getChildren().add(this.selectedSlideModel.getRootNode());
 
-            // Play the animation
-            final ParallelTransition slideAnimation = ParallelTransitionBuilder.create().build();
-            if (previousSlideModel != null) {
-                final Animation a = previousSlideModel.getHideAnimation();
-                if (a != null) {
-                    slideAnimation.getChildren().add(a);
-                }
+            final String animationKey = isReverse ? this.slidePosition + "_" + (this.slidePosition + 1) : this.slidePosition - 1 + "_" + this.slidePosition;
+
+            // Play the animation<
+            final ParallelTransition slideAnimation = getSlideTransition(this.slidePosition, isReverse, previousSlideModel, this.selectedSlideModel);
+
+            if (isReverse) {
+                slideAnimation.setRate(-1);
+                slideAnimation.playFrom(slideAnimation.getCycleDuration());
+            } else {
+                slideAnimation.setRate(1);
+                slideAnimation.playFromStart();
             }
-            if (this.selectedSlideModel != null) {
-                final Animation a = this.selectedSlideModel.getShowAnimation();
-                if (a != null) {
-                    slideAnimation.getChildren().add(this.selectedSlideModel.getShowAnimation());
-                }
-            }
-
-            final SlideModel<SlideStep> psm = previousSlideModel;
-            slideAnimation.setOnFinished(new javafx.event.EventHandler<ActionEvent>() {
-
-                @Override
-                public void handle(final ActionEvent arg0) {
-                    // Hide previous slide
-                    if (psm != null) {
-                        getView().getRootNode().getChildren().removeAll(psm.getRootNode());
-                    }
-                }
-            });
-
-            slideAnimation.play();
 
             // Store the new default slide
             this.selectedSlide = slide;
@@ -135,9 +123,48 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
             // setSlidePosition(slide.getPage().intValue());
 
         } catch (final ClassNotFoundException e) {
-            getLocalFacade().getGlobalFacade().getLogger();
+            getLocalFacade().getGlobalFacade().getLogger().error(e.getMessage());
+            e.printStackTrace();
         }
 
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param slidePosition2
+     * @param isReverse
+     * @return
+     */
+    private ParallelTransition getSlideTransition(final int slidePosition2, final boolean isReverse, final SlideModel<SlideStep> previousSlideModel, final SlideModel<SlideStep> selectedSlideModel) {
+        final ParallelTransition slideAnimation = ParallelTransitionBuilder.create().build();
+
+        if (previousSlideModel != null) {
+            final Animation a = isReverse ? previousSlideModel.getShowAnimation() : previousSlideModel.getHideAnimation();
+            if (a != null) {
+                slideAnimation.getChildren().add(a);
+            }
+        }
+        if (this.selectedSlideModel != null) {
+            final Animation a = isReverse ? this.selectedSlideModel.getHideAnimation() : this.selectedSlideModel.getShowAnimation();
+            if (a != null) {
+                slideAnimation.getChildren().add(a);
+            }
+        }
+
+        final SlideModel<SlideStep> psm = previousSlideModel;
+        slideAnimation.setOnFinished(new javafx.event.EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(final ActionEvent arg0) {
+                // Hide previous slide
+                if (psm != null) {
+                    getView().getRootNode().getChildren().removeAll(psm.getRootNode());
+                }
+            }
+        });
+
+        return slideAnimation;
     }
 
     /**
@@ -160,7 +187,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
     public void next() {
         if (this.selectedSlideModel.nextStep()) {
             this.slidePosition = Math.min(this.slidePosition + 1, getPresentationService().getPresentation().getSlides().getSlide().size() - 1);
-            displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition));
+            displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition), false);
         }
     }
 
@@ -170,7 +197,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
     public void previous() {
         if (this.selectedSlideModel.previousStep()) {
             this.slidePosition = Math.max(this.slidePosition - 1, 0);
-            displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition));
+            displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition), true);
         }
     }
 

@@ -44,6 +44,10 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     /** The slide number. */
     private int slideNumber;
 
+    private Animation hideAnimation;
+
+    private Animation showAnimation;
+
     /**
      * @return Returns the slide.
      */
@@ -198,8 +202,22 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      * {@inheritDoc}
      */
     @Override
+    public Animation getShowAnimation() {
+        if (this.showAnimation == null) {
+            this.showAnimation = buildAnimation(getSlide().getShowAnimation());
+        }
+        return this.showAnimation;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Animation getHideAnimation() {
-        return buildAnimation(getSlide().getHideAnimation());
+        if (this.hideAnimation == null) {
+            this.hideAnimation = buildAnimation(getSlide().getHideAnimation());
+        }
+        return this.hideAnimation;
     }
 
     /**
@@ -269,24 +287,28 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
 
         return ParallelTransitionBuilder.create()
                 .children(
-                        TranslateTransitionBuilder.create().node(getRootNode()).fromX(fromX).toX(toX).fromY(fromY).toY(toY).duration(Duration.seconds(1)).build(),
+                        TranslateTransitionBuilder.create()
+                                // .autoReverse(true)
+                                .node(getRootNode())
+                                .fromX(fromX)
+                                .toX(toX)
+                                .fromY(fromY)
+                                .toY(toY)
+                                .duration(Duration.seconds(1))
+                                .build(),
+
                         TimelineBuilder.create()
                                 .keyFrames(
                                         new KeyFrame(Duration.millis(0), new KeyValue(mb.radiusProperty(), 0)),
-                                        new KeyFrame(Duration.millis(500), new KeyValue(mb.radiusProperty(), 60)),
+                                        new KeyFrame(Duration.millis(100), new KeyValue(mb.radiusProperty(), 50)),
+                                        new KeyFrame(Duration.millis(500), new KeyValue(mb.radiusProperty(), 63)),
+                                        new KeyFrame(Duration.millis(900), new KeyValue(mb.radiusProperty(), 50)),
                                         new KeyFrame(Duration.millis(1000), new KeyValue(mb.radiusProperty(), 0))
                                 )
                                 .build()
                 )
+                // autoReverse(true)
                 .build();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Animation getShowAnimation() {
-        return buildAnimation(getSlide().getShowAnimation());
     }
 
 }
