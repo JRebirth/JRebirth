@@ -54,7 +54,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
         initializeInnerModels();
 
         // Show the view
-        getView().show();
+        getView().doStart();
     }
 
     /**
@@ -64,7 +64,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
      */
     protected final void initialize() throws CoreException {
         // Prepare the current view
-        getView().prepare();
+        getView().doPrepare();
 
         // Do custom stuff
         customInitialize();

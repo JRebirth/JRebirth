@@ -33,7 +33,7 @@ public abstract class AbstractSlideView<M extends AbstractSlideModel<?, ?, ?>, N
      * {@inheritDoc}
      */
     @Override
-    public void hide() {
+    public void doHide() {
         // Nothing to do yet
     }
 

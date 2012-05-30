@@ -67,7 +67,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * {@inheritDoc}
      */
     @Override
-    public void prepare() throws CoreException {
+    public void doPrepare() throws CoreException {
 
         // Initialize view components
         initializeComponents();
@@ -75,6 +75,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         // Activate the controller to listen all components (this+children)
         getController().activate();
 
+        // Allow to release the model if the root business object doesn't exist anymore
         getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
 
             @Override
@@ -91,13 +92,19 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * {@inheritDoc}
      */
     @Override
-    public abstract void show();
+    public abstract void doStart();
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public abstract void hide();
+    public abstract void doReload();
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public abstract void doHide();
 
     /**
      * Build the root node.

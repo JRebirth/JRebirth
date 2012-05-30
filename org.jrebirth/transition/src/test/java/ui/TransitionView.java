@@ -36,7 +36,7 @@ public final class TransitionView extends AbstractView<TransitionModel, StackPan
      * {@inheritDoc}
      */
     @Override
-    public void show() {
+    public void doStart() {
 
         getRootNode().setPrefWidth(getModel().getService().getImage().getWidth());
         getRootNode().setPrefHeight(getModel().getService().getImage().getHeight());
@@ -52,7 +52,16 @@ public final class TransitionView extends AbstractView<TransitionModel, StackPan
      * {@inheritDoc}
      */
     @Override
-    public void hide() {
+    public void doHide() {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doReload() {
         // Nothing to do yet
 
     }

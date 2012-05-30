@@ -43,16 +43,27 @@ public interface View<M extends Model, N extends Node, C extends Controller<?, ?
      * 
      * @throws CoreException if the preparation fails
      */
-    void prepare() throws CoreException;
+    void doPrepare() throws CoreException;
 
     /**
-     * Start the show animation of the view.
+     * Handle custom tasks to do the fist time after creation of the view.
+     * 
+     * For example : you could start the show animation of the view.
      */
-    void show();
+    void doStart();
 
     /**
-     * Start hide animation of the view.
+     * Handle custom tasks to do at each rendering of the view.
+     * 
+     * For example : play from start the start animation.
      */
-    void hide();
+    void doReload();
+
+    /**
+     * Handle custom tasks to do when the view is closed.
+     * 
+     * For example : you could start the hide animation of the view.
+     */
+    void doHide();
 
 }

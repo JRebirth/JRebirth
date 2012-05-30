@@ -66,7 +66,7 @@ public final class SplashView extends AbstractSlideView<SplashModel, BorderPane,
      * {@inheritDoc}
      */
     @Override
-    public void show() {
+    public void doStart() {
 
         getTextTransition().playFromStart();
     }
@@ -94,6 +94,15 @@ public final class SplashView extends AbstractSlideView<SplashModel, BorderPane,
                     .build();
         }
         return this.textTransition;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doReload() {
+        // Nothing to do yet
+
     }
 
 }

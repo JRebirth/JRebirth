@@ -34,7 +34,7 @@ public class DefaultView<M extends Model, N extends Node, C extends Controller<?
      * {@inheritDoc}
      */
     @Override
-    public void show() {
+    public void doStart() {
         // Nothing to do generic
     }
 
@@ -42,7 +42,15 @@ public class DefaultView<M extends Model, N extends Node, C extends Controller<?
      * {@inheritDoc}
      */
     @Override
-    public void hide() {
+    public void doReload() {
+        // Nothing to do generic
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doHide() {
         // Nothing to do generic
     }
 

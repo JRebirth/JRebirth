@@ -137,7 +137,7 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
      * Show the ball by using a nice transition.
      */
     @Override
-    public void show() {
+    public void doStart() {
         this.showTransition.play();
     }
 
@@ -145,7 +145,7 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
      * Hide the ball by using a nice reverse transition..
      */
     @Override
-    public void hide() {
+    public void doHide() {
 
         this.showTransition.setRate(-1);
         this.showTransition.play();

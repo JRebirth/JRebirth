@@ -34,4 +34,12 @@ public final class ClassicView extends AbstractTemplateView<ClassicModel, Border
         return buildDefaultContent(getModel().getDefaultContent());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doReload() {
+        // Nothing to do yet
+    }
+
 }

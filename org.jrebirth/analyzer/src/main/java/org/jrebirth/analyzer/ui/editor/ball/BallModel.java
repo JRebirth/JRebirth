@@ -68,7 +68,7 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
      */
     public void show() {
         getView().setStyle(getEventModel().getEventType()); // TODO remove
-        getView().show();
+        getView().doStart();
     }
 
     /**
@@ -77,13 +77,13 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
      * @param i
      */
     public void hide() {
-        getView().hide();
+        getView().doHide();
     }
 
     /**
      * TODO To complete.
      */
     public void destroy() {
-        getView().hide();
+        getView().doHide();
     }
 }

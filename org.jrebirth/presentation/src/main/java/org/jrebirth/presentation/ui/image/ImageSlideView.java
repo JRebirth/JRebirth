@@ -81,7 +81,7 @@ public final class ImageSlideView extends
      * {@inheritDoc}
      */
     @Override
-    public void show() {
+    public void doStart() {
 
         if (getModel().getSlide().getShowAnimation() != null && AnimationType.TILE_IN == getModel().getSlide().getShowAnimation()) {
             for (final Node n : getRootNode().getChildren()) {
@@ -174,6 +174,15 @@ public final class ImageSlideView extends
 
     private Duration getRandomDuration() {
         return Duration.millis(new Random().nextLong() % 900 + 300);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doReload() {
+        // Nothing to do yet
+
     }
 
 }

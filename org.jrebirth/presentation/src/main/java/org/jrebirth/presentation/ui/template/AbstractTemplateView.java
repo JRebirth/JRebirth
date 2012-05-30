@@ -110,7 +110,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * {@inheritDoc}
      */
     @Override
-    public void show() {
+    public void doStart() {
 
         // FIXME MUST be refactored with property binding
         // this.pageLabel.setText(String.valueOf(getModel().getSlideNumber()));
@@ -133,13 +133,13 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                 .children(
                         RotateTransitionBuilder
                                 .create()
-                                .duration(Duration.millis(600))
+                                .duration(Duration.millis(800))
                                 .fromAngle(-180)
                                 .toAngle(0)
                                 .build(),
                         ScaleTransitionBuilder
                                 .create()
-                                .duration(Duration.millis(600))
+                                .duration(Duration.millis(800))
                                 .fromX(0)
                                 .fromY(0)
                                 .toX(1)
