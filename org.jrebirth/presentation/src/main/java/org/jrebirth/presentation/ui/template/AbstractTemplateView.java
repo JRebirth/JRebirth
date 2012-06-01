@@ -97,6 +97,12 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
         // Attach the properties view to the center place of the root border pane
         getRootNode().setCenter(getContentPanel());
+
+        // initialize the begin properties for the transition
+        getRootNode().getCenter().setScaleX(0);
+        getRootNode().getCenter().setScaleY(0);
+        getRootNode().getCenter().setRotate(-180);
+
         BorderPane.setAlignment(getRootNode().getCenter(), Pos.CENTER);
         BorderPane.setMargin(getRootNode().getCenter(), new Insets(10, 0, 10, 0));
 
@@ -129,7 +135,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         // .build().play();
 
         ParallelTransitionBuilder
-                .create()
+                .create().delay(Duration.millis(400))
                 .children(
                         RotateTransitionBuilder
                                 .create()

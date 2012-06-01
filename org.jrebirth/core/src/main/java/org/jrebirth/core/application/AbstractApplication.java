@@ -167,7 +167,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         final Stage currentStage = this.stage;
 
         // Manage F11 button to switch full screen
-        scene.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 
             @Override
             public void handle(final KeyEvent event) {
@@ -211,8 +211,12 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * @throws CoreException if build fails
      */
     protected final Scene buildScene(final Stage primaryStage) throws CoreException {
-        return SceneBuilder.create().root(buildRootPane()).width(JRebirthApplication.DEFAULT_SCENE_WIDTH).height(JRebirthApplication.DEFAULT_SCENE_HEIGHT)
-                .fill(JRebirthApplication.DEFAULT_SCENE_BG_COLOR).build();
+        return SceneBuilder.create()
+                .root(buildRootPane())
+                .width(JRebirthApplication.DEFAULT_SCENE_WIDTH)
+                .height(JRebirthApplication.DEFAULT_SCENE_HEIGHT)
+                .fill(JRebirthApplication.DEFAULT_SCENE_BG_COLOR)
+                .build();
     }
 
     /**

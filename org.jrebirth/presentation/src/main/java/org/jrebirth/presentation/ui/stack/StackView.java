@@ -1,6 +1,5 @@
 package org.jrebirth.presentation.ui.stack;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -42,7 +41,7 @@ public final class StackView extends AbstractView<StackModel, StackPane, StackCo
         getRootNode().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         getRootNode().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         getRootNode().setAlignment(Pos.CENTER);
-        getRootNode().setPadding(new Insets(5, 5, 5, 5));
+        // getRootNode().setPadding(new Insets(5, 5, 5, 5));
 
         // Blend blend = new Blend();
         // blend.setMode(BlendMode.HARD_LIGHT);
