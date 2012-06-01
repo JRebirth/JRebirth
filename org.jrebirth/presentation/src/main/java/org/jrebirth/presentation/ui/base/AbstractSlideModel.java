@@ -9,6 +9,7 @@ import javafx.animation.FadeTransitionBuilder;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.ParallelTransitionBuilder;
+import javafx.animation.ScaleTransitionBuilder;
 import javafx.animation.TimelineBuilder;
 import javafx.animation.TranslateTransitionBuilder;
 import javafx.scene.effect.MotionBlur;
@@ -261,6 +262,24 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
             case FADE_OUT:
                 animation = FadeTransitionBuilder.create().node(getRootNode()).fromValue(1.0).toValue(0.0).duration(Duration.seconds(1)).build();
                 break;
+
+            case SCALE_FROM_MAX:
+                animation = buildScaleAnimation(20.0, 1.0, true);
+                break;
+            case SCALE_FROM_MIN:
+                animation = buildScaleAnimation(0.0, 1.0, true);
+                break;
+            case SCALE_TO_MAX:
+                animation = buildScaleAnimation(1.0, 20.0, false);
+                break;
+            case SCALE_TO_MIN:
+                animation = buildScaleAnimation(1.0, 0.0, false);
+                break;
+
+            case SLIDING_TOP_BOTTOM_PROGRESSIVE:
+                animation = buildSliding();
+                break;
+
             case TILE_IN:
                 break;
             case TILE_OUT:
@@ -271,8 +290,49 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
                 break;
 
             default:
+                // animation = PauseTransitionBuilder.create().duration(Duration.seconds(1)).build();
         }
         return animation;
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @return
+     */
+    private Animation buildSliding() {
+
+        return null;
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param d
+     * @param e
+     * @return
+     */
+    private Animation buildScaleAnimation(final double from, final double to, final boolean show) {
+
+        return ParallelTransitionBuilder.create()
+                .children(
+                        ScaleTransitionBuilder.create()
+                                .node(getRootNode())
+                                .fromX(from)
+                                .toX(to)
+                                .fromY(from)
+                                .toY(to)
+                                .duration(Duration.seconds(1))
+                                .build(),
+
+                        FadeTransitionBuilder.create()
+                                .node(getRootNode())
+                                .fromValue(show ? 0.0 : 1.0)
+                                .toValue(show ? 1.0 : 0.0)
+                                .duration(Duration.seconds(1))
+                                .build()
+                )
+                .build();
     }
 
     /**
@@ -288,7 +348,6 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         return ParallelTransitionBuilder.create()
                 .children(
                         TranslateTransitionBuilder.create()
-                                // .autoReverse(true)
                                 .node(getRootNode())
                                 .fromX(fromX)
                                 .toX(toX)
@@ -307,7 +366,6 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
                                 )
                                 .build()
                 )
-                // autoReverse(true)
                 .build();
     }
 

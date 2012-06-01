@@ -87,6 +87,13 @@
 			<enumeration value="MoveFromTop" />
 			<enumeration value="MoveFromBottom" />
 			
+			<enumeration value="ScaleToMin" />
+			<enumeration value="ScaleFromMin" />
+			<enumeration value="ScaleToMax" />
+			<enumeration value="ScaleFromMax" />
+			
+			<enumeration value="SlidingTopBottomProgressive"></enumeration>
+			
 			<enumeration value="TileIn"/>
 			<enumeration value="TileOut"/>
 			<enumeration value="TileIn60k" />

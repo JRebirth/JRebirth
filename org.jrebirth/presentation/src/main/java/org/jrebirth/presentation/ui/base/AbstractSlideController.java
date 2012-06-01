@@ -54,7 +54,9 @@ public abstract class AbstractSlideController<M extends AbstractSlideModel<M, V,
     protected void customInitializeEventHandlers() throws CoreException {
 
         // Listen keys event on the root node
-        getRootNode().addEventFilter(KeyEvent.KEY_RELEASED, getKeyHandler());
+        // getRootNode().addEventFilter(KeyEvent.KEY_PRESSED, getKeyHandler());
+
+        getRootNode().setOnKeyPressed(getKeyHandler());
 
         // Listen mouse event on the root node
         getRootNode().setOnMouseClicked(getMouseHandler());
@@ -72,6 +74,33 @@ public abstract class AbstractSlideController<M extends AbstractSlideModel<M, V,
      * @since $Date$
      */
     private class SlideKeyAdapter extends DefaultKeyAdapter<AbstractSlideController<M, V>> {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void key(final KeyEvent keyEvent) {
+            // Nothing to do yet
+            super.key(keyEvent);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void keyReleased(final KeyEvent keyEvent) {
+            // Nothing to do yet
+            super.keyReleased(keyEvent);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void keyTyped(final KeyEvent keyEvent) {
+            // Nothing to do yet
+            super.keyTyped(keyEvent);
+        }
 
         /**
          * {@inheritDoc}

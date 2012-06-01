@@ -16,7 +16,7 @@
 		<moduleSet>
 
 			<!-- Enable access to all projects in the current multimodule build! -->
-			<!-- <useAllReactorProjects>true</useAllReactorProjects> -->
+			<useAllReactorProjects>true</useAllReactorProjects>
 
 			<includes>
 				<include>org.jrebirth:core</include>
