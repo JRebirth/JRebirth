@@ -119,6 +119,10 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         return this.stepPosition;
     }
 
+    public boolean hasStep() {
+        return !getStepList().isEmpty();
+    }
+
     /**
      * @return Returns the stepList.
      */

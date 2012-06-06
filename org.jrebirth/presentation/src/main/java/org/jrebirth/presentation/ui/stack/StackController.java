@@ -1,6 +1,7 @@
 package org.jrebirth.presentation.ui.stack;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Control;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -53,12 +54,10 @@ public final class StackController extends AbstractController<StackModel, StackV
     protected void customInitializeEventHandlers() throws CoreException {
 
         // Listen keys event on the root node
-        // getRootNode().addEventFilter(KeyEvent.KEY_PRESSED, getKeyHandler());
         getRootNode().setOnKeyPressed(getKeyHandler());
 
         // Listen mouse event on the root node
         getRootNode().setOnMouseClicked(getMouseHandler());
-
     }
 
     /**
@@ -79,9 +78,11 @@ public final class StackController extends AbstractController<StackModel, StackV
         public void keyPressed(final KeyEvent keyEvent) {
 
             if (keyEvent.getCode() == KeyCode.PAGE_DOWN) {
-                /* getController(). */getModel().callCommand(ShowNextSlideCommand.class);
+                getModel().callCommand(ShowNextSlideCommand.class);
+                keyEvent.consume();
             } else if (keyEvent.getCode() == KeyCode.PAGE_UP) {
-                /* getController(). */getModel().callCommand(ShowPreviousSlideCommand.class);
+                getModel().callCommand(ShowPreviousSlideCommand.class);
+                keyEvent.consume();
             }
         }
 
@@ -103,12 +104,17 @@ public final class StackController extends AbstractController<StackModel, StackV
          */
         @Override
         public void mouseClicked(final MouseEvent mouseEvent) {
-            if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-                /* getController(). */getModel().callCommand(ShowNextSlideCommand.class);
-            } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                /* getController(). */getModel().callCommand(ShowPreviousSlideCommand.class);
-            } else if (mouseEvent.getButton() == MouseButton.MIDDLE) {
-                /* getController(). */getModel().callCommand(ShowSlideMenuCommand.class);
+            if (!(mouseEvent.getTarget() instanceof Control)) {
+                if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+                    getModel().callCommand(ShowNextSlideCommand.class);
+                    mouseEvent.consume();
+                } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                    getModel().callCommand(ShowPreviousSlideCommand.class);
+                    mouseEvent.consume();
+                } else if (mouseEvent.getButton() == MouseButton.MIDDLE) {
+                    getModel().callCommand(ShowSlideMenuCommand.class);
+                    mouseEvent.consume();
+                }
             }
 
         }

@@ -1,8 +1,17 @@
 package org.jrebirth.presentation.ui.template;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
 import javafx.animation.ParallelTransitionBuilder;
 import javafx.animation.RotateTransitionBuilder;
 import javafx.animation.ScaleTransitionBuilder;
+import javafx.animation.SequentialTransitionBuilder;
+import javafx.animation.TimelineBuilder;
+import javafx.animation.TranslateTransitionBuilder;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.event.ActionEvent;
@@ -63,6 +72,12 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     private Label subTitle;
     private Label pageLabel;
 
+    private StackPane slideContent;
+
+    private final List<Node> subSlides = new ArrayList<>();
+
+    private Node currentSubSlide;
+
     /**
      * Default Constructor.
      * 
@@ -91,12 +106,15 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         getRootNode().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         getRootNode().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
-        // Attach the header panel
-        getRootNode().setTop(getHeaderPanel());
-        BorderPane.setMargin(getRootNode().getTop(), new Insets(0, 0, 0, 0));
+        this.slideContent = new StackPane();
+        // this.slideContent.setStyle("-fx-background-color:#000CCC");
 
         // Attach the properties view to the center place of the root border pane
-        getRootNode().setCenter(getContentPanel());
+        getRootNode().setCenter(this.slideContent);
+
+        if (!getModel().hasStep()) {
+            addSubSlide(getContentPanel());
+        }
 
         // initialize the begin properties for the transition
         getRootNode().getCenter().setScaleX(0);
@@ -106,9 +124,25 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         BorderPane.setAlignment(getRootNode().getCenter(), Pos.CENTER);
         BorderPane.setMargin(getRootNode().getCenter(), new Insets(10, 0, 10, 0));
 
+        // Attach the header panel after the content to allow under scroll
+        getRootNode().setTop(getHeaderPanel());
+        BorderPane.setMargin(getRootNode().getTop(), new Insets(0, 0, 0, 0));
+
         // Attach footer panel
         getRootNode().setBottom(getFooterPanel());
         BorderPane.setMargin(getRootNode().getBottom(), new Insets(0, 0, 0, 0));
+
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param contentPanel
+     */
+    private void addSubSlide(final Node defaultSubSlide) {
+
+        this.subSlides.add(getModel().getStepPosition(), defaultSubSlide);
+        this.slideContent.getChildren().add(defaultSubSlide);
 
     }
 
@@ -378,6 +412,87 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * @param slideStep the slide step to show
      */
     public void showSlideStep(final SlideStep slideStep) {
-        getRootNode().setCenter(buildDefaultContent(getModel().getContent(slideStep)));
+
+        if (this.subSlides.size() >= getModel().getStepPosition() || this.subSlides.get(getModel().getStepPosition()) == null) {
+            addSubSlide(buildDefaultContent(getModel().getContent(slideStep)));
+        }
+        final Node nextSlide = this.subSlides.get(getModel().getStepPosition());
+
+        if (this.currentSubSlide != null && nextSlide != null) {
+            performStepAnimation(nextSlide);
+        } else {
+            // No Animation
+            this.currentSubSlide = nextSlide;
+        }
+
+    }
+
+    protected void showCustomSlideStep(final Node node) {
+
+        addSubSlide(node);
+        final Node nextSlide = this.subSlides.get(getModel().getStepPosition());
+        if (this.currentSubSlide != null && nextSlide != null) {
+            performStepAnimation(nextSlide);
+        } else {
+            // No Animation
+            this.currentSubSlide = nextSlide;
+        }
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param nextSlide
+     */
+    private void performStepAnimation(final Node nextSlide) {
+        final ParallelTransition pt = ParallelTransitionBuilder.create()
+
+                .onFinished(new EventHandler<ActionEvent>() {
+
+                    @Override
+                    public void handle(final ActionEvent arg0) {
+                        AbstractTemplateView.this.currentSubSlide = nextSlide;
+                    }
+                })
+
+                .children(
+                        SequentialTransitionBuilder.create()
+                                .node(this.currentSubSlide)
+                                .children(
+                                        TranslateTransitionBuilder.create()
+                                                .duration(Duration.millis(400))
+                                                .fromY(0)
+                                                .toY(-700)
+                                                // .fromZ(-10)
+                                                .build(),
+                                        TimelineBuilder.create()
+                                                .keyFrames(
+                                                        new KeyFrame(Duration.millis(0), new KeyValue(this.currentSubSlide.visibleProperty(), true)),
+                                                        new KeyFrame(Duration.millis(1), new KeyValue(this.currentSubSlide.visibleProperty(), false))
+                                                )
+                                                .build()
+                                )
+
+                                .build(),
+                        SequentialTransitionBuilder.create()
+                                .node(nextSlide)
+                                .children(
+                                        TimelineBuilder.create()
+                                                .keyFrames(
+                                                        new KeyFrame(Duration.millis(0), new KeyValue(nextSlide.visibleProperty(), false)),
+                                                        new KeyFrame(Duration.millis(1), new KeyValue(nextSlide.visibleProperty(), true))
+                                                )
+                                                .build(),
+                                        TranslateTransitionBuilder.create()
+                                                .duration(Duration.millis(400))
+                                                .fromY(700)
+                                                .toY(0)
+                                                // .fromZ(-10)
+                                                .build()
+                                )
+                                .build()
+                )
+                .build();
+        pt.play();
     }
 }
