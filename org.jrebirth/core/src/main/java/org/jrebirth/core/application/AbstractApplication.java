@@ -129,7 +129,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             super.stop();
 
             // Stop the JRebirthThread
-            JRebirthThread.getThread().interrupt();
+            JRebirthThread.getThread().close();
 
         } catch (final Exception e) {
             // getFacade().getLogger().error("Error while stoping application : "

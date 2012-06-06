@@ -39,6 +39,10 @@ public final class JRebirthThread extends Thread {
     /** The list of tasks to execute, all access MUST BE synchronized. */
     private final List<Runnable> tasks;
 
+    private boolean infiniteLoop = true;
+
+    private final boolean readyToShutdown = false;
+
     /**
      * Build the JRebirth Thread.
      */
@@ -93,7 +97,7 @@ public final class JRebirthThread extends Thread {
             getFacade().getLogger().logException(e);
         }
 
-        while (true) {
+        while (this.infiniteLoop) {
             try {
 
                 // Need to sort tasks to launch by priority
@@ -108,15 +112,19 @@ public final class JRebirthThread extends Thread {
                     // Remove all task processed
                     this.tasks.clear();
                 }
+
                 // Pause this thread during 20ms to let other thread adding some
                 // task into the queue
                 Thread.sleep(20);
 
             } catch (final InterruptedException e) {
+                e.printStackTrace();
                 this.facade.getLogger().logException(e);
             }
-        }
 
+        }
+        // Shutdown the application more properly
+        shutdown();
     }
 
     /**
@@ -126,6 +134,24 @@ public final class JRebirthThread extends Thread {
     public void interrupt() {
         super.interrupt();
 
+        // Release all resources
+        shutdown();
+    }
+
+    /**
+     * 
+     */
+    public void close() {
+        this.infiniteLoop = false;
+
+        // Release all resources
+        shutdown();
+    }
+
+    /**
+     * Release all resources.
+     */
+    private void shutdown() {
         try {
             this.facade.stop();
             this.facade = null;
@@ -217,4 +243,5 @@ public final class JRebirthThread extends Thread {
     public static void runLater(final Runnable runnable) {
         internalThread.runAsap(runnable);
     }
+
 }
