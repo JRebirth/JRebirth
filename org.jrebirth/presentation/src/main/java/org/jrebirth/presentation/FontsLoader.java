@@ -12,6 +12,8 @@ import org.jrebirth.core.resource.font.FontName;
  */
 public enum FontsLoader implements FontName {
 
+    BRLNSB,
+
     /** . */
     DINk,
 

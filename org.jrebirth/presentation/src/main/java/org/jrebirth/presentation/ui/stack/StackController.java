@@ -6,6 +6,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.web.WebView;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.AbstractController;
@@ -57,7 +58,7 @@ public final class StackController extends AbstractController<StackModel, StackV
         getRootNode().setOnKeyPressed(getKeyHandler());
 
         // Listen mouse event on the root node
-        getRootNode().setOnMouseClicked(getMouseHandler());
+        getRootNode().setOnMousePressed(getMouseHandler());
     }
 
     /**
@@ -103,8 +104,8 @@ public final class StackController extends AbstractController<StackModel, StackV
          * {@inheritDoc}
          */
         @Override
-        public void mouseClicked(final MouseEvent mouseEvent) {
-            if (!(mouseEvent.getTarget() instanceof Control)) {
+        public void mousePressed(final MouseEvent mouseEvent) {
+            if (!(mouseEvent.getTarget() instanceof Control) && !(mouseEvent.getTarget() instanceof WebView)) {
                 if (mouseEvent.getButton() == MouseButton.PRIMARY) {
                     getModel().callCommand(ShowNextSlideCommand.class);
                     mouseEvent.consume();
@@ -116,6 +117,13 @@ public final class StackController extends AbstractController<StackModel, StackV
                     mouseEvent.consume();
                 }
             }
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void mouseClicked(final MouseEvent mouseEvent) {
 
         }
     }

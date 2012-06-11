@@ -16,8 +16,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
@@ -31,15 +29,22 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.AnchorPaneBuilder;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.FlowPaneBuilder;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.PaneBuilder;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.StackPaneBuilder;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.CircleBuilder;
+import javafx.scene.shape.Polyline;
+import javafx.scene.shape.PolylineBuilder;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBuilder;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebViewBuilder;
@@ -65,11 +70,11 @@ import org.jrebirth.presentation.ui.base.SlideStep;
  * @param <N> the layout node
  * @param <C> the template controller class
  */
-public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?, ?>, N extends BorderPane, C extends AbstractTemplateController<?, ?>> extends
+public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?, ?>, N extends AnchorPane, C extends AbstractTemplateController<?, ?>> extends
         AbstractSlideView<M, N, C> {
 
     /** The sub title of this slide. */
-    private Label subTitle;
+    private Label secondaryTitle;
     private Label pageLabel;
 
     private StackPane slideContent;
@@ -77,6 +82,9 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     private final List<Node> subSlides = new ArrayList<>();
 
     private Node currentSubSlide;
+
+    private final boolean subSlideLock = false;
+    private ParallelTransition subSlideTransition;
 
     /**
      * Default Constructor.
@@ -93,7 +101,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * @return Returns the subTitle.
      */
     protected Label getSubTitle() {
-        return this.subTitle;
+        return this.secondaryTitle;
     }
 
     /**
@@ -102,36 +110,58 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     @Override
     protected void customInitializeComponents() {
 
-        getRootNode().setPrefSize(1010, 750);
-        getRootNode().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        getRootNode().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        // getRootNode().setPrefSize(1010, 750);
+        // getRootNode().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        // getRootNode().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
         this.slideContent = new StackPane();
+        this.slideContent.getStyleClass().add("content");
+
+        this.slideContent.setMinSize(952, 642);
+        this.slideContent.setMaxSize(952, 642);
+        this.slideContent.setPrefSize(952, 642);
+
+        // this.slideContent.setLayoutX(240);
+        // this.slideContent.setLayoutY(420);
+        // this.slideContent.setMinWidth(952);
+        // this.slideContent.setPrefWidth(952);
+        // this.slideContent.setMaxWidth(952);
+        // this.slideContent.setMinHeight(642);
+
+        // this.slideContent.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        // this.slideContent.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+
         // this.slideContent.setStyle("-fx-background-color:#000CCC");
 
         // Attach the properties view to the center place of the root border pane
-        getRootNode().setCenter(this.slideContent);
+
+        // final Pane bp = PaneBuilder.create().children(this.slideContent).build();
+        // bp.relocate(20, 100);
+        // bp.setStyle("-fx-background-color:#000CCC");
+        // bp.setMinWidth(952);
+        // bp.setPrefWidth(952);
+        // bp.setMaxWidth(952);
+        //
+        // bp.setMinHeight(642);
 
         if (!getModel().hasStep()) {
             addSubSlide(getContentPanel());
         }
 
         // initialize the begin properties for the transition
-        getRootNode().getCenter().setScaleX(0);
-        getRootNode().getCenter().setScaleY(0);
-        getRootNode().getCenter().setRotate(-180);
+        this.slideContent.setScaleX(0);
+        this.slideContent.setScaleY(0);
+        this.slideContent.setRotate(-180);
 
-        BorderPane.setAlignment(getRootNode().getCenter(), Pos.CENTER);
-        BorderPane.setMargin(getRootNode().getCenter(), new Insets(10, 0, 10, 0));
+        final Node header = getHeaderPanel();
+        // final Node footer = getFooterPanel();
 
-        // Attach the header panel after the content to allow under scroll
-        getRootNode().setTop(getHeaderPanel());
-        BorderPane.setMargin(getRootNode().getTop(), new Insets(0, 0, 0, 0));
+        AnchorPane.setTopAnchor(header, 0.0);
+        AnchorPane.setTopAnchor(this.slideContent, 109.0);
+        AnchorPane.setLeftAnchor(this.slideContent, 48.0);
+        // AnchorPane.setBottomAnchor(footer, 95.0);
 
-        // Attach footer panel
-        getRootNode().setBottom(getFooterPanel());
-        BorderPane.setMargin(getRootNode().getBottom(), new Insets(0, 0, 0, 0));
-
+        getRootNode().getChildren().addAll(/* footer, */this.slideContent, header);
     }
 
     /**
@@ -143,6 +173,8 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
         this.subSlides.add(getModel().getStepPosition(), defaultSubSlide);
         this.slideContent.getChildren().add(defaultSubSlide);
+
+        StackPane.setAlignment(defaultSubSlide, Pos.CENTER);
 
     }
 
@@ -173,20 +205,20 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                 .children(
                         RotateTransitionBuilder
                                 .create()
-                                .duration(Duration.millis(800))
+                                .duration(Duration.millis(600))
                                 .fromAngle(-180)
                                 .toAngle(0)
                                 .build(),
                         ScaleTransitionBuilder
                                 .create()
-                                .duration(Duration.millis(800))
+                                .duration(Duration.millis(600))
                                 .fromX(0)
                                 .fromY(0)
                                 .toX(1)
                                 .toY(1)
                                 .build()
                 )
-                .node(getRootNode().getCenter())
+                .node(this.slideContent)
                 .build().play();
     }
 
@@ -197,48 +229,98 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      */
     protected Node getHeaderPanel() {
 
-        final StackPane sp = StackPaneBuilder.create()
+        final Pane headerPane = PaneBuilder.create()
                 .styleClass("header")
+                .layoutX(0.0)
+                .layoutY(0.0)
+                .minWidth(1024)
+                .prefWidth(1024)
                 .build();
+        // sp.getStyleClass().add("header");
 
-        final AnchorPane ap = AnchorPaneBuilder.create().build();
-
-        final Label text = LabelBuilder.create()
+        final Label primaryTitle = LabelBuilder.create()
                 // .styleClass("slideTitle")
                 .font(PrezFonts.SLIDE_TITLE.get())
                 .textFill(PrezColors.SLIDE_TITLE.get())
                 .text(getModel().getSlide().getTitle().replaceAll("\\\\n", "\n").replaceAll("\\\\t", "\t"))
+                .layoutX(40)
+                .layoutY(45)
+                // .style("-fx-background-color:#CCCB20")
                 .build();
 
-        this.subTitle = LabelBuilder.create()
+        this.secondaryTitle = LabelBuilder.create()
                 // .styleClass("slideTitle")
-                .prefHeight(40)
-                .font(PrezFonts.SLIDE_TITLE.get())
+                .font(PrezFonts.SLIDE_SUB_TITLE.get())
                 .textFill(PrezColors.SLIDE_TITLE.get())
-                .scaleX(1.5)
-                .scaleY(1.5)
-                .alignment(Pos.BASELINE_RIGHT)
+                // .scaleX(1.5)
+                // .scaleY(1.5)
+                .layoutX(450)
+                .layoutY(14)
+                .minWidth(450)
+                // .style("-fx-background-color:#E53B20")
+                .alignment(Pos.CENTER_RIGHT)
+                .textAlignment(TextAlignment.RIGHT)
                 .build();
 
-        final FlowPane fp = FlowPaneBuilder.create()
-                .orientation(Orientation.HORIZONTAL)
-                .alignment(Pos.BASELINE_CENTER)
-                .children(this.subTitle)
-                // .style("-fx-background-color:#CCCCCC")
+        final ImageView breizhcamp = ImageViewBuilder.create()
+                .layoutX(760.0)
+                .layoutY(36.0)
+                .scaleX(0.75)
+                .scaleY(0.75)
+                .image(loadImage("images/Logo_breizh.png"))
                 .build();
 
-        ap.getChildren().addAll(text, fp);
+        final Polyline pl = PolylineBuilder.create()
+                .strokeWidth(3)
+                .stroke(Color.BLACK)
+                .points(684.0, 12.0, 946.0, 12.0, 946.0, 107.0)
+                .build();
 
-        AnchorPane.setLeftAnchor(text, 30.0);
-        AnchorPane.setRightAnchor(fp, 30.0);
+        final Rectangle rb = RectangleBuilder.create()
+                .layoutX(108.0)
+                .layoutY(95.0)
+                .width(60.0)
+                .height(14.0)
+                .fill(Color.web("#1C9A9A"))
+                .build();
+
+        final Circle c = CircleBuilder.create()
+                .layoutX(18 + 54)
+                .layoutY(18 + 54)
+                .radius(54)
+                .fill(Color.web("#444442"))
+                .build();
+
+        this.pageLabel = LabelBuilder.create()
+                .layoutX(970)
+                .layoutY(18.0)
+                .text(String.valueOf(getModel().getSlide().getPage()))
+                .font(PrezFonts.PAGE.get())
+                .rotate(90.0)
+                .build();
+
+        // final FlowPane fp = FlowPaneBuilder.create()
+        // .orientation(Orientation.HORIZONTAL)
+        // .alignment(Pos.BASELINE_CENTER)
+        // .children(this.secondaryTitle)
+        // // .style("-fx-background-color:#CCCCCC")
+        // .build();
+
+        headerPane.getChildren().addAll(c, primaryTitle, breizhcamp, this.secondaryTitle, pl, rb, this.pageLabel);
+
+        // AnchorPane.setLeftAnchor(primaryTitle, 40.0);
+        // AnchorPane.setTopAnchor(primaryTitle, 45.0);
+        //
+        // AnchorPane.setRightAnchor(this.secondaryTitle, 80.0);
+        // AnchorPane.setTopAnchor(primaryTitle, 20.0);
 
         // ap.setStyle("-fx-background-color:#002266");
 
         // sp.setStyle("-fx-background-color:#663366");
-        StackPane.setAlignment(ap, Pos.BOTTOM_CENTER);
-        sp.getChildren().add(ap);
+        // StackPane.setAlignment(ap, Pos.BOTTOM_CENTER);
+        // sp.getChildren().add(ap);
 
-        return sp;
+        return headerPane;
 
     }
 
@@ -314,11 +396,11 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     protected VBox buildDefaultContent(final SlideContent slideContent) {
 
         if (slideContent.getTitle() != null) {
-            this.subTitle.setText(slideContent.getTitle());
+            this.secondaryTitle.setText(slideContent.getTitle());
         }
 
         final VBox vbox = new VBox();
-        vbox.getStyleClass().add("content");
+        // vbox.getStyleClass().add("content");
 
         if (getModel().getSlide().getStyle() != null) {
             vbox.getStyleClass().add(getModel().getSlide().getStyle());
@@ -432,6 +514,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         addSubSlide(node);
         final Node nextSlide = this.subSlides.get(getModel().getStepPosition());
         if (this.currentSubSlide != null && nextSlide != null) {
+
             performStepAnimation(nextSlide);
         } else {
             // No Animation
@@ -445,13 +528,16 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * @param nextSlide
      */
     private void performStepAnimation(final Node nextSlide) {
-        final ParallelTransition pt = ParallelTransitionBuilder.create()
+
+        setSlideLocked(true);
+        this.subSlideTransition = ParallelTransitionBuilder.create()
 
                 .onFinished(new EventHandler<ActionEvent>() {
 
                     @Override
-                    public void handle(final ActionEvent arg0) {
+                    public void handle(final ActionEvent event) {
                         AbstractTemplateView.this.currentSubSlide = nextSlide;
+                        AbstractTemplateView.this.setSlideLocked(false);
                     }
                 })
 
@@ -493,6 +579,14 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                                 .build()
                 )
                 .build();
-        pt.play();
+        this.subSlideTransition.play();
+
+    }
+
+    /**
+     * @return Returns the slideContent.
+     */
+    protected StackPane getSlideContent() {
+        return this.slideContent;
     }
 }

@@ -17,7 +17,7 @@ import org.jrebirth.core.resource.color.WebColor;
  */
 public enum PrezColors implements ColorEnum {
 
-    SLIDE_TITLE(new WebColor("#0088D3", 1.0)),
+    SLIDE_TITLE(new WebColor("#FFFFFF", 1.0)),
 
     SHAPE_BLUE(new WebColor("#3495CE", 1.0)),
 
