@@ -145,7 +145,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     @Override
     public boolean nextStep() {
         final boolean res = this.stepPosition < this.stepList.size() - 1;
-        if (res) {
+        if (res && !getView().isSlideLocked()) {
             this.stepPosition++;
             // Launch the next step
             showSlideStep(getStepList().get(this.stepPosition));
@@ -160,7 +160,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     @Override
     public boolean previousStep() {
         final boolean res = this.stepPosition > 0;
-        if (res) {
+        if (res && !getView().isSlideLocked()) {
             this.stepPosition--;
             // Launch the previous step
             showSlideStep(getStepList().get(this.stepPosition));

@@ -1,7 +1,7 @@
 package org.jrebirth.presentation.ui.classic;
 
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.presentation.ui.template.AbstractTemplateView;
@@ -13,7 +13,7 @@ import org.jrebirth.presentation.ui.template.AbstractTemplateView;
  * @author Sébastien Bordes
  * 
  */
-public final class ClassicView extends AbstractTemplateView<ClassicModel, BorderPane, ClassicController> {
+public final class ClassicView extends AbstractTemplateView<ClassicModel, AnchorPane, ClassicController> {
 
     /**
      * Default Constructor.

@@ -17,13 +17,13 @@ import org.jrebirth.core.resource.font.RealFont;
 public enum PrezFonts implements FontEnum {
 
     /** The splash font. */
-    PAGE(new RealFont(FontsLoader.DINk, 24)),
+    PAGE(new RealFont(FontsLoader.BorisBlackBloxx, 36)),
 
     /** The slide title font. */
-    SLIDE_TITLE(new RealFont(FontsLoader.Harabara, 30)),
+    SLIDE_TITLE(new RealFont(FontsLoader.Harabara, 45)),
 
-    /** The slide subtitle font. */
-    SLIDE_SUBTITLE(new RealFont(FontsLoader.Harabara, 20)),
+    /** The slide title font. */
+    SLIDE_SUB_TITLE(new RealFont(FontsLoader.Harabara, 30)),
 
     /** The typewriter font. */
     TYPEWRITER(new RealFont(FontsLoader.Report_1942, 72)),

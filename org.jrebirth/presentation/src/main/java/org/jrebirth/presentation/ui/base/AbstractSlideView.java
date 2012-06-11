@@ -18,6 +18,9 @@ import org.jrebirth.core.ui.AbstractView;
 public abstract class AbstractSlideView<M extends AbstractSlideModel<?, ?, ?>, N extends Parent, C extends AbstractSlideController<?, ?>> extends
         AbstractView<M, N, C> {
 
+    /** Sub slide animation flag. */
+    private boolean slideLocked;
+
     /**
      * Default Constructor.
      * 
@@ -44,6 +47,20 @@ public abstract class AbstractSlideView<M extends AbstractSlideModel<?, ?, ?>, N
     protected void customInitializeComponents() {
         // Nothing to do yet
 
+    }
+
+    /**
+     * @return Returns the slideLocked.
+     */
+    protected boolean isSlideLocked() {
+        return this.slideLocked;
+    }
+
+    /**
+     * @param slideLocked The slideLocked to set.
+     */
+    protected void setSlideLocked(final boolean slideLocked) {
+        this.slideLocked = slideLocked;
     }
 
 }
