@@ -164,6 +164,10 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         getRootNode().getChildren().addAll(/* footer, */this.slideContent, header);
     }
 
+    protected void showEmptySlide() {
+        this.subSlides.add(getModel().getStepPosition(), null);
+    }
+
     /**
      * TODO To complete.
      * 
