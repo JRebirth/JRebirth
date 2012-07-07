@@ -129,7 +129,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
          */
         synchronized (this.singletonMap) {
             // Check from singleton map it he key exists and if the weak reference is not null
-            res = this.singletonMap.containsKey(buildKey(clazz, keyPart));// && this.singletonMap.get(clazz) != null;
+            res = this.singletonMap.containsKey(buildKey(clazz, keyPart)); // && this.singletonMap.get(clazz) != null;
         }
 
         // }
@@ -137,10 +137,10 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     }
 
     /**
-     * TODO To complete.
+     * Build a key object to register this object.
      * 
-     * @param clazz
-     * @param key
+     * @param clazz the class of the object to build its key
+     * @param keyPart the unique key (could be composed of many keyPart) or null for singleton
      * @return
      */
     private Object buildKey(final Class<? extends R> clazz, final Object... keyPart) {
@@ -151,7 +151,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * Build a new instance of the ready object class.
      * 
      * @param clazz the class to build
-     * @param key the unique key or null
+     * @param keyPart the unique key (could be composed of many keyPart) or null for singleton
      * 
      * @return a new instance of the given clazz and key
      * 
@@ -193,7 +193,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             return readyObject;
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // FIXME manage with inner logger
             throw new CoreException("Impossible to create the class " + clazz.getName(), e);
         }
     }

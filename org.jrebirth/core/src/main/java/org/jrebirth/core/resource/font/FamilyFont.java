@@ -44,7 +44,7 @@ public class FamilyFont extends AbstractBaseFont {
      * @return the font size
      */
     public double size() {
-        return size();
+        return this.size;
     }
 
     /**
