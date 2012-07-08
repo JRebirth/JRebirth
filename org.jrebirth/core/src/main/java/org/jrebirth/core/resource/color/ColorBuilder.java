@@ -2,19 +2,16 @@ package org.jrebirth.core.resource.color;
 
 import javafx.scene.paint.Color;
 
-import org.jrebirth.core.resource.factory.AbstractResourceFactory;
+import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 
 /**
- * The class <strong>FontManager</strong>.
+ * The class <strong>ColorBuilder</strong>.
  * 
  * Class used to manage font with weak reference.
  * 
  * @author Sébastien Bordes
- * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
-public final class ColorFactory extends AbstractResourceFactory<ColorEnum, ColorParams, Color> {
+public final class ColorBuilder extends AbstractResourceBuilder<ColorEnum, ColorParams, Color> {
 
     /**
      * {@inheritDoc}

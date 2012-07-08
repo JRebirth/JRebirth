@@ -20,7 +20,6 @@ import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.AbstractGlobalReady;
 import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.WaveReady;
-import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 
 /**
@@ -98,9 +97,9 @@ public class NotifierImpl extends AbstractGlobalReady implements Notifier {
      */
     @SuppressWarnings("unchecked")
     private void returnData(final Wave wave) {
-        final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<? extends Service>) wave.getRelatedClass());
+        // final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<? extends Service>) wave.getRelatedClass());
 
-        // TODO parse arguments !!!!!!!!
+        // FIX ME parse arguments !!!!!!!!
     }
 
     /**
@@ -143,7 +142,7 @@ public class NotifierImpl extends AbstractGlobalReady implements Notifier {
             // If the notified class is part of the UI
             // We must perform this action into the JavaFX Application Thread
             if (linked instanceof Model) {
-                JRebirth.runIntoJAT(LoopFactory.newRunnable(linked, wave));
+                JRebirth.runIntoJAT(LoopBuilder.newRunnable(linked, wave));
             } else {
                 // Otherwise can perform it right now into the current thread
                 // (JRebirthThread)
@@ -166,7 +165,7 @@ public class NotifierImpl extends AbstractGlobalReady implements Notifier {
             if (this.notifierMap.containsKey(wt)) {
                 list = this.notifierMap.get(wt);
             } else {
-                list = LoopFactory.newList(linkedObject);
+                list = LoopBuilder.newList(linkedObject);
                 this.notifierMap.put(wt, list);
             }
             if (list.isEmpty() || !list.contains(linkedObject)) {
@@ -196,18 +195,18 @@ public class NotifierImpl extends AbstractGlobalReady implements Notifier {
     }
 
     /**
-     * The class <strong>LoopFactory</strong>.
+     * The class <strong>LoopBuilder</strong>.
      * 
      * Used to instantiate object into loop.
      * 
      * @author Sébastien Bordes
      */
-    private static final class LoopFactory {
+    private static final class LoopBuilder {
 
         /**
          * Private Constructor.
          */
-        private LoopFactory() {
+        private LoopBuilder() {
             // Nothing to do
         }
 

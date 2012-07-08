@@ -43,7 +43,7 @@ public final class JRebirthThread extends Thread {
     private boolean infiniteLoop = true;
 
     /** FIXME . */
-    private final boolean readyToShutdown = false;
+    // private final boolean readyToShutdown = false;
 
     /**
      * Build the JRebirth Thread.

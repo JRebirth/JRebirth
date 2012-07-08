@@ -2,9 +2,9 @@ package org.jrebirth.presentation;
 
 import javafx.scene.paint.Color;
 
-import org.jrebirth.core.resource.ResourceFactories;
+import org.jrebirth.core.resource.ResourceBuilders;
+import org.jrebirth.core.resource.color.ColorBuilder;
 import org.jrebirth.core.resource.color.ColorEnum;
-import org.jrebirth.core.resource.color.ColorFactory;
 import org.jrebirth.core.resource.color.ColorParams;
 import org.jrebirth.core.resource.color.RGB255Color;
 import org.jrebirth.core.resource.color.WebColor;
@@ -51,7 +51,7 @@ public enum PrezColors implements ColorEnum {
      * {@inheritDoc}
      */
     @Override
-    public ColorFactory factory() {
-        return (ColorFactory) ResourceFactories.COLOR_FACTORY.use();
+    public ColorBuilder factory() {
+        return (ColorBuilder) ResourceBuilders.COLOR_BUILDER.use();
     }
 }

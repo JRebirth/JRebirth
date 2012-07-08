@@ -3,22 +3,18 @@ package org.jrebirth.core.resource.font;
 import java.util.List;
 
 import javafx.scene.text.Font;
-import javafx.scene.text.FontBuilder;
 
 import org.jrebirth.core.exception.CoreRuntimeException;
-import org.jrebirth.core.resource.factory.AbstractResourceFactory;
+import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 
 /**
- * The class <strong>FontManager</strong>.
+ * The class <strong>FontBuilder</strong>.
  * 
  * Class used to manage font with weak reference.
  * 
  * @author Sébastien Bordes
- * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
-public final class FontFactory extends AbstractResourceFactory<FontEnum, FontParams, Font> {
+public final class FontBuilder extends AbstractResourceBuilder<FontEnum, FontParams, Font> {
 
     /**
      * The <code>TRUE_TYPE_FONT_EXT</code> field is used to dedine the file extension.
@@ -56,7 +52,7 @@ public final class FontFactory extends AbstractResourceFactory<FontEnum, FontPar
      */
     private Font buildRealFont(final RealFont rFont) {
         checkFontStatus(rFont);
-        return FontBuilder.create().name(transformFontName(rFont.name().get())).size(rFont.size()).build();
+        return javafx.scene.text.FontBuilder.create().name(transformFontName(rFont.name().get())).size(rFont.size()).build();
     }
 
     /**

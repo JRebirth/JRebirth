@@ -146,7 +146,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * @return the key built
      */
     private Object buildKey(final Class<? extends R> clazz, final Object... keyPart) {
-        return KeyFactory.buildKey(clazz, keyPart);
+        return KeyBuilder.buildKey(clazz, keyPart);
     }
 
     /**
@@ -180,7 +180,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             readyObject.setLocalFacade(this);
 
             // Create the unique key
-            readyObject.setKey(KeyFactory.buildKey(readyObject.getClass(), keyPart));
+            readyObject.setKey(KeyBuilder.buildKey(readyObject.getClass(), keyPart));
 
             // TODO IMPROVE IT
             if (readyObject instanceof AbstractModel && keyPart.length > 0) {
