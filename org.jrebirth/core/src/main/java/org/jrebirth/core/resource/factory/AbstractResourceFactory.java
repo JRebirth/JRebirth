@@ -12,10 +12,8 @@ import java.util.WeakHashMap;
  * 
  * @author Sébastien Bordes
  * 
- * @version $Revision$ $Author$
- * @since $Date$
- * 
  * @param <E> The enumeration used to wrap the resource
+ * @param <P> The params type
  * @param <R> The resource managed
  */
 public abstract class AbstractResourceFactory<E, P, R> implements ResourceFactory<E, P, R> {
@@ -77,7 +75,7 @@ public abstract class AbstractResourceFactory<E, P, R> implements ResourceFactor
     /**
      * Build the resource requested.
      * 
-     * @param p the primitive parameters used to build the resource
+     * @param params the primitive parameters used to build the resource
      * 
      * @return the resource built and weakly stored with a WeakReference
      */

@@ -39,8 +39,10 @@ public final class JRebirthThread extends Thread {
     /** The list of tasks to execute, all access MUST BE synchronized. */
     private final List<Runnable> tasks;
 
+    /** FIXME. */
     private boolean infiniteLoop = true;
 
+    /** FIXME . */
     private final boolean readyToShutdown = false;
 
     /**
