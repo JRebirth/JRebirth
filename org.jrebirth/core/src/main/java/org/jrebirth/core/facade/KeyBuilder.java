@@ -1,16 +1,16 @@
 package org.jrebirth.core.facade;
 
 /**
- * The class <strong>KeyFactory</strong>.
+ * The class <strong>KeyBuilder</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class KeyFactory {
+public final class KeyBuilder {
 
     /**
      * Private constructor to avoid instantiation.
      */
-    private KeyFactory() {
+    private KeyBuilder() {
         // Nothing to initialize
     }
 
@@ -22,7 +22,7 @@ public final class KeyFactory {
      * 
      * @return the unique key for the given class and keyParts array
      */
-    public static UniqueKey buildKey(final Class clazz, final Object... keyPart) {
+    public static UniqueKey buildKey(final Class<?> clazz, final Object... keyPart) {
 
         UniqueKey uniqueKey;
         if (keyPart.length == 0) {
@@ -40,7 +40,7 @@ public final class KeyFactory {
      * 
      * @return the unique key for a singleton
      */
-    private static UniqueKey buildClassKey(final Class clazz) {
+    private static UniqueKey buildClassKey(final Class<?> clazz) {
         return new ClassKey(clazz);
     }
 

@@ -12,7 +12,7 @@ package org.jrebirth.core.resource.factory;
  * @param <P> The params object that store primitive resources values
  * @param <R> The resource managed
  */
-public interface ResourceFactory<E, P, R> {
+public interface ResourceBuilder<E, P, R> {
 
     /**
      * Store a parameter.

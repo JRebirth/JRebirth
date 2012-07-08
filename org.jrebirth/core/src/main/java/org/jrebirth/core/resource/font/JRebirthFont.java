@@ -12,7 +12,7 @@ import org.jrebirth.core.resource.Resource;
  * @version $Revision$ $Author$
  * @since $Date$
  */
-public interface JRebirthFont extends Resource<Font, FontFactory> {
+public interface JRebirthFont extends Resource<Font, FontBuilder> {
 
     /**
      * Return the name of the font.

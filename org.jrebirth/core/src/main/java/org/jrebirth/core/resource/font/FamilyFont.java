@@ -25,6 +25,7 @@ public class FamilyFont extends AbstractBaseFont {
     /**
      * Default Constructor.
      * 
+     * @param name the font name
      * @param family the font family
      * @param size the font size
      * @param weight the font weight

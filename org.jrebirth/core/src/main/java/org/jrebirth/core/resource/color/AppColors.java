@@ -2,7 +2,7 @@ package org.jrebirth.core.resource.color;
 
 import javafx.scene.paint.Color;
 
-import org.jrebirth.core.resource.ResourceFactories;
+import org.jrebirth.core.resource.ResourceBuilders;
 
 /**
  * The class <strong>AppColors</strong>.
@@ -38,7 +38,7 @@ public enum AppColors implements ColorEnum {
      * {@inheritDoc}
      */
     @Override
-    public ColorFactory factory() {
-        return (ColorFactory) ResourceFactories.COLOR_FACTORY.use();
+    public ColorBuilder factory() {
+        return (ColorBuilder) ResourceBuilders.COLOR_BUILDER.use();
     }
 }

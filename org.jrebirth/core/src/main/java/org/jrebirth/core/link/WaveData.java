@@ -51,19 +51,19 @@ public final class WaveData<T> implements Comparable<WaveData<?>> {
         this.waveItem = waveItem;
     }
 
-    /**
-     * @return Returns the valueClass.
-     */
-    protected Class<T> getValueClass() {
-        return this.valueClass;
-    }
-
-    /**
-     * @param valueClass The valueClass to set.
-     */
-    protected void setValueClass(final Class<T> valueClass) {
-        this.valueClass = valueClass;
-    }
+    // /**
+    // * @return Returns the valueClass.
+    // */
+    // protected Class<T> getValueClass() {
+    // return this.valueClass;
+    // }
+    //
+    // /**
+    // * @param valueClass The valueClass to set.
+    // */
+    // protected void setValueClass(final Class<T> valueClass) {
+    // this.valueClass = valueClass;
+    // }
 
     /**
      * @return Returns the value.

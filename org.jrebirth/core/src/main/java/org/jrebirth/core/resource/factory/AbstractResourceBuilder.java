@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
- * The class <strong>ResourceManager</strong>.
+ * The abstract class <strong>AbstractResourceBuilder</strong>.
  * 
  * The base abstract class used to manage resource weakly.
  * 
@@ -16,7 +16,7 @@ import java.util.WeakHashMap;
  * @param <P> The params type
  * @param <R> The resource managed
  */
-public abstract class AbstractResourceFactory<E, P, R> implements ResourceFactory<E, P, R> {
+public abstract class AbstractResourceBuilder<E, P, R> implements ResourceBuilder<E, P, R> {
 
     /** The resource weak Map. */
     private final Map<E, P> paramsMap = new HashMap<E, P>();
