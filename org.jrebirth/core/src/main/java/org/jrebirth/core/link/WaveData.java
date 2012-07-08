@@ -18,7 +18,7 @@ public final class WaveData<T> implements Comparable<WaveData<?>> {
     private WaveItem waveItem;
 
     /** The class type of the contained object. */
-    private Class<T> valueClass;
+    // private Class<T> valueClass;
 
     /** The value data. */
     private T value;
