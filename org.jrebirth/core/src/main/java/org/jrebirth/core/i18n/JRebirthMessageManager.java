@@ -22,7 +22,7 @@ public final class JRebirthMessageManager {
     /** The Resources bundle built. */
     private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 
-    // FIX ME MANAGE BUNDLE NAME
+    // FIX ME MANAGE BUNDLE NAME DYNAMICALLY
 
     /**
      * Default Constructor.

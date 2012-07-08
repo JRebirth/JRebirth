@@ -20,6 +20,7 @@ import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.AbstractGlobalReady;
 import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.WaveReady;
+import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 
 /**
@@ -84,9 +85,6 @@ public class NotifierImpl extends AbstractGlobalReady implements Notifier {
     @SuppressWarnings("unchecked")
     private void callCommand(final Wave wave) {
         final Command command = getGlobalFacade().getCommandFacade().retrieve((Class<? extends Command>) wave.getRelatedClass());
-
-        // TODO parse arguments !!!!!!!! like for model events
-
         command.run(wave);
     }
 
@@ -97,9 +95,15 @@ public class NotifierImpl extends AbstractGlobalReady implements Notifier {
      */
     @SuppressWarnings("unchecked")
     private void returnData(final Wave wave) {
-        // final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<? extends Service>) wave.getRelatedClass());
+        final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<? extends Service>) wave.getRelatedClass());
 
-        // FIX ME parse arguments !!!!!!!!
+        if (service instanceof WaveReady) {
+            try {
+                ((WaveReady) service).handle(wave);
+            } catch (final WaveException e) {
+                getGlobalFacade().getLogger().logException(e);
+            }
+        }
     }
 
     /**
@@ -123,7 +127,6 @@ public class NotifierImpl extends AbstractGlobalReady implements Notifier {
             final ObservableList<Node> list = (ObservableList<Node>) wave.get(JRebirthWaveItem.attachUi).getValue();
             list.add(model.getView().getRootNode());
         }
-
     }
 
     /**
