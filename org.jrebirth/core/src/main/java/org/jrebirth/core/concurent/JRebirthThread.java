@@ -120,7 +120,6 @@ public final class JRebirthThread extends Thread {
                 Thread.sleep(20);
 
             } catch (final InterruptedException e) {
-                e.printStackTrace();
                 this.facade.getLogger().logException(e);
             }
 

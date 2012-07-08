@@ -41,7 +41,7 @@ public class SlidingDoorService extends ServiceImpl {
      * @return Returns the fullTransition.
      */
     public Transition getFullTransition() {
-        return fullTransition;
+        return this.fullTransition;
     }
 
     /**
@@ -57,9 +57,9 @@ public class SlidingDoorService extends ServiceImpl {
      * 
      * @param slices
      */
-    public void setNodes(List<? extends Node> nodesToAdd) {
-        for (Node n : nodesToAdd) {
-            nodes.add(n);
+    public void setNodes(final List<? extends Node> nodesToAdd) {
+        for (final Node n : nodesToAdd) {
+            this.nodes.add(n);
         }
     }
 
@@ -91,15 +91,15 @@ public class SlidingDoorService extends ServiceImpl {
         // p.getChildren().add(RectangleBuilder.create().x(i * 40).y(0).width(40).height(600).fill(Color.AZURE).build());
         // }
 
-        fullTransition = ParallelTransitionBuilder.create().autoReverse(true).cycleCount(2).build();
+        this.fullTransition = ParallelTransitionBuilder.create().autoReverse(true).cycleCount(2).build();
 
         int i = 0;
         // Collections.shuffle(nodes);
-        for (Node node : nodes) {
+        for (final Node node : this.nodes) {
             node.setCache(true);
             node.setCacheHint(CacheHint.SPEED);
 
-            ((ParallelTransition) fullTransition).getChildren().add(
+            ((ParallelTransition) this.fullTransition).getChildren().add(
                     TranslateTransitionBuilder.create().delay(getRandomDuration()).node(node).toY(1000).duration(Duration.millis(500)).interpolator(Interpolator.EASE_IN).build());
             i++;
         }

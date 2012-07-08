@@ -13,7 +13,6 @@ import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Model;
 
 /**
- * 
  * The class <strong>AbstractFacade</strong>.
  * 
  * An abstract facade can manage singleton of object which implements the FacadeReady interface
@@ -195,8 +194,10 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             return readyObject;
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
-            e.printStackTrace(); // FIXME manage with inner logger
-            throw new CoreException("Impossible to create the class " + clazz.getName(), e);
+            final String msg = "Impossible to create the class " + clazz.getName();
+            getGlobalFacade().getLogger().error(msg);
+            getGlobalFacade().getLogger().logException(e);
+            throw new CoreException(msg, e);
         }
     }
 
