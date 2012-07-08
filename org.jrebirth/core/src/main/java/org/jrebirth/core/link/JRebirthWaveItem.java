@@ -10,15 +10,20 @@ import javafx.collections.ObservableList;
  */
 public enum JRebirthWaveItem implements WaveItem {
 
-    /** . */
+    /** Manage a property data class. */
     attachUi(ObjectProperty.class),
 
-    /** . */
+    /** Manage an observable list data class. */
     addUi(ObservableList.class);
 
-    /** . */
+    /** The class to manage to hold date. */
     private Class<?> dataClass;
 
+    /**
+     * Private CoOnstructor.
+     * 
+     * @param dataClass the class to manage
+     */
     private JRebirthWaveItem(final Class<?> dataClass) {
         this.dataClass = dataClass;
     }

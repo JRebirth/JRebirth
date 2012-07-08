@@ -34,10 +34,10 @@ public class RGB01Color extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param red
-     * @param green
-     * @param blue
-     * @param opacity
+     * @param red the red component of the rgb color
+     * @param green the green component of the rgb color
+     * @param blue the blue component of the rgb color
+     * @param opacity the color opacity component
      */
     public RGB01Color(final double red, final double green, final double blue, final double opacity) {
         super(opacity);

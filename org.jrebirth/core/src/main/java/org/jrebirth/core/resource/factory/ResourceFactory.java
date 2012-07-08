@@ -15,20 +15,20 @@ package org.jrebirth.core.resource.factory;
 public interface ResourceFactory<E, P, R> {
 
     /**
-     * .
+     * Store a parameter.
      * 
-     * @param key
-     * @param params
+     * @param key the parameter key
+     * @param params the parameter value
      */
     void storeParams(E key, P params);
 
     /**
-     * .
+     * Retrieve a parameter value from its key.
      * 
-     * @param key
-     * @return
+     * @param key the parameter key
+     * @return the parameter value
      */
-    public P getParam(final E key);
+    P getParam(final E key);
 
     /**
      * Retrieve the resource. And build it if it didn't be done before.

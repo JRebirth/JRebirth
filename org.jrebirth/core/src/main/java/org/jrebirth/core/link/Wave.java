@@ -67,7 +67,7 @@ public interface Wave {
     /**
      * @return Returns the nextWave.
      */
-    public Wave getNextWave();
+    Wave getNextWave();
 
     /**
      * @param nextWave The nextWave to set.
