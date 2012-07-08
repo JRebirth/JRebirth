@@ -19,9 +19,9 @@ public final class RGB255Color extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param red the red component (0 - 1.0)
-     * @param green the green component (0 - 1.0)
-     * @param blue the blue component (0 - 1.0)
+     * @param red the red component (0 - 255)
+     * @param green the green component (0 - 255)
+     * @param blue the blue component (0 - 255)
      */
     public RGB255Color(final int red, final int green, final int blue) {
         super();
@@ -33,9 +33,9 @@ public final class RGB255Color extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param red the red component (0 - 1.0)
-     * @param green the green component (0 - 1.0)
-     * @param blue the blue component (0 - 1.0)
+     * @param red the red component (0 - 255)
+     * @param green the green component (0 - 255)
+     * @param blue the blue component (0 - 255)
      * @param opacity the color opacity (0 - 1.0)
      */
     public RGB255Color(final int red, final int green, final int blue, final double opacity) {

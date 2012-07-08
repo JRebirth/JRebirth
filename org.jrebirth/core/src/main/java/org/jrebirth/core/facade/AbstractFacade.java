@@ -93,8 +93,9 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                     register(build(clazz, keyPart), keyPart);
                 } catch (final CoreException ce) {
                     getGlobalFacade().getLogger().error(ce.getMessage());
-                    getGlobalFacade().getLogger().error("Error while building " + clazz.getCanonicalName() + " instance");
-                    throw new CoreRuntimeException("Error while building " + clazz.getCanonicalName() + " instance", ce);
+                    final String msg = "Error while building " + clazz.getCanonicalName() + " instance";
+                    getGlobalFacade().getLogger().error(msg);
+                    throw new CoreRuntimeException(msg, ce);
                 }
             }
 
@@ -141,7 +142,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * 
      * @param clazz the class of the object to build its key
      * @param keyPart the unique key (could be composed of many keyPart) or null for singleton
-     * @return
+     * 
+     * @return the key built
      */
     private Object buildKey(final Class<? extends R> clazz, final Object... keyPart) {
         return KeyFactory.buildKey(clazz, keyPart);

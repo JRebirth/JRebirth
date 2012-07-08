@@ -10,6 +10,7 @@ import java.util.List;
  * 
  * @author Sébastien Bordes
  * 
+ * @param <C> the type of the object registered by this key
  */
 public class MultitonKey<C> extends ClassKey<C> {
 
