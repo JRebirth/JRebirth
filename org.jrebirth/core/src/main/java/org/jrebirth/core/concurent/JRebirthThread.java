@@ -42,7 +42,7 @@ public final class JRebirthThread extends Thread {
     /** FIXME. */
     private boolean infiniteLoop = true;
 
-    /** FIXME . */
+    /** . */
     // private final boolean readyToShutdown = false;
 
     /**

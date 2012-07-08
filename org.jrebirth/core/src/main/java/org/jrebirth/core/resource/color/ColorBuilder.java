@@ -43,7 +43,7 @@ public final class ColorBuilder extends AbstractResourceBuilder<ColorEnum, Color
      */
     private Color buildWebColor(final WebColor wColor) {
         Color color = null;
-        if (wColor.opacity() == null) {
+        if (wColor.opacity() >= 1.0) {
             color = Color.web(wColor.hex());
         } else {
             color = Color.web(wColor.hex(), wColor.opacity());
@@ -60,7 +60,7 @@ public final class ColorBuilder extends AbstractResourceBuilder<ColorEnum, Color
      */
     private Color buildRGB01Color(final RGB01Color rColor) {
         Color color = null;
-        if (rColor.opacity() == null) {
+        if (rColor.opacity() >= 1.0) {
             color = Color.color(rColor.red(), rColor.green(), rColor.blue());
         } else {
             color = Color.color(rColor.red(), rColor.green(), rColor.blue(), rColor.opacity());
@@ -77,7 +77,7 @@ public final class ColorBuilder extends AbstractResourceBuilder<ColorEnum, Color
      */
     private Color buildRGB255Color(final RGB255Color rColor) {
         Color color = null;
-        if (rColor.opacity() == null) {
+        if (rColor.opacity() >= 1.0) {
             color = Color.rgb(rColor.red(), rColor.green(), rColor.blue());
         } else {
             color = Color.rgb(rColor.red(), rColor.green(), rColor.blue(), rColor.opacity());
@@ -94,7 +94,7 @@ public final class ColorBuilder extends AbstractResourceBuilder<ColorEnum, Color
      */
     private Color buildHSBColor(final HSBColor hsbColor) {
         Color color = null;
-        if (hsbColor.opacity() == null) {
+        if (hsbColor.opacity() >= 1.0) {
             color = Color.hsb(hsbColor.hue(), hsbColor.saturation(), hsbColor.brightness());
         } else {
             color = Color.hsb(hsbColor.hue(), hsbColor.saturation(), hsbColor.brightness(), hsbColor.opacity());
@@ -111,7 +111,7 @@ public final class ColorBuilder extends AbstractResourceBuilder<ColorEnum, Color
      */
     private Color buildGrayColor(final GrayColor gColor) {
         Color color = null;
-        if (gColor.opacity() == null) {
+        if (gColor.opacity() >= 1.0) {
             color = Color.gray(gColor.gray());
         } else {
             color = Color.gray(gColor.gray(), gColor.opacity());
