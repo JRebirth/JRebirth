@@ -4,7 +4,6 @@ package org.jrebirth.core.resource.color;
  * The interface <strong>GrayColor</strong>.
  * 
  * @author Sébastien Bordes
- * 
  */
 public class GrayColor extends AbstractBaseColor {
 
@@ -14,7 +13,7 @@ public class GrayColor extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param gray
+     * @param gray the gray component
      */
     public GrayColor(final int gray) {
         super();
@@ -24,8 +23,8 @@ public class GrayColor extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param gray
-     * @param opacity
+     * @param gray the gray component
+     * @param opacity the color opacity
      */
     public GrayColor(final int gray, final double opacity) {
         super(opacity);

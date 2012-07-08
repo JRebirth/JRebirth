@@ -13,8 +13,8 @@ public class RealFont extends AbstractBaseFont {
     /**
      * Default Constructor.
      * 
-     * @param name
-     * @param size
+     * @param name the font name
+     * @param size the default font size
      */
     public RealFont(final FontName name, final double size) {
         super(name);

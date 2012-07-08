@@ -8,6 +8,7 @@ package org.jrebirth.core.link;
  * 
  * @author Sébastien Bordes
  * 
+ * @param <T> the type of the data object used
  */
 public final class WaveData<T> implements Comparable<WaveData<?>> {
 

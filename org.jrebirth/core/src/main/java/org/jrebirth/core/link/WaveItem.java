@@ -6,15 +6,13 @@ package org.jrebirth.core.link;
  * Wave item is used to identify an object into a wave.
  * 
  * @author Sébastien Bordes
- * 
  */
 public interface WaveItem {
 
     /**
+     * Return the type of the data class managed.
      * 
-     * TODO To complete.
-     * 
-     * @return
+     * @return the type of the data class managed
      */
     Class<?> dataClass();
 

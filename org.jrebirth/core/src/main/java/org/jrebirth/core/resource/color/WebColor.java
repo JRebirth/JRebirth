@@ -4,7 +4,6 @@ package org.jrebirth.core.resource.color;
  * The interface <strong>WebColor</strong>.
  * 
  * @author Sébastien Bordes
- * 
  */
 public class WebColor extends AbstractBaseColor {
 
@@ -14,7 +13,7 @@ public class WebColor extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param hex
+     * @param hex the hexadecimal value
      */
     public WebColor(final String hex) {
         super();
@@ -24,8 +23,8 @@ public class WebColor extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param hex
-     * @param opacity
+     * @param hex the hexadecimal value
+     * @param opacity the color opacity
      */
     public WebColor(final String hex, final double opacity) {
         super(opacity);
