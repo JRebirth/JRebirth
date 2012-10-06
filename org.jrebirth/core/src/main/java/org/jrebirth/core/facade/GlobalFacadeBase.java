@@ -1,13 +1,29 @@
+/**
+ * Copyright JRebirth.org © 2011-2012 
+ * Contact : sebastien.bordes@jrebirth.org
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.jrebirth.core.facade;
 
 import org.jrebirth.core.application.JRebirthApplication;
-import org.jrebirth.core.event.EventImpl;
+import org.jrebirth.core.event.EventBase;
 import org.jrebirth.core.event.EventTracker;
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.link.Notifier;
-import org.jrebirth.core.link.NotifierImpl;
+import org.jrebirth.core.link.NotifierBase;
 
 /**
  * 
@@ -19,11 +35,8 @@ import org.jrebirth.core.link.NotifierImpl;
  * 
  * 
  * @author Sébastien Bordes
- * 
- * @version $Revision: 171 $ $Author: sbordes $
- * @since $Date: 2011-11-09 13:17:31 +0100 (mer., 09 nov. 2011) $
  */
-public class GlobalFacadeImpl implements GlobalFacade {
+public class GlobalFacadeBase implements GlobalFacade {
 
     /** The application. */
     private final transient JRebirthApplication application;
@@ -51,7 +64,7 @@ public class GlobalFacadeImpl implements GlobalFacade {
      * 
      * @param application the current application launched
      */
-    public GlobalFacadeImpl(final JRebirthApplication application) {
+    public GlobalFacadeBase(final JRebirthApplication application) {
         super();
 
         // Launch the default executor
@@ -71,10 +84,10 @@ public class GlobalFacadeImpl implements GlobalFacade {
         trackEvent(org.jrebirth.core.event.EventType.CREATE_GLOBAL_FACADE, getApplication().getClass(), this.getClass());
 
         // Build singletons
-        this.notifier = new NotifierImpl(this);
-        this.uiFacade = new UiFacade(this);
-        this.serviceFacade = new ServiceFacade(this);
-        this.commandFacade = new CommandFacade(this);
+        this.notifier = buildNotifier();
+        this.uiFacade = buildUiFacade();
+        this.serviceFacade = buildServiceFacade();
+        this.commandFacade = buildCommandFacade();
 
     }
 
@@ -84,7 +97,7 @@ public class GlobalFacadeImpl implements GlobalFacade {
     @Override
     public final void trackEvent(final EventType eventType, final Class<?> source, final Class<?> target, final String... eventData) {
         if (getEventTracker() != null) {
-            getEventTracker().track(new EventImpl(eventType, source, target, eventData));
+            getEventTracker().track(new EventBase(eventType, source, target, eventData));
         }
 
     }
@@ -169,6 +182,42 @@ public class GlobalFacadeImpl implements GlobalFacade {
      */
     protected void customStop() {
         // Must be overridden
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @return
+     */
+    protected CommandFacade buildCommandFacade() {
+        return new CommandFacade(this);
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @return
+     */
+    protected ServiceFacade buildServiceFacade() {
+        return new ServiceFacade(this);
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @return
+     */
+    protected UiFacade buildUiFacade() {
+        return new UiFacade(this);
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @return
+     */
+    protected NotifierBase buildNotifier() {
+        return new NotifierBase(this);
     }
 
 }

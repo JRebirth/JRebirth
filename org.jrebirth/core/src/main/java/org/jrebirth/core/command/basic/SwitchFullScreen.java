@@ -3,7 +3,7 @@ package org.jrebirth.core.command.basic;
 import javafx.stage.Stage;
 
 import org.jrebirth.core.command.DefaultUICommand;
-import org.jrebirth.core.link.Wave;
+import org.jrebirth.core.wave.Wave;
 
 /**
  * The class <strong>SwitchFullScreen</strong>.

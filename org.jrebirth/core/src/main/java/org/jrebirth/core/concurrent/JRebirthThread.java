@@ -1,26 +1,38 @@
-package org.jrebirth.core.concurent;
+/**
+ * Copyright JRebirth.org © 2011-2012 
+ * Contact : sebastien.bordes@jrebirth.org
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.jrebirth.core.concurrent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 import org.jrebirth.core.application.JRebirthApplication;
+import org.jrebirth.core.command.basic.ShowModelWaveBuilder;
 import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.facade.GlobalFacade;
-import org.jrebirth.core.facade.GlobalFacadeImpl;
-import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.facade.GlobalFacadeBase;
 
 /**
  * The class <strong>JRebirthThread</strong>.
  * 
  * @author Sébastien Bordes
- * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
 public final class JRebirthThread extends Thread {
 
@@ -37,14 +49,21 @@ public final class JRebirthThread extends Thread {
     private transient JRebirthApplication application;
 
     /** The list of tasks to execute, all access MUST BE synchronized. */
-    private final List<Runnable> tasks;
+    // private final List<Runnable> tasks;
 
+    /** The list of tasks queued waiting to be processed, all access MUST BE synchronized. */
+    private final List<Runnable> queuedTasks;
+
+    /** The list of tasks being processed, all access MUST BE synchronized. */
+    private final List<Runnable> processingTasks;
+
+    /** Flag to stop the infinite loop that process JRebirth Events. */
     private boolean infiniteLoop = true;
 
-    private final boolean readyToShutdown = false;
-
     /**
-     * Build the JRebirth Thread.
+     * private final boolean readyToShutdown = false;
+     * 
+     * /** Build the JRebirth Thread.
      */
     private JRebirthThread() {
         super(NAME);
@@ -54,7 +73,8 @@ public final class JRebirthThread extends Thread {
         setDaemon(true);
 
         // Initialize the queue
-        this.tasks = new ArrayList<>();
+        this.queuedTasks = new ArrayList<>();
+        this.processingTasks = new ArrayList<>();
     }
 
     /**
@@ -65,7 +85,7 @@ public final class JRebirthThread extends Thread {
     public void runAsap(final Runnable runnable) {
         // Synchronize the queue !
         synchronized (this) {
-            this.tasks.add(runnable);
+            this.queuedTasks.add(runnable);
         }
     }
 
@@ -79,7 +99,7 @@ public final class JRebirthThread extends Thread {
         // LInk the current application
         this.application = application;
         // Build the global facade at startup
-        this.facade = new GlobalFacadeImpl(application);
+        this.facade = new GlobalFacadeBase(application);
 
         // Start the thread (infinite loop)
         start();
@@ -88,7 +108,6 @@ public final class JRebirthThread extends Thread {
     /**
      * {@inheritDoc}
      */
-    @Override
     public void run() {
 
         try {
@@ -103,14 +122,23 @@ public final class JRebirthThread extends Thread {
                 // Need to sort tasks to launch by priority
                 // Collections.sort(tasks);
 
+                // Synchronize the re-copy operation
+                synchronized (this.queuedTasks) {
+                    // Copy enqueued tasks into processing list to run them
+                    this.processingTasks.addAll(this.queuedTasks);
+                    // Purge the current queue
+                    this.queuedTasks.clear();
+                }
+
                 // Synchronize the queue !
-                synchronized (this) {
-                    // Run all queued tasks
-                    for (final Runnable r : this.tasks) {
+                synchronized (this.processingTasks) {
+
+                    // Run all tasks that are waiting to be processed
+                    for (final Runnable r : this.processingTasks) {
                         r.run();
                     }
                     // Remove all task processed
-                    this.tasks.clear();
+                    this.processingTasks.clear();
                 }
 
                 // Pause this thread during 20ms to let other thread adding some
@@ -130,7 +158,6 @@ public final class JRebirthThread extends Thread {
     /**
      * {@inheritDoc}
      */
-    @Override
     public void interrupt() {
         super.interrupt();
 
@@ -167,23 +194,19 @@ public final class JRebirthThread extends Thread {
      */
     protected void launchFirstView() throws CoreException {
 
-        final Class<? extends Model> first = this.application.getFirstModelClass();
+        try {
 
-        if (first == null) {
-            throw new CoreException("No First Model Class defined.");
+            getFacade().getNotifier().sendWave(
+                    ShowModelWaveBuilder.create()
+                            .parentNode((Pane) JRebirthThread.this.application.getScene().getRoot())
+                            .modelClass(this.application.getFirstModelClass())
+                            .build()
+                    );
+
+        } catch (final JRebirthThreadException e) {
+            // Impossible case, unless someone override JRebirthThread class
+            throw new CoreException("launchFirstView method was called outside JIT.");
         }
-        // Build the first root node
-        final Node firstNode = getFacade().getUiFacade().retrieve(first).getView().getRootNode();
-
-        // Add the scene's root node into the JavaFX Application Thread
-        JRebirth.runIntoJAT(new JRebirthRunnable() {
-
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                ((Pane) JRebirthThread.this.application.getScene().getRoot()).getChildren().add(firstNode);
-                firstNode.requestFocus();
-            }
-        });
     }
 
     /**

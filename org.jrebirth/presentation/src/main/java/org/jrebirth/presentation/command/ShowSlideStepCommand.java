@@ -1,7 +1,7 @@
 package org.jrebirth.presentation.command;
 
 import org.jrebirth.core.command.DefaultUICommand;
-import org.jrebirth.core.link.Wave;
+import org.jrebirth.core.wave.Wave;
 import org.jrebirth.presentation.ui.base.ShowSlideWaveItem;
 import org.jrebirth.presentation.ui.base.SlideModel;
 import org.jrebirth.presentation.ui.base.SlideStep;

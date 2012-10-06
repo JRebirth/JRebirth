@@ -9,9 +9,9 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.ParallelTransitionBuilder;
 import javafx.event.ActionEvent;
 
-import org.jrebirth.core.link.Wave;
 import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.wave.Wave;
 import org.jrebirth.presentation.model.Slide;
 import org.jrebirth.presentation.service.PresentationService;
 import org.jrebirth.presentation.ui.base.SlideModel;

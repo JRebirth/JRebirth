@@ -66,9 +66,6 @@ public final class StackController extends AbstractController<StackModel, StackV
      * The class <strong>SlideKeyAdapter</strong>.
      * 
      * @author Sébastien Bordes
-     * 
-     * @version $Revision$ $Author$
-     * @since $Date$
      */
     private class SlideKeyAdapter extends DefaultKeyAdapter<StackController> {
 
@@ -94,9 +91,6 @@ public final class StackController extends AbstractController<StackModel, StackV
      * The class <strong>SlideMouseAdapter</strong>.
      * 
      * @author Sébastien Bordes
-     * 
-     * @version $Revision$ $Author$
-     * @since $Date$
      */
     private class SlideMouseAdapter extends DefaultMouseAdapter<StackController> {
 

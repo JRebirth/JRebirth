@@ -1,15 +1,11 @@
-
 /**
  * The class <strong>CheckModelCreation</strong>. TODO To complete
  * 
  * @author Sébastien Bordes
- * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
 public class CheckModelCreation {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         /*
          * GlobalFacade facade = new GlobalFacadeImpl();

@@ -1,35 +1,18 @@
 /**
-Copyright JRebirth.org © 2011 
-sebastien.bordes@jrebirth.org
-
-This software is a computer program whose purpose is to [describe
-functionalities and technical features of your software].
-
-This software is governed by the CeCILL-C license under French law and
-abiding by the rules of distribution of free software.  You can  use, 
-modify and/ or redistribute the software under the terms of the CeCILL-C
-license as circulated by CEA, CNRS and INRIA at the following URL
-"http://www.cecill.info". 
-
-As a counterpart to the access to the source code and  rights to copy,
-modify and redistribute granted by the license, users are provided only
-with a limited warranty  and the software's author,  the holder of the
-economic rights,  and the successive licensors  have only  limited
-liability. 
-
-In this respect, the user's attention is drawn to the risks associated
-with loading,  using,  modifying and/or developing or reproducing the
-software by the user in light of its specific status of free software,
-that may mean  that it is complicated to manipulate,  and  that  also
-therefore means  that it is reserved for developers  and  experienced
-professionals having in-depth computer knowledge. Users are therefore
-encouraged to load and test the software's suitability as regards their
-requirements in conditions enabling the security of their systems and/or 
-data to be ensured and,  more generally, to use and operate it in the 
-same conditions as regards security. 
-
-The fact that you are presently reading this means that you have had
-knowledge of the CeCILL-C license and that you accept its terms.
+ * Copyright JRebirth.org © 2011-2012 
+ * Contact : sebastien.bordes@jrebirth.org
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.jrebirth.core.application;
 
@@ -42,21 +25,25 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import org.jrebirth.core.concurent.JRebirthThread;
+import org.jrebirth.core.concurrent.AbstractJrbRunnable;
+import org.jrebirth.core.concurrent.JRebirth;
+import org.jrebirth.core.concurrent.JRebirthThread;
 import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.exception.JRebirthThreadException;
+import org.jrebirth.core.exception.handler.DefaultUncaughtExceptionHandler;
+import org.jrebirth.core.exception.handler.JatUncaughtExceptionHandler;
+import org.jrebirth.core.exception.handler.JitUncaughtExceptionHandler;
+import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.util.ClassUtility;
 
 /**
  * 
- * The class <strong>AbstractApplication</strong>.
+ * The abstract class <strong>AbstractApplication</strong>.
  * 
  * The class to extend if you want to build an application using JRebirth CSM MVC (Command-Service-Message-Model-View Controller).
  * 
  * @author Sébastien Bordes
- * 
- * @version $Revision: 333 $ $Author: sbordes $
- * @since $Date: 2012-02-07 23:18:59 +0100 (mar., 07 févr. 2012) $
  * 
  * @param <P> The root node of the stage, must extends Pane
  */
@@ -101,12 +88,16 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             // Attach the primary stage for later customization
             this.stage = primaryStage;
             // Customize the primary stage
-            initializeStage(this.stage);
+            initializeStage();
 
-            this.scene = buildScene(primaryStage);
+            this.scene = buildScene();
             // Customize the default scene previously created
-            initializeScene(this.scene);
+            initializeScene();
 
+            // Attach exception handler (JRebirth thread will be created)
+            initializeExceptionHandler();
+
+            // Start the JRebirthThread
             JRebirthThread.getThread().launch(this);
 
             // Attach the scene
@@ -132,7 +123,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             JRebirthThread.getThread().close();
 
         } catch (final Exception e) {
-            // getFacade().getLogger().error("Error while stoping application : "
+            // getFacade().getLogger().error("Error while stopping application : "
             // + e.getMessage());
             throw new CoreException(e);
         }
@@ -140,14 +131,12 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
     /**
      * Customize the primary Stage.
-     * 
-     * @param stage the primary stage to customize
      */
-    private void initializeStage(final Stage stage) {
+    private void initializeStage() {
 
-        stage.setTitle(getApplicationTitle());
+        this.stage.setTitle(getApplicationTitle());
 
-        customizeStage(stage);
+        customizeStage(this.stage);
     }
 
     /**
@@ -162,19 +151,19 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * 
      * @param scene the default scene to initialize
      */
-    private void initializeScene(final Scene scene) {
+    private void initializeScene() {
 
         final Stage currentStage = this.stage;
 
         // Manage F11 button to switch full screen
-        scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+        this.scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 
             @Override
             public void handle(final KeyEvent event) {
-                if (event.getCode() == KeyCode.F11) {
+                if (event.getCode() == getFullScreenKeyCode()) {
                     currentStage.setFullScreen(!currentStage.isFullScreen());
                     event.consume();
-                } else if (event.getCode() == KeyCode.F10) {
+                } else if (event.getCode() == getIconifiedKeyCode()) {
                     currentStage.setIconified(!currentStage.isIconified());
                     event.consume();
                 }
@@ -182,7 +171,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             }
         });
         // The call customize method to allow extension by sub class
-        customizeScene(scene);
+        customizeScene(this.scene);
     }
 
     /**
@@ -204,13 +193,11 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * 
      * 800x600 with transparent background and a Region as Parent Node
      * 
-     * @param primaryStage the primary javafx stage
-     * 
      * @return the scene built
      * 
      * @throws CoreException if build fails
      */
-    protected final Scene buildScene(final Stage primaryStage) throws CoreException {
+    protected final Scene buildScene() throws CoreException {
         return SceneBuilder.create()
                 .root(buildRootPane())
                 .width(JRebirthApplication.DEFAULT_SCENE_WIDTH)
@@ -235,6 +222,34 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      */
     public final void setLoggerEnabled(final boolean loggerEnabled) {
         this.loggerEnabled = loggerEnabled;
+    }
+
+    /**
+     * Initialize all Uncaught Exception Handler.
+     */
+    protected void initializeExceptionHandler() {
+
+        final GlobalFacade gf = JRebirthThread.getThread().getFacade();
+
+        // Initialize the default uncaught exception handler for all other threads
+        Thread.setDefaultUncaughtExceptionHandler(getDefaultUncaughtExceptionHandler(gf));
+
+        // Initialize the uncaught exception handler for JavaFX Application Thread
+        JRebirth.runIntoJAT(new AbstractJrbRunnable() {
+            @Override
+            public void runInto() throws JRebirthThreadException {
+                Thread.currentThread().setUncaughtExceptionHandler(getJatUncaughtExceptionHandler(gf));
+            }
+        });
+
+        // Initialize the uncaught exception handler for JRebirth Internal Thread
+        JRebirth.runIntoJIT(new AbstractJrbRunnable() {
+            @Override
+            public void runInto() throws JRebirthThreadException {
+                Thread.currentThread().setUncaughtExceptionHandler(getJitUncaughtExceptionHandler(gf));
+            }
+        });
+
     }
 
     /**
@@ -274,5 +289,50 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     @Override
     public final Scene getScene() {
         return this.scene;
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @return
+     */
+    protected KeyCode getFullScreenKeyCode() {
+        return KeyCode.F11;
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @return
+     */
+    protected KeyCode getIconifiedKeyCode() {
+        return KeyCode.F10;
+    }
+
+    /**
+     * TODO To complete.
+     * @param gf
+     * @return
+     */
+    protected DefaultUncaughtExceptionHandler getDefaultUncaughtExceptionHandler(final GlobalFacade gf) {
+        return new DefaultUncaughtExceptionHandler(gf);
+    }
+
+    /**
+     * TODO To complete.
+     * @param gf
+     * @return
+     */
+    protected JatUncaughtExceptionHandler getJatUncaughtExceptionHandler(final GlobalFacade gf) {
+        return new JatUncaughtExceptionHandler(gf);
+    }
+
+    /**
+     * TODO To complete.
+     * @param gf
+     * @return
+     */
+    protected JitUncaughtExceptionHandler getJitUncaughtExceptionHandler(final GlobalFacade gf) {
+        return new JitUncaughtExceptionHandler(gf);
     }
 }
