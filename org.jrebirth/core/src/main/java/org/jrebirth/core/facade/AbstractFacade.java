@@ -29,7 +29,6 @@ import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Model;
 
 /**
- * 
  * The class <strong>AbstractFacade</strong>.
  * 
  * An abstract facade can manage singleton of object which implements the FacadeReady interface
@@ -109,8 +108,9 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                     register(build(clazz, keyPart), keyPart);
                 } catch (final CoreException ce) {
                     getGlobalFacade().getLogger().error(ce.getMessage());
-                    getGlobalFacade().getLogger().error("Error while building " + clazz.getCanonicalName() + " instance");
-                    throw new CoreRuntimeException("Error while building " + clazz.getCanonicalName() + " instance", ce);
+                    final String msg = "Error while building " + clazz.getCanonicalName() + " instance";
+                    getGlobalFacade().getLogger().error(msg);
+                    throw new CoreRuntimeException(msg, ce);
                 }
             }
 
@@ -145,7 +145,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
          */
         synchronized (this.singletonMap) {
             // Check from singleton map it he key exists and if the weak reference is not null
-            res = this.singletonMap.containsKey(buildKey(clazz, keyPart));// && this.singletonMap.get(clazz) != null;
+            res = this.singletonMap.containsKey(buildKey(clazz, keyPart)); // && this.singletonMap.get(clazz) != null;
         }
 
         // }
@@ -153,21 +153,22 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     }
 
     /**
-     * TODO To complete.
+     * Build a key object to register this object.
      * 
-     * @param clazz
-     * @param key
-     * @return
+     * @param clazz the class of the object to build its key
+     * @param keyPart the unique key (could be composed of many keyPart) or null for singleton
+     * 
+     * @return the key built
      */
     private Object buildKey(final Class<? extends R> clazz, final Object... keyPart) {
-        return KeyFactory.buildKey(clazz, keyPart);
+        return KeyBuilder.buildKey(clazz, keyPart);
     }
 
     /**
      * Build a new instance of the ready object class.
      * 
      * @param clazz the class to build
-     * @param key the unique key or null
+     * @param keyPart the unique key (could be composed of many keyPart) or null for singleton
      * 
      * @return a new instance of the given clazz and key
      * 
@@ -194,7 +195,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             readyObject.setLocalFacade(this);
 
             // Create the unique key
-            readyObject.setKey(KeyFactory.buildKey(readyObject.getClass(), keyPart));
+            readyObject.setKey(KeyBuilder.buildKey(readyObject.getClass(), keyPart));
 
             // TODO IMPROVE IT
             if (readyObject instanceof AbstractModel && keyPart.length > 0) {
@@ -209,7 +210,14 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             return readyObject;
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
+<<<<<<< HEAD
             throw new CoreException("Impossible to create the class " + clazz.getName(), e);
+=======
+            final String msg = "Impossible to create the class " + clazz.getName();
+            getGlobalFacade().getLogger().error(msg);
+            getGlobalFacade().getLogger().logException(e);
+            throw new CoreException(msg, e);
+>>>>>>> refs/remotes/origin/master
         }
     }
 

@@ -20,7 +20,6 @@ package org.jrebirth.core.resource.color;
  * The interface <strong>HSBColor</strong>.
  * 
  * @author Sébastien Bordes
- * 
  */
 public class HSBColor extends AbstractBaseColor {
 
@@ -36,9 +35,9 @@ public class HSBColor extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param hue
-     * @param saturation
-     * @param brightness
+     * @param hue the color hue
+     * @param saturation the color saturation
+     * @param brightness the color brightness
      */
     public HSBColor(final double hue, final double saturation, final double brightness) {
         super();
@@ -50,10 +49,10 @@ public class HSBColor extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param hue
-     * @param saturation
-     * @param brightness
-     * @param opacity
+     * @param hue the color hue
+     * @param saturation the color saturation
+     * @param brightness the color brightness
+     * @param opacity the color opacity
      */
     public HSBColor(final double hue, final double saturation, final double brightness, final double opacity) {
         super(opacity);

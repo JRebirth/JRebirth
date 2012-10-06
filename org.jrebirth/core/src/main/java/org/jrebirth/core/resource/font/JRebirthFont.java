@@ -25,7 +25,7 @@ import org.jrebirth.core.resource.Resource;
  * 
  * @author Sébastien Bordes
  */
-public interface JRebirthFont extends Resource<Font, FontFactory> {
+public interface JRebirthFont extends Resource<Font, FontBuilder> {
 
     /**
      * Return the name of the font.

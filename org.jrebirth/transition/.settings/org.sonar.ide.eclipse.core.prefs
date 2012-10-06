@@ -1,6 +1,6 @@
 analyseLocally=false
 eclipse.preferences.version=1
-projectArtifactId=core
+projectArtifactId=transition
 projectBranch=
 projectGroupId=org.jrebirth
 serverUrl=http\://quality.jrebirth.org

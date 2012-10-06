@@ -41,10 +41,11 @@ public class FamilyFont extends AbstractBaseFont {
     /**
      * Default Constructor.
      * 
-     * @param family
-     * @param size
-     * @param weight
-     * @param posture
+     * @param name the font name
+     * @param family the font family
+     * @param size the font size
+     * @param weight the font weight
+     * @param posture the font posture
      */
     public FamilyFont(final FontName name, final String family, final double size, final FontWeight weight, final FontPosture posture) {
         super(name);
@@ -60,7 +61,7 @@ public class FamilyFont extends AbstractBaseFont {
      * @return the font size
      */
     public double size() {
-        return size();
+        return this.size;
     }
 
     /**

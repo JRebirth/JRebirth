@@ -234,6 +234,18 @@
 				<javafx.home>C:/Program Files/Oracle/JavaFX 2.1 SDK</javafx.home>
 			</properties>
 		</profile>
+		
+		<profile>
+			<id>linux</id>
+			<activation>
+				<file>
+					<exists>/usr/lib/jvm/javafx-sdk</exists>
+				</file>
+			</activation>
+			<properties>
+				<javafx.home>/usr/lib/jvm/javafx-sdk</javafx.home>
+			</properties>
+		</profile>
 
 	</profiles> -->
 
