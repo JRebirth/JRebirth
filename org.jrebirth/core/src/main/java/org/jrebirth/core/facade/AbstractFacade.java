@@ -210,14 +210,10 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             return readyObject;
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
-<<<<<<< HEAD
-            throw new CoreException("Impossible to create the class " + clazz.getName(), e);
-=======
             final String msg = "Impossible to create the class " + clazz.getName();
             getGlobalFacade().getLogger().error(msg);
             getGlobalFacade().getLogger().logException(e);
             throw new CoreException(msg, e);
->>>>>>> refs/remotes/origin/master
         }
     }
 
