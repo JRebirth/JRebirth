@@ -35,7 +35,7 @@ public class RandomFadingService extends ServiceImpl {
      * @return Returns the timeline.
      */
     public Timeline getTimeline() {
-        return timeline;
+        return this.timeline;
     }
 
     /**
@@ -51,38 +51,38 @@ public class RandomFadingService extends ServiceImpl {
      * 
      * @param slices
      */
-    public void setNodes(List<? extends Node> nodesToAdd) {
-        for (Node n : nodesToAdd) {
-            nodes.add(n);
+    public void setNodes(final List<? extends Node> nodesToAdd) {
+        for (final Node n : nodesToAdd) {
+            this.nodes.add(n);
         }
     }
 
     public void doIt() {
 
-        Collections.shuffle(nodes);
+        Collections.shuffle(this.nodes);
 
-        List<DoubleProperty> opacities = new ArrayList<>();
+        final List<DoubleProperty> opacities = new ArrayList<>();
 
         // DoubleProperty dp;
         int idx = 0;
 
-        int nodesCount = nodes.size();
-        int groupCount = nodesCount / 2;
+        final int nodesCount = this.nodes.size();
+        final int groupCount = nodesCount / 2;
 
         for (int i = 0; i < groupCount; i++)
         {
             // dp = new SimpleDoubleProperty(1.0);
-            for (int j = idx; j < 20 && j < nodes.size(); j++) {
+            for (int j = idx; j < 20 && j < this.nodes.size(); j++) {
                 // nodes.get(j).opacityProperty().bind(dp);
                 // nodes.get(j).scaleXProperty().bind(dp);
-                opacities.add(/* dp */nodes.get(j).opacityProperty());
+                opacities.add(/* dp */this.nodes.get(j).opacityProperty());
                 idx++;
 
             }
             // opacities.add(/* dp */nodes.get(j).opacityProperty());
         }
 
-        List<KeyFrame> keyFrames = new ArrayList<>();
+        final List<KeyFrame> keyFrames = new ArrayList<>();
 
         List<KeyValue> keyValues;
 
@@ -93,7 +93,7 @@ public class RandomFadingService extends ServiceImpl {
             keyFrames.add(new KeyFrame(Duration.millis(d), new EventHandler<ActionEvent>() {
 
                 @Override
-                public void handle(ActionEvent arg0) {
+                public void handle(final ActionEvent arg0) {
                     System.out.println(arg0.toString());
 
                 }
@@ -103,7 +103,7 @@ public class RandomFadingService extends ServiceImpl {
             // }
         }
 
-        timeline = TimelineBuilder.create()
+        this.timeline = TimelineBuilder.create()
                 .keyFrames(keyFrames)
                 .build();
 

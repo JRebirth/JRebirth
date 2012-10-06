@@ -25,6 +25,6 @@ import org.jrebirth.core.resource.Resource;
  * 
  * @author Sébastien Bordes
  */
-public interface FontEnum extends Resource<Font, FontFactory> {
+public interface FontEnum extends Resource<Font, FontBuilder> {
 
 }

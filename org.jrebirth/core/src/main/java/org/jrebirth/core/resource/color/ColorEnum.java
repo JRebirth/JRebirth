@@ -25,6 +25,6 @@ import org.jrebirth.core.resource.Resource;
  * 
  * @author Sébastien Bordes
  */
-public interface ColorEnum extends Resource<Color, ColorFactory> {
+public interface ColorEnum extends Resource<Color, ColorBuilder> {
 
 }

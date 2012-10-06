@@ -38,67 +38,67 @@ public class ImageSlicerService extends ServiceImpl {
      * @return Returns the slices.
      */
     public List<ImageView> getSlices() {
-        return slices;
+        return this.slices;
     }
 
-    public void setColumn(Integer column) {
-        columnProperty.set(column);
+    public void setColumn(final Integer column) {
+        this.columnProperty.set(column);
     }
 
     public Integer getColumn() {
-        return columnProperty.get();
+        return this.columnProperty.get();
     }
 
     public IntegerProperty columnProperty() {
-        return columnProperty;
+        return this.columnProperty;
     }
 
-    public void setRow(Integer row) {
-        rowProperty.set(row);
+    public void setRow(final Integer row) {
+        this.rowProperty.set(row);
     }
 
     public Integer getRow() {
-        return rowProperty.get();
+        return this.rowProperty.get();
     }
 
     public IntegerProperty rowProperty() {
-        return rowProperty;
+        return this.rowProperty;
     }
 
-    public void setTileWidth(Integer tileWidth) {
-        tileWidthProperty.set(tileWidth);
+    public void setTileWidth(final Integer tileWidth) {
+        this.tileWidthProperty.set(tileWidth);
     }
 
     public Integer getTileWidth() {
-        return tileWidthProperty.get();
+        return this.tileWidthProperty.get();
     }
 
     public IntegerProperty tileWidthProperty() {
-        return tileWidthProperty;
+        return this.tileWidthProperty;
     }
 
-    public void setTileHeight(Integer tileHeight) {
-        tileHeightProperty.set(tileHeight);
+    public void setTileHeight(final Integer tileHeight) {
+        this.tileHeightProperty.set(tileHeight);
     }
 
     public Integer getTileHeight() {
-        return tileHeightProperty.get();
+        return this.tileHeightProperty.get();
     }
 
     public IntegerProperty tileHeightProperty() {
-        return tileHeightProperty;
+        return this.tileHeightProperty;
     }
 
-    public void setImage(Image image) {
-        imageProperty.set(image);
+    public void setImage(final Image image) {
+        this.imageProperty.set(image);
     }
 
     public Image getImage() {
-        return imageProperty.get();
+        return this.imageProperty.get();
     }
 
     public ObjectProperty<Image> imageProperty() {
-        return imageProperty;
+        return this.imageProperty;
     }
 
     /**
@@ -137,7 +137,7 @@ public class ImageSlicerService extends ServiceImpl {
                         .layoutY(y)
                         .build();
 
-                slices.add(iv);
+                this.slices.add(iv);
                 // sp.getChildren().add(iv);
                 //
                 // fades.add(SequentialTransitionBuilder
