@@ -1,6 +1,6 @@
 package org.jrebirth.presentation.ui.base;
 
-import org.jrebirth.core.link.WaveItem;
+import org.jrebirth.core.wave.WaveItem;
 
 /**
  * The class <strong>ShowSlideWaveItem</strong>.
@@ -16,13 +16,13 @@ public enum ShowSlideWaveItem implements WaveItem {
     /** The Slide step type to show. */
     SLIDE_STEP_TYPE;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Class<?> dataClass() {
-        // Nothing to do yet
-        return null;
-    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public Class<?> dataClass() {
+    // // Nothing to do yet
+    // return null;
+    // }
 
 }

@@ -59,10 +59,10 @@
 
 	<licenses>
 		<license>
-			<name>CeCILL-C</name>
-			<url>http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.html</url>
+			<name>Apache License</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
 			<distribution>repo</distribution>
-			<comments>CeCILL-C Free Software Licence</comments>
+			<comments>Version 2.0, January 2004</comments>
 		</license>
 	</licenses>
 
@@ -158,7 +158,7 @@
 	</distributionManagement>
 
 
-	<dependencyManagement>
+<!-- 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>com.oracle.javafx</groupId>
@@ -176,7 +176,7 @@
 			<systemPath>${javafx.home}/rt/lib/jfxrt.jar</systemPath>
 			<scope>system</scope>
 		</dependency>
-	</dependencies>
+	</dependencies> -->
 
 	<developers>
 		<developer>
@@ -210,7 +210,7 @@
 		</pluginRepository> <pluginRepository> <snapshots /> <id>snapshots</id> <name>plugins-snapshot</name> <url>http://repo.jrebirth.org/plugins-snapshot</url> </pluginRepository> 
 		</pluginRepositories> -->
 
-	<profiles>
+<!-- 	<profiles>
 
 		<profile>
 			<id>win32</id>
@@ -235,6 +235,6 @@
 			</properties>
 		</profile>
 
-	</profiles>
+	</profiles> -->
 
 </project>

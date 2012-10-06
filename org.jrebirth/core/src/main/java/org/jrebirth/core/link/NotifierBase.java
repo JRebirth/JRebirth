@@ -1,3 +1,19 @@
+/**
+ * Copyright JRebirth.org © 2011-2012 
+ * Contact : sebastien.bordes@jrebirth.org
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.jrebirth.core.link;
 
 import java.util.ArrayList;
@@ -10,9 +26,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
 import org.jrebirth.core.command.Command;
-import org.jrebirth.core.concurent.JRebirth;
-import org.jrebirth.core.concurent.JRebirthRunnable;
-import org.jrebirth.core.concurent.JRebirthThread;
+import org.jrebirth.core.concurrent.AbstractJrbRunnable;
+import org.jrebirth.core.concurrent.JRebirth;
+import org.jrebirth.core.concurrent.JRebirthThread;
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.JRebirthThreadException;
@@ -22,6 +38,9 @@ import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.wave.JRebirthWaveItem;
+import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveType;
 
 /**
  * 
@@ -30,11 +49,8 @@ import org.jrebirth.core.ui.Model;
  * An implementation that allow to send and to rpocess wave message.
  * 
  * @author Sébastien Bordes
- * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
-public class NotifierImpl extends AbstractGlobalReady implements Notifier {
+public class NotifierBase extends AbstractGlobalReady implements Notifier {
 
     /** The map that store link between wave type and objects interested. */
     private final Map<WaveType, List<WaveReady>> notifierMap = new HashMap<>();
@@ -44,7 +60,7 @@ public class NotifierImpl extends AbstractGlobalReady implements Notifier {
      * 
      * @param globalFacade the global facade of the application
      */
-    public NotifierImpl(final GlobalFacade globalFacade) {
+    public NotifierBase(final GlobalFacade globalFacade) {
         super(globalFacade);
         getGlobalFacade().trackEvent(EventType.CREATE_NOTIFIER, globalFacade.getClass(), this.getClass());
     }
@@ -242,7 +258,7 @@ public class NotifierImpl extends AbstractGlobalReady implements Notifier {
      * 
      * @author Sébastien Bordes
      */
-    private static class WaveRunnable extends JRebirthRunnable {
+    private static class WaveRunnable extends AbstractJrbRunnable {
 
         /** The linked component which will handle the wave. */
         private final WaveReady linked;

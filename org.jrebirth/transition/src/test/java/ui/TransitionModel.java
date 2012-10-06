@@ -1,7 +1,7 @@
 package ui;
 
-import org.jrebirth.core.link.Wave;
 import org.jrebirth.core.ui.AbstractModel;
+import org.jrebirth.core.wave.Wave;
 import org.jrebirth.transition.slicer.ImageSlicerService;
 import org.jrebirth.transition.slicer.SlidingDoorService;
 
@@ -19,14 +19,14 @@ public final class TransitionModel extends AbstractModel<TransitionModel, Transi
      * @return Returns the service2.
      */
     public SlidingDoorService getService2() {
-        return service2;
+        return this.service2;
     }
 
     /**
      * @return Returns the service.
      */
     public ImageSlicerService getService() {
-        return service;
+        return this.service;
     }
 
     private ImageSlicerService service;
@@ -46,18 +46,18 @@ public final class TransitionModel extends AbstractModel<TransitionModel, Transi
     protected void customInitializeInnerModels() {
         // Nothing to do yet
 
-        service = getService(ImageSlicerService.class, "Properties");
+        this.service = getService(ImageSlicerService.class, "Properties");
 
-        service.setImage(getView().loadImage("Properties.png"));
-        service.setTileHeight(600);
-        service.setTileWidth(10);
+        this.service.setImage(getView().loadImage("Properties.png"));
+        this.service.setTileHeight(600);
+        this.service.setTileWidth(10);
 
-        service.doIt();
+        this.service.doIt();
 
         // service2 = getService(RandomFadingService.class, "Properties");
-        service2 = getService(SlidingDoorService.class, "Properties");
-        service2.setNodes(service.getSlices());
-        service2.doIt();
+        this.service2 = getService(SlidingDoorService.class, "Properties");
+        this.service2.setNodes(this.service.getSlices());
+        this.service2.doIt();
 
     }
 

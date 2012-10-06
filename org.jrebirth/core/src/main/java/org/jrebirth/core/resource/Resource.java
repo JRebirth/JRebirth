@@ -5,9 +5,6 @@ package org.jrebirth.core.resource;
  * 
  * @author Sébastien Bordes
  * 
- * @version $Revision$ $Author$
- * @since $Date$
- * 
  * @param <R> The resource managed
  * @param <F> The factory to use
  */

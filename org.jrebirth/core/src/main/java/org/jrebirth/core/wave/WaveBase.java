@@ -1,4 +1,20 @@
-package org.jrebirth.core.link;
+/**
+ * Copyright JRebirth.org © 2011-2012 
+ * Contact : sebastien.bordes@jrebirth.org
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.jrebirth.core.wave;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,12 +30,9 @@ import java.util.UUID;
  * 
  * This Bean is used to move wave's data through layer. It allow to manage priorities.
  * 
- * @author Sébastien Bordes
- * @version $Revision$ $Date$ $Name$
- * 
- * @since org.jrebirth.core 1.0
+ * @param <B> The wave bean class used
  */
-public class WaveImpl implements Wave {
+public class WaveBase implements Wave {
 
     /** The Wave Unique Identifier. */
     private final String wuid;
@@ -47,13 +60,20 @@ public class WaveImpl implements Wave {
     /** A map used to contain all data. */
     private final Map<WaveItem, WaveData<?>> waveItemsMap = new HashMap<>();
 
-    /** A sortered list that contains all data. */
+    /** A sorted list that contains all data. */
     private final List<WaveData<?>> waveItemsList = new ArrayList<>();
+
+    /**
+     * The wave bean.
+     */
+    private WaveBean waveBean;
+
+    private Class<? extends WaveBean> waveBeanClass;
 
     /**
      * Default Constructor.
      */
-    public WaveImpl() {
+    public WaveBase() {
         super();
         // Generate a random but unique identifier
         this.wuid = UUID.randomUUID().toString();
@@ -153,11 +173,11 @@ public class WaveImpl implements Wave {
      * {@inheritDoc}
      */
     @Override
-    public void add(final WaveItem waveItem, final WaveData<?> waveData) {
+    public void add(final WaveData<?> waveData) {
         // Init the order of the wave Data
         waveData.setOrder(getWaveItems().size());
         // Store into the map to allow access by WaveItem
-        this.waveItemsMap.put(waveItem, waveData);
+        this.waveItemsMap.put(waveData.getKey(), waveData);
         // Ad into the list to enable sorting
         this.waveItemsList.add(waveData);
         // Sort the list
@@ -168,8 +188,21 @@ public class WaveImpl implements Wave {
      * {@inheritDoc}
      */
     @Override
+    public <V extends Object> void addItem(final WaveItem waveItem, final V value) {
+        final WaveData<V> waveData = new WaveData<V>(waveItem, value);
+        add(waveData);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public WaveData<?> get(final WaveItem waveItem) {
         return this.waveItemsMap.get(waveItem);
+    }
+
+    public <C extends Object> C getData(final WaveData<C> waveData) {
+        return ((Class<C>) waveData.getClass()).cast(waveData.getValue());
     }
 
     /**
@@ -194,6 +227,46 @@ public class WaveImpl implements Wave {
     @Override
     public long getTimestamp() {
         return this.timestamp;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public WaveBean getWaveBean() {
+        if (this.waveBean == null) {
+            if (!WaveBean.class.equals(this.waveBeanClass)) {
+                try {
+                    this.waveBean = this.waveBeanClass.newInstance();
+                } catch (InstantiationException | IllegalAccessException e) {
+                    // throw new CoreRuntimeException("Impossible to build Wave Bean instance", e);
+                } finally {
+                    if (this.waveBean == null) {
+                        this.waveBean = new DefaultWaveBean();
+                    }
+                }
+            } else {
+                // Build an empty wave bean to avoid null pointer exception
+                this.waveBean = new DefaultWaveBean();
+            }
+        }
+
+        return this.waveBean;
+    }
+
+    /**
+     * @return Returns the waveBeanClass.
+     */
+    public Class<? extends WaveBean> getWaveBeanClass() {
+        return this.waveBeanClass;
+    }
+
+    /**
+     * @param waveBeanClass The waveBeanClass to set.
+     */
+    public void setWaveBeanClass(final Class<? extends WaveBean> waveBeanClass) {
+        this.waveBeanClass = waveBeanClass;
     }
 
 }

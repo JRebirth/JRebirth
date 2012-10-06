@@ -1,3 +1,19 @@
+/**
+ * Copyright JRebirth.org © 2011-2012 
+ * Contact : sebastien.bordes@jrebirth.org
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.jrebirth.core.util;
 
 import java.lang.reflect.InvocationTargetException;
@@ -13,13 +29,10 @@ import org.jrebirth.core.exception.CoreException;
  * Some Useful class utilities to perform introspection.
  * 
  * @author Sébastien Bordes
- * 
- * @version $Revision$ $Author$
- * @since $Date$
  */
 public final class ClassUtility {
 
-    /** The separtor used for serialization. */
+    /** The separator used for serialization. */
     public static final String SEPARATOR = "|";
 
     /**
@@ -29,18 +42,29 @@ public final class ClassUtility {
         // Nothing to do
     }
 
+    // public static boolean isGenericType(final Class<?> mainClass, final int index, final Class<?> genericTypeClass) {
+    //
+    // // Retrieve the generic super class Parameterized type
+    // final ParameterizedType paramType = (ParameterizedType) mainClass.getGenericInterfaces();
+    //
+    // // Retrieve the right generic type we want to instantiate
+    // final Class<?> genericClass = (Class<?>) paramType.getActualTypeArguments()[index];
+    //
+    // return genericTypeClass.equals(genericClass);
+    // }
+
     /**
      * Build the nth generic type of a class.
      * 
      * @param mainClass The main class used (that contain at least one generic type)
-     * @param index the index of the generic type we want to instantiate
+     * @param superTypeIndex the index of the generic type we want to instantiate set to the parent extended
      * @param parameters used by the constructor of the generic type
      * 
      * @return a new instance of the generic type
      * 
      * @throws CoreException if the instantiation fails
      */
-    public static Object buildGenericType(final Class<?> mainClass, final int index, final Object... parameters) throws CoreException {
+    public static Object buildGenericType(final Class<?> mainClass, final int superTypeIndex, final Object... parameters) throws CoreException {
         try {
 
             // Copy parameters type to find the right constructor
@@ -54,7 +78,7 @@ public final class ClassUtility {
             final ParameterizedType paramType = (ParameterizedType) mainClass.getGenericSuperclass();
 
             // Retrieve the right generic type we want to instantiate
-            final Class<?> genericClass = (Class<?>) paramType.getActualTypeArguments()[index];
+            final Class<?> genericClass = (Class<?>) paramType.getActualTypeArguments()[superTypeIndex];
 
             // Find the right constructor and use arguments to create a new
             // instance
@@ -62,7 +86,7 @@ public final class ClassUtility {
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
                 | SecurityException e) {
-            throw new CoreException("Impossible to build the dedicated " + index + " th type of the class " + mainClass.getName(), e);
+            throw new CoreException("Impossible to build the dedicated " + superTypeIndex + " th type of the class " + mainClass.getName(), e);
         }
     }
 
