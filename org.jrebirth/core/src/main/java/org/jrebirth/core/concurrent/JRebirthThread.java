@@ -60,6 +60,9 @@ public final class JRebirthThread extends Thread {
     /** Flag to stop the infinite loop that process JRebirth Events. */
     private boolean infiniteLoop = true;
 
+    /** Flag that indicate that the closure must be forced. */
+    private boolean forceClose = false;
+
     /**
      * private final boolean readyToShutdown = false;
      * 
@@ -75,6 +78,15 @@ public final class JRebirthThread extends Thread {
         // Initialize the queue
         this.queuedTasks = new ArrayList<>();
         this.processingTasks = new ArrayList<>();
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param runnable
+     */
+    public void runNow(final Runnable runnable) {
+        getFacade().getExecutorService().submit(runnable);
     }
 
     /**
@@ -135,7 +147,9 @@ public final class JRebirthThread extends Thread {
 
                     // Run all tasks that are waiting to be processed
                     for (final Runnable r : this.processingTasks) {
-                        r.run();
+                        if (!this.forceClose) {
+                            r.run();
+                        }
                     }
                     // Remove all task processed
                     this.processingTasks.clear();
@@ -169,10 +183,21 @@ public final class JRebirthThread extends Thread {
      * 
      */
     public void close() {
-        this.infiniteLoop = false;
 
-        // Release all resources
-        shutdown();
+        // Infinite loop is till active
+        if (this.infiniteLoop) {
+            // First attempt to close the application
+            this.infiniteLoop = false;
+        } else {
+            // N-th attempt to close the application
+            this.forceClose = true;
+
+            // All Task Queues are cleared
+            this.queuedTasks.clear();
+            this.processingTasks.clear();
+
+        }
+
     }
 
     /**
@@ -265,6 +290,16 @@ public final class JRebirthThread extends Thread {
      */
     public static void runLater(final Runnable runnable) {
         internalThread.runAsap(runnable);
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param runnable
+     */
+    public static void runIntoPool(final Runnable runnable) {
+        internalThread.runNow(runnable);
+
     }
 
 }

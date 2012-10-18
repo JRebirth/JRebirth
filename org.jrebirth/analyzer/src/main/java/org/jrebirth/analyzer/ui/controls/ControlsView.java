@@ -36,6 +36,9 @@ public final class ControlsView extends DefaultView<ControlsModel, HBox, Control
     /** The open button. */
     private Button openButton;
 
+    /** The unload button. */
+    private Button unloadButton;
+
     /** The playPause button. */
     private Button playPauseButton;
 
@@ -69,23 +72,47 @@ public final class ControlsView extends DefaultView<ControlsModel, HBox, Control
         HBox.setHgrow(this.openButton, Priority.ALWAYS);
         this.openButton.setMaxWidth(Double.MAX_VALUE);
 
+        this.unloadButton = new Button("Unload");
+        this.unloadButton.setDisable(true);
+        HBox.setHgrow(this.unloadButton, Priority.ALWAYS);
+        this.unloadButton.setMaxWidth(Double.MAX_VALUE);
+
         this.playPauseButton = new Button("Play");
+        this.playPauseButton.setDisable(true);
         HBox.setHgrow(this.playPauseButton, Priority.ALWAYS);
         this.playPauseButton.setMaxWidth(Double.MAX_VALUE);
 
         this.backwardButton = new Button("<<");
+        this.backwardButton.setDisable(true);
         HBox.setHgrow(this.backwardButton, Priority.ALWAYS);
         this.backwardButton.setMaxWidth(Double.MAX_VALUE);
 
         this.forwardButton = new Button(">>");
+        this.forwardButton.setDisable(true);
         HBox.setHgrow(this.forwardButton, Priority.ALWAYS);
         this.forwardButton.setMaxWidth(Double.MAX_VALUE);
 
         this.stopButton = new Button("Stop");
+        this.stopButton.setDisable(true);
         HBox.setHgrow(this.stopButton, Priority.ALWAYS);
         this.stopButton.setMaxWidth(Double.MAX_VALUE);
 
-        getRootNode().getChildren().addAll(this.openButton, this.playPauseButton, this.backwardButton, this.forwardButton, this.stopButton);
+        getRootNode().getChildren().addAll(
+                this.openButton,
+                this.unloadButton,
+                this.playPauseButton,
+                this.backwardButton,
+                this.forwardButton,
+                this.stopButton
+                );
+    }
+
+    void activateButtons(final boolean enable) {
+        this.unloadButton.setDisable(!enable);
+        this.playPauseButton.setDisable(!enable);
+        this.backwardButton.setDisable(!enable);
+        this.forwardButton.setDisable(!enable);
+        this.stopButton.setDisable(!enable);
     }
 
     /**
@@ -93,6 +120,13 @@ public final class ControlsView extends DefaultView<ControlsModel, HBox, Control
      */
     Button getOpenButton() {
         return this.openButton;
+    }
+
+    /**
+     * @return Returns the unloadButton.
+     */
+    Button getUnloadButton() {
+        return this.unloadButton;
     }
 
     /**

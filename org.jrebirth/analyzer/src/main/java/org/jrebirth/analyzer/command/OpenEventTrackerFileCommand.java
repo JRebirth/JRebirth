@@ -16,20 +16,13 @@
  */
 package org.jrebirth.analyzer.command;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javafx.stage.FileChooser;
 
-import org.jrebirth.analyzer.ui.editor.EditorWave;
+import org.jrebirth.analyzer.service.LoadEdtFileService;
 import org.jrebirth.analyzer.ui.editor.EditorWaveItem;
 import org.jrebirth.core.command.DefaultUICommand;
-import org.jrebirth.core.event.Event;
-import org.jrebirth.core.event.EventBase;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;
 
@@ -54,44 +47,11 @@ public final class OpenEventTrackerFileCommand extends DefaultUICommand {
 
         if (selected != null) { // if nothing is selected
             // Process the file
-            processEventFile(selected);
+            // getService(LoadEdtFileService.class).processEventFile(selected);
+
+            returnData(LoadEdtFileService.class, new WaveData(EditorWaveItem.EVENTS_FILE, selected));
+
         }
     }
 
-    /**
-     * Parse the event file.
-     * 
-     * @param selecteFile the event file selected
-     */
-    private void processEventFile(final File selecteFile) {
-        final List<Event> eventList = new ArrayList<>();
-
-        try {
-            final BufferedReader br = new BufferedReader(new FileReader(selecteFile));
-
-            String strLine = br.readLine();
-            // Read File Line By Line
-            while (strLine != null) {
-                addEvent(eventList, strLine);
-                strLine = br.readLine();
-            }
-
-            send(EditorWave.EVENTS_LOADED, new WaveData(EditorWaveItem.EVENTS, eventList));
-
-        } catch (final IOException e) {
-            // TODO
-            getLocalFacade().getGlobalFacade().getLogger().error("Erro while processing event file");
-        }
-
-    }
-
-    /**
-     * Add an event to the event list.
-     * 
-     * @param eventList the list of events
-     * @param strLine the string to use
-     */
-    private void addEvent(final List<Event> eventList, final String strLine) {
-        eventList.add(new EventBase(strLine));
-    }
 }

@@ -30,6 +30,9 @@ public enum EditorWave implements WaveType {
     EVENTS_LOADED,
 
     /** . */
+    UNLOAD,
+
+    /** . */
     PLAY,
 
     /** . */

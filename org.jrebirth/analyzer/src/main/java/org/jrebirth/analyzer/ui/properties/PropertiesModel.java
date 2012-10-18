@@ -52,6 +52,7 @@ public final class PropertiesModel extends AbstractModel<PropertiesModel, Proper
         if (EditorWave.EVENT_SELECTED == wave.getWaveType()) {
 
             final Event event = (Event) wave.get(PropertiesWaveItem.EVENT_OBJECT).getValue();
+
             getView().getNodeName().setText(event.getTarget().getSimpleName());
         }
     }

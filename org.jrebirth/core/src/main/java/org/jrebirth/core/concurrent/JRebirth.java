@@ -82,6 +82,6 @@ public final class JRebirth {
     public static void runIntoThreadPool(final Runnable runnable) {
         // TODO add the runnable into the thread pool
         // Manage different pools (1 and 4)
-        JRebirthThread.runLater(runnable); // FIXME
+        JRebirthThread.runIntoPool(runnable); // FIXME
     }
 }

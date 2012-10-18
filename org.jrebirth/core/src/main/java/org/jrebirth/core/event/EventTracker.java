@@ -16,6 +16,8 @@
  */
 package org.jrebirth.core.event;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +49,11 @@ public class EventTracker extends AbstractRecord {
     @Override
     protected OutputStream buildOutputStream() {
         // Nothing to do yet
+        try {
+            return new FileOutputStream("events.log");
+        } catch (final FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

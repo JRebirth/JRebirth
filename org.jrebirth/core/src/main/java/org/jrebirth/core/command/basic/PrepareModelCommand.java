@@ -2,7 +2,7 @@ package org.jrebirth.core.command.basic;
 
 import javafx.scene.Node;
 
-import org.jrebirth.core.command.DefaultCommand;
+import org.jrebirth.core.command.DefaultPoolCommand;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 
@@ -11,9 +11,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public class PrepareModelCommand extends DefaultCommand {
-
-    // FIXME must be run into another thread
+public class PrepareModelCommand extends DefaultPoolCommand {
 
     /**
      * {@inheritDoc}

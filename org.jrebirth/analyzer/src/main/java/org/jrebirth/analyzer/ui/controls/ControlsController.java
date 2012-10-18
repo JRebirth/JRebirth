@@ -50,6 +50,7 @@ public final class ControlsController extends DefaultController<ControlsModel, C
 
         // Register mouse clicked handler
         getView().getOpenButton().setOnMouseClicked(getMouseHandler());
+        getView().getUnloadButton().setOnMouseClicked(getMouseHandler());
         getView().getPlayPauseButton().setOnMouseClicked(getMouseHandler());
         getView().getForwardButton().setOnMouseClicked(getMouseHandler());
         getView().getBackwardButton().setOnMouseClicked(getMouseHandler());
@@ -65,6 +66,10 @@ public final class ControlsController extends DefaultController<ControlsModel, C
 
             // Call the command synchronously
             getModel().callCommand(OpenEventTrackerFileCommand.class);
+
+        } else if (mouseEvent.getSource().equals(getView().getUnloadButton())) {
+
+            getModel().send(EditorWave.UNLOAD);
 
         } else if (mouseEvent.getSource().equals(getView().getPlayPauseButton())) {
 

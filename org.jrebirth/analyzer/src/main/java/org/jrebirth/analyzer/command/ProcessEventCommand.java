@@ -16,10 +16,9 @@
  */
 package org.jrebirth.analyzer.command;
 
-import org.jrebirth.analyzer.ui.editor.EditorModel;
 import org.jrebirth.analyzer.ui.editor.EditorWaveItem;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
-import org.jrebirth.core.command.DefaultUICommand;
+import org.jrebirth.core.command.DefaultCommand;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;
@@ -29,14 +28,13 @@ import org.jrebirth.core.wave.WaveData;
  * 
  * @author Sébastien Bordes
  */
-public final class ProcessEventCommand extends DefaultUICommand {
+public final class ProcessEventCommand extends DefaultCommand {
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void execute(final Wave wave) {
-        super.run(wave);
 
         final Event event = (Event) wave.get(EditorWaveItem.EVENT).getValue();
 
@@ -68,9 +66,6 @@ public final class ProcessEventCommand extends DefaultUICommand {
             case CREATE_VIEW:
             case CREATE_CONTROLLER:
                 final BallModel ballModel = getModel(BallModel.class, event);
-                ballModel.setEventModel(event); // TODO do it automatically !!! see
-                                                // you track
-                getModel(EditorModel.class).register(ballModel);
                 callCommand(ShowBallCommand.class, new WaveData(EditorWaveItem.EVENT, event));
                 break;
             case CREATE_WAVE:
@@ -102,7 +97,6 @@ public final class ProcessEventCommand extends DefaultUICommand {
             case DESTROY_CONTROLLER:
                 final BallModel ballModel = getModel(BallModel.class, event);
                 callCommand(HideBallCommand.class, new WaveData(EditorWaveItem.EVENT, event));
-                getModel(EditorModel.class).unregister(ballModel);
                 break;
             case DESTROY_WAVE:
             default:

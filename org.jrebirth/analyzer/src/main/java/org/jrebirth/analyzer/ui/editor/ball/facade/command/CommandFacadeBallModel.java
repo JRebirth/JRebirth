@@ -14,26 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.service;
+package org.jrebirth.analyzer.ui.editor.ball.facade.command;
 
-import org.jrebirth.core.facade.FacadeReady;
-import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.ui.DefaultModel;
 
 /**
- * 
- * The interface <strong>Service</strong>.
- * 
- * The contract for the service layer.
+ * The class <strong>BallModel</strong>.
  * 
  * @author Sébastien Bordes
  */
-public interface Service extends FacadeReady<Service> {
-
-    /**
-     * Do a specific action and process the wave.
-     * 
-     * @param wave
-     */
-    void returnData(Wave wave);
+public final class CommandFacadeBallModel extends DefaultModel<CommandFacadeBallModel, CommandFacadeBallView> {
 
 }

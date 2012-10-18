@@ -55,4 +55,13 @@ public class ServiceImpl extends AbstractWaveReady<Service> implements Service {
         getLocalFacade().getGlobalFacade().trackEvent(EventType.DESTROY_SERVICE, null, this.getClass());
         super.finalize();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void returnData(final Wave wave) {
+        // Nothing to do yet
+
+    }
 }

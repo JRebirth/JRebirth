@@ -17,8 +17,8 @@
 		<sonar.jdbc.url>jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;characterEncoding=utf8</sonar.jdbc.url>
 		<sonar.jdbc.driver>com.mysql.jdbc.Driver</sonar.jdbc.driver>
 		<!--Parameters to add as arguments of the mvn command -->
-		<!--<sonar.jdbc.username></sonar.jdbc.username> -->
-		<!--<sonar.jdbc.password></sonar.jdbc.password> -->
+		<sonar.jdbc.username>sonar</sonar.jdbc.username>
+		<sonar.jdbc.password>sonar</sonar.jdbc.password>
 
 		<jrebirth-configuration.version>1.0.0</jrebirth-configuration.version>
 
@@ -85,6 +85,8 @@
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
 		<!-- <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName> -->
 
+		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -93,6 +95,40 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<links>
+						<link>http://download.oracle.com/javafx/2.0/api/</link>
+					</links>
+					<failOnError>false</failOnError>
 				</configuration>
 			</plugin>
 
@@ -113,7 +149,7 @@
 			<plugin>
 				<groupId>org.codehaus.sonar</groupId>
 				<artifactId>sonar-maven3-plugin</artifactId>
-				<version>2.12</version>
+				<version>3.2.1-RC1</version>
 			</plugin>
 
 		</plugins>
@@ -125,6 +161,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
 				<configuration>
 					<links>
 						<link>http://download.oracle.com/javafx/2.0/api/</link>
@@ -158,25 +195,9 @@
 	</distributionManagement>
 
 
-<!-- 	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.oracle.javafx</groupId>
-				<artifactId>jfxrt</artifactId>
-				<version>2.1</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.oracle.javafx</groupId>
-			<artifactId>jfxrt</artifactId>
-			<version>2.1</version>
-			<systemPath>${javafx.home}/rt/lib/jfxrt.jar</systemPath>
-			<scope>system</scope>
-		</dependency>
-	</dependencies> -->
+	<!-- <dependencyManagement> <dependencies> <dependency> <groupId>com.oracle.javafx</groupId> <artifactId>jfxrt</artifactId> <version>2.1</version> </dependency> 
+		</dependencies> </dependencyManagement> <dependencies> <dependency> <groupId>com.oracle.javafx</groupId> <artifactId>jfxrt</artifactId> <version>2.1</version> <systemPath>${javafx.home}/rt/lib/jfxrt.jar</systemPath> 
+		<scope>system</scope> </dependency> </dependencies> -->
 
 	<developers>
 		<developer>
@@ -210,43 +231,9 @@
 		</pluginRepository> <pluginRepository> <snapshots /> <id>snapshots</id> <name>plugins-snapshot</name> <url>http://repo.jrebirth.org/plugins-snapshot</url> </pluginRepository> 
 		</pluginRepositories> -->
 
-<!-- 	<profiles>
-
-		<profile>
-			<id>win32</id>
-			<activation>
-				<file>
-					<exists>C:/Program Files (x86)/Oracle/JavaFX 2.1 SDK</exists>
-				</file>
-			</activation>
-			<properties>
-				<javafx.home>C:/Program Files (x86)/Oracle/JavaFX 2.1 SDK</javafx.home>
-			</properties>
-		</profile>
-		<profile>
-			<id>win</id>
-			<activation>
-				<file>
-					<exists>C:/Program Files/Oracle/JavaFX 2.1 SDK</exists>
-				</file>
-			</activation>
-			<properties>
-				<javafx.home>C:/Program Files/Oracle/JavaFX 2.1 SDK</javafx.home>
-			</properties>
-		</profile>
-		
-		<profile>
-			<id>linux</id>
-			<activation>
-				<file>
-					<exists>/usr/lib/jvm/javafx-sdk</exists>
-				</file>
-			</activation>
-			<properties>
-				<javafx.home>/usr/lib/jvm/javafx-sdk</javafx.home>
-			</properties>
-		</profile>
-
-	</profiles> -->
+	<!-- <profiles> <profile> <id>win32</id> <activation> <file> <exists>C:/Program Files (x86)/Oracle/JavaFX 2.1 SDK</exists> </file> </activation> <properties> <javafx.home>C:/Program 
+		Files (x86)/Oracle/JavaFX 2.1 SDK</javafx.home> </properties> </profile> <profile> <id>win</id> <activation> <file> <exists>C:/Program Files/Oracle/JavaFX 2.1 SDK</exists> 
+		</file> </activation> <properties> <javafx.home>C:/Program Files/Oracle/JavaFX 2.1 SDK</javafx.home> </properties> </profile> <profile> <id>linux</id> <activation> 
+		<file> <exists>/usr/lib/jvm/javafx-sdk</exists> </file> </activation> <properties> <javafx.home>/usr/lib/jvm/javafx-sdk</javafx.home> </properties> </profile> </profiles> -->
 
 </project>

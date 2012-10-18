@@ -28,7 +28,9 @@ import org.jrebirth.core.ui.Model;
 /**
  * The class <strong>JRebirthAnalyzer</strong>.
  * 
- * The application that demonstrate how to use JRebirth Framework. It also allow to show all JRebirth events.
+ * The application that demonstrate how to use JRebirth Framework.
+ * 
+ * It also allows showing all JRebirth events.
  * 
  * @author Sébastien Bordes
  */
