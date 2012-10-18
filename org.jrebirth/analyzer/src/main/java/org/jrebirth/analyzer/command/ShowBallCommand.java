@@ -35,7 +35,6 @@ public final class ShowBallCommand extends DefaultUICommand {
      */
     @Override
     public void execute(final Wave wave) {
-        super.run(wave);
 
         final Event event = (Event) wave.get(EditorWaveItem.EVENT).getValue();
 
@@ -43,16 +42,19 @@ public final class ShowBallCommand extends DefaultUICommand {
 
         final BallModel targetBallModel = getModel(BallModel.class, event);
 
-        if (targetBallModel.getEventModel().getSource() == null) {
+        editorModel.registerBall(targetBallModel);
 
-            // First Node center it !!!
+        if (editorModel.retrieveBall(targetBallModel.getEventModel().getSource()) == null) {
+
+            // it's the application node, we shall center it !!!
             targetBallModel.getView().getRootNode().setCenterX(editorModel.getView().getRootNode().getWidth() / 2 - 70);
             targetBallModel.getView().getRootNode().setCenterY(editorModel.getView().getRootNode().getHeight() / 2);
 
         } else {
 
-            final BallModel sourceBallModel = editorModel.retrieve(targetBallModel.getEventModel().getSource());
+            final BallModel sourceBallModel = editorModel.retrieveBall(targetBallModel.getEventModel().getSource());
 
+            // All other nodes shall be positionned relatively to their parent
             /*
              * System.out.println("Create " + targetBallModel.getEventModel().getTarget().getSimpleName() + " From : " + targetBallModel.getEventModel().getSource().getSimpleName() + " x=" +
              * sourceBallModel.getView().getRootNode().getCenterX() + " trX=" + sourceBallModel.getView().getRootNode().getTranslateX() + " y=" + sourceBallModel.getView().getRootNode().getCenterY() +
@@ -66,7 +68,7 @@ public final class ShowBallCommand extends DefaultUICommand {
         }
 
         targetBallModel.show();
-        targetBallModel.getView().prout();
+        // targetBallModel.getView().prout();
     }
 
 }

@@ -29,12 +29,13 @@ import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.facade.WaveReady;
+import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBase;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveGroup;
-import org.jrebirth.core.wave.WaveBase;
 import org.jrebirth.core.wave.WaveType;
 
 /**
@@ -116,7 +117,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public final void returnData(final Class<? extends Command> serviceClass, final WaveData<?>... data) {
+    public final void returnData(final Class<? extends Service> serviceClass, final WaveData<?>... data) {
         buildAndSendWave(WaveGroup.RETURN_DATA, null, serviceClass, data);
     }
 
@@ -198,6 +199,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
 
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             // Propagate the wave exception
+            e.printStackTrace();
             throw new WaveException(wave, e);
         }
     }

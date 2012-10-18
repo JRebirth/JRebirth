@@ -43,7 +43,7 @@ import org.jrebirth.core.wave.Wave;
 public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> extends AbstractWaveReady<Model> implements Model {
 
     /** The model object. */
-    private transient Object modeObject;
+    private transient Object modelObject;
 
     /** The dedicated view component. */
     private transient V view;
@@ -110,14 +110,14 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
      * @return Returns the modelObject.
      */
     public Object getModelObject() {
-        return this.modeObject;
+        return this.modelObject;
     }
 
     /**
      * @param modelObject The modelObject to set.
      */
     public void setModelObject(final Object modelObject) {
-        this.modeObject = modelObject;
+        this.modelObject = modelObject;
     }
 
     /**

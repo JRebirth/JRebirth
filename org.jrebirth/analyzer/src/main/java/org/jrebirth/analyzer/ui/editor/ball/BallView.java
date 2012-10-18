@@ -18,6 +18,7 @@ package org.jrebirth.analyzer.ui.editor.ball;
 
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
+import javafx.animation.ParallelTransitionBuilder;
 import javafx.animation.ScaleTransition;
 import javafx.animation.ScaleTransitionBuilder;
 import javafx.animation.TranslateTransitionBuilder;
@@ -25,7 +26,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-import org.jrebirth.analyzer.ui.editor.EditorModel;
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.DefaultView;
@@ -69,18 +69,39 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
         getRootNode().setScaleX(0);
         getRootNode().setScaleY(0);
 
-        this.showTransition = new ParallelTransition();
-        this.showTransition.getChildren().add(
-                ScaleTransitionBuilder.create().duration(Duration.millis(400)).node(getRootNode()).byX(1f).byY(1f).cycleCount(1).autoReverse(false).build());
-        this.showTransition.getChildren().add(
-                TranslateTransitionBuilder.create().duration(Duration.millis(500)).node(getRootNode()).byX(getX()).byY(getY()).build());
+        this.showTransition = ParallelTransitionBuilder.create()
+                .children(
+                        ScaleTransitionBuilder.create()
+                                .duration(Duration.millis(400))
+                                .node(getRootNode())
+                                .fromX(0.0)
+                                .fromY(0.0)
+                                .toX(1f)
+                                .toY(1f)
+                                .build(),
+                        TranslateTransitionBuilder.create()
+                                .duration(Duration.millis(500))
+                                .node(getRootNode())
+                                .fromX(0.0)
+                                .fromY(0.0)
+                                .toX(getX())
+                                .toY(getY())
+                                .build()
+                )
+                .cycleCount(1)
+                .autoReverse(false)
+                .build();
 
-        this.scaleTransition = new ScaleTransition(Duration.millis(600), getRootNode());
-        this.scaleTransition.setToX(1.1f);
-        this.scaleTransition.setToY(1.1f);
-        this.scaleTransition.setCycleCount(Animation.INDEFINITE);
-        this.scaleTransition.setAutoReverse(true);
-
+        this.scaleTransition = ScaleTransitionBuilder.create()
+                .duration(Duration.millis(600))
+                .node(getRootNode())
+                .fromX(1.1)
+                .fromY(1.1)
+                .toX(0.7)
+                .toY(0.7)
+                .cycleCount(Animation.INDEFINITE)
+                .autoReverse(true)
+                .build();
     }
 
     /**
@@ -138,12 +159,15 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
      * To complete.
      */
     public void resetScale() {
-        final ScaleTransition st = new ScaleTransition(Duration.millis(400), getRootNode());
-        st.setToX(1);
-        st.setToY(1f);
-        st.setCycleCount(1);
-        st.setAutoReverse(false);
-        st.play();
+        ScaleTransitionBuilder.create()
+                .duration(Duration.millis(400))
+                .node(getRootNode())
+                .toX(1f)
+                .toY(1f)
+                .cycleCount(1)
+                .autoReverse(false)
+                .build()
+                .play();
     }
 
     /**
@@ -184,19 +208,19 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
     /**
      * To remove.
      */
-    public void prout() {
-        if (getModel().getEventModel().getEventType() == EventType.CREATE_GLOBAL_FACADE) {
-            final Circle c = new Circle(230);
-            c.setCenterX(getRootNode().getCenterX() + getRootNode().getTranslateX() + 70);
-            c.setCenterY(getRootNode().getCenterY() + getRootNode().getTranslateY());
-            c.setFill(Color.ORANGE);
-            c.setOpacity(0.05);
-            /*
-             * c.setStrokeLineCap(StrokeLineCap.ROUND); c.setStrokeDashOffset(100); c.setStrokeWidth(6); c.setStrokeType(StrokeType.CENTERED); c.setStroke(Color.BLUEVIOLET);
-             */
-            getModel().getModel(EditorModel.class).getView().getRootNode().getChildren().add(c);
-        }
-    }
+    // public void prout() {
+    // if (getModel().getEventModel().getEventType() == EventType.CREATE_GLOBAL_FACADE) {
+    // final Circle c = new Circle(230);
+    // c.setCenterX(getRootNode().getCenterX() + getRootNode().getTranslateX() + 70);
+    // c.setCenterY(getRootNode().getCenterY() + getRootNode().getTranslateY());
+    // c.setFill(Color.ORANGE);
+    // c.setOpacity(0.05);
+    // /*
+    // * c.setStrokeLineCap(StrokeLineCap.ROUND); c.setStrokeDashOffset(100); c.setStrokeWidth(6); c.setStrokeType(StrokeType.CENTERED); c.setStroke(Color.BLUEVIOLET);
+    // */
+    // getModel().getModel(EditorModel.class).getView().getRootNode().getChildren().add(c);
+    // }
+    // }
 
     /**
      * Return the x coordinate.

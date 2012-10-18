@@ -116,7 +116,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     private void returnData(final Wave wave) {
         final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<? extends Service>) wave.getRelatedClass());
 
-        // TODO parse arguments !!!!!!!!
+        service.returnData(wave);
     }
 
     /**

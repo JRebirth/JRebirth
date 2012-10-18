@@ -119,6 +119,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         try {
             super.stop();
 
+            // Be Careful done into the JAT
+            // Shuould create a progress bar to control the closur process
+
             // Stop the JRebirthThread
             JRebirthThread.getThread().close();
 
@@ -311,6 +314,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
     /**
      * TODO To complete.
+     * 
      * @param gf
      * @return
      */
@@ -320,6 +324,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
     /**
      * TODO To complete.
+     * 
      * @param gf
      * @return
      */
@@ -329,6 +334,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
     /**
      * TODO To complete.
+     * 
      * @param gf
      * @return
      */

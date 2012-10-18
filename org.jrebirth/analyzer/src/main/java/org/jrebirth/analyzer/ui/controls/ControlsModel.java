@@ -16,7 +16,12 @@
  */
 package org.jrebirth.analyzer.ui.controls;
 
+import java.util.List;
+
+import org.jrebirth.analyzer.ui.editor.EditorWave;
+import org.jrebirth.core.event.Event;
 import org.jrebirth.core.ui.DefaultModel;
+import org.jrebirth.core.wave.Wave;
 
 /**
  * The class <strong>ControlsModel</strong>.
@@ -25,4 +30,32 @@ import org.jrebirth.core.ui.DefaultModel;
  */
 public final class ControlsModel extends DefaultModel<ControlsModel, ControlsView> {
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customInitialize() {
+        listen(EditorWave.EVENTS_LOADED);
+        listen(EditorWave.UNLOAD);
+    }
+
+    /**
+     * Call when event are loaded.
+     * 
+     * @param eventList the list of events loaded
+     * @param wave the wave received
+     */
+    public void eventsLoaded(final List<Event> eventList, final Wave wave) {
+        getView().activateButtons(eventList.size() > 0);
+    }
+
+    /**
+     * Call when event are loaded.
+     * 
+     * @param eventList the list of events loaded
+     * @param wave the wave received
+     */
+    public void unload(final Wave wave) {
+        getView().activateButtons(false);
+    }
 }

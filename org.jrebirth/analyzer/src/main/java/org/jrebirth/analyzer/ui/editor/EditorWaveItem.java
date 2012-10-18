@@ -25,6 +25,8 @@ import org.jrebirth.core.wave.WaveItem;
  */
 public enum EditorWaveItem implements WaveItem {
 
+    EVENTS_FILE,
+
     /** The name of the events. */
     EVENTS(),
     // {

@@ -16,6 +16,8 @@
  */
 package org.jrebirth.core.facade;
 
+import java.util.concurrent.ExecutorService;
+
 import org.jrebirth.core.application.JRebirthApplication;
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.event.EventTracker;
@@ -59,6 +61,11 @@ public interface GlobalFacade {
      * @return the application
      */
     JRebirthApplication getApplication();
+
+    /**
+     * @return Returns the executorService.
+     */
+    ExecutorService getExecutorService();
 
     /**
      * @return the logger

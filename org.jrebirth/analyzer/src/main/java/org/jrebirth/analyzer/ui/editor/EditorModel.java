@@ -16,6 +16,8 @@
  */
 package org.jrebirth.analyzer.ui.editor;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +51,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
     @Override
     protected void customInitialize() {
         listen(EditorWave.EVENTS_LOADED);
+        listen(EditorWave.UNLOAD);
         listen(EditorWave.PLAY);
         listen(EditorWave.NEXT);
         listen(EditorWave.PREVIOUS);
@@ -63,6 +66,21 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      */
     public void eventsLoaded(final List<Event> eventList, final Wave wave) {
         this.eventList = eventList;
+    }
+
+    /**
+     * Unload the event list.
+     * 
+     * @param wave the wave received
+     */
+    public void unload(final Wave wave) {
+        this.eventList = new ArrayList<>();
+
+        final Collection<BallModel> list = new ArrayList<>(this.ballMap.values());
+
+        for (final BallModel ballModel : list) {
+            unregisterBall(ballModel);
+        }
     }
 
     /**
@@ -93,7 +111,10 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * @param wave the wave received
      */
     public void next(final Wave wave) {
-        showNext(this.eventList.get(this.timeFrame + 1));
+        if (this.eventList != null && this.timeFrame + 1 < this.eventList.size()) {
+            showNext(this.eventList.get(this.timeFrame + 1));
+        }
+
     }
 
     /**
@@ -102,7 +123,9 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * @param wave the wave received
      */
     public void previous(final Wave wave) {
-        hideCurrent(this.eventList.get(this.timeFrame));
+        if (this.eventList != null && this.timeFrame > 0) {
+            hideCurrent(this.eventList.get(this.timeFrame));
+        }
     }
 
     /**
@@ -138,7 +161,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * 
      * @param ballModel the ball model to register
      */
-    public void register(final BallModel ballModel) {
+    public void registerBall(final BallModel ballModel) {
         this.ballMap.put(ballModel.getEventModel().getTarget(), ballModel);
         getView().getRootNode().getChildren().add(ballModel.getRootNode());
     }
@@ -148,7 +171,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * 
      * @param ballModel the ball model to unregister
      */
-    public void unregister(final BallModel ballModel) {
+    public void unregisterBall(final BallModel ballModel) {
         this.ballMap.remove(ballModel.getEventModel().getTarget());
         getView().getRootNode().getChildren().remove(ballModel.getRootNode());
     }
@@ -159,7 +182,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * @param source the class of the source event.
      * @return the right ball model
      */
-    public BallModel retrieve(final Class<?> source) {
+    public BallModel retrieveBall(final Class<?> source) {
         return this.ballMap.get(source);
     }
 

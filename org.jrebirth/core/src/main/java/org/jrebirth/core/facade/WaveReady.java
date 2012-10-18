@@ -18,6 +18,7 @@ package org.jrebirth.core.facade;
 
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.exception.WaveException;
+import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;
@@ -68,7 +69,7 @@ public interface WaveReady {
      * @param serviceClass the service called
      * @param data the data to transport
      */
-    void returnData(final Class<? extends Command> serviceClass, final WaveData<?>... data);
+    void returnData(final Class<? extends Service> serviceClass, final WaveData<?>... data);
 
     /**
      * Send a wave used to display an UI model.

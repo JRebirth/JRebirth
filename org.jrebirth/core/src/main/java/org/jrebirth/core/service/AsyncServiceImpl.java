@@ -57,4 +57,13 @@ public class AsyncServiceImpl extends AbstractWaveReady<Service> implements Serv
         getLocalFacade().getGlobalFacade().trackEvent(EventType.DESTROY_SERVICE, null, this.getClass());
         super.finalize();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void returnData(final Wave wave) {
+        // Nothing to do yet
+
+    }
 }

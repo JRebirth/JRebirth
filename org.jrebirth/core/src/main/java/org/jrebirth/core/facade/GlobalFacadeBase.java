@@ -16,6 +16,9 @@
  */
 package org.jrebirth.core.facade;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.jrebirth.core.application.JRebirthApplication;
 import org.jrebirth.core.event.EventBase;
 import org.jrebirth.core.event.EventTracker;
@@ -57,7 +60,7 @@ public class GlobalFacadeBase implements GlobalFacade {
     private final transient EventTracker eventTracker;
 
     /** The default executor. */
-    // private final ExecutorService executorService;
+    private final ExecutorService executorService;
 
     /**
      * Default Constructor. Initialize all facades.
@@ -68,9 +71,7 @@ public class GlobalFacadeBase implements GlobalFacade {
         super();
 
         // Launch the default executor
-        // this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
-
-        // this.executorService.
+        this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
 
         // Manage internal logging
         JRebirthLogger.getInstance().setEnabled(application.isLoggerEnabled());
@@ -146,6 +147,14 @@ public class GlobalFacadeBase implements GlobalFacade {
      * {@inheritDoc}
      */
     @Override
+    public ExecutorService getExecutorService() {
+        return this.executorService;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public final JRebirthLogger getLogger() {
         return JRebirthLogger.getInstance();
     }
@@ -166,6 +175,10 @@ public class GlobalFacadeBase implements GlobalFacade {
 
         // Manage design for extension
         customStop();
+
+        if (getExecutorService() != null) {
+            getExecutorService().shutdown();
+        }
 
         if (getLogger() != null) {
             getLogger().closeOutputStream();

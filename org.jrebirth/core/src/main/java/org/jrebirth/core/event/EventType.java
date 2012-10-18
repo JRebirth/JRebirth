@@ -30,9 +30,9 @@ public enum EventType {
     /** */
     CREATE_APPLICATION,
     /** */
-    CREATE_NOTIFIER,
-    /** */
     CREATE_GLOBAL_FACADE,
+    /** */
+    CREATE_NOTIFIER,
     /** */
     CREATE_COMMAND_FACADE,
     /** */
@@ -63,6 +63,12 @@ public enum EventType {
     /** */
     ACCESS_CONTROLLER,
 
+    /** */
+    DESTROY_APPLICATION,
+    /** */
+    DESTROY_GLOBAL_FACADE,
+    /** */
+    DESTROY_NOTIFIER,
     /** */
     DESTROY_COMMAND,
     /** */

@@ -14,26 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.service;
+package org.jrebirth.analyzer.ui.editor.ball.facade;
 
-import org.jrebirth.core.facade.FacadeReady;
-import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.ui.DefaultController;
 
 /**
- * 
- * The interface <strong>Service</strong>.
- * 
- * The contract for the service layer.
+ * The class <strong>BallController</strong>.
  * 
  * @author Sébastien Bordes
  */
-public interface Service extends FacadeReady<Service> {
+public final class FacadeBallController extends DefaultController<FacadeBallModel, FacadeBallView> {
 
     /**
-     * Do a specific action and process the wave.
+     * Default Constructor.
      * 
-     * @param wave
+     * @param view the view to control
+     * 
+     * @throws CoreException if an error occurred while creating event handlers
      */
-    void returnData(Wave wave);
+    public FacadeBallController(final FacadeBallView view) throws CoreException {
+        super(view);
+    }
 
 }
