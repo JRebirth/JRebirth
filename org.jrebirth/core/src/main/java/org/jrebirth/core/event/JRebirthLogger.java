@@ -18,6 +18,8 @@ package org.jrebirth.core.event;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class <strong>JRebirthLogger</strong>.
@@ -69,8 +71,10 @@ public class JRebirthLogger extends AbstractRecord {
      * {@inheritDoc}
      */
     @Override
-    protected OutputStream buildOutputStream() {
-        return new OutConsole(System.out);
+    protected List<OutputStream> buildOutputStreamList() {
+        final List<OutputStream> fosList = new ArrayList<>();
+        fosList.add(new OutConsole(System.out));
+        return fosList;
     }
 
     /**

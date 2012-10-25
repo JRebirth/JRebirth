@@ -14,34 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.wave;
+package org.jrebirth.core.exception.handler;
 
+import org.jrebirth.core.facade.GlobalFacade;
 
 /**
- * The class <strong>JRebirthWaveItem</strong>.
+ * The class <strong>JatUncaughtExceptionHandler</strong>.
  * 
  * @author Sébastien Bordes
  */
-public enum JRebirthWaveItem implements WaveItem {
+public class PoolUncaughtExceptionHandler extends AbstractJrbUncaughtExceptionHandler {
 
-    /** . */
-    attachUi, // (ObjectProperty.class),
+    /**
+     * Instantiates a new Pool uncaught exception handler.
+     * 
+     * @param globalFacade the global facade
+     */
+    public PoolUncaughtExceptionHandler(final GlobalFacade globalFacade) {
+        super(globalFacade, UncaughtExceptionHandlerType.PoolHandler);
+    }
 
-    /** . */
-    addUi;// (ObservableList.class);
-
-    // /** . */
-    // private Class<?> dataClass;
-    //
-    // private JRebirthWaveItem(final Class<?> dataClass) {
-    // this.dataClass = dataClass;
-    // }
-    //
-    // /**
-    // * {@inheritDoc}
-    // */
-    // @Override
-    // public Class<?> dataClass() {
-    // return this.dataClass;
-    // }
 }

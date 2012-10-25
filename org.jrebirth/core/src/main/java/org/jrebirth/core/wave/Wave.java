@@ -100,18 +100,33 @@ public interface Wave {
      * @param waveData the object to store
      * 
      */
-    void add(WaveData<?> waveData);
-
-    <V extends Object> void addItem(final WaveItem waveItem, final V value);
+    <T> void addData(WaveData<T> waveData);
 
     /**
-     * Retrieve an object.
+     * .
+     * 
+     * @param waveItem
+     * @param value
+     */
+    <T> void add(final WaveItem<T> waveItem, final T value);
+
+    /**
+     * Retrieve a wave data object.
      * 
      * @param waveItem the waveItem of the object to retrieve
      * 
      * @return the waveData registered by the key
      */
-    WaveData<?> get(WaveItem waveItem);
+    <T> WaveData<T> getData(WaveItem<T> waveItem);
+
+    /**
+     * Retrieve a value.
+     * 
+     * @param waveItem waveItem of the object to retrieve
+     * 
+     * @return the data registered by the key
+     */
+    <T> T get(WaveItem<T> waveItem);
 
     /**
      * Check if an object exists.
@@ -120,7 +135,7 @@ public interface Wave {
      * 
      * @return true if the waveData is registered
      */
-    boolean contains(WaveItem waveItem);
+    boolean contains(WaveItem<?> waveItem);
 
     /**
      * Return the wave bean used to wrap wave properties.

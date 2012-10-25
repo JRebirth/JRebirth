@@ -7,29 +7,39 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jrebirth.analyzer.ui.editor.EditorWave;
-import org.jrebirth.analyzer.ui.editor.EditorWaveItem;
+import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.event.EventBase;
-import org.jrebirth.core.service.ServiceImpl;
-import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.WaveData;
+import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.service.ServiceBase;
+import org.jrebirth.core.wave.WaveTypeBase;
 
 /**
  * The class <strong>LoadEdtFileService</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class LoadEdtFileService extends ServiceImpl {
+public class LoadEdtFileService extends ServiceBase {
+
+    // public enum Services implements WaveType {
+    // LOAD_EVENTS,
+    // EVENTS_LOADED;
+    // }
+
+    /** . */
+    public static WaveTypeBase DO_LOAD_EVENTS = new WaveTypeBase("LOAD_EVENTS", EditorWaves.EVENTS_FILE);
+
+    /** . */
+    public static WaveTypeBase RE_EVENTS_LOADED = new WaveTypeBase("EVENTS_LOADED", EditorWaves.EVENTS);
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void returnData(final Wave wave) {
-        super.returnData(wave);
+    public void ready() throws CoreException {
+        super.ready();
 
-        processEventFile((File) wave.get(EditorWaveItem.EVENTS_FILE).getValue());
+        registerService(DO_LOAD_EVENTS, RE_EVENTS_LOADED, EditorWaves.EVENTS);
     }
 
     /**
@@ -37,7 +47,7 @@ public class LoadEdtFileService extends ServiceImpl {
      * 
      * @param selecteFile the event file selected
      */
-    public void processEventFile(final File selecteFile) {
+    public List<Event> loadEvents(final File selecteFile) {
         final List<Event> eventList = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));)
@@ -50,12 +60,13 @@ public class LoadEdtFileService extends ServiceImpl {
                 strLine = br.readLine();
             }
 
-            send(EditorWave.EVENTS_LOADED, new WaveData(EditorWaveItem.EVENTS, eventList));
+            return eventList;
+            // send(EditorWave.EVENTS_LOADED, new WaveData(EditorWaveItem.EVENTS, eventList));
 
         } catch (final IOException e) {
-            // TODO
             getLocalFacade().getGlobalFacade().getLogger().error("Error while processing event file");
         }
+        return new ArrayList<>();
 
     }
 

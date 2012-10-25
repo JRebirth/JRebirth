@@ -19,6 +19,7 @@ package org.jrebirth.core.facade;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.jrebirth.core.application.AbstractApplication;
 import org.jrebirth.core.application.JRebirthApplication;
 import org.jrebirth.core.event.EventBase;
 import org.jrebirth.core.event.EventTracker;
@@ -30,7 +31,7 @@ import org.jrebirth.core.link.NotifierBase;
 
 /**
  * 
- * The class <strong>GlobalFacadeImpl</strong>.
+ * The class <strong>GlobalFacadeBase</strong>.
  * 
  * This class is a facade taht helps to retrive any JRebirth RIA pattern component of the application.
  * 
@@ -71,7 +72,8 @@ public class GlobalFacadeBase implements GlobalFacade {
         super();
 
         // Launch the default executor
-        this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
+        this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2,
+                new NamedThreadFactory(((AbstractApplication) application).getPoolUncaughtExceptionHandler(this), "JRebirth Pool - Slot "));
 
         // Manage internal logging
         JRebirthLogger.getInstance().setEnabled(application.isLoggerEnabled());

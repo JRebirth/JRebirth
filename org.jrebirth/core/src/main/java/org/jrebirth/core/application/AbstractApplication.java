@@ -34,6 +34,7 @@ import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.handler.DefaultUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.JatUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.JitUncaughtExceptionHandler;
+import org.jrebirth.core.exception.handler.PoolUncaughtExceptionHandler;
 import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.util.ClassUtility;
 
@@ -340,5 +341,15 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      */
     protected JitUncaughtExceptionHandler getJitUncaughtExceptionHandler(final GlobalFacade gf) {
         return new JitUncaughtExceptionHandler(gf);
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param gf
+     * @return
+     */
+    public PoolUncaughtExceptionHandler getPoolUncaughtExceptionHandler(final GlobalFacade gf) {
+        return new PoolUncaughtExceptionHandler(gf);
     }
 }

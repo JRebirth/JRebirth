@@ -18,6 +18,7 @@ package org.jrebirth.core.event;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 import org.jrebirth.core.exception.CoreException;
 
@@ -33,18 +34,18 @@ public abstract class AbstractRecord implements Recordable {
     private String fileName;
 
     /** The output stream to use. */
-    private OutputStream outputStream;
+    private List<OutputStream> outputStreamList;
 
     /**
      * Return the output stream.
      * 
      * @return the output stream
      */
-    private OutputStream getOutputStream() {
-        if (this.outputStream == null) {
-            this.outputStream = buildOutputStream();
+    private List<OutputStream> getOutputStreamList() {
+        if (this.outputStreamList == null) {
+            this.outputStreamList = buildOutputStreamList();
         }
-        return this.outputStream;
+        return this.outputStreamList;
     }
 
     /**
@@ -52,7 +53,7 @@ public abstract class AbstractRecord implements Recordable {
      * 
      * @return the OutputStream built
      */
-    protected abstract OutputStream buildOutputStream();
+    protected abstract List<OutputStream> buildOutputStreamList();
 
     /**
      * {@inheritDoc}
@@ -60,10 +61,10 @@ public abstract class AbstractRecord implements Recordable {
     @Override
     public final void record(final String data) {
         try {
-            if (getOutputStream() != null) {
-                getOutputStream().write(data.getBytes());
-                getOutputStream().write("\r\n".getBytes());// TODO
-                getOutputStream().flush();
+            for (final OutputStream outputStream : getOutputStreamList()) {
+                outputStream.write(data.getBytes());
+                outputStream.write("\r\n".getBytes());// TODO
+                outputStream.flush();
             }
         } catch (final IOException e) {
             // Nothing that we can do
@@ -77,8 +78,8 @@ public abstract class AbstractRecord implements Recordable {
     @Override
     public void closeOutputStream() throws CoreException {
         try {
-            if (getOutputStream() != null) {
-                getOutputStream().close();
+            for (final OutputStream outputStream : getOutputStreamList()) {
+                outputStream.close();
             }
         } catch (final IOException e) {
             throw new CoreException("Impossible to close the output stream", e);

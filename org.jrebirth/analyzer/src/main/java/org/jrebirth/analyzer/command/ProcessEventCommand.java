@@ -16,10 +16,12 @@
  */
 package org.jrebirth.analyzer.command;
 
-import org.jrebirth.analyzer.ui.editor.EditorWaveItem;
+import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
+import org.jrebirth.core.command.CommandListener;
 import org.jrebirth.core.command.DefaultCommand;
 import org.jrebirth.core.event.Event;
+import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;
 
@@ -28,7 +30,16 @@ import org.jrebirth.core.wave.WaveData;
  * 
  * @author Sébastien Bordes
  */
-public final class ProcessEventCommand extends DefaultCommand {
+public final class ProcessEventCommand extends DefaultCommand implements CommandListener {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void ready() throws CoreException {
+        super.ready();
+        addCommandListener(this);
+    }
 
     /**
      * {@inheritDoc}
@@ -36,7 +47,7 @@ public final class ProcessEventCommand extends DefaultCommand {
     @Override
     public void execute(final Wave wave) {
 
-        final Event event = (Event) wave.get(EditorWaveItem.EVENT).getValue();
+        final Event event = wave.get(EditorWaves.EVENT);
 
         if (event.getEventType().name().startsWith("CREATE")) {
             createBallModel(event);
@@ -66,7 +77,7 @@ public final class ProcessEventCommand extends DefaultCommand {
             case CREATE_VIEW:
             case CREATE_CONTROLLER:
                 final BallModel ballModel = getModel(BallModel.class, event);
-                callCommand(ShowBallCommand.class, new WaveData(EditorWaveItem.EVENT, event));
+                callCommand(ShowBallCommand.class, WaveData.build(EditorWaves.EVENT, event));
                 break;
             case CREATE_WAVE:
             default:
@@ -96,11 +107,20 @@ public final class ProcessEventCommand extends DefaultCommand {
             case DESTROY_VIEW:
             case DESTROY_CONTROLLER:
                 final BallModel ballModel = getModel(BallModel.class, event);
-                callCommand(HideBallCommand.class, new WaveData(EditorWaveItem.EVENT, event));
+                callCommand(HideBallCommand.class, WaveData.build(EditorWaves.EVENT, event));
                 break;
             case DESTROY_WAVE:
             default:
         }
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void commandAchieved(final Wave wave) {
+        send(EditorWaves.RE_EVENT_PROCESSED/* , WaveData.build(waveItem, value) */);
 
     }
 

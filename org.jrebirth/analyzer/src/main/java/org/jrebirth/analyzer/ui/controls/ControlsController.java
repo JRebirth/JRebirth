@@ -19,17 +19,16 @@ package org.jrebirth.analyzer.ui.controls;
 import javafx.scene.input.MouseEvent;
 
 import org.jrebirth.analyzer.command.OpenEventTrackerFileCommand;
-import org.jrebirth.analyzer.ui.editor.EditorWave;
+import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.DefaultController;
-import org.jrebirth.core.ui.adapter.MouseAdapter;
 
 /**
  * The class <strong>ControlsController</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class ControlsController extends DefaultController<ControlsModel, ControlsView> implements MouseAdapter {
+public final class ControlsController extends DefaultController<ControlsModel, ControlsView> /* implements MouseAdapter */{
 
     /**
      * Default Constructor.
@@ -48,126 +47,133 @@ public final class ControlsController extends DefaultController<ControlsModel, C
     @Override
     protected void customInitializeEventHandlers() throws CoreException {
 
+        linkCommand(getView().getOpenButton(), MouseEvent.MOUSE_CLICKED, OpenEventTrackerFileCommand.class);
+        linkWave(getView().getUnloadButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_UNLOAD);
+        linkWave(getView().getPlayPauseButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_PLAY);
+        linkWave(getView().getBackwardButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_PREVIOUS);
+        linkWave(getView().getForwardButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_NEXT);
+        linkWave(getView().getStopButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_STOP);
+
         // Register mouse clicked handler
-        getView().getOpenButton().setOnMouseClicked(getMouseHandler());
-        getView().getUnloadButton().setOnMouseClicked(getMouseHandler());
-        getView().getPlayPauseButton().setOnMouseClicked(getMouseHandler());
-        getView().getForwardButton().setOnMouseClicked(getMouseHandler());
-        getView().getBackwardButton().setOnMouseClicked(getMouseHandler());
-        getView().getStopButton().setOnMouseClicked(getMouseHandler());
+        // getView().getOpenButton().setOnMouseClicked(getMouseHandler());
+        // getView().getUnloadButton().setOnMouseClicked(getMouseHandler());
+        // getView().getPlayPauseButton().setOnMouseClicked(getMouseHandler());
+        // getView().getForwardButton().setOnMouseClicked(getMouseHandler());
+        // getView().getBackwardButton().setOnMouseClicked(getMouseHandler());
+        // getView().getStopButton().setOnMouseClicked(getMouseHandler());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void mouseClicked(final MouseEvent mouseEvent) {
-        if (mouseEvent.getSource().equals(getView().getOpenButton())) {
-
-            // Call the command synchronously
-            getModel().callCommand(OpenEventTrackerFileCommand.class);
-
-        } else if (mouseEvent.getSource().equals(getView().getUnloadButton())) {
-
-            getModel().send(EditorWave.UNLOAD);
-
-        } else if (mouseEvent.getSource().equals(getView().getPlayPauseButton())) {
-
-            getModel().send(EditorWave.PLAY);
-
-        } else if (mouseEvent.getSource().equals(getView().getForwardButton())) {
-
-            getModel().send(EditorWave.NEXT);
-
-        } else if (mouseEvent.getSource().equals(getView().getBackwardButton())) {
-
-            getModel().send(EditorWave.PREVIOUS);
-
-        } else if (mouseEvent.getSource().equals(getView().getStopButton())) {
-
-            getModel().send(EditorWave.STOP);
-
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void mouse(final MouseEvent mouseEvent) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void mouseDragDetected(final MouseEvent mouseEvent) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void mouseDragged(final MouseEvent mouseEvent) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void mouseEntered(final MouseEvent mouseEvent) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void mouseEnteredTarget(final MouseEvent mouseEvent) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void mouseExited(final MouseEvent mouseEvent) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void mouseExitedTarget(final MouseEvent mouseEvent) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void mouseMoved(final MouseEvent mouseEvent) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void mousePressed(final MouseEvent mouseEvent) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void mouseReleased(final MouseEvent mouseEvent) {
-        // Nothing to do yet
-    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mouseClicked(final MouseEvent mouseEvent) {
+    // if (mouseEvent.getSource().equals(getView().getOpenButton())) {
+    //
+    // // Call the command synchronously
+    // getModel().callCommand(OpenEventTrackerFileCommand.class);
+    //
+    // } else if (mouseEvent.getSource().equals(getView().getUnloadButton())) {
+    //
+    // getModel().send(EditorWaves.DO_UNLOAD);
+    //
+    // } else if (mouseEvent.getSource().equals(getView().getPlayPauseButton())) {
+    //
+    // getModel().send(EditorWaves.DO_PLAY);
+    //
+    // } else if (mouseEvent.getSource().equals(getView().getForwardButton())) {
+    //
+    // getModel().send(EditorWaves.DO_NEXT);
+    //
+    // } else if (mouseEvent.getSource().equals(getView().getBackwardButton())) {
+    //
+    // getModel().send(EditorWaves.DO_PREVIOUS);
+    //
+    // } else if (mouseEvent.getSource().equals(getView().getStopButton())) {
+    //
+    // getModel().send(EditorWaves.DO_STOP);
+    //
+    // }
+    // }
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mouse(final MouseEvent mouseEvent) {
+    // // Nothing to do yet
+    // }
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mouseDragDetected(final MouseEvent mouseEvent) {
+    // // Nothing to do yet
+    // }
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mouseDragged(final MouseEvent mouseEvent) {
+    // // Nothing to do yet
+    // }
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mouseEntered(final MouseEvent mouseEvent) {
+    // // Nothing to do yet
+    // }
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mouseEnteredTarget(final MouseEvent mouseEvent) {
+    // // Nothing to do yet
+    // }
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mouseExited(final MouseEvent mouseEvent) {
+    // // Nothing to do yet
+    // }
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mouseExitedTarget(final MouseEvent mouseEvent) {
+    // // Nothing to do yet
+    // }
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mouseMoved(final MouseEvent mouseEvent) {
+    // // Nothing to do yet
+    // }
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mousePressed(final MouseEvent mouseEvent) {
+    // // Nothing to do yet
+    // }
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mouseReleased(final MouseEvent mouseEvent) {
+    // // Nothing to do yet
+    // }
 
 }

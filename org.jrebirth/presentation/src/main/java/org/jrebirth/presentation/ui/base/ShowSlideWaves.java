@@ -8,21 +8,12 @@ import org.jrebirth.core.wave.WaveItem;
  * @author Sébastien Bordes
  * 
  */
-public enum ShowSlideWaveItem implements WaveItem {
+public interface ShowSlideWaves {
 
     /** The slide model class concerned. */
-    SLIDE_MODEL_CLASS,
+    WaveItem<Class<SlideModel<SlideStep>>> SLIDE_MODEL_CLASS = new WaveItem<>();
 
     /** The Slide step type to show. */
-    SLIDE_STEP_TYPE;
-
-    // /**
-    // * {@inheritDoc}
-    // */
-    // @Override
-    // public Class<?> dataClass() {
-    // // Nothing to do yet
-    // return null;
-    // }
+    WaveItem<SlideStep> SLIDE_STEP_TYPE = new WaveItem<>();
 
 }

@@ -13,14 +13,14 @@ import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.shape.RectangleBuilder;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.service.ServiceImpl;
+import org.jrebirth.core.service.ServiceBase;
 
 /**
  * The class <strong>ImageSlicerService</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class ImageSlicerService extends ServiceImpl {
+public class ImageSlicerService extends ServiceBase {
 
     private final IntegerProperty columnProperty = new SimpleIntegerProperty();
 

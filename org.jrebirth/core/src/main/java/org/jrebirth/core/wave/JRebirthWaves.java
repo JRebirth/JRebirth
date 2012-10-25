@@ -14,37 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.analyzer.ui.properties;
+package org.jrebirth.core.wave;
 
-import org.jrebirth.core.wave.WaveItem;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 
 /**
- * The class <strong>PropertiesWaveItem</strong>.
+ * The class <strong>JRebirthWaveItem</strong>.
  * 
  * @author Sébastien Bordes
  */
-public enum PropertiesWaveItem implements WaveItem {
+public interface JRebirthWaves {
 
-    /** The event object. */
-    EVENT_OBJECT,
-    // () {
-    //
-    // @Override
-    // public Class<?> dataClass() {
-    // return null;
-    // }
-    //
-    // },
+    /** . */
+    WaveItem<ObjectProperty<Node>> attachUi = new WaveItem<>();
 
-    /** The type of the node. */
-    NODE_TYPE,
-    // () {
-    //
-    // @Override
-    // public Class<?> dataClass() {
-    // return null;
-    // }
-    //
-    // },
+    /** . */
+    WaveItem<ObservableList<Node>> addUi = new WaveItem<>();
 
 }

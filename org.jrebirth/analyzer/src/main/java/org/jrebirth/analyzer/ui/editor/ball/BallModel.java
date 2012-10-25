@@ -16,7 +16,7 @@
  */
 package org.jrebirth.analyzer.ui.editor.ball;
 
-import org.jrebirth.analyzer.ui.editor.EditorWave;
+import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
@@ -36,7 +36,7 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
      */
     @Override
     protected void customInitialize() {
-        listen(EditorWave.EVENT_SELECTED);
+        listen(EditorWaves.DO_SELECT_EVENT);
     }
 
     /**

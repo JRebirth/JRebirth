@@ -67,15 +67,27 @@ public final class JRebirth {
     /**
      * Run into the JRebirth Internal Thread.
      * 
+     * Actually only few methods are allowed to execute themselves into JRebirthThread.
+     * <ul>
+     * <li>Uncaught Exception Handler initialization</li>
+     * <li>Wave queuing</li>
+     * <li>Run a default Command (neither UI nor Pooled)</li>
+     * <li>Listen a Wave Type</li>
+     * <li>UnListen a Wave Type</li>
+     * </ul>
+     * 
+     * Be careful this method can be called through any thread.
+     * 
      * @param runnable the task to run
      */
     public static void runIntoJIT(final Runnable runnable) {
         JRebirthThread.runLater(runnable);
-
     }
 
     /**
      * Run into the internal thread pool.
+     * 
+     * Be careful this method can be called through any thread.
      * 
      * @param runnable the task to run
      */

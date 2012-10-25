@@ -1,20 +1,6 @@
-/**
- * Copyright JRebirth.org © 2011-2012 
- * Contact : sebastien.bordes@jrebirth.org
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.jrebirth.core.wave;
+
+import org.jrebirth.core.util.ClassUtility;
 
 /**
  * The class <strong>WaveItem</strong>.
@@ -24,14 +10,51 @@ package org.jrebirth.core.wave;
  * @author Sébastien Bordes
  * 
  */
-public interface WaveItem {
+public class WaveItem<T> {
+
+    private static int idGenerator;
+
+    private final int uid;
+
+    private final Class<T> itemClass;
+
+    public WaveItem() {
+        synchronized (WaveItem.class) {
+            this.uid = ++idGenerator;
+        }
+
+        // FIXME
+        this.itemClass = (Class<T>) ClassUtility.getGenericType(0);
+    }
 
     /**
-     * 
-     * TODO To complete.
-     * 
-     * @return
+     * @return Returns the uid.
      */
-    // Class<?> dataClass();
+    public int getUid() {
+        return this.uid;
+    }
+
+    /**
+     * @return Returns the itemClass.
+     */
+    public Class<T> getItemClass() {
+        return this.itemClass;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object waveItem) {
+        return waveItem != null && waveItem instanceof WaveItem && getUid() == ((WaveItem<?>) waveItem).getUid();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return getUid();
+    }
 
 }

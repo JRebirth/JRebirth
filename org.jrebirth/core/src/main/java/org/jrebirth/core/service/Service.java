@@ -34,6 +34,6 @@ public interface Service extends FacadeReady<Service> {
      * 
      * @param wave
      */
-    void returnData(Wave wave);
+    <T extends Object> void returnData(Wave wave);
 
 }

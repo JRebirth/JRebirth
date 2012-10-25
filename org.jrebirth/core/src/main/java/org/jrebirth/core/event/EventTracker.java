@@ -47,10 +47,12 @@ public class EventTracker extends AbstractRecord {
      * {@inheritDoc}
      */
     @Override
-    protected OutputStream buildOutputStream() {
+    protected List<OutputStream> buildOutputStreamList() {
         // Nothing to do yet
         try {
-            return new FileOutputStream("events.log");
+            final List<OutputStream> fosList = new ArrayList<>();
+            fosList.add(new FileOutputStream("events.edt"));
+            return fosList;
         } catch (final FileNotFoundException e) {
             e.printStackTrace();
         }

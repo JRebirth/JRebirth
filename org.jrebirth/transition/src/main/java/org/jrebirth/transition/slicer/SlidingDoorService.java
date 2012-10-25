@@ -15,14 +15,14 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.service.ServiceImpl;
+import org.jrebirth.core.service.ServiceBase;
 
 /**
  * The class <strong>ImageSlicerService</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class SlidingDoorService extends ServiceImpl {
+public class SlidingDoorService extends ServiceBase {
 
     private enum SLIDING_TYPE {
         UP_DOWN,

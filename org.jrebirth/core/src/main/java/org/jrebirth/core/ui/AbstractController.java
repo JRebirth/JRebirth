@@ -17,6 +17,7 @@
 package org.jrebirth.core.ui;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.DragEvent;
@@ -24,8 +25,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.WindowEvent;
 
+import org.jrebirth.core.command.Command;
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.adapter.ActionAdapter;
 import org.jrebirth.core.ui.adapter.DragAdapter;
 import org.jrebirth.core.ui.adapter.KeyAdapter;
@@ -36,6 +39,8 @@ import org.jrebirth.core.ui.handler.DragHandler;
 import org.jrebirth.core.ui.handler.KeyHandler;
 import org.jrebirth.core.ui.handler.MouseHandler;
 import org.jrebirth.core.ui.handler.WindowHandler;
+import org.jrebirth.core.wave.WaveData;
+import org.jrebirth.core.wave.WaveTypeBase;
 
 /**
  * The abstract class <strong>AbstractController</strong>.
@@ -315,6 +320,83 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
             }
         }
         return this.windowHandler;
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param playPauseButton2
+     * @param mouseClicked
+     * @param doPlay
+     */
+    protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveTypeBase waveType, final WaveData<?>... waveData) {
+        node.addEventHandler(eventType, new EventHandler<E>() {
+            /**
+             * 
+             */
+            @Override
+            public void handle(final E event) {
+                getModel().send(waveType, waveData);
+            }
+        });
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param playPauseButton2
+     * @param mouseClicked
+     * @param doPlay
+     */
+    protected <E extends Event> void linkCommand(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Command> commandClass, final WaveData<?>... waveData) {
+        node.addEventHandler(eventType, new EventHandler<E>() {
+            /**
+             * 
+             */
+            @Override
+            public void handle(final E event) {
+                getModel().callCommand(commandClass, waveData);
+            }
+        });
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param playPauseButton2
+     * @param mouseClicked
+     * @param doPlay
+     */
+    protected <E extends Event> void linkUi(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Model> modelClass, final WaveData<?>... waveData) {
+        node.addEventHandler(eventType, new EventHandler<E>() {
+            /**
+             * 
+             */
+            @Override
+            public void handle(final E event) {
+                getModel().attachUi(modelClass, waveData);
+            }
+        });
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param playPauseButton2
+     * @param mouseClicked
+     * @param doPlay
+     */
+    protected <E extends Event> void linkService(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Service> serviceClass, final WaveTypeBase waveType,
+            final WaveData<?>... waveData) {
+        node.addEventHandler(eventType, new EventHandler<E>() {
+            /**
+             * 
+             */
+            @Override
+            public void handle(final E event) {
+                getModel().returnData(serviceClass, waveType, waveData);
+            }
+        });
     }
 
     /**

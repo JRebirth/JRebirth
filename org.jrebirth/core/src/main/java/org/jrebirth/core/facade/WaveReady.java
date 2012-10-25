@@ -67,9 +67,10 @@ public interface WaveReady {
      * Send a wave used to return data from a service.
      * 
      * @param serviceClass the service called
+     * @param waveType the type of the wave
      * @param data the data to transport
      */
-    void returnData(final Class<? extends Service> serviceClass, final WaveData<?>... data);
+    void returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WaveData<?>... data);
 
     /**
      * Send a wave used to display an UI model.

@@ -131,4 +131,15 @@ public final class ClassUtility {
         }
         throw new NoSuchMethodException(action);
     }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param i
+     * @return
+     */
+    public static Class<?> getGenericType(final int i) {
+
+        return null;
+    }
 }

@@ -27,7 +27,7 @@ import org.jrebirth.core.exception.CoreException;
  * 
  * @param <R> A type that implements FacadeReady
  */
-public interface FacadeReady<R extends FacadeReady<R>> {
+public interface FacadeReady<R extends FacadeReady<R>> extends WaveReady {
 
     /**
      * Launch the initialization of the component.

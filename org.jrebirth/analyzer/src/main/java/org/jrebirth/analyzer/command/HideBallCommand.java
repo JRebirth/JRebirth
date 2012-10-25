@@ -17,7 +17,7 @@
 package org.jrebirth.analyzer.command;
 
 import org.jrebirth.analyzer.ui.editor.EditorModel;
-import org.jrebirth.analyzer.ui.editor.EditorWaveItem;
+import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
 import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.event.Event;
@@ -36,7 +36,7 @@ public final class HideBallCommand extends DefaultUICommand {
     @Override
     public void execute(final Wave wave) {
 
-        final Event event = (Event) wave.get(EditorWaveItem.EVENT).getValue();
+        final Event event = wave.get(EditorWaves.EVENT);
         final BallModel targetBallModel = getModel(BallModel.class, event);
         targetBallModel.hide();
 

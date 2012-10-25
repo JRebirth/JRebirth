@@ -33,7 +33,7 @@ public interface JrbUncaughtExceptionHandler extends UncaughtExceptionHandler {
     enum UncaughtExceptionHandlerType {
         JITHandler,
         JATHandler,
-        ServiceHandler,
+        PoolHandler,
         DefaultHandler
     }
 
