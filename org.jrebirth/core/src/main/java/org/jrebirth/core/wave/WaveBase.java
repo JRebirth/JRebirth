@@ -18,7 +18,6 @@ package org.jrebirth.core.wave;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -174,7 +173,7 @@ public class WaveBase implements Wave {
      * {@inheritDoc}
      */
     @Override
-    public <T> void addData(final WaveData<T> waveData) {
+    public <T extends Object> void addData(final WaveData<T> waveData) {
         // Init the order of the wave Data
         waveData.setOrder(getWaveItems().size());
         // Store into the map to allow access by WaveItem
@@ -182,7 +181,7 @@ public class WaveBase implements Wave {
         // Ad into the list to enable sorting
         this.waveItemsList.add(waveData);
         // Sort the list
-        Collections.sort(this.waveItemsList);
+        // FIXME Collections.sort(this.waveItemsList);
     }
 
     /**
