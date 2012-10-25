@@ -63,7 +63,7 @@ public abstract class AbstractRecord implements Recordable {
         try {
             for (final OutputStream outputStream : getOutputStreamList()) {
                 outputStream.write(data.getBytes());
-                outputStream.write("\r\n".getBytes());// TODO
+                outputStream.write("\r\n".getBytes());
                 outputStream.flush();
             }
         } catch (final IOException e) {

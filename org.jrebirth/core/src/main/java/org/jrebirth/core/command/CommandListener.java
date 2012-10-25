@@ -9,6 +9,11 @@ import org.jrebirth.core.wave.Wave;
  */
 public interface CommandListener {
 
+    /**
+     * This event is fired when a command has been performed. .
+     * 
+     * @param wave the wave processed
+     */
     void commandAchieved(Wave wave);
 
 }

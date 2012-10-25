@@ -23,13 +23,6 @@ public class ShowModelWaveBean implements WaveBean {
     private Node createdNode;
 
     /**
-     * Instantiates a new show model wave bean.
-     */
-    public ShowModelWaveBean() {
-        // Nothing to do
-    }
-
-    /**
      * Gets the model class.
      * 
      * @return the model class

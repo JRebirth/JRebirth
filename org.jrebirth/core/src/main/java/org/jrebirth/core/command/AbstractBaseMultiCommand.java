@@ -35,8 +35,12 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
     /** The list of command that will be chained. */
     private final List<Class<? extends Command>> commandList = new ArrayList<>();
 
+    /**
+     * Flag that indicate if commands must be run sequentially(true) or in parallel(false).
+     */
     private final boolean sequential;
 
+    /** The index of the last command performed. */
     private int commandRunIndex = 0;
 
     /**
@@ -52,7 +56,7 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
      * Default Constructor.
      * 
      * @param runInto The run into thread type
-     * @param sequential
+     * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
      */
     public AbstractBaseMultiCommand(final RunIntoType runInto, final boolean sequential) {
         super(runInto);

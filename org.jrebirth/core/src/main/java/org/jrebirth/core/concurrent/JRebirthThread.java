@@ -18,6 +18,7 @@ package org.jrebirth.core.concurrent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
 
 import javafx.scene.layout.Pane;
 
@@ -61,7 +62,7 @@ public final class JRebirthThread extends Thread {
     private boolean infiniteLoop = true;
 
     /** Flag that indicate that the closure must be forced. */
-    private boolean forceClose = false;
+    private boolean forceClose;
 
     /**
      * private final boolean readyToShutdown = false;
@@ -89,8 +90,8 @@ public final class JRebirthThread extends Thread {
      * @param runnable the task to run
      */
     public void runNow(final Runnable runnable) {
-        // TODO Manage Future
-        getFacade().getExecutorService().submit(runnable);
+        final Future<?> future = getFacade().getExecutorService().submit(runnable);
+        // TODO log or delete
     }
 
     /**
@@ -101,7 +102,7 @@ public final class JRebirthThread extends Thread {
     public void runAsap(final Runnable runnable) {
         // Synchronize the queue !
         synchronized (this.queuedTasks) {
-            this.queuedTasks.notify();
+            this.queuedTasks.notifyAll();
             this.queuedTasks.add(runnable);
         }
     }
@@ -176,7 +177,7 @@ public final class JRebirthThread extends Thread {
                 }
 
             } catch (final InterruptedException e) {
-                e.printStackTrace();
+                this.facade.getLogger().error("An exception occured into the JRebirth Thread");
                 this.facade.getLogger().logException(e);
             }
 
@@ -246,8 +247,10 @@ public final class JRebirthThread extends Thread {
                     );
 
         } catch (final JRebirthThreadException e) {
+            this.facade.getLogger().error("An exception occured while creating and attaching the first view");
+            this.facade.getLogger().logException(e);
             // Impossible case, unless someone override JRebirthThread class
-            throw new CoreException("launchFirstView method was called outside JIT.");
+            throw new CoreException("launchFirstView method was called outside JIT.", e);
         }
     }
 
@@ -313,7 +316,7 @@ public final class JRebirthThread extends Thread {
      * 
      * @param runnable the task to run
      */
-    public static void runIntoPool(final Runnable runnable) {
+    public static void runIntoThreadPool(final Runnable runnable) {
         internalThread.runNow(runnable);
     }
 

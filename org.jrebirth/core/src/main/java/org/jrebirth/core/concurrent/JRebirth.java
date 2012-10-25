@@ -92,8 +92,6 @@ public final class JRebirth {
      * @param runnable the task to run
      */
     public static void runIntoThreadPool(final Runnable runnable) {
-        // TODO add the runnable into the thread pool
-        // Manage different pools (1 and 4)
-        JRebirthThread.runIntoPool(runnable); // FIXME
+        JRebirthThread.runIntoThreadPool(runnable);
     }
 }
