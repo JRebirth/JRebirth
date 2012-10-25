@@ -19,7 +19,6 @@ package org.jrebirth.core.i18n;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-
 /**
  * The class <strong>JRebirthMessageManager</strong>.
  * 

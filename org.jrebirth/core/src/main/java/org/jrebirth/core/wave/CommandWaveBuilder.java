@@ -37,6 +37,7 @@ public class CommandWaveBuilder<B extends CommandWaveBuilder<B, WB>, WB extends 
         this.waveBeanClass = waveBeanClass;
     }
 
+    @Override
     public void applyTo(final WaveBase paramWave)
     {
         super.applyTo(paramWave);

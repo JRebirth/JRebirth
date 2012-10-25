@@ -18,7 +18,6 @@ package org.jrebirth.core.ui.adapter;
 
 import javafx.stage.WindowEvent;
 
-
 /**
  * The class <strong>WindowAdapter</strong>.
  * 

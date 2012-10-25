@@ -34,6 +34,7 @@ public class ShowModelWaveBuilder<B extends ShowModelWaveBuilder<B>> extends Com
         super(ShowModelCommand.class, ShowModelWaveBean.class);
     }
 
+    @Override
     public void applyTo(final WaveBase paramWave)
     {
         super.applyTo(paramWave);
@@ -72,6 +73,7 @@ public class ShowModelWaveBuilder<B extends ShowModelWaveBuilder<B>> extends Com
         return (B) this;
     }
 
+    @Override
     public WaveBase build()
     {
         final WaveBase localWave = new WaveBase();
