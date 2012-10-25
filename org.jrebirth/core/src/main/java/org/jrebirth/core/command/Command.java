@@ -56,14 +56,14 @@ public interface Command extends FacadeReady<Command> {
     /**
      * Add a command Listener.
      * 
-     * @param commandListener
+     * @param commandListener the listener to add
      */
     void addCommandListener(CommandListener commandListener);
 
     /**
      * Add a command Listener.
      * 
-     * @param commandListener
+     * @param commandListener the listener to remove
      */
     void removeCommandListener(CommandListener commandListener);
 

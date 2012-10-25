@@ -50,6 +50,9 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
      */
     private Command parentCommand;
 
+    /**
+     * The list of command Listener to warn taht an event occurred.
+     */
     private final List<CommandListener> commandListeners = new ArrayList<>();
 
     /**
@@ -148,6 +151,11 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
         return WaveBean.class;
     }
 
+    /**
+     * Fire an achieve event.
+     * 
+     * @param wave forward the wave that has been performed
+     */
     private void fireAchieve(final Wave wave) {
         for (final CommandListener commandListener : this.commandListeners) {
             commandListener.commandAchieved(wave);

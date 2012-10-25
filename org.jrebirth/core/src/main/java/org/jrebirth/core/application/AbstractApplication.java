@@ -152,8 +152,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
     /**
      * Initialize the default scene.
-     * 
-     * @param scene the default scene to initialize
      */
     private void initializeScene() {
 
@@ -324,30 +322,33 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     }
 
     /**
-     * TODO To complete.
+     * Build and return the Uncaught Exception Handler for JavaFX Application Thread.
      * 
-     * @param gf
-     * @return
+     * @param gf the JRebirth global facade
+     * 
+     * @return the uncaught exception handler for JavaFX Application Thread
      */
     protected JatUncaughtExceptionHandler getJatUncaughtExceptionHandler(final GlobalFacade gf) {
         return new JatUncaughtExceptionHandler(gf);
     }
 
     /**
-     * TODO To complete.
+     * Build and return the Uncaught Exception Handler for JRebirth Internal Thread.
      * 
-     * @param gf
-     * @return
+     * @param gf the JRebirth global facade
+     * 
+     * @return the uncaught exception handler for JRebirth Internal Thread
      */
     protected JitUncaughtExceptionHandler getJitUncaughtExceptionHandler(final GlobalFacade gf) {
         return new JitUncaughtExceptionHandler(gf);
     }
 
     /**
-     * TODO To complete.
+     * Build and return the Uncaught Exception Handler for JRebirth Thread Pool.
      * 
-     * @param gf
-     * @return
+     * @param gf the JRebirth global facade
+     * 
+     * @return the uncaught exception handler for JRebirth Thread Pool
      */
     public PoolUncaughtExceptionHandler getPoolUncaughtExceptionHandler(final GlobalFacade gf) {
         return new PoolUncaughtExceptionHandler(gf);
