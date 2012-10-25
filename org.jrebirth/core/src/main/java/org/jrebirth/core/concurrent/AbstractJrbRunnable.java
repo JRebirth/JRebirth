@@ -30,7 +30,6 @@ public abstract class AbstractJrbRunnable implements Runnable {
      * {@inheritDoc}
      */
     @Override
-    @Override
     public final void run() {
         try {
             runInto();
