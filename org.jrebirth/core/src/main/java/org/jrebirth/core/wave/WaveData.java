@@ -25,12 +25,12 @@ package org.jrebirth.core.wave;
  * @author Sébastien Bordes
  * 
  */
-public final class WaveData<T> implements Comparable<WaveData<?>> {
+public final class WaveData<T> implements Comparable<WaveData<T>> {
 
     /**
      * The key property, must be set with an enumeration that implements WaveItem.
      */
-    private WaveItem waveItem;
+    private WaveItem<T> waveItem;
 
     /** The class type of the contained object. */
     private Class<T> valueClass;
@@ -41,13 +41,17 @@ public final class WaveData<T> implements Comparable<WaveData<?>> {
     /** The field used for sorting. */
     private int order;
 
+    public static <T extends Object> WaveData<T> build(final WaveItem<T> waveItem, final T value) {
+        return new WaveData<>(waveItem, value);
+    }
+
     /**
      * Default Constructor.
      * 
      * @param waveItem the enumeration used as key property
      * @param value the data
      */
-    public WaveData(final WaveItem waveItem, final T value) {
+    private WaveData(final WaveItem<T> waveItem, final T value) {
         setKey(waveItem);
         setValue(value);
     }
@@ -62,7 +66,7 @@ public final class WaveData<T> implements Comparable<WaveData<?>> {
     /**
      * @param waveItem the waveItem to set
      */
-    public void setKey(final WaveItem waveItem) {
+    public void setKey(final WaveItem<T> waveItem) {
         this.waveItem = waveItem;
     }
 
@@ -129,7 +133,7 @@ public final class WaveData<T> implements Comparable<WaveData<?>> {
      * {@inheritDoc}
      */
     @Override
-    public int compareTo(final WaveData<?> waveData) {
+    public int compareTo(final WaveData<T> waveData) {
         return getOrder() - waveData.getOrder();
     }
 }

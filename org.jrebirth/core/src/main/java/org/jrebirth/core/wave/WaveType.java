@@ -20,7 +20,7 @@ package org.jrebirth.core.wave;
  * 
  * The interface <strong>WaveType</strong>.
  * 
- * A WaveType could be an enumeration that return an action name.
+ * //A WaveType could be an enumeration that return an action name.
  * 
  * @author Sébastien Bordes
  */
@@ -31,13 +31,13 @@ public interface WaveType {
      * 
      * @return the name of the wave type
      */
-    String getName();
+    // String getName();
 
     /**
      * Return the method to process in the processor class.
      * 
      * @return a method name or null
      */
-    String getAction();
+    // String getAction();
 
 }

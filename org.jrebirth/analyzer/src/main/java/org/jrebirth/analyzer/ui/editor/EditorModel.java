@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.analyzer.command.ProcessEventCommand;
+import org.jrebirth.analyzer.service.LoadEdtFileService;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.ui.DefaultModel;
@@ -45,17 +46,23 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
     /** The event list to display. */
     private List<Event> eventList;
 
+    private boolean playing = false;
+
     /**
      * {@inheritDoc}
      */
     @Override
     protected void customInitialize() {
-        listen(EditorWave.EVENTS_LOADED);
-        listen(EditorWave.UNLOAD);
-        listen(EditorWave.PLAY);
-        listen(EditorWave.NEXT);
-        listen(EditorWave.PREVIOUS);
-        listen(EditorWave.STOP);
+
+        listen(LoadEdtFileService.RE_EVENTS_LOADED);
+
+        listen(EditorWaves.DO_UNLOAD);
+        listen(EditorWaves.DO_PLAY);
+        listen(EditorWaves.DO_NEXT);
+        listen(EditorWaves.DO_PREVIOUS);
+        listen(EditorWaves.DO_STOP);
+
+        listen(EditorWaves.RE_EVENT_PROCESSED);
     }
 
     /**
@@ -89,9 +96,20 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * @param wave the wave received
      */
     public void play(final Wave wave) {
-        this.timeFrame = 0;
-        for (int i = this.timeFrame; i < this.eventList.size() - 1; i++) {
-            showNext(this.eventList.get(this.timeFrame));
+        if (!this.playing) {
+            this.playing = true;
+            this.timeFrame = 0;
+        }
+        if (this.timeFrame < this.eventList.size() - 1) {
+            showNext(this.eventList.get(this.timeFrame++));
+        } else {
+            this.playing = false;
+        }
+    }
+
+    public void eventProcessed(final Wave wave) {
+        if (this.playing) {
+            play(wave);
         }
     }
 
@@ -102,7 +120,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      */
     private void showNext(final Event event) {
         this.timeFrame++;
-        callCommand(ProcessEventCommand.class, new WaveData(EditorWaveItem.EVENT, event));
+        callCommand(ProcessEventCommand.class, WaveData.build(EditorWaves.EVENT, event));
     }
 
     /**

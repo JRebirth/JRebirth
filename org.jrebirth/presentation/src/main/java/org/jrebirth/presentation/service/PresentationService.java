@@ -13,7 +13,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.service.ServiceImpl;
+import org.jrebirth.core.service.ServiceBase;
 import org.jrebirth.presentation.model.Presentation;
 
 /**
@@ -22,7 +22,7 @@ import org.jrebirth.presentation.model.Presentation;
  * @author Sébastien Bordes
  * 
  */
-public final class PresentationService extends ServiceImpl {
+public final class PresentationService extends ServiceBase {
 
     /** The XML file location. */
     public static final String CONFIG_NAME = "presentation/Presentation";

@@ -18,14 +18,14 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.service.ServiceImpl;
+import org.jrebirth.core.service.ServiceBase;
 
 /**
  * The class <strong>ImageSlicerService</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class RandomFadingService extends ServiceImpl {
+public class RandomFadingService extends ServiceBase {
 
     private final ObservableList<Node> nodes = FXCollections.observableArrayList();
 

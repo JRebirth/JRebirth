@@ -19,7 +19,7 @@ package org.jrebirth.core.wave;
 /**
  * The enumeration <strong>WaveGroup</strong>.
  * 
- * Alow to classify waves by group.
+ * Allow to classify waves by group.
  * 
  * @author Sébastien Bordes
  */

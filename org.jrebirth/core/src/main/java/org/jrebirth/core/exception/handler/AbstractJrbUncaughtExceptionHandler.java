@@ -62,6 +62,7 @@ public abstract class AbstractJrbUncaughtExceptionHandler implements JrbUncaught
      */
     @Override
     public void uncaughtException(final Thread t, final Throwable e) {
+        e.printStackTrace();
         if (e instanceof Exception) {
             getGlobalFacade().getLogger().error(e.getMessage());
             getGlobalFacade().getLogger().logException((Exception) e);

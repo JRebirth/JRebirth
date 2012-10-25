@@ -81,22 +81,27 @@ public final class JRebirthThread extends Thread {
     }
 
     /**
-     * TODO To complete.
+     * Run into thread pool.
      * 
-     * @param runnable
+     * If a slot is available the task will be run immediately.<br />
+     * Otherwise it will run as soon as a slot will be available according to the existing task queue
+     * 
+     * @param runnable the task to run
      */
     public void runNow(final Runnable runnable) {
+        // TODO Manage Future
         getFacade().getExecutorService().submit(runnable);
     }
 
     /**
-     * Run this task as soon as possible. Enqueue the task to be run at the next event pulse.
+     * Run this task as soon as possible. Enqueue the task to be run at the next event pulse. Run ii into the JRebirth Thread
      * 
      * @param runnable the task to run
      */
     public void runAsap(final Runnable runnable) {
         // Synchronize the queue !
-        synchronized (this) {
+        synchronized (this.queuedTasks) {
+            this.queuedTasks.notify();
             this.queuedTasks.add(runnable);
         }
     }
@@ -155,9 +160,19 @@ public final class JRebirthThread extends Thread {
                     this.processingTasks.clear();
                 }
 
-                // Pause this thread during 20ms to let other thread adding some
-                // task into the queue
-                Thread.sleep(20);
+                synchronized (this.queuedTasks) {
+                    // Pause this thread during 20ms to let other thread adding some
+                    // task into the queue
+                    // Thread.sleep(20);
+
+                    if (this.queuedTasks.size() == 0) {
+                        // Pause the JRebirth Thread no more than 500ms
+                        // it will be woke up if any task is added to the queue
+                        // Obviously if a task has been added during the unqueue of the processingTask queue,
+                        // the waiting is canceled
+                        this.queuedTasks.wait(500);
+                    }
+                }
 
             } catch (final InterruptedException e) {
                 e.printStackTrace();
@@ -280,26 +295,24 @@ public final class JRebirthThread extends Thread {
         if (!isJRebirthThread()) {
             throw new JRebirthThreadException();
         }
-
     }
 
     /**
      * Run a task as soon as possible.
      * 
-     * @param runnable the runnable to run
+     * @param runnable the task to run
      */
     public static void runLater(final Runnable runnable) {
         internalThread.runAsap(runnable);
     }
 
     /**
-     * TODO To complete.
+     * Run a task immedialtely if a slot is available into the shared thread pool.
      * 
-     * @param runnable
+     * @param runnable the task to run
      */
     public static void runIntoPool(final Runnable runnable) {
         internalThread.runNow(runnable);
-
     }
 
 }

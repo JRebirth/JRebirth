@@ -117,8 +117,8 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public final void returnData(final Class<? extends Service> serviceClass, final WaveData<?>... data) {
-        buildAndSendWave(WaveGroup.RETURN_DATA, null, serviceClass, data);
+    public final void returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WaveData<?>... data) {
+        buildAndSendWave(WaveGroup.RETURN_DATA, waveType, serviceClass, data);
     }
 
     /**
@@ -164,7 +164,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         wave.setWaveType(waveType);
         wave.setRelatedClass(relatedClass);
         for (final WaveData<?> wd : waveData) {
-            wave.add(wd);
+            wave.addData(wd);
         }
 
         // Track wave creation
@@ -188,7 +188,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
             parameterValues.add(wave);
 
             // Search the wave handler method
-            final Method method = ClassUtility.getMethodByName(this.getClass(), wave.getWaveType().getAction());
+            final Method method = ClassUtility.getMethodByName(this.getClass(), ClassUtility.underscoreToCamelCase(wave.getWaveType().toString()));
             if (method != null) {
                 // Call this method with right parameters
                 method.invoke(this, parameterValues.toArray());

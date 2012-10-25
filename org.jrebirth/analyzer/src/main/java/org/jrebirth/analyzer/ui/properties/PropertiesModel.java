@@ -16,7 +16,7 @@
  */
 package org.jrebirth.analyzer.ui.properties;
 
-import org.jrebirth.analyzer.ui.editor.EditorWave;
+import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.wave.Wave;
@@ -33,7 +33,7 @@ public final class PropertiesModel extends AbstractModel<PropertiesModel, Proper
      */
     @Override
     protected void customInitialize() {
-        listen(EditorWave.EVENT_SELECTED);
+        listen(EditorWaves.DO_SELECT_EVENT);
     }
 
     /**
@@ -49,9 +49,9 @@ public final class PropertiesModel extends AbstractModel<PropertiesModel, Proper
      */
     @Override
     protected void processAction(final Wave wave) {
-        if (EditorWave.EVENT_SELECTED == wave.getWaveType()) {
+        if (EditorWaves.DO_SELECT_EVENT == wave.getWaveType()) {
 
-            final Event event = (Event) wave.get(PropertiesWaveItem.EVENT_OBJECT).getValue();
+            final Event event = wave.get(PropertiesWaves.EVENT_OBJECT);
 
             getView().getNodeName().setText(event.getTarget().getSimpleName());
         }

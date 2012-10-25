@@ -2,7 +2,7 @@ package org.jrebirth.presentation.command;
 
 import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.wave.Wave;
-import org.jrebirth.presentation.ui.base.ShowSlideWaveItem;
+import org.jrebirth.presentation.ui.base.ShowSlideWaves;
 import org.jrebirth.presentation.ui.base.SlideModel;
 import org.jrebirth.presentation.ui.base.SlideStep;
 
@@ -20,10 +20,10 @@ public final class ShowSlideStepCommand extends DefaultUICommand {
     @Override
     protected void execute(final Wave wave) {
         // Retrieve the slide model
-        final SlideModel<SlideStep> model = getModel((Class<SlideModel<SlideStep>>) wave.get(ShowSlideWaveItem.SLIDE_MODEL_CLASS).getValue());
+        final SlideModel<SlideStep> model = getModel(wave.get(ShowSlideWaves.SLIDE_MODEL_CLASS));
 
         // Show the the next slide step
-        model.showSlideStep((SlideStep) wave.get(ShowSlideWaveItem.SLIDE_STEP_TYPE).getValue());
+        model.showSlideStep(wave.get(ShowSlideWaves.SLIDE_STEP_TYPE));
     }
 
 }

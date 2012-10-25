@@ -38,7 +38,7 @@ import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
-import org.jrebirth.core.wave.JRebirthWaveItem;
+import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveType;
 
@@ -130,14 +130,14 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         // Build the new UI view
         final Model model = getGlobalFacade().getUiFacade().retrieve((Class<? extends Model>) wave.getRelatedClass());
 
-        if (wave.contains(JRebirthWaveItem.attachUi)) {
+        if (wave.contains(JRebirthWaves.attachUi)) {
             // Add an Ui view into a the place holder provided
-            final ObjectProperty<Node> property = (ObjectProperty<Node>) wave.get(JRebirthWaveItem.attachUi).getValue();
+            final ObjectProperty<Node> property = wave.get(JRebirthWaves.attachUi);
             property.setValue(model.getView().getRootNode());
 
-        } else if (wave.contains(JRebirthWaveItem.addUi)) {
+        } else if (wave.contains(JRebirthWaves.addUi)) {
             // Add an Ui view into a children list of its parent container
-            final ObservableList<Node> list = (ObservableList<Node>) wave.get(JRebirthWaveItem.attachUi).getValue();
+            final ObservableList<Node> list = wave.get(JRebirthWaves.addUi);
             list.add(model.getView().getRootNode());
         }
 
@@ -152,19 +152,23 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
      */
     private void sendUndefinedWave(final Wave wave) throws WaveException {
         // Retrieve all interested object from the map
-        final List<WaveReady> list = this.notifierMap.get(wave.getWaveType());
-        // For each object process the action
-        for (final WaveReady linked : list) {
+        if (this.notifierMap.containsKey(wave.getWaveType())) {
+            final List<WaveReady> list = this.notifierMap.get(wave.getWaveType());
+            // For each object process the action
+            for (final WaveReady linked : list) {
 
-            // If the notified class is part of the UI
-            // We must perform this action into the JavaFX Application Thread
-            if (linked instanceof Model) {
-                JRebirth.runIntoJAT(LoopFactory.newRunnable(linked, wave));
-            } else {
-                // Otherwise can perform it right now into the current thread
-                // (JRebirthThread)
-                linked.handle(wave);
+                // If the notified class is part of the UI
+                // We must perform this action into the JavaFX Application Thread
+                if (linked instanceof Model) {
+                    JRebirth.runIntoJAT(LoopFactory.newRunnable(linked, wave));
+                } else {
+                    // Otherwise can perform it right now into the current thread
+                    // (JRebirthThread)
+                    linked.handle(wave);
+                }
             }
+        } else {
+            System.err.println("No Listener attached");
         }
     }
 

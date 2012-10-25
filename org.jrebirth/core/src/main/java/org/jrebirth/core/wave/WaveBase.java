@@ -68,6 +68,7 @@ public class WaveBase implements Wave {
      */
     private WaveBean waveBean;
 
+    /** The type extending WaveBean to use to embed some values. */
     private Class<? extends WaveBean> waveBeanClass;
 
     /**
@@ -173,7 +174,7 @@ public class WaveBase implements Wave {
      * {@inheritDoc}
      */
     @Override
-    public void add(final WaveData<?> waveData) {
+    public <T> void addData(final WaveData<T> waveData) {
         // Init the order of the wave Data
         waveData.setOrder(getWaveItems().size());
         // Store into the map to allow access by WaveItem
@@ -188,28 +189,34 @@ public class WaveBase implements Wave {
      * {@inheritDoc}
      */
     @Override
-    public <V extends Object> void addItem(final WaveItem waveItem, final V value) {
-        final WaveData<V> waveData = new WaveData<V>(waveItem, value);
-        add(waveData);
+    public <T> void add(final WaveItem<T> waveItem, final T value) {
+        final WaveData<T> waveData = WaveData.build(waveItem, value);
+        addData(waveData);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> WaveData<T> getData(final WaveItem<T> waveItem) {
+        return (WaveData<T>) this.waveItemsMap.get(waveItem);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T get(final WaveItem<T> waveItem) {
+        return (T) this.waveItemsMap.get(waveItem).getValue();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public WaveData<?> get(final WaveItem waveItem) {
-        return this.waveItemsMap.get(waveItem);
-    }
-
-    public <C extends Object> C getData(final WaveData<C> waveData) {
-        return ((Class<C>) waveData.getClass()).cast(waveData.getValue());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean contains(final WaveItem waveItem) {
+    public boolean contains(final WaveItem<?> waveItem) {
         return this.waveItemsMap.containsKey(waveItem);
     }
 

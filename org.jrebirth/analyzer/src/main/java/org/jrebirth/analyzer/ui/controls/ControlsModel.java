@@ -18,7 +18,8 @@ package org.jrebirth.analyzer.ui.controls;
 
 import java.util.List;
 
-import org.jrebirth.analyzer.ui.editor.EditorWave;
+import org.jrebirth.analyzer.service.LoadEdtFileService;
+import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
@@ -35,8 +36,8 @@ public final class ControlsModel extends DefaultModel<ControlsModel, ControlsVie
      */
     @Override
     protected void customInitialize() {
-        listen(EditorWave.EVENTS_LOADED);
-        listen(EditorWave.UNLOAD);
+        listen(LoadEdtFileService.RE_EVENTS_LOADED);
+        listen(EditorWaves.DO_UNLOAD);
     }
 
     /**
@@ -51,6 +52,8 @@ public final class ControlsModel extends DefaultModel<ControlsModel, ControlsVie
 
     /**
      * Call when event are loaded.
+     * 
+     * 
      * 
      * @param eventList the list of events loaded
      * @param wave the wave received
