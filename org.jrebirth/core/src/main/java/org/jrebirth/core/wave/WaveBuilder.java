@@ -69,6 +69,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
         return (B) this;
     }
 
+    @Override
     public WaveBase build()
     {
         final WaveBase localWave = new WaveBase();

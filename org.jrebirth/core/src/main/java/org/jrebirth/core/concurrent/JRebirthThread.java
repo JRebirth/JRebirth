@@ -125,6 +125,7 @@ public final class JRebirthThread extends Thread {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void run() {
 
         try {
@@ -187,6 +188,7 @@ public final class JRebirthThread extends Thread {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void interrupt() {
         super.interrupt();
 

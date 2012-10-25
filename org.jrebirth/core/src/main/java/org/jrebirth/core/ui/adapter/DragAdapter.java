@@ -18,7 +18,6 @@ package org.jrebirth.core.ui.adapter;
 
 import javafx.scene.input.DragEvent;
 
-
 /**
  * The class <strong>DragAdapter</strong>.
  * 

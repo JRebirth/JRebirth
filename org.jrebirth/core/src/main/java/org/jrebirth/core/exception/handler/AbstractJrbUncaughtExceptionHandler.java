@@ -18,7 +18,6 @@ package org.jrebirth.core.exception.handler;
 
 import org.jrebirth.core.facade.GlobalFacade;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class <strong>AbstractJRBUncaughtExceptionHandler</strong>.
  * 

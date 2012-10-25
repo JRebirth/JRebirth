@@ -18,7 +18,6 @@ package org.jrebirth.core.ui.adapter;
 
 import javafx.event.ActionEvent;
 
-
 /**
  * The class <strong>ActionAdapter</strong>.
  * 

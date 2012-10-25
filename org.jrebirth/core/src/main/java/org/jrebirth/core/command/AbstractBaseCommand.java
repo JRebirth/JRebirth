@@ -143,6 +143,7 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     /**
      * {@inheritDoc}
      */
+    @Override
     public Class<? extends WaveBean> getWaveBeanClass() {
         return WaveBean.class;
     }

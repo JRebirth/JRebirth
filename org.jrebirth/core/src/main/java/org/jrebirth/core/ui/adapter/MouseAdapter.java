@@ -18,7 +18,6 @@ package org.jrebirth.core.ui.adapter;
 
 import javafx.scene.input.MouseEvent;
 
-
 /**
  * The class <strong>MouseAdapter</strong>.
  * 
