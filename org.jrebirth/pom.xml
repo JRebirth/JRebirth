@@ -32,9 +32,9 @@
 		<module>component</module>
 		<module>analyzer</module>
 		<module>archetype</module>
-		<module>distribution</module>
 		<module>presentation</module>
 		<module>transition</module>
+		<module>distribution</module>
 	</modules>
 
 	<issueManagement>
@@ -126,10 +126,11 @@
 					</execution>
 				</executions>
 				<configuration>
+					<bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</bootclasspath>
 					<links>
 						<link>http://download.oracle.com/javafx/2.0/api/</link>
 					</links>
-					<failOnError>false</failOnError>
+					<failOnError>true</failOnError>
 				</configuration>
 			</plugin>
 
