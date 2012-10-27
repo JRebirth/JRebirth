@@ -46,7 +46,8 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
     /** The event list to display. */
     private List<Event> eventList;
 
-    private boolean playing = false;
+    /** Flag that indicate if events are played. */
+    private boolean playing;
 
     /**
      * {@inheritDoc}
@@ -107,6 +108,11 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
         }
     }
 
+    /**
+     * Called when an event is processed.
+     * 
+     * @param wave the wave taht contains data related to the event processed
+     */
     public void eventProcessed(final Wave wave) {
         if (this.playing) {
             play(wave);

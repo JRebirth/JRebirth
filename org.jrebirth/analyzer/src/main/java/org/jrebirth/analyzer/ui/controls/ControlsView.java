@@ -107,6 +107,11 @@ public final class ControlsView extends DefaultView<ControlsModel, HBox, Control
                 );
     }
 
+    /**
+     * Change activation of all buttons.
+     * 
+     * @param enable true to enable all buttons false otherwise
+     */
     void activateButtons(final boolean enable) {
         this.unloadButton.setDisable(!enable);
         this.playPauseButton.setDisable(!enable);
