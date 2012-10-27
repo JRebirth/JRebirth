@@ -17,7 +17,6 @@
 package org.jrebirth.analyzer.command;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
-import org.jrebirth.analyzer.ui.editor.ball.BallModel;
 import org.jrebirth.core.command.CommandListener;
 import org.jrebirth.core.command.DefaultCommand;
 import org.jrebirth.core.event.Event;
@@ -76,7 +75,7 @@ public final class ProcessEventCommand extends DefaultCommand implements Command
             case CREATE_MODEL:
             case CREATE_VIEW:
             case CREATE_CONTROLLER:
-                final BallModel ballModel = getModel(BallModel.class, event);
+                // final BallModel ballModel = getModel(BallModel.class, event);
                 callCommand(ShowBallCommand.class, WaveData.build(EditorWaves.EVENT, event));
                 break;
             case CREATE_WAVE:
@@ -106,7 +105,7 @@ public final class ProcessEventCommand extends DefaultCommand implements Command
             case DESTROY_MODEL:
             case DESTROY_VIEW:
             case DESTROY_CONTROLLER:
-                final BallModel ballModel = getModel(BallModel.class, event);
+                // final BallModel ballModel = getModel(BallModel.class, event);
                 callCommand(HideBallCommand.class, WaveData.build(EditorWaves.EVENT, event));
                 break;
             case DESTROY_WAVE:

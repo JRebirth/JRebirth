@@ -21,16 +21,11 @@ import org.jrebirth.core.wave.WaveTypeBase;
  */
 public class LoadEdtFileService extends ServiceBase {
 
-    // public enum Services implements WaveType {
-    // LOAD_EVENTS,
-    // EVENTS_LOADED;
-    // }
+    /** Wave type use to load events. */
+    public static final WaveTypeBase DO_LOAD_EVENTS = new WaveTypeBase("LOAD_EVENTS", EditorWaves.EVENTS_FILE);
 
-    /** . */
-    public static WaveTypeBase DO_LOAD_EVENTS = new WaveTypeBase("LOAD_EVENTS", EditorWaves.EVENTS_FILE);
-
-    /** . */
-    public static WaveTypeBase RE_EVENTS_LOADED = new WaveTypeBase("EVENTS_LOADED", EditorWaves.EVENTS);
+    /** Wave type to return events loaded. */
+    public static final WaveTypeBase RE_EVENTS_LOADED = new WaveTypeBase("EVENTS_LOADED", EditorWaves.EVENTS);
 
     /**
      * {@inheritDoc}
@@ -46,6 +41,8 @@ public class LoadEdtFileService extends ServiceBase {
      * Parse the event file.
      * 
      * @param selecteFile the event file selected
+     * 
+     * @return the list of loaded events
      */
     public List<Event> loadEvents(final File selecteFile) {
         final List<Event> eventList = new ArrayList<>();
@@ -60,13 +57,10 @@ public class LoadEdtFileService extends ServiceBase {
                 strLine = br.readLine();
             }
 
-            return eventList;
-            // send(EditorWave.EVENTS_LOADED, new WaveData(EditorWaveItem.EVENTS, eventList));
-
         } catch (final IOException e) {
             getLocalFacade().getGlobalFacade().getLogger().error("Error while processing event file");
         }
-        return new ArrayList<>();
+        return eventList;
 
     }
 
