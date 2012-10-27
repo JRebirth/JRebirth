@@ -27,10 +27,10 @@ import javafx.scene.Node;
  */
 public interface JRebirthWaves {
 
-    /** . */
+    /** The waveItem that hold the attached node. */
     WaveItem<ObjectProperty<Node>> attachUi = new WaveItem<>();
 
-    /** . */
+    /** The waveItem that hold the children lsit of the parent node. */
     WaveItem<ObservableList<Node>> addUi = new WaveItem<>();
 
 }

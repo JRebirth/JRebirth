@@ -80,7 +80,7 @@ public interface Wave {
     /**
      * @return Returns the nextWave.
      */
-    public Wave getNextWave();
+    Wave getNextWave();
 
     /**
      * @param nextWave The nextWave to set.
@@ -95,18 +95,21 @@ public interface Wave {
     List<WaveData<?>> getWaveItems();
 
     /**
-     * Store an object and indexize it.
+     * Add a wave data. Store an object and indexize it.
      * 
      * @param waveData the object to store
      * 
+     * @param <T> the type of the wave data to add
      */
     <T> void addData(WaveData<T> waveData);
 
     /**
-     * .
+     * Add a wave data. Store an object and indexize it.
      * 
-     * @param waveItem
-     * @param value
+     * @param waveItem the wave item used as hashkey
+     * @param value the data to store
+     * 
+     * @param <T> the type of the wave data to add
      */
     <T> void add(final WaveItem<T> waveItem, final T value);
 
@@ -116,6 +119,8 @@ public interface Wave {
      * @param waveItem the waveItem of the object to retrieve
      * 
      * @return the waveData registered by the key
+     * 
+     * @param <T> the type of the wave data to add
      */
     <T> WaveData<T> getData(WaveItem<T> waveItem);
 
@@ -125,6 +130,8 @@ public interface Wave {
      * @param waveItem waveItem of the object to retrieve
      * 
      * @return the data registered by the key
+     * 
+     * @param <T> the type of the wave data to add
      */
     <T> T get(WaveItem<T> waveItem);
 
