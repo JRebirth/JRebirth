@@ -323,11 +323,14 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
     }
 
     /**
-     * TODO To complete.
+     * Link the creation of a wave to an event triggered on a node.
      * 
-     * @param playPauseButton2
-     * @param mouseClicked
-     * @param doPlay
+     * @param node the node to follow
+     * @param eventType the type of the event to follow
+     * @param waveType the type of the wave to create
+     * @param waveData additional Wave data
+     * 
+     * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveTypeBase waveType, final WaveData<?>... waveData) {
         node.addEventHandler(eventType, new EventHandler<E>() {
@@ -342,16 +345,19 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
     }
 
     /**
-     * TODO To complete.
+     * Link a command to an event triggered on a node.
      * 
-     * @param playPauseButton2
-     * @param mouseClicked
-     * @param doPlay
+     * @param node the node to follow
+     * @param eventType the type of the event to follow
+     * @param commandClass the command to launch
+     * @param waveData additional Wave data
+     * 
+     * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkCommand(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Command> commandClass, final WaveData<?>... waveData) {
         node.addEventHandler(eventType, new EventHandler<E>() {
             /**
-             * 
+             * Handle the triggered event
              */
             @Override
             public void handle(final E event) {
@@ -361,16 +367,19 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
     }
 
     /**
-     * TODO To complete.
+     * Link an User Interface action to an event triggered on a node.
      * 
-     * @param playPauseButton2
-     * @param mouseClicked
-     * @param doPlay
+     * @param node the node to follow
+     * @param eventType the type of the event to follow
+     * @param modelClass the model to display
+     * @param waveData additional Wave data
+     * 
+     * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkUi(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Model> modelClass, final WaveData<?>... waveData) {
         node.addEventHandler(eventType, new EventHandler<E>() {
             /**
-             * 
+             * Handle the triggered event
              */
             @Override
             public void handle(final E event) {
@@ -380,17 +389,21 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
     }
 
     /**
-     * TODO To complete.
+     * Link a Service to an event triggered on a node.
      * 
-     * @param playPauseButton2
-     * @param mouseClicked
-     * @param doPlay
+     * @param node the node to follow
+     * @param eventType the type of the event to follow
+     * @param serviceClass the service to call
+     * @param waveType the method of the service call
+     * @param waveData additional Wave data
+     * 
+     * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkService(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Service> serviceClass, final WaveTypeBase waveType,
             final WaveData<?>... waveData) {
         node.addEventHandler(eventType, new EventHandler<E>() {
             /**
-             * 
+             * Handle the triggered event
              */
             @Override
             public void handle(final E event) {

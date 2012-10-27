@@ -24,6 +24,7 @@ package org.jrebirth.core.wave;
  * 
  * @author Sébastien Bordes
  * 
+ * @param <T> the type of the data hold
  */
 public final class WaveData<T> implements Comparable<WaveData<T>> {
 
@@ -41,6 +42,14 @@ public final class WaveData<T> implements Comparable<WaveData<T>> {
     /** The field used for sorting. */
     private int order;
 
+    /**
+     * Build a wave data.
+     * 
+     * @param waveItem the wave item used as the key into the wave
+     * @param value the data hold by he wave data wrapper
+     * 
+     * @return a new fresh wave Data object
+     */
     public static <T extends Object> WaveData<T> build(final WaveItem<T> waveItem, final T value) {
         return new WaveData<>(waveItem, value);
     }

@@ -47,7 +47,7 @@ public final class ControlsModel extends DefaultModel<ControlsModel, ControlsVie
      * @param wave the wave received
      */
     public void eventsLoaded(final List<Event> eventList, final Wave wave) {
-        getView().activateButtons(eventList.size() > 0);
+        getView().activateButtons(!eventList.isEmpty());
     }
 
     /**

@@ -33,6 +33,7 @@ public class CommandWaveBuilder<B extends CommandWaveBuilder<B, WB>, WB extends 
      * @param waveBeanClass
      */
     public CommandWaveBuilder(final Class<? extends Command> commandClass, final Class<WB> waveBeanClass) {
+        super();
         this.commandClass = commandClass;
         this.waveBeanClass = waveBeanClass;
     }

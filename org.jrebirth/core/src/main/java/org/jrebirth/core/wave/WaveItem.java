@@ -12,12 +12,18 @@ import org.jrebirth.core.util.ClassUtility;
  */
 public class WaveItem<T> {
 
+    /** The generator of unique id. */
     private static int idGenerator;
 
+    /** The unique identifier of the wave item. */
     private final int uid;
 
+    /** The type of the related object registered by this wave item. */
     private final Class<T> itemClass;
 
+    /**
+     * Default Constructor.
+     */
     public WaveItem() {
         synchronized (WaveItem.class) {
             this.uid = ++idGenerator;
@@ -46,7 +52,7 @@ public class WaveItem<T> {
      */
     @Override
     public boolean equals(final Object waveItem) {
-        return waveItem != null && waveItem instanceof WaveItem && getUid() == ((WaveItem<?>) waveItem).getUid();
+        return waveItem instanceof WaveItem && getUid() == ((WaveItem<?>) waveItem).getUid();
     }
 
     /**
