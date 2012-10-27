@@ -28,7 +28,9 @@ import org.jrebirth.core.ui.DefaultController;
  * 
  * @author Sébastien Bordes
  */
-public final class ControlsController extends DefaultController<ControlsModel, ControlsView> /* implements MouseAdapter */{
+public final class ControlsController extends DefaultController<ControlsModel, ControlsView> {
+
+    /* implements MouseAdapter */
 
     /**
      * Default Constructor.

@@ -130,14 +130,14 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         // Build the new UI view
         final Model model = getGlobalFacade().getUiFacade().retrieve((Class<? extends Model>) wave.getRelatedClass());
 
-        if (wave.contains(JRebirthWaves.attachUi)) {
+        if (wave.contains(JRebirthWaves.ATTACH_UI)) {
             // Add an Ui view into a the place holder provided
-            final ObjectProperty<Node> property = wave.get(JRebirthWaves.attachUi);
+            final ObjectProperty<Node> property = wave.get(JRebirthWaves.ATTACH_UI);
             property.setValue(model.getView().getRootNode());
 
-        } else if (wave.contains(JRebirthWaves.addUi)) {
+        } else if (wave.contains(JRebirthWaves.ADD_UI)) {
             // Add an Ui view into a children list of its parent container
-            final ObservableList<Node> list = wave.get(JRebirthWaves.addUi);
+            final ObservableList<Node> list = wave.get(JRebirthWaves.ADD_UI);
             list.add(model.getView().getRootNode());
         }
 

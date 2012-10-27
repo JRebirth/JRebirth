@@ -103,8 +103,7 @@ public final class ControlsView extends DefaultView<ControlsModel, HBox, Control
                 this.playPauseButton,
                 this.backwardButton,
                 this.forwardButton,
-                this.stopButton
-                );
+                this.stopButton);
     }
 
     /**
