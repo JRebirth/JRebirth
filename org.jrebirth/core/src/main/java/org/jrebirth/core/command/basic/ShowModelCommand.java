@@ -2,6 +2,7 @@ package org.jrebirth.core.command.basic;
 
 import org.jrebirth.core.command.AbstractBaseMultiCommand;
 import org.jrebirth.core.concurrent.RunIntoType;
+import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
 
 /**
@@ -34,6 +35,14 @@ public class ShowModelCommand extends AbstractBaseMultiCommand {
     @Override
     public Class<? extends WaveBean> getWaveBeanClass() {
         return ShowModelWaveBean.class;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void processAction(final Wave wave) {
+        // Nothing to do yet
     }
 
 }

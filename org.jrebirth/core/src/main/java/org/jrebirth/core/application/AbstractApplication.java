@@ -121,7 +121,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             super.stop();
 
             // Be Careful done into the JAT
-            // Shuould create a progress bar to control the closur process
+            // Should create a progress bar to control the closure process
 
             // Stop the JRebirthThread
             JRebirthThread.getThread().close();
@@ -294,28 +294,33 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     }
 
     /**
-     * TODO To complete.
+     * Return the #KeyCode used to put the application in full screen mode.<br />
+     * Can be overridden<br />
+     * Default is F11<br />
      * 
-     * @return
+     * @return the full screen shortcut
      */
     protected KeyCode getFullScreenKeyCode() {
         return KeyCode.F11;
     }
 
     /**
-     * TODO To complete.
+     * Return the #KeyCode used to iconify the application.<br />
+     * Can be overridden<br />
+     * Default is F10<br />
      * 
-     * @return
+     * @return the iconify shortcut
      */
     protected KeyCode getIconifiedKeyCode() {
         return KeyCode.F10;
     }
 
     /**
-     * TODO To complete.
+     * Build and return the Default Uncaught Exception Handler for All threads which don't have any handler.
      * 
-     * @param gf
-     * @return
+     * @param gf the JRebirth global facade
+     * 
+     * @return the uncaught exception handler for All threads which don't have any handler.
      */
     protected DefaultUncaughtExceptionHandler getDefaultUncaughtExceptionHandler(final GlobalFacade gf) {
         return new DefaultUncaughtExceptionHandler(gf);

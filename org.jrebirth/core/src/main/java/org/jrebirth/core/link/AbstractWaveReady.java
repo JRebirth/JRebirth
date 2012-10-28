@@ -25,6 +25,7 @@ import org.jrebirth.core.command.Command;
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.event.EventType;
+import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.FacadeReady;
@@ -51,7 +52,7 @@ import org.jrebirth.core.wave.WaveType;
  * 
  * @param <R> the class type of the subclass
  */
-public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends AbstractReady<R> implements WaveReady {
+public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends AbstractReady<R> {
 
     /**
      * Short cut method used to retrieve the notifier.
@@ -198,8 +199,9 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
             processAction(wave);
 
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            JRebirthLogger.getInstance().error("Error while dispatching a wave");
+            JRebirthLogger.getInstance().logException(e);
             // Propagate the wave exception
-            e.printStackTrace();
             throw new WaveException(wave, e);
         }
     }

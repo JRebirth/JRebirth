@@ -26,7 +26,7 @@ public class WaveTypeBase implements WaveType {
      * Default constructor.
      * 
      * @param action The action to performed
-     * @param waveItems
+     * @param waveItems the list of #WaveItem required by this wave
      */
     public WaveTypeBase(final String action, final WaveItem<?>... waveItems) {
 

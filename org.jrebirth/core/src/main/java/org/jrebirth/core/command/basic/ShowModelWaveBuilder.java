@@ -29,6 +29,13 @@ public final class ShowModelWaveBuilder<B extends ShowModelWaveBuilder<B>> exten
     private Node createdNode;
 
     /**
+     * Private constructor.
+     */
+    private ShowModelWaveBuilder() {
+        super(ShowModelCommand.class, ShowModelWaveBean.class);
+    }
+
+    /**
      * Static method to build a default builder.
      * 
      * @return a new fresh ShowModelWaveBuilder instance
@@ -36,13 +43,6 @@ public final class ShowModelWaveBuilder<B extends ShowModelWaveBuilder<B>> exten
     @SuppressWarnings("rawtypes")
     public static ShowModelWaveBuilder<?> create() {
         return new ShowModelWaveBuilder();
-    }
-
-    /**
-     * Private constructor.
-     */
-    private ShowModelWaveBuilder() {
-        super(ShowModelCommand.class, ShowModelWaveBean.class);
     }
 
     /**

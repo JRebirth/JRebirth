@@ -28,6 +28,7 @@ public abstract class AbstractJrbUncaughtExceptionHandler implements JrbUncaught
     /** The global facade. */
     private final GlobalFacade globalFacade;
 
+    /** The type of UncaughtExceptionHandler. */
     private final UncaughtExceptionHandlerType uncaughtExceptionHandlerType;
 
     /**
@@ -61,14 +62,12 @@ public abstract class AbstractJrbUncaughtExceptionHandler implements JrbUncaught
      */
     @Override
     public void uncaughtException(final Thread t, final Throwable e) {
-        e.printStackTrace();
+        // e.printStackTrace();
         if (e instanceof Exception) {
             getGlobalFacade().getLogger().error(e.getMessage());
             getGlobalFacade().getLogger().logException((Exception) e);
         } else {
             getGlobalFacade().getLogger().fatal(e.getMessage());
-            // TODO
-
         }
 
     }

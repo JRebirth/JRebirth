@@ -133,13 +133,13 @@ public final class ClassUtility {
     }
 
     /**
-     * TODO To complete.
+     * Return the generic type of the class.
      * 
-     * @param i
-     * @return
+     * @param the index of the type to find
+     * 
+     * @return the generic type
      */
     public static Class<?> getGenericType(final int i) {
-
         return null;
     }
 }

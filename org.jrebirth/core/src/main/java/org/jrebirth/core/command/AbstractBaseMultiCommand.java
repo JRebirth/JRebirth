@@ -41,7 +41,7 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
     private final boolean sequential;
 
     /** The index of the last command performed. */
-    private int commandRunIndex = 0;
+    private int commandRunIndex;
 
     /**
      * Default Constructor.
@@ -119,14 +119,6 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
     @Override
     public void addCommandClass(final Class<? extends Command> commandClass) {
         this.commandList.add(commandClass);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void processAction(final Wave wave) {
-        // Nothing to do yet
     }
 
 }
