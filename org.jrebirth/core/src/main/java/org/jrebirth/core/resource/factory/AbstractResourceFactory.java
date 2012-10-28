@@ -29,6 +29,7 @@ import java.util.WeakHashMap;
  * @author Sébastien Bordes
  * 
  * @param <E> The enumeration used to wrap the resource
+ * @param <P> The object parameter type taht hold custom resource properties
  * @param <R> The resource managed
  */
 public abstract class AbstractResourceFactory<E, P, R> implements ResourceFactory<E, P, R> {

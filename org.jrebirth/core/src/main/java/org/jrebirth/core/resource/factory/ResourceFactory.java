@@ -28,18 +28,19 @@ package org.jrebirth.core.resource.factory;
 public interface ResourceFactory<E, P, R> {
 
     /**
-     * .
+     * Store a Parameter Object.
      * 
-     * @param key
-     * @param params
+     * @param key the key to use
+     * @param params the parameter object to store
      */
     void storeParams(E key, P params);
 
     /**
-     * .
+     * Retrieve the Parameter Object.
      * 
-     * @param key
-     * @return
+     * @param key the key of the param to retrieve
+     * 
+     * @return the Parameter Object
      */
     P getParam(final E key);
 

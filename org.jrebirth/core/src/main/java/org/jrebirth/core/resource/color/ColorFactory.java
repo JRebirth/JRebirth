@@ -59,11 +59,11 @@ public final class ColorFactory extends AbstractResourceFactory<ColorEnum, Color
      */
     private Color buildWebColor(final WebColor wColor) {
         Color color = null;
-        if (wColor.opacity() == null) {
-            color = Color.web(wColor.hex());
-        } else {
-            color = Color.web(wColor.hex(), wColor.opacity());
-        }
+        // if (wColor.opacity() == null) {
+        // color = Color.web(wColor.hex());
+        // } else {
+        color = Color.web(wColor.hex(), wColor.opacity());
+        // }
         return color;
     }
 
@@ -76,11 +76,11 @@ public final class ColorFactory extends AbstractResourceFactory<ColorEnum, Color
      */
     private Color buildRGB01Color(final RGB01Color rColor) {
         Color color = null;
-        if (rColor.opacity() == null) {
-            color = Color.color(rColor.red(), rColor.green(), rColor.blue());
-        } else {
-            color = Color.color(rColor.red(), rColor.green(), rColor.blue(), rColor.opacity());
-        }
+        // if (rColor.opacity() == null) {
+        // color = Color.color(rColor.red(), rColor.green(), rColor.blue());
+        // } else {
+        color = Color.color(rColor.red(), rColor.green(), rColor.blue(), rColor.opacity());
+        // }
         return color;
     }
 
@@ -93,11 +93,11 @@ public final class ColorFactory extends AbstractResourceFactory<ColorEnum, Color
      */
     private Color buildRGB255Color(final RGB255Color rColor) {
         Color color = null;
-        if (rColor.opacity() == null) {
-            color = Color.rgb(rColor.red(), rColor.green(), rColor.blue());
-        } else {
-            color = Color.rgb(rColor.red(), rColor.green(), rColor.blue(), rColor.opacity());
-        }
+        // if (rColor.opacity() == null) {
+        // color = Color.rgb(rColor.red(), rColor.green(), rColor.blue());
+        // } else {
+        color = Color.rgb(rColor.red(), rColor.green(), rColor.blue(), rColor.opacity());
+        // }
         return color;
     }
 
@@ -110,11 +110,11 @@ public final class ColorFactory extends AbstractResourceFactory<ColorEnum, Color
      */
     private Color buildHSBColor(final HSBColor hsbColor) {
         Color color = null;
-        if (hsbColor.opacity() == null) {
-            color = Color.hsb(hsbColor.hue(), hsbColor.saturation(), hsbColor.brightness());
-        } else {
-            color = Color.hsb(hsbColor.hue(), hsbColor.saturation(), hsbColor.brightness(), hsbColor.opacity());
-        }
+        // if (hsbColor.opacity() == null) {
+        // color = Color.hsb(hsbColor.hue(), hsbColor.saturation(), hsbColor.brightness());
+        // } else {
+        color = Color.hsb(hsbColor.hue(), hsbColor.saturation(), hsbColor.brightness(), hsbColor.opacity());
+        // }
         return color;
     }
 
@@ -127,11 +127,11 @@ public final class ColorFactory extends AbstractResourceFactory<ColorEnum, Color
      */
     private Color buildGrayColor(final GrayColor gColor) {
         Color color = null;
-        if (gColor.opacity() == null) {
-            color = Color.gray(gColor.gray());
-        } else {
-            color = Color.gray(gColor.gray(), gColor.opacity());
-        }
+        // if (gColor.opacity() == null) {
+        // color = Color.gray(gColor.gray());
+        // } else {
+        color = Color.gray(gColor.gray(), gColor.opacity());
+        // }
         return color;
     }
 }

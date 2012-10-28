@@ -68,7 +68,7 @@ public class ClassKey<C> implements UniqueKey {
     @SuppressWarnings("unchecked")
     @Override
     public boolean equals(final Object obj) {
-        return obj != null && obj instanceof ClassKey && this.getClassField().equals(((ClassKey<C>) obj).getClassField());
+        return obj instanceof ClassKey && this.getClassField().equals(((ClassKey<C>) obj).getClassField());
     }
 
     /**

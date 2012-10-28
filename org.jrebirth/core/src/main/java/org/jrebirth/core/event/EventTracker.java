@@ -16,8 +16,8 @@
  */
 package org.jrebirth.core.event;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,14 +49,15 @@ public class EventTracker extends AbstractRecord {
     @Override
     protected List<OutputStream> buildOutputStreamList() {
         // Nothing to do yet
-        try {
-            final List<OutputStream> fosList = new ArrayList<>();
-            fosList.add(new FileOutputStream("events.edt"));
-            return fosList;
-        } catch (final FileNotFoundException e) {
-            e.printStackTrace();
+        final List<OutputStream> fosList = new ArrayList<>();
+
+        try (FileOutputStream fos = new FileOutputStream("events.edt")) {
+            fosList.add(fos);
+        } catch (final IOException e) {
+            JRebirthLogger.getInstance().error("Impossible to create events.edt");
+            JRebirthLogger.getInstance().logException(e);
         }
-        return null;
+        return fosList;
     }
 
     /**

@@ -23,9 +23,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.jrebirth.core.event.JRebirthLogger;
+
 /**
  * 
- * The class <strong>WaveImpl</strong>.
+ * The class <strong>WaveBase</strong>.
  * 
  * This Bean is used to move wave's data through layer. It allow to manage priorities.
  * 
@@ -242,19 +244,20 @@ public class WaveBase implements Wave {
     @Override
     public WaveBean getWaveBean() {
         if (this.waveBean == null) {
-            if (!WaveBean.class.equals(this.waveBeanClass)) {
+            if (WaveBean.class.equals(this.waveBeanClass)) {
+                // Build an empty wave bean to avoid null pointer exception
+                this.waveBean = new DefaultWaveBean();
+            } else {
                 try {
                     this.waveBean = this.waveBeanClass.newInstance();
                 } catch (InstantiationException | IllegalAccessException e) {
-                    // throw new CoreRuntimeException("Impossible to build Wave Bean instance", e);
+                    JRebirthLogger.getInstance().error("Impossible to build WaveBean instance : " + this.waveBeanClass.toString());
+                    JRebirthLogger.getInstance().logException(e);
                 } finally {
                     if (this.waveBean == null) {
                         this.waveBean = new DefaultWaveBean();
                     }
                 }
-            } else {
-                // Build an empty wave bean to avoid null pointer exception
-                this.waveBean = new DefaultWaveBean();
             }
         }
 
