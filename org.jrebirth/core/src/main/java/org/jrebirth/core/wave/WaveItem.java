@@ -9,6 +9,7 @@ import org.jrebirth.core.util.ClassUtility;
  * 
  * @author Sébastien Bordes
  * 
+ * @param <T> the type of the object mapped by this WaveItem
  */
 public class WaveItem<T> {
 
@@ -25,6 +26,7 @@ public class WaveItem<T> {
      * Default Constructor.
      */
     public WaveItem() {
+        // Ensure that the uid will be unique at runtime
         synchronized (WaveItem.class) {
             this.uid = ++idGenerator;
         }

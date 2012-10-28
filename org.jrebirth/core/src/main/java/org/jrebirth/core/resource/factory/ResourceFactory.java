@@ -41,7 +41,7 @@ public interface ResourceFactory<E, P, R> {
      * @param key
      * @return
      */
-    public P getParam(final E key);
+    P getParam(final E key);
 
     /**
      * Retrieve the resource. And build it if it didn't be done before.

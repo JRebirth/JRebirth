@@ -44,6 +44,7 @@ public final class ControlsModel extends DefaultModel<ControlsModel, ControlsVie
      * Call when event are loaded.
      * 
      * @param eventList the list of events loaded
+     * 
      * @param wave the wave received
      */
     public void eventsLoaded(final List<Event> eventList, final Wave wave) {
@@ -53,9 +54,6 @@ public final class ControlsModel extends DefaultModel<ControlsModel, ControlsVie
     /**
      * Call when event are loaded.
      * 
-     * 
-     * 
-     * @param eventList the list of events loaded
      * @param wave the wave received
      */
     public void unload(final Wave wave) {
