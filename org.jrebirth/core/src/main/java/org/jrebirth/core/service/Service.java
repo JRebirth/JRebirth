@@ -30,9 +30,11 @@ import org.jrebirth.core.wave.Wave;
 public interface Service extends FacadeReady<Service> {
 
     /**
-     * Do a specific action and process the wave.
+     * Do a specific action by processing the wave.
      * 
-     * @param wave
+     * @param wave the wave that hold all related data
+     * 
+     * @param <T> The type of the object to return must be compatible with the WaveType contract taht call this service
      */
     <T extends Object> void returnData(Wave wave);
 

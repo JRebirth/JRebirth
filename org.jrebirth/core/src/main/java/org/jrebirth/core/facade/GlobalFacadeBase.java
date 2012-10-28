@@ -178,14 +178,17 @@ public class GlobalFacadeBase implements GlobalFacade {
         // Manage design for extension
         customStop();
 
+        // Stop the thread pool
         if (getExecutorService() != null) {
             getExecutorService().shutdown();
         }
 
+        // Close log files or streams
         if (getLogger() != null) {
             getLogger().closeOutputStream();
         }
 
+        // Close the JRebirth events logged
         if (getEventTracker() != null) {
             getEventTracker().closeOutputStream();
         }
@@ -200,36 +203,44 @@ public class GlobalFacadeBase implements GlobalFacade {
     }
 
     /**
-     * TODO To complete.
+     * Build the CommandFacade singleton to use.
      * 
-     * @return
+     * Can be overridden by sub class to customize its behaviors.
+     * 
+     * @return the command facade
      */
     protected CommandFacade buildCommandFacade() {
         return new CommandFacade(this);
     }
 
     /**
-     * TODO To complete.
+     * Build the ServiceFacade singleton to use.
      * 
-     * @return
+     * Can be overridden by sub class to customize its behaviors.
+     * 
+     * @return the service facade
      */
     protected ServiceFacade buildServiceFacade() {
         return new ServiceFacade(this);
     }
 
     /**
-     * TODO To complete.
+     * Build the UiFacade singleton to use.
      * 
-     * @return
+     * Can be overridden by sub class to customize its behaviors.
+     * 
+     * @return the ui facade
      */
     protected UiFacade buildUiFacade() {
         return new UiFacade(this);
     }
 
     /**
-     * TODO To complete.
+     * Build the notifier singleton to use.
      * 
-     * @return
+     * Can be overridden by sub class to customize its behaviors.
+     * 
+     * @return the notifier
      */
     protected NotifierBase buildNotifier() {
         return new NotifierBase(this);

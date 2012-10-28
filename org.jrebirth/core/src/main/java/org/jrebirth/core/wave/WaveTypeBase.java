@@ -10,16 +10,28 @@ import java.util.List;
  */
 public class WaveTypeBase implements WaveType {
 
+    /** The generator of unique id. */
     private static int idGenerator;
 
+    /** The action to performed, basically the name of the method to call. */
     private final String action;
 
+    /** Define arguments types to use. */
     private final List<WaveItem<?>> waveItemList = new ArrayList<>();
 
+    /** The unique identifier of the wave type. */
     private final int uid;
 
+    /**
+     * Default constructor.
+     * 
+     * @param action The action to performed
+     * @param waveItems
+     */
     public WaveTypeBase(final String action, final WaveItem<?>... waveItems) {
-        synchronized (WaveItem.class) {
+
+        // Ensure that the uid will be unique at runtime
+        synchronized (WaveTypeBase.class) {
             this.uid = ++idGenerator;
         }
 
@@ -63,7 +75,7 @@ public class WaveTypeBase implements WaveType {
      */
     @Override
     public boolean equals(final Object waveType) {
-        return waveType != null && waveType instanceof WaveTypeBase && getUid() == ((WaveTypeBase) waveType).getUid();
+        return waveType instanceof WaveTypeBase && getUid() == ((WaveTypeBase) waveType).getUid();
     }
 
     /**

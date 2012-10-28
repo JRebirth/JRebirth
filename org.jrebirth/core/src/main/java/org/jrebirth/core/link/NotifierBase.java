@@ -160,7 +160,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
                 // If the notified class is part of the UI
                 // We must perform this action into the JavaFX Application Thread
                 if (linked instanceof Model) {
-                    JRebirth.runIntoJAT(LoopFactory.newRunnable(linked, wave));
+                    JRebirth.runIntoJAT(LoopBuilder.newRunnable(linked, wave));
                 } else {
                     // Otherwise can perform it right now into the current thread
                     // (JRebirthThread)
@@ -168,7 +168,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
                 }
             }
         } else {
-            System.err.println("No Listener attached");
+            JRebirthLogger.getInstance().warn("No Listener attached");
         }
     }
 
@@ -186,7 +186,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
             if (this.notifierMap.containsKey(wt)) {
                 list = this.notifierMap.get(wt);
             } else {
-                list = LoopFactory.newList(linkedObject);
+                list = LoopBuilder.newList(linkedObject);
                 this.notifierMap.put(wt, list);
             }
             if (list.isEmpty() || !list.contains(linkedObject)) {
@@ -216,18 +216,18 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     }
 
     /**
-     * The class <strong>LoopFactory</strong>.
+     * The class <strong>LoopBuilder</strong>.
      * 
      * Used to instantiate object into loop.
      * 
      * @author Sébastien Bordes
      */
-    private static final class LoopFactory {
+    private static final class LoopBuilder {
 
         /**
          * Private Constructor.
          */
-        private LoopFactory() {
+        private LoopBuilder() {
             // Nothing to do
         }
 
