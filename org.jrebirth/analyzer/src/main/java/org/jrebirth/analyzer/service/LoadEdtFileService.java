@@ -58,7 +58,7 @@ public class LoadEdtFileService extends ServiceBase {
             }
 
         } catch (final IOException e) {
-            getLocalFacade().getGlobalFacade().getLogger().error("Error while processing event file");
+            // getLocalFacade().getGlobalFacade().getLogger().error("Error while processing event file");
         }
         return eventList;
 

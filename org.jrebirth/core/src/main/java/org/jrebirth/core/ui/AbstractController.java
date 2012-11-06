@@ -339,7 +339,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
              */
             @Override
             public void handle(final E event) {
-                getModel().send(waveType, waveData);
+                getModel().sendWave(waveType, waveData);
             }
         });
     }

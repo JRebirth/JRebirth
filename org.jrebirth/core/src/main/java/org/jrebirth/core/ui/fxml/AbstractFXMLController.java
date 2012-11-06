@@ -20,6 +20,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import org.jrebirth.core.ui.View;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>AbstractFXMLController</strong>.
@@ -27,6 +29,9 @@ import org.jrebirth.core.ui.View;
  * @author Sébastien Bordes
  */
 public abstract class AbstractFXMLController implements FXMLController {
+
+    /** The class logger. */
+    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractFXMLController.class);
 
     /** The linked view that load this FXML component. */
     private View<?, ?, ?> view;
@@ -52,7 +57,7 @@ public abstract class AbstractFXMLController implements FXMLController {
      */
     @Override
     public void initialize(final URL url, final ResourceBundle resource) {
-        getView().getModel().getLocalFacade().getGlobalFacade().getLogger().trace("Initialize fxml node : " + url.toString());
+        LOGGER.trace("Initialize fxml node : " + url.toString());
     }
 
 }

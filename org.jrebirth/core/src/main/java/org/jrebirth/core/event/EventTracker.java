@@ -51,7 +51,8 @@ public class EventTracker extends AbstractRecord {
         // Nothing to do yet
         final List<OutputStream> fosList = new ArrayList<>();
 
-        try (FileOutputStream fos = new FileOutputStream("events.edt")) {
+        try {
+            final FileOutputStream fos = new FileOutputStream("events.etd");
             fosList.add(fos);
         } catch (final IOException e) {
             JRebirthLogger.getInstance().error("Impossible to create events.edt");

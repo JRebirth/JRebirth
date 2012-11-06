@@ -1,4 +1,4 @@
-analyseLocally=true
+analyseLocally=false
 eclipse.preferences.version=1
 projectArtifactId=core
 projectBranch=

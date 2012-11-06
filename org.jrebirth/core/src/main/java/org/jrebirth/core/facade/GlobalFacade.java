@@ -22,7 +22,6 @@ import org.jrebirth.core.application.JRebirthApplication;
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.event.EventTracker;
 import org.jrebirth.core.event.EventType;
-import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.link.Notifier;
 import org.jrebirth.core.service.Service;
@@ -70,7 +69,7 @@ public interface GlobalFacade {
     /**
      * @return the logger
      */
-    JRebirthLogger getLogger();
+    // JRebirthLogger getLogger();
 
     /**
      * @return the event tracker

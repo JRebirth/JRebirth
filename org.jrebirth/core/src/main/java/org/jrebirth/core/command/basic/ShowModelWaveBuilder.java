@@ -14,7 +14,7 @@ import org.jrebirth.core.wave.WaveBase;
  * 
  * @param <B> The builder generic type
  */
-public final class ShowModelWaveBuilder<B extends ShowModelWaveBuilder<B>> extends CommandWaveBuilder<B, ShowModelWaveBean> {
+public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWaveBuilder, ShowModelWaveBean> {
 
     /** The field used to store the property mask. */
     private int setMask;
@@ -40,8 +40,7 @@ public final class ShowModelWaveBuilder<B extends ShowModelWaveBuilder<B>> exten
      * 
      * @return a new fresh ShowModelWaveBuilder instance
      */
-    @SuppressWarnings("rawtypes")
-    public static ShowModelWaveBuilder<?> create() {
+    public static ShowModelWaveBuilder create() {
         return new ShowModelWaveBuilder();
     }
 
@@ -71,11 +70,10 @@ public final class ShowModelWaveBuilder<B extends ShowModelWaveBuilder<B>> exten
      * 
      * @return the builder
      */
-    @SuppressWarnings("unchecked")
-    public B parentNode(final Pane parentNode) {
+    public ShowModelWaveBuilder parentNode(final Pane parentNode) {
         this.parentNode = parentNode;
         this.setMask |= 1;
-        return (B) this;
+        return this;
     }
 
     /**
@@ -85,11 +83,10 @@ public final class ShowModelWaveBuilder<B extends ShowModelWaveBuilder<B>> exten
      * 
      * @return the builder
      */
-    @SuppressWarnings("unchecked")
-    public B modelClass(final Class<? extends Model> modelClass) {
+    public ShowModelWaveBuilder modelClass(final Class<? extends Model> modelClass) {
         this.modelClass = modelClass;
         this.setMask |= 2;
-        return (B) this;
+        return this;
     }
 
     /**
@@ -99,11 +96,10 @@ public final class ShowModelWaveBuilder<B extends ShowModelWaveBuilder<B>> exten
      * 
      * @return the builder
      */
-    @SuppressWarnings("unchecked")
-    public B createdNode(final Node createdNode) {
+    public ShowModelWaveBuilder createdNode(final Node createdNode) {
         this.createdNode = createdNode;
         this.setMask |= 4;
-        return (B) this;
+        return this;
     }
 
     /**

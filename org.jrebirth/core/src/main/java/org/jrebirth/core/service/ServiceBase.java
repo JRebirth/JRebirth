@@ -130,7 +130,7 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
                                 final WaveItem<T> waveItem = localService.waveItemMap.get(responseWaveType);
 
                                 // FIXME Manage !
-                                send(responseWaveType, WaveData.build(waveItem, res));
+                                sendWave(responseWaveType, WaveData.build(waveItem, res));
                             }
 
                         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {

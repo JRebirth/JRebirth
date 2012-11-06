@@ -67,8 +67,7 @@ public abstract class AbstractRecord implements Recordable {
                 outputStream.flush();
             }
         } catch (final IOException e) {
-            // Nothing that we can do
-            return;
+            JRebirthLogger.getInstance().logException(e);
         }
     }
 

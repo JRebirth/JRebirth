@@ -135,7 +135,7 @@ public final class ClassUtility {
     /**
      * Return the generic type of the class.
      * 
-     * @param the index of the type to find
+     * @param i the index of the type to find
      * 
      * @return the generic type
      */

@@ -9,8 +9,8 @@
 
 	<groupId>org.jrebirth</groupId>
 	<artifactId>component</artifactId>
-	<name>JRebirth Components Library based on JRebirth Core feature</name>
-	<description>Convenient components to use with JRebirt Core features</description>
+	<name>JRebirth Components</name>
+	<description>Convenient components to use with JRebirth Core features</description>
 
 	<dependencies>
 		<dependency>

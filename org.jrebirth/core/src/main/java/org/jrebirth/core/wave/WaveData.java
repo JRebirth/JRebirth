@@ -33,9 +33,6 @@ public final class WaveData<T> implements Comparable<WaveData<T>> {
      */
     private WaveItem<T> waveItem;
 
-    /** The class type of the contained object. */
-    private Class<T> valueClass;
-
     /** The value data. */
     private T value;
 
@@ -70,7 +67,7 @@ public final class WaveData<T> implements Comparable<WaveData<T>> {
     /**
      * @return Returns the waveItem.
      */
-    public WaveItem getKey() {
+    public WaveItem<T> getKey() {
         return this.waveItem;
     }
 
@@ -79,20 +76,6 @@ public final class WaveData<T> implements Comparable<WaveData<T>> {
      */
     public void setKey(final WaveItem<T> waveItem) {
         this.waveItem = waveItem;
-    }
-
-    /**
-     * @return Returns the valueClass.
-     */
-    protected Class<T> getValueClass() {
-        return this.valueClass;
-    }
-
-    /**
-     * @param valueClass The valueClass to set.
-     */
-    protected void setValueClass(final Class<T> valueClass) {
-        this.valueClass = valueClass;
     }
 
     /**
@@ -134,6 +117,7 @@ public final class WaveData<T> implements Comparable<WaveData<T>> {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public boolean equals(final Object obj) {
         // A wave data is unique into a wave, no equals needed

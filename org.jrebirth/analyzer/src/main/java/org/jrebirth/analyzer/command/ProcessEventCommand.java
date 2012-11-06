@@ -37,7 +37,7 @@ public final class ProcessEventCommand extends DefaultCommand implements Command
     @Override
     public void ready() throws CoreException {
         super.ready();
-        addCommandListener(this);
+        // addCommandListener(this);
     }
 
     /**
@@ -76,7 +76,7 @@ public final class ProcessEventCommand extends DefaultCommand implements Command
             case CREATE_VIEW:
             case CREATE_CONTROLLER:
                 // final BallModel ballModel = getModel(BallModel.class, event);
-                callCommand(ShowBallCommand.class, WaveData.build(EditorWaves.EVENT, event));
+                callCommand(CreateBallCommand.class, WaveData.build(EditorWaves.EVENT, event));
                 break;
             case CREATE_WAVE:
             default:
@@ -90,7 +90,17 @@ public final class ProcessEventCommand extends DefaultCommand implements Command
      * @param event the access event
      */
     private void accessBallModel(final Event event) {
-        event.toString();
+        switch (event.getEventType()) {
+            case ACCESS_COMMAND:
+            case ACCESS_CONTROLLER:
+            case ACCESS_MODEL:
+            case ACCESS_SERVICE:
+            case ACCESS_VIEW:
+                // final BallModel ballModel = getModel(BallModel.class, event);
+                callCommand(AccessBallCommand.class, WaveData.build(EditorWaves.EVENT, event));
+                break;
+            default:
+        }
     }
 
     /**
@@ -106,7 +116,7 @@ public final class ProcessEventCommand extends DefaultCommand implements Command
             case DESTROY_VIEW:
             case DESTROY_CONTROLLER:
                 // final BallModel ballModel = getModel(BallModel.class, event);
-                callCommand(HideBallCommand.class, WaveData.build(EditorWaves.EVENT, event));
+                callCommand(DestroyBallCommand.class, WaveData.build(EditorWaves.EVENT, event));
                 break;
             case DESTROY_WAVE:
             default:
@@ -119,7 +129,7 @@ public final class ProcessEventCommand extends DefaultCommand implements Command
      */
     @Override
     public void commandAchieved(final Wave wave) {
-        send(EditorWaves.RE_EVENT_PROCESSED/* , WaveData.build(waveItem, value) */);
+        sendWave(EditorWaves.RE_EVENT_PROCESSED/* , WaveData.build(waveItem, value) */);
 
     }
 

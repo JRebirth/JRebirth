@@ -16,22 +16,18 @@
  */
 package org.jrebirth.analyzer.command;
 
-import java.io.File;
-
-import javafx.stage.FileChooser;
-
-import org.jrebirth.analyzer.service.LoadEdtFileService;
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
+import org.jrebirth.analyzer.ui.editor.ball.BallModel;
 import org.jrebirth.core.command.DefaultUICommand;
+import org.jrebirth.core.event.Event;
 import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.WaveData;
 
 /**
- * The class <strong>OpenEventTrackerFileCommand</strong>.
+ * The class <strong>HideBallCommand</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class OpenEventTrackerFileCommand extends DefaultUICommand {
+public final class AccessBallCommand extends DefaultUICommand {
 
     /**
      * {@inheritDoc}
@@ -39,26 +35,11 @@ public final class OpenEventTrackerFileCommand extends DefaultUICommand {
     @Override
     public void execute(final Wave wave) {
 
-        File selected = wave.get(EditorWaves.EVENTS_FILE);
+        final Event event = wave.get(EditorWaves.EVENT);
+        final BallModel targetBallModel = getModel(BallModel.class, event);
+        targetBallModel.access();
 
-        if (selected == null) {
-
-            final FileChooser fc = new FileChooser();
-            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("(etd)", "*.etd")); // to filter
-            selected = fc.showOpenDialog(null);
-
-        }
-
-        if (selected != null) {
-            // if nothing is selected
-            // Process the file
-            // getService(LoadEdtFileService.class).processEventFile(selected);
-
-            returnData(LoadEdtFileService.class,
-                    LoadEdtFileService.DO_LOAD_EVENTS,
-                    WaveData.build(EditorWaves.EVENTS_FILE, selected));
-
-        }
+        // getModel(EditorModel.class).unregisterBall(targetBallModel);
     }
 
 }

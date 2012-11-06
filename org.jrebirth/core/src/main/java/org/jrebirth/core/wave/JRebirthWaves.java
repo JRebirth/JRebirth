@@ -16,6 +16,8 @@
  */
 package org.jrebirth.core.wave;
 
+import java.util.List;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -28,9 +30,12 @@ import javafx.scene.Node;
 public interface JRebirthWaves {
 
     /** The waveItem that hold the attached node. */
-    WaveItem<ObjectProperty<Node>> ATTACH_UI = new WaveItem<>();
+    WaveItem<ObjectProperty<Node>> ATTACH_UI_NODE_PLACEHOLDER = new WaveItem<>();
 
     /** The waveItem that hold the children lsit of the parent node. */
-    WaveItem<ObservableList<Node>> ADD_UI = new WaveItem<>();
+    WaveItem<ObservableList<Node>> ADD_UI_CHILDREN_PLACEHOLDER = new WaveItem<>();
+
+    /** The waveItem that hold the list of wave to be executed back to back. */
+    WaveItem<List<Wave>> CHAINED_WAVES = new WaveItem<>();
 
 }

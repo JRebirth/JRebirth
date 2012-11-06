@@ -16,8 +16,6 @@ public @interface DataClass {
 
     /**
      * The class value.
-     * 
-     * @return the class value
      */
     Class<?> value();
 }

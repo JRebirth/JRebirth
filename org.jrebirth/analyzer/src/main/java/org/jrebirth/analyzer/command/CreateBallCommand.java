@@ -22,13 +22,18 @@ import org.jrebirth.analyzer.ui.editor.ball.BallModel;
 import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.wave.Wave;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>ShowBallCommand</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class ShowBallCommand extends DefaultUICommand {
+public final class CreateBallCommand extends DefaultUICommand {
+
+    /** The class logger. */
+    private final static Logger LOGGER = LoggerFactory.getLogger(CreateBallCommand.class);
 
     /**
      * {@inheritDoc}
@@ -38,6 +43,8 @@ public final class ShowBallCommand extends DefaultUICommand {
 
         final Event event = wave.get(EditorWaves.EVENT);
 
+        LOGGER.trace("Process " + event.getEventType() + " of type " + event.getTarget().getSimpleName());
+
         final EditorModel editorModel = getModel(EditorModel.class);
 
         final BallModel targetBallModel = getModel(BallModel.class, event);
@@ -46,9 +53,9 @@ public final class ShowBallCommand extends DefaultUICommand {
 
         if (editorModel.retrieveBall(targetBallModel.getEventModel().getSource()) == null) {
 
-            // it's the application node, we shall center it !!!
-            targetBallModel.getView().getRootNode().setCenterX(editorModel.getView().getRootNode().getWidth() / 2 - 70);
-            targetBallModel.getView().getRootNode().setCenterY(editorModel.getView().getRootNode().getHeight() / 2);
+            // it's the application node, we shall center it !!! minus 70 because it's the globalFacade node that resides in the center
+            targetBallModel.getView().getRootNode().layoutXProperty().bind(editorModel.getView().getRootNode().widthProperty().divide(2).subtract(70).subtract(24));
+            targetBallModel.getView().getRootNode().layoutYProperty().bind(editorModel.getView().getRootNode().heightProperty().divide(2).subtract(24));
 
         } else {
 
@@ -61,14 +68,12 @@ public final class ShowBallCommand extends DefaultUICommand {
              * " trY=" + sourceBallModel.getView().getRootNode().getTranslateY());
              */
             targetBallModel.getView().getRootNode()
-                    .setCenterX(sourceBallModel.getView().getRootNode().getCenterX() + sourceBallModel.getView().getRootNode().getTranslateX());
+                    .layoutXProperty().bind(sourceBallModel.getView().getRootNode().layoutXProperty().add(sourceBallModel.getView().getRootNode().translateXProperty()));
             targetBallModel.getView().getRootNode()
-                    .setCenterY(sourceBallModel.getView().getRootNode().getCenterY() + sourceBallModel.getView().getRootNode().getTranslateY());
+                    .layoutYProperty().bind(sourceBallModel.getView().getRootNode().layoutYProperty().add(sourceBallModel.getView().getRootNode().translateYProperty()));
 
         }
 
         targetBallModel.show();
-        // targetBallModel.getView().prout();
     }
-
 }

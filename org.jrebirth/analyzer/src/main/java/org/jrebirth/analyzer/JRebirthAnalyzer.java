@@ -16,14 +16,22 @@
  */
 package org.jrebirth.analyzer;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import org.jrebirth.analyzer.command.OpenEventTrackerFileCommand;
+import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.analyzer.ui.workbench.WorkbenchModel;
 import org.jrebirth.core.application.AbstractApplication;
 import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBuilder;
+import org.jrebirth.core.wave.WaveData;
+import org.jrebirth.core.wave.WaveGroup;
 
 /**
  * The class <strong>JRebirthAnalyzer</strong>.
@@ -77,4 +85,33 @@ public final class JRebirthAnalyzer extends AbstractApplication<StackPane> {
         // Customize the current stage
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Wave getPreBootWave() {
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Wave getPostBootWave() {
+        Wave wave = null;
+        final Parameters p = getParameters();
+        if (p.getRaw().size() >= 1) {
+            final String etdFile = p.getRaw().get(0);
+            final File file = new File(etdFile);
+            if (file.exists()) {
+
+                wave = WaveBuilder.create()
+                        .waveGroup(WaveGroup.CALL_COMMAND)
+                        .relatedClass(OpenEventTrackerFileCommand.class)
+                        .data(WaveData.build(EditorWaves.EVENTS_FILE, file))
+                        .build();
+            }
+        }
+        return wave;
+    }
 }

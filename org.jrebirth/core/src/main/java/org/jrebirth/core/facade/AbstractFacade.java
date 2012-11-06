@@ -27,6 +27,8 @@ import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Model;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>AbstractFacade</strong>.
@@ -38,6 +40,9 @@ import org.jrebirth.core.ui.Model;
  * @param <R> A type that implements FacadeReady
  */
 public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractGlobalReady implements Facade<R> {
+
+    /** The class logger. */
+    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractFacade.class);
 
     /** The map that store FacadeReady singletons. */
     private final Map<ClassKey<? extends R>, R> singletonMap;
@@ -107,9 +112,9 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                     // Build an instance and register it
                     register(build(clazz, keyPart), keyPart);
                 } catch (final CoreException ce) {
-                    getGlobalFacade().getLogger().error(ce.getMessage());
+                    LOGGER.error(ce.getMessage());
                     final String msg = "Error while building " + clazz.getCanonicalName() + " instance";
-                    getGlobalFacade().getLogger().error(msg);
+                    LOGGER.error(msg);
                     throw new CoreRuntimeException(msg, ce);
                 }
             }
@@ -211,8 +216,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
             final String msg = "Impossible to create the class " + clazz.getName();
-            getGlobalFacade().getLogger().error(msg);
-            getGlobalFacade().getLogger().logException(e);
+            LOGGER.error(msg, e);
             throw new CoreException(msg, e);
         }
     }

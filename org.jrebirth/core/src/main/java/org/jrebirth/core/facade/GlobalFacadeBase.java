@@ -73,7 +73,7 @@ public class GlobalFacadeBase implements GlobalFacade {
 
         // Launch the default executor
         this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2,
-                new NamedThreadFactory(((AbstractApplication) application).getPoolUncaughtExceptionHandler(this), "JRebirth Pool - Slot "));
+                new NamedThreadBuilder(((AbstractApplication) application).getPoolUncaughtExceptionHandler(this), "JRebirth Pool - Slot "));
 
         // Manage internal logging
         JRebirthLogger.getInstance().setEnabled(application.isLoggerEnabled());
@@ -156,10 +156,10 @@ public class GlobalFacadeBase implements GlobalFacade {
     /**
      * {@inheritDoc}
      */
-    @Override
-    public final JRebirthLogger getLogger() {
-        return JRebirthLogger.getInstance();
-    }
+    // @Override
+    // public final JRebirthLogger getLogger() {
+    // return JRebirthLogger.getInstance();
+    // }
 
     /**
      * {@inheritDoc}
@@ -184,9 +184,9 @@ public class GlobalFacadeBase implements GlobalFacade {
         }
 
         // Close log files or streams
-        if (getLogger() != null) {
-            getLogger().closeOutputStream();
-        }
+        // if (getLogger() != null) {
+        // getLogger().closeOutputStream();
+        // }
 
         // Close the JRebirth events logged
         if (getEventTracker() != null) {

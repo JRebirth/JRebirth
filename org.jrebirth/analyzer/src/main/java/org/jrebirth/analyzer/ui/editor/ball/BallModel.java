@@ -99,4 +99,12 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
     public void destroy() {
         getView().doHide();
     }
+
+    /**
+     * TODO To complete.
+     */
+    public void access() {
+        // Nothing to do yet
+
+    }
 }

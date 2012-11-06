@@ -53,7 +53,7 @@ public interface WaveReady {
      * @param waveType the type of wave to send
      * @param waveData the data (key-value
      */
-    void send(WaveType waveType, WaveData<?>... waveData);
+    void sendWave(WaveType waveType, WaveData<?>... waveData);
 
     /**
      * Send a wave used to call a command.

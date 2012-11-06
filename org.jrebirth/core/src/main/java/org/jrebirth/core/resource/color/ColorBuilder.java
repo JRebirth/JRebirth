@@ -44,9 +44,9 @@ public final class ColorBuilder extends AbstractResourceBuilder<ColorEnum, Color
     private Color buildWebColor(final WebColor wColor) {
         Color color = null;
         if (wColor.opacity() >= 1.0) {
-            color = Color.web(wColor.hex());
+            color = Color.web("#" + wColor.hex());
         } else {
-            color = Color.web(wColor.hex(), wColor.opacity());
+            color = Color.web("#" + wColor.hex(), wColor.opacity());
         }
         return color;
     }

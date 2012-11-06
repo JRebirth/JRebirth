@@ -31,10 +31,12 @@
 			<sources>
 				<fileSets>
 					<fileSet>
+					
 						<includes>
 							<include>**/*</include>
 						</includes>
 					</fileSet>
+					
 				</fileSets>
 			</sources>
 			
