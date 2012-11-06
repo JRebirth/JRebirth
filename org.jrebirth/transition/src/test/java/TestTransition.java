@@ -1,3 +1,5 @@
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -67,7 +69,7 @@ public final class TestTransition extends AbstractApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public Wave getPreBootWaveList() {
+    public List<Wave> getPreBootWaveList() {
         // Nothing to do yet
         return null;
     }
@@ -76,7 +78,7 @@ public final class TestTransition extends AbstractApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public Wave getPostBootWaveList() {
+    public List<Wave> getPostBootWaveList() {
         // Nothing to do yet
         return null;
     }
