@@ -105,11 +105,21 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
      * {@inheritDoc}
      */
     @Override
+    protected void fireAchieve(final Wave wave) {
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void commandAchieved(final Wave wave) {
         this.commandRunIndex++;
         // Run next command if any
         if (this.commandList.size() > this.commandRunIndex) {
             execute(wave);
+        } else {
+            super.fireAchieve(wave);
         }
     }
 

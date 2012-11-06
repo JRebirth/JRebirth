@@ -29,7 +29,7 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
         final Wave waveToRun = this.waveList.get(this.index);
         if (waveToRun != null) {
 
-            wave.addWaveListener(this);
+            waveToRun.addWaveListener(this);
             sendWave(waveToRun);
 
         } else {

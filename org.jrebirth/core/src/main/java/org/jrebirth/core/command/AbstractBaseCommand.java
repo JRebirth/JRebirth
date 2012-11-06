@@ -156,10 +156,11 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
      * 
      * @param wave forward the wave that has been performed
      */
-    private void fireAchieve(final Wave wave) {
+    protected void fireAchieve(final Wave wave) {
         for (final CommandListener commandListener : this.commandListeners) {
             commandListener.commandAchieved(wave);
         }
+        wave.setStatus(Wave.Status.consumed);
     }
 
     /**

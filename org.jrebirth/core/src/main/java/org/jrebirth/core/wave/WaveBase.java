@@ -18,6 +18,7 @@ package org.jrebirth.core.wave;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,7 +81,7 @@ public class WaveBase implements Wave {
     /**
      * The list of wave Listener to warn when wave status changed.
      */
-    private final List<WaveListener> waveListeners = new ArrayList<>();
+    private final List<WaveListener> waveListeners = Collections.synchronizedList(new ArrayList<WaveListener>());
 
     /**
      * Default Constructor.
@@ -345,6 +346,7 @@ public class WaveBase implements Wave {
      * Fire a wave status change.
      */
     private void fireStatusChanged() {
+        System.out.println("fireStatusChanged " + this.status.toString());
         for (final WaveListener waveListener : this.waveListeners) {
 
             switch (this.status) {
