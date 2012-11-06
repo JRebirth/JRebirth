@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 public class WaveBase implements Wave {
 
     /** The class logger. */
-    private final static Logger LOGGER = LoggerFactory.getLogger(WaveBase.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WaveBase.class);
 
     /** The Wave Unique Identifier. */
     private final String wuid;

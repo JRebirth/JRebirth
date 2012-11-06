@@ -17,6 +17,8 @@
 package org.jrebirth.analyzer;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -89,29 +91,37 @@ public final class JRebirthAnalyzer extends AbstractApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public Wave getPreBootWave() {
-        return null;
+    public List<Wave> getPreBootWaveList() {
+        return new ArrayList<>();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Wave getPostBootWave() {
-        Wave wave = null;
+    public List<Wave> getPostBootWaveList() {
+
+        final List<Wave> waveList = new ArrayList<>();
         final Parameters p = getParameters();
         if (p.getRaw().size() >= 1) {
             final String etdFile = p.getRaw().get(0);
             final File file = new File(etdFile);
             if (file.exists()) {
 
-                wave = WaveBuilder.create()
-                        .waveGroup(WaveGroup.CALL_COMMAND)
-                        .relatedClass(OpenEventTrackerFileCommand.class)
-                        .data(WaveData.build(EditorWaves.EVENTS_FILE, file))
-                        .build();
+                waveList.add(
+                        WaveBuilder.create()
+                                .waveGroup(WaveGroup.CALL_COMMAND)
+                                .relatedClass(OpenEventTrackerFileCommand.class)
+                                .data(WaveData.build(EditorWaves.EVENTS_FILE, file))
+                                .build()
+                        );
+                waveList.add(
+                        WaveBuilder.create()
+                                .waveType(EditorWaves.DO_PLAY)
+                                .build()
+                        );
             }
         }
-        return wave;
+        return waveList;
     }
 }

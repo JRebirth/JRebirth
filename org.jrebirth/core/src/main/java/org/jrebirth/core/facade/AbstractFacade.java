@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractGlobalReady implements Facade<R> {
 
     /** The class logger. */
-    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractFacade.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFacade.class);
 
     /** The map that store FacadeReady singletons. */
     private final Map<ClassKey<? extends R>, R> singletonMap;

@@ -22,8 +22,6 @@ import javafx.animation.ParallelTransitionBuilder;
 import javafx.animation.ScaleTransition;
 import javafx.animation.ScaleTransitionBuilder;
 import javafx.animation.TranslateTransitionBuilder;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -59,13 +57,15 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
     /** The Show animation. */
     private ParallelTransition showTransition;
 
+    /** The circle shape of the ball. */
     private Circle circle;
 
+    /** The label used to dispaly the ball name. */
     private Label label;
 
-    private final DoubleProperty xTranslateProperty = new SimpleDoubleProperty();
+    // private final DoubleProperty xTranslateProperty = new SimpleDoubleProperty();
 
-    private final DoubleProperty yTranslateProperty = new SimpleDoubleProperty();
+    // private final DoubleProperty yTranslateProperty = new SimpleDoubleProperty();
 
     /**
      * Default Constructor.

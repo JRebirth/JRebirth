@@ -13,6 +13,9 @@ import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
  */
 public final class ColorBuilder extends AbstractResourceBuilder<ColorEnum, ColorParams, Color> {
 
+    /** The <code>HEXA_PREFIX</code> field is used before any hexadecimal value. */
+    private static final String HEXA_PREFIX = "#";
+
     /**
      * {@inheritDoc}
      */
@@ -44,9 +47,9 @@ public final class ColorBuilder extends AbstractResourceBuilder<ColorEnum, Color
     private Color buildWebColor(final WebColor wColor) {
         Color color = null;
         if (wColor.opacity() >= 1.0) {
-            color = Color.web("#" + wColor.hex());
+            color = Color.web(HEXA_PREFIX + wColor.hex());
         } else {
-            color = Color.web("#" + wColor.hex(), wColor.opacity());
+            color = Color.web(HEXA_PREFIX + wColor.hex(), wColor.opacity());
         }
         return color;
     }

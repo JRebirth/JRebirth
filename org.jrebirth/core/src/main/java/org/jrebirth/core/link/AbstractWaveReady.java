@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends AbstractReady<R> {
 
     /** The class logger. */
-    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractWaveReady.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractWaveReady.class);
 
     /**
      * Short cut method used to retrieve the notifier.
@@ -103,8 +103,9 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     }
 
     /**
-     * Send the wave using the JRebirthThread.
+     * {@inheritDoc}
      */
+    @Override
     public final void sendWave(final Wave wave) {
         sendWaveIntoJit(wave);
     }
@@ -112,6 +113,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     /**
      * {@inheritDoc}
      */
+    @Override
     public final void sendWave(final WaveType waveType, final WaveData<?>... waveData) {
         sendWaveIntoJit(createWave(WaveGroup.UNDEFINED, waveType, null, waveData));
     }
@@ -119,6 +121,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     /**
      * {@inheritDoc}
      */
+    @Override
     public final void callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data) {
         sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, data));
     }
@@ -126,6 +129,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     /**
      * {@inheritDoc}
      */
+    @Override
     public final void returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WaveData<?>... data) {
         sendWaveIntoJit(createWave(WaveGroup.RETURN_DATA, waveType, serviceClass, data));
     }
@@ -133,17 +137,15 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     /**
      * {@inheritDoc}
      */
+    @Override
     public final void attachUi(final Class<? extends Model> modelClass, final WaveData<?>... data) {
         sendWaveIntoJit(createWave(WaveGroup.ATTACH_UI, null, modelClass, data));
     }
 
     /**
-     * Send it using the JRebirth Thread.
+     * Send the given wave using the JRebirth Thread.
      * 
-     * @param waveGroup the group of the wave
-     * @param waveType the type of the wave
-     * @param relatedClass the related class if any
-     * @param waveData wave data to use
+     * @param wave the wave to send
      */
     private void sendWaveIntoJit(final Wave wave) {
 

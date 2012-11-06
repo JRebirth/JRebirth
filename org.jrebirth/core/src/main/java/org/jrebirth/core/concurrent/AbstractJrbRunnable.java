@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractJrbRunnable implements Runnable {
 
     /** The class logger. */
-    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApplication.class);
 
     /** This name is used for debug purpose. */
     private final String runnableName;
@@ -37,7 +37,7 @@ public abstract class AbstractJrbRunnable implements Runnable {
     /**
      * Default Constructor
      * 
-     * @param runnableName
+     * @param runnableName the name of the runnable to allow live debugging
      */
     public AbstractJrbRunnable(final String runnableName) {
         this.runnableName = runnableName;
@@ -48,6 +48,9 @@ public abstract class AbstractJrbRunnable implements Runnable {
      */
     @Override
     public final void run() {
+
+        LOGGER.trace("Launch the runnable : " + this.runnableName);
+
         try {
             runInto();
         } catch (final JRebirthThreadException jte) {
