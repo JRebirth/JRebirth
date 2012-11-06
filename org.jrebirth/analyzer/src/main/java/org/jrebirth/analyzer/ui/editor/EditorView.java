@@ -16,6 +16,7 @@
  */
 package org.jrebirth.analyzer.ui.editor;
 
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -31,7 +32,9 @@ import org.jrebirth.core.ui.DefaultView;
  * 
  * @author Sébastien Bordes
  */
-public final class EditorView extends DefaultView<EditorModel, Pane, EditorController> {
+public final class EditorView extends DefaultView<EditorModel, ScrollPane, EditorController> {
+
+    private Pane panel;
 
     /**
      * Default Constructor.
@@ -50,14 +53,30 @@ public final class EditorView extends DefaultView<EditorModel, Pane, EditorContr
     @Override
     protected void customInitializeComponents() {
 
-        getRootNode().setPrefSize(600, 500);
+        // getRootNode().setFitToWidth(false);
+        // getRootNode().setFitToHeight(false);
 
-        getRootNode().getStyleClass().add("editor");
+        this.panel = new Pane();
+        this.panel.setPrefSize(600, 500);
 
-        final Circle c = new Circle(30, Color.BEIGE);
-        c.setCenterX(100);
-        c.setCenterY(10);
+        this.panel.getStyleClass().add("editor");
 
+        final Circle c = new Circle(200 + 25, Color.BEIGE);
+        c.centerXProperty().bind(getRootNode().widthProperty().divide(2)/* .add(70) */);
+        c.centerYProperty().bind(getRootNode().heightProperty().divide(2));
+
+        this.panel.getChildren().add(c);
+
+        getRootNode().setContent(this.panel);
+
+        // this.panel.scaleXProperty().bind(this.panel.prefWidthProperty().divide(getRootNode().widthProperty()));
+        // this.panel.scaleYProperty().bind(this.panel.prefHeightProperty().divide(getRootNode().heightProperty()));
     }
 
+    /**
+     * @return Returns the panel.
+     */
+    public Pane getPanel() {
+        return this.panel;
+    }
 }

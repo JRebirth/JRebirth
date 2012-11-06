@@ -25,7 +25,6 @@ import org.jrebirth.core.command.Command;
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.event.EventType;
-import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.FacadeReady;
@@ -38,6 +37,8 @@ import org.jrebirth.core.wave.WaveBase;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveGroup;
 import org.jrebirth.core.wave.WaveType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -53,6 +54,9 @@ import org.jrebirth.core.wave.WaveType;
  * @param <R> the class type of the subclass
  */
 public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends AbstractReady<R> {
+
+    /** The class logger. */
+    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractWaveReady.class);
 
     /**
      * Short cut method used to retrieve the notifier.
@@ -72,7 +76,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         final WaveReady waveReady = this;
 
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJIT(new AbstractJrbRunnable() {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable("Listen " + waveType.toString()) {
             @Override
             public void runInto() throws JRebirthThreadException {
                 getNotifier().listen(waveReady, waveType);
@@ -89,7 +93,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         final WaveReady waveReady = this;
 
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJIT(new AbstractJrbRunnable() {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable("UnListen " + waveType.toString()) {
 
             @Override
             protected void runInto() throws JRebirthThreadException {
@@ -99,52 +103,55 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     }
 
     /**
-     * {@inheritDoc}
+     * Send the wave using the JRebirthThread.
      */
-    @Override
-    public final void send(final WaveType waveType, final WaveData<?>... waveData) {
-        buildAndSendWave(WaveGroup.UNDEFINED, waveType, null, waveData);
+    public final void sendWave(final Wave wave) {
+        sendWaveIntoJit(wave);
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
+    public final void sendWave(final WaveType waveType, final WaveData<?>... waveData) {
+        sendWaveIntoJit(createWave(WaveGroup.UNDEFINED, waveType, null, waveData));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public final void callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data) {
-        buildAndSendWave(WaveGroup.CALL_COMMAND, null, commandClass, data);
+        sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, data));
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
     public final void returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WaveData<?>... data) {
-        buildAndSendWave(WaveGroup.RETURN_DATA, waveType, serviceClass, data);
+        sendWaveIntoJit(createWave(WaveGroup.RETURN_DATA, waveType, serviceClass, data));
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
     public final void attachUi(final Class<? extends Model> modelClass, final WaveData<?>... data) {
-        buildAndSendWave(WaveGroup.ATTACH_UI, null, modelClass, data);
+        sendWaveIntoJit(createWave(WaveGroup.ATTACH_UI, null, modelClass, data));
     }
 
     /**
-     * Build a new Wave Object and send it using the JRebirth Thread.
+     * Send it using the JRebirth Thread.
      * 
      * @param waveGroup the group of the wave
      * @param waveType the type of the wave
      * @param relatedClass the related class if any
      * @param waveData wave data to use
      */
-    private void buildAndSendWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData<?>... waveData) {
+    private void sendWaveIntoJit(final Wave wave) {
 
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJIT(new AbstractJrbRunnable() {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable("Send Wave") {
             @Override
             public void runInto() throws JRebirthThreadException {
-                getNotifier().sendWave(createWave(waveGroup, waveType, relatedClass, waveData));
+                getNotifier().sendWave(wave);
             }
         });
     }
@@ -199,8 +206,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
             processAction(wave);
 
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            JRebirthLogger.getInstance().error("Error while dispatching a wave");
-            JRebirthLogger.getInstance().logException(e);
+            LOGGER.error("Error while dispatching a wave", e);
             // Propagate the wave exception
             throw new WaveException(wave, e);
         }

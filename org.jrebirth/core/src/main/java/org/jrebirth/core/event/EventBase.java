@@ -174,11 +174,13 @@ public final class EventBase implements Event {
      */
     private void parseString(final String eventSerialized) {
         final StringTokenizer st = new StringTokenizer(eventSerialized, ClassUtility.SEPARATOR);
-        setSequence(Integer.valueOf(st.nextToken()));
-        setEventType(EventType.valueOf(st.nextToken()));
-        setSource(getClass(st.nextToken()));
-        setTarget(getClass(st.nextToken()));
-        setEventData(st.nextToken());
+        if (st.countTokens() >= 5) {
+            setSequence(Integer.valueOf(st.nextToken()));
+            setEventType(EventType.valueOf(st.nextToken()));
+            setSource(getClass(st.nextToken()));
+            setTarget(getClass(st.nextToken()));
+            setEventData(st.nextToken());
+        }
     }
 
     /**

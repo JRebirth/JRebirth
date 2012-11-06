@@ -21,6 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.wave.Wave;
 
 /**
  * The interface <strong>JRebirthApplication</strong>.
@@ -68,5 +69,19 @@ public interface JRebirthApplication {
      * @return the class of the first UI Model to launch
      */
     Class<? extends Model> getFirstModelClass();
+
+    /**
+     * Return the Pre-Boot Wave called after displaying the first view.
+     * 
+     * @return the Pre-Boot Wave
+     */
+    Wave getPreBootWave();
+
+    /**
+     * Return the Post-Boot Wave called after displaying the first view.
+     * 
+     * @return the Post-Boot Wave
+     */
+    Wave getPostBootWave();
 
 }

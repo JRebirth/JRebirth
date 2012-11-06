@@ -99,7 +99,7 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     public final void run(final Wave wave) {
 
         // Create the runnable that will be run
-        final AbstractJrbRunnable runnable = new AbstractJrbRunnable() {
+        final AbstractJrbRunnable runnable = new AbstractJrbRunnable(this.getClass().getSimpleName()) {
 
             @Override
             protected void runInto() throws JRebirthThreadException {
@@ -160,7 +160,6 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
         for (final CommandListener commandListener : this.commandListeners) {
             commandListener.commandAchieved(wave);
         }
-
     }
 
     /**

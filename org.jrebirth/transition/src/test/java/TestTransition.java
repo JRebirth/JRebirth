@@ -5,13 +5,14 @@ import javafx.stage.Stage;
 
 import org.jrebirth.core.application.AbstractApplication;
 import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.wave.Wave;
 
 import ui.TransitionModel;
 
 /**
  * The class <strong>JRebirthAnalyzer</strong>.
  * 
- * The application that demonstrate how to use JRebirth Framework. It also allow to show all JRebirth events.
+ * The application that demonstrates how to use JRebirth Framework. It also allow to show all JRebirth events.
  * 
  * @author Sébastien Bordes
  * 
@@ -57,8 +58,26 @@ public final class TestTransition extends AbstractApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    protected void customizeScene(Scene scene) {
+    protected void customizeScene(final Scene scene) {
         // Nothing to do yet
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Wave getPreBootWave() {
+        // Nothing to do yet
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Wave getPostBootWave() {
+        // Nothing to do yet
+        return null;
     }
 }

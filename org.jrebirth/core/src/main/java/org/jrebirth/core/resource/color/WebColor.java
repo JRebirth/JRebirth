@@ -23,7 +23,7 @@ package org.jrebirth.core.resource.color;
  */
 public class WebColor extends AbstractBaseColor {
 
-    /** The hexadecimal string value (#FFFFFF). */
+    /** The hexadecimal string value (FFFFFF). */
     private final String hex;
 
     /**

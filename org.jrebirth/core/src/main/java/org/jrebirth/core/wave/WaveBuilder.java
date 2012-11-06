@@ -28,6 +28,9 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     /** The wave bean class of the wave to build. */
     private Class<? extends WaveBean> waveBeanClass;
 
+    /** The list of Wave Data. */
+    private WaveData<?>[] waveData;
+
     /**
      * Create a WaveBuilder instance.
      * 
@@ -58,12 +61,16 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
         if ((i & 0x8) != 0) {
             paramWave.setWaveBeanClass(this.waveBeanClass);
         }
+        if ((i & 0x16) != 0) {
+            paramWave.addDatas(this.waveData);
+        }
     }
 
     /**
      * Define the wave group.
      * 
      * @param waveGroup the wave group to set
+     * 
      * @return the builder
      */
     @SuppressWarnings("unchecked")
@@ -77,6 +84,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
      * Define the wave type.
      * 
      * @param waveType the wave type to set
+     * 
      * @return the builder
      */
     @SuppressWarnings("unchecked")
@@ -90,6 +98,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
      * Define the related class.
      * 
      * @param relatedClass the related class to set
+     * 
      * @return the builder
      */
     @SuppressWarnings("unchecked")
@@ -103,12 +112,27 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
      * Define the wave bean class.
      * 
      * @param waveBeanClass the wave bean class to set
+     * 
      * @return the builder
      */
     @SuppressWarnings("unchecked")
     public B waveBeanClass(final Class<? extends WaveBean> waveBeanClass) {
         this.waveBeanClass = waveBeanClass;
         this.setMask |= 8;
+        return (B) this;
+    }
+
+    /**
+     * Define the list of WaveData.
+     * 
+     * @param waveData the list of waveData to set
+     * 
+     * @return the builder
+     */
+    @SuppressWarnings("unchecked")
+    public B data(final WaveData<?>... waveData) {
+        this.waveData = waveData;
+        this.setMask |= 16;
         return (B) this;
     }
 

@@ -28,7 +28,6 @@ import javafx.stage.Stage;
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.concurrent.JRebirthThread;
-import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.handler.DefaultUncaughtExceptionHandler;
@@ -37,6 +36,8 @@ import org.jrebirth.core.exception.handler.JitUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.PoolUncaughtExceptionHandler;
 import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.util.ClassUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -49,6 +50,9 @@ import org.jrebirth.core.util.ClassUtility;
  * @param <P> The root node of the stage, must extends Pane
  */
 public abstract class AbstractApplication<P extends Pane> extends Application implements JRebirthApplication {
+
+    /** The class logger. */
+    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractApplication.class);
 
     /** The application primary stage. */
     private transient Stage stage;
@@ -71,8 +75,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         try {
             super.init();
         } catch (final Exception e) {
-            // getFacade().getLogger().error("Error while application init phase : "
-            // + e.getMessage());
+            LOGGER.error("Error while application init phase : ", e);
             throw new CoreException(e);
         }
 
@@ -101,15 +104,34 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             // Start the JRebirthThread
             JRebirthThread.getThread().launch(this);
 
+            // Attach the first view and run pre and post command
+            // JRebirthThread.getThread().bootUp();
+
             // Attach the scene
             primaryStage.setScene(this.scene);
             primaryStage.show();
 
+            // JRebirthThread.getThread().stageShown();
+
+            // JRebirth.runIntoJIT(new AbstractJrbRunnable() {
+            //
+            // @Override
+            // protected void runInto() throws JRebirthThreadException {
+            // bootup();
+            // }
+            // });
+
         } catch (final CoreException ce) {
-            JRebirthLogger.getInstance().error("Error while starting application : ");
-            JRebirthLogger.getInstance().logException(ce);
+            LOGGER.error("Error while starting application : ", ce);
         }
     }
+
+    /**
+     * Launch custom BootUp action.<br />
+     * 
+     * In Example read Application parameters and perform something.
+     */
+    // protected abstract void bootup();
 
     /**
      * {@inheritDoc}
@@ -237,7 +259,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         Thread.setDefaultUncaughtExceptionHandler(getDefaultUncaughtExceptionHandler(gf));
 
         // Initialize the uncaught exception handler for JavaFX Application Thread
-        JRebirth.runIntoJAT(new AbstractJrbRunnable() {
+        JRebirth.runIntoJAT(new AbstractJrbRunnable("Attach JAT Uncaught Exception Handler") {
             @Override
             public void runInto() throws JRebirthThreadException {
                 Thread.currentThread().setUncaughtExceptionHandler(getJatUncaughtExceptionHandler(gf));
@@ -245,7 +267,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         });
 
         // Initialize the uncaught exception handler for JRebirth Internal Thread
-        JRebirth.runIntoJIT(new AbstractJrbRunnable() {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable("Attach JIT Uncaught Exception Handler") {
             @Override
             public void runInto() throws JRebirthThreadException {
                 Thread.currentThread().setUncaughtExceptionHandler(getJitUncaughtExceptionHandler(gf));

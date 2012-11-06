@@ -28,7 +28,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public final class HideBallCommand extends DefaultUICommand {
+public final class DestroyBallCommand extends DefaultUICommand {
 
     /**
      * {@inheritDoc}

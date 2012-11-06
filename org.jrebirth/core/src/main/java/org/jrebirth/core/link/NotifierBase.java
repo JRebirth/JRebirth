@@ -30,7 +30,6 @@ import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.concurrent.JRebirthThread;
 import org.jrebirth.core.event.EventType;
-import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.AbstractGlobalReady;
@@ -40,7 +39,10 @@ import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -51,6 +53,9 @@ import org.jrebirth.core.wave.WaveType;
  * @author Sébastien Bordes
  */
 public class NotifierBase extends AbstractGlobalReady implements Notifier {
+
+    /** The class logger. */
+    private final static Logger LOGGER = LoggerFactory.getLogger(NotifierBase.class);
 
     /** The map that store link between wave type and objects interested. */
     private final Map<WaveType, List<WaveReady>> notifierMap = new HashMap<>();
@@ -71,6 +76,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     @Override
     public void sendWave(final Wave wave) throws JRebirthThreadException {
 
+        wave.setStatus(Status.sent);
+
         JRebirthThread.checkJRebirthThread();
 
         try {
@@ -89,7 +96,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
                     sendUndefinedWave(wave);
             }
         } catch (final WaveException e) {
-            getGlobalFacade().getLogger().error("Failed to send Wave");
+            LOGGER.error("Failed to send Wave", e);
         }
     }
 
@@ -103,7 +110,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         final Command command = getGlobalFacade().getCommandFacade().retrieve((Class<? extends Command>) wave.getRelatedClass());
 
         // TODO parse arguments !!!!!!!! like for model events
-
+        wave.setStatus(Status.processed);
         command.run(wave);
     }
 
@@ -115,7 +122,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     @SuppressWarnings("unchecked")
     private void returnData(final Wave wave) {
         final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<? extends Service>) wave.getRelatedClass());
-
+        wave.setStatus(Status.processed);
         service.returnData(wave);
     }
 
@@ -129,15 +136,16 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
 
         // Build the new UI view
         final Model model = getGlobalFacade().getUiFacade().retrieve((Class<? extends Model>) wave.getRelatedClass());
+        wave.setStatus(Status.processed);
 
-        if (wave.contains(JRebirthWaves.ATTACH_UI)) {
+        if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
             // Add an Ui view into a the place holder provided
-            final ObjectProperty<Node> property = wave.get(JRebirthWaves.ATTACH_UI);
+            final ObjectProperty<Node> property = wave.get(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER);
             property.setValue(model.getView().getRootNode());
 
-        } else if (wave.contains(JRebirthWaves.ADD_UI)) {
+        } else if (wave.contains(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER)) {
             // Add an Ui view into a children list of its parent container
-            final ObservableList<Node> list = wave.get(JRebirthWaves.ADD_UI);
+            final ObservableList<Node> list = wave.get(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER);
             list.add(model.getView().getRootNode());
         }
 
@@ -146,15 +154,18 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     /**
      * Dispatch a standard wave which could be handled by a custom method of the component.
      * 
-     * @param wave the wave that contain all information
+     * @param wave the wave that contains all information
      * 
      * @throws WaveException if wave dispatching fails
      */
     private void sendUndefinedWave(final Wave wave) throws WaveException {
+
+        wave.setStatus(Status.processed);
+
         // Retrieve all interested object from the map
         if (this.notifierMap.containsKey(wave.getWaveType())) {
             final List<WaveReady> list = this.notifierMap.get(wave.getWaveType());
-            // For each object process the action
+            // For each object interested in that wave type, process the action
             for (final WaveReady linked : list) {
 
                 // If the notified class is part of the UI
@@ -162,13 +173,12 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
                 if (linked instanceof Model) {
                     JRebirth.runIntoJAT(LoopBuilder.newRunnable(linked, wave));
                 } else {
-                    // Otherwise can perform it right now into the current thread
-                    // (JRebirthThread)
+                    // Otherwise can perform it right now into the current thread (JRebirthThread)
                     linked.handle(wave);
                 }
             }
         } else {
-            JRebirthLogger.getInstance().warn("No Listener attached");
+            LOGGER.warn("No Listener attached for wave type : " + wave.getWaveType().toString());
         }
     }
 
@@ -277,7 +287,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
          * @param wave the wave to handle
          */
         public WaveRunnable(final WaveReady linked, final Wave wave) {
-            super();
+            super(WaveRunnable.class.getSimpleName());
             this.linked = linked;
             this.wave = wave;
         }
@@ -290,7 +300,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
             try {
                 this.linked.handle(this.wave);
             } catch (final WaveException e) {
-                JRebirthLogger.getInstance().logException(e);
+                LOGGER.error("Error while handling a wave", e);
             }
         }
     }

@@ -22,10 +22,23 @@ import javafx.animation.ParallelTransitionBuilder;
 import javafx.animation.ScaleTransition;
 import javafx.animation.ScaleTransitionBuilder;
 import javafx.animation.TranslateTransitionBuilder;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Label;
+import javafx.scene.control.LabelBuilder;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadowBuilder;
+import javafx.scene.effect.InnerShadowBuilder;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.CircleBuilder;
 import javafx.util.Duration;
 
+import org.jrebirth.analyzer.ui.editor.BallColors;
+import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.DefaultView;
@@ -38,13 +51,21 @@ import org.jrebirth.core.ui.DefaultView;
  * 
  * @author Sébastien Bordes
  */
-public final class BallView extends DefaultView<BallModel, Circle, BallController> {
+public final class BallView extends DefaultView<BallModel, StackPane, BallController> {
 
     /** The ZoomIN ZoomOUT animation. */
     private ScaleTransition scaleTransition;
 
     /** The Show animation. */
     private ParallelTransition showTransition;
+
+    private Circle circle;
+
+    private Label label;
+
+    private final DoubleProperty xTranslateProperty = new SimpleDoubleProperty();
+
+    private final DoubleProperty yTranslateProperty = new SimpleDoubleProperty();
 
     /**
      * Default Constructor.
@@ -63,11 +84,22 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
     @Override
     protected void customInitializeComponents() {
 
-        // Define custom colors
-        getRootNode().setRadius(20);
-        getRootNode().setFill(Color.ALICEBLUE);
         getRootNode().setScaleX(0);
         getRootNode().setScaleY(0);
+
+        this.circle = CircleBuilder.create()
+                .radius(22)
+                .fill(Color.ALICEBLUE)
+                .stroke(Color.WHITE)
+                .strokeWidth(4)
+                .build();
+
+        this.label = LabelBuilder.create()
+                .textFill(Color.WHITE)
+                // .effect(arg0)
+                .build();
+
+        getRootNode().getChildren().addAll(this.circle, this.label);
 
         this.showTransition = ParallelTransitionBuilder.create()
                 .children(
@@ -92,6 +124,15 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
                 .autoReverse(false)
                 .build();
 
+        this.showTransition.setOnFinished(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(final ActionEvent arg0) {
+                getModel().sendWave(EditorWaves.RE_EVENT_PROCESSED/* , WaveData.build(waveItem, value) */);
+
+            }
+        });
+
         this.scaleTransition = ScaleTransitionBuilder.create()
                 .duration(Duration.millis(600))
                 .node(getRootNode())
@@ -102,6 +143,24 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
                 .cycleCount(Animation.INDEFINITE)
                 .autoReverse(true)
                 .build();
+
+        this.circle.setEffect(InnerShadowBuilder.create()
+                .color(Color.GREY)
+                .blurType(BlurType.GAUSSIAN)
+                .radius(2)
+                .offsetX(1)
+                .offsetY(1)
+                .build());
+
+        getRootNode().setEffect(DropShadowBuilder.create()
+                // .input()
+                .color(Color.BLACK)
+                .blurType(BlurType.GAUSSIAN)
+                .radius(4)
+                .offsetX(3)
+                .offsetY(3)
+                .build());
+
     }
 
     /**
@@ -120,34 +179,44 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
 
         switch (eventType) {
             case CREATE_APPLICATION:
-                getRootNode().setFill(Color.AZURE);
+                this.circle.setFill(BallColors.APPLICATION.get());
+                this.label.setText("App");
                 break;
             case CREATE_NOTIFIER:
-                getRootNode().setFill(Color.BISQUE);
+                this.circle.setFill(BallColors.NOTIFIER.get());
+                this.label.setText("N");
                 break;
             case CREATE_GLOBAL_FACADE:
-                getRootNode().setFill(Color.BLANCHEDALMOND);
+                this.circle.setFill(BallColors.GLOBAL_FACADE.get());
+                this.label.setText("GF");
                 break;
             case CREATE_UI_FACADE:
-                getRootNode().setFill(Color.BLUEVIOLET);
+                this.circle.setFill(BallColors.UI_FACADE.get());
+                this.label.setText("UF");
                 break;
             case CREATE_SERVICE_FACADE:
-                getRootNode().setFill(Color.CADETBLUE);
+                this.circle.setFill(BallColors.SERVICE_FACADE.get());
+                this.label.setText("SF");
                 break;
             case CREATE_COMMAND_FACADE:
-                getRootNode().setFill(Color.CORNFLOWERBLUE);
+                this.circle.setFill(BallColors.COMMAND_FACADE.get());
+                this.label.setText("CF");
                 break;
             case CREATE_SERVICE:
-                getRootNode().setFill(Color.CRIMSON);
+                this.circle.setFill(BallColors.SERVICE.get());
+                this.label.setText("S");
                 break;
             case CREATE_MODEL:
-                getRootNode().setFill(Color.DARKGREY);
+                this.circle.setFill(BallColors.MODEL.get());
+                this.label.setText("M");
                 break;
             case CREATE_COMMAND:
-                getRootNode().setFill(Color.DARKRED);
+                this.circle.setFill(BallColors.COMMAND.get());
+                this.label.setText("C");
                 break;
             case CREATE_VIEW:
-                getRootNode().setFill(Color.GAINSBORO);
+                this.circle.setFill(BallColors.VIEW.get());
+                this.label.setText("V");
                 break;
             default:
                 // Nothing to colorize
@@ -231,6 +300,7 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
         double res;
         switch (getModel().getEventModel().getEventType()) {
             case CREATE_APPLICATION:
+            case CREATE_COMMAND:
             case CREATE_COMMAND_FACADE:
                 res = 0;
                 break;
@@ -239,11 +309,14 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
                 res = 70;
                 break;
             case CREATE_SERVICE_FACADE:
+            case CREATE_SERVICE:
                 res = -200 * Math.cos(Math.PI / 6);
                 break;
             case CREATE_UI_FACADE:
+            case CREATE_MODEL:
                 res = 200 * Math.cos(Math.PI / 6);
                 break;
+
             default:
                 res = 50;
         }
@@ -259,6 +332,7 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
         double res;
         switch (getModel().getEventModel().getEventType()) {
             case CREATE_COMMAND_FACADE:
+            case CREATE_COMMAND:
                 res = -200 * Math.sin(Math.PI / 2);
                 break;
             case CREATE_GLOBAL_FACADE:
@@ -268,6 +342,8 @@ public final class BallView extends DefaultView<BallModel, Circle, BallControlle
                 break;
             case CREATE_SERVICE_FACADE:
             case CREATE_UI_FACADE:
+            case CREATE_MODEL:
+            case CREATE_SERVICE:
                 res = +200 * Math.sin(Math.PI / 6);
                 break;
             default:

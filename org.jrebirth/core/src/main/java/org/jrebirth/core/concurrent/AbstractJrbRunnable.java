@@ -16,8 +16,10 @@
  */
 package org.jrebirth.core.concurrent;
 
-import org.jrebirth.core.event.JRebirthLogger;
+import org.jrebirth.core.application.AbstractApplication;
 import org.jrebirth.core.exception.JRebirthThreadException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>AbstractJrbRunnable</strong>.
@@ -25,6 +27,21 @@ import org.jrebirth.core.exception.JRebirthThreadException;
  * @author Sébastien Bordes
  */
 public abstract class AbstractJrbRunnable implements Runnable {
+
+    /** The class logger. */
+    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractApplication.class);
+
+    /** This name is used for debug purpose. */
+    private final String runnableName;
+
+    /**
+     * Default Constructor
+     * 
+     * @param runnableName
+     */
+    public AbstractJrbRunnable(final String runnableName) {
+        this.runnableName = runnableName;
+    }
 
     /**
      * {@inheritDoc}
@@ -34,7 +51,7 @@ public abstract class AbstractJrbRunnable implements Runnable {
         try {
             runInto();
         } catch (final JRebirthThreadException jte) {
-            JRebirthLogger.getInstance().logException(jte);
+            LOGGER.error(jte.getMessage(), jte);
         }
 
     }
@@ -45,5 +62,13 @@ public abstract class AbstractJrbRunnable implements Runnable {
      * @throws JRebirthThreadException it thread error
      */
     protected abstract void runInto() throws JRebirthThreadException;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "AbstractJrbRunnable - " + this.runnableName;
+    }
 
 }

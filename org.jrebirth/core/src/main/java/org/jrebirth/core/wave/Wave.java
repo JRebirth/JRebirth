@@ -27,6 +27,23 @@ import java.util.List;
  */
 public interface Wave {
 
+    enum Status {
+        created,
+        sent,
+        processed,
+        consumed;
+    }
+
+    /**
+     * @return Returns the Wave Unique Identifier.
+     */
+    Status getStatus();
+
+    /**
+     * @return Returns the Wave Unique Identifier.
+     */
+    void setStatus(Status status);
+
     /**
      * @return Returns the Wave Unique Identifier.
      */
@@ -104,6 +121,13 @@ public interface Wave {
     <T> void addData(WaveData<T> waveData);
 
     /**
+     * Add a list of wave data. Store objects and indexize them.
+     * 
+     * @param waveDatas the list of wave data to store
+     */
+    void addDatas(WaveData<?>[] waveDatas);
+
+    /**
      * Add a wave data. Store an object and indexize it.
      * 
      * @param waveItem the wave item used as hashkey
@@ -150,4 +174,11 @@ public interface Wave {
      * @return the wave bean, could be null
      */
     WaveBean getWaveBean();
+
+    /**
+     * TODO To complete.
+     * 
+     * @param waveListener
+     */
+    void addWaveListener(WaveListener waveListener);
 }

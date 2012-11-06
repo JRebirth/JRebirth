@@ -102,7 +102,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
             this.timeFrame = 0;
         }
         if (this.timeFrame < this.eventList.size() - 1) {
-            showNext(this.eventList.get(this.timeFrame++));
+            showNext(this.eventList.get(this.timeFrame));
         } else {
             this.playing = false;
         }
@@ -111,22 +111,12 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
     /**
      * Called when an event is processed.
      * 
-     * @param wave the wave taht contains data related to the event processed
+     * @param wave the wave that contains data related to the event processed
      */
     public void eventProcessed(final Wave wave) {
         if (this.playing) {
             play(wave);
         }
-    }
-
-    /**
-     * Show next element.
-     * 
-     * @param event the next event to show
-     */
-    private void showNext(final Event event) {
-        this.timeFrame++;
-        callCommand(ProcessEventCommand.class, WaveData.build(EditorWaves.EVENT, event));
     }
 
     /**
@@ -138,7 +128,16 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
         if (this.eventList != null && this.timeFrame + 1 < this.eventList.size()) {
             showNext(this.eventList.get(this.timeFrame + 1));
         }
+    }
 
+    /**
+     * Show next element.
+     * 
+     * @param event the next event to show
+     */
+    private void showNext(final Event event) {
+        this.timeFrame++;
+        callCommand(ProcessEventCommand.class, WaveData.build(EditorWaves.EVENT, event));
     }
 
     /**
@@ -186,8 +185,10 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * @param ballModel the ball model to register
      */
     public void registerBall(final BallModel ballModel) {
-        this.ballMap.put(ballModel.getEventModel().getTarget(), ballModel);
-        getView().getRootNode().getChildren().add(ballModel.getRootNode());
+        if (!this.ballMap.containsKey(ballModel.getEventModel().getTarget())) {
+            this.ballMap.put(ballModel.getEventModel().getTarget(), ballModel);
+            getView().getPanel().getChildren().add(ballModel.getRootNode());
+        }
     }
 
     /**
@@ -197,7 +198,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      */
     public void unregisterBall(final BallModel ballModel) {
         this.ballMap.remove(ballModel.getEventModel().getTarget());
-        getView().getRootNode().getChildren().remove(ballModel.getRootNode());
+        getView().getPanel().getChildren().remove(ballModel.getRootNode());
     }
 
     /**

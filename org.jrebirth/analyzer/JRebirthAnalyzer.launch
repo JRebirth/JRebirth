@@ -6,13 +6,9 @@
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
-<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
-<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
-<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
-</listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.jrebirth.analyzer.JRebirthAnalyzer"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="events_250.etd"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.jrebirth.analyzer"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
-<stringAttribute key="yk-options" value="&#13;&#10;additional-options2=onexit\=snapshot&#13;&#10;"/>
 </launchConfiguration>

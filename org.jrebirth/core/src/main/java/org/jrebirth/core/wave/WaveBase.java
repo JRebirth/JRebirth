@@ -23,23 +23,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.jrebirth.core.event.JRebirthLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
  * The class <strong>WaveBase</strong>.
  * 
  * This Bean is used to move wave's data through layer. It allow to manage priorities.
- * 
- * @param <B> The wave bean class used
  */
 public class WaveBase implements Wave {
+
+    /** The class logger. */
+    private final static Logger LOGGER = LoggerFactory.getLogger(WaveBase.class);
 
     /** The Wave Unique Identifier. */
     private final String wuid;
 
     /** The Wave timestamp. */
     private final long timestamp;
+
+    /** The wave status. */
+    private Status status;
 
     /** The group of the wave used to dispatch the right event. */
     private WaveGroup waveGroup;
@@ -71,6 +76,11 @@ public class WaveBase implements Wave {
 
     /** The type extending WaveBean to use to embed some values. */
     private Class<? extends WaveBean> waveBeanClass;
+
+    /**
+     * The list of wave Listener to warn when wave status changed.
+     */
+    private final List<WaveListener> waveListeners = new ArrayList<>();
 
     /**
      * Default Constructor.
@@ -176,6 +186,7 @@ public class WaveBase implements Wave {
      */
     @Override
     public <T extends Object> void addData(final WaveData<T> waveData) {
+
         // Init the order of the wave Data
         waveData.setOrder(getWaveItems().size());
         // Store into the map to allow access by WaveItem
@@ -184,6 +195,24 @@ public class WaveBase implements Wave {
         this.waveItemsList.add(waveData);
         // Sort the list
         // FIXME Collections.sort(this.waveItemsList);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addDatas(final WaveData<?>[] waveDatas) {
+
+        for (final WaveData<?> waveData : waveDatas) {
+            // Init the order of the wave Data
+            waveData.setOrder(getWaveItems().size());
+            // Store into the map to allow access by WaveItem
+            this.waveItemsMap.put(waveData.getKey(), waveData);
+            // Ad into the list to enable sorting
+            this.waveItemsList.add(waveData);
+            // Sort the list
+            // FIXME Collections.sort(this.waveItemsList);
+        }
     }
 
     /**
@@ -210,7 +239,7 @@ public class WaveBase implements Wave {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T get(final WaveItem<T> waveItem) {
-        return (T) this.waveItemsMap.get(waveItem).getValue();
+        return (T) (this.waveItemsMap.containsKey(waveItem) ? this.waveItemsMap.get(waveItem).getValue() : null);
     }
 
     /**
@@ -251,8 +280,7 @@ public class WaveBase implements Wave {
                 try {
                     this.waveBean = this.waveBeanClass.newInstance();
                 } catch (InstantiationException | IllegalAccessException e) {
-                    JRebirthLogger.getInstance().error("Impossible to build WaveBean instance : " + this.waveBeanClass.toString());
-                    JRebirthLogger.getInstance().logException(e);
+                    LOGGER.error("Impossible to build WaveBean instance : " + this.waveBeanClass.toString(), e);
                 } finally {
                     if (this.waveBean == null) {
                         this.waveBean = new DefaultWaveBean();
@@ -276,6 +304,67 @@ public class WaveBase implements Wave {
      */
     public void setWaveBeanClass(final Class<? extends WaveBean> waveBeanClass) {
         this.waveBeanClass = waveBeanClass;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addWaveListener(final WaveListener waveListener) {
+        this.waveListeners.add(waveListener);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    // @Override
+    public void removeWaveListener(final WaveListener waveListener) {
+        this.waveListeners.remove(waveListener);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Status getStatus() {
+        return this.status;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setStatus(final Status status) {
+        synchronized (status) {
+            this.status = status;
+            fireStatusChanged();
+        }
+    }
+
+    /**
+     * Fire a wave status change.
+     */
+    private void fireStatusChanged() {
+        for (final WaveListener waveListener : this.waveListeners) {
+
+            switch (this.status) {
+
+                case created:
+                    waveListener.waveCreated(this);
+                    break;
+                case sent:
+                    waveListener.waveSent(this);
+                    break;
+                case processed:
+                    waveListener.waveProcessed(this);
+                    break;
+                case consumed:
+                    waveListener.waveConsumed(this);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
 }

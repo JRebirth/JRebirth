@@ -6,11 +6,11 @@ import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.wave.Wave;
 
 /**
- * The class <strong>SwitchFullScreen</strong>.
+ * The class <strong>SwitchFullScreenCommand</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class SwitchFullScreen extends DefaultUICommand {
+public class SwitchFullScreenCommand extends DefaultUICommand {
 
     /**
      * {@inheritDoc}

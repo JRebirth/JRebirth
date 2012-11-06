@@ -123,7 +123,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
             // setSlidePosition(slide.getPage().intValue());
 
         } catch (final ClassNotFoundException e) {
-            getLocalFacade().getGlobalFacade().getLogger().error(e.getMessage());
+            // getLocalFacade().getGlobalFacade().getLogger().error(e.getMessage());
             e.printStackTrace();
         }
 
