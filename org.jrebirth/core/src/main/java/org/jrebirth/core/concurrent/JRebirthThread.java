@@ -44,11 +44,11 @@ import org.slf4j.LoggerFactory;
  */
 public final class JRebirthThread extends Thread {
 
-    /** The class logger. */
-    private final static Logger LOGGER = LoggerFactory.getLogger(JRebirthThread.class);
-
     /** The JRebirth Thread name. */
     public static final String NAME = "JRebirth Thread";
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(JRebirthThread.class);
 
     /** The unique instance of the current class. */
     private static JRebirthThread internalThread;
@@ -101,6 +101,7 @@ public final class JRebirthThread extends Thread {
     public void runNow(final Runnable runnable) {
         final Future<?> future = getFacade().getExecutorService().submit(runnable);
         // TODO log or delete
+        LOGGER.trace(future.toString());
     }
 
     /**
@@ -199,14 +200,26 @@ public final class JRebirthThread extends Thread {
     /**
      * Attach the first view and run pre and post command.
      * 
-     * @throws JRebirthThreadException
+     * @throws JRebirthThreadException if a problem occurred while calling the command
      */
     public void bootUp() throws JRebirthThreadException {
 
         final List<Wave> chainedWaveList = new ArrayList<>();
-        chainedWaveList.add(getApplication().getPreBootWave());
+
+        // Manage waves to run before the First node creation
+        final List<Wave> preBootList = getApplication().getPreBootWaveList();
+        if (preBootList != null && !preBootList.isEmpty()) {
+            chainedWaveList.addAll(preBootList);
+        }
+
+        // Manage the creation of the first node and show it !
         chainedWaveList.add(getLaunchFirstViewWave());
-        chainedWaveList.add(getApplication().getPostBootWave());
+
+        // Manage waves to run after the First node creation
+        final List<Wave> postBootList = getApplication().getPostBootWaveList();
+        if (postBootList != null && !postBootList.isEmpty()) {
+            chainedWaveList.addAll(postBootList);
+        }
 
         getFacade().getNotifier().sendWave(
                 WaveBuilder.create()
@@ -214,28 +227,6 @@ public final class JRebirthThread extends Thread {
                         .relatedClass(ChainWaveCommand.class)
                         .data(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList))
                         .build());
-
-        // JRebirth.runIntoJIT(new AbstractJrbRunnable("BootUp") {
-        //
-        // /**
-        // * {@inheritDoc}
-        // */
-        // @Override
-        // protected void runInto() throws JRebirthThreadException {
-        // try {
-        // sendWave(WaveBuilder.create()
-        // .waveGroup(WaveGroup.CALL_COMMAND)
-        // .relatedClass(ChainWaveCommand.class)
-        // .data(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList))
-        // .build()
-        // );
-        // } catch (final CoreException e) {
-        // LOGGER.error("Error while starting the UI", e);
-        // }
-        //
-        // }
-        // });
-
     }
 
     /**
@@ -282,32 +273,10 @@ public final class JRebirthThread extends Thread {
         }
     }
 
-    // /**
-    // * Launch a command.
-    // *
-    // * @param commandClass
-    // * @param waveData
-    // *
-    // * @throws CoreException if the command class was not found
-    // */
-    // protected void sendWave(final Wave wave) throws CoreException {
-    // if (wave != null) {
-    // try {
-    //
-    // getFacade().getNotifier().sendWave(wave);
-    //
-    // } catch (final JRebirthThreadException e) {
-    // LOGGER.error("An exception occured while sending the wave for class " + wave.getRelatedClass().getSimpleName(), e);
-    // // Impossible case, unless someone override JRebirthThread class
-    // throw new CoreException("sendWave method was called outside JIT.", e);
-    // }
-    // }
-    // }
-
     /**
      * Launch the first view by adding it into the root node.
      * 
-     * @throws CoreException if the first class was not found
+     * @return the wave responsible of the creation of the first view
      */
     protected Wave getLaunchFirstViewWave() {
 
@@ -383,22 +352,5 @@ public final class JRebirthThread extends Thread {
     public static void runIntoThreadPool(final Runnable runnable) {
         internalThread.runNow(runnable);
     }
-
-    // /**
-    // * Launch the post boot wave after taht the stage has been shown.
-    // */
-    // public void stageShown() {
-    // JRebirth.runIntoJIT(new AbstractJrbRunnable() {
-    //
-    // @Override
-    // protected void runInto() throws JRebirthThreadException {
-    // try {
-    // sendWave(getApplication().getPostBootWave());
-    // } catch (final CoreException e) {
-    // LOGGER.error("Error while sending a wave", e);
-    // }
-    // }
-    // });
-    // }
 
 }

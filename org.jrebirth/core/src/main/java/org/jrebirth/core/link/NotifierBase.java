@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 public class NotifierBase extends AbstractGlobalReady implements Notifier {
 
     /** The class logger. */
-    private final static Logger LOGGER = LoggerFactory.getLogger(NotifierBase.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NotifierBase.class);
 
     /** The map that store link between wave type and objects interested. */
     private final Map<WaveType, List<WaveReady>> notifierMap = new HashMap<>();

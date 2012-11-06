@@ -50,6 +50,17 @@ public interface WaveReady {
     /**
      * Send a wave to the notifier.
      * 
+     * The wave will automatically be sent from JRebirthThread.
+     * 
+     * @param wave the wave to send
+     */
+    void sendWave(Wave wave);
+
+    /**
+     * Send a wave to the notifier.
+     * 
+     * The wave will automatically be sent from JRebirthThread.
+     * 
      * @param waveType the type of wave to send
      * @param waveData the data (key-value
      */
@@ -57,6 +68,8 @@ public interface WaveReady {
 
     /**
      * Send a wave used to call a command.
+     * 
+     * The command will be called from JRebirthThread and could execute itself from another thread.
      * 
      * @param commandClass the command class to call
      * @param data the data to transport
@@ -66,6 +79,8 @@ public interface WaveReady {
     /**
      * Send a wave used to return data from a service.
      * 
+     * The service will be called from JRebirthThread and could execute itself from another thread.
+     * 
      * @param serviceClass the service called
      * @param waveType the type of the wave
      * @param data the data to transport
@@ -74,6 +89,8 @@ public interface WaveReady {
 
     /**
      * Send a wave used to display an UI model.
+     * 
+     * The command will be called from JRebirthThread but will execute itself from the JavaFX Application thread.
      * 
      * @param modelClass the model class to display
      * @param data the data to transport

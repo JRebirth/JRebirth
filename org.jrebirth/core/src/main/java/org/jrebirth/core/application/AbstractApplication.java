@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractApplication<P extends Pane> extends Application implements JRebirthApplication {
 
     /** The class logger. */
-    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractApplication.class);
+    private static final  Logger LOGGER = LoggerFactory.getLogger(AbstractApplication.class);
 
     /** The application primary stage. */
     private transient Stage stage;

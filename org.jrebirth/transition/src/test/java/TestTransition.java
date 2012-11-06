@@ -67,7 +67,7 @@ public final class TestTransition extends AbstractApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public Wave getPreBootWave() {
+    public Wave getPreBootWaveList() {
         // Nothing to do yet
         return null;
     }
@@ -76,7 +76,7 @@ public final class TestTransition extends AbstractApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public Wave getPostBootWave() {
+    public Wave getPostBootWaveList() {
         // Nothing to do yet
         return null;
     }

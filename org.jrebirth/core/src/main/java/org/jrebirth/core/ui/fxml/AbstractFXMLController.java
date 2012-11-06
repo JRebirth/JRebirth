@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractFXMLController implements FXMLController {
 
     /** The class logger. */
-    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractFXMLController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFXMLController.class);
 
     /** The linked view that load this FXML component. */
     private View<?, ?, ?> view;

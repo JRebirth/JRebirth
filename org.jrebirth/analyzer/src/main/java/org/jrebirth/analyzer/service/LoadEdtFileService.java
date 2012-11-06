@@ -13,6 +13,8 @@ import org.jrebirth.core.event.EventBase;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.ServiceBase;
 import org.jrebirth.core.wave.WaveTypeBase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>LoadEdtFileService</strong>.
@@ -26,6 +28,9 @@ public class LoadEdtFileService extends ServiceBase {
 
     /** Wave type to return events loaded. */
     public static final WaveTypeBase RE_EVENTS_LOADED = new WaveTypeBase("EVENTS_LOADED", EditorWaves.EVENTS);
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoadEdtFileService.class);
 
     /**
      * {@inheritDoc}
@@ -58,7 +63,7 @@ public class LoadEdtFileService extends ServiceBase {
             }
 
         } catch (final IOException e) {
-            // getLocalFacade().getGlobalFacade().getLogger().error("Error while processing event file");
+            LOGGER.error("Error while processing event file", e);
         }
         return eventList;
 

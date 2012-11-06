@@ -16,6 +16,8 @@
  */
 package org.jrebirth.core.application;
 
+import java.util.List;
+
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -71,17 +73,17 @@ public interface JRebirthApplication {
     Class<? extends Model> getFirstModelClass();
 
     /**
-     * Return the Pre-Boot Wave called after displaying the first view.
+     * Return the Pre-Boot Waves called after displaying the first view.
      * 
-     * @return the Pre-Boot Wave
+     * @return the list of wave to be run before the boot
      */
-    Wave getPreBootWave();
+    List<Wave> getPreBootWaveList();
 
     /**
-     * Return the Post-Boot Wave called after displaying the first view.
+     * Return the Post-Boot Waves called after displaying the first view.
      * 
-     * @return the Post-Boot Wave
+     * @return the list of wave to be run after the boot
      */
-    Wave getPostBootWave();
+    List<Wave> getPostBootWaveList();
 
 }

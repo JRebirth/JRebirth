@@ -14,7 +14,10 @@ import org.jrebirth.core.wave.WaveListener;
  */
 public class ChainWaveCommand extends DefaultCommand implements WaveListener {
 
+    /** The index of the wave to process. */
     private int index;
+
+    /** The list of wave to be processed one after the other. */
     private List<Wave> waveList;
 
     /**
@@ -23,23 +26,29 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
     @Override
     protected void execute(final Wave wave) {
 
+        // The first time we store the list of wave to run into the command field
         if (this.index == 0) {
             this.waveList = wave.get(JRebirthWaves.CHAINED_WAVES);
         }
+
+        // Extract the next wave to run
         final Wave waveToRun = this.waveList.get(this.index);
-        if (waveToRun != null) {
 
-            waveToRun.addWaveListener(this);
-            sendWave(waveToRun);
+        // The wave is null skip it and launch the next one
+        if (waveToRun == null) {
 
-        } else {
             this.index++;
             // Run next command if any
             if (this.waveList.size() > this.index) {
                 execute(wave);
             }
-        }
+        } else {
 
+            // Attach a listener to be informed when the wave will be consumed
+            waveToRun.addWaveListener(this);
+            // Send it to the queue in order to perform it
+            sendWave(waveToRun);
+        }
     }
 
     /**
@@ -48,7 +57,6 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
     @Override
     public void waveCreated(final Wave wave) {
         // Nothing to do yet
-
     }
 
     /**
@@ -57,7 +65,6 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
     @Override
     public void waveSent(final Wave wave) {
         // Nothing to do yet
-
     }
 
     /**
@@ -66,7 +73,6 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
     @Override
     public void waveProcessed(final Wave wave) {
         // Nothing to do yet
-
     }
 
     /**
