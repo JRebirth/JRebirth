@@ -131,8 +131,6 @@ public final class JRebirthThread extends Thread {
         // Start the thread (infinite loop)
         start();
 
-        // Attach the first view and run pre and post command
-        bootUp();
     }
 
     /**
@@ -140,6 +138,13 @@ public final class JRebirthThread extends Thread {
      */
     @Override
     public void run() {
+
+        // Attach the first view and run pre and post command
+        try {
+            bootUp();
+        } catch (final JRebirthThreadException e) {
+            LOGGER.error("An exception occured during JRebirth BootUp", e);
+        }
 
         while (this.infiniteLoop) {
             try {
@@ -193,34 +198,43 @@ public final class JRebirthThread extends Thread {
 
     /**
      * Attach the first view and run pre and post command.
+     * 
+     * @throws JRebirthThreadException
      */
-    public void bootUp() {
+    public void bootUp() throws JRebirthThreadException {
 
         final List<Wave> chainedWaveList = new ArrayList<>();
         chainedWaveList.add(getApplication().getPreBootWave());
         chainedWaveList.add(getLaunchFirstViewWave());
         chainedWaveList.add(getApplication().getPostBootWave());
 
-        JRebirth.runIntoJIT(new AbstractJrbRunnable("BootUp") {
+        getFacade().getNotifier().sendWave(
+                WaveBuilder.create()
+                        .waveGroup(WaveGroup.CALL_COMMAND)
+                        .relatedClass(ChainWaveCommand.class)
+                        .data(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList))
+                        .build());
 
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                try {
-                    sendWave(WaveBuilder.create()
-                            .waveGroup(WaveGroup.CALL_COMMAND)
-                            .relatedClass(ChainWaveCommand.class)
-                            .data(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList))
-                            .build()
-                    );
-                } catch (final CoreException e) {
-                    LOGGER.error("Error while starting the UI", e);
-                }
-
-            }
-        });
+        // JRebirth.runIntoJIT(new AbstractJrbRunnable("BootUp") {
+        //
+        // /**
+        // * {@inheritDoc}
+        // */
+        // @Override
+        // protected void runInto() throws JRebirthThreadException {
+        // try {
+        // sendWave(WaveBuilder.create()
+        // .waveGroup(WaveGroup.CALL_COMMAND)
+        // .relatedClass(ChainWaveCommand.class)
+        // .data(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList))
+        // .build()
+        // );
+        // } catch (final CoreException e) {
+        // LOGGER.error("Error while starting the UI", e);
+        // }
+        //
+        // }
+        // });
 
     }
 
@@ -268,27 +282,27 @@ public final class JRebirthThread extends Thread {
         }
     }
 
-    /**
-     * Launch a command.
-     * 
-     * @param commandClass
-     * @param waveData
-     * 
-     * @throws CoreException if the command class was not found
-     */
-    protected void sendWave(final Wave wave) throws CoreException {
-        if (wave != null) {
-            try {
-
-                getFacade().getNotifier().sendWave(wave);
-
-            } catch (final JRebirthThreadException e) {
-                LOGGER.error("An exception occured while sending the wave for class " + wave.getRelatedClass().getSimpleName(), e);
-                // Impossible case, unless someone override JRebirthThread class
-                throw new CoreException("sendWave method was called outside JIT.", e);
-            }
-        }
-    }
+    // /**
+    // * Launch a command.
+    // *
+    // * @param commandClass
+    // * @param waveData
+    // *
+    // * @throws CoreException if the command class was not found
+    // */
+    // protected void sendWave(final Wave wave) throws CoreException {
+    // if (wave != null) {
+    // try {
+    //
+    // getFacade().getNotifier().sendWave(wave);
+    //
+    // } catch (final JRebirthThreadException e) {
+    // LOGGER.error("An exception occured while sending the wave for class " + wave.getRelatedClass().getSimpleName(), e);
+    // // Impossible case, unless someone override JRebirthThread class
+    // throw new CoreException("sendWave method was called outside JIT.", e);
+    // }
+    // }
+    // }
 
     /**
      * Launch the first view by adding it into the root node.
