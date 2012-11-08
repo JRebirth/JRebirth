@@ -60,9 +60,7 @@ public enum BallColors implements ColorEnum {
     MODEL(new WebColor("F1693A")),
 
     /** The View ball background color. */
-    VIEW(new WebColor("4AACF2"))
-
-    ;
+    VIEW(new WebColor("4AACF2"));
 
     /**
      * Private Constructor.

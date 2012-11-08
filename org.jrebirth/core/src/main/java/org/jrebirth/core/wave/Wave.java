@@ -114,14 +114,14 @@ public interface Wave {
     void setPriority(int priority);
 
     /**
-     * @return Returns the nextWave.
+     * @return Returns the relatedWave.
      */
-    Wave getNextWave();
+    Wave getRelatedWave();
 
     /**
-     * @param nextWave The nextWave to set.
+     * @param relatedWave The related Wave to set.
      */
-    void setNextWave(Wave nextWave);
+    void setRelatedWave(Wave relatedWave);
 
     /**
      * Return all wave items sorted by order.

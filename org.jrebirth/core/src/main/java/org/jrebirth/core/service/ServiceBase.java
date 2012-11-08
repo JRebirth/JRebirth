@@ -34,7 +34,6 @@ import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveBuilder;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveItem;
-import org.jrebirth.core.wave.WaveListener;
 import org.jrebirth.core.wave.WaveType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,7 +101,7 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings({ "unchecked", "unused" })
+    @SuppressWarnings("unchecked")
     @Override
     public <T extends Object> void returnData(final Wave sourceWave) {
 
@@ -116,90 +115,16 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
             // parameterValues.add(wave);
 
             if (sourceWave.getWaveType() == null) {
-                // log error
+                LOGGER.error("Wave processed without any wave type for service  " + this.getClass().getSimpleName());
             }
 
             // Search the wave handler method
             final Method method = ClassUtility.getMethodByName(this.getClass(), ClassUtility.underscoreToCamelCase(sourceWave.getWaveType().toString()));
             if (method != null) {
 
-                final Class<T> returnClass = (Class<T>) method.getReturnType();
+                // final Class<T> returnClass = (Class<T>) method.getReturnType();
 
-                final ServiceBase localService = this;
-
-                final Task<T> task = new Task<T>() {
-
-                    @Override
-                    protected T call() throws Exception {
-                        T res = null;
-                        try {
-                            // Call this method with right parameters
-                            res = (T) method.invoke(localService, parameterValues.toArray());
-
-                            if (res != null) {
-                                final WaveType responseWaveType = localService.waveTypeMap.get(sourceWave.getWaveType());
-                                final WaveItem<T> waveItem = localService.waveItemMap.get(responseWaveType);
-
-                                final Wave returnWave = WaveBuilder.create()
-                                        .waveType(responseWaveType)
-                                        .data(WaveData.build(waveItem, res))
-                                        .build();
-
-                                returnWave.addWaveListener(new WaveListener() {
-
-                                    @Override
-                                    public void waveSent(final Wave wave) {
-                                    }
-
-                                    @Override
-                                    public void waveProcessed(final Wave wave) {
-                                    }
-
-                                    @Override
-                                    public void waveCreated(final Wave wave) {
-                                    }
-
-                                    @Override
-                                    public void waveConsumed(final Wave wave) {
-                                        // Return wave has been consumed, so the triggered wave can be consumed too
-
-                                        LOGGER.trace(localService.getClass().getSimpleName() + " Consumes wave " + sourceWave.toString());
-                                        sourceWave.setStatus(Status.Consumed);
-                                    }
-
-                                    @Override
-                                    public void waveCancelled(final Wave wave) {
-                                        // Nothing to do yet
-
-                                    }
-
-                                    @Override
-                                    public void waveDestroyed(final Wave wave) {
-                                        // Nothing to do yet
-
-                                    }
-                                });
-
-                                // Send the return wave to interested components
-                                sendWave(returnWave);
-
-                            } else {
-                                // No return wave required
-                                LOGGER.trace(localService.getClass().getSimpleName() + " Consumes wave (noreturn)" + sourceWave.toString());
-
-                                sourceWave.setStatus(Status.Consumed);
-                            }
-
-                        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                            // Propagate the wave exception
-                            LOGGER.error("Unable to perform the service", e);
-                            // throw new WaveException(wave, e);
-                        }
-                        return res;
-                    }
-
-                };
-                task.run();
+                runTask(sourceWave, method, parameterValues);
 
             }
         } catch (final NoSuchMethodException e) {
@@ -208,5 +133,57 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
 
         }
 
+    }
+
+    /**
+     * Run the wave type method.
+     * 
+     * @param sourceWave the source wave
+     * @param parameterValues values to pass to the method
+     * @param method method to call
+     */
+    private <T> void runTask(final Wave sourceWave, final Method method, final List<Object> parameterValues) {
+
+        final ServiceBase localService = this;
+
+        final Task<T> task = new Task<T>() {
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected T call() throws Exception {
+                T res = null;
+                try {
+                    // Call this method with right parameters
+                    res = (T) method.invoke(localService, parameterValues.toArray());
+
+                    if (res != null) {
+                        final WaveType responseWaveType = localService.waveTypeMap.get(sourceWave.getWaveType());
+                        final WaveItem<T> waveItem = localService.waveItemMap.get(responseWaveType);
+
+                        final Wave returnWave = WaveBuilder.create()
+                                .waveType(responseWaveType)
+                                .relatedClass(this.getClass())
+                                .data(WaveData.build(waveItem, res))
+                                .build();
+                        returnWave.setRelatedWave(sourceWave);
+                        returnWave.addWaveListener(new ServiceWaveListener());
+
+                        // Send the return wave to interested components
+                        sendWave(returnWave);
+
+                    } else {
+                        // No return wave required
+                        LOGGER.trace(localService.getClass().getSimpleName() + " Consumes wave (noreturn)" + sourceWave.toString());
+                        sourceWave.setStatus(Status.Consumed);
+                    }
+                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                    // Propagate the wave exception
+                    LOGGER.error("Unable to perform the service", e);
+                    // throw new WaveException(wave, e);
+                }
+                return res;
+            }
+        };
+        task.run();
     }
 }
