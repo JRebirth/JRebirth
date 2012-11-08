@@ -19,6 +19,7 @@ package org.jrebirth.core.wave;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +86,9 @@ public class WaveBase implements Wave {
      * The list of wave Listener to warn when wave status changed.
      */
     private final List<WaveListener> waveListeners = Collections.synchronizedList(new ArrayList<WaveListener>());
+
+    /** The space separator. */
+    private static final String SPACE_SEP = " ";
 
     /**
      * Default Constructor.
@@ -197,8 +201,9 @@ public class WaveBase implements Wave {
         this.waveItemsMap.put(waveData.getKey(), waveData);
         // Ad into the list to enable sorting
         this.waveItemsList.add(waveData);
+
         // Sort the list
-        // FIXME Collections.sort(this.waveItemsList);
+        sortWaveItems();
     }
 
     /**
@@ -214,9 +219,24 @@ public class WaveBase implements Wave {
             this.waveItemsMap.put(waveData.getKey(), waveData);
             // Ad into the list to enable sorting
             this.waveItemsList.add(waveData);
+
             // Sort the list
-            // FIXME Collections.sort(this.waveItemsList);
+            sortWaveItems();
         }
+    }
+
+    /**
+     * Sort the list of wave items.
+     */
+    private void sortWaveItems() {
+        Collections.sort(this.waveItemsList, new Comparator<WaveData<?>>() {
+
+            @Override
+            public int compare(final WaveData<?> wd1, final WaveData<?> wd2) {
+                return ((WaveData<?>) wd1).getOrder() - ((WaveData<?>) wd2).getOrder();
+            }
+
+        });
     }
 
     /**
@@ -273,7 +293,6 @@ public class WaveBase implements Wave {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
     @Override
     public WaveBean getWaveBean() {
         if (this.waveBean == null) {
@@ -387,16 +406,14 @@ public class WaveBase implements Wave {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        final String space = " ";
-
         if (getWaveGroup() != null) {
-            sb.append(getWaveGroup()).append(space);
+            sb.append(getWaveGroup()).append(SPACE_SEP);
         }
         if (getRelatedClass() != null) {
-            sb.append(getRelatedClass().getSimpleName()).append(space);
+            sb.append(getRelatedClass().getSimpleName()).append(SPACE_SEP);
         }
         if (getWaveType() != null) {
-            sb.append(getWaveType()).append(space);
+            sb.append(getWaveType()).append(SPACE_SEP);
         }
 
         if (getWUID() != null) {
