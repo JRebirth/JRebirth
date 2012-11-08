@@ -16,9 +16,6 @@
  */
 package org.jrebirth.core.command;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.concurrent.RunIntoType;
@@ -28,6 +25,8 @@ import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>AbstractBaseCommand</strong>.
@@ -40,6 +39,9 @@ import org.jrebirth.core.wave.WaveBean;
  */
 public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> implements Command {
 
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBaseCommand.class);
+
     /**
      * The field that indicate how this command must be launched.
      */
@@ -49,11 +51,6 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
      * The parent command, useful when chained or multi commands are used.
      */
     private Command parentCommand;
-
-    /**
-     * The list of command Listener to warn taht an event occurred.
-     */
-    private final List<CommandListener> commandListeners = new ArrayList<>();
 
     /**
      * Default constructor.
@@ -103,14 +100,29 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
 
             @Override
             protected void runInto() throws JRebirthThreadException {
+                preExecute(wave);
                 execute(wave);
-                fireAchieve(wave);
+                postExecute(wave);
             }
         };
 
         // Add the runnable to the runner queue run it as soon as possible
         JRebirth.run(getRunInto(), runnable);
     }
+
+    /**
+     * Actions to perform before the command into the executor thread.
+     * 
+     * @param wave the wave that triggered this command
+     */
+    abstract protected void preExecute(final Wave wave);
+
+    /**
+     * Actions to perform after the command into the executor thread.
+     * 
+     * @param wave the wave that triggered this command
+     */
+    abstract protected void postExecute(final Wave wave);
 
     /**
      * @return Returns the runInto.
@@ -152,31 +164,15 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     }
 
     /**
-     * Fire an achieve event.
+     * Fire an achieve event for command listeners.
+     * 
+     * And consume the wave that trigger this command
      * 
      * @param wave forward the wave that has been performed
      */
     protected void fireAchieve(final Wave wave) {
-        for (final CommandListener commandListener : this.commandListeners) {
-            commandListener.commandAchieved(wave);
-        }
-        wave.setStatus(Wave.Status.consumed);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addCommandListener(final CommandListener commandListener) {
-        this.commandListeners.add(commandListener);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void removeCommandListener(final CommandListener commandListener) {
-        this.commandListeners.remove(commandListener);
+        LOGGER.trace(this.getClass().getSimpleName() + " consumes  " + wave.toString());
+        wave.setStatus(Wave.Status.Consumed);
     }
 
 }

@@ -16,7 +16,6 @@
  */
 package org.jrebirth.core.concurrent;
 
-import org.jrebirth.core.application.AbstractApplication;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +28,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractJrbRunnable implements Runnable {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractJrbRunnable.class);
 
     /** This name is used for debug purpose. */
     private final String runnableName;
@@ -49,7 +48,7 @@ public abstract class AbstractJrbRunnable implements Runnable {
     @Override
     public final void run() {
 
-        LOGGER.trace("Launch the runnable : " + this.runnableName);
+        LOGGER.trace("Run> " + this.runnableName);
 
         try {
             runInto();

@@ -26,14 +26,18 @@ import java.util.Map;
 import javafx.concurrent.Task;
 
 import org.jrebirth.core.event.EventType;
-import org.jrebirth.core.event.JRebirthLogger;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.Wave.Status;
+import org.jrebirth.core.wave.WaveBuilder;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveItem;
+import org.jrebirth.core.wave.WaveListener;
 import org.jrebirth.core.wave.WaveType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -44,6 +48,9 @@ import org.jrebirth.core.wave.WaveType;
  * @author Sébastien Bordes
  */
 public class ServiceBase extends AbstractWaveReady<Service> implements Service {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceBase.class);
 
     /** The wave type map. */
     private final Map<WaveType, WaveType> waveTypeMap = new HashMap<>();
@@ -97,19 +104,23 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
      */
     @SuppressWarnings({ "unchecked", "unused" })
     @Override
-    public <T extends Object> void returnData(final Wave wave) {
+    public <T extends Object> void returnData(final Wave sourceWave) {
 
         try {
             // Build parameter list of the searched method
             final List<Object> parameterValues = new ArrayList<>();
-            for (final WaveData<?> wd : wave.getWaveItems()) {
+            for (final WaveData<?> wd : sourceWave.getWaveItems()) {
                 parameterValues.add(wd.getValue());
             }
             // Add the current wave to process
             // parameterValues.add(wave);
 
+            if (sourceWave.getWaveType() == null) {
+                // log error
+            }
+
             // Search the wave handler method
-            final Method method = ClassUtility.getMethodByName(this.getClass(), ClassUtility.underscoreToCamelCase(wave.getWaveType().toString()));
+            final Method method = ClassUtility.getMethodByName(this.getClass(), ClassUtility.underscoreToCamelCase(sourceWave.getWaveType().toString()));
             if (method != null) {
 
                 final Class<T> returnClass = (Class<T>) method.getReturnType();
@@ -126,16 +137,50 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
                             res = (T) method.invoke(localService, parameterValues.toArray());
 
                             if (res != null) {
-                                final WaveType responseWaveType = localService.waveTypeMap.get(wave.getWaveType());
+                                final WaveType responseWaveType = localService.waveTypeMap.get(sourceWave.getWaveType());
                                 final WaveItem<T> waveItem = localService.waveItemMap.get(responseWaveType);
 
-                                // FIXME Manage !
-                                sendWave(responseWaveType, WaveData.build(waveItem, res));
+                                final Wave returnWave = WaveBuilder.create()
+                                        .waveType(responseWaveType)
+                                        .data(WaveData.build(waveItem, res))
+                                        .build();
+
+                                returnWave.addWaveListener(new WaveListener() {
+
+                                    @Override
+                                    public void waveSent(final Wave wave) {
+                                    }
+
+                                    @Override
+                                    public void waveProcessed(final Wave wave) {
+                                    }
+
+                                    @Override
+                                    public void waveCreated(final Wave wave) {
+                                    }
+
+                                    @Override
+                                    public void waveConsumed(final Wave wave) {
+                                        // Return wave has been consumed, so the triggered wave can be consumed too
+
+                                        LOGGER.trace(localService.getClass().getSimpleName() + " Consumes wave " + sourceWave.toString());
+                                        sourceWave.setStatus(Status.Consumed);
+                                    }
+                                });
+
+                                // Send the return wave to interested components
+                                sendWave(returnWave);
+
+                            } else {
+                                // No return wave required
+                                LOGGER.trace(localService.getClass().getSimpleName() + " Consumes wave (noreturn)" + sourceWave.toString());
+
+                                sourceWave.setStatus(Status.Consumed);
                             }
 
                         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                             // Propagate the wave exception
-                            JRebirthLogger.getInstance().logException(e);
+                            LOGGER.error("Unable to perform the service", e);
                             // throw new WaveException(wave, e);
                         }
                         return res;
@@ -147,7 +192,7 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
             }
         } catch (final NoSuchMethodException e) {
             // If no method was found, call the default method
-            processAction(wave);
+            processAction(sourceWave);
 
         }
 

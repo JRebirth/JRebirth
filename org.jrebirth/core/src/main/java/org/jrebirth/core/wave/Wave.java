@@ -27,20 +27,39 @@ import java.util.List;
  */
 public interface Wave {
 
+    /**
+     * The class <strong>Status</strong>.
+     * 
+     * @author Sébastien Bordes
+     */
     enum Status {
-        created,
-        sent,
-        processed,
-        consumed;
+
+        /** The wave has just been created, it's the default status. */
+        Created,
+
+        /** The wave has just been sent. */
+        Sent,
+
+        /** The wave is being processing. */
+        Processing,
+
+        /** The wave has just been cancelled. */
+        Cancelled,
+
+        /** The wave has just been consumed. */
+        Consumed,
+
+        /** The wave has just been destroyed. */
+        Destroyed;
     }
 
     /**
-     * @return Returns the Wave Unique Identifier.
+     * @return Returns the Wave Status.
      */
     Status getStatus();
 
     /**
-     * @return Returns the Wave Unique Identifier.
+     * @param status The status to set.
      */
     void setStatus(Status status);
 
@@ -181,4 +200,11 @@ public interface Wave {
      * @param waveListener
      */
     void addWaveListener(WaveListener waveListener);
+
+    /**
+     * TODO To complete.
+     * 
+     * @param waveBean
+     */
+    void linkWaveBean(WaveBean waveBean);
 }

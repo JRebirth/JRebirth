@@ -61,7 +61,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
         if ((i & 0x8) != 0) {
             paramWave.setWaveBeanClass(this.waveBeanClass);
         }
-        if ((i & 0x16) != 0) {
+        if ((i & 0x10) != 0) {
             paramWave.addDatas(this.waveData);
         }
     }

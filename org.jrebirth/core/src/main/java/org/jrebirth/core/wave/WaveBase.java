@@ -24,6 +24,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.jrebirth.core.concurrent.AbstractJrbRunnable;
+import org.jrebirth.core.concurrent.JRebirth;
+import org.jrebirth.core.exception.JRebirthThreadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,10 +48,10 @@ public class WaveBase implements Wave {
     private final long timestamp;
 
     /** The wave status. */
-    private Status status;
+    private Status status = Status.Created;
 
     /** The group of the wave used to dispatch the right event. */
-    private WaveGroup waveGroup;
+    private WaveGroup waveGroup = WaveGroup.UNDEFINED;
 
     /**
      * The type of the wave used to call the right method name of the receiver object.
@@ -338,7 +341,14 @@ public class WaveBase implements Wave {
     public void setStatus(final Status status) {
         synchronized (status) {
             this.status = status;
-            fireStatusChanged();
+            JRebirth.runIntoJIT(new AbstractJrbRunnable("Set Wave Status") {
+
+                @Override
+                protected void runInto() throws JRebirthThreadException {
+                    fireStatusChanged();
+                }
+            });
+
         }
     }
 
@@ -346,26 +356,61 @@ public class WaveBase implements Wave {
      * Fire a wave status change.
      */
     private void fireStatusChanged() {
-        System.out.println("fireStatusChanged " + this.status.toString());
+        // System.out.println("fireStatusChanged " + this.status.toString());
+
         for (final WaveListener waveListener : this.waveListeners) {
 
             switch (this.status) {
 
-                case created:
+                case Created:
                     waveListener.waveCreated(this);
                     break;
-                case sent:
+                case Sent:
                     waveListener.waveSent(this);
                     break;
-                case processed:
+                case Processing:
                     waveListener.waveProcessed(this);
                     break;
-                case consumed:
+                case Consumed:
                     waveListener.waveConsumed(this);
                     break;
                 default:
                     break;
             }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+
+        if (getWaveGroup() != null) {
+            sb.append(getWaveGroup()).append(" ");
+        }
+        if (getRelatedClass() != null) {
+            sb.append(getRelatedClass().getSimpleName()).append(" ");
+        }
+        if (getWaveType() != null) {
+            sb.append(getWaveType()).append(" ");
+        }
+
+        if (getWUID() != null) {
+            sb.append("(").append(getWUID()).append(") ");
+        }
+        return sb.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void linkWaveBean(final WaveBean waveBean) {
+        if (waveBean != null) {
+            this.waveBean = waveBean;
+            this.waveBeanClass = waveBean.getClass();
         }
     }
 

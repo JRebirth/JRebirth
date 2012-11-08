@@ -22,6 +22,9 @@ import java.util.List;
 import org.jrebirth.core.concurrent.RunIntoType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBuilder;
+import org.jrebirth.core.wave.WaveGroup;
+import org.jrebirth.core.wave.WaveListener;
 
 /**
  * The class <strong>AbstractBaseMultiCommand</strong>.
@@ -30,7 +33,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand implements MultiCommand, CommandListener {
+public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand implements MultiCommand, WaveListener {
 
     /** The list of command that will be chained. */
     private final List<Class<? extends Command>> commandList = new ArrayList<>();
@@ -42,6 +45,8 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
 
     /** The index of the last command performed. */
     private int commandRunIndex;
+
+    private Wave waveSource;
 
     /**
      * Default Constructor.
@@ -86,16 +91,25 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
      */
     @Override
     protected void execute(final Wave wave) {
+
+        if (this.commandRunIndex == 0) {
+            this.waveSource = wave;
+        }
+
         if (this.sequential) {
 
-            final Command command = getLocalFacade().retrieve(this.commandList.get(this.commandRunIndex));
-            command.addCommandListener(this);
-            command.run(wave);
+            final Wave subCommandWave = WaveBuilder.create()
+                    .waveGroup(WaveGroup.CALL_COMMAND)
+                    .relatedClass(this.commandList.get(this.commandRunIndex))
+                    .build();
+            subCommandWave.linkWaveBean(wave.getWaveBean());
+            subCommandWave.addWaveListener(this);
+            sendWave(subCommandWave);
 
         } else {
             // Launch all sub command in parallel
             for (final Class<? extends Command> commandClass : this.commandList) {
-                getLocalFacade().retrieve(commandClass).run(wave);
+                getLocalFacade().retrieve(commandClass).run();
             }
         }
 
@@ -105,7 +119,24 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
      * {@inheritDoc}
      */
     @Override
-    protected void fireAchieve(final Wave wave) {
+    protected void preExecute(final Wave wave) {
+        // Nothing to do
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void postExecute(final Wave wave) {
+        // Nothing to do
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveCreated(final Wave wave) {
+        // Nothing to do yet
 
     }
 
@@ -113,15 +144,52 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
      * {@inheritDoc}
      */
     @Override
-    public void commandAchieved(final Wave wave) {
+    public void waveSent(final Wave wave) {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveProcessed(final Wave wave) {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveConsumed(final Wave wave) {
         this.commandRunIndex++;
         // Run next command if any
         if (this.commandList.size() > this.commandRunIndex) {
             execute(wave);
         } else {
-            super.fireAchieve(wave);
+            // No more command to run the MultiCommand is achieved
+            fireAchieve(this.waveSource);
         }
+
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void processAction(final Wave wave) {
+        // Nothing to do yet
+
+    }
+
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void commandAchieved(final Wave wave) {
+    //
+    // }
 
     /**
      * {@inheritDoc}
