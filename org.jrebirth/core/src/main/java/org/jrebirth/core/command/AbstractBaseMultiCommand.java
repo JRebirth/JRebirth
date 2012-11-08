@@ -172,7 +172,6 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
             // No more command to run the MultiCommand is achieved
             fireAchieve(this.waveSource);
         }
-
     }
 
     /**
@@ -183,14 +182,6 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
         // Nothing to do yet
 
     }
-
-    // /**
-    // * {@inheritDoc}
-    // */
-    // @Override
-    // public void commandAchieved(final Wave wave) {
-    //
-    // }
 
     /**
      * {@inheritDoc}
