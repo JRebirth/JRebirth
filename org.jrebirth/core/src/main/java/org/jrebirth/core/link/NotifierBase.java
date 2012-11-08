@@ -103,18 +103,22 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     /**
      * Call dynamically a command.
      * 
+     * According to its runIntoType the command will be ru into JAT, JIT or a Thread Pool
+     * 
+     * This method is called from the JIT (JRebirth Internal Thread)<br>
+     * 
      * @param wave the wave that contain all information
      */
     @SuppressWarnings("unchecked")
     private void callCommand(final Wave wave) {
         final Command command = getGlobalFacade().getCommandFacade().retrieve((Class<? extends Command>) wave.getRelatedClass());
-
-        // TODO parse arguments !!!!!!!! like for model events
         command.run(wave);
     }
 
     /**
-     * Display dynamically an Ui model.
+     * Call a service method by using a task worker.
+     * 
+     * This method is called from the JIT (JRebirth Internal Thread)<br>
      * 
      * @param wave the wave that contain all information
      */
@@ -125,7 +129,16 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     }
 
     /**
-     * Display dynamically an Ui model.
+     * Display dynamically an Ui model.<br>
+     * 
+     * This method is called from the JIT (JRebirth Internal Thread)<br>
+     * 
+     * Creates the model and its root node.<br>
+     * Then attach it according to the placeholder defined into the wave<br>
+     * <ul>
+     * <li>JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER : to replace a property node by the model's root node</li>
+     * <li>JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER : to add the model's root node into a children list</li>
+     * </ul>
      * 
      * @param wave the wave that contain all information
      */
@@ -135,22 +148,36 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         // Build the new UI view
         final Model model = getGlobalFacade().getUiFacade().retrieve((Class<? extends Model>) wave.getRelatedClass());
 
-        // FIXME run it into JAT !!!!
-        if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
-            // Add an Ui view into a the place holder provided
-            final ObjectProperty<Node> property = wave.get(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER);
-            property.setValue(model.getView().getRootNode());
+        // Attach the model root node to a dedicated place holder.
+        // This link is done into the JavaFX Application Thread
+        JRebirth.runIntoJAT(new AbstractJrbRunnable("Display Model " + model.getClass().getSimpleName()) {
 
-        } else if (wave.contains(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER)) {
-            // Add an Ui view into a children list of its parent container
-            final ObservableList<Node> list = wave.get(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER);
-            list.add(model.getView().getRootNode());
-        }
-        wave.setStatus(Status.Consumed);
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            protected void runInto() throws JRebirthThreadException {
+                if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
+                    // Add an Ui view into a the place holder provided
+                    final ObjectProperty<Node> nodePlaceHolder = wave.get(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER);
+                    nodePlaceHolder.setValue(model.getView().getRootNode());
+
+                } else if (wave.contains(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER)) {
+                    // Add an Ui view into a children list of its parent container
+                    final ObservableList<Node> childrenPlaceHolder = wave.get(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER);
+                    childrenPlaceHolder.add(model.getView().getRootNode());
+                }
+                // We can consume the wave because the link is done synchronously into the JAT
+                wave.setStatus(Status.Consumed);
+            }
+        });
+
     }
 
     /**
      * Dispatch a standard wave which could be handled by a custom method of the component.
+     * 
+     * This method is called from the JIT (JRebirth Internal Thread)<br>
      * 
      * @param wave the wave that contains all information
      * 

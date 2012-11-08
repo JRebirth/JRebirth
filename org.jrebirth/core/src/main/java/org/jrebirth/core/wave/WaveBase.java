@@ -64,8 +64,8 @@ public class WaveBase implements Wave {
     /** The priority used to process wave according to a custom order. */
     private int priority;
 
-    /** The next wave to process after this one, used to chain waves. */
-    private Wave nextWave;
+    /** The related wave to the current wave, cold be a parent wave or child wave according context. */
+    private Wave relatedWave;
 
     /** A map used to contain all data. */
     private final Map<WaveItem, WaveData<?>> waveItemsMap = new HashMap<>();
@@ -165,16 +165,16 @@ public class WaveBase implements Wave {
      * {@inheritDoc}
      */
     @Override
-    public Wave getNextWave() {
-        return this.nextWave;
+    public Wave getRelatedWave() {
+        return this.relatedWave;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setNextWave(final Wave nextWave) {
-        this.nextWave = nextWave;
+    public void setRelatedWave(final Wave nextWave) {
+        this.relatedWave = nextWave;
     }
 
     /**

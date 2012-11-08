@@ -34,6 +34,7 @@ import org.jrebirth.core.ui.DefaultView;
  */
 public final class EditorView extends DefaultView<EditorModel, ScrollPane, EditorController> {
 
+    /** The editor panel that is scrollable. */
     private Pane panel;
 
     /**
