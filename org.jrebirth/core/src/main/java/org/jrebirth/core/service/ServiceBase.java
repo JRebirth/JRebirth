@@ -27,6 +27,7 @@ import javafx.concurrent.Task;
 
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
@@ -124,7 +125,7 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
 
                 // final Class<T> returnClass = (Class<T>) method.getReturnType();
 
-                runTask(sourceWave, method, parameterValues);
+                runTask(sourceWave, method, parameterValues.toArray());
 
             }
         } catch (final NoSuchMethodException e) {
@@ -141,22 +142,31 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
      * @param sourceWave the source wave
      * @param parameterValues values to pass to the method
      * @param method method to call
+     * 
+     * @param <T> the type of the returned type
      */
-    private <T> void runTask(final Wave sourceWave, final Method method, final List<Object> parameterValues) {
+    private <T> void runTask(final Wave sourceWave, final Method method, final Object[] parameterValues) {
 
         final ServiceBase localService = this;
 
         final Task<T> task = new Task<T>() {
 
+            /**
+             * {@inheritDoc}
+             */
             @SuppressWarnings("unchecked")
             @Override
-            protected T call() throws Exception {
+            protected T call() throws WaveException {
                 T res = null;
                 try {
                     // Call this method with right parameters
-                    res = (T) method.invoke(localService, parameterValues.toArray());
+                    res = (T) method.invoke(localService, parameterValues);
 
-                    if (res != null) {
+                    if (res == null) {
+                        // No return wave required
+                        LOGGER.trace(localService.getClass().getSimpleName() + " Consumes wave (noreturn)" + sourceWave.toString());
+                        sourceWave.setStatus(Status.Consumed);
+                    } else {
                         final WaveType responseWaveType = localService.waveTypeMap.get(sourceWave.getWaveType());
                         final WaveItem<T> waveItem = localService.waveItemMap.get(responseWaveType);
 
@@ -171,10 +181,6 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
                         // Send the return wave to interested components
                         sendWave(returnWave);
 
-                    } else {
-                        // No return wave required
-                        LOGGER.trace(localService.getClass().getSimpleName() + " Consumes wave (noreturn)" + sourceWave.toString());
-                        sourceWave.setStatus(Status.Consumed);
                     }
                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                     // Propagate the wave exception

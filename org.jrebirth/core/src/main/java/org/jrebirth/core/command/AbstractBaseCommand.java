@@ -96,18 +96,19 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     public final void run(final Wave wave) {
 
         // Create the runnable that will be run
-        final AbstractJrbRunnable runnable = new AbstractJrbRunnable(this.getClass().getSimpleName()) {
+        // Add the runnable to the runner queue run it as soon as possible
+        JRebirth.run(getRunInto(), new AbstractJrbRunnable(this.getClass().getSimpleName()) {
 
+            /**
+             * {@inheritDoc}
+             */
             @Override
             protected void runInto() throws JRebirthThreadException {
                 preExecute(wave);
                 execute(wave);
                 postExecute(wave);
             }
-        };
-
-        // Add the runnable to the runner queue run it as soon as possible
-        JRebirth.run(getRunInto(), runnable);
+        });
     }
 
     /**
