@@ -45,4 +45,22 @@ public class ShowModelCommand extends AbstractBaseMultiCommand {
         // Nothing to do yet
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveCancelled(final Wave wave) {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveDestroyed(final Wave wave) {
+        // Nothing to do yet
+
+    }
+
 }

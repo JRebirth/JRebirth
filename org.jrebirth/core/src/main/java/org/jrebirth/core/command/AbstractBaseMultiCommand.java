@@ -46,6 +46,7 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
     /** The index of the last command performed. */
     private int commandRunIndex;
 
+    /** The source wave that trigger this command. */
     private Wave waveSource;
 
     /**

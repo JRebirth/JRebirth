@@ -116,4 +116,22 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
             fireAchieve(this.sourceWave);
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveCancelled(final Wave wave) {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveDestroyed(final Wave wave) {
+        // Nothing to do yet
+
+    }
 }

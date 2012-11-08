@@ -321,7 +321,7 @@ public class WaveBase implements Wave {
     /**
      * {@inheritDoc}
      */
-    // @Override
+    @Override
     public void removeWaveListener(final WaveListener waveListener) {
         this.waveListeners.remove(waveListener);
     }
@@ -387,14 +387,16 @@ public class WaveBase implements Wave {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
+        final String space = " ";
+
         if (getWaveGroup() != null) {
-            sb.append(getWaveGroup()).append(" ");
+            sb.append(getWaveGroup()).append(space);
         }
         if (getRelatedClass() != null) {
-            sb.append(getRelatedClass().getSimpleName()).append(" ");
+            sb.append(getRelatedClass().getSimpleName()).append(space);
         }
         if (getWaveType() != null) {
-            sb.append(getWaveType()).append(" ");
+            sb.append(getWaveType()).append(space);
         }
 
         if (getWUID() != null) {

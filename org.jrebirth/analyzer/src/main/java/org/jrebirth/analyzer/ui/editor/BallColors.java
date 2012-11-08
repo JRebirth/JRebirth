@@ -32,25 +32,35 @@ import org.jrebirth.core.resource.color.WebColor;
  */
 public enum BallColors implements ColorEnum {
 
+    /** The application ball background color. */
     APPLICATION(new WebColor("70CD43")),
 
+    /** The notifier ball background color. */
     NOTIFIER(new WebColor("FDFD89")),
 
+    /** The global facade ball background color. */
     GLOBAL_FACADE(new WebColor("FC1A9C")),
 
+    /** The command facade ball background color. */
     COMMAND_FACADE(new WebColor("963593")),
 
+    /** The service facade ball background color. */
     SERVICE_FACADE(new WebColor("FD1CFD")),
 
+    /** The UI Facade ball background color. */
     UI_FACADE(new WebColor("FD2C33")),
 
+    /** The Command ball background color. */
     COMMAND(new WebColor("D9E032")),
 
+    /** The Service ball background color. */
     SERVICE(new WebColor("FAED30")),
 
+    /** The Model ball background color. */
     MODEL(new WebColor("F1693A")),
 
-    VIEW(new WebColor("4AACF2")),
+    /** The View ball background color. */
+    VIEW(new WebColor("4AACF2"))
 
     ;
 

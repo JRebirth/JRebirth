@@ -73,7 +73,7 @@ public class GlobalFacadeBase implements GlobalFacade {
 
         // Launch the default executor
         this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2,
-                new NamedThreadBuilder(((AbstractApplication) application).getPoolUncaughtExceptionHandler(this), "JRebirth Pool - Slot "));
+                new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(this), "JRebirth Pool - Slot "));
 
         // Manage internal logging
         JRebirthLogger.getInstance().setEnabled(application.isLoggerEnabled());

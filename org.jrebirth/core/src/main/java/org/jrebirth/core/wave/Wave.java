@@ -195,16 +195,23 @@ public interface Wave {
     WaveBean getWaveBean();
 
     /**
-     * TODO To complete.
+     * Add a wave listener.
      * 
-     * @param waveListener
+     * @param waveListener the wave listener that will be notified of wave status
      */
     void addWaveListener(WaveListener waveListener);
 
     /**
-     * TODO To complete.
+     * Remove a wave listener.
      * 
-     * @param waveBean
+     * @param waveListener the wave listener to removed
+     */
+    void removeWaveListener(WaveListener waveListener);
+
+    /**
+     * Link a wave bean.
+     * 
+     * @param waveBean the wave bean already built to link
      */
     void linkWaveBean(WaveBean waveBean);
 }

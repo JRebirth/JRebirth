@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 public final class CreateBallCommand extends DefaultUICommand {
 
     /** The class logger. */
-    private static final  Logger LOGGER = LoggerFactory.getLogger(CreateBallCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateBallCommand.class);
 
     /**
      * {@inheritDoc}
