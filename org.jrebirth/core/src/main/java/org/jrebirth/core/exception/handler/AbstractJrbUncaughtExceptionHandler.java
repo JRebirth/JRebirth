@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractJrbUncaughtExceptionHandler implements JrbUncaughtExceptionHandler {
 
     /** The class logger. */
-    private static final  Logger LOGGER = LoggerFactory.getLogger(AbstractJrbUncaughtExceptionHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractJrbUncaughtExceptionHandler.class);
 
     /** The global facade. */
     private final GlobalFacade globalFacade;
@@ -72,7 +72,7 @@ public abstract class AbstractJrbUncaughtExceptionHandler implements JrbUncaught
         if (e instanceof Exception) {
             LOGGER.error(e.getMessage(), e);
         } else {
-            LOGGER.error(e.getMessage());
+            LOGGER.error(e.getClass().getCanonicalName() + " - " + e.getMessage());
         }
 
     }

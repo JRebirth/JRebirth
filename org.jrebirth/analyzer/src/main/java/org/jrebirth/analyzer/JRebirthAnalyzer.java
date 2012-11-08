@@ -18,6 +18,7 @@ package org.jrebirth.analyzer;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javafx.application.Application;
@@ -25,7 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import org.jrebirth.analyzer.command.OpenEventTrackerFileCommand;
+import org.jrebirth.analyzer.service.LoadEdtFileService;
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.analyzer.ui.workbench.WorkbenchModel;
 import org.jrebirth.core.application.AbstractApplication;
@@ -92,7 +93,7 @@ public final class JRebirthAnalyzer extends AbstractApplication<StackPane> {
      */
     @Override
     public List<Wave> getPreBootWaveList() {
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     /**
@@ -110,11 +111,13 @@ public final class JRebirthAnalyzer extends AbstractApplication<StackPane> {
 
                 waveList.add(
                         WaveBuilder.create()
-                                .waveGroup(WaveGroup.CALL_COMMAND)
-                                .relatedClass(OpenEventTrackerFileCommand.class)
+                                .waveGroup(WaveGroup.RETURN_DATA)
+                                .waveType(LoadEdtFileService.DO_LOAD_EVENTS)
+                                .relatedClass(LoadEdtFileService.class)
                                 .data(WaveData.build(EditorWaves.EVENTS_FILE, file))
                                 .build()
                         );
+
                 waveList.add(
                         WaveBuilder.create()
                                 .waveType(EditorWaves.DO_PLAY)

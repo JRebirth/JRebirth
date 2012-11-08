@@ -33,6 +33,7 @@ import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveBase;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveGroup;
@@ -76,7 +77,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         final WaveReady waveReady = this;
 
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJIT(new AbstractJrbRunnable("Listen " + waveType.toString()) {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable("Listen " + waveType.toString() + " by " + waveReady.getClass().getSimpleName()) {
             @Override
             public void runInto() throws JRebirthThreadException {
                 getNotifier().listen(waveReady, waveType);
@@ -149,8 +150,10 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      */
     private void sendWaveIntoJit(final Wave wave) {
 
+        wave.setStatus(Status.Sent);
+
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJIT(new AbstractJrbRunnable("Send Wave") {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable("Send Wave " + wave.toString()) {
             @Override
             public void runInto() throws JRebirthThreadException {
                 getNotifier().sendWave(wave);

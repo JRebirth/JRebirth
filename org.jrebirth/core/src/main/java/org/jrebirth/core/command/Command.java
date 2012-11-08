@@ -53,18 +53,4 @@ public interface Command extends FacadeReady<Command> {
      */
     Class<? extends WaveBean> getWaveBeanClass();
 
-    /**
-     * Add a command Listener.
-     * 
-     * @param commandListener the listener to add
-     */
-    void addCommandListener(CommandListener commandListener);
-
-    /**
-     * Add a command Listener.
-     * 
-     * @param commandListener the listener to remove
-     */
-    void removeCommandListener(CommandListener commandListener);
-
 }

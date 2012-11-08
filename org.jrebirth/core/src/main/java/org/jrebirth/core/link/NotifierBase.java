@@ -76,7 +76,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     @Override
     public void sendWave(final Wave wave) throws JRebirthThreadException {
 
-        wave.setStatus(Status.sent);
+        wave.setStatus(Status.Processing);
 
         JRebirthThread.checkJRebirthThread();
 
@@ -110,7 +110,6 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         final Command command = getGlobalFacade().getCommandFacade().retrieve((Class<? extends Command>) wave.getRelatedClass());
 
         // TODO parse arguments !!!!!!!! like for model events
-        wave.setStatus(Status.processed);
         command.run(wave);
     }
 
@@ -122,7 +121,6 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     @SuppressWarnings("unchecked")
     private void returnData(final Wave wave) {
         final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<? extends Service>) wave.getRelatedClass());
-        wave.setStatus(Status.processed);
         service.returnData(wave);
     }
 
@@ -136,8 +134,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
 
         // Build the new UI view
         final Model model = getGlobalFacade().getUiFacade().retrieve((Class<? extends Model>) wave.getRelatedClass());
-        wave.setStatus(Status.processed);
 
+        // FIXME run it into JAT !!!!
         if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
             // Add an Ui view into a the place holder provided
             final ObjectProperty<Node> property = wave.get(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER);
@@ -148,7 +146,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
             final ObservableList<Node> list = wave.get(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER);
             list.add(model.getView().getRootNode());
         }
-
+        wave.setStatus(Status.Consumed);
     }
 
     /**
@@ -159,8 +157,6 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
      * @throws WaveException if wave dispatching fails
      */
     private void sendUndefinedWave(final Wave wave) throws WaveException {
-
-        wave.setStatus(Status.processed);
 
         // Retrieve all interested object from the map
         if (this.notifierMap.containsKey(wave.getWaveType())) {
@@ -180,6 +176,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         } else {
             LOGGER.warn("No Listener attached for wave type : " + wave.getWaveType().toString());
         }
+        LOGGER.warn("NB consumes : " + wave.toString());
+        wave.setStatus(Status.Consumed);
     }
 
     /**
@@ -287,7 +285,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
          * @param wave the wave to handle
          */
         public WaveRunnable(final WaveReady linked, final Wave wave) {
-            super(WaveRunnable.class.getSimpleName());
+            super(linked.getClass().getSimpleName() + " handle wave " + wave.toString());
             this.linked = linked;
             this.wave = wave;
         }

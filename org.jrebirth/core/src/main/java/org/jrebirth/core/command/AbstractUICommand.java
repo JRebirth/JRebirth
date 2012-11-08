@@ -25,7 +25,7 @@ import org.jrebirth.core.concurrent.RunIntoType;
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractUICommand extends AbstractBaseCommand {
+public abstract class AbstractUICommand extends AbstractSingleCommand {
 
     /**
      * Default Constructor used to run this action into the JAT.

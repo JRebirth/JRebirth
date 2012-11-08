@@ -17,7 +17,6 @@
 package org.jrebirth.analyzer.command;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
-import org.jrebirth.core.command.CommandListener;
 import org.jrebirth.core.command.DefaultCommand;
 import org.jrebirth.core.event.Event;
 import org.jrebirth.core.exception.CoreException;
@@ -29,7 +28,7 @@ import org.jrebirth.core.wave.WaveData;
  * 
  * @author Sébastien Bordes
  */
-public final class ProcessEventCommand extends DefaultCommand implements CommandListener {
+public final class ProcessEventCommand extends DefaultCommand {
 
     /**
      * {@inheritDoc}
@@ -37,7 +36,6 @@ public final class ProcessEventCommand extends DefaultCommand implements Command
     @Override
     public void ready() throws CoreException {
         super.ready();
-        // addCommandListener(this);
     }
 
     /**
@@ -121,15 +119,6 @@ public final class ProcessEventCommand extends DefaultCommand implements Command
             case DESTROY_WAVE:
             default:
         }
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void commandAchieved(final Wave wave) {
-        sendWave(EditorWaves.RE_EVENT_PROCESSED/* , WaveData.build(waveItem, value) */);
 
     }
 
