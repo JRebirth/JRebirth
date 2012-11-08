@@ -34,7 +34,7 @@ public abstract class AbstractJrbRunnable implements Runnable {
     private final String runnableName;
 
     /**
-     * Default Constructor
+     * Default Constructor.
      * 
      * @param runnableName the name of the runnable to allow live debugging
      */

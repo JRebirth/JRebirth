@@ -115,14 +115,14 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
      * 
      * @param wave the wave that triggered this command
      */
-    abstract protected void preExecute(final Wave wave);
+    protected abstract void preExecute(final Wave wave);
 
     /**
      * Actions to perform after the command into the executor thread.
      * 
      * @param wave the wave that triggered this command
      */
-    abstract protected void postExecute(final Wave wave);
+    protected abstract void postExecute(final Wave wave);
 
     /**
      * @return Returns the runInto.

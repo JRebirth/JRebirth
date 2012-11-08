@@ -166,6 +166,18 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
                                         LOGGER.trace(localService.getClass().getSimpleName() + " Consumes wave " + sourceWave.toString());
                                         sourceWave.setStatus(Status.Consumed);
                                     }
+
+                                    @Override
+                                    public void waveCancelled(final Wave wave) {
+                                        // Nothing to do yet
+
+                                    }
+
+                                    @Override
+                                    public void waveDestroyed(final Wave wave) {
+                                        // Nothing to do yet
+
+                                    }
                                 });
 
                                 // Send the return wave to interested components

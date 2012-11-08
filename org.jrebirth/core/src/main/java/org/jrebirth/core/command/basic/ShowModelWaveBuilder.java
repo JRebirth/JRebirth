@@ -11,8 +11,6 @@ import org.jrebirth.core.wave.WaveBase;
  * The class <strong>ShowModelWaveBuilder</strong>. is used to build a new Show Model Wave.
  * 
  * @author Sébastien Bordes
- * 
- * @param <B> The builder generic type
  */
 public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWaveBuilder, ShowModelWaveBean> {
 

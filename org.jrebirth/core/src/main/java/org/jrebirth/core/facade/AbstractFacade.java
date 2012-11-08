@@ -83,6 +83,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public <E extends R> void unregister(final E readyObject, final Object... keyPart) {
         // Release the facade link

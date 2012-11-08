@@ -19,7 +19,6 @@ package org.jrebirth.analyzer.command;
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.command.DefaultCommand;
 import org.jrebirth.core.event.Event;
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;
 
@@ -29,14 +28,6 @@ import org.jrebirth.core.wave.WaveData;
  * @author Sébastien Bordes
  */
 public final class ProcessEventCommand extends DefaultCommand {
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void ready() throws CoreException {
-        super.ready();
-    }
 
     /**
      * {@inheritDoc}
