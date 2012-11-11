@@ -25,6 +25,7 @@ import java.util.Map;
 
 import javafx.concurrent.Task;
 
+import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.WaveException;
@@ -190,6 +191,7 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
                 return res;
             }
         };
-        task.run();
+        // Call the task into the JRebirth Thread Pool
+        JRebirth.runIntoThreadPool(task);
     }
 }
