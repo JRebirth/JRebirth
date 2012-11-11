@@ -125,6 +125,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     @SuppressWarnings("unchecked")
     private void returnData(final Wave wave) {
         final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<? extends Service>) wave.getRelatedClass());
+        // The inner task will be run into the JRebirth Thread Pool
         service.returnData(wave);
     }
 
