@@ -44,12 +44,12 @@ public interface EditorWaves {
     /*************************************************************************/
 
     /** The file containing all events serialized. */
-    WaveItem<File> EVENTS_FILE = new WaveItem<>();
+    WaveItem<File> EVENTS_FILE = WaveItem.build();
 
     /** The name of the events. */
-    WaveItem<List<Event>> EVENTS = new WaveItem<>();
+    WaveItem<List<Event>> EVENTS = WaveItem.build();
 
     /** An event unserialized. */
-    WaveItem<Event> EVENT = new WaveItem<>();
+    WaveItem<Event> EVENT = WaveItem.build();
 
 }

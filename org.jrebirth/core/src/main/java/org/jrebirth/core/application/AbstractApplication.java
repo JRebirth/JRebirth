@@ -16,6 +16,8 @@
  */
 package org.jrebirth.core.application;
 
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -35,6 +37,7 @@ import org.jrebirth.core.exception.handler.JatUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.JitUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.PoolUncaughtExceptionHandler;
 import org.jrebirth.core.facade.GlobalFacade;
+import org.jrebirth.core.resource.font.FontEnum;
 import org.jrebirth.core.util.ClassUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -194,9 +197,31 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
             }
         });
+
+        // Preload fonts to allow them to be used by CSS
+        preloadFonts();
+
         // The call customize method to allow extension by sub class
         customizeScene(this.scene);
     }
+
+    /**
+     * Preload fonts to allow them to be used by CSS.
+     */
+    private void preloadFonts() {
+        for (final FontEnum font : getFontToPreload()) {
+            // Access the font to load it and allow it to be used by CSS
+            font.get();
+        }
+
+    }
+
+    /**
+     * Return the list of FontEnum to load for CSS.
+     * 
+     * @return the list of fontEnum to load
+     */
+    protected abstract List<FontEnum> getFontToPreload();
 
     /**
      * Customize the default scene.

@@ -21,4 +21,31 @@ public abstract class AbstractTemplateModel<M extends AbstractTemplateModel<M, V
     protected String getTitle() {
         return getSlide().getTitle();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected S[] initializeSlideStep() {
+        // Nothing to do yet
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showSlideStep(final S slideStep) {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return getSlideNumber() + "/" + getStepPosition() + " " + getTitle() + this.getClass().getSimpleName();
+    }
+
 }

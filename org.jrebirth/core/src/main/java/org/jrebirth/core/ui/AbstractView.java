@@ -17,6 +17,7 @@
 package org.jrebirth.core.ui;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -33,6 +34,8 @@ import org.jrebirth.core.ui.fxml.AbstractFXMLController;
 import org.jrebirth.core.ui.fxml.FXMLComponent;
 import org.jrebirth.core.ui.fxml.FXMLController;
 import org.jrebirth.core.util.ClassUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -47,6 +50,9 @@ import org.jrebirth.core.util.ClassUtility;
  * @param <C> The class type of the controller of the view
  */
 public abstract class AbstractView<M extends Model, N extends Node, C extends Controller<?, ?>> implements View<M, N, C> {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractView.class);
 
     /** The view model. */
     private final transient M model;
@@ -255,7 +261,14 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * @return the image loaded
      */
     public Image loadImage(final String resourceName) {
-        return new Image(Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceName));
+        Image image = null;
+        final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceName);
+        if (imageInputStream != null) {
+            image = new Image(imageInputStream);
+        }
+        if (image == null) {
+            LOGGER.error("Image : " + resourceName + " not found !");
+        }
+        return image;
     }
-
 }

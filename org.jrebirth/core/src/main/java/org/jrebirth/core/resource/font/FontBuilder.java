@@ -4,7 +4,6 @@ import java.util.List;
 
 import javafx.scene.text.Font;
 
-import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 
 /**
@@ -94,13 +93,23 @@ public final class FontBuilder extends AbstractResourceBuilder<FontEnum, FontPar
     private void checkFontStatus(final RealFont realFont) {
 
         final List<String> fonts = Font.getFontNames(transformFontName(realFont.name().get()));
+
+        Font font;
         if (fonts.isEmpty()) {
-            final Font font = Font.loadFont(
+            font = Font.loadFont(
                     Thread.currentThread().getContextClassLoader()
                             .getResourceAsStream(fontsFolder + "/" + transformFontName(realFont.name().get()) + TRUE_TYPE_FONT_EXT), realFont.size());
 
+            // The font name contains '_' in its file name
             if (font == null) {
-                throw new CoreRuntimeException("Font not found " + transformFontName(realFont.name().get()));
+                font = Font.loadFont(
+                        Thread.currentThread().getContextClassLoader()
+                                .getResourceAsStream(fontsFolder + "/" + realFont.name().get() + TRUE_TYPE_FONT_EXT), realFont.size());
+
+            }
+            // Font has not been found with or without '_'
+            if (font == null) {
+                // throw new CoreRuntimeException("Font not found " + transformFontName(realFont.name().get()));
             }
         }
     }

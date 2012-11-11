@@ -5,9 +5,6 @@ package org.jrebirth.core.resource.factory;
  * 
  * @author Sébastien Bordes
  * 
- * @version $Revision$ $Author$
- * @since $Date$
- * 
  * @param <E> The enumeration used to wrap the resource
  * @param <P> The params object that store primitive resources values
  * @param <R> The resource managed

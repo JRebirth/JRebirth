@@ -1,7 +1,5 @@
 package org.jrebirth.core.wave;
 
-import org.jrebirth.core.util.ClassUtility;
-
 /**
  * The class <strong>WaveItem</strong>.
  * 
@@ -17,22 +15,34 @@ public class WaveItem<T> {
     private static int idGenerator;
 
     /** The unique identifier of the wave item. */
-    private final int uid;
+    private int uid;
 
     /** The type of the related object registered by this wave item. */
-    private final Class<T> itemClass;
+    // private Class<T> itemClass;
 
     /**
-     * Default Constructor.
+     * Private Constructor.
      */
-    public WaveItem() {
+    private WaveItem() {
+
+        // this.itemClass = null;// (Class<T>) ClassUtility.getGenericType(0);
+    }
+
+    /**
+     * Build a wave item.
+     * 
+     * @return a new fresh wave Data object
+     * 
+     * @param <T> the type of the object wrapped by this WaveData
+     */
+    public static <T> WaveItem<T> build() {
+        final WaveItem<T> waveItem = new WaveItem<>();
+
         // Ensure that the uid will be unique at runtime
         synchronized (WaveItem.class) {
-            this.uid = ++idGenerator;
+            waveItem.setUid(++idGenerator);
         }
-
-        // FIXME
-        this.itemClass = (Class<T>) ClassUtility.getGenericType(0);
+        return waveItem;
     }
 
     /**
@@ -43,11 +53,18 @@ public class WaveItem<T> {
     }
 
     /**
-     * @return Returns the itemClass.
+     * @param uid The uid to set.
      */
-    public Class<T> getItemClass() {
-        return this.itemClass;
+    private void setUid(final int uid) {
+        this.uid = uid;
     }
+
+    // /**
+    // * @return Returns the itemClass.
+    // */
+    // public Class<T> getItemClass() {
+    // return this.itemClass;
+    // }
 
     /**
      * {@inheritDoc}

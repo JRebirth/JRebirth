@@ -25,6 +25,7 @@ import org.jrebirth.core.resource.font.FontName;
  */
 public enum FontsLoader implements FontName {
 
+    /** . */
     BRLNSB,
 
     /** . */
@@ -45,6 +46,7 @@ public enum FontsLoader implements FontName {
     /** . */
     Neuton_Cursive,
 
+    /** . */
     BorisBlackBloxx;
 
     /**
