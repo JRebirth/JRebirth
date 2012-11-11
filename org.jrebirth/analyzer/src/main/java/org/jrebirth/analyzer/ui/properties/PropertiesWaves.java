@@ -11,9 +11,9 @@ import org.jrebirth.core.wave.WaveItem;
 public interface PropertiesWaves {
 
     /** The event object. */
-    WaveItem<Event> EVENT_OBJECT = new WaveItem<>();
+    WaveItem<Event> EVENT_OBJECT = WaveItem.build();
 
     /** The type of the node. */
-    WaveItem<Event> NODE_TYPE = new WaveItem<>();
+    WaveItem<Event> NODE_TYPE = WaveItem.build();
 
 }

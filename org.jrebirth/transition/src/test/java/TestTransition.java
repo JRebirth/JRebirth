@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.List;
 
 import javafx.application.Application;
@@ -6,6 +7,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import org.jrebirth.core.application.AbstractApplication;
+import org.jrebirth.core.resource.font.FontEnum;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 
@@ -70,8 +72,7 @@ public final class TestTransition extends AbstractApplication<StackPane> {
      */
     @Override
     public List<Wave> getPreBootWaveList() {
-        // Nothing to do yet
-        return null;
+        return Collections.emptyList();
     }
 
     /**
@@ -79,7 +80,14 @@ public final class TestTransition extends AbstractApplication<StackPane> {
      */
     @Override
     public List<Wave> getPostBootWaveList() {
-        // Nothing to do yet
-        return null;
+        return Collections.emptyList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<FontEnum> getFontToPreload() {
+        return Collections.emptyList();
     }
 }

@@ -73,17 +73,28 @@ import org.jrebirth.presentation.ui.base.SlideStep;
 public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?, ?>, N extends AnchorPane, C extends AbstractTemplateController<?, ?>> extends
         AbstractSlideView<M, N, C> {
 
+    /** Prefix used for css class. */
+    private static final String ITEM_CLASS_PREFIX = "item";
+
     /** The sub title of this slide. */
     private Label secondaryTitle;
+
+    /** The label that display the number of the page. */
     private Label pageLabel;
 
+    /** The pane that hold the content. */
     private StackPane slideContent;
 
+    /** The list of nodes taht reprensent each subslide. */
     private final List<Node> subSlides = new ArrayList<>();
 
+    /** The current subslide node displayed. */
     private Node currentSubSlide;
 
+    /** A lock managed by subslide. */
     private final boolean subSlideLock = false;
+
+    /** The transitionn used between subslides. */
     private ParallelTransition subSlideTransition;
 
     /**
@@ -164,14 +175,17 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         getRootNode().getChildren().addAll(/* footer, */this.slideContent, header);
     }
 
+    /**
+     * Show en aempty slide.
+     */
     protected void showEmptySlide() {
         this.subSlides.add(getModel().getStepPosition(), null);
     }
 
     /**
-     * TODO To complete.
+     * Add a subslide node.
      * 
-     * @param contentPanel
+     * @param defaultSubSlide the subslide node
      */
     private void addSubSlide(final Node defaultSubSlide) {
 
@@ -188,7 +202,8 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     @Override
     public void doStart() {
 
-        // FIXME MUST be refactored with property binding
+        // MUST be refactored with property binding
+
         // this.pageLabel.setText(String.valueOf(getModel().getSlideNumber()));
 
         // FadeTransitionBuilder.create()
@@ -285,14 +300,14 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                 .layoutY(95.0)
                 .width(60.0)
                 .height(14.0)
-                .fill(Color.web("#1C9A9A"))
+                .fill(Color.web("1C9A9A"))
                 .build();
 
         final Circle c = CircleBuilder.create()
                 .layoutX(18 + 54)
                 .layoutY(18 + 54)
                 .radius(54)
-                .fill(Color.web("#444442"))
+                .fill(Color.web("444442"))
                 .build();
 
         this.pageLabel = LabelBuilder.create()
@@ -424,7 +439,6 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * 
      * @param vbox the layout node
      * @param item the slide item to add
-     * @param level the current level od the slide item
      */
     protected void addSlideItem(final VBox vbox, final SlideItem item) {
 
@@ -458,13 +472,13 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
             VBox.setVgrow(web, Priority.NEVER);
 
-            node = web;// StackPaneBuilder.create().children(web).style("-fx-border-width:2;-fx-border-color:#000000").build();
+            node = web; // StackPaneBuilder.create().children(web).style("-fx-border-width:2;-fx-border-color:#000000").build();
 
         } else if (item.getImage() != null) {
 
             final Image image = loadImage(item.getImage());
             final ImageView imageViewer = ImageViewBuilder.create()
-                    .styleClass("item" + item.getLevel())
+                    .styleClass(ITEM_CLASS_PREFIX + item.getLevel())
                     .image(image)
                     // .effect(ReflectionBuilder.create().fraction(0.9).build())
                     .build();
@@ -473,7 +487,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         } else {
 
             final Text text = TextBuilder.create()
-                    .styleClass("item" + item.getLevel())
+                    .styleClass(ITEM_CLASS_PREFIX + item.getLevel())
                     .text(item.getValue() == null ? "" : item.getValue())
                     .build();
 

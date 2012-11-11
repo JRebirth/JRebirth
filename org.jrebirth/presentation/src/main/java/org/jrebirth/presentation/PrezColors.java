@@ -33,17 +33,25 @@ import org.jrebirth.core.resource.color.WebColor;
  */
 public enum PrezColors implements ColorEnum {
 
-    SLIDE_TITLE(new WebColor("#FFFFFF", 1.0)),
+    /** Color for slide title, white. */
+    SLIDE_TITLE(new WebColor("FFFFFF", 1.0)),
 
-    SHAPE_BLUE(new WebColor("#3495CE", 1.0)),
+    /** Color for blue shape, xxx. */
+    SHAPE_BLUE(new WebColor("3495CE", 1.0)),
 
-    DROP_SHADOW(new WebColor("#000000", 0.8)),
-    INNER_SHADOW(new WebColor("#FFFFFF", 0.3)),
+    /** Color for drop shadow, black. */
+    DROP_SHADOW(new WebColor("000000", 0.8)),
+    /** Color for inner shadow, white. */
+    INNER_SHADOW(new WebColor("FFFFFF", 0.3)),
 
-    GRADIENT_1(new WebColor("#1AA2AC", 1.0)),
-    GRADIENT_2(new WebColor("#F04F24", 1.0)),
-    GRADIENT_3(new WebColor("#FFF200", 1.0)),
+    /** Color for first gradient, xxx. */
+    GRADIENT_1(new WebColor("1AA2AC", 1.0)),
+    /** Color for second gradient, xxx. */
+    GRADIENT_2(new WebColor("F04F24", 1.0)),
+    /** Color for third gradient, xxxx. */
+    GRADIENT_3(new WebColor("FFF200", 1.0)),
 
+    /** Color for splash text, xxx. */
     SPLASH_TEXT(new RGB255Color(60, 60, 70));
 
     /**
