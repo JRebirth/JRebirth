@@ -41,6 +41,9 @@ public enum PrezFonts implements FontEnum {
     /** The slide title font. */
     SLIDE_SUB_TITLE(new RealFont(FontsLoader.Harabara, 30)),
 
+    /** The slide title font. */
+    PREZ_TITLE(new RealFont(FontsLoader.OliJo, 20)),
+
     /** The typewriter font. */
     TYPEWRITER(new RealFont(FontsLoader.Report_1942, 72)),
 

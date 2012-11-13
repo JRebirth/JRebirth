@@ -97,6 +97,10 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     /** The transitionn used between subslides. */
     private ParallelTransition subSlideTransition;
 
+    private Circle circle;
+
+    private Rectangle rectangle;
+
     /**
      * Default Constructor.
      * 
@@ -202,6 +206,14 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     @Override
     public void doStart() {
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doReload() {
+
         // MUST be refactored with property binding
 
         // this.pageLabel.setText(String.valueOf(getModel().getSlideNumber()));
@@ -219,25 +231,47 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         // .toValue(0.4)
         // .build().play();
 
-        ParallelTransitionBuilder
-                .create().delay(Duration.millis(400))
-                .children(
-                        RotateTransitionBuilder
-                                .create()
-                                .duration(Duration.millis(600))
-                                .fromAngle(-180)
-                                .toAngle(0)
-                                .build(),
-                        ScaleTransitionBuilder
-                                .create()
-                                .duration(Duration.millis(600))
-                                .fromX(0)
-                                .fromY(0)
-                                .toX(1)
-                                .toY(1)
-                                .build()
+        ParallelTransitionBuilder.create().children(
+
+                // ParallelTransitionBuilder.create().children(
+                ScaleTransitionBuilder
+                        .create()
+                        .node(this.circle)
+                        .duration(Duration.millis(600))
+                        .fromX(0)
+                        .fromY(0)
+                        .toX(1)
+                        .toY(1)
+                        .build(),
+                TimelineBuilder.create()
+                        .delay(Duration.millis(200))
+                        .keyFrames(
+                                new KeyFrame(Duration.millis(0), new KeyValue(this.rectangle.widthProperty(), 0)),
+                                new KeyFrame(Duration.millis(600), new KeyValue(this.rectangle.widthProperty(), 90))
+                        )
+                        .build(),
+                // ).build()
+                ParallelTransitionBuilder
+                        .create().delay(Duration.millis(400))
+                        .children(
+                                RotateTransitionBuilder
+                                        .create()
+                                        .duration(Duration.millis(600))
+                                        .fromAngle(-180)
+                                        .toAngle(0)
+                                        .build(),
+                                ScaleTransitionBuilder
+                                        .create()
+                                        .duration(Duration.millis(600))
+                                        .fromX(0)
+                                        .fromY(0)
+                                        .toX(1)
+                                        .toY(1)
+                                        .build()
+                        )
+                        .node(this.slideContent)
+                        .build()
                 )
-                .node(this.slideContent)
                 .build().play();
     }
 
@@ -282,11 +316,11 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                 .build();
 
         final ImageView breizhcamp = ImageViewBuilder.create()
-                .layoutX(760.0)
-                .layoutY(36.0)
-                .scaleX(0.75)
-                .scaleY(0.75)
-                .image(loadImage("images/Logo_breizh.png"))
+                .layoutX(680.0)
+                .layoutY(-14.0)
+                .scaleX(0.6)
+                .scaleY(0.6)
+                .image(loadImage("images/HeaderLogo.png"))
                 .build();
 
         final Polyline pl = PolylineBuilder.create()
@@ -295,15 +329,17 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                 .points(684.0, 12.0, 946.0, 12.0, 946.0, 107.0)
                 .build();
 
-        final Rectangle rb = RectangleBuilder.create()
+        this.rectangle = RectangleBuilder.create()
                 .layoutX(108.0)
                 .layoutY(95.0)
-                .width(60.0)
+                .width(0.0) // 60.0
                 .height(14.0)
                 .fill(Color.web("1C9A9A"))
                 .build();
 
-        final Circle c = CircleBuilder.create()
+        this.circle = CircleBuilder.create()
+                .scaleX(0)
+                .scaleY(0)
                 .layoutX(18 + 54)
                 .layoutY(18 + 54)
                 .radius(54)
@@ -325,7 +361,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         // // .style("-fx-background-color:#CCCCCC")
         // .build();
 
-        headerPane.getChildren().addAll(c, primaryTitle, breizhcamp, this.secondaryTitle, pl, rb, this.pageLabel);
+        headerPane.getChildren().addAll(this.circle, primaryTitle, breizhcamp, this.secondaryTitle, pl, this.rectangle, this.pageLabel);
 
         // AnchorPane.setLeftAnchor(primaryTitle, 40.0);
         // AnchorPane.setTopAnchor(primaryTitle, 45.0);

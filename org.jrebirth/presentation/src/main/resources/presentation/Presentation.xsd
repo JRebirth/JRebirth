@@ -33,6 +33,7 @@
 		<sequence>
 			<element name="slide" type="tns:Slide" minOccurs="0" maxOccurs="unbounded" />
 		</sequence>
+		<attribute name="defaultModelClass" type="string" />
 	</complexType>
 
 	<complexType name="Slide">
@@ -41,7 +42,7 @@
 			<element name="content" type="tns:SlideContent" minOccurs="0" maxOccurs="unbounded" />
 		</sequence>
 		<attribute name="page" type="int" use="optional" />
-		<attribute name="modelClass" type="string" default="org.jrebirth.presentation.ui.classic.ClassicModel" />
+		<attribute name="modelClass" type="string" />
 		<attribute name="style" type="string" use="optional" />
 		<attribute name="showAnimation" type="tns:AnimationType" default="None" />
 		<attribute name="hideAnimation" type="tns:AnimationType" default="None" />
@@ -62,9 +63,9 @@
 				<attribute name="level" type="int" default="0" />
 				<attribute name="image" type="string" use="optional" />
 				<attribute name="style" type="string" use="optional" />
-				<attribute name="scale" type="double" use="optional" default="1.0"/>
-				<attribute name="html" type="boolean" use="optional" default="false"/>
-				<attribute name="link" type="boolean" use="optional" default="false"/>
+				<attribute name="scale" type="double" use="optional" default="1.0" />
+				<attribute name="html" type="boolean" use="optional" default="false" />
+				<attribute name="link" type="boolean" use="optional" default="false" />
 			</extension>
 		</simpleContent>
 	</complexType>
@@ -73,32 +74,32 @@
 	<simpleType name="AnimationType">
 		<restriction base="string">
 			<enumeration value="None" />
-			
+
 			<enumeration value="FadeIn" />
 			<enumeration value="FadeOut" />
-			
+
 			<enumeration value="MoveToLeft" />
 			<enumeration value="MoveToRight" />
 			<enumeration value="MoveToTop" />
 			<enumeration value="MoveToBottom" />
-			
+
 			<enumeration value="MoveFromLeft" />
 			<enumeration value="MoveFromRight" />
 			<enumeration value="MoveFromTop" />
 			<enumeration value="MoveFromBottom" />
-			
+
 			<enumeration value="ScaleToMin" />
 			<enumeration value="ScaleFromMin" />
 			<enumeration value="ScaleToMax" />
 			<enumeration value="ScaleFromMax" />
-			
+
 			<enumeration value="SlidingTopBottomProgressive"></enumeration>
-			
-			<enumeration value="TileIn"/>
-			<enumeration value="TileOut"/>
+
+			<enumeration value="TileIn" />
+			<enumeration value="TileOut" />
 			<enumeration value="TileIn60k" />
 			<enumeration value="TileOut60k" />
 		</restriction>
 	</simpleType>
-	
+
 </schema>
