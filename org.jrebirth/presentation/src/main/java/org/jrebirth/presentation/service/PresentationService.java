@@ -15,14 +15,18 @@ import javax.xml.stream.XMLStreamReader;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.ServiceBase;
 import org.jrebirth.presentation.model.Presentation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * The class <strong>PresentationService</strong>. TODO To complete
+ * The class <strong>PresentationService</strong>.
  * 
  * @author Sébastien Bordes
- * 
  */
 public final class PresentationService extends ServiceBase {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(PresentationService.class);
 
     /** The XML file location. */
     public static final String CONFIG_NAME = "presentation/Presentation";
@@ -47,9 +51,7 @@ public final class PresentationService extends ServiceBase {
             this.presentation = Presentation.class.cast(JAXBElement.class.cast(unmarshaller.unmarshal(xsr)).getValue());
 
         } catch (final JAXBException | XMLStreamException | FactoryConfigurationError e) {
-            System.err.println("Impossible to open " + CONFIG_NAME + ".xml");
-            e.printStackTrace();
-            throw new CoreException("Xml file incorrectly parsed !", e);
+            LOGGER.error("Impossible to open {}.xml", CONFIG_NAME, e);
         }
     }
 

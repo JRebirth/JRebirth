@@ -142,4 +142,23 @@ public final class ClassUtility {
     public static Class<?> getGenericType(final int i) {
         return null;
     }
+
+    /**
+     * Check if the given method exists in the given class.
+     * 
+     * @param cls the class to search into
+     * @param rawMethodName the name of the method to check
+     * 
+     * @return true if the method exists
+     */
+    public static boolean methodExist(final Class<?> cls, final String rawMethodName) {
+        boolean res = false;
+        final String methodName = underscoreToCamelCase(rawMethodName);
+        for (final Method m : cls.getMethods()) {
+            if (m.getName().equals(methodName)) {
+                res = true;
+            }
+        }
+        return res;
+    }
 }

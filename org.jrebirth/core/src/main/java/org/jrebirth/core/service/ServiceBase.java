@@ -57,21 +57,27 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
     private final Map<WaveType, WaveType> waveTypeMap = new HashMap<>();
 
     /** The wave item map. */
-    private final Map<WaveType, WaveItem> waveItemMap = new HashMap<>();
+    private final Map<WaveType, WaveItem<?>> waveItemMap = new HashMap<>();
 
     /**
      * Register a service contract.
      * 
      * @param callType the wave type mapped to this service.
      * @param responseType the wave type of the wave emitted in return
-     * @param waveItem the lsit of wave item used as arguments
+     * @param waveItem the list of wave item used as arguments
      */
-    public void registerService(final WaveType callType, final WaveType responseType, final WaveItem waveItem) {
+    public void registerService(final WaveType callType, final WaveType responseType, final WaveItem<?> waveItem) {
 
-        listen(callType);
+        if (ClassUtility.methodExist(getClass(), callType.toString())) {
 
-        this.waveTypeMap.put(callType, responseType);
-        this.waveItemMap.put(responseType, waveItem);
+            listen(callType);
+
+            this.waveTypeMap.put(callType, responseType);
+            this.waveItemMap.put(responseType, waveItem);
+
+        } else {
+            LOGGER.error("Service API is broken, the method {} is not available", ClassUtility.underscoreToCamelCase(callType.toString()));
+        }
     }
 
     /**
@@ -103,7 +109,6 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
     @Override
     public <T extends Object> void returnData(final Wave sourceWave) {
 
@@ -169,7 +174,7 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
                         sourceWave.setStatus(Status.Consumed);
                     } else {
                         final WaveType responseWaveType = localService.waveTypeMap.get(sourceWave.getWaveType());
-                        final WaveItem<T> waveItem = localService.waveItemMap.get(responseWaveType);
+                        final WaveItem<T> waveItem = (WaveItem<T>) localService.waveItemMap.get(responseWaveType);
 
                         final Wave returnWave = WaveBuilder.create()
                                 .waveType(responseWaveType)

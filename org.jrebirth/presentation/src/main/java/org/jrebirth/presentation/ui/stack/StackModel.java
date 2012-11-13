@@ -99,14 +99,21 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
                 SlideModel<SlideStep> previousSlideModel = null;
 
                 if (this.selectedSlide != null) {
-                    final Class<Model> previousClass = (Class<Model>) Class.forName(this.selectedSlide.getModelClass());
+                    final Class<Model> previousClass = (Class<Model>)
+                            (this.selectedSlide.getModelClass() != null ?
+                                    Class.forName(this.selectedSlide.getModelClass()) :
+                                    Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass()));
+
                     previousSlideModel = (SlideModel<SlideStep>) getModel(previousClass, this.selectedSlide);
                 }
 
                 // Define the slide number
                 slide.setPage(this.slidePosition);
 
-                final Class<Model> nextClass = (Class<Model>) Class.forName(slide.getModelClass());
+                final Class<Model> nextClass = (Class<Model>)
+                        (slide.getModelClass() != null ?
+                                Class.forName(slide.getModelClass()) :
+                                Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass()));
                 this.selectedSlideModel = (SlideModel<SlideStep>) getModel(nextClass, slide);
 
                 // Add the new slide to the stack
@@ -120,6 +127,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
                 final ParallelTransition slideAnimation = getSlideTransition(this.slidePosition, isReverse, previousSlideModel, this.selectedSlideModel);
 
                 if (isReverse) {
+
                     slideAnimation.setRate(-1);
                     slideAnimation.playFrom(slideAnimation.getCycleDuration());
                 } else {
@@ -173,6 +181,14 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
                 // if (psm != null) {
                 // getView().getRootNode().getChildren().removeAll(psm.getRootNode());
                 // }
+
+                // FIX ME NOT APPROPRIATED !!!
+                if (previousSlideModel != null) {
+                    previousSlideModel.getView().doHide();
+                }
+                if (selectedSlideModel != null) {
+                    selectedSlideModel.getView().doReload();
+                }
 
                 // Hide all other slides
                 if (psm != null) {
