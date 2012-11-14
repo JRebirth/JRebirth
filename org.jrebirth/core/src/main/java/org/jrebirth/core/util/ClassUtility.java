@@ -22,6 +22,8 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Locale;
 
 import org.jrebirth.core.exception.CoreException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>ClassUtility</strong>.
@@ -34,6 +36,9 @@ public final class ClassUtility {
 
     /** The separator used for serialization. */
     public static final String SEPARATOR = "|";
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtility.class);
 
     /**
      * Private Constructor.
@@ -86,6 +91,7 @@ public final class ClassUtility {
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
                 | SecurityException e) {
+            LOGGER.error("Impossible to build the dedicated " + superTypeIndex + " th type of the class " + mainClass.getName(), e);
             throw new CoreException("Impossible to build the dedicated " + superTypeIndex + " th type of the class " + mainClass.getName(), e);
         }
     }
