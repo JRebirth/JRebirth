@@ -22,6 +22,7 @@ import org.jrebirth.analyzer.command.OpenEventTrackerFileCommand;
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.DefaultController;
+import org.jrebirth.core.ui.LinkedCallback;
 
 /**
  * The class <strong>ControlsController</strong>.
@@ -49,7 +50,8 @@ public final class ControlsController extends DefaultController<ControlsModel, C
     @Override
     protected void customInitializeEventHandlers() throws CoreException {
 
-        linkCommand(getView().getOpenButton(), MouseEvent.MOUSE_CLICKED, OpenEventTrackerFileCommand.class);
+        linkCommand(getView().getOpenButton(), MouseEvent.MOUSE_CLICKED, OpenEventTrackerFileCommand.class, LinkedCallback.CHECK_MOUSE_DOUBLE_CLICK);
+
         linkWave(getView().getUnloadButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_UNLOAD);
         linkWave(getView().getPlayPauseButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_PLAY);
         linkWave(getView().getBackwardButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_PREVIOUS);

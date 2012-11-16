@@ -18,7 +18,7 @@ package org.jrebirth.core.ui.adapter;
 
 import javafx.stage.WindowEvent;
 
-import org.jrebirth.core.ui.AbstractController;
+import org.jrebirth.core.ui.AbstractBaseController;
 
 /**
  * The class <strong>DefaultWindowAdapter</strong>.
@@ -27,7 +27,7 @@ import org.jrebirth.core.ui.AbstractController;
  * 
  * @param <C> The controller class which manage this event adapter
  */
-public class DefaultWindowAdapter<C extends AbstractController<?, ?>> extends AbstractDefaultAdapter<C> implements WindowAdapter {
+public class DefaultWindowAdapter<C extends AbstractBaseController<?, ?>> extends AbstractDefaultAdapter<C> implements WindowAdapter {
 
     /**
      * {@inheritDoc}
