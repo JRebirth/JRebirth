@@ -18,7 +18,7 @@ package org.jrebirth.core.ui.adapter;
 
 import javafx.scene.input.DragEvent;
 
-import org.jrebirth.core.ui.AbstractController;
+import org.jrebirth.core.ui.AbstractBaseController;
 
 /**
  * The class <strong>DefaultDragAdapter</strong>.
@@ -27,7 +27,7 @@ import org.jrebirth.core.ui.AbstractController;
  * 
  * @param <C> The controller class which manage this event adapter
  */
-public class DefaultDragAdapter<C extends AbstractController<?, ?>> extends AbstractDefaultAdapter<C> implements DragAdapter {
+public class DefaultDragAdapter<C extends AbstractBaseController<?, ?>> extends AbstractDefaultAdapter<C> implements DragAdapter {
 
     /**
      * {@inheritDoc}

@@ -16,7 +16,7 @@
  */
 package org.jrebirth.core.ui.adapter;
 
-import org.jrebirth.core.ui.AbstractController;
+import org.jrebirth.core.ui.AbstractBaseController;
 
 /**
  * The class <strong>EventAdapter</strong>.
@@ -25,7 +25,7 @@ import org.jrebirth.core.ui.AbstractController;
  * 
  * @param <C> The controller class which manage this event adapter
  */
-public interface EventAdapter<C extends AbstractController<?, ?>> {
+public interface EventAdapter<C extends AbstractBaseController<?, ?>> {
 
     /**
      * @param controller The controller to set.

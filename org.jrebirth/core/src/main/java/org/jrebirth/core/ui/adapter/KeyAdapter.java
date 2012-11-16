@@ -18,7 +18,7 @@ package org.jrebirth.core.ui.adapter;
 
 import javafx.scene.input.KeyEvent;
 
-import org.jrebirth.core.ui.AbstractController;
+import org.jrebirth.core.ui.AbstractBaseController;
 
 /**
  * The class <strong>KeyAdapter</strong>.
@@ -27,7 +27,7 @@ import org.jrebirth.core.ui.AbstractController;
  * 
  * @param <C> the controller class
  */
-public interface KeyAdapter<C extends AbstractController<?, ?>> extends EventAdapter<C> {
+public interface KeyAdapter<C extends AbstractBaseController<?, ?>> extends EventAdapter<C> {
 
     /**
      * Manage key ANY events.

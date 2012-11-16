@@ -18,7 +18,7 @@ package org.jrebirth.core.ui.adapter;
 
 import javafx.event.ActionEvent;
 
-import org.jrebirth.core.ui.AbstractController;
+import org.jrebirth.core.ui.AbstractBaseController;
 
 /**
  * The class <strong>DefaultActionAdapter</strong>.
@@ -27,7 +27,7 @@ import org.jrebirth.core.ui.AbstractController;
  * 
  * @param <C> The controller class which manage this event adapter
  */
-public class DefaultActionAdapter<C extends AbstractController<?, ?>> extends AbstractDefaultAdapter<C> implements ActionAdapter {
+public class DefaultActionAdapter<C extends AbstractBaseController<?, ?>> extends AbstractDefaultAdapter<C> implements ActionAdapter {
 
     /**
      * {@inheritDoc}
