@@ -91,8 +91,9 @@ public final class ClassUtility {
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
                 | SecurityException e) {
-            LOGGER.error("Impossible to build the dedicated " + superTypeIndex + " th type of the class " + mainClass.getName(), e);
-            throw new CoreException("Impossible to build the dedicated " + superTypeIndex + " th type of the class " + mainClass.getName(), e);
+            final String message = "Impossible to build the dedicated " + superTypeIndex + " th type of the class " + mainClass.getName();
+            LOGGER.error(message, e);
+            throw new CoreException(message, e);
         }
     }
 

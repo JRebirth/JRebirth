@@ -34,7 +34,7 @@ import org.jrebirth.core.ui.handler.WindowHandler;
 public abstract class AbstractBaseController<M extends Model, V extends View<M, ?, ?>> implements Controller<M, V> {
 
     /** The view component. */
-    private transient V view;
+    private final transient V view;
 
     /** The action handler instance to use for Action events. */
     private EventHandler<ActionEvent> actionHandler;
