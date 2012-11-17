@@ -1,6 +1,6 @@
 package org.jrebirth.core.command.basic;
 
-import org.jrebirth.core.command.AbstractBaseMultiCommand;
+import org.jrebirth.core.command.DefaultMultiCommand;
 import org.jrebirth.core.concurrent.RunIntoType;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
@@ -10,7 +10,7 @@ import org.jrebirth.core.wave.WaveBean;
  * 
  * @author Sébastien Bordes
  */
-public class ShowModelCommand extends AbstractBaseMultiCommand {
+public class ShowModelCommand extends DefaultMultiCommand {
 
     /**
      * Default Constructor.
