@@ -93,19 +93,22 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
     @Override
     protected void execute(final Wave wave) {
 
-        if (this.commandRunIndex == 0) {
-            this.waveSource = wave;
-        }
-
         if (this.sequential) {
 
-            final Wave subCommandWave = WaveBuilder.create()
-                    .waveGroup(WaveGroup.CALL_COMMAND)
-                    .relatedClass(this.commandList.get(this.commandRunIndex))
-                    .build();
-            subCommandWave.linkWaveBean(wave.getWaveBean());
-            subCommandWave.addWaveListener(this);
-            sendWave(subCommandWave);
+            // Store the wave when we are running the first command
+            synchronized (this) {
+                if (this.commandRunIndex == 0) {
+                    this.waveSource = wave;
+                }
+                final Wave subCommandWave = WaveBuilder.create()
+                        .waveGroup(WaveGroup.CALL_COMMAND)
+                        .relatedClass(this.commandList.get(this.commandRunIndex))
+                        .build();
+
+                subCommandWave.linkWaveBean(wave.getWaveBean());
+                subCommandWave.addWaveListener(this);
+                sendWave(subCommandWave);
+            }
 
         } else {
             // Launch all sub command in parallel
@@ -120,67 +123,23 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
      * {@inheritDoc}
      */
     @Override
-    protected void preExecute(final Wave wave) {
-        // Nothing to do
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void postExecute(final Wave wave) {
-        // Nothing to do
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveCreated(final Wave wave) {
-        // Nothing to do yet
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveSent(final Wave wave) {
-        // Nothing to do yet
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveProcessed(final Wave wave) {
-        // Nothing to do yet
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void waveConsumed(final Wave wave) {
-        this.commandRunIndex++;
-        // Run next command if any
-        if (this.commandList.size() > this.commandRunIndex) {
-            execute(wave);
-        } else {
-            // No more command to run the MultiCommand is achieved
-            fireAchieve(this.waveSource);
+        if (this.sequential) {
+
+            synchronized (this) {
+
+                // Move the index to retrieve the next command to run
+                this.commandRunIndex++;
+
+                // Run next command if any
+                if (this.commandList.size() > this.commandRunIndex) {
+                    execute(wave);
+                } else {
+                    // No more command to run the MultiCommand is achieved
+                    fireAchieve(this.waveSource);
+                }
+            }
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void processAction(final Wave wave) {
-        // Nothing to do yet
-
     }
 
     /**
