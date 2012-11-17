@@ -12,6 +12,25 @@
 	<name>JRebirth Analyzer</name>
 
 	<build>
+
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/java</directory>
+				<includes>
+					<include>**/*.fxml</include>
+					<include>**/*.txt</include>
+				</includes>
+			</resource>
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+
 		<plugins>
 
 			<plugin>
@@ -28,7 +47,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
+				<version>2.3.2</version>
 
 				<!-- <executions> <execution> <goals> <goal>sign</goal> </goals> </execution> </executions> -->
 				<configuration>
@@ -39,9 +58,9 @@
 							<Main-Class>org.jrebirth.analyzer.JRebirthAnalyzer</Main-Class>
 
 
-							<implementation-vendor>seb</implementation-vendor>
-							<implementation-title>JRebirthAnalyzer</implementation-title>
-							<implementation-version>1.0</implementation-version>
+							<!-- <implementation-vendor>seb</implementation-vendor> -->
+							<!-- <implementation-title>JRebirthAnalyzer</implementation-title> -->
+							<!-- <implementation-version>1.0</implementation-version> -->
 							<JavaFX-Application-Class>org.jrebirth.analyzer.JRebirthAnalyzer</JavaFX-Application-Class>
 
 							<JavaFX-Class-Path>${classpath}</JavaFX-Class-Path>
@@ -90,7 +109,7 @@
 					<excludeTransitive>false</excludeTransitive>
 
 					<!-- The path where the libraries are stored within the jnlp structure. not required. by default the libraries are within the working directory -->
-					<libPath>lib</libPath>
+					<!-- <libPath>lib</libPath> -->
 
 					<!-- [optional] transitive dependencies filter - if omitted, all transitive dependencies are included -->
 					<!-- <dependencies> Note that only groupId and artifactId must be specified here. because of a limitation of the Include/ExcludesArtifactFilter <includes> <include>org.jrebirth:presentation</include> 
@@ -167,7 +186,7 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.0.6</version>
 		</dependency>
-		
+
 	</dependencies>
-	
+
 </project>
