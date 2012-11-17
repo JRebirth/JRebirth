@@ -9,7 +9,7 @@ package org.jrebirth.core.wave;
  * 
  * @param <T> the type of the object mapped by this WaveItem
  */
-public class WaveItem<T> {
+public final class WaveItem<T> {
 
     /** The generator of unique id. */
     private static int idGenerator;
@@ -24,14 +24,13 @@ public class WaveItem<T> {
      * Private Constructor.
      */
     private WaveItem() {
-
         // this.itemClass = null;// (Class<T>) ClassUtility.getGenericType(0);
     }
 
     /**
      * Build a wave item.
      * 
-     * @return a new fresh wave Data object
+     * @return a new fresh wave item object
      * 
      * @param <T> the type of the object wrapped by this WaveData
      */

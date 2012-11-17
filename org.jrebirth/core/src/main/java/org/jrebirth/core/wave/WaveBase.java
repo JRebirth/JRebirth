@@ -42,6 +42,9 @@ public class WaveBase implements Wave {
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(WaveBase.class);
 
+    /** The space separator. */
+    private static final String SPACE_SEP = " ";
+
     /** The Wave Unique Identifier. */
     private final String wuid;
 
@@ -86,9 +89,6 @@ public class WaveBase implements Wave {
      * The list of wave Listener to warn when wave status changed.
      */
     private final List<WaveListener> waveListeners = Collections.synchronizedList(new ArrayList<WaveListener>());
-
-    /** The space separator. */
-    private static final String SPACE_SEP = " ";
 
     /**
      * Default Constructor.

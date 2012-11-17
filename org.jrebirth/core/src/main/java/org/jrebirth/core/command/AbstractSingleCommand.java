@@ -10,6 +10,9 @@ import org.jrebirth.core.wave.Wave;
  */
 public abstract class AbstractSingleCommand extends AbstractBaseCommand {
 
+    /** The command is running. */
+    private boolean running;
+
     /**
      * Default constructor.
      * 
@@ -24,7 +27,9 @@ public abstract class AbstractSingleCommand extends AbstractBaseCommand {
      */
     @Override
     protected void preExecute(final Wave wave) {
-        // Nothing to do
+        synchronized (this) {
+            this.running = true;
+        }
     }
 
     /**
@@ -32,6 +37,16 @@ public abstract class AbstractSingleCommand extends AbstractBaseCommand {
      */
     @Override
     protected void postExecute(final Wave wave) {
+        synchronized (this) {
+            this.running = false;
+        }
         fireAchieve(wave);
+    }
+
+    /**
+     * @return Returns the running.
+     */
+    public boolean isRunning() {
+        return this.running;
     }
 }

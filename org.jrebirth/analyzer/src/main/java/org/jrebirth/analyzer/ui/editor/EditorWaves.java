@@ -19,25 +19,25 @@ public interface EditorWaves {
     /*************************************************************************/
 
     /** Trigger a Unload wave. */
-    WaveTypeBase DO_UNLOAD = new WaveTypeBase("UNLOAD");
+    WaveTypeBase DO_UNLOAD = WaveTypeBase.build("UNLOAD");
 
     /** Trigger a Play wave. */
-    WaveTypeBase DO_PLAY = new WaveTypeBase("PLAY");
+    WaveTypeBase DO_PLAY = WaveTypeBase.build("PLAY");
 
     /** Trigger a Next wave. */
-    WaveTypeBase DO_NEXT = new WaveTypeBase("NEXT");
+    WaveTypeBase DO_NEXT = WaveTypeBase.build("NEXT");
 
     /** Trigger a Previous wave. */
-    WaveTypeBase DO_PREVIOUS = new WaveTypeBase("PREVIOUS");
+    WaveTypeBase DO_PREVIOUS = WaveTypeBase.build("PREVIOUS");
 
     /** Trigger a Stop wave. */
-    WaveTypeBase DO_STOP = new WaveTypeBase("STOP");
+    WaveTypeBase DO_STOP = WaveTypeBase.build("STOP");
 
     /** Wave used to display info into the properties view. */
-    WaveTypeBase DO_SELECT_EVENT = new WaveTypeBase("EVENT_SELECTED");
+    WaveTypeBase DO_SELECT_EVENT = WaveTypeBase.build("EVENT_SELECTED");
 
     /** Wave type used to return the event currently processed. */
-    WaveTypeBase RE_EVENT_PROCESSED = new WaveTypeBase("EVENT_PROCESSED");
+    WaveTypeBase RE_EVENT_PROCESSED = WaveTypeBase.build("EVENT_PROCESSED");
 
     /*************************************************************************/
     /** Wave Items **/

@@ -24,10 +24,10 @@ import org.slf4j.LoggerFactory;
 public class LoadEdtFileService extends ServiceBase {
 
     /** Wave type use to load events. */
-    public static final WaveTypeBase DO_LOAD_EVENTS = new WaveTypeBase("LOAD_EVENTS", EditorWaves.EVENTS_FILE);
+    public static final WaveTypeBase DO_LOAD_EVENTS = WaveTypeBase.build("LOAD_EVENTS", EditorWaves.EVENTS_FILE);
 
     /** Wave type to return events loaded. */
-    public static final WaveTypeBase RE_EVENTS_LOADED = new WaveTypeBase("EVENTS_LOADED", EditorWaves.EVENTS);
+    public static final WaveTypeBase RE_EVENTS_LOADED = WaveTypeBase.build("EVENTS_LOADED", EditorWaves.EVENTS);
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(LoadEdtFileService.class);
