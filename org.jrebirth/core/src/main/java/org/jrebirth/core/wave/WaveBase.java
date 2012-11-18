@@ -19,7 +19,6 @@ package org.jrebirth.core.wave;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,10 +71,10 @@ public class WaveBase implements Wave {
     private Wave relatedWave;
 
     /** A map used to contain all data. */
-    private final Map<WaveItem, WaveData<?>> waveItemsMap = new HashMap<>();
+    private final Map<WaveItem<?>, WaveData<?>> waveItemsMap = new HashMap<>();
 
     /** A sorted list that contains all data. */
-    private final List<WaveData<?>> waveItemsList = new ArrayList<>();
+    private final List<WaveData<?>> waveDataList = new ArrayList<>();
 
     /**
      * The wave bean.
@@ -186,7 +185,7 @@ public class WaveBase implements Wave {
      */
     @Override
     public List<WaveData<?>> getWaveItems() {
-        return this.waveItemsList;
+        return this.waveDataList;
     }
 
     /**
@@ -200,7 +199,7 @@ public class WaveBase implements Wave {
         // Store into the map to allow access by WaveItem
         this.waveItemsMap.put(waveData.getKey(), waveData);
         // Ad into the list to enable sorting
-        this.waveItemsList.add(waveData);
+        this.waveDataList.add(waveData);
 
         // Sort the list
         sortWaveItems();
@@ -218,7 +217,7 @@ public class WaveBase implements Wave {
             // Store into the map to allow access by WaveItem
             this.waveItemsMap.put(waveData.getKey(), waveData);
             // Ad into the list to enable sorting
-            this.waveItemsList.add(waveData);
+            this.waveDataList.add(waveData);
 
             // Sort the list
             sortWaveItems();
@@ -229,14 +228,7 @@ public class WaveBase implements Wave {
      * Sort the list of wave items.
      */
     private void sortWaveItems() {
-        Collections.sort(this.waveItemsList, new Comparator<WaveData<?>>() {
-
-            @Override
-            public int compare(final WaveData<?> wd1, final WaveData<?> wd2) {
-                return ((WaveData<?>) wd1).getOrder() - ((WaveData<?>) wd2).getOrder();
-            }
-
-        });
+        Collections.sort(this.waveDataList/* , WaveData.Comparator */);
     }
 
     /**

@@ -158,8 +158,8 @@
 
 					<!-- BUILDING PROCESS -->
 
-					<pack200>false</pack200>
-					<gzip>false</gzip> <!-- default force when pack200 false, true when pack200 selected ?? -->
+					<pack200>true</pack200>
+					<gzip>true</gzip> <!-- default force when pack200 false, true when pack200 selected ?? -->
 
 					<!-- causes a version attribute to be output in each jar resource element, optional, default is false -->
 					<!-- <outputJarVersions>true</outputJarVersions> -->

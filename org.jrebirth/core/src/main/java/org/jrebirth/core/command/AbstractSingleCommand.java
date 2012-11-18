@@ -47,6 +47,8 @@ public abstract class AbstractSingleCommand extends AbstractBaseCommand {
      * @return Returns the running.
      */
     public boolean isRunning() {
-        return this.running;
+        synchronized (this) {
+            return this.running;
+        }
     }
 }
