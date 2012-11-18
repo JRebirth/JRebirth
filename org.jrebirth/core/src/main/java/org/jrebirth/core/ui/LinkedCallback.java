@@ -10,13 +10,6 @@ import javafx.util.Callback;
  */
 public final class LinkedCallback {
 
-    /**
-     * Private Constructor.
-     */
-    private LinkedCallback() {
-        // Nothing to do
-    }
-
     /** The mouse double click checker. */
     public static final Callback<MouseEvent, Boolean> CHECK_MOUSE_DOUBLE_CLICK = new Callback<MouseEvent, Boolean>() {
 
@@ -32,4 +25,11 @@ public final class LinkedCallback {
             return event.getClickCount() == 2;
         }
     };
+
+    /**
+     * Private Constructor.
+     */
+    private LinkedCallback() {
+        // Nothing to do
+    }
 }

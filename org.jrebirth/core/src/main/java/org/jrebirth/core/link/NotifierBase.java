@@ -21,10 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
@@ -37,7 +33,6 @@ import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
-import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveType;
@@ -151,27 +146,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
 
         // Attach the model root node to a dedicated place holder.
         // This link is done into the JavaFX Application Thread
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("Display Model " + model.getClass().getSimpleName()) {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
-                    // Add an Ui view into a the place holder provided
-                    final ObjectProperty<Node> nodePlaceHolder = wave.get(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER);
-                    nodePlaceHolder.setValue(model.getView().getRootNode());
-
-                } else if (wave.contains(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER)) {
-                    // Add an Ui view into a children list of its parent container
-                    final ObservableList<Node> childrenPlaceHolder = wave.get(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER);
-                    childrenPlaceHolder.add(model.getView().getRootNode());
-                }
-                // We can consume the wave because the link is done synchronously into the JAT
-                wave.setStatus(Status.Consumed);
-            }
-        });
+        JRebirth.runIntoJAT(new DisplayUiRunnable("Display Model " + model.getClass().getSimpleName(), model, wave));
 
     }
 

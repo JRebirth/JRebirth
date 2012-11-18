@@ -16,6 +16,8 @@
  */
 package org.jrebirth.core.wave;
 
+import java.util.Comparator;
+
 /**
  * 
  * The class <strong>WaveData</strong>.
@@ -26,7 +28,10 @@ package org.jrebirth.core.wave;
  * 
  * @param <T> the type of the data hold
  */
-public final class WaveData<T> implements Comparable<WaveData<T>> {
+public final class WaveData<T> implements Comparable<WaveData<?>> {
+
+    /** The WaveData comparator to use with different data type. */
+    // public static final Comparator<? super WaveData<?>> Comparator = new WaveDataComparator();
 
     /**
      * The key property, must be set with an enumeration that implements WaveItem.
@@ -128,7 +133,19 @@ public final class WaveData<T> implements Comparable<WaveData<T>> {
      * {@inheritDoc}
      */
     @Override
-    public int compareTo(final WaveData<T> waveData) {
+    public int compareTo(final WaveData<?> waveData) {
         return getOrder() - waveData.getOrder();
+    }
+
+    /**
+     * The class <strong>WaveDataComparator</strong>.
+     * 
+     * @author Sébastien Bordes
+     */
+    public final static class WaveDataComparator implements Comparator<WaveData<?>> {
+        @Override
+        public int compare(final WaveData<?> wd1, final WaveData<?> wd2) {
+            return ((WaveData<?>) wd1).getOrder() - ((WaveData<?>) wd2).getOrder();
+        }
     }
 }

@@ -84,7 +84,6 @@
 
 		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, it's not yet implemented: see MNG-2216 -->
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
-		<!-- <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName> -->
 
 		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
 

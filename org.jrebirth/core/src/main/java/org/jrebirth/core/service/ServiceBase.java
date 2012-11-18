@@ -16,7 +16,6 @@
  */
 package org.jrebirth.core.service;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,12 +27,9 @@ import javafx.concurrent.Task;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.Wave.Status;
-import org.jrebirth.core.wave.WaveBuilder;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveType;
@@ -51,13 +47,13 @@ import org.slf4j.LoggerFactory;
 public class ServiceBase extends AbstractWaveReady<Service> implements Service {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceBase.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(ServiceBase.class);
 
     /** The wave type map. */
-    private final Map<WaveType, WaveType> waveTypeMap = new HashMap<>();
+    final Map<WaveType, WaveType> waveTypeMap = new HashMap<>();
 
     /** The wave item map. */
-    private final Map<WaveType, WaveItem<?>> waveItemMap = new HashMap<>();
+    final Map<WaveType, WaveItem<?>> waveItemMap = new HashMap<>();
 
     /**
      * Register a service contract.
@@ -155,47 +151,8 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
 
         final ServiceBase localService = this;
 
-        final Task<T> task = new Task<T>() {
+        final Task<T> task = new ServiceTask<T>(localService, method, parameterValues, sourceWave);
 
-            /**
-             * {@inheritDoc}
-             */
-            @SuppressWarnings("unchecked")
-            @Override
-            protected T call() throws WaveException {
-                T res = null;
-                try {
-                    // Call this method with right parameters
-                    res = (T) method.invoke(localService, parameterValues);
-
-                    if (res == null) {
-                        // No return wave required
-                        LOGGER.trace(localService.getClass().getSimpleName() + " Consumes wave (noreturn)" + sourceWave.toString());
-                        sourceWave.setStatus(Status.Consumed);
-                    } else {
-                        final WaveType responseWaveType = localService.waveTypeMap.get(sourceWave.getWaveType());
-                        final WaveItem<T> waveItem = (WaveItem<T>) localService.waveItemMap.get(responseWaveType);
-
-                        final Wave returnWave = WaveBuilder.create()
-                                .waveType(responseWaveType)
-                                .relatedClass(this.getClass())
-                                .data(WaveData.build(waveItem, res))
-                                .build();
-                        returnWave.setRelatedWave(sourceWave);
-                        returnWave.addWaveListener(new ServiceWaveListener());
-
-                        // Send the return wave to interested components
-                        sendWave(returnWave);
-
-                    }
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    // Propagate the wave exception
-                    LOGGER.error("Unable to perform the service", e);
-                    // throw new WaveException(wave, e);
-                }
-                return res;
-            }
-        };
         // Call the task into the JRebirth Thread Pool
         JRebirth.runIntoThreadPool(task);
     }
