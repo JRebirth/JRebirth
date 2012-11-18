@@ -27,9 +27,11 @@ final class DisplayUiRunnable extends AbstractJrbRunnable {
     private final Wave wave;
 
     /**
-     * @param runnableName
-     * @param model
-     * @param wave
+     * Default constructor only visible by link package.
+     * 
+     * @param runnableName The name of the runnable
+     * @param model the model to display
+     * @param wave the wave that contain all relavant information
      */
     DisplayUiRunnable(final String runnableName, final Model model, final Wave wave) {
         super(runnableName);

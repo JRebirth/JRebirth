@@ -50,10 +50,10 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
     static final Logger LOGGER = LoggerFactory.getLogger(ServiceBase.class);
 
     /** The wave type map. */
-    final Map<WaveType, WaveType> waveTypeMap = new HashMap<>();
+    private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
 
     /** The wave item map. */
-    final Map<WaveType, WaveItem<?>> waveItemMap = new HashMap<>();
+    private final Map<WaveType, WaveItem<?>> waveItemMap = new HashMap<>();
 
     /**
      * Register a service contract.
@@ -68,12 +68,30 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
 
             listen(callType);
 
-            this.waveTypeMap.put(callType, responseType);
+            this.returnWaveTypeMap.put(callType, responseType);
             this.waveItemMap.put(responseType, waveItem);
 
         } else {
             LOGGER.error("Service API is broken, the method {} is not available", ClassUtility.underscoreToCamelCase(callType.toString()));
         }
+    }
+
+    /**
+     * Return the return wave type.
+     * 
+     * @return Returns the waveType for return wave.
+     */
+    public WaveType getReturnWaveType(final WaveType waveType) {
+        return this.returnWaveTypeMap.get(waveType);
+    }
+
+    /**
+     * Return the wave item for given wave type
+     * 
+     * @return Returns the waveItem for this wave type.
+     */
+    public WaveItem<?> getWaveItem(final WaveType waveType) {
+        return this.waveItemMap.get(waveType);
     }
 
     /**
