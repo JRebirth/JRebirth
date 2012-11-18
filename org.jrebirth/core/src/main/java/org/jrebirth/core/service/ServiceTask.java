@@ -19,6 +19,8 @@ import org.slf4j.LoggerFactory;
  * The class <strong>ServiceTask</strong>.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <T> the current Service Task type
  */
 final class ServiceTask<T> extends Task<T> {
 
@@ -47,14 +49,15 @@ final class ServiceTask<T> extends Task<T> {
      * 
      * @param parameterValues the lsit of function parameter
      * @param method the method to call
-     * @param localService the service object
-     * @param sourceWave the wave to process
+     * @param service the service object
+     * @param wave the wave to process
      */
-    ServiceTask(final ServiceBase localService, final Method method, final Object[] parameterValues, final Wave sourceWave) {
-        this.service = localService;
+    ServiceTask(final ServiceBase service, final Method method, final Object[] parameterValues, final Wave wave) {
+        super();
+        this.service = service;
         this.method = method;
-        this.parameterValues = parameterValues;
-        this.wave = sourceWave;
+        this.parameterValues = parameterValues.clone();
+        this.wave = wave;
     }
 
     /**
@@ -73,8 +76,8 @@ final class ServiceTask<T> extends Task<T> {
                 LOGGER.trace(this.service.getClass().getSimpleName() + " Consumes wave (noreturn)" + this.wave.toString());
                 this.wave.setStatus(Status.Consumed);
             } else {
-                final WaveType responseWaveType = this.service.waveTypeMap.get(this.wave.getWaveType());
-                final WaveItem<T> waveItem = (WaveItem<T>) this.service.waveItemMap.get(responseWaveType);
+                final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.getWaveType());
+                final WaveItem<T> waveItem = (WaveItem<T>) this.service.getWaveItem(responseWaveType);
 
                 final Wave returnWave = WaveBuilder.create()
                         .waveType(responseWaveType)

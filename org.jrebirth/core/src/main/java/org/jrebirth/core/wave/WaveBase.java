@@ -202,7 +202,7 @@ public class WaveBase implements Wave {
         this.waveDataList.add(waveData);
 
         // Sort the list
-        sortWaveItems();
+        Collections.sort(this.waveDataList);
     }
 
     /**
@@ -220,15 +220,8 @@ public class WaveBase implements Wave {
             this.waveDataList.add(waveData);
 
             // Sort the list
-            sortWaveItems();
+            Collections.sort(this.waveDataList);
         }
-    }
-
-    /**
-     * Sort the list of wave items.
-     */
-    private void sortWaveItems() {
-        Collections.sort(this.waveDataList/* , WaveData.Comparator */);
     }
 
     /**
