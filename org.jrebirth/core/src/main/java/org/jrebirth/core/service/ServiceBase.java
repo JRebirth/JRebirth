@@ -1,5 +1,6 @@
 /**
- * Copyright JRebirth.org © 2011-2012 
+ * Get more info at : www.jrebirth.org .
+ * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -79,6 +80,8 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
     /**
      * Return the return wave type.
      * 
+     * @param waveType the source wave type
+     * 
      * @return Returns the waveType for return wave.
      */
     public WaveType getReturnWaveType(final WaveType waveType) {
@@ -87,6 +90,8 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
 
     /**
      * Return the wave item for given wave type
+     * 
+     * @param waveType the wave type taht we want to get wave item
      * 
      * @return Returns the waveItem for this wave type.
      */
