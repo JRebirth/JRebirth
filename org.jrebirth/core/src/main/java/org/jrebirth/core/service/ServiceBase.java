@@ -89,9 +89,9 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
     }
 
     /**
-     * Return the wave item for given wave type
+     * Return the wave item for given wave type.
      * 
-     * @param waveType the wave type taht we want to get wave item
+     * @param waveType the wave type that we want to get wave item
      * 
      * @return Returns the waveItem for this wave type.
      */
