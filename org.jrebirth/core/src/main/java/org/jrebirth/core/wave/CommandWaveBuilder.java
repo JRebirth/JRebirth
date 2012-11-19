@@ -78,6 +78,7 @@ public class CommandWaveBuilder<B extends CommandWaveBuilder<B, WB>, WB extends 
      * 
      * @return the casted wavebean
      */
+    @SuppressWarnings("unchecked")
     protected WB getWaveBean(final Wave wave) {
         return (WB) wave.getWaveBean();
     }

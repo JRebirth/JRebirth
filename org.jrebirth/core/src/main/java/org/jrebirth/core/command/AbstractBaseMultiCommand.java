@@ -147,6 +147,16 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
      * {@inheritDoc}
      */
     @Override
+    public void waveFailed(final Wave wave) {
+        if (this.sequential) {
+            // FIXME
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void addCommandClass(final Class<? extends Command> commandClass) {
         this.commandList.add(commandClass);
     }

@@ -10,7 +10,6 @@
 
 	<includeBaseDirectory>false</includeBaseDirectory>
 
-
 	<moduleSets>
 
 		<moduleSet>
@@ -21,10 +20,12 @@
 			<includes>
 				<include>org.jrebirth:core</include>
 				<include>org.jrebirth:analyzer</include>
+<!-- 				<include>org.jrebirth:presentation</include>
+				<include>org.jrebirth:transition</include> -->
 			</includes>
 
 			<binaries>
-				<outputDirectory>modules/</outputDirectory>
+				<outputDirectory>/</outputDirectory>
 				<unpack>false</unpack>
 			</binaries>
 

@@ -20,6 +20,7 @@ package org.jrebirth.core.application;
 import java.util.List;
 
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -31,7 +32,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public interface JRebirthApplication {
+public interface JRebirthApplication<P extends Pane> {
 
     /** The default scene width used. */
     int DEFAULT_SCENE_WIDTH = 800;
@@ -65,6 +66,11 @@ public interface JRebirthApplication {
      * @return Returns the scene.
      */
     Scene getScene();
+
+    /**
+     * @return Returns the rootNode.
+     */
+    P getRootNode();
 
     /**
      * This method must be implemented to declare which UI Model to display first.

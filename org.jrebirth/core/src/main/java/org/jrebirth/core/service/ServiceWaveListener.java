@@ -82,6 +82,14 @@ public final class ServiceWaveListener implements WaveListener {
      * {@inheritDoc}
      */
     @Override
+    public void waveFailed(final Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void waveDestroyed(final Wave wave) {
         // Nothing to do yet
     }

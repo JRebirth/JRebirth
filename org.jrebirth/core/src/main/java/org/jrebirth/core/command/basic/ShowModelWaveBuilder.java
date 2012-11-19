@@ -17,8 +17,9 @@
  */
 package org.jrebirth.core.command.basic;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.CommandWaveBuilder;
@@ -37,8 +38,12 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
     /** The model class to show. */
     private Class<? extends Model> modelClass;
 
+    private ObjectProperty<Node> uniquePlaceHolder;
+
+    private ObservableList<Node> chidrenPlaceHolder;
+
     /** The parent node. */
-    private Pane parentNode;
+    // private Parent parentNode;
 
     /** The created node. */
     private Node createdNode;
@@ -68,12 +73,15 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
 
         final int i = this.setMask;
         if ((i & 0x1) != 0) {
-            getWaveBean(paramWave).setParentNode(this.parentNode);
+            getWaveBean(paramWave).setUniquePlaceHolder(this.uniquePlaceHolder);
         }
         if ((i & 0x2) != 0) {
-            getWaveBean(paramWave).setModelClass(this.modelClass);
+            getWaveBean(paramWave).setChidrenPlaceHolder(this.chidrenPlaceHolder);
         }
         if ((i & 0x4) != 0) {
+            getWaveBean(paramWave).setModelClass(this.modelClass);
+        }
+        if ((i & 0x8) != 0) {
             getWaveBean(paramWave).setCreatedNode(this.createdNode);
         }
     }
@@ -85,9 +93,35 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
      * 
      * @return the builder
      */
-    public ShowModelWaveBuilder parentNode(final Pane parentNode) {
-        this.parentNode = parentNode;
+    // public ShowModelWaveBuilder parentNode(final Parent parentNode) {
+    // this.parentNode = parentNode;
+    // this.setMask |= 1;
+    // return this;
+    // }
+
+    /**
+     * Define the parent node.
+     * 
+     * @param parentNode the node that will hold the model to shown
+     * 
+     * @return the builder
+     */
+    public ShowModelWaveBuilder uniquePlaceHolder(final ObjectProperty<Node> node) {
+        this.uniquePlaceHolder = node;
         this.setMask |= 1;
+        return this;
+    }
+
+    /**
+     * Define the parent node.
+     * 
+     * @param parentNode the node that will hold the model to shown
+     * 
+     * @return the builder
+     */
+    public ShowModelWaveBuilder childrenPlaceHolder(final ObservableList<Node> children) {
+        this.chidrenPlaceHolder = children;
+        this.setMask |= 2;
         return this;
     }
 

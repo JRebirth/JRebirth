@@ -33,7 +33,7 @@ public interface JRebirthWaves {
     /** The waveItem that hold the attached node. */
     WaveItem<ObjectProperty<Node>> ATTACH_UI_NODE_PLACEHOLDER = WaveItem.build();
 
-    /** The waveItem that hold the children lsit of the parent node. */
+    /** The waveItem that hold the children list of the parent node. */
     WaveItem<ObservableList<Node>> ADD_UI_CHILDREN_PLACEHOLDER = WaveItem.build();
 
     /** The waveItem that hold the list of wave to be executed back to back. */

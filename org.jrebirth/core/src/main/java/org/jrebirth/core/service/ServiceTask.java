@@ -92,6 +92,7 @@ final class ServiceTask<T> extends Task<T> {
                 // No return wave required
                 LOGGER.trace(this.service.getClass().getSimpleName() + " Consumes wave (noreturn)" + this.wave.toString());
                 this.wave.setStatus(Status.Consumed);
+
             } else {
                 final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.getWaveType());
                 final WaveItem<T> waveItem = (WaveItem<T>) this.service.getWaveItem(responseWaveType);

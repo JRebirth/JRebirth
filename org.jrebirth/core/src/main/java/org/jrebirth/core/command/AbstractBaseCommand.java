@@ -21,6 +21,7 @@ import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.concurrent.RunIntoType;
 import org.jrebirth.core.event.EventType;
+import org.jrebirth.core.exception.CommandException;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.link.AbstractWaveReady;
@@ -73,8 +74,10 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
      * Execute the command code.
      * 
      * @param wave the wave that contain data to be processed
+     * 
+     * @throws CommandException if an error occurred while processing the command
      */
-    protected abstract void execute(final Wave wave);
+    protected abstract void execute(final Wave wave) throws CommandException;
 
     /**
      * {@inheritDoc}
@@ -105,9 +108,18 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
              */
             @Override
             protected void runInto() throws JRebirthThreadException {
-                preExecute(wave);
-                execute(wave);
-                postExecute(wave);
+
+                try {
+                    preExecute(wave);
+
+                    execute(wave);
+
+                    postExecute(wave);
+
+                } catch (final CommandException ce) {
+                    LOGGER.error("Command has failed :", ce);
+                    wave.setStatus(Wave.Status.Failed);
+                }
             }
         });
     }
