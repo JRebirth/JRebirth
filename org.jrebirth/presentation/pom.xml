@@ -8,6 +8,7 @@
 	</parent>
 	<groupId>org.jrebirth</groupId>
 	<artifactId>presentation</artifactId>
+	<version>0.7.0-SNAPSHOT</version>
 	<name>Presentation Base Module</name>
 	<description>Base files to build a JavaFX slide's presentation</description>
 
