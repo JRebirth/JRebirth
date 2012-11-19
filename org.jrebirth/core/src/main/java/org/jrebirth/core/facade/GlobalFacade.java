@@ -60,7 +60,7 @@ public interface GlobalFacade {
     /**
      * @return the application
      */
-    JRebirthApplication getApplication();
+    JRebirthApplication<?> getApplication();
 
     /**
      * @return Returns the executorService.

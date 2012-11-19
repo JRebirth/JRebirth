@@ -60,6 +60,13 @@ public interface WaveListener {
     void waveConsumed(Wave wave);
 
     /**
+     * The wave processing has failed.
+     * 
+     * @param wave the failed wave
+     */
+    void waveFailed(Wave wave);
+
+    /**
      * The wave has just been destroyed.
      * 
      * @param wave the destroyed wave

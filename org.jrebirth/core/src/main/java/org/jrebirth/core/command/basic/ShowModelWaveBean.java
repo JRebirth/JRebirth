@@ -17,8 +17,9 @@
  */
 package org.jrebirth.core.command.basic;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.WaveBean;
@@ -33,8 +34,12 @@ public class ShowModelWaveBean implements WaveBean {
     /** The model class. */
     private Class<? extends Model> modelClass;
 
+    private ObjectProperty<Node> uniquePlaceHolder;
+
+    private ObservableList<Node> chidrenPlaceHolder;
+
     /** The parent node. */
-    private Pane parentNode;
+    // private Parent parentNode;
 
     /** The created node. */
     private Node createdNode;
@@ -57,22 +62,50 @@ public class ShowModelWaveBean implements WaveBean {
         this.modelClass = modelClass;
     }
 
+    // /**
+    // * Gets the parent node.
+    // *
+    // * @return the parent node
+    // */
+    // public Parent getParentNode() {
+    // return this.parentNode;
+    // }
+    //
+    // /**
+    // * Sets the parent node.
+    // *
+    // * @param parentNode the new parent node
+    // */
+    // public void setParentNode(final Parent parentNode) {
+    // this.parentNode = parentNode;
+    // }
+
     /**
-     * Gets the parent node.
-     * 
-     * @return the parent node
+     * @return Returns the uniquePlaceHolder.
      */
-    public Pane getParentNode() {
-        return this.parentNode;
+    public ObjectProperty<Node> getUniquePlaceHolder() {
+        return this.uniquePlaceHolder;
     }
 
     /**
-     * Sets the parent node.
-     * 
-     * @param parentNode the new parent node
+     * @param uniquePlaceHolder The uniquePlaceHolder to set.
      */
-    public void setParentNode(final Pane parentNode) {
-        this.parentNode = parentNode;
+    public void setUniquePlaceHolder(final ObjectProperty<Node> uniquePlaceHolder) {
+        this.uniquePlaceHolder = uniquePlaceHolder;
+    }
+
+    /**
+     * @return Returns the chidrenPlaceHolder.
+     */
+    public ObservableList<Node> getChidrenPlaceHolder() {
+        return this.chidrenPlaceHolder;
+    }
+
+    /**
+     * @param chidrenPlaceHolder The chidrenPlaceHolder to set.
+     */
+    public void setChidrenPlaceHolder(final ObservableList<Node> chidrenPlaceHolder) {
+        this.chidrenPlaceHolder = chidrenPlaceHolder;
     }
 
     /**

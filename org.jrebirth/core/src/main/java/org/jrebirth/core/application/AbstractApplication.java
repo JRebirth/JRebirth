@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @param <P> The root node of the stage, must extends Pane
  */
-public abstract class AbstractApplication<P extends Pane> extends Application implements JRebirthApplication {
+public abstract class AbstractApplication<P extends Pane> extends Application implements JRebirthApplication<P> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApplication.class);
@@ -63,6 +63,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
     /** The application scene. */
     private transient Scene scene;
+
+    /** The root node of the scene built by reflection. */
+    private transient P rootNode;
 
     /** The logger status. */
     private boolean loggerEnabled = true;
@@ -264,7 +267,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      */
     @SuppressWarnings("unchecked")
     protected P buildRootPane() throws CoreException {
-        return (P) ClassUtility.buildGenericType(this.getClass(), 0);
+        this.rootNode = (P) ClassUtility.buildGenericType(this.getClass(), 0);
+        return this.rootNode;
     }
 
     /**
@@ -339,6 +343,14 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     @Override
     public final Scene getScene() {
         return this.scene;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public P getRootNode() {
+        return this.rootNode;
     }
 
     /**

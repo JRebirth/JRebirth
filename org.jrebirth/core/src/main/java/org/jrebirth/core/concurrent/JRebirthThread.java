@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import javafx.scene.layout.Pane;
-
 import org.jrebirth.core.application.JRebirthApplication;
 import org.jrebirth.core.command.basic.ChainWaveCommand;
 import org.jrebirth.core.command.basic.ShowModelWaveBuilder;
@@ -58,7 +56,7 @@ public final class JRebirthThread extends Thread {
     private transient GlobalFacade facade;
 
     /** The javaFX application that launch this thread. */
-    private transient JRebirthApplication application;
+    private transient JRebirthApplication<?> application;
 
     /** The list of tasks to execute, all access MUST BE synchronized. */
     // private final List<Runnable> tasks;
@@ -123,7 +121,7 @@ public final class JRebirthThread extends Thread {
      * 
      * @param application the javaFX application instance
      */
-    public void launch(final JRebirthApplication application) {
+    public void launch(final JRebirthApplication<?> application) {
 
         // Link the current application
         this.application = application;
@@ -281,8 +279,9 @@ public final class JRebirthThread extends Thread {
      */
     protected Wave getLaunchFirstViewWave() {
 
+        // Generates the command cave directly to win a Wave turn
         return ShowModelWaveBuilder.create()
-                .parentNode((Pane) JRebirthThread.this.application.getScene().getRoot())
+                .childrenPlaceHolder(this.application.getRootNode().getChildren())
                 .modelClass(this.application.getFirstModelClass())
                 .build();
 
@@ -291,7 +290,7 @@ public final class JRebirthThread extends Thread {
     /**
      * @return Returns the application.
      */
-    public JRebirthApplication getApplication() {
+    public JRebirthApplication<?> getApplication() {
         return this.application;
     }
 

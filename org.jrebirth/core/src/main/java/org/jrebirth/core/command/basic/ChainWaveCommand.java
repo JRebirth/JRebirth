@@ -138,6 +138,15 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
      * {@inheritDoc}
      */
     @Override
+    public void waveFailed(final Wave wave) {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void waveCancelled(final Wave wave) {
         // Nothing to do yet
 

@@ -379,6 +379,9 @@ public class WaveBase implements Wave {
                 case Consumed:
                     waveListener.waveConsumed(this);
                     break;
+                case Failed:
+                    waveListener.waveFailed(this);
+                    break;
                 default:
                     break;
             }

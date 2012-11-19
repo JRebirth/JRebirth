@@ -137,6 +137,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     /**
      * Create the view it was null.
      */
+    @SuppressWarnings("unchecked")
     private void createView() {
         // Build the current view by reflection
         try {

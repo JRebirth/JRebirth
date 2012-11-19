@@ -50,6 +50,9 @@ public interface Wave {
         /** The wave has just been consumed. */
         Consumed,
 
+        /** The wave processing has failed. */
+        Failed,
+
         /** The wave has just been destroyed. */
         Destroyed;
     }

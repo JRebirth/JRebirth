@@ -252,7 +252,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
         if (this.keyHandler == null) {
             // Build the mouse handler instance
             if (this instanceof KeyAdapter) {
-                this.keyHandler = new KeyHandler((KeyAdapter) this);
+                this.keyHandler = new KeyHandler((KeyAdapter<?>) this);
             } else {
                 throwBrokenContract(KeyAdapter.class);
             }

@@ -18,10 +18,11 @@
 package org.jrebirth.core.command.basic;
 
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 
 import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.wave.Wave;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>AttachModelCommand</strong>.
@@ -30,17 +31,32 @@ import org.jrebirth.core.wave.Wave;
  */
 public class AttachModelCommand extends DefaultUICommand {
 
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(AttachModelCommand.class);
+
     /**
      * {@inheritDoc}
      */
     @Override
     protected void execute(final Wave wave) {
 
-        final Pane parentNode = getWaveBean(wave).getParentNode();
+        // final Pane parentNode = getWaveBean(wave).getParentNode();
         final Node createdNode = getWaveBean(wave).getCreatedNode();
 
-        parentNode.getChildren().add(createdNode);
-        createdNode.requestFocus();
+        if (createdNode != null) {
+            if (getWaveBean(wave).getUniquePlaceHolder() != null) {
+                getWaveBean(wave).getUniquePlaceHolder().set(createdNode);
+            } else if (getWaveBean(wave).getChidrenPlaceHolder() != null) {
+                getWaveBean(wave).getChidrenPlaceHolder().add(createdNode);
+            } else {
+                LOGGER.warn("Impossible to attach model {}, no place holder found", getWaveBean(wave).getModelClass().getSimpleName());
+            }
+
+            // Try to give focus to the new node added (Could be managed by a boolean ??)
+            createdNode.requestFocus();
+        } else {
+            LOGGER.warn("Impossible to attach model {} because the created node is null", getWaveBean(wave).getModelClass().getSimpleName());
+        }
     }
 
     /**

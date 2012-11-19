@@ -17,8 +17,6 @@
  */
 package org.jrebirth.core.command.basic;
 
-import javafx.scene.Node;
-
 import org.jrebirth.core.command.DefaultPoolCommand;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
@@ -36,16 +34,15 @@ public class PrepareModelCommand extends DefaultPoolCommand {
     @Override
     protected void execute(final Wave wave) {
 
-        final Class<? extends Model> first = getWaveBean(wave).getModelClass();
+        // Retrieved the model class
+        final Class<? extends Model> modelClass = getWaveBean(wave).getModelClass();
 
-        // ShowModelCommandItem.modelClass;//.getAnnotation(DataClass.class);
-        /*
-         * if (first == null) { throw new CoreException("No First Model Class defined."); }
-         */
+        if (modelClass == null) {
+            // throw new WaveException("ModelClass is null", wave);
+        }
 
-        // Build the first root node
-        final Node modelNode = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(first).getView().getRootNode();
-        getWaveBean(wave).setCreatedNode(modelNode);
+        // Build the first root node into the thread pool and link it to the waveBean
+        getWaveBean(wave).setCreatedNode(getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelClass).getView().getRootNode());
     }
 
     /**
@@ -53,7 +50,7 @@ public class PrepareModelCommand extends DefaultPoolCommand {
      * 
      * @param wave the wave that hold the bean
      * 
-     * @return he casted wave bean
+     * @return the casted wave bean
      */
     public ShowModelWaveBean getWaveBean(final Wave wave) {
         return (ShowModelWaveBean) wave.getWaveBean();

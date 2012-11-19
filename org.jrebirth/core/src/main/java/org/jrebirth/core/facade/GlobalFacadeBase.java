@@ -44,7 +44,7 @@ import org.jrebirth.core.link.NotifierBase;
 public class GlobalFacadeBase implements GlobalFacade {
 
     /** The application. */
-    private final transient JRebirthApplication application;
+    private final transient JRebirthApplication<?> application;
 
     /** The notifier that dispatch waves. */
     private final transient Notifier notifier;
@@ -69,7 +69,7 @@ public class GlobalFacadeBase implements GlobalFacade {
      * 
      * @param application the current application launched
      */
-    public GlobalFacadeBase(final JRebirthApplication application) {
+    public GlobalFacadeBase(final JRebirthApplication<?> application) {
         super();
 
         // Launch the default executor
@@ -110,7 +110,7 @@ public class GlobalFacadeBase implements GlobalFacade {
      * {@inheritDoc}
      */
     @Override
-    public final JRebirthApplication getApplication() {
+    public final JRebirthApplication<?> getApplication() {
         return this.application;
     }
 
