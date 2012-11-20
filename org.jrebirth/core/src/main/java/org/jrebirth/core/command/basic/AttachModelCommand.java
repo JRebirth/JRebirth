@@ -43,7 +43,9 @@ public class AttachModelCommand extends DefaultUICommand {
         // final Pane parentNode = getWaveBean(wave).getParentNode();
         final Node createdNode = getWaveBean(wave).getCreatedNode();
 
-        if (createdNode != null) {
+        if (createdNode == null) {
+            LOGGER.warn("Impossible to attach model {} because the created node is null", getWaveBean(wave).getModelClass().getSimpleName());
+        } else {
             if (getWaveBean(wave).getUniquePlaceHolder() != null) {
                 getWaveBean(wave).getUniquePlaceHolder().set(createdNode);
             } else if (getWaveBean(wave).getChidrenPlaceHolder() != null) {
@@ -54,8 +56,6 @@ public class AttachModelCommand extends DefaultUICommand {
 
             // Try to give focus to the new node added (Could be managed by a boolean ??)
             createdNode.requestFocus();
-        } else {
-            LOGGER.warn("Impossible to attach model {} because the created node is null", getWaveBean(wave).getModelClass().getSimpleName());
         }
     }
 

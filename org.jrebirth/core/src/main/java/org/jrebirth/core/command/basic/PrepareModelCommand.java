@@ -18,6 +18,7 @@
 package org.jrebirth.core.command.basic;
 
 import org.jrebirth.core.command.DefaultPoolCommand;
+import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 
@@ -38,7 +39,7 @@ public class PrepareModelCommand extends DefaultPoolCommand {
         final Class<? extends Model> modelClass = getWaveBean(wave).getModelClass();
 
         if (modelClass == null) {
-            // throw new WaveException("ModelClass is null", wave);
+            throw new CoreRuntimeException("ModelClass is null");
         }
 
         // Build the first root node into the thread pool and link it to the waveBean

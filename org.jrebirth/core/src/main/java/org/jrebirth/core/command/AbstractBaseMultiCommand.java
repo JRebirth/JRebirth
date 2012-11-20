@@ -149,7 +149,10 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
     @Override
     public void waveFailed(final Wave wave) {
         if (this.sequential) {
-            // FIXME
+            synchronized (this) {
+                // A sub command has failed
+                fireFailed(this.waveSource);
+            }
         }
     }
 

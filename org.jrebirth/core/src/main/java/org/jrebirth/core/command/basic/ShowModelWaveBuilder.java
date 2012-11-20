@@ -38,12 +38,11 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
     /** The model class to show. */
     private Class<? extends Model> modelClass;
 
+    /** The unique place holder, in example the centerProperty of a BorderPane. */
     private ObjectProperty<Node> uniquePlaceHolder;
 
+    /** The Children list of a parent pane. */
     private ObservableList<Node> chidrenPlaceHolder;
-
-    /** The parent node. */
-    // private Parent parentNode;
 
     /** The created node. */
     private Node createdNode;
@@ -87,40 +86,27 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
     }
 
     /**
-     * Define the parent node.
+     * Define the unique place holder.
      * 
-     * @param parentNode the node that will hold the model to shown
-     * 
-     * @return the builder
-     */
-    // public ShowModelWaveBuilder parentNode(final Parent parentNode) {
-    // this.parentNode = parentNode;
-    // this.setMask |= 1;
-    // return this;
-    // }
-
-    /**
-     * Define the parent node.
-     * 
-     * @param parentNode the node that will hold the model to shown
+     * @param uniquePlaceHolder the property that handle the view's node
      * 
      * @return the builder
      */
-    public ShowModelWaveBuilder uniquePlaceHolder(final ObjectProperty<Node> node) {
-        this.uniquePlaceHolder = node;
+    public ShowModelWaveBuilder uniquePlaceHolder(final ObjectProperty<Node> uniquePlaceHolder) {
+        this.uniquePlaceHolder = uniquePlaceHolder;
         this.setMask |= 1;
         return this;
     }
 
     /**
-     * Define the parent node.
+     * Define the children list observable list.
      * 
-     * @param parentNode the node that will hold the model to shown
+     * @param chidrenPlaceHolder the children list of the parent pane that will handle the view's node
      * 
      * @return the builder
      */
-    public ShowModelWaveBuilder childrenPlaceHolder(final ObservableList<Node> children) {
-        this.chidrenPlaceHolder = children;
+    public ShowModelWaveBuilder childrenPlaceHolder(final ObservableList<Node> chidrenPlaceHolder) {
+        this.chidrenPlaceHolder = chidrenPlaceHolder;
         this.setMask |= 2;
         return this;
     }
