@@ -31,6 +31,8 @@ import org.jrebirth.core.wave.Wave;
  * The interface <strong>JRebirthApplication</strong>.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <P> the type of the root node of the scene
  */
 public interface JRebirthApplication<P extends Pane> {
 

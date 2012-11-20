@@ -101,27 +101,7 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
 
         // Create the runnable that will be run
         // Add the runnable to the runner queue run it as soon as possible
-        JRebirth.run(getRunInto(), new AbstractJrbRunnable(this.getClass().getSimpleName()) {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-
-                try {
-                    preExecute(wave);
-
-                    execute(wave);
-
-                    postExecute(wave);
-
-                } catch (final CommandException ce) {
-                    LOGGER.error("Command has failed :", ce);
-                    wave.setStatus(Wave.Status.Failed);
-                }
-            }
-        });
+        JRebirth.run(getRunInto(), new CommandRunnable(this.getClass().getSimpleName(), this, wave));
     }
 
     /**
@@ -129,14 +109,14 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
      * 
      * @param wave the wave that triggered this command
      */
-    protected abstract void preExecute(final Wave wave);
+    public abstract void preExecute(final Wave wave);
 
     /**
      * Actions to perform after the command into the executor thread.
      * 
      * @param wave the wave that triggered this command
      */
-    protected abstract void postExecute(final Wave wave);
+    public abstract void postExecute(final Wave wave);
 
     /**
      * @return Returns the runInto.
@@ -178,15 +158,70 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     }
 
     /**
-     * Fire an achieve event for command listeners.
+     * Fire a consumed event for command listeners.
      * 
      * And consume the wave that trigger this command
      * 
      * @param wave forward the wave that has been performed
      */
-    protected void fireAchieve(final Wave wave) {
+    protected void fireConsumed(final Wave wave) {
         LOGGER.trace(this.getClass().getSimpleName() + " consumes  " + wave.toString());
         wave.setStatus(Wave.Status.Consumed);
+    }
+
+    /**
+     * Fire a failed event for command listeners.
+     * 
+     * And mark as failed the wave that trigger this command
+     * 
+     * @param wave forward the wave that has been performed
+     */
+    protected void fireFailed(final Wave wave) {
+        LOGGER.trace(this.getClass().getSimpleName() + " has failed  " + wave.toString());
+        wave.setStatus(Wave.Status.Failed);
+    }
+
+    /**
+     * The class <strong>CommandRunnable</strong>.
+     * 
+     * @author Sébastien Bordes
+     */
+    private static final class CommandRunnable extends AbstractJrbRunnable {
+        /**
+         * The <code>wave</code>.
+         */
+        private final Wave wave;
+
+        /** The command link. */
+        private final AbstractBaseCommand command;
+
+        /**
+         * Default Constructor.
+         * 
+         * @param runnableName the name of the action to perform
+         * @param wave the wave that generates this command call
+         */
+        private CommandRunnable(final String runnableName, final AbstractBaseCommand command, final Wave wave) {
+            super(runnableName);
+            this.command = command;
+            this.wave = wave;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void runInto() throws JRebirthThreadException {
+
+            try {
+                this.command.preExecute(this.wave);
+                this.command.execute(this.wave);
+                this.command.postExecute(this.wave);
+            } catch (final CommandException ce) {
+                LOGGER.error("Command has failed :", ce);
+                this.wave.setStatus(Wave.Status.Failed);
+            }
+        }
     }
 
 }

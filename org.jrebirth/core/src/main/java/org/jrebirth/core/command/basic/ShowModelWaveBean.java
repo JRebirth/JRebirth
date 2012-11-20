@@ -34,12 +34,11 @@ public class ShowModelWaveBean implements WaveBean {
     /** The model class. */
     private Class<? extends Model> modelClass;
 
+    /** The unique place holder, in example the centerProperty of a BorderPane. */
     private ObjectProperty<Node> uniquePlaceHolder;
 
+    /** The Children list of a parent pane. */
     private ObservableList<Node> chidrenPlaceHolder;
-
-    /** The parent node. */
-    // private Parent parentNode;
 
     /** The created node. */
     private Node createdNode;
@@ -61,24 +60,6 @@ public class ShowModelWaveBean implements WaveBean {
     public void setModelClass(final Class<? extends Model> modelClass) {
         this.modelClass = modelClass;
     }
-
-    // /**
-    // * Gets the parent node.
-    // *
-    // * @return the parent node
-    // */
-    // public Parent getParentNode() {
-    // return this.parentNode;
-    // }
-    //
-    // /**
-    // * Sets the parent node.
-    // *
-    // * @param parentNode the new parent node
-    // */
-    // public void setParentNode(final Parent parentNode) {
-    // this.parentNode = parentNode;
-    // }
 
     /**
      * @return Returns the uniquePlaceHolder.
