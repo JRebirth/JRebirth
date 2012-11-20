@@ -109,7 +109,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
      */
     @SuppressWarnings("unchecked")
     private void callCommand(final Wave wave) {
-        final Command command = getGlobalFacade().getCommandFacade().retrieve((Class<? extends Command>) wave.getRelatedClass());
+        final Command command = getGlobalFacade().getCommandFacade().retrieve((Class<? extends Command>) wave.getRelatedClass(), wave.getWUID());
         command.run(wave);
     }
 
