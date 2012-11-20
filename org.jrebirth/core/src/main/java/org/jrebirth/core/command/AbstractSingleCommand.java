@@ -43,7 +43,7 @@ public abstract class AbstractSingleCommand extends AbstractBaseCommand {
      * {@inheritDoc}
      */
     @Override
-    protected void preExecute(final Wave wave) {
+    public void preExecute(final Wave wave) {
         synchronized (this) {
             this.running = true;
         }
@@ -53,11 +53,11 @@ public abstract class AbstractSingleCommand extends AbstractBaseCommand {
      * {@inheritDoc}
      */
     @Override
-    protected void postExecute(final Wave wave) {
+    public void postExecute(final Wave wave) {
         synchronized (this) {
             this.running = false;
         }
-        fireAchieve(wave);
+        fireConsumed(wave);
     }
 
     /**

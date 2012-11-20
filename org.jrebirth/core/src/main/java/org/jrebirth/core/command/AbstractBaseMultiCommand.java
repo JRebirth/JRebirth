@@ -101,14 +101,17 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
                 if (this.commandRunIndex == 0) {
                     this.waveSource = wave;
                 }
-                final Wave subCommandWave = WaveBuilder.create()
-                        .waveGroup(WaveGroup.CALL_COMMAND)
-                        .relatedClass(this.commandList.get(this.commandRunIndex))
-                        .build();
 
-                subCommandWave.linkWaveBean(wave.getWaveBean());
-                subCommandWave.addWaveListener(this);
-                sendWave(subCommandWave);
+                if (this.commandList.size() > this.commandRunIndex) {
+                    final Wave subCommandWave = WaveBuilder.create()
+                            .waveGroup(WaveGroup.CALL_COMMAND)
+                            .relatedClass(this.commandList.get(this.commandRunIndex))
+                            .build();
+
+                    subCommandWave.linkWaveBean(wave.getWaveBean());
+                    subCommandWave.addWaveListener(this);
+                    sendWave(subCommandWave);
+                }
             }
 
         } else {
@@ -137,7 +140,7 @@ public abstract class AbstractBaseMultiCommand extends AbstractBaseCommand imple
                     execute(wave);
                 } else {
                     // No more command to run the MultiCommand is achieved
-                    fireAchieve(this.waveSource);
+                    fireConsumed(this.waveSource);
                 }
             }
         }

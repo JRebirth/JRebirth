@@ -110,18 +110,16 @@ public class DefaultMultiCommand extends AbstractBaseMultiCommand {
      * {@inheritDoc}
      */
     @Override
-    protected void preExecute(final Wave wave) {
+    public void preExecute(final Wave wave) {
         // Nothing to do yet
-
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void postExecute(final Wave wave) {
+    public void postExecute(final Wave wave) {
         // Nothing to do yet
-
     }
 
 }
