@@ -64,7 +64,7 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
      * {@inheritDoc}
      */
     @Override
-    protected void postExecute(final Wave wave) {
+    public void postExecute(final Wave wave) {
         // Nothing
     }
 
@@ -130,7 +130,7 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
         if (this.waveList.size() > this.index) {
             unqueueWaves();
         } else {
-            fireAchieve(this.sourceWave);
+            fireConsumed(this.sourceWave);
         }
     }
 
@@ -139,8 +139,7 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
      */
     @Override
     public void waveFailed(final Wave wave) {
-        // Nothing to do yet
-
+        fireFailed(this.sourceWave);
     }
 
     /**
