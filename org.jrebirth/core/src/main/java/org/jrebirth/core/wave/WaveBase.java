@@ -346,7 +346,7 @@ public class WaveBase implements Wave {
     public void setStatus(final Status status) {
         synchronized (status) {
             this.status = status;
-            JRebirth.runIntoJIT(new AbstractJrbRunnable("Set Wave Status") {
+            JRebirth.runIntoJIT(new AbstractJrbRunnable("Set Wave Status " + status) {
 
                 @Override
                 protected void runInto() throws JRebirthThreadException {

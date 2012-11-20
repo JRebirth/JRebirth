@@ -199,6 +199,7 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
          * Default Constructor.
          * 
          * @param runnableName the name of the action to perform
+         * @param command the command to run
          * @param wave the wave that generates this command call
          */
         private CommandRunnable(final String runnableName, final AbstractBaseCommand command, final Wave wave) {
