@@ -21,6 +21,8 @@ import org.jrebirth.core.command.DefaultPoolCommand;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>PrepareModelCommand</strong>.
@@ -28,6 +30,9 @@ import org.jrebirth.core.wave.Wave;
  * @author Sébastien Bordes
  */
 public class PrepareModelCommand extends DefaultPoolCommand {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(PrepareModelCommand.class);
 
     /**
      * {@inheritDoc}
@@ -39,6 +44,7 @@ public class PrepareModelCommand extends DefaultPoolCommand {
         final Class<? extends Model> modelClass = getWaveBean(wave).getModelClass();
 
         if (modelClass == null) {
+            LOGGER.error("ModelClass is null");
             throw new CoreRuntimeException("ModelClass is null");
         }
 
