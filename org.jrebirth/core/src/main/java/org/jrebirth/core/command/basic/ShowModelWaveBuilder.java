@@ -120,7 +120,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
      */
     public ShowModelWaveBuilder modelClass(final Class<? extends Model> modelClass) {
         this.modelClass = modelClass;
-        this.setMask |= 2;
+        this.setMask |= 4;
         return this;
     }
 
