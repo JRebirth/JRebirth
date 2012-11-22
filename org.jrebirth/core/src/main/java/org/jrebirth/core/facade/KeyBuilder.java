@@ -42,7 +42,7 @@ public final class KeyBuilder {
     public static UniqueKey buildKey(final Class<?> clazz, final Object... keyPart) {
 
         UniqueKey uniqueKey;
-        if (keyPart.length == 0) {
+        if (keyPart == null || keyPart.length == 0) {
             uniqueKey = buildClassKey(clazz);
         } else {
             uniqueKey = buildMultitonKey(clazz, keyPart);

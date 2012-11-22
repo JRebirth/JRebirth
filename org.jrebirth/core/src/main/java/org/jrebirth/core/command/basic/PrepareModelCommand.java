@@ -42,14 +42,22 @@ public class PrepareModelCommand extends DefaultPoolCommand {
 
         // Retrieved the model class
         final Class<? extends Model> modelClass = getWaveBean(wave).getModelClass();
+        final Object[] keyPart = getWaveBean(wave).getKeyPart();
 
         if (modelClass == null) {
             LOGGER.error("ModelClass is null");
             throw new CoreRuntimeException("ModelClass is null");
         }
+        // Retrive the mode according to its keyPart
+        Model modelInstance;
+        if (keyPart == null) {
+            modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelClass);
+        } else {
+            modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelClass, keyPart);
+        }
 
         // Build the first root node into the thread pool and link it to the waveBean
-        getWaveBean(wave).setCreatedNode(getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelClass).getView().getRootNode());
+        getWaveBean(wave).setCreatedNode(modelInstance.getView().getRootNode());
     }
 
     /**
