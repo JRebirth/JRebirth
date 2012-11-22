@@ -44,8 +44,8 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
     /** The Children list of a parent pane. */
     private ObservableList<Node> chidrenPlaceHolder;
 
-    /** The created node. */
-    private Node createdNode;
+    /** The key part. */
+    private Object[] keyPart;
 
     /**
      * Private constructor.
@@ -81,7 +81,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
             getWaveBean(paramWave).setModelClass(this.modelClass);
         }
         if ((i & 0x8) != 0) {
-            getWaveBean(paramWave).setCreatedNode(this.createdNode);
+            getWaveBean(paramWave).setKeyPart(this.keyPart);
         }
     }
 
@@ -125,15 +125,15 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
     }
 
     /**
-     * Define the created node.
+     * Part of unique model key.
      * 
-     * @param createdNode the node created
+     * @param keyPart keyPart for the model class
      * 
      * @return the builder
      */
-    public ShowModelWaveBuilder createdNode(final Node createdNode) {
-        this.createdNode = createdNode;
-        this.setMask |= 4;
+    public ShowModelWaveBuilder keyPart(final Object... keyPart) {
+        this.keyPart = keyPart.clone();
+        this.setMask |= 8;
         return this;
     }
 

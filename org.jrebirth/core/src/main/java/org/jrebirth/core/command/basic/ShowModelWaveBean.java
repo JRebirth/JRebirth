@@ -34,6 +34,9 @@ public class ShowModelWaveBean implements WaveBean {
     /** The model class. */
     private Class<? extends Model> modelClass;
 
+    /** The model key parts. */
+    private Object[] keyPart;
+
     /** The unique place holder, in example the centerProperty of a BorderPane. */
     private ObjectProperty<Node> uniquePlaceHolder;
 
@@ -59,6 +62,20 @@ public class ShowModelWaveBean implements WaveBean {
      */
     public void setModelClass(final Class<? extends Model> modelClass) {
         this.modelClass = modelClass;
+    }
+
+    /**
+     * @return Returns the keyPart.
+     */
+    public Object[] getKeyPart() {
+        return this.keyPart;
+    }
+
+    /**
+     * @param keyPart The keyPart to set.
+     */
+    public void setKeyPart(final Object[] keyPart) {
+        this.keyPart = keyPart;
     }
 
     /**
