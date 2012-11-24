@@ -62,8 +62,10 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     /** The slide number. */
     private int slideNumber;
 
+    /** The animation used to hide the slide. */
     private Animation hideAnimation;
 
+    /** The animation used to show the slide. */
     private Animation showAnimation;
 
     /**
@@ -136,6 +138,11 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         return this.stepPosition;
     }
 
+    /**
+     * Returns true if the slide has at least one step.
+     * 
+     * @return true if the slide step list is not empty
+     */
     public boolean hasStep() {
         return !getStepList().isEmpty();
     }
@@ -153,6 +160,8 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
 
     /**
      * Initialize the SlideStep array.
+     * 
+     * @return the list of slide step for this slide
      */
     protected abstract S[] initializeSlideStep();
 
@@ -189,29 +198,33 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     /**
      * Return the default content or null.
      * 
-     * @return the SlideContent
+     * @return the default SlideContent
      */
     public SlideContent getDefaultContent() {
+        SlideContent res = null;
         if (getSlide().getContent() != null && !getSlide().getContent().isEmpty()) {
-            return getSlide().getContent().get(0);
+            res = getSlide().getContent().get(0);
         }
-        return null;
+        return res;
     }
 
     /**
-     * Return the default content or null.
+     * Return the default content or null for the given step.
+     * 
+     * @param slideStep the step to build
      * 
      * @return the SlideContent
      */
     public SlideContent getContent(final SlideStep slideStep) {
+        SlideContent res = null;
         if (getSlide().getContent() != null && !getSlide().getContent().isEmpty()) {
             for (final SlideContent sc : getSlide().getContent()) {
                 if (sc.getName() != null && !sc.getName().isEmpty() && sc.getName().equals(slideStep.toString())) {
-                    return sc;
+                    res = sc;
                 }
             }
         }
-        return getDefaultContent();
+        return res == null ? getDefaultContent() : res;
     }
 
     /**
@@ -243,10 +256,11 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     }
 
     /**
-     * TODO To complete.
+     * Build an animation.
      * 
-     * @param hideAnimation
-     * @return
+     * @param animationType the type of the animation to build
+     * 
+     * @return the animation
      */
     private Animation buildAnimation(final AnimationType animationType) {
         Animation animation = null;
@@ -317,21 +331,22 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     }
 
     /**
-     * TODO To complete.
+     * Build a sliding animation.
      * 
-     * @return
+     * @return a sliding animation
      */
     private Animation buildSliding() {
-
         return null;
     }
 
     /**
-     * TODO To complete.
+     * Build a scaling animation.
      * 
-     * @param d
-     * @param e
-     * @return
+     * @param from scale ratio used as from value
+     * @param to scale ratio used as to value
+     * @param show if true a fade in transition will be performed, otherwise fade out
+     * 
+     * @return a scale animation
      */
     private Animation buildScaleAnimation(final double from, final double to, final boolean show) {
 
@@ -357,13 +372,20 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     }
 
     /**
-     * TODO To complete.
+     * Build a scaling animation.
      * 
-     * @return
+     * @param fromX the x starting point coordinate
+     * @param toX the x arrival point coordinate
+     * @param fromY the y starting point coordinate
+     * @param toY the y arrival point coordinate
+     * 
+     * @return a translate animation
      */
     protected Animation buildHorizontalAnimation(final double fromX, final double toX, final double fromY, final double toY) {
 
-        final MotionBlur mb = MotionBlurBuilder.create().angle(180).build();
+        final double angle = findAngle(fromX, toX, fromY, toY);
+
+        final MotionBlur mb = MotionBlurBuilder.create().angle(angle).build();
         getRootNode().setEffect(mb);
 
         return ParallelTransitionBuilder.create()
@@ -390,4 +412,27 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
                 .build();
     }
 
+    /**
+     * Return the right angle for the given coordinate.
+     * 
+     * @param fromX the x starting point coordinate
+     * @param toX the x arrival point coordinate
+     * @param fromY the y starting point coordinate
+     * @param toY the y arrival point coordinate
+     * 
+     * @return the right angle
+     */
+    private double findAngle(final double fromX, final double fromY, final double toX, final double toY) {
+        final double yDelta = toY - fromY;
+        final double y = Math.sin(yDelta) * Math.cos(toX);
+        final double x = Math.cos(fromX) * Math.sin(toX) -
+                Math.sin(fromX) * Math.cos(toX) * Math.cos(yDelta);
+        double angle = Math.toDegrees(Math.atan2(y, x));
+
+        // Keep a positive angle
+        while (angle < 0) {
+            angle += 360;
+        }
+        return (float) angle % 360;
+    }
 }

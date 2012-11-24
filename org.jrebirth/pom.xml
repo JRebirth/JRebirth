@@ -95,9 +95,7 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
-<!-- 					<compilerArguments>
-        				<bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</bootclasspath>
-					</compilerArguments> -->
+					<!-- <compilerArguments> <bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</bootclasspath> </compilerArguments> -->
 				</configuration>
 			</plugin>
 
@@ -106,7 +104,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.3.2</version>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -180,6 +178,17 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
 
 	<distributionManagement>
 
