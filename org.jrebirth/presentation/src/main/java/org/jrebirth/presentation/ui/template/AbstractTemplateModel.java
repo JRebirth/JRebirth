@@ -27,6 +27,7 @@ import org.jrebirth.presentation.ui.base.SlideStep;
  * 
  * @param <M> the TemplateModel class
  * @param <V> the TemplateView class
+ * @param <S> the slide step enumeration
  */
 public abstract class AbstractTemplateModel<M extends AbstractTemplateModel<M, V, S>, V extends AbstractTemplateView<?, ?, ?>, S extends SlideStep> extends AbstractSlideModel<M, V, S> {
 
@@ -42,10 +43,10 @@ public abstract class AbstractTemplateModel<M extends AbstractTemplateModel<M, V
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     protected S[] initializeSlideStep() {
-        // Nothing to do yet
-        return null;
+        return (S[]) new SlideStep[0];
     }
 
     /**
