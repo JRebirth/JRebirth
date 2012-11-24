@@ -17,9 +17,7 @@
  */
 package org.jrebirth.presentation.ui.stack;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
@@ -60,7 +58,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
     /** Store a strong reference to the service to avoid reloading. */
     private PresentationService presentationService;
 
-    private final Map<String, Double> animationRate = new HashMap<>();
+    // private final Map<String, Double> animationRate = new HashMap<>();
 
     /**
      * {@inheritDoc}
@@ -105,6 +103,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
      * Display a slide.
      * 
      * @param slide the slide to display
+     * @param isReverse indicate the direction (next or previous slide)
      */
     @SuppressWarnings("unchecked")
     private void displaySlide(final Slide slide, final boolean isReverse) {
@@ -117,9 +116,10 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
 
                 if (this.selectedSlide != null) {
                     final Class<Model> previousClass = (Class<Model>)
-                            (this.selectedSlide.getModelClass() != null ?
-                                    Class.forName(this.selectedSlide.getModelClass()) :
-                                    Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass()));
+                            (this.selectedSlide.getModelClass() == null ?
+                                    Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass()) :
+                                    Class.forName(this.selectedSlide.getModelClass())
+                            );
 
                     previousSlideModel = (SlideModel<SlideStep>) getModel(previousClass, this.selectedSlide);
                 }
@@ -128,9 +128,10 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
                 slide.setPage(this.slidePosition);
 
                 final Class<Model> nextClass = (Class<Model>)
-                        (slide.getModelClass() != null ?
-                                Class.forName(slide.getModelClass()) :
-                                Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass()));
+                        (slide.getModelClass() == null ?
+                                Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass()) :
+                                Class.forName(slide.getModelClass())
+                        );
                 this.selectedSlideModel = (SlideModel<SlideStep>) getModel(nextClass, slide);
 
                 // Add the new slide to the stack
@@ -138,7 +139,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
                     getView().getRootNode().getChildren().add(this.selectedSlideModel.getRootNode());
                 }
 
-                final String animationKey = isReverse ? this.slidePosition + "_" + (this.slidePosition + 1) : this.slidePosition - 1 + "_" + this.slidePosition;
+                // final String animationKey = isReverse ? this.slidePosition + "_" + (this.slidePosition + 1) : this.slidePosition - 1 + "_" + this.slidePosition;
 
                 // Play the animation<
                 final ParallelTransition slideAnimation = getSlideTransition(this.slidePosition, isReverse, previousSlideModel, this.selectedSlideModel);
@@ -166,7 +167,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
     }
 
     /**
-     * TODO To complete.
+     * Get the animation to use between slides.
      * 
      * @param slidePosition2
      * @param isReverse
@@ -216,12 +217,9 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
                             getView().getRootNode().getChildren().remove(node);
                         }
                     }
-
                 }
-
             }
         });
-
         return slideAnimation;
     }
 

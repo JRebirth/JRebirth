@@ -52,11 +52,11 @@ public abstract class AbstractTemplateModel<M extends AbstractTemplateModel<M, V
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void showSlideStep(final S slideStep) {
-        // Nothing to do yet
-
-    }
+    // @Override
+    // public void showSlideStep(final S slideStep) {
+    // // Nothing to do yet
+    //
+    // }
 
     /**
      * {@inheritDoc}

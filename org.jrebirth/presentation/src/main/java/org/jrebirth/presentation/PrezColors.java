@@ -43,7 +43,7 @@ public enum PrezColors implements ColorEnum {
     /** Color for drop shadow, black. */
     DROP_SHADOW(new WebColor("000000", 0.8)),
     /** Color for inner shadow, white. */
-    INNER_SHADOW(new WebColor("FFFFFF", 0.3)),
+    INNER_SHADOW(new WebColor("FFFFFE", 0.3)),
 
     /** Color for first gradient, xxx. */
     GRADIENT_1(new WebColor("1AA2AC", 1.0)),

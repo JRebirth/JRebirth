@@ -119,7 +119,14 @@ public final class SplashView extends AbstractSlideView<SplashModel, BorderPane,
     @Override
     public void doReload() {
         // Nothing to do yet
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doHide() {
+        // Nothing to do yet
     }
 
 }

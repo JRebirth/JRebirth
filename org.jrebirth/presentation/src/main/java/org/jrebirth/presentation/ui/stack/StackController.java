@@ -100,7 +100,6 @@ public final class StackController extends AbstractController<StackModel, StackV
                 keyEvent.consume();
             }
         }
-
     }
 
     /**
@@ -130,13 +129,6 @@ public final class StackController extends AbstractController<StackModel, StackV
             }
         }
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void mouseClicked(final MouseEvent mouseEvent) {
-
-        }
     }
 
     /**
