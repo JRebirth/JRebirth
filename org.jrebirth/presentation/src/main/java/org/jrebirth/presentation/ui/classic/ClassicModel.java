@@ -24,7 +24,6 @@ import org.jrebirth.presentation.ui.template.AbstractTemplateModel;
  * The class <strong>ClassicModel</strong>.
  * 
  * @author Sébastien Bordes
- * 
  */
 public final class ClassicModel extends AbstractTemplateModel<ClassicModel, ClassicView, SlideStep> {
 
@@ -41,7 +40,7 @@ public final class ClassicModel extends AbstractTemplateModel<ClassicModel, Clas
      */
     @Override
     public void showSlideStep(final SlideStep slideStep) {
-
+        // No programmatic sub slide
     }
 
 }

@@ -57,16 +57,16 @@ public interface SlideModel<S extends SlideStep> extends Model {
     boolean previousStep();
 
     /**
-     * TODO To complete.
+     * Get the hide animation.
      * 
-     * @return
+     * @return the hide animation
      */
     Animation getHideAnimation();
 
     /**
-     * TODO To complete.
+     * Get the show animation.
      * 
-     * @return
+     * @return the show animation
      */
     Animation getShowAnimation();
 }

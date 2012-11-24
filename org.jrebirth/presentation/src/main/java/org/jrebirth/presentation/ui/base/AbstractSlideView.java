@@ -23,7 +23,6 @@ import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.AbstractView;
 
 /**
- * 
  * The class <strong>AbstractSlideView</strong>.
  * 
  * @author Sébastien Bordes
@@ -52,19 +51,18 @@ public abstract class AbstractSlideView<M extends AbstractSlideModel<?, ?, ?>, N
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void doHide() {
-        // Nothing to do yet
-    }
-
+    // @Override
+    // public void doHide() {
+    // // Nothing to do yet
+    // }
     /**
      * {@inheritDoc}
      */
-    @Override
-    protected void customInitializeComponents() {
-        // Nothing to do yet
-
-    }
+    // @Override
+    // protected void customInitializeComponents() {
+    // // Nothing to do yet
+    //
+    // }
 
     /**
      * @return Returns the slideLocked.

@@ -56,7 +56,7 @@ public final class ImageSlideView extends
     /** The fade transition. */
     private Animation fadeTransition;
 
-    /** The image to display */
+    /** The image to display. */
     private Image image;
 
     /** The number of tiles per row and column. */
@@ -90,6 +90,11 @@ public final class ImageSlideView extends
 
     }
 
+    /**
+     * Return the image node.
+     * 
+     * @return the image node
+     */
     Image getImage() {
         return this.image;
     }
@@ -189,6 +194,11 @@ public final class ImageSlideView extends
         return this.tileTransition;
     }
 
+    /**
+     * Get a random duration from the range [300-1200].
+     * 
+     * @return a duration object
+     */
     private Duration getRandomDuration() {
         return Duration.millis(new Random().nextLong() % 900 + 300);
     }
@@ -199,7 +209,14 @@ public final class ImageSlideView extends
     @Override
     public void doReload() {
         // Nothing to do yet
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doHide() {
+        // Nothing to do yet
     }
 
 }

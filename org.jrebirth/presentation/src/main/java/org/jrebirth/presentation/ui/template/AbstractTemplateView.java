@@ -102,20 +102,22 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     /** The pane that hold the content. */
     private StackPane slideContent;
 
-    /** The list of nodes taht reprensent each subslide. */
+    /** The list of nodes that represent each sub slide. */
     private final List<Node> subSlides = new ArrayList<>();
 
     /** The current subslide node displayed. */
     private Node currentSubSlide;
 
     /** A lock managed by subslide. */
-    private final boolean subSlideLock = false;
+    // private final boolean subSlideLock = false;
 
-    /** The transitionn used between subslides. */
-    private ParallelTransition subSlideTransition;
+    /** The transition used between subslides. */
+    // private ParallelTransition subSlideTransition;
 
+    /** The circle shape used in the top left corner. */
     private Circle circle;
 
+    /** The rectangle shape used to underline the slide title. */
     private Rectangle rectangle;
 
     /**
@@ -222,7 +224,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      */
     @Override
     public void doStart() {
-
+        // Nothing to do
     }
 
     /**
@@ -230,23 +232,6 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      */
     @Override
     public void doReload() {
-
-        // MUST be refactored with property binding
-
-        // this.pageLabel.setText(String.valueOf(getModel().getSlideNumber()));
-
-        // FadeTransitionBuilder.create()
-        // .node(getRootNode().getTop())
-        // .duration(Duration.millis(600))
-        // .fromValue(0).toValue(0.7)
-        // .build().play();
-
-        // FadeTransitionBuilder.create()
-        // .node(getRootNode().getCenter())
-        // .duration(Duration.millis(600))
-        // .fromValue(0)
-        // .toValue(0.4)
-        // .build().play();
 
         ParallelTransitionBuilder.create().children(
 
@@ -267,7 +252,6 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                                 new KeyFrame(Duration.millis(600), new KeyValue(this.rectangle.widthProperty(), 90))
                         )
                         .build(),
-                // ).build()
                 ParallelTransitionBuilder
                         .create().delay(Duration.millis(400))
                         .children(
@@ -397,9 +381,9 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     }
 
     /**
-     * TODO To complete.
+     * Bind node's scale properties to stage size.
      * 
-     * @param text
+     * @param node the bound node
      */
     protected void bindNode(final Node node) {
         node.scaleXProperty().bind(bindWidth());
@@ -407,18 +391,18 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     }
 
     /**
-     * TODO To complete.
+     * Returns the height ratio.
      * 
-     * @return
+     * @return the height ratio
      */
     protected NumberBinding bindHeight() {
         return Bindings.divide(getModel().getLocalFacade().getGlobalFacade().getApplication().getStage().heightProperty(), 768);
     }
 
     /**
-     * TODO To complete.
+     * Returns the width ratio.
      * 
-     * @return
+     * @return the width ratio
      */
     protected NumberBinding bindWidth() {
         return Bindings.divide(getModel().getLocalFacade().getGlobalFacade().getApplication().getStage().widthProperty(), 1024);
@@ -463,27 +447,31 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     /**
      * Build the default content slide.
      * 
+     * @param slideContent the content of the slide to build
+     * 
      * @return the vbox with default content items
      */
     protected VBox buildDefaultContent(final SlideContent slideContent) {
 
-        if (slideContent.getTitle() != null) {
-            this.secondaryTitle.setText(slideContent.getTitle());
-        }
-
         final VBox vbox = new VBox();
         // vbox.getStyleClass().add("content");
 
+        // Link the class style of this slide content
         if (getModel().getSlide().getStyle() != null) {
             vbox.getStyleClass().add(getModel().getSlide().getStyle());
         }
 
         if (slideContent != null) {
+            // Add all slide item into the vbox panel
             for (final SlideItem item : slideContent.getItem()) {
                 addSlideItem(vbox, item);
             }
-        }
 
+            // Manage the secondary title if any
+            if (slideContent.getTitle() != null) {
+                this.secondaryTitle.setText(slideContent.getTitle());
+            }
+        }
         return vbox;
     }
 
@@ -560,7 +548,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     }
 
     /**
-     * Show the slide step store which match with xml file.
+     * Show the slide step store which match with XML file.
      * 
      * @param slideStep the slide step to show
      */
@@ -571,37 +559,42 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         }
         final Node nextSlide = this.subSlides.get(getModel().getStepPosition());
 
-        if (this.currentSubSlide != null && nextSlide != null) {
-            performStepAnimation(nextSlide);
-        } else {
+        if (this.currentSubSlide == null || nextSlide == null) {
             // No Animation
             this.currentSubSlide = nextSlide;
+        } else {
+            performStepAnimation(nextSlide);
         }
 
     }
 
+    /**
+     * Show a programmatic built node as a sub slide.
+     * 
+     * @param node the node built programatically
+     */
     protected void showCustomSlideStep(final Node node) {
 
         addSubSlide(node);
         final Node nextSlide = this.subSlides.get(getModel().getStepPosition());
-        if (this.currentSubSlide != null && nextSlide != null) {
 
-            performStepAnimation(nextSlide);
-        } else {
+        if (this.currentSubSlide == null || nextSlide == null) {
             // No Animation
             this.currentSubSlide = nextSlide;
+        } else {
+            performStepAnimation(nextSlide);
         }
     }
 
     /**
-     * TODO To complete.
+     * Create an Luacnhe the animation between two sub slides.
      * 
-     * @param nextSlide
+     * @param nextSlide the next subSlide to show
      */
     private void performStepAnimation(final Node nextSlide) {
 
         setSlideLocked(true);
-        this.subSlideTransition = ParallelTransitionBuilder.create()
+        final ParallelTransition subSlideTransition = ParallelTransitionBuilder.create()
 
                 .onFinished(new EventHandler<ActionEvent>() {
 
@@ -650,7 +643,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                                 .build()
                 )
                 .build();
-        this.subSlideTransition.play();
+        subSlideTransition.play();
 
     }
 

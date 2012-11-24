@@ -46,7 +46,7 @@ public final class PresentationService extends ServiceBase {
     private static final Logger LOGGER = LoggerFactory.getLogger(PresentationService.class);
 
     /** The XML file location. */
-    public static final String CONFIG_NAME = "presentation/Presentation";
+    private static final String CONFIG_NAME = "presentation/Presentation";
 
     /** The root configuration object. */
     private Presentation presentation;
