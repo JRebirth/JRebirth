@@ -34,6 +34,7 @@ import javafx.util.Duration;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.ServiceBase;
 
+// TODO: Auto-generated Javadoc
 /**
  * The class <strong>ImageSlicerService</strong>.
  * 
@@ -41,20 +42,37 @@ import org.jrebirth.core.service.ServiceBase;
  */
 public class SlidingDoorService extends ServiceBase {
 
+    /**
+     * The Enum SLIDING_TYPE.
+     */
     private enum SLIDING_TYPE {
+
+        /** The U p_ down. */
         UP_DOWN,
+
+        /** The DOW n_ up. */
         DOWN_UP,
+
+        /** The FRO m_ left. */
         FROM_LEFT,
+
+        /** The FRO m_ right. */
         FROM_RIGHT,
+
+        /** The T o_ center. */
         TO_CENTER
 
     }
 
+    /** The nodes. */
     private final ObservableList<Node> nodes = FXCollections.observableArrayList();
 
+    /** The full transition. */
     private Transition fullTransition;
 
     /**
+     * Gets the full transition.
+     * 
      * @return Returns the fullTransition.
      */
     public Transition getFullTransition() {
@@ -66,13 +84,13 @@ public class SlidingDoorService extends ServiceBase {
      */
     @Override
     public void ready() throws CoreException {
-
+        // Nothing to do yet
     }
 
     /**
      * TODO To complete.
      * 
-     * @param slices
+     * @param nodesToAdd the new nodes
      */
     public void setNodes(final List<? extends Node> nodesToAdd) {
         for (final Node n : nodesToAdd) {
@@ -80,6 +98,9 @@ public class SlidingDoorService extends ServiceBase {
         }
     }
 
+    /**
+     * Do it.
+     */
     public void doIt() {
 
         // timeline.
@@ -110,7 +131,7 @@ public class SlidingDoorService extends ServiceBase {
 
         this.fullTransition = ParallelTransitionBuilder.create().autoReverse(true).cycleCount(2).build();
 
-        int i = 0;
+        // int i = 0;
         // Collections.shuffle(nodes);
         for (final Node node : this.nodes) {
             node.setCache(true);
@@ -118,11 +139,16 @@ public class SlidingDoorService extends ServiceBase {
 
             ((ParallelTransition) this.fullTransition).getChildren().add(
                     TranslateTransitionBuilder.create().delay(getRandomDuration()).node(node).toY(1000).duration(Duration.millis(500)).interpolator(Interpolator.EASE_IN).build());
-            i++;
+            // i++;
         }
 
     }
 
+    /**
+     * Gets the random duration.
+     * 
+     * @return the random duration
+     */
     private Duration getRandomDuration() {
         return Duration.millis(new Random().nextLong() % 3000 + 200);
     }

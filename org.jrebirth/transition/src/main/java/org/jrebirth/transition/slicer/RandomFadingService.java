@@ -44,11 +44,15 @@ import org.jrebirth.core.service.ServiceBase;
  */
 public class RandomFadingService extends ServiceBase {
 
+    /** The nodes. */
     private final ObservableList<Node> nodes = FXCollections.observableArrayList();
 
+    /** The timeline. */
     private Timeline timeline;
 
     /**
+     * Gets the timeline.
+     * 
      * @return Returns the timeline.
      */
     public Timeline getTimeline() {
@@ -64,9 +68,9 @@ public class RandomFadingService extends ServiceBase {
     }
 
     /**
-     * TODO To complete.
+     * Set the nodes.
      * 
-     * @param slices
+     * @param nodesToAdd the new nodes
      */
     public void setNodes(final List<? extends Node> nodesToAdd) {
         for (final Node n : nodesToAdd) {
@@ -74,6 +78,9 @@ public class RandomFadingService extends ServiceBase {
         }
     }
 
+    /**
+     * Do it.
+     */
     public void doIt() {
 
         Collections.shuffle(this.nodes);
@@ -86,8 +93,7 @@ public class RandomFadingService extends ServiceBase {
         final int nodesCount = this.nodes.size();
         final int groupCount = nodesCount / 2;
 
-        for (int i = 0; i < groupCount; i++)
-        {
+        for (int i = 0; i < groupCount; i++) {
             // dp = new SimpleDoubleProperty(1.0);
             for (int j = idx; j < 20 && j < this.nodes.size(); j++) {
                 // nodes.get(j).opacityProperty().bind(dp);
@@ -101,10 +107,10 @@ public class RandomFadingService extends ServiceBase {
 
         final List<KeyFrame> keyFrames = new ArrayList<>();
 
-        List<KeyValue> keyValues;
+        // List<KeyValue> keyValues;
 
         long d = 100;
-        keyValues = new ArrayList<>();
+        // keyValues = new ArrayList<>();
         for (int i = 0; i < opacities.size(); i++) {
 
             keyFrames.add(new KeyFrame(Duration.millis(d), new EventHandler<ActionEvent>() {
@@ -126,6 +132,11 @@ public class RandomFadingService extends ServiceBase {
 
     }
 
+    /**
+     * Gets the random duration.
+     * 
+     * @return the random duration
+     */
     private Duration getRandomDuration() {
         return Duration.millis(new Random().nextLong() % 1800 + 600);
     }
