@@ -32,7 +32,6 @@ import javafx.scene.shape.RectangleBuilder;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.ServiceBase;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class <strong>ImageSlicerService</strong>.
  * 
