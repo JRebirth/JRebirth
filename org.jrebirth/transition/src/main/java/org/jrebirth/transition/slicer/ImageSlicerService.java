@@ -32,6 +32,7 @@ import javafx.scene.shape.RectangleBuilder;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.ServiceBase;
 
+// TODO: Auto-generated Javadoc
 /**
  * The class <strong>ImageSlicerService</strong>.
  * 
@@ -39,81 +40,164 @@ import org.jrebirth.core.service.ServiceBase;
  */
 public class ImageSlicerService extends ServiceBase {
 
+    /** The column property. */
     private final IntegerProperty columnProperty = new SimpleIntegerProperty();
 
+    /** The row property. */
     private final IntegerProperty rowProperty = new SimpleIntegerProperty();
 
+    /** The tile width property. */
     private final IntegerProperty tileWidthProperty = new SimpleIntegerProperty();
 
+    /** The tile height property. */
     private final IntegerProperty tileHeightProperty = new SimpleIntegerProperty();
 
+    /** The image property. */
     private final ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
 
+    /** The slices. */
     private final List<ImageView> slices = new ArrayList<>();
 
     /**
+     * Gets the slices.
+     * 
      * @return Returns the slices.
      */
     public List<ImageView> getSlices() {
         return this.slices;
     }
 
+    /**
+     * Sets the column.
+     * 
+     * @param column the new column
+     */
     public void setColumn(final Integer column) {
         this.columnProperty.set(column);
     }
 
+    /**
+     * Gets the column.
+     * 
+     * @return the column
+     */
     public Integer getColumn() {
         return this.columnProperty.get();
     }
 
+    /**
+     * Column property.
+     * 
+     * @return the integer property
+     */
     public IntegerProperty columnProperty() {
         return this.columnProperty;
     }
 
+    /**
+     * Sets the row.
+     * 
+     * @param row the new row
+     */
     public void setRow(final Integer row) {
         this.rowProperty.set(row);
     }
 
+    /**
+     * Gets the row.
+     * 
+     * @return the row
+     */
     public Integer getRow() {
         return this.rowProperty.get();
     }
 
+    /**
+     * Row property.
+     * 
+     * @return the integer property
+     */
     public IntegerProperty rowProperty() {
         return this.rowProperty;
     }
 
+    /**
+     * Sets the tile width.
+     * 
+     * @param tileWidth the new tile width
+     */
     public void setTileWidth(final Integer tileWidth) {
         this.tileWidthProperty.set(tileWidth);
     }
 
+    /**
+     * Gets the tile width.
+     * 
+     * @return the tile width
+     */
     public Integer getTileWidth() {
         return this.tileWidthProperty.get();
     }
 
+    /**
+     * Tile width property.
+     * 
+     * @return the integer property
+     */
     public IntegerProperty tileWidthProperty() {
         return this.tileWidthProperty;
     }
 
+    /**
+     * Sets the tile height.
+     * 
+     * @param tileHeight the new tile height
+     */
     public void setTileHeight(final Integer tileHeight) {
         this.tileHeightProperty.set(tileHeight);
     }
 
+    /**
+     * Gets the tile height.
+     * 
+     * @return the tile height
+     */
     public Integer getTileHeight() {
         return this.tileHeightProperty.get();
     }
 
+    /**
+     * Tile height property.
+     * 
+     * @return the integer property
+     */
     public IntegerProperty tileHeightProperty() {
         return this.tileHeightProperty;
     }
 
+    /**
+     * Sets the image.
+     * 
+     * @param image the new image
+     */
     public void setImage(final Image image) {
         this.imageProperty.set(image);
     }
 
+    /**
+     * Gets the image.
+     * 
+     * @return the image
+     */
     public Image getImage() {
         return this.imageProperty.get();
     }
 
+    /**
+     * Image property.
+     * 
+     * @return the object property
+     */
     public ObjectProperty<Image> imageProperty() {
         return this.imageProperty;
     }
@@ -126,6 +210,9 @@ public class ImageSlicerService extends ServiceBase {
 
     }
 
+    /**
+     * Do it.
+     */
     public void doIt() {
 
         final double width = getImage().getWidth();
@@ -169,9 +256,6 @@ public class ImageSlicerService extends ServiceBase {
                 // .build()).build());
                 //
             }
-
         }
-
     }
-
 }
