@@ -59,4 +59,12 @@ public final class ClassicView extends AbstractTemplateView<ClassicModel, Anchor
         // Nothing to do yet
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doStart() {
+        // Nothing to do yet
+    }
+
 }

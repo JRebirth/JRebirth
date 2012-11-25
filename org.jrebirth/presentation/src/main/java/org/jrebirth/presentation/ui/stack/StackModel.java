@@ -116,9 +116,9 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
 
                 if (this.selectedSlide != null) {
                     final Class<Model> previousClass = (Class<Model>)
-                            (this.selectedSlide.getModelClass() == null ?
-                                    Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass()) :
-                                    Class.forName(this.selectedSlide.getModelClass())
+                            (this.selectedSlide.getModelClass() == null
+                                    ? Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass())
+                                    : Class.forName(this.selectedSlide.getModelClass())
                             );
 
                     previousSlideModel = (SlideModel<SlideStep>) getModel(previousClass, this.selectedSlide);
@@ -128,9 +128,9 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
                 slide.setPage(this.slidePosition);
 
                 final Class<Model> nextClass = (Class<Model>)
-                        (slide.getModelClass() == null ?
-                                Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass()) :
-                                Class.forName(slide.getModelClass())
+                        (slide.getModelClass() == null
+                                ? Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass())
+                                : Class.forName(slide.getModelClass())
                         );
                 this.selectedSlideModel = (SlideModel<SlideStep>) getModel(nextClass, slide);
 
@@ -142,7 +142,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
                 // final String animationKey = isReverse ? this.slidePosition + "_" + (this.slidePosition + 1) : this.slidePosition - 1 + "_" + this.slidePosition;
 
                 // Play the animation<
-                final ParallelTransition slideAnimation = getSlideTransition(this.slidePosition, isReverse, previousSlideModel, this.selectedSlideModel);
+                final ParallelTransition slideAnimation = getSlideTransition(isReverse, previousSlideModel, this.selectedSlideModel);
 
                 if (isReverse) {
 
@@ -169,11 +169,13 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
     /**
      * Get the animation to use between slides.
      * 
-     * @param slidePosition2
-     * @param isReverse
-     * @return
+     * @param isReverse true for reverse mode
+     * @param previousSlideModel the previous slide model
+     * @param selectedSlideModel the current slide model
+     * 
+     * @return the animation to show
      */
-    private ParallelTransition getSlideTransition(final int slidePosition2, final boolean isReverse, final SlideModel<SlideStep> previousSlideModel, final SlideModel<SlideStep> selectedSlideModel) {
+    private ParallelTransition getSlideTransition(final boolean isReverse, final SlideModel<SlideStep> previousSlideModel, final SlideModel<SlideStep> selectedSlideModel) {
         final ParallelTransition slideAnimation = ParallelTransitionBuilder.create().build();
 
         if (previousSlideModel != null) {
@@ -241,11 +243,13 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
      * Got to next slide.
      */
     public void next() {
-        // Try to display the next slide step first
-        // If no slide step is remaining, display the next slide
-        if (this.selectedSlideModel.nextStep() && this.slidePosition < getPresentationService().getPresentation().getSlides().getSlide().size() - 1) {
-            this.slidePosition = Math.min(this.slidePosition + 1, getPresentationService().getPresentation().getSlides().getSlide().size() - 1);
-            displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition), false);
+        synchronized (this) {
+            // Try to display the next slide step first
+            // If no slide step is remaining, display the next slide
+            if (this.selectedSlideModel.nextStep() && this.slidePosition < getPresentationService().getPresentation().getSlides().getSlide().size() - 1) {
+                this.slidePosition = Math.min(this.slidePosition + 1, getPresentationService().getPresentation().getSlides().getSlide().size() - 1);
+                displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition), false);
+            }
         }
     }
 
@@ -253,11 +257,13 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
      * Go to previous slide.
      */
     public void previous() {
-        // Try to display the previous slide step first
-        // If no slide step is remaining, display the previous slide
-        if (this.selectedSlideModel.previousStep() && this.slidePosition > 0) {
-            this.slidePosition = Math.max(this.slidePosition - 1, 0);
-            displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition), true);
+        synchronized (this) {
+            // Try to display the previous slide step first
+            // If no slide step is remaining, display the previous slide
+            if (this.selectedSlideModel.previousStep() && this.slidePosition > 0) {
+                this.slidePosition = Math.max(this.slidePosition - 1, 0);
+                displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition), true);
+            }
         }
     }
 

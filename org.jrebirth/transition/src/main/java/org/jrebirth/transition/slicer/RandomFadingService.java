@@ -20,19 +20,14 @@ package org.jrebirth.transition.slicer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.animation.TimelineBuilder;
 import javafx.beans.property.DoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.util.Duration;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.ServiceBase;
@@ -64,7 +59,7 @@ public class RandomFadingService extends ServiceBase {
      */
     @Override
     public void ready() throws CoreException {
-
+        // Nothing to do
     }
 
     /**
@@ -113,14 +108,14 @@ public class RandomFadingService extends ServiceBase {
         // keyValues = new ArrayList<>();
         for (int i = 0; i < opacities.size(); i++) {
 
-            keyFrames.add(new KeyFrame(Duration.millis(d), new EventHandler<ActionEvent>() {
-
-                @Override
-                public void handle(final ActionEvent arg0) {
-                    System.out.println(arg0.toString());
-
-                }
-            }, new KeyValue(opacities.get(i), 1.0/* , Interpolator.EASE_IN */)));
+            // keyFrames.add(new KeyFrame(Duration.millis(d), new EventHandler<ActionEvent>() {
+            //
+            // @Override
+            // public void handle(final ActionEvent arg0) {
+            // // System.out.println(arg0.toString());
+            // // nothing to do
+            // }
+            // }, new KeyValue(opacities.get(i), 1.0/* , Interpolator.EASE_IN */)));
 
             d += 1000;
             // }
@@ -137,8 +132,8 @@ public class RandomFadingService extends ServiceBase {
      * 
      * @return the random duration
      */
-    private Duration getRandomDuration() {
-        return Duration.millis(new Random().nextLong() % 1800 + 600);
-    }
+    // private Duration getRandomDuration() {
+    // return Duration.millis(new Random().nextLong() % 1800 + 600);
+    // }
 
 }

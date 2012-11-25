@@ -206,7 +206,7 @@ public class ImageSlicerService extends ServiceBase {
      */
     @Override
     public void ready() throws CoreException {
-
+        // Nothing to do
     }
 
     /**
