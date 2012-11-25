@@ -48,9 +48,11 @@ public class AttachModelCommand extends DefaultUICommand {
         } else {
             if (getWaveBean(wave).getUniquePlaceHolder() != null) {
                 getWaveBean(wave).getUniquePlaceHolder().set(createdNode);
-            } else if (getWaveBean(wave).getChidrenPlaceHolder() != null) {
+            }
+            if (getWaveBean(wave).getChidrenPlaceHolder() != null) {
                 getWaveBean(wave).getChidrenPlaceHolder().add(createdNode);
-            } else {
+            }
+            if (getWaveBean(wave).getUniquePlaceHolder() == null && getWaveBean(wave).getChidrenPlaceHolder() == null) {
                 LOGGER.warn("Impossible to attach model {}, no place holder found", getWaveBean(wave).getModelClass().getSimpleName());
             }
 

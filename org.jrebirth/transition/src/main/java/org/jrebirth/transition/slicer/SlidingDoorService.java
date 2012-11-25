@@ -42,6 +42,11 @@ import org.jrebirth.core.service.ServiceBase;
 public class SlidingDoorService extends ServiceBase {
 
     /**
+     * The <code>RANDOM</code> field is used to build a random integer.
+     */
+    private static final Random RANDOM = new Random();
+
+    /**
      * The Enum SLIDING_TYPE.
      */
     private enum SLIDING_TYPE {
@@ -149,7 +154,7 @@ public class SlidingDoorService extends ServiceBase {
      * @return the random duration
      */
     private Duration getRandomDuration() {
-        return Duration.millis(new Random().nextLong() % 3000 + 200);
+        return Duration.millis(RANDOM.nextLong() % 3000 + 200);
     }
 
 }

@@ -62,6 +62,11 @@ public final class ImageSlideModel extends AbstractSlideModel<ImageSlideModel, I
         return getSlide().getStyle();
     }
 
+    /**
+     * Return the image.
+     * 
+     * @return the image path name
+     */
     public String getImage() {
         return getSlide().getContent().get(0).getItem().get(0).getImage();
     }

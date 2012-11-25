@@ -223,14 +223,6 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * {@inheritDoc}
      */
     @Override
-    public void doStart() {
-        // Nothing to do
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void doReload() {
 
         ParallelTransitionBuilder.create().children(

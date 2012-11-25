@@ -50,6 +50,11 @@ import org.jrebirth.presentation.ui.base.AbstractSlideView;
 public final class ImageSlideView extends
         AbstractSlideView<ImageSlideModel, StackPane, ImageSlideController> {
 
+    /**
+     * The <code>RANDOM</code> field is used to build a random integer.
+     */
+    private static final Random RANDOM = new Random();
+
     /** The tile transition. */
     private Animation tileTransition;
 
@@ -117,9 +122,7 @@ public final class ImageSlideView extends
             }
             this.tilePerRow = 50;
             getTileTransition().play();
-        }
-
-        else {
+        } else {
             getRootNode().setOpacity(0);
             getFadeTransition().play();
         }
@@ -200,7 +203,7 @@ public final class ImageSlideView extends
      * @return a duration object
      */
     private Duration getRandomDuration() {
-        return Duration.millis(new Random().nextLong() % 900 + 300);
+        return Duration.millis(RANDOM.nextLong() % 900 + 300);
     }
 
     /**

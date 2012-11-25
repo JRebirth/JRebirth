@@ -28,6 +28,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.ParallelTransitionBuilder;
 import javafx.animation.ScaleTransitionBuilder;
 import javafx.animation.TimelineBuilder;
+import javafx.animation.TranslateTransition;
 import javafx.animation.TranslateTransitionBuilder;
 import javafx.scene.effect.MotionBlur;
 import javafx.scene.effect.MotionBlurBuilder;
@@ -336,7 +337,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      * @return a sliding animation
      */
     private Animation buildSliding() {
-        return null;
+        return new TranslateTransition();
     }
 
     /**
@@ -425,8 +426,8 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     private double findAngle(final double fromX, final double fromY, final double toX, final double toY) {
         final double yDelta = toY - fromY;
         final double y = Math.sin(yDelta) * Math.cos(toX);
-        final double x = Math.cos(fromX) * Math.sin(toX) -
-                Math.sin(fromX) * Math.cos(toX) * Math.cos(yDelta);
+        final double x = Math.cos(fromX) * Math.sin(toX)
+                - Math.sin(fromX) * Math.cos(toX) * Math.cos(yDelta);
         double angle = Math.toDegrees(Math.atan2(y, x));
 
         // Keep a positive angle
