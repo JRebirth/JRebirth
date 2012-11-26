@@ -87,8 +87,6 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
 
     /**
      * TODO To complete.
-     * 
-     * @param i
      */
     public void hide() {
         getView().doHide();
