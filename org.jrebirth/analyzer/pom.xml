@@ -95,7 +95,7 @@
 
 				<executions>
 					<execution>
-						<phase>site-deploy</phase><!-- package -->
+						<phase>package</phase>
 						<goals>
 							<goal>jnlp</goal> <!-- use jnlp, jnlp-inline or jnlp-single as appropriate -->
 						</goals>
