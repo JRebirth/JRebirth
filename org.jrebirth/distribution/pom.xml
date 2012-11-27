@@ -3,12 +3,12 @@
 	<parent>
 		<artifactId>jrebirth</artifactId>
 		<groupId>org</groupId>
-		<version>0.7.0</version>
+		<version>0.7.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
 	<groupId>org.jrebirth</groupId>
 	<artifactId>distribution</artifactId>
-	<version>0.7.0</version>
+	<version>0.7.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Distribution Module</name>
@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.0</version>
+			<version>0.7.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>analyzer</artifactId>
-			<version>0.7.0</version>
+			<version>0.7.1-SNAPSHOT</version>
 			<type>pom</type>
 			<scope>compile</scope>
 		</dependency>

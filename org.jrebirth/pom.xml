@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org</groupId>
 	<artifactId>jrebirth</artifactId>
-	<version>0.7.0</version>
+	<version>0.7.1-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 	<name>JRebirth Parent Project</name>
@@ -51,7 +51,7 @@
 		<connection>scm:git:git://github.com/JRebirth/JRebirth.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth.git</developerConnection>
 		<url>https://github.com/JRebirth/JRebirth</url>
-	  <tag>jrebirth-0.7.0</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<organization>
