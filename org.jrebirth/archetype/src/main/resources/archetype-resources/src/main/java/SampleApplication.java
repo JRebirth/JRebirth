@@ -102,7 +102,4 @@ public final class SampleApplication extends AbstractApplication<StackPane> {
         return Collections.emptyList();
     }
     
-    
-    
-
 }

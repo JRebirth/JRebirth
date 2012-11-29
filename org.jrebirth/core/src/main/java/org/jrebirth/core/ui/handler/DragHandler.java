@@ -17,18 +17,17 @@
  */
 package org.jrebirth.core.ui.handler;
 
-import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.input.DragEvent;
 
 import org.jrebirth.core.ui.adapter.DragAdapter;
 
 /**
- * The interface <strong>MouseHandler</strong>.
+ * The interface <strong>DragHandler</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class DragHandler implements EventHandler<DragEvent> {
+public final class DragHandler extends AbstractNamedEventHandler<DragEvent> {
 
     /** The Drag adapter. */
     private final DragAdapter dragAdapter;
@@ -39,6 +38,7 @@ public final class DragHandler implements EventHandler<DragEvent> {
      * @param dragAdapter the adapter to use
      */
     public DragHandler(final DragAdapter dragAdapter) {
+        super(DragHandler.class.getSimpleName());
         this.dragAdapter = dragAdapter;
     }
 

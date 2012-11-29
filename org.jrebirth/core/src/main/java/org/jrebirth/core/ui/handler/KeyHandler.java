@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.ui.handler;
 
-import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.input.KeyEvent;
 
@@ -28,7 +27,7 @@ import org.jrebirth.core.ui.adapter.KeyAdapter;
  * 
  * @author Sébastien Bordes
  */
-public final class KeyHandler implements EventHandler<KeyEvent> {
+public final class KeyHandler extends AbstractNamedEventHandler<KeyEvent> {
 
     /** The Key adapter. */
     private final KeyAdapter<?> keyAdapter;
@@ -39,6 +38,7 @@ public final class KeyHandler implements EventHandler<KeyEvent> {
      * @param keyAdapter the adapter to use
      */
     public KeyHandler(final KeyAdapter<?> keyAdapter) {
+        super(KeyHandler.class.getSimpleName());
         this.keyAdapter = keyAdapter;
     }
 
