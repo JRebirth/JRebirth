@@ -18,13 +18,13 @@
 package org.jrebirth.core.ui;
 
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.util.Callback;
 
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.Service;
+import org.jrebirth.core.ui.handler.AbstractNamedEventHandler;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveTypeBase;
 
@@ -54,6 +54,8 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
     /**
      * Link the creation of a wave to an event triggered on a node.
      * 
+     * This method doesn't use any callback function to trigger the launch the wave.
+     * 
      * @param node the node to follow
      * @param eventType the type of the event to follow
      * @param waveType the type of the wave to create
@@ -81,7 +83,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
     protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveTypeBase waveType, final Callback<E, Boolean> callback,
             final WaveData<?>... waveData) {
 
-        node.addEventHandler(eventType, new EventHandler<E>() {
+        node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkWave") {
 
             /**
              * Handle the triggered event.
@@ -97,6 +99,8 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
     /**
      * Link a command to an event triggered on a node.
+     * 
+     * This method doesn't use any callback function to trigger the command.
      * 
      * @param node the node to follow
      * @param eventType the type of the event to follow
@@ -125,7 +129,8 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
     protected <E extends Event> void linkCommand(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Command> commandClass, final Callback<E, Boolean> callback,
             final WaveData<?>... waveData) {
 
-        node.addEventHandler(eventType, new EventHandler<E>() {
+        node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkCommand") {
+
             /**
              * Handle the triggered event.
              */
@@ -140,6 +145,8 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
     /**
      * Link an User Interface action to an event triggered on a node.
+     * 
+     * This method doesn't use any callback function to trigger attach the node.
      * 
      * @param node the node to follow
      * @param eventType the type of the event to follow
@@ -168,7 +175,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
     protected <E extends Event> void linkUi(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Model> modelClass, final Callback<E, Boolean> callback,
             final WaveData<?>... waveData) {
 
-        node.addEventHandler(eventType, new EventHandler<E>() {
+        node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkUi") {
             /**
              * Handle the triggered event.
              */
@@ -183,6 +190,8 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
     /**
      * Link a Service to an event triggered on a node.
+     * 
+     * This method doesn't use any callback function to call the service.
      * 
      * @param node the node to follow
      * @param eventType the type of the event to follow
@@ -214,7 +223,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
             final Class<? extends Service> serviceClass, final WaveTypeBase waveType, final Callback<E, Boolean> callback,
             final WaveData<?>... waveData) {
 
-        node.addEventHandler(eventType, new EventHandler<E>() {
+        node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkService") {
 
             /**
              * Handle the triggered event.

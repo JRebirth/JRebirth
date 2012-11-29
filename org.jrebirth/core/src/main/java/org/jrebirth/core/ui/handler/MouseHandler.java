@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.ui.handler;
 
-import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.input.MouseEvent;
 
@@ -28,7 +27,7 @@ import org.jrebirth.core.ui.adapter.MouseAdapter;
  * 
  * @author Sébastien Bordes
  */
-public final class MouseHandler implements EventHandler<MouseEvent> {
+public final class MouseHandler extends AbstractNamedEventHandler<MouseEvent> {
 
     /** The Mouse adapter. */
     private final MouseAdapter mouseAdapter;
@@ -39,6 +38,7 @@ public final class MouseHandler implements EventHandler<MouseEvent> {
      * @param mouseAdapter the adapter to use
      */
     public MouseHandler(final MouseAdapter mouseAdapter) {
+        super(MouseHandler.class.getSimpleName());
         this.mouseAdapter = mouseAdapter;
     }
 

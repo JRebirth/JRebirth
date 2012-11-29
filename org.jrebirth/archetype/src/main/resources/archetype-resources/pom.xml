@@ -8,8 +8,8 @@
 	<packaging>jar</packaging>
 
 	<name>Sample Application</name>
-	<url>http://www.jrebirth.org</url>
-	<description>A JavaFX 2.0 application built with JRebirth</description>
+	<url>http://www.sample.org</url>
+	<description>Build with JRebirth Framework</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -56,40 +56,23 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>2.3.2</version>
 
-				<!-- <executions> <execution> <goals> <goal>sign</goal> </goals> </execution> </executions> -->
-
 				<configuration>
 					<archive>
 						<manifestEntries>
 							<JavaFX-Version>2.1</JavaFX-Version>
 							<Main-Class>${groupId}.${artifactId}.SampleApplication</Main-Class>
-<!-- 							<implementation-vendor>You</implementation-vendor>
-							<implementation-title>SampleApplication</implementation-title>
-							<implementation-version>1.0</implementation-version>
-							<JavaFX-Application-Class>${groupId}.${artifactId}.SampleApplication</JavaFX-Application-Class>
-
-							<JavaFX-Class-Path>${artifactId}-${version}.jar core-0.6.0-SNAPSHOT.jar</JavaFX-Class-Path> -->
 						</manifestEntries>
 						<manifest>
 							<addClasspath>true</addClasspath>
-
 						</manifest>
 					</archive>
 				</configuration>
 			</plugin>
 
-			<!-- <plugin> <artifactId>maven-assembly-plugin</artifactId> <configuration> <archive> <manifest> <mainClass>org.jrebirth.presentation.Presentation</mainClass> 
-				</manifest> </archive> <descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> </descriptorRefs> </configuration> <executions> <execution> <id>make-my-jar-with-dependencies</id> 
-				<phase>package</phase> <goals> <goal>single</goal> </goals> </execution> </executions> </plugin> -->
-
-
 			<plugin>
-
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>webstart-maven-plugin</artifactId>
 				<version>1.0-beta-3</version>
-
-				<!-- do not bind to install phase - - > <executions> <execution> <goals> <goal>package</goal> </goals> </execution> </executions> -->
 
 				<executions>
 					<execution>
@@ -127,7 +110,6 @@
 						<mainClass>${groupId}.${artifactId}.SampleApplication</mainClass>
 					</jnlp>
 
-
 					<!-- SIGNING -->
 					<!-- defining this will automatically sign the jar and its dependencies, if necessary -->
 					<sign>
@@ -157,7 +139,6 @@
 					</sign>
 
 					<!-- BUILDING PROCESS -->
-
 					<pack200>true</pack200>
 					<gzip>true</gzip> <!-- default force when pack200 false, true when pack200 selected ?? -->
 
@@ -174,54 +155,11 @@
 	</build>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
 			<version>0.6.0-SNAPSHOT</version>
 		</dependency>
-
-<!-- 		<dependency>
-			<groupId>com.oracle.javafx</groupId>
-			<artifactId>jfxrt</artifactId>
-			<scope>provided</scope>
-			<version>2.1</version>
-		</dependency> -->
-
 	</dependencies>
-
-
-<!-- 	<repositories>
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>releases</id>
-			<name>libs-release</name>
-			<url>http://repo.jrebirth.org/libs-release</url>
-		</repository>
-		<repository>
-			<snapshots />
-			<id>snapshots</id>
-			<name>libs-snapshot</name>
-			<url>http://repo.jrebirth.org/libs-snapshot</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>central</id>
-			<name>plugins-release</name>
-			<url>http://repo.jrebirth.org/plugins-release</url>
-		</pluginRepository>
-		<pluginRepository>
-			<snapshots />
-			<id>snapshots</id>
-			<name>plugins-snapshot</name>
-			<url>http://repo.jrebirth.org/plugins-snapshot</url>
-		</pluginRepository>
-	</pluginRepositories> -->
 
 </project>

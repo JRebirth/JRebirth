@@ -18,7 +18,6 @@
 package org.jrebirth.core.ui.handler;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import org.jrebirth.core.ui.adapter.ActionAdapter;
 
@@ -27,7 +26,7 @@ import org.jrebirth.core.ui.adapter.ActionAdapter;
  * 
  * @author Sébastien Bordes
  */
-public final class ActionHandler implements EventHandler<ActionEvent> {
+public final class ActionHandler extends AbstractNamedEventHandler<ActionEvent> {
 
     /** The Action adapter. */
     private final ActionAdapter actionAdapter;
@@ -38,6 +37,7 @@ public final class ActionHandler implements EventHandler<ActionEvent> {
      * @param actionAdapter the adapter to use
      */
     public ActionHandler(final ActionAdapter actionAdapter) {
+        super(ActionHandler.class.getSimpleName());
         this.actionAdapter = actionAdapter;
     }
 

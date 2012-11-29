@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.ui.handler;
 
-import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.stage.WindowEvent;
 
@@ -28,7 +27,7 @@ import org.jrebirth.core.ui.adapter.WindowAdapter;
  * 
  * @author Sébastien Bordes
  */
-public final class WindowHandler implements EventHandler<WindowEvent> {
+public final class WindowHandler extends AbstractNamedEventHandler<WindowEvent> {
 
     /** The Window adapter. */
     private final WindowAdapter windowAdapter;
@@ -39,6 +38,7 @@ public final class WindowHandler implements EventHandler<WindowEvent> {
      * @param windowAdapter the adapter to use
      */
     public WindowHandler(final WindowAdapter windowAdapter) {
+        super(WindowHandler.class.getSimpleName());
         this.windowAdapter = windowAdapter;
     }
 
