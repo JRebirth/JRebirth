@@ -160,11 +160,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.0</version>
-<!-- 				<configuration>
-					<additionalClasspathElements>
-						<additionalClasspathElement>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</additionalClasspathElement>
-					</additionalClasspathElements>
-				</configuration> -->
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.wagon</groupId>
@@ -231,7 +226,6 @@
 			<id>JRebirth_Sites</id>
 			<name>JRebirth Sites</name>
 			<url>scp://source.jrebirth.org:2022/var/www/sites/org.jrebirth-${project.version}</url>
-			<!--<url>file:/var/www/sites/org.jrebirth-${project.version}</url> -->
 		</site>
 
 	</distributionManagement>
@@ -262,11 +256,5 @@
 			</roles>
 		</contributor>
 	</contributors>
-
-	<!-- <repositories> <repository> <snapshots> <enabled>false</enabled> </snapshots> <id>releases</id> <name>libs-release</name> <url>http://repo.jrebirth.org/libs-release</url> 
-		</repository> <repository> <snapshots /> <id>snapshots</id> <name>libs-snapshot</name> <url>http://repo.jrebirth.org/libs-snapshot</url> </repository> </repositories> 
-		<pluginRepositories> <pluginRepository> <snapshots> <enabled>false</enabled> </snapshots> <id>central</id> <name>plugins-release</name> <url>http://repo.jrebirth.org/plugins-release</url> 
-		</pluginRepository> <pluginRepository> <snapshots /> <id>snapshots</id> <name>plugins-snapshot</name> <url>http://repo.jrebirth.org/plugins-snapshot</url> </pluginRepository> 
-		</pluginRepositories> -->
 
 </project>
