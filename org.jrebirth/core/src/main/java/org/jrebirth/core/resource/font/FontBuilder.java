@@ -17,13 +17,13 @@
  */
 package org.jrebirth.core.resource.font;
 
-import java.io.File;
 import java.util.List;
 
 import javafx.scene.text.Font;
 
-import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>FontBuilder</strong>.
@@ -35,7 +35,15 @@ import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 public final class FontBuilder extends AbstractResourceBuilder<FontEnum, FontParams, Font> {
 
     /**
-     * The <code>TRUE_TYPE_FONT_EXT</code> field is used to dedine the file extension.
+     * The <code>RESOURCE_SEPARATOR</code>.
+     */
+    private static final String R_SEP = "/";
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(FontBuilder.class);
+
+    /**
+     * The <code>TRUE_TYPE_FONT_EXT</code> field is used to define the file extension.
      */
     private static final String TRUE_TYPE_FONT_EXT = ".ttf";
 
@@ -70,7 +78,10 @@ public final class FontBuilder extends AbstractResourceBuilder<FontEnum, FontPar
      */
     private Font buildRealFont(final RealFont rFont) {
         checkFontStatus(rFont);
-        return javafx.scene.text.FontBuilder.create().name(transformFontName(rFont.name().get())).size(rFont.size()).build();
+        return javafx.scene.text.FontBuilder.create()
+                .name(transformFontName(rFont.name().get()))
+                .size(rFont.size())
+                .build();
     }
 
     /**
@@ -111,26 +122,37 @@ public final class FontBuilder extends AbstractResourceBuilder<FontEnum, FontPar
      */
     private void checkFontStatus(final RealFont realFont) {
 
+        // Try to load system fonts
         final List<String> fonts = Font.getFontNames(transformFontName(realFont.name().get()));
 
         Font font;
         if (fonts.isEmpty()) {
-            font = Font.loadFont(
-                    Thread.currentThread().getContextClassLoader()
-                            .getResourceAsStream(fontsFolder + File.separator + transformFontName(realFont.name().get()) + TRUE_TYPE_FONT_EXT), realFont.size());
 
-            // The font name contains '_' in its file name
+            // This variable will hold the 2 alternative font name
+            String fontName = fontsFolder + R_SEP + transformFontName(realFont.name().get()) + TRUE_TYPE_FONT_EXT;
+
+            LOGGER.trace("Try to load font  {}", fontName);
+            font = Font.loadFont(Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), realFont.size());
+
+            // The font name contains '_' in its file name to replace ' '
             if (font == null) {
+                fontName = fontsFolder + R_SEP + realFont.name().get() + TRUE_TYPE_FONT_EXT;
+                LOGGER.trace("Try to load font  {}", fontName);
                 font = Font.loadFont(
-                        Thread.currentThread().getContextClassLoader()
-                                .getResourceAsStream(fontsFolder + File.separator + realFont.name().get() + TRUE_TYPE_FONT_EXT), realFont.size());
+                        Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), realFont.size());
 
+                if (font == null) {
+                    // Neither transformed nor raw font has been loaded (with or without '_')
+                    LOGGER.error("Font not found {}", fontName);
+                } else {
+                    // Raw font has been loaded
+                    LOGGER.info("{} Font loaded", fontName);
+                }
+            } else {
+                // Transformed font has been loaded
+                LOGGER.info("{} Font loaded", fontName);
             }
-            // Font has not been found with or without '_'
-            if (font == null) {
-                throw new CoreRuntimeException("Font not found " + transformFontName(realFont.name().get()));
-            }
+
         }
     }
-
 }

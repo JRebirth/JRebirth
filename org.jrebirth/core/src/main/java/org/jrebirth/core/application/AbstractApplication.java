@@ -17,6 +17,7 @@
  */
 package org.jrebirth.core.application;
 
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.List;
 
 import javafx.application.Application;
@@ -82,7 +83,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         try {
             super.init();
         } catch (final Exception e) {
-            LOGGER.error("Error while application init phase : ", e);
+            LOGGER.error("Error while initializing the application  : ", e);
             throw new CoreException(e);
         }
 
@@ -92,17 +93,19 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * {@inheritDoc}
      */
     @Override
-    public final void start(final Stage primaryStage) {
+    public final void start(final Stage primaryStage) throws CoreException {
 
         try {
+            LOGGER.trace("Starting {}", this.getClass().getSimpleName());
 
             // Attach the primary stage for later customization
             this.stage = primaryStage;
+
             // Customize the primary stage
             initializeStage();
 
+            // Build and customize the default scene
             this.scene = buildScene();
-            // Customize the default scene previously created
             initializeScene();
 
             // Attach exception handler (JRebirth thread will be created)
@@ -111,53 +114,59 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             // Start the JRebirthThread
             JRebirthThread.getThread().launch(this);
 
-            // Attach the first view and run pre and post command
-            // JRebirthThread.getThread().bootUp();
-
             // Attach the scene
             primaryStage.setScene(this.scene);
+
+            // Let the stage visible for users
             primaryStage.show();
 
-            // JRebirthThread.getThread().stageShown();
-
-            // JRebirth.runIntoJIT(new AbstractJrbRunnable() {
-            //
-            // @Override
-            // protected void runInto() throws JRebirthThreadException {
-            // bootup();
-            // }
-            // });
+            LOGGER.trace("{} has started successfully", this.getClass().getSimpleName());
 
         } catch (final CoreException ce) {
-            LOGGER.error("Error while starting application : ", ce);
+            LOGGER.error("Error while starting the application : ", ce);
+            throw new CoreException(ce);
         }
     }
 
     /**
-     * Launch custom BootUp action.<br />
-     * 
-     * In Example read Application parameters and perform something.
-     */
-    // protected abstract void bootup();
-
-    /**
      * {@inheritDoc}
      */
-    // @Override
     @Override
     public final void stop() throws CoreException {
         try {
+            LOGGER.trace("Stopping {}", this.getClass().getSimpleName());
+
             super.stop();
+
+            // Hide the stage is this method wasn't call by user
+            if (getStage().isShowing()) {
+                getStage().hide();
+            }
+
+            // Now nothing is visible by users, Let's kill and release all JRebirth folks
+            // without loosing or corrupting something
 
             // Be Careful done into the JAT
             // Should create a progress bar to control the closure process
 
-            // Stop the JRebirthThread
-            JRebirthThread.getThread().close();
+            // Flag used to have 2 different waiting times
+            boolean firstTime = true;
+            do {
+                // Try to stop the JRebirth Thread
+                JRebirthThread.getThread().close();
+
+                // Wait 2s before retrying to close if the thread is still alive
+                Thread.sleep(firstTime ? 4000 : 1000); // TO BE PARAMETRIZED
+
+                if (firstTime) {
+                    firstTime = false;
+                }
+            } while (JRebirthThread.getThread().isAlive());
+
+            LOGGER.trace("{} has stopped successfully", this.getClass().getSimpleName());
 
         } catch (final Exception e) {
-            // getFacade().getLogger().error("Error while stopping application : "
-            // + e.getMessage());
+            LOGGER.error("Error while stopping the application : ", e);
             throw new CoreException(e);
         }
     }
@@ -166,9 +175,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * Customize the primary Stage.
      */
     private void initializeStage() {
-
+        // Define the stage title
         this.stage.setTitle(getApplicationTitle());
-
+        // and allow customization
         customizeStage(this.stage);
     }
 
@@ -186,21 +195,29 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
         final Stage currentStage = this.stage;
 
-        // Manage F11 button to switch full screen
-        this.scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+        final KeyCode fullKeyCode = getFullScreenKeyCode();
+        final KeyCode iconKeyCode = getIconifiedKeyCode();
 
-            @Override
-            public void handle(final KeyEvent event) {
-                if (event.getCode() == getFullScreenKeyCode()) {
-                    currentStage.setFullScreen(!currentStage.isFullScreen());
-                    event.consume();
-                } else if (event.getCode() == getIconifiedKeyCode()) {
-                    currentStage.setIconified(!currentStage.isIconified());
-                    event.consume();
+        // Attach the handler only if necessary, these 2 method can be overridden to return null
+        if (fullKeyCode != null && iconKeyCode != null) {
+
+            this.scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+
+                @Override
+                public void handle(final KeyEvent event) {
+                    // Manage F11 button to switch full screen
+                    if (fullKeyCode != null && fullKeyCode == event.getCode()) {
+                        currentStage.setFullScreen(!currentStage.isFullScreen());
+                        event.consume();
+                        // Manage F10 button to iconify
+                    } else if (iconKeyCode != null && iconKeyCode == event.getCode()) {
+                        currentStage.setIconified(!currentStage.isIconified());
+                        event.consume();
+                    }
+
                 }
-
-            }
-        });
+            });
+        }
 
         // Preload fonts to allow them to be used by CSS
         preloadFonts();
@@ -213,11 +230,13 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * Preload fonts to allow them to be used by CSS.
      */
     private void preloadFonts() {
-        for (final FontEnum font : getFontToPreload()) {
-            // Access the font to load it and allow it to be used by CSS
-            font.get();
+        final List<FontEnum> fontList = getFontToPreload();
+        if (fontList != null) {
+            for (final FontEnum font : fontList) {
+                // Access the font to load it and allow it to be used by CSS
+                font.get();
+            }
         }
-
     }
 
     /**
@@ -382,7 +401,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * 
      * @return the uncaught exception handler for All threads which don't have any handler.
      */
-    protected DefaultUncaughtExceptionHandler getDefaultUncaughtExceptionHandler(final GlobalFacade gf) {
+    protected UncaughtExceptionHandler getDefaultUncaughtExceptionHandler(final GlobalFacade gf) {
         return new DefaultUncaughtExceptionHandler(gf);
     }
 
@@ -393,7 +412,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * 
      * @return the uncaught exception handler for JavaFX Application Thread
      */
-    protected JatUncaughtExceptionHandler getJatUncaughtExceptionHandler(final GlobalFacade gf) {
+    protected UncaughtExceptionHandler getJatUncaughtExceptionHandler(final GlobalFacade gf) {
         return new JatUncaughtExceptionHandler(gf);
     }
 
@@ -404,7 +423,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * 
      * @return the uncaught exception handler for JRebirth Internal Thread
      */
-    protected JitUncaughtExceptionHandler getJitUncaughtExceptionHandler(final GlobalFacade gf) {
+    protected UncaughtExceptionHandler getJitUncaughtExceptionHandler(final GlobalFacade gf) {
         return new JitUncaughtExceptionHandler(gf);
     }
 
@@ -415,7 +434,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * 
      * @return the uncaught exception handler for JRebirth Thread Pool
      */
-    public PoolUncaughtExceptionHandler getPoolUncaughtExceptionHandler(final GlobalFacade gf) {
+    public UncaughtExceptionHandler getPoolUncaughtExceptionHandler(final GlobalFacade gf) {
         return new PoolUncaughtExceptionHandler(gf);
     }
 }
