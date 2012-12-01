@@ -247,11 +247,13 @@ public final class JRebirthThread extends Thread {
     }
 
     /**
+     * This method can be called a lot of time while application is running.
      * 
+     * The first time to stop the infinite loop, then to purge all queues and let the thread terminate itself.
      */
     public void close() {
 
-        // Infinite loop is till active
+        // Infinite loop is still active
         if (this.infiniteLoop) {
             // First attempt to close the application
             this.infiniteLoop = false;
@@ -262,7 +264,6 @@ public final class JRebirthThread extends Thread {
             // All Task Queues are cleared
             this.queuedTasks.clear();
             this.processingTasks.clear();
-
         }
 
     }

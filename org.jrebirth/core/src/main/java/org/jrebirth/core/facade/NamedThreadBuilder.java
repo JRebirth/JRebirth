@@ -17,9 +17,8 @@
  */
 package org.jrebirth.core.facade;
 
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.concurrent.ThreadFactory;
-
-import org.jrebirth.core.exception.handler.PoolUncaughtExceptionHandler;
 
 /**
  * The class <strong>NamedThreadBuilder</strong>.
@@ -35,7 +34,7 @@ public class NamedThreadBuilder implements ThreadFactory {
     private final String baseName;
 
     /** The uncaught Exception handler. */
-    private final PoolUncaughtExceptionHandler uncaughtExceptionHandler;
+    private final UncaughtExceptionHandler uncaughtExceptionHandler;
 
     /**
      * Default Constructor.
@@ -43,7 +42,7 @@ public class NamedThreadBuilder implements ThreadFactory {
      * @param uncaughtExceptionHandler the handler to use for uncaught exception
      * @param baseName the base name for all threads created into this pool
      */
-    public NamedThreadBuilder(final PoolUncaughtExceptionHandler uncaughtExceptionHandler, final String baseName) {
+    public NamedThreadBuilder(final UncaughtExceptionHandler uncaughtExceptionHandler, final String baseName) {
         this.uncaughtExceptionHandler = uncaughtExceptionHandler;
         this.baseName = baseName;
     }
@@ -55,7 +54,7 @@ public class NamedThreadBuilder implements ThreadFactory {
     public Thread newThread(final Runnable r) {
         final String pooledThreadName = this.baseName + this.poolIndex++;
         final Thread thread = new Thread(r, pooledThreadName);
-        thread.setUncaughtExceptionHandler(this.uncaughtExceptionHandler);
+        thread.setUncaughtExceptionHandler(this.uncaughtExceptionHandler); // Cannot be used !!! see JRebirthThread.runNow method which will catch exceptions
 
         return thread;
     }
