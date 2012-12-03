@@ -1,0 +1,133 @@
+<class-diagram version="1.0.11" icons="true" automaticImage="PNG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <enumeration id="1" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.concurrent.RunIntoType" 
+    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/RunIntoType.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="107" y="124"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </enumeration>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.concurrent.JRebirthThread" 
+    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/JRebirthThread.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="425" y="304"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.concurrent.AbstractJrbRunnable" 
+    project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/AbstractJrbRunnable.java" binary="false">    
+    <position height="-1" width="-1" x="783" y="383"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.concurrent.JRebirth" 
+    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/JRebirth.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="104" y="302"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </class>  
+  <package id="5" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.concurrent" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent" binary="false">    
+    <position height="34" width="182" x="-5" y="-8"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <interface id="6" corner="BOTTOM_RIGHT" language="java" name="java.lang.Runnable" project="org.jrebirth.core" 
+    file="C:/Users/ng1e2b8/Tools/jdk1.7.0_07/jre/lib/rt.jar" binary="true">    
+    <position height="-1" width="-1" x="784" y="242"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="7" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.facade.GlobalFacade" 
+    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/GlobalFacade.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="381" y="24"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="8" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.application.JRebirthApplication" 
+    project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/application/JRebirthApplication.java" binary="false">    
+    <position height="-1" width="-1" x="527" y="23"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <dependency id="9">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="10">    
+    <bendpoint x="427" y="516"/>    
+    <bendpoint x="574" y="515"/>    
+    <bendpoint x="572" y="445"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="11" name="internalThread"/>      
+      <multiplicity id="12" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="13">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="14" name="facade"/>      
+      <multiplicity id="15" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="16">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="17" name="application"/>      
+      <multiplicity id="18" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="19">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="20">    
+    <bendpoint x="617" y="205"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="21" name="queuedTasks"/>      
+      <multiplicity id="22" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="23">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <association id="24">    
+    <bendpoint x="668" y="284"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="25" name="processingTasks"/>      
+      <multiplicity id="26" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
+    visibility="true">    
+    <attributes public="true" package="true" protected="true" private="false"/>    
+    <operations public="true" package="true" protected="true" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
