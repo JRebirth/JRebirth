@@ -23,7 +23,6 @@ import javafx.application.Platform;
  * The class <strong>JRebirth</strong>.
  * 
  * @author Sébastien Bordes
- * 
  */
 public final class JRebirth {
 
@@ -48,15 +47,15 @@ public final class JRebirth {
             case JIT:
                 runIntoJIT(runnable);
                 break;
-            case POOL:
-                runIntoThreadPool(runnable);
+            case JTP:
+                runIntoJTP(runnable);
                 break;
             default:
         }
     }
 
     /**
-     * Run the task into the Java Application Thread.
+     * Run the task into the JavaFX Application Thread [JAT].
      * 
      * @param runnable the task to run
      */
@@ -66,7 +65,7 @@ public final class JRebirth {
     }
 
     /**
-     * Run into the JRebirth Internal Thread.
+     * Run into the JRebirth Internal Thread [JIT].
      * 
      * Actually only few methods are allowed to execute themselves into JRebirthThread.
      * <ul>
@@ -86,13 +85,13 @@ public final class JRebirth {
     }
 
     /**
-     * Run into the internal thread pool.
+     * Run into the JRebirth Thread Pool [JTP].
      * 
      * Be careful this method can be called through any thread.
      * 
      * @param runnable the task to run
      */
-    public static void runIntoThreadPool(final Runnable runnable) {
-        JRebirthThread.runIntoThreadPool(runnable);
+    public static void runIntoJTP(final Runnable runnable) {
+        JRebirthThread.runIntoJTP(runnable);
     }
 }

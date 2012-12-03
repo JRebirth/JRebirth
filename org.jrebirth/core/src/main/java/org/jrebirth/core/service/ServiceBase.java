@@ -177,6 +177,6 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
         final Task<T> task = new ServiceTask<T>(localService, method, parameterValues, sourceWave);
 
         // Call the task into the JRebirth Thread Pool
-        JRebirth.runIntoThreadPool(task);
+        JRebirth.runIntoJTP(task);
     }
 }

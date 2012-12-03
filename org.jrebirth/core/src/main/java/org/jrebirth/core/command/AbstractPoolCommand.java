@@ -32,7 +32,7 @@ public abstract class AbstractPoolCommand extends AbstractSingleCommand {
      * Default Constructor used to run this action within the thread pool.
      */
     public AbstractPoolCommand() {
-        super(RunIntoType.POOL);
+        super(RunIntoType.JTP);
     }
 
 }

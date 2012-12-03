@@ -258,7 +258,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     /**
      * Load an image.
      * 
-     * @param resourceName the name of the image
+     * @param resourceName the name of the image, path must be separated by '/'
      * @return the image loaded
      */
     public Image loadImage(final String resourceName) {

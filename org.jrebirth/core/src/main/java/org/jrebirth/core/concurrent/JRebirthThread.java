@@ -82,7 +82,7 @@ public final class JRebirthThread extends Thread {
     private JRebirthThread() {
         super(NAME);
 
-        // Daemonize this thread, thus it will be killed with the main JavaFX Thread
+        // Daemon-ize this thread, thus it will be killed with the main JavaFX Thread
         setDaemon(true);
 
         // Initialize the queue
@@ -353,11 +353,11 @@ public final class JRebirthThread extends Thread {
     }
 
     /**
-     * Run a task immedialtely if a slot is available into the shared thread pool.
+     * Run a task immediately if a slot is available into the shared thread pool.
      * 
      * @param runnable the task to run
      */
-    public static void runIntoThreadPool(final Runnable runnable) {
+    public static void runIntoJTP(final Runnable runnable) {
         internalThread.runNow(runnable);
     }
 
