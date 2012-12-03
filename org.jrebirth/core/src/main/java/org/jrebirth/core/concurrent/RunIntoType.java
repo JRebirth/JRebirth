@@ -32,7 +32,7 @@ public enum RunIntoType {
     /** Run into JRebirth Internal Thread. */
     JIT,
 
-    /** Queue in a Thread Pool and run it sequentially. */
-    POOL;
+    /** Queue and run into the JRebirth Thread Pool. */
+    JTP;
 
 }
