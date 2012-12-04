@@ -1,0 +1,113 @@
+<class-diagram version="1.0.11" icons="true" automaticImage="PNG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <package id="1" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.service" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service" binary="false">    
+    <position height="-1" width="-1" x="803" y="336"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <package id="2" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.concurrent" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent" binary="false">    
+    <position height="-1" width="-1" x="102" y="116"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <package id="3" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.facade" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade" binary="false">    
+    <position height="-1" width="-1" x="344" y="69"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <package id="4" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave" binary="false">    
+    <position height="-1" width="-1" x="100" y="411"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <package id="5" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.util" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/util" binary="false">    
+    <position height="-1" width="-1" x="257" y="507"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <package id="6" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.application" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/application" binary="false">    
+    <position height="-1" width="-1" x="502" y="542"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <package id="7" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.command" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command" binary="false">    
+    <position height="-1" width="-1" x="102" y="292"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <package id="8" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui" binary="false">    
+    <position height="-1" width="-1" x="657" y="271"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <package id="9" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.exception" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/exception" binary="false">    
+    <position height="-1" width="-1" x="425" y="312"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <package id="10" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.link" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/link" binary="false">    
+    <position height="-1" width="-1" x="506" y="162"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <package id="11" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.event" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/event" binary="false">    
+    <position height="-1" width="-1" x="807" y="65"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <package id="12" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.command.basic" 
+    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/basic" binary="false">    
+    <position height="-1" width="-1" x="737" y="458"/>    
+    <display autosize="true" stereotype="false"/>  
+  </package>  
+  <dependency id="13">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="14">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="15">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="16">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="17">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="18">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="19">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="20">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="21">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="22">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="23">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
+    visibility="true">    
+    <attributes public="true" package="true" protected="true" private="false"/>    
+    <operations public="true" package="true" protected="true" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
