@@ -15,28 +15,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.facade;
+package org.jrebirth.core.link;
 
-import org.jrebirth.core.service.Service;
+import org.jrebirth.core.ui.Model;
 
 /**
- * 
- * The interface <strong>ServiceReady</strong>.
+ * The interface <strong>ModelReady</strong> allows to retrieve a {@link Model} instance.
  * 
  * @author Sébastien Bordes
  */
-public interface ServiceReady {
+public interface ModelReady {
 
     /**
-     * Return the service singleton or part of multiton.
+     * Return the model singleton or part of multiton according to key parts provided.
      * 
-     * @param clazz the service class to find
-     * @param keyPart the unique key (in option)
+     * @param clazz the model class to find
+     * @param keyPart key parts for multiton model (in option), singleton
      * 
-     * @param <S> a sub class of service
+     * @param <M> a sub class of Model
      * 
-     * @return a service instance
+     * @return a model instance
      */
-    <S extends Service> S getService(final Class<S> clazz, final Object... keyPart);
+    <M extends Model> M getModel(final Class<M> clazz, final Object... keyPart);
 
 }

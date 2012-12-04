@@ -44,8 +44,8 @@ import org.slf4j.LoggerFactory;
  */
 public final class JRebirthThread extends Thread {
 
-    /** The JRebirth Thread name. */
-    public static final String NAME = "JRebirth Thread";
+    /** The JRebirth Internal Thread name [JIT]. */
+    public static final String JIT_NAME = "JIT";
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JRebirthThread.class);
@@ -80,7 +80,7 @@ public final class JRebirthThread extends Thread {
      * /** Build the JRebirth Thread.
      */
     private JRebirthThread() {
-        super(NAME);
+        super(JIT_NAME);
 
         // Daemon-ize this thread, thus it will be killed with the main JavaFX Thread
         setDaemon(true);
@@ -329,7 +329,7 @@ public final class JRebirthThread extends Thread {
      * @return true if currentThread == JRebirthThread
      */
     public static boolean isJRebirthThread() {
-        return NAME.equals(Thread.currentThread().getName());
+        return JIT_NAME.equals(Thread.currentThread().getName());
     }
 
     /**

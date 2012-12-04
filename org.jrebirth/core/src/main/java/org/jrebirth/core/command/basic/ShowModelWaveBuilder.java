@@ -21,8 +21,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
+import org.jrebirth.core.command.CommandWaveBuilder;
 import org.jrebirth.core.ui.Model;
-import org.jrebirth.core.wave.CommandWaveBuilder;
 import org.jrebirth.core.wave.WaveBase;
 
 /**

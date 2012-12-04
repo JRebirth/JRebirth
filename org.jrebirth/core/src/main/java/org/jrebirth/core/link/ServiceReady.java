@@ -15,28 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.facade;
+package org.jrebirth.core.link;
 
-import org.jrebirth.core.command.Command;
+import org.jrebirth.core.service.Service;
 
 /**
  * 
- * The class <strong>CommandReady</strong>.
+ * The interface <strong>ServiceReady</strong>.
  * 
  * @author Sébastien Bordes
  */
-public interface CommandReady {
+public interface ServiceReady {
 
     /**
-     * Return the command singleton or part of multiton.
+     * Return the service singleton or part of multiton.
      * 
      * @param clazz the service class to find
      * @param keyPart the unique key (in option)
      * 
-     * @param <C> a sub class of command
+     * @param <S> a sub class of service
      * 
-     * @return a command instance
+     * @return a service instance
      */
-    <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart);
+    <S extends Service> S getService(final Class<S> clazz, final Object... keyPart);
 
 }
