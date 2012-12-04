@@ -15,9 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.wave;
+package org.jrebirth.core.command;
 
-import org.jrebirth.core.command.Command;
+import org.jrebirth.core.wave.DefaultWaveBean;
+import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBase;
+import org.jrebirth.core.wave.WaveBean;
+import org.jrebirth.core.wave.WaveBuilder;
+import org.jrebirth.core.wave.WaveGroup;
 
 /**
  * The class <strong>WaveBuilder</strong>.

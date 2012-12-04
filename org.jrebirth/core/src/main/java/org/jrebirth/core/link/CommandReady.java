@@ -15,27 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.facade;
+package org.jrebirth.core.link;
 
-import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.command.Command;
 
 /**
- * The interface <strong>ModelReady</strong> allows to retrieve a {@link Model} instance.
+ * 
+ * The class <strong>CommandReady</strong>.
  * 
  * @author Sébastien Bordes
  */
-public interface ModelReady {
+public interface CommandReady {
 
     /**
-     * Return the model singleton or part of multiton according to key parts provided.
+     * Return the command singleton or part of multiton.
      * 
-     * @param clazz the model class to find
-     * @param keyPart key parts for multiton model (in option), singleton
+     * @param clazz the service class to find
+     * @param keyPart the unique key (in option)
      * 
-     * @param <M> a sub class of Model
+     * @param <C> a sub class of command
      * 
-     * @return a model instance
+     * @return a command instance
      */
-    <M extends Model> M getModel(final Class<M> clazz, final Object... keyPart);
+    <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart);
 
 }

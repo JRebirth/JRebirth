@@ -25,9 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.jrebirth.core.concurrent.AbstractJrbRunnable;
-import org.jrebirth.core.concurrent.JRebirth;
-import org.jrebirth.core.exception.JRebirthThreadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -336,7 +333,9 @@ public class WaveBase implements Wave {
      */
     @Override
     public Status getStatus() {
-        return this.status;
+        synchronized (this.status) {
+            return this.status;
+        }
     }
 
     /**
@@ -346,14 +345,7 @@ public class WaveBase implements Wave {
     public void setStatus(final Status status) {
         synchronized (status) {
             this.status = status;
-            JRebirth.runIntoJIT(new AbstractJrbRunnable("Set Wave Status " + status) {
-
-                @Override
-                protected void runInto() throws JRebirthThreadException {
-                    fireStatusChanged();
-                }
-            });
-
+            fireStatusChanged();
         }
     }
 
