@@ -198,7 +198,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * 
      * @param fxmlPath the fxml string path
      * 
-     * @return a FXMLComponent object taht wrap a fxml node with its controller
+     * @return a FXMLComponent object that wrap a fxml node with its controller
      */
     protected FXMLComponent loadFXML(final String fxmlPath) {
         return loadFXML(fxmlPath, null);
