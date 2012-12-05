@@ -17,8 +17,6 @@
  */
 package org.jrebirth.core.event;
 
-import org.jrebirth.core.facade.UniqueKey;
-
 /**
  * The interface <strong>Event</strong>.
  * 
@@ -26,7 +24,7 @@ import org.jrebirth.core.facade.UniqueKey;
  * 
  * @author Sébastien Bordes
  */
-public interface Event extends UniqueKey {
+public interface Event /* extends UniqueKey */{
 
     /**
      * @return Returns the sequence number.

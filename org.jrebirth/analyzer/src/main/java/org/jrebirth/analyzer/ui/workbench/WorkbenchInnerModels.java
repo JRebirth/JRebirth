@@ -20,7 +20,7 @@ package org.jrebirth.analyzer.ui.workbench;
 import org.jrebirth.analyzer.ui.controls.ControlsModel;
 import org.jrebirth.analyzer.ui.editor.EditorModel;
 import org.jrebirth.analyzer.ui.properties.PropertiesModel;
-import org.jrebirth.core.facade.UniqueKey;
+import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.ui.InnerModels;
 import org.jrebirth.core.ui.Model;
 

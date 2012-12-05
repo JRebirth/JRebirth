@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.facade;
+package org.jrebirth.core.key;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -93,7 +93,8 @@
   <package id="11" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.facade" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade" binary="false">    
     <position height="29" width="191" x="18" y="13"/>    
-    <display autosize="false" stereotype="false"/>  
+    <display autosize="false" stereotype="false" package="true" initial-value="false" signature="true" 
+      visibility="true"/>  
   </package>  
   <class id="12" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.facade.NamedThreadBuilder" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/NamedThreadBuilder.java" 
@@ -104,8 +105,8 @@
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <interface id="13" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.facade.UniqueKey" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/UniqueKey.java" 
+  <interface id="13" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.key.UniqueKey" 
+    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/key/UniqueKey.java" 
     binary="false">    
     <position height="-1" width="-1" x="581" y="695"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
@@ -122,8 +123,8 @@
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <class id="15" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.facade.MultitonKey" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/MultitonKey.java" 
+  <class id="15" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.key.MultitonKey" 
+    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/key/MultitonKey.java" 
     binary="false">    
     <position height="-1" width="-1" x="838" y="869"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
@@ -131,8 +132,8 @@
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="16" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.facade.KeyBuilder" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/KeyBuilder.java" 
+  <class id="16" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.key.KeyBuilder" 
+    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/key/KeyBuilder.java" 
     binary="false">    
     <position height="-1" width="-1" x="822" y="648"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
@@ -140,9 +141,8 @@
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="17" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.facade.ClassKey" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/ClassKey.java" 
-    binary="false">    
+  <class id="17" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.key.ClassKey" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/key/ClassKey.java" binary="false">    
     <position height="-1" width="-1" x="583" y="856"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      

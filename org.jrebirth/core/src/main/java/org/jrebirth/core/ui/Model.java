@@ -20,7 +20,7 @@ package org.jrebirth.core.ui;
 import javafx.scene.Node;
 
 import org.jrebirth.core.facade.FacadeReady;
-import org.jrebirth.core.facade.UniqueKey;
+import org.jrebirth.core.key.UniqueKey;
 
 /**
  * The interface <strong>Model</strong>.

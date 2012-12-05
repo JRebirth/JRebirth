@@ -18,7 +18,7 @@
 package org.jrebirth.analyzer.ui.editor;
 
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
-import org.jrebirth.core.facade.UniqueKey;
+import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.ui.InnerModels;
 import org.jrebirth.core.ui.Model;
 

@@ -22,7 +22,7 @@ import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.Facade;
 import org.jrebirth.core.facade.FacadeReady;
-import org.jrebirth.core.facade.UniqueKey;
+import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 

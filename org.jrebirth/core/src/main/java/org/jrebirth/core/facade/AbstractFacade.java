@@ -25,6 +25,8 @@ import org.jrebirth.core.command.Command;
 import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
+import org.jrebirth.core.key.ClassKey;
+import org.jrebirth.core.key.KeyBuilder;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Model;

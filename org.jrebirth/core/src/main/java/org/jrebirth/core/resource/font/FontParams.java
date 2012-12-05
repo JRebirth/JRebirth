@@ -17,11 +17,13 @@
  */
 package org.jrebirth.core.resource.font;
 
+import org.jrebirth.core.resource.color.ResourceParams;
+
 /**
  * The class <strong>FontParams</strong>.
  * 
  * @author Sébastien Bordes
  */
-public interface FontParams {
+public interface FontParams extends ResourceParams {
 
 }

@@ -203,21 +203,21 @@ public final class EventBase implements Event {
         return cls;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getKey() {
-        return toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getValue() {
-        // TODO CHECK IT
-        return null;
-    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public String getKey() {
+    // return toString();
+    // }
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public Object getValue() {
+    // // TODO CHECK IT
+    // return null;
+    // }
 
 }
