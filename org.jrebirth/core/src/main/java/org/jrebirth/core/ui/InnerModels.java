@@ -17,7 +17,7 @@
  */
 package org.jrebirth.core.ui;
 
-import org.jrebirth.core.facade.UniqueKey;
+import org.jrebirth.core.key.UniqueKey;
 
 /**
  * The interface <strong>InnerModels</strong>.

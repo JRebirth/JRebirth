@@ -3,7 +3,7 @@
   <class id="1" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.color.HSBColor" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/HSBColor.java" 
     binary="false">    
-    <position height="118" width="215" x="2535" y="265"/>    
+    <position height="-1" width="-1" x="647" y="680"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -11,13 +11,13 @@
   </class>  
   <package id="2" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.font" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font" binary="false">    
-    <position height="34" width="196" x="188" y="90"/>    
+    <position height="-1" width="-1" x="1328" y="86"/>    
     <display autosize="true" stereotype="false"/>  
   </package>  
   <interface id="3" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.font.FontName" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/FontName.java" 
     binary="false">    
-    <position height="50" width="81" x="1525" y="265"/>    
+    <position height="-1" width="-1" x="110" y="514"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -26,7 +26,7 @@
   <class id="4" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.font.FamilyFont" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/FamilyFont.java" 
     binary="false">    
-    <position height="118" width="315" x="1646" y="265"/>    
+    <position height="-1" width="-1" x="181" y="678"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -35,7 +35,7 @@
   <interface id="5" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.font.JRebirthFont" 
     project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/JRebirthFont.java" binary="false">    
-    <position height="50" width="129" x="1110" y="265"/>    
+    <position height="-1" width="-1" x="935" y="154"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -45,7 +45,7 @@
     project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/factory/AbstractResourceBuilder.java" 
     binary="false">    
-    <position height="135" width="215" x="678" y="90"/>    
+    <position height="-1" width="-1" x="654" y="217"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -54,7 +54,7 @@
   <class id="7" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.color.RGB255Color" 
     project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/RGB255Color.java" binary="false">    
-    <position height="118" width="171" x="2790" y="265"/>    
+    <position height="-1" width="-1" x="987" y="679"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -63,7 +63,7 @@
   <class id="8" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.font.RealFont" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/RealFont.java" 
     binary="false">    
-    <position height="67" width="157" x="2001" y="265"/>    
+    <position height="-1" width="-1" x="426" y="693"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -72,7 +72,7 @@
   <interface id="9" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.Resource" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/Resource.java" 
     binary="false">    
-    <position height="67" width="110" x="1260" y="90"/>    
+    <position height="-1" width="-1" x="1105" y="46"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -81,7 +81,7 @@
   <class id="10" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.font.AbstractBaseFont" 
     project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/AbstractBaseFont.java" binary="false">    
-    <position height="67" width="168" x="1842" y="90"/>    
+    <position height="-1" width="-1" x="349" y="516"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -91,7 +91,7 @@
     project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/factory/AbstractResourceFactory.java" 
     binary="false">    
-    <position height="135" width="219" x="2331" y="90"/>    
+    <position height="-1" width="-1" x="116" y="249"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -100,7 +100,7 @@
   <enumeration id="12" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.color.AppColors" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/AppColors.java" 
     binary="false">    
-    <position height="84" width="137" x="1410" y="90"/>    
+    <position height="-1" width="-1" x="1241" y="289"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -109,7 +109,7 @@
   <class id="13" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.color.AbstractBaseColor" 
     project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/AbstractBaseColor.java" binary="false">    
-    <position height="101" width="185" x="3109" y="90"/>    
+    <position height="-1" width="-1" x="983" y="512"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -118,7 +118,7 @@
   <class id="14" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.color.RGB01Color" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/RGB01Color.java" 
     binary="false">    
-    <position height="118" width="228" x="3001" y="265"/>    
+    <position height="-1" width="-1" x="1203" y="690"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -127,7 +127,7 @@
   <interface id="15" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.color.ColorParams" 
     project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/ColorParams.java" binary="false">    
-    <position height="33" width="99" x="3618" y="265"/>    
+    <position height="-1" width="-1" x="669" y="435"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -136,7 +136,7 @@
   <interface id="16" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.color.ResourceParams" 
     project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/ResourceParams.java" binary="false">    
-    <position height="33" width="124" x="3593" y="90"/>    
+    <position height="-1" width="-1" x="584" y="340"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -145,7 +145,7 @@
   <interface id="17" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.font.FontParams" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/FontParams.java" 
     binary="false">    
-    <position height="33" width="93" x="2198" y="265"/>    
+    <position height="-1" width="-1" x="510" y="437"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -154,7 +154,7 @@
   <enumeration id="18" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.ResourceBuilders" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/ResourceBuilders.java" 
     binary="false">    
-    <position height="84" width="200" x="933" y="90"/>    
+    <position height="-1" width="-1" x="336" y="53"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -163,7 +163,7 @@
   <class id="19" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.font.FontBuilder" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/FontBuilder.java" 
     binary="false">    
-    <position height="67" width="182" x="456" y="265"/>    
+    <position height="-1" width="-1" x="365" y="370"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -172,7 +172,7 @@
   <interface id="20" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.font.FontEnum" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/FontEnum.java" 
     binary="false">    
-    <position height="33" width="80" x="1279" y="265"/>    
+    <position height="-1" width="-1" x="1096" y="167"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -181,7 +181,7 @@
   <class id="21" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.color.GrayColor" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/GrayColor.java" 
     binary="false">    
-    <position height="84" width="127" x="3269" y="265"/>    
+    <position height="-1" width="-1" x="828" y="663"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -190,7 +190,7 @@
   <class id="22" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.color.ColorBuilder" 
     project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/ColorBuilder.java" binary="false">    
-    <position height="67" width="190" x="678" y="265"/>    
+    <position height="-1" width="-1" x="798" y="359"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -199,7 +199,7 @@
   <interface id="23" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.color.ColorEnum" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/ColorEnum.java" 
     binary="false">    
-    <position height="33" width="86" x="1399" y="265"/>    
+    <position height="-1" width="-1" x="1239" y="153"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -208,13 +208,13 @@
   <package id="24" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.factory" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/factory" 
     binary="false">    
-    <position height="34" width="214" x="424" y="90"/>    
+    <position height="-1" width="-1" x="1332" y="45"/>    
     <display autosize="true" stereotype="false"/>  
   </package>  
   <interface id="25" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.factory.ResourceBuilder" 
     project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/factory/ResourceBuilder.java" binary="false">    
-    <position height="101" width="162" x="908" y="265"/>    
+    <position height="-1" width="-1" x="653" y="64"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -223,7 +223,7 @@
   <class id="26" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.color.WebColor" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/WebColor.java" 
     binary="false">    
-    <position height="84" width="142" x="3436" y="265"/>    
+    <position height="-1" width="-1" x="1396" y="658"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -232,99 +232,123 @@
   <interface id="27" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.resource.factory.ResourceFactory" 
     project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/factory/ResourceFactory.java" binary="false">    
-    <position height="101" width="164" x="2331" y="265"/>    
+    <position height="-1" width="-1" x="92" y="57"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <association id="28">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="29" name="builder"/>      
-      <multiplicity id="30" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="31">    
+  <realization id="28">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <generalization id="29">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="30">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <realization id="31">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="23"/>  
+  </realization>  
+  <dependency id="32">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <realization id="33">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="25"/>  
+  </realization>  
+  <generalization id="34">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="35">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <realization id="36">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="17"/>  
+  </realization>  
+  <generalization id="37">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="13"/>  
   </generalization>  
-  <generalization id="32">    
+  <generalization id="38">    
     <end type="SOURCE" refId="23"/>    
     <end type="TARGET" refId="9"/>  
   </generalization>  
-  <generalization id="33">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <generalization id="34">    
+  <generalization id="39">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="16"/>  
   </generalization>  
-  <association id="35">    
+  <dependency id="40">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <realization id="41">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <dependency id="42">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <generalization id="43">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <generalization id="44">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <dependency id="45">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <association id="46">    
     <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="36" name="name"/>      
-      <multiplicity id="37" minimum="0" maximum="1"/>    
+      <attribute id="47" name="name"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="38">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="9"/>  
-  </generalization>  
-  <realization id="39">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="15"/>  
-  </realization>  
-  <generalization id="40">    
-    <end type="SOURCE" refId="19"/>    
+  <generalization id="49">    
+    <end type="SOURCE" refId="22"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <realization id="41">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="17"/>  
-  </realization>  
-  <generalization id="42">    
+  <generalization id="50">    
     <end type="SOURCE" refId="26"/>    
     <end type="TARGET" refId="13"/>  
   </generalization>  
-  <generalization id="43">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="10"/>  
-  </generalization>  
-  <realization id="44">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="23"/>  
-  </realization>  
-  <generalization id="45">    
+  <dependency id="51">    
     <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <association id="52">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="53" name="builder"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="55">    
+    <end type="SOURCE" refId="20"/>    
     <end type="TARGET" refId="9"/>  
   </generalization>  
-  <realization id="46">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="25"/>  
-  </realization>  
-  <realization id="47">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="27"/>  
-  </realization>  
-  <generalization id="48">    
-    <end type="SOURCE" refId="1"/>    
+  <generalization id="56">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <generalization id="57">    
+    <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <generalization id="49">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <generalization id="50">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="10"/>  
-  </generalization>  
-  <generalization id="51">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="6"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
     visibility="true">    

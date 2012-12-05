@@ -18,6 +18,7 @@
 package org.jrebirth.core.facade;
 
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.key.UniqueKey;
 
 /**
  * The interface <strong>FacadeReady</strong>.
