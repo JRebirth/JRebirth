@@ -20,7 +20,7 @@ package org.jrebirth.analyzer.ui.editor;
 import java.io.File;
 import java.util.List;
 
-import org.jrebirth.core.event.Event;
+import org.jrebirth.core.facade.Event;
 import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveTypeBase;
 

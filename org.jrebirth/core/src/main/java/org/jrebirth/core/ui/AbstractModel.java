@@ -22,9 +22,9 @@ import java.util.Map;
 
 import javafx.scene.Node;
 
-import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
+import org.jrebirth.core.facade.EventType;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.util.ClassUtility;

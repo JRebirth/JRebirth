@@ -18,7 +18,6 @@
 package org.jrebirth.core.facade;
 
 import org.jrebirth.core.command.Command;
-import org.jrebirth.core.event.EventType;
 
 /**
  * 

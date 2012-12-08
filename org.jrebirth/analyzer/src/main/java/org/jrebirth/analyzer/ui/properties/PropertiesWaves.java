@@ -17,7 +17,7 @@
  */
 package org.jrebirth.analyzer.ui.properties;
 
-import org.jrebirth.core.event.Event;
+import org.jrebirth.core.facade.Event;
 import org.jrebirth.core.wave.WaveItem;
 
 /**

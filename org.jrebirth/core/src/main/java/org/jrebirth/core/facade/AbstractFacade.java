@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.jrebirth.core.command.Command;
-import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.key.ClassKey;

@@ -18,7 +18,7 @@
 package org.jrebirth.analyzer.ui.editor.ball;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
-import org.jrebirth.core.event.Event;
+import org.jrebirth.core.facade.Event;
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
 

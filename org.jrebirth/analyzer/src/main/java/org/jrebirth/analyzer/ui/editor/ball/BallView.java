@@ -38,8 +38,8 @@ import javafx.util.Duration;
 
 import org.jrebirth.analyzer.ui.editor.BallColors;
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
-import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.facade.EventType;
 import org.jrebirth.core.ui.DefaultView;
 
 /**

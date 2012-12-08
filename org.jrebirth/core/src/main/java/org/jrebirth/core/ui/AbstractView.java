@@ -28,9 +28,9 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.text.TextBuilder;
 
-import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
+import org.jrebirth.core.facade.EventType;
 import org.jrebirth.core.ui.fxml.AbstractFXMLController;
 import org.jrebirth.core.ui.fxml.FXMLComponent;
 import org.jrebirth.core.ui.fxml.FXMLController;

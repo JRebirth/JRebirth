@@ -68,12 +68,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     /** The root node of the scene built by reflection. */
     private transient P rootNode;
 
-    /** The logger status. */
-    private boolean loggerEnabled = true;
-
-    /** The eventTracker status. */
-    private boolean eventTrackerEnabled = true;
-
     /**
      * {@inheritDoc}
      */
@@ -86,7 +80,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             LOGGER.error("Error while initializing the application  : ", e);
             throw new CoreException(e);
         }
-
     }
 
     /**
@@ -291,13 +284,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     }
 
     /**
-     * @param loggerEnabled The loggerEnabled to set.
-     */
-    public final void setLoggerEnabled(final boolean loggerEnabled) {
-        this.loggerEnabled = loggerEnabled;
-    }
-
-    /**
      * Initialize all Uncaught Exception Handler.
      */
     protected void initializeExceptionHandler() {
@@ -322,30 +308,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
                 Thread.currentThread().setUncaughtExceptionHandler(getJitUncaughtExceptionHandler(gf));
             }
         });
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final boolean isLoggerEnabled() {
-        return this.loggerEnabled;
-    }
-
-    /**
-     * @param eventTrackerEnabled The eventTrackerEnabled to set.
-     */
-    public final void setEventTrackerEnabled(final boolean eventTrackerEnabled) {
-        this.eventTrackerEnabled = eventTrackerEnabled;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final boolean isEventTrackerEnabled() {
-        return this.eventTrackerEnabled;
     }
 
     /**

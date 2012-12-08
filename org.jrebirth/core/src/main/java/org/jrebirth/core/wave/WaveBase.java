@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.jrebirth.core.exception.CoreRuntimeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -343,9 +344,14 @@ public class WaveBase implements Wave {
      */
     @Override
     public void setStatus(final Status status) {
-        synchronized (status) {
-            this.status = status;
-            fireStatusChanged();
+        synchronized (this.status) {
+            if (this.status != status) {
+                this.status = status;
+                fireStatusChanged();
+            } else {
+                throw new CoreRuntimeException("The status " + status.toString() + " has been already set for this wave " + toString());
+            }
+
         }
     }
 

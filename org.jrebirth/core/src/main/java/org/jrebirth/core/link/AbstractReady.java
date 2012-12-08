@@ -18,8 +18,8 @@
 package org.jrebirth.core.link;
 
 import org.jrebirth.core.command.Command;
-import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.facade.EventType;
 import org.jrebirth.core.facade.Facade;
 import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.key.UniqueKey;
