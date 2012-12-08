@@ -26,8 +26,8 @@ import java.util.Map;
 import javafx.concurrent.Task;
 
 import org.jrebirth.core.concurrent.JRebirth;
-import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.facade.EventType;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;

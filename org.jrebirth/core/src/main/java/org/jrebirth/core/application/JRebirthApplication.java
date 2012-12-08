@@ -46,20 +46,6 @@ public interface JRebirthApplication<P extends Pane> {
     Color DEFAULT_SCENE_BG_COLOR = Color.TRANSPARENT;
 
     /**
-     * Return the logger status.
-     * 
-     * @return true if logging is enabled, false otherwise
-     */
-    boolean isLoggerEnabled();
-
-    /**
-     * Return the track event status.
-     * 
-     * @return true if event tracking is enable, false otherwise
-     */
-    boolean isEventTrackerEnabled();
-
-    /**
      * @return Returns the stage.
      */
     Stage getStage();

@@ -25,8 +25,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.WindowEvent;
 
-import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.facade.EventType;
 import org.jrebirth.core.ui.adapter.ActionAdapter;
 import org.jrebirth.core.ui.adapter.DragAdapter;
 import org.jrebirth.core.ui.adapter.KeyAdapter;

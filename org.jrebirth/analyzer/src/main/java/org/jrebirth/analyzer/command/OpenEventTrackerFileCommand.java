@@ -45,7 +45,7 @@ public final class OpenEventTrackerFileCommand extends DefaultUICommand {
         if (selected == null) {
 
             final FileChooser fc = new FileChooser();
-            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("(etd)", "*.etd")); // to filter
+            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("log file", "*"));
             selected = fc.showOpenDialog(null);
 
         }

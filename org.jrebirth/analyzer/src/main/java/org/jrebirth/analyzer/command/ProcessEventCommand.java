@@ -19,7 +19,7 @@ package org.jrebirth.analyzer.command;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.command.DefaultCommand;
-import org.jrebirth.core.event.Event;
+import org.jrebirth.core.facade.Event;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;
 

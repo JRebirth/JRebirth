@@ -26,7 +26,7 @@ import java.util.Map;
 import org.jrebirth.analyzer.command.ProcessEventCommand;
 import org.jrebirth.analyzer.service.LoadEdtFileService;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
-import org.jrebirth.core.event.Event;
+import org.jrebirth.core.facade.Event;
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;

@@ -25,9 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
-import org.jrebirth.core.event.Event;
-import org.jrebirth.core.event.EventBase;
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.facade.Event;
+import org.jrebirth.core.facade.EventBase;
+import org.jrebirth.core.facade.GlobalFacadeBase;
 import org.jrebirth.core.service.ServiceBase;
 import org.jrebirth.core.wave.WaveTypeBase;
 import org.slf4j.Logger;
@@ -75,7 +76,9 @@ public class LoadEdtFileService extends ServiceBase {
             String strLine = br.readLine();
             // Read File Line By Line
             while (strLine != null) {
-                addEvent(eventList, strLine);
+                if (strLine.contains(GlobalFacadeBase.EVENT_TRACKED)) {
+                    addEvent(eventList, strLine.substring(strLine.indexOf(GlobalFacadeBase.EVENT_TRACKED) + GlobalFacadeBase.EVENT_TRACKED.length()));
+                }
                 strLine = br.readLine();
             }
 

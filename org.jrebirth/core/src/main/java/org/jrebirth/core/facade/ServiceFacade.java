@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.facade;
 
-import org.jrebirth.core.event.EventType;
 import org.jrebirth.core.service.Service;
 
 /**
