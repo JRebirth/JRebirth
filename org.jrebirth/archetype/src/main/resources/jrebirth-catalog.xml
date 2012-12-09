@@ -26,6 +26,13 @@
 		<archetype>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>archetype</artifactId>
+			<version>0.7.2-SNAPSHOT</version>
+			<repository>http://repo.jrebirth.org/jrebirth-snapshot-local</repository>
+			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
+		</archetype>
+		<archetype>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>archetype</artifactId>
 			<version>0.6.0</version>
 			<repository>http://repo.jrebirth.org/jrebirth-release-local</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
@@ -34,6 +41,13 @@
 			<groupId>org.jrebirth</groupId>
 			<artifactId>archetype</artifactId>
 			<version>0.7.0</version>
+			<repository>http://repo.jrebirth.org/jrebirth-release-local</repository>
+			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
+		</archetype>
+		<archetype>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>archetype</artifactId>
+			<version>0.7.1</version>
 			<repository>http://repo.jrebirth.org/jrebirth-release-local</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
