@@ -13,6 +13,19 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<deployUrl>http://apps.sample.org</deployUrl>
+		<deployPath>${project.artifactId}/${project.version}</deployPath>
+
+		<jnlpFilename>${artifactId}.jnlp</jnlpFilename>
+		<appClass>${groupId}.${artifactId}.SampleApplication</appClass>
+
+		<appletWidth>1024</appletWidth>
+		<appletHeight>768</appletHeight>
+
+		<updateCheck>timeout</updateCheck>
+		<updatePolicy>prompt-update</updatePolicy>
+		
 	</properties>
 
 	<organization>
@@ -59,8 +72,12 @@
 				<configuration>
 					<archive>
 						<manifestEntries>
-							<JavaFX-Version>2.1</JavaFX-Version>
-							<Main-Class>${groupId}.${artifactId}.SampleApplication</Main-Class>
+							<JavaFX-Version>2.0</JavaFX-Version>
+							<Main-Class>${appClass}</Main-Class>
+							<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
+							<implementation-version>1.0</implementation-version>
+							<!-- not automated yet -->
+							<JavaFX-Class-Path></JavaFX-Class-Path>
 						</manifestEntries>
 						<manifest>
 							<addClasspath>true</addClasspath>
@@ -84,82 +101,89 @@
 				</executions>
 
 				<configuration>
-					<!--outputDirectory></outputDirectory --> <!-- not required?? -->
 
-					<!-- Set to true to exclude all transitive dependencies. Default is false. -->
+					<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
 					<excludeTransitive>false</excludeTransitive>
+					<libPath>lib</libPath>
 
-					<!-- The path where the libraries are stored within the jnlp structure. not required. by default the libraries are within the working directory -->
-					<!-- <libPath>lib</libPath> -->
+					<resourcesDirectory>${project.basedir}/src/main/jnlp/resources</resourcesDirectory>
+					<codebase>${deployUrl}/${deployPath}</codebase>
 
-					<!-- [optional] transitive dependencies filter - if omitted, all transitive dependencies are included -->
-					<!-- <dependencies> Note that only groupId and artifactId must be specified here. because of a limitation of the Include/ExcludesArtifactFilter <includes> <include>org.jrebirth:presentation</include> 
-						<include>org.jrebirth:core</include> </includes> excludes> <exclude></exclude> <excludes </dependencies> -->
-
-					<!--resourcesDirectory>${project.basedir}/src/main/jnlp/resources</resourcesDirectory --> <!-- default value -->
-
-					<!-- JNLP generation -->
 					<jnlp>
-						<!-- default values -->
-						<!--inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath -->
-						<!--inputTemplate>src/main/jnlp/template.vm</inputTemplate --> <!-- relative to inputTemplateResourcePath -->
-						<outputFile>SampleApplication.jnlp</outputFile> <!-- defaults to launch.jnlp -->
+						<!-- <inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath> <inputTemplate>src/main/jnlp/template.vm</inputTemplate> -->
+						<outputFile>${jnlpFilename}</outputFile>
 
-						<!-- used to automatically identify the jar containing the main class. -->
-						<!-- this is perhaps going to change -->
-						<mainClass>${groupId}.${artifactId}.SampleApplication</mainClass>
+						<mainClass>${appClass}</mainClass>
+						<offlineAllowed>true</offlineAllowed>
 					</jnlp>
 
-					<!-- SIGNING -->
-					<!-- defining this will automatically sign the jar and its dependencies, if necessary -->
 					<sign>
 						<keystore>${basedir}/yourkey.jks</keystore>
-						<keypass>acustompassword</keypass>  <!-- we need to override passwords easily from the command line. ${keypass} -->
-						<storepass>acustompassword</storepass> <!-- ${storepass} -->
-						<!--storetype>fillme</storetype -->
-						<alias>jrebirth</alias>
+						<!-- MUST BE PROVIDED BY COMMAND LINE ARGUMENTS -->
+						<!-- -Dstorepass=xxx -Dkeypass=xxx -->
+						<keypass>${keypass}</keypass>
+						<storepass>${storepass}</storepass>
+						<!-- <storetype>fillme</storetype> -->
+						<alias>sample</alias>
 
-						<validity>180</validity>
-
-						<!-- only required for generating the keystore -->
-						<dnameCn>www.jrebirth.org</dnameCn>
+						<validity>360</validity>
+						<dnameCn>www.sample.org</dnameCn>
 						<dnameOu>None</dnameOu>
-						<dnameO>JRebirth</dnameO>
+						<dnameO>Sample</dnameO>
 						<dnameL>Toulouse</dnameL>
-						<dnameSt></dnameSt>
-						<dnameC>France</dnameC>
+						<dnameSt>HG</dnameSt>
+						<dnameC>FR</dnameC>
 
-						<verify>true</verify> <!-- verify that the signing operation succeeded -->
+						<verify>true</verify>
 
-						<!-- KEYSTORE MANAGEMENT -->
 						<keystoreConfig>
-							<delete>true</delete> <!-- delete the keystore -->
-							<gen>true</gen> <!-- optional shortcut to generate the store. -->
+							<delete>true</delete>
+							<gen>true</gen>
 						</keystoreConfig>
 					</sign>
 
-					<!-- BUILDING PROCESS -->
 					<pack200>true</pack200>
-					<gzip>true</gzip> <!-- default force when pack200 false, true when pack200 selected ?? -->
+					<gzip>true</gzip>
 
-					<!-- causes a version attribute to be output in each jar resource element, optional, default is false -->
-					<!-- <outputJarVersions>true</outputJarVersions> -->
-
-					<!--install>false</install --> <!-- not yet supported -->
+					<outputJarVersions>false</outputJarVersions>
+					<install>false</install>
 					<verbose>true</verbose>
-
 				</configuration>
 			</plugin>
+			
+		<!-- Project Quality -->
+			<plugin>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-maven3-plugin</artifactId>
+				<version>3.3.2</version>
+			</plugin>
 		</plugins>
+
+		<extensions>
+			<extension>
+			<!-- To allow ftp deployment -->
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>2.2</version>
+			</extension>
+		</extensions>
 
 	</build>
 
 	<dependencies>
+		<!-- Use logback logger -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.6.0-SNAPSHOT</version>
+			<version>0.7.2-SNAPSHOT</version>
 		</dependency>
+		
 	</dependencies>
 
 </project>
