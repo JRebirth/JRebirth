@@ -29,14 +29,17 @@ public class FXMLComponent {
     /** The FXML node. */
     private final Node node;
 
-    /** The controller of the FXML component. */
+    /**
+     * The controller of the FXML component.<br />
+     * Be careful the controller could be null.
+     */
     private final FXMLController controller;
 
     /**
      * Default Constructor.
      * 
-     * @param node the loaded fxml node
-     * @param controller the attached fxml controller
+     * @param node the loaded fxml node, must not be null
+     * @param controller the attached fxml controller (could be null)
      */
     public FXMLComponent(final Node node, final FXMLController controller) {
         this.node = node;
@@ -51,6 +54,8 @@ public class FXMLComponent {
     }
 
     /**
+     * Return the controller or null.
+     * 
      * @return Returns the controller.
      */
     public FXMLController getController() {
