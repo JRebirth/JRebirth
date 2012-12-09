@@ -131,19 +131,19 @@ public final class FontBuilder extends AbstractResourceBuilder<FontEnum, FontPar
             // This variable will hold the 2 alternative font name
             String fontName = fontsFolder + R_SEP + transformFontName(realFont.name().get()) + TRUE_TYPE_FONT_EXT;
 
-            LOGGER.trace("Try to load font  {}", fontName);
+            LOGGER.trace("Try to load Transformed Font  {}", fontName);
             font = Font.loadFont(Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), realFont.size());
 
             // The font name contains '_' in its file name to replace ' '
             if (font == null) {
                 fontName = fontsFolder + R_SEP + realFont.name().get() + TRUE_TYPE_FONT_EXT;
-                LOGGER.trace("Try to load font  {}", fontName);
+                LOGGER.trace("Try to load Raw Font  {}", fontName);
                 font = Font.loadFont(
                         Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), realFont.size());
 
                 if (font == null) {
                     // Neither transformed nor raw font has been loaded (with or without '_')
-                    LOGGER.error("Font not found {}", fontName);
+                    LOGGER.error("Font Not Found {}", fontName);
                 } else {
                     // Raw font has been loaded
                     LOGGER.info("{} Raw Font loaded", fontName);

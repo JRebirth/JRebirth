@@ -42,14 +42,13 @@ public class PrepareModelCommand extends DefaultPoolCommand {
 
         // Retrieved the model class
         final Class<? extends Model> modelClass = getWaveBean(wave).getModelClass();
-        final Object[] keyPart = getWaveBean(wave).getKeyPart();
+        final Object[] keyPart = getWaveBean(wave).getKeyPart().toArray();
 
         if (modelClass == null) {
-            final String message = "ModelClass is null";
-            LOGGER.error(message);
-            throw new CoreRuntimeException(message);
+            LOGGER.error("ModelClass is null");
+            throw new CoreRuntimeException("Illegal action : ModelClass is null");
         }
-        // Retrive the mode according to its keyPart
+        // Retrieve the mode according to its keyPart
         Model modelInstance;
         if (keyPart == null) {
             modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelClass);

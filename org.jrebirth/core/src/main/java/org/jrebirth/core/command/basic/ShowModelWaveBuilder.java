@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.command.basic;
 
+import java.util.Arrays;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -81,7 +83,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
             getWaveBean(paramWave).setModelClass(this.modelClass);
         }
         if ((i & 0x8) != 0) {
-            getWaveBean(paramWave).setKeyPart(this.keyPart);
+            getWaveBean(paramWave).setKeyPart(Arrays.asList(this.keyPart));
         }
     }
 

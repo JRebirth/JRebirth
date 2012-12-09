@@ -334,7 +334,7 @@ public class WaveBase implements Wave {
      */
     @Override
     public Status getStatus() {
-        synchronized (this.status) {
+        synchronized (this) {
             return this.status;
         }
     }
@@ -344,7 +344,7 @@ public class WaveBase implements Wave {
      */
     @Override
     public void setStatus(final Status status) {
-        synchronized (this.status) {
+        synchronized (this) {
             if (this.status == status) {
                 throw new CoreRuntimeException("The status " + status.toString() + " has been already set for this wave " + toString());
             } else {
