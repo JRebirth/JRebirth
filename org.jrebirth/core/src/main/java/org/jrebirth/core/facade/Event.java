@@ -24,7 +24,7 @@ package org.jrebirth.core.facade;
  * 
  * @author Sébastien Bordes
  */
-public interface Event /* extends UniqueKey */{
+public interface Event {
 
     /**
      * @return Returns the sequence number.

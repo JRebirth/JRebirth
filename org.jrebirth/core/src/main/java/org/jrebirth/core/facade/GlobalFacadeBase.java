@@ -113,7 +113,7 @@ public class GlobalFacadeBase implements GlobalFacade {
             sb.append(ClassUtility.SEPARATOR);
             sb.append(target == null ? null : target.getCanonicalName());
             sb.append(ClassUtility.SEPARATOR);
-            sb.append(eventData);
+            sb.append(eventData.toString());
             LOGGER.info(sb.toString());
         }
     }

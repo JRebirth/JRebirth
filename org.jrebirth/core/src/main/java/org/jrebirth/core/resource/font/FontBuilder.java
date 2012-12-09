@@ -146,11 +146,11 @@ public final class FontBuilder extends AbstractResourceBuilder<FontEnum, FontPar
                     LOGGER.error("Font not found {}", fontName);
                 } else {
                     // Raw font has been loaded
-                    LOGGER.info("{} Font loaded", fontName);
+                    LOGGER.info("{} Raw Font loaded", fontName);
                 }
             } else {
                 // Transformed font has been loaded
-                LOGGER.info("{} Font loaded", fontName);
+                LOGGER.info("{} Transformed Font loaded", fontName);
             }
 
         }

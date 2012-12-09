@@ -345,13 +345,12 @@ public class WaveBase implements Wave {
     @Override
     public void setStatus(final Status status) {
         synchronized (this.status) {
-            if (this.status != status) {
+            if (this.status == status) {
+                throw new CoreRuntimeException("The status " + status.toString() + " has been already set for this wave " + toString());
+            } else {
                 this.status = status;
                 fireStatusChanged();
-            } else {
-                throw new CoreRuntimeException("The status " + status.toString() + " has been already set for this wave " + toString());
             }
-
         }
     }
 
