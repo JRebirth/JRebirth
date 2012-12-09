@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.command.basic;
 
+import java.util.List;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -35,7 +37,7 @@ public class ShowModelWaveBean implements WaveBean {
     private Class<? extends Model> modelClass;
 
     /** The model key parts. */
-    private Object[] keyPart;
+    private List<Object> keyPart;
 
     /** The unique place holder, in example the centerProperty of a BorderPane. */
     private ObjectProperty<Node> uniquePlaceHolder;
@@ -67,14 +69,14 @@ public class ShowModelWaveBean implements WaveBean {
     /**
      * @return Returns the keyPart.
      */
-    public Object[] getKeyPart() {
+    public List<Object> getKeyPart() {
         return this.keyPart;
     }
 
     /**
      * @param keyPart The keyPart to set.
      */
-    public void setKeyPart(final Object[] keyPart) {
+    public void setKeyPart(final List<Object> keyPart) {
         this.keyPart = keyPart;
     }
 
