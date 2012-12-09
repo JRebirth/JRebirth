@@ -8,7 +8,7 @@ import javafx.event.EventHandler;
  * 
  * @author Sébastien Bordes
  * 
- * @param <T> the event to handle
+ * @param <E> the event to handle
  */
 public abstract class AbstractNamedEventHandler<E extends Event> implements EventHandler<E> {
 
@@ -25,6 +25,21 @@ public abstract class AbstractNamedEventHandler<E extends Event> implements Even
     public AbstractNamedEventHandler(final String name) {
         super();
         this.name = name;
+    }
+
+    /**
+     * @return Returns the name.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return getName();
     }
 
 }
