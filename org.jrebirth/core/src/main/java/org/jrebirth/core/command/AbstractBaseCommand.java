@@ -17,12 +17,10 @@
  */
 package org.jrebirth.core.command;
 
-import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.concurrent.RunIntoType;
 import org.jrebirth.core.exception.CommandException;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.facade.EventType;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.wave.Wave;
@@ -42,7 +40,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> implements Command {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBaseCommand.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(AbstractBaseCommand.class);
 
     /**
      * The field that indicate how this command must be launched.
@@ -105,18 +103,28 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void innerRun(final Wave wave) throws CommandException {
+        preExecute(wave);
+        execute(wave);
+        postExecute(wave);
+    }
+
+    /**
      * Actions to perform before the command into the executor thread.
      * 
      * @param wave the wave that triggered this command
      */
-    public abstract void preExecute(final Wave wave);
+    protected abstract void preExecute(final Wave wave);
 
     /**
      * Actions to perform after the command into the executor thread.
      * 
      * @param wave the wave that triggered this command
      */
-    public abstract void postExecute(final Wave wave);
+    protected abstract void postExecute(final Wave wave);
 
     /**
      * @return Returns the runInto.
@@ -179,50 +187,6 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     protected void fireFailed(final Wave wave) {
         LOGGER.trace(this.getClass().getSimpleName() + " has failed  " + wave.toString());
         wave.setStatus(Wave.Status.Failed);
-    }
-
-    /**
-     * The class <strong>CommandRunnable</strong>.
-     * 
-     * @author Sébastien Bordes
-     */
-    private static final class CommandRunnable extends AbstractJrbRunnable {
-        /**
-         * The <code>wave</code>.
-         */
-        private final Wave wave;
-
-        /** The command link. */
-        private final AbstractBaseCommand command;
-
-        /**
-         * Default Constructor.
-         * 
-         * @param runnableName the name of the action to perform
-         * @param command the command to run
-         * @param wave the wave that generates this command call
-         */
-        private CommandRunnable(final String runnableName, final AbstractBaseCommand command, final Wave wave) {
-            super(runnableName);
-            this.command = command;
-            this.wave = wave;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void runInto() throws JRebirthThreadException {
-
-            try {
-                this.command.preExecute(this.wave);
-                this.command.execute(this.wave);
-                this.command.postExecute(this.wave);
-            } catch (final CommandException ce) {
-                LOGGER.error("Command has failed :", ce);
-                this.wave.setStatus(Wave.Status.Failed);
-            }
-        }
     }
 
 }

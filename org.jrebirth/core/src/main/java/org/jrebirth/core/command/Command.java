@@ -17,6 +17,7 @@
  */
 package org.jrebirth.core.command;
 
+import org.jrebirth.core.exception.CommandException;
 import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
@@ -39,6 +40,15 @@ public interface Command extends FacadeReady<Command> {
      * @param wave the wave that have triggered this command
      */
     void run(final Wave wave);
+
+    /**
+     * Run the inner task.
+     * 
+     * @param wave the wave that have triggered this command
+     * 
+     * @throws CommandException if an error occurred
+     */
+    void innerRun(final Wave wave) throws CommandException;
 
     /**
      * Link a parent command.
