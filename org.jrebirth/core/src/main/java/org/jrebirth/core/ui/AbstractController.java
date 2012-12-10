@@ -23,8 +23,10 @@ import javafx.util.Callback;
 
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.handler.AbstractNamedEventHandler;
+import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveTypeBase;
 
@@ -148,10 +150,13 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * 
      * This method doesn't use any callback function to trigger attach the node.
      * 
+     * Don't forget to add a placeholder to indicate where to attach the model node created
+     * 
      * @param node the node to follow
      * @param eventType the type of the event to follow
      * @param modelClass the model to display
-     * @param waveData additional Wave data
+     * @param waveData additional Wave data, Must contain either #JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER or #JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER wave data to indicate where to attach the
+     *        created model
      * 
      * @param <E> The type of JavaFX Event to track
      */
@@ -164,16 +169,33 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
     /**
      * Link an User Interface action to an event triggered on a node.
      * 
+     * Don't forget to add a placeholder to indicate where to attach the model node created
+     * 
      * @param node the node to follow
      * @param eventType the type of the event to follow
      * @param modelClass the model to display
      * @param callback the call back to use to check if the ui can be attached
-     * @param waveData additional Wave data
+     * @param waveData additional Wave data, Must contain either #JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER or #JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER wave data to indicate where to attach the
+     *        created model
      * 
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkUi(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Model> modelClass, final Callback<E, Boolean> callback,
             final WaveData<?>... waveData) {
+
+        boolean noHookFound = true;
+        // Check if the contract is respected by searching a placeholder from WaveData
+        for (final WaveData<?> wd : waveData) {
+            if ((wd.getKey() == JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER || wd.getKey() == JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER)
+                    && wd.getValue() != null) {
+                noHookFound = false;
+                break;
+            }
+        }
+        // Stop the process if no placeholder have been found to attach the model-view created
+        if (noHookFound) {
+            throw new CoreRuntimeException("LinkUi must be called with either JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER or JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER Wave Data provided");
+        }
 
         node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkUi") {
             /**
