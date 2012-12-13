@@ -19,27 +19,38 @@ package org.jrebirth.core.ui.fxml;
 
 import javafx.fxml.Initializable;
 
+import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.ui.View;
 
 /**
  * The interface <strong>FXMLController</strong>.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <M> The model responsible of the view
+ * @param <V> The view hosting the FXML component
  */
-public interface FXMLController extends Initializable {
+public interface FXMLController<M extends Model, V extends View<M, ?, ?>> extends Initializable {
 
     /**
-     * Set the view that load this FXML component.
+     * Set the model that manage the view that load this FXML component.
      * 
-     * @param view the linked view
+     * @param model the linked model
      */
-    void setView(View<?, ?, ?> view);
+    void setModel(M model);
+
+    /**
+     * Return the linked model that manage the view.
+     * 
+     * @return the linked model
+     */
+    M getModel();
 
     /**
      * Return the linked view that load this component.
      * 
      * @return the linked view
      */
-    View<?, ?, ?> getView();
+    V getView();
 
 }
