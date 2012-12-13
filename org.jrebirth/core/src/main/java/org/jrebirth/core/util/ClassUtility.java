@@ -143,32 +143,11 @@ public final class ClassUtility {
         throw new NoSuchMethodException(action);
     }
 
-    // public static Method getMethodFortWaveType(final Class<?> cls, final WaveTypeBase waveType) throws NoSuchMethodException {
-    // for (final Method m : cls.getMethods()) {
-    // if (m.getName().equals(action)) {
-    // return m;
-    // }
-    // }
-    // throw new NoSuchMethodException(action);
-    // }
-
-    // /**
-    // * Return the generic type of the class.
-    // *
-    // * @param i the index of the type to find
-    // *
-    // * @return the generic type
-    // */
-    // public static Class<?> getGenericType(final Class<?> mainClass, final int typeIndex) {
-    //
-    // return null;
-    // }
-
     /**
      * Check if the given method exists in the given class.
      * 
      * @param cls the class to search into
-     * @param ;ethodName the name of the method to check (camelCased or in upper case with underscore separator)
+     * @param methodName the name of the method to check (camelCased or in upper case with underscore separator)
      * 
      * @return true if the method exists
      */
@@ -184,17 +163,19 @@ public final class ClassUtility {
     }
 
     /**
-     * TODO To complete.
+     * Return the Class object for the given type.
      * 
-     * @param type
-     * @return
+     * @param type the given type to cast into Class
+     * 
+     * @return the Class casted object
      */
     public static Class<?> getClassFromType(final Type type) {
+        Class<?> returnClass = null;
         if (type instanceof Class<?>) {
-            return (Class<?>) type;
+            returnClass = (Class<?>) type;
         } else if (type instanceof ParameterizedType) {
-            return getClassFromType(((ParameterizedType) type).getRawType());
+            returnClass = getClassFromType(((ParameterizedType) type).getRawType());
         }
-        return null;
+        return returnClass;
     }
 }
