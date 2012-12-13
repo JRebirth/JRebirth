@@ -20,6 +20,7 @@ package org.jrebirth.core.ui.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.ui.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,29 +29,41 @@ import org.slf4j.LoggerFactory;
  * The class <strong>AbstractFXMLController</strong>.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <M> The model responsible of the view
+ * @param <V> The view hosting the FXML component
  */
-public abstract class AbstractFXMLController implements FXMLController {
+public abstract class AbstractFXMLController<M extends Model, V extends View<M, ?, ?>> implements FXMLController<M, V> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFXMLController.class);
 
-    /** The linked view that load this FXML component. */
-    private View<?, ?, ?> view;
+    /** The linked model that manage the view that load this FXML component. */
+    private M model;
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setView(final View<?, ?, ?> view) {
-        this.view = view;
+    public void setModel(final M model) {
+        this.model = model;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public View<?, ?, ?> getView() {
-        return this.view;
+    public M getModel() {
+        return this.model;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public V getView() {
+        return (V) this.model.getView();
     }
 
     /**
