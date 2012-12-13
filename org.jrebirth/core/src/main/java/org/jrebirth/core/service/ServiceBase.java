@@ -32,7 +32,6 @@ import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;
-import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,9 +52,6 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
     /** The wave type map. */
     private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
 
-    /** The wave item map. */
-    private final Map<WaveType, WaveItem<?>> waveItemMap = new HashMap<>();
-
     /**
      * Register a service contract.
      * 
@@ -63,18 +59,11 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
      * @param responseType the wave type of the wave emitted in return
      * @param waveItem the list of wave item used as arguments
      */
-    public void registerService(final WaveType callType, final WaveType responseType, final WaveItem<?> waveItem) {
+    public void registerService(final WaveType callType, final WaveType responseType/* , final WaveItem<?> waveItem */) {
 
-        if (ClassUtility.methodExist(getClass(), callType.toString())) {
+        listen(callType);
 
-            listen(callType);
-
-            this.returnWaveTypeMap.put(callType, responseType);
-            this.waveItemMap.put(responseType, waveItem);
-
-        } else {
-            LOGGER.error("Service API is broken, the method {} is not available", ClassUtility.underscoreToCamelCase(callType.toString()));
-        }
+        this.returnWaveTypeMap.put(callType, responseType);
     }
 
     /**
@@ -86,17 +75,6 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
      */
     public WaveType getReturnWaveType(final WaveType waveType) {
         return this.returnWaveTypeMap.get(waveType);
-    }
-
-    /**
-     * Return the wave item for given wave type.
-     * 
-     * @param waveType the wave type that we want to get wave item
-     * 
-     * @return Returns the waveItem for this wave type.
-     */
-    public WaveItem<?> getWaveItem(final WaveType waveType) {
-        return this.waveItemMap.get(waveType);
     }
 
     /**

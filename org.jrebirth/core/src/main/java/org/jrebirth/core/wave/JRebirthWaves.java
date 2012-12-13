@@ -30,13 +30,18 @@ import javafx.scene.Node;
  */
 public interface JRebirthWaves {
 
+    // WaveItem<ObjectProperty<Node>> HHH = WaveItem.build(ObjectProperty.class, Node.class);
+
     /** The waveItem that hold the attached node. */
-    WaveItem<ObjectProperty<Node>> ATTACH_UI_NODE_PLACEHOLDER = WaveItem.build();
+    WaveItem<ObjectProperty<Node>> ATTACH_UI_NODE_PLACEHOLDER = new WaveItem<ObjectProperty<Node>>() {
+    };
 
     /** The waveItem that hold the children list of the parent node. */
-    WaveItem<ObservableList<Node>> ADD_UI_CHILDREN_PLACEHOLDER = WaveItem.build();
+    WaveItem<ObservableList<Node>> ADD_UI_CHILDREN_PLACEHOLDER = new WaveItem<ObservableList<Node>>() {
+    };
 
     /** The waveItem that hold the list of wave to be executed back to back. */
-    WaveItem<List<Wave>> CHAINED_WAVES = WaveItem.build();
+    WaveItem<List<Wave>> CHAINED_WAVES = new WaveItem<List<Wave>>() {
+    };
 
 }

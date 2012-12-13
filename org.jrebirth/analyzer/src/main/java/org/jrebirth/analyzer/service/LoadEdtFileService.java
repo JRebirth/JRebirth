@@ -57,7 +57,7 @@ public class LoadEdtFileService extends ServiceBase {
     public void ready() throws CoreException {
         super.ready();
 
-        registerService(DO_LOAD_EVENTS, RE_EVENTS_LOADED, EditorWaves.EVENTS);
+        registerService(DO_LOAD_EVENTS, RE_EVENTS_LOADED/* , EditorWaves.EVENTS */);
     }
 
     /**

@@ -17,6 +17,9 @@
  */
 package org.jrebirth.core.wave;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 /**
  * The class <strong>WaveItem</strong>.
  * 
@@ -26,7 +29,7 @@ package org.jrebirth.core.wave;
  * 
  * @param <T> the type of the object mapped by this WaveItem
  */
-public final class WaveItem<T> {
+public abstract class WaveItem<T> {
 
     /** The generator of unique id. */
     private static int idGenerator;
@@ -35,31 +38,61 @@ public final class WaveItem<T> {
     private int uid;
 
     /** The type of the related object registered by this wave item. */
-    // private Class<T> itemClass;
+    private final Type itemType;
 
     /**
      * Private Constructor.
      */
-    private WaveItem() {
-        // this.itemClass = null;// (Class<T>) ClassUtility.getGenericType(0);
-    }
-
-    /**
-     * Build a wave item.
-     * 
-     * @return a new fresh wave item object
-     * 
-     * @param <T> the type of the object wrapped by this WaveData
-     */
-    public static <T> WaveItem<T> build() {
-        final WaveItem<T> waveItem = new WaveItem<>();
+    public WaveItem() {
+        this.itemType = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
         // Ensure that the uid will be unique at runtime
         synchronized (WaveItem.class) {
-            waveItem.setUid(++idGenerator);
+            setUid(++idGenerator);
         }
-        return waveItem;
     }
+
+    // /**
+    // * Build a wave item.
+    // *
+    // * @return a new fresh wave item object
+    // *
+    // * @param <T> the type of the object wrapped by this WaveData
+    // */
+    // public static <TT> WaveItem<TT> build(final Class<?>... cls) {
+    //
+    // final Type waveItemType = new ParameterizedType() {
+    // public Type getRawType() {
+    // return cls[0];
+    // }
+    //
+    // public Type getOwnerType() {
+    // return null;
+    // }
+    //
+    // public Type[] getActualTypeArguments() {
+    //
+    // final Type[] subtypes = new Type[cls.length - 1];
+    // for (int i = 1; i < cls.length; i++) {
+    // subtypes[i - 1] = cls[i];
+    // }
+    // return subtypes;
+    // }
+    // };
+    //
+    // final WaveItem<TT> waveItem = new WaveItem<TT>() {
+    // };
+    //
+    // waveItem.setItemClass(waveItemType);
+    // // Ensure that the uid will be unique at runtime
+    // synchronized (WaveItem.class) {
+    // waveItem.setUid(++idGenerator);
+    // }
+    // return waveItem;
+    // }
+    // public void setItemClass(final Type itemClass) {
+    // this.itemClass = itemClass;
+    // }
 
     /**
      * @return Returns the uid.
@@ -75,12 +108,12 @@ public final class WaveItem<T> {
         this.uid = uid;
     }
 
-    // /**
-    // * @return Returns the itemClass.
-    // */
-    // public Class<T> getItemClass() {
-    // return this.itemClass;
-    // }
+    /**
+     * @return Returns the itemType.
+     */
+    public Type getItemType() {
+        return this.itemType;
+    }
 
     /**
      * {@inheritDoc}

@@ -30,14 +30,17 @@ public final class WaveTypeBase implements WaveType {
     /** The generator of unique id. */
     private static int idGenerator;
 
+    /** The unique identifier of the wave type. */
+    private int uid;
+
     /** The action to performed, basically the name of the method to call. */
     private final String action;
 
+    /** The wave type of the wave returned after processing. */
+    private WaveType returnWaveType;
+
     /** Define arguments types to use. */
     private final List<WaveItem<?>> waveItemList = new ArrayList<>();
-
-    /** The unique identifier of the wave type. */
-    private int uid;
 
     /**
      * Default constructor.
@@ -72,6 +75,20 @@ public final class WaveTypeBase implements WaveType {
     }
 
     /**
+     * Build a wave type.
+     * 
+     * @param action The action to performed
+     * @param waveItems the list of #WaveItem required by this wave
+     * 
+     * @return a new fresh wave type object
+     */
+    public static WaveTypeBase build(final String action, final WaveType d, final WaveItem<?>... waveItems) {
+        final WaveTypeBase waveType = build(action, waveItems);
+        waveType.setReturnWaveType(d);
+        return waveType;
+    }
+
+    /**
      * @return Returns the uid.
      */
     public int getUid() {
@@ -97,6 +114,14 @@ public final class WaveTypeBase implements WaveType {
      */
     public List<WaveItem<?>> getWaveItemList() {
         return this.waveItemList;
+    }
+
+    public WaveType getReturnWaveType() {
+        return this.returnWaveType;
+    }
+
+    public void setReturnWaveType(final WaveType returnWaveType) {
+        this.returnWaveType = returnWaveType;
     }
 
     /**

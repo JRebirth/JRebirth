@@ -37,9 +37,19 @@ public interface WaveReady {
     /**
      * Begin to listen the type of wave for the current component.
      * 
+     * By default the Wave Contract will be checked use {@link #listen(WaveType, boolean)} otherwise
+     * 
      * @param waveType the type to listen
      */
     void listen(WaveType waveType);
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     * 
+     * @param waveType the type to listen
+     * @param checkWaveContract true to check the wave contract, false otherwise
+     */
+    void listen(WaveType waveType, boolean checkWaveContract);
 
     /**
      * Stop to listen the type of wave for the current component.

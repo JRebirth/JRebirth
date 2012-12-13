@@ -15,13 +15,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import java.io.InputStream;
+
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ParallelTransitionBuilder;
+import javafx.animation.TranslateTransition;
 import javafx.animation.TranslateTransitionBuilder;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.DropShadowBuilder;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.RectangleBuilder;
@@ -51,10 +59,10 @@ public final class SlideTransition extends Application {
      * {@inheritDoc}
      */
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(final Stage stage) throws Exception {
 
-        Pane p = new Pane();
-        Scene scene = new Scene(p, 800, 600);
+        final Pane p = new Pane();
+        final Scene scene = new Scene(p, 800, 600);
 
         stage.setScene(scene);
 
@@ -71,17 +79,67 @@ public final class SlideTransition extends Application {
         // RectangleBuilder.create().x(700).y(0).width(100).height(600).fill(Color.BEIGE).build()
         // );
 
-        for (int i = 0; i < 20; i++) {
-            p.getChildren().add(RectangleBuilder.create().x(i * 40).y(0).width(40).height(600).fill(Color.AZURE).build());
+        final DropShadow shadow = DropShadowBuilder.create()
+                .radius(4)
+                .color(Color.GREY)
+                .build();
+
+        Image image = null;
+        final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("Properties.png");
+        if (imageInputStream != null) {
+            image = new Image(imageInputStream);
+        }
+
+        for (int i = 0; i < 40; i++) {
+            p.getChildren().add(
+                    ImageViewBuilder.create()
+                            .image(image)
+                            .clip(RectangleBuilder.create()
+                                    .x(i * 20)
+                                    .y(0)
+                                    .width(20)
+                                    .height(600)
+                                    .build())
+                            // RectangleBuilder.create()
+                            // .x(i * 40)
+                            // .y(0)
+                            // .fitWidth(40)
+                            // .fitHeight(600)
+                            // .width(40)
+                            // .height(600)
+                            // .fill(Color.AZURE)
+                            .effect(shadow)
+                            // .strokeDashArray(2.0, 4.0)
+                            // .stroke(Color.CHOCOLATE)
+                            .build()
+                    );
         }
         stage.show();
 
-        ParallelTransition st = ParallelTransitionBuilder.create().delay(Duration.seconds(1)).autoReverse(true).cycleCount(10).build();
+        final EventHandler<javafx.event.ActionEvent> shadowRemover = new EventHandler<javafx.event.ActionEvent>() {
+
+            @Override
+            public void handle(final javafx.event.ActionEvent event) {
+                ((TranslateTransition) event.getSource()).getNode().setEffect(null);
+            }
+
+        };
+
+        final ParallelTransition st = ParallelTransitionBuilder.create().delay(Duration.seconds(1)).autoReverse(true).cycleCount(10).build();
         int i = 0;
-        for (Node n : p.getChildren()) {
+        for (final Node n : p.getChildren()) {
 
             st.getChildren().add(
-                    TranslateTransitionBuilder.create().delay(Duration.millis((i * 1))).node(n).fromY(0).toY(1000).duration(Duration.millis(500)).interpolator(Interpolator.EASE_IN).build());
+                    TranslateTransitionBuilder.create()
+                            .delay(Duration.millis(i * 50))
+                            .node(n)
+                            .fromY(0)
+                            .toY(1000)
+                            .duration(Duration.millis(1000))
+                            .interpolator(Interpolator.EASE_IN)
+                            .onFinished(shadowRemover)
+                            .build()
+                    );
             i++;
         }
 
