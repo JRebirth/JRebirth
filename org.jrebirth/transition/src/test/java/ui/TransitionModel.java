@@ -19,7 +19,8 @@ package ui;
 
 import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.wave.Wave;
-import org.jrebirth.transition.slicer.ImageSlicerService;
+import org.jrebirth.transition.service.slicer.NodeSlicerService;
+import org.jrebirth.transition.slicer.RandomFadingService;
 import org.jrebirth.transition.slicer.SlidingDoorService;
 
 /**
@@ -30,23 +31,32 @@ import org.jrebirth.transition.slicer.SlidingDoorService;
  */
 public final class TransitionModel extends AbstractModel<TransitionModel, TransitionView> {
 
-    private SlidingDoorService service2;
+    private NodeSlicerService imageSlicerService;
+
+    private RandomFadingService randomFadingService;
+
+    private SlidingDoorService slidingDoorService;
 
     /**
-     * @return Returns the service2.
+     * @return Returns the imageSlicerService.
      */
-    public SlidingDoorService getService2() {
-        return this.service2;
+    public NodeSlicerService getImageSlicerService() {
+        return this.imageSlicerService;
     }
 
     /**
-     * @return Returns the service.
+     * @return Returns the randomFadingService.
      */
-    public ImageSlicerService getService() {
-        return this.service;
+    public RandomFadingService getRandomFadingService() {
+        return this.randomFadingService;
     }
 
-    private ImageSlicerService service;
+    /**
+     * @return Returns the slidingDoorService.
+     */
+    public SlidingDoorService getSlidingDoorService() {
+        return this.slidingDoorService;
+    }
 
     /**
      * {@inheritDoc}
@@ -63,18 +73,22 @@ public final class TransitionModel extends AbstractModel<TransitionModel, Transi
     protected void customInitializeInnerModels() {
         // Nothing to do yet
 
-        this.service = getService(ImageSlicerService.class, "Properties");
+        this.imageSlicerService = getService(NodeSlicerService.class, "Properties");
 
-        this.service.setImage(getView().loadImage("Properties.png"));
-        this.service.setTileHeight(600);
-        this.service.setTileWidth(10);
+        this.imageSlicerService.setImage(getView().loadImage("Properties.png"));
+        this.imageSlicerService.setTileHeight(600);
+        this.imageSlicerService.setTileWidth(4);
 
-        this.service.doIt();
+        this.imageSlicerService.sliceNode(null, null);
 
-        // service2 = getService(RandomFadingService.class, "Properties");
-        this.service2 = getService(SlidingDoorService.class, "Properties");
-        this.service2.setNodes(this.service.getSlices());
-        this.service2.doIt();
+        this.randomFadingService = getService(RandomFadingService.class, "Properties");
+        this.randomFadingService.setNodes(this.imageSlicerService.getSlices());
+        this.randomFadingService.doIt();
+
+        this.slidingDoorService = getService(SlidingDoorService.class, "Properties");
+        this.slidingDoorService.setNodeDelay(4);
+        this.slidingDoorService.setNodes(this.imageSlicerService.getSlices());
+        this.slidingDoorService.doIt();
 
     }
 

@@ -29,6 +29,7 @@ import org.jrebirth.core.wave.WaveBuilder;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveType;
+import org.jrebirth.core.wave.WaveTypeBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -95,7 +96,7 @@ final class ServiceTask<T> extends Task<T> {
 
             } else {
                 final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.getWaveType());
-                final WaveItem<T> waveItem = (WaveItem<T>) this.service.getWaveItem(responseWaveType);
+                final WaveItem<T> waveItem = (WaveItem<T>) ((WaveTypeBase) responseWaveType).getWaveItemList().get(0);// this.service.getWaveItem(responseWaveType);
 
                 final Wave returnWave = WaveBuilder.create()
                         .waveType(responseWaveType)

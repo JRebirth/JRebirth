@@ -23,16 +23,25 @@ import java.util.Random;
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ParallelTransitionBuilder;
+import javafx.animation.PauseTransition;
+import javafx.animation.PauseTransitionBuilder;
+import javafx.animation.SequentialTransitionBuilder;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransitionBuilder;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.ServiceBase;
+import org.jrebirth.core.wave.WaveTypeBase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>ImageSlicerService</strong>.
@@ -40,6 +49,24 @@ import org.jrebirth.core.service.ServiceBase;
  * @author Sébastien Bordes
  */
 public class SlidingDoorService extends ServiceBase {
+
+    /** Wave type use to load events. */
+    public static final WaveTypeBase DO_SLICE_NODE = WaveTypeBase.build("SLICE_NODE", TransitionWaves.NODE);
+
+    /** Wave type to return events loaded. */
+    public static final WaveTypeBase RE_NODE_SLICED = WaveTypeBase.build("NODE_SLICED", TransitionWaves.NODE);
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SlidingDoorService.class);
+
+    /** The delay between each node transition property. */
+    private final IntegerProperty nodeDelayProperty = new SimpleIntegerProperty(4);
+
+    /** The delay between each node transition property. */
+    private final ObjectProperty<SlidingType> slidingTypeProperty = new SimpleObjectProperty<>(SlidingType.FromBottomLeft);
+
+    /** . */
+    private final ObjectProperty<Duration> translateDurationProperty = new SimpleObjectProperty<>(Duration.millis(500));
 
     /**
      * The <code>RANDOM</code> field is used to build a random integer.
@@ -49,23 +76,20 @@ public class SlidingDoorService extends ServiceBase {
     /**
      * The Enum SLIDING_TYPE.
      */
-    private enum SLIDING_TYPE {
+    private enum SlidingType {
 
-        /** The U p_ down. */
-        UP_DOWN,
+        FromBottomLeft,
+        FromBottomRight,
+        FromTopLeft,
+        FromTopRight,
 
-        /** The DOW n_ up. */
-        DOWN_UP,
+        FromLeftBottom,
+        FromRightBottom,
+        FromLeftTop,
+        FromRightTop,
 
-        /** The FRO m_ left. */
-        FROM_LEFT,
-
-        /** The FRO m_ right. */
-        FROM_RIGHT,
-
-        /** The T o_ center. */
-        TO_CENTER
-
+        FromHorizontalMiddle,
+        FromVerticalMiddle
     }
 
     /** The nodes. */
@@ -73,6 +97,57 @@ public class SlidingDoorService extends ServiceBase {
 
     /** The full transition. */
     private Transition fullTransition;
+
+    /**
+     * Sets the node delay.
+     * 
+     * @param column the new node delay
+     */
+    public void setNodeDelay(final Integer column) {
+        this.nodeDelayProperty.set(column);
+    }
+
+    /**
+     * Gets the node delay.
+     * 
+     * @return the node delay
+     */
+    public Integer getNodeDelay() {
+        return this.nodeDelayProperty.get();
+    }
+
+    /**
+     * Node delay property.
+     * 
+     * @return the integer property
+     */
+    public IntegerProperty nodeDelayProperty() {
+        return this.nodeDelayProperty;
+    }
+
+    public void setSlidingType(final SlidingType slidingType) {
+        this.slidingTypeProperty.set(slidingType);
+    }
+
+    public SlidingType getSlidingType() {
+        return this.slidingTypeProperty.get();
+    }
+
+    public ObjectProperty<SlidingType> slidingTypeProperty() {
+        return this.slidingTypeProperty;
+    }
+
+    public void setTranslateDuration(final Duration translateDuration) {
+        this.translateDurationProperty.set(translateDuration);
+    }
+
+    public Duration getTranslateDuration() {
+        return this.translateDurationProperty.get();
+    }
+
+    public ObjectProperty<Duration> translateDurationProperty() {
+        return this.translateDurationProperty;
+    }
 
     /**
      * Gets the full transition.
@@ -97,9 +172,7 @@ public class SlidingDoorService extends ServiceBase {
      * @param nodesToAdd the new nodes
      */
     public void setNodes(final List<? extends Node> nodesToAdd) {
-        for (final Node n : nodesToAdd) {
-            this.nodes.add(n);
-        }
+        this.nodes.addAll(nodesToAdd);
     }
 
     /**
@@ -133,18 +206,56 @@ public class SlidingDoorService extends ServiceBase {
         // p.getChildren().add(RectangleBuilder.create().x(i * 40).y(0).width(40).height(600).fill(Color.AZURE).build());
         // }
 
-        this.fullTransition = ParallelTransitionBuilder.create().autoReverse(true).cycleCount(2).build();
+        final ParallelTransition parallel = ParallelTransitionBuilder.create()
+                .build();
 
-        // int i = 0;
-        // Collections.shuffle(nodes);
+        // // int i = 0;
+        // // Collections.shuffle(nodes);
+        // for (final Node node : this.nodes) {
+        // node.setCache(true);
+        // node.setCacheHint(CacheHint.SPEED);
+        //
+        // ((ParallelTransition) this.fullTransition).getChildren().add(
+        // TranslateTransitionBuilder.create().delay(getRandomDuration()).node(node).toY(1000).duration(Duration.millis(500)).interpolator(Interpolator.EASE_IN).build());
+        // // i++;
+        // }
+
+        int i = 0;
         for (final Node node : this.nodes) {
-            node.setCache(true);
-            node.setCacheHint(CacheHint.SPEED);
 
-            ((ParallelTransition) this.fullTransition).getChildren().add(
-                    TranslateTransitionBuilder.create().delay(getRandomDuration()).node(node).toY(1000).duration(Duration.millis(500)).interpolator(Interpolator.EASE_IN).build());
-            // i++;
+            parallel.getChildren().add(
+                    TranslateTransitionBuilder.create()
+                            .delay(Duration.millis(i * getNodeDelay()))
+                            .node(node)
+                            // .fromY(0)
+                            // .toY(1000)
+                            .byY(1000)
+                            .duration(getTranslateDuration())
+                            .interpolator(Interpolator.EASE_IN)
+                            .build()
+                    );
+            // parallel.getChildren().add(
+            // TranslateTransitionBuilder.create()
+            // .delay(getRandomDuration())
+            // .node(node)
+            // .toY(1000)
+            // .duration(Duration.millis(500))
+            // .interpolator(Interpolator.EASE_IN)
+            // .build()
+            // );
+            i++;
         }
+        final PauseTransition pt = PauseTransitionBuilder.create()
+                .duration(Duration.seconds(1))
+                .build();
+
+        this.fullTransition = SequentialTransitionBuilder.create()
+                .children(
+                        parallel
+                )
+                .autoReverse(true)
+                .cycleCount(10)
+                .build();
 
     }
 
@@ -154,7 +265,7 @@ public class SlidingDoorService extends ServiceBase {
      * @return the random duration
      */
     private Duration getRandomDuration() {
-        return Duration.millis(RANDOM.nextLong() % 3000 + 200);
+        return Duration.millis(RANDOM.nextLong() % 3000 + 1000);
     }
 
 }

@@ -19,12 +19,14 @@ package org.jrebirth.core.link;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
+import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.EventType;
@@ -38,7 +40,9 @@ import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveBase;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveGroup;
+import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveType;
+import org.jrebirth.core.wave.WaveTypeBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,6 +78,18 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      */
     @Override
     public final void listen(final WaveType waveType) {
+        listen(waveType, true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void listen(final WaveType waveType, final boolean checkWaveContract) {
+
+        if (checkWaveContract) {
+            checkWaveTypeContract(waveType);
+        }
 
         final WaveReady waveReady = this;
 
@@ -84,6 +100,67 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
                 getNotifier().listen(waveReady, waveType);
             }
         });
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param waveType
+     */
+    private void checkWaveTypeContract(final WaveType waveType) {
+
+        final List<Method> methods = ClassUtility.retrieveMethodList(this.getClass(), waveType.toString());
+
+        if (methods.size() < 1) {
+            LOGGER.error("Service API is broken, no method {} is available", ClassUtility.underscoreToCamelCase(waveType.toString()));
+            throw new CoreRuntimeException("Service API is broken, no method " + ClassUtility.underscoreToCamelCase(waveType.toString()) + " is available");
+        }
+
+        // Check parameter only for a WaveTypeBase
+        if (waveType instanceof WaveTypeBase) {
+
+            boolean hasCompliantMethod = false;
+
+            final List<WaveItem<?>> wParams = ((WaveTypeBase) waveType).getWaveItemList();
+
+            final Method method = null;
+            for (int j = 0; j < methods.size() && !hasCompliantMethod; j++) {
+                hasCompliantMethod = checkMethodSignature(method, wParams);
+            }
+            if (!hasCompliantMethod) {
+                throw new CoreRuntimeException("Service API is broken, the method " + ClassUtility.underscoreToCamelCase(waveType.toString()) + " has wrong parameters, expected:  provided:");
+            }
+        }
+
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * 
+     * @return
+     */
+    private boolean checkMethodSignature(final Method method, final List<WaveItem<?>> wParams) {
+        boolean isCompliant = false;
+
+        final Type[] mParams = method.getGenericParameterTypes();
+
+        if (mParams.length - 1 == wParams.size()) {
+
+            // Check each parameter
+            for (int i = 0; i < mParams.length - 1 && !isCompliant; i++) {
+                if (ClassUtility.getClassFromType(mParams[i]).isAssignableFrom(ClassUtility.getClassFromType(wParams.get(i).getItemType()))) {
+                    // This method has not the right parameters
+                    break;
+                }
+                if (i == mParams.length - 2
+                        && Wave.class.isAssignableFrom(ClassUtility.getClassFromType(mParams[i + 1]))) {
+                    // This method is compliant with wave type
+                    isCompliant = true;
+                }
+            }
+        }
+        return isCompliant;
     }
 
     /**

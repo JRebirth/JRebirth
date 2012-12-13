@@ -20,6 +20,9 @@ package org.jrebirth.core.util;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.jrebirth.core.exception.CoreException;
@@ -140,33 +143,58 @@ public final class ClassUtility {
         throw new NoSuchMethodException(action);
     }
 
-    /**
-     * Return the generic type of the class.
-     * 
-     * @param i the index of the type to find
-     * 
-     * @return the generic type
-     */
-    public static Class<?> getGenericType(final int i) {
-        return null;
-    }
+    // public static Method getMethodFortWaveType(final Class<?> cls, final WaveTypeBase waveType) throws NoSuchMethodException {
+    // for (final Method m : cls.getMethods()) {
+    // if (m.getName().equals(action)) {
+    // return m;
+    // }
+    // }
+    // throw new NoSuchMethodException(action);
+    // }
+
+    // /**
+    // * Return the generic type of the class.
+    // *
+    // * @param i the index of the type to find
+    // *
+    // * @return the generic type
+    // */
+    // public static Class<?> getGenericType(final Class<?> mainClass, final int typeIndex) {
+    //
+    // return null;
+    // }
 
     /**
      * Check if the given method exists in the given class.
      * 
      * @param cls the class to search into
-     * @param rawMethodName the name of the method to check
+     * @param ;ethodName the name of the method to check (camelCased or in upper case with underscore separator)
      * 
      * @return true if the method exists
      */
-    public static boolean methodExist(final Class<?> cls, final String rawMethodName) {
-        boolean res = false;
-        final String methodName = underscoreToCamelCase(rawMethodName);
+    public static List<Method> retrieveMethodList(final Class<?> cls, final String methodName) {
+        final List<Method> methodList = new ArrayList<>();
+        final String camelCasedMethodName = underscoreToCamelCase(methodName);
         for (final Method m : cls.getMethods()) {
-            if (m.getName().equals(methodName)) {
-                res = true;
+            if (m.getName().equals(camelCasedMethodName) || m.getName().equals(methodName)) {
+                methodList.add(m);
             }
         }
-        return res;
+        return methodList;
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param type
+     * @return
+     */
+    public static Class<?> getClassFromType(final Type type) {
+        if (type instanceof Class<?>) {
+            return (Class<?>) type;
+        } else if (type instanceof ParameterizedType) {
+            return getClassFromType(((ParameterizedType) type).getRawType());
+        }
+        return null;
     }
 }

@@ -91,7 +91,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
                     break;
                 case UNDEFINED:
                 default:
-                    sendUndefinedWave(wave);
+                    processUndefinedWave(wave);
             }
         } catch (final WaveException e) {
             LOGGER.error("Failed to send Wave", e);
@@ -173,7 +173,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
      * 
      * @throws WaveException if wave dispatching fails
      */
-    private void sendUndefinedWave(final Wave wave) throws WaveException {
+    private void processUndefinedWave(final Wave wave) throws WaveException {
 
         // Retrieve all interested object from the map
         if (this.notifierMap.containsKey(wave.getWaveType())) {
