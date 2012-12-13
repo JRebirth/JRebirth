@@ -103,9 +103,11 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     }
 
     /**
-     * TODO To complete.
+     * Check if wave Type contract is respected.
      * 
-     * @param waveType
+     * @param waveType the contract to check
+     * 
+     *        Throws an exception is Wave Contract is broken
      */
     private void checkWaveTypeContract(final WaveType waveType) {
 
@@ -123,9 +125,8 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
 
             final List<WaveItem<?>> wParams = ((WaveTypeBase) waveType).getWaveItemList();
 
-            final Method method = null;
             for (int j = 0; j < methods.size() && !hasCompliantMethod; j++) {
-                hasCompliantMethod = checkMethodSignature(method, wParams);
+                hasCompliantMethod = checkMethodSignature(methods.get(j), wParams);
             }
             if (!hasCompliantMethod) {
                 throw new CoreRuntimeException("Service API is broken, the method " + ClassUtility.underscoreToCamelCase(waveType.toString()) + " has wrong parameters, expected:  provided:");
@@ -135,10 +136,12 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     }
 
     /**
-     * TODO To complete.
+     * Compare method parameters with wave parameters.
      * 
+     * @param method the method to check
+     * @param wParams the wave parameters taht define the contract
      * 
-     * @return
+     * @return true if the method has the right signature
      */
     private boolean checkMethodSignature(final Method method, final List<WaveItem<?>> wParams) {
         boolean isCompliant = false;
@@ -147,11 +150,13 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
 
         if (mParams.length - 1 == wParams.size()) {
 
+            // Flag used to skip a method not compliant
+            boolean skipMethod = false;
             // Check each parameter
-            for (int i = 0; i < mParams.length - 1 && !isCompliant; i++) {
+            for (int i = 0; !skipMethod && i < mParams.length - 1 && !isCompliant; i++) {
                 if (ClassUtility.getClassFromType(mParams[i]).isAssignableFrom(ClassUtility.getClassFromType(wParams.get(i).getItemType()))) {
                     // This method has not the right parameters
-                    break;
+                    skipMethod = true;
                 }
                 if (i == mParams.length - 2
                         && Wave.class.isAssignableFrom(ClassUtility.getClassFromType(mParams[i + 1]))) {
