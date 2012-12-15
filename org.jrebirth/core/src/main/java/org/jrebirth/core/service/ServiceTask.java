@@ -19,6 +19,8 @@ package org.jrebirth.core.service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.concurrent.Task;
 
@@ -86,8 +88,17 @@ final class ServiceTask<T> extends Task<T> {
     protected T call() throws WaveException {
         T res = null;
         try {
+
+            // Build parameter list of the searched method
+            final List<Object> params = new ArrayList<>();
+            for (final Object o : this.parameterValues) {
+                params.add(o);
+            }
+            // Add the current wave to process
+            params.add(this.wave);
+
             // Call this method with right parameters
-            res = (T) this.method.invoke(this.service, this.parameterValues);
+            res = (T) this.method.invoke(this.service, params.toArray());
 
             if (res == null) {
                 // No return wave required

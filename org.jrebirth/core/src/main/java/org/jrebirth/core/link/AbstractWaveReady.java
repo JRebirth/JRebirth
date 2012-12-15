@@ -114,8 +114,8 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         final List<Method> methods = ClassUtility.retrieveMethodList(this.getClass(), waveType.toString());
 
         if (methods.size() < 1) {
-            LOGGER.error("Service API is broken, no method {} is available", ClassUtility.underscoreToCamelCase(waveType.toString()));
-            throw new CoreRuntimeException("Service API is broken, no method " + ClassUtility.underscoreToCamelCase(waveType.toString()) + " is available");
+            LOGGER.error(this.getClass().getSimpleName() + " API is broken, no method {} is available", ClassUtility.underscoreToCamelCase(waveType.toString()));
+            throw new CoreRuntimeException(this.getClass().getSimpleName() + " API is broken, no method " + ClassUtility.underscoreToCamelCase(waveType.toString()) + " is available");
         }
 
         // Check parameter only for a WaveTypeBase
@@ -129,7 +129,8 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
                 hasCompliantMethod = checkMethodSignature(methods.get(j), wParams);
             }
             if (!hasCompliantMethod) {
-                throw new CoreRuntimeException("Service API is broken, the method " + ClassUtility.underscoreToCamelCase(waveType.toString()) + " has wrong parameters, expected:  provided:");
+                throw new CoreRuntimeException(this.getClass().getSimpleName() + " API is broken, the method " + ClassUtility.underscoreToCamelCase(waveType.toString())
+                        + " has wrong parameters, expected:  provided:");
             }
         }
 
@@ -148,7 +149,9 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
 
         final Type[] mParams = method.getGenericParameterTypes();
 
-        if (mParams.length - 1 == wParams.size()) {
+        if (wParams.size() == 0) {
+            isCompliant = true;
+        } else if (mParams.length - 1 == wParams.size()) {
 
             // Flag used to skip a method not compliant
             boolean skipMethod = false;

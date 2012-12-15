@@ -71,4 +71,14 @@ public interface Model extends FacadeReady<Model> {
      */
     Model getInnerModel(InnerModels innerModel, UniqueKey... innerModelKey);
 
+    /**
+     * Show the view.
+     */
+    public void showView();
+
+    /**
+     * Hide the view.
+     */
+    public void hideView();
+
 }

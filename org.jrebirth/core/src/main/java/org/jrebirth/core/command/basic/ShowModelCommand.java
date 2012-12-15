@@ -51,7 +51,7 @@ public class ShowModelCommand extends DefaultMultiCommand {
      */
     @Override
     public Class<? extends WaveBean> getWaveBeanClass() {
-        return ShowModelWaveBean.class;
+        return DisplayModelWaveBean.class;
     }
 
     /**

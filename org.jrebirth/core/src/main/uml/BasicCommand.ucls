@@ -3,7 +3,7 @@
   <package id="1" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.command.basic" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/basic" binary="false">    
     <position height="-1" width="-1" x="66" y="577"/>    
-    <display autosize="true" stereotype="false"/>  
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true"/>  
   </package>  
   <class id="2" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.command.basic.ShowModelWaveBuilder" 
     project="org.jrebirth.core" 
@@ -32,9 +32,9 @@
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="5" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.command.basic.ShowModelWaveBean" 
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.command.basic.DisplayModelWaveBean" 
     project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/basic/ShowModelWaveBean.java" binary="false">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/basic/DisplayModelWaveBean.java" binary="false">    
     <position height="-1" width="-1" x="462" y="620"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
@@ -116,7 +116,7 @@
   <package id="14" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.command" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command" binary="false">    
     <position height="-1" width="-1" x="24" y="20"/>    
-    <display autosize="true" stereotype="false"/>  
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true"/>  
   </package>  
   <dependency id="15">    
     <end type="SOURCE" refId="4"/>    

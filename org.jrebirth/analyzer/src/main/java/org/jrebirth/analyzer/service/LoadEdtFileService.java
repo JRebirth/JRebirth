@@ -30,6 +30,7 @@ import org.jrebirth.core.facade.Event;
 import org.jrebirth.core.facade.EventBase;
 import org.jrebirth.core.facade.GlobalFacadeBase;
 import org.jrebirth.core.service.ServiceBase;
+import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveTypeBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,7 +68,7 @@ public class LoadEdtFileService extends ServiceBase {
      * 
      * @return the list of loaded events
      */
-    public List<Event> loadEvents(final File selecteFile) {
+    public List<Event> loadEvents(final File selecteFile, final Wave wave) {
         final List<Event> eventList = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));)

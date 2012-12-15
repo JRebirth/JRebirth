@@ -58,12 +58,14 @@ public interface View<M extends Model, N extends Node, C extends Controller<?, ?
     /**
      * Prepare the view by creating all visual nodes.
      * 
+     * This method is called after Model initialization
+     * 
      * @throws CoreException if the preparation fails
      */
     void doPrepare() throws CoreException;
 
     /**
-     * Handle custom tasks to do the fist time after creation of the view.
+     * Handle custom tasks to do the first time after creation of the view.
      * 
      * For example : you could start the show animation of the view.
      */
@@ -77,7 +79,7 @@ public interface View<M extends Model, N extends Node, C extends Controller<?, ?
     void doReload();
 
     /**
-     * Handle custom tasks to do when the view is closed.
+     * Handle custom tasks to do when the view is closed or hidden.
      * 
      * For example : you could start the hide animation of the view.
      */

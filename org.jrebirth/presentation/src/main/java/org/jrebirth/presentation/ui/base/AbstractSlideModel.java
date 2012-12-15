@@ -110,6 +110,24 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     /**
      * {@inheritDoc}
      */
+    @Override
+    protected void customShowView() {
+        // Nothing to do generic
+        getClass();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customHideView() {
+        // Nothing to do generic
+        getClass();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     // @Override
     @Override
     protected void processAction(final Wave wave) {

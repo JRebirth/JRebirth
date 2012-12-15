@@ -44,4 +44,13 @@ public interface JRebirthWaves {
     WaveItem<List<Wave>> CHAINED_WAVES = new WaveItem<List<Wave>>() {
     };
 
+    /******************************/
+    /** WaveType related to Model */
+    /******************************/
+
+    /** The waveType used to show a view (start or reload). */
+    WaveType SHOW_VIEW = WaveTypeBase.build("PERFORM_SHOW_VIEW");
+
+    /** The waveType used to hide a view. */
+    WaveType HIDE_VIEW = WaveTypeBase.build("PERFORM_HIDE_VIEW");
 }
