@@ -27,11 +27,11 @@ import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.WaveBean;
 
 /**
- * The class <strong>ShowModelWaveBean</strong>.
+ * The class <strong>DisplayModelWaveBean</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class ShowModelWaveBean implements WaveBean {
+public class DisplayModelWaveBean implements WaveBean {
 
     /** The model class. */
     private Class<? extends Model> modelClass;
@@ -47,6 +47,9 @@ public class ShowModelWaveBean implements WaveBean {
 
     /** The created node. */
     private Node createdNode;
+
+    /** The model instance created. */
+    private Model model;
 
     /**
      * Gets the model class.
@@ -124,5 +127,13 @@ public class ShowModelWaveBean implements WaveBean {
      */
     public void setCreatedNode(final Node createdNode) {
         this.createdNode = createdNode;
+    }
+
+    public Model getModel() {
+        return this.model;
+    }
+
+    public void setModel(final Model model) {
+        this.model = model;
     }
 }

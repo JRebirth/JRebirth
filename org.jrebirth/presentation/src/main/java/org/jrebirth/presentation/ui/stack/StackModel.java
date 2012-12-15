@@ -85,6 +85,22 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
      * {@inheritDoc}
      */
     @Override
+    protected void customShowView() {
+        // Nothing to do generic
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customHideView() {
+        // Nothing to do generic
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void processAction(final Wave wave) {
         // Nothing to do yet
     }
@@ -142,7 +158,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
                 // final String animationKey = isReverse ? this.slidePosition + "_" + (this.slidePosition + 1) : this.slidePosition - 1 + "_" + this.slidePosition;
 
                 // Play the animation<
-                final ParallelTransition slideAnimation = getSlideTransition(isReverse, previousSlideModel, this.selectedSlideModel);
+                final ParallelTransition slideAnimation = buildSlideTransition(isReverse, previousSlideModel, this.selectedSlideModel);
 
                 if (isReverse) {
 
@@ -175,7 +191,7 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
      * 
      * @return the animation to show
      */
-    private ParallelTransition getSlideTransition(final boolean isReverse, final SlideModel<SlideStep> previousSlideModel, final SlideModel<SlideStep> selectedSlideModel) {
+    private ParallelTransition buildSlideTransition(final boolean isReverse, final SlideModel<SlideStep> previousSlideModel, final SlideModel<SlideStep> selectedSlideModel) {
         final ParallelTransition slideAnimation = ParallelTransitionBuilder.create().build();
 
         if (previousSlideModel != null) {
@@ -204,10 +220,10 @@ public final class StackModel extends AbstractModel<StackModel, StackView> {
 
                 // FIX ME NOT APPROPRIATED !!!
                 if (previousSlideModel != null) {
-                    previousSlideModel.getView().doHide();
+                    previousSlideModel.hideView();
                 }
                 if (selectedSlideModel != null) {
-                    selectedSlideModel.getView().doReload();
+                    selectedSlideModel.showView();
                 }
 
                 // Hide all other slides

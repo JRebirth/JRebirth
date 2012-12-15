@@ -32,7 +32,7 @@ import org.jrebirth.core.wave.WaveBase;
  * 
  * @author Sébastien Bordes
  */
-public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWaveBuilder, ShowModelWaveBean> {
+public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWaveBuilder, DisplayModelWaveBean> {
 
     /** The field used to store the property mask. */
     private int setMask;
@@ -53,7 +53,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
      * Private constructor.
      */
     private ShowModelWaveBuilder() {
-        super(ShowModelCommand.class, ShowModelWaveBean.class);
+        super(ShowModelCommand.class, DisplayModelWaveBean.class);
     }
 
     /**

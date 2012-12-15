@@ -28,6 +28,7 @@ import org.jrebirth.core.facade.EventType;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.util.ClassUtility;
+import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -48,6 +49,9 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
 
     /** The dedicated view component. */
     private transient V view;
+
+    /** Flag used to determine if a view has been already displayed, useful to manage first time animation. */
+    private boolean viewDisplayed = false;
 
     /** The root model not null for inner model. */
     private Model rootModel;
@@ -70,8 +74,8 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
         // Initialize inner models (if any)
         initializeInnerModels();
 
-        // Show the view
-        getView().doStart();
+        // Model and InnerModels are OK, let's prepare the view
+        getView().doPrepare();
     }
 
     /**
@@ -80,8 +84,9 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
      * @throws CoreException if the creation of the view fails
      */
     protected final void initialize() throws CoreException {
-        // Prepare the current view
-        getView().doPrepare();
+        // Do generic stuff
+        listen(JRebirthWaves.SHOW_VIEW);
+        listen(JRebirthWaves.HIDE_VIEW);
 
         // Do custom stuff
         customInitialize();
@@ -101,6 +106,57 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
         // Do custom stuff
         customInitializeInnerModels();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public final void performShowView(final Wave wave) {
+        showView();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public final void showView() {
+        //
+        customShowView();
+
+        if (this.viewDisplayed) {
+            //
+            getView().doReload();
+        } else {
+            //
+            getView().doStart();
+            this.viewDisplayed = true;
+        }
+    }
+
+    /**
+     * Perform custom action before showing the view.
+     */
+    protected abstract void customShowView();
+
+    /**
+     * {@inheritDoc}
+     */
+    public final void performHideView(final Wave wave) {
+        hideView();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public final void hideView() {
+        //
+        customHideView();
+        //
+        getView().doHide();
+    }
+
+    /**
+     * Perform custom action before hiding the view.
+     */
+    protected abstract void customHideView();
 
     /**
      * Initialize method for inner models to implement for adding custom processes.

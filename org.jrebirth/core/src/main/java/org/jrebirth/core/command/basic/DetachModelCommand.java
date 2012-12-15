@@ -25,14 +25,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The class <strong>AttachModelCommand</strong>.
+ * The class <strong>DetachModelCommand</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class AttachModelCommand extends DefaultUICommand {
+public class DetachModelCommand extends DefaultUICommand {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AttachModelCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DetachModelCommand.class);
 
     /**
      * {@inheritDoc}
@@ -40,26 +40,26 @@ public class AttachModelCommand extends DefaultUICommand {
     @Override
     protected void execute(final Wave wave) {
 
+        getWaveBean(wave).getModel().hideView();
+
         // final Pane parentNode = getWaveBean(wave).getParentNode();
-        final Node createdNode = getWaveBean(wave).getCreatedNode();
+        Node createdNode = getWaveBean(wave).getCreatedNode();
+        if (createdNode == null) {
+            createdNode = getWaveBean(wave).getModel().getRootNode();
+        }
 
         if (createdNode == null) {
-            LOGGER.warn("Impossible to attach model {} because the created node is null", getWaveBean(wave).getModelClass().getSimpleName());
+            LOGGER.warn("Impossible to dettach model {} because the node is null", getWaveBean(wave).getModelClass().getSimpleName());
         } else {
             if (getWaveBean(wave).getUniquePlaceHolder() != null) {
-                getWaveBean(wave).getUniquePlaceHolder().set(createdNode);
+                getWaveBean(wave).getUniquePlaceHolder().set(null);
             }
             if (getWaveBean(wave).getChidrenPlaceHolder() != null) {
-                getWaveBean(wave).getChidrenPlaceHolder().add(createdNode);
+                getWaveBean(wave).getChidrenPlaceHolder().remove(createdNode);
             }
             if (getWaveBean(wave).getUniquePlaceHolder() == null && getWaveBean(wave).getChidrenPlaceHolder() == null) {
-                LOGGER.warn("Impossible to attach model {}, no place holder found", getWaveBean(wave).getModelClass().getSimpleName());
+                LOGGER.warn("Impossible to detach model {}, no place holder found", getWaveBean(wave).getModelClass().getSimpleName());
             }
-
-            // Try to give focus to the new node added (Could be managed by a boolean ??)
-            // createdNode.requestFocus();
-
-            getWaveBean(wave).getModel().showView();
         }
     }
 

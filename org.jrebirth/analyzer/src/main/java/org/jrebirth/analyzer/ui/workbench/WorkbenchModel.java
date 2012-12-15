@@ -55,4 +55,22 @@ public final class WorkbenchModel extends AbstractModel<WorkbenchModel, Workbenc
         // Nothing to do yet
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customShowView() {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customHideView() {
+        // Nothing to do yet
+
+    }
+
 }

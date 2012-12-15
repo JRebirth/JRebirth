@@ -34,7 +34,7 @@ public final class PropertiesModel extends AbstractModel<PropertiesModel, Proper
      */
     @Override
     protected void customInitialize() {
-        listen(EditorWaves.DO_SELECT_EVENT);
+        listen(EditorWaves.DO_SELECT_EVENT, false);
     }
 
     /**
@@ -56,5 +56,23 @@ public final class PropertiesModel extends AbstractModel<PropertiesModel, Proper
 
             getView().getNodeName().setText(event.getTarget().getSimpleName());
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customShowView() {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customHideView() {
+        // Nothing to do yet
+
     }
 }

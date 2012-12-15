@@ -26,6 +26,7 @@ import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.key.ClassKey;
 import org.jrebirth.core.key.KeyBuilder;
+import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Model;
@@ -112,21 +113,30 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             // If the component isn't contained into a map, create and register it
             if (!exists(clazz, keyPart)) {
                 try {
-                    // Build an instance and register it
-                    register(build(clazz, keyPart), keyPart);
+
+                    // Build the new instance of the component
+                    readyObject = build(clazz, keyPart);
+
+                    // Register it
+                    register(readyObject, keyPart);
+
+                    // The component is accessible from facade, let's start its initialization
+                    readyObject.ready();
+
                 } catch (final CoreException ce) {
                     LOGGER.error(ce.getMessage());
                     final String msg = "Error while building " + clazz.getCanonicalName() + " instance";
                     LOGGER.error(msg);
                     throw new CoreRuntimeException(msg, ce);
                 }
+            } else {
+
+                // TODO OPTIMIZE KEY CREATION
+
+                // If no key is provided retrieve from the singleton map
+                // Extract the value from the weak reference
+                readyObject = (E) this.singletonMap.get(buildKey(clazz, keyPart));
             }
-
-            // TODO OPTIMIZE KEY CREATION
-
-            // If no key is provided retrieve from the singleton map
-            // Extract the value from the weak reference
-            readyObject = (E) this.singletonMap.get(buildKey(clazz, keyPart));
         }
         /*
          * } else {
@@ -168,7 +178,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * 
      * @return the key built
      */
-    private Object buildKey(final Class<? extends R> clazz, final Object... keyPart) {
+    private UniqueKey buildKey(final Class<? extends R> clazz, final Object... keyPart) {
         return KeyBuilder.buildKey(clazz, keyPart);
     }
 
@@ -182,10 +192,11 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * 
      * @throws CoreException if an error occurred
      */
-    protected R build(final Class<? extends R> clazz, final Object... keyPart) throws CoreException {
+    @SuppressWarnings("unchecked")
+    protected <E extends R> E build(final Class<E> clazz, final Object... keyPart) throws CoreException {
         try {
             // Build a new instance of the component
-            final R readyObject = clazz.newInstance();
+            final E readyObject = clazz.newInstance();
 
             // Retrieve the right event type to track
             EventType type = EventType.NONE;
@@ -203,16 +214,13 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             readyObject.setLocalFacade(this);
 
             // Create the unique key
-            readyObject.setKey(KeyBuilder.buildKey(readyObject.getClass(), keyPart));
+            readyObject.setKey(buildKey((Class<R>) readyObject.getClass(), keyPart));
 
             // TODO IMPROVE IT
             if (readyObject instanceof AbstractModel && keyPart.length > 0) {
                 // Attach the unique key (if any)
                 ((AbstractModel<?, ?>) readyObject).setModelObject(keyPart[0]);
             }
-
-            // Start the component initialization
-            readyObject.ready();
 
             // Component Ready !
             return readyObject;

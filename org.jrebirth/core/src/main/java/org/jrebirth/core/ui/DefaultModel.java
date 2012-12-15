@@ -52,6 +52,22 @@ public class DefaultModel<M extends Model, V extends View<?, ?, ?>> extends Abst
      * {@inheritDoc}
      */
     @Override
+    protected void customShowView() {
+        // Nothing to do generic
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customHideView() {
+        // Nothing to do generic
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void processAction(final Wave wave) {
         // Nothing to do generic
     }

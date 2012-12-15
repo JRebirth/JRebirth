@@ -56,6 +56,9 @@ public class PrepareModelCommand extends DefaultPoolCommand {
             modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelClass, keyPart);
         }
 
+        // Attach the model to allow reuse later in the process
+        getWaveBean(wave).setModel(modelInstance);
+
         // Build the first root node into the thread pool and link it to the waveBean
         getWaveBean(wave).setCreatedNode(modelInstance.getView().getRootNode());
     }
@@ -67,8 +70,8 @@ public class PrepareModelCommand extends DefaultPoolCommand {
      * 
      * @return the casted wave bean
      */
-    public ShowModelWaveBean getWaveBean(final Wave wave) {
-        return (ShowModelWaveBean) wave.getWaveBean();
+    public DisplayModelWaveBean getWaveBean(final Wave wave) {
+        return (DisplayModelWaveBean) wave.getWaveBean();
     }
 
 }
