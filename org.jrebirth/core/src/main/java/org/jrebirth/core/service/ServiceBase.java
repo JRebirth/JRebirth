@@ -57,9 +57,8 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
      * 
      * @param callType the wave type mapped to this service.
      * @param responseType the wave type of the wave emitted in return
-     * @param waveItem the list of wave item used as arguments
      */
-    public void registerService(final WaveType callType, final WaveType responseType/* , final WaveItem<?> waveItem */) {
+    public void registerService(final WaveType callType, final WaveType responseType) {
 
         listen(callType);
 

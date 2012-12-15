@@ -17,10 +17,7 @@
  */
 package org.jrebirth.core.command.basic;
 
-import java.util.List;
-
 import org.jrebirth.core.command.DefaultCommand;
-import org.jrebirth.core.service.Service;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveListener;
 import org.slf4j.Logger;
@@ -36,28 +33,13 @@ public class ChainServiceCommand extends DefaultCommand implements WaveListener 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ChainServiceCommand.class);
 
-    /** The index of the wave to process. */
-    private int index;
-
-    /** The list of service to be processed one after the other. */
-    private List<Service> serviceList;
-
-    /** The wave that launch this command. */
-    private Wave sourceWave;
-
     /**
      * {@inheritDoc}
      */
     @Override
     protected void execute(final Wave wave) {
-
-        // // The first time we store the list of wave to run into the command field
-        // if (this.index == 0) {
-        // this.waveList = wave.get(JRebirthWaves.CHAINED_WAVES);
-        // this.sourceWave = wave;
-        // }
-        //
-        // unqueueWaves();
+        LOGGER.info("execute");
+        // Nothing to do yet
     }
 
     /**
@@ -66,34 +48,6 @@ public class ChainServiceCommand extends DefaultCommand implements WaveListener 
     @Override
     public void postExecute(final Wave wave) {
         // Nothing
-    }
-
-    /**
-     * Recursive call.
-     */
-    private void unqueueWaves() {
-        //
-        // // Extract the next wave to run
-        // final Wave waveToRun = this.waveList.get(this.index);
-        //
-        // // The wave is null skip it and launch the next one
-        // if (waveToRun == null) {
-        //
-        // this.index++;
-        // // Run next command if any
-        // if (this.waveList.size() > this.index) {
-        // unqueueWaves();
-        // }
-        // } else {
-        //
-        // LOGGER.trace("Unqueue wave N° " + this.index + " >> " + waveToRun.toString());
-        //
-        // // Attach a listener to be informed when the wave will be consumed
-        // waveToRun.addWaveListener(this);
-        // // Send it to the queue in order to perform it
-        // sendWave(waveToRun);
-        // }
-        //
     }
 
     /**
@@ -125,13 +79,7 @@ public class ChainServiceCommand extends DefaultCommand implements WaveListener 
      */
     @Override
     public void waveConsumed(final Wave wave) {
-        // this.index++;
-        // // Run next command if any
-        // if (this.waveList.size() > this.index) {
-        // unqueueWaves();
-        // } else {
-        // fireConsumed(this.sourceWave);
-        // }
+        // Nothing to do yet
     }
 
     /**
@@ -139,7 +87,7 @@ public class ChainServiceCommand extends DefaultCommand implements WaveListener 
      */
     @Override
     public void waveFailed(final Wave wave) {
-        fireFailed(this.sourceWave);
+        // Nothing to do yet
     }
 
     /**
@@ -148,7 +96,6 @@ public class ChainServiceCommand extends DefaultCommand implements WaveListener 
     @Override
     public void waveCancelled(final Wave wave) {
         // Nothing to do yet
-
     }
 
     /**
@@ -157,6 +104,5 @@ public class ChainServiceCommand extends DefaultCommand implements WaveListener 
     @Override
     public void waveDestroyed(final Wave wave) {
         // Nothing to do yet
-
     }
 }

@@ -51,7 +51,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     private transient V view;
 
     /** Flag used to determine if a view has been already displayed, useful to manage first time animation. */
-    private boolean viewDisplayed = false;
+    private boolean viewDisplayed;
 
     /** The root model not null for inner model. */
     private Model rootModel;
@@ -108,7 +108,9 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     }
 
     /**
-     * {@inheritDoc}
+     * Perform show view.
+     * 
+     * @param wave the wave that trigger the action
      */
     public final void performShowView(final Wave wave) {
         showView();
@@ -117,6 +119,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     /**
      * {@inheritDoc}
      */
+    @Override
     public final void showView() {
         //
         customShowView();
@@ -137,7 +140,9 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     protected abstract void customShowView();
 
     /**
-     * {@inheritDoc}
+     * Perform hide view.
+     * 
+     * @param wave the wave that trigger the action
      */
     public final void performHideView(final Wave wave) {
         hideView();
@@ -146,6 +151,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     /**
      * {@inheritDoc}
      */
+    @Override
     public final void hideView() {
         //
         customHideView();

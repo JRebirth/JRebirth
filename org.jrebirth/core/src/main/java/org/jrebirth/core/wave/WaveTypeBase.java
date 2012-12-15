@@ -20,6 +20,7 @@ package org.jrebirth.core.wave;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
  * The class <strong>WaveTypeBase</strong>.
  * 
@@ -78,8 +79,8 @@ public final class WaveTypeBase implements WaveType {
      * Build a wave type.
      * 
      * @param action The action to performed
+     * @param d the d
      * @param waveItems the list of #WaveItem required by this wave
-     * 
      * @return a new fresh wave type object
      */
     public static WaveTypeBase build(final String action, final WaveType d, final WaveItem<?>... waveItems) {
@@ -89,6 +90,8 @@ public final class WaveTypeBase implements WaveType {
     }
 
     /**
+     * Gets the uid.
+     * 
      * @return Returns the uid.
      */
     public int getUid() {
@@ -96,6 +99,8 @@ public final class WaveTypeBase implements WaveType {
     }
 
     /**
+     * Sets the uid.
+     * 
      * @param uid The uid to set.
      */
     public void setUid(final int uid) {
@@ -103,6 +108,8 @@ public final class WaveTypeBase implements WaveType {
     }
 
     /**
+     * Gets the action.
+     * 
      * @return Returns the action.
      */
     public String getAction() {
@@ -110,16 +117,28 @@ public final class WaveTypeBase implements WaveType {
     }
 
     /**
+     * Gets the wave item list.
+     * 
      * @return Returns the waveItemList.
      */
     public List<WaveItem<?>> getWaveItemList() {
         return this.waveItemList;
     }
 
+    /**
+     * Gets the return wave type.
+     * 
+     * @return the return wave type
+     */
     public WaveType getReturnWaveType() {
         return this.returnWaveType;
     }
 
+    /**
+     * Sets the return wave type.
+     * 
+     * @param returnWaveType the new return wave type
+     */
     public void setReturnWaveType(final WaveType returnWaveType) {
         this.returnWaveType = returnWaveType;
     }
