@@ -72,13 +72,15 @@ public interface Model extends FacadeReady<Model> {
     Model getInnerModel(InnerModels innerModel, UniqueKey... innerModelKey);
 
     /**
-     * Show the view.
+     * Show the view.<br />
+     * In example : start the show transition
      */
-    public void showView();
+    void showView();
 
     /**
-     * Hide the view.
+     * Hide the view.<br />
+     * In example : start the hide transition
      */
-    public void hideView();
+    void hideView();
 
 }

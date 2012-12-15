@@ -149,7 +149,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
 
         final Type[] mParams = method.getGenericParameterTypes();
 
-        if (wParams.size() == 0) {
+        if (wParams.isEmpty() && Wave.class.isAssignableFrom(ClassUtility.getClassFromType(mParams[0]))) {
             isCompliant = true;
         } else if (mParams.length - 1 == wParams.size()) {
 

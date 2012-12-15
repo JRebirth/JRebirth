@@ -26,6 +26,7 @@ import javafx.scene.Node;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.WaveBean;
 
+// TODO: Auto-generated Javadoc
 /**
  * The class <strong>DisplayModelWaveBean</strong>.
  * 
@@ -70,6 +71,8 @@ public class DisplayModelWaveBean implements WaveBean {
     }
 
     /**
+     * Gets the key part.
+     * 
      * @return Returns the keyPart.
      */
     public List<Object> getKeyPart() {
@@ -77,6 +80,8 @@ public class DisplayModelWaveBean implements WaveBean {
     }
 
     /**
+     * Sets the key part.
+     * 
      * @param keyPart The keyPart to set.
      */
     public void setKeyPart(final List<Object> keyPart) {
@@ -84,6 +89,8 @@ public class DisplayModelWaveBean implements WaveBean {
     }
 
     /**
+     * Gets the unique place holder.
+     * 
      * @return Returns the uniquePlaceHolder.
      */
     public ObjectProperty<Node> getUniquePlaceHolder() {
@@ -91,6 +98,8 @@ public class DisplayModelWaveBean implements WaveBean {
     }
 
     /**
+     * Sets the unique place holder.
+     * 
      * @param uniquePlaceHolder The uniquePlaceHolder to set.
      */
     public void setUniquePlaceHolder(final ObjectProperty<Node> uniquePlaceHolder) {
@@ -98,6 +107,8 @@ public class DisplayModelWaveBean implements WaveBean {
     }
 
     /**
+     * Gets the chidren place holder.
+     * 
      * @return Returns the chidrenPlaceHolder.
      */
     public ObservableList<Node> getChidrenPlaceHolder() {
@@ -105,6 +116,8 @@ public class DisplayModelWaveBean implements WaveBean {
     }
 
     /**
+     * Sets the chidren place holder.
+     * 
      * @param chidrenPlaceHolder The chidrenPlaceHolder to set.
      */
     public void setChidrenPlaceHolder(final ObservableList<Node> chidrenPlaceHolder) {
@@ -129,10 +142,20 @@ public class DisplayModelWaveBean implements WaveBean {
         this.createdNode = createdNode;
     }
 
+    /**
+     * Gets the model.
+     * 
+     * @return the model
+     */
     public Model getModel() {
         return this.model;
     }
 
+    /**
+     * Sets the model.
+     * 
+     * @param model the new model
+     */
     public void setModel(final Model model) {
         this.model = model;
     }

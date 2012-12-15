@@ -107,7 +107,7 @@ final class ServiceTask<T> extends Task<T> {
 
             } else {
                 final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.getWaveType());
-                final WaveItem<T> waveItem = (WaveItem<T>) ((WaveTypeBase) responseWaveType).getWaveItemList().get(0);// this.service.getWaveItem(responseWaveType);
+                final WaveItem<T> waveItem = (WaveItem<T>) ((WaveTypeBase) responseWaveType).getWaveItemList().get(0);
 
                 final Wave returnWave = WaveBuilder.create()
                         .waveType(responseWaveType)

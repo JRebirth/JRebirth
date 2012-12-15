@@ -65,6 +65,7 @@ public class LoadEdtFileService extends ServiceBase {
      * Parse the event file.
      * 
      * @param selecteFile the event file selected
+     * @param wave the wave that trigger the action
      * 
      * @return the list of loaded events
      */

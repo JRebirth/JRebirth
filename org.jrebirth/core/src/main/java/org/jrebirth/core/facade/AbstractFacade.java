@@ -110,8 +110,17 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         // retrieve the component from the singleton map
         synchronized (this.singletonMap) {
 
-            // If the component isn't contained into a map, create and register it
+            // It the component is already registered, get it to return it
             if (!exists(clazz, keyPart)) {
+
+                // TODO OPTIMIZE KEY CREATION
+
+                // If no key is provided retrieve from the singleton map
+                // Extract the value from the weak reference
+                readyObject = (E) this.singletonMap.get(buildKey(clazz, keyPart));
+
+            } else {
+                // If the component isn't contained into the singleton map, create and register it
                 try {
 
                     // Build the new instance of the component
@@ -129,13 +138,6 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                     LOGGER.error(msg);
                     throw new CoreRuntimeException(msg, ce);
                 }
-            } else {
-
-                // TODO OPTIMIZE KEY CREATION
-
-                // If no key is provided retrieve from the singleton map
-                // Extract the value from the weak reference
-                readyObject = (E) this.singletonMap.get(buildKey(clazz, keyPart));
             }
         }
         /*
@@ -189,6 +191,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * @param keyPart the unique key (could be composed of many keyPart) or null for singleton
      * 
      * @return a new instance of the given clazz and key
+     * 
+     * @param <E> the type of the ready object to retrieve
      * 
      * @throws CoreException if an error occurred
      */
