@@ -21,7 +21,7 @@ import org.jrebirth.core.service.Service;
 
 /**
  * 
- * The class <strong>ServiceFacade</strong>. TODO To complete
+ * The class <strong>ServiceFacade</strong>.
  * 
  * @author Sébastien Bordes
  */

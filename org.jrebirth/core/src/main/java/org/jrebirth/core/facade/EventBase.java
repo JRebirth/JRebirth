@@ -216,7 +216,7 @@ public final class EventBase implements Event {
     // */
     // @Override
     // public Object getValue() {
-    // // TODO CHECK IT
+    // // CHECK IT
     // return null;
     // }
 

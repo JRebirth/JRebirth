@@ -26,7 +26,6 @@ import javafx.scene.Node;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.WaveBean;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class <strong>DisplayModelWaveBean</strong>.
  * 
