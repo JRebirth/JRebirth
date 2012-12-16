@@ -111,9 +111,9 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         synchronized (this.singletonMap) {
 
             // It the component is already registered, get it to return it
-            if (!exists(clazz, keyPart)) {
+            if (exists(clazz, keyPart)) {
 
-                // TODO OPTIMIZE KEY CREATION
+                // FIXME OPTIMIZE KEY CREATION
 
                 // If no key is provided retrieve from the singleton map
                 // Extract the value from the weak reference
@@ -220,7 +220,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             // Create the unique key
             readyObject.setKey(buildKey((Class<R>) readyObject.getClass(), keyPart));
 
-            // TODO IMPROVE IT
+            // FIXME IMPROVE IT
             if (readyObject instanceof AbstractModel && keyPart.length > 0) {
                 // Attach the unique key (if any)
                 ((AbstractModel<?, ?>) readyObject).setModelObject(keyPart[0]);

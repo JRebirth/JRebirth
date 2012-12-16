@@ -20,7 +20,6 @@ package org.jrebirth.core.wave;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class <strong>WaveTypeBase</strong>.
  * 

@@ -21,7 +21,7 @@ import org.jrebirth.core.concurrent.RunIntoType;
 import org.jrebirth.core.wave.Wave;
 
 /**
- * The class <strong>DefaultMultiCommand</strong>. TODO To complete
+ * The class <strong>DefaultMultiCommand</strong>.
  * 
  * @author Sébastien Bordes
  */

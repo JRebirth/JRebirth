@@ -21,7 +21,7 @@ import org.jrebirth.core.command.Command;
 
 /**
  * 
- * The class <strong>CommandFacade</strong>. TODO To complete
+ * The class <strong>CommandFacade</strong>.
  * 
  * @author Sébastien Bordes
  */

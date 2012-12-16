@@ -107,6 +107,6 @@ public class MultitonKey<C> extends ClassKey<C> {
      */
     @Override
     public Object getValue() {
-        return this.keyPartList.get(0); // TODO
+        return this.keyPartList.get(0); // FIXME
     }
 }
