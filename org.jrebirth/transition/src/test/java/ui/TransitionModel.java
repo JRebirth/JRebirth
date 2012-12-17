@@ -71,7 +71,6 @@ public final class TransitionModel extends AbstractModel<TransitionModel, Transi
      */
     @Override
     protected void customInitializeInnerModels() {
-        // Nothing to do yet
 
         this.imageSlicerService = getService(NodeSlicerService.class, "Properties");
 
@@ -97,6 +96,22 @@ public final class TransitionModel extends AbstractModel<TransitionModel, Transi
      */
     @Override
     protected void processAction(final Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customShowView() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customHideView() {
         // Nothing to do yet
     }
 }

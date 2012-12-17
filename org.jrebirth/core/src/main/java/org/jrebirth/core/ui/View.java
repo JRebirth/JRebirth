@@ -18,6 +18,7 @@
 package org.jrebirth.core.ui;
 
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 
 import org.jrebirth.core.exception.CoreException;
 
@@ -40,6 +41,13 @@ public interface View<M extends Model, N extends Node, C extends Controller<?, ?
      * @return the view base javafx node
      */
     N getRootNode();
+
+    /**
+     * Return the error node.
+     * 
+     * @return the error node
+     */
+    Pane getErrorNode();
 
     /**
      * Return the view model.

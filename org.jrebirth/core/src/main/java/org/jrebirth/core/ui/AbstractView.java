@@ -17,23 +17,19 @@
  */
 package org.jrebirth.core.ui;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.image.Image;
-import javafx.scene.text.TextBuilder;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.PaneBuilder;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.facade.EventType;
-import org.jrebirth.core.ui.fxml.AbstractFXMLController;
-import org.jrebirth.core.ui.fxml.FXMLComponent;
-import org.jrebirth.core.ui.fxml.FXMLController;
 import org.jrebirth.core.util.ClassUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,10 +55,13 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     private final transient M model;
 
     /** The view controller. */
-    private final transient C controller;
+    private transient C controller;
 
     /** The root node of this view. */
-    private final transient N rootNode;
+    private transient N rootNode;
+
+    /** The error node used if an error occurred. */
+    private transient Pane errorNode;
 
     /**
      * Default Constructor.
@@ -71,7 +70,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * 
      * @throws CoreException if the controller or the node creation has failed
      */
-    public AbstractView(final M model) throws CoreException {
+    public AbstractView(final M model) {
 
         // Attach the view model
         this.model = model;
@@ -79,11 +78,34 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         // Track this view creation
         getModel().getLocalFacade().getGlobalFacade().trackEvent(EventType.CREATE_VIEW, getModel().getClass(), this.getClass());
 
-        // Build the root node of the view
-        this.rootNode = buildRootNode();
+        try {
+            // Build the root node of the view
+            buildRootNode();
 
-        // Manage components controller
-        this.controller = buildController();
+            // Manage components controller
+            buildController();
+
+        } catch (final CoreException ce) {
+            this.controller = null;
+            this.rootNode = null;
+
+            LOGGER.error(this.getClass().getName() + " creation has failed ", ce);
+            buildErrorNode(ce);
+        }
+    }
+
+    /**
+     * Build the erroNode to display the error taht occured.
+     * 
+     * @param ce the CoreException to display
+     * 
+     * @return a pane that hold the textArea
+     */
+    private void buildErrorNode(final CoreException ce) {
+        final TextArea ta = TextAreaBuilder.create()
+                .text(ce.getMessage())
+                .build();
+        this.errorNode = PaneBuilder.create().children(ta).build();
     }
 
     /**
@@ -137,8 +159,8 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * @throws CoreException if introspection fails
      */
     @SuppressWarnings("unchecked")
-    private N buildRootNode() throws CoreException {
-        return (N) ClassUtility.buildGenericType(this.getClass(), 1);
+    protected void buildRootNode() throws CoreException {
+        this.rootNode = (N) ClassUtility.buildGenericType(this.getClass(), 1);
     }
 
     /**
@@ -149,9 +171,12 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * @throws CoreException if introspection fails
      */
     @SuppressWarnings("unchecked")
-    private C buildController() throws CoreException {
-        // Build the controller by introspection
-        return (C) ClassUtility.buildGenericType(this.getClass(), 2, this);
+    protected void buildController() throws CoreException {
+
+        if (!NullController.class.equals(ClassUtility.getGenericClass(this.getClass(), 2))) {
+            // Build the controller by introspection
+            this.controller = (C) ClassUtility.buildGenericType(this.getClass(), 2, this);
+        }
     }
 
     /**
@@ -179,6 +204,14 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final Pane getErrorNode() {
+        return this.errorNode;
+    }
+
+    /**
      * Initialize the view.
      * 
      * You must implement the customInitializeComponents method to prepare your view.
@@ -192,65 +225,6 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * Custom method used to initialize components.
      */
     protected abstract void customInitializeComponents();
-
-    /**
-     * Load a FXML component without resource bundle.
-     * 
-     * @param fxmlPath the fxml string path
-     * 
-     * @return a FXMLComponent object that wrap a fxml node with its controller
-     */
-    protected FXMLComponent loadFXML(final String fxmlPath) {
-        return loadFXML(fxmlPath, null);
-    }
-
-    /**
-     * Load a FXML component.
-     * 
-     * @param fxmlPath the fxml string path
-     * @param bundlePath the bundle string path
-     * 
-     * @return a FXMLComponent object that wrap a fxml node with its controller
-     */
-    @SuppressWarnings("unchecked")
-    protected FXMLComponent loadFXML(final String fxmlPath, final String bundlePath) {
-
-        final FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(Thread.currentThread().getContextClassLoader().getResource(fxmlPath));
-
-        if (bundlePath != null) {
-            fxmlLoader.setResources(ResourceBundle.getBundle(bundlePath));
-        }
-
-        Node node = null;
-        boolean error = false;
-        try {
-            error = fxmlLoader.getLocation() == null;
-            if (error) {
-                node = TextBuilder.create().text("FXML Error : " + fxmlPath).build();
-            } else {
-                node = (Node) fxmlLoader.load(fxmlLoader.getLocation().openStream());
-            }
-
-        } catch (final IOException e) {
-            throw new CoreRuntimeException("The FXML node doesn't exist : " + fxmlPath, e);
-        }
-
-        final FXMLController<M, ?> fxmlController = (FXMLController<M, ?>) fxmlLoader.getController();
-
-        // It's tolerated to have a null controller for an fxml node
-        if (fxmlController != null) {
-            // The fxml controller must extends AbstractFXMLController
-            if (!error && !(fxmlLoader.getController() instanceof AbstractFXMLController)) {
-                throw new CoreRuntimeException("The FXML controller must extends the FXMLController class : "
-                        + fxmlLoader.getController().getClass().getCanonicalName());
-            }
-            // Link the View component with the fxml controller
-            fxmlController.setModel(getModel());
-        }
-
-        return new FXMLComponent(node, fxmlController);
-    }
 
     /**
      * {@inheritDoc}

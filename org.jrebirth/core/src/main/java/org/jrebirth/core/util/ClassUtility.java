@@ -78,16 +78,14 @@ public final class ClassUtility {
 
             // Copy parameters type to find the right constructor
             final Class<?>[] parameterTypes = new Class<?>[parameters.length];
-            // final int i = 0;
+
+            int i = 0;
             for (final Object obj : parameters) {
-                parameterTypes[0] = obj.getClass();
+                parameterTypes[i] = obj.getClass();
+                i++;
             }
 
-            // Retrieve the generic super class Parameterized type
-            final ParameterizedType paramType = (ParameterizedType) mainClass.getGenericSuperclass();
-
-            // Retrieve the right generic type we want to instantiate
-            final Class<?> genericClass = (Class<?>) paramType.getActualTypeArguments()[superTypeIndex];
+            final Class<?> genericClass = getGenericClass(mainClass, superTypeIndex);
 
             // Find the right constructor and use arguments to create a new
             // instance
@@ -99,6 +97,25 @@ public final class ClassUtility {
             LOGGER.error(message, e);
             throw new CoreException(message, e);
         }
+    }
+
+    /**
+     * Return the generic class for the given parent class and index.
+     * 
+     * @param mainClass the parent class
+     * @param superTypeIndex the index of the generic type to return
+     * 
+     * @return the class of the generic type according to the index provided
+     */
+    public static Class<?> getGenericClass(final Class<?> mainClass, final int superTypeIndex) {
+
+        // Retrieve the generic super class Parameterized type
+        final ParameterizedType paramType = (ParameterizedType) mainClass.getGenericSuperclass();
+
+        // Retrieve the right generic type we want to instantiate
+        final Class<?> genericClass = getClassFromType(paramType.getActualTypeArguments()[superTypeIndex]);
+
+        return genericClass;
     }
 
     /**
