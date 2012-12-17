@@ -61,10 +61,24 @@ public class MultitonKey<C> extends ClassKey<C> {
         final StringBuffer sb = new StringBuffer();
 
         sb.append(getClassField().getCanonicalName());
-        for (final Object k : this.keyPartList) {
-            sb.append(k.toString()).append('|');
+        for (final Object keyObject : this.keyPartList) {
+            sb.append(buildObjectKey(keyObject)).append('|');
         }
         this.key = sb.toString();
+    }
+
+    /**
+     * Generate the string key for an object.
+     * 
+     * @param keyObject the object which is part of the global key
+     * 
+     * @return the unique string for this object
+     */
+    private String buildObjectKey(final Object keyObject) {
+
+        // FIXME ADD VISITOR + FACTORY PATTERN
+
+        return keyObject.toString();
     }
 
     /**
