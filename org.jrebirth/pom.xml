@@ -51,8 +51,8 @@
 		<connection>scm:git:git://github.com/JRebirth/JRebirth.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth.git</developerConnection>
 		<url>https://github.com/JRebirth/JRebirth</url>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 
 	<organization>
 		<name>JRebirth Open Group</name>
@@ -177,6 +177,14 @@
 			</plugin>
 
 		</plugins>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>2.2</version>
+			</extension>
+		</extensions>
 	</build>
 
 	<reporting>
@@ -225,7 +233,7 @@
 		<site>
 			<id>JRebirth_Sites</id>
 			<name>JRebirth Sites</name>
-			<url>scp://source.jrebirth.org:2022/var/www/sites/org.jrebirth-${project.version}</url>
+			<url>ftp://jrebirth.org/sites/${project.groupId}.${project.artifactId}-${project.version}</url>
 		</site>
 
 	</distributionManagement>
