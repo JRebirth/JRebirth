@@ -17,19 +17,15 @@
 		<sonar.jdbc.url>jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;characterEncoding=utf8</sonar.jdbc.url>
 		<sonar.jdbc.driver>com.mysql.jdbc.Driver</sonar.jdbc.driver>
 		<!--Parameters to add as arguments of the mvn command -->
-		<sonar.jdbc.username>sonar</sonar.jdbc.username>
-		<sonar.jdbc.password>sonar</sonar.jdbc.password>
+		<!-- <sonar.jdbc.username></sonar.jdbc.username> <sonar.jdbc.password></sonar.jdbc.password> -->
 
 		<jrebirth-configuration.version>1.0.0</jrebirth-configuration.version>
-
-
-		<!-- <javafx.home>C:/Program Files (x86)/Oracle/JavaFX 2.1 SDK</javafx.home> -->
 
 	</properties>
 
 	<modules>
 		<module>core</module>
-		<module>component</module>
+		<!-- <module>component</module> -->
 		<module>analyzer</module>
 		<module>archetype</module>
 		<module>presentation</module>
