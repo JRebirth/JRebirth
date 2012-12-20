@@ -71,13 +71,6 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
     }
 
     /**
-     * @param eventModel The eventModel to set.
-     */
-    public void setEventModel(final Event eventModel) {
-        setModelObject(eventModel);
-    }
-
-    /**
      * Show the ball node.
      */
     public void show() {
