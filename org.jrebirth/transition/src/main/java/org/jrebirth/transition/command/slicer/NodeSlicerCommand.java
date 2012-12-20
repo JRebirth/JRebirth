@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.transition.service.slicer;
+package org.jrebirth.transition.command.slicer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class NodeSlicerService extends ServiceBase {
+public class NodeSlicerCommand extends ServiceBase {
 
     /** Wave type use to load events. */
     public static final WaveTypeBase DO_SLICE_NODE = WaveTypeBase.build("SLICE_NODE", TransitionWaves.NODE);
@@ -54,7 +54,7 @@ public class NodeSlicerService extends ServiceBase {
     public static final WaveTypeBase RE_NODE_SLICED = WaveTypeBase.build("NODE_SLICED", TransitionWaves.SLICES);
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(NodeSlicerService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NodeSlicerCommand.class);
 
     /** The column property. */
     private final IntegerProperty columnProperty = new SimpleIntegerProperty();
@@ -81,7 +81,7 @@ public class NodeSlicerService extends ServiceBase {
     public void ready() throws CoreException {
         super.ready();
 
-        registerService(DO_SLICE_NODE, RE_NODE_SLICED/* , TransitionWaves.NODE */);
+        registerCallback(DO_SLICE_NODE, RE_NODE_SLICED/* , TransitionWaves.NODE */);
     }
 
     /**

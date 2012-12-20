@@ -21,7 +21,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
@@ -63,6 +65,8 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractWaveReady.class);
+    /** The wave type map. */
+    private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
 
     /**
      * Short cut method used to retrieve the notifier.
@@ -100,6 +104,40 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
                 getNotifier().listen(waveReady, waveType);
             }
         });
+    }
+
+    /**
+     * Register a wave call back contract.
+     * 
+     * @param callType the wave type mapped to this service.
+     * @param responseType the wave type of the wave emitted in return
+     */
+    public void registerCallback(final WaveType callType, final WaveType responseType) {
+        registerCallback(callType, responseType, true);
+    }
+
+    /**
+     * Register a wave call back contract.
+     * 
+     * @param callType the wave type mapped to this service.
+     * @param responseType the wave type of the wave emitted in return
+     */
+    public void registerCallback(final WaveType callType, final WaveType responseType, final boolean checkWaveContract) {
+
+        listen(callType);
+
+        this.returnWaveTypeMap.put(callType, responseType);
+    }
+
+    /**
+     * Return the return wave type.
+     * 
+     * @param waveType the source wave type
+     * 
+     * @return Returns the waveType for return wave.
+     */
+    public WaveType getReturnWaveType(final WaveType waveType) {
+        return this.returnWaveTypeMap.get(waveType);
     }
 
     /**

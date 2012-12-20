@@ -19,9 +19,7 @@ package org.jrebirth.core.service;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javafx.concurrent.Task;
 
@@ -32,7 +30,6 @@ import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;
-import org.jrebirth.core.wave.WaveType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,33 +45,6 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
 
     /** The class logger. */
     static final Logger LOGGER = LoggerFactory.getLogger(ServiceBase.class);
-
-    /** The wave type map. */
-    private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
-
-    /**
-     * Register a service contract.
-     * 
-     * @param callType the wave type mapped to this service.
-     * @param responseType the wave type of the wave emitted in return
-     */
-    public void registerService(final WaveType callType, final WaveType responseType) {
-
-        listen(callType);
-
-        this.returnWaveTypeMap.put(callType, responseType);
-    }
-
-    /**
-     * Return the return wave type.
-     * 
-     * @param waveType the source wave type
-     * 
-     * @return Returns the waveType for return wave.
-     */
-    public WaveType getReturnWaveType(final WaveType waveType) {
-        return this.returnWaveTypeMap.get(waveType);
-    }
 
     /**
      * {@inheritDoc}
@@ -133,7 +103,6 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
         } catch (final NoSuchMethodException e) {
             // If no method was found, call the default method
             processAction(sourceWave);
-
         }
 
     }
@@ -149,7 +118,7 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
      */
     private <T> void runTask(final Wave sourceWave, final Method method, final Object[] parameterValues) {
 
-        final ServiceBase localService = this;
+        final AbstractWaveReady<Service> localService = this;
 
         final Task<T> task = new ServiceTask<T>(localService, method, parameterValues, sourceWave);
 

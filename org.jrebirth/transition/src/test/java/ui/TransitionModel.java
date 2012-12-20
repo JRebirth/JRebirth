@@ -19,7 +19,7 @@ package ui;
 
 import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.wave.Wave;
-import org.jrebirth.transition.service.slicer.NodeSlicerService;
+import org.jrebirth.transition.command.slicer.NodeSlicerCommand;
 import org.jrebirth.transition.slicer.RandomFadingService;
 import org.jrebirth.transition.slicer.SlidingDoorService;
 
@@ -31,7 +31,7 @@ import org.jrebirth.transition.slicer.SlidingDoorService;
  */
 public final class TransitionModel extends AbstractModel<TransitionModel, TransitionView> {
 
-    private NodeSlicerService imageSlicerService;
+    private NodeSlicerCommand imageSlicerService;
 
     private RandomFadingService randomFadingService;
 
@@ -40,7 +40,7 @@ public final class TransitionModel extends AbstractModel<TransitionModel, Transi
     /**
      * @return Returns the imageSlicerService.
      */
-    public NodeSlicerService getImageSlicerService() {
+    public NodeSlicerCommand getImageSlicerService() {
         return this.imageSlicerService;
     }
 
@@ -72,7 +72,7 @@ public final class TransitionModel extends AbstractModel<TransitionModel, Transi
     @Override
     protected void customInitializeInnerModels() {
 
-        this.imageSlicerService = getService(NodeSlicerService.class, "Properties");
+        this.imageSlicerService = getService(NodeSlicerCommand.class, "Properties");
 
         this.imageSlicerService.setImage(getView().loadImage("Properties.png"));
         this.imageSlicerService.setTileHeight(600);

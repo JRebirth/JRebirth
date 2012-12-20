@@ -17,6 +17,9 @@
  */
 package org.jrebirth.core.link;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.EventType;
@@ -75,6 +78,42 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
     public void setKey(final UniqueKey key) {
         this.key = key;
     }
+
+    /**
+     * @return Returns the modelObject.
+     */
+    @SuppressWarnings("unchecked")
+    public Object getModelObject() {
+        Object modelObject = null;
+        if (this.key.getValue() instanceof List && !((List<Object>) this.key.getValue()).isEmpty()) {
+            modelObject = ((List<Object>) this.key.getValue()).get(0);
+        } else {
+            modelObject = this.key.getValue();
+        }
+        return modelObject;
+    }
+
+    /**
+     * @return Returns the list of model Object.
+     */
+    @SuppressWarnings("unchecked")
+    public List<Object> getListModelObject() {
+        List<Object> listModelObject = null;
+        if (this.key.getValue() instanceof List) {
+            listModelObject = (List<Object>) this.key.getValue();
+        } else {
+            listModelObject = Collections.emptyList();
+            listModelObject.add(this.key.getValue());
+        }
+        return listModelObject;
+    }
+
+    /**
+     * @param modelObject The modelObject to set.
+     */
+    // public void setModelObject(final Object modelObject) {
+    // this.modelObject = modelObject;
+    // }
 
     /**
      * {@inheritDoc}

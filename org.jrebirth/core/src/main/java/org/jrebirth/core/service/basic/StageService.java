@@ -30,7 +30,7 @@ public class StageService extends ServiceBase {
     public void ready() throws CoreException {
         super.ready();
 
-        registerService(DO_ADD_STAGE, RE_STAGE_ADDED);
+        registerCallback(DO_ADD_STAGE, RE_STAGE_ADDED);
     }
 
     /**

@@ -23,11 +23,11 @@ import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.AbstractBaseModel;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.ui.NullView;
+import org.jrebirth.core.ui.View;
 import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
 
 /**
- * 
  * The interface <strong>DefaultModel</strong>.
  * 
  * Default implementation of the model.
@@ -63,12 +63,32 @@ public abstract class FXMLModel<M extends Model> extends AbstractBaseModel<M, Nu
      */
     @Override
     protected final void initialize() throws CoreException {
+
+        fxmlPreInitialize();
+
         // Do generic stuff
         listen(JRebirthWaves.SHOW_VIEW);
         listen(JRebirthWaves.HIDE_VIEW);
 
+        if (getFXMLPath() != null) {
+            this.fxmlComponent = FXMLUtils.loadFXML(this, getFXMLPath(), getFXMLBundlePath());
+        }
+
         // Do custom stuff
         customInitialize();
+    }
+
+    /**
+     * Pre init.
+     */
+    protected abstract void fxmlPreInitialize();
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public View<?, ?, ?> getView() {
+        return null;
     }
 
     /**

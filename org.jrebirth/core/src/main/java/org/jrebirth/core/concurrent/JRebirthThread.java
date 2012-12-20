@@ -219,7 +219,11 @@ public final class JRebirthThread extends Thread {
         }
 
         // Manage the creation of the first node and show it !
-        chainedWaveList.add(getLaunchFirstViewWave());
+
+        final Wave firstViewWave = getLaunchFirstViewWave();
+        if (firstViewWave != null) {
+            chainedWaveList.add(firstViewWave);
+        }
 
         // Manage waves to run after the First node creation
         final List<Wave> postBootList = getApplication().getPostBootWaveList();
@@ -227,12 +231,14 @@ public final class JRebirthThread extends Thread {
             chainedWaveList.addAll(postBootList);
         }
 
-        getFacade().getNotifier().sendWave(
-                WaveBuilder.create()
-                        .waveGroup(WaveGroup.CALL_COMMAND)
-                        .relatedClass(ChainWaveCommand.class)
-                        .data(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList))
-                        .build());
+        if (!chainedWaveList.isEmpty()) {
+            getFacade().getNotifier().sendWave(
+                    WaveBuilder.create()
+                            .waveGroup(WaveGroup.CALL_COMMAND)
+                            .relatedClass(ChainWaveCommand.class)
+                            .data(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList))
+                            .build());
+        }
     }
 
     /**
@@ -286,12 +292,15 @@ public final class JRebirthThread extends Thread {
      * @return the wave responsible of the creation of the first view
      */
     protected Wave getLaunchFirstViewWave() {
-
+        Wave firstWave = null;
         // Generates the command cave directly to win a Wave turn
-        return ShowModelWaveBuilder.create()
-                .childrenPlaceHolder(this.application.getRootNode().getChildren())
-                .modelClass(this.application.getFirstModelClass())
-                .build();
+        if (this.application != null && this.application.getRootNode() != null && this.application.getFirstModelClass() != null) {
+            firstWave = ShowModelWaveBuilder.create()
+                    .childrenPlaceHolder(this.application.getRootNode().getChildren())
+                    .modelClass(this.application.getFirstModelClass())
+                    .build();
+        }
+        return firstWave;
 
     }
 

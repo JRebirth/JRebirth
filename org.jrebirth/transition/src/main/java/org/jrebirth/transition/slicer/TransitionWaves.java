@@ -22,7 +22,7 @@ import java.util.List;
 import javafx.scene.Node;
 
 import org.jrebirth.core.wave.WaveItem;
-import org.jrebirth.transition.service.slicer.SliceItem;
+import org.jrebirth.transition.command.slicer.SliceItem;
 
 /**
  * The class <strong>TransitionWaves</strong>.

@@ -28,7 +28,6 @@ import org.jrebirth.core.key.ClassKey;
 import org.jrebirth.core.key.KeyBuilder;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.service.Service;
-import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -219,12 +218,6 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
             // Create the unique key
             readyObject.setKey(buildKey((Class<R>) readyObject.getClass(), keyPart));
-
-            // FIXME IMPROVE IT
-            if (readyObject instanceof AbstractModel && keyPart.length > 0) {
-                // Attach the unique key (if any)
-                ((AbstractModel<?, ?>) readyObject).setModelObject(keyPart[0]);
-            }
 
             // Component Ready !
             return readyObject;
