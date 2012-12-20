@@ -25,6 +25,7 @@ import java.util.List;
 import javafx.concurrent.Task;
 
 import org.jrebirth.core.exception.WaveException;
+import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveBuilder;
@@ -58,7 +59,7 @@ final class ServiceTask<T> extends Task<T> {
     /**
      * The <code>localService</code>.
      */
-    private final ServiceBase service;
+    private final AbstractWaveReady<Service> service;
     /**
      * The <code>sourceWave</code>.
      */
@@ -72,7 +73,7 @@ final class ServiceTask<T> extends Task<T> {
      * @param service the service object
      * @param wave the wave to process
      */
-    ServiceTask(final ServiceBase service, final Method method, final Object[] parameterValues, final Wave wave) {
+    ServiceTask(final AbstractWaveReady<Service> service, final Method method, final Object[] parameterValues, final Wave wave) {
         super();
         this.service = service;
         this.method = method;

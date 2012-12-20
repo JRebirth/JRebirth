@@ -1,4 +1,4 @@
-package org.jrebirth.transition.service.slicer;
+package org.jrebirth.transition.command.slicer;
 
 import javafx.geometry.Bounds;
 import javafx.scene.Node;

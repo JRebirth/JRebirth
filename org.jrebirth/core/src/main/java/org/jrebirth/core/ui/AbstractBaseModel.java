@@ -41,9 +41,6 @@ import org.jrebirth.core.wave.Wave;
  */
 public abstract class AbstractBaseModel<M extends Model, V extends View<?, ?, ?>> extends AbstractWaveReady<Model> implements Model {
 
-    /** The model object. */
-    private transient Object modelObject;
-
     /** The root model not null for inner model. */
     private Model rootModel;
 
@@ -66,7 +63,9 @@ public abstract class AbstractBaseModel<M extends Model, V extends View<?, ?, ?>
         initializeInnerModels();
 
         // Model and InnerModels are OK, let's prepare the view
-        getView().doPrepare();
+        if (getView() != null) {
+            getView().doPrepare();
+        }
     }
 
     /**
@@ -95,20 +94,6 @@ public abstract class AbstractBaseModel<M extends Model, V extends View<?, ?, ?>
      * Initialize method for inner models to implement for adding custom processes.
      */
     protected abstract void customInitializeInnerModels();
-
-    /**
-     * @return Returns the modelObject.
-     */
-    public Object getModelObject() {
-        return this.modelObject;
-    }
-
-    /**
-     * @param modelObject The modelObject to set.
-     */
-    public void setModelObject(final Object modelObject) {
-        this.modelObject = modelObject;
-    }
 
     /**
      * {@inheritDoc}

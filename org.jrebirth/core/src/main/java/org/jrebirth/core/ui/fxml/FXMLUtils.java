@@ -1,6 +1,7 @@
 package org.jrebirth.core.ui.fxml;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXMLLoader;
@@ -47,7 +48,7 @@ public final class FXMLUtils {
     public static <M extends Model> FXMLComponent loadFXML(final M model, final String fxmlPath, final String bundlePath) {
 
         final FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(Thread.currentThread().getContextClassLoader().getResource(fxmlPath));
+        fxmlLoader.setLocation(convertFxmlUrl(model, fxmlPath));
 
         if (bundlePath != null) {
             fxmlLoader.setResources(ResourceBundle.getBundle(bundlePath));
@@ -81,5 +82,25 @@ public final class FXMLUtils {
         }
 
         return new FXMLComponent(node, fxmlController);
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param fxmlPath
+     * @return
+     */
+    private static <M extends Model> URL convertFxmlUrl(final M model, final String fxmlPath) {
+        URL fxmlUrl = null;
+        if (model != null) {
+            // Try to load the resource from the same path as the model class
+            fxmlUrl = model.getClass().getResource(fxmlPath);
+        }
+        if (fxmlUrl == null) {
+            // Try to load the resource from the full path org/jrebirth/core/ui/Test.fxml
+            fxmlUrl = Thread.currentThread().getContextClassLoader().getResource(fxmlPath);
+        }
+
+        return fxmlUrl;
     }
 }

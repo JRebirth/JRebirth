@@ -121,6 +121,12 @@ public class MultitonKey<C> extends ClassKey<C> {
      */
     @Override
     public Object getValue() {
-        return this.keyPartList.get(0); // FIXME
+        Object obj = null;
+        if (this.keyPartList.size() > 1) {
+            obj = this.keyPartList;
+        } else if (this.keyPartList.size() == 1) {
+            obj = this.keyPartList.get(0);
+        }
+        return obj;
     }
 }

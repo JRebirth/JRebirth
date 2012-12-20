@@ -61,7 +61,7 @@ public class TestService extends ServiceBase {
 
         listen(RE_JOB_DONE);
 
-        registerService(DO_JOB, RE_JOB_DONE);
+        registerCallback(DO_JOB, RE_JOB_DONE);
     }
 
     /**
