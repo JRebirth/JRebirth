@@ -34,7 +34,6 @@ public class UiFacade extends AbstractFacade<Model> {
      */
     public UiFacade(final GlobalFacade globalFacade) {
         super(globalFacade);
-        getGlobalFacade().trackEvent(EventType.CREATE_UI_FACADE, globalFacade.getClass(), this.getClass());
     }
 
 }

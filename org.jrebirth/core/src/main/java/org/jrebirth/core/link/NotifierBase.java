@@ -30,7 +30,6 @@ import org.jrebirth.core.concurrent.JRebirthThread;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.AbstractGlobalReady;
-import org.jrebirth.core.facade.EventType;
 import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.service.Service;
@@ -65,7 +64,6 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
      */
     public NotifierBase(final GlobalFacade globalFacade) {
         super(globalFacade);
-        getGlobalFacade().trackEvent(EventType.CREATE_NOTIFIER, globalFacade.getClass(), this.getClass());
     }
 
     /**

@@ -43,17 +43,17 @@ public interface GlobalFacade {
     /**
      * @return Returns the uiFacade.
      */
-    Facade<Model> getUiFacade();
+    LocalFacade<Model> getUiFacade();
 
     /**
      * @return Returns the serviceFacade.
      */
-    Facade<Service> getServiceFacade();
+    LocalFacade<Service> getServiceFacade();
 
     /**
      * @return Returns the commandFacade.
      */
-    Facade<Command> getCommandFacade();
+    LocalFacade<Command> getCommandFacade();
 
     /**
      * @return the application

@@ -34,7 +34,6 @@ public class ServiceFacade extends AbstractFacade<Service> {
      */
     public ServiceFacade(final GlobalFacade globalFacade) {
         super(globalFacade);
-        getGlobalFacade().trackEvent(EventType.CREATE_SERVICE_FACADE, globalFacade.getClass(), this.getClass());
     }
 
 }

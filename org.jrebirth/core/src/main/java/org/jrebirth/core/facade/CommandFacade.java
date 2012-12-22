@@ -34,6 +34,5 @@ public class CommandFacade extends AbstractFacade<Command> {
      */
     public CommandFacade(final GlobalFacade globalFacade) {
         super(globalFacade);
-        getGlobalFacade().trackEvent(EventType.CREATE_COMMAND_FACADE, globalFacade.getClass(), this.getClass());
     }
 }

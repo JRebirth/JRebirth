@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @param <R> A type that implements FacadeReady
  */
-public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractGlobalReady implements Facade<R> {
+public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractGlobalReady implements LocalFacade<R> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFacade.class);
@@ -73,8 +73,11 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             // Check if the class of the object is already stored into the singleton map
             // if (!this.singletonMap.containsKey(readyObject.getClass())) {
 
+            // reload the key
+            readyObject.setKey(buildKey((Class<? extends R>) readyObject.getClass(), keyPart));
+
             // Attach the facade to allow to retrieve any components
-            // readyObject.setLocalFacade(this);
+            readyObject.setLocalFacade(this);
 
             // Store the component into the singleton map
             this.singletonMap.put((ClassKey<E>) readyObject.getKey(), readyObject);
@@ -88,10 +91,14 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     @SuppressWarnings("unchecked")
     @Override
     public <E extends R> void unregister(final E readyObject, final Object... keyPart) {
-        // Release the facade link
-        readyObject.setLocalFacade(null);
 
         synchronized (this.singletonMap) {
+            // Release the key
+            readyObject.setKey(null);
+
+            // Release the facade link
+            readyObject.setLocalFacade(null);
+
             // Remove the component from the singleton map
             this.singletonMap.remove(buildKey((Class<? extends R>) readyObject.getClass(), keyPart));
         }

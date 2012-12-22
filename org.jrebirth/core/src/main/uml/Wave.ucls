@@ -55,7 +55,7 @@
   <interface id="7" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.WaveType" 
     project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveType.java" 
     binary="false">    
-    <position height="-1" width="-1" x="301" y="472"/>    
+    <position height="-1" width="-1" x="366" y="521"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
@@ -126,7 +126,7 @@
   <package id="15" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave" binary="false">    
     <position height="-1" width="-1" x="82" y="-31"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true"/>  
+    <display autosize="true" stereotype="false"/>  
   </package>  
   <class id="16" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.command.basic.ShowModelWaveBuilder" 
     project="org.jrebirth.core" 
@@ -137,62 +137,63 @@
       <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
-  <association id="17">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="18" name="waveItemList"/>      
-      <multiplicity id="19" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="20">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <realization id="21">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <nesting id="22">    
+  <generalization id="17">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <nesting id="18">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="5"/>  
   </nesting>  
-  <association id="23">    
+  <association id="19">    
+    <bendpoint x="612" y="578"/>    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="24" name="waveBean"/>      
-      <multiplicity id="25" minimum="0" maximum="1"/>    
+      <attribute id="20" name="waveDataList"/>      
+      <multiplicity id="21" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="26">    
+  <association id="22">    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="27" name="waveListeners"/>      
-      <multiplicity id="28" minimum="0" maximum="2147483647"/>    
+      <attribute id="23" name="relatedWave"/>      
+      <multiplicity id="24" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="25">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="26">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <association id="27">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="28" name="waveListeners"/>      
+      <multiplicity id="29" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="29">    
+  <association id="30">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="30" name="waveType"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
+      <attribute id="31" name="waveGroup"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="32">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="33" name="waveType"/>      
-      <multiplicity id="34" minimum="0" maximum="1"/>    
+  <association id="33">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="34" name="waveItem"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="35">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
   <association id="36">    
     <end type="SOURCE" refId="13" navigable="false">      
       <attribute id="37" name="status"/>      
@@ -202,70 +203,69 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="39">    
-    <bendpoint x="647" y="755"/>    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="40" name="waveData"/>      
-      <multiplicity id="41" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="42">    
-    <bendpoint x="464" y="588"/>    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="43" name="waveItemsMap"/>      
-      <multiplicity id="44" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="45">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="46" name="waveGroup"/>      
-      <multiplicity id="47" minimum="0" maximum="1"/>    
+      <attribute id="40" name="waveGroup"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="48">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <association id="49">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="50" name="waveGroup"/>      
-      <multiplicity id="51" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="52">    
+  <realization id="42">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  
+  <association id="43">    
+    <bendpoint x="647" y="755"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="44" name="waveData"/>      
+      <multiplicity id="45" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="46">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="47">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="48" name="waveType"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="51" name="waveItemList"/>      
+      <multiplicity id="52" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="53">    
-    <bendpoint x="612" y="578"/>    
+    <bendpoint x="464" y="588"/>    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="54" name="waveDataList"/>      
+      <attribute id="54" name="waveItemsMap"/>      
       <multiplicity id="55" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="56">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="57" name="waveItem"/>      
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="57" name="waveBean"/>      
       <multiplicity id="58" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="59">    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="60" name="relatedWave"/>      
+      <attribute id="60" name="waveType"/>      
       <multiplicity id="61" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 

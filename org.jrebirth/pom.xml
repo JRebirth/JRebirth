@@ -19,6 +19,10 @@
 		<!--Parameters to add as arguments of the mvn command -->
 		<!-- <sonar.jdbc.username></sonar.jdbc.username> <sonar.jdbc.password></sonar.jdbc.password> -->
 
+		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.jacoco.reportPath>${test.log.dir}/jacoco.exec</sonar.jacoco.reportPath><!-- ${user.dir}/target -->
+
 		<jrebirth-configuration.version>1.0.0</jrebirth-configuration.version>
 
 	</properties>
@@ -197,26 +201,29 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
+
+			<!-- <plugin>
 				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.2</version>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>2.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.6.0</version>
 				<configuration>
-					<formats>
-						<format>html</format>
-						<format>xml</format>
-					</formats>
+					<destFile>${test.log.dir}/jacoco.exec</destFile>${session.executionRootDirectory}/target/
 				</configuration>
 				<executions>
 					<execution>
-						<phase>package</phase>
 						<goals>
-							<goal>cobertura</goal>
+							<goal>prepare-agent</goal>
 						</goals>
+						<phase>initialize</phase>
 					</execution>
 				</executions>
 			</plugin>
-
+ -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>

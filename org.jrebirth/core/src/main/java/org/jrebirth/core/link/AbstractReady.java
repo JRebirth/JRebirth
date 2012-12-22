@@ -23,8 +23,8 @@ import java.util.List;
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.EventType;
-import org.jrebirth.core.facade.Facade;
 import org.jrebirth.core.facade.FacadeReady;
+import org.jrebirth.core.facade.LocalFacade;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
@@ -42,7 +42,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
     /**
      * The facade that manage same kind of object (from Service, Command and Model).
      */
-    private Facade<R> localFacade;
+    private LocalFacade<R> localFacade;
 
     /** The key that is used to register this component. */
     private UniqueKey key;
@@ -51,7 +51,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
-    public final Facade<R> getLocalFacade() {
+    public final LocalFacade<R> getLocalFacade() {
         return this.localFacade;
     }
 
@@ -59,7 +59,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
-    public final void setLocalFacade(final Facade<R> localFacade) {
+    public final void setLocalFacade(final LocalFacade<R> localFacade) {
         this.localFacade = localFacade;
     }
 
@@ -107,13 +107,6 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
         }
         return listModelObject;
     }
-
-    /**
-     * @param modelObject The modelObject to set.
-     */
-    // public void setModelObject(final Object modelObject) {
-    // this.modelObject = modelObject;
-    // }
 
     /**
      * {@inheritDoc}

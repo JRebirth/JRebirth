@@ -29,13 +29,6 @@ package org.jrebirth.core.facade;
 public interface Facade<R extends FacadeReady<R>> {
 
     /**
-     * Get the unique global facade.
-     * 
-     * @return the global facade
-     */
-    GlobalFacade getGlobalFacade();
-
-    /**
      * Register a new ready object component.
      * 
      * @param readyObject the component to register
