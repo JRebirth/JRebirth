@@ -80,21 +80,32 @@ public class GlobalFacadeBase implements GlobalFacade {
     public GlobalFacadeBase(final JRebirthApplication<?> application) {
         super();
 
+        // Link the application
+        this.application = application;
+        trackEvent(org.jrebirth.core.facade.EventType.CREATE_APPLICATION, null, getApplication().getClass());
+
         LOGGER.trace("Create the JRebirth Thread Pool");
         // Launch the default executor
         this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2,
                 new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(this), JTP_BASE_NAME));
 
-        // Link the application
-        this.application = application;
-        trackEvent(org.jrebirth.core.facade.EventType.CREATE_APPLICATION, null, getApplication().getClass());
         trackEvent(org.jrebirth.core.facade.EventType.CREATE_GLOBAL_FACADE, getApplication().getClass(), this.getClass());
 
-        // Build singletons
+        // Build the notifier manager
         this.notifier = buildNotifier();
-        this.uiFacade = buildUiFacade();
-        this.serviceFacade = buildServiceFacade();
+        trackEvent(EventType.CREATE_NOTIFIER, getClass(), this.notifier.getClass());
+
+        // Build the Command Facade
         this.commandFacade = buildCommandFacade();
+        trackEvent(EventType.CREATE_COMMAND_FACADE, getClass(), this.commandFacade.getClass());
+
+        // Build the Service Facade
+        this.serviceFacade = buildServiceFacade();
+        trackEvent(EventType.CREATE_SERVICE_FACADE, getClass(), this.serviceFacade.getClass());
+
+        // Build the Ui Facade
+        this.uiFacade = buildUiFacade();
+        trackEvent(EventType.CREATE_UI_FACADE, getClass(), this.uiFacade.getClass());
     }
 
     /**

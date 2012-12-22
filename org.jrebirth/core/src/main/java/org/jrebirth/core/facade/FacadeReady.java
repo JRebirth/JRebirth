@@ -43,14 +43,14 @@ public interface FacadeReady<R extends FacadeReady<R>> extends WaveReady {
      * 
      * @return the local facade
      */
-    Facade<R> getLocalFacade();
+    LocalFacade<R> getLocalFacade();
 
     /**
      * Attach the local facade for this object type.
      * 
      * @param localFacade the local facade to set
      */
-    void setLocalFacade(Facade<R> localFacade);
+    void setLocalFacade(LocalFacade<R> localFacade);
 
     /**
      * @return Returns the key.
