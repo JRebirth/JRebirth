@@ -202,17 +202,13 @@
 			</plugin>
 
 
-			<!-- <plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>2.0</version>
-			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.6.0</version>
 				<configuration>
-					<destFile>${test.log.dir}/jacoco.exec</destFile>${session.executionRootDirectory}/target/
+					<destFile>${test.log.dir}/jacoco.exec</destFile>
+					<!-- ${session.executionRootDirectory}/target/ -->
 				</configuration>
 				<executions>
 					<execution>
@@ -223,7 +219,7 @@
 					</execution>
 				</executions>
 			</plugin>
- -->
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
