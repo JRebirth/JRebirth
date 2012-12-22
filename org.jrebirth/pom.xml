@@ -19,10 +19,10 @@
 		<!--Parameters to add as arguments of the mvn command -->
 		<!-- <sonar.jdbc.username></sonar.jdbc.username> <sonar.jdbc.password></sonar.jdbc.password> -->
 
-		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+<!-- 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-		<sonar.jacoco.reportPath>${test.log.dir}/jacoco.exec</sonar.jacoco.reportPath><!-- ${user.dir}/target -->
-
+		<sonar.jacoco.reportPath>${test.log.dir}/jacoco.exec</sonar.jacoco.reportPath>${user.dir}/target
+ -->
 		<jrebirth-configuration.version>1.0.0</jrebirth-configuration.version>
 
 	</properties>
@@ -205,9 +205,9 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.6.0</version>
+				<version>0.6.0.201210061924</version>
 				<configuration>
-					<destFile>${test.log.dir}/jacoco.exec</destFile>
+					<!-- <destFile>${test.log.dir}/jacoco.exec</destFile> -->
 					<!-- ${session.executionRootDirectory}/target/ -->
 				</configuration>
 				<executions>
