@@ -28,14 +28,13 @@ import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
 
 /**
- * The interface <strong>DefaultModel</strong>.
+ * The interface <strong>FXMLModel</strong>.
  * 
- * Default implementation of the model.
+ * Default implementation used to manage FXML file.
  * 
  * @author Sébastien Bordes
  * 
  * @param <M> the class type of the current model
- * @param <V> the class type of the view managed by this model
  */
 public abstract class FXMLModel<M extends Model> extends AbstractBaseModel<M, NullView> {
 
@@ -43,18 +42,20 @@ public abstract class FXMLModel<M extends Model> extends AbstractBaseModel<M, Nu
     private FXMLComponent fxmlComponent;
 
     /**
+     * Return the fxml path of the the file to load.
      * 
-     * TODO To complete.
+     * @see FXMLUtils
      * 
-     * @return
+     * @return the fxml path
      */
     protected abstract String getFXMLPath();
 
     /**
+     * Return the bunlde path of the the properties file to load.
      * 
-     * TODO To complete.
+     * @see FXMLUtils
      * 
-     * @return
+     * @return the bundle path
      */
     protected abstract String getFXMLBundlePath();
 
@@ -87,7 +88,7 @@ public abstract class FXMLModel<M extends Model> extends AbstractBaseModel<M, Nu
      * {@inheritDoc}
      */
     @Override
-    public View<?, ?, ?> getView() {
+    public final View<?, ?, ?> getView() {
         return null;
     }
 
@@ -111,14 +112,6 @@ public abstract class FXMLModel<M extends Model> extends AbstractBaseModel<M, Nu
     @Override
     public Node getRootNode() {
         return this.fxmlComponent.getNode();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void customInitializeInnerModels() {
-        // Nothing to do generic
     }
 
 }

@@ -185,11 +185,12 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
         boolean noHookFound = true;
         // Check if the contract is respected by searching a placeholder from WaveData
-        for (final WaveData<?> wd : waveData) {
+        WaveData<?> wd;
+        for (int i = 0; i < waveData.length && noHookFound; i++) {
+            wd = waveData[i];
             if ((wd.getKey() == JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER || wd.getKey() == JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER)
                     && wd.getValue() != null) {
                 noHookFound = false;
-                break;
             }
         }
         // Stop the process if no placeholder have been found to attach the model-view created

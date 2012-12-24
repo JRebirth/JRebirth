@@ -41,10 +41,6 @@ public abstract class AbstractResourceBuilder<E, P, R> implements ResourceBuilde
     /** The resource weak Map. */
     private final Map<E, WeakReference<R>> resourceMap = new WeakHashMap<>();
 
-    // public AbstractResourceFactory(Class<E> enumClass) {
-    // paramsMap = new HashMap<E, P>();
-    // }
-
     /**
      * {@inheritDoc}
      */

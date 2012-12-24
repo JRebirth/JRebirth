@@ -107,21 +107,17 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     }
 
     /**
-     * Register a wave call back contract.
-     * 
-     * @param callType the wave type mapped to this service.
-     * @param responseType the wave type of the wave emitted in return
+     * {@inheritDoc}
      */
+    @Override
     public void registerCallback(final WaveType callType, final WaveType responseType) {
         registerCallback(callType, responseType, true);
     }
 
     /**
-     * Register a wave call back contract.
-     * 
-     * @param callType the wave type mapped to this service.
-     * @param responseType the wave type of the wave emitted in return
+     * {@inheritDoc}
      */
+    @Override
     public void registerCallback(final WaveType callType, final WaveType responseType, final boolean checkWaveContract) {
 
         listen(callType);

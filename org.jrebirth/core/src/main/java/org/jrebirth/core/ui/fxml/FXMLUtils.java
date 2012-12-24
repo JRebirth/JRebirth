@@ -28,9 +28,18 @@ public final class FXMLUtils {
     /**
      * Load a FXML component without resource bundle.
      * 
+     * The fxml path could be :
+     * <ul>
+     * <li>Relative : fxml file will be loaded with the classloader of the given model class</li>
+     * <li>Absolute : fxml file will be loaded with default thread class loader, packages must be separated by / character</li>
+     * </ul>
+     * 
+     * @param model the model that will manage the fxml node
      * @param fxmlPath the fxml string path
      * 
      * @return a FXMLComponent object that wrap a fxml node with its controller
+     * 
+     * @param <M> the model type that will manage this fxml node
      */
     public static <M extends Model> FXMLComponent loadFXML(final M model, final String fxmlPath) {
         return loadFXML(model, fxmlPath, null);
@@ -39,10 +48,19 @@ public final class FXMLUtils {
     /**
      * Load a FXML component.
      * 
+     * The fxml path could be :
+     * <ul>
+     * <li>Relative : fxml file will be loaded with the classloader of the given model class</li>
+     * <li>Absolute : fxml file will be loaded with default thread class loader, packages must be separated by / character</li>
+     * </ul>
+     * 
+     * @param model the model that will manage the fxml node
      * @param fxmlPath the fxml string path
      * @param bundlePath the bundle string path
      * 
      * @return a FXMLComponent object that wrap a fxml node with its controller
+     * 
+     * @param <M> the model type that will manage this fxml node
      */
     @SuppressWarnings("unchecked")
     public static <M extends Model> FXMLComponent loadFXML(final M model, final String fxmlPath, final String bundlePath) {
@@ -85,9 +103,11 @@ public final class FXMLUtils {
     }
 
     /**
-     * TODO To complete.
+     * Convert The url of fxml files to allow local and path loading.
      * 
-     * @param fxmlPath
+     * @param model the model class taht will be used for relative loading
+     * @param fxmlPath the path of the fxml file (relative or absolute)
+     * 
      * @return
      */
     private static <M extends Model> URL convertFxmlUrl(final M model, final String fxmlPath) {
