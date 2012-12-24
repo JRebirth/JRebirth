@@ -108,7 +108,9 @@ public final class FXMLUtils {
      * @param model the model class taht will be used for relative loading
      * @param fxmlPath the path of the fxml file (relative or absolute)
      * 
-     * @return
+     * @return the FXML file URL
+     * 
+     * @param <M> the model type that will manage this fxml node
      */
     private static <M extends Model> URL convertFxmlUrl(final M model, final String fxmlPath) {
         URL fxmlUrl = null;
