@@ -52,6 +52,23 @@ public interface WaveReady {
     void listen(WaveType waveType, boolean checkWaveContract);
 
     /**
+     * Register a wave call back contract.
+     * 
+     * @param callType the wave type mapped to this service.
+     * @param responseType the wave type of the wave emitted in return
+     */
+    void registerCallback(final WaveType callType, final WaveType responseType);
+
+    /**
+     * Register a wave call back contract.
+     * 
+     * @param callType the wave type mapped to this service.
+     * @param responseType the wave type of the wave emitted in return
+     * @param checkWaveContract true to check the wave contract, false otherwise
+     */
+    void registerCallback(final WaveType callType, final WaveType responseType, final boolean checkWaveContract);
+
+    /**
      * Stop to listen the type of wave for the current component.
      * 
      * @param waveType the type to stop to listen

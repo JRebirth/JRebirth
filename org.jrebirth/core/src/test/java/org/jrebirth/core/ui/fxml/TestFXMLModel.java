@@ -103,4 +103,13 @@ public class TestFXMLModel extends FXMLModel<TestFXMLModel> {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customInitializeInnerModels() {
+        // Nothing to do yet
+
+    }
+
 }

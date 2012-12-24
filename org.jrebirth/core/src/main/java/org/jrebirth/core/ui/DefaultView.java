@@ -19,8 +19,6 @@ package org.jrebirth.core.ui;
 
 import javafx.scene.Node;
 
-import org.jrebirth.core.exception.CoreException;
-
 /**
  * 
  * The class <strong>DefaultView</strong>.
@@ -40,10 +38,8 @@ public class DefaultView<M extends Model, N extends Node, C extends Controller<?
      * Default Constructor.
      * 
      * @param model the model of the view
-     * 
-     * @throws CoreException if an error occurred while initializing
      */
-    public DefaultView(final M model) throws CoreException {
+    public DefaultView(final M model) {
         super(model);
     }
 
