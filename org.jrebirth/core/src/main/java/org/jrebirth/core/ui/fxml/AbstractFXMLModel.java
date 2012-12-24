@@ -36,7 +36,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @param <M> the class type of the current model
  */
-public abstract class FXMLModel<M extends Model> extends AbstractBaseModel<M, NullView> {
+public abstract class AbstractFXMLModel<M extends Model> extends AbstractBaseModel<M, NullView> {
 
     /** The fxmlComponent that wrap the node and its controller. */
     private FXMLComponent fxmlComponent;

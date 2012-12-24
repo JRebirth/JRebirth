@@ -67,8 +67,6 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * Default Constructor.
      * 
      * @param model the dedicated view model
-     * 
-     * @throws CoreException if the controller or the node creation has failed
      */
     public AbstractView(final M model) {
 
@@ -98,8 +96,6 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * Build the erroNode to display the error taht occured.
      * 
      * @param ce the CoreException to display
-     * 
-     * @return a pane that hold the textArea
      */
     private void buildErrorNode(final CoreException ce) {
         final TextArea ta = TextAreaBuilder.create()
@@ -154,8 +150,6 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     /**
      * Build the root node.
      * 
-     * @return the dedicated root node
-     * 
      * @throws CoreException if introspection fails
      */
     @SuppressWarnings("unchecked")
@@ -165,8 +159,6 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Build the view controller.
-     * 
-     * @return the dedicated view controller
      * 
      * @throws CoreException if introspection fails
      */

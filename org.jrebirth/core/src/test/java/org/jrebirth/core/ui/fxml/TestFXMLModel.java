@@ -7,7 +7,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public class TestFXMLModel extends FXMLModel<TestFXMLModel> {
+public class TestFXMLModel extends AbstractFXMLModel<TestFXMLModel> {
 
     private String fxmlPath;
 

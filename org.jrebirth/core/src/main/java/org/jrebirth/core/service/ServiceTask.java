@@ -52,14 +52,17 @@ final class ServiceTask<T> extends Task<T> {
      * The <code>parameterValues</code>.
      */
     private final Object[] parameterValues;
+
     /**
      * The <code>method</code>.
      */
     private final Method method;
+
     /**
      * The <code>localService</code>.
      */
     private final AbstractWaveReady<Service> service;
+
     /**
      * The <code>sourceWave</code>.
      */
