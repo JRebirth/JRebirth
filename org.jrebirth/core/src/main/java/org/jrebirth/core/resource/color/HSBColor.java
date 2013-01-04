@@ -18,27 +18,27 @@
 package org.jrebirth.core.resource.color;
 
 /**
- * The interface <strong>HSBColor</strong>.
+ * The class <strong>HSBColor</strong>.
  * 
  * @author Sébastien Bordes
  */
 public class HSBColor extends AbstractBaseColor {
 
-    /** The saturation value 0-255. */
+    /** The saturation value [>0.0 in degrees]. */
     private final double hue;
 
-    /** The saturation value 0-255. */
+    /** The saturation value [0.0-1.0]. */
     private final double saturation;
 
-    /** The brightness value 0-255. */
+    /** The brightness value [0.0-1.0]. */
     private final double brightness;
 
     /**
      * Default Constructor.
      * 
-     * @param hue the color hue
-     * @param saturation the color saturation
-     * @param brightness the color brightness
+     * @param hue the color hue [>0.0 in degrees]
+     * @param saturation the color saturation [0.0-1.0]
+     * @param brightness the color brightness [0.0-1.0]
      */
     public HSBColor(final double hue, final double saturation, final double brightness) {
         super();
@@ -50,10 +50,10 @@ public class HSBColor extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param hue the color hue
-     * @param saturation the color saturation
-     * @param brightness the color brightness
-     * @param opacity the color opacity
+     * @param hue the color hue [>0.0 in degrees]
+     * @param saturation the color saturation [0.0-1.0]
+     * @param brightness the color brightness [0.0-1.0]
+     * @param opacity the color opacity [0.0-1.0]
      */
     public HSBColor(final double hue, final double saturation, final double brightness, final double opacity) {
         super(opacity);
@@ -63,7 +63,7 @@ public class HSBColor extends AbstractBaseColor {
     }
 
     /**
-     * Return the hue value 0.0-1.0.
+     * Return the hue value [>0.0 in degrees].
      * 
      * @return Returns the hue.
      */
