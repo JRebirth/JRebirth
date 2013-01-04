@@ -85,6 +85,6 @@ public enum BallColors implements ColorEnum {
      */
     @Override
     public ColorBuilder factory() {
-        return (ColorBuilder) ResourceBuilders.COLOR_BUILDER.use();
+        return ResourceBuilders.COLOR_BUILDER;
     }
 }
