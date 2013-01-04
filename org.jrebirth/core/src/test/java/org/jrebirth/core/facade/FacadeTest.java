@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * The class <strong>FxmlTest</strong>. TODO To complete
+ * The class <strong>FacadeTest</strong>.
  * 
  * @author Sébastien Bordes
  */

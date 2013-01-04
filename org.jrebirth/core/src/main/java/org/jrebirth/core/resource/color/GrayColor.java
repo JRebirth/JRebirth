@@ -24,15 +24,15 @@ package org.jrebirth.core.resource.color;
  */
 public class GrayColor extends AbstractBaseColor {
 
-    /** The gray value. */
-    private final int gray;
+    /** The gray value [0.0-1.0]. */
+    private final double gray;
 
     /**
      * Default Constructor.
      * 
-     * @param gray the gray component
+     * @param gray the gray component [0.0-1.0]
      */
-    public GrayColor(final int gray) {
+    public GrayColor(final double gray) {
         super();
         this.gray = gray;
     }
@@ -40,10 +40,10 @@ public class GrayColor extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param gray the gray component
-     * @param opacity the color opacity
+     * @param gray the gray component [0.0-1.0]
+     * @param opacity the color opacity [0.0-1.0]
      */
-    public GrayColor(final int gray, final double opacity) {
+    public GrayColor(final double gray, final double opacity) {
         super(opacity);
         this.gray = gray;
     }
@@ -51,9 +51,9 @@ public class GrayColor extends AbstractBaseColor {
     /**
      * Return the gray value.
      * 
-     * @return Returns the gray.
+     * @return Returns the gray [0.0-1.0].
      */
-    public int gray() {
+    public double gray() {
         return this.gray;
     }
 
