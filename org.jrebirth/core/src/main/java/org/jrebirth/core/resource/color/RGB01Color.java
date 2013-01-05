@@ -24,21 +24,21 @@ package org.jrebirth.core.resource.color;
  */
 public class RGB01Color extends AbstractBaseColor {
 
-    /** The green value (0 - 1.0). */
+    /** The green value [0.0-1.0]. */
     private final double red;
 
-    /** The green value (0 - 1.0). */
+    /** The green value [0.0-1.0]. */
     private final double green;
 
-    /** The blue value (0 - 1.0). */
+    /** The blue value [0.0-1.0]. */
     private final double blue;
 
     /**
      * Default Constructor.
      * 
-     * @param red the red value (0 - 1.0)
-     * @param green the green value (0 - 1.0)
-     * @param blue the blue value (0 - 1.0)
+     * @param red the red value [0.0-1.0]
+     * @param green the green value [0.0-1.0]
+     * @param blue the blue value [0.0-1.0]
      */
     public RGB01Color(final double red, final double green, final double blue) {
         super();
@@ -50,10 +50,10 @@ public class RGB01Color extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param red the red value (0 - 1.0)
-     * @param green the green value (0 - 1.0)
-     * @param blue the blue value (0 - 1.0)
-     * @param opacity the color opacity component
+     * @param red the red value [0.0-1.0]
+     * @param green the green value [0.0-1.0]
+     * @param blue the blue value [0.0-1.0]
+     * @param opacity the color opacity component [0.0-1.0]
      */
     public RGB01Color(final double red, final double green, final double blue, final double opacity) {
         super(opacity);
@@ -63,7 +63,7 @@ public class RGB01Color extends AbstractBaseColor {
     }
 
     /**
-     * Return the red value 0.0-1.0.
+     * Return the red value [0.0-1.0]
      * 
      * @return Returns the red.
      */
@@ -72,7 +72,7 @@ public class RGB01Color extends AbstractBaseColor {
     }
 
     /**
-     * Return the green value 0.0-1.0.
+     * Return the green value [0.0-1.0].
      * 
      * @return Returns the green.
      */
@@ -81,7 +81,7 @@ public class RGB01Color extends AbstractBaseColor {
     }
 
     /**
-     * Return the blue value 0.0-1.0.
+     * Return the blue value [0.0-1.0].
      * 
      * @return Returns the blue.
      */

@@ -18,19 +18,19 @@
 package org.jrebirth.core.resource.color;
 
 /**
- * The interface <strong>WebColor</strong>.
+ * The class <strong>WebColor</strong> used to create a Web Color.
  * 
  * @author Sébastien Bordes
  */
 public class WebColor extends AbstractBaseColor {
 
-    /** The hexadecimal string value (FFFFFF). */
+    /** The hexadecimal string value [0-9A-F]{6} . */
     private final String hex;
 
     /**
      * Default Constructor.
      * 
-     * @param hex the hexadecimal value
+     * @param hex the hexadecimal value [0-9A-F]{6}
      */
     public WebColor(final String hex) {
         super();
@@ -40,8 +40,8 @@ public class WebColor extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param hex the hexadecimal value
-     * @param opacity the color opacity
+     * @param hex the hexadecimal value [0-9A-F]{6}
+     * @param opacity the color opacity [0.0-1.0]
      */
     public WebColor(final String hex, final double opacity) {
         super(opacity);
@@ -49,7 +49,7 @@ public class WebColor extends AbstractBaseColor {
     }
 
     /**
-     * Return the hexadecimal string value.
+     * Return the hexadecimal string value [0-9A-F]{6}.
      * 
      * @return Returns the hexadecimal value.
      */
