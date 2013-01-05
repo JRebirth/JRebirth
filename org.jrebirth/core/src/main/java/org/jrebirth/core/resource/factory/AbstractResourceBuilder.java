@@ -22,6 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import org.jrebirth.core.resource.Resource;
+import org.jrebirth.core.resource.color.ResourceParams;
+
 /**
  * The abstract class <strong>AbstractResourceBuilder</strong>.
  * 
@@ -33,7 +36,7 @@ import java.util.WeakHashMap;
  * @param <P> The params type
  * @param <R> The resource managed
  */
-public abstract class AbstractResourceBuilder<E, P, R> implements ResourceBuilder<E, P, R> {
+public abstract class AbstractResourceBuilder<E extends Resource<?, ?>, P extends ResourceParams, R> implements ResourceBuilder<E, P, R> {
 
     /** The resource weak Map. */
     private final Map<E, P> paramsMap = new HashMap<E, P>();
@@ -67,7 +70,7 @@ public abstract class AbstractResourceBuilder<E, P, R> implements ResourceBuilde
         // Retrieve the resource into the map
         WeakReference<R> resource = this.resourceMap.get(key);
         // The resource may be null if nobody use it
-        if (resource == null || resource.get() == null) {
+        if (getParam(key).hasChanged() || resource == null || resource.get() == null) {
             // So we must rebuild an instance and then store it weakly
             set(key, buildResource(getParam(key)));
 

@@ -24,7 +24,7 @@ import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 /**
  * The class <strong>ColorBuilder</strong>.
  * 
- * Class used to manage font with weak reference.
+ * Class used to build color instance and store them with weak references.
  * 
  * @author Sébastien Bordes
  */
@@ -89,7 +89,7 @@ public final class ColorBuilder extends AbstractResourceBuilder<ColorEnum, Color
     }
 
     /**
-     * Build a RGB color (255).
+     * Build a RGB color (0-255).
      * 
      * @param rColor the rgb color enum
      * 

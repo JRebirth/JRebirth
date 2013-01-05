@@ -37,6 +37,7 @@ public class ColorTest {
 
         checkGrayColor(TestColors.TEST_COLOR_GRAY_1);
         checkGrayColor(TestColors.TEST_COLOR_GRAY_2);
+        checkGrayColor(TestColors.TEST_COLOR_GRAY_3);
     }
 
     private void checkGrayColor(final ColorItem colorItem) {
@@ -56,6 +57,7 @@ public class ColorTest {
 
         checkHsbColor(TestColors.TEST_COLOR_HSB_1);
         checkHsbColor(TestColors.TEST_COLOR_HSB_2);
+        checkHsbColor(TestColors.TEST_COLOR_HSB_3);
     }
 
     private void checkHsbColor(final ColorItem colorItem) {
@@ -73,7 +75,8 @@ public class ColorTest {
     public void webColor() {
 
         checkWebColor(TestColors.TEST_COLOR_WEB_1);
-        checkWebColor(TestColors.TEST_COLOR_WEB_1);
+        checkWebColor(TestColors.TEST_COLOR_WEB_2);
+        checkWebColor(TestColors.TEST_COLOR_WEB_3);
     }
 
     private void checkWebColor(final ColorItem colorItem) {
@@ -93,6 +96,7 @@ public class ColorTest {
 
         checkRgb01Color(TestColors.TEST_COLOR_RGB01_1);
         checkRgb01Color(TestColors.TEST_COLOR_RGB01_2);
+        checkRgb01Color(TestColors.TEST_COLOR_RGB01_3);
     }
 
     private void checkRgb01Color(final ColorItem colorItem) {
@@ -111,6 +115,7 @@ public class ColorTest {
 
         checkRgb255Color(TestColors.TEST_COLOR_RGB255_1);
         checkRgb255Color(TestColors.TEST_COLOR_RGB255_2);
+        checkRgb255Color(TestColors.TEST_COLOR_RGB255_3);
     }
 
     private void checkRgb255Color(final ColorItem colorItem) {

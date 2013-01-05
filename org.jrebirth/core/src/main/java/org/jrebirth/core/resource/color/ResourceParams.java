@@ -24,4 +24,8 @@ package org.jrebirth.core.resource.color;
  */
 public interface ResourceParams {
 
+    boolean hasChanged();
+
+    void hasChanged(final boolean changed);
+
 }

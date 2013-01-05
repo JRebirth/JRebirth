@@ -18,13 +18,13 @@
 package org.jrebirth.core.resource.color;
 
 /**
- * The class <strong>HSBColor</strong>.
+ * The class <strong>HSBColor</strong> used to create an HSB color.
  * 
  * @author Sébastien Bordes
  */
 public class HSBColor extends AbstractBaseColor {
 
-    /** The saturation value [>0.0 in degrees]. */
+    /** The saturation value [0.0-360.0] in degrees. */
     private final double hue;
 
     /** The saturation value [0.0-1.0]. */
@@ -36,7 +36,7 @@ public class HSBColor extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param hue the color hue [>0.0 in degrees]
+     * @param hue the color hue [0.0-360.0] in degrees
      * @param saturation the color saturation [0.0-1.0]
      * @param brightness the color brightness [0.0-1.0]
      */
@@ -50,7 +50,7 @@ public class HSBColor extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param hue the color hue [>0.0 in degrees]
+     * @param hue the color hue [0.0-360.0] in degrees
      * @param saturation the color saturation [0.0-1.0]
      * @param brightness the color brightness [0.0-1.0]
      * @param opacity the color opacity [0.0-1.0]
@@ -63,7 +63,7 @@ public class HSBColor extends AbstractBaseColor {
     }
 
     /**
-     * Return the hue value [>0.0 in degrees].
+     * Return the hue value [0.0-360.0] in degrees.
      * 
      * @return Returns the hue.
      */

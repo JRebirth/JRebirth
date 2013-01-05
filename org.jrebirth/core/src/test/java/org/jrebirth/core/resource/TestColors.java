@@ -31,34 +31,68 @@ import org.jrebirth.core.resource.color.WebColor;
  */
 public interface TestColors {
 
+    /**************************************************************************************/
+    /** ___________________________________Web Colors.___________________________________ */
+    /**************************************************************************************/
+
     /** The web color. */
     ColorItem TEST_COLOR_WEB_1 = ColorItem.build(new WebColor("0088D3"));
 
     /** The web color. */
-    ColorItem TEST_COLOR_WEB_2 = ColorItem.build(new WebColor("0088D3", 1.0));
+    ColorItem TEST_COLOR_WEB_2 = ColorItem.build(new WebColor("0D88D3", 0.4));
+
+    /** The web color. */
+    ColorItem TEST_COLOR_WEB_3 = ColorItem.build(new WebColor("0087D3", 1.0));
+
+    /**************************************************************************************/
+    /** __________________________________Gray Colors.___________________________________ */
+    /**************************************************************************************/
 
     /** The gray color. */
     ColorItem TEST_COLOR_GRAY_1 = ColorItem.build(new GrayColor(0.3));
 
     /** The gray color. */
-    ColorItem TEST_COLOR_GRAY_2 = ColorItem.build(new GrayColor(0.5, 1.0));
+    ColorItem TEST_COLOR_GRAY_2 = ColorItem.build(new GrayColor(0.74, 0.9));
+
+    /** The gray color. */
+    ColorItem TEST_COLOR_GRAY_3 = ColorItem.build(new GrayColor(0.5, 1.0));
+
+    /**************************************************************************************/
+    /** ___________________________________HSB Colors.___________________________________ */
+    /**************************************************************************************/
 
     /** The hsb color. */
-    ColorItem TEST_COLOR_HSB_1 = ColorItem.build(new HSBColor(45.0, 0.5, 0.5));
+    ColorItem TEST_COLOR_HSB_1 = ColorItem.build(new HSBColor(96.0, 0.4, 0.9));
 
     /** The hsb color. */
-    ColorItem TEST_COLOR_HSB_2 = ColorItem.build(new HSBColor(45.0, 0.5, 0.5, 1.0));
+    ColorItem TEST_COLOR_HSB_2 = ColorItem.build(new HSBColor(45.0, 0.3, 0.8, 0.45));
+
+    /** The hsb color. */
+    ColorItem TEST_COLOR_HSB_3 = ColorItem.build(new HSBColor(153.0, 0.6, 0.75, 1.0));
+
+    /**************************************************************************************/
+    /** _________________________________RGB 01 Colors.__________________________________ */
+    /**************************************************************************************/
 
     /** The rgb 0-1 color. */
-    ColorItem TEST_COLOR_RGB01_1 = ColorItem.build(new RGB01Color(0.2, 0.3, 0.4));
+    ColorItem TEST_COLOR_RGB01_1 = ColorItem.build(new RGB01Color(0.22, 0.752, 0.78));
 
     /** The rgb 0-1 color. */
-    ColorItem TEST_COLOR_RGB01_2 = ColorItem.build(new RGB01Color(0.2, 0.3, 0.4, 1.0));
+    ColorItem TEST_COLOR_RGB01_2 = ColorItem.build(new RGB01Color(0.78, 0.653, 0.85, 0.12));
+
+    /** The rgb 0-1 color. */
+    ColorItem TEST_COLOR_RGB01_3 = ColorItem.build(new RGB01Color(0.96, 0.851, 0.41, 1.0));
+
+    /**************************************************************************************/
+    /** ___________________________________RGB 255 Colors._______________________________ */
+    /**************************************************************************************/
 
     /** The rgb 255 color. */
-    ColorItem TEST_COLOR_RGB255_1 = ColorItem.build(new RGB255Color(100, 60, 250));
+    ColorItem TEST_COLOR_RGB255_1 = ColorItem.build(new RGB255Color(107, 69, 251));
 
     /** The rgb 255 color. */
-    ColorItem TEST_COLOR_RGB255_2 = ColorItem.build(new RGB255Color(100, 60, 250, 1.0));
+    ColorItem TEST_COLOR_RGB255_2 = ColorItem.build(new RGB255Color(255, 248, 189, 70 / 100));
 
+    /** The rgb 255 color. */
+    ColorItem TEST_COLOR_RGB255_3 = ColorItem.build(new RGB255Color(112, 60, 63, 1.0));
 }

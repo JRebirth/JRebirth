@@ -17,13 +17,15 @@
  */
 package org.jrebirth.core.resource.font;
 
+import org.jrebirth.core.resource.AbstractBaseParams;
+
 /**
  * The interface <strong>AbstractBaseColor</strong>.
  * 
  * @author Sébastien Bordes
  * 
  */
-public abstract class AbstractBaseFont implements FontParams {
+public abstract class AbstractBaseFont extends AbstractBaseParams implements FontParams {
 
     /** The opacity of the color. */
     private final FontName name;
