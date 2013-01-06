@@ -28,7 +28,7 @@ import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
  * 
  * @author Sébastien Bordes
  */
-public final class ColorBuilder extends AbstractResourceBuilder<ColorEnum, ColorParams, Color> {
+public final class ColorBuilder extends AbstractResourceBuilder<ColorItem, ColorParams, Color> {
 
     /** The <code>HEXA_PREFIX</code> field is used before any hexadecimal value. */
     private static final String HEXA_PREFIX = "#";

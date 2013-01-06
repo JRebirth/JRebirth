@@ -20,15 +20,20 @@ package org.jrebirth.core.resource.font;
 /**
  * The interface <strong>FontName</strong>.
  * 
+ * The font name used is the enum String name() method to retrieved the font name string.<br />
+ * It will be transformed (or not) by a custom mechanism that replace '_' by space.
+ * 
  * @author Sébastien Bordes
  */
 public interface FontName {
 
     /**
-     * Return the unique name of the font. Must provide a mechanism to transform _ into space.
+     * Return the unique name of the font.
+     * 
+     * When a enumeration implements this interface the name() method is automatically provided.
      * 
      * @return the system name of the font
      */
-    String get();
+    String name();
 
 }

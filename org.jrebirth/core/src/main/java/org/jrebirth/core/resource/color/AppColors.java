@@ -26,7 +26,7 @@ import org.jrebirth.core.resource.ResourceBuilders;
  * 
  * @author Sébastien Bordes
  */
-public enum AppColors implements ColorEnum {
+public enum AppColors implements ColorItem {
 
     /** The stage background color. */
     STAGE_BG(new RGB255Color(240, 240, 255, 1.0));
@@ -37,7 +37,7 @@ public enum AppColors implements ColorEnum {
      * @param colorParams the primitive values for the color
      */
     private AppColors(final ColorParams colorParams) {
-        factory().storeParams(this, colorParams);
+        builder().storeParams(this, colorParams);
     }
 
     /**
@@ -45,14 +45,14 @@ public enum AppColors implements ColorEnum {
      */
     @Override
     public Color get() {
-        return factory().get(this);
+        return builder().get(this);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public ColorBuilder factory() {
+    public ColorBuilder builder() {
         return ResourceBuilders.COLOR_BUILDER;
     }
 }

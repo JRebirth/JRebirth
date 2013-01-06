@@ -1,14 +1,9 @@
-package org.jrebirth.core.resource;
+package org.jrebirth.core.resource.color;
 
+import static org.junit.Assert.assertEquals;
 import javafx.scene.paint.Color;
-import junit.framework.Assert;
 
-import org.jrebirth.core.resource.color.ColorItem;
-import org.jrebirth.core.resource.color.GrayColor;
-import org.jrebirth.core.resource.color.HSBColor;
-import org.jrebirth.core.resource.color.RGB01Color;
-import org.jrebirth.core.resource.color.RGB255Color;
-import org.jrebirth.core.resource.color.WebColor;
+import org.jrebirth.core.resource.ResourceBuilders;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -40,7 +35,7 @@ public class ColorTest {
         checkGrayColor(TestColors.TEST_COLOR_GRAY_3);
     }
 
-    private void checkGrayColor(final ColorItem colorItem) {
+    private void checkGrayColor(final ColorItemBase colorItem) {
         final Color color = colorItem.get();
         final GrayColor wc = (GrayColor) ResourceBuilders.COLOR_BUILDER.getParam(colorItem);
 
@@ -48,7 +43,7 @@ public class ColorTest {
         // compareRoundedValues(color.getGreen(), convert255To1(wc.hex().substring(2, 4)));
         // compareRoundedValues(color.getBlue(), convert255To1(wc.hex().substring(4, 6)));
 
-        Assert.assertEquals(color.getOpacity(), wc.opacity());
+        assertEquals(color.getOpacity(), wc.opacity(), 0.1);
 
     }
 
@@ -60,15 +55,15 @@ public class ColorTest {
         checkHsbColor(TestColors.TEST_COLOR_HSB_3);
     }
 
-    private void checkHsbColor(final ColorItem colorItem) {
+    private void checkHsbColor(final ColorItemBase colorItem) {
         final Color color = colorItem.get();
         final HSBColor wc = (HSBColor) ResourceBuilders.COLOR_BUILDER.getParam(colorItem);
 
-        compareRoundedValues(color.getHue(), wc.hue());
-        compareRoundedValues(color.getSaturation(), wc.saturation());
-        compareRoundedValues(color.getBrightness(), wc.brightness());
+        assertEquals(color.getHue(), wc.hue(), 1.0);
+        assertEquals(color.getSaturation(), wc.saturation(), 0.000001);
+        assertEquals(color.getBrightness(), wc.brightness(), 0.000001);
 
-        Assert.assertEquals(color.getOpacity(), wc.opacity());
+        assertEquals(color.getOpacity(), wc.opacity(), 0.1);
     }
 
     @Test
@@ -79,15 +74,15 @@ public class ColorTest {
         checkWebColor(TestColors.TEST_COLOR_WEB_3);
     }
 
-    private void checkWebColor(final ColorItem colorItem) {
+    private void checkWebColor(final ColorItemBase colorItem) {
         final Color color = colorItem.get();
         final WebColor wc = (WebColor) ResourceBuilders.COLOR_BUILDER.getParam(colorItem);
 
-        compareRoundedValues(color.getRed(), convertHexToDouble(wc.hex().substring(0, 2)));
-        compareRoundedValues(color.getGreen(), convertHexToDouble(wc.hex().substring(2, 4)));
-        compareRoundedValues(color.getBlue(), convertHexToDouble(wc.hex().substring(4, 6)));
+        assertEquals(color.getRed(), convertHexToDouble(wc.hex().substring(0, 2)), 0.000001);
+        assertEquals(color.getGreen(), convertHexToDouble(wc.hex().substring(2, 4)), 0.000001);
+        assertEquals(color.getBlue(), convertHexToDouble(wc.hex().substring(4, 6)), 0.000001);
 
-        Assert.assertEquals(color.getOpacity(), wc.opacity());
+        assertEquals(color.getOpacity(), wc.opacity(), 0.1);
 
     }
 
@@ -99,15 +94,15 @@ public class ColorTest {
         checkRgb01Color(TestColors.TEST_COLOR_RGB01_3);
     }
 
-    private void checkRgb01Color(final ColorItem colorItem) {
+    private void checkRgb01Color(final ColorItemBase colorItem) {
         final Color color = colorItem.get();
         final RGB01Color wc = (RGB01Color) ResourceBuilders.COLOR_BUILDER.getParam(colorItem);
 
-        compareRoundedValues(color.getRed(), wc.red());
-        compareRoundedValues(color.getGreen(), wc.green());
-        compareRoundedValues(color.getBlue(), wc.blue());
+        assertEquals(color.getRed(), wc.red(), 0.000001);
+        assertEquals(color.getGreen(), wc.green(), 0.000001);
+        assertEquals(color.getBlue(), wc.blue(), 0.000001);
 
-        Assert.assertEquals(color.getOpacity(), wc.opacity());
+        assertEquals(color.getOpacity(), wc.opacity(), 0.1);
     }
 
     @Test
@@ -118,19 +113,15 @@ public class ColorTest {
         checkRgb255Color(TestColors.TEST_COLOR_RGB255_3);
     }
 
-    private void checkRgb255Color(final ColorItem colorItem) {
+    private void checkRgb255Color(final ColorItemBase colorItem) {
         final Color color = colorItem.get();
         final RGB255Color wc = (RGB255Color) ResourceBuilders.COLOR_BUILDER.getParam(colorItem);
 
-        compareRoundedValues(color.getRed(), convert255To1(wc.red()));
-        compareRoundedValues(color.getGreen(), convert255To1(wc.green()));
-        compareRoundedValues(color.getBlue(), convert255To1(wc.blue()));
+        assertEquals(color.getRed(), convert255To1(wc.red()), 0.000001);
+        assertEquals(color.getGreen(), convert255To1(wc.green()), 0.000001);
+        assertEquals(color.getBlue(), convert255To1(wc.blue()), 0.000001);
 
-        Assert.assertEquals(color.getOpacity(), wc.opacity());
-    }
-
-    private void compareRoundedValues(final double colorComponent, final double paramValue) {
-        Assert.assertEquals(Math.round(colorComponent * 1_000_000), Math.round(paramValue * 1_000_000));
+        assertEquals(color.getOpacity(), wc.opacity(), 0.1);
     }
 
     private double convertHexToDouble(final String hexaSingleColor) {

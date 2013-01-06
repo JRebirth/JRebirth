@@ -31,7 +31,7 @@ import org.jrebirth.analyzer.service.LoadEdtFileService;
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.analyzer.ui.workbench.WorkbenchModel;
 import org.jrebirth.core.application.AbstractApplication;
-import org.jrebirth.core.resource.font.FontEnum;
+import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBuilder;
@@ -134,7 +134,7 @@ public final class JRebirthAnalyzer extends AbstractApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    protected List<FontEnum> getFontToPreload() {
+    protected List<FontItem> getFontToPreload() {
         return Collections.emptyList();
     }
 }

@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public final class FontBuilder extends AbstractResourceBuilder<FontEnum, FontParams, Font> {
+public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontParams, Font> {
 
     /**
      * The <code>RESOURCE_SEPARATOR</code>.
@@ -48,7 +48,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontEnum, FontPar
     private static final String TRUE_TYPE_FONT_EXT = ".ttf";
 
     /** The root folder that store all application fonts. */
-    private static String fontsFolder = "font";
+    public static String fontsFolder = "font";
 
     /**
      * {@inheritDoc}
@@ -79,7 +79,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontEnum, FontPar
     private Font buildRealFont(final RealFont rFont) {
         checkFontStatus(rFont);
         return javafx.scene.text.FontBuilder.create()
-                .name(transformFontName(rFont.name().get()))
+                .name(transformFontName(rFont.name().name()))
                 .size(rFont.size())
                 .build();
     }
@@ -123,20 +123,20 @@ public final class FontBuilder extends AbstractResourceBuilder<FontEnum, FontPar
     private void checkFontStatus(final RealFont realFont) {
 
         // Try to load system fonts
-        final List<String> fonts = Font.getFontNames(transformFontName(realFont.name().get()));
+        final List<String> fonts = Font.getFontNames(transformFontName(realFont.name().name()));
 
         Font font;
         if (fonts.isEmpty()) {
 
-            // This variable will hold the 2 alternative font name
-            String fontName = fontsFolder + R_SEP + transformFontName(realFont.name().get()) + TRUE_TYPE_FONT_EXT;
+            // This variable will hold the 2 alternative font names
+            String fontName = fontsFolder + R_SEP + transformFontName(realFont.name().name()) + TRUE_TYPE_FONT_EXT;
 
             LOGGER.trace("Try to load Transformed Font  {}", fontName);
             font = Font.loadFont(Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), realFont.size());
 
             // The font name contains '_' in its file name to replace ' '
             if (font == null) {
-                fontName = fontsFolder + R_SEP + realFont.name().get() + TRUE_TYPE_FONT_EXT;
+                fontName = fontsFolder + R_SEP + realFont.name().name() + TRUE_TYPE_FONT_EXT;
                 LOGGER.trace("Try to load Raw Font  {}", fontName);
                 font = Font.loadFont(
                         Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), realFont.size());

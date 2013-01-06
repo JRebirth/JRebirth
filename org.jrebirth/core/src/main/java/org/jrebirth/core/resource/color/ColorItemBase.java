@@ -15,52 +15,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.presentation;
+package org.jrebirth.core.resource.color;
 
 import javafx.scene.paint.Color;
 
 import org.jrebirth.core.resource.ResourceBuilders;
-import org.jrebirth.core.resource.color.ColorBuilder;
-import org.jrebirth.core.resource.color.ColorItem;
-import org.jrebirth.core.resource.color.ColorParams;
-import org.jrebirth.core.resource.color.RGB255Color;
-import org.jrebirth.core.resource.color.WebColor;
 
 /**
- * The class <strong>PrezColors</strong>.
+ * The class <strong>ColorItemBase</strong>.
  * 
  * @author Sébastien Bordes
- * 
  */
-public enum PrezColors implements ColorItem {
+public final class ColorItemBase implements ColorItem {
 
-    /** Color for slide title, white. */
-    SLIDE_TITLE(new WebColor("FFFFFF", 1.0)),
+    /** The generator of unique id. */
+    private static int idGenerator;
 
-    /** Color for blue shape, xxx. */
-    SHAPE_BLUE(new WebColor("3495CE", 1.0)),
-
-    /** Color for drop shadow, black. */
-    DROP_SHADOW(new WebColor("000000", 0.8)),
-    /** Color for inner shadow, white. */
-    INNER_SHADOW(new WebColor("FFFFFE", 0.3)),
-
-    /** Color for first gradient, xxx. */
-    GRADIENT_1(new WebColor("1AA2AC", 1.0)),
-    /** Color for second gradient, xxx. */
-    GRADIENT_2(new WebColor("F04F24", 1.0)),
-    /** Color for third gradient, xxxx. */
-    GRADIENT_3(new WebColor("FFF200", 1.0)),
-
-    /** Color for splash text, xxx. */
-    SPLASH_TEXT(new RGB255Color(60, 60, 70));
+    /** The unique identifier of the color item. */
+    private int uid;
 
     /**
      * Private Constructor.
      * 
      * @param colorParams the primitive values for the color
      */
-    private PrezColors(final ColorParams colorParams) {
+    private ColorItemBase(final ColorParams colorParams) {
         builder().storeParams(this, colorParams);
     }
 
@@ -79,4 +58,40 @@ public enum PrezColors implements ColorItem {
     public ColorBuilder builder() {
         return ResourceBuilders.COLOR_BUILDER;
     }
+
+    /**
+     * Build a color item.
+     * 
+     * @param colorParams the primitive values for the color
+     * 
+     * @return a new fresh color item object
+     */
+    public static ColorItemBase build(final ColorParams colorParams) {
+        final ColorItemBase colorItem = new ColorItemBase(colorParams);
+
+        // Ensure that the uid will be unique at runtime
+        synchronized (ColorItemBase.class) {
+            colorItem.setUid(++idGenerator);
+        }
+        return colorItem;
+    }
+
+    /**
+     * Gets the uid.
+     * 
+     * @return Returns the uid.
+     */
+    public int getUid() {
+        return this.uid;
+    }
+
+    /**
+     * Sets the uid.
+     * 
+     * @param uid The uid to set.
+     */
+    public void setUid(final int uid) {
+        this.uid = uid;
+    }
+
 }

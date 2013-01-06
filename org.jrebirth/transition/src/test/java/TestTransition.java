@@ -24,7 +24,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import org.jrebirth.core.application.AbstractApplication;
-import org.jrebirth.core.resource.font.FontEnum;
+import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 
@@ -104,7 +104,7 @@ public final class TestTransition extends AbstractApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    protected List<FontEnum> getFontToPreload() {
+    protected List<FontItem> getFontToPreload() {
         return Collections.emptyList();
     }
 }

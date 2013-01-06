@@ -15,17 +15,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.resource.color;
-
-import javafx.scene.paint.Color;
-
-import org.jrebirth.core.resource.Resource;
+package org.jrebirth.core.resource;
 
 /**
- * The class <strong>ColorEnum</strong>.
+ * The interface <strong>ResourceItem</strong> designate a system resource.
+ * 
+ * In example Color, Font resources that are heavy object managed by the toolkit.<br />
+ * They must be released as soon as possible to limit memory consumption.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <R> The resource managed
+ * @param <B> The resource builder to use
  */
-public interface ColorEnum extends Resource<Color, ColorBuilder> {
+public interface ResourceItem<R, B> {
 
+    /**
+     * Return the resource unique instance.
+     * 
+     * @return the resource
+     */
+    R get();
+
+    /**
+     * Return the resource builder.
+     * 
+     * @return the resource builder
+     */
+    B builder();
 }

@@ -21,7 +21,7 @@ import javafx.scene.paint.Color;
 
 import org.jrebirth.core.resource.ResourceBuilders;
 import org.jrebirth.core.resource.color.ColorBuilder;
-import org.jrebirth.core.resource.color.ColorEnum;
+import org.jrebirth.core.resource.color.ColorItem;
 import org.jrebirth.core.resource.color.ColorParams;
 import org.jrebirth.core.resource.color.WebColor;
 
@@ -31,7 +31,7 @@ import org.jrebirth.core.resource.color.WebColor;
  * @author Sébastien Bordes
  * 
  */
-public enum BallColors implements ColorEnum {
+public enum BallColors implements ColorItem {
 
     /** The application ball background color. */
     APPLICATION(new WebColor("70CD43")),
@@ -69,7 +69,7 @@ public enum BallColors implements ColorEnum {
      * @param colorParams the primitive values for the color
      */
     private BallColors(final ColorParams colorParams) {
-        factory().storeParams(this, colorParams);
+        builder().storeParams(this, colorParams);
     }
 
     /**
@@ -77,14 +77,14 @@ public enum BallColors implements ColorEnum {
      */
     @Override
     public Color get() {
-        return factory().get(this);
+        return builder().get(this);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public ColorBuilder factory() {
+    public ColorBuilder builder() {
         return ResourceBuilders.COLOR_BUILDER;
     }
 }
