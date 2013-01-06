@@ -19,13 +19,13 @@ package org.jrebirth.core.resource.font;
 
 import javafx.scene.text.Font;
 
-import org.jrebirth.core.resource.Resource;
+import org.jrebirth.core.resource.ResourceItem;
 
 /**
  * The class <strong>FontEnum</strong>.
  * 
  * @author Sébastien Bordes
  */
-public interface FontEnum extends Resource<Font, FontBuilder> {
+public interface FontItem extends ResourceItem<Font, FontBuilder> {
 
 }

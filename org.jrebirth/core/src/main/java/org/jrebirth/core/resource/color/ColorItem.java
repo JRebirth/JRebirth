@@ -19,79 +19,13 @@ package org.jrebirth.core.resource.color;
 
 import javafx.scene.paint.Color;
 
-import org.jrebirth.core.resource.ResourceBuilders;
+import org.jrebirth.core.resource.ResourceItem;
 
 /**
- * The class <strong>ColorItem</strong>.
+ * The class <strong>ColorEnum</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class ColorItem implements ColorEnum {
-
-    /** The generator of unique id. */
-    private static int idGenerator;
-
-    /** The unique identifier of the wave type. */
-    private int uid;
-
-    /**
-     * Private Constructor.
-     * 
-     * @param colorParams the primitive values for the color
-     */
-    private ColorItem(final ColorParams colorParams) {
-        factory().storeParams(this, colorParams);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Color get() {
-        return factory().get(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ColorBuilder factory() {
-        return ResourceBuilders.COLOR_BUILDER;
-    }
-
-    /**
-     * Build a color item.
-     * 
-     * @param colorParams the primitive values for the color
-     * 
-     * @return a new fresh color item object
-     */
-    public static ColorItem build(final ColorParams colorParams) {
-        final ColorItem waveType = new ColorItem(colorParams);
-
-        // Ensure that the uid will be unique at runtime
-        synchronized (ColorItem.class) {
-            waveType.setUid(++idGenerator);
-        }
-        return waveType;
-    }
-
-    /**
-     * Gets the uid.
-     * 
-     * @return Returns the uid.
-     */
-    public int getUid() {
-        return this.uid;
-    }
-
-    /**
-     * Sets the uid.
-     * 
-     * @param uid The uid to set.
-     */
-    public void setUid(final int uid) {
-        this.uid = uid;
-    }
+public interface ColorItem extends ResourceItem<Color, ColorBuilder> {
 
 }

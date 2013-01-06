@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import org.jrebirth.core.resource.font.FontEnum;
+import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 
@@ -52,7 +52,7 @@ public class TestApplication extends AbstractApplication<Pane> {
      * {@inheritDoc}
      */
     @Override
-    protected List<FontEnum> getFontToPreload() {
+    protected List<FontItem> getFontToPreload() {
         return null;
     }
 

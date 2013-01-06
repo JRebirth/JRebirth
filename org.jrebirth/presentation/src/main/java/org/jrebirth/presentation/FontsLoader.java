@@ -50,12 +50,4 @@ public enum FontsLoader implements FontName {
     /** . */
     BorisBlackBloxx;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String get() {
-        return name();
-    }
-
 }

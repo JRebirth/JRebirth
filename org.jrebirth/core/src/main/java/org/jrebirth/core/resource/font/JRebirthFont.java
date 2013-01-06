@@ -19,14 +19,14 @@ package org.jrebirth.core.resource.font;
 
 import javafx.scene.text.Font;
 
-import org.jrebirth.core.resource.Resource;
+import org.jrebirth.core.resource.ResourceItem;
 
 /**
  * The interface <strong>JRebirthFont</strong>.
  * 
  * @author Sébastien Bordes
  */
-public interface JRebirthFont extends Resource<Font, FontBuilder> {
+public interface JRebirthFont extends ResourceItem<Font, FontBuilder> {
 
     /**
      * Return the name of the font.

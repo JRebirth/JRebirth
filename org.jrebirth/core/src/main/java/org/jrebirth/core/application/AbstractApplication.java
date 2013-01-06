@@ -39,7 +39,7 @@ import org.jrebirth.core.exception.handler.JatUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.JitUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.PoolUncaughtExceptionHandler;
 import org.jrebirth.core.facade.GlobalFacade;
-import org.jrebirth.core.resource.font.FontEnum;
+import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.util.ClassUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -223,9 +223,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * Preload fonts to allow them to be used by CSS.
      */
     private void preloadFonts() {
-        final List<FontEnum> fontList = getFontToPreload();
+        final List<FontItem> fontList = getFontToPreload();
         if (fontList != null) {
-            for (final FontEnum font : fontList) {
+            for (final FontItem font : fontList) {
                 // Access the font to load it and allow it to be used by CSS
                 font.get();
             }
@@ -237,7 +237,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * 
      * @return the list of fontEnum to load
      */
-    protected abstract List<FontEnum> getFontToPreload();
+    protected abstract List<FontItem> getFontToPreload();
 
     /**
      * Customize the default scene.
