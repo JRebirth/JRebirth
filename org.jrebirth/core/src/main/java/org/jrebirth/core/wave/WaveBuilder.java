@@ -30,8 +30,8 @@ import javafx.util.Builder;
  */
 public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> {
 
-    /** The internal properties mask. */
-    private int setMask;
+    /** The field used to store the property mask (allow up to 64 properties). */
+    private long bitMask;
 
     /** The wave group of the wave to build. */
     private WaveGroup waveGroup;
@@ -65,20 +65,19 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
      */
     public void applyTo(final WaveBase paramWave) {
         // super.applyTo(paramWave);
-        final int i = this.setMask;
-        if ((i & 0x1) != 0) {
+        if (hasBit(0)) {
             paramWave.setWaveGroup(this.waveGroup);
         }
-        if ((i & 0x2) != 0) {
+        if (hasBit(1)) {
             paramWave.setWaveType(this.waveType);
         }
-        if ((i & 0x4) != 0) {
+        if (hasBit(2)) {
             paramWave.setRelatedClass(this.relatedClass);
         }
-        if ((i & 0x8) != 0) {
+        if (hasBit(3)) {
             paramWave.setWaveBeanClass(this.waveBeanClass);
         }
-        if ((i & 0x10) != 0) {
+        if (hasBit(4)) {
             paramWave.addDatas(this.waveData);
         }
     }
@@ -93,7 +92,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B waveGroup(final WaveGroup waveGroup) {
         this.waveGroup = waveGroup;
-        this.setMask |= 1;
+        setBit(0);
         return (B) this;
     }
 
@@ -107,7 +106,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B waveType(final WaveType waveType) {
         this.waveType = waveType;
-        this.setMask |= 2;
+        setBit(1);
         return (B) this;
     }
 
@@ -121,7 +120,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B relatedClass(final Class<?> relatedClass) {
         this.relatedClass = relatedClass;
-        this.setMask |= 4;
+        setBit(2);
         return (B) this;
     }
 
@@ -135,7 +134,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B waveBeanClass(final Class<? extends WaveBean> waveBeanClass) {
         this.waveBeanClass = waveBeanClass;
-        this.setMask |= 8;
+        setBit(3);
         return (B) this;
     }
 
@@ -149,7 +148,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B data(final WaveData<?>... waveData) {
         this.waveData = waveData;
-        this.setMask |= 16;
+        setBit(4);
         return (B) this;
     }
 
@@ -161,6 +160,25 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
         final WaveBase localWave = new WaveBase();
         applyTo(localWave);
         return localWave;
+    }
+
+    /**
+     * .
+     * 
+     * @param toLeft
+     */
+    protected void setBit(final int toLeft) {
+        this.bitMask |= 1 << toLeft;
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param i
+     * @return
+     */
+    protected boolean hasBit(final int bit) {
+        return (this.bitMask & bit) != 0;
     }
 
 }
