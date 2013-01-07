@@ -29,7 +29,12 @@ public class FontTest {
 
     @Before
     public void setUp() throws Exception {
-
+        System.out.println("2 << 1 = " + (1 << 1));
+        System.out.println("2 << 2 = " + (1 << 2));
+        System.out.println("2 << 3 = " + (1 << 3));
+        System.out.println("2 << 4 = " + (1 << 4));
+        System.out.println("2 << 5 = " + (1 << 5));
+        System.out.println("2 << 6 = " + (1 << 6));
     }
 
     @Test

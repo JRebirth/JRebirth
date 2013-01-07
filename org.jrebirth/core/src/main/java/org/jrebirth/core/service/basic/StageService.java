@@ -1,5 +1,16 @@
 package org.jrebirth.core.service.basic;
 
+import java.util.Map;
+import java.util.WeakHashMap;
+
+import javafx.scene.Scene;
+import javafx.scene.SceneBuilder;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPaneBuilder;
+import javafx.stage.Stage;
+import javafx.stage.StageBuilder;
+
+import org.jrebirth.core.command.basic.stage.StageWaveBean;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.ServiceBase;
 import org.jrebirth.core.wave.Wave;
@@ -15,13 +26,28 @@ import org.slf4j.LoggerFactory;
 public class StageService extends ServiceBase {
 
     /** Wave type use to load events. */
-    public static final WaveTypeBase DO_ADD_STAGE = WaveTypeBase.build("ADD_STAGE");
+    public static final WaveTypeBase DO_OPEN_STAGE = WaveTypeBase.build("OPEN_STAGE");
 
     /** Wave type to return events loaded. */
-    public static final WaveTypeBase RE_STAGE_ADDED = WaveTypeBase.build("STAGE_ADDED");
+    public static final WaveTypeBase RE_STAGE_OPENED = WaveTypeBase.build("STAGE_OPENED");
+
+    /** Wave type use to load events. */
+    public static final WaveTypeBase DO_CLOSE_STAGE = WaveTypeBase.build("CLOSE_STAGE");
+
+    /** Wave type to return events loaded. */
+    public static final WaveTypeBase RE_STAGE_CLOSED = WaveTypeBase.build("STAGE_CLOSED");
+
+    /** Wave type use to load events. */
+    public static final WaveTypeBase DO_DESTROY_STAGE = WaveTypeBase.build("DESTROY_STAGE");
+
+    /** Wave type to return events loaded. */
+    public static final WaveTypeBase RE_STAGE_DESTROYED = WaveTypeBase.build("STAGE_DESTROYED");
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(StageService.class);
+
+    /** The map that stores all stages. */
+    private final Map<String, Stage> stageMap = new WeakHashMap<>();
 
     /**
      * {@inheritDoc}
@@ -30,16 +56,131 @@ public class StageService extends ServiceBase {
     public void ready() throws CoreException {
         super.ready();
 
-        registerCallback(DO_ADD_STAGE, RE_STAGE_ADDED);
+        registerCallback(DO_OPEN_STAGE, RE_STAGE_OPENED);
+        registerCallback(DO_CLOSE_STAGE, RE_STAGE_CLOSED);
+        registerCallback(DO_DESTROY_STAGE, RE_STAGE_DESTROYED);
     }
 
     /**
-     * Add a stage.
+     * Open a stage.
      * 
      * @param wave the source wave
      */
-    public void addStage(final Wave wave) {
+    public void openStage(final Wave wave) {
 
+        final StageWaveBean swb = getWaveBean(wave);
+        final String stageKey = swb.getStageKey();
+
+        if (this.stageMap.containsKey(stageKey) && this.stageMap.get(stageKey) != null) {
+            // Show the stage
+            this.stageMap.get(stageKey).show();
+
+        } else {
+
+            final Region rootPane = getRootPane(swb);
+            final Scene scene = getScene(swb, rootPane);
+            final Stage stage = getStage(swb, scene);
+
+            // Show the stage
+            this.stageMap.put(stageKey, stage);
+
+            stage.show();
+        }
+    }
+
+    /**
+     * Gets the root pane.
+     * 
+     * @param swb the swb
+     * @return the root pane
+     */
+    private Region getRootPane(final StageWaveBean swb) {
+
+        return swb.getRootPane() == null ?
+                StackPaneBuilder.create()
+                        .build()
+                : swb.getRootPane();
+    }
+
+    /**
+     * Gets the scene.
+     * 
+     * @param swb the swb
+     * @param region the region
+     * @return the scene
+     */
+    private Scene getScene(final StageWaveBean swb, final Region region) {
+        Scene scene = swb.getScene();
+        if (scene == null) {
+            scene = SceneBuilder.create()
+                    .root(region)
+                    .build();
+        } else {
+            scene.setRoot(region);
+        }
+        return scene;
+    }
+
+    /**
+     * Gets the stage.
+     * 
+     * @param swb the swb
+     * @param scene the scene
+     * @return the stage
+     */
+    private Stage getStage(final StageWaveBean swb, final Scene scene) {
+
+        Stage stage = swb.getStage();
+        if (swb.getStage() == null) {
+            stage = StageBuilder.create()
+                    .scene(scene)
+                    .build();
+        } else {
+            stage.setScene(scene);
+        }
+        return stage;
+    }
+
+    /**
+     * Close a stage. (Hide it)
+     * 
+     * @param wave the source wave
+     */
+    public void closeStage(final Wave wave) {
+        final String stageKey = getWaveBean(wave).getStageKey();
+        this.stageMap.get(stageKey).close();
+    }
+
+    /**
+     * Destroy the stage and dereference it.
+     * 
+     * @param wave the source wave
+     */
+    public void destroyStage(final Wave wave) {
+        final String stageKey = getWaveBean(wave).getStageKey();
+        this.stageMap.get(stageKey).close();
+        this.stageMap.remove(stageKey);
+    }
+
+    /**
+     * Get the wave bean and cast it.
+     * 
+     * @param wave the wave that hold the bean
+     * 
+     * @return the casted wave bean
+     */
+    public StageWaveBean getWaveBean(final Wave wave) {
+        return (StageWaveBean) wave.getWaveBean();
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param stageKey
+     * @return
+     */
+    public Stage getStage(final String stageKey) {
+        return this.stageMap.get(stageKey);
     }
 
 }

@@ -42,15 +42,15 @@ public interface TestFonts {
     /**************************************************************************************/
 
     /** The family font. */
-    FontItem TEST_FAMILY_FONT_1 = FontItemBase.build(new FamilyFont("Arial", 10.0, FontWeight.BOLD, FontPosture.ITALIC));
+    FontItem TEST_FAMILY_FONT_1 = FontItemBase.build(new FamilyFont("serif", 10.0, FontWeight.BOLD, FontPosture.ITALIC));
 
     /** The family font. */
-    FontItem TEST_FAMILY_FONT_2 = FontItemBase.build(new FamilyFont("Verdana", 16.0, FontWeight.BOLD));
+    FontItem TEST_FAMILY_FONT_2 = FontItemBase.build(new FamilyFont("sansserif", 16.0, FontWeight.BOLD));
 
     /** The family font. */
-    FontItem TEST_FAMILY_FONT_3 = FontItemBase.build(new FamilyFont("Arial", 17.0, FontPosture.ITALIC));
+    FontItem TEST_FAMILY_FONT_3 = FontItemBase.build(new FamilyFont("monospaced", 17.0, FontPosture.ITALIC));
 
     /** The family font. */
-    FontItem TEST_FAMILY_FONT_4 = FontItemBase.build(new FamilyFont("Verdana", 8.0));
+    FontItem TEST_FAMILY_FONT_4 = FontItemBase.build(new FamilyFont("monospaced", 8.0));
 
 }

@@ -34,9 +34,6 @@ import org.jrebirth.core.wave.WaveBase;
  */
 public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWaveBuilder, DisplayModelWaveBean> {
 
-    /** The field used to store the property mask. */
-    private int setMask;
-
     /** The model class to show. */
     private Class<? extends Model> modelClass;
 
@@ -72,17 +69,16 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
     public void applyTo(final WaveBase paramWave) {
         super.applyTo(paramWave);
 
-        final int i = this.setMask;
-        if ((i & 0x1) != 0) {
+        if (hasBit(0)) {
             getWaveBean(paramWave).setUniquePlaceHolder(this.uniquePlaceHolder);
         }
-        if ((i & 0x2) != 0) {
+        if (hasBit(1)) {
             getWaveBean(paramWave).setChidrenPlaceHolder(this.chidrenPlaceHolder);
         }
-        if ((i & 0x4) != 0) {
+        if (hasBit(2)) {
             getWaveBean(paramWave).setModelClass(this.modelClass);
         }
-        if ((i & 0x8) != 0) {
+        if (hasBit(3)) {
             getWaveBean(paramWave).setKeyPart(Arrays.asList(this.keyPart));
         }
     }
@@ -96,7 +92,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
      */
     public ShowModelWaveBuilder uniquePlaceHolder(final ObjectProperty<Node> uniquePlaceHolder) {
         this.uniquePlaceHolder = uniquePlaceHolder;
-        this.setMask |= 1;
+        setBit(0);
         return this;
     }
 
@@ -109,7 +105,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
      */
     public ShowModelWaveBuilder childrenPlaceHolder(final ObservableList<Node> chidrenPlaceHolder) {
         this.chidrenPlaceHolder = chidrenPlaceHolder;
-        this.setMask |= 2;
+        setBit(1);
         return this;
     }
 
@@ -122,7 +118,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
      */
     public ShowModelWaveBuilder modelClass(final Class<? extends Model> modelClass) {
         this.modelClass = modelClass;
-        this.setMask |= 4;
+        setBit(2);
         return this;
     }
 
@@ -135,18 +131,8 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
      */
     public ShowModelWaveBuilder keyPart(final Object... keyPart) {
         this.keyPart = keyPart.clone();
-        this.setMask |= 8;
+        setBit(3);
         return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public WaveBase build() {
-        final WaveBase localWave = new WaveBase();
-        applyTo(localWave);
-        return localWave;
     }
 
 }

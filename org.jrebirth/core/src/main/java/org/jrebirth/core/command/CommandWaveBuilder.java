@@ -69,11 +69,11 @@ public class CommandWaveBuilder<B extends CommandWaveBuilder<B, WB>, WB extends 
      */
     @Override
     public void applyTo(final WaveBase paramWave) {
-        super.applyTo(paramWave);
 
         paramWave.setWaveGroup(WaveGroup.CALL_COMMAND);
         paramWave.setRelatedClass(this.commandClass);
         paramWave.setWaveBeanClass(this.waveBeanClass);
+
     }
 
     /**
