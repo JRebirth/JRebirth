@@ -174,11 +174,12 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     /**
      * TODO To complete.
      * 
-     * @param i
+     * @param toLeft
+     * 
      * @return
      */
-    protected boolean hasBit(final int bit) {
-        return (this.bitMask & bit) != 0;
+    protected boolean hasBit(final int toLeft) {
+        return (this.bitMask & 1 << toLeft) != 0;
     }
 
 }

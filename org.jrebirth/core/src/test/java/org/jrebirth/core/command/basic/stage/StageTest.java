@@ -1,5 +1,6 @@
 package org.jrebirth.core.command.basic.stage;
 
+import javafx.application.Application;
 import javafx.stage.Stage;
 
 import org.jrebirth.core.application.TestApplication;
@@ -37,8 +38,18 @@ public class StageTest {
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        globalFacade = new GlobalFacadeBase(new TestApplication());
-        JRebirthThread.getThread().launch(globalFacade.getApplication());
+        // globalFacade = new GlobalFacadeBase(new TestApplication());
+        // JRebirthThread.getThread().launch(globalFacade.getApplication());
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Application.launch(TestApplication.class);
+
+            }
+        }).start();
+        Thread.sleep(1000);
+        globalFacade = (GlobalFacadeBase) JRebirthThread.getThread().getFacade();
     }
 
     /**
@@ -48,6 +59,7 @@ public class StageTest {
      */
     @Before
     public void setUp() throws Exception {
+
         // new TestApplication().start(new Stage());
         this.commandFacade = globalFacade.getCommandFacade();
     }
@@ -97,6 +109,7 @@ public class StageTest {
             public void waveConsumed(final Wave wave) {
                 final Stage stage = StageTest.globalFacade.getServiceFacade().retrieve(StageService.class).getStage(stageKey);
                 Assert.assertNotNull(stage);
+                System.out.println("dddd");
             }
 
             @Override
@@ -112,6 +125,12 @@ public class StageTest {
                 StageTest.globalFacade.getNotifier().sendWave(wave);
             }
         });
+
+        try {
+            Thread.sleep(2000);
+        } catch (final InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
