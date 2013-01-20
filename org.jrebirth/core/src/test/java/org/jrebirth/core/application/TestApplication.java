@@ -11,11 +11,17 @@ import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 
 /**
- * The class <strong>TestApplication</strong>. TODO To complete
+ * The class <strong>TestApplication</strong>.
  * 
  * @author Sébastien Bordes
  */
 public class TestApplication extends AbstractApplication<Pane> {
+
+    private static TestApplication instance;
+
+    public static TestApplication getInstance() {
+        return instance;
+    }
 
     /**
      * {@inheritDoc}
@@ -46,6 +52,7 @@ public class TestApplication extends AbstractApplication<Pane> {
      */
     @Override
     protected void customizeStage(final Stage stage) {
+        instance = this;
     }
 
     /**

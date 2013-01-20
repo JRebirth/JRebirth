@@ -1,7 +1,7 @@
 package org.jrebirth.core.service.basic;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.WeakHashMap;
 
 import javafx.scene.Scene;
 import javafx.scene.SceneBuilder;
@@ -47,7 +47,7 @@ public class StageService extends ServiceBase {
     private static final Logger LOGGER = LoggerFactory.getLogger(StageService.class);
 
     /** The map that stores all stages. */
-    private final Map<String, Stage> stageMap = new WeakHashMap<>();
+    private final Map<String, Stage> stageMap = new HashMap<>();
 
     /**
      * {@inheritDoc}
