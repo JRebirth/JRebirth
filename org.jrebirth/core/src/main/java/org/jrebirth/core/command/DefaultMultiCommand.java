@@ -17,7 +17,7 @@
  */
 package org.jrebirth.core.command;
 
-import org.jrebirth.core.concurrent.RunIntoType;
+import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -25,14 +25,14 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public class DefaultMultiCommand extends AbstractBaseMultiCommand {
+public class DefaultMultiCommand extends AbstractMultiCommand {
 
     /**
      * Default Constructor.
      * 
      * @param runInto The run into thread type
      */
-    public DefaultMultiCommand(final RunIntoType runInto) {
+    public DefaultMultiCommand(final RunType runInto) {
         super(runInto, true);
     }
 
@@ -42,7 +42,7 @@ public class DefaultMultiCommand extends AbstractBaseMultiCommand {
      * @param runInto The run into thread type
      * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
      */
-    public DefaultMultiCommand(final RunIntoType runInto, final boolean sequential) {
+    public DefaultMultiCommand(final RunType runInto, final boolean sequential) {
         super(runInto, sequential);
     }
 

@@ -15,24 +15,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.command;
+package org.jrebirth.core.concurrent;
 
-import org.jrebirth.core.concurrent.RunIntoType;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * The class <strong>AbstractPoolCommand</strong>.
+ * This annotation is used to
  * 
- * Base implementation for Commands that will be run into a thread pool.
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractPoolCommand extends AbstractSingleCommand {
+@Target({ ElementType.TYPE, ElementType.METHOD })
+@Retention(RetentionPolicy.RUNTIME)
+public @interface RunInto {
 
-    /**
-     * Default Constructor used to run this action within the thread pool.
-     */
-    public AbstractPoolCommand() {
-        super(RunIntoType.JTP);
-    }
-
+    RunType value();
 }

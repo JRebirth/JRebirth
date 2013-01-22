@@ -39,7 +39,7 @@ public final class JRebirth {
      * @param runInto the targeted thread
      * @param runnable the task to run
      */
-    public static void run(final RunIntoType runInto, final Runnable runnable) {
+    public static void run(final RunType runInto, final Runnable runnable) {
         switch (runInto) {
             case JAT:
                 runIntoJAT(runnable);

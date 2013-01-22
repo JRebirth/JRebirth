@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.command;
 
-import org.jrebirth.core.concurrent.RunIntoType;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -30,14 +29,14 @@ public abstract class AbstractSingleCommand extends AbstractBaseCommand {
     /** The command is running. */
     private boolean running;
 
-    /**
-     * Default constructor.
-     * 
-     * @param runIntoThread the way to launch this command
-     */
-    public AbstractSingleCommand(final RunIntoType runIntoThread) {
-        super(runIntoThread);
-    }
+    // /**
+    // * Default constructor.
+    // *
+    // * @param runIntoThread the way to launch this command
+    // */
+    // public AbstractSingleCommand(final RunIntoType runIntoThread) {
+    // super(runIntoThread);
+    // }
 
     /**
      * {@inheritDoc}
