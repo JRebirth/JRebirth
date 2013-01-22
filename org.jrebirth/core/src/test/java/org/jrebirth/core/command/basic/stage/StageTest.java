@@ -18,13 +18,15 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * The class <strong>FacadeTest</strong>.
+ * The class <strong>StageTest</strong>.
  * 
  * @author Sébastien Bordes
  */
+@Ignore
 public class StageTest {
 
     private static GlobalFacadeBase globalFacade;
