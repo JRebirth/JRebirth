@@ -20,6 +20,7 @@ package org.jrebirth.core.resource.color;
 import javafx.scene.paint.Color;
 
 import org.jrebirth.core.resource.ResourceBuilders;
+import org.jrebirth.core.resource.parameter.ParameterName;
 
 /**
  * The class <strong>ColorItemBase</strong>.
@@ -67,6 +68,24 @@ public final class ColorItemBase implements ColorItem {
      * @return a new fresh color item object
      */
     public static ColorItemBase build(final ColorParams colorParams) {
+        final ColorItemBase colorItem = new ColorItemBase(colorParams);
+
+        // Ensure that the uid will be unique at runtime
+        synchronized (ColorItemBase.class) {
+            colorItem.setUid(++idGenerator);
+        }
+        return colorItem;
+    }
+
+    /**
+     * Build a color item.
+     * 
+     * @param colorName the name used to define uniqueness
+     * @param colorParams the primitive values for the color
+     * 
+     * @return a new fresh color item object
+     */
+    public static ColorItemBase build(final ParameterName colorName, final ColorParams colorParams) {
         final ColorItemBase colorItem = new ColorItemBase(colorParams);
 
         // Ensure that the uid will be unique at runtime
