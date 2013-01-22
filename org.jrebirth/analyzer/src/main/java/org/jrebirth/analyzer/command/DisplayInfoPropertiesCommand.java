@@ -17,7 +17,9 @@
  */
 package org.jrebirth.analyzer.command;
 
-import org.jrebirth.core.command.AbstractUICommand;
+import org.jrebirth.core.command.AbstractSingleCommand;
+import org.jrebirth.core.concurrent.RunInto;
+import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 
@@ -26,7 +28,8 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public class DisplayInfoPropertiesCommand extends AbstractUICommand {
+@RunInto(RunType.JAT)
+public class DisplayInfoPropertiesCommand extends AbstractSingleCommand {
 
     @Override
     public void ready() throws CoreException {
