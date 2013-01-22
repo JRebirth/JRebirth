@@ -17,16 +17,22 @@
  */
 package org.jrebirth.core.concurrent;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
 /**
+ * The class <strong>RunType</strong>.
+ * 
+ * The different ways to run a task.
  * 
  * @author Sébastien Bordes
  */
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.SOURCE)
-public @interface RunIntoJIT {
+public enum RunType {
+
+    /** Run into Java Application Thread. */
+    JAT,
+
+    /** Run into JRebirth Internal Thread. */
+    JIT,
+
+    /** Queue and run into the JRebirth Thread Pool. */
+    JTP;
+
 }

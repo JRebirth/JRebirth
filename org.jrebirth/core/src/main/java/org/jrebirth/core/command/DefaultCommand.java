@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.command;
 
+import org.jrebirth.core.concurrent.RunInto;
+import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 
@@ -27,7 +29,8 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public class DefaultCommand extends AbstractCommand {
+@RunInto(RunType.JIT)
+public class DefaultCommand extends AbstractSingleCommand {
 
     /**
      * {@inheritDoc}

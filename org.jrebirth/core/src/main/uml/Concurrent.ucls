@@ -1,7 +1,7 @@
 <class-diagram version="1.0.11" icons="true" automaticImage="PNG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <enumeration id="1" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.concurrent.RunIntoType" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/RunIntoType.java" 
+  <enumeration id="1" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.concurrent.RunType" 
+    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/RunType.java" 
     binary="false">    
     <position height="-1" width="-1" x="107" y="124"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
@@ -42,7 +42,7 @@
     <display autosize="true" stereotype="false"/>  
   </package>  
   <interface id="6" corner="BOTTOM_RIGHT" language="java" name="java.lang.Runnable" project="org.jrebirth.core" 
-    file="C:/Users/ng1e2b8/LocalTest/TOOLS/jdk1.7.0_09/jre/lib/rt.jar" binary="true">    
+    file="E:/JREBIRTH/TOOLS/jdk1.7.0_09/jre/lib/rt.jar" binary="true">    
     <position height="-1" width="-1" x="738" y="232"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
@@ -67,10 +67,15 @@
       <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </interface>  
-  <dependency id="9">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
+  <annotation id="9" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.concurrent.RunInto" 
+    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/RunInto.java" 
+    binary="false">    
+    <position height="50" width="103" x="66" y="431"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </annotation>  
   <association id="10">    
     <bendpoint x="388" y="513"/>    
     <bendpoint x="533" y="513"/>    
@@ -98,36 +103,40 @@
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="19">    
+  <association id="19">    
+    <bendpoint x="615" y="295"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="20" name="processingTasks">        
+        <position height="15" width="90" x="564" y="253"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <bendpoint x="576" y="231"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="23" name="queuedTasks">        
+        <position height="15" width="72" x="584" y="209"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="25">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
-  <association id="20">    
-    <bendpoint x="615" y="295"/>    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="21" name="processingTasks">        
-        <position height="15" width="90" x="564" y="253"/>      
-      </attribute>      
-      <multiplicity id="22" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="23">    
-    <bendpoint x="576" y="231"/>    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="24" name="queuedTasks">        
-        <position height="15" width="72" x="584" y="209"/>      
-      </attribute>      
-      <multiplicity id="25" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <realization id="26">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  
+  <dependency id="27">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
     visibility="true">    
     <attributes public="true" package="true" protected="true" private="false"/>    
