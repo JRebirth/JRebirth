@@ -18,7 +18,8 @@
 package org.jrebirth.core.command;
 
 import org.jrebirth.core.concurrent.JRebirth;
-import org.jrebirth.core.concurrent.RunIntoType;
+import org.jrebirth.core.concurrent.RunInto;
+import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.exception.CommandException;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.EventType;
@@ -45,7 +46,7 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     /**
      * The field that indicate how this command must be launched.
      */
-    private final RunIntoType runIntoThread;
+    private final RunType runIntoThread;
 
     /**
      * The parent command, useful when chained or multi commands are used.
@@ -55,11 +56,37 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     /**
      * Default constructor.
      * 
+     * The RunIntoThread property is defined according to (ordered by priority):
+     * <ol>
+     * <li>RunInto annotation</li>
+     * <li>JRebirth Internal Thread</li>
+     * </ol>
+     */
+    public AbstractBaseCommand() {
+        this(null);
+    }
+
+    /**
+     * Default constructor.
+     * 
+     * The RunIntoThread property is defined according to (ordered by priority):
+     * <ol>
+     * <li>RunInto annotation</li>
+     * <li>Provided RunType argument</li>
+     * <li>JRebirth Internal Thread</li>
+     * </ol>
+     * 
      * @param runIntoThread the way to launch this command
      */
-    public AbstractBaseCommand(final RunIntoType runIntoThread) {
+    public AbstractBaseCommand(final RunType runIntoThread) {
         super();
-        this.runIntoThread = runIntoThread;
+        // Try to retrieve the RunInto annotation at class level
+        final RunInto ri = this.getClass().getAnnotation(RunInto.class);
+
+        // First try to get the annotation value
+        // Secondly by provided runtType argument
+        // Thirdly (default case) use JIT
+        this.runIntoThread = ri == null ? runIntoThread == null ? RunType.JIT : runIntoThread : ri.value();
     }
 
     /**
@@ -129,7 +156,7 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     /**
      * @return Returns the runInto.
      */
-    protected final RunIntoType getRunInto() {
+    protected final RunType getRunInto() {
         return this.runIntoThread;
     }
 
