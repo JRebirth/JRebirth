@@ -23,6 +23,7 @@ import java.util.List;
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBean;
 import org.jrebirth.core.wave.WaveBuilder;
 import org.jrebirth.core.wave.WaveGroup;
 import org.jrebirth.core.wave.WaveListener;
@@ -34,10 +35,10 @@ import org.jrebirth.core.wave.WaveListener;
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractMultiCommand extends AbstractBaseCommand implements MultiCommand, WaveListener {
+public abstract class AbstractMultiCommand<WB extends WaveBean> extends AbstractBaseCommand<WB> implements MultiCommand<WB>, WaveListener {
 
     /** The list of command that will be chained. */
-    private final List<Class<? extends Command>> commandList = new ArrayList<>();
+    private final List<Class<? extends Command<WB>>> commandList = new ArrayList<>();
 
     /**
      * Flag that indicate if commands must be run sequentially(true) or in parallel(false).
@@ -57,6 +58,16 @@ public abstract class AbstractMultiCommand extends AbstractBaseCommand implement
      */
     public AbstractMultiCommand(final RunType runInto) {
         this(runInto, true);
+    }
+
+    /**
+     * Default Constructor.
+     * 
+     * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
+     */
+    public AbstractMultiCommand(final boolean sequential) {
+        super();
+        this.sequential = sequential;
     }
 
     /**
@@ -116,7 +127,7 @@ public abstract class AbstractMultiCommand extends AbstractBaseCommand implement
 
         } else {
             // Launch all sub command in parallel
-            for (final Class<? extends Command> commandClass : this.commandList) {
+            for (final Class<? extends Command<WB>> commandClass : this.commandList) {
                 getLocalFacade().retrieve(commandClass).run();
             }
         }
@@ -163,7 +174,7 @@ public abstract class AbstractMultiCommand extends AbstractBaseCommand implement
      * {@inheritDoc}
      */
     @Override
-    public void addCommandClass(final Class<? extends Command> commandClass) {
+    public void addCommandClass(final Class<? extends Command<WB>> commandClass) {
         this.commandList.add(commandClass);
     }
 

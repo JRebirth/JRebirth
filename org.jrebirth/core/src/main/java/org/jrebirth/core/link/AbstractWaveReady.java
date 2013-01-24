@@ -110,7 +110,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public void registerCallback(final WaveType callType, final WaveType responseType) {
+    public final void registerCallback(final WaveType callType, final WaveType responseType) {
         registerCallback(callType, responseType, true);
     }
 
@@ -118,10 +118,12 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public void registerCallback(final WaveType callType, final WaveType responseType, final boolean checkWaveContract) {
+    public final void registerCallback(final WaveType callType, final WaveType responseType, final boolean checkWaveContract) {
 
+        if (checkWaveContract) {
+            checkWaveTypeContract(callType);
+        }
         listen(callType);
-
         this.returnWaveTypeMap.put(callType, responseType);
     }
 
@@ -132,7 +134,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * 
      * @return Returns the waveType for return wave.
      */
-    public WaveType getReturnWaveType(final WaveType waveType) {
+    public final WaveType getReturnWaveType(final WaveType waveType) {
         return this.returnWaveTypeMap.get(waveType);
     }
 
@@ -243,7 +245,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public final void callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data) {
+    public final void callCommand(final Class<? extends Command<?>> commandClass, final WaveData<?>... data) {
         sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, data));
     }
 
@@ -310,7 +312,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public void handle(final Wave wave) throws WaveException {
+    public final void handle(final Wave wave) throws WaveException {
         try {
             // Build parameter list of the searched method
             final List<Object> parameterValues = new ArrayList<>();

@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.command;
 
-import org.jrebirth.core.exception.CommandException;
 import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
@@ -27,7 +26,7 @@ import org.jrebirth.core.wave.WaveBean;
  * 
  * @author Sébastien Bordes
  */
-public interface Command extends FacadeReady<Command> {
+public interface Command<WB extends WaveBean> extends FacadeReady<Command<WB>> {
 
     /**
      * Run the command.
@@ -42,26 +41,19 @@ public interface Command extends FacadeReady<Command> {
     void run(final Wave wave);
 
     /**
-     * Run the inner task.
-     * 
-     * @param wave the wave that have triggered this command
-     * 
-     * @throws CommandException if an error occurred
-     */
-    void innerRun(final Wave wave) throws CommandException;
-
-    /**
      * Link a parent command.
      * 
      * @param parentCommand the parent command
      */
-    void setParentCommand(final Command parentCommand);
+    void setParentCommand(final Command<WB> parentCommand);
 
     /**
-     * Return the wave bean class used to store data information.
+     * Get the wave bean and cast it.
      * 
-     * @return the wave bean class
+     * @param wave the wave that hold the bean
+     * 
+     * @return the casted wave bean
      */
-    Class<? extends WaveBean> getWaveBeanClass();
+    WB getWaveBean(final Wave wave);
 
 }

@@ -28,6 +28,7 @@ import org.jrebirth.core.facade.LocalFacade;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.wave.WaveBean;
 
 /**
  * 
@@ -129,7 +130,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
-    public final <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart) {
+    public final <C extends Command<? extends WaveBean>> C getCommand(final Class<C> clazz, final Object... keyPart) {
         getLocalFacade().getGlobalFacade().trackEvent(EventType.ACCESS_COMMAND, this.getClass(), clazz);
         return getLocalFacade().getGlobalFacade().getCommandFacade().retrieve(clazz, keyPart);
     }

@@ -18,15 +18,16 @@
 package org.jrebirth.core.command.basic;
 
 import org.jrebirth.core.command.DefaultMultiCommand;
+import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.WaveBean;
 
 /**
  * The class <strong>ShowModelCommand</strong>.
  * 
  * @author Sébastien Bordes
  */
+@RunInto(RunType.JIT)
 public class ShowModelCommand extends DefaultMultiCommand {
 
     /**
@@ -44,14 +45,6 @@ public class ShowModelCommand extends DefaultMultiCommand {
         addCommandClass(PrepareModelCommand.class);
         addCommandClass(AttachModelCommand.class);
 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Class<? extends WaveBean> getWaveBeanClass() {
-        return DisplayModelWaveBean.class;
     }
 
     /**

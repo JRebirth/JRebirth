@@ -112,7 +112,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkCommand(final Node node, final javafx.event.EventType<E> eventType,
-            final Class<? extends Command> commandClass, final WaveData<?>... waveData) {
+            final Class<? extends Command<?>> commandClass, final WaveData<?>... waveData) {
 
         linkCommand(node, eventType, commandClass, null, waveData);
     }
@@ -128,7 +128,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * 
      * @param <E> The type of JavaFX Event to track
      */
-    protected <E extends Event> void linkCommand(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Command> commandClass, final Callback<E, Boolean> callback,
+    protected <E extends Event> void linkCommand(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Command<?>> commandClass, final Callback<E, Boolean> callback,
             final WaveData<?>... waveData) {
 
         node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkCommand") {
