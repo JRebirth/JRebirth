@@ -23,8 +23,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to
- * 
+ * This annotation is used to.
  * 
  * @author Sébastien Bordes
  */
@@ -32,5 +31,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RunInto {
 
-    RunType value();
+    /**
+     * Return the RunType value.
+     * 
+     * The default value is RunType.JIT
+     * 
+     * @return the run type value
+     */
+    RunType value() default RunType.JIT;
 }

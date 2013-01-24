@@ -102,7 +102,7 @@ public interface WaveReady {
      * @param commandClass the command class to call
      * @param data the data to transport
      */
-    void callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data);
+    void callCommand(final Class<? extends Command<?>> commandClass, final WaveData<?>... data);
 
     /**
      * Send a wave used to return data from a service.

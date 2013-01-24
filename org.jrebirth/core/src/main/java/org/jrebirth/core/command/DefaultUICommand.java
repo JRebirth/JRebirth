@@ -21,6 +21,7 @@ import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBean;
 
 /**
  * The class <strong>DefaultUICommand</strong>.
@@ -30,7 +31,7 @@ import org.jrebirth.core.wave.Wave;
  * @author Sébastien Bordes
  */
 @RunInto(RunType.JIT)
-public class DefaultUICommand extends AbstractSingleCommand {
+public class DefaultUICommand extends AbstractSingleCommand<WaveBean> {
 
     /**
      * {@inheritDoc}

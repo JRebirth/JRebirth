@@ -65,6 +65,7 @@ public class StageCommand extends DefaultUICommand {
      * 
      * @return the casted wave bean
      */
+    @Override
     public StageWaveBean getWaveBean(final Wave wave) {
         return (StageWaveBean) wave.getWaveBean();
     }

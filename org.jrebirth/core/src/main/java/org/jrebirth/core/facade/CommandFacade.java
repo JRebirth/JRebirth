@@ -25,7 +25,7 @@ import org.jrebirth.core.command.Command;
  * 
  * @author Sébastien Bordes
  */
-public class CommandFacade extends AbstractFacade<Command> {
+public class CommandFacade extends AbstractFacade<Command<?>> {
 
     /**
      * Default Constructor.

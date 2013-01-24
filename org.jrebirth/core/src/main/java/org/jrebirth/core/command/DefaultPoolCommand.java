@@ -21,6 +21,7 @@ import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBean;
 
 /**
  * The class <strong>DefaultPoolCommand</strong>.
@@ -30,7 +31,7 @@ import org.jrebirth.core.wave.Wave;
  * @author Sébastien Bordes
  */
 @RunInto(RunType.JTP)
-public class DefaultPoolCommand extends AbstractSingleCommand {
+public class DefaultPoolCommand extends AbstractSingleCommand<WaveBean> {
 
     /**
      * {@inheritDoc}

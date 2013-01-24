@@ -19,13 +19,14 @@ package org.jrebirth.core.command;
 
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBean;
 
 /**
  * The class <strong>DefaultMultiCommand</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class DefaultMultiCommand extends AbstractMultiCommand {
+public class DefaultMultiCommand extends AbstractMultiCommand<WaveBean> {
 
     /**
      * Default Constructor.

@@ -38,10 +38,10 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> implements Command {
+public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractWaveReady<Command<WB>> implements Command<WB> {
 
     /** The class logger. */
-    static final Logger LOGGER = LoggerFactory.getLogger(AbstractBaseCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBaseCommand.class);
 
     /**
      * The field that indicate how this command must be launched.
@@ -51,7 +51,7 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     /**
      * The parent command, useful when chained or multi commands are used.
      */
-    private Command parentCommand;
+    private Command<WB> parentCommand;
 
     /**
      * Default constructor.
@@ -130,10 +130,13 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     }
 
     /**
-     * {@inheritDoc}
+     * Run the inner task.
+     * 
+     * @param wave the wave that have triggered this command
+     * 
+     * @throws CommandException if an error occurred
      */
-    @Override
-    public final void innerRun(final Wave wave) throws CommandException {
+    final void innerRun(final Wave wave) throws CommandException {
         preExecute(wave);
         execute(wave);
         postExecute(wave);
@@ -172,7 +175,7 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
     /**
      * @return Returns the parentCommand.
      */
-    public Command getParentCommand() {
+    public Command<WB> getParentCommand() {
         return this.parentCommand;
     }
 
@@ -180,16 +183,20 @@ public abstract class AbstractBaseCommand extends AbstractWaveReady<Command> imp
      * {@inheritDoc}
      */
     @Override
-    public void setParentCommand(final Command parentCommand) {
+    public void setParentCommand(final Command<WB> parentCommand) {
         this.parentCommand = parentCommand;
     }
 
     /**
-     * {@inheritDoc}
+     * Get the wave bean and cast it.
+     * 
+     * @param wave the wave that hold the bean
+     * 
+     * @return the casted wave bean
      */
-    @Override
-    public Class<? extends WaveBean> getWaveBeanClass() {
-        return WaveBean.class;
+    @SuppressWarnings("unchecked")
+    public WB getWaveBean(final Wave wave) {
+        return (WB) wave.getWaveBean();
     }
 
     /**

@@ -25,6 +25,7 @@ import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.link.Notifier;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.wave.WaveBean;
 
 /**
  * The interface <strong>GlobalFacade</strong>.
@@ -53,7 +54,7 @@ public interface GlobalFacade {
     /**
      * @return Returns the commandFacade.
      */
-    LocalFacade<Command> getCommandFacade();
+    LocalFacade<Command<? extends WaveBean>> getCommandFacade();
 
     /**
      * @return the application
