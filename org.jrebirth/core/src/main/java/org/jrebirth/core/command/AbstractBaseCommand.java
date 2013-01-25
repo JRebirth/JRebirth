@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractWaveReady<Command<WB>> implements Command<WB> {
+public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractWaveReady<Command> implements Command {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBaseCommand.class);
@@ -51,7 +51,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
     /**
      * The parent command, useful when chained or multi commands are used.
      */
-    private Command<WB> parentCommand;
+    private Command parentCommand;
 
     /**
      * Default constructor.
@@ -175,7 +175,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
     /**
      * @return Returns the parentCommand.
      */
-    public Command<WB> getParentCommand() {
+    public Command getParentCommand() {
         return this.parentCommand;
     }
 
@@ -183,7 +183,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      * {@inheritDoc}
      */
     @Override
-    public void setParentCommand(final Command<WB> parentCommand) {
+    public void setParentCommand(final Command parentCommand) {
         this.parentCommand = parentCommand;
     }
 
