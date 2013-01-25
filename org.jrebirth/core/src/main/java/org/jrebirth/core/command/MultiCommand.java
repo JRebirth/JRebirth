@@ -26,12 +26,12 @@ import org.jrebirth.core.wave.WaveBean;
  * 
  * @author Sébastien Bordes
  */
-public interface MultiCommand<WB extends WaveBean> extends Command<WB> {
+public interface MultiCommand<WB extends WaveBean> extends Command {
 
     /**
      * Add a command to the queue.
      * 
      * @param commandClass the class of the command to add
      */
-    void addCommandClass(final Class<? extends Command<WB>> commandClass);
+    void addCommandClass(final Class<? extends Command> commandClass);
 }

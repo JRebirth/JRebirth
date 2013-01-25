@@ -18,7 +18,6 @@
 package org.jrebirth.core.link;
 
 import org.jrebirth.core.command.Command;
-import org.jrebirth.core.wave.WaveBean;
 
 /**
  * 
@@ -38,6 +37,6 @@ public interface CommandReady {
      * 
      * @return a command instance
      */
-    <C extends Command<? extends WaveBean>> C getCommand(final Class<C> clazz, final Object... keyPart);
+    <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart);
 
 }

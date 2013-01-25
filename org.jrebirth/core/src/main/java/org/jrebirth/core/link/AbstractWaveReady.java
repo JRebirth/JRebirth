@@ -245,7 +245,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public final void callCommand(final Class<? extends Command<?>> commandClass, final WaveData<?>... data) {
+    public final void callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data) {
         sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, data));
     }
 

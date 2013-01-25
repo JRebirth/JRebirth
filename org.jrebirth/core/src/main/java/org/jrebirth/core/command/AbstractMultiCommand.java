@@ -38,7 +38,7 @@ import org.jrebirth.core.wave.WaveListener;
 public abstract class AbstractMultiCommand<WB extends WaveBean> extends AbstractBaseCommand<WB> implements MultiCommand<WB>, WaveListener {
 
     /** The list of command that will be chained. */
-    private final List<Class<? extends Command<WB>>> commandList = new ArrayList<>();
+    private final List<Class<? extends Command>> commandList = new ArrayList<>();
 
     /**
      * Flag that indicate if commands must be run sequentially(true) or in parallel(false).
@@ -127,7 +127,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
         } else {
             // Launch all sub command in parallel
-            for (final Class<? extends Command<WB>> commandClass : this.commandList) {
+            for (final Class<? extends Command> commandClass : this.commandList) {
                 getLocalFacade().retrieve(commandClass).run();
             }
         }
@@ -174,7 +174,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * {@inheritDoc}
      */
     @Override
-    public void addCommandClass(final Class<? extends Command<WB>> commandClass) {
+    public void addCommandClass(final Class<? extends Command> commandClass) {
         this.commandList.add(commandClass);
     }
 
