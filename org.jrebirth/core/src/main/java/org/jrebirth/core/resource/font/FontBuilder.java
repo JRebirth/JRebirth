@@ -34,6 +34,9 @@ import org.slf4j.LoggerFactory;
  */
 public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontParams, Font> {
 
+    /** The root folder that store all application fonts. */
+    public static String fontsFolder = "font";
+
     /**
      * The <code>RESOURCE_SEPARATOR</code>.
      */
@@ -46,9 +49,6 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
      * The <code>TRUE_TYPE_FONT_EXT</code> field is used to define the file extension.
      */
     private static final String TRUE_TYPE_FONT_EXT = ".ttf";
-
-    /** The root folder that store all application fonts. */
-    public static String fontsFolder = "font";
 
     /**
      * {@inheritDoc}

@@ -34,6 +34,8 @@ import org.jrebirth.core.wave.WaveListener;
  * The base multi command class for Internal commands.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  */
 public abstract class AbstractMultiCommand<WB extends WaveBean> extends AbstractBaseCommand<WB> implements MultiCommand<WB>, WaveListener {
 

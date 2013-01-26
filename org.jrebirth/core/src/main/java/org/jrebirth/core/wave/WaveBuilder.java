@@ -163,20 +163,20 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     }
 
     /**
-     * .
+     * .Add a bit to the mask.
      * 
-     * @param toLeft
+     * @param the bit to add
      */
     protected void setBit(final int toLeft) {
         this.bitMask |= 1 << toLeft;
     }
 
     /**
-     * TODO To complete.
+     * Check if the mask contains teh requested bit.
      * 
-     * @param toLeft
+     * @param toLeft the requested bit
      * 
-     * @return
+     * @return true if the mask contains the requested bit
      */
     protected boolean hasBit(final int toLeft) {
         return (this.bitMask & 1 << toLeft) != 0;

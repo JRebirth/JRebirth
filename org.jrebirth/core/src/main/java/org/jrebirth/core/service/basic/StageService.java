@@ -68,6 +68,8 @@ public class StageService extends ServiceBase {
      */
     public void openStage(final Wave wave) {
 
+        LOGGER.trace("Open a stage.");
+
         final StageWaveBean swb = getWaveBean(wave);
         final String stageKey = swb.getStageKey();
 
@@ -96,8 +98,8 @@ public class StageService extends ServiceBase {
      */
     private Region getRootPane(final StageWaveBean swb) {
 
-        return swb.getRootPane() == null ?
-                StackPaneBuilder.create()
+        return swb.getRootPane() == null
+                ? StackPaneBuilder.create()
                         .build()
                 : swb.getRootPane();
     }
@@ -174,10 +176,11 @@ public class StageService extends ServiceBase {
     }
 
     /**
-     * TODO To complete.
+     * Retrieve a stage according to its key.
      * 
-     * @param stageKey
-     * @return
+     * @param stageKey the unique key for the requested stage
+     * 
+     * @return the stage or null if not mapped
      */
     public Stage getStage(final String stageKey) {
         return this.stageMap.get(stageKey);

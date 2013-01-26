@@ -32,11 +32,9 @@ import java.lang.annotation.Target;
 public @interface RunInto {
 
     /**
-     * Return the RunType value.
+     * Define the RunType value.
      * 
      * The default value is RunType.JIT
-     * 
-     * @return the run type value
      */
     RunType value() default RunType.JIT;
 }

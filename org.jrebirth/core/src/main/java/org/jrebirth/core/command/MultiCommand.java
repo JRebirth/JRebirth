@@ -25,6 +25,8 @@ import org.jrebirth.core.wave.WaveBean;
  * The contract to chain multiple commands.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  */
 public interface MultiCommand<WB extends WaveBean> extends Command {
 
