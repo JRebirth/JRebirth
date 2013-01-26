@@ -25,6 +25,8 @@ import org.jrebirth.core.wave.WaveBean;
  * The class <strong>AbstractSingleCommand</strong>.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  */
 public abstract class AbstractSingleCommand<WB extends WaveBean> extends AbstractBaseCommand<WB> {
 

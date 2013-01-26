@@ -7,9 +7,10 @@ import org.jrebirth.core.resource.color.ResourceParams;
  * 
  * @author Sébastien Bordes
  */
-public class AbstractBaseParams implements ResourceParams {
+public abstract class AbstractBaseParams implements ResourceParams {
 
-    private boolean changed = false;
+    /** The flag that indicates if the resource params has changed. */
+    private boolean changed;
 
     /**
      * {@inheritDoc}

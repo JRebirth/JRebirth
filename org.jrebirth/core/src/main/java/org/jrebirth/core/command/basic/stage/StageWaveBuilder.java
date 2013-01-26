@@ -73,7 +73,7 @@ public final class StageWaveBuilder extends CommandWaveBuilder<StageWaveBuilder,
     /**
      * Define action to process.
      * 
-     * @param action the action to do
+     * @param stageKey the stage key
      * 
      * @return the builder
      */
@@ -86,8 +86,7 @@ public final class StageWaveBuilder extends CommandWaveBuilder<StageWaveBuilder,
     /**
      * Define action to process.
      * 
-     * @see #StageAction.
-     * @param action the action to do
+     * @param action the action to perform {@link StageAction}
      * 
      * @return the builder
      */
@@ -100,7 +99,7 @@ public final class StageWaveBuilder extends CommandWaveBuilder<StageWaveBuilder,
     /**
      * Define the root model class.
      * 
-     * @param uniquePlaceHolder the property that handle the view's node
+     * @param rootModelClass the root model class
      * 
      * @return the builder
      */

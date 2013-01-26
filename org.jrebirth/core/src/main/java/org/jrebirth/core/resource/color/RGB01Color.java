@@ -63,7 +63,7 @@ public class RGB01Color extends AbstractBaseColor {
     }
 
     /**
-     * Return the red value [0.0-1.0]
+     * Return the red value [0.0-1.0].
      * 
      * @return Returns the red.
      */

@@ -89,7 +89,7 @@ public abstract class AbstractFXMLModel<M extends Model> extends AbstractBaseMod
      */
     @Override
     public final View<?, ?, ?> getView() {
-        return null;
+        return NullView.NULL_VIEW;
     }
 
     /**

@@ -37,6 +37,8 @@ import org.slf4j.LoggerFactory;
  * Allow to run the command in different thread according to the runInto field value.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  */
 public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractWaveReady<Command> implements Command {
 

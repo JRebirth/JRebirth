@@ -58,7 +58,7 @@ public class FamilyFont extends AbstractBaseFont {
      * 
      * @param family the font family
      * @param size the font size
-     * @param weight the font weight
+     * @param weight the font weight {@link FontWeight}
      */
     public FamilyFont(final String family, final double size, final FontWeight weight) {
         this(family, size, weight, FontPosture.REGULAR);
@@ -71,7 +71,7 @@ public class FamilyFont extends AbstractBaseFont {
      * 
      * @param family the font family
      * @param size the font size
-     * @param posture the font posture
+     * @param posture the font posture {@link FontPosture}
      */
     public FamilyFont(final String family, final double size, final FontPosture posture) {
         this(family, size, FontWeight.NORMAL, posture);
@@ -82,6 +82,8 @@ public class FamilyFont extends AbstractBaseFont {
      * 
      * @param family the font family
      * @param size the font size
+     * @param weight the font weight {@link FontWeight}
+     * @param posture the font posture {@link FontPosture}
      */
     public FamilyFont(final String family, final double size, final FontWeight weight, final FontPosture posture) {
         super(null);
