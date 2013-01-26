@@ -15,26 +15,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.resource;
+package org.jrebirth.core.resource.parameter;
 
-import org.jrebirth.core.resource.color.ColorBuilder;
-import org.jrebirth.core.resource.font.FontBuilder;
-import org.jrebirth.core.resource.parameter.ParameterBuilder;
 
 /**
- * The interface <strong>ResourceBuilders</strong> is used to retrieve resource builder singleton.
+ * The class <strong>TestColors</strong>.
  * 
  * @author Sébastien Bordes
  */
-public interface ResourceBuilders {
+public interface TestParameters {
 
-    /** The factory used to manage application parameters. */
-    ParameterBuilder PARAMETER_BUILDER = new ParameterBuilder();
+    /**************************************************************************************/
+    /** ______________________________String Parameters._________________________________ */
+    /**************************************************************************************/
 
-    /** The factory used to manage colors. */
-    ColorBuilder COLOR_BUILDER = new ColorBuilder();
-
-    /** The factory used to manage fonts. */
-    FontBuilder FONT_BUILDER = new FontBuilder();
+    /** The web color. */
+    ParameterItemBase<String> TEST_STRING_PARAM_1 = ParameterItemBase.build(null);
 
 }

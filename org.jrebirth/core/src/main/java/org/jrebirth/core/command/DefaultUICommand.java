@@ -30,7 +30,7 @@ import org.jrebirth.core.wave.WaveBean;
  * 
  * @author Sébastien Bordes
  */
-@RunInto(RunType.JIT)
+@RunInto(RunType.JAT)
 public class DefaultUICommand extends AbstractSingleCommand<WaveBean> {
 
     /**

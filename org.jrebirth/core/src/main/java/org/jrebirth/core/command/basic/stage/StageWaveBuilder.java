@@ -28,9 +28,10 @@ import org.jrebirth.core.wave.WaveBase;
  */
 public final class StageWaveBuilder extends CommandWaveBuilder<StageWaveBuilder, StageWaveBean> {
 
+    /** The unique key used to identify a stage. */
     private String stageKey;
 
-    /** . */
+    /** The action to perform for this stage. */
     private StageAction action;
 
     /** The root model class to show attached to the stage. */
@@ -79,7 +80,7 @@ public final class StageWaveBuilder extends CommandWaveBuilder<StageWaveBuilder,
      */
     public StageWaveBuilder key(final String stageKey) {
         this.stageKey = stageKey;
-        setBit(0);
+        addBit(0);
         return this;
     }
 
@@ -92,7 +93,7 @@ public final class StageWaveBuilder extends CommandWaveBuilder<StageWaveBuilder,
      */
     public StageWaveBuilder action(final StageAction action) {
         this.action = action;
-        setBit(1);
+        addBit(1);
         return this;
     }
 
@@ -105,7 +106,7 @@ public final class StageWaveBuilder extends CommandWaveBuilder<StageWaveBuilder,
      */
     public StageWaveBuilder rootModelClass(final Class<? extends Model> rootModelClass) {
         this.rootModelClass = rootModelClass;
-        setBit(2);
+        addBit(2);
         return this;
     }
 

@@ -20,6 +20,7 @@ package org.jrebirth.core.resource.font;
 import javafx.scene.text.Font;
 
 import org.jrebirth.core.resource.ResourceBuilders;
+import org.jrebirth.core.resource.parameter.ParameterItem;
 
 /**
  * The class <strong>FontItemBase</strong>.
@@ -67,6 +68,24 @@ public final class FontItemBase implements FontItem {
      * @return a new fresh font item object
      */
     public static FontItemBase build(final FontParams fontParams) {
+        final FontItemBase fontItem = new FontItemBase(fontParams);
+
+        // Ensure that the uid will be unique at runtime
+        synchronized (FontItemBase.class) {
+            fontItem.setUid(++idGenerator);
+        }
+        return fontItem;
+    }
+
+    /**
+     * Build a font item.
+     * 
+     * @param fontParameterName the parameter name used by this font
+     * @param fontParams the primitive values for the font
+     * 
+     * @return a new fresh font item object
+     */
+    public static FontItemBase build(final ParameterItem fontParameterName, final FontParams fontParams) {
         final FontItemBase fontItem = new FontItemBase(fontParams);
 
         // Ensure that the uid will be unique at runtime

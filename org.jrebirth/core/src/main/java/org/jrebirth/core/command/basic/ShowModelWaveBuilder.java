@@ -92,7 +92,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
      */
     public ShowModelWaveBuilder uniquePlaceHolder(final ObjectProperty<Node> uniquePlaceHolder) {
         this.uniquePlaceHolder = uniquePlaceHolder;
-        setBit(0);
+        addBit(0);
         return this;
     }
 
@@ -105,7 +105,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
      */
     public ShowModelWaveBuilder childrenPlaceHolder(final ObservableList<Node> chidrenPlaceHolder) {
         this.chidrenPlaceHolder = chidrenPlaceHolder;
-        setBit(1);
+        addBit(1);
         return this;
     }
 
@@ -118,7 +118,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
      */
     public ShowModelWaveBuilder modelClass(final Class<? extends Model> modelClass) {
         this.modelClass = modelClass;
-        setBit(2);
+        addBit(2);
         return this;
     }
 
@@ -131,7 +131,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
      */
     public ShowModelWaveBuilder keyPart(final Object... keyPart) {
         this.keyPart = keyPart.clone();
-        setBit(3);
+        addBit(3);
         return this;
     }
 

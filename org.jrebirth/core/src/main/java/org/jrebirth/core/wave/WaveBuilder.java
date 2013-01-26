@@ -26,7 +26,7 @@ import javafx.util.Builder;
  * 
  * @author Sébastien Bordes
  * 
- * @param <B> the builder recusrive type
+ * @param <B> the builder recursive type
  */
 public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> {
 
@@ -92,7 +92,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B waveGroup(final WaveGroup waveGroup) {
         this.waveGroup = waveGroup;
-        setBit(0);
+        addBit(0);
         return (B) this;
     }
 
@@ -106,7 +106,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B waveType(final WaveType waveType) {
         this.waveType = waveType;
-        setBit(1);
+        addBit(1);
         return (B) this;
     }
 
@@ -120,7 +120,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B relatedClass(final Class<?> relatedClass) {
         this.relatedClass = relatedClass;
-        setBit(2);
+        addBit(2);
         return (B) this;
     }
 
@@ -134,7 +134,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B waveBeanClass(final Class<? extends WaveBean> waveBeanClass) {
         this.waveBeanClass = waveBeanClass;
-        setBit(3);
+        addBit(3);
         return (B) this;
     }
 
@@ -148,7 +148,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B data(final WaveData<?>... waveData) {
         this.waveData = waveData;
-        setBit(4);
+        addBit(4);
         return (B) this;
     }
 
@@ -163,23 +163,23 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     }
 
     /**
-     * .Add a bit to the mask.
+     * Add a bit to the mask.
      * 
-     * @param the bit to add
+     * @param bit the bit to add
      */
-    protected void setBit(final int toLeft) {
-        this.bitMask |= 1 << toLeft;
+    protected void addBit(final int bit) {
+        this.bitMask |= 1 << bit;
     }
 
     /**
-     * Check if the mask contains teh requested bit.
+     * Check if the mask contains the requested bit.
      * 
-     * @param toLeft the requested bit
+     * @param bit the requested bit
      * 
      * @return true if the mask contains the requested bit
      */
-    protected boolean hasBit(final int toLeft) {
-        return (this.bitMask & 1 << toLeft) != 0;
+    protected boolean hasBit(final int bit) {
+        return (this.bitMask & 1 << bit) != 0;
     }
 
 }

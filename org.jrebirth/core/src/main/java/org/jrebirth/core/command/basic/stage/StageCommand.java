@@ -54,6 +54,7 @@ public class StageCommand extends DefaultUICommand {
                 ss.destroyStage(wave);
                 break;
             default:
+                LOGGER.error("Undefined StageAction");
         }
 
     }
