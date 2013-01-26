@@ -17,11 +17,9 @@
  */
 package org.jrebirth.core.resource.parameter;
 
-import javafx.scene.text.Font;
+import java.util.ResourceBundle;
 
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
-import org.jrebirth.core.resource.font.FamilyFont;
-import org.jrebirth.core.resource.font.RealFont;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,34 +30,47 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public final class ParameterBuilder extends AbstractResourceBuilder<ParameterEnum, ParameterParams, Object> {
-
-    /**
-     * The <code>RESOURCE_SEPARATOR</code>.
-     */
-    private static final String R_SEP = "/";
+public final class ParameterBuilder extends AbstractResourceBuilder<ParameterItem, ParameterParams, Object> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ParameterBuilder.class);
 
-    /** The root folder that store all application fonts. */
-    private static String fontsFolder = "font";
+    /** The jrebirth bundle name. */
+    private static final String BUNDLE_NAME = "jrebirth";
+
+    /** The Resources bundle built. */
+    private static final ResourceBundle PARAMETERS = ResourceBundle.getBundle(BUNDLE_NAME);
+
+    /**
+     * Default Constructor
+     */
+    public ParameterBuilder() {
+        super();
+
+        // TODO Search All configuration file
+        readPropertiesFile();
+    }
+
+    /**
+     * TODO To complete.
+     */
+    private void readPropertiesFile() {
+        // Nothing to do yet
+
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected Font buildResource(final ParameterParams jrFont) {
-        Font font = null;
-        if (jrFont instanceof RealFont) {
-            // Build the requested font
-        } else if (jrFont instanceof FamilyFont) {
-            // Build a family like font
-        } else {
-            // Return the default font
-            font = Font.getDefault();
+    protected Object buildResource(final ParameterParams parameterParams) {
+        final Object object = null;
+        if (parameterParams instanceof ObjectParameter) {
+            // Build the requested parameter
+
         }
-        return font;
+
+        return object;
     }
 
 }

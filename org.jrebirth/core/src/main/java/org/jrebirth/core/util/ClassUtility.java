@@ -17,6 +17,7 @@
  */
 package org.jrebirth.core.util;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -195,4 +196,24 @@ public final class ClassUtility {
         }
         return returnClass;
     }
+
+    /**
+     * Extract the first annotation requested found into the class hierarchy.<br />
+     * Interfaces are not yet supported.
+     * 
+     * @param sourceClass the class (wit its parent classes) to inspect
+     * @param annotationClass the annotation to find
+     * 
+     * @return the request annotation or null if none have been found into the class hierarchy
+     */
+    public static <A extends Annotation> A extractAnnotation(final Class<?> sourceClass, final Class<A> annotationClass) {
+        A annotation = null;
+        Class<?> currentClass = sourceClass;
+        while (annotation == null && currentClass != null) {
+            annotation = currentClass.getAnnotation(annotationClass);
+            currentClass = currentClass.getSuperclass();
+        }
+        return annotation;
+    }
+
 }

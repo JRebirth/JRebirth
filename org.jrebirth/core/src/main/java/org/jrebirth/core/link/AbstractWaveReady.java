@@ -92,7 +92,8 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     public final void listen(final WaveType waveType, final boolean checkWaveContract) {
 
         if (checkWaveContract) {
-            checkWaveTypeContract(waveType);
+            // FIX ME
+            // checkWaveTypeContract(waveType);
         }
 
         final WaveReady waveReady = this;

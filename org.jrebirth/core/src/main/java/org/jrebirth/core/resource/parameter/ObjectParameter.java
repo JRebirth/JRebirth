@@ -17,13 +17,37 @@
  */
 package org.jrebirth.core.resource.parameter;
 
-import org.jrebirth.core.resource.ResourceItem;
+import org.jrebirth.core.resource.AbstractBaseParams;
 
 /**
- * The class <strong>ParameterEnum</strong>.
+ * The interface <strong>ObjectParameter</strong>.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <O> the parameter type
  */
-public interface ParameterEnum extends ResourceItem<Object, ParameterBuilder> {
+public class ObjectParameter<O> extends AbstractBaseParams implements ParameterParams {
+
+    /** The parameter object. */
+    private final O object;
+
+    /**
+     * Default Constructor.
+     * 
+     * @param object the parameter object
+     */
+    public ObjectParameter(final O object) {
+        super();
+        this.object = object;
+    }
+
+    /**
+     * Return the parameter object value.
+     * 
+     * @return Returns the object.
+     */
+    public O object() {
+        return this.object;
+    }
 
 }

@@ -29,7 +29,7 @@ import java.lang.reflect.Type;
  * 
  * @param <T> the type of the object mapped by this WaveItem
  */
-public abstract class WaveItem<T> {
+public class WaveItem<T> {
 
     /** The generator of unique id. */
     private static int idGenerator;

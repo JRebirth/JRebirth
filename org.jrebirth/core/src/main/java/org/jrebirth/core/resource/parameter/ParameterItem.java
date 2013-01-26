@@ -1,4 +1,5 @@
 /**
+
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
@@ -15,26 +16,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.resource;
+package org.jrebirth.core.resource.parameter;
 
-import org.jrebirth.core.resource.color.ColorBuilder;
-import org.jrebirth.core.resource.font.FontBuilder;
-import org.jrebirth.core.resource.parameter.ParameterBuilder;
+import org.jrebirth.core.resource.ResourceItem;
 
 /**
- * The interface <strong>ResourceBuilders</strong> is used to retrieve resource builder singleton.
+ * The class <strong>ParameterItem</strong>.
+ * 
+ * The name of the parameter.
+ * 
+ * The name will be transformed : camelCase => CAMEL_CASE
  * 
  * @author Sébastien Bordes
  */
-public interface ResourceBuilders {
-
-    /** The factory used to manage application parameters. */
-    ParameterBuilder PARAMETER_BUILDER = new ParameterBuilder();
-
-    /** The factory used to manage colors. */
-    ColorBuilder COLOR_BUILDER = new ColorBuilder();
-
-    /** The factory used to manage fonts. */
-    FontBuilder FONT_BUILDER = new FontBuilder();
+public interface ParameterItem extends ResourceItem<Object, ParameterBuilder> {
 
 }

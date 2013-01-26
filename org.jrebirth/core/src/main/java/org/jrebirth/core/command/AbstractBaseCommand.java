@@ -24,6 +24,7 @@ import org.jrebirth.core.exception.CommandException;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.EventType;
 import org.jrebirth.core.link.AbstractWaveReady;
+import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
 import org.slf4j.Logger;
@@ -82,8 +83,8 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      */
     public AbstractBaseCommand(final RunType runIntoThread) {
         super();
-        // Try to retrieve the RunInto annotation at class level
-        final RunInto ri = this.getClass().getAnnotation(RunInto.class);
+        // Try to retrieve the RunInto annotation at class level within class hierarchy
+        final RunInto ri = ClassUtility.extractAnnotation(this.getClass(), RunInto.class);
 
         // First try to get the annotation value
         // Secondly by provided runtType argument

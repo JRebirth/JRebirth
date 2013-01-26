@@ -114,38 +114,40 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         E readyObject;
 
         // retrieve the component from the singleton map
-        synchronized (this.singletonMap) {
 
-            // It the component is already registered, get it to return it
-            if (exists(clazz, keyPart)) {
+        // It the component is already registered, get it to return it
+        if (exists(clazz, keyPart)) {
 
+            synchronized (this.singletonMap) {
                 // FIXME OPTIMIZE KEY CREATION
 
                 // If no key is provided retrieve from the singleton map
                 // Extract the value from the weak reference
                 readyObject = (E) this.singletonMap.get(buildKey(clazz, keyPart));
 
-            } else {
-                // If the component isn't contained into the singleton map, create and register it
-                try {
+            }
 
-                    // Build the new instance of the component
-                    readyObject = build(clazz, keyPart);
+        } else {
+            // If the component isn't contained into the singleton map, create and register it
+            try {
 
-                    // Register it
-                    register(readyObject, keyPart);
+                // Build the new instance of the component
+                readyObject = build(clazz, keyPart);
 
-                    // The component is accessible from facade, let's start its initialization
-                    readyObject.ready();
+                // Register it
+                register(readyObject, keyPart);
 
-                } catch (final CoreException ce) {
-                    LOGGER.error(ce.getMessage());
-                    final String msg = "Error while building " + clazz.getCanonicalName() + " instance";
-                    LOGGER.error(msg);
-                    throw new CoreRuntimeException(msg, ce);
-                }
+                // The component is accessible from facade, let's start its initialization
+                readyObject.ready();
+
+            } catch (final CoreException ce) {
+                LOGGER.error(ce.getMessage());
+                final String msg = "Error while building " + clazz.getCanonicalName() + " instance";
+                LOGGER.error(msg);
+                throw new CoreRuntimeException(msg, ce);
             }
         }
+
         /*
          * } else {
          * 

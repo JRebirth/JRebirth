@@ -1,7 +1,7 @@
 package org.jrebirth.core.command.basic.stage;
 
 /**
- * The enumeration <strong>StageAction</strong> list all action related to stage.
+ * The enumeration <strong>StageAction</strong> list all action related to Stage.
  * 
  * @author Sébastien Bordes
  */
