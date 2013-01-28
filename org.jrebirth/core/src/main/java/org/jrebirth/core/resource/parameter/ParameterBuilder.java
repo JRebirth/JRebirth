@@ -17,7 +17,20 @@
  */
 package org.jrebirth.core.resource.parameter;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 import org.slf4j.Logger;
@@ -41,21 +54,79 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
     /** The Resources bundle built. */
     private static final ResourceBundle PARAMETERS = ResourceBundle.getBundle(BUNDLE_NAME);
 
+    /** . */
+    private final Map<String, Object> parametersMap = new ConcurrentHashMap<>();
+
     /**
      * Default Constructor
      */
     public ParameterBuilder() {
         super();
 
-        // TODO Search All configuration file
-        readPropertiesFile();
+        // Search and analyze all properties files available
+        readPropertiesFiles();
     }
 
     /**
      * TODO To complete.
      */
-    private void readPropertiesFile() {
-        // Nothing to do yet
+    private void readPropertiesFiles() {
+
+        final FilenameFilter configFileFilter = new FilenameFilter() {
+
+            @Override
+            public boolean accept(final File dir, final String name) {
+                return name != null && name.endsWith("jrebirth.properties");
+            }
+        };
+
+        final File configFolder = new File("config");
+        if (configFolder.exists()) {
+
+            final File[] configFiles = configFolder.listFiles(configFileFilter);
+            final List<File> cfList = new ArrayList<>(Arrays.asList(configFiles));
+
+            // Sort configuration File to allow to override default configuration
+            Collections.sort(cfList, new Comparator<File>() {
+
+                @Override
+                public int compare(final File file1, final File file2) {
+                    return file1.getName().compareTo(file2.getName());
+                }
+            });
+
+            for (final File cf : configFiles) {
+                readPropertiesFile(cf);
+            }
+        }
+
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param cf
+     */
+    private void readPropertiesFile(final File cf) {
+        final Properties p = new Properties();
+
+        try (InputStream is = new FileInputStream(cf)) {
+
+            p.load(is);
+
+            for (final Object key : p.keySet()) {
+                if (this.parametersMap.containsKey(key)) {
+                    LOGGER.trace("Update key {} with value= {}", key, p.get(key));
+                } else {
+                    LOGGER.trace("Store key {} with value= {}", key, p.get(key));
+                }
+                this.parametersMap.put(key.toString(), p.get(key));
+
+            }
+
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -64,13 +135,21 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
      */
     @Override
     protected Object buildResource(final ParameterParams parameterParams) {
-        final Object object = null;
+        Object object = null;
         if (parameterParams instanceof ObjectParameter) {
-            // Build the requested parameter
 
+            final ObjectParameter<?> op = (ObjectParameter<?>) parameterParams;
+
+            object = op.object();// Build the requested parameter
+
+            if (op.name() != null && PARAMETERS.containsKey(op.name())) {
+
+                final Object configured = op.parseObject(PARAMETERS.getObject(op.name()).toString());
+
+                this.parametersMap.put(op.name(), configured);
+            }
         }
 
         return object;
     }
-
 }

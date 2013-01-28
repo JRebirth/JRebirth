@@ -18,7 +18,6 @@
 package org.jrebirth.core.resource.parameter;
 
 import org.jrebirth.core.resource.ResourceBuilders;
-import org.jrebirth.core.resource.color.ColorItemBase;
 
 /**
  * 
@@ -53,9 +52,10 @@ public class ParameterItemBase<T> implements ParameterItem {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public Object get() {
-        return builder().get(this);
+    public T get() {
+        return (T) builder().get(this);
     }
 
     /**
@@ -73,11 +73,28 @@ public class ParameterItemBase<T> implements ParameterItem {
      * 
      * @return a new fresh color item object
      */
-    public static ParameterItemBase build(final ParameterParams parameterParams) {
-        final ParameterItemBase parameterItem = new ParameterItemBase(parameterParams);
+    public static <O extends Object> ParameterItemBase<O> build(final ObjectParameter<O> parameterParams) {
+        final ParameterItemBase<O> parameterItem = new ParameterItemBase<O>(parameterParams);
 
         // Ensure that the uid will be unique at runtime
-        synchronized (ColorItemBase.class) {
+        synchronized (ParameterItemBase.class) {
+            parameterItem.setUid(++idGenerator);
+        }
+        return parameterItem;
+    }
+
+    /**
+     * Build a color item.
+     * 
+     * @param parameterParams the primitive values for the color
+     * 
+     * @return a new fresh color item object
+     */
+    public static <O extends Object> ParameterItemBase<O> build(final String name, final O value) {
+        final ParameterItemBase<O> parameterItem = new ParameterItemBase<O>(new ObjectParameter<O>(name, value));
+
+        // Ensure that the uid will be unique at runtime
+        synchronized (ParameterItemBase.class) {
             parameterItem.setUid(++idGenerator);
         }
         return parameterItem;

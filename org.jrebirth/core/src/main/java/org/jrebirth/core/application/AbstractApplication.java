@@ -27,6 +27,7 @@ import javafx.scene.SceneBuilder;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
@@ -40,6 +41,7 @@ import org.jrebirth.core.exception.handler.JitUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.PoolUncaughtExceptionHandler;
 import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.resource.font.FontItem;
+import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.util.ClassUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -265,9 +267,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     protected final Scene buildScene() throws CoreException {
         return SceneBuilder.create()
                 .root(buildRootPane())
-                .width(JRebirthApplication.DEFAULT_SCENE_WIDTH)
-                .height(JRebirthApplication.DEFAULT_SCENE_HEIGHT)
-                .fill(JRebirthApplication.DEFAULT_SCENE_BG_COLOR)
+                .width(JRebirthParameters.APPLICATION_STAGE_WIDTH.get())
+                .height(JRebirthParameters.APPLICATION_STAGE_HEIGHT.get())
+                .fill(Color.TRANSPARENT/* JRebirthApplication.DEFAULT_SCENE_BG_COLOR */)
                 .build();
     }
 

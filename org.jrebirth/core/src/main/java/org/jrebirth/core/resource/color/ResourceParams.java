@@ -24,8 +24,18 @@ package org.jrebirth.core.resource.color;
  */
 public interface ResourceParams {
 
+    /**
+     * Checks for resource changes.
+     * 
+     * @return true, if resource has changed and need to be reloaded
+     */
     boolean hasChanged();
 
+    /**
+     * Define if the resource has changed or not.
+     * 
+     * @param changed the changed argument
+     */
     void hasChanged(final boolean changed);
 
 }

@@ -17,9 +17,8 @@
  */
 package org.jrebirth.core.resource.parameter;
 
-
 /**
- * The class <strong>TestColors</strong>.
+ * The class <strong>TestParameters</strong>.
  * 
  * @author Sébastien Bordes
  */
@@ -30,6 +29,13 @@ public interface TestParameters {
     /**************************************************************************************/
 
     /** The web color. */
-    ParameterItemBase<String> TEST_STRING_PARAM_1 = ParameterItemBase.build(null);
+    ParameterItemBase<String> TEST_STRING_PARAM_1 = ParameterItemBase.build(new ObjectParameter<String>("fonts"));
+    ParameterItemBase<String> TEST_STRING_PARAM_2 = ParameterItemBase.build(new ObjectParameter<String>("fontsFolder"));
+    ParameterItemBase<String> TEST_STRING_PARAM_3 = ParameterItemBase.build("fontsFolder", "fonts");
+
+    /**************************************************************************************/
+    /** ______________________________Integer Parameters.________________________________ */
+    /**************************************************************************************/
+    ParameterItemBase<Integer> TEST_INTEGER_WIDTH = ParameterItemBase.build("stageWidth", 800);
 
 }
