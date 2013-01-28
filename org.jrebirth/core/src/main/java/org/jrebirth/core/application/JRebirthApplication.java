@@ -21,7 +21,6 @@ import java.util.List;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import org.jrebirth.core.ui.Model;
@@ -36,14 +35,14 @@ import org.jrebirth.core.wave.Wave;
  */
 public interface JRebirthApplication<P extends Pane> {
 
-    /** The default scene width used. */
-    int DEFAULT_SCENE_WIDTH = 800;
-
-    /** The default scene height used. */
-    int DEFAULT_SCENE_HEIGHT = 600;
-
-    /** The default scene height used. */
-    Color DEFAULT_SCENE_BG_COLOR = Color.TRANSPARENT;
+    // /** The default scene width used. */
+    // int DEFAULT_SCENE_WIDTH = 800;
+    //
+    // /** The default scene height used. */
+    // int DEFAULT_SCENE_HEIGHT = 600;
+    //
+    // /** The default scene height used. */
+    // Color DEFAULT_SCENE_BG_COLOR = Color.TRANSPARENT;
 
     /**
      * @return Returns the stage.

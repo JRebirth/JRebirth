@@ -1,5 +1,7 @@
 package org.jrebirth.core.resource.parameter;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -26,15 +28,26 @@ public class ParameterTest {
     @Test
     public void stringParameter() {
 
-        checkStringParameter(TestParameters.TEST_STRING_PARAM_1);
+        checkStringParameter(TestParameters.TEST_STRING_PARAM_1, "fonts");
+        checkStringParameter(TestParameters.TEST_STRING_PARAM_2, "fontsFolder");
+        checkStringParameter(TestParameters.TEST_STRING_PARAM_3, "fonts");
     }
 
-    private void checkStringParameter(final ParameterItemBase<String> parammeterItem) {
-        // final Color color = colorItem.get();
-        //
-        // final GrayColor wc = (GrayColor) ResourceBuilders.COLOR_BUILDER.getParam(colorItem);
-        //
-        // assertEquals(color.getOpacity(), wc.opacity(), 0.1);
+    private void checkStringParameter(final ParameterItemBase<String> parameterItem, final String checkedName) {
+        final String param = parameterItem.get();
+        assertEquals("Check String", checkedName, param);
+
+    }
+
+    @Test
+    public void integerParameter() {
+
+        checkIntegerParameter(TestParameters.TEST_INTEGER_WIDTH, 800);
+    }
+
+    private void checkIntegerParameter(final ParameterItemBase<Integer> parameterItem, final Integer checkedValue) {
+        final Integer param = parameterItem.get();
+        assertEquals("Check Integer", checkedValue, param);
 
     }
 

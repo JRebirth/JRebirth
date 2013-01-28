@@ -26,7 +26,10 @@ import org.jrebirth.core.resource.AbstractBaseParams;
  * 
  * @param <O> the parameter type
  */
-public class ObjectParameter<O> extends AbstractBaseParams implements ParameterParams {
+public class ObjectParameter<O extends Object> extends AbstractBaseParams implements ParameterParams {
+
+    /** The parameter name. */
+    private String parameterName;
 
     /** The parameter object. */
     private final O object;
@@ -42,6 +45,27 @@ public class ObjectParameter<O> extends AbstractBaseParams implements ParameterP
     }
 
     /**
+     * Default Constructor.
+     * 
+     * @param parameterName the name of the parameter
+     * @param object the parameter object
+     */
+    public ObjectParameter(final String parameterName, final O object) {
+        super();
+        this.parameterName = parameterName;
+        this.object = object;
+    }
+
+    /**
+     * Return the parameter name.
+     * 
+     * @return Returns the parameter name.
+     */
+    public String name() {
+        return this.parameterName;
+    }
+
+    /**
      * Return the parameter object value.
      * 
      * @return Returns the object.
@@ -50,4 +74,21 @@ public class ObjectParameter<O> extends AbstractBaseParams implements ParameterP
         return this.object;
     }
 
+    /**
+     * TODO To complete.
+     * 
+     * @param object2
+     * 
+     * @return
+     */
+    public Object parseObject(final String serializedObject) {
+        Object res = null;
+        if (this.object instanceof String) {
+            res = serializedObject;
+        } else if (this.object instanceof Integer) {
+            res = Integer.parseInt(serializedObject);
+        }
+
+        return res;
+    }
 }

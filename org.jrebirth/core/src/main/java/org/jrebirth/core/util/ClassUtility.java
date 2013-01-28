@@ -204,6 +204,8 @@ public final class ClassUtility {
      * @param sourceClass the class (wit its parent classes) to inspect
      * @param annotationClass the annotation to find
      * 
+     * @param <A> the type of the requested annotation
+     * 
      * @return the request annotation or null if none have been found into the class hierarchy
      */
     public static <A extends Annotation> A extractAnnotation(final Class<?> sourceClass, final Class<A> annotationClass) {
