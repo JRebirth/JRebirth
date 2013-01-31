@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.exception.handler;
 
-import org.jrebirth.core.facade.GlobalFacade;
 
 /**
  * The class <strong>DefaultUncaughtExceptionHandler</strong>.
@@ -28,11 +27,9 @@ public class DefaultUncaughtExceptionHandler extends AbstractJrbUncaughtExceptio
 
     /**
      * Instantiates a new Default uncaught exception handler.
-     * 
-     * @param globalFacade the global facade
      */
-    public DefaultUncaughtExceptionHandler(final GlobalFacade globalFacade) {
-        super(globalFacade, UncaughtExceptionHandlerType.DefaultHandler);
+    public DefaultUncaughtExceptionHandler() {
+        super(UncaughtExceptionHandlerType.DefaultHandler);
     }
 
 }

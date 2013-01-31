@@ -19,8 +19,6 @@ package org.jrebirth.core.exception.handler;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 
-import org.jrebirth.core.facade.GlobalFacade;
-
 /**
  * The class <strong>JRebirthUncaughtExceptionHandler</strong>.
  * 
@@ -49,10 +47,4 @@ public interface JrbUncaughtExceptionHandler extends UncaughtExceptionHandler {
      */
     UncaughtExceptionHandlerType getUncaughtExceptionHandlerType();
 
-    /**
-     * Gets the global facade.
-     * 
-     * @return the global facade
-     */
-    GlobalFacade getGlobalFacade();
 }

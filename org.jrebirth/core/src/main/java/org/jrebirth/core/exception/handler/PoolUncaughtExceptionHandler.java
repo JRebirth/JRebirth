@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.exception.handler;
 
-import org.jrebirth.core.facade.GlobalFacade;
 
 /**
  * The class <strong>JatUncaughtExceptionHandler</strong>.
@@ -28,11 +27,9 @@ public class PoolUncaughtExceptionHandler extends AbstractJrbUncaughtExceptionHa
 
     /**
      * Instantiates a new Pool uncaught exception handler.
-     * 
-     * @param globalFacade the global facade
      */
-    public PoolUncaughtExceptionHandler(final GlobalFacade globalFacade) {
-        super(globalFacade, UncaughtExceptionHandlerType.PoolHandler);
+    public PoolUncaughtExceptionHandler() {
+        super(UncaughtExceptionHandlerType.PoolHandler);
     }
 
 }

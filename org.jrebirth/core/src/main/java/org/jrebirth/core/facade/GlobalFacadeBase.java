@@ -82,37 +82,37 @@ public class GlobalFacadeBase implements GlobalFacade {
 
         // Link the application
         this.application = application;
-        trackEvent(org.jrebirth.core.facade.EventType.CREATE_APPLICATION, null, getApplication().getClass());
+        trackEvent(org.jrebirth.core.facade.JRebirthEventType.CREATE_APPLICATION, null, getApplication().getClass());
 
         LOGGER.trace("Create the JRebirth Thread Pool");
         // Launch the default executor
         this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2,
-                new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(this), JTP_BASE_NAME));
+                new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(), JTP_BASE_NAME));
 
-        trackEvent(org.jrebirth.core.facade.EventType.CREATE_GLOBAL_FACADE, getApplication().getClass(), this.getClass());
+        trackEvent(org.jrebirth.core.facade.JRebirthEventType.CREATE_GLOBAL_FACADE, getApplication().getClass(), this.getClass());
 
         // Build the notifier manager
         this.notifier = buildNotifier();
-        trackEvent(EventType.CREATE_NOTIFIER, getClass(), this.notifier.getClass());
+        trackEvent(JRebirthEventType.CREATE_NOTIFIER, getClass(), this.notifier.getClass());
 
         // Build the Command Facade
         this.commandFacade = buildCommandFacade();
-        trackEvent(EventType.CREATE_COMMAND_FACADE, getClass(), this.commandFacade.getClass());
+        trackEvent(JRebirthEventType.CREATE_COMMAND_FACADE, getClass(), this.commandFacade.getClass());
 
         // Build the Service Facade
         this.serviceFacade = buildServiceFacade();
-        trackEvent(EventType.CREATE_SERVICE_FACADE, getClass(), this.serviceFacade.getClass());
+        trackEvent(JRebirthEventType.CREATE_SERVICE_FACADE, getClass(), this.serviceFacade.getClass());
 
         // Build the Ui Facade
         this.uiFacade = buildUiFacade();
-        trackEvent(EventType.CREATE_UI_FACADE, getClass(), this.uiFacade.getClass());
+        trackEvent(JRebirthEventType.CREATE_UI_FACADE, getClass(), this.uiFacade.getClass());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void trackEvent(final EventType eventType, final Class<?> source, final Class<?> target, final String... eventData) {
+    public final void trackEvent(final JRebirthEventType eventType, final Class<?> source, final Class<?> target, final String... eventData) {
         if (LOGGER.isInfoEnabled()) {
             final StringBuilder sb = new StringBuilder();
             sb.append(EVENT_TRACKED);
