@@ -19,7 +19,7 @@ package org.jrebirth.analyzer.command;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.command.DefaultCommand;
-import org.jrebirth.core.facade.Event;
+import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;
 
@@ -36,7 +36,7 @@ public final class ProcessEventCommand extends DefaultCommand {
     @Override
     public void execute(final Wave wave) {
 
-        final Event event = wave.get(EditorWaves.EVENT);
+        final JRebirthEvent event = wave.get(EditorWaves.EVENT);
 
         if (event.getEventType().name().startsWith("CREATE")) {
             createBallModel(event);
@@ -52,7 +52,7 @@ public final class ProcessEventCommand extends DefaultCommand {
      * 
      * @param event the create event
      */
-    private void createBallModel(final Event event) {
+    private void createBallModel(final JRebirthEvent event) {
         switch (event.getEventType()) {
             case CREATE_APPLICATION:
             case CREATE_NOTIFIER:
@@ -79,7 +79,7 @@ public final class ProcessEventCommand extends DefaultCommand {
      * 
      * @param event the access event
      */
-    private void accessBallModel(final Event event) {
+    private void accessBallModel(final JRebirthEvent event) {
         switch (event.getEventType()) {
             case ACCESS_COMMAND:
             case ACCESS_CONTROLLER:
@@ -98,7 +98,7 @@ public final class ProcessEventCommand extends DefaultCommand {
      * 
      * @param event the destroy event
      */
-    private void destroyBallModel(final Event event) {
+    private void destroyBallModel(final JRebirthEvent event) {
         switch (event.getEventType()) {
             case DESTROY_COMMAND:
             case DESTROY_SERVICE:

@@ -21,7 +21,7 @@ import org.jrebirth.analyzer.ui.editor.EditorModel;
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
 import org.jrebirth.core.command.DefaultUICommand;
-import org.jrebirth.core.facade.Event;
+import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.wave.Wave;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +42,7 @@ public final class CreateBallCommand extends DefaultUICommand {
     @Override
     public void execute(final Wave wave) {
 
-        final Event event = wave.get(EditorWaves.EVENT);
+        final JRebirthEvent event = wave.get(EditorWaves.EVENT);
 
         LOGGER.trace("Process " + event.getEventType() + " of type " + event.getTarget().getSimpleName());
 

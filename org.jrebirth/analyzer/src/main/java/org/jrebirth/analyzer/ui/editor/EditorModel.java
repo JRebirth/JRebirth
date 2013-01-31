@@ -26,7 +26,7 @@ import java.util.Map;
 import org.jrebirth.analyzer.command.ProcessEventCommand;
 import org.jrebirth.analyzer.service.LoadEdtFileService;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
-import org.jrebirth.core.facade.Event;
+import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;
@@ -45,7 +45,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
     private final Map<Class<?>, BallModel> ballMap = new HashMap<>();
 
     /** The event list to display. */
-    private List<Event> eventList;
+    private List<JRebirthEvent> eventList;
 
     /** Flag that indicate if events are played. */
     private boolean playing;
@@ -73,7 +73,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * @param eventList the lsit of events loaded
      * @param wave the wave received
      */
-    public void eventsLoaded(final List<Event> eventList, final Wave wave) {
+    public void eventsLoaded(final List<JRebirthEvent> eventList, final Wave wave) {
         this.eventList = eventList;
     }
 
@@ -136,7 +136,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * 
      * @param event the next event to show
      */
-    private void showNext(final Event event) {
+    private void showNext(final JRebirthEvent event) {
         this.timeFrame++;
         callCommand(ProcessEventCommand.class, WaveData.build(EditorWaves.EVENT, event));
     }
@@ -157,7 +157,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * 
      * @param event the event to hide
      */
-    private void hideCurrent(final Event event) {
+    private void hideCurrent(final JRebirthEvent event) {
         this.timeFrame--;
         getModel(BallModel.class, event).hide();
     }
@@ -176,7 +176,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
     /**
      * @return Returns the eventList.
      */
-    public List<Event> getEventList() {
+    public List<JRebirthEvent> getEventList() {
         return this.eventList;
     }
 

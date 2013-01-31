@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.jrebirth.analyzer.service.LoadEdtFileService;
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
-import org.jrebirth.core.facade.Event;
+import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
 
@@ -48,7 +48,7 @@ public final class ControlsModel extends DefaultModel<ControlsModel, ControlsVie
      * 
      * @param wave the wave received
      */
-    public void eventsLoaded(final List<Event> eventList, final Wave wave) {
+    public void eventsLoaded(final List<JRebirthEvent> eventList, final Wave wave) {
         getView().activateButtons(!eventList.isEmpty());
     }
 

@@ -23,7 +23,7 @@ import java.util.Map;
 import javafx.scene.Node;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.facade.EventType;
+import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.wave.Wave;
@@ -181,7 +181,7 @@ public abstract class AbstractBaseModel<M extends Model, V extends View<?, ?, ?>
      */
     @Override
     protected void finalize() throws Throwable {
-        getLocalFacade().getGlobalFacade().trackEvent(EventType.DESTROY_MODEL, null, this.getClass());
+        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_MODEL, null, this.getClass());
         super.finalize();
     }
 

@@ -18,7 +18,7 @@
 package org.jrebirth.analyzer.ui.properties;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
-import org.jrebirth.core.facade.Event;
+import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.wave.Wave;
 
@@ -52,7 +52,7 @@ public final class PropertiesModel extends AbstractModel<PropertiesModel, Proper
     protected void processAction(final Wave wave) {
         if (EditorWaves.DO_SELECT_EVENT == wave.getWaveType()) {
 
-            final Event event = wave.get(PropertiesWaves.EVENT_OBJECT);
+            final JRebirthEvent event = wave.get(PropertiesWaves.EVENT_OBJECT);
 
             getView().getNodeName().setText(event.getTarget().getSimpleName());
         }

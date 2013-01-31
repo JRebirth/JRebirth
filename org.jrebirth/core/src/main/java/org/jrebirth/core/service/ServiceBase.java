@@ -25,7 +25,7 @@ import javafx.concurrent.Task;
 
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.facade.EventType;
+import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
@@ -68,7 +68,7 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
      */
     @Override
     protected void finalize() throws Throwable {
-        getLocalFacade().getGlobalFacade().trackEvent(EventType.DESTROY_SERVICE, null, this.getClass());
+        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_SERVICE, null, this.getClass());
         super.finalize();
     }
 

@@ -18,13 +18,13 @@
 package org.jrebirth.core.facade;
 
 /**
- * The interface <strong>Event</strong>.
+ * The interface <strong>JRebirthEvent</strong>.
  * 
  * An Event is stored for each important action into the application. Events are useful to understand and debug complex interactions.
  * 
  * @author Sébastien Bordes
  */
-public interface Event {
+public interface JRebirthEvent {
 
     /**
      * @return Returns the sequence number.
@@ -39,12 +39,12 @@ public interface Event {
     /**
      * @return Returns the eventType.
      */
-    EventType getEventType();
+    JRebirthEventType getEventType();
 
     /**
      * @param eventType The eventType to set.
      */
-    void setEventType(EventType eventType);
+    void setEventType(JRebirthEventType eventType);
 
     /**
      * @return Returns the source class.

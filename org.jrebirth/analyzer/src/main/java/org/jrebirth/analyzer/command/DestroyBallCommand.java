@@ -21,7 +21,7 @@ import org.jrebirth.analyzer.ui.editor.EditorModel;
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
 import org.jrebirth.core.command.DefaultUICommand;
-import org.jrebirth.core.facade.Event;
+import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -37,7 +37,7 @@ public final class DestroyBallCommand extends DefaultUICommand {
     @Override
     public void execute(final Wave wave) {
 
-        final Event event = wave.get(EditorWaves.EVENT);
+        final JRebirthEvent event = wave.get(EditorWaves.EVENT);
         final BallModel targetBallModel = getModel(BallModel.class, event);
         targetBallModel.hide();
 

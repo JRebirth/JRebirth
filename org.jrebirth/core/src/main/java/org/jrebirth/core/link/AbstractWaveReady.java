@@ -31,7 +31,7 @@ import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.WaveException;
-import org.jrebirth.core.facade.EventType;
+import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.service.Service;
@@ -304,7 +304,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         }
 
         // Track wave creation
-        getLocalFacade().getGlobalFacade().trackEvent(EventType.CREATE_WAVE, this.getClass(), wave.getClass());
+        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
 
         return wave;
     }

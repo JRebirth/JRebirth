@@ -17,18 +17,29 @@
  */
 package org.jrebirth.core.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Node;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.RotateEvent;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.SwipeEvent;
+import javafx.scene.input.TouchEvent;
+import javafx.scene.input.ZoomEvent;
 import javafx.stage.WindowEvent;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.facade.EventType;
+import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.ui.adapter.ActionAdapter;
 import org.jrebirth.core.ui.adapter.DragAdapter;
+import org.jrebirth.core.ui.adapter.EventAdapter;
 import org.jrebirth.core.ui.adapter.KeyAdapter;
 import org.jrebirth.core.ui.adapter.MouseAdapter;
 import org.jrebirth.core.ui.adapter.WindowAdapter;
@@ -68,6 +79,21 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
     /** The window handler instance to use for Windows events. */
     private EventHandler<WindowEvent> windowHandler;
 
+    /** The touch handler instance to use for Touch events. */
+    private EventHandler<TouchEvent> touchHandler;
+
+    /** The scroll handler instance to use for Scroll events. */
+    private EventHandler<ScrollEvent> scrollHandler;
+
+    /** The rotate handler instance to use for Rotate events. */
+    private EventHandler<RotateEvent> rotateHandler;
+
+    /** The swipe handler instance to use for Swipe events. */
+    private EventHandler<SwipeEvent> swipeHandler;
+
+    /** The zoom handler instance to use for Zoom events. */
+    private EventHandler<ZoomEvent> zoomHandler;
+
     /**
      * Default Constructor.
      * 
@@ -80,7 +106,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
         this.view = view;
 
         // Track this controller creation
-        getModel().getLocalFacade().getGlobalFacade().trackEvent(EventType.CREATE_CONTROLLER, getView().getClass(), this.getClass());
+        getModel().getLocalFacade().getGlobalFacade().trackEvent(org.jrebirth.core.facade.JRebirthEventType.CREATE_CONTROLLER, getView().getClass(), this.getClass());
     }
 
     /**
@@ -170,6 +196,72 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      */
     private void throwBrokenContract(final Class<?> adapterClass) throws CoreException {
         throw new CoreException(this.getClass().getName() + " must implement " + adapterClass.getName() + " interface");
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param browserMouseAdapter
+     */
+    protected final void addAdapter(final EventAdapter<?> eventAdapter) {
+        if (eventAdapter instanceof MouseAdapter) {
+            this.map.put(MouseEvent.ANY, new MouseHandler((MouseAdapter) eventAdapter));
+            this.mouseHandler = new MouseHandler((MouseAdapter) eventAdapter);
+        } else if (eventAdapter instanceof KeyAdapter) {
+            this.keyHandler = new KeyHandler((KeyAdapter) eventAdapter);
+        }
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param browser
+     * @param mouseClicked
+     */
+    protected final void addHandler(final Node node, final EventType<? extends Event> eventType) {
+        // FIXME node.addEventHandler(eventType, getHandler(eventType));
+    }
+
+    private final Map<javafx.event.EventType<? extends Event>, EventHandler<? extends Event>> map = new HashMap<>();
+
+    /**
+     * Return a MouseEvent Handler.
+     * 
+     * @return the mouse event handler
+     * 
+     * @throws CoreException an exception if the current class doesn't implement the MouseAdapter interface.
+     */
+    protected final <E extends Event> EventHandler<E> getHandler(final EventType<E> eventType) throws CoreException {
+
+        final EventType<E> et = extractFirstAnyEventType(eventType);
+
+        // Check if the handler has been created or not
+        if (this.map.get(et) == null) {
+
+            if (et == MouseEvent.ANY) {
+                // Build the mouse handler instance
+                if (this instanceof MouseAdapter) {
+                    this.map.put(et, new MouseHandler((MouseAdapter) this));
+                } else {
+                    throwBrokenContract(MouseAdapter.class);
+                }
+            }
+        }
+        return (EventHandler<E>) this.map.get(et);
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param eventType
+     * @return
+     */
+    private <E extends Event> EventType<E> extractFirstAnyEventType(final EventType<E> eventType) {
+        EventType<E> et = eventType;
+        while (et.getName().contains("_")) {
+            et = (EventType<E>) et.getSuperType();
+        }
+        return et;
     }
 
     /**
@@ -323,7 +415,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      */
     @Override
     protected void finalize() throws Throwable {
-        getModel().getLocalFacade().getGlobalFacade().trackEvent(EventType.DESTROY_CONTROLLER, null, this.getClass());
+        getModel().getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_CONTROLLER, null, this.getClass());
         super.finalize();
     }
 
