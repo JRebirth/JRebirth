@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.facade.EventType;
+import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.facade.LocalFacade;
 import org.jrebirth.core.key.UniqueKey;
@@ -121,7 +121,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <S extends Service> S getService(final Class<S> clazz, final Object... keyPart) {
-        getLocalFacade().getGlobalFacade().trackEvent(EventType.ACCESS_SERVICE, this.getClass(), clazz);
+        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_SERVICE, this.getClass(), clazz);
         return getLocalFacade().getGlobalFacade().getServiceFacade().retrieve(clazz, keyPart);
     }
 
@@ -130,7 +130,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart) {
-        getLocalFacade().getGlobalFacade().trackEvent(EventType.ACCESS_COMMAND, this.getClass(), clazz);
+        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_COMMAND, this.getClass(), clazz);
         return getLocalFacade().getGlobalFacade().getCommandFacade().retrieve(clazz, keyPart);
     }
 
@@ -139,7 +139,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <M extends Model> M getModel(final Class<M> clazz, final Object... keyPart) {
-        getLocalFacade().getGlobalFacade().trackEvent(EventType.ACCESS_MODEL, this.getClass(), clazz);
+        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_MODEL, this.getClass(), clazz);
         return getLocalFacade().getGlobalFacade().getUiFacade().retrieve(clazz, keyPart);
     }
 

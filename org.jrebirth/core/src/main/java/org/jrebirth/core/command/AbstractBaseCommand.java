@@ -22,7 +22,7 @@ import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.exception.CommandException;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.facade.EventType;
+import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
@@ -171,7 +171,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      */
     @Override
     protected void finalize() throws Throwable {
-        getLocalFacade().getGlobalFacade().trackEvent(EventType.DESTROY_COMMAND, null, this.getClass());
+        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_COMMAND, null, this.getClass());
         super.finalize();
     }
 

@@ -18,13 +18,13 @@
 package org.jrebirth.core.facade;
 
 /**
- * The enumeration <strong>EventType</strong>.
+ * The enumeration <strong>JRebirthEventType</strong>.
  * 
- * Usr to track the type of all JRebirth events
+ * Used to track the type of all JRebirth events
  * 
  * @author Sébastien Bordes
  */
-public enum EventType {
+public enum JRebirthEventType {
 
     /** */
     NONE,

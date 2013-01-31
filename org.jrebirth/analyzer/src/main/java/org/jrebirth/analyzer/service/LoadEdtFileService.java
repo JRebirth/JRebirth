@@ -26,8 +26,8 @@ import java.util.List;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.facade.Event;
-import org.jrebirth.core.facade.EventBase;
+import org.jrebirth.core.facade.JRebirthEvent;
+import org.jrebirth.core.facade.JRebirthEventBase;
 import org.jrebirth.core.facade.GlobalFacadeBase;
 import org.jrebirth.core.service.ServiceBase;
 import org.jrebirth.core.wave.Wave;
@@ -69,8 +69,8 @@ public class LoadEdtFileService extends ServiceBase {
      * 
      * @return the list of loaded events
      */
-    public List<Event> loadEvents(final File selecteFile, final Wave wave) {
-        final List<Event> eventList = new ArrayList<>();
+    public List<JRebirthEvent> loadEvents(final File selecteFile, final Wave wave) {
+        final List<JRebirthEvent> eventList = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));)
         {
@@ -97,7 +97,7 @@ public class LoadEdtFileService extends ServiceBase {
      * @param eventList the list of events
      * @param strLine the string to use
      */
-    private void addEvent(final List<Event> eventList, final String strLine) {
-        eventList.add(new EventBase(strLine));
+    private void addEvent(final List<JRebirthEvent> eventList, final String strLine) {
+        eventList.add(new JRebirthEventBase(strLine));
     }
 }

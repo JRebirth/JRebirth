@@ -39,7 +39,7 @@ import javafx.util.Duration;
 import org.jrebirth.analyzer.ui.editor.BallColors;
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.facade.EventType;
+import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.ui.DefaultView;
 
 /**
@@ -176,7 +176,7 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
      * 
      * @param eventType the type of event for this ball
      */
-    public void setStyle(final EventType eventType) {
+    public void setStyle(final JRebirthEventType eventType) {
 
         switch (eventType) {
             case CREATE_APPLICATION:

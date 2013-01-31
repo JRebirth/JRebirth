@@ -23,17 +23,17 @@ import org.jrebirth.core.util.ClassUtility;
 
 /**
  * 
- * The class <strong>EventImpl</strong>.
+ * The class <strong>JRebirthEventBase</strong>.
  * 
  * This Bean is used to store event data.
  */
-public final class EventBase implements Event {
+public final class JRebirthEventBase implements JRebirthEvent {
 
     /** The sequence number. */
     private int sequence;
 
     /** The type of the event. */
-    private EventType eventType;
+    private JRebirthEventType eventType;
 
     /** The source class. */
     private Class<?> source;
@@ -52,7 +52,7 @@ public final class EventBase implements Event {
      * @param target the target of the event
      * @param eventData the data of the event
      */
-    public EventBase(final EventType eventType, final Class<?> source, final Class<?> target, final String... eventData) {
+    public JRebirthEventBase(final JRebirthEventType eventType, final Class<?> source, final Class<?> target, final String... eventData) {
         this.eventType = eventType;
         this.source = source;
         this.target = target;
@@ -66,7 +66,7 @@ public final class EventBase implements Event {
      * 
      * @param eventSerialized the serialized event
      */
-    public EventBase(final String eventSerialized) {
+    public JRebirthEventBase(final String eventSerialized) {
         parseString(eventSerialized);
     }
 
@@ -90,7 +90,7 @@ public final class EventBase implements Event {
      * {@inheritDoc}
      */
     @Override
-    public EventType getEventType() {
+    public JRebirthEventType getEventType() {
         return this.eventType;
     }
 
@@ -98,7 +98,7 @@ public final class EventBase implements Event {
      * {@inheritDoc}
      */
     @Override
-    public void setEventType(final EventType eventType) {
+    public void setEventType(final JRebirthEventType eventType) {
         this.eventType = eventType;
     }
 
@@ -177,7 +177,7 @@ public final class EventBase implements Event {
         final StringTokenizer st = new StringTokenizer(eventSerialized, ClassUtility.SEPARATOR);
         if (st.countTokens() >= 5) {
             setSequence(Integer.valueOf(st.nextToken()));
-            setEventType(EventType.valueOf(st.nextToken()));
+            setEventType(JRebirthEventType.valueOf(st.nextToken()));
             setSource(getClass(st.nextToken()));
             setTarget(getClass(st.nextToken()));
             setEventData(st.nextToken());

@@ -18,7 +18,7 @@
 package org.jrebirth.analyzer.ui.editor.ball;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
-import org.jrebirth.core.facade.Event;
+import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
 
@@ -46,7 +46,7 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
      * @param eventSelected the selected event
      * @param wave the wave received
      */
-    public void eventSelected(final Event eventSelected, final Wave wave) {
+    public void eventSelected(final JRebirthEvent eventSelected, final Wave wave) {
         // Same object (reference)
         if (getEventModel() == eventSelected) {
             getView().getScaleTransition().play();
@@ -66,8 +66,8 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
     /**
      * @return Returns the eventModel.
      */
-    public Event getEventModel() {
-        return (Event) getModelObject();
+    public JRebirthEvent getEventModel() {
+        return (JRebirthEvent) getModelObject();
     }
 
     /**

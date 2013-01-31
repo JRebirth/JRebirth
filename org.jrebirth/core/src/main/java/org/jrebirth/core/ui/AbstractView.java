@@ -18,6 +18,8 @@
 package org.jrebirth.core.ui;
 
 import java.io.InputStream;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,7 +31,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.PaneBuilder;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.facade.EventType;
+import org.jrebirth.core.facade.JRebirthEventType;
+import org.jrebirth.core.ui.annotation.OnSwipe;
 import org.jrebirth.core.util.ClassUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,7 +77,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         this.model = model;
 
         // Track this view creation
-        getModel().getLocalFacade().getGlobalFacade().trackEvent(EventType.CREATE_VIEW, getModel().getClass(), this.getClass());
+        getModel().getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_VIEW, getModel().getClass(), this.getClass());
 
         try {
             // Build the root node of the view
@@ -116,6 +119,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         // Activate the controller to listen all components (this+children)
         getController().activate();
 
+        // Process field annotation
+        processAnnotation();
+
         // Allow to release the model if the root business object doesn't exist anymore
         getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
 
@@ -127,6 +133,43 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             }
 
         });
+    }
+
+    /**
+     * Process annotation to auto-link field with handler.
+     */
+    private void processAnnotation() {
+
+        final Class<?> currentClass = this.getClass();
+
+        for (final Field f : currentClass.getDeclaredFields()) {
+
+            if (Node.class.isAssignableFrom(f.getType())) {
+
+                if (!f.isAccessible()) {
+                    f.setAccessible(true);
+                }
+                for (final Annotation a : f.getAnnotations()) {
+                    if (a.annotationType() == OnSwipe.class) {
+
+                        try {
+                            final Node node = (Node) f.get(this);
+
+                            if (node != null) {
+
+                            }
+
+                        } catch (IllegalArgumentException | IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                    if (f.isAccessible()) {
+                        f.setAccessible(false);
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -223,7 +266,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      */
     @Override
     protected void finalize() throws Throwable {
-        getModel().getLocalFacade().getGlobalFacade().trackEvent(EventType.DESTROY_VIEW, null, this.getClass());
+        getModel().getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_VIEW, null, this.getClass());
         super.finalize();
     }
 

@@ -20,7 +20,7 @@ package org.jrebirth.analyzer.ui.editor;
 import java.io.File;
 import java.util.List;
 
-import org.jrebirth.core.facade.Event;
+import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveTypeBase;
 
@@ -65,11 +65,11 @@ public interface EditorWaves {
     };
 
     /** The name of the events. */
-    WaveItem<List<Event>> EVENTS = new WaveItem<List<Event>>() {
+    WaveItem<List<JRebirthEvent>> EVENTS = new WaveItem<List<JRebirthEvent>>() {
     };
 
     /** An event unserialized. */
-    WaveItem<Event> EVENT = new WaveItem<Event>() {
+    WaveItem<JRebirthEvent> EVENT = new WaveItem<JRebirthEvent>() {
     };
 
 }
