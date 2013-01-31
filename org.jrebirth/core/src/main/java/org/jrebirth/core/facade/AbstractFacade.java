@@ -211,13 +211,13 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             final E readyObject = clazz.newInstance();
 
             // Retrieve the right event type to track
-            EventType type = EventType.NONE;
+            JRebirthEventType type = JRebirthEventType.NONE;
             if (readyObject instanceof Model) {
-                type = EventType.CREATE_MODEL;
+                type = JRebirthEventType.CREATE_MODEL;
             } else if (readyObject instanceof Service) {
-                type = EventType.CREATE_SERVICE;
+                type = JRebirthEventType.CREATE_SERVICE;
             } else if (readyObject instanceof Command) {
-                type = EventType.CREATE_COMMAND;
+                type = JRebirthEventType.CREATE_COMMAND;
             }
             // Track this instantiation event
             getGlobalFacade().trackEvent(type, this.getClass(), readyObject.getClass());

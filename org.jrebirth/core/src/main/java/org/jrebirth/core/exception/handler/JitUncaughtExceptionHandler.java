@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.exception.handler;
 
-import org.jrebirth.core.facade.GlobalFacade;
 
 /**
  * The class <strong>JitUncaughtExceptionHandler</strong>.
@@ -28,11 +27,9 @@ public class JitUncaughtExceptionHandler extends AbstractJrbUncaughtExceptionHan
 
     /**
      * Instantiates a new JIT uncaught exception handler.
-     * 
-     * @param globalFacade the global facade
      */
-    public JitUncaughtExceptionHandler(final GlobalFacade globalFacade) {
-        super(globalFacade, UncaughtExceptionHandlerType.JITHandler);
+    public JitUncaughtExceptionHandler() {
+        super(UncaughtExceptionHandlerType.JITHandler);
     }
 
 }

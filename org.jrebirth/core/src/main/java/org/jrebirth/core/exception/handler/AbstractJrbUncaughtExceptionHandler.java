@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.exception.handler;
 
-import org.jrebirth.core.facade.GlobalFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,29 +30,16 @@ public abstract class AbstractJrbUncaughtExceptionHandler implements JrbUncaught
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractJrbUncaughtExceptionHandler.class);
 
-    /** The global facade. */
-    private final GlobalFacade globalFacade;
-
     /** The type of UncaughtExceptionHandler. */
     private final UncaughtExceptionHandlerType uncaughtExceptionHandlerType;
 
     /**
      * Instantiates a new abstract jrb uncaught exception handler.
      * 
-     * @param globalFacade the global facade
      * @param uncaughtExceptionHandlerType the type of handler
      */
-    public AbstractJrbUncaughtExceptionHandler(final GlobalFacade globalFacade, final UncaughtExceptionHandlerType uncaughtExceptionHandlerType) {
-        this.globalFacade = globalFacade;
+    public AbstractJrbUncaughtExceptionHandler(final UncaughtExceptionHandlerType uncaughtExceptionHandlerType) {
         this.uncaughtExceptionHandlerType = uncaughtExceptionHandlerType;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public GlobalFacade getGlobalFacade() {
-        return this.globalFacade;
     }
 
     /**

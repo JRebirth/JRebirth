@@ -39,7 +39,6 @@ import org.jrebirth.core.exception.handler.DefaultUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.JatUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.JitUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.PoolUncaughtExceptionHandler;
-import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.util.ClassUtility;
@@ -103,11 +102,16 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             this.scene = buildScene();
             initializeScene();
 
-            // Attach exception handler (JRebirth thread will be created)
+            // Build the JRebirth Thread before attaching uncaught Exception Handler
+
+            final JRebirthThread jrt = JRebirthThread.getThread();
+
+            // Attach exception handler
             initializeExceptionHandler();
 
-            // Start the JRebirthThread
-            JRebirthThread.getThread().launch(this);
+            // Start the JRebirthThread, if an error occurred it will be processed by predefined handler
+            // It will create all facades
+            jrt.launch(this);
 
             // Attach the scene
             primaryStage.setScene(this.scene);
@@ -290,16 +294,14 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      */
     protected void initializeExceptionHandler() {
 
-        final GlobalFacade gf = JRebirthThread.getThread().getFacade();
-
         // Initialize the default uncaught exception handler for all other threads
-        Thread.setDefaultUncaughtExceptionHandler(getDefaultUncaughtExceptionHandler(gf));
+        Thread.setDefaultUncaughtExceptionHandler(getDefaultUncaughtExceptionHandler());
 
         // Initialize the uncaught exception handler for JavaFX Application Thread
         JRebirth.runIntoJAT(new AbstractJrbRunnable("Attach JAT Uncaught Exception Handler") {
             @Override
             public void runInto() throws JRebirthThreadException {
-                Thread.currentThread().setUncaughtExceptionHandler(getJatUncaughtExceptionHandler(gf));
+                Thread.currentThread().setUncaughtExceptionHandler(getJatUncaughtExceptionHandler());
             }
         });
 
@@ -307,7 +309,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         JRebirth.runIntoJIT(new AbstractJrbRunnable("Attach JIT Uncaught Exception Handler") {
             @Override
             public void runInto() throws JRebirthThreadException {
-                Thread.currentThread().setUncaughtExceptionHandler(getJitUncaughtExceptionHandler(gf));
+                Thread.currentThread().setUncaughtExceptionHandler(getJitUncaughtExceptionHandler());
             }
         });
     }
@@ -361,44 +363,36 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     /**
      * Build and return the Default Uncaught Exception Handler for All threads which don't have any handler.
      * 
-     * @param gf the JRebirth global facade
-     * 
      * @return the uncaught exception handler for All threads which don't have any handler.
      */
-    protected UncaughtExceptionHandler getDefaultUncaughtExceptionHandler(final GlobalFacade gf) {
-        return new DefaultUncaughtExceptionHandler(gf);
+    protected UncaughtExceptionHandler getDefaultUncaughtExceptionHandler() {
+        return new DefaultUncaughtExceptionHandler();
     }
 
     /**
      * Build and return the Uncaught Exception Handler for JavaFX Application Thread.
      * 
-     * @param gf the JRebirth global facade
-     * 
      * @return the uncaught exception handler for JavaFX Application Thread
      */
-    protected UncaughtExceptionHandler getJatUncaughtExceptionHandler(final GlobalFacade gf) {
-        return new JatUncaughtExceptionHandler(gf);
+    protected UncaughtExceptionHandler getJatUncaughtExceptionHandler() {
+        return new JatUncaughtExceptionHandler();
     }
 
     /**
      * Build and return the Uncaught Exception Handler for JRebirth Internal Thread.
      * 
-     * @param gf the JRebirth global facade
-     * 
      * @return the uncaught exception handler for JRebirth Internal Thread
      */
-    protected UncaughtExceptionHandler getJitUncaughtExceptionHandler(final GlobalFacade gf) {
-        return new JitUncaughtExceptionHandler(gf);
+    protected UncaughtExceptionHandler getJitUncaughtExceptionHandler() {
+        return new JitUncaughtExceptionHandler();
     }
 
     /**
      * Build and return the Uncaught Exception Handler for JRebirth Thread Pool.
      * 
-     * @param gf the JRebirth global facade
-     * 
      * @return the uncaught exception handler for JRebirth Thread Pool
      */
-    public UncaughtExceptionHandler getPoolUncaughtExceptionHandler(final GlobalFacade gf) {
-        return new PoolUncaughtExceptionHandler(gf);
+    public UncaughtExceptionHandler getPoolUncaughtExceptionHandler() {
+        return new PoolUncaughtExceptionHandler();
     }
 }
