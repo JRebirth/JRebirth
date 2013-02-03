@@ -23,22 +23,58 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import javafx.event.Event;
+import javafx.event.EventType;
+import javafx.scene.input.KeyEvent;
+
 /**
- * This annotation is used to automatically attached an event handler to a property node.
+ * This annotation is used to automatically attached a Key event handler to a property node.
  * 
  * @author Sébastien Bordes
  */
-@Target({ ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER })
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface OnKey {
 
-    /** The Key event type. */
-    enum KeyType {
-        Any,
-        Pressed,
-        Released,
-        Typed
+    /**
+     * The Key event type.<br />
+     * The Key type will be appended to method name to use.
+     */
+    enum KeyType implements EnumEventType {
+
+        /** Any Key Event. */
+        Any(KeyEvent.ANY),
+
+        /** Key pressed event. */
+        Pressed(KeyEvent.KEY_PRESSED),
+
+        /** Key released event. */
+        Released(KeyEvent.KEY_RELEASED),
+
+        /** Key typed event. */
+        Typed(KeyEvent.KEY_TYPED);
+
+        /** The JavaFX internal api name. */
+        private EventType<?> eventType;
+
+        /**
+         * Default constructor used to link the apiName
+         * 
+         * @param eventType the javafx event type
+         */
+        private KeyType(final EventType<?> eventType) {
+            this.eventType = eventType;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public EventType<?> eventType() {
+            return this.eventType;
+        }
+
     }
 
     /**
@@ -54,4 +90,11 @@ public @interface OnKey {
      * The default value is null, same event handler will be used for multiple annotation
      */
     String name() default "";
+
+    /**
+     * Define the JavaFX api event class.
+     * 
+     * Must not be changed !!!
+     */
+    Class<? extends Event> apiEventClass() default KeyEvent.class;
 }

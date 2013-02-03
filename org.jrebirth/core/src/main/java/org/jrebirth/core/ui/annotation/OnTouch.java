@@ -23,24 +23,61 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import javafx.event.Event;
+import javafx.event.EventType;
+import javafx.scene.input.TouchEvent;
+
 /**
- * This annotation is used to automatically attached an event handler to a property node.
+ * This annotation is used to automatically attached a touch event handler to a property node.
  * 
  * @author Sébastien Bordes
  */
-@Target({ ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER })
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface OnTouch {
 
-    /** The Touch event type. */
-    enum TouchType {
-        Any,
-        Pressed,
-        Released,
-        Moved,
-        Touch,
-        Stationary
+    /**
+     * The Touch event type.<br />
+     * The Touch type will be appended to method name to use.
+     */
+    enum TouchType implements EnumEventType {
+
+        /** Any Swipe Event. */
+        Any(TouchEvent.ANY),
+
+        /** Touch pressed event. */
+        Pressed(TouchEvent.TOUCH_PRESSED),
+
+        /** Touch released event. */
+        Released(TouchEvent.TOUCH_RELEASED),
+
+        /** Touch moved event. */
+        Moved(TouchEvent.TOUCH_MOVED),
+
+        /** Touch stationary event. */
+        Stationary(TouchEvent.TOUCH_STATIONARY);
+
+        /** The JavaFX internal api name. */
+        private EventType<?> eventType;
+
+        /**
+         * Default constructor used to link the apiName
+         * 
+         * @param eventType the javafx event type
+         */
+        private TouchType(final EventType<?> eventType) {
+            this.eventType = eventType;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public EventType<?> eventType() {
+            return this.eventType;
+        }
+
     }
 
     /**
@@ -56,4 +93,11 @@ public @interface OnTouch {
      * The default value is null, same event handler will be used for multiple annotation
      */
     String name() default "";
+
+    /**
+     * Define the JavaFX api event class.
+     * 
+     * Must not be changed !!!
+     */
+    Class<? extends Event> apiEventClass() default TouchEvent.class;
 }
