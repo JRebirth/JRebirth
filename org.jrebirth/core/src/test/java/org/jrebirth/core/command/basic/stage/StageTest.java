@@ -26,7 +26,7 @@ import org.junit.Test;
  * 
  * @author Sébastien Bordes
  */
-@Ignore
+@Ignore("JavaFX can't be run in headless mode yet")
 public class StageTest {
 
     private static GlobalFacadeBase globalFacade;

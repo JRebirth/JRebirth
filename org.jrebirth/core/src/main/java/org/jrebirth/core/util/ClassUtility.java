@@ -218,4 +218,20 @@ public final class ClassUtility {
         return annotation;
     }
 
+    public static Object getAnnotationAttribute(final Annotation annotation, final String attributeName) {
+        Object object = null;
+        try {
+            final Method attributeMethod = annotation.annotationType().getDeclaredMethod(attributeName);
+
+            object = attributeMethod.invoke(annotation);
+
+        } catch (NoSuchMethodException | SecurityException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return object;
+    }
+
 }

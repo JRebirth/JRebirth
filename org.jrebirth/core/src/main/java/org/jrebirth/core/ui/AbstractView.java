@@ -32,7 +32,10 @@ import javafx.scene.layout.PaneBuilder;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.JRebirthEventType;
-import org.jrebirth.core.ui.annotation.OnSwipe;
+import org.jrebirth.core.ui.annotation.AutoHandler;
+import org.jrebirth.core.ui.annotation.AutoHandler.CallbackObject;
+import org.jrebirth.core.ui.annotation.EnumEventType;
+import org.jrebirth.core.ui.handler.AnnotationEventHandler;
 import org.jrebirth.core.util.ClassUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,6 +68,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /** The error node used if an error occurred. */
     private transient Pane errorNode;
+
+    /** The callback object to use for annoation event handler. */
+    private Object callbackObject;
 
     /**
      * Default Constructor.
@@ -119,8 +125,11 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         // Activate the controller to listen all components (this+children)
         getController().activate();
 
+        // Process class annotation
+        processViewAnnotation();
+
         // Process field annotation
-        processAnnotation();
+        processFields();
 
         // Allow to release the model if the root business object doesn't exist anymore
         getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
@@ -136,40 +145,101 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     }
 
     /**
-     * Process annotation to auto-link field with handler.
+     * Process view annotation.
+     * 
+     * @throws CoreException if annotation processing fails
      */
-    private void processAnnotation() {
+    private void processViewAnnotation() {
+
+        // Find the AutoHandler annotation if any because it's optional
+        final AutoHandler ah = ClassUtility.extractAnnotation(this.getClass(), AutoHandler.class);
+        if (ah != null && ah.value() == CallbackObject.View) {
+            this.callbackObject = this;
+        } else {
+            // by default use the controller object as callback object
+            this.callbackObject = this.getController();
+        }
+
+    }
+
+    /**
+     * Process all fields' annotations to auto-link them with event handler.
+     * 
+     * @throws CoreException if annotation processing fails
+     */
+    private void processFields() throws CoreException {
 
         final Class<?> currentClass = this.getClass();
 
+        // Parse view properties
         for (final Field f : currentClass.getDeclaredFields()) {
 
+            // Only node properties are eligible
             if (Node.class.isAssignableFrom(f.getType())) {
 
+                // If a property was private, it must set to accessible = false after processing action
+                boolean needToHide = false;
+                // For private properties, set them accessible temporary
                 if (!f.isAccessible()) {
                     f.setAccessible(true);
+                    needToHide = true;
                 }
-                for (final Annotation a : f.getAnnotations()) {
-                    if (a.annotationType() == OnSwipe.class) {
 
-                        try {
-                            final Node node = (Node) f.get(this);
+                // Process all existing annotation for the current field
+                processAnnotations(f);
 
-                            if (node != null) {
-
-                            }
-
-                        } catch (IllegalArgumentException | IllegalAccessException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                    if (f.isAccessible()) {
-                        f.setAccessible(false);
-                    }
+                // Reset the property visibility
+                if (needToHide && f.isAccessible()) {
+                    f.setAccessible(false);
                 }
             }
         }
+    }
+
+    /**
+     * Process all OnXxxx Annotation to attach event handler on this field.
+     * 
+     * @param property the field to analyze
+     * 
+     * @throws CoreException if annotation processing fails
+     */
+    private void processAnnotations(final Field property) throws CoreException {
+        // For each field annotation we will attach an event handler
+        for (final Annotation a : property.getAnnotations()) {
+
+            // Manage only JRebirth OnXxxxx annotations
+            if (a.annotationType().getName().startsWith("org.jrebirth.core.ui.annotation.On")) {
+
+                try {
+                    // Retrieve the property value
+                    final Node node = (Node) property.get(this);
+
+                    // Process the annotation if the node is not null
+                    if (node != null && getController() instanceof AbstractController) {
+                        addHandler(node, a);
+                    }
+
+                } catch (IllegalArgumentException | IllegalAccessException e) {
+                    LOGGER.debug("Impossible to process annotation for property : {}-{}", this.getClass().getName(), property.getName());
+                }
+            }
+        }
+    }
+
+    /**
+     * Add an event handler on the given node according to annotation OnXxxxx.
+     * 
+     * @param node the graphical node, must be not null
+     * @param annotation the OnXxxx annotation
+     */
+    private final void addHandler(final Node node, final Annotation annotation) throws CoreException {
+
+        // Build the auto event handler for this annotation
+        final AnnotationEventHandler aeh = new AnnotationEventHandler(this.callbackObject, annotation);
+        for (final EnumEventType eet : (EnumEventType[]) ClassUtility.getAnnotationAttribute(annotation, "value")) {
+            node.addEventHandler(eet.eventType(), aeh);
+        }
+
     }
 
     /**

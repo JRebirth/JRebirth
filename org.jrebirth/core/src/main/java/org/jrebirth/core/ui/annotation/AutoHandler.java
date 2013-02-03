@@ -23,30 +23,30 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-
 /**
- * This annotation is used to automatically attached an action event handler to a property node.
+ * This annotation is used to define the callback object to use for annotation event handler.
  * 
  * @author Sébastien Bordes
  */
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface OnAction {
+public @interface AutoHandler {
+
+    /** The callback object to use for annotation event handler. */
+    enum CallbackObject {
+
+        /** Annotation event handler will be processed by controller. */
+        Controller,
+
+        /** Annotation event handler will be processed by view. */
+        View;
+    }
 
     /**
-     * Define a unique name used to avoid sharing same handler.
+     * Define callback object to use for annotation event handler.
      * 
-     * The default value is null, same event handler will be used for multiple annotation
+     * The default value is Controller
      */
-    String name() default "";
-
-    /**
-     * Define the JavaFX api event class.
-     * 
-     * Must not be changed !!!
-     */
-    Class<? extends Event> apiEventClass() default ActionEvent.class;
+    CallbackObject value() default CallbackObject.Controller;
 }

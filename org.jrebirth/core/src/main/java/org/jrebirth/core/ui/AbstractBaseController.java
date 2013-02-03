@@ -194,12 +194,12 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      * 
      * @throws CoreException to stop ui initialization
      */
-    private void throwBrokenContract(final Class<?> adapterClass) throws CoreException {
+    private void throwBrokenAdapterContract(final Class<?> adapterClass) throws CoreException {
         throw new CoreException(this.getClass().getName() + " must implement " + adapterClass.getName() + " interface");
     }
 
     /**
-     * TODO To complete.
+     * To complete.
      * 
      * @param browserMouseAdapter
      */
@@ -210,16 +210,6 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
         } else if (eventAdapter instanceof KeyAdapter) {
             this.keyHandler = new KeyHandler((KeyAdapter) eventAdapter);
         }
-    }
-
-    /**
-     * TODO To complete.
-     * 
-     * @param browser
-     * @param mouseClicked
-     */
-    protected final void addHandler(final Node node, final EventType<? extends Event> eventType) {
-        // FIXME node.addEventHandler(eventType, getHandler(eventType));
     }
 
     private final Map<javafx.event.EventType<? extends Event>, EventHandler<? extends Event>> map = new HashMap<>();
@@ -243,7 +233,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
                 if (this instanceof MouseAdapter) {
                     this.map.put(et, new MouseHandler((MouseAdapter) this));
                 } else {
-                    throwBrokenContract(MouseAdapter.class);
+                    throwBrokenAdapterContract(MouseAdapter.class);
                 }
             }
         }
@@ -287,7 +277,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
             if (this instanceof ActionAdapter) {
                 this.actionHandler = new ActionHandler((ActionAdapter) this);
             } else {
-                throwBrokenContract(ActionAdapter.class);
+                throwBrokenAdapterContract(ActionAdapter.class);
             }
         }
         return this.actionHandler;
@@ -316,7 +306,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
             if (this instanceof MouseAdapter) {
                 this.mouseHandler = new MouseHandler((MouseAdapter) this);
             } else {
-                throwBrokenContract(MouseAdapter.class);
+                throwBrokenAdapterContract(MouseAdapter.class);
             }
         }
         return this.mouseHandler;
@@ -346,7 +336,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
             if (this instanceof KeyAdapter) {
                 this.keyHandler = new KeyHandler((KeyAdapter<?>) this);
             } else {
-                throwBrokenContract(KeyAdapter.class);
+                throwBrokenAdapterContract(KeyAdapter.class);
             }
         }
         return this.keyHandler;
@@ -375,7 +365,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
             if (this instanceof DragAdapter) {
                 this.dragHandler = new DragHandler((DragAdapter) this);
             } else {
-                throwBrokenContract(DragAdapter.class);
+                throwBrokenAdapterContract(DragAdapter.class);
             }
         }
         return this.dragHandler;
@@ -404,7 +394,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
             if (this instanceof WindowAdapter) {
                 this.windowHandler = new WindowHandler((WindowAdapter) this);
             } else {
-                throwBrokenContract(WindowAdapter.class);
+                throwBrokenAdapterContract(WindowAdapter.class);
             }
         }
         return this.windowHandler;

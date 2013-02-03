@@ -23,8 +23,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import javafx.event.Event;
+import javafx.event.EventType;
+import javafx.scene.input.SwipeEvent;
+
 /**
- * This annotation is used to automatically attached an event handler to a property node.
+ * This annotation is used to automatically attached a Zoom event handler to a property node.
  * 
  * @author Sébastien Bordes
  */
@@ -33,13 +37,47 @@ import java.lang.annotation.Target;
 @Documented
 public @interface OnSwipe {
 
-    /** The Swipe event type. */
-    enum SwipeType {
-        Any,
-        Up,
-        Down,
-        Left,
-        Right
+    /**
+     * The Swipe event type.<br />
+     * The swipe type will be appended to method name to use.
+     */
+    enum SwipeType implements EnumEventType {
+
+        /** Any Swipe Event. */
+        Any(SwipeEvent.ANY),
+
+        /** Swipe Up event. */
+        Up(SwipeEvent.SWIPE_UP),
+
+        /** Swipe Down event. */
+        Down(SwipeEvent.SWIPE_DOWN),
+
+        /** Swipe Left event. */
+        Left(SwipeEvent.SWIPE_LEFT),
+
+        /** Swipe Right event. */
+        Right(SwipeEvent.SWIPE_RIGHT);
+
+        /** The JavaFX internal api name. */
+        private EventType<?> eventType;
+
+        /**
+         * Default constructor used to link the apiName
+         * 
+         * @param eventType the javafx event type
+         */
+        private SwipeType(final EventType<?> eventType) {
+            this.eventType = eventType;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public EventType<?> eventType() {
+            return this.eventType;
+        }
+
     }
 
     /**
@@ -52,7 +90,15 @@ public @interface OnSwipe {
     /**
      * Define a unique name used to avoid sharing same handler.
      * 
-     * The default value is null, same event handler will be used for multiple annotation
+     * The default value is empty, same event handler will be used for multiple annotation
      */
     String name() default "";
+
+    /**
+     * Define the JavaFX api event class.
+     * 
+     * Must not be changed !!!
+     */
+    Class<? extends Event> apiEventClass() default SwipeEvent.class;
+
 }

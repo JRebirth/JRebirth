@@ -23,22 +23,58 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import javafx.event.Event;
+import javafx.event.EventType;
+import javafx.scene.input.ScrollEvent;
+
 /**
- * This annotation is used to automatically attached an event handler to a property node.
+ * This annotation is used to automatically attached an Scroll event handler to a property node.
  * 
  * @author Sébastien Bordes
  */
-@Target({ ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER })
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface OnScroll {
 
-    /** The Scroll event type. */
-    enum ScrollType {
-        Any,
-        Started,
-        Scroll,
-        Finished
+    /**
+     * The Scroll event type.<br />
+     * The scroll type will be appended to method name to use.
+     */
+    enum ScrollType implements EnumEventType {
+
+        /** Any Scroll Event. */
+        Any(ScrollEvent.ANY),
+
+        /** Scroll started event. */
+        Started(ScrollEvent.SCROLL_STARTED),
+
+        /** Scroll event. */
+        Rotate(ScrollEvent.SCROLL),
+
+        /** Scroll finished event. */
+        Finished(ScrollEvent.SCROLL_FINISHED);
+
+        /** The JavaFX internal api name. */
+        private EventType<?> eventType;
+
+        /**
+         * Default constructor used to link the apiName
+         * 
+         * @param eventType the javafx event type
+         */
+        private ScrollType(final EventType<?> eventType) {
+            this.eventType = eventType;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public EventType<?> eventType() {
+            return this.eventType;
+        }
+
     }
 
     /**
@@ -54,4 +90,11 @@ public @interface OnScroll {
      * The default value is null, same event handler will be used for multiple annotation
      */
     String name() default "";
+
+    /**
+     * Define the JavaFX api event class.
+     * 
+     * Must not be changed !!!
+     */
+    Class<? extends Event> apiEventClass() default ScrollEvent.class;
 }
