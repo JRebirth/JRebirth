@@ -16,6 +16,9 @@ public interface JRebirthParameters {
     /**************************************************************************************/
 
     /** The application stage width. */
+    ParameterItemBase<Boolean> DEVELOPER_MODE = ParameterItemBase.build("developerMode", true);
+
+    /** The application stage width. */
     ParameterItemBase<Integer> THREAD_POOL_SIZE = ParameterItemBase.build("threadPoolSize", 4);
 
     /**************************************************************************************/
