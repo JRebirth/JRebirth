@@ -19,20 +19,16 @@ package org.jrebirth.core.resource.parameter;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
-import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
 
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
+import org.jrebirth.core.util.ClasspathUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,12 +44,6 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ParameterBuilder.class);
 
-    /** The jrebirth bundle name. */
-    private static final String BUNDLE_NAME = "jrebirth";
-
-    /** The Resources bundle built. */
-    private static final ResourceBundle PARAMETERS = ResourceBundle.getBundle(BUNDLE_NAME);
-
     /** . */
     private final Map<String, Object> parametersMap = new ConcurrentHashMap<>();
 
@@ -68,50 +58,34 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
     }
 
     /**
-     * TODO To complete.
+     * Read all configuration files available into the application classpath.
      */
     private void readPropertiesFiles() {
 
-        final FilenameFilter configFileFilter = new FilenameFilter() {
+        final Collection<String> list = ClasspathUtility.getResources(Pattern.compile(".*jrebirth\\.properties"));// *jrebirth.properties
 
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return name != null && name.endsWith("jrebirth.properties");
-            }
-        };
+        LOGGER.info("{} configuration file{} found.", list.size(), list.size() > 1 ? "s" : "");
 
-        final File configFolder = new File("config");
-        if (configFolder.exists()) {
-
-            final File[] configFiles = configFolder.listFiles(configFileFilter);
-            final List<File> cfList = new ArrayList<>(Arrays.asList(configFiles));
-
-            // Sort configuration File to allow to override default configuration
-            Collections.sort(cfList, new Comparator<File>() {
-
-                @Override
-                public int compare(final File file1, final File file2) {
-                    return file1.getName().compareTo(file2.getName());
-                }
-            });
-
-            for (final File cf : configFiles) {
-                readPropertiesFile(cf);
-            }
+        for (final String cf : list) {
+            readPropertiesFile(new File(cf));
         }
 
     }
 
     /**
-     * TODO To complete.
+     * Read a customized configuration file to load parameters values.
      * 
-     * @param cf
+     * @param custConfFile the file to load
      */
-    private void readPropertiesFile(final File cf) {
+    private void readPropertiesFile(final File custConfFile) {
+
         final Properties p = new Properties();
 
-        try (InputStream is = new FileInputStream(cf)) {
+        LOGGER.info("Read configuration file : {} ", custConfFile.getAbsolutePath());
 
+        try (InputStream is = new FileInputStream(custConfFile)) {
+
+            // Read the properties file
             p.load(is);
 
             for (final Object key : p.keySet()) {
@@ -125,7 +99,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
             }
 
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Impossible to read the properties file : {}", custConfFile.getAbsolutePath());
         }
 
     }
@@ -140,16 +114,24 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
             final ObjectParameter<?> op = (ObjectParameter<?>) parameterParams;
 
-            object = op.object();// Build the requested parameter
+            // Check if the parameter has a parameter name and
+            // check if the parameter has been loaded from any customized configuration file
+            if (op.name() != null && this.parametersMap.containsKey(op.name())) {
 
-            if (op.name() != null && PARAMETERS.containsKey(op.name())) {
+                // Retrieve the customized parameter
+                object = op.parseObject(this.parametersMap.get(op.name()).toString());
 
-                final Object configured = op.parseObject(PARAMETERS.getObject(op.name()).toString());
+            } else {
+                // No customized parameter has been loaded, gets the default programmatic one
+                object = op.object();
+            }
 
-                this.parametersMap.put(op.name(), configured);
+            // Don't store the parameter into the map if it hasn't got any parameter name
+            if (op.name() != null) {
+                // Store the new parameter into the map
+                this.parametersMap.put(op.name(), object);
             }
         }
-
         return object;
     }
 }
