@@ -2,6 +2,7 @@
 <archetype-catalog xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-catalog/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-catalog/1.0.0 http://maven.apache.org/xsd/archetype-catalog-1.0.0.xsd">
 	<archetypes>
+	
 		<!-- Snapshots version -->
 		<archetype>
 			<groupId>org.jrebirth</groupId>
@@ -31,6 +32,7 @@
 			<repository>http://repo.jrebirth.org/jrebirth-snapshot-local</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
+		
 		<!-- Releases version -->
 		<archetype>
 			<groupId>org.jrebirth</groupId>

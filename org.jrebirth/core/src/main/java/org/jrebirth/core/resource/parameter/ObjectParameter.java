@@ -75,11 +75,11 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
     }
 
     /**
-     * TODO To complete.
+     * Parse the serialized object.
      * 
-     * @param object2
+     * @param serializedObject the string object to convert
      * 
-     * @return
+     * @return the real object
      */
     public Object parseObject(final String serializedObject) {
         Object res = null;

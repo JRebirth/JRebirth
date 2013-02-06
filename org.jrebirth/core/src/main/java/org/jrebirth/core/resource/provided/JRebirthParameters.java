@@ -27,6 +27,14 @@ public interface JRebirthParameters {
     /** . */
     ParameterItemBase<Integer> THREAD_POOL_SIZE = ParameterItemBase.build("threadPoolSize", 4);
 
+    /** Font default folder . */
+    ParameterItemBase<String> DEFAULT_FONT_FOLDER = ParameterItemBase.build("defaultFontFolder", "font");
+
+    /**
+     * The <code>TRUE_TYPE_FONT_EXTENSION</code> field is used to define the font file extension .
+     */
+    ParameterItemBase<String> TRUE_TYPE_FONT_EXTENSION = ParameterItemBase.build("trueTypeFontExtension", ".ttf");
+
     /**************************************************************************************/
     /** _________________________Application Stage Parameters.___________________________ */
     /**************************************************************************************/

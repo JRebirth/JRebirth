@@ -22,9 +22,11 @@ import org.jrebirth.core.resource.ResourceBuilders;
 /**
  * The class <strong>ParameterItemBase</strong> is used to build Parameterized Object.
  * 
+ * @param <T> the object type of the parameter
+ * 
  * @author Sébastien Bordes
  */
-public class ParameterItemBase<T> implements ParameterItem {
+public final class ParameterItemBase<T> implements ParameterItem {
 
     /** The generator of unique id. */
     private static int idGenerator;
@@ -34,8 +36,10 @@ public class ParameterItemBase<T> implements ParameterItem {
 
     /**
      * Private Constructor.
+     * 
+     * @param parameterParams the params for parameter object
      */
-    private ParameterItemBase(final ParameterParams parameterParams/* final String name, final T value */) {
+    private ParameterItemBase(final ParameterParams parameterParams) {
 
         builder().storeParams(this, parameterParams);
     }
