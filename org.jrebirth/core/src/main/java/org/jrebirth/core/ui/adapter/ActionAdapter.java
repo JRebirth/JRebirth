@@ -24,7 +24,7 @@ import javafx.event.ActionEvent;
  * 
  * @author Sébastien Bordes
  */
-public interface ActionAdapter {
+public interface ActionAdapter extends EventAdapter {
 
     /**
      * Manage action events.

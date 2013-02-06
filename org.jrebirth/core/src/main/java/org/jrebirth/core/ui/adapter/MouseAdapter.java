@@ -24,7 +24,7 @@ import javafx.scene.input.MouseEvent;
  * 
  * @author Sébastien Bordes
  */
-public interface MouseAdapter {
+public interface MouseAdapter extends EventAdapter {
 
     /**
      * Manage mouse ANY events.

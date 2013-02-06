@@ -30,14 +30,14 @@ import org.jrebirth.core.ui.adapter.KeyAdapter;
 public final class KeyHandler extends AbstractNamedEventHandler<KeyEvent> {
 
     /** The Key adapter. */
-    private final KeyAdapter<?> keyAdapter;
+    private final KeyAdapter keyAdapter;
 
     /**
      * Default Constructor.
      * 
      * @param keyAdapter the adapter to use
      */
-    public KeyHandler(final KeyAdapter<?> keyAdapter) {
+    public KeyHandler(final KeyAdapter keyAdapter) {
         super(KeyHandler.class.getSimpleName());
         this.keyAdapter = keyAdapter;
     }
@@ -47,7 +47,7 @@ public final class KeyHandler extends AbstractNamedEventHandler<KeyEvent> {
      * 
      * @return Returns the keyAdapter.
      */
-    public KeyAdapter<?> getKeyAdapter() {
+    public KeyAdapter getKeyAdapter() {
         return this.keyAdapter;
     }
 

@@ -24,7 +24,7 @@ import javafx.scene.input.ScrollEvent;
  * 
  * @author Sébastien Bordes
  */
-public interface ScrollAdapter {
+public interface ScrollAdapter extends EventAdapter {
 
     /**
      * Manage ANY scroll events.

@@ -24,7 +24,7 @@ import javafx.stage.WindowEvent;
  * 
  * @author Sébastien Bordes
  */
-public interface WindowAdapter {
+public interface WindowAdapter extends EventAdapter {
 
     /**
      * Manage window ANY events.
