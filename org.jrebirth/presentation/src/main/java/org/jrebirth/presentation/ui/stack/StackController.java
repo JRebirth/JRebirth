@@ -18,11 +18,13 @@
 package org.jrebirth.presentation.ui.stack;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Control;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.SwipeEvent;
 import javafx.scene.web.WebView;
 
 import org.jrebirth.core.exception.CoreException;
@@ -60,9 +62,9 @@ public final class StackController extends AbstractController<StackModel, StackV
     protected void customInitializeEventAdapters() throws CoreException {
 
         // Use the inner class
-        buildKeyHandler(new SlideKeyAdapter());
+        addAdapter(new SlideKeyAdapter());
         // Use the inner class
-        buildMouseHandler(new SlideMouseAdapter());
+        addAdapter(new SlideMouseAdapter());
     }
 
     /**
@@ -72,10 +74,28 @@ public final class StackController extends AbstractController<StackModel, StackV
     protected void customInitializeEventHandlers() throws CoreException {
 
         // Listen keys event on the root node
-        getRootNode().setOnKeyPressed(getKeyHandler());
+        getRootNode().setOnKeyPressed(getHandler(KeyEvent.KEY_PRESSED));
 
         // Listen mouse event on the root node
-        getRootNode().setOnMousePressed(getMouseHandler());
+        getRootNode().setOnMousePressed(getHandler(MouseEvent.MOUSE_PRESSED));
+
+        getRootNode().setOnSwipeLeft(new EventHandler<SwipeEvent>() {
+
+            @Override
+            public void handle(final SwipeEvent swipeEvent) {
+                getModel().callCommand(ShowPreviousSlideCommand.class);
+                swipeEvent.consume();
+            }
+        });
+
+        getRootNode().setOnSwipeRight(new EventHandler<SwipeEvent>() {
+
+            @Override
+            public void handle(final SwipeEvent swipeEvent) {
+                getModel().callCommand(ShowNextSlideCommand.class);
+                swipeEvent.consume();
+            }
+        });
     }
 
     /**

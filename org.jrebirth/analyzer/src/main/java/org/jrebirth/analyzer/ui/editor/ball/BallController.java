@@ -52,7 +52,7 @@ public final class BallController extends DefaultController<BallModel, BallView>
     protected void customInitializeEventHandlers() throws CoreException {
 
         // Register mouse clicked handler
-        getView().getRootNode().setOnMouseClicked(getMouseHandler());
+        getView().getRootNode().setOnMouseClicked(getHandler(MouseEvent.MOUSE_CLICKED));
 
         // getView().getShowTransition().setOnFinished(getActionHandler());
     }

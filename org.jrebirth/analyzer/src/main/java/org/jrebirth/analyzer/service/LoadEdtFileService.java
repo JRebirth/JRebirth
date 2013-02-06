@@ -26,9 +26,9 @@ import java.util.List;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.facade.GlobalFacadeBase;
 import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.facade.JRebirthEventBase;
-import org.jrebirth.core.facade.GlobalFacadeBase;
 import org.jrebirth.core.service.ServiceBase;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveTypeBase;
