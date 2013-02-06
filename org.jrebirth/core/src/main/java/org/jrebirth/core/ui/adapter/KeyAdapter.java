@@ -23,8 +23,6 @@ import javafx.scene.input.KeyEvent;
  * The class <strong>KeyAdapter</strong>.
  * 
  * @author Sébastien Bordes
- * 
- * @param <C> the controller class
  */
 public interface KeyAdapter extends EventAdapter {
 

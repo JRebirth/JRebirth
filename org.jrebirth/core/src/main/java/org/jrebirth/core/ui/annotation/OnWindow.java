@@ -65,7 +65,7 @@ public @interface OnWindow {
         private EventType<?> eventType;
 
         /**
-         * Default constructor used to link the apiName
+         * Default constructor used to link the apiName.
          * 
          * @param eventType the javafx event type
          */
