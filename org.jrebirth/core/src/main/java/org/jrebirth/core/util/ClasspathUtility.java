@@ -22,10 +22,11 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 import org.slf4j.Logger;
@@ -46,6 +47,13 @@ public final class ClasspathUtility {
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ClasspathUtility.class);
 
+    /** The classpath of the current java executable or current folder if not defined. */
+    private static final String CLASSPATH = System.getProperty("java.class.path", ".");
+
+    /** String to separate all classpath entries. */
+    private static final String CLASSPATH_SEPARATOR = System.getProperty("path.separator");
+
+    /** Filter for properties file. */
     private static final FilenameFilter configFileFilter = new FilenameFilter() {
 
         @Override
@@ -64,93 +72,115 @@ public final class ClasspathUtility {
     /**
      * for all elements of java.class.path get a Collection of resources Pattern pattern = Pattern.compile(".*"); gets all resources
      * 
-     * @param pattern the pattern to match
-     * @return the resources in the order they are found
+     * @param searchPattern the pattern used to filter all matching files
+     * 
+     * @return Sorted list of resources that match the pattern
      */
-    public static Collection<String> getResources(final Pattern pattern) {
-        final ArrayList<String> retval = new ArrayList<String>();
-        final String classPath = System.getProperty("java.class.path", ".");
-        final String classPathSeparator = System.getProperty("path.separator");
+    public static Collection<String> getClasspathResources(final Pattern searchPattern) {
 
-        final String[] classPathElements = classPath.split(classPathSeparator);
-        for (final String element : classPathElements) {
-            retval.addAll(getResources(element, pattern));
-        }
-        return retval;
-    }
+        final List<String> resources = new ArrayList<>();
 
-    private static Collection<String> getResources(final String element, final Pattern pattern) {
-        final ArrayList<String> retval = new ArrayList<String>();
-        final File file = new File(element);
-        if (file.isDirectory()) {
-            retval.addAll(getResourcesFromDirectory(file, pattern));
-        } else {
-            retval.addAll(getResourcesFromJarFile(file, pattern));
+        final String[] classpathEntries = CLASSPATH.split(CLASSPATH_SEPARATOR);
+        for (final String classpathEntry : classpathEntries) {
+            // Parse the classpath entry and apply the given pattern as filter
+            resources.addAll(getResources(classpathEntry, searchPattern));
         }
-        return retval;
-    }
+        // Sort resources
+        Collections.sort(resources);
 
-    private static Collection<String> getResourcesFromJarFile(final File file, final Pattern pattern) {
-        final ArrayList<String> retval = new ArrayList<String>();
-        ZipFile zf;
-        try {
-            zf = new ZipFile(file);
-        } catch (final ZipException e) {
-            throw new Error(e);
-        } catch (final IOException e) {
-            throw new Error(e);
-        }
-        final Enumeration e = zf.entries();
-        while (e.hasMoreElements()) {
-            final ZipEntry ze = (ZipEntry) e.nextElement();
-            final String fileName = ze.getName();
-            final boolean accept = pattern.matcher(fileName).matches();
-            if (accept) {
-                retval.add(fileName);
-            }
-        }
-        try {
-            zf.close();
-        } catch (final IOException e1) {
-            throw new Error(e1);
-        }
-        return retval;
-    }
-
-    private static Collection<String> getResourcesFromDirectory(final File directory, final Pattern pattern) {
-        final ArrayList<String> retval = new ArrayList<String>();
-        final File[] fileList = directory.listFiles(configFileFilter);
-
-        for (final File file : fileList) {
-            if (file.isDirectory()) {
-                retval.addAll(getResourcesFromDirectory(file, pattern));
-            } else {
-                try {
-                    final String fileName = file.getCanonicalPath();
-                    final boolean accept = pattern.matcher(fileName).matches();
-                    if (accept) {
-                        retval.add(fileName);
-                    }
-                } catch (final IOException e) {
-                    throw new Error(e);
-                }
-            }
-        }
-        return retval;
+        return resources;
     }
 
     /**
-     * list the resources that match args[0]
+     * Search all files that match the given Regex pattern.
      * 
-     * @param args args[0] is the pattern to match, or list all resources if there are no args
+     * @param classpathEntryPath the root folder used for search
+     * @param searchPattern the regex pattern used as a filter
+     * 
+     * @return list of resources that match the pattern
      */
-    public static void main(final String[] args) {
-        Pattern pattern;
-        if (args.length < 1) {
-            pattern = Pattern.compile(".*");
+    private static List<String> getResources(final String classpathEntryPath, final Pattern searchPattern) {
+        final List<String> resources = new ArrayList<>();
+        final File classpathEntryFile = new File(classpathEntryPath);
+        // The classpath entry could be a jar or a folder
+        if (classpathEntryFile.isDirectory()) {
+            // Browse the folder content
+            resources.addAll(getResourcesFromDirectory(classpathEntryFile, searchPattern));
+        } else if (classpathEntryFile.getName().endsWith(".jar") || classpathEntryFile.getName().endsWith(".zip")) {
+            // Explode and browse jar|zip content
+            resources.addAll(getResourcesFromJarOrZipFile(classpathEntryFile, searchPattern));
         } else {
-            pattern = Pattern.compile(args[0]);
+            LOGGER.info("The resource {} is ignored from classpath search engine (not a zip|jar|directory)", classpathEntryFile.getAbsolutePath());
         }
+        return resources;
+    }
 
+    /**
+     * Browse a directory to search resources that match the pattern.
+     * 
+     * @param directory the root directory to browse
+     * @param searchPattern the regex pattern used as a filter
+     * 
+     * @return list of resources that match the pattern
+     */
+    private static List<String> getResourcesFromDirectory(final File directory, final Pattern searchPattern) {
+        final List<String> resources = new ArrayList<>();
+
+        // Filter only properties files
+        final File[] fileList = directory.listFiles(configFileFilter);
+
+        // Iterate over each relevant file
+        for (final File file : fileList) {
+            // If the file is a directory process a recursive call to explorer the tree
+            if (file.isDirectory()) {
+                resources.addAll(getResourcesFromDirectory(file, searchPattern));
+            } else {
+                try {
+                    checkResource(resources, searchPattern, file.getCanonicalPath());
+                } catch (final IOException e) {
+                    LOGGER.error("Impossible to get the resource canonical path", e);
+                }
+            }
+        }
+        return resources;
+    }
+
+    /**
+     * Browse the jar content to search resources that match the pattern.
+     * 
+     * @param jarOrZipFile the jar to explore
+     * @param searchPattern the regex pattern used as a filter
+     * 
+     * @return list of resources that match the pattern
+     */
+    @SuppressWarnings("unchecked")
+    private static List<String> getResourcesFromJarOrZipFile(final File jarOrZipFile, final Pattern searchPattern) {
+        final List<String> resources = new ArrayList<>();
+
+        try (ZipFile zf = new ZipFile(jarOrZipFile);) {
+
+            final Enumeration<ZipEntry> e = (Enumeration<ZipEntry>) zf.entries();
+            while (e.hasMoreElements()) {
+                final ZipEntry ze = e.nextElement();
+                checkResource(resources, searchPattern, ze.getName());
+            }
+
+        } catch (final IOException e) {
+            LOGGER.error("Impossible to read the file", e);
+        }
+        return resources;
+    }
+
+    /**
+     * Check if the resource match the regex.
+     * 
+     * @param resources the list of found resources
+     * @param searchPattern the regex pattern
+     * @param resourceName the resource to check and to add
+     */
+    private static void checkResource(final List<String> resources, final Pattern searchPattern, final String resourceName) {
+        if (searchPattern.matcher(resourceName).matches()) {
+            resources.add(resourceName);
+        }
     }
 }

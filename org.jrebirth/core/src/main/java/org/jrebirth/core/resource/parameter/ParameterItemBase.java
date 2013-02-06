@@ -20,8 +20,7 @@ package org.jrebirth.core.resource.parameter;
 import org.jrebirth.core.resource.ResourceBuilders;
 
 /**
- * 
- * The interface <strong>ParameterItemBase</strong>.
+ * The class <strong>ParameterItemBase</strong> is used to build Parameterized Object.
  * 
  * @author Sébastien Bordes
  */
@@ -33,18 +32,10 @@ public class ParameterItemBase<T> implements ParameterItem {
     /** The unique identifier of the color item. */
     private int uid;
 
-    // private String name;
-    // private T value;
-    //
-    // /** The type of the related object registered by this parameter. */
-    // private final Type parameterType;
-
     /**
      * Private Constructor.
      */
     private ParameterItemBase(final ParameterParams parameterParams/* final String name, final T value */) {
-
-        // this.parameterType = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
         builder().storeParams(this, parameterParams);
     }
@@ -69,6 +60,8 @@ public class ParameterItemBase<T> implements ParameterItem {
     /**
      * Build a color item.
      * 
+     * @param <O> the type of parameterized object
+     * 
      * @param parameterParams the primitive values for the color
      * 
      * @return a new fresh color item object
@@ -86,7 +79,10 @@ public class ParameterItemBase<T> implements ParameterItem {
     /**
      * Build a color item.
      * 
-     * @param parameterParams the primitive values for the color
+     * @param <O> the type of parameterized object
+     * 
+     * @param name the parameter unique name
+     * @param value the parameterized object value
      * 
      * @return a new fresh color item object
      */
