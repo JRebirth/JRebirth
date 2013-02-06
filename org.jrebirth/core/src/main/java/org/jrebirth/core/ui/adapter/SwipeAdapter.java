@@ -24,7 +24,7 @@ import javafx.scene.input.SwipeEvent;
  * 
  * @author Sébastien Bordes
  */
-public interface SwipeAdapter {
+public interface SwipeAdapter extends EventAdapter {
 
     /**
      * Manage ANY swipe events.

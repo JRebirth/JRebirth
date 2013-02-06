@@ -17,37 +17,18 @@
  */
 package org.jrebirth.core.ui;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Node;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.RotateEvent;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.input.SwipeEvent;
-import javafx.scene.input.TouchEvent;
-import javafx.scene.input.ZoomEvent;
-import javafx.stage.WindowEvent;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.JRebirthEventType;
-import org.jrebirth.core.ui.adapter.ActionAdapter;
-import org.jrebirth.core.ui.adapter.DragAdapter;
 import org.jrebirth.core.ui.adapter.EventAdapter;
-import org.jrebirth.core.ui.adapter.KeyAdapter;
-import org.jrebirth.core.ui.adapter.MouseAdapter;
-import org.jrebirth.core.ui.adapter.WindowAdapter;
-import org.jrebirth.core.ui.handler.ActionHandler;
-import org.jrebirth.core.ui.handler.DragHandler;
-import org.jrebirth.core.ui.handler.KeyHandler;
-import org.jrebirth.core.ui.handler.MouseHandler;
-import org.jrebirth.core.ui.handler.WindowHandler;
 
 /**
  * The abstract class <strong>AbstractBaseController</strong>.
@@ -59,40 +40,13 @@ import org.jrebirth.core.ui.handler.WindowHandler;
  * @param <M> the class type of the model of the view controlled
  * @param <V> the class type of the view controlled
  */
-public abstract class AbstractBaseController<M extends Model, V extends View<M, ?, ?>> implements Controller<M, V> {
+public abstract class AbstractBaseController<M extends Model, V extends View<M, ?, ?>> implements Controller<M, V>, EventAdapter {
 
     /** The view component. */
     private final transient V view;
 
-    /** The action handler instance to use for Action events. */
-    private EventHandler<ActionEvent> actionHandler;
-
-    /** The mouse handler instance to use for Mouse events. */
-    private EventHandler<MouseEvent> mouseHandler;
-
-    /** The key handler instance to use for Key events. */
-    private EventHandler<KeyEvent> keyHandler;
-
-    /** The drag handler instance to use for Drag events. */
-    private EventHandler<DragEvent> dragHandler;
-
-    /** The window handler instance to use for Windows events. */
-    private EventHandler<WindowEvent> windowHandler;
-
-    /** The touch handler instance to use for Touch events. */
-    private EventHandler<TouchEvent> touchHandler;
-
-    /** The scroll handler instance to use for Scroll events. */
-    private EventHandler<ScrollEvent> scrollHandler;
-
-    /** The rotate handler instance to use for Rotate events. */
-    private EventHandler<RotateEvent> rotateHandler;
-
-    /** The swipe handler instance to use for Swipe events. */
-    private EventHandler<SwipeEvent> swipeHandler;
-
-    /** The zoom handler instance to use for Zoom events. */
-    private EventHandler<ZoomEvent> zoomHandler;
+    /** Store all event handler according to the event type. */
+    private final Map<EventType<? extends Event>, EventHandler<? extends Event>> eventHandlerMap = new HashMap<>();
 
     /**
      * Default Constructor.
@@ -188,217 +142,122 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
     }
 
     /**
-     * If a contract is broken throw an exception to warn developers.
+     * Add an event adapter and automatically generate the associated event handler. It could be accessed by calling {@link #getHandler(EventType)}
      * 
-     * @param adapterClass the class that represent the contract to comply with
+     * @param eventAdapter the {@link EventAdapter} used to route event
      * 
-     * @throws CoreException to stop ui initialization
+     * @throws CoreException it the local api contract is not respected
      */
-    private void throwBrokenAdapterContract(final Class<?> adapterClass) throws CoreException {
-        throw new CoreException(this.getClass().getName() + " must implement " + adapterClass.getName() + " interface");
-    }
+    @SuppressWarnings("unchecked")
+    protected final void addAdapter(final EventAdapter eventAdapter) throws CoreException {
 
-    /**
-     * To complete.
-     * 
-     * @param browserMouseAdapter
-     */
-    protected final void addAdapter(final EventAdapter<?> eventAdapter) {
-        if (eventAdapter instanceof MouseAdapter) {
-            this.map.put(MouseEvent.ANY, new MouseHandler((MouseAdapter) eventAdapter));
-            this.mouseHandler = new MouseHandler((MouseAdapter) eventAdapter);
-        } else if (eventAdapter instanceof KeyAdapter) {
-            this.keyHandler = new KeyHandler((KeyAdapter) eventAdapter);
+        // Parse all event to find the right to manage
+        for (final EventAdapter.Linker linker : EventAdapter.Linker.values()) {
+            if (linker.adapterClass().isAssignableFrom(eventAdapter.getClass())) {
+                // Create and store the event handler
+                this.eventHandlerMap.put(linker.eventType(), wrapbuildHandler(eventAdapter, (Class<? extends EventHandler<Event>>) linker.handlerClass()));
+            }
         }
     }
 
-    private final Map<javafx.event.EventType<? extends Event>, EventHandler<? extends Event>> map = new HashMap<>();
-
     /**
-     * Return a MouseEvent Handler.
+     * Return an {@link EventHandler}.
      * 
-     * @return the mouse event handler
+     * @return the right event handler
      * 
-     * @throws CoreException an exception if the current class doesn't implement the MouseAdapter interface.
+     * @throws CoreException an exception if the current class doesn't implement the right EventAdapter interface.
      */
+    @SuppressWarnings("unchecked")
     protected final <E extends Event> EventHandler<E> getHandler(final EventType<E> eventType) throws CoreException {
 
-        final EventType<E> et = extractFirstAnyEventType(eventType);
+        // final EventType<? extends Event> et = extractFirstAnyEventType(eventType);
+
+        EventHandler<E> handler = (EventHandler<E>) this.eventHandlerMap.get(eventType);
 
         // Check if the handler has been created or not
-        if (this.map.get(et) == null) {
+        if (handler == null) {
 
-            if (et == MouseEvent.ANY) {
-                // Build the mouse handler instance
-                if (this instanceof MouseAdapter) {
-                    this.map.put(et, new MouseHandler((MouseAdapter) this));
-                } else {
-                    throwBrokenAdapterContract(MouseAdapter.class);
+            for (final EventAdapter.Linker linker : EventAdapter.Linker.values()) {
+                if (isEventType(eventType, linker.eventType())) {
+                    handler = buildEventHandler(linker.adapterClass(), (Class<? extends EventHandler<E>>) linker.handlerClass());
                 }
             }
-        }
-        return (EventHandler<E>) this.map.get(et);
-    }
 
-    /**
-     * TODO To complete.
-     * 
-     * @param eventType
-     * @return
-     */
-    private <E extends Event> EventType<E> extractFirstAnyEventType(final EventType<E> eventType) {
-        EventType<E> et = eventType;
-        while (et.getName().contains("_")) {
-            et = (EventType<E>) et.getSuperType();
-        }
-        return et;
-    }
-
-    /**
-     * Build an instance of ActionHandler using a custom ActionAdapter.
-     * 
-     * @param actionAdapter the custom adapter to used to manage action events
-     */
-    protected final void buildActionHandler(final ActionAdapter actionAdapter) {
-        this.actionHandler = new ActionHandler(actionAdapter);
-    }
-
-    /**
-     * Return a ActionEvent Handler.
-     * 
-     * @return the action event handler
-     * 
-     * @throws CoreException an exception if the current class doesn't implement the ActionAdapter interface.
-     */
-    protected final EventHandler<ActionEvent> getActionHandler() throws CoreException {
-        // Check if the handler has been created or not
-        if (this.actionHandler == null) {
-            // Build the mouse handler instance
-            if (this instanceof ActionAdapter) {
-                this.actionHandler = new ActionHandler((ActionAdapter) this);
-            } else {
-                throwBrokenAdapterContract(ActionAdapter.class);
+            if (handler != null) {
+                // store the handler
+                this.eventHandlerMap.put(eventType, handler);
             }
         }
-        return this.actionHandler;
+        return handler;
     }
 
     /**
-     * Build an instance of MouseHandler using a custom MouseAdapter.
+     * Build an event handler by reflection to wrap the event adapter given.
      * 
-     * @param mouseAdapter the custom adapter to used to manage mouse events
+     * @param eventAdapter the instance of an eventAdapter
+     * @param handlerClass the handler class to build
+     * 
+     * @return the required event handler
+     * 
+     * @throws CoreException if an error occurred while creating the event handler
      */
-    protected final void buildMouseHandler(final MouseAdapter mouseAdapter) {
-        this.mouseHandler = new MouseHandler(mouseAdapter);
-    }
-
-    /**
-     * Return a MouseEvent Handler.
-     * 
-     * @return the mouse event handler
-     * 
-     * @throws CoreException an exception if the current class doesn't implement the MouseAdapter interface.
-     */
-    protected final EventHandler<MouseEvent> getMouseHandler() throws CoreException {
-        // Check if the handler has been created or not
-        if (this.mouseHandler == null) {
-            // Build the mouse handler instance
-            if (this instanceof MouseAdapter) {
-                this.mouseHandler = new MouseHandler((MouseAdapter) this);
-            } else {
-                throwBrokenAdapterContract(MouseAdapter.class);
-            }
+    private <E extends Event> EventHandler<E> wrapbuildHandler(final EventAdapter eventAdapter, final Class<? extends EventHandler<E>> handlerClass) throws CoreException {
+        try {
+            return handlerClass.getDeclaredConstructor(eventAdapter.getClass()).newInstance(this);
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+            throw new CoreException("Impossible to build event handler " + handlerClass.getName() + " for the class " + this.getClass().getName());
         }
-        return this.mouseHandler;
     }
 
     /**
-     * Build an instance of KeyHandler using a custom KeyAdapter.
+     * Build an event handler by reflection using the Controller object as eventAdapter.
      * 
-     * @param keyAdapter the custom adapter to used to manage key events
+     * @param adapterClass the event adapter class to used
+     * @param handlerClass the event handler class to used
+     * 
+     * @return the required event handler
+     * 
+     * @throws CoreException if the local api contract is not respected
      */
-    protected final void buildKeyHandler(final KeyAdapter keyAdapter) {
-        keyAdapter.setController(this);
-        this.keyHandler = new KeyHandler(keyAdapter);
-    }
+    private <E extends Event> EventHandler<E> buildEventHandler(final Class<? extends EventAdapter> adapterClass, final Class<? extends EventHandler<E>> handlerClass) throws CoreException {
+        // final Class<? extends EventAdapter<?>> adapterClass, final Class<? extends EventHandler<Event>> handlerClass
 
-    /**
-     * Return a KeyEvent Handler.
-     * 
-     * @return the key event handler
-     * 
-     * @throws CoreException an exception if the current class doesn't implement the KeyAdapter interface.
-     */
-    protected final EventHandler<KeyEvent> getKeyHandler() throws CoreException {
-        // Check if the handler has been created or not
-        if (this.keyHandler == null) {
-            // Build the mouse handler instance
-            if (this instanceof KeyAdapter) {
-                this.keyHandler = new KeyHandler((KeyAdapter<?>) this);
-            } else {
-                throwBrokenAdapterContract(KeyAdapter.class);
-            }
+        // final Class<?> adapterClass, final Class<?> handlerClass
+        EventHandler<E> eventHandler = null;
+        // Build the mouse handler instance
+        if (adapterClass.isAssignableFrom(this.getClass())) {
+            eventHandler = wrapbuildHandler(this, handlerClass);
+        } else {
+            throw new CoreException(this.getClass().getName() + " must implement " + adapterClass.getName() + " interface");
         }
-        return this.keyHandler;
+        return eventHandler;
     }
 
     /**
-     * Build an instance of DragHandler using a custom DragAdapter.
+     * Check the tow eventype given and check the super level if necessary to always return the ANy event type.
      * 
-     * @param dragAdapter the custom adapter to used to manage drag events
+     * @param testEventType the sub event type or any instance
+     * @param anyEventType the eventype.ANY instance
+     * 
+     * @return true if the ANY event type is the same for both objects
      */
-    protected final void buildDragHandler(final DragAdapter dragAdapter) {
-        this.dragHandler = new DragHandler(dragAdapter);
+    private boolean isEventType(final EventType<? extends Event> testEventType, final EventType<? extends Event> anyEventType) {
+        return testEventType == anyEventType || testEventType.getSuperType() == anyEventType;
     }
 
-    /**
-     * Return a DragEvent Handler.
-     * 
-     * @return the drag event handler
-     * 
-     * @throws CoreException an exception if the current class doesn't implements the DragAdapter interface.
-     */
-    protected final EventHandler<DragEvent> getDragHandler() throws CoreException {
-        // Check if the handler has been created or not
-        if (this.dragHandler == null) {
-            // Build the mouse handler instance
-            if (this instanceof DragAdapter) {
-                this.dragHandler = new DragHandler((DragAdapter) this);
-            } else {
-                throwBrokenAdapterContract(DragAdapter.class);
-            }
-        }
-        return this.dragHandler;
-    }
-
-    /**
-     * Build an instance of WindowHandler using a custom WindowAdapter.
-     * 
-     * @param windowAdapter the custom adapter to used to manage window events
-     */
-    protected final void buildWindowHandler(final WindowAdapter windowAdapter) {
-        this.windowHandler = new WindowHandler(windowAdapter);
-    }
-
-    /**
-     * Return a WindowEvent Handler.
-     * 
-     * @return the window event handler
-     * 
-     * @throws CoreException an exception if the current class doesn't implements the WindowAdapter interface.
-     */
-    protected final EventHandler<WindowEvent> getWindowHandler() throws CoreException {
-        // Check if the handler has been created or not
-        if (this.windowHandler == null) {
-            // Build the mouse handler instance
-            if (this instanceof WindowAdapter) {
-                this.windowHandler = new WindowHandler((WindowAdapter) this);
-            } else {
-                throwBrokenAdapterContract(WindowAdapter.class);
-            }
-        }
-        return this.windowHandler;
-    }
+    // /**
+    // * TODO To complete.
+    // *
+    // * @param eventType
+    // * @return
+    // */
+    // private EventType<? extends Event> extractFirstAnyEventType(final EventType<? extends Event> eventType) {
+    // EventType<?> et = eventType;
+    // while (et.getName().contains("_")) {
+    // et = et.getSuperType();
+    // }
+    // return et;
+    // }
 
     /**
      * {@inheritDoc}

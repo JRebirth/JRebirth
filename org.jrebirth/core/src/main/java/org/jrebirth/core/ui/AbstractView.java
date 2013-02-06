@@ -146,8 +146,6 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Process view annotation.
-     * 
-     * @throws CoreException if annotation processing fails
      */
     private void processViewAnnotation() {
 

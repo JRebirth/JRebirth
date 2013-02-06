@@ -24,7 +24,7 @@ import javafx.scene.input.RotateEvent;
  * 
  * @author Sébastien Bordes
  */
-public interface RotateAdapter {
+public interface RotateAdapter extends EventAdapter {
 
     /**
      * Manage ANY rotate events.

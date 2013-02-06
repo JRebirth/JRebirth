@@ -26,7 +26,7 @@ import org.jrebirth.core.ui.AbstractBaseController;
  * 
  * @param <C> The controller class which manage this event adapter
  */
-public abstract class AbstractDefaultAdapter<C extends AbstractBaseController<?, ?>> implements EventAdapter<C> {
+public abstract class AbstractDefaultAdapter<C extends AbstractBaseController<?, ?>> implements EventAdapter {
 
     /** The controller that manage these events. */
     private C controller;
@@ -34,7 +34,6 @@ public abstract class AbstractDefaultAdapter<C extends AbstractBaseController<?,
     /**
      * @param controller The controller to set.
      */
-    @Override
     public void setController(final C controller) {
         this.controller = controller;
     }

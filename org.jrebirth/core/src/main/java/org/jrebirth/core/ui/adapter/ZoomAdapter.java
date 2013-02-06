@@ -24,7 +24,7 @@ import javafx.scene.input.ZoomEvent;
  * 
  * @author Sébastien Bordes
  */
-public interface ZoomAdapter {
+public interface ZoomAdapter extends EventAdapter {
 
     /**
      * Manage ANY zoom events.

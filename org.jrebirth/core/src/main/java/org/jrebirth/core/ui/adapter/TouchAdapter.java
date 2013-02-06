@@ -24,7 +24,7 @@ import javafx.scene.input.TouchEvent;
  * 
  * @author Sébastien Bordes
  */
-public interface TouchAdapter {
+public interface TouchAdapter extends EventAdapter {
 
     /**
      * Manage ANY touch events.

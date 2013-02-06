@@ -24,7 +24,7 @@ import javafx.scene.input.DragEvent;
  * 
  * @author Sébastien Bordes
  */
-public interface DragAdapter {
+public interface DragAdapter extends EventAdapter {
 
     /**
      * Manage drag ANY events. Common supertype for all drag event types.
