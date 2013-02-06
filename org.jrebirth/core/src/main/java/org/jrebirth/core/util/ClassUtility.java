@@ -218,19 +218,28 @@ public final class ClassUtility {
         return annotation;
     }
 
+    /**
+     * Retrieve an annotation property dynamically by reflection.
+     * 
+     * @param annotation the annotation to explore
+     * @param attributeName the name of the method to call
+     * 
+     * @return the property value
+     */
     public static Object getAnnotationAttribute(final Annotation annotation, final String attributeName) {
         Object object = null;
         try {
+            // Get the annotation method for the given name
             final Method attributeMethod = annotation.annotationType().getDeclaredMethod(attributeName);
 
+            // Call the method to gets the value
             object = attributeMethod.invoke(annotation);
 
         } catch (NoSuchMethodException | SecurityException e) {
-            e.printStackTrace();
+            LOGGER.error("Impossible to find the annotation property : " + attributeName, e);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            e.printStackTrace();
+            LOGGER.error("Impossible to retrieve value for the annotation property : " + attributeName, e);
         }
-
         return object;
     }
 

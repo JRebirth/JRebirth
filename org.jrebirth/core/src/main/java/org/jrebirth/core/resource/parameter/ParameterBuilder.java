@@ -44,14 +44,33 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ParameterBuilder.class);
 
-    /** . */
+    /** Store all parameter values. */
     private final Map<String, Object> parametersMap = new ConcurrentHashMap<>();
 
+    /** The file extension used by configuration files. */
+    private String configurationFileExtension;
+
+    /** The Wildcard used to load configuration files. */
+    private String configurationFileWildcard;
+
     /**
-     * Default Constructor
+     * Default Constructor.
      */
     public ParameterBuilder() {
         super();
+    }
+
+    /**
+     * Search configuration files according to the parameters provided.
+     * 
+     * @param wildcard the regex wildcard (must not be null)
+     * @param extension the file extension without the first dot (ie: properties) (must not be null)
+     */
+    public void searchConfigurationFiles(final String wildcard, final String extension) {
+
+        // Store parameters
+        this.configurationFileWildcard = wildcard;
+        this.configurationFileExtension = extension;
 
         // Search and analyze all properties files available
         readPropertiesFiles();
@@ -62,14 +81,21 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
      */
     private void readPropertiesFiles() {
 
-        final Collection<String> list = ClasspathUtility.getResources(Pattern.compile(".*jrebirth\\.properties"));// *jrebirth.properties
+        if (!this.configurationFileWildcard.isEmpty() && !this.configurationFileExtension.isEmpty()) {
+            // Assemble the regex pattern
+            final Pattern filePattern = Pattern.compile(this.configurationFileWildcard + "\\." + this.configurationFileExtension);
 
-        LOGGER.info("{} configuration file{} found.", list.size(), list.size() > 1 ? "s" : "");
+            // Retrieve all resources from default classpath
+            final Collection<String> list = ClasspathUtility.getClasspathResources(filePattern);
 
-        for (final String cf : list) {
-            readPropertiesFile(new File(cf));
+            LOGGER.info("{} configuration file{} found.", list.size(), list.size() > 1 ? "s" : "");
+
+            for (final String cf : list) {
+                readPropertiesFile(new File(cf));
+            }
+        } else {
+            LOGGER.info("Configuration Loading is skipped");
         }
-
     }
 
     /**

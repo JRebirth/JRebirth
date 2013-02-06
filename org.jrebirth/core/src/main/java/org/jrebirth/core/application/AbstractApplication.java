@@ -39,6 +39,7 @@ import org.jrebirth.core.exception.handler.DefaultUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.JatUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.JitUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.PoolUncaughtExceptionHandler;
+import org.jrebirth.core.resource.ResourceBuilders;
 import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.util.ClassUtility;
@@ -55,6 +56,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @param <P> The root node of the stage, must extends Pane
  */
+@Configuration(value = ".*jrebirth", extension = "properties", schedule = 0)
 public abstract class AbstractApplication<P extends Pane> extends Application implements JRebirthApplication<P> {
 
     /** The class logger. */
@@ -92,6 +94,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         try {
             LOGGER.trace("Starting {}", this.getClass().getSimpleName());
 
+            // Load configurationrationFiles
+            loadConfigurationFiles();
+
             // Attach the primary stage for later customization
             this.stage = primaryStage;
 
@@ -103,14 +108,13 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             initializeScene();
 
             // Build the JRebirth Thread before attaching uncaught Exception Handler
-
             final JRebirthThread jrt = JRebirthThread.getThread();
 
-            // Attach exception handler
+            // Attach exception handlers
             initializeExceptionHandler();
 
             // Start the JRebirthThread, if an error occurred it will be processed by predefined handler
-            // It will create all facades
+            // It will create all facades and trigger the pre and post boot waves and will alost attach the first model view
             jrt.launch(this);
 
             // Attach the scene
@@ -128,13 +132,26 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     }
 
     /**
+     * Load all configuration files before showing anything.
+     */
+    private void loadConfigurationFiles() {
+
+        // Parse the first annotation found (manage overriding)
+        final Configuration conf = ClassUtility.extractAnnotation(this.getClass(), Configuration.class);
+
+        // Conf variable cannot be null because it was defined in this class
+
+        // launch the configuration search engine
+        ResourceBuilders.PARAMETER_BUILDER.searchConfigurationFiles(conf.value(), conf.extension());
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public final void stop() throws CoreException {
         try {
             LOGGER.trace("Stopping {}", this.getClass().getSimpleName());
-
             super.stop();
 
             // Hide the stage is this method wasn't call by user
@@ -154,8 +171,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
                 // Try to stop the JRebirth Thread
                 JRebirthThread.getThread().close();
 
-                // Wait 2s before retrying to close if the thread is still alive
-                Thread.sleep(firstTime ? 4000 : 1000); // TO BE PARAMETRIZED
+                // Wait parameterized delay before retrying to close if the thread is still alive
+                Thread.sleep(firstTime ? JRebirthParameters.CLOSE_RETRY_DELAY_FIRST.get() : JRebirthParameters.CLOSE_RETRY_DELAY_OTHER.get());
 
                 if (firstTime) {
                     firstTime = false;
@@ -176,6 +193,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     private void initializeStage() {
         // Define the stage title
         this.stage.setTitle(getApplicationTitle());
+
         // and allow customization
         customizeStage(this.stage);
     }
