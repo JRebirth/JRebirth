@@ -69,7 +69,7 @@ public class AnnotationEventHandler extends AbstractNamedEventHandler<Event> {
     }
 
     /**
-     * For each annotation event type, check if the callback method exist
+     * For each annotation event type, check if the callback method exists.
      * 
      * @throws CoreException an exception if the current class doesn't have the right handling method
      */

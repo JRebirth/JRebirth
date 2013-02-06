@@ -229,8 +229,10 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * 
      * @param node the graphical node, must be not null
      * @param annotation the OnXxxx annotation
+     * 
+     * @throws CoreException if an error occurred while linking the event handler
      */
-    private final void addHandler(final Node node, final Annotation annotation) throws CoreException {
+    private void addHandler(final Node node, final Annotation annotation) throws CoreException {
 
         // Build the auto event handler for this annotation
         final AnnotationEventHandler aeh = new AnnotationEventHandler(this.callbackObject, annotation);

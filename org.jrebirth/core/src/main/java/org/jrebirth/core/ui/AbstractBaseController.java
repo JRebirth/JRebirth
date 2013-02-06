@@ -163,7 +163,11 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
     /**
      * Return an {@link EventHandler}.
      * 
+     * @param eventType the event type of the handler we want to return
+     * 
      * @return the right event handler
+     * 
+     * @param <E> the Event type to manage
      * 
      * @throws CoreException an exception if the current class doesn't implement the right EventAdapter interface.
      */
@@ -199,13 +203,15 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      * 
      * @return the required event handler
      * 
+     * @param <E> the Event type to manage
+     * 
      * @throws CoreException if an error occurred while creating the event handler
      */
     private <E extends Event> EventHandler<E> wrapbuildHandler(final EventAdapter eventAdapter, final Class<? extends EventHandler<E>> handlerClass) throws CoreException {
         try {
             return handlerClass.getDeclaredConstructor(eventAdapter.getClass()).newInstance(this);
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-            throw new CoreException("Impossible to build event handler " + handlerClass.getName() + " for the class " + this.getClass().getName());
+            throw new CoreException("Impossible to build event handler " + handlerClass.getName() + " for the class " + this.getClass().getName(), e);
         }
     }
 
@@ -216,6 +222,8 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      * @param handlerClass the event handler class to used
      * 
      * @return the required event handler
+     * 
+     * @param <E> the Event type to manage
      * 
      * @throws CoreException if the local api contract is not respected
      */
@@ -245,12 +253,6 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
         return testEventType == anyEventType || testEventType.getSuperType() == anyEventType;
     }
 
-    // /**
-    // * TODO To complete.
-    // *
-    // * @param eventType
-    // * @return
-    // */
     // private EventType<? extends Event> extractFirstAnyEventType(final EventType<? extends Event> eventType) {
     // EventType<?> et = eventType;
     // while (et.getName().contains("_")) {
