@@ -29,14 +29,14 @@ import java.lang.annotation.Target;
  * 
  * @author Sébastien Bordes
  */
-@Target({ ElementType.TYPE })
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
 public @interface Configuration {
 
     /**
-     * Define the wildcard used to find configuration files. The format is the same as Regex Pattern (ie: .*jrebirth => for XXXjrebirth.EXTENSION files)
+     * Define the wildcard used to find configuration files. The format is the same as Regex Pattern (ie: .*jrebirth => for abcjrebirth.EXTENSION files)
      * 
      * The default value is empty, no search will be done
      */
@@ -44,7 +44,7 @@ public @interface Configuration {
 
     /**
      * Define the file extension to find configuration files.<br/>
-     * The extension must not included the first dot (ie: properties => for XXXjrebirth.properties files)
+     * The extension must not included the first dot (ie: properties => for abcjrebirth.properties files)
      * 
      * The default value is empty, no search will be done
      */

@@ -44,8 +44,6 @@ import org.jrebirth.core.ui.handler.ZoomHandler;
  * The class <strong>EventAdapter</strong>.
  * 
  * @author Sébastien Bordes
- * 
- * @param <C> The controller class which manage this event adapter
  */
 public interface EventAdapter {
 
@@ -54,30 +52,59 @@ public interface EventAdapter {
     // */
     // void setController(final C controller);
 
+    /**
+     * 
+     * The class <strong>Linker</strong> is used to link Event with adapter and handler classes.
+     * 
+     * @author Sébastien Bordes
+     */
     enum Linker {
 
-        // Action(ActionEvent.ANY, ActionAdapter.class, ActionHandler.class),
+        // FIXME Action(ActionEvent.ANY, ActionAdapter.class, ActionHandler.class),
+
+        /** The Mouse Event linker. */
         Mouse(MouseEvent.ANY, MouseAdapter.class, MouseHandler.class),
+
+        /** The Key Event linker. */
         Key(KeyEvent.ANY, KeyAdapter.class, KeyHandler.class),
+
+        /** The Drag Event linker. */
         Drag(DragEvent.ANY, DragAdapter.class, DragHandler.class),
+
+        /** The Rotate Event linker. */
         Rotate(RotateEvent.ANY, RotateAdapter.class, RotateHandler.class),
+
+        /** The Scroll Event linker. */
         Scroll(ScrollEvent.ANY, ScrollAdapter.class, ScrollHandler.class),
+
+        /** The Swipe Event linker. */
         Swipe(SwipeEvent.ANY, SwipeAdapter.class, SwipeHandler.class),
+
+        /** The Touch Event linker. */
         Touch(TouchEvent.ANY, TouchAdapter.class, TouchHandler.class),
+
+        /** The Window Event linker. */
         Window(WindowEvent.ANY, WindowAdapter.class, WindowHandler.class),
+
+        /** The Zomm Event linker. */
         Zoom(ZoomEvent.ANY, ZoomAdapter.class, ZoomHandler.class);
 
         /** The JavaFX internal api name. */
         private final EventType<?> eventType;
 
+        /** The mapped event adapter class. */
         private final Class<? extends EventAdapter> adapterClass;
 
+        /** The mapped event handler class. */
         private final Class<? extends EventHandler<?>> handlerClass;
 
         /**
-         * Default constructor used to link the apiName
+         * Default constructor used to link the apiName.
          * 
+         * @param <E> the element type
          * @param eventType the javafx event type
+         * @param adapterClass the adapter class
+         * @param handlerClass the handler class
          */
         private <E extends Event> Linker(final EventType<E> eventType, final Class<? extends EventAdapter> adapterClass, final Class<? extends EventHandler<E>> handlerClass) {
             this.eventType = eventType;
@@ -86,21 +113,27 @@ public interface EventAdapter {
         }
 
         /**
-         * {@inheritDoc}
+         * Return Event type.
+         * 
+         * @return the event type<?>
          */
         public EventType<?> eventType() {
             return this.eventType;
         }
 
         /**
-         * {@inheritDoc}
+         * Return Adapter class.
+         * 
+         * @return the class<? extends event adapter>
          */
         public Class<? extends EventAdapter> adapterClass() {
             return this.adapterClass;
         }
 
         /**
-         * {@inheritDoc}
+         * Return Handler class.
+         * 
+         * @return the class<? extends event handler<?>>
          */
         public Class<? extends EventHandler<?>> handlerClass() {
             return this.handlerClass;

@@ -54,13 +54,6 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
     private String configurationFileWildcard;
 
     /**
-     * Default Constructor.
-     */
-    public ParameterBuilder() {
-        super();
-    }
-
-    /**
      * Search configuration files according to the parameters provided.
      * 
      * @param wildcard the regex wildcard (must not be null)
@@ -81,7 +74,11 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
      */
     private void readPropertiesFiles() {
 
-        if (!this.configurationFileWildcard.isEmpty() && !this.configurationFileExtension.isEmpty()) {
+        if (this.configurationFileWildcard.isEmpty() || this.configurationFileExtension.isEmpty()) {
+            // Skip configuration loading
+            LOGGER.info("Configuration Loading is skipped");
+
+        } else {
             // Assemble the regex pattern
             final Pattern filePattern = Pattern.compile(this.configurationFileWildcard + "\\." + this.configurationFileExtension);
 
@@ -90,20 +87,20 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
             LOGGER.info("{} configuration file{} found.", list.size(), list.size() > 1 ? "s" : "");
 
-            for (final String cf : list) {
-                readPropertiesFile(new File(cf));
+            for (final String confFilename : list) {
+                readPropertiesFile(confFilename);
             }
-        } else {
-            LOGGER.info("Configuration Loading is skipped");
         }
     }
 
     /**
      * Read a customized configuration file to load parameters values.
      * 
-     * @param custConfFile the file to load
+     * @param custConfFileName the file to load
      */
-    private void readPropertiesFile(final File custConfFile) {
+    private void readPropertiesFile(final String custConfFileName) {
+
+        final File custConfFile = new File(custConfFileName);
 
         final Properties p = new Properties();
 
@@ -114,13 +111,13 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
             // Read the properties file
             p.load(is);
 
-            for (final Object key : p.keySet()) {
-                if (this.parametersMap.containsKey(key)) {
-                    LOGGER.trace("Update key {} with value= {}", key, p.get(key));
+            for (final Map.Entry<Object, Object> entry : p.entrySet()) {
+                if (this.parametersMap.containsKey(entry.getKey())) {
+                    LOGGER.trace("Update key {} with value= {}", entry.getKey(), entry.getValue());
                 } else {
-                    LOGGER.trace("Store key {} with value= {}", key, p.get(key));
+                    LOGGER.trace("Store key {} with value= {}", entry.getKey(), entry.getValue());
                 }
-                this.parametersMap.put(key.toString(), p.get(key));
+                this.parametersMap.put(entry.getKey().toString(), entry.getValue());
 
             }
 

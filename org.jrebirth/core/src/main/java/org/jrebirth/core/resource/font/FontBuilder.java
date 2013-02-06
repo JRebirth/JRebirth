@@ -22,6 +22,7 @@ import java.util.List;
 import javafx.scene.text.Font;
 
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
+import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,9 +35,6 @@ import org.slf4j.LoggerFactory;
  */
 public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontParams, Font> {
 
-    /** The root folder that store all application fonts. */
-    public static String fontsFolder = "font";
-
     /**
      * The <code>RESOURCE_SEPARATOR</code>.
      */
@@ -44,11 +42,6 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(FontBuilder.class);
-
-    /**
-     * The <code>TRUE_TYPE_FONT_EXT</code> field is used to define the file extension.
-     */
-    private static final String TRUE_TYPE_FONT_EXT = ".ttf";
 
     /**
      * {@inheritDoc}
@@ -129,14 +122,14 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
         if (fonts.isEmpty()) {
 
             // This variable will hold the 2 alternative font names
-            String fontName = fontsFolder + R_SEP + transformFontName(realFont.name().name()) + TRUE_TYPE_FONT_EXT;
+            String fontName = JRebirthParameters.DEFAULT_FONT_FOLDER.get() + R_SEP + transformFontName(realFont.name().name()) + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
 
             LOGGER.trace("Try to load Transformed Font  {}", fontName);
             font = Font.loadFont(Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), realFont.size());
 
             // The font name contains '_' in its file name to replace ' '
             if (font == null) {
-                fontName = fontsFolder + R_SEP + realFont.name().name() + TRUE_TYPE_FONT_EXT;
+                fontName = JRebirthParameters.DEFAULT_FONT_FOLDER.get() + R_SEP + realFont.name().name() + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
                 LOGGER.trace("Try to load Raw Font  {}", fontName);
                 font = Font.loadFont(
                         Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), realFont.size());

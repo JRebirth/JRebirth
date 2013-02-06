@@ -18,7 +18,6 @@
 package org.jrebirth.core.util;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,15 +52,6 @@ public final class ClasspathUtility {
     /** String to separate all classpath entries. */
     private static final String CLASSPATH_SEPARATOR = System.getProperty("path.separator");
 
-    /** Filter for properties file. */
-    private static final FilenameFilter configFileFilter = new FilenameFilter() {
-
-        @Override
-        public boolean accept(final File dir, final String name) {
-            return name != null && name.endsWith(".properties");
-        }
-    };
-
     /**
      * Private Constructor.
      */
@@ -70,7 +60,7 @@ public final class ClasspathUtility {
     }
 
     /**
-     * for all elements of java.class.path get a Collection of resources Pattern pattern = Pattern.compile(".*"); gets all resources
+     * Retrieve all resources that match the search pattern from the java.class.path.
      * 
      * @param searchPattern the pattern used to filter all matching files
      * 
@@ -127,7 +117,7 @@ public final class ClasspathUtility {
         final List<String> resources = new ArrayList<>();
 
         // Filter only properties files
-        final File[] fileList = directory.listFiles(configFileFilter);
+        final File[] fileList = directory.listFiles();
 
         // Iterate over each relevant file
         for (final File file : fileList) {

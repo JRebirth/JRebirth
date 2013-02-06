@@ -52,7 +52,8 @@ public class AnnotationEventHandler extends AbstractNamedEventHandler<Event> {
     /**
      * Default Constructor.
      * 
-     * @param swipeAdapter the adapter to use
+     * @param callbackObject the object that will handle the event by reflection
+     * @param annotation the annotation that configure the event handling
      * 
      * @throws CoreException if handler is not correctly initialized
      */
@@ -83,7 +84,7 @@ public class AnnotationEventHandler extends AbstractNamedEventHandler<Event> {
             try {
                 this.callbackObject.getClass().getDeclaredMethod(methodName, eventClass);
             } catch (NoSuchMethodException | SecurityException e) {
-                throw new CoreException(this.callbackObject.getClass().getName() + " must have a method => void " + methodName + " (" + eventClass.getName() + " event){}");
+                throw new CoreException(this.callbackObject.getClass().getName() + " must have a method => void " + methodName + " (" + eventClass.getName() + " event){}", e);
             }
         }
 
@@ -105,7 +106,7 @@ public class AnnotationEventHandler extends AbstractNamedEventHandler<Event> {
     /**
      * Build the handling method name used to manage this event.
      * 
-     * @param event tje JavaFX event
+     * @param annotationType the custom annotation event type used to define the kind of event to manage
      * 
      * @return the method name to trigger into the callback object
      */
@@ -159,7 +160,7 @@ public class AnnotationEventHandler extends AbstractNamedEventHandler<Event> {
     /**
      * Convert a JavaFX event type into an annotation event type.
      * 
-     * @param event the JavaFX event type
+     * @param eventType the JavaFX event type
      * 
      * @return the Annotation event type or null if not found
      */
