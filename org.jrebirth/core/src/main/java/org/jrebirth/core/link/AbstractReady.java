@@ -22,8 +22,8 @@ import java.util.List;
 
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.facade.FacadeReady;
+import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.facade.LocalFacade;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.service.Service;

@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.exception.handler;
 
-
 /**
  * The class <strong>JitUncaughtExceptionHandler</strong>.
  * 

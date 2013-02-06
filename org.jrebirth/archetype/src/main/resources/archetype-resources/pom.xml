@@ -150,24 +150,7 @@
 					<verbose>true</verbose>
 				</configuration>
 			</plugin>
-			
-		<!-- Project Quality -->
-			<plugin>
-				<groupId>org.codehaus.sonar</groupId>
-				<artifactId>sonar-maven3-plugin</artifactId>
-				<version>3.3.2</version>
-			</plugin>
 		</plugins>
-
-		<extensions>
-			<extension>
-			<!-- To allow ftp deployment -->
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ftp</artifactId>
-				<version>2.2</version>
-			</extension>
-		</extensions>
-
 	</build>
 
 	<dependencies>

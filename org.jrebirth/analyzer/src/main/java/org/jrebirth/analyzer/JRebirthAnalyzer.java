@@ -87,7 +87,8 @@ public final class JRebirthAnalyzer extends AbstractApplication<StackPane> {
      */
     @Override
     protected void customizeStage(final Stage stage) {
-        // Customize the current stage
+        // Center the stage
+        stage.centerOnScreen();
     }
 
     /**
