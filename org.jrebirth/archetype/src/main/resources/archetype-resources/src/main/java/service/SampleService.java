@@ -3,39 +3,50 @@
 #set( $symbol_escape = '\' )
 package ${package}.service;
 
-import ${groupId}.core.command.AbstractUICommand;
-import ${groupId}.core.exception.CoreException;
-import ${groupId}.core.link.Wave;
+import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.service.ServiceBase;
+import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveTypeBase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleService</strong>.
  * 
  * @author
  */
-public final class SampleService extends AbstractUICommand {
+public final class SampleService extends ServiceBase {
+
+    /** Perform something. */
+    public static final WaveTypeBase DO_SOMETHING = WaveTypeBase.build("SOMETHING");
+
+    /** Wave type to return when something was done. */
+    public static final WaveTypeBase RE_SOMETHING_DONE = WaveTypeBase.build("SOMETHING_DONE");
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SampleService.class);
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void ready() throws CoreException {
-        // Nothing to do yet
+        super.ready();
+
+        // Define the service method
+        registerCallback(DO_SOMETHING, RE_SOMETHING_DONE);
     }
 
     /**
-     * {@inheritDoc}
+     * Do something.
+     * 
+     * @param wave the source wave
      */
-    @Override
-    protected void execute(Wave wave) {
-        // Nothing to do yet
-    }
+    public void something(final Wave wave) {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void processAction(Wave wave) {
-        // Nothing to do yet
+        LOGGER.trace("Do Something.");
+
+        // Put code to do it !
     }
 
 }

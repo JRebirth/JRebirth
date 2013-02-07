@@ -6,8 +6,10 @@ package ${package}.ui;
 import javafx.scene.control.LabelBuilder;
 import javafx.scene.layout.BorderPane;
 
-import ${groupId}.core.exception.CoreException;
-import ${groupId}.core.ui.AbstractView;
+import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.ui.AbstractView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleView</strong>.
@@ -15,6 +17,9 @@ import ${groupId}.core.ui.AbstractView;
  * @author
  */
 public class SampleView extends AbstractView<SampleModel, BorderPane, SampleController> {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SampleView.class);
 
     /**
      * Default Constructor.
@@ -31,26 +36,36 @@ public class SampleView extends AbstractView<SampleModel, BorderPane, SampleCont
      * {@inheritDoc}
      */
     @Override
-    public void show() {
-        getRootNode().setCenter(LabelBuilder.create().text("JRebirth Sample").build());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void hide() {
-        // Nothing to do yet
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void customInitializeComponents() {
-        // Nothing to do yet
+        getRootNode().setCenter(
+                LabelBuilder.create()
+                        .text("JRebirth Sample")
+                        .build()
+                );
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doStart() {
+        // Custom code to process when the view is displayed the first time
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doReload() {
+        // Custom code to process when the view is displayed the 1+n time
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doHide() {
+        // Custom code to process when the view is hidden
     }
 
 }

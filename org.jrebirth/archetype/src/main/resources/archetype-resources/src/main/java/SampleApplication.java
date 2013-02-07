@@ -7,23 +7,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.jrebirth.core.resource.font.FontEnum;
-import org.jrebirth.core.ui.Model;
-import org.jrebirth.core.wave.Wave;
-import org.jrebirth.presentation.javafx.JfxFonts;
-import org.jrebirth.presentation.javafx.Presentation;
-import org.jrebirth.presentation.ui.stack.StackModel;
-
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import ${groupId}.core.application.AbstractApplication;
-import ${groupId}.core.ui.Model;
+import org.jrebirth.core.application.AbstractApplication;
+import org.jrebirth.core.resource.font.FontItem;
+import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.wave.Wave;
 import ${package}.ui.SampleModel;
 
 /**
@@ -55,7 +47,7 @@ public final class SampleApplication extends AbstractApplication<StackPane> {
      */
     @Override
     protected String getApplicationTitle() {
-        return "JavaFX 2.0 - Sample Application";
+        return "Sample Application - Powered by JRebirth";
     }
 
     /**
@@ -64,8 +56,6 @@ public final class SampleApplication extends AbstractApplication<StackPane> {
     @Override
     protected void customizeStage(final Stage stage) {
         stage.setFullScreen(false);
-        stage.setWidth(800);
-        stage.setHeight(600);
     }
 
     /**
@@ -80,9 +70,9 @@ public final class SampleApplication extends AbstractApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public List<FontEnum> getFontToPreload() {
-        return Arrays.asList(new FontEnum[] {
-                JfxFonts.SPLASH
+    public List<FontItem> getFontToPreload() {
+        return Arrays.asList(new FontItem[] {
+                SampleFonts.SPLASH
         });
     }
 
