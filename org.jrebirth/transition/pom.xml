@@ -3,18 +3,19 @@
 	<parent>
 		<artifactId>jrebirth</artifactId>
 		<groupId>org</groupId>
-		<version>0.7.2-SNAPSHOT</version>
+		<version>0.7.2</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<groupId>org.jrebirth</groupId>
 	<artifactId>transition</artifactId>
 	<name>JRebirth Transition</name>
 	<description>A set of beautiful &amp; powerful transition</description>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.2-SNAPSHOT</version>
+			<version>0.7.2</version>
 		</dependency>
 
 		<dependency>

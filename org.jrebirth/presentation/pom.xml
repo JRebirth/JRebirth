@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org</groupId>
 		<artifactId>jrebirth</artifactId>
-		<version>0.7.2-SNAPSHOT</version>
+		<version>0.7.2</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<groupId>org.jrebirth</groupId>
@@ -41,8 +41,7 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.2-SNAPSHOT</version>
+			<version>0.7.2</version>
 		</dependency>
-		<!-- <dependency> <groupId>com.oracle.javafx</groupId> <artifactId>jfxrt</artifactId> <version>2.1</version> <scope>provided</scope> </dependency> -->
 	</dependencies>
 </project>
