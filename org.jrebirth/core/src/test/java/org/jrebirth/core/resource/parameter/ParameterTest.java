@@ -2,6 +2,7 @@ package org.jrebirth.core.resource.parameter;
 
 import static org.junit.Assert.assertEquals;
 
+import org.jrebirth.core.resource.ResourceBuilders;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,7 +18,7 @@ public class ParameterTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-
+        ResourceBuilders.PARAMETER_BUILDER.searchConfigurationFiles(".*jrebirth", "properties");
     }
 
     @Before
@@ -30,7 +31,7 @@ public class ParameterTest {
 
         checkStringParameter(TestParameters.TEST_STRING_PARAM_1, "fonts");
         checkStringParameter(TestParameters.TEST_STRING_PARAM_2, "fontsFolder");
-        checkStringParameter(TestParameters.TEST_STRING_PARAM_3, "fonts");
+        checkStringParameter(TestParameters.TEST_STRING_PARAM_3, "font");
     }
 
     private void checkStringParameter(final ParameterItemBase<String> parameterItem, final String checkedName) {

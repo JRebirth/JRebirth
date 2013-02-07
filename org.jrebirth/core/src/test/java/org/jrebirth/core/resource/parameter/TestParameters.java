@@ -31,7 +31,7 @@ public interface TestParameters {
     /** The web color. */
     ParameterItemBase<String> TEST_STRING_PARAM_1 = ParameterItemBase.build(new ObjectParameter<String>("fonts"));
     ParameterItemBase<String> TEST_STRING_PARAM_2 = ParameterItemBase.build(new ObjectParameter<String>("fontsFolder"));
-    ParameterItemBase<String> TEST_STRING_PARAM_3 = ParameterItemBase.build("fontsFolder", "fonts");
+    ParameterItemBase<String> TEST_STRING_PARAM_3 = ParameterItemBase.build("fontsFolder", "font");
 
     /**************************************************************************************/
     /** ______________________________Integer Parameters.________________________________ */
