@@ -33,13 +33,13 @@
 	</modules>
 
 	<issueManagement>
-		<system>YouTrack</system>
+		<system>GitHub Issue Tracker</system>
 		<url>http://bugs.jrebirth.org</url>
 	</issueManagement>
 
 	<ciManagement>
 		<system>Jenkins</system>
-		<url>http://ci.jrebirth.org/job/JRebirth-Wip/</url>
+		<url>http://ci.jrebirth.org/job/JRebirth-master/</url>
 	</ciManagement>
 
 	<scm>
