@@ -4,13 +4,9 @@ import javafx.scene.Node;
 import javafx.scene.input.RotateEvent;
 import javafx.scene.input.SwipeEvent;
 
-import org.jrebirth.core.application.TestApplication;
-import org.jrebirth.core.concurrent.JRebirthThread;
-import org.jrebirth.core.facade.GlobalFacade;
+import org.jrebirth.core.test.AbstractTest;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -18,9 +14,7 @@ import org.junit.Test;
  * 
  * @author Sébastien Bordes
  */
-public class AnnotationTest {
-
-    private static GlobalFacade globalFacade;
+public class AnnotationTest extends AbstractTest {
 
     private AnnotationModel model;
 
@@ -29,28 +23,13 @@ public class AnnotationTest {
      * 
      * @throws java.lang.Exception
      */
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-
-        // new TestApplication().start(new Stage());
-        JRebirthThread.getThread().launch(new TestApplication());
-        globalFacade = JRebirthThread.getThread().getFacade();
-    }
-
-    /**
-     * TODO To complete.
-     * 
-     * @throws java.lang.Exception
-     */
     @Before
     public void setUp() throws Exception {
-
+        this.model = AbstractTest.globalFacade.getUiFacade().retrieve(AnnotationModel.class);
     }
 
     @Test
     public void triggerSwipe() {
-
-        this.model = AnnotationTest.globalFacade.getUiFacade().retrieve(AnnotationModel.class);
 
         fireAllSwipeEvents(this.model.getView().getSwipeVerticalButton());
         fireAllSwipeEvents(this.model.getView().getSwipeHorizontalButton());
@@ -59,8 +38,6 @@ public class AnnotationTest {
 
     @Test
     public void triggerRotate() {
-
-        this.model = AnnotationTest.globalFacade.getUiFacade().retrieve(AnnotationModel.class);
 
         fireAllRotateEvents(this.model.getView().getRotateAllButton());
         fireAllRotateEvents(this.model.getView().getRotateButton());
@@ -107,16 +84,6 @@ public class AnnotationTest {
      */
     @After
     public void tearDown() throws Exception {
-    }
-
-    /**
-     * TODO To complete.
-     * 
-     * @throws java.lang.Exception
-     */
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-        JRebirthThread.getThread().close();
     }
 
 }
