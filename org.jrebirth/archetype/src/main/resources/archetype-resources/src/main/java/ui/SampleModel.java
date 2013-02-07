@@ -3,8 +3,10 @@
 #set( $symbol_escape = '\' )
 package ${package}.ui;
 
-import ${groupId}.core.link.Wave;
-import ${groupId}.core.ui.AbstractModel;
+import org.jrebirth.core.ui.AbstractModel;
+import org.jrebirth.core.wave.Wave;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleModel</strong>.
@@ -13,13 +15,15 @@ import ${groupId}.core.ui.AbstractModel;
  */
 public class SampleModel extends AbstractModel<SampleModel, SampleView> {
 
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SampleModel.class);
+
     /**
      * {@inheritDoc}
      */
     @Override
     protected void customInitialize() {
-        // Nothing to do yet
-
+        // Put the code to initialize your model here
     }
 
     /**
@@ -27,17 +31,31 @@ public class SampleModel extends AbstractModel<SampleModel, SampleView> {
      */
     @Override
     protected void customInitializeInnerModels() {
-        // Nothing to do yet
-
+        // Put the code to initialize inner models here (if any)
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void processAction(Wave wave) {
-        // Nothing to do yet
+    protected void processAction(final Wave wave) {
+        // Process a wave action, you must listen the wave type before
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customShowView() {
+        // Custom code to process when the view is displayed
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customHideView() {
+        // Custom code to process when the view is hidden
     }
 
 }

@@ -3,8 +3,10 @@
 #set( $symbol_escape = '\' )
 package ${package}.ui;
 
-import ${groupId}.core.exception.CoreException;
-import ${groupId}.core.ui.AbstractController;
+import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.ui.AbstractController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleController</strong>.
@@ -12,6 +14,9 @@ import ${groupId}.core.ui.AbstractController;
  * @author
  */
 public class SampleController extends AbstractController<SampleModel, SampleView> {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SampleController.class);
 
     /**
      * Default Constructor.
@@ -38,7 +43,6 @@ public class SampleController extends AbstractController<SampleModel, SampleView
     @Override
     protected void customInitializeEventHandlers() throws CoreException {
         // Listen events
-
     }
 
 }
