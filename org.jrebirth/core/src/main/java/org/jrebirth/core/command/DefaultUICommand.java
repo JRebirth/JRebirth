@@ -49,12 +49,4 @@ public class DefaultUICommand extends AbstractSingleCommand<WaveBean> {
         // Nothing to do yet by the default UI command, must be overridden
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void processAction(final Wave wave) {
-        // Nothing to do yet by the default UI command, must be overridden
-    }
-
 }
