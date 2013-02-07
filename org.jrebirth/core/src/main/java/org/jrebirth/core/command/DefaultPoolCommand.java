@@ -49,12 +49,4 @@ public class DefaultPoolCommand extends AbstractSingleCommand<WaveBean> {
         // Nothing to do yet by the default Pool command, must be overridden
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void processAction(final Wave wave) {
-        // Nothing to do yet by the default Pool command, must be overridden
-    }
-
 }

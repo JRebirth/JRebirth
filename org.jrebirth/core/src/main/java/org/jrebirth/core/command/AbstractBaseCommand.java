@@ -111,7 +111,9 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      * {@inheritDoc}
      */
     @Override
-    protected abstract void processAction(final Wave wave);
+    protected void processAction(final Wave wave) {
+        // Command must not be run a long time
+    }
 
     /**
      * {@inheritDoc}

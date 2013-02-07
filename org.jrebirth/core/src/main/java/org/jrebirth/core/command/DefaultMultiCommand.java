@@ -95,16 +95,6 @@ public class DefaultMultiCommand extends AbstractMultiCommand<WaveBean> {
     @Override
     public void waveProcessed(final Wave wave) {
         // Nothing to do yet
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void processAction(final Wave wave) {
-        // Nothing to do yet
-
     }
 
     /**
