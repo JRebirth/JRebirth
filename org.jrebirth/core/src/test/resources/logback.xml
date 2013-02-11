@@ -1,7 +1,7 @@
 <configuration>
 
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>JRebirthAnalyzer.log</file>
+		<file>JRebirthTest.log</file>
 		<encoder>
 			<pattern>%date %level [%thread{6}] %logger{10} [%file:%line] %msg%n</pattern>
 		</encoder>
