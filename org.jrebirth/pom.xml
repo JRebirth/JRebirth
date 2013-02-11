@@ -214,7 +214,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.0</version>
+				<version>3.2</version>
 				
 				<executions>
 					<execution>
@@ -227,7 +227,7 @@
 				
 				<configuration>
 					<stagingDirectory>${project.build.directory}/staging-site</stagingDirectory>
-					<stagingSiteURL>${project.distributionManagement.site.url}/${project.groupId}.${project.artifactId}-${project.version}</stagingSiteURL>
+					<stagingSiteURL>${project.distributionManagement.site.url}</stagingSiteURL>
 				</configuration>
 
 				<dependencies>
@@ -344,7 +344,7 @@
 		<site>
 			<id>JRebirth_Sites</id>
 			<name>JRebirth Sites</name>
-			<url>ftp://jrebirth.org/sites</url>
+			<url>ftp://jrebirth.org/sites/org.jrebirth-${project.version}</url>
 		</site>
 
 	</distributionManagement>
