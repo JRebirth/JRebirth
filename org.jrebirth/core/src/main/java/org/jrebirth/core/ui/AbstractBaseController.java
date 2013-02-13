@@ -155,7 +155,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
         for (final EventAdapter.Linker linker : EventAdapter.Linker.values()) {
             if (linker.adapterClass().isAssignableFrom(eventAdapter.getClass())) {
                 // Create and store the event handler
-                this.eventHandlerMap.put(linker.eventType(), wrapbuildHandler(eventAdapter, (Class<? extends EventHandler<Event>>) linker.handlerClass()));
+                this.eventHandlerMap.put(linker.eventType(), wrapbuildHandler(eventAdapter, linker.adapterClass(), (Class<? extends EventHandler<Event>>) linker.handlerClass()));
             }
         }
     }
@@ -178,6 +178,11 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
 
         EventHandler<E> handler = (EventHandler<E>) this.eventHandlerMap.get(eventType);
 
+        // Check supertype (ANY)
+        if (handler == null) {
+            handler = (EventHandler<E>) this.eventHandlerMap.get(eventType.getSuperType());
+        }
+
         // Check if the handler has been created or not
         if (handler == null) {
 
@@ -199,6 +204,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      * Build an event handler by reflection to wrap the event adapter given.
      * 
      * @param eventAdapter the instance of an eventAdapter
+     * @param adapterClass the adapter class used by the handler constructor
      * @param handlerClass the handler class to build
      * 
      * @return the required event handler
@@ -207,10 +213,12 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      * 
      * @throws CoreException if an error occurred while creating the event handler
      */
-    private <E extends Event> EventHandler<E> wrapbuildHandler(final EventAdapter eventAdapter, final Class<? extends EventHandler<E>> handlerClass) throws CoreException {
+    private <E extends Event> EventHandler<E> wrapbuildHandler(final EventAdapter eventAdapter, final Class<? extends EventAdapter> adapterClass, final Class<? extends EventHandler<E>> handlerClass)
+            throws CoreException {
         try {
-            return handlerClass.getDeclaredConstructor(eventAdapter.getClass()).newInstance(this);
+            return handlerClass.getDeclaredConstructor(adapterClass).newInstance(eventAdapter);
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+            e.printStackTrace();
             throw new CoreException("Impossible to build event handler " + handlerClass.getName() + " for the class " + this.getClass().getName(), e);
         }
     }
@@ -228,13 +236,11 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      * @throws CoreException if the local api contract is not respected
      */
     private <E extends Event> EventHandler<E> buildEventHandler(final Class<? extends EventAdapter> adapterClass, final Class<? extends EventHandler<E>> handlerClass) throws CoreException {
-        // final Class<? extends EventAdapter<?>> adapterClass, final Class<? extends EventHandler<Event>> handlerClass
 
-        // final Class<?> adapterClass, final Class<?> handlerClass
         EventHandler<E> eventHandler = null;
         // Build the mouse handler instance
         if (adapterClass.isAssignableFrom(this.getClass())) {
-            eventHandler = wrapbuildHandler(this, handlerClass);
+            eventHandler = wrapbuildHandler(this, adapterClass, handlerClass);
         } else {
             throw new CoreException(this.getClass().getName() + " must implement " + adapterClass.getName() + " interface");
         }
@@ -242,7 +248,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
     }
 
     /**
-     * Check the tow eventype given and check the super level if necessary to always return the ANy event type.
+     * Check the event type given and check the super level if necessary to always return the ANy event type.
      * 
      * @param testEventType the sub event type or any instance
      * @param anyEventType the eventype.ANY instance
