@@ -174,8 +174,6 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
     @SuppressWarnings("unchecked")
     protected final <E extends Event> EventHandler<E> getHandler(final EventType<E> eventType) throws CoreException {
 
-        // final EventType<? extends Event> et = extractFirstAnyEventType(eventType);
-
         EventHandler<E> handler = (EventHandler<E>) this.eventHandlerMap.get(eventType);
 
         // Check supertype (ANY)
@@ -218,7 +216,6 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
         try {
             return handlerClass.getDeclaredConstructor(adapterClass).newInstance(eventAdapter);
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-            e.printStackTrace();
             throw new CoreException("Impossible to build event handler " + handlerClass.getName() + " for the class " + this.getClass().getName(), e);
         }
     }
@@ -258,14 +255,6 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
     private boolean isEventType(final EventType<? extends Event> testEventType, final EventType<? extends Event> anyEventType) {
         return testEventType == anyEventType || testEventType.getSuperType() == anyEventType;
     }
-
-    // private EventType<? extends Event> extractFirstAnyEventType(final EventType<? extends Event> eventType) {
-    // EventType<?> et = eventType;
-    // while (et.getName().contains("_")) {
-    // et = et.getSuperType();
-    // }
-    // return et;
-    // }
 
     /**
      * {@inheritDoc}

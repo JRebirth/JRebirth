@@ -97,7 +97,7 @@ public class AnnotationEventHandler extends AbstractNamedEventHandler<Event> {
     public void handle(final Event event) {
 
         final String methodName = buildHandlingMethodName(convertEventToEnum(event.getEventType()));
-        if (methodName != null) {
+        if (!methodName.isEmpty()) {
             callMethod(methodName, event);
         }
 
@@ -112,21 +112,23 @@ public class AnnotationEventHandler extends AbstractNamedEventHandler<Event> {
      */
     private String buildHandlingMethodName(final EnumEventType annotationType) {
 
-        String methodName = null;
+        final StringBuilder methodName = new StringBuilder();
         if (Arrays.asList(getAnnotationValue()).contains(annotationType)) {
 
-            methodName = this.annotation.annotationType().getSimpleName() + (annotationType == SwipeType.Any ? "" : annotationType.name());
-
-            // Lower case the first letter
-            methodName = methodName.substring(0, 1).toLowerCase() + methodName.substring(1);
+            // Lower case the first letter of the annotation name
+            methodName.append(this.annotation.annotationType().getSimpleName().substring(0, 1).toLowerCase());
+            // Don't change the case for all other letters
+            methodName.append(this.annotation.annotationType().getSimpleName().substring(1));
+            // Append if necessary the sub type if not equals to any
+            methodName.append(annotationType == SwipeType.Any ? "" : annotationType.name());
 
             // Add suffix if handling method is named
             final String uniqueName = getAnnotationName();
             if (uniqueName.length() > 0) {
-                methodName += uniqueName;
+                methodName.append(uniqueName);
             }
         }
-        return methodName;
+        return methodName.toString();
     }
 
     /**
