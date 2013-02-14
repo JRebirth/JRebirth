@@ -281,10 +281,18 @@ public final class JRebirthThread extends Thread {
         try {
             this.facade.stop();
             this.facade = null;
-            internalThread = null;
+            // Destroy the static reference
+            destroyInstance();
         } catch (final CoreException e) {
             LOGGER.error("An error occurred while shuting down the application ", e);
         }
+    }
+
+    /**
+     * Destroy the singleton that hold the thread.
+     */
+    private static void destroyInstance() {
+        internalThread = null;
     }
 
     /**
