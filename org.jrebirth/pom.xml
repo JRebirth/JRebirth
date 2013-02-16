@@ -152,6 +152,7 @@
 				</executions>
 			</plugin>
 
+			<!-- Javadoc for the jar package -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -169,7 +170,10 @@
 					<links>
 						<link>http://docs.oracle.com/javafx/2/api/</link>
 					</links>
-					<failOnError>true</failOnError>
+					<detectLinks>true</detectLinks>
+					<show>private</show>
+					<nohelp>true</nohelp>
+					<failOnError>false</failOnError>
 				</configuration>
 			</plugin>
 
@@ -215,7 +219,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.2</version>
-				
+
 				<executions>
 					<execution>
 						<id>attach-site</id>
@@ -224,7 +228,7 @@
 						</goals>
 					</execution>
 				</executions>
-				
+
 				<configuration>
 					<stagingDirectory>${project.build.directory}/staging-site</stagingDirectory>
 					<stagingSiteURL>${project.distributionManagement.site.url}</stagingSiteURL>
@@ -298,11 +302,14 @@
 					<links>
 						<link>http://docs.oracle.com/javafx/2/api/</link>
 					</links>
-					<failOnError>true</failOnError>
+					<detectLinks>true</detectLinks>
+					<show>public</show>
+					<nohelp>false</nohelp>
+					<failOnError>false</failOnError>
 				</configuration>
 			</plugin>
 
- 			<plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>2.6</version>
