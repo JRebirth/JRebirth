@@ -146,6 +146,8 @@ public final class JRebirthThread extends Thread {
     @Override
     public void run() {
 
+    	this.application.preloadFonts();
+    	
         // Attach the first view and run pre and post command
         try {
             bootUp();
