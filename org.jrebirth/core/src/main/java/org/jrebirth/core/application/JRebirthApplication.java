@@ -80,4 +80,9 @@ public interface JRebirthApplication<P extends Pane> {
      */
     List<Wave> getPostBootWaveList();
 
+    /**
+     * Preload fonts to allow them to be used by CSS.
+     */
+	void preloadFonts();
+
 }

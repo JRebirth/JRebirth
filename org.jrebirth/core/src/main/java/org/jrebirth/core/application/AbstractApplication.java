@@ -123,6 +123,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             // Let the stage visible for users
             primaryStage.show();
 
+            // Preload fonts to allow them to be used by CSS
+            //preloadFonts();
+            
             LOGGER.trace("{} has started successfully", this.getClass().getSimpleName());
 
         } catch (final CoreException ce) {
@@ -236,17 +239,16 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             });
         }
 
-        // Preload fonts to allow them to be used by CSS
-        preloadFonts();
-
         // The call customize method to allow extension by sub class
         customizeScene(this.scene);
+
     }
 
     /**
-     * Preload fonts to allow them to be used by CSS.
+     * {@inheritDoc}
      */
-    private void preloadFonts() {
+    @Override
+    public void preloadFonts() {
         final List<FontItem> fontList = getFontToPreload();
         if (fontList != null) {
             for (final FontItem font : fontList) {
