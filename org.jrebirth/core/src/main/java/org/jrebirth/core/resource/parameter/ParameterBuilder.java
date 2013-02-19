@@ -144,7 +144,9 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
                 // Retrieve the customized parameter
                 object = op.parseObject(this.parametersMap.get(op.name()).toString());
 
-            } else {
+            }
+
+            if (object == null) {
                 // No customized parameter has been loaded, gets the default programmatic one
                 object = op.object();
             }

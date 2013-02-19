@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>jrebirth</artifactId>
@@ -10,6 +11,22 @@
 	<artifactId>analyzer</artifactId>
 
 	<name>JRebirth Analyzer</name>
+
+	<properties>
+
+		<deployUrl>http://apps.jrebirth.org</deployUrl>
+		<deployPath>${project.artifactId}/${project.version}</deployPath>
+
+		<jnlpFilename>JRebirthAnalyzer.jnlp</jnlpFilename>
+		<appClass>org.jrebirth.analyzer.JRebirthAnalyzer</appClass>
+
+		<appletWidth>1024</appletWidth>
+		<appletHeight>768</appletHeight>
+
+		<updateCheck>timeout</updateCheck>
+		<updatePolicy>prompt-update</updatePolicy>
+
+	</properties>
 
 	<build>
 
@@ -31,7 +48,8 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>2.3.2</version>
 
-				<!-- <executions> <execution> <goals> <goal>sign</goal> </goals> </execution> </executions> -->
+				<!-- <executions> <execution> <goals> <goal>sign</goal> </goals> </execution> 
+					</executions> -->
 				<configuration>
 					<archive>
 
@@ -46,8 +64,9 @@
 							<JavaFX-Application-Class>org.jrebirth.analyzer.JRebirthAnalyzer</JavaFX-Application-Class>
 
 							<JavaFX-Class-Path>${classpath}</JavaFX-Class-Path>
-							<!-- implementation-vendor: I implementation-title: Jrebirth demo implementation-version: 1.0 JavaFX-Application-Class: org.jrebirth.demo.JRebirthDemo Created-By: 
-								Maven Packager Main-Class: com/javafx/main/Main -->
+							<!-- implementation-vendor: I implementation-title: Jrebirth demo 
+								implementation-version: 1.0 JavaFX-Application-Class: org.jrebirth.demo.JRebirthDemo 
+								Created-By: Maven Packager Main-Class: com/javafx/main/Main -->
 						</manifestEntries>
 						<manifest>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
@@ -56,15 +75,19 @@
 
 						</manifest>
 					</archive>
-					<!-- <keystore>jrebirth.jks</keystore> <alias>jrebirth</alias> <storepass>gojava</storepass> <signedjar>${project.build.directory}/signed/${project.build.finalName}.jar</signedjar> 
+					<!-- <keystore>jrebirth.jks</keystore> <alias>jrebirth</alias> <storepass>gojava</storepass> 
+						<signedjar>${project.build.directory}/signed/${project.build.finalName}.jar</signedjar> 
 						<verify>true</verify> -->
 
 				</configuration>
 			</plugin>
 
-			<!-- <plugin> <artifactId>maven-assembly-plugin</artifactId> <configuration> <archive> <manifest> <mainClass>org.jrebirth.presentation.Presentation</mainClass> 
-				</manifest> </archive> <descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> </descriptorRefs> </configuration> <executions> <execution> <id>make-my-jar-with-dependencies</id> 
-				<phase>package</phase> <goals> <goal>single</goal> </goals> </execution> </executions> </plugin> -->
+			<!-- <plugin> <artifactId>maven-assembly-plugin</artifactId> <configuration> 
+				<archive> <manifest> <mainClass>org.jrebirth.presentation.Presentation</mainClass> 
+				</manifest> </archive> <descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> 
+				</descriptorRefs> </configuration> <executions> <execution> <id>make-my-jar-with-dependencies</id> 
+				<phase>package</phase> <goals> <goal>single</goal> </goals> </execution> 
+				</executions> </plugin> -->
 
 
 			<plugin>
@@ -73,7 +96,8 @@
 				<artifactId>webstart-maven-plugin</artifactId>
 				<version>1.0-beta-3</version>
 
-				<!-- do not bind to install phase - - > <executions> <execution> <goals> <goal>package</goal> </goals> </execution> </executions> -->
+				<!-- do not bind to install phase - - > <executions> <execution> <goals> 
+					<goal>package</goal> </goals> </execution> </executions> -->
 
 				<executions>
 					<execution>
@@ -85,67 +109,51 @@
 				</executions>
 
 				<configuration>
-					<!--outputDirectory></outputDirectory --> <!-- not required?? -->
 
-					<!-- Set to true to exclude all transitive dependencies. Default is false. -->
+					<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
 					<excludeTransitive>false</excludeTransitive>
+					<libPath>lib</libPath>
 
-					<!-- The path where the libraries are stored within the jnlp structure. not required. by default the libraries are within the working directory -->
-					<!-- <libPath>lib</libPath> -->
+					<resourcesDirectory>${project.basedir}/src/main/jnlp/resources</resourcesDirectory>
+					<codebase>${deployUrl}/${deployPath}</codebase>
 
-					<!-- [optional] transitive dependencies filter - if omitted, all transitive dependencies are included -->
-					<!-- <dependencies> Note that only groupId and artifactId must be specified here. because of a limitation of the Include/ExcludesArtifactFilter <includes> <include>org.jrebirth:presentation</include> 
-						<include>org.jrebirth:core</include> </includes> excludes> <exclude></exclude> <excludes </dependencies> -->
-
-					<!--resourcesDirectory>${project.basedir}/src/main/jnlp/resources</resourcesDirectory --> <!-- default value -->
-
-					<!-- JNLP generation -->
 					<jnlp>
-						<!-- default values -->
-						<!--inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath -->
-						<inputTemplate>src/main/jnlp/template.vm</inputTemplate> <!-- relative to inputTemplateResourcePath -->
-						<outputFile>JRebirthAnalyzer.jnlp</outputFile> <!-- defaults to launch.jnlp -->
+						<!-- <inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath> 
+							<inputTemplate>src/main/jnlp/template.vm</inputTemplate> -->
+						<outputFile>${jnlpFilename}</outputFile>
 
-						<!-- used to automatically identify the jar containing the main class. -->
-						<!-- this is perhaps going to change -->
-						<mainClass>org.jrebirth.analyzer.JRebirthAnalyzer</mainClass>
+						<mainClass>${appClass}</mainClass>
+						<offlineAllowed>true</offlineAllowed>
 					</jnlp>
 
-
-					<!-- SIGNING -->
-					<!-- defining this will automatically sign the jar and its dependencies, if necessary -->
 					<sign>
 						<keystore>${basedir}/jrebirth.jks</keystore>
-						<keypass>gojava</keypass>  <!-- we need to override passwords easily from the command line. ${keypass} -->
-						<storepass>gojava</storepass> <!-- ${storepass} -->
-						<!--storetype>fillme</storetype -->
+						<keypass>${keypass}</keypass>
+						<storepass>${storepass}</storepass>
+						<!-- <storetype>fillme</storetype> -->
 						<alias>jrebirth</alias>
 
-						<!--validity>fillme</validity -->
+						<validity>360</validity>
+						<dnameCn>www.jrebirth.org</dnameCn>
+						<dnameOu>None</dnameOu>
+						<dnameO>JRebirth</dnameO>
+						<dnameL>Toulouse</dnameL>
+						<dnameSt>HG</dnameSt>
+						<dnameC>FR</dnameC>
 
-						<!-- only required for generating the keystore -->
-						<dnameCn>fillme</dnameCn>
-						<dnameOu>fillme</dnameOu>
-						<dnameO>fillme</dnameO>
-						<dnameL>fillme</dnameL>
-						<dnameSt>fillme</dnameSt>
-						<dnameC>fillme</dnameC>
+						<verify>true</verify>
 
-						<verify>true</verify> <!-- verify that the signing operation succeeded -->
-
-						<!-- KEYSTORE MANAGEMENT -->
-						<!-- <keystoreConfig> <delete>true</delete> delete the keystore <gen>true</gen> optional shortcut to generate the store. </keystoreConfig> -->
+						<keystoreConfig>
+							<delete>true</delete>
+							<gen>true</gen>
+						</keystoreConfig>
 					</sign>
 
-					<!-- BUILDING PROCESS -->
-
 					<pack200>true</pack200>
-					<gzip>true</gzip> <!-- default force when pack200 false, true when pack200 selected ?? -->
+					<gzip>true</gzip>
 
-					<!-- causes a version attribute to be output in each jar resource element, optional, default is false -->
-					<!-- <outputJarVersions>true</outputJarVersions> -->
-
-					<!--install>false</install --> <!-- not yet supported -->
+					<outputJarVersions>false</outputJarVersions>
+					<install>false</install>
 					<verbose>true</verbose>
 
 				</configuration>

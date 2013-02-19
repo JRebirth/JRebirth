@@ -105,7 +105,7 @@ public final class FXMLUtils {
     /**
      * Convert The url of fxml files to allow local and path loading.
      * 
-     * @param model the model class taht will be used for relative loading
+     * @param model the model class that will be used for relative loading
      * @param fxmlPath the path of the fxml file (relative or absolute)
      * 
      * @return the FXML file URL
