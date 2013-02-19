@@ -56,11 +56,16 @@ public class PrepareModelCommand extends DefaultPoolCommand {
             modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelClass, keyPart);
         }
 
+        if (modelInstance == null) {
+            LOGGER.error("Model " + modelClass.getSimpleName() + " couldn't be created");
+            throw new CoreRuntimeException("Illegal action : Model Instance is null: " + modelClass.getName());
+        }
+
         // Attach the model to allow reuse later in the process
         getWaveBean(wave).setModel(modelInstance);
 
         // Build the first root node into the thread pool and link it to the waveBean
-        getWaveBean(wave).setCreatedNode(modelInstance.getView().getRootNode());
+        getWaveBean(wave).setCreatedNode(modelInstance.getRootNode());
     }
 
     /**
