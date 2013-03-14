@@ -1,0 +1,82 @@
+<!DOCTYPE document [
+  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
+  <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+  %HTMLlat1;
+  <!-- These are the entity sets for special characters for the XHTML -->
+  <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+  %HTMLsymbol;
+  <!-- These are the entity sets for symbol characters for the XHTML -->
+  <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+  %HTMLspecial;
+]>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<body>
+
+<section name="Facades" title="How Facades work ?">	
+  <macro name="toc" section="0" fromDepth="1" toDepth="3" />
+
+  <subsection name="GlobalFacade" title="One Facade to rule the other">
+
+<p>The global facade is automatically created by JRebirth AbstractApplication class.</p>
+<p>It allows to manage the three main facades :</p>
+<ul>
+<li>CommandFacade</li>
+<li>ServiceFacade</li>
+<li>UiFacade</li>
+</ul>
+<p><span style="text-decoration: underline;">Short UML Diagram:</span></p>
+	<div class="uml"> 
+		<a title="Facade Class Diagram " rel="lightbox" href="uml/Facade.png">
+			<img class="redux" alt="" src="uml/Facade.png" />
+		</a>
+	</div>
+<p>The global facade is accessible by the 3 main facades by calling : getGlobalFacade() (each facade extends the AbstractGlobalReady class.</p>
+<pre class="prettyprint lang-java linenums"><code>
+public abstract class AbstractGlobalReady implements GlobalReady {
+
+    /** The main global facade. */
+    private final GlobalFacade globalFacade;
+
+    /**
+     * Default Constructor.
+     * 
+     * @param globalFacade the unique global facade of the application
+     */
+    public AbstractGlobalReady(final GlobalFacade globalFacade) {
+        super();
+        this.globalFacade = globalFacade;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final GlobalFacade getGlobalFacade() {
+        return this.globalFacade;
+    }
+}
+</code></pre>
+
+</subsection>
+
+<subsection name="InternalCom" title="Internal Communication">
+<p>The global facade create automatically the JRebirth notification engine. You should read the <a title="Notifier" href="notifier" target="_self">Notifier</a> page to have more informations.</p>
+</subsection>
+
+<subsection name="Linked" title="Linked with Application">
+<p>The global facade also allow to communicate with the Application class and therefore with its stage and scene.</p>
+</subsection>
+
+<subsection name="Tracking" title="Provide Tracking">
+<p>JRebirth allows to track all creation &amp; finalization of each component (Command, Service, Model, View) and also track the emission of waves and their path.</p>
+<p>They are logged in order to be processed by the JRebirthAnalyzer tool.</p>
+</subsection>
+
+	<div class="bottomLinks">
+		<div class="previousDocPage"><a href="Logging.html">Previous - Configure Logging system</a></div>
+		<div class="nextDocPage"><a href="Notifier.html">Next - Notifier &amp; Wave</a></div>
+		<div class="tocDocPage"><a href="index.html">TOC</a></div>
+	</div>
+</section>	
+</body>
+</document> 	

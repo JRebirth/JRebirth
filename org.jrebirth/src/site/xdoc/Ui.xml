@@ -1,0 +1,680 @@
+<!DOCTYPE document [
+  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
+  <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+  %HTMLlat1;
+  <!-- These are the entity sets for special characters for the XHTML -->
+  <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+  %HTMLsymbol;
+  <!-- These are the entity sets for symbol characters for the XHTML -->
+  <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+  %HTMLspecial;
+]>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<body>
+
+		<section name="UI Roles" title="UI Roles">
+			<macro name="toc" section="4" fromDepth="2" toDepth="3" />
+
+			<p>The User Interface layer is composed by three main components :</p>
+			<ul>
+				<li>Model</li>
+				<li>View</li>
+				<li>Controller</li>
+			</ul>
+			<p>Each of these must do predefined tasks to maintain a good Separation of Concerns (SoC).</p>
+			<p>
+				<span style="text-decoration: underline;">Short UML Diagram:</span>
+			</p>
+			<div style="text-align: center;">
+				<img src="uploads/images/uml/UI.png" alt="" />
+			</div>
+
+			<subsection name="Models">
+				<p>Models are directly synchronized with the UIFacade and can send &amp; receive Waves, they can also use any other components.</p>
+				<p>The goal of Models is to retrieve data from other layers, and to define Business Logic (business rules, authorizations ...).</p>
+				<p>The Model automatically build its attached view.</p>
+				<pre>
+					<div class="luminous">
+						<div class="code_container" style="overflow:visible !important;">
+							<table class="code_container">
+								<tr>
+									<td class="line_number_bar">
+										<pre class="line_numbers">
+											<span class="line_number">&nbsp;1&nbsp;
+											</span>
+											<span class="line_number">&nbsp;2&nbsp;
+											</span>
+											<span class="line_number">&nbsp;3&nbsp;
+											</span>
+											<span class="line_number">&nbsp;4&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;5&nbsp;
+											</span>
+											<span class="line_number">&nbsp;6&nbsp;
+											</span>
+											<span class="line_number">&nbsp;7&nbsp;
+											</span>
+											<span class="line_number">&nbsp;8&nbsp;
+											</span>
+											<span class="line_number">&nbsp;9&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;10&nbsp;
+											</span>
+											<span class="line_number">&nbsp;11&nbsp;
+											</span>
+											<span class="line_number">&nbsp;12&nbsp;
+											</span>
+											<span class="line_number">&nbsp;13&nbsp;
+											</span>
+											<span class="line_number">&nbsp;14&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;15&nbsp;
+											</span>
+											<span class="line_number">&nbsp;16&nbsp;
+											</span>
+											<span class="line_number">&nbsp;17&nbsp;
+											</span>
+											<span class="line_number">&nbsp;18&nbsp;
+											</span>
+											<span class="line_number">&nbsp;19&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;20&nbsp;
+											</span>
+											<span class="line_number">&nbsp;21&nbsp;
+											</span>
+											<span class="line_number">&nbsp;22&nbsp;
+											</span>
+											<span class="line_number">&nbsp;23&nbsp;
+											</span>
+											<span class="line_number">&nbsp;24&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;25&nbsp;
+											</span>
+											<span class="line_number">&nbsp;26&nbsp;
+											</span>
+											<span class="line_number">&nbsp;27&nbsp;
+											</span>
+											<span class="line_number">&nbsp;28&nbsp;
+											</span>
+											<span class="line_number">&nbsp;29&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;30&nbsp;
+											</span>
+											<span class="line_number">&nbsp;31&nbsp;
+											</span>
+											<span class="line_number">&nbsp;32&nbsp;
+											</span>
+										</pre>
+									</td>
+									<td class="code">
+										<pre class="code">
+											<span class="line">
+											</span>
+											<span class="line line_alt">
+												<span class='keyword'>public</span>
+												<span class='keyword'>class</span>
+												<span class='type'>SampleModel</span>
+												extends AbstractModel {
+											</span>
+											<span class="line">
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'>/**</span>
+											</span>
+											<span class="line">
+												<span class='doccomment'> * {@inheritDoc}</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> */</span>
+											</span>
+											<span class="line">
+												<span class='function'>@Override</span>
+											</span>
+											<span class="line line_alt">
+												<span class='keyword'>protected</span>
+												<span class='type'>void</span>
+												customInitialize() {
+											</span>
+											<span class="line">
+												<span class='comment'>// Nothing to do yet</span>
+											</span>
+											<span class="line line_alt">
+											</span>
+											<span class="line"> }
+											</span>
+											<span class="line line_alt">
+											</span>
+											<span class="line">
+												<span class='doccomment'>/**</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> * {@inheritDoc}</span>
+											</span>
+											<span class="line">
+												<span class='doccomment'> */</span>
+											</span>
+											<span class="line line_alt">
+												<span class='function'>@Override</span>
+											</span>
+											<span class="line">
+												<span class='keyword'>protected</span>
+												<span class='type'>void</span>
+												customInitializeInnerModels() {
+											</span>
+											<span class="line line_alt">
+												<span class='comment'>// Nothing to do yet</span>
+											</span>
+											<span class="line">
+											</span>
+											<span class="line line_alt"> }
+											</span>
+											<span class="line">
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'>/**</span>
+											</span>
+											<span class="line">
+												<span class='doccomment'> * {@inheritDoc}</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> */</span>
+											</span>
+											<span class="line">
+												<span class='function'>@Override</span>
+											</span>
+											<span class="line line_alt">
+												<span class='keyword'>protected</span>
+												<span class='type'>void</span>
+												processAction(Wave wave) {
+											</span>
+											<span class="line">
+												<span class='comment'>// Nothing to do yet</span>
+											</span>
+											<span class="line line_alt">
+											</span>
+											<span class="line"> }
+											</span>
+											<span class="line line_alt">
+											</span>
+											<span class="line">}
+											</span>
+											<span class="line line_alt">
+											</span>
+										</pre>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</pre>
+			</subsection>
+
+
+			<subsection name="InnerModels">
+			</subsection>
+
+			<subsection name="Views">
+				<pre>
+					<div class="luminous">
+						<div class="code_container" style="overflow:visible !important;">
+							<table class="code_container">
+								<tr>
+									<td class="line_number_bar">
+										<pre class="line_numbers">
+											<span class="line_number">&nbsp;1&nbsp;
+											</span>
+											<span class="line_number">&nbsp;2&nbsp;
+											</span>
+											<span class="line_number">&nbsp;3&nbsp;
+											</span>
+											<span class="line_number">&nbsp;4&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;5&nbsp;
+											</span>
+											<span class="line_number">&nbsp;6&nbsp;
+											</span>
+											<span class="line_number">&nbsp;7&nbsp;
+											</span>
+											<span class="line_number">&nbsp;8&nbsp;
+											</span>
+											<span class="line_number">&nbsp;9&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;10&nbsp;
+											</span>
+											<span class="line_number">&nbsp;11&nbsp;
+											</span>
+											<span class="line_number">&nbsp;12&nbsp;
+											</span>
+											<span class="line_number">&nbsp;13&nbsp;
+											</span>
+											<span class="line_number">&nbsp;14&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;15&nbsp;
+											</span>
+											<span class="line_number">&nbsp;16&nbsp;
+											</span>
+											<span class="line_number">&nbsp;17&nbsp;
+											</span>
+											<span class="line_number">&nbsp;18&nbsp;
+											</span>
+											<span class="line_number">&nbsp;19&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;20&nbsp;
+											</span>
+											<span class="line_number">&nbsp;21&nbsp;
+											</span>
+											<span class="line_number">&nbsp;22&nbsp;
+											</span>
+											<span class="line_number">&nbsp;23&nbsp;
+											</span>
+											<span class="line_number">&nbsp;24&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;25&nbsp;
+											</span>
+											<span class="line_number">&nbsp;26&nbsp;
+											</span>
+											<span class="line_number">&nbsp;27&nbsp;
+											</span>
+											<span class="line_number">&nbsp;28&nbsp;
+											</span>
+											<span class="line_number">&nbsp;29&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;30&nbsp;
+											</span>
+											<span class="line_number">&nbsp;31&nbsp;
+											</span>
+											<span class="line_number">&nbsp;32&nbsp;
+											</span>
+											<span class="line_number">&nbsp;33&nbsp;
+											</span>
+											<span class="line_number">&nbsp;34&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;35&nbsp;
+											</span>
+											<span class="line_number">&nbsp;36&nbsp;
+											</span>
+											<span class="line_number">&nbsp;37&nbsp;
+											</span>
+											<span class="line_number">&nbsp;38&nbsp;
+											</span>
+											<span class="line_number">&nbsp;39&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;40&nbsp;
+											</span>
+											<span class="line_number">&nbsp;41&nbsp;
+											</span>
+											<span class="line_number">&nbsp;42&nbsp;
+											</span>
+										</pre>
+									</td>
+									<td class="code">
+										<pre class="code">
+											<span class="line">
+											</span>
+											<span class="line line_alt">
+												<span class='keyword'>public</span>
+												<span class='keyword'>class</span>
+												SampleView extends AbstractView {
+											</span>
+											<span class="line">
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'>/**</span>
+											</span>
+											<span class="line">
+												<span class='doccomment'> * Default Constructor.</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> * </span>
+											</span>
+											<span class="line">
+												<span class='doccomment'>
+													*
+													<span class='doctag'>@param</span>
+													<span class='docproperty'> model</span>
+													the controls view model
+												</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> * </span>
+											</span>
+											<span class="line">
+												<span class='doccomment'>
+													*
+													<span class='doctag'>@throws</span>
+													<span class='docproperty'> CoreException</span>
+													if build fails
+												</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> */</span>
+											</span>
+											<span class="line">
+												<span class='keyword'>public</span>
+												SampleView(
+												<span class='keyword'>final</span>
+												<span class='type'>SampleModel</span>
+												model)
+												<span class='keyword'>throws</span>
+												CoreException {
+											</span>
+											<span class="line line_alt"> super(model);
+											</span>
+											<span class="line"> }
+											</span>
+											<span class="line line_alt">
+											</span>
+											<span class="line">
+												<span class='doccomment'>/**</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> * {@inheritDoc}</span>
+											</span>
+											<span class="line">
+												<span class='doccomment'> */</span>
+											</span>
+											<span class="line line_alt">
+												<span class='function'>@Override</span>
+											</span>
+											<span class="line">
+												<span class='keyword'>public</span>
+												<span class='type'>void</span>
+												show() {
+											</span>
+											<span class="line line_alt">
+												getRootNode().setCenter(
+												<span class='obj'>LabelBuilder</span>
+												.
+												<span class='oo'>create</span>
+												().text(
+												<span class='string'>"JRebirth Sample"</span>
+												).build());
+											</span>
+											<span class="line"> }
+											</span>
+											<span class="line line_alt">
+											</span>
+											<span class="line">
+												<span class='doccomment'>/**</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> * {@inheritDoc}</span>
+											</span>
+											<span class="line">
+												<span class='doccomment'> */</span>
+											</span>
+											<span class="line line_alt">
+												<span class='function'>@Override</span>
+											</span>
+											<span class="line">
+												<span class='keyword'>public</span>
+												<span class='type'>void</span>
+												hide() {
+											</span>
+											<span class="line line_alt">
+												<span class='comment'>// Nothing to do yet</span>
+											</span>
+											<span class="line">
+											</span>
+											<span class="line line_alt"> }
+											</span>
+											<span class="line">
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'>/**</span>
+											</span>
+											<span class="line">
+												<span class='doccomment'> * {@inheritDoc}</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> */</span>
+											</span>
+											<span class="line">
+												<span class='function'>@Override</span>
+											</span>
+											<span class="line line_alt">
+												<span class='keyword'>protected</span>
+												<span class='type'>void</span>
+												customInitializeComponents() {
+											</span>
+											<span class="line">
+												<span class='comment'>// Nothing to do yet</span>
+											</span>
+											<span class="line line_alt">
+											</span>
+											<span class="line"> }
+											</span>
+											<span class="line line_alt">
+											</span>
+											<span class="line">}
+											</span>
+											<span class="line line_alt">
+											</span>
+										</pre>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</pre>
+
+			</subsection>
+
+			<subsection name="Controllers">
+				<pre>
+					<div class="luminous">
+						<div class="code_container" style="overflow:visible !important;">
+							<table class="code_container">
+								<tr>
+									<td class="line_number_bar">
+										<pre class="line_numbers">
+											<span class="line_number">&nbsp;1&nbsp;
+											</span>
+											<span class="line_number">&nbsp;2&nbsp;
+											</span>
+											<span class="line_number">&nbsp;3&nbsp;
+											</span>
+											<span class="line_number">&nbsp;4&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;5&nbsp;
+											</span>
+											<span class="line_number">&nbsp;6&nbsp;
+											</span>
+											<span class="line_number">&nbsp;7&nbsp;
+											</span>
+											<span class="line_number">&nbsp;8&nbsp;
+											</span>
+											<span class="line_number">&nbsp;9&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;10&nbsp;
+											</span>
+											<span class="line_number">&nbsp;11&nbsp;
+											</span>
+											<span class="line_number">&nbsp;12&nbsp;
+											</span>
+											<span class="line_number">&nbsp;13&nbsp;
+											</span>
+											<span class="line_number">&nbsp;14&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;15&nbsp;
+											</span>
+											<span class="line_number">&nbsp;16&nbsp;
+											</span>
+											<span class="line_number">&nbsp;17&nbsp;
+											</span>
+											<span class="line_number">&nbsp;18&nbsp;
+											</span>
+											<span class="line_number">&nbsp;19&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;20&nbsp;
+											</span>
+											<span class="line_number">&nbsp;21&nbsp;
+											</span>
+											<span class="line_number">&nbsp;22&nbsp;
+											</span>
+											<span class="line_number">&nbsp;23&nbsp;
+											</span>
+											<span class="line_number">&nbsp;24&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;25&nbsp;
+											</span>
+											<span class="line_number">&nbsp;26&nbsp;
+											</span>
+											<span class="line_number">&nbsp;27&nbsp;
+											</span>
+											<span class="line_number">&nbsp;28&nbsp;
+											</span>
+											<span class="line_number">&nbsp;29&nbsp;
+											</span>
+											<span class="line_number line_number_emphasised">&nbsp;30&nbsp;
+											</span>
+											<span class="line_number">&nbsp;31&nbsp;
+											</span>
+											<span class="line_number">&nbsp;32&nbsp;
+											</span>
+											<span class="line_number">&nbsp;33&nbsp;
+											</span>
+										</pre>
+									</td>
+									<td class="code">
+										<pre class="code">
+											<span class="line">
+											</span>
+											<span class="line line_alt">
+												<span class='keyword'>public</span>
+												<span class='keyword'>class</span>
+												SampleController extends AbstractController {
+											</span>
+											<span class="line">
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'>/**</span>
+											</span>
+											<span class="line">
+												<span class='doccomment'> * Default Constructor.</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> * </span>
+											</span>
+											<span class="line">
+												<span class='doccomment'>
+													*
+													<span class='doctag'>@param</span>
+													<span class='docproperty'> view</span>
+													the view to control
+												</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> * </span>
+											</span>
+											<span class="line">
+												<span class='doccomment'>
+													*
+													<span class='doctag'>@throws</span>
+													<span class='docproperty'> CoreException</span>
+													if an error occurred while creating event handlers
+												</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> */</span>
+											</span>
+											<span class="line">
+												<span class='keyword'>public</span>
+												SampleController(
+												<span class='keyword'>final</span>
+												SampleView view)
+												<span class='keyword'>throws</span>
+												CoreException {
+											</span>
+											<span class="line line_alt"> super(view);
+											</span>
+											<span class="line"> }
+											</span>
+											<span class="line line_alt">
+											</span>
+											<span class="line">
+												<span class='doccomment'>/**</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> * {@inheritDoc}</span>
+											</span>
+											<span class="line">
+												<span class='doccomment'> */</span>
+											</span>
+											<span class="line line_alt">
+												<span class='function'>@Override</span>
+											</span>
+											<span class="line">
+												<span class='keyword'>protected</span>
+												<span class='type'>void</span>
+												customInitializeEventAdapters()
+												<span class='keyword'>throws</span>
+												CoreException {
+											</span>
+											<span class="line line_alt">
+												<span class='comment'>// Attach event adapters</span>
+											</span>
+											<span class="line"> }
+											</span>
+											<span class="line line_alt">
+											</span>
+											<span class="line">
+												<span class='doccomment'>/**</span>
+											</span>
+											<span class="line line_alt">
+												<span class='doccomment'> * {@inheritDoc}</span>
+											</span>
+											<span class="line">
+												<span class='doccomment'> */</span>
+											</span>
+											<span class="line line_alt">
+												<span class='function'>@Override</span>
+											</span>
+											<span class="line">
+												<span class='keyword'>protected</span>
+												<span class='type'>void</span>
+												customInitializeEventHandlers()
+												<span class='keyword'>throws</span>
+												CoreException {
+											</span>
+											<span class="line line_alt">
+												<span class='comment'>// Listen events</span>
+											</span>
+											<span class="line">
+											</span>
+											<span class="line line_alt"> }
+											</span>
+											<span class="line">
+											</span>
+											<span class="line line_alt">}
+											</span>
+											<span class="line">
+											</span>
+										</pre>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</pre>
+			</subsection>
+
+			<subsection name="Adapters &amp; Handlers"></subsection>
+
+
+			<div class="bottomLinks">
+				<div class="previousDocPage">
+					<a href="Services.html">Previous - Services</a>
+				</div>
+				<div class="nextDocPage">
+					<a href="Resources.html">Next - Resources</a>
+				</div>
+				<div class="tocDocPage">
+					<a href="index.html">TOC</a>
+				</div>
+			</div>
+
+		</section>
+
+	</body>
+</document> 	

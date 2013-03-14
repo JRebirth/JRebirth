@@ -1,0 +1,108 @@
+<!DOCTYPE document [
+  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
+  <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+  %HTMLlat1;
+  <!-- These are the entity sets for special characters for the XHTML -->
+  <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+  %HTMLsymbol;
+  <!-- These are the entity sets for symbol characters for the XHTML -->
+  <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+  %HTMLspecial;
+]>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<body>
+
+		<section name="Resources" title="Resources">
+
+			<macro name="toc" section="12" fromDepth="2" toDepth="3" />
+
+			<p>The JRebirth Framework provides an useful way to deal with your local resources, we currently support :</p>
+			<ul>
+				<li>Colors</li>
+				<li>Fonts</li>
+			</ul>
+			<p>These resources can consume a lot of memory if you don't dispose them when you stop using them. JRebirth provides a mechanism to store them weakly and to rebuild them if necessary in order to
+				use
+				the less memory as required.
+			</p>
+			<p>
+				<span style="text-decoration: underline;">UML Diagram Overview:</span>
+			</p>
+			<div class="uml">
+				<a href="uml/Resource.png" rel="lightbox" title="Resources Class Diagram ">
+					<img class="redux" src="uml/Resource.png" alt="" />
+				</a>
+			</div>
+			<p>
+				To manage these resources we use a
+				<em>enum</em>
+				hack to cleanly define them and most important to have a concise way to use them without calling singleton getter or another complex set of methods.
+			</p>
+			<p>So if you want to handle resources with JRebirth mechanism, you just have to create an enumeration that implement the interface of the resource you want, with a custom constructor.</p>
+
+			<subsection name="Color" title="12.1 Color">
+
+				<p>For example to manage web color, (traditionnal hexadecimal string #00CC00), you have to use this declaration:</p>
+				<macro name="include">
+					<param name="highlight-theme" value="eclipse" />
+					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" />
+					<param name="snippet" value="aj:..TEST_COLOR_WEB_1" />
+					<param name="expand-snippets" value="true" />
+				</macro>
+
+
+				<macro name="include">
+					<param name="highlight-theme" value="eclipse" />
+					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" />
+					<param name="snippet" value="aj:..TestColors" />
+					<param name="expand-snippets" value="true" />
+				</macro>
+
+
+				<macro name="include">
+					<param name="highlight-theme" value="eclipse" />
+					<param name="source" value="core/src/main/java/org/jrebirth/core/resource/color/WebColor.java" />
+					<!-- <param name="snippet" value="aj:*.WebColor" /> <param name="expand-snippets" value="true" /> -->
+				</macro>
+
+
+				<p>But this interface doesn't explain how to register a resource, so let's see an example.</p>
+				<macro name="include">
+					<param name="highlight-theme" value="eclipse" />
+					<param name="source" value="presentation/src/main/java/org/jrebirth/presentation/PrezColors.java" />
+					<!-- <param name="snippet" value="aj:..PrezColors" /> <param name="expand-snippets" value="true" /> -->
+				</macro>
+
+			</subsection>
+
+
+			<subsection name="Font" title="12.2 Font">
+
+
+				<macro name="include">
+					<param name="highlight-theme" value="eclipse" />
+					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/font/TestFonts.java" />
+					<param name="snippet" value="aj:..TestFonts" />
+					<param name="expand-snippets" value="true" />
+				</macro>
+			</subsection>
+
+			<subsection name="Parameters" title="12.3 Parameters">
+
+			</subsection>
+
+		</section>
+
+
+		<div class="bottomLinks">
+			<div class="previousDocPage">
+				<a href="Ui.html">Previous - Ui</a>
+			</div>
+			<!--<div class="nextDocPage"><a href="Notifier.html">Next - Notifier &amp; Wave</a></div> -->
+			<div class="tocDocPage">
+				<a href="index.html">TOC</a>
+			</div>
+		</div>
+
+	</body>
+</document> 	
