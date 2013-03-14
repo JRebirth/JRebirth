@@ -1,0 +1,88 @@
+@font-face{
+	font-family: 'DejaVuSansCondensed';
+  	src: url('DejaVuSansCondensed.ttf') format('truetype');
+}
+@font-face{
+	font-family: 'DejaVuSerifCondensed';
+  	src: url('DejaVuSerifCondensed.ttf') format('truetype');
+}
+
+body{
+	background-color:#F2F2F3;
+	margin: 5px 0;
+	font-family: 'DejaVuSerifCondensed';
+}
+
+h1{margin-top:30px;}
+h2{margin-top:20px;}
+h3{margin-top:10px;}
+
+h1,h2,h3,h4{
+	color: #A84800;
+	font-family: 'DejaVuSansCondensed';
+}
+
+a{
+	color: #CEAE79;
+	text-decoration:none;
+	cursor:pointer;
+}
+
+div#page{
+	padding-top:100px;
+	background-image:url(../images/JRebirth_Logo_80px.png),url(../images/JRebirthApplicationFramework.png);
+	background-position:30px 10px, 100px 10px;
+	background-repeat:no-repeat,no-repeat;
+}
+
+span.high
+{
+	font-weight:bolder;
+	text-decoration:underline;
+}
+
+div.uml{
+	text-align: center;
+}
+div.uml legend{
+	font-style:italic;
+}
+
+img.redux  {
+	width:800px;
+	height:auto;
+}
+
+.tocDocPage{
+	text-align:center;
+	margin:auto;
+	width:200px;
+}
+.nextDocPage{
+	float:right;
+}
+.previousDocPage{
+	float:left;
+}
+.question{
+	font-style:italic;
+}
+.highlight{
+	color:#f28705;
+	font-weight:600;
+}
+div.bottomLinks{
+	margin-top:40px;
+}
+
+@media print
+{
+	div#page{
+		padding:0;
+		background-image: none;
+	}
+
+	div.bottomLinks{
+		display:none;
+	}
+}

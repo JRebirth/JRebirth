@@ -1,0 +1,99 @@
+<!DOCTYPE document [
+  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
+  <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+  %HTMLlat1;
+  <!-- These are the entity sets for special characters for the XHTML -->
+  <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+  %HTMLsymbol;
+  <!-- These are the entity sets for symbol characters for the XHTML -->
+  <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+  %HTMLspecial;
+]>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<body>
+		<section name="Commands" title="Commands">
+			<macro name="toc" section="4" fromDepth="2" toDepth="3" />
+
+			<subsection name=" Command Lifecycle">
+
+				<p>A command is an atomic action reusable or not that can be run into any thread. A command provides specific features:</p>
+				<ul>
+					<li>A component key, built with Class Name and an addtionnal string</li>
+					<li>An action to process</li>
+					<li>A property indicating in which thread it must be run</li>
+					<li>A parent command for chained one</li>
+					<li>A WaveBean that will hold all required data to process the action</li>
+				</ul>
+
+				<p>
+					<span style="text-decoration: underline;">UML Class Diagram:</span>
+				</p>
+
+				<div class="uml">
+					<a href="uml/Command.png" rel="lightbox" title="Command Class Diagram ">
+						<img class="redux" src="uml/Command.png" alt="" />
+					</a>
+				</div>
+
+			</subsection>
+
+			<subsection name=" Component">
+				<p>
+					Commands are designed to be disposable after usage, but they could be retained by strong references to be executed twice or more.
+					<br />
+					You can call a command by tree differents ways:
+				</p>
+				<ul>
+					<li>Synchronous way : getCommand()</li>
+					<li>Asynchronous way : CALL_COMMAND WaveType</li>
+					<li>Listener Callback : processAction(), require pre-registration</li>
+				</ul>
+				<p>
+					Please note that Commands are JRebirth main components, they follow the component lifecycle as described in (TODO link to Facade Page).
+					<br />
+					Thus
+					<em>AbstractBaseCommand</em>
+					extends
+					<em>AbstractWaveReady</em>
+					and their descendants must provide ready() and processAction() methods.
+				</p>
+				<h3>Synchronous way</h3>
+				<p>It's possible to call a command from any JRebirth component (Command, Service, Model).</p>
+				<pre>callCommand(TestCommmand.class)</pre>
+				<pre>getLocalFacade().getGlobalFacade().getCommandFacade().retrieve(TestCommmand.class)</pre>
+			</subsection>
+
+			<subsection name="Action to process">
+				<p>
+				</p>
+				<h3>Run Into</h3>
+				<p>
+				</p>
+				<h3>Parent command</h3>
+				<p>
+				</p>
+				<h3>WaveBean</h3>
+				<p>
+				</p>
+				<h2>Single Commands</h2>
+				<h2>Multi Commands</h2>
+				<p>Interal Commands are automatically run into the JET, if you want to do some tasks in background you should use these.</p>
+				<p>UI Commands are automatically run into the JAT, if you want to update scene nodes.</p>
+			</subsection>
+
+			<div class="bottomLinks">
+				<div class="previousDocPage">
+					<a href="Notifier.html">Previous - Notifier &amp; Wave</a>
+				</div>
+				<div class="nextDocPage">
+					<a href="Services.html">Next - Services</a>
+				</div>
+				<div class="tocDocPage">
+					<a href="index.html">TOC</a>
+				</div>
+			</div>
+
+		</section>
+
+	</body>
+</document> 	

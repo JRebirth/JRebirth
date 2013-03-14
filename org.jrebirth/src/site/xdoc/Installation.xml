@@ -1,0 +1,122 @@
+<!DOCTYPE document [
+  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
+  <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+  %HTMLlat1;
+  <!-- These are the entity sets for special characters for the XHTML -->
+  <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+  %HTMLsymbol;
+  <!-- These are the entity sets for symbol characters for the XHTML -->
+  <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+  %HTMLspecial;
+]>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<body>
+
+		<section name="Installation" title="2 Installation">
+			<macro name="toc" section="0" fromDepth="1" toDepth="1" />
+
+			<subsection name="Manual" title="Manual Download">
+
+				<p>JRebirth is composed by a set of jar files, you just have to add them
+					into your application classpath to use them.
+				</p>
+				<p>To get them you can download manually JRebirth distribution archive,
+					but it could be out of date.
+				</p>
+				<p>This distribution mode will be improved in the future for those you
+					don't want to deal with an artifact repository.
+				</p>
+
+			</subsection>
+
+			<subsection name="Maven" title="Maven way">
+				<p>
+					Currently the easy way to get JRebirth jar files is to use maven
+					convention because JRebirth has its own artifact repository (
+					<a href="http://repo.jrebirth.org">repo.jrebirth.org</a>
+					).
+				</p>
+				<p>
+					Add this declaration into your
+					<strong>pom.xml</strong>
+				</p>
+				<p>It's also possible to add this declaration into the profile section of
+					your user settings.xml or enterprise settings.xml
+				</p>
+				<p>
+					<em>JRebirth is not yet on Maven Central repository because the modules
+						list will slightly evolve until the release of the final 1.0.0 and we
+						don't want to add confusion about it.
+					</em>
+				</p>
+				<pre class="prettyprint lang-xml linenums">
+					<source>
+						<repositories>
+							<repository>
+								<snapshots>
+									<enabled>false</enabled>
+								</snapshots>
+								<id>releases</id>
+								<name>libs-release</name>
+								<url>http://repo.jrebirth.org/libs-release</url>
+							</repository>
+							<repository>
+								<snapshots>
+									<enabled>false</enabled>
+								</snapshots>
+								<id>snapshots</id>
+								<name>libs-snapshot</name>
+								<url>http://repo.jrebirth.org/libs-snapshot</url>
+							</repository>
+						</repositories>
+						<pluginRepositories>
+							<pluginRepository>
+								<snapshots>
+									<enabled>false</enabled>
+								</snapshots>
+								<id>central</id>
+								<name>plugins-release</name>
+								<url>http://repo.jrebirth.org/plugins-release</url>
+							</pluginRepository>
+							<pluginRepository>
+								<snapshots>
+									<enabled>true</enabled>
+								</snapshots>
+								<id>snapshots</id>
+								<name>plugins-snapshot</name>
+								<url>http://repo.jrebirth.org/plugins-snapshot</url>
+							</pluginRepository>
+						</pluginRepositories>
+					</source>
+				</pre>
+				<p>Then you just need to add this dependency to begin to play with
+					JRebirth features ...
+				</p>
+				<!-- <pre class="prettyprint lang-xml linenums"> -->
+				<source>
+					<dependency>
+						<groupid>org.jrebirth</groupid>
+						<artifactid>core</artifactid>
+						<version>0.7.2</version>
+					</dependency>
+				</source>
+
+			</subsection>
+		</section>
+		<div class="bottomLinks">
+			<div class="previousDocPage">
+				<a href="Introduction.html">Previous -
+					Introduction
+				</a>
+			</div>
+			<div class="nextDocPage">
+				<a href="Overview.html">Next - JRebirth
+					Overview
+				</a>
+			</div>
+			<div class="tocDocPage">
+				<a href="index.html">TOC</a>
+			</div>
+		</div>
+	</body>
+</document> 	

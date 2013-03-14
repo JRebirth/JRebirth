@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0
+http://maven.apache.org/xsd/decoration-1.3.0.xsd">
+	<version position="right" />
+	<publishDate position="right" />
+	<body>
+		<head>
+			<meta name="keywords" content="JRebirth, JavaFX, Application, Framework, WCS, MVC, Maven" />
+
+			<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+			<script type="text/javascript" src="js/prettify.js"></script>
+			<script type="text/javascript" src="js/syntax.js"></script>
+			<script type="text/javascript" src="js/lightbox.js"></script>
+
+			<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+			<link rel="stylesheet" type="text/css" href="css/lightbox.css" media="screen" />
+			<link rel="stylesheet" type="text/css" href="css/eclipse.css" media="all" />
+			<link rel="stylesheet" type="text/css" href="css/doc.css" media="all" />
+
+		</head>
+		<breadcrumbs>
+			<item name="JRebirth" href="index.html" />
+		</breadcrumbs>
+
+		<menu name="General">
+			<item name="About" href="index.html" />
+			<item name="Release Notes" href="releaseNotes.html" />
+			<!-- <item name="License &amp; Credits" href="licenseAndCredits.html" /> -->
+		</menu>
+
+		<menu name="Documentation">
+			<item name="Documentation" href="TOC.html" />
+			<item name="Introduction" href="Introduction.html" />
+			<item name="Installation" href="Installation.html" />
+			<item name="Overview" href="Overview.html" />
+			<item name="Application" href="Application.html" />
+			<item name="Thread Management" href="Thread.html" />
+			<item name="Configure Logging system" href="Logging.html" />
+			<item name="How Facades work" href="Facades.html" />
+			<item name="Notifier &amp; Wave" href="Notifier.html" />
+			<item name="Commands" href="Commands.html" />
+			<item name="Services" href="Services.html" />
+			<item name="Ui" href="Ui.html" />
+			<item name="Resources" href="Resources.html" />
+		</menu>
+
+		<menu ref="modules" />
+
+		<menu ref="reports" />
+
+		<menu name="Resources">
+			<item name="Project Website" href="http://www.jrebirth.org" />
+			<item name="Latest Sources" href="${project.scm.url}" />
+			<item name="Built with Jenkins" href="${project.ciManagement.url}/lastSuccessfulBuild/" />
+			<item name="QA'ed by Sonar" href="${sonar.host.url}/dashboard/index/1" />
+		</menu>
+	</body>
+	<bannerLeft>
+		<alt>${project.name}</alt>
+		<src>/images/JRebirth_Logo_80px.png</src>
+	</bannerLeft>
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-stylus-skin</artifactId>
+		<version>1.3</version>
+	</skin>
+</project> 

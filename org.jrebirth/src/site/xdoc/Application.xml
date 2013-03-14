@@ -1,0 +1,243 @@
+<!DOCTYPE document [
+  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
+  <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+  %HTMLlat1;
+  <!-- These are the entity sets for special characters for the XHTML -->
+  <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+  %HTMLsymbol;
+  <!-- These are the entity sets for symbol characters for the XHTML -->
+  <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+  %HTMLspecial;
+]>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<body>
+
+<section name="Application" title="Create your first Application">
+	<macro name="toc" section="4" fromDepth="2" toDepth="3" />
+
+     <subsection name="firstClass" title="4.1 First Class to extend">
+      <p>JRebirth Application Framework offers a custom class that extends the
+        traditionnal javafx.Application class, the aim is to automatically start
+        the JRebirth underlying Application Framework.</p>
+      <p><span style="text-decoration: underline;">Short UML Diagram:</span></p>
+		<div class="uml">
+			<a title="Application Class Diagram " rel="lightbox" href="uml/Application.png">
+				<img class="redux" alt="" src="uml/Application.png" />
+			</a>
+		</div>
+      <p>So you must extend <strong>org.jrebirth.core.application.AbstractApplication</strong>
+        to be able to use JRebirth features.</p>
+      <p>If you have used the Maven archetype <em>org.jrebirth.archetype</em>
+        you will obtain this source code :</p>
+		<!--
+	<macro name="include">
+		<param name="highlight-theme" value="eclipse" />
+		<param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" />
+	</macro>
+	-->
+	<pre class="prettyprint lang-java linenums">public final class SampleApplication extends AbstractApplication {
+
+    /**
+     * Application launcher.
+     * 
+     * @param args the command line arguments
+     */
+    public static void main(final String... args) {
+        Application.launch(SampleApplication.class, args);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Class getFirstModelClass() {
+        return SampleModel.class;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String getApplicationTitle() {
+        return "JavaFX 2.0 - Sample Application";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customizeStage(final Stage stage) {
+        stage.setFullScreen(false);
+        stage.setWidth(800);
+        stage.setHeight(600);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customizeScene(final Scene scene) {
+        scene.getStylesheets().add("style/sample.css");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List getFontToPreload() {
+        return Arrays.asList(new FontEnum[] {
+                JfxFonts.SPLASH
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List getPreBootWaveList() {
+        return Collections.emptyList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List getPostBootWaveList() {
+        return Collections.emptyList();
+    }
+    
+}
+</pre>
+      <p>This class skeleton provides some hooks to allow customization of the
+        application start up.<br />
+        The AbstractApplication is using a generic type that represents the
+        first JavaFX node hold by the scene. This node will be instantiated
+        automatically by the framework and could be accessed by calling the
+        protected method <em>getRootNode().</em></p>
+      <h3>First Model Class</h3>
+      <p>The method <em>Class&lt;? extends Model&gt; getFirstModelClass() </em>is
+        mandatory to define which UI model will be attached to the root node of
+        the scene.</p>
+      <p>This first model will be created into the JRebirth Thread Pool, then it
+        will be attached to the root node into the JavaFX Application Thread.</p>
+      <h3>Application Title</h3>
+      <p>The method <em>String getApplicationTitle() </em>is simply used to
+        define the name of the application displayed by the stage (OS window)
+        and used by OS task bar.</p>
+      <h3>Stage customization</h3>
+      <p>The first stage object is provided by the JavaFX launcher, the method <em>void
+          customizeStage(final Stage stage)</em> allows doing some stage
+        customizations.</p>
+      <h3>Scene customization</h3>
+      <p>The scene object automatically attached to the default stage stage is
+        built by the protected method <em>Scene buildScene()</em> that could be
+        overridden as needed. By defaut it creates a default scene with these
+        attributes :</p>
+      <ul>
+        <li>Width = 800</li>
+        <li>Height = 600</li>
+        <li>Background Color = Transparent</li>
+        <li>Root = Automatically built according to the generic type used</li>
+      </ul>
+      <p>Theses attributes will be customizable soon with a properties file. <strong>TODO</strong></p>
+      <p>Another method let you customize the scene : <em>void
+          customizeSscene(final Scene scene)</em>. For example you can listen
+        some key binding to perform a global action. The Presentation
+        application uses it to listen &lt;Ctrl&gt; + &lt;+&gt; and &lt;Ctrl&gt;
+        + &lt;-&gt; key combo to zoom in/out the whole scene.</p>
+      <p>This method is also useful to attach a stylesheet to the scene like
+        this : <em>scene.getStylesheets().add("style/sample.css");</em></p>
+      <h2>Fonts preloading</h2>
+      <p>JavaFX applications are able to use fonts throught programmatic
+        declarations or with CSS declaration (in .css files. or inline).<br />
+        If font used by CSS are not provided by the platform running the
+        application, it must be provided and loaded by the application.<br />
+        JRebirth provides a simple way to embed and declare font: this mechanism
+        is explained in the custom topic: Managing Fonts.</p>
+      <p>The method <em>List&lt;FontEnum&gt; getFontToPreload() </em>is used
+        to preload fonts to allow them to be used by CSS declaration. They are
+        loaded at boot in the same time than stylesheets.</p>
+      <h2>Running Waves</h2>
+      <p>The JRebirth Application class allow running Waves before and after the
+        creation of the first model class.</p>
+      <p>A Wave is a JRebirth Event that could be process by any JRebirth
+        components, they are carrying throught JRebirth classes and threads.</p>
+      <p>You can add your own wave with the two following methods :</p>
+      <ul>
+        <li><em><span class="line line_alt"><span class="doccomment">List&lt;Wave&gt;
+                getPreBootWaveList()</span></span></em></li>
+        <li><em><span class="line line_alt"><span class="doccomment">List&lt;Wave&gt;
+                getPostBootWaveList()</span></span></em></li>
+      </ul>
+      <p>The waves returnes will be processed <strong>sequentially</strong>
+        althought they could be processed by different threads.</p>
+      <p>In this method you are allowed to call visible methods from the <em>javafx.application.Application</em>
+        class, in example the <em>getParameter()</em> will give you the
+        arguments passed to command line</p>
+      <p>Don't forget that you can chain your waves if you need to do more than
+        one thing.</p>
+      <p><span style="text-decoration: underline;">JRebirth Analyzer example :</span></p>
+      <pre class="prettyprint lang-java linenums:40">public List getPostBootWaveList() {
+
+	final List waveList = new ArrayList&lt;&gt;();
+	final Parameters p = getParameters();
+	if (p.getRaw().size() &gt;= 1) {
+		final String etdFile = p.getRaw().get(0);
+		final File file = new File(etdFile);
+		if (file.exists()) {
+
+			waveList.add(
+					WaveBuilder.create()
+							.waveGroup(WaveGroup.RETURN_DATA)
+							.waveType(LoadEdtFileService.DO_LOAD_EVENTS)
+							.relatedClass(LoadEdtFileService.class)
+							.data(WaveData.build(EditorWaves.EVENTS_FILE, file))
+							.build()
+					);
+
+			waveList.add(
+					WaveBuilder.create()
+							.waveType(EditorWaves.DO_PLAY)
+							.build()
+					);
+		}
+	}
+	return waveList;
+}
+</pre>
+
+</subsection>
+
+<subsection name="keys" title="Default key shortcuts">
+
+      <p>The AbstractApplication class is using two defaults hotkey:</p>
+      <ul>
+        <li><em>KeyCode getFullScreenKeyCode()</em> =&gt; to go to to fullscreen
+          mode (default is &lt;<strong>F10</strong>&gt;)</li>
+        <li><em>KeyCode getIconifiedKeyCode() </em>=&gt; to go to iconified
+          mode<em> </em>(default is &lt;<strong>F11</strong>&gt;)</li>
+      </ul>
+      <p>These methods could be overridden if you want to change them, you can
+        avoid these shortcut by returning <em>null</em>.</p>
+      <h2>Exception Manager</h2>
+      JRebirth creates its own uncaught exception handlers in order to log
+      exceptions that were not caught by application code.<br />
+      It's possible to customize them by overriding methods listed hereafter:<br />
+      <ul>
+        <li><em>UncaughtExceptionHandler getDefaultUncaughtExceptionHandler()</em></li>
+        <li><em>UncaughtExceptionHandler getJatUncaughtExceptionHandler()</em></li>
+        <li><em>UncaughtExceptionHandler getJitUncaughtExceptionHandler()</em></li>
+      </ul>
+</subsection>
+
+</section>
+ 
+	  <div class="bottomLinks">
+        <div class="previousDocPage"><a href="Overview.html">Previous - Framework Overview</a></div>
+        <div class="nextDocPage"><a href="Thread.html">Next - Thread Management</a></div>
+        <div class="tocDocPage"><a href="index.html">TOC</a></div>
+      </div>
+
+
+</body>
+</document> 	

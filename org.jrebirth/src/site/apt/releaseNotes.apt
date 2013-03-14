@@ -1,0 +1,51 @@
+	------
+	Release Notes
+	------
+	Sébastien Bordes
+	------
+	2013-02-22
+	------
+
+Release Notes
+
+* 0.7.2 - Fix version - 2013-02-22
+
+	* JRebirth Maven Repository is up to date
+	Artifactory server was sometimes offline due to a lot of file corruption, Jenkins had broken a lot of build due to severals Java (64bit) VM fatal errors.
+	
+	* Update archetype to 0.7.2 version
+	The 0.7.2 archetype has been upgraded to fit with new command and application classes
+	
+	* Add OnAction annotation
+	JRebirth provides a new feature that allow handling events with annotation, a sample is available here : https://github.com/JRebirth/JRebirth...
+	
+	* Add Touch and Gesture events
+    All newest touch and gesture event handlers have been added (with annotation and standard way)
+    
+	* Manage @RunInto
+	Thread management are now configurable with annotation, you can still use class inheritance
+	
+	* Impossible to retrieve a component from ready method
+	Main facades had a bug in their own lifecycle, everything is ok now, (Special Thanks to Heiko who send his remarks on mailing list)
+	
+	* Manage Multiple Stage
+	A feature has been added to manage Stage (open, close etc...) with a command and a service
+	
+	* Improve Wave Contract
+	WaveType usage has been improved (most convenient ot use)
+	
+    * Provide FXMLModel
+	FXML integration has been simplified, you can just use a FXMLModel with a fxml file, check a sample here : https://github.com/JRebirth/JRebirt...
+	
+    * Merge Event Tracking with new Logging way
+	Internal logger has been discarded, and internal event tracker has been upgraded, it allows JRebirth Analyzer tool to replay all JRebirth events to analyze application behaviour
+	
+	*Add JRebirth properties management
+	A new mecanism to load properties has been created, it allows to use custom parameters (JRebirth already use some customizable properties)
+	
+	* Refactor Resources Management
+	Usage of resources has been improved (font, colors, parameters), check sample test classes to learn more : https://github.com/JRebirth/JRebirt...
+	
+	* Improve site deployment
+	JRebirth maven web site has been repaired, it provides Javadoc API, you should visit these urls : api.jrebirth.org site.jrebirth.org sites.jrebirth.org
+	
