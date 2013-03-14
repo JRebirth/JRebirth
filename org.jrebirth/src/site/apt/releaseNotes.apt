@@ -8,6 +8,12 @@
 
 Release Notes
 
+* 0.8.0 - Major version - 2013-04-22 (work in progress)
+
+    * JRebirth Web site will be entirely generated with Maven engine
+    All documentation is now written with Doxia and could be updated on GitHub.
+    Every one can send a pull request to add information or to correct mistakes.
+
 * 0.7.2 - Fix version - 2013-02-22
 
 	* JRebirth Maven Repository is up to date
@@ -38,14 +44,14 @@ Release Notes
 	FXML integration has been simplified, you can just use a FXMLModel with a fxml file, check a sample here : https://github.com/JRebirth/JRebirt...
 	
     * Merge Event Tracking with new Logging way
-	Internal logger has been discarded, and internal event tracker has been upgraded, it allows JRebirth Analyzer tool to replay all JRebirth events to analyze application behaviour
+    Internal logger has been discarded, and internal event tracker has been upgraded, it allows JRebirth Analyzer tool to replay all JRebirth events to analyze application behaviour
 	
-	*Add JRebirth properties management
-	A new mecanism to load properties has been created, it allows to use custom parameters (JRebirth already use some customizable properties)
+    * Add JRebirth properties management
+    A new mecanism to load properties has been created, it allows to use custom parameters (JRebirth already use some customizable properties)
 	
-	* Refactor Resources Management
-	Usage of resources has been improved (font, colors, parameters), check sample test classes to learn more : https://github.com/JRebirth/JRebirt...
+    * Refactor Resources Management
+    Usage of resources has been improved (font, colors, parameters), check sample test classes to learn more : https://github.com/JRebirth/JRebirt...
 	
-	* Improve site deployment
-	JRebirth maven web site has been repaired, it provides Javadoc API, you should visit these urls : api.jrebirth.org site.jrebirth.org sites.jrebirth.org
+    * Improve site deployment
+    JRebirth maven web site has been repaired, it provides Javadoc API, you should visit these urls : api.jrebirth.org site.jrebirth.org sites.jrebirth.org
 	
