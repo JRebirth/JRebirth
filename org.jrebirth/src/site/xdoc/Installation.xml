@@ -49,8 +49,8 @@
 						don't want to add confusion about it.
 					</em>
 				</p>
-				<pre class="prettyprint lang-xml linenums">
-					<source>
+				<!-- <pre class="prettyprint lang-xml linenums"> -->
+					<source><![CDATA[
 						<repositories>
 							<repository>
 								<snapshots>
@@ -87,19 +87,19 @@
 								<url>http://repo.jrebirth.org/plugins-snapshot</url>
 							</pluginRepository>
 						</pluginRepositories>
-					</source>
-				</pre>
+					]]></source>
+				<!-- </pre> -->
 				<p>Then you just need to add this dependency to begin to play with
 					JRebirth features ...
 				</p>
 				<!-- <pre class="prettyprint lang-xml linenums"> -->
-				<source>
+				<source><![CDATA[
 					<dependency>
 						<groupid>org.jrebirth</groupid>
 						<artifactid>core</artifactid>
 						<version>0.7.2</version>
 					</dependency>
-				</source>
+				]]></source>
 
 			</subsection>
 		</section>
