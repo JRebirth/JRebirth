@@ -10,7 +10,7 @@
 	<groupId>org.jrebirth</groupId>
 	<artifactId>analyzer</artifactId>
 
-	<name>JRebirth Analyzer</name>
+	<name>Analyzer</name>
 
 	<properties>
 

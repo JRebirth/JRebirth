@@ -11,7 +11,7 @@
 	<groupId>org.jrebirth</groupId>
 	<artifactId>archetype</artifactId>
 	
-	<name>JRebirth Application Archetype</name>
+	<name>Application Archetype</name>
 	<description>JRebirth Archetype used to build a new fresh application</description>
 
 </project>

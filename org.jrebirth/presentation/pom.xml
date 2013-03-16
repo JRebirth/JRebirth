@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>org.jrebirth</groupId>
 	<artifactId>presentation</artifactId>
-	<name>Presentation Base Module</name>
+	<name>Prez Engine</name>
 	<description>Base files to build a JavaFX slide's presentation</description>
 
 	<build>

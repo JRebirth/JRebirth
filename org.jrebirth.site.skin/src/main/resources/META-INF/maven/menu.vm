@@ -1,0 +1,34 @@
+#*
+<ul>
+   <li class='active'><a href='index.html'><span>Home</span></a></li>
+   <li class='has-sub'><a href='#'><span>Products</span></a>
+      <ul>
+         <li><a href='#'><span>Product 1</span></a></li>
+         <li class='last'><a href='#'><span>Product 2</span></a></li>
+      </ul>
+   </li>
+   <li><a href='#'><span>About</span></a></li>
+   <li class='last'><a href='#'><span>Contact</span></a></li>
+</ul>
+*#
+
+#macro ( mainMenu $menus )
+  <ul>
+  #foreach( $menu in $menus )
+  
+	## First Menu Level
+  	<li class="has-sub"><a><span>$menu.name</span></a>
+ 		<ul>
+ 		#foreach( $item in $menu.items )
+ 	
+ 	 		#set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
+ 	 		#set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
+ 	 	
+	    	<li class="last"><a href="$currentItemHref"><span>$item.name</span></a></li>
+  		#end
+  		</ul>
+  	</li>
+  #end
+  </ul>
+#end
+

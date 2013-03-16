@@ -11,7 +11,7 @@
 	<artifactId>distribution</artifactId>
 	<packaging>pom</packaging>
 
-	<name>Distribution Module</name>
+	<name>Distribution</name>
 	<description>Module used to package the full JRebirth distribution</description>
 
 	<build>
