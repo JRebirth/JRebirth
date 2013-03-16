@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>org.jrebirth</groupId>
 	<artifactId>transition</artifactId>
-	<name>JRebirth Transition</name>
+	<name>Transition</name>
 	<description>A set of beautiful &amp; powerful transition</description>
 	
 	<dependencies>

@@ -16,22 +16,22 @@
 
 			<p>Here you have some interesting links if you want to contribute to JRebirth projects.</p>
 
-			<subsection name="Bugs Tracker" id="maven" class="soft">
+			<subsection name="Bugs Tracker" id="maven" class="component soft">
 				<p>We are using GitHub issue Tracker to follow features requests and bugs.</p>
 				<a href="http://bugs.jrebirth.org/">GitHub - http://bugs.jrebirth.org</a>
 			</subsection>
 
-			<subsection name="Continuous Integration Server" id="jenkins" class="soft">
+			<subsection name="Continuous Integration Server" id="jenkins" class="component soft">
 				<p>We are using a Jenkins instance to build periodically our releases.</p>
 				<a href="http://ci.jrebirth.org/">Jenkins - http://ci.jrebirth.org</a>
 			</subsection>
 
-			<subsection name="Quality" id="sonar" class="soft">
+			<subsection name="Quality" id="sonar" class="component soft">
 				<p>We are using a Sonar instance to finely follow our code quality.</p>
 				<a href="http://quality.jrebirth.org/">Sonar - http://quality.jrebirth.org</a>
 			</subsection>
 
-			<subsection name="Maven Repository" id="artifactory" class="soft">
+			<subsection name="Maven Repository" id="artifactory" class="component soft">
 				<p>We are using an Artifactory instance to manage our releases and snapshots artifacts versions.</p>
 				<p>We are also using it as a proxy repository for our team.</p>
 				<a href="http://repo.jrebirth.org/">Artifactory - http://repo.jrebirth.org</a>
@@ -43,19 +43,19 @@
 				<a href="http://jcenter.bintray.com ">JCenter - http://jcenter.bintray.com </a>
 			</subsection>
 
-			<subsection name="SCM Browser" id="github" class="soft">
+			<subsection name="SCM Browser" id="github" class="component soft">
 				<p>Our source code is hosted by GitHub, and shared throught a custom organization named 'JRebirth'</p>
 				<p>
 					<a href="https://github.com/organizations/JRebirth">GitHub - https://github.com/organizations/JRebirth</a>
 				</p>
 			</subsection>
 
-			<subsection name="Maven Sites" id="maven" class="soft">
+			<subsection name="Maven Sites" id="maven" class="component soft">
 				<p>You can browse our maven sites released at this address.</p>
 				<a href="http://sites.jrebirth.org/">Maven Sites - http://sites.jrebirth.org</a>
 			</subsection>
 
-			<subsection name="Runtime Analyzer" id="yourkit" class="soft">
+			<subsection name="Runtime Analyzer" id="yourkit" class="component soft">
 				<p>
 					YourKit is kindly supporting open source projects with its full-featured Java Profiler. YourKit, LLC is the creator of innovative and intelligent tools for profiling Java and .NET applications.
 					Take a look at YourKit's leading software products:

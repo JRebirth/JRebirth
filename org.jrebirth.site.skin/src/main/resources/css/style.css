@@ -9,18 +9,18 @@
 }
 
 @font-face{
-	font-family: 'DejaVuSansCondensed';
-  	src: url('DejaVuSansCondensed.ttf') format('truetype');
+	font-family: 'Acme';
+  	src: url('../font/Acme-Regular.ttf') format('truetype');
 }
 @font-face{
 	font-family: 'DejaVuSerifCondensed';
-  	src: url('DejaVuSerifCondensed.ttf') format('truetype');
+  	src: url('../font/PT_Serif-Web-Regular.ttf') format('truetype');
 }
 
 body{
 	background-color:#F2F2F3;
 	margin: 5px 0;
-	font-family: 'DejaVuSerifCondensed';
+	font-family: 'PT Serif';
 }
 
 h1{margin-top:30px;}
@@ -29,7 +29,7 @@ h3{margin-top:10px;}
 
 h1,h2,h3,h4{
 	color: #A84800;
-	font-family: 'DejaVuSansCondensed';
+	font-family: 'Acme';
 }
 
 a{
@@ -57,7 +57,7 @@ div#header{
 	margin:auto;
 	background-color: #FFFFFF;
 	
-	background-image : url("../../uploads/images/header_back.png");
+	background-image : url("../images/header_back.png");
 	background-position:center top;
 	background-repeat:no-repeat;
 	
@@ -78,14 +78,14 @@ div#header div {
 	width:446px;
 	height:92px;
 		
-	background-image : url("../../uploads/images/titre.png");
+	background-image : url("../images/titre.png");
 	background-position:center top;
 	background-repeat:no-repeat;
 	
 }
 
 div#catcher{
-	background-image:url("../../uploads/images/bar_above_catcher.png"),url("../../uploads/images/bar_below_catcher.png");
+	background-image:url("../images/bar_above_catcher.png"),url("../images/bar_below_catcher.png");
 	background-position: center top, center bottom;
 	background-repeat:repeat-x;
 }
@@ -96,7 +96,7 @@ div#catcher_block {
 	margin:auto;
 	height: 200px;
 	padding: 10px 20px;
-	background-image:url("../../uploads/images/bar_above_catcher.png"),url("../../uploads/images/bar_below_catcher.png"),url("../../uploads/images/catcher_back.png");
+	background-image:url("../images/bar_above_catcher.png"),url("../images/bar_below_catcher.png"),url("../images/catcher_back.png");
 	background-position: center top, center bottom, left top;
 	background-repeat:repeat-x, repeat-x, no-repeat;
 	
@@ -160,7 +160,7 @@ div#features {
 	font-size:21px;
 	letter-spacing:0.1em;
 	
-	background-image:url("../../uploads/images/quote-gauche.png"),url("../../uploads/images/quote-droite.png");
+	background-image:url("../images/quote-gauche.png"),url("../images/quote-droite.png");
 	background-position: left top, right 240px;
 	background-repeat:no-repeat, no-repeat;
 	
@@ -388,7 +388,7 @@ div#footer{
 
 .done{
     padding-right:30px;
-    background-image : url("../../uploads/images/done.png");
+    background-image : url("../images/done.png");
 	background-position:right top;
 	background-repeat:no-repeat;
 }

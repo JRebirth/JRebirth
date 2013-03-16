@@ -9,7 +9,7 @@
 
 	<groupId>org.jrebirth</groupId>
 	<artifactId>core</artifactId>
-	<name>JRebirth Core Library</name>
+	<name>Core Lib</name>
 	<description>The Core library of the JRebirth Framework</description>
 
 

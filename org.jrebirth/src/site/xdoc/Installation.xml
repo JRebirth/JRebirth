@@ -29,27 +29,69 @@
 
 			</subsection>
 
-			<subsection name="Maven" title="Maven way">
+			<subsection id="Maven" name="Maven Way">
 				<p>
 					Currently the easy way to get JRebirth jar files is to use maven
-					convention because JRebirth has its own artifact repository (
-					<a href="http://repo.jrebirth.org">repo.jrebirth.org</a>
-					).
+					convention.
 				</p>
-				<p>
-					Add this declaration into your
-					<strong>pom.xml</strong>
-				</p>
-				<p>It's also possible to add this declaration into the profile section of
-					your user settings.xml or enterprise settings.xml
-				</p>
-				<p>
-					<em>JRebirth is not yet on Maven Central repository because the modules
-						list will slightly evolve until the release of the final 1.0.0 and we
-						don't want to add confusion about it.
-					</em>
+
+				<p>You just need to add this dependency to begin to play with
+					JRebirth Core features ...
 				</p>
 				<!-- <pre class="prettyprint lang-xml linenums"> -->
+				<source><![CDATA[
+					<dependency>
+						<groupid>org.jrebirth</groupid>
+						<artifactid>core</artifactid>
+						<version>0.7.2</version>
+					</dependency>
+				]]></source>
+
+
+
+				<p>
+					Releases are pushed to our bintray repository :
+					<a href="https://bintray.com/pkg/show/general/jrebirth/JRebirth/JRebirth">https://bintray.com/pkg/show/general/jrebirth/JRebirth/JRebirth</a>
+					and then synchronized to JCenter main Bintray repository.
+				</p>
+
+
+				<p>So you have some alternatives to get JRebirth artifacts from these repositories.</p>
+
+				<subsection id="jcenter" name="Use JCenter">
+					<p>JCenter is a new social Java repository hosted on Bintray website. It allows to broadcast thousand of libraries without the pitfall to
+						update your pom.xml in order to push them on a proxy
+						repository.
+						JCenter is absolutely a fabulous alternative to Maven Central.
+					</p>
+
+					<p>If you want to use JCenter repository, you must add this into yout Maven settings.xml.
+						Pay attention that JCenter contains only 'Release' artifacts, no 'snapshot' versions
+					</p>
+					<macro name="include">
+						<param name="highlight-theme" value="eclipse" />
+						<param name="source" value="../includes/JCenterProfile_settings.xml" />
+					</macro>
+
+				</subsection>
+
+
+				<subsection id="artifactory" name="JRebirth artifactory instance">
+					<p>
+						JRebirth has its own artifact repository (
+						<a href="http://repo.jrebirth.org">repo.jrebirth.org</a>
+						), but the server is not 7/7 24/24 ready. It could be offline when you need to recompile your application.
+						Its main advantage is not manage snapshot versions, so useful when you want to test a new feature or a bug fix.
+					</p>
+					<p>
+					You have 2 ways to plug your maven build to our server:
+					<ol>
+				<li>Add a repositories section ionto the pom.xml of your project.</li>
+				<li>Add a profile section into your settings.xml (like for JCenter configuration)</li>	
+					</ol>
+					</p>
+					
+					<!-- <pre class="prettyprint lang-xml linenums"> -->
 					<source><![CDATA[
 						<repositories>
 							<repository>
@@ -88,18 +130,28 @@
 							</pluginRepository>
 						</pluginRepositories>
 					]]></source>
-				<!-- </pre> -->
-				<p>Then you just need to add this dependency to begin to play with
-					JRebirth features ...
-				</p>
-				<!-- <pre class="prettyprint lang-xml linenums"> -->
-				<source><![CDATA[
-					<dependency>
-						<groupid>org.jrebirth</groupid>
-						<artifactid>core</artifactid>
-						<version>0.7.2</version>
-					</dependency>
-				]]></source>
+					<!-- </pre> -->
+				</subsection>
+
+					<p>
+						Add this declaration into your
+						<strong>pom.xml</strong>
+					</p>
+					<p>It's also possible to add this declaration into the profile section of
+						your user settings.xml or enterprise settings.xml
+					</p>
+					<p>
+						<em>JRebirth is not yet on Maven Central repository because the modules
+							list will slightly evolve until the release of the final 1.0.0 and we
+							don't want to add confusion about it.
+						</em>
+					</p>
+
+				<subsection id="hybrid" name="Hybrid Configuration">
+
+				</subsection>
+
+
 
 			</subsection>
 		</section>
