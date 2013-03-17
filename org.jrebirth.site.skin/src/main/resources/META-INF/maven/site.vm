@@ -321,11 +321,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>$title</title>
-    
+
+	<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/printdoc.css" media="print" />
     <link rel="stylesheet" href="$relativePath/css/navmenu.css" type="text/css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="css/lightbox.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/doc.css" media="all" />
 	
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="js/lightbox.js"></script>

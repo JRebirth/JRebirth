@@ -1,0 +1,15 @@
+div#header, div#navmenu, div#catcher{
+	display:none;
+}
+
+div#page{
+	padding:0;
+	background-image:url(../images/JRebirth_Logo_80px.png),url(../images/JRebirthApplicationFramework.png);
+	background-position:30px 10px, 100px 10px;
+	background-repeat:no-repeat,no-repeat;
+}
+
+div.bottomLinks{
+	display:none;
+}
+

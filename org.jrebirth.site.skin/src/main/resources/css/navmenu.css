@@ -65,6 +65,7 @@
 	float: none;
 	padding: 0px;
 	width: 180px;
+	line-height: 30px;
 }
 
 #navmenu li ul a {
