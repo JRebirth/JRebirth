@@ -8,12 +8,15 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd">
 			<meta name="keywords" content="JRebirth, JavaFX, Application, Framework, WCS, MVC, Maven" />
 		</head>
 		<breadcrumbs>
-			<!-- <item name="JRebirth" href="index.html" /> -->
+			<item name="JRebirth" href="../index.html" />
+			<item name="${project.name}" href="index.html" />
 		</breadcrumbs>
 
 		<menu name="General">
 			<item name="About" href="index.html" />
 		</menu>
+
+		<menu ref="parent" />
 
 		<menu ref="modules" />
 

@@ -12,36 +12,29 @@
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
 	<properties>
-		<title>Lightning Talk - JavaFX 2.2 What's Up ?</title>
+		<title>JRebirth Analyzer</title>
 		<author>Sébastien Bordes</author>
-		<date>16/11/2012</date>
+		<date>22/02/2013</date>
 	</properties>
 
 	<head>
 		<meta name="keywords" lang="Fr" content="JavaFX 2 Demo Application Presentation" />
 		<meta name="keywords" lang="En" content="JavaFX 2 Demo Application Presentation" />
-		<meta name="description" content="JavaFx 2 JavaFx 2.0 Demo Application Presentation JRebirth Framework" />
+		<meta name="description" content="JavaFx 2 JavaFx 2.0 Demo Application Presentation JRebirth Framework Lightning Talk" />
 	</head>
 	<body>
+
 		<script type="text/javascript">//<![CDATA[
-			var JAVAFX_APP_JNLP='prez/1.1.0-SNAPSHOT/Prez.jnlp';
+			var JAVAFX_APP_JNLP='analyzer/0.7.2/JRebirthAnalyzer.jnlp';
 			var JAVAFX_APP_WIDTH=1024;
 			var JAVAFX_APP_HEIGHT=768;
 		//]]></script>
-		<script type="text/javascript" src="web-files/dtjava.js"></script>
-		<script type="text/javascript" src="web-files/javafxApp.js"></script>
+		<script type="text/javascript" src="../web-files/dtjava.js"></script>
+		<script type="text/javascript" src="../web-files/javafxApp.js"></script>
 
-		<section id="ToulouseJug" name="JRebirth JavaFX 2 Presentation">
+		<section id="JRebirthAnalyzer" name="JRebirth Analyzer" >
 
-			<p>
-				This application has been shown during my JavaFX 2 Presentation at
-				<a href="http://www/toulousejug.org">ToulouseJUG</a>
-				, here you have the
-				<a href="http://blog.webeo.fr/post/2012/01/27/JavaFX-2-Presentation">event poster</a>
-				.
-				<br />
-				This is a DogFooding like JavaFX 2 Presentation.
-			</p>
+			<p>This application can help you to debug your application</p>
 			<p>
 				Require
 				<a href="http://www.oracle.com/technetwork/java/javafx/downloads/index.html">Java 7 with JavaFX 2 Runtime</a>
@@ -51,14 +44,17 @@
 			</p>
 			<br />
 			<strong>Launch by Java Webstart:</strong>
-			<a href="#" onclick="return launchApplication();">Click to launch this app as webstart</a>
+			<a onclick="return launchApplication();">Click to launch this app as webstart</a>
 			<br />
 			Press F11 to activate fullscreen mode, use left-click to show the next slide, right click for previous slide
-			You can browse the source code on
-			<a title="JRebirth Demo Source Code" href="https://github.com/JRebirth/JFX-Presentation/tree/master/org.jrebirth.presentation.javafx2" target="_blank">GitHub</a>
-			.
-			<br />
-			<hr />
+		
+			<div style="margin: 10px;">
+				You can browse the source code on
+				<a title="JRebirth EclipseDay Repository" href="https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth/analyzer" target="_blank">GitHub</a>
+				.
+				<br />
+				<hr />
+			</div>
 			<div id="javafx-app-placeholder" style="margin: 0; padding: 0;">
 			</div>
 

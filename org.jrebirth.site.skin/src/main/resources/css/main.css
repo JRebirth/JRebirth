@@ -73,10 +73,48 @@ div#header div {
 	
 }
 
+div#navmenu{
+	box-shadow: #CCC 0 5px 5px 0;
+}
+
+/*----------------------------------*/
+/*			Breadcrumb				*/
+/*----------------------------------*/
+#breadcrumbs {
+	padding: 4px 20px;
+    font-size: 13px;
+	margin: 0;
+    height: 23px;
+	background-image: url("../images/bar_above_catcher.png");
+	background-position: center top;
+}
+
+#breadcrumbs a:link, #breadcrumbs a:visited, #breadcrumbs a:active {
+  color: #E96700;
+}
+#breadcrumbs a:hover {
+  color: #F68618;
+}
+.xleft{
+  float:left;
+}
+.xright {
+  float:right;
+}
+div.clear{
+  clear:both;
+  visibility: hidden;
+}
+
+/*----------------------------------*/
+/*			Catcher					*/
+/*----------------------------------*/
 div#catcher{
-	background-image:url("../images/bar_above_catcher.png"),url("../images/bar_below_catcher.png");
-	background-position: center top, center bottom;
+	background-image:,url("../images/bar_below_catcher.png");
+	background-position: center bottom;
 	background-repeat:repeat-x;
+	margin: auto;
+    width: 1000px;
 }
 
 div#catcher_block {
@@ -85,9 +123,9 @@ div#catcher_block {
 	margin:auto;
 	height: 200px;
 	padding: 10px 20px;
-	background-image:url("../images/bar_above_catcher.png"),url("../images/bar_below_catcher.png"),url("../images/catcher_back.png");
-	background-position: center top, center bottom, left top;
-	background-repeat:repeat-x, repeat-x, no-repeat;
+	background-image:/*url("../images/bar_above_catcher.png"),*/url("../images/bar_below_catcher.png"),url("../images/catcher_back.png");
+	background-position: /*center top,*/ center bottom, left top;
+	background-repeat:/*repeat-x,*/ repeat-x, no-repeat;
 	
 	box-shadow: #CCC 0 5px 5px 0;
 }

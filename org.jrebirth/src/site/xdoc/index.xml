@@ -1,0 +1,154 @@
+<!DOCTYPE document [
+  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
+  <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+  %HTMLlat1;
+  <!-- These are the entity sets for special characters for the XHTML -->
+  <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+  %HTMLsymbol;
+  <!-- These are the entity sets for symbol characters for the XHTML -->
+  <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+  %HTMLspecial;
+]>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/homepage.css" media="all" />
+	</head>
+
+	<body>
+
+		<div id="catcher">
+			<div id="catcher_block">
+				<div>
+					<h1 style="margin-top: 50px; margin-left: 80px;">
+						Simplest
+						<br />
+						JavaFX 2
+						<br />
+						Framework
+					</h1>
+				</div>
+				<div class="catchme" style="padding-top: 40px; padding-left: 50px; clear: none; float: left;">
+					RIA Pattern providing perfect
+					<a title="Separation of Concerns" href="http://en.wikipedia.org/wiki/Separation_of_concerns" target="_blank">SoC</a>
+					<br />
+					Simplify Multithreaded Development
+					<br />
+					Built according to
+					<a title="KISS principle" href="http://en.wikipedia.org/wiki/KISS_principle" target="_blank">KISS principle</a>
+					<br />
+					Lightweight (lower than 50kb with Pack200)
+					<br />
+					<a title="Apache 2 Licensed" href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Free</a>
+					&amp;
+					<a title="Open Source Repository" href="https://github.com/JRebirth/JRebirth" target="_blank">Open Source</a>
+					Library
+					<br /> <!--<a href="#" title="Click for more info">More Info</a> -->
+				</div>
+			</div>
+		</div>
+
+
+		<div id="features"><!-- <h2>JRebirth, Write your JavaFX2 Application more simply !</h2> -->
+			JRebirth JavaFX 2 Application Framework provides a
+			<span style="color: #f28705;">really simple way to write sophisticated and powerful RIA's applications</span>
+			. By leveraging the best of previous RIA framework, we can deliver the ultimate one to work cleanly and efficiently with this
+			<span style="color: #f28705;">awesome API</span>
+			. Check our
+			<a href="overview.html">overview page</a>
+			to see a diagram illustrating features and layers. Have also a look to
+			<a href="lightningtalk">demo applications</a>
+			which were used as
+			<span style="color: #f28705;">JavaFX 2</span>
+			presentations.
+		</div>
+		<div id="download">
+			<h1>
+				<a href="http://repo.jrebirth.org/repo/org/jrebirth">Download</a>
+			</h1>
+
+			<ul>
+				<li>
+					<a href="http://jcenter.bintray.com/org/jrebirth">Get It from JCenter</a>
+				</li>
+
+				<li>
+					<a href="http://www.jrebirth.org/index.php?mact=DownCnt,cntnt01,click,0&amp;cntnt01name=zip7&amp;cntnt01link=uploads%252Freleases%252FJRebirth-0.7.2.zip&amp;cntnt01returnid=15">JRebirth 0.7.2 .zip</a>
+					<span style="font-size: 0.5em;"> - 199 hits</span>
+				</li>
+				<li>
+					<a href="http://www.jrebirth.org/index.php?mact=DownCnt,cntnt01,click,0&amp;cntnt01name=prez&amp;cntnt01link=uploads%252Freleases%252Fjavafx2-1.1.0-SNAPSHOT.zip&amp;cntnt01returnid=15">Breizhcamp</a>
+					<span style="font-size: 0.5em;"> - 699 hits</span>
+				</li>
+				<li>
+					<a
+						href="http://www.jrebirth.org/index.php?mact=DownCnt,cntnt01,click,0&amp;cntnt01name=light&amp;cntnt01link=http%253A%252F%252Fapps.jrebirth.org%252Flightningtalk%252Flightningtalk-1.0.0.zip&amp;cntnt01returnid=15"
+					>LightningTalk</a>
+					<span style="font-size: 0.5em;"> - 132 hits</span>
+				</li>
+			</ul>
+		</div>
+
+		<div id="twitter">
+			<a class="twitter-timeline" href="https://twitter.com/JRebirth4JFX" data-widget-id="313731797349441536">Tweets de @JRebirth4JFX</a>
+			<script>//<![CDATA[
+			!function(d,s,id){
+					var js,fjs=d.getElementsByTagName(s)[0];
+					if(!d.getElementById(id)){
+						js=d.createElement(s);
+						js.id=id;
+						js.src="//platform.twitter.com/widgets.js";
+						fjs.parentNode.insertBefore(js,fjs);
+					}
+				}(document,"script","twitter-wjs");
+			//]]></script>
+
+		</div>
+
+		<div id="3mintuto" style="float: left; width: 600px;">
+
+			<h2>3 minute Tutorial</h2>
+			<object width="600" height="400">
+				<param name="movie" value="http://www.youtube.com/v/Ii2Rf7qinpM?rel=0&amp;fs=1&amp;loop=0"></param>
+				<param name="wmode" value="transparent"></param>
+				<param name="allowFullScreen" value="true"></param>
+				<embed src="http://www.youtube.com/v/Ii2Rf7qinpM?rel=0&amp;fs=1&amp;loop=0" allowfullscreen="true" type="application/x-shockwave-flash" wmode="transparent" width="600" height="485">
+				</embed>
+			</object>
+
+			<h2>Command Line Tutorial</h2>
+			<p>For Maven Gurus, here you have command line to type to do the job</p>
+			<h3>Full Auto</h3>
+			<a href="images/tuto/Maven_Archetype_CLI_OneLine.png" rel="lightbox">
+				<img src="images/icons/view.gif" />
+			</a>
+			mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=http://www.jrebirth.org/uploads/catalogs/jrebirth-catalog.xml -DarchetypeGroupId=org.jrebirth -DarchetypeArtifactId=archetype
+			-DarchetypeVersion=0.7.2-SNAPSHOT -DarchetypeRepository=http://repo.jrebirth.org/jrebirth-snapshot-local -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
+			-Dpackage=org.jrebirth.sample
+			<h3>Interactive pre-filled</h3>
+			mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/uploads/catalogs/jrebirth-catalog.xml -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
+			-Dpackage=org.jrebirth.sample
+			<h3>Full Interactive</h3>
+			<a href="images/tuto/Maven_Archetype_CLI_interactive.png" rel="lightbox">
+				<img src="images/icons/view.gif" />
+			</a>
+			mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/uploads/catalogs/jrebirth-catalog.xml
+		</div>
+
+		<!-- id="ohloh" -->
+		<div style="text-align:center;float:right">
+			<script type="text/javascript" src="http://www.ohloh.net/p/599672/widgets/project_users.js?style=gray"></script>
+			<script type="text/javascript" src="http://www.ohloh.net/p/599672/widgets/project_thin_badge.js"></script>
+		</div>
+
+		<div id="thanks" style="float:right">
+			<h1>Special Thanks</h1>
+			<a title="YourKit, Java Profiler" href="http://www.yourkit.com" target="_blank">YourKit</a>,
+			used for Memory &amp; CPU Java profiling.
+		</div>
+		
+		<div style="clear: both;">
+		</div>
+
+	</body>
+</document> 	

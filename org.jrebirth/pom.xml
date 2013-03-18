@@ -5,8 +5,9 @@
 	<version>0.8.0-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
-	<name>JRebirth</name>
+	<name>JRebirth Parent</name>
 	<url>http://sites.jrebirth.org/org.jrebirth-${project.version}</url>
+	<description>JRebirth is an Application Framework dedicated to JavaFX 2+ technology.</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -50,7 +51,7 @@
 	</scm>
 
 	<organization>
-		<name>JRebirth Open Group</name>
+		<name>JRebirth OSS</name>
 		<url>http://www.jrebirth.org</url>
 	</organization>
 
@@ -245,7 +246,7 @@
 					<dependency>
 						<groupId>org.apache.maven.wagon</groupId>
 						<artifactId>wagon-ssh</artifactId>
-						<version>2.0</version>
+						<version>2.4</version>
 					</dependency>
 
 					<dependency>
@@ -273,10 +274,17 @@
 		</plugins>
 
 		<extensions>
+		<!--
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ftp</artifactId>
 				<version>2.2</version>
+			</extension>-->
+			
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>2.4</version>
 			</extension>
 		</extensions>
 		
@@ -372,7 +380,8 @@
 		<site>
 			<id>JRebirth_Sites</id>
 			<name>JRebirth Sites</name>
-			<url>ftp://jrebirth.org/sites/org.jrebirth-${project.version}</url>
+			<!--<url>ftp://jrebirth.org/sites/org.jrebirth-${project.version}</url>-->
+			<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url>	
 		</site>
 
 	</distributionManagement>
@@ -413,5 +422,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<description>JRebirth is an Application Framework dedicated to JavaFX 2+ technology.</description>
+	
 </project>

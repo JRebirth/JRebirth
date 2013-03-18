@@ -1,0 +1,17 @@
+div.component h1 {
+    font-size: 15px;
+}
+div.component {
+    background-color: #FFFFFF;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 4px 5px #666666;
+    float: left;
+    font-family: Verdana;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: normal;
+    margin: 20px;
+    overflow: visible;
+    padding: 10px 20px;
+    width: 40%;
+}
