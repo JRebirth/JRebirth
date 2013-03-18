@@ -10,8 +10,8 @@ Release Notes
 
 * 0.8.0 - Major version - 2013-04-22 (work in progress)
 
-    * JRebirth Web site will be entirely generated with Maven engine
-    All documentation is now written with Doxia and could be updated on GitHub.
+    * JRebirth Web site will be entirely generated with Maven Doxia engine.\    
+    All documentation is now written with Doxia and could be updated on GitHub.\
     Every one can send a pull request to add information or to correct mistakes.
 
 * 0.7.2 - Fix version - 2013-02-22

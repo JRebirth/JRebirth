@@ -31,7 +31,7 @@
 	font-weight: bold;
 	line-height: 43px;
 	padding: 0px 10px;
-	text-align: center;
+	text-align: justify;
 	text-decoration: none;
 }
 
@@ -65,6 +65,8 @@
 	float: none;
 	padding: 0px;
 	width: 180px;
+}
+#navmenu li li a {
 	line-height: 30px;
 }
 
@@ -72,8 +74,8 @@
 	display: block;
 	font-size: 12px;
 	font-style: normal;
-	padding: 0px 10px 0px 15px;
-	text-align: left;
+	padding: 0px 10px 0px 10px;
+	text-align: justify;
 }
 
 #navmenu li ul a:hover {
