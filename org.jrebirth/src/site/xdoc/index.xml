@@ -16,7 +16,7 @@
 	</head>
 
 	<body>
-
+<!--
 		<div id="catcher">
 			<div id="catcher_block">
 				<div>
@@ -43,11 +43,11 @@
 					&amp;
 					<a title="Open Source Repository" href="https://github.com/JRebirth/JRebirth" target="_blank">Open Source</a>
 					Library
-					<br /> <!--<a href="#" title="Click for more info">More Info</a> -->
+					<br /> < ! - - <a href="#" title="Click for more info">More Info</a> - - >
 				</div>
 			</div>
 		</div>
-
+-->
 
 		<div id="features"><!-- <h2>JRebirth, Write your JavaFX2 Application more simply !</h2> -->
 			JRebirth JavaFX 2 Application Framework provides a
@@ -62,6 +62,7 @@
 			<span style="color: #f28705;">JavaFX 2</span>
 			presentations.
 		</div>
+		
 		<div id="download">
 			<h1>
 				<a href="http://repo.jrebirth.org/repo/org/jrebirth">Download</a>

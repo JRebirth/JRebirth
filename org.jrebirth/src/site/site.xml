@@ -7,9 +7,9 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd" name="JRebirth">
 		<head>
 			<meta name="keywords" content="JRebirth, JavaFX, Application, Framework, WCS, MVC, Maven" />
 
-			<script type="text/javascript" src="js/prettify.js"></script>
-			<script type="text/javascript" src="js/syntax.js"></script>
-			<link rel="stylesheet" type="text/css" href="css/eclipse.css" media="all" />
+			<script type="text/javascript" src="$relativePath/js/prettify.js"></script>
+			<script type="text/javascript" src="$relativePath/js/syntax.js"></script>
+			<link rel="stylesheet" type="text/css" href="$relativePath/css/eclipse.css" media="all" />
 		</head>
 		
 		<breadcrumbs>
@@ -74,7 +74,7 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd" name="JRebirth">
 
 	<skin>
 		<groupId>org.jrebirth.site</groupId>
-		<artifactId>skin</artifactId>
+		<artifactId>jrebirth-skin</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</skin>
 </project> 

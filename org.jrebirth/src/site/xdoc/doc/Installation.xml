@@ -10,6 +10,9 @@
   %HTMLspecial;
 ]>
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<head>
+		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+	</head>
 	<body>
 
 		<section name="Installation" title="2 Installation">
@@ -69,7 +72,7 @@
 						Pay attention that JCenter contains only 'Release' artifacts, no 'snapshot' versions
 					</p>
 					<macro name="include">
-						<param name="highlight-theme" value="eclipse" />
+						<!-- <param name="highlight-theme" value="eclipse" /> -->
 						<param name="source" value="../includes/JCenterProfile_settings.xml" />
 					</macro>
 
