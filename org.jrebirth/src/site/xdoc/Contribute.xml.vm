@@ -10,15 +10,26 @@
   %HTMLspecial;
 ]>
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
 	<head>
+		#set( $catcherTitle = "Contribute!")
+	#set( $catcherContent = "Here you have some interesting links if you want to contribute to JRebirth projects.")
+	
 		<link rel="stylesheet" type="text/css" href="css/component.css" media="all" />
 		<link rel="stylesheet" type="text/css" href="css/contribute.css" media="all" />
 	</head>
 	<body>
+	
+	<div class="catcherTitle">Contribute!</div>
+	
 
-		<section id="Contribute" name="Contribute" title="Contribute">
+#if( 1 < 10 )
+    <strong>$catcherTitle</strong>
+#else
+    <strong>$catcherContent</strong>
+#end
 
-			<p>Here you have some interesting links if you want to contribute to JRebirth projects.</p>
+		<section id="Contribute" name="">
 
 			<subsection name="Bugs Tracker" id="maven" class="component soft">
 				<p>We are using GitHub issue Tracker to follow features requests and bugs.</p>

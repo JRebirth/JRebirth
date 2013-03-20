@@ -274,20 +274,15 @@
 		</plugins>
 
 		<extensions>
-		<!--
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ftp</artifactId>
-				<version>2.2</version>
-			</extension>-->
-			
+			<!-- <extension> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-ftp</artifactId> <version>2.2</version> </extension> -->
+
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ssh</artifactId>
 				<version>2.4</version>
 			</extension>
 		</extensions>
-		
+
 		<pluginManagement>
 			<plugins>
 				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
@@ -364,28 +359,54 @@
 	</dependencies>
 
 	<distributionManagement>
-
 		<repository>
-			<id>bintray-jrebirth-JRebirth-JRebirth</id>
-			<name>jrebirth-JRebirth-JRebirth</name>
-			<url>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirth/</url>
+			<id>${repositoryId}</id>
+			<name>${repositoryName}</name>
+			<url>${repositoryUrl}</url>
 		</repository>
-
 		<snapshotRepository>
-			<id>JRebirth-Snapshot</id>
-			<name>JRebirth Snasphots Repository</name>
-			<url>http://repo.jrebirth.org/jrebirth-snapshot-local</url>
+			<id>${snapshotRepositoryId}</id>
+			<name>${snapshotRepositoryName}</name>
+			<url>${snapshotRepositoryUrl}</url>
 		</snapshotRepository>
-
 		<site>
 			<id>JRebirth_Sites</id>
 			<name>JRebirth Sites</name>
-			<!--<url>ftp://jrebirth.org/sites/org.jrebirth-${project.version}</url>-->
-			<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url>	
+			<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url>
 		</site>
-
 	</distributionManagement>
 
+	<profiles>
+		<profile>
+			<id>JRebirth</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- Release repository -->
+				<repositoryId>JRebirth-Release</repositoryId>
+				<repositoryName>JRebirth Releases Repository</repositoryName>
+				<repositoryUrl>http://repo.jrebirth.org/jrebirth-release-local</repositoryUrl>
+				<!-- Snapshot repository -->
+				<snapshotRepositoryId>JRebirth-Snapshot</snapshotRepositoryId>
+				<snapshotRepositoryName>JRebirth Snasphots Repository</snapshotRepositoryName>
+				<snapshotRepositoryUrl>http://repo.jrebirth.org/jrebirth-snapshot-local</snapshotRepositoryUrl>
+			</properties>
+		</profile>
+		<profile>
+			<id>Bintray</id>
+			<properties>
+				<!-- Release repository -->
+				<repositoryId>bintray-jrebirth-JRebirth-JRebirth</repositoryId>
+				<repositoryName>jrebirth-JRebirth-JRebirth</repositoryName>
+				<repositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirth/</repositoryUrl>
+				<!-- Snapshot repository -->
+				<snapshotRepositoryId>bintray-jrebirth-JRebirth-JRebirth</snapshotRepositoryId>
+				<snapshotRepositoryName>jrebirth-JRebirth-JRebirth</snapshotRepositoryName>
+				<snapshotRepositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirth/</snapshotRepositoryUrl>
+			</properties>
+		</profile>
+	</profiles>
 
 	<developers>
 		<developer>
@@ -422,5 +443,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 </project>
