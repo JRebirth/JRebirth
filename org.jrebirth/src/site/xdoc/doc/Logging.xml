@@ -10,6 +10,11 @@
   %HTMLspecial;
 ]>
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>Configure Logging</title>
+	</properties>
+
 	<body>
 
 		<section name="Logging" title="Logging">
@@ -71,7 +76,8 @@
 			<subsection name="LOGback" title="LOGback">
 				<p>Personnaly I choose LOGback implementation because it represents a good
 					compromise between performances and customization. It was finely
-					integrated because it was written by the same team as slf4j.
+					integrated because it was written by the same team as
+					slf4j.
 				</p>
 				<p>LOGBack jars are quite heavy and weight more than 800 kb so it could be
 					a probleme for tiny applications.

@@ -16,38 +16,31 @@
 	</head>
 
 	<body>
-<!--
-		<div id="catcher">
-			<div id="catcher_block">
-				<div>
-					<h1 style="margin-top: 50px; margin-left: 80px;">
-						Simplest
-						<br />
-						JavaFX 2
-						<br />
-						Framework
-					</h1>
-				</div>
-				<div class="catchme" style="padding-top: 40px; padding-left: 50px; clear: none; float: left;">
-					RIA Pattern providing perfect
-					<a title="Separation of Concerns" href="http://en.wikipedia.org/wiki/Separation_of_concerns" target="_blank">SoC</a>
-					<br />
-					Simplify Multithreaded Development
-					<br />
-					Built according to
-					<a title="KISS principle" href="http://en.wikipedia.org/wiki/KISS_principle" target="_blank">KISS principle</a>
-					<br />
-					Lightweight (lower than 50kb with Pack200)
-					<br />
-					<a title="Apache 2 Licensed" href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Free</a>
-					&amp;
-					<a title="Open Source Repository" href="https://github.com/JRebirth/JRebirth" target="_blank">Open Source</a>
-					Library
-					<br /> < ! - - <a href="#" title="Click for more info">More Info</a> - - >
-				</div>
-			</div>
+
+		<div id="catcherTitle">
+			Simplest
+			<br />
+			JavaFX 2
+			<br />
+			Framework
 		</div>
--->
+		<div id="catcherContent">
+			RIA Pattern providing perfect
+			<a title="Separation of Concerns" href="http://en.wikipedia.org/wiki/Separation_of_concerns" target="_blank">SoC</a>
+			<br />
+			Simplify Multithreaded Development
+			<br />
+			Built according to
+			<a title="KISS principle" href="http://en.wikipedia.org/wiki/KISS_principle" target="_blank">KISS principle</a>
+			<br />
+			Lightweight (lower than 50kb with Pack200)
+			<br />
+			<a title="Apache 2 Licensed" href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Free</a>
+			&amp;
+			<a title="Open Source Repository" href="https://github.com/JRebirth/JRebirth" target="_blank">Open Source</a>
+			Library
+			<br /> <!-- <a href="#" title="Click for more info">More Info</a> -->
+		</div>
 
 		<div id="features"><!-- <h2>JRebirth, Write your JavaFX2 Application more simply !</h2> -->
 			JRebirth JavaFX 2 Application Framework provides a
@@ -62,7 +55,7 @@
 			<span style="color: #f28705;">JavaFX 2</span>
 			presentations.
 		</div>
-		
+
 		<div id="download">
 			<h1>
 				<a href="http://repo.jrebirth.org/repo/org/jrebirth">Download</a>
@@ -106,49 +99,65 @@
 
 		</div>
 
+
 		<div id="3mintuto" style="float: left; width: 600px;">
 
-			<h2>3 minute Tutorial</h2>
-			<object width="600" height="400">
-				<param name="movie" value="http://www.youtube.com/v/Ii2Rf7qinpM?rel=0&amp;fs=1&amp;loop=0"></param>
-				<param name="wmode" value="transparent"></param>
-				<param name="allowFullScreen" value="true"></param>
-				<embed src="http://www.youtube.com/v/Ii2Rf7qinpM?rel=0&amp;fs=1&amp;loop=0" allowfullscreen="true" type="application/x-shockwave-flash" wmode="transparent" width="600" height="485">
-				</embed>
-			</object>
+			<section id="3min" name="3 minute Tutorial">
+				<object width="600" height="400">
+					<param name="movie" value="http://www.youtube.com/v/Ii2Rf7qinpM?rel=0&amp;fs=1&amp;loop=0"></param>
+					<param name="wmode" value="transparent"></param>
+					<param name="allowFullScreen" value="true"></param>
+					<embed src="http://www.youtube.com/v/Ii2Rf7qinpM?rel=0&amp;fs=1&amp;loop=0" allowfullscreen="true" type="application/x-shockwave-flash" wmode="transparent" width="600" height="485">
+					</embed>
+				</object>
 
-			<h2>Command Line Tutorial</h2>
-			<p>For Maven Gurus, here you have command line to type to do the job</p>
-			<h3>Full Auto</h3>
-			<a href="images/tuto/Maven_Archetype_CLI_OneLine.png" rel="lightbox">
-				<img src="images/icons/view.gif" />
-			</a>
-			mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=http://www.jrebirth.org/uploads/catalogs/jrebirth-catalog.xml -DarchetypeGroupId=org.jrebirth -DarchetypeArtifactId=archetype
-			-DarchetypeVersion=0.7.2-SNAPSHOT -DarchetypeRepository=http://repo.jrebirth.org/jrebirth-snapshot-local -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
-			-Dpackage=org.jrebirth.sample
-			<h3>Interactive pre-filled</h3>
-			mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/uploads/catalogs/jrebirth-catalog.xml -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
-			-Dpackage=org.jrebirth.sample
-			<h3>Full Interactive</h3>
-			<a href="images/tuto/Maven_Archetype_CLI_interactive.png" rel="lightbox">
-				<img src="images/icons/view.gif" />
-			</a>
-			mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/uploads/catalogs/jrebirth-catalog.xml
+			</section>
+
+			<section id="cli" name="Command Line Tutorial">
+				<p>For Maven Gurus, here you have command line to type to do the job</p>
+
+				<subsection name="Full Auto">
+					<a href="images/tuto/Maven_Archetype_CLI_OneLine.png" rel="lightbox">
+						<img src="images/icons/view.gif" />
+					</a>
+					mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=http://www.jrebirth.org/uploads/catalogs/jrebirth-catalog.xml -DarchetypeGroupId=org.jrebirth
+					-DarchetypeArtifactId=archetype
+					-DarchetypeVersion=0.7.2-SNAPSHOT -DarchetypeRepository=http://repo.jrebirth.org/jrebirth-snapshot-local -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
+					-Dpackage=org.jrebirth.sample
+				</subsection>
+
+				<subsection name="Interactive pre-filled">
+					mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/uploads/catalogs/jrebirth-catalog.xml -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
+					-Dpackage=org.jrebirth.sample
+				</subsection>
+
+				<subsection name="Full Interactive">
+					<a href="images/tuto/Maven_Archetype_CLI_interactive.png" rel="lightbox">
+						<img src="images/icons/view.gif" />
+					</a>
+					mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/uploads/catalogs/jrebirth-catalog.xml
+				</subsection>
+			</section>
 		</div>
 
 		<!-- id="ohloh" -->
-		<div style="text-align:center;float:right">
-			<script type="text/javascript" src="http://www.ohloh.net/p/599672/widgets/project_users.js?style=gray"></script>
-			<script type="text/javascript" src="http://www.ohloh.net/p/599672/widgets/project_thin_badge.js"></script>
+		<div id="ohloh">
+			<div>
+				<script type="text/javascript" src="http://www.ohloh.net/p/599672/widgets/project_users.js?style=gray"></script>
+			</div>
+			<div>
+				<script type="text/javascript" src="http://www.ohloh.net/p/599672/widgets/project_thin_badge.js"></script>
+			</div>
 		</div>
 
-		<div id="thanks" style="float:right">
+		<div id="thanks">
 			<h1>Special Thanks</h1>
 			<a title="YourKit, Java Profiler" href="http://www.yourkit.com" target="_blank">YourKit</a>,
 			used for Memory &amp; CPU Java profiling.
-		</div>
-		
-		<div style="clear: both;">
+			<a title="Structure 101" href="http://www.structure101.com/" target="_blank">Structure101 guys</a>,
+			for give us a free license of <a href="http://structure101.com/products/#/refactor">ReStructure 101</a>.
+			<a title="Jet Brains" href="http://www.jetbrains.com" target="_blank">Jet Brains</a>,
+			for give us a free license of <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>.
 		</div>
 
 	</body>

@@ -10,119 +10,164 @@
   %HTMLspecial;
 ]>
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>Introduction</title>
+	</properties>
+
 	<body>
+		<section id="intro" name="Introduction" title="Introduction">
+			<macro name="toc" section="0" fromDepth="1" toDepth="3" />
 
-<section id="intro" name="Introduction" title="Introduction">
-  <macro name="toc" section="0" fromDepth="1" toDepth="3" />
+			<subsection name="Origins" title="Origins">
 
-<subsection name="Origins" title="Origins">
+				<p>Just before the 2011's summer I was bored to work with some RIA toolkit that
+					don't give me enought satisfaction.
+				</p>
 
-<p>Just before the 2011's summer I was bored to work with some RIA toolkit that
-don't give me enought satisfaction.</p>
+				<p>Like many people I thought tath web applications were the ultimate solution
+					to build quickly beautiful and sophisticated applications. Before the advent of
+					JQuery's like toolkit I built mine, a
+					modularized javascript framework written
+					with OOP spirit. Browser compatibility stops the projects because it requires
+					too much time to manage their particularities. But the biggest pitfall is the
+					Javascript language that is not enough powerful to build cleanly big
+					application and not enough efficient than pre-compiled ones.
+				</p>
 
-<p>Like many people I thought tath web applications were the ultimate solution
-to build quickly beautiful and sophisticated applications. Before the advent of
-JQuery's like toolkit I built mine, a modularized javascript framework written
-with OOP spirit. Browser compatibility stops the projects because it requires
-too much time to manage their particularities. But the biggest pitfall is the
-Javascript language that is not enough powerful to build cleanly big
-application and not enough efficient than pre-compiled ones.</p>
+				<p>Then I was upset by the single thread used by Flash and Flex application,
+					even if I really have pleasure to work with FlexBuilder with PureMVC framework.
+					Making extension of Flex components was
+					also sometimes pretty hard due to
+					inheritance of Flash widgets (partially resolved with new spark components).
+				</p>
 
-<p>Then I was upset by the single thread used by Flash and Flex application,
-even if I really have pleasure to work with FlexBuilder with PureMVC framework.
-Making extension of Flex components was also sometimes pretty hard due to
-inheritance of Flash widgets (partially resolved with new spark components).</p>
+				<p>Unfortunately I also worked several month with Silverlight (C#) provided by
+					Microsoft, the language itself have some interesting feature but ecosystem is
+					not as good as the Java one. The MVVM
+					pattern (Model-View-ViewModel) is a fake
+					that hide a MVVCVM (Model-View-ViewController-ViewModel) where VC is the
+					.xaml.cs file...
+				</p>
 
-<p>Unfortunately I also worked several month with Silverlight (C#) provided by
-Microsoft, the language itself have some interesting feature but ecosystem is
-not as good as the Java one. The MVVM pattern (Model-View-ViewModel) is a fake
-that hide a MVVCVM (Model-View-ViewController-ViewModel) where VC is the
-.xaml.cs file...</p>
+				<p>Before working with RIA, I obviously worked with Swing and SWT/JFace
+					toolkit. And finally Swing was not so bad !
+				</p>
 
-<p>Before working with RIA, I obviously worked with Swing and SWT/JFace
-toolkit. And finally Swing was not so bad !</p>
+				<p>It suffered from a lot drawback like graphical performance issues,
+					concurrency problems and old layout and components. But it was possible to
+					write nice application powered with a pleasant Look
+					&amp; Feel. </p>
 
-<p>It suffered from a lot drawback like graphical performance issues,
-concurrency problems and old layout and components. But it was possible to
-write nice application powered with a pleasant Look &amp; Feel. </p>
+				<p>So JRebirth was primarly though to be a rebirth of Java Swing Toolkit in
+					order to create the missing Application Framework that Swing never had.
+				</p>
 
-<p>So JRebirth was primarly though to be a rebirth of Java Swing Toolkit in
-order to create the missing Application Framework that Swing never had.</p>
+				<p>
+					I posted on the
+					<a href="https://groups.google.com/d/topic/toulouse-jug/d3zZJXPqUhI/discussion">ToulouseJUG</a>
+					mailing list a question about my Swing revival vision, and during the
+					discussion I learn taht Oracle had planned to rewrite the first JavaFX entirely
+					in Java (and leave the awful fxscript
+					language). So I spent the summer in
+					reading beta documentation and during the autumn I began to play with it ...
+					and I decided to build my own Framework.
+				</p>
 
-<p>I posted on the <a
-href="https://groups.google.com/d/topic/toulouse-jug/d3zZJXPqUhI/discussion">ToulouseJUG</a>
-mailing list a question about my Swing revival vision, and during the
-discussion I learn taht Oracle had planned to rewrite the first JavaFX entirely
-in Java (and leave the awful fxscript language). So I spent the summer in
-reading beta documentation and during the autumn I began to play with it ...
-and I decided to build my own Framework.</p>
+				<p></p>
 
-<p></p>
+				<p>
+					The name was readily found:
+					<span class="highlight">JRebirth</span>
+					(for
+					Java Rebirth) JavaFX Application Framework
+				</p>
 
-<p>The name was readily found: <span class="highlight">JRebirth</span> (for
-Java Rebirth) JavaFX Application Framework </p>
+				<p>
+					Everything began on a local SVN and then was pushed on
+					<a href="https://github.com/JRebirth/JRebirth">Github</a>
+					on Feb 22, 2012, few
+					days after my first talk about JavaFX (2).
+				</p>
 
-<p>Everything began on a local SVN and then was pushed on <a
-href="https://github.com/JRebirth/JRebirth">Github</a> on Feb 22, 2012, few
-days after my first talk about JavaFX (2).</p>
+			</subsection>
 
-</subsection>
+			<subsection name="Objectives" title="JRebirth Objectives">
 
-<subsection name="Objectives" title="JRebirth Objectives">
+				<p>The main goal of building yet another application framework is to be the
+					more convenient as possible for developpers.
+				</p>
 
-<p>The main goal of building yet another application framework is to be the
-more convenient as possible for developpers.</p>
+				<p>The major issue when building graphical application is to create
+					unresponsive memory-hungry application, while dealing with ugly code hard to
+					maintain.
+				</p>
 
-<p>The major issue when building graphical application is to create
-unresponsive memory-hungry application, while dealing with ugly code hard to
-maintain.</p>
+				<p>
+					To adress the first point JRebirth offers a way to
+					<span class="highlight">manage threads</span>
+					on your behalf, for the second JRebirth
+					<span class="highlight">defines layers</span>
+					to maintain a good Separation of
+					Concern (SoC).
+				</p>
 
-<p>To adress the first point JRebirth offers a way to <span
-class="highlight">manage threads</span> on your behalf, for the second JRebirth
-<span class="highlight">defines layers</span> to maintain a good Separation of
-Concern (SoC).</p>
+				<p></p>
 
-<p></p>
+				<p>
+					<span class="question">Why don't manage myself my application thread
+						?
+					</span>
+				</p>
 
-<p><span class="question">Why don't manage myself my application thread
-?</span></p>
+				<p>Writing concurrent program is more complex than you can think, problems can
+					occur whenever and always when you are demoing your application with your
+					client.
+				</p>
 
-<p>Writing concurrent program is more complex than you can think, problems can
-occur whenever and always when you are demoing your application with your
-client.</p>
+				<p></p>
 
-<p></p>
+				<p>
+					<span class="question">Layers sucks !</span>
+				</p>
 
-<p><span class="question">Layers sucks !</span></p>
+				<p>Are you sure ? Layer is the more basic way to organize and reuse smartly
+					your code. It could seem to add some overhead to it but when you are working
+					with a small or big team over years, you will
+					enjoy to retrieve at the same
+					place the same logic. It requires to respect some rules.
+				</p>
 
-<p>Are you sure ? Layer is the more basic way to organize and reuse smartly
-your code. It could seem to add some overhead to it but when you are working
-with a small or big team over years, you will enjoy to retrieve at the same
-place the same logic. It requires to respect some rules.</p>
+				<p>Moreover you will have the capability to customize your layer to fit your
+					need by factorizing your code.
+				</p>
 
-<p>Moreover you will have the capability to customize your layer to fit your
-need by factorizing your code.</p>
+			</subsection>
+			<subsection name="KeyFeatures" title="JRebirth Key features">
 
-</subsection>
-<subsection name="KeyFeatures" title="JRebirth Key features">
+				<p>Main features of JRebirth Application Framework are:</p>
+				<ol>
+					<li>Simplify Thread Management</li>
+					<li>Avoid memory leak</li>
+					<li>Maintain a good SoC </li>
+					<li>Be the more convenient as possible for developpers</li>
+					<li>Be lightweight (and modularizable)</li>
+					<li>Follow OSS spirit and Java Best Practices</li>
+				</ol>
+			</subsection>
 
-<p>Main features of JRebirth Application Framework are:</p>
-<ol>
-  <li>Simplify Thread Management</li>
-  <li>Avoid memory leak</li>
-  <li>Maintain a good SoC </li>
-  <li>Be the more convenient as possible for developpers</li>
-  <li>Be lightweight (and modularizable)</li>
-  <li>Follow OSS spirit and Java Best Practices</li>
-</ol>
-</subsection>
+			<div class="bottomLinks">
+				<div class="previousDocPage">
+					<a href="index.html">Previous - TOC</a>
+				</div>
+				<div class="nextDocPage">
+					<a href="Installation.html">Next - How to install JRebirth</a>
+				</div>
+				<div class="tocDocPage">
+					<a href="index.html">TOC</a>
+				</div>
+			</div>
 
-<div class="bottomLinks">
-	<div class="previousDocPage"><a href="index.html">Previous - TOC</a></div>
-	<div class="nextDocPage"><a href="Installation.html">Next - How to install JRebirth</a></div>
-	<div class="tocDocPage"><a href="index.html">TOC</a></div>
-</div>
-
-</section>
-</body>
+		</section>
+	</body>
 </document>
