@@ -10,6 +10,11 @@
   %HTMLspecial;
 ]>
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>Overview</title>
+	</properties>
+
 	<head>
 		<link rel="stylesheet" type="text/css" href="../css/component.css" media="all" />
 	</head>
@@ -34,10 +39,11 @@
 
 			</subsection>
 
-			<subsection name="Application" title="Application">
+			<subsection name="Application" title="Application" class="component">
 				<p>
 					The
-					<span class="high">App</span>lication is the starting class to extends to build a JavaFX 2.0 application that use JRebirth framework.
+					<span class="high">App</span>
+					lication is the starting class to extends to build a JavaFX 2.0 application that use JRebirth framework.
 				</p>
 				<p>
 					<a href="application">Learn more about Application</a>
@@ -45,7 +51,7 @@
 			</subsection>
 
 
-			<subsection name="GlobalFacade" title="GlobalFacade">
+			<subsection name="GlobalFacade" title="GlobalFacade" class="component">
 				<p>
 					The GlobalFacade is just used to simplify acess from any layer to any other.
 					<br />
@@ -53,9 +59,10 @@
 				</p>
 			</subsection>
 
-			<subsection name="Notifier" title="Notifier and Wave">
+			<subsection name="Notifier" title="Notifier and Wave" class="component">
 				<p>The Notifier layer will transport small notifications called Waves. This notification engine is integrated into the core of JRebirth. Its role is to manage communication throught all JRebirth
-					layers.</p>
+					layers.
+				</p>
 				<p>Instead of propagating events or notifications we are using Waves. Why Waves ? Because it sounds great.</p>
 				<p>When I send a wave I feel like a surfer !</p>
 				<p>A wave can be sent or received by three kinds of components :</p>
@@ -70,7 +77,7 @@
 				</p>
 			</subsection>
 
-			<subsection name="Commands" title="CommandFacade and Commands">
+			<subsection name="Commands" title="CommandFacade and Commands" class="component">
 				<p>The Command layer is used to manage complex group of actions (MultiCommand) (synchronously or asynchronously), or atomic reusable action (Command).</p>
 				<p>They can be processed into one of the 3 kind of thread managed by using annotation.</p>
 				<p>All interactions between layers must be managed by Commands.</p>
@@ -79,7 +86,7 @@
 				</p>
 			</subsection>
 
-			<subsection name="Services" title="ServiceFacade and Services">
+			<subsection name="Services" title="ServiceFacade and Services" class="component">
 				<p>The Service layer is used to retrieve Data from outside the application or to communicate with others applications.</p>
 				<p>It can use Spring HttpRequests, Web Services, Restlets, files or whatever you want. They are managed as Worker tasks in a dedicated thread pool.</p>
 				<p>
@@ -87,7 +94,7 @@
 				</p>
 			</subsection>
 
-			<subsection name="UI" title="UiFacade and Models">
+			<subsection name="UI" title="UiFacade and Models" class="component">
 				<p>The Model layer is used to manage the loading of the data displayed into a view, for example by calling a service.</p>
 				<p>A model manage the View logic.</p>
 				<p>A Model creates its View automatically by reflection.</p>
@@ -96,13 +103,13 @@
 				</p>
 			</subsection>
 
-			<subsection name="Controllers" title="Controllers">
+			<subsection name="Controllers" title="Controllers" class="component">
 				<p>A Controller manage the View's Interactions logic. it's used to intercept all JavaFX components' events.</p>
 				<p>A controller must implements an custom Adapter to manage events (like MouseAdapter) and link its built-in Handler to the View's nodes (like MouseHandler).</p>
 				<p>Or it can simply implement custom methods if annotations are used. </p>
 			</subsection>
 
-			<subsection name="Views" title="Views">
+			<subsection name="Views" title="Views" class="component">
 				<p>The view layer is used to create user interface by using JavaFX visual components.</p>
 				<p>A View manage the View's Presentation logic.</p>
 				<p>Each view have a Model used to acessinterrogate to display data.</p>

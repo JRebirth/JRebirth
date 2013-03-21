@@ -10,6 +10,11 @@
   %HTMLspecial;
 ]>
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>Installation</title>
+	</properties>
+
 	<head>
 		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
 	</head>
@@ -84,16 +89,17 @@
 						JRebirth has its own artifact repository (
 						<a href="http://repo.jrebirth.org">repo.jrebirth.org</a>
 						), but the server is not 7/7 24/24 ready. It could be offline when you need to recompile your application.
-						Its main advantage is not manage snapshot versions, so useful when you want to test a new feature or a bug fix.
+						Its main advantage is not manage snapshot versions, so useful when you want to test a
+						new feature or a bug fix.
 					</p>
 					<p>
-					You have 2 ways to plug your maven build to our server:
-					<ol>
-				<li>Add a repositories section ionto the pom.xml of your project.</li>
-				<li>Add a profile section into your settings.xml (like for JCenter configuration)</li>	
-					</ol>
+						You have 2 ways to plug your maven build to our server:
+						<ol>
+							<li>Add a repositories section ionto the pom.xml of your project.</li>
+							<li>Add a profile section into your settings.xml (like for JCenter configuration)</li>
+						</ol>
 					</p>
-					
+
 					<!-- <pre class="prettyprint lang-xml linenums"> -->
 					<source><![CDATA[
 						<repositories>
@@ -136,19 +142,19 @@
 					<!-- </pre> -->
 				</subsection>
 
-					<p>
-						Add this declaration into your
-						<strong>pom.xml</strong>
-					</p>
-					<p>It's also possible to add this declaration into the profile section of
-						your user settings.xml or enterprise settings.xml
-					</p>
-					<p>
-						<em>JRebirth is not yet on Maven Central repository because the modules
-							list will slightly evolve until the release of the final 1.0.0 and we
-							don't want to add confusion about it.
-						</em>
-					</p>
+				<p>
+					Add this declaration into your
+					<strong>pom.xml</strong>
+				</p>
+				<p>It's also possible to add this declaration into the profile section of
+					your user settings.xml or enterprise settings.xml
+				</p>
+				<p>
+					<em>JRebirth is not yet on Maven Central repository because the modules
+						list will slightly evolve until the release of the final 1.0.0 and we
+						don't want to add confusion about it.
+					</em>
+				</p>
 
 				<subsection id="hybrid" name="Hybrid Configuration">
 

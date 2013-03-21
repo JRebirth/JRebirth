@@ -10,6 +10,11 @@
   %HTMLspecial;
 ]>
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>Thread</title>
+	</properties>
+
 	<body>
 
 		<section name="Thread Management" title="Thread Management">
@@ -122,7 +127,8 @@
 				</p>
 				<p>If you want to call a service which make an asynchronuous call
 					to a remote server. You can use the getService method to initiate the
-					call (By default this call will be managed into JRebirth Thread Pool :
+					call (By default this call will be managed into JRebirth
+					Thread Pool :
 					JTP), but the return must be managed into the JAT:
 				</p>
 				<ul>

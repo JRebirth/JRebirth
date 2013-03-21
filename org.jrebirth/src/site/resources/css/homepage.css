@@ -1,6 +1,21 @@
 /*----------------------------------*/
 /*			Home¨Page				*/
 /*----------------------------------*/
+
+div#catcher_block h1 {
+	font-size:26px;
+	margin-top:50px;
+	margin-left:80px;
+	float: left;
+}
+
+div#catcher_block div.catchme {
+	float:left;
+	font-size:20px;
+	padding-top:20px;
+	padding-left:100px;
+}
+
 div#features {
 	float : left;
 	width:50%;	
@@ -12,7 +27,7 @@ div#features {
 	letter-spacing:0.1em;
 	
 	background-image:url("../images/quote-gauche.png"),url("../images/quote-droite.png");
-	background-position: left top, right 240px;
+	background-position: left top, right 300px;
 	background-repeat:no-repeat, no-repeat;
 	
 	/*border: 1px solid #696;
@@ -144,39 +159,14 @@ div.twEnd{
 }
 
 div#ohloh{
-    
-   
-    font-size:12px;
+    margin-top : 30px;
+    text-align:center;
 	float : right;
-	
 	width:32%;
-	
-	color:#756f6b;
-	
-	margin-top : 30px;
-	border: 1px solid #696;
-	padding: 5px 10px;
-	
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 20px;
-	
-	-webkit-box-shadow: #666 0px 4px 5px;
-	-moz-box-shadow: #666  0px 4px 5px;
-	box-shadow: #666  0px 4px 5px;
-	
-	background: #f9c667;
-	background: -moz-radial-gradient(center, ellipse cover, #f9c667 0%, #f79621 100%);
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#f9c667), color-stop(100%,#f79621));
-	background: -webkit-radial-gradient(center, ellipse cover, #f9c667 0%,#f79621 100%);
-	background: -o-radial-gradient(center, ellipse cover, #f9c667 0%,#f79621 100%);
-	background: -ms-radial-gradient(center, ellipse cover, #f9c667 0%,#f79621 100%);
-	background: radial-gradient(center, ellipse cover, #f9c667 0%,#f79621 100%);	
 }
 
 div#thanks{
-    
-   
+    margin-top : 30px;
 	font-size:12px;
 	float : right;
 	
@@ -184,7 +174,6 @@ div#thanks{
 	
 	color:#FFFFF;
 	
-	margin-top : 30px;
 	border: 1px solid #696;
 	padding: 5px 10px;
 	

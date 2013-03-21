@@ -10,35 +10,50 @@
   %HTMLspecial;
 ]>
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>Services</title>
+	</properties>
+
 	<body>
 
-<section name="Internal Services" title="Internal Services">
-	<macro name="toc" section="4" fromDepth="2" toDepth="3" />
+		<section name="Internal Services" title="Internal Services">
+			<macro name="toc" section="4" fromDepth="2" toDepth="3" />
 
 
-<div class="uml">
-	<a href="uml/Service.png" rel="lightbox" title="Service Class Diagram">
-		<img class="redux" src="uml/Service.png" alt="" />
-	</a>
-	<legend>Service Class Diagram</legend>
-</div>
+			<div class="uml">
+				<a href="uml/Service.png" rel="lightbox" title="Service Class Diagram">
+					<img class="redux" src="uml/Service.png" alt="" />
+				</a>
+				<legend>Service Class Diagram</legend>
+			</div>
 
-<p>TODO</p>
-<p><span style="text-decoration: underline;">Short UML Diagram:</span></p>
-<div style="text-align: center;"><img src="uploads/images/uml/Service.png" alt="" /></div>
-<h1>Remote Services</h1>
-<h2>Manage pending calls</h2>
-<p>TODO</p>
-<h2>Retrieve remote data</h2>
-<p>TODO</p>
+			<p>TODO</p>
+			<p>
+				<span style="text-decoration: underline;">Short UML Diagram:</span>
+			</p>
+			<div style="text-align: center;">
+				<img src="uploads/images/uml/Service.png" alt="" />
+			</div>
+			<h1>Remote Services</h1>
+			<h2>Manage pending calls</h2>
+			<p>TODO</p>
+			<h2>Retrieve remote data</h2>
+			<p>TODO</p>
 
 
-	<div class="bottomLinks">
-		<div class="previousDocPage"><a href="Notifier.html">Previous - Commands</a></div>
-		<div class="nextDocPage"><a href="Ui.html">Next - User Interface</a></div>
-		<div class="tocDocPage"><a href="index.html">TOC</a></div>
-	</div>
-	
-	</section>
-</body>
+			<div class="bottomLinks">
+				<div class="previousDocPage">
+					<a href="Notifier.html">Previous - Commands</a>
+				</div>
+				<div class="nextDocPage">
+					<a href="Ui.html">Next - User Interface</a>
+				</div>
+				<div class="tocDocPage">
+					<a href="index.html">TOC</a>
+				</div>
+			</div>
+
+		</section>
+	</body>
 </document> 	
