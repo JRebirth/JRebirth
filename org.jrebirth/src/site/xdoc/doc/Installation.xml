@@ -20,10 +20,10 @@
 	</head>
 	<body>
 
-		<section name="Installation" title="2 Installation">
+		<section name="Installation">
 			<macro name="toc" section="0" fromDepth="1" toDepth="1" />
 
-			<subsection name="Manual" title="Manual Download">
+			<subsection name="Manual Download" >
 
 				<p>JRebirth is composed by a set of jar files, you just have to add them
 					into your application classpath to use them.
@@ -47,15 +47,13 @@
 					JRebirth Core features ...
 				</p>
 				<!-- <pre class="prettyprint lang-xml linenums"> -->
-				<source><![CDATA[
-					<dependency>
-						<groupid>org.jrebirth</groupid>
-						<artifactid>core</artifactid>
-						<version>0.7.2</version>
-					</dependency>
-				]]></source>
-
-
+<source><![CDATA[
+<dependency>
+	<groupid>org.jrebirth</groupid>
+	<artifactid>core</artifactid>
+	<version>0.7.2</version>
+</dependency>
+]]></source>
 
 				<p>
 					Releases are pushed to our bintray repository :
@@ -89,56 +87,56 @@
 						JRebirth has its own artifact repository (
 						<a href="http://repo.jrebirth.org">repo.jrebirth.org</a>
 						), but the server is not 7/7 24/24 ready. It could be offline when you need to recompile your application.
-						Its main advantage is not manage snapshot versions, so useful when you want to test a
+						Its main advantage is to manage snapshot versions, so useful when you want to test a
 						new feature or a bug fix.
 					</p>
 					<p>
 						You have 2 ways to plug your maven build to our server:
 						<ol>
-							<li>Add a repositories section ionto the pom.xml of your project.</li>
+							<li>Add a repositories section into the pom.xml of your project.</li>
 							<li>Add a profile section into your settings.xml (like for JCenter configuration)</li>
 						</ol>
 					</p>
 
 					<!-- <pre class="prettyprint lang-xml linenums"> -->
-					<source><![CDATA[
-						<repositories>
-							<repository>
-								<snapshots>
-									<enabled>false</enabled>
-								</snapshots>
-								<id>releases</id>
-								<name>libs-release</name>
-								<url>http://repo.jrebirth.org/libs-release</url>
-							</repository>
-							<repository>
-								<snapshots>
-									<enabled>false</enabled>
-								</snapshots>
-								<id>snapshots</id>
-								<name>libs-snapshot</name>
-								<url>http://repo.jrebirth.org/libs-snapshot</url>
-							</repository>
-						</repositories>
-						<pluginRepositories>
-							<pluginRepository>
-								<snapshots>
-									<enabled>false</enabled>
-								</snapshots>
-								<id>central</id>
-								<name>plugins-release</name>
-								<url>http://repo.jrebirth.org/plugins-release</url>
-							</pluginRepository>
-							<pluginRepository>
-								<snapshots>
-									<enabled>true</enabled>
-								</snapshots>
-								<id>snapshots</id>
-								<name>plugins-snapshot</name>
-								<url>http://repo.jrebirth.org/plugins-snapshot</url>
-							</pluginRepository>
-						</pluginRepositories>
-					]]></source>
+<source><![CDATA[
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>releases</id>
+			<name>libs-release</name>
+			<url>http://repo.jrebirth.org/libs-release</url>
+		</repository>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>snapshots</id>
+			<name>libs-snapshot</name>
+			<url>http://repo.jrebirth.org/libs-snapshot</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>plugins-release</name>
+			<url>http://repo.jrebirth.org/plugins-release</url>
+		</pluginRepository>
+		<pluginRepository>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>snapshots</id>
+			<name>plugins-snapshot</name>
+			<url>http://repo.jrebirth.org/plugins-snapshot</url>
+		</pluginRepository>
+	</pluginRepositories>
+]]></source>
 					<!-- </pre> -->
 				</subsection>
 
@@ -166,14 +164,10 @@
 		</section>
 		<div class="bottomLinks">
 			<div class="previousDocPage">
-				<a href="Introduction.html">Previous -
-					Introduction
-				</a>
+				<a href="Introduction.html">Introduction</a>
 			</div>
 			<div class="nextDocPage">
-				<a href="Overview.html">Next - JRebirth
-					Overview
-				</a>
+				<a href="Application.html">Your first Application</a>
 			</div>
 			<div class="tocDocPage">
 				<a href="index.html">TOC</a>

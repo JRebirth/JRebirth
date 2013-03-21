@@ -16,10 +16,10 @@
 	</properties>
 
 	<body>
-		<section id="intro" name="Introduction" title="Introduction">
-			<macro name="toc" section="0" fromDepth="1" toDepth="3" />
+		<section id="intro" name="Introduction">
+			<macro name="toc" section="2" fromDepth="3" toDepth="5" />
 
-			<subsection name="Origins" title="Origins">
+			<subsection name="Origins">
 
 				<p>Just before the 2011's summer I was bored to work with some RIA toolkit that
 					don't give me enought satisfaction.
@@ -92,7 +92,7 @@
 
 			</subsection>
 
-			<subsection name="Objectives" title="JRebirth Objectives">
+			<subsection name="JRebirth Objectives">
 
 				<p>The main goal of building yet another application framework is to be the
 					more convenient as possible for developpers.
@@ -111,8 +111,6 @@
 					to maintain a good Separation of
 					Concern (SoC).
 				</p>
-
-				<p></p>
 
 				<p>
 					<span class="question">Why don't manage myself my application thread
@@ -143,7 +141,7 @@
 				</p>
 
 			</subsection>
-			<subsection name="KeyFeatures" title="JRebirth Key features">
+			<subsection name="JRebirth Key features">
 
 				<p>Main features of JRebirth Application Framework are:</p>
 				<ol>
@@ -158,13 +156,13 @@
 
 			<div class="bottomLinks">
 				<div class="previousDocPage">
-					<a href="index.html">Previous - TOC</a>
+					<a href="Toc.html">TOC</a>
 				</div>
 				<div class="nextDocPage">
-					<a href="Installation.html">Next - How to install JRebirth</a>
+					<a href="Installation.html"> How to install JRebirth</a>
 				</div>
 				<div class="tocDocPage">
-					<a href="index.html">TOC</a>
+					<a href="Toc.html">TOC</a>
 				</div>
 			</div>
 

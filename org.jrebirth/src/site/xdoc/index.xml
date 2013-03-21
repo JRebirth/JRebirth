@@ -11,6 +11,10 @@
 ]>
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
+	<properties>
+		<title>Home</title>
+	</properties>
+
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/homepage.css" media="all" />
 	</head>
@@ -85,31 +89,39 @@
 
 		<div id="twitter">
 			<a class="twitter-timeline" href="https://twitter.com/JRebirth4JFX" data-widget-id="313731797349441536">Tweets de @JRebirth4JFX</a>
-			<script>//<![CDATA[
-			!function(d,s,id){
-					var js,fjs=d.getElementsByTagName(s)[0];
-					if(!d.getElementById(id)){
-						js=d.createElement(s);
-						js.id=id;
-						js.src="//platform.twitter.com/widgets.js";
-						fjs.parentNode.insertBefore(js,fjs);
-					}
-				}(document,"script","twitter-wjs");
-			//]]></script>
-
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</div>
 
 
 		<div id="3mintuto" style="float: left; width: 600px;">
 
 			<section id="3min" name="3 minute Tutorial">
-				<object width="600" height="400">
-					<param name="movie" value="http://www.youtube.com/v/Ii2Rf7qinpM?rel=0&amp;fs=1&amp;loop=0"></param>
-					<param name="wmode" value="transparent"></param>
-					<param name="allowFullScreen" value="true"></param>
-					<embed src="http://www.youtube.com/v/Ii2Rf7qinpM?rel=0&amp;fs=1&amp;loop=0" allowfullscreen="true" type="application/x-shockwave-flash" wmode="transparent" width="600" height="485">
-					</embed>
-				</object>
+				<!-- <object width="600" height="400"> <param name="movie" value="http://www.youtube.com/v/Ii2Rf7qinpM?rel=0&amp;fs=1&amp;loop=0"></param> <param name="wmode" value="transparent"></param> <param name="allowFullScreen" 
+					value="true"></param> <embed src="http://www.youtube.com/v/Ii2Rf7qinpM?rel=0&amp;fs=1&amp;loop=0" allowfullscreen="true" type="application/x-shockwave-flash" wmode="transparent" width="600" height="485"> 
+					</embed> </object> -->
+
+				<div id="ytplayer"></div>
+
+				<script>
+				// <![CDATA[]
+					// Load the IFrame Player API code asynchronously.
+					var tag = document.createElement('script');
+					tag.src = "https://www.youtube.com/player_api";
+					var firstScriptTag = document.getElementsByTagName('script')[0];
+					firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+					// Replace the 'ytplayer' element with an < iframe > and
+					// YouTube player after the API code downloads.
+					var player;
+					function onYouTubePlayerAPIReady() {
+						player = new YT.Player('ytplayer', {
+							height: '400',
+							width: '600',
+							videoId: 'Ii2Rf7qinpM'
+						});
+					}
+					//]]>
+				</script>
 
 			</section>
 
@@ -154,10 +166,16 @@
 			<h1>Special Thanks</h1>
 			<a title="YourKit, Java Profiler" href="http://www.yourkit.com" target="_blank">YourKit</a>,
 			used for Memory &amp; CPU Java profiling.
-			<a title="Structure 101" href="http://www.structure101.com/" target="_blank">Structure101 guys</a>,
-			for give us a free license of <a href="http://structure101.com/products/#/refactor">ReStructure 101</a>.
-			<a title="Jet Brains" href="http://www.jetbrains.com" target="_blank">Jet Brains</a>,
-			for give us a free license of <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>.
+			<a title="Structure 101" href="http://www.structure101.com/" target="_blank">Structure101 guys</a>
+			,
+			for give us a free license of
+			<a href="http://structure101.com/products/#/refactor">ReStructure 101</a>
+			.
+			<a title="Jet Brains" href="http://www.jetbrains.com" target="_blank">Jet Brains</a>
+			,
+			for give us a free license of
+			<a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>
+			.
 		</div>
 
 	</body>
