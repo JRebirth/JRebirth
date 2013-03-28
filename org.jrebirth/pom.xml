@@ -269,7 +269,7 @@
 				<configuration> <includeReports>false</includeReports> <locales>en_US</locales> </configuration> </execution> </executions> <dependencies> <dependency> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> 
 				<version>1.1</version> </dependency> </dependencies> </plugin> -->
 
-			<plugin>
+			<!-- <plugin>
 				<groupId>com.agilejava.docbkx</groupId>
 				<artifactId>docbkx-maven-plugin</artifactId>
 				<version>2.0.14-SNAPSHOT</version>
@@ -289,7 +289,7 @@
 					<highlightSource>1</highlightSource>
 					<foCustomization>src/docbkx/docbook-fo.xsl</foCustomization>
 
-					<!-- <includes>article.xml</includes> -->
+					<includes>article.xml</includes>
 				</configuration>
 
 				<dependencies>
@@ -306,7 +306,7 @@
 						<scope>runtime</scope>
 					</dependency>
 				</dependencies>
-			</plugin>
+			</plugin> -->
 
 			<!-- Project Quality -->
 			<plugin>
