@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dependencies>
+
+	<dependency>
+		<groupid>org.slf4j</groupid>
+		<artifactid>slf4j-api</artifactid>
+		<version>1.7.2</version>
+	</dependency>
+
+	<dependency>
+		<groupid>org.slf4j</groupid>
+		<artifactid>slf4j-nop</artifactid>
+		<version>1.7.2</version>
+	</dependency>
+
+	<dependency>
+		<groupid>ch.qos.logback</groupid>
+		<artifactid>logback-classic</artifactid>
+		<version>1.0.6</version>
+	</dependency>
+	
+	<dependency>
+		<groupid>org.slf4j</groupid>
+		<artifactid>slf4j-simple</artifactid>
+		<version>1.7.2</version>
+	</dependency>
+</dependencies>

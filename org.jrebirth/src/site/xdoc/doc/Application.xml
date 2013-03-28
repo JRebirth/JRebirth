@@ -15,14 +15,23 @@
 		<title>Application</title>
 	</properties>
 
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+	</head>
+
 	<body>
 
-		<section name="Application" title="Create your first Application">
-			<macro name="toc" section="4" fromDepth="2" toDepth="3" />
+		<section name="Create your first Application">
+			
+			<div id="catcherTitle">Application Layer</div>
+			<div id="catcherContent">How to create your first start class.</div>
+			
+			<!-- <macro name="toc" section="4" fromDepth="2" toDepth="3" /> -->
 
-			<subsection name="firstClass" title="4.1 First Class to extend">
+			<subsection name="First Class to extend">
 				<p>JRebirth Application Framework offers a custom class that extends the
-					traditionnal javafx.Application class, the aim is to automatically start
+					basic javafx.Application class, the aim is to automatically start
 					the JRebirth underlying Application Framework.
 				</p>
 				<p>
@@ -43,91 +52,24 @@
 					<em>org.jrebirth.archetype</em>
 					you will obtain this source code :
 				</p>
-				<!-- <macro name="include"> <param name="highlight-theme" value="eclipse" /> <param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" /> </macro> -->
-				<pre class="prettyprint lang-java linenums">public final class SampleApplication extends AbstractApplication {
 
-					/**
-					* Application launcher.
-					*
-					* @param args the command line arguments
-					*/
-					public static void main(final String... args) {
-					Application.launch(SampleApplication.class, args);
-					}
+				<macro name="include">
+					<param name="source" value="sample/src/main/java/org/jrebirth/sample/SampleApplication.java" />
+					<param name="snippet" value="aj:SampleApplication" />
+				</macro>
 
-					/**
-					* {@inheritDoc}
-					*/
-					@Override
-					public Class getFirstModelClass() {
-					return SampleModel.class;
-					}
-
-					/**
-					* {@inheritDoc}
-					*/
-					@Override
-					protected String getApplicationTitle() {
-					return "JavaFX 2.0 - Sample Application";
-					}
-
-					/**
-					* {@inheritDoc}
-					*/
-					@Override
-					protected void customizeStage(final Stage stage) {
-					stage.setFullScreen(false);
-					stage.setWidth(800);
-					stage.setHeight(600);
-					}
-
-					/**
-					* {@inheritDoc}
-					*/
-					@Override
-					protected void customizeScene(final Scene scene) {
-					scene.getStylesheets().add("style/sample.css");
-					}
-
-					/**
-					* {@inheritDoc}
-					*/
-					@Override
-					public List getFontToPreload() {
-					return Arrays.asList(new FontEnum[] {
-					JfxFonts.SPLASH
-					});
-					}
-
-					/**
-					* {@inheritDoc}
-					*/
-					@Override
-					public List getPreBootWaveList() {
-					return Collections.emptyList();
-					}
-
-					/**
-					* {@inheritDoc}
-					*/
-					@Override
-					public List getPostBootWaveList() {
-					return Collections.emptyList();
-					}
-
-					}
-				</pre>
 				<p>
 					This class skeleton provides some hooks to allow customization of the
 					application start up.
 					<br />
 					The AbstractApplication is using a generic type that represents the
 					first JavaFX node hold by the scene. This node will be instantiated
-					automatically by the framework and could be accessed by calling the
+					automatically by the framework and could be accessed by
+					calling the
 					protected method
 					<em>getRootNode().</em>
 				</p>
-				<h3>First Model Class</h3>
+				<h4>First Model Class</h4>
 				<p>
 					The method
 					<em>Class&lt;? extends Model&gt; getFirstModelClass() </em>
@@ -138,7 +80,7 @@
 				<p>This first model will be created into the JRebirth Thread Pool, then it
 					will be attached to the root node into the JavaFX Application Thread.
 				</p>
-				<h3>Application Title</h3>
+				<h4>Application Title</h4>
 				<p>
 					The method
 					<em>String getApplicationTitle() </em>
@@ -146,7 +88,7 @@
 					define the name of the application displayed by the stage (OS window)
 					and used by OS task bar.
 				</p>
-				<h3>Stage customization</h3>
+				<h4>Stage customization</h4>
 				<p>
 					The first stage object is provided by the JavaFX launcher, the method
 					<em>void
@@ -155,7 +97,7 @@
 					allows doing some stage
 					customizations.
 				</p>
-				<h3>Scene customization</h3>
+				<h4>Scene customization</h4>
 				<p>
 					The scene object automatically attached to the default stage stage is
 					built by the protected method
@@ -182,14 +124,15 @@
 					For example you can listen
 					some key binding to perform a global action. The Presentation
 					application uses it to listen &lt;Ctrl&gt; + &lt;+&gt; and &lt;Ctrl&gt;
-					+ &lt;-&gt; key combo to zoom in/out the whole scene.
+					+ &lt;-&gt; key combo to zoom in/out
+					the whole scene.
 				</p>
 				<p>
 					This method is also useful to attach a stylesheet to the scene like
 					this :
 					<em>scene.getStylesheets().add("style/sample.css");</em>
 				</p>
-				<h2>Fonts preloading</h2>
+				<h4>Fonts preloading</h4>
 				<p>
 					JavaFX applications are able to use fonts throught programmatic
 					declarations or with CSS declaration (in .css files. or inline).
@@ -207,7 +150,7 @@
 					to preload fonts to allow them to be used by CSS declaration. They are
 					loaded at boot in the same time than stylesheets.
 				</p>
-				<h2>Running Waves</h2>
+				<h4>Running Waves</h4>
 				<p>The JRebirth Application class allow running Waves before and after the
 					creation of the first model class.
 				</p>
@@ -254,38 +197,15 @@
 				<p>
 					<span style="text-decoration: underline;">JRebirth Analyzer example :</span>
 				</p>
-				<pre class="prettyprint lang-java linenums:40">public List getPostBootWaveList() {
 
-					final List waveList = new ArrayList&lt;&gt;();
-					final Parameters p = getParameters();
-					if (p.getRaw().size() &gt;= 1) {
-					final String etdFile = p.getRaw().get(0);
-					final File file = new File(etdFile);
-					if (file.exists()) {
-
-					waveList.add(
-					WaveBuilder.create()
-					.waveGroup(WaveGroup.RETURN_DATA)
-					.waveType(LoadEdtFileService.DO_LOAD_EVENTS)
-					.relatedClass(LoadEdtFileService.class)
-					.data(WaveData.build(EditorWaves.EVENTS_FILE, file))
-					.build()
-					);
-
-					waveList.add(
-					WaveBuilder.create()
-					.waveType(EditorWaves.DO_PLAY)
-					.build()
-					);
-					}
-					}
-					return waveList;
-					}
-				</pre>
+				<macro name="include">
+					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/JRebirthAnalyzer.java" />
+					<param name="snippet" value="aj:..JRebirthAnalyzer.getPostBootWaveList(..)" />
+				</macro>
 
 			</subsection>
 
-			<subsection name="keys" title="Default key shortcuts">
+			<subsection name="Default key shortcuts">
 
 				<p>The AbstractApplication class is using two defaults hotkey:</p>
 				<ul>
@@ -313,12 +233,13 @@
 					<em>null</em>
 					.
 				</p>
-				<h2>Exception Manager</h2>
-				JRebirth creates its own uncaught exception handlers in order to log
-				exceptions that were not caught by application code.
-				<br />
-				It's possible to customize them by overriding methods listed hereafter:
-				<br />
+				<h4>Exception Manager</h4>
+				<p>
+					JRebirth creates its own uncaught exception handlers in order to log
+					exceptions that were not caught by application code.
+					<br />
+					It's possible to customize them by overriding methods listed hereafter:
+				</p>
 				<ul>
 					<li>
 						<em>UncaughtExceptionHandler getDefaultUncaughtExceptionHandler()</em>
@@ -332,20 +253,19 @@
 				</ul>
 			</subsection>
 
+			<div class="bottomLinks">
+				<div class="previousDocPage">
+					<a href="Overview.html">Framework Overview</a>
+				</div>
+				<div class="nextDocPage">
+					<a href="Thread.html">Thread Management</a>
+				</div>
+				<div class="tocDocPage">
+					<a href="index.html">TOC</a>
+				</div>
+			</div>
+
 		</section>
-
-		<div class="bottomLinks">
-			<div class="previousDocPage">
-				<a href="Overview.html">Previous - Framework Overview</a>
-			</div>
-			<div class="nextDocPage">
-				<a href="Thread.html">Next - Thread Management</a>
-			</div>
-			<div class="tocDocPage">
-				<a href="index.html">TOC</a>
-			</div>
-		</div>
-
 
 	</body>
 </document> 	

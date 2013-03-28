@@ -1,51 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <book xmlns="http://maven.apache.org/BOOK/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/BOOK/1.0.0 http://maven.apache.org/xsd/book-1.0.0.xsd">
+
 	<id>jrebirth-doc-book</id>
 	<title>JRebirth Application Framework Documentation</title>
+
 	<chapters>
-	
 		<chapter>
 			<id>Introduction</id>
 			<title>Introduction</title>
 			<sections>
 				<section>
-					<id>intro</id>
+					<id>Introduction</id>
+				</section>
+				<section>
+					<id>releaseNotes</id>
+				</section>
+				<section>
+					<id>license</id>
 				</section>
 			</sections>
 		</chapter>
-		
-<!-- 		<chapter>
-			<id>bind</id>
-			<title>Bindings</title>
-			<sections>
-				<section>
-					<id>bindings</id>
-				</section>
-				<section>
-					<id>aegis-binding</id>
-				</section>
-				<section>
-					<id>castor</id>
-				</section>
-			</sections>
-		</chapter>
+
 		<chapter>
-			<id>transports</id>
-			<title>Transports</title>
+			<id>Core</id>
+			<title>JRebirth Core</title>
 			<sections>
+				<!-- <section> <id>Installation</id> </section> -->
 				<section>
-					<id>transport-and-channel-api</id>
+					<id>Application</id>
 				</section>
 				<section>
-					<id>http-transport</id>
+					<id>Thread</id>
 				</section>
 				<section>
-					<id>jms-transport</id>
-				</section>
-				<section>
-					<id>local-transport</id>
+					<id>Logging</id>
 				</section>
 			</sections>
-		</chapter> -->
+		</chapter>
+
 	</chapters>
 </book>

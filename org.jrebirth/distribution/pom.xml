@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org</groupId>
 		<artifactId>jrebirth</artifactId>
-		<version>0.8.0-SNAPSHOT</version>
+		<version>0.7.3-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
 
@@ -15,6 +15,8 @@
 	<description>Module used to package the full JRebirth distribution</description>
 
 	<build>
+		<finalName>JRebirth-${project.version}</finalName>
+	
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -46,7 +48,7 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.8.0-SNAPSHOT</version>
+			<version>0.7.3-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -54,7 +56,7 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>analyzer</artifactId>
-			<version>0.8.0-SNAPSHOT</version>
+			<version>0.7.3-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 

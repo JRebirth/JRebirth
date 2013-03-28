@@ -52,9 +52,9 @@
 			. By leveraging the best of previous RIA framework, we can deliver the ultimate one to work cleanly and efficiently with this
 			<span style="color: #f28705;">awesome API</span>
 			. Check our
-			<a href="overview.html">overview page</a>
+			<a href="doc/overview.html">overview page</a>
 			to see a diagram illustrating features and layers. Have also a look to
-			<a href="lightningtalk">demo applications</a>
+			<a href="apps/lightningtalk.html">demo applications</a>
 			which were used as
 			<span style="color: #f28705;">JavaFX 2</span>
 			presentations.
@@ -71,18 +71,13 @@
 				</li>
 
 				<li>
-					<a href="http://www.jrebirth.org/index.php?mact=DownCnt,cntnt01,click,0&amp;cntnt01name=zip7&amp;cntnt01link=uploads%252Freleases%252FJRebirth-0.7.2.zip&amp;cntnt01returnid=15">JRebirth 0.7.2 .zip</a>
-					<span style="font-size: 0.5em;"> - 199 hits</span>
+					<a href="http://apps.jrebirth.org/org.jrebirth/JRebirth-${project.version}.zip">JRebirth ${project.version} .zip</a>
 				</li>
 				<li>
-					<a href="http://www.jrebirth.org/index.php?mact=DownCnt,cntnt01,click,0&amp;cntnt01name=prez&amp;cntnt01link=uploads%252Freleases%252Fjavafx2-1.1.0-SNAPSHOT.zip&amp;cntnt01returnid=15">Breizhcamp</a>
-					<span style="font-size: 0.5em;"> - 699 hits</span>
+					<a href="http://apps.jrebirth.org/breizhcamp/javafx2-1.1.0-SNAPSHOT.zip">Breizhcamp</a>
 				</li>
 				<li>
-					<a
-						href="http://www.jrebirth.org/index.php?mact=DownCnt,cntnt01,click,0&amp;cntnt01name=light&amp;cntnt01link=http%253A%252F%252Fapps.jrebirth.org%252Flightningtalk%252Flightningtalk-1.0.0.zip&amp;cntnt01returnid=15"
-					>LightningTalk</a>
-					<span style="font-size: 0.5em;"> - 132 hits</span>
+					<a href="http://apps.jrebirth.org/lightningtalk/lightningtalk-1.0.0.zip">Lightning Talk</a>
 				</li>
 			</ul>
 		</div>
@@ -96,10 +91,6 @@
 		<div id="3mintuto" style="float: left; width: 600px;">
 
 			<section id="3min" name="3 minute Tutorial">
-				<!-- <object width="600" height="400"> <param name="movie" value="http://www.youtube.com/v/Ii2Rf7qinpM?rel=0&amp;fs=1&amp;loop=0"></param> <param name="wmode" value="transparent"></param> <param name="allowFullScreen" 
-					value="true"></param> <embed src="http://www.youtube.com/v/Ii2Rf7qinpM?rel=0&amp;fs=1&amp;loop=0" allowfullscreen="true" type="application/x-shockwave-flash" wmode="transparent" width="600" height="485"> 
-					</embed> </object> -->
-
 				<div id="ytplayer"></div>
 
 				<script>
@@ -132,14 +123,14 @@
 					<a href="images/tuto/Maven_Archetype_CLI_OneLine.png" rel="lightbox">
 						<img src="images/icons/view.gif" />
 					</a>
-					mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=http://www.jrebirth.org/uploads/catalogs/jrebirth-catalog.xml -DarchetypeGroupId=org.jrebirth
+					mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DarchetypeGroupId=org.jrebirth
 					-DarchetypeArtifactId=archetype
-					-DarchetypeVersion=0.7.2-SNAPSHOT -DarchetypeRepository=http://repo.jrebirth.org/jrebirth-snapshot-local -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
+					-DarchetypeVersion=${project.version} -DarchetypeRepository=http://repo.jrebirth.org/jrebirth-snapshot-local -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
 					-Dpackage=org.jrebirth.sample
 				</subsection>
 
 				<subsection name="Interactive pre-filled">
-					mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/uploads/catalogs/jrebirth-catalog.xml -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
+					mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
 					-Dpackage=org.jrebirth.sample
 				</subsection>
 
@@ -147,7 +138,7 @@
 					<a href="images/tuto/Maven_Archetype_CLI_interactive.png" rel="lightbox">
 						<img src="images/icons/view.gif" />
 					</a>
-					mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/uploads/catalogs/jrebirth-catalog.xml
+					mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml
 				</subsection>
 			</section>
 		</div>
@@ -165,12 +156,12 @@
 		<div id="thanks">
 			<h1>Special Thanks</h1>
 			<a title="YourKit, Java Profiler" href="http://www.yourkit.com" target="_blank">YourKit</a>,
-			used for Memory &amp; CPU Java profiling.
+			used for Memory &amp; CPU Java profiling.<br />
 			<a title="Structure 101" href="http://www.structure101.com/" target="_blank">Structure101 guys</a>
 			,
 			for give us a free license of
 			<a href="http://structure101.com/products/#/refactor">ReStructure 101</a>
-			.
+			.<br />
 			<a title="Jet Brains" href="http://www.jetbrains.com" target="_blank">Jet Brains</a>
 			,
 			for give us a free license of

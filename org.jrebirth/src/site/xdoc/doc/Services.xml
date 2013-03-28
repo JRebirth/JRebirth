@@ -15,11 +15,17 @@
 		<title>Services</title>
 	</properties>
 
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+	</head>
+	
 	<body>
 
-		<section name="Internal Services" title="Internal Services">
-			<macro name="toc" section="4" fromDepth="2" toDepth="3" />
-
+		<section name="Internal Services">
+			
+			<div id="catcherTitle">Service Layer</div>
+			<div id="catcherContent">Process configurable action</div>
 
 			<div class="uml">
 				<a href="uml/Service.png" rel="lightbox" title="Service Class Diagram">
@@ -33,7 +39,7 @@
 				<span style="text-decoration: underline;">Short UML Diagram:</span>
 			</p>
 			<div style="text-align: center;">
-				<img src="uploads/images/uml/Service.png" alt="" />
+				<img class="redux" src="uploads/images/uml/Service.png" alt="" />
 			</div>
 			<h1>Remote Services</h1>
 			<h2>Manage pending calls</h2>
@@ -44,10 +50,10 @@
 
 			<div class="bottomLinks">
 				<div class="previousDocPage">
-					<a href="Notifier.html">Previous - Commands</a>
+					<a href="Notifier.html">Commands</a>
 				</div>
 				<div class="nextDocPage">
-					<a href="Ui.html">Next - User Interface</a>
+					<a href="Ui.html">User Interface</a>
 				</div>
 				<div class="tocDocPage">
 					<a href="index.html">TOC</a>

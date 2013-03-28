@@ -1,0 +1,30 @@
+	------
+	Useful Links
+	------
+	Sébastien Bordes
+	------
+	2013-03-26
+	------
+
+Useful links
+
+* All web sites
+	
+	* Website for latest stable version: {{{http://www.jrebirth.org} www.jrebirth.org}}
+	
+	* Website for latest Dev Snapshot Website: {{{http://latest.jrebirth.org} latest.jrebirth.org}}
+	
+	* List of all generated Websites: {{{http://sites.jrebirth.org}sites.jrebirth.org}}
+
+* Javadoc
+	
+	* Latest API: {{{http://api.jrebirth.org}api.jrebirth.org}}
+
+
+* Software Factory
+	
+	* Latest Source: {{{${project.scm.url}}${project.scm.url}}}
+	
+	* Built with Jenkins: {{{${project.ciManagement.url}/lastSuccessfulBuild} ${project.ciManagement.url}/lastSuccessfulBuild}}
+	
+	* Checked by Sonar:  {{{http://quality.jrebirth.org/dashboard/index/1}quality.jrebirth.org/dashboard/index/1}}

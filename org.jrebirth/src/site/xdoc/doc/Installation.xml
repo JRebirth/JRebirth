@@ -16,14 +16,19 @@
 	</properties>
 
 	<head>
+		<title></title>
 		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
 	</head>
 	<body>
 
 		<section name="Installation">
-			<macro name="toc" section="0" fromDepth="1" toDepth="1" />
 
-			<subsection name="Manual Download" >
+			<div id="catcherTitle">How to use JRebirth Application Framework</div>
+			<div id="catcherContent">This page will help you setting up your project to work with JRebirth.</div>
+
+			<!-- <macro name="toc" section="2" /> -->
+
+			<subsection name="Manual Download">
 
 				<p>JRebirth is composed by a set of jar files, you just have to add them
 					into your application classpath to use them.
@@ -43,26 +48,30 @@
 					convention.
 				</p>
 
-				<p>You just need to add this dependency to begin to play with
-					JRebirth Core features ...
+				<p>You just need to add these dependencies into your pom.xml to begin to play with
+					JRebirth Core features. The first one is the core library of JRebirth Application Framework, and the second one is
+					the optional library used to manage logs.
 				</p>
-				<!-- <pre class="prettyprint lang-xml linenums"> -->
-<source><![CDATA[
-<dependency>
-	<groupid>org.jrebirth</groupid>
-	<artifactid>core</artifactid>
-	<version>0.7.2</version>
-</dependency>
-]]></source>
+
+				<macro name="include">
+					<param name="highlight-theme" value="eclipse" />
+					<param name="source" value="../../../analyzer/pom.xml" />
+					<param name="snippet" value="xp:project/dependencies" />
+				</macro>
 
 				<p>
-					Releases are pushed to our bintray repository :
+					Releases are pushed to several repositories in this order :
+					<ol>
+						<li>Our internal repository powered by Artifactory (All Jenkins build)</li>
+						<li>Our public repository powered by Bintray (On demand Jenkins build)</li>
+						<li>JCenter Bintray repository (Only Releases)</li>
+					</ol>
 					<a href="https://bintray.com/pkg/show/general/jrebirth/JRebirth/JRebirth">https://bintray.com/pkg/show/general/jrebirth/JRebirth/JRebirth</a>
 					and then synchronized to JCenter main Bintray repository.
 				</p>
 
 
-				<p>So you have some alternatives to get JRebirth artifacts from these repositories.</p>
+				<p>So you have some alternatives to retrieve JRebirth artifacts from these repositories.</p>
 
 				<subsection id="jcenter" name="Use JCenter">
 					<p>JCenter is a new social Java repository hosted on Bintray website. It allows to broadcast thousand of libraries without the pitfall to
@@ -71,12 +80,12 @@
 						JCenter is absolutely a fabulous alternative to Maven Central.
 					</p>
 
-					<p>If you want to use JCenter repository, you must add this into yout Maven settings.xml.
-						Pay attention that JCenter contains only 'Release' artifacts, no 'snapshot' versions
+					<p>If you want to use JCenter repository, you must add this into your Maven settings.xml.
+						Pay attention that at this time JCenter contains only 'Release' artifacts, no 'snapshot' versions
 					</p>
 					<macro name="include">
-						<!-- <param name="highlight-theme" value="eclipse" /> -->
-						<param name="source" value="../includes/JCenterProfile_settings.xml" />
+						<param name="source" value="../includes/JCenter_Profile_Settings.xml" />
+						<!-- <param name="snippet" value="xp://profiles" /> -->
 					</macro>
 
 				</subsection>
@@ -88,7 +97,8 @@
 						<a href="http://repo.jrebirth.org">repo.jrebirth.org</a>
 						), but the server is not 7/7 24/24 ready. It could be offline when you need to recompile your application.
 						Its main advantage is to manage snapshot versions, so useful when you want to test a
-						new feature or a bug fix.
+						new
+						feature or a bug fix.
 					</p>
 					<p>
 						You have 2 ways to plug your maven build to our server:
@@ -98,46 +108,18 @@
 						</ol>
 					</p>
 
-					<!-- <pre class="prettyprint lang-xml linenums"> -->
-<source><![CDATA[
-	<repositories>
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>releases</id>
-			<name>libs-release</name>
-			<url>http://repo.jrebirth.org/libs-release</url>
-		</repository>
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>snapshots</id>
-			<name>libs-snapshot</name>
-			<url>http://repo.jrebirth.org/libs-snapshot</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>central</id>
-			<name>plugins-release</name>
-			<url>http://repo.jrebirth.org/plugins-release</url>
-		</pluginRepository>
-		<pluginRepository>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<id>snapshots</id>
-			<name>plugins-snapshot</name>
-			<url>http://repo.jrebirth.org/plugins-snapshot</url>
-		</pluginRepository>
-	</pluginRepositories>
-]]></source>
-					<!-- </pre> -->
+					<h4>Into Pom.xml</h4>
+					<macro name="include">
+						<param name="source" value="../includes/Pom_Repositories.xml" />
+						<param name="snippet" value="xp://repositories" />
+					</macro>
+
+					<h4>Into Settings.xml</h4>
+					<macro name="include">
+						<param name="source" value="../includes/Artifactory_Profile_Settings.xml" />
+						<param name="snippet" value="xp://profiles" />
+					</macro>
+
 				</subsection>
 
 				<p>
@@ -148,13 +130,23 @@
 					your user settings.xml or enterprise settings.xml
 				</p>
 				<p>
-					<em>JRebirth is not yet on Maven Central repository because the modules
-						list will slightly evolve until the release of the final 1.0.0 and we
-						don't want to add confusion about it.
+					<em>JRebirth is not yet on Maven Central repository because the upload policy is too restrictive (actually it requires to update your pom to be allowed to send your artifacts on a third-party
+						repository that will be synchronized with Central)
 					</em>
 				</p>
 
 				<subsection id="hybrid" name="Hybrid Configuration">
+					<p>You can add both JCenter, JRebirth Bintray and JRebirth Artifactory repositories, if you want to be up-to-date at any time</p>
+
+					<p>If you just want to deal with stable release use only JCenter, but if sometims you need to test a snapshot version use our artifactory instance or ask us to synchronize Artifactory with
+						Bintray.
+					</p>
+
+					<h4>All-In-One Profile</h4>
+					<macro name="include">
+						<param name="source" value="../includes/All-In-One_Profile_Settings.xml" />
+						<param name="snippet" value="xp://profiles" />
+					</macro>
 
 				</subsection>
 

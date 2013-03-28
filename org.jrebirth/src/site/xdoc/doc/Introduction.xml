@@ -16,8 +16,13 @@
 	</properties>
 
 	<body>
+
 		<section id="intro" name="Introduction">
-			<macro name="toc" section="2" fromDepth="3" toDepth="5" />
+
+			<div id="catcherTitle">JRebirth Origins</div>
+			<div id="catcherContent">The small story of JRebirth project.</div>
+
+			<!-- <macro name="toc" section="2" fromDepth="3" toDepth="5" /> -->
 
 			<subsection name="Origins">
 

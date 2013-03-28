@@ -15,11 +15,19 @@
 		<title>Notifier &amp; Wave</title>
 	</properties>
 
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+	</head>
+
 	<body>
 
 		<section name="Notification Engine" title="Notification Engine">
-			<macro name="toc" section="4" fromDepth="2" toDepth="3" />
 
+			<div id="catcherTitle">Notifier Layer</div>
+			<div id="catcherContent">Allow communication between components</div>
+
+			<!-- <macro name="toc" section="4" fromDepth="2" toDepth="3" /> -->
 
 			<subsection name="Notifier aim">
 				<p>JRebirth have got its own Notification Engine to allow each component to communicate with each other.</p>
@@ -55,7 +63,7 @@
 
 				<div class="uml">
 					<a href="uml/Wave.png" rel="lightbox[uml]" title="Wave Class Diagram ">
-						<img src="uml/Wave_min.png" alt="" />
+						<img class="redux" src="uml/Wave.png" alt="" />
 					</a>
 				</div>
 
@@ -82,90 +90,26 @@
 						<li>Into an Interface to define wave contract (here without argument)</li>
 					</ul>
 				</ul>
-				<pre>
-					<div class="luminous">
-						<div class="code_container" style="overflow:visible !important;">
-							<table class="code_container">
-								<tr>
-									<td class="line_number_bar">
-										<pre class="line_numbers">
-											<span class="line_number">&nbsp;1&nbsp;
-											</span>
-											<span class="line_number">&nbsp;2&nbsp;
-											</span>
-										</pre>
-									</td>
-									<td class="code">
-										<pre class="code">
-											<span class="line">
-												<span class='doccomment'>/** Trigger a Unload wave. */</span>
-											</span>
-											<span class="line line_alt">
-												WaveTypeBase
-												<span class='constant'>DO_UNLOAD</span>
-												<span class='operator'>=</span>
-												<span class='obj'>WaveTypeBase</span>
-												.
-												<span class='oo'>build</span>
-												(
-												<span class='string'>"UNLOAD"</span>
-												);
-											</span>
-										</pre>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</pre>
+
+				<macro name="include">
+					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/ui/editor/EditorWaves.java" />
+					<param name="snippet" value="aj:..DO_UNLOAD" />
+					<param name="snippet-start-offset" value="1" />
+				</macro>
+
 				<ul>
 					<ul>
 						<li>Into a service class (here with on argument) :</li>
 					</ul>
 				</ul>
-				<pre>
-					<div class="luminous">
-						<div class="code_container" style="overflow:visible !important;">
-							<table class="code_container">
-								<tr>
-									<td class="line_number_bar">
-										<pre class="line_numbers">
-											<span class="line_number">&nbsp;1&nbsp;
-											</span>
-											<span class="line_number">&nbsp;2&nbsp;
-											</span>
-										</pre>
-									</td>
-									<td class="code">
-										<pre class="code">
-											<span class="line">
-												<span class='doccomment'>/** Wave type use to load events. */</span>
-											</span>
-											<span class="line line_alt">
-												<span class='keyword'>public</span>
-												<span class='keyword'>static</span>
-												<span class='keyword'>final</span>
-												WaveTypeBase
-												<span class='constant'>DO_LOAD_EVENTS</span>
-												<span class='operator'>=</span>
-												<span class='obj'>WaveTypeBase</span>
-												.
-												<span class='oo'>build</span>
-												(
-												<span class='string'>"LOAD_EVENTS"</span>
-												,
-												<span class='obj'>EditorWaves</span>
-												.
-												<span class='oo'>EVENTS_FILE</span>
-												);
-											</span>
-										</pre>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</pre>
+				
+				<macro name="include">
+					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java" />
+					<param name="snippet" value="aj:..DO_LOAD_EVENTS" />
+					<param name="snippet-start-offset" value="1" />
+				</macro>
+				
+				
 				<h3>8.2.3 WaveType name</h3>
 				<p>
 					<strong>This string is used to link to a component method</strong>
@@ -211,10 +155,10 @@
 
 			<div class="bottomLinks">
 				<div class="previousDocPage">
-					<a href="Facades.html">Previous - How Facades work</a>
+					<a href="Facades.html">How Facades work</a>
 				</div>
 				<div class="nextDocPage">
-					<a href="Commands.html">Next - Commands</a>
+					<a href="Commands.html">Commands</a>
 				</div>
 				<div class="tocDocPage">
 					<a href="index.html">TOC</a>
