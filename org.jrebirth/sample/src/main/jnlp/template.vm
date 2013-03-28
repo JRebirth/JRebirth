@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jnlp spec="1.0+" xmlns:jfx="http://javafx.com" href="SampleApplication.jnlp">
+<!-- codebase="http://www.jrebirth.org/sample" -->
+	<information>
+		<title>${project.name}</title>
+		<vendor>Sébastien Bordes</vendor>
+		<homepage href="${project.url}"/>
+		<description>${project.description}</description>
+		<description kind="short">Sample Application</description>
+		<icon href="http://www.jrebirth.org/uploads/images/JRebirth_32x32.png"/>
+		<offline-allowed/>
+	</information>
+
+	<security>
+		<all-permissions/>
+	</security>
+
+	<resources os="Windows" arch="x86">
+		<jfx:javafx-runtime version="2.0+" href="http://download.oracle.com/otn-pub/java/javafx/javafx-windows-i586__Vlatest.exe "/>
+	</resources>
+	<resources os="Windows" arch="x64">
+		<jfx:javafx-runtime version="2.0+" href="http://download.oracle.com/otn-pub/java/javafx/javafx-windows-x64__Vlatest.exe "/>
+	</resources>
+  
+  	<resources>
+		<j2se version="1.7+" />
+		$dependencies
+	</resources>
+	
+	<applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="${project.name}" />
+	<jfx:javafx-desc  width="800" height="600" main-class="$mainClass"  name="${project.name}" />
+	
+<!--
+
+	update element: The update element is used to indicate the preferences for how application updates should be handled by the JNLP Client. The update element can contain the following two optional attributes:
+	
+	check attribute: The check attribute indicates the preference for when the JNLP Client should check for updates, and can have one of the three values: "always", "timeout", and "background".
+	A value of "always" means to always check for updates before launching the application.
+	A value of "timeout" (default) means to check for updates until timeout before launching the application. If the update check is not completed before the timeout, the application is launched, and the update check will continue in the background.
+	A value of "background" means to launch the application while checking for updates in the background.
+	
+	policy attribute: The policy attribute indicates the preference for how the JNLP Client should handle an application update when it is known an update is available before the application is launched, and can have one of the following three values: "always", "prompt-update", and "prompt-run".
+	A value of "always" (default) means to always download updates without any prompt.
+	A value of "prompt-update" means to ask the user if he/she wants to download and run the updated version, or launch the cached version.
+	A value of "prompt-run" means to ask the user if he/she wants to download and run the updated version, or cancel and abort runing the application.
+
+-->	
+	<update check="timeout" policy="prompt-update">
+</jnlp>

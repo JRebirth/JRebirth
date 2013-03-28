@@ -16,6 +16,10 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd">
 		<menu name="General">
 			<item name="About" href="index.html" />
 		</menu>
+		
+		<menu name="JRebirth Catalog" >
+			<item name="Get Catalog" href="jrebirth-catalog.xml" />
+		</menu>
 
 		<menu ref="parent" />
 

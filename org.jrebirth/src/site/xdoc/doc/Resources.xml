@@ -15,11 +15,19 @@
 		<title>Resources</title>
 	</properties>
 
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+	</head>
+	
 	<body>
 
-		<section name="Resources" title="Resources">
+		<section name="Resources">
 
-			<macro name="toc" section="12" fromDepth="2" toDepth="3" />
+			<!-- <macro name="toc" section="12" fromDepth="2" toDepth="3" /> -->
+
+			<div id="catcherTitle">Using Resources</div>
+			<div id="catcherContent">Decrease your memory footprint by using resource wrapper</div>
 
 			<p>The JRebirth Framework provides an useful way to deal with your local resources, we currently support :</p>
 			<ul>
@@ -45,9 +53,9 @@
 			</p>
 			<p>So if you want to handle resources with JRebirth mechanism, you just have to create an enumeration that implement the interface of the resource you want, with a custom constructor.</p>
 
-			<subsection name="Color" title="12.1 Color">
+			<subsection name="Color" >
 
-				<p>For example to manage web color, (traditionnal hexadecimal string #00CC00), you have to use this declaration:</p>
+				<p>For example to manage web color, (basic hexadecimal string #00CC00), you have to use this declaration:</p>
 				<macro name="include">
 					<param name="highlight-theme" value="eclipse" />
 					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" />
@@ -81,7 +89,7 @@
 			</subsection>
 
 
-			<subsection name="Font" title="12.2 Font">
+			<subsection name="Font">
 
 
 				<macro name="include">
@@ -101,9 +109,9 @@
 
 		<div class="bottomLinks">
 			<div class="previousDocPage">
-				<a href="Ui.html">Previous - Ui</a>
+				<a href="Ui.html">Ui</a>
 			</div>
-			<!--<div class="nextDocPage"><a href="Notifier.html">Next - Notifier &amp; Wave</a></div> -->
+			<!--<div class="nextDocPage"><a href="Notifier.html">Notifier &amp; Wave</a></div> -->
 			<div class="tocDocPage">
 				<a href="index.html">TOC</a>
 			</div>

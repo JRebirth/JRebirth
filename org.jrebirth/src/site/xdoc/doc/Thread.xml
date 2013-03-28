@@ -15,10 +15,19 @@
 		<title>Thread</title>
 	</properties>
 
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+	</head>
+
 	<body>
 
 		<section name="Thread Management" title="Thread Management">
-			<macro name="toc" section="4" fromDepth="2" toDepth="3" />
+			
+			<div id="catcherTitle">Thread Management</div>
+			<div id="catcherContent">Writing concurrent application could be painful ! Not with JRebirth</div>
+			
+			<!-- <macro name="toc" section="4" fromDepth="2" toDepth="3" /> -->
 
 			<subsection name="Threading overview">
 				<p>JRebirth is multi-threaded, not only by using Task Worker
@@ -145,10 +154,10 @@
 
 			<div class="bottomLinks">
 				<div class="previousDocPage">
-					<a href="Application.html">Previous - Create your first Application</a>
+					<a href="Application.html">Create your first Application</a>
 				</div>
 				<div class="nextDocPage">
-					<a href="Logging.html">Next - Configure Logging System</a>
+					<a href="Logging.html">Configure Logging System</a>
 				</div>
 				<div class="tocDocPage">
 					<a href="index.html">TOC</a>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <artifactId>jrebirth</artifactId>
+        <groupId>org</groupId>
+        <version>0.7.3-SNAPSHOT</version>
+    </parent>
+
+	<groupId>org.jrebirth</groupId>
+	<artifactId>sample</artifactId>
+	<version>0.7.3-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>Sample Application</name>
+	<url>http://www.sample.org</url>
+	<description>Build with JRebirth Framework</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<deployUrl>http://apps.sample.org</deployUrl>
+		<deployPath>${project.artifactId}/${project.version}</deployPath>
+
+		<jnlpFilename>sample.jnlp</jnlpFilename>
+		<appClass>org.jrebirth.sample.SampleApplication</appClass>
+
+		<appletWidth>1024</appletWidth>
+		<appletHeight>768</appletHeight>
+
+		<updateCheck>timeout</updateCheck>
+		<updatePolicy>prompt-update</updatePolicy>
+		
+	</properties>
+
+	<organization>
+		<name>JRebirth</name>
+		<url>http://www.jrebirth.org</url>
+	</organization>
+
+
+	<build>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/java</directory>
+				<includes>
+					<include>**/*.fxml</include>
+					<include>**/*.txt</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<JavaFX-Version>2.0</JavaFX-Version>
+							<Main-Class>${appClass}</Main-Class>
+							<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
+							<implementation-version>1.0</implementation-version>
+							<!-- not automated yet -->
+							<JavaFX-Class-Path></JavaFX-Class-Path>
+						</manifestEntries>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>webstart-maven-plugin</artifactId>
+				<version>1.0-beta-3</version>
+
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jnlp</goal> <!-- use jnlp, jnlp-inline or jnlp-single as appropriate -->
+						</goals>
+					</execution>
+				</executions>
+
+				<configuration>
+
+					<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
+					<excludeTransitive>false</excludeTransitive>
+					<libPath>lib</libPath>
+
+					<resourcesDirectory>${project.basedir}/src/main/jnlp/resources</resourcesDirectory>
+					<codebase>${deployUrl}/${deployPath}</codebase>
+
+					<jnlp>
+						<!-- <inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath> <inputTemplate>src/main/jnlp/template.vm</inputTemplate> -->
+						<outputFile>${jnlpFilename}</outputFile>
+
+						<mainClass>${appClass}</mainClass>
+						<offlineAllowed>true</offlineAllowed>
+					</jnlp>
+
+					<sign>
+						<keystore>${basedir}/yourkey.jks</keystore>
+						<!-- MUST BE PROVIDED BY COMMAND LINE ARGUMENTS -->
+						<!-- -Dstorepass=xxx -Dkeypass=xxx -->
+						<keypass>${keypass}</keypass>
+						<storepass>${storepass}</storepass>
+						<!-- <storetype>fillme</storetype> -->
+						<alias>sample</alias>
+
+						<validity>360</validity>
+						<dnameCn>www.sample.org</dnameCn>
+						<dnameOu>None</dnameOu>
+						<dnameO>Sample</dnameO>
+						<dnameL>Toulouse</dnameL>
+						<dnameSt>HG</dnameSt>
+						<dnameC>FR</dnameC>
+
+						<verify>true</verify>
+
+						<keystoreConfig>
+							<delete>true</delete>
+							<gen>true</gen>
+						</keystoreConfig>
+					</sign>
+
+					<pack200>true</pack200>
+					<gzip>true</gzip>
+
+					<outputJarVersions>false</outputJarVersions>
+					<install>false</install>
+					<verbose>true</verbose>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- Use logback logger -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>core</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+		</dependency>
+		
+	</dependencies>
+
+</project>

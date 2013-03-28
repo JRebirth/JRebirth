@@ -10,11 +10,23 @@
   %HTMLspecial;
 ]>
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
-	<body>
-		<section name="Commands" title="Commands">
-			<macro name="toc" section="4" fromDepth="2" toDepth="3" />
 
-			<subsection name=" Command Lifecycle">
+	<properties>
+		<title>Command</title>
+	</properties>
+
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+	</head>
+
+	<body>
+		<section name="Commands">
+
+			<div id="catcherTitle">Command Layer</div>
+			<div id="catcherContent">Reuse common code and don't be scared by threading issue</div>
+
+			<subsection name="Command Lifecycle">
 
 				<p>A command is an atomic action reusable or not that can be run into any thread. A command provides specific features:</p>
 				<ul>
@@ -37,7 +49,7 @@
 
 			</subsection>
 
-			<subsection name=" Component">
+			<subsection name="Component">
 				<p>
 					Commands are designed to be disposable after usage, but they could be retained by strong references to be executed twice or more.
 					<br />
@@ -83,10 +95,10 @@
 
 			<div class="bottomLinks">
 				<div class="previousDocPage">
-					<a href="Notifier.html">Previous - Notifier &amp; Wave</a>
+					<a href="Notifier.html">Notifier &amp; Wave</a>
 				</div>
 				<div class="nextDocPage">
-					<a href="Services.html">Next - Services</a>
+					<a href="Services.html">Services</a>
 				</div>
 				<div class="tocDocPage">
 					<a href="index.html">TOC</a>
