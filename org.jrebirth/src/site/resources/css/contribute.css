@@ -55,3 +55,8 @@ div#yourkit {
     background-position: left center;
     background-repeat: no-repeat;
 }
+div#structure101 {
+    background-image: url("../images/soft/structure101.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+}
