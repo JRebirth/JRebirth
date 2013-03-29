@@ -1,49 +1,108 @@
-<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd"
+>
 
 	<id>package-all</id>
-	
+
 	<formats>
 		<format>zip</format>
-		<format>tar.gz</format>
 	</formats>
 
 	<includeBaseDirectory>false</includeBaseDirectory>
+	<baseDirectory>JRebirth-${project.version}</baseDirectory>
+
+<!-- 	<fileSets>
+		<fileSet>
+			<directory>..</directory>
+			<includes>
+				<include>README.txt</include>
+				<include>CHANGES</include>
+				<include>COPYING</include>
+			</includes>
+			<outputDirectory>sqljet-${project.version}.${ci.buildNumber}</outputDirectory>
+		</fileSet>
+	</fileSets> -->
 
 	<moduleSets>
-
 		<moduleSet>
-
-			<!-- Enable access to all projects in the current multimodule build! -->
 			<useAllReactorProjects>true</useAllReactorProjects>
-
 			<includes>
 				<include>org.jrebirth:core</include>
-				<include>org.jrebirth:analyzer</include>
-<!-- 				<include>org.jrebirth:presentation</include>
-				<include>org.jrebirth:transition</include> -->
 			</includes>
-
 			<binaries>
-				<outputDirectory>/</outputDirectory>
+				<includeDependencies>true</includeDependencies>
+				<outputDirectory>bin</outputDirectory>
+				<!-- <outputFileNameMapping>${artifact.artifactId}-${artifact.baseVersion}.${ci.buildNumber}${dashClassifier?}.${artifact.extension}</outputFileNameMapping> -->
+<!-- 				<dependencySets>
+					<dependencySet>
+						<outputDirectory>sqljet-${project.version}.${ci.buildNumber}</outputDirectory>
+						<unpack>false</unpack>
+						<useProjectArtifact>true</useProjectArtifact>
+						<useTransitiveDependencies>true</useTransitiveDependencies>
+						<useProjectAttachments>false</useProjectAttachments>
+						<excludes>
+							<exclude>org.tmatesoft.sqljet:*</exclude>
+						</excludes>
+					</dependencySet>
+				</dependencySets> -->
 				<unpack>false</unpack>
 			</binaries>
-
-			<sources>
-				<fileSets>
-					<fileSet>
-					
-						<includes>
-							<include>**/*</include>
-						</includes>
-					</fileSet>
-					
-				</fileSets>
-			</sources>
-			
 		</moduleSet>
 		
+		<!-- Javadoc -->
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org.jrebirth:core</include>
+			</includes>
+			<binaries>
+				<includeDependencies>false</includeDependencies>
+				<attachmentClassifier>javadoc</attachmentClassifier>
+				<outputDirectory>apidocs</outputDirectory>
+				<unpack>true</unpack>
+				<!-- <outputFileNameMapping>${artifact.artifactId}-${artifact.baseVersion}.${ci.buildNumber}${dashClassifier?}.${artifact.extension}</outputFileNameMapping> -->
+			</binaries>
+		</moduleSet>
+		
+<!-- 		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org.tmatesoft.sqljet:sqljet-example-inventory</include>
+				<include>org.tmatesoft.sqljet:sqljet-example-simple</include>
+				<include>org.tmatesoft.sqljet:sqljet-example-expenses</include>
+			</includes>
+			<binaries>
+				<unpack>false</unpack>
+				<outputDirectory>sqljet-${project.version}.${ci.buildNumber}/examples</outputDirectory>
+				<includeDependencies>false</includeDependencies>
+				<outputFileNameMapping>${artifact.artifactId}-${artifact.baseVersion}.${ci.buildNumber}${dashClassifier?}.${artifact.extension}</outputFileNameMapping>
+			</binaries>
+		</moduleSet> -->
+		
+		
+		<!-- Sources -->
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org.jrebirth:core</include>
+			</includes>
+			<binaries>
+				<!-- <outputFileNameMapping>${artifact.artifactId}-${artifact.baseVersion}.${ci.buildNumber}${dashClassifier?}.${artifact.extension}</outputFileNameMapping> -->
+				<attachmentClassifier>sources</attachmentClassifier>
+				<unpack>false</unpack>
+				<outputDirectory>sources</outputDirectory>
+				<includeDependencies>false</includeDependencies>
+			</binaries>
+		</moduleSet>
 	</moduleSets>
 
+	<!-- <formats> <format>zip</format> <format>tar.gz</format> </formats> <includeBaseDirectory>false</includeBaseDirectory> <dependencySets> <dependencySet> <excludes> Exclude the Jars that are included 
+		in later sections <exclude>*:javadoc</exclude> </excludes> <outputDirectory>lib</outputDirectory> <unpack>false</unpack> <useTransitiveDependencies>true</useTransitiveDependencies> <useTransitiveFiltering>false</useTransitiveFiltering> 
+		<useProjectArtifact>false</useProjectArtifact> </dependencySet> <dependencySet> <includes> <include>*:javadoc</include> </includes> <outputDirectory>docs</outputDirectory> <unpack>true</unpack> <useTransitiveDependencies>true</useTransitiveDependencies> 
+		<useProjectArtifact>false</useProjectArtifact> <useStrictFiltering>true</useStrictFiltering> </dependencySet> </dependencySets> <moduleSets> <moduleSet> Enable access to all projects in the current multimodule 
+		build! <useAllReactorProjects>true</useAllReactorProjects> <includes> <include>org.jrebirth:core</include> <include>org.jrebirth:analyzer</include> <include>org.jrebirth:presentation</include> <include>org.jrebirth:transition</include> 
+		<include>*:jar</include> <include>*:tests</include> <include>*:sources</include> <include>*:javadoc</include> <include>*:site</include> </includes> <binaries> <attachmentClassifier>*</attachmentClassifier> 
+		<outputDirectory>/</outputDirectory> <unpack>false</unpack> <includeDependencies>true</includeDependencies> </binaries> <sources> <fileSets> <fileSet> <includes> <include>**/*</include> </includes> <excludes> 
+		<exclude>.*</exclude> <exclude>**/.settings/**/*</exclude> <exclude>target</exclude> <exclude>**/target/**/*</exclude> </excludes> </fileSet> </fileSets> </sources> </moduleSet> </moduleSets> -->
 
 </assembly>

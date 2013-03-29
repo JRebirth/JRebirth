@@ -9,22 +9,34 @@
 Useful links
 
 * All web sites
-	
+
 	* Website for latest stable version: {{{http://www.jrebirth.org} www.jrebirth.org}}
-	
-	* Website for latest Dev Snapshot Website: {{{http://latest.jrebirth.org} latest.jrebirth.org}}
-	
+
+	* Website for latest development version: {{{http://latest.jrebirth.org} latest.jrebirth.org}}
+
 	* List of all generated Websites: {{{http://sites.jrebirth.org}sites.jrebirth.org}}
 
 * Javadoc
-	
-	* Latest API: {{{http://api.jrebirth.org}api.jrebirth.org}}
+
+	* Latest stable version (all modules mixed): {{{http://api.jrebirth.org}api.jrebirth.org}}
+
+	* Latest development version (all modules mixed): {{{http://latest-api.jrebirth.org}latest-api.jrebirth.org}}
+
+	* Latest stable version of core module only: {{{http://api-core.jrebirth.org}api-core.jrebirth.org}}
+
+	* Latest development version of core module only: {{{http://latest-api-core.jrebirth.org}latest-api-core.jrebirth.org}}
 
 
 * Software Factory
-	
+
 	* Latest Source: {{{${project.scm.url}}${project.scm.url}}}
-	
-	* Built with Jenkins: {{{${project.ciManagement.url}/lastSuccessfulBuild} ${project.ciManagement.url}/lastSuccessfulBuild}}
-	
-	* Checked by Sonar:  {{{http://quality.jrebirth.org/dashboard/index/1}quality.jrebirth.org/dashboard/index/1}}
+
+	* Built with Jenkins: {{{${project.ciManagement.url}/lastSuccessfulBuild} ${project.ciManagement.url}}}
+
+	* Checked by Sonar:  {{{http://quality.jrebirth.org/dashboard/index/1}quality.jrebirth.org}}
+
+	* Distributed by Artifactory:  {{{http://repo.jrebirth.org/repo/org/jrebirth}repo.jrebirth.org}}
+
+	* Also available on Bintray Organization repo:  {{{https://bintray.com/repo/browse/jrebirth/JRebirth}https://bintray.com/repo/browse/jrebirth/JRebirth}}
+
+	* And JCenter (top level Bintray repository): {{{http://jcenter.bintray.com/org/jrebirth}jcenter.bintray.com}}

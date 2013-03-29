@@ -9,6 +9,7 @@
 	<name>JRebirth Parent</name>
 	<url>http://sites.jrebirth.org/org.jrebirth-${project.version}</url>
 	<description>JRebirth is an Application Framework dedicated to JavaFX 2+ technology.</description>
+	<inceptionYear>2011</inceptionYear>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,7 +34,7 @@
 		<module>transition</module>
 		<module>distribution</module>
 		<!-- <module>form</module> -->
-  </modules>
+	</modules>
 
 	<issueManagement>
 		<system>GitHub Issue Tracker</system>
@@ -173,10 +174,11 @@
 					<links>
 						<link>http://docs.oracle.com/javafx/2/api/</link>
 					</links>
-					<detectLinks>true</detectLinks>
+					<detectLinks>false</detectLinks>
 					<show>private</show>
 					<nohelp>true</nohelp>
 					<failOnError>false</failOnError>
+					<!-- <linksource>true</linksource> -->
 				</configuration>
 			</plugin>
 
@@ -231,7 +233,9 @@
 				<version>3.2</version>
 
 				<executions>
+
 					<execution>
+						<phase>post-site</phase>
 						<id>attach-site</id>
 						<goals>
 							<goal>jar</goal>
@@ -269,44 +273,10 @@
 				<configuration> <includeReports>false</includeReports> <locales>en_US</locales> </configuration> </execution> </executions> <dependencies> <dependency> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> 
 				<version>1.1</version> </dependency> </dependencies> </plugin> -->
 
-			<!-- <plugin>
-				<groupId>com.agilejava.docbkx</groupId>
-				<artifactId>docbkx-maven-plugin</artifactId>
-				<version>2.0.14-SNAPSHOT</version>
-
-				<executions>
-					<execution>
-						<goals>
-							<goal>generate-html</goal>
-							<goal>generate-pdf</goal>
-							<goal>generate-manpages</goal>
-							<goal>generate-eclipse</goal>
-						</goals>
-						<phase>site</phase>
-					</execution>
-				</executions>
-				<configuration>
-					<highlightSource>1</highlightSource>
-					<foCustomization>src/docbkx/docbook-fo.xsl</foCustomization>
-
-					<includes>article.xml</includes>
-				</configuration>
-
-				<dependencies>
-					<dependency>
-						<groupId>net.sf.xslthl</groupId>
-						<artifactId>xslthl</artifactId>
-						<version>2.0.1</version>
-						<scope>runtime</scope>
-					</dependency>
-					<dependency>
-						<groupId>net.sf.offo</groupId>
-						<artifactId>fop-hyph</artifactId>
-						<version>1.2</version>
-						<scope>runtime</scope>
-					</dependency>
-				</dependencies>
-			</plugin> -->
+			<!-- <plugin> <groupId>com.agilejava.docbkx</groupId> <artifactId>docbkx-maven-plugin</artifactId> <version>2.0.14-SNAPSHOT</version> <executions> <execution> <goals> <goal>generate-html</goal> <goal>generate-pdf</goal> 
+				<goal>generate-manpages</goal> <goal>generate-eclipse</goal> </goals> <phase>site</phase> </execution> </executions> <configuration> <highlightSource>1</highlightSource> <foCustomization>src/docbkx/docbook-fo.xsl</foCustomization> 
+				<includes>article.xml</includes> </configuration> <dependencies> <dependency> <groupId>net.sf.xslthl</groupId> <artifactId>xslthl</artifactId> <version>2.0.1</version> <scope>runtime</scope> </dependency> 
+				<dependency> <groupId>net.sf.offo</groupId> <artifactId>fop-hyph</artifactId> <version>1.2</version> <scope>runtime</scope> </dependency> </dependencies> </plugin> -->
 
 			<!-- Project Quality -->
 			<plugin>
@@ -347,7 +317,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
