@@ -6,6 +6,7 @@ div.soft h1 {
     font-size: 15px;
 }
 div.soft {
+	
     background-color: #FFFFFF;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 4px 5px #666666;
@@ -16,47 +17,30 @@ div.soft {
     font-weight: normal;
     height: 150px;
     margin: 20px;
-    padding-left: 140px;
+    padding-left: 130px;
     padding-right: 5px;
     width: 30%;
-}
-div#youtrack {
-    background-image: url("../images/soft/youtrack.png");
-    background-position: left center;
+    background-position: 5px center;
     background-repeat: no-repeat;
 }
 div#jenkins {
     background-image: url("../images/soft/jenkins.png");
-    background-position: left center;
-    background-repeat: no-repeat;
 }
 div#sonar {
     background-image: url("../images/soft/sonar.png");
-    background-position: left center;
-    background-repeat: no-repeat;
 }
 div#artifactory {
     background-image: url("../images/soft/artifactory.png");
-    background-position: left center;
-    background-repeat: no-repeat;
 }
 div#github {
     background-image: url("../images/soft/github.png");
-    background-position: left center;
-    background-repeat: no-repeat;
 }
 div#maven {
     background-image: url("../images/soft/maven.png");
-    background-position: left center;
-    background-repeat: no-repeat;
 }
 div#yourkit {
     background-image: url("../images/soft/yourkit.png");
-    background-position: left center;
-    background-repeat: no-repeat;
 }
 div#structure101 {
     background-image: url("../images/soft/structure101.png");
-    background-position: left center;
-    background-repeat: no-repeat;
 }
