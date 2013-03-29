@@ -25,12 +25,11 @@
 				<executions>
 					<execution>
 						<id>package-all</id>
-						<phase>package</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>
 						<configuration>
-							<finalName>JRebirth-${project.version}</finalName>
 							<appendAssemblyId>false</appendAssemblyId>
 							<descriptors>
 								<descriptor>src/main/assembly/all.xml</descriptor>

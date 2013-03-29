@@ -8,11 +8,37 @@
 
 Release Notes
 
-* 0.8.0 - Major version - 2013-04-22 (work in progress)
+* 0.7.3 - 'Doc&Site' version - 2013-04-22 (work in progress)
 
-    * JRebirth Web site will be entirely generated with Maven Doxia engine.\    
-    All documentation is now written with Doxia and could be updated on GitHub.\
-    Every one can send a pull request to add information or to correct mistakes.
+	* JRebirth is now available on {{{http://jcenter.bintray.com/org/jrebirth}JCenter}} repository hosted by bintray
+
+	* JRebirth Web site is now entirely generated with Maven Doxia engine.\
+		All documentation is written with Doxia and could be updated on GitHub.\
+		Every one can send a pull request to add information or to correct mistakes.\
+		PDF Documentation is delayed or will be manually built.
+
+	* The website is now managed with rolling version:
+
+		* {{{http://www.jrebirth.org}www.jrebirth.org}} for latest stable version
+		
+		* {{{http://latest.jrebirth.org}latest.jrebirth.org}} for latest development version
+		
+		* {{{http://sites.jrebirth.org}sites.jrebirth.org}} will list all versions (current and archives)
+
+	* Javadoc API (and other reports) follow the same rules:
+    
+		* {{{http://api.jrebirth.org}api.jrebirth.org}} Javadoc for latest stable version (all modules mixed)
+		
+		* {{{http://latest-api.jrebirth.org}latest-api.jrebirth.org}} Javadoc for latest development version (all modules mixed)
+		
+		* {{{http://api-core.jrebirth.org}api-core.jrebirth.org}} Javadoc for latest stable version of core module only
+		
+		* {{{http://latest-api-core.jrebirth.org}latest-api-core.jrebirth.org}} Javadoc for latest development version of core module only
+
+	* JRebirth Catalog used to declare JRebirth archetype is now available online for each version.\
+		The latest one is available here :  {{{http://latest.jrebirth.org/archetype/jrebirth-catalog.xml}Latest catalog}}
+
+============================================
 
 * 0.7.2 - Fix version - 2013-02-22
 
