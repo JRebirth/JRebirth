@@ -81,18 +81,19 @@
 				</li>
 			</ul>
 		</div>
-
+		
+		
 		<div id="twitter">
-			<a class="twitter-timeline" href="https://twitter.com/JRebirth4JFX" data-widget-id="313731797349441536">Tweets de @JRebirth4JFX</a>
+        	<a id="twitlink" class="twitter-timeline" href="https://twitter.com/JRebirth4JFX" >Tweets of @JRebirth4JFX</a>
 			<script>//<![CDATA[
-			!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+			document.getElementById("twitlink").setAttribute("data-widget-id","313731797349441536");
 			//]]></script>
-		</div>
-
+            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+        </div>
 
 		<div id="3mintuto" style="float: left; width: 600px;">
 
-			<section id="3min" name="3 minute Tutorial">
+			<section id="3min" name="3-minute Tutorial">
 				<div id="ytplayer"></div>
 
 				<script>

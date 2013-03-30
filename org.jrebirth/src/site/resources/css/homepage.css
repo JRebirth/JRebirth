@@ -104,9 +104,9 @@ div#twitter {
 	width:32%;
 	
 	margin-top : 30px;
-	border: 1px solid #696;
+	/*border: 1px solid #696;*/
 	padding: 5px 10px;
-	
+/*	
 	-webkit-border-radius: 20px;
 	-moz-border-radius: 20px;
 	border-radius: 20px;
@@ -117,12 +117,12 @@ div#twitter {
 	
 	background: #b3dced; 
 	background: -moz-linear-gradient(45deg,  #b3dced 0%, #29b8e5 0%, #bce0ee 100%); 
-	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#b3dced), color-stop(0%,#29b8e5), color-stop(100%,#bce0ee)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(45deg,  #b3dced 0%,#29b8e5 0%,#bce0ee 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(45deg,  #b3dced 0%,#29b8e5 0%,#bce0ee 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(45deg,  #b3dced 0%,#29b8e5 0%,#bce0ee 100%); /* IE10+ */
-	background: linear-gradient(45deg,  #b3dced 0%,#29b8e5 0%,#bce0ee 100%); /* W3C */
-
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#b3dced), color-stop(0%,#29b8e5), color-stop(100%,#bce0ee)); / * Chrome,Safari4+ * /
+	background: -webkit-linear-gradient(45deg,  #b3dced 0%,#29b8e5 0%,#bce0ee 100%); / * Chrome10+,Safari5.1+ * /
+	background: -o-linear-gradient(45deg,  #b3dced 0%,#29b8e5 0%,#bce0ee 100%); / * Opera 11.10+ * /
+	background: -ms-linear-gradient(45deg,  #b3dced 0%,#29b8e5 0%,#bce0ee 100%); /* IE10+ * /
+	background: linear-gradient(45deg,  #b3dced 0%,#29b8e5 0%,#bce0ee 100%); / * W3C * /
+*/
 }
 div.twPicture{
     float: left;
