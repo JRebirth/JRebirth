@@ -94,6 +94,9 @@ div#download a {
 	color:#756f6b;
 }
 
+div#download ul{
+	padding:0;
+}
 div#download ul li{
 	list-style-type:none;
 	margin-bottom:8px;
