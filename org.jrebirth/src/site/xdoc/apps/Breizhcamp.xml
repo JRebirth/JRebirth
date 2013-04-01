@@ -54,10 +54,10 @@
 			.
 			<br />
 			<hr />
-		<div id="javafx-app-placeholder" style="margin: 0; padding: 0;">
-		</div>
-
+			<div id="javafx-app-placeholder" style="margin: 0 -27px; padding: 0;">
+			</div>
 		</section>
+
 	</body>
 </document>
 
