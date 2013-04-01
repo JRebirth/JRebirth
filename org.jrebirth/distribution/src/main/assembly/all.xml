@@ -12,65 +12,39 @@
 	<includeBaseDirectory>true</includeBaseDirectory>
 	<baseDirectory>JRebirth-${project.version}</baseDirectory>
 
-
+	<!-- Analyzer Tool -->
+	<fileSets>
+		<fileSet>
+			<directory>../analyzer/target/jnlp</directory>
+			<outputDirectory>/Analyzer</outputDirectory>
+		</fileSet>
+	</fileSets>
 	<moduleSets>
 
-		<!-- Analyzer Tool -->
+
+		<!-- <moduleSet> <useAllReactorProjects>true</useAllReactorProjects> <includes> <include>org.jrebirth:analyzer</include> </includes> <binaries> <includeDependencies>true</includeDependencies> <outputDirectory>Analyzer-${project.version}</outputDirectory> 
+			<excludes> <exclude>*.jar</exclude> </excludes> <includes> <include>org.jrebirth.analyzer-${project.version}.zip</include> </includes> <unpack>true</unpack> </binaries> </moduleSet> -->
+
+
 		<moduleSet>
-		
-			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>org.jrebirth:analyzer</include>
+				<include>org.jrebirth:core</include>
 			</includes>
-			
 			<binaries>
-			
+
+				<outputDirectory>/</outputDirectory>
+				<unpack>false</unpack>
 				<includeDependencies>true</includeDependencies>
-				<outputDirectory>Analyzer-${project.version}</outputDirectory>
+
 				<dependencySets>
 					<dependencySet>
-						<unpack>true</unpack>
+						<outputDirectory>libs</outputDirectory>
+						<unpack>false</unpack>
 						<useProjectArtifact>false</useProjectArtifact>
-						<useTransitiveDependencies>false</useTransitiveDependencies>
+						<useTransitiveDependencies>true</useTransitiveDependencies>
 						<useProjectAttachments>false</useProjectAttachments>
-						<includes>
-							<include>*.zip</include>
-						</includes>
 					</dependencySet>
 				</dependencySets>
-				<unpack>false</unpack>
-			</binaries>
-		</moduleSet>
-
-
-		<!-- Only Raw Jar -->
-		<moduleSet>
-			<useAllReactorProjects>true</useAllReactorProjects>
-			<includes>
-				<include>org.jrebirth:core</include>
-			</includes>
-			<binaries>
-				<includeDependencies>true</includeDependencies>
-				<outputDirectory>/</outputDirectory>
-				<!-- <outputFileNameMapping>${artifact.artifactId}-${artifact.baseVersion}.${ci.buildNumber}${dashClassifier?}.${artifact.extension}</outputFileNameMapping> -->
-				<!-- <dependencySets> <dependencySet> <outputDirectory>sqljet-${project.version}.${ci.buildNumber}</outputDirectory> <unpack>false</unpack> <useProjectArtifact>true</useProjectArtifact> <useTransitiveDependencies>true</useTransitiveDependencies> 
-					<useProjectAttachments>false</useProjectAttachments> <excludes> <exclude>org.tmatesoft.sqljet:*</exclude> </excludes> </dependencySet> </dependencySets> -->
-				<unpack>false</unpack>
-			</binaries>
-		</moduleSet>
-
-		<moduleSet>
-			<useAllReactorProjects>true</useAllReactorProjects>
-			<includes>
-				<include>org.jrebirth:core</include>
-			</includes>
-			<binaries>
-				<includeDependencies>true</includeDependencies>
-				<outputDirectory>bin</outputDirectory>
-				<!-- <outputFileNameMapping>${artifact.artifactId}-${artifact.baseVersion}.${ci.buildNumber}${dashClassifier?}.${artifact.extension}</outputFileNameMapping> -->
-				<!-- <dependencySets> <dependencySet> <outputDirectory>sqljet-${project.version}.${ci.buildNumber}</outputDirectory> <unpack>false</unpack> <useProjectArtifact>true</useProjectArtifact> <useTransitiveDependencies>true</useTransitiveDependencies> 
-					<useProjectAttachments>false</useProjectAttachments> <excludes> <exclude>org.tmatesoft.sqljet:*</exclude> </excludes> </dependencySet> </dependencySets> -->
-				<unpack>false</unpack>
 			</binaries>
 		</moduleSet>
 
@@ -105,6 +79,24 @@
 				<includeDependencies>false</includeDependencies>
 			</binaries>
 		</moduleSet>
+
+		<!-- Site -->
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org:jrebirth</include>
+				<include>org.jrebirth:core</include>
+				<include>org.jrebirth:presentation</include>
+				<include>org.jrebirth:transition</include>
+			</includes>
+			<binaries>
+				<attachmentClassifier>site</attachmentClassifier>
+				<outputDirectory>site/${module.artifactId}</outputDirectory>
+				<unpack>true</unpack>
+				<includeDependencies>false</includeDependencies>
+			</binaries>
+		</moduleSet>
+
 	</moduleSets>
 
 </assembly>
