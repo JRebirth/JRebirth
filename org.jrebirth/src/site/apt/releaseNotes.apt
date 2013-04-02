@@ -10,8 +10,10 @@ Release Notes
 
 * 0.7.3 - 'Doc&Site' version - 2013-04-22 (work in progress)
 
-	* JRebirth is now available on {{{http://jcenter.bintray.com/org/jrebirth}JCenter}} repository hosted by bintray
-
+	* JRebirth is now available on {{{http://jcenter.bintray.com/org/jrebirth}JCenter}} repository hosted by bintray.
+	
+	* JRebirth has now its own Logo (Special thanks to XoXi).
+	
 	* JRebirth Web site is now entirely generated with Maven Doxia engine.\
 		All documentation is written with Doxia and could be updated on GitHub.\
 		Every one can send a pull request to add information or to correct mistakes.\
@@ -38,7 +40,6 @@ Release Notes
 	* JRebirth Catalog used to declare JRebirth archetype is now available online for each version.\
 		The latest one is available here :  {{{http://latest.jrebirth.org/archetype/jrebirth-catalog.xml}Latest catalog}}
 
-============================================
 
 * 0.7.2 - Fix version - 2013-02-22
 

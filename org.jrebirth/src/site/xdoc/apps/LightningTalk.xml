@@ -35,6 +35,9 @@
 
 		<section id="LightningTalk" name="JavaFX 2.2 Lightning Talk ToulouseJUG" title="JavaFX 2.2 Lightning Talk ToulouseJUG">
 
+		<div id="catcherTitle">JRebirth - JavaFX 2.2 Lightning Talk ToulouseJUG</div>
+		<div id="catcherContent">DogFooding like JavaFX 2.2 Presentation</div>
+
 			<p>This application has been shown during Heroes Event at ToulouseJUG</p>
 			<p>
 				Require

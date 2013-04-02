@@ -15,12 +15,22 @@
 		<title>Table of Content</title>
 	</properties>
 
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+	</head>
+
 	<body>
 
 		<section name="Table of Content">
 
 			<div id="catcherTitle">JRebirth Application Framework Documentation</div>
 			<div id="catcherContent">Learn how to use JRebirth to help you building sophisticated application in minutes.</div>
+
+			<p>
+				Note: An all-in-one documentation is also available:
+				<a href="AllInOne.html">All-In-One Page</a>
+			</p>
 
 			<ol>
 				<li>
@@ -63,7 +73,5 @@
 				</li>
 			</ol>
 		</section>
-
-
 	</body>
 </document> 	

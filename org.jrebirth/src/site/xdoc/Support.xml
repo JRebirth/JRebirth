@@ -19,6 +19,9 @@
 
 		<section id="Support" name="Support" title="Support">
 
+			<div id="catcherTitle">JRebirth Support</div>
+			<div id="catcherContent">How to get support or to give us some feedback.</div>
+
 			<p>How to get support or to give us some feedback</p>
 
 			<subsection name="Bugs Tracker" class="hBlock">
