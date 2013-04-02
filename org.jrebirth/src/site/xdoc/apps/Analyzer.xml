@@ -32,7 +32,10 @@
 		<script type="text/javascript" src="../web-files/dtjava.js"></script>
 		<script type="text/javascript" src="../web-files/javafxApp.js"></script>
 
-		<section id="JRebirthAnalyzer" name="JRebirth Analyzer" >
+		<section id="JRebirthAnalyzer" name="JRebirth Analyzer">
+
+			<div id="catcherTitle">JRebirth - Application Analyzer</div>
+			<div id="catcherContent">Analyze your log trace to see how JRebirth code engine works</div>
 
 			<p>This application can help you to debug your application</p>
 			<p>
@@ -47,7 +50,7 @@
 			<a onclick="return launchApplication();">Click to launch this app as webstart</a>
 			<br />
 			Press F11 to activate fullscreen mode, use left-click to show the next slide, right click for previous slide
-		
+
 			<div style="margin: 10px;">
 				You can browse the source code on
 				<a title="JRebirth EclipseDay Repository" href="https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth/analyzer" target="_blank">GitHub</a>

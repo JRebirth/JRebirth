@@ -3,16 +3,16 @@
 /*----------------------------------*/
 
 div#catcher_block h1 {
-	font-size:26px;
-	margin-top:50px;
+	font-size:48px;
+	/*margin-top:50px;*/
 	margin-left:80px;
 	float: left;
 }
 
 div#catcher_block div.catchme {
 	float:left;
-	font-size:20px;
-	padding-top:20px;
+	font-size:26px;
+	padding-top:15px;
 	padding-left:100px;
 }
 
@@ -21,6 +21,7 @@ div#features {
 	width:50%;	
 	
 	text-align:justify;
+	margin : 30px 15px;
 	padding:25px 40px;
 	
 	font-size:21px;
@@ -51,9 +52,19 @@ div#features {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=1 );*/
 }
 
-div#3mintuto{
+div#mintuto{
 	float : left;
 	width:600px;	
+}
+
+div.box{
+	
+	margin : 30px 15px;
+	border: 1px solid #696;
+	padding: 5px 5px;
+	
+	border-radius: 10px;
+	box-shadow: #666  0px 4px 5px;
 }
 
 div#download{
@@ -66,18 +77,6 @@ div#download{
 	width:32%;
 	
 	color:#756f6b;
-	
-	margin-top : 30px;
-	border: 1px solid #696;
-	padding: 5px 10px;
-	
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 20px;
-	
-	-webkit-box-shadow: #666 0px 4px 5px;
-	-moz-box-shadow: #666  0px 4px 5px;
-	box-shadow: #666  0px 4px 5px;
 	
 	background: #f9c667;
 	background: -moz-radial-gradient(center, ellipse cover, #f9c667 0%, #f79621 100%);
@@ -106,27 +105,10 @@ div#twitter {
 	float : right;
 	width:32%;
 	
-	margin-top : 30px;
-	/*border: 1px solid #696;*/
-	padding: 5px 10px;
-/*	
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 20px;
-	
-	-webkit-box-shadow: #666 0px 4px 5px;
-	-moz-box-shadow: #666 0px 4px 5px;
-	box-shadow: #666 0px 4px 5px;
-	
-	background: #b3dced; 
-	background: -moz-linear-gradient(45deg,  #b3dced 0%, #29b8e5 0%, #bce0ee 100%); 
-	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#b3dced), color-stop(0%,#29b8e5), color-stop(100%,#bce0ee)); / * Chrome,Safari4+ * /
-	background: -webkit-linear-gradient(45deg,  #b3dced 0%,#29b8e5 0%,#bce0ee 100%); / * Chrome10+,Safari5.1+ * /
-	background: -o-linear-gradient(45deg,  #b3dced 0%,#29b8e5 0%,#bce0ee 100%); / * Opera 11.10+ * /
-	background: -ms-linear-gradient(45deg,  #b3dced 0%,#29b8e5 0%,#bce0ee 100%); /* IE10+ * /
-	background: linear-gradient(45deg,  #b3dced 0%,#29b8e5 0%,#bce0ee 100%); / * W3C * /
-*/
+	margin : 30px 15px;
+	padding: 5px 5px;
 }
+
 div.twPicture{
     float: left;
     margin-right: 10px;
@@ -143,10 +125,10 @@ div#twitter div p strong{
 div#twitter div p strong a{
 	font-size:12px;
 	color:#fff;
-        border:1px solid #fff; 
-        background-color: #F8A435; 
-        margin: 0px;
-        padding: 0 2px;
+    border:1px solid #fff; 
+    background-color: #F8A435; 
+    margin: 0px;
+    padding: 0 2px;
 }
 div#twitter a{
         color:#6E6254;
@@ -176,17 +158,6 @@ div#thanks{
 	width:32%;
 	
 	color:#FFFFF;
-	
-	border: 1px solid #696;
-	padding: 5px 10px;
-	
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 20px;
-	
-	-webkit-box-shadow: #666 0px 4px 5px;
-	-moz-box-shadow: #666  0px 4px 5px;
-	box-shadow: #666  0px 4px 5px;
 	
 	background: #f9c667;
 	background: -moz-radial-gradient(center, ellipse cover, #f9c667 0%, #f79621 100%);

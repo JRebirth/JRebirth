@@ -32,6 +32,10 @@
 		<script type="text/javascript" src="../web-files/javafxApp.js"></script>
 
 		<section id="Breizhcamp" name="JRebirth JavaFX 2 Presentation">
+
+			<div id="catcherTitle">JRebirth JavaFX 2 Presentation Demo</div>
+			<div id="catcherContent">DogFooding like JavaFX 2 Presentation</div>
+
 			<p>
 				This application has been shown during my JavaFX 2 Presentation at
 				<a href="http://app.breizhcamp.cloudbees.net/talk/5.htm">Breizhcamp</a>

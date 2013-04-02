@@ -35,6 +35,9 @@
 
 		<section id="EclipseDay" name="Eclipse Day Toulouse 2012 JavaFX Slides">
 
+			<div id="catcherTitle">JRebirth - EclipseDay Toulouse Demo</div>
+			<div id="catcherContent">DogFooding like JavaFX 2 Presentation</div>
+
 			<p>This application has been shown during Eclipse Day Toulouse 2012.</p>
 			<p>
 				Require

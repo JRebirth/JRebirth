@@ -33,6 +33,9 @@
 
 		<section id="ToulouseJug" name="JRebirth JavaFX 2 Presentation">
 
+		<div id="catcherTitle">JRebirth JavaFX 2 Presentation Demo</div>
+		<div id="catcherContent">DogFooding like JavaFX 2 Presentation</div>
+
 			<p>
 				This application has been shown during my JavaFX 2 Presentation at
 				<a href="http://www/toulousejug.org">ToulouseJUG</a>

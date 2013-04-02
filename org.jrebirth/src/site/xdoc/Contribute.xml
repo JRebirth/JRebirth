@@ -14,16 +14,17 @@
 	<properties>
 		<title>Contribute</title>
 	</properties>
-	
+
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/component.css" media="all" />
 		<link rel="stylesheet" type="text/css" href="css/contribute.css" media="all" />
 	</head>
 	<body>
-		<div id="catcherTitle">Contribute!</div>
-		<div id="catcherContent">Here you have some interesting links if you want to contribute to JRebirth projects.</div>
-		
+
 		<section id="Contribute" name="">
+
+			<div id="catcherTitle">Contribute!</div>
+			<div id="catcherContent">Here you have some interesting links if you want to contribute to JRebirth projects.</div>
 
 			<subsection name="Bugs Tracker" id="maven" class="component soft">
 				<p>We are using GitHub issue Tracker to follow features requests and bugs.</p>
@@ -73,11 +74,12 @@
 					<a href="http://www.yourkit.com/.net/profiler/index.jsp">YourKit .NET Profiler </a>
 				</p>
 			</subsection>
-			
+
 			<subsection name="Code refactoring" id="structure101" class="component soft">
 				<p>
 					Structure101 provides us a free license to help us refactoring our source code, we still have a lot of nasty cycles we want to suppress.
-					You should visit this web site to learn more about their solutions:  
+					You should visit this web site to learn more about their
+					solutions:
 					<a href="http://www.structure101.com">www.structure101.com</a>
 				</p>
 			</subsection>

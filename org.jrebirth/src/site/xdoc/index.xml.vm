@@ -60,7 +60,7 @@
 			presentations.
 		</div>
 
-		<div id="download">
+		<div id="download" class="box">
 			<h1>
 				<a href="http://repo.jrebirth.org/repo/org/jrebirth">Download</a>
 			</h1>
@@ -91,7 +91,7 @@
             <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
         </div>
 
-		<div id="3mintuto" style="float: left; width: 600px;">
+		<div id="mintuto" style="float: left; width: 600px;">
 
 			<section id="3min" name="3-minute Tutorial">
 				<div id="ytplayer"></div>
@@ -156,7 +156,7 @@
 			</div>
 		</div>
 
-		<div id="thanks">
+		<div id="thanks" class="box">
 			<h1>Special Thanks</h1>
 			<a title="YourKit, Java Profiler" href="http://www.yourkit.com" target="_blank">YourKit</a>,
 			used for Memory &amp; CPU Java profiling.<br />
