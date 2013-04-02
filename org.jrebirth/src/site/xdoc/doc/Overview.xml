@@ -21,12 +21,12 @@
 
 	<body>
 
-		<section name="Overview" title="Overview">
+		<section name="Overview">
 
 			<div id="catcherTitle">Overview of the JRebirth Core Architecture</div>
 			<div id="catcherContent">JRebirth Application Framework offers a very efficient pattern for build real Professional JavaFX 2.0 applications.</div>
 
-			<subsection name="ItWorksAs" title="How does JRebirth work ?">
+			<subsection name="How does JRebirth work ?">
 
 				<p>JRebirth uses a WCS-MVC pattern with 6 main layers:</p>
 				<br />
@@ -39,7 +39,7 @@
 
 			</subsection>
 
-			<subsection name="Application" title="Application" class="component">
+			<subsection name="Application" class="component">
 				<p>
 					The
 					<span class="high">App</span>
@@ -51,7 +51,7 @@
 			</subsection>
 
 
-			<subsection name="GlobalFacade" title="GlobalFacade" class="component">
+			<subsection name="GlobalFacade" class="component">
 				<p>
 					The GlobalFacade is just used to simplify acess from any layer to any other.
 					<br />
@@ -59,7 +59,7 @@
 				</p>
 			</subsection>
 
-			<subsection name="Notifier" title="Notifier and Wave" class="component">
+			<subsection name="Notifier and Wave" class="component">
 				<p>The Notifier layer will transport small notifications called Waves. This notification engine is integrated into the core of JRebirth. Its role is to manage communication throught all JRebirth
 					layers.
 				</p>
@@ -77,7 +77,7 @@
 				</p>
 			</subsection>
 
-			<subsection name="Commands" title="CommandFacade and Commands" class="component">
+			<subsection name="CommandFacade and Commands" class="component">
 				<p>The Command layer is used to manage complex group of actions (MultiCommand) (synchronously or asynchronously), or atomic reusable action (Command).</p>
 				<p>They can be processed into one of the 3 kind of thread managed by using annotation.</p>
 				<p>All interactions between layers must be managed by Commands.</p>
@@ -86,7 +86,7 @@
 				</p>
 			</subsection>
 
-			<subsection name="Services" title="ServiceFacade and Services" class="component">
+			<subsection name="ServiceFacade and Services" class="component">
 				<p>The Service layer is used to retrieve Data from outside the application or to communicate with others applications.</p>
 				<p>It can use Spring HttpRequests, Web Services, Restlets, files or whatever you want. They are managed as Worker tasks in a dedicated thread pool.</p>
 				<p>
@@ -94,7 +94,7 @@
 				</p>
 			</subsection>
 
-			<subsection name="UI" title="UiFacade and Models" class="component">
+			<subsection name="UiFacade and Models" class="component">
 				<p>The Model layer is used to manage the loading of the data displayed into a view, for example by calling a service.</p>
 				<p>A model manage the View logic.</p>
 				<p>A Model creates its View automatically by reflection.</p>
@@ -103,13 +103,13 @@
 				</p>
 			</subsection>
 
-			<subsection name="Controllers" title="Controllers" class="component">
+			<subsection name="Controllers" class="component">
 				<p>A Controller manage the View's Interactions logic. it's used to intercept all JavaFX components' events.</p>
 				<p>A controller must implements an custom Adapter to manage events (like MouseAdapter) and link its built-in Handler to the View's nodes (like MouseHandler).</p>
 				<p>Or it can simply implement custom methods if annotations are used. </p>
 			</subsection>
 
-			<subsection name="Views" title="Views" class="component">
+			<subsection name="Views" class="component">
 				<p>The view layer is used to create user interface by using JavaFX visual components.</p>
 				<p>A View manage the View's Presentation logic.</p>
 				<p>Each view have a Model used to acessinterrogate to display data.</p>
