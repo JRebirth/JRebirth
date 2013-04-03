@@ -98,27 +98,30 @@
 			</resource>
 			<resource>
 				<filtering>false</filtering>
-				<directory>${basedir}/src/test/java</directory>
-				<includes>
-					<include>**/*.fxml</include>
-					<include>**/*.properties</include>
-				</includes>
-			</resource>
-			<resource>
-				<filtering>false</filtering>
 				<directory>${basedir}/src/main/resources</directory>
 				<includes>
 					<include>**/*.*</include>
 				</includes>
 			</resource>
-			<resource>
+		</resources>
+
+		<testResources>
+			<testResource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/test/java</directory>
+				<includes>
+					<include>**/*.fxml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</testResource>
+			<testResource>
 				<filtering>false</filtering>
 				<directory>${basedir}/src/test/resources</directory>
 				<includes>
 					<include>**/*.*</include>
 				</includes>
-			</resource>
-		</resources>
+			</testResource>
+		</testResources>
 
 		<plugins>
 			<plugin>
