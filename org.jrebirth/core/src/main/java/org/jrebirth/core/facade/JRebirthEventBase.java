@@ -165,6 +165,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
         sb.append(getTarget() == null ? null : getTarget().getCanonicalName());
         sb.append(ClassUtility.SEPARATOR);
         sb.append(getEventData());
+        sb.append(ClassUtility.SEPARATOR);
         return sb.toString();
     }
 
