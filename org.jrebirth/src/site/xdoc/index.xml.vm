@@ -37,7 +37,7 @@
 			Built according to
 			<a title="KISS principle" href="http://en.wikipedia.org/wiki/KISS_principle" target="_blank">KISS principle</a>
 			<br />
-			Lightweight (lower than 50kb with Pack200)
+			Lightweight (lower than 65kb with Pack200)
 			<br />
 			<a title="Apache 2 Licensed" href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Free</a>
 			&amp;
