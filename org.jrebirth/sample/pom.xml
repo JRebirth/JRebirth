@@ -4,12 +4,11 @@
 	<parent>
         <artifactId>jrebirth</artifactId>
         <groupId>org</groupId>
-        <version>0.7.3-SNAPSHOT</version>
+        <version>0.7.3</version>
     </parent>
 
 	<groupId>org.jrebirth</groupId>
 	<artifactId>sample</artifactId>
-	<version>0.7.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Sample Application</name>
@@ -169,7 +168,7 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>0.7.3</version>
 		</dependency>
 		
 	</dependencies>

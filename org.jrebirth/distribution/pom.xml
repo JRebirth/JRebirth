@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org</groupId>
 		<artifactId>jrebirth</artifactId>
-		<version>0.7.3-SNAPSHOT</version>
+		<version>0.7.3</version>
 		<relativePath>../</relativePath>
 	</parent>
 
@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>org</groupId>
 			<artifactId>jrebirth</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>site</classifier>
 		</dependency>
 
@@ -55,27 +55,27 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>javadoc</classifier>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>site</classifier>
 		</dependency>
 
@@ -83,27 +83,27 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>presentation</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>presentation</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>javadoc</classifier>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>presentation</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>presentation</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>site</classifier>
 		</dependency>
 
@@ -111,27 +111,27 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>transition</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>transition</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>javadoc</classifier>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>transition</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>transition</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>site</classifier>
 		</dependency>
 
@@ -139,27 +139,27 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>sample</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>sample</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>javadoc</classifier>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>sample</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>sample</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>site</classifier>
 		</dependency>
 
@@ -167,14 +167,14 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>archetype</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>archetype</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>site</classifier>
 		</dependency>
 
@@ -182,20 +182,20 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>analyzer</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>analyzer</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>analyzer</artifactId>
-			<version>0.7.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>site</classifier>
 		</dependency>
 
