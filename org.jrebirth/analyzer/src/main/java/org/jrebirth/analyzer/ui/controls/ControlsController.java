@@ -51,7 +51,7 @@ public final class ControlsController extends DefaultController<ControlsModel, C
     @Override
     protected void customInitializeEventHandlers() throws CoreException {
 
-        linkCommand(getView().getOpenButton(), MouseEvent.MOUSE_CLICKED, OpenEventTrackerFileCommand.class, LinkedCallback.CHECK_MOUSE_DOUBLE_CLICK);
+        linkCommand(getView().getOpenButton(), MouseEvent.MOUSE_CLICKED, OpenEventTrackerFileCommand.class, LinkedCallback.CHECK_MOUSE_SINGLE_CLICK);
 
         linkWave(getView().getUnloadButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_UNLOAD);
         linkWave(getView().getPlayPauseButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_PLAY);

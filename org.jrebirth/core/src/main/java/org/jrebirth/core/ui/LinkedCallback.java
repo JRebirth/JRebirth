@@ -27,6 +27,22 @@ import javafx.util.Callback;
  */
 public final class LinkedCallback {
 
+    /** The mouse single click checker. */
+    public static final Callback<MouseEvent, Boolean> CHECK_MOUSE_SINGLE_CLICK = new Callback<MouseEvent, Boolean>() {
+
+        /**
+         * Check if the mouse event is a single click.
+         * 
+         * @param event the mouse event triggered
+         * 
+         * @return true for single click
+         */
+        @Override
+        public Boolean call(final MouseEvent event) {
+            return event.getClickCount() == 1;
+        }
+    };
+    
     /** The mouse double click checker. */
     public static final Callback<MouseEvent, Boolean> CHECK_MOUSE_DOUBLE_CLICK = new Callback<MouseEvent, Boolean>() {
 
