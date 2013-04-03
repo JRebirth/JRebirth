@@ -7,6 +7,7 @@
 	<formats>
 		<format>zip</format>
 		<format>tar.gz</format>
+		<format>tar.bz2</format>
 	</formats>
 
 	<includeBaseDirectory>true</includeBaseDirectory>
@@ -19,84 +20,94 @@
 			<outputDirectory>/Analyzer</outputDirectory>
 		</fileSet>
 	</fileSets>
-	<moduleSets>
 
+	<dependencySets>
 
-		<!-- <moduleSet> <useAllReactorProjects>true</useAllReactorProjects> <includes> <include>org.jrebirth:analyzer</include> </includes> <binaries> <includeDependencies>true</includeDependencies> <outputDirectory>Analyzer-${project.version}</outputDirectory> 
-			<excludes> <exclude>*.jar</exclude> </excludes> <includes> <include>org.jrebirth.analyzer-${project.version}.zip</include> </includes> <unpack>true</unpack> </binaries> </moduleSet> -->
-
-
-		<moduleSet>
+		<!-- Binaries -->
+		<dependencySet>
 			<includes>
-				<include>org.jrebirth:core</include>
+				<include>org.jrebirth:*:jar</include>
 			</includes>
-			<binaries>
-
-				<outputDirectory>/</outputDirectory>
-				<unpack>false</unpack>
-				<includeDependencies>true</includeDependencies>
-
-				<dependencySets>
-					<dependencySet>
-						<outputDirectory>libs</outputDirectory>
-						<unpack>false</unpack>
-						<useProjectArtifact>false</useProjectArtifact>
-						<useTransitiveDependencies>true</useTransitiveDependencies>
-						<useProjectAttachments>false</useProjectAttachments>
-					</dependencySet>
-				</dependencySets>
-			</binaries>
-		</moduleSet>
-
+			<excludes>
+				<exclude>*:javadoc</exclude>
+				<exclude>*:sources</exclude>
+				<exclude>*:site</exclude>
+			</excludes>
+			<outputDirectory>/</outputDirectory>
+			<outputFileNameMapping>${artifact.groupId}.${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}</outputFileNameMapping>
+			<unpack>false</unpack>
+			<useTransitiveDependencies>false</useTransitiveDependencies>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useStrictFiltering>true</useStrictFiltering>
+		</dependencySet>
+		
+		<!-- Libs -->
+		<dependencySet>
+			<includes>
+				<include>*:jar</include>
+			</includes>
+			<excludes>
+				<exclude>org.jrebirth:*:jar</exclude>
+			</excludes>
+			<outputDirectory>libs/</outputDirectory>
+			<outputFileNameMapping>${artifact.groupId}.${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}</outputFileNameMapping>
+			<unpack>false</unpack>
+			<useTransitiveDependencies>true</useTransitiveDependencies>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useStrictFiltering>true</useStrictFiltering>
+		</dependencySet>
+		
 		<!-- Javadoc -->
-		<moduleSet>
-			<useAllReactorProjects>true</useAllReactorProjects>
+		<dependencySet>
 			<includes>
-				<include>org.jrebirth:core</include>
-				<include>org.jrebirth:presentation</include>
-				<include>org.jrebirth:transition</include>
+				<include>*:javadoc</include>
 			</includes>
-			<binaries>
-				<attachmentClassifier>javadoc</attachmentClassifier>
-				<outputDirectory>apidocs/${module.artifactId}</outputDirectory>
-				<unpack>true</unpack>
-				<includeDependencies>false</includeDependencies>
-			</binaries>
-		</moduleSet>
+			<outputDirectory>apidocs/${artifact.artifactId}</outputDirectory>
+			<unpack>true</unpack>
+			<useTransitiveDependencies>true</useTransitiveDependencies>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useStrictFiltering>true</useStrictFiltering>
+		</dependencySet>
 
 		<!-- Sources -->
-		<moduleSet>
-			<useAllReactorProjects>true</useAllReactorProjects>
+		<dependencySet>
 			<includes>
-				<include>org.jrebirth:core</include>
-				<include>org.jrebirth:presentation</include>
-				<include>org.jrebirth:transition</include>
+				<include>*:sources</include>
 			</includes>
-			<binaries>
-				<attachmentClassifier>sources</attachmentClassifier>
-				<outputDirectory>sources/${module.artifactId}</outputDirectory>
-				<unpack>true</unpack>
-				<includeDependencies>false</includeDependencies>
-			</binaries>
-		</moduleSet>
+			<outputDirectory>source/${artifact.artifactId}</outputDirectory>
+			<unpack>true</unpack>
+			<useTransitiveDependencies>true</useTransitiveDependencies>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useStrictFiltering>true</useStrictFiltering>
+		</dependencySet>
+
+		<!-- Root Site -->
+		<dependencySet>
+			<includes>
+				<include>org:jrebirth:*:site</include>
+			</includes>
+			<outputDirectory>site/</outputDirectory>
+			<unpack>true</unpack>
+			<useTransitiveDependencies>true</useTransitiveDependencies>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useStrictFiltering>true</useStrictFiltering>
+		</dependencySet>
 
 		<!-- Site -->
-		<moduleSet>
-			<useAllReactorProjects>true</useAllReactorProjects>
+		<dependencySet>
 			<includes>
-				<include>org:jrebirth</include>
-				<include>org.jrebirth:core</include>
-				<include>org.jrebirth:presentation</include>
-				<include>org.jrebirth:transition</include>
+				<include>*:site</include>
 			</includes>
-			<binaries>
-				<attachmentClassifier>site</attachmentClassifier>
-				<outputDirectory>site/${module.artifactId}</outputDirectory>
-				<unpack>true</unpack>
-				<includeDependencies>false</includeDependencies>
-			</binaries>
-		</moduleSet>
+			<excludes>
+				<exclude>org:jrebirth:*:site</exclude>
+			</excludes>
+			<outputDirectory>site/${artifact.artifactId}</outputDirectory>
+			<unpack>true</unpack>
+			<useTransitiveDependencies>true</useTransitiveDependencies>
+			<useProjectArtifact>true</useProjectArtifact>
+			<useStrictFiltering>true</useStrictFiltering>
+		</dependencySet>
 
-	</moduleSets>
+	</dependencySets>
 
 </assembly>

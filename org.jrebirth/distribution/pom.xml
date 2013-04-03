@@ -21,11 +21,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2</version>
+				<version>2.4</version>
 				<executions>
 					<execution>
-						<id>package-all</id>
-						<phase>post-site</phase>
+						<id>build-assembly</id>
+						<phase>verify</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>
@@ -45,18 +45,158 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>org</groupId>
+			<artifactId>jrebirth</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>site</classifier>
+		</dependency>
+
+		<!-- core -->
+		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
 			<version>0.7.3-SNAPSHOT</version>
-			<type>jar</type>
-			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>core</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>javadoc</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>core</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>sources</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>core</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>site</classifier>
+		</dependency>
+
+		<!-- presentation -->
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>presentation</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>presentation</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>javadoc</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>presentation</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>sources</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>presentation</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>site</classifier>
+		</dependency>
+
+		<!-- transition -->
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>transition</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>transition</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>javadoc</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>transition</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>sources</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>transition</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>site</classifier>
+		</dependency>
+
+		<!-- sample -->
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>sample</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>sample</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>javadoc</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>sample</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>sources</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>sample</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>site</classifier>
+		</dependency>
+
+		<!-- archetype -->
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>archetype</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>sources</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>archetype</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>site</classifier>
+		</dependency>
+
+		<!-- analyzer -->
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>analyzer</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>analyzer</artifactId>
+			<version>0.7.3-SNAPSHOT</version>
+			<classifier>sources</classifier>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>analyzer</artifactId>
 			<version>0.7.3-SNAPSHOT</version>
-			<scope>compile</scope>
+			<classifier>site</classifier>
 		</dependency>
 
 	</dependencies>
