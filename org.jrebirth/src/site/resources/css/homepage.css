@@ -4,14 +4,14 @@
 
 div#catcher_block h1 {
 	font-size:48px;
-	/*margin-top:50px;*/
-	margin-left:80px;
+	margin: 15px 80px 15px 80px;
 	float: left;
 }
 
 div#catcher_block div.catchme {
 	float:left;
 	font-size:26px;
+	line-height:30px;
 	padding-top:15px;
 	padding-left:100px;
 }
