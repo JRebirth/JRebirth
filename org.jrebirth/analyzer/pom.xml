@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>jrebirth</artifactId>
 		<groupId>org</groupId>
-		<version>0.7.3</version>
+		<version>0.7.4-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<groupId>org.jrebirth</groupId>
@@ -48,8 +47,7 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>2.3.2</version>
 
-				<!-- <executions> <execution> <goals> <goal>sign</goal> </goals> </execution> 
-					</executions> -->
+				<!-- <executions> <execution> <goals> <goal>sign</goal> </goals> </execution> </executions> -->
 				<configuration>
 					<archive>
 
@@ -57,16 +55,13 @@
 							<JavaFX-Version>2.0</JavaFX-Version>
 							<Main-Class>org.jrebirth.analyzer.JRebirthAnalyzer</Main-Class>
 
-
 							<!-- <implementation-vendor>seb</implementation-vendor> -->
 							<!-- <implementation-title>JRebirthAnalyzer</implementation-title> -->
 							<!-- <implementation-version>1.0</implementation-version> -->
 							<JavaFX-Application-Class>org.jrebirth.analyzer.JRebirthAnalyzer</JavaFX-Application-Class>
 
 							<JavaFX-Class-Path>${classpath}</JavaFX-Class-Path>
-							<!-- implementation-vendor: I implementation-title: Jrebirth demo 
-								implementation-version: 1.0 JavaFX-Application-Class: org.jrebirth.demo.JRebirthDemo 
-								Created-By: Maven Packager Main-Class: com/javafx/main/Main -->
+							<!-- implementation-vendor: I implementation-title: Jrebirth demo implementation-version: 1.0 JavaFX-Application-Class: org.jrebirth.demo.JRebirthDemo Created-By: Maven Packager Main-Class: com/javafx/main/Main -->
 						</manifestEntries>
 						<manifest>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
@@ -75,19 +70,14 @@
 
 						</manifest>
 					</archive>
-					<!-- <keystore>jrebirth.jks</keystore> <alias>jrebirth</alias> <storepass>gojava</storepass> 
-						<signedjar>${project.build.directory}/signed/${project.build.finalName}.jar</signedjar> 
-						<verify>true</verify> -->
+					<!-- <keystore>jrebirth.jks</keystore> <alias>jrebirth</alias> <storepass>gojava</storepass> <signedjar>${project.build.directory}/signed/${project.build.finalName}.jar</signedjar> <verify>true</verify> -->
 
 				</configuration>
 			</plugin>
 
-			<!-- <plugin> <artifactId>maven-assembly-plugin</artifactId> <configuration> 
-				<archive> <manifest> <mainClass>org.jrebirth.presentation.Presentation</mainClass> 
-				</manifest> </archive> <descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> 
-				</descriptorRefs> </configuration> <executions> <execution> <id>make-my-jar-with-dependencies</id> 
-				<phase>package</phase> <goals> <goal>single</goal> </goals> </execution> 
-				</executions> </plugin> -->
+			<!-- <plugin> <artifactId>maven-assembly-plugin</artifactId> <configuration> <archive> <manifest> <mainClass>org.jrebirth.presentation.Presentation</mainClass> </manifest> </archive> <descriptorRefs> 
+				<descriptorRef>jar-with-dependencies</descriptorRef> </descriptorRefs> </configuration> <executions> <execution> <id>make-my-jar-with-dependencies</id> <phase>package</phase> <goals> <goal>single</goal> 
+				</goals> </execution> </executions> </plugin> -->
 
 
 			<plugin>
@@ -96,8 +86,7 @@
 				<artifactId>webstart-maven-plugin</artifactId>
 				<version>1.0-beta-3</version>
 
-				<!-- do not bind to install phase - - > <executions> <execution> <goals> 
-					<goal>package</goal> </goals> </execution> </executions> -->
+				<!-- do not bind to install phase - - > <executions> <execution> <goals> <goal>package</goal> </goals> </execution> </executions> -->
 
 				<executions>
 					<execution>
@@ -111,15 +100,14 @@
 				<configuration>
 
 					<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
-					<excludeTransitive>false</excludeTransitive>
-					<libPath>lib</libPath>
+					<excludeTransitive>true</excludeTransitive>
+					<!-- <libPath>lib</libPath> -->
 
-					<resourcesDirectory>${project.basedir}/src/main/jnlp/resources</resourcesDirectory>
+					<resourcesDirectory>${project.basedir}/src/main/jnlp/</resourcesDirectory>
 					<codebase>${deployUrl}/${deployPath}</codebase>
 
 					<jnlp>
-						<!-- <inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath> 
-							<inputTemplate>src/main/jnlp/template.vm</inputTemplate> -->
+						<!-- <inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath> <inputTemplate>src/main/jnlp/template.vm</inputTemplate> -->
 						<outputFile>${jnlpFilename}</outputFile>
 
 						<mainClass>${appClass}</mainClass>
@@ -168,7 +156,7 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.3</version>
+			<version>0.7.4-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
