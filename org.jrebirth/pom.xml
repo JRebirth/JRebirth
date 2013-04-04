@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org</groupId>
 	<artifactId>jrebirth</artifactId>
-	<version>0.7.3</version>
+	<version>0.7.4-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 	<name>JRebirth Parent</name>
@@ -244,20 +244,21 @@
 				<executions>
 					<execution>
 						<id>attach-sites</id>
+						<phase>package</phase>
 						<goals>
 							<goal>jar</goal>
 						</goals>
 					</execution>
 					<execution>
 						<id>build-sites</id>
-						<phase>package</phase>
+						<phase>site</phase>
 						<goals>
 							<goal>stage</goal>
 						</goals>
 					</execution>
 					<execution>
 						<id>deploy-sites</id>
-						<phase>deploy</phase>
+						<phase>site-deploy</phase>
 						<goals>
 							<goal>stage-deploy</goal>
 						</goals>
@@ -361,7 +362,7 @@
 					<links>
 						<link>http://docs.oracle.com/javafx/2/api/</link>
 					</links>
-					<detectLinks>true</detectLinks>
+					<detectLinks>false</detectLinks>
 					<show>public</show>
 					<nohelp>false</nohelp>
 					<failOnError>false</failOnError>
