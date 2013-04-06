@@ -19,7 +19,7 @@
 
 		<section id="intro" name="Introduction">
 
-			<div id="catcherTitle">JRebirth Origins</div>
+ 			<div id="catcherTitle">JRebirth Origins</div>
 			<div id="catcherContent">The small story of JRebirth project.</div>
 
 			<!-- <macro name="toc" section="2" fromDepth="3" toDepth="5" /> -->
@@ -30,7 +30,7 @@
 					don't give me enought satisfaction.
 				</p>
 
-				<p>Like many people I thought tath web applications were the ultimate solution
+				<p>Like many people I thought that web applications were the ultimate solution
 					to build quickly beautiful and sophisticated applications. Before the advent of
 					JQuery's like toolkit I built mine, a
 					modularized javascript framework written
@@ -64,7 +64,7 @@
 					write nice application powered with a pleasant Look
 					&amp; Feel. </p>
 
-				<p>So JRebirth was primarly though to be a rebirth of Java Swing Toolkit in
+				<p>So JRebirth was first thought to be a rebirth of Java Swing Toolkit in
 					order to create the missing Application Framework that Swing never had.
 				</p>
 

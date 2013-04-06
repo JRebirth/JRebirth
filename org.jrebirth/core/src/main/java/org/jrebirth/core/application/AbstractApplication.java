@@ -48,15 +48,15 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 
- * The abstract class <strong>AbstractApplication</strong>.
+ * The abstract class <strong>AbstractApplication</strong> is the base class of a JRebirth Application.
  * 
- * The class to extend if you want to build an application using JRebirth CSM MVC (Command-Service-Message-Model-View Controller).
+ * This the class to extend if you want to build an application using JRebirth WCS-MVC (Wave-Command-Service-Model-View-Controller).
  * 
  * @author Sébastien Bordes
  * 
- * @param <P> The root node of the stage, must extends Pane
+ * @param <P> The root node of the stage, must extends Pane to allow children management
  */
-@Configuration(value = ".*jrebirth", extension = "properties", schedule = 0)
+@Configuration(".*jrebirth")
 public abstract class AbstractApplication<P extends Pane> extends Application implements JRebirthApplication<P> {
 
     /** The class logger. */
@@ -143,6 +143,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         final Configuration conf = ClassUtility.extractAnnotation(this.getClass(), Configuration.class);
 
         // Conf variable cannot be null because it was defined in this class
+        // It's possible to discard default behaviour by setting an empty string to the value.
 
         // launch the configuration search engine
         ResourceBuilders.PARAMETER_BUILDER.searchConfigurationFiles(conf.value(), conf.extension());

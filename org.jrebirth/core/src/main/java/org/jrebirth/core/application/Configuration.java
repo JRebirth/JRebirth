@@ -36,7 +36,7 @@ import java.lang.annotation.Target;
 public @interface Configuration {
 
     /**
-     * Define the wildcard used to find configuration files. The format is the same as Regex Pattern (ie: .*jrebirth => for abcjrebirth.EXTENSION files)
+     * Define the wildcard used to find configuration files. The format is the same as Regex Pattern (ie: .*-jrebirth => for abcjrebirth.EXTENSION files)
      * 
      * The default value is empty, no search will be done
      */
@@ -46,9 +46,9 @@ public @interface Configuration {
      * Define the file extension to find configuration files.<br/>
      * The extension must not included the first dot (ie: properties => for abcjrebirth.properties files)
      * 
-     * The default value is empty, no search will be done
+     * The default value is "properties" to load properties files
      */
-    String extension() default "";
+    String extension() default "properties";
 
     /**
      * Define the delay used to check if the file has changed in order to reload configuration files.<br />

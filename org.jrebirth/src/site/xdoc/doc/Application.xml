@@ -23,10 +23,10 @@
 	<body>
 
 		<section name="Create your first Application">
-			
+
 			<div id="catcherTitle">Application Layer</div>
 			<div id="catcherContent">How to create your first start class.</div>
-			
+
 			<!-- <macro name="toc" section="4" fromDepth="2" toDepth="3" /> -->
 
 			<subsection name="First Class to extend">
@@ -264,6 +264,89 @@
 					<a href="index.html">TOC</a>
 				</div>
 			</div>
+
+		</section>
+
+		<section name="Manage Configuration">
+			<p>JRebirth provides a configuration engine that allow to parse configuration files and inject values into application.</p>
+
+			<subsection name="@Configuration">
+				<p>
+					Your application class can use the dedicated
+					<strong>@Configuration</strong>
+					annotation.
+					The
+					<strong>AbstractApplication</strong>
+					class use a default one:
+				</p>
+
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java" />
+					<param name="snippet" value="re:(@Configuration)" />
+				</macro>
+
+				<p>Hereafter you have a full annotation usage:
+
+				</p>
+				<macro name="include">
+					<param name="source" value="core/src/test/java/org/jrebirth/core/application/FullConfApplication.java" />
+					<param name="snippet" value="re:(@Configuration)" />
+				</macro>
+
+
+				<p>
+					This annotation has 3 properties:
+					<ul>
+						<li>value</li>
+						<li>extension</li>
+						<li>schedule</li>
+					</ul>
+				</p>
+				<h4>Value (default property)</h4>
+				<p>
+					Define the wildcard used to find configuration files.
+					<br />
+					The format is the same as Regex Pattern (ie: .*-jrebirth => for abc-jrebirth.EXTENSION files, abc matches the .* regex part)
+					<br />
+					The default value is empty, no search will be
+					done
+				</p>
+
+				<h4>Extension</h4>
+				<p>
+					Define the file extension to find configuration files.
+					<br />
+					The extension must not included the first dot (ie: properties => for abc-jrebirth.properties files)
+					<br />
+					The default value is "properties" to load properties files
+				</p>
+
+				<h4>Schedule</h4>
+				<p>
+					Define the delay used to check if the file has changed in order to reload configuration files.
+					<br />
+					This value is in seconds.
+					<br />
+					The default value is 0, no check will be done
+				</p>
+
+			</subsection>
+
+			<subsection name="Avoid Configuration">
+				<p>
+					It's possible to avoid configuration mechanism, for example if you want to use your own and don't need another process at start-up.
+					<br />
+					You can disable it by setting an empty
+					<strong>@Configuration</strong>
+					annotation.
+
+				</p>
+				<macro name="include">
+					<param name="source" value="core/src/test/java/org/jrebirth/core/application/NullConfApplication.java" />
+					<param name="snippet" value="re:(@Configuration)" />
+				</macro>
+
+			</subsection>
 
 		</section>
 

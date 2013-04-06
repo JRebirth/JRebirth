@@ -19,7 +19,7 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
 	</head>
-	
+
 	<body>
 
 		<section name="Resources">
@@ -53,19 +53,17 @@
 			</p>
 			<p>So if you want to handle resources with JRebirth mechanism, you just have to create an enumeration that implement the interface of the resource you want, with a custom constructor.</p>
 
-			<subsection name="Color" >
+			<subsection name="Color">
 
 				<p>For example to manage web color, (basic hexadecimal string #00CC00), you have to use this declaration:</p>
 				<macro name="include">
-					<param name="highlight-theme" value="eclipse" />
 					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" />
-					<param name="snippet" value="aj:..TEST_COLOR_WEB_1" />
-					<param name="expand-snippets" value="true" />
+					<param name="snippet" value="re:TEST_COLOR_WEB_1" />
+					<param name="snippet-start-offset" value="1" />
 				</macro>
 
-
+				<p>Hereafter an example of an interface that hold multiple colors.</p>
 				<macro name="include">
-					<param name="highlight-theme" value="eclipse" />
 					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" />
 					<param name="snippet" value="aj:..TestColors" />
 					<param name="expand-snippets" value="true" />
@@ -73,7 +71,6 @@
 
 
 				<macro name="include">
-					<param name="highlight-theme" value="eclipse" />
 					<param name="source" value="core/src/main/java/org/jrebirth/core/resource/color/WebColor.java" />
 					<!-- <param name="snippet" value="aj:*.WebColor" /> <param name="expand-snippets" value="true" /> -->
 				</macro>
@@ -81,7 +78,6 @@
 
 				<p>But this interface doesn't explain how to register a resource, so let's see an example.</p>
 				<macro name="include">
-					<param name="highlight-theme" value="eclipse" />
 					<param name="source" value="presentation/src/main/java/org/jrebirth/presentation/PrezColors.java" />
 					<!-- <param name="snippet" value="aj:..PrezColors" /> <param name="expand-snippets" value="true" /> -->
 				</macro>
@@ -91,9 +87,16 @@
 
 			<subsection name="Font">
 
-
+			<p>For example to manage the <strong>Turtles</strong>font, you have to use this declaration:</p>
 				<macro name="include">
-					<param name="highlight-theme" value="eclipse" />
+					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/font/TestFonts.java" />
+					<param name="snippet" value="re:TEST_REAL_FONT_1" />
+					<param name="snippet-start-offset" value="1" />
+				</macro>
+
+				<p>Hereafter an example of an interface that hold multiple colors.</p>
+				
+				<macro name="include">
 					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/font/TestFonts.java" />
 					<param name="snippet" value="aj:..TestFonts" />
 					<param name="expand-snippets" value="true" />
