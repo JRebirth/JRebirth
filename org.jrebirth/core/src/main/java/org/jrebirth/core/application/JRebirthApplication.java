@@ -27,7 +27,7 @@ import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 
 /**
- * The interface <strong>JRebirthApplication</strong>.
+ * The interface <strong>JRebirthApplication</strong> define the contract to respect in order to launch correctly the underlying JRebirth Application Framework.
  * 
  * @author Sébastien Bordes
  * 
@@ -35,34 +35,31 @@ import org.jrebirth.core.wave.Wave;
  */
 public interface JRebirthApplication<P extends Pane> {
 
-    // /** The default scene width used. */
-    // int DEFAULT_SCENE_WIDTH = 800;
-    //
-    // /** The default scene height used. */
-    // int DEFAULT_SCENE_HEIGHT = 600;
-    //
-    // /** The default scene height used. */
-    // Color DEFAULT_SCENE_BG_COLOR = Color.TRANSPARENT;
-
     /**
+     * Return the main stage of this application.
+     * 
      * @return Returns the stage.
      */
     Stage getStage();
 
     /**
+     * Return the scene of the main stage of this application.
+     * 
      * @return Returns the scene.
      */
     Scene getScene();
 
     /**
+     * Return the root node of the main scene of this application.
+     * 
      * @return Returns the rootNode.
      */
     P getRootNode();
 
     /**
-     * This method must be implemented to declare which UI Model to display first.
+     * This method must be implemented to declare which JRebirth UI Model will be displayed first.
      * 
-     * @return the class of the first UI Model to launch
+     * @return the class of the first UI Model to launch it must extend the {@link Model}
      */
     Class<? extends Model> getFirstModelClass();
 
@@ -81,7 +78,7 @@ public interface JRebirthApplication<P extends Pane> {
     List<Wave> getPostBootWaveList();
 
     /**
-     * Preload fonts to allow them to be used by CSS.
+     * Preload JRebirth wrapped fonts to allow them to be used directly by CSS.
      */
 	void preloadFonts();
 

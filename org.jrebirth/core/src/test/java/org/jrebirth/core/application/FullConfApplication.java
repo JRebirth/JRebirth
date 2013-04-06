@@ -11,16 +11,16 @@ import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 
 /**
- * The class <strong>TestApplication</strong>.
+ * The class <strong>FullConfApplication</strong>.
  * 
  * @author Sébastien Bordes
  */
-@Configuration(".-jrebirth")
-public class TestApplication extends AbstractApplication<Pane> {
+@Configuration(value=".-jrebirth", extension="properties", schedule=60)
+public class FullConfApplication extends AbstractApplication<Pane> {
 
-    private static TestApplication instance;
+    private static FullConfApplication instance;
 
-    public static TestApplication getInstance() {
+    public static FullConfApplication getInstance() {
         return instance;
     }
 
