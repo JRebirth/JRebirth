@@ -48,15 +48,15 @@
 
 		<div id="features"><!-- <h2>JRebirth, Write your JavaFX2 Application more simply !</h2> -->
 			JRebirth JavaFX 2 Application Framework provides a
-			<span style="color: #f28705;">really simple way to write sophisticated and powerful RIA's applications</span>
+			<strong>really simple way to write sophisticated and powerful RIA's applications</strong>
 			. By leveraging the best of previous RIA framework, we can deliver the ultimate one to work cleanly and efficiently with this
-			<span style="color: #f28705;">awesome API</span>
+			<strong>awesome API</strong>
 			. Check our
 			<a href="doc/overview.html">overview page</a>
 			to see a diagram illustrating features and layers. Have also a look to
 			<a href="apps/lightningtalk.html">demo applications</a>
 			which were used as
-			<span style="color: #f28705;">JavaFX 2</span>
+			<strong>JavaFX 2</strong>
 			presentations.
 		</div>
 
