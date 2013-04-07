@@ -63,7 +63,7 @@ public final class SampleApplication extends AbstractApplication<StackPane> {
      */
     @Override
     protected void customizeScene(final Scene scene) {
-        scene.getStylesheets().add(loadCSS("style/sample.css"));
+    	 addCSS(scene, "style/sample.css");
     }
 
     /**

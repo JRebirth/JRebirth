@@ -43,6 +43,7 @@ import org.jrebirth.core.resource.ResourceBuilders;
 import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.util.ClassUtility;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -124,8 +125,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             primaryStage.show();
 
             // Preload fonts to allow them to be used by CSS
-            //preloadFonts();
-            
+            // preloadFonts();
+
             LOGGER.trace("{} has started successfully", this.getClass().getSimpleName());
 
         } catch (final CoreException ce) {
@@ -272,8 +273,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * @param scene the scene to customize
      */
     protected abstract void customizeScene(final Scene scene);
-    
-    
+
     /**
      * Return the external form of the css file by using the default classloader.
      * 
@@ -281,8 +281,18 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * 
      * @return the external form of the css file
      */
-    protected String loadCSS(String cssFileName){
-    	return Thread.currentThread().getContextClassLoader().getResource(cssFileName).toExternalForm();	
+    protected String loadCSS(final String cssFileName) {
+        return Thread.currentThread().getContextClassLoader().getResource(cssFileName).toExternalForm();
+    }
+
+    /**
+     * Attach a new CSS file to the scene using the default classloader.
+     * 
+     * @param scene the scene that will hold this new CSS file
+     * @param cssFileName the raw path to css file
+     */
+    protected void addCSS(final Scene scene, final String cssFileName) {
+        scene.getStylesheets().add(loadCSS(cssFileName));
     }
 
     /**
