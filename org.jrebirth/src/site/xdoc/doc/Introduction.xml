@@ -83,7 +83,7 @@
 
 				<p>
 					The name was readily found:
-					<span class="highlight">JRebirth</span>
+					<strong>JRebirth</strong>
 					(for
 					Java Rebirth) JavaFX Application Framework
 				</p>
@@ -110,9 +110,9 @@
 
 				<p>
 					To adress the first point JRebirth offers a way to
-					<span class="highlight">manage threads</span>
+					<strong>manage threads</strong>
 					on your behalf, for the second JRebirth
-					<span class="highlight">defines layers</span>
+					<strong>defines layers</strong>
 					to maintain a good Separation of
 					Concern (SoC).
 				</p>

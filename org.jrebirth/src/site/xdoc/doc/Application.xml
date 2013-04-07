@@ -22,7 +22,7 @@
 
 	<body>
 
-		<section name="Create your first Application">
+		<section name="Starting Point">
 
 			<div id="catcherTitle">Application Layer</div>
 			<div id="catcherContent">How to create your first start class.</div>
@@ -32,7 +32,8 @@
 			<subsection name="First Class to extend">
 				<p>JRebirth Application Framework offers a custom class that extends the
 					basic javafx.Application class, the aim is to automatically start
-					the JRebirth underlying Application Framework.
+					the JRebirth underlying Application Framework without doing
+					complex stuff.
 				</p>
 				<p>
 					<span style="text-decoration: underline;">Short UML Diagram:</span>
@@ -41,16 +42,18 @@
 					<a title="Application Class Diagram " rel="lightbox" href="uml/Application.png">
 						<img class="redux" alt="" src="uml/Application.png" />
 					</a>
+					<legend>Application Class Diagram</legend>
 				</div>
+
 				<p>
-					So you must extend
+					So you just have to extend
 					<strong>org.jrebirth.core.application.AbstractApplication</strong>
 					to be able to use JRebirth features.
 				</p>
 				<p>
 					If you have used the Maven archetype
 					<em>org.jrebirth.archetype</em>
-					you will obtain this source code :
+					you obtained this source code otherwise you could copy-paste it:
 				</p>
 
 				<macro name="include">
@@ -68,11 +71,13 @@
 					calling the
 					protected method
 					<em>getRootNode().</em>
+					You must define it in the class definition as generic type, this type must extend Pane class.
 				</p>
+
 				<h4>First Model Class</h4>
 				<p>
 					The method
-					<em>Class&lt;? extends Model&gt; getFirstModelClass() </em>
+					<em>Class&lt;? extends Model&gt; getFirstModelClass()</em>
 					is
 					mandatory to define which UI model will be attached to the root node of
 					the scene.
@@ -80,14 +85,16 @@
 				<p>This first model will be created into the JRebirth Thread Pool, then it
 					will be attached to the root node into the JavaFX Application Thread.
 				</p>
+
 				<h4>Application Title</h4>
 				<p>
 					The method
-					<em>String getApplicationTitle() </em>
+					<em>String getApplicationTitle()</em>
 					is simply used to
 					define the name of the application displayed by the stage (OS window)
 					and used by OS task bar.
 				</p>
+
 				<h4>Stage customization</h4>
 				<p>
 					The first stage object is provided by the JavaFX launcher, the method
@@ -97,6 +104,7 @@
 					allows doing some stage
 					customizations.
 				</p>
+
 				<h4>Scene customization</h4>
 				<p>
 					The scene object automatically attached to the default stage stage is
@@ -113,8 +121,7 @@
 					<li>Root = Automatically built according to the generic type used</li>
 				</ul>
 				<p>
-					Theses attributes will be customizable soon with a properties file.
-					<strong>TODO</strong>
+					Theses properties are customizable with a properties file, this is explained below into the Configuration section.
 				</p>
 				<p>
 					Another method let you customize the scene :
@@ -130,8 +137,9 @@
 				<p>
 					This method is also useful to attach a stylesheet to the scene like
 					this :
-					<em>scene.getStylesheets().add("style/sample.css");</em>
+					<em>scene.getStylesheets().add(loadCSS("style/sample.css"));</em>
 				</p>
+
 				<h4>Fonts preloading</h4>
 				<p>
 					JavaFX applications are able to use fonts throught programmatic
@@ -253,18 +261,6 @@
 				</ul>
 			</subsection>
 
-			<div class="bottomLinks">
-				<div class="previousDocPage">
-					<a href="Overview.html">Framework Overview</a>
-				</div>
-				<div class="nextDocPage">
-					<a href="Thread.html">Thread Management</a>
-				</div>
-				<div class="tocDocPage">
-					<a href="index.html">TOC</a>
-				</div>
-			</div>
-
 		</section>
 
 		<section name="Manage Configuration">
@@ -327,7 +323,7 @@
 					<br />
 					This value is in seconds.
 					<br />
-					The default value is 0, no check will be done
+					The default value is 0, no check will be done (this feature is still under development)
 				</p>
 
 			</subsection>
@@ -348,6 +344,20 @@
 
 			</subsection>
 
+		</section>
+
+		<section>
+			<div class="bottomLinks">
+				<div class="previousDocPage">
+					<a href="Overview.html">Framework Overview</a>
+				</div>
+				<div class="nextDocPage">
+					<a href="Thread.html">Thread Management</a>
+				</div>
+				<div class="tocDocPage">
+					<a href="index.html">TOC</a>
+				</div>
+			</div>
 		</section>
 
 	</body>
