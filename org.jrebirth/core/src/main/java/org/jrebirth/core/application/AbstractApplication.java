@@ -272,6 +272,18 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * @param scene the scene to customize
      */
     protected abstract void customizeScene(final Scene scene);
+    
+    
+    /**
+     * Return the external form of the css file by using the default classloader.
+     * 
+     * @param cssFileName the razw path to css file
+     * 
+     * @return the external form of the css file
+     */
+    protected String loadCSS(String cssFileName){
+    	return Thread.currentThread().getContextClassLoader().getResource(cssFileName).toExternalForm();	
+    }
 
     /**
      * Return the application title.
