@@ -42,7 +42,7 @@ public final class LinkedCallback {
             return event.getClickCount() == 1;
         }
     };
-    
+
     /** The mouse double click checker. */
     public static final Callback<MouseEvent, Boolean> CHECK_MOUSE_DOUBLE_CLICK = new Callback<MouseEvent, Boolean>() {
 

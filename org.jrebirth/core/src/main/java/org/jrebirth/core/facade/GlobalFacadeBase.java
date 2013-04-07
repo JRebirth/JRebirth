@@ -26,6 +26,7 @@ import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.link.Notifier;
 import org.jrebirth.core.link.NotifierBase;
 import org.jrebirth.core.util.ClassUtility;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

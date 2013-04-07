@@ -37,6 +37,7 @@ import org.jrebirth.core.ui.annotation.AutoHandler.CallbackObject;
 import org.jrebirth.core.ui.annotation.EnumEventType;
 import org.jrebirth.core.ui.handler.AnnotationEventHandler;
 import org.jrebirth.core.util.ClassUtility;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

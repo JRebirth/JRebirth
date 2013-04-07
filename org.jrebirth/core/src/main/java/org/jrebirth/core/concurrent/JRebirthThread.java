@@ -34,6 +34,7 @@ import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBuilder;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveGroup;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -146,8 +147,8 @@ public final class JRebirthThread extends Thread {
     @Override
     public void run() {
 
-    	this.application.preloadFonts();
-    	
+        this.application.preloadFonts();
+
         // Attach the first view and run pre and post command
         try {
             bootUp();

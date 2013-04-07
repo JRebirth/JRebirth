@@ -20,6 +20,7 @@ package org.jrebirth.core.command.basic;
 import org.jrebirth.core.command.DefaultCommand;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveListener;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
