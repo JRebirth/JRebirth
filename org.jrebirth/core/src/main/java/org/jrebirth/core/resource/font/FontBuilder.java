@@ -23,6 +23,7 @@ import javafx.scene.text.Font;
 
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

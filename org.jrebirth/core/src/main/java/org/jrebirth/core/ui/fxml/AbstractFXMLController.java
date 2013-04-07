@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.ui.View;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

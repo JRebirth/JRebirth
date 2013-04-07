@@ -21,6 +21,7 @@ import org.jrebirth.core.command.DefaultPoolCommand;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

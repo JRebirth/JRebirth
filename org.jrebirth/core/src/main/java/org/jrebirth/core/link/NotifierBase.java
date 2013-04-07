@@ -38,6 +38,7 @@ import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

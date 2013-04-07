@@ -17,14 +17,10 @@
  */
 package org.jrebirth.core.ui;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javafx.scene.Node;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.JRebirthEventType;
-import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.wave.Wave;
 
@@ -40,7 +36,7 @@ public abstract class AbstractSimpleModel extends AbstractWaveReady<Model> imple
 
     /** The root model not null for inner model. */
     private Model rootModel;
-    
+
     private Node rootNode;
 
     /**
@@ -51,25 +47,25 @@ public abstract class AbstractSimpleModel extends AbstractWaveReady<Model> imple
 
         // Initialize the current model
         initialize();
- 
+
         // Prepare the view
         prepareView();
     }
 
-	protected void prepareView() throws CoreException {
-		// Model and InnerModels are OK, let's prepare the view
+    protected void prepareView() throws CoreException {
+        // Model and InnerModels are OK, let's prepare the view
         if (getView() != null) {
             getView().doPrepare();
         }
-	}
+    }
 
     /**
      * Initialize the model.
      * 
      * @throws CoreException if the creation of the view fails
      */
-    protected void initialize() throws CoreException{
-    	customInitialize();
+    protected void initialize() throws CoreException {
+        customInitialize();
     }
 
     /**

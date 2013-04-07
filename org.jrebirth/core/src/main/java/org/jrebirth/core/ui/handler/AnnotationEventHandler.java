@@ -30,6 +30,7 @@ import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.ui.annotation.EnumEventType;
 import org.jrebirth.core.ui.annotation.OnSwipe.SwipeType;
 import org.jrebirth.core.util.ClassUtility;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
