@@ -72,7 +72,7 @@
 					I posted on the
 					<a href="https://groups.google.com/d/topic/toulouse-jug/d3zZJXPqUhI/discussion">ToulouseJUG</a>
 					mailing list a question about my Swing revival vision, and during the
-					discussion I learn taht Oracle had planned to rewrite the first JavaFX entirely
+					discussion I learned that Oracle had planned to rewrite the first JavaFX entirely
 					in Java (and leave the awful fxscript
 					language). So I spent the summer in
 					reading beta documentation and during the autumn I began to play with it ...

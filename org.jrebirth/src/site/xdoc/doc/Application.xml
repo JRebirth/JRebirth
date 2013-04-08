@@ -218,6 +218,10 @@
 				<p>The AbstractApplication class is using two defaults hotkey:</p>
 				<ul>
 					<li>
+						<macro name="include">
+							<param name="source" value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java" />
+							<param name="snippet" value="re:(KeyCode getFullScreenKeyCode)" />
+						</macro>
 						<em>KeyCode getFullScreenKeyCode()</em>
 						=&gt; to go to to fullscreen
 						mode (default is &lt;
@@ -225,6 +229,10 @@
 						&gt;)
 					</li>
 					<li>
+						<macro name="include">
+							<param name="source" value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java" />
+							<param name="snippet" value="re:(KeyCode getIconifiedKeyCode)" />
+						</macro>
 						<em>KeyCode getIconifiedKeyCode() </em>=&gt;
 						to go to iconified
 						mode
@@ -249,15 +257,21 @@
 					It's possible to customize them by overriding methods listed hereafter:
 				</p>
 				<ul>
-					<li>
-						<em>UncaughtExceptionHandler getDefaultUncaughtExceptionHandler()</em>
-					</li>
-					<li>
-						<em>UncaughtExceptionHandler getJatUncaughtExceptionHandler()</em>
-					</li>
-					<li>
-						<em>UncaughtExceptionHandler getJitUncaughtExceptionHandler()</em>
-					</li>
+					<li>Exception handler of the JavaFX Application Thread</li>
+					<macro name="include">
+						<param name="source" value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java" />
+						<param name="snippet" value="re:(UncaughtExceptionHandler getJatUncaughtExceptionHandler)" />
+					</macro>
+					<li>Exception handler of the JRebirth Internal Thread</li>
+					<macro name="include">
+						<param name="source" value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java" />
+						<param name="snippet" value="re:(UncaughtExceptionHandler getJitUncaughtExceptionHandler)" />
+					</macro>
+					<li>Default Exception handler of all other threads</li>
+					<macro name="include">
+						<param name="source" value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java" />
+						<param name="snippet" value="re:(UncaughtExceptionHandler getDefaultUncaughtExceptionHandler)" />
+					</macro>
 				</ul>
 			</subsection>
 
