@@ -46,16 +46,16 @@
 				<a href="http://www.oracle.com/technetwork/java/javafx/downloads/devpreview-1429449.html">mac and linux since 2.1</a>
 				)
 			</p>
-			<br />
-			<strong>Launch by Java Webstart:</strong>
-			<a onclick="return launchApplication();">Click to launch this app as webstart</a>
-			<br />
-			Press F11 to activate fullscreen mode, use left-click to show the next slide, right click for previous slide
-			You can browse the source code on
-			<a title="JRebirth EclipseDay Repository" href="https://github.com/JRebirth/EclipseDay-Presentation" target="_blank">GitHub</a>
-			.
-			<br />
-			<hr />
+			<p>
+				<strong>Launch by Java Webstart:</strong>
+				<a onclick="return launchApplication();">Click to launch this app as webstart</a>
+			</p>
+			<p>
+				Press F11 to activate fullscreen mode, use left-click to show the next slide, right click for previous slide
+				You can browse the source code on
+				<a title="JRebirth EclipseDay Repository" href="https://github.com/JRebirth/EclipseDay-Presentation" target="_blank">GitHub</a>
+				.
+			</p>
 			<div id="javafx-app-placeholder" style="margin: 0 -27px; padding: 0;">
 			</div>
 

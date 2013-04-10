@@ -60,13 +60,13 @@
 					<param name="snippet" value="xp:project/dependencies" />
 				</macro>
 
+				<p>Releases are pushed to several repositories in this order :</p>
+				<ol>
+					<li>Our internal repository powered by Artifactory (All Jenkins build)</li>
+					<li>Our public repository powered by Bintray (On demand Jenkins build)</li>
+					<li>JCenter Bintray repository (Only Releases)</li>
+				</ol>
 				<p>
-					Releases are pushed to several repositories in this order :
-					<ol>
-						<li>Our internal repository powered by Artifactory (All Jenkins build)</li>
-						<li>Our public repository powered by Bintray (On demand Jenkins build)</li>
-						<li>JCenter Bintray repository (Only Releases)</li>
-					</ol>
 					<a href="https://bintray.com/pkg/show/general/jrebirth/JRebirth/JRebirth">https://bintray.com/pkg/show/general/jrebirth/JRebirth/JRebirth</a>
 					and then synchronized to JCenter main Bintray repository.
 				</p>
