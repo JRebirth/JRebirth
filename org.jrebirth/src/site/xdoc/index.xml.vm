@@ -12,7 +12,7 @@
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
 	<properties>
-		<title>Home</title>
+		<title>Application Framework for JavaFX</title>
 	</properties>
 
 	<head>
@@ -123,6 +123,8 @@
 				<p>For Maven Gurus, here you have command line to type to do the job</p>
 
 				<subsection name="Full Auto">
+					
+					<p>
 					<a href="images/tuto/Maven_Archetype_CLI_OneLine.png" rel="lightbox">
 						<img src="images/icons/view.gif" />
 					</a>
@@ -130,18 +132,23 @@
 					-DarchetypeArtifactId=archetype
 					-DarchetypeVersion=${project.version} -DarchetypeRepository=http://repo.jrebirth.org/jrebirth-snapshot-local -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
 					-Dpackage=org.jrebirth.sample
+				
+					</p>
 				</subsection>
 
 				<subsection name="Interactive pre-filled">
-					mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
+					<p>
+						mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
 					-Dpackage=org.jrebirth.sample
+					</p>
 				</subsection>
 
 				<subsection name="Full Interactive">
-					<a href="images/tuto/Maven_Archetype_CLI_interactive.png" rel="lightbox">
+					<p><a href="images/tuto/Maven_Archetype_CLI_interactive.png" rel="lightbox">
 						<img src="images/icons/view.gif" />
 					</a>
 					mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml
+					</p>
 				</subsection>
 			</section>
 		</div>

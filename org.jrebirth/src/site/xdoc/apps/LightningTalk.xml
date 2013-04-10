@@ -35,8 +35,8 @@
 
 		<section id="LightningTalk" name="JavaFX 2.2 Lightning Talk ToulouseJUG" title="JavaFX 2.2 Lightning Talk ToulouseJUG">
 
-		<div id="catcherTitle">JRebirth - JavaFX 2.2 Lightning Talk ToulouseJUG</div>
-		<div id="catcherContent">DogFooding like JavaFX 2.2 Presentation</div>
+			<div id="catcherTitle">JRebirth - JavaFX 2.2 Lightning Talk ToulouseJUG</div>
+			<div id="catcherContent">DogFooding like JavaFX 2.2 Presentation</div>
 
 			<p>This application has been shown during Heroes Event at ToulouseJUG</p>
 			<p>
@@ -52,15 +52,15 @@
 				<br />
 				Press F11 to activate fullscreen mode, use left-click to show the next slide (or page down), right click for previous slide (or page up).
 			</p>
-			You can download the whole application here :
-			<a href="http://apps.jrebirth.org/lightningtalk/lightningtalk-1.0.0.zip">Lightning Talk</a>
+			<p>
+				You can download the whole application here :
+				<a href="http://apps.jrebirth.org/lightningtalk/lightningtalk-1.0.0.zip">Lightning Talk</a>
+			</p>
 			<p>
 				You can browse the source code on
 				<a title="JRebirth LightningTalk Repository" href="https://github.com/JRebirth/LightningTalk" target="_blank">GitHub LightningTalk repository</a>
 				.
 			</p>
-
-			<hr />
 
 			<div id="javafx-app-placeholder" style="margin: 0 -27px; padding: 0;">
 			</div>
