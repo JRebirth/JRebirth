@@ -165,18 +165,24 @@
 
 		<div id="thanks" class="box">
 			<h1>Special Thanks</h1>
+			<p>
 			<a title="YourKit, Java Profiler" href="http://www.yourkit.com" target="_blank">YourKit</a>,
-			used for Memory &amp; CPU Java profiling.<br />
+			used for Memory &amp; CPU Java profiling.
+			</p>
+			<p>
 			<a title="Structure 101" href="http://www.structure101.com/" target="_blank">Structure101 guys</a>
 			,
 			for give us a free license of
 			<a href="http://structure101.com/products/#/refactor">ReStructure 101</a>
-			.<br />
+			.
+			</p>
+			<p>
 			<a title="Jet Brains" href="http://www.jetbrains.com" target="_blank">Jet Brains</a>
 			,
 			for give us a free license of
 			<a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>
 			.
+			</p>
 		</div>
 
 	</body>

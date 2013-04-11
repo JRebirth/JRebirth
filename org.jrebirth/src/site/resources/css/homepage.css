@@ -176,3 +176,10 @@ div#thanks a {
     font-size:20px;
     color:#756f6b;
 }
+
+div#thanks h1 , div#download h1 {
+	margin: 10px 10px;
+}
+div#thanks p, div#download ul {
+	margin:5px 10px;
+}
