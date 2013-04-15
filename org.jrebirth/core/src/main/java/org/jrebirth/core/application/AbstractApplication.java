@@ -125,7 +125,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             primaryStage.show();
 
             // Preload fonts to allow them to be used by CSS
-            // preloadFonts();
+            preloadFonts();
 
             LOGGER.trace("{} has started successfully", this.getClass().getSimpleName());
 
