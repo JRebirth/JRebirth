@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.jrebirth.core.application.JRebirthApplication;
 import org.jrebirth.core.command.basic.ChainWaveCommand;
@@ -69,11 +70,14 @@ public final class JRebirthThread extends Thread {
     /** The list of tasks being processed, all access MUST BE synchronized. */
     private final List<Runnable> processingTasks;
 
+    /** Flag indicating that current thread has started and is ready to process events. */
+    private final AtomicBoolean hasStarted = new AtomicBoolean(false);
+
     /** Flag to stop the infinite loop that process JRebirth Events. */
-    private boolean infiniteLoop = true;
+    private final AtomicBoolean infiniteLoop = new AtomicBoolean(true);
 
     /** Flag that indicate that the closure must be forced. */
-    private boolean forceClose;
+    private final AtomicBoolean forceClose = new AtomicBoolean(false);
 
     /**
      * private final boolean readyToShutdown = false;
@@ -142,6 +146,15 @@ public final class JRebirthThread extends Thread {
     }
 
     /**
+     * Return true if JRebirth has been correctly started (boot action is done)
+     * 
+     * @return true if JRebirth has been correctly started
+     */
+    public boolean hasStarted() {
+        return this.hasStarted.get();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -156,7 +169,10 @@ public final class JRebirthThread extends Thread {
             LOGGER.error("An exception occured during JRebirth BootUp", e);
         }
 
-        while (this.infiniteLoop) {
+        // JRebirth thread has boot up and is ready to process events
+        this.hasStarted.set(true);
+
+        while (this.infiniteLoop.get()) {
             try {
 
                 // Need to sort tasks to launch by priority
@@ -175,7 +191,7 @@ public final class JRebirthThread extends Thread {
 
                     // Run all tasks that are waiting to be processed
                     for (final Runnable r : this.processingTasks) {
-                        if (!this.forceClose) {
+                        if (!this.forceClose.get()) {
                             r.run();
                         }
                     }
@@ -263,12 +279,12 @@ public final class JRebirthThread extends Thread {
     public void close() {
 
         // Infinite loop is still active
-        if (this.infiniteLoop) {
+        if (this.infiniteLoop.get()) {
             // First attempt to close the application
-            this.infiniteLoop = false;
+            this.infiniteLoop.set(false);
         } else {
             // N-th attempt to close the application
-            this.forceClose = true;
+            this.forceClose.set(true);
 
             // All Task Queues are cleared
             this.queuedTasks.clear();

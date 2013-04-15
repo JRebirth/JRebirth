@@ -124,8 +124,8 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      */
     @Override
     public final void run() {
-        //Build a default Wave to avoid NullPOinterException when 
-        //command was directly called by its run method
+        // Build a default Wave to avoid NullPOinterException when
+        // command was directly called by its run method
         run(WaveBuilder.create()
                 .waveGroup(WaveGroup.CALL_COMMAND)
                 .relatedClass(this.getClass())
