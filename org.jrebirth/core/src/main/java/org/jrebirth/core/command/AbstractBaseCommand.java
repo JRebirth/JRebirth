@@ -27,6 +27,8 @@ import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
+import org.jrebirth.core.wave.WaveBuilder;
+import org.jrebirth.core.wave.WaveGroup;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -122,7 +124,12 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      */
     @Override
     public final void run() {
-        run(null);
+        //Build a default Wave to avoid NullPOinterException when 
+        //command was directly called by its run method
+        run(WaveBuilder.create()
+                .waveGroup(WaveGroup.CALL_COMMAND)
+                .relatedClass(this.getClass())
+                .build());
     }
 
     /**
