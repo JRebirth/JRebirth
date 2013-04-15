@@ -2,6 +2,7 @@ package org.jrebirth.sample.ui;
 
 import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.wave.Wave;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

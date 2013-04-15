@@ -6,6 +6,8 @@ package ${package}.command;
 import org.jrebirth.core.command.DefaultCommand;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.sample.command.SampleCommand;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +34,10 @@ public final class SampleCommand extends DefaultCommand {
      */
     @Override
     protected void execute(final Wave wave) {
-        // You must put your processing code here
+
+        LOGGER.info("Perform a short action JIT");
+        LOGGER.info("Be careful it locks wave processing");
+
     }
 
 }

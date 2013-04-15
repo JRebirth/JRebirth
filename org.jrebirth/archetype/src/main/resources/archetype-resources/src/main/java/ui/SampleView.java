@@ -3,11 +3,17 @@
 #set( $symbol_escape = '\' )
 package ${package}.ui;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.LabelBuilder;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPaneBuilder;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.AbstractView;
+import org.jrebirth.core.ui.annotation.OnMouse;
+import org.jrebirth.sample.ui.SampleModel;
+import org.jrebirth.sample.ui.SampleView;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +26,16 @@ public class SampleView extends AbstractView<SampleModel, BorderPane, SampleCont
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SampleView.class);
+
+    /** Button used to trigger the SampleCommand. */
+    @OnMouse(OnMouse.MouseType.Clicked)
+    private Button defaultCommand;
+
+    /** Button used to trigger the SampleUICommand. */
+    private Button uiCommand;
+
+    /** Button used to trigger the SamplePoolCommand. */
+    private Button pooledCommand;
 
     /**
      * Default Constructor.
@@ -37,11 +53,22 @@ public class SampleView extends AbstractView<SampleModel, BorderPane, SampleCont
      */
     @Override
     protected void customInitializeComponents() {
+
+        this.defaultCommand = new Button("Trigger a default Command into JIT");
+        this.uiCommand = new Button("Trigger an UI Command into JAT");
+        this.pooledCommand = new Button("Trigger a pooled Command into JTP");
+
         getRootNode().setCenter(
                 LabelBuilder.create()
                         .text("JRebirth Sample")
                         .build()
                 );
+
+        getRootNode().setBottom(FlowPaneBuilder.create().children(
+                this.defaultCommand,
+                this.uiCommand,
+                this.pooledCommand
+                ).build());
     }
 
     /**
@@ -66,6 +93,18 @@ public class SampleView extends AbstractView<SampleModel, BorderPane, SampleCont
     @Override
     public void doHide() {
         // Custom code to process when the view is hidden
+    }
+
+    Button getDefaultCommand() {
+        return this.defaultCommand;
+    }
+
+    Button getUiCommand() {
+        return this.uiCommand;
+    }
+
+    Button getPooledCommand() {
+        return this.pooledCommand;
     }
 
 }

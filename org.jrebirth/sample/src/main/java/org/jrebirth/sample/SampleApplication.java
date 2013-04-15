@@ -88,5 +88,5 @@ public final class SampleApplication extends AbstractApplication<StackPane> {
     public List<Wave> getPostBootWaveList() {
         return Collections.emptyList();
     }
-    
+
 }

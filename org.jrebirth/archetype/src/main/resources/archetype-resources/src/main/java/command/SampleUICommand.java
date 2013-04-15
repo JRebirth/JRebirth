@@ -3,9 +3,17 @@
 #set( $symbol_escape = '\' )
 package ${package}.command;
 
+import javafx.scene.SceneBuilder;
+import javafx.scene.control.LabelBuilder;
+import javafx.stage.Stage;
+import javafx.stage.StageBuilder;
+import javafx.stage.StageStyle;
+
 import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.sample.command.SampleUICommand;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +40,23 @@ public final class SampleUICommand extends DefaultUICommand {
      */
     @Override
     protected void execute(final Wave wave) {
-        // You must put your processing code here
+
+        LOGGER.info("Display a pop up from JAT");
+
+        final Stage s = StageBuilder.create()
+                .title("Sample Ui Command Test")
+                .style(StageStyle.DECORATED)
+                .scene(SceneBuilder.create()
+                        .root(LabelBuilder.create().text("Run into JAT").build())
+                        .build())
+
+                .build();
+
+        s.show();
+
+        // Sample for popup => Attach owner !!!
+        // getLocalFacade().getGlobalFacade().getApplication().getStage()
     }
 
 }
+
