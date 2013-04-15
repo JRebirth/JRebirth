@@ -3,9 +3,12 @@
 #set( $symbol_escape = '\' )
 package ${package}.command;
 
+import org.jrebirth.core.command.DefaultPoolCommand;
 import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.sample.command.SamplePoolCommand;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author
  */
-public final class SamplePoolCommand extends DefaultUICommand {
+public final class SamplePoolCommand extends DefaultPoolCommand {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SamplePoolCommand.class);
@@ -32,7 +35,10 @@ public final class SamplePoolCommand extends DefaultUICommand {
      */
     @Override
     protected void execute(final Wave wave) {
-        // You must put your processing code here
+
+        LOGGER.info("Perform a short or long action into a decicated thread from JTP");
+        LOGGER.info("Be careful the JTP size depend on configuration");
+
     }
 
 }

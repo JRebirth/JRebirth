@@ -3,8 +3,20 @@
 #set( $symbol_escape = '\' )
 package ${package}.ui;
 
+import javafx.scene.input.MouseEvent;
+
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.AbstractController;
+import org.jrebirth.core.ui.adapter.DefaultMouseAdapter;
+import org.jrebirth.core.wave.WaveBuilder;
+import org.jrebirth.core.wave.WaveGroup;
+import org.jrebirth.sample.command.SampleCommand;
+import org.jrebirth.sample.command.SamplePoolCommand;
+import org.jrebirth.sample.command.SampleUICommand;
+import org.jrebirth.sample.ui.SampleController;
+import org.jrebirth.sample.ui.SampleView;
+import org.jrebirth.sample.ui.SampleController.SampleMouseAdapter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +46,13 @@ public class SampleController extends AbstractController<SampleModel, SampleView
      */
     @Override
     protected void customInitializeEventAdapters() throws CoreException {
-        // Attach event adapters
+
+        // Manage Ui Command Button
+        linkCommand(getView().getUiCommand(), MouseEvent.MOUSE_CLICKED, SampleUICommand.class);
+
+        // Use the inner class
+        addAdapter(new SampleMouseAdapter());
+
     }
 
     /**
@@ -43,6 +61,40 @@ public class SampleController extends AbstractController<SampleModel, SampleView
     @Override
     protected void customInitializeEventHandlers() throws CoreException {
         // Listen events
+
+        // Manage Pooled Command Button
+        getView().getPooledCommand().setOnMouseClicked(getHandler(MouseEvent.MOUSE_CLICKED));
+    }
+
+    /**
+     * Manage Mouse click of widget that have annotation.
+     * 
+     * @param event the mouse event
+     */
+    void onMouseClicked(final MouseEvent event) {
+
+        // Manage Default Command Button
+        getModel().getCommand(SampleCommand.class).run();
+
+    }
+
+    /**
+     * The class <strong>SampleMouseAdapter</strong>.
+     */
+    private class SampleMouseAdapter extends DefaultMouseAdapter<SampleController> {
+
+        @Override
+        public void mouseClicked(final MouseEvent mouseEvent) {
+            super.mouseClicked(mouseEvent);
+
+            getModel().sendWave(
+                    WaveBuilder.create()
+                            .waveGroup(WaveGroup.CALL_COMMAND)
+                            .relatedClass(SamplePoolCommand.class)
+                            .build()
+                    );
+        }
+
     }
 
 }
