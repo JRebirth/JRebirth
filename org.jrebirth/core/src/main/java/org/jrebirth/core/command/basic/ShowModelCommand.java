@@ -18,8 +18,6 @@
 package org.jrebirth.core.command.basic;
 
 import org.jrebirth.core.command.DefaultMultiCommand;
-import org.jrebirth.core.concurrent.RunInto;
-import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -27,14 +25,13 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-@RunInto(RunType.JIT)
 public class ShowModelCommand extends DefaultMultiCommand {
 
     /**
      * Default Constructor.
      */
     public ShowModelCommand() {
-        super(RunType.JIT);
+        super();// Run into JIT and is sequential
     }
 
     /**
@@ -53,24 +50,6 @@ public class ShowModelCommand extends DefaultMultiCommand {
     @Override
     protected void processAction(final Wave wave) {
         // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveCancelled(final Wave wave) {
-        // Nothing to do yet
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveDestroyed(final Wave wave) {
-        // Nothing to do yet
-
     }
 
 }

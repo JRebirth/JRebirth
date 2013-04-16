@@ -19,6 +19,7 @@ package org.jrebirth.core.command;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.exception.CoreException;
@@ -39,12 +40,13 @@ import org.jrebirth.core.wave.WaveListener;
  */
 public abstract class AbstractMultiCommand<WB extends WaveBean> extends AbstractBaseCommand<WB> implements MultiCommand<WB>, WaveListener {
 
+    /** The command is running. */
+    private final AtomicBoolean running = new AtomicBoolean(false);
+
     /** The list of command that will be chained. */
     private final List<Class<? extends Command>> commandList = new ArrayList<>();
 
-    /**
-     * Flag that indicate if commands must be run sequentially(true) or in parallel(false).
-     */
+    /** Flag that indicate if commands must be run sequentially(true) or in parallel(false). */
     private final boolean sequential;
 
     /** The index of the last command performed. */
@@ -105,6 +107,29 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * {@inheritDoc}
      */
     @Override
+    public void preExecute(final Wave wave) {
+        this.running.set(true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void postExecute(final Wave wave) {
+        // Nothing to do
+    }
+
+    /**
+     * @return Returns the running.
+     */
+    public boolean isRunning() {
+        return this.running.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void execute(final Wave wave) {
 
         if (this.sequential) {
@@ -152,6 +177,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                 if (this.commandList.size() > this.commandRunIndex) {
                     execute(wave);
                 } else {
+                    this.running.set(false);
                     // No more command to run the MultiCommand is achieved
                     fireConsumed(this.waveSource);
                 }

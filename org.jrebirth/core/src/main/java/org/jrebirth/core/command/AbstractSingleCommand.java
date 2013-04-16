@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.command;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
@@ -31,7 +33,7 @@ import org.jrebirth.core.wave.WaveBean;
 public abstract class AbstractSingleCommand<WB extends WaveBean> extends AbstractBaseCommand<WB> {
 
     /** The command is running. */
-    private boolean running;
+    private final AtomicBoolean running = new AtomicBoolean(false);
 
     /**
      * Default constructor.
@@ -54,9 +56,7 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
      */
     @Override
     public void preExecute(final Wave wave) {
-        synchronized (this) {
-            this.running = true;
-        }
+        this.running.set(true);
     }
 
     /**
@@ -64,9 +64,7 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
      */
     @Override
     public void postExecute(final Wave wave) {
-        synchronized (this) {
-            this.running = false;
-        }
+        this.running.set(false);
         fireConsumed(wave);
     }
 
@@ -74,8 +72,6 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
      * @return Returns the running.
      */
     public boolean isRunning() {
-        synchronized (this) {
-            return this.running;
-        }
+        return this.running.get();
     }
 }
