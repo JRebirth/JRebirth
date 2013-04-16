@@ -167,10 +167,10 @@
 					method.
 				</p>
 
-				<macro name="include">
+				<!-- <macro name="include">
 					<param name="source" value="core/src/main/java/org/jrebirth/core/concurrent/JRebirthThread.java" />
-					<param name="snippet" value="aj:..bootUp" />
-				</macro>
+					<param name="snippet" value="aj:..bootUp()" />
+				</macro> -->
 
 			</subsection>
 
