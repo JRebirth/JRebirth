@@ -47,7 +47,8 @@
 
 			<subsection name="What's a Wave">
 				<p>A Wave is a temporary object created to carry data througt CS-MVC components.</p>
-				<p>They allow JRebirth to handle application internal events asynchronously between each components, at the opposite you can use getModel, getCommand and getService method to perform synchronous
+				<p>They allow JRebirth to handle application internal events asynchronously between each components, at the opposite you can use getModel,
+					getCommand and getService method to perform synchronous
 					operations.
 				</p>
 				<p>
@@ -76,7 +77,8 @@
 					<li>Undefined : to handle all other waves, the wave type must be defined</li>
 				</ol>
 				<h3>8.2.2 Wave Type</h3>
-				<p>The wave type is where black magic resides. It defines a contract between the emitter (the one who creates the wave) and the receiver (the one who handles the waves).</p>
+				<p>The wave type is where black magic resides. It defines a contract between the emitter (the one who creates the wave) and the receiver (the one
+					who handles the waves).</p>
 				<p>This contract is dynamic because it relies on a String and WaveItem objects.</p>
 				<p>
 					A
@@ -102,14 +104,14 @@
 						<li>Into a service class (here with on argument) :</li>
 					</ul>
 				</ul>
-				
+
 				<macro name="include">
 					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java" />
 					<param name="snippet" value="aj:..DO_LOAD_EVENTS" />
 					<param name="snippet-start-offset" value="1" />
 				</macro>
-				
-				
+
+
 				<h3>8.2.3 WaveType name</h3>
 				<p>
 					<strong>This string is used to link to a component method</strong>
@@ -122,7 +124,8 @@
 					will be passed to the method as an argument
 				</p>
 				<h3>8.2.4 Wave argument</h3>
-				<p>Each wave procesing method must add a least argument : the source wave, thus it will be possible to know the handling context for this method call.</p>
+				<p>Each wave procesing method must add a least argument : the source wave, thus it will be possible to know the handling context for this method
+					call.</p>
 				<p>The wave argument is useful to access to wave bean or other information like source wave.</p>
 				<p>
 				</p>
@@ -150,6 +153,24 @@
 				<h3>How they are consumed</h3>
 				<p>
 				</p>
+
+			</subsection>
+
+
+			<subsection name="Chained Wave">
+
+				<p>
+					It's possible to chain command by using the
+					<em>ChainWaveCommand</em>
+					class. A sample is used into the
+					<em>JRebirthThread.bootUp()</em>
+					method.
+				</p>
+
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/concurrent/JRebirthThread.java" />
+					<param name="snippet" value="aj:..bootUp" />
+				</macro>
 
 			</subsection>
 

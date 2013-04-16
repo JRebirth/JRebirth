@@ -82,17 +82,17 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      * <li>JRebirth Internal Thread</li>
      * </ol>
      * 
-     * @param runIntoThread the way to launch this command
+     * @param runType the way to launch this command
      */
-    public AbstractBaseCommand(final RunType runIntoThread) {
+    public AbstractBaseCommand(final RunType runType) {
         super();
         // Try to retrieve the RunInto annotation at class level within class hierarchy
-        final RunInto ri = ClassUtility.extractAnnotation(this.getClass(), RunInto.class);
+        final RunInto ria = ClassUtility.extractAnnotation(this.getClass(), RunInto.class);
 
         // First try to get the annotation value
         // Secondly by provided runtType argument
         // Thirdly (default case) use JIT
-        this.runIntoThread = ri == null ? runIntoThread == null ? RunType.JIT : runIntoThread : ri.value();
+        this.runIntoThread = ria == null ? runType == null ? RunType.JIT : runType : ria.value();
     }
 
     /**
@@ -124,8 +124,8 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      */
     @Override
     public final void run() {
-        // Build a default Wave to avoid NullPOinterException when
-        // command was directly called by its run method
+        // Build a default Wave to avoid NullPointerException when
+        // command was directly called by its run() method
         run(WaveBuilder.create()
                 .waveGroup(WaveGroup.CALL_COMMAND)
                 .relatedClass(this.getClass())

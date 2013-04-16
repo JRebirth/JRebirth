@@ -21,78 +21,305 @@
 	</head>
 
 	<body>
-		<section name="Commands">
+		<section name="Command Overview">
 
 			<div id="catcherTitle">Command Layer</div>
 			<div id="catcherContent">Reuse common code and don't be scared by threading issue</div>
 
-			<subsection name="Command Lifecycle">
 
-				<p>A command is an atomic action reusable or not that can be run into any thread. A command provides specific features:</p>
-				<ul>
-					<li>A component key, built with Class Name and an addtionnal string</li>
-					<li>An action to process</li>
-					<li>A property indicating in which thread it must be run</li>
-					<li>A parent command for chained one</li>
-					<li>A WaveBean that will hold all required data to process the action</li>
-				</ul>
+			<p>A command is an atomic reusable action.</p>
+			<p>There are two kinds of Commands:</p>
+			<ul>
+				<li>Single Command</li>
+				<li>Multi Command (composed by a set of Single Command)</li>
+			</ul>
 
-				<p>
-					<span style="text-decoration: underline;">UML Class Diagram:</span>
+
+			<p>
+				<span style="text-decoration: underline;">UML Class Diagram:</span>
+			</p>
+
+			<div class="uml">
+				<a href="uml/Command.png" rel="lightbox" title="Command Class Diagram ">
+					<img class="redux" src="uml/Command.png" alt="" />
+				</a>
+			</div>
+
+
+			<subsection name="Single Command">
+				<p>Single Commands are atomic and are run independently.</p>
+				<p>If you trigger several commands in-a-row you will trigger them
+					in parallel according to their predefined running thread.
+					JRebirth engine will
+					serialize
+					their instantiation and their startup but they will be processed into JAT, JIT or one of JTP slots.
+					JAT and JIT will process command one
+					after the other. JTP will act in the same
+					manner but will dispatch all actions to its pooled threads (ie: 4).
 				</p>
-
-				<div class="uml">
-					<a href="uml/Command.png" rel="lightbox" title="Command Class Diagram ">
-						<img class="redux" src="uml/Command.png" alt="" />
-					</a>
-				</div>
 
 			</subsection>
 
-			<subsection name="Component">
+			<subsection name="MultiCommand">
+				<p>MultiCommand provides the ability to run some Single Commands sequentially or in parallel.</p>
+
+				<p>Hereafter you will find an example of MultiCommand used to display a model UI:</p>
+
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/ShowModelCommand.java" />
+					<!-- <param name="snippet" value="aj:public class org.jrebirth.core.command.basic.ShowModelCommand" /> -->
+				</macro>
+
+				<p>
+					The multi command code will be run into JIT, but its sub-command will be run respectively into JTP and JAT (according to their own
+					configuration).
+				</p>
+				<p>
+					<strong>Why are they using these threads ?</strong>
+					<br />
+					<em>ShowModelCommand</em>
+					use the annotation defined into
+					<em>DefaultMultiCommand</em>
+					to run into
+					<strong>JIT</strong>
+					.
+					<br />
+					<em>PrepareModelCommand</em>
+					use the annotation defined into
+					<em>DefaultPoolCommand</em>
+					to run into
+					<strong>JTP</strong>
+					.
+					<br />
+					<em>ShowModelCommand</em>
+					use the annotation defined into
+					<em>DefaultUICommand</em>
+					to run into
+					<strong>JAT</strong>
+					(it's mandatory to update scene's nodes).
+				</p>
+			</subsection>
+
+			<subsection name="How to trigger a Command">
 				<p>
 					Commands are designed to be disposable after usage, but they could be retained by strong references to be executed twice or more.
+					Each call will
+					return a new instance of the command class, because
+					each was stored with a timestamp key-based.
 					<br />
-					You can call a command by tree differents ways:
+					You can call a command by four different ways:
 				</p>
 				<ul>
-					<li>Synchronous way : getCommand()</li>
+					<li>Synchronous way : getCommand(Command.class).run()</li>
 					<li>Asynchronous way : CALL_COMMAND WaveType</li>
+					<li>
+						Into Controller: by using
+						<em>
+							void linkCommand(Node, EventType&lt;E&gt;, Class&lt;? extends Command&gt;, WaveData&lt;?&gt;...)
+						</em>
+					</li>
 					<li>Listener Callback : processAction(), require pre-registration</li>
 				</ul>
 				<p>
-					Please note that Commands are JRebirth main components, they follow the component lifecycle as described in (TODO link to Facade Page).
+					Please note that Commands are JRebirth top components (with Services and Models), they follow the component lifecycle as described in
+					<a href="Facades.html">Facade Page</a>
+					.
 					<br />
 					Thus
 					<em>AbstractBaseCommand</em>
 					extends
 					<em>AbstractWaveReady</em>
-					and their descendants must provide ready() and processAction() methods.
+					and their descendants must provide ready(), processAction() and execute() methods.
 				</p>
-				<h3>Synchronous way</h3>
+
+
+
+				<h4>Synchronous way</h4>
 				<p>It's possible to call a command from any JRebirth component (Command, Service, Model).</p>
 				<pre>callCommand(TestCommmand.class)</pre>
 				<pre>getLocalFacade().getGlobalFacade().getCommandFacade().retrieve(TestCommmand.class)</pre>
+
+
 			</subsection>
 
-			<subsection name="Action to process">
-				<p>
-				</p>
-				<h3>Run Into</h3>
-				<p>
-				</p>
-				<h3>Parent command</h3>
-				<p>
-				</p>
-				<h3>WaveBean</h3>
-				<p>
-				</p>
-				<h2>Single Commands</h2>
-				<h2>Multi Commands</h2>
-				<p>Interal Commands are automatically run into the JET, if you want to do some tasks in background you should use these.</p>
-				<p>UI Commands are automatically run into the JAT, if you want to update scene nodes.</p>
+			<subsection name="Command Properties">
+
+				<p>A command is an atomic action reusable or not that can be run into a predefined thread. A command provides specific features:</p>
+				<ul>
+					<li>
+						A property indicating
+						<a href="#threading">in which thread</a>
+						it must be run
+					</li>
+					<li>
+						A
+						<a href="#key">Component Key</a>
+						, built with Class Name and an additional string
+					</li>
+					<li>
+						An
+						<a href="#action">Action to process</a>
+						(
+						<em>execute(Wave)</em>
+						method)
+					</li>
+
+					<li>
+						A
+						<a href="#parent">Parent Command</a>
+						for chained use case
+					</li>
+					<li>
+						A
+						<a href="#wavebean">WaveBean</a>
+						that will hold all required data to process the action
+					</li>
+					<li>
+						<a href="#props">Optional custom properties</a>
+						(useful for reusable commands)
+					</li>
+				</ul>
+
 			</subsection>
 
+			<subsection name="How to manage Threading issues" id="threading">
+
+				<p>
+					Each command will be launch by JRebirth Internal engine and run into a dedicated thread.
+					Threads involved in a JRebirth application are explained
+					into the
+					<a href="Thread.html">Thread page</a>
+					.
+				</p>
+				<p>
+					The runner thread can be configured by two ways:
+				</p>
+				<ul>
+					<li><a href="#annotation">Annotation</a></li>
+					<li><a href="#inheritance">Constructor argument and class inheritance</a></li>
+				</ul>
+
+				<p>The priority rule is : Annotation &gt; Constructor argument &gt; Default value</p>
+				<p>The default value is : JIT (JRebirth Internal Thread)</p>
+				<p>The top-level annotation will be systematically used overriding lower ones and also constructor arguments</p>
+
+				<a name="annotation" />
+				<h4>Annotation usage</h4>
+
+				<p>To run a command into the JAT (JavaFX Application Thread), use this annotation :</p>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/DefaultUICommand.java" />
+					<param name="snippet" value="re:@RunInto" />
+				</macro>
+
+				<p>To run a command into the JIT (JRebirth Internal Thread), use this annotation :</p>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/DefaultCommand.java" />
+					<param name="snippet" value="re:@RunInto" />
+				</macro>
+
+				<p>To run a command into JTP (JRebirth Thread Pool, the command will be run into a slot), use this annotation :</p>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/DefaultPoolCommand.java" />
+					<param name="snippet" value="re:@RunInto" />
+				</macro>
+
+				<a name="inheritance" />
+				<h4>Class inheritance usage</h4>
+
+				<p>
+					To run a command into the JAT (JavaFX Application Thread), extends the
+					<em>DefaultUICommand</em>
+					class :
+				</p>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/AttachModelCommand.java" />
+					<param name="snippet" value="re:extends DefaultUICommand" />
+				</macro>
+
+				<p>
+					To run a command into the JIT (JRebirth Internal Thread), extends the
+					<em>DefaultCommand</em>
+					class :
+				</p>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/ChainWaveCommand.java" />
+					<param name="snippet" value="re:extends DefaultCommand" />
+				</macro>
+				<p>
+					<em>WaveListener implementation is optionnal</em>
+				</p>
+
+				<p>
+					To run a command into JTP (JRebirth Thread Pool, the command will be run into a slot), extends the
+					<em>DefaultPoolCommand</em>
+					class :
+				</p>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/PrepareModelCommand.java" />
+					<param name="snippet" value="re:extends DefaultPoolCommand" />
+				</macro>
+
+				<h4>Constructor argument usage</h4>
+
+				<p>
+					To run a command into the JAT (JavaFX Application Thread), extends the
+					<em>DefaultUICommand</em>
+					class :
+				</p>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/AttachModelCommand.java" />
+					<param name="snippet" value="re:extends DefaultUICommand" />
+				</macro>
+
+				<p>
+					To run a command into the JIT (JRebirth Internal Thread), extends the
+					<em>DefaultCommand</em>
+					class :
+				</p>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/ChainWaveCommand.java" />
+					<param name="snippet" value="re:extends DefaultCommand" />
+				</macro>
+				<p>
+					<em>WaveListener implementation is optionnal</em>
+				</p>
+
+				<p>
+					To run a command into JTP (JRebirth Thread Pool, the command will be run into a slot), extends the
+					<em>DefaultPoolCommand</em>
+					class :
+				</p>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/PrepareModelCommand.java" />
+					<param name="snippet" value="re:extends DefaultPoolCommand" />
+				</macro>
+
+			</subsection>
+
+			<subsection name="Custom properties" id="key">
+			</subsection>
+
+			<subsection name="Custom properties" id="action">
+			</subsection>
+
+			<subsection name="Wave Bean" id="wavebean">
+			</subsection>
+
+			<subsection name="Parent Command" id="parent">
+			</subsection>
+
+			<subsection name="Custom properties" id="props">
+			</subsection>
+
+
+		</section>
+
+
+
+
+
+		<section>
 			<div class="bottomLinks">
 				<div class="previousDocPage">
 					<a href="Notifier.html">Notifier &amp; Wave</a>

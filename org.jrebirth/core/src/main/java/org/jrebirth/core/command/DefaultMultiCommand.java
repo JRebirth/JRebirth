@@ -17,6 +17,7 @@
  */
 package org.jrebirth.core.command;
 
+import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
@@ -26,7 +27,24 @@ import org.jrebirth.core.wave.WaveBean;
  * 
  * @author Sébastien Bordes
  */
+@RunInto(RunType.JIT)
 public class DefaultMultiCommand extends AbstractMultiCommand<WaveBean> {
+
+    /**
+     * Default Constructor. Annotation will be used to define run type (default is JIT)
+     */
+    public DefaultMultiCommand() {
+        super(true);
+    }
+
+    /**
+     * Default Constructor. Annotation will be used to define run type (default is JIT)
+     * 
+     * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
+     */
+    public DefaultMultiCommand(final boolean sequential) {
+        super(sequential);
+    }
 
     /**
      * Default Constructor.
@@ -51,6 +69,14 @@ public class DefaultMultiCommand extends AbstractMultiCommand<WaveBean> {
      * {@inheritDoc}
      */
     @Override
+    protected void addSubCommand() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void waveCancelled(final Wave wave) {
         // Nothing to do yet
     }
@@ -60,14 +86,6 @@ public class DefaultMultiCommand extends AbstractMultiCommand<WaveBean> {
      */
     @Override
     public void waveDestroyed(final Wave wave) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void addSubCommand() {
         // Nothing to do yet
     }
 
@@ -94,22 +112,6 @@ public class DefaultMultiCommand extends AbstractMultiCommand<WaveBean> {
      */
     @Override
     public void waveProcessed(final Wave wave) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void preExecute(final Wave wave) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void postExecute(final Wave wave) {
         // Nothing to do yet
     }
 
