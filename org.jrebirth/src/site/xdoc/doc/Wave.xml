@@ -1,0 +1,183 @@
+<!DOCTYPE document [
+  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
+  <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+  %HTMLlat1;
+  <!-- These are the entity sets for special characters for the XHTML -->
+  <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+  %HTMLsymbol;
+  <!-- These are the entity sets for symbol characters for the XHTML -->
+  <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+  %HTMLspecial;
+]>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>Wave</title>
+	</properties>
+
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+	</head>
+
+	<body>
+
+		<section name="Wave Overview">
+
+			<div id="catcherTitle">Wave Layer</div>
+			<div id="catcherContent">Allow asynchronous communication between components</div>
+
+			<subsection name="What's a Wave">
+				<p>A Wave is a temporary object created to carry data througt CS-MVC components.</p>
+				<p>They allow JRebirth to handle application internal events asynchronously between each components, at the opposite you can use getModel,
+					getCommand and getService method to perform synchronous
+					operations.
+				</p>
+				<p>
+					Waves are handled by the notifier engine which are running within the
+					<em>JRebirthThread</em>
+					.
+				</p>
+				<p>
+				</p>
+				<p>
+					<span style="text-decoration: underline;">Short UML Diagram:</span>
+				</p>
+
+				<div class="uml">
+					<a href="uml/Wave.png" rel="lightbox[uml]" title="Wave Class Diagram ">
+						<img class="redux" src="uml/Wave.png" alt="" />
+					</a>
+				</div>
+
+				<h3>Wave Group</h3>
+				<p>There are 4 main group of waves :</p>
+				<ol>
+					<li>Call Command : used to trigger a command action</li>
+					<li>Call Service : used to call a service, later another wave will be used</li>
+					<li>Attach Ui : used to link two JavaFX nodes</li>
+					<li>Undefined : to handle all other waves, the wave type must be defined</li>
+				</ol>
+				
+				
+				<h3>Wave Type</h3>
+				<p>The wave type is where black magic resides. It defines a contract between the emitter (the one who creates the wave) and the receiver (the one
+					who handles the waves).</p>
+				<p>This contract is dynamic because it relies on a String and WaveItem objects.</p>
+				<p>
+					A
+					<em>WaveType</em>
+					has a unique name and a set of
+					<em>WaveItem</em>
+					objects. It must be created and stored like this:
+				</p>
+				<ul>
+					<ul>
+						<li>Into an Interface to define wave contract (here without argument)</li>
+					</ul>
+				</ul>
+
+				<macro name="include">
+					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/ui/editor/EditorWaves.java" />
+					<param name="snippet" value="aj:..DO_UNLOAD" />
+					<param name="snippet-start-offset" value="1" />
+				</macro>
+
+				<ul>
+					<ul>
+						<li>Into a service class (here with on argument) :</li>
+					</ul>
+				</ul>
+
+				<macro name="include">
+					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java" />
+					<param name="snippet" value="aj:..DO_LOAD_EVENTS" />
+					<param name="snippet-start-offset" value="1" />
+				</macro>
+
+
+
+				<h3>WaveType name</h3>
+				<p>
+					<strong>This string is used to link to a component method</strong>
+					, this call is made by reflection when the wave is processed.
+				</p>
+				
+				
+				
+				<h3>WaveItem List</h3>
+				<p>
+					Each
+					<em>WaveItem</em>
+					will be passed to the method as an argument
+				</p>
+				
+				
+				
+				<h3>Wave argument</h3>
+				<p>Each wave procesing method must add a least argument : the source wave, thus it will be possible to know the handling context for this method
+					call.</p>
+				<p>The wave argument is useful to access to wave bean or other information like source wave.</p>
+				<p>
+				</p>
+				<p>
+				</p>
+
+			</subsection>
+
+			<subsection name="Wave Lifecycle">
+				<p>
+					Wave lifecycle are defined by the
+					<em>Status</em>
+					enumeration:
+				</p>
+				<ol>
+					<li>Created : The Wave object has just been built by someone.</li>
+					<li>Sent : The wave has been sent to the JRebirth Notifier Engine</li>
+					<li>Processing : The wave is being dispatched</li>
+					<li>Cancelled : The wave has been cancelled by an user action</li>
+					<li>Consumed : The wave task is achieved and is marked as consumed</li>
+					<li>Failed : The wave process has generated an error</li>
+					<li>Destroyed : the wave is available for garbage collection</li>
+				</ol>
+
+				<h3>How they are consumed</h3>
+				<p>
+				</p>
+
+			</subsection>
+
+
+			<subsection name="Chained Wave">
+
+				<p>
+					It's possible to chain command by using the
+					<em>ChainWaveCommand</em>
+					class. A sample is used into the
+					<em>JRebirthThread.bootUp()</em>
+					method.
+				</p>
+
+				<!-- <macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/concurrent/JRebirthThread.java" />
+					<param name="snippet" value="aj:..bootUp()" />
+				</macro> -->
+
+			</subsection>
+
+			<div class="bottomLinks">
+				<div class="previousDocPage">
+					<a href="Notifier.html">Notifier &amp; Components</a>
+				</div>
+				<div class="nextDocPage">
+					<a href="Commands.html">Commands</a>
+				</div>
+				<div class="tocDocPage">
+					<a href="index.html">TOC</a>
+				</div>
+			</div>
+
+		</section>
+
+	</body>
+</document> 	

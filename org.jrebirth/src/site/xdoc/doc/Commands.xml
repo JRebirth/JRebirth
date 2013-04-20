@@ -27,22 +27,18 @@
 			<div id="catcherContent">Reuse common code and don't be scared by threading issue</div>
 
 
-			<p>A command is an atomic reusable action.</p>
+			<p>A command is an atomic reusable action that could be triggered from anywhere.</p>
 			<p>There are two kinds of Commands:</p>
 			<ul>
 				<li>Single Command</li>
 				<li>Multi Command (composed by a set of Single Command)</li>
 			</ul>
 
-
-			<p>
-				<span style="text-decoration: underline;">UML Class Diagram:</span>
-			</p>
-
 			<div class="uml">
 				<a href="uml/Command.png" rel="lightbox" title="Command Class Diagram ">
 					<img class="redux" src="uml/Command.png" alt="" />
 				</a>
+				<legend>Command - Class Diagram</legend>
 			</div>
 
 
@@ -55,7 +51,8 @@
 					their instantiation and their startup but they will be processed into JAT, JIT or one of JTP slots.
 					JAT and JIT will process command one
 					after the other. JTP will act in the same
-					manner but will dispatch all actions to its pooled threads (ie: 4).
+					manner but internal engine will dispatch all actions to its pooled threads (by default 4 slots are
+					available).
 				</p>
 
 			</subsection>
@@ -67,7 +64,8 @@
 
 				<macro name="include">
 					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/ShowModelCommand.java" />
-					<!-- <param name="snippet" value="aj:public class org.jrebirth.core.command.basic.ShowModelCommand" /> -->
+					<!-- <param name="snippet" value="aj:..ShowModelCommand" /> -->
+
 				</macro>
 
 				<p>
@@ -105,20 +103,30 @@
 					Commands are designed to be disposable after usage, but they could be retained by strong references to be executed twice or more.
 					Each call will
 					return a new instance of the command class, because
-					each was stored with a timestamp key-based.
+					each command was stored with a timestamp key-based Timestamp is added to the default key and
+					also for custom key).
 					<br />
-					You can call a command by four different ways:
+					You can create a command by four different ways:
 				</p>
 				<ul>
-					<li>Synchronous way : getCommand(Command.class).run()</li>
-					<li>Asynchronous way : CALL_COMMAND WaveType</li>
 					<li>
-						Into Controller: by using
-						<em>
-							void linkCommand(Node, EventType&lt;E&gt;, Class&lt;? extends Command&gt;, WaveData&lt;?&gt;...)
-						</em>
+						<a href="#direct">Direct way : getCommand(Command.class).run()</a>
 					</li>
-					<li>Listener Callback : processAction(), require pre-registration</li>
+					<li>
+						<a href="#indirect">Indirect way (Wave)</a>
+					</li>
+					<li>
+						<a href="#link">
+							From Controller by using
+							<em>
+								linkCommand
+							</em>
+							method
+						</a>
+					</li>
+					<li>
+						<a href="#callback">Component Callback</a>
+					</li>
 				</ul>
 				<p>
 					Please note that Commands are JRebirth top components (with Services and Models), they follow the component lifecycle as described in
@@ -133,11 +141,107 @@
 				</p>
 
 
-
-				<h4>Synchronous way</h4>
+				<a name="direct" />
+				<h4>Direct way</h4>
 				<p>It's possible to call a command from any JRebirth component (Command, Service, Model).</p>
-				<pre>callCommand(TestCommmand.class)</pre>
-				<pre>getLocalFacade().getGlobalFacade().getCommandFacade().retrieve(TestCommmand.class)</pre>
+				<p>
+					You just need to call the
+					<strong>getCommand</strong>
+					method to build an instance. You must provide the Command
+					Class and its unique key (if required).
+				</p>
+
+				<!-- <macro name="include"> <param name="source" value="core/src/main/java/org/jrebirth/core/facade/AbstractFacade.java" /> <param name="snippet" value="re:E 
+					retrieve" /> </macro> -->
+
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/link/CommandReady.java" />
+					<param name="snippet" value="re:getCommand" />
+				</macro>
+
+				<p>
+					Once you have retrieved your command, you can store it with a strong reference to avoid GC collecting it. Your command life will depend on the
+					lifetime of your strong reference. Thus you will be able to configure directly your command properties. Finally to trigger it you must call its
+					<strong>run()</strong>
+					method.
+				</p>
+
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/Command.java" />
+					<param name="snippet" value="re:run\(\)" />
+				</macro>
+
+				<p>
+					<strong>Be careful</strong>
+					: As explained
+					<a href="#key">here</a>
+					each call to
+					<strong>getCommand</strong>
+					could retrieve the same
+					<em>OR</em>
+					another instance of the command class depending on key parts provided and instance's strong references.
+				</p>
+
+
+				<a name="Indirect" />
+				<h4>Indirect way</h4>
+				<p>
+					You can trigger a command execution by calling
+					<strong>callCommand</strong>
+					from any component.
+				</p>
+				<p>
+					You can provide some parameters into
+					<strong>WaveData</strong>
+					that will be hold by the wave and so available into the command.
+				</p>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/facade/WaveReady.java" />
+					<param name="snippet" value="re:callCommand" />
+				</macro>
+
+
+				<a name="link" />
+				<h4>Convenient Link method</h4>
+				<p>
+					Controllers provide a convenient method named
+					<em>void linkCommand(Node, EventType&lt;E&gt;, Class&lt;? extends Command&gt;, WaveData&lt;?&gt;...)</em>
+				</p>
+				<p>This method useful to declare with only one line of code the trigger of a command when a prefined JavaFX event occured on a node belonging to
+					the View.
+				</p>
+				<p>It's also possible to add a callback function, in example to manage double-click detection (see <strong>LinkedCallback</strong>).</p>
+
+				<macro name="include">
+					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/ui/controls/ControlsController.java" />
+					<param name="snippet" value="re:linkCommand" />
+				</macro>
+
+
+				<a name="callback" />
+				<h4>Component Callback way</h4>
+				<p>
+					Any
+					<strong>Command</strong>
+					is a JRebirth component and can benefits of
+					<em>Observer</em>
+					features.
+					It's possible to listen a
+					<strong>WaveType</strong>
+					(registration done into the
+					<em>ready()</em>
+					method)
+					in order to be notified when a such wave is sent.
+					You can manage custom methods called by reflection to handle waves and can you catch
+					all waves into the
+					<em>processAction(Wave)</em>
+					method.
+				</p>
+				<p>More information is available in <a href="Notifier.html">Notifier &amp; Component page</a>.</p>
+
+				<p>Be careful, commands can handle asynchronous wave only if they haven't been collected by the Garbage Collector! So you need to create a
+					instance and to keep a strong references on it somewhere.
+				</p>
 
 
 			</subsection>
@@ -164,14 +268,11 @@
 						method)
 					</li>
 
+					<!-- <li> A <a href="#parent">Parent Command</a> for chained use case </li> -->
+
 					<li>
 						A
-						<a href="#parent">Parent Command</a>
-						for chained use case
-					</li>
-					<li>
-						A
-						<a href="#wavebean">WaveBean</a>
+						<a href="#wavebean">Wave Bean Generic Type</a>
 						that will hold all required data to process the action
 					</li>
 					<li>
@@ -195,8 +296,12 @@
 					The runner thread can be configured by two ways:
 				</p>
 				<ul>
-					<li><a href="#annotation">Annotation</a></li>
-					<li><a href="#inheritance">Constructor argument and class inheritance</a></li>
+					<li>
+						<a href="#annotation">Annotation</a>
+					</li>
+					<li>
+						<a href="#inheritance">Constructor argument and class inheritance</a>
+					</li>
 				</ul>
 
 				<p>The priority rule is : Annotation &gt; Constructor argument &gt; Default value</p>
@@ -247,7 +352,7 @@
 					<param name="snippet" value="re:extends DefaultCommand" />
 				</macro>
 				<p>
-					<em>WaveListener implementation is optionnal</em>
+					<em>WaveListener implementation is optional</em>
 				</p>
 
 				<p>
@@ -261,55 +366,82 @@
 				</macro>
 
 				<h4>Constructor argument usage</h4>
-
 				<p>
-					To run a command into the JAT (JavaFX Application Thread), extends the
-					<em>DefaultUICommand</em>
-					class :
+					It's also possible to define the runType (The thread which will handle the command) by passing
+					<strong>RunType</strong>
+					, each descendant classes of
+					<strong>AbstractBaseCommand</strong>
+					offer at least one constructor allowing this.
+					enum value to the command constructor.
 				</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/AttachModelCommand.java" />
-					<param name="snippet" value="re:extends DefaultUICommand" />
-				</macro>
-
-				<p>
-					To run a command into the JIT (JRebirth Internal Thread), extends the
-					<em>DefaultCommand</em>
-					class :
-				</p>
-				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/ChainWaveCommand.java" />
-					<param name="snippet" value="re:extends DefaultCommand" />
-				</macro>
-				<p>
-					<em>WaveListener implementation is optionnal</em>
-				</p>
-
-				<p>
-					To run a command into JTP (JRebirth Thread Pool, the command will be run into a slot), extends the
-					<em>DefaultPoolCommand</em>
-					class :
-				</p>
-				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/PrepareModelCommand.java" />
-					<param name="snippet" value="re:extends DefaultPoolCommand" />
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/AbstractBaseCommand.java" />
+					<param name="snippet" value="re:RunType runType" />
 				</macro>
 
 			</subsection>
 
-			<subsection name="Custom properties" id="key">
+			<subsection name="Component Key" id="key">
+				<p>
+					The component key as described in the
+					<a href="Facade.html">Facade page</a>
+					allow storing unique commands.
+				</p>
+				<p>All objects provided as key part will be serialized (toString call) to build the key.</p>
+				<p>Warning : When a command is built consequently to a wave reception, the wave UID will be concatened to the class name instead of using key
+					parts.
+				</p>
+
 			</subsection>
 
-			<subsection name="Custom properties" id="action">
+			<subsection name="Execute Code" id="action">
+
+				<p>Command are run in a custom thread in 3 steps:</p>
+				<ul>
+					<li>preExecute</li>
+					<li>execute</li>
+					<li>postExecute</li>
+				</ul>
+				<p>
+					Only the
+					<strong>execute</strong>
+					method must be implemented to perform your action.
+				</p>
+
 			</subsection>
 
 			<subsection name="Wave Bean" id="wavebean">
+				<p>
+					A
+					<strong>WaveBean</strong>
+					is a Java Bean that allow carrying a lot of names properties into a
+					<strong>Wave</strong>
+					.
+				</p>
+				<p>
+					Command Classes can declare a generic type that allow to cast the Wave Bean into the right one, it allows to use
+					<em>getWaveBean().getMyProperty()</em>
+					into source code which is more convenient than parsing
+					<strong>WaveData</strong>
+					(but it implies to create a dedicated Java Class).
+				</p>
+
 			</subsection>
 
-			<subsection name="Parent Command" id="parent">
-			</subsection>
+			<!-- <subsection name="Parent Command" id="parent"> <p> When you use a command into a <strong>MultiCommand</strong> , this property will hold a strong 
+				reference to it. </p> </subsection> -->
 
 			<subsection name="Custom properties" id="props">
+
+				<p>Each command is a simple Java Object, you can add fields or JavaFX Properties to help configuring your execution code.</p>
+				<p>You must pay attention that these values will be kept until the command is disposed (after execution if no strong references exists).</p>
+
+				<p>
+					For example you can attach a command to a
+					<strong>Model</strong>
+					and launch it several times while updating its internal properties.
+				</p>
+
 			</subsection>
 
 
@@ -322,7 +454,7 @@
 		<section>
 			<div class="bottomLinks">
 				<div class="previousDocPage">
-					<a href="Notifier.html">Notifier &amp; Wave</a>
+					<a href="Wave.html">Wave</a>
 				</div>
 				<div class="nextDocPage">
 					<a href="Services.html">Services</a>

@@ -23,23 +23,31 @@
 	<body>
 
 		<section name="Thread Management" title="Thread Management">
-			
+
 			<div id="catcherTitle">Thread Management</div>
 			<div id="catcherContent">Writing concurrent application could be painful ! Not with JRebirth</div>
-			
+
 			<!-- <macro name="toc" section="4" fromDepth="2" toDepth="3" /> -->
 
 			<subsection name="Threading overview">
 				<p>JRebirth is multi-threaded, not only by using Task Worker
 					provided by JavaFX APIs. JRebirth has got its own Thread to manage
-					local events (called waves).
+					local events (called
+					waves) allowing components to communicate with each others.
+					It also allows to manage multiple threads in a very simple manner with its included
+					thread pool.
 				</p>
 				<p>Thus all inner JRebirth tasks are processed into a custom
 					thread and don't infer with the JavaFX Application Thread which have to
-					manage user events and some UI instantiation.
+					manage user
+					events and some UI instantiation.
 				</p>
-				<p>When you debug a JRebirth application, you can observe a lot
-					of threads, Don't be scared !!
+				<p>
+					Lags, UI Freeze ... are lost to history :D
+				</p>
+				<p>What happens when you debug a JRebirth application ? You can observe a lot
+					of threads, but don't be scared !! Everything is at the right
+					isolated place doing the right thing.
 				</p>
 				<p>The most important are :</p>
 				<ul>
@@ -50,63 +58,67 @@
 					</li>
 				</ul>
 				<p>Other threads are related to JavaFX platform, JRebirth only
-					creates 2-5 threads that can be extended if required.
-				</p>
-				<p>
-					<span style="text-decoration: underline;">UML Class Diagram:</span>
+					creates 2 to 5 threads (by default) that can be extended if required.
 				</p>
 				<div class="uml">
 					<a href="uml/Concurrent.png" rel="lightbox" title="Thread Class Diagram">
 						<img class="redux" src="uml/Concurrent.png" alt="" />
 					</a>
+					<legend>Concurrent Class Diagram</legend>
 				</div>
 			</subsection>
 
 			<subsection name="Thread Rules">
 				<p>
-					All UI tasks must be done into the JAT, but
-					<strong>you
-						can build a view into the JIT or JTP but you must add it to your scene
+					JavaFX toolkit requires that all UI tasks must be done into the JAT, but it also allows
+					<strong>to build a view into the JIT or JTP and then link it to your scene
 						into the JAT.
 					</strong>
 				</p>
 				<p>All Wave processing tasks are automatically done into the JIT.</p>
 				<p>When the JRebirth Framework needs to update UI, it's done
-					automatically into the JAT. No matters to have !
-				</p>
-				<p>But when you call a component directly( getCommand,
-					getService, getModel), your call is processed into the current thread.
+					automatically done into the JAT. No matters to have !
 				</p>
 				<p>
+					But when you call a component directly (synchronous method:
+					<em>getCommand,
+						getService, getModel
+					</em>
+					), your call is processed into the current thread, so you must pay attention to what you are doing.
 				</p>
-				<p>
-				</p>
-				<p>Pay attention to the thread into you are before calling
-					synchronous methods getCommand, get getModel, getService.
-				</p>
+
 				<p>
 					<span style="text-decoration: underline;">If you
 						are into the JIT:
 					</span>
 				</p>
 				<ul>
-					<li>getCommand =&gt; the command will be processed
-						synchronously into the JIT
+					<li>getCommand
+						=&gt; the code will be processed
+						synchronously into the JIT, but if you call the
+						<em>run</em>
+						method of the command it will be run into the thread defined by the command configuration.
 					</li>
 					<li>getModel =&gt; all called methods of the model will be
-						processed into the JIT ==&gt; Can Break !!!</li>
+						processed into the JIT ==&gt; Can Break !!! Toolkit will raise an error.</li>
 				</ul>
 				<p>
-					When you are into the JIT you must use Platform.runLater to
-					perform UI updates. JRebirth Framework offers some default commands to
+					When you are into the JIT you must use
+					<strong>JRebirth.runIntoJAT</strong>
+					that call internally
+					<em>Platform.runLater</em>
+					to perform UI updates.
+				</p>
+				<p>
+					JRebirth Framework offers some default commands to
 					do the trick (
 					<em>DefaultUiCommand</em>
-					). Moreovere if you
+					). Moreover if you
 					send a
 					<em>Wave</em>
 					with a
 					<em>WaveType</em>
-					listend by a model, it will be automatically processed into the JAT.
+					listened by a model, it will be automatically processed into the JAT (Cool JRebirth Magic).
 				</p>
 				<p>
 					<span style="text-decoration: underline;">If you
@@ -114,19 +126,25 @@
 					</span>
 				</p>
 				<ul>
-					<li>getCommand =&gt; future task will be done into the JAT
+					<li>getCommand, getService =&gt; this code will be processed into the JAT
 						: Don't perform long task or you will freeze the application !!!
 					</li>
 					<li>getModel =&gt; actions will be done into the JAT
-						==&gt; OK for short Ui actions</li>
+						==&gt; OK for short UI actions</li>
 				</ul>
 				<p>
-					When you are in the JAT you must use JRebirthThread.runLater
-					to run tasks into the core thread. JRebirth Framework offers some
-					default commands to force to run into the JIT (
+					When you are in the JAT you must use
+					<strong>JRebirth.runIntoJIT</strong>
+					that call internally
+					<em>JRebirthThread.runLater</em>
+					to run tasks into the core thread.
+				</p>
+				<p>
+					JRebirth Framework offers some
+					default commands to force to run into JIT &amp; JTP (
 					<em>DefaultCommand</em>
-					or
-					<em>DefaultPoolCOmmand</em>
+					and
+					<em>DefaultPoolCommand</em>
 					). You can also send a wave
 					that will trigger a command, or call a service into another thread that
 					JAT.
@@ -134,16 +152,18 @@
 				<p>
 					<em>For example:</em>
 				</p>
-				<p>If you want to call a service which make an asynchronuous call
+				<p>If you want to call a service which make an asynchronous call
 					to a remote server. You can use the getService method to initiate the
-					call (By default this call will be managed into JRebirth
+					call (By
+					default this call will be managed into JRebirth
 					Thread Pool :
 					JTP), but the return must be managed into the JAT:
 				</p>
 				<ul>
 					<li>Either use a wave to send data received from remote server,
 						default service will generate a such wave (automatically processed into
-						the JAT for models taht listen it)
+						the JAT for
+						models that listen it)
 					</li>
 					<li>Either call the model from the JAT and access to service
 						results (the first way way is the best to use)

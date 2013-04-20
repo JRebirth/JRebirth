@@ -14,14 +14,22 @@
 	<properties>
 		<title>JRebirth All-In-One Documentation Page</title>
 	</properties>
-	
+
 	<head>
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+
+		<style>
+			/*<![CDATA[*/
+			div.bottomLinks{
+			display:none;
+			}
+			/*]]>*/
+		</style>
 	</head>
 
 	<body>
-		
+
 		<section name="All In One Documentation Page">
 			<div id="catcherTitle">JRebirth Application Framework Documentation</div>
 			<div id="catcherContent">Learn how to use JRebirth to help you building sophisticated application in minutes.</div>
@@ -64,6 +72,11 @@
 
 		<macro name="include">
 			<param name="source" value="xdoc/doc/Notifier.xml" />
+			<param name="source-content-type" value="xdoc" />
+		</macro>
+		
+		<macro name="include">
+			<param name="source" value="xdoc/doc/Wave.xml" />
 			<param name="source-content-type" value="xdoc" />
 		</macro>
 
