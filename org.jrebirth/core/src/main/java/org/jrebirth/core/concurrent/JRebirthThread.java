@@ -104,7 +104,7 @@ public final class JRebirthThread extends Thread {
      * @param runnable the task to run
      */
     @SuppressWarnings("unchecked")
-    public void runNow(final Runnable runnable) {
+    public void runIntoJTP(final Runnable runnable) {
         final Future<Void> future = (Future<Void>) getFacade().getExecutorService().submit(runnable);
 
         try {
@@ -120,7 +120,7 @@ public final class JRebirthThread extends Thread {
      * 
      * @param runnable the task to run
      */
-    public void runAsap(final Runnable runnable) {
+    public void runLater(final Runnable runnable) {
         // Synchronize the queue !
         synchronized (this.queuedTasks) {
             this.queuedTasks.notifyAll();
@@ -360,42 +360,22 @@ public final class JRebirthThread extends Thread {
         return internalThread;
     }
 
-    /**
-     * Return true if we are into the JRebirth Thread.
-     * 
-     * @return true if currentThread == JRebirthThread
-     */
-    public static boolean isJRebirthThread() {
-        return JIT_NAME.equals(Thread.currentThread().getName());
-    }
-
-    /**
-     * Check if the current code is executed into the JRebirthThread otherwise throws an exception.
-     * 
-     * @throws JRebirthThreadException if the we are into the wrong thread
-     */
-    public static void checkJRebirthThread() throws JRebirthThreadException {
-        if (!isJRebirthThread()) {
-            throw new JRebirthThreadException();
-        }
-    }
-
-    /**
-     * Run a task as soon as possible.
-     * 
-     * @param runnable the task to run
-     */
-    public static void runLater(final Runnable runnable) {
-        internalThread.runAsap(runnable);
-    }
-
-    /**
-     * Run a task immediately if a slot is available into the shared thread pool.
-     * 
-     * @param runnable the task to run
-     */
-    public static void runIntoJTP(final Runnable runnable) {
-        internalThread.runNow(runnable);
-    }
+    // /**
+    // * Run a task as soon as possible.
+    // *
+    // * @param runnable the task to run
+    // */
+    // public static void runLater(final Runnable runnable) {
+    // internalThread.runLater(runnable);
+    // }
+    //
+    // /**
+    // * Run a task immediately if a slot is available into the shared thread pool.
+    // *
+    // * @param runnable the task to run
+    // */
+    // public static void runIntoJTP(final Runnable runnable) {
+    // internalThread.runIntoJTP(runnable);
+    // }
 
 }

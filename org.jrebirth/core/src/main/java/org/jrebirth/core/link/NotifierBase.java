@@ -26,7 +26,6 @@ import org.jrebirth.core.command.Command;
 import org.jrebirth.core.command.basic.ShowModelWaveBuilder;
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
-import org.jrebirth.core.concurrent.JRebirthThread;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.AbstractGlobalReady;
@@ -75,7 +74,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
 
         wave.setStatus(Status.Processing);
 
-        JRebirthThread.checkJRebirthThread();
+        JRebirth.checkJIT();
 
         try {
             switch (wave.getWaveGroup()) {
@@ -206,7 +205,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     @Override
     public void listen(final WaveReady linkedObject, final WaveType... waveType) throws JRebirthThreadException {
 
-        JRebirthThread.checkJRebirthThread();
+        JRebirth.checkJIT();
 
         // For each wave type manage listeners
         for (final WaveType wt : waveType) {
@@ -229,7 +228,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     @Override
     public void unlisten(final WaveReady linkedObject, final WaveType... waveType) throws JRebirthThreadException {
 
-        JRebirthThread.checkJRebirthThread();
+        JRebirth.checkJIT();
 
         for (final WaveType nt : waveType) {
             List<WaveReady> list;
