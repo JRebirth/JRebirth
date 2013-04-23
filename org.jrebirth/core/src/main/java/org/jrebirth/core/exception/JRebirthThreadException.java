@@ -32,11 +32,49 @@ public class JRebirthThreadException extends Exception {
      */
     private static final long serialVersionUID = 112036725331588469L;
 
+    /** The type of thread exception. */
+    public enum Type {
+        NOT_JAT, NOT_JIT, NOT_JTP
+    }
+
+    /** The local thread type. */
+    private final Type threadType;
+
     /**
      * Default Constructor.
      */
-    public JRebirthThreadException() {
-        super("Current code must be executed into the JRebirth Thread.");
+    public JRebirthThreadException(final Type threadType) {
+        super("Current code must be executed into: " + getThreadName(threadType));
+        this.threadType = threadType;
+    }
+
+    /**
+     * Return the concerned thread name.
+     * 
+     * @return the thread name concerned
+     */
+    private static String getThreadName(final Type threadType) {
+        String threadName = "";
+
+        switch (threadType) {
+            case NOT_JAT:
+                threadName = "JavaFX Application Thread";
+                break;
+            case NOT_JIT:
+                threadName = "JRebirth Internal Thread";
+                break;
+            case NOT_JTP:
+                threadName = "JRebirth Thread Pool";
+                break;
+        }
+        return threadName;
+    }
+
+    /**
+     * @return Returns the threadType.
+     */
+    Type getThreadType() {
+        return threadType;
     }
 
 }

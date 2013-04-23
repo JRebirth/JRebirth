@@ -52,9 +52,9 @@
 				<p>The most important are :</p>
 				<ul>
 					<li>JavaFX Application Thread - JAT</li>
-					<li>JRebirth Engine Thread - JIT</li>
+					<li>JRebirth Internal Thread - JIT</li>
 					<li>JRebirth Slot x (n threads available in JRebirth Thread
-						Pool - JTP)
+						Pool - JTP Slot 'n')
 					</li>
 				</ul>
 				<p>Other threads are related to JavaFX platform, JRebirth only
@@ -76,7 +76,7 @@
 					</strong>
 				</p>
 				<p>All Wave processing tasks are automatically done into the JIT.</p>
-				<p>When the JRebirth Framework needs to update UI, it's done
+				<p>When the JRebirth Framework needs to update UI (thanks to <strong>Model</strong> layer), it's done
 					automatically done into the JAT. No matters to have !
 				</p>
 				<p>
@@ -86,6 +86,29 @@
 					</em>
 					), your call is processed into the current thread, so you must pay attention to what you are doing.
 				</p>
+				
+				<h4>Launch a runnable into JAT</h4>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/facade/WaveReady.java" />
+					<param name="snippet" value="re:callCommand" />
+				</macro>
+				
+				<h4>Launch a runnable into JIT</h4>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/facade/WaveReady.java" />
+					<param name="snippet" value="re:callCommand" />
+				</macro>
+				
+				<h4>Launch a runnable into JTP</h4>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/facade/WaveReady.java" />
+					<param name="snippet" value="re:callCommand" />
+				</macro>
+				
+				
+				</subsection>
+				
+				<subsection name="Examples">
 
 				<p>
 					<span style="text-decoration: underline;">If you
