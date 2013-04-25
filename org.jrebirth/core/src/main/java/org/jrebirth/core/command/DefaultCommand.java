@@ -49,4 +49,10 @@ public class DefaultCommand extends AbstractSingleCommand<WaveBean> {
         // Nothing to do yet by the default command, must be overridden
     }
 
+    @Override
+    public void setParentCommand(Command parentCommand) {
+        // Nothing to do yet
+
+    }
+
 }

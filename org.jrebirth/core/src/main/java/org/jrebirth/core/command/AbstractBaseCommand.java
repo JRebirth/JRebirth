@@ -54,10 +54,10 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      */
     private final RunType runIntoThread;
 
-    /**
-     * The parent command, useful when chained or multi commands are used.
-     */
-    private Command parentCommand;
+    // /**
+    // * The parent command, useful when chained or multi commands are used.
+    // */
+    // private Command parentCommand;
 
     /**
      * Default constructor.
@@ -124,12 +124,8 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      */
     @Override
     public final void run() {
-        // Build a default Wave to avoid NullPointerException when
-        // command was directly called by its run() method
-        run(WaveBuilder.create()
-                .waveGroup(WaveGroup.CALL_COMMAND)
-                .relatedClass(this.getClass())
-                .build());
+        // No wave was created
+        run(null);
     }
 
     /**
@@ -138,9 +134,18 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
     @Override
     public final void run(final Wave wave) {
 
+        // If given wave is null
+        // Build a default Wave to avoid NullPointerException when
+        // command was directly called by its run() method
+        final Wave commandWave = wave == null ?
+                WaveBuilder.create()
+                        .waveGroup(WaveGroup.CALL_COMMAND)
+                        .relatedClass(this.getClass())
+                        .build() : wave;
+
         // Create the runnable that will be run
         // Add the runnable to the runner queue run it as soon as possible
-        JRebirth.run(getRunInto(), new CommandRunnable(this.getClass().getSimpleName(), this, wave));
+        JRebirth.run(getRunInto(), new CommandRunnable(this.getClass().getSimpleName(), this, commandWave));
     }
 
     /**
@@ -186,20 +191,20 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
         super.finalize();
     }
 
-    /**
-     * @return Returns the parentCommand.
-     */
-    public Command getParentCommand() {
-        return this.parentCommand;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setParentCommand(final Command parentCommand) {
-        this.parentCommand = parentCommand;
-    }
+    // /**
+    // * @return Returns the parentCommand.
+    // */
+    // public Command getParentCommand() {
+    // return this.parentCommand;
+    // }
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void setParentCommand(final Command parentCommand) {
+    // this.parentCommand = parentCommand;
+    // }
 
     /**
      * Get the wave bean and cast it.
