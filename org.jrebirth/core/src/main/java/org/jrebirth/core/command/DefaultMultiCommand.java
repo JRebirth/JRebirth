@@ -115,10 +115,10 @@ public class DefaultMultiCommand extends AbstractMultiCommand<WaveBean> {
         // Nothing to do yet
     }
 
-    @Override
-    public void setParentCommand(Command parentCommand) {
-        // Nothing to do yet
-
-    }
+    // @Override
+    // public void setParentCommand(Command parentCommand) {
+    // // Nothing to do yet
+    //
+    // }
 
 }

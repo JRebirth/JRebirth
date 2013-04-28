@@ -22,6 +22,7 @@ import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBean;
 
 /**
  * The class <strong>DisplayInfoPropertiesCommand</strong>.
@@ -29,7 +30,7 @@ import org.jrebirth.core.wave.Wave;
  * @author Sébastien Bordes
  */
 @RunInto(RunType.JAT)
-public class DisplayInfoPropertiesCommand extends AbstractSingleCommand {
+public class DisplayInfoPropertiesCommand extends AbstractSingleCommand<WaveBean> {
 
     @Override
     public void ready() throws CoreException {

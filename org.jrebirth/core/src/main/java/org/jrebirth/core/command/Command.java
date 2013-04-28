@@ -40,12 +40,12 @@ public interface Command extends FacadeReady<Command> {
      */
     void run(final Wave wave);
 
-    /**
-     * Link a parent command.
-     * 
-     * @param parentCommand the parent command
-     */
-    void setParentCommand(final Command parentCommand);
+    // /**
+    // * Link a parent command.
+    // *
+    // * @param parentCommand the parent command
+    // */
+    // void setParentCommand(final Command parentCommand);
 
     /**
      * Get the wave bean and cast it.
