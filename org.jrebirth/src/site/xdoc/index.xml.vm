@@ -71,7 +71,7 @@
 				</li>
 
 				<li>
-					<a href="http://apps.jrebirth.org/org.jrebirth/JRebirth-${project.version}.zip">JRebirth ${project.version} .zip</a>
+					<a href="http://apps.jrebirth.org/org.jrebirth/JRebirth-${project.version}.tar.gz">JRebirth ${project.version} .tar.gz</a>
 				</li>
 				<li>
 					<a href="http://apps.jrebirth.org/breizhcamp/javafx2-1.1.0-SNAPSHOT.zip">Breizhcamp</a>
