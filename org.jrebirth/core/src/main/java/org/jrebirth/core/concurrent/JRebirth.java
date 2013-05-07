@@ -66,13 +66,13 @@ public final class JRebirth {
      * @param runnable the task to run
      */
     public static void runIntoJAT(final Runnable runnable) {
-        if (Platform.isFxApplicationThread()) {
-            // We are into a JAT so just run it synchronously
-            runnable.run();
-        } else {
-            // The runnable will be run into the JAT
-            Platform.runLater(runnable);
-        }
+        // if (Platform.isFxApplicationThread()) {
+        // // We are into a JAT so just run it synchronously
+        // runnable.run();
+        // } else {
+        // The runnable will be run into the JAT during the next round
+        Platform.runLater(runnable);
+        // }
     }
 
     /**
@@ -92,13 +92,13 @@ public final class JRebirth {
      * @param runnable the task to run
      */
     public static void runIntoJIT(final Runnable runnable) {
-        if (JRebirth.isJIT()) {
-            // We are into JIT so just run it synchronously
-            runnable.run();
-        } else {
-            // The runnable will be run into the JIT
-            JRebirthThread.getThread().runLater(runnable);
-        }
+        // if (JRebirth.isJIT()) {
+        // // We are into JIT so just run it synchronously
+        // runnable.run();
+        // } else {
+        // The runnable will be run into the JIT during the next round
+        JRebirthThread.getThread().runLater(runnable);
+        // }
     }
 
     /**
@@ -109,13 +109,13 @@ public final class JRebirth {
      * @param runnable the task to run
      */
     public static void runIntoJTP(final Runnable runnable) {
-        if (JRebirth.isJTPSlot()) {
-            // We are into a JTP slot so just run it synchronously
-            runnable.run();
-        } else {
-            // The runnable will be run into a JTP slot
-            JRebirthThread.getThread().runIntoJTP(runnable);
-        }
+        // if (JRebirth.isJTPSlot()) {
+        // // We are into a JTP slot so just run it synchronously
+        // runnable.run();
+        // } else {
+        // The runnable will be run into a JTP slot during the next round
+        JRebirthThread.getThread().runIntoJTP(runnable);
+        // }
     }
 
     /**
