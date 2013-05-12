@@ -21,8 +21,11 @@ import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
+import javafx.animation.Animation;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextAreaBuilder;
@@ -35,6 +38,7 @@ import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.ui.annotation.AutoHandler;
 import org.jrebirth.core.ui.annotation.AutoHandler.CallbackObject;
 import org.jrebirth.core.ui.annotation.EnumEventType;
+import org.jrebirth.core.ui.annotation.OnFinished;
 import org.jrebirth.core.ui.handler.AnnotationEventHandler;
 import org.jrebirth.core.util.ClassUtility;
 
@@ -129,7 +133,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         // Process class annotation
         processViewAnnotation();
 
-        // Process field annotation
+        // Process field annotation to attach event handler
         processFields();
 
         // Allow to release the model if the root business object doesn't exist anymore
@@ -147,6 +151,8 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Process view annotation.
+     * 
+     * This will define if callback action will the view itself or its dedicated controller
      */
     private void processViewAnnotation() {
 
@@ -173,8 +179,8 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         // Parse view properties
         for (final Field f : currentClass.getDeclaredFields()) {
 
-            // Only node properties are eligible
-            if (Node.class.isAssignableFrom(f.getType())) {
+            // Only Node and Animation properties are eligible
+            if (Node.class.isAssignableFrom(f.getType()) || Animation.class.isAssignableFrom(f.getType())) {
 
                 // If a property was private, it must set to accessible = false after processing action
                 boolean needToHide = false;
@@ -206,22 +212,45 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         // For each field annotation we will attach an event handler
         for (final Annotation a : property.getAnnotations()) {
 
-            // Manage only JRebirth OnXxxxx annotations
-            if (a.annotationType().getName().startsWith("org.jrebirth.core.ui.annotation.On")) {
+            if (Node.class.isAssignableFrom(property.getType())) {
 
-                try {
-                    // Retrieve the property value
-                    final Node node = (Node) property.get(this);
+                // Manage only JRebirth OnXxxxx annotations
+                if (a.annotationType().getName().startsWith("org.jrebirth.core.ui.annotation.On")) {
 
-                    // Process the annotation if the node is not null
-                    if (node != null && getController() instanceof AbstractController) {
-                        addHandler(node, a);
+                    try {
+                        // Retrieve the property value
+                        final Node node = (Node) property.get(this);
+
+                        // Process the annotation if the node is not null
+                        if (node != null && getController() instanceof AbstractController) {
+                            addHandler(node, a);
+                        }
+
+                    } catch (IllegalArgumentException | IllegalAccessException e) {
+                        LOGGER.debug("Impossible to process annotation for property : {}-{}", this.getClass().getName(), property.getName());
                     }
+                }
 
-                } catch (IllegalArgumentException | IllegalAccessException e) {
-                    LOGGER.debug("Impossible to process annotation for property : {}-{}", this.getClass().getName(), property.getName());
+            } else if (Animation.class.isAssignableFrom(property.getType())) {
+
+                // Manage only JRebirth OnFinished annotations
+                if (OnFinished.class.getName().equals(a.annotationType().getName())) {
+
+                    try {
+                        // Retrieve the property value
+                        final Animation animation = (Animation) property.get(this);
+
+                        // Process the annotation if the node is not null
+                        if (animation != null && getController() instanceof AbstractController) {
+                            addHandler(animation, a);
+                        }
+
+                    } catch (IllegalArgumentException | IllegalAccessException e) {
+                        LOGGER.debug("Impossible to process annotation for property : {}-{}", this.getClass().getName(), property.getName());
+                    }
                 }
             }
+
         }
     }
 
@@ -236,10 +265,27 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     private void addHandler(final Node node, final Annotation annotation) throws CoreException {
 
         // Build the auto event handler for this annotation
-        final AnnotationEventHandler aeh = new AnnotationEventHandler(this.callbackObject, annotation);
+        final AnnotationEventHandler<Event> aeh = new AnnotationEventHandler<>(this.callbackObject, annotation);
         for (final EnumEventType eet : (EnumEventType[]) ClassUtility.getAnnotationAttribute(annotation, "value")) {
             node.addEventHandler(eet.eventType(), aeh);
         }
+
+    }
+
+    /**
+     * Add an event handler on the given animation according to annotation OnFinished.
+     * 
+     * @param animation the animation, must be not null
+     * @param annotation the OnXxxx annotation (only OnFinished is supported)
+     * 
+     * @throws CoreException if an error occurred while linking the event handler
+     */
+    private void addHandler(final Animation animation, final Annotation annotation) throws CoreException {
+
+        // Build the auto event handler for this annotation
+        final AnnotationEventHandler<ActionEvent> aeh = new AnnotationEventHandler<>(this.callbackObject, annotation);
+        // Only on event type
+        animation.setOnFinished(aeh);
 
     }
 
@@ -358,4 +404,5 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         }
         return image;
     }
+
 }

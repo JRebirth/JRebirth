@@ -17,6 +17,7 @@
  */
 package org.jrebirth.core.ui.adapter;
 
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -30,7 +31,9 @@ import javafx.scene.input.TouchEvent;
 import javafx.scene.input.ZoomEvent;
 import javafx.stage.WindowEvent;
 
+import org.jrebirth.core.ui.handler.ActionHandler;
 import org.jrebirth.core.ui.handler.DragHandler;
+import org.jrebirth.core.ui.handler.FinishedHandler;
 import org.jrebirth.core.ui.handler.KeyHandler;
 import org.jrebirth.core.ui.handler.MouseHandler;
 import org.jrebirth.core.ui.handler.RotateHandler;
@@ -60,7 +63,11 @@ public interface EventAdapter {
      */
     enum Linker {
 
-        // FIXME Action(ActionEvent.ANY, ActionAdapter.class, ActionHandler.class),
+        /** The Action Event linker. */
+        Action(ActionEvent.ACTION, ActionAdapter.class, ActionHandler.class),
+
+        /** The Finished Event linker. */
+        Finished(ActionEvent.ACTION, FinishedAdapter.class, FinishedHandler.class),
 
         /** The Mouse Event linker. */
         Mouse(MouseEvent.ANY, MouseAdapter.class, MouseHandler.class),
@@ -86,7 +93,7 @@ public interface EventAdapter {
         /** The Window Event linker. */
         Window(WindowEvent.ANY, WindowAdapter.class, WindowHandler.class),
 
-        /** The Zomm Event linker. */
+        /** The Zoom Event linker. */
         Zoom(ZoomEvent.ANY, ZoomAdapter.class, ZoomHandler.class);
 
         /** The JavaFX internal api name. */

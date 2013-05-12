@@ -28,20 +28,20 @@ import javafx.event.Event;
 import javafx.event.EventType;
 
 /**
- * This annotation is used to automatically attached an action event handler to a property node.
+ * This annotation is used to automatically attached a Finished event handler to an Animation.
  * 
  * @author Sébastien Bordes
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface OnAction {
+public @interface OnFinished {
 
     /**
-     * The Action event type.<br />
-     * The Action type will be appended to method name to use.
+     * The Finished event type.<br />
+     * The Finished type will be appended to method name to use.
      */
-    enum ActionType implements EnumEventType {
+    enum FinishedType implements EnumEventType {
 
         /** Unique Action event type. */
         Action(ActionEvent.ACTION);
@@ -54,7 +54,7 @@ public @interface OnAction {
          * 
          * @param eventType the javafx event type
          */
-        private ActionType(final EventType<?> eventType) {
+        private FinishedType(final EventType<?> eventType) {
             this.eventType = eventType;
         }
 
@@ -71,9 +71,9 @@ public @interface OnAction {
     /**
      * Define the event type to manage.
      * 
-     * The default value is ActionType.Action, no other type can be defined
+     * The default value is FinishedType.Action, no other type can be defined
      */
-    ActionType[] value() default ActionType.Action;
+    FinishedType[] value() default FinishedType.Action;
 
     /**
      * Define a unique name used to avoid sharing same handler.
