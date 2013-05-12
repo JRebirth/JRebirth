@@ -34,7 +34,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     private long bitMask;
 
     /** The wave group of the wave to build. */
-    private WaveGroup waveGroup;
+    private WaveGroup waveGroup = WaveGroup.UNDEFINED;
 
     /** The wave type of the wave to build. */
     private WaveType waveType;
@@ -84,6 +84,8 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
 
     /**
      * Define the wave group.
+     * 
+     * Default value is WaveGroup.UNDEFINED
      * 
      * @param waveGroup the wave group to set
      * 
