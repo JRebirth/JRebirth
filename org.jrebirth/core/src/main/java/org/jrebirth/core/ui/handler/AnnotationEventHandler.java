@@ -23,12 +23,14 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.event.EventType;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.ui.annotation.EnumEventType;
-import org.jrebirth.core.ui.annotation.OnSwipe.SwipeType;
+import org.jrebirth.core.ui.annotation.OnAction;
+import org.jrebirth.core.ui.annotation.OnKey;
 import org.jrebirth.core.util.ClassUtility;
 
 import org.slf4j.Logger;
@@ -39,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class AnnotationEventHandler extends AbstractNamedEventHandler<Event> {
+public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventHandler<E> implements EventHandler<E> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AnnotationEventHandler.class);
@@ -121,7 +123,7 @@ public class AnnotationEventHandler extends AbstractNamedEventHandler<Event> {
             // Don't change the case for all other letters
             methodName.append(this.annotation.annotationType().getSimpleName().substring(1));
             // Append if necessary the sub type if not equals to any
-            methodName.append(annotationType == SwipeType.Any ? "" : annotationType.name());
+            methodName.append(OnKey.KeyType.Any.name().equals(annotationType.toString()) || OnAction.ActionType.Action.name().equals(annotationType.toString()) ? "" : annotationType.name());
 
             // Add suffix if handling method is named
             final String uniqueName = getAnnotationName();
