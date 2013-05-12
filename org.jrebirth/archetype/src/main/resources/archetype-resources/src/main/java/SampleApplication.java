@@ -16,6 +16,7 @@ import org.jrebirth.core.application.AbstractApplication;
 import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.sample.resources.SampleFonts;
 import ${package}.ui.SampleModel;
 
 /**

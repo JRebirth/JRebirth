@@ -1,4 +1,4 @@
-package org.jrebirth.sample;
+package org.jrebirth.sample.resources;
 
 import javafx.scene.text.Font;
 
