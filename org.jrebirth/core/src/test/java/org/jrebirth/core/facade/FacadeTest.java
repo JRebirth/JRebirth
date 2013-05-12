@@ -2,6 +2,7 @@ package org.jrebirth.core.facade;
 
 import org.jrebirth.core.application.TestApplication;
 import org.jrebirth.core.command.basic.SwitchFullScreenCommand;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;

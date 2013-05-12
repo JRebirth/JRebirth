@@ -15,7 +15,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-@Configuration(value=".-jrebirth", extension="properties", schedule=60)
+@Configuration(value=".*-jrebirth", extension="properties", schedule=60)
 public class FullConfApplication extends AbstractApplication<Pane> {
 
     private static FullConfApplication instance;
