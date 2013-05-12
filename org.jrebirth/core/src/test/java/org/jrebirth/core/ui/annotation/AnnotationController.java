@@ -71,7 +71,7 @@ public final class AnnotationController extends DefaultController<AnnotationMode
         System.out.println("SwipeRight on node " + ((Button) event.getSource()).getText());
     }
 
-    void onRotateAny(final RotateEvent event) {
+    void onRotate(final RotateEvent event) {
         System.out.println("Rotate on node " + ((Button) event.getSource()).getText());
     }
 
