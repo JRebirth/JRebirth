@@ -24,6 +24,7 @@ import java.util.List;
 
 import javafx.concurrent.Task;
 
+import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.wave.Wave;
@@ -87,10 +88,12 @@ final class ServiceTask<T> extends Task<T> {
 
     /**
      * {@inheritDoc}
+     * 
+     * @throws CoreException if return wavetype has bad API
      */
     @SuppressWarnings("unchecked")
     @Override
-    protected T call() throws WaveException {
+    protected T call() throws WaveException, CoreException {
         T res = null;
         try {
 
@@ -112,6 +115,13 @@ final class ServiceTask<T> extends Task<T> {
 
             } else {
                 final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.getWaveType());
+
+                if (((WaveTypeBase) responseWaveType).getWaveItemList().isEmpty()) {
+                    String msg = "The Return WaveType must contain at least one WaveItem to wrap the service return";
+                    LOGGER.error(msg);
+                    throw new CoreException(msg);
+                }
+
                 final WaveItem<T> waveItem = (WaveItem<T>) ((WaveTypeBase) responseWaveType).getWaveItemList().get(0);
 
                 final Wave returnWave = WaveBuilder.create()
