@@ -53,8 +53,8 @@
 }
 
 .syntaxhighlighter {
-  width: 100% !important;
-  margin: 1em 0 1em 0 !important;
+  /*width: 100% !important;*/
+  margin: 1em 1em 1em 1em !important;
   position: relative !important;
   overflow: auto !important;
   font-size: 0.95em !important;
