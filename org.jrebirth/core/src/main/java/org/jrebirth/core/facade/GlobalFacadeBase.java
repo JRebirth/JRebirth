@@ -18,10 +18,10 @@
 package org.jrebirth.core.facade;
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.jrebirth.core.application.AbstractApplication;
 import org.jrebirth.core.application.JRebirthApplication;
+import org.jrebirth.core.concurrent.JRebirthThreadPoolExecutor;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.link.Notifier;
 import org.jrebirth.core.link.NotifierBase;
@@ -87,7 +87,7 @@ public class GlobalFacadeBase implements GlobalFacade {
 
         LOGGER.trace("Create the JRebirth Thread Pool");
         // Launch the default executor
-        this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2,
+        this.executorService = new JRebirthThreadPoolExecutor(Runtime.getRuntime().availableProcessors() * 2,
                 new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(), JTP_BASE_NAME));
 
         trackEvent(org.jrebirth.core.facade.JRebirthEventType.CREATE_GLOBAL_FACADE, getApplication().getClass(), this.getClass());

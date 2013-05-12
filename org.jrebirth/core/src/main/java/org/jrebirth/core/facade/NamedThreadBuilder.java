@@ -54,7 +54,7 @@ public class NamedThreadBuilder implements ThreadFactory {
     public Thread newThread(final Runnable r) {
         final String pooledThreadName = this.baseName + this.poolIndex++;
         final Thread thread = new Thread(r, pooledThreadName);
-        thread.setUncaughtExceptionHandler(this.uncaughtExceptionHandler); // Cannot be used !!! see JRebirthThread.runNow method which will catch exceptions
+        thread.setUncaughtExceptionHandler(this.uncaughtExceptionHandler); // FIXME Cannot be used !!! see JRebirthThread.runNow method which will catch exceptions
 
         return thread;
     }
