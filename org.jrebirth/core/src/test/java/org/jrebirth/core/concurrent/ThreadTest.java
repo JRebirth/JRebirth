@@ -6,6 +6,7 @@ import junit.framework.Assert;
 
 import org.jrebirth.core.application.ApplicationTest;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-// @Ignore("JavaFX can't be run in headless mode yet")
+@Ignore("JavaFX can't be run in headless mode yet")
 public class ThreadTest extends ApplicationTest<ThreadApplication> {
 
     public ThreadTest() {
