@@ -16,7 +16,7 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor {
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JRebirthThreadPoolExecutor.class);
 
-    public JRebirthThreadPoolExecutor(int threadNumber, ThreadFactory threadFactory) {
+    public JRebirthThreadPoolExecutor(final int threadNumber, final ThreadFactory threadFactory) {
         super(threadNumber, threadNumber, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(), threadFactory);
     }
 
@@ -24,16 +24,16 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor {
      * {@inheritDoc}
      */
     @Override
-    protected void afterExecute(Runnable r, Throwable t) {
+    protected void afterExecute(final Runnable r, Throwable t) {
         super.afterExecute(r, t);
         if (t == null && r instanceof Future<?>) {
             try {
-                Object result = ((Future<?>) r).get();
-            } catch (CancellationException ce) {
+                final Object result = ((Future<?>) r).get();
+            } catch (final CancellationException ce) {
                 t = ce;
-            } catch (ExecutionException ee) {
+            } catch (final ExecutionException ee) {
                 t = ee.getCause();
-            } catch (InterruptedException ie) {
+            } catch (final InterruptedException ie) {
                 Thread.currentThread().interrupt(); // ignore/reset
             }
         }

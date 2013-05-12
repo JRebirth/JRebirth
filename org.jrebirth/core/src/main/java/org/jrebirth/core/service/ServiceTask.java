@@ -117,7 +117,7 @@ final class ServiceTask<T> extends Task<T> {
                 final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.getWaveType());
 
                 if (((WaveTypeBase) responseWaveType).getWaveItemList().isEmpty()) {
-                    String msg = "The Return WaveType must contain at least one WaveItem to wrap the service return";
+                    final String msg = "The Return WaveType must contain at least one WaveItem to wrap the service return";
                     LOGGER.error(msg);
                     throw new CoreException(msg);
                 }

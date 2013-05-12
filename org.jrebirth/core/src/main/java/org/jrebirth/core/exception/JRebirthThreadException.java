@@ -74,7 +74,7 @@ public class JRebirthThreadException extends Exception {
      * @return Returns the threadType.
      */
     Type getThreadType() {
-        return threadType;
+        return this.threadType;
     }
 
 }
