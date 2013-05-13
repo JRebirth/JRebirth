@@ -83,7 +83,7 @@ public final class StackController extends AbstractController<StackModel, StackV
 
             @Override
             public void handle(final SwipeEvent swipeEvent) {
-                getModel().callCommand(ShowPreviousSlideCommand.class);
+                getModel().callCommand(ShowNextSlideCommand.class);
                 swipeEvent.consume();
             }
         });
@@ -92,7 +92,7 @@ public final class StackController extends AbstractController<StackModel, StackV
 
             @Override
             public void handle(final SwipeEvent swipeEvent) {
-                getModel().callCommand(ShowNextSlideCommand.class);
+                getModel().callCommand(ShowPreviousSlideCommand.class);
                 swipeEvent.consume();
             }
         });
