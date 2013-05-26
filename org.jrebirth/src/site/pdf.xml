@@ -6,18 +6,19 @@
 		<author>Sébastien Bordes</author>
 	</meta>
 
-	<toc name="Table Of Content">
-		<item name="Installation" ref="Support.html" />
-		<!-- <item name="Contribute" ref="contribute.html" /> -->
-	</toc>
 
-<!-- 	<cover>
+	<toc name="Table Of Content">
+		<item name="Introduction" ref="doc/Controllers.xml" />
+	</toc>
+<!--
+ 	<cover>
 		<coverTitle>${project.name}</coverTitle>
 		<coverSubTitle>v. ${project.version}</coverSubTitle>
-		<coverType>User Guide</coverType>
+		<coverType>Documentation</coverType>
 		<projectName>${project.name}</projectName>
-		<projectLogo>images/JRebirth_Logo_80px.png</projectLogo>
+ 		<projectLogo>images/JRebirth_Title.png</projectLogo>
 		<companyName>JRebirth</companyName>
-		<companyLogo>images/JRebirth_Logo_80px.png</companyLogo>
-	</cover> -->
+		<companyLogo>images/JRebirth_Title.png</companyLogo> 
+	</cover>
+	-->
 </document>
