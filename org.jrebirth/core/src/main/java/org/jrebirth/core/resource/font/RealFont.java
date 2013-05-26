@@ -46,4 +46,14 @@ public class RealFont extends AbstractBaseFont {
     public double size() {
         return this.size;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    public static RealFont parseFont(final String fontString) {
+
+        return new RealFont(new CustomFontName(""), 0.0);
+    }
 }
