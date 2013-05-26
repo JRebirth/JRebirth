@@ -39,6 +39,7 @@ import org.jrebirth.core.ui.annotation.AutoHandler;
 import org.jrebirth.core.ui.annotation.AutoHandler.CallbackObject;
 import org.jrebirth.core.ui.annotation.EnumEventType;
 import org.jrebirth.core.ui.annotation.OnFinished;
+import org.jrebirth.core.ui.annotation.RootNodeId;
 import org.jrebirth.core.ui.handler.AnnotationEventHandler;
 import org.jrebirth.core.util.ClassUtility;
 
@@ -164,6 +165,10 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             // by default use the controller object as callback object
             this.callbackObject = this.getController();
         }
+
+        // Find the RootNodeId annotation
+        final RootNodeId rni = ClassUtility.extractAnnotation(this.getClass(), RootNodeId.class);
+        getRootNode().setId((rni != null && !rni.value().isEmpty()) ? rni.value() : this.getClass().getSimpleName());
 
     }
 
