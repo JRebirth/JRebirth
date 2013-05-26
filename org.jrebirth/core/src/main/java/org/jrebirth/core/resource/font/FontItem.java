@@ -22,7 +22,7 @@ import javafx.scene.text.Font;
 import org.jrebirth.core.resource.ResourceItem;
 
 /**
- * The class <strong>FontEnum</strong>.
+ * The class <strong>FontItem</strong>.
  * 
  * @author Sébastien Bordes
  */

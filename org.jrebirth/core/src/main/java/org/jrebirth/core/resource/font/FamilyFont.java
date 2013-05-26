@@ -128,4 +128,14 @@ public class FamilyFont extends AbstractBaseFont {
     FontWeight weight() {
         return this.weight;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    public static FamilyFont parseFont(final String fontString) {
+
+        return new FamilyFont("", 0.0);
+    }
 }

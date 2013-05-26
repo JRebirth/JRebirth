@@ -18,6 +18,10 @@
 package org.jrebirth.core.resource.parameter;
 
 import org.jrebirth.core.resource.AbstractBaseParams;
+import org.jrebirth.core.resource.font.CustomFontName;
+import org.jrebirth.core.resource.font.FamilyFont;
+import org.jrebirth.core.resource.font.FontName;
+import org.jrebirth.core.resource.font.RealFont;
 
 /**
  * The interface <strong>ObjectParameter</strong>.
@@ -85,8 +89,26 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
         Object res = null;
         if (this.object instanceof String) {
             res = serializedObject;
+        } else if (this.object instanceof Character) {
+            res = Character.valueOf(serializedObject.charAt(0));
+        } else if (this.object instanceof Byte) {
+            res = Byte.parseByte(serializedObject);
+        } else if (this.object instanceof Short) {
+            res = Short.parseShort(serializedObject);
         } else if (this.object instanceof Integer) {
             res = Integer.parseInt(serializedObject);
+        } else if (this.object instanceof Long) {
+            res = Long.parseLong(serializedObject);
+        } else if (this.object instanceof Float) {
+            res = Float.parseFloat(serializedObject);
+        } else if (this.object instanceof Double) {
+            res = Double.parseDouble(serializedObject);
+        } else if (this.object instanceof FontName) {
+            res = new CustomFontName(serializedObject);
+        } else if (this.object instanceof RealFont) {
+            res = new CustomFontName(serializedObject);
+        } else if (this.object instanceof FamilyFont) {
+            res = new CustomFontName(serializedObject);
         }
 
         return res;
