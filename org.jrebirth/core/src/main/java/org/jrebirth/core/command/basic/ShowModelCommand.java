@@ -18,7 +18,6 @@
 package org.jrebirth.core.command.basic;
 
 import org.jrebirth.core.command.DefaultMultiCommand;
-import org.jrebirth.core.wave.Wave;
 
 /**
  * The class <strong>ShowModelCommand</strong>.
@@ -42,14 +41,6 @@ public class ShowModelCommand extends DefaultMultiCommand {
         addCommandClass(PrepareModelCommand.class);
         addCommandClass(AttachModelCommand.class);
 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void processAction(final Wave wave) {
-        // Nothing to do yet
     }
 
 }

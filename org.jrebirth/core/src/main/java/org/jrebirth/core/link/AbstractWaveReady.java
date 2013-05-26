@@ -40,6 +40,7 @@ import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveBase;
+import org.jrebirth.core.wave.WaveBean;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveGroup;
 import org.jrebirth.core.wave.WaveItem;
@@ -247,6 +248,14 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
+    public final void callCommand(final Class<? extends Command> commandClass, final WaveBean waveBean) {
+        sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, waveBean));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public final void callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data) {
         sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, data));
     }
@@ -303,6 +312,30 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         for (final WaveData<?> wd : waveData) {
             wave.addData(wd);
         }
+
+        // Track wave creation
+        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
+
+        return wave;
+    }
+
+    /**
+     * Build a wave object with its dedicated WaveBean.
+     * 
+     * @param waveGroup the group of the wave
+     * @param waveType the type of the wave
+     * @param relatedClass the related class if any
+     * @param waveBean the wave bean that holds all required wave data
+     * 
+     * @return the wave built
+     */
+    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveBean waveBean) {
+        final Wave wave = new WaveBase();
+        wave.setWaveGroup(waveGroup);
+        wave.setWaveType(waveType);
+        wave.setRelatedClass(relatedClass);
+
+        wave.linkWaveBean(waveBean);
 
         // Track wave creation
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
