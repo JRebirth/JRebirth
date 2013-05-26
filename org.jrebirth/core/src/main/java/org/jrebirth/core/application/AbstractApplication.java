@@ -18,6 +18,7 @@
 package org.jrebirth.core.application;
 
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.net.URL;
 import java.util.List;
 
 import javafx.application.Application;
@@ -282,7 +283,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * @return the external form of the css file
      */
     protected String loadCSS(final String cssFileName) {
-        return Thread.currentThread().getContextClassLoader().getResource(cssFileName).toExternalForm();
+        final URL cssResource = Thread.currentThread().getContextClassLoader().getResource(cssFileName);
+        return cssResource == null ? null : cssResource.toExternalForm();
     }
 
     /**
@@ -292,7 +294,13 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * @param cssFileName the raw path to css file
      */
     protected void addCSS(final Scene scene, final String cssFileName) {
-        scene.getStylesheets().add(loadCSS(cssFileName));
+
+        final String cssPath = loadCSS(cssFileName);
+        if (cssPath != null) {
+            scene.getStylesheets().add(cssPath);
+        } else {
+            LOGGER.error("Impossible to load CSS: " + cssFileName);
+        }
     }
 
     /**
