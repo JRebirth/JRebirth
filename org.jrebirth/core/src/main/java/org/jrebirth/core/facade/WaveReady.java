@@ -22,6 +22,7 @@ import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBean;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveType;
 
@@ -103,6 +104,16 @@ public interface WaveReady {
      * @param data the data to transport
      */
     void callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data);
+
+    /**
+     * Send a wave used to call a command.
+     * 
+     * The command will be called from JRebirthThread and could execute itself from another thread.
+     * 
+     * @param commandClass the command class to call
+     * @param waveBean the WaveBean that holds all required wave data
+     */
+    void callCommand(final Class<? extends Command> commandClass, final WaveBean waveBean);
 
     /**
      * Send a wave used to return data from a service.
