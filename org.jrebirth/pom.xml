@@ -361,12 +361,6 @@
 				<version>2.6</version>
 			</plugin>
 
-			<!-- <plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.6.2.201302030002</version>
-			</plugin> -->
-
 <!-- 			<plugin>
 				<groupId>org.codehaus.sonar-plugins</groupId>
 				<artifactId>maven-report</artifactId>
