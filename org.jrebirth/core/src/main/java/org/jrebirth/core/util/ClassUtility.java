@@ -18,6 +18,7 @@
 package org.jrebirth.core.util;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -76,6 +77,7 @@ public final class ClassUtility {
      * @throws CoreException if the instantiation fails
      */
     public static Object buildGenericType(final Class<?> mainClass, final int superTypeIndex, final Object... parameters) throws CoreException {
+        Class<?> genericClass = null;
         try {
 
             // Copy parameters type to find the right constructor
@@ -87,17 +89,40 @@ public final class ClassUtility {
                 i++;
             }
 
-            final Class<?> genericClass = getGenericClass(mainClass, superTypeIndex);
+            genericClass = getGenericClass(mainClass, superTypeIndex);
 
             // Find the right constructor and use arguments to create a new
             // instance
-            return genericClass.getConstructor(parameterTypes).newInstance(parameters);
+            final Constructor<?> constructor = getConstructor(genericClass, parameterTypes);
 
-        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+            return constructor.newInstance(parameters);
+
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | SecurityException e) {
-            final String message = "Impossible to build the dedicated " + superTypeIndex + " th type of the class " + mainClass.getName();
+            final String message = genericClass == null ?
+                    "Impossible to build the dedicated " + superTypeIndex + " th type of the class " + mainClass.getName()
+                    :
+                    "Impossible to build the " + genericClass.getName() + " object for the class " + mainClass.getName();
             LOGGER.error(message, e);
             throw new CoreException(message, e);
+        }
+    }
+
+    /**
+     * Retrieve the constructor of a Type
+     * 
+     * @param genericClass the type of the object
+     * @param parameterTypes an array of parameters' type
+     * 
+     * @return the right constructor that matchers parameters
+     */
+    private static Constructor<?> getConstructor(final Class<?> genericClass, final Class<?>[] parameterTypes) {
+        try {
+            return genericClass.getConstructor(parameterTypes);
+        } catch (final NoSuchMethodException e) {
+            return genericClass.getConstructors()[0];
+        } catch (final SecurityException e) {
+            throw e;
         }
     }
 
