@@ -130,13 +130,13 @@ public class DisplayModelWaveBean implements WaveBean {
      * @return Returns the appendChild.
      */
     public boolean isAppendChild() {
-        return appendChild;
+        return this.appendChild;
     }
 
     /**
      * @param appendChild The appendChild to set.
      */
-    public void setAppendChild(boolean appendChild) {
+    public void setAppendChild(final boolean appendChild) {
         this.appendChild = appendChild;
     }
 
