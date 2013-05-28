@@ -63,7 +63,7 @@
 				<p>Hereafter you will find an example of MultiCommand used to display a model UI:</p>
 
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/ShowModelCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/showmodel/ShowModelCommand.java" />
 					<!-- <param name="snippet" value="aj:..ShowModelCommand" /> -->
 
 				</macro>
@@ -338,7 +338,7 @@
 					class :
 				</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/AttachModelCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/showmodel/AttachModelCommand.java" />
 					<param name="snippet" value="re:extends DefaultUICommand" />
 				</macro>
 
@@ -361,7 +361,7 @@
 					class :
 				</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/PrepareModelCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/showmodel/PrepareModelCommand.java" />
 					<param name="snippet" value="re:extends DefaultPoolCommand" />
 				</macro>
 
