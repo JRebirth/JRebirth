@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.jrebirth.core.application.JRebirthApplication;
 import org.jrebirth.core.command.basic.ChainWaveCommand;
-import org.jrebirth.core.command.basic.ShowModelWaveBuilder;
+import org.jrebirth.core.command.basic.showmodel.ShowModelWaveBuilder;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.facade.GlobalFacade;

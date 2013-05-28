@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.core.command.Command;
-import org.jrebirth.core.command.basic.ShowModelWaveBuilder;
+import org.jrebirth.core.command.basic.showmodel.ShowModelWaveBuilder;
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.exception.JRebirthThreadException;

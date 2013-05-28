@@ -20,6 +20,7 @@ package org.jrebirth.core.command.basic;
 import javafx.scene.Node;
 
 import org.jrebirth.core.command.DefaultUICommand;
+import org.jrebirth.core.command.basic.showmodel.DisplayModelWaveBean;
 import org.jrebirth.core.wave.Wave;
 
 import org.slf4j.Logger;
