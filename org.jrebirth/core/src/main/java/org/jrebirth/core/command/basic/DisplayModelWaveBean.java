@@ -45,6 +45,9 @@ public class DisplayModelWaveBean implements WaveBean {
     /** The Children list of a parent pane. */
     private ObservableList<Node> chidrenPlaceHolder;
 
+    /** Flag that indicates if the child node must be added at the end (true) or at the beginning (false). */
+    private boolean appendChild = true;
+
     /** The created node. */
     private Node createdNode;
 
@@ -121,6 +124,20 @@ public class DisplayModelWaveBean implements WaveBean {
      */
     public void setChidrenPlaceHolder(final ObservableList<Node> chidrenPlaceHolder) {
         this.chidrenPlaceHolder = chidrenPlaceHolder;
+    }
+
+    /**
+     * @return Returns the appendChild.
+     */
+    public boolean isAppendChild() {
+        return appendChild;
+    }
+
+    /**
+     * @param appendChild The appendChild to set.
+     */
+    public void setAppendChild(boolean appendChild) {
+        this.appendChild = appendChild;
     }
 
     /**
