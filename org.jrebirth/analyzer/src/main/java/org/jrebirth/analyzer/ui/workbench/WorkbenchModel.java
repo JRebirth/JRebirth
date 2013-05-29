@@ -17,7 +17,7 @@
  */
 package org.jrebirth.analyzer.ui.workbench;
 
-import org.jrebirth.core.ui.AbstractModel;
+import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -25,7 +25,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public final class WorkbenchModel extends AbstractModel<WorkbenchModel, WorkbenchView> {
+public final class WorkbenchModel extends DefaultModel<WorkbenchModel, WorkbenchView> {
 
     /**
      * {@inheritDoc}
