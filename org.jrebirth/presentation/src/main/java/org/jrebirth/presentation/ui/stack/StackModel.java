@@ -25,13 +25,14 @@ import javafx.animation.ParallelTransitionBuilder;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 
-import org.jrebirth.core.ui.AbstractModel;
+import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.presentation.model.Slide;
 import org.jrebirth.presentation.service.PresentationService;
 import org.jrebirth.presentation.ui.base.SlideModel;
 import org.jrebirth.presentation.ui.base.SlideStep;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * @author Sébastien Bordes
  * 
  */
-public final class StackModel extends AbstractModel<StackModel, StackView> {
+public final class StackModel extends DefaultModel<StackModel, StackView> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(StackModel.class);

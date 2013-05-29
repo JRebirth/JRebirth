@@ -17,7 +17,7 @@
  */
 package ui;
 
-import org.jrebirth.core.ui.AbstractModel;
+import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.transition.command.slicer.NodeSlicerCommand;
 import org.jrebirth.transition.slicer.RandomFadingService;
@@ -29,7 +29,7 @@ import org.jrebirth.transition.slicer.SlidingDoorService;
  * @author Sébastien Bordes
  * 
  */
-public final class TransitionModel extends AbstractModel<TransitionModel, TransitionView> {
+public final class TransitionModel extends DefaultModel<TransitionModel, TransitionView> {
 
     private NodeSlicerCommand imageSlicerService;
 
