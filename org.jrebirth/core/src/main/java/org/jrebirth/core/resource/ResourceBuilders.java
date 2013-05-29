@@ -19,6 +19,7 @@ package org.jrebirth.core.resource;
 
 import org.jrebirth.core.resource.color.ColorBuilder;
 import org.jrebirth.core.resource.font.FontBuilder;
+import org.jrebirth.core.resource.image.ImageBuilder;
 import org.jrebirth.core.resource.parameter.ParameterBuilder;
 
 /**
@@ -36,5 +37,8 @@ public interface ResourceBuilders {
 
     /** The factory used to manage fonts. */
     FontBuilder FONT_BUILDER = new FontBuilder();
+
+    /** The factory used to manage image. */
+    ImageBuilder IMAGE_BUILDER = new ImageBuilder();
 
 }

@@ -393,6 +393,10 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     }
 
     /**
+     * FIXME remove IT !!!
+     * 
+     * MUST ADD a dynamic resource implementation
+     * 
      * Load an image.
      * 
      * @param resourceName the name of the image, path must be separated by '/'
