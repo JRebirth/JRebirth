@@ -80,6 +80,17 @@ public abstract class AbstractFXMLModel<M extends Model> extends AbstractBaseMod
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected final void bind() {
+        // Auto bound !
+
+        // Do custom binding stuff
+        customBind();
+    }
+
+    /**
      * Pre init.
      */
     protected abstract void fxmlPreInitialize();

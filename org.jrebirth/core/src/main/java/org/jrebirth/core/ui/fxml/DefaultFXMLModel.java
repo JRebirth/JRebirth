@@ -109,6 +109,15 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
      * {@inheritDoc}
      */
     @Override
+    protected void customBind() {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void customInitializeInnerModels() {
         // Nothing to do yet
     }
@@ -120,4 +129,5 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
     protected void processAction(final Wave wave) {
         // Nothing to do yet
     }
+
 }
