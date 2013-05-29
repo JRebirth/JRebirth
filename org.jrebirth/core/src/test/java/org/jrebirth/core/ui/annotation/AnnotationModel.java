@@ -17,7 +17,7 @@
  */
 package org.jrebirth.core.ui.annotation;
 
-import org.jrebirth.core.ui.AbstractModel;
+import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -25,7 +25,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public final class AnnotationModel extends AbstractModel<AnnotationModel, AnnotationView> {
+public final class AnnotationModel extends DefaultModel<AnnotationModel, AnnotationView> {
 
     /**
      * {@inheritDoc}

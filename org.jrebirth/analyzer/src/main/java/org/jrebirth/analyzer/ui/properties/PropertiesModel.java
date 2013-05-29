@@ -19,7 +19,7 @@ package org.jrebirth.analyzer.ui.properties;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.facade.JRebirthEvent;
-import org.jrebirth.core.ui.AbstractModel;
+import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -27,7 +27,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public final class PropertiesModel extends AbstractModel<PropertiesModel, PropertiesView> {
+public final class PropertiesModel extends DefaultModel<PropertiesModel, PropertiesView> {
 
     /**
      * {@inheritDoc}

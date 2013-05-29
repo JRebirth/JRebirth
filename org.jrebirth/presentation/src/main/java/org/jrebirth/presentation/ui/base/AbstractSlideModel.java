@@ -34,7 +34,7 @@ import javafx.scene.effect.MotionBlur;
 import javafx.scene.effect.MotionBlurBuilder;
 import javafx.util.Duration;
 
-import org.jrebirth.core.ui.AbstractModel;
+import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.presentation.model.AnimationType;
 import org.jrebirth.presentation.model.Slide;
@@ -49,7 +49,7 @@ import org.jrebirth.presentation.model.SlideContent;
  * @param <V> the SlideView class
  * @param <S> the SlideStep to use
  */
-public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, V extends AbstractSlideView<?, ?, ?>, S extends SlideStep> extends AbstractModel<M, V> implements SlideModel<S> {
+public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, V extends AbstractSlideView<?, ?, ?>, S extends SlideStep> extends DefaultModel<M, V> implements SlideModel<S> {
 
     /** The slide data object. */
     private Slide slide;
