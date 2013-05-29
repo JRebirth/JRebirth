@@ -52,6 +52,15 @@ public class DefaultModel<M extends Model, V extends View<?, ?, ?>> extends Abst
      * {@inheritDoc}
      */
     @Override
+    protected void customBind() {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void customShowView() {
         // Nothing to do generic
     }

@@ -53,6 +53,20 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
 
         // Do custom stuff
         customInitialize();
+
+        // Bind Object properties to view widget ones
+        bind();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected final void bind() {
+        // Auto bound !
+
+        // Do custom binding stuff
+        customBind();
     }
 
     /**
