@@ -36,6 +36,14 @@ public class SampleModel extends AbstractModel<SampleModel, SampleView> {
      * {@inheritDoc}
      */
     @Override
+    protected void customBind() {
+        // Put the code to manage model object binding (if any)
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void processAction(final Wave wave) {
         // Process a wave action, you must listen the wave type before
     }
