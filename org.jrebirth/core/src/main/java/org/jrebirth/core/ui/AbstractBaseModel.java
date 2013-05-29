@@ -81,6 +81,16 @@ public abstract class AbstractBaseModel<M extends Model, V extends View<?, ?, ?>
     protected abstract void customInitialize();
 
     /**
+     * Bind current object to view's widget.
+     */
+    protected abstract void bind();
+
+    /**
+     * Bind method to implement for adding custom bindings.
+     */
+    protected abstract void customBind();
+
+    /**
      * Initialize the included models.
      */
     protected final void initializeInnerModels() {

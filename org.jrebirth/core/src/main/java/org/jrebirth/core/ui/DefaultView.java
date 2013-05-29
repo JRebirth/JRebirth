@@ -48,7 +48,7 @@ public class DefaultView<M extends Model, N extends Node, C extends Controller<?
      */
     @Override
     public void doStart() {
-        // Nothing to do generic
+        // Custom code to process when the view is displayed the first time
     }
 
     /**
@@ -56,7 +56,7 @@ public class DefaultView<M extends Model, N extends Node, C extends Controller<?
      */
     @Override
     public void doReload() {
-        // Nothing to do generic
+        // Custom code to process when the view is displayed the 1+n time
     }
 
     /**
@@ -64,7 +64,7 @@ public class DefaultView<M extends Model, N extends Node, C extends Controller<?
      */
     @Override
     public void doHide() {
-        // Nothing to do generic
+        // Custom code to process when the view is hidden
     }
 
     /**
@@ -72,7 +72,7 @@ public class DefaultView<M extends Model, N extends Node, C extends Controller<?
      */
     @Override
     protected void customInitializeComponents() {
-        // Nothing to do generic
+        // Custom code used to update the root node and add some children
     }
 
 }
