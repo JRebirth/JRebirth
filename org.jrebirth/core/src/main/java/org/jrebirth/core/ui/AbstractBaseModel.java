@@ -75,6 +75,13 @@ public abstract class AbstractBaseModel<M extends Model, V extends View<?, ?, ?>
     }
 
     /**
+     * Initialize the model.
+     * 
+     * @throws CoreException if the creation of the view fails
+     */
+    protected abstract void initInternalModel() throws CoreException;
+
+    /**
      * Initialize method to implement for adding custom processes.
      * 
      * This method is a hook to manage generic code before initializing current model.
@@ -82,13 +89,6 @@ public abstract class AbstractBaseModel<M extends Model, V extends View<?, ?, ?>
      * You must implement the {@link #initModel()} method to setup your model.
      */
     protected abstract void initModel();
-
-    /**
-     * Initialize the model.
-     * 
-     * @throws CoreException if the creation of the view fails
-     */
-    protected abstract void initInternalModel() throws CoreException;
 
     /**
      * Initialize the included models.
