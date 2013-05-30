@@ -36,7 +36,7 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
      * {@inheritDoc}
      */
     @Override
-    protected void customInitialize() {
+    protected void initModel() {
         listen(EditorWaves.DO_SELECT_EVENT);
     }
 
@@ -75,21 +75,21 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
      */
     public void show() {
         getView().setStyle(getEventModel().getEventType()); // TODO remove
-        getView().doStart();
+        getView().start();
     }
 
     /**
      * TODO To complete.
      */
     public void hide() {
-        getView().doHide();
+        getView().hide();
     }
 
     /**
      * TODO To complete.
      */
     public void destroy() {
-        getView().doHide();
+        getView().hide();
     }
 
     /**

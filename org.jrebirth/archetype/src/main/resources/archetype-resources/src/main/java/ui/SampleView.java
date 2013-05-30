@@ -52,7 +52,7 @@ public class SampleView extends AbstractView<SampleModel, BorderPane, SampleCont
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeComponents() {
+    protected void initView() {
 
         this.defaultCommand = new Button("Trigger a default Command into JIT");
         this.uiCommand = new Button("Trigger an UI Command into JAT");
@@ -75,7 +75,7 @@ public class SampleView extends AbstractView<SampleModel, BorderPane, SampleCont
      * {@inheritDoc}
      */
     @Override
-    public void doStart() {
+    public void start() {
         // Custom code to process when the view is displayed the first time
     }
 
@@ -83,7 +83,7 @@ public class SampleView extends AbstractView<SampleModel, BorderPane, SampleCont
      * {@inheritDoc}
      */
     @Override
-    public void doReload() {
+    public void reload() {
         // Custom code to process when the view is displayed the 1+n time
     }
 
@@ -91,7 +91,7 @@ public class SampleView extends AbstractView<SampleModel, BorderPane, SampleCont
      * {@inheritDoc}
      */
     @Override
-    public void doHide() {
+    public void hide() {
         // Custom code to process when the view is hidden
     }
 

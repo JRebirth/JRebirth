@@ -65,7 +65,7 @@ public final class StackModel extends DefaultModel<StackModel, StackView> {
      * {@inheritDoc}
      */
     @Override
-    protected void customInitialize() {
+    protected void initModel() {
         // Load the Presentation content
         final List<Slide> slideList = getPresentationService().getPresentation().getSlides().getSlide();
         if (!slideList.isEmpty()) {
@@ -78,7 +78,7 @@ public final class StackModel extends DefaultModel<StackModel, StackView> {
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeInnerModels() {
+    protected void initInnerModels() {
         // Nothing to do yet
     }
 
@@ -86,7 +86,7 @@ public final class StackModel extends DefaultModel<StackModel, StackView> {
      * {@inheritDoc}
      */
     @Override
-    protected void customShowView() {
+    protected void showView() {
         // Nothing to do generic
     }
 
@@ -94,7 +94,7 @@ public final class StackModel extends DefaultModel<StackModel, StackView> {
      * {@inheritDoc}
      */
     @Override
-    protected void customHideView() {
+    protected void hideView() {
         // Nothing to do generic
     }
 
@@ -221,10 +221,10 @@ public final class StackModel extends DefaultModel<StackModel, StackView> {
 
                 // FIX ME NOT APPROPRIATED !!!
                 if (previousSlideModel != null) {
-                    previousSlideModel.hideView();
+                    previousSlideModel.doHideView(null);
                 }
                 if (selectedSlideModel != null) {
-                    selectedSlideModel.showView();
+                    selectedSlideModel.doShowView(null);
                 }
 
                 // Hide all other slides

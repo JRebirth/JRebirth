@@ -54,7 +54,7 @@ public final class PropertiesView extends DefaultView<PropertiesModel, VBox, Pro
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeComponents() {
+    protected void initView() {
 
         getRootNode().setMinWidth(200);
 

@@ -49,7 +49,7 @@ public final class BallController extends DefaultController<BallModel, BallView>
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeEventHandlers() throws CoreException {
+    protected void initEventHandlers() throws CoreException {
 
         // Register mouse clicked handler
         getView().getRootNode().setOnMouseClicked(getHandler(MouseEvent.MOUSE_CLICKED));

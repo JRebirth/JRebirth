@@ -90,7 +90,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      * {@inheritDoc}
      */
     @Override
-    protected void customInitialize() {
+    protected void initModel() {
 
         // Load the default slide step (if exists)
         if (getStepList().size() > 0) {
@@ -102,7 +102,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeInnerModels() {
+    protected void initInnerModels() {
         // Nothing to do generic
         getClass();
     }
@@ -111,7 +111,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      * {@inheritDoc}
      */
     @Override
-    protected void customShowView() {
+    protected void showView() {
         // Nothing to do generic
         getClass();
     }
@@ -120,7 +120,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      * {@inheritDoc}
      */
     @Override
-    protected void customHideView() {
+    protected void hideView() {
         // Nothing to do generic
         getClass();
     }

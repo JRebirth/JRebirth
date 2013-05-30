@@ -46,7 +46,7 @@ public final class AnnotationController extends DefaultController<AnnotationMode
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeEventHandlers() throws CoreException {
+    protected void initEventHandlers() throws CoreException {
         // Nothing to do yet
 
     }

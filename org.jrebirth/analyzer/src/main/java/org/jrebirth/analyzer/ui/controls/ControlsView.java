@@ -67,7 +67,7 @@ public final class ControlsView extends DefaultView<ControlsModel, HBox, Control
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeComponents() {
+    protected void initView() {
 
         this.openButton = new Button("Open");
         HBox.setHgrow(this.openButton, Priority.ALWAYS);

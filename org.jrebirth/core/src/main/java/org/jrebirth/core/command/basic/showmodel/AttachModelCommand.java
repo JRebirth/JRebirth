@@ -64,7 +64,7 @@ public class AttachModelCommand extends DefaultUICommand {
             // Try to give focus to the new node added (Could be managed by a boolean ??)
             // createdNode.requestFocus();
 
-            getWaveBean(wave).getModel().showView();
+            getWaveBean(wave).getModel().doShowView(wave);
         }
     }
 

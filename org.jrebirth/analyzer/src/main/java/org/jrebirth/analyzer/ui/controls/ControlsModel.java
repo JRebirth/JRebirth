@@ -36,7 +36,7 @@ public final class ControlsModel extends DefaultModel<ControlsModel, ControlsVie
      * {@inheritDoc}
      */
     @Override
-    protected void customInitialize() {
+    protected void initModel() {
         listen(LoadEdtFileService.RE_EVENTS_LOADED);
         listen(EditorWaves.DO_UNLOAD);
     }

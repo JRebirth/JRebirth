@@ -63,7 +63,7 @@ public abstract class AbstractFXMLModel<M extends Model> extends AbstractBaseMod
      * {@inheritDoc}
      */
     @Override
-    protected final void initialize() throws CoreException {
+    protected final void initInternalModel() throws CoreException {
 
         fxmlPreInitialize();
 
@@ -76,18 +76,18 @@ public abstract class AbstractFXMLModel<M extends Model> extends AbstractBaseMod
         }
 
         // Do custom stuff
-        customInitialize();
+        initModel();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected final void bind() {
+    protected final void bindInternal() {
         // Auto bound !
 
         // Do custom binding stuff
-        customBind();
+        bind();
     }
 
     /**
@@ -106,16 +106,26 @@ public abstract class AbstractFXMLModel<M extends Model> extends AbstractBaseMod
     /**
      * Perform show view.
      * 
+     * Method handler for Wave JRebirthWaves.SHOW_VIEW
+     * 
      * @param wave the wave that trigger the action
      */
-    public abstract void performShowView(final Wave wave);
+    @Override
+    public final void doShowView(final Wave wave) {
+        showInternalView();
+    }
 
     /**
      * Perform hide view.
      * 
+     * Method handler for Wave JRebirthWaves.HIDE_VIEW
+     * 
      * @param wave the wave that trigger the action
      */
-    public abstract void performHideView(final Wave wave);
+    @Override
+    public final void doHideView(final Wave wave) {
+        hideInternalView();
+    }
 
     /**
      * {@inheritDoc}

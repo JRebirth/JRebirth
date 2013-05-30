@@ -55,7 +55,7 @@ public abstract class AbstractSimpleModel extends AbstractWaveReady<Model> imple
     protected void prepareView() throws CoreException {
         // Model and InnerModels are OK, let's prepare the view
         if (getView() != null) {
-            getView().doPrepare();
+            getView().prepare();
         }
     }
 

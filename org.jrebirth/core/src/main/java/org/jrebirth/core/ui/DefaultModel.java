@@ -36,7 +36,7 @@ public class DefaultModel<M extends Model, V extends View<?, ?, ?>> extends Abst
      * {@inheritDoc}
      */
     @Override
-    protected void customInitialize() {
+    protected void initModel() {
         // Nothing to do generic
     }
 
@@ -44,7 +44,7 @@ public class DefaultModel<M extends Model, V extends View<?, ?, ?>> extends Abst
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeInnerModels() {
+    protected void initInnerModels() {
         // Nothing to do generic
     }
 
@@ -52,7 +52,7 @@ public class DefaultModel<M extends Model, V extends View<?, ?, ?>> extends Abst
      * {@inheritDoc}
      */
     @Override
-    protected void customBind() {
+    protected void bind() {
         // Nothing to do yet
 
     }
@@ -61,7 +61,7 @@ public class DefaultModel<M extends Model, V extends View<?, ?, ?>> extends Abst
      * {@inheritDoc}
      */
     @Override
-    protected void customShowView() {
+    protected void showView() {
         // Nothing to do generic
     }
 
@@ -69,7 +69,7 @@ public class DefaultModel<M extends Model, V extends View<?, ?, ?>> extends Abst
      * {@inheritDoc}
      */
     @Override
-    protected void customHideView() {
+    protected void hideView() {
         // Nothing to do generic
     }
 

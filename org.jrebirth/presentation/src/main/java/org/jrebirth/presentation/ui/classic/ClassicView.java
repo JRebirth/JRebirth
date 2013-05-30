@@ -51,20 +51,4 @@ public final class ClassicView extends AbstractTemplateView<ClassicModel, Anchor
         return buildDefaultContent(getModel().getDefaultContent());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void doHide() {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void doStart() {
-        // Nothing to do yet
-    }
-
 }

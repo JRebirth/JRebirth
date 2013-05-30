@@ -49,7 +49,7 @@ public final class ControlsController extends DefaultController<ControlsModel, C
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeEventHandlers() throws CoreException {
+    protected void initEventHandlers() throws CoreException {
 
         linkCommand(getView().getOpenButton(), MouseEvent.MOUSE_CLICKED, OpenEventTrackerFileCommand.class, LinkedCallback.CHECK_MOUSE_SINGLE_CLICK);
 

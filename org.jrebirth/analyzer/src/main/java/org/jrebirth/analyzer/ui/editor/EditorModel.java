@@ -54,7 +54,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * {@inheritDoc}
      */
     @Override
-    protected void customInitialize() {
+    protected void initModel() {
 
         listen(LoadEdtFileService.RE_EVENTS_LOADED);
 

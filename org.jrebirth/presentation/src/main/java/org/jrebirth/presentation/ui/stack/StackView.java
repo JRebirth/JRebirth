@@ -50,7 +50,7 @@ public final class StackView extends AbstractView<StackModel, StackPane, StackCo
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeComponents() {
+    protected void initView() {
 
         getRootNode().setId("SlideStack");
 
@@ -78,7 +78,7 @@ public final class StackView extends AbstractView<StackModel, StackPane, StackCo
      * {@inheritDoc}
      */
     @Override
-    public void doStart() {
+    public void start() {
         // Nothing to do yet
     }
 
@@ -86,7 +86,7 @@ public final class StackView extends AbstractView<StackModel, StackPane, StackCo
      * {@inheritDoc}
      */
     @Override
-    public void doHide() {
+    public void hide() {
         // Nothing to do yet
 
     }
@@ -95,7 +95,7 @@ public final class StackView extends AbstractView<StackModel, StackPane, StackCo
      * {@inheritDoc}
      */
     @Override
-    public void doReload() {
+    public void reload() {
         // Nothing to do yet
 
     }

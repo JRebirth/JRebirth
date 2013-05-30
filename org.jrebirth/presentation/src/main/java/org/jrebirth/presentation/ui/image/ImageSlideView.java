@@ -82,7 +82,7 @@ public final class ImageSlideView extends
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeComponents() {
+    protected void initView() {
 
         this.image = loadImage(getModel().getImage());
 
@@ -108,7 +108,7 @@ public final class ImageSlideView extends
      * {@inheritDoc}
      */
     @Override
-    public void doStart() {
+    public void start() {
 
         if (getModel().getSlide().getShowAnimation() != null && AnimationType.TILE_IN == getModel().getSlide().getShowAnimation()) {
             for (final Node n : getRootNode().getChildren()) {
@@ -210,7 +210,7 @@ public final class ImageSlideView extends
      * {@inheritDoc}
      */
     @Override
-    public void doReload() {
+    public void reload() {
         // Nothing to do yet
     }
 
@@ -218,7 +218,7 @@ public final class ImageSlideView extends
      * {@inheritDoc}
      */
     @Override
-    public void doHide() {
+    public void hide() {
         // Nothing to do yet
     }
 

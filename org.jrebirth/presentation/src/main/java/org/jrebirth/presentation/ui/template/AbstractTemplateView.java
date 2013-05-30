@@ -142,7 +142,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeComponents() {
+    protected void initView() {
 
         // getRootNode().setPrefSize(1010, 750);
         // getRootNode().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
@@ -223,7 +223,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * {@inheritDoc}
      */
     @Override
-    public void doReload() {
+    public void reload() {
 
         ParallelTransitionBuilder.create().children(
 

@@ -35,7 +35,8 @@ public class DefaultController<M extends Model, V extends View<M, ?, ?>> extends
      * Default Constructor.
      * 
      * @param view the view controlled
-     * @throws CoreException if an error occurred while initialisation
+     * 
+     * @throws CoreException if an error occurred while initialization
      */
     public DefaultController(final V view) throws CoreException {
         super(view);
@@ -45,7 +46,7 @@ public class DefaultController<M extends Model, V extends View<M, ?, ?>> extends
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeEventAdapters() throws CoreException {
+    protected void initEventAdapters() throws CoreException {
         // Nothing to do generic
     }
 
@@ -53,7 +54,7 @@ public class DefaultController<M extends Model, V extends View<M, ?, ?>> extends
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeEventHandlers() throws CoreException {
+    protected void initEventHandlers() throws CoreException {
         // Nothing to do generic
     }
 

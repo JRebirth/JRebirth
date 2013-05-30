@@ -21,6 +21,7 @@ import javafx.scene.Node;
 
 import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.key.UniqueKey;
+import org.jrebirth.core.wave.Wave;
 
 /**
  * The interface <strong>Model</strong>.
@@ -72,15 +73,20 @@ public interface Model extends FacadeReady<Model> {
     Model getInnerModel(InnerModels innerModel, UniqueKey... innerModelKey);
 
     /**
-     * Show the view.<br />
-     * In example : start the show transition
+     * Perform the show view action triggered by a wave.
+     * 
+     * Method handler for Wave JRebirthWaves.SHOW_VIEW
+     * 
+     * @param wave the wave that trigger the action
      */
-    void showView();
+    void doShowView(Wave wave);
 
     /**
-     * Hide the view.<br />
-     * In example : start the hide transition
+     * Perform the hide view action triggered by a wave.
+     * 
+     * Method handler for Wave JRebirthWaves.HIDE_VIEW
+     * 
+     * @param wave the wave that trigger the action
      */
-    void hideView();
-
+    void doHideView(Wave wave);
 }
