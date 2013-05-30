@@ -1,204 +1,289 @@
-<class-diagram version="1.0.11" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.2" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <interface id="1" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui.Model" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/Model.java" binary="false">    
+  <interface id="1" language="java" name="org.jrebirth.core.ui.Model" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/Model.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="207" y="174"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <interface id="2" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui.View" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/View.java" binary="false">    
-    <position height="-1" width="-1" x="521" y="240"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+  <interface id="2" language="java" name="org.jrebirth.core.ui.View" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/View.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="631" y="226"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <interface id="3" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui.Controller" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/Controller.java" 
-    binary="false">    
-    <position height="-1" width="-1" x="846" y="178"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+  <interface id="3" language="java" name="org.jrebirth.core.ui.Controller" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1068" y="171"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <class id="4" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui.DefaultView" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/DefaultView.java" 
-    binary="false">    
-    <position height="-1" width="-1" x="501" y="820"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+  <class id="4" language="java" name="org.jrebirth.core.ui.DefaultView" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/DefaultView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="621" y="813"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="5" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui.LinkedCallback" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/LinkedCallback.java" 
-    binary="false">    
-    <position height="-1" width="-1" x="128" y="948"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+  <class id="5" language="java" name="org.jrebirth.core.ui.LinkedCallback" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/LinkedCallback.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="506" y="1020"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="6" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui.AbstractController" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractController.java" 
-    binary="false">    
-    <position height="-1" width="-1" x="903" y="853"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+  <class id="6" language="java" name="org.jrebirth.core.ui.AbstractController" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1068" y="828"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="7" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui.DefaultModel" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/DefaultModel.java" 
-    binary="false">    
-    <position height="-1" width="-1" x="191" y="814"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+  <class id="7" language="java" name="org.jrebirth.core.ui.DefaultModel" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/DefaultModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="351" y="1032"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="8" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui.AbstractBaseController" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractBaseController.java" 
-    binary="false">    
-    <position height="-1" width="-1" x="856" y="533"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+  <class id="8" language="java" name="org.jrebirth.core.ui.AbstractBaseController" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractBaseController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1068" y="461"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <interface id="9" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui.InnerModels" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/InnerModels.java" 
-    binary="false">    
+  <interface id="9" language="java" name="org.jrebirth.core.ui.InnerModels" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/InnerModels.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="594" y="30"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <class id="10" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui.AbstractView" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractView.java" 
-    binary="false">    
-    <position height="-1" width="-1" x="524" y="494"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+  <class id="10" language="java" name="org.jrebirth.core.ui.AbstractView" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="626" y="524"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="11" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui.AbstractModel" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractModel.java" 
-    binary="false">    
-    <position height="-1" width="-1" x="212" y="484"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+  <class id="11" language="java" name="org.jrebirth.core.ui.AbstractModel" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="347" y="796"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="12" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui.DefaultController" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/DefaultController.java" 
-    binary="false">    
-    <position height="-1" width="-1" x="901" y="1034"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+  <class id="12" language="java" name="org.jrebirth.core.ui.DefaultController" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/DefaultController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1068" y="1029"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <package id="13" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.ui" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui" binary="false">    
-    <position height="-1" width="-1" x="92" y="14"/>    
-    <display autosize="true" stereotype="true"/>  
+  <package id="13" language="java" name="org.jrebirth.core.ui" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="80" y="15"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
   </package>  
-  <interface id="14" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.facade.FacadeReady" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/FacadeReady.java" 
-    binary="false">    
+  <interface id="14" language="java" name="org.jrebirth.core.facade.FacadeReady" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/FacadeReady.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="251" y="18"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </interface>  
-  <interface id="15" corner="BOTTOM_RIGHT" language="java" name="javafx.util.Callback" project="org.jrebirth.core" 
-    file="C:/Users/ng1e2b8/Tools/jdk1.7.0_07/jre/lib/jfxrt.jar" binary="true">    
-    <position height="-1" width="-1" x="440" y="948"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
+  <interface id="15" language="java" name="javafx.util.Callback" project="org.jrebirth.core" 
+    file="E:/JREBIRTH/TOOLS/jdk1.7.0_21/jre/lib/jfxrt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="884" y="1028"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </interface>  
-  <generalization id="16">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="11"/>  
+  <class id="16" language="java" name="org.jrebirth.core.ui.AbstractBaseModel" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractBaseModel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="207" y="490"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="org.jrebirth.core.ui.AbstractObjectModel" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractObjectModel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="112" y="881"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="org.jrebirth.core.ui.DefaultObjectModel" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/DefaultObjectModel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="108" y="1084"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </class>  
+  <generalization id="19">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="16"/>  
   </generalization>  
-  <generalization id="17">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="10"/>  
-  </generalization>  
-  <dependency id="18">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="9"/>  
-  </dependency>  
-  <dependency id="19">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="15"/>  
-  </dependency>  
   <generalization id="20">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="14"/>  
-  </generalization>  
-  <dependency id="21">    
-    <bendpoint x="684" y="234"/>    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <generalization id="22">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <realization id="23">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <dependency id="24">    
-    <bendpoint x="392" y="234"/>    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <dependency id="25">    
-    <bendpoint x="522" y="109"/>    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </dependency>  
-  <dependency id="26">    
-    <bendpoint x="668" y="194"/>    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
-  <association id="27">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="28" name="CHECK_MOUSE_DOUBLE_CLICK"/>      
-      <multiplicity id="29" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="30">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <realization id="31">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
-  <dependency id="32">    
+  <dependency id="21">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="22">    
     <bendpoint x="406" y="196"/>    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
+  <association id="23">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="24" name="innerModelSingletonMap"/>      
+      <multiplicity id="25" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="26">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="27">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <dependency id="28">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="29">    
+    <bendpoint x="522" y="109"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <generalization id="30">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <generalization id="31">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <dependency id="32">    
+    <bendpoint x="392" y="234"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <realization id="33">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <generalization id="34">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <dependency id="35">    
+    <bendpoint x="668" y="194"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <association id="36">    
+    <bendpoint x="699" y="1012"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="37" name="CHECK_MOUSE_DOUBLE_CLICK">        
+        <position height="18" width="168" x="622" y="984"/>      
+      </attribute>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="39">    
+    <bendpoint x="684" y="234"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <generalization id="40">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="41">    
+    <bendpoint x="699" y="1034"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="42" name="CHECK_MOUSE_SINGLE_CLICK">        
+        <position height="18" width="163" x="615" y="1038"/>      
+      </attribute>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="45" name="rootModel"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="47">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="48">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-    visibility="true">    
+    accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="false"/>    
     <operations public="true" package="true" protected="true" private="false"/>  
   </classifier-display>  

@@ -1,248 +1,248 @@
-<class-diagram version="1.0.11" icons="true" automaticImage="PNG" always-add-relationships="false" 
-  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.WaveTypeBase" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveTypeBase.java" 
-    binary="false">    
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="org.jrebirth.core.wave.WaveTypeBase" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveTypeBase.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="133" y="604"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="2" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.DefaultWaveBean" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/DefaultWaveBean.java" 
-    binary="false">    
+  <class id="2" language="java" name="org.jrebirth.core.wave.DefaultWaveBean" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/DefaultWaveBean.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="899" y="57"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="3" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.WaveBuilder" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveBuilder.java" 
-    binary="false">    
+  <class id="3" language="java" name="org.jrebirth.core.wave.WaveBuilder" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveBuilder.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="900" y="619"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="4" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.WaveItem" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveItem.java" binary="false">    
+  <class id="4" language="java" name="org.jrebirth.core.wave.WaveItem" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveItem.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="134" y="791"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <enumeration id="5" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.Wave.Status" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/Wave.java" binary="false">    
+  <enumeration id="5" language="java" name="org.jrebirth.core.wave.Wave.Status" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/Wave.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="338" y="54"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </enumeration>  
-  <interface id="6" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.WaveBean" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveBean.java" 
-    binary="false">    
+  <interface id="6" language="java" name="org.jrebirth.core.wave.WaveBean" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveBean.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="899" y="-31"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <interface id="7" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.WaveType" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveType.java" 
-    binary="false">    
+  <interface id="7" language="java" name="org.jrebirth.core.wave.WaveType" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveType.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="366" y="521"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <interface id="8" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.WaveListener" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveListener.java" 
-    binary="false">    
+  <interface id="8" language="java" name="org.jrebirth.core.wave.WaveListener" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveListener.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="899" y="181"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <interface id="9" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.Wave" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/Wave.java" binary="false">    
+  <interface id="9" language="java" name="org.jrebirth.core.wave.Wave" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/Wave.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="120" y="222"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <interface id="10" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.JRebirthWaves" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/JRebirthWaves.java" 
-    binary="false">    
+  <interface id="10" language="java" name="org.jrebirth.core.wave.JRebirthWaves" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/JRebirthWaves.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="314" y="929"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <class id="11" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.WaveData" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveData.java" 
-    binary="false">    
+  <class id="11" language="java" name="org.jrebirth.core.wave.WaveData" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveData.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="482" y="755"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="12" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.command.CommandWaveBuilder" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/CommandWaveBuilder.java" binary="false">    
+  <class id="12" language="java" name="org.jrebirth.core.command.CommandWaveBuilder" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/CommandWaveBuilder.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="899" y="805"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="13" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.WaveBase" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveBase.java" 
-    binary="false">    
+  <class id="13" language="java" name="org.jrebirth.core.wave.WaveBase" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveBase.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="582" y="230"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <enumeration id="14" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.WaveGroup" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveGroup.java" 
-    binary="false">    
+  <enumeration id="14" language="java" name="org.jrebirth.core.wave.WaveGroup" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveGroup.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="900" y="358"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </enumeration>  
-  <package id="15" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave" binary="false">    
+  <package id="15" language="java" name="org.jrebirth.core.wave" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="82" y="-31"/>    
-    <display autosize="true" stereotype="false"/>  
+    <display autosize="true" stereotype="false" accessors="true"/>  
   </package>  
-  <class id="16" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.command.basic.ShowModelWaveBuilder" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/basic/ShowModelWaveBuilder.java" binary="false">    
-    <position height="-1" width="-1" x="900" y="915"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="false" package="false" protected="false" private="false"/>    
-    </display>  
-  </class>  
-  <generalization id="17">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <nesting id="18">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="5"/>  
-  </nesting>  
-  <association id="19">    
-    <bendpoint x="612" y="578"/>    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="20" name="waveDataList"/>      
-      <multiplicity id="21" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="22">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="23" name="relatedWave"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="25">    
+  <realization id="16">    
     <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="9"/>  
   </realization>  
-  <realization id="26">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <association id="27">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="28" name="waveListeners"/>      
-      <multiplicity id="29" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="30">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="31" name="waveGroup"/>      
-      <multiplicity id="32" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="33">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="34" name="waveItem"/>      
-      <multiplicity id="35" minimum="0" maximum="1"/>    
+  <association id="17">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="18" name="waveItemList"/>      
+      <multiplicity id="19" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="36">    
+  <association id="20">    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="37" name="status"/>      
-      <multiplicity id="38" minimum="0" maximum="1"/>    
+      <attribute id="21" name="status"/>      
+      <multiplicity id="22" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="39">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="40" name="waveGroup"/>      
-      <multiplicity id="41" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="42">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
-  </realization>  
-  <association id="43">    
-    <bendpoint x="647" y="755"/>    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="44" name="waveData"/>      
-      <multiplicity id="45" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="46">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <association id="47">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="48" name="waveType"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="50">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="51" name="waveItemList"/>      
-      <multiplicity id="52" minimum="0" maximum="2147483647"/>    
+  <association id="23">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="24" name="waveItem"/>      
+      <multiplicity id="25" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="26">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="27" name="waveGroup"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="30" name="waveGroup"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="33" name="waveBean"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="35">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="36">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="37" name="waveType"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="39">    
+    <bendpoint x="612" y="578"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="40" name="waveDataList"/>      
+      <multiplicity id="41" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="42">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="43" name="relatedWave"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="45">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <association id="46">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="47" name="waveType"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <bendpoint x="647" y="755"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="50" name="waveData"/>      
+      <multiplicity id="51" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="52">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </nesting>  
   <association id="53">    
     <bendpoint x="464" y="588"/>    
     <end type="SOURCE" refId="13" navigable="false">      
@@ -254,22 +254,18 @@
   </association>  
   <association id="56">    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="57" name="waveBean"/>      
-      <multiplicity id="58" minimum="0" maximum="1"/>    
+      <attribute id="57" name="waveListeners"/>      
+      <multiplicity id="58" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="59">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="60" name="waveType"/>      
-      <multiplicity id="61" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <generalization id="59">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-    visibility="true">    
+    accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="false"/>    
     <operations public="true" package="true" protected="true" private="false"/>  
   </classifier-display>  
