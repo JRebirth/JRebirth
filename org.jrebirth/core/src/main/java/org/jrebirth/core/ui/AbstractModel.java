@@ -39,22 +39,28 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     /** The dedicated view component. */
     private transient V view;
 
-    /** Flag used to determine if a view has been already displayed, useful to manage first time animation. */
-    private boolean viewDisplayed;
-
     /**
      * {@inheritDoc}
      */
     @Override
-    protected final void initialize() throws CoreException {
+    protected final void initInternalModel() throws CoreException {
+
         // Do generic stuff
         listen(JRebirthWaves.SHOW_VIEW);
         listen(JRebirthWaves.HIDE_VIEW);
 
         // Do custom stuff
-        customInitialize();
+        initModel();
+    }
 
-        // Bind Object properties to view widget ones
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected final void bindInternal() {
+        // Auto bound !
+
+        // Do custom binding stuff
         bind();
     }
 
@@ -62,69 +68,17 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
      * {@inheritDoc}
      */
     @Override
-    protected final void bind() {
-        // Auto bound !
-
-        // Do custom binding stuff
-        customBind();
-    }
-
-    /**
-     * Perform show view.
-     * 
-     * @param wave the wave that trigger the action
-     */
-    public final void performShowView(final Wave wave) {
-        showView();
+    public final void doShowView(final Wave wave) {
+        showInternalView();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void showView() {
-        //
-        customShowView();
-
-        if (this.viewDisplayed) {
-            //
-            getView().doReload();
-        } else {
-            //
-            getView().doStart();
-            this.viewDisplayed = true;
-        }
+    public final void doHideView(final Wave wave) {
+        hideInternalView();
     }
-
-    /**
-     * Perform custom action before showing the view.
-     */
-    protected abstract void customShowView();
-
-    /**
-     * Perform hide view.
-     * 
-     * @param wave the wave that trigger the action
-     */
-    public final void performHideView(final Wave wave) {
-        hideView();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void hideView() {
-        //
-        customHideView();
-        //
-        getView().doHide();
-    }
-
-    /**
-     * Perform custom action before hiding the view.
-     */
-    protected abstract void customHideView();
 
     /**
      * {@inheritDoc}

@@ -31,14 +31,14 @@ public final class AnnotationModel extends DefaultModel<AnnotationModel, Annotat
      * {@inheritDoc}
      */
     @Override
-    protected void customInitialize() {
+    protected void initModel() {
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeInnerModels() {
+    protected void initInnerModels() {
     }
 
     /**
@@ -52,13 +52,13 @@ public final class AnnotationModel extends DefaultModel<AnnotationModel, Annotat
      * {@inheritDoc}
      */
     @Override
-    protected void customShowView() {
+    protected void showView() {
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void customHideView() {
+    protected void hideView() {
     }
 }

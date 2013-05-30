@@ -20,7 +20,7 @@ package org.jrebirth.presentation.ui.base;
 import javafx.scene.Parent;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.AbstractView;
+import org.jrebirth.core.ui.DefaultView;
 
 /**
  * The class <strong>AbstractSlideView</strong>.
@@ -32,7 +32,7 @@ import org.jrebirth.core.ui.AbstractView;
  * @param <C> the slide controller class
  */
 public abstract class AbstractSlideView<M extends AbstractSlideModel<?, ?, ?>, N extends Parent, C extends AbstractSlideController<?, ?>> extends
-        AbstractView<M, N, C> {
+        DefaultView<M, N, C> {
 
     /** Sub slide animation flag. */
     private boolean slideLocked;
@@ -47,22 +47,6 @@ public abstract class AbstractSlideView<M extends AbstractSlideModel<?, ?, ?>, N
     public AbstractSlideView(final M model) throws CoreException {
         super(model);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    // @Override
-    // public void doHide() {
-    // // Nothing to do yet
-    // }
-    /**
-     * {@inheritDoc}
-     */
-    // @Override
-    // protected void customInitializeComponents() {
-    // // Nothing to do yet
-    //
-    // }
 
     /**
      * @return Returns the slideLocked.

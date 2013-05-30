@@ -61,7 +61,7 @@ public final class SplashView extends AbstractSlideView<SplashModel, BorderPane,
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeComponents() {
+    protected void initView() {
 
         getRootNode().getStyleClass().add(getModel().getStyleClass() == null ? "splashContainer" : getModel().getStyleClass());
 
@@ -83,7 +83,7 @@ public final class SplashView extends AbstractSlideView<SplashModel, BorderPane,
      * {@inheritDoc}
      */
     @Override
-    public void doStart() {
+    public void start() {
 
         getTextTransition().playFromStart();
     }
@@ -117,7 +117,7 @@ public final class SplashView extends AbstractSlideView<SplashModel, BorderPane,
      * {@inheritDoc}
      */
     @Override
-    public void doReload() {
+    public void reload() {
         // Nothing to do yet
     }
 
@@ -125,7 +125,7 @@ public final class SplashView extends AbstractSlideView<SplashModel, BorderPane,
      * {@inheritDoc}
      */
     @Override
-    public void doHide() {
+    public void hide() {
         // Nothing to do yet
     }
 

@@ -47,7 +47,7 @@ public final class WorkbenchView extends DefaultView<WorkbenchModel, BorderPane,
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeComponents() {
+    protected void initView() {
 
         getRootNode().setPrefSize(800, 600);
 

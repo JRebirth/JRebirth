@@ -20,16 +20,14 @@ package org.jrebirth.core.ui;
 import javafx.scene.Node;
 
 /**
- * 
  * The class <strong>DefaultView</strong>.
  * 
- * Default implementation of the view.
+ * Default implementation of the view, use to avoid implementation of all abstract method (just override those you need).
  * 
  * @author Sébastien Bordes
  * 
- * 
  * @param <M> The class type of the model of the view
- * @param <N> Any object that is a JavaFx2 Node
+ * @param <N> Any object that is a JavaFX Node
  * @param <C> The class type of the controller of the view
  */
 public class DefaultView<M extends Model, N extends Node, C extends Controller<?, ?>> extends AbstractView<M, N, C> {
@@ -47,7 +45,15 @@ public class DefaultView<M extends Model, N extends Node, C extends Controller<?
      * {@inheritDoc}
      */
     @Override
-    public void doStart() {
+    protected void initView() {
+        // Custom code used to update the root node and add some children
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void start() {
         // Custom code to process when the view is displayed the first time
     }
 
@@ -55,7 +61,7 @@ public class DefaultView<M extends Model, N extends Node, C extends Controller<?
      * {@inheritDoc}
      */
     @Override
-    public void doReload() {
+    public void reload() {
         // Custom code to process when the view is displayed the 1+n time
     }
 
@@ -63,16 +69,8 @@ public class DefaultView<M extends Model, N extends Node, C extends Controller<?
      * {@inheritDoc}
      */
     @Override
-    public void doHide() {
+    public void hide() {
         // Custom code to process when the view is hidden
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void customInitializeComponents() {
-        // Custom code used to update the root node and add some children
     }
 
 }

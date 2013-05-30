@@ -31,7 +31,7 @@ public final class WorkbenchModel extends DefaultModel<WorkbenchModel, Workbench
      * {@inheritDoc}
      */
     @Override
-    protected void customInitialize() {
+    protected void initModel() {
         // Nothing to do yet
     }
 
@@ -39,7 +39,7 @@ public final class WorkbenchModel extends DefaultModel<WorkbenchModel, Workbench
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeInnerModels() {
+    protected void initInnerModels() {
 
         // Do stuff on the model !
         getInnerModel(WorkbenchInnerModels.CONTROLS);
@@ -59,7 +59,7 @@ public final class WorkbenchModel extends DefaultModel<WorkbenchModel, Workbench
      * {@inheritDoc}
      */
     @Override
-    protected void customShowView() {
+    protected void showView() {
         // Nothing to do yet
 
     }
@@ -68,7 +68,7 @@ public final class WorkbenchModel extends DefaultModel<WorkbenchModel, Workbench
      * {@inheritDoc}
      */
     @Override
-    protected void customHideView() {
+    protected void hideView() {
         // Nothing to do yet
 
     }

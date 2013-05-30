@@ -83,7 +83,7 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeComponents() {
+    protected void initView() {
 
         getRootNode().setScaleX(0);
         getRootNode().setScaleY(0);
@@ -244,7 +244,7 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
      * Show the ball by using a nice transition.
      */
     @Override
-    public void doStart() {
+    public void start() {
         this.showTransition.play();
     }
 
@@ -252,7 +252,7 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
      * Hide the ball by using a nice reverse transition..
      */
     @Override
-    public void doHide() {
+    public void hide() {
 
         this.showTransition.setRate(-1);
         this.showTransition.play();

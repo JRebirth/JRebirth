@@ -33,7 +33,7 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
      * {@inheritDoc}
      */
     @Override
-    protected void customInitialize() {
+    protected void initModel() {
         listen(EditorWaves.DO_SELECT_EVENT, false);
     }
 
@@ -41,7 +41,7 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeInnerModels() {
+    protected void initInnerModels() {
         // Nothing to do yet
     }
 
@@ -62,7 +62,7 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
      * {@inheritDoc}
      */
     @Override
-    protected void customShowView() {
+    protected void showView() {
         // Nothing to do yet
 
     }
@@ -71,7 +71,7 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
      * {@inheritDoc}
      */
     @Override
-    protected void customHideView() {
+    protected void hideView() {
         // Nothing to do yet
 
     }

@@ -50,7 +50,7 @@ public interface Controller<M extends Model, V extends View<M, ?, ?>> {
     M getModel();
 
     /**
-     * Activate the controller by calling the initializeEventHandler method.
+     * Activate the controller by initializing all event handler.
      * 
      * Must be called after children initialization.
      * 

@@ -59,7 +59,7 @@ public final class StackController extends AbstractController<StackModel, StackV
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeEventAdapters() throws CoreException {
+    protected void initEventAdapters() throws CoreException {
 
         // Use the inner class
         addAdapter(new SlideKeyAdapter());
@@ -71,7 +71,7 @@ public final class StackController extends AbstractController<StackModel, StackV
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeEventHandlers() throws CoreException {
+    protected void initEventHandlers() throws CoreException {
 
         // Listen keys event on the root node
         getRootNode().setOnKeyPressed(getHandler(KeyEvent.KEY_PRESSED));

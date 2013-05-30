@@ -42,7 +42,7 @@ public class DetachModelCommand extends DefaultUICommand {
     @Override
     protected void execute(final Wave wave) {
 
-        getWaveBean(wave).getModel().hideView();
+        getWaveBean(wave).getModel().doHideView(wave);
 
         // final Pane parentNode = getWaveBean(wave).getParentNode();
         Node createdNode = getWaveBean(wave).getCreatedNode();

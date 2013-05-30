@@ -50,6 +50,9 @@ public abstract class AbstractBaseModel<M extends Model, V extends View<?, ?, ?>
     /** The map that store inner models loaded. */
     private final Map<InnerModels, Map<UniqueKey, Model>> innerModelMultitonMap = new HashMap<>();
 
+    /** Flag used to determine if a view has been already displayed, useful to manage first time animation. */
+    private boolean viewDisplayed;
+
     /**
      * {@inheritDoc}
      */
@@ -57,53 +60,115 @@ public abstract class AbstractBaseModel<M extends Model, V extends View<?, ?, ?>
     public final void ready() throws CoreException {
 
         // Initialize the current model
-        initialize();
+        initInternalModel();
 
         // Initialize inner models (if any)
-        initializeInnerModels();
+        initInternalInnerModels();
 
         // Model and InnerModels are OK, let's prepare the view
         if (getView() != null) {
-            getView().doPrepare();
+            getView().prepare();
         }
+
+        // Bind Object properties to view widget ones
+        bindInternal();
     }
+
+    /**
+     * Initialize method to implement for adding custom processes.
+     * 
+     * This method is a hook to manage generic code before initializing current model.
+     * 
+     * You must implement the {@link #initModel()} method to setup your model.
+     */
+    protected abstract void initModel();
 
     /**
      * Initialize the model.
      * 
      * @throws CoreException if the creation of the view fails
      */
-    protected abstract void initialize() throws CoreException;
-
-    /**
-     * Initialize method to implement for adding custom processes.
-     */
-    protected abstract void customInitialize();
-
-    /**
-     * Bind current object to view's widget.
-     */
-    protected abstract void bind();
-
-    /**
-     * Bind method to implement for adding custom bindings.
-     */
-    protected abstract void customBind();
+    protected abstract void initInternalModel() throws CoreException;
 
     /**
      * Initialize the included models.
+     * 
+     * This method is a hook to manage generic code before initializing inner models.
+     * 
+     * You must implement the {@link #initInnerModels()} method to setup your inner models.
      */
-    protected final void initializeInnerModels() {
+    protected final void initInternalInnerModels() {
         // Do generic stuff
 
         // Do custom stuff
-        customInitializeInnerModels();
+        initInnerModels();
     }
 
     /**
      * Initialize method for inner models to implement for adding custom processes.
      */
-    protected abstract void customInitializeInnerModels();
+    protected abstract void initInnerModels();
+
+    /**
+     * Bind current object to view's widget.
+     * 
+     * This method is a hook to manage generic code before binding model's object.
+     * 
+     * You must implement the {@link #bind()} method to add your bindings.
+     */
+    protected abstract void bindInternal();
+
+    /**
+     * Bind method to implement for adding custom bindings.
+     */
+    protected abstract void bind();
+
+    /**
+     * Show the view.<br />
+     * In example : start the show transition
+     * 
+     * This method is a hook to manage generic code before initializing the view's node tree. It will call {@link #org.jrebirth.core.ui.View.start()} or {@link #org.jrebirth.core.ui.View.reload()}
+     * method
+     * 
+     * You must implement the {@link #showView()} method to setup your view.
+     */
+    protected final void showInternalView() {
+
+        // Call user code
+        showView();
+
+        if (this.viewDisplayed) {
+            //
+            getView().reload();
+        } else {
+            //
+            getView().start();
+            this.viewDisplayed = true;
+        }
+    }
+
+    /**
+     * Perform custom user action <b>before</b> showing the view.
+     */
+    protected abstract void showView();
+
+    /**
+     * Hide the view.<br />
+     * In example : start the hide transition
+     * 
+     * Will call the {@link #org.jrebirth.core.ui.View.hide()} method
+     */
+    protected final void hideInternalView() {
+        //
+        hideView();
+        //
+        getView().hide();
+    }
+
+    /**
+     * Perform custom action <b>before</b> hiding the view.
+     */
+    protected abstract void hideView();
 
     /**
      * {@inheritDoc}

@@ -108,7 +108,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     }
 
     /**
-     * Build the erroNode to display the error taht occured.
+     * Build the errorNode to display the error taht occured.
      * 
      * @param ce the CoreException to display
      */
@@ -123,10 +123,10 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * {@inheritDoc}
      */
     @Override
-    public void doPrepare() throws CoreException {
+    public void prepare() throws CoreException {
 
         // Initialize view components
-        initializeComponents();
+        initInternalView();
 
         // Activate the controller to listen all components (this+children)
         getController().activate();
@@ -298,19 +298,19 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * {@inheritDoc}
      */
     @Override
-    public abstract void doStart();
+    public abstract void start();
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public abstract void doReload();
+    public abstract void reload();
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public abstract void doHide();
+    public abstract void hide();
 
     /**
      * Build the root node.
@@ -371,17 +371,23 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     /**
      * Initialize the view.
      * 
-     * You must implement the customInitializeComponents method to prepare your view.
+     * This method is a hook to manage generic code before initializing the view's node tree.
+     * 
+     * You must implement the {@link #initView()} method to setup your view.
      */
-    protected final void initializeComponents() {
+    protected final void initInternalView() {
+        // Do some generic stuff to set up the view
 
-        customInitializeComponents();
+        // Call the user method used to set up the graphical tree of nodes
+        initView();
     }
 
     /**
      * Custom method used to initialize components.
+     * 
+     * This method must be overridden by user to create its own graphical tree
      */
-    protected abstract void customInitializeComponents();
+    protected abstract void initView();
 
     /**
      * {@inheritDoc}

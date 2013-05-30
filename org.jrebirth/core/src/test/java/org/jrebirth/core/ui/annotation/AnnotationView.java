@@ -75,7 +75,7 @@ public final class AnnotationView extends DefaultView<AnnotationModel, VBox, Ann
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeComponents() {
+    protected void initView() {
 
         getRootNode().setMinWidth(200);
 

@@ -45,7 +45,7 @@ public class SampleController extends AbstractController<SampleModel, SampleView
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeEventAdapters() throws CoreException {
+    protected void initEventAdapters() throws CoreException {
 
         // Manage Ui Command Button
         linkCommand(getView().getUiCommand(), MouseEvent.MOUSE_CLICKED, SampleUICommand.class);
@@ -59,7 +59,7 @@ public class SampleController extends AbstractController<SampleModel, SampleView
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeEventHandlers() throws CoreException {
+    protected void initEventHandlers() throws CoreException {
         // Listen events
 
         // Manage Pooled Command Button

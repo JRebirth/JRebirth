@@ -42,7 +42,7 @@ public final class EditorController extends DefaultController<EditorModel, Edito
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeEventHandlers() throws CoreException {
+    protected void initEventHandlers() throws CoreException {
         // Nothing to do
     }
 

@@ -62,7 +62,7 @@ public final class TransitionModel extends DefaultModel<TransitionModel, Transit
      * {@inheritDoc}
      */
     @Override
-    protected void customInitialize() {
+    protected void initModel() {
         // Load the Presentation content
     }
 
@@ -70,7 +70,7 @@ public final class TransitionModel extends DefaultModel<TransitionModel, Transit
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeInnerModels() {
+    protected void initInnerModels() {
 
         this.imageSlicerService = getService(NodeSlicerCommand.class, "Properties");
 
@@ -103,7 +103,7 @@ public final class TransitionModel extends DefaultModel<TransitionModel, Transit
      * {@inheritDoc}
      */
     @Override
-    protected void customShowView() {
+    protected void showView() {
         // Nothing to do yet
     }
 
@@ -111,7 +111,7 @@ public final class TransitionModel extends DefaultModel<TransitionModel, Transit
      * {@inheritDoc}
      */
     @Override
-    protected void customHideView() {
+    protected void hideView() {
         // Nothing to do yet
     }
 }

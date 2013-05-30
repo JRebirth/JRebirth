@@ -53,7 +53,7 @@ public final class EditorView extends DefaultView<EditorModel, ScrollPane, Edito
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeComponents() {
+    protected void initView() {
 
         // getRootNode().setFitToWidth(false);
         // getRootNode().setFitToHeight(false);

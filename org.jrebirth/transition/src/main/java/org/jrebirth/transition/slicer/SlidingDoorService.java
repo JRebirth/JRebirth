@@ -40,6 +40,7 @@ import javafx.util.Duration;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.ServiceBase;
 import org.jrebirth.core.wave.WaveTypeBase;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

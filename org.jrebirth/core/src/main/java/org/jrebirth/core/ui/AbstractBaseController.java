@@ -69,24 +69,26 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
     @Override
     public final void activate() throws CoreException {
         // Initialize event adapters
-        initializeEventAdapters();
+        initInternalEventAdapters();
 
         // Initialize event handlers
-        initializeEventHandlers();
+        initInternalEventHandlers();
     }
 
     /**
      * Initialize event Adapters.
      * 
-     * You must implement the customInitializeEventHandlers method to prepare your controller.
+     * This method is a hook to manage generic code before initializing the user event adapters.
+     * 
+     * You must implement the {@link #initEventAdapters()} method to prepare your controller.
      * 
      * @throws CoreException if an error occurred while creating event adapters
      */
-    protected final void initializeEventAdapters() throws CoreException {
+    protected final void initInternalEventAdapters() throws CoreException {
         // Do generic stuff
 
         // Do custom stuff
-        customInitializeEventAdapters();
+        initEventAdapters();
     }
 
     /**
@@ -94,20 +96,22 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      * 
      * @throws CoreException if an error occurred while creating event adapters
      */
-    protected abstract void customInitializeEventAdapters() throws CoreException;
+    protected abstract void initEventAdapters() throws CoreException;
 
     /**
      * Initialize event Handlers.
      * 
-     * You must implement the customInitializeEventHandlers method to prepare your controller.
+     * This method is a hook to manage generic code before initializing the user event handlers.
+     * 
+     * You must implement the {@link #initEventHandlers()} method to prepare your controller.
      * 
      * @throws CoreException if an error occurred while creating event handlers
      */
-    protected final void initializeEventHandlers() throws CoreException {
+    protected final void initInternalEventHandlers() throws CoreException {
         // Do generic stuff
 
         // Do custom stuff
-        customInitializeEventHandlers();
+        initEventHandlers();
     }
 
     /**
@@ -115,7 +119,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      * 
      * @throws CoreException if an error occurred while creating event handlers
      */
-    protected abstract void customInitializeEventHandlers() throws CoreException;
+    protected abstract void initEventHandlers() throws CoreException;
 
     /**
      * @return Returns the view.

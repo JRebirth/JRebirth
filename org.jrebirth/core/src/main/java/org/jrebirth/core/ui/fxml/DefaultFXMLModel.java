@@ -40,22 +40,6 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
      * {@inheritDoc}
      */
     @Override
-    public void showView() {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void hideView() {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected String getFXMLPath() {
         return this.fxmlPath;
     }
@@ -85,7 +69,7 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
      * {@inheritDoc}
      */
     @Override
-    public void performShowView(final Wave wave) {
+    protected void initModel() {
         // Nothing to do yet
     }
 
@@ -93,23 +77,7 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
      * {@inheritDoc}
      */
     @Override
-    public void performHideView(final Wave wave) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void customInitialize() {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void customBind() {
+    protected void bind() {
         // Nothing to do yet
 
     }
@@ -118,7 +86,7 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
      * {@inheritDoc}
      */
     @Override
-    protected void customInitializeInnerModels() {
+    protected void initInnerModels() {
         // Nothing to do yet
     }
 
@@ -127,6 +95,22 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
      */
     @Override
     protected void processAction(final Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void showView() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void hideView() {
         // Nothing to do yet
     }
 
