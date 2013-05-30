@@ -49,8 +49,8 @@ public interface JRebirthWaves {
     /******************************/
 
     /** The waveType used to show a view (start or reload). */
-    WaveType SHOW_VIEW = WaveTypeBase.build("PERFORM_SHOW_VIEW");
+    WaveType SHOW_VIEW = WaveTypeBase.build("SHOW_VIEW");
 
     /** The waveType used to hide a view. */
-    WaveType HIDE_VIEW = WaveTypeBase.build("PERFORM_HIDE_VIEW");
+    WaveType HIDE_VIEW = WaveTypeBase.build("HIDE_VIEW");
 }

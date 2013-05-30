@@ -1,5 +1,6 @@
 package org.jrebirth.core.resource.provided;
 
+import org.jrebirth.core.resource.image.LocalImage;
 import org.jrebirth.core.resource.parameter.ParameterItemBase;
 
 /**
@@ -34,6 +35,16 @@ public interface JRebirthParameters {
      * The <code>TRUE_TYPE_FONT_EXTENSION</code> field is used to define the font file extension .
      */
     ParameterItemBase<String> TRUE_TYPE_FONT_EXTENSION = ParameterItemBase.build("trueTypeFontExtension", ".ttf");
+
+    /**
+     * The <code>WAVE_HANDLER_PREFIX</code> field is used to add a prefix to custom wave handler method of JRebirth components.
+     */
+    ParameterItemBase<String> WAVE_HANDLER_PREFIX = ParameterItemBase.build("waveHandlerPrefix", "DO_");
+
+    /**
+     * The <code>NOT_AVAILABLE_IMAGE</code> field is used to define the image to use when an image is missing.
+     */
+    ParameterItemBase<LocalImage> NOT_AVAILABLE_IMAGE = ParameterItemBase.build("notAvailableImage", new LocalImage("image/NotAvailableImage.png"));
 
     /**************************************************************************************/
     /** _________________________Application Stage Parameters.___________________________ */
