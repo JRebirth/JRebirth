@@ -22,7 +22,6 @@ import java.io.InputStream;
 import javafx.scene.image.Image;
 
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
-import org.jrebirth.core.resource.font.RealFont;
 import org.jrebirth.core.resource.provided.JRebirthImages;
 
 import org.slf4j.Logger;
@@ -46,7 +45,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
     @Override
     protected Image buildResource(final ImageParams jrImage) {
         Image image = null;
-        if (jrImage instanceof RealFont) {
+        if (jrImage instanceof LocalImage) {
             // Build the requested font
             image = buildLocalImage((LocalImage) jrImage);
         } else {

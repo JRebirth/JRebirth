@@ -53,11 +53,16 @@ public class LocalImage extends AbstractBaseParams implements ImageParams {
      */
     @Override
     public String toString() {
-        return super.toString();
+        return this.localPath;
     }
 
-    public static LocalImage parseImage(final String localImage) {
-
-        return new LocalImage("");
+    /**
+     * .
+     * 
+     * @param localPath
+     * @return
+     */
+    public static LocalImage parseImage(final String localPath) {
+        return new LocalImage(localPath);
     }
 }

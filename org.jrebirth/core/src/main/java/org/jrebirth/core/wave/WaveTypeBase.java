@@ -20,6 +20,8 @@ package org.jrebirth.core.wave;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jrebirth.core.resource.provided.JRebirthParameters;
+
 /**
  * The class <strong>WaveTypeBase</strong>.
  * 
@@ -45,12 +47,17 @@ public final class WaveTypeBase implements WaveType {
     /**
      * Default constructor.
      * 
-     * @param action The action to performed
-     * @param waveItems the list of #WaveItem required by this wave
+     * @param action The action to perform, "DO_" (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) keyword will be prepended to the action name to generate the handler method
+     * 
+     * @param waveItems the list of #WaveItem{@link WaveItem} required by this wave
      */
     private WaveTypeBase(final String action, final WaveItem<?>... waveItems) {
 
-        this.action = action;
+        // The action name will be used to define the name of the wave handler method
+        // Prepend do the the action name to force wave handler method to begin with do (convention parameterizable)
+        this.action = JRebirthParameters.WAVE_HANDLER_PREFIX.get() + action;
+
+        // Add each wave item to manage method argument
         for (final WaveItem<?> waveItem : waveItems) {
             this.waveItemList.add(waveItem);
         }
@@ -59,8 +66,9 @@ public final class WaveTypeBase implements WaveType {
     /**
      * Build a wave type.
      * 
-     * @param action The action to performed
-     * @param waveItems the list of #WaveItem required by this wave
+     * @param action The action to perform, "DO_" keyword (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to generate the handler method
+     * 
+     * @param waveItems the list of {@link WaveItem} required by this wave
      * 
      * @return a new fresh wave type object
      */
@@ -77,14 +85,15 @@ public final class WaveTypeBase implements WaveType {
     /**
      * Build a wave type.
      * 
-     * @param action The action to performed
-     * @param d the d
-     * @param waveItems the list of #WaveItem required by this wave
+     * @param action The action to perform "DO_" (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) keyword will be prepended to the action name to generate the handler method
+     * @param returnWaveType the return wave Type to call after having processing the current
+     * @param waveItems the list of {@link WaveItem} required by this wave
+     * 
      * @return a new fresh wave type object
      */
-    public static WaveTypeBase build(final String action, final WaveType d, final WaveItem<?>... waveItems) {
+    public static WaveTypeBase build(final String action, final WaveType returnWaveType, final WaveItem<?>... waveItems) {
         final WaveTypeBase waveType = build(action, waveItems);
-        waveType.setReturnWaveType(d);
+        waveType.setReturnWaveType(waveType);
         return waveType;
     }
 

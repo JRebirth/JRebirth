@@ -22,6 +22,7 @@ import org.jrebirth.core.resource.font.CustomFontName;
 import org.jrebirth.core.resource.font.FamilyFont;
 import org.jrebirth.core.resource.font.FontName;
 import org.jrebirth.core.resource.font.RealFont;
+import org.jrebirth.core.resource.image.LocalImage;
 
 /**
  * The interface <strong>ObjectParameter</strong>.
@@ -87,6 +88,23 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      */
     public Object parseObject(final String serializedObject) {
         Object res = null;
+        if (this.object instanceof LocalImage) {
+            res = LocalImage.parseImage(serializedObject);
+        } else if (this.object instanceof FontName) {
+            res = new CustomFontName(serializedObject);
+        } else if (this.object instanceof RealFont) {
+            res = new CustomFontName(serializedObject);
+        } else if (this.object instanceof FamilyFont) {
+            res = new CustomFontName(serializedObject);
+        } else {
+            res = parsePrimitive(serializedObject);
+        }
+
+        return res;
+    }
+
+    private Object parsePrimitive(final String serializedObject) {
+        Object res = null;
         if (this.object instanceof String) {
             res = serializedObject;
         } else if (this.object instanceof Character) {
@@ -103,14 +121,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
             res = Float.parseFloat(serializedObject);
         } else if (this.object instanceof Double) {
             res = Double.parseDouble(serializedObject);
-        } else if (this.object instanceof FontName) {
-            res = new CustomFontName(serializedObject);
-        } else if (this.object instanceof RealFont) {
-            res = new CustomFontName(serializedObject);
-        } else if (this.object instanceof FamilyFont) {
-            res = new CustomFontName(serializedObject);
         }
-
         return res;
     }
 }
