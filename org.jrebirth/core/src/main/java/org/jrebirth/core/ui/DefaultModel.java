@@ -52,6 +52,14 @@ public class DefaultModel<M extends Model, V extends View<?, ?, ?>> extends Abst
      * {@inheritDoc}
      */
     @Override
+    protected void bindObject() {
+        // Do nothing, API compliance
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void bind() {
         // Nothing to do yet
 

@@ -19,6 +19,7 @@ package org.jrebirth.core.ui;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
+import org.jrebirth.core.key.MultitonKey;
 import org.jrebirth.core.util.ClassUtility;
 
 /**
@@ -73,5 +74,20 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
 
         // Rebind current object
         bindInternal();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    protected final void bindObject() {
+
+        // If the model object has been passed as part of the key
+        if (getKey() instanceof MultitonKey<?>
+                && ((MultitonKey<?>) getKey()).getValue() != null
+                && ClassUtility.getGenericClass(this.getClass(), 2).isAssignableFrom(((MultitonKey<?>) getKey()).getValue().getClass())) {
+            this.object = (O) ((MultitonKey<?>) getKey()).getValue();
+        }
     }
 }

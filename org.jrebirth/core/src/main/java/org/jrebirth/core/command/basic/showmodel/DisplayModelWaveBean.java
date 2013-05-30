@@ -17,6 +17,7 @@
  */
 package org.jrebirth.core.command.basic.showmodel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.property.ObjectProperty;
@@ -78,6 +79,9 @@ public class DisplayModelWaveBean implements WaveBean {
      * @return Returns the keyPart.
      */
     public List<Object> getKeyPart() {
+        if (this.keyPart == null) {
+            this.keyPart = new ArrayList<>();
+        }
         return this.keyPart;
     }
 

@@ -56,13 +56,21 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     protected final void bindInternal() {
-        // Auto bound !
+
+        // Bind model object if any or do nothing
+        bindObject();
 
         // Do custom binding stuff
         bind();
     }
+
+    /**
+     * Bind object, store model oject if key part is provided.
+     */
+    protected abstract void bindObject();
 
     /**
      * {@inheritDoc}
