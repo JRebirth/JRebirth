@@ -78,10 +78,10 @@ public final class ClassUtility {
      */
     public static Object buildGenericType(final Class<?> mainClass, final int superTypeIndex, final Object... parameters) throws CoreException {
         Class<?> genericClass = null;
-        try {
+        // Copy parameters type to find the right constructor
+        final Class<?>[] parameterTypes = new Class<?>[parameters.length];
 
-            // Copy parameters type to find the right constructor
-            final Class<?>[] parameterTypes = new Class<?>[parameters.length];
+        try {
 
             int i = 0;
             for (final Object obj : parameters) {
@@ -104,6 +104,14 @@ public final class ClassUtility {
                     :
                     "Impossible to build the " + genericClass.getName() + " object for the class " + mainClass.getName();
             LOGGER.error(message, e);
+
+            if (e instanceof IllegalArgumentException) {
+                LOGGER.error("Arguments are : ");
+                for (int i = 0; i < parameterTypes.length; i++) {
+                    LOGGER.error("{} = {}", parameterTypes[i].toString(), parameters[i].toString());
+                }
+            }
+
             throw new CoreException(message, e);
         }
     }
