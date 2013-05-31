@@ -1,9 +1,11 @@
 package org.jrebirth.core.resource.color;
 
 import static org.junit.Assert.assertEquals;
+
 import javafx.scene.paint.Color;
 
 import org.jrebirth.core.resource.ResourceBuilders;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -35,7 +37,7 @@ public class ColorTest {
         checkGrayColor(TestColors.TEST_COLOR_GRAY_3);
     }
 
-    private void checkGrayColor(final ColorItemBase colorItem) {
+    private void checkGrayColor(final ColorItem colorItem) {
         final Color color = colorItem.get();
         final GrayColor wc = (GrayColor) ResourceBuilders.COLOR_BUILDER.getParam(colorItem);
 
@@ -55,7 +57,7 @@ public class ColorTest {
         checkHsbColor(TestColors.TEST_COLOR_HSB_3);
     }
 
-    private void checkHsbColor(final ColorItemBase colorItem) {
+    private void checkHsbColor(final ColorItem colorItem) {
         final Color color = colorItem.get();
         final HSBColor wc = (HSBColor) ResourceBuilders.COLOR_BUILDER.getParam(colorItem);
 
@@ -74,7 +76,7 @@ public class ColorTest {
         checkWebColor(TestColors.TEST_COLOR_WEB_3);
     }
 
-    private void checkWebColor(final ColorItemBase colorItem) {
+    private void checkWebColor(final ColorItem colorItem) {
         final Color color = colorItem.get();
         final WebColor wc = (WebColor) ResourceBuilders.COLOR_BUILDER.getParam(colorItem);
 
@@ -94,7 +96,7 @@ public class ColorTest {
         checkRgb01Color(TestColors.TEST_COLOR_RGB01_3);
     }
 
-    private void checkRgb01Color(final ColorItemBase colorItem) {
+    private void checkRgb01Color(final ColorItem colorItem) {
         final Color color = colorItem.get();
         final RGB01Color wc = (RGB01Color) ResourceBuilders.COLOR_BUILDER.getParam(colorItem);
 
@@ -113,7 +115,7 @@ public class ColorTest {
         checkRgb255Color(TestColors.TEST_COLOR_RGB255_3);
     }
 
-    private void checkRgb255Color(final ColorItemBase colorItem) {
+    private void checkRgb255Color(final ColorItem colorItem) {
         final Color color = colorItem.get();
         final RGB255Color wc = (RGB255Color) ResourceBuilders.COLOR_BUILDER.getParam(colorItem);
 

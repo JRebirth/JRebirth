@@ -3,6 +3,7 @@ package org.jrebirth.core.resource.parameter;
 import static org.junit.Assert.assertEquals;
 
 import org.jrebirth.core.resource.ResourceBuilders;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -34,7 +35,7 @@ public class ParameterTest {
         checkStringParameter(TestParameters.TEST_STRING_PARAM_3, "font");
     }
 
-    private void checkStringParameter(final ParameterItemBase<String> parameterItem, final String checkedName) {
+    private void checkStringParameter(final ParameterItem<String> parameterItem, final String checkedName) {
         final String param = parameterItem.get();
         assertEquals("Check String", checkedName, param);
 
@@ -46,7 +47,7 @@ public class ParameterTest {
         checkIntegerParameter(TestParameters.TEST_INTEGER_WIDTH, 800);
     }
 
-    private void checkIntegerParameter(final ParameterItemBase<Integer> parameterItem, final Integer checkedValue) {
+    private void checkIntegerParameter(final ParameterItem<Integer> parameterItem, final Integer checkedValue) {
         final Integer param = parameterItem.get();
         assertEquals("Check Integer", checkedValue, param);
 

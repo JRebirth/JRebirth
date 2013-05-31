@@ -34,13 +34,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The class <strong>FontBuilder</strong>.
+ * The class <strong>ParameterBuilder</strong>.
  * 
- * Class used to manage font with weak reference.
+ * Class used to manage parameters with weak reference.
  * 
  * @author Sébastien Bordes
  */
-public final class ParameterBuilder extends AbstractResourceBuilder<ParameterItem, ParameterParams, Object> {
+public final class ParameterBuilder extends AbstractResourceBuilder<ParameterItem<?>, ParameterParams, Object> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ParameterBuilder.class);

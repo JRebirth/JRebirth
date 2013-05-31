@@ -26,7 +26,7 @@ import org.jrebirth.core.resource.ResourceBuilders;
  * 
  * @author Sébastien Bordes
  */
-public final class ParameterItemBase<T> implements ParameterItem {
+public final class ParameterItemBase<T> implements ParameterItem<T> {
 
     /** The generator of unique id. */
     private static int idGenerator;
@@ -35,11 +35,13 @@ public final class ParameterItemBase<T> implements ParameterItem {
     private int uid;
 
     /**
-     * Private Constructor.
+     * Default Constructor.
+     * 
+     * You should not use this constructor, see #{@link org.jrebirth.core.resource.Resources}
      * 
      * @param parameterParams the params for parameter object
      */
-    private ParameterItemBase(final ParameterParams parameterParams) {
+    public ParameterItemBase(final ParameterParams parameterParams) {
 
         builder().storeParams(this, parameterParams);
     }
@@ -59,45 +61,6 @@ public final class ParameterItemBase<T> implements ParameterItem {
     @Override
     public ParameterBuilder builder() {
         return ResourceBuilders.PARAMETER_BUILDER;
-    }
-
-    /**
-     * Build a color item.
-     * 
-     * @param <O> the type of parameterized object
-     * 
-     * @param parameterParams the primitive values for the color
-     * 
-     * @return a new fresh color item object
-     */
-    public static <O extends Object> ParameterItemBase<O> build(final ObjectParameter<O> parameterParams) {
-        final ParameterItemBase<O> parameterItem = new ParameterItemBase<O>(parameterParams);
-
-        // Ensure that the uid will be unique at runtime
-        synchronized (ParameterItemBase.class) {
-            parameterItem.setUid(++idGenerator);
-        }
-        return parameterItem;
-    }
-
-    /**
-     * Build a color item.
-     * 
-     * @param <O> the type of parameterized object
-     * 
-     * @param name the parameter unique name
-     * @param value the parameterized object value
-     * 
-     * @return a new fresh color item object
-     */
-    public static <O extends Object> ParameterItemBase<O> build(final String name, final O value) {
-        final ParameterItemBase<O> parameterItem = new ParameterItemBase<O>(new ObjectParameter<O>(name, value));
-
-        // Ensure that the uid will be unique at runtime
-        synchronized (ParameterItemBase.class) {
-            parameterItem.setUid(++idGenerator);
-        }
-        return parameterItem;
     }
 
     /**

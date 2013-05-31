@@ -27,8 +27,10 @@ import org.jrebirth.core.resource.ResourceItem;
  * 
  * The name will be transformed : camelCase => CAMEL_CASE
  * 
+ * @param <T> the object type of the parameter
+ * 
  * @author Sébastien Bordes
  */
-public interface ParameterItem extends ResourceItem<Object, ParameterBuilder> {
+public interface ParameterItem<T extends Object> extends ResourceItem<T, ParameterBuilder> {
 
 }
