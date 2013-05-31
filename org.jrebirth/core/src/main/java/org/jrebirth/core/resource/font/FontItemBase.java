@@ -20,7 +20,6 @@ package org.jrebirth.core.resource.font;
 import javafx.scene.text.Font;
 
 import org.jrebirth.core.resource.ResourceBuilders;
-import org.jrebirth.core.resource.parameter.ParameterItem;
 
 /**
  * The class <strong>FontItemBase</strong>.
@@ -29,18 +28,17 @@ import org.jrebirth.core.resource.parameter.ParameterItem;
  */
 public final class FontItemBase implements FontItem {
 
-    /** The generator of unique id. */
-    private static int idGenerator;
-
     /** The unique identifier of the font item. */
     private int uid;
 
     /**
-     * Private Constructor.
+     * Default Constructor.
+     * 
+     * You should not use this constructor, see #{@link org.jrebirth.core.resource.Resources}
      * 
      * @param fontParams the primitive values for the font
      */
-    private FontItemBase(final FontParams fontParams) {
+    public FontItemBase(final FontParams fontParams) {
         builder().storeParams(this, fontParams);
     }
 
@@ -58,41 +56,6 @@ public final class FontItemBase implements FontItem {
     @Override
     public FontBuilder builder() {
         return ResourceBuilders.FONT_BUILDER;
-    }
-
-    /**
-     * Build a font item.
-     * 
-     * @param fontParams the primitive values for the font
-     * 
-     * @return a new fresh font item object
-     */
-    public static FontItemBase build(final FontParams fontParams) {
-        final FontItemBase fontItem = new FontItemBase(fontParams);
-
-        // Ensure that the uid will be unique at runtime
-        synchronized (FontItemBase.class) {
-            fontItem.setUid(++idGenerator);
-        }
-        return fontItem;
-    }
-
-    /**
-     * Build a font item.
-     * 
-     * @param fontParameterName the parameter name used by this font
-     * @param fontParams the primitive values for the font
-     * 
-     * @return a new fresh font item object
-     */
-    public static FontItemBase build(final ParameterItem fontParameterName, final FontParams fontParams) {
-        final FontItemBase fontItem = new FontItemBase(fontParams);
-
-        // Ensure that the uid will be unique at runtime
-        synchronized (FontItemBase.class) {
-            fontItem.setUid(++idGenerator);
-        }
-        return fontItem;
     }
 
     /**

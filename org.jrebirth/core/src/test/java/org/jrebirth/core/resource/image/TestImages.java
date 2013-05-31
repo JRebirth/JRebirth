@@ -15,31 +15,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.resource.parameter;
+package org.jrebirth.core.resource.image;
 
 import static org.jrebirth.core.resource.Resources.create;
 
 /**
- * The class <strong>TestParameters</strong>.
+ * The class <strong>TestColors</strong>.
  * 
  * @author Sébastien Bordes
  */
-public interface TestParameters {
+public interface TestImages {
 
     /**************************************************************************************/
-    /** ______________________________String Parameters._________________________________ */
+    /** __________________________________Local Image.___________________________________ */
     /**************************************************************************************/
 
-    /** The web color. */
-    ParameterItem<String> TEST_STRING_PARAM_1 = create(new ObjectParameter<String>("fonts"));
-    ParameterItem<String> TEST_STRING_PARAM_2 = create(new ObjectParameter<String>("fontsFolder"));
-    ParameterItem<String> TEST_STRING_PARAM_3 = create("fontsFolder", "font");
-
-    /**************************************************************************************/
-    /** ______________________________Integer Parameters.________________________________ */
-    /**************************************************************************************/
-
-    ParameterItem<Integer> TEST_INTEGER_WIDTH = create("stageWidth", 800);
-    ParameterItem<Integer> TEST_INTEGER_HEIGHT = create("stageHeight", 600);
+    /** The local image. */
+    ImageItem TEST_IMAGE_JR_1 = create(new LocalImage("image/logo.png"));
 
 }

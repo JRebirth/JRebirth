@@ -20,7 +20,6 @@ package org.jrebirth.core.resource.image;
 import javafx.scene.image.Image;
 
 import org.jrebirth.core.resource.ResourceBuilders;
-import org.jrebirth.core.resource.parameter.ParameterItem;
 
 /**
  * The class <strong>ImageItemBase</strong>.
@@ -29,18 +28,17 @@ import org.jrebirth.core.resource.parameter.ParameterItem;
  */
 public final class ImageItemBase implements ImageItem {
 
-    /** The generator of unique id. */
-    private static int idGenerator;
-
     /** The unique identifier of the image item. */
     private int uid;
 
     /**
-     * Private Constructor.
+     * Default Constructor.
+     * 
+     * You should not use this constructor, see #{@link org.jrebirth.core.resource.Resources}
      * 
      * @param imageParams the primitive values for the image
      */
-    private ImageItemBase(final ImageParams imageParams) {
+    public ImageItemBase(final ImageParams imageParams) {
         builder().storeParams(this, imageParams);
     }
 
@@ -58,41 +56,6 @@ public final class ImageItemBase implements ImageItem {
     @Override
     public ImageBuilder builder() {
         return ResourceBuilders.IMAGE_BUILDER;
-    }
-
-    /**
-     * Build an image item.
-     * 
-     * @param imageParams the primitive values for the image
-     * 
-     * @return a new fresh image item object
-     */
-    public static ImageItemBase build(final ImageParams imageParams) {
-        final ImageItemBase imageItem = new ImageItemBase(imageParams);
-
-        // Ensure that the uid will be unique at runtime
-        synchronized (ImageItemBase.class) {
-            imageItem.setUid(++idGenerator);
-        }
-        return imageItem;
-    }
-
-    /**
-     * Build a image item.
-     * 
-     * @param imageParameterName the parameter name used by this image
-     * @param imageParams the primitive values for the image
-     * 
-     * @return a new fresh image item object
-     */
-    public static ImageItemBase build(final ParameterItem imageParameterName, final ImageParams imageParams) {
-        final ImageItemBase imageItem = new ImageItemBase(imageParams);
-
-        // Ensure that the uid will be unique at runtime
-        synchronized (ImageItemBase.class) {
-            imageItem.setUid(++idGenerator);
-        }
-        return imageItem;
     }
 
     /**

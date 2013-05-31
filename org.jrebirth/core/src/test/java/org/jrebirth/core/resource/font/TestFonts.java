@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.resource.font;
 
+import static org.jrebirth.core.resource.Resources.create;
+
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
@@ -32,25 +34,25 @@ public interface TestFonts {
     /**************************************************************************************/
 
     /** The real font. */
-    FontItem TEST_REAL_FONT_1 = FontItemBase.build(new RealFont(TestFontNames.Turtles, 10.0));
+    FontItem TEST_REAL_FONT_1 = create(new RealFont(TestFontNames.Turtles, 10.0));
 
     /** The real font. */
-    FontItem TEST_REAL_FONT_2 = FontItemBase.build(new RealFont(TestFontNames.Turtles, 12.0));
+    FontItem TEST_REAL_FONT_2 = create(new RealFont(TestFontNames.Turtles, 12.0));
 
     /**************************************************************************************/
     /** _________________________________Family Fonts.___________________________________ */
     /**************************************************************************************/
 
     /** The family font. */
-    FontItem TEST_FAMILY_FONT_1 = FontItemBase.build(new FamilyFont("serif", 10.0, FontWeight.BOLD, FontPosture.ITALIC));
+    FontItem TEST_FAMILY_FONT_1 = create(new FamilyFont("serif", 10.0, FontWeight.BOLD, FontPosture.ITALIC));
 
     /** The family font. */
-    FontItem TEST_FAMILY_FONT_2 = FontItemBase.build(new FamilyFont("sansserif", 16.0, FontWeight.BOLD));
+    FontItem TEST_FAMILY_FONT_2 = create(new FamilyFont("sansserif", 16.0, FontWeight.BOLD));
 
     /** The family font. */
-    FontItem TEST_FAMILY_FONT_3 = FontItemBase.build(new FamilyFont("monospaced", 17.0, FontPosture.ITALIC));
+    FontItem TEST_FAMILY_FONT_3 = create(new FamilyFont("monospaced", 17.0, FontPosture.ITALIC));
 
     /** The family font. */
-    FontItem TEST_FAMILY_FONT_4 = FontItemBase.build(new FamilyFont("monospaced", 8.0));
+    FontItem TEST_FAMILY_FONT_4 = create(new FamilyFont("monospaced", 8.0));
 
 }
