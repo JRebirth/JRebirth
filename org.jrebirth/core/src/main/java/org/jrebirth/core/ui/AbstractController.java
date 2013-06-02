@@ -28,6 +28,7 @@ import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.handler.AbstractNamedEventHandler;
 import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.WaveData;
+import org.jrebirth.core.wave.WaveType;
 import org.jrebirth.core.wave.WaveTypeBase;
 
 /**
@@ -65,7 +66,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * 
      * @param <E> The type of JavaFX Event to track
      */
-    protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveTypeBase waveType,
+    protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveType waveType,
             final WaveData<?>... waveData) {
 
         linkWave(node, eventType, waveType, null, waveData);
@@ -82,7 +83,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * 
      * @param <E> The type of JavaFX Event to track
      */
-    protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveTypeBase waveType, final Callback<E, Boolean> callback,
+    protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveType waveType, final Callback<E, Boolean> callback,
             final WaveData<?>... waveData) {
 
         node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkWave") {
