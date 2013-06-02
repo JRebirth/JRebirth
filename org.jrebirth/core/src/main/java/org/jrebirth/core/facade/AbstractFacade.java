@@ -26,6 +26,7 @@ import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.key.ClassKey;
 import org.jrebirth.core.key.KeyBuilder;
+import org.jrebirth.core.key.MultitonKey;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
@@ -103,6 +104,16 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             // Remove the component from the singleton map
             this.singletonMap.remove(buildKey((Class<? extends R>) readyObject.getClass(), keyPart));
         }
+    }
+
+    @Override
+    public <E extends R> E retrieve(UniqueKey<E> uniqueKey) {
+
+        if (uniqueKey instanceof MultitonKey<?>) {
+            return retrieve(uniqueKey.getClassField(), ((MultitonKey<?>) uniqueKey).getValue());
+        }
+        return retrieve(uniqueKey.getClassField());
+
     }
 
     /**

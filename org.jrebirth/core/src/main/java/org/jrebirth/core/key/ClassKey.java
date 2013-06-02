@@ -24,7 +24,7 @@ package org.jrebirth.core.key;
  * 
  * @author Sébastien Bordes
  */
-public class ClassKey<C> implements UniqueKey {
+public class ClassKey<C> implements UniqueKey<C> {
 
     /** The class definition of the component registered by the current key. */
     private final Class<C> classField;
@@ -75,6 +75,7 @@ public class ClassKey<C> implements UniqueKey {
     /**
      * @return Returns the classField.
      */
+    @Override
     public Class<C> getClassField() {
         return this.classField;
     }

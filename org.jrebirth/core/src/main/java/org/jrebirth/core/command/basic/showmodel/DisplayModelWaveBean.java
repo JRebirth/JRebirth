@@ -24,6 +24,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
+import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.WaveBean;
 
@@ -34,8 +35,11 @@ import org.jrebirth.core.wave.WaveBean;
  */
 public class DisplayModelWaveBean implements WaveBean {
 
-    /** The model class. */
-    private Class<? extends Model> modelClass;
+    /** The show model key. */
+    private UniqueKey showModelKey;
+
+    /** The hide model key. */
+    private UniqueKey hideModelKey;
 
     /** The model key parts. */
     private List<Object> keyPart;
@@ -49,28 +53,46 @@ public class DisplayModelWaveBean implements WaveBean {
     /** Flag that indicates if the child node must be added at the end (true) or at the beginning (false). */
     private boolean appendChild = true;
 
-    /** The created node. */
-    private Node createdNode;
+    /** The model instance created to show. */
+    private Model showModel;
 
-    /** The model instance created. */
-    private Model model;
+    /** The model instance to hide (ie: with an animation). */
+    private Model hideModel;
 
     /**
-     * Gets the model class.
+     * Gets the show model key.
      * 
-     * @return the model class
+     * @return the show model key
      */
-    public Class<? extends Model> getModelClass() {
-        return this.modelClass;
+    public UniqueKey getShowModelKey() {
+        return this.showModelKey;
     }
 
     /**
-     * Sets the model class.
+     * Sets the show model key.
      * 
-     * @param modelClass the new model class
+     * @param showModelKey the new show model key
      */
-    public void setModelClass(final Class<? extends Model> modelClass) {
-        this.modelClass = modelClass;
+    public void setShowModelKey(final UniqueKey showModelKey) {
+        this.showModelKey = showModelKey;
+    }
+
+    /**
+     * Gets the hide model key.
+     * 
+     * @return the hide model key
+     */
+    public UniqueKey getHideModelKey() {
+        return hideModelKey;
+    }
+
+    /**
+     * Sets the hide model key.
+     * 
+     * @param hideModelKey the new hide model key
+     */
+    public void setHideModelKey(UniqueKey hideModelKey) {
+        this.hideModelKey = hideModelKey;
     }
 
     /**
@@ -122,7 +144,7 @@ public class DisplayModelWaveBean implements WaveBean {
     }
 
     /**
-     * Sets the chidren place holder.
+     * Sets the children place holder.
      * 
      * @param chidrenPlaceHolder The chidrenPlaceHolder to set.
      */
@@ -131,6 +153,8 @@ public class DisplayModelWaveBean implements WaveBean {
     }
 
     /**
+     * Checks if is flag that indicates if the child node must be added at the end (true) or at the beginning (false).
+     * 
      * @return Returns the appendChild.
      */
     public boolean isAppendChild() {
@@ -138,6 +162,8 @@ public class DisplayModelWaveBean implements WaveBean {
     }
 
     /**
+     * Sets the flag that indicates if the child node must be added at the end (true) or at the beginning (false).
+     * 
      * @param appendChild The appendChild to set.
      */
     public void setAppendChild(final boolean appendChild) {
@@ -149,34 +175,34 @@ public class DisplayModelWaveBean implements WaveBean {
      * 
      * @return the created node
      */
-    public Node getCreatedNode() {
-        return this.createdNode;
+    public Model getShowModel() {
+        return this.showModel;
     }
 
     /**
      * Sets the created node.
      * 
-     * @param createdNode the new created node
+     * @param model the new created node
      */
-    public void setCreatedNode(final Node createdNode) {
-        this.createdNode = createdNode;
+    public void setShowModel(final Model model) {
+        this.showModel = model;
     }
 
     /**
-     * Gets the model.
+     * Gets the model instance to hide (ie: with an animation).
      * 
-     * @return the model
+     * @return the model instance to hide (ie: with an animation)
      */
-    public Model getModel() {
-        return this.model;
+    public Model getHideModel() {
+        return hideModel;
     }
 
     /**
-     * Sets the model.
+     * Sets the model instance to hide (ie: with an animation).
      * 
-     * @param model the new model
+     * @param hideModel the new model instance to hide (ie: with an animation)
      */
-    public void setModel(final Model model) {
-        this.model = model;
+    public void setHideModel(Model hideModel) {
+        this.hideModel = hideModel;
     }
 }

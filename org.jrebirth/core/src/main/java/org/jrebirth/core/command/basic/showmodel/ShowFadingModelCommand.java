@@ -40,5 +40,6 @@ public class ShowFadingModelCommand extends DefaultMultiCommand {
     protected void addSubCommand() {
         addCommandClass(ShowModelCommand.class);
         addCommandClass(FadeTransitionCommand.class);
+        addCommandClass(DetachModelCommand.class);
     }
 }

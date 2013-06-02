@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
 import org.jrebirth.core.command.CommandWaveBuilder;
+import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.WaveBase;
 
@@ -34,8 +35,8 @@ import org.jrebirth.core.wave.WaveBase;
  */
 public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWaveBuilder, DisplayModelWaveBean> {
 
-    /** The model class to show. */
-    private Class<? extends Model> modelClass;
+    /** The unique key of the model to show. */
+    private UniqueKey<? extends Model> showModelKey;
 
     /** The unique place holder, in example the centerProperty of a BorderPane. */
     private ObjectProperty<Node> uniquePlaceHolder;
@@ -76,7 +77,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
             getWaveBean(paramWave).setChidrenPlaceHolder(this.chidrenPlaceHolder);
         }
         if (hasBit(2)) {
-            getWaveBean(paramWave).setModelClass(this.modelClass);
+            getWaveBean(paramWave).setShowModelKey(this.showModelKey);
         }
         if (hasBit(3)) {
             getWaveBean(paramWave).setKeyPart(Arrays.asList(this.keyPart));
@@ -110,14 +111,14 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
     }
 
     /**
-     * Define the model class to shown.
+     * Define the unique key of the model to show.
      * 
-     * @param modelClass the model class to shown
+     * @param showwModelKey the unique key of the model to show
      * 
      * @return the builder
      */
-    public ShowModelWaveBuilder modelClass(final Class<? extends Model> modelClass) {
-        this.modelClass = modelClass;
+    public ShowModelWaveBuilder showModelKey(final UniqueKey<? extends Model> showModelKey) {
+        this.showModelKey = showModelKey;
         addBit(2);
         return this;
     }

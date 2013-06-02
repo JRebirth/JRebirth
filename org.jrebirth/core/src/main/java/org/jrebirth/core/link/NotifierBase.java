@@ -31,6 +31,7 @@ import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.AbstractGlobalReady;
 import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.WaveReady;
+import org.jrebirth.core.key.KeyBuilder;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.JRebirthWaves;
@@ -149,7 +150,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         // This key method could be managed in another way (fully sync with JAT), to see if it could be useful
 
         // Build the wave used to call the required command
-        final ShowModelWaveBuilder smwb = ShowModelWaveBuilder.create().modelClass((Class<? extends Model>) wave.getRelatedClass());
+        final ShowModelWaveBuilder smwb = ShowModelWaveBuilder.create().showModelKey(KeyBuilder.buildKey(wave.getRelatedClass()));
 
         if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
             // Add the Ui view into the place holder provided

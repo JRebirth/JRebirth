@@ -42,10 +42,10 @@ public class AttachModelCommand extends DefaultUICommand {
     protected void execute(final Wave wave) {
 
         // final Pane parentNode = getWaveBean(wave).getParentNode();
-        final Node createdNode = getWaveBean(wave).getCreatedNode();
+        final Node createdNode = getWaveBean(wave).getShowModel().getRootNode();
 
         if (createdNode == null) {
-            LOGGER.warn("Impossible to attach model {} because the created node is null", getWaveBean(wave).getModelClass().getSimpleName());
+            LOGGER.warn("Impossible to attach model {} because the created node is null", getWaveBean(wave).getShowModelKey().toString());
         } else {
             if (getWaveBean(wave).getUniquePlaceHolder() != null) {
                 getWaveBean(wave).getUniquePlaceHolder().set(createdNode);
@@ -58,13 +58,17 @@ public class AttachModelCommand extends DefaultUICommand {
                 }
             }
             if (getWaveBean(wave).getUniquePlaceHolder() == null && getWaveBean(wave).getChidrenPlaceHolder() == null) {
-                LOGGER.warn("Impossible to attach model {}, no place holder found", getWaveBean(wave).getModelClass().getSimpleName());
+                LOGGER.warn("Impossible to attach model {}, no place holder found", getWaveBean(wave).getShowModelKey().toString());
             }
 
             // Try to give focus to the new node added (Could be managed by a boolean ??)
             // createdNode.requestFocus();
 
-            getWaveBean(wave).getModel().doShowView(wave);
+            // FIXME do it in the right way
+            if (getWaveBean(wave).isAppendChild()) {
+                getWaveBean(wave).getShowModel().doShowView(wave);
+            }
+
         }
     }
 
