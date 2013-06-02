@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.facade;
 
+import org.jrebirth.core.key.UniqueKey;
+
 /**
  * The class <strong>Facade</strong>.
  * 
@@ -60,6 +62,18 @@ public interface Facade<R extends FacadeReady<R>> {
      * @param <E> the type of the ready object to retrieve
      */
     <E extends R> E retrieve(final Class<E> clazz, Object... keyPart);
+
+    /**
+     * Retrieve a ready object component.<br />
+     * May allow to build it if it hadn't been done previously
+     * 
+     * @param uniqueKey the unique key for the component to get
+     * 
+     * @return the singleton of the component
+     * 
+     * @param <E> the type of the ready object to retrieve
+     */
+    <E extends R> E retrieve(final UniqueKey<E> uniqueKey);
 
     /**
      * Check if the component has already been created and stored.

@@ -22,7 +22,7 @@ package org.jrebirth.core.key;
  * 
  * @author Sébastien Bordes
  */
-public interface UniqueKey {
+public interface UniqueKey<C> {
 
     /**
      * Return the unique key.
@@ -37,4 +37,11 @@ public interface UniqueKey {
      * @return the unique object or null if none
      */
     Object getValue();
+
+    /**
+     * Return the class type of the component
+     * 
+     * @return Returns the classField.
+     */
+    Class<C> getClassField();
 }

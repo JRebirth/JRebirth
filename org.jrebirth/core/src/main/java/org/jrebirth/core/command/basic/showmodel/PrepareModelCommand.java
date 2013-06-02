@@ -19,6 +19,7 @@ package org.jrebirth.core.command.basic.showmodel;
 
 import org.jrebirth.core.command.DefaultPoolCommand;
 import org.jrebirth.core.exception.CoreRuntimeException;
+import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 
@@ -42,31 +43,36 @@ public class PrepareModelCommand extends DefaultPoolCommand {
     protected void execute(final Wave wave) {
 
         // Retrieved the model class
-        final Class<? extends Model> modelClass = getWaveBean(wave).getModelClass();
-        final Object[] keyPart = getWaveBean(wave).getKeyPart() == null ? null : getWaveBean(wave).getKeyPart().toArray();
+        // final Class<? extends Model> modelClass = (Class<? extends Model>) getWaveBean(wave).getShowModelKey().getClass();
 
-        if (modelClass == null) {
+        // final Object[] keyPart = getWaveBean(wave).getKeyPart() == null ? null : getWaveBean(wave).getKeyPart().toArray();
+
+        final UniqueKey<? extends Model> showModelKey = getWaveBean(wave).getShowModelKey();
+
+        if (showModelKey.getClass() == null) {
             LOGGER.error("ModelClass is null");
-            throw new CoreRuntimeException("Illegal action : ModelClass is null");
+            throw new CoreRuntimeException("Illegal action : Model Class is null");
         }
         // Retrieve the mode according to its keyPart
-        Model modelInstance;
-        if (keyPart == null) {
-            modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelClass);
-        } else {
-            modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelClass, keyPart);
-        }
+        Model modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(showModelKey);
+
+        //
+        // if (keyPart == null) {
+        // modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelClass);
+        // } else {
+        // modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelClass, keyPart);
+        // }
 
         if (modelInstance == null) {
-            LOGGER.error("Model " + modelClass.getSimpleName() + " couldn't be created");
-            throw new CoreRuntimeException("Illegal action : Model Instance is null: " + modelClass.getName());
+            LOGGER.error("Model " + showModelKey.getClassField().getSimpleName() + " couldn't be created");
+            throw new CoreRuntimeException("Illegal action : Model Instance is null: " + showModelKey.getClassField().getName());
         }
 
         // Attach the model to allow reuse later in the process
-        getWaveBean(wave).setModel(modelInstance);
+        getWaveBean(wave).setShowModel(modelInstance);
 
         // Build the first root node into the thread pool and link it to the waveBean
-        getWaveBean(wave).setCreatedNode(modelInstance.getRootNode());
+        // getWaveBean(wave).setCreatedNode(modelInstance.getRootNode());
     }
 
     /**

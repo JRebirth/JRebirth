@@ -282,7 +282,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * 
      * @return the external form of the css file
      */
-    protected String loadCSS(final String cssFileName) {
+    private String loadCSS(final String cssFileName) {
         final URL cssResource = Thread.currentThread().getContextClassLoader().getResource(cssFileName);
         return cssResource == null ? null : cssResource.toExternalForm();
     }

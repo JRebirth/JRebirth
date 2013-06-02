@@ -52,13 +52,16 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
     @Override
     protected void execute(final Wave wave) {
 
-        final ObservableList<Node> parentContainer = getWaveBean(wave).getChidrenPlaceHolder();
-
         // The old node is the one that exists into the parent container (or null if none)
-        final Node oldNode = parentContainer.size() > 1 ? parentContainer.get(getWaveBean(wave).getChidrenPlaceHolder().size() - 1) : null;
+        Node oldNode = (getWaveBean(wave).getHideModel() == null) ? null : getWaveBean(wave).getHideModel().getRootNode();
+
+        if (oldNode == null) {
+            final ObservableList<Node> parentContainer = getWaveBean(wave).getChidrenPlaceHolder();
+            oldNode = parentContainer.size() > 1 ? parentContainer.get(getWaveBean(wave).getChidrenPlaceHolder().size() - 1) : null;
+        }
 
         // The new node is the one create by PrepareModelCommand
-        final Node newNode = getWaveBean(wave).getCreatedNode();
+        final Node newNode = (getWaveBean(wave).getShowModel() == null) ? null : getWaveBean(wave).getShowModel().getRootNode();
 
         if (oldNode != null || newNode != null) {
             final ParallelTransition animation = ParallelTransitionBuilder.create()
@@ -83,6 +86,8 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
                                 .build());
             }
 
+            final Node oldNodeLink = oldNode;
+
             // When animation is finished remove the hidden node from the stack to let only one node at the same time
             animation.setOnFinished(new EventHandler<ActionEvent>() {
 
@@ -91,12 +96,14 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
                  */
                 @Override
                 public void handle(final ActionEvent arg0) {
-                    if (oldNode != null) {
+                    if (oldNodeLink != null) {
                         // remove the old nod from the stack to hide it
-                        getWaveBean(wave).getChidrenPlaceHolder().remove(oldNode);
+                        getWaveBean(wave).getChidrenPlaceHolder().remove(oldNodeLink);
 
-                        LOGGER.info("Remove " + oldNode.toString() + " from stack container");
+                        LOGGER.info("Remove " + oldNodeLink.toString() + " from stack container");
                     }
+                    // FIXME do it in the right way
+                    getWaveBean(wave).getShowModel().doShowView(wave);
                 }
             });
             animation.playFromStart();

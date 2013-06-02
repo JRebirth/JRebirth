@@ -20,6 +20,7 @@ package org.jrebirth.core.command.basic.showmodel;
 import javafx.scene.Node;
 
 import org.jrebirth.core.command.DefaultUICommand;
+import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 
 import org.slf4j.Logger;
@@ -41,27 +42,32 @@ public class DetachModelCommand extends DefaultUICommand {
     @Override
     protected void execute(final Wave wave) {
 
-        getWaveBean(wave).getModel().doHideView(wave);
-
-        // final Pane parentNode = getWaveBean(wave).getParentNode();
-        Node createdNode = getWaveBean(wave).getCreatedNode();
-        if (createdNode == null) {
-            createdNode = getWaveBean(wave).getModel().getRootNode();
+        Model hideModel = getWaveBean(wave).getHideModel();
+        if (hideModel == null && getWaveBean(wave).getHideModelKey() != null) {
+            hideModel = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(getWaveBean(wave).getHideModelKey());
         }
 
-        if (createdNode == null) {
-            LOGGER.warn("Impossible to dettach model {} because the node is null", getWaveBean(wave).getModelClass().getSimpleName());
+        Node hideNode = null;
+
+        if (hideModel == null) {
+            LOGGER.warn("Impossible to dettach a model because hideModel is null");
         } else {
-            if (getWaveBean(wave).getUniquePlaceHolder() != null) {
-                getWaveBean(wave).getUniquePlaceHolder().set(null);
-            }
-            if (getWaveBean(wave).getChidrenPlaceHolder() != null) {
-                getWaveBean(wave).getChidrenPlaceHolder().remove(createdNode);
-            }
-            if (getWaveBean(wave).getUniquePlaceHolder() == null && getWaveBean(wave).getChidrenPlaceHolder() == null) {
-                LOGGER.warn("Impossible to detach model {}, no place holder found", getWaveBean(wave).getModelClass().getSimpleName());
+            hideModel.doHideView(wave);
+            hideNode = hideModel.getRootNode();
+
+            if (hideNode == null) {
+                LOGGER.warn("Impossible to dettach model {} because the node is null", hideModel.getClass().getSimpleName());
+            } else {
+                if (getWaveBean(wave).getUniquePlaceHolder() != null) {
+                    getWaveBean(wave).getUniquePlaceHolder().set(null);
+                } else if (getWaveBean(wave).getChidrenPlaceHolder() != null) {
+                    getWaveBean(wave).getChidrenPlaceHolder().remove(hideNode);
+                } else {
+                    LOGGER.warn("Impossible to detach model {}, no place holder found", hideModel.getClass().getSimpleName());
+                }
             }
         }
+
     }
 
     /**
@@ -69,7 +75,7 @@ public class DetachModelCommand extends DefaultUICommand {
      * 
      * @param wave the wave that hold the bean
      * 
-     * @return he casted wave bean
+     * @return the casted wave bean
      */
     @Override
     public DisplayModelWaveBean getWaveBean(final Wave wave) {
