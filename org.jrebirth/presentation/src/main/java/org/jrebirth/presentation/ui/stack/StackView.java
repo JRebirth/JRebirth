@@ -54,6 +54,8 @@ public final class StackView extends AbstractView<StackModel, StackPane, StackCo
 
         getRootNode().setId("SlideStack");
 
+        getRootNode().setFocusTraversable(true);
+
         getRootNode().setPrefSize(1024, 768);
         getRootNode().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         getRootNode().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
