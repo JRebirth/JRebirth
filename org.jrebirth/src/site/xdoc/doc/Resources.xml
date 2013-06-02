@@ -82,7 +82,7 @@
 			</subsection>
 			
 			<subsection id="enum" name="With Enumeration">
-				<p>The other way to declare is a little bit complex, it implies to create an <strong>enum</strong> that implements a <i>ResourceItem<i/> interface.<br />
+				<p>The other way to declare is a little bit complex, it implies to create an <strong>enum</strong> that implements a <i>ResourceItem</i> interface.<br />
 				But it requires to add some copy/paste code into implemented methods.
 				</p>
 			</subsection>
