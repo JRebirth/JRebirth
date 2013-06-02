@@ -293,6 +293,29 @@
 				<version>3.3.2</version>
 			</plugin>
 
+
+			<!-- Copy UML Class Diagram -->
+			<!--<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>UML recopy</id>
+						<phase>pre-site</phase>
+						<configuration>
+							<tasks>
+								<copy todir="${project.build.directory}/site/doc/uml/">
+									<fileset dir="${basedir}/src/main/uml/*.png" />
+								</copy>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>-->
+
 		</plugins>
 
 		<extensions>
@@ -361,10 +384,7 @@
 				<version>2.6</version>
 			</plugin>
 
-<!-- 			<plugin>
-				<groupId>org.codehaus.sonar-plugins</groupId>
-				<artifactId>maven-report</artifactId>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.codehaus.sonar-plugins</groupId> <artifactId>maven-report</artifactId> </plugin> -->
 
 		</plugins>
 	</reporting>
@@ -445,12 +465,26 @@
 			<organization>JRebirth</organization>
 			<organizationUrl>www.jrebirth.org</organizationUrl>
 			<roles>
-				<role>JRebirth Project Leader</role>
+				<role>JRebirth Designer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>jr3</id>
+			<name>Rajmahendra Hegde</name>
+			<email></email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Forge Developper</role>
+				<role>Gradle Developper</role>
+				<role>JRebirth Developper</role>
 			</roles>
 		</developer>
 	</developers>
 	<contributors>
 		<contributor>
+		<id>jr2</id>
 			<name>Bordes Céline</name>
 			<email>celine.bordes@jrebirth.org</email>
 			<url>www.xoxi.fr</url>
