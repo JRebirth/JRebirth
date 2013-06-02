@@ -33,10 +33,14 @@
 			<ul>
 				<li>Colors</li>
 				<li>Fonts</li>
+				<li>Images</li>
+				<li>Parameters</li>
 			</ul>
-			<p>These resources can consume a lot of memory if you don't dispose them when you stop using them. JRebirth provides a mechanism to store them weakly and to rebuild them if necessary in order to
-				use
-				the less memory as required.
+			<p>These resources can consume a lot of memory if you don't dispose them (especially big images) when you stop using them. <br />
+			JRebirth provides a mechanism to store them weakly and to rebuild them if necessary in order to
+				use the less memory as required.
+				To do this JRebirth stores a <b>ResourceParam</b> lightweight object that contains all information to create the heavyweight resource.<br />
+				This one is linked by a <b>ResourceItem</b> to facilitate its usage.
 			</p>
 			<p>
 				<span style="text-decoration: underline;">UML Diagram Overview:</span>
@@ -46,6 +50,51 @@
 					<img class="redux" src="uml/Resource.png" alt="" />
 				</a>
 			</div>
+			
+			<p>There are 3 ways to declare resources, each one is available for all kind of resources with special feature for parameters.
+			</p>
+			<ul>
+				<li><a href="#create">With Resources.create</a></li>
+				<li><a href="#enum">With Enumeration</a></li>
+				<li><a href="#dynamic">Dynamically</a></li>
+			</ul>
+			
+			
+			<subsection id="create" name="With Resources.create">
+				<p>The first way is to hold static field declaration instantiated  with custom 'factory' Resources (not named xxFactory with an overloaded create method to avoid latercast).<br />
+				This static fields can be hold in any class you want but we recommend to store them into an <b>Interface</b> used 'as' an enum.
+				It's better to have an interface per resource type to avoid big file that merges all resources.<br/>
+				Another interesting trick, is to add a static import on related static Resource.create method to shorten the resource declaration (Ctrl+Shift+M with Eclipse).
+				</p>
+				<p>Static import declaration:</p>
+				<macro name="include">
+					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" />
+					<param name="snippet" value="re:import static" />
+					<param name="snippet-start-offset" value="1" />
+				</macro>
+				
+				<p>Example of Web color declaration:</p>
+				<macro name="include">
+					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" />
+					<param name="snippet" value="re:TEST_COLOR_WEB_1" />
+					<param name="snippet-start-offset" value="1" />
+				</macro>
+			</subsection>
+			
+			<subsection id="enum" name="With Enumeration">
+				<p>The other way to declare is a little bit complex, it implies to create an <strong>enum</strong> that implements a <i>ResourceItem<i/> interface.<br />
+				But it requires to add some copy/paste code into implemented methods.
+				</p>
+			</subsection>
+			
+
+			<subsection id="dynamic" name="Dynamically">
+				<p>Not implemented yet</p>
+			</subsection>
+
+
+
+			
 			<p>
 				To manage these resources we use a
 				<em>enum</em>
