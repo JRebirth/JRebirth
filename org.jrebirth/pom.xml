@@ -295,7 +295,7 @@
 
 
 			<!-- Copy UML Class Diagram -->
-			<!--<plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
@@ -314,7 +314,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>-->
+			</plugin>
 
 		</plugins>
 
@@ -471,7 +471,7 @@
 		<developer>
 			<id>jr3</id>
 			<name>Rajmahendra Hegde</name>
-			<email></email>
+			<email>rajmahendra@gmail.com </email>
 			<url></url>
 			<organization></organization>
 			<organizationUrl></organizationUrl>
@@ -484,7 +484,6 @@
 	</developers>
 	<contributors>
 		<contributor>
-		<id>jr2</id>
 			<name>Bordes Céline</name>
 			<email>celine.bordes@jrebirth.org</email>
 			<url>www.xoxi.fr</url>
