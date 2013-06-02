@@ -38,7 +38,7 @@ import org.jrebirth.presentation.ui.base.AbstractSlideView;
  * @author Sébastien Bordes
  * 
  */
-public final class SplashView extends AbstractSlideView<SplashModel, BorderPane, SplashController> {
+public class SplashView extends AbstractSlideView<SplashModel, BorderPane, SplashController> {
 
     /** The Splashed text. */
     private Text splashText;

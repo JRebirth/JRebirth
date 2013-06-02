@@ -26,7 +26,7 @@ import org.jrebirth.presentation.ui.base.AbstractSlideController;
  * @author Sébastien Bordes
  * 
  */
-public final class SplashController extends AbstractSlideController<SplashModel, SplashView> {
+public class SplashController extends AbstractSlideController<SplashModel, SplashView> {
 
     /**
      * Default Constructor.

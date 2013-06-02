@@ -26,7 +26,7 @@ import org.jrebirth.presentation.ui.base.SlideStep;
  * @author Sébastien Bordes
  * 
  */
-public final class SplashModel extends AbstractSlideModel<SplashModel, SplashView, SlideStep> {
+public class SplashModel extends AbstractSlideModel<SplashModel, SplashView, SlideStep> {
 
     /**
      * {@inheritDoc}
