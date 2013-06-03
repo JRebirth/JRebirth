@@ -8,15 +8,15 @@
 					<snapshots>
 						<enabled>false</enabled>
 					</snapshots>
-					<id>releases</id>
+					<id>jrebirth-release</id>
 					<name>libs-release</name>
 					<url>http://repo.jrebirth.org/libs-release</url>
 				</repository>
 				<repository>
 					<snapshots>
-						<enabled>false</enabled>
+						<enabled>true</enabled>
 					</snapshots>
-					<id>snapshots</id>
+					<id>jrebirth-snapshot</id>
 					<name>libs-snapshot</name>
 					<url>http://repo.jrebirth.org/libs-snapshot</url>
 				</repository>
@@ -26,7 +26,7 @@
 					<snapshots>
 						<enabled>false</enabled>
 					</snapshots>
-					<id>central</id>
+					<id>jrebirth-plugin-release</id>
 					<name>plugins-release</name>
 					<url>http://repo.jrebirth.org/plugins-release</url>
 				</pluginRepository>
@@ -34,7 +34,7 @@
 					<snapshots>
 						<enabled>true</enabled>
 					</snapshots>
-					<id>snapshots</id>
+					<id>jrebirth-plugin-snapshot</id>
 					<name>plugins-snapshot</name>
 					<url>http://repo.jrebirth.org/plugins-snapshot</url>
 				</pluginRepository>
