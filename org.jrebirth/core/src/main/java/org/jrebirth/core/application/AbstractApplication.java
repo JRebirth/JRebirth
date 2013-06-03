@@ -306,9 +306,28 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     /**
      * Return the application title.
      * 
+     * This method could be overridden.
+     * 
+     * By default it will will return {@link JRebirthParameters.APPLICATION_NAME} {@link JRebirthParameters.APPLICATION_VERSION} string.
+     * 
+     * The default application is: ApplicationClass powered by JRebirth <br />
+     * If version is equals to "0.0.0", it will not be appended
+     * 
      * @return the application title
      */
-    protected abstract String getApplicationTitle();
+    protected String getApplicationTitle() {
+        // Add application Name
+        String name = JRebirthParameters.APPLICATION_NAME.get();
+        if (name.contains("{}")) {
+            name = name.replace("{}", this.getClass().getSimpleName());
+        }
+        // Add version with a space before
+        String version = JRebirthParameters.APPLICATION_VERSION.get();
+        if (!"0.0.0".equals(version)) {
+            name += " " + version;
+        }
+        return name;
+    }
 
     /**
      * Initialize the properties of the scene.
