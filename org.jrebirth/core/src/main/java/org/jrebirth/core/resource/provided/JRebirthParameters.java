@@ -3,6 +3,7 @@ package org.jrebirth.core.resource.provided;
 import static org.jrebirth.core.resource.Resources.create;
 
 import org.jrebirth.core.resource.image.LocalImage;
+import org.jrebirth.core.resource.parameter.ParameterItem;
 import org.jrebirth.core.resource.parameter.ParameterItemBase;
 
 /**
@@ -47,6 +48,17 @@ public interface JRebirthParameters {
      * The <code>NOT_AVAILABLE_IMAGE</code> field is used to define the image to use when an image is missing.
      */
     ParameterItemBase<LocalImage> NOT_AVAILABLE_IMAGE = create("notAvailableImage", new LocalImage("image/NotAvailableImage.png"));
+
+    /**
+     * The <code>APPLICATION_NAME</code> field is used to define title of the application displayed by stage window.<br />
+     * The default value contains a <b>{}</b> that will be replaced by application class simple name.
+     */
+    ParameterItemBase<String> APPLICATION_NAME = create("applicationName", "{} powered by JRebirth");
+
+    /**
+     * The <code>APPLICATION_VERSION</code> field is used to define the application version.
+     */
+    ParameterItem<String> APPLICATION_VERSION = create("applicationVersion", "0.0.0");
 
     /**************************************************************************************/
     /** _________________________Application Stage Parameters.___________________________ */
