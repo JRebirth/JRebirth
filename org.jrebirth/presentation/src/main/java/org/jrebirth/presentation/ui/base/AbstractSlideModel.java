@@ -91,7 +91,15 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      */
     @Override
     protected void initModel() {
+        // Nothing to do generic
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void bind() {
+        super.bind();
         // Load the default slide step (if exists)
         if (getStepList().size() > 0) {
             showSlideStep(getStepList().get(this.stepPosition));
@@ -104,7 +112,6 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     @Override
     protected void initInnerModels() {
         // Nothing to do generic
-        getClass();
     }
 
     /**
@@ -113,7 +120,6 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     @Override
     protected void showView() {
         // Nothing to do generic
-        getClass();
     }
 
     /**
@@ -122,7 +128,6 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     @Override
     protected void hideView() {
         // Nothing to do generic
-        getClass();
     }
 
     /**
@@ -132,7 +137,6 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     @Override
     protected void processAction(final Wave wave) {
         // Nothing to do generic
-        getClass();
     }
 
     /**
