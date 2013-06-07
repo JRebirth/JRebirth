@@ -23,6 +23,7 @@ import javafx.scene.layout.StackPane;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.AbstractView;
+import org.jrebirth.core.ui.annotation.RootNodeId;
 
 /**
  * 
@@ -33,6 +34,7 @@ import org.jrebirth.core.ui.AbstractView;
  * @author Sébastien Bordes
  * 
  */
+@RootNodeId("SlideStack")
 public final class StackView extends AbstractView<StackModel, StackPane, StackController> {
 
     /**
@@ -51,8 +53,6 @@ public final class StackView extends AbstractView<StackModel, StackPane, StackCo
      */
     @Override
     protected void initView() {
-
-        getRootNode().setId("SlideStack");
 
         getRootNode().setFocusTraversable(true);
 

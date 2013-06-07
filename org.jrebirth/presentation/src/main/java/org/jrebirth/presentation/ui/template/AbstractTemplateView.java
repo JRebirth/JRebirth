@@ -144,6 +144,8 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     @Override
     protected void initView() {
 
+        super.initView();
+
         // getRootNode().setPrefSize(1010, 750);
         // getRootNode().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         // getRootNode().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
