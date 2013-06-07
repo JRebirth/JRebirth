@@ -168,7 +168,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
         // Find the RootNodeId annotation
         final RootNodeId rni = ClassUtility.extractAnnotation(this.getClass(), RootNodeId.class);
-        getRootNode().setId(rni != null && !rni.value().isEmpty() ? rni.value() : this.getClass().getSimpleName());
+        if (rni != null) {
+            getRootNode().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
+        }
 
     }
 
