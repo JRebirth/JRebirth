@@ -61,7 +61,7 @@
 				.
 			</p>
 
-			<div id="javafx-app-placeholder" style="margin: 0 -27px; padding: 0;">
+			<div id="javafx-app-placeholder" style="margin: auto; width:800px; padding: 0;">
 			</div>
 
 		</section>
