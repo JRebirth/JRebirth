@@ -460,7 +460,7 @@
 		<developer>
 			<id>jr1</id>
 			<name>Bordes Sébastien</name>
-			<email>sebastien.bordes@jrebirth.org</email>
+			<email>seb@jrebirth.org</email>
 			<url>blog.webeo.fr</url>
 			<organization>JRebirth</organization>
 			<organizationUrl>www.jrebirth.org</organizationUrl>
@@ -471,16 +471,27 @@
 		<developer>
 			<id>jr3</id>
 			<name>Rajmahendra Hegde</name>
-			<email>rajmahendra@gmail.com </email>
-			<url></url>
-			<organization></organization>
-			<organizationUrl></organizationUrl>
+			<email>rajmahendra.hegde@jrebirth.org</email>
+			<url>http://twitter.come/rajonjava</url>
+			<organization>JUGChennai</organization>
+			<organizationUrl>http://jugchennai.in</organizationUrl>
 			<roles>
-				<role>Forge Developper</role>
-				<role>Gradle Developper</role>
-				<role>JRebirth Developper</role>
+				<role>JRebirth Developer</role>
 			</roles>
 		</developer>
+		
+		<developer>
+			<id>jr4</id>
+			<name>Guruprasad Shenoy</name>
+			<email>guruprasad.shenoy@jrebirth.org</email>
+			<url></url>
+			<organization>JUGChennai</organization>
+			<organizationUrl>http://jugchennai.in</organizationUrl>
+			<roles>
+				<role>JRebirth Developer</role>
+			</roles>
+		</developer>
+		
 	</developers>
 	<contributors>
 		<contributor>

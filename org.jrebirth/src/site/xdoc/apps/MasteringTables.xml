@@ -1,0 +1,71 @@
+<!DOCTYPE document [
+  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
+  <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+  %HTMLlat1;
+  <!-- These are the entity sets for special characters for the XHTML -->
+  <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+  %HTMLsymbol;
+  <!-- These are the entity sets for symbol characters for the XHTML -->
+  <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+  %HTMLspecial;
+]>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>Mastering Tables - Game for Kids</title>
+		<author>Sébastien Bordes</author>
+		<date>05/06/2013</date>
+	</properties>
+
+	<head>
+
+		<meta name="keywords" lang="Fr" content="JavaFX Mind Game Mastering Tables" />
+		<meta name="keywords" lang="En" content="JavaFX Mind Game Mastering Tables" />
+		<meta name="description" content="JavaFX Mind Game Mastering Tables" />
+
+	</head>
+	<body>
+		<script type="text/javascript">//<![CDATA[
+			var JAVAFX_APP_JNLP='masteringtables/1.0.0-SNAPSHOT/MasteringTables.jnlp';
+			var JAVAFX_APP_WIDTH=800;
+			var JAVAFX_APP_HEIGHT=600;
+		//]]></script>
+		<script type="text/javascript" src="../web-files/dtjava.js"></script>
+		<script type="text/javascript" src="../web-files/javafxApp.js"></script>
+
+		<section id="MasteringTables" name="Mastering Tables Mind Game" title="Mastering Tables Mind Game">
+
+			<div id="catcherTitle">Mastering Tables - Game for Kids</div>
+			<div id="catcherContent">Help kids learning their Math Tables</div>
+
+			<p>This application has been used as Workshop support during EclipseCON France JavaFX workshop</p>
+			<p>
+				Require
+				<a href="http://www.oracle.com/technetwork/java/javafx/downloads/index.html">Java 7 with JavaFX 2 Runtime</a>
+				(available for windows,
+				<a href="http://www.oracle.com/technetwork/java/javafx/downloads/devpreview-1429449.html">mac and linux since 2.1</a>
+				)
+			</p>
+			<p>
+				<strong>You can launch the application with Java Webstart:</strong>
+				<a onclick="return launchApplication();">Click to launch this app as webstart</a>
+				<br />
+			</p>
+			<p>
+				You can download the whole application here :
+				<a href="http://apps.jrebirth.org/masteringtables/masteringtables-1.0.0-SNASPHOT.zip">Mastering Tables Game</a>
+			</p>
+			<p>
+				You can browse the source code on
+				<a title="JRebirth Mastering Tables Repository" href="https://github.com/JRebirth/MasteringTables" target="_blank">GitHub MasteringTables repository</a>
+				.
+			</p>
+
+			<div id="javafx-app-placeholder" style="margin: 0 -27px; padding: 0;">
+			</div>
+
+		</section>
+	</body>
+</document>
+
+
