@@ -12,9 +12,9 @@
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
 	<properties>
-		<title>Lightning Talk - JavaFX 2.2 What's Up ?</title>
+		<title>EclipseCON France 2013 - JavaFX Workshop</title>
 		<author>Sébastien Bordes</author>
-		<date>16/11/2012</date>
+		<date>05/06/2013</date>
 	</properties>
 
 	<head>
