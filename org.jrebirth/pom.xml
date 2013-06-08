@@ -469,6 +469,17 @@
 			</roles>
 		</developer>
 		<developer>
+			<id>jr2</id>
+			<name>Bordes Céline</name>
+			<email>celine.bordes@jrebirth.org</email>
+			<url>www.jrebirth.org</url>
+			<organization>JRebirth</organization>
+			<organizationUrl>www.jrebirth.org</organizationUrl>
+			<roles>
+				<role>Graphic Designer</role>
+			</roles>
+		</developer>
+		<developer>
 			<id>jr3</id>
 			<name>Rajmahendra Hegde</name>
 			<email>rajmahendra.hegde@jrebirth.org</email>
@@ -479,7 +490,7 @@
 				<role>JRebirth Developer</role>
 			</roles>
 		</developer>
-		
+
 		<developer>
 			<id>jr4</id>
 			<name>Guruprasad Shenoy</name>
@@ -491,20 +502,8 @@
 				<role>JRebirth Developer</role>
 			</roles>
 		</developer>
-		
+
 	</developers>
-	<contributors>
-		<contributor>
-			<name>Bordes Céline</name>
-			<email>celine.bordes@jrebirth.org</email>
-			<url>www.xoxi.fr</url>
-			<organization>JRebirth</organization>
-			<organizationUrl>www.jrebirth.org</organizationUrl>
-			<roles>
-				<role>Graphic Designer</role>
-			</roles>
-		</contributor>
-	</contributors>
 
 	<dependencyManagement>
 		<dependencies>
