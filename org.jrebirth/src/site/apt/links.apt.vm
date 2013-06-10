@@ -8,23 +8,27 @@
 
 Useful links
 
+JRebirth provides 2 websites, one for latest development and one for latest stable. 
+The default website (www) is mapped to development version to be more up-to-date than frozen stable release.
+All previous websites are still available for reference.
+
 * All web sites
 
-	* Website for latest stable version: {{{http://www.jrebirth.org} www.jrebirth.org}}
+	* Website for latest stable version: {{{http://stable.jrebirth.org} stable.jrebirth.org}}
 
-	* Website for latest development version: {{{http://latest.jrebirth.org} latest.jrebirth.org}}
+	* Website for latest development version: {{{http://www.jrebirth.org} www.jrebirth.org}}
 
-	* List of all generated Websites: {{{http://sites.jrebirth.org}sites.jrebirth.org}}
+	* List of all generated Websites: {{{http://sites.jrebirth.org} sites.jrebirth.org}}
 
 * Javadoc
 
-	* Latest stable version (all modules mixed): {{{http://api.jrebirth.org}api.jrebirth.org}}
+	* Latest stable version (all modules mixed): {{{http://stable-api.jrebirth.org} stable-api.jrebirth.org}}
 
-	* Latest development version (all modules mixed): {{{http://latest-api.jrebirth.org}latest-api.jrebirth.org}}
+	* Latest development version (all modules mixed): {{{http://api.jrebirth.org} api.jrebirth.org}}
 
-	* Latest stable version of core module only: {{{http://api-core.jrebirth.org}api-core.jrebirth.org}}
+	* Latest stable version of core module only: {{{http://stable-api-core.jrebirth.org} stable-api-core.jrebirth.org}}
 
-	* Latest development version of core module only: {{{http://latest-api-core.jrebirth.org}latest-api-core.jrebirth.org}}
+	* Latest development version of core module only: {{{http://api-core.jrebirth.org} api-core.jrebirth.org}}
 
 
 * Software Factory
