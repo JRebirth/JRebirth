@@ -17,35 +17,31 @@
  */
 package org.jrebirth.core.resource.image;
 
-import org.jrebirth.core.resource.AbstractBaseParams;
-
 /**
  * The interface <strong>LocalImage</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class LocalImage extends AbstractBaseParams implements ImageParams {
+public class LocalImage extends AbstractBaseImage implements ImageParams {
 
-    /** the local image path. */
-    private final String localPath;
+    /**
+     * Default Constructor.
+     * 
+     * @param path the image local path
+     * @param name the file name
+     * @param extension the image extension
+     */
+    public LocalImage(final String path, String name, ImageExtension extension) {
+        super(path, name, extension);
+    }
 
     /**
      * Default Constructor.
      * 
      * @param path the image local path
      */
-    public LocalImage(final String localPath) {
-        super();
-        this.localPath = localPath;
-    }
-
-    /**
-     * Return the local image path.
-     * 
-     * @return the local image path
-     */
-    public String localPath() {
-        return this.localPath;
+    public LocalImage(String name, ImageExtension extension) {
+        this("", name, extension);
     }
 
     /**
@@ -53,7 +49,13 @@ public class LocalImage extends AbstractBaseParams implements ImageParams {
      */
     @Override
     public String toString() {
-        return this.localPath;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(path()).append(PARAMETER_SEPARATOR);
+        sb.append(name()).append(PARAMETER_SEPARATOR);
+        sb.append(extension());
+
+        return sb.toString();
     }
 
     /**
@@ -62,7 +64,10 @@ public class LocalImage extends AbstractBaseParams implements ImageParams {
      * @param localPath
      * @return
      */
-    public static LocalImage parseImage(final String localPath) {
-        return new LocalImage(localPath);
+    public static LocalImage parseImage(final String serializedImage) {
+
+        String[] parameters = serializedImage.split(PARAMETER_SEPARATOR);
+
+        return new LocalImage(parameters[0], parameters[1], ImageExtension.valueOf(ImageExtension.class, parameters[2]));
     }
 }

@@ -24,6 +24,9 @@ package org.jrebirth.core.resource.color;
  */
 public interface ResourceParams {
 
+    /** The separator used between parameters into serialized string. */
+    String PARAMETER_SEPARATOR = "||";
+
     /**
      * Checks for resource changes.
      * 

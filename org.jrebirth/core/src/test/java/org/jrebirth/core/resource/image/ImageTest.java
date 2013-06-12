@@ -32,10 +32,19 @@ public class ImageTest {
     @Test
     public void localImage() {
 
-        checkLocalImage(TestImages.TEST_IMAGE_JR_1);
+        checkImage(TestImages.TEST_LOCAL_IMAGE_1);
+        checkImage(TestImages.TEST_LOCAL_IMAGE_2);
     }
 
-    private void checkLocalImage(final ImageItem imageItem) {
+    @Test
+    public void webImage() {
+
+        checkImage(TestImages.TEST_WEB_IMAGE_1);
+        checkImage(TestImages.TEST_WEB_IMAGE_2);
+        checkImage(TestImages.TEST_WEB_IMAGE_3);
+    }
+
+    private void checkImage(final ImageItem imageItem) {
         final Image image = imageItem.get();
         final LocalImage wc = (LocalImage) ResourceBuilders.IMAGE_BUILDER.getParam(imageItem);
 

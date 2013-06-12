@@ -48,7 +48,11 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
         if (jrImage instanceof LocalImage) {
             // Build the requested font
             image = buildLocalImage((LocalImage) jrImage);
-        } else {
+        } else if (jrImage instanceof WebImage) {
+            // Build the requested font
+            image = buildWebImage((WebImage) jrImage);
+        }
+        if (image == null) {
             // Return the default image
             image = JRebirthImages.NOT_AVAILABLE.get();
         }
@@ -58,12 +62,33 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
     /**
      * Build a local image with its local path.
      * 
-     * @param jrImage the local image enum
+     * @param jrImage the local image params
      * 
-     * @return the javafx image wrapper
+     * @return the JavaFX image object
      */
     private Image buildLocalImage(final LocalImage jrImage) {
-        return loadImage(jrImage.localPath());
+        return loadImage(jrImage.path() + jrImage.name() + jrImage.extension());
+    }
+
+    /**
+     * Build a web image with its url parameters.
+     * 
+     * @param jrImage the web image params
+     * 
+     * @return the JavaFX image object
+     */
+    private Image buildWebImage(WebImage jrImage) {
+
+        String url = jrImage.getUrl();
+
+        Image image = null;
+        if (url != null) {
+            image = new Image(url);
+        }
+        if (image == null) {
+            LOGGER.error("Image : " + url + " not found !");
+        }
+        return image;
     }
 
     /**
