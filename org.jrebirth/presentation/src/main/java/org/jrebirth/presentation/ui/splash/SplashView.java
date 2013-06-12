@@ -28,7 +28,7 @@ import javafx.scene.text.TextBuilder;
 import javafx.util.Duration;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.presentation.PrezColors;
+import org.jrebirth.presentation.resource.PrezColors;
 import org.jrebirth.presentation.ui.base.AbstractSlideView;
 
 /**
