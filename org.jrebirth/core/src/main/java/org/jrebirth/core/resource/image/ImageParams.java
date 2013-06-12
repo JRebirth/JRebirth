@@ -26,4 +26,25 @@ import org.jrebirth.core.resource.color.ResourceParams;
  */
 public interface ImageParams extends ResourceParams {
 
+    /**
+     * Gets the image path.
+     * 
+     * @return the image path
+     */
+    String path();
+
+    /**
+     * Gets the image name.
+     * 
+     * @return the image name
+     */
+    String name();
+
+    /**
+     * Gets the image extension.
+     * 
+     * @return the image extension
+     */
+    ImageExtension extension();
+
 }

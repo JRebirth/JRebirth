@@ -1,5 +1,5 @@
 /**
- * Get more info at : www.jrebirth.org .
+ b * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
  * 
@@ -31,6 +31,22 @@ public interface TestImages {
     /**************************************************************************************/
 
     /** The local image. */
-    ImageItem TEST_IMAGE_JR_1 = create(new LocalImage("image/logo.png"));
+    ImageItem TEST_LOCAL_IMAGE_1 = create(new LocalImage("image/", "logo", ImageExtension.PNG));
+
+    /** The local image. */
+    ImageItem TEST_LOCAL_IMAGE_2 = create(new LocalImage("logo", ImageExtension.PNG));
+
+    /**************************************************************************************/
+    /** ___________________________________Web Image.____________________________________ */
+    /**************************************************************************************/
+
+    /** The web image. */
+    ImageItem TEST_WEB_IMAGE_1 = create(new WebImage("www.jrebirth.org", "", "", ImageExtension.PNG));
+
+    /** The web image. */
+    ImageItem TEST_WEB_IMAGE_2 = create(new WebImage("www.jrebirth.org", "", "", ImageExtension.PNG));
+
+    /** The web image. */
+    ImageItem TEST_WEB_IMAGE_3 = create(new WebImage("www.jrebirth.org", true, "", "", ImageExtension.PNG));
 
 }

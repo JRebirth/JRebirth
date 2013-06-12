@@ -1,0 +1,290 @@
+@prefix atxa-rse-eclipse: <http://www.architexa.com/rdf/rse-eclipse#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix atxa-jdt-wkspc: <http://www.architexa.com/rdf/jdt-wkspc#> .
+@prefix atxa-core: <http://www.architexa.com/rdf/core#> .
+@prefix atxa: <http://www.architexa.com/rdf/> .
+@prefix atxa-jdt: <http://www.architexa.com/rdf/jdt#> .
+
+<http://www.architexa.com/rdf/rse-eclipse#src_slmain_sluml_slResources.atxa> a atxa-core:reloFile .
+
+atxa:DetailNode atxa-core:detailLevel "0" .
+
+atxa-core:docRoot atxa-core:browseModel "com.architexa.diagrams.relo.jdt/com.architexa.diagrams.relo.jdt.browse.ClassStrucBrowseModel" ;
+	atxa-core:contains _:node17sq59lamx1 .
+
+_:node17sq59lamx1 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color> ;
+	atxa-core:posX "19" ;
+	atxa-core:posY "147" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$HSBColor> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$AppColors> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$ColorItem> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$ColorParams> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$RGB255Color> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$ResourceParams> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$AbstractBaseColor> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$RGB01Color> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$WebColor> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$GrayColor> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$ColorBuilder> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$ColorItemBase> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$ColorBuilder> .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx7 .
+
+_:node17sq59lamx7 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$HSBColor> ;
+	atxa-core:posX "236" ;
+	atxa-core:posY "496" .
+
+_:node17sq59lamx8 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node17sq59lamx7 ;
+	rdf:object _:node17sq59lamx9 ;
+	atxa-core:bendpoint _:node17sq4g4v0x2482 .
+
+_:node17sq4g4v0x2482 atxa-core:bpLocation "281,226" ;
+	atxa-core:bpIndex "0" .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx11 .
+
+_:node17sq59lamx11 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$AppColors> ;
+	atxa-core:posX "45" ;
+	atxa-core:posY "452" .
+
+_:node17sq59lamx12 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node17sq59lamx11 ;
+	rdf:object _:node17sq59lamx13 ;
+	atxa-core:bendpoint _:node17sq4g4v0x2483 .
+
+_:node17sq4g4v0x2483 atxa-core:bpLocation "92,270" ;
+	atxa-core:bpIndex "0" .
+
+_:node17sq59lamx12 atxa-core:bendpoint _:node17sq4g4v0x2484 .
+
+_:node17sq4g4v0x2484 atxa-core:bpLocation "281,270" ;
+	atxa-core:bpIndex "1" .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx13 .
+
+_:node17sq59lamx13 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$ColorItem> ;
+	atxa-core:posX "234" ;
+	atxa-core:posY "216" .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx16 .
+
+_:node17sq59lamx16 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$ColorParams> ;
+	atxa-core:posX "228" ;
+	atxa-core:posY "290" .
+
+_:node17sq59lamx17 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node17sq59lamx16 ;
+	rdf:object _:node17sq59lamx18 ;
+	atxa-core:bendpoint _:node17sq4g4v0x2485 .
+
+_:node17sq4g4v0x2485 atxa-core:bpLocation "281,314" ;
+	atxa-core:bpIndex "0" .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx20 .
+
+_:node17sq59lamx20 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$RGB255Color> ;
+	atxa-core:posX "225" ;
+	atxa-core:posY "583" .
+
+_:node17sq59lamx21 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node17sq59lamx20 ;
+	rdf:object _:node17sq59lamx9 ;
+	atxa-core:bendpoint _:node17sq4g4v0x2486 .
+
+_:node17sq4g4v0x2486 atxa-core:bpLocation "281,226" ;
+	atxa-core:bpIndex "0" .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx18 .
+
+_:node17sq59lamx18 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$ResourceParams> ;
+	atxa-core:posX "216" ;
+	atxa-core:posY "260" .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx9 .
+
+_:node17sq59lamx9 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$AbstractBaseColor> ;
+	atxa-core:posX "211" ;
+	atxa-core:posY "172" .
+
+_:node17sq59lamx30 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node17sq59lamx9 ;
+	rdf:object _:node17sq59lamx16 ;
+	atxa-core:bendpoint _:node17sq4g4v0x2487 .
+
+_:node17sq4g4v0x2487 atxa-core:bpLocation "281,344" ;
+	atxa-core:bpIndex "0" .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx36 .
+
+_:node17sq59lamx36 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$RGB01Color> ;
+	atxa-core:posX "25" ;
+	atxa-core:posY "408" .
+
+_:node17sq59lamx37 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node17sq59lamx36 ;
+	rdf:object _:node17sq59lamx9 ;
+	atxa-core:bendpoint _:node17sq4g4v0x2488 .
+
+_:node17sq4g4v0x2488 atxa-core:bpLocation "78,226" ;
+	atxa-core:bpIndex "0" .
+
+_:node17sq59lamx37 atxa-core:bendpoint _:node17sq4g4v0x2489 .
+
+_:node17sq4g4v0x2489 atxa-core:bpLocation "281,226" ;
+	atxa-core:bpIndex "1" .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx40 .
+
+_:node17sq59lamx40 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$WebColor> ;
+	atxa-core:posX "803" ;
+	atxa-core:posY "449" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$WebColor> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$WebColor.WebColor(String,double,)> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$WebColor.WebColor(String,)> , <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$WebColor.hex()> .
+
+_:node17sq59lamx41 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node17sq59lamx40 ;
+	rdf:object _:node17sq59lamx9 ;
+	atxa-core:bendpoint _:node17sq4g4v0x2490 .
+
+_:node17sq4g4v0x2490 atxa-core:bpLocation "905,226" ;
+	atxa-core:bpIndex "0" .
+
+_:node17sq59lamx41 atxa-core:bendpoint _:node17sq4g4v0x2491 .
+
+_:node17sq4g4v0x2491 atxa-core:bpLocation "281,226" ;
+	atxa-core:bpIndex "1" .
+
+_:node17sq59lamx40 atxa-core:contains _:node17sq59lamx45 .
+
+_:node17sq59lamx45 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$WebColor.WebColor(String,double,)> ;
+	atxa-core:posX "804" ;
+	atxa-core:posY "467" .
+
+_:node17sq59lamx40 atxa-core:contains _:node17sq59lamx46 .
+
+_:node17sq59lamx46 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$WebColor.WebColor(String,)> ;
+	atxa-core:posX "804" ;
+	atxa-core:posY "483" .
+
+_:node17sq59lamx40 atxa-core:contains _:node17sq59lamx44 .
+
+_:node17sq59lamx44 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$WebColor.hex()> ;
+	atxa-core:posX "804" ;
+	atxa-core:posY "499" .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx32 .
+
+_:node17sq59lamx32 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$GrayColor> ;
+	atxa-core:posX "647" ;
+	atxa-core:posY "324" .
+
+_:node17sq59lamx33 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node17sq59lamx32 ;
+	rdf:object _:node17sq59lamx9 ;
+	atxa-core:bendpoint _:node17sq4g4v0x2492 .
+
+_:node17sq4g4v0x2492 atxa-core:bpLocation "693,226" ;
+	atxa-core:bpIndex "0" .
+
+_:node17sq59lamx33 atxa-core:bendpoint _:node17sq4g4v0x2493 .
+
+_:node17sq4g4v0x2493 atxa-core:bpLocation "281,226" ;
+	atxa-core:bpIndex "1" .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx23 .
+
+_:node17sq59lamx23 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$ColorBuilder> ;
+	atxa-core:posX "573" ;
+	atxa-core:posY "517" .
+
+_:node17sq59lamx24 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node17sq59lamx23 ;
+	rdf:object _:node17sq59lamx4 ;
+	atxa-core:bendpoint _:node17sq4g4v0x2494 .
+
+_:node17sq4g4v0x2494 atxa-core:bpLocation "626,751" ;
+	atxa-core:bpIndex "0" .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx27 .
+
+_:node17sq59lamx27 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$ColorItemBase> ;
+	atxa-core:posX "434" ;
+	atxa-core:posY "400" .
+
+_:node17sq59lamx28 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node17sq59lamx27 ;
+	rdf:object _:node17sq59lamx13 ;
+	atxa-core:bendpoint _:node17sq4g4v0x2495 .
+
+_:node17sq4g4v0x2495 atxa-core:bpLocation "494,270" ;
+	atxa-core:bpIndex "0" .
+
+_:node17sq59lamx28 atxa-core:bendpoint _:node17sq4g4v0x2496 .
+
+_:node17sq4g4v0x2496 atxa-core:bpLocation "281,270" ;
+	atxa-core:bpIndex "1" .
+
+_:node17sq59lamx1 atxa-core:contains _:node17sq59lamx2 .
+
+_:node17sq59lamx2 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.color$ColorBuilder> ;
+	atxa-core:posX "526" ;
+	atxa-core:posY "287" .
+
+_:node17sq59lamx3 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node17sq59lamx2 ;
+	rdf:object _:node17sq59lamx4 ;
+	atxa-core:bendpoint _:node17sq4g4v0x2497 .
+
+_:node17sq4g4v0x2497 atxa-core:bpLocation "579,751" ;
+	atxa-core:bpIndex "0" .
+
+_:node17sq59lamx3 atxa-core:bendpoint _:node17sq4g4v0x2498 .
+
+_:node17sq4g4v0x2498 atxa-core:bpLocation "626,751" ;
+	atxa-core:bpIndex "1" .
+
+atxa-core:docRoot atxa-core:contains _:node17sq59lamx47 .
+
+_:node17sq59lamx47 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.factory> ;
+	atxa-core:posX "276" ;
+	atxa-core:posY "672" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.factory> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.factory$AbstractResourceBuilder> .
+
+_:node17sq59lamx47 atxa-core:contains _:node17sq59lamx4 .
+
+_:node17sq59lamx4 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.jrebirth.core.resource.factory$AbstractResourceBuilder> ;
+	atxa-core:posX "282" ;
+	atxa-core:posY "697" .
+
+@prefix atxa-rse-eclipse: <http://www.architexa.com/rdf/rse-eclipse#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix atxa-jdt-wkspc: <http://www.architexa.com/rdf/jdt-wkspc#> .
+@prefix atxa-core: <http://www.architexa.com/rdf/core#> .
+@prefix atxa: <http://www.architexa.com/rdf/> .
+@prefix atxa-jdt: <http://www.architexa.com/rdf/jdt#> .
+
+<http://www.architexa.com/rdf/rse-eclipse#src_slmain_sluml_slResources.atxa> a atxa-core:reloFile ;
+	atxa-core:contains _:node17sq59lamx7 , _:node17sq59lamx11 , _:node17sq59lamx13 , _:node17sq59lamx16 , _:node17sq59lamx20 , _:node17sq59lamx18 , _:node17sq59lamx9 , _:node17sq59lamx36 , _:node17sq59lamx45 , _:node17sq59lamx46 , _:node17sq59lamx44 , _:node17sq59lamx40 , _:node17sq59lamx32 , _:node17sq59lamx23 , _:node17sq59lamx27 , _:node17sq59lamx2 , _:node17sq59lamx1 , _:node17sq59lamx4 , _:node17sq59lamx47 , atxa-core:docRoot , _:node17sq59lamx7 , _:node17sq59lamx11 , _:node17sq59lamx13 , _:node17sq59lamx16 , _:node17sq59lamx20 , _:node17sq59lamx18 , _:node17sq59lamx9 , _:node17sq59lamx36 , _:node17sq59lamx45 , _:node17sq59lamx46 , _:node17sq59lamx44 , _:node17sq59lamx40 , _:node17sq59lamx32 , _:node17sq59lamx23 , _:node17sq59lamx27 , _:node17sq59lamx2 , _:node17sq59lamx1 , _:node17sq59lamx4 , _:node17sq59lamx47 , atxa-core:docRoot , _:node17sq59lamx8 , _:node17sq59lamx12 , _:node17sq59lamx17 , _:node17sq59lamx21 , _:node17sq59lamx30 , _:node17sq59lamx37 , _:node17sq59lamx41 , _:node17sq59lamx33 , _:node17sq59lamx24 , _:node17sq59lamx28 , _:node17sq59lamx3 , _:node17sq59lamx8 , _:node17sq59lamx12 , _:node17sq59lamx17 , _:node17sq59lamx21 , _:node17sq59lamx30 , _:node17sq59lamx37 , _:node17sq59lamx41 , _:node17sq59lamx33 , _:node17sq59lamx24 , _:node17sq59lamx28 , _:node17sq59lamx3 .
+
