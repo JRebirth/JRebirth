@@ -32,24 +32,31 @@ public class ImageTest {
     @Test
     public void localImage() {
 
-        checkImage(TestImages.TEST_LOCAL_IMAGE_1);
-        checkImage(TestImages.TEST_LOCAL_IMAGE_2);
+        checkLocalImage(TestImages.TEST_LOCAL_IMAGE_1);
+        checkLocalImage(TestImages.TEST_LOCAL_IMAGE_2);
     }
 
-    @Test
-    public void webImage() {
-
-        checkImage(TestImages.TEST_WEB_IMAGE_1);
-        checkImage(TestImages.TEST_WEB_IMAGE_2);
-        checkImage(TestImages.TEST_WEB_IMAGE_3);
-    }
-
-    private void checkImage(final ImageItem imageItem) {
+    private void checkLocalImage(final ImageItem imageItem) {
         final Image image = imageItem.get();
         final LocalImage wc = (LocalImage) ResourceBuilders.IMAGE_BUILDER.getParam(imageItem);
 
         assertEquals(image.getProgress(), 1.0, 0.0);
 
+    }
+
+    @Test
+    public void webImage() {
+
+        checkWebImage(TestImages.TEST_WEB_IMAGE_1);
+        checkWebImage(TestImages.TEST_WEB_IMAGE_2);
+        checkWebImage(TestImages.TEST_WEB_IMAGE_3);
+    }
+
+    private void checkWebImage(final ImageItem imageItem) {
+        final Image image = imageItem.get();
+        final WebImage wc = (WebImage) ResourceBuilders.IMAGE_BUILDER.getParam(imageItem);
+
+        assertEquals(image.getProgress(), 1.0, 0.0);
     }
 
     @After

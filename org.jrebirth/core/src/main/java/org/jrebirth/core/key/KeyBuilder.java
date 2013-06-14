@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.key;
 
+import org.jrebirth.core.facade.FacadeReady;
+
 /**
  * The class <strong>KeyBuilder</strong>.
  * 
@@ -38,10 +40,12 @@ public final class KeyBuilder {
      * @param keyPart all complementary part of the key
      * 
      * @return the unique key for the given class and keyParts array
+     * 
+     * @param <R> The type of the object registered by this ClassKey
      */
-    public static UniqueKey buildKey(final Class<?> clazz, final Object... keyPart) {
+    public static <R extends FacadeReady<R>> UniqueKey<R> buildKey(final Class<R> clazz, final Object... keyPart) {
 
-        UniqueKey uniqueKey;
+        UniqueKey<R> uniqueKey;
         if (keyPart == null || keyPart.length == 0) {
             uniqueKey = buildClassKey(clazz);
         } else {
@@ -57,10 +61,10 @@ public final class KeyBuilder {
      * 
      * @return the unique key for a singleton
      * 
-     * @param <C> The type of the object registered by this ClassKey
+     * @param <R> The type of the object registered by this ClassKey
      */
-    private static <C> UniqueKey buildClassKey(final Class<C> clazz) {
-        return new ClassKey<C>(clazz);
+    private static <R extends FacadeReady<R>> UniqueKey<R> buildClassKey(final Class<R> clazz) {
+        return new ClassKey<R>(clazz);
     }
 
     /**
@@ -71,9 +75,9 @@ public final class KeyBuilder {
      * 
      * @return the unique key for a multiton
      * 
-     * @param <C> The type of the object registered by this ClassKey
+     * @param <R> The type of the object registered by this ClassKey
      */
-    private static <C> UniqueKey buildMultitonKey(final Class<C> clazz, final Object... keyPart) {
-        return new MultitonKey<C>(clazz, keyPart);
+    private static <R extends FacadeReady<R>> UniqueKey<R> buildMultitonKey(final Class<R> clazz, final Object... keyPart) {
+        return new MultitonKey<R>(clazz, keyPart);
     }
 }

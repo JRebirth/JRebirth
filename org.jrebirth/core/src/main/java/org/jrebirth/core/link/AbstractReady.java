@@ -45,7 +45,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
     private LocalFacade<R> localFacade;
 
     /** The key that is used to register this component. */
-    private UniqueKey key;
+    private UniqueKey<R> key;
 
     /**
      * {@inheritDoc}
@@ -67,7 +67,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
-    public UniqueKey getKey() {
+    public UniqueKey<R> getKey() {
         return this.key;
     }
 
@@ -75,7 +75,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
-    public void setKey(final UniqueKey key) {
+    public void setKey(final UniqueKey<R> key) {
         this.key = key;
     }
 

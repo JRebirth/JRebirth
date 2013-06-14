@@ -31,6 +31,7 @@ import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.GlobalFacadeBase;
 import org.jrebirth.core.key.KeyBuilder;
+import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBuilder;
@@ -326,7 +327,7 @@ public final class JRebirthThread extends Thread {
         if (this.application != null && this.application.getRootNode() != null && this.application.getFirstModelClass() != null) {
             firstWave = ShowModelWaveBuilder.create()
                     .childrenPlaceHolder(this.application.getRootNode().getChildren())
-                    .showModelKey(KeyBuilder.buildKey(this.application.getFirstModelClass()))
+                    .showModelKey(KeyBuilder.buildKey((Class<Model>) this.application.getFirstModelClass()))
                     .build();
         }
         return firstWave;

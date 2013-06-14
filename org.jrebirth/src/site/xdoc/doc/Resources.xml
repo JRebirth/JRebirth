@@ -35,8 +35,11 @@
 				<li>Fonts</li>
 				<li>Images</li>
 				<li>Parameters</li>
+				
+				<li>CSS (WIP)</li>
+				<li>FXML (WIP)</li>
 			</ul>
-			<p>These resources can consume a lot of memory if you don't dispose them (especially big images) when you stop using them. <br />
+			<p>These resources can consume a lot of memory if you don't dispose them (especially big images and fonts) when you stop using them. <br />
 			JRebirth provides a mechanism to store them weakly and to rebuild them if necessary in order to
 				use the less memory as required.
 				To do this JRebirth stores a <b>ResourceParam</b> lightweight object that contains all information to create the heavyweight resource.<br />
@@ -54,16 +57,16 @@
 			<p>There are 3 ways to declare resources, each one is available for all kind of resources with special feature for parameters.
 			</p>
 			<ul>
-				<li><a href="#create">With Resources.create</a></li>
-				<li><a href="#enum">With Enumeration</a></li>
+				<li><a href="#create">With Resources.create(ResourceParam)</a></li>
+				<li><a href="#enum">With Enumeration allowing customization</a></li>
 				<li><a href="#dynamic">Dynamically</a></li>
 			</ul>
 			
 			
-			<subsection id="create" name="With Resources.create">
-				<p>The first way is to hold static field declaration instantiated  with custom 'factory' Resources (not named xxFactory with an overloaded create method to avoid latercast).<br />
+			<subsection id="create" name="With Resources.create(ResourceParam)">
+				<p>The first way is to hold static field declaration instantiated  with custom 'factory' Resources (not named, with an overloaded create method to avoid later cast).<br />
 				This static fields can be hold in any class you want but we recommend to store them into an <b>Interface</b> used 'as' an enum.
-				It's better to have an interface per resource type to avoid big file that merges all resources.<br/>
+				It's better to have an interface per resource type to avoid big file that blends all resources.<br/>
 				Another interesting trick, is to add a static import on related static Resource.create method to shorten the resource declaration (Ctrl+Shift+M with Eclipse).
 				</p>
 				<p>Static import declaration:</p>
@@ -85,6 +88,8 @@
 				<p>The other way to declare is a little bit complex, it implies to create an <strong>enum</strong> that implements a <i>ResourceItem</i> interface.<br />
 				But it requires to add some copy/paste code into implemented methods.
 				</p>
+				
+				
 			</subsection>
 			
 
@@ -100,6 +105,8 @@
 				<em>enum</em>
 				hack to cleanly define them and most important to have a concise way to use them without calling singleton getter or another complex set of methods.
 			</p>
+			
+			
 			<p>So if you want to handle resources with JRebirth mechanism, you just have to create an enumeration that implement the interface of the resource you want, with a custom constructor.</p>
 
 			<subsection name="Color">
@@ -127,7 +134,7 @@
 
 				<p>But this interface doesn't explain how to register a resource, so let's see an example.</p>
 				<macro name="include">
-					<param name="source" value="presentation/src/main/java/org/jrebirth/presentation/PrezColors.java" />
+					<param name="source" value="presentation/src/main/java/org/jrebirth/presentation/resource/PrezColors.java" />
 					<!-- <param name="snippet" value="aj:..PrezColors" /> <param name="expand-snippets" value="true" /> -->
 				</macro>
 

@@ -41,4 +41,18 @@ public interface ResourceParams {
      */
     void hasChanged(final boolean changed);
 
+    /**
+     * Return the dynamic key used to hold resources without static field.
+     * 
+     * @return the unique dynamic key
+     */
+    String getDynamicKey();
+
+    /**
+     * Define the dynamic key used to hold resources without static field.
+     * 
+     * @param the unique dynamic key
+     */
+    void setDynamicKey(String dynamicKey);
+
 }

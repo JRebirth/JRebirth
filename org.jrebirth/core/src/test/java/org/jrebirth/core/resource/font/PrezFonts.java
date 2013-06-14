@@ -15,35 +15,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.key;
+package org.jrebirth.core.resource.font;
 
-import org.jrebirth.core.facade.FacadeReady;
+import javafx.scene.text.Font;
+
+import org.jrebirth.core.resource.ResourceBuilders;
 
 /**
- * The class <strong>UniqueKey</strong>.
+ * The class <strong>PrezFonts</strong>.
  * 
  * @author Sébastien Bordes
+ * 
  */
-public interface UniqueKey<R extends FacadeReady<R>> {
+public enum PrezFonts implements FontItem {
+
+    /** The first font. */
+    FONT_1(new RealFont(TestFontNames.Report_1942, 36)),
+
+    /** The second font. */
+    FONT_2(new RealFont(TestFontNames.Turtles, 36));
 
     /**
-     * Return the unique key.
+     * Default Constructor.
      * 
-     * @return the unique key
+     * @param fontParams the font size
      */
-    String getKey();
+    PrezFonts(final FontParams fontParams) {
+        builder().storeParams(this, fontParams);
+    }
 
     /**
-     * Return the unique object if any or null.
-     * 
-     * @return the unique object or null if none
+     * {@inheritDoc}
      */
-    Object getValue();
+    @Override
+    public Font get() {
+        return builder().get(this);
+    }
 
     /**
-     * Return the class type of the component
-     * 
-     * @return Returns the classField.
+     * {@inheritDoc}
      */
-    Class<R> getClassField();
+    @Override
+    public FontBuilder builder() {
+        return ResourceBuilders.FONT_BUILDER;
+    }
+
 }

@@ -17,4 +17,12 @@ public enum ImageExtension {
     /** The .gif image file extension. */
     GIF;
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "." + name().toLowerCase();
+    }
+
 }

@@ -47,7 +47,7 @@ public class PrepareModelCommand extends DefaultPoolCommand {
 
         // final Object[] keyPart = getWaveBean(wave).getKeyPart() == null ? null : getWaveBean(wave).getKeyPart().toArray();
 
-        final UniqueKey<? extends Model> showModelKey = getWaveBean(wave).getShowModelKey();
+        final UniqueKey<Model> showModelKey = getWaveBean(wave).getShowModelKey();
 
         if (showModelKey.getClass() == null) {
             LOGGER.error("ModelClass is null");

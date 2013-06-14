@@ -1,0 +1,87 @@
+<!DOCTYPE document [
+  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
+  <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+  %HTMLlat1;
+  <!-- These are the entity sets for special characters for the XHTML -->
+  <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+  %HTMLsymbol;
+  <!-- These are the entity sets for symbol characters for the XHTML -->
+  <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+  %HTMLspecial;
+]>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>JRebirth Forge Plugin</title>
+	</properties>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="../css/component.css" media="all" />
+	</head>
+
+	<body>
+
+		<section name="JRebirth Forge Plugin">
+
+			<div id="catcherTitle">JRebirth Forge Plugin</div>
+			<div id="catcherContent">Provide shell commands that help</div>
+
+			<subsection name="How to accelerate your application development ?">
+
+				<p>JRebirth has its own plugin for JBoss Forge, a single command can create several pre-configured files instantaneously.</p>
+
+				<p> This project is a effort to create a plugin for Forge to work easily with JRebirth JavaFX Framework. This Plugin makes life easy to work with Maven + JavaFX with JRebirth Framework.
+
+					This project is currently in progress. You may not get full features currenlty.
+					Stay tuned.
+				</p>
+			</subsection>
+
+			<subsection name="Prerequisite">
+				<ul>
+					<li>JDK 7</li>
+					<li>JBoss Forge</li>
+					<li>IDE that supports Maven (Eclipse, NetBeans, IntelliJ etc.)</li>
+				</ul>
+			</subsection>
+			<subsection name="Commands">
+				<p>
+					JRebirth executible command jrebirth. Add following sub commands.
+
+					setup - Instals basic dependency for JRebirth.(core, JAVA_HOME javafx runtime, slf4j).
+					Setup also creates jrebirth.properties,
+					MainApp, and resource folders for fonts, images and styles.
+					setup --module presentation - adds Presentation module to your project
+					mvc-create - Creates Model, View and Controller calsses for given
+					name. Use --name to provide name.
+					--controllerGenerate - default true - Creates Controller
+					--beanGenerate - default true - Created Bean
+					--fxmlGenerate - default false - Create FXML
+				</p>
+
+				<p>
+					NOTE: For best practice, above commad creates sub-package and classes inside ui.[name] or ui.fxml.[name] package in top level package.
+				</p>
+				command-create - Creates Command calss for given name. Use --name to provide name.
+				service-create - Creates Service class for given name. Use --name to provide name.
+				resource-create - Creates
+				Resource class for given name. Use --name to provide name.
+				--all - default true - Creates all resource for the application.
+				--colorGenerate - default false - Creates Color
+				--fontGenerate - default
+				false - Creates Font
+				--imageGenerate - default false - Creates Image
+
+				<p>
+					NOTE: For best practice, above commad creates the classes inside command, service or resource package in top level package.
+				</p>
+			</subsection>
+			<!-- <div class="bottomLinks"> <div class="previousDocPage"> <a href="Installation.html">Installation</a> </div> <div class="nextDocPage"> <a href="Application.html">Create your first Application</a> 
+				</div> <div class="tocDocPage"> <a href="index.html">TOC</a> </div> </div> -->
+
+		</section>
+
+		<div style="clear:both"></div>
+
+	</body>
+</document> 	
