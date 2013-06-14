@@ -76,13 +76,13 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             // if (!this.singletonMap.containsKey(readyObject.getClass())) {
 
             // reload the key
-            readyObject.setKey(buildKey((Class<? extends R>) readyObject.getClass(), keyPart));
+            readyObject.setKey(buildKey((Class<R>) readyObject.getClass(), keyPart));
 
             // Attach the facade to allow to retrieve any components
             readyObject.setLocalFacade(this);
 
             // Store the component into the singleton map
-            this.singletonMap.put((ClassKey<E>) readyObject.getKey(), readyObject);
+            this.singletonMap.put((ClassKey<R>) readyObject.getKey(), readyObject);
             // }
         }
     }
@@ -102,17 +102,21 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             readyObject.setLocalFacade(null);
 
             // Remove the component from the singleton map
-            this.singletonMap.remove(buildKey((Class<? extends R>) readyObject.getClass(), keyPart));
+            this.singletonMap.remove(buildKey((Class<R>) readyObject.getClass(), keyPart));
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    // @Override
     @Override
-    public <E extends R> E retrieve(UniqueKey<E> uniqueKey) {
+    public <E extends R> E retrieve(UniqueKey<? super E> uniqueKey) {
 
         if (uniqueKey instanceof MultitonKey<?>) {
-            return retrieve(uniqueKey.getClassField(), ((MultitonKey<?>) uniqueKey).getValue());
+            return retrieve((Class<E>) uniqueKey.getClassField(), ((MultitonKey<?>) uniqueKey).getValue());
         }
-        return retrieve(uniqueKey.getClassField());
+        return retrieve((Class<E>) uniqueKey.getClassField());
 
     }
 
@@ -135,7 +139,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
                 // If no key is provided retrieve from the singleton map
                 // Extract the value from the weak reference
-                readyObject = (E) this.singletonMap.get(buildKey(clazz, keyPart));
+                readyObject = (E) this.singletonMap.get(buildKey((Class<R>) clazz, keyPart));
 
             }
 
@@ -177,7 +181,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * {@inheritDoc}
      */
     @Override
-    public boolean exists(final Class<? extends R> clazz, final Object... keyPart) {
+    public <E extends R> boolean exists(final Class<E> clazz, final Object... keyPart) {
         boolean res;
         /*
          * if (key.length > 0) { // Check from multiton map final Map<UniqueKey, R> mMap = this.multitonMap.get(clazz); res = mMap != null && mMap.containsKey(key[0]);// && mMap.get(key[0]) != null; }
@@ -185,7 +189,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
          */
         synchronized (this.singletonMap) {
             // Check from singleton map it he key exists and if the weak reference is not null
-            res = this.singletonMap.containsKey(buildKey(clazz, keyPart)); // && this.singletonMap.get(clazz) != null;
+            res = this.singletonMap.containsKey(buildKey((Class<R>) clazz, keyPart)); // && this.singletonMap.get(clazz) != null;
         }
 
         // }
@@ -200,7 +204,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * 
      * @return the key built
      */
-    private UniqueKey buildKey(final Class<? extends R> clazz, final Object... keyPart) {
+    private <E extends R> UniqueKey<R> buildKey(final Class<R> clazz, final Object... keyPart) {
         return KeyBuilder.buildKey(clazz, keyPart);
     }
 

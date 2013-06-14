@@ -15,16 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.presentation;
+package org.jrebirth.presentation.resource;
 
 import org.jrebirth.core.resource.font.FontName;
 
 /**
- * The class <strong>FontsLoader</strong>.
+ * The class <strong>PrezFontNames</strong>.
  * 
  * @author Sébastien Bordes
  */
-public enum FontsLoader implements FontName {
+public enum PrezFontNames implements FontName {
 
     /** . */
     BRLNSB,

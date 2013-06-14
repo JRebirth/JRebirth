@@ -213,6 +213,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      * 
      * @return the casted wave bean
      */
+    @Override
     @SuppressWarnings("unchecked")
     public WB getWaveBean(final Wave wave) {
         return (WB) wave.getWaveBean();

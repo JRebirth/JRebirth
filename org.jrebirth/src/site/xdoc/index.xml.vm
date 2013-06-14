@@ -93,64 +93,7 @@
 
 		<div id="mintuto" style="float: left; width: 600px;">
 
-			<section id="3min" name="3-minute Tutorial">
-				<div id="ytplayer"></div>
-
-				<script>
-				// <![CDATA[]
-					// Load the IFrame Player API code asynchronously.
-					var tag = document.createElement('script');
-					tag.src = "https://www.youtube.com/player_api";
-					var firstScriptTag = document.getElementsByTagName('script')[0];
-					firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-					// Replace the 'ytplayer' element with an < iframe > and
-					// YouTube player after the API code downloads.
-					var player;
-					function onYouTubePlayerAPIReady() {
-						player = new YT.Player('ytplayer', {
-							height: '400',
-							width: '600',
-							videoId: 'Ii2Rf7qinpM'
-						});
-					}
-					//]]>
-				</script>
-
-			</section>
-
-			<section id="cli" name="Command Line Tutorial">
-				<p>For Maven Gurus, here you have command line to type to do the job</p>
-
-				<subsection name="Full Auto">
-					
-					<p>
-					<a href="images/tuto/Maven_Archetype_CLI_OneLine.png" rel="lightbox">
-						<img src="images/icons/view.gif" />
-					</a>
-					mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DarchetypeGroupId=org.jrebirth
-					-DarchetypeArtifactId=archetype
-					-DarchetypeVersion=${project.version} -DarchetypeRepository=http://repo.jrebirth.org/jrebirth-snapshot-local -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
-					-Dpackage=org.jrebirth.sample
-				
-					</p>
-				</subsection>
-
-				<subsection name="Interactive pre-filled">
-					<p>
-						mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
-					-Dpackage=org.jrebirth.sample
-					</p>
-				</subsection>
-
-				<subsection name="Full Interactive">
-					<p><a href="images/tuto/Maven_Archetype_CLI_interactive.png" rel="lightbox">
-						<img src="images/icons/view.gif" />
-					</a>
-					mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml
-					</p>
-				</subsection>
-			</section>
+			
 		</div>
 
 		<!-- id="ohloh" -->

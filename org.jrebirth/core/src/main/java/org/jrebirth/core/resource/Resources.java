@@ -1,7 +1,10 @@
 package org.jrebirth.core.resource;
 
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.jrebirth.core.resource.color.ColorItem;
 import org.jrebirth.core.resource.color.ColorItemBase;
 import org.jrebirth.core.resource.color.ColorParams;
 import org.jrebirth.core.resource.font.FontItemBase;
@@ -29,6 +32,8 @@ public class Resources {
 
     /** The generator of unique id for images. */
     private static AtomicInteger imageIdGenerator = new AtomicInteger();
+
+    private static Map<String, ColorItem> colorMap = new Hashtable<>();
 
     /*************************************************************************/
     /** __________________________PARAMETER___________________________________ */
@@ -77,12 +82,29 @@ public class Resources {
      * 
      * @return a new fresh color item object
      */
-    public static ColorItemBase create(final ColorParams colorParams) {
+    public static ColorItem create(final ColorParams colorParams) {
         final ColorItemBase colorItem = new ColorItemBase(colorParams);
 
         // Ensure that the uid will be unique at runtime
         colorItem.setUid(colorIdGenerator.incrementAndGet());
 
+        return colorItem;
+    }
+
+    /**
+     * Build a color item.
+     * 
+     * @param colorParams the primitive values for the color
+     * 
+     * @return a new fresh color item object
+     */
+    public static ColorItem create(String dynamicKey, final ColorParams colorParams) {
+        colorParams.setDynamicKey(dynamicKey);
+        final ColorItem colorItem = create(colorParams);
+
+        if (!colorMap.containsKey(dynamicKey)) {
+            colorMap.put(dynamicKey, colorItem);
+        }
         return colorItem;
     }
 

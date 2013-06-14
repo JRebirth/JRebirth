@@ -55,12 +55,12 @@ public interface FacadeReady<R extends FacadeReady<R>> extends WaveReady {
     /**
      * @return Returns the key.
      */
-    UniqueKey getKey();
+    UniqueKey<R> getKey();
 
     /**
      * @param key The key to set.
      */
-    void setKey(UniqueKey key);
+    void setKey(UniqueKey<R> key);
 
     /**
      * Release the component by deleting this key used by the WeakHashMap.

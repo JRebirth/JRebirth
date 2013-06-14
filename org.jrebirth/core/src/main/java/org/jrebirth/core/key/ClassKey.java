@@ -17,24 +17,26 @@
  */
 package org.jrebirth.core.key;
 
+import org.jrebirth.core.facade.FacadeReady;
+
 /**
  * The class <strong>ClassKey</strong>.
  * 
- * @param <C> the class type of the registered key
+ * @param <R> the class type of the registered key
  * 
  * @author Sébastien Bordes
  */
-public class ClassKey<C> implements UniqueKey<C> {
+public class ClassKey<R extends FacadeReady<R>> implements UniqueKey<R> {
 
     /** The class definition of the component registered by the current key. */
-    private final Class<C> classField;
+    private final Class<R> classField;
 
     /**
      * Default Constructor.
      * 
      * @param classField the class type of the registered component
      */
-    public ClassKey(final Class<C> classField) {
+    public ClassKey(final Class<R> classField) {
         super();
         this.classField = classField;
     }
@@ -69,14 +71,14 @@ public class ClassKey<C> implements UniqueKey<C> {
     @SuppressWarnings("unchecked")
     @Override
     public boolean equals(final Object obj) {
-        return obj instanceof ClassKey && this.getClassField().equals(((ClassKey<C>) obj).getClassField());
+        return obj instanceof ClassKey && this.getClassField().equals(((ClassKey<R>) obj).getClassField());
     }
 
     /**
      * @return Returns the classField.
      */
     @Override
-    public Class<C> getClassField() {
+    public Class<R> getClassField() {
         return this.classField;
     }
 }

@@ -110,7 +110,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     private void callCommand(final Wave wave) {
 
         // Use the Wave UID to guarantee that a new fresh command is built and used !
-        final Command command = getGlobalFacade().getCommandFacade().retrieve((Class<? extends Command>) wave.getRelatedClass(), wave.getWUID());
+        final Command command = getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.getRelatedClass(), wave.getWUID());
 
         // Run the command into the predefined thread
         command.run(wave);
@@ -125,7 +125,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
      */
     @SuppressWarnings("unchecked")
     private void returnData(final Wave wave) {
-        final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<? extends Service>) wave.getRelatedClass());
+        final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<Service>) wave.getRelatedClass());
         // The inner task will be run into the JRebirth Thread Pool
         service.returnData(wave);
     }
@@ -150,7 +150,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         // This key method could be managed in another way (fully sync with JAT), to see if it could be useful
 
         // Build the wave used to call the required command
-        final ShowModelWaveBuilder smwb = ShowModelWaveBuilder.create().showModelKey(KeyBuilder.buildKey(wave.getRelatedClass()));
+        final ShowModelWaveBuilder smwb = ShowModelWaveBuilder.create().showModelKey(KeyBuilder.buildKey((Class<Model>) wave.getRelatedClass()));
 
         if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
             // Add the Ui view into the place holder provided

@@ -17,12 +17,9 @@
  */
 package org.jrebirth.presentation.resource;
 
-import javafx.scene.paint.Color;
+import static org.jrebirth.core.resource.Resources.create;
 
-import org.jrebirth.core.resource.ResourceBuilders;
-import org.jrebirth.core.resource.color.ColorBuilder;
 import org.jrebirth.core.resource.color.ColorItem;
-import org.jrebirth.core.resource.color.ColorParams;
 import org.jrebirth.core.resource.color.RGB255Color;
 import org.jrebirth.core.resource.color.WebColor;
 
@@ -32,51 +29,30 @@ import org.jrebirth.core.resource.color.WebColor;
  * @author Sébastien Bordes
  * 
  */
-public enum PrezColors implements ColorItem {
+public interface PrezColors {
 
     /** Color for slide title, white. */
-    SLIDE_TITLE(new WebColor("FFFFFF", 1.0)),
+    ColorItem SLIDE_TITLE = create(new WebColor("FFFFFF", 1.0));
 
     /** Color for blue shape, xxx. */
-    SHAPE_BLUE(new WebColor("3495CE", 1.0)),
+    ColorItem SHAPE_BLUE = create(new WebColor("3495CE", 1.0));
 
     /** Color for drop shadow, black. */
-    DROP_SHADOW(new WebColor("000000", 0.8)),
+    ColorItem DROP_SHADOW = create(new WebColor("000000", 0.8));
+
     /** Color for inner shadow, white. */
-    INNER_SHADOW(new WebColor("FFFFFE", 0.3)),
+    ColorItem INNER_SHADOW = create(new WebColor("FFFFFE", 0.3));
 
     /** Color for first gradient, xxx. */
-    GRADIENT_1(new WebColor("1AA2AC", 1.0)),
+    ColorItem GRADIENT_1 = create(new WebColor("1AA2AC", 1.0));
+
     /** Color for second gradient, xxx. */
-    GRADIENT_2(new WebColor("F04F24", 1.0)),
+    ColorItem GRADIENT_2 = create(new WebColor("F04F24", 1.0));
+
     /** Color for third gradient, xxxx. */
-    GRADIENT_3(new WebColor("FFF200", 1.0)),
+    ColorItem GRADIENT_3 = create(new WebColor("FFF200", 1.0));
 
     /** Color for splash text, xxx. */
-    SPLASH_TEXT(new RGB255Color(60, 60, 70));
+    ColorItem SPLASH_TEXT = create(new RGB255Color(60, 60, 70));
 
-    /**
-     * Private Constructor.
-     * 
-     * @param colorParams the primitive values for the color
-     */
-    private PrezColors(final ColorParams colorParams) {
-        builder().storeParams(this, colorParams);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Color get() {
-        return builder().get(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ColorBuilder builder() {
-        return ResourceBuilders.COLOR_BUILDER;
-    }
 }
