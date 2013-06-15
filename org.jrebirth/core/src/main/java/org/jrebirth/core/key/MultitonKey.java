@@ -20,8 +20,6 @@ package org.jrebirth.core.key;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jrebirth.core.facade.FacadeReady;
-
 /**
  * The class <strong>MultitonKey</strong>.
  * 
@@ -31,7 +29,7 @@ import org.jrebirth.core.facade.FacadeReady;
  * 
  * @param <R> the type of the object registered by this key
  */
-public class MultitonKey<R extends FacadeReady<R>> extends ClassKey<R> {
+public class MultitonKey<R> extends ClassKey<R> {
 
     /** The key formatted into a string. */
     private String key;

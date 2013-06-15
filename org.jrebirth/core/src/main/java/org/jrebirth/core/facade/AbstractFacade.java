@@ -25,7 +25,6 @@ import org.jrebirth.core.command.Command;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.key.ClassKey;
-import org.jrebirth.core.key.KeyBuilder;
 import org.jrebirth.core.key.MultitonKey;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.service.Service;
@@ -111,7 +110,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      */
     // @Override
     @Override
-    public <E extends R> E retrieve(UniqueKey<? super E> uniqueKey) {
+    public <E extends R> E retrieve(final UniqueKey<? super E> uniqueKey) {
 
         if (uniqueKey instanceof MultitonKey<?>) {
             return retrieve((Class<E>) uniqueKey.getClassField(), ((MultitonKey<?>) uniqueKey).getValue());
@@ -196,17 +195,17 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         return res;
     }
 
-    /**
-     * Build a key object to register this object.
-     * 
-     * @param clazz the class of the object to build its key
-     * @param keyPart the unique key (could be composed of many keyPart) or null for singleton
-     * 
-     * @return the key built
-     */
-    private <E extends R> UniqueKey<R> buildKey(final Class<R> clazz, final Object... keyPart) {
-        return KeyBuilder.buildKey(clazz, keyPart);
-    }
+    // /**
+    // * Build a key object to register this object.
+    // *
+    // * @param clazz the class of the object to build its key
+    // * @param keyPart the unique key (could be composed of many keyPart) or null for singleton
+    // *
+    // * @return the key built
+    // */
+    // private <E extends R> UniqueKey<R> buildKey(final Class<R> clazz, final Object... keyPart) {
+    // return KeyBuilder.buildKey(clazz, keyPart);
+    // }
 
     /**
      * Build a new instance of the ready object class.
@@ -252,6 +251,54 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             LOGGER.error(msg, e);
             throw new CoreException(msg, e);
         }
+    }
+
+    /**
+     * Build an unique key.
+     * 
+     * @param clazz the class type of the component
+     * @param keyPart all complementary part of the key
+     * 
+     * @return the unique key for the given class and keyParts array
+     * 
+     * @param <R> The type of the object registered by this ClassKey
+     */
+    public <E extends R> UniqueKey<E> buildKey(final Class<E> clazz, final Object... keyPart) {
+
+        UniqueKey<E> uniqueKey;
+        if (keyPart == null || keyPart.length == 0) {
+            uniqueKey = buildClassKey(clazz);
+        } else {
+            uniqueKey = buildMultitonKey(clazz, keyPart);
+        }
+        return uniqueKey;
+    }
+
+    /**
+     * Build a singleton key.
+     * 
+     * @param clazz the class type of the component
+     * 
+     * @return the unique key for a singleton
+     * 
+     * @param <R> The type of the object registered by this ClassKey
+     */
+    private <E extends R> UniqueKey<E> buildClassKey(final Class<E> clazz) {
+        return new ClassKey<E>(clazz);
+    }
+
+    /**
+     * Build a multiton key.
+     * 
+     * @param clazz the class type of the component
+     * @param keyPart all complementary part of the key
+     * 
+     * @return the unique key for a multiton
+     * 
+     * @param <R> The type of the object registered by this ClassKey
+     */
+    private <E extends R> UniqueKey<E> buildMultitonKey(final Class<E> clazz, final Object... keyPart) {
+        return new MultitonKey<E>(clazz, keyPart);
     }
 
 }

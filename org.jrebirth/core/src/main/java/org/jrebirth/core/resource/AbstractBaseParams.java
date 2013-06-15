@@ -37,13 +37,13 @@ public abstract class AbstractBaseParams implements ResourceParams {
      */
     @Override
     public String getDynamicKey() {
-        return dynamicKey;
+        return this.dynamicKey;
     }
 
     /**
      * @param dynamicKey The dynamicKey to set.
      */
-    public void setDynamicKey(String dynamicKey) {
+    public void setDynamicKey(final String dynamicKey) {
         this.dynamicKey = dynamicKey;
     }
 

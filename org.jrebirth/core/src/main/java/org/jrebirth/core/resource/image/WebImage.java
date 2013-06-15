@@ -38,7 +38,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
      * @param name the image file name to use.
      * @param extension the image extension to use
      */
-    public WebImage(final String website, final String path, String name, ImageExtension extension) {
+    public WebImage(final String website, final String path, final String name, final ImageExtension extension) {
         super(path, name, extension);
         this.website = website;
     }
@@ -52,7 +52,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
      * @param name the image file name to use.
      * @param extension the image extension to use
      */
-    public WebImage(final String website, boolean secured, final String path, String name, ImageExtension extension) {
+    public WebImage(final String website, final boolean secured, final String path, final String name, final ImageExtension extension) {
         this(website, path, name, extension);
         this.secured = secured;
     }
@@ -67,7 +67,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
     }
 
     public Boolean secured() {
-        return secured;
+        return this.secured;
     }
 
     /**
@@ -75,7 +75,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         sb.append(website()).append(PARAMETER_SEPARATOR);
         sb.append(secured().toString()).append(PARAMETER_SEPARATOR);
@@ -94,13 +94,13 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
      */
     public static WebImage parseImage(final String serializedImage) {
 
-        String[] parameters = serializedImage.split(PARAMETER_SEPARATOR);
+        final String[] parameters = serializedImage.split(PARAMETER_SEPARATOR);
 
-        return new WebImage(parameters[0], Boolean.parseBoolean(parameters[1]), parameters[2], parameters[3], ImageExtension.valueOf(ImageExtension.class, parameters[4]));
+        return new WebImage(parameters[0], Boolean.parseBoolean(parameters[1]), parameters[2], parameters[3], Enum.valueOf(ImageExtension.class, parameters[4]));
     }
 
     public String getUrl() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         sb.append(secured() ? "https://" : "http://");
         sb.append(website());

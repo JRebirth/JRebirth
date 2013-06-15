@@ -53,7 +53,7 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
     protected void execute(final Wave wave) {
 
         // The old node is the one that exists into the parent container (or null if none)
-        Node oldNode = (getWaveBean(wave).getHideModel() == null) ? null : getWaveBean(wave).getHideModel().getRootNode();
+        Node oldNode = getWaveBean(wave).getHideModel() == null ? null : getWaveBean(wave).getHideModel().getRootNode();
 
         if (oldNode == null) {
             final ObservableList<Node> parentContainer = getWaveBean(wave).getChidrenPlaceHolder();
@@ -61,7 +61,7 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
         }
 
         // The new node is the one create by PrepareModelCommand
-        final Node newNode = (getWaveBean(wave).getShowModel() == null) ? null : getWaveBean(wave).getShowModel().getRootNode();
+        final Node newNode = getWaveBean(wave).getShowModel() == null ? null : getWaveBean(wave).getShowModel().getRootNode();
 
         if (oldNode != null || newNode != null) {
             final ParallelTransition animation = ParallelTransitionBuilder.create()

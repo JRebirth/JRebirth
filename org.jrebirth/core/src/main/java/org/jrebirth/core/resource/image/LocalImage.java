@@ -31,7 +31,7 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
      * @param name the file name
      * @param extension the image extension
      */
-    public LocalImage(final String path, String name, ImageExtension extension) {
+    public LocalImage(final String path, final String name, final ImageExtension extension) {
         super(path, name, extension);
     }
 
@@ -40,7 +40,7 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
      * 
      * @param path the image local path
      */
-    public LocalImage(String name, ImageExtension extension) {
+    public LocalImage(final String name, final ImageExtension extension) {
         this("", name, extension);
     }
 
@@ -49,7 +49,7 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         sb.append(path()).append(PARAMETER_SEPARATOR);
         sb.append(name()).append(PARAMETER_SEPARATOR);
@@ -66,8 +66,8 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
      */
     public static LocalImage parseImage(final String serializedImage) {
 
-        String[] parameters = serializedImage.split(PARAMETER_SEPARATOR);
+        final String[] parameters = serializedImage.split(PARAMETER_SEPARATOR);
 
-        return new LocalImage(parameters[0], parameters[1], ImageExtension.valueOf(ImageExtension.class, parameters[2]));
+        return new LocalImage(parameters[0], parameters[1], Enum.valueOf(ImageExtension.class, parameters[2]));
     }
 }

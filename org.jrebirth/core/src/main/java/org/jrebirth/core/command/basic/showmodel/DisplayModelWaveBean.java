@@ -83,7 +83,7 @@ public class DisplayModelWaveBean implements WaveBean {
      * @return the hide model key
      */
     public UniqueKey getHideModelKey() {
-        return hideModelKey;
+        return this.hideModelKey;
     }
 
     /**
@@ -91,7 +91,7 @@ public class DisplayModelWaveBean implements WaveBean {
      * 
      * @param hideModelKey the new hide model key
      */
-    public void setHideModelKey(UniqueKey hideModelKey) {
+    public void setHideModelKey(final UniqueKey hideModelKey) {
         this.hideModelKey = hideModelKey;
     }
 
@@ -194,7 +194,7 @@ public class DisplayModelWaveBean implements WaveBean {
      * @return the model instance to hide (ie: with an animation)
      */
     public Model getHideModel() {
-        return hideModel;
+        return this.hideModel;
     }
 
     /**
@@ -202,7 +202,7 @@ public class DisplayModelWaveBean implements WaveBean {
      * 
      * @param hideModel the new model instance to hide (ie: with an animation)
      */
-    public void setHideModel(Model hideModel) {
+    public void setHideModel(final Model hideModel) {
         this.hideModel = hideModel;
     }
 }

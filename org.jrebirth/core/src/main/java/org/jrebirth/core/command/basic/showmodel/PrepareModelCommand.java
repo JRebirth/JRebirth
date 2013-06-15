@@ -54,7 +54,7 @@ public class PrepareModelCommand extends DefaultPoolCommand {
             throw new CoreRuntimeException("Illegal action : Model Class is null");
         }
         // Retrieve the mode according to its keyPart
-        Model modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(showModelKey);
+        final Model modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(showModelKey);
 
         //
         // if (keyPart == null) {
