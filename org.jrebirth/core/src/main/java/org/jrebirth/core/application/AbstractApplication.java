@@ -322,7 +322,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             name = name.replace("{}", this.getClass().getSimpleName());
         }
         // Add version with a space before
-        String version = JRebirthParameters.APPLICATION_VERSION.get();
+        final String version = JRebirthParameters.APPLICATION_VERSION.get();
         if (!"0.0.0".equals(version)) {
             name += " " + version;
         }

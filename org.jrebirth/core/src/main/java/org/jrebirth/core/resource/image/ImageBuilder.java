@@ -77,9 +77,9 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      * 
      * @return the JavaFX image object
      */
-    private Image buildWebImage(WebImage jrImage) {
+    private Image buildWebImage(final WebImage jrImage) {
 
-        String url = jrImage.getUrl();
+        final String url = jrImage.getUrl();
 
         Image image = null;
         if (url != null) {

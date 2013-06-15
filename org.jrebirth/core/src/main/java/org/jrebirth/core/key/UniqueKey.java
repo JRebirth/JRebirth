@@ -17,14 +17,12 @@
  */
 package org.jrebirth.core.key;
 
-import org.jrebirth.core.facade.FacadeReady;
-
 /**
  * The class <strong>UniqueKey</strong>.
  * 
  * @author Sébastien Bordes
  */
-public interface UniqueKey<R extends FacadeReady<R>> {
+public interface UniqueKey<R> {
 
     /**
      * Return the unique key.

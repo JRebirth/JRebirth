@@ -17,8 +17,6 @@
  */
 package org.jrebirth.core.key;
 
-import org.jrebirth.core.facade.FacadeReady;
-
 /**
  * The class <strong>ClassKey</strong>.
  * 
@@ -26,7 +24,7 @@ import org.jrebirth.core.facade.FacadeReady;
  * 
  * @author Sébastien Bordes
  */
-public class ClassKey<R extends FacadeReady<R>> implements UniqueKey<R> {
+public class ClassKey<R> implements UniqueKey<R> {
 
     /** The class definition of the component registered by the current key. */
     private final Class<R> classField;

@@ -49,7 +49,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
      * @param name the image file name to use.
      * @param extension the image extension to use
      */
-    public AbstractBaseImage(final String path, String name, ImageExtension extension) {
+    public AbstractBaseImage(final String path, final String name, final ImageExtension extension) {
         super();
         this.path = path;
         this.name = name;
@@ -62,7 +62,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
     @Override
     public String path() {
         // Avoid NPE on path
-        return path == null ? "" : path;
+        return this.path == null ? "" : this.path;
     }
 
     /**
@@ -70,7 +70,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
      */
     @Override
     public String name() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -78,7 +78,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
      */
     @Override
     public ImageExtension extension() {
-        return extension;
+        return this.extension;
     }
 
 }

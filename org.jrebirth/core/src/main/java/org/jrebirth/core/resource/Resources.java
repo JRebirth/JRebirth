@@ -98,7 +98,7 @@ public class Resources {
      * 
      * @return a new fresh color item object
      */
-    public static ColorItem create(String dynamicKey, final ColorParams colorParams) {
+    public static ColorItem create(final String dynamicKey, final ColorParams colorParams) {
         colorParams.setDynamicKey(dynamicKey);
         final ColorItem colorItem = create(colorParams);
 
