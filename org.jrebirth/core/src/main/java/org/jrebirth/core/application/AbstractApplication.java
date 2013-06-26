@@ -43,6 +43,7 @@ import org.jrebirth.core.exception.handler.PoolUncaughtExceptionHandler;
 import org.jrebirth.core.resource.ResourceBuilders;
 import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
+import org.jrebirth.core.resource.style.StyleSheetItem;
 import org.jrebirth.core.util.ClassUtility;
 
 import org.slf4j.Logger;
@@ -276,31 +277,20 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     protected abstract void customizeScene(final Scene scene);
 
     /**
-     * Return the external form of the css file by using the default classloader.
-     * 
-     * @param cssFileName the raw path to css file
-     * 
-     * @return the external form of the css file
-     */
-    private String loadCSS(final String cssFileName) {
-        final URL cssResource = Thread.currentThread().getContextClassLoader().getResource(cssFileName);
-        return cssResource == null ? null : cssResource.toExternalForm();
-    }
-
-    /**
      * Attach a new CSS file to the scene using the default classloader.
      * 
      * @param scene the scene that will hold this new CSS file
-     * @param cssFileName the raw path to css file
+     * @param styleSheetURL the URL path to css file
      */
-    protected void addCSS(final Scene scene, final String cssFileName) {
+    protected void addCSS(final Scene scene, final StyleSheetItem styleSheetItem) {
 
-        final String cssPath = loadCSS(JRebirthParameters.STYLE_FOLDER.get() + "/" + cssFileName);
-        if (cssPath != null) {
-            scene.getStylesheets().add(cssPath);
+        URL styleSheetURL = styleSheetItem.get();
+        if (styleSheetURL != null) {
+            scene.getStylesheets().add(styleSheetURL.toExternalForm());
         } else {
-            LOGGER.error("Impossible to load CSS: " + cssFileName + " using folder: " + JRebirthParameters.STYLE_FOLDER.get() + "/");
+            LOGGER.error("Impossible to load CSS: " + styleSheetItem.toString() + " using folder: " + JRebirthParameters.STYLE_FOLDER.get() + "/");
         }
+
     }
 
     /**

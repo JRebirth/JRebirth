@@ -3,11 +3,11 @@ package org.jrebirth.sample.resources;
 import org.jrebirth.core.resource.font.FontName;
 
 /**
- * The class <strong>SampleFontsLoader</strong>.
+ * The class <strong>SampleFontNames</strong>.
  * 
  * @author
  */
-public enum SampleFontsLoader implements FontName {
+public enum SampleFontNames implements FontName {
 
     /** The Dink font. */
     DINk;

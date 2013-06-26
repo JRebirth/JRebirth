@@ -23,6 +23,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javafx.scene.Scene;
+
 import org.jrebirth.core.application.JRebirthApplication;
 import org.jrebirth.core.command.basic.ChainWaveCommand;
 import org.jrebirth.core.command.basic.showmodel.ShowModelWaveBuilder;
@@ -30,6 +32,8 @@ import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.GlobalFacadeBase;
+import org.jrebirth.core.resource.provided.JRebirthParameters;
+import org.jrebirth.core.service.basic.StyleSheetTrackerService;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
@@ -163,6 +167,8 @@ public final class JRebirthThread extends Thread {
 
         this.application.preloadFonts();
 
+        manageStyleSheetReloading(this.application.getScene());
+
         // Attach the first view and run pre and post command
         try {
             bootUp();
@@ -221,6 +227,17 @@ public final class JRebirthThread extends Thread {
         }
         // Shutdown the application more properly
         shutdown();
+    }
+
+    private void manageStyleSheetReloading(Scene scene) {
+        if (JRebirthParameters.DEVELOPER_MODE.get() && scene != null) {
+
+            for (String styleSheet : scene.getStylesheets()) {
+
+                getFacade().getServiceFacade().retrieve(StyleSheetTrackerService.class).listen(styleSheet, this.application.getScene());
+            }
+            getFacade().getServiceFacade().retrieve(StyleSheetTrackerService.class).start();
+        }
     }
 
     /**

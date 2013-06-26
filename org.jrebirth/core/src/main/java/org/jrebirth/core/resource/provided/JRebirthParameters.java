@@ -43,6 +43,11 @@ public interface JRebirthParameters {
     ParameterItemBase<String> STYLE_FOLDER = create("stylesFolder", "styles");
 
     /**
+     * .
+     */
+    ParameterItemBase<String> DEFAULT_CSS = create("defaultCSS", "{}");
+
+    /**
      * The <code>TRUE_TYPE_FONT_EXTENSION</code> field is used to define the font file extension .
      */
     ParameterItemBase<String> TRUE_TYPE_FONT_EXTENSION = create("trueTypeFontExtension", ".ttf");
