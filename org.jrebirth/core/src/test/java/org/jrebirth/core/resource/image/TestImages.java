@@ -31,10 +31,13 @@ public interface TestImages {
     /**************************************************************************************/
 
     /** The local image. */
-    ImageItem TEST_LOCAL_IMAGE_1 = create(new LocalImage("image/", "logo", ImageExtension.PNG));
+    ImageItem TEST_LOCAL_IMAGE_1 = create(new LocalImage("path1", "logo", ImageExtension.PNG));
 
     /** The local image. */
-    ImageItem TEST_LOCAL_IMAGE_2 = create(new LocalImage("logo", ImageExtension.PNG));
+    ImageItem TEST_LOCAL_IMAGE_2 = create(new LocalImage("path1/path2", "logo", ImageExtension.PNG));
+
+    /** The local image. */
+    ImageItem TEST_LOCAL_IMAGE_3 = create(new LocalImage("logo", ImageExtension.PNG));
 
     /**************************************************************************************/
     /** ___________________________________Web Image.____________________________________ */

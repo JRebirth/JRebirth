@@ -14,6 +14,7 @@ import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.sample.resources.SampleFonts;
+import org.jrebirth.sample.resources.SampleStyles;
 import org.jrebirth.sample.ui.SampleModel;
 
 /**
@@ -44,14 +45,6 @@ public final class SampleApplication extends AbstractApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    protected String getApplicationTitle() {
-        return "Sample Application - Powered by JRebirth";
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void customizeStage(final Stage stage) {
         stage.setFullScreen(false);
     }
@@ -61,7 +54,7 @@ public final class SampleApplication extends AbstractApplication<StackPane> {
      */
     @Override
     protected void customizeScene(final Scene scene) {
-        addCSS(scene, "style/sample.css");
+        addCSS(scene, SampleStyles.MAIN);
     }
 
     /**

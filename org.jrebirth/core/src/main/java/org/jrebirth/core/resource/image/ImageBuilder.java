@@ -68,7 +68,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      * @return the JavaFX image object
      */
     private Image buildLocalImage(final LocalImage jrImage) {
-        return loadImage(jrImage.path() + jrImage.name() + jrImage.extension());
+        return loadImage(jrImage.path() + "/" + jrImage.name() + jrImage.extension());
     }
 
     /**

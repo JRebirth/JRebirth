@@ -1,14 +1,11 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package};
+package ${package}.resources;
 
-import javafx.scene.text.Font;
+import static org.jrebirth.core.resource.Resources.create;
 
-import org.jrebirth.core.resource.ResourceBuilders;
-import org.jrebirth.core.resource.font.FontBuilder;
 import org.jrebirth.core.resource.font.FontItem;
-import org.jrebirth.core.resource.font.FontParams;
 import org.jrebirth.core.resource.font.RealFont;
 
 /**
@@ -16,34 +13,9 @@ import org.jrebirth.core.resource.font.RealFont;
  * 
  * @author
  */
-public enum SampleFonts implements FontItem {
+public interface SampleFonts {
 
     /** The splash font. */
-    SPLASH(new RealFont(SampleFontsLoader.DINk, 24));
-
-    /**
-     * Default Constructor.
-     * 
-     * @param fontParams the font size
-     */
-    SampleFonts(final FontParams fontParams) {
-        builder().storeParams(this, fontParams);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Font get() {
-        return builder().get(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public FontBuilder builder() {
-        return ResourceBuilders.FONT_BUILDER;
-    }
+    FontItem SPLASH = create(new RealFont(SampleFontNames.DINk, 24));
 
 }

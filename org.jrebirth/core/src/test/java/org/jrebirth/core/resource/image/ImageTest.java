@@ -34,6 +34,7 @@ public class ImageTest {
 
         checkLocalImage(TestImages.TEST_LOCAL_IMAGE_1);
         checkLocalImage(TestImages.TEST_LOCAL_IMAGE_2);
+        checkLocalImage(TestImages.TEST_LOCAL_IMAGE_3);
     }
 
     private void checkLocalImage(final ImageItem imageItem) {

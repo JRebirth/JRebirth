@@ -21,6 +21,7 @@ import org.jrebirth.core.resource.color.ColorBuilder;
 import org.jrebirth.core.resource.font.FontBuilder;
 import org.jrebirth.core.resource.image.ImageBuilder;
 import org.jrebirth.core.resource.parameter.ParameterBuilder;
+import org.jrebirth.core.resource.style.StyleSheetBuilder;
 
 /**
  * The interface <strong>ResourceBuilders</strong> is used to retrieve resource builder singleton.
@@ -38,7 +39,10 @@ public interface ResourceBuilders {
     /** The factory used to manage fonts. */
     FontBuilder FONT_BUILDER = new FontBuilder();
 
-    /** The factory used to manage image. */
+    /** The factory used to manage images. */
     ImageBuilder IMAGE_BUILDER = new ImageBuilder();
+
+    /** The factory used to manage style sheets. */
+    StyleSheetBuilder STYLE_SHEET_BUILDER = new StyleSheetBuilder();
 
 }

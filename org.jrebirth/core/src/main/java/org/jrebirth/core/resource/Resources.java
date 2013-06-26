@@ -13,6 +13,8 @@ import org.jrebirth.core.resource.image.ImageItemBase;
 import org.jrebirth.core.resource.image.ImageParams;
 import org.jrebirth.core.resource.parameter.ObjectParameter;
 import org.jrebirth.core.resource.parameter.ParameterItemBase;
+import org.jrebirth.core.resource.style.StyleSheetItemBase;
+import org.jrebirth.core.resource.style.StyleSheetParams;
 
 /**
  * The class <strong>Resources</strong> is the first access point when you want to declare a resource for your application.
@@ -32,6 +34,9 @@ public class Resources {
 
     /** The generator of unique id for images. */
     private static AtomicInteger imageIdGenerator = new AtomicInteger();
+
+    /** The generator of unique id for style sheets. */
+    private static AtomicInteger styleSheetIdGenerator = new AtomicInteger();
 
     private static Map<String, ColorItem> colorMap = new Hashtable<>();
 
@@ -147,6 +152,27 @@ public class Resources {
         imageItem.setUid(imageIdGenerator.incrementAndGet());
 
         return imageItem;
+    }
+
+    /*************************************************************************/
+    /** ____________________________STYLE SHEET_____________________________ */
+    /*************************************************************************/
+
+    /**
+     * Build a style sheet item.
+     * 
+     * @param styleSheetParams the primitive values for the style sheet
+     * 
+     * @return a new fresh file
+     */
+    public static StyleSheetItemBase create(final StyleSheetParams styleSheetParams) {
+
+        final StyleSheetItemBase styleSheetItem = new StyleSheetItemBase(styleSheetParams);
+
+        // Ensure that the uid will be unique at runtime
+        styleSheetItem.setUid(styleSheetIdGenerator.incrementAndGet());
+
+        return styleSheetItem;
     }
 
 }
