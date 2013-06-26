@@ -33,7 +33,8 @@ public interface TestParameters {
     /** The web color. */
     ParameterItem<String> TEST_STRING_PARAM_1 = create(new ObjectParameter<String>("fonts"));
     ParameterItem<String> TEST_STRING_PARAM_2 = create(new ObjectParameter<String>("fontsFolder"));
-    ParameterItem<String> TEST_STRING_PARAM_3 = create("fontsFolder", "font");
+    ParameterItem<String> TEST_STRING_PARAM_3 = create("fontsFolderFake", "font");
+    ParameterItem<String> TEST_STRING_PARAM_4 = create("fontsFolder", "font");
 
     /**************************************************************************************/
     /** ______________________________Integer Parameters.________________________________ */
