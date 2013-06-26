@@ -32,7 +32,8 @@ public class ParameterTest {
 
         checkStringParameter(TestParameters.TEST_STRING_PARAM_1, "fonts");
         checkStringParameter(TestParameters.TEST_STRING_PARAM_2, "fontsFolder");
-        checkStringParameter(TestParameters.TEST_STRING_PARAM_3, "font");
+        checkStringParameter(TestParameters.TEST_STRING_PARAM_3, "font");// Default value
+        checkStringParameter(TestParameters.TEST_STRING_PARAM_4, "fonts");// properties value, default one is ignored
     }
 
     private void checkStringParameter(final ParameterItem<String> parameterItem, final String checkedName) {
