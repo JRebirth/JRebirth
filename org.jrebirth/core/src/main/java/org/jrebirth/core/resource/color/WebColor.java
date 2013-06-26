@@ -24,13 +24,13 @@ package org.jrebirth.core.resource.color;
  */
 public class WebColor extends AbstractBaseColor {
 
-    /** The hexadecimal string value [0-9A-F]{6} . */
+    /** The hexadecimal string value [0-9A-F]{6} (without 0x or #). */
     private final String hex;
 
     /**
      * Default Constructor.
      * 
-     * @param hex the hexadecimal value [0-9A-F]{6}
+     * @param hex the hexadecimal value [0-9A-F]{6} (without 0x or #)
      */
     public WebColor(final String hex) {
         super();
@@ -40,7 +40,7 @@ public class WebColor extends AbstractBaseColor {
     /**
      * Default Constructor.
      * 
-     * @param hex the hexadecimal value [0-9A-F]{6}
+     * @param hex the hexadecimal value [0-9A-F]{6} (without 0x or #)
      * @param opacity the color opacity [0.0-1.0]
      */
     public WebColor(final String hex, final double opacity) {
@@ -49,7 +49,7 @@ public class WebColor extends AbstractBaseColor {
     }
 
     /**
-     * Return the hexadecimal string value [0-9A-F]{6}.
+     * Return the hexadecimal string value [0-9A-F]{6} (without 0x or #).
      * 
      * @return Returns the hexadecimal value.
      */

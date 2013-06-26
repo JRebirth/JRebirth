@@ -123,14 +123,14 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
         if (fonts.isEmpty()) {
 
             // This variable will hold the 2 alternative font names
-            String fontName = JRebirthParameters.DEFAULT_FONT_FOLDER.get() + R_SEP + transformFontName(realFont.name().name()) + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
+            String fontName = JRebirthParameters.FONT_FOLDER.get() + R_SEP + transformFontName(realFont.name().name()) + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
 
             LOGGER.trace("Try to load Transformed Font  {}", fontName);
             font = Font.loadFont(Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), realFont.size());
 
             // The font name contains '_' in its file name to replace ' '
             if (font == null) {
-                fontName = JRebirthParameters.DEFAULT_FONT_FOLDER.get() + R_SEP + realFont.name().name() + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
+                fontName = JRebirthParameters.FONT_FOLDER.get() + R_SEP + realFont.name().name() + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
                 LOGGER.trace("Try to load Raw Font  {}", fontName);
                 font = Font.loadFont(
                         Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), realFont.size());

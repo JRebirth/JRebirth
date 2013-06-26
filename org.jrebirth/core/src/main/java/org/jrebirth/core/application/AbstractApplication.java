@@ -278,7 +278,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     /**
      * Return the external form of the css file by using the default classloader.
      * 
-     * @param cssFileName the razw path to css file
+     * @param cssFileName the raw path to css file
      * 
      * @return the external form of the css file
      */
@@ -295,11 +295,11 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      */
     protected void addCSS(final Scene scene, final String cssFileName) {
 
-        final String cssPath = loadCSS(cssFileName);
+        final String cssPath = loadCSS(JRebirthParameters.STYLE_FOLDER.get() + "/" + cssFileName);
         if (cssPath != null) {
             scene.getStylesheets().add(cssPath);
         } else {
-            LOGGER.error("Impossible to load CSS: " + cssFileName);
+            LOGGER.error("Impossible to load CSS: " + cssFileName + " using folder: " + JRebirthParameters.STYLE_FOLDER.get() + "/");
         }
     }
 

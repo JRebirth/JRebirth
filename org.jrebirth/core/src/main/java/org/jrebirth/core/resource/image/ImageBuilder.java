@@ -23,6 +23,7 @@ import javafx.scene.image.Image;
 
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 import org.jrebirth.core.resource.provided.JRebirthImages;
+import org.jrebirth.core.resource.provided.JRebirthParameters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,12 +101,12 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      */
     private Image loadImage(final String resourceName) {
         Image image = null;
-        final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceName);
+        final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(JRebirthParameters.IMAGE_FOLDER.get() + "/" + resourceName);
         if (imageInputStream != null) {
             image = new Image(imageInputStream);
         }
         if (image == null) {
-            LOGGER.error("Image : " + resourceName + " not found !");
+            LOGGER.error("Image : " + resourceName + " not found into base folder: " + JRebirthParameters.IMAGE_FOLDER.get() + "/");
         }
         return image;
     }
