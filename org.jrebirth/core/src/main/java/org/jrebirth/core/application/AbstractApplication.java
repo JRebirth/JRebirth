@@ -43,6 +43,7 @@ import org.jrebirth.core.exception.handler.PoolUncaughtExceptionHandler;
 import org.jrebirth.core.resource.ResourceBuilders;
 import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
+import org.jrebirth.core.resource.provided.JRebirthStyles;
 import org.jrebirth.core.resource.style.StyleSheetItem;
 import org.jrebirth.core.util.ClassUtility;
 
@@ -246,6 +247,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         // The call customize method to allow extension by sub class
         customizeScene(this.scene);
 
+        // Add the default Style Sheet if none have been added
+        manageDefaultStyleSheet(this.scene);
+
     }
 
     /**
@@ -309,7 +313,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         // Add application Name
         String name = JRebirthParameters.APPLICATION_NAME.get();
         if (name.contains("{}")) {
-            name = name.replace("{}", this.getClass().getSimpleName());
+            name = name.replace("{}", getShortClassName());
         }
         // Add version with a space before
         final String version = JRebirthParameters.APPLICATION_VERSION.get();
@@ -317,6 +321,33 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             name += " " + version;
         }
         return name;
+    }
+
+    /**
+     * Return the application class name without the Application suffix.
+     * 
+     * @return the application class short name
+     */
+    private String getShortClassName() {
+        String name = this.getClass().getSimpleName();
+        if (name.endsWith("Application")) {
+            name = name.substring(0, name.indexOf("Application"));
+        }
+        return name;
+    }
+
+    /**
+     * .
+     * 
+     * @param scene
+     */
+    private void manageDefaultStyleSheet(Scene scene) {
+        if (scene.getStylesheets().size() < 1) {
+            // No style sheet has been added to the scene
+            LOGGER.warn("No style sheet has been added to the scene, will link the default.css");
+            addCSS(scene, JRebirthStyles.DEFAULT);
+        }
+
     }
 
     /**
