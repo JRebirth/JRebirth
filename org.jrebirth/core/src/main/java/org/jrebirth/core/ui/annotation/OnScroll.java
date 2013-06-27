@@ -32,7 +32,7 @@ import javafx.scene.input.ScrollEvent;
  * 
  * @author Sébastien Bordes
  */
-@Target(ElementType.FIELD)
+@Target({ ElementType.FIELD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface OnScroll {

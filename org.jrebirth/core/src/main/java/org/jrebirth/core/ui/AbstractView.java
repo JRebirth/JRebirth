@@ -172,6 +172,22 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             getRootNode().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
         }
 
+        // Process Event Handler Annotation
+        // For each View class annotation we will attach an event handler to the root node
+        for (final Annotation a : this.getClass().getAnnotations()) {
+            // Manage only JRebirth OnXxxxx annotations
+            if (a.annotationType().getName().startsWith("org.jrebirth.core.ui.annotation.On")) {
+                try {
+                    // Process the annotation if the node is not null
+                    if (getRootNode() != null && getController() instanceof AbstractController) {
+                        addHandler(getRootNode(), a);
+                    }
+                } catch (IllegalArgumentException | CoreException e) {
+                    LOGGER.debug("Impossible to process annotation for root node : {}", this.getClass().getName());
+                }
+            }
+        }
+
     }
 
     /**

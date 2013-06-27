@@ -32,7 +32,7 @@ import javafx.scene.input.SwipeEvent;
  * 
  * @author Sébastien Bordes
  */
-@Target({ ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER })
+@Target({ ElementType.FIELD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface OnSwipe {

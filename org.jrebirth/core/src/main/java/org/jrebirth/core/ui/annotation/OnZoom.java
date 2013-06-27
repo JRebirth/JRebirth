@@ -32,7 +32,7 @@ import javafx.scene.input.ZoomEvent;
  * 
  * @author Sébastien Bordes
  */
-@Target(ElementType.FIELD)
+@Target({ ElementType.FIELD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface OnZoom {
