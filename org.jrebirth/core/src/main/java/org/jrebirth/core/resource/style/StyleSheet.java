@@ -92,7 +92,10 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
     public static StyleSheet parseStyleSheet(final String serializedStyleSheet) {
 
         final String[] parameters = serializedStyleSheet.split(PARAMETER_SEPARATOR);
-
-        return new StyleSheet(parameters[0], parameters[1]);
+        if (parameters.length > 1) {
+            return new StyleSheet(parameters[0], parameters[1]);
+        } else {
+            return new StyleSheet(parameters[0]);
+        }
     }
 }

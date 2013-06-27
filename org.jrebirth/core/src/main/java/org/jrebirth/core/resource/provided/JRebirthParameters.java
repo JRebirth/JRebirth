@@ -6,6 +6,7 @@ import org.jrebirth.core.resource.color.WebColor;
 import org.jrebirth.core.resource.image.ImageExtension;
 import org.jrebirth.core.resource.image.LocalImage;
 import org.jrebirth.core.resource.parameter.ParameterItem;
+import org.jrebirth.core.resource.style.StyleSheet;
 
 /**
  * The class <strong>JRebirthParameters</strong>.
@@ -42,9 +43,9 @@ public interface JRebirthParameters {
     ParameterItem<String> STYLE_FOLDER = create("stylesFolder", "styles");
 
     /**
-     * .
+     * The <code>DEFAULT_CSS</code> field is used to parameterize the name of the default style sheet.
      */
-    ParameterItem<String> DEFAULT_CSS = create("defaultCSS", "{}");
+    ParameterItem<StyleSheet> DEFAULT_CSS = create("defaultStyleSheet", new StyleSheet("default"));
 
     /**
      * The <code>TRUE_TYPE_FONT_EXTENSION</code> field is used to define the font file extension .
