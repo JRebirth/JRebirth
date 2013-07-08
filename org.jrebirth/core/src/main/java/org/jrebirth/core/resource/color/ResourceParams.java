@@ -51,7 +51,7 @@ public interface ResourceParams {
     /**
      * Define the dynamic key used to hold resources without static field.
      * 
-     * @param the unique dynamic key
+     * @param dynamicKey the unique dynamic key
      */
     void setDynamicKey(String dynamicKey);
 

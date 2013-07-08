@@ -99,10 +99,9 @@ public final class ClassUtility {
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | SecurityException e) {
-            final String message = genericClass == null ?
-                    "Impossible to build the dedicated " + superTypeIndex + " th type of the class " + mainClass.getName()
-                    :
-                    "Impossible to build the " + genericClass.getName() + " object for the class " + mainClass.getName();
+            final String message = genericClass == null
+                    ? "Impossible to build the dedicated " + superTypeIndex + " th type of the class " + mainClass.getName()
+                    : "Impossible to build the " + genericClass.getName() + " object for the class " + mainClass.getName();
             LOGGER.error(message, e);
 
             if (e instanceof IllegalArgumentException) {
@@ -117,7 +116,7 @@ public final class ClassUtility {
     }
 
     /**
-     * Retrieve the constructor of a Type
+     * Retrieve the constructor of a Type.
      * 
      * @param genericClass the type of the object
      * @param parameterTypes an array of parameters' type

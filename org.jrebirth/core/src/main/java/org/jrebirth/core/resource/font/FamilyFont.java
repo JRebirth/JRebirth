@@ -129,13 +129,32 @@ public class FamilyFont extends AbstractBaseFont {
         return this.weight;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return super.toString();
+        final StringBuilder sb = new StringBuilder();
+
+        sb.append(family().toString()).append(PARAMETER_SEPARATOR);
+        sb.append(size()).append(PARAMETER_SEPARATOR);
+        sb.append(weight().toString()).append(PARAMETER_SEPARATOR);
+        sb.append(posture().toString());
+
+        return sb.toString();
     }
 
-    public static FamilyFont parseFont(final String fontString) {
+    /**
+     * Parse the serialized family font string to build a fresh instance.
+     * 
+     * @param serializedFamilyFont the serialized string
+     * 
+     * @return a new fresh instance of {@link FamilyFont}
+     */
+    public static FamilyFont parseFont(final String serializedFamilyFont) {
 
-        return new FamilyFont("", 0.0);
+        final String[] parameters = extractParameters(serializedFamilyFont);
+
+        return new FamilyFont(parameters[0], Double.parseDouble(parameters[1]), FontWeight.findByName(parameters[2]), FontPosture.findByName(parameters[3]));
     }
 }

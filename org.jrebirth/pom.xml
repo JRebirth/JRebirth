@@ -21,6 +21,7 @@
 		<!--Parameters to add as arguments of the mvn command -->
 		<!-- <sonar.jdbc.username></sonar.jdbc.username> <sonar.jdbc.password></sonar.jdbc.password> -->
 		<jrebirth-configuration.version>1.0.0</jrebirth-configuration.version>
+		<sonar.language>java</sonar.language>
 
 	</properties>
 

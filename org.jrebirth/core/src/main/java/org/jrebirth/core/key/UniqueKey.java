@@ -21,6 +21,8 @@ package org.jrebirth.core.key;
  * The class <strong>UniqueKey</strong>.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <R> the type of the classfield managed by this key
  */
 public interface UniqueKey<R> {
 
@@ -39,7 +41,7 @@ public interface UniqueKey<R> {
     Object getValue();
 
     /**
-     * Return the class type of the component
+     * Return the class type of the component.
      * 
      * @return Returns the classField.
      */

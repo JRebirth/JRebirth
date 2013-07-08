@@ -152,7 +152,7 @@ public final class JRebirth {
      */
     public static void checkJAT() throws JRebirthThreadException {
         if (!Platform.isFxApplicationThread()) {
-            throw new JRebirthThreadException(Type.NOT_JAT);
+            throw new JRebirthThreadException(Type.NOT_RUN_INTO_JAT);
         }
     }
 
@@ -163,7 +163,7 @@ public final class JRebirth {
      */
     public static void checkJIT() throws JRebirthThreadException {
         if (!isJIT()) {
-            throw new JRebirthThreadException(Type.NOT_JIT);
+            throw new JRebirthThreadException(Type.NOT_RUN_INTO_JIT);
         }
     }
 
@@ -174,7 +174,7 @@ public final class JRebirth {
      */
     public static void checkJTPSlot() throws JRebirthThreadException {
         if (!isJTPSlot()) {
-            throw new JRebirthThreadException(Type.NOT_JTP);
+            throw new JRebirthThreadException(Type.NOT_RUN_INTO_JTP);
         }
     }
 }

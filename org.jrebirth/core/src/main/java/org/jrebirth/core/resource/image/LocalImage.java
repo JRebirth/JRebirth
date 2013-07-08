@@ -59,10 +59,11 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
     }
 
     /**
-     * .
+     * Parse the serialized Local Image string to build a fresh instance.
      * 
-     * @param localPath
-     * @return
+     * @param serializedImage the serialized string
+     * 
+     * @return a new fresh instance of {@link LocalImage}
      */
     public static LocalImage parseImage(final String serializedImage) {
 

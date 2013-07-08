@@ -108,15 +108,16 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     /**
      * {@inheritDoc}
      */
-    // @Override
+    @SuppressWarnings("unchecked")
     @Override
     public <E extends R> E retrieve(final UniqueKey<? super E> uniqueKey) {
-
+        E component;
         if (uniqueKey instanceof MultitonKey<?>) {
-            return retrieve((Class<E>) uniqueKey.getClassField(), ((MultitonKey<?>) uniqueKey).getValue());
+            component = retrieve((Class<E>) uniqueKey.getClassField(), ((MultitonKey<?>) uniqueKey).getValue());
+        } else {
+            component = retrieve((Class<E>) uniqueKey.getClassField());
         }
-        return retrieve((Class<E>) uniqueKey.getClassField());
-
+        return component;
     }
 
     /**
@@ -261,8 +262,9 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * 
      * @return the unique key for the given class and keyParts array
      * 
-     * @param <R> The type of the object registered by this ClassKey
+     * @param <E> The type of the object registered by this ClassKey
      */
+    @Override
     public <E extends R> UniqueKey<E> buildKey(final Class<E> clazz, final Object... keyPart) {
 
         UniqueKey<E> uniqueKey;
@@ -281,7 +283,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * 
      * @return the unique key for a singleton
      * 
-     * @param <R> The type of the object registered by this ClassKey
+     * @param <E> The type of the object registered by this ClassKey
      */
     private <E extends R> UniqueKey<E> buildClassKey(final Class<E> clazz) {
         return new ClassKey<E>(clazz);
@@ -295,7 +297,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * 
      * @return the unique key for a multiton
      * 
-     * @param <R> The type of the object registered by this ClassKey
+     * @param <E> The type of the object registered by this ClassKey
      */
     private <E extends R> UniqueKey<E> buildMultitonKey(final Class<E> clazz, final Object... keyPart) {
         return new MultitonKey<E>(clazz, keyPart);
