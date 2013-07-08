@@ -28,9 +28,6 @@ import org.jrebirth.core.resource.ResourceBuilders;
  */
 public final class ParameterItemBase<T> implements ParameterItem<T> {
 
-    /** The generator of unique id. */
-    private static int idGenerator;
-
     /** The unique identifier of the color item. */
     private int uid;
 

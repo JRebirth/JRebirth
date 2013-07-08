@@ -37,6 +37,12 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(StyleSheetBuilder.class);
 
+    /** The css file extension. */
+    private static final String CSS_EXT = ".css";
+
+    /** The class path separator. */
+    private static final String PATH_SEP = "/";
+
     /**
      * {@inheritDoc}
      */
@@ -63,18 +69,18 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
      */
     private URL buildStyleSheetUrl(final StyleSheet ss) {
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
-        sb.append(JRebirthParameters.STYLE_FOLDER.get()).append("/");
+        sb.append(JRebirthParameters.STYLE_FOLDER.get()).append(PATH_SEP);
 
         if (!ss.path().isEmpty()) {
-            sb.append(ss.path()).append("/");
+            sb.append(ss.path()).append(PATH_SEP);
         }
 
         sb.append(ss.name());
 
-        if (!ss.name().endsWith(".css")) {
-            sb.append(".css");
+        if (!ss.name().endsWith(CSS_EXT)) {
+            sb.append(CSS_EXT);
         }
 
         return buildUrl(sb.toString());

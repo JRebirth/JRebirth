@@ -87,18 +87,23 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
     }
 
     /**
-     * .
+     * Parse the serialized Web Image string to build a fresh instance.
      * 
-     * @param localPath
-     * @return
+     * @param serializedImage the serialized string
+     * 
+     * @return a new fresh instance of {@link WebImage}
      */
     public static WebImage parseImage(final String serializedImage) {
 
-        final String[] parameters = serializedImage.split(PARAMETER_SEPARATOR);
-
+        final String[] parameters = extractParameters(serializedImage);
         return new WebImage(parameters[0], Boolean.parseBoolean(parameters[1]), parameters[2], parameters[3], Enum.valueOf(ImageExtension.class, parameters[4]));
     }
 
+    /**
+     * Build the image url.
+     * 
+     * @return the full image url string
+     */
     public String getUrl() {
         final StringBuilder sb = new StringBuilder();
 

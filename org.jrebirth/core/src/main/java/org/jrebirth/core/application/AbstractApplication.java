@@ -63,6 +63,12 @@ import org.slf4j.LoggerFactory;
 @Configuration(".*jrebirth")
 public abstract class AbstractApplication<P extends Pane> extends Application implements JRebirthApplication<P> {
 
+    /** Default parameter re"placement string. */
+    private static final String PARAM = "{}";
+
+    /** The default suffix for Application main class. */
+    private static final String APP_SUFFIX_CLASSNAME = "Application";
+
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApplication.class);
 
@@ -284,15 +290,15 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * Attach a new CSS file to the scene using the default classloader.
      * 
      * @param scene the scene that will hold this new CSS file
-     * @param styleSheetURL the URL path to css file
+     * @param styleSheetItem the stylesheet item to add
      */
     protected void addCSS(final Scene scene, final StyleSheetItem styleSheetItem) {
 
-        URL styleSheetURL = styleSheetItem.get();
-        if (styleSheetURL != null) {
-            scene.getStylesheets().add(styleSheetURL.toExternalForm());
-        } else {
+        final URL styleSheetURL = styleSheetItem.get();
+        if (styleSheetURL == null) {
             LOGGER.error("Impossible to load CSS: " + styleSheetItem.toString() + " using folder: " + JRebirthParameters.STYLE_FOLDER.get() + "/");
+        } else {
+            scene.getStylesheets().add(styleSheetURL.toExternalForm());
         }
 
     }
@@ -312,8 +318,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     protected String getApplicationTitle() {
         // Add application Name
         String name = JRebirthParameters.APPLICATION_NAME.get();
-        if (name.contains("{}")) {
-            name = name.replace("{}", getShortClassName());
+        if (name.contains(PARAM)) {
+            name = name.replace(PARAM, getShortClassName());
         }
         // Add version with a space before
         final String version = JRebirthParameters.APPLICATION_VERSION.get();
@@ -330,18 +336,18 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      */
     private String getShortClassName() {
         String name = this.getClass().getSimpleName();
-        if (name.endsWith("Application")) {
-            name = name.substring(0, name.indexOf("Application"));
+        if (name.endsWith(APP_SUFFIX_CLASSNAME)) {
+            name = name.substring(0, name.indexOf(APP_SUFFIX_CLASSNAME));
         }
         return name;
     }
 
     /**
-     * .
+     * Attach default CSS file if none have been previously attached.
      * 
-     * @param scene
+     * @param scene the scene to check
      */
-    private void manageDefaultStyleSheet(Scene scene) {
+    private void manageDefaultStyleSheet(final Scene scene) {
         if (scene.getStylesheets().size() < 1) {
             // No style sheet has been added to the scene
             LOGGER.warn("No style sheet has been added to the scene, will link the default.css");

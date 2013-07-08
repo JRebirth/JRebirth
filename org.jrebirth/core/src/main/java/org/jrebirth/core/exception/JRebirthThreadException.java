@@ -21,7 +21,7 @@ package org.jrebirth.core.exception;
  * 
  * The class <strong>JRebirthThreadException</strong>.
  * 
- * This is the exception that can be thrown if JRebirth code is executed outside the JRebirth Thread.
+ * This is the exception that can be thrown if JRebirth code is executed outside the right JRebirth Thread.
  * 
  * @author Sébastien Bordes
  */
@@ -32,9 +32,16 @@ public class JRebirthThreadException extends Exception {
      */
     private static final long serialVersionUID = 112036725331588469L;
 
-    /** The type of thread exception. */
+    /**
+     * The type of thread exception.
+     */
     public enum Type {
-        NOT_JAT, NOT_JIT, NOT_JTP
+        /** The related code must be run into JAT. */
+        NOT_RUN_INTO_JAT,
+        /** The related code must be run into JIT. */
+        NOT_RUN_INTO_JIT,
+        /** The related code must be run into JTP. */
+        NOT_RUN_INTO_JTP
     }
 
     /** The local thread type. */
@@ -42,6 +49,8 @@ public class JRebirthThreadException extends Exception {
 
     /**
      * Default Constructor.
+     * 
+     * @param threadType the type of error to thrown.
      */
     public JRebirthThreadException(final Type threadType) {
         super("Current code must be executed into: " + getThreadName(threadType));
@@ -51,21 +60,23 @@ public class JRebirthThreadException extends Exception {
     /**
      * Return the concerned thread name.
      * 
-     * @return the thread name concerned
+     * @return threadType the thread name concerned
      */
     private static String getThreadName(final Type threadType) {
-        String threadName = "";
+        String threadName;
 
         switch (threadType) {
-            case NOT_JAT:
+            case NOT_RUN_INTO_JAT:
                 threadName = "JavaFX Application Thread";
                 break;
-            case NOT_JIT:
+            case NOT_RUN_INTO_JIT:
                 threadName = "JRebirth Internal Thread";
                 break;
-            case NOT_JTP:
+            case NOT_RUN_INTO_JTP:
                 threadName = "JRebirth Thread Pool";
                 break;
+            default:
+                threadName = "";
         }
         return threadName;
     }

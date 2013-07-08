@@ -47,13 +47,30 @@ public class RealFont extends AbstractBaseFont {
         return this.size;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return super.toString();
+        final StringBuilder sb = new StringBuilder();
+
+        sb.append(name().toString()).append(PARAMETER_SEPARATOR);
+        sb.append(this.size);
+
+        return sb.toString();
     }
 
-    public static RealFont parseFont(final String fontString) {
+    /**
+     * Parse the serialized real font string to build a fresh instance.
+     * 
+     * @param serializedRealFont the serialized string
+     * 
+     * @return a new fresh instance of {@link RealFont}
+     */
+    public static RealFont parseFont(final String serializedRealFont) {
 
-        return new RealFont(new CustomFontName(""), 0.0);
+        final String[] parameters = extractParameters(serializedRealFont);
+
+        return new RealFont(new CustomFontName(parameters[0]), Double.parseDouble(parameters[1]));
     }
 }

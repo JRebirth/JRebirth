@@ -151,7 +151,7 @@ public final class JRebirthThread extends Thread {
     }
 
     /**
-     * Return true if JRebirth has been correctly started (boot action is done)
+     * Return true if JRebirth has been correctly started (boot action is done).
      * 
      * @return true if JRebirth has been correctly started
      */
@@ -229,10 +229,15 @@ public final class JRebirthThread extends Thread {
         shutdown();
     }
 
-    private void manageStyleSheetReloading(Scene scene) {
+    /**
+     * Manage style sheet reloading by using a custom service provide by JRebirth Core.
+     * 
+     * @param scene the scene to reload in case of Style Sheet update
+     */
+    private void manageStyleSheetReloading(final Scene scene) {
         if (JRebirthParameters.DEVELOPER_MODE.get() && scene != null) {
 
-            for (String styleSheet : scene.getStylesheets()) {
+            for (final String styleSheet : scene.getStylesheets()) {
 
                 getFacade().getServiceFacade().retrieve(StyleSheetTrackerService.class).listen(styleSheet, this.application.getScene());
             }

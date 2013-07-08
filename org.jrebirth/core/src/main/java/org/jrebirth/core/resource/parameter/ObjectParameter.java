@@ -103,6 +103,13 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
         return res;
     }
 
+    /**
+     * Parse primitive serialized object.
+     * 
+     * @param serializedObject the serialized string to parse
+     * 
+     * @return a new fresh instance of the object
+     */
     private Object parsePrimitive(final String serializedObject) {
         Object res = null;
         if (this.object instanceof String) {
