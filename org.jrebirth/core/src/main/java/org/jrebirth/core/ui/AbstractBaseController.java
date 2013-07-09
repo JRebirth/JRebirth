@@ -257,7 +257,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      * @return true if the ANY event type is the same for both objects
      */
     private boolean isEventType(final EventType<? extends Event> testEventType, final EventType<? extends Event> anyEventType) {
-        return testEventType == anyEventType || testEventType.getSuperType() == anyEventType;
+        return testEventType.equals(anyEventType) || testEventType.getSuperType().equals(anyEventType);
     }
 
     /**

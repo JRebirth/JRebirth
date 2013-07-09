@@ -31,13 +31,16 @@ import org.jrebirth.core.wave.Wave;
  * Base implementation for simple model without View-Controller part.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <N> the root node type
  */
-public abstract class AbstractSimpleModel extends AbstractWaveReady<Model> implements Model {
+public abstract class AbstractSimpleModel<N extends Node> extends AbstractWaveReady<Model> implements Model {
 
     /** The root model not null for inner model. */
     private Model rootModel;
 
-    private Node rootNode;
+    /** The root node. */
+    private N rootNode;
 
     /**
      * {@inheritDoc}
@@ -48,16 +51,17 @@ public abstract class AbstractSimpleModel extends AbstractWaveReady<Model> imple
         // Initialize the current model
         initialize();
 
-        // Prepare the view
-        prepareView();
+        // Prepare the root node
+        this.rootNode = prepareNode();
     }
 
-    protected void prepareView() throws CoreException {
-        // Model and InnerModels are OK, let's prepare the view
-        if (getView() != null) {
-            getView().prepare();
-        }
-    }
+    /**
+     * Prepare the root node.
+     * 
+     * With simple model no view neither controller are created.<br />
+     * You must manage them yourself.
+     */
+    protected abstract N prepareNode();
 
     /**
      * Initialize the model.
@@ -77,7 +81,7 @@ public abstract class AbstractSimpleModel extends AbstractWaveReady<Model> imple
      * {@inheritDoc}
      */
     @Override
-    public Node getRootNode() {
+    public N getRootNode() {
         return this.rootNode;
     }
 

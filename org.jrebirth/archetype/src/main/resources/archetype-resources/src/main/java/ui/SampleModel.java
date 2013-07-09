@@ -31,6 +31,7 @@ public class SampleModel extends DefaultModel<SampleModel, SampleView> {
      */
     @Override
     protected void initInnerModels() {
+        LOGGER.debug("Init Sample Model");
         // Put the code to initialize inner models here (if any)
     }
 

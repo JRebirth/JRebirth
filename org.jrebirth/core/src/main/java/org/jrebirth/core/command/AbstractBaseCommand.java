@@ -137,11 +137,12 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
         // If given wave is null
         // Build a default Wave to avoid NullPointerException when
         // command was directly called by its run() method
-        final Wave commandWave = wave == null ?
-                WaveBuilder.create()
+        final Wave commandWave = wave == null
+                ? WaveBuilder.create()
                         .waveGroup(WaveGroup.CALL_COMMAND)
                         .relatedClass(this.getClass())
-                        .build() : wave;
+                        .build()
+                : wave;
 
         // Create the runnable that will be run
         // Add the runnable to the runner queue run it as soon as possible

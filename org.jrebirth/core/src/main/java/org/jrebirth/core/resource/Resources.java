@@ -38,7 +38,10 @@ import org.jrebirth.core.resource.style.StyleSheetParams;
  * 
  * @author Sébastien Bordes
  */
-public class Resources {
+public final class Resources {
+
+    /** The class path separator. */
+    public static final String PATH_SEP = "/";
 
     /** The generator of unique id for parameters. */
     private static AtomicInteger parameterIdGenerator = new AtomicInteger();
@@ -55,7 +58,15 @@ public class Resources {
     /** The generator of unique id for style sheets. */
     private static AtomicInteger styleSheetIdGenerator = new AtomicInteger();
 
+    /** The dynamic color map. */
     private static Map<String, ColorItem> colorMap = new Hashtable<>();
+
+    /**
+     * Private Constructor.
+     */
+    private Resources() {
+        super();
+    }
 
     /*************************************************************************/
     /** __________________________PARAMETER___________________________________ */
@@ -117,6 +128,7 @@ public class Resources {
      * Build a color item.
      * 
      * @param colorParams the primitive values for the color
+     * @param dynamicKey the dynamic key used to register this color
      * 
      * @return a new fresh color item object
      */

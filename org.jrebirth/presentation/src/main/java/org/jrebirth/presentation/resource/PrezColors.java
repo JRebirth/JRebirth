@@ -17,11 +17,11 @@
  */
 package org.jrebirth.presentation.resource;
 
-import static org.jrebirth.core.resource.Resources.create;
-
 import org.jrebirth.core.resource.color.ColorItem;
 import org.jrebirth.core.resource.color.RGB255Color;
 import org.jrebirth.core.resource.color.WebColor;
+
+import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>PrezColors</strong>.

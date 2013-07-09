@@ -82,6 +82,8 @@ public interface Facade<R extends FacadeReady<R>> {
      * @param keyPart the unique key for multiton FacadeReady element, could be omitted for singleton
      * 
      * @return true if the component exists
+     * 
+     * @param <E> The type of the object registered by this ClassKey
      */
     <E extends R> boolean exists(final Class<E> clazz, Object... keyPart);
 
@@ -93,7 +95,7 @@ public interface Facade<R extends FacadeReady<R>> {
      * 
      * @return the unique key for the given class and keyParts array
      * 
-     * @param <R> The type of the object registered by this ClassKey
+     * @param <E> The type of the object registered by this ClassKey
      */
     <E extends R> UniqueKey<E> buildKey(final Class<E> clazz, final Object... keyPart);
 }

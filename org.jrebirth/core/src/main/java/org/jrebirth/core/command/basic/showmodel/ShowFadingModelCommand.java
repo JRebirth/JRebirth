@@ -30,7 +30,7 @@ public class ShowFadingModelCommand extends DefaultMultiCommand {
      * Instantiates a new start game command.
      */
     public ShowFadingModelCommand() {
-        super();// Run into JIT and is sequential
+        super(); // Run into JIT and is sequential
     }
 
     /**

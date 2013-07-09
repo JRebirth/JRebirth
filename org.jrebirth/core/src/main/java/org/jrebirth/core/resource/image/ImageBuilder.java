@@ -21,6 +21,7 @@ import java.io.InputStream;
 
 import javafx.scene.image.Image;
 
+import org.jrebirth.core.resource.Resources;
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 import org.jrebirth.core.resource.provided.JRebirthImages;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
@@ -68,7 +69,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      * @return the JavaFX image object
      */
     private Image buildLocalImage(final LocalImage jrImage) {
-        return loadImage(jrImage.path() + "/" + jrImage.name() + jrImage.extension());
+        return loadImage(jrImage.path() + Resources.PATH_SEP + jrImage.name() + jrImage.extension());
     }
 
     /**
@@ -83,11 +84,10 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
         final String url = jrImage.getUrl();
 
         Image image = null;
-        if (url != null) {
-            image = new Image(url);
-        }
-        if (image == null) {
+        if (url == null || url.isEmpty()) {
             LOGGER.error("Image : " + url + " not found !");
+        } else {
+            image = new Image(url);
         }
         return image;
     }
@@ -101,12 +101,12 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      */
     private Image loadImage(final String resourceName) {
         Image image = null;
-        final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(JRebirthParameters.IMAGE_FOLDER.get() + "/" + resourceName);
+        final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(JRebirthParameters.IMAGE_FOLDER.get() + Resources.PATH_SEP + resourceName);
         if (imageInputStream != null) {
             image = new Image(imageInputStream);
         }
         if (image == null) {
-            LOGGER.error("Image : " + resourceName + " not found into base folder: " + JRebirthParameters.IMAGE_FOLDER.get() + "/");
+            LOGGER.error("Image : " + resourceName + " not found into base folder: " + JRebirthParameters.IMAGE_FOLDER.get() + Resources.PATH_SEP);
         }
         return image;
     }

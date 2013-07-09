@@ -49,7 +49,7 @@ public class PrepareModelCommand extends DefaultPoolCommand {
 
         final UniqueKey<Model> showModelKey = getWaveBean(wave).getShowModelKey();
 
-        if (showModelKey.getClass() == null) {
+        if (showModelKey == null) {
             LOGGER.error("ModelClass is null");
             throw new CoreRuntimeException("Illegal action : Model Class is null");
         }

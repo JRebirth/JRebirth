@@ -21,6 +21,7 @@ public class SampleModel extends DefaultModel<SampleModel, SampleView> {
      */
     @Override
     protected void initModel() {
+        LOGGER.debug("Init Sample Model");
         // Put the code to initialize your model here
     }
 

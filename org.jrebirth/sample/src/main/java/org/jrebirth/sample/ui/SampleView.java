@@ -71,6 +71,7 @@ public class SampleView extends AbstractView<SampleModel, BorderPane, SampleCont
      */
     @Override
     public void start() {
+        LOGGER.debug("Start the Sample View");
         // Custom code to process when the view is displayed the first time
     }
 
@@ -79,6 +80,7 @@ public class SampleView extends AbstractView<SampleModel, BorderPane, SampleCont
      */
     @Override
     public void reload() {
+        LOGGER.debug("Reload the Sample View");
         // Custom code to process when the view is displayed the 1+n time
     }
 
@@ -87,17 +89,33 @@ public class SampleView extends AbstractView<SampleModel, BorderPane, SampleCont
      */
     @Override
     public void hide() {
+        LOGGER.debug("Hide the Sample View");
         // Custom code to process when the view is hidden
     }
 
+    /**
+     * Return the button that trigger the default command.
+     * 
+     * @return the button that trigger the default command
+     */
     Button getDefaultCommand() {
         return this.defaultCommand;
     }
 
+    /**
+     * Return the button that trigger the UI command.
+     * 
+     * @return the button that trigger the UI command
+     */
     Button getUiCommand() {
         return this.uiCommand;
     }
 
+    /**
+     * Return the button that trigger the pooled command.
+     * 
+     * @return the button that trigger the pooled command
+     */
     Button getPooledCommand() {
         return this.pooledCommand;
     }

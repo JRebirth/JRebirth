@@ -36,7 +36,7 @@ import org.jrebirth.core.wave.WaveBase;
 public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWaveBuilder, DisplayModelWaveBean> {
 
     /** The unique key of the model to show. */
-    private UniqueKey<? extends Model> showModelKey;
+    private UniqueKey<Model> showModelKey;
 
     /** The unique place holder, in example the centerProperty of a BorderPane. */
     private ObjectProperty<Node> uniquePlaceHolder;
@@ -113,11 +113,11 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
     /**
      * Define the unique key of the model to show.
      * 
-     * @param showwModelKey the unique key of the model to show
+     * @param showModelKey the unique key of the model to show
      * 
      * @return the builder
      */
-    public ShowModelWaveBuilder showModelKey(final UniqueKey<? extends Model> showModelKey) {
+    public ShowModelWaveBuilder showModelKey(final UniqueKey<Model> showModelKey) {
         this.showModelKey = showModelKey;
         addBit(2);
         return this;

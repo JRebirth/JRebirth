@@ -1,7 +1,10 @@
 analyseLocally=false
 eclipse.preferences.version=1
+extraProperties=
+lastAnalysisDate=1373275994000
 projectArtifactId=presentation
 projectBranch=
 projectGroupId=org.jrebirth
+projectKey=org.jrebirth\:presentation
 serverUrl=http\://quality.jrebirth.org
-version=1
+version=2

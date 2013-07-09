@@ -63,7 +63,7 @@ public final class SampleApplication extends AbstractApplication<StackPane> {
     @Override
     public List<FontItem> getFontToPreload() {
         return Arrays.asList(new FontItem[] {
-                SampleFonts.SPLASH
+                SampleFonts.SPLASH,
         });
     }
 

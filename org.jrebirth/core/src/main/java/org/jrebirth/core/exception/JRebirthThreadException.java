@@ -60,7 +60,9 @@ public class JRebirthThreadException extends Exception {
     /**
      * Return the concerned thread name.
      * 
-     * @return threadType the thread name concerned
+     * @param threadType the thread type concerned
+     * 
+     * @return the thread name concerned
      */
     private static String getThreadName(final Type threadType) {
         String threadName;

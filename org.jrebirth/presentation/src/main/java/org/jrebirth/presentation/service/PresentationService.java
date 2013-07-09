@@ -57,7 +57,7 @@ public final class PresentationService extends ServiceBase {
     public void ready() throws CoreException {
         super.ready();
 
-        String configName = PrezParameters.XML_FILE_LOCATION.get();
+        final String configName = PrezParameters.XML_FILE_LOCATION.get();
 
         try {
             final JAXBContext jaxbContext = JAXBContext.newInstance("org.jrebirth.presentation.model");
