@@ -66,6 +66,11 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
         return this.website;
     }
 
+    /**
+     * Return the secured flag.
+     * 
+     * @return the secured
+     */
     public Boolean secured() {
         return this.secured;
     }

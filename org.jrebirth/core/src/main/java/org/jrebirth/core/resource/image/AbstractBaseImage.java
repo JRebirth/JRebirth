@@ -23,7 +23,6 @@ import org.jrebirth.core.resource.AbstractBaseParams;
  * The interface <strong>AbstractBaseImage</strong>.
  * 
  * @author Sébastien Bordes
- * 
  */
 public abstract class AbstractBaseImage extends AbstractBaseParams implements ImageParams {
 
@@ -36,10 +35,19 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
     /** The image path. */
     private final ImageExtension extension;
 
+    /** The requested width. */
     private final double requestedWidth = 0;
+
+    /** The requested height. */
     private final double requestedHeight = 0;
+
+    /** The preserve ratio. */
     private final boolean preserveRatio = false;
+
+    /** The smooth. */
     private final boolean smooth = false;
+
+    /** The background loading. */
     private final boolean backgroundLoading = false;
 
     /**
@@ -79,6 +87,41 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
     @Override
     public ImageExtension extension() {
         return this.extension;
+    }
+
+    /**
+     * @return Returns the requestedWidth.
+     */
+    public double requestedWidth() {
+        return this.requestedWidth;
+    }
+
+    /**
+     * @return Returns the requestedHeight.
+     */
+    public double requestedHeight() {
+        return this.requestedHeight;
+    }
+
+    /**
+     * @return Returns the preserveRatio.
+     */
+    public boolean preserveRatio() {
+        return this.preserveRatio;
+    }
+
+    /**
+     * @return Returns the smooth.
+     */
+    public boolean smooth() {
+        return this.smooth;
+    }
+
+    /**
+     * @return Returns the backgroundLoading.
+     */
+    public boolean backgroundLoading() {
+        return this.backgroundLoading;
     }
 
 }

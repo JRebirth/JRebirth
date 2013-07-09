@@ -67,6 +67,8 @@ public class SampleController extends AbstractController<SampleModel, SampleView
      */
     void onMouseClicked(final MouseEvent event) {
 
+        LOGGER.debug("MouseClicked => Call Sample Command");
+
         // Manage Default Command Button
         getModel().getCommand(SampleCommand.class).run();
 
@@ -80,6 +82,8 @@ public class SampleController extends AbstractController<SampleModel, SampleView
         @Override
         public void mouseClicked(final MouseEvent mouseEvent) {
             super.mouseClicked(mouseEvent);
+
+            LOGGER.debug("MouseClicked => Call Sample Pool Command");
 
             getModel().sendWave(
                     WaveBuilder.create()

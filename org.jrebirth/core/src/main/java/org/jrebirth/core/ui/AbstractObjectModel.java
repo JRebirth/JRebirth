@@ -39,11 +39,9 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
     private O object;
 
     /**
-     * Return the bindable object and create it if null
+     * Return the bindable object and create it if null.
      * 
      * @return the bindable object
-     * 
-     * @throws CoreException if instantiation has failed
      */
     public final O getObject() {
         if (this.object == null) {

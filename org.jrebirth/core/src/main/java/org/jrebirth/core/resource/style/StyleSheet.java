@@ -47,7 +47,7 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
     /**
      * Default Constructor.
      * 
-     * @param path the image local path
+     * @param name the style sheet file name
      */
     public StyleSheet(final String name) {
         this("", name);

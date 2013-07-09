@@ -21,14 +21,14 @@ import java.io.File;
 
 import javafx.scene.Scene;
 
+import com.sun.javafx.css.StyleManager;
+
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.ServiceBase;
 import org.jrebirth.core.wave.WaveTypeBase;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.sun.javafx.css.StyleManager;
 
 /**
  * The class <strong>StageService</strong>.
@@ -57,9 +57,10 @@ public class StyleSheetTrackerService extends ServiceBase {
     }
 
     /**
-     * Open a stage.
+     * Listen new style sheet path.
      * 
-     * @param wave the source wave
+     * @param styleSheetPath the style hseet path
+     * @param scene the root scene
      */
     public void listen(final String styleSheetPath, final Scene scene) {
 
@@ -73,6 +74,9 @@ public class StyleSheetTrackerService extends ServiceBase {
 
     }
 
+    /**
+     * Start the service.
+     */
     public void start() {
         // Nothing to do yet
 

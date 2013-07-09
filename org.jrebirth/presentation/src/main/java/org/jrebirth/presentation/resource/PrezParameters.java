@@ -1,9 +1,9 @@
 package org.jrebirth.presentation.resource;
 
-import static org.jrebirth.core.resource.Resources.create;
-
 import org.jrebirth.core.resource.parameter.ObjectParameter;
 import org.jrebirth.core.resource.parameter.ParameterItem;
+
+import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The interface <strong>PrezParameters</strong>.

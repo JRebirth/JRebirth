@@ -30,7 +30,7 @@ public class ShowModelCommand extends DefaultMultiCommand {
      * Default Constructor.
      */
     public ShowModelCommand() {
-        super();// Run into JIT and is sequential
+        super(); // Run into JIT and is sequential
     }
 
     /**

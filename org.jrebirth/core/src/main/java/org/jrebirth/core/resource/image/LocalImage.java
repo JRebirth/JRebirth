@@ -38,7 +38,8 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
     /**
      * Default Constructor.
      * 
-     * @param path the image local path
+     * @param name the file name
+     * @param extension the image extension
      */
     public LocalImage(final String name, final ImageExtension extension) {
         this("", name, extension);

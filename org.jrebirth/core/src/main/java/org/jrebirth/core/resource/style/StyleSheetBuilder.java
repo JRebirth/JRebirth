@@ -19,6 +19,7 @@ package org.jrebirth.core.resource.style;
 
 import java.net.URL;
 
+import org.jrebirth.core.resource.Resources;
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 
@@ -39,9 +40,6 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
 
     /** The css file extension. */
     private static final String CSS_EXT = ".css";
-
-    /** The class path separator. */
-    private static final String PATH_SEP = "/";
 
     /**
      * {@inheritDoc}
@@ -71,10 +69,10 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
 
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(JRebirthParameters.STYLE_FOLDER.get()).append(PATH_SEP);
+        sb.append(JRebirthParameters.STYLE_FOLDER.get()).append(Resources.PATH_SEP);
 
         if (!ss.path().isEmpty()) {
-            sb.append(ss.path()).append(PATH_SEP);
+            sb.append(ss.path()).append(Resources.PATH_SEP);
         }
 
         sb.append(ss.name());

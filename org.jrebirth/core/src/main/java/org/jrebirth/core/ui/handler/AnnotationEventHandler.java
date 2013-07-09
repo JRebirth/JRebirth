@@ -40,6 +40,8 @@ import org.slf4j.LoggerFactory;
  * The interface <strong>AnnotationEventHandler</strong>.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <E> the event type to handle
  */
 public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventHandler<E> implements EventHandler<E> {
 

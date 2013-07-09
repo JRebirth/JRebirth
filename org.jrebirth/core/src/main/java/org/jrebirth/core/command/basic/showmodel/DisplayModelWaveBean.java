@@ -36,10 +36,10 @@ import org.jrebirth.core.wave.WaveBean;
 public class DisplayModelWaveBean implements WaveBean {
 
     /** The show model key. */
-    private UniqueKey showModelKey;
+    private UniqueKey<Model> showModelKey;
 
     /** The hide model key. */
-    private UniqueKey hideModelKey;
+    private UniqueKey<Model> hideModelKey;
 
     /** The model key parts. */
     private List<Object> keyPart;
@@ -64,7 +64,7 @@ public class DisplayModelWaveBean implements WaveBean {
      * 
      * @return the show model key
      */
-    public UniqueKey getShowModelKey() {
+    public UniqueKey<Model> getShowModelKey() {
         return this.showModelKey;
     }
 
@@ -73,7 +73,7 @@ public class DisplayModelWaveBean implements WaveBean {
      * 
      * @param showModelKey the new show model key
      */
-    public void setShowModelKey(final UniqueKey showModelKey) {
+    public void setShowModelKey(final UniqueKey<Model> showModelKey) {
         this.showModelKey = showModelKey;
     }
 
@@ -82,7 +82,7 @@ public class DisplayModelWaveBean implements WaveBean {
      * 
      * @return the hide model key
      */
-    public UniqueKey getHideModelKey() {
+    public UniqueKey<Model> getHideModelKey() {
         return this.hideModelKey;
     }
 
@@ -91,7 +91,7 @@ public class DisplayModelWaveBean implements WaveBean {
      * 
      * @param hideModelKey the new hide model key
      */
-    public void setHideModelKey(final UniqueKey hideModelKey) {
+    public void setHideModelKey(final UniqueKey<Model> hideModelKey) {
         this.hideModelKey = hideModelKey;
     }
 
