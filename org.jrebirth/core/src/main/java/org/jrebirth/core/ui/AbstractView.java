@@ -254,24 +254,23 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
                     }
                 }
 
-            } else if (Animation.class.isAssignableFrom(property.getType())) {
-
                 // Manage only JRebirth OnFinished annotations
-                if (OnFinished.class.getName().equals(a.annotationType().getName())) {
+            } else if (Animation.class.isAssignableFrom(property.getType())
+                    && OnFinished.class.getName().equals(a.annotationType().getName())) {
 
-                    try {
-                        // Retrieve the property value
-                        final Animation animation = (Animation) property.get(this);
+                try {
+                    // Retrieve the property value
+                    final Animation animation = (Animation) property.get(this);
 
-                        // Process the annotation if the node is not null
-                        if (animation != null && getController() instanceof AbstractController) {
-                            addHandler(animation, a);
-                        }
-
-                    } catch (IllegalArgumentException | IllegalAccessException e) {
-                        LOGGER.debug("Impossible to process annotation for property : {}-{}", this.getClass().getName(), property.getName());
+                    // Process the annotation if the node is not null
+                    if (animation != null && getController() instanceof AbstractController) {
+                        addHandler(animation, a);
                     }
+
+                } catch (IllegalArgumentException | IllegalAccessException e) {
+                    LOGGER.debug("Impossible to process annotation for property : {}-{}", this.getClass().getName(), property.getName());
                 }
+
             }
 
         }

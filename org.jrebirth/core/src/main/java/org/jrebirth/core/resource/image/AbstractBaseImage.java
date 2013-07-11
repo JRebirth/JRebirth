@@ -36,19 +36,19 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
     private final ImageExtension extension;
 
     /** The requested width. */
-    private final double requestedWidth = 0;
+    private final double requestedWidth;
 
     /** The requested height. */
-    private final double requestedHeight = 0;
+    private final double requestedHeight;
 
     /** The preserve ratio. */
-    private final boolean preserveRatio = false;
+    private final boolean preserveRatio;
 
     /** The smooth. */
-    private final boolean smooth = false;
+    private final boolean smooth;
 
     /** The background loading. */
-    private final boolean backgroundLoading = false;
+    private final boolean backgroundLoading;
 
     /**
      * Default Constructor.
@@ -58,10 +58,32 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
      * @param extension the image extension to use
      */
     public AbstractBaseImage(final String path, final String name, final ImageExtension extension) {
+        this(path, name, extension, 0, 0, false, false, false);
+    }
+
+    /**
+     * Default Constructor.
+     * 
+     * @param path the path of the image to load
+     * @param name the image file name to use.
+     * @param extension the image extension to use
+     * @param requestedWidth the requested Width
+     * @param requestedHeight the requested Height
+     * @param preserveRatio the preserve Ratio
+     * @param smooth the smooth
+     * @param backgroundLoading the background loading
+     */
+    public AbstractBaseImage(final String path, final String name, final ImageExtension extension, final double requestedWidth,
+            final double requestedHeight, final boolean preserveRatio, final boolean smooth, final boolean backgroundLoading) {
         super();
         this.path = path;
         this.name = name;
         this.extension = extension;
+        this.requestedWidth = requestedWidth;
+        this.requestedHeight = requestedHeight;
+        this.preserveRatio = preserveRatio;
+        this.smooth = smooth;
+        this.backgroundLoading = backgroundLoading;
     }
 
     /**

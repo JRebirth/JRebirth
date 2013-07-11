@@ -22,16 +22,11 @@ import org.jrebirth.core.command.DefaultMultiCommand;
 /**
  * The class <strong>ShowModelCommand</strong>.
  * 
+ * Run into JIT and is sequential
+ * 
  * @author Sébastien Bordes
  */
 public class ShowModelCommand extends DefaultMultiCommand {
-
-    /**
-     * Default Constructor.
-     */
-    public ShowModelCommand() {
-        super(); // Run into JIT and is sequential
-    }
 
     /**
      * {@inheritDoc}

@@ -23,15 +23,10 @@ import org.jrebirth.core.command.DefaultMultiCommand;
  * The Class ShowFadingModelCommand is used to show a model an then used a fading transition.
  * 
  * Must be used with append(false)
+ * 
+ * Run into JIT and is sequential
  */
 public class ShowFadingModelCommand extends DefaultMultiCommand {
-
-    /**
-     * Instantiates a new start game command.
-     */
-    public ShowFadingModelCommand() {
-        super(); // Run into JIT and is sequential
-    }
 
     /**
      * {@inheritDoc}
