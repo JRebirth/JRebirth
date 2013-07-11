@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author
  */
-public class SampleModel extends DefaultModel<SampleModel, SampleView> {
+public final class SampleModel extends DefaultModel<SampleModel, SampleView> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SampleModel.class);
