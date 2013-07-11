@@ -59,6 +59,9 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor {
         if (t == null && r instanceof Future<?>) {
             try {
                 final Object result = ((Future<?>) r).get();
+                if (result != null) {
+                    LOGGER.trace("Thread pool returned object : {}", result.toString());
+                }
             } catch (final CancellationException | ExecutionException e) {
                 rootCause = e.getCause();
             } catch (final InterruptedException ie) {

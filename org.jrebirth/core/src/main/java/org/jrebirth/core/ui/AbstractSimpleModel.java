@@ -60,6 +60,8 @@ public abstract class AbstractSimpleModel<N extends Node> extends AbstractWaveRe
      * 
      * With simple model no view neither controller are created.<br />
      * You must manage them yourself.
+     * 
+     * @return the model root node
      */
     protected abstract N prepareNode();
 

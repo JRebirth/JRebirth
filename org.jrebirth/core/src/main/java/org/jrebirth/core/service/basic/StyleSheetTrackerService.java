@@ -23,7 +23,6 @@ import javafx.scene.Scene;
 
 import com.sun.javafx.css.StyleManager;
 
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.ServiceBase;
 import org.jrebirth.core.wave.WaveTypeBase;
 
@@ -46,15 +45,15 @@ public class StyleSheetTrackerService extends ServiceBase {
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(StyleSheetTrackerService.class);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void ready() throws CoreException {
-        super.ready();
-
-        // registerCallback(DO_OPEN_STAGE, RE_STAGE_OPENED);
-    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void ready() throws CoreException {
+    // super.ready();
+    //
+    // // registerCallback(DO_OPEN_STAGE, RE_STAGE_OPENED);
+    // }
 
     /**
      * Listen new style sheet path.
