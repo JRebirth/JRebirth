@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author
  */
-public class SampleController extends AbstractController<SampleModel, SampleView> {
+public final class SampleController extends AbstractController<SampleModel, SampleView> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SampleController.class);

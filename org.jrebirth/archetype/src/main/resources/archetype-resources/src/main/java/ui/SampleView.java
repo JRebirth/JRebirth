@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author
  */
-public class SampleView extends AbstractView<SampleModel, BorderPane, SampleController> {
+public final class SampleView extends AbstractView<SampleModel, BorderPane, SampleController> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SampleView.class);
