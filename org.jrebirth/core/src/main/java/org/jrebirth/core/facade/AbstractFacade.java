@@ -110,12 +110,12 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      */
     @SuppressWarnings("unchecked")
     @Override
-    public <E extends R> E retrieve(final UniqueKey<? super E> uniqueKey) {
+    public <E extends R> E retrieve(final UniqueKey<E> uniqueKey) {
         E component;
         if (uniqueKey instanceof MultitonKey<?>) {
-            component = retrieve((Class<E>) uniqueKey.getClassField(), ((MultitonKey<?>) uniqueKey).getValue());
+            component = retrieve(uniqueKey.getClassField(), ((MultitonKey<?>) uniqueKey).getValue());
         } else {
-            component = retrieve((Class<E>) uniqueKey.getClassField());
+            component = retrieve(uniqueKey.getClassField());
         }
         return component;
     }

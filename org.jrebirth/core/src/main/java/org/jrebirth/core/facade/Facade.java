@@ -73,7 +73,7 @@ public interface Facade<R extends FacadeReady<R>> {
      * 
      * @param <E> the type of the ready object to retrieve
      */
-    <E extends R> E retrieve(final UniqueKey<? super E> uniqueKey);
+    <E extends R> E retrieve(final UniqueKey<E> uniqueKey);
 
     /**
      * Check if the component has already been created and stored.
