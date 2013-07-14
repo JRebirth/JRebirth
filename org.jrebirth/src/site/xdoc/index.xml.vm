@@ -79,23 +79,37 @@
 				<li>
 					<a href="http://apps.jrebirth.org/lightningtalk/lightningtalk-1.0.0.zip">Lightning Talk</a>
 				</li>
+				<li>
+					<a href="http://apps.jrebirth.org/masteringtables/http://apps.jrebirth.org/masteringtables/masteringtables-1.0.0-SNAPSHOT.zip">Mastering Tables</a>
+				</li>
 			</ul>
 		</div>
 		
 		
 		<div id="twitter">
-        	<a id="twitlink" class="twitter-timeline" href="https://twitter.com/JRebirth4JFX" >Tweets of @JRebirth4JFX</a>
-			<script>//<![CDATA[
-			document.getElementById("twitlink").setAttribute("data-widget-id","313731797349441536");
-			//]]></script>
-            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-        </div>
-
-		<div id="mintuto" style="float: left; width: 600px;">
-
+			<div class="twitterFeed">
+            	<a id="twitlink1" class="twitter-timeline" href="https://twitter.com/JRebirthAF" >Tweets of @JRebirthAF</a>
+    			<script>//<![CDATA[
+    			document.getElementById("twitlink1").setAttribute("data-widget-id","313731797349441536");
+    			//]]></script>
+                <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+			</div>
+			<div class="twitterFeed">
+            	<a id="twitlink2" class="twitter-timeline" href="https://twitter.com/JRebirthTeam" >Tweets of @JRebirthTeam</a>
+    			<script>//<![CDATA[
+    			document.getElementById("twitlink2").setAttribute("data-widget-id","356345521822121984");
+    			//]]></script>
+			</div>
 			
+			<div class="twitterFeed">
+				<a id="twitlink3" class="twitter-timeline" href="https://twitter.com/search?q=%23jrebirth" >Tweets about "#jrebirth"</a>
+    			<script>//<![CDATA[
+    			document.getElementById("twitlink3").setAttribute("data-widget-id","356351856227790848");
+    			//]]></script>
+			</div>
 		</div>
-
+		
+	
 		<!-- id="ohloh" -->
 		<div id="ohloh">
 			<div>

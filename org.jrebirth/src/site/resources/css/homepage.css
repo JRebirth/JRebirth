@@ -102,11 +102,17 @@ div#download ul li{
 }
 
 div#twitter {
-	float : right;
-	width:32%;
+	clear : both;
+	width:100%;
 	
 	margin : 30px 15px;
 	padding: 5px 5px;
+}
+
+div.twitterFeed{
+	float:left;
+	width: 300px;
+    margin: 10px
 }
 
 div.twPicture{
@@ -144,10 +150,11 @@ div.twEnd{
 }
 
 div#ohloh{
+	clear:both;
     margin-top : 30px;
     text-align:center;
 	float : right;
-	width:32%;
+	width:30%;
 }
 
 div#thanks{
@@ -155,7 +162,7 @@ div#thanks{
 	font-size:12px;
 	float : right;
 	
-	width:32%;
+	width:64%;
 	
 	color:#FFFFF;
 	
