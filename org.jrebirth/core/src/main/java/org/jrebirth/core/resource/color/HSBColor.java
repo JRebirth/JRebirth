@@ -24,7 +24,7 @@ package org.jrebirth.core.resource.color;
  */
 public class HSBColor extends AbstractBaseColor {
 
-    /** The saturation value [0.0-360.0] in degrees. */
+    /** The hue value [0.0-360.0] in degrees. */
     private final double hue;
 
     /** The saturation value [0.0-1.0]. */

@@ -153,7 +153,7 @@ public final class ClassUtility {
     }
 
     /**
-     * Concert A_STRING_UNDESCORED into aStringUnderscored.
+     * Convert A_STRING_UNDESCORED into aStringUnderscored.
      * 
      * @param undescoredString the string to convert
      * 
@@ -175,6 +175,25 @@ public final class ClassUtility {
         }
         return camelCaseString.toString();
 
+    }
+
+    /**
+     * Convert aStringUnderscored into A_STRING_UNDESCORED.
+     * 
+     * @param camelCaseString the string to convert
+     * 
+     * @return the underscored string
+     */
+    public static String camelCaseToUnderscore(final String camelCaseString) {
+
+        StringBuilder sb = new StringBuilder();
+        for (String camelPart : camelCaseString.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")) {
+            if (sb.length() > 0) {
+                sb.append("_");
+            }
+            sb.append(camelPart.toUpperCase());
+        }
+        return sb.toString();
     }
 
     /**

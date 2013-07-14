@@ -1,0 +1,38 @@
+package org.jrebirth.core.util;
+
+import junit.framework.Assert;
+
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * The class <strong>UtilTest</strong>.
+ * 
+ * @author Sébastien Bordes
+ */
+public class UtilTest {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(UtilTest.class);
+
+    @Test
+    public void toCamelCase() {
+
+        Assert.assertEquals("", "atest", ClassUtility.underscoreToCamelCase("ATEST"));
+        Assert.assertEquals("", "aTest", ClassUtility.underscoreToCamelCase("A_TEST"));
+        Assert.assertEquals("", "aLotOfTest", ClassUtility.underscoreToCamelCase("A_LOT_OF_TEST"));
+
+    }
+
+    @Test
+    public void toUnderscore() {
+
+        Assert.assertEquals("", "ATEST", ClassUtility.camelCaseToUnderscore("atest"));
+        Assert.assertEquals("", "A_TEST", ClassUtility.camelCaseToUnderscore("aTest"));
+        Assert.assertEquals("", "A_LOT_OF_TEST", ClassUtility.camelCaseToUnderscore("aLotOfTest"));
+        // Assert.assertEquals("", "A_LOT_OFTEST", ClassUtility.camelCaseToUnderscore("aLotOFTest"));
+
+    }
+
+}
