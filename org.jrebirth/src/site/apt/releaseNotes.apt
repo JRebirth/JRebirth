@@ -10,34 +10,46 @@ Release Notes
 
 * 0.7.4 - Core Release - 2013-04-22
 
-This version must be used instead of 0.7.3 because a lot of API changes and bug fixes is provided.
-JRebirth's Team is growing and we are now proud to have our own Forge plugin to build application faster (Thanks to {{{/team-list.html#jr3}Raj}} & {{{/team-list.html#jr4}Guru}})
+ This version must be used instead of 0.7.3 because a lot of API changes and bug fixes is provided.
+ JRebirth's Team is growing and we are now proud to have our own Forge plugin to build application faster (Thanks to {{{/team-list.html#jr3}Raj}} & {{{/team-list.html#jr4}Guru}})
 
-	
-	* API changes, a lot of method have been rename to hava a more concise name
-		CustomXXX method have been replaced, and now you just need to implement like initModel instead of customInitialize
-	* Manage Image & StyleSheet as Resources feature
-		It's nowx possible to load these resources with JRebvirth resource engine it's also possible to use them as JRebirth properties
-	* Properties that define default folder for images and style sheets have been added
-		By default images and style sheets will be loaded from these folder 
-	* Parameterize Default CSS File feature
-		Define a default CSS file to load if none have been defined
-	* Parameterize Application Name
-		Application name shown into the tile bar of the stage can be parametrize as a properties instead of overriding the Application method getApplicationTitle
-	* Provide Event Annotation for view's root node feature
-		We can now attach event handler on the view's root node by using a View annotation
-	* Define id of the view's root node with an annoation
-		Add @RootNodeId annotation to define id of the view's root node
-	* Manage default bindable object
-		Each Model class manage a default object and provides specific method to bound all properties
-	* Improve internal commands
-		Internal command such AttachCommand and DetachCommand have been improved to be more robust
-	* Fix a regression related to fonts preloading
-		Fontpreloading had been broken and so fixed
-	* Fix deadlock generator
-		While using runInto method, deadlocks can occured in some specific cases, everything goes right now :)
-	* Improve overall concurency
-		Some parts have been refactored to improve race condition with AtomicBoolean		 
+
+	* API changes, a lot of method have been rename to hava a more concise name\
+	CustomXXX method have been replaced, and now in example you just need to implement initModel instead of customInitialize method.
+
+	* Manage Image & StyleSheet as Resources feature\
+	It's now possible to load these resources with JRebvith resource engine it's also possible to use them as JRebirth properties.
+
+	* Properties that define default folder for images and style sheets have been added\
+	By default images and style sheets will be loaded from these folder .
+
+	* Parameterize Default CSS File feature\
+	Define a default CSS file to load if none have been defined.
+
+	* Parameterize Application Name\
+	Application name shown into the title bar of the stage can be parameterized as a properties instead of overriding the Application method getApplicationTitle.
+
+	* Provide Event Annotation for view's root node feature\
+	We can now attach event handler on the view's root node by using a View annotation.
+
+	* Define id of the view's root node with an annotation\
+	Add @RootNodeId annotation to define id of the view's root node.
+
+	* Manage default bindable object\
+	Each Model class manage a default object and provides specific method to bound all properties.
+
+	* Improve internal commands\
+	Internal command such AttachCommand and DetachCommand have been improved to be more robust.
+
+	* Fix a regression related to fonts preloading\
+	Font preloading had been broken and so fixed.
+
+	* Fix deadlock generator\
+	While using runInto method, deadlocks can occured in some specific cases, everything goes right now :)
+
+	* Improve overall concurency\
+	Some parts have been refactored to improve race condition with AtomicBoolean.	 
+
 
 * 0.7.3 - 'Doc&Site' version - 2013-04-03
 
