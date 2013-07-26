@@ -15,52 +15,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.ui;
+package org.jrebirth.core.ui.simple;
+
+import javafx.scene.Node;
 
 import org.jrebirth.core.wave.Wave;
 
 /**
  * 
- * The interface <strong>DefaultModel</strong>.
+ * The interface <strong>DefaultSimpleModel</strong>.
  * 
- * Default implementation of the model.
+ * Default implementation for Simple model (models that don't have neither View nor Controller).
  * 
  * @author Sébastien Bordes
  * 
- * @param <M> the class type of the current model
- * @param <V> the class type of the view managed by this model
+ * @param <N> the root node type
  */
-public class DefaultModel<M extends Model, V extends View<?, ?, ?>> extends AbstractModel<M, V> {
+public class DefaultSimpleModel<N extends Node> extends AbstractSimpleModel<N> {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected N prepareNode() {
+        // Nothing to do yet
+        return null;
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     protected void initModel() {
-        // Nothing to do generic
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initInnerModels() {
-        // Nothing to do generic
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void bindObject() {
-        // Do nothing, API compliance
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void bind() {
         // Nothing to do yet
 
     }
@@ -69,16 +55,8 @@ public class DefaultModel<M extends Model, V extends View<?, ?, ?>> extends Abst
      * {@inheritDoc}
      */
     @Override
-    protected void showView() {
-        // Nothing to do generic
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void hideView() {
-        // Nothing to do generic
+    protected void initInnerModels() {
+        // Nothing to do yet
     }
 
     /**
@@ -86,7 +64,35 @@ public class DefaultModel<M extends Model, V extends View<?, ?, ?>> extends Abst
      */
     @Override
     protected void processWave(final Wave wave) {
-        // Nothing to do generic
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void showView() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void hideView() {
+        // Nothing to do yet
+    }
+
+    @Override
+    protected void bindInternal() {
+        // Nothing to do yet
+
+    }
+
+    @Override
+    protected void bind() {
+        // Nothing to do yet
+
     }
 
 }

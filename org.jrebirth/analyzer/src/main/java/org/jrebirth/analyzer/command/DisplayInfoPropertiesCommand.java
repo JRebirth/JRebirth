@@ -45,7 +45,7 @@ public class DisplayInfoPropertiesCommand extends AbstractSingleCommand<WaveBean
     }
 
     @Override
-    protected void processAction(final Wave wave) {
+    protected void processWave(final Wave wave) {
         // TODO Auto-generated method stub
 
     }

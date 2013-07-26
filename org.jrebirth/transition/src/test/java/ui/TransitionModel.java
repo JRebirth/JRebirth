@@ -95,7 +95,7 @@ public final class TransitionModel extends DefaultModel<TransitionModel, Transit
      * {@inheritDoc}
      */
     @Override
-    protected void processAction(final Wave wave) {
+    protected void processWave(final Wave wave) {
         // Nothing to do yet
     }
 

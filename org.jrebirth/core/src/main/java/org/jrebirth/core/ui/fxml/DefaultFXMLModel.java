@@ -94,14 +94,6 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
      * {@inheritDoc}
      */
     @Override
-    protected void processAction(final Wave wave) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void showView() {
         // Nothing to do yet
     }
@@ -111,6 +103,14 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
      */
     @Override
     protected void hideView() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void processWave(final Wave wave) {
         // Nothing to do yet
     }
 

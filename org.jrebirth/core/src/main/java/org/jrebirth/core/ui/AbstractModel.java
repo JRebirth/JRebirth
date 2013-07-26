@@ -34,7 +34,7 @@ import org.jrebirth.core.wave.Wave;
  * @param <M> the class type of the current model
  * @param <V> the class type of the view managed by this model
  */
-public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> extends AbstractBaseModel<M, V> {
+public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> extends AbstractBaseModel<M> {
 
     /** The dedicated view component. */
     private transient V view;
@@ -43,7 +43,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
      * {@inheritDoc}
      */
     @Override
-    protected final void initInternalModel() throws CoreException {
+    protected void initInternalModel() throws CoreException {
 
         // Do generic stuff
         listen(JRebirthWaves.SHOW_VIEW);
@@ -56,9 +56,8 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
     @Override
-    protected final void bindInternal() {
+    protected void bindInternal() {
 
         // Bind model object if any or do nothing
         bindObject();
@@ -68,7 +67,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     }
 
     /**
-     * Bind object, store model oject if key part is provided.
+     * Bind object, store model object if key part is provided.
      */
     protected abstract void bindObject();
 

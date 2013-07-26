@@ -45,7 +45,7 @@ public final class SampleModel extends DefaultModel<SampleModel, SampleView> {
      * {@inheritDoc}
      */
     @Override
-    protected void processAction(final Wave wave) {
+    protected void processWave(final Wave wave) {
         // Process a wave action, you must listen the wave type before
     }
 

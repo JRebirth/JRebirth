@@ -76,6 +76,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
 
         JRebirth.checkJIT();
 
+        // Perform different action according to Wave Group used
         try {
             switch (wave.getWaveGroup()) {
                 case CALL_COMMAND:
@@ -99,11 +100,13 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     /**
      * Call dynamically a command.
      * 
-     * According to its runIntoType the command will be ru into JAT, JIT or a Thread Pool
+     * According to its runIntoType the command will be run into JAT, JIT or a Thread Pool
+     * 
+     * Each time a new fresh command will be retrieved.
      * 
      * This method is called from the JIT (JRebirth Internal Thread)<br>
      * 
-     * @param wave the wave that contain all information
+     * @param wave the wave that contains all informations
      */
     @SuppressWarnings("unchecked")
     private void callCommand(final Wave wave) {
@@ -118,13 +121,18 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     /**
      * Call a service method by using a task worker.
      * 
+     * The same service will be retrieved each time this method is called.
+     * 
      * This method is called from the JIT (JRebirth Internal Thread)<br>
      * 
-     * @param wave the wave that contain all information
+     * @param wave the wave that contains all informations
      */
     @SuppressWarnings("unchecked")
     private void returnData(final Wave wave) {
+
+        // Use only the Service class to retrieve the same instance each time
         final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<Service>) wave.getRelatedClass());
+
         // The inner task will be run into the JRebirth Thread Pool
         service.returnData(wave);
     }
@@ -135,13 +143,13 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
      * This method is called from the JIT (JRebirth Internal Thread)<br>
      * 
      * Creates the model and its root node.<br>
-     * Then attach it according to the placeholder defined into the wave<br>
+     * Then attach it according to the placeholder defined into the wave:<br>
      * <ul>
      * <li>JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER : to replace a property node by the model's root node</li>
      * <li>JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER : to add the model's root node into a children list</li>
      * </ul>
      * 
-     * @param wave the wave that contain all information
+     * @param wave the wave that contains all informations
      */
     @SuppressWarnings("unchecked")
     private void displayUi(final Wave wave) {
@@ -149,7 +157,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         // This key method could be managed in another way (fully sync with JAT), to see if it could be useful
 
         // Build the wave used to call the required command
-        final ShowModelWaveBuilder smwb = ShowModelWaveBuilder.create().showModelKey(getGlobalFacade().getUiFacade().buildKey((Class<Model>) wave.getRelatedClass()));
+        final ShowModelWaveBuilder smwb = ShowModelWaveBuilder.create()
+                .showModelKey(getGlobalFacade().getUiFacade().buildKey((Class<Model>) wave.getRelatedClass()));
 
         if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
             // Add the Ui view into the place holder provided
@@ -161,8 +170,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         }
 
         // Call the command that manage the display UI in 2 steps
-        // 1 - Create the model into the POol Thread
-        // 2 - Attache it to the graphical tree model according to their place holder type
+        // 1 - Create the model into the Thread Pool
+        // 2 - Attach it to the graphical tree model according to their placeholder type
         callCommand(smwb.build());
     }
 
@@ -207,16 +216,17 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
 
         JRebirth.checkJIT();
 
-        // For each wave type manage listeners
+        // For each given wave type, add linked Object to call
         for (final WaveType wt : waveType) {
-            List<WaveReady> list;
-            if (this.notifierMap.containsKey(wt)) {
-                list = this.notifierMap.get(wt);
-            } else {
-                list = LoopBuilder.newList(linkedObject);
-                this.notifierMap.put(wt, list);
+
+            // IF this wave type isn't registered into the map, we add it with an empty list of LinkedObject
+            if (!this.notifierMap.containsKey(wt)) {
+                this.notifierMap.put(wt, LoopBuilder.newList(linkedObject));
             }
+            // Retrieve he list associated to this Wave Type
+            List<WaveReady> list = this.notifierMap.get(wt);
             if (list.isEmpty() || !list.contains(linkedObject)) {
+                // Add the linked object if the list is empty or if the object isn't yet contained
                 list.add(linkedObject);
             }
         }
@@ -230,11 +240,18 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
 
         JRebirth.checkJIT();
 
+        // For each given wave type, remove linked Object to avoid calling them anymore
         for (final WaveType nt : waveType) {
             List<WaveReady> list;
             if (this.notifierMap.containsKey(nt)) {
+
+                // Retrieve the list of linked object associated to this Wave Type
                 list = this.notifierMap.get(nt);
+
+                // Remove the linked object to unregister it
                 list.remove(linkedObject);
+
+                // Remove the Wave Type from the map if there isn't any linked object left
                 if (list.isEmpty()) {
                     this.notifierMap.remove(nt);
                 }

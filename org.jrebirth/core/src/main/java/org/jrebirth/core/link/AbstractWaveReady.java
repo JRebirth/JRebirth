@@ -365,7 +365,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
             }
         } catch (final NoSuchMethodException e) {
             // If no method was found, call the default method
-            processAction(wave);
+            processWave(wave);
 
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             LOGGER.error("Error while dispatching a wave", e);
@@ -378,9 +378,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * Process the wave. Typically by using a switch on the waveType.
      * 
      * @param wave the wave received
-     * 
-     * @since org.jrebirth.core 1.0
      */
-    protected abstract void processAction(final Wave wave);
+    protected abstract void processWave(final Wave wave);
 
 }

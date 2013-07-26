@@ -51,7 +51,7 @@ public final class WorkbenchModel extends DefaultModel<WorkbenchModel, Workbench
      * {@inheritDoc}
      */
     @Override
-    protected void processAction(final Wave wave) {
+    protected void processWave(final Wave wave) {
         // Nothing to do yet
     }
 
