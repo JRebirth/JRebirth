@@ -15,14 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.ui;
+package org.jrebirth.core.ui.simple;
 
 import javafx.scene.Node;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.facade.JRebirthEventType;
-import org.jrebirth.core.link.AbstractWaveReady;
-import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.ui.AbstractModel;
+import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.ui.NullView;
 
 /**
  * 
@@ -34,26 +34,10 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @param <N> the root node type
  */
-public abstract class AbstractSimpleModel<N extends Node> extends AbstractWaveReady<Model> implements Model {
-
-    /** The root model not null for inner model. */
-    private Model rootModel;
+public abstract class AbstractSimpleModel<N extends Node> extends AbstractModel<Model, NullView> {
 
     /** The root node. */
     private N rootNode;
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void ready() throws CoreException {
-
-        // Initialize the current model
-        initialize();
-
-        // Prepare the root node
-        this.rootNode = prepareNode();
-    }
 
     /**
      * Prepare the root node.
@@ -70,14 +54,21 @@ public abstract class AbstractSimpleModel<N extends Node> extends AbstractWaveRe
      * 
      * @throws CoreException if the creation of the view fails
      */
-    protected void initialize() throws CoreException {
-        customInitialize();
+    @Override
+    protected void initInternalModel() throws CoreException {
+
+        // Initiailze model with custom method
+        initModel();
+
+        // Prepare the root node
+        this.rootNode = prepareNode();
     }
 
-    /**
-     * Initialize method to implement for adding custom processes.
-     */
-    protected abstract void customInitialize();
+    @Override
+    protected void bindObject() {
+        // Nothing to do yet FIXME
+
+    }
 
     /**
      * {@inheritDoc}
@@ -85,37 +76,6 @@ public abstract class AbstractSimpleModel<N extends Node> extends AbstractWaveRe
     @Override
     public N getRootNode() {
         return this.rootNode;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Model getRootModel() {
-        return this.rootModel;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setRootModel(final Model rootModel) {
-        this.rootModel = rootModel;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected abstract void processAction(final Wave wave);
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void finalize() throws Throwable {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_MODEL, null, this.getClass());
-        super.finalize();
     }
 
 }

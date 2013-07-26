@@ -39,7 +39,7 @@ public interface JRebirthParameters {
     /**************************************************************************************/
 
     /** Developer provides more information when dynamic API is broken (Wave Contrcat). */
-    ParameterItem<Boolean> DEVELOPER_MODE = create("developerMode", true);
+    ParameterItem<Boolean> DEVELOPER_MODE = create("developerMode", false);
 
     /** Fir Close Retry Delay in milliseconds, time to wait when application try to close the first time. */
     ParameterItem<Integer> CLOSE_RETRY_DELAY_FIRST = create("closeRetryDelayFirst", 4000);

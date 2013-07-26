@@ -15,11 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.ui;
+package org.jrebirth.core.ui.object;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.key.MultitonKey;
+import org.jrebirth.core.ui.AbstractModel;
+import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.ui.View;
 import org.jrebirth.core.util.ClassUtility;
 
 /**

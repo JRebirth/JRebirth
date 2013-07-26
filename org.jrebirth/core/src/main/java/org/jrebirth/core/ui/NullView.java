@@ -27,5 +27,5 @@ import javafx.scene.Node;
 public interface NullView extends View<Model, Node, Controller<?, ?>> {
 
     /** The default view used when no view is required. */
-    View<?, ?, ?> NULL_VIEW = null;
+    NullView NULL_VIEW = null;
 }

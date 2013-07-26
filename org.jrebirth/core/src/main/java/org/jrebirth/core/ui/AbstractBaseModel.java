@@ -37,9 +37,8 @@ import org.jrebirth.core.wave.Wave;
  * @author Sébastien Bordes
  * 
  * @param <M> the class type of the current model
- * @param <V> the class type of the view managed by this model
  */
-public abstract class AbstractBaseModel<M extends Model, V extends View<?, ?, ?>> extends AbstractWaveReady<Model> implements Model {
+public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveReady<Model> implements Model {
 
     /** The root model not null for inner model. */
     private Model rootModel;
@@ -249,7 +248,7 @@ public abstract class AbstractBaseModel<M extends Model, V extends View<?, ?, ?>
      * {@inheritDoc}
      */
     @Override
-    protected abstract void processAction(final Wave wave);
+    protected abstract void processWave(final Wave wave);
 
     /**
      * {@inheritDoc}
