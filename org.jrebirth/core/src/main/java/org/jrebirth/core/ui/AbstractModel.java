@@ -108,7 +108,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
 
         final Class<?> viewClass = ClassUtility.getGenericClass(this.getClass(), 1);
 
-        if (!NullView.class.equals(viewClass)) {
+        if (viewClass != null && !NullView.class.equals(viewClass)) {
             // Build the current view by reflection
             try {
                 this.view = (V) ClassUtility.buildGenericType(this.getClass(), 1, this);
