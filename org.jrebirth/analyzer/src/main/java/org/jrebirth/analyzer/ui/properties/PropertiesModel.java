@@ -19,7 +19,6 @@ package org.jrebirth.analyzer.ui.properties;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.facade.JRebirthEvent;
-import org.jrebirth.core.link.OnWave;
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
 
@@ -59,10 +58,10 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
         }
     }
 
-    @OnWave(EditorWaves.DO_SELECT_EVENT.getAction())
-    public void totot() {
-
-    }
+    // @OnWave(EditorWaves.DO_SELECT_EVENT.getAction())
+    // public void totot() {
+    //
+    // }
 
     /**
      * {@inheritDoc}
