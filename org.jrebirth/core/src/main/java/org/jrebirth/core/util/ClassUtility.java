@@ -19,6 +19,7 @@ package org.jrebirth.core.util;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -211,6 +212,14 @@ public final class ClassUtility {
             }
         }
         throw new NoSuchMethodException(action);
+    }
+
+    public static List<Field> retrievePropertyList(final Class<?> cls) {
+        final List<Field> propertyList = new ArrayList<>();
+        for (final Field f : cls.getFields()) {
+            propertyList.add(f);
+        }
+        return propertyList;
     }
 
     /**
