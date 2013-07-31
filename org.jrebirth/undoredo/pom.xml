@@ -1,29 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>jrebirth</artifactId>
 		<groupId>org</groupId>
+		<artifactId>jrebirth</artifactId>
 		<version>0.7.5-SNAPSHOT</version>
-		<relativePath>..</relativePath>
 	</parent>
 	<groupId>org.jrebirth</groupId>
-	<artifactId>transition</artifactId>
-	<name>Transition</name>
-	<description>A set of beautiful &amp; powerful transition</description>
-	
+	<artifactId>undoredo</artifactId>
+	<name>JRebirth Undo/Redo</name>
+	<description>Provide Undo/Redo features for JRebirth commands</description>
+
 	<dependencies>
+
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
 			<version>0.7.5-SNAPSHOT</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.2</version>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
 </project>
