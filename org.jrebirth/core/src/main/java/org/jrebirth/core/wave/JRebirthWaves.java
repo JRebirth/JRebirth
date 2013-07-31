@@ -44,6 +44,13 @@ public interface JRebirthWaves {
     WaveItem<List<Wave>> CHAINED_WAVES = new WaveItem<List<Wave>>() {
     };
 
+    /** The waveItem that indicates if command instance must be reused or if another must created. DEfault value is false. */
+    WaveItem<Boolean> REUSE_COMMAND = new WaveItem<Boolean>() {
+    };
+
+    /** . */
+    WaveData<Boolean> REUSE = WaveData.build(REUSE_COMMAND, true);
+
     /******************************/
     /** WaveType related to Model */
     /******************************/
