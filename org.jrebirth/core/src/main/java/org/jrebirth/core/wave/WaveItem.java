@@ -40,6 +40,8 @@ public class WaveItem<T> {
     /** The type of the related object registered by this wave item. */
     private final Type itemType;
 
+    private String name;
+
     /**
      * Private Constructor.
      */
@@ -50,6 +52,14 @@ public class WaveItem<T> {
         synchronized (WaveItem.class) {
             setUid(++idGenerator);
         }
+    }
+
+    /**
+     * Private Constructor.
+     */
+    public WaveItem(String name) {
+        this();
+        this.name = name;
     }
 
     // /**
@@ -95,6 +105,13 @@ public class WaveItem<T> {
     // }
 
     /**
+     * @return Returns the name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * @return Returns the uid.
      */
     public int getUid() {
@@ -129,6 +146,15 @@ public class WaveItem<T> {
     @Override
     public int hashCode() {
         return getUid();
+    }
+
+    public static void init(WaveItems waveItems, WaveItem<?> wi) {
+        wi.setName(waveItems.toString());
+
+    }
+
+    private void setName(String name) {
+        this.name = name;
     }
 
 }

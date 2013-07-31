@@ -281,7 +281,7 @@ public class WaveBase implements Wave {
     @Override
     public WaveBean getWaveBean() {
         if (this.waveBean == null) {
-            if (WaveBean.class.equals(this.waveBeanClass)) {
+            if (this.waveBeanClass == null || WaveBean.class.equals(this.waveBeanClass)) {
                 // Build an empty wave bean to avoid null pointer exception
                 this.waveBean = new DefaultWaveBean();
             } else {

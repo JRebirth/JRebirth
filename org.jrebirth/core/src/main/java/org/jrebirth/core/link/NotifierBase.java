@@ -99,7 +99,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     /**
      * Call dynamically a command.
      * 
-     * According to its runIntoType the command will be ru into JAT, JIT or a Thread Pool
+     * According to its runIntoType the command will be run into JAT, JIT or a Thread Pool
      * 
      * This method is called from the JIT (JRebirth Internal Thread)<br>
      * 
@@ -109,7 +109,9 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     private void callCommand(final Wave wave) {
 
         // Use the Wave UID to guarantee that a new fresh command is built and used !
-        final Command command = getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.getRelatedClass(), wave.getWUID());
+        final Command command = (wave.contains(JRebirthWaves.REUSE_COMMAND) && wave.get(JRebirthWaves.REUSE_COMMAND))
+                ? getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.getRelatedClass())
+                : getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.getRelatedClass(), wave.getWUID());
 
         // Run the command into the predefined thread
         command.run(wave);

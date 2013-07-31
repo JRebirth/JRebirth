@@ -344,6 +344,64 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     }
 
     /**
+     * This method is called before each execution of the command.
+     * 
+     * It will parse the given wave to store local command properties.
+     * 
+     * Wave parsing mechanism is composed by three steps:
+     * <ol>
+     * <li>Parse WaveBean properties and copy them into command ones if they exist (by reflection)</li>
+     * <li>Parse WaveData keys and copy them into command ones if they exist (by reflection)</li>
+     * <li>Call {@link #parseWave(Wave)} method for later customization</li>
+     * </ol>
+     * 
+     * @param wave the wave to parse
+     */
+    private void parseInternalWave(final Wave wave) {
+
+        // Parse WaveBean
+        // WB waveBean = getWaveBean(wave);
+        // if (waveBean != null && !(waveBean instanceof DefaultWaveBean)) {
+        // for (Field f : ClassUtility.retrievePropertyList(waveBean.getClass())) {
+        // try {
+        // tryToSetProperty(f.getName(), f.get(waveBean));
+        // } catch (IllegalArgumentException | IllegalAccessException e) {
+        // LOGGER.error("Fail to get field value " + f.getName() + " from " + waveBean.getClass(), e);
+        // }
+        // }
+        // }
+
+        // Parse WaveData
+        for (WaveData<?> wd : wave.getWaveItems()) {
+            tryToSetProperty(wd.getKey().toString(), wd.getValue());
+        }
+
+        // Call customized method
+        // parseWave(wave);
+    }
+
+    /**
+     * Try to set the value of the given property for the current class.
+     * 
+     * @param fieldName the field to initialize
+     * @param fieldValue the field value to set
+     */
+    private void tryToSetProperty(String fieldName, Object fieldValue) {
+        try {
+            this.getClass().getField(fieldName).set(this, fieldValue);
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+            LOGGER.error("Fail to set value for field " + fieldName, e);
+        }
+    }
+
+    /**
+     * Customizable method used to perform more action before command execution.
+     * 
+     * @param wave the given wave to parser before command execution
+     */
+    // protected abstract void parseWave(final Wave wave);
+
+    /**
      * {@inheritDoc}
      */
     @Override
