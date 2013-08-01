@@ -15,8 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.ui;
+package org.jrebirth.core.ui.object;
 
+import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.ui.View;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -82,7 +84,7 @@ public class DefaultObjectModel<M extends Model, V extends View<?, ?, ?>, O exte
      * {@inheritDoc}
      */
     @Override
-    protected void processAction(final Wave wave) {
+    protected void processWave(final Wave wave) {
         // Nothing to do yet
 
     }

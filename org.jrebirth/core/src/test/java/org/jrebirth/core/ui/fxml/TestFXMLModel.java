@@ -62,7 +62,7 @@ public class TestFXMLModel extends DefaultFXMLModel<TestFXMLModel> {
      * {@inheritDoc}
      */
     @Override
-    protected void processAction(final Wave wave) {
+    protected void processWave(final Wave wave) {
         // Nothing to do yet
 
     }

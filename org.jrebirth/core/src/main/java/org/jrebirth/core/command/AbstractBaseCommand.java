@@ -114,7 +114,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      * {@inheritDoc}
      */
     @Override
-    protected void processAction(final Wave wave) {
+    protected void processWave(final Wave wave) {
         // Command must not be run a long time, so they can't handle wave types
         LOGGER.warn("Command don't manage wave type handling");
     }
