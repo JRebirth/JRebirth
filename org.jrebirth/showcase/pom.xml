@@ -1,0 +1,239 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>jrebirth</artifactId>
+		<groupId>org</groupId>
+		<version>0.7.5-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.jrebirth</groupId>
+	<artifactId>showcase</artifactId>
+	<packaging>pom</packaging>
+
+	<name>JRebirth Showcase</name>
+	<description>Set of Showcase Application for live documentation and used as integration test</description>
+	<url>http://www.jrebirth.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<storepass>defaultpass</storepass>
+		<keypass>defaultpass</keypass>
+
+		<deployUrl>http://showcases.jrebirth.org</deployUrl>
+		<deployPath>${project.artifactId}/${project.version}</deployPath>
+
+		<!-- <jnlpFilename>MasteringTables.jnlp</jnlpFilename> <appClass>org.jrebirth.demo.masteringtables.MTApplication</appClass> -->
+
+		<appletWidth>800</appletWidth>
+		<appletHeight>600</appletHeight>
+
+		<updateCheck>background</updateCheck>
+		<updatePolicy>prompt-update</updatePolicy>
+
+	</properties>
+
+<!-- 	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/JRebirth/JRebirth-Showcase</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>Jenkins</system>
+		<url>http://ci.jrebirth.org/job/JRebirth-Showcase-master/</url>
+	</ciManagement>
+
+	<scm>
+		<connection>scm:git:git://github.com/JRebirth/JRebirth-Showcase.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth-Showcase.git</developerConnection>
+		<url>https://github.com/JRebirth/JRebirth-Showcase</url>
+	</scm>
+
+	<organization>
+		<name>JRebirth Open Group</name>
+		<url>http://www.jrebirth.org</url>
+	</organization>
+
+	<licenses>
+		<license>
+			<name>Apache License</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<distribution>repo</distribution>
+			<comments>Version 2.0, January 2004</comments>
+		</license>
+	</licenses> -->
+
+	<build>
+		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/java</directory>
+				<includes>
+					<include>**/*.fxml</include>
+					<include>**/*.txt</include>
+				</includes>
+			</resource>
+			<resource>
+				<filtering>true</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<JavaFX-Version>2.0</JavaFX-Version>
+							<Main-Class>${appClass}</Main-Class>
+							<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
+
+							<!-- <implementation-vendor>JRebirth</implementation-vendor> <implementation-title>JRebirthAnalyzer</implementation-title> <implementation-version>1.0</implementation-version> -->
+
+							<!-- not automated yet -->
+							<!-- <JavaFX-Class-Path>logback-classic-1.0.6.jar logback-core-1.0.6.jar slf4j-api -1.6.5.jar core-0.7.4-SNAPSHOT.jar</JavaFX-Class-Path> -->
+
+							<!-- <Permissions>sandbox</Permissions> -->
+							<Codebase>${deployUrl}</Codebase>
+						</manifestEntries>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>webstart-maven-plugin</artifactId>
+				<version>1.0-beta-3</version>
+
+				<configuration>
+
+					<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
+					<excludeTransitive>false</excludeTransitive>
+					<libPath>lib</libPath>
+
+					<resourcesDirectory>${project.basedir}/src/main/jnlp/resources</resourcesDirectory>
+					<codebase>${deployUrl}/${deployPath}</codebase>
+
+					<jnlp>
+						<!-- <inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath> <inputTemplate>src/main/jnlp/template.vm</inputTemplate> -->
+						<outputFile>${jnlpFilename}</outputFile>
+
+						<mainClass>${appClass}</mainClass>
+						<offlineAllowed>true</offlineAllowed>
+						<allPermissions>true</allPermissions>
+					</jnlp>
+
+					<sign>
+						<keystore>${basedir}/JRebirth-Showcase.jks</keystore>
+						<!-- MUST BE PROVIDED BY COMMAND LINE ARGUMENTS -->
+						<!-- -Dstorepass=xxx -Dkeypass=xxx -->
+						<keypass>${keypass}</keypass>
+						<storepass>${storepass}</storepass>
+						<!-- <storetype>fillme</storetype> -->
+						<alias>masteringtables</alias>
+
+						<validity>360</validity>
+						<dnameCn>www.jrebirth.org</dnameCn>
+						<dnameOu>None</dnameOu>
+						<dnameO>JRebirth</dnameO>
+						<dnameL>Toulouse</dnameL>
+						<dnameSt>HG</dnameSt>
+						<dnameC>FR</dnameC>
+
+						<verify>true</verify>
+
+						<keystoreConfig>
+							<delete>true</delete>
+							<gen>true</gen>
+						</keystoreConfig>
+					</sign>
+
+					<pack200>false</pack200>
+					<gzip>false</gzip>
+
+					<outputJarVersions>false</outputJarVersions>
+					<install>false</install>
+					<verbose>true</verbose>
+				</configuration>
+			</plugin>
+
+			<!-- Project Quality -->
+<!-- 			<plugin>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-maven3-plugin</artifactId>
+				<version>3.3.2</version>
+			</plugin> -->
+		</plugins>
+
+<!-- 		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>2.2</version>
+			</extension>
+		</extensions> -->
+	</build>
+
+	<dependencies>
+		<!-- Use logback logger -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>core</artifactId>
+			<version>0.7.5-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+
+<!-- 	<distributionManagement>
+		<repository>
+			<id>JRebirth-Release</id>
+			<name>JRebirth Releases Repository</name>
+			<url>http://repo.jrebirth.org/jrebirth-release-local</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>JRebirth-Snapshot</id>
+			<name>JRebirth Snasphots Repository</name>
+			<url>http://repo.jrebirth.org/jrebirth-snapshot-local</url>
+		</snapshotRepository>
+
+		<site> <id>JRebirth_Sites</id> <name>JRebirth Sites</name> <url>ftp://jrebirth.org/sites/${project.groupId}.${project.artifactId}-${project.version}</url> </site>
+	</distributionManagement> -->
+
+	<modules>
+		<module>undoredo</module>
+		<module>fxml</module>
+	</modules>
+</project>

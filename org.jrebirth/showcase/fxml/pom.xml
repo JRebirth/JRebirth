@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jrebirth</groupId>
+		<artifactId>showcase</artifactId>
+		<version>0.7.5-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.jrebirth.showcase</groupId>
+	<artifactId>fxml</artifactId>
+
+	<name>FXML</name>
+	<description>Sample application to describe JRebirth FXMLUndo features</description>
+
+
+	<properties>
+
+		<jnlpFilename>FXML-Showcase.jnlp</jnlpFilename>
+		<appClass>org.jrebirth.showcase.fxml.FXMLApplication</appClass>
+
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>webstart-maven-plugin</artifactId>
+				<version>1.0-beta-3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jnlp</goal> <!-- use jnlp, jnlp-inline or jnlp-single as appropriate -->
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>component</artifactId>
+			<version>0.7.5-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+</project>

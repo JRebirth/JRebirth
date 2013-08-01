@@ -1,6 +1,10 @@
+if(!JAVAFX_APP_JNLP_SUBDOMAIN){
+	JAVAFX_APP_JNLP_SUBDOMAIN = "apps";
+}
+
 function launchApplication(jnlpfile) {
 	dtjava.launch(            {
-			url : 'http://apps.jrebirth.org/' + JAVAFX_APP_JNLP,
+			url : 'http://' +JAVAFX_APP_JNLP_SUBDOMAIN +'.jrebirth.org/' + JAVAFX_APP_JNLP,
 			jnlp_content : ''
 		},
 		{
@@ -13,7 +17,7 @@ function launchApplication(jnlpfile) {
 function javafxEmbed() {
 	dtjava.embed(
 		{
-			url : 'http://apps.jrebirth.org/' + JAVAFX_APP_JNLP,
+			url : 'http://'+JAVAFX_APP_JNLP_SUBDOMAIN+'.jrebirth.org/' + JAVAFX_APP_JNLP,
 			placeholder : 'javafx-app-placeholder',
 			width : JAVAFX_APP_WIDTH,
 			height : JAVAFX_APP_HEIGHT,
