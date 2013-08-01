@@ -60,7 +60,7 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
      * {@inheritDoc}
      */
     @Override
-    protected void processAction(final Wave wave) {
+    protected void processWave(final Wave wave) {
         // Must be overridden to manage action handling by service
     }
 
@@ -103,7 +103,7 @@ public class ServiceBase extends AbstractWaveReady<Service> implements Service {
             }
         } catch (final NoSuchMethodException e) {
             // If no method was found, call the default method
-            processAction(sourceWave);
+            processWave(sourceWave);
         }
 
     }

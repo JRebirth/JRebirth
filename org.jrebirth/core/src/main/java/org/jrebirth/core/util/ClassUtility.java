@@ -140,15 +140,18 @@ public final class ClassUtility {
      * @param mainClass the parent class
      * @param superTypeIndex the index of the generic type to return
      * 
-     * @return the class of the generic type according to the index provided
+     * @return the class of the generic type according to the index provided or null if not found
      */
     public static Class<?> getGenericClass(final Class<?> mainClass, final int superTypeIndex) {
 
         // Retrieve the generic super class Parameterized type
         final ParameterizedType paramType = (ParameterizedType) mainClass.getGenericSuperclass();
 
-        // Retrieve the right generic type we want to instantiate
-        final Class<?> genericClass = getClassFromType(paramType.getActualTypeArguments()[superTypeIndex]);
+        Class<?> genericClass = null;
+        if (superTypeIndex < paramType.getActualTypeArguments().length) {
+            // Retrieve the right generic type we want to instantiate
+            genericClass = getClassFromType(paramType.getActualTypeArguments()[superTypeIndex]);
+        }
 
         return genericClass;
     }

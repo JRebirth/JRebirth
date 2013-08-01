@@ -49,7 +49,7 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
      * {@inheritDoc}
      */
     @Override
-    protected void processAction(final Wave wave) {
+    protected void processWave(final Wave wave) {
         if (EditorWaves.DO_SELECT_EVENT == wave.getWaveType()) {
 
             final JRebirthEvent event = wave.get(PropertiesWaves.EVENT_OBJECT);
@@ -57,6 +57,11 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
             getView().getNodeName().setText(event.getTarget().getSimpleName());
         }
     }
+
+    // @OnWave(EditorWaves.DO_SELECT_EVENT.getAction())
+    // public void totot() {
+    //
+    // }
 
     /**
      * {@inheritDoc}

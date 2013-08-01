@@ -102,7 +102,7 @@ public final class StackModel extends DefaultModel<StackModel, StackView> {
      * {@inheritDoc}
      */
     @Override
-    protected void processAction(final Wave wave) {
+    protected void processWave(final Wave wave) {
         // Nothing to do yet
     }
 

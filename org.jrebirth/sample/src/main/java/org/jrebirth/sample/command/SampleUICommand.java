@@ -49,7 +49,6 @@ public final class SampleUICommand extends DefaultUICommand {
                 .build();
 
         s.show();
-
         // Sample for popup => Attach owner !!!
         // getLocalFacade().getGlobalFacade().getApplication().getStage()
     }

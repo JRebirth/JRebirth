@@ -45,7 +45,7 @@ public final class AnnotationModel extends DefaultModel<AnnotationModel, Annotat
      * {@inheritDoc}
      */
     @Override
-    protected void processAction(final Wave wave) {
+    protected void processWave(final Wave wave) {
     }
 
     /**

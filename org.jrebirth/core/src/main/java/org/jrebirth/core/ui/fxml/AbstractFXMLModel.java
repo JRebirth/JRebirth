@@ -20,12 +20,10 @@ package org.jrebirth.core.ui.fxml;
 import javafx.scene.Node;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.AbstractBaseModel;
+import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.ui.NullView;
-import org.jrebirth.core.ui.View;
 import org.jrebirth.core.wave.JRebirthWaves;
-import org.jrebirth.core.wave.Wave;
 
 /**
  * The interface <strong>FXMLModel</strong>.
@@ -36,7 +34,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @param <M> the class type of the current model
  */
-public abstract class AbstractFXMLModel<M extends Model> extends AbstractBaseModel<M, NullView> {
+public abstract class AbstractFXMLModel<M extends Model> extends AbstractModel<M, NullView> {
 
     /** The fxmlComponent that wrap the node and its controller. */
     private FXMLComponent fxmlComponent;
@@ -51,7 +49,7 @@ public abstract class AbstractFXMLModel<M extends Model> extends AbstractBaseMod
     protected abstract String getFXMLPath();
 
     /**
-     * Return the bunlde path of the the properties file to load.
+     * Return the bundle path of the the properties file to load.
      * 
      * @see FXMLUtils
      * 
@@ -90,42 +88,16 @@ public abstract class AbstractFXMLModel<M extends Model> extends AbstractBaseMod
         bind();
     }
 
+    @Override
+    protected void bindObject() {
+        // Nothing to do yet FIXME
+
+    }
+
     /**
      * Pre init.
      */
     protected abstract void fxmlPreInitialize();
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final View<?, ?, ?> getView() {
-        return NullView.NULL_VIEW;
-    }
-
-    /**
-     * Perform show view.
-     * 
-     * Method handler for Wave JRebirthWaves.SHOW_VIEW
-     * 
-     * @param wave the wave that trigger the action
-     */
-    @Override
-    public final void doShowView(final Wave wave) {
-        showInternalView();
-    }
-
-    /**
-     * Perform hide view.
-     * 
-     * Method handler for Wave JRebirthWaves.HIDE_VIEW
-     * 
-     * @param wave the wave that trigger the action
-     */
-    @Override
-    public final void doHideView(final Wave wave) {
-        hideInternalView();
-    }
 
     /**
      * {@inheritDoc}
