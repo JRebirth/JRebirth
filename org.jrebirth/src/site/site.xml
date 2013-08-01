@@ -34,8 +34,8 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd" name="JRebirth">
 		</menu>
 		
 		<menu name="Showcase">
-			<item name="FXML" href="apps/FXML.html" />
-			<item name="UndoRedo" href="apps/UndoRedo.html" />
+			<item name="FXML" href="showcases/FXML.html" />
+			<item name="UndoRedo" href="showcases/UndoRedo.html" />
 		</menu>
 		
 		<menu name="Overview"> 

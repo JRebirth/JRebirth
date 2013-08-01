@@ -12,12 +12,6 @@ import org.jrebirth.core.wave.WaveData;
 public abstract class AbstractUndoableCommand extends AbstractSingleCommand<WaveBean> implements Undoable {
 
     @Override
-    protected void parseWave(Wave wave) {
-        // Nothing to do yet
-
-    }
-
-    @Override
     public void ready() throws CoreException {
         // Nothing to do yet
 
