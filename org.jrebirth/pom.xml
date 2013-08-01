@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.jrebirth</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
 	<groupId>org</groupId>
 	<artifactId>jrebirth</artifactId>
 	<version>0.7.5-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
-	<name>JRebirth Parent</name>
-	
+	<name>JRebirth Application Framework</name>
+
 	<url>http://sites.jrebirth.org/org.jrebirth-${project.version}</url>
-	
+
 	<description>JRebirth is an Application Framework dedicated to JavaFX 2+ technology.</description>
 	<inceptionYear>2011</inceptionYear>
 
@@ -58,189 +66,34 @@
 		<tag>HEAD</tag>
 	</scm>
 
-<!-- 	<organization>
-		<name>JRebirth OSS</name>
-		<url>http://www.jrebirth.org</url>
-	</organization>
-
-	<licenses>
-		<license>
-			<name>Apache License</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-			<distribution>repo</distribution>
-			<comments>Version 2.0, January 2004</comments>
-		</license>
-	</licenses>
-
-	<mailingLists>
-		<mailingList>
-			<name>JRebirth Developers Google Group</name>
-			<archive>groups.google.com/group/jrebirth-developers</archive>
-			<subscribe>http://groups.google.com/group/jrebirth-developers/subscribe</subscribe>
-		</mailingList>
-		<mailingList>
-			<name>JRebirth Users Google Group</name>
-			<archive>groups.google.com/group/jrebirth-users</archive>
-			<subscribe>http://groups.google.com/group/jrebirth-users/subscribe</subscribe>
-		</mailingList>
-	</mailingLists> -->
+	<!-- <organization> <name>JRebirth OSS</name> <url>http://www.jrebirth.org</url> </organization> <licenses> <license> <name>Apache License</name> <url>http://www.apache.org/licenses/LICENSE-2.0.html</url> 
+		<distribution>repo</distribution> <comments>Version 2.0, January 2004</comments> </license> </licenses> <mailingLists> <mailingList> <name>JRebirth Developers Google Group</name> <archive>groups.google.com/group/jrebirth-developers</archive> 
+		<subscribe>http://groups.google.com/group/jrebirth-developers/subscribe</subscribe> </mailingList> <mailingList> <name>JRebirth Users Google Group</name> <archive>groups.google.com/group/jrebirth-users</archive> 
+		<subscribe>http://groups.google.com/group/jrebirth-users/subscribe</subscribe> </mailingList> </mailingLists> -->
 
 	<build>
 
 		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, it's not yet implemented: see MNG-2216 -->
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
 
-<!-- 		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
-
-		<resources>
-			<resource>
-				<filtering>false</filtering>
-				<directory>${basedir}/src/main/java</directory>
-				<includes>
-					<include>**/*.fxml</include>
-					<include>**/*.properties</include>
-				</includes>
-			</resource>
-			<resource>
-				<filtering>false</filtering>
-				<directory>${basedir}/src/main/resources</directory>
-				<includes>
-					<include>**/*.*</include>
-				</includes>
-			</resource>
-		</resources>
-
-		<testResources>
-			<testResource>
-				<filtering>false</filtering>
-				<directory>${basedir}/src/test/java</directory>
-				<includes>
-					<include>**/*.fxml</include>
-					<include>**/*.properties</include>
-				</includes>
-			</testResource>
-			<testResource>
-				<filtering>false</filtering>
-				<directory>${basedir}/src/test/resources</directory>
-				<includes>
-					<include>**/*.*</include>
-				</includes>
-			</testResource>
-		</testResources> -->
+		<!-- <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName> <resources> <resource> <filtering>false</filtering> <directory>${basedir}/src/main/java</directory> <includes> 
+			<include>**/*.fxml</include> <include>**/*.properties</include> </includes> </resource> <resource> <filtering>false</filtering> <directory>${basedir}/src/main/resources</directory> <includes> <include>**/*.*</include> 
+			</includes> </resource> </resources> <testResources> <testResource> <filtering>false</filtering> <directory>${basedir}/src/test/java</directory> <includes> <include>**/*.fxml</include> <include>**/*.properties</include> 
+			</includes> </testResource> <testResource> <filtering>false</filtering> <directory>${basedir}/src/test/resources</directory> <includes> <include>**/*.*</include> </includes> </testResource> </testResources> -->
 
 		<plugins>
-			<!-- <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-					<compilerArguments> <bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</bootclasspath> </compilerArguments>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<preparationGoals>clean install</preparationGoals>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			Javadoc for the jar package
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9</version>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</bootclasspath>
-					<links>
-						<link>http://docs.oracle.com/javafx/2/api/</link>
-					</links>
-					<detectLinks>false</detectLinks>
-					<show>private</show>
-					<nohelp>true</nohelp>
-					<failOnError>false</failOnError>
-					<linksource>true</linksource>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.4</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>test-jar</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<skipIfEmpty>true</skipIfEmpty>
-				</configuration>
-
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.12</version>
-				<configuration>
-					<additionalClasspathElements>
-						<additionalClasspathElement>${java.home}/lib/rt.jar</additionalClasspathElement>
-						<additionalClasspathElement>${java.home}/lib/jfxrt.jar</additionalClasspathElement>
-					</additionalClasspathElements>
-				</configuration>
-			</plugin>
-
-
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.6.3.201306030806</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-						<phase>initialize</phase>
-					</execution>
-				</executions>
-			</plugin>
- -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-compiler-plugin</artifactId> <version>2.3.2</version> <configuration> <source>1.7</source> <target>1.7</target> <compilerArguments> 
+				<bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</bootclasspath> </compilerArguments> </configuration> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-release-plugin</artifactId> 
+				<version>2.3.2</version> <configuration> <autoVersionSubmodules>true</autoVersionSubmodules> <preparationGoals>clean install</preparationGoals> </configuration> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+				<artifactId>maven-source-plugin</artifactId> <version>2.2</version> <executions> <execution> <id>attach-sources</id> <goals> <goal>jar</goal> </goals> </execution> </executions> </plugin> Javadoc for the 
+				jar package <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> <version>2.9</version> <executions> <execution> <id>attach-javadocs</id> <goals> <goal>jar</goal> 
+				</goals> </execution> </executions> <configuration> <bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</bootclasspath> <links> <link>http://docs.oracle.com/javafx/2/api/</link> </links> 
+				<detectLinks>false</detectLinks> <show>private</show> <nohelp>true</nohelp> <failOnError>false</failOnError> <linksource>true</linksource> </configuration> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+				<artifactId>maven-assembly-plugin</artifactId> <version>2.4</version> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jar-plugin</artifactId> <version>2.4</version> <executions> 
+				<execution> <phase>package</phase> <goals> <goal>test-jar</goal> </goals> </execution> </executions> <configuration> <skipIfEmpty>true</skipIfEmpty> </configuration> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+				<artifactId>maven-surefire-plugin</artifactId> <version>2.12</version> <configuration> <additionalClasspathElements> <additionalClasspathElement>${java.home}/lib/rt.jar</additionalClasspathElement> <additionalClasspathElement>${java.home}/lib/jfxrt.jar</additionalClasspathElement> 
+				</additionalClasspathElements> </configuration> </plugin> <plugin> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId> <version>0.6.3.201306030806</version> <executions> <execution> 
+				<goals> <goal>prepare-agent</goal> </goals> <phase>initialize</phase> </execution> </executions> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
@@ -299,11 +152,7 @@
 			</plugin>
 
 			<!-- Project Quality -->
-<!-- 			<plugin>
-				<groupId>org.codehaus.sonar</groupId>
-				<artifactId>sonar-maven3-plugin</artifactId>
-				<version>3.3.2</version>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.codehaus.sonar</groupId> <artifactId>sonar-maven3-plugin</artifactId> <version>3.3.2</version> </plugin> -->
 
 
 			<!-- Copy UML Class Diagram -->
@@ -354,7 +203,7 @@
 									<pluginExecutionFilter>
 										<groupId>org.jacoco</groupId>
 										<artifactId>jacoco-maven-plugin</artifactId>
-										<versionRange>[0.6.0.201210061924,)</versionRange>
+										<versionRange>[0.6.3.201306030806,)</versionRange>
 										<goals>
 											<goal>prepare-agent</goal>
 										</goals>
@@ -371,35 +220,10 @@
 		</pluginManagement>
 	</build>
 
-<!-- 	<reporting>
-
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9</version>
-				<configuration>
-					<bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</bootclasspath>
-					<links>
-						<link>http://docs.oracle.com/javafx/2/api/</link>
-					</links>
-					<detectLinks>false</detectLinks>
-					<show>public</show>
-					<nohelp>false</nohelp>
-					<failOnError>false</failOnError>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.6</version>
-			</plugin>
-
-			<plugin> <groupId>org.codehaus.sonar-plugins</groupId> <artifactId>maven-report</artifactId> </plugin>
-
-		</plugins>
-	</reporting> -->
+	<!-- <reporting> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> <version>2.9</version> <configuration> <bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</bootclasspath> 
+		<links> <link>http://docs.oracle.com/javafx/2/api/</link> </links> <detectLinks>false</detectLinks> <show>public</show> <nohelp>false</nohelp> <failOnError>false</failOnError> </configuration> </plugin> 
+		<plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-report-plugin</artifactId> <version>2.6</version> </plugin> <plugin> <groupId>org.codehaus.sonar-plugins</groupId> <artifactId>maven-report</artifactId> 
+		</plugin> </plugins> </reporting> -->
 
 
 	<dependencyManagement>
@@ -430,109 +254,18 @@
 		</dependency>
 	</dependencies>
 
-	<!-- <distributionManagement>
-		<repository>
-			<id>${repositoryId}</id>
-			<name>${repositoryName}</name>
-			<url>${repositoryUrl}</url>
-		</repository>
-		<snapshotRepository>
-			<id>${snapshotRepositoryId}</id>
-			<name>${snapshotRepositoryName}</name>
-			<url>${snapshotRepositoryUrl}</url>
-		</snapshotRepository>
-		<site>
-			<id>JRebirth_Sites</id>
-			<name>JRebirth Sites</name>
-			<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url>
-		</site>
-	</distributionManagement>
+	<!-- <distributionManagement> <repository> <id>${repositoryId}</id> <name>${repositoryName}</name> <url>${repositoryUrl}</url> </repository> <snapshotRepository> <id>${snapshotRepositoryId}</id> <name>${snapshotRepositoryName}</name> 
+		<url>${snapshotRepositoryUrl}</url> </snapshotRepository> <site> <id>JRebirth_Sites</id> <name>JRebirth Sites</name> <url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url> 
+		</site> </distributionManagement> <profiles> <profile> <id>JRebirth</id> <activation> <activeByDefault>true</activeByDefault> </activation> <properties> Release repository <repositoryId>JRebirth-Release</repositoryId> 
+		<repositoryName>JRebirth Releases Repository</repositoryName> <repositoryUrl>http://repo.jrebirth.org/jrebirth-release-local</repositoryUrl> Snapshot repository <snapshotRepositoryId>JRebirth-Snapshot</snapshotRepositoryId> 
+		<snapshotRepositoryName>JRebirth Snasphots Repository</snapshotRepositoryName> <snapshotRepositoryUrl>http://repo.jrebirth.org/jrebirth-snapshot-local</snapshotRepositoryUrl> </properties> </profile> <profile> 
+		<id>Bintray</id> <properties> Release repository <repositoryId>bintray-jrebirth-JRebirth-JRebirth</repositoryId> <repositoryName>jrebirth-JRebirth-JRebirth</repositoryName> <repositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirth/</repositoryUrl> 
+		Snapshot repository <snapshotRepositoryId>bintray-jrebirth-JRebirth-JRebirth</snapshotRepositoryId> <snapshotRepositoryName>jrebirth-JRebirth-JRebirth</snapshotRepositoryName> <snapshotRepositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirth/</snapshotRepositoryUrl> 
+		</properties> </profile> </profiles> <developers> <developer> <id>jr1</id> <name>Bordes Sébastien</name> <email>seb@jrebirth.org</email> <url>blog.webeo.fr</url> <organization>JRebirth</organization> <organizationUrl>www.jrebirth.org</organizationUrl> 
+		<roles> <role>JRebirth Designer</role> </roles> </developer> <developer> <id>jr2</id> <name>Bordes Céline</name> <email>celine.bordes@jrebirth.org</email> <url>www.jrebirth.org</url> <organization>JRebirth</organization> 
+		<organizationUrl>www.jrebirth.org</organizationUrl> <roles> <role>Graphic Designer</role> </roles> </developer> <developer> <id>jr3</id> <name>Rajmahendra Hegde</name> <email>rajmahendra.hegde@jrebirth.org</email> 
+		<url>http://twitter.come/rajonjava</url> <organization>JUGChennai</organization> <organizationUrl>http://jugchennai.in</organizationUrl> <roles> <role>JRebirth Developer</role> </roles> </developer> <developer> 
+		<id>jr4</id> <name>Guruprasad Shenoy</name> <email>guruprasad.shenoy@jrebirth.org</email> <url></url> <organization>JUGChennai</organization> <organizationUrl>http://jugchennai.in</organizationUrl> <roles> 
+		<role>JRebirth Developer</role> </roles> </developer> </developers> -->
 
-	<profiles>
-		<profile>
-			<id>JRebirth</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				Release repository
-				<repositoryId>JRebirth-Release</repositoryId>
-				<repositoryName>JRebirth Releases Repository</repositoryName>
-				<repositoryUrl>http://repo.jrebirth.org/jrebirth-release-local</repositoryUrl>
-				Snapshot repository
-				<snapshotRepositoryId>JRebirth-Snapshot</snapshotRepositoryId>
-				<snapshotRepositoryName>JRebirth Snasphots Repository</snapshotRepositoryName>
-				<snapshotRepositoryUrl>http://repo.jrebirth.org/jrebirth-snapshot-local</snapshotRepositoryUrl>
-			</properties>
-		</profile>
-		<profile>
-			<id>Bintray</id>
-			<properties>
-				Release repository
-				<repositoryId>bintray-jrebirth-JRebirth-JRebirth</repositoryId>
-				<repositoryName>jrebirth-JRebirth-JRebirth</repositoryName>
-				<repositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirth/</repositoryUrl>
-				Snapshot repository
-				<snapshotRepositoryId>bintray-jrebirth-JRebirth-JRebirth</snapshotRepositoryId>
-				<snapshotRepositoryName>jrebirth-JRebirth-JRebirth</snapshotRepositoryName>
-				<snapshotRepositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirth/</snapshotRepositoryUrl>
-			</properties>
-		</profile>
-	</profiles>
-
-	<developers>
-		<developer>
-			<id>jr1</id>
-			<name>Bordes Sébastien</name>
-			<email>seb@jrebirth.org</email>
-			<url>blog.webeo.fr</url>
-			<organization>JRebirth</organization>
-			<organizationUrl>www.jrebirth.org</organizationUrl>
-			<roles>
-				<role>JRebirth Designer</role>
-			</roles>
-		</developer>
-		<developer>
-			<id>jr2</id>
-			<name>Bordes Céline</name>
-			<email>celine.bordes@jrebirth.org</email>
-			<url>www.jrebirth.org</url>
-			<organization>JRebirth</organization>
-			<organizationUrl>www.jrebirth.org</organizationUrl>
-			<roles>
-				<role>Graphic Designer</role>
-			</roles>
-		</developer>
-		<developer>
-			<id>jr3</id>
-			<name>Rajmahendra Hegde</name>
-			<email>rajmahendra.hegde@jrebirth.org</email>
-			<url>http://twitter.come/rajonjava</url>
-			<organization>JUGChennai</organization>
-			<organizationUrl>http://jugchennai.in</organizationUrl>
-			<roles>
-				<role>JRebirth Developer</role>
-			</roles>
-		</developer>
-
-		<developer>
-			<id>jr4</id>
-			<name>Guruprasad Shenoy</name>
-			<email>guruprasad.shenoy@jrebirth.org</email>
-			<url></url>
-			<organization>JUGChennai</organization>
-			<organizationUrl>http://jugchennai.in</organizationUrl>
-			<roles>
-				<role>JRebirth Developer</role>
-			</roles>
-		</developer>
-
-	</developers> -->
-
-	<parent>
-		<groupId>org.jrebirth</groupId>
-		<artifactId>oss</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
 </project>
