@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org</groupId>
-	<artifactId>jrebirth</artifactId>
-	<version>0.7.5-SNAPSHOT</version>
+	<groupId>org.jrebirth</groupId>
+	<artifactId>oss</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
-	<name>JRebirth Parent</name>
+	<name>JRebirth OSS</name>
 	
-	<url>http://sites.jrebirth.org/org.jrebirth-${project.version}</url>
-	
+	<url>http://www.jrebirth.org</url>
 	<description>JRebirth is an Application Framework dedicated to JavaFX 2+ technology.</description>
 	<inceptionYear>2011</inceptionYear>
 
@@ -20,26 +19,12 @@
 		<sonar.host.url>http://quality.jrebirth.org</sonar.host.url>
 		<sonar.jdbc.url>jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;characterEncoding=utf8</sonar.jdbc.url>
 		<sonar.jdbc.driver>com.mysql.jdbc.Driver</sonar.jdbc.driver>
+		<sonar.language>java</sonar.language>
 		<!--Parameters to add as arguments of the mvn command -->
 		<!-- <sonar.jdbc.username></sonar.jdbc.username> <sonar.jdbc.password></sonar.jdbc.password> -->
 		<jrebirth-configuration.version>1.0.0</jrebirth-configuration.version>
-		<sonar.language>java</sonar.language>
 
 	</properties>
-
-	<modules>
-		<module>core</module>
-		<module>component</module>
-		<module>analyzer</module>
-		<module>archetype</module>
-		<module>sample</module>
-		<module>presentation</module>
-		<module>transition</module>
-		<module>distribution</module>
-		<!-- <module>form</module> -->
-		<module>undoredo</module>
-		<module>showcase</module>
-	</modules>
 
 	<issueManagement>
 		<system>GitHub Issue Tracker</system>
@@ -58,7 +43,7 @@
 		<tag>HEAD</tag>
 	</scm>
 
-<!-- 	<organization>
+	<organization>
 		<name>JRebirth OSS</name>
 		<url>http://www.jrebirth.org</url>
 	</organization>
@@ -83,14 +68,14 @@
 			<archive>groups.google.com/group/jrebirth-users</archive>
 			<subscribe>http://groups.google.com/group/jrebirth-users/subscribe</subscribe>
 		</mailingList>
-	</mailingLists> -->
+	</mailingLists>
 
 	<build>
 
 		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, it's not yet implemented: see MNG-2216 -->
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
 
-<!-- 		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
 
 		<resources>
 			<resource>
@@ -126,17 +111,17 @@
 					<include>**/*.*</include>
 				</includes>
 			</testResource>
-		</testResources> -->
+		</testResources>
 
 		<plugins>
-			<!-- <plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
-					<compilerArguments> <bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</bootclasspath> </compilerArguments>
+					<!-- <compilerArguments> <bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</bootclasspath> </compilerArguments> -->
 				</configuration>
 			</plugin>
 
@@ -164,7 +149,7 @@
 				</executions>
 			</plugin>
 
-			Javadoc for the jar package
+			<!-- Javadoc for the jar package -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -186,7 +171,7 @@
 					<show>private</show>
 					<nohelp>true</nohelp>
 					<failOnError>false</failOnError>
-					<linksource>true</linksource>
+					<!-- <linksource>true</linksource> -->
 				</configuration>
 			</plugin>
 
@@ -230,7 +215,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.6.3.201306030806</version>
+				<version>0.6.2.201302030002</version>
 				<executions>
 					<execution>
 						<goals>
@@ -240,8 +225,8 @@
 					</execution>
 				</executions>
 			</plugin>
- -->
-			<plugin>
+
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.2</version>
@@ -294,38 +279,15 @@
 						<version>1.3</version>
 					</dependency>
 
-					<!-- <dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-docbook-simple</artifactId> <version>1.3</version> </dependency> -->
+					<dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-docbook-simple</artifactId> <version>1.3</version> </dependency>
 				</dependencies>
-			</plugin>
+			</plugin> -->
 
 			<!-- Project Quality -->
-<!-- 			<plugin>
+			<plugin>
 				<groupId>org.codehaus.sonar</groupId>
 				<artifactId>sonar-maven3-plugin</artifactId>
 				<version>3.3.2</version>
-			</plugin> -->
-
-
-			<!-- Copy UML Class Diagram -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>UML recopy</id>
-						<phase>pre-site</phase>
-						<configuration>
-							<tasks>
-								<copy todir="${project.build.directory}/site/doc/uml/">
-									<fileset dir="${basedir}/src/main/uml/*.png" />
-								</copy>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 		</plugins>
@@ -340,38 +302,9 @@
 			</extension>
 		</extensions>
 
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.jacoco</groupId>
-										<artifactId>jacoco-maven-plugin</artifactId>
-										<versionRange>[0.6.0.201210061924,)</versionRange>
-										<goals>
-											<goal>prepare-agent</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 
-<!-- 	<reporting>
+	<reporting>
 
 		<plugins>
 			<plugin>
@@ -396,41 +329,14 @@
 				<version>2.6</version>
 			</plugin>
 
-			<plugin> <groupId>org.codehaus.sonar-plugins</groupId> <artifactId>maven-report</artifactId> </plugin>
+			<!-- <plugin> <groupId>org.codehaus.sonar-plugins</groupId> <artifactId>maven-report</artifactId> </plugin> -->
 
 		</plugins>
-	</reporting> -->
+	</reporting>
 
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.8.2</version>
-			</dependency>
-			<dependency>
-				<groupId>org.easytesting</groupId>
-				<artifactId>fest-assert</artifactId>
-				<version>1.4</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.easytesting</groupId>
-			<artifactId>fest-assert</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<!-- <distributionManagement>
+	<distributionManagement>
 		<repository>
 			<id>${repositoryId}</id>
 			<name>${repositoryName}</name>
@@ -455,11 +361,11 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				Release repository
+				<!-- Release repository -->
 				<repositoryId>JRebirth-Release</repositoryId>
 				<repositoryName>JRebirth Releases Repository</repositoryName>
 				<repositoryUrl>http://repo.jrebirth.org/jrebirth-release-local</repositoryUrl>
-				Snapshot repository
+				<!-- Snapshot repository -->
 				<snapshotRepositoryId>JRebirth-Snapshot</snapshotRepositoryId>
 				<snapshotRepositoryName>JRebirth Snasphots Repository</snapshotRepositoryName>
 				<snapshotRepositoryUrl>http://repo.jrebirth.org/jrebirth-snapshot-local</snapshotRepositoryUrl>
@@ -468,11 +374,11 @@
 		<profile>
 			<id>Bintray</id>
 			<properties>
-				Release repository
+				<!-- Release repository -->
 				<repositoryId>bintray-jrebirth-JRebirth-JRebirth</repositoryId>
 				<repositoryName>jrebirth-JRebirth-JRebirth</repositoryName>
 				<repositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirth/</repositoryUrl>
-				Snapshot repository
+				<!-- Snapshot repository -->
 				<snapshotRepositoryId>bintray-jrebirth-JRebirth-JRebirth</snapshotRepositoryId>
 				<snapshotRepositoryName>jrebirth-JRebirth-JRebirth</snapshotRepositoryName>
 				<snapshotRepositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirth/</snapshotRepositoryUrl>
@@ -527,12 +433,17 @@
 			</roles>
 		</developer>
 
-	</developers> -->
+	</developers>
 
-	<parent>
-		<groupId>org.jrebirth</groupId>
-		<artifactId>oss</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.8.2</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
 </project>
