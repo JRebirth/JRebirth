@@ -254,12 +254,17 @@
 		</dependency>
 	</dependencies>
 
-	<!-- <distributionManagement> <repository> <id>${repositoryId}</id> <name>${repositoryName}</name> <url>${repositoryUrl}</url> </repository> <snapshotRepository> <id>${snapshotRepositoryId}</id> <name>${snapshotRepositoryName}</name> 
-		<url>${snapshotRepositoryUrl}</url> </snapshotRepository> <site> <id>JRebirth_Sites</id> <name>JRebirth Sites</name> <url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url> 
-		</site> </distributionManagement> <profiles> <profile> <id>JRebirth</id> <activation> <activeByDefault>true</activeByDefault> </activation> <properties> Release repository <repositoryId>JRebirth-Release</repositoryId> 
-		<repositoryName>JRebirth Releases Repository</repositoryName> <repositoryUrl>http://repo.jrebirth.org/jrebirth-release-local</repositoryUrl> Snapshot repository <snapshotRepositoryId>JRebirth-Snapshot</snapshotRepositoryId> 
-		<snapshotRepositoryName>JRebirth Snasphots Repository</snapshotRepositoryName> <snapshotRepositoryUrl>http://repo.jrebirth.org/jrebirth-snapshot-local</snapshotRepositoryUrl> </properties> </profile> <profile> 
-		<id>Bintray</id> <properties> Release repository <repositoryId>bintray-jrebirth-JRebirth-JRebirth</repositoryId> <repositoryName>jrebirth-JRebirth-JRebirth</repositoryName> <repositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirth/</repositoryUrl> 
+	<distributionManagement>
+		<site>
+			<id>JRebirth_Sites</id>
+			<name>JRebirth Sites</name>
+			<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url>
+		</site>
+	</distributionManagement>
+	<!-- <profiles> <profile> <id>JRebirth</id> <activation> <activeByDefault>true</activeByDefault> </activation> <properties> Release repository <repositoryId>JRebirth-Release</repositoryId> <repositoryName>JRebirth 
+		Releases Repository</repositoryName> <repositoryUrl>http://repo.jrebirth.org/jrebirth-release-local</repositoryUrl> Snapshot repository <snapshotRepositoryId>JRebirth-Snapshot</snapshotRepositoryId> <snapshotRepositoryName>JRebirth 
+		Snasphots Repository</snapshotRepositoryName> <snapshotRepositoryUrl>http://repo.jrebirth.org/jrebirth-snapshot-local</snapshotRepositoryUrl> </properties> </profile> <profile> <id>Bintray</id> <properties> 
+		Release repository <repositoryId>bintray-jrebirth-JRebirth-JRebirth</repositoryId> <repositoryName>jrebirth-JRebirth-JRebirth</repositoryName> <repositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirth/</repositoryUrl> 
 		Snapshot repository <snapshotRepositoryId>bintray-jrebirth-JRebirth-JRebirth</snapshotRepositoryId> <snapshotRepositoryName>jrebirth-JRebirth-JRebirth</snapshotRepositoryName> <snapshotRepositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirth/</snapshotRepositoryUrl> 
 		</properties> </profile> </profiles> <developers> <developer> <id>jr1</id> <name>Bordes Sébastien</name> <email>seb@jrebirth.org</email> <url>blog.webeo.fr</url> <organization>JRebirth</organization> <organizationUrl>www.jrebirth.org</organizationUrl> 
 		<roles> <role>JRebirth Designer</role> </roles> </developer> <developer> <id>jr2</id> <name>Bordes Céline</name> <email>celine.bordes@jrebirth.org</email> <url>www.jrebirth.org</url> <organization>JRebirth</organization> 
