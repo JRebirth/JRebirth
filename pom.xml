@@ -334,8 +334,6 @@
 		</plugins>
 	</reporting>
 
-
-
 	<distributionManagement>
 		<repository>
 			<id>${repositoryId}</id>
@@ -347,11 +345,6 @@
 			<name>${snapshotRepositoryName}</name>
 			<url>${snapshotRepositoryUrl}</url>
 		</snapshotRepository>
-		<site>
-			<id>JRebirth_Sites</id>
-			<name>JRebirth Sites</name>
-			<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url>
-		</site>
 	</distributionManagement>
 
 	<profiles>
