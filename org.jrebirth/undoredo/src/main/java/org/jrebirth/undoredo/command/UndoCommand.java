@@ -22,13 +22,12 @@ import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.exception.CommandException;
 import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.undoredo.service.UndoRedoService;
 
 /**
  * The Class UndoCommand is used to undo latest action done for the given stack.
  * 
- * It retrieves the stack name from the {@link WaveItem} {@link UndoRedoWaves}.stackName or use the default one.
+ * It retrieves the stack name from the WaveItem {@link UndoRedoWaves}.stackName or use the default one.
  */
 @RunInto(RunType.JIT)
 public class UndoCommand extends DefaultCommand {
