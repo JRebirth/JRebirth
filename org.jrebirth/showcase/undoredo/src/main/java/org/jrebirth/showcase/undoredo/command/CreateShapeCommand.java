@@ -1,3 +1,20 @@
+/**
+ * Get more info at : www.jrebirth.org .
+ * Copyright JRebirth.org © 2011-2013
+ * Contact : sebastien.bordes@jrebirth.org
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.jrebirth.showcase.undoredo.command;
 
 import javafx.scene.Node;
@@ -14,19 +31,24 @@ import org.jrebirth.showcase.undoredo.beans.UndoAppWaves;
 import org.jrebirth.showcase.undoredo.ui.UndoModel;
 import org.jrebirth.undoredo.command.AbstractUndoableCommand;
 
+/**
+ * The Class CreateShapeCommand is used to create a node and add it to the graphical editor.
+ */
 @RunInto(RunType.JAT)
 public class CreateShapeCommand extends AbstractUndoableCommand {
 
+    /** The shape type. */
     private ShapeType shapeType;
 
+    /** The created node. */
     private Node createdNode;
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void init(Wave wave) {
-        shapeType = wave.get(UndoAppWaves.shapeType);
+    public void init(final Wave wave) {
+        this.shapeType = wave.get(UndoAppWaves.shapeType);
 
     }
 
@@ -36,19 +58,21 @@ public class CreateShapeCommand extends AbstractUndoableCommand {
     @Override
     public void redo() {
 
-        switch (shapeType) {
+        // Build a node according to the shape type
+        switch (this.shapeType) {
             case Circle:
-                createdNode = CircleBuilder.create().fill(Color.BLUE).layoutX(60).layoutY(60).radius(30).build();
+                this.createdNode = CircleBuilder.create().fill(Color.BLUE).layoutX(60).layoutY(60).radius(30).build();
                 break;
             case Square:
-                createdNode = RectangleBuilder.create().fill(Color.BLUEVIOLET).layoutX(50).layoutY(100).width(30).height(30).build();
+                this.createdNode = RectangleBuilder.create().fill(Color.BLUEVIOLET).layoutX(50).layoutY(100).width(30).height(30).build();
                 break;
             case Rectangle:
-                createdNode = RectangleBuilder.create().fill(Color.AZURE).layoutX(100).layoutY(150).width(30).height(15).build();
+                this.createdNode = RectangleBuilder.create().fill(Color.AZURE).layoutX(100).layoutY(150).width(30).height(15).build();
                 break;
         }
 
-        getModel(UndoModel.class).addShape(createdNode);
+        // Add to editor
+        getModel(UndoModel.class).addShape(this.createdNode);
 
     }
 
@@ -58,14 +82,17 @@ public class CreateShapeCommand extends AbstractUndoableCommand {
     @Override
     public void undo() {
 
-        getModel(UndoModel.class).removeShape(createdNode);
+        // Remove from editor
+        getModel(UndoModel.class).removeShape(this.createdNode);
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void ready() throws CoreException {
         // Nothing to do yet
-
     }
 
 }

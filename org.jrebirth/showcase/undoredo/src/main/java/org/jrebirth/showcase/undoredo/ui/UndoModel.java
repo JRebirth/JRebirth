@@ -1,3 +1,20 @@
+/**
+ * Get more info at : www.jrebirth.org .
+ * Copyright JRebirth.org © 2011-2013
+ * Contact : sebastien.bordes@jrebirth.org
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.jrebirth.showcase.undoredo.ui;
 
 import javafx.scene.Node;
@@ -11,17 +28,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The class <strong>SampleModel</strong>.
+ * The class <strong>UndoModel</strong>.
  * 
- * @author
+ * The mai UI of the Undo/Redo showcase application.
+ * 
+ * @author Sébastien Bordes
  */
 public final class UndoModel extends DefaultModel<UndoModel, UndoView> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(UndoModel.class);
 
+    /** The Constant stackName. */
     static final WaveData<String> stackName = WaveData.build(UndoRedoWaves.STACK_NAME, "main");
 
+    /** The undo redo service. */
     private UndoRedoService undoRedoService;
 
     /**
@@ -33,14 +54,24 @@ public final class UndoModel extends DefaultModel<UndoModel, UndoView> {
 
         // Get a strong reference to service to avoid any garbage collection.
         // Be careful it can hold a lot of objects
-        undoRedoService = getService(UndoRedoService.class, stackName.getValue());
+        this.undoRedoService = getService(UndoRedoService.class, stackName.getValue());
     }
 
-    public void addShape(Node createdNode) {
+    /**
+     * Adds the shape.
+     * 
+     * @param createdNode the created node
+     */
+    public void addShape(final Node createdNode) {
         getView().getEditor().getChildren().add(createdNode);
     }
 
-    public void removeShape(Node createdNode) {
+    /**
+     * Removes the shape.
+     * 
+     * @param createdNode the created node
+     */
+    public void removeShape(final Node createdNode) {
         getView().getEditor().getChildren().remove(createdNode);
     }
 
