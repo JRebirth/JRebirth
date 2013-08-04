@@ -4,8 +4,8 @@ import javafx.scene.Node;
 
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.WaveData;
-import org.jrebirth.undo.command.UndoRedoWaves;
-import org.jrebirth.undo.service.UndoRedoService;
+import org.jrebirth.undoredo.command.UndoRedoWaves;
+import org.jrebirth.undoredo.service.UndoRedoService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public final class UndoModel extends DefaultModel<UndoModel, UndoView> {
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(UndoModel.class);
 
-    static final WaveData<String> stackName = WaveData.build(UndoRedoWaves.stackName, "main");
+    static final WaveData<String> stackName = WaveData.build(UndoRedoWaves.STACK_NAME, "main");
 
     private UndoRedoService undoRedoService;
 
