@@ -7,11 +7,12 @@ import javafx.scene.shape.RectangleBuilder;
 
 import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
+import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.showcase.undoredo.beans.ShapeType;
 import org.jrebirth.showcase.undoredo.beans.UndoAppWaves;
 import org.jrebirth.showcase.undoredo.ui.UndoModel;
-import org.jrebirth.undo.command.AbstractUndoableCommand;
+import org.jrebirth.undoredo.command.AbstractUndoableCommand;
 
 @RunInto(RunType.JAT)
 public class CreateShapeCommand extends AbstractUndoableCommand {
@@ -58,6 +59,12 @@ public class CreateShapeCommand extends AbstractUndoableCommand {
     public void undo() {
 
         getModel(UndoModel.class).removeShape(createdNode);
+
+    }
+
+    @Override
+    public void ready() throws CoreException {
+        // Nothing to do yet
 
     }
 

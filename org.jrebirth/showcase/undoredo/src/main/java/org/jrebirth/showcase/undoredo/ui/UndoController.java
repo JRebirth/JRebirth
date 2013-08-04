@@ -8,8 +8,8 @@ import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.showcase.undoredo.beans.ShapeType;
 import org.jrebirth.showcase.undoredo.beans.UndoAppWaves;
 import org.jrebirth.showcase.undoredo.command.CreateShapeCommand;
-import org.jrebirth.undo.command.RedoCommand;
-import org.jrebirth.undo.command.UndoCommand;
+import org.jrebirth.undoredo.command.RedoCommand;
+import org.jrebirth.undoredo.command.UndoCommand;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
