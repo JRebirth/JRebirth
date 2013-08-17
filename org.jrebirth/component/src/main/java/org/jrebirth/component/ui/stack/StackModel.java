@@ -55,7 +55,8 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
      * 
      * Called when model received a SHOW_PAGE wave type.
      * 
-     * @param page the page
+     * @param pageModelKey the modelKey for the page to show
+     * @param stackName the unique string tha t identify the stack
      * 
      * @param wave the wave
      */
@@ -72,19 +73,26 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
      * 
      * Called when model received a SHOW_PAGE wave type.
      * 
-     * @param page the page
+     * @param pageEnum the page enum for the model to show
      * @param wave the wave
      */
     public void doShowPageEnum(final PageEnum pageEnum, final Wave wave) {
 
         LOGGER.info("Show Page Enum: " + pageEnum.toString());
-        if (getPageEnum() != null && getPageEnum().equals(pageEnum.getClass())) {
+        if (getPageEnumClass() != null && getPageEnumClass().equals(pageEnum.getClass())) {
             showPage(pageEnum.getModelKey());
         }
     }
 
+    /**
+     * Returns the page enum class associated to this model.
+     * 
+     * Checks the modelObject and return it only if it extends {@link PageEnum}
+     * 
+     * @return the page enum class
+     */
     @SuppressWarnings("unchecked")
-    private Class<? extends PageEnum> getPageEnum() {
+    private Class<? extends PageEnum> getPageEnumClass() {
         Class<? extends PageEnum> res = null;
         if (getModelObject() instanceof Class && PageEnum.class.isAssignableFrom((Class<?>) getModelObject())) {
             res = (Class<? extends PageEnum>) getModelObject();
@@ -92,7 +100,13 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
         return res;
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * Returns the current stack name associated to this model.
+     * 
+     * Checks the modelObject and return it only if it is a String
+     * 
+     * @return the stack name
+     */
     private String getStackName() {
         String res = null;
         if (getModelObject() instanceof String) {
@@ -102,9 +116,9 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
     }
 
     /**
-     * TODO To complete.
+     * Private method used to show another page.
      * 
-     * @param pageModelKey
+     * @param pageModelKey the mdoelKey for the page to show
      */
     private void showPage(final UniqueKey<? extends Model> pageModelKey) {
         LOGGER.info("Show Page Model: " + pageModelKey.toString());
