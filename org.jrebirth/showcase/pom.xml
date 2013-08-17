@@ -71,6 +71,7 @@
 				<directory>${basedir}/src/main/java</directory>
 				<includes>
 					<include>**/*.fxml</include>
+					<include>**/*.properties</include>
 					<include>**/*.txt</include>
 				</includes>
 			</resource>

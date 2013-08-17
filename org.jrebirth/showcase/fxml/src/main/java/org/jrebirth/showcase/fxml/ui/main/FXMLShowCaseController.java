@@ -1,7 +1,11 @@
 package org.jrebirth.showcase.fxml.ui.main;
 
+import javafx.scene.input.MouseEvent;
+
+import org.jrebirth.component.ui.stack.StackWaves;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.DefaultController;
+import org.jrebirth.core.wave.WaveData;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,14 +37,20 @@ public final class FXMLShowCaseController extends DefaultController<FXMLShowCase
     @Override
     protected void initEventAdapters() throws CoreException {
 
+        // WaveData<Class<? extends PageEnum>> stackName = WaveData.build(StackWaves.STACK_PAGES, FXMLShowCaseModel.STACK_PAGES);
+
         // Manage Ui Command Button
-        // linkCommand(getView().getUndoButton(), MouseEvent.MOUSE_CLICKED, UndoCommand.class, FXMLShowCaseModel.stackName);
-        // linkCommand(getView().getRedoButton(), MouseEvent.MOUSE_CLICKED, RedoCommand.class, FXMLShowCaseModel.stackName);
-        //
-        // linkCommand(getView().getAddCircleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WaveData.build(UndoAppWaves.shapeType, ShapeType.Circle), FXMLShowCaseModel.stackName);
-        // linkCommand(getView().getAddSquareButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WaveData.build(UndoAppWaves.shapeType, ShapeType.Square), FXMLShowCaseModel.stackName);
-        // linkCommand(getView().getAddRectangleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WaveData.build(UndoAppWaves.shapeType, ShapeType.Rectangle), FXMLShowCaseModel.stackName);
+        linkWave(getView().getShowIncluded(), MouseEvent.MOUSE_CLICKED, StackWaves.SHOW_PAGE_ENUM,
+                WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.IncludedFxml)/* , stackName */);
+
+        linkWave(getView().getShowEmbedded(), MouseEvent.MOUSE_CLICKED, StackWaves.SHOW_PAGE_ENUM,
+                WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.ViewEmbeddedFxml)/* , stackName */);
+
+        linkWave(getView().getShowStandalone(), MouseEvent.MOUSE_CLICKED, StackWaves.SHOW_PAGE_ENUM,
+                WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.StandaloneFxml)/* , stackName */);
+
+        linkWave(getView().getShowHybrid(), MouseEvent.MOUSE_CLICKED, StackWaves.SHOW_PAGE_ENUM,
+                WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.HybridFxml)/* , stackName */);
 
     }
-
 }

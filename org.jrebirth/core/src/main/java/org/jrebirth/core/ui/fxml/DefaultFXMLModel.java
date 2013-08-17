@@ -17,6 +17,7 @@
  */
 package org.jrebirth.core.ui.fxml;
 
+import org.jrebirth.core.resource.fxml.FXMLItem;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 
@@ -112,6 +113,12 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
     @Override
     protected void processWave(final Wave wave) {
         // Nothing to do yet
+    }
+
+    @Override
+    protected FXMLItem getFXMLItem() {
+        // Nothing to do yet
+        return null;
     }
 
 }

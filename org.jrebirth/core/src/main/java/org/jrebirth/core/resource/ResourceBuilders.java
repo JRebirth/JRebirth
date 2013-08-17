@@ -19,6 +19,7 @@ package org.jrebirth.core.resource;
 
 import org.jrebirth.core.resource.color.ColorBuilder;
 import org.jrebirth.core.resource.font.FontBuilder;
+import org.jrebirth.core.resource.fxml.FXMLBuilder;
 import org.jrebirth.core.resource.image.ImageBuilder;
 import org.jrebirth.core.resource.parameter.ParameterBuilder;
 import org.jrebirth.core.resource.style.StyleSheetBuilder;
@@ -44,5 +45,8 @@ public interface ResourceBuilders {
 
     /** The factory used to manage style sheets. */
     StyleSheetBuilder STYLE_SHEET_BUILDER = new StyleSheetBuilder();
+
+    /** The factory used to manage fxml files. */
+    FXMLBuilder FXML_BUILDER = new FXMLBuilder();
 
 }

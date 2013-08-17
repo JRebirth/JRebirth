@@ -94,28 +94,32 @@
 				<artifactId>maven-surefire-plugin</artifactId> <version>2.12</version> <configuration> <additionalClasspathElements> <additionalClasspathElement>${java.home}/lib/rt.jar</additionalClasspathElement> <additionalClasspathElement>${java.home}/lib/jfxrt.jar</additionalClasspathElement> 
 				</additionalClasspathElements> </configuration> </plugin> <plugin> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId> <version>0.6.3.201306030806</version> <executions> <execution> 
 				<goals> <goal>prepare-agent</goal> </goals> <phase>initialize</phase> </execution> </executions> </plugin> -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.2</version>
+				<version>3.3</version>
 
 				<executions>
-					<execution>
-						<id>attach-sites</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
+					<!-- <execution> <id>attach-sites</id> <goals> <goal>jar</goal> </goals> </execution> -->
 					<execution>
 						<id>build-sites</id>
-						<phase>package</phase>
+						<phase>site</phase>
 						<goals>
+							<goal>site</goal>
+							<goal>jar</goal>
 							<goal>stage</goal>
 						</goals>
 					</execution>
+					<!-- <execution> <id>package-sites</id> <phase>package</phase> <goals> <goal>jar</goal> </goals> </execution> -->
 					<execution>
 						<id>deploy-sites</id>
-						<phase>deploy</phase>
+						<phase>site-deploy</phase>
 						<goals>
 							<goal>stage-deploy</goal>
 						</goals>
@@ -156,26 +160,8 @@
 
 
 			<!-- Copy UML Class Diagram -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>UML recopy</id>
-						<phase>pre-site</phase>
-						<configuration>
-							<tasks>
-								<copy todir="${project.build.directory}/site/doc/uml/">
-									<fileset dir="${basedir}/src/main/uml/*.png" />
-								</copy>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> <executions> <execution> <id>UML recopy</id> <phase>pre-site</phase> <configuration> <tasks> <copy 
+				todir="${project.build.directory}/site/doc/uml/"> <fileset dir="${basedir}/src/main/uml/*.png" /> </copy> </tasks> </configuration> <goals> <goal>run</goal> </goals> </execution> </executions> </plugin> -->
 
 		</plugins>
 

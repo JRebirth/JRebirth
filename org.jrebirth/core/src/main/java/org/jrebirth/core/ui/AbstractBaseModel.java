@@ -136,14 +136,18 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
         // Call user code
         showView();
 
-        if (this.viewDisplayed) {
-            //
-            getView().reload();
-        } else {
-            //
-            getView().start();
-            this.viewDisplayed = true;
+        // Sometimes view can be null
+        if (getView() != null) {
+            if (this.viewDisplayed) {
+                // Relaod the view
+                getView().reload();
+            } else {
+                // Start the view for the first time
+                getView().start();
+                this.viewDisplayed = true;
+            }
         }
+
     }
 
     /**
@@ -158,10 +162,15 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
      * Will call the {@link #org.jrebirth.core.ui.View.hide()} method
      */
     protected final void hideInternalView() {
-        //
+
+        // Call user code
         hideView();
-        //
-        getView().hide();
+
+        // Sometimes view can be null
+        if (getView() != null) {
+            // hide the view
+            getView().hide();
+        }
     }
 
     /**

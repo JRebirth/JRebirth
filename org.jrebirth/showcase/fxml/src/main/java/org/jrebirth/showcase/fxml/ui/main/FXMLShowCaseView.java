@@ -3,8 +3,6 @@ package org.jrebirth.showcase.fxml.ui.main;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPaneBuilder;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.PaneBuilder;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.AbstractView;
@@ -22,17 +20,13 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(FXMLShowCaseView.class);
 
-    private Button undoButton;
+    private Button showIncluded;
 
-    private Button redoButton;
+    private Button showEmbedded;
 
-    private Button addCircleButton;
+    private Button showHybrid;
 
-    private Button addSquareButton;
-
-    private Button addRectangleButton;
-
-    private Pane editor;
+    private Button showStandalone;
 
     /**
      * Default Constructor.
@@ -51,20 +45,14 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
     @Override
     protected void initView() {
 
-        this.undoButton = new Button("Undo");
-        this.redoButton = new Button("Redo");
-
-        this.addCircleButton = new Button("Add Circle");
-        this.addSquareButton = new Button("Add Square");
-        this.addRectangleButton = new Button("Add Rectangle");
+        this.showIncluded = new Button("Included");
+        this.showEmbedded = new Button("Embedded");
+        this.showHybrid = new Button("Hybrid");
+        this.showStandalone = new Button("Standalone");
 
         getRootNode().setTop(FlowPaneBuilder.create()
-                .children(undoButton, redoButton, addCircleButton, addSquareButton, addRectangleButton)
+                .children(showIncluded, showEmbedded, showHybrid, showStandalone)
                 .build());
-
-        this.editor = PaneBuilder.create().style("-fx-background-color:beige").build();
-
-        getRootNode().setCenter(editor);
 
     }
 
@@ -95,46 +83,20 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
         // Custom code to process when the view is hidden
     }
 
-    /**
-     * @return Returns the undoButton.
-     */
-    Button getUndoButton() {
-        return undoButton;
+    Button getShowIncluded() {
+        return showIncluded;
     }
 
-    /**
-     * @return Returns the redoButton.
-     */
-    Button getRedoButton() {
-        return redoButton;
+    Button getShowEmbedded() {
+        return showEmbedded;
     }
 
-    /**
-     * @return Returns the editor.
-     */
-    Pane getEditor() {
-        return editor;
+    Button getShowHybrid() {
+        return showHybrid;
     }
 
-    /**
-     * @return Returns the addCircleButton.
-     */
-    Button getAddCircleButton() {
-        return addCircleButton;
-    }
-
-    /**
-     * @return Returns the addSquareButton.
-     */
-    Button getAddSquareButton() {
-        return addSquareButton;
-    }
-
-    /**
-     * @return Returns the addRectangleButton.
-     */
-    Button getAddRectangleButton() {
-        return addRectangleButton;
+    Button getShowStandalone() {
+        return showStandalone;
     }
 
 }

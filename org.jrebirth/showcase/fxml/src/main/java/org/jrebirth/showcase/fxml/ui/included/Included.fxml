@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
-<?scenebuilder-preview-i18n-resource Test1.properties?>
+<?scenebuilder-preview-i18n-resource Included.properties?>
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
   <children>
@@ -13,14 +13,14 @@
       <top>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
           <tabs>
-            <Tab text="%title">
+            <Tab text="Include #1">
               <content>
-                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <fx:include source="SubIncluded1.fxml" layoutX="121.0" layoutY="97.0" prefHeight="103.0" prefWidth="179.0" />
               </content>
             </Tab>
-            <Tab text="Untitled Tab 2">
+            <Tab text="Include #2">
               <content>
-                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <fx:include source="SubIncluded2.fxml" layoutX="121.0" layoutY="97.0" prefHeight="103.0" prefWidth="179.0" />
               </content>
             </Tab>
           </tabs>
