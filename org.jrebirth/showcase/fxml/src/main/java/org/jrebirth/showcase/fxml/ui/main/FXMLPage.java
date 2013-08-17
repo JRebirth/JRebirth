@@ -4,18 +4,35 @@ import org.jrebirth.component.ui.stack.PageEnum;
 import org.jrebirth.core.concurrent.JRebirthThread;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.ui.Model;
+import org.jrebirth.showcase.fxml.ui.embedded.EmbeddedModel;
+import org.jrebirth.showcase.fxml.ui.hybrid.HybridModel;
+import org.jrebirth.showcase.fxml.ui.included.IncludedModel;
 import org.jrebirth.showcase.fxml.ui.standalone.StandaloneModel;
 
+/**
+ * The class <strong>FXMLPage</strong>.
+ * 
+ * @author Sébastien Bordes
+ */
 public enum FXMLPage implements PageEnum {
 
+    /** . */
     ViewEmbeddedFxml,
 
+    /** . */
     StandaloneFxml,
 
-    HybridFxml
+    /** . */
+    HybridFxml,
+
+    /** . */
+    IncludedFxml
 
     ;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UniqueKey<? extends Model> getModelKey() {
         UniqueKey<? extends Model> modelKey;
@@ -24,13 +41,16 @@ public enum FXMLPage implements PageEnum {
 
             default:
             case ViewEmbeddedFxml:
-                modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(StandaloneModel.class);
+                modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(EmbeddedModel.class);
                 break;
             case StandaloneFxml:
                 modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(StandaloneModel.class);
                 break;
             case HybridFxml:
-                modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(StandaloneModel.class);
+                modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(HybridModel.class);
+                break;
+            case IncludedFxml:
+                modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(IncludedModel.class);
                 break;
         }
 

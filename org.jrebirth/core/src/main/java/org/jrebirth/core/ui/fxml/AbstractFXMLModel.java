@@ -20,6 +20,7 @@ package org.jrebirth.core.ui.fxml;
 import javafx.scene.Node;
 
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.resource.fxml.FXMLItem;
 import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.ui.NullView;
@@ -58,6 +59,15 @@ public abstract class AbstractFXMLModel<M extends Model> extends AbstractModel<M
     protected abstract String getFXMLBundlePath();
 
     /**
+     * Return the fxml item used used to build the fxml component.
+     * 
+     * @see FXMLItem
+     * 
+     * @return the fxml item used used to build the fxml component
+     */
+    protected abstract FXMLItem getFXMLItem();
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -69,7 +79,9 @@ public abstract class AbstractFXMLModel<M extends Model> extends AbstractModel<M
         listen(JRebirthWaves.SHOW_VIEW);
         listen(JRebirthWaves.HIDE_VIEW);
 
-        if (getFXMLPath() != null) {
+        if (getFXMLItem() != null) {
+            this.fxmlComponent = getFXMLItem().get();
+        } else if (getFXMLPath() != null) {
             this.fxmlComponent = FXMLUtils.loadFXML(this, getFXMLPath(), getFXMLBundlePath());
         }
 

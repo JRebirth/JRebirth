@@ -19,6 +19,7 @@ package org.jrebirth.core.ui.fxml;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXMLLoader;
@@ -85,8 +86,12 @@ public final class FXMLUtils {
         final FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(convertFxmlUrl(model, fxmlPath));
 
-        if (bundlePath != null) {
-            fxmlLoader.setResources(ResourceBundle.getBundle(bundlePath));
+        try {
+            if (bundlePath != null) {
+                fxmlLoader.setResources(ResourceBundle.getBundle(bundlePath));
+            }
+        } catch (MissingResourceException e) {
+            e.printStackTrace();
         }
 
         Node node = null;

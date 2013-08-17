@@ -28,9 +28,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The Class PageView.
+ * The Class StackView.
+ * 
+ * @author Sébastien Bordes
  */
-@RootNodeId("PagePanel")
+@RootNodeId("StackPanel")
 public class StackView extends DefaultView<StackModel, StackPane, DefaultController<StackModel, StackView>> {
 
     /** The Constant LOGGER. */

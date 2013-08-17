@@ -59,6 +59,14 @@ public class ClassKey<R> implements UniqueKey<R> {
      * {@inheritDoc}
      */
     @Override
+    public String toString() {
+        return this.getClassField().toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int hashCode() {
         return this.getClassField().hashCode();
     }

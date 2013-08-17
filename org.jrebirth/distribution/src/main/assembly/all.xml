@@ -13,101 +13,185 @@
 	<includeBaseDirectory>true</includeBaseDirectory>
 	<baseDirectory>JRebirth-${project.version}</baseDirectory>
 
-	<!-- Analyzer Tool -->
+
 	<fileSets>
+
+		<!-- oooooooooo -->
+		<!-- Analyzer Tool -->
+		<!-- oooooooooo -->
 		<fileSet>
 			<directory>../analyzer/target/jnlp</directory>
-			<outputDirectory>/Analyzer</outputDirectory>
+			<outputDirectory>Analyzer</outputDirectory>
 		</fileSet>
+
+		<!-- oooooooooo -->
+		<!-- Showcases -->
+		<!-- oooooooooo -->
+		<fileSet>
+			<directory>../showcase/fxml/target/jnlp</directory>
+			<outputDirectory>Showcases/fxml</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>../showcase/undoredo/target/jnlp</directory>
+			<outputDirectory>Showcases/undoredo</outputDirectory>
+		</fileSet>
+
 	</fileSets>
 
-	<dependencySets>
+	<moduleSets>
 
-		<!-- Binaries -->
-		<dependencySet>
+		<!-- oooooooooo -->
+		<!-- APIDOCS -->
+		<!-- oooooooooo -->
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>org.jrebirth:*:jar</include>
+				<include>org.jrebirth:core:</include>
+				<include>org.jrebirth:presentation:</include>
+				<include>org.jrebirth:component:</include>
+				<include>org.jrebirth:transition:*</include>
+				<!-- <include>org.jrebirth:undoredo:*</include> -->
 			</includes>
+
+			<!-- Javadoc -->
+			<binaries>
+				<!-- <outputFileNameMapping>apidocs/${module.artifactId}</outputFileNameMapping> -->
+				<attachmentClassifier>javadoc</attachmentClassifier>
+				<includeDependencies>false</includeDependencies>
+				<outputDirectory>apidocs/${module.artifactId}</outputDirectory>
+				<unpack>true</unpack>
+			</binaries>
+		</moduleSet>
+
+		<!-- oooooooooo -->
+		<!-- LIBS -->
+		<!-- oooooooooo -->
+
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org.jrebirth:core:*</include>
+				<include>org.jrebirth:component:*</include>
+				<include>org.jrebirth:presentation:*</include>
+				<include>org.jrebirth:transition:*</include>
+				<!-- <include>org.jrebirth:undoredo:*</include> -->
+			</includes>
+			<binaries>
+				<dependencySets>
+					<dependencySet>
+						<useTransitiveDependencies>true</useTransitiveDependencies>
+						<useProjectArtifact>false</useProjectArtifact>
+						<outputDirectory>/libs</outputDirectory>
+					</dependencySet>
+				</dependencySets>
+			</binaries>
+		</moduleSet>
+
+		<!-- oooooooooo -->
+		<!-- Root SITE -->
+		<!-- oooooooooo -->
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org:jrebirth:*</include>
+			</includes>
+
+			<!-- Root site -->
+			<binaries>
+				<!-- <outputFileNameMapping>site/${module.artifactId}</outputFileNameMapping> -->
+				<attachmentClassifier>site</attachmentClassifier>
+				<includeDependencies>false</includeDependencies>
+				<outputDirectory>site</outputDirectory>
+				<unpack>true</unpack>
+			</binaries>
+		</moduleSet>
+
+		<!-- oooooooooo -->
+		<!-- SITE -->
+		<!-- oooooooooo -->
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org.jrebirth:core:*</include>
+				<include>org.jrebirth:presentation:*</include>
+				<include>org.jrebirth:component:*</include>
+				<include>org.jrebirth:transition:*</include>
+				<!-- <include>org.jrebirth:undoredo:*</include> -->
+			</includes>
+
+			<!-- Javadoc -->
+			<binaries>
+				<!-- <outputFileNameMapping>site/${module.artifactId}</outputFileNameMapping> -->
+				<attachmentClassifier>site</attachmentClassifier>
+				<includeDependencies>false</includeDependencies>
+				<outputDirectory>site/${module.artifactId}</outputDirectory>
+				<unpack>true</unpack>
+			</binaries>
+		</moduleSet>
+
+		<!-- oooooooooo -->
+		<!-- SOURCES -->
+		<!-- oooooooooo -->
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org.jrebirth:core:*</include>
+				<include>org.jrebirth:presentation:*</include>
+				<include>org.jrebirth:component:*</include>
+				<include>org.jrebirth:transition:*</include>
+				<!-- <include>org.jrebirth:undoredo:*</include> -->
+			</includes>
+
+			<!-- Sources -->
+			<binaries>
+				<!-- <outputFileNameMapping>sources/${module.artifactId}</outputFileNameMapping> -->
+				<attachmentClassifier>sources</attachmentClassifier>
+				<includeDependencies>false</includeDependencies>
+				<outputDirectory>sources</outputDirectory>
+				<unpack>false</unpack>
+			</binaries>
+		</moduleSet>
+
+		<!-- oooooooooo -->
+		<!-- JARS -->
+		<!-- oooooooooo -->
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org.jrebirth:core:*</include>
+				<include>org.jrebirth:presentation:*</include>
+				<include>org.jrebirth:component:*</include>
+				<include>org.jrebirth:transition:*</include>
+				<!-- <include>org.jrebirth:undoredo:*</include> -->
+			</includes>
+
 			<excludes>
 				<exclude>*:javadoc</exclude>
 				<exclude>*:sources</exclude>
 				<exclude>*:site</exclude>
 			</excludes>
-			<outputDirectory>/</outputDirectory>
-			<outputFileNameMapping>${artifact.groupId}.${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}</outputFileNameMapping>
-			<unpack>false</unpack>
-			<useTransitiveDependencies>false</useTransitiveDependencies>
-			<useProjectArtifact>false</useProjectArtifact>
-			<useStrictFiltering>true</useStrictFiltering>
-		</dependencySet>
-		
-		<!-- Libs -->
-		<dependencySet>
+			<sources>
+
+			</sources>
+
+			<!-- Jars -->
+			<binaries>
+				<!-- <outputFileNameMapping>${module.artifactId}</outputFileNameMapping> -->
+				<includeDependencies>false</includeDependencies>
+				<unpack>false</unpack>
+			</binaries>
+		</moduleSet>
+
+
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>*:jar</include>
+				<include>org.jrebirth:sample:*</include>
 			</includes>
 			<excludes>
-				<exclude>org.jrebirth:*:jar</exclude>
+				<exclude>*:jar:*</exclude>
 			</excludes>
-			<outputDirectory>libs/</outputDirectory>
-			<outputFileNameMapping>${artifact.groupId}.${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}</outputFileNameMapping>
-			<unpack>false</unpack>
-			<useTransitiveDependencies>true</useTransitiveDependencies>
-			<useProjectArtifact>false</useProjectArtifact>
-			<useStrictFiltering>true</useStrictFiltering>
-		</dependencySet>
-		
-		<!-- Javadoc -->
-		<dependencySet>
-			<includes>
-				<include>*:javadoc</include>
-			</includes>
-			<outputDirectory>apidocs/${artifact.artifactId}</outputDirectory>
-			<unpack>true</unpack>
-			<useTransitiveDependencies>true</useTransitiveDependencies>
-			<useProjectArtifact>false</useProjectArtifact>
-			<useStrictFiltering>true</useStrictFiltering>
-		</dependencySet>
-
-		<!-- Sources -->
-		<dependencySet>
-			<includes>
-				<include>*:sources</include>
-			</includes>
-			<outputDirectory>source/${artifact.artifactId}</outputDirectory>
-			<unpack>true</unpack>
-			<useTransitiveDependencies>true</useTransitiveDependencies>
-			<useProjectArtifact>false</useProjectArtifact>
-			<useStrictFiltering>true</useStrictFiltering>
-		</dependencySet>
-
-		<!-- Root Site -->
-		<dependencySet>
-			<includes>
-				<include>org:jrebirth:*:site</include>
-			</includes>
-			<outputDirectory>site/</outputDirectory>
-			<unpack>true</unpack>
-			<useTransitiveDependencies>true</useTransitiveDependencies>
-			<useProjectArtifact>false</useProjectArtifact>
-			<useStrictFiltering>true</useStrictFiltering>
-		</dependencySet>
-
-		<!-- Site -->
-		<dependencySet>
-			<includes>
-				<include>*:site</include>
-			</includes>
-			<excludes>
-				<exclude>org:jrebirth:*:site</exclude>
-			</excludes>
-			<outputDirectory>site/${artifact.artifactId}</outputDirectory>
-			<unpack>true</unpack>
-			<useTransitiveDependencies>true</useTransitiveDependencies>
-			<useProjectArtifact>true</useProjectArtifact>
-			<useStrictFiltering>true</useStrictFiltering>
-		</dependencySet>
-
-	</dependencySets>
+		</moduleSet>
+	</moduleSets>
 
 </assembly>

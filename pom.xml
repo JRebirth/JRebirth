@@ -7,7 +7,7 @@
 
 	<packaging>pom</packaging>
 	<name>JRebirth OSS</name>
-	
+
 	<url>http://www.jrebirth.org</url>
 	<description>JRebirth is an Application Framework dedicated to JavaFX 2+ technology.</description>
 	<inceptionYear>2011</inceptionYear>
@@ -204,6 +204,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.12</version>
 				<configuration>
+					<reuseForks>false</reuseForks>
 					<additionalClasspathElements>
 						<additionalClasspathElement>${java.home}/lib/rt.jar</additionalClasspathElement>
 						<additionalClasspathElement>${java.home}/lib/jfxrt.jar</additionalClasspathElement>
@@ -226,62 +227,12 @@
 				</executions>
 			</plugin>
 
-			<!-- <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.2</version>
-
-				<executions>
-					<execution>
-						<id>attach-sites</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>build-sites</id>
-						<phase>package</phase>
-						<goals>
-							<goal>stage</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>deploy-sites</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>stage-deploy</goal>
-						</goals>
-					</execution>
-				</executions>
-
-				<configuration>
-					<stagingDirectory>${project.build.directory}/staging-site</stagingDirectory>
-					<stagingSiteURL>${project.distributionManagement.site.url}</stagingSiteURL>
-					<inputEncoding>UTF-8</inputEncoding>
-					<outputEncoding>UTF-8</outputEncoding>
-				</configuration>
-
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.wagon</groupId>
-						<artifactId>wagon-ssh</artifactId>
-						<version>2.4</version>
-					</dependency>
-
-					<dependency>
-						<groupId>org.tinyjee.dim</groupId>
-						<artifactId>doxia-include-macro</artifactId>
-						<version>1.1</version>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.maven.doxia</groupId>
-						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.3</version>
-					</dependency>
-
-					<dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-docbook-simple</artifactId> <version>1.3</version> </dependency>
-				</dependencies>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-site-plugin</artifactId> <version>3.2</version> <executions> <execution> <id>attach-sites</id> <goals> <goal>jar</goal> </goals> 
+				</execution> <execution> <id>build-sites</id> <phase>package</phase> <goals> <goal>stage</goal> </goals> </execution> <execution> <id>deploy-sites</id> <phase>deploy</phase> <goals> <goal>stage-deploy</goal> 
+				</goals> </execution> </executions> <configuration> <stagingDirectory>${project.build.directory}/staging-site</stagingDirectory> <stagingSiteURL>${project.distributionManagement.site.url}</stagingSiteURL> 
+				<inputEncoding>UTF-8</inputEncoding> <outputEncoding>UTF-8</outputEncoding> </configuration> <dependencies> <dependency> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-ssh</artifactId> <version>2.4</version> 
+				</dependency> <dependency> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> <version>1.1</version> </dependency> <dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-markdown</artifactId> 
+				<version>1.3</version> </dependency> <dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-docbook-simple</artifactId> <version>1.3</version> </dependency> </dependencies> </plugin> -->
 
 			<!-- Project Quality -->
 			<plugin>
@@ -349,10 +300,23 @@
 
 	<profiles>
 		<profile>
-			<id>JRebirth</id>
+			<id>OJO</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+			<properties>
+				<!-- Release repository -->
+				<repositoryId>oss-jfrog-artifactory</repositoryId>
+				<repositoryName>oss-jfrog-artifactory-releases</repositoryName>
+				<repositoryUrl>http://oss.jfrog.org/artifactory/oss-release-local</repositoryUrl>
+				<!-- Snapshot repository -->
+				<snapshotRepositoryId>oss-jfrog-artifactory</snapshotRepositoryId>
+				<snapshotRepositoryName>oss-jfrog-artifactory-snapshots</snapshotRepositoryName>
+				<snapshotRepositoryUrl>http://oss.jfrog.org/artifactory/oss-snapshot-local</snapshotRepositoryUrl>
+			</properties>
+		</profile>
+		<profile>
+			<id>JRebirth</id>
 			<properties>
 				<!-- Release repository -->
 				<repositoryId>JRebirth-Release</repositoryId>
@@ -364,6 +328,7 @@
 				<snapshotRepositoryUrl>http://repo.jrebirth.org/jrebirth-snapshot-local</snapshotRepositoryUrl>
 			</properties>
 		</profile>
+		
 		<profile>
 			<id>Bintray</id>
 			<properties>

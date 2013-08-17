@@ -28,7 +28,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The Class PageModel.
+ * The Class StackModel.
+ * 
+ * @author Sébastien Bordes
  */
 public class StackModel extends DefaultModel<StackModel, StackView> {
 
@@ -46,8 +48,22 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
 
         listen(StackWaves.SHOW_PAGE_MODEL);
         listen(StackWaves.SHOW_PAGE_ENUM);
+    }
 
-        getModelObject();
+    /**
+     * Show page.
+     * 
+     * Called when model received a SHOW_PAGE wave type.
+     * 
+     * @param page the page
+     * 
+     * @param wave the wave
+     */
+    public void doShowPageModel(final UniqueKey<? extends Model> pageModelKey, String stackName, final Wave wave) {
+
+        if (getStackName() != null && getStackName().equals(stackName)) {
+            showPage(pageModelKey);
+        }
 
     }
 
@@ -59,15 +75,45 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
      * @param page the page
      * @param wave the wave
      */
-    public void doShowPageModel(final UniqueKey<? extends Model> pageModelKey, final Wave wave) {
+    public void doShowPageEnum(final PageEnum pageEnum, final Wave wave) {
 
+        LOGGER.info("Show Page Enum: " + pageEnum.toString());
+        if (getPageEnum() != null && getPageEnum().equals(pageEnum.getClass())) {
+            showPage(pageEnum.getModelKey());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private Class<? extends PageEnum> getPageEnum() {
+        Class<? extends PageEnum> res = null;
+        if (getModelObject() instanceof Class && PageEnum.class.isAssignableFrom((Class<?>) getModelObject())) {
+            res = (Class<? extends PageEnum>) getModelObject();
+        }
+        return res;
+    }
+
+    @SuppressWarnings("unchecked")
+    private String getStackName() {
+        String res = null;
+        if (getModelObject() instanceof String) {
+            res = (String) getModelObject();
+        }
+        return res;
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param pageModelKey
+     */
+    private void showPage(final UniqueKey<? extends Model> pageModelKey) {
         LOGGER.info("Show Page Model: " + pageModelKey.toString());
 
         // Create the Wave Bean that will hold all data processed by chained commands
         final DisplayModelWaveBean waveBean = new DisplayModelWaveBean();
         // Define the placeholder that will receive the content
         waveBean.setChidrenPlaceHolder(getView().getRootNode().getChildren());
-        // Allow to add element behin the stack to allow transition
+        // Allow to add element behind the stack to allow transition
         waveBean.setAppendChild(false);
 
         waveBean.setShowModelKey(pageModelKey);
@@ -76,21 +122,6 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
         this.currentModelKey = waveBean.getShowModelKey();
 
         callCommand(ShowFadingModelCommand.class, waveBean);
-    }
-
-    /**
-     * Show page.
-     * 
-     * Called when model received a SHOW_PAGE wave type.
-     * 
-     * @param page the page
-     * @param wave the wave
-     */
-    public void doShowPageEnuModel(final PageEnum pageEnum, final Wave wave) {
-
-        LOGGER.info("Show Page Enum: " + pageEnum.toString());
-
-        doShowPageModel(pageEnum.getModelKey(), wave);
     }
 
     /**
