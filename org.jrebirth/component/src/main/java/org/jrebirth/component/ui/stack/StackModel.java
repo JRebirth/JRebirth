@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The Class StackModel.
+ * The Class StackModel is used to manage a StackPane that show other Model.
  * 
  * @author Sébastien Bordes
  */
@@ -46,6 +46,7 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
     @Override
     protected void initModel() {
 
+        // Listen StackWaves to be aware of any changes
         listen(StackWaves.SHOW_PAGE_MODEL);
         listen(StackWaves.SHOW_PAGE_ENUM);
     }
@@ -60,7 +61,7 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
      * 
      * @param wave the wave
      */
-    public void doShowPageModel(final UniqueKey<? extends Model> pageModelKey, String stackName, final Wave wave) {
+    public void doShowPageModel(final UniqueKey<? extends Model> pageModelKey, final String stackName, final Wave wave) {
 
         if (getStackName() != null && getStackName().equals(stackName)) {
             showPage(pageModelKey);

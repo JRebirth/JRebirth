@@ -24,11 +24,10 @@ import org.jrebirth.core.ui.DefaultController;
 import org.jrebirth.core.ui.DefaultView;
 import org.jrebirth.core.ui.annotation.RootNodeId;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * The Class StackView.
+ * The Class StackView only creates a StackPane.
+ * 
+ * No Controller is needed.
  * 
  * @author Sébastien Bordes
  */
@@ -36,12 +35,13 @@ import org.slf4j.LoggerFactory;
 public class StackView extends DefaultView<StackModel, StackPane, DefaultController<StackModel, StackView>> {
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(StackView.class);
+    // private static final Logger LOGGER = LoggerFactory.getLogger(StackView.class);
 
     /**
-     * Instantiates a new page view.
+     * Instantiates a new Stack View.
      * 
      * @param model the model
+     * 
      * @throws CoreException the core exception
      */
     public StackView(final StackModel model) throws CoreException {
