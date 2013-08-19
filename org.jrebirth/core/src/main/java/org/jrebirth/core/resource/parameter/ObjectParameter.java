@@ -80,6 +80,14 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return name();
+    }
+
+    /**
      * Parse the serialized object.
      * 
      * @param serializedObject the string object to convert
@@ -112,7 +120,9 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      */
     private Object parsePrimitive(final String serializedObject) {
         Object res = null;
-        if (this.object instanceof String) {
+        if (this.object instanceof Boolean) {
+            res = Boolean.valueOf(serializedObject);
+        } else if (this.object instanceof String) {
             res = serializedObject;
         } else if (this.object instanceof Character) {
             res = Character.valueOf(serializedObject.charAt(0));
