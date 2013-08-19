@@ -56,6 +56,14 @@ public final class ParameterItemBase<T> implements ParameterItem<T> {
      * {@inheritDoc}
      */
     @Override
+    public void define(final T forcedValue) {
+        builder().set(this, forcedValue);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public ParameterBuilder builder() {
         return ResourceBuilders.PARAMETER_BUILDER;
     }
@@ -77,4 +85,5 @@ public final class ParameterItemBase<T> implements ParameterItem<T> {
     public void setUid(final int uid) {
         this.uid = uid;
     }
+
 }

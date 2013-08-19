@@ -33,4 +33,12 @@ import org.jrebirth.core.resource.ResourceItem;
  */
 public interface ParameterItem<T extends Object> extends ResourceItem<T, ParameterBuilder> {
 
+    /**
+     * Define a new forced value.
+     * 
+     * This forced value will be used instead of default programmatic one and all other retrieved from properties files.
+     * 
+     * @param forcedValue the new value for this parameter
+     */
+    void define(T forcedValue);
 }
