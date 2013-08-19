@@ -5,6 +5,7 @@ import javafx.scene.input.RotateEvent;
 import javafx.scene.input.SwipeEvent;
 
 import org.jrebirth.core.test.AbstractTest;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

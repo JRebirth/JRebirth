@@ -1,7 +1,5 @@
 package org.jrebirth.core.resource.parameter;
 
-import static org.junit.Assert.assertEquals;
-
 import org.jrebirth.core.resource.ResourceBuilders;
 
 import org.junit.After;
@@ -9,6 +7,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * The class <strong>ParameterTest</strong>.

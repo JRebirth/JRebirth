@@ -18,7 +18,6 @@ import org.jrebirth.core.wave.Wave;
 @Configuration
 public class NullConfApplication extends AbstractApplication<Pane> {
 
-
     /**
      * {@inheritDoc}
      */

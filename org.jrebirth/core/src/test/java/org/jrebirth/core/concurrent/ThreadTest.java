@@ -87,7 +87,7 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
         while (!ok.get() && i < 10) {
             try {
                 Thread.sleep(200);
-            } catch (InterruptedException e) {
+            } catch (final InterruptedException e) {
             }
             i++;
         }

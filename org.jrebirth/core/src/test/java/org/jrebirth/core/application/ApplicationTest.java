@@ -16,7 +16,7 @@ public class ApplicationTest<A extends AbstractApplication<?>> {
 
     private A application;
 
-    public ApplicationTest(Class<A> appClass) {
+    public ApplicationTest(final Class<A> appClass) {
         this.appClass = appClass;
     }
 
@@ -27,7 +27,7 @@ public class ApplicationTest<A extends AbstractApplication<?>> {
      */
     @Before
     public void setUp() throws Exception {
-        application = launchApplication(appClass);
+        this.application = launchApplication(this.appClass);
     }
 
     /**
@@ -37,7 +37,7 @@ public class ApplicationTest<A extends AbstractApplication<?>> {
      */
     @After
     public void tearDown() throws Exception {
-        closeApplication(application);
+        closeApplication(this.application);
     }
 
     public static <APP extends AbstractApplication<?>> APP launchApplication(
@@ -45,7 +45,7 @@ public class ApplicationTest<A extends AbstractApplication<?>> {
 
         // globalFacade = new GlobalFacadeBase(new TestApplication());
         // JRebirthThread.getThread().launch(globalFacade.getApplication());
-        Thread launcherThread = new Thread(new Runnable() {
+        final Thread launcherThread = new Thread(new Runnable() {
 
             @Override
             public void run() {
@@ -59,7 +59,7 @@ public class ApplicationTest<A extends AbstractApplication<?>> {
             app = JRebirthThread.getThread().getApplication();
             try {
                 Thread.sleep(100);
-            } catch (InterruptedException e) {
+            } catch (final InterruptedException e) {
                 e.printStackTrace();
             }
         } while (app == null);
@@ -69,7 +69,7 @@ public class ApplicationTest<A extends AbstractApplication<?>> {
 
     public static void closeApplication(final AbstractApplication<?> application) {
 
-        JRebirthThread jit = JRebirthThread.getThread();
+        final JRebirthThread jit = JRebirthThread.getThread();
         Platform.setImplicitExit(true);
         Platform.exit();
         // JRebirth.runIntoJAT(new
@@ -86,7 +86,7 @@ public class ApplicationTest<A extends AbstractApplication<?>> {
         while (jit == JRebirthThread.getThread()) {
             try {
                 Thread.sleep(100);
-            } catch (InterruptedException e) {
+            } catch (final InterruptedException e) {
                 e.printStackTrace();
             }
         }
