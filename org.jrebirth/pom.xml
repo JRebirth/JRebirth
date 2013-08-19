@@ -45,6 +45,7 @@
 		<module>transition</module>
 		<module>distribution</module>
 		<!-- <module>form</module> -->
+		<module>fxform</module>
 		<module>undoredo</module>
 		<module>showcase</module>
 	</modules>
