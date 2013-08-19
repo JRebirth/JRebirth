@@ -46,7 +46,7 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
      * @param bundlePath the resource bundle absolute path
      * @param bundleName the resource bundle file name
      */
-    public FXML(final String fxmlPath, final String fxmlName, String bundlePath, String bundleName) {
+    public FXML(final String fxmlPath, final String fxmlName, final String bundlePath, final String bundleName) {
         super();
         this.absolutePath = fxmlPath;
         this.fxmlName = fxmlName;

@@ -190,8 +190,8 @@ public final class ClassUtility {
      */
     public static String camelCaseToUnderscore(final String camelCaseString) {
 
-        StringBuilder sb = new StringBuilder();
-        for (String camelPart : camelCaseString.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")) {
+        final StringBuilder sb = new StringBuilder();
+        for (final String camelPart : camelCaseString.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")) {
             if (sb.length() > 0) {
                 sb.append("_");
             }

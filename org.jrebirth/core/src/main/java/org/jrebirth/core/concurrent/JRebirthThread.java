@@ -383,22 +383,4 @@ public final class JRebirthThread extends Thread {
         return internalThread;
     }
 
-    // /**
-    // * Run a task as soon as possible.
-    // *
-    // * @param runnable the task to run
-    // */
-    // public static void runLater(final Runnable runnable) {
-    // internalThread.runLater(runnable);
-    // }
-    //
-    // /**
-    // * Run a task immediately if a slot is available into the shared thread pool.
-    // *
-    // * @param runnable the task to run
-    // */
-    // public static void runIntoJTP(final Runnable runnable) {
-    // internalThread.runIntoJTP(runnable);
-    // }
-
 }

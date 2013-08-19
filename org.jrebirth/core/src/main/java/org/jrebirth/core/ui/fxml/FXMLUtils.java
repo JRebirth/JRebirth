@@ -29,12 +29,18 @@ import javafx.scene.text.TextBuilder;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.ui.Model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * The class <strong>FXMLUtils</strong>.
  * 
  * @author Sébastien Bordes
  */
 public final class FXMLUtils {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(FXMLUtils.class);
 
     /**
      * Private constructor.
@@ -90,8 +96,8 @@ public final class FXMLUtils {
             if (bundlePath != null) {
                 fxmlLoader.setResources(ResourceBundle.getBundle(bundlePath));
             }
-        } catch (MissingResourceException e) {
-            e.printStackTrace();
+        } catch (final MissingResourceException e) {
+            LOGGER.error("Resource Bundle is missing:  " + bundlePath);
         }
 
         Node node = null;

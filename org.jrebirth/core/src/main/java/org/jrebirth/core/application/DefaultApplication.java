@@ -36,7 +36,7 @@ public class DefaultApplication<P extends Pane> extends AbstractApplication<P> {
      * {@inheritDoc}
      */
     @Override
-    protected void customizeStage(Stage stage) {
+    protected void customizeStage(final Stage stage) {
         // Nothing to do yet
     }
 
@@ -44,7 +44,7 @@ public class DefaultApplication<P extends Pane> extends AbstractApplication<P> {
      * {@inheritDoc}
      */
     @Override
-    protected void customizeScene(Scene scene) {
+    protected void customizeScene(final Scene scene) {
         // Nothing to do yet
     }
 
