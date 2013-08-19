@@ -98,6 +98,16 @@ public interface Wave {
     void setWaveType(WaveType waveType);
 
     /**
+     * @return Returns the fromClass.
+     */
+    Class<?> getFromClass();
+
+    /**
+     * @param fromClass The fromClass to set.
+     */
+    void setFromClass(Class<?> fromClass);
+
+    /**
      * @return Returns the relatedClass.
      */
     Class<?> getRelatedClass();

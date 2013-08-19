@@ -61,6 +61,9 @@ public class WaveBase implements Wave {
      */
     private WaveType waveType;
 
+    /** The from class to used for create waves. */
+    private Class<?> fromClass;
+
     /** The related class to used for create waves. */
     private Class<?> relatedClass;
 
@@ -130,6 +133,22 @@ public class WaveBase implements Wave {
     @Override
     public void setWaveType(final WaveType waveType) {
         this.waveType = waveType;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Class<?> getFromClass() {
+        return this.fromClass;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setFromClass(final Class<?> fromClass) {
+        this.fromClass = fromClass;
     }
 
     /**
@@ -396,8 +415,11 @@ public class WaveBase implements Wave {
         if (getWaveGroup() != null) {
             sb.append(getWaveGroup()).append(SPACE_SEP);
         }
+        if (getFromClass() != null) {
+            sb.append("fromClass=").append(getFromClass().getSimpleName()).append(SPACE_SEP);
+        }
         if (getRelatedClass() != null) {
-            sb.append(getRelatedClass().getSimpleName()).append(SPACE_SEP);
+            sb.append("relatedClass=").append(getRelatedClass().getSimpleName()).append(SPACE_SEP);
         }
         if (getWaveType() != null) {
             sb.append(getWaveType()).append(SPACE_SEP);
@@ -406,6 +428,14 @@ public class WaveBase implements Wave {
         if (getWUID() != null) {
             sb.append("(").append(getWUID()).append(") ");
         }
+
+        if (getWaveItems().size() > 0) {
+            sb.append("\r\nData=>");
+            for (final WaveData<?> wd : getWaveItems()) {
+                sb.append(wd.getKey()).append("=").append(wd.getValue());
+            }
+        }
+
         return sb.toString();
     }
 

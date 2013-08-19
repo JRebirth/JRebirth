@@ -34,7 +34,7 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
      */
     @Override
     protected void initModel() {
-        listen(EditorWaves.DO_SELECT_EVENT, false);
+        listen(EditorWaves.DO_SELECT_EVENT);
     }
 
     /**
