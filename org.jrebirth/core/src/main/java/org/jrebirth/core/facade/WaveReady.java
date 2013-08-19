@@ -19,6 +19,7 @@ package org.jrebirth.core.facade;
 
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.exception.WaveException;
+import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
@@ -38,36 +39,21 @@ public interface WaveReady {
     /**
      * Begin to listen the type of wave for the current component.
      * 
-     * By default the Wave Contract will be checked use {@link #listen(WaveType, boolean)} otherwise
+     * Wave Contract will be checked if {@link JRebirthParameters.DEVELOPER_MODE} parameter is true
      * 
      * @param waveType the type to listen
      */
     void listen(WaveType waveType);
 
     /**
-     * Begin to listen the type of wave for the current component.
-     * 
-     * @param waveType the type to listen
-     * @param checkWaveContract true to check the wave contract, false otherwise
-     */
-    void listen(WaveType waveType, boolean checkWaveContract);
-
-    /**
      * Register a wave call back contract.
+     * 
+     * Wave Contract will be checked if {@link JRebirthParameters.DEVELOPER_MODE} parameter is true
      * 
      * @param callType the wave type mapped to this service.
      * @param responseType the wave type of the wave emitted in return
      */
     void registerCallback(final WaveType callType, final WaveType responseType);
-
-    /**
-     * Register a wave call back contract.
-     * 
-     * @param callType the wave type mapped to this service.
-     * @param responseType the wave type of the wave emitted in return
-     * @param checkWaveContract true to check the wave contract, false otherwise
-     */
-    void registerCallback(final WaveType callType, final WaveType responseType, final boolean checkWaveContract);
 
     /**
      * Stop to listen the type of wave for the current component.

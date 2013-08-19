@@ -19,7 +19,6 @@ package org.jrebirth.core.link;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +27,6 @@ import java.util.Map;
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
-import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.FacadeReady;
@@ -36,6 +34,7 @@ import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.util.CheckerUtility;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
@@ -43,9 +42,7 @@ import org.jrebirth.core.wave.WaveBase;
 import org.jrebirth.core.wave.WaveBean;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveGroup;
-import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveType;
-import org.jrebirth.core.wave.WaveTypeBase;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,6 +64,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractWaveReady.class);
+
     /** The wave type map. */
     private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
 
@@ -84,23 +82,13 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      */
     @Override
     public final void listen(final WaveType waveType) {
-        listen(waveType, true);
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void listen(final WaveType waveType, final boolean checkWaveContract) {
-
-        if (checkWaveContract) {
-            // FIX ME
-            // checkWaveTypeContract(waveType);
-        }
+        // Check API compliance
+        CheckerUtility.checkWaveTypeContract(this.getClass(), waveType);
 
         final WaveReady waveReady = this;
 
-        // Use the JRebirth Thread to manage Waves
+        // Use the JRebirth Thread to add new subscriptions for given Wave Type
         JRebirth.runIntoJIT(new AbstractJrbRunnable("Listen " + waveType.toString() + " by " + waveReady.getClass().getSimpleName()) {
             @Override
             public void runInto() throws JRebirthThreadException {
@@ -114,19 +102,11 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      */
     @Override
     public final void registerCallback(final WaveType callType, final WaveType responseType) {
-        registerCallback(callType, responseType, true);
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void registerCallback(final WaveType callType, final WaveType responseType, final boolean checkWaveContract) {
-
-        if (checkWaveContract) {
-            checkWaveTypeContract(callType);
-        }
+        // Perform the subscription
         listen(callType);
+
+        // Store a link between call Wave Type and return wave type
         this.returnWaveTypeMap.put(callType, responseType);
     }
 
@@ -142,80 +122,12 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     }
 
     /**
-     * Check if wave Type contract is respected.
-     * 
-     * @param waveType the contract to check
-     * 
-     *        Throws an exception is Wave Contract is broken
-     */
-    private void checkWaveTypeContract(final WaveType waveType) {
-
-        final List<Method> methods = ClassUtility.retrieveMethodList(this.getClass(), waveType.toString());
-
-        if (methods.size() < 1) {
-            LOGGER.error(this.getClass().getSimpleName() + " API is broken, no method {} is available", ClassUtility.underscoreToCamelCase(waveType.toString()));
-            throw new CoreRuntimeException(this.getClass().getSimpleName() + " API is broken, no method " + ClassUtility.underscoreToCamelCase(waveType.toString()) + " is available");
-        }
-
-        // Check parameter only for a WaveTypeBase
-        if (waveType instanceof WaveTypeBase) {
-
-            boolean hasCompliantMethod = false;
-
-            final List<WaveItem<?>> wParams = ((WaveTypeBase) waveType).getWaveItemList();
-
-            for (int j = 0; j < methods.size() && !hasCompliantMethod; j++) {
-                hasCompliantMethod = checkMethodSignature(methods.get(j), wParams);
-            }
-            if (!hasCompliantMethod) {
-                throw new CoreRuntimeException(this.getClass().getSimpleName() + " API is broken, the method " + ClassUtility.underscoreToCamelCase(waveType.toString())
-                        + " has wrong parameters, expected:  provided:");
-            }
-        }
-
-    }
-
-    /**
-     * Compare method parameters with wave parameters.
-     * 
-     * @param method the method to check
-     * @param wParams the wave parameters taht define the contract
-     * 
-     * @return true if the method has the right signature
-     */
-    private boolean checkMethodSignature(final Method method, final List<WaveItem<?>> wParams) {
-        boolean isCompliant = false;
-
-        final Type[] mParams = method.getGenericParameterTypes();
-
-        if (wParams.isEmpty() && Wave.class.isAssignableFrom(ClassUtility.getClassFromType(mParams[0]))) {
-            isCompliant = true;
-        } else if (mParams.length - 1 == wParams.size()) {
-
-            // Flag used to skip a method not compliant
-            boolean skipMethod = false;
-            // Check each parameter
-            for (int i = 0; !skipMethod && i < mParams.length - 1 && !isCompliant; i++) {
-                if (ClassUtility.getClassFromType(mParams[i]).isAssignableFrom(ClassUtility.getClassFromType(wParams.get(i).getItemType()))) {
-                    // This method has not the right parameters
-                    skipMethod = true;
-                }
-                if (i == mParams.length - 2
-                        && Wave.class.isAssignableFrom(ClassUtility.getClassFromType(mParams[i + 1]))) {
-                    // This method is compliant with wave type
-                    isCompliant = true;
-                }
-            }
-        }
-        return isCompliant;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public final void unlisten(final WaveType waveType) {
 
+        // Store an hard link to be able to use current class into the closure
         final WaveReady waveReady = this;
 
         // Use the JRebirth Thread to manage Waves
@@ -233,6 +145,10 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      */
     @Override
     public final void sendWave(final Wave wave) {
+        // Define the from class if it didn't been done before (manually)
+        if (wave.getFromClass() == null) {
+            wave.setFromClass(this.getClass());
+        }
         sendWaveIntoJit(wave);
     }
 
@@ -308,6 +224,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         final Wave wave = new WaveBase();
         wave.setWaveGroup(waveGroup);
         wave.setWaveType(waveType);
+        wave.setFromClass(this.getClass());
         wave.setRelatedClass(relatedClass);
         for (final WaveData<?> wd : waveData) {
             wave.addData(wd);
@@ -333,6 +250,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         final Wave wave = new WaveBase();
         wave.setWaveGroup(waveGroup);
         wave.setWaveType(waveType);
+        wave.setFromClass(this.getClass());
         wave.setRelatedClass(relatedClass);
 
         wave.linkWaveBean(waveBean);
@@ -372,7 +290,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         // }
 
         // Parse WaveData
-        for (WaveData<?> wd : wave.getWaveItems()) {
+        for (final WaveData<?> wd : wave.getWaveItems()) {
             tryToSetProperty(wd.getKey().toString(), wd.getValue());
         }
 
@@ -386,7 +304,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * @param fieldName the field to initialize
      * @param fieldValue the field value to set
      */
-    private void tryToSetProperty(String fieldName, Object fieldValue) {
+    private void tryToSetProperty(final String fieldName, final Object fieldValue) {
         try {
             this.getClass().getField(fieldName).set(this, fieldValue);
         } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
@@ -422,6 +340,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
                 method.invoke(this, parameterValues.toArray());
             }
         } catch (final NoSuchMethodException e) {
+            e.printStackTrace();
             // If no method was found, call the default method
             processWave(wave);
 
