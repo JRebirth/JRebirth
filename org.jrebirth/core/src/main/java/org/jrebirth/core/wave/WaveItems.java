@@ -11,7 +11,7 @@ public enum WaveItems implements IWaveItem {
     name(new WaveItem<String>() {
     });
 
-    WaveItems(WaveItem<?> wi) {
+    WaveItems(final WaveItem<?> wi) {
         WaveItem.init(this, wi);
     }
 

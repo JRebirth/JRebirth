@@ -112,7 +112,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     private void callCommand(final Wave wave) {
 
         // Use the Wave UID to guarantee that a new fresh command is built and used !
-        final Command command = (wave.contains(JRebirthWaves.REUSE_COMMAND) && wave.get(JRebirthWaves.REUSE_COMMAND))
+        final Command command = wave.contains(JRebirthWaves.REUSE_COMMAND) && wave.get(JRebirthWaves.REUSE_COMMAND)
                 ? getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.getRelatedClass())
                 : getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.getRelatedClass(), wave.getWUID());
 
@@ -226,7 +226,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
                 this.notifierMap.put(wt, LoopBuilder.newList(linkedObject));
             }
             // Retrieve he list associated to this Wave Type
-            List<WaveReady> list = this.notifierMap.get(wt);
+            final List<WaveReady> list = this.notifierMap.get(wt);
             if (list.isEmpty() || !list.contains(linkedObject)) {
                 // Add the linked object if the list is empty or if the object isn't yet contained
                 list.add(linkedObject);

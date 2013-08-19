@@ -57,7 +57,7 @@ public class WaveItem<T> {
     /**
      * Private Constructor.
      */
-    public WaveItem(String name) {
+    public WaveItem(final String name) {
         this();
         this.name = name;
     }
@@ -108,7 +108,7 @@ public class WaveItem<T> {
      * @return Returns the name.
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -148,12 +148,12 @@ public class WaveItem<T> {
         return getUid();
     }
 
-    public static void init(WaveItems waveItems, WaveItem<?> wi) {
+    public static void init(final WaveItems waveItems, final WaveItem<?> wi) {
         wi.setName(waveItems.toString());
 
     }
 
-    private void setName(String name) {
+    private void setName(final String name) {
         this.name = name;
     }
 
