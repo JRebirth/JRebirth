@@ -33,34 +33,34 @@ public interface TouchAdapter extends EventAdapter {
      * 
      * @param touchEvent the event to manage
      */
-    void touch(TouchEvent touchEvent);
+    void touch(final TouchEvent touchEvent);
 
     /**
      * Manage events when touch point is moved.
      * 
      * @param touchEvent the event to manage
      */
-    void touchMoved(TouchEvent touchEvent);
+    void touchMoved(final TouchEvent touchEvent);
 
     /**
      * Manage events when touch point is touched for the first time.
      * 
      * @param touchEvent the event to manage
      */
-    void touchPressed(TouchEvent touchEvent);
+    void touchPressed(final TouchEvent touchEvent);
 
     /**
      * Manage events when touch point is released.
      * 
      * @param touchEvent the event to manage
      */
-    void touchReleased(TouchEvent touchEvent);
+    void touchReleased(final TouchEvent touchEvent);
 
     /**
      * Manage events when touch point is pressed and still (doesn't move)..
      * 
      * @param touchEvent the event to manage
      */
-    void touchStationary(TouchEvent touchEvent);
+    void touchStationary(final TouchEvent touchEvent);
 
 }

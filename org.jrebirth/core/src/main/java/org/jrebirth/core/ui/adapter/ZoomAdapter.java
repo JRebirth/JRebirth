@@ -33,27 +33,27 @@ public interface ZoomAdapter extends EventAdapter {
      * 
      * @param zoomEvent the event to manage
      */
-    void anyZoom(ZoomEvent zoomEvent);
+    void anyZoom(final ZoomEvent zoomEvent);
 
     /**
      * Manage events when a zooming gesture is detected.
      * 
      * @param zoomEvent the event to manage
      */
-    void zoomStarted(ZoomEvent zoomEvent);
+    void zoomStarted(final ZoomEvent zoomEvent);
 
     /**
      * Manage events when user performs a zooming gesture such as dragging two fingers apart.
      * 
      * @param zoomEvent the event to manage
      */
-    void zoom(ZoomEvent zoomEvent);
+    void zoom(final ZoomEvent zoomEvent);
 
     /**
      * Manage events when a zooming gesture ends.
      * 
      * @param zoomEvent the event to manage
      */
-    void zoomFinished(ZoomEvent zoomEvent);
+    void zoomFinished(final ZoomEvent zoomEvent);
 
 }

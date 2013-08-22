@@ -33,7 +33,7 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouse(MouseEvent mouseEvent);
+    void mouse(final MouseEvent mouseEvent);
 
     /**
      * Manage mouse drag detected events.
@@ -42,7 +42,7 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseDragDetected(MouseEvent mouseEvent);
+    void mouseDragDetected(final MouseEvent mouseEvent);
 
     /**
      * Manage mouse clicked events.
@@ -51,7 +51,7 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseClicked(MouseEvent mouseEvent);
+    void mouseClicked(final MouseEvent mouseEvent);
 
     /**
      * Manage mouse dragged events.
@@ -60,7 +60,7 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseDragged(MouseEvent mouseEvent);
+    void mouseDragged(final MouseEvent mouseEvent);
 
     /**
      * Manage mouse entered events.
@@ -69,7 +69,7 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseEntered(MouseEvent mouseEvent);
+    void mouseEntered(final MouseEvent mouseEvent);
 
     /**
      * Manage mouse entered target events.
@@ -78,7 +78,7 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseEnteredTarget(MouseEvent mouseEvent);
+    void mouseEnteredTarget(final MouseEvent mouseEvent);
 
     /**
      * Manage mouse exited events.
@@ -87,7 +87,7 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseExited(MouseEvent mouseEvent);
+    void mouseExited(final MouseEvent mouseEvent);
 
     /**
      * Manage mouse exited target events.
@@ -96,7 +96,7 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseExitedTarget(MouseEvent mouseEvent);
+    void mouseExitedTarget(final MouseEvent mouseEvent);
 
     /**
      * Manage mouse moved events.
@@ -105,7 +105,7 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseMoved(MouseEvent mouseEvent);
+    void mouseMoved(final MouseEvent mouseEvent);
 
     /**
      * Manage mouse pressed events.
@@ -114,7 +114,7 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mousePressed(MouseEvent mouseEvent);
+    void mousePressed(final MouseEvent mouseEvent);
 
     /**
      * Manage mouse released events.
@@ -123,6 +123,6 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseReleased(MouseEvent mouseEvent);
+    void mouseReleased(final MouseEvent mouseEvent);
 
 }

@@ -36,5 +36,5 @@ public interface MessageReady {
      * 
      * @return Returns the translated language.
      */
-    String get(Object... parameter);
+    String get(final Object... parameter);
 }

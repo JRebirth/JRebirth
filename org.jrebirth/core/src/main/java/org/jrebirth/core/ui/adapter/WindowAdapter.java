@@ -33,7 +33,7 @@ public interface WindowAdapter extends EventAdapter {
      * 
      * @param windowEvent the event to manage
      */
-    void window(WindowEvent windowEvent);
+    void window(final WindowEvent windowEvent);
 
     /**
      * Manage window close request events.
@@ -42,7 +42,7 @@ public interface WindowAdapter extends EventAdapter {
      * 
      * @param windowEvent the event to manage
      */
-    void windowCloseRequest(WindowEvent windowEvent);
+    void windowCloseRequest(final WindowEvent windowEvent);
 
     /**
      * Manage window hidden events.
@@ -51,7 +51,7 @@ public interface WindowAdapter extends EventAdapter {
      * 
      * @param windowEvent the event to manage
      */
-    void windowHidden(WindowEvent windowEvent);
+    void windowHidden(final WindowEvent windowEvent);
 
     /**
      * Manage window hiding events.
@@ -60,7 +60,7 @@ public interface WindowAdapter extends EventAdapter {
      * 
      * @param windowEvent the event to manage
      */
-    void windowHiding(WindowEvent windowEvent);
+    void windowHiding(final WindowEvent windowEvent);
 
     /**
      * Manage window showing events.
@@ -69,7 +69,7 @@ public interface WindowAdapter extends EventAdapter {
      * 
      * @param windowEvent the event to manage
      */
-    void windowShowing(WindowEvent windowEvent);
+    void windowShowing(final WindowEvent windowEvent);
 
     /**
      * Manage window shown events.
@@ -78,6 +78,6 @@ public interface WindowAdapter extends EventAdapter {
      * 
      * @param windowEvent the event to manage
      */
-    void windowShown(WindowEvent windowEvent);
+    void windowShown(final WindowEvent windowEvent);
 
 }

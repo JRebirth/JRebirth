@@ -58,7 +58,7 @@ public interface Model extends FacadeReady<Model> {
      * 
      * @param rootModel The rootModel to set.
      */
-    void setRootModel(Model rootModel);
+    void setRootModel(final Model rootModel);
 
     /**
      * Get an inner model.
@@ -70,7 +70,7 @@ public interface Model extends FacadeReady<Model> {
      * 
      * @return the inner model instance
      */
-    Model getInnerModel(InnerModels innerModel, UniqueKey... innerModelKey);
+    Model getInnerModel(final InnerModels innerModel, final UniqueKey... innerModelKey);
 
     /**
      * Perform the show view action triggered by a wave.
@@ -79,7 +79,7 @@ public interface Model extends FacadeReady<Model> {
      * 
      * @param wave the wave that trigger the action
      */
-    void doShowView(Wave wave);
+    void doShowView(final Wave wave);
 
     /**
      * Perform the hide view action triggered by a wave.
@@ -88,5 +88,5 @@ public interface Model extends FacadeReady<Model> {
      * 
      * @param wave the wave that trigger the action
      */
-    void doHideView(Wave wave);
+    void doHideView(final Wave wave);
 }

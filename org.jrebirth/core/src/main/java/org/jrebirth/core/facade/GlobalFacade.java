@@ -73,7 +73,7 @@ public interface GlobalFacade {
      * @param target the target class of the event
      * @param eventData the data of the vent (like class name or other)
      */
-    void trackEvent(JRebirthEventType eventType, Class<?> source, Class<?> target, String... eventData);
+    void trackEvent(final JRebirthEventType eventType, final Class<?> source, final Class<?> target, final String... eventData);
 
     /**
      * Propagate the stop action into the global facade.

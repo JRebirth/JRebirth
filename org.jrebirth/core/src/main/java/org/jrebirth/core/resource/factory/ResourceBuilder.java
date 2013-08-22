@@ -34,7 +34,7 @@ public interface ResourceBuilder<E, P, R> {
      * @param key the parameter key
      * @param params the parameter value
      */
-    void storeParams(E key, P params);
+    void storeParams(final E key, final P params);
 
     /**
      * Retrieve a parameter value from its key.

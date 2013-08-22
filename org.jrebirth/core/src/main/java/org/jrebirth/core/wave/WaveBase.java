@@ -282,6 +282,14 @@ public class WaveBase implements Wave {
      * {@inheritDoc}
      */
     @Override
+    public boolean containsNotNull(final WaveItem<?> waveItem) {
+        return contains(waveItem) && getData(waveItem).getValue() != null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getWUID() {
         return this.wuid;
     }

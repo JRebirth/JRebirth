@@ -50,7 +50,7 @@ public interface FacadeReady<R extends FacadeReady<R>> extends WaveReady {
      * 
      * @param localFacade the local facade to set
      */
-    void setLocalFacade(LocalFacade<R> localFacade);
+    void setLocalFacade(final LocalFacade<R> localFacade);
 
     /**
      * @return Returns the key.
@@ -60,7 +60,7 @@ public interface FacadeReady<R extends FacadeReady<R>> extends WaveReady {
     /**
      * @param key The key to set.
      */
-    void setKey(UniqueKey<R> key);
+    void setKey(final UniqueKey<R> key);
 
     /**
      * Release the component by deleting this key used by the WeakHashMap.

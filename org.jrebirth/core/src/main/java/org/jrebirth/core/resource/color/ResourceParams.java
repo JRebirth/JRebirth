@@ -53,6 +53,6 @@ public interface ResourceParams {
      * 
      * @param dynamicKey the unique dynamic key
      */
-    void setDynamicKey(String dynamicKey);
+    void setDynamicKey(final String dynamicKey);
 
 }

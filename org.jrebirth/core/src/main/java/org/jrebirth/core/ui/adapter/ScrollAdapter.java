@@ -33,27 +33,27 @@ public interface ScrollAdapter extends EventAdapter {
      * 
      * @param scrollEvent the event to manage
      */
-    void anyScroll(ScrollEvent scrollEvent);
+    void anyScroll(final ScrollEvent scrollEvent);
 
     /**
      * Manage events when a scrolling gesture is detected.
      * 
      * @param scrollEvent the event to manage
      */
-    void scrollStarted(ScrollEvent scrollEvent);
+    void scrollStarted(final ScrollEvent scrollEvent);
 
     /**
      * Manage events when user performs a scrolling gesture such as rotating mouse wheel or dragging a finger over touch screen.
      * 
      * @param scrollEvent the event to manage
      */
-    void scroll(ScrollEvent scrollEvent);
+    void scroll(final ScrollEvent scrollEvent);
 
     /**
      * Manage events when a scrolling gesture ends.
      * 
      * @param scrollEvent the event to manage
      */
-    void scrollFinished(ScrollEvent scrollEvent);
+    void scrollFinished(final ScrollEvent scrollEvent);
 
 }

@@ -97,6 +97,6 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?>, P ex
      * 
      * @return the resource built and weakly stored with a WeakReference
      */
-    protected abstract R buildResource(P params);
+    protected abstract R buildResource(final P params);
 
 }

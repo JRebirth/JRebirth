@@ -33,7 +33,7 @@ public interface KeyAdapter extends EventAdapter {
      * 
      * @param keyEvent the event to manage
      */
-    void key(KeyEvent keyEvent);
+    void key(final KeyEvent keyEvent);
 
     /**
      * Manage key pressed events.
@@ -42,7 +42,7 @@ public interface KeyAdapter extends EventAdapter {
      * 
      * @param keyEvent the event to manage
      */
-    void keyPressed(KeyEvent keyEvent);
+    void keyPressed(final KeyEvent keyEvent);
 
     /**
      * Manage key released events.
@@ -51,7 +51,7 @@ public interface KeyAdapter extends EventAdapter {
      * 
      * @param keyEvent the event to manage
      */
-    void keyReleased(KeyEvent keyEvent);
+    void keyReleased(final KeyEvent keyEvent);
 
     /**
      * Manage key typed events.
@@ -60,6 +60,6 @@ public interface KeyAdapter extends EventAdapter {
      * 
      * @param keyEvent the event to manage
      */
-    void keyTyped(KeyEvent keyEvent);
+    void keyTyped(final KeyEvent keyEvent);
 
 }

@@ -22,6 +22,7 @@ import java.util.List;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.ProgressBar;
 
 /**
  * The class <strong>JRebirthWaveItem</strong>.
@@ -60,4 +61,12 @@ public interface JRebirthWaves {
 
     /** The waveType used to hide a view. */
     WaveType HIDE_VIEW = WaveTypeBase.build("HIDE_VIEW");
+
+    /******************************/
+    /** WaveType related to Service */
+    /******************************/
+
+    /** . */
+    WaveItem<ProgressBar> PROGRESS_BAR = new WaveItem<ProgressBar>() {
+    };
 }

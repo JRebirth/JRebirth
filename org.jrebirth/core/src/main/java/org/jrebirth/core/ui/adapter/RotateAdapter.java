@@ -33,27 +33,27 @@ public interface RotateAdapter extends EventAdapter {
      * 
      * @param rotateEvent the event to manage
      */
-    void anyRotate(RotateEvent rotateEvent);
+    void anyRotate(final RotateEvent rotateEvent);
 
     /**
      * Manage events when a rotating gesture is detected.
      * 
      * @param rotateEvent the event to manage
      */
-    void rotationStarted(RotateEvent rotateEvent);
+    void rotationStarted(final RotateEvent rotateEvent);
 
     /**
      * Manage events when user performs a rotating gesture such as dragging two fingers around each other.
      * 
      * @param rotateEvent the event to manage
      */
-    void rotate(RotateEvent rotateEvent);
+    void rotate(final RotateEvent rotateEvent);
 
     /**
      * Manage events when a rotating gesture ends.
      * 
      * @param rotateEvent the event to manage
      */
-    void rotationFinished(RotateEvent rotateEvent);
+    void rotationFinished(final RotateEvent rotateEvent);
 
 }

@@ -65,7 +65,7 @@ public interface Wave {
     /**
      * @param status The status to set.
      */
-    void setStatus(Status status);
+    void setStatus(final Status status);
 
     /**
      * @return Returns the Wave Unique Identifier.
@@ -85,7 +85,7 @@ public interface Wave {
     /**
      * @param waveGroup The waveGroup to set.
      */
-    void setWaveGroup(WaveGroup waveGroup);
+    void setWaveGroup(final WaveGroup waveGroup);
 
     /**
      * @return Returns the waveType.
@@ -95,7 +95,7 @@ public interface Wave {
     /**
      * @param waveType The waveType to set.
      */
-    void setWaveType(WaveType waveType);
+    void setWaveType(final WaveType waveType);
 
     /**
      * @return Returns the fromClass.
@@ -105,7 +105,7 @@ public interface Wave {
     /**
      * @param fromClass The fromClass to set.
      */
-    void setFromClass(Class<?> fromClass);
+    void setFromClass(final Class<?> fromClass);
 
     /**
      * @return Returns the relatedClass.
@@ -115,7 +115,7 @@ public interface Wave {
     /**
      * @param relatedClass The relatedClass to set.
      */
-    void setRelatedClass(Class<?> relatedClass);
+    void setRelatedClass(final Class<?> relatedClass);
 
     /**
      * @return Returns the priority.
@@ -125,7 +125,7 @@ public interface Wave {
     /**
      * @param priority The priority to set.
      */
-    void setPriority(int priority);
+    void setPriority(final int priority);
 
     /**
      * @return Returns the relatedWave.
@@ -135,7 +135,7 @@ public interface Wave {
     /**
      * @param relatedWave The related Wave to set.
      */
-    void setRelatedWave(Wave relatedWave);
+    void setRelatedWave(final Wave relatedWave);
 
     /**
      * Return all wave items sorted by order.
@@ -151,14 +151,14 @@ public interface Wave {
      * 
      * @param <T> the type of the wave data to add
      */
-    <T> void addData(WaveData<T> waveData);
+    <T> void addData(final WaveData<T> waveData);
 
     /**
      * Add a list of wave data. Store objects and indexize them.
      * 
      * @param waveDatas the list of wave data to store
      */
-    void addDatas(WaveData<?>[] waveDatas);
+    void addDatas(final WaveData<?>[] waveDatas);
 
     /**
      * Add a wave data. Store an object and indexize it.
@@ -179,7 +179,7 @@ public interface Wave {
      * 
      * @param <T> the type of the wave data to add
      */
-    <T> WaveData<T> getData(WaveItem<T> waveItem);
+    <T> WaveData<T> getData(final WaveItem<T> waveItem);
 
     /**
      * Retrieve a value.
@@ -190,7 +190,7 @@ public interface Wave {
      * 
      * @param <T> the type of the wave data to add
      */
-    <T> T get(WaveItem<T> waveItem);
+    <T> T get(final WaveItem<T> waveItem);
 
     /**
      * Check if an object exists.
@@ -199,7 +199,16 @@ public interface Wave {
      * 
      * @return true if the waveData is registered
      */
-    boolean contains(WaveItem<?> waveItem);
+    boolean contains(final WaveItem<?> waveItem);
+
+    /**
+     * Check if an object exists and if it isn't null.
+     * 
+     * @param waveItem the waveItem of the object to check
+     * 
+     * @return true if the waveData is registered and the value is not null
+     */
+    boolean containsNotNull(final WaveItem<?> waveItem);
 
     /**
      * Return the wave bean used to wrap wave properties.
@@ -213,19 +222,19 @@ public interface Wave {
      * 
      * @param waveListener the wave listener that will be notified of wave status
      */
-    void addWaveListener(WaveListener waveListener);
+    void addWaveListener(final WaveListener waveListener);
 
     /**
      * Remove a wave listener.
      * 
      * @param waveListener the wave listener to removed
      */
-    void removeWaveListener(WaveListener waveListener);
+    void removeWaveListener(final WaveListener waveListener);
 
     /**
      * Link a wave bean.
      * 
      * @param waveBean the wave bean already built to link
      */
-    void linkWaveBean(WaveBean waveBean);
+    void linkWaveBean(final WaveBean waveBean);
 }
