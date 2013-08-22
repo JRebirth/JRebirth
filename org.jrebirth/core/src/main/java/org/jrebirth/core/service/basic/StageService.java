@@ -29,7 +29,7 @@ import javafx.stage.StageBuilder;
 
 import org.jrebirth.core.command.basic.stage.StageWaveBean;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.service.ServiceBase;
+import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveTypeBase;
 
@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class StageService extends ServiceBase {
+public class StageService extends DefaultService {
 
     /** Wave type use to load events. */
     public static final WaveTypeBase DO_OPEN_STAGE = WaveTypeBase.build("OPEN_STAGE");
@@ -72,7 +72,7 @@ public class StageService extends ServiceBase {
      */
     @Override
     public void ready() throws CoreException {
-        super.ready();
+        super.ready(); // Can be omitted but it's a bad practice
 
         registerCallback(DO_OPEN_STAGE, RE_STAGE_OPENED);
         registerCallback(DO_CLOSE_STAGE, RE_STAGE_CLOSED);

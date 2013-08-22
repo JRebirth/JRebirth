@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.jrebirth.core.service.ServiceBase;
+import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.WaveBuilder;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.undoredo.command.UndoRedoWaves;
@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class UndoRedoService extends ServiceBase {
+public class UndoRedoService extends DefaultService {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(UndoRedoService.class);

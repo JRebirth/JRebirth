@@ -30,7 +30,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.service.ServiceBase;
+import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.presentation.model.Presentation;
 import org.jrebirth.presentation.resource.PrezParameters;
 
@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public final class PresentationService extends ServiceBase {
+public final class PresentationService extends DefaultService {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PresentationService.class);

@@ -26,7 +26,6 @@ import javafx.concurrent.Task;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.WaveException;
-import org.jrebirth.core.link.AbstractWaveReady;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveBuilder;
@@ -45,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @param <T> the current Service Task type
  */
-final class ServiceTask<T> extends Task<T> {
+public final class ServiceTask<T> extends Task<T> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceTask.class);
@@ -63,7 +62,7 @@ final class ServiceTask<T> extends Task<T> {
     /**
      * The <code>localService</code>.
      */
-    private final AbstractWaveReady<Service> service;
+    private final AbstractService service;
 
     /**
      * The <code>sourceWave</code>.
@@ -78,7 +77,7 @@ final class ServiceTask<T> extends Task<T> {
      * @param service the service object
      * @param wave the wave to process
      */
-    ServiceTask(final AbstractWaveReady<Service> service, final Method method, final Object[] parameterValues, final Wave wave) {
+    ServiceTask(final AbstractService service, final Method method, final Object[] parameterValues, final Wave wave) {
         super();
         this.service = service;
         this.method = method;
@@ -89,7 +88,7 @@ final class ServiceTask<T> extends Task<T> {
     /**
      * {@inheritDoc}
      * 
-     * @throws CoreException if return wavetype has bad API
+     * @throws CoreException if return WaveType has bad API
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -136,9 +135,33 @@ final class ServiceTask<T> extends Task<T> {
                 this.service.sendWave(returnWave);
 
             }
+
+            // Finally remove the pending task (even if the return wave isn't processed TO CHECK)
+            // this.service.removePendingTask(this.wave.getWUID());
+
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             LOGGER.error("Unable to perform the service task", e);
         }
         return res;
+    }
+
+    @Override
+    public void updateProgress(long l, long l2) {
+        super.updateProgress(l, l2);
+    }
+
+    @Override
+    public void updateProgress(double v, double v2) {
+        super.updateProgress(v, v2);
+    }
+
+    @Override
+    public void updateMessage(String s) {
+        super.updateMessage(s);
+    }
+
+    @Override
+    public void updateTitle(String s) {
+        super.updateTitle(s);
     }
 }

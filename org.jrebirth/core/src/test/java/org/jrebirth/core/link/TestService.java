@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.service.ServiceBase;
+import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.WaveBase;
 import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveTypeBase;
@@ -30,11 +30,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The class <strong>ImageSlicerService</strong>.
+ * The class <strong>TestService</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class TestService extends ServiceBase {
+public class TestService extends DefaultService {
 
     /** The file containing all events serialized. */
     public static final WaveItem<List<String>> STRINGS = new WaveItem<List<String>>() {

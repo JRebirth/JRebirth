@@ -33,7 +33,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.shape.RectangleBuilder;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.service.ServiceBase;
+import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.WaveBase;
 import org.jrebirth.core.wave.WaveTypeBase;
 import org.jrebirth.transition.slicer.TransitionWaves;
@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class NodeSlicerCommand extends ServiceBase {
+public class NodeSlicerCommand extends DefaultService {
 
     /** Wave type use to load events. */
     public static final WaveTypeBase DO_SLICE_NODE = WaveTypeBase.build("SLICE_NODE", TransitionWaves.NODE);

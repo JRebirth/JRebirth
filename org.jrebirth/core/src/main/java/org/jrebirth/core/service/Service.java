@@ -37,6 +37,6 @@ public interface Service extends FacadeReady<Service> {
      * 
      * @param <T> The type of the object to return must be compatible with the WaveType contract taht call this service
      */
-    <T extends Object> void returnData(Wave wave);
+    <T extends Object> void returnData(final Wave wave);
 
 }
