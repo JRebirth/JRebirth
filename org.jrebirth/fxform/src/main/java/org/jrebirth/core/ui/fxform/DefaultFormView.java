@@ -16,7 +16,7 @@ public class DefaultFormView<M extends AbstractFormModel<M, ?, B>, C extends Con
      * 
      * @param model the model of the view
      */
-    public DefaultFormView(M model) {
+    public DefaultFormView(final M model) {
         super(model);
     }
 
