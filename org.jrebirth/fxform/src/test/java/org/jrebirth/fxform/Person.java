@@ -3,12 +3,14 @@ package org.jrebirth.fxform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import org.jrebirth.core.ui.fxform.FormObject;
+
 /**
  * The class <strong>Person</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class Person {
+public class Person implements FormObject {
 
     private final StringProperty firstName = new SimpleStringProperty("Sebastien");
 

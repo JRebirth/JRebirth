@@ -1,7 +1,5 @@
 package org.jrebirth.fxform;
 
-import com.dooapp.fxform.FXForm;
-
 import org.jrebirth.core.ui.DefaultController;
 import org.jrebirth.core.ui.fxform.AbstractFormView;
 
@@ -10,7 +8,7 @@ import org.jrebirth.core.ui.fxform.AbstractFormView;
  * 
  * @author Sébastien Bordes
  */
-public class PersonFormView extends AbstractFormView<PersonFormModel, FXForm<Person>, DefaultController<PersonFormModel, PersonFormView>, Person> {
+public class PersonFormView extends AbstractFormView<PersonFormModel, DefaultController<PersonFormModel, PersonFormView>, Person> {
 
     public PersonFormView(PersonFormModel model) {
         super(model);
