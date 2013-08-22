@@ -146,22 +146,22 @@ public final class ServiceTask<T> extends Task<T> {
     }
 
     @Override
-    public void updateProgress(long l, long l2) {
+    public void updateProgress(final long l, final long l2) {
         super.updateProgress(l, l2);
     }
 
     @Override
-    public void updateProgress(double v, double v2) {
+    public void updateProgress(final double v, final double v2) {
         super.updateProgress(v, v2);
     }
 
     @Override
-    public void updateMessage(String s) {
+    public void updateMessage(final String s) {
         super.updateMessage(s);
     }
 
     @Override
-    public void updateTitle(String s) {
+    public void updateTitle(final String s) {
         super.updateTitle(s);
     }
 }
