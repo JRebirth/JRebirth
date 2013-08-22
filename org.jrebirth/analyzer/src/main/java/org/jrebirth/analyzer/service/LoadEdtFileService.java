@@ -29,7 +29,7 @@ import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.GlobalFacadeBase;
 import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.facade.JRebirthEventBase;
-import org.jrebirth.core.service.ServiceBase;
+import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveTypeBase;
 
@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class LoadEdtFileService extends ServiceBase {
+public class LoadEdtFileService extends DefaultService {
 
     /** Wave type use to load events. */
     public static final WaveTypeBase DO_LOAD_EVENTS = WaveTypeBase.build("LOAD_EVENTS", EditorWaves.EVENTS_FILE);

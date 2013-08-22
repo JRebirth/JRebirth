@@ -1,7 +1,7 @@
 package org.jrebirth.sample.service;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.service.ServiceBase;
+import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveTypeBase;
 
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author
  */
-public final class SampleService extends ServiceBase {
+public final class SampleService extends DefaultService {
 
     /** Perform something. */
     public static final WaveTypeBase DO_SOMETHING = WaveTypeBase.build("SOMETHING");
