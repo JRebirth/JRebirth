@@ -1,8 +1,7 @@
 package org.jrebirth.core.ui.fxform;
 
-import com.dooapp.fxform.FXForm;
-
 import org.jrebirth.core.ui.object.AbstractObjectModel;
+import org.jrebirth.core.ui.object.ViewObject;
 
 /**
  * 
@@ -14,7 +13,7 @@ import org.jrebirth.core.ui.object.AbstractObjectModel;
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractFormModel<M extends AbstractFormModel<?, ?, ?>, V extends AbstractFormView<?, ?, ?, B>, B extends Object> extends AbstractObjectModel<M, V, B> {
+public abstract class AbstractFormModel<M extends AbstractFormModel<?, ?, ?>, V extends AbstractFormView<?, ?, B>, B extends ViewObject> extends AbstractObjectModel<M, V, B> {
 
     /**
      * {@inheritDoc}
@@ -22,6 +21,6 @@ public abstract class AbstractFormModel<M extends AbstractFormModel<?, ?, ?>, V 
     @Override
     protected void bind() {
         // super.bind();
-        ((FXForm<B>) getView().getRootNode()).setSource(getObject());
+        getView().getRootNode().setSource(getObject());
     }
 }
