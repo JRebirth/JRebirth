@@ -93,7 +93,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
         try {
             // Build the root node of the view
-            buildRootNode();
+            this.rootNode = buildRootNode();
 
             // Manage components controller
             buildController();
@@ -335,8 +335,8 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * @throws CoreException if introspection fails
      */
     @SuppressWarnings("unchecked")
-    protected void buildRootNode() throws CoreException {
-        this.rootNode = (N) ClassUtility.buildGenericType(this.getClass(), 1);
+    protected N buildRootNode() throws CoreException {
+        return (N) ClassUtility.buildGenericType(this.getClass(), Node.class);
     }
 
     /**
@@ -347,9 +347,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     @SuppressWarnings("unchecked")
     protected void buildController() throws CoreException {
 
-        if (!NullController.class.equals(ClassUtility.getGenericClass(this.getClass(), 2))) {
+        if (!NullController.class.equals(ClassUtility.findGenericClass(this.getClass(), Controller.class))) {
             // Build the controller by introspection
-            this.controller = (C) ClassUtility.buildGenericType(this.getClass(), 2, this);
+            this.controller = (C) ClassUtility.buildGenericType(this.getClass(), Controller.class, this);
         }
     }
 

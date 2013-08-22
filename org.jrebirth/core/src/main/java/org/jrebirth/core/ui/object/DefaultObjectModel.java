@@ -33,7 +33,7 @@ import org.jrebirth.core.wave.Wave;
  * @param <V> the class type of the view managed by this model
  * @param <O> the class type of the bindable object
  */
-public class DefaultObjectModel<M extends Model, V extends View<?, ?, ?>, O extends Object> extends AbstractObjectModel<M, V, O> {
+public class DefaultObjectModel<M extends Model, V extends View<?, ?, ?>, O extends ViewObject> extends AbstractObjectModel<M, V, O> {
 
     /**
      * {@inheritDoc}

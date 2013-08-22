@@ -40,5 +40,5 @@ public interface ParameterItem<T extends Object> extends ResourceItem<T, Paramet
      * 
      * @param forcedValue the new value for this parameter
      */
-    void define(T forcedValue);
+    void define(final T forcedValue);
 }

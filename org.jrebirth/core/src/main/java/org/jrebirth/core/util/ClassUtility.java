@@ -77,7 +77,7 @@ public final class ClassUtility {
      * 
      * @throws CoreException if the instantiation fails
      */
-    public static Object buildGenericType(final Class<?> mainClass, final int superTypeIndex, final Object... parameters) throws CoreException {
+    public static Object buildGenericType(final Class<?> mainClass, final Class<?> assignableClass, final Object... parameters) throws CoreException {
         Class<?> genericClass = null;
         // Copy parameters type to find the right constructor
         final Class<?>[] parameterTypes = new Class<?>[parameters.length];
@@ -90,7 +90,7 @@ public final class ClassUtility {
                 i++;
             }
 
-            genericClass = getGenericClass(mainClass, superTypeIndex);
+            genericClass = findGenericClass(mainClass, assignableClass);
 
             // Find the right constructor and use arguments to create a new
             // instance
@@ -101,7 +101,7 @@ public final class ClassUtility {
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | SecurityException e) {
             final String message = genericClass == null
-                    ? "Impossible to build the dedicated " + superTypeIndex + " th type of the class " + mainClass.getName()
+                    ? "Impossible to build the dedicated " + 0 + " th type of the class " + mainClass.getName() // FIXME
                     : "Impossible to build the " + genericClass.getName() + " object for the class " + mainClass.getName();
             LOGGER.error(message, e);
 
@@ -142,16 +142,23 @@ public final class ClassUtility {
      * 
      * @return the class of the generic type according to the index provided or null if not found
      */
-    public static Class<?> getGenericClass(final Class<?> mainClass, final int superTypeIndex) {
+    public static Class<?> findGenericClass(final Class<?> mainClass, final Class<?> assignableClass) {
 
         // Retrieve the generic super class Parameterized type
         final ParameterizedType paramType = (ParameterizedType) mainClass.getGenericSuperclass();
 
+        boolean found = false;
         Class<?> genericClass = null;
-        if (superTypeIndex < paramType.getActualTypeArguments().length) {
-            // Retrieve the right generic type we want to instantiate
-            genericClass = getClassFromType(paramType.getActualTypeArguments()[superTypeIndex]);
+        for (int i = 0; !found && i < paramType.getActualTypeArguments().length; i++) {
+            genericClass = getClassFromType(paramType.getActualTypeArguments()[i]);
+            if (assignableClass.isAssignableFrom(genericClass)) {
+                found = true;
+            }
         }
+        // if (superTypeIndex < paramType.getActualTypeArguments().length) {
+        // // Retrieve the right generic type we want to instantiate
+        // genericClass = getClassFromType(paramType.getActualTypeArguments()[superTypeIndex]);
+        // }
 
         return genericClass;
     }

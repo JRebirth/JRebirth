@@ -31,6 +31,6 @@ public interface ActionAdapter extends EventAdapter {
      * 
      * @param actionEvent the event to manage
      */
-    void action(ActionEvent actionEvent);
+    void action(final ActionEvent actionEvent);
 
 }

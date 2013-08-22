@@ -29,47 +29,47 @@ public interface WaveListener {
      * 
      * @param wave the created wave
      */
-    void waveCreated(Wave wave);
+    void waveCreated(final Wave wave);
 
     /**
      * The wave has just been sent to the notifier.
      * 
      * @param wave the sent wave
      */
-    void waveSent(Wave wave);
+    void waveSent(final Wave wave);
 
     /**
      * The wave is being processed.
      * 
      * @param wave the processed wave
      */
-    void waveProcessed(Wave wave);
+    void waveProcessed(final Wave wave);
 
     /**
      * The wave has just been cancelled.
      * 
      * @param wave the cancelled wave
      */
-    void waveCancelled(Wave wave);
+    void waveCancelled(final Wave wave);
 
     /**
      * The wave has just been consumed.
      * 
      * @param wave the consumed wave
      */
-    void waveConsumed(Wave wave);
+    void waveConsumed(final Wave wave);
 
     /**
      * The wave processing has failed.
      * 
      * @param wave the failed wave
      */
-    void waveFailed(Wave wave);
+    void waveFailed(final Wave wave);
 
     /**
      * The wave has just been destroyed.
      * 
      * @param wave the destroyed wave
      */
-    void waveDestroyed(Wave wave);
+    void waveDestroyed(final Wave wave);
 }

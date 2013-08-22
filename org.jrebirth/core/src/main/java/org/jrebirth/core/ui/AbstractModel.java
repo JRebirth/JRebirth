@@ -106,12 +106,12 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     @SuppressWarnings("unchecked")
     protected void buildView() {
 
-        final Class<?> viewClass = ClassUtility.getGenericClass(this.getClass(), 1);
+        final Class<?> viewClass = ClassUtility.findGenericClass(this.getClass(), View.class);
 
         if (viewClass != null && !NullView.class.equals(viewClass)) {
             // Build the current view by reflection
             try {
-                this.view = (V) ClassUtility.buildGenericType(this.getClass(), 1, this);
+                this.view = (V) ClassUtility.buildGenericType(this.getClass(), View.class, this);
             } catch (final CoreException e) {
                 throw new CoreRuntimeException("Failure while building the view for model " + getClass(), e);
             }

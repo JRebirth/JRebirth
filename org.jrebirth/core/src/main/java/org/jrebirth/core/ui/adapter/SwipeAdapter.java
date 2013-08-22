@@ -33,33 +33,33 @@ public interface SwipeAdapter extends EventAdapter {
      * 
      * @param swipeEvent the event to manage
      */
-    void anySwipe(SwipeEvent swipeEvent);
+    void anySwipe(final SwipeEvent swipeEvent);
 
     /**
      * Manage events when user performs downward swipe gesture.
      * 
      * @param swipeEvent the event to manage
      */
-    void swipeDown(SwipeEvent swipeEvent);
+    void swipeDown(final SwipeEvent swipeEvent);
 
     /**
      * Manage events when user performs leftward swipe gesture.
      * 
      * @param swipeEvent the event to manage
      */
-    void swipeLeft(SwipeEvent swipeEvent);
+    void swipeLeft(final SwipeEvent swipeEvent);
 
     /**
      * Manage events when user performs rightward swipe gesture.
      * 
      * @param swipeEvent the event to manage
      */
-    void swipeRight(SwipeEvent swipeEvent);
+    void swipeRight(final SwipeEvent swipeEvent);
 
     /**
      * Manage events when user performs upward swipe gesture.
      * 
      * @param swipeEvent the event to manage
      */
-    void swipeUp(SwipeEvent swipeEvent);
+    void swipeUp(final SwipeEvent swipeEvent);
 }

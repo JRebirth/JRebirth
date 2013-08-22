@@ -34,7 +34,7 @@ public interface JRebirthEvent {
     /**
      * @param sequence The sequence to set.
      */
-    void setSequence(int sequence);
+    void setSequence(final int sequence);
 
     /**
      * @return Returns the eventType.
@@ -44,7 +44,7 @@ public interface JRebirthEvent {
     /**
      * @param eventType The eventType to set.
      */
-    void setEventType(JRebirthEventType eventType);
+    void setEventType(final JRebirthEventType eventType);
 
     /**
      * @return Returns the source class.
@@ -54,7 +54,7 @@ public interface JRebirthEvent {
     /**
      * @param source The source class to set.
      */
-    void setSource(Class<?> source);
+    void setSource(final Class<?> source);
 
     /**
      * @return Returns the target class.
@@ -64,7 +64,7 @@ public interface JRebirthEvent {
     /**
      * @param target The data to set.
      */
-    void setTarget(Class<?> target);
+    void setTarget(final Class<?> target);
 
     /**
      * @return Returns the data.
@@ -74,6 +74,6 @@ public interface JRebirthEvent {
     /**
      * @param data The data to set.
      */
-    void setEventData(String data);
+    void setEventData(final String data);
 
 }

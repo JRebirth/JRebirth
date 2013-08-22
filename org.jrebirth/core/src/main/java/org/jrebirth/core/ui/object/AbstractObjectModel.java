@@ -36,7 +36,7 @@ import org.jrebirth.core.util.ClassUtility;
  * @param <V> the class type of the view managed by this model
  * @param <O> the class type of the bindable object
  */
-public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, ?>, O extends Object> extends AbstractModel<M, V> {
+public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, ?>, O extends ViewObject> extends AbstractModel<M, V> {
 
     /** The dedicated view component. */
     private O object;
@@ -61,7 +61,7 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
 
         // Build the current view by reflection
         try {
-            this.object = (O) ClassUtility.buildGenericType(this.getClass(), 2);
+            this.object = (O) ClassUtility.buildGenericType(this.getClass(), ViewObject.class);
         } catch (final CoreException e) {
             throw new CoreRuntimeException("Failure while building the bindable object for model " + getClass(), e);
         }
@@ -87,7 +87,7 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
         // If the model object has been passed as part of the key
         if (getKey() instanceof MultitonKey<?>
                 && ((MultitonKey<?>) getKey()).getValue() != null
-                && ClassUtility.getGenericClass(this.getClass(), 2).isAssignableFrom(((MultitonKey<?>) getKey()).getValue().getClass())) {
+                && ClassUtility.findGenericClass(this.getClass(), ViewObject.class).isAssignableFrom(((MultitonKey<?>) getKey()).getValue().getClass())) {
             this.object = (O) ((MultitonKey<?>) getKey()).getValue();
         }
     }

@@ -38,7 +38,7 @@ public interface Facade<R extends FacadeReady<R>> {
      * 
      * @param <E> the type of the ready object used
      */
-    <E extends R> void register(final E readyObject, Object... keyPart);
+    <E extends R> void register(final E readyObject, final Object... keyPart);
 
     /**
      * Unregister a new ready object component.
@@ -48,7 +48,7 @@ public interface Facade<R extends FacadeReady<R>> {
      * 
      * @param <E> the type of the ready object used
      */
-    <E extends R> void unregister(final E readyObject, Object... keyPart);
+    <E extends R> void unregister(final E readyObject, final Object... keyPart);
 
     /**
      * Retrieve a ready object component.<br />
@@ -61,7 +61,7 @@ public interface Facade<R extends FacadeReady<R>> {
      * 
      * @param <E> the type of the ready object to retrieve
      */
-    <E extends R> E retrieve(final Class<E> clazz, Object... keyPart);
+    <E extends R> E retrieve(final Class<E> clazz, final Object... keyPart);
 
     /**
      * Retrieve a ready object component.<br />
@@ -85,7 +85,7 @@ public interface Facade<R extends FacadeReady<R>> {
      * 
      * @param <E> The type of the object registered by this ClassKey
      */
-    <E extends R> boolean exists(final Class<E> clazz, Object... keyPart);
+    <E extends R> boolean exists(final Class<E> clazz, final Object... keyPart);
 
     /**
      * Build an unique key.

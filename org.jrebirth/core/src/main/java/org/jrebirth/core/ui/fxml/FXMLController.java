@@ -37,7 +37,7 @@ public interface FXMLController<M extends Model, V extends View<M, ?, ?>> extend
      * 
      * @param model the linked model
      */
-    void setModel(M model);
+    void setModel(final M model);
 
     /**
      * Return the linked model that manage the view.

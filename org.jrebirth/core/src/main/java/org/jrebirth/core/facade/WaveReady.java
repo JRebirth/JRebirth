@@ -43,7 +43,7 @@ public interface WaveReady {
      * 
      * @param waveType the type to listen
      */
-    void listen(WaveType waveType);
+    void listen(final WaveType waveType);
 
     /**
      * Register a wave call back contract.
@@ -60,7 +60,7 @@ public interface WaveReady {
      * 
      * @param waveType the type to stop to listen
      */
-    void unlisten(WaveType waveType);
+    void unlisten(final WaveType waveType);
 
     /**
      * Send a wave to the notifier.
@@ -69,7 +69,7 @@ public interface WaveReady {
      * 
      * @param wave the wave to send
      */
-    void sendWave(Wave wave);
+    void sendWave(final Wave wave);
 
     /**
      * Send a wave to the notifier.
@@ -79,7 +79,7 @@ public interface WaveReady {
      * @param waveType the type of wave to send
      * @param waveData the data (key-value
      */
-    void sendWave(WaveType waveType, WaveData<?>... waveData);
+    void sendWave(final WaveType waveType, final WaveData<?>... waveData);
 
     /**
      * Send a wave used to call a command.
@@ -129,6 +129,6 @@ public interface WaveReady {
      * 
      * @throws WaveException if an error occurred while dispatching the wave
      */
-    void handle(Wave wave) throws WaveException;
+    void handle(final Wave wave) throws WaveException;
 
 }
