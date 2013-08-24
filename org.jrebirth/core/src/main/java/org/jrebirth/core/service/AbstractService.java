@@ -19,6 +19,7 @@ package org.jrebirth.core.service;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,7 +74,8 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
             // Build parameter list of the searched method
             final List<Object> parameterValues = new ArrayList<>();
             for (final WaveData<?> wd : sourceWave.getWaveItems()) {
-                if (wd.getKey() != JRebirthWaves.PROGRESS_BAR) {
+                // Add only wave items defined as parameter
+                if (wd.getKey().isParameter()) {
                     parameterValues.add(wd.getValue());
                 }
             }
@@ -111,11 +113,17 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
      */
     private <T> void runTask(final Wave sourceWave, final Method method, final Object[] parameterValues) {
 
+        // Allow to remove the pending task when the service is finished
+        sourceWave.addWaveListener(new ServiceTaskWaveListener());
+
         // Create a new ServiceTask to handle this request and follow progression
         final ServiceTask<T> task = new ServiceTask<T>(this, method, parameterValues, sourceWave);
 
         // Store the task into the pending map
         this.pendingTasks.put(sourceWave.getWUID(), task);
+
+        // Attach ServiceTask to the source wave
+        sourceWave.addData(WaveData.build(JRebirthWaves.SERVICE_TASK, task));
 
         // Bind ProgressBar
         if (sourceWave.containsNotNull(JRebirthWaves.PROGRESS_BAR)) { // Check double call
@@ -126,94 +134,137 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
         JRebirth.runIntoJTP(task);
     }
 
+    /**
+     * Bind a task to a progress bar widget to follow its progression.
+     * 
+     * @param task the service task that we need to follow the progression
+     * @param progressBar graphical progress bar
+     */
     private void bindProgressBar(final ServiceTask<?> task, final ProgressBar progressBar) {
 
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("") {
+        // Perform this binding into the JAT to respect widget and task API
+        JRebirth.runIntoJAT(new AbstractJrbRunnable("Bind ProgressBar to " + task.getServiceHandlerName()) {
 
+            /**
+             * {@inheritDoc}
+             */
             @Override
             protected void runInto() throws JRebirthThreadException {
                 progressBar.progressProperty().bind(task.workDoneProperty().divide(task.totalWorkProperty()));
-
             }
         });
 
     }
 
     /**
-     * .
-     * 
-     * @param taskKey
+     * {@inheritDoc}
      */
+    @Override
+    public Collection<ServiceTask<?>> getPendingTaskList() {
+        return this.pendingTasks.values();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void removePendingTask(final String taskKey) {
         this.pendingTasks.remove(taskKey);
     }
 
     /**
-     * .
-     * 
-     * @param wave
-     * 
-     * @return the pending task or null if not found
+     * {@inheritDoc}
      */
-    protected ServiceTask<?> getPendingTask(final Wave wave) {
-        return getPendingTask(wave.getWUID());
-    }
-
-    /**
-     * .
-     * 
-     * @param taskKey
-     * 
-     * @return the pending task or null if not found
-     */
+    @Override
     public ServiceTask<?> getPendingTask(final String taskKey) {
         return this.pendingTasks.get(taskKey);
     }
 
-    public void updateProgress(final Wave wave, final long l, final long l2) {
-        LOGGER.info("workdone {} total {}", l, l2);
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("") {
+    /**
+     * Update the progress of the service task related to the given wave.
+     * 
+     * @param wave the wave that trigger the service task call
+     * @param workDone the amount of overall work done
+     * @param totalWork the amount of total work todo
+     */
+    public void updateProgress(final Wave wave, final long workDone, final long totalWork) {
 
+        // Increase the task progression
+        JRebirth.runIntoJAT(new AbstractJrbRunnable("ServiceTask Workdone " + workDone + " / " + totalWork) {
+
+            /**
+             * {@inheritDoc}
+             */
             @Override
             protected void runInto() throws JRebirthThreadException {
-                getPendingTask(wave).updateProgress(l, l2);
-
+                wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork);
             }
         });
 
     }
 
-    public void updateProgress(final Wave wave, final double v, final double v2) {
-        LOGGER.info("workdone {} total {}", v, v2);
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("") {
+    /**
+     * Update the progress of the service task related to the given wave.
+     * 
+     * @param wave the wave that trigger the service task call
+     * @param workDone the amount of overall work done
+     * @param totalWork the amount of total work todo
+     */
+    public void updateProgress(final Wave wave, final double workDone, final double totalWork) {
 
+        // Increase the task progression
+        JRebirth.runIntoJAT(new AbstractJrbRunnable("ServiceTask Workdone " + workDone + " / " + totalWork) {
+
+            /**
+             * {@inheritDoc}
+             */
             @Override
             protected void runInto() throws JRebirthThreadException {
-                getPendingTask(wave).updateProgress(v, v2);
-
+                wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork);
             }
         });
 
     }
 
-    public void updateMessage(final Wave wave, final String s) {
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("") {
+    /**
+     * Update the current message of the service task related to the given wave.
+     * 
+     * @param wave the wave that trigger the service task call
+     * @param message the current message of the service task processed
+     */
+    public void updateMessage(final Wave wave, final String message) {
 
+        // Update the current task message
+        JRebirth.runIntoJAT(new AbstractJrbRunnable("Service Task Message => " + message) {
+
+            /**
+             * {@inheritDoc}
+             */
             @Override
             protected void runInto() throws JRebirthThreadException {
-                getPendingTask(wave).updateMessage(s);
+                wave.get(JRebirthWaves.SERVICE_TASK).updateMessage(message);
             }
         });
 
     }
 
-    public void updateTitle(final Wave wave, final String s) {
+    /**
+     * Update the current message of the service task related to the given wave.
+     * 
+     * @param wave the wave that trigger the service task call
+     * @param title the title of the service task processed
+     */
+    public void updateTitle(final Wave wave, final String title) {
 
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("") {
+        // Update the task title
+        JRebirth.runIntoJAT(new AbstractJrbRunnable("Service Task Title => " + title) {
 
+            /**
+             * {@inheritDoc}
+             */
             @Override
             protected void runInto() throws JRebirthThreadException {
-                getPendingTask(wave).updateTitle(s);
+                wave.get(JRebirthWaves.SERVICE_TASK).updateTitle(title);
             }
         });
 

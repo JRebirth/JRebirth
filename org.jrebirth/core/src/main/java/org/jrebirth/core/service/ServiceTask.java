@@ -62,7 +62,7 @@ public final class ServiceTask<T> extends Task<T> {
     /**
      * The <code>localService</code>.
      */
-    private final AbstractService service;
+    private final Service service;
 
     /**
      * The <code>sourceWave</code>.
@@ -72,17 +72,35 @@ public final class ServiceTask<T> extends Task<T> {
     /**
      * Default Constructor only visible by service package.
      * 
-     * @param parameterValues the lsit of function parameter
+     * @param parameterValues the list of function parameter
      * @param method the method to call
      * @param service the service object
      * @param wave the wave to process
      */
-    ServiceTask(final AbstractService service, final Method method, final Object[] parameterValues, final Wave wave) {
+    ServiceTask(final Service service, final Method method, final Object[] parameterValues, final Wave wave) {
         super();
         this.service = service;
         this.method = method;
         this.parameterValues = parameterValues.clone();
         this.wave = wave;
+    }
+
+    /**
+     * Return the full service handler name.
+     * 
+     * ServiceName + method + ( parameters types )
+     * 
+     * @return the full service handler name
+     */
+    public String getServiceHandlerName() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(this.service.getClass().getSimpleName()).append(".");
+        sb.append(this.method.getName()).append("(");
+        for (final Class<?> parameterType : this.method.getParameterTypes()) {
+            sb.append(parameterType.getSimpleName()).append(", ");
+        }
+        sb.append(")");
+        return sb.toString();
     }
 
     /**
@@ -129,39 +147,59 @@ public final class ServiceTask<T> extends Task<T> {
                         .data(WaveData.build(waveItem, res))
                         .build();
                 returnWave.setRelatedWave(this.wave);
-                returnWave.addWaveListener(new ServiceWaveListener());
+                returnWave.addWaveListener(new ServiceTaskReturnWaveListener());
 
                 // Send the return wave to interested components
                 this.service.sendWave(returnWave);
 
             }
 
-            // Finally remove the pending task (even if the return wave isn't processed TO CHECK)
-            // this.service.removePendingTask(this.wave.getWUID());
-
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            LOGGER.error("Unable to perform the service task", e);
+            LOGGER.error("Unable to perform the Service Task " + getServiceHandlerName(), e);
         }
         return res;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateProgress(final long l, final long l2) {
-        super.updateProgress(l, l2);
+    public void updateProgress(final long workDone, final long totalWork) {
+        super.updateProgress(workDone, totalWork);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateProgress(final double v, final double v2) {
-        super.updateProgress(v, v2);
+    public void updateProgress(final double workDone, final double totalWork) {
+        super.updateProgress(workDone, totalWork);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateMessage(final String s) {
-        super.updateMessage(s);
+    public void updateMessage(final String message) {
+        super.updateMessage(message);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateTitle(final String s) {
-        super.updateTitle(s);
+    public void updateTitle(final String title) {
+        super.updateTitle(title);
     }
+
+    /**
+     * The task has complete because the source wave was consumed.
+     * 
+     * Remove the task from the service pending list
+     */
+    public void taskDone() {
+        // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
+        this.service.removePendingTask(this.wave.getWUID());
+    }
+
 }
