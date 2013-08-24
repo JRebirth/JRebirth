@@ -46,6 +46,15 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
     }
 
     /**
+     * Default Constructor.
+     * 
+     * @param fullName the full file name (including path and image extension)
+     */
+    public LocalImage(final String name) {
+        this("", name, null);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

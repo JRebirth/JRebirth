@@ -19,6 +19,8 @@ package org.jrebirth.core.wave;
 
 import java.util.List;
 
+import javafx.beans.property.ObjectProperty;
+
 /**
  * The interface <strong>Wave</strong>.
  * 
@@ -66,6 +68,13 @@ public interface Wave {
      * @param status The status to set.
      */
     void setStatus(final Status status);
+
+    /**
+     * Return the status property to allow binding.
+     * 
+     * @return the status property
+     */
+    ObjectProperty<Status> statusProperty();
 
     /**
      * @return Returns the Wave Unique Identifier.
