@@ -68,6 +68,8 @@ import javafx.scene.web.WebViewBuilder;
 import javafx.util.Duration;
 
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.resource.Resources;
+import org.jrebirth.core.resource.image.LocalImage;
 import org.jrebirth.presentation.model.SlideContent;
 import org.jrebirth.presentation.model.SlideItem;
 import org.jrebirth.presentation.resource.PrezColors;
@@ -323,7 +325,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                 .layoutY(-14.0)
                 .scaleX(0.6)
                 .scaleY(0.6)
-                .image(loadImage("images/HeaderLogo.png"))
+                .image(Resources.create(new LocalImage("images/HeaderLogo.png")).get())
                 .build();
 
         final Polyline pl = PolylineBuilder.create()
@@ -519,7 +521,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
         } else if (item.getImage() != null) {
 
-            final Image image = loadImage(item.getImage());
+            final Image image = Resources.create(new LocalImage(item.getImage())).get();
             final ImageView imageViewer = ImageViewBuilder.create()
                     .styleClass(ITEM_CLASS_PREFIX + item.getLevel())
                     .image(image)

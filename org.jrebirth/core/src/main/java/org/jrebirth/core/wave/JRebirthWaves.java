@@ -24,6 +24,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ProgressBar;
 
+import org.jrebirth.core.service.ServiceTask;
+
 /**
  * The class <strong>JRebirthWaveItem</strong>.
  * 
@@ -67,6 +69,10 @@ public interface JRebirthWaves {
     /******************************/
 
     /** . */
-    WaveItem<ProgressBar> PROGRESS_BAR = new WaveItem<ProgressBar>() {
+    WaveItem<ServiceTask<?>> SERVICE_TASK = new WaveItem<ServiceTask<?>>(false) {
+    };
+
+    /** . */
+    WaveItem<ProgressBar> PROGRESS_BAR = new WaveItem<ProgressBar>(false) {
     };
 }

@@ -78,8 +78,10 @@ public interface WaveReady {
      * 
      * @param waveType the type of wave to send
      * @param waveData the data (key-value
+     * 
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
      */
-    void sendWave(final WaveType waveType, final WaveData<?>... waveData);
+    Wave sendWave(final WaveType waveType, final WaveData<?>... waveData);
 
     /**
      * Send a wave used to call a command.
@@ -88,8 +90,10 @@ public interface WaveReady {
      * 
      * @param commandClass the command class to call
      * @param data the data to transport
+     * 
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
      */
-    void callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data);
+    Wave callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data);
 
     /**
      * Send a wave used to call a command.
@@ -98,8 +102,19 @@ public interface WaveReady {
      * 
      * @param commandClass the command class to call
      * @param waveBean the WaveBean that holds all required wave data
+     * 
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
      */
-    void callCommand(final Class<? extends Command> commandClass, final WaveBean waveBean);
+    Wave callCommand(final Class<? extends Command> commandClass, final WaveBean waveBean);
+
+    /**
+     * Return the return wave type.
+     * 
+     * @param waveType the source wave type
+     * 
+     * @return Returns the waveType for return wave.
+     */
+    WaveType getReturnWaveType(final WaveType waveType);
 
     /**
      * Send a wave used to return data from a service.
@@ -109,8 +124,10 @@ public interface WaveReady {
      * @param serviceClass the service called
      * @param waveType the type of the wave
      * @param data the data to transport
+     * 
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
      */
-    void returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WaveData<?>... data);
+    Wave returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WaveData<?>... data);
 
     /**
      * Send a wave used to display an UI model.
@@ -119,8 +136,10 @@ public interface WaveReady {
      * 
      * @param modelClass the model class to display
      * @param data the data to transport
+     * 
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
      */
-    void attachUi(final Class<? extends Model> modelClass, final WaveData<?>... data);
+    Wave attachUi(final Class<? extends Model> modelClass, final WaveData<?>... data);
 
     /**
      * Process a wave.
