@@ -1,4 +1,4 @@
-if(!JAVAFX_APP_JNLP_SUBDOMAIN){
+if(typeof JAVAFX_APP_JNLP_SUBDOMAIN === 'undefined'){
 	JAVAFX_APP_JNLP_SUBDOMAIN = "apps";
 }
 
