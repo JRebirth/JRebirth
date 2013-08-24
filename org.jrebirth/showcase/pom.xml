@@ -21,6 +21,7 @@
 		<storepass>defaultpass</storepass>
 		<keypass>defaultpass</keypass>
 
+		<permissions>all-permissions</permissions> <!-- sandbox -->
 		<deployUrl>http://showcases.jrebirth.org</deployUrl>
 		<deployPath>${project.artifactId}/${project.version}</deployPath>
 
@@ -34,35 +35,10 @@
 
 	</properties>
 
-<!-- 	<issueManagement>
-		<system>GitHub Issues</system>
-		<url>https://github.com/JRebirth/JRebirth-Showcase</url>
-	</issueManagement>
-
-	<ciManagement>
-		<system>Jenkins</system>
-		<url>http://ci.jrebirth.org/job/JRebirth-Showcase-master/</url>
-	</ciManagement>
-
-	<scm>
-		<connection>scm:git:git://github.com/JRebirth/JRebirth-Showcase.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth-Showcase.git</developerConnection>
-		<url>https://github.com/JRebirth/JRebirth-Showcase</url>
-	</scm>
-
-	<organization>
-		<name>JRebirth Open Group</name>
-		<url>http://www.jrebirth.org</url>
-	</organization>
-
-	<licenses>
-		<license>
-			<name>Apache License</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-			<distribution>repo</distribution>
-			<comments>Version 2.0, January 2004</comments>
-		</license>
-	</licenses> -->
+	<!-- <issueManagement> <system>GitHub Issues</system> <url>https://github.com/JRebirth/JRebirth-Showcase</url> </issueManagement> <ciManagement> <system>Jenkins</system> <url>http://ci.jrebirth.org/job/JRebirth-Showcase-master/</url> 
+		</ciManagement> <scm> <connection>scm:git:git://github.com/JRebirth/JRebirth-Showcase.git</connection> <developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth-Showcase.git</developerConnection> 
+		<url>https://github.com/JRebirth/JRebirth-Showcase</url> </scm> <organization> <name>JRebirth Open Group</name> <url>http://www.jrebirth.org</url> </organization> <licenses> <license> <name>Apache License</name> 
+		<url>http://www.apache.org/licenses/LICENSE-2.0.html</url> <distribution>repo</distribution> <comments>Version 2.0, January 2004</comments> </license> </licenses> -->
 
 	<build>
 		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
@@ -114,7 +90,7 @@
 							<!-- not automated yet -->
 							<!-- <JavaFX-Class-Path>logback-classic-1.0.6.jar logback-core-1.0.6.jar slf4j-api -1.6.5.jar core-0.7.4-SNAPSHOT.jar</JavaFX-Class-Path> -->
 
-							<!-- <Permissions>sandbox</Permissions> -->
+							<Permissions>${permissions}</Permissions>
 							<Codebase>${deployUrl}</Codebase>
 						</manifestEntries>
 						<manifest>
@@ -185,20 +161,10 @@
 			</plugin>
 
 			<!-- Project Quality -->
-<!-- 			<plugin>
-				<groupId>org.codehaus.sonar</groupId>
-				<artifactId>sonar-maven3-plugin</artifactId>
-				<version>3.3.2</version>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.codehaus.sonar</groupId> <artifactId>sonar-maven3-plugin</artifactId> <version>3.3.2</version> </plugin> -->
 		</plugins>
 
-<!-- 		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ftp</artifactId>
-				<version>2.2</version>
-			</extension>
-		</extensions> -->
+		<!-- <extensions> <extension> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-ftp</artifactId> <version>2.2</version> </extension> </extensions> -->
 	</build>
 
 	<dependencies>
@@ -217,21 +183,9 @@
 
 	</dependencies>
 
-<!-- 	<distributionManagement>
-		<repository>
-			<id>JRebirth-Release</id>
-			<name>JRebirth Releases Repository</name>
-			<url>http://repo.jrebirth.org/jrebirth-release-local</url>
-		</repository>
-
-		<snapshotRepository>
-			<id>JRebirth-Snapshot</id>
-			<name>JRebirth Snasphots Repository</name>
-			<url>http://repo.jrebirth.org/jrebirth-snapshot-local</url>
-		</snapshotRepository>
-
-		<site> <id>JRebirth_Sites</id> <name>JRebirth Sites</name> <url>ftp://jrebirth.org/sites/${project.groupId}.${project.artifactId}-${project.version}</url> </site>
-	</distributionManagement> -->
+	<!-- <distributionManagement> <repository> <id>JRebirth-Release</id> <name>JRebirth Releases Repository</name> <url>http://repo.jrebirth.org/jrebirth-release-local</url> </repository> <snapshotRepository> 
+		<id>JRebirth-Snapshot</id> <name>JRebirth Snasphots Repository</name> <url>http://repo.jrebirth.org/jrebirth-snapshot-local</url> </snapshotRepository> <site> <id>JRebirth_Sites</id> <name>JRebirth Sites</name> 
+		<url>ftp://jrebirth.org/sites/${project.groupId}.${project.artifactId}-${project.version}</url> </site> </distributionManagement> -->
 
 	<modules>
 		<module>undoredo</module>
