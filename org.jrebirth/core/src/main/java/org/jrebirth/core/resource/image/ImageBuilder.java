@@ -69,7 +69,18 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      * @return the JavaFX image object
      */
     private Image buildLocalImage(final LocalImage jrImage) {
-        return loadImage(jrImage.path() + Resources.PATH_SEP + jrImage.name() + jrImage.extension());
+        final StringBuilder sb = new StringBuilder();
+
+        if (jrImage.path() != null && !jrImage.path().isEmpty()) {
+            sb.append(jrImage.path()).append(Resources.PATH_SEP);
+        }
+
+        sb.append(jrImage.name());
+
+        if (jrImage.extension() != null) {
+            sb.append(jrImage.extension());
+        }
+        return loadImage(sb.toString());
     }
 
     /**
@@ -85,7 +96,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
 
         Image image = null;
         if (url == null || url.isEmpty()) {
-            LOGGER.error("Image : " + url + " not found !");
+            LOGGER.error("Image : {} not found !", url);
         } else {
             image = new Image(url);
         }
@@ -106,7 +117,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             image = new Image(imageInputStream);
         }
         if (image == null) {
-            LOGGER.error("Image : " + resourceName + " not found into base folder: " + JRebirthParameters.IMAGE_FOLDER.get() + Resources.PATH_SEP);
+            LOGGER.error("Image : {} not found into base folder: {}", resourceName, JRebirthParameters.IMAGE_FOLDER.get() + Resources.PATH_SEP);
         }
         return image;
     }
