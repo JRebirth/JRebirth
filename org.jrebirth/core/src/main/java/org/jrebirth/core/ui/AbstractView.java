@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.ui;
 
-import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
@@ -29,7 +28,6 @@ import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextAreaBuilder;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.PaneBuilder;
 
@@ -63,6 +61,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractView.class);
 
+    /** The base name of all JRebirth Annotation. */
+    private static final String BASE_ANNOTATION_NAME = "org.jrebirth.core.ui.annotation.On";
+
     /** The view model. */
     private final transient M model;
 
@@ -75,7 +76,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     /** The error node used if an error occurred. */
     private transient Pane errorNode;
 
-    /** The callback object to use for annoation event handler. */
+    /** The callback object to use for annotation event handler. */
     private Object callbackObject;
 
     /**
@@ -176,7 +177,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         // For each View class annotation we will attach an event handler to the root node
         for (final Annotation a : this.getClass().getAnnotations()) {
             // Manage only JRebirth OnXxxxx annotations
-            if (a.annotationType().getName().startsWith("org.jrebirth.core.ui.annotation.On")) {
+            if (a.annotationType().getName().startsWith(BASE_ANNOTATION_NAME)) {
                 try {
                     // Process the annotation if the node is not null
                     if (getRootNode() != null && getController() instanceof AbstractController) {
@@ -238,7 +239,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             if (Node.class.isAssignableFrom(property.getType())) {
 
                 // Manage only JRebirth OnXxxxx annotations
-                if (a.annotationType().getName().startsWith("org.jrebirth.core.ui.annotation.On")) {
+                if (a.annotationType().getName().startsWith(BASE_ANNOTATION_NAME)) {
 
                     try {
                         // Retrieve the property value
@@ -413,28 +414,6 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     protected void finalize() throws Throwable {
         getModel().getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_VIEW, null, this.getClass());
         super.finalize();
-    }
-
-    /**
-     * FIXME remove IT !!!
-     * 
-     * MUST ADD a dynamic resource implementation
-     * 
-     * Load an image.
-     * 
-     * @param resourceName the name of the image, path must be separated by '/'
-     * @return the image loaded
-     */
-    public Image loadImage(final String resourceName) {
-        Image image = null;
-        final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceName);
-        if (imageInputStream != null) {
-            image = new Image(imageInputStream);
-        }
-        if (image == null) {
-            LOGGER.error("Image : " + resourceName + " not found !");
-        }
-        return image;
     }
 
 }
