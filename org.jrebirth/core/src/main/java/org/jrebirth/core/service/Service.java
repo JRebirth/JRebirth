@@ -17,11 +17,12 @@
  */
 package org.jrebirth.core.service;
 
+import java.util.Collection;
+
 import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.wave.Wave;
 
 /**
- * 
  * The interface <strong>Service</strong>.
  * 
  * The contract for the service layer.
@@ -38,5 +39,24 @@ public interface Service extends FacadeReady<Service> {
      * @param <T> The type of the object to return must be compatible with the WaveType contract taht call this service
      */
     <T extends Object> void returnData(final Wave wave);
+
+    /**
+     * Get pending task list.
+     */
+    Collection<ServiceTask<?>> getPendingTaskList();
+
+    /**
+     * Remove a task from the pending list.
+     * 
+     * @param taskKey the key of the task, commonly the WaveUID
+     */
+    void removePendingTask(final String taskKey);
+
+    /**
+     * Retrieve a task from the pending list.
+     * 
+     * @param taskKey the key of the task, commonly the WaveUID
+     */
+    ServiceTask<?> getPendingTask(final String taskKey);
 
 }

@@ -17,22 +17,16 @@
  */
 package org.jrebirth.core.service;
 
+import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveListener;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * The class <strong>ServiceWaveListener</strong>.
+ * The class <strong>ServiceReturnWaveListener</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class ServiceWaveListener implements WaveListener {
-
-    /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceWaveListener.class);
+public final class ServiceTaskWaveListener implements WaveListener {
 
     /**
      * {@inheritDoc}
@@ -71,12 +65,9 @@ public final class ServiceWaveListener implements WaveListener {
      */
     @Override
     public void waveConsumed(final Wave wave) {
-        if (wave.getRelatedWave() != null) {
-            // Return wave has been consumed, so the triggered wave can be consumed too
-            LOGGER.trace(wave.getRelatedClass().getSimpleName() + " Consumes wave " + wave.getRelatedWave().toString());
 
-            wave.getRelatedWave().setStatus(Status.Consumed);
-        }
+        // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
+        wave.get(JRebirthWaves.SERVICE_TASK).taskDone();
     }
 
     /**
