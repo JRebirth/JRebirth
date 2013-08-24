@@ -60,5 +60,5 @@
 	A value of "prompt-run" means to ask the user if he/she wants to download and run the updated version, or cancel and abort runing the application.
 
 -->	
-	<update check="$updateCheck" policy="$updatePolicy">
+	<update check="$updateCheck" policy="$updatePolicy" />
 </jnlp>
