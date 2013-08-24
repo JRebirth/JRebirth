@@ -13,6 +13,7 @@
 
 	<properties>
 
+		<permissions>all-permissions</permissions> <!-- sandbox -->
 		<deployUrl>http://apps.jrebirth.org</deployUrl>
 		<deployPath>${project.artifactId}/${project.version}</deployPath>
 
@@ -50,26 +51,28 @@
 				<!-- <executions> <execution> <goals> <goal>sign</goal> </goals> </execution> </executions> -->
 				<configuration>
 					<archive>
-
 						<manifestEntries>
 							<JavaFX-Version>2.0</JavaFX-Version>
-							<Main-Class>org.jrebirth.analyzer.JRebirthAnalyzer</Main-Class>
+							<Main-Class>${appClass}</Main-Class>
+							<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
 
-							<!-- <implementation-vendor>seb</implementation-vendor> -->
-							<!-- <implementation-title>JRebirthAnalyzer</implementation-title> -->
-							<!-- <implementation-version>1.0</implementation-version> -->
-							<JavaFX-Application-Class>org.jrebirth.analyzer.JRebirthAnalyzer</JavaFX-Application-Class>
+							<!-- <implementation-vendor>JRebirth</implementation-vendor> <implementation-title>JRebirthAnalyzer</implementation-title> <implementation-version>1.0</implementation-version> -->
 
-							<JavaFX-Class-Path>${classpath}</JavaFX-Class-Path>
-							<!-- implementation-vendor: I implementation-title: Jrebirth demo implementation-version: 1.0 JavaFX-Application-Class: org.jrebirth.demo.JRebirthDemo Created-By: Maven Packager Main-Class: com/javafx/main/Main -->
+							<!-- not automated yet -->
+							<JavaFX-Class-Path>logback-classic-1.0.6.jar logback-core-1.0.6.jar slf4j-api
+								-1.6.5.jar core-0.7.5-SNAPSHOT.jar</JavaFX-Class-Path>
+
+							<Permissions>${permissions}</Permissions>
+							<Codebase>${deployUrl}</Codebase>
 						</manifestEntries>
 						<manifest>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 							<addClasspath>true</addClasspath>
-
 						</manifest>
 					</archive>
+
+
 					<!-- <keystore>jrebirth.jks</keystore> <alias>jrebirth</alias> <storepass>gojava</storepass> <signedjar>${project.build.directory}/signed/${project.build.finalName}.jar</signedjar> <verify>true</verify> -->
 
 				</configuration>
@@ -112,6 +115,7 @@
 
 						<mainClass>${appClass}</mainClass>
 						<offlineAllowed>true</offlineAllowed>
+						<allPermissions>true</allPermissions>
 					</jnlp>
 
 					<sign>
