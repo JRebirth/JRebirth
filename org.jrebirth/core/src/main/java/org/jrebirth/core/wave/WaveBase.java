@@ -25,6 +25,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+
 import org.jrebirth.core.exception.CoreRuntimeException;
 
 import org.slf4j.Logger;
@@ -50,8 +53,8 @@ public class WaveBase implements Wave {
     /** The Wave timestamp. */
     private final long timestamp;
 
-    /** The wave status. */
-    private Status status = Status.Created;
+    /** The wave status (can be bound). */
+    private final ObjectProperty<Status> statusProperty = new SimpleObjectProperty<>(Status.Created);
 
     /** The group of the wave used to dispatch the right event. */
     private WaveGroup waveGroup = WaveGroup.UNDEFINED;
@@ -363,8 +366,16 @@ public class WaveBase implements Wave {
     @Override
     public Status getStatus() {
         synchronized (this) {
-            return this.status;
+            return this.statusProperty.get();
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ObjectProperty<Status> statusProperty() {
+        return this.statusProperty;
     }
 
     /**
@@ -373,10 +384,10 @@ public class WaveBase implements Wave {
     @Override
     public void setStatus(final Status status) {
         synchronized (this) {
-            if (this.status == status) {
+            if (this.statusProperty.get() == status) {
                 throw new CoreRuntimeException("The status " + status.toString() + " has been already set for this wave " + toString());
             } else {
-                this.status = status;
+                this.statusProperty.set(status);
                 fireStatusChanged();
             }
         }
@@ -390,7 +401,7 @@ public class WaveBase implements Wave {
 
         for (final WaveListener waveListener : this.waveListeners) {
 
-            switch (this.status) {
+            switch (this.statusProperty.get()) {
 
                 case Created:
                     waveListener.waveCreated(this);

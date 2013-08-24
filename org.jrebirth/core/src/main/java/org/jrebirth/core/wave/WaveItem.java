@@ -42,24 +42,55 @@ public class WaveItem<T> {
 
     private String name;
 
+    private boolean isParameter;
+
     /**
-     * Private Constructor.
+     * Default Constructor.
+     * 
+     * Set the name to null and the the isParameter flag to true
      */
     public WaveItem() {
+        this(null, true);
+    }
+
+    /**
+     * Default Constructor.
+     * 
+     * Set the isParameter flag to true
+     * 
+     * @param name the unique name of this wave item
+     */
+    public WaveItem(final String name) {
+        this(name, true);
+    }
+
+    /**
+     * Default Constructor.
+     * 
+     * Set the name to null
+     * 
+     * @param isParameter the flag that indicates if this WaveItem must be considered by wave handlers
+     */
+    public WaveItem(final boolean isParameter) {
+        this(null, isParameter);
+    }
+
+    /**
+     * Constructor with all parameters.
+     * 
+     * @param name the unique name of this wave item
+     * @param isParameter the flag that indicates if this WaveItem must be considered by wave handlers
+     */
+    public WaveItem(final String name, final boolean isParameter) {
         this.itemType = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+
+        setParameter(isParameter);
+        setName(name);
 
         // Ensure that the uid will be unique at runtime
         synchronized (WaveItem.class) {
             setUid(++idGenerator);
         }
-    }
-
-    /**
-     * Private Constructor.
-     */
-    public WaveItem(final String name) {
-        this();
-        this.name = name;
     }
 
     // /**
@@ -155,6 +186,20 @@ public class WaveItem<T> {
 
     private void setName(final String name) {
         this.name = name;
+    }
+
+    /**
+     * @return Returns the isParameter.
+     */
+    public boolean isParameter() {
+        return this.isParameter;
+    }
+
+    /**
+     * @param isParameter The isParameter to set.
+     */
+    public void setParameter(final boolean isParameter) {
+        this.isParameter = isParameter;
     }
 
 }
