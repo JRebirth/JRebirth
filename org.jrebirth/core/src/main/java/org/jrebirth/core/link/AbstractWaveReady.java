@@ -60,7 +60,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @param <R> the class type of the subclass
  */
-public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends AbstractReady<R> {
+public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends AbstractReady<R> implements WaveReady {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractWaveReady.class);
@@ -111,12 +111,9 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
     }
 
     /**
-     * Return the return wave type.
-     * 
-     * @param waveType the source wave type
-     * 
-     * @return Returns the waveType for return wave.
+     * {@inheritDoc}
      */
+    @Override
     public final WaveType getReturnWaveType(final WaveType waveType) {
         return this.returnWaveTypeMap.get(waveType);
     }
@@ -156,48 +153,50 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public final void sendWave(final WaveType waveType, final WaveData<?>... waveData) {
-        sendWaveIntoJit(createWave(WaveGroup.UNDEFINED, waveType, null, waveData));
+    public final Wave sendWave(final WaveType waveType, final WaveData<?>... waveData) {
+        return sendWaveIntoJit(createWave(WaveGroup.UNDEFINED, waveType, null, waveData));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void callCommand(final Class<? extends Command> commandClass, final WaveBean waveBean) {
-        sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, waveBean));
+    public final Wave callCommand(final Class<? extends Command> commandClass, final WaveBean waveBean) {
+        return sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, waveBean));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data) {
-        sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, data));
+    public final Wave callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data) {
+        return sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, data));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WaveData<?>... data) {
-        sendWaveIntoJit(createWave(WaveGroup.RETURN_DATA, waveType, serviceClass, data));
+    public final Wave returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WaveData<?>... data) {
+        return sendWaveIntoJit(createWave(WaveGroup.RETURN_DATA, waveType, serviceClass, data));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void attachUi(final Class<? extends Model> modelClass, final WaveData<?>... data) {
-        sendWaveIntoJit(createWave(WaveGroup.ATTACH_UI, null, modelClass, data));
+    public final Wave attachUi(final Class<? extends Model> modelClass, final WaveData<?>... data) {
+        return sendWaveIntoJit(createWave(WaveGroup.ATTACH_UI, null, modelClass, data));
     }
 
     /**
      * Send the given wave using the JRebirth Thread.
      * 
      * @param wave the wave to send
+     * 
+     * @return the wave sent to JIT (with Sent status)
      */
-    private void sendWaveIntoJit(final Wave wave) {
+    private Wave sendWaveIntoJit(final Wave wave) {
 
         wave.setStatus(Status.Sent);
 
@@ -208,6 +207,8 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
                 getNotifier().sendWave(wave);
             }
         });
+
+        return wave;
     }
 
     /**
@@ -328,7 +329,10 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
             // Build parameter list of the searched method
             final List<Object> parameterValues = new ArrayList<>();
             for (final WaveData<?> wd : wave.getWaveItems()) {
-                parameterValues.add(wd.getValue());
+                // Add only wave items defined as parameter
+                if (wd.getKey().isParameter()) {
+                    parameterValues.add(wd.getValue());
+                }
             }
             // Add the current wave to process
             parameterValues.add(wave);
@@ -340,7 +344,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
                 method.invoke(this, parameterValues.toArray());
             }
         } catch (final NoSuchMethodException e) {
-            e.printStackTrace();
+            LOGGER.info("Custom method not found {}", e.getMessage());
             // If no method was found, call the default method
             processWave(wave);
 

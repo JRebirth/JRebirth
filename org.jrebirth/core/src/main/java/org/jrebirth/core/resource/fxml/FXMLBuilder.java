@@ -81,7 +81,7 @@ public final class FXMLBuilder extends AbstractResourceBuilder<FXMLItem, FXMLPar
         // sb.append(FXML_EXT);
         // }
 
-        return FXMLUtils.loadFXML(null, "");
+        return FXMLUtils.loadFXML(null, sb.toString());
     }
 
     /**

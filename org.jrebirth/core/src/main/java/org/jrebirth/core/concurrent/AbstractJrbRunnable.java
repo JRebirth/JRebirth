@@ -72,7 +72,7 @@ public abstract class AbstractJrbRunnable implements Runnable {
      */
     @Override
     public String toString() {
-        return "AbstractJrbRunnable - " + this.runnableName;
+        return "JRebirthRunnable - " + this.runnableName;
     }
 
 }
