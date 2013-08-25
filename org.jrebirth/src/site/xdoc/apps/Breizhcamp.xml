@@ -50,7 +50,7 @@
 			</p>
 			<p>
 				<strong>Launch by Java Webstart:</strong>
-				<a onclick="return launchApplication();">Click to launch this app as webstart</a>
+				<a id="launchApp" href="#" title="Launch Application with Java WebStart">Click to launch this application with Java WebStart</a>
 			</p>
 			<p>
 				Press F11 to activate fullscreen mode, use left-click to show the next slide, right click for previous slide
