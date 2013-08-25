@@ -15,6 +15,14 @@ function launchApplication(jnlpfile) {
 	return false;
 }
 function javafxEmbed() {
+
+	var startAppAnchor = document.getElementById("launchApp");
+	if(startAppAnchor != null){
+		startAppAnchor.onclick = function(){
+			return launchApplication();
+		}
+	}
+	
 	dtjava.embed(
 		{
 			url : 'http://'+JAVAFX_APP_JNLP_SUBDOMAIN+'.jrebirth.org/' + JAVAFX_APP_JNLP,
