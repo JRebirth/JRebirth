@@ -110,13 +110,7 @@ public final class JRebirthThread extends Thread {
     @SuppressWarnings("unchecked")
     public void runIntoJTP(final Runnable runnable) {
         final Future<Void> future = (Future<Void>) getFacade().getExecutorService().submit(runnable);
-
-        // try {
-        // // Force the future call to retrieve the ExecutionException
-        // future.get(); // TO CHECK !!
-        // } catch (InterruptedException | ExecutionException e) {
-        // LOGGER.error("An error occurred into the JRebirth Thread pool", e);
-        // }
+        LOGGER.trace("Runnable submitted with hashCode={}", future.hashCode());
     }
 
     /**

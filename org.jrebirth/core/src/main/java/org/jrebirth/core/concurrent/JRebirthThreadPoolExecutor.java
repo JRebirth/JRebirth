@@ -60,7 +60,7 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor {
             try {
                 final Object result = ((Future<?>) r).get();
                 if (result != null) {
-                    LOGGER.trace("Thread pool returned object : {}", result.toString());
+                    LOGGER.trace("Future (hashcode={}) returned object : {}", r.hashCode(), result.toString());
                 }
             } catch (final CancellationException | ExecutionException e) {
                 rootCause = e.getCause();
@@ -68,8 +68,11 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor {
                 Thread.currentThread().interrupt(); // ignore/reset
             }
         }
-        if (rootCause != null) {
+        if (t != null) {
             LOGGER.error("JTP returned an error", t);
+        }
+        if (rootCause != null) {
+            LOGGER.error("JTP returned an error with rootCause =>", rootCause);
         }
     }
 }

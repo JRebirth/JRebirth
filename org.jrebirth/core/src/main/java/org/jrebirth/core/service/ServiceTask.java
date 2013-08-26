@@ -25,7 +25,6 @@ import java.util.List;
 import javafx.concurrent.Task;
 
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveBuilder;
@@ -110,7 +109,7 @@ public final class ServiceTask<T> extends Task<T> {
      */
     @SuppressWarnings("unchecked")
     @Override
-    protected T call() throws WaveException, CoreException {
+    protected T call() throws CoreException {
         T res = null;
         try {
 
