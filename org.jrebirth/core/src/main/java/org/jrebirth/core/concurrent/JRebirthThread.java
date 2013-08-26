@@ -19,7 +19,6 @@ package org.jrebirth.core.concurrent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -112,12 +111,12 @@ public final class JRebirthThread extends Thread {
     public void runIntoJTP(final Runnable runnable) {
         final Future<Void> future = (Future<Void>) getFacade().getExecutorService().submit(runnable);
 
-        try {
-            // Force the future call to retrieve the ExecutionException
-            future.get(); // TO CHECK !!
-        } catch (InterruptedException | ExecutionException e) {
-            LOGGER.error("An error occurred into the JRebirth Thread pool", e);
-        }
+        // try {
+        // // Force the future call to retrieve the ExecutionException
+        // future.get(); // TO CHECK !!
+        // } catch (InterruptedException | ExecutionException e) {
+        // LOGGER.error("An error occurred into the JRebirth Thread pool", e);
+        // }
     }
 
     /**
