@@ -42,6 +42,8 @@ public interface Service extends FacadeReady<Service> {
 
     /**
      * Get pending task list.
+     * 
+     * @return the list of pending tasks
      */
     Collection<ServiceTask<?>> getPendingTaskList();
 
@@ -56,6 +58,8 @@ public interface Service extends FacadeReady<Service> {
      * Retrieve a task from the pending list.
      * 
      * @param taskKey the key of the task, commonly the WaveUID
+     * 
+     * @return the pending task for the given key (basically the Wave UID)
      */
     ServiceTask<?> getPendingTask(final String taskKey);
 
