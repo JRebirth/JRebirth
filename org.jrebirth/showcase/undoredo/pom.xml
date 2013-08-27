@@ -5,8 +5,10 @@
 		<artifactId>showcase</artifactId>
 		<version>0.7.5-SNAPSHOT</version>
 	</parent>
+	
 	<groupId>org.jrebirth.showcase</groupId>
 	<artifactId>undoredo</artifactId>
+	
 	<name>Undo Redo</name>
 	<description>Sample application to describe Undo Redo features</description>
 

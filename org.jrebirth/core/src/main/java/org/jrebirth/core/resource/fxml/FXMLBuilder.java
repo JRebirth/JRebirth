@@ -61,11 +61,11 @@ public final class FXMLBuilder extends AbstractResourceBuilder<FXMLItem, FXMLPar
     /**
      * Build a FXML component taht embed a node and its FXML controller.
      * 
-     * @param fp the fxmlparams
+     * @param fxmlParam the fxmlparams
      * 
      * @return the JavaFX image object
      */
-    private FXMLComponent buildFXMLComponent(final FXML fp) {
+    private FXMLComponent buildFXMLComponent(final FXML fxmlParam) {
 
         final StringBuilder sb = new StringBuilder();
 

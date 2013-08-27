@@ -251,7 +251,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
                         }
 
                     } catch (IllegalArgumentException | IllegalAccessException e) {
-                        LOGGER.debug("Impossible to process annotation for property : {}-{}", this.getClass().getName(), property.getName());
+                        LOGGER.debug("Impossible to process annotation for Node property : {}-{}", this.getClass().getName(), property.getName());
                     }
                 }
 
@@ -269,7 +269,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
                     }
 
                 } catch (IllegalArgumentException | IllegalAccessException e) {
-                    LOGGER.debug("Impossible to process annotation for property : {}-{}", this.getClass().getName(), property.getName());
+                    LOGGER.debug("Impossible to process annotation for Animation property : {}-{}", this.getClass().getName(), property.getName());
                 }
 
             }
@@ -332,6 +332,8 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Build the root node.
+     * 
+     * @return the root node of the view
      * 
      * @throws CoreException if introspection fails
      */

@@ -20,10 +20,11 @@ public enum WaveItems implements IWaveItem {
     });
 
     /**
+     * Private constructor.
      * 
-     * @param wi
+     * @param wi the wave item to initialize
      */
-    WaveItems(final WaveItem<?> wi) {
+    private WaveItems(final WaveItem<?> wi) {
         WaveItem.init(this, wi);
     }
 
