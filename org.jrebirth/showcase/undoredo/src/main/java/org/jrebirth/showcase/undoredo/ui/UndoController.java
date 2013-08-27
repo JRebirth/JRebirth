@@ -62,9 +62,9 @@ public final class UndoController extends DefaultController<UndoModel, UndoView>
         linkCommand(getView().getUndoButton(), MouseEvent.MOUSE_CLICKED, UndoCommand.class, UndoModel.stackName);
         linkCommand(getView().getRedoButton(), MouseEvent.MOUSE_CLICKED, RedoCommand.class, UndoModel.stackName);
 
-        linkCommand(getView().getAddCircleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WaveData.build(UndoAppWaves.shapeType, ShapeType.Circle), UndoModel.stackName);
-        linkCommand(getView().getAddSquareButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WaveData.build(UndoAppWaves.shapeType, ShapeType.Square), UndoModel.stackName);
-        linkCommand(getView().getAddRectangleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WaveData.build(UndoAppWaves.shapeType, ShapeType.Rectangle), UndoModel.stackName);
+        linkCommand(getView().getAddCircleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WaveData.build(UndoAppWaves.SHAPE_TYPE, ShapeType.Circle), UndoModel.stackName);
+        linkCommand(getView().getAddSquareButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WaveData.build(UndoAppWaves.SHAPE_TYPE, ShapeType.Square), UndoModel.stackName);
+        linkCommand(getView().getAddRectangleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WaveData.build(UndoAppWaves.SHAPE_TYPE, ShapeType.Rectangle), UndoModel.stackName);
 
     }
 

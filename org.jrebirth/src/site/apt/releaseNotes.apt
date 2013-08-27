@@ -8,7 +8,7 @@
 
 Release Notes
 
-* 0.7.4 - Core Release - 2013-04-22
+* 0.7.4 - Core Release - 2013-07-22
 
  This version must be used instead of 0.7.3 because a lot of API changes and bug fixes is provided.
  JRebirth's Team is growing and we are now proud to have our own Forge plugin to build application faster (Thanks to {{{/team-list.html#jr3}Raj}} & {{{/team-list.html#jr4}Guru}})

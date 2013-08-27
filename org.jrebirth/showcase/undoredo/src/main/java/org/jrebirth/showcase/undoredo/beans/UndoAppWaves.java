@@ -20,12 +20,12 @@ package org.jrebirth.showcase.undoredo.beans;
 import org.jrebirth.core.wave.WaveItem;
 
 /**
- * The Interface UndoAppWaves is sued to store WaveItems and WaveTypes.
+ * The Interface UndoAppWaves is used to store WaveItems and WaveTypes.
  */
 public interface UndoAppWaves {
 
     /** The shape type used to define which shape to build by the same command. */
-    WaveItem<ShapeType> shapeType = new WaveItem<ShapeType>() {
+    WaveItem<ShapeType> SHAPE_TYPE = new WaveItem<ShapeType>() {
     };
 
 }
