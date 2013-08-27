@@ -17,6 +17,7 @@
  */
 package org.jrebirth.core.resource.parameter;
 
+import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.resource.AbstractBaseParams;
 import org.jrebirth.core.resource.font.CustomFontName;
 import org.jrebirth.core.resource.font.FamilyFont;
@@ -104,10 +105,29 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
             res = new CustomFontName(serializedObject);
         } else if (this.object instanceof FamilyFont) {
             res = new CustomFontName(serializedObject);
+        } else if (this.object instanceof Class<?>) {
+            res = parseClassParameter(serializedObject);
         } else {
             res = parsePrimitive(serializedObject);
         }
 
+        return res;
+    }
+
+    /**
+     * Parse a class definition by calling to call Class.forName.
+     * 
+     * @param serializedObject the full class name
+     * 
+     * @return the class object
+     */
+    private Object parseClassParameter(final String serializedObject) {
+        Object res = null;
+        try {
+            res = Class.forName(serializedObject);
+        } catch (final ClassNotFoundException e) {
+            throw new CoreRuntimeException("Impossible to load class " + serializedObject, e);
+        }
         return res;
     }
 

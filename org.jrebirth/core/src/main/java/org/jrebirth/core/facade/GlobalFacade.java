@@ -36,6 +36,11 @@ import org.jrebirth.core.ui.Model;
 public interface GlobalFacade {
 
     /**
+     * @return Returns the componentFactory.
+     */
+    ComponentFactory getComponentFactory();
+
+    /**
      * @return Returns the notifier.
      */
     Notifier getNotifier();

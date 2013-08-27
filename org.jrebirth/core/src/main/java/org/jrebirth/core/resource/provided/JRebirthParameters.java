@@ -17,6 +17,7 @@
  */
 package org.jrebirth.core.resource.provided;
 
+import org.jrebirth.core.facade.DefaultComponentFactory;
 import org.jrebirth.core.resource.color.WebColor;
 import org.jrebirth.core.resource.image.ImageExtension;
 import org.jrebirth.core.resource.image.LocalImage;
@@ -40,6 +41,9 @@ public interface JRebirthParameters {
 
     /** Developer provides more information when dynamic API is broken (Wave Contract). */
     ParameterItem<Boolean> DEVELOPER_MODE = create("developerMode", false);
+
+    /** . */
+    ParameterItem<Class> COMPONENT_FACTORY = create("componentFactory", (Class) DefaultComponentFactory.class);
 
     /** Fir Close Retry Delay in milliseconds, time to wait when application try to close the first time. */
     ParameterItem<Integer> CLOSE_RETRY_DELAY_FIRST = create("closeRetryDelayFirst", 4000);
