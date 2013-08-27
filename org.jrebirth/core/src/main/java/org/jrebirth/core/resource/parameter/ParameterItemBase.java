@@ -57,7 +57,7 @@ public final class ParameterItemBase<T> implements ParameterItem<T> {
      */
     @Override
     public void define(final T forcedValue) {
-        // The default programmtic value (stored into ObjectParameter) is not updated but overridden into the local map
+        // The default programmatic value (stored into ObjectParameter) is not updated but overridden into the local map
         builder().set(this, forcedValue);
     }
 

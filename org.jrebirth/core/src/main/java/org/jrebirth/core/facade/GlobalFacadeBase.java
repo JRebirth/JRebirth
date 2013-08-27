@@ -25,6 +25,7 @@ import org.jrebirth.core.concurrent.JRebirthThreadPoolExecutor;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.link.Notifier;
 import org.jrebirth.core.link.NotifierBase;
+import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.util.ClassUtility;
 
 import org.slf4j.Logger;
@@ -51,6 +52,9 @@ public class GlobalFacadeBase implements GlobalFacade {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalFacadeBase.class);
+
+    /** The factory used to build all component. */
+    private final ComponentFactory componentFactory;
 
     /** The application. */
     private final transient JRebirthApplication<?> application;
@@ -80,6 +84,16 @@ public class GlobalFacadeBase implements GlobalFacade {
      */
     public GlobalFacadeBase(final JRebirthApplication<?> application) {
         super();
+
+        ComponentFactory factory;
+        try {
+            factory = (ComponentFactory) JRebirthParameters.COMPONENT_FACTORY.get().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            LOGGER.error("Impossible to load the custom ComponentFactory, will use the default one", e);
+            factory = new DefaultComponentFactory();
+        }
+        // Attach the right Component Factory
+        this.componentFactory = factory;
 
         // Link the application
         this.application = application;
@@ -128,6 +142,14 @@ public class GlobalFacadeBase implements GlobalFacade {
             sb.append(eventData.length > 0 ? eventData[0] : "");
             LOGGER.info(sb.toString());
         }
+    }
+
+    /**
+     * @return Returns the componentFactory.
+     */
+    @Override
+    public ComponentFactory getComponentFactory() {
+        return this.componentFactory;
     }
 
     /**
