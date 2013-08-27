@@ -48,7 +48,7 @@ public class CreateShapeCommand extends AbstractUndoableCommand {
      */
     @Override
     public void init(final Wave wave) {
-        this.shapeType = wave.get(UndoAppWaves.shapeType);
+        this.shapeType = wave.get(UndoAppWaves.SHAPE_TYPE);
 
     }
 

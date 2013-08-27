@@ -40,8 +40,10 @@ public class WaveItem<T> {
     /** The type of the related object registered by this wave item. */
     private final Type itemType;
 
+    /** The WaveItem unique name. */
     private String name;
 
+    /** Flag that indicates if the WaveItem muste be considered as a method parameter. */
     private boolean isParameter;
 
     /**
@@ -179,11 +181,22 @@ public class WaveItem<T> {
         return getUid();
     }
 
+    /**
+     * Initialize a WaveItem for a WaveItems
+     * 
+     * @param waveItems the enum wave item
+     * @param wi the real waveItem
+     */
     public static void init(final WaveItems waveItems, final WaveItem<?> wi) {
         wi.setName(waveItems.toString());
 
     }
 
+    /**
+     * Set the name (optionally).
+     * 
+     * @param name the name to set
+     */
     private void setName(final String name) {
         this.name = name;
     }

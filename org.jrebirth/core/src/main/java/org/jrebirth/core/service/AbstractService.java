@@ -49,6 +49,8 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class AbstractService extends AbstractWaveReady<Service> implements Service {
 
+    private static final String RATIO_SEPARATOR = " / ";
+
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractService.class);
 
@@ -190,7 +192,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
     public void updateProgress(final Wave wave, final long workDone, final long totalWork) {
 
         // Increase the task progression
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("ServiceTask Workdone " + workDone + " / " + totalWork) {
+        JRebirth.runIntoJAT(new AbstractJrbRunnable("ServiceTask Workdone (lng) " + workDone + RATIO_SEPARATOR + totalWork) {
 
             /**
              * {@inheritDoc}
@@ -213,7 +215,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
     public void updateProgress(final Wave wave, final double workDone, final double totalWork) {
 
         // Increase the task progression
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("ServiceTask Workdone " + workDone + " / " + totalWork) {
+        JRebirth.runIntoJAT(new AbstractJrbRunnable("ServiceTask Workdone (dbl) " + workDone + RATIO_SEPARATOR + totalWork) {
 
             /**
              * {@inheritDoc}
