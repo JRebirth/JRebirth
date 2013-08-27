@@ -71,9 +71,6 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         // Synchronize the registration
         synchronized (this.singletonMap) {
 
-            // Check if the class of the object is already stored into the singleton map
-            // if (!this.singletonMap.containsKey(readyObject.getClass())) {
-
             // reload the key
             readyObject.setKey(buildKey((Class<R>) readyObject.getClass(), keyPart));
 
@@ -108,7 +105,6 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
     @Override
     public <E extends R> E retrieve(final UniqueKey<E> uniqueKey) {
         E component;
@@ -130,7 +126,6 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         E readyObject;
 
         // retrieve the component from the singleton map
-
         // It the component is already registered, get it to return it
         if (exists(clazz, keyPart)) {
 
@@ -164,16 +159,6 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             }
         }
 
-        /*
-         * } else {
-         * 
-         * synchronized (this.multitonMap) { // If the component isn't contained into a map, create and register it if (!exists(clazz, key)) { try { // Build an instance and register it
-         * register(build(clazz, key), key); } catch (final CoreException ce) { getGlobalFacade().getLogger().error(ce.getMessage()); getGlobalFacade().getLogger().error("Error while building " +
-         * clazz.getCanonicalName() + " instance"); throw new CoreRuntimeException("Error while building " + clazz.getCanonicalName() + " instance", ce); } }
-         * 
-         * // otherwise retrieve from the multiton map (which cannot be null) readyObject = (E) this.multitonMap.get(clazz).get(key[0]); } }
-         */
-
         return readyObject;
     }
 
@@ -183,30 +168,14 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     @Override
     public <E extends R> boolean exists(final Class<E> clazz, final Object... keyPart) {
         boolean res;
-        /*
-         * if (key.length > 0) { // Check from multiton map final Map<UniqueKey, R> mMap = this.multitonMap.get(clazz); res = mMap != null && mMap.containsKey(key[0]);// && mMap.get(key[0]) != null; }
-         * else {
-         */
+
         synchronized (this.singletonMap) {
             // Check from singleton map it he key exists and if the weak reference is not null
             res = this.singletonMap.containsKey(buildKey((Class<R>) clazz, keyPart)); // && this.singletonMap.get(clazz) != null;
         }
 
-        // }
         return res;
     }
-
-    // /**
-    // * Build a key object to register this object.
-    // *
-    // * @param clazz the class of the object to build its key
-    // * @param keyPart the unique key (could be composed of many keyPart) or null for singleton
-    // *
-    // * @return the key built
-    // */
-    // private <E extends R> UniqueKey<R> buildKey(final Class<R> clazz, final Object... keyPart) {
-    // return KeyBuilder.buildKey(clazz, keyPart);
-    // }
 
     /**
      * Build a new instance of the ready object class.
@@ -224,7 +193,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     protected <E extends R> E build(final Class<E> clazz, final Object... keyPart) throws CoreException {
         try {
             // Build a new instance of the component
-            final E readyObject = clazz.newInstance();
+            final E readyObject = getGlobalFacade().getComponentFactory().buildComponent(clazz);
 
             // Retrieve the right event type to track
             JRebirthEventType type = JRebirthEventType.NONE;
@@ -247,7 +216,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             // Component Ready !
             return readyObject;
 
-        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
+        } catch (CoreException | IllegalArgumentException | SecurityException e) {
             final String msg = "Impossible to create the class " + clazz.getName();
             LOGGER.error(msg, e);
             throw new CoreException(msg, e);
