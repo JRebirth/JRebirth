@@ -17,34 +17,66 @@
  */
 package org.jrebirth.core.resource.font;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
+
 import org.jrebirth.core.resource.AbstractBaseParams;
 
 /**
- * The interface <strong>AbstractBaseColor</strong>.
+ * The interface <strong>AbstractBaseFont</strong>.
  * 
  * @author Sébastien Bordes
- * 
  */
 public abstract class AbstractBaseFont extends AbstractBaseParams implements FontParams {
 
     /** The opacity of the color. */
-    private final FontName name;
+    private final ObjectProperty<FontName> nameProperty = new SimpleObjectProperty<>();
+    /** the font size. */
+    protected final DoubleProperty sizeProperty = new SimpleDoubleProperty();
 
     /**
      * Default Constructor.
      * 
-     * @param name the name to use.
+     * @param name the name to use
+     * @param size the default font size
      */
-    public AbstractBaseFont(final FontName name) {
+    public AbstractBaseFont(final FontName name, final double size) {
         super();
-        this.name = name;
+        this.nameProperty.set(name);
+        this.sizeProperty.set(size);
     }
 
     /**
      * @return Returns the font name.
      */
-    protected FontName name() {
-        return this.name;
+    public FontName name() {
+        return this.nameProperty.get();
     }
 
+    /**
+     * @return Returns the font name property.
+     */
+    public ObjectProperty<FontName> nameProperty() {
+        return this.nameProperty;
+    }
+
+    /**
+     * Return the font size.
+     * 
+     * @return the font size
+     */
+    public double size() {
+        return this.sizeProperty.get();
+    }
+
+    /**
+     * Return the font size property.
+     * 
+     * @return the font size property
+     */
+    public DoubleProperty sizeProperty() {
+        return this.sizeProperty;
+    }
 }

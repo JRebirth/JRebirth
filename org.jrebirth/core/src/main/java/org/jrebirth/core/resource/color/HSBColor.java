@@ -89,4 +89,12 @@ public class HSBColor extends AbstractBaseColor {
         return this.brightness;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void parse(final String[] parameters) {
+        // FIXME
+    }
+
 }

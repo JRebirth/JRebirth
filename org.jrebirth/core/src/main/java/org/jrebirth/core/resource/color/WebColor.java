@@ -17,6 +17,9 @@
  */
 package org.jrebirth.core.resource.color;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  * The class <strong>WebColor</strong> used to create a Web Color.
  * 
@@ -25,7 +28,7 @@ package org.jrebirth.core.resource.color;
 public class WebColor extends AbstractBaseColor {
 
     /** The hexadecimal string value [0-9A-F]{6} (without 0x or #). */
-    private final String hex;
+    private final StringProperty hexProperty = new SimpleStringProperty();
 
     /**
      * Default Constructor.
@@ -34,7 +37,7 @@ public class WebColor extends AbstractBaseColor {
      */
     public WebColor(final String hex) {
         super();
-        this.hex = hex;
+        this.hexProperty.set(hex);
     }
 
     /**
@@ -45,7 +48,7 @@ public class WebColor extends AbstractBaseColor {
      */
     public WebColor(final String hex, final double opacity) {
         super(opacity);
-        this.hex = hex;
+        this.hexProperty.set(hex);
     }
 
     /**
@@ -54,7 +57,52 @@ public class WebColor extends AbstractBaseColor {
      * @return Returns the hexadecimal value.
      */
     public String hex() {
-        return this.hex;
+        return this.hexProperty.get();
     }
 
+    /**
+     * @return Returns the hex property.
+     */
+    public StringProperty hexProperty() {
+        return this.hexProperty;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void parse(final String[] parameters) {
+        if (parameters.length >= 1) {
+
+            String hexValue = parameters[0];
+            if (hexValue.startsWith("0x")) {
+                hexValue = hexValue.substring(2);
+            }
+            if (hexValue.startsWith("#")) {
+                hexValue = hexValue.substring(1);
+            }
+
+            switch (hexValue.length()) {
+            // 0x r g b
+                case 3:
+                    this.hexProperty.set(hexValue);
+                    break;
+                // 0x rr gg bb
+                case 6:
+                    this.hexProperty.set(hexValue);
+                    break;
+                // 0x rr gg bb oo
+                case 8:
+                    // Not managed yet
+                    break;
+
+            }
+
+        }
+        // Opacity
+        if (parameters.length == 2) {
+            opacityProperty().set(Double.parseDouble(parameters[1]));
+        }
+
+    }
 }

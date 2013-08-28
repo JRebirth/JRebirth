@@ -122,17 +122,12 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
     }
 
     /**
-     * Parse the serialized fxml string to build a fresh instance.
-     * 
-     * @param serializedFXML the serialized string
-     * 
-     * @return a new fresh instance of {@link FXML}
+     * {@inheritDoc}
      */
-    public static FXML parseFXML(final String serializedFXML) {
+    @Override
+    public void parse(final String[] parameters) {
 
-        final String[] parameters = serializedFXML.split(PARAMETER_SEPARATOR);
-
-        FXML fxml = null;
+        FXML fxml = null; // FIXME
 
         switch (parameters.length) {
             case 3:
@@ -145,7 +140,5 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
             default:
                 fxml = new FXML(parameters[0]);
         }
-
-        return fxml;
     }
 }

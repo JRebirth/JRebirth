@@ -27,6 +27,7 @@ import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
+import org.jrebirth.core.resource.ParameterEntry;
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 import org.jrebirth.core.util.ClasspathUtility;
 
@@ -46,7 +47,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
     private static final Logger LOGGER = LoggerFactory.getLogger(ParameterBuilder.class);
 
     /** Store all parameter values. */
-    private final Map<String, Object> parametersMap = new ConcurrentHashMap<>();
+    private final Map<String, ParameterEntry<?>> parametersMap = new ConcurrentHashMap<>();
 
     /** The file extension used by configuration files. */
     private String configurationFileExtension;
@@ -118,7 +119,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
                 } else {
                     LOGGER.trace("Store key {} with value= {}", entry.getKey(), entry.getValue());
                 }
-                this.parametersMap.put(entry.getKey().toString(), entry.getValue());
+                this.parametersMap.put(entry.getKey().toString(), new ParameterEntry<>(entry.getValue().toString()));
 
             }
 
@@ -143,8 +144,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
             if (op.name() != null && this.parametersMap.containsKey(op.name())) {
 
                 // Retrieve the customized parameter
-                object = op.parseObject(this.parametersMap.get(op.name()).toString());
-
+                object = op.parseObject(this.parametersMap.get(op.name()));
             }
 
             if (object == null) {
@@ -154,8 +154,9 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
             // Don't store the parameter into the map if it hasn't got any parameter name
             if (op.name() != null) {
+
                 // Store the new parameter into the map
-                this.parametersMap.put(op.name(), object);
+                this.parametersMap.put(op.name(), new ParameterEntry<Object>("", object));
             }
         }
         return object;

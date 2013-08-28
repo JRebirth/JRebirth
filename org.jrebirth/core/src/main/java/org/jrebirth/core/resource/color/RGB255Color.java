@@ -83,4 +83,12 @@ public final class RGB255Color extends AbstractBaseColor {
         return this.blue;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void parse(final String[] string) {
+        // FIXME
+    }
+
 }

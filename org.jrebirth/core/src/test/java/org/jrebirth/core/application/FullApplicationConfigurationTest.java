@@ -22,8 +22,8 @@ public class FullApplicationConfigurationTest extends ApplicationTest<FullConfAp
     public void checkFullConf() {
 
         // Check that default value is used not those of properties file
-        Assert.assertEquals(new Integer(1024), JRebirthParameters.APPLICATION_STAGE_WIDTH.get());
-        Assert.assertEquals(new Integer(768), JRebirthParameters.APPLICATION_STAGE_HEIGHT.get());
+        Assert.assertEquals(new Integer(1024), JRebirthParameters.APPLICATION_SCENE_WIDTH.get());
+        Assert.assertEquals(new Integer(768), JRebirthParameters.APPLICATION_SCENE_HEIGHT.get());
 
     }
 

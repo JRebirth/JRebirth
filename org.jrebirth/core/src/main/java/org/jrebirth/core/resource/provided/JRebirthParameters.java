@@ -99,12 +99,12 @@ public interface JRebirthParameters {
     /** _________________________Application Stage Parameters.___________________________ */
     /**************************************************************************************/
 
-    /** The application stage width. */
-    ParameterItem<Integer> APPLICATION_STAGE_WIDTH = create("applicationStageWidth", 800);
+    /** The application scene width. */
+    ParameterItem<Integer> APPLICATION_SCENE_WIDTH = create("applicationSceneWidth", 800);
 
-    /** The application stage height. */
-    ParameterItem<Integer> APPLICATION_STAGE_HEIGHT = create("applicationStageHeight", 600);
+    /** The application scene height. */
+    ParameterItem<Integer> APPLICATION_SCENE_HEIGHT = create("applicationSceneHeight", 600);
 
-    /** The application stage height. */
-    ParameterItem<WebColor> APPLICATION_STAGE_BG_COLOR = create("applicationStageBgColor", new WebColor("FFFFFF", 1.0));
+    /** The application scene background color. */
+    ParameterItem<WebColor> APPLICATION_SCENE_BG_COLOR = create("applicationSceneBgColor", new WebColor("000000", 0.0));
 }

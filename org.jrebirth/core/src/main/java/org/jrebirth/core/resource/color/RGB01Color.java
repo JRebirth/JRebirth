@@ -89,4 +89,12 @@ public class RGB01Color extends AbstractBaseColor {
         return this.blue;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void parse(final String[] string) {
+        // FIXME
+    }
+
 }
