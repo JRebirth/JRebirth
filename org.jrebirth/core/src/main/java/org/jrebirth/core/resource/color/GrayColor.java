@@ -17,6 +17,9 @@
  */
 package org.jrebirth.core.resource.color;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
 /**
  * The interface <strong>GrayColor</strong>.
  * 
@@ -25,7 +28,7 @@ package org.jrebirth.core.resource.color;
 public class GrayColor extends AbstractBaseColor {
 
     /** The gray value [0.0-1.0]. */
-    private final double gray;
+    private final DoubleProperty gray = new SimpleDoubleProperty();
 
     /**
      * Default Constructor.
@@ -34,7 +37,7 @@ public class GrayColor extends AbstractBaseColor {
      */
     public GrayColor(final double gray) {
         super();
-        this.gray = gray;
+        this.gray.set(gray);
     }
 
     /**
@@ -45,7 +48,7 @@ public class GrayColor extends AbstractBaseColor {
      */
     public GrayColor(final double gray, final double opacity) {
         super(opacity);
-        this.gray = gray;
+        this.gray.set(gray);
     }
 
     /**
@@ -54,7 +57,31 @@ public class GrayColor extends AbstractBaseColor {
      * @return Returns the gray [0.0-1.0].
      */
     public double gray() {
+        return this.gray.get();
+    }
+
+    /**
+     * Return the gray property.
+     * 
+     * @return Returns the gray property.
+     */
+    public DoubleProperty grayProperty() {
         return this.gray;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void parse(final String[] parameters) {
+        // Manage gray scale
+        if (parameters.length >= 1) {
+            grayProperty().set(Double.parseDouble(parameters[0]));
+        }
+        // Opacity
+        if (parameters.length == 2) {
+            opacityProperty().set(Double.parseDouble(parameters[1]));
+        }
     }
 
 }

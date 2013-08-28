@@ -49,7 +49,7 @@ public class FontTest {
 
     private void checkRealFont(final FontItem fontItem) {
         final Font font = fontItem.get();
-        final RealFont rf = (RealFont) ResourceBuilders.FONT_BUILDER.getParam(fontItem);
+        final AbstractBaseFont rf = (AbstractBaseFont) ResourceBuilders.FONT_BUILDER.getParam(fontItem);
 
         assertNotNull(font);
         assertEquals(font.getName(), rf.name().name());

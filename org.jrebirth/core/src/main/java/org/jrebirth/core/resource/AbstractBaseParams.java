@@ -65,15 +65,4 @@ public abstract class AbstractBaseParams implements ResourceParams {
         this.dynamicKey = dynamicKey;
     }
 
-    /**
-     * Extract serialized parameters.
-     * 
-     * @param serializedResource the serialized resource string
-     * 
-     * @return an array of string parameters
-     */
-    protected static String[] extractParameters(final String serializedResource) {
-        return serializedResource.split(PARAMETER_SEPARATOR);
-    }
-
 }

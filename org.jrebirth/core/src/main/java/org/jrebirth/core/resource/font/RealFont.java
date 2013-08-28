@@ -24,9 +24,6 @@ package org.jrebirth.core.resource.font;
  */
 public class RealFont extends AbstractBaseFont {
 
-    /** the font size. */
-    private final double size;
-
     /**
      * Default Constructor.
      * 
@@ -34,17 +31,7 @@ public class RealFont extends AbstractBaseFont {
      * @param size the default font size
      */
     public RealFont(final FontName name, final double size) {
-        super(name);
-        this.size = size;
-    }
-
-    /**
-     * Return the font size.
-     * 
-     * @return the font size
-     */
-    public double size() {
-        return this.size;
+        super(name, size);
     }
 
     /**
@@ -55,22 +42,21 @@ public class RealFont extends AbstractBaseFont {
         final StringBuilder sb = new StringBuilder();
 
         sb.append(name().toString()).append(PARAMETER_SEPARATOR);
-        sb.append(this.size);
+        sb.append(size());
 
         return sb.toString();
     }
 
     /**
-     * Parse the serialized real font string to build a fresh instance.
-     * 
-     * @param serializedRealFont the serialized string
-     * 
-     * @return a new fresh instance of {@link RealFont}
+     * {@inheritDoc}
      */
-    public static RealFont parseFont(final String serializedRealFont) {
-
-        final String[] parameters = extractParameters(serializedRealFont);
-
-        return new RealFont(new CustomFontName(parameters[0]), Double.parseDouble(parameters[1]));
+    @Override
+    public void parse(final String[] parameters) {
+        if (parameters.length >= 1) {
+            nameProperty().set(new CustomFontName(parameters[0]));
+        }
+        if (parameters.length == 2) {
+            sizeProperty().set(Double.parseDouble(parameters[1]));
+        }
     }
 }

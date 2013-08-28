@@ -69,16 +69,11 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
     }
 
     /**
-     * Parse the serialized Local Image string to build a fresh instance.
-     * 
-     * @param serializedImage the serialized string
-     * 
-     * @return a new fresh instance of {@link LocalImage}
+     * {@inheritDoc}
      */
-    public static LocalImage parseImage(final String serializedImage) {
-
-        final String[] parameters = serializedImage.split(PARAMETER_SEPARATOR);
-
-        return new LocalImage(parameters[0], parameters[1], Enum.valueOf(ImageExtension.class, parameters[2]));
+    @Override
+    public void parse(final String[] parameters) {
+        // FIXME
+        // return new LocalImage(parameters[0], parameters[1], Enum.valueOf(ImageExtension.class, parameters[2]));
     }
 }
