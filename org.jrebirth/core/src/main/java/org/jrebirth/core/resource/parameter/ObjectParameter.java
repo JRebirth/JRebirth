@@ -19,11 +19,8 @@ package org.jrebirth.core.resource.parameter;
 
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.resource.AbstractBaseParams;
-import org.jrebirth.core.resource.font.CustomFontName;
-import org.jrebirth.core.resource.font.FamilyFont;
-import org.jrebirth.core.resource.font.FontName;
-import org.jrebirth.core.resource.font.RealFont;
-import org.jrebirth.core.resource.image.LocalImage;
+import org.jrebirth.core.resource.ParameterEntry;
+import org.jrebirth.core.resource.color.ResourceParams;
 
 /**
  * The interface <strong>ObjectParameter</strong>.
@@ -48,6 +45,11 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
     public ObjectParameter(final O object) {
         super();
         this.object = object;
+
+        // Object must be not null in order to have
+        if (object == null) {
+            throw new CoreRuntimeException("ObjectParameter msut have a non null object (" + this.parameterName + ")");
+        }
     }
 
     /**
@@ -57,9 +59,8 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      * @param object the parameter object
      */
     public ObjectParameter(final String parameterName, final O object) {
-        super();
+        this(object);
         this.parameterName = parameterName;
-        this.object = object;
     }
 
     /**
@@ -95,23 +96,31 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      * 
      * @return the real object
      */
-    public Object parseObject(final String serializedObject) {
+    public Object parseObject(final ParameterEntry<?> parameterEntry) {
         Object res = null;
-        if (this.object instanceof LocalImage) {
-            res = LocalImage.parseImage(serializedObject);
-        } else if (this.object instanceof FontName) {
-            res = new CustomFontName(serializedObject);
-        } else if (this.object instanceof RealFont) {
-            res = new CustomFontName(serializedObject);
-        } else if (this.object instanceof FamilyFont) {
-            res = new CustomFontName(serializedObject);
+        if (this.object instanceof ResourceParams) {
+            // Setup the default object
+            ((ResourceParams) this.object).parse(parameterEntry.getSerializedString().split(PARAMETER_SEPARATOR));
+            // return the new value
+            res = this.object;
         } else if (this.object instanceof Class<?>) {
-            res = parseClassParameter(serializedObject);
+            res = parseClassParameter(parameterEntry.getSerializedString());
         } else {
-            res = parsePrimitive(serializedObject);
+            res = parsePrimitive(parameterEntry.getSerializedString());
         }
 
         return res;
+    }
+
+    /**
+     * Parse a color.
+     * 
+     * @param serializedObject
+     * @return
+     */
+    private Object parseColor(final String serializedObject) {
+        // Nothing to do yet
+        return null;
     }
 
     /**
@@ -160,5 +169,13 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
             res = Double.parseDouble(serializedObject);
         }
         return res;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void parse(final String[] string) {
+        // Nothing to do
     }
 }

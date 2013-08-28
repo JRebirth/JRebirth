@@ -98,10 +98,14 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
      * 
      * @return a new fresh instance of {@link WebImage}
      */
-    public static WebImage parseImage(final String serializedImage) {
 
-        final String[] parameters = extractParameters(serializedImage);
-        return new WebImage(parameters[0], Boolean.parseBoolean(parameters[1]), parameters[2], parameters[3], Enum.valueOf(ImageExtension.class, parameters[4]));
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void parse(final String[] parameters) {
+        // FIXME
+        // return new WebImage(parameters[0], Boolean.parseBoolean(parameters[1]), parameters[2], parameters[3], Enum.valueOf(ImageExtension.class, parameters[4]));
     }
 
     /**

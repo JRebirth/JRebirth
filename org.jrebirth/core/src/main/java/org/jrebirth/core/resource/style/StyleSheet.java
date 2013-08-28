@@ -84,17 +84,17 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
     }
 
     /**
-     * Parse the serialized style sheet string to build a fresh instance.
-     * 
-     * @param serializedStyleSheet the serialized string
-     * 
-     * @return a new fresh instance of {@link StyleSheet}
+     * {@inheritDoc}
      */
-    public static StyleSheet parseStyleSheet(final String serializedStyleSheet) {
-
-        final String[] parameters = serializedStyleSheet.split(PARAMETER_SEPARATOR);
-
-        return parameters.length > 1 ? new StyleSheet(parameters[0], parameters[1]) : new StyleSheet(parameters[0]);
+    @Override
+    public void parse(final String[] parameters) {
+        if (parameters.length >= 1) {
+            // this.path = parameters[0];
+        }
+        if (parameters.length == 2) {
+            // this.name = parameters[1];
+        }
+        // return ? new StyleSheet(parameters[0], parameters[1]) : new StyleSheet(parameters[0]);
     }
 
 }

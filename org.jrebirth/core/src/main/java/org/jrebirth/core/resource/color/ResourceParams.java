@@ -25,7 +25,7 @@ package org.jrebirth.core.resource.color;
 public interface ResourceParams {
 
     /** The separator used between parameters into serialized string. */
-    String PARAMETER_SEPARATOR = "||";
+    String PARAMETER_SEPARATOR = "\\|\\|";
 
     /**
      * Checks for resource changes.
@@ -54,5 +54,12 @@ public interface ResourceParams {
      * @param dynamicKey the unique dynamic key
      */
     void setDynamicKey(final String dynamicKey);
+
+    /**
+     * Parse a string to initialize fields.
+     * 
+     * @param parameters split from resource properties file
+     */
+    void parse(String[] parameters);
 
 }

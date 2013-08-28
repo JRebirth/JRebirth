@@ -96,12 +96,12 @@ public final class Resources {
      * @param <O> the type of parameterized object
      * 
      * @param name the parameter unique name
-     * @param value the parameterized object value
+     * @param defaultValue the default object value
      * 
      * @return a new fresh color item object
      */
-    public static <O extends Object> ParameterItemBase<O> create(final String name, final O value) {
-        return create(new ObjectParameter<O>(name, value));
+    public static <O extends Object> ParameterItemBase<O> create(final String name, final O defaultValue) {
+        return create(new ObjectParameter<O>(name, defaultValue));
     }
 
     /*************************************************************************/

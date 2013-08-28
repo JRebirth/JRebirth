@@ -17,6 +17,10 @@
  */
 package org.jrebirth.core.resource.font;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
@@ -27,17 +31,14 @@ import javafx.scene.text.FontWeight;
  */
 public class FamilyFont extends AbstractBaseFont {
 
-    /** the font size. */
-    private final double size;
-
     /** the family name. */
-    private final String family;
+    private final StringProperty familyProperty = new SimpleStringProperty();
 
     /** the font posture. */
-    private final FontPosture posture;
+    private final ObjectProperty<FontPosture> postureProperty = new SimpleObjectProperty<>();
 
     /** the font weight. */
-    private final FontWeight weight;
+    private final ObjectProperty<FontWeight> weightProperty = new SimpleObjectProperty<>();
 
     /**
      * Default Constructor.
@@ -86,20 +87,10 @@ public class FamilyFont extends AbstractBaseFont {
      * @param posture the font posture {@link FontPosture}
      */
     public FamilyFont(final String family, final double size, final FontWeight weight, final FontPosture posture) {
-        super(null);
-        this.family = family;
-        this.size = size;
-        this.weight = weight;
-        this.posture = posture;
-    }
-
-    /**
-     * Return the font size.
-     * 
-     * @return the font size
-     */
-    public double size() {
-        return this.size;
+        super(null, size);
+        this.familyProperty.set(family);
+        this.weightProperty.set(weight);
+        this.postureProperty.set(posture);
     }
 
     /**
@@ -108,7 +99,16 @@ public class FamilyFont extends AbstractBaseFont {
      * @return the family name
      */
     public String family() {
-        return this.family;
+        return this.familyProperty.get();
+    }
+
+    /**
+     * Return the family name property.
+     * 
+     * @return the family name property
+     */
+    public StringProperty familyProperty() {
+        return this.familyProperty;
     }
 
     /**
@@ -116,8 +116,17 @@ public class FamilyFont extends AbstractBaseFont {
      * 
      * @return the font posture
      */
-    FontPosture posture() {
-        return this.posture;
+    public FontPosture posture() {
+        return this.postureProperty.get();
+    }
+
+    /**
+     * Return the font posture property.
+     * 
+     * @return the font posture property
+     */
+    public ObjectProperty<FontPosture> postureProperty() {
+        return this.postureProperty;
     }
 
     /**
@@ -125,8 +134,17 @@ public class FamilyFont extends AbstractBaseFont {
      * 
      * @return the font weight
      */
-    FontWeight weight() {
-        return this.weight;
+    public FontWeight weight() {
+        return this.weightProperty.get();
+    }
+
+    /**
+     * Return the font weight property.
+     * 
+     * @return the font weight property
+     */
+    public ObjectProperty<FontWeight> weightProperty() {
+        return this.weightProperty;
     }
 
     /**
@@ -145,16 +163,21 @@ public class FamilyFont extends AbstractBaseFont {
     }
 
     /**
-     * Parse the serialized family font string to build a fresh instance.
-     * 
-     * @param serializedFamilyFont the serialized string
-     * 
-     * @return a new fresh instance of {@link FamilyFont}
+     * {@inheritDoc}
      */
-    public static FamilyFont parseFont(final String serializedFamilyFont) {
-
-        final String[] parameters = extractParameters(serializedFamilyFont);
-
-        return new FamilyFont(parameters[0], Double.parseDouble(parameters[1]), FontWeight.findByName(parameters[2]), FontPosture.findByName(parameters[3]));
+    @Override
+    public void parse(final String[] parameters) {
+        if (parameters.length >= 1) {
+            familyProperty().set(parameters[0]);
+        }
+        if (parameters.length >= 2) {
+            sizeProperty().set(Double.parseDouble(parameters[1]));
+        }
+        if (parameters.length >= 3) {
+            weightProperty().set(FontWeight.findByName(parameters[2]));
+        }
+        if (parameters.length >= 4) {
+            postureProperty().set(FontPosture.findByName(parameters[3]));
+        }
     }
 }
