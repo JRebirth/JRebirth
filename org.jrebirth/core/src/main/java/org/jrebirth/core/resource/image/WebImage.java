@@ -17,6 +17,11 @@
  */
 package org.jrebirth.core.resource.image;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  * The interface <strong>LocalImage</strong>.
  * 
@@ -25,10 +30,10 @@ package org.jrebirth.core.resource.image;
 public class WebImage extends AbstractBaseImage implements ImageParams {
 
     /** the local image path. */
-    private final String website;
+    private final StringProperty websiteProperty = new SimpleStringProperty();
 
     /** Indicate if we must call http:// or https:// protocol. */
-    private Boolean secured = Boolean.FALSE;
+    private final BooleanProperty securedProperty = new SimpleBooleanProperty(Boolean.FALSE);
 
     /**
      * Default Constructor.
@@ -40,7 +45,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
      */
     public WebImage(final String website, final String path, final String name, final ImageExtension extension) {
         super(path, name, extension);
-        this.website = website;
+        this.websiteProperty.set(website);
     }
 
     /**
@@ -54,7 +59,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
      */
     public WebImage(final String website, final boolean secured, final String path, final String name, final ImageExtension extension) {
         this(website, path, name, extension);
-        this.secured = secured;
+        this.securedProperty.set(secured);
     }
 
     /**
@@ -63,7 +68,16 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
      * @return the website
      */
     public String website() {
-        return this.website;
+        return this.websiteProperty.get();
+    }
+
+    /**
+     * Return the website property.
+     * 
+     * @return the website property
+     */
+    public StringProperty websiteProperty() {
+        return this.websiteProperty;
     }
 
     /**
@@ -72,40 +86,16 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
      * @return the secured
      */
     public Boolean secured() {
-        return this.secured;
+        return this.securedProperty.get();
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        sb.append(website()).append(PARAMETER_SEPARATOR);
-        sb.append(secured().toString()).append(PARAMETER_SEPARATOR);
-        sb.append(path()).append(PARAMETER_SEPARATOR);
-        sb.append(name()).append(PARAMETER_SEPARATOR);
-        sb.append(extension());
-
-        return sb.toString();
-    }
-
-    /**
-     * Parse the serialized Web Image string to build a fresh instance.
+     * Return the secured property.
      * 
-     * @param serializedImage the serialized string
-     * 
-     * @return a new fresh instance of {@link WebImage}
+     * @return the secured property
      */
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void parse(final String[] parameters) {
-        // FIXME
-        // return new WebImage(parameters[0], Boolean.parseBoolean(parameters[1]), parameters[2], parameters[3], Enum.valueOf(ImageExtension.class, parameters[4]));
+    public BooleanProperty securedProperty() {
+        return this.securedProperty;
     }
 
     /**
@@ -124,4 +114,49 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
 
         return sb.toString();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+
+        append(sb, website());
+        append(sb, secured().toString());
+        append(sb, path());
+        append(sb, name());
+        append(sb, extension().toString());
+
+        return cleanString(sb);
+    }
+
+    /**
+     * Parse the serialized Web Image string to build a fresh instance.
+     * 
+     * @param serializedImage the serialized string
+     * 
+     * @return a new fresh instance of {@link WebImage}
+     */
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void parse(final String[] parameters) {
+        if (parameters.length == 4) {
+            websiteProperty().set(parameters[0]);
+            pathProperty().set(parameters[1]);
+            nameProperty().set(parameters[2]);
+            extensionProperty().set(ImageExtension.valueOf(parameters[3]));
+        }
+        if (parameters.length == 5) {
+            websiteProperty().set(parameters[0]);
+            securedProperty().set(readBoolean(parameters[1]));
+            pathProperty().set(parameters[2]);
+            nameProperty().set(parameters[3]);
+            extensionProperty().set(ImageExtension.valueOf(parameters[4]));
+        }
+    }
+
 }

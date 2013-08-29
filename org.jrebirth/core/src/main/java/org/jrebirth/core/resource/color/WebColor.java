@@ -71,6 +71,19 @@ public class WebColor extends AbstractBaseColor {
      * {@inheritDoc}
      */
     @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+
+        append(sb, hex());
+        append(sb, opacity());
+
+        return cleanString(sb);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void parse(final String[] parameters) {
         if (parameters.length >= 1) {
 

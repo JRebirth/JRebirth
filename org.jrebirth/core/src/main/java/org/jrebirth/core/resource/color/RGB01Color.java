@@ -17,6 +17,9 @@
  */
 package org.jrebirth.core.resource.color;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
 /**
  * The interface <strong>RGB01Color</strong>.
  * 
@@ -25,13 +28,13 @@ package org.jrebirth.core.resource.color;
 public class RGB01Color extends AbstractBaseColor {
 
     /** The green value [0.0-1.0]. */
-    private final double red;
+    private final DoubleProperty redProperty = new SimpleDoubleProperty();
 
     /** The green value [0.0-1.0]. */
-    private final double green;
+    private final DoubleProperty greenProperty = new SimpleDoubleProperty();
 
     /** The blue value [0.0-1.0]. */
-    private final double blue;
+    private final DoubleProperty blueProperty = new SimpleDoubleProperty();
 
     /**
      * Default Constructor.
@@ -42,9 +45,9 @@ public class RGB01Color extends AbstractBaseColor {
      */
     public RGB01Color(final double red, final double green, final double blue) {
         super();
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
+        this.redProperty.set(red);
+        this.greenProperty.set(green);
+        this.blueProperty.set(blue);
     }
 
     /**
@@ -57,9 +60,9 @@ public class RGB01Color extends AbstractBaseColor {
      */
     public RGB01Color(final double red, final double green, final double blue, final double opacity) {
         super(opacity);
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
+        this.redProperty.set(red);
+        this.greenProperty.set(green);
+        this.blueProperty.set(blue);
     }
 
     /**
@@ -68,7 +71,16 @@ public class RGB01Color extends AbstractBaseColor {
      * @return Returns the red.
      */
     public double red() {
-        return this.red;
+        return this.redProperty.get();
+    }
+
+    /**
+     * Return the red property.
+     * 
+     * @return Returns the red property.
+     */
+    public DoubleProperty redProperty() {
+        return this.redProperty;
     }
 
     /**
@@ -77,7 +89,16 @@ public class RGB01Color extends AbstractBaseColor {
      * @return Returns the green.
      */
     public double green() {
-        return this.green;
+        return this.greenProperty.get();
+    }
+
+    /**
+     * Return the green property.
+     * 
+     * @return Returns the green property.
+     */
+    public DoubleProperty greenProperty() {
+        return this.greenProperty;
     }
 
     /**
@@ -86,15 +107,54 @@ public class RGB01Color extends AbstractBaseColor {
      * @return Returns the blue.
      */
     public double blue() {
-        return this.blue;
+        return this.blueProperty.get();
+    }
+
+    /**
+     * Return the blue property.
+     * 
+     * @return Returns the blue property.
+     */
+    public DoubleProperty blueProperty() {
+        return this.blueProperty;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] string) {
-        // FIXME
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+
+        append(sb, red());
+        append(sb, green());
+        append(sb, blue());
+        append(sb, opacity());
+
+        return cleanString(sb);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void parse(final String[] parameters) {
+        // Manage red composite
+        if (parameters.length >= 1) {
+            redProperty().set(Double.parseDouble(parameters[0]));
+        }
+        // Manage green composite
+        if (parameters.length >= 2) {
+            greenProperty().set(Double.parseDouble(parameters[1]));
+        }
+        // Manage blue composite
+        if (parameters.length >= 3) {
+            blueProperty().set(Double.parseDouble(parameters[2]));
+        }
+        // Manage opacity
+        if (parameters.length >= 4) {
+            opacityProperty().set(Double.parseDouble(parameters[3]));
+        }
     }
 
 }

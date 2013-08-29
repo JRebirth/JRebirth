@@ -2,6 +2,7 @@ package org.jrebirth.core.resource.image;
 
 import javafx.scene.image.Image;
 
+import org.jrebirth.core.resource.AbstractBaseParams;
 import org.jrebirth.core.resource.ResourceBuilders;
 
 import org.junit.After;
@@ -55,7 +56,7 @@ public class ImageTest {
 
     private void checkWebImage(final ImageItem imageItem) {
         final Image image = imageItem.get();
-        final WebImage wc = (WebImage) ResourceBuilders.IMAGE_BUILDER.getParam(imageItem);
+        final AbstractBaseParams wc = (AbstractBaseParams) ResourceBuilders.IMAGE_BUILDER.getParam(imageItem);
 
         assertEquals(image.getProgress(), 1.0, 0.0);
     }

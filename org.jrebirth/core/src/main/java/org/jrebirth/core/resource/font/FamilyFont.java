@@ -154,12 +154,12 @@ public class FamilyFont extends AbstractBaseFont {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(family().toString()).append(PARAMETER_SEPARATOR);
-        sb.append(size()).append(PARAMETER_SEPARATOR);
-        sb.append(weight().toString()).append(PARAMETER_SEPARATOR);
-        sb.append(posture().toString());
+        append(sb, family());
+        append(sb, size());
+        append(sb, weight().toString());
+        append(sb, posture().toString());
 
-        return sb.toString();
+        return cleanString(sb);
     }
 
     /**
