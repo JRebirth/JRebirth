@@ -65,4 +65,80 @@ public abstract class AbstractBaseParams implements ResourceParams {
         this.dynamicKey = dynamicKey;
     }
 
+    /**
+     * Read a double string value.
+     * 
+     * @param doubleString the double value
+     * @param min the minimum value allowed
+     * @param max the maximum value allowed
+     * 
+     * @return the value parsed according to its range
+     */
+    protected double readDouble(String doubleString, double min, double max) {
+        return Math.max(Math.min(Double.parseDouble(doubleString), max), min);
+    }
+
+    /**
+     * Read ab integer string value.
+     * 
+     * @param intString the integer value
+     * @param min the minimum value allowed
+     * @param max the maximum value allowed
+     * 
+     * @return the value parsed according to its range
+     */
+    protected int readInteger(String intString, int min, int max) {
+        return Math.max(Math.min(Integer.parseInt(intString), max), min);
+    }
+
+    /**
+     * Read a boolean string value.<br />
+     * Values allowed are (case insensitive):
+     * <ul>
+     * <li>true</li>
+     * <li>yes</li>
+     * <li>1</li>
+     * </ul>
+     * 
+     * @param parameter the boolean string value
+     * 
+     * @return the boolean or false
+     */
+    protected boolean readBoolean(String parameter) {
+
+        return parameter != null && "true".equalsIgnoreCase(parameter) || "yes".equalsIgnoreCase(parameter) || "1".equalsIgnoreCase(parameter);
+    }
+
+    /**
+     * Append a string parameter with its separator.
+     * 
+     * @param sb the string container
+     * @param parameter the parameter to append
+     */
+    protected void append(StringBuilder sb, String parameter) {
+        sb.append(parameter).append(PARAMETER_SEPARATOR);
+    }
+
+    /**
+     * Append a number parameter with its separator.
+     * 
+     * @param sb the string container
+     * @param parameter the number parameter to append
+     */
+    protected void append(StringBuilder sb, Number parameter) {
+        append(sb, parameter.toString());
+    }
+
+    /**
+     * Remove the last parameter separator and return the string of the given builder.
+     * 
+     * @param sb the string builder toc lean
+     * 
+     * @return the cleaned string
+     */
+    protected String cleanString(StringBuilder sb) {
+        String res = sb.toString();
+        return res.substring(0, res.length() - PARAMETER_SEPARATOR.length());
+    }
+
 }

@@ -28,7 +28,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 public class GrayColor extends AbstractBaseColor {
 
     /** The gray value [0.0-1.0]. */
-    private final DoubleProperty gray = new SimpleDoubleProperty();
+    private final DoubleProperty grayProperty = new SimpleDoubleProperty();
 
     /**
      * Default Constructor.
@@ -37,7 +37,7 @@ public class GrayColor extends AbstractBaseColor {
      */
     public GrayColor(final double gray) {
         super();
-        this.gray.set(gray);
+        this.grayProperty.set(gray);
     }
 
     /**
@@ -48,7 +48,7 @@ public class GrayColor extends AbstractBaseColor {
      */
     public GrayColor(final double gray, final double opacity) {
         super(opacity);
-        this.gray.set(gray);
+        this.grayProperty.set(gray);
     }
 
     /**
@@ -57,7 +57,7 @@ public class GrayColor extends AbstractBaseColor {
      * @return Returns the gray [0.0-1.0].
      */
     public double gray() {
-        return this.gray.get();
+        return this.grayProperty.get();
     }
 
     /**
@@ -66,7 +66,20 @@ public class GrayColor extends AbstractBaseColor {
      * @return Returns the gray property.
      */
     public DoubleProperty grayProperty() {
-        return this.gray;
+        return this.grayProperty;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+
+        append(sb, gray());
+        append(sb, opacity());
+
+        return cleanString(sb);
     }
 
     /**

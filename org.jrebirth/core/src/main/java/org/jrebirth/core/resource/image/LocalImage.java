@@ -17,6 +17,7 @@
  */
 package org.jrebirth.core.resource.image;
 
+
 /**
  * The interface <strong>LocalImage</strong>.
  * 
@@ -61,11 +62,11 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(path()).append(PARAMETER_SEPARATOR);
-        sb.append(name()).append(PARAMETER_SEPARATOR);
-        sb.append(extension());
+        append(sb, path());
+        append(sb, name());
+        append(sb, extension().toString());
 
-        return sb.toString();
+        return cleanString(sb);
     }
 
     /**
@@ -73,7 +74,17 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
      */
     @Override
     public void parse(final String[] parameters) {
-        // FIXME
-        // return new LocalImage(parameters[0], parameters[1], Enum.valueOf(ImageExtension.class, parameters[2]));
+        if (parameters.length == 1) {
+            nameProperty().set(parameters[0]);
+        }
+        if (parameters.length == 2) {
+            nameProperty().set(parameters[0]);
+            extensionProperty().set(ImageExtension.valueOf(parameters[1]));
+        }
+        if (parameters.length == 3) {
+            pathProperty().set(parameters[0]);
+            nameProperty().set(parameters[1]);
+            extensionProperty().set(ImageExtension.valueOf(parameters[2]));
+        }
     }
 }
