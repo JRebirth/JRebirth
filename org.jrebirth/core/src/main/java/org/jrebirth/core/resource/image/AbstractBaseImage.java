@@ -17,6 +17,11 @@
  */
 package org.jrebirth.core.resource.image;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import org.jrebirth.core.resource.AbstractBaseParams;
 
 /**
@@ -27,13 +32,13 @@ import org.jrebirth.core.resource.AbstractBaseParams;
 public abstract class AbstractBaseImage extends AbstractBaseParams implements ImageParams {
 
     /** The image path. */
-    private final String path;
+    private final StringProperty path = new SimpleStringProperty();
 
     /** The image path. */
-    private final String name;
+    private final StringProperty nameProperty = new SimpleStringProperty();
 
     /** The image path. */
-    private final ImageExtension extension;
+    private final ObjectProperty<ImageExtension> extensionProperty = new SimpleObjectProperty<>();
 
     /** The requested width. */
     private final double requestedWidth;
@@ -76,9 +81,10 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
     public AbstractBaseImage(final String path, final String name, final ImageExtension extension, final double requestedWidth,
             final double requestedHeight, final boolean preserveRatio, final boolean smooth, final boolean backgroundLoading) {
         super();
-        this.path = path;
-        this.name = name;
-        this.extension = extension;
+        this.path.set(path);
+        this.nameProperty.set(name);
+        this.extensionProperty.set(extension);
+
         this.requestedWidth = requestedWidth;
         this.requestedHeight = requestedHeight;
         this.preserveRatio = preserveRatio;
@@ -92,7 +98,15 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
     @Override
     public String path() {
         // Avoid NPE on path
-        return this.path == null ? "" : this.path;
+        return this.path.get() == null ? "" : this.path.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public StringProperty pathProperty() {
+        // Avoid NPE on path
+        return this.path;
     }
 
     /**
@@ -100,7 +114,14 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
      */
     @Override
     public String name() {
-        return this.name;
+        return this.nameProperty.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public StringProperty nameProperty() {
+        return this.nameProperty;
     }
 
     /**
@@ -108,7 +129,14 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
      */
     @Override
     public ImageExtension extension() {
-        return this.extension;
+        return this.extensionProperty.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public ObjectProperty<ImageExtension> extensionProperty() {
+        return this.extensionProperty;
     }
 
     /**

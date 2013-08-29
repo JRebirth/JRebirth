@@ -41,10 +41,10 @@ public class RealFont extends AbstractBaseFont {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(name().toString()).append(PARAMETER_SEPARATOR);
-        sb.append(size());
+        append(sb, name().toString());
+        append(sb, size());
 
-        return sb.toString();
+        return cleanString(sb);
     }
 
     /**
