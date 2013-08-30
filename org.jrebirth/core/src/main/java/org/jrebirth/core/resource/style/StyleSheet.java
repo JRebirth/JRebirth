@@ -30,7 +30,7 @@ import org.jrebirth.core.resource.AbstractBaseParams;
 public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
 
     /** The style sheet path. */
-    private final StringProperty pathProperty = new SimpleStringProperty("");// Avoid NPE for path
+    private final StringProperty pathProperty = new SimpleStringProperty(""); // Avoid NPE for path
 
     /** The style sheet name (without .css extension). */
     private final StringProperty nameProperty = new SimpleStringProperty();
@@ -65,10 +65,11 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
     }
 
     /**
-     * {@inheritDoc}
+     * Path property.
+     * 
+     * @return the string property
      */
     public StringProperty pathProperty() {
-        // Avoid NPE on path
         return this.pathProperty;
     }
 
@@ -81,7 +82,9 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
     }
 
     /**
-     * {@inheritDoc}
+     * Name property.
+     * 
+     * @return the string property
      */
     public StringProperty nameProperty() {
         return this.nameProperty;

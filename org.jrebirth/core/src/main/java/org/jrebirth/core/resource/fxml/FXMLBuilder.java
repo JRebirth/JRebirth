@@ -52,10 +52,6 @@ public final class FXMLBuilder extends AbstractResourceBuilder<FXMLItem, FXMLPar
             // Build the requested font
             component = buildFXMLComponent((FXML) fp);
         }
-        if (component == null) {
-            // Return the default ...
-
-        }
         return component;
     }
 

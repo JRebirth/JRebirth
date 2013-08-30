@@ -33,8 +33,9 @@ public abstract class AbstractBaseFont extends AbstractBaseParams implements Fon
 
     /** The opacity of the color. */
     private final ObjectProperty<FontName> nameProperty = new SimpleObjectProperty<>();
-    /** the font size. */
-    protected final DoubleProperty sizeProperty = new SimpleDoubleProperty();
+
+    /** The font size. */
+    private final DoubleProperty sizeProperty = new SimpleDoubleProperty();
 
     /**
      * Default Constructor.
