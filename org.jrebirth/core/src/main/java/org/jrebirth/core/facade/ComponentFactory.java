@@ -19,7 +19,7 @@ public interface ComponentFactory {
      * 
      * @param <R> the ReadyObject, it's a component class
      * 
-     * @throws a CoreException if an error has occurred
+     * @throws CoreException CoreException if an error has occurred
      */
     <R extends Object> R buildComponent(Class<R> clazz) throws CoreException;
 

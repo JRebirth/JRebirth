@@ -48,7 +48,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
 
         // Object must be not null in order to have
         if (object == null) {
-            throw new CoreRuntimeException("ObjectParameter msut have a non null object (" + this.parameterName + ")");
+            throw new CoreRuntimeException("ObjectParameter must have a non null object (" + this.parameterName + ")");
         }
     }
 
@@ -92,7 +92,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
     /**
      * Parse the serialized object.
      * 
-     * @param serializedObject the string object to convert
+     * @param parameterEntry the prameter entry to convert that wrap the serialized string
      * 
      * @return the real object
      */

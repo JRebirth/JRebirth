@@ -51,10 +51,6 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
             // Build the requested font
             cssURL = buildStyleSheetUrl((StyleSheet) ssp);
         }
-        if (cssURL == null) {
-            // Return the default image
-
-        }
         return cssURL;
     }
 
