@@ -17,7 +17,11 @@
  */
 package org.jrebirth.core.resource.fxml;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import org.jrebirth.core.resource.AbstractBaseParams;
+import org.jrebirth.core.resource.Resources;
 
 /**
  * The interface <strong>FXML</strong>.
@@ -27,16 +31,16 @@ import org.jrebirth.core.resource.AbstractBaseParams;
 public class FXML extends AbstractBaseParams implements FXMLParams {
 
     /** The absolute path used to retrieved fxml file and resource bundle. */
-    private final String absolutePath;
+    private final StringProperty absolutePath = new SimpleStringProperty("");// Avoid NPE for absolute path
 
     /** The absolute path used to retrieved resource bundle file if different of fxml one. */
-    private final String absoluteBundlePath;
+    private final StringProperty absoluteBundlePath = new SimpleStringProperty();
 
     /** The FXML file name (without .fxml extension). */
-    private final String fxmlName;
+    private final StringProperty fxmlName = new SimpleStringProperty();
 
     /** The FXML resource bundle name (without .properties extension). */
-    private final String bundleName;
+    private final StringProperty bundleName = new SimpleStringProperty();
 
     /**
      * Default Constructor.
@@ -48,10 +52,10 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
      */
     public FXML(final String fxmlPath, final String fxmlName, final String bundlePath, final String bundleName) {
         super();
-        this.absolutePath = fxmlPath;
-        this.fxmlName = fxmlName;
-        this.absoluteBundlePath = bundlePath;
-        this.bundleName = bundleName;
+        this.absolutePath.set(fxmlPath);
+        this.fxmlName.set(fxmlName);
+        this.absoluteBundlePath.set(bundlePath);
+        this.bundleName.set(bundleName);
     }
 
     /**
@@ -78,8 +82,14 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
      */
     @Override
     public String absolutePath() {
-        // Avoid NPE on path
-        return this.absolutePath == null ? "" : this.absolutePath;
+        return this.absolutePath.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public StringProperty absolutePathProperty() {
+        return this.absolutePath;
     }
 
     /**
@@ -87,6 +97,13 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
      */
     @Override
     public String fxmlName() {
+        return this.fxmlName.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public StringProperty fxmlNameProperty() {
         return this.fxmlName;
     }
 
@@ -95,6 +112,13 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
      */
     @Override
     public String absoluteBundlePath() {
+        return this.absoluteBundlePath.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public StringProperty absoluteBundlePathProperty() {
         return this.absoluteBundlePath;
     }
 
@@ -103,7 +127,45 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
      */
     @Override
     public String bundleName() {
+        return this.bundleName.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public StringProperty bundleNameProperty() {
         return this.bundleName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getFxmlPath() {
+        final StringBuilder sb = new StringBuilder();
+        if (!absolutePath().isEmpty()) {
+            sb.append(absolutePath()).append(Resources.PATH_SEP);
+        }
+        sb.append(fxmlName());
+        return sb.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBundlePath() {
+        final StringBuilder sb = new StringBuilder();
+        if (!bundleName().isEmpty()) {
+            if (!absoluteBundlePath().isEmpty()) {
+                sb.append(absoluteBundlePath()).append(Resources.PATH_SEP);
+            }
+            sb.append(bundleName());
+        } else {
+            // Get the fxml path to build the bundle one
+            sb.append(getFxmlPath());
+        }
+        return sb.toString();
     }
 
     /**
@@ -113,12 +175,12 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(absolutePath()).append(PARAMETER_SEPARATOR);
-        sb.append(fxmlName()).append(PARAMETER_SEPARATOR);
-        sb.append(absoluteBundlePath()).append(PARAMETER_SEPARATOR);
-        sb.append(bundleName());
+        append(sb, absolutePath());
+        append(sb, fxmlName());
+        append(sb, absoluteBundlePath());
+        append(sb, bundleName());
 
-        return sb.toString();
+        return cleanString(sb);
     }
 
     /**
@@ -127,18 +189,23 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
     @Override
     public void parse(final String[] parameters) {
 
-        FXML fxml = null; // FIXME
-
         switch (parameters.length) {
-            case 3:
-                fxml = new FXML(parameters[0], parameters[1]);
-                break;
             case 4:
-                fxml = new FXML(parameters[0], parameters[1], parameters[2], parameters[3]);
+                absolutePathProperty().set(parameters[0]);
+                fxmlNameProperty().set(parameters[1]);
+                absoluteBundlePathProperty().set(parameters[2]);
+                bundleNameProperty().set(parameters[3]);
                 break;
+
+            case 3:
+                absolutePathProperty().set(parameters[0]);
+                fxmlNameProperty().set(parameters[1]);
+                break;
+
             case 1:
             default:
-                fxml = new FXML(parameters[0]);
+                fxmlNameProperty().set(parameters[0]);
         }
     }
+
 }

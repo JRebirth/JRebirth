@@ -113,17 +113,6 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
     }
 
     /**
-     * Parse a color.
-     * 
-     * @param serializedObject
-     * @return
-     */
-    private Object parseColor(final String serializedObject) {
-        // Nothing to do yet
-        return null;
-    }
-
-    /**
      * Parse a class definition by calling to call Class.forName.
      * 
      * @param serializedObject the full class name
@@ -176,6 +165,6 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      */
     @Override
     public void parse(final String[] string) {
-        // Nothing to do
+        // Nothing to do, method added to be compliant with API
     }
 }

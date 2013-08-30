@@ -54,4 +54,17 @@ public interface FXMLParams extends ResourceParams {
      */
     String bundleName();
 
+    /**
+     * Return the full path of the fxml file without .fxml extension.
+     * 
+     * @return the full fxml path
+     */
+    String getFxmlPath();
+
+    /**
+     * Return the full path of the resource bundle file without .properties extension.
+     * 
+     * @return the full resource bundle path
+     */
+    String getBundlePath();
 }

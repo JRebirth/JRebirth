@@ -50,13 +50,13 @@ public class CheckerTest {
     @Test()
     public void checkWaveTypes() {
 
-        checkWaveType(TYPE_0, null);
-        checkWaveType(TYPE_1, null);
-        checkWaveType(TYPE_2, null);
-        checkWaveType(TYPE_3, null);
-        checkWaveType(TYPE_4, null);
+        checkWaveType(this.TYPE_0, null);
+        checkWaveType(this.TYPE_1, null);
+        checkWaveType(this.TYPE_2, null);
+        checkWaveType(this.TYPE_3, null);
+        checkWaveType(this.TYPE_4, null);
 
-        checkWaveType(TYPE_5, CoreRuntimeException.class);
+        checkWaveType(this.TYPE_5, CoreRuntimeException.class);
 
     }
 
