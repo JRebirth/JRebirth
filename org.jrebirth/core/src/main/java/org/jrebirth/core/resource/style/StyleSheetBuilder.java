@@ -89,7 +89,7 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
      * 
      * @param styleSheetPath the path of the style sheet, path must be separated by '/'
      * 
-     * @return the image loaded
+     * @return the stylesheet url
      */
     private URL buildUrl(final String styleSheetPath) {
 

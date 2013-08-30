@@ -17,8 +17,6 @@
  */
 package org.jrebirth.core.resource.fxml;
 
-import java.net.URL;
-
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 import org.jrebirth.core.ui.fxml.FXMLComponent;
 import org.jrebirth.core.ui.fxml.FXMLUtils;
@@ -27,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The class <strong>StyleSheetBuilder</strong>.
+ * The class <strong>FXMLBuilder</strong>.
  * 
  * Class used to manage style sheet with weak reference.
  * 
@@ -38,8 +36,11 @@ public final class FXMLBuilder extends AbstractResourceBuilder<FXMLItem, FXMLPar
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(FXMLBuilder.class);
 
-    /** The css file extension. */
+    /** The fxml file extension. */
     private static final String FXML_EXT = ".fxml";
+
+    /** The resource bundle file extension. */
+    private static final String BUNDLE_EXT = ".properties";
 
     /**
      * {@inheritDoc}
@@ -59,46 +60,15 @@ public final class FXMLBuilder extends AbstractResourceBuilder<FXMLItem, FXMLPar
     }
 
     /**
-     * Build a FXML component taht embed a node and its FXML controller.
+     * Build a FXML component that embed a node and its FXML controller.
      * 
-     * @param fxmlParam the fxmlparams
+     * @param fxmlParam the FXMLParams object
      * 
-     * @return the JavaFX image object
+     * @return the FXMLcomponent wrapper object
      */
     private FXMLComponent buildFXMLComponent(final FXML fxmlParam) {
 
-        final StringBuilder sb = new StringBuilder();
-
-        // sb.append(JRebirthParameters.STYLE_FOLDER.get()).append(Resources.PATH_SEP);
-        //
-        // if (!fp.path().isEmpty()) {
-        // sb.append(fp.path()).append(Resources.PATH_SEP);
-        // }
-        //
-        // sb.append(fp.name());
-        //
-        // if (!fp.name().endsWith(FXML_EXT)) {
-        // sb.append(FXML_EXT);
-        // }
-
-        return FXMLUtils.loadFXML(null, sb.toString());
-    }
-
-    /**
-     * Get a style sheet URL.
-     * 
-     * @param styleSheetPath the path of the style sheet, path must be separated by '/'
-     * 
-     * @return the image loaded
-     */
-    private URL buildUrl(final String styleSheetPath) {
-
-        final URL cssResource = Thread.currentThread().getContextClassLoader().getResource(styleSheetPath);
-
-        if (cssResource == null) {
-            LOGGER.error("Style Sheet : " + styleSheetPath + " not found !");
-        }
-        return cssResource;
+        return FXMLUtils.loadFXML(null, fxmlParam.getFxmlPath() + FXML_EXT, fxmlParam.getBundlePath());
     }
 
 }

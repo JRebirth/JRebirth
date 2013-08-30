@@ -28,6 +28,11 @@ public interface ResourceParams {
     String PARAMETER_SEPARATOR = "\\|\\|";
 
     /**
+     * Activate AutoRefresh that will mark the {@link ResourceParams} as 'Updated' to force the rebuild of the resource on next call.
+     */
+    void activateAutoRefresh();
+
+    /**
      * Checks for resource changes.
      * 
      * @return true, if resource has changed and need to be reloaded

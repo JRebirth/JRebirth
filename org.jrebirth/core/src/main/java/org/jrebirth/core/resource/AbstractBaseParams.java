@@ -17,6 +17,12 @@
  */
 package org.jrebirth.core.resource;
 
+import java.lang.reflect.Field;
+
+import javafx.beans.property.Property;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
 import org.jrebirth.core.resource.color.ResourceParams;
 
 /**
@@ -31,6 +37,43 @@ public abstract class AbstractBaseParams implements ResourceParams {
 
     /** The dynamic key used to store the resource into a map. */
     private String dynamicKey;
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public void activateAutoRefresh() {
+
+        final ChangeListener<Object> changeListener = new ChangeListener<Object>() {
+
+            /**
+             * Called when the value is updated.
+             * @param value the observable value
+             * @param oldValue the old value
+             * @param newValue the new value
+             */
+            @Override
+            public void changed(final ObservableValue<? extends Object> value, final Object oldValue, final Object newValue) {
+                if (oldValue != null && newValue == null || !oldValue.equals(newValue)) {
+                    hasChanged(true);
+                }
+            }
+        };
+
+        // Iterate over each field that is a JavaFX Property
+        for (final Field field : this.getClass().getDeclaredFields()) {
+            if (Property.class.isAssignableFrom(field.getDeclaringClass())) {
+
+                try {
+                    ((Property<Object>) field.get(this)).addListener(changeListener);
+                } catch (IllegalArgumentException | IllegalAccessException e) {
+                    //Skip this field
+                }
+            }
+        }
+
+    }
 
     /**
      * {@inheritDoc}
@@ -74,7 +117,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
      * 
      * @return the value parsed according to its range
      */
-    protected double readDouble(String doubleString, double min, double max) {
+    protected double readDouble(final String doubleString, final double min, final double max) {
         return Math.max(Math.min(Double.parseDouble(doubleString), max), min);
     }
 
@@ -87,7 +130,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
      * 
      * @return the value parsed according to its range
      */
-    protected int readInteger(String intString, int min, int max) {
+    protected int readInteger(final String intString, final int min, final int max) {
         return Math.max(Math.min(Integer.parseInt(intString), max), min);
     }
 
@@ -104,7 +147,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
      * 
      * @return the boolean or false
      */
-    protected boolean readBoolean(String parameter) {
+    protected boolean readBoolean(final String parameter) {
 
         return parameter != null && "true".equalsIgnoreCase(parameter) || "yes".equalsIgnoreCase(parameter) || "1".equalsIgnoreCase(parameter);
     }
@@ -115,7 +158,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
      * @param sb the string container
      * @param parameter the parameter to append
      */
-    protected void append(StringBuilder sb, String parameter) {
+    protected void append(final StringBuilder sb, final String parameter) {
         sb.append(parameter).append(PARAMETER_SEPARATOR);
     }
 
@@ -125,7 +168,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
      * @param sb the string container
      * @param parameter the number parameter to append
      */
-    protected void append(StringBuilder sb, Number parameter) {
+    protected void append(final StringBuilder sb, final Number parameter) {
         append(sb, parameter.toString());
     }
 
@@ -136,8 +179,8 @@ public abstract class AbstractBaseParams implements ResourceParams {
      * 
      * @return the cleaned string
      */
-    protected String cleanString(StringBuilder sb) {
-        String res = sb.toString();
+    protected String cleanString(final StringBuilder sb) {
+        final String res = sb.toString();
         return res.substring(0, res.length() - PARAMETER_SEPARATOR.length());
     }
 
