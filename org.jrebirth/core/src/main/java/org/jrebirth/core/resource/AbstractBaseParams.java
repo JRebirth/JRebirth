@@ -49,13 +49,16 @@ public abstract class AbstractBaseParams implements ResourceParams {
 
             /**
              * Called when the value is updated.
+             * 
              * @param value the observable value
              * @param oldValue the old value
              * @param newValue the new value
              */
             @Override
             public void changed(final ObservableValue<? extends Object> value, final Object oldValue, final Object newValue) {
-                if (oldValue != null && newValue == null || !oldValue.equals(newValue)) {
+                if (oldValue == null && newValue != null
+                        || oldValue != null && newValue == null
+                        || oldValue != null && !oldValue.equals(newValue)) {
                     hasChanged(true);
                 }
             }
@@ -68,7 +71,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
                 try {
                     ((Property<Object>) field.get(this)).addListener(changeListener);
                 } catch (IllegalArgumentException | IllegalAccessException e) {
-                    //Skip this field
+                    continue;
                 }
             }
         }

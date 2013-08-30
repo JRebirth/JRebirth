@@ -31,7 +31,7 @@ import org.jrebirth.core.resource.Resources;
 public class FXML extends AbstractBaseParams implements FXMLParams {
 
     /** The absolute path used to retrieved fxml file and resource bundle. */
-    private final StringProperty absolutePath = new SimpleStringProperty("");// Avoid NPE for absolute path
+    private final StringProperty absolutePath = new SimpleStringProperty(""); // Avoid NPE for absolute path
 
     /** The absolute path used to retrieved resource bundle file if different of fxml one. */
     private final StringProperty absoluteBundlePath = new SimpleStringProperty();
@@ -86,7 +86,9 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
     }
 
     /**
-     * {@inheritDoc}
+     * Absolute path property.
+     * 
+     * @return the string property
      */
     public StringProperty absolutePathProperty() {
         return this.absolutePath;
@@ -101,7 +103,9 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
     }
 
     /**
-     * {@inheritDoc}
+     * Fxml name property.
+     * 
+     * @return the string property
      */
     public StringProperty fxmlNameProperty() {
         return this.fxmlName;
@@ -116,7 +120,9 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
     }
 
     /**
-     * {@inheritDoc}
+     * Absolute bundle path property.
+     * 
+     * @return the string property
      */
     public StringProperty absoluteBundlePathProperty() {
         return this.absoluteBundlePath;
@@ -131,7 +137,9 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
     }
 
     /**
-     * {@inheritDoc}
+     * Bundle name property.
+     * 
+     * @return the string property
      */
     public StringProperty bundleNameProperty() {
         return this.bundleName;

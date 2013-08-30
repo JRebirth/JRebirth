@@ -182,7 +182,7 @@ public class WaveItem<T> {
     }
 
     /**
-     * Initialize a WaveItem for a WaveItems
+     * Initialize a WaveItem for a WaveItems.
      * 
      * @param waveItems the enum wave item
      * @param wi the real waveItem
