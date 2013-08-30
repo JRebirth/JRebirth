@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.resource.image;
 
-
 /**
  * The interface <strong>LocalImage</strong>.
  * 

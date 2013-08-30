@@ -42,6 +42,9 @@ public interface JRebirthParameters {
     /** Developer provides more information when dynamic API is broken (Wave Contract). */
     ParameterItem<Boolean> DEVELOPER_MODE = create("developerMode", false);
 
+    /** Allow to auto refresh resource when resource params is updated. */
+    ParameterItem<Boolean> AUTO_REFRESH_RESOURCE = create("autoRefreshResource", false);
+
     /** . */
     ParameterItem<Class> COMPONENT_FACTORY = create("componentFactory", (Class) DefaultComponentFactory.class);
 

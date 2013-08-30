@@ -21,6 +21,7 @@ import java.util.List;
 
 import javafx.scene.text.Font;
 
+import org.jrebirth.core.resource.Resources;
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 
@@ -35,11 +36,6 @@ import org.slf4j.LoggerFactory;
  * @author Sébastien Bordes
  */
 public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontParams, Font> {
-
-    /**
-     * The <code>RESOURCE_SEPARATOR</code>.
-     */
-    private static final String R_SEP = "/";
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(FontBuilder.class);
@@ -123,14 +119,14 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
         if (fonts.isEmpty()) {
 
             // This variable will hold the 2 alternative font names
-            String fontName = JRebirthParameters.FONT_FOLDER.get() + R_SEP + transformFontName(realFont.name().name()) + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
+            String fontName = JRebirthParameters.FONT_FOLDER.get() + Resources.PATH_SEP + transformFontName(realFont.name().name()) + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
 
             LOGGER.trace("Try to load Transformed Font  {}", fontName);
             font = Font.loadFont(Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), realFont.size());
 
             // The font name contains '_' in its file name to replace ' '
             if (font == null) {
-                fontName = JRebirthParameters.FONT_FOLDER.get() + R_SEP + realFont.name().name() + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
+                fontName = JRebirthParameters.FONT_FOLDER.get() + Resources.PATH_SEP + realFont.name().name() + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
                 LOGGER.trace("Try to load Raw Font  {}", fontName);
                 font = Font.loadFont(
                         Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), realFont.size());

@@ -32,7 +32,7 @@ import org.jrebirth.core.resource.AbstractBaseParams;
 public abstract class AbstractBaseImage extends AbstractBaseParams implements ImageParams {
 
     /** The image path. */
-    private final StringProperty path = new SimpleStringProperty();
+    private final StringProperty path = new SimpleStringProperty("");// Avoid NPE for path
 
     /** The image path. */
     private final StringProperty nameProperty = new SimpleStringProperty();
@@ -97,8 +97,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
      */
     @Override
     public String path() {
-        // Avoid NPE on path
-        return this.path.get() == null ? "" : this.path.get();
+        return this.path.get();
     }
 
     /**

@@ -17,6 +17,9 @@
  */
 package org.jrebirth.core.resource.style;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import org.jrebirth.core.resource.AbstractBaseParams;
 
 /**
@@ -27,10 +30,10 @@ import org.jrebirth.core.resource.AbstractBaseParams;
 public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
 
     /** The style sheet path. */
-    private final String path;
+    private final StringProperty pathProperty = new SimpleStringProperty("");// Avoid NPE for path
 
     /** The style sheet name (without .css extension). */
-    private final String name;
+    private final StringProperty nameProperty = new SimpleStringProperty();
 
     /**
      * Default Constructor.
@@ -40,8 +43,8 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
      */
     public StyleSheet(final String path, final String name) {
         super();
-        this.path = path;
-        this.name = name;
+        this.pathProperty.set(path);
+        this.nameProperty.set(name);
     }
 
     /**
@@ -58,8 +61,15 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
      */
     @Override
     public String path() {
+        return this.pathProperty.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public StringProperty pathProperty() {
         // Avoid NPE on path
-        return this.path == null ? "" : this.path;
+        return this.pathProperty;
     }
 
     /**
@@ -67,7 +77,14 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
      */
     @Override
     public String name() {
-        return this.name;
+        return this.nameProperty.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public StringProperty nameProperty() {
+        return this.nameProperty;
     }
 
     /**
@@ -77,10 +94,10 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(path()).append(PARAMETER_SEPARATOR);
-        sb.append(name());
+        append(sb, path());
+        append(sb, name());
 
-        return sb.toString();
+        return cleanString(sb);
     }
 
     /**
@@ -89,12 +106,11 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
     @Override
     public void parse(final String[] parameters) {
         if (parameters.length >= 1) {
-            // this.path = parameters[0];
+            pathProperty().set(parameters[0]);
         }
         if (parameters.length == 2) {
-            // this.name = parameters[1];
+            nameProperty().set(parameters[1]);
         }
-        // return ? new StyleSheet(parameters[0], parameters[1]) : new StyleSheet(parameters[0]);
     }
 
 }
