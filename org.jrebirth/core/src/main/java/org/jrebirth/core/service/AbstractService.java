@@ -49,6 +49,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class AbstractService extends AbstractWaveReady<Service> implements Service {
 
+    /** The string used to separate the workdone and total work of a service task. */
     private static final String RATIO_SEPARATOR = " / ";
 
     /** The class logger. */
