@@ -43,12 +43,11 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      * @param object the parameter object
      */
     public ObjectParameter(final O object) {
-        super();
         this.object = object;
 
-        // Object must be not null in order to have
+        // Object must be not null
         if (object == null) {
-            throw new CoreRuntimeException("ObjectParameter must have a non null object (" + this.parameterName + ")");
+            throw new CoreRuntimeException("ObjectParameter must have a non null object for unamed parameter");
         }
     }
 
@@ -59,8 +58,13 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      * @param object the parameter object
      */
     public ObjectParameter(final String parameterName, final O object) {
-        this(object);
+        this.object = object;
         this.parameterName = parameterName;
+
+        // Object must be not null
+        if (object == null) {
+            throw new CoreRuntimeException("ObjectParameter must have a non null object for parameter : " + this.parameterName);
+        }
     }
 
     /**
@@ -92,7 +96,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
     /**
      * Parse the serialized object.
      * 
-     * @param parameterEntry the prameter entry to convert that wrap the serialized string
+     * @param parameterEntry the parameter entry to convert that wrap the serialized string
      * 
      * @return the real object
      */
