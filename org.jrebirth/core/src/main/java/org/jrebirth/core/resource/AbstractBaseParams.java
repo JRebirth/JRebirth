@@ -24,6 +24,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 import org.jrebirth.core.resource.color.ResourceParams;
+import org.jrebirth.core.util.ObjectUtility;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>AbstractBaseParams</strong>.
@@ -31,6 +35,9 @@ import org.jrebirth.core.resource.color.ResourceParams;
  * @author Sébastien Bordes
  */
 public abstract class AbstractBaseParams implements ResourceParams {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBaseParams.class);
 
     /** The flag that indicates if the resource params has changed. */
     private boolean changed;
@@ -56,9 +63,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
              */
             @Override
             public void changed(final ObservableValue<? extends Object> value, final Object oldValue, final Object newValue) {
-                if (oldValue == null && newValue != null
-                        || oldValue != null && newValue == null
-                        || oldValue != null && !oldValue.equals(newValue)) {
+                if (ObjectUtility.equalsOrNull(oldValue, newValue)) {
                     hasChanged(true);
                 }
             }
@@ -71,7 +76,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
                 try {
                     ((Property<Object>) field.get(this)).addListener(changeListener);
                 } catch (IllegalArgumentException | IllegalAccessException e) {
-                    continue;
+                    LOGGER.error("Cannot access to property " + field.getName() + " of class " + this.getClass(), e);
                 }
             }
         }

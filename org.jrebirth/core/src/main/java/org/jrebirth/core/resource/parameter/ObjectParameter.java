@@ -43,6 +43,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      * @param object the parameter object
      */
     public ObjectParameter(final O object) {
+        super();
         this.object = object;
 
         // Object must be not null
@@ -58,6 +59,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      * @param object the parameter object
      */
     public ObjectParameter(final String parameterName, final O object) {
+        super();
         this.object = object;
         this.parameterName = parameterName;
 
