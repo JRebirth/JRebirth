@@ -21,9 +21,6 @@ import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 import org.jrebirth.core.ui.fxml.FXMLComponent;
 import org.jrebirth.core.ui.fxml.FXMLUtils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * The class <strong>FXMLBuilder</strong>.
  * 
@@ -34,13 +31,13 @@ import org.slf4j.LoggerFactory;
 public final class FXMLBuilder extends AbstractResourceBuilder<FXMLItem, FXMLParams, FXMLComponent> {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FXMLBuilder.class);
+    // private static final Logger LOGGER = LoggerFactory.getLogger(FXMLBuilder.class);
 
     /** The fxml file extension. */
     private static final String FXML_EXT = ".fxml";
 
     /** The resource bundle file extension. */
-    private static final String BUNDLE_EXT = ".properties";
+    // private static final String BUNDLE_EXT = ".properties";
 
     /**
      * {@inheritDoc}

@@ -42,11 +42,11 @@ import org.slf4j.LoggerFactory;
  */
 public final class ClassUtility {
 
-    /** The separator use in upper case to simulate a acamleCase change. */
-    private static final String CASE_SEPARATOR = "_";
-
     /** The separator used for serialization. */
     public static final String SEPARATOR = "|";
+
+    /** The separator use in upper case to simulate a acamleCase change. */
+    private static final String CASE_SEPARATOR = "_";
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtility.class);
