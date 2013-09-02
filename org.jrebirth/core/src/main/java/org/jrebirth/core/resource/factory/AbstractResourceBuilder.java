@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.jrebirth.core.resource.ResourceItem;
+import org.jrebirth.core.resource.Resources;
 import org.jrebirth.core.resource.color.ResourceParams;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 
@@ -53,8 +54,8 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?>, P ex
         // Store the resource into the map
         this.paramsMap.put(key, params);
 
-        // Check if we need to activate the params checker to refresh resource
-        if (JRebirthParameters.AUTO_REFRESH_RESOURCE.get()) {
+        // Activate the AutoRefresh feature only for other parameters
+        if (Resources.isNotAutoRefreshParam(params) && JRebirthParameters.AUTO_REFRESH_RESOURCE.get()) {
             params.activateAutoRefresh();
         }
     }
