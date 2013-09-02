@@ -19,7 +19,6 @@ package org.jrebirth.core.facade;
 
 import org.jrebirth.core.command.Command;
 import org.jrebirth.core.exception.WaveException;
-import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
@@ -40,7 +39,7 @@ public interface WaveReady {
     /**
      * Begin to listen the type of wave for the current component.
      * 
-     * Wave Contract will be checked if {@link JRebirthParameters.DEVELOPER_MODE} parameter is true
+     * Wave Contract will be checked if {@link org.jrebirth.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
      * 
      * @param waveType the type(s) to listen
      */
@@ -49,7 +48,7 @@ public interface WaveReady {
     /**
      * Begin to listen the type of wave for the current component.
      * 
-     * Wave Contract will be checked if {@link JRebirthParameters.DEVELOPER_MODE} parameter is true
+     * Wave Contract will be checked if {@link org.jrebirth.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
      * 
      * The wave checker is used to filter the wave if the checker returns false
      * 
@@ -61,7 +60,7 @@ public interface WaveReady {
     /**
      * Register a wave call back contract.
      * 
-     * Wave Contract will be checked if {@link JRebirthParameters.DEVELOPER_MODE} parameter is true
+     * Wave Contract will be checked if {@link org.jrebirth.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
      * 
      * @param callType the wave type mapped to this service.
      * @param responseType the wave type of the wave emitted in return
