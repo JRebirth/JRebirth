@@ -11,10 +11,10 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class UtilTest {
+public class ClassUtilTest {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(UtilTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtilTest.class);
 
     @Test
     public void toCamelCase() {

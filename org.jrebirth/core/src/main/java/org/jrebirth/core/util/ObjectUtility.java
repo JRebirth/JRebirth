@@ -41,8 +41,21 @@ public final class ObjectUtility {
      * 
      * @return true if the object are equals or both null
      */
-    public static boolean equalsOrNull(final Object object1, final Object object2) {
+    public static boolean equalsOrBothNull(final Object object1, final Object object2) {
         return object1 == null && object2 == null || object1 != null && object1.equals(object2);
+    }
+
+    /**
+     * Return true if the object are NOT equals.<br />
+     * This method is NullPointerException-proof
+     * 
+     * @param object1 first object to compare
+     * @param object2 second object to compare
+     * 
+     * @return true if the object are NOT equals
+     */
+    public static boolean notEquals(final Object object1, final Object object2) {
+        return object1 != null && !object1.equals(object2) || object1 == null && object2 != null;
     }
 
 }
