@@ -193,16 +193,16 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         if (this.notifierMap.containsKey(wave.getWaveType())) {
             final List<WaveHandler> list = this.notifierMap.get(wave.getWaveType());
             // For each object interested in that wave type, process the action
-            for (final WaveHandler linked : list) {
+            for (final WaveHandler waveHandler : list) {
 
-                if (linked.check(wave)) {
+                if (waveHandler.check(wave)) {
                     // If the notified class is part of the UI
                     // We must perform this action into the JavaFX Application Thread
-                    if (linked instanceof Model) {
-                        JRebirth.runIntoJAT(LoopBuilder.newRunnable(linked.getWaveReady(), wave));
+                    if (waveHandler.getWaveReady() instanceof Model) {
+                        JRebirth.runIntoJAT(LoopBuilder.newRunnable(waveHandler.getWaveReady(), wave));
                     } else {
                         // Otherwise can perform it right now into the current thread (JRebirthThread)
-                        linked.getWaveReady().handle(wave);
+                        waveHandler.getWaveReady().handle(wave);
                     }
                 }
             }
