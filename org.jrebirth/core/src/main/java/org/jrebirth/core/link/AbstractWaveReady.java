@@ -40,6 +40,7 @@ import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveBase;
 import org.jrebirth.core.wave.WaveBean;
+import org.jrebirth.core.wave.WaveChecker;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveGroup;
 import org.jrebirth.core.wave.WaveType;
@@ -81,18 +82,42 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public final void listen(final WaveType waveType) {
+    public final void listen(final WaveType... waveTypes) {
+        // Call the other method with null waveChecker
+        listen(null, waveTypes);
+    }
+
+    /**
+     * Return the human-readable list of Wave Type.
+     * 
+     * @param waveTypes the list of wave type
+     * 
+     * @return the string list of Wave Type
+     */
+    private String getWaveTypesString(final WaveType[] waveTypes) {
+        final StringBuilder sb = new StringBuilder();
+        for (final WaveType waveType : waveTypes) {
+            sb.append(waveType.toString()).append(" ");
+        }
+        return sb.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void listen(final WaveChecker waveChecker, final WaveType... waveTypes) {
 
         // Check API compliance
-        CheckerUtility.checkWaveTypeContract(this.getClass(), waveType);
+        CheckerUtility.checkWaveTypeContract(this.getClass(), waveTypes);
 
         final WaveReady waveReady = this;
 
         // Use the JRebirth Thread to add new subscriptions for given Wave Type
-        JRebirth.runIntoJIT(new AbstractJrbRunnable("Listen " + waveType.toString() + " by " + waveReady.getClass().getSimpleName()) {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable("Listen " + getWaveTypesString(waveTypes) + " by " + waveReady.getClass().getSimpleName()) {
             @Override
             public void runInto() throws JRebirthThreadException {
-                getNotifier().listen(waveReady, waveType);
+                getNotifier().listen(waveReady, waveChecker, waveTypes);
             }
         });
     }
@@ -122,17 +147,17 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public final void unlisten(final WaveType waveType) {
+    public final void unlisten(final WaveType... waveTypes) {
 
         // Store an hard link to be able to use current class into the closure
         final WaveReady waveReady = this;
 
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJIT(new AbstractJrbRunnable("UnListen " + waveType.toString()) {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable("UnListen " + getWaveTypesString(waveTypes)) {
 
             @Override
             protected void runInto() throws JRebirthThreadException {
-                getNotifier().unlisten(waveReady, waveType);
+                getNotifier().unlisten(waveReady, waveTypes);
             }
         });
     }

@@ -24,6 +24,7 @@ import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
+import org.jrebirth.core.wave.WaveChecker;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveType;
 
@@ -41,9 +42,21 @@ public interface WaveReady {
      * 
      * Wave Contract will be checked if {@link JRebirthParameters.DEVELOPER_MODE} parameter is true
      * 
-     * @param waveType the type to listen
+     * @param waveType the type(s) to listen
      */
-    void listen(final WaveType waveType);
+    void listen(final WaveType... waveType);
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     * 
+     * Wave Contract will be checked if {@link JRebirthParameters.DEVELOPER_MODE} parameter is true
+     * 
+     * The wave checker is used to filter the wave if the checker returns false
+     * 
+     * @param waveChecker the wave checker used to forward the wave only if the checker return true
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveChecker waveChecker, final WaveType... waveType);
 
     /**
      * Register a wave call back contract.
@@ -58,9 +71,9 @@ public interface WaveReady {
     /**
      * Stop to listen the type of wave for the current component.
      * 
-     * @param waveType the type to stop to listen
+     * @param waveTypes the type(s) to stop to listen
      */
-    void unlisten(final WaveType waveType);
+    void unlisten(final WaveType... waveTypes);
 
     /**
      * Send a wave to the notifier.
