@@ -35,15 +35,17 @@ import static org.jrebirth.core.resource.Resources.create;
  */
 public interface JRebirthParameters {
 
+    String AUTO_REFRESH_NAME = "autoRefreshResource";
+
     /**************************************************************************************/
     /** __________________________Application Core Parameters.___________________________ */
     /**************************************************************************************/
 
+    /** Allow to auto refresh resource when resource params is updated. */
+    ParameterItem<Boolean> AUTO_REFRESH_RESOURCE = create(AUTO_REFRESH_NAME, false);
+
     /** Developer provides more information when dynamic API is broken (Wave Contract). */
     ParameterItem<Boolean> DEVELOPER_MODE = create("developerMode", false);
-
-    /** Allow to auto refresh resource when resource params is updated. */
-    ParameterItem<Boolean> AUTO_REFRESH_RESOURCE = create("autoRefreshResource", false);
 
     /** . */
     ParameterItem<Class> COMPONENT_FACTORY = create("componentFactory", (Class) DefaultComponentFactory.class);

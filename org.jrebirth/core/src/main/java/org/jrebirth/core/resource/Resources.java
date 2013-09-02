@@ -24,12 +24,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.jrebirth.core.resource.color.ColorItem;
 import org.jrebirth.core.resource.color.ColorItemBase;
 import org.jrebirth.core.resource.color.ColorParams;
+import org.jrebirth.core.resource.color.ResourceParams;
 import org.jrebirth.core.resource.font.FontItemBase;
 import org.jrebirth.core.resource.font.FontParams;
 import org.jrebirth.core.resource.image.ImageItemBase;
 import org.jrebirth.core.resource.image.ImageParams;
 import org.jrebirth.core.resource.parameter.ObjectParameter;
 import org.jrebirth.core.resource.parameter.ParameterItemBase;
+import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.resource.style.StyleSheetItemBase;
 import org.jrebirth.core.resource.style.StyleSheetParams;
 
@@ -202,6 +204,18 @@ public final class Resources {
         styleSheetItem.setUid(styleSheetIdGenerator.incrementAndGet());
 
         return styleSheetItem;
+    }
+
+    /**
+     * This utility method allow to avoid doing something if the parameter given is tahe AutoRefresh one. <br />
+     * Because this parameter is used to control how other parameters can be updated.
+     * 
+     * @param params the ResourceParams to check
+     * 
+     * @return true if the resource params is not the auto refresh parameter
+     */
+    public static boolean isNotAutoRefreshParam(final ResourceParams params) {
+        return !(params instanceof ObjectParameter && JRebirthParameters.AUTO_REFRESH_NAME.equals(((ObjectParameter<?>) params).name()));
     }
 
 }
