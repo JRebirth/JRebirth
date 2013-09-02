@@ -63,7 +63,8 @@ public abstract class AbstractBaseParams implements ResourceParams {
              */
             @Override
             public void changed(final ObservableValue<? extends Object> value, final Object oldValue, final Object newValue) {
-                if (ObjectUtility.equalsOrNull(oldValue, newValue)) {
+                if (ObjectUtility.notEquals(oldValue, newValue)) {
+                    LOGGER.trace(value.toString() + " has changed");
                     hasChanged(true);
                 }
             }
