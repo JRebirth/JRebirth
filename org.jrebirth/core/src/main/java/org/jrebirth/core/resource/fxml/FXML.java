@@ -164,14 +164,14 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
     @Override
     public String getBundlePath() {
         final StringBuilder sb = new StringBuilder();
-        if (!bundleName().isEmpty()) {
+        if (bundleName().isEmpty()) {
+            // Get the fxml path to build the bundle one
+            sb.append(getFxmlPath());
+        } else {
             if (!absoluteBundlePath().isEmpty()) {
                 sb.append(absoluteBundlePath()).append(Resources.PATH_SEP);
             }
             sb.append(bundleName());
-        } else {
-            // Get the fxml path to build the bundle one
-            sb.append(getFxmlPath());
         }
         return sb.toString();
     }
