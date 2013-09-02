@@ -22,6 +22,8 @@ import org.jrebirth.core.command.basic.showmodel.ShowFadingModelCommand;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.wave.ClassWaveChecker;
+import org.jrebirth.core.wave.DefaultWaveChecker;
 import org.jrebirth.core.wave.Wave;
 
 import org.slf4j.Logger;
@@ -47,8 +49,8 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
     protected void initModel() {
 
         // Listen StackWaves to be aware of any changes
-        listen(StackWaves.SHOW_PAGE_MODEL);
-        listen(StackWaves.SHOW_PAGE_ENUM);
+        listen(new DefaultWaveChecker<>(StackWaves.STACK_NAME, getStackName()), StackWaves.SHOW_PAGE_MODEL);
+        listen(new ClassWaveChecker<>(StackWaves.PAGE_ENUM, getPageEnumClass()), StackWaves.SHOW_PAGE_ENUM);
     }
 
     /**
@@ -93,10 +95,10 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
      * @return the page enum class
      */
     @SuppressWarnings("unchecked")
-    private Class<? extends PageEnum> getPageEnumClass() {
-        Class<? extends PageEnum> res = null;
+    private Class<PageEnum> getPageEnumClass() {
+        Class<PageEnum> res = null;
         if (getModelObject() instanceof Class && PageEnum.class.isAssignableFrom((Class<?>) getModelObject())) {
-            res = (Class<? extends PageEnum>) getModelObject();
+            res = (Class<PageEnum>) getModelObject();
         }
         return res;
     }
