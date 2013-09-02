@@ -37,35 +37,38 @@ public final class CheckerUtility {
     /**
      * Check if wave Type contract is respected for the the given {@link WaveReady} class.
      * 
-     * @param waveReadyClass the {@link WaveReady} class to check
-     * @param waveType the contract to respect
+     * Throws a Runtime exception is Wave Contract is broken.
      * 
-     *        Throws a Runtime exception is Wave Contract is broken
+     * @param waveReadyClass the {@link WaveReady} class to check
+     * @param waveTypes the contract to respect (could be several WaveType)
      */
-    public static void checkWaveTypeContract(final Class<? extends WaveReady> waveReadyClass, final WaveType waveType) {
+    public static void checkWaveTypeContract(final Class<? extends WaveReady> waveReadyClass, final WaveType... waveTypes) {
 
         // Perform the check only if Developer Mode is activated
         if (JRebirthParameters.DEVELOPER_MODE.get()) {
-            final List<Method> methods = ClassUtility.retrieveMethodList(waveReadyClass, waveType.toString());
 
-            if (methods.size() < 1) {
-                LOGGER.error(waveReadyClass.getSimpleName() + " API is broken, no method {} is available", ClassUtility.underscoreToCamelCase(waveType.toString()));
-                throw new CoreRuntimeException(waveReadyClass.getSimpleName() + " API is broken, no method " + ClassUtility.underscoreToCamelCase(waveType.toString()) + " is available");
-            }
+            for (final WaveType waveType : waveTypes) {
+                final List<Method> methods = ClassUtility.retrieveMethodList(waveReadyClass, waveType.toString());
 
-            // Check parameter only for a WaveTypeBase
-            if (waveType instanceof WaveTypeBase) {
-
-                boolean hasCompliantMethod = false;
-
-                final List<WaveItem<?>> wParams = ((WaveTypeBase) waveType).getWaveItemList();
-
-                for (int j = 0; j < methods.size() && !hasCompliantMethod; j++) {
-                    hasCompliantMethod = checkMethodSignature(methods.get(j), wParams);
+                if (methods.size() < 1) {
+                    LOGGER.error(waveReadyClass.getSimpleName() + " API is broken, no method {} is available", ClassUtility.underscoreToCamelCase(waveType.toString()));
+                    throw new CoreRuntimeException(waveReadyClass.getSimpleName() + " API is broken, no method " + ClassUtility.underscoreToCamelCase(waveType.toString()) + " is available");
                 }
-                if (!hasCompliantMethod) {
-                    throw new CoreRuntimeException(waveReadyClass.getSimpleName() + " API is broken, the method " + ClassUtility.underscoreToCamelCase(waveType.toString())
-                            + " has wrong parameters, expected:  provided:");
+
+                // Check parameter only for a WaveTypeBase
+                if (waveType instanceof WaveTypeBase) {
+
+                    boolean hasCompliantMethod = false;
+
+                    final List<WaveItem<?>> wParams = ((WaveTypeBase) waveType).getWaveItemList();
+
+                    for (int j = 0; j < methods.size() && !hasCompliantMethod; j++) {
+                        hasCompliantMethod = checkMethodSignature(methods.get(j), wParams);
+                    }
+                    if (!hasCompliantMethod) {
+                        throw new CoreRuntimeException(waveReadyClass.getSimpleName() + " API is broken, the method " + ClassUtility.underscoreToCamelCase(waveType.toString())
+                                + " has wrong parameters, expected:  provided:");
+                    }
                 }
             }
         }

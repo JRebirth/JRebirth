@@ -35,6 +35,7 @@ import static org.jrebirth.core.resource.Resources.create;
  */
 public interface JRebirthParameters {
 
+    /** The name of the AUTO_REEFRESH parameter which is quite special because it modify how other parameters will be processed. */
     String AUTO_REFRESH_NAME = "autoRefreshResource";
 
     /**************************************************************************************/

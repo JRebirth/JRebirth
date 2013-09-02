@@ -39,7 +39,6 @@ public final class ParameterItemBase<T> implements ParameterItem<T> {
      * @param parameterParams the params for parameter object
      */
     public ParameterItemBase(final ParameterParams parameterParams) {
-
         builder().storeParams(this, parameterParams);
     }
 
