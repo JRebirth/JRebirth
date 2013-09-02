@@ -180,6 +180,7 @@ public final class ServiceTask<T> extends Task<T> {
      */
     @Override
     public void updateMessage(final String message) {
+        // Override method modifier
         super.updateMessage(message);
     }
 
@@ -188,6 +189,7 @@ public final class ServiceTask<T> extends Task<T> {
      */
     @Override
     public void updateTitle(final String title) {
+        // Override method modifier
         super.updateTitle(title);
     }
 
