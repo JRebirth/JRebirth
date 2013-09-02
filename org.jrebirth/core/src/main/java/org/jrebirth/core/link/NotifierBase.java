@@ -36,6 +36,7 @@ import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
+import org.jrebirth.core.wave.WaveChecker;
 import org.jrebirth.core.wave.WaveType;
 
 import org.slf4j.Logger;
@@ -55,7 +56,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     private static final Logger LOGGER = LoggerFactory.getLogger(NotifierBase.class);
 
     /** The map that store link between wave type and objects interested. */
-    private final Map<WaveType, List<WaveReady>> notifierMap = new HashMap<>();
+    private final Map<WaveType, List<WaveHandler>> notifierMap = new HashMap<>();
 
     /**
      * Default Constructor.
@@ -190,17 +191,19 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
 
         // Retrieve all interested object from the map
         if (this.notifierMap.containsKey(wave.getWaveType())) {
-            final List<WaveReady> list = this.notifierMap.get(wave.getWaveType());
+            final List<WaveHandler> list = this.notifierMap.get(wave.getWaveType());
             // For each object interested in that wave type, process the action
-            for (final WaveReady linked : list) {
+            for (final WaveHandler linked : list) {
 
-                // If the notified class is part of the UI
-                // We must perform this action into the JavaFX Application Thread
-                if (linked instanceof Model) {
-                    JRebirth.runIntoJAT(LoopBuilder.newRunnable(linked, wave));
-                } else {
-                    // Otherwise can perform it right now into the current thread (JRebirthThread)
-                    linked.handle(wave);
+                if (linked.check(wave)) {
+                    // If the notified class is part of the UI
+                    // We must perform this action into the JavaFX Application Thread
+                    if (linked instanceof Model) {
+                        JRebirth.runIntoJAT(LoopBuilder.newRunnable(linked.getWaveReady(), wave));
+                    } else {
+                        // Otherwise can perform it right now into the current thread (JRebirthThread)
+                        linked.getWaveReady().handle(wave);
+                    }
                 }
             }
         } else {
@@ -214,22 +217,39 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
      * {@inheritDoc}
      */
     @Override
-    public void listen(final WaveReady linkedObject, final WaveType... waveType) throws JRebirthThreadException {
+    public void listen(final WaveReady linkedObject, final WaveType... waveTypes) throws JRebirthThreadException {
+        // Call the other method with null waveChecker
+        listen(linkedObject, null, waveTypes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void listen(final WaveReady linkedObject, final WaveChecker waveChecker, final WaveType... waveTypes) throws JRebirthThreadException {
 
         JRebirth.checkJIT();
 
         // For each given wave type, add linked Object to call
-        for (final WaveType wt : waveType) {
+        for (final WaveType waveType : waveTypes) {
 
             // IF this wave type isn't registered into the map, we add it with an empty list of LinkedObject
-            if (!this.notifierMap.containsKey(wt)) {
-                this.notifierMap.put(wt, LoopBuilder.newList(linkedObject));
+            if (!this.notifierMap.containsKey(waveType)) {
+                this.notifierMap.put(waveType, LoopBuilder.newList(linkedObject));
             }
             // Retrieve he list associated to this Wave Type
-            final List<WaveReady> list = this.notifierMap.get(wt);
-            if (list.isEmpty() || !list.contains(linkedObject)) {
+            final List<WaveHandler> list = this.notifierMap.get(waveType);
+
+            // Remove the linked object to unregister it
+            boolean contains = false;
+            for (int i = 0; !contains && i < list.size(); i++) {
+                if (list.get(i).getWaveReady().equals(linkedObject)) {
+                    contains = true;
+                }
+            }
+            if (list.isEmpty() || !contains) {
                 // Add the linked object if the list is empty or if the object isn't yet contained
-                list.add(linkedObject);
+                list.add(LoopBuilder.newHandler(linkedObject, waveChecker));
             }
         }
     }
@@ -238,24 +258,31 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
      * {@inheritDoc}
      */
     @Override
-    public void unlisten(final WaveReady linkedObject, final WaveType... waveType) throws JRebirthThreadException {
+    public void unlisten(final WaveReady linkedObject, final WaveType... waveTypes) throws JRebirthThreadException {
 
         JRebirth.checkJIT();
 
         // For each given wave type, remove linked Object to avoid calling them anymore
-        for (final WaveType nt : waveType) {
-            List<WaveReady> list;
-            if (this.notifierMap.containsKey(nt)) {
+        for (final WaveType waveType : waveTypes) {
+            List<WaveHandler> list;
+            if (this.notifierMap.containsKey(waveType)) {
 
                 // Retrieve the list of linked object associated to this Wave Type
-                list = this.notifierMap.get(nt);
+                list = this.notifierMap.get(waveType);
 
+                // When the linkedObject is removed stop the iteration
+                boolean removed = false;
                 // Remove the linked object to unregister it
-                list.remove(linkedObject);
+                for (int i = list.size() - 1; !removed && i >= 0; i--) {
+                    if (list.get(i).getWaveReady().equals(linkedObject)) {
+                        list.remove(i);
+                        removed = true;
+                    }
+                }
 
                 // Remove the Wave Type from the map if there isn't any linked object left
                 if (list.isEmpty()) {
-                    this.notifierMap.remove(nt);
+                    this.notifierMap.remove(waveType);
                 }
             }
         }
@@ -278,6 +305,18 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         }
 
         /**
+         * Build a new empty component wrapper.
+         * 
+         * @param linkedObject the object to wrap into an handler
+         * @param waveChecker the wave checker
+         * 
+         * @return a new instance of WaveHandler
+         */
+        public static WaveHandler newHandler(final WaveReady linkedObject, final WaveChecker waveChecker) {
+            return new WaveHandler(linkedObject, waveChecker);
+        }
+
+        /**
          * Build a new empty mutable array list.
          * 
          * @param item the object to define the generic type
@@ -286,8 +325,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
          * 
          * @return a new instance of ArrayList
          */
-        public static <T> List<T> newList(final T item) {
-            return new ArrayList<T>();
+        public static <T> List<WaveHandler> newList(final T item) {
+            return new ArrayList<WaveHandler>();
         }
 
         /**
