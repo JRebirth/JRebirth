@@ -119,7 +119,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
                 } else {
                     LOGGER.trace("Store key {} with value= {}", entry.getKey(), entry.getValue());
                 }
-                this.parametersMap.put(entry.getKey().toString(), new ParameterEntry<>(entry.getValue().toString()));
+                storeParameter(entry);
 
             }
 
@@ -127,6 +127,16 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
             LOGGER.error("Impossible to read the properties file : {}", custConfFile.getAbsolutePath());
         }
 
+    }
+
+    /**
+     * Store a parameter read from properties files.<br />
+     * The parameter is wrapped into a parameterEntry
+     * 
+     * @param entry the entry to store
+     */
+    private void storeParameter(final Map.Entry<Object, Object> entry) {
+        this.parametersMap.put(entry.getKey().toString(), new ParameterEntry<>(entry.getValue().toString()));
     }
 
     /**

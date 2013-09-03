@@ -26,4 +26,15 @@ import org.jrebirth.core.resource.color.ResourceParams;
  */
 public interface FontParams extends ResourceParams {
 
+    /**
+     * @return Returns the font name.
+     */
+    FontName name();
+
+    /**
+     * Return the font size.
+     * 
+     * @return the font size
+     */
+    double size();
 }
