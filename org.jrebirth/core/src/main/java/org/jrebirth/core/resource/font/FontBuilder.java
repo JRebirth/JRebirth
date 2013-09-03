@@ -48,7 +48,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
         Font font = null;
         if (jrFont instanceof RealFont) {
             // Build the requested font
-            font = buildRealFont((AbstractBaseFont) jrFont);
+            font = buildRealFont((RealFont) jrFont);
         } else if (jrFont instanceof FamilyFont) {
             // Build a family like font
             font = buildFamilyFont((FamilyFont) jrFont);
@@ -66,7 +66,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
      * 
      * @return the javafx font
      */
-    private Font buildRealFont(final AbstractBaseFont rFont) {
+    private Font buildRealFont(final RealFont rFont) {
         checkFontStatus(rFont);
         return javafx.scene.text.FontBuilder.create()
                 .name(transformFontName(rFont.name().name()))
@@ -110,7 +110,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
      * 
      * @param realFont the name of the font to load
      */
-    private void checkFontStatus(final AbstractBaseFont realFont) {
+    private void checkFontStatus(final FontParams realFont) {
 
         // Try to load system fonts
         final List<String> fonts = Font.getFontNames(transformFontName(realFont.name().name()));

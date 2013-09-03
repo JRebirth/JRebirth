@@ -91,7 +91,7 @@ public class WebColor extends AbstractBaseColor {
             if (hexValue.startsWith("0x")) {
                 hexValue = hexValue.substring(2);
             }
-            if (hexValue.startsWith("#")) {
+            if (hexValue.charAt(0) == '#') {
                 hexValue = hexValue.substring(1);
             }
 
