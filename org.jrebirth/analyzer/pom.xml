@@ -141,8 +141,8 @@
 						</keystoreConfig>
 					</sign>
 
-					<pack200>true</pack200>
-					<gzip>true</gzip>
+					<pack200>false</pack200>
+					<gzip>false</gzip>
 
 					<outputJarVersions>false</outputJarVersions>
 					<install>false</install>
