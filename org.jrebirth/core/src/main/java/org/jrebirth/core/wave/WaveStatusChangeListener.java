@@ -16,5 +16,5 @@ public interface WaveStatusChangeListener extends ChangeListener<Wave.Status> {
      * {@inheritDoc}
      */
     @Override
-    void changed(ObservableValue<? extends Status> observable, Status oldValue, Status newValue);
+    void changed(final ObservableValue<? extends Status> observable, final Status oldValue, final Status newValue);
 }

@@ -1,5 +1,7 @@
 package org.jrebirth.core.resource.image;
 
+import static org.junit.Assert.assertEquals;
+
 import javafx.scene.image.Image;
 
 import org.jrebirth.core.resource.AbstractBaseParams;
@@ -10,8 +12,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * The class <strong>ImageTest</strong>.

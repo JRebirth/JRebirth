@@ -35,7 +35,7 @@ public class PersonFormModel extends AbstractFormModel<PersonFormModel, PersonFo
     }
 
     @Override
-    protected void processWave(Wave wave) {
+    protected void processWave(final Wave wave) {
         // Nothing to do yet
 
     }

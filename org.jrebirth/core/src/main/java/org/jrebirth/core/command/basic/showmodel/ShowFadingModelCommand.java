@@ -17,7 +17,7 @@
  */
 package org.jrebirth.core.command.basic.showmodel;
 
-import org.jrebirth.core.command.DefaultMultiCommand;
+import org.jrebirth.core.command.DefaultMultiBeanCommand;
 
 /**
  * The Class ShowFadingModelCommand is used to show a model an then used a fading transition.
@@ -26,7 +26,7 @@ import org.jrebirth.core.command.DefaultMultiCommand;
  * 
  * Run into JIT and is sequential
  */
-public class ShowFadingModelCommand extends DefaultMultiCommand {
+public class ShowFadingModelCommand extends DefaultMultiBeanCommand<DisplayModelWaveBean> {
 
     /**
      * {@inheritDoc}

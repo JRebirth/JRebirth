@@ -42,6 +42,9 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
     /** Hold the current model displayed as a page. */
     private UniqueKey<? extends Model> currentModelKey;
 
+    /** The default page model key to display first. */
+    private UniqueKey<? extends Model> defaultPageModelKey;
+
     /**
      * {@inheritDoc}
      */
@@ -128,8 +131,10 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
 
         // Create the Wave Bean that will hold all data processed by chained commands
         final DisplayModelWaveBean waveBean = new DisplayModelWaveBean();
+
         // Define the placeholder that will receive the content
         waveBean.setChidrenPlaceHolder(getView().getRootNode().getChildren());
+
         // Allow to add element behind the stack to allow transition
         waveBean.setAppendChild(false);
 
@@ -146,8 +151,24 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
      */
     @Override
     protected void showView() {
-        // On redisplay show the start page
-        // doShowPage(Page.Splash, null);
+        // On redisplay show the start page only if no page is displayed
+        if (this.currentModelKey == null) {
+            // Manage default page for Page Enum
+            if (getPageEnumClass() != null && getPageEnumClass().isEnum() && getPageEnumClass().getEnumConstants().length > 0) {
+                doShowPageEnum(getPageEnumClass().getEnumConstants()[0], null);
+            }
+            // Manage default page for pageModelKey
+            if (getDefaultPageModelKey() != null) {
+                doShowPageModel(getDefaultPageModelKey(), getStackName(), null);
+            }
+        }
+    }
+
+    /**
+     * @return the default PageModel Key
+     */
+    public UniqueKey<? extends Model> getDefaultPageModelKey() {
+        return defaultPageModelKey;
     }
 
 }

@@ -17,7 +17,7 @@
  */
 package org.jrebirth.core.command.basic.showmodel;
 
-import org.jrebirth.core.command.DefaultMultiCommand;
+import org.jrebirth.core.command.DefaultMultiBeanCommand;
 
 /**
  * The class <strong>ShowModelCommand</strong>.
@@ -26,7 +26,7 @@ import org.jrebirth.core.command.DefaultMultiCommand;
  * 
  * @author Sébastien Bordes
  */
-public class ShowModelCommand extends DefaultMultiCommand {
+public class ShowModelCommand extends DefaultMultiBeanCommand<DisplayModelWaveBean> {
 
     /**
      * {@inheritDoc}

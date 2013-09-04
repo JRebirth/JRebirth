@@ -19,106 +19,16 @@ package org.jrebirth.core.command;
 
 import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
-import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.WaveBean;
+import org.jrebirth.core.wave.DefaultWaveBean;
 
 /**
  * The class <strong>DefaultMultiCommand</strong>.
  * 
+ * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
+ * 
  * @author Sébastien Bordes
  */
 @RunInto(RunType.JIT)
-public class DefaultMultiCommand extends AbstractMultiCommand<WaveBean> {
-
-    /**
-     * Default Constructor. Annotation will be used to define run type (default is JIT)
-     */
-    public DefaultMultiCommand() {
-        super(true);
-    }
-
-    /**
-     * Default Constructor. Annotation will be used to define run type (default is JIT)
-     * 
-     * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
-     */
-    public DefaultMultiCommand(final boolean sequential) {
-        super(sequential);
-    }
-
-    /**
-     * Default Constructor.
-     * 
-     * @param runInto The run into thread type
-     */
-    public DefaultMultiCommand(final RunType runInto) {
-        super(runInto, true);
-    }
-
-    /**
-     * Default Constructor.
-     * 
-     * @param runInto The run into thread type
-     * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
-     */
-    public DefaultMultiCommand(final RunType runInto, final boolean sequential) {
-        super(runInto, sequential);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void addSubCommand() {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveCancelled(final Wave wave) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveDestroyed(final Wave wave) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveCreated(final Wave wave) {
-        // Nothing to do yet
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveSent(final Wave wave) {
-        // Nothing to do yet
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveProcessed(final Wave wave) {
-        // Nothing to do yet
-    }
-
-    // @Override
-    // public void setParentCommand(Command parentCommand) {
-    // // Nothing to do yet
-    //
-    // }
+public class DefaultMultiCommand extends DefaultMultiBeanCommand<DefaultWaveBean> {
 
 }

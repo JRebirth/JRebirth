@@ -10,7 +10,7 @@ import org.jrebirth.core.ui.fxform.AbstractFormView;
  */
 public class PersonFormView extends AbstractFormView<PersonFormModel, DefaultController<PersonFormModel, PersonFormView>, Person> {
 
-    public PersonFormView(PersonFormModel model) {
+    public PersonFormView(final PersonFormModel model) {
         super(model);
     }
 

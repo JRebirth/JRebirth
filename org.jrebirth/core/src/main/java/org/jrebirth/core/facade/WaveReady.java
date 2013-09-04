@@ -18,6 +18,7 @@
 package org.jrebirth.core.facade;
 
 import org.jrebirth.core.command.Command;
+import org.jrebirth.core.command.CommandBean;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
@@ -115,9 +116,11 @@ public interface WaveReady {
      * @param commandClass the command class to call
      * @param waveBean the WaveBean that holds all required wave data
      * 
+     * @param <WB> the type of the wave bean to used
+     * 
      * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
      */
-    Wave callCommand(final Class<? extends Command> commandClass, final WaveBean waveBean);
+    <WB extends WaveBean> Wave callCommand(final Class<? extends CommandBean<WB>> commandClass, final WB waveBean);
 
     /**
      * Return the return wave type.

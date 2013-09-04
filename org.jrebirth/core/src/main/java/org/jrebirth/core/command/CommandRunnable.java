@@ -21,6 +21,7 @@ import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.exception.CommandException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ final class CommandRunnable extends AbstractJrbRunnable {
     private final Wave wave;
 
     /** The command link. */
-    private final AbstractBaseCommand command;
+    private final AbstractBaseCommand<? extends WaveBean> command;
 
     /**
      * Default Constructor.
@@ -50,7 +51,7 @@ final class CommandRunnable extends AbstractJrbRunnable {
      * @param command the command to run with the right thread
      * @param wave the wave that generates this command call
      */
-    CommandRunnable(final String runnableName, final AbstractBaseCommand command, final Wave wave) {
+    CommandRunnable(final String runnableName, final AbstractBaseCommand<? extends WaveBean> command, final Wave wave) {
         super(runnableName);
         this.command = command;
         this.wave = wave;
