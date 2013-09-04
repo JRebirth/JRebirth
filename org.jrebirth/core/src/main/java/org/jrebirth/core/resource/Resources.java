@@ -106,20 +106,6 @@ public final class Resources {
         return create(new ObjectParameter<O>(name, defaultValue));
     }
 
-    /**
-     * Build a class parameter item.
-     * 
-     * @param <O> the type of parameterized object
-     * 
-     * @param name the parameter unique name
-     * @param defaultValue the default object value
-     * 
-     * @return a new fresh color item object
-     */
-    public static <O extends Object> ParameterItemBase<Class<O>> create(final String name, final Class defaultValueClass) {
-        return create(new ObjectParameter<Class<O>>(name, defaultValueClass));
-    }
-
     /*************************************************************************/
     /** ______________________________COLOR___________________________________ */
     /*************************************************************************/
