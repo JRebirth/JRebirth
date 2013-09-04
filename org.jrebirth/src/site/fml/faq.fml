@@ -16,5 +16,30 @@
         <p>JRebirth is an Application Framework dedicated to JavaFX 2+ Java UI toolkit.</p>
       </answer>
     </faq>
+    
+        <faq id="why-jrebirth">
+      <question>
+        Why should I use JRebirth ?
+      </question>
+      <answer>
+        <p>If you want to build a complex application using JavaFX toolkit you may consider using an Application Framework.
+        <br />
+        JRebirth has been built to facilitate developers' work by providing easy-to-use features that crunch complexity.
+        </p>
+        <p>Main issues addressed</p>
+        <ul>
+        	<li>Concurrency within Multi-Threaded applications (single graphical thread, UI freezes &amp; Deadlocks)</li>
+       		<li>Memory Leaks</li>
+       		<li>Thread Pool dedicated to long tasks</li>
+       		<li>Asynchronous Messaging</li>
+        	<li>Resources management (Fonts, Colors, Images, CSS, FXML)</li>
+        	<li>Reusable Commands</li>
+        	<li>Pragmatic Events Handling</li>
+        </ul>
+        <p>All these topics are essential to build a reliable and maintainable application.</p>
+        
+      </answer>
+    </faq>
+    
   </part>
 </faqs>
