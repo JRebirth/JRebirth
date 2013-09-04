@@ -41,7 +41,7 @@ public interface Notifier {
      * 
      * @throws JRebirthThreadException if called outside the JRebirthThread
      */
-    void sendWave(Wave wave) throws JRebirthThreadException;
+    void sendWave(final Wave wave) throws JRebirthThreadException;
 
     /**
      * Start to listen a defined type of wave.
@@ -53,7 +53,7 @@ public interface Notifier {
      * 
      * @throws JRebirthThreadException if called outside the JRebirthThread
      */
-    void listen(WaveReady linkedObject, WaveType... waveTypes) throws JRebirthThreadException;
+    void listen(final WaveReady linkedObject, final WaveType... waveTypes) throws JRebirthThreadException;
 
     /**
      * Start to listen a defined type of wave.
@@ -68,7 +68,7 @@ public interface Notifier {
      * 
      * @throws JRebirthThreadException if called outside the JRebirthThread
      */
-    void listen(WaveReady linkedObject, WaveChecker waveChecker, WaveType... waveTypes) throws JRebirthThreadException;
+    void listen(final WaveReady linkedObject, final WaveChecker waveChecker, final WaveType... waveTypes) throws JRebirthThreadException;
 
     /**
      * Stop to listen a defined type of wave.
@@ -80,6 +80,6 @@ public interface Notifier {
      * 
      * @throws JRebirthThreadException if called outside the JRebirthThread
      */
-    void unlisten(WaveReady linkedObject, WaveType... waveType) throws JRebirthThreadException;
+    void unlisten(final WaveReady linkedObject, final WaveType... waveType) throws JRebirthThreadException;
 
 }
