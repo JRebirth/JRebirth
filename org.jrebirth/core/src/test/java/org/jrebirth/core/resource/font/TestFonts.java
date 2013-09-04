@@ -17,10 +17,10 @@
  */
 package org.jrebirth.core.resource.font;
 
+import static org.jrebirth.core.resource.Resources.create;
+
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
-
-import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>TestFonts</strong>.

@@ -1,14 +1,13 @@
 package org.jrebirth.core.ui.fxform;
 
 import org.jrebirth.core.ui.Controller;
-import org.jrebirth.core.ui.object.ViewObject;
 
 /**
  * The class <strong>DefaultFormView</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class DefaultFormView<M extends AbstractFormModel<M, ?, B>, C extends Controller<M, AbstractFormView<M, C, B>>, B extends ViewObject>
+public class DefaultFormView<M extends AbstractFormModel<M, ?, B>, C extends Controller<M, AbstractFormView<M, C, B>>, B extends Object>
         extends AbstractFormView<M, C, B> {
 
     /**

@@ -46,7 +46,7 @@ public final class TransitionController extends DefaultController<TransitionMode
      * {@inheritDoc}
      */
     @Override
-    public void action(ActionEvent actionEvent) {
+    public void action(final ActionEvent actionEvent) {
         // Nothing to do yet
     }
 

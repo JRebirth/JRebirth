@@ -1,14 +1,13 @@
 package org.jrebirth.core.ui.fxform;
 
-import com.dooapp.fxform.FXForm;
-
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.AbstractView;
 import org.jrebirth.core.ui.Controller;
-import org.jrebirth.core.ui.object.ViewObject;
+
+import com.dooapp.fxform.FXForm;
 
 //M, AbstractFormView<M, B, C>, B
-public abstract class AbstractFormView<M extends AbstractFormModel<M, ?, ?>, C extends Controller<M, ?>, B extends ViewObject> extends AbstractView<M, FXForm<B>, C> {
+public abstract class AbstractFormView<M extends AbstractFormModel<M, ?, ?>, C extends Controller<M, ?>, B extends Object> extends AbstractView<M, FXForm<B>, C> {
 
     /**
      * Default Constructor.

@@ -65,6 +65,6 @@ public interface ResourceParams {
      * 
      * @param parameters split from resource properties file
      */
-    void parse(String[] parameters);
+    void parse(final String[] parameters);
 
 }

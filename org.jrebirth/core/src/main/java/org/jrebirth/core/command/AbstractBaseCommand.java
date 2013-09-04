@@ -208,11 +208,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
     // }
 
     /**
-     * Get the wave bean and cast it.
-     * 
-     * @param wave the wave that hold the bean
-     * 
-     * @return the casted wave bean
+     * {@inheritDoc}
      */
     @Override
     @SuppressWarnings("unchecked")

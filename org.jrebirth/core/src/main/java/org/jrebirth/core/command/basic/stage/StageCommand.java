@@ -17,7 +17,7 @@
  */
 package org.jrebirth.core.command.basic.stage;
 
-import org.jrebirth.core.command.DefaultUICommand;
+import org.jrebirth.core.command.DefaultUIBeanCommand;
 import org.jrebirth.core.service.basic.StageService;
 import org.jrebirth.core.wave.Wave;
 
@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class StageCommand extends DefaultUICommand {
+public class StageCommand extends DefaultUIBeanCommand<StageWaveBean> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(StageCommand.class);

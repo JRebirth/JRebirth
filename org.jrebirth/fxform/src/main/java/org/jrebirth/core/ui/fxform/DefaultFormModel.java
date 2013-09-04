@@ -1,6 +1,5 @@
 package org.jrebirth.core.ui.fxform;
 
-import org.jrebirth.core.ui.object.ViewObject;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -12,7 +11,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public class DefaultFormModel<M extends AbstractFormModel<?, ?, ?>, V extends AbstractFormView<?, ?, B>, B extends ViewObject> extends AbstractFormModel<M, V, B> {
+public class DefaultFormModel<M extends AbstractFormModel<?, ?, ?>, V extends AbstractFormView<?, ?, B>, B extends Object> extends AbstractFormModel<M, V, B> {
 
     /**
      * {@inheritDoc}

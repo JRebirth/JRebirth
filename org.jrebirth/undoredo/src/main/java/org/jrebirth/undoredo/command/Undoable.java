@@ -18,11 +18,12 @@
 package org.jrebirth.undoredo.command;
 
 import org.jrebirth.core.command.Command;
+import org.jrebirth.core.wave.WaveBean;
 
 /**
  * The Interface Undoable.
  */
-public interface Undoable extends Command {
+public interface Undoable<WB extends WaveBean> extends Command {
 
     // void init(Wave wave);
     //

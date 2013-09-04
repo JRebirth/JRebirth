@@ -17,7 +17,7 @@
  */
 package org.jrebirth.core.command.basic.showmodel;
 
-import org.jrebirth.core.command.DefaultPoolCommand;
+import org.jrebirth.core.command.DefaultPoolBeanCommand;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.ui.Model;
@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class PrepareModelCommand extends DefaultPoolCommand {
+public class PrepareModelCommand extends DefaultPoolBeanCommand<DisplayModelWaveBean> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PrepareModelCommand.class);

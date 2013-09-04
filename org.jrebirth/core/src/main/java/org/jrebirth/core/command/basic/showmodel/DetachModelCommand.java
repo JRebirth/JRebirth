@@ -19,7 +19,7 @@ package org.jrebirth.core.command.basic.showmodel;
 
 import javafx.scene.Node;
 
-import org.jrebirth.core.command.DefaultUICommand;
+import org.jrebirth.core.command.DefaultUIBeanCommand;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 
@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class DetachModelCommand extends DefaultUICommand {
+public class DetachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBean> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DetachModelCommand.class);

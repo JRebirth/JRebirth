@@ -335,6 +335,7 @@ public final class JRebirthThread extends Thread {
      * 
      * @return the wave responsible of the creation of the first view
      */
+    @SuppressWarnings("unchecked")
     protected Wave getLaunchFirstViewWave() {
         Wave firstWave = null;
         // Generates the command cave directly to win a Wave turn

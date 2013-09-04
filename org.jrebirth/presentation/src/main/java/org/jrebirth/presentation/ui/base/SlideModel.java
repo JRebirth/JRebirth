@@ -33,7 +33,7 @@ public interface SlideModel<S extends SlideStep> extends Model {
     /**
      * @param slideNumber The slideNumber to set.
      */
-    void setSlideNumber(int slideNumber);
+    void setSlideNumber(final int slideNumber);
 
     /**
      * Show the step.
