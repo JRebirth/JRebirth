@@ -49,7 +49,7 @@ public abstract class AbstractWaveChecker<I extends Object, V> implements WaveCh
      * {@inheritDoc}
      */
     @Override
-    public abstract Boolean call(Wave wave);
+    public abstract Boolean call(final Wave wave);
 
     /**
      * @return Returns the waveItem.

@@ -16,8 +16,6 @@ public final class FXMLShowCaseModel extends DefaultModel<FXMLShowCaseModel, FXM
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(FXMLShowCaseModel.class);
 
-    // static final Class<? extends PageEnum> STACK_PAGES = FXMLPage.class;// "Main";
-
     /**
      * {@inheritDoc}
      */
@@ -26,6 +24,16 @@ public final class FXMLShowCaseModel extends DefaultModel<FXMLShowCaseModel, FXM
         super.initModel();
 
         getView().getRootNode().setCenter(getModel(StackModel.class, FXMLPage.class).getRootNode());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void showView() {
+        super.showView();
+
+        // getModel(StackModel.class, FXMLPage.class).doShowView(null);
     }
 
 }

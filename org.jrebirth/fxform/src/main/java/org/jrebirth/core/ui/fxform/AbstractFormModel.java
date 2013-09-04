@@ -1,7 +1,6 @@
 package org.jrebirth.core.ui.fxform;
 
 import org.jrebirth.core.ui.object.AbstractObjectModel;
-import org.jrebirth.core.ui.object.ViewObject;
 
 /**
  * 
@@ -13,7 +12,7 @@ import org.jrebirth.core.ui.object.ViewObject;
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractFormModel<M extends AbstractFormModel<?, ?, ?>, V extends AbstractFormView<?, ?, B>, B extends ViewObject> extends AbstractObjectModel<M, V, B> {
+public abstract class AbstractFormModel<M extends AbstractFormModel<?, ?, ?>, V extends AbstractFormView<?, ?, B>, B extends Object> extends AbstractObjectModel<M, V, B> {
 
     /**
      * {@inheritDoc}

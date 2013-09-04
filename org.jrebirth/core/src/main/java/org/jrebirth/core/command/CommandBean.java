@@ -17,7 +17,6 @@
  */
 package org.jrebirth.core.command;
 
-import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
 
@@ -28,26 +27,7 @@ import org.jrebirth.core.wave.WaveBean;
  * 
  * @author Sébastien Bordes
  */
-public interface Command extends FacadeReady<Command> {
-
-    /**
-     * Run the command.
-     */
-    void run();
-
-    /**
-     * Run the command.
-     * 
-     * @param wave the wave that have triggered this command
-     */
-    void run(final Wave wave);
-
-    // /**
-    // * Link a parent command.
-    // *
-    // * @param parentCommand the parent command
-    // */
-    // void setParentCommand(final Command parentCommand);
+public interface CommandBean<WB extends WaveBean> extends Command {
 
     /**
      * Get the wave bean and cast it.
@@ -56,6 +36,6 @@ public interface Command extends FacadeReady<Command> {
      * 
      * @return the casted wave bean
      */
-    WaveBean getWaveBean(final Wave wave);
-
+    @Override
+    WB getWaveBean(final Wave wave);
 }

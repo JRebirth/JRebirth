@@ -30,7 +30,7 @@ import org.jrebirth.core.wave.WaveData;
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractUndoableCommand extends AbstractSingleCommand<WaveBean> implements Undoable {
+public abstract class AbstractUndoableCommand<WB extends WaveBean> extends AbstractSingleCommand<WB> implements Undoable<WB> {
 
     /**
      * {@inheritDoc}
@@ -68,7 +68,7 @@ public abstract class AbstractUndoableCommand extends AbstractSingleCommand<Wave
      * 
      * @param wave the wave
      */
-    protected abstract void init(Wave wave);
+    protected abstract void init(final Wave wave);
 
     /**
      * Undo the command.

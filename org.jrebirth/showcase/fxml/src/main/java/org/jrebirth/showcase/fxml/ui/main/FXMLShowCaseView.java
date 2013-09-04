@@ -1,6 +1,8 @@
 package org.jrebirth.showcase.fxml.ui.main;
 
-import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.ToggleGroupBuilder;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPaneBuilder;
 
@@ -20,13 +22,13 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(FXMLShowCaseView.class);
 
-    private Button showIncluded;
+    private ToggleButton showEmbedded;
 
-    private Button showEmbedded;
+    private ToggleButton showStandalone;
 
-    private Button showHybrid;
+    private ToggleButton showHybrid;
 
-    private Button showStandalone;
+    private ToggleButton showIncluded;
 
     /**
      * Default Constructor.
@@ -44,14 +46,17 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
      */
     @Override
     protected void initView() {
+        this.showEmbedded = new ToggleButton("Embedded");
+        this.showStandalone = new ToggleButton("Standalone");
+        this.showHybrid = new ToggleButton("Hybrid");
+        this.showIncluded = new ToggleButton("Included");
 
-        this.showIncluded = new Button("Included");
-        this.showEmbedded = new Button("Embedded");
-        this.showHybrid = new Button("Hybrid");
-        this.showStandalone = new Button("Standalone");
+        ToggleGroup group = ToggleGroupBuilder.create()
+                .toggles(this.showEmbedded, this.showStandalone, this.showHybrid, this.showIncluded)
+                .build();
 
         getRootNode().setTop(FlowPaneBuilder.create()
-                .children(showIncluded, showEmbedded, showHybrid, showStandalone)
+                .children(this.showEmbedded, this.showStandalone, this.showHybrid, this.showIncluded)
                 .build());
 
     }
@@ -61,8 +66,8 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
      */
     @Override
     public void start() {
-        LOGGER.debug("Start the Sample View");
-        // Custom code to process when the view is displayed the first time
+        LOGGER.debug("Start the View");
+        //
     }
 
     /**
@@ -83,20 +88,20 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
         // Custom code to process when the view is hidden
     }
 
-    Button getShowIncluded() {
-        return showIncluded;
+    ToggleButton getShowIncluded() {
+        return this.showIncluded;
     }
 
-    Button getShowEmbedded() {
-        return showEmbedded;
+    ToggleButton getShowEmbedded() {
+        return this.showEmbedded;
     }
 
-    Button getShowHybrid() {
-        return showHybrid;
+    ToggleButton getShowHybrid() {
+        return this.showHybrid;
     }
 
-    Button getShowStandalone() {
-        return showStandalone;
+    ToggleButton getShowStandalone() {
+        return this.showStandalone;
     }
 
 }

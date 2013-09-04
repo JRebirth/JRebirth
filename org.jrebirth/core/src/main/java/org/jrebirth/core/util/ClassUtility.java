@@ -73,7 +73,7 @@ public final class ClassUtility {
      * Build the nth generic type of a class.
      * 
      * @param mainClass The main class used (that contain at least one generic type)
-     * @param assignableClass the type of the generic to build
+     * @param assignableClass the parent type of the generic to build
      * @param parameters used by the constructor of the generic type
      * 
      * @return a new instance of the generic type
@@ -81,6 +81,21 @@ public final class ClassUtility {
      * @throws CoreException if the instantiation fails
      */
     public static Object buildGenericType(final Class<?> mainClass, final Class<?> assignableClass, final Object... parameters) throws CoreException {
+        return buildGenericType(mainClass, new Class<?>[] { assignableClass }, parameters);
+    }
+
+    /**
+     * Build the nth generic type of a class.
+     * 
+     * @param mainClass The main class used (that contain at least one generic type)
+     * @param assignableClasses if the array contains only one class it define the type of the generic to build, otherwise it defines the types to skip to find the obejct to build
+     * @param parameters used by the constructor of the generic type
+     * 
+     * @return a new instance of the generic type
+     * 
+     * @throws CoreException if the instantiation fails
+     */
+    public static Object buildGenericType(final Class<?> mainClass, final Class<?>[] assignableClasses, final Object... parameters) throws CoreException {
         Class<?> genericClass = null;
         // Copy parameters type to find the right constructor
         final Class<?>[] parameterTypes = new Class<?>[parameters.length];
@@ -93,7 +108,7 @@ public final class ClassUtility {
                 i++;
             }
 
-            genericClass = findGenericClass(mainClass, assignableClass);
+            genericClass = findGenericClass(mainClass, assignableClasses);
 
             // Find the right constructor and use arguments to create a new
             // instance
@@ -104,7 +119,7 @@ public final class ClassUtility {
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | SecurityException e) {
             final String message = genericClass == null
-                    ? "Impossible to build the object assignable to " + assignableClass.getName() + " for the class " + mainClass.getName()
+                    ? "Impossible to build the object assignable to " + assignableClasses.toString() + " for the class " + mainClass.getName() // FIXME tostinrg classes
                     : "Impossible to build the " + genericClass.getName() + " object for the class " + mainClass.getName();
             LOGGER.error(message, e);
 
@@ -145,11 +160,25 @@ public final class ClassUtility {
      * Return the generic class for the given parent class and index.
      * 
      * @param mainClass the parent class
-     * @param assignableClass the type of the generic type to find
+     * @param assignableClass the parent type of the generic to build
      * 
      * @return the class of the generic type according to the index provided or null if not found
      */
     public static Class<?> findGenericClass(final Class<?> mainClass, final Class<?> assignableClass) {
+        return findGenericClass(mainClass, new Class<?>[] { assignableClass });
+    }
+
+    /**
+     * Return the generic class for the given parent class and index.
+     * 
+     * @param mainClass the parent class
+     * @param assignableClasses if the array contains only one class it define the type of the generic to build, otherwise it defines the types to skip to find the obejct to build
+     * 
+     * @return the class of the generic type according to the index provided or null if not found
+     */
+    public static Class<?> findGenericClass(final Class<?> mainClass, final Class<?>[] assignableClasses) {
+
+        final boolean excludeMode = assignableClasses.length > 1;
 
         // Retrieve the generic super class Parameterized type
         final ParameterizedType paramType = (ParameterizedType) mainClass.getGenericSuperclass();
@@ -158,8 +187,19 @@ public final class ClassUtility {
         Class<?> tempClass = null;
         for (int i = 0; genericClass == null && i < paramType.getActualTypeArguments().length; i++) {
             tempClass = getClassFromType(paramType.getActualTypeArguments()[i]);
-            if (assignableClass.isAssignableFrom(tempClass)) {
+            if (!excludeMode && assignableClasses[0].isAssignableFrom(tempClass)) {
                 genericClass = tempClass;
+            }
+            if (excludeMode) {
+                boolean excludeIt = false;
+                for (final Class<?> excludeClass : assignableClasses) {
+                    if (excludeClass.isAssignableFrom(tempClass)) {
+                        excludeIt = true;
+                    }
+                }
+                if (!excludeIt) {
+                    genericClass = tempClass;
+                }
             }
         }
 

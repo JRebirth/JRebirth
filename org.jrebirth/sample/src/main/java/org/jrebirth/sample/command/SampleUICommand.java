@@ -6,9 +6,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageBuilder;
 import javafx.stage.StageStyle;
 
-import org.jrebirth.core.command.DefaultUICommand;
+import org.jrebirth.core.command.DefaultUIBeanCommand;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author
  */
-public final class SampleUICommand extends DefaultUICommand {
+public final class SampleUICommand extends DefaultUIBeanCommand<WaveBean> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SampleUICommand.class);

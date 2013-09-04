@@ -21,6 +21,6 @@ public interface ComponentFactory {
      * 
      * @throws CoreException CoreException if an error has occurred
      */
-    <R extends Object> R buildComponent(Class<R> clazz) throws CoreException;
+    <R extends Object> R buildComponent(final Class<R> clazz) throws CoreException;
 
 }

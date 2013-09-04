@@ -19,7 +19,7 @@ package org.jrebirth.core.command.basic.showmodel;
 
 import javafx.scene.Node;
 
-import org.jrebirth.core.command.DefaultUICommand;
+import org.jrebirth.core.command.DefaultUIBeanCommand;
 import org.jrebirth.core.wave.Wave;
 
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class AttachModelCommand extends DefaultUICommand {
+public class AttachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBean> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AttachModelCommand.class);
@@ -70,18 +70,6 @@ public class AttachModelCommand extends DefaultUICommand {
             }
 
         }
-    }
-
-    /**
-     * Get the wave bean and cast it.
-     * 
-     * @param wave the wave that hold the bean
-     * 
-     * @return he casted wave bean
-     */
-    @Override
-    public DisplayModelWaveBean getWaveBean(final Wave wave) {
-        return (DisplayModelWaveBean) wave.getWaveBean();
     }
 
 }

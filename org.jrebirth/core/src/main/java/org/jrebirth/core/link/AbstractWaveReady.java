@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.core.command.Command;
+import org.jrebirth.core.command.CommandBean;
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.exception.JRebirthThreadException;
@@ -186,7 +187,7 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
      * {@inheritDoc}
      */
     @Override
-    public final Wave callCommand(final Class<? extends Command> commandClass, final WaveBean waveBean) {
+    public final <WB extends WaveBean> Wave callCommand(final Class<? extends CommandBean<WB>> commandClass, final WB waveBean) {
         return sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, waveBean));
     }
 

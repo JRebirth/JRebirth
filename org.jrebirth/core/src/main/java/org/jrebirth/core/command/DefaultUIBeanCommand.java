@@ -19,18 +19,42 @@ package org.jrebirth.core.command;
 
 import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
-import org.jrebirth.core.wave.DefaultWaveBean;
+import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBean;
 
 /**
- * The class <strong>DefaultCommand</strong>.
+ * The class <strong>DefaultUIBeanCommand</strong>.
  * 
- * The default empty class for Internal commands.
+ * The default empty class for UI commands.
  * 
  * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  * 
  * @author Sébastien Bordes
  */
-@RunInto(RunType.JIT)
-public class DefaultCommand extends DefaultBeanCommand<DefaultWaveBean> {
+@RunInto(RunType.JAT)
+public class DefaultUIBeanCommand<WB extends WaveBean> extends AbstractSingleCommand<WB> {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void ready() throws CoreException {
+        // Nothing to do yet by the default UI command, must be overridden
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void execute(final Wave wave) {
+        // Nothing to do yet by the default UI command, must be overridden
+    }
+
+    // @Override
+    // public void setParentCommand(Command parentCommand) {
+    // // Nothing to do yet
+    //
+    // }
 
 }

@@ -28,7 +28,7 @@ import org.jrebirth.core.wave.WaveBean;
  * 
  * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  */
-public interface MultiCommand<WB extends WaveBean> extends Command {
+public interface MultiCommand<WB extends WaveBean> extends CommandBean<WB> {
 
     /**
      * Add a command to the queue.

@@ -17,10 +17,13 @@
  */
 package org.jrebirth.core.ui.object;
 
+import javafx.scene.Node;
+
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.key.MultitonKey;
 import org.jrebirth.core.ui.AbstractModel;
+import org.jrebirth.core.ui.Controller;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.ui.View;
 import org.jrebirth.core.util.ClassUtility;
@@ -36,7 +39,7 @@ import org.jrebirth.core.util.ClassUtility;
  * @param <V> the class type of the view managed by this model
  * @param <O> the class type of the bindable object
  */
-public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, ?>, O extends ViewObject> extends AbstractModel<M, V> {
+public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, ?>, O extends Object> extends AbstractModel<M, V> {
 
     /** The dedicated view component. */
     private O object;
@@ -61,7 +64,7 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
 
         // Build the current view by reflection
         try {
-            this.object = (O) ClassUtility.buildGenericType(this.getClass(), ViewObject.class);
+            this.object = (O) ClassUtility.buildGenericType(this.getClass(), new Class<?>[] { Model.class, View.class, Node.class, Controller.class });
         } catch (final CoreException e) {
             throw new CoreRuntimeException("Failure while building the bindable object for model " + getClass(), e);
         }
@@ -87,7 +90,8 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
         // If the model object has been passed as part of the key
         if (getKey() instanceof MultitonKey<?>
                 && ((MultitonKey<?>) getKey()).getValue() != null
-                && ClassUtility.findGenericClass(this.getClass(), ViewObject.class).isAssignableFrom(((MultitonKey<?>) getKey()).getValue().getClass())) {
+                && ClassUtility.findGenericClass(this.getClass(), new Class<?>[] { Model.class, View.class, Node.class, Controller.class }).isAssignableFrom(
+                        ((MultitonKey<?>) getKey()).getValue().getClass())) {
             this.object = (O) ((MultitonKey<?>) getKey()).getValue();
         }
     }

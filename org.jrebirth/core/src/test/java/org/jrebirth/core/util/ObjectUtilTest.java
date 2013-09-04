@@ -19,13 +19,13 @@ public class ObjectUtilTest {
     @Test
     public void equalsOrBothNull() {
 
-        String na = null;
-        String nb = null;
+        final String na = null;
+        final String nb = null;
 
-        String a = "a_string";
-        String a2 = "a_string";
+        final String a = "a_string";
+        final String a2 = "a_string";
 
-        String b = "b_string";
+        final String b = "b_string";
 
         Assert.assertTrue("Null <=> Null", ObjectUtility.equalsOrBothNull(na, nb));
 
@@ -45,13 +45,13 @@ public class ObjectUtilTest {
     @Test
     public void notEquals() {
 
-        String na = null;
-        String nb = null;
+        final String na = null;
+        final String nb = null;
 
-        String a = "a_string";
-        String a2 = "a_string";
+        final String a = "a_string";
+        final String a2 = "a_string";
 
-        String b = "b_string";
+        final String b = "b_string";
 
         Assert.assertFalse("Null </=/> Null", ObjectUtility.notEquals(na, nb));
 
