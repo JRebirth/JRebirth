@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  */
-public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractWaveReady<Command> implements Command {
+public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractWaveReady<Command> implements CommandBean<WB> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBaseCommand.class);
