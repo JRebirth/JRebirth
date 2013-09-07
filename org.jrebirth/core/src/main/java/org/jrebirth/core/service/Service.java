@@ -19,6 +19,8 @@ package org.jrebirth.core.service;
 
 import java.util.Collection;
 
+import javafx.collections.ObservableMap;
+
 import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.wave.Wave;
 
@@ -36,9 +38,19 @@ public interface Service extends FacadeReady<Service> {
      * 
      * @param wave the wave that hold all related data
      * 
-     * @param <T> The type of the object to return must be compatible with the WaveType contract taht call this service
+     * @return the service task created that will perform the job
+     * 
+     * @param <T> The type of the object to return must be compatible with the WaveType contract that call this service
      */
-    <T extends Object> void returnData(final Wave wave);
+    <T extends Object> ServiceTask<T> returnData(final Wave wave);
+
+    /**
+     * Return The Pending tasks map.<br/>
+     * Key is the wave UID, value is the {@link ServiceTask}
+     * 
+     * @return the pending tasks map
+     */
+    ObservableMap<String, ServiceTask<?>> pendingTasksProperty();
 
     /**
      * Get pending task list.
