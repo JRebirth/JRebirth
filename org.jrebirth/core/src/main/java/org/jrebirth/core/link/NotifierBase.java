@@ -33,6 +33,7 @@ import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.service.Service;
+import org.jrebirth.core.service.ServiceTask;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
@@ -147,7 +148,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
      * 
      * The same service will be retrieved each time this method is called.
      * 
-     * This method is called from the JIT (JRebirth Internal Thread)<br>
+     * This method is called from the JIT (JRebirth Internal Thread)<br />
      * 
      * @param wave the wave that contains all informations
      */
@@ -164,7 +165,11 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
             }
         } else {
             // The inner task will be run into the JRebirth Thread Pool
-            service.returnData(wave);
+            ServiceTask<?> task = service.returnData(wave);
+            if (task != null && JRebirthParameters.FOLLOW_UP_SERVICE_TASKS.get()) {
+
+            }
+
         }
     }
 
