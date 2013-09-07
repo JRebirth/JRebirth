@@ -22,8 +22,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
 import javafx.scene.control.ProgressBar;
 
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
@@ -56,7 +57,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractService.class);
 
     /** The map that stores pending tasks, useful to access to Worker implementation. */
-    private final Map<String, ServiceTask<?>> pendingTasks = new HashMap<>();
+    private final ObservableMap<String, ServiceTask<?>> pendingTasks = FXCollections.observableMap(new HashMap<String, ServiceTask<?>>());
 
     /**
      * {@inheritDoc}
@@ -71,8 +72,9 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
      * {@inheritDoc}
      */
     @Override
-    public <T extends Object> void returnData(final Wave sourceWave) {
+    public <T extends Object> ServiceTask<T> returnData(final Wave sourceWave) {
 
+        ServiceTask<T> task = null;
         try {
             // Build parameter list of the searched method
             final List<Object> parameterValues = new ArrayList<>();
@@ -95,14 +97,14 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
                 // final Class<T> returnClass = (Class<T>) method.getReturnType();
 
-                runTask(sourceWave, method, parameterValues.toArray());
+                task = runTask(sourceWave, method, parameterValues.toArray());
 
             }
         } catch (final NoSuchMethodException e) {
             // If no method was found, call the default method
             processWave(sourceWave);
         }
-
+        return task;
     }
 
     /**
@@ -114,7 +116,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
      * 
      * @param <T> the type of the returned type
      */
-    private <T> void runTask(final Wave sourceWave, final Method method, final Object[] parameterValues) {
+    private <T> ServiceTask<T> runTask(final Wave sourceWave, final Method method, final Object[] parameterValues) {
 
         // Allow to remove the pending task when the service is finished
         sourceWave.addWaveListener(new ServiceTaskWaveListener());
@@ -135,6 +137,8 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
         // Call the task into the JRebirth Thread Pool
         JRebirth.runIntoJTP(task);
+
+        return task;
     }
 
     /**
@@ -157,6 +161,14 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
             }
         });
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ObservableMap<String, ServiceTask<?>> pendingTasksProperty() {
+        return pendingTasks;
     }
 
     /**
@@ -188,7 +200,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
      * 
      * @param wave the wave that trigger the service task call
      * @param workDone the amount of overall work done
-     * @param totalWork the amount of total work todo
+     * @param totalWork the amount of total work to do
      */
     public void updateProgress(final Wave wave, final long workDone, final long totalWork) {
 
