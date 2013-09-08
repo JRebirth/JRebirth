@@ -45,7 +45,7 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
      * {@inheritDoc}
      */
     @Override
-    protected URL buildResource(final StyleSheetParams ssp) {
+    protected URL buildResource(final StyleSheetItem ssi, final StyleSheetParams ssp) {
         URL cssURL = null;
         if (ssp instanceof StyleSheet) {
             // Build the requested font

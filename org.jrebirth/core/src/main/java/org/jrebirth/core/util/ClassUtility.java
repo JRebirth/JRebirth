@@ -118,8 +118,13 @@ public final class ClassUtility {
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | SecurityException e) {
+            final StringBuilder sb = new StringBuilder("[");
+            for (final Class<?> assignableClass : assignableClasses) {
+                sb.append(assignableClass.getName()).append(", ");
+            }
+            sb.append("]");
             final String message = genericClass == null
-                    ? "Impossible to build the object assignable to " + assignableClasses.toString() + " for the class " + mainClass.getName() // FIXME tostinrg classes
+                    ? "Impossible to build the object assignable to " + sb.toString() + " for the class " + mainClass.getName()
                     : "Impossible to build the " + genericClass.getName() + " object for the class " + mainClass.getName();
             LOGGER.error(message, e);
 

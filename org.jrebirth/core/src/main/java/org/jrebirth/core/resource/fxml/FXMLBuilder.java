@@ -43,7 +43,7 @@ public final class FXMLBuilder extends AbstractResourceBuilder<FXMLItem, FXMLPar
      * {@inheritDoc}
      */
     @Override
-    protected FXMLComponent buildResource(final FXMLParams fp) {
+    protected FXMLComponent buildResource(final FXMLItem fi, final FXMLParams fp) {
         FXMLComponent component = null;
         if (fp instanceof FXML) {
             // Build the requested font

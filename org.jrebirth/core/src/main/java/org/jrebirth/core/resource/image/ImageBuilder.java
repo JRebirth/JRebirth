@@ -45,7 +45,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      * {@inheritDoc}
      */
     @Override
-    protected Image buildResource(final ImageParams jrImage) {
+    protected Image buildResource(final ImageItem imageItem, final ImageParams jrImage) {
         Image image = null;
         if (jrImage instanceof LocalImage) {
             // Build the requested font

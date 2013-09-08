@@ -17,9 +17,9 @@
  */
 package org.jrebirth.core.resource.provided;
 
-import static org.jrebirth.core.resource.Resources.create;
-
 import org.jrebirth.core.resource.image.ImageItem;
+
+import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>JRebirthImages</strong>.

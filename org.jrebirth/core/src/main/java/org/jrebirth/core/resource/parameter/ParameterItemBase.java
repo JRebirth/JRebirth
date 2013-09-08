@@ -17,6 +17,7 @@
  */
 package org.jrebirth.core.resource.parameter;
 
+import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.resource.ResourceBuilders;
 
 /**
@@ -57,7 +58,7 @@ public final class ParameterItemBase<T> implements ParameterItem<T> {
     @Override
     public void define(final T forcedValue) {
         // The default programmatic value (stored into ObjectParameter) is not updated but overridden into the local map
-        builder().set(this, forcedValue);
+        builder().define(this, forcedValue);
     }
 
     /**
@@ -84,6 +85,14 @@ public final class ParameterItemBase<T> implements ParameterItem<T> {
      */
     public void setUid(final int uid) {
         this.uid = uid;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void persist() {
+        throw new CoreRuntimeException("Not Implemented yet");
     }
 
 }

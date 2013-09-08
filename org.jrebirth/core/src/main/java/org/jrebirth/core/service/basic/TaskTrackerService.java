@@ -44,12 +44,13 @@ public class TaskTrackerService extends DefaultService {
     /** The list of all running service tasks. */
     private final ObservableList<ServiceTask<?>> serviceTasks = FXCollections.observableList(new ArrayList<ServiceTask<?>>());
 
+    /** The unique handler used to remove a pending task. */
     private final EventHandler<WorkerStateEvent> workerHandler = new EventHandler<WorkerStateEvent>() {
 
         @Override
-        public void handle(WorkerStateEvent event) {
+        public void handle(final WorkerStateEvent event) {
 
-            serviceTasks.remove(event.getSource());
+            TaskTrackerService.this.serviceTasks.remove(event.getSource());
         }
     };
 
@@ -63,26 +64,26 @@ public class TaskTrackerService extends DefaultService {
     }
 
     /**
-     * Open a stage.
+     * Track a task progression.
      * 
-     * @param wave the source wave
+     * @param task the task to track
      */
     public void trackTask(final ServiceTask<?> task) {
 
         LOGGER.trace("track a Task");
 
-        serviceTasks.add(task);
+        this.serviceTasks.add(task);
 
-        task.setOnCancelled(workerHandler);
-        task.setOnSucceeded(workerHandler);
-        task.setOnFailed(workerHandler);
+        task.setOnCancelled(this.workerHandler);
+        task.setOnSucceeded(this.workerHandler);
+        task.setOnFailed(this.workerHandler);
     }
 
     /**
      * @return Returns the serviceTasks.
      */
     public ObservableList<ServiceTask<?>> getServiceTasks() {
-        return serviceTasks;
+        return this.serviceTasks;
     }
 
 }

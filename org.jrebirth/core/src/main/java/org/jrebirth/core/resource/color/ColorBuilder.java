@@ -37,7 +37,7 @@ public final class ColorBuilder extends AbstractResourceBuilder<ColorItem, Color
      * {@inheritDoc}
      */
     @Override
-    protected Color buildResource(final ColorParams cp) {
+    protected Color buildResource(final ColorItem ci, final ColorParams cp) {
         Color color = null;
 
         if (cp instanceof WebColor) {
