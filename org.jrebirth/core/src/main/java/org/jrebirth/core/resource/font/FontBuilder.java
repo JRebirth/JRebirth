@@ -44,7 +44,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
      * {@inheritDoc}
      */
     @Override
-    protected Font buildResource(final FontParams jrFont) {
+    protected Font buildResource(final FontItem fontItem, final FontParams jrFont) {
         Font font = null;
         if (jrFont instanceof RealFont) {
             // Build the requested font

@@ -54,6 +54,25 @@ public class ParameterTest {
 
     }
 
+    @Test
+    public void overridableParameter() {
+
+        TestParameters.OVERRIDABLE_PARAM.define(2000);
+
+        assertEquals(2000, TestParameters.OVERRIDABLE_PARAM.get().intValue());
+
+        try {
+            System.gc();
+            Thread.sleep(500);
+            System.gc();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(2000, TestParameters.OVERRIDABLE_PARAM.get().intValue());
+
+    }
+
     @After
     public void tearDown() throws Exception {
     }

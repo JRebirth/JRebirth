@@ -81,7 +81,7 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?>, P ex
         // The resource may be null if nobody use it
         if (params.hasChanged() || resource == null || resource.get() == null) {
             // So we must rebuild an instance and then store it weakly
-            set(key, buildResource(params));
+            set(key, buildResource(key, params));
 
             // Get the WeakReference
             resource = this.resourceMap.get(key);
@@ -100,10 +100,11 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?>, P ex
     /**
      * Build the resource requested.
      * 
+     * @param item the parameter item used to identify the resource element
      * @param params the primitive parameters used to build the resource
      * 
      * @return the resource built and weakly stored with a WeakReference
      */
-    protected abstract R buildResource(final P params);
+    protected abstract R buildResource(final E item, final P params);
 
 }

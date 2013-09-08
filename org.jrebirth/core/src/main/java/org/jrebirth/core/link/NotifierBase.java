@@ -34,6 +34,7 @@ import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.service.ServiceTask;
+import org.jrebirth.core.service.basic.TaskTrackerService;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
@@ -165,9 +166,9 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
             }
         } else {
             // The inner task will be run into the JRebirth Thread Pool
-            ServiceTask<?> task = service.returnData(wave);
+            final ServiceTask<?> task = service.returnData(wave);
             if (task != null && JRebirthParameters.FOLLOW_UP_SERVICE_TASKS.get()) {
-
+                getGlobalFacade().getServiceFacade().retrieve(TaskTrackerService.class).trackTask(task);
             }
 
         }
