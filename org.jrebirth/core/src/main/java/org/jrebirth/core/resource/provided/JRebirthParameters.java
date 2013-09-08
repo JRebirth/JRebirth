@@ -50,6 +50,9 @@ public interface JRebirthParameters {
     ParameterItem<Boolean> DEVELOPER_MODE = create("developerMode", false);
 
     /** The handler used while running in developer mode to manage unprocessed wave. */
+    ParameterItem<Boolean> FOLLOW_UP_SERVICE_TASKS = create("followUpServiceTasks", false);
+
+    /** The handler used while running in developer mode to manage unprocessed wave. */
     ParameterItem<Class> UNPROCESSED_WAVE_HANDLER = create("unprocessedWaveHandler", (Class) DefaultUnprocessedWaveHandler.class);
 
     /** The factory used to create components. */
