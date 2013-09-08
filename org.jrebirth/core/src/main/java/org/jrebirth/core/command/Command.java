@@ -24,8 +24,6 @@ import org.jrebirth.core.wave.WaveBean;
 /**
  * The interface <strong>Command</strong> is used to run atomic and reusable action.
  * 
- * @param <WB> the type of the {@link WaveBean} to use
- * 
  * @author Sébastien Bordes
  */
 public interface Command extends FacadeReady<Command> {

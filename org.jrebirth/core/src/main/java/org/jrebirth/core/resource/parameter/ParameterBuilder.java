@@ -46,8 +46,11 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ParameterBuilder.class);
 
-    /** Store all parameter values. */
-    private final Map<String, ParameterEntry<?>> parametersMap = new ConcurrentHashMap<>();
+    /** Store all parameter values defined ito properties files. */
+    private final Map<String, ParameterEntry> propertiesParametersMap = new ConcurrentHashMap<>();
+
+    /** Store all overridden values defined by the call of define method. */
+    private final Map<ParameterItem<?>, Object> overriddenParametersMap = new ConcurrentHashMap<>();
 
     /** The file extension used by configuration files. */
     private String configurationFileExtension;
@@ -114,12 +117,12 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
             p.load(is);
 
             for (final Map.Entry<Object, Object> entry : p.entrySet()) {
-                if (this.parametersMap.containsKey(entry.getKey())) {
+                if (this.propertiesParametersMap.containsKey(entry.getKey())) {
                     LOGGER.trace("Update key {} with value= {}", entry.getKey(), entry.getValue());
                 } else {
                     LOGGER.trace("Store key {} with value= {}", entry.getKey(), entry.getValue());
                 }
-                storeParameter(entry);
+                storePropertiesParameter(entry);
 
             }
 
@@ -135,40 +138,60 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
      * 
      * @param entry the entry to store
      */
-    private void storeParameter(final Map.Entry<Object, Object> entry) {
-        this.parametersMap.put(entry.getKey().toString(), new ParameterEntry<>(entry.getValue().toString()));
+    private void storePropertiesParameter(final Map.Entry<Object, Object> entry) {
+        this.propertiesParametersMap.put(entry.getKey().toString(), new ParameterEntry(entry.getValue().toString()));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected Object buildResource(final ParameterParams parameterParams) {
+    protected Object buildResource(final ParameterItem<?> parameterItem, final ParameterParams parameterParams) {
         Object object = null;
         if (parameterParams instanceof ObjectParameter) {
 
             final ObjectParameter<?> op = (ObjectParameter<?>) parameterParams;
 
-            // Check if the parameter has a parameter name and
-            // check if the parameter has been loaded from any customized configuration file
-            if (op.name() != null && this.parametersMap.containsKey(op.name())) {
+            // Load overridden values first
+            if (op.name() != null && this.overriddenParametersMap.containsKey(parameterItem)) {
 
                 // Retrieve the customized parameter
-                object = op.parseObject(this.parametersMap.get(op.name()));
+                object = this.overriddenParametersMap.get(parameterItem);
             }
 
+            // No overridden value is defined
+            // Check if the parameter has a parameter name and
+            // check if the parameter has been loaded from any customized configuration file
+            if (object == null && op.name() != null && this.propertiesParametersMap.containsKey(op.name())) {
+
+                // Retrieve the customized parameter
+                object = op.parseObject(this.propertiesParametersMap.get(op.name()));
+            }
+
+            // Object is still null
             if (object == null) {
-                // No customized parameter has been loaded, gets the default programmatic one
+                // No customized (properties and overridden) parameter has been loaded, gets the default programmatic one
                 object = op.object();
             }
 
-            // Don't store the parameter into the map if it hasn't got any parameter name
-            if (op.name() != null) {
-
-                // Store the new parameter into the map
-                this.parametersMap.put(op.name(), new ParameterEntry<Object>("", object));
-            }
+            // // Don't store the parameter into the map if it hasn't got any parameter name
+            // if (op.name() != null) {
+            //
+            // // Store the new parameter into the map
+            // this.propertiesParametersMap.put(op.name(), new ParameterEntry("", object));
+            // }
         }
         return object;
+    }
+
+    /**
+     * Override a parameter value.
+     * 
+     * @param key the parameter item key
+     * @param forcedValue the overridden value
+     */
+    public void define(final ParameterItem<?> key, final Object forcedValue) {
+        this.overriddenParametersMap.put(key, forcedValue);
+        set(key, forcedValue);
     }
 }

@@ -168,7 +168,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
      */
     @Override
     public ObservableMap<String, ServiceTask<?>> pendingTasksProperty() {
-        return pendingTasks;
+        return this.pendingTasks;
     }
 
     /**

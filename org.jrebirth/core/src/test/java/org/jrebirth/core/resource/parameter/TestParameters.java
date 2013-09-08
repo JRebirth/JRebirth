@@ -43,4 +43,10 @@ public interface TestParameters {
     ParameterItem<Integer> TEST_INTEGER_WIDTH = create("stageWidth", 800);
     ParameterItem<Integer> TEST_INTEGER_HEIGHT = create("stageHeight", 600);
 
+    /**************************************************************************************/
+    /** ______________________________Overridabl Parameters.________________________________ */
+    /**************************************************************************************/
+
+    ParameterItem<Integer> OVERRIDABLE_PARAM = create("minDuration", 1000);
+
 }

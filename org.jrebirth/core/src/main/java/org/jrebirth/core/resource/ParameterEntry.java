@@ -20,17 +20,17 @@ package org.jrebirth.core.resource;
 /**
  * The class <strong>ParameterEntry</strong>.
  * 
- * @param <O> the generic type of the unserialized object
+ * param <O> the generic type of the unserialized object
  * 
  * @author Sébastien Bordes
  */
-public class ParameterEntry<O extends Object> {
+public class ParameterEntry {
 
     /** The serialized. */
     private final String serializedString;
 
     /** The wrapped object unserialized. */
-    private O object;
+    private Object object;
 
     /**
      * Instantiates a new parameter entry.
@@ -48,7 +48,7 @@ public class ParameterEntry<O extends Object> {
      * @param serializedString the serialized string
      * @param unserializedObject the object2
      */
-    public ParameterEntry(final String serializedString, final O unserializedObject) {
+    public ParameterEntry(final String serializedString, final Object unserializedObject) {
         this(serializedString);
         this.object = unserializedObject;
     }
@@ -67,8 +67,15 @@ public class ParameterEntry<O extends Object> {
      * 
      * @return Returns the wrapped object unserialized.
      */
-    public O getObject() {
+    public Object getObject() {
         return this.object;
+    }
+
+    /**
+     * @param object The object to set.
+     */
+    public void setObject(final Object object) {
+        this.object = object;
     }
 
 }

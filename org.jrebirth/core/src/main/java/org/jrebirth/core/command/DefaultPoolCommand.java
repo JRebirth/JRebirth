@@ -26,8 +26,6 @@ import org.jrebirth.core.wave.DefaultWaveBean;
  * 
  * The default empty class for commands that must be run into a new thread using a pool.
  * 
- * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
- * 
  * @author Sébastien Bordes
  */
 @RunInto(RunType.JTP)

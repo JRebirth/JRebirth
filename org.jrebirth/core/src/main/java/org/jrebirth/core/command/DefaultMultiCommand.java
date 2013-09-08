@@ -24,8 +24,6 @@ import org.jrebirth.core.wave.DefaultWaveBean;
 /**
  * The class <strong>DefaultMultiCommand</strong>.
  * 
- * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
- * 
  * @author Sébastien Bordes
  */
 @RunInto(RunType.JIT)

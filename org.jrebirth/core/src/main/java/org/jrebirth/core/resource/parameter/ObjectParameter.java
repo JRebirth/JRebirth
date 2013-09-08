@@ -102,7 +102,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      * 
      * @return the real object
      */
-    public Object parseObject(final ParameterEntry<?> parameterEntry) {
+    public Object parseObject(final ParameterEntry parameterEntry) {
         Object res = null;
         if (this.object instanceof ResourceParams) {
             // Setup the default object
@@ -114,6 +114,10 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
         } else {
             res = parsePrimitive(parameterEntry.getSerializedString());
         }
+
+        // Store the parsed object directly into the entry instance
+        // for later access
+        parameterEntry.setObject(res);
 
         return res;
     }
