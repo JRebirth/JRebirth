@@ -23,6 +23,7 @@ import java.util.Map;
 import javafx.scene.Node;
 
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.link.AbstractWaveReady;
@@ -44,10 +45,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
     private Model rootModel;
 
     /** The map that store inner models loaded. */
-    private final Map<InnerModels, Model> innerModelSingletonMap = new HashMap<>();
-
-    /** The map that store inner models loaded. */
-    private final Map<InnerModels, Map<UniqueKey, Model>> innerModelMultitonMap = new HashMap<>();
+    private final Map<InnerModels, Model> innerModelMap = new HashMap<>();
 
     /** Flag used to determine if a view has been already displayed, useful to manage first time animation. */
     private boolean viewDisplayed;
@@ -206,50 +204,28 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
      * {@inheritDoc}
      */
     @Override
-    public final Model getInnerModel(final InnerModels innerModel, final UniqueKey... innerModelKey) {
+    public final Model getInnerModel(final InnerModels innerModel) {
 
         // The model to return
         Model model;
 
-        UniqueKey key = null; // TODO Check priority
-        if (innerModelKey != null && innerModelKey.length == 1) {
-            key = innerModelKey[0];
-        } else if (innerModel.getKey() != null) {
-            key = innerModel.getKey();
-        }
+        UniqueKey<?> key = innerModel.getKey();
 
         if (key == null) {
-            // Check if the inner model is registered
-            if (!this.innerModelSingletonMap.containsKey(innerModel)) {
-
-                // retrieve and attache the inner model into the dedicated map
-                this.innerModelSingletonMap.put(innerModel, getLocalFacade().retrieve(innerModel.getModelClass()));
-                // Link the current root model
-                this.innerModelSingletonMap.get(innerModel).setRootModel(this);
-            }
-
-            // Return the registered inner model
-            model = this.innerModelSingletonMap.get(innerModel);
-
-        } else {
-
-            // For Multiton Components
-            // Check if the MultitonKey map exists for this component class
-            if (!this.innerModelMultitonMap.containsKey(innerModel)) {
-                this.innerModelMultitonMap.put(innerModel, new HashMap<UniqueKey, Model>());
-            }
-            // Check if the class of the object is already stored into the
-            // multitonKey map
-            if (!this.innerModelMultitonMap.get(innerModel).containsKey(key)) {
-
-                // Store the component into the multitonKey map
-                this.innerModelMultitonMap.get(innerModel).put(key, getLocalFacade().retrieve(innerModel.getModelClass(), key));
-
-                // Link the current root model
-                this.innerModelMultitonMap.get(innerModel).get(key).setRootModel(this);
-            }
-            model = this.innerModelMultitonMap.get(innerModel).get(key);
+            throw new CoreRuntimeException("InnerModel must have a valid key ( " + innerModel.toString() + ")");
         }
+
+        // Check if the class of the object is already stored into the map
+        if (!this.innerModelMap.containsKey(innerModel)) {
+
+            // Store the component into the multitonKey map
+            this.innerModelMap.put(innerModel, getLocalFacade().retrieve(innerModel.getKey()));
+
+            // Link the current root model
+            this.innerModelMap.get(innerModel).setRootModel(this);
+        }
+        model = this.innerModelMap.get(innerModel);
+
         return model;
     }
 

@@ -18,6 +18,7 @@
 package org.jrebirth.analyzer.ui.editor;
 
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
+import org.jrebirth.core.concurrent.JRebirthThread;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.ui.InnerModels;
 import org.jrebirth.core.ui.Model;
@@ -37,8 +38,8 @@ public enum EditorInnerModels implements InnerModels {
     // /** The properties UI. */
     // WAVE(WaveModel.class)
 
-    /** The model class of the inner model. */
-    private final Class<? extends Model> modelClass;
+    /** The unique key of the inner model. */
+    private final UniqueKey<? extends Model> modelKey;
 
     /**
      * Default Constructor.
@@ -46,23 +47,15 @@ public enum EditorInnerModels implements InnerModels {
      * @param modelClass the class to set
      */
     EditorInnerModels(final Class<? extends Model> modelClass) {
-        this.modelClass = modelClass;
+        this.modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(modelClass);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public UniqueKey getKey() {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Class<? extends Model> getModelClass() {
-        return this.modelClass;
+    public UniqueKey<? extends Model> getKey() {
+        return this.modelKey;
     }
 
 }

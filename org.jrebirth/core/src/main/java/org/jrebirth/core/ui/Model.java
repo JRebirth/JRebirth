@@ -20,7 +20,6 @@ package org.jrebirth.core.ui;
 import javafx.scene.Node;
 
 import org.jrebirth.core.facade.FacadeReady;
-import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -66,11 +65,10 @@ public interface Model extends FacadeReady<Model> {
      * If the model isn't registered create it
      * 
      * @param innerModel the enumeration entry that describe the inner model
-     * @param innerModelKey key used to identify each innerModle of the same type
      * 
      * @return the inner model instance
      */
-    Model getInnerModel(final InnerModels innerModel, final UniqueKey... innerModelKey);
+    Model getInnerModel(final InnerModels innerModel);
 
     /**
      * Perform the show view action triggered by a wave.
