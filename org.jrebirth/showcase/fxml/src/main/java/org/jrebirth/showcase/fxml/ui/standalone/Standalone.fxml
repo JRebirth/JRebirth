@@ -5,27 +5,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
-<?scenebuilder-preview-i18n-resource Test1.properties?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.jrebirth.showcase.fxml.ui.standalone.StandaloneController">
   <children>
-    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0">
-      <top>
-        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-          <tabs>
-            <Tab text="%title">
-              <content>
-                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-            <Tab text="Untitled Tab 2">
-              <content>
-                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-          </tabs>
-        </TabPane>
-      </top>
+    <BorderPane layoutX="7.0" layoutY="-7.0" prefHeight="400.0" prefWidth="600.0">
+      <center>
+        <VBox prefHeight="120.0" prefWidth="600.0">
+          <children>
+            <Label prefWidth="273.0" text="%title">
+              <font>
+                <Font name="System Bold" size="16.0" />
+              </font>
+            </Label>
+            <TextArea prefHeight="225.0" prefWidth="600.0" text="This page is composed by:&#10;- A main Model =&gt; StandaloneModel&#10;- A Main FXML file + properties =&gt; Standalone.fxml + Standalone.properties&#10;- A FXML Controller class =&gt; StandaloneController&#10;&#10;It doesn't contain : &#10;_ a View ( = ModelView from JRebirth hierarchy classes)&#10;_ a Controller ( = ModelController from JRebirth hierarchy classes)" wrapText="true" />
+          </children>
+        </VBox>
+      </center>
     </BorderPane>
   </children>
 </AnchorPane>

@@ -90,6 +90,10 @@ public final class FXMLUtils {
     public static <M extends Model> FXMLComponent loadFXML(final M model, final String fxmlPath, final String bundlePath) {
 
         final FXMLLoader fxmlLoader = new FXMLLoader();
+
+        // Use Custom controller factory to attach the root model to the controller
+        fxmlLoader.setControllerFactory(new DefaultFXMLControllerBuilder(model));
+
         fxmlLoader.setLocation(convertFxmlUrl(model, fxmlPath));
 
         try {

@@ -39,7 +39,7 @@ public abstract class AbstractFXMLController<M extends Model, V extends View<M, 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFXMLController.class);
 
-    /** The linked model that manage the view that load this FXML component. */
+    /** The linked model that manage the view that load this FXML component or the root model for included fxml. */
     private M model;
 
     /**

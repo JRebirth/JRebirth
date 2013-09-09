@@ -3,11 +3,17 @@ package org.jrebirth.showcase.fxml.ui.included;
 import org.jrebirth.core.ui.fxml.DefaultFXMLModel;
 
 /**
- * The class <strong>StandaloneModel</strong>.
+ * The class <strong>IncludedModel</strong>.
  * 
  * @author Sébastien Bordes
  */
 public class IncludedModel extends DefaultFXMLModel<IncludedModel> {
+
+    // private final FXMLItem subIncluded1Item = Resources.create(new FXML("org.jrebirth.showcase.fxml.ui.included.SubIncluded1"));
+    // private final FXMLItem subIncluded2Item = Resources.create(new FXML("org.jrebirth.showcase.fxml.ui.included.SubIncluded2"));
+    //
+    // private final InnerModels subIncluded1 = InnerModelBase.build(DefaultFXMLModel.class, subIncluded1Item);
+    // private final InnerModels subIncluded2 = InnerModelBase.build(DefaultFXMLModel.class, subIncluded2Item);
 
     /**
      * {@inheritDoc}
