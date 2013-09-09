@@ -37,6 +37,16 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
     /** The resource path. */
     private String resourcePath;
 
+    /** The fxml resource. */
+    private FXMLItem fxmlItem;
+
+    /**
+     * @return Returns the fxmlItem.
+     */
+    protected FXMLItem getFxmlItem() {
+        return this.fxmlItem;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -53,16 +63,28 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
         return this.resourcePath;
     }
 
+    @Override
+    protected FXMLItem getFXMLItem() {
+        // Nothing to do yet
+        return null;
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     protected void fxmlPreInitialize() {
-        if (!getListModelObject().isEmpty()) {
-            this.fxmlPath = getListModelObject().get(0).toString();
-        }
-        if (getListModelObject().size() > 1) {
-            this.resourcePath = getListModelObject().get(1).toString();
+        if (!getListModelObject().isEmpty() && getListModelObject().get(0) instanceof FXMLItem) {
+
+            this.fxmlItem = (FXMLItem) getListModelObject().get(0);
+
+        } else {
+            if (!getListModelObject().isEmpty()) {
+                this.fxmlPath = getListModelObject().get(0).toString();
+            }
+            if (getListModelObject().size() > 1) {
+                this.resourcePath = getListModelObject().get(1).toString();
+            }
         }
     }
 
@@ -113,12 +135,6 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
     @Override
     protected void processWave(final Wave wave) {
         // Nothing to do yet
-    }
-
-    @Override
-    protected FXMLItem getFXMLItem() {
-        // Nothing to do yet
-        return null;
     }
 
 }

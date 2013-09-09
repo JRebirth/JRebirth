@@ -27,6 +27,8 @@ import org.jrebirth.core.resource.color.ColorParams;
 import org.jrebirth.core.resource.color.ResourceParams;
 import org.jrebirth.core.resource.font.FontItemBase;
 import org.jrebirth.core.resource.font.FontParams;
+import org.jrebirth.core.resource.fxml.FXMLItemBase;
+import org.jrebirth.core.resource.fxml.FXMLParams;
 import org.jrebirth.core.resource.image.ImageItemBase;
 import org.jrebirth.core.resource.image.ImageParams;
 import org.jrebirth.core.resource.parameter.ObjectParameter;
@@ -59,6 +61,9 @@ public final class Resources {
 
     /** The generator of unique id for style sheets. */
     private static AtomicInteger styleSheetIdGenerator = new AtomicInteger();
+
+    /** The generator of unique id for fxml files. */
+    private static AtomicInteger fxmlIdGenerator = new AtomicInteger();
 
     /** The dynamic color map. */
     private static Map<String, ColorItem> colorMap = new Hashtable<>();
@@ -204,6 +209,27 @@ public final class Resources {
         styleSheetItem.setUid(styleSheetIdGenerator.incrementAndGet());
 
         return styleSheetItem;
+    }
+
+    /*************************************************************************/
+    /** ________________________________FXML________________________________ */
+    /*************************************************************************/
+
+    /**
+     * Build a fxml item.
+     * 
+     * @param fxmlParams the primitive values for the fxml resource
+     * 
+     * @return a new fresh FXML item
+     */
+    public static FXMLItemBase create(final FXMLParams fxmlParams) {
+
+        final FXMLItemBase fxmlItem = new FXMLItemBase(fxmlParams);
+
+        // Ensure that the uid will be unique at runtime
+        fxmlItem.setUid(fxmlIdGenerator.incrementAndGet());
+
+        return fxmlItem;
     }
 
     /**
