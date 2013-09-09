@@ -24,23 +24,20 @@ import org.jrebirth.core.key.UniqueKey;
  * 
  * You may create an enumeration that implements this interface to manage inner models inside a root model.
  * 
+ * Or you can use The InnerModelBase class.
+ * 
  * @author Sébastien Bordes
  * 
  */
 public interface InnerModels {
 
     /**
-     * Return the class model.
+     * Return the key of the model.
      * 
-     * @return the class of the model
-     */
-    Class<? extends Model> getModelClass();
-
-    /**
-     * Return the key of the model. Can return null if the model is unique
+     * Will return a {@link org.jrebirth.core.key.ClassKey} instance for a unique model or a {@link org.jrebirth.core.key.MultitonKey} for non unique model
      * 
-     * @return the multiton key if any, or null
+     * @return the unique key used to load the right Model, must be not null
      */
-    UniqueKey getKey();
+    UniqueKey<? extends Model> getKey();
 
 }
