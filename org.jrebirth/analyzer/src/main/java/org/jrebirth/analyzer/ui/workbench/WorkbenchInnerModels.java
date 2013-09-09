@@ -20,6 +20,7 @@ package org.jrebirth.analyzer.ui.workbench;
 import org.jrebirth.analyzer.ui.controls.ControlsModel;
 import org.jrebirth.analyzer.ui.editor.EditorModel;
 import org.jrebirth.analyzer.ui.properties.PropertiesModel;
+import org.jrebirth.core.concurrent.JRebirthThread;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.ui.InnerModels;
 import org.jrebirth.core.ui.Model;
@@ -42,8 +43,8 @@ public enum WorkbenchInnerModels implements InnerModels {
     /** The properties UI. */
     EDITOR(EditorModel.class);
 
-    /** The model class of the inner model. */
-    private final Class<? extends Model> modelClass;
+    /** The unique key of the inner model. */
+    private final UniqueKey<? extends Model> modelKey;
 
     /**
      * Default Constructor.
@@ -51,23 +52,15 @@ public enum WorkbenchInnerModels implements InnerModels {
      * @param modelClass the class to set
      */
     WorkbenchInnerModels(final Class<? extends Model> modelClass) {
-        this.modelClass = modelClass;
+        this.modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(modelClass);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Class<? extends Model> getModelClass() {
-        return this.modelClass;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UniqueKey getKey() {
-        return null;
+    public UniqueKey<? extends Model> getKey() {
+        return this.modelKey;
     }
 
 }
