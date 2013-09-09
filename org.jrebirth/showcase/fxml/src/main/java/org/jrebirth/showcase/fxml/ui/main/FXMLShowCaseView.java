@@ -56,7 +56,7 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
                 .build();
 
         getRootNode().setTop(FlowPaneBuilder.create()
-                .children(this.showEmbedded, this.showStandalone, this.showHybrid, this.showIncluded)
+                .children(this.showEmbedded, this.showStandalone, this.showIncluded, this.showHybrid)
                 .build());
 
     }

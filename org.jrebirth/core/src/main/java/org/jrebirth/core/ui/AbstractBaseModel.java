@@ -209,7 +209,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
         // The model to return
         Model model;
 
-        UniqueKey<?> key = innerModel.getKey();
+        final UniqueKey<?> key = innerModel.getKey();
 
         if (key == null) {
             throw new CoreRuntimeException("InnerModel must have a valid key ( " + innerModel.toString() + ")");

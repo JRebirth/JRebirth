@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.jrebirth.showcase.fxml.ui.embedded.EmbeddedFXMLController">
+  <children>
+    <BorderPane layoutX="7.0" layoutY="-7.0" prefHeight="400.0" prefWidth="600.0">
+      <center>
+        <VBox prefHeight="120.0" prefWidth="600.0">
+          <children>
+            <Label prefWidth="273.0" text="%title">
+              <font>
+                <Font name="System Bold" size="16.0" />
+              </font>
+            </Label>
+            <TextArea prefHeight="225.0" prefWidth="600.0" text="This page is composed by:&#10;- A main Model =&gt; EmbeddedModel&#10;- A main View =&gt; EmbeddedView (aka ModelView) with a root node [AnchorPane]&#10;- A main Controller =&gt; EmbeddedController (aka ModelController)&#10;&#10;- An embeddedFXML file + properties =&gt; Embedded.fxml + Embedded.properties&#10;- A FXML Controller class =&gt; EmbeddedFXMLController&#10;&#10;The FXML file is loaded into main model and attached to the view root node" wrapText="true" />
+          </children>
+        </VBox>
+      </center>
+    </BorderPane>
+  </children>
+</AnchorPane>

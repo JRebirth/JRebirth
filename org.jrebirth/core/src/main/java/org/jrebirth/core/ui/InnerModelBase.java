@@ -9,7 +9,7 @@ import org.jrebirth.core.wave.WaveTypeBase;
  * 
  * @author Sébastien Bordes
  */
-public class InnerModelBase implements InnerModels {
+public final class InnerModelBase implements InnerModels {
 
     /** The generator of unique id. */
     private static int idGenerator;
@@ -23,6 +23,8 @@ public class InnerModelBase implements InnerModels {
     /**
      * Default constructor.
      * 
+     * @param modelClass the model class
+     * @param keyPart the list of model keys
      */
     private InnerModelBase(final Class<? extends Model> modelClass, final Object... keyPart) {
 
@@ -32,6 +34,8 @@ public class InnerModelBase implements InnerModels {
     /**
      * Build an InnerModel.
      * 
+     * @param modelClass the model class
+     * @param keyPart the list of model keys
      * 
      * @return a new fresh InnerModel type object
      */
