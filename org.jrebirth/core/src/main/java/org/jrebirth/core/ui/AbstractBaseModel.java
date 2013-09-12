@@ -45,7 +45,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
     private Model rootModel;
 
     /** The map that store inner models loaded. */
-    private final Map<InnerModels, Model> innerModelMap = new HashMap<>();
+    private final Map<InnerModel, Model> innerModelMap = new HashMap<>();
 
     /** Flag used to determine if a view has been already displayed, useful to manage first time animation. */
     private boolean viewDisplayed;
@@ -204,7 +204,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
      * {@inheritDoc}
      */
     @Override
-    public final Model getInnerModel(final InnerModels innerModel) {
+    public final Model getInnerModel(final InnerModel innerModel) {
 
         // The model to return
         Model model;
@@ -215,7 +215,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
             throw new CoreRuntimeException("InnerModel must have a valid key ( " + innerModel.toString() + ")");
         }
 
-        // Check if the class of the object is already stored into the map
+        // If the inner model hasn't been loaded before, get it from UIFacade
         if (!this.innerModelMap.containsKey(innerModel)) {
 
             // Store the component into the multitonKey map

@@ -20,7 +20,7 @@ package org.jrebirth.analyzer.ui.editor;
 import org.jrebirth.analyzer.ui.editor.ball.BallModel;
 import org.jrebirth.core.concurrent.JRebirthThread;
 import org.jrebirth.core.key.UniqueKey;
-import org.jrebirth.core.ui.InnerModels;
+import org.jrebirth.core.ui.InnerModel;
 import org.jrebirth.core.ui.Model;
 
 /**
@@ -30,7 +30,7 @@ import org.jrebirth.core.ui.Model;
  * 
  * @author Sébastien Bordes
  */
-public enum EditorInnerModels implements InnerModels {
+public enum EditorInnerModels implements InnerModel {
 
     /** The controls UI. */
     BALLS(BallModel.class);

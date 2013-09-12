@@ -146,6 +146,7 @@ public final class FXMLUtils {
      */
     private static <M extends Model> URL convertFxmlUrl(final M model, final String fxmlPath) {
         URL fxmlUrl = null;
+        // Replace all '.' separator by path separator '/'
         if (model != null) {
             // Try to load the resource from the same path as the model class
             fxmlUrl = model.getClass().getResource(fxmlPath);

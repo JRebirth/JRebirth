@@ -22,7 +22,7 @@ import org.jrebirth.analyzer.ui.editor.EditorModel;
 import org.jrebirth.analyzer.ui.properties.PropertiesModel;
 import org.jrebirth.core.concurrent.JRebirthThread;
 import org.jrebirth.core.key.UniqueKey;
-import org.jrebirth.core.ui.InnerModels;
+import org.jrebirth.core.ui.InnerModel;
 import org.jrebirth.core.ui.Model;
 
 /**
@@ -32,7 +32,7 @@ import org.jrebirth.core.ui.Model;
  * 
  * @author Sébastien Bordes
  */
-public enum WorkbenchInnerModels implements InnerModels {
+public enum WorkbenchInnerModels implements InnerModel {
 
     /** The controls UI. */
     CONTROLS(ControlsModel.class),

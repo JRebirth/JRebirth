@@ -1,8 +1,11 @@
 package org.jrebirth.showcase.fxml.ui.main;
 
+import javafx.collections.ListChangeListener;
+import javafx.event.EventHandler;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.ToggleGroupBuilder;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPaneBuilder;
 
@@ -51,9 +54,8 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
         this.showHybrid = new ToggleButton("Hybrid");
         this.showIncluded = new ToggleButton("Included");
 
-        ToggleGroup group = ToggleGroupBuilder.create()
-                .toggles(this.showEmbedded, this.showStandalone, this.showHybrid, this.showIncluded)
-                .build();
+        final ToggleGroup group = new PersistentButtonToggleGroup();
+        group.getToggles().addAll(this.showEmbedded, this.showStandalone, this.showHybrid, this.showIncluded);
 
         getRootNode().setTop(FlowPaneBuilder.create()
                 .children(this.showEmbedded, this.showStandalone, this.showIncluded, this.showHybrid)
@@ -66,8 +68,8 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
      */
     @Override
     public void start() {
-        LOGGER.debug("Start the View");
-        //
+        LOGGER.debug("Start the View and fire the first tab");
+        this.showEmbedded.fire();
     }
 
     /**
@@ -102,6 +104,30 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
 
     ToggleButton getShowStandalone() {
         return this.showStandalone;
+    }
+
+    private class PersistentButtonToggleGroup extends ToggleGroup {
+
+        public PersistentButtonToggleGroup() {
+            super();
+            getToggles().addListener(new ListChangeListener<Toggle>() {
+                @Override
+                public void onChanged(final Change<? extends Toggle> c) {
+                    while (c.next()) {
+                        for (final Toggle addedToggle : c.getAddedSubList()) {
+                            ((ToggleButton) addedToggle).addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(final MouseEvent mouseEvent) {
+                                    if (addedToggle.equals(getSelectedToggle())) {
+                                        mouseEvent.consume();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        }
     }
 
 }

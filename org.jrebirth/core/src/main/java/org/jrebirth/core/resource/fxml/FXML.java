@@ -52,9 +52,9 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
      */
     public FXML(final String fxmlPath, final String fxmlName, final String bundlePath, final String bundleName) {
         super();
-        this.absolutePath.set(fxmlPath);
+        this.absolutePath.set(fxmlPath.replace(".", "/"));
         this.fxmlName.set(fxmlName);
-        this.absoluteBundlePath.set(bundlePath);
+        this.absoluteBundlePath.set(bundlePath.replace(".", "/"));
         this.bundleName.set(bundleName);
     }
 
