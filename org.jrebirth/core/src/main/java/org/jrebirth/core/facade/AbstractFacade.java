@@ -130,12 +130,10 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         if (exists(clazz, keyPart)) {
 
             synchronized (this.singletonMap) {
-                // FIXME OPTIMIZE KEY CREATION
 
                 // If no key is provided retrieve from the singleton map
                 // Extract the value from the weak reference
                 readyObject = (E) this.singletonMap.get(buildKey((Class<R>) clazz, keyPart));
-
             }
 
         } else {

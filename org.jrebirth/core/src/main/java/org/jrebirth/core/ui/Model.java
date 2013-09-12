@@ -68,7 +68,7 @@ public interface Model extends FacadeReady<Model> {
      * 
      * @return the inner model instance
      */
-    Model getInnerModel(final InnerModels innerModel);
+    Model getInnerModel(final InnerModel innerModel);
 
     /**
      * Perform the show view action triggered by a wave.
