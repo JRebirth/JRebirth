@@ -29,7 +29,7 @@ import org.jrebirth.core.key.UniqueKey;
  * @author Sébastien Bordes
  * 
  */
-public interface InnerModels {
+public interface InnerModel {
 
     /**
      * Return the key of the model.

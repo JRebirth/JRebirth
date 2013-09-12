@@ -76,8 +76,8 @@
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <interface id="9" language="java" name="org.jrebirth.core.ui.InnerModels" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/InnerModels.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="9" language="java" name="org.jrebirth.core.ui.InnerModel" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/InnerModel.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="594" y="30"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -116,7 +116,8 @@
   <package id="13" language="java" name="org.jrebirth.core.ui" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="80" y="15"/>    
-    <display autosize="true" stereotype="true" accessors="true"/>  
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true"/>  
   </package>  
   <interface id="14" language="java" name="org.jrebirth.core.facade.FacadeReady" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/FacadeReady.java" binary="false" 

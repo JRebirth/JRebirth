@@ -11,11 +11,11 @@ import org.jrebirth.core.ui.DefaultView;
 
 public class EmbeddedView extends DefaultView<EmbeddedModel, AnchorPane, EmbeddedController> {
 
-    FXMLItem EMBEDDED_FXML = Resources.create(new FXML("org/jrebirth/showcase/fxml/ui/embedded/Embedded"));
+    FXMLItem ROOT_EMBEDDED_FXML = Resources.create(new FXML("org.jrebirth.showcase.fxml.ui.embedded", "Embedded"));
 
     private BorderPane borderPane;
 
-    public EmbeddedView(EmbeddedModel model) {
+    public EmbeddedView(final EmbeddedModel model) {
         super(model);
     }
 
@@ -29,16 +29,16 @@ public class EmbeddedView extends DefaultView<EmbeddedModel, AnchorPane, Embedde
         getRootNode().setPrefHeight(400);
         getRootNode().setPrefWidth(600);
 
-        borderPane = new BorderPane();
+        this.borderPane = new BorderPane();
 
-        getRootNode().getChildren().add(borderPane);
+        getRootNode().getChildren().add(this.borderPane);
 
-        addNode(EMBEDDED_FXML.get().getNode());
+        addNode(this.ROOT_EMBEDDED_FXML.get().getNode());
     }
 
-    public void addNode(Node node) {
+    public void addNode(final Node node) {
 
-        borderPane.setCenter(node);
+        this.borderPane.setCenter(node);
 
     }
 

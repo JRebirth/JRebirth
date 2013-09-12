@@ -5,7 +5,7 @@ import org.jrebirth.core.ui.DefaultController;
 
 public class EmbeddedController extends DefaultController<EmbeddedModel, EmbeddedView> {
 
-    public EmbeddedController(EmbeddedView view) throws CoreException {
+    public EmbeddedController(final EmbeddedView view) throws CoreException {
         super(view);
     }
 

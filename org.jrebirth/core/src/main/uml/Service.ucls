@@ -1,95 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.0.11" icons="true" automaticImage="PNG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.service.ServiceWaveListener" 
+  <class id="1" language="java" name="org.jrebirth.core.service.ServiceTaskReturnWaveListener" 
     project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/ServiceWaveListener.java" binary="false">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/ServiceTaskReturnWaveListener.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="572" y="521"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <interface id="2" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.service.Service" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/Service.java" 
-    binary="false">    
+  <interface id="2" language="java" name="org.jrebirth.core.service.Service" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/Service.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="214" y="73"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <class id="3" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.service.ServiceTask" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/ServiceTask.java" 
-    binary="false">    
+  <class id="3" language="java" name="org.jrebirth.core.service.ServiceTask" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/ServiceTask.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="208" y="543"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="4" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.service.ServiceBase" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/ServiceBase.java" 
-    binary="false">    
+  <class id="4" language="java" name="org.jrebirth.core.service.AbstractService" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/AbstractService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="215" y="333"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <package id="5" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.service" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service" binary="false">    
+  <package id="5" language="java" name="org.jrebirth.core.service" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="84" y="27"/>    
-    <display autosize="true" stereotype="false"/>  
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true"/>  
   </package>  
-  <interface id="6" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.wave.WaveListener" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveListener.java" 
-    binary="false">    
+  <interface id="6" language="java" name="org.jrebirth.core.wave.WaveListener" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveListener.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="575" y="290"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
-  <class id="7" corner="BOTTOM_RIGHT" language="java" name="javafx.concurrent.Task" project="org.jrebirth.core" 
-    file="C:/Users/ng1e2b8/Tools/jdk1.7.0_07/jre/lib/jfxrt.jar" binary="true">    
+  <class id="7" language="java" name="javafx.concurrent.Task" project="org.jrebirth.core" 
+    file="C:/Users/ng1e2b8/Tools/jdk1.7.0_07/jre/lib/jfxrt.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="320" y="457"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="false" package="false" protected="false" private="false"/>      
       <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
-  <class id="8" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.link.AbstractWaveReady" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/link/AbstractWaveReady.java" 
-    binary="false">    
+  <class id="8" language="java" name="org.jrebirth.core.link.AbstractWaveReady" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/link/AbstractWaveReady.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="343" y="201"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="false" package="false" protected="false" private="false"/>      
       <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
-  <interface id="9" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.facade.FacadeReady" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/FacadeReady.java" 
-    binary="false">    
+  <interface id="9" language="java" name="org.jrebirth.core.facade.FacadeReady" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/FacadeReady.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="433" y="75"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="false" package="false" protected="false" private="false"/>      
       <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </interface>  
-  <interface id="10" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.facade.WaveReady" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/WaveReady.java" 
-    binary="false">    
+  <interface id="10" language="java" name="org.jrebirth.core.facade.WaveReady" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/WaveReady.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="460" y="20"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="false" package="false" protected="false" private="false"/>      
       <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </interface>  
-  <class id="11" corner="BOTTOM_RIGHT" language="java" name="org.jrebirth.core.link.AbstractReady" 
-    project="org.jrebirth.core" file="/org.jrebirth.core/src/main/java/org/jrebirth/core/link/AbstractReady.java" 
-    binary="false">    
+  <class id="11" language="java" name="org.jrebirth.core.link.AbstractReady" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/link/AbstractReady.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="392" y="139"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" visibility="true">      
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
@@ -131,7 +142,7 @@
     <end type="TARGET" refId="2"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-    visibility="true">    
+    accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="false"/>    
     <operations public="true" package="true" protected="true" private="false"/>  
   </classifier-display>  

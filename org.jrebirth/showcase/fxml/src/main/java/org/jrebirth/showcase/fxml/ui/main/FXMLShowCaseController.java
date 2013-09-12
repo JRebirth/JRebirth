@@ -1,6 +1,6 @@
 package org.jrebirth.showcase.fxml.ui.main;
 
-import javafx.scene.input.MouseEvent;
+import javafx.event.ActionEvent;
 
 import org.jrebirth.component.ui.stack.StackWaves;
 import org.jrebirth.core.exception.CoreException;
@@ -40,16 +40,16 @@ public final class FXMLShowCaseController extends DefaultController<FXMLShowCase
         // WaveData<Class<? extends PageEnum>> stackName = WaveData.build(StackWaves.STACK_PAGES, FXMLShowCaseModel.STACK_PAGES);
 
         // Manage Ui Command Button
-        linkWave(getView().getShowIncluded(), MouseEvent.MOUSE_CLICKED, StackWaves.SHOW_PAGE_ENUM,
+        linkWave(getView().getShowIncluded(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
                 WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.IncludedFxml)/* , stackName */);
 
-        linkWave(getView().getShowEmbedded(), MouseEvent.MOUSE_CLICKED, StackWaves.SHOW_PAGE_ENUM,
+        linkWave(getView().getShowEmbedded(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
                 WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.ViewEmbeddedFxml)/* , stackName */);
 
-        linkWave(getView().getShowStandalone(), MouseEvent.MOUSE_CLICKED, StackWaves.SHOW_PAGE_ENUM,
+        linkWave(getView().getShowStandalone(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
                 WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.StandaloneFxml)/* , stackName */);
 
-        linkWave(getView().getShowHybrid(), MouseEvent.MOUSE_CLICKED, StackWaves.SHOW_PAGE_ENUM,
+        linkWave(getView().getShowHybrid(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
                 WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.HybridFxml)/* , stackName */);
 
     }
