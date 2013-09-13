@@ -115,6 +115,8 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
      * @param method method to call
      * 
      * @param <T> the type of the returned type
+     * 
+     * @return the service task created
      */
     private <T> ServiceTask<T> runTask(final Wave sourceWave, final Method method, final Object[] parameterValues) {
 
