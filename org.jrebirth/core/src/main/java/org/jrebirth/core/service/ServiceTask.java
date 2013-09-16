@@ -124,11 +124,12 @@ public final class ServiceTask<T> extends Task<T> {
             // Call this method with right parameters
             res = (T) this.method.invoke(this.service, params.toArray());
 
-            if (res == null) {
-                // No return wave required
+            if (Void.TYPE.equals(this.method.getReturnType())) {
+                // No return wave required because the service method will return nothing (VOID)
                 LOGGER.trace(this.service.getClass().getSimpleName() + " Consumes wave (noreturn)" + this.wave.toString());
                 this.wave.setStatus(Status.Consumed);
 
+                // Otherwise prepare the return wave
             } else {
                 final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.getWaveType());
 
