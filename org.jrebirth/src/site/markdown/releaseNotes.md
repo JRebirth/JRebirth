@@ -55,6 +55,12 @@ The default value of some parameters couldn't be updated by properties file, it'
 It's now possible to override programmatically a parameter by calling the define method, parameters values will be set according to this order : default, properties file, define call.
 
 
+- Only service method that return nothing (void) will not send a return wave  
+Service method that return null will send a return wave with the null value.
+
+
+
+
 0.7.4 - Core Release - 2013-07-22
 ---------------------------------
 
