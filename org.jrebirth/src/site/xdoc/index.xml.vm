@@ -135,20 +135,26 @@
 			<h1>Special Thanks</h1>
 			<p>
 			<a title="YourKit, Java Profiler" href="http://www.yourkit.com" target="_blank">YourKit</a>,
-			used for Memory &amp; CPU Java profiling.
+			used for Memory &amp; CPU Java profiling with a free license.
 			</p>
 			<p>
 			<a title="Structure 101" href="http://www.structure101.com/" target="_blank">Structure101 guys</a>
 			,
-			for give us a free license of
+			for offering us a free license of
 			<a href="http://structure101.com/products/#/refactor">ReStructure 101</a>
 			.
 			</p>
 			<p>
 			<a title="Jet Brains" href="http://www.jetbrains.com" target="_blank">Jet Brains</a>
 			,
-			for give us a free license of
+			for offering us a free license of
 			<a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>
+			.
+			</p>
+			<p>
+			<a title="GlobalSign" href="https://www.globalsign.com" target="_blank">Global Sign</a>
+			,
+			for offering us free <a href="https://www.globalsign.com/ssl/">SSL</a> &amp; <a href="https://www.globalsign.com/code-signing/">Code Signing</a> certicates.
 			.
 			</p>
 		</div>
