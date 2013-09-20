@@ -20,12 +20,14 @@
 			<version>1.7.2</version>
 		</dependency>
 
+
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.0.6</version>
-			<scope>test</scope>
+			<version>1.0.13</version>
+			<!-- <optional>true</optional> -->
 		</dependency>
+		
 	</dependencies>
 
 </project>
