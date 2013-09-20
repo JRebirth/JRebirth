@@ -21,13 +21,13 @@ public final class JRLoggerFactory {
      * 
      * @return the logger adapter
      */
-    public static JRLogger getLogger(Class<?> clazz) {
+    public static JRLogger getLogger(final Class<?> clazz) {
 
         JRLogger logger = loggerMap.get(clazz.getName());
         if (logger == null) {
             JRLogger newInstance = null;
 
-            org.slf4j.Logger innerLogger = LoggerFactory.getLogger(clazz);
+            final org.slf4j.Logger innerLogger = LoggerFactory.getLogger(clazz);
 
             if ("ch.qos.logback.classic.Logger".equals(innerLogger.getClass().getName())) {
                 newInstance = new LogbackAdapter((ch.qos.logback.classic.Logger) innerLogger);
@@ -36,7 +36,7 @@ public final class JRLoggerFactory {
                 newInstance = new Slf4jAdapter(innerLogger);
             }
 
-            JRLogger oldInstance = loggerMap.putIfAbsent(clazz.getName(), newInstance);
+            final JRLogger oldInstance = loggerMap.putIfAbsent(clazz.getName(), newInstance);
             logger = oldInstance == null ? newInstance : oldInstance;
         }
         return logger;
