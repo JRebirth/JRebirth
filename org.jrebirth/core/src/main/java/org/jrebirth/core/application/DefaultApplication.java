@@ -68,7 +68,7 @@ public class DefaultApplication<P extends Pane> extends AbstractApplication<P> {
      * {@inheritDoc}
      */
     @Override
-    public List<FontItem> getFontToPreload() {
+    protected List<FontItem> getFontToPreload() {
         return Collections.emptyList();
     }
 

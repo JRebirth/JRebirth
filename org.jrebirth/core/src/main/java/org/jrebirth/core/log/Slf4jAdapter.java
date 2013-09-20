@@ -14,168 +14,168 @@ public class Slf4jAdapter implements JRLogger {
      * 
      * @param logger
      */
-    public Slf4jAdapter(org.slf4j.Logger logger) {
-        slf4jLogger = logger;
+    public Slf4jAdapter(final org.slf4j.Logger logger) {
+        this.slf4jLogger = logger;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void trace(MessageItem messageItem) {
-        slf4jLogger.trace(messageItem.getMarker(), messageItem.get());
+    public void trace(final MessageItem messageItem) {
+        this.slf4jLogger.trace(messageItem.getMarker(), messageItem.get());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void trace(MessageItem messageItem, Throwable t) {
-        slf4jLogger.trace(messageItem.getMarker(), messageItem.get(), t);
+    public void trace(final MessageItem messageItem, final Throwable t) {
+        this.slf4jLogger.trace(messageItem.getMarker(), messageItem.get(), t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void trace(MessageItem messageItem, Object... parameters) {
-        slf4jLogger.trace(messageItem.getMarker(), messageItem.get(parameters));
+    public void trace(final MessageItem messageItem, final Object... parameters) {
+        this.slf4jLogger.trace(messageItem.getMarker(), messageItem.get(parameters));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void trace(MessageItem messageItem, Throwable t, Object... parameters) {
-        slf4jLogger.trace(messageItem.getMarker(), messageItem.get(parameters), t);
+    public void trace(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        this.slf4jLogger.trace(messageItem.getMarker(), messageItem.get(parameters), t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void debug(MessageItem messageItem) {
-        slf4jLogger.debug(messageItem.getMarker(), messageItem.get());
+    public void debug(final MessageItem messageItem) {
+        this.slf4jLogger.debug(messageItem.getMarker(), messageItem.get());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void debug(MessageItem messageItem, Throwable t) {
-        slf4jLogger.debug(messageItem.getMarker(), messageItem.get(), t);
+    public void debug(final MessageItem messageItem, final Throwable t) {
+        this.slf4jLogger.debug(messageItem.getMarker(), messageItem.get(), t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void debug(MessageItem messageItem, Object... parameters) {
-        slf4jLogger.debug(messageItem.getMarker(), messageItem.get(parameters));
+    public void debug(final MessageItem messageItem, final Object... parameters) {
+        this.slf4jLogger.debug(messageItem.getMarker(), messageItem.get(parameters));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void debug(MessageItem messageItem, Throwable t, Object... parameters) {
-        slf4jLogger.debug(messageItem.getMarker(), messageItem.get(parameters), t);
+    public void debug(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        this.slf4jLogger.debug(messageItem.getMarker(), messageItem.get(parameters), t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void info(MessageItem messageItem) {
-        slf4jLogger.info(messageItem.getMarker(), messageItem.get());
+    public void info(final MessageItem messageItem) {
+        this.slf4jLogger.info(messageItem.getMarker(), messageItem.get());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void info(MessageItem messageItem, Throwable t) {
-        slf4jLogger.info(messageItem.getMarker(), messageItem.get(), t);
+    public void info(final MessageItem messageItem, final Throwable t) {
+        this.slf4jLogger.info(messageItem.getMarker(), messageItem.get(), t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void info(MessageItem messageItem, Object... parameters) {
-        slf4jLogger.info(messageItem.getMarker(), messageItem.get(parameters));
+    public void info(final MessageItem messageItem, final Object... parameters) {
+        this.slf4jLogger.info(messageItem.getMarker(), messageItem.get(parameters));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void info(MessageItem messageItem, Throwable t, Object... parameters) {
-        slf4jLogger.info(messageItem.getMarker(), messageItem.get(parameters), t);
+    public void info(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        this.slf4jLogger.info(messageItem.getMarker(), messageItem.get(parameters), t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void warn(MessageItem messageItem) {
-        slf4jLogger.warn(messageItem.getMarker(), messageItem.get());
+    public void warn(final MessageItem messageItem) {
+        this.slf4jLogger.warn(messageItem.getMarker(), messageItem.get());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void warn(MessageItem messageItem, Throwable t) {
-        slf4jLogger.warn(messageItem.getMarker(), messageItem.get(), t);
+    public void warn(final MessageItem messageItem, final Throwable t) {
+        this.slf4jLogger.warn(messageItem.getMarker(), messageItem.get(), t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void warn(MessageItem messageItem, Object... parameters) {
-        slf4jLogger.warn(messageItem.getMarker(), messageItem.get(parameters));
+    public void warn(final MessageItem messageItem, final Object... parameters) {
+        this.slf4jLogger.warn(messageItem.getMarker(), messageItem.get(parameters));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void warn(MessageItem messageItem, Throwable t, Object... parameters) {
-        slf4jLogger.warn(messageItem.getMarker(), messageItem.get(parameters), t);
+    public void warn(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        this.slf4jLogger.warn(messageItem.getMarker(), messageItem.get(parameters), t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void error(MessageItem messageItem) {
-        slf4jLogger.error(messageItem.getMarker(), messageItem.get());
+    public void error(final MessageItem messageItem) {
+        this.slf4jLogger.error(messageItem.getMarker(), messageItem.get());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void error(MessageItem messageItem, Throwable t) {
-        slf4jLogger.error(messageItem.getMarker(), messageItem.get(), t);
+    public void error(final MessageItem messageItem, final Throwable t) {
+        this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(), t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void error(MessageItem messageItem, Object... parameters) {
-        slf4jLogger.error(messageItem.getMarker(), messageItem.get(parameters));
+    public void error(final MessageItem messageItem, final Object... parameters) {
+        this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(parameters));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void error(MessageItem messageItem, Throwable t, Object... parameters) {
-        slf4jLogger.error(messageItem.getMarker(), messageItem.get(parameters), t);
+    public void error(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(parameters), t);
     }
 
 }

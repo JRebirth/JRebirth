@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 
 @Ignore("Only one application at the same time")
-public class ApplicationTest<A extends AbstractApplication<?>> {
+public class ApplicationTest<A extends DefaultApplication<?>> {
 
     private final Class<A> appClass;
 
