@@ -1,10 +1,10 @@
 package org.jrebirth.core.log;
 
+import ch.qos.logback.classic.Logger;
+
 import org.jrebirth.core.resource.i18n.MessageItem;
 
 import org.slf4j.spi.LocationAwareLogger;
-
-import ch.qos.logback.classic.Logger;
 
 /**
  * The Class LogbackAdapter.
@@ -25,168 +25,168 @@ public class LogbackAdapter implements JRLogger {
      * @param logger the wrapped logger
      */
     public LogbackAdapter(final Logger logger) {
-        logbackLogger = logger;
+        this.logbackLogger = logger;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void trace(MessageItem messageItem) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.get(), null, null);
+    public void trace(final MessageItem messageItem) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.get(), null, null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void trace(MessageItem messageItem, Throwable t) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.get(), null, t);
+    public void trace(final MessageItem messageItem, final Throwable t) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.get(), null, t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void trace(MessageItem messageItem, Throwable t, Object... parameters) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.get(parameters), null, t);
+    public void trace(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.get(parameters), null, t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void trace(MessageItem messageItem, Object... parameters) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.get(parameters), null, null);
+    public void trace(final MessageItem messageItem, final Object... parameters) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.get(parameters), null, null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void debug(MessageItem messageItem) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.get(), null, null);
+    public void debug(final MessageItem messageItem) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.get(), null, null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void debug(MessageItem messageItem, Throwable t) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.get(), null, t);
+    public void debug(final MessageItem messageItem, final Throwable t) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.get(), null, t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void debug(MessageItem messageItem, Throwable t, Object... parameters) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.get(parameters), null, t);
+    public void debug(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.get(parameters), null, t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void debug(MessageItem messageItem, Object... parameters) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.get(parameters), null, null);
+    public void debug(final MessageItem messageItem, final Object... parameters) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.get(parameters), null, null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void info(MessageItem messageItem) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.get(), null, null);
+    public void info(final MessageItem messageItem) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.get(), null, null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void info(MessageItem messageItem, Throwable t) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.get(), null, t);
+    public void info(final MessageItem messageItem, final Throwable t) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.get(), null, t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void info(MessageItem messageItem, Throwable t, Object... parameters) {
-        logbackLogger.info(messageItem.getMarker(), messageItem.get(parameters), t);
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.get(parameters), null, t);
+    public void info(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        this.logbackLogger.info(messageItem.getMarker(), messageItem.get(parameters), t);
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.get(parameters), null, t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void info(MessageItem messageItem, Object... parameters) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.get(parameters), null, null);
+    public void info(final MessageItem messageItem, final Object... parameters) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.get(parameters), null, null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void warn(MessageItem messageItem) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.get(), null, null);
+    public void warn(final MessageItem messageItem) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.get(), null, null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void warn(MessageItem messageItem, Throwable t) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.get(), null, t);
+    public void warn(final MessageItem messageItem, final Throwable t) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.get(), null, t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void warn(MessageItem messageItem, Throwable t, Object... parameters) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.get(parameters), null, t);
+    public void warn(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.get(parameters), null, t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void warn(MessageItem messageItem, Object... parameters) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.get(parameters), null, null);
+    public void warn(final MessageItem messageItem, final Object... parameters) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.get(parameters), null, null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void error(MessageItem messageItem) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(), null, null);
+    public void error(final MessageItem messageItem) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(), null, null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void error(MessageItem messageItem, Throwable t) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(), null, t);
+    public void error(final MessageItem messageItem, final Throwable t) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(), null, t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void error(MessageItem messageItem, Throwable t, Object... parameters) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(parameters), null, t);
+    public void error(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(parameters), null, t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void error(MessageItem messageItem, Object... parameters) {
-        logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(parameters), null, null);
+    public void error(final MessageItem messageItem, final Object... parameters) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(parameters), null, null);
     }
 
 }

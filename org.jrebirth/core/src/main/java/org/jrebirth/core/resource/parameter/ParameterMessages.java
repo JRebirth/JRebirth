@@ -17,11 +17,11 @@
  */
 package org.jrebirth.core.resource.parameter;
 
-import static org.jrebirth.core.resource.Resources.create;
-
 import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.resource.i18n.LogMessage;
 import org.jrebirth.core.resource.i18n.MessageItem;
+
+import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>ParameterMessages</strong>.

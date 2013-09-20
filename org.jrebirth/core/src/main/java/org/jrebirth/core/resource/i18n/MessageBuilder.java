@@ -67,7 +67,7 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
     /**
      * @param logResolutionActivated The logResolutionActivated to set.
      */
-    public void setLogResolutionActivated(boolean logResolutionActivated) {
+    public void setLogResolutionActivated(final boolean logResolutionActivated) {
         this.logResolutionActivated = logResolutionActivated;
     }
 
@@ -186,9 +186,9 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
      * 
      * @return the translated message or null
      */
-    private String findMessage(String messageKey) {
+    private String findMessage(final String messageKey) {
         String message = null;
-        for (int i = resourceBundles.size() - 1; i >= 0 && message == null; i--) {
+        for (int i = this.resourceBundles.size() - 1; i >= 0 && message == null; i--) {
 
             if (this.resourceBundles.get(i).containsKey(messageKey)) {
                 message = this.resourceBundles.get(i).getString(messageKey);
