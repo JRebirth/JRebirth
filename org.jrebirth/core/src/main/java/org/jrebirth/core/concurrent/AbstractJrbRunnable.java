@@ -18,19 +18,18 @@
 package org.jrebirth.core.concurrent;
 
 import org.jrebirth.core.exception.JRebirthThreadException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 
 /**
  * The class <strong>AbstractJrbRunnable</strong>.
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractJrbRunnable implements Runnable {
+public abstract class AbstractJrbRunnable implements Runnable, ConcurrentMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractJrbRunnable.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractJrbRunnable.class);
 
     /** This name is used for debug purpose. */
     private final String runnableName;
@@ -50,12 +49,12 @@ public abstract class AbstractJrbRunnable implements Runnable {
     @Override
     public final void run() {
 
-        LOGGER.trace("Run> " + this.runnableName);
+        LOGGER.trace(RUN_IT, this.runnableName);
 
         try {
             runInto();
         } catch (final JRebirthThreadException jte) {
-            LOGGER.error(jte.getMessage(), jte);
+            LOGGER.error(THREAD_ERROR, jte, jte.getMessage());
         }
 
     }

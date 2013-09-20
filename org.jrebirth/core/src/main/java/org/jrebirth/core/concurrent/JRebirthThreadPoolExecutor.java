@@ -25,8 +25,8 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 
 /**
  * 
@@ -34,10 +34,10 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor {
+public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements ConcurrentMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JRebirthThreadPoolExecutor.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(JRebirthThreadPoolExecutor.class);
 
     /**
      * Default Constructor.
@@ -60,7 +60,7 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor {
             try {
                 final Object result = ((Future<?>) r).get();
                 if (result != null) {
-                    LOGGER.trace("Future (hashcode={}) returned object : {}", r.hashCode(), result.toString());
+                    LOGGER.trace(FUTURE_DONE, r.hashCode(), result.toString());
                 }
             } catch (final CancellationException | ExecutionException e) {
                 rootCause = e.getCause();
@@ -69,10 +69,10 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor {
             }
         }
         if (t != null) {
-            LOGGER.error("JTP returned an error", t);
+            LOGGER.error(JTP_ERROR, t);
         }
         if (rootCause != null) {
-            LOGGER.error("JTP returned an error with rootCause =>", rootCause);
+            LOGGER.error(JTP_ERROR_EXPLANATION, rootCause);
         }
     }
 }

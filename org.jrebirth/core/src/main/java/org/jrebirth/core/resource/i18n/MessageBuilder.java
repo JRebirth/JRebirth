@@ -1,0 +1,211 @@
+/**
+ * Get more info at : www.jrebirth.org .
+ * Copyright JRebirth.org © 2011-2013
+ * Contact : sebastien.bordes@jrebirth.org
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.jrebirth.core.resource.i18n;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
+
+import org.jrebirth.core.log.JRebirthMarkers;
+import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
+import org.jrebirth.core.resource.provided.JRebirthParameters;
+import org.jrebirth.core.util.ClasspathUtility;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * The class <strong>MessageBuilder</strong>.
+ * 
+ * Class used to manage message with weak reference.
+ * 
+ * @author Sébastien Bordes
+ */
+public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, MessageParams, String> {
+
+    /**
+     * The class logger.
+     * 
+     * All Logs of this class are hard coded because l10n engine is not started.
+     * 
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageBuilder.class);
+
+    /** The list of all resource bundle loaded according to annotation. */
+    private final List<ResourceBundle> resourceBundles = new ArrayList<>();
+
+    /** Store all overridden values defined by the call of define method. */
+    private final Map<MessageItem, String> overriddenMessageMap = new ConcurrentHashMap<>();
+
+    /** The Wildcard used to load Messages files. */
+    private String messageFileWildcard;
+
+    /** Flag mapped to the parameter to know if we must resolve log code. */
+    private boolean logResolutionActivated = true;
+
+    /**
+     * @param logResolutionActivated The logResolutionActivated to set.
+     */
+    public void setLogResolutionActivated(boolean logResolutionActivated) {
+        this.logResolutionActivated = logResolutionActivated;
+    }
+
+    /**
+     * Search configuration files according to the parameters provided.
+     * 
+     * @param wildcard the regex wildcard (must not be null)
+     */
+    public void searchMessagesFiles(final String wildcard) {
+
+        // Store parameters
+        this.messageFileWildcard = wildcard;
+
+        // Search and analyze all properties files available
+        readPropertiesFiles();
+    }
+
+    /**
+     * Read all configuration files available into the application classpath.
+     */
+    private void readPropertiesFiles() {
+
+        if (this.messageFileWildcard.isEmpty() || !JRebirthParameters.LOG_RESOLUTION.get()) {
+            // Skip configuration loading
+            LOGGER.info(JRebirthMarkers.MESSAGE, "Messages Loading is skipped");
+
+        } else {
+            // Assemble the regex pattern
+            final Pattern filePattern = Pattern.compile(this.messageFileWildcard + "\\.properties");
+
+            // Retrieve all resources from default classpath
+            final Collection<String> list = ClasspathUtility.getClasspathResources(filePattern);
+
+            LOGGER.info(JRebirthMarkers.MESSAGE, "{} Messages file{} found.", list.size(), list.size() > 1 ? "s" : "");
+
+            for (final String rbFilename : list) {
+                readPropertiesFile(rbFilename);
+            }
+        }
+    }
+
+    /**
+     * Read a customized Message file to load all translated messages.
+     * 
+     * @param rbFilename the resource bundle file to load
+     */
+    private void readPropertiesFile(final String rbFilename) {
+
+        final File rbFile = new File(rbFilename);
+
+        final String rbName = rbFile.getName().substring(0, rbFile.getName().lastIndexOf(".properties"));
+
+        LOGGER.info(JRebirthMarkers.MESSAGE, "Store ResourceBundle : {} ", rbName);
+        try {
+            this.resourceBundles.add(ResourceBundle.getBundle(rbName));
+        } catch (final NullPointerException e) {
+            LOGGER.error(JRebirthMarkers.MESSAGE, "Resource Bundle must be not not null", e);
+        } catch (final MissingResourceException e) {
+            LOGGER.error(JRebirthMarkers.MESSAGE, "{} Resource Bundle not found", rbName);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String buildResource(final MessageItem messageItem, final MessageParams messageParams) {
+        String messsageValue = null;
+        if (messageParams instanceof Message && JRebirthParameters.LOG_RESOLUTION.get()) {
+
+            // Load overridden values first
+            if (messageParams.name() != null && this.overriddenMessageMap.containsKey(messageItem)) {
+
+                // Retrieve the customized parameter
+                messsageValue = this.overriddenMessageMap.get(messageItem);
+            }
+
+            // No overridden value is defined
+            // Check if the message has a message key and
+            // check if the message has been loaded from any customized Messages file
+            if (messsageValue == null && messageParams.name() != null /* && this.propertiesParametersMap.containsKey(op.name()) */) {
+
+                try {
+                    messsageValue = findMessage(messageParams.name());
+                } catch (final MissingResourceException e) {
+                    messsageValue = '<' + messageParams.name() + '>';
+                }
+                // Retrieve the customized parameter
+                // object = op.parseObject(this.propertiesParametersMap.get(op.name()));
+            }
+            //
+
+            // // Don't store the parameter into the map if it hasn't got any parameter name
+            // if (op.name() != null) {
+            //
+            // // Store the new parameter into the map
+            // this.propertiesParametersMap.put(op.name(), new ParameterEntry("", object));
+            // }
+        }
+
+        // Object is still null
+        if (messsageValue == null) {
+            // No customized (properties and overridden) parameter has been loaded, gets the default programmatic one
+            messsageValue = '<' + messageParams.name() + '>';
+        }
+
+        return messsageValue;
+    }
+
+    /**
+     * Retrieved the message mapped with the given key.
+     * 
+     * Perform the search by iterating over all resource bundles available in reverse order.
+     * 
+     * @param messageKey the key of the message to translate
+     * 
+     * @return the translated message or null
+     */
+    private String findMessage(String messageKey) {
+        String message = null;
+        for (int i = resourceBundles.size() - 1; i >= 0 && message == null; i--) {
+
+            if (this.resourceBundles.get(i).containsKey(messageKey)) {
+                message = this.resourceBundles.get(i).getString(messageKey);
+            }
+        }
+
+        return message;
+    }
+
+    /**
+     * Override a parameter value.
+     * 
+     * @param key the parameter item key
+     * @param forcedValue the overridden value
+     */
+    public void define(final MessageItem key, final String forcedValue) {
+        this.overriddenMessageMap.put(key, forcedValue);
+        set(key, forcedValue);
+    }
+}
