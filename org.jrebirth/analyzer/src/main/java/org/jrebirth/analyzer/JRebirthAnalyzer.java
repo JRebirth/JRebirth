@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 import org.jrebirth.analyzer.service.LoadEdtFileService;
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.analyzer.ui.workbench.WorkbenchModel;
-import org.jrebirth.core.application.AbstractApplication;
+import org.jrebirth.core.application.DefaultApplication;
 import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
@@ -47,7 +47,7 @@ import org.jrebirth.core.wave.WaveGroup;
  * 
  * @author Sébastien Bordes
  */
-public final class JRebirthAnalyzer extends AbstractApplication<StackPane> {
+public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
 
     /**
      * Application launcher.
@@ -89,14 +89,6 @@ public final class JRebirthAnalyzer extends AbstractApplication<StackPane> {
     protected void customizeStage(final Stage stage) {
         // Center the stage
         stage.centerOnScreen();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<Wave> getPreBootWaveList() {
-        return Collections.emptyList();
     }
 
     /**
