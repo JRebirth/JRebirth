@@ -20,6 +20,7 @@ package org.jrebirth.core.resource;
 import org.jrebirth.core.resource.color.ColorBuilder;
 import org.jrebirth.core.resource.font.FontBuilder;
 import org.jrebirth.core.resource.fxml.FXMLBuilder;
+import org.jrebirth.core.resource.i18n.MessageBuilder;
 import org.jrebirth.core.resource.image.ImageBuilder;
 import org.jrebirth.core.resource.parameter.ParameterBuilder;
 import org.jrebirth.core.resource.style.StyleSheetBuilder;
@@ -48,5 +49,8 @@ public interface ResourceBuilders {
 
     /** The factory used to manage fxml files. */
     FXMLBuilder FXML_BUILDER = new FXMLBuilder();
+
+    /** The factory used to manage i18ned message. */
+    MessageBuilder MESSAGE_BUILDER = new MessageBuilder();
 
 }

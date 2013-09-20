@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.resource.provided;
 
+import static org.jrebirth.core.resource.Resources.create;
+
 import org.jrebirth.core.facade.DefaultComponentFactory;
 import org.jrebirth.core.link.DefaultUnprocessedWaveHandler;
 import org.jrebirth.core.resource.color.WebColor;
@@ -24,8 +26,6 @@ import org.jrebirth.core.resource.image.ImageExtension;
 import org.jrebirth.core.resource.image.LocalImage;
 import org.jrebirth.core.resource.parameter.ParameterItem;
 import org.jrebirth.core.resource.style.StyleSheet;
-
-import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>JRebirthParameters</strong>.
@@ -51,6 +51,12 @@ public interface JRebirthParameters {
 
     /** The handler used while running in developer mode to manage unprocessed wave. */
     ParameterItem<Boolean> FOLLOW_UP_SERVICE_TASKS = create("followUpServiceTasks", false);
+
+    /**
+     * When true log code will be resolved according to Message_rb properties files. <br />
+     * Disable it to improve performances, log could be translated later.
+     */
+    ParameterItem<Boolean> LOG_RESOLUTION = create("logResolution", true);
 
     /** The handler used while running in developer mode to manage unprocessed wave. */
     ParameterItem<Class> UNPROCESSED_WAVE_HANDLER = create("unprocessedWaveHandler", (Class) DefaultUnprocessedWaveHandler.class);

@@ -17,36 +17,20 @@
  */
 package org.jrebirth.core.resource.i18n;
 
+import org.jrebirth.core.resource.color.ResourceParams;
+
 /**
- * The class <strong>JRebirthMessages</strong>.
+ * The class <strong>MessageParams</strong>.
  * 
  * @author Sébastien Bordes
  */
-public enum JRebirthMessages implements MessageReady {
-
-    /** The Error message. */
-    ERROR;
+public interface MessageParams extends ResourceParams {
 
     /**
-     * Default Constructor.
+     * Return the parameter name.
+     * 
+     * @return Returns the parameter name.
      */
-    private JRebirthMessages() {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String get(final Object... parameter) {
-        return JRebirthMessageManager.getInstance().get(this, parameter);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getSymbolicName() {
-        return name();
-    }
+    String name();
 
 }

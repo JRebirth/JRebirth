@@ -39,6 +39,8 @@ import org.jrebirth.core.exception.handler.DefaultUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.JatUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.JitUncaughtExceptionHandler;
 import org.jrebirth.core.exception.handler.PoolUncaughtExceptionHandler;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.resource.ResourceBuilders;
 import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.resource.provided.JRebirthColors;
@@ -46,9 +48,6 @@ import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.resource.provided.JRebirthStyles;
 import org.jrebirth.core.resource.style.StyleSheetItem;
 import org.jrebirth.core.util.ClassUtility;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -61,16 +60,17 @@ import org.slf4j.LoggerFactory;
  * @param <P> The root node of the stage, must extends Pane to allow children management
  */
 @Configuration(".*jrebirth")
-public abstract class AbstractApplication<P extends Pane> extends Application implements JRebirthApplication<P> {
+@Localized(".*_rb")
+public abstract class AbstractApplication<P extends Pane> extends Application implements JRebirthApplication<P>, ApplicationMessages {
 
-    /** Default parameter re"placement string. */
+    /** Default parameter replacement string. */
     private static final String PARAM = "{}";
 
     /** The default suffix for Application main class. */
     private static final String APP_SUFFIX_CLASSNAME = "Application";
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApplication.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractApplication.class);
 
     /** The application primary stage. */
     private transient Stage stage;
@@ -89,11 +89,32 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     public final void init() throws CoreException {
         try {
             super.init();
+
+            preInit();
+
+            // Load messages Files
+            loadMessagesFiles();
+
+            // Load configuration Files
+            loadConfigurationFiles();
+
+            postInit();
+
         } catch (final Exception e) {
-            LOGGER.error("Error while initializing the application  : ", e);
+            LOGGER.error(ApplicationMessages.INIT_ERROR, e, this.getClass().getSimpleName());
             throw new CoreException(e);
         }
     }
+
+    /**
+     * Perform custom task before application initialization phase.
+     */
+    protected abstract void preInit();
+
+    /**
+     * Perform custom task after application initialization phase and before starting phase.
+     */
+    protected abstract void postInit();
 
     /**
      * {@inheritDoc}
@@ -102,10 +123,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     public final void start(final Stage primaryStage) throws CoreException {
 
         try {
-            LOGGER.trace("Starting {}", this.getClass().getSimpleName());
-
-            // Load configurationrationFiles
-            loadConfigurationFiles();
+            LOGGER.trace(START_APPLICATION, this.getClass().getSimpleName());
 
             // Attach the primary stage for later customization
             this.stage = primaryStage;
@@ -136,10 +154,10 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             // Preload fonts to allow them to be used by CSS
             preloadFonts();
 
-            LOGGER.trace("{} has started successfully", this.getClass().getSimpleName());
+            LOGGER.trace(STARTED_SUCCESSFULLY, this.getClass().getSimpleName());
 
         } catch (final CoreException ce) {
-            LOGGER.error("Error while starting the application : ", ce);
+            LOGGER.error(START_ERROR, ce, this.getClass().getSimpleName());
             throw new CoreException(ce);
         }
     }
@@ -157,6 +175,24 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
         // launch the configuration search engine
         ResourceBuilders.PARAMETER_BUILDER.searchConfigurationFiles(conf.value(), conf.extension());
+
+        // Take into account the log resolution parameter
+        ResourceBuilders.MESSAGE_BUILDER.setLogResolutionActivated(JRebirthParameters.LOG_RESOLUTION.get());
+    }
+
+    /**
+     * Load all Messages files before showing anything.
+     */
+    private void loadMessagesFiles() {
+
+        // Parse the first annotation found (manage overriding)
+        final Localized local = ClassUtility.extractAnnotation(this.getClass(), Localized.class);
+
+        // Conf variable cannot be null because it was defined in this class
+        // It's possible to discard default behavior by setting an empty string to the value.
+
+        // launch the configuration search engine
+        ResourceBuilders.MESSAGE_BUILDER.searchMessagesFiles(local.value());
     }
 
     /**
@@ -165,7 +201,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     @Override
     public final void stop() throws CoreException {
         try {
-            LOGGER.trace("Stopping {}", this.getClass().getSimpleName());
+            LOGGER.trace(STOP_APPLICATION, this.getClass().getSimpleName());
             super.stop();
 
             // Hide the stage is this method wasn't call by user
@@ -193,10 +229,10 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
                 }
             } while (JRebirthThread.getThread().isAlive());
 
-            LOGGER.trace("{} has stopped successfully", this.getClass().getSimpleName());
+            LOGGER.trace(STOPPED_SUCCESSFULLY, this.getClass().getSimpleName());
 
         } catch (final Exception e) {
-            LOGGER.error("Error while stopping the application : ", e);
+            LOGGER.error(STOP_ERROR, e, this.getClass().getSimpleName());
             throw new CoreException(e);
         }
     }
@@ -296,7 +332,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
         final URL styleSheetURL = styleSheetItem.get();
         if (styleSheetURL == null) {
-            LOGGER.error("Impossible to load CSS: " + styleSheetItem.toString() + " using folder: " + JRebirthParameters.STYLE_FOLDER.get() + "/");
+            LOGGER.error(CSS_LOADING_ERROR, styleSheetItem.toString(), JRebirthParameters.STYLE_FOLDER.get());
         } else {
             scene.getStylesheets().add(styleSheetURL.toExternalForm());
         }
@@ -351,7 +387,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     private void manageDefaultStyleSheet(final Scene scene) {
         if (scene.getStylesheets().size() < 1) {
             // No style sheet has been added to the scene
-            LOGGER.warn("No style sheet has been added to the scene, will link the default.css");
+            LOGGER.warn(NO_CSS_DEFINED);
             addCSS(scene, JRebirthStyles.DEFAULT);
         }
 

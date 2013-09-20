@@ -17,9 +17,9 @@
  */
 package org.jrebirth.core.resource.provided;
 
-import org.jrebirth.core.resource.color.ColorItem;
-
 import static org.jrebirth.core.resource.Resources.create;
+
+import org.jrebirth.core.resource.color.ColorItem;
 
 /**
  * The class <strong>JRebirthColors</strong>.

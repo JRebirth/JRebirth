@@ -31,6 +31,8 @@ import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.GlobalFacadeBase;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.service.basic.StyleSheetTrackerService;
 import org.jrebirth.core.ui.Model;
@@ -40,21 +42,18 @@ import org.jrebirth.core.wave.WaveBuilder;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveGroup;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * The class <strong>JRebirthThread</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class JRebirthThread extends Thread {
+public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
     /** The JRebirth Internal Thread name [JIT]. */
     public static final String JIT_NAME = "JIT";
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JRebirthThread.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(JRebirthThread.class);
 
     /** The unique instance of the current class. */
     private static JRebirthThread internalThread;
@@ -110,7 +109,7 @@ public final class JRebirthThread extends Thread {
     @SuppressWarnings("unchecked")
     public void runIntoJTP(final Runnable runnable) {
         final Future<Void> future = (Future<Void>) getFacade().getExecutorService().submit(runnable);
-        LOGGER.trace("Runnable submitted with hashCode={}", future.hashCode());
+        LOGGER.trace(JTP_QUEUED, future.hashCode());
     }
 
     /**
@@ -166,7 +165,7 @@ public final class JRebirthThread extends Thread {
         try {
             bootUp();
         } catch (final JRebirthThreadException e) {
-            LOGGER.error("An exception occured during JRebirth BootUp", e);
+            LOGGER.error(BOOT_UP_ERROR, e);
         }
 
         // JRebirth thread has boot up and is ready to process events
@@ -214,7 +213,7 @@ public final class JRebirthThread extends Thread {
                 }
 
             } catch (final InterruptedException e) {
-                LOGGER.error("An exception occured into the JRebirth Thread", e);
+                LOGGER.error(JIT_ERROR, e);
             }
 
         }
@@ -319,7 +318,7 @@ public final class JRebirthThread extends Thread {
             // Destroy the static reference
             destroyInstance();
         } catch (final CoreException e) {
-            LOGGER.error("An error occurred while shuting down the application ", e);
+            LOGGER.error(SHUTDOWN_ERROR, e);
         }
     }
 

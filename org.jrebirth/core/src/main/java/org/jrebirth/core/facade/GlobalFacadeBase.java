@@ -25,6 +25,7 @@ import org.jrebirth.core.concurrent.JRebirthThreadPoolExecutor;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.link.Notifier;
 import org.jrebirth.core.link.NotifierBase;
+import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.util.ClassUtility;
 
@@ -140,7 +141,7 @@ public class GlobalFacadeBase implements GlobalFacade {
             sb.append(target == null ? null : target.getCanonicalName());
             sb.append(ClassUtility.SEPARATOR);
             sb.append(eventData.length > 0 ? eventData[0] : "");
-            LOGGER.info(sb.toString());
+            LOGGER.info(JRebirthMarkers.JREVENT, sb.toString());
         }
     }
 
