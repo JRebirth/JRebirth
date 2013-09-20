@@ -23,7 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import org.jrebirth.core.application.AbstractApplication;
+import org.jrebirth.core.application.DefaultApplication;
 import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
@@ -38,7 +38,7 @@ import ui.TransitionModel;
  * @author Sébastien Bordes
  * 
  */
-public final class TestTransition extends AbstractApplication<StackPane> {
+public final class TestTransition extends DefaultApplication<StackPane> {
 
     /**
      * Application launcher.
