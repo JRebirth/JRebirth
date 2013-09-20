@@ -27,12 +27,11 @@ import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.resource.ParameterEntry;
 import org.jrebirth.core.resource.factory.AbstractResourceBuilder;
 import org.jrebirth.core.util.ClasspathUtility;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>ParameterBuilder</strong>.
@@ -41,12 +40,12 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public final class ParameterBuilder extends AbstractResourceBuilder<ParameterItem<?>, ParameterParams, Object> {
+public final class ParameterBuilder extends AbstractResourceBuilder<ParameterItem<?>, ParameterParams, Object> implements ParameterMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ParameterBuilder.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(ParameterBuilder.class);
 
-    /** Store all parameter values defined ito properties files. */
+    /** Store all parameter values defined into properties files. */
     private final Map<String, ParameterEntry> propertiesParametersMap = new ConcurrentHashMap<>();
 
     /** Store all overridden values defined by the call of define method. */
@@ -81,7 +80,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
         if (this.configurationFileWildcard.isEmpty() || this.configurationFileExtension.isEmpty()) {
             // Skip configuration loading
-            LOGGER.info("Configuration Loading is skipped");
+            LOGGER.info(SKIP_CONF_LOADING);
 
         } else {
             // Assemble the regex pattern
@@ -90,7 +89,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
             // Retrieve all resources from default classpath
             final Collection<String> list = ClasspathUtility.getClasspathResources(filePattern);
 
-            LOGGER.info("{} configuration file{} found.", list.size(), list.size() > 1 ? "s" : "");
+            LOGGER.info(CONFIG_FOUND, list.size(), list.size() > 1 ? "s" : "");
 
             for (final String confFilename : list) {
                 readPropertiesFile(confFilename);
@@ -109,7 +108,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
         final Properties p = new Properties();
 
-        LOGGER.info("Read configuration file : {} ", custConfFile.getAbsolutePath());
+        LOGGER.info(READ_CONF_FILE, custConfFile.getAbsolutePath());
 
         try (InputStream is = new FileInputStream(custConfFile)) {
 
@@ -118,16 +117,16 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
             for (final Map.Entry<Object, Object> entry : p.entrySet()) {
                 if (this.propertiesParametersMap.containsKey(entry.getKey())) {
-                    LOGGER.trace("Update key {} with value= {}", entry.getKey(), entry.getValue());
+                    LOGGER.trace(UPDATE_PARAMETER, entry.getKey(), entry.getValue());
                 } else {
-                    LOGGER.trace("Store key {} with value= {}", entry.getKey(), entry.getValue());
+                    LOGGER.trace(STORE_PARAMETER, entry.getKey(), entry.getValue());
                 }
                 storePropertiesParameter(entry);
 
             }
 
         } catch (final IOException e) {
-            LOGGER.error("Impossible to read the properties file : {}", custConfFile.getAbsolutePath());
+            LOGGER.error(CONF_READING_ERROR, custConfFile.getAbsolutePath());
         }
 
     }

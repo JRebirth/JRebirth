@@ -17,24 +17,35 @@
  */
 package org.jrebirth.core.resource.i18n;
 
+import org.slf4j.Marker;
+
 /**
- * The class <strong>MessageReady</strong>.
+ * The interface <strong>Message</strong>.
  * 
  * @author Sébastien Bordes
  */
-public interface MessageReady {
+public class LogMessage extends Message implements LogMessageParams {
+
+    /** The mandatory log marker used to sort log items. */
+    private final Marker marker;
 
     /**
-     * @return Returns the symbolicName formerly returned by name() method.
+     * Default Constructor.
+     * 
+     * @param parameterName the name of the parameter
+     * @param marker the log marker
      */
-    String getSymbolicName();
+    public LogMessage(final String parameterName, final Marker marker) {
+        super(parameterName);
+        this.marker = marker;
+    }
 
     /**
-     * Return the message translated with the right language.
-     * 
-     * @param parameter used by parameterized formatted string
-     * 
-     * @return Returns the translated language.
+     * {@inheritDoc}
      */
-    String get(final Object... parameter);
+    @Override
+    public Marker marker() {
+        return this.marker;
+    }
+
 }

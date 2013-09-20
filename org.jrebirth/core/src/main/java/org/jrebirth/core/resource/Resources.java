@@ -29,6 +29,8 @@ import org.jrebirth.core.resource.font.FontItemBase;
 import org.jrebirth.core.resource.font.FontParams;
 import org.jrebirth.core.resource.fxml.FXMLItemBase;
 import org.jrebirth.core.resource.fxml.FXMLParams;
+import org.jrebirth.core.resource.i18n.Message;
+import org.jrebirth.core.resource.i18n.MessageItemBase;
 import org.jrebirth.core.resource.image.ImageItemBase;
 import org.jrebirth.core.resource.image.ImageParams;
 import org.jrebirth.core.resource.parameter.ObjectParameter;
@@ -64,6 +66,9 @@ public final class Resources {
 
     /** The generator of unique id for fxml files. */
     private static AtomicInteger fxmlIdGenerator = new AtomicInteger();
+
+    /** The generator of unique id for message items. */
+    private static AtomicInteger messageIdGenerator = new AtomicInteger();
 
     /** The dynamic color map. */
     private static Map<String, ColorItem> colorMap = new Hashtable<>();
@@ -230,6 +235,27 @@ public final class Resources {
         fxmlItem.setUid(fxmlIdGenerator.incrementAndGet());
 
         return fxmlItem;
+    }
+
+    /*************************************************************************/
+    /** ______________________________Message_______________________________ */
+    /*************************************************************************/
+
+    /**
+     * Build a Message item.
+     * 
+     * @param messageParams the key of the i18n message
+     * 
+     * @return a new fresh Message item
+     */
+    public static MessageItemBase create(final Message messageParams) {
+
+        final MessageItemBase messageItem = new MessageItemBase(messageParams);
+
+        // Ensure that the uid will be unique at runtime
+        messageItem.setUid(messageIdGenerator.incrementAndGet());
+
+        return messageItem;
     }
 
     /**
