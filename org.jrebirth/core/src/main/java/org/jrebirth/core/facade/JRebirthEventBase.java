@@ -36,10 +36,10 @@ public final class JRebirthEventBase implements JRebirthEvent {
     private JRebirthEventType eventType;
 
     /** The source class. */
-    private Class<?> source;
+    private String source;
 
     /** The target class. */
-    private Class<?> target;
+    private String target;
 
     /** The event data. */
     private String eventData;
@@ -47,12 +47,14 @@ public final class JRebirthEventBase implements JRebirthEvent {
     /**
      * Default Constructor with mandatory fields.
      * 
+     * @param sequence the sequence number
      * @param eventType the type of the event
      * @param source the source class of the event
      * @param target the target of the event
      * @param eventData the data of the event
      */
-    public JRebirthEventBase(final JRebirthEventType eventType, final Class<?> source, final Class<?> target, final String... eventData) {
+    public JRebirthEventBase(final int sequence, final JRebirthEventType eventType, final String source, final String target, final String... eventData) {
+        this.sequence = sequence;
         this.eventType = eventType;
         this.source = source;
         this.target = target;
@@ -106,7 +108,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * {@inheritDoc}
      */
     @Override
-    public Class<?> getSource() {
+    public String getSource() {
         return this.source;
     }
 
@@ -114,7 +116,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * {@inheritDoc}
      */
     @Override
-    public void setSource(final Class<?> source) {
+    public void setSource(final String source) {
         this.source = source;
     }
 
@@ -122,7 +124,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * {@inheritDoc}
      */
     @Override
-    public Class<?> getTarget() {
+    public String getTarget() {
         return this.target;
     }
 
@@ -130,7 +132,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * {@inheritDoc}
      */
     @Override
-    public void setTarget(final Class<?> target) {
+    public void setTarget(final String target) {
         this.target = target;
     }
 
@@ -160,9 +162,9 @@ public final class JRebirthEventBase implements JRebirthEvent {
         sb.append(ClassUtility.SEPARATOR);
         sb.append(getEventType());
         sb.append(ClassUtility.SEPARATOR);
-        sb.append(getSource() == null ? null : getSource().getCanonicalName());
+        sb.append(getSource());
         sb.append(ClassUtility.SEPARATOR);
-        sb.append(getTarget() == null ? null : getTarget().getCanonicalName());
+        sb.append(getTarget());
         sb.append(ClassUtility.SEPARATOR);
         sb.append(getEventData());
         sb.append(ClassUtility.SEPARATOR);
@@ -179,8 +181,8 @@ public final class JRebirthEventBase implements JRebirthEvent {
         if (st.countTokens() >= 5) {
             setSequence(Integer.valueOf(st.nextToken()));
             setEventType(JRebirthEventType.valueOf(st.nextToken()));
-            setSource(getClass(st.nextToken()));
-            setTarget(getClass(st.nextToken()));
+            setSource(st.nextToken());
+            setTarget(st.nextToken());
             setEventData(st.nextToken());
         }
     }

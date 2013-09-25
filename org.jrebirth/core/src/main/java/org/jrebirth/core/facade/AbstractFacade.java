@@ -27,11 +27,10 @@ import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.key.ClassKey;
 import org.jrebirth.core.key.MultitonKey;
 import org.jrebirth.core.key.UniqueKey;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>AbstractFacade</strong>.
@@ -42,10 +41,10 @@ import org.slf4j.LoggerFactory;
  * 
  * @param <R> A type that implements FacadeReady
  */
-public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractGlobalReady implements LocalFacade<R> {
+public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractGlobalReady implements LocalFacade<R>, FacadeMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFacade.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractFacade.class);
 
     /** The map that store FacadeReady singletons. */
     private final Map<ClassKey<? extends R>, R> singletonMap;
@@ -79,7 +78,6 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
             // Store the component into the singleton map
             this.singletonMap.put((ClassKey<R>) readyObject.getKey(), readyObject);
-            // }
         }
     }
 
@@ -150,10 +148,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                 readyObject.ready();
 
             } catch (final CoreException ce) {
-                LOGGER.error(ce.getMessage());
-                final String msg = "Error while building " + clazz.getCanonicalName() + " instance";
-                LOGGER.error(msg);
-                throw new CoreRuntimeException(msg, ce);
+                LOGGER.error(COMPONENT_RETRIEVAL_ERROR, ce);
+                throw new CoreRuntimeException(ce);// Pop up the exception wrapped into a runtime exception
             }
         }
 
@@ -189,36 +185,30 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      */
     @SuppressWarnings("unchecked")
     protected <E extends R> E build(final Class<E> clazz, final Object... keyPart) throws CoreException {
-        try {
-            // Build a new instance of the component
-            final E readyObject = getGlobalFacade().getComponentFactory().buildComponent(clazz);
 
-            // Retrieve the right event type to track
-            JRebirthEventType type = JRebirthEventType.NONE;
-            if (readyObject instanceof Model) {
-                type = JRebirthEventType.CREATE_MODEL;
-            } else if (readyObject instanceof Service) {
-                type = JRebirthEventType.CREATE_SERVICE;
-            } else if (readyObject instanceof Command) {
-                type = JRebirthEventType.CREATE_COMMAND;
-            }
-            // Track this instantiation event
-            getGlobalFacade().trackEvent(type, this.getClass(), readyObject.getClass());
+        // Build a new instance of the component
+        final E readyObject = getGlobalFacade().getComponentFactory().buildComponent(clazz);
 
-            // Attach the local facade
-            readyObject.setLocalFacade(this);
-
-            // Create the unique key
-            readyObject.setKey(buildKey((Class<R>) readyObject.getClass(), keyPart));
-
-            // Component Ready !
-            return readyObject;
-
-        } catch (CoreException | IllegalArgumentException | SecurityException e) {
-            final String msg = "Impossible to create the class " + clazz.getName();
-            LOGGER.error(msg, e);
-            throw new CoreException(msg, e);
+        // Retrieve the right event type to track
+        JRebirthEventType type = JRebirthEventType.NONE;
+        if (readyObject instanceof Model) {
+            type = JRebirthEventType.CREATE_MODEL;
+        } else if (readyObject instanceof Service) {
+            type = JRebirthEventType.CREATE_SERVICE;
+        } else if (readyObject instanceof Command) {
+            type = JRebirthEventType.CREATE_COMMAND;
         }
+        // Track this instantiation event
+        getGlobalFacade().trackEvent(type, this.getClass(), readyObject.getClass());
+
+        // Attach the local facade
+        readyObject.setLocalFacade(this);
+
+        // Create the unique key
+        readyObject.setKey(buildKey((Class<R>) readyObject.getClass(), keyPart));
+
+        // Component Ready !
+        return readyObject;
     }
 
     /**

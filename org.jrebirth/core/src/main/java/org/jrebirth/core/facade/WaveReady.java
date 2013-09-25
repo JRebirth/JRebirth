@@ -24,9 +24,9 @@ import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
-import org.jrebirth.core.wave.WaveChecker;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveType;
+import org.jrebirth.core.wave.checker.WaveChecker;
 
 /**
  * The interface <strong>WaveReady</strong>.
