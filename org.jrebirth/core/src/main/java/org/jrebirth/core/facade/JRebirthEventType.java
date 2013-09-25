@@ -26,31 +26,31 @@ package org.jrebirth.core.facade;
  */
 public enum JRebirthEventType {
 
-    /** */
+    /** No Event type specified. */
     NONE,
-    /** */
+    /** Create Application class. */
     CREATE_APPLICATION,
-    /** */
+    /** Create Global Facade class. */
     CREATE_GLOBAL_FACADE,
-    /** */
+    /** Create Notifier class. */
     CREATE_NOTIFIER,
-    /** */
+    /** Create Command Facade class. */
     CREATE_COMMAND_FACADE,
-    /** */
+    /** Create Service Facade class. */
     CREATE_SERVICE_FACADE,
-    /** */
+    /** Create UI Facade class. */
     CREATE_UI_FACADE,
-    /** */
+    /** Create Command class. */
     CREATE_COMMAND,
-    /** */
+    /** Create Service class. */
     CREATE_SERVICE,
-    /** */
+    /** Create Model class. */
     CREATE_MODEL,
-    /** */
+    /** Create View class. */
     CREATE_VIEW,
-    /** */
+    /** Create Controller class. */
     CREATE_CONTROLLER,
-    /** */
+    /** Create Wave class. */
     CREATE_WAVE,
 
     /** */
