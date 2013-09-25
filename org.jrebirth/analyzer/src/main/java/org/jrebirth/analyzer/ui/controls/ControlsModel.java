@@ -48,7 +48,7 @@ public final class ControlsModel extends DefaultModel<ControlsModel, ControlsVie
      * 
      * @param wave the wave received
      */
-    public void eventsLoaded(final List<JRebirthEvent> eventList, final Wave wave) {
+    public void doEventsLoaded(final List<JRebirthEvent> eventList, final Wave wave) {
         getView().activateButtons(!eventList.isEmpty());
     }
 
@@ -57,7 +57,7 @@ public final class ControlsModel extends DefaultModel<ControlsModel, ControlsVie
      * 
      * @param wave the wave received
      */
-    public void unload(final Wave wave) {
+    public void doUnload(final Wave wave) {
         getView().activateButtons(false);
     }
 }

@@ -22,9 +22,9 @@ import org.jrebirth.core.command.basic.showmodel.ShowFadingModelCommand;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.ui.Model;
-import org.jrebirth.core.wave.ClassWaveChecker;
-import org.jrebirth.core.wave.DefaultWaveChecker;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.checker.ClassWaveChecker;
+import org.jrebirth.core.wave.checker.DefaultWaveChecker;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
