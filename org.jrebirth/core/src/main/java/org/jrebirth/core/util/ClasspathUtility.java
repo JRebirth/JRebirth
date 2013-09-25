@@ -28,8 +28,8 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 
 /**
  * The class <strong>ClassUtility</strong>.
@@ -38,13 +38,13 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public final class ClasspathUtility {
+public final class ClasspathUtility implements UtilMessages {
 
     /** The separator used for serialization. */
     public static final String SEPARATOR = "|";
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClasspathUtility.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(ClasspathUtility.class);
 
     /** The classpath of the current java executable or current folder if not defined. */
     private static final String CLASSPATH = System.getProperty("java.class.path", ".");
@@ -100,7 +100,7 @@ public final class ClasspathUtility {
             // Explode and browse jar|zip content
             resources.addAll(getResourcesFromJarOrZipFile(classpathEntryFile, searchPattern));
         } else {
-            LOGGER.info("The resource {} is ignored from classpath search engine (not a zip|jar|directory)", classpathEntryFile.getAbsolutePath());
+            LOGGER.info(RESOURCE_IGNORED, classpathEntryFile.getAbsolutePath());
         }
         return resources;
     }
@@ -128,7 +128,7 @@ public final class ClasspathUtility {
                 try {
                     checkResource(resources, searchPattern, file.getCanonicalPath());
                 } catch (final IOException e) {
-                    LOGGER.error("Impossible to get the resource canonical path", e);
+                    LOGGER.error(BAD_CANONICAL_PATH, e);
                 }
             }
         }
@@ -156,7 +156,7 @@ public final class ClasspathUtility {
             }
 
         } catch (final IOException e) {
-            LOGGER.error("Impossible to read the file", e);
+            LOGGER.error(FILE_UNREADABLE, e);
         }
         return resources;
     }

@@ -29,9 +29,8 @@ import java.util.List;
 import java.util.Locale;
 
 import org.jrebirth.core.exception.CoreException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 
 /**
  * The class <strong>ClassUtility</strong>.
@@ -40,7 +39,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public final class ClassUtility {
+public final class ClassUtility implements UtilMessages {
 
     /** The separator used for serialization. */
     public static final String SEPARATOR = "|";
@@ -49,7 +48,7 @@ public final class ClassUtility {
     private static final String CASE_SEPARATOR = "_";
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtility.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(ClassUtility.class);
 
     /**
      * Private Constructor.
@@ -118,24 +117,30 @@ public final class ClassUtility {
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | SecurityException e) {
+
             final StringBuilder sb = new StringBuilder("[");
             for (final Class<?> assignableClass : assignableClasses) {
                 sb.append(assignableClass.getName()).append(", ");
             }
             sb.append("]");
-            final String message = genericClass == null
-                    ? "Impossible to build the object assignable to " + sb.toString() + " for the class " + mainClass.getName()
-                    : "Impossible to build the " + genericClass.getName() + " object for the class " + mainClass.getName();
-            LOGGER.error(message, e);
 
-            if (e instanceof IllegalArgumentException) {
-                LOGGER.error("Arguments are : ");
-                for (int i = 0; i < parameterTypes.length; i++) {
-                    LOGGER.error("{} = {}", parameterTypes[i].toString(), parameters[i].toString());
-                }
+            if (genericClass == null) {
+                LOGGER.error(GENERIC_TYPE_ERROR_1, e, sb.toString(), mainClass.getName());
+            } else {
+                LOGGER.error(GENERIC_TYPE_ERROR_2, e, genericClass.getName(), mainClass.getName());
             }
 
-            throw new CoreException(message, e);
+            if (e instanceof IllegalArgumentException) {
+                LOGGER.error(ARGUMENT_LIST);
+                for (int i = 0; i < parameterTypes.length; i++) {
+                    LOGGER.error(ARGUMENT_DETAIL, parameterTypes[i].toString(), parameters[i].toString());
+                }
+            }
+            if (genericClass == null) {
+                throw new CoreException(GENERIC_TYPE_ERROR_1.get(sb.toString(), mainClass.getName()), e);
+            } else {
+                throw new CoreException(GENERIC_TYPE_ERROR_2.get(genericClass.getName(), mainClass.getName()), e);
+            }
         }
     }
 
@@ -155,8 +160,8 @@ public final class ClassUtility {
             // Return the first constructor as a workaround
             constructor = genericClass.getConstructors()[0];
         } catch (final SecurityException e) {
-            LOGGER.error("Impossible to retrieve the constructor due to security", e);
-            throw e;
+            LOGGER.error(NO_CONSTRUCTOR, e);
+            throw e; // Pop up the exception to let it managed by the caller method
         }
         return constructor;
     }
@@ -362,9 +367,9 @@ public final class ClassUtility {
             object = attributeMethod.invoke(annotation);
 
         } catch (NoSuchMethodException | SecurityException e) {
-            LOGGER.error("Impossible to find the annotation property : " + attributeName, e);
+            LOGGER.error(NO_ANNOTATION_PROPERTY, e, attributeName);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            LOGGER.error("Impossible to retrieve value for the annotation property : " + attributeName, e);
+            LOGGER.error(NO_ANNOTATION_PROPERTY_VALUE, e, attributeName);
         }
         return object;
     }
