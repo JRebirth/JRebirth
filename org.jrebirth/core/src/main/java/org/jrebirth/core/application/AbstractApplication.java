@@ -177,7 +177,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         ResourceBuilders.PARAMETER_BUILDER.searchConfigurationFiles(conf.value(), conf.extension());
 
         // Take into account the log resolution parameter
-        ResourceBuilders.MESSAGE_BUILDER.setLogResolutionActivated(JRebirthParameters.LOG_RESOLUTION.get());
+        // ResourceBuilders.MESSAGE_BUILDER.setLogResolutionActivated(JRebirthParameters.LOG_RESOLUTION.get());
     }
 
     /**

@@ -17,8 +17,9 @@
  */
 package org.jrebirth.core.exception;
 
+import org.jrebirth.core.resource.i18n.MessageItem;
+
 /***
- * 
  * The class <strong>CoreRuntimeException</strong>.
  * 
  * This is the exception that can be thrown by the JRebirth core module.
@@ -49,6 +50,25 @@ public class CoreRuntimeException extends RuntimeException {
      */
     public CoreRuntimeException(final String message) {
         super(message);
+    }
+
+    /**
+     * Constructor with message and throwable.
+     * 
+     * @param messageItem the message item to display.
+     * @param t the base exception thrown
+     */
+    public CoreRuntimeException(final MessageItem messageItem, final Throwable t) {
+        super(messageItem.get(), t);
+    }
+
+    /**
+     * Constructor without base exception.
+     * 
+     * @param messageItem the message item to display.
+     */
+    public CoreRuntimeException(final MessageItem messageItem) {
+        super(messageItem.get());
     }
 
     /**

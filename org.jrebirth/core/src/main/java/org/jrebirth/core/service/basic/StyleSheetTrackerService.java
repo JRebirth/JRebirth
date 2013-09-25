@@ -21,13 +21,13 @@ import java.io.File;
 
 import javafx.scene.Scene;
 
-import com.sun.javafx.css.StyleManager;
-
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.WaveTypeBase;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.sun.javafx.css.StyleManager;
 
 /**
  * The class <strong>StyleSheetTrackerService</strong>.
@@ -62,8 +62,6 @@ public class StyleSheetTrackerService extends DefaultService {
      * @param scene the root scene
      */
     public void listen(final String styleSheetPath, final Scene scene) {
-
-        LOGGER.trace("Open a stage.");
 
         final File file = new File(styleSheetPath);
 

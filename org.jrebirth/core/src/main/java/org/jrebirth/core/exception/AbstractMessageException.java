@@ -21,27 +21,26 @@ import org.jrebirth.core.resource.i18n.MessageItem;
 
 /***
  * 
- * The class <strong>CoreException</strong>.
+ * The class <strong>CommandException</strong>.
  * 
- * This is the exception that can be thrown by the JRebirth core module.
+ * This is the exception that can be thrown by any JRebirth command.
  * 
  * @author Sébastien Bordes
  */
-public class CoreException extends AbstractMessageException {
+public class AbstractMessageException extends Exception {
 
     /**
      * The constant used for serialization.
      */
-    private static final long serialVersionUID = 112036992331510469L;
+    private static final long serialVersionUID = -5049887872782512847L;
 
     /**
-     * Constructor with message and throwable.
+     * Constructor without any exception.
      * 
-     * @param messageItem the message to display.
-     * @param t the base exception thrown
+     * @param CommandException.java the message item to display.
      */
-    public CoreException(final MessageItem messageItem, final Throwable t) {
-        super(messageItem, t);
+    public AbstractMessageException(final MessageItem messageItem) {
+        super(messageItem.get());
     }
 
     /**
@@ -50,7 +49,7 @@ public class CoreException extends AbstractMessageException {
      * @param message the message to display.
      * @param t the base exception thrown
      */
-    public CoreException(final String message, final Throwable t) {
+    public AbstractMessageException(final String message, final Throwable t) {
         super(message, t);
     }
 
@@ -59,17 +58,18 @@ public class CoreException extends AbstractMessageException {
      * 
      * @param message the message to display.
      */
-    public CoreException(final String message) {
+    public AbstractMessageException(final String message) {
         super(message);
     }
 
     /**
-     * Constructor without base exception.
+     * Constructor with message and root cause.
      * 
-     * @param messageItem the message to display.
+     * @param messageItem the message item to display.
+     * @param t the base exception thrown
      */
-    public CoreException(final MessageItem messageItem) {
-        super(messageItem);
+    public AbstractMessageException(final MessageItem messageItem, final Throwable t) {
+        super(messageItem.get(), t);
     }
 
     /**
@@ -77,7 +77,7 @@ public class CoreException extends AbstractMessageException {
      * 
      * @param t the base exception thrown
      */
-    public CoreException(final Throwable t) {
+    public AbstractMessageException(final Throwable t) {
         super(t);
     }
 

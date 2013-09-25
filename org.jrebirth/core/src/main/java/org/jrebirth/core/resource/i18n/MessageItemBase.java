@@ -67,7 +67,7 @@ public final class MessageItemBase implements MessageItem {
             } catch (final IllegalArgumentException e) {
                 res = "<!!" + builder().getParam(this).toString() + "!!>";
                 if (JRebirthParameters.DEVELOPER_MODE.get()) {
-                    throw new CoreRuntimeException("Invalid key : " + res);
+                    throw new CoreRuntimeException("Invalid key : " + res, e);
                 }
             }
         }

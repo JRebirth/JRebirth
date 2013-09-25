@@ -17,11 +17,12 @@
  */
 package org.jrebirth.core.application;
 
+import static org.jrebirth.core.resource.Resources.create;
+
 import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.resource.i18n.LogMessage;
+import org.jrebirth.core.resource.i18n.MessageContainer;
 import org.jrebirth.core.resource.i18n.MessageItem;
-
-import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>ApplicationMessages</strong>.
@@ -30,35 +31,35 @@ import static org.jrebirth.core.resource.Resources.create;
  * 
  * @author Sébastien Bordes
  */
-public interface ApplicationMessages {
+public interface ApplicationMessages extends MessageContainer {
 
     /** "Starting {0}" . */
-    MessageItem START_APPLICATION = create(new LogMessage("application.startApplication", JRebirthMarkers.APPLICATION));
+    MessageItem START_APPLICATION = create(new LogMessage("jrebirth.application.startApplication", JRebirthMarkers.APPLICATION));
 
     /** "{} has started successfully". */
-    MessageItem STARTED_SUCCESSFULLY = create(new LogMessage("application.startedSuccessfully", JRebirthMarkers.APPLICATION));
+    MessageItem STARTED_SUCCESSFULLY = create(new LogMessage("jrebirth.application.startedSuccessfully", JRebirthMarkers.APPLICATION));
 
     /** "You must override getFirstModelClass without calling super.". */
-    MessageItem OVERRIDE_FIRST_MODEL_CLASS = create(new LogMessage("application.overrideFirstModelClass", JRebirthMarkers.APPLICATION));
+    MessageItem OVERRIDE_FIRST_MODEL_CLASS = create(new LogMessage("jrebirth.application.overrideFirstModelClass", JRebirthMarkers.APPLICATION));
 
     /** "Error while initializing the application {0} : ". */
-    MessageItem INIT_ERROR = create(new LogMessage("application.initError", JRebirthMarkers.APPLICATION));
+    MessageItem INIT_ERROR = create(new LogMessage("jrebirth.application.initError", JRebirthMarkers.APPLICATION));
 
     /** "Error while starting the application {0} : ". */
-    MessageItem START_ERROR = create(new LogMessage("application.startError", JRebirthMarkers.APPLICATION));
+    MessageItem START_ERROR = create(new LogMessage("jrebirth.application.startError", JRebirthMarkers.APPLICATION));
 
     /** "Stopping {0}" . */
-    MessageItem STOP_APPLICATION = create(new LogMessage("application.stopApplication", JRebirthMarkers.APPLICATION));
+    MessageItem STOP_APPLICATION = create(new LogMessage("jrebirth.application.stopApplication", JRebirthMarkers.APPLICATION));
 
     /** "{0} has stopped successfully". */
-    MessageItem STOPPED_SUCCESSFULLY = create(new LogMessage("application.stoppedSuccessfully", JRebirthMarkers.APPLICATION));
+    MessageItem STOPPED_SUCCESSFULLY = create(new LogMessage("jrebirth.application.stoppedSuccessfully", JRebirthMarkers.APPLICATION));
 
     /** "Error while stopping the application {0} : ". */
-    MessageItem STOP_ERROR = create(new LogMessage("application.stopError", JRebirthMarkers.APPLICATION));
+    MessageItem STOP_ERROR = create(new LogMessage("jrebirth.application.stopError", JRebirthMarkers.APPLICATION));
 
     /** ""Impossible to load CSS: {0} using folder: {1}/". */
-    MessageItem CSS_LOADING_ERROR = create(new LogMessage("application.cssLoadingError", JRebirthMarkers.APPLICATION));
+    MessageItem CSS_LOADING_ERROR = create(new LogMessage("jrebirth.application.cssLoadingError", JRebirthMarkers.APPLICATION));
 
     /** "No style sheet has been added to the scene, will link the default.css". */
-    MessageItem NO_CSS_DEFINED = create(new LogMessage("application.noCssDefined", JRebirthMarkers.APPLICATION));
+    MessageItem NO_CSS_DEFINED = create(new LogMessage("jrebirth.application.noCssDefined", JRebirthMarkers.APPLICATION));
 }

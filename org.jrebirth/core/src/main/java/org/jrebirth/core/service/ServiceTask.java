@@ -68,6 +68,8 @@ public final class ServiceTask<T> extends Task<T> {
      */
     private final Wave wave;
 
+    private double localWorkDone;
+
     /**
      * Default Constructor only visible by service package.
      * 
@@ -165,6 +167,9 @@ public final class ServiceTask<T> extends Task<T> {
      */
     @Override
     public void updateProgress(final long workDone, final long totalWork) {
+        synchronized (this) {
+            this.localWorkDone = workDone;
+        }
         super.updateProgress(workDone, totalWork);
     }
 
@@ -173,6 +178,9 @@ public final class ServiceTask<T> extends Task<T> {
      */
     @Override
     public void updateProgress(final double workDone, final double totalWork) {
+        synchronized (this) {
+            this.localWorkDone = workDone;
+        }
         super.updateProgress(workDone, totalWork);
     }
 
@@ -202,6 +210,29 @@ public final class ServiceTask<T> extends Task<T> {
     public void taskDone() {
         // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
         this.service.removePendingTask(this.wave.getWUID());
+    }
+
+    /**
+     * Check if the task has enough progressed according to the given threshold.
+     * 
+     * This method can be called outside the JAT, it's useful to filter useless call to JAT
+     * 
+     * @param newWorkDone the amount of work done
+     * @param totalWork the total amount of work
+     * @param amountThreshold the minimum threshold amount to return true; range is [0.0 - 100.0] (typically 1.0 for 1%)
+     * 
+     * @return true if the threshold is reached
+     */
+    public boolean checkProgressRatio(final double newWorkDone, final double totalWork, final double amountThreshold) {
+
+        // Compute the actual progression
+        final double currentRatio = this.localWorkDone >= 0 ? 100 * this.localWorkDone / totalWork : 0.0;
+
+        // Compute the future progression
+        final double newRatio = 100 * newWorkDone / totalWork;
+
+        // return true if the task has progressed of at least block increment value
+        return newRatio - currentRatio > amountThreshold;
     }
 
 }
