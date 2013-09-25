@@ -42,7 +42,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
     private int timeFrame = -1;
 
     /** The map that stored events Nodes . */
-    private final Map<Class<?>, BallModel> ballMap = new HashMap<>();
+    private final Map<String, BallModel> ballMap = new HashMap<>();
 
     /** The event list to display. */
     private List<JRebirthEvent> eventList;
@@ -73,7 +73,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * @param eventList the lsit of events loaded
      * @param wave the wave received
      */
-    public void eventsLoaded(final List<JRebirthEvent> eventList, final Wave wave) {
+    public void doEventsLoaded(final List<JRebirthEvent> eventList, final Wave wave) {
         this.eventList = eventList;
     }
 
@@ -82,7 +82,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * 
      * @param wave the wave received
      */
-    public void unload(final Wave wave) {
+    public void doUnload(final Wave wave) {
         this.eventList = new ArrayList<>();
 
         final Collection<BallModel> list = new ArrayList<>(this.ballMap.values());
@@ -97,7 +97,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * 
      * @param wave the wave received
      */
-    public void play(final Wave wave) {
+    public void doPlay(final Wave wave) {
         if (!this.playing) {
             this.playing = true;
             this.timeFrame = 0;
@@ -114,9 +114,9 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * 
      * @param wave the wave that contains data related to the event processed
      */
-    public void eventProcessed(final Wave wave) {
+    public void doEventProcessed(final Wave wave) {
         if (this.playing) {
-            play(wave);
+            doPlay(wave);
         }
     }
 
@@ -125,7 +125,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * 
      * @param wave the wave received
      */
-    public void next(final Wave wave) {
+    public void doNext(final Wave wave) {
         if (this.eventList != null && this.timeFrame + 1 < this.eventList.size()) {
             showNext(this.eventList.get(this.timeFrame + 1));
         }
@@ -146,7 +146,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * 
      * @param wave the wave received
      */
-    public void previous(final Wave wave) {
+    public void doPrevious(final Wave wave) {
         if (this.eventList != null && this.timeFrame > 0) {
             hideCurrent(this.eventList.get(this.timeFrame));
         }
@@ -167,7 +167,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * 
      * @param wave the wave received
      */
-    public void stop(final Wave wave) {
+    public void doStop(final Wave wave) {
         for (int i = this.timeFrame; i >= 0; i--) {
             hideCurrent(this.eventList.get(this.timeFrame));
         }
@@ -208,7 +208,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * @param source the class of the source event.
      * @return the right ball model
      */
-    public BallModel retrieveBall(final Class<?> source) {
+    public BallModel retrieveBall(final String source) {
         return this.ballMap.get(source);
     }
 
