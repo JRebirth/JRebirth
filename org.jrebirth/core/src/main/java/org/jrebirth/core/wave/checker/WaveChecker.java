@@ -15,9 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.wave;
+package org.jrebirth.core.wave.checker;
 
 import javafx.util.Callback;
+
+import org.jrebirth.core.wave.Wave;
 
 /**
  * The class <strong>WaveChecker</strong>.
