@@ -45,7 +45,7 @@ public final class CreateBallCommand extends DefaultUICommand {
 
         final JRebirthEvent event = wave.get(EditorWaves.EVENT);
 
-        LOGGER.trace("Process " + event.getEventType() + " of type " + event.getTarget().getSimpleName());
+        LOGGER.trace("Process " + event.getEventType() + " of type " + event.getTarget());
 
         final EditorModel editorModel = getModel(EditorModel.class);
 

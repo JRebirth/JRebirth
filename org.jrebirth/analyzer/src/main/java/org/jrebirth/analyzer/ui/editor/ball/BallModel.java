@@ -46,7 +46,7 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
      * @param eventSelected the selected event
      * @param wave the wave received
      */
-    public void eventSelected(final JRebirthEvent eventSelected, final Wave wave) {
+    public void doEventSelected(final JRebirthEvent eventSelected, final Wave wave) {
         // Same object (reference)
         if (getEventModel() == eventSelected) {
             getView().getScaleTransition().play();

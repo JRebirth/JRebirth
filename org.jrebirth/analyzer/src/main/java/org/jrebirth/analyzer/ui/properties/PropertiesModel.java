@@ -54,7 +54,7 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
 
             final JRebirthEvent event = wave.get(PropertiesWaves.EVENT_OBJECT);
 
-            getView().getNodeName().setText(event.getTarget().getSimpleName());
+            getView().getNodeName().setText(event.getTarget());
         }
     }
 

@@ -26,9 +26,9 @@ import java.util.List;
 
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.facade.GlobalFacadeBase;
 import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.facade.JRebirthEventBase;
+import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveTypeBase;
@@ -70,7 +70,7 @@ public class LoadEdtFileService extends DefaultService {
      * 
      * @return the list of loaded events
      */
-    public List<JRebirthEvent> loadEvents(final File selecteFile, final Wave wave) {
+    public List<JRebirthEvent> doLoadEvents(final File selecteFile, final Wave wave) {
         final List<JRebirthEvent> eventList = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));)
@@ -79,8 +79,8 @@ public class LoadEdtFileService extends DefaultService {
             String strLine = br.readLine();
             // Read File Line By Line
             while (strLine != null) {
-                if (strLine.contains(GlobalFacadeBase.EVENT_TRACKED)) {
-                    addEvent(eventList, strLine.substring(strLine.indexOf(GlobalFacadeBase.EVENT_TRACKED) + GlobalFacadeBase.EVENT_TRACKED.length()));
+                if (strLine.contains(JRebirthMarkers.JREVENT.getName())) {
+                    addEvent(eventList, strLine.substring(strLine.indexOf(">>") + 2));
                 }
                 strLine = br.readLine();
             }
