@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.exception;
 
+import org.jrebirth.core.resource.i18n.MessageItem;
+
 /***
  * 
  * The class <strong>CommandException</strong>.
@@ -25,7 +27,7 @@ package org.jrebirth.core.exception;
  * 
  * @author Sébastien Bordes
  */
-public class CommandException extends Exception {
+public class CommandException extends AbstractMessageException {
 
     /**
      * The constant used for serialization.
@@ -35,20 +37,29 @@ public class CommandException extends Exception {
     /**
      * Constructor without any exception.
      * 
-     * @param message the message to display.
+     * @param messageItem the message item to display.
      */
-    public CommandException(final String message) {
-        super(message);
+    public CommandException(final MessageItem messageItem) {
+        super(messageItem);
     }
 
     /**
      * Constructor with message and root cause.
      * 
-     * @param message the message to display.
+     * @param messageItem the message item to display.
      * @param t the base exception thrown
      */
-    public CommandException(final String message, final Throwable t) {
-        super(message, t);
+    public CommandException(final MessageItem messageItem, final Throwable t) {
+        super(messageItem, t);
+    }
+
+    /**
+     * Constructor without custom message.
+     * 
+     * @param t the base exception thrown
+     */
+    public CommandException(final Throwable t) {
+        super(t);
     }
 
 }

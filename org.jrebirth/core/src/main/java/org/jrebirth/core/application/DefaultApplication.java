@@ -45,7 +45,7 @@ public class DefaultApplication<P extends Pane> extends AbstractApplication<P> {
      */
     @Override
     public Class<? extends Model> getFirstModelClass() {
-        throw new CoreRuntimeException(OVERRIDE_FIRST_MODEL_CLASS.get());
+        throw new CoreRuntimeException(OVERRIDE_FIRST_MODEL_CLASS);
     }
 
     /**

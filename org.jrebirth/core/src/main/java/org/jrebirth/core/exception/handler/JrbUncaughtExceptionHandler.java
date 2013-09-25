@@ -30,12 +30,16 @@ public interface JrbUncaughtExceptionHandler extends UncaughtExceptionHandler {
      * The Enum UncaughtExceptionHandlerType.
      */
     enum UncaughtExceptionHandlerType {
+
         /** JRebirth Internal Thread Uncaught Exception Handler. */
         JITHandler,
+
         /** JavaFX Application Thread Uncaught Exception Handler. */
         JATHandler,
+
         /** JRebirth Thread Pool Uncaught Exception Handler. */
         PoolHandler,
+
         /** Default Thread Uncaught Exception Handler. */
         DefaultHandler
     }
