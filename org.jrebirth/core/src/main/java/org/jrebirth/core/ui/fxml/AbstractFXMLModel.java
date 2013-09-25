@@ -100,10 +100,12 @@ public abstract class AbstractFXMLModel<M extends Model> extends AbstractModel<M
         bind();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void bindObject() {
         // Nothing to do yet FIXME
-
     }
 
     /**
@@ -117,6 +119,15 @@ public abstract class AbstractFXMLModel<M extends Model> extends AbstractModel<M
     @Override
     public Node getRootNode() {
         return this.fxmlComponent.getNode();
+    }
+
+    /**
+     * Return the Controller associated to the FXML file.
+     * 
+     * @return the FXML controller
+     */
+    public FXMLController getFXMLController() {
+        return this.fxmlComponent.getController();
     }
 
 }
