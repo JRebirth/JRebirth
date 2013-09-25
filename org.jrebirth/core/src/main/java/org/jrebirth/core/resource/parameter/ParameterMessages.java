@@ -17,11 +17,12 @@
  */
 package org.jrebirth.core.resource.parameter;
 
+import static org.jrebirth.core.resource.Resources.create;
+
 import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.resource.i18n.LogMessage;
+import org.jrebirth.core.resource.i18n.MessageContainer;
 import org.jrebirth.core.resource.i18n.MessageItem;
-
-import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>ParameterMessages</strong>.
@@ -30,23 +31,23 @@ import static org.jrebirth.core.resource.Resources.create;
  * 
  * @author Sébastien Bordes
  */
-public interface ParameterMessages {
+public interface ParameterMessages extends MessageContainer {
 
     /** "Configuration Loading is skipped". */
-    MessageItem SKIP_CONF_LOADING = create(new LogMessage("parameter.skipConfLoading", JRebirthMarkers.PARAMETER));
+    MessageItem SKIP_CONF_LOADING = create(new LogMessage("jrebirth.parameter.skipConfLoading", JRebirthMarkers.PARAMETER));
 
     /** "{} configuration file{} found.". */
-    MessageItem CONFIG_FOUND = create(new LogMessage("parameter.configFound", JRebirthMarkers.PARAMETER));
+    MessageItem CONFIG_FOUND = create(new LogMessage("jrebirth.parameter.configFound", JRebirthMarkers.PARAMETER));
 
     /** "Read configuration file : {} ". */
-    MessageItem READ_CONF_FILE = create(new LogMessage("parameter.readConfFile", JRebirthMarkers.PARAMETER));
+    MessageItem READ_CONF_FILE = create(new LogMessage("jrebirth.parameter.readConfFile", JRebirthMarkers.PARAMETER));
 
     /** "Update key {} with value= {}". */
-    MessageItem UPDATE_PARAMETER = create(new LogMessage("parameter.updateParameter", JRebirthMarkers.PARAMETER));
+    MessageItem UPDATE_PARAMETER = create(new LogMessage("jrebirth.parameter.updateParameter", JRebirthMarkers.PARAMETER));
 
     /** "Store key {} with value= {}". */
-    MessageItem STORE_PARAMETER = create(new LogMessage("parameter.storeParameter", JRebirthMarkers.PARAMETER));
+    MessageItem STORE_PARAMETER = create(new LogMessage("jrebirth.parameter.storeParameter", JRebirthMarkers.PARAMETER));
 
     /** "Impossible to read the properties file : {}". */
-    MessageItem CONF_READING_ERROR = create(new LogMessage("parameter.confReadingError", JRebirthMarkers.PARAMETER));
+    MessageItem CONF_READING_ERROR = create(new LogMessage("jrebirth.parameter.confReadingError", JRebirthMarkers.PARAMETER));
 }

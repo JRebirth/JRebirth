@@ -62,14 +62,14 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
     private String messageFileWildcard;
 
     /** Flag mapped to the parameter to know if we must resolve log code. */
-    private boolean logResolutionActivated = true;
+    // private boolean logResolutionActivated = true;
 
-    /**
-     * @param logResolutionActivated The logResolutionActivated to set.
-     */
-    public void setLogResolutionActivated(final boolean logResolutionActivated) {
-        this.logResolutionActivated = logResolutionActivated;
-    }
+    // /**
+    // * @param logResolutionActivated The logResolutionActivated to set.
+    // */
+    // public void setLogResolutionActivated(final boolean logResolutionActivated) {
+    // this.logResolutionActivated = logResolutionActivated;
+    // }
 
     /**
      * Search configuration files according to the parameters provided.
@@ -120,13 +120,16 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
 
         final String rbName = rbFile.getName().substring(0, rbFile.getName().lastIndexOf(".properties"));
 
-        LOGGER.info(JRebirthMarkers.MESSAGE, "Store ResourceBundle : {} ", rbName);
-        try {
-            this.resourceBundles.add(ResourceBundle.getBundle(rbName));
-        } catch (final NullPointerException e) {
-            LOGGER.error(JRebirthMarkers.MESSAGE, "Resource Bundle must be not not null", e);
-        } catch (final MissingResourceException e) {
-            LOGGER.error(JRebirthMarkers.MESSAGE, "{} Resource Bundle not found", rbName);
+        if (rbName == null || rbName.isEmpty()) {
+            LOGGER.error(JRebirthMarkers.MESSAGE, "Resource Bundle must be not not null and not empty");
+        } else {
+
+            LOGGER.info(JRebirthMarkers.MESSAGE, "Store ResourceBundle : {} ", rbName);
+            try {
+                this.resourceBundles.add(ResourceBundle.getBundle(rbName));
+            } catch (final MissingResourceException e) {
+                LOGGER.error(JRebirthMarkers.MESSAGE, "{} Resource Bundle not found", rbName);
+            }
         }
     }
 

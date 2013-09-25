@@ -159,6 +159,9 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
              */
             @Override
             protected void runInto() throws JRebirthThreadException {
+                // Avoid the progress bar to display 100% at start up
+                task.updateProgress(0, 0);
+                // Bind the progress bar
                 progressBar.progressProperty().bind(task.workDoneProperty().divide(task.totalWorkProperty()));
             }
         });
@@ -200,24 +203,14 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
     /**
      * Update the progress of the service task related to the given wave.
      * 
+     * This method will use a 1.0 block increment
+     * 
      * @param wave the wave that trigger the service task call
      * @param workDone the amount of overall work done
      * @param totalWork the amount of total work to do
      */
     public void updateProgress(final Wave wave, final long workDone, final long totalWork) {
-
-        // Increase the task progression
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("ServiceTask Workdone (lng) " + workDone + RATIO_SEPARATOR + totalWork) {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork);
-            }
-        });
-
+        updateProgress(wave, workDone, totalWork, 1.0);
     }
 
     /**
@@ -225,21 +218,65 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
      * 
      * @param wave the wave that trigger the service task call
      * @param workDone the amount of overall work done
-     * @param totalWork the amount of total work todo
+     * @param totalWork the amount of total work to do
+     * @param progressIncrement the value increment used to filter useless progress event
+     */
+    public void updateProgress(final Wave wave, final long workDone, final long totalWork, final double progressIncrement) {
+
+        if (wave.get(JRebirthWaves.SERVICE_TASK).checkProgressRatio(workDone, totalWork, progressIncrement)) {
+
+            // Increase the task progression
+            JRebirth.runIntoJAT(new AbstractJrbRunnable("ServiceTask Workdone (lng) " + workDone + RATIO_SEPARATOR + totalWork + "[" + workDone * 100 / totalWork + "%]") {
+
+                /**
+                 * {@inheritDoc}
+                 */
+                @Override
+                protected void runInto() throws JRebirthThreadException {
+
+                    wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork);
+                }
+            });
+        }
+    }
+
+    /**
+     * Update the progress of the service task related to the given wave.
+     * 
+     * This method will use a 1.0 block increment
+     * 
+     * @param wave the wave that trigger the service task call
+     * @param workDone the amount of overall work done
+     * @param totalWork the amount of total work to do
      */
     public void updateProgress(final Wave wave, final double workDone, final double totalWork) {
+        updateProgress(wave, workDone, totalWork, 1.0);
+    }
 
-        // Increase the task progression
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("ServiceTask Workdone (dbl) " + workDone + RATIO_SEPARATOR + totalWork) {
+    /**
+     * Update the progress of the service task related to the given wave.
+     * 
+     * @param wave the wave that trigger the service task call
+     * @param workDone the amount of overall work done
+     * @param totalWork the amount of total work to do
+     * @param progressIncrement the value increment used to filter useless progress event
+     */
+    public void updateProgress(final Wave wave, final double workDone, final double totalWork, final double progressIncrement) {
 
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork);
-            }
-        });
+        if (wave.get(JRebirthWaves.SERVICE_TASK).checkProgressRatio(workDone, totalWork, progressIncrement)) {
+
+            // Increase the task progression
+            JRebirth.runIntoJAT(new AbstractJrbRunnable("ServiceTask Workdone (dbl) " + workDone + RATIO_SEPARATOR + totalWork) {
+
+                /**
+                 * {@inheritDoc}
+                 */
+                @Override
+                protected void runInto() throws JRebirthThreadException {
+                    wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork);
+                }
+            });
+        }
 
     }
 

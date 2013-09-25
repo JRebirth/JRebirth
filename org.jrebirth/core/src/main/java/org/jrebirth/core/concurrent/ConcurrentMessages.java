@@ -17,11 +17,12 @@
  */
 package org.jrebirth.core.concurrent;
 
+import static org.jrebirth.core.resource.Resources.create;
+
 import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.resource.i18n.LogMessage;
+import org.jrebirth.core.resource.i18n.MessageContainer;
 import org.jrebirth.core.resource.i18n.MessageItem;
-
-import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>ConcurrentMessages</strong>.
@@ -30,39 +31,39 @@ import static org.jrebirth.core.resource.Resources.create;
  * 
  * @author Sébastien Bordes
  */
-public interface ConcurrentMessages {
+public interface ConcurrentMessages extends MessageContainer {
 
     /** JRebirthThread. */
 
     /** "Run> {0}". */
-    MessageItem RUN_IT = create(new LogMessage("concurrent.runIt", JRebirthMarkers.CONCURRENT));
+    MessageItem RUN_IT = create(new LogMessage("jrebirth.concurrent.runIt", JRebirthMarkers.CONCURRENT));
 
     /** "Thread error : {0} ". */
-    MessageItem THREAD_ERROR = create(new LogMessage("concurrent.threadError", JRebirthMarkers.CONCURRENT));
+    MessageItem THREAD_ERROR = create(new LogMessage("jrebirth.concurrent.threadError", JRebirthMarkers.CONCURRENT));
 
     /** "Runnable submitted with hashCode={}" . */
-    MessageItem JTP_QUEUED = create(new LogMessage("concurrent.jtpQueued", JRebirthMarkers.CONCURRENT));
+    MessageItem JTP_QUEUED = create(new LogMessage("jrebirth.concurrent.jtpQueued", JRebirthMarkers.CONCURRENT));
 
     /** "An exception occured during JRebirth BootUp" . */
-    MessageItem BOOT_UP_ERROR = create(new LogMessage("concurrent.bootUpError", JRebirthMarkers.CONCURRENT));
+    MessageItem BOOT_UP_ERROR = create(new LogMessage("jrebirth.concurrent.bootUpError", JRebirthMarkers.CONCURRENT));
 
     /** AbstractJrbRunnable. */
 
     /** "An exception occured into the JRebirth Thread". */
-    MessageItem JIT_ERROR = create(new LogMessage("concurrent.jitError", JRebirthMarkers.CONCURRENT));
+    MessageItem JIT_ERROR = create(new LogMessage("jrebirth.concurrent.jitError", JRebirthMarkers.CONCURRENT));
 
     /** "An error occurred while shuting down the application ". */
-    MessageItem SHUTDOWN_ERROR = create(new LogMessage("concurrent.shutdownError", JRebirthMarkers.CONCURRENT));
+    MessageItem SHUTDOWN_ERROR = create(new LogMessage("jrebirth.concurrent.shutdownError", JRebirthMarkers.CONCURRENT));
 
     /** JrebirthThreadPoolExecutor. */
 
     /** "JTP returned an error" . */
-    MessageItem JTP_ERROR = create(new LogMessage("concurrent.jtpError", JRebirthMarkers.CONCURRENT));
+    MessageItem JTP_ERROR = create(new LogMessage("jrebirth.concurrent.jtpError", JRebirthMarkers.CONCURRENT));
 
     /** "JTP returned an error with rootCause =>". */
-    MessageItem JTP_ERROR_EXPLANATION = create(new LogMessage("concurrent.jtpErrorExplanation", JRebirthMarkers.CONCURRENT));
+    MessageItem JTP_ERROR_EXPLANATION = create(new LogMessage("jrebirth.concurrent.jtpErrorExplanation", JRebirthMarkers.CONCURRENT));
 
     /** "Future (hashcode={}) returned object : {}". */
-    MessageItem FUTURE_DONE = create(new LogMessage("concurrent.futureDone", JRebirthMarkers.CONCURRENT));
+    MessageItem FUTURE_DONE = create(new LogMessage("jrebirth.concurrent.futureDone", JRebirthMarkers.CONCURRENT));
 
 }

@@ -46,13 +46,13 @@ public class StageCommand extends DefaultUIBeanCommand<StageWaveBean> {
 
         switch (getWaveBean(wave).getAction()) {
             case show:
-                ss.openStage(wave);
+                ss.doOpenStage(wave);
                 break;
             case hide:
-                ss.closeStage(wave);
+                ss.doCloseStage(wave);
                 break;
             case destroy:
-                ss.destroyStage(wave);
+                ss.doDestroyStage(wave);
                 break;
             default:
                 LOGGER.error("Undefined StageAction");

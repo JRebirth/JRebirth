@@ -84,7 +84,7 @@ public class StageService extends DefaultService {
      * 
      * @param wave the source wave
      */
-    public void openStage(final Wave wave) {
+    public void doOpenStage(final Wave wave) {
 
         LOGGER.trace("Open a stage.");
 
@@ -166,7 +166,7 @@ public class StageService extends DefaultService {
      * 
      * @param wave the source wave
      */
-    public void closeStage(final Wave wave) {
+    public void doCloseStage(final Wave wave) {
         final String stageKey = getWaveBean(wave).getStageKey();
         this.stageMap.get(stageKey).close();
     }
@@ -176,7 +176,7 @@ public class StageService extends DefaultService {
      * 
      * @param wave the source wave
      */
-    public void destroyStage(final Wave wave) {
+    public void doDestroyStage(final Wave wave) {
         final String stageKey = getWaveBean(wave).getStageKey();
         this.stageMap.get(stageKey).close();
         this.stageMap.remove(stageKey);
