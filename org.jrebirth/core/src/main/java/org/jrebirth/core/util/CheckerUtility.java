@@ -6,14 +6,13 @@ import java.util.List;
 
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.facade.WaveReady;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveType;
 import org.jrebirth.core.wave.WaveTypeBase;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>CheckerUtility</strong>.
@@ -22,10 +21,10 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public final class CheckerUtility {
+public final class CheckerUtility implements UtilMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CheckerUtility.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(CheckerUtility.class);
 
     /**
      * Private Constructor.
@@ -51,8 +50,8 @@ public final class CheckerUtility {
                 final List<Method> methods = ClassUtility.retrieveMethodList(waveReadyClass, waveType.toString());
 
                 if (methods.size() < 1) {
-                    LOGGER.error(waveReadyClass.getSimpleName() + " API is broken, no method {} is available", ClassUtility.underscoreToCamelCase(waveType.toString()));
-                    throw new CoreRuntimeException(waveReadyClass.getSimpleName() + " API is broken, no method " + ClassUtility.underscoreToCamelCase(waveType.toString()) + " is available");
+                    LOGGER.error(BROKEN_API_NO_METHOD, waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString()));
+                    throw new CoreRuntimeException(BROKEN_API_NO_METHOD.get(waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString())));
                 }
 
                 // Check parameter only for a WaveTypeBase
@@ -66,8 +65,8 @@ public final class CheckerUtility {
                         hasCompliantMethod = checkMethodSignature(methods.get(j), wParams);
                     }
                     if (!hasCompliantMethod) {
-                        throw new CoreRuntimeException(waveReadyClass.getSimpleName() + " API is broken, the method " + ClassUtility.underscoreToCamelCase(waveType.toString())
-                                + " has wrong parameters, expected:  provided:");
+                        LOGGER.error(BROKEN_API_WRONG_PARAMETERS, waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString()));
+                        throw new CoreRuntimeException(BROKEN_API_WRONG_PARAMETERS.get(waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString())));
                     }
                 }
             }
