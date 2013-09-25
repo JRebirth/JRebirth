@@ -49,22 +49,22 @@ public interface JRebirthEvent {
     /**
      * @return Returns the source class.
      */
-    Class<?> getSource();
+    String getSource();
 
     /**
      * @param source The source class to set.
      */
-    void setSource(final Class<?> source);
+    void setSource(final String source);
 
     /**
      * @return Returns the target class.
      */
-    Class<?> getTarget();
+    String getTarget();
 
     /**
      * @param target The data to set.
      */
-    void setTarget(final Class<?> target);
+    void setTarget(final String target);
 
     /**
      * @return Returns the data.

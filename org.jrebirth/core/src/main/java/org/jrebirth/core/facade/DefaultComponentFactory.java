@@ -7,7 +7,7 @@ import org.jrebirth.core.exception.CoreException;
  * 
  * @author Sébastien Bordes
  */
-public final class DefaultComponentFactory implements ComponentFactory {
+public final class DefaultComponentFactory implements ComponentFactory, FacadeMessages {
 
     /**
      * {@inheritDoc}
@@ -18,7 +18,7 @@ public final class DefaultComponentFactory implements ComponentFactory {
         try {
             return clazz.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            throw new CoreException("Impossible to build the the component " + clazz.getName(), e);
+            throw new CoreException(COMPONENT_BUILD_ERROR.get(clazz.getName()), e);
         }
     }
 

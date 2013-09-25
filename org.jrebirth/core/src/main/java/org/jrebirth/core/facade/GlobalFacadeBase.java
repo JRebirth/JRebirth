@@ -25,34 +25,28 @@ import org.jrebirth.core.concurrent.JRebirthThreadPoolExecutor;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.link.Notifier;
 import org.jrebirth.core.link.NotifierBase;
-import org.jrebirth.core.log.JRebirthMarkers;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
-import org.jrebirth.core.util.ClassUtility;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 
  * The class <strong>GlobalFacadeBase</strong>.
  * 
- * This class is a facade taht helps to retrive any JRebirth RIA pattern component of the application.
+ * This class is a facade that helps to retrieve any JRebirth RIA pattern component of the application.
  * 
  * It uses 3 facades that store services, commands and models of the application. It allows to dispatch waves to all required components.
  * 
  * 
  * @author Sébastien Bordes
  */
-public class GlobalFacadeBase implements GlobalFacade {
-
-    /** The <code>EVENT_TRACKED</code> field is used to log a JRebirth Event. */
-    public static final String EVENT_TRACKED = "JREvent: ";
+public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
 
     /** The JRebirth Thread Pool base name [JTP]. */
     public static final String JTP_BASE_NAME = "JTP Slot ";
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalFacadeBase.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(GlobalFacadeBase.class);
 
     /** The factory used to build all component. */
     private final ComponentFactory componentFactory;
@@ -90,7 +84,7 @@ public class GlobalFacadeBase implements GlobalFacade {
         try {
             factory = (ComponentFactory) JRebirthParameters.COMPONENT_FACTORY.get().newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            LOGGER.error("Impossible to load the custom ComponentFactory, will use the default one", e);
+            LOGGER.error(COMPONENT_CUSTOM_FACTORY_ERROR, e);
             factory = new DefaultComponentFactory();
         }
         // Attach the right Component Factory
@@ -98,14 +92,14 @@ public class GlobalFacadeBase implements GlobalFacade {
 
         // Link the application
         this.application = application;
-        trackEvent(org.jrebirth.core.facade.JRebirthEventType.CREATE_APPLICATION, null, getApplication().getClass());
+        trackEvent(JRebirthEventType.CREATE_APPLICATION, null, getApplication().getClass());
 
-        LOGGER.trace("Create the JRebirth Thread Pool");
+        LOGGER.trace(JTP_CREATION);
         // Launch the default executor
         this.executorService = new JRebirthThreadPoolExecutor(Runtime.getRuntime().availableProcessors() * 2,
                 new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(), JTP_BASE_NAME));
 
-        trackEvent(org.jrebirth.core.facade.JRebirthEventType.CREATE_GLOBAL_FACADE, getApplication().getClass(), this.getClass());
+        trackEvent(JRebirthEventType.CREATE_GLOBAL_FACADE, getApplication().getClass(), this.getClass());
 
         // Build the notifier manager
         this.notifier = buildNotifier();
@@ -130,18 +124,11 @@ public class GlobalFacadeBase implements GlobalFacade {
     @Override
     public final void trackEvent(final JRebirthEventType eventType, final Class<?> source, final Class<?> target, final String... eventData) {
         if (LOGGER.isInfoEnabled()) {
-            final StringBuilder sb = new StringBuilder();
-            sb.append(EVENT_TRACKED);
-            sb.append(this.eventSequence++);
-            sb.append(ClassUtility.SEPARATOR);
-            sb.append(eventType);
-            sb.append(ClassUtility.SEPARATOR);
-            sb.append(source == null ? null : source.getCanonicalName());
-            sb.append(ClassUtility.SEPARATOR);
-            sb.append(target == null ? null : target.getCanonicalName());
-            sb.append(ClassUtility.SEPARATOR);
-            sb.append(eventData.length > 0 ? eventData[0] : "");
-            LOGGER.info(JRebirthMarkers.JREVENT, sb.toString());
+            final JRebirthEvent event = new JRebirthEventBase(this.eventSequence++, eventType,
+                    source == null ? null : source.getCanonicalName(),
+                    target == null ? null : target.getCanonicalName()
+                    , eventData);
+            LOGGER.info(JREBIRTH_EVENT, event);
         }
     }
 
