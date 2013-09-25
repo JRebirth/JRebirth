@@ -8,14 +8,14 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public class DefaultUnprocessedWaveHandler implements UnprocessedWaveHandler {
+public class DefaultUnprocessedWaveHandler implements UnprocessedWaveHandler, LinkMessages {
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void manageUnprocessedWave(final Wave wave) {
-        throw new CoreRuntimeException("Wave Lost : " + wave.toString());
+        throw new CoreRuntimeException(WAVE_LOST.get(wave.toString()));
     }
 
     /**
@@ -23,7 +23,7 @@ public class DefaultUnprocessedWaveHandler implements UnprocessedWaveHandler {
      */
     @Override
     public void manageUnprocessedWave(final String contextExplanation, final Wave wave) {
-        throw new CoreRuntimeException(contextExplanation + " : " + wave.toString());
+        throw new CoreRuntimeException(WAVE_LOST_CONTEXT.get(wave.toString(), contextExplanation));
     }
 
 }

@@ -33,4 +33,16 @@ public interface JRebirthMarkers {
     /** The Marker used by JRebirth Concurrent layer. */
     Marker CONCURRENT = MarkerFactory.getMarker("CNCRT");
 
+    /** The Marker used by JRebirth Facade layer. */
+    Marker FACADE = MarkerFactory.getMarker("FACAD");
+
+    /** The Marker used by JRebirth Link layer. */
+    Marker LINK = MarkerFactory.getMarker("LINK");
+
+    /** The Marker used by JRebirth Util layer. */
+    Marker UTIL = MarkerFactory.getMarker("UTIL");
+
+    /** The Marker used to report Wave related message. */
+    Marker WAVE = MarkerFactory.getMarker("WAVE");
+
 }
