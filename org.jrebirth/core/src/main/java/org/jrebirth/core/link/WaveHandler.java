@@ -19,7 +19,7 @@ package org.jrebirth.core.link;
 
 import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.WaveChecker;
+import org.jrebirth.core.wave.checker.WaveChecker;
 
 /**
  * The Class WaveHandler.

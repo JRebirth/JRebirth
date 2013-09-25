@@ -33,6 +33,8 @@ import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.facade.WaveReady;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.util.CheckerUtility;
@@ -41,13 +43,10 @@ import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveBase;
 import org.jrebirth.core.wave.WaveBean;
-import org.jrebirth.core.wave.WaveChecker;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveGroup;
 import org.jrebirth.core.wave.WaveType;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jrebirth.core.wave.checker.WaveChecker;
 
 /**
  * 
@@ -62,10 +61,10 @@ import org.slf4j.LoggerFactory;
  * 
  * @param <R> the class type of the subclass
  */
-public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends AbstractReady<R> implements WaveReady {
+public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends AbstractReady<R> implements WaveReady, LinkMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractWaveReady.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractWaveReady.class);
 
     /** The wave type map. */
     private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
@@ -288,56 +287,56 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
         return wave;
     }
 
-    /**
-     * This method is called before each execution of the command.
-     * 
-     * It will parse the given wave to store local command properties.
-     * 
-     * Wave parsing mechanism is composed by three steps:
-     * <ol>
-     * <li>Parse WaveBean properties and copy them into command ones if they exist (by reflection)</li>
-     * <li>Parse WaveData keys and copy them into command ones if they exist (by reflection)</li>
-     * <li>Call {@link #parseWave(Wave)} method for later customization</li>
-     * </ol>
-     * 
-     * @param wave the wave to parse
-     */
-    private void parseInternalWave(final Wave wave) {
-
-        // Parse WaveBean
-        // WB waveBean = getWaveBean(wave);
-        // if (waveBean != null && !(waveBean instanceof DefaultWaveBean)) {
-        // for (Field f : ClassUtility.retrievePropertyList(waveBean.getClass())) {
-        // try {
-        // tryToSetProperty(f.getName(), f.get(waveBean));
-        // } catch (IllegalArgumentException | IllegalAccessException e) {
-        // LOGGER.error("Fail to get field value " + f.getName() + " from " + waveBean.getClass(), e);
-        // }
-        // }
-        // }
-
-        // Parse WaveData
-        for (final WaveData<?> wd : wave.getWaveItems()) {
-            tryToSetProperty(wd.getKey().toString(), wd.getValue());
-        }
-
-        // Call customized method
-        // parseWave(wave);
-    }
-
-    /**
-     * Try to set the value of the given property for the current class.
-     * 
-     * @param fieldName the field to initialize
-     * @param fieldValue the field value to set
-     */
-    private void tryToSetProperty(final String fieldName, final Object fieldValue) {
-        try {
-            this.getClass().getField(fieldName).set(this, fieldValue);
-        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-            LOGGER.error("Fail to set value for field " + fieldName, e);
-        }
-    }
+    // /**
+    // * This method is called before each execution of the command.
+    // *
+    // * It will parse the given wave to store local command properties.
+    // *
+    // * Wave parsing mechanism is composed by three steps:
+    // * <ol>
+    // * <li>Parse WaveBean properties and copy them into command ones if they exist (by reflection)</li>
+    // * <li>Parse WaveData keys and copy them into command ones if they exist (by reflection)</li>
+    // * <li>Call {@link #parseWave(Wave)} method for later customization</li>
+    // * </ol>
+    // *
+    // * @param wave the wave to parse
+    // */
+    // private void parseInternalWave(final Wave wave) {
+    //
+    // // Parse WaveBean
+    // // WB waveBean = getWaveBean(wave);
+    // // if (waveBean != null && !(waveBean instanceof DefaultWaveBean)) {
+    // // for (Field f : ClassUtility.retrievePropertyList(waveBean.getClass())) {
+    // // try {
+    // // tryToSetProperty(f.getName(), f.get(waveBean));
+    // // } catch (IllegalArgumentException | IllegalAccessException e) {
+    // // LOGGER.error("Fail to get field value " + f.getName() + " from " + waveBean.getClass(), e);
+    // // }
+    // // }
+    // // }
+    //
+    // // Parse WaveData
+    // for (final WaveData<?> wd : wave.getWaveItems()) {
+    // tryToSetProperty(wd.getKey().toString(), wd.getValue());
+    // }
+    //
+    // // Call customized method
+    // // parseWave(wave);
+    // }
+    //
+    // /**
+    // * Try to set the value of the given property for the current class.
+    // *
+    // * @param fieldName the field to initialize
+    // * @param fieldValue the field value to set
+    // */
+    // private void tryToSetProperty(final String fieldName, final Object fieldValue) {
+    // try {
+    // this.getClass().getField(fieldName).set(this, fieldValue);
+    // } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+    // LOGGER.error("Fail to set value for field " + fieldName, e);
+    // }
+    // }
 
     /**
      * Customizable method used to perform more action before command execution.
@@ -370,12 +369,13 @@ public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends Abstra
                 method.invoke(this, parameterValues.toArray());
             }
         } catch (final NoSuchMethodException e) {
-            LOGGER.info("Custom method not found {}", e.getMessage());
+
+            LOGGER.info(CUSTOM_METHOD_NOT_FOUND, e.getMessage());
             // If no method was found, call the default method
             processWave(wave);
 
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            LOGGER.error("Error while dispatching a wave", e);
+            LOGGER.error(WAVE_DISPATCH_ERROR, e);
             // Propagate the wave exception
             throw new WaveException(wave, e);
         }
