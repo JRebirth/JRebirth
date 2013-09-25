@@ -15,7 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.wave;
+package org.jrebirth.core.wave.checker;
+
+import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveItem;
 
 /**
  * The class <strong>AbstractWaveChecker</strong> is the base class for checker that use a WaveData.

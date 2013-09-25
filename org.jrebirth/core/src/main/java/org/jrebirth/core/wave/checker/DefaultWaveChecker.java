@@ -15,9 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.wave;
+package org.jrebirth.core.wave.checker;
 
 import org.jrebirth.core.util.ObjectUtility;
+import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveData;
+import org.jrebirth.core.wave.WaveItem;
 
 /**
  * The class <strong>DefaultWaveChecker</strong> will check if the provided object type is equals to the wave data object defined.
