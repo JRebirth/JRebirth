@@ -31,6 +31,8 @@ import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.AbstractGlobalReady;
 import org.jrebirth.core.facade.GlobalFacade;
 import org.jrebirth.core.facade.WaveReady;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.service.ServiceTask;
@@ -39,11 +41,8 @@ import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
-import org.jrebirth.core.wave.WaveChecker;
 import org.jrebirth.core.wave.WaveType;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jrebirth.core.wave.checker.WaveChecker;
 
 /**
  * 
@@ -53,10 +52,10 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class NotifierBase extends AbstractGlobalReady implements Notifier {
+public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(NotifierBase.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(NotifierBase.class);
 
     /** The map that store link between wave type and objects interested. */
     private final Map<WaveType, List<WaveHandler>> notifierMap = new HashMap<>();
@@ -76,7 +75,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         try {
             waveHandler = (UnprocessedWaveHandler) JRebirthParameters.UNPROCESSED_WAVE_HANDLER.get().newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            LOGGER.error("Impossible to load the UnprocessedWaveHandler , will use the default one", e);
+
+            LOGGER.error(USE_DEFAULT_WAVE_HANDLER, e);
             waveHandler = new DefaultUnprocessedWaveHandler();
         }
         // Attach the right Component Factory
@@ -110,7 +110,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
                     processUndefinedWave(wave);
             }
         } catch (final WaveException e) {
-            LOGGER.error("Failed to send Wave", e);
+            LOGGER.error(WAVE_SENDING_ERROR, e);
         }
     }
 
@@ -134,9 +134,9 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
                 : getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.getRelatedClass(), wave.getWUID());
 
         if (command == null) {
-            LOGGER.error("Cannot get the right Command to process the wave : {}", wave.toString());
+            LOGGER.error(COMMAND_NOT_FOUND_ERROR, wave.toString());
             if (JRebirthParameters.DEVELOPER_MODE.get()) {
-                this.unprocessedWaveHandler.manageUnprocessedWave("Cannot get the right Command to process the wave", wave);
+                this.unprocessedWaveHandler.manageUnprocessedWave(COMMAND_NOT_FOUND_MESSAGE.get(), wave);
             }
         } else {
             // Run the command into the predefined thread
@@ -160,9 +160,9 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
         final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<Service>) wave.getRelatedClass());
 
         if (service == null) {
-            LOGGER.error("Cannot get the right Service to process the wave {}", wave.toString());
+            LOGGER.error(SERVICE_NOT_FOUND_ERROR, wave.toString());
             if (JRebirthParameters.DEVELOPER_MODE.get()) {
-                this.unprocessedWaveHandler.manageUnprocessedWave("Cannot get the right Service to process the wave : ", wave);
+                this.unprocessedWaveHandler.manageUnprocessedWave(SERVICE_NOT_FOUND_MESSAGE.get(), wave);
             }
         } else {
             // The inner task will be run into the JRebirth Thread Pool
@@ -192,9 +192,9 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
     private void displayUi(final Wave wave) {
 
         if (wave.getRelatedClass() != null) {
-            LOGGER.error("Cannot get the right Model to process the wave : {}", wave.toString());
+            LOGGER.error(MODEL_NOT_FOUND_ERROR, wave.toString());
             if (JRebirthParameters.DEVELOPER_MODE.get()) {
-                this.unprocessedWaveHandler.manageUnprocessedWave("Cannot get the right Model to process the wave", wave);
+                this.unprocessedWaveHandler.manageUnprocessedWave(MODEL_NOT_FOUND_MESSAGE.get(), wave);
             }
         }
         // This key method could be managed in another way (fully sync with JAT), to see if it could be useful
@@ -247,12 +247,13 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
                 }
             }
         } else {
-            LOGGER.warn("No Listener attached for wave type : {}", wave.getWaveType().toString());
+            LOGGER.warn(NO_WAVE_LISTENER, wave.getWaveType().toString());
             if (JRebirthParameters.DEVELOPER_MODE.get()) {
-                this.unprocessedWaveHandler.manageUnprocessedWave("No Listener attached for wave type : " + wave.getWaveType().toString(), wave);
+                this.unprocessedWaveHandler.manageUnprocessedWave(NO_WAVE_LISTENER.get(wave.getWaveType().toString()), wave);
             }
         }
-        LOGGER.warn("NB consumes : " + wave.toString());
+
+        LOGGER.warn(NOTIFIER_CONSUMES, wave.toString());
         wave.setStatus(Status.Consumed);
     }
 
@@ -418,7 +419,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier {
             try {
                 this.linked.handle(this.wave);
             } catch (final WaveException e) {
-                LOGGER.error("Error while handling a wave", e);
+                LOGGER.error(WAVE_HANDLING_ERROR, e);
             }
         }
     }
