@@ -43,6 +43,18 @@ public interface JRebirthMarkers {
     Marker UTIL = MarkerFactory.getMarker("UTIL");
 
     /** The Marker used to report Wave related message. */
-    Marker WAVE = MarkerFactory.getMarker("WAVE");
+    Marker WAVE = MarkerFactory.getMarker("WAVE ");
+
+    /** The Marker used by JRebirth Service layer. */
+    Marker SERVICE = MarkerFactory.getMarker("SERVC");
+
+    /** The Marker used by JRebirth Util layer. */
+    Marker UI = MarkerFactory.getMarker("UI   ");
+
+    /** The Marker used by JRebirth UI.FXML layer. */
+    Marker FXML = MarkerFactory.getMarker("FXML ");
+
+    /** The Marker used by JRebirth Exception.Handler layer. */
+    Marker UNCAUGHT = MarkerFactory.getMarker("UNCAU");
 
 }

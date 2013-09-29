@@ -50,7 +50,7 @@ public final class CheckerUtility implements UtilMessages {
                 final List<Method> methods = ClassUtility.retrieveMethodList(waveReadyClass, waveType.toString());
 
                 if (methods.size() < 1) {
-                    LOGGER.error(BROKEN_API_NO_METHOD, waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString()));
+                    LOGGER.log(BROKEN_API_NO_METHOD, waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString()));
                     throw new CoreRuntimeException(BROKEN_API_NO_METHOD.get(waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString())));
                 }
 
@@ -65,7 +65,7 @@ public final class CheckerUtility implements UtilMessages {
                         hasCompliantMethod = checkMethodSignature(methods.get(j), wParams);
                     }
                     if (!hasCompliantMethod) {
-                        LOGGER.error(BROKEN_API_WRONG_PARAMETERS, waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString()));
+                        LOGGER.log(BROKEN_API_WRONG_PARAMETERS, waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString()));
                         throw new CoreRuntimeException(BROKEN_API_WRONG_PARAMETERS.get(waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString())));
                     }
                 }

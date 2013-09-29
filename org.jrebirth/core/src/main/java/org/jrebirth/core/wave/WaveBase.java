@@ -29,9 +29,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 import org.jrebirth.core.exception.CoreRuntimeException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jrebirth.core.link.LinkMessages;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 
 /**
  * 
@@ -39,10 +39,10 @@ import org.slf4j.LoggerFactory;
  * 
  * This Bean is used to move wave's data through layer. It allow to manage priorities.
  */
-public class WaveBase implements Wave {
+public class WaveBase implements Wave, LinkMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(WaveBase.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(WaveBase.class);
 
     /** The space separator. */
     private static final String SPACE_SEP = " ";
@@ -318,7 +318,7 @@ public class WaveBase implements Wave {
                 try {
                     this.waveBean = this.waveBeanClass.newInstance();
                 } catch (InstantiationException | IllegalAccessException e) {
-                    LOGGER.error("Impossible to build WaveBean instance : " + this.waveBeanClass.toString(), e);
+                    LOGGER.error(WAVE_BEAN_CREATION_ERROR, e, this.waveBeanClass.toString());
                 } finally {
                     if (this.waveBean == null) {
                         this.waveBean = new DefaultWaveBean();

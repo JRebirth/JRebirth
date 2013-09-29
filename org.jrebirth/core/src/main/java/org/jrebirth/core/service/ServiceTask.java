@@ -24,7 +24,12 @@ import java.util.List;
 
 import javafx.concurrent.Task;
 
+import org.jrebirth.core.concurrent.JRebirthRunnable;
+import org.jrebirth.core.concurrent.Priority;
+import org.jrebirth.core.concurrent.RunnablePriority;
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveBuilder;
@@ -33,9 +38,6 @@ import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveType;
 import org.jrebirth.core.wave.WaveTypeBase;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * The class <strong>ServiceTask</strong>.
  * 
@@ -43,10 +45,10 @@ import org.slf4j.LoggerFactory;
  * 
  * @param <T> the current Service Task type
  */
-public final class ServiceTask<T> extends Task<T> {
+public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, ServiceMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceTask.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(ServiceTask.class);
 
     /**
      * The <code>parameterValues</code>.
@@ -68,7 +70,14 @@ public final class ServiceTask<T> extends Task<T> {
      */
     private final Wave wave;
 
+    /**
+     * The workdone copied property stored locally to allow access outside JAT.<br/>
+     * It implies to synchronize each access/modification
+     */
     private double localWorkDone;
+
+    /** The runnable priority. */
+    private final RunnablePriority priority;
 
     /**
      * Default Constructor only visible by service package.
@@ -84,6 +93,10 @@ public final class ServiceTask<T> extends Task<T> {
         this.method = method;
         this.parameterValues = parameterValues.clone();
         this.wave = wave;
+
+        final Priority priorityA = method.getAnnotation(Priority.class);
+        this.priority = priorityA == null ? RunnablePriority.Low : priorityA.value();
+
     }
 
     /**
@@ -128,7 +141,7 @@ public final class ServiceTask<T> extends Task<T> {
 
             if (Void.TYPE.equals(this.method.getReturnType())) {
                 // No return wave required because the service method will return nothing (VOID)
-                LOGGER.trace(this.service.getClass().getSimpleName() + " Consumes wave (noreturn)" + this.wave.toString());
+                LOGGER.log(NO_RETURN_WAVE_CONSUMED, this.service.getClass().getSimpleName(), this.wave.toString());
                 this.wave.setStatus(Status.Consumed);
 
                 // Otherwise prepare the return wave
@@ -136,9 +149,8 @@ public final class ServiceTask<T> extends Task<T> {
                 final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.getWaveType());
 
                 if (((WaveTypeBase) responseWaveType).getWaveItemList().isEmpty()) {
-                    final String msg = "The Return WaveType must contain at least one WaveItem to wrap the service return";
-                    LOGGER.error(msg);
-                    throw new CoreException(msg);
+                    LOGGER.log(NO_RETURNED_WAVE_ITEM);
+                    throw new CoreException(NO_RETURNED_WAVE_ITEM);
                 }
 
                 final WaveItem<T> waveItem = (WaveItem<T>) ((WaveTypeBase) responseWaveType).getWaveItemList().get(0);
@@ -157,7 +169,7 @@ public final class ServiceTask<T> extends Task<T> {
             }
 
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            LOGGER.error("Unable to perform the Service Task " + getServiceHandlerName(), e);
+            LOGGER.log(SERVICE_TASK_ERROR, e, getServiceHandlerName());
         }
         return res;
     }
@@ -188,8 +200,7 @@ public final class ServiceTask<T> extends Task<T> {
      * {@inheritDoc}
      */
     @Override
-    public void updateMessage(final String message) {
-        // Override method modifier
+    public void updateMessage(final String message) { // NOSONAR Override method visibility
         super.updateMessage(message);
     }
 
@@ -197,8 +208,7 @@ public final class ServiceTask<T> extends Task<T> {
      * {@inheritDoc}
      */
     @Override
-    public void updateTitle(final String title) {
-        // Override method modifier
+    public void updateTitle(final String title) { // NOSONAR Override method visibility
         super.updateTitle(title);
     }
 
@@ -225,14 +235,25 @@ public final class ServiceTask<T> extends Task<T> {
      */
     public boolean checkProgressRatio(final double newWorkDone, final double totalWork, final double amountThreshold) {
 
-        // Compute the actual progression
-        final double currentRatio = this.localWorkDone >= 0 ? 100 * this.localWorkDone / totalWork : 0.0;
+        double currentRatio;
+        synchronized (this) {
+            // Compute the actual progression
+            currentRatio = this.localWorkDone >= 0 ? 100 * this.localWorkDone / totalWork : 0.0;
+        }
 
         // Compute the future progression
         final double newRatio = 100 * newWorkDone / totalWork;
 
         // return true if the task has progressed of at least block increment value
         return newRatio - currentRatio > amountThreshold;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public RunnablePriority getPriority() {
+        return this.priority;
     }
 
 }

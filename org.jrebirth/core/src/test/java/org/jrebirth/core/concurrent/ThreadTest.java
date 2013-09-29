@@ -31,12 +31,17 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
 
         final AtomicBoolean ok = new AtomicBoolean(false);
 
-        JRebirth.runIntoJAT(new Runnable() {
+        JRebirth.runIntoJAT(new JRebirthRunnable() {
 
             @Override
             public void run() {
                 LOGGER.info("Running into " + Thread.currentThread().getName());
                 ok.set(JRebirth.isJAT());
+            }
+
+            @Override
+            public RunnablePriority getPriority() {
+                return RunnablePriority.Normal;
             }
         });
 
@@ -48,12 +53,17 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
 
         final AtomicBoolean ok = new AtomicBoolean(false);
 
-        JRebirth.runIntoJIT(new Runnable() {
+        JRebirth.runIntoJIT(new JRebirthRunnable() {
 
             @Override
             public void run() {
                 LOGGER.info("Running into " + Thread.currentThread().getName());
                 ok.set(JRebirth.isJIT());
+            }
+
+            @Override
+            public RunnablePriority getPriority() {
+                return RunnablePriority.Normal;
             }
         });
 
@@ -65,12 +75,17 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
 
         final AtomicBoolean ok = new AtomicBoolean(false);
 
-        JRebirth.runIntoJTP(new Runnable() {
+        JRebirth.runIntoJTP(new JRebirthRunnable() {
 
             @Override
             public void run() {
                 LOGGER.info("Running into " + Thread.currentThread().getName());
                 ok.set(JRebirth.isJTPSlot());
+            }
+
+            @Override
+            public RunnablePriority getPriority() {
+                return RunnablePriority.Normal;
             }
         });
 

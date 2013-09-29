@@ -17,12 +17,14 @@
  */
 package org.jrebirth.core.application;
 
-import static org.jrebirth.core.resource.Resources.create;
-
+import org.jrebirth.core.log.JRLevel;
 import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.resource.i18n.LogMessage;
+import org.jrebirth.core.resource.i18n.Message;
 import org.jrebirth.core.resource.i18n.MessageContainer;
 import org.jrebirth.core.resource.i18n.MessageItem;
+
+import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>ApplicationMessages</strong>.
@@ -33,33 +35,44 @@ import org.jrebirth.core.resource.i18n.MessageItem;
  */
 public interface ApplicationMessages extends MessageContainer {
 
+    /** AbstractApplication. */
+
     /** "Starting {0}" . */
-    MessageItem START_APPLICATION = create(new LogMessage("jrebirth.application.startApplication", JRebirthMarkers.APPLICATION));
+    MessageItem START_APPLICATION = create(new LogMessage("jrebirth.application.startApplication", JRLevel.Trace, JRebirthMarkers.APPLICATION));
 
     /** "{} has started successfully". */
-    MessageItem STARTED_SUCCESSFULLY = create(new LogMessage("jrebirth.application.startedSuccessfully", JRebirthMarkers.APPLICATION));
-
-    /** "You must override getFirstModelClass without calling super.". */
-    MessageItem OVERRIDE_FIRST_MODEL_CLASS = create(new LogMessage("jrebirth.application.overrideFirstModelClass", JRebirthMarkers.APPLICATION));
+    MessageItem STARTED_SUCCESSFULLY = create(new LogMessage("jrebirth.application.startedSuccessfully", JRLevel.Trace, JRebirthMarkers.APPLICATION));
 
     /** "Error while initializing the application {0} : ". */
-    MessageItem INIT_ERROR = create(new LogMessage("jrebirth.application.initError", JRebirthMarkers.APPLICATION));
+    MessageItem INIT_ERROR = create(new LogMessage("jrebirth.application.initError", JRLevel.Error, JRebirthMarkers.APPLICATION));
 
     /** "Error while starting the application {0} : ". */
-    MessageItem START_ERROR = create(new LogMessage("jrebirth.application.startError", JRebirthMarkers.APPLICATION));
+    MessageItem START_ERROR = create(new LogMessage("jrebirth.application.startError", JRLevel.Error, JRebirthMarkers.APPLICATION));
 
     /** "Stopping {0}" . */
-    MessageItem STOP_APPLICATION = create(new LogMessage("jrebirth.application.stopApplication", JRebirthMarkers.APPLICATION));
+    MessageItem STOP_APPLICATION = create(new LogMessage("jrebirth.application.stopApplication", JRLevel.Trace, JRebirthMarkers.APPLICATION));
 
     /** "{0} has stopped successfully". */
-    MessageItem STOPPED_SUCCESSFULLY = create(new LogMessage("jrebirth.application.stoppedSuccessfully", JRebirthMarkers.APPLICATION));
+    MessageItem STOPPED_SUCCESSFULLY = create(new LogMessage("jrebirth.application.stoppedSuccessfully", JRLevel.Trace, JRebirthMarkers.APPLICATION));
 
     /** "Error while stopping the application {0} : ". */
-    MessageItem STOP_ERROR = create(new LogMessage("jrebirth.application.stopError", JRebirthMarkers.APPLICATION));
+    MessageItem STOP_ERROR = create(new LogMessage("jrebirth.application.stopError", JRLevel.Error, JRebirthMarkers.APPLICATION));
 
     /** ""Impossible to load CSS: {0} using folder: {1}/". */
-    MessageItem CSS_LOADING_ERROR = create(new LogMessage("jrebirth.application.cssLoadingError", JRebirthMarkers.APPLICATION));
+    MessageItem CSS_LOADING_ERROR = create(new LogMessage("jrebirth.application.cssLoadingError", JRLevel.Error, JRebirthMarkers.APPLICATION));
 
     /** "No style sheet has been added to the scene, will link the default.css". */
-    MessageItem NO_CSS_DEFINED = create(new LogMessage("jrebirth.application.noCssDefined", JRebirthMarkers.APPLICATION));
+    MessageItem NO_CSS_DEFINED = create(new LogMessage("jrebirth.application.noCssDefined", JRLevel.Warn, JRebirthMarkers.APPLICATION));
+
+    /** "Attach JAT Uncaught Exception Handler." . */
+    MessageItem ATTACH_JAT_UEH = create(new Message("jrebirth.application.attachJatUeh"));
+
+    /** "Attach JIT Uncaught Exception Handler." . */
+    MessageItem ATTACH_JIT_UEH = create(new Message("jrebirth.application.attachJitUeh"));
+
+    /** DefaultApplication. */
+
+    /** "You must override getFirstModelClass without calling super.". */
+    MessageItem OVERRIDE_FIRST_MODEL_CLASS = create(new Message("jrebirth.application.overrideFirstModelClass"));
+
 }

@@ -33,6 +33,8 @@ import javafx.scene.layout.PaneBuilder;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.JRebirthEventType;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.ui.annotation.AutoHandler;
 import org.jrebirth.core.ui.annotation.AutoHandler.CallbackObject;
 import org.jrebirth.core.ui.annotation.EnumEventType;
@@ -40,9 +42,6 @@ import org.jrebirth.core.ui.annotation.OnFinished;
 import org.jrebirth.core.ui.annotation.RootNodeId;
 import org.jrebirth.core.ui.handler.AnnotationEventHandler;
 import org.jrebirth.core.util.ClassUtility;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -59,7 +58,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractView<M extends Model, N extends Node, C extends Controller<?, ?>> implements View<M, N, C> {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractView.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractView.class);
 
     /** The base name of all JRebirth Annotation. */
     private static final String BASE_ANNOTATION_NAME = "org.jrebirth.core.ui.annotation.On";
@@ -103,7 +102,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             this.controller = null;
             this.rootNode = null;
 
-            LOGGER.error(this.getClass().getName() + " creation has failed ", ce);
+            LOGGER.log(UIMessages.CREATION_FAILURE, ce, this.getClass().getName());
             buildErrorNode(ce);
         }
     }
@@ -184,7 +183,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
                         addHandler(getRootNode(), a);
                     }
                 } catch (IllegalArgumentException | CoreException e) {
-                    LOGGER.debug("Impossible to process annotation for root node : {}", this.getClass().getName());
+                    LOGGER.log(UIMessages.VIEW_ANNO_PROCESSING_FAILURE, e, this.getClass().getName());
                 }
             }
         }
@@ -251,7 +250,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
                         }
 
                     } catch (IllegalArgumentException | IllegalAccessException e) {
-                        LOGGER.debug("Impossible to process annotation for Node property : {}-{}", this.getClass().getName(), property.getName());
+                        LOGGER.log(UIMessages.NODE_ANNO_PROCESSING_FAILURE, e, this.getClass().getName(), property.getName());
                     }
                 }
 
@@ -269,7 +268,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
                     }
 
                 } catch (IllegalArgumentException | IllegalAccessException e) {
-                    LOGGER.debug("Impossible to process annotation for Animation property : {}-{}", this.getClass().getName(), property.getName());
+                    LOGGER.log(UIMessages.ANIM_ANNO_PROCESSING_FAILURE, e, this.getClass().getName(), property.getName());
                 }
 
             }

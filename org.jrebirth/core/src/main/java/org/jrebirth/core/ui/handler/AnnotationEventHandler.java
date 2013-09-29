@@ -27,14 +27,14 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 
 import org.jrebirth.core.exception.CoreException;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
+import org.jrebirth.core.ui.UIMessages;
 import org.jrebirth.core.ui.annotation.EnumEventType;
 import org.jrebirth.core.ui.annotation.OnAction;
 import org.jrebirth.core.ui.annotation.OnKey;
 import org.jrebirth.core.util.ClassUtility;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The interface <strong>AnnotationEventHandler</strong>.
@@ -43,10 +43,10 @@ import org.slf4j.LoggerFactory;
  * 
  * @param <E> the event type to handle
  */
-public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventHandler<E> implements EventHandler<E> {
+public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventHandler<E> implements EventHandler<E>, UIMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AnnotationEventHandler.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AnnotationEventHandler.class);
 
     /** The OnXxxxx annotation that define which handler to manage. */
     private final Annotation annotation;
@@ -89,7 +89,7 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
             try {
                 this.callbackObject.getClass().getDeclaredMethod(methodName, eventClass);
             } catch (NoSuchMethodException | SecurityException e) {
-                throw new CoreException(this.callbackObject.getClass().getName() + " must have a method => void " + methodName + " (" + eventClass.getName() + " event){}", e);
+                throw new CoreException(NO_EVENT_CALLBACK.get(this.callbackObject.getClass().getName(), methodName, eventClass.getName()), e);
             }
         }
 
@@ -206,7 +206,7 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
             method.setAccessible(false);
 
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            LOGGER.error("Impossible to handle the event", e);
+            LOGGER.log(EVENT_HANDLING_IMPOSSIBLE, e);
         }
 
     }

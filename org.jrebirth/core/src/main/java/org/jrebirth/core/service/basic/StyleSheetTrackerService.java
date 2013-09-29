@@ -21,13 +21,10 @@ import java.io.File;
 
 import javafx.scene.Scene;
 
+import com.sun.javafx.css.StyleManager;
+
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.WaveTypeBase;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.sun.javafx.css.StyleManager;
 
 /**
  * The class <strong>StyleSheetTrackerService</strong>.
@@ -43,7 +40,7 @@ public class StyleSheetTrackerService extends DefaultService {
     public static final WaveTypeBase RE_STAGE_OPENED = WaveTypeBase.build("STAGE_OPENED");
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(StyleSheetTrackerService.class);
+    // private static final Logger LOGGER = LoggerFactory.getLogger(StyleSheetTrackerService.class);
 
     // /**
     // * {@inheritDoc}

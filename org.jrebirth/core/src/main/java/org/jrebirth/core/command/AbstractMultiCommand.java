@@ -175,6 +175,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
                 // Run next command if any
                 if (this.commandList.size() > this.commandRunIndex) {
+                    // Recurse to handle next command
                     execute(wave);
                 } else {
                     this.running.set(false);

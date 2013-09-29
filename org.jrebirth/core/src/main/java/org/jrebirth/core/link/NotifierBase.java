@@ -253,7 +253,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             }
         }
 
-        LOGGER.warn(NOTIFIER_CONSUMES, wave.toString());
+        LOGGER.info(NOTIFIER_CONSUMES, wave.toString());
         wave.setStatus(Status.Consumed);
     }
 

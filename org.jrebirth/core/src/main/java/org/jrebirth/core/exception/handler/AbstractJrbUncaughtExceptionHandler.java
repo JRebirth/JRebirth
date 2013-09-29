@@ -17,18 +17,18 @@
  */
 package org.jrebirth.core.exception.handler;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 
 /**
  * The class <strong>AbstractJRBUncaughtExceptionHandler</strong>.
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractJrbUncaughtExceptionHandler implements JrbUncaughtExceptionHandler {
+public abstract class AbstractJrbUncaughtExceptionHandler implements JrbUncaughtExceptionHandler, HandlerMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractJrbUncaughtExceptionHandler.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractJrbUncaughtExceptionHandler.class);
 
     /** The type of UncaughtExceptionHandler. */
     private final UncaughtExceptionHandlerType uncaughtExceptionHandlerType;
@@ -57,9 +57,9 @@ public abstract class AbstractJrbUncaughtExceptionHandler implements JrbUncaught
     public void uncaughtException(final Thread t, final Throwable e) {
         // e.printStackTrace();
         if (e instanceof Exception) {
-            LOGGER.error(e.getMessage(), e);
+            LOGGER.error(UNCAUGHT_EXCEPTION, e, e.getMessage());
         } else {
-            LOGGER.error(e.getClass().getCanonicalName() + " - " + e.getMessage());
+            LOGGER.error(UNKNOWN_UNCAUGHT_EXCEPTION, e.getClass().getCanonicalName(), e.getMessage());
         }
 
     }
