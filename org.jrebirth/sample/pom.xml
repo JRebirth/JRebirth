@@ -4,7 +4,7 @@
 	<parent>
         <artifactId>jrebirth</artifactId>
         <groupId>org</groupId>
-        <version>0.7.5-SNAPSHOT</version>
+        <version>0.7.5</version>
     </parent>
 
 	<groupId>org.jrebirth</groupId>
@@ -162,13 +162,13 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.0.6</version>
+			<version>1.0.13</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.5-SNAPSHOT</version>
+			<version>0.7.5</version>
 		</dependency>
 		
 	</dependencies>
