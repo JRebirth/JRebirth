@@ -11,7 +11,7 @@
 
 	<groupId>org</groupId>
 	<artifactId>jrebirth</artifactId>
-	<version>0.7.5-SNAPSHOT</version>
+	<version>0.7.5</version>
 
 	<packaging>pom</packaging>
 	<name>JRebirth Application Framework</name>
