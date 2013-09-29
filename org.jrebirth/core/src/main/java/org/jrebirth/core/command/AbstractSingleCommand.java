@@ -20,6 +20,7 @@ package org.jrebirth.core.command;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.jrebirth.core.concurrent.RunType;
+import org.jrebirth.core.concurrent.RunnablePriority;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
 
@@ -48,7 +49,17 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
      * @param runInto the way to launch this command
      */
     public AbstractSingleCommand(final RunType runInto) {
-        super(runInto);
+        super(runInto, null);
+    }
+
+    /**
+     * Default constructor.
+     * 
+     * @param runInto the way to launch this command
+     * @param priority the runnable priority
+     */
+    public AbstractSingleCommand(final RunType runInto, final RunnablePriority priority) {
+        super(runInto, priority);
     }
 
     /**

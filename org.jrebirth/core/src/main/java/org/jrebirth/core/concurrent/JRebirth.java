@@ -45,7 +45,7 @@ public final class JRebirth {
      * @param runInto the targeted thread
      * @param runnable the task to run
      */
-    public static void run(final RunType runInto, final Runnable runnable) {
+    public static void run(final RunType runInto, final JRebirthRunnable runnable) {
         switch (runInto) {
             case JAT:
                 runIntoJAT(runnable);
@@ -65,7 +65,7 @@ public final class JRebirth {
      * 
      * @param runnable the task to run
      */
-    public static void runIntoJAT(final Runnable runnable) {
+    public static void runIntoJAT(final JRebirthRunnable runnable) {
         // if (Platform.isFxApplicationThread()) {
         // // We are into a JAT so just run it synchronously
         // runnable.run();
@@ -91,7 +91,7 @@ public final class JRebirth {
      * 
      * @param runnable the task to run
      */
-    public static void runIntoJIT(final Runnable runnable) {
+    public static void runIntoJIT(final JRebirthRunnable runnable) {
         // if (JRebirth.isJIT()) {
         // // We are into JIT so just run it synchronously
         // runnable.run();
@@ -108,7 +108,7 @@ public final class JRebirth {
      * 
      * @param runnable the task to run
      */
-    public static void runIntoJTP(final Runnable runnable) {
+    public static void runIntoJTP(final JRebirthRunnable runnable) {
         // if (JRebirth.isJTPSlot()) {
         // // We are into a JTP slot so just run it synchronously
         // runnable.run();

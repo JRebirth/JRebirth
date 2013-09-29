@@ -25,7 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to.
+ * This annotation is used to define the runnable priority for a command.
  * 
  * @author Sébastien Bordes
  */
@@ -33,19 +33,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface RunInto {
-
-    /**
-     * Define the RunType value.
-     * 
-     * The default value is RunType.JIT
-     */
-    RunType value() default RunType.JIT;
+public @interface Priority {
 
     /**
      * Define the Runnable Priority value.
      * 
-     * The default value is RunnablePriority.Normal
+     * The default value is RunnablePriority.Low
      */
-    RunnablePriority priority() default RunnablePriority.Normal;
+    RunnablePriority value() default RunnablePriority.Low;
+
 }

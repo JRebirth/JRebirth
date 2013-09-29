@@ -17,35 +17,44 @@
  */
 package org.jrebirth.core.concurrent;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
 /**
- * This annotation is used to.
- * 
- * @author Sébastien Bordes
+ * The Enum RunnablePriority used to priorize all runnable.
  */
-@Target({ ElementType.TYPE, ElementType.METHOD })
-@Retention(RetentionPolicy.RUNTIME)
-@Inherited
-@Documented
-public @interface RunInto {
+public enum RunnablePriority {
+
+    /** The Highest. */
+    Highest(5),
+
+    /** The High. */
+    High(4),
+
+    /** The Normal. */
+    Normal(3),
+
+    /** The Low. */
+    Low(2),
+
+    /** The Lowest. */
+    Lowest(1);
+
+    /** The level. */
+    private final int level;
 
     /**
-     * Define the RunType value.
+     * Instantiates a new runnable priority.
      * 
-     * The default value is RunType.JIT
+     * @param level the level
      */
-    RunType value() default RunType.JIT;
+    private RunnablePriority(final int level) {
+        this.level = level;
+    }
 
     /**
-     * Define the Runnable Priority value.
+     * Gets the level.
      * 
-     * The default value is RunnablePriority.Normal
+     * @return the level
      */
-    RunnablePriority priority() default RunnablePriority.Normal;
+    public int getLevel() {
+        return this.level;
+    }
 }

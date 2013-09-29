@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.jrebirth.core.concurrent.RunType;
+import org.jrebirth.core.concurrent.RunnablePriority;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
@@ -81,7 +82,19 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
      */
     public AbstractMultiCommand(final RunType runInto, final boolean sequential) {
-        super(runInto);
+        super(runInto, null);
+        this.sequential = sequential;
+    }
+
+    /**
+     * Default Constructor.
+     * 
+     * @param runInto The run into thread type
+     * @param priority the runnable priority
+     * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
+     */
+    public AbstractMultiCommand(final RunType runInto, final RunnablePriority priority, final boolean sequential) {
+        super(runInto, priority);
         this.sequential = sequential;
     }
 

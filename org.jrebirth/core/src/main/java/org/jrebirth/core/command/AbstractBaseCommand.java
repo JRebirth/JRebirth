@@ -20,6 +20,7 @@ package org.jrebirth.core.command;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
+import org.jrebirth.core.concurrent.RunnablePriority;
 import org.jrebirth.core.exception.CommandException;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.JRebirthEventType;
@@ -50,9 +51,14 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBaseCommand.class);
 
     /**
-     * The field that indicate how this command must be launched.
+     * The field that indicates how this command must be launched.
      */
     private final RunType runIntoThread;
+
+    /**
+     * The field that indicates the threading priority.
+     */
+    private RunnablePriority runnablePriority;
 
     // /**
     // * The parent command, useful when chained or multi commands are used.
@@ -69,7 +75,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      * </ol>
      */
     public AbstractBaseCommand() {
-        this(null);
+        this(null, null);
     }
 
     /**
@@ -83,8 +89,9 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      * </ol>
      * 
      * @param runType the way to launch this command
+     * @param priority the runnable priority
      */
-    public AbstractBaseCommand(final RunType runType) {
+    public AbstractBaseCommand(final RunType runType, final RunnablePriority priority) {
         super();
         // Try to retrieve the RunInto annotation at class level within class hierarchy
         final RunInto ria = ClassUtility.extractAnnotation(this.getClass(), RunInto.class);
@@ -93,6 +100,9 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
         // Secondly by provided runtType argument
         // Thirdly (default case) use JIT
         this.runIntoThread = ria == null ? runType == null ? RunType.JIT : runType : ria.value();
+
+        // Do same job for the priority
+        this.runnablePriority = ria == null ? priority == null ? RunnablePriority.Normal : priority : ria.priority();
     }
 
     /**
@@ -181,6 +191,13 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      */
     protected final RunType getRunInto() {
         return this.runIntoThread;
+    }
+
+    /**
+     * @return Returns the runInto.
+     */
+    protected final RunnablePriority getRunnablePriority() {
+        return this.runnablePriority;
     }
 
     /**

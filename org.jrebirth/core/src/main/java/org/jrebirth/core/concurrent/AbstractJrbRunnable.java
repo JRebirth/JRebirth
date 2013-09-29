@@ -26,7 +26,7 @@ import org.jrebirth.core.log.JRLoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractJrbRunnable implements Runnable, ConcurrentMessages {
+public abstract class AbstractJrbRunnable implements JRebirthRunnable, ConcurrentMessages {
 
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractJrbRunnable.class);
@@ -34,13 +34,27 @@ public abstract class AbstractJrbRunnable implements Runnable, ConcurrentMessage
     /** This name is used for debug purpose. */
     private final String runnableName;
 
+    /** The runnable priority. */
+    private final RunnablePriority priority;
+
     /**
      * Default Constructor.
      * 
      * @param runnableName the name of the runnable to allow live debugging
      */
     public AbstractJrbRunnable(final String runnableName) {
+        this(runnableName, RunnablePriority.Normal);
+    }
+
+    /**
+     * Default Constructor.
+     * 
+     * @param runnableName the name of the runnable to allow live debugging
+     * @param priority the runnable priority
+     */
+    public AbstractJrbRunnable(final String runnableName, final RunnablePriority priority) {
         this.runnableName = runnableName;
+        this.priority = priority;
     }
 
     /**
@@ -72,6 +86,14 @@ public abstract class AbstractJrbRunnable implements Runnable, ConcurrentMessage
     @Override
     public String toString() {
         return "JRebirthRunnable - " + this.runnableName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public RunnablePriority getPriority() {
+        return this.priority;
     }
 
 }

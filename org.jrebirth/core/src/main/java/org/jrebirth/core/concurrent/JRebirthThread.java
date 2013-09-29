@@ -107,9 +107,9 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
      * @param runnable the task to run
      */
     @SuppressWarnings("unchecked")
-    public void runIntoJTP(final Runnable runnable) {
+    public void runIntoJTP(final JRebirthRunnable runnable) {
         final Future<Void> future = (Future<Void>) getFacade().getExecutorService().submit(runnable);
-        LOGGER.trace(JTP_QUEUED, future.hashCode());
+        LOGGER.log(JTP_QUEUED, future.hashCode());
     }
 
     /**
@@ -117,7 +117,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
      * 
      * @param runnable the task to run
      */
-    public void runLater(final Runnable runnable) {
+    public void runLater(final JRebirthRunnable runnable) {
         // Synchronize the queue !
         synchronized (this.queuedTasks) {
             this.queuedTasks.notifyAll();
@@ -318,7 +318,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
             // Destroy the static reference
             destroyInstance();
         } catch (final CoreException e) {
-            LOGGER.error(SHUTDOWN_ERROR, e);
+            LOGGER.log(SHUTDOWN_ERROR, e);
         }
     }
 
