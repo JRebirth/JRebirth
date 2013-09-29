@@ -11,8 +11,6 @@ import javafx.scene.layout.FlowPaneBuilder;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.ui.AbstractView;
 import org.jrebirth.core.ui.annotation.OnMouse;
-import org.jrebirth.sample.ui.SampleModel;
-import org.jrebirth.sample.ui.SampleView;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -124,4 +122,5 @@ public final class SampleView extends AbstractView<SampleModel, BorderPane, Samp
     Button getPooledCommand() {
         return this.pooledCommand;
     }
+
 }

@@ -5,6 +5,7 @@ package ${package}.ui;
 
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.wave.Wave;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +24,7 @@ public final class SampleModel extends DefaultModel<SampleModel, SampleView> {
      */
     @Override
     protected void initModel() {
+        LOGGER.debug("Init Sample Model");
         // Put the code to initialize your model here
     }
 
@@ -31,7 +33,6 @@ public final class SampleModel extends DefaultModel<SampleModel, SampleView> {
      */
     @Override
     protected void initInnerModels() {
-        LOGGER.debug("Init Sample Model");
         // Put the code to initialize inner models here (if any)
     }
 
@@ -42,5 +43,13 @@ public final class SampleModel extends DefaultModel<SampleModel, SampleView> {
     protected void bind() {
         // Put the code to manage model object binding (if any)
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void processWave(final Wave wave) {
+        // Process a wave action, you must listen the wave type before
+    }
+
 }

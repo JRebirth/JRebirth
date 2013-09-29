@@ -13,7 +13,7 @@
 
 	<name>Sample Application</name>
 	<url>http://www.sample.org</url>
-	<description>Build with JRebirth Framework</description>
+	<description>Built with JRebirth Framework</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
