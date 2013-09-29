@@ -36,7 +36,7 @@ import static org.jrebirth.core.resource.Resources.create;
  */
 public interface JRebirthParameters {
 
-    /** The name of the AUTO_REEFRESH parameter which is quite special because it modify how other parameters will be processed. */
+    /** The name of the AUTO_REFRESH parameter which is quite special because it modify how other parameters will be processed. */
     String AUTO_REFRESH_NAME = "autoRefreshResource";
 
     /**************************************************************************************/
@@ -64,7 +64,7 @@ public interface JRebirthParameters {
     /** The factory used to create components. */
     ParameterItem<Class> COMPONENT_FACTORY = create("componentFactory", (Class) DefaultComponentFactory.class);
 
-    /** Fir Close Retry Delay in milliseconds, time to wait when application try to close the first time. */
+    /** First Close Retry Delay in milliseconds, time to wait when application try to close the first time. */
     ParameterItem<Integer> CLOSE_RETRY_DELAY_FIRST = create("closeRetryDelayFirst", 4000);
 
     /** Close Retry Delay in milliseconds, time to wait when application try to close all other time. */
@@ -73,11 +73,26 @@ public interface JRebirthParameters {
     /** Pool size of JRebirth Thread Pool. */
     ParameterItem<Integer> THREAD_POOL_SIZE = create("threadPoolSize", 4);
 
+    /**
+     * The <code>WAVE_HANDLER_PREFIX</code> field is used to add a prefix to custom wave handler method of JRebirth components. They will be named like this : doMyAction(Wave) after being renamed in
+     * camel case.
+     */
+    ParameterItem<String> WAVE_HANDLER_PREFIX = create("waveHandlerPrefix", "DO_");
+
+    /**************************************************************************************/
+    /** _________________________Application Resource Parameters.___________________________ */
+    /**************************************************************************************/
+
     /** Fonts default folder, Multiple folder can be managed by separating them with a comma ','. */
     ParameterItem<String> FONT_FOLDER = create("fontsFolder", "fonts");
 
     /** Images default folder, Multiple folder can be managed by separating them with a comma ','. */
     ParameterItem<String> IMAGE_FOLDER = create("imagesFolder", "images");
+
+    /**
+     * The <code>NOT_AVAILABLE_IMAGE</code> field is used to define the image to use when an image is missing.
+     */
+    ParameterItem<LocalImage> NOT_AVAILABLE_IMAGE = create("notAvailableImage", new LocalImage("NotAvailableImage", ImageExtension.PNG));
 
     /** Styles default folder, Multiple folder can be managed by separating them with a comma ','. */
     ParameterItem<String> STYLE_FOLDER = create("stylesFolder", "styles");
@@ -92,16 +107,9 @@ public interface JRebirthParameters {
      */
     ParameterItem<String> TRUE_TYPE_FONT_EXTENSION = create("trueTypeFontExtension", ".ttf");
 
-    /**
-     * The <code>WAVE_HANDLER_PREFIX</code> field is used to add a prefix to custom wave handler method of JRebirth components. They will be named like this : doMyAction(Wave) after being renamed in
-     * camel case.
-     */
-    ParameterItem<String> WAVE_HANDLER_PREFIX = create("waveHandlerPrefix", "DO_");
-
-    /**
-     * The <code>NOT_AVAILABLE_IMAGE</code> field is used to define the image to use when an image is missing.
-     */
-    ParameterItem<LocalImage> NOT_AVAILABLE_IMAGE = create("notAvailableImage", new LocalImage("NotAvailableImage", ImageExtension.PNG));
+    /**************************************************************************************/
+    /** _________________________Application Stage Parameters.___________________________ */
+    /**************************************************************************************/
 
     /**
      * The <code>APPLICATION_NAME</code> field is used to define title of the application displayed by stage window.<br />
@@ -113,10 +121,6 @@ public interface JRebirthParameters {
      * The <code>APPLICATION_VERSION</code> field is used to define the application version.
      */
     ParameterItem<String> APPLICATION_VERSION = create("applicationVersion", "0.0.0");
-
-    /**************************************************************************************/
-    /** _________________________Application Stage Parameters.___________________________ */
-    /**************************************************************************************/
 
     /** The application scene width. */
     ParameterItem<Integer> APPLICATION_SCENE_WIDTH = create("applicationSceneWidth", 800);

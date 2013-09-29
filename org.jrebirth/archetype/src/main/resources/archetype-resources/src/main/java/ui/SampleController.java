@@ -13,9 +13,6 @@ import org.jrebirth.core.wave.WaveGroup;
 import org.jrebirth.sample.command.SampleCommand;
 import org.jrebirth.sample.command.SamplePoolCommand;
 import org.jrebirth.sample.command.SampleUICommand;
-import org.jrebirth.sample.ui.SampleController;
-import org.jrebirth.sample.ui.SampleView;
-import org.jrebirth.sample.ui.SampleController.SampleMouseAdapter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

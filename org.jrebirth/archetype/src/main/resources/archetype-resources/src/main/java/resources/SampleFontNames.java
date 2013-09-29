@@ -16,4 +16,3 @@ public enum SampleFontNames implements FontName {
     DINk;
 
 }
- 
