@@ -20,7 +20,7 @@ package org.jrebirth.core.concurrent;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -46,7 +46,8 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
      * @param threadFactory the factory used to add a thread into the pool
      */
     public JRebirthThreadPoolExecutor(final int threadNumber, final ThreadFactory threadFactory) {
-        super(threadNumber, threadNumber, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(), threadFactory);
+        super(threadNumber, threadNumber, 0L, TimeUnit.MILLISECONDS, new PriorityBlockingQueue<Runnable>(threadNumber, new JRebirthRunnableComparator()),
+                threadFactory);
     }
 
     /**
@@ -60,7 +61,7 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
             try {
                 final Object result = ((Future<?>) r).get();
                 if (result != null) {
-                    LOGGER.trace(FUTURE_DONE, r.hashCode(), result.toString());
+                    LOGGER.log(FUTURE_DONE, r.hashCode(), result.toString());
                 }
             } catch (final CancellationException | ExecutionException e) {
                 rootCause = e.getCause();
@@ -69,10 +70,10 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
             }
         }
         if (t != null) {
-            LOGGER.error(JTP_ERROR, t);
+            LOGGER.log(JTP_ERROR, t);
         }
         if (rootCause != null) {
-            LOGGER.error(JTP_ERROR_EXPLANATION, rootCause);
+            LOGGER.log(JTP_ERROR_EXPLANATION, rootCause);
         }
     }
 }
