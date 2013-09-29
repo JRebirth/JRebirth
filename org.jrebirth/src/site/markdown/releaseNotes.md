@@ -3,72 +3,77 @@
 Release Notes
 ==============
 
-0.7.5 - Keep On Move Release - 2013-09-30
+0.7.5 - ["Aerodynamite"](https://www.youtube.com/watch?v=9FMDb6PBpIM) Release - 2013-09-30
 -----------------------------------------
 
 This version provides several priceless enhancements, you should consider migration.
 
-- Force callCommand to use right WaveBean class feature  
+- Force callCommand to use right WaveBean class feature<br/>
 Now the callCommand require to use the right WaveBean type according to the command class used
 
 
-- Allow to catch orphan waves feature &amp; Improve WaveBean usability duplicate  
+- Allow to catch orphan waves feature &amp; Improve WaveBean usability duplicate<br/>
 Orphan waves will be caught by an handler that could be parameterized, the default one will throw a RuntimeException only if DeveloperMode is activated  
 
 
-- Manage default services feature
+- Manage default services feature<br/>
 The service component has now a fully operational service task used to follow progression with binding.  
 A bug was also fixed that was leading to a pause into the JIT waiting the result of the service. Now services are fully parallelized (running into JTP) and don't block the JIT.  
 Thanks to Antoine for having disclosed [this problem](https://groups.google.com/d/msg/jrebirth-users/pFp4HcGzvpI/4RPI3ZXNiLUJ "Antoine's explanation") (related to dead code).  
 
 
-- Add resource parameter support  
+- Add resource parameter support<br/>
 All resources can be parameterized into JRebirth properties files.
 
 
-- Provide Undo/Redo support
+- Provide Undo/Redo support<br/>
 An Undo/Redo module has been added to demonstrate that Command layer is versatile and can manage complex workflow.  
 A Showcase has been also added and deployed on the website: [Undo/Redo Showcase](showcases/UndoRedo.html "UndoRedo Showcase").   
 Thanks to Bastien for [bug fix](https://github.com/JRebirth/JRebirth/pull/65 "Bastien's Pull Request").
 
 
-- Allow Wave filtering according to a filter Data
+- Allow Wave filtering according to a filter Data<br/>
 When a component listen a generic wave, it will receive all waves even those related to other components.  
 Now it's possible add a filter (defined as a callback) to receive only right waves.  
 A sample is available into the StackModel component (of components module).
 
 
-- Allow customization of component instantiation
+- Allow customization of component instantiation<br/>
 It's now possible to define its own factory class in order to build JRebirth top-level components (Command, Service, Model).  
 For example you can plug a injector (like Guice) into your factory to build a outstanding pluggable software.  
 
 
-- Bad Wave Contract Check with several parameters  
+- Bad Wave Contract Check with several parameters<br/>
 When application is start with developerMode parameter to true, all wave handler method are checked at runtime, this feature is now fully operational
 
 
-- Boolean Property is not overridable bug fix  
+- Boolean Property is not overridable bug fix<br/>
 The default value of some parameters couldn't be updated by properties file, it's fixed
 
 
-- Override programmatically a Parameter  
+- Override programmatically a Parameter<br/>
 It's now possible to override programmatically a parameter by calling the define method, parameters values will be set according to this order : default, properties file, define call.
 
 
-- Only service method that return nothing (void) will not send a return wave  
+- Only service method that return nothing (void) will not send a return wave<br/>
 Service method that return null will send a return wave with the null value.
 
-- Provide i18 Suppport  
-Now it's possible to manage l10n properties files to translate your application
 
-- Provide Smart logging capabilities
-Internal log are now localized, and use log markers. Custom hook has been added to support line number for log back
+- Provide i18 Support<br/>
+Now it's possible to manage l10n properties files to translate your application 
 
-- Add getFXMLController method
-Add this method into AbstractFXMLModel class to allow getting the FXML controller
 
-- Introduce JRebirth Runnable Priority
-Priority can be set for Commands and Service Task and any runnable run into JIT and JTP
+- Provide Smart logging capabilities<br/>
+Internal log are now localized, and use log markers. Custom hook has been added to support line number for log back 
+
+- Add getFXMLController method<br/>
+Add this method into AbstractFXMLModel class to allow getting the FXML controller 
+
+
+- Introduce JRebirth Runnable Priority<br/>
+Priority can be set for Commands and Service Task and any runnable run into JIT and JTP 
+
+
 
 0.7.4 - Core Release - 2013-07-22
 ---------------------------------
@@ -121,7 +126,7 @@ Font preloading had been broken and so fixed.
 While using runInto method, deadlocks can occured in some specific cases, everything goes right now :)
 
 
-- Improve overall concurency<br/>
+- Improve overall concurrency<br/>
 Some parts have been refactored to improve race condition with AtomicBoolean.	 
 
 

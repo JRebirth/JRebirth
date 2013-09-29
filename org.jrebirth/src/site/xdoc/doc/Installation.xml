@@ -19,7 +19,7 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
 	</head>
-	
+
 	<body>
 
 		<section name="Installation">
@@ -62,10 +62,18 @@
 
 				<p>Releases are pushed to several repositories in this order :</p>
 				<ol>
-					<li>Our internal repository powered by Artifactory (All Jenkins build)</li>
+					<li>OJO, Open Source Repository hosted by JFrog and powered by Artifactory [oss.jfrog.org](http://oss.jfrog.org)</li>
+					<li>Our internal repository powered by Artifactory (All Jenkins build, could be offline)</li>
 					<li>Our public repository powered by Bintray (On demand Jenkins build)</li>
 					<li>JCenter Bintray repository (Only Releases)</li>
 				</ol>
+
+				<p>
+					The first location to check is
+					<b>OJO</b>
+					because releases and snapshots are pushed automatically to it, so check it out !
+				</p>
+
 				<p>
 					<a href="https://bintray.com/pkg/show/general/jrebirth/JRebirth/JRebirth">https://bintray.com/pkg/show/general/jrebirth/JRebirth/JRebirth</a>
 					and then synchronized to JCenter main Bintray repository.
@@ -73,6 +81,36 @@
 
 
 				<p>So you have some alternatives to retrieve JRebirth artifacts from these repositories.</p>
+
+
+				<subsection id="ojo" name="JFrog Open Source artifactory instance">
+					<p>
+						JRebirth is pushed to OJO (
+						<a href="http://oss.jfrog.org/simple/oss-release-local/org/jrebirth/">oss.jfrog.org/simple/oss-release-local/org/jrebirth/</a>
+						).
+					</p>
+					<p>
+						You have 2 ways to plug your maven build to this server:
+						<ol>
+							<li>Add a repositories section into the pom.xml of your project.</li>
+							<li>Add a profile section into your settings.xml (like for JCenter configuration)</li>
+						</ol>
+					</p>
+
+					<h4>Into Pom.xml</h4>
+					<macro name="include">
+						<param name="source" value="../includes/Pom_Repositories.xml" />
+						<param name="snippet" value="xp://repositories" />
+					</macro>
+
+					<h4>Into Settings.xml</h4>
+					<macro name="include">
+						<param name="source" value="../includes/OJO_Profile_Settings.xml" />
+						<param name="snippet" value="xp://profiles" />
+					</macro>
+
+				</subsection>
+
 
 				<subsection id="jcenter" name="Use JCenter">
 					<p>JCenter is a new social Java repository hosted on Bintray website. It allows to broadcast thousand of libraries without the pitfall to
@@ -109,12 +147,6 @@
 						</ol>
 					</p>
 
-					<h4>Into Pom.xml</h4>
-					<macro name="include">
-						<param name="source" value="../includes/Pom_Repositories.xml" />
-						<param name="snippet" value="xp://repositories" />
-					</macro>
-
 					<h4>Into Settings.xml</h4>
 					<macro name="include">
 						<param name="source" value="../includes/Artifactory_Profile_Settings.xml" />
@@ -132,12 +164,13 @@
 				</p>
 				<p>
 					<em>JRebirth is not yet on Maven Central repository because the upload policy is too restrictive (actually it requires to update your pom to be allowed to send your artifacts on a third-party
-						repository that will be synchronized with Central)
+						repository that will be synchronized with Central).
 					</em>
+					JRebith artifacts are hosted on the Open Source repository provided by JFrog.
 				</p>
 
 				<subsection id="hybrid" name="Hybrid Configuration">
-					<p>You can add both JCenter, JRebirth Bintray and JRebirth Artifactory repositories, if you want to be up-to-date at any time</p>
+					<p>You can add both OJO, JCenter, JRebirth Bintray and JRebirth Artifactory repositories, if you want to be up-to-date at any time</p>
 
 					<p>If you just want to deal with stable release use only JCenter, but if sometims you need to test a snapshot version use our artifactory instance or ask us to synchronize Artifactory with
 						Bintray.
