@@ -5,35 +5,33 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-			<id>jrebirth-release</id>
+			<id>central</id>
 			<name>libs-release</name>
-			<url>http://repo.jrebirth.org/libs-release</url>
+			<url>http://oss.jfrog.org/artifactory/libs-release</url>
 		</repository>
 		<repository>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<id>jrebirth-snapshot</id>
+			<snapshots />
+			<id>snapshots</id>
 			<name>libs-snapshot</name>
-			<url>http://repo.jrebirth.org/libs-snapshot</url>
+			<url>http://oss.jfrog.org/artifactory/libs-snapshot</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
-		<pluginRepository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>jrebirth-plugin-release</id>
-			<name>plugins-release</name>
-			<url>http://repo.jrebirth.org/plugins-release</url>
-		</pluginRepository>
-		<pluginRepository>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<id>jrebirth-plugin-snapshot</id>
-			<name>plugins-snapshot</name>
-			<url>http://repo.jrebirth.org/plugins-snapshot</url>
-		</pluginRepository>
+		<pluginRepositories>
+			<pluginRepository>
+				<snapshots>
+					<enabled>false</enabled>
+				</snapshots>
+				<id>central</id>
+				<name>plugins-release</name>
+				<url>http://oss.jfrog.org/artifactory/plugins-release</url>
+			</pluginRepository>
+			<pluginRepository>
+				<snapshots />
+				<id>snapshots</id>
+				<name>plugins-snapshot</name>
+				<url>http://oss.jfrog.org/artifactory/plugins-snapshot</url>
+			</pluginRepository>
+		</pluginRepositories>
 	</pluginRepositories>
 </project>

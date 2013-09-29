@@ -4,24 +4,24 @@
 	<dependency>
 		<groupid>org.slf4j</groupid>
 		<artifactid>slf4j-api</artifactid>
-		<version>1.7.2</version>
+		<version>1.7.5</version>
 	</dependency>
 
 	<dependency>
 		<groupid>org.slf4j</groupid>
 		<artifactid>slf4j-nop</artifactid>
-		<version>1.7.2</version>
+		<version>1.7.5</version>
 	</dependency>
 
 	<dependency>
 		<groupid>ch.qos.logback</groupid>
 		<artifactid>logback-classic</artifactid>
-		<version>1.0.6</version>
+		<version>1.0.13</version>
 	</dependency>
 	
 	<dependency>
 		<groupid>org.slf4j</groupid>
 		<artifactid>slf4j-simple</artifactid>
-		<version>1.7.2</version>
+		<version>1.7.5</version>
 	</dependency>
 </dependencies>
