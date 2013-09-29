@@ -3,6 +3,7 @@ package org.jrebirth.sample.command;
 import org.jrebirth.core.command.DefaultCommand;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.sample.command.SampleCommand;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

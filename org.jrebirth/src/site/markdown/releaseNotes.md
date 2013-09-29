@@ -58,8 +58,17 @@ It's now possible to override programmatically a parameter by calling the define
 - Only service method that return nothing (void) will not send a return wave  
 Service method that return null will send a return wave with the null value.
 
+- Provide i18 Suppport  
+Now it's possible to manage l10n properties files to translate your application
 
+- Provide Smart logging capabilities
+Internal log are now localized, and use log markers. Custom hook has been added to support line number for log back
 
+- Add getFXMLController method
+Add this method into AbstractFXMLModel class to allow getting the FXML controller
+
+- Introduce JRebirth Runnable Priority
+Priority can be set for Commands and Service Task and any runnable run into JIT and JTP
 
 0.7.4 - Core Release - 2013-07-22
 ---------------------------------
