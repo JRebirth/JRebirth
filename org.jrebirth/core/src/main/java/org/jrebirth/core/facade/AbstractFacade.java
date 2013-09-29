@@ -149,7 +149,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
             } catch (final CoreException ce) {
                 LOGGER.error(COMPONENT_RETRIEVAL_ERROR, ce);
-                throw new CoreRuntimeException(ce);// Pop up the exception wrapped into a runtime exception
+                throw new CoreRuntimeException(ce); // Pop up the exception wrapped into a runtime exception
             }
         }
 

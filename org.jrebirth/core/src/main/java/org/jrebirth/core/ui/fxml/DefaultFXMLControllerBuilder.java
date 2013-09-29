@@ -2,11 +2,10 @@ package org.jrebirth.core.ui.fxml;
 
 import javafx.util.Callback;
 
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.ui.View;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>DefaultFXMLControllerBuilder</strong>.
@@ -16,7 +15,7 @@ import org.slf4j.LoggerFactory;
 public class DefaultFXMLControllerBuilder implements Callback<Class<?>, Object> {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultFXMLControllerBuilder.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(DefaultFXMLControllerBuilder.class);
 
     /** The root model of the FXML file. */
     private final Model relatedModel;
@@ -43,7 +42,7 @@ public class DefaultFXMLControllerBuilder implements Callback<Class<?>, Object> 
             controller.setModel(this.relatedModel);
 
         } catch (InstantiationException | IllegalAccessException e) {
-            LOGGER.warn(e.getMessage(), e);
+            LOGGER.log(FXMLMessages.DEFAULT_CTRLR_CREATION_ERROR, e, e.getMessage());
         }
 
         return controller;

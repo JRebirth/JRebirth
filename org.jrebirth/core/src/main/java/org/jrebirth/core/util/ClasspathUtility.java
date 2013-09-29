@@ -100,7 +100,7 @@ public final class ClasspathUtility implements UtilMessages {
             // Explode and browse jar|zip content
             resources.addAll(getResourcesFromJarOrZipFile(classpathEntryFile, searchPattern));
         } else {
-            LOGGER.info(RESOURCE_IGNORED, classpathEntryFile.getAbsolutePath());
+            LOGGER.log(RESOURCE_IGNORED, classpathEntryFile.getAbsolutePath());
         }
         return resources;
     }
@@ -128,7 +128,7 @@ public final class ClasspathUtility implements UtilMessages {
                 try {
                     checkResource(resources, searchPattern, file.getCanonicalPath());
                 } catch (final IOException e) {
-                    LOGGER.error(BAD_CANONICAL_PATH, e);
+                    LOGGER.log(BAD_CANONICAL_PATH, e);
                 }
             }
         }
@@ -156,7 +156,7 @@ public final class ClasspathUtility implements UtilMessages {
             }
 
         } catch (final IOException e) {
-            LOGGER.error(FILE_UNREADABLE, e);
+            LOGGER.log(FILE_UNREADABLE, e);
         }
         return resources;
     }

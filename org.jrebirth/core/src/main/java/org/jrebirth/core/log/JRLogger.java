@@ -24,7 +24,39 @@ import org.slf4j.Marker;
 /**
  * The Interface JRebirthLogger.
  */
-public interface JRLogger {
+public interface JRLogger { // NOSONAR lot of methods !!
+
+    /**
+     * Log with custom level.
+     * 
+     * @param messageItem the message item
+     */
+    void log(final MessageItem messageItem);
+
+    /**
+     * Log with custom level.
+     * 
+     * @param messageItem the message item
+     * @param t the t
+     */
+    void log(final MessageItem messageItem, final Throwable t);
+
+    /**
+     * Log with custom level.
+     * 
+     * @param messageItem the message item
+     * @param parameters the parameters
+     */
+    void log(final MessageItem messageItem, final Object... parameters);
+
+    /**
+     * Log with custom level.
+     * 
+     * @param messageItem the message item
+     * @param t the t
+     * @param parameters the parameters
+     */
+    void log(final MessageItem messageItem, final Throwable t, final Object... parameters);
 
     /**
      * Trace.
@@ -186,24 +218,79 @@ public interface JRLogger {
      */
     void error(final MessageItem messageItem, final Throwable t, final Object... parameters);
 
+    /**
+     * Checks if is debug enabled.
+     * 
+     * @return true, if is debug enabled
+     */
     boolean isDebugEnabled();
 
+    /**
+     * Checks if is debug enabled.
+     * 
+     * @param marker the marker
+     * @return true, if is debug enabled
+     */
     boolean isDebugEnabled(final Marker marker);
 
+    /**
+     * Checks if is error enabled.
+     * 
+     * @return true, if is error enabled
+     */
     boolean isErrorEnabled();
 
+    /**
+     * Checks if is error enabled.
+     * 
+     * @param marker the marker
+     * @return true, if is error enabled
+     */
     boolean isErrorEnabled(final Marker marker);
 
+    /**
+     * Checks if is info enabled.
+     * 
+     * @return true, if is info enabled
+     */
     boolean isInfoEnabled();
 
+    /**
+     * Checks if is info enabled.
+     * 
+     * @param marker the marker
+     * @return true, if is info enabled
+     */
     boolean isInfoEnabled(final Marker marker);
 
+    /**
+     * Checks if is trace enabled.
+     * 
+     * @return true, if is trace enabled
+     */
     boolean isTraceEnabled();
 
+    /**
+     * Checks if is trace enabled.
+     * 
+     * @param marker the marker
+     * @return true, if is trace enabled
+     */
     boolean isTraceEnabled(final Marker marker);
 
+    /**
+     * Checks if is warn enabled.
+     * 
+     * @return true, if is warn enabled
+     */
     boolean isWarnEnabled();
 
+    /**
+     * Checks if is warn enabled.
+     * 
+     * @param marker the marker
+     * @return true, if is warn enabled
+     */
     boolean isWarnEnabled(final Marker marker);
 
 }

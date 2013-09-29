@@ -27,20 +27,19 @@ import javafx.scene.Node;
 import javafx.scene.text.TextBuilder;
 
 import org.jrebirth.core.exception.CoreRuntimeException;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.ui.Model;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>FXMLUtils</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class FXMLUtils {
+public final class FXMLUtils implements FXMLMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FXMLUtils.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(FXMLUtils.class);
 
     /**
      * Private constructor.
@@ -101,7 +100,7 @@ public final class FXMLUtils {
                 fxmlLoader.setResources(ResourceBundle.getBundle(bundlePath));
             }
         } catch (final MissingResourceException e) {
-            LOGGER.error("Resource Bundle is missing:  " + bundlePath);
+            LOGGER.log(MISSING_RESOURCE_BUNDLE, e, bundlePath);
         }
 
         Node node = null;
@@ -109,13 +108,13 @@ public final class FXMLUtils {
         try {
             error = fxmlLoader.getLocation() == null;
             if (error) {
-                node = TextBuilder.create().text("FXML Error : " + fxmlPath).build();
+                node = TextBuilder.create().text(FXML_ERROR_NODE_LABEL.get(fxmlPath)).build();
             } else {
                 node = (Node) fxmlLoader.load(fxmlLoader.getLocation().openStream());
             }
 
         } catch (final IOException e) {
-            throw new CoreRuntimeException("The FXML node doesn't exist : " + fxmlPath, e);
+            throw new CoreRuntimeException(FXML_NODE_DOESNT_EXIST.get(fxmlPath), e);
         }
 
         final FXMLController<M, ?> fxmlController = (FXMLController<M, ?>) fxmlLoader.getController();
@@ -124,8 +123,7 @@ public final class FXMLUtils {
         if (fxmlController != null) {
             // The fxml controller must extends AbstractFXMLController
             if (!error && !(fxmlLoader.getController() instanceof AbstractFXMLController)) {
-                throw new CoreRuntimeException("The FXML controller must extends the FXMLController class : "
-                        + fxmlLoader.getController().getClass().getCanonicalName());
+                throw new CoreRuntimeException(BAD_FXML_CONTROLLER_ANCESTOR.get(fxmlLoader.getController().getClass().getCanonicalName()));
             }
             // Link the View component with the fxml controller
             fxmlController.setModel(model);

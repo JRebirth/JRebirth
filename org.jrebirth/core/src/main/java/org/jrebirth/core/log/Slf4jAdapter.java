@@ -27,7 +27,7 @@ import org.slf4j.Marker;
  * 
  * @author Sébastien Bordes
  */
-public class Slf4jAdapter implements JRLogger {
+public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
 
     /** The internal logger. */
     private final Logger slf4jLogger; // NOSONAR this is a wrapped logger
@@ -39,6 +39,57 @@ public class Slf4jAdapter implements JRLogger {
      */
     public Slf4jAdapter(final org.slf4j.Logger logger) {
         this.slf4jLogger = logger;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void log(final MessageItem messageItem) {
+        log(messageItem, null, new Object[0]);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void log(final MessageItem messageItem, final Throwable t) {
+        log(messageItem, t, new Object[0]);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void log(final MessageItem messageItem, final Object... parameters) {
+        log(messageItem, null, parameters);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void log(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        switch (messageItem.getLevel()) {
+            case Trace:
+                trace(messageItem, t, parameters);
+                break;
+            case Debug:
+                debug(messageItem, t, parameters);
+                break;
+
+            case Warn:
+                warn(messageItem, t, parameters);
+                break;
+            case Error:
+                error(messageItem, t, parameters);
+                break;
+            case Info:
+                info(messageItem, t, parameters);
+                break;
+            default:
+                break;
+        }
     }
 
     /**

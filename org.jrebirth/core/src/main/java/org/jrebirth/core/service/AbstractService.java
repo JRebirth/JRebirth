@@ -32,13 +32,12 @@ import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.link.AbstractWaveReady;
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.core.wave.JRebirthWaves;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -48,13 +47,13 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractService extends AbstractWaveReady<Service> implements Service {
+public abstract class AbstractService extends AbstractWaveReady<Service> implements Service, ServiceMessages {
 
     /** The string used to separate the workdone and total work of a service task. */
     private static final String RATIO_SEPARATOR = " / ";
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractService.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractService.class);
 
     /** The map that stores pending tasks, useful to access to Worker implementation. */
     private final ObservableMap<String, ServiceTask<?>> pendingTasks = FXCollections.observableMap(new HashMap<String, ServiceTask<?>>());
@@ -88,7 +87,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
             // parameterValues.add(wave);
 
             if (sourceWave.getWaveType() == null) {
-                LOGGER.error("Wave processed without any wave type for service  " + this.getClass().getSimpleName());
+                LOGGER.error(NO_WAVE_TYPE_DEFINED, this.getClass().getSimpleName());
             }
 
             // Search the wave handler method

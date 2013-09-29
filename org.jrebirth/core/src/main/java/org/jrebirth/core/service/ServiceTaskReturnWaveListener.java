@@ -17,22 +17,21 @@
  */
 package org.jrebirth.core.service;
 
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveListener;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>ServiceTaskReturnWaveListener</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class ServiceTaskReturnWaveListener implements WaveListener {
+public final class ServiceTaskReturnWaveListener implements WaveListener, ServiceMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceTaskReturnWaveListener.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(ServiceTaskReturnWaveListener.class);
 
     /**
      * {@inheritDoc}
@@ -73,7 +72,7 @@ public final class ServiceTaskReturnWaveListener implements WaveListener {
     public void waveConsumed(final Wave wave) {
         if (wave.getRelatedWave() != null) {
             // Return wave has been consumed, so the triggered wave can be consumed too
-            LOGGER.trace(wave.getRelatedClass().getSimpleName() + " Consumes wave " + wave.getRelatedWave().toString());
+            LOGGER.trace(SERVICE_TASK_RETURN_CONSUMES, wave.getRelatedClass().getSimpleName(), wave.getRelatedWave().toString());
 
             wave.getRelatedWave().setStatus(Status.Consumed);
         }

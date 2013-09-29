@@ -17,9 +17,9 @@
  */
 package org.jrebirth.core.resource.provided;
 
-import static org.jrebirth.core.resource.Resources.create;
-
 import org.jrebirth.core.resource.style.StyleSheetItem;
+
+import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>JRebirthStyles</strong>.

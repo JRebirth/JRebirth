@@ -17,17 +17,17 @@
  */
 package org.jrebirth.core.log;
 
+import ch.qos.logback.classic.Logger;
+
 import org.jrebirth.core.resource.i18n.MessageItem;
 
 import org.slf4j.Marker;
 import org.slf4j.spi.LocationAwareLogger;
 
-import ch.qos.logback.classic.Logger;
-
 /**
  * The Class LogbackAdapter.
  */
-public class LogbackAdapter implements JRLogger {
+public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
 
     /**
      * The fully qualified name of this class. Used in gathering caller information.
@@ -44,6 +44,69 @@ public class LogbackAdapter implements JRLogger {
      */
     public LogbackAdapter(final Logger logger) {
         this.logbackLogger = logger;
+    }
+
+    /**
+     * Convert JRebirth LogLevel to Logback one.
+     * 
+     * @param level the JRebirth log level to convert
+     * 
+     * @return the logback log level
+     */
+    private int convertLevel(final JRLevel level) {
+        int logbackLevel = 0;
+        switch (level) {
+            case Trace:
+                logbackLevel = LocationAwareLogger.TRACE_INT;
+                break;
+            case Debug:
+                logbackLevel = LocationAwareLogger.DEBUG_INT;
+                break;
+            case Warn:
+                logbackLevel = LocationAwareLogger.WARN_INT;
+                break;
+            case Error:
+                logbackLevel = LocationAwareLogger.ERROR_INT;
+                break;
+            case Info:
+                logbackLevel = LocationAwareLogger.INFO_INT;
+                break;
+            default:
+                break;
+        }
+        return logbackLevel;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void log(final MessageItem messageItem) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.get(), null, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void log(final MessageItem messageItem, final Throwable t) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.get(), null, t);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void log(final MessageItem messageItem, final Object... parameters) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.get(parameters), null, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void log(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.get(parameters), null, t);
     }
 
     /**

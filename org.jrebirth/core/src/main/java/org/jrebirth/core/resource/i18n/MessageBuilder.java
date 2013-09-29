@@ -48,7 +48,6 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
      * The class logger.
      * 
      * All Logs of this class are hard coded because l10n engine is not started.
-     * 
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageBuilder.class);
 
@@ -139,7 +138,7 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
     @Override
     protected String buildResource(final MessageItem messageItem, final MessageParams messageParams) {
         String messsageValue = null;
-        if (messageParams instanceof Message && JRebirthParameters.LOG_RESOLUTION.get()) {
+        if (!(messageParams instanceof LogMessageParams) || messageParams instanceof LogMessageParams && JRebirthParameters.LOG_RESOLUTION.get()) {
 
             // Load overridden values first
             if (messageParams.name() != null && this.overriddenMessageMap.containsKey(messageItem)) {

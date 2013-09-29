@@ -125,15 +125,15 @@ public final class ClassUtility implements UtilMessages {
             sb.append("]");
 
             if (genericClass == null) {
-                LOGGER.error(GENERIC_TYPE_ERROR_1, e, sb.toString(), mainClass.getName());
+                LOGGER.log(GENERIC_TYPE_ERROR_1, e, sb.toString(), mainClass.getName());
             } else {
-                LOGGER.error(GENERIC_TYPE_ERROR_2, e, genericClass.getName(), mainClass.getName());
+                LOGGER.log(GENERIC_TYPE_ERROR_2, e, genericClass.getName(), mainClass.getName());
             }
 
             if (e instanceof IllegalArgumentException) {
-                LOGGER.error(ARGUMENT_LIST);
+                LOGGER.log(ARGUMENT_LIST);
                 for (int i = 0; i < parameterTypes.length; i++) {
-                    LOGGER.error(ARGUMENT_DETAIL, parameterTypes[i].toString(), parameters[i].toString());
+                    LOGGER.log(ARGUMENT_DETAIL, parameterTypes[i].toString(), parameters[i].toString());
                 }
             }
             if (genericClass == null) {
@@ -160,7 +160,7 @@ public final class ClassUtility implements UtilMessages {
             // Return the first constructor as a workaround
             constructor = genericClass.getConstructors()[0];
         } catch (final SecurityException e) {
-            LOGGER.error(NO_CONSTRUCTOR, e);
+            LOGGER.log(NO_CONSTRUCTOR, e);
             throw e; // Pop up the exception to let it managed by the caller method
         }
         return constructor;
@@ -367,9 +367,9 @@ public final class ClassUtility implements UtilMessages {
             object = attributeMethod.invoke(annotation);
 
         } catch (NoSuchMethodException | SecurityException e) {
-            LOGGER.error(NO_ANNOTATION_PROPERTY, e, attributeName);
+            LOGGER.log(NO_ANNOTATION_PROPERTY, e, attributeName);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            LOGGER.error(NO_ANNOTATION_PROPERTY_VALUE, e, attributeName);
+            LOGGER.log(NO_ANNOTATION_PROPERTY_VALUE, e, attributeName);
         }
         return object;
     }
