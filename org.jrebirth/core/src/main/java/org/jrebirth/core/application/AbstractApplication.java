@@ -123,7 +123,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     public final void start(final Stage primaryStage) throws CoreException {
 
         try {
-            LOGGER.trace(START_APPLICATION, this.getClass().getSimpleName());
+            LOGGER.log(START_APPLICATION, this.getClass().getSimpleName());
 
             // Attach the primary stage for later customization
             this.stage = primaryStage;
@@ -154,7 +154,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             // Preload fonts to allow them to be used by CSS
             preloadFonts();
 
-            LOGGER.trace(STARTED_SUCCESSFULLY, this.getClass().getSimpleName());
+            LOGGER.log(STARTED_SUCCESSFULLY, this.getClass().getSimpleName());
 
         } catch (final CoreException ce) {
             LOGGER.error(START_ERROR, ce, this.getClass().getSimpleName());
@@ -201,7 +201,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     @Override
     public final void stop() throws CoreException {
         try {
-            LOGGER.trace(STOP_APPLICATION, this.getClass().getSimpleName());
+            LOGGER.log(STOP_APPLICATION, this.getClass().getSimpleName());
             super.stop();
 
             // Hide the stage is this method wasn't call by user
@@ -229,7 +229,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
                 }
             } while (JRebirthThread.getThread().isAlive());
 
-            LOGGER.trace(STOPPED_SUCCESSFULLY, this.getClass().getSimpleName());
+            LOGGER.log(STOPPED_SUCCESSFULLY, this.getClass().getSimpleName());
 
         } catch (final Exception e) {
             LOGGER.error(STOP_ERROR, e, this.getClass().getSimpleName());
@@ -387,7 +387,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     private void manageDefaultStyleSheet(final Scene scene) {
         if (scene.getStylesheets().size() < 1) {
             // No style sheet has been added to the scene
-            LOGGER.warn(NO_CSS_DEFINED);
+            LOGGER.log(NO_CSS_DEFINED);
             addCSS(scene, JRebirthStyles.DEFAULT);
         }
 
@@ -432,7 +432,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         Thread.setDefaultUncaughtExceptionHandler(getDefaultUncaughtExceptionHandler());
 
         // Initialize the uncaught exception handler for JavaFX Application Thread
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("Attach JAT Uncaught Exception Handler") {
+        JRebirth.runIntoJAT(new AbstractJrbRunnable(ATTACH_JAT_UEH.get()) {
             @Override
             public void runInto() throws JRebirthThreadException {
                 Thread.currentThread().setUncaughtExceptionHandler(getJatUncaughtExceptionHandler());
@@ -440,7 +440,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         });
 
         // Initialize the uncaught exception handler for JRebirth Internal Thread
-        JRebirth.runIntoJIT(new AbstractJrbRunnable("Attach JIT Uncaught Exception Handler") {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable(ATTACH_JIT_UEH.get()) {
             @Override
             public void runInto() throws JRebirthThreadException {
                 Thread.currentThread().setUncaughtExceptionHandler(getJitUncaughtExceptionHandler());

@@ -21,13 +21,13 @@ import org.jrebirth.core.resource.i18n.MessageItem;
 
 /***
  * 
- * The class <strong>CommandException</strong>.
+ * The class <strong>AbstractMessageException</strong>.
  * 
- * This is the exception that can be thrown by any JRebirth command.
+ * This is the base exception class that handle Message Item.
  * 
  * @author Sébastien Bordes
  */
-public class AbstractMessageException extends Exception {
+public abstract class AbstractMessageException extends Exception {
 
     /**
      * The constant used for serialization.
@@ -37,7 +37,7 @@ public class AbstractMessageException extends Exception {
     /**
      * Constructor without any exception.
      * 
-     * @param CommandException.java the message item to display.
+     * @param messageItem the message item to display.
      */
     public AbstractMessageException(final MessageItem messageItem) {
         super(messageItem.get());

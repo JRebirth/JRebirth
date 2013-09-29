@@ -20,11 +20,10 @@ package org.jrebirth.core.ui.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.jrebirth.core.log.JRLogger;
+import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.ui.View;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>AbstractFXMLController</strong>.
@@ -37,7 +36,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractFXMLController<M extends Model, V extends View<M, ?, ?>> implements FXMLController<M, V> {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFXMLController.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractFXMLController.class);
 
     /** The linked model that manage the view that load this FXML component or the root model for included fxml. */
     private M model;
@@ -72,7 +71,7 @@ public abstract class AbstractFXMLController<M extends Model, V extends View<M, 
      */
     @Override
     public void initialize(final URL url, final ResourceBundle resource) {
-        LOGGER.trace("Initialize fxml node : " + url.toString());
+        LOGGER.log(FXMLMessages.INIT_FXML_NODE, url.toString());
     }
 
 }

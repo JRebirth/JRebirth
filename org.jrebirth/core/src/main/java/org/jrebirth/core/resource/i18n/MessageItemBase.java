@@ -20,6 +20,7 @@ package org.jrebirth.core.resource.i18n;
 import java.text.MessageFormat;
 
 import org.jrebirth.core.exception.CoreRuntimeException;
+import org.jrebirth.core.log.JRLevel;
 import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.resource.ResourceBuilders;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
@@ -63,9 +64,15 @@ public final class MessageItemBase implements MessageItem {
         String res = get();
         if (stringParameters.length > 0) {
             try {
+                // Use the message formatter
                 res = MessageFormat.format(res, stringParameters);
+
             } catch (final IllegalArgumentException e) {
+
+                // Display special markups
                 res = "<!!" + builder().getParam(this).toString() + "!!>";
+
+                // In developer mode throw a runtime exception to stop the current task
                 if (JRebirthParameters.DEVELOPER_MODE.get()) {
                     throw new CoreRuntimeException("Invalid key : " + res, e);
                 }
@@ -123,6 +130,14 @@ public final class MessageItemBase implements MessageItem {
     @Override
     public Marker getMarker() {
         return builder().getParam(this) instanceof LogMessageParams ? ((LogMessageParams) builder().getParam(this)).marker() : JRebirthMarkers.EMPTY;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JRLevel getLevel() {
+        return builder().getParam(this) instanceof LogMessageParams ? ((LogMessageParams) builder().getParam(this)).level() : JRLevel.Info;
     }
 
 }

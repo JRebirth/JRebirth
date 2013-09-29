@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.resource.i18n;
 
+import org.jrebirth.core.log.JRLevel;
+
 import org.slf4j.Marker;
 
 /**
@@ -26,18 +28,23 @@ import org.slf4j.Marker;
  */
 public class LogMessage extends Message implements LogMessageParams {
 
-    /** The mandatory log marker used to sort log items. */
+    /** The log marker used to sort log items. */
     private final Marker marker;
+
+    /** The level to use to log (or display) this message. */
+    private final JRLevel level;
 
     /**
      * Default Constructor.
      * 
      * @param parameterName the name of the parameter
+     * @param level the log level
      * @param marker the log marker
      */
-    public LogMessage(final String parameterName, final Marker marker) {
+    public LogMessage(final String parameterName, final JRLevel level, final Marker marker) {
         super(parameterName);
         this.marker = marker;
+        this.level = level;
     }
 
     /**
@@ -48,4 +55,11 @@ public class LogMessage extends Message implements LogMessageParams {
         return this.marker;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JRLevel level() {
+        return this.level;
+    }
 }

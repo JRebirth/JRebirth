@@ -53,6 +53,7 @@ public final class JRLoggerFactory {
         if (logger == null) {
             JRLogger newInstance = null;
 
+            // Get the logger instance accordinf to slf4j configuration
             final org.slf4j.Logger innerLogger = LoggerFactory.getLogger(clazz);
 
             if ("ch.qos.logback.classic.Logger".equals(innerLogger.getClass().getName())) {

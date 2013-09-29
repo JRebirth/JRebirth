@@ -187,24 +187,24 @@ public final class JRebirthEventBase implements JRebirthEvent {
         }
     }
 
-    /**
-     * Return the class object or null.
-     * 
-     * @param className the class name to convert into class object
-     * 
-     * @return a class or null
-     */
-    private Class<?> getClass(final String className) {
-        Class<?> cls = null;
-        try {
-            if (!"null".equals(className)) {
-                cls = Class.forName(className);
-            }
-        } catch (final ClassNotFoundException e) {
-            cls = Object.class;
-        }
-        return cls;
-    }
+    // /**
+    // * Return the class object or null.
+    // *
+    // * @param className the class name to convert into class object
+    // *
+    // * @return a class or null
+    // */
+    // private Class<?> getClass(final String className) {
+    // Class<?> cls = null;
+    // try {
+    // if (!"null".equals(className)) {
+    // cls = Class.forName(className);
+    // }
+    // } catch (final ClassNotFoundException e) {
+    // cls = Object.class;
+    // }
+    // return cls;
+    // }
 
     // /**
     // * {@inheritDoc}

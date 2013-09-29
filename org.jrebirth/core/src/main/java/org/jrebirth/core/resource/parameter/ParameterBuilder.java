@@ -80,7 +80,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
         if (this.configurationFileWildcard.isEmpty() || this.configurationFileExtension.isEmpty()) {
             // Skip configuration loading
-            LOGGER.info(SKIP_CONF_LOADING);
+            LOGGER.log(SKIP_CONF_LOADING);
 
         } else {
             // Assemble the regex pattern
@@ -89,7 +89,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
             // Retrieve all resources from default classpath
             final Collection<String> list = ClasspathUtility.getClasspathResources(filePattern);
 
-            LOGGER.info(CONFIG_FOUND, list.size(), list.size() > 1 ? "s" : "");
+            LOGGER.log(CONFIG_FOUND, list.size(), list.size() > 1 ? "s" : "");
 
             for (final String confFilename : list) {
                 readPropertiesFile(confFilename);
@@ -108,7 +108,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
         final Properties p = new Properties();
 
-        LOGGER.info(READ_CONF_FILE, custConfFile.getAbsolutePath());
+        LOGGER.log(READ_CONF_FILE, custConfFile.getAbsolutePath());
 
         try (InputStream is = new FileInputStream(custConfFile)) {
 
@@ -117,9 +117,9 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
             for (final Map.Entry<Object, Object> entry : p.entrySet()) {
                 if (this.propertiesParametersMap.containsKey(entry.getKey())) {
-                    LOGGER.trace(UPDATE_PARAMETER, entry.getKey(), entry.getValue());
+                    LOGGER.log(UPDATE_PARAMETER, entry.getKey(), entry.getValue());
                 } else {
-                    LOGGER.trace(STORE_PARAMETER, entry.getKey(), entry.getValue());
+                    LOGGER.log(STORE_PARAMETER, entry.getKey(), entry.getValue());
                 }
                 storePropertiesParameter(entry);
 

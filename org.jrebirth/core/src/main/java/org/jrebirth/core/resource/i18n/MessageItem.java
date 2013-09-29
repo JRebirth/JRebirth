@@ -18,6 +18,7 @@
  */
 package org.jrebirth.core.resource.i18n;
 
+import org.jrebirth.core.log.JRLevel;
 import org.jrebirth.core.resource.ResourceItem;
 
 import org.slf4j.Marker;
@@ -45,9 +46,16 @@ public interface MessageItem extends ResourceItem<String, MessageBuilder> {
     /**
      * Return the log marker if any.
      * 
-     * @return the log marker or null
+     * @return the log marker or the Empty one
      */
     Marker getMarker();
+
+    /**
+     * Return the log level if any.
+     * 
+     * @return the log level or the info one
+     */
+    JRLevel getLevel();
 
     /**
      * Define a new forced string.
@@ -62,4 +70,5 @@ public interface MessageItem extends ResourceItem<String, MessageBuilder> {
      * Persist a message value.
      */
     void persist();
+
 }

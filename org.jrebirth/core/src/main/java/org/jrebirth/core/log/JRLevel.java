@@ -15,11 +15,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.resource.i18n;
+package org.jrebirth.core.log;
 
 /**
- * The Interface MessageContainer that designate in terface that will contains several MessageItem.
+ * The Enum JRLevel used by JRLogger.
  */
-public interface MessageContainer {
+public enum JRLevel {
 
+    /** The Trace. */
+    Trace,
+
+    /** The Debug. */
+    Debug,
+
+    /** The Info. */
+    Info,
+
+    /** The Warn. */
+    Warn,
+
+    /** The Error. */
+    Error,
+
+    /** The Warn popup. */
+    WarnPopup,
+
+    /** The Error popup. */
+    ErrorPopup,
+
+    /** The Info popup. */
+    InfoPopup,
+
+    /** The Exception. */
+    Exception
 }

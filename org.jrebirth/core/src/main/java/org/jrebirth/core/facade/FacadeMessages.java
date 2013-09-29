@@ -17,12 +17,14 @@
  */
 package org.jrebirth.core.facade;
 
-import static org.jrebirth.core.resource.Resources.create;
-
+import org.jrebirth.core.log.JRLevel;
 import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.resource.i18n.LogMessage;
+import org.jrebirth.core.resource.i18n.Message;
 import org.jrebirth.core.resource.i18n.MessageContainer;
 import org.jrebirth.core.resource.i18n.MessageItem;
+
+import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>FacadeMessages</strong>.
@@ -36,22 +38,22 @@ public interface FacadeMessages extends MessageContainer {
     /** DefaultComponentFactory. */
 
     /** "Impossible to build the the component {0}". */
-    MessageItem COMPONENT_BUILD_ERROR = create(new LogMessage("jrebirth.facade.componentBuildError", JRebirthMarkers.FACADE));
+    MessageItem COMPONENT_BUILD_ERROR = create(new Message("jrebirth.facade.componentBuildError"));
 
     /** GlobalFacadeBase. */
 
     /** "Impossible to load the custom ComponentFactory, will use the default one". */
-    MessageItem COMPONENT_CUSTOM_FACTORY_ERROR = create(new LogMessage("jrebirth.facade.componentFactoryError", JRebirthMarkers.FACADE));
+    MessageItem COMPONENT_CUSTOM_FACTORY_ERROR = create(new LogMessage("jrebirth.facade.componentFactoryError", JRLevel.Error, JRebirthMarkers.FACADE));
 
     /** "Create the JRebirth Thread Pool". */
-    MessageItem JTP_CREATION = create(new LogMessage("jrebirth.facade.jtpCreation", JRebirthMarkers.FACADE));
+    MessageItem JTP_CREATION = create(new LogMessage("jrebirth.facade.jtpCreation", JRLevel.Trace, JRebirthMarkers.FACADE));
 
     /** "JREvent>>". */
-    MessageItem JREBIRTH_EVENT = create(new LogMessage("jrebirth.facade.jrebirthEvent", JRebirthMarkers.JREVENT));
+    MessageItem JREBIRTH_EVENT = create(new LogMessage("jrebirth.facade.jrebirthEvent", JRLevel.Info, JRebirthMarkers.JREVENT));
 
     /** AbstractFacade. */
 
     /** "Component Retrieval Error". */
-    MessageItem COMPONENT_RETRIEVAL_ERROR = create(new LogMessage("jrebirth.facade.componentRetrievalError", JRebirthMarkers.FACADE));
+    MessageItem COMPONENT_RETRIEVAL_ERROR = create(new LogMessage("jrebirth.facade.componentRetrievalError", JRLevel.Error, JRebirthMarkers.FACADE));
 
 }

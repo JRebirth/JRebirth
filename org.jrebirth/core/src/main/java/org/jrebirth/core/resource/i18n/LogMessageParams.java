@@ -1,5 +1,7 @@
 package org.jrebirth.core.resource.i18n;
 
+import org.jrebirth.core.log.JRLevel;
+
 import org.slf4j.Marker;
 
 /**
@@ -10,9 +12,16 @@ import org.slf4j.Marker;
 public interface LogMessageParams extends MessageParams {
 
     /**
-     * Return the mandatory log marker.
+     * Return the log marker.
      * 
      * @return the log marker
      */
     Marker marker();
+
+    /**
+     * Return the log level.
+     * 
+     * @return the log level
+     */
+    JRLevel level();
 }
