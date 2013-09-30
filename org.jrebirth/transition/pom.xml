@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>jrebirth</artifactId>
 		<groupId>org</groupId>
-		<version>0.7.5-SNAPSHOT</version>
+		<version>0.7.5</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<groupId>org.jrebirth</groupId>
