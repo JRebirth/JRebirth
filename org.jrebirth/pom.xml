@@ -48,6 +48,7 @@
 		<module>fxform</module>
 		<module>undoredo</module>
 		<module>showcase</module>
+		<module>preloader</module>
 	</modules>
 
 	<issueManagement>

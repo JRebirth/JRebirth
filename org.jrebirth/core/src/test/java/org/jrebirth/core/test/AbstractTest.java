@@ -25,7 +25,7 @@ public abstract class AbstractTest {
     public static void setUpBeforeClass() throws Exception {
 
         // new TestApplication().start(new Stage());
-        JRebirthThread.getThread().launch(new TestApplication());
+        JRebirthThread.getThread().prepare(new TestApplication());
         globalFacade = JRebirthThread.getThread().getFacade();
     }
 
