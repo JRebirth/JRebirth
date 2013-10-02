@@ -130,7 +130,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
      * 
      * @param application the javaFX application instance
      */
-    public void launch(final JRebirthApplication<?> application) {
+    public void prepare(final JRebirthApplication<?> application) {
 
         // Link the current application
         this.application = application;
@@ -138,8 +138,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         this.facade = new GlobalFacadeBase(application);
 
         // Start the thread (infinite loop)
-        start();
-
+        // start();
     }
 
     /**
@@ -157,7 +156,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
     @Override
     public void run() {
 
-        this.application.preloadFonts();
+        // this.application.preloadFonts();
 
         manageStyleSheetReloading(this.application.getScene());
 

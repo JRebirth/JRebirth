@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.application.Preloader.ProgressNotification;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.SceneBuilder;
@@ -48,6 +49,7 @@ import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.resource.provided.JRebirthStyles;
 import org.jrebirth.core.resource.style.StyleSheetItem;
 import org.jrebirth.core.util.ClassUtility;
+import org.jrebirth.preloader.MessageNotification;
 
 /**
  * 
@@ -90,15 +92,43 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         try {
             super.init();
 
+            notifyPreloader(new MessageNotification("Initialisation", this));
+
             preInit();
+
+            notifyPreloader(new MessageNotification("Loading Messages Properties", this));
 
             // Load messages Files
             loadMessagesFiles();
 
+            notifyPreloader(new ProgressNotification(80.0 / 100));
+
+            notifyPreloader(new MessageNotification("Loading Parameters Properties", this));
+
             // Load configuration Files
             loadConfigurationFiles();
 
+            notifyPreloader(new ProgressNotification(90.0 / 100));
+
+            notifyPreloader(new MessageNotification("Preparing Core Engine", this));
+
+            // Build the JRebirth Thread before attaching uncaught Exception Handler
+            final JRebirthThread jrt = JRebirthThread.getThread();
+
+            // Attach exception handlers
+            initializeExceptionHandler();
+
+            // Start the JRebirthThread, if an error occurred it will be processed by predefined handler
+            // It will create all facades and trigger the pre and post boot waves and will alost attach the first model view
+            jrt.prepare(this);
+
+            notifyPreloader(new MessageNotification("Preloading Fonts", this));
+            // Preload fonts to allow them to be used by CSS
+            preloadFonts();
+
             postInit();
+
+            notifyPreloader(new MessageNotification("Starting", this));
 
         } catch (final Exception e) {
             LOGGER.error(ApplicationMessages.INIT_ERROR, e, this.getClass().getSimpleName());
@@ -135,24 +165,13 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             this.scene = buildScene();
             initializeScene();
 
-            // Build the JRebirth Thread before attaching uncaught Exception Handler
-            final JRebirthThread jrt = JRebirthThread.getThread();
-
-            // Attach exception handlers
-            initializeExceptionHandler();
-
-            // Start the JRebirthThread, if an error occurred it will be processed by predefined handler
-            // It will create all facades and trigger the pre and post boot waves and will alost attach the first model view
-            jrt.launch(this);
-
             // Attach the scene
             primaryStage.setScene(this.scene);
 
+            JRebirthThread.getThread().start();
+
             // Let the stage visible for users
             primaryStage.show();
-
-            // Preload fonts to allow them to be used by CSS
-            preloadFonts();
 
             LOGGER.log(STARTED_SUCCESSFULLY, this.getClass().getSimpleName());
 
