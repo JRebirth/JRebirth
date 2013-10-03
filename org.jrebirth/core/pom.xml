@@ -19,6 +19,7 @@
 			<groupId>org.jrebirth</groupId>
 			<artifactId>preloader</artifactId>
 			<version>0.7.6-SNAPSHOT</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -33,6 +34,7 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.0.13</version>
 			<!-- <optional>true</optional> -->
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
