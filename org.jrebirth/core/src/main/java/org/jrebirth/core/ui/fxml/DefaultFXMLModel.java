@@ -43,7 +43,8 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
     /**
      * @return Returns the fxmlItem.
      */
-    protected FXMLItem getFxmlItem() {
+    @Override
+    protected FXMLItem getFXMLItem() {
         return this.fxmlItem;
     }
 
@@ -61,12 +62,6 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
     @Override
     protected String getFXMLBundlePath() {
         return this.resourcePath;
-    }
-
-    @Override
-    protected FXMLItem getFXMLItem() {
-        // Nothing to do yet
-        return null;
     }
 
     /**
