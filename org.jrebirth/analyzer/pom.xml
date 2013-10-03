@@ -103,8 +103,8 @@
 				<configuration>
 
 					<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
-					<excludeTransitive>true</excludeTransitive>
-					<!-- <libPath>lib</libPath> -->
+					<excludeTransitive>false</excludeTransitive>
+					<libPath>lib</libPath>
 
 					<resourcesDirectory>${project.basedir}/src/main/jnlp/</resourcesDirectory>
 					<codebase>${deployUrl}/${deployPath}</codebase>
