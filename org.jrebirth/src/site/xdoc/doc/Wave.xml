@@ -59,7 +59,36 @@
 					<li>Undefined : to handle all other waves, the wave type must be defined</li>
 				</ol>
 				
+				<h3>Wave ItemType</h3>
+				<p>A wave item designate a Java type (precisely a generic type that can be for example: List&lt;String&gt;).
+				It could be used with a custom name or as a parameter.
+				</p>
 				
+				<p><b>Don't forget the opening and closing braces used { } to allow anonymous class to define the super generic type !</b></p>
+				
+				<p>Wave items are used by Wave Type to describe an api contract.</p>
+			
+				<macro name="include">
+					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/ui/editor/EditorWaves.java" />
+					<param name="snippet" value="aj:..EVENTS_FILE" />
+					<param name="snippet-start-offset" value="1" />
+					<param name="snippet-end-offset" value="1"/>
+				</macro>
+				
+				<p>Wave items can also be used to define the unique identifier of a value wrapped into a WaveData wrapper stored into a wave.</p>
+			
+						
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/wave/JRebirthWaves.java" />
+					<param name="snippet" value="aj:..SERVICE_TASK" />
+					<param name="snippet-start-offset" value="1" />
+				</macro>
+				<macro name="include">
+					<param name="source" value="core/src/main/java/org/jrebirth/core/service/AbstractService.java" />
+					<param name="snippet" value="re:(SERVICE_TASK,\ ).*$" />
+					<param name="snippet-start-offset" value="1" />
+				</macro>
+							
 				<h3>Wave Type</h3>
 				<p>The wave type is where black magic resides. It defines a contract between the emitter (the one who creates the wave) and the receiver (the one
 					who handles the waves).</p>
