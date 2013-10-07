@@ -51,7 +51,7 @@ public class WaveItem<T> {
      * 
      * Set the name to null and the the isParameter flag to true
      */
-    public WaveItem() {
+    protected WaveItem() {
         this(null, true);
     }
 
@@ -62,7 +62,7 @@ public class WaveItem<T> {
      * 
      * @param name the unique name of this wave item
      */
-    public WaveItem(final String name) {
+    protected WaveItem(final String name) {
         this(name, true);
     }
 
@@ -73,7 +73,7 @@ public class WaveItem<T> {
      * 
      * @param isParameter the flag that indicates if this WaveItem must be considered by wave handlers
      */
-    public WaveItem(final boolean isParameter) {
+    protected WaveItem(final boolean isParameter) {
         this(null, isParameter);
     }
 
@@ -83,7 +83,7 @@ public class WaveItem<T> {
      * @param name the unique name of this wave item
      * @param isParameter the flag that indicates if this WaveItem must be considered by wave handlers
      */
-    public WaveItem(final String name, final boolean isParameter) {
+    protected WaveItem(final String name, final boolean isParameter) {
         this.itemType = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
         setParameter(isParameter);
