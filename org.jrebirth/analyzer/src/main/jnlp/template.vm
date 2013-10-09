@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jnlp spec="1.0+" xmlns:jfx="http://javafx.com"  href="JRebirthAnalyzer.jnlp"> <!-- codebase="http://www.jrebirth.org/analyzer" -->
+<jnlp spec="1.0+" xmlns:jfx="http://javafx.com" codebase="$jnlpCodebase" href="$outputFile" >
 	<information>
 		<title>${project.name}</title>
 		<vendor>Sébastien Bordes</vendor>
@@ -27,7 +27,7 @@
 	</resources>
 	
 	<applet-desc  width="1024" height="768" main-class="com.javafx.main.NoJavaFXFallback"  name="${project.name}" />
-	<jfx:javafx-desc  width="1024" height="768" main-class="$mainClass"  name="${project.name}" />
+	<jfx:javafx-desc  width="1024" height="768" preloader-class="$preloaderClass" main-class="$mainClass"  name="${project.name}" />
 	
 <!--
 
