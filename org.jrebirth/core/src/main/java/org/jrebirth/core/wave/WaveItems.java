@@ -5,7 +5,7 @@ package org.jrebirth.core.wave;
  * 
  * @author Sébastien Bordes
  */
-public enum WaveItems implements IWaveItem {
+public enum WaveItems implements WaveItemEnum {
 
     /** . */
     resourceName(new WaveItem<String>() {
@@ -25,7 +25,7 @@ public enum WaveItems implements IWaveItem {
      * @param wi the wave item to initialize
      */
     private WaveItems(final WaveItem<?> wi) {
-        WaveItem.init(this, wi);
+        WaveItem.initEnum(this, wi);
     }
 
 }
