@@ -49,7 +49,6 @@ import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.resource.provided.JRebirthStyles;
 import org.jrebirth.core.resource.style.StyleSheetItem;
 import org.jrebirth.core.util.ClassUtility;
-import org.jrebirth.preloader.MessageNotification;
 
 /**
  * 
@@ -92,27 +91,24 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         try {
             super.init();
 
-            notifyPreloader(new MessageNotification("Initialisation", this));
+            notifyPreloader(new ProgressNotification(0.1));
 
-            preInit();
-
-            notifyPreloader(new MessageNotification("Loading Messages Properties", this));
+            notifyPreloader(new ProgressNotification(100));
+            preInit();// 200 , 300
+            notifyPreloader(new ProgressNotification(0.3));
 
             // Load messages Files
+            notifyPreloader(new ProgressNotification(400));
             loadMessagesFiles();
-
-            notifyPreloader(new ProgressNotification(80.0 / 100));
-
-            notifyPreloader(new MessageNotification("Loading Parameters Properties", this));
+            notifyPreloader(new ProgressNotification(0.4));
 
             // Load configuration Files
+            notifyPreloader(new ProgressNotification(500));
             loadConfigurationFiles();
-
-            notifyPreloader(new ProgressNotification(90.0 / 100));
-
-            notifyPreloader(new MessageNotification("Preparing Core Engine", this));
+            notifyPreloader(new ProgressNotification(0.5));
 
             // Build the JRebirth Thread before attaching uncaught Exception Handler
+            notifyPreloader(new ProgressNotification(600));
             final JRebirthThread jrt = JRebirthThread.getThread();
 
             // Attach exception handlers
@@ -121,14 +117,17 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             // Start the JRebirthThread, if an error occurred it will be processed by predefined handler
             // It will create all facades and trigger the pre and post boot waves and will alost attach the first model view
             jrt.prepare(this);
+            notifyPreloader(new ProgressNotification(0.6));
 
-            notifyPreloader(new MessageNotification("Preloading Fonts", this));
             // Preload fonts to allow them to be used by CSS
+            notifyPreloader(new ProgressNotification(700));
             preloadFonts();
+            notifyPreloader(new ProgressNotification(0.7));
 
-            postInit();
+            postInit();// 800 , 900
 
-            notifyPreloader(new MessageNotification("Starting", this));
+            notifyPreloader(new ProgressNotification(1000));
+            notifyPreloader(new ProgressNotification(1.0));
 
         } catch (final Exception e) {
             LOGGER.error(ApplicationMessages.INIT_ERROR, e, this.getClass().getSimpleName());
