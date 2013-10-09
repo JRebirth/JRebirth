@@ -23,7 +23,7 @@ import java.lang.reflect.Type;
 /**
  * The class <strong>WaveItem</strong>.
  * 
- * Wave item is used to identify an object into a wave.
+ * Wave item is used to identify an object into a wave or a parameter.
  * 
  * @author Sébastien Bordes
  * 
@@ -43,7 +43,7 @@ public class WaveItem<T> {
     /** The WaveItem unique name. */
     private String name;
 
-    /** Flag that indicates if the WaveItem muste be considered as a method parameter. */
+    /** Flag that indicates if the WaveItem must be considered as a method parameter. */
     private boolean isParameter;
 
     /**
@@ -182,17 +182,6 @@ public class WaveItem<T> {
     }
 
     /**
-     * Initialize a WaveItem for a WaveItems.
-     * 
-     * @param waveItems the enum wave item
-     * @param wi the real waveItem
-     */
-    public static void init(final WaveItems waveItems, final WaveItem<?> wi) {
-        wi.setName(waveItems.toString());
-
-    }
-
-    /**
      * Set the name (optionally).
      * 
      * @param name the name to set
@@ -213,6 +202,16 @@ public class WaveItem<T> {
      */
     public void setParameter(final boolean isParameter) {
         this.isParameter = isParameter;
+    }
+
+    /**
+     * Initialize a WaveItem for a WaveItems.
+     * 
+     * @param waveItemEnum the enumerated wave item
+     * @param wi the real waveItem
+     */
+    public static void initEnum(final WaveItemEnum waveItemEnum, final WaveItem<?> wi) {
+        wi.setName(waveItemEnum.name());
     }
 
 }
