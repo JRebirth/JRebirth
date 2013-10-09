@@ -33,8 +33,6 @@ import org.jrebirth.core.service.ServiceTask;
  */
 public interface JRebirthWaves {
 
-    // WaveItem<ObjectProperty<Node>> HHH = WaveItem.build(ObjectProperty.class, Node.class);
-
     /** The waveItem that hold the attached node. */
     WaveItem<ObjectProperty<Node>> ATTACH_UI_NODE_PLACEHOLDER = new WaveItem<ObjectProperty<Node>>() {
     };
@@ -64,15 +62,15 @@ public interface JRebirthWaves {
     /** The waveType used to hide a view. */
     WaveType HIDE_VIEW = WaveTypeBase.build("HIDE_VIEW");
 
-    /******************************/
+    /********************************/
     /** WaveType related to Service */
-    /******************************/
+    /********************************/
 
-    /** . */
+    /** This wave item will be used only into a WaveData to pass the current Service task handled by the wave. */
     WaveItem<ServiceTask<?>> SERVICE_TASK = new WaveItem<ServiceTask<?>>(false) {
     };
 
-    /** . */
+    /** This wave item will be used only into a WaveData to pass the right progress bar used by service task. */
     WaveItem<ProgressBar> PROGRESS_BAR = new WaveItem<ProgressBar>(false) {
     };
 }
