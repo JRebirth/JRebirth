@@ -13,4 +13,11 @@ public interface JRebirthRunnable extends Runnable {
      * @return the runnable priority
      */
     RunnablePriority getPriority();
+
+    /**
+     * Return the creation time.
+     * 
+     * @return the creation time in milliseconds
+     */
+    long getCreationTime();
 }

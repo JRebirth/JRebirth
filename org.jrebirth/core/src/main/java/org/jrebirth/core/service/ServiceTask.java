@@ -20,6 +20,7 @@ package org.jrebirth.core.service;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javafx.concurrent.Task;
@@ -79,6 +80,9 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
     /** The runnable priority. */
     private final RunnablePriority priority;
 
+    /** The creation timestamp in milliseconds. */
+    private final long creationTime;
+
     /**
      * Default Constructor only visible by service package.
      * 
@@ -89,6 +93,9 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
      */
     ServiceTask(final Service service, final Method method, final Object[] parameterValues, final Wave wave) {
         super();
+
+        this.creationTime = Calendar.getInstance().getTimeInMillis();
+
         this.service = service;
         this.method = method;
         this.parameterValues = parameterValues.clone();
@@ -254,6 +261,14 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
     @Override
     public RunnablePriority getPriority() {
         return this.priority;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long getCreationTime() {
+        return this.creationTime;
     }
 
 }

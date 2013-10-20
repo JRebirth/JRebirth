@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.concurrent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -39,6 +41,8 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(JRebirthThreadPoolExecutor.class);
 
+    private final List<JRebirthRunnable> pending = new ArrayList<>();
+
     /**
      * Default Constructor.
      * 
@@ -50,12 +54,50 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
                 threadFactory);
     }
 
+    public boolean checkAvailability(final RunnablePriority taskPriority) {
+
+        // The next task could be added if:
+        // _ a slot is available
+        // _ the task has a lower priority than current executed
+
+        return getActiveCount() < getCorePoolSize() || checkPriority(taskPriority);
+    }
+
+    private boolean checkPriority(final RunnablePriority taskPriority) {
+        boolean highPriority = false;
+        for (final JRebirthRunnable jr : this.pending) {
+            highPriority |= taskPriority.getLevel() > jr.getPriority().getLevel();
+        }
+        return !highPriority;
+    }
+
+    /**
+     * 
+     */
+    public void execute(final JRebirthRunnable task) {
+        super.execute(task);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void beforeExecute(final Thread t, final Runnable r) {
+
+        this.pending.add((JRebirthRunnable) r);
+
+        super.beforeExecute(t, r);
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     protected void afterExecute(final Runnable r, final Throwable t) {
         super.afterExecute(r, t);
+
+        this.pending.remove(r);
+
         Throwable rootCause = null;
         if (t == null && r instanceof Future<?>) {
             try {

@@ -17,8 +17,6 @@
  */
 package org.jrebirth.core.facade;
 
-import java.util.concurrent.ExecutorService;
-
 import org.jrebirth.core.application.AbstractApplication;
 import org.jrebirth.core.application.JRebirthApplication;
 import org.jrebirth.core.concurrent.JRebirthThreadPoolExecutor;
@@ -45,6 +43,9 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
     /** The JRebirth Thread Pool base name [JTP]. */
     public static final String JTP_BASE_NAME = "JTP Slot ";
 
+    /** The High Priority Thread Pool base name [HPTP]. */
+    public static final String HPTP_BASE_NAME = "HPTP Slot ";
+
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(GlobalFacadeBase.class);
 
@@ -67,7 +68,10 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
     private final transient CommandFacade commandFacade;
 
     /** The default executor. */
-    private final ExecutorService executorService;
+    private final JRebirthThreadPoolExecutor executorService;
+
+    /** The high priority executor used only for most important runnable. */
+    private final JRebirthThreadPoolExecutor highPriorityExecutorService;
 
     /** The index of JRebirth events. */
     private int eventSequence;
@@ -98,6 +102,10 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
         // Launch the default executor
         this.executorService = new JRebirthThreadPoolExecutor(Runtime.getRuntime().availableProcessors() * 2,
                 new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(), JTP_BASE_NAME));
+
+        // Launch the High Priority executor
+        this.highPriorityExecutorService = new JRebirthThreadPoolExecutor(Runtime.getRuntime().availableProcessors() * 2,
+                new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(), HPTP_BASE_NAME));
 
         trackEvent(JRebirthEventType.CREATE_GLOBAL_FACADE, getApplication().getClass(), this.getClass());
 
@@ -184,8 +192,16 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      * {@inheritDoc}
      */
     @Override
-    public ExecutorService getExecutorService() {
+    public JRebirthThreadPoolExecutor getExecutorService() {
         return this.executorService;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JRebirthThreadPoolExecutor getHighPriorityExecutorService() {
+        return this.highPriorityExecutorService;
     }
 
     /**
@@ -200,6 +216,11 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
         // Stop the thread pool
         if (getExecutorService() != null) {
             getExecutorService().shutdown();
+        }
+
+        // Stop the high priority thread pool
+        if (getHighPriorityExecutorService() != null) {
+            getHighPriorityExecutorService().shutdown();
         }
     }
 

@@ -19,7 +19,7 @@ package org.jrebirth.core.concurrent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javafx.scene.Scene;
@@ -64,14 +64,8 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
     /** The javaFX application that launch this thread. */
     private transient JRebirthApplication<?> application;
 
-    /** The list of tasks to execute, all access MUST BE synchronized. */
-    // private final List<Runnable> tasks;
-
-    /** The list of tasks queued waiting to be processed, all access MUST BE synchronized. */
-    private final List<Runnable> queuedTasks;
-
     /** The list of tasks being processed, all access MUST BE synchronized. */
-    private final List<Runnable> processingTasks;
+    private final PriorityBlockingQueue<JRebirthRunnable> processingTasks;
 
     /** Flag indicating that current thread has started and is ready to process events. */
     private final AtomicBoolean hasStarted = new AtomicBoolean(false);
@@ -94,8 +88,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         setDaemon(true);
 
         // Initialize the queue
-        this.queuedTasks = new ArrayList<>();
-        this.processingTasks = new ArrayList<>();
+        this.processingTasks = new PriorityBlockingQueue<JRebirthRunnable>(10, new JRebirthRunnableComparator());
     }
 
     /**
@@ -106,10 +99,16 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
      * 
      * @param runnable the task to run
      */
-    @SuppressWarnings("unchecked")
     public void runIntoJTP(final JRebirthRunnable runnable) {
-        final Future<Void> future = (Future<Void>) getFacade().getExecutorService().submit(runnable);
-        LOGGER.log(JTP_QUEUED, future.hashCode());
+
+        if (getFacade().getExecutorService().checkAvailability(runnable.getPriority())) {
+            getFacade().getExecutorService().execute(runnable);
+            LOGGER.log(JTP_QUEUED, runnable.toString());
+        } else {
+            getFacade().getHighPriorityExecutorService().execute(runnable);
+            LOGGER.log(HPTP_QUEUED, runnable.toString());
+        }
+
     }
 
     /**
@@ -118,11 +117,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
      * @param runnable the task to run
      */
     public void runLater(final JRebirthRunnable runnable) {
-        // Synchronize the queue !
-        synchronized (this.queuedTasks) {
-            this.queuedTasks.notifyAll();
-            this.queuedTasks.add(runnable);
-        }
+        this.processingTasks.add(runnable);
     }
 
     /**
@@ -156,8 +151,6 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
     @Override
     public void run() {
 
-        // this.application.preloadFonts();
-
         manageStyleSheetReloading(this.application.getScene());
 
         // Attach the first view and run pre and post command
@@ -172,49 +165,12 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
         while (this.infiniteLoop.get()) {
             try {
-
-                // Need to sort tasks to launch by priority
-                // Collections.sort(tasks);
-
-                // Synchronize the re-copy operation
-                synchronized (this.queuedTasks) {
-                    // Copy enqueued tasks into processing list to run them
-                    this.processingTasks.addAll(this.queuedTasks);
-                    // Purge the current queue
-                    this.queuedTasks.clear();
+                if (!this.forceClose.get()) {
+                    this.processingTasks.take().run();
                 }
-
-                // Synchronize the queue !
-                synchronized (this.processingTasks) {
-
-                    // Run all tasks that are waiting to be processed
-                    for (final Runnable r : this.processingTasks) {
-                        if (!this.forceClose.get()) {
-                            r.run();
-                        }
-                    }
-                    // Remove all task processed
-                    this.processingTasks.clear();
-                }
-
-                synchronized (this.queuedTasks) {
-                    // Pause this thread during 20ms to let other thread adding some
-                    // task into the queue
-                    // Thread.sleep(20);
-
-                    if (this.queuedTasks.size() == 0) {
-                        // Pause the JRebirth Thread no more than 500ms
-                        // it will be woke up if any task is added to the queue
-                        // Obviously if a task has been added during the unqueue of the processingTask queue,
-                        // the waiting is canceled
-                        this.queuedTasks.wait(500);
-                    }
-                }
-
             } catch (final InterruptedException e) {
                 LOGGER.error(JIT_ERROR, e);
             }
-
         }
         // Shutdown the application more properly
         shutdown();
@@ -301,7 +257,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
             this.forceClose.set(true);
 
             // All Task Queues are cleared
-            this.queuedTasks.clear();
+            // this.queuedTasks.clear();
             this.processingTasks.clear();
         }
 
@@ -336,7 +292,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
     @SuppressWarnings("unchecked")
     protected Wave getLaunchFirstViewWave() {
         Wave firstWave = null;
-        // Generates the command cave directly to win a Wave turn
+        // Generates the command wave directly to win a Wave cycle
         if (this.application != null && this.application.getRootNode() != null && this.application.getFirstModelClass() != null) {
             firstWave = ShowModelWaveBuilder.create()
                     .childrenPlaceHolder(this.application.getRootNode().getChildren())
