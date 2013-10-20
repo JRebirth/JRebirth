@@ -241,7 +241,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
                     if (waveHandler.getWaveReady() instanceof Model) {
                         JRebirth.runIntoJAT(LoopBuilder.newRunnable(waveHandler.getWaveReady(), wave));
                     } else {
-                        // Otherwise can perform it right now into the current thread (JRebirthThread)
+                        // Otherwise can perform it right now into the current thread (JRebirthThread - JIT)
                         waveHandler.getWaveReady().handle(wave);
                     }
                 }

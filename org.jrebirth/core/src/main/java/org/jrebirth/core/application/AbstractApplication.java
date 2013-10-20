@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.application.Preloader;
 import javafx.application.Preloader.ProgressNotification;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -30,6 +31,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import com.sun.javafx.application.LauncherImpl;
 
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
@@ -49,6 +52,7 @@ import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.resource.provided.JRebirthStyles;
 import org.jrebirth.core.resource.style.StyleSheetItem;
 import org.jrebirth.core.util.ClassUtility;
+import org.jrebirth.preloader.JRebirthPreloader;
 
 /**
  * 
@@ -81,6 +85,42 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
     /** The root node of the scene built by reflection. */
     private transient P rootNode;
+
+    /**
+     * TODO To complete.
+     * 
+     * @param args
+     */
+    protected static void preloadAndLaunch(final String... args) {
+        preloadAndLaunch(ClassUtility.getClassFromStaticMethod(3), JRebirthPreloader.class, args);
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param args
+     */
+    protected static void preloadAndLaunch(final Class<? extends Application> appClass, final Class<? extends Preloader> preloaderClass, final String... args) {
+        LauncherImpl.launchApplication(appClass, preloaderClass, args);
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param args
+     */
+    protected static void launchNow(final String... args) {
+        launchNow(ClassUtility.getClassFromStaticMethod(3), args);
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param args
+     */
+    protected static void launchNow(final Class<? extends Application> appClass, final String... args) {
+        Application.launch(appClass, args);
+    }
 
     /**
      * {@inheritDoc}

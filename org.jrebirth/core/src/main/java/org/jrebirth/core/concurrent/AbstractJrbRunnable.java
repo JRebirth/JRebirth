@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.concurrent;
 
+import java.util.Calendar;
+
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.log.JRLogger;
 import org.jrebirth.core.log.JRLoggerFactory;
@@ -37,6 +39,9 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
     /** The runnable priority. */
     private final RunnablePriority priority;
 
+    /** The creation timestamp in milliseconds. */
+    private final long creationTime;
+
     /**
      * Default Constructor.
      * 
@@ -53,8 +58,12 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
      * @param priority the runnable priority
      */
     public AbstractJrbRunnable(final String runnableName, final RunnablePriority priority) {
+
+        this.creationTime = Calendar.getInstance().getTimeInMillis();
+
         this.runnableName = runnableName;
         this.priority = priority;
+
     }
 
     /**
@@ -94,6 +103,14 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
     @Override
     public RunnablePriority getPriority() {
         return this.priority;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long getCreationTime() {
+        return this.creationTime;
     }
 
 }
