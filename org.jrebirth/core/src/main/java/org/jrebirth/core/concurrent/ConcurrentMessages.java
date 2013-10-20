@@ -42,8 +42,11 @@ public interface ConcurrentMessages extends MessageContainer {
     /** "Thread error : {0} ". */
     MessageItem THREAD_ERROR = create(new LogMessage("jrebirth.concurrent.threadError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
 
-    /** "Runnable submitted with hashCode={}" . */
+    /** "Runnable submitted to JTP with hashCode={}" . */
     MessageItem JTP_QUEUED = create(new LogMessage("jrebirth.concurrent.jtpQueued", JRLevel.Trace, JRebirthMarkers.CONCURRENT));
+
+    /** "Runnable submitted to HPTP with hashCode={}" . */
+    MessageItem HPTP_QUEUED = create(new LogMessage("jrebirth.concurrent.hptpQueued", JRLevel.Trace, JRebirthMarkers.CONCURRENT));
 
     /** "An exception occurred during JRebirth BootUp" . */
     MessageItem BOOT_UP_ERROR = create(new LogMessage("jrebirth.concurrent.bootUpError", JRLevel.Error, JRebirthMarkers.CONCURRENT));

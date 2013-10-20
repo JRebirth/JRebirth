@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javafx.application.Application;
+
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.log.JRLogger;
 import org.jrebirth.core.log.JRLoggerFactory;
@@ -372,6 +374,14 @@ public final class ClassUtility implements UtilMessages {
             LOGGER.log(NO_ANNOTATION_PROPERTY_VALUE, e, attributeName);
         }
         return object;
+    }
+
+    public static Class<? extends Application> getClassFromStaticMethod(final int classDeepLevel) {
+        try {
+            return (Class<? extends Application>) Class.forName(Thread.currentThread().getStackTrace()[classDeepLevel].getClassName());
+        } catch (final ClassNotFoundException e) {
+            return null;
+        }
     }
 
 }
