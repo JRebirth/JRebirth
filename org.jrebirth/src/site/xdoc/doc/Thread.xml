@@ -22,6 +22,14 @@
 
 	<body>
 
+        <div class="toc">
+            <macro name="toc">
+                <param name="section" value="0"/>
+                <param name="fromDepth" value="0"/>
+                <param name="toDepth" value="3"/>
+            </macro>
+        </div>
+
 		<section name="Thread Management" title="Thread Management">
 
 			<div id="catcherTitle">Thread Management</div>
@@ -194,18 +202,19 @@
 				</ul>
 			</subsection>
 
-
-			<div class="bottomLinks">
-				<div class="previousDocPage">
-					<a href="Application.html">Create your first Application</a>
-				</div>
-				<div class="nextDocPage">
-					<a href="Logging.html">Configure Logging System</a>
-				</div>
-				<div class="tocDocPage">
-					<a href="index.html">TOC</a>
-				</div>
-			</div>
 		</section>
+
+        <div class="bottomLinks">
+            <div class="previousDocPage">
+                <a href="Application.html">Create your first Application</a>
+            </div>
+            <div class="nextDocPage">
+                <a href="Logging.html">Configure Logging System</a>
+            </div>
+            <div class="tocDocPage">
+                <a href="Toc.html">TOC</a>
+            </div>
+        </div>
+
 	</body>
 </document> 	
