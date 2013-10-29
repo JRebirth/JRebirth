@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.util;
 
+import java.util.Locale;
+
 /**
  * The class <strong>ObjectUtility</strong>.
  * 
@@ -56,6 +58,16 @@ public final class ObjectUtility {
      */
     public static boolean notEquals(final Object object1, final Object object2) {
         return object1 != null && !object1.equals(object2) || object1 == null && object2 != null;
+    }
+
+    /**
+     * Lower case te first char of a string.
+     *
+     * @param upperCasedString the string to modify
+     * @return a new string with a first character lower cased
+     */
+    public static String lowerFirstChar(String upperCasedString){
+        return upperCasedString.substring(0, 1).toLowerCase(Locale.getDefault()) + upperCasedString.substring(1);
     }
 
 }
