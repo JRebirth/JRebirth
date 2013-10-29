@@ -1,19 +1,17 @@
 package org.jrebirth.sample;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import org.jrebirth.core.application.DefaultApplication;
 import org.jrebirth.core.resource.font.FontItem;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.sample.resources.SampleFonts;
 import org.jrebirth.sample.resources.SampleStyles;
 import org.jrebirth.sample.ui.SampleModel;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The class <strong>SampleApplication</strong>.
@@ -28,7 +26,7 @@ public final class SampleApplication extends DefaultApplication<StackPane> {
      * @param args the command line arguments
      */
     public static void main(final String... args) {
-        Application.launch(SampleApplication.class, args);
+        preloadAndLaunch(args);
     }
 
     /**

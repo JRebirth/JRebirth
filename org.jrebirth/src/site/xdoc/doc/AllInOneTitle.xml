@@ -1,0 +1,19 @@
+<!DOCTYPE document [
+  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
+  <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+  %HTMLlat1;
+  <!-- These are the entity sets for special characters for the XHTML -->
+  <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+  %HTMLsymbol;
+  <!-- These are the entity sets for symbol characters for the XHTML -->
+  <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+  %HTMLspecial;
+]>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>JRebirth Documentation</title>
+	</properties>
+	<head></head>
+	<body></body>
+</document> 	
