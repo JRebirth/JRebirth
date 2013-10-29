@@ -35,11 +35,12 @@ public class MessageNotification implements PreloaderNotification {
      * Instantiates a new message notification.
      * 
      * @param message the message
-     * @param application the application
+     * @param application the application that triggers this message
      */
     public MessageNotification(final String message, final Application application) {
         super();
         this.message = message;
+        this.application = application;
     }
 
     /**

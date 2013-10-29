@@ -36,6 +36,9 @@ public interface UtilMessages extends MessageContainer {
 
     /** CheckerUtility. */
 
+    /** "{0} must have a method => void {1} ({2}, Wave wave)\{\}". */
+    MessageItem WAVE_HANDLER_METHOD_REQUIRED = create(new LogMessage("jrebirth.util.waveHandlerMethodRequired", JRLevel.Error, JRebirthMarkers.UTIL));
+
     /** "{0} API is broken, no method {1} is available". */
     MessageItem BROKEN_API_NO_METHOD = create(new LogMessage("jrebirth.util.brokenApiNoMethod", JRLevel.Error, JRebirthMarkers.UTIL));
 
