@@ -17,10 +17,7 @@
  */
 package org.jrebirth.core.application;
 
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.net.URL;
-import java.util.List;
-
+import com.sun.javafx.application.LauncherImpl;
 import javafx.application.Application;
 import javafx.application.Preloader;
 import javafx.application.Preloader.ProgressNotification;
@@ -31,9 +28,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import com.sun.javafx.application.LauncherImpl;
-
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.concurrent.JRebirthThread;
@@ -53,6 +47,10 @@ import org.jrebirth.core.resource.provided.JRebirthStyles;
 import org.jrebirth.core.resource.style.StyleSheetItem;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.preloader.JRebirthPreloader;
+
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.net.URL;
+import java.util.List;
 
 /**
  * 
@@ -87,36 +85,49 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     private transient P rootNode;
 
     /**
-     * TODO To complete.
+     * Launch the Current JavaFX Application with Default JRebirth preloader.
      * 
-     * @param args
+     * @param args arguments passed to java command line
      */
     protected static void preloadAndLaunch(final String... args) {
         preloadAndLaunch(ClassUtility.getClassFromStaticMethod(3), JRebirthPreloader.class, args);
     }
 
     /**
-     * TODO To complete.
-     * 
-     * @param args
+     * Launch the Current JavaFX Application with given preloader.
+     *
+     * @param preloaderClass the preloader class used as splash screen with progress
+     * @param args arguments passed to java command line
+     */
+    protected static void preloadAndLaunch(final Class<? extends Preloader> preloaderClass, final String... args) {
+        preloadAndLaunch(ClassUtility.getClassFromStaticMethod(3), preloaderClass, args);
+    }
+
+    /**
+     * Launch the given JavaFX Application with given preloader.
+     *
+     * @param appClass the JavaFX application class to launch
+     * @param preloaderClass the preloader class used as splash screen with progress
+     * @param args arguments passed to java command line
      */
     protected static void preloadAndLaunch(final Class<? extends Application> appClass, final Class<? extends Preloader> preloaderClass, final String... args) {
         LauncherImpl.launchApplication(appClass, preloaderClass, args);
     }
 
     /**
-     * TODO To complete.
+     * Launch the Current JavaFX Application (without any preloader).
      * 
-     * @param args
+     * @param args arguments passed to java command line
      */
     protected static void launchNow(final String... args) {
         launchNow(ClassUtility.getClassFromStaticMethod(3), args);
     }
 
     /**
-     * TODO To complete.
-     * 
-     * @param args
+     * Launch the Given JavaFX Application (without any preloader).
+     *
+     * @param appClass the JavaFX application class to launch
+     * @param args arguments passed to java command line
      */
     protected static void launchNow(final Class<? extends Application> appClass, final String... args) {
         Application.launch(appClass, args);
@@ -125,7 +136,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     /**
      * {@inheritDoc}
      */
-    // @Override
     @Override
     public final void init() throws CoreException {
         try {

@@ -17,10 +17,11 @@
  */
 package org.jrebirth.core.wave;
 
+import org.jrebirth.core.resource.provided.JRebirthParameters;
+import org.jrebirth.core.util.ObjectUtility;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.jrebirth.core.resource.provided.JRebirthParameters;
 
 /**
  * The class <strong>WaveTypeBase</strong>.
@@ -131,6 +132,30 @@ public final class WaveTypeBase implements WaveType {
      */
     public List<WaveItem<?>> getWaveItemList() {
         return this.waveItemList;
+    }
+
+    /**
+     * Return the required method parameter list to handle this WaveType.
+     *
+     * @return the parameter list (Type1 arg1, Type2 arg2 ...)
+     */
+    public String getItems(){
+        StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        for(WaveItem<?> waveItem: getWaveItemList()){
+            if(first){
+                first=false;
+            }else{
+                sb.append(", ");
+            }
+            sb.append(waveItem.getItemType().getClass().getSimpleName()).append(" ");
+            if(waveItem.getName() == null || waveItem.getName().isEmpty()){
+                sb.append(ObjectUtility.lowerFirstChar(waveItem.getItemType().getClass().getSimpleName()));
+            }else{
+                sb.append(waveItem.getName());
+            }
+        }
+        return sb.toString();
     }
 
     /**
