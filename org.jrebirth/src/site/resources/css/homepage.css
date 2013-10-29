@@ -94,6 +94,7 @@ div#download a {
 }
 
 div#download ul{
+    list-style-image: none;
 	padding:0;
 }
 div#download ul li{
