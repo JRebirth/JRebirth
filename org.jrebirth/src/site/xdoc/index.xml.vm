@@ -66,10 +66,12 @@
 			</h1>
 
 			<ul>
+                <li>
+                    <a name="Oss.JFrog.Org" href="https://oss.jfrog.org/repo/org/jrebirth/">Get It from OJO</a>
+                </li>
 				<li>
-					<a href="http://jcenter.bintray.com/org/jrebirth">Get It from JCenter</a>
+					<a name="JCenter" href="http://jcenter.bintray.com/org/jrebirth">Get It from JCenter</a>
 				</li>
-
 				<li>
 					<a href="http://apps.jrebirth.org/org.jrebirth/JRebirth-${project.version}.tar.gz">JRebirth ${project.version} .tar.gz</a>
 				</li>

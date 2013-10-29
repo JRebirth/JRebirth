@@ -3,6 +3,38 @@
 Release Notes
 ==============
 
+0.7.6 - ["Testarossa Autodrive"](https://www.youtube.com/watch?v=YWIX3UuWdxo‎) Release - 2013-11-30
+-----------------------------------------
+
+This version provides several threading enhancements.
+
+- WaveItem is now an abstract class [#79](https://github.com/JRebirth/JRebirth/issues/79)<br/>
+ It forces the addition of brackets to define a nested class, thanks to Christophe from dooApp.
+
+
+- Add a second Thread Pool [#77](https://github.com/JRebirth/JRebirth/issues/77)<br/>
+ The second Thread Pool is named HPTP (High Priority Thread Pool). It will run jobs taht have an higher priority
+ than those currently running into all JTP slots
+
+
+- Manage Runnable Priority [#76](https://github.com/JRebirth/JRebirth/issues/76)<br/>
+  All Command and ServiceTask are now supporting Priority by using @RunInto and @Priority annotations
+  or dedicated constructor.
+
+- Improve JIT enhancement [#45](https://github.com/JRebirth/JRebirth/issues/45)<br/>
+ JRebirth Internal Thread has been improved to reduced waiting and sleeping time in order to be more reactive and support Task Priority.
+
+
+- Add JRebirth Preloader [#29](https://github.com/JRebirth/JRebirth/issues/29)<br/>
+ A module has been added to show a JRebirth preloader splash when launching application with Java WebStart
+ It's also possible to call the preloader programmatically by calling the preloadAndLaunch method.
+
+
+- Provide concise UI view [#9](https://github.com/JRebirth/JRebirth/issues/9)<br/>
+ This issue was fixed in a previous released by adding AbstractSimpleModel class.
+
+
+
 0.7.5 - ["Aerodynamite"](https://www.youtube.com/watch?v=9FMDb6PBpIM) Release - 2013-09-30
 -----------------------------------------
 

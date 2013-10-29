@@ -31,7 +31,7 @@ public final class SampleApplication extends DefaultApplication<StackPane> {
      * @param args the command line arguments
      */
     public static void main(final String... args) {
-        Application.launch(SampleApplication.class, args);
+        preloadAndLaunch(args);
     }
 
     /**

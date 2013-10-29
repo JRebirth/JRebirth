@@ -1,7 +1,6 @@
 package org.jrebirth.core.application;
 
 import javafx.scene.layout.Pane;
-
 import org.jrebirth.core.ui.Model;
 
 /**
@@ -10,6 +9,7 @@ import org.jrebirth.core.ui.Model;
  * @author Sébastien Bordes
  */
 @Configuration
+@Localized
 public class NullConfApplication extends DefaultApplication<Pane> {
 
     /**

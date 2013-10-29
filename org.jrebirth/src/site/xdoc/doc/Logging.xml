@@ -21,6 +21,14 @@
 	</head>
 	<body>
 
+        <div class="toc">
+            <macro name="toc">
+                <param name="section" value="0"/>
+                <param name="fromDepth" value="0"/>
+                <param name="toDepth" value="3"/>
+            </macro>
+        </div>
+
 		<section name="Logging">
 
 			<div id="catcherTitle">To log or not to log !</div>
@@ -125,19 +133,26 @@
 
 			</subsection>
 
-			<div class="bottomLinks">
-				<div class="previousDocPage">
-					<a href="Thread.html">Thread Management</a>
-				</div>
-				<div class="nextDocPage">
-					<a href="Facades.html">How Facades work</a>
-				</div>
-				<div class="tocDocPage">
-					<a href="index.html">TOC</a>
-				</div>
-			</div>
-
 		</section>
+
+        <section name="JRebirth Logs">
+
+            <p>All JRebirth logs used an internationalized engine allowing us to provide extensible log message.</p>
+
+        </section>
+
+
+        <div class="bottomLinks">
+            <div class="previousDocPage">
+                <a href="Thread.html">Thread Management</a>
+            </div>
+            <div class="nextDocPage">
+                <a href="Facades.html">How Facades work</a>
+            </div>
+            <div class="tocDocPage">
+                <a href="Toc.html">TOC</a>
+            </div>
+        </div>
 
 	</body>
 </document> 	
