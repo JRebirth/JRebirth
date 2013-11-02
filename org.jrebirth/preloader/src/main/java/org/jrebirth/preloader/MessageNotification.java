@@ -29,7 +29,7 @@ public class MessageNotification implements PreloaderNotification {
     private final String message;
 
     /** The application. */
-    private Application application;
+    private final Application application;
 
     /**
      * Instantiates a new message notification.
