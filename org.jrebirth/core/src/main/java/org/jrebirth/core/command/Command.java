@@ -17,7 +17,7 @@
  */
 package org.jrebirth.core.command;
 
-import org.jrebirth.core.facade.FacadeReady;
+import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
 
@@ -26,7 +26,7 @@ import org.jrebirth.core.wave.WaveBean;
  * 
  * @author Sébastien Bordes
  */
-public interface Command extends FacadeReady<Command> {
+public interface Command extends WaveReady<Command> {
 
     /**
      * Run the command.

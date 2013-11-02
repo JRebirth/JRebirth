@@ -30,7 +30,6 @@ import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.WaveException;
-import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.log.JRLogger;
@@ -61,7 +60,7 @@ import org.jrebirth.core.wave.checker.WaveChecker;
  * 
  * @param <R> the class type of the subclass
  */
-public abstract class AbstractWaveReady<R extends FacadeReady<R>> extends AbstractReady<R> implements WaveReady, LinkMessages {
+public abstract class AbstractWaveReady<R extends WaveReady<R>> extends AbstractReady<R> implements WaveReady<R>, LinkMessages {
 
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractWaveReady.class);

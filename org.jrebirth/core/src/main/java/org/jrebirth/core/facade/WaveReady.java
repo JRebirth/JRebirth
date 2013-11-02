@@ -17,13 +17,8 @@
  */
 package org.jrebirth.core.facade;
 
-import org.jrebirth.core.command.Command;
-import org.jrebirth.core.command.CommandBean;
 import org.jrebirth.core.exception.WaveException;
-import org.jrebirth.core.service.Service;
-import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.WaveBean;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveType;
 import org.jrebirth.core.wave.checker.WaveChecker;
@@ -35,7 +30,7 @@ import org.jrebirth.core.wave.checker.WaveChecker;
  * 
  * @author Sébastien Bordes
  */
-public interface WaveReady {
+public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
 
     /**
      * Begin to listen the type of wave for the current component.
@@ -97,32 +92,6 @@ public interface WaveReady {
     Wave sendWave(final WaveType waveType, final WaveData<?>... waveData);
 
     /**
-     * Send a wave used to call a command.
-     * 
-     * The command will be called from JRebirthThread and could execute itself from another thread.
-     * 
-     * @param commandClass the command class to call
-     * @param data the data to transport
-     * 
-     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
-     */
-    Wave callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data);
-
-    /**
-     * Send a wave used to call a command.
-     * 
-     * The command will be called from JRebirthThread and could execute itself from another thread.
-     * 
-     * @param commandClass the command class to call
-     * @param waveBean the WaveBean that holds all required wave data
-     * 
-     * @param <WB> the type of the wave bean to used
-     * 
-     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
-     */
-    <WB extends WaveBean> Wave callCommand(final Class<? extends CommandBean<WB>> commandClass, final WB waveBean);
-
-    /**
      * Return the return wave type.
      * 
      * @param waveType the source wave type
@@ -130,31 +99,6 @@ public interface WaveReady {
      * @return Returns the waveType for return wave.
      */
     WaveType getReturnWaveType(final WaveType waveType);
-
-    /**
-     * Send a wave used to return data from a service.
-     * 
-     * The service will be called from JRebirthThread and could execute itself from another thread.
-     * 
-     * @param serviceClass the service called
-     * @param waveType the type of the wave
-     * @param data the data to transport
-     * 
-     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
-     */
-    Wave returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WaveData<?>... data);
-
-    /**
-     * Send a wave used to display an UI model.
-     * 
-     * The command will be called from JRebirthThread but will execute itself from the JavaFX Application thread.
-     * 
-     * @param modelClass the model class to display
-     * @param data the data to transport
-     * 
-     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
-     */
-    Wave attachUi(final Class<? extends Model> modelClass, final WaveData<?>... data);
 
     /**
      * Process a wave.

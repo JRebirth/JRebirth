@@ -19,6 +19,7 @@ package org.jrebirth.core.facade;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.key.UniqueKey;
+import org.jrebirth.core.link.ModelReady;
 
 /**
  * The interface <strong>FacadeReady</strong>.
@@ -29,7 +30,7 @@ import org.jrebirth.core.key.UniqueKey;
  * 
  * @param <R> A type that implements FacadeReady
  */
-public interface FacadeReady<R extends FacadeReady<R>> extends WaveReady {
+public interface FacadeReady<R extends FacadeReady<R>> extends ModelReady {
 
     /**
      * Launch the initialization of the component.

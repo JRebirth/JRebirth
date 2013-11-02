@@ -6,7 +6,7 @@
     <position height="-1" width="-1" x="207" y="174"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
+      <attributes public="false" package="false" protected="false" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
@@ -15,7 +15,7 @@
     <position height="-1" width="-1" x="631" y="226"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
+      <attributes public="false" package="false" protected="false" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
@@ -24,7 +24,7 @@
     <position height="-1" width="-1" x="1068" y="171"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
+      <attributes public="false" package="false" protected="false" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
@@ -40,7 +40,7 @@
   <class id="5" language="java" name="org.jrebirth.core.ui.LinkedCallback" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/LinkedCallback.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="607" y="1020"/>    
+    <position height="-1" width="-1" x="622" y="1021"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
@@ -59,7 +59,7 @@
   </class>  
   <class id="7" language="java" name="org.jrebirth.core.ui.DefaultModel" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/DefaultModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="281" y="1101"/>    
+    <position height="-1" width="-1" x="297" y="1107"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
@@ -78,10 +78,10 @@
   </class>  
   <interface id="9" language="java" name="org.jrebirth.core.ui.InnerModel" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/InnerModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="594" y="30"/>    
+    <position height="-1" width="-1" x="498" y="26"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
+      <attributes public="false" package="false" protected="false" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </interface>  
@@ -96,7 +96,7 @@
   </class>  
   <class id="11" language="java" name="org.jrebirth.core.ui.AbstractModel" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="292" y="874"/>    
+    <position height="-1" width="-1" x="297" y="807"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
@@ -116,165 +116,163 @@
   <package id="13" language="java" name="org.jrebirth.core.ui" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="80" y="15"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true"/>  
+    <display autosize="true" stereotype="true" accessors="true"/>  
   </package>  
-  <interface id="14" language="java" name="org.jrebirth.core.facade.FacadeReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/FacadeReady.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="251" y="18"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="false" package="false" protected="false" private="false"/>    
-    </display>  
-  </interface>  
-  <interface id="15" language="java" name="javafx.util.Callback" project="org.jrebirth.core" 
-    file="C:/Users/NG1E2B8/Desktop/UsbKey/JRebirth/TOOLS/jdk1.7.0_21/jre/lib/jfxrt.jar" binary="true" 
+  <interface id="14" language="java" name="javafx.util.Callback" project="org.jrebirth.core" 
+    file="C:/Users/ng1e2b8/Desktop/UsbKey/JRebirth/TOOLS/jdk1.7.0_40/jre/lib/jfxrt.jar" binary="true" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="916" y="1028"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
+      <attributes public="false" package="false" protected="false" private="false"/>      
       <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </interface>  
-  <class id="16" language="java" name="org.jrebirth.core.ui.AbstractBaseModel" project="org.jrebirth.core" 
+  <class id="15" language="java" name="org.jrebirth.core.ui.AbstractBaseModel" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractBaseModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="207" y="490"/>    
+    <position height="-1" width="-1" x="216" y="516"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="org.jrebirth.core.ui.object.AbstractObjectModel" project="org.jrebirth.core" 
+  <class id="16" language="java" name="org.jrebirth.core.ui.object.AbstractObjectModel" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/object/AbstractObjectModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="78" y="877"/>    
+    <position height="-1" width="-1" x="94" y="927"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="org.jrebirth.core.ui.object.DefaultObjectModel" project="org.jrebirth.core" 
+  <class id="17" language="java" name="org.jrebirth.core.ui.object.DefaultObjectModel" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/object/DefaultObjectModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="47" y="1087"/>    
+    <position height="-1" width="-1" x="95" y="1113"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="org.jrebirth.core.ui.simple.DefaultSimpleModel" project="org.jrebirth.core" 
+  <class id="18" language="java" name="org.jrebirth.core.ui.simple.DefaultSimpleModel" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/simple/DefaultSimpleModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="468" y="1078"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+    <position height="-1" width="-1" x="482" y="1138"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="org.jrebirth.core.ui.simple.AbstractSimpleModel" project="org.jrebirth.core" 
+  <class id="19" language="java" name="org.jrebirth.core.ui.simple.AbstractSimpleModel" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/simple/AbstractSimpleModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="506" y="772"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+    <position height="-1" width="-1" x="479" y="928"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false"/>      
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
+  <interface id="20" language="java" name="org.jrebirth.core.facade.WaveReady" project="org.jrebirth.core" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/WaveReady.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="238" y="18"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
   <generalization id="21">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
   </generalization>  
-  <generalization id="22">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
-  <generalization id="23">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="14"/>  
-  </generalization>  
-  <dependency id="24">    
+  <realization id="22">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <dependency id="23">    
     <bendpoint x="522" y="109"/>    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
-  <realization id="25">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <association id="26">    
-    <bendpoint x="750" y="1041"/>    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="27" name="CHECK_MOUSE_SINGLE_CLICK">        
-        <position height="18" width="163" x="670" y="1047"/>      
-      </attribute>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="29">    
+  <dependency id="24">    
     <bendpoint x="406" y="196"/>    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
-  <realization id="30">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <generalization id="31">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="11"/>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="16"/>  
   </generalization>  
-  <dependency id="32">    
+  <dependency id="26">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="9"/>  
   </dependency>  
-  <dependency id="33">    
-    <bendpoint x="684" y="234"/>    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <generalization id="34">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="10"/>  
-  </generalization>  
-  <generalization id="35">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="17"/>  
-  </generalization>  
-  <dependency id="36">    
+  <dependency id="27">    
     <bendpoint x="392" y="234"/>    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
-  <generalization id="37">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="16"/>  
+  <dependency id="28">    
+    <bendpoint x="684" y="234"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <association id="29">    
+    <bendpoint x="747" y="1008"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="30" name="CHECK_MOUSE_DOUBLE_CLICK">        
+        <position height="18" width="168" x="674" y="984"/>      
+      </attribute>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="32">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <generalization id="33">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="11"/>  
   </generalization>  
-  <generalization id="38">    
+  <generalization id="34">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <generalization id="35">    
     <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="20"/>  
+    <end type="TARGET" refId="11"/>  
   </generalization>  
+  <association id="36">    
+    <bendpoint x="750" y="1041"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="37" name="CHECK_MOUSE_SINGLE_CLICK">        
+        <position height="18" width="163" x="670" y="1047"/>      
+      </attribute>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="39">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="40" name="innerModelSingletonMap"/>      
+    <bendpoint x="144" y="296"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="40" name="innerModelMap"/>      
       <multiplicity id="41" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <generalization id="42">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="8"/>  
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="19"/>  
   </generalization>  
   <realization id="43">    
     <end type="SOURCE" refId="10"/>    
@@ -282,36 +280,38 @@
   </realization>  
   <generalization id="44">    
     <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="16"/>  
+    <end type="TARGET" refId="15"/>  
   </generalization>  
   <dependency id="45">    
     <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="15"/>  
+    <end type="TARGET" refId="14"/>  
   </dependency>  
-  <association id="46">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="47" name="rootModel"/>      
-      <multiplicity id="48" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="49">    
+  <generalization id="46">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <dependency id="47">    
     <bendpoint x="668" y="194"/>    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
-  <association id="50">    
-    <bendpoint x="747" y="1008"/>    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="51" name="CHECK_MOUSE_DOUBLE_CLICK">        
-        <position height="18" width="168" x="674" y="984"/>      
-      </attribute>      
-      <multiplicity id="52" minimum="0" maximum="1"/>    
+  <generalization id="48">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="49">    
+    <bendpoint x="301" y="300"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="50" name="rootModel"/>      
+      <multiplicity id="51" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <generalization id="52">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="false"/>    

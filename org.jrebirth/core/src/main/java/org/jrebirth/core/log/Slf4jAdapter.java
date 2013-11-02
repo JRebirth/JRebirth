@@ -77,7 +77,6 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
             case Debug:
                 debug(messageItem, t, parameters);
                 break;
-
             case Warn:
                 warn(messageItem, t, parameters);
                 break;
@@ -113,7 +112,9 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void trace(final MessageItem messageItem, final Object... parameters) {
-        this.slf4jLogger.trace(messageItem.getMarker(), messageItem.get(parameters));
+        if(this.slf4jLogger.isTraceEnabled(messageItem.getMarker())){
+            this.slf4jLogger.trace(messageItem.getMarker(), messageItem.get(parameters));
+        }
     }
 
     /**
@@ -121,7 +122,9 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void trace(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        this.slf4jLogger.trace(messageItem.getMarker(), messageItem.get(parameters), t);
+        if(this.slf4jLogger.isTraceEnabled(messageItem.getMarker())){
+            this.slf4jLogger.trace(messageItem.getMarker(), messageItem.get(parameters), t);
+        }
     }
 
     /**
@@ -145,7 +148,9 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void debug(final MessageItem messageItem, final Object... parameters) {
-        this.slf4jLogger.debug(messageItem.getMarker(), messageItem.get(parameters));
+        if(this.slf4jLogger.isDebugEnabled(messageItem.getMarker())){
+            this.slf4jLogger.debug(messageItem.getMarker(), messageItem.get(parameters));
+        }
     }
 
     /**
@@ -153,7 +158,9 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void debug(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        this.slf4jLogger.debug(messageItem.getMarker(), messageItem.get(parameters), t);
+        if(this.slf4jLogger.isDebugEnabled(messageItem.getMarker())){
+            this.slf4jLogger.debug(messageItem.getMarker(), messageItem.get(parameters), t);
+        }
     }
 
     /**
@@ -177,7 +184,9 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void info(final MessageItem messageItem, final Object... parameters) {
-        this.slf4jLogger.info(messageItem.getMarker(), messageItem.get(parameters));
+        if(this.slf4jLogger.isInfoEnabled(messageItem.getMarker())){
+            this.slf4jLogger.info(messageItem.getMarker(), messageItem.get(parameters));
+        }
     }
 
     /**
@@ -185,7 +194,9 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void info(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        this.slf4jLogger.info(messageItem.getMarker(), messageItem.get(parameters), t);
+        if(this.slf4jLogger.isInfoEnabled(messageItem.getMarker())){
+            this.slf4jLogger.info(messageItem.getMarker(), messageItem.get(parameters), t);
+        }
     }
 
     /**
@@ -209,7 +220,9 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void warn(final MessageItem messageItem, final Object... parameters) {
-        this.slf4jLogger.warn(messageItem.getMarker(), messageItem.get(parameters));
+        if(this.slf4jLogger.isWarnEnabled(messageItem.getMarker())){
+            this.slf4jLogger.warn(messageItem.getMarker(), messageItem.get(parameters));
+        }
     }
 
     /**
@@ -217,7 +230,9 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void warn(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        this.slf4jLogger.warn(messageItem.getMarker(), messageItem.get(parameters), t);
+        if(this.slf4jLogger.isWarnEnabled(messageItem.getMarker())){
+            this.slf4jLogger.warn(messageItem.getMarker(), messageItem.get(parameters), t);
+        }
     }
 
     /**
@@ -241,7 +256,9 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void error(final MessageItem messageItem, final Object... parameters) {
-        this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(parameters));
+        if(this.slf4jLogger.isErrorEnabled(messageItem.getMarker())){
+            this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(parameters));
+        }
     }
 
     /**
@@ -249,7 +266,9 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void error(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(parameters), t);
+        if(this.slf4jLogger.isErrorEnabled(messageItem.getMarker())){
+            this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(parameters), t);
+        }
     }
 
     /**
