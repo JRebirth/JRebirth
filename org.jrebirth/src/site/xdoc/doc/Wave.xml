@@ -22,6 +22,14 @@
 
 	<body>
 
+        <div class="toc">
+            <macro name="toc">
+                <param name="section" value="0"/>
+                <param name="fromDepth" value="0"/>
+                <param name="toDepth" value="3"/>
+            </macro>
+        </div>
+        
 		<section name="Wave Overview">
 
 			<div id="catcherTitle">Wave Layer</div>
@@ -69,6 +77,7 @@
 				<p>Wave items are used by Wave Type to describe an api contract.</p>
 			
 				<macro name="include">
+					<param name="highlight-theme" value="eclipse"/>
 					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/ui/editor/EditorWaves.java" />
 					<param name="snippet" value="aj:..EVENTS_FILE" />
 					<param name="snippet-start-offset" value="1" />

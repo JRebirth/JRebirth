@@ -97,6 +97,7 @@
                 </p>
 
                 <macro name="include">
+               		<param name="highlight-theme" value="eclipse"/>
                     <param name="source"
                            value="analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java"/>
                     <param name="snippet" value="re:DO_LOAD_EVENTS ="/>
@@ -190,7 +191,7 @@
 
         </section>
 
-        <section name="How to use the Servive Feature">
+        <section name="How to use the Service Feature">
 
             <subsection name="Call the Service">
 

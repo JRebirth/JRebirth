@@ -22,26 +22,25 @@
 
 	<body>
 
-        <div class="toc">
-            <macro name="toc">
-                <param name="section" value="0"/>
-                <param name="fromDepth" value="0"/>
-                <param name="toDepth" value="3"/>
-            </macro>
-        </div>
+		<div class="toc">
+			<macro name="toc">
+				<param name="section" value="0" />
+				<param name="fromDepth" value="0" />
+				<param name="toDepth" value="3" />
+			</macro>
+		</div>
 
 		<section name="Thread Management" title="Thread Management">
 
 			<div id="catcherTitle">Thread Management</div>
 			<div id="catcherContent">Writing concurrent application could be painful ! Not with JRebirth</div>
 
-			<!-- <macro name="toc" section="4" fromDepth="2" toDepth="3" /> -->
-
 			<subsection name="Threading overview">
 				<p>JRebirth is multi-threaded, not only by using Task Worker
 					provided by JavaFX APIs. JRebirth has got its own Thread to manage
 					local events (called
-					waves) allowing components to communicate with each others.
+					waves) allowing components to communicate with
+					each others.
 					It also allows to manage multiple threads in a very simple manner with its included
 					thread pool.
 				</p>
@@ -84,7 +83,10 @@
 					</strong>
 				</p>
 				<p>All Wave processing tasks are automatically done into the JIT.</p>
-				<p>When the JRebirth Framework needs to update UI (thanks to <strong>Model</strong> layer), it's done
+				<p>
+					When the JRebirth Framework needs to update UI (thanks to
+					<strong>Model</strong>
+					layer), it's done
 					automatically done into the JAT. No matters to have !
 				</p>
 				<p>
@@ -94,29 +96,30 @@
 					</em>
 					), your call is processed into the current thread, so you must pay attention to what you are doing.
 				</p>
-				
+
 				<h4>Launch a runnable into JAT</h4>
 				<macro name="include">
+					<param name="highlight-theme" value="eclipse" />
 					<param name="source" value="core/src/main/java/org/jrebirth/core/facade/WaveReady.java" />
 					<param name="snippet" value="re:callCommand" />
 				</macro>
-				
+
 				<h4>Launch a runnable into JIT</h4>
 				<macro name="include">
 					<param name="source" value="core/src/main/java/org/jrebirth/core/facade/WaveReady.java" />
 					<param name="snippet" value="re:callCommand" />
 				</macro>
-				
+
 				<h4>Launch a runnable into JTP</h4>
 				<macro name="include">
 					<param name="source" value="core/src/main/java/org/jrebirth/core/facade/WaveReady.java" />
 					<param name="snippet" value="re:callCommand" />
 				</macro>
-				
-				
-				</subsection>
-				
-				<subsection name="Examples">
+
+
+			</subsection>
+
+			<subsection name="Examples">
 
 				<p>
 					<span style="text-decoration: underline;">If you
@@ -187,7 +190,8 @@
 					to a remote server. You can use the getService method to initiate the
 					call (By
 					default this call will be managed into JRebirth
-					Thread Pool :
+					Thread
+					Pool :
 					JTP), but the return must be managed into the JAT:
 				</p>
 				<ul>
@@ -204,17 +208,17 @@
 
 		</section>
 
-        <div class="bottomLinks">
-            <div class="previousDocPage">
-                <a href="Application.html">Create your first Application</a>
-            </div>
-            <div class="nextDocPage">
-                <a href="Logging.html">Configure Logging System</a>
-            </div>
-            <div class="tocDocPage">
-                <a href="Toc.html">TOC</a>
-            </div>
-        </div>
+		<div class="bottomLinks">
+			<div class="previousDocPage">
+				<a href="Application.html">Create your first Application</a>
+			</div>
+			<div class="nextDocPage">
+				<a href="Logging.html">Configure Logging System</a>
+			</div>
+			<div class="tocDocPage">
+				<a href="Toc.html">TOC</a>
+			</div>
+		</div>
 
 	</body>
 </document> 	
