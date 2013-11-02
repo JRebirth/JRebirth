@@ -1,89 +1,167 @@
 <!DOCTYPE document [
-  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
-  <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
-  %HTMLlat1;
-  <!-- These are the entity sets for special characters for the XHTML -->
-  <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
-  %HTMLsymbol;
-  <!-- These are the entity sets for symbol characters for the XHTML -->
-  <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
-  %HTMLspecial;
-]>
-<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+        <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
+        <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+        %HTMLlat1;
+        <!-- These are the entity sets for special characters for the XHTML -->
+        <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+        %HTMLsymbol;
+        <!-- These are the entity sets for symbol characters for the XHTML -->
+        <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+        %HTMLspecial;
+        ]>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
-	<properties>
-		<title>Understand Facades</title>
-	</properties>
+    <properties>
+        <title>Understand Facades</title>
+    </properties>
 
-	<head>
-		<title></title>
-		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
-	</head>
-	
-	<body>
+    <head>
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
+    </head>
 
-		<section name="How Facades work ?">
+    <body>
 
-			<div id="catcherTitle">Facades Layer</div>
-			<div id="catcherContent">Simplify component accessibility.</div>
-			
-			<!-- <macro name="toc" section="0" fromDepth="1" toDepth="3" /> -->
+        <div class="toc">
+            <macro name="toc">
+                <param name="section" value="0"/>
+                <param name="fromDepth" value="0"/>
+                <param name="toDepth" value="3"/>
+            </macro>
+        </div>
 
-			<subsection name="One Facade to rule the other">
+        <section name="Facade(s)">
 
-				<p>The global facade is automatically created by JRebirth AbstractApplication class.</p>
-				<p>It allows to manage the three main facades :</p>
-				<ul>
-					<li>CommandFacade</li>
-					<li>ServiceFacade</li>
-					<li>UiFacade</li>
-				</ul>
-				<p>
-					<span style="text-decoration: underline;">Short UML Diagram:</span>
-				</p>
-				<div class="uml">
-					<a title="Facade Class Diagram " rel="lightbox" href="uml/Facade.png">
-						<img class="redux" alt="" src="uml/Facade.png" />
-					</a>
-				</div>
-				<p>The global facade is accessible by the 3 main facades by calling : getGlobalFacade() (each facade extends the AbstractGlobalReady class.</p>
-				
-				
-				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/facade/AbstractGlobalReady.java" />
-					<!-- <param name="snippet" value="aj:AbstractGlobalReady" /> -->
-				</macro>
-				
-			</subsection>
+            <div id="catcherTitle">Facades Layer</div>
+            <div id="catcherContent">Simplify component accessibility.</div>
 
-			<subsection name="Internal Communication">
-				<p>
-					The global facade create automatically the JRebirth notification engine. You should read the
-					<a title="Notifier" href="notifier" target="_self">Notifier</a>
-					page to have more informations.
-				</p>
-			</subsection>
+            <p>JRebirth provide 3+1
+                <b>Facade</b>s
+                used to manage its dedicated pattern <b>wCS-Mvc</b>.
+            </p>
 
-			<subsection name="Linked with Application">
-				<p>The global facade also allow to communicate with the Application class and therefore with its stage and scene.</p>
-			</subsection>
+            <subsection name="Overview">
 
-			<subsection name="Provide Tracking">
-				<p>JRebirth allows to track all creation &amp; finalization of each component (Command, Service, Model, View) and also track the emission of waves and their path.</p>
-				<p>They are logged in order to be processed by the JRebirthAnalyzer tool.</p>
-			</subsection>
+                <p>
+                    <span style="text-decoration: underline;">Short UML Diagram:</span>
+                </p>
+                <div class="uml">
+                    <a title="Facade Class Diagram " rel="lightbox" href="uml/Facade.png">
+                        <img class="redux" alt="" src="uml/Facade.png"/>
+                    </a>
+                </div>
 
-			<div class="bottomLinks">
-				<div class="previousDocPage">
-					<a href="Logging.html">Configure Logging system</a>
-				</div>
-				<div class="nextDocPage">
-					<a href="Notifier.html">Notifier &amp; Components</a>
-				</div>
-				<div class="tocDocPage">
-					<a href="Toc.html">TOC</a>
-				</div>
-			</div>
-		</section>
-	</body>
+            </subsection>
+
+        </section>
+
+        <section name="Global Facade">
+
+            <p>
+                <i>One Facade to rule them all</i>
+            </p>
+            <p>JRebirth uses a global facade automatically created by JRebirth
+                <b>AbstractApplication</b>
+                class.
+            </p>
+
+
+            <subsection name="Internal Communication">
+                <p>
+                    The global facade create automatically the JRebirth notification engine. You should read the
+                    <a title="Notifier" href="notifier" target="_self">Notifier</a>
+                    page to have more informations.
+                </p>
+            </subsection>
+
+            <subsection name="Linked with Application">
+                <p>The global facade also allow to communicate with the Application class and therefore with its stage
+                    and scene.
+                </p>
+            </subsection>
+
+            <subsection name="Manage Local Facades">
+                <p>It allows to manage the three main facades:</p>
+                <ul>
+                    <li>CommandFacade</li>
+                    <li>ServiceFacade</li>
+                    <li>UiFacade</li>
+                </ul>
+
+                <p>The <b>GlobaleFacadeBase</b> allow to get each of these facades by calling appropriate getters:</p>
+
+                <macro name="include">
+                	<param name="highlight-theme" value="eclipse"/>
+                    <param name="source" value="core/src/main/java/org/jrebirth/core/facade/GlobalFacade.java"/>
+                    <param name="snippet" value="re:LocalFacade"/>
+                </macro>
+
+                <p>This link is bidirectionnal because global facade is accessible from the 3 main facades by calling :
+                    <i>getGlobalFacade()</i>
+                    (each facade extends the
+                    <b>AbstractGlobalReady</b> abstract class which implement <b>GlobalReady</b> interface.
+                </p>
+
+                <macro name="include">
+                    <param name="source" value="core/src/main/java/org/jrebirth/core/facade/GlobalReady.java"/>
+                    <param name="snippet" value="re:getGlobalFacade"/>
+                </macro>
+            </subsection>
+
+        </section>
+
+        <section name="Local Facades">
+
+            <p>There are 3 <b>LocalFacade</b>, each one is responsible of its layer components.
+
+            </p>
+
+            <subsection name="Basic Features">
+
+                <p>Each Facade can manage its components (also called readyObject) throught some public methods.</p>
+                <ul>
+                    <li>retrieve : used to get a component (build and register it if needed)</li>
+                    <li>exists : check if the component is already registered, it could be released</li>
+                    <li>register : store a pre-built component</li>
+                    <li>unregister : remove a component</li>
+                    <li>buildKey : build a unique key for the given component</li>
+                </ul>
+
+                <macro name="include">
+                    <param name="source" value="core/src/main/java/org/jrebirth/core/facade/Facade.java"/>
+                    <param name="snippet" value="re:E extends R"/>
+                </macro>
+
+            </subsection>
+
+            <subsection name="Component Key">
+                <p>Define how to manage component Key</p>
+
+            </subsection>
+
+            <subsection name="Provide Tracking">
+                <p>JRebirth allows to track all creation &amp; finalization of each component (Command, Service, Model,
+                    View) and also track the emission of waves and their path.
+                </p>
+                <p>They are logged in order to be processed by the JRebirthAnalyzer tool.</p>
+            </subsection>
+
+
+        </section>
+
+
+        <div class="bottomLinks">
+            <div class="previousDocPage">
+                <a href="Logging.html">Configure Logging system</a>
+            </div>
+            <div class="nextDocPage">
+                <a href="Notifier.html">Notifier &amp; Components</a>
+            </div>
+            <div class="tocDocPage">
+                <a href="Toc.html">TOC</a>
+            </div>
+        </div>
+
+    </body>
 </document> 	

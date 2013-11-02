@@ -21,11 +21,19 @@
 	</head>
 
 	<body>
+	
+		<div class="toc">
+            <macro name="toc">
+                <param name="section" value="0"/>
+                <param name="fromDepth" value="0"/>
+                <param name="toDepth" value="3"/>
+            </macro>
+        </div>
+        
 		<section name="Command Overview">
 
 			<div id="catcherTitle">Command Layer</div>
 			<div id="catcherContent">Reuse common code and don't be scared by threading issue</div>
-
 
 			<p>A command is an atomic reusable action that could be triggered from anywhere.</p>
 			<p>There are two kinds of Commands:</p>
@@ -63,9 +71,9 @@
 				<p>Hereafter you will find an example of MultiCommand used to display a model UI:</p>
 
 				<macro name="include">
+					<param name="highlight-theme" value="eclipse"/>
 					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/showmodel/ShowModelCommand.java" />
-					<!-- <param name="snippet" value="aj:..ShowModelCommand" /> -->
-
+					<param name="snippet" value="aj:org.jrebirth.core.command.basic.showmodel.ShowModelCommand" />
 				</macro>
 
 				<p>

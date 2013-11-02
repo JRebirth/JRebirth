@@ -21,15 +21,25 @@
 	</head>
 
 	<body>
+
+        <div class="toc">
+            <macro name="toc">
+                <param name="section" value="0"/>
+                <param name="fromDepth" value="0"/>
+                <param name="toDepth" value="3"/>
+            </macro>
+        </div>
+
 		<section name="Component definition">
 
 			<div id="catcherTitle">Notifier &amp; Components</div>
 			<div id="catcherContent">Provide a communication means between top-level components</div>
 
+<!-- <param name="highlight-theme" value="eclipse"/> -->
 
 			<p>
 				A component is a top-level actor of the
-				<strong>WCS-MVC</strong>
+				<strong>wCS-Mvc</strong>
 				pattern.
 			</p>
 			<p>Each component can communicate with other in a simple way. </p>
@@ -70,20 +80,17 @@
 
 		</section>
 
-		<section>
-			<div class="bottomLinks">
-				<div class="previousDocPage">
-					<a href="Facades.html">How Facades work</a>
-				</div>
-				<div class="nextDocPage">
-					<a href="Wave.html">Wave</a>
-				</div>
-				<div class="tocDocPage">
-					<a href="Toc.html">TOC</a>
-				</div>
-			</div>
-
-		</section>
+        <div class="bottomLinks">
+            <div class="previousDocPage">
+                <a href="Facades.html">How Facades work</a>
+            </div>
+            <div class="nextDocPage">
+                <a href="Wave.html">Wave</a>
+            </div>
+            <div class="tocDocPage">
+                <a href="Toc.html">TOC</a>
+            </div>
+        </div>
 
 	</body>
 </document> 	

@@ -27,12 +27,6 @@
 			<div id="catcherContent">Learn how to use JRebirth to help you building sophisticated application in minutes.</div>
 		</section>
 
-        <macro name="toc">
-            <param name="section" value="0"/>
-            <param name="fromDepth" value="0"/>
-            <param name="toDepth" value="3"/>
-        </macro>
-
         <div id="All-In-One">
             <macro name="include">
                 <param name="source" value="xdoc/doc/Introduction.xml" />
