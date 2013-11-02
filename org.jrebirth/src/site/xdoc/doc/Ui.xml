@@ -22,6 +22,14 @@
 	
 	<body>
 
+        <div class="toc">
+            <macro name="toc">
+                <param name="section" value="0"/>
+                <param name="fromDepth" value="0"/>
+                <param name="toDepth" value="3"/>
+            </macro>
+        </div>
+        
 		<section name="UI Roles">
 
 			<div id="catcherTitle">User Interface Layer</div>
@@ -47,6 +55,7 @@
 				<p>The Model automatically build its attached view.</p>
 
 				<macro name="include">
+					<param name="highlight-theme" value="eclipse"/>
 					<param name="source" value="sample/src/main/java/org/jrebirth/sample/ui/SampleModel.java" />
 					<param name="snippet" value="aj:SampleModel" />
 				</macro>
@@ -77,20 +86,19 @@
 
 			<subsection name="Adapters &amp; Handlers"></subsection>
 
-
-			<div class="bottomLinks">
-				<div class="previousDocPage">
-					<a href="Services.html">Services</a>
-				</div>
-				<div class="nextDocPage">
-					<a href="Resources.html">Resources</a>
-				</div>
-				<div class="tocDocPage">
-					<a href="Toc.html">TOC</a>
-				</div>
-			</div>
-
 		</section>
+		
+		<div class="bottomLinks">
+			<div class="previousDocPage">
+				<a href="Services.html">Services</a>
+			</div>
+			<div class="nextDocPage">
+				<a href="Resources.html">Resources</a>
+			</div>
+			<div class="tocDocPage">
+				<a href="Toc.html">TOC</a>
+			</div>
+		</div>
 
 	</body>
 </document> 	

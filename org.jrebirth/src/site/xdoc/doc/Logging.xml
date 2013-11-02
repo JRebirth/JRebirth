@@ -52,6 +52,7 @@
 
 				<p> This API is lightweight because the jar is near to 10 kb.</p>
 				<macro name="include">
+					<param name="highlight-theme" value="eclipse"/>
 					<param name="source" value="../includes/Logging_Dependencies.xml" />
 					<param name="snippet" value="xp:/dependencies/dependency[1]" />
 					<param name="set-first-line" value="1"/>
@@ -137,7 +138,40 @@
 
         <section name="JRebirth Logs">
 
-            <p>All JRebirth logs used an internationalized engine allowing us to provide extensible log message.</p>
+            <p>All JRebirth logs use an internationalized engine allowing us to provide extensible log messaging.
+            <br />
+                 It could be seen as an overkill feature but it has some advantages:
+            </p>
+            <ul>
+                <li>Provide localized log message</li>
+                <li>Manage log level activation automatically</li>
+                <li>Parameterize log level, to increase or decrease it by custo</li>
+                <li>Disable Message resolution for high performance</li>
+            </ul>
+
+            <p>Note that you can still use your logger basic features.</p>
+
+            <p>JRebirth provides its own LoggerFactory that you can initialize like this:</p>
+
+            <macro name="include">
+                <param name="source" value="core/src/main/java/org/jrebirth/core/concurrent/JRebirthThread.java" />
+                <param name="snippet" value="re:JRLoggerFactory.getLogger" />
+                <param name="snippet-start-offset" value="1" />
+            </macro>
+
+            <p>Then you can log your message like this:</p>
+
+            <macro name="include">
+                <param name="source" value="core/src/main/java/org/jrebirth/core/concurrent/JRebirthThread.java" />
+                <param name="snippet" value="re:LOGGER\." />
+            </macro>
+
+            <p>All these log messages are store into an interface implemented by the class to let them accessible</p>
+
+            <macro name="include">
+                <param name="source" value="core/src/main/java/org/jrebirth/core/concurrent/ConcurrentMessages.java" />
+                <param name="snippet" value="aj:ConcurrentMessages" />
+            </macro>
 
         </section>
 

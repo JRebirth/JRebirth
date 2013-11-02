@@ -70,10 +70,29 @@
                 <macro name="include">
                     <param name="source" value="sample/src/main/java/org/jrebirth/sample/SampleApplication.java"/>
                     <param name="snippet" value="aj:..SampleApplication.main(..)"/>
+                    <param name="highlight-theme" value="eclipse"/>
                 </macro>
 
+				<p>If you want to use the <b>JRebirthPreloader</b>, you must include the JRebirth preloader artifact to your pom.xml file</p>
+				
+					<macro name="include">
+						<param name="source" value="sample/pom.xml" />
+						<param name="snippet" value="xp:/project/dependencies/dependency[3]" />
+						<param name="set-first-line" value="1"/>
+					</macro>
 
-
+				<p>You can create your own <b>Preloader</b> class, JRebirth send only <b>ProgressNotification</b> with two kinf of values:</p>
+				<ul>
+				<li>With double value: 0.0 to 1.0 to update the progress bar</li>
+				<li>With integer value: > 1 to be translated into a message</li>
+				</ul>
+				<p>Hereafter you have the default <b>JRebirthPreloader</b> implementation.</p>
+				
+				<macro name="include">
+                    <param name="source" value="preloader/src/main/java/org/jrebirth/preloader/JRebirthPreloader.java"/>
+                    <param name="snippet" value="aj:org.jrebirth.preloader.JRebirthPreloader"/>
+                </macro>
+                
             </subsection>
 
 
