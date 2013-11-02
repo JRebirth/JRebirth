@@ -35,28 +35,31 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
- * Hello world!.
+ * 
+ * The class <strong>JRebirthPreloader</strong>.
+ * 
+ * @author Sébastien Bordes
  */
-public class JRebirthPreloader extends Preloader
-{
+public class JRebirthPreloader extends Preloader {
 
-    /** The bar. */
-    ProgressBar bar;
+    /** The Progress Bar. */
+    private ProgressBar progressBar;
 
-    /** The stage. */
-    Stage stage;
+    /** The prelaoder Stage. */
+    private Stage preloaderStage;
 
-    /** The text. */
-    private Text text;
+    /** The text that will display message received. */
+    private Text messageText;
 
-    private boolean jrebirthInit = false;
+    /** Flag that indicate if the application is initialized. */
+    private boolean jrebirthInitialized = false;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void init() throws Exception {
-        super.init();
+        super.init(); // Nothing to do for the preloader
     }
 
     /**
@@ -64,10 +67,15 @@ public class JRebirthPreloader extends Preloader
      */
     @Override
     public void start(final Stage stage) throws Exception {
-        this.stage = stage;
+        // Store the preloader stage to reuse it later
+        this.preloaderStage = stage;
+
+        // Configure the stage
         stage.centerOnScreen();
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(createPreloaderScene());
+
+        // Let's start the show
         stage.show();
     }
 
@@ -84,16 +92,16 @@ public class JRebirthPreloader extends Preloader
         p.getChildren().add(logo);
         StackPane.setAlignment(logo, Pos.CENTER);
 
-        this.bar = new ProgressBar(0.0);
-        this.bar.setPrefSize(460, 20);
-        p.getChildren().add(this.bar);
-        StackPane.setAlignment(this.bar, Pos.BOTTOM_CENTER);
-        StackPane.setMargin(this.bar, new Insets(30));
+        this.progressBar = new ProgressBar(0.0);
+        this.progressBar.setPrefSize(460, 20);
+        p.getChildren().add(this.progressBar);
+        StackPane.setAlignment(this.progressBar, Pos.BOTTOM_CENTER);
+        StackPane.setMargin(this.progressBar, new Insets(30));
 
-        this.text = new Text("Loading");
-        p.getChildren().add(this.text);
-        StackPane.setAlignment(this.text, Pos.BOTTOM_CENTER);
-        StackPane.setMargin(this.text, new Insets(10));
+        this.messageText = new Text("Loading");
+        p.getChildren().add(this.messageText);
+        StackPane.setAlignment(this.messageText, Pos.BOTTOM_CENTER);
+        StackPane.setMargin(this.messageText, new Insets(10));
 
         return new Scene(p, 600, 200, Color.TRANSPARENT);
     }
@@ -111,10 +119,10 @@ public class JRebirthPreloader extends Preloader
      */
     @Override
     public void handleProgressNotification(final ProgressNotification pn) {
-        if (jrebirthInit && pn.getProgress() >= 0.0 && pn.getProgress() <= 1.0) {
-            this.bar.setProgress(pn.getProgress());
+        if (this.jrebirthInitialized && pn.getProgress() >= 0.0 && pn.getProgress() <= 1.0) {
+            this.progressBar.setProgress(pn.getProgress());
         } else {
-            this.text.setText(getMessageFromCode((int) pn.getProgress()));
+            this.messageText.setText(getMessageFromCode((int) pn.getProgress()));
         }
     }
 
@@ -122,9 +130,10 @@ public class JRebirthPreloader extends Preloader
      * Gets the message from code.
      * 
      * @param messageCode the message code
+     * 
      * @return the message from code
      */
-    private String getMessageFromCode(int messageCode) {
+    private String getMessageFromCode(final int messageCode) {
         String res = "";
 
         switch (messageCode) {
@@ -132,10 +141,10 @@ public class JRebirthPreloader extends Preloader
                 res = "Initializing";
                 break;
             case 200:
-                res = "";// Provisioned for custom pre-init
+                res = "";// Provisioned for custom pre-init task
                 break;
             case 300:
-                res = "";// Provisioned for custom pre-init
+                res = "";// Provisioned for custom pre-init task
                 break;
             case 400:
                 res = "Loading Messages Properties";
@@ -150,10 +159,10 @@ public class JRebirthPreloader extends Preloader
                 res = "Preloading Fonts";
                 break;
             case 800:
-                res = "";// Provisioned for custom post-init
+                res = "";// Provisioned for custom post-init task
                 break;
             case 900:
-                res = "";// Provisioned for custom post-init
+                res = "";// Provisioned for custom post-init task
                 break;
             case 1000:
                 res = "Starting";
@@ -169,10 +178,18 @@ public class JRebirthPreloader extends Preloader
     @Override
     public void handleApplicationNotification(final PreloaderNotification n) {
         if (n instanceof MessageNotification) {
-            this.text.setText(((MessageNotification) n).getMessage());
+            this.messageText.setText(((MessageNotification) n).getMessage());
         } else if (n instanceof ProgressNotification) {
             handleProgressNotification((ProgressNotification) n);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean handleErrorNotification(final ErrorNotification arg0) {
+        return super.handleErrorNotification(arg0);
     }
 
     /**
@@ -184,7 +201,7 @@ public class JRebirthPreloader extends Preloader
             case BEFORE_LOAD:
                 break;
             case BEFORE_INIT:
-                jrebirthInit = true;
+                this.jrebirthInitialized = true;
                 break;
             case BEFORE_START:
                 beforeStart();
@@ -194,12 +211,12 @@ public class JRebirthPreloader extends Preloader
     }
 
     /**
-     * TODO To complete.
+     * Perform actions before the application start.
      * 
      * @throws InterruptedException
      */
     private void beforeStart() {
-        final Stage stage = this.stage;
+        final Stage stage = this.preloaderStage;
 
         ScaleTransitionBuilder.create()
                 .fromX(1.0)
@@ -209,21 +226,13 @@ public class JRebirthPreloader extends Preloader
                 .onFinished(new EventHandler<ActionEvent>() {
 
                     @Override
-                    public void handle(ActionEvent arg0) {
+                    public void handle(final ActionEvent arg0) {
                         stage.hide();
 
                     }
                 })
                 .build().play();
 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean handleErrorNotification(final ErrorNotification arg0) {
-        return super.handleErrorNotification(arg0);
     }
 
 }
