@@ -21,8 +21,6 @@ import java.io.File;
 
 import javafx.scene.Scene;
 
-import com.sun.javafx.css.StyleManager;
-
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.WaveTypeBase;
 
@@ -64,7 +62,7 @@ public class StyleSheetTrackerService extends DefaultService {
 
         file.lastModified();
 
-        StyleManager.getInstance().reloadStylesheets(scene);
+        // StyleManager.getInstance().reloadStylesheets(scene);
 
     }
 

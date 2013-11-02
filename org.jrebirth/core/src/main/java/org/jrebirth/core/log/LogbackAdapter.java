@@ -130,7 +130,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void trace(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.get(parameters), null, t);
+        if(this.logbackLogger.isTraceEnabled(messageItem.getMarker())){
+            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.get(parameters), null, t);
+        }
     }
 
     /**
@@ -138,7 +140,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void trace(final MessageItem messageItem, final Object... parameters) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.get(parameters), null, null);
+        if(this.logbackLogger.isTraceEnabled(messageItem.getMarker())){
+            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.get(parameters), null, null);
+        }
     }
 
     /**
@@ -162,7 +166,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void debug(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.get(parameters), null, t);
+        if(this.logbackLogger.isDebugEnabled(messageItem.getMarker())){
+            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.get(parameters), null, t);
+        }
     }
 
     /**
@@ -170,7 +176,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void debug(final MessageItem messageItem, final Object... parameters) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.get(parameters), null, null);
+        if(this.logbackLogger.isDebugEnabled(messageItem.getMarker())){
+            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.get(parameters), null, null);
+        }
     }
 
     /**
@@ -194,8 +202,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void info(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        this.logbackLogger.info(messageItem.getMarker(), messageItem.get(parameters), t);
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.get(parameters), null, t);
+        if(this.logbackLogger.isInfoEnabled(messageItem.getMarker())){
+            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.get(parameters), null, t);
+        }
     }
 
     /**
@@ -203,7 +212,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void info(final MessageItem messageItem, final Object... parameters) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.get(parameters), null, null);
+        if(this.logbackLogger.isInfoEnabled(messageItem.getMarker())){
+            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.get(parameters), null, null);
+        }
     }
 
     /**
@@ -227,7 +238,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void warn(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.get(parameters), null, t);
+        if(this.logbackLogger.isWarnEnabled(messageItem.getMarker())){
+            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.get(parameters), null, t);
+        }
     }
 
     /**
@@ -235,7 +248,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void warn(final MessageItem messageItem, final Object... parameters) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.get(parameters), null, null);
+        if(this.logbackLogger.isWarnEnabled(messageItem.getMarker())){
+            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.get(parameters), null, null);
+        }
     }
 
     /**
@@ -259,7 +274,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void error(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(parameters), null, t);
+        if(this.logbackLogger.isErrorEnabled(messageItem.getMarker())){
+            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(parameters), null, t);
+        }
     }
 
     /**
@@ -267,7 +284,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
      */
     @Override
     public void error(final MessageItem messageItem, final Object... parameters) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(parameters), null, null);
+        if(this.logbackLogger.isErrorEnabled(messageItem.getMarker())){
+            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(parameters), null, null);
+        }
     }
 
     /**

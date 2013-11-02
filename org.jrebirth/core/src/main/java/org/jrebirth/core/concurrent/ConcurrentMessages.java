@@ -36,22 +36,14 @@ public interface ConcurrentMessages extends MessageContainer {
 
     /** JRebirthThread. */
 
-    /** "Run> {0}". */
-    MessageItem RUN_IT = create(new LogMessage("jrebirth.concurrent.runIt", JRLevel.Trace, JRebirthMarkers.CONCURRENT));
-
-    /** "Thread error : {0} ". */
-    MessageItem THREAD_ERROR = create(new LogMessage("jrebirth.concurrent.threadError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
-
-    /** "Runnable submitted to JTP with hashCode={}" . */
+    /** "Runnable submitted to JTP with hashCode={0}" . */
     MessageItem JTP_QUEUED = create(new LogMessage("jrebirth.concurrent.jtpQueued", JRLevel.Trace, JRebirthMarkers.CONCURRENT));
 
-    /** "Runnable submitted to HPTP with hashCode={}" . */
+    /** "Runnable submitted to HPTP with hashCode={0}" . */
     MessageItem HPTP_QUEUED = create(new LogMessage("jrebirth.concurrent.hptpQueued", JRLevel.Trace, JRebirthMarkers.CONCURRENT));
 
     /** "An exception occurred during JRebirth BootUp" . */
     MessageItem BOOT_UP_ERROR = create(new LogMessage("jrebirth.concurrent.bootUpError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
-
-    /** AbstractJrbRunnable. */
 
     /** "An exception occured into the JRebirth Thread". */
     MessageItem JIT_ERROR = create(new LogMessage("jrebirth.concurrent.jitError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
@@ -59,7 +51,17 @@ public interface ConcurrentMessages extends MessageContainer {
     /** "An error occurred while shuting down the application ". */
     MessageItem SHUTDOWN_ERROR = create(new LogMessage("jrebirth.concurrent.shutdownError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
 
-    /** JrebirthThreadPoolExecutor. */
+
+    /** AbstractJrbRunnable. */
+
+    /** "Run> {0}". */
+    MessageItem RUN_IT = create(new LogMessage("jrebirth.concurrent.runIt", JRLevel.Trace, JRebirthMarkers.CONCURRENT));
+
+    /** "Thread error : {0} ". */
+    MessageItem THREAD_ERROR = create(new LogMessage("jrebirth.concurrent.threadError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
+
+
+    /** JRebirthThreadPoolExecutor. */
 
     /** "JTP returned an error" . */
     MessageItem JTP_ERROR = create(new LogMessage("jrebirth.concurrent.jtpError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
@@ -67,7 +69,7 @@ public interface ConcurrentMessages extends MessageContainer {
     /** "JTP returned an error with rootCause =>". */
     MessageItem JTP_ERROR_EXPLANATION = create(new LogMessage("jrebirth.concurrent.jtpErrorExplanation", JRLevel.Error, JRebirthMarkers.CONCURRENT));
 
-    /** "Future (hashcode={}) returned object : {}". */
+    /** "Future (hashcode={}) returned object : {0}". */
     MessageItem FUTURE_DONE = create(new LogMessage("jrebirth.concurrent.futureDone", JRLevel.Trace, JRebirthMarkers.CONCURRENT));
 
 }
