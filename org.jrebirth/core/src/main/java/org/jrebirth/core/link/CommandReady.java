@@ -18,6 +18,10 @@
 package org.jrebirth.core.link;
 
 import org.jrebirth.core.command.Command;
+import org.jrebirth.core.command.CommandBean;
+import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBean;
+import org.jrebirth.core.wave.WaveData;
 
 /**
  * 
@@ -38,5 +42,31 @@ public interface CommandReady {
      * @return a command instance
      */
     <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart);
+
+    /**
+     * Send a wave used to call a command.
+     *
+     * The command will be called from JRebirthThread and could execute itself from another thread.
+     *
+     * @param commandClass the command class to call
+     * @param data the data to transport
+     *
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
+     */
+    Wave callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data);
+
+    /**
+     * Send a wave used to call a command.
+     *
+     * The command will be called from JRebirthThread and could execute itself from another thread.
+     *
+     * @param commandClass the command class to call
+     * @param waveBean the WaveBean that holds all required wave data
+     *
+     * @param <WB> the type of the wave bean to used
+     *
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
+     */
+    <WB extends WaveBean> Wave callCommand(final Class<? extends CommandBean<WB>> commandClass, final WB waveBean);
 
 }

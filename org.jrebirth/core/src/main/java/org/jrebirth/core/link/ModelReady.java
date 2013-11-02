@@ -18,13 +18,15 @@
 package org.jrebirth.core.link;
 
 import org.jrebirth.core.ui.Model;
+import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveData;
 
 /**
  * The interface <strong>ModelReady</strong> allows to retrieve a {@link Model} instance.
  * 
  * @author Sébastien Bordes
  */
-public interface ModelReady {
+public interface ModelReady extends ServiceReady {
 
     /**
      * Return the model singleton or part of multiton according to key parts provided.
@@ -37,5 +39,17 @@ public interface ModelReady {
      * @return a model instance
      */
     <M extends Model> M getModel(final Class<M> clazz, final Object... keyPart);
+
+    /**
+     * Send a wave used to display an UI model.
+     * 
+     * The command will be called from JRebirthThread but will execute itself from the JavaFX Application thread.
+     * 
+     * @param modelClass the model class to display
+     * @param data the data to transport
+     * 
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
+     */
+    Wave attachUi(final Class<? extends Model> modelClass, final WaveData<?>... data);
 
 }

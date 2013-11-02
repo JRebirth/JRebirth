@@ -19,7 +19,7 @@ package org.jrebirth.core.ui;
 
 import javafx.scene.Node;
 
-import org.jrebirth.core.facade.FacadeReady;
+import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -29,7 +29,7 @@ import org.jrebirth.core.wave.Wave;
  * 
  * @author Sébastien Bordes
  */
-public interface Model extends FacadeReady<Model> {
+public interface Model extends WaveReady<Model> {
 
     /**
      * Return the view.

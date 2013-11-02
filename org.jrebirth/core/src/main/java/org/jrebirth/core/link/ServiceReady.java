@@ -18,6 +18,9 @@
 package org.jrebirth.core.link;
 
 import org.jrebirth.core.service.Service;
+import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveData;
+import org.jrebirth.core.wave.WaveType;
 
 /**
  * 
@@ -25,7 +28,7 @@ import org.jrebirth.core.service.Service;
  * 
  * @author Sébastien Bordes
  */
-public interface ServiceReady {
+public interface ServiceReady extends CommandReady {
 
     /**
      * Return the service singleton or part of multiton.
@@ -38,5 +41,18 @@ public interface ServiceReady {
      * @return a service instance
      */
     <S extends Service> S getService(final Class<S> clazz, final Object... keyPart);
+
+    /**
+     * Send a wave used to return data from a service.
+     * 
+     * The service will be called from JRebirthThread and could execute itself from another thread.
+     * 
+     * @param serviceClass the service called
+     * @param waveType the type of the wave
+     * @param data the data to transport
+     * 
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
+     */
+    Wave returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WaveData<?>... data);
 
 }
