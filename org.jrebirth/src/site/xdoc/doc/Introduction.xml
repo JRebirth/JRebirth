@@ -158,19 +158,19 @@
 					<li>Follow OSS spirit and Java Best Practices</li>
 				</ol>
 			</subsection>
-
-			<div class="bottomLinks">
-				<div class="previousDocPage">
-					<a href="Toc.html">TOC</a>
-				</div>
-				<div class="nextDocPage">
-					<a href="Installation.html"> How to install JRebirth</a>
-				</div>
-				<div class="tocDocPage">
-					<a href="Toc.html">TOC</a>
-				</div>
-			</div>
-
 		</section>
+		
+		<div class="bottomLinks">
+			<div class="previousDocPage">
+				<a href="Toc.html">TOC</a>
+			</div>
+			<div class="nextDocPage">
+				<a href="Installation.html"> How to install JRebirth</a>
+			</div>
+			<div class="tocDocPage">
+				<a href="Toc.html">TOC</a>
+			</div>
+		</div>
+
 	</body>
 </document>
