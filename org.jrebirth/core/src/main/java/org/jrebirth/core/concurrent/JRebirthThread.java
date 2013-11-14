@@ -20,6 +20,7 @@ package org.jrebirth.core.concurrent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javafx.scene.Scene;
@@ -166,7 +167,10 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         while (this.infiniteLoop.get()) {
             try {
                 if (!this.forceClose.get()) {
-                    this.processingTasks.take().run();
+                    final JRebirthRunnable jrr = this.processingTasks.poll(100, TimeUnit.MILLISECONDS);
+                    if (jrr != null) {
+                        jrr.run();
+                    }
                 }
             } catch (final InterruptedException e) {
                 LOGGER.error(JIT_ERROR, e);

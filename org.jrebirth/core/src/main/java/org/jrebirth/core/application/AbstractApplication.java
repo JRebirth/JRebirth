@@ -17,7 +17,10 @@
  */
 package org.jrebirth.core.application;
 
-import com.sun.javafx.application.LauncherImpl;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.net.URL;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.application.Preloader;
 import javafx.application.Preloader.ProgressNotification;
@@ -28,6 +31,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import com.sun.javafx.application.LauncherImpl;
+
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.concurrent.JRebirthThread;
@@ -47,10 +53,6 @@ import org.jrebirth.core.resource.provided.JRebirthStyles;
 import org.jrebirth.core.resource.style.StyleSheetItem;
 import org.jrebirth.core.util.ClassUtility;
 import org.jrebirth.preloader.JRebirthPreloader;
-
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.net.URL;
-import java.util.List;
 
 /**
  * 
@@ -95,7 +97,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
     /**
      * Launch the Current JavaFX Application with given preloader.
-     *
+     * 
      * @param preloaderClass the preloader class used as splash screen with progress
      * @param args arguments passed to java command line
      */
@@ -105,7 +107,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
     /**
      * Launch the given JavaFX Application with given preloader.
-     *
+     * 
      * @param appClass the JavaFX application class to launch
      * @param preloaderClass the preloader class used as splash screen with progress
      * @param args arguments passed to java command line
@@ -125,7 +127,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
     /**
      * Launch the Given JavaFX Application (without any preloader).
-     *
+     * 
      * @param appClass the JavaFX application class to launch
      * @param args arguments passed to java command line
      */
