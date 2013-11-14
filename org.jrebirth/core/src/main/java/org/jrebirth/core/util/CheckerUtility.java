@@ -1,5 +1,9 @@
 package org.jrebirth.core.util;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.List;
+
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.log.JRLogger;
@@ -9,10 +13,6 @@ import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveType;
 import org.jrebirth.core.wave.WaveTypeBase;
-
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
-import java.util.List;
 
 /**
  * The class <strong>CheckerUtility</strong>.
@@ -65,8 +65,8 @@ public final class CheckerUtility implements UtilMessages {
 
                     for (int j = 0; j < methods.size() && !hasCompliantMethod; j++) {
                         hasCompliantMethod = checkMethodSignature(methods.get(j), wParams);
-                        if(hasCompliantMethod){
-                            methodParameters = methods.get(j).getTypeParameters().length -1; // Remove the wave parameters
+                        if (hasCompliantMethod) {
+                            methodParameters = methods.get(j).getTypeParameters().length - 1; // Remove the wave parameters
                         }
                     }
                     if (!hasCompliantMethod) {
