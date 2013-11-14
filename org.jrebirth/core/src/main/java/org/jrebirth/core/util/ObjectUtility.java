@@ -62,11 +62,11 @@ public final class ObjectUtility {
 
     /**
      * Lower case te first char of a string.
-     *
+     * 
      * @param upperCasedString the string to modify
      * @return a new string with a first character lower cased
      */
-    public static String lowerFirstChar(String upperCasedString){
+    public static String lowerFirstChar(final String upperCasedString) {
         return upperCasedString.substring(0, 1).toLowerCase(Locale.getDefault()) + upperCasedString.substring(1);
     }
 
