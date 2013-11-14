@@ -51,7 +51,6 @@ public interface ConcurrentMessages extends MessageContainer {
     /** "An error occurred while shuting down the application ". */
     MessageItem SHUTDOWN_ERROR = create(new LogMessage("jrebirth.concurrent.shutdownError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
 
-
     /** AbstractJrbRunnable. */
 
     /** "Run> {0}". */
@@ -59,7 +58,6 @@ public interface ConcurrentMessages extends MessageContainer {
 
     /** "Thread error : {0} ". */
     MessageItem THREAD_ERROR = create(new LogMessage("jrebirth.concurrent.threadError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
-
 
     /** JRebirthThreadPoolExecutor. */
 

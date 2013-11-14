@@ -1,15 +1,16 @@
 package org.jrebirth.core.concurrent;
 
+import java.util.Calendar;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import junit.framework.Assert;
+
 import org.jrebirth.core.application.ApplicationTest;
 import org.jrebirth.core.exception.JRebirthThreadException;
-import org.junit.Ignore;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Calendar;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * The class <strong>ThreadTest</strong>.
