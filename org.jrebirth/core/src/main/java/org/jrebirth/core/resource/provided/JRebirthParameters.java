@@ -71,7 +71,7 @@ public interface JRebirthParameters {
     ParameterItem<Integer> CLOSE_RETRY_DELAY_OTHER = create("closeRetryDelayOther", 1000);
 
     /** Pool size of JRebirth Thread Pool. */
-    ParameterItem<Integer> THREAD_POOL_SIZE = create("threadPoolSize", 4);
+    ParameterItem<Float> THREAD_POOL_SIZE_RATIO = create("threadPoolSizeRatio", 0.5f);
 
     /**
      * The <code>WAVE_HANDLER_PREFIX</code> field is used to add a prefix to custom wave handler method of JRebirth components. They will be named like this : doMyAction(Wave) after being renamed in

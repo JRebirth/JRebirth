@@ -99,12 +99,15 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
         trackEvent(JRebirthEventType.CREATE_APPLICATION, null, getApplication().getClass());
 
         LOGGER.trace(JTP_CREATION);
+
+        final int poolSize = Math.max(1, Math.round(JRebirthParameters.THREAD_POOL_SIZE_RATIO.get() * Runtime.getRuntime().availableProcessors()));
+
         // Launch the default executor
-        this.executorService = new JRebirthThreadPoolExecutor(Runtime.getRuntime().availableProcessors() * 2,
+        this.executorService = new JRebirthThreadPoolExecutor(poolSize,
                 new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(), JTP_BASE_NAME));
 
         // Launch the High Priority executor
-        this.highPriorityExecutorService = new JRebirthThreadPoolExecutor(Runtime.getRuntime().availableProcessors() * 2,
+        this.highPriorityExecutorService = new JRebirthThreadPoolExecutor(poolSize,
                 new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(), HPTP_BASE_NAME));
 
         trackEvent(JRebirthEventType.CREATE_GLOBAL_FACADE, getApplication().getClass(), this.getClass());
