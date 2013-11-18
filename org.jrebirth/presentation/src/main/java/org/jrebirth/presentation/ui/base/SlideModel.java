@@ -39,8 +39,10 @@ public interface SlideModel<S extends SlideStep> extends Model {
      * Show the step.
      * 
      * @param slideStep the step to show
+     * @param forward the slide flow direction (forward, backward)
+     * 
      */
-    void showSlideStep(final S slideStep);
+    void showSlideStep(final S slideStep, final boolean forward);
 
     /**
      * Check if the next step is available.

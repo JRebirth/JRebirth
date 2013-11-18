@@ -39,8 +39,8 @@ public final class ClassicModel extends AbstractTemplateModel<ClassicModel, Clas
      * {@inheritDoc}
      */
     @Override
-    public void showSlideStep(final SlideStep slideStep) {
-        // No programmatic sub slide
+    public void showSlideStep(final SlideStep slideStep, final boolean forward) {
+        getView().showSlideStep(slideStep, forward);
     }
 
 }
