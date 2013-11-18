@@ -26,7 +26,7 @@ import org.jrebirth.core.resource.image.LocalImage;
 /**
  * The MTImages interface providing all images.
  */
-public interface PresentationImages {
+public interface PrezImages {
 
     /** The application main title image. */
     ImageItem MT_TITLE = create(new LocalImage("Title", ImageExtension.PNG));

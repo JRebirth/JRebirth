@@ -40,7 +40,7 @@ public class SplashModel extends AbstractSlideModel<SplashModel, SplashView, Sli
      * {@inheritDoc}
      */
     @Override
-    public void showSlideStep(final SlideStep slideStep) {
+    public void showSlideStep(final SlideStep slideStep, final boolean forward) {
         // Nothing to do yet
     }
 
