@@ -32,7 +32,7 @@ import javax.xml.stream.XMLStreamReader;
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.presentation.model.Presentation;
-import org.jrebirth.presentation.resource.PrezParameters;
+import org.jrebirth.presentation.resources.PrezParameters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

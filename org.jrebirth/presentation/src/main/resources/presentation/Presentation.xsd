@@ -54,6 +54,7 @@
 			<element name="item" type="tns:SlideItem" minOccurs="0" maxOccurs="unbounded" />
 		</sequence>
 		<attribute name="name" type="string" />
+		<attribute name="index" type="integer"/>
 		<attribute name="style" type="string" />
 	</complexType>
 

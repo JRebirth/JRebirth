@@ -102,7 +102,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         super.bind();
         // Load the default slide step (if exists)
         if (getStepList().size() > 0) {
-            showSlideStep(getStepList().get(this.stepPosition));
+            showSlideStep(getStepList().get(this.stepPosition), true); // FIXME Check usage
         }
     }
 
@@ -177,8 +177,28 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         if (this.stepList == null) {
             this.stepList = new ArrayList<>();
             this.stepList.addAll(Arrays.asList(initializeSlideStep()));
+
+            for (SlideContent sc : getSlide().getContent()) {
+                if (!hasStep(stepList, sc)) {
+                    if (sc.getIndex() != null) {
+                        stepList.add(sc.getIndex().intValue(), (S) new DefaultSlideStep(sc.getName()));
+                    } else {
+                        stepList.add((S) new DefaultSlideStep(sc.getName()));
+                    }
+                }
+            }
         }
         return this.stepList;
+    }
+
+    private boolean hasStep(List<S> stepList2, SlideContent slideContent) {
+        boolean res = false;
+        for (S step : stepList2) {
+            if (step.name().equalsIgnoreCase(slideContent.getName())) {
+                res = true;
+            }
+        }
+        return res;
     }
 
     /**
@@ -197,7 +217,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         if (res && !getView().isSlideLocked()) {
             this.stepPosition++;
             // Launch the next step
-            showSlideStep(getStepList().get(this.stepPosition));
+            showSlideStep(getStepList().get(this.stepPosition), true);
         }
         // otherwise no more step return true to go to the next slide
         return !res;
@@ -212,7 +232,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         if (res && !getView().isSlideLocked()) {
             this.stepPosition--;
             // Launch the previous step
-            showSlideStep(getStepList().get(this.stepPosition));
+            showSlideStep(getStepList().get(this.stepPosition), false);
         }
         // otherwise no more step return true to go to the previous slide
         return !res;
@@ -242,7 +262,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         SlideContent res = null;
         if (getSlide().getContent() != null && !getSlide().getContent().isEmpty()) {
             for (final SlideContent sc : getSlide().getContent()) {
-                if (sc.getName() != null && !sc.getName().isEmpty() && sc.getName().equals(slideStep.toString())) {
+                if (sc.getName() != null && !sc.getName().isEmpty() && sc.getName().equals(slideStep.name())) {
                     res = sc;
                 }
             }
@@ -254,7 +274,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      * {@inheritDoc}
      */
     @Override
-    public abstract void showSlideStep(final S slideStep);
+    public abstract void showSlideStep(final S slideStep, final boolean forward);
 
     /**
      * {@inheritDoc}

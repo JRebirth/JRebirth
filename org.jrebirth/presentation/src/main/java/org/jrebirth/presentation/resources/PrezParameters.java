@@ -1,4 +1,4 @@
-package org.jrebirth.presentation.resource;
+package org.jrebirth.presentation.resources;
 
 import static org.jrebirth.core.resource.Resources.create;
 
