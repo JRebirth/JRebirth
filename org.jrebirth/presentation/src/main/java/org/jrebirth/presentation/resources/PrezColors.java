@@ -17,11 +17,11 @@
  */
 package org.jrebirth.presentation.resources;
 
-import static org.jrebirth.core.resource.Resources.create;
-
 import org.jrebirth.core.resource.color.ColorItem;
 import org.jrebirth.core.resource.color.RGB255Color;
 import org.jrebirth.core.resource.color.WebColor;
+
+import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>PrezColors</strong>.
@@ -33,6 +33,9 @@ public interface PrezColors {
 
     /** Color for slide title, white. */
     ColorItem SLIDE_TITLE = create(new WebColor("FFFFFF", 1.0));
+
+    /** Color for slide title, white. */
+    ColorItem SUB_TITLE = create(new WebColor("FFF6EF", 1.0));
 
     /** Color for blue shape, xxx. */
     ColorItem SHAPE_BLUE = create(new WebColor("3495CE", 1.0));
