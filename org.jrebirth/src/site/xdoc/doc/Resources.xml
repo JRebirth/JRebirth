@@ -141,7 +141,7 @@
 
 				<p>But this interface doesn't explain how to register a resource, so let's see an example.</p>
 				<macro name="include">
-					<param name="source" value="presentation/src/main/java/org/jrebirth/presentation/resource/PrezColors.java" />
+					<param name="source" value="presentation/src/main/java/org/jrebirth/presentation/resources/PrezColors.java" />
 					<!-- <param name="snippet" value="aj:..PrezColors" /> <param name="expand-snippets" value="true" /> -->
 				</macro>
 
