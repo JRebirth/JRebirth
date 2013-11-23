@@ -24,7 +24,6 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.service.ServiceTask;
 
@@ -54,14 +53,14 @@ public class TaskTrackerService extends DefaultService {
         }
     };
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void ready() throws CoreException {
-        super.ready(); // Can be omitted but it's a bad practice
-
-    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void ready() throws CoreException {
+    // super.ready(); // Can be omitted but it's a bad practice
+    //
+    // }
 
     /**
      * Track a task progression.

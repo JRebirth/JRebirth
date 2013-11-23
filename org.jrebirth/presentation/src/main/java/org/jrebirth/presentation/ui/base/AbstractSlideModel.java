@@ -179,7 +179,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
             this.stepList.addAll(Arrays.asList(initializeSlideStep()));
 
             for (SlideContent sc : getSlide().getContent()) {
-                if (!hasStep(stepList, sc)) {
+                if (!hasStep(sc)) {
                     if (sc.getIndex() != null) {
                         stepList.add(sc.getIndex().intValue(), (S) new DefaultSlideStep(sc.getName()));
                     } else {
@@ -191,9 +191,16 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         return this.stepList;
     }
 
-    private boolean hasStep(List<S> stepList2, SlideContent slideContent) {
+    /**
+     * Check if step defined in xml exist into current step list.
+     * 
+     * @param slideContent the content to check
+     * 
+     * @return true if the slide content is mapped to a programmatic slidestep
+     */
+    private boolean hasStep(SlideContent slideContent) {
         boolean res = false;
-        for (S step : stepList2) {
+        for (S step : this.stepList) {
             if (step.name().equalsIgnoreCase(slideContent.getName())) {
                 res = true;
             }
