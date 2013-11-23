@@ -29,6 +29,8 @@ import org.jrebirth.core.wave.checker.WaveChecker;
  * Define the contract used to manage waves.
  * 
  * @author Sébastien Bordes
+ * 
+ * @param <R> A type that implements FacadeReady
  */
 public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
 

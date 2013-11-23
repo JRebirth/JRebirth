@@ -41,6 +41,7 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(JRebirthThreadPoolExecutor.class);
 
+    /** The pending list of JRebirthRunnable. */
     private final List<JRebirthRunnable> pending = new ArrayList<>();
 
     /**
@@ -54,6 +55,13 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
                 threadFactory);
     }
 
+    /**
+     * Check if a slot is available for the given task priority.
+     * 
+     * @param taskPriority the priority to check
+     * 
+     * @return true if this priority can be run right now
+     */
     public boolean checkAvailability(final RunnablePriority taskPriority) {
 
         // The next task could be added if:
@@ -63,6 +71,13 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
         return getActiveCount() < getCorePoolSize() || checkPriority(taskPriority);
     }
 
+    /**
+     * Check given priority with current pending list.
+     * 
+     * @param taskPriority the priority to check
+     * 
+     * @return true if the priority is greater than those pending
+     */
     private boolean checkPriority(final RunnablePriority taskPriority) {
         boolean highPriority = false;
         for (final JRebirthRunnable jr : this.pending) {
@@ -71,12 +86,14 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
         return !highPriority;
     }
 
-    /**
-     * 
-     */
-    public void execute(final JRebirthRunnable task) {
-        super.execute(task);
-    }
+    // /**
+    // * Execute the JRebirthRunnable.
+    // *
+    // * @param task to run
+    // */
+    // public void execute(final JRebirthRunnable task) {
+    // super.execute(task);
+    // }
 
     /**
      * {@inheritDoc}
