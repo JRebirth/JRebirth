@@ -33,12 +33,31 @@ public interface Facade<R extends FacadeReady<R>> {
     /**
      * Register a new ready object component.
      * 
+     * @param uniqueKey the unique key for the component to get
+     * @param readyObject the component to register
+     * 
+     * @param <E> the type of the ready object used
+     */
+    <E extends R> void register(final UniqueKey<E> uniqueKey, final E readyObject);
+
+    /**
+     * Register a new ready object component.
+     * 
      * @param readyObject the component to register
      * @param keyPart the unique key for multiton FacadeReady element, could be omitted for singleton
      * 
      * @param <E> the type of the ready object used
      */
     <E extends R> void register(final E readyObject, final Object... keyPart);
+
+    /**
+     * Unregister a new ready object component.
+     * 
+     * @param uniqueKey the unique key for the component to get
+     * 
+     * @param <E> the type of the ready object used
+     */
+    <E extends R> void unregister(final UniqueKey<E> uniqueKey);
 
     /**
      * Unregister a new ready object component.
@@ -54,6 +73,18 @@ public interface Facade<R extends FacadeReady<R>> {
      * Retrieve a ready object component.<br />
      * May allow to build it if it hadn't been done previously
      * 
+     * @param uniqueKey the unique key for the component to get
+     * 
+     * @return the singleton of the component
+     * 
+     * @param <E> the type of the ready object to retrieve
+     */
+    <E extends R> E retrieve(final UniqueKey<E> uniqueKey);
+
+    /**
+     * Retrieve a ready object component.<br />
+     * May allow to build it if it hadn't been done previously
+     * 
      * @param clazz the component class
      * @param keyPart the unique key for multiton FacadeReady element, could be omitted for singleton
      * 
@@ -64,16 +95,15 @@ public interface Facade<R extends FacadeReady<R>> {
     <E extends R> E retrieve(final Class<E> clazz, final Object... keyPart);
 
     /**
-     * Retrieve a ready object component.<br />
-     * May allow to build it if it hadn't been done previously
+     * Check if the component has already been created and stored.
      * 
      * @param uniqueKey the unique key for the component to get
      * 
-     * @return the singleton of the component
+     * @return true if the component exists
      * 
-     * @param <E> the type of the ready object to retrieve
+     * @param <E> The type of the object registered by this ClassKey
      */
-    <E extends R> E retrieve(final UniqueKey<E> uniqueKey);
+    <E extends R> boolean exists(final UniqueKey<E> uniqueKey);
 
     /**
      * Check if the component has already been created and stored.
