@@ -376,12 +376,22 @@ public final class ClassUtility implements UtilMessages {
         return object;
     }
 
+    /**
+     * Return the class used by the Nth level of the current call stack.
+     * 
+     * @param classDeepLevel the deep level to use to find the right class
+     * 
+     * @return the Nth level ancestor class
+     */
+    @SuppressWarnings("unchecked")
     public static Class<? extends Application> getClassFromStaticMethod(final int classDeepLevel) {
+        Class<? extends Application> clazz = null;
         try {
-            return (Class<? extends Application>) Class.forName(Thread.currentThread().getStackTrace()[classDeepLevel].getClassName());
+            clazz = (Class<? extends Application>) Class.forName(Thread.currentThread().getStackTrace()[classDeepLevel].getClassName());
         } catch (final ClassNotFoundException e) {
-            return null;
+            clazz = null;
         }
+        return clazz;
     }
 
 }

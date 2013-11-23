@@ -146,7 +146,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             notifyPreloader(new ProgressNotification(0.1));
 
             notifyPreloader(new ProgressNotification(100));
-            preInit();// 200 , 300
+            preInit(); // 200 , 300
             notifyPreloader(new ProgressNotification(0.3));
 
             // Load messages Files
@@ -176,7 +176,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             preloadFonts();
             notifyPreloader(new ProgressNotification(0.7));
 
-            postInit();// 800 , 900
+            postInit(); // 800 , 900
 
             notifyPreloader(new ProgressNotification(1000));
             notifyPreloader(new ProgressNotification(1.0));
