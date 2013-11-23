@@ -8,18 +8,24 @@ Release Notes
 
 This version provides several threading enhancements.
 
+
+- Manage Thread Pool Size Parameter  [#82](https://github.com/JRebirth/JRebirth/issues/82)<br/>
+ You can now define your ration by setting the threadPoolSizeRatio parameter, the rule is threadPoolSizeRatio x nb of available processor	 
+
+
 - WaveItem is now an abstract class [#79](https://github.com/JRebirth/JRebirth/issues/79)<br/>
  It forces the addition of brackets to define a nested class, thanks to Christophe from dooApp.
 
 
 - Add a second Thread Pool [#77](https://github.com/JRebirth/JRebirth/issues/77)<br/>
- The second Thread Pool is named HPTP (High Priority Thread Pool). It will run jobs taht have an higher priority
+ The second Thread Pool is named HPTP (High Priority Thread Pool). It will run jobs that have an higher priority
  than those currently running into all JTP slots
 
 
 - Manage Runnable Priority [#76](https://github.com/JRebirth/JRebirth/issues/76)<br/>
   All Command and ServiceTask are now supporting Priority by using @RunInto and @Priority annotations
   or dedicated constructor.
+
 
 - Improve JIT enhancement [#45](https://github.com/JRebirth/JRebirth/issues/45)<br/>
  JRebirth Internal Thread has been improved to reduced waiting and sleeping time in order to be more reactive and support Task Priority.
@@ -97,6 +103,7 @@ Now it's possible to manage l10n properties files to translate your application
 
 - Provide Smart logging capabilities<br/>
 Internal log are now localized, and use log markers. Custom hook has been added to support line number for log back 
+
 
 - Add getFXMLController method<br/>
 Add this method into AbstractFXMLModel class to allow getting the FXML controller 
