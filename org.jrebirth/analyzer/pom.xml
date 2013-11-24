@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>jrebirth</artifactId>
 		<groupId>org</groupId>
-		<version>0.7.6-SNAPSHOT</version>
+		<version>0.7.6</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<groupId>org.jrebirth</groupId>
@@ -71,7 +71,7 @@
 
 							<!-- not automated yet -->
 							<JavaFX-Class-Path>logback-classic-1.0.13.jar logback-core-1.0.13.jar slf4j-api
-								-1.7.5.jar core-0.7.6-SNAPSHOT.jar</JavaFX-Class-Path>
+								-1.7.5.jar core-0.7.6.jar</JavaFX-Class-Path>
 
 							<Permissions>${permissions}</Permissions>
 							<Codebase>${deployUrl}</Codebase>
@@ -174,13 +174,13 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.6-SNAPSHOT</version>
+			<version>0.7.6</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>preloader</artifactId>
-			<version>0.7.6-SNAPSHOT</version>
+			<version>0.7.6</version>
 		</dependency>
 
 		<dependency>
