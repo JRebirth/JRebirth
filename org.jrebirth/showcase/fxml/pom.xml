@@ -8,6 +8,8 @@
 
 	<groupId>org.jrebirth.showcase</groupId>
 	<artifactId>fxml</artifactId>
+	<version>0.7.6</version>
+	<packaging>jar</packaging>
 
 	<name>FXML</name>
 	<description>Sample application to describe JRebirth FXMLUndo features</description>
