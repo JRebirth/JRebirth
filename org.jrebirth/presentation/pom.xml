@@ -8,6 +8,9 @@
 	</parent>
 	<groupId>org.jrebirth</groupId>
 	<artifactId>presentation</artifactId>
+	<version>0.7.6</version>
+	<packaging>jar</packaging>
+
 	<name>Prez Engine</name>
 	<description>Base files to build a JavaFX slide's presentation</description>
 

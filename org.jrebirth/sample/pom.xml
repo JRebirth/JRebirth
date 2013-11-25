@@ -9,6 +9,7 @@
 
 	<groupId>org.jrebirth</groupId>
 	<artifactId>sample</artifactId>
+	<version>0.7.6</version>
 	<packaging>jar</packaging>
 
 	<name>Sample Application</name>

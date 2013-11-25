@@ -8,6 +8,8 @@
 	</parent>
 	<groupId>org.jrebirth</groupId>
 	<artifactId>analyzer</artifactId>
+	<version>0.7.6</version>
+	<packaging>jar</packaging>
 
 	<name>Analyzer</name>
 
@@ -24,9 +26,9 @@
 		<genkeystore>true</genkeystore>
 
 		<permissions>all-permissions</permissions> <!-- sandbox -->
- 		<deployUrl>http://apps.jrebirth.org</deployUrl>
+		<deployUrl>http://apps.jrebirth.org</deployUrl>
 		<deployPath>${project.artifactId}/${project.version}</deployPath>
-		
+
 		<jnlpFilename>JRebirthAnalyzer.jnlp</jnlpFilename>
 		<preloaderClass>org.jrebirth.preloader.JRebirthPreloader</preloaderClass>
 		<appClass>org.jrebirth.analyzer.JRebirthAnalyzer</appClass>
@@ -130,7 +132,7 @@
 					</jnlp>
 
 					<sign>
-											<keystore>${keystore}</keystore>
+						<keystore>${keystore}</keystore>
 						<!-- MUST BE PROVIDED BY COMMAND LINE ARGUMENTS -->
 						<!-- -Dstorepass=xxx -Dkeypass=xxx -->
 						<keypass>${keypass}</keypass>
@@ -191,4 +193,5 @@
 
 	</dependencies>
 
+	<description>An application used to analyze JRebirth logs</description>
 </project>
