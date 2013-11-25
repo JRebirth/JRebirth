@@ -9,6 +9,9 @@
 
 	<groupId>org.jrebirth</groupId>
 	<artifactId>core</artifactId>
+	<version>0.7.6</version>
+	<packaging>jar</packaging>
+
 	<name>Core Lib</name>
 	<description>The Core library of the JRebirth Framework</description>
 

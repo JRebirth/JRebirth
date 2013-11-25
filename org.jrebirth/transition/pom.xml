@@ -8,9 +8,12 @@
 	</parent>
 	<groupId>org.jrebirth</groupId>
 	<artifactId>transition</artifactId>
+	<version>0.7.6</version>
+	<packaging>jar</packaging>
+
 	<name>Transition</name>
 	<description>A set of beautiful &amp; powerful transition</description>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.jrebirth</groupId>

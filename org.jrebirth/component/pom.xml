@@ -9,6 +9,9 @@
 
 	<groupId>org.jrebirth</groupId>
 	<artifactId>component</artifactId>
+	<version>0.7.6</version>
+	<packaging>jar</packaging>
+
 	<name>Components</name>
 	<description>Convenient components to use with JRebirth Core</description>
 
@@ -19,4 +22,5 @@
 			<version>0.7.6</version>
 		</dependency>
 	</dependencies>
+
 </project>
