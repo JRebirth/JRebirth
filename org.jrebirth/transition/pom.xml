@@ -3,12 +3,11 @@
 	<parent>
 		<artifactId>jrebirth</artifactId>
 		<groupId>org</groupId>
-		<version>0.7.6</version>
+		<version>0.7.7-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<groupId>org.jrebirth</groupId>
 	<artifactId>transition</artifactId>
-	<version>0.7.6</version>
 	<packaging>jar</packaging>
 
 	<name>Transition</name>
@@ -18,7 +17,7 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.6</version>
+			<version>0.7.7-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
