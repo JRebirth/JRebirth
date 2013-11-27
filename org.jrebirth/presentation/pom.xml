@@ -3,12 +3,11 @@
 	<parent>
 		<groupId>org</groupId>
 		<artifactId>jrebirth</artifactId>
-		<version>0.7.6</version>
+		<version>0.7.7-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<groupId>org.jrebirth</groupId>
 	<artifactId>presentation</artifactId>
-	<version>0.7.6</version>
 	<packaging>jar</packaging>
 
 	<name>Prez Engine</name>
@@ -44,7 +43,7 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.6</version>
+			<version>0.7.7-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
