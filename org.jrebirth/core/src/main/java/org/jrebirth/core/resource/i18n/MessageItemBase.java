@@ -74,7 +74,7 @@ public final class MessageItemBase implements MessageItem {
 
                 // In developer mode throw a runtime exception to stop the current task
                 if (JRebirthParameters.DEVELOPER_MODE.get()) {
-                    throw new CoreRuntimeException("Invalid key : " + res, e);
+                    throw new CoreRuntimeException("Bad formatted Message key : " + res, e);
                 }
             }
         }
