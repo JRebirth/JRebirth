@@ -4,7 +4,8 @@
 	<parent>
 		<artifactId>jrebirth</artifactId>
 		<groupId>org</groupId>
-		<version>0.7.6</version>
+		<version>0.7.7-SNAPSHOT</version>
+		<relativePath>..</relativePath>
 	</parent>
 
 	<groupId>org.jrebirth</groupId>
@@ -25,7 +26,7 @@
 		<deployUrl>http://showcases.jrebirth.org</deployUrl>
 		<deployPath>${project.artifactId}/${project.version}</deployPath>
 
-		<!-- <jnlpFilename>MasteringTables.jnlp</jnlpFilename> <appClass>org.jrebirth.demo.masteringtables.MTApplication</appClass> -->
+		<!-- <jnlpFilename>.jnlp</jnlpFilename> <appClass>org.jrebirth.showcase</appClass> -->
 
 		<appletWidth>800</appletWidth>
 		<appletHeight>600</appletHeight>
@@ -35,11 +36,11 @@
 
 	</properties>
 
-	<!-- <issueManagement> <system>GitHub Issues</system> <url>https://github.com/JRebirth/JRebirth-Showcase</url> </issueManagement> <ciManagement> <system>Jenkins</system> <url>http://ci.jrebirth.org/job/JRebirth-Showcase-master/</url> 
-		</ciManagement> <scm> <connection>scm:git:git://github.com/JRebirth/JRebirth-Showcase.git</connection> <developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth-Showcase.git</developerConnection> 
-		<url>https://github.com/JRebirth/JRebirth-Showcase</url> </scm> <organization> <name>JRebirth Open Group</name> <url>http://www.jrebirth.org</url> </organization> <licenses> <license> <name>Apache License</name> 
-		<url>http://www.apache.org/licenses/LICENSE-2.0.html</url> <distribution>repo</distribution> <comments>Version 2.0, January 2004</comments> </license> </licenses> -->
-
+	<modules>
+		<module>undoredo</module>
+		<module>fxml</module>
+	</modules>
+	
 	<build>
 		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
 		<resources>
@@ -160,11 +161,8 @@
 				</configuration>
 			</plugin>
 
-			<!-- Project Quality -->
-			<!-- <plugin> <groupId>org.codehaus.sonar</groupId> <artifactId>sonar-maven3-plugin</artifactId> <version>3.3.2</version> </plugin> -->
 		</plugins>
 
-		<!-- <extensions> <extension> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-ftp</artifactId> <version>2.2</version> </extension> </extensions> -->
 	</build>
 
 	<dependencies>
@@ -178,17 +176,9 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>0.7.6</version>
+			<version>0.7.7-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
 
-	<!-- <distributionManagement> <repository> <id>JRebirth-Release</id> <name>JRebirth Releases Repository</name> <url>http://repo.jrebirth.org/jrebirth-release-local</url> </repository> <snapshotRepository> 
-		<id>JRebirth-Snapshot</id> <name>JRebirth Snasphots Repository</name> <url>http://repo.jrebirth.org/jrebirth-snapshot-local</url> </snapshotRepository> <site> <id>JRebirth_Sites</id> <name>JRebirth Sites</name> 
-		<url>ftp://jrebirth.org/sites/${project.groupId}.${project.artifactId}-${project.version}</url> </site> </distributionManagement> -->
-
-	<modules>
-		<module>undoredo</module>
-		<module>fxml</module>
-	</modules>
 </project>
