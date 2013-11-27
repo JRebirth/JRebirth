@@ -47,12 +47,14 @@ public final class CheckerUtility implements UtilMessages {
         if (JRebirthParameters.DEVELOPER_MODE.get()) {
 
             for (final WaveType waveType : waveTypes) {
+
+                final String methodName = ClassUtility.underscoreToCamelCase(waveType.toString());
                 final List<Method> methods = ClassUtility.retrieveMethodList(waveReadyClass, waveType.toString());
 
                 if (methods.size() < 1) {
-                    LOGGER.log(BROKEN_API_NO_METHOD, waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString()));
-                    LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(), ((WaveTypeBase) waveType).getWaveItemList());
-                    throw new CoreRuntimeException(BROKEN_API_NO_METHOD.get(waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString())));
+                    LOGGER.log(BROKEN_API_NO_METHOD, waveReadyClass.getSimpleName(), methodName);
+                    LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(), methodName, ((WaveTypeBase) waveType).getItems());
+                    throw new CoreRuntimeException(BROKEN_API_NO_METHOD.get(waveReadyClass.getSimpleName(), methodName));
                 }
 
                 // Check parameter only for a WaveTypeBase
@@ -65,19 +67,19 @@ public final class CheckerUtility implements UtilMessages {
 
                     for (int j = 0; j < methods.size() && !hasCompliantMethod; j++) {
                         hasCompliantMethod = checkMethodSignature(methods.get(j), wParams);
-                        if (hasCompliantMethod) {
-                            methodParameters = methods.get(j).getTypeParameters().length - 1; // Remove the wave parameters
+                        if (!hasCompliantMethod) {
+                            methodParameters = methods.get(j).getParameterTypes().length - 1; // Remove the wave parameters
                         }
                     }
                     if (!hasCompliantMethod) {
-                        LOGGER.log(BROKEN_API_WRONG_PARAMETERS, waveReadyClass.getSimpleName(), ClassUtility.underscoreToCamelCase(waveType.toString()),
-                                ((WaveTypeBase) waveType).getWaveItemList().size(),
-                                methodParameters);
+                        LOGGER.log(BROKEN_API_WRONG_PARAMETERS, waveReadyClass.getSimpleName(), methodName,
+                                ((WaveTypeBase) waveType).getWaveItemList().size(), methodParameters);
 
-                        LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(), ((WaveTypeBase) waveType).getWaveItemList());
+                        LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(),
+                                methodName, ((WaveTypeBase) waveType).getItems());
 
                         throw new CoreRuntimeException(BROKEN_API_WRONG_PARAMETERS.get(waveReadyClass.getSimpleName(),
-                                ClassUtility.underscoreToCamelCase(waveType.toString()),
+                                methodName,
                                 ((WaveTypeBase) waveType).getWaveItemList().size(),
                                 methodParameters));
                     }

@@ -17,6 +17,7 @@
  */
 package org.jrebirth.core.wave;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,9 +149,13 @@ public final class WaveTypeBase implements WaveType {
             } else {
                 sb.append(", ");
             }
-            sb.append(waveItem.getItemType().getClass().getSimpleName()).append(" ");
+            String fullName = waveItem.getItemType() instanceof ParameterizedType ? ((ParameterizedType) waveItem.getItemType()).toString()
+                    : ((Class<?>) waveItem.getItemType()).getName();
+            sb.append(fullName).append(" ");
+
+            fullName = fullName.replaceAll("[<>]", "");
             if (waveItem.getName() == null || waveItem.getName().isEmpty()) {
-                sb.append(ObjectUtility.lowerFirstChar(waveItem.getItemType().getClass().getSimpleName()));
+                sb.append(ObjectUtility.lowerFirstChar(fullName.substring(fullName.lastIndexOf(".") + 1)));
             } else {
                 sb.append(waveItem.getName());
             }
