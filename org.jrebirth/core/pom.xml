@@ -3,13 +3,12 @@
 	<parent>
 		<groupId>org</groupId>
 		<artifactId>jrebirth</artifactId>
-		<version>0.7.6</version>
+		<version>0.7.7-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
 	<groupId>org.jrebirth</groupId>
 	<artifactId>core</artifactId>
-	<version>0.7.6</version>
 	<packaging>jar</packaging>
 
 	<name>Core Lib</name>
@@ -21,7 +20,7 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>preloader</artifactId>
-			<version>0.7.6</version>
+			<version>0.7.7-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 
