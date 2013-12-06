@@ -39,6 +39,9 @@ public interface JRebirthMarkers {
     /** The Marker used by JRebirth Link layer. */
     Marker LINK = MarkerFactory.getMarker("LINK");
 
+    /** The Marker used by JRebirth Key layer. */
+    Marker KEY = MarkerFactory.getMarker("KEY  ");
+
     /** The Marker used by JRebirth Util layer. */
     Marker UTIL = MarkerFactory.getMarker("UTIL");
 
