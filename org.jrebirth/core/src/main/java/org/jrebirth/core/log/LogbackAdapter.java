@@ -17,17 +17,17 @@
  */
 package org.jrebirth.core.log;
 
-import ch.qos.logback.classic.Logger;
-
 import org.jrebirth.core.resource.i18n.MessageItem;
 
 import org.slf4j.Marker;
 import org.slf4j.spi.LocationAwareLogger;
 
+import ch.qos.logback.classic.Logger;
+
 /**
  * The Class LogbackAdapter.
  */
-public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
+public class LogbackAdapter extends AbstractAdapter implements JRLogger { // NOSONAR lot of methods !!
 
     /**
      * The fully qualified name of this class. Used in gathering caller information.
@@ -83,6 +83,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
     @Override
     public void log(final MessageItem messageItem) {
         this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.get(), null, null);
+        if (messageItem.getLevel() == JRLevel.Error) {
+            throwError(messageItem, null);
+        }
     }
 
     /**
@@ -91,6 +94,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
     @Override
     public void log(final MessageItem messageItem, final Throwable t) {
         this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.get(), null, t);
+        if (messageItem.getLevel() == JRLevel.Error) {
+            throwError(messageItem, t);
+        }
     }
 
     /**
@@ -99,6 +105,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
     @Override
     public void log(final MessageItem messageItem, final Object... parameters) {
         this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.get(parameters), null, null);
+        if (messageItem.getLevel() == JRLevel.Error) {
+            throwError(messageItem, null, parameters);
+        }
     }
 
     /**
@@ -107,6 +116,9 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
     @Override
     public void log(final MessageItem messageItem, final Throwable t, final Object... parameters) {
         this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.get(parameters), null, t);
+        if (messageItem.getLevel() == JRLevel.Error) {
+            throwError(messageItem, t, parameters);
+        }
     }
 
     /**
@@ -259,6 +271,7 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
     @Override
     public void error(final MessageItem messageItem) {
         this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(), null, null);
+        throwError(messageItem, null);
     }
 
     /**
@@ -267,6 +280,7 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
     @Override
     public void error(final MessageItem messageItem, final Throwable t) {
         this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(), null, t);
+        throwError(messageItem, t);
     }
 
     /**
@@ -277,6 +291,7 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
         if (this.logbackLogger.isErrorEnabled(messageItem.getMarker())) {
             this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(parameters), null, t);
         }
+        throwError(messageItem, t, parameters);
     }
 
     /**
@@ -287,6 +302,7 @@ public class LogbackAdapter implements JRLogger { // NOSONAR lot of methods !!
         if (this.logbackLogger.isErrorEnabled(messageItem.getMarker())) {
             this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.get(parameters), null, null);
         }
+        throwError(messageItem, null, parameters);
     }
 
     /**
