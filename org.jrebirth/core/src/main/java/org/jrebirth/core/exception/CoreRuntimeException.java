@@ -57,18 +57,20 @@ public class CoreRuntimeException extends RuntimeException {
      * 
      * @param messageItem the message item to display.
      * @param t the base exception thrown
+     * @param parameters the message parameters (if any)
      */
-    public CoreRuntimeException(final MessageItem messageItem, final Throwable t) {
-        super(messageItem.get(), t);
+    public CoreRuntimeException(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        super(messageItem.get(parameters), t);
     }
 
     /**
      * Constructor without base exception.
      * 
      * @param messageItem the message item to display.
+     * @param parameters the message parameters (if any)
      */
-    public CoreRuntimeException(final MessageItem messageItem) {
-        super(messageItem.get());
+    public CoreRuntimeException(final MessageItem messageItem, final Object... parameters) {
+        super(messageItem.get(parameters));
     }
 
     /**

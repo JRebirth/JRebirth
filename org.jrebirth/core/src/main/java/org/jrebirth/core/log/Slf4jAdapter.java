@@ -27,7 +27,7 @@ import org.slf4j.Marker;
  * 
  * @author Sébastien Bordes
  */
-public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
+public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSONAR lot of methods !!
 
     /** The internal logger. */
     private final Logger slf4jLogger; // NOSONAR this is a wrapped logger
@@ -82,6 +82,7 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
                 break;
             case Error:
                 error(messageItem, t, parameters);
+                throwError(messageItem, t, parameters);
                 break;
             case Info:
                 info(messageItem, t, parameters);
@@ -89,6 +90,7 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
             default:
                 break;
         }
+
     }
 
     /**
@@ -241,6 +243,7 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
     @Override
     public void error(final MessageItem messageItem) {
         this.slf4jLogger.error(messageItem.getMarker(), messageItem.get());
+        throwError(messageItem, null);
     }
 
     /**
@@ -249,6 +252,7 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
     @Override
     public void error(final MessageItem messageItem, final Throwable t) {
         this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(), t);
+        throwError(messageItem, t);
     }
 
     /**
@@ -259,6 +263,7 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
         if (this.slf4jLogger.isErrorEnabled(messageItem.getMarker())) {
             this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(parameters));
         }
+        throwError(messageItem, null, parameters);
     }
 
     /**
@@ -269,6 +274,7 @@ public class Slf4jAdapter implements JRLogger { // NOSONAR lot of methods !!
         if (this.slf4jLogger.isErrorEnabled(messageItem.getMarker())) {
             this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(parameters), t);
         }
+        throwError(messageItem, t, parameters);
     }
 
     /**
