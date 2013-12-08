@@ -139,9 +139,9 @@ public final class ClassUtility implements UtilMessages {
                 }
             }
             if (genericClass == null) {
-                throw new CoreException(GENERIC_TYPE_ERROR_1.get(sb.toString(), mainClass.getName()), e);
+                throw new CoreException(GENERIC_TYPE_ERROR_1.getText(sb.toString(), mainClass.getName()), e);
             } else {
-                throw new CoreException(GENERIC_TYPE_ERROR_2.get(genericClass.getName(), mainClass.getName()), e);
+                throw new CoreException(GENERIC_TYPE_ERROR_2.getText(genericClass.getName(), mainClass.getName()), e);
             }
         }
     }

@@ -40,7 +40,7 @@ public abstract class AbstractMessageException extends Exception {
      * @param messageItem the message item to display.
      */
     public AbstractMessageException(final MessageItem messageItem) {
-        super(messageItem.get());
+        super(messageItem.getText());
     }
 
     /**
@@ -69,7 +69,7 @@ public abstract class AbstractMessageException extends Exception {
      * @param t the base exception thrown
      */
     public AbstractMessageException(final MessageItem messageItem, final Throwable t) {
-        super(messageItem.get(), t);
+        super(messageItem.getText(), t);
     }
 
     /**

@@ -98,7 +98,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
      */
     @Override
     public void trace(final MessageItem messageItem) {
-        this.slf4jLogger.trace(messageItem.getMarker(), messageItem.get());
+        this.slf4jLogger.trace(messageItem.getMarker(), messageItem.getText());
     }
 
     /**
@@ -106,7 +106,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
      */
     @Override
     public void trace(final MessageItem messageItem, final Throwable t) {
-        this.slf4jLogger.trace(messageItem.getMarker(), messageItem.get(), t);
+        this.slf4jLogger.trace(messageItem.getMarker(), messageItem.getText(), t);
     }
 
     /**
@@ -115,7 +115,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
     @Override
     public void trace(final MessageItem messageItem, final Object... parameters) {
         if (this.slf4jLogger.isTraceEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.trace(messageItem.getMarker(), messageItem.get(parameters));
+            this.slf4jLogger.trace(messageItem.getMarker(), messageItem.getText(parameters));
         }
     }
 
@@ -125,7 +125,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
     @Override
     public void trace(final MessageItem messageItem, final Throwable t, final Object... parameters) {
         if (this.slf4jLogger.isTraceEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.trace(messageItem.getMarker(), messageItem.get(parameters), t);
+            this.slf4jLogger.trace(messageItem.getMarker(), messageItem.getText(parameters), t);
         }
     }
 
@@ -134,7 +134,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
      */
     @Override
     public void debug(final MessageItem messageItem) {
-        this.slf4jLogger.debug(messageItem.getMarker(), messageItem.get());
+        this.slf4jLogger.debug(messageItem.getMarker(), messageItem.getText());
     }
 
     /**
@@ -142,7 +142,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
      */
     @Override
     public void debug(final MessageItem messageItem, final Throwable t) {
-        this.slf4jLogger.debug(messageItem.getMarker(), messageItem.get(), t);
+        this.slf4jLogger.debug(messageItem.getMarker(), messageItem.getText(), t);
     }
 
     /**
@@ -151,7 +151,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
     @Override
     public void debug(final MessageItem messageItem, final Object... parameters) {
         if (this.slf4jLogger.isDebugEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.debug(messageItem.getMarker(), messageItem.get(parameters));
+            this.slf4jLogger.debug(messageItem.getMarker(), messageItem.getText(parameters));
         }
     }
 
@@ -161,7 +161,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
     @Override
     public void debug(final MessageItem messageItem, final Throwable t, final Object... parameters) {
         if (this.slf4jLogger.isDebugEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.debug(messageItem.getMarker(), messageItem.get(parameters), t);
+            this.slf4jLogger.debug(messageItem.getMarker(), messageItem.getText(parameters), t);
         }
     }
 
@@ -170,7 +170,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
      */
     @Override
     public void info(final MessageItem messageItem) {
-        this.slf4jLogger.info(messageItem.getMarker(), messageItem.get());
+        this.slf4jLogger.info(messageItem.getMarker(), messageItem.getText());
     }
 
     /**
@@ -178,7 +178,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
      */
     @Override
     public void info(final MessageItem messageItem, final Throwable t) {
-        this.slf4jLogger.info(messageItem.getMarker(), messageItem.get(), t);
+        this.slf4jLogger.info(messageItem.getMarker(), messageItem.getText(), t);
     }
 
     /**
@@ -187,7 +187,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
     @Override
     public void info(final MessageItem messageItem, final Object... parameters) {
         if (this.slf4jLogger.isInfoEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.info(messageItem.getMarker(), messageItem.get(parameters));
+            this.slf4jLogger.info(messageItem.getMarker(), messageItem.getText(parameters));
         }
     }
 
@@ -197,7 +197,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
     @Override
     public void info(final MessageItem messageItem, final Throwable t, final Object... parameters) {
         if (this.slf4jLogger.isInfoEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.info(messageItem.getMarker(), messageItem.get(parameters), t);
+            this.slf4jLogger.info(messageItem.getMarker(), messageItem.getText(parameters), t);
         }
     }
 
@@ -206,7 +206,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
      */
     @Override
     public void warn(final MessageItem messageItem) {
-        this.slf4jLogger.warn(messageItem.getMarker(), messageItem.get());
+        this.slf4jLogger.warn(messageItem.getMarker(), messageItem.getText());
     }
 
     /**
@@ -214,7 +214,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
      */
     @Override
     public void warn(final MessageItem messageItem, final Throwable t) {
-        this.slf4jLogger.warn(messageItem.getMarker(), messageItem.get(), t);
+        this.slf4jLogger.warn(messageItem.getMarker(), messageItem.getText(), t);
     }
 
     /**
@@ -223,7 +223,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
     @Override
     public void warn(final MessageItem messageItem, final Object... parameters) {
         if (this.slf4jLogger.isWarnEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.warn(messageItem.getMarker(), messageItem.get(parameters));
+            this.slf4jLogger.warn(messageItem.getMarker(), messageItem.getText(parameters));
         }
     }
 
@@ -233,7 +233,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
     @Override
     public void warn(final MessageItem messageItem, final Throwable t, final Object... parameters) {
         if (this.slf4jLogger.isWarnEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.warn(messageItem.getMarker(), messageItem.get(parameters), t);
+            this.slf4jLogger.warn(messageItem.getMarker(), messageItem.getText(parameters), t);
         }
     }
 
@@ -242,7 +242,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
      */
     @Override
     public void error(final MessageItem messageItem) {
-        this.slf4jLogger.error(messageItem.getMarker(), messageItem.get());
+        this.slf4jLogger.error(messageItem.getMarker(), messageItem.getText());
         throwError(messageItem, null);
     }
 
@@ -251,7 +251,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
      */
     @Override
     public void error(final MessageItem messageItem, final Throwable t) {
-        this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(), t);
+        this.slf4jLogger.error(messageItem.getMarker(), messageItem.getText(), t);
         throwError(messageItem, t);
     }
 
@@ -261,7 +261,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
     @Override
     public void error(final MessageItem messageItem, final Object... parameters) {
         if (this.slf4jLogger.isErrorEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(parameters));
+            this.slf4jLogger.error(messageItem.getMarker(), messageItem.getText(parameters));
         }
         throwError(messageItem, null, parameters);
     }
@@ -272,7 +272,7 @@ public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSON
     @Override
     public void error(final MessageItem messageItem, final Throwable t, final Object... parameters) {
         if (this.slf4jLogger.isErrorEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.error(messageItem.getMarker(), messageItem.get(parameters), t);
+            this.slf4jLogger.error(messageItem.getMarker(), messageItem.getText(parameters), t);
         }
         throwError(messageItem, t, parameters);
     }
