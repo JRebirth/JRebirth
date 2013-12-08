@@ -7,6 +7,8 @@ import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.ui.DefaultModel;
 import org.jrebirth.core.ui.NullView;
 import org.jrebirth.core.wave.Wave;
+import org.jrebirth.core.wave.WaveBuilder;
+import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveType;
 import org.jrebirth.core.wave.WaveTypeBase;
@@ -105,5 +107,50 @@ public class CheckerTest {
         public void doType4(final Object item3, final Object item2, final Object item1, final Wave wave) {
         }
 
+    }
+
+    @Test()
+    public void checkWaves() {
+
+        checkWave(WaveBuilder.create().waveType(TYPE_0)
+                .build(), null);
+
+        checkWave(WaveBuilder.create().waveType(TYPE_1)
+                .data(WaveData.build(ITEM_1, "string"))
+                .build(), null);
+
+        checkWave(WaveBuilder.create().waveType(TYPE_1)
+                .data(WaveData.build(ITEM_2, 0))
+                .build(), CoreRuntimeException.class);
+
+        checkWave(WaveBuilder.create().waveType(TYPE_2)
+                .data(WaveData.build(ITEM_1, "string"), WaveData.build(ITEM_2, Integer.MIN_VALUE))
+                .build(), null);
+
+        checkWave(WaveBuilder.create().waveType(TYPE_3)
+                .data(WaveData.build(ITEM_1, "string"), WaveData.build(ITEM_2, Integer.MIN_VALUE), WaveData.build(ITEM_3, new Object()))
+                .build(), null);
+
+        checkWave(WaveBuilder.create().waveType(TYPE_4)
+                .data(WaveData.build(ITEM_2, 42), WaveData.build(ITEM_2, Integer.MIN_VALUE), WaveData.build(ITEM_2, 12))
+                .build(), null);
+
+        checkWave(WaveBuilder.create().waveType(TYPE_5)
+                .data(WaveData.build(ITEM_1, "string"), WaveData.build(ITEM_2, Integer.MIN_VALUE), WaveData.build(ITEM_3, new Object()))
+                .build(), null);
+
+    }
+
+    private void checkWave(final Wave wave, final Class<? extends Throwable> exceptionClass) {
+        if (exceptionClass != null) {
+            this.thrown.expect(exceptionClass);
+        }
+
+        // Check that wave respect its WaveType contract (if any)
+        CheckerUtility.checkWave(wave);
+
+        // ONly called for successful checked wave type
+        // Other will throw a CoreRuntimeException and use the Junit rule
+        Assert.assertNull(exceptionClass);
     }
 }
