@@ -205,6 +205,28 @@ public class WaveItem<T> {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+
+        if (getItemType() != null) {
+            if (getItemType() instanceof ParameterizedType) {
+                sb.append(((ParameterizedType) getItemType()).toString());
+            } else {
+                sb.append(getItemType().toString());
+            }
+        }
+
+        if (getName() != null) {
+            sb.append(" ").append(getName());
+        }
+
+        return sb.toString();
+    }
+
+    /**
      * Initialize a WaveItem for a WaveItems.
      * 
      * @param waveItemEnum the enumerated wave item

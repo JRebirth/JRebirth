@@ -45,6 +45,12 @@ public interface UtilMessages extends MessageContainer {
     /** "{0} API is broken, the method {1} has wrong parameters, expected:{2}  provided:{3}" . */
     MessageItem BROKEN_API_WRONG_PARAMETERS = create(new LogMessage("jrebirth.util.brokenApiWrongParameters", JRLevel.Error, JRebirthMarkers.UTIL));
 
+    /** "Broken Wave sent : {0}" . */
+    MessageItem BROKEN_WAVE_SENT = create(new LogMessage("jrebirth.util.brokenWaveSent", JRLevel.Error, JRebirthMarkers.UTIL));
+
+    /** "This wave must provide these items: {0}" . */
+    MessageItem BROKEN_WAVE_BAD_ITEM_LIST = create(new LogMessage("jrebirth.util.brokenWaveBadItemList", JRLevel.Error, JRebirthMarkers.UTIL));
+
     /** ClasspathUtility. */
 
     /** "The resource {0} is ignored from classpath search engine (not a zip|jar|directory)". */
