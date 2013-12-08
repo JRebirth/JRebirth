@@ -60,7 +60,7 @@ public class CoreRuntimeException extends RuntimeException {
      * @param parameters the message parameters (if any)
      */
     public CoreRuntimeException(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        super(messageItem.get(parameters), t);
+        super(messageItem.getText(parameters), t);
     }
 
     /**
@@ -70,7 +70,7 @@ public class CoreRuntimeException extends RuntimeException {
      * @param parameters the message parameters (if any)
      */
     public CoreRuntimeException(final MessageItem messageItem, final Object... parameters) {
-        super(messageItem.get(parameters));
+        super(messageItem.getText(parameters));
     }
 
     /**

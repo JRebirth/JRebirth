@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, MessageParams, String> {
+public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, MessageParams, MessageResource> {
 
     /**
      * The class logger.
@@ -55,7 +55,7 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
     private final List<ResourceBundle> resourceBundles = new ArrayList<>();
 
     /** Store all overridden values defined by the call of define method. */
-    private final Map<MessageItem, String> overriddenMessageMap = new ConcurrentHashMap<>();
+    private final Map<MessageItem, MessageResource> overriddenMessageMap = new ConcurrentHashMap<>();
 
     /** The Wildcard used to load Messages files. */
     private String messageFileWildcard;
@@ -120,7 +120,7 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
         final String rbName = rbFile.getName().substring(0, rbFile.getName().lastIndexOf(".properties"));
 
         if (rbName == null || rbName.isEmpty()) {
-            LOGGER.error(JRebirthMarkers.MESSAGE, "Resource Bundle must be not not null and not empty");
+            LOGGER.error(JRebirthMarkers.MESSAGE, "Resource Bundle must be not null and not empty");
         } else {
 
             LOGGER.info(JRebirthMarkers.MESSAGE, "Store ResourceBundle : {} ", rbName);
@@ -136,47 +136,45 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
      * {@inheritDoc}
      */
     @Override
-    protected String buildResource(final MessageItem messageItem, final MessageParams messageParams) {
-        String messsageValue = null;
+    protected MessageResource buildResource(final MessageItem messageItem, final MessageParams messageParams) {
+
+        MessageResource messageResource = null;
+
         if (!(messageParams instanceof LogMessageParams) || messageParams instanceof LogMessageParams && JRebirthParameters.LOG_RESOLUTION.get()) {
 
             // Load overridden values first
             if (messageParams.name() != null && this.overriddenMessageMap.containsKey(messageItem)) {
 
                 // Retrieve the customized parameter
-                messsageValue = this.overriddenMessageMap.get(messageItem);
+                messageResource = this.overriddenMessageMap.get(messageItem);
             }
 
             // No overridden value is defined
             // Check if the message has a message key and
             // check if the message has been loaded from any customized Messages file
-            if (messsageValue == null && messageParams.name() != null /* && this.propertiesParametersMap.containsKey(op.name()) */) {
+            if (messageResource == null && messageParams.name() != null /* && this.propertiesParametersMap.containsKey(op.name()) */) {
 
                 try {
-                    messsageValue = findMessage(messageParams.name());
+                    if (messageParams instanceof LogMessageParams) {
+                        // Use default log marker and log level
+                        messageResource = new MessageResource(findMessage(messageParams.name()), ((LogMessageParams) messageParams).marker(), ((LogMessageParams) messageParams).level());
+                    } else {
+                        // Just convert the code into message
+                        messageResource = new MessageResource(findMessage(messageParams.name()));
+                    }
                 } catch (final MissingResourceException e) {
-                    messsageValue = '<' + messageParams.name() + '>';
+                    messageResource = new MessageResource('<' + messageParams.name() + '>');
                 }
-                // Retrieve the customized parameter
-                // object = op.parseObject(this.propertiesParametersMap.get(op.name()));
             }
-            //
-
-            // // Don't store the parameter into the map if it hasn't got any parameter name
-            // if (op.name() != null) {
-            //
-            // // Store the new parameter into the map
-            // this.propertiesParametersMap.put(op.name(), new ParameterEntry("", object));
-            // }
         }
 
-        // Object is still null
-        if (messsageValue == null) {
+        // Object is still null, the message will be the key with wrapped by <>
+        if (messageResource == null) {
             // No customized (properties and overridden) parameter has been loaded, gets the default programmatic one
-            messsageValue = '<' + messageParams.name() + '>';
+            messageResource = new MessageResource('<' + messageParams.name() + '>');
         }
 
-        return messsageValue;
+        return messageResource;
     }
 
     /**
@@ -206,7 +204,7 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
      * @param key the parameter item key
      * @param forcedValue the overridden value
      */
-    public void define(final MessageItem key, final String forcedValue) {
+    public void define(final MessageItem key, final MessageResource forcedValue) {
         this.overriddenMessageMap.put(key, forcedValue);
         set(key, forcedValue);
     }

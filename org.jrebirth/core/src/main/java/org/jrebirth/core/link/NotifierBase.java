@@ -136,7 +136,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         if (command == null) {
             LOGGER.error(COMMAND_NOT_FOUND_ERROR, wave.toString());
             if (JRebirthParameters.DEVELOPER_MODE.get()) {
-                this.unprocessedWaveHandler.manageUnprocessedWave(COMMAND_NOT_FOUND_MESSAGE.get(), wave);
+                this.unprocessedWaveHandler.manageUnprocessedWave(COMMAND_NOT_FOUND_MESSAGE.getText(), wave);
             }
         } else {
             // Run the command into the predefined thread
@@ -162,7 +162,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         if (service == null) {
             LOGGER.error(SERVICE_NOT_FOUND_ERROR, wave.toString());
             if (JRebirthParameters.DEVELOPER_MODE.get()) {
-                this.unprocessedWaveHandler.manageUnprocessedWave(SERVICE_NOT_FOUND_MESSAGE.get(), wave);
+                this.unprocessedWaveHandler.manageUnprocessedWave(SERVICE_NOT_FOUND_MESSAGE.getText(), wave);
             }
         } else {
             // The inner task will be run into the JRebirth Thread Pool
@@ -194,7 +194,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         if (wave.getRelatedClass() != null) {
             LOGGER.error(MODEL_NOT_FOUND_ERROR, wave.toString());
             if (JRebirthParameters.DEVELOPER_MODE.get()) {
-                this.unprocessedWaveHandler.manageUnprocessedWave(MODEL_NOT_FOUND_MESSAGE.get(), wave);
+                this.unprocessedWaveHandler.manageUnprocessedWave(MODEL_NOT_FOUND_MESSAGE.getText(), wave);
             }
         }
         // This key method could be managed in another way (fully sync with JAT), to see if it could be useful
@@ -249,7 +249,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         } else {
             LOGGER.warn(NO_WAVE_LISTENER, wave.getWaveType().toString());
             if (JRebirthParameters.DEVELOPER_MODE.get()) {
-                this.unprocessedWaveHandler.manageUnprocessedWave(NO_WAVE_LISTENER.get(wave.getWaveType().toString()), wave);
+                this.unprocessedWaveHandler.manageUnprocessedWave(NO_WAVE_LISTENER.getText(wave.getWaveType().toString()), wave);
             }
         }
 

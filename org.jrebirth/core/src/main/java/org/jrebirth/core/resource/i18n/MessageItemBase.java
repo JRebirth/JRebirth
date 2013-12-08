@@ -21,7 +21,6 @@ import java.text.MessageFormat;
 
 import org.jrebirth.core.exception.CoreRuntimeException;
 import org.jrebirth.core.log.JRLevel;
-import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.resource.ResourceBuilders;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 
@@ -52,7 +51,7 @@ public final class MessageItemBase implements MessageItem {
      * {@inheritDoc}
      */
     @Override
-    public String get() {
+    public MessageResource get() {
         return builder().get(this);
     }
 
@@ -60,8 +59,8 @@ public final class MessageItemBase implements MessageItem {
      * {@inheritDoc}
      */
     @Override
-    public String get(final Object... stringParameters) {
-        String res = get();
+    public String getText(final Object... stringParameters) {
+        String res = get().getMessage();
         if (stringParameters.length > 0) {
             try {
                 // Use the message formatter
@@ -85,7 +84,7 @@ public final class MessageItemBase implements MessageItem {
      * {@inheritDoc}
      */
     @Override
-    public void define(final String forcedValue) {
+    public void define(final MessageResource forcedValue) {
         // The default programmatic value (stored into ObjectParameter) is not updated but overridden into the local map
         builder().define(this, forcedValue);
     }
@@ -129,7 +128,7 @@ public final class MessageItemBase implements MessageItem {
      */
     @Override
     public Marker getMarker() {
-        return builder().getParam(this) instanceof LogMessageParams ? ((LogMessageParams) builder().getParam(this)).marker() : JRebirthMarkers.EMPTY;
+        return get().getMarker();
     }
 
     /**
@@ -137,7 +136,7 @@ public final class MessageItemBase implements MessageItem {
      */
     @Override
     public JRLevel getLevel() {
-        return builder().getParam(this) instanceof LogMessageParams ? ((LogMessageParams) builder().getParam(this)).level() : JRLevel.Info;
+        return get().getLevel();
     }
 
 }
