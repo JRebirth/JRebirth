@@ -113,7 +113,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
         final WaveReady waveReady = this;
 
         // Use the JRebirth Thread to add new subscriptions for given Wave Type
-        JRebirth.runIntoJIT(new AbstractJrbRunnable(LISTEN_WAVE_TYPE.get(getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName())) {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable(LISTEN_WAVE_TYPE.getText(getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName())) {
             @Override
             public void runInto() throws JRebirthThreadException {
                 getNotifier().listen(waveReady, waveChecker, waveTypes);
@@ -152,7 +152,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
         final WaveReady waveReady = this;
 
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJIT(new AbstractJrbRunnable(UNLISTEN_WAVE_TYPE.get(getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName())) {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable(UNLISTEN_WAVE_TYPE.getText(getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName())) {
 
             @Override
             protected void runInto() throws JRebirthThreadException {
@@ -222,10 +222,12 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      */
     private Wave sendWaveIntoJit(final Wave wave) {
 
+        CheckerUtility.checkWave(wave);
+
         wave.setStatus(Status.Sent);
 
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJIT(new AbstractJrbRunnable(SEND_WAVE.get(wave.toString())) {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable(SEND_WAVE.getText(wave.toString())) {
             @Override
             public void runInto() throws JRebirthThreadException {
                 getNotifier().sendWave(wave);

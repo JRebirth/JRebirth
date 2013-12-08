@@ -32,28 +32,28 @@ import org.slf4j.Marker;
  * 
  * @author Sébastien Bordes
  */
-public interface MessageItem extends ResourceItem<String, MessageBuilder> {
+public interface MessageItem extends ResourceItem<MessageResource, MessageBuilder> {
 
     /**
-     * Get the message formatted with parameterized objects.
+     * Get the message formatted text with or without parameterized objects.
      * 
      * @param stringParameters the list of object used as string parameter
      * 
-     * @return Returns right message foramtted with given parameters.
+     * @return Returns right message formatted with given parameters.
      */
-    String get(final Object... stringParameters);
+    String getText(final Object... stringParameters);
 
     /**
-     * Return the log marker if any.
+     * Return the optional log marker if any.
      * 
-     * @return the log marker or the Empty one
+     * @return the optional log marker or the Empty one
      */
     Marker getMarker();
 
     /**
-     * Return the log level if any.
+     * Return the optional log level if any.
      * 
-     * @return the log level or the info one
+     * @return the optional log level or the info one
      */
     JRLevel getLevel();
 
@@ -64,7 +64,7 @@ public interface MessageItem extends ResourceItem<String, MessageBuilder> {
      * 
      * @param forcedValue the new string for this message
      */
-    void define(final String forcedValue);
+    void define(final MessageResource forcedValue);
 
     /**
      * Persist a message value.

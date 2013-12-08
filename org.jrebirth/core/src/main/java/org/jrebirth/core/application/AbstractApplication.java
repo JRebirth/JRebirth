@@ -502,7 +502,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         Thread.setDefaultUncaughtExceptionHandler(getDefaultUncaughtExceptionHandler());
 
         // Initialize the uncaught exception handler for JavaFX Application Thread
-        JRebirth.runIntoJAT(new AbstractJrbRunnable(ATTACH_JAT_UEH.get()) {
+        JRebirth.runIntoJAT(new AbstractJrbRunnable(ATTACH_JAT_UEH.getText()) {
             @Override
             public void runInto() throws JRebirthThreadException {
                 Thread.currentThread().setUncaughtExceptionHandler(getJatUncaughtExceptionHandler());
@@ -510,7 +510,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         });
 
         // Initialize the uncaught exception handler for JRebirth Internal Thread
-        JRebirth.runIntoJIT(new AbstractJrbRunnable(ATTACH_JIT_UEH.get()) {
+        JRebirth.runIntoJIT(new AbstractJrbRunnable(ATTACH_JIT_UEH.getText()) {
             @Override
             public void runInto() throws JRebirthThreadException {
                 Thread.currentThread().setUncaughtExceptionHandler(getJitUncaughtExceptionHandler());

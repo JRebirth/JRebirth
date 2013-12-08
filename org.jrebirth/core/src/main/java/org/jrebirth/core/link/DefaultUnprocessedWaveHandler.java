@@ -15,7 +15,7 @@ public class DefaultUnprocessedWaveHandler implements UnprocessedWaveHandler, Li
      */
     @Override
     public void manageUnprocessedWave(final Wave wave) {
-        throw new CoreRuntimeException(WAVE_LOST.get(wave.toString()));
+        throw new CoreRuntimeException(WAVE_LOST.getText(wave.toString()));
     }
 
     /**
@@ -23,7 +23,7 @@ public class DefaultUnprocessedWaveHandler implements UnprocessedWaveHandler, Li
      */
     @Override
     public void manageUnprocessedWave(final String contextExplanation, final Wave wave) {
-        throw new CoreRuntimeException(WAVE_LOST_CONTEXT.get(wave.toString(), contextExplanation));
+        throw new CoreRuntimeException(WAVE_LOST_CONTEXT.getText(wave.toString(), contextExplanation));
     }
 
 }

@@ -18,7 +18,7 @@ public final class DefaultComponentFactory implements ComponentFactory, FacadeMe
         try {
             return clazz.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            throw new CoreException(COMPONENT_BUILD_ERROR.get(clazz.getName()), e);
+            throw new CoreException(COMPONENT_BUILD_ERROR.getText(clazz.getName()), e);
         }
     }
 

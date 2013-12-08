@@ -20,7 +20,7 @@ public class AbstractAdapter {
      */
     protected void throwError(final MessageItem messageItem, final Throwable t, final Object... parameters) {
         if (JRebirthParameters.DEVELOPER_MODE.get()) {
-            throw new CoreRuntimeException(messageItem, t);
+            throw new CoreRuntimeException(messageItem, t, parameters);
         }
     }
 

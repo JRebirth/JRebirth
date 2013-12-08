@@ -108,13 +108,13 @@ public final class FXMLUtils implements FXMLMessages {
         try {
             error = fxmlLoader.getLocation() == null;
             if (error) {
-                node = TextBuilder.create().text(FXML_ERROR_NODE_LABEL.get(fxmlPath)).build();
+                node = TextBuilder.create().text(FXML_ERROR_NODE_LABEL.getText(fxmlPath)).build();
             } else {
                 node = (Node) fxmlLoader.load(fxmlLoader.getLocation().openStream());
             }
 
         } catch (final IOException e) {
-            throw new CoreRuntimeException(FXML_NODE_DOESNT_EXIST.get(fxmlPath), e);
+            throw new CoreRuntimeException(FXML_NODE_DOESNT_EXIST.getText(fxmlPath), e);
         }
 
         final FXMLController<M, ?> fxmlController = (FXMLController<M, ?>) fxmlLoader.getController();
@@ -123,7 +123,7 @@ public final class FXMLUtils implements FXMLMessages {
         if (fxmlController != null) {
             // The fxml controller must extends AbstractFXMLController
             if (!error && !(fxmlLoader.getController() instanceof AbstractFXMLController)) {
-                throw new CoreRuntimeException(BAD_FXML_CONTROLLER_ANCESTOR.get(fxmlLoader.getController().getClass().getCanonicalName()));
+                throw new CoreRuntimeException(BAD_FXML_CONTROLLER_ANCESTOR.getText(fxmlLoader.getController().getClass().getCanonicalName()));
             }
             // Link the View component with the fxml controller
             fxmlController.setModel(model);

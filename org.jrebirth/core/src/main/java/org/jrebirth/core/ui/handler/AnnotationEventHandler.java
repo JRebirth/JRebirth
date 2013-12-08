@@ -89,7 +89,7 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
             try {
                 this.callbackObject.getClass().getDeclaredMethod(methodName, eventClass);
             } catch (NoSuchMethodException | SecurityException e) {
-                throw new CoreException(NO_EVENT_CALLBACK.get(this.callbackObject.getClass().getName(), methodName, eventClass.getName()), e);
+                throw new CoreException(NO_EVENT_CALLBACK.getText(this.callbackObject.getClass().getName(), methodName, eventClass.getName()), e);
             }
         }
 
