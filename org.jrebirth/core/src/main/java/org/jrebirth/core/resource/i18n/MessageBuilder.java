@@ -154,26 +154,22 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
             // check if the message has been loaded from any customized Messages file
             if (messageResource == null && messageParams.name() != null /* && this.propertiesParametersMap.containsKey(op.name()) */) {
 
-                try {
-                    if (messageParams instanceof LogMessageParams) {
-                        // Use default log marker and log level
-                        messageResource = new MessageResource(findMessage(messageParams.name()), ((LogMessageParams) messageParams).marker(), ((LogMessageParams) messageParams).level());
-                    } else {
-                        // Just convert the code into message
-                        messageResource = new MessageResource(findMessage(messageParams.name()));
-                    }
-                } catch (final MissingResourceException e) {
-                    messageResource = new MessageResource('<' + messageParams.name() + '>');
+                String rawMessage = findMessage(messageParams.name());
+                // No translation found, the message will be the key with wrapped by <>
+                if (rawMessage == null) {
+                    rawMessage = '<' + messageParams.name() + '>';
+                }
+
+                if (messageParams instanceof LogMessageParams) {
+                    // Use default log marker and log level
+                    messageResource = new MessageResource(rawMessage, ((LogMessageParams) messageParams).marker(), ((LogMessageParams) messageParams).level());
+                } else {
+                    // Just convert the code into message
+                    messageResource = new MessageResource(rawMessage);
                 }
             }
-        }
 
-        // Object is still null, the message will be the key with wrapped by <>
-        if (messageResource == null) {
-            // No customized (properties and overridden) parameter has been loaded, gets the default programmatic one
-            messageResource = new MessageResource('<' + messageParams.name() + '>');
         }
-
         return messageResource;
     }
 
@@ -188,11 +184,18 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
      */
     private String findMessage(final String messageKey) {
         String message = null;
-        for (int i = this.resourceBundles.size() - 1; i >= 0 && message == null; i--) {
 
-            if (this.resourceBundles.get(i).containsKey(messageKey)) {
-                message = this.resourceBundles.get(i).getString(messageKey);
+        try {
+            if (!this.resourceBundles.isEmpty()) {
+                for (int i = this.resourceBundles.size() - 1; i >= 0 && message == null; i--) {
+
+                    if (this.resourceBundles.get(i).containsKey(messageKey)) {
+                        message = this.resourceBundles.get(i).getString(messageKey);
+                    }
+                }
             }
+        } catch (final MissingResourceException e) {
+            LOGGER.error("Message key not found into resource bundle", e);
         }
 
         return message;
