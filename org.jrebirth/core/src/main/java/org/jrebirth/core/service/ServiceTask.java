@@ -177,6 +177,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             LOGGER.log(SERVICE_TASK_ERROR, e, getServiceHandlerName());
+            this.wave.setStatus(Status.Failed);
         }
         return res;
     }
@@ -220,11 +221,11 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
     }
 
     /**
-     * The task has complete because the source wave was consumed.
+     * The task has been terminated because the source wave was consumed or has failed.
      * 
      * Remove the task from the service pending list
      */
-    public void taskDone() {
+    public void taskAchieved() {
         // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
         this.service.removePendingTask(this.wave.getWUID());
     }

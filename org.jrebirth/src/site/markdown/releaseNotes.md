@@ -3,6 +3,21 @@
 Release Notes
 ==============
 
+
+7.7.0 - ["Wanna Rock"](https://www.youtube.com/watch?v=4xmckWVPRaI) Release 2013-12-31
+-----------------------------------------
+
+The first 7.x.x version that only supports Java 7
+
+
+- WAVE_HANDLER_METHOD_REQUIRED failure [#85](https://github.com/JRebirth/JRebirth/issues/85)
+A custom log was badly formatted, error message is also improved to facilitate trouble diagnosis
+
+- Retrieve model from different KeyParts (but same content) enhancement [#88](https://github.com/JRebirth/JRebirth/issues/85)
+Each JRebirth Component can now use object that embed @KeyGenerator annotation to define how unique string key will be generated
+
+
+
 0.7.6 - ["Testarossa Autodrive"](https://www.youtube.com/watch?v=YWIX3UuWdxo‎) Release - 2013-11-30
 -----------------------------------------
 

@@ -57,7 +57,8 @@ public final class ServiceTaskWaveListener implements WaveListener {
      */
     @Override
     public void waveCancelled(final Wave wave) {
-        // Nothing to do yet
+        // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
+        wave.get(JRebirthWaves.SERVICE_TASK).taskAchieved();
     }
 
     /**
@@ -67,7 +68,7 @@ public final class ServiceTaskWaveListener implements WaveListener {
     public void waveConsumed(final Wave wave) {
 
         // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
-        wave.get(JRebirthWaves.SERVICE_TASK).taskDone();
+        wave.get(JRebirthWaves.SERVICE_TASK).taskAchieved();
     }
 
     /**
@@ -75,7 +76,8 @@ public final class ServiceTaskWaveListener implements WaveListener {
      */
     @Override
     public void waveFailed(final Wave wave) {
-        // Nothing to do yet
+        // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
+        wave.get(JRebirthWaves.SERVICE_TASK).taskAchieved();
     }
 
     /**
