@@ -11,6 +11,7 @@ import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.log.JRLogger;
 import org.jrebirth.core.log.JRLoggerFactory;
 import org.jrebirth.core.resource.provided.JRebirthParameters;
+import org.jrebirth.core.wave.OnWave;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveType;
@@ -50,10 +51,11 @@ public final class CheckerUtility implements UtilMessages {
 
             for (final WaveType waveType : waveTypes) {
 
-                final String methodName = ClassUtility.underscoreToCamelCase(waveType.toString());
+                String methodName = ClassUtility.underscoreToCamelCase(waveType.toString());
                 final List<Method> methods = ClassUtility.retrieveMethodList(waveReadyClass, waveType.toString());
+                final List<Method> annotatedMethods = ClassUtility.getAnnotatedMethods(waveReadyClass, OnWave.class);
 
-                if (methods.size() < 1) {
+                if (methods.size() < 1 && annotatedMethods.size() < 1) {
                     LOGGER.log(BROKEN_API_NO_METHOD, waveReadyClass.getSimpleName(), methodName);
                     LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(), methodName, ((WaveTypeBase) waveType).getItems());
                 }
@@ -72,6 +74,19 @@ public final class CheckerUtility implements UtilMessages {
                             methodParameters = methods.get(j).getParameterTypes().length - 1; // Remove the wave parameters
                         }
                     }
+
+                    if (!hasCompliantMethod) {
+                        for (int j = 0; j < annotatedMethods.size() && !hasCompliantMethod; j++) {
+                            if (WaveTypeBase.getWaveType(annotatedMethods.get(j).getAnnotation(OnWave.class).value()) == waveType) {
+                                hasCompliantMethod = checkMethodSignature(annotatedMethods.get(j), wParams);
+                                if (!hasCompliantMethod) {
+                                    methodName = annotatedMethods.get(j).getName();
+                                    methodParameters = annotatedMethods.get(j).getParameterTypes().length - 1; // Remove the wave parameters
+                                }
+                            }
+                        }
+                    }
+
                     if (!hasCompliantMethod) {
                         LOGGER.log(BROKEN_API_WRONG_PARAMETERS, waveReadyClass.getSimpleName(), methodName,
                                 ((WaveTypeBase) waveType).getWaveItemList().size(), methodParameters);

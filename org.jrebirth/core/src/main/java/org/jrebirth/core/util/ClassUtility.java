@@ -394,4 +394,33 @@ public final class ClassUtility implements UtilMessages {
         return clazz;
     }
 
+    /**
+     * .
+     * 
+     * @param cls
+     * @param annotationClass
+     * 
+     * @return
+     */
+    public static List<Method> getAnnotatedMethods(final Class<?> cls, final Class<? extends Annotation> annotationClass) {
+        final List<Method> methodList = new ArrayList<>();
+
+        for (final Method m : cls.getDeclaredMethods()) {
+            if (m.getAnnotation(annotationClass) != null) {
+                methodList.add(m);
+            }
+        }
+
+        // Add implemented interfaces methods
+        for (final Class<?> i : cls.getInterfaces()) {
+            methodList.addAll(getAnnotatedMethods(i, annotationClass));
+        }
+
+        // Add super class methods
+        if (cls.getSuperclass() != null) {
+            methodList.addAll(getAnnotatedMethods(cls.getSuperclass(), annotationClass));
+        }
+
+        return methodList;
+    }
 }

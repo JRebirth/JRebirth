@@ -11,6 +11,7 @@
 	<packaging>jar</packaging>
 
 	<name>Analyzer</name>
+	<description>An application used to analyze JRebirth logs</description>
 
 	<properties>
 
@@ -58,36 +59,43 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>2.4</version>
 
-				<!-- <executions> <execution> <goals> <goal>sign</goal> </goals> </execution> </executions> -->
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<JavaFX-Version>2.0</JavaFX-Version>
-							<Main-Class>${appClass}</Main-Class>
-							<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
+				<executions>
+					<execution>
+						<id>Build_jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
 
-							<!-- <implementation-vendor>JRebirth</implementation-vendor> <implementation-title>JRebirthAnalyzer</implementation-title> <implementation-version>1.0</implementation-version> -->
+						<configuration>
+							<archive>
+								<manifestEntries>
+									<JavaFX-Version>2.0</JavaFX-Version>
+									<Main-Class>${appClass}</Main-Class>
+									<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
 
-							<!-- not automated yet -->
-							<JavaFX-Class-Path>logback-classic-1.0.13.jar logback-core-1.0.13.jar slf4j-api
-								-1.7.5.jar core-7.7.0-SNAPSHOT.jar</JavaFX-Class-Path>
+									<!-- <implementation-vendor>JRebirth</implementation-vendor> <implementation-title>JRebirthAnalyzer</implementation-title> <implementation-version>1.0</implementation-version> -->
 
-							<Permissions>${permissions}</Permissions>
-							<Codebase>${deployUrl}</Codebase>
-						</manifestEntries>
-						<manifest>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<addClasspath>true</addClasspath>
-						</manifest>
-					</archive>
+									<!-- not automated yet -->
+									<JavaFX-Class-Path>logback-classic-1.0.13.jar logback-core-1.0.13.jar slf4j-api
+										-1.7.5.jar core-7.7.0-SNAPSHOT.jar</JavaFX-Class-Path>
 
+									<Permissions>${permissions}</Permissions>
+									<Codebase>${deployUrl}</Codebase>
+								</manifestEntries>
+								<manifest>
+									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+									<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+									<addClasspath>true</addClasspath>
+								</manifest>
+							</archive>
+							<!-- <keystore>jrebirth.jks</keystore> <alias>jrebirth</alias> <storepass>gojava</storepass> <signedjar>${project.build.directory}/signed/${project.build.finalName}.jar</signedjar> <verify>true</verify> -->
+						</configuration>
+					</execution>
+				</executions>
 
-					<!-- <keystore>jrebirth.jks</keystore> <alias>jrebirth</alias> <storepass>gojava</storepass> <signedjar>${project.build.directory}/signed/${project.build.finalName}.jar</signedjar> <verify>true</verify> -->
-
-				</configuration>
 			</plugin>
 
 			<!-- <plugin> <artifactId>maven-assembly-plugin</artifactId> <configuration> <archive> <manifest> <mainClass>org.jrebirth.presentation.Presentation</mainClass> </manifest> </archive> <descriptorRefs> 
@@ -192,5 +200,4 @@
 
 	</dependencies>
 
-	<description>An application used to analyze JRebirth logs</description>
 </project>

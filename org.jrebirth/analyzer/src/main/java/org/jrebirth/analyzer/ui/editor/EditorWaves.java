@@ -50,8 +50,11 @@ public interface EditorWaves {
     /** Trigger a Stop wave. */
     WaveTypeBase DO_STOP = WaveTypeBase.build("STOP");
 
+    /** The WaveType key usabe by OnWave annotation. */
+    String DO_SELECT_EVENT_ACTION = "EVENT_SELECTED";
+
     /** Wave used to display info into the properties view. */
-    WaveTypeBase DO_SELECT_EVENT = WaveTypeBase.build("EVENT_SELECTED");
+    WaveTypeBase DO_SELECT_EVENT = WaveTypeBase.build(DO_SELECT_EVENT_ACTION);
 
     /** Wave type used to return the event currently processed. */
     WaveTypeBase RE_EVENT_PROCESSED = WaveTypeBase.build("EVENT_PROCESSED");
