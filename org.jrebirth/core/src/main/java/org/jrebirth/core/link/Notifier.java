@@ -17,6 +17,8 @@
  */
 package org.jrebirth.core.link;
 
+import java.lang.reflect.Method;
+
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.wave.Wave;
@@ -53,7 +55,20 @@ public interface Notifier {
      * 
      * @throws JRebirthThreadException if called outside the JRebirthThread
      */
-    void listen(final WaveReady linkedObject, final WaveType... waveTypes) throws JRebirthThreadException;
+    // void listen(final WaveReady<?> linkedObject, final WaveType... waveTypes) throws JRebirthThreadException;
+
+    /**
+     * Start to listen a defined type of wave.
+     * 
+     * MUST BE CALLED into the JRebirthThread.
+     * 
+     * @param linkedObject an object that can process the content of a wave
+     * @param method the default method to call
+     * @param waveTypes the type(s) of wave that interests the object (one or many)
+     * 
+     * @throws JRebirthThreadException if called outside the JRebirthThread
+     */
+    // void listen(final WaveReady<?> linkedObject, final Method method, final WaveType... waveTypes) throws JRebirthThreadException;
 
     /**
      * Start to listen a defined type of wave.
@@ -64,11 +79,12 @@ public interface Notifier {
      * 
      * @param linkedObject an object that can process the content of a wave
      * @param waveChecker the wave checker to filter unwanted wave to be processed by other components
+     * @param method the default method to call
      * @param waveTypes the type(s) of wave that interests the object (one or many)
      * 
      * @throws JRebirthThreadException if called outside the JRebirthThread
      */
-    void listen(final WaveReady linkedObject, final WaveChecker waveChecker, final WaveType... waveTypes) throws JRebirthThreadException;
+    void listen(final WaveReady<?> linkedObject, final WaveChecker waveChecker, final Method method, final WaveType... waveTypes) throws JRebirthThreadException;
 
     /**
      * Stop to listen a defined type of wave.
@@ -80,6 +96,6 @@ public interface Notifier {
      * 
      * @throws JRebirthThreadException if called outside the JRebirthThread
      */
-    void unlisten(final WaveReady linkedObject, final WaveType... waveType) throws JRebirthThreadException;
+    void unlisten(final WaveReady<?> linkedObject, final WaveType... waveType) throws JRebirthThreadException;
 
 }

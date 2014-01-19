@@ -18,7 +18,6 @@
 package org.jrebirth.core.link;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.jrebirth.core.command.Command;
@@ -97,10 +96,9 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
     /**
      * Return the list of key parts (considered as model objects).
      * 
-     * If the key value is an instance of List it will return it as is
-     * otherwise it will create a new list and add the unique key part object 
+     * If the key value is an instance of List it will return it as is otherwise it will create a new list and add the unique key part object
      * 
-     * @return Returns a list composed by all model objects (= component key parts).
+     * @return Returns a list composed by all model object (= component key parts).
      */
     @SuppressWarnings("unchecked")
     public List<Object> getListModelObject() {

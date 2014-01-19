@@ -20,6 +20,7 @@ package org.jrebirth.analyzer.ui.properties;
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.ui.DefaultModel;
+import org.jrebirth.core.wave.OnWave;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -34,7 +35,7 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
      */
     @Override
     protected void initModel() {
-        listen(EditorWaves.DO_SELECT_EVENT);
+        // listen(EditorWaves.DO_SELECT_EVENT);
     }
 
     /**
@@ -49,6 +50,7 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
      * {@inheritDoc}
      */
     @Override
+    @OnWave(EditorWaves.DO_SELECT_EVENT_ACTION)
     protected void processWave(final Wave wave) {
         if (EditorWaves.DO_SELECT_EVENT == wave.getWaveType()) {
 
