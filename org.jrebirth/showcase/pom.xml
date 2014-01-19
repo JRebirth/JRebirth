@@ -77,31 +77,39 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.2</version>
 
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<JavaFX-Version>2.0</JavaFX-Version>
-							<Main-Class>${appClass}</Main-Class>
-							<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
+				<executions>
+					<execution>
+						<id>produce_jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<manifestEntries>
+									<JavaFX-Version>2.0</JavaFX-Version>
+									<Main-Class>${appClass}</Main-Class>
+									<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
 
-							<!-- <implementation-vendor>JRebirth</implementation-vendor> <implementation-title>JRebirthAnalyzer</implementation-title> <implementation-version>1.0</implementation-version> -->
+									<!-- <implementation-vendor>JRebirth</implementation-vendor> <implementation-title>JRebirthAnalyzer</implementation-title> <implementation-version>1.0</implementation-version> -->
 
-							<!-- not automated yet -->
-							<!-- <JavaFX-Class-Path>logback-classic-1.0.13.jar logback-core-1.0.13.jar slf4j-api-1.7.5.jar core-0.7.4-SNAPSHOT.jar</JavaFX-Class-Path> -->
+									<!-- not automated yet -->
+									<!-- <JavaFX-Class-Path>logback-classic-1.0.13.jar logback-core-1.0.13.jar slf4j-api-1.7.5.jar core-0.7.4-SNAPSHOT.jar</JavaFX-Class-Path> -->
 
-							<Permissions>${permissions}</Permissions>
-							<Codebase>${deployUrl}</Codebase>
-						</manifestEntries>
-						<manifest>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<addClasspath>true</addClasspath>
-						</manifest>
-					</archive>
+									<Permissions>${permissions}</Permissions>
+									<Codebase>${deployUrl}</Codebase>
+								</manifestEntries>
+								<manifest>
+									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+									<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+									<addClasspath>true</addClasspath>
+								</manifest>
+							</archive>
 
-				</configuration>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>

@@ -17,11 +17,8 @@
  */
 package org.jrebirth.core.link;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.core.command.Command;
@@ -29,7 +26,6 @@ import org.jrebirth.core.command.CommandBean;
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
 import org.jrebirth.core.exception.JRebirthThreadException;
-import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.facade.WaveReady;
 import org.jrebirth.core.log.JRLogger;
@@ -38,6 +34,7 @@ import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
 import org.jrebirth.core.util.CheckerUtility;
 import org.jrebirth.core.util.ClassUtility;
+import org.jrebirth.core.wave.OnWave;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveBase;
@@ -45,6 +42,7 @@ import org.jrebirth.core.wave.WaveBean;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveGroup;
 import org.jrebirth.core.wave.WaveType;
+import org.jrebirth.core.wave.WaveTypeBase;
 import org.jrebirth.core.wave.checker.WaveChecker;
 
 /**
@@ -65,6 +63,9 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractWaveReady.class);
 
+    /** . */
+    public static final String PROCESS_WAVE_METHOD_NAME = "processWave";
+
     /** The wave type map. */
     private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
 
@@ -82,8 +83,17 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      */
     @Override
     public final void listen(final WaveType... waveTypes) {
-        // Call the other method with null waveChecker
-        listen(null, waveTypes);
+        // Call the other method with null waveChecker & method
+        listen(null, null, waveTypes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void listen(final WaveChecker waveChecker, final WaveType... waveTypes) {
+        // Call the other method with null method
+        listen(waveChecker, null, waveTypes);
     }
 
     /**
@@ -105,20 +115,33 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      * {@inheritDoc}
      */
     @Override
-    public final void listen(final WaveChecker waveChecker, final WaveType... waveTypes) {
+    public final void listen(final WaveChecker waveChecker, final Method method, final WaveType... waveTypes) {
 
         // Check API compliance
         CheckerUtility.checkWaveTypeContract(this.getClass(), waveTypes);
 
-        final WaveReady waveReady = this;
+        final WaveReady<?> waveReady = this;
 
         // Use the JRebirth Thread to add new subscriptions for given Wave Type
         JRebirth.runIntoJIT(new AbstractJrbRunnable(LISTEN_WAVE_TYPE.getText(getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName())) {
             @Override
             public void runInto() throws JRebirthThreadException {
-                getNotifier().listen(waveReady, waveChecker, waveTypes);
+                getNotifier().listen(waveReady, waveChecker, method, waveTypes);
             }
         });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void registerCallback(final WaveChecker waveChecker, final WaveType callType, final WaveType responseType) {
+
+        // Perform the subscription
+        listen(waveChecker, callType);
+
+        // Store a link between call Wave Type and return wave type
+        this.returnWaveTypeMap.put(callType, responseType);
     }
 
     /**
@@ -346,41 +369,41 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      */
     // protected abstract void parseWave(final Wave wave);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void handle(final Wave wave) throws WaveException {
-        try {
-            // Build parameter list of the searched method
-            final List<Object> parameterValues = new ArrayList<>();
-            for (final WaveData<?> wd : wave.getWaveItems()) {
-                // Add only wave items defined as parameter
-                if (wd.getKey().isParameter()) {
-                    parameterValues.add(wd.getValue());
-                }
-            }
-            // Add the current wave to process
-            parameterValues.add(wave);
-
-            // Search the wave handler method
-            final Method method = ClassUtility.getMethodByName(this.getClass(), ClassUtility.underscoreToCamelCase(wave.getWaveType().toString()));
-            if (method != null) {
-                // Call this method with right parameters
-                method.invoke(this, parameterValues.toArray());
-            }
-        } catch (final NoSuchMethodException e) {
-
-            LOGGER.info(CUSTOM_METHOD_NOT_FOUND, e.getMessage());
-            // If no method was found, call the default method
-            processWave(wave);
-
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            LOGGER.error(WAVE_DISPATCH_ERROR, e);
-            // Propagate the wave exception
-            throw new WaveException(wave, e);
-        }
-    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public final void handle(final Wave wave) throws WaveException {
+    // try {
+    // // Build parameter list of the searched method
+    // final List<Object> parameterValues = new ArrayList<>();
+    // for (final WaveData<?> wd : wave.getWaveItems()) {
+    // // Add only wave items defined as parameter
+    // if (wd.getKey().isParameter()) {
+    // parameterValues.add(wd.getValue());
+    // }
+    // }
+    // // Add the current wave to process
+    // parameterValues.add(wave);
+    //
+    // // Search the wave handler method
+    // final Method method = ClassUtility.getMethodByName(this.getClass(), ClassUtility.underscoreToCamelCase(wave.getWaveType().toString()));
+    // if (method != null) {
+    // // Call this method with right parameters
+    // method.invoke(this, parameterValues.toArray());
+    // }
+    // } catch (final NoSuchMethodException e) {
+    //
+    // LOGGER.info(CUSTOM_METHOD_NOT_FOUND, e.getMessage());
+    // // If no method was found, call the default method
+    // processWave(wave);
+    //
+    // } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+    // LOGGER.error(WAVE_DISPATCH_ERROR, e);
+    // // Propagate the wave exception
+    // throw new WaveException(wave, e);
+    // }
+    // }
 
     /**
      * Process the wave. Typically by using a switch on the waveType.
@@ -389,4 +412,53 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      */
     protected abstract void processWave(final Wave wave);
 
+    /**
+     * TODO To complete.
+     */
+    protected void manageOnWaveAnnotation() {
+
+        final OnWave clsOnWave = this.getClass().getAnnotation(OnWave.class);
+        if (clsOnWave != null) {
+            manageWaveTypeAction(clsOnWave.value(), null);
+            manageWaveTypeActions(clsOnWave, null);
+        }
+
+        OnWave onWave = null;
+        for (final Method method : ClassUtility.getAnnotatedMethods(this.getClass(), OnWave.class)) {
+            onWave = method.getAnnotation(OnWave.class);
+            manageWaveTypeAction(onWave.value(), method);
+            manageWaveTypeActions(onWave, method);
+        }
+
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param onWave
+     * @param method
+     */
+    private void manageWaveTypeAction(final String action, final Method method) {
+        final WaveType wt = WaveTypeBase.getWaveType(action);
+        if (wt != null) {
+            if (method == null || AbstractWaveReady.PROCESS_WAVE_METHOD_NAME.equals(method.getName())) {
+                // Ignore default method if it's the default fallback one
+                listen(wt);
+            } else {
+                listen(null, method, wt);
+            }
+        }
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param onWave
+     * @param method
+     */
+    private void manageWaveTypeActions(final OnWave onWave, final Method method) {
+        for (final String action : onWave.types()) {
+            manageWaveTypeAction(action, method);
+        }
+    }
 }

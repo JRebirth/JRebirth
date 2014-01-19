@@ -19,7 +19,10 @@ package org.jrebirth.core.wave;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jrebirth.core.resource.provided.JRebirthParameters;
 import org.jrebirth.core.util.ObjectUtility;
@@ -33,6 +36,9 @@ public final class WaveTypeBase implements WaveType {
 
     /** The generator of unique id. */
     private static int idGenerator;
+
+    /** Map that store WaveType used according to their unique identifier. */
+    private static Map<String, WaveType> waveTypeMap = Collections.synchronizedMap(new HashMap<String, WaveType>());
 
     /** The unique identifier of the wave type. */
     private int uid;
@@ -80,6 +86,29 @@ public final class WaveTypeBase implements WaveType {
         // Ensure that the uid will be unique at runtime
         synchronized (WaveTypeBase.class) {
             waveType.setUid(++idGenerator);
+        }
+
+        // it uses action without any prefix
+        if (!waveTypeMap.containsKey(action)) {
+            waveTypeMap.put(action, waveType);
+        }
+
+        return waveType;
+    }
+
+    /**
+     * 
+     * TODO To complete.
+     * 
+     * @param action
+     * 
+     * @return
+     */
+    public static WaveType getWaveType(final String action) {
+
+        WaveType waveType = null;
+        if (waveTypeMap.containsKey(action)) {
+            waveType = waveTypeMap.get(action);
         }
         return waveType;
     }
