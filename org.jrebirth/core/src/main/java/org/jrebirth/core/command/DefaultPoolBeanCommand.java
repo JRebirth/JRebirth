@@ -19,7 +19,6 @@ package org.jrebirth.core.command;
 
 import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
 
@@ -34,14 +33,6 @@ import org.jrebirth.core.wave.WaveBean;
  */
 @RunInto(RunType.JTP)
 public class DefaultPoolBeanCommand<WB extends WaveBean> extends AbstractSingleCommand<WB> {
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void ready() throws CoreException {
-        // Nothing to do yet by the default Pool command, must be overridden
-    }
 
     /**
      * {@inheritDoc}

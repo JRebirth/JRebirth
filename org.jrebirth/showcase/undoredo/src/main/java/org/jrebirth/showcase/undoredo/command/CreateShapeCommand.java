@@ -24,7 +24,6 @@ import javafx.scene.shape.RectangleBuilder;
 
 import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
 import org.jrebirth.showcase.undoredo.beans.ShapeType;
@@ -86,14 +85,6 @@ public class CreateShapeCommand extends AbstractUndoableCommand<WaveBean> {
         // Remove from editor
         getModel(UndoModel.class).removeShape(this.createdNode);
 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void ready() throws CoreException {
-        // Nothing to do yet
     }
 
 }
