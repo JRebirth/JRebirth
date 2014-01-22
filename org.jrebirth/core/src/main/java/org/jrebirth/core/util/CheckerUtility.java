@@ -151,10 +151,6 @@ public final class CheckerUtility implements UtilMessages {
         if (JRebirthParameters.DEVELOPER_MODE.get()) {
             if (wave.getWaveType() != null && wave.getWaveType() instanceof WaveTypeBase) {
 
-                if (((WaveTypeBase) wave.getWaveType()).getWaveItemList().size() > wave.getWaveItems().size()) {
-                    // not enough Wave Data;
-                }
-
                 // List missing wave items not held by WaveData wrapper
                 final List<WaveItem<?>> missingWaveItems = new ArrayList<>();
                 for (final WaveItem<?> item : ((WaveTypeBase) wave.getWaveType()).getWaveItemList()) {
@@ -165,23 +161,35 @@ public final class CheckerUtility implements UtilMessages {
 
                 }
 
+                // Check provided WaveBean (if any) EXPERIMENTAL
                 if (wave.getWaveBean() != null) {
-                    // Check that WaveItem not present into WaveData wrapper are available into WaveBean
-                    for (final WaveItem<?> missing : missingWaveItems) {
-                        if (missing.getName() != null && !missing.getName().isEmpty()) {
-                            for (final Field wbField : ClassUtility.retrievePropertyList(wave.getWaveBean().getClass())) {
 
+                    // Check that WaveItem not present into WaveData wrapper are available into available WaveBean
+                    for (int i = missingWaveItems.size() - 1; i >= 0; i--) {
+                        final WaveItem<?> missing = missingWaveItems.get(i);
+
+                        if (missing.getName() != null && !missing.getName().isEmpty()) {
+
+                            Field property = ClassUtility.findProperty(wave.getWaveBean().getClass(), missing.getName(), (Class<?>) missing.getItemType());
+
+                            if (property != null) {
+                                missingWaveItems.remove(missing);
                             }
                         }
                     }
                 }
 
+                // Log informative message and throw an error
                 if (missingWaveItems.size() > 0) {
+
                     LOGGER.log(BROKEN_WAVE_SENT, wave.toString());
+
+                    // List all missing wave items
                     final StringBuilder sb = new StringBuilder();
                     for (final WaveItem<?> missing : missingWaveItems) {
                         sb.append(missing.toString());
                     }
+
                     LOGGER.log(BROKEN_WAVE_BAD_ITEM_LIST, sb.toString());
 
                     throw new CoreRuntimeException(BROKEN_WAVE_BAD_ITEM_LIST.getText(sb.toString()));
