@@ -295,6 +295,37 @@ public final class ClassUtility implements UtilMessages {
     }
 
     /**
+     * Retrieve a field according to the item name first, then according to searched class.
+     * 
+     * @param sourceClass the class to inspect
+     * @param itemName the item name to find (LIKE_THIS)
+     * @param searchedClass the property class to find if item name query has failed
+     * 
+     * @return the source class field that match provided criterion
+     */
+    public static Field findProperty(final Class<?> sourceClass, final String itemName, final Class<?> searchedClass) {
+
+        Field found = null;
+
+        if (itemName != null && !itemName.trim().isEmpty()) {
+            try {
+                found = sourceClass.getField(ClassUtility.underscoreToCamelCase(itemName));
+            } catch (NoSuchFieldException | SecurityException e) {
+                // Nothing to do
+            }
+        }
+        if (found == null) {
+            for (final Field f : sourceClass.getFields()) {
+                if (f.getClass().equals(searchedClass)) {
+                    found = f;
+                    break;
+                }
+            }
+        }
+        return found;
+    }
+
+    /**
      * Check if the given method exists in the given class.
      * 
      * @param cls the class to search into
@@ -422,5 +453,36 @@ public final class ClassUtility implements UtilMessages {
         }
 
         return methodList;
+    }
+
+    /**
+     * Call the given method for the instance object even if its visibility is private or protected.
+     * 
+     * @param method the method to call
+     * @param instance the object instance to use
+     * @param parameters the list of method parameters to use
+     * 
+     * @return the method return
+     * 
+     * @throws IllegalAccessException if method invocation has failed
+     * @throws InvocationTargetException if method invocation has failed
+     */
+    public static Object callMethod(final Method method, final Object instance, final Object[] parameters) throws IllegalAccessException, InvocationTargetException {
+
+        Object res;
+
+        // store current visibility
+        final boolean accessible = method.isAccessible();
+
+        // let it accessible anyway
+        method.setAccessible(true);
+
+        // Call this method with right parameters
+        res = method.invoke(instance, parameters);
+
+        // Reset default visibility
+        method.setAccessible(accessible);
+
+        return res;
     }
 }
