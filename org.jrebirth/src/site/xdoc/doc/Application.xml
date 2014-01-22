@@ -81,7 +81,7 @@
 						<param name="set-first-line" value="1"/>
 					</macro>
 
-				<p>You can create your own <b>Preloader</b> class, JRebirth send only <b>ProgressNotification</b> with two kinf of values:</p>
+				<p>You can create your own <b>Preloader</b> class, JRebirth send only <b>ProgressNotification</b> with two kind of values:</p>
 				<ul>
 				<li>With double value: 0.0 to 1.0 to update the progress bar</li>
 				<li>With integer value: > 1 to be translated into a message</li>
@@ -100,8 +100,8 @@
 
                 <p>To define your own Application class you have 2 options:</p>
                    <ul>
-                       <li>Extends <b>AbstractApplication</b> and implement abstract methods</li>
-                       <li>Extends <b>DefaultApplication</b> and override abstract methods you need</li>
+                       <li>Extend <b>AbstractApplication</b> and implement abstract methods</li>
+                       <li>Extend <b>DefaultApplication</b> and only override abstract methods you need</li>
                    </ul>
 
                 <p>The <b>AbstractApplication</b> class will do all extra stuff required to launch JRebirth engine.
@@ -112,7 +112,7 @@
                 </p>
 
                 <p>Please note that one method is <b>mandatory</b> ! You must define a first Model Class to load
-                    the first node of your scene.
+                    the first <b>Model</b> that will initialize the first <b>Node</b> attached to the RootNode (<em>automagically</em> created) )of your <b>Scene</b>.
                 </p>
                 <p>
                     If you have used the Maven archetype
@@ -144,8 +144,8 @@
                     mandatory to define which UI model will be attached to the root node of
                     the scene.
                 </p>
-                <p>This first model will be created into the JRebirth Thread Pool, then it
-                    will be attached to the root node into the JavaFX Application Thread.
+                <p>This first model will be created into the JRebirth Thread Pool (JTP), then it
+                    will be attached to the root node into the JavaFX Application Thread (JAT).
                 </p>
 
                 <h4>Application Title</h4>
@@ -155,7 +155,14 @@
                     is simply used to
                     define the name of the application displayed by the stage (OS window)
                     and used by OS task bar.
+                   
                 </p>
+                <p>By default it will retrieve values from properties file (default is <em>jrebirth.properties</em>):
+                </p>
+                <ul>
+                	<li>applicationName={} powered by JRebirth ({} is replaced by application class simple name)</li>
+                	<li>applicationVersion=1.0</li>
+                </ul>
 
 
                 <h4>Stage customization</h4>
@@ -178,11 +185,12 @@
                     attributes :
                 </p>
                 <ul>
-                    <li>Width = 800</li>
-                    <li>Height = 600</li>
-                    <li>Background Color = Transparent</li>
+                    <li>Width = 800 (applicationSceneWidth parameter)</li>
+                    <li>Height = 600 (applicationSceneHeight parameter)</li>
+                    <li>Background Color = Transparent (applicationSceneBgColor parameter)</li>
                     <li>Root = Automatically built according to the generic type used</li>
                 </ul>
+                
                 <p>
                     Theses properties are customizable with a properties file, this is explained below into the
                     Configuration section.
@@ -206,7 +214,7 @@
 
                 <h4>Fonts preloading</h4>
                 <p>
-                    JavaFX applications are able to use fonts throught programmatic
+                    JavaFX applications are able to use fonts through programmatic
                     declarations or with CSS declaration (in .css files. or inline).
                     <br/>
                     If font used by CSS are not provided by the platform running the
