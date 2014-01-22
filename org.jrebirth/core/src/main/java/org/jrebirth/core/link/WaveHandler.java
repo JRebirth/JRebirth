@@ -24,6 +24,10 @@ import java.util.List;
 
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
+import org.jrebirth.core.concurrent.JRebirthRunnable;
+import org.jrebirth.core.concurrent.RunInto;
+import org.jrebirth.core.concurrent.RunType;
+import org.jrebirth.core.concurrent.RunnablePriority;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.WaveReady;
@@ -98,83 +102,130 @@ public class WaveHandler implements LinkMessages {
      */
     public void handle(final Wave wave) throws WaveException {
 
+        final Method customMethod = retrieveCustomMethod(wave);
+
+        // Grab the run type annotation (if exists)
+        final RunInto runInto = customMethod.getAnnotation(RunInto.class);
+
+        // Retrieve the annotation runnable priority (if any)
+        final RunnablePriority priority = runInto == null ? RunnablePriority.Normal : runInto.priority();
+
+        // Retrieve the annotation run type (if any)
+        final RunType runType = runInto == null ? null : runInto.value();
+
+        final JRebirthRunnable waveHandlerRunnable = buildWaveRunnable(wave, customMethod, priority);
+
         // If the notified class is part of the UI
         // We must perform this action into the JavaFX Application Thread
-        if (getWaveReady() instanceof Model) {
-            JRebirth.runIntoJAT(new AbstractJrbRunnable(getWaveReady().getClass().getSimpleName() + " handle wave " + wave.toString()) {
+        // only if the run type hasn't been overridden
+        if (runType != null && runType == RunType.JAT || runType == null && getWaveReady() instanceof Model) {
+            JRebirth.runIntoJAT(waveHandlerRunnable);
 
-                /**
-                 * {@inheritDoc}
-                 */
-                @Override
-                protected void runInto() throws JRebirthThreadException {
-                    try {
-                        performHandle(wave);
-                    } catch (final WaveException e) {
-                        LOGGER.error(WAVE_HANDLING_ERROR, e);
-                    }
-                }
-            });
+            // Launch the wave handling into JRebirth Thread Pool
+        } else if (runType != null && runType == RunType.JTP) {
+            JRebirth.runIntoJTP(waveHandlerRunnable);
         } else {
-            // Otherwise can perform it right now into the current thread (JRebirthThread - JIT)
-            performHandle(wave);
+            // Otherwise we can perform it right now into the current thread (JRebirthThread - JIT)
+            waveHandlerRunnable.run();
         }
 
     }
 
     /**
-     * Perfom the handle independently of thread used.
+     * Build the wave runnable handler that will handle the wave into the right thread.
      * 
-     * @param wave the wave to manage
+     * @param wave the wave to handle
+     * @param customMethod the custom method to call (could be null)
+     * @param priority the runnable priority to use
      * 
-     * @throws WaveException if an error occurred whil processing the wave
+     * @return the right JRebirth Runnable
      */
-    private final void performHandle(final Wave wave) throws WaveException {
+    private JRebirthRunnable buildWaveRunnable(final Wave wave, final Method customMethod, final RunnablePriority priority) {
 
-        try {
-            // Build parameter list of the searched method
-            final List<Object> parameterValues = new ArrayList<>();
-            for (final WaveData<?> wd : wave.getWaveItems()) {
-                // Add only wave items defined as parameter
-                if (wd.getKey().isParameter()) {
-                    parameterValues.add(wd.getValue());
+        return new AbstractJrbRunnable(getWaveReady().getClass().getSimpleName() + " handle wave " + wave.toString(), priority) {
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            protected void runInto() throws JRebirthThreadException {
+                try {
+                    performHandle(wave, customMethod);
+                } catch (final WaveException e) {
+                    LOGGER.error(WAVE_HANDLING_ERROR, e);
                 }
             }
-            // Add the current wave to process
-            parameterValues.add(wave);
+        };
+    }
 
+    /**
+     * Retrieve the custom wave handler method.
+     * 
+     * @param wave the wave to be handled
+     * 
+     * @return the custom handler emthod or null if none exists
+     */
+    private Method retrieveCustomMethod(final Wave wave) {
+        Method customMethod = null;
+        try {
             // Search the wave handler method to call
-            final Method method = this.defaultMethod != null
+            customMethod = this.defaultMethod != null
                     // Method defined with annotation
                     ? this.defaultMethod
                     // Method computed according to wave prefix and wave type action name
                     : ClassUtility.getMethodByName(getWaveReady().getClass(), ClassUtility.underscoreToCamelCase(wave.getWaveType().toString()));
 
-            if (method != null) {
-                // store current visibility
-                final boolean accessible = method.isAccessible();
-                // let it accessible anyway
-                method.setAccessible(true);
-                // Call this method with right parameters
-                method.invoke(getWaveReady(), parameterValues.toArray());
-                // Reset default visibility
-                method.setAccessible(accessible);
-            }
         } catch (final NoSuchMethodException e) {
 
             LOGGER.info(CUSTOM_METHOD_NOT_FOUND, e.getMessage());
-            // If no method was found, call the default method named 'processWave(wave)'
+        }
+        return customMethod;
+    }
+
+    /**
+     * Perform the handle independently of thread used.
+     * 
+     * @param wave the wave to manage
+     * @param method the handler method to call, could be null
+     * 
+     * @throws WaveException if an error occurred while processing the wave
+     */
+    private final void performHandle(final Wave wave, final Method method) throws WaveException {
+
+        // Build parameter list of the searched method
+        final List<Object> parameterValues = new ArrayList<>();
+        for (final WaveData<?> wd : wave.getWaveItems()) {
+            // Add only wave items defined as parameter
+            if (wd.getKey().isParameter()) {
+                parameterValues.add(wd.getValue());
+            }
+        }
+        // Add the current wave to process
+        parameterValues.add(wave);
+
+        // If custom method exists we call it
+        if (method != null) {
+
             try {
-                ClassUtility.getMethodByName(getWaveReady().getClass(), AbstractWaveReady.PROCESS_WAVE_METHOD_NAME).invoke(getWaveReady(), wave);
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ee) {
+
+                ClassUtility.callMethod(method, getWaveReady(), parameterValues.toArray());
+
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                LOGGER.error(WAVE_DISPATCH_ERROR, e);
                 // Propagate the wave exception
-                throw new WaveException(wave, ee);
+                throw new WaveException(wave, e);
             }
 
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            LOGGER.error(WAVE_DISPATCH_ERROR, e);
-            // Propagate the wave exception
-            throw new WaveException(wave, e);
+        } else {
+            // If no custom method was proviced, call the default method named 'processWave(wave)'
+            try {
+                ClassUtility.getMethodByName(getWaveReady().getClass(), AbstractWaveReady.PROCESS_WAVE_METHOD_NAME).invoke(getWaveReady(), wave);
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
+                LOGGER.error(WAVE_DISPATCH_ERROR, e);
+                // Propagate the wave exception
+                throw new WaveException(wave, e);
+            }
         }
+
     }
 }

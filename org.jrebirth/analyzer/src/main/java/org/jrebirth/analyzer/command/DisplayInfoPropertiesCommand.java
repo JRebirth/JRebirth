@@ -20,7 +20,6 @@ package org.jrebirth.analyzer.command;
 import org.jrebirth.core.command.AbstractSingleCommand;
 import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
 
@@ -31,12 +30,6 @@ import org.jrebirth.core.wave.WaveBean;
  */
 @RunInto(RunType.JAT)
 public class DisplayInfoPropertiesCommand extends AbstractSingleCommand<WaveBean> {
-
-    @Override
-    public void ready() throws CoreException {
-        // TODO Auto-generated method stub
-
-    }
 
     @Override
     protected void execute(final Wave wave) {

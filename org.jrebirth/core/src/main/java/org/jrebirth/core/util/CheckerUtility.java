@@ -170,7 +170,7 @@ public final class CheckerUtility implements UtilMessages {
 
                         if (missing.getName() != null && !missing.getName().isEmpty()) {
 
-                            Field property = ClassUtility.findProperty(wave.getWaveBean().getClass(), missing.getName(), (Class<?>) missing.getItemType());
+                            final Field property = ClassUtility.findProperty(wave.getWaveBean().getClass(), missing.getName(), (Class<?>) missing.getItemType());
 
                             if (property != null) {
                                 missingWaveItems.remove(missing);
