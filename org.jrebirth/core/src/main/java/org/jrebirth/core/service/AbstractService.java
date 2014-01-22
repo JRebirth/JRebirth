@@ -29,6 +29,7 @@ import javafx.scene.control.ProgressBar;
 
 import org.jrebirth.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.core.concurrent.JRebirth;
+import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.link.AbstractWaveReady;
@@ -57,6 +58,15 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
     /** The map that stores pending tasks, useful to access to Worker implementation. */
     private final ObservableMap<String, ServiceTask<?>> pendingTasks = FXCollections.observableMap(new HashMap<String, ServiceTask<?>>());
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void ready() throws CoreException {
+        // Search OnWave annotation to manage auto wave handler setup
+        manageOnWaveAnnotation();
+    }
 
     /**
      * {@inheritDoc}

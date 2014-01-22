@@ -21,6 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.concurrent.RunnablePriority;
+import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
 
@@ -84,5 +85,15 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
      */
     public boolean isRunning() {
         return this.running.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void ready() throws CoreException {
+
+        // Search OnWave annotation to manage auto wave handler setup
+        manageOnWaveAnnotation();
     }
 }

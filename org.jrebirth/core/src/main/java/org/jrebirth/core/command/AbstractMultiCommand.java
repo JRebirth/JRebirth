@@ -109,6 +109,9 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
         for (final Class<? extends Command> commandClass : this.commandList) {
             getLocalFacade().retrieve(commandClass);
         }
+
+        // Search OnWave annotation to manage auto wave handler setup
+        manageOnWaveAnnotation();
     }
 
     /**

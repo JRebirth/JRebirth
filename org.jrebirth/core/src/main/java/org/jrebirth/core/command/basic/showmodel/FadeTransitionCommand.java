@@ -29,7 +29,6 @@ import javafx.util.Duration;
 import org.jrebirth.core.command.AbstractSingleCommand;
 import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 
 import org.slf4j.Logger;
@@ -108,15 +107,6 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
             });
             animation.playFromStart();
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void ready() throws CoreException {
-        // Nothing to do yet
-
     }
 
 }

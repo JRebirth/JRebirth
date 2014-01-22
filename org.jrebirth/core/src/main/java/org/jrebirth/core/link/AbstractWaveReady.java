@@ -413,52 +413,58 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     protected abstract void processWave(final Wave wave);
 
     /**
-     * TODO To complete.
+     * Manage {@link OnWave} annotation (defined on type and method).
      */
     protected void manageOnWaveAnnotation() {
 
+        // Retrieve class annotation
         final OnWave clsOnWave = this.getClass().getAnnotation(OnWave.class);
         if (clsOnWave != null) {
-            manageWaveTypeAction(clsOnWave.value(), null);
-            manageWaveTypeActions(clsOnWave, null);
+            manageUniqueWaveTypeAction(clsOnWave.value(), null);
+            manageMultipleWaveTypeAction(clsOnWave, null);
         }
 
+        // Iterate over each annotated Method
         OnWave onWave = null;
         for (final Method method : ClassUtility.getAnnotatedMethods(this.getClass(), OnWave.class)) {
             onWave = method.getAnnotation(OnWave.class);
-            manageWaveTypeAction(onWave.value(), method);
-            manageWaveTypeActions(onWave, method);
+            manageUniqueWaveTypeAction(onWave.value(), method);
+            manageMultipleWaveTypeAction(onWave, method);
         }
 
     }
 
     /**
-     * TODO To complete.
+     * Manage unique {@link WaveType} subscription (from value field of {@link OnWave} annotation).
      * 
-     * @param onWave
-     * @param method
+     * @param waveActionName the {@link WaveType} unique name
+     * @param method the wave handler method
      */
-    private void manageWaveTypeAction(final String action, final Method method) {
-        final WaveType wt = WaveTypeBase.getWaveType(action);
+    private void manageUniqueWaveTypeAction(final String waveActionName, final Method method) {
+
+        // Get the WaveType from the WaveType registry
+        final WaveType wt = WaveTypeBase.getWaveType(waveActionName);
         if (wt != null) {
+            // Method is not defined or is the default fallback one
             if (method == null || AbstractWaveReady.PROCESS_WAVE_METHOD_NAME.equals(method.getName())) {
-                // Ignore default method if it's the default fallback one
+                // Just listen the WaveType
                 listen(wt);
             } else {
+                // Listen the WaveType and specify the right method handler
                 listen(null, method, wt);
             }
         }
     }
 
     /**
-     * TODO To complete.
+     * Manage several {@link WaveType} subscriptions (from types field of {@link OnWave} annotation).
      * 
-     * @param onWave
-     * @param method
+     * @param onWave the {@link OnWave} annotation to explore
+     * @param method the wave handler method
      */
-    private void manageWaveTypeActions(final OnWave onWave, final Method method) {
+    private void manageMultipleWaveTypeAction(final OnWave onWave, final Method method) {
         for (final String action : onWave.types()) {
-            manageWaveTypeAction(action, method);
+            manageUniqueWaveTypeAction(action, method);
         }
     }
 }
