@@ -98,21 +98,28 @@ public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
     public List<Wave> getPostBootWaveList() {
 
         final List<Wave> waveList = new ArrayList<>();
+
+        // Get Java command line parameters
         final Parameters p = getParameters();
         if (p.getRaw().size() >= 1) {
-            final String etdFile = p.getRaw().get(0);
-            final File file = new File(etdFile);
-            if (file.exists()) {
 
+            // The first parameter must contains the log file to parse
+            final String logFileName = p.getRaw().get(0);
+            final File logFile = new File(logFileName);
+
+            if (logFile.exists()) {
+
+                // Call the service that will load and parse the log file
                 waveList.add(
                         WaveBuilder.create()
                                 .waveGroup(WaveGroup.RETURN_DATA)
                                 .waveType(LoadEdtFileService.DO_LOAD_EVENTS)
                                 .relatedClass(LoadEdtFileService.class)
-                                .data(WaveData.build(EditorWaves.EVENTS_FILE, file))
+                                .data(WaveData.build(EditorWaves.EVENTS_FILE, logFile))
                                 .build()
                         );
 
+                // Start the animation to show all components creation
                 waveList.add(
                         WaveBuilder.create()
                                 .waveType(EditorWaves.DO_PLAY)
