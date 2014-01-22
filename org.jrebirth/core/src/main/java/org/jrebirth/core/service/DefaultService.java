@@ -1,6 +1,5 @@
 package org.jrebirth.core.service;
 
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 
 /**
@@ -9,14 +8,6 @@ import org.jrebirth.core.wave.Wave;
  * @author Sébastien Bordes
  */
 public class DefaultService extends AbstractService {
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void ready() throws CoreException {
-        // Initialize Service with private method
-    }
 
     /**
      * {@inheritDoc}
