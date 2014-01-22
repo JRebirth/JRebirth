@@ -58,21 +58,91 @@
 				</p>
 				<p>The most important are :</p>
 				<ul>
-					<li>JavaFX Application Thread - JAT</li>
-					<li>JRebirth Internal Thread - JIT</li>
-					<li>JRebirth Slot x (n threads available in JRebirth Thread
-						Pool - JTP Slot 'n')
+					<li>
+						<b>JAT</b>
+						- JavaFX Application Thread
+					</li>
+					<li>
+						<b>JIT</b>
+						- JRebirth Internal Thread
+					</li>
+					<li>
+						<b>JTP</b>
+						- JRebirth Thread Pool (name pattern is
+						<em>JTP Slot 'n'</em>
+						)
+					</li>
+					<li>
+						<b>HPTP</b>
+						- High Priority Thread Pool (name pattern is
+						<em>HPTP Slot 'n'</em>
+						)
 					</li>
 				</ul>
 				<p>Other threads are related to JavaFX platform, JRebirth only
-					creates 2 to 5 threads (by default) that can be extended if required.
+					creates one thread with two Thread Pools.
 				</p>
+				<p>
+					<b>JRebirth Thread Pool</b>
+					and
+					<b>High Priority Thread Pool</b>
+					have the same size.
+					<br />
+					computed like this: Number of available Core * threadPoolSizeRatio parameter
+					<br />
+					The default parameter value is 2, so each thread pool will have a size of 16 on Core i7 (Quad Core with HyperThreading).
+					You can use a double value to divide this amount if you think that it can
+					disturb your platform performances
+					(0.125 value will only provide a thread pool size of 2 on a such platform).
+					<br />
+					Obviously a minimum size of 1 will be used if your thread pool ratio is too low.
+				</p>
+
 				<div class="uml">
 					<a href="uml/Concurrent.png" rel="lightbox" title="Thread Class Diagram">
 						<img class="redux" src="uml/Concurrent.png" alt="" />
 					</a>
 					<legend>Concurrent Class Diagram</legend>
 				</div>
+			</subsection>
+
+			<subsection name="Thread Usage">
+				<p>
+					Each thread shall manage specific tasks, let's see their aims.
+				</p>
+				<h4>JAT</h4>
+				<p>
+					<b>JavaFX Application Thread</b>
+					is the graphical thread of the toolkit, you shouldn't perform long task into it,
+					but you must update all node attached to the displayed scene into it.
+					It's the equivalent of the former EDT (Event Dispatch Thread) in Swing.
+					If you try to update a node attached to the main JavaFX scene outside it you will obtain an ugly Exception.
+				</p>
+
+				<h4>JIT</h4>
+				<p>
+					<b>JRebirth Internal Thread</b>
+					is the internal thread of JRebirth Application Framework.
+					It will be used to host the communication engine between all JRebirth Components.
+					If you start a long task into it it will freeze all communication tasks because all runnable added will
+					be executed synchronously according to FIFO rule (First-In First-Out).
+				</p>
+
+				<h4>JTP</h4>
+				<p>
+					<b>JRebirth Thread Pool</b>
+					is designed to perform all other long task your application require, you just have to remember that any graphical update still require to be done into JAT.
+					Moreover any JRebirth internal configuration must be performed into JIT (ie: listen a WaveType).
+				</p>
+
+				<h4>HPTP</h4>
+				<p>
+					<b>High Priority Thread Pool</b>
+					has been added to be able to assign a priority to a long task.
+					On small platform or when using very long task, the JTP can be overloaded and we must used a higher priority task to trigger an User interface refresh.
+					The HPTP will be used to start higher priority task when JTP is full.
+					It has same settings than JTP.
+				</p>
 			</subsection>
 
 			<subsection name="Thread Rules">
