@@ -97,12 +97,13 @@ public final class WaveTypeBase implements WaveType {
     }
 
     /**
+     * Retrieve a WaveType according to its unique action name.
      * 
-     * TODO To complete.
+     * Be careful it could return null if the {@link WaveType} has not been initialized yet.
      * 
-     * @param action
+     * @param action the unique action name used to register the WaveType
      * 
-     * @return
+     * @return the WaveType found into registry or null
      */
     public static WaveType getWaveType(final String action) {
 
@@ -184,7 +185,7 @@ public final class WaveTypeBase implements WaveType {
 
             fullName = fullName.replaceAll("[<>]", "");
             if (waveItem.getName() == null || waveItem.getName().isEmpty()) {
-                sb.append(ObjectUtility.lowerFirstChar(fullName.substring(fullName.lastIndexOf(".") + 1)));
+                sb.append(ObjectUtility.lowerFirstChar(fullName.substring(fullName.lastIndexOf('.') + 1)));
             } else {
                 sb.append(waveItem.getName());
             }

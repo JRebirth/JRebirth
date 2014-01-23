@@ -17,11 +17,10 @@
  */
 package org.jrebirth.analyzer.command;
 
-import org.jrebirth.core.command.AbstractSingleCommand;
+import org.jrebirth.core.command.DefaultUICommand;
 import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.WaveBean;
 
 /**
  * The class <strong>DisplayInfoPropertiesCommand</strong>.
@@ -29,18 +28,14 @@ import org.jrebirth.core.wave.WaveBean;
  * @author Sébastien Bordes
  */
 @RunInto(RunType.JAT)
-public class DisplayInfoPropertiesCommand extends AbstractSingleCommand<WaveBean> {
+public class DisplayInfoPropertiesCommand extends DefaultUICommand {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void execute(final Wave wave) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void processWave(final Wave wave) {
-        // TODO Auto-generated method stub
-
+        // Nothing to do yet
     }
 
 }

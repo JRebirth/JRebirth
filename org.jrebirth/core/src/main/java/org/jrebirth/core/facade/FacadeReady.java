@@ -35,6 +35,8 @@ public interface FacadeReady<R extends FacadeReady<R>> extends ModelReady {
     /**
      * Launch the initialization of the component.
      * 
+     * This method is always called into JIT
+     * 
      * @throws CoreException if the initialization fails
      */
     void ready() throws CoreException;

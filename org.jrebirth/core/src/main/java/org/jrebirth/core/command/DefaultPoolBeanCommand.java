@@ -38,6 +38,14 @@ public class DefaultPoolBeanCommand<WB extends WaveBean> extends AbstractSingleC
      * {@inheritDoc}
      */
     @Override
+    protected void initCommand() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void execute(final Wave wave) {
         // Nothing to do yet by the default Pool command, must be overridden
     }

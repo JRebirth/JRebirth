@@ -38,6 +38,14 @@ public class DefaultUIBeanCommand<WB extends WaveBean> extends AbstractSingleCom
      * {@inheritDoc}
      */
     @Override
+    protected void initCommand() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void execute(final Wave wave) {
         // Nothing to do yet by the default UI command, must be overridden
     }

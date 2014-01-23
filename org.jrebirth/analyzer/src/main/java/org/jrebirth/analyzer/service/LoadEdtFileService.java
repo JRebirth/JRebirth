@@ -17,22 +17,26 @@
  */
 package org.jrebirth.analyzer.service;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jrebirth.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.core.concurrent.Priority;
 import org.jrebirth.core.concurrent.RunnablePriority;
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.facade.JRebirthEventBase;
 import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveTypeBase;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The class <strong>LoadEdtFileService</strong>.
@@ -54,8 +58,7 @@ public class LoadEdtFileService extends DefaultService {
      * {@inheritDoc}
      */
     @Override
-    public void ready() throws CoreException {
-        super.ready();
+    public void initService() {
 
         registerCallback(DO_LOAD_EVENTS, RE_EVENTS_LOADED);
     }
@@ -77,12 +80,12 @@ public class LoadEdtFileService extends DefaultService {
         try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));)
         {
 
-            int totalLines = 0;
-            while (br.readLine() != null){
-                totalLines++;
-            }
-
-            br.reset();
+            // int totalLines = 0;
+            // while (br.readLine() != null){
+            // totalLines++;
+            // }
+            //
+            // br.reset();
 
             int processedLines = 0;
 
@@ -91,7 +94,7 @@ public class LoadEdtFileService extends DefaultService {
             while (strLine != null) {
                 processedLines++;
 
-                updateProgress(wave, totalLines, processedLines);
+                // updateProgress(wave, totalLines, processedLines);
 
                 if (strLine.contains(JRebirthMarkers.JREVENT.getName())) {
                     addEvent(eventList, strLine.substring(strLine.indexOf(">>") + 2));
@@ -107,17 +110,20 @@ public class LoadEdtFileService extends DefaultService {
 
     }
 
-    public static int countLines(File aFile) throws IOException {
+    public static int countLines(final File aFile) throws IOException {
         LineNumberReader reader = null;
         try {
             reader = new LineNumberReader(new FileReader(aFile));
-            while ((reader.readLine()) != null);
+            while (reader.readLine() != null) {
+                ;
+            }
             return reader.getLineNumber();
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             return -1;
         } finally {
-            if(reader != null)
+            if (reader != null) {
                 reader.close();
+            }
         }
     }
 

@@ -71,6 +71,14 @@ public class DefaultMultiBeanCommand<WB extends WaveBean> extends AbstractMultiC
      * {@inheritDoc}
      */
     @Override
+    protected void initCommand() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void addSubCommand() {
         // Nothing to do yet
     }

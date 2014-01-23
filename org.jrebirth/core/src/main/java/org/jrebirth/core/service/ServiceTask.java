@@ -25,6 +25,7 @@ import java.util.List;
 
 import javafx.concurrent.Task;
 
+import org.jrebirth.core.command.Command;
 import org.jrebirth.core.concurrent.JRebirthRunnable;
 import org.jrebirth.core.concurrent.Priority;
 import org.jrebirth.core.concurrent.RunnablePriority;
@@ -35,6 +36,7 @@ import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.Wave.Status;
 import org.jrebirth.core.wave.WaveBuilder;
 import org.jrebirth.core.wave.WaveData;
+import org.jrebirth.core.wave.WaveGroup;
 import org.jrebirth.core.wave.WaveItem;
 import org.jrebirth.core.wave.WaveType;
 import org.jrebirth.core.wave.WaveTypeBase;
@@ -153,25 +155,9 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
                 // Otherwise prepare the return wave
             } else {
-                final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.getWaveType());
 
-                if (((WaveTypeBase) responseWaveType).getWaveItemList().isEmpty()) {
-                    LOGGER.log(NO_RETURNED_WAVE_ITEM);
-                    throw new CoreException(NO_RETURNED_WAVE_ITEM);
-                }
-
-                final WaveItem<T> waveItem = (WaveItem<T>) ((WaveTypeBase) responseWaveType).getWaveItemList().get(0);
-
-                final Wave returnWave = WaveBuilder.create()
-                        .waveType(responseWaveType)
-                        .relatedClass(this.getClass())
-                        .data(WaveData.build(waveItem, res))
-                        .build();
-                returnWave.setRelatedWave(this.wave);
-                returnWave.addWaveListener(new ServiceTaskReturnWaveListener());
-
-                // Send the return wave to interested components
-                this.service.sendWave(returnWave);
+                // Send the result into a wave
+                sendReturnWave(res);
 
             }
 
@@ -180,6 +166,67 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
             this.wave.setStatus(Status.Failed);
         }
         return res;
+    }
+
+    /**
+     * Send a wave that will carry the service result.
+     * 
+     * 2 Kinds of wave can be sent according to service configuration
+     * 
+     * @param res the service result
+     * 
+     * @throws CoreException if the wave generation has failed
+     */
+    private void sendReturnWave(final T res) throws CoreException {
+
+        Wave returnWave = null;
+
+        // Try to retrieve the return Wave type, could be null
+        final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.getWaveType());
+
+        if (responseWaveType != null) {
+
+            // No service result type defined into a WaveItem
+            if (((WaveTypeBase) responseWaveType).getWaveItemList().isEmpty()) {
+                LOGGER.log(NO_RETURNED_WAVE_ITEM);
+                throw new CoreException(NO_RETURNED_WAVE_ITEM);
+            }
+
+            // Get the first (and unique) WaveItem used to define the service result type
+            final WaveItem<T> waveItem = (WaveItem<T>) ((WaveTypeBase) responseWaveType).getWaveItemList().get(0);
+
+            // Try to retrieve the command class, cold be null
+            final Class<? extends Command> responseCommandClass = this.service.getReturnCommand(this.wave.getWaveType());
+
+            if (responseCommandClass != null) {
+
+                // If a Command Class is provided, call it with the right WaveItem to get the real result type
+                returnWave = WaveBuilder.create()
+                        .waveGroup(WaveGroup.CALL_COMMAND)
+                        .fromClass(this.service.getClass())
+                        .relatedClass(responseCommandClass)
+                        .data(WaveData.build(waveItem, res))
+                        .build();
+            } else {
+
+                // Otherwise send a generic wave that can be handled by any component
+                returnWave = WaveBuilder.create()
+                        .waveType(responseWaveType)
+                        .fromClass(this.service.getClass())
+                        .data(WaveData.build(waveItem, res))
+                        .build();
+            }
+
+            returnWave.setRelatedWave(this.wave);
+            returnWave.addWaveListener(new ServiceTaskReturnWaveListener());
+
+            // Send the return wave to interested components
+            this.service.sendWave(returnWave);
+        } else {
+            // No service return wave Type defined
+            LOGGER.log(NO_RETURNED_WAVE_TYPE_DEFINED, this.wave.getWaveType());
+            throw new CoreException(NO_RETURNED_WAVE_ITEM, this.wave.getWaveType());
+        }
     }
 
     /**

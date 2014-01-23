@@ -63,10 +63,21 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
      * {@inheritDoc}
      */
     @Override
-    public void ready() throws CoreException {
+    public final void ready() throws CoreException {
+
         // Search OnWave annotation to manage auto wave handler setup
         manageOnWaveAnnotation();
+
+        // Call the custom method
+        initService();
     }
+
+    /**
+     * Custom method used to initialize the service.
+     * 
+     * Called into JIT by ready method.
+     */
+    protected abstract void initService();
 
     /**
      * {@inheritDoc}

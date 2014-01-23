@@ -102,7 +102,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * {@inheritDoc}
      */
     @Override
-    public void ready() throws CoreException {
+    public final void ready() throws CoreException {
 
         addSubCommand();
 
@@ -112,7 +112,16 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
         // Search OnWave annotation to manage auto wave handler setup
         manageOnWaveAnnotation();
+
+        initCommand();
     }
+
+    /**
+     * Custom method used to initialize the command.
+     * 
+     * Called into JIT by ready method.
+     */
+    protected abstract void initCommand();
 
     /**
      * This method must be used to add sub command.

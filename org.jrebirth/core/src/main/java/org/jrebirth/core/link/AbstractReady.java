@@ -37,7 +37,7 @@ import org.jrebirth.core.ui.Model;
  * 
  * @param <R> the class type of the subclass
  */
-public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeReady<R>, ModelReady, CommandReady, ServiceReady {
+public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeReady<R>, ModelReady {
 
     /**
      * The facade that manage same kind of object (from Service, Command and Model).

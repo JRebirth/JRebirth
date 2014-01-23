@@ -49,6 +49,14 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
      * {@inheritDoc}
      */
     @Override
+    protected void initCommand() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void execute(final Wave wave) {
 
         // The old node is the one that exists into the parent container (or null if none)

@@ -20,7 +20,6 @@ package org.jrebirth.core.link;
 import java.util.List;
 import java.util.Set;
 
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.WaveBase;
 import org.jrebirth.core.wave.WaveItem;
@@ -57,8 +56,7 @@ public class TestService extends DefaultService {
      * {@inheritDoc}
      */
     @Override
-    public void ready() throws CoreException {
-        super.ready();
+    public void initService() {
 
         listen(RE_JOB_DONE);
 
