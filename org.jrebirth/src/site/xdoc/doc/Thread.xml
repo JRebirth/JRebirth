@@ -146,12 +146,32 @@
 			</subsection>
 
 			<subsection name="Thread Rules">
-				<p>
-					JavaFX toolkit requires that all UI tasks must be done into the JAT, but it also allows
-					<strong>to build a view into the JIT or JTP and then link it to your scene
-						into the JAT.
-					</strong>
+			
+				<h4>JavaFX Application Thread (JAT)</h4>
+				
+				<p>JAT is the the graphical thread of the  JavaFX toolkit (identical to Swinf EDT), all UI tasks must be perform into it only if a direct link can be establish between the graphical component and the displayed scene.
+				So if you call <em>setText("myText")</em> on a <b>Text</b> node:
 				</p>
+				<ul>
+					<li>You must call it into JAT if the node is displayed or linked to the displayed scene.</li>
+					<li>You can call in whatever thread you want if the node isn't linked to the displayed scene.</li>
+				</ul>
+				<p>JavaFX toolkit let you prepare some tree of node into a separate thread and then attached it to the displayed scene.
+				This is how JRebirth load and display any <b>Model</b>, the <b>PrepareModelCommand</b> will run into <b>JTP</b> to create the <b>Model</b> root Node with all its children.
+				Then the <b>AttachModelCommand</b> will be run into JAT to attach the model root node into another node already displayed into the <b>Scene</b>.</p>
+				
+				
+				<h4>JRebirth Internal Thread</h4>
+				
+				<p></p>
+				
+				
+				<h4>JRebirth Thread Pool</h4>
+				JRebirth provides 2 thread pools to run long task asynchronously without freezing neither the User Interface (JAT) nor JRebirth Messaging (JIT).
+				
+				<p></p>
+				
+				<!-- 
 				<p>All Wave processing tasks are automatically done into the JIT.</p>
 				<p>
 					When the JRebirth Framework needs to update UI (thanks to
@@ -170,28 +190,28 @@
 				<h4>Launch a runnable into JAT</h4>
 				<macro name="include">
 					<param name="highlight-theme" value="eclipse" />
-					<param name="source" value="core/src/main/java/org/jrebirth/core/facade/WaveReady.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/core/link/AbstractWaveReady.java" />
 					<param name="snippet" value="re:callCommand" />
 				</macro>
 
 				<h4>Launch a runnable into JIT</h4>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/facade/WaveReady.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/core/link/AbstractWaveReady.java" />
 					<param name="snippet" value="re:callCommand" />
 				</macro>
 
 				<h4>Launch a runnable into JTP</h4>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/facade/WaveReady.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/core/link/AbstractWaveReady.java" />
 					<param name="snippet" value="re:callCommand" />
 				</macro>
 
-
+ -->
 			</subsection>
 
 			<subsection name="Examples">
 
-				<p>
+<!-- 				<p>
 					<span style="text-decoration: underline;">If you
 						are into the JIT:
 					</span>
@@ -273,7 +293,7 @@
 					<li>Either call the model from the JAT and access to service
 						results (the first way way is the best to use)
 					</li>
-				</ul>
+				</ul> -->
 			</subsection>
 
 		</section>

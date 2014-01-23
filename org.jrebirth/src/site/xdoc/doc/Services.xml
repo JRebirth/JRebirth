@@ -39,12 +39,12 @@
             <subsection name="Overview">
                 <p>A Service Object is a JRebirth Component (part of CSM pattern, Command-Service-Model).
                     <br/>
-                    It can be retrieved from the<em>ServiceFacade</em>.
+                    It can be retrieved from the <em>ServiceFacade</em>.
                 </p>
 
                 <p>A
                     <em>Service</em>
-                    can hold several Tasks defined by a<em>WaveType</em>.
+                    can hold several Tasks defined by a <em>WaveType</em>.
                     Each Task requires:
                 </p>
                 <ol>
@@ -154,14 +154,14 @@
                     value.
                     <br/>
                     This registration must be done into the JRebirth's Component
-                    <strong>void ready()</strong>
+                    <strong>void initService()</strong>
                     method like this:
                 </p>
 
                 <macro name="include">
                     <param name="source"
                            value="analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java"/>
-                    <param name="snippet" value="aj:....LoadEdtFileService.ready(..)"/>
+                    <param name="snippet" value="aj:....LoadEdtFileService.initService(..)"/>
                     <!--<param name="snippet-start-offset" value="3" />-->
                     <param name="highlight-lines" value="grep:registerCallback"/>
                 </macro>
@@ -233,14 +233,17 @@
                     <strong>listen</strong>
                     method with one or several Wave Types.
                     <br/>
-                    This call must be done into the
-                    <i>ready</i>
-                    method or into
-                    <em>initModel</em>
-                    for
-                    <b>Model</b>
-                    classes.
+                    This call must be done into one of the following method according to component used:
+                    
                 </p>
+                
+                <ul>
+                <li><em>initCommand</em> : for Command classes</li>
+                <li><em>initService</em> : for Service classes</li>
+                <li><em>initModel</em> : for Model classes</li>
+                </ul>
+                
+                <p>Each initXXX method is called into JRebirth Internal Thread by ready method.</p>
 
                 <macro name="include">
                     <param name="source"

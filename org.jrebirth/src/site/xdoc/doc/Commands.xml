@@ -59,8 +59,8 @@
 					their instantiation and their startup but they will be processed into JAT, JIT or one of JTP slots.
 					JAT and JIT will process command one
 					after the other. JTP will act in the same
-					manner but internal engine will dispatch all actions to its pooled threads (by default 4 slots are
-					available).
+					manner but internal engine will dispatch all actions to its pooled threads (by default {2 x Number of CPU core} slots are
+					available by Thread Pool).
 				</p>
 
 			</subsection>
@@ -145,7 +145,7 @@
 					<em>AbstractBaseCommand</em>
 					extends
 					<em>AbstractWaveReady</em>
-					and their descendants must provide ready(), processAction() and execute() methods.
+					and their descendants must provide <em>initCommand()</em>, <em>processAction()</em> and <em>execute()</em> methods.
 				</p>
 
 
@@ -204,7 +204,7 @@
 					that will be hold by the wave and so available into the command.
 				</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/facade/WaveReady.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/core/link/AbstractWaveReady.java" />
 					<param name="snippet" value="re:callCommand" />
 				</macro>
 
@@ -347,7 +347,7 @@
 				</p>
 				<macro name="include">
 					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/showmodel/AttachModelCommand.java" />
-					<param name="snippet" value="re:extends DefaultUICommand" />
+					<param name="snippet" value="re:extends DefaultUIBeanCommand" />
 				</macro>
 
 				<p>
@@ -370,7 +370,7 @@
 				</p>
 				<macro name="include">
 					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/showmodel/PrepareModelCommand.java" />
-					<param name="snippet" value="re:extends DefaultPoolCommand" />
+					<param name="snippet" value="re:extends DefaultPoolBeanCommand" />
 				</macro>
 
 				<h4>Constructor argument usage</h4>
@@ -396,7 +396,7 @@
 					allow storing unique commands.
 				</p>
 				<p>All objects provided as key part will be serialized (toString call) to build the key.</p>
-				<p>Warning : When a command is built consequently to a wave reception, the wave UID will be concatened to the class name instead of using key
+				<p>Warning : When a command is built consequently to a wave reception, the wave UID will be concatenated to the class name instead of using key
 					parts.
 				</p>
 
