@@ -37,7 +37,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.WaveTypeBase;
 
@@ -163,7 +162,7 @@ public class SlidingDoorService extends DefaultService {
      * {@inheritDoc}
      */
     @Override
-    public void ready() throws CoreException {
+    public void initService() {
         // Nothing to do yet
     }
 

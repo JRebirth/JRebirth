@@ -15,25 +15,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.core.command;
+package org.jrebirth.undoredo.command;
 
-import org.jrebirth.core.concurrent.RunInto;
-import org.jrebirth.core.concurrent.RunType;
-import org.jrebirth.core.exception.CommandException;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
 
 /**
- * The class <strong>DefaultBeanCommand</strong>.
- * 
- * The default empty class for Internal commands.
- * 
- * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
+ * The Class DefaultUndoableCommand is the default class to build an undoable command.
  * 
  * @author Sébastien Bordes
  */
-@RunInto(RunType.JIT)
-public class DefaultBeanCommand<WB extends WaveBean> extends AbstractSingleCommand<WB> {
+public class DefaultUndoableCommand<WB extends WaveBean> extends AbstractUndoableCommand<WB> {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void init(Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void undo() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void redo() {
+        // Nothing to do yet
+    }
 
     /**
      * {@inheritDoc}
@@ -42,19 +58,5 @@ public class DefaultBeanCommand<WB extends WaveBean> extends AbstractSingleComma
     protected void initCommand() {
         // Nothing to do yet
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void execute(final Wave wave) throws CommandException {
-        // Nothing to do yet by the default command, must be overridden
-    }
-
-    // @Override
-    // public void setParentCommand(Command parentCommand) {
-    // // Nothing to do yet
-    //
-    // }
 
 }

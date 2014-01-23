@@ -73,6 +73,27 @@ public class CoreException extends AbstractMessageException {
     }
 
     /**
+     * Constructor with message and throwable.
+     * 
+     * @param messageItem the message item to display.
+     * @param t the base exception thrown
+     * @param parameters the message parameters (if any)
+     */
+    public CoreException(final MessageItem messageItem, final Throwable t, final Object... parameters) {
+        super(messageItem.getText(parameters), t);
+    }
+
+    /**
+     * Constructor without base exception.
+     * 
+     * @param messageItem the message item to display.
+     * @param parameters the message parameters (if any)
+     */
+    public CoreException(final MessageItem messageItem, final Object... parameters) {
+        super(messageItem.getText(parameters));
+    }
+
+    /**
      * Constructor without custom message.
      * 
      * @param t the base exception thrown

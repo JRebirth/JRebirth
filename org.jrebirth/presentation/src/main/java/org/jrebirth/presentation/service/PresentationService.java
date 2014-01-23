@@ -29,7 +29,6 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.presentation.model.Presentation;
 import org.jrebirth.presentation.resources.PrezParameters;
@@ -54,8 +53,7 @@ public final class PresentationService extends DefaultService {
      * {@inheritDoc}
      */
     @Override
-    public void ready() throws CoreException {
-        super.ready();
+    public void initService() {
 
         final String configName = PrezParameters.XML_FILE_LOCATION.get();
 

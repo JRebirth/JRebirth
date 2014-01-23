@@ -19,6 +19,7 @@ package org.jrebirth.core.facade;
 
 import java.lang.reflect.Method;
 
+import org.jrebirth.core.command.Command;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveData;
 import org.jrebirth.core.wave.WaveType;
@@ -77,8 +78,20 @@ public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
      * @param waveChecker the wave checker used to forward the wave only if the checker return true
      * @param callType the wave type mapped to this service.
      * @param responseType the wave type of the wave emitted in return
+     * @param returnCommandClass the command class to call to process the service result
      */
-    void registerCallback(final WaveChecker waveChecker, final WaveType callType, final WaveType responseType);
+    void registerCallback(final WaveChecker waveChecker, final WaveType callType, final WaveType responseType, Class<? extends Command> returnCommandClass);
+
+    /**
+     * Register a wave call back contract.
+     * 
+     * Wave Contract will be checked if {@link org.jrebirth.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     * 
+     * @param callType the wave type mapped to this service.
+     * @param responseType the wave type of the wave emitted in return
+     * @param returnCommandClass the command class to call to process the service result
+     */
+    void registerCallback(final WaveType callType, final WaveType responseType, Class<? extends Command> returnCommandClass);
 
     /**
      * Register a wave call back contract.
@@ -126,6 +139,15 @@ public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
      * @return Returns the waveType for return wave.
      */
     WaveType getReturnWaveType(final WaveType waveType);
+
+    /**
+     * Return the return Command to call for given wave type.
+     * 
+     * @param waveType the source wave type
+     * 
+     * @return Returns the Command class to call (or null.
+     */
+    Class<? extends Command> getReturnCommand(final WaveType waveType);
 
     /**
      * Process a wave.

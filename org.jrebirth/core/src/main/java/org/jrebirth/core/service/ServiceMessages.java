@@ -52,6 +52,9 @@ public interface ServiceMessages extends MessageContainer {
     /** "{0} Consumes wave (noReturn) {1}". */
     MessageItem NO_RETURN_WAVE_CONSUMED = create(new LogMessage("jrebirth.service.noReturnedWaveConsumed", JRLevel.Trace, JRebirthMarkers.SERVICE));
 
+    /** "No Return WaveType defined for this WaveType {0}". */
+    MessageItem NO_RETURNED_WAVE_TYPE_DEFINED = create(new LogMessage("jrebirth.service.noReturnedWaveTypeDefined", JRLevel.Error, JRebirthMarkers.SERVICE));
+
     /** "The Return WaveType must contain at least one WaveItem to wrap the service return". */
     MessageItem NO_RETURNED_WAVE_ITEM = create(new LogMessage("jrebirth.service.noReturnedWaveItem", JRLevel.Error, JRebirthMarkers.SERVICE));
 
