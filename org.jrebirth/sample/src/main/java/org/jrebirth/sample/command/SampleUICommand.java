@@ -7,7 +7,6 @@ import javafx.stage.StageBuilder;
 import javafx.stage.StageStyle;
 
 import org.jrebirth.core.command.DefaultUIBeanCommand;
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveBean;
 
@@ -28,7 +27,7 @@ public final class SampleUICommand extends DefaultUIBeanCommand<WaveBean> {
      * {@inheritDoc}
      */
     @Override
-    public void ready() throws CoreException {
+    public void initCommand() {
         // You must put your initialization code here (if any)
     }
 

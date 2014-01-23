@@ -311,7 +311,7 @@ public final class ClassUtility implements UtilMessages {
             try {
                 found = sourceClass.getField(ClassUtility.underscoreToCamelCase(itemName));
             } catch (NoSuchFieldException | SecurityException e) {
-                // Nothing to do
+                found = null;
             }
         }
         if (found == null) {

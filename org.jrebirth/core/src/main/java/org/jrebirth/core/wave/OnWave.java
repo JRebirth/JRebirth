@@ -30,6 +30,6 @@ public @interface OnWave {
      * 
      * There is no default value
      */
-    String[] types() default {};
+    String[] types() default { };
 
 }

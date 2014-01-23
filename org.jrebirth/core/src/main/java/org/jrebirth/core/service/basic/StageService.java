@@ -28,7 +28,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageBuilder;
 
 import org.jrebirth.core.command.basic.stage.StageWaveBean;
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveTypeBase;
@@ -71,8 +70,7 @@ public class StageService extends DefaultService {
      * {@inheritDoc}
      */
     @Override
-    public void ready() throws CoreException {
-        super.ready(); // Can be omitted but it's a bad practice
+    public void initService() {
 
         registerCallback(DO_OPEN_STAGE, RE_STAGE_OPENED);
         registerCallback(DO_CLOSE_STAGE, RE_STAGE_CLOSED);

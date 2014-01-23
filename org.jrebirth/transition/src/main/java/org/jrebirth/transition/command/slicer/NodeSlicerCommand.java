@@ -32,7 +32,6 @@ import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.image.WritableImage;
 import javafx.scene.shape.RectangleBuilder;
 
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.WaveBase;
 import org.jrebirth.core.wave.WaveTypeBase;
@@ -79,8 +78,7 @@ public class NodeSlicerCommand extends DefaultService {
      * {@inheritDoc}
      */
     @Override
-    public void ready() throws CoreException {
-        super.ready();
+    public void initService() {
 
         registerCallback(DO_SLICE_NODE, RE_NODE_SLICED/* , TransitionWaves.NODE */);
     }

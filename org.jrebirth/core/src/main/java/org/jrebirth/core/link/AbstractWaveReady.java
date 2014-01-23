@@ -60,14 +60,17 @@ import org.jrebirth.core.wave.checker.WaveChecker;
  */
 public abstract class AbstractWaveReady<R extends WaveReady<R>> extends AbstractReady<R> implements WaveReady<R>, LinkMessages {
 
+    /** The default fallback wave handle method. */
+    public static final String PROCESS_WAVE_METHOD_NAME = "processWave";
+
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractWaveReady.class);
 
-    /** . */
-    public static final String PROCESS_WAVE_METHOD_NAME = "processWave";
-
-    /** The wave type map. */
+    /** The return wave type map. */
     private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
+
+    /** The return command class map. */
+    private final Map<WaveType, Class<? extends Command>> returnCommandClass = new HashMap<>();
 
     /**
      * Short cut method used to retrieve the notifier.
@@ -122,6 +125,8 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
         final WaveReady<?> waveReady = this;
 
+        LOGGER.trace(LinkMessages.LISTEN_WAVE_TYPE, getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName());
+
         // Use the JRebirth Thread to add new subscriptions for given Wave Type
         JRebirth.runIntoJIT(new AbstractJrbRunnable(LISTEN_WAVE_TYPE.getText(getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName())) {
             @Override
@@ -135,26 +140,38 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      * {@inheritDoc}
      */
     @Override
-    public final void registerCallback(final WaveChecker waveChecker, final WaveType callType, final WaveType responseType) {
+    public final void registerCallback(final WaveType callType, final WaveType responseType) {
 
-        // Perform the subscription
-        listen(waveChecker, callType);
-
-        // Store a link between call Wave Type and return wave type
-        this.returnWaveTypeMap.put(callType, responseType);
+        // Call the generic method
+        registerCallback(null, callType, responseType, null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void registerCallback(final WaveType callType, final WaveType responseType) {
+    public final void registerCallback(final WaveType callType, final WaveType responseType, final Class<? extends Command> returnCommandClass) {
+
+        // Call the generic method
+        registerCallback(null, callType, responseType, returnCommandClass);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void registerCallback(final WaveChecker waveChecker, final WaveType callType, final WaveType responseType, final Class<? extends Command> returnCommandClass) {
 
         // Perform the subscription
-        listen(callType);
+        listen(waveChecker, callType);
 
-        // Store a link between call Wave Type and return wave type
+        // Store a link between call Wave Type and return wave type that store the result type ino a WaveItem
         this.returnWaveTypeMap.put(callType, responseType);
+
+        // Store the Command Class that will handle the service result
+        if (returnCommandClass != null) {
+            this.returnCommandClass.put(callType, returnCommandClass);
+        }
     }
 
     /**
@@ -169,10 +186,20 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      * {@inheritDoc}
      */
     @Override
+    public final Class<? extends Command> getReturnCommand(final WaveType waveType) {
+        return this.returnCommandClass.get(waveType);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public final void unlisten(final WaveType... waveTypes) {
 
         // Store an hard link to be able to use current class into the closure
         final WaveReady waveReady = this;
+
+        LOGGER.trace(LinkMessages.UNLISTEN_WAVE_TYPE, getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName());
 
         // Use the JRebirth Thread to manage Waves
         JRebirth.runIntoJIT(new AbstractJrbRunnable(UNLISTEN_WAVE_TYPE.getText(getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName())) {
@@ -271,11 +298,14 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      * @return the wave built
      */
     private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData<?>... waveData) {
+
         final Wave wave = new WaveBase();
+
         wave.setWaveGroup(waveGroup);
         wave.setWaveType(waveType);
         wave.setFromClass(this.getClass());
         wave.setRelatedClass(relatedClass);
+
         for (final WaveData<?> wd : waveData) {
             wave.addData(wd);
         }
@@ -297,7 +327,9 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      * @return the wave built
      */
     private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveBean waveBean) {
+
         final Wave wave = new WaveBase();
+
         wave.setWaveGroup(waveGroup);
         wave.setWaveType(waveType);
         wave.setFromClass(this.getClass());

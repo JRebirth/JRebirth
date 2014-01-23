@@ -39,6 +39,9 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     /** The wave type of the wave to build. */
     private WaveType waveType;
 
+    /** The from class of the wave to build. */
+    private Class<?> fromClass;
+
     /** The related class of the wave to build. */
     private Class<?> relatedClass;
 
@@ -72,12 +75,15 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
             paramWave.setWaveType(this.waveType);
         }
         if (hasBit(2)) {
-            paramWave.setRelatedClass(this.relatedClass);
+            paramWave.setFromClass(this.fromClass);
         }
         if (hasBit(3)) {
-            paramWave.setWaveBeanClass(this.waveBeanClass);
+            paramWave.setRelatedClass(this.relatedClass);
         }
         if (hasBit(4)) {
+            paramWave.setWaveBeanClass(this.waveBeanClass);
+        }
+        if (hasBit(5)) {
             paramWave.addDatas(this.waveData);
         }
     }
@@ -113,6 +119,20 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     }
 
     /**
+     * Define the from class.
+     * 
+     * @param fromClass the from class to set
+     * 
+     * @return the builder
+     */
+    @SuppressWarnings("unchecked")
+    public B fromClass(final Class<?> fromClass) {
+        this.fromClass = fromClass;
+        addBit(2);
+        return (B) this;
+    }
+
+    /**
      * Define the related class.
      * 
      * @param relatedClass the related class to set
@@ -122,7 +142,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B relatedClass(final Class<?> relatedClass) {
         this.relatedClass = relatedClass;
-        addBit(2);
+        addBit(3);
         return (B) this;
     }
 
@@ -136,7 +156,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B waveBeanClass(final Class<? extends WaveBean> waveBeanClass) {
         this.waveBeanClass = waveBeanClass;
-        addBit(3);
+        addBit(4);
         return (B) this;
     }
 
@@ -150,7 +170,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
     @SuppressWarnings("unchecked")
     public B data(final WaveData<?>... waveData) {
         this.waveData = waveData;
-        addBit(4);
+        addBit(5);
         return (B) this;
     }
 

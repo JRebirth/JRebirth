@@ -29,13 +29,13 @@ import org.jrebirth.core.wave.WaveBean;
 import org.jrebirth.showcase.undoredo.beans.ShapeType;
 import org.jrebirth.showcase.undoredo.beans.UndoAppWaves;
 import org.jrebirth.showcase.undoredo.ui.UndoModel;
-import org.jrebirth.undoredo.command.AbstractUndoableCommand;
+import org.jrebirth.undoredo.command.DefaultUndoableCommand;
 
 /**
  * The Class CreateShapeCommand is used to create a node and add it to the graphical editor.
  */
 @RunInto(RunType.JAT)
-public class CreateShapeCommand extends AbstractUndoableCommand<WaveBean> {
+public class CreateShapeCommand extends DefaultUndoableCommand<WaveBean> {
 
     /** The shape type. */
     private ShapeType shapeType;

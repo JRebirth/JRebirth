@@ -67,6 +67,26 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
      * {@inheritDoc}
      */
     @Override
+    public final void ready() throws CoreException {
+
+        // Search OnWave annotation to manage auto wave handler setup
+        manageOnWaveAnnotation();
+
+        // Call the custom method
+        initCommand();
+    }
+
+    /**
+     * Custom method used to initialize the command.
+     * 
+     * Called into JIT by ready method.
+     */
+    protected abstract void initCommand();
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void preExecute(final Wave wave) {
         this.running.set(true);
     }
@@ -87,13 +107,4 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
         return this.running.get();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void ready() throws CoreException {
-
-        // Search OnWave annotation to manage auto wave handler setup
-        manageOnWaveAnnotation();
-    }
 }
