@@ -28,6 +28,7 @@ import org.jrebirth.core.concurrent.JRebirthRunnable;
 import org.jrebirth.core.concurrent.RunInto;
 import org.jrebirth.core.concurrent.RunType;
 import org.jrebirth.core.concurrent.RunnablePriority;
+import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.JRebirthThreadException;
 import org.jrebirth.core.exception.WaveException;
 import org.jrebirth.core.facade.WaveReady;
@@ -98,14 +99,14 @@ public class WaveHandler implements LinkMessages {
      * 
      * @param wave the wave to manage
      * 
-     * @throws WaveException if an error occurred whil processing the wave
+     * @throws WaveException if an error occurred while processing the wave
      */
     public void handle(final Wave wave) throws WaveException {
 
         final Method customMethod = retrieveCustomMethod(wave);
 
         // Grab the run type annotation (if exists)
-        final RunInto runInto = customMethod.getAnnotation(RunInto.class);
+        final RunInto runInto = customMethod.getAnnotation(RunInto.class); // FIX ME
 
         // Retrieve the annotation runnable priority (if any)
         final RunnablePriority priority = runInto == null ? RunnablePriority.Normal : runInto.priority();
@@ -210,7 +211,7 @@ public class WaveHandler implements LinkMessages {
 
                 ClassUtility.callMethod(method, getWaveReady(), parameterValues.toArray());
 
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            } catch (final CoreException e) {
                 LOGGER.error(WAVE_DISPATCH_ERROR, e);
                 // Propagate the wave exception
                 throw new WaveException(wave, e);

@@ -72,7 +72,7 @@ public final class ServiceTaskReturnWaveListener implements WaveListener, Servic
     public void waveConsumed(final Wave wave) {
         if (wave.getRelatedWave() != null) {
             // Return wave has been consumed, so the triggered wave can be consumed too
-            LOGGER.trace(SERVICE_TASK_RETURN_CONSUMES, wave.getRelatedClass().getSimpleName(), wave.getRelatedWave().toString());
+            LOGGER.trace(SERVICE_TASK_RETURN_CONSUMES, wave.getFromClass().getSimpleName(), wave.getRelatedWave().toString());
             wave.getRelatedWave().setStatus(Status.Consumed);
         }
     }

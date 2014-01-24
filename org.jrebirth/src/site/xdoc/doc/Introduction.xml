@@ -97,7 +97,7 @@
 
 			</subsection>
 
-			<subsection name="JRebirth Objectives">
+			<subsection name="JRebirth Objectives" id="Objectives">
 
 				<p>The main goal of building yet another application framework is to be the
 					more convenient as possible for developpers.
@@ -146,7 +146,8 @@
 				</p>
 
 			</subsection>
-			<subsection name="JRebirth Key features">
+			
+			<subsection name="JRebirth Key features" id="KeyFeatures">
 
 				<p>Main features of JRebirth Application Framework are:</p>
 				<ol>
