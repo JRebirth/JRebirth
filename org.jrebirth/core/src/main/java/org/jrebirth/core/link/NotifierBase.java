@@ -20,7 +20,6 @@ package org.jrebirth.core.link;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.core.command.Command;
@@ -291,7 +290,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
             // IF this wave type isn't registered into the map, we add it with an empty list of LinkedObject
             if (!this.notifierMap.containsKey(waveType)) {
-                this.notifierMap.put(waveType, new WaveSubscription(waveType, LoopBuilder.newList(linkedObject)));
+                this.notifierMap.put(waveType, LoopBuilder.newSubscription(waveType));
             }
             // Retrieve he list associated to this Wave Type
             final WaveSubscription ws = this.notifierMap.get(waveType);
@@ -361,28 +360,27 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         }
 
         /**
+         * Build a new {@link WaveSubscription}.
+         * 
+         * @param waveType the Wave Type listened
+         * 
+         * @return a new {@link WaveSubscription} instance
+         */
+        public static WaveSubscription newSubscription(final WaveType waveType) {
+            return new WaveSubscription(waveType, new ArrayList<WaveHandler>());
+        }
+
+        /**
          * Build a new empty component wrapper.
          * 
          * @param linkedObject the object to wrap into an handler
          * @param waveChecker the wave checker
+         * @param method the method used to handle the wave (could be null)
          * 
          * @return a new instance of WaveHandler
          */
         public static WaveHandler newHandler(final WaveReady<?> linkedObject, final WaveChecker waveChecker, final Method method) {
             return new WaveHandler(linkedObject, waveChecker, method);
-        }
-
-        /**
-         * Build a new empty mutable array list.
-         * 
-         * @param item the object to define the generic type
-         * 
-         * @param <T> the generic type to use
-         * 
-         * @return a new instance of ArrayList
-         */
-        public static <T> List<WaveHandler> newList(final T item) {
-            return new ArrayList<WaveHandler>();
         }
 
     }

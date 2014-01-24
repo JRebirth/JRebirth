@@ -315,10 +315,11 @@ public final class ClassUtility implements UtilMessages {
             }
         }
         if (found == null) {
-            for (final Field f : sourceClass.getFields()) {
+            Field f = null;
+            for (int i = 0; found == null && i < sourceClass.getFields().length; i++) {
+                f = sourceClass.getFields()[i];
                 if (f.getClass().equals(searchedClass)) {
                     found = f;
-                    break;
                 }
             }
         }
@@ -426,12 +427,12 @@ public final class ClassUtility implements UtilMessages {
     }
 
     /**
-     * .
+     * Retrieve all annotation of the given type from the given class.
      * 
-     * @param cls
-     * @param annotationClass
+     * @param cls the class that we want to inspect
+     * @param annotationClass the type of Annaotion to find
      * 
-     * @return
+     * @return the list of annotated method
      */
     public static List<Method> getAnnotatedMethods(final Class<?> cls, final Class<? extends Annotation> annotationClass) {
         final List<Method> methodList = new ArrayList<>();
@@ -463,26 +464,28 @@ public final class ClassUtility implements UtilMessages {
      * @param parameters the list of method parameters to use
      * 
      * @return the method return
-     * 
-     * @throws IllegalAccessException if method invocation has failed
-     * @throws InvocationTargetException if method invocation has failed
+     * @throws CoreException if the method call has failed
      */
-    public static Object callMethod(final Method method, final Object instance, final Object[] parameters) throws IllegalAccessException, InvocationTargetException {
+    public static Object callMethod(final Method method, final Object instance, final Object[] parameters) throws CoreException {
 
-        Object res;
+        Object res = null;
 
-        // store current visibility
-        final boolean accessible = method.isAccessible();
+        try {
+            // store current visibility
+            final boolean accessible = method.isAccessible();
 
-        // let it accessible anyway
-        method.setAccessible(true);
+            // let it accessible anyway
+            method.setAccessible(true);
 
-        // Call this method with right parameters
-        res = method.invoke(instance, parameters);
+            // Call this method with right parameters
+            res = method.invoke(instance, parameters);
 
-        // Reset default visibility
-        method.setAccessible(accessible);
+            // Reset default visibility
+            method.setAccessible(accessible);
 
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
+            throw new CoreException(e);
+        }
         return res;
     }
 }

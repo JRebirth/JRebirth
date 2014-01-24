@@ -27,7 +27,7 @@ import org.slf4j.spi.LocationAwareLogger;
 /**
  * The Class LogbackAdapter.
  */
-public class LogbackAdapter extends AbstractAdapter implements JRLogger { // NOSONAR lot of methods !!
+public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of methods !!
 
     /**
      * The fully qualified name of this class. Used in gathering caller information.
