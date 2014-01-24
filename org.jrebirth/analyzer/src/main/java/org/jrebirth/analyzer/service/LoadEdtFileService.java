@@ -73,20 +73,19 @@ public class LoadEdtFileService extends DefaultService {
      */
     @Priority(RunnablePriority.High)
     public List<JRebirthEvent> doLoadEvents(final File selecteFile, final Wave wave) {
+
         final List<JRebirthEvent> eventList = new ArrayList<>();
 
         updateMessage(wave, "Parsing events");
 
+        int totalLines = 0;
+        try {
+            totalLines = countLines(selecteFile);
+        } catch (IOException e1) {
+        }
+
         try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));)
         {
-
-            // int totalLines = 0;
-            // while (br.readLine() != null){
-            // totalLines++;
-            // }
-            //
-            // br.reset();
-
             int processedLines = 0;
 
             String strLine = br.readLine();
@@ -94,13 +93,12 @@ public class LoadEdtFileService extends DefaultService {
             while (strLine != null) {
                 processedLines++;
 
-                // updateProgress(wave, totalLines, processedLines);
+                updateProgress(wave, processedLines, totalLines);
 
                 if (strLine.contains(JRebirthMarkers.JREVENT.getName())) {
                     addEvent(eventList, strLine.substring(strLine.indexOf(">>") + 2));
                 }
                 strLine = br.readLine();
-
             }
 
         } catch (final IOException e) {

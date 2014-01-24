@@ -237,8 +237,8 @@
 					It's possible to listen a
 					<strong>WaveType</strong>
 					(registration done into the
-					<em>ready()</em>
-					method)
+					<em>initModel</em>, <em>initService</em> and <em>initCommand</em>
+					methods)
 					in order to be notified when a such wave is sent.
 					You can manage custom methods called by reflection to handle waves and can you catch
 					all waves into the

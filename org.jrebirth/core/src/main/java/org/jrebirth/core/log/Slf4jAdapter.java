@@ -27,7 +27,7 @@ import org.slf4j.Marker;
  * 
  * @author Sébastien Bordes
  */
-public class Slf4jAdapter extends AbstractAdapter implements JRLogger { // NOSONAR lot of methods !!
+public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NOSONAR lot of methods !!
 
     /** The internal logger. */
     private final Logger slf4jLogger; // NOSONAR this is a wrapped logger

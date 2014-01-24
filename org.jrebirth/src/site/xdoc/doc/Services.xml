@@ -60,8 +60,8 @@
                     <strong>Warning:</strong>
                     <br/>
                     You must pay attention to the lifecycle of your service instance. As a JRebirth Component, each
-                    service object is elligible
-                    to garbage collection if it isn't retained by another object currenlty used.
+                    service object is eligible
+                    to garbage collection if it isn't retained by another object currently used.
                     <br/>
 
                     So your data stored or processed into your service can be loss if you didn't manage correctly your
@@ -195,7 +195,7 @@
 
             <subsection name="Call the Service">
 
-                <p>To call this<strong>Service Feature</strong>, you can use the
+                <p>To call this <strong>Service Feature</strong>, you can use the
                     <em>returnData</em>
                     from any JRebirth's Component.
                     It takes at least 2 mandatory arguments:
@@ -277,7 +277,12 @@
 
         <section name="Threading ">
 
-            <subsection name="Which Thread is involved ?">
+            <subsection name="Which Threads are involved ?">
+            
+            <p>
+            All communications with Service Component is done into <b>JIT</b> and all Service Tasks are performed 
+            into one slot of <b>JTP</b> or <b>HPTP</b> according to priority defined with annotation.
+            </p>
 
             </subsection>
 

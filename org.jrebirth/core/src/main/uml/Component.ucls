@@ -19,16 +19,7 @@
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="org.jrebirth.core.key.KeyBuilder" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/key/KeyBuilder.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="118" y="208"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="org.jrebirth.core.key.ClassKey" project="org.jrebirth.core" 
+  <class id="3" language="java" name="org.jrebirth.core.key.ClassKey" project="org.jrebirth.core" 
     file="/org.jrebirth.core/src/main/java/org/jrebirth/core/key/ClassKey.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="392" y="210"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -37,26 +28,14 @@
       <operations public="true" package="true" protected="true" private="false"/>    
     </display>  
   </class>  
-  <dependency id="5">    
+  <generalization id="4">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="5">    
     <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <dependency id="6">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <realization id="7">    
-    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
-  <dependency id="8">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </dependency>  
-  <generalization id="9">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="false"/>    

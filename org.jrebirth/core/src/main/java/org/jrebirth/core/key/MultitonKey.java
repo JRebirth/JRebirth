@@ -37,8 +37,8 @@ import org.jrebirth.core.util.ClassUtility;
  */
 public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
 
-    /** . */
-    private final JRLogger LOGGER = JRLoggerFactory.getLogger(MultitonKey.class);
+    /** The class logger. */
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(MultitonKey.class);
 
     /** The key formatted into a string. */
     private String key;
@@ -117,15 +117,13 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
         Method method = null;
         try {
             method = object.getClass().getMethod(typeGenerator.value());
-            if (method == null) {
-                this.LOGGER.log(METHOD_NOT_FOUND, typeGenerator.value(), object.getClass().getSimpleName());
-            } else {
-                objectKey = (String) method.invoke(object);
-            }
-        } catch (NoSuchMethodException | SecurityException e) {
-            this.LOGGER.log(NO_KEY_GENERATOR_METHOD, typeGenerator.value(), object.getClass().getSimpleName());
+            objectKey = (String) method.invoke(object);
+        } catch (final NoSuchMethodException e) {
+            LOGGER.log(METHOD_NOT_FOUND, typeGenerator.value(), object.getClass().getSimpleName());
+        } catch (final SecurityException e) {
+            LOGGER.log(NO_KEY_GENERATOR_METHOD, typeGenerator.value(), object.getClass().getSimpleName());
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            this.LOGGER.log(KEY_GENERATOR_FAILURE, typeGenerator.value(), object.getClass().getSimpleName());
+            LOGGER.log(KEY_GENERATOR_FAILURE, typeGenerator.value(), object.getClass().getSimpleName());
         }
 
         return objectKey;
@@ -153,11 +151,11 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
                     returnedValue = m.invoke(object);
 
                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    this.LOGGER.log(METHOD_KEY_GENERATOR_FAILURE, m.getName(), object.getClass().getSimpleName());
+                    LOGGER.log(METHOD_KEY_GENERATOR_FAILURE, m.getName(), object.getClass().getSimpleName());
                 }
                 if (returnedValue == null) {
                     // returned value is null
-                    this.LOGGER.log(NULL_METHOD_KEY, m.getName(), object.getClass().getSimpleName());
+                    LOGGER.log(NULL_METHOD_KEY, m.getName(), object.getClass().getSimpleName());
                 } else {
                     sb.append(convertMethodKeyObject(methodGenerator, returnedValue));
                 }
@@ -172,6 +170,8 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
      * 
      * @param methodGenerator the method annotation
      * @param keyValue the returned key value
+     * 
+     * @return the key converted from object
      */
     private String convertMethodKeyObject(final KeyGenerator methodGenerator, final Object keyValue) {
         String res = "";
@@ -183,23 +183,21 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
                 // The default annotation value is toString
                 final Method converter = ClassUtility.getMethodByName(keyValue.getClass(), methodGenerator.value());
 
-                if (converter == null) {
-                    this.LOGGER.log(METHOD_NOT_FOUND, methodGenerator.value(), keyValue.getClass().getSimpleName());
-                } else {
-                    // The toString will be called for a string
-                    final Object key = converter.invoke(keyValue);
+                // The toString will be called for a string
+                final Object localKey = converter.invoke(keyValue);
 
-                    if (key == null) {
-                        this.LOGGER.log(NULL_METHOD_KEY_STRING, converter.getName(), keyValue.getClass().getSimpleName());
-                    } else {
-                        res = key.toString();
-                    }
+                if (localKey == null) {
+                    LOGGER.log(NULL_METHOD_KEY_STRING, converter.getName(), keyValue.getClass().getSimpleName());
+                } else {
+                    res = localKey.toString();
                 }
 
-            } catch (NoSuchMethodException | SecurityException e) {
-                this.LOGGER.log(NO_TOSTRING_KEY_METHOD, methodGenerator.value(), keyValue.getClass().getSimpleName());
+            } catch (final NoSuchMethodException e) {
+                LOGGER.log(METHOD_NOT_FOUND, methodGenerator.value(), keyValue.getClass().getSimpleName());
+            } catch (final SecurityException e) {
+                LOGGER.log(NO_TOSTRING_KEY_METHOD, methodGenerator.value(), keyValue.getClass().getSimpleName());
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                this.LOGGER.log(METHOD_KEY_TOSTRING_FAILURE, methodGenerator.value(), keyValue.getClass().getSimpleName());
+                LOGGER.log(METHOD_KEY_TOSTRING_FAILURE, methodGenerator.value(), keyValue.getClass().getSimpleName());
             }
         }
         return res + "|";
