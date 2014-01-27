@@ -22,6 +22,8 @@ import org.jrebirth.core.wave.WaveBean;
 
 /**
  * The Interface Undoable.
+ * 
+ * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  */
 public interface Undoable<WB extends WaveBean> extends Command {
 
