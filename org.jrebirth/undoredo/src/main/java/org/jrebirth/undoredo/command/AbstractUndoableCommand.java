@@ -28,6 +28,8 @@ import org.jrebirth.core.wave.WaveData;
 /**
  * The Class AbstractUndoableCommand is the base class for all other undoable command.
  * 
+ * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
+ * 
  * @author Sébastien Bordes
  */
 public abstract class AbstractUndoableCommand<WB extends WaveBean> extends AbstractSingleCommand<WB> implements Undoable<WB> {
