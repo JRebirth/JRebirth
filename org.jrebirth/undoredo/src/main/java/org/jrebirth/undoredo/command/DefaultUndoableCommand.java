@@ -23,6 +23,8 @@ import org.jrebirth.core.wave.WaveBean;
 /**
  * The Class DefaultUndoableCommand is the default class to build an undoable command.
  * 
+ * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
+ * 
  * @author Sébastien Bordes
  */
 public class DefaultUndoableCommand<WB extends WaveBean> extends AbstractUndoableCommand<WB> {
@@ -31,7 +33,7 @@ public class DefaultUndoableCommand<WB extends WaveBean> extends AbstractUndoabl
      * {@inheritDoc}
      */
     @Override
-    protected void init(Wave wave) {
+    protected void init(final Wave wave) {
         // Nothing to do yet
     }
 
