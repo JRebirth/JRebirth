@@ -27,9 +27,11 @@ import org.jrebirth.core.wave.Wave;
  * Default implementation of the FXML model.
  * 
  * @param <M> the class type of the current model
+ * @param <O> the class type of the bindable object
+ * 
  * @author Sébastien Bordes
  */
-public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
+public class DefaultFXMLObjectModel<M extends Model, O extends Object> extends AbstractFXMLObjectModel<M, O> {
 
     /** The fxml path. */
     private String fxmlPath;

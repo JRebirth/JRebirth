@@ -21,7 +21,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +31,7 @@ import org.jrebirth.core.facade.JRebirthEvent;
 import org.jrebirth.core.facade.JRebirthEventBase;
 import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.service.DefaultService;
+import org.jrebirth.core.service.ServiceUtility;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveTypeBase;
 
@@ -78,17 +78,15 @@ public class LoadEdtFileService extends DefaultService {
 
         updateMessage(wave, "Parsing events");
 
-        int totalLines = 0;
-        try {
-            totalLines = countLines(selecteFile);
-        } catch (IOException e1) {
-        }
+        // Get number of line to calculate the task progression
+        int totalLines = ServiceUtility.countFileLines(selecteFile);
 
         try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));)
         {
             int processedLines = 0;
 
             String strLine = br.readLine();
+
             // Read File Line By Line
             while (strLine != null) {
                 processedLines++;
@@ -96,8 +94,11 @@ public class LoadEdtFileService extends DefaultService {
                 updateProgress(wave, processedLines, totalLines);
 
                 if (strLine.contains(JRebirthMarkers.JREVENT.getName())) {
+                    // Convert the string to a JRebirth event and add it to the list
                     addEvent(eventList, strLine.substring(strLine.indexOf(">>") + 2));
                 }
+
+                // Read the next line to process
                 strLine = br.readLine();
             }
 
@@ -106,23 +107,6 @@ public class LoadEdtFileService extends DefaultService {
         }
         return eventList;
 
-    }
-
-    public static int countLines(final File aFile) throws IOException {
-        LineNumberReader reader = null;
-        try {
-            reader = new LineNumberReader(new FileReader(aFile));
-            while (reader.readLine() != null) {
-                ;
-            }
-            return reader.getLineNumber();
-        } catch (final Exception ex) {
-            return -1;
-        } finally {
-            if (reader != null) {
-                reader.close();
-            }
-        }
     }
 
     /**

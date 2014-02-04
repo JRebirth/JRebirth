@@ -69,12 +69,19 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     /** The animation used to show the slide. */
     private Animation showAnimation;
 
+    public enum SlideFlow {
+        forward, backward
+    };
+
+    /** The current slide flow. */
+    private SlideFlow currentFlow = SlideFlow.forward;
+
     /**
      * @return Returns the slide.
      */
     public Slide getSlide() {
         if (this.slide == null) {
-            this.slide = Slide.class.cast(getModelObject()/* .getValue() */);
+            this.slide = Slide.class.cast(getFirstKeyPart()/* .getValue() */);
         }
         return this.slide;
     }
@@ -84,6 +91,29 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      */
     public void setSlide(final Slide slide) {
         this.slide = slide;
+    }
+
+    /**
+     * @return Returns the currentFlow.
+     */
+    public SlideFlow getCurrentFlow() {
+        return currentFlow;
+    }
+
+    /**
+     * Return true if the slide flow is forward
+     * 
+     * @return true if currentFlow == forward
+     */
+    public boolean isForwardFlow() {
+        return currentFlow == SlideFlow.forward;
+    }
+
+    /**
+     * @param currentFlow The currentFlow to set.
+     */
+    public void setCurrentFlow(SlideFlow currentFlow) {
+        this.currentFlow = currentFlow;
     }
 
     /**
@@ -102,7 +132,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         super.bind();
         // Load the default slide step (if exists)
         if (getStepList().size() > 0) {
-            showSlideStep(getStepList().get(this.stepPosition), true); // FIXME Check usage
+            showSlideStep(getStepList().get(this.stepPosition));
         }
     }
 
@@ -222,9 +252,10 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     public boolean nextStep() {
         final boolean res = this.stepPosition < this.stepList.size() - 1;
         if (res && !getView().isSlideLocked()) {
+            setCurrentFlow(SlideFlow.forward);
             this.stepPosition++;
             // Launch the next step
-            showSlideStep(getStepList().get(this.stepPosition), true);
+            showSlideStep(getStepList().get(this.stepPosition));
         }
         // otherwise no more step return true to go to the next slide
         return !res;
@@ -237,9 +268,10 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     public boolean previousStep() {
         final boolean res = this.stepPosition > 0;
         if (res && !getView().isSlideLocked()) {
+            setCurrentFlow(SlideFlow.backward);
             this.stepPosition--;
             // Launch the previous step
-            showSlideStep(getStepList().get(this.stepPosition), false);
+            showSlideStep(getStepList().get(this.stepPosition));
         }
         // otherwise no more step return true to go to the previous slide
         return !res;
@@ -281,7 +313,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      * {@inheritDoc}
      */
     @Override
-    public abstract void showSlideStep(final S slideStep, final boolean forward);
+    public abstract void showSlideStep(final S slideStep);
 
     /**
      * {@inheritDoc}

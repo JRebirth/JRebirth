@@ -67,7 +67,7 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
      * @return Returns the eventModel.
      */
     public JRebirthEvent getEventModel() {
-        return (JRebirthEvent) getModelObject();
+        return (JRebirthEvent) getFirstKeyPart();
     }
 
     /**

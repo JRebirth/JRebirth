@@ -4,7 +4,6 @@
 package ${package}.command;
 
 import org.jrebirth.core.command.DefaultCommand;
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.sample.command.SampleCommand;
 
@@ -25,7 +24,7 @@ public final class SampleCommand extends DefaultCommand {
      * {@inheritDoc}
      */
     @Override
-    public void ready() throws CoreException {
+    public void initCommand() {
         // You must put your initialization code here (if any)
     }
 

@@ -70,6 +70,7 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
         final StringBuffer sb = new StringBuffer();
 
         sb.append(getClassField().getCanonicalName());
+        sb.append('|');
         for (final Object keyObject : this.keyPartList) {
             sb.append(buildObjectKey(keyObject)).append('|');
         }
@@ -181,23 +182,32 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
             try {
 
                 // The default annotation value is toString
-                final Method converter = ClassUtility.getMethodByName(keyValue.getClass(), methodGenerator.value());
+                final List<Method> converterList = ClassUtility.retrieveMethodList(keyValue.getClass(), methodGenerator.value());
 
-                // The toString will be called for a string
-                final Object localKey = converter.invoke(keyValue);
-
-                if (localKey == null) {
-                    LOGGER.log(NULL_METHOD_KEY_STRING, converter.getName(), keyValue.getClass().getSimpleName());
-                } else {
-                    res = localKey.toString();
+                Method converter = null;
+                for (Method m : converterList) {
+                    if (m.getParameterTypes().length == 0) {
+                        converter = m;
+                    }
                 }
 
-            } catch (final NoSuchMethodException e) {
-                LOGGER.log(METHOD_NOT_FOUND, methodGenerator.value(), keyValue.getClass().getSimpleName());
+                if (converter == null) {
+                    LOGGER.log(METHOD_NOT_FOUND, methodGenerator.value(), keyValue.getClass().getSimpleName());
+                } else {
+                    // The toString will be called for a string
+                    final Object localKey = converter.invoke(keyValue);
+
+                    if (localKey == null) {
+                        LOGGER.log(NULL_METHOD_KEY_STRING, converter.getName(), keyValue.getClass().getSimpleName());
+                    } else {
+                        res = localKey.toString();
+                    }
+                }
             } catch (final SecurityException e) {
                 LOGGER.log(NO_TOSTRING_KEY_METHOD, methodGenerator.value(), keyValue.getClass().getSimpleName());
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                 LOGGER.log(METHOD_KEY_TOSTRING_FAILURE, methodGenerator.value(), keyValue.getClass().getSimpleName());
+                e.printStackTrace();
             }
         }
         return res + "|";
@@ -247,6 +257,17 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
         if (this.keyPartList.size() > 1) {
             obj = this.keyPartList;
         } else if (this.keyPartList.size() == 1) {
+            obj = this.keyPartList.get(0);
+        }
+        return obj;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Object getFirstValue() {
+        Object obj = null;
+        if (this.keyPartList.size() >= 1) {
             obj = this.keyPartList.get(0);
         }
         return obj;

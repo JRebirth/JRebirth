@@ -21,7 +21,6 @@ import javafx.scene.Node;
 
 import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.exception.CoreRuntimeException;
-import org.jrebirth.core.key.MultitonKey;
 import org.jrebirth.core.ui.AbstractModel;
 import org.jrebirth.core.ui.Controller;
 import org.jrebirth.core.ui.Model;
@@ -40,6 +39,9 @@ import org.jrebirth.core.util.ClassUtility;
  * @param <O> the class type of the bindable object
  */
 public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, ?>, O extends Object> extends AbstractModel<M, V> {
+
+    /** The list of type to exclude in order to find the object type from generics declaration. */
+    private static final Class<?>[] OBJECT_EXCLUDED_CLASSES = new Class<?>[] { Model.class, View.class, Node.class, Controller.class };
 
     /** The dedicated view component. */
     private O object;
@@ -62,11 +64,30 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
     @SuppressWarnings("unchecked")
     protected void buildObject() {
 
-        // Build the current view by reflection
-        try {
-            this.object = (O) ClassUtility.buildGenericType(this.getClass(), new Class<?>[] { Model.class, View.class, Node.class, Controller.class });
-        } catch (final CoreException e) {
-            throw new CoreRuntimeException("Failure while building the bindable object for model " + getClass(), e);
+        Class<?> objectType = ClassUtility.findGenericClass(this.getClass(), OBJECT_EXCLUDED_CLASSES);
+
+        // If not generic type is defined for Object, object field will remain null
+        if (objectType != null) {
+            Object keyPart = null;
+            boolean found = false;
+            for (int i = 0; !found && i < getListKeyPart().size(); i++) {
+                keyPart = getListKeyPart().get(i);
+
+                if (objectType.isAssignableFrom(keyPart.getClass())) {
+
+                    this.object = (O) keyPart;
+                    found = true;
+                }
+            }
+
+            if (this.object == null) {
+                // Build the current default object by reflection if it hadn't been provided into the key
+                try {
+                    this.object = (O) ClassUtility.buildGenericType(this.getClass(), OBJECT_EXCLUDED_CLASSES);
+                } catch (final CoreException e) {
+                    throw new CoreRuntimeException("Failure while building the bindable object for model " + getClass(), e);
+                }
+            }
         }
     }
 
@@ -80,19 +101,4 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
         bindInternal();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    protected final void bindObject() {
-
-        // If the model object has been passed as part of the key
-        if (getKey() instanceof MultitonKey<?>
-                && ((MultitonKey<?>) getKey()).getValue() != null
-                && ClassUtility.findGenericClass(this.getClass(), new Class<?>[] { Model.class, View.class, Node.class, Controller.class }).isAssignableFrom(
-                        ((MultitonKey<?>) getKey()).getValue().getClass())) {
-            this.object = (O) ((MultitonKey<?>) getKey()).getValue();
-        }
-    }
 }

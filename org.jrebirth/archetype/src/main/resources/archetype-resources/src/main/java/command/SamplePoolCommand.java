@@ -4,7 +4,6 @@
 package ${package}.command;
 
 import org.jrebirth.core.command.DefaultPoolCommand;
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.wave.Wave;
 
 import org.slf4j.Logger;
@@ -24,7 +23,7 @@ public final class SamplePoolCommand extends DefaultPoolCommand {
      * {@inheritDoc}
      */
     @Override
-    public void ready() throws CoreException {
+    public void initCommand() {
         // You must put your initialization code here (if any)
     }
 
