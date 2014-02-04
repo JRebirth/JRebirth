@@ -74,6 +74,7 @@ import org.jrebirth.presentation.model.SlideContent;
 import org.jrebirth.presentation.model.SlideItem;
 import org.jrebirth.presentation.resources.PrezColors;
 import org.jrebirth.presentation.resources.PrezFonts;
+import org.jrebirth.presentation.resources.PrezImages;
 import org.jrebirth.presentation.ui.base.AbstractSlideView;
 import org.jrebirth.presentation.ui.base.SlideStep;
 
@@ -325,7 +326,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                 .layoutY(-14.0)
                 .scaleX(0.6)
                 .scaleY(0.6)
-                .image(Resources.create(new LocalImage("images/HeaderLogo.png")).get())
+                .image(PrezImages.HEADER_LOGO.get())
                 .build();
 
         final Polyline pl = PolylineBuilder.create()
@@ -555,9 +556,8 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * Show the slide step store which match with XML file.
      * 
      * @param slideStep the slide step to show
-     * @param forward the slide step flow direction
      */
-    public void showSlideStep(final SlideStep slideStep, final boolean forward) {
+    public void showSlideStep(final SlideStep slideStep) {
 
         if (this.subSlides.size() >= getModel().getStepPosition() || this.subSlides.get(getModel().getStepPosition()) == null) {
             addSubSlide(buildDefaultContent(getModel().getContent(slideStep)));
@@ -568,7 +568,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
             // No Animation
             this.currentSubSlide = nextSlide;
         } else {
-            performStepAnimation(nextSlide, forward);
+            performStepAnimation(nextSlide);
         }
 
     }
@@ -576,9 +576,9 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     /**
      * Show a programmatic built node as a sub slide.
      * 
-     * @param node the node built programatically
+     * @param node the node built programmatically
      */
-    protected void showCustomSlideStep(final Node node, final boolean forward) {
+    protected void showCustomSlideStep(final Node node) {
 
         addSubSlide(node);
         final Node nextSlide = this.subSlides.get(getModel().getStepPosition());
@@ -587,16 +587,16 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
             // No Animation
             this.currentSubSlide = nextSlide;
         } else {
-            performStepAnimation(nextSlide, forward);
+            performStepAnimation(nextSlide);
         }
     }
 
     /**
-     * Create an Luacnhe the animation between two sub slides.
+     * Create an Launch the animation between two sub slides.
      * 
      * @param nextSlide the next subSlide to show
      */
-    private void performStepAnimation(final Node nextSlide, boolean forward) {
+    private void performStepAnimation(final Node nextSlide) {
 
         setSlideLocked(true);
         final ParallelTransition subSlideTransition = ParallelTransitionBuilder.create()

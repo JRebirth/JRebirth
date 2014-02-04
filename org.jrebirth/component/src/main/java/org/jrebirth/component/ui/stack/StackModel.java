@@ -100,8 +100,8 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
     @SuppressWarnings("unchecked")
     private Class<PageEnum> getPageEnumClass() {
         Class<PageEnum> res = null;
-        if (getModelObject() instanceof Class && PageEnum.class.isAssignableFrom((Class<?>) getModelObject())) {
-            res = (Class<PageEnum>) getModelObject();
+        if (getFirstKeyPart() instanceof Class && PageEnum.class.isAssignableFrom((Class<?>) getFirstKeyPart())) {
+            res = (Class<PageEnum>) getFirstKeyPart();
         }
         return res;
     }
@@ -115,8 +115,8 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
      */
     private String getStackName() {
         String res = null;
-        if (getModelObject() instanceof String) {
-            res = (String) getModelObject();
+        if (getFirstKeyPart() instanceof String) {
+            res = (String) getFirstKeyPart();
         }
         return res;
     }

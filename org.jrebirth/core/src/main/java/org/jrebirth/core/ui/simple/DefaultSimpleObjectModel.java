@@ -31,8 +31,9 @@ import org.jrebirth.core.wave.Wave;
  * @author Sébastien Bordes
  * 
  * @param <N> the root node type
+ * @param <O> the class type of the bindable object
  */
-public class DefaultSimpleModel<N extends Node> extends AbstractSimpleModel<N> {
+public class DefaultSimpleObjectModel<N extends Node, O extends Object> extends AbstractSimpleObjectModel<N, O> {
 
     /**
      * {@inheritDoc}

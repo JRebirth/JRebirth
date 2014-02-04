@@ -3,7 +3,6 @@
 #set( $symbol_escape = '\' )
 package ${package}.service;
 
-import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.service.DefaultService;
 import org.jrebirth.core.wave.Wave;
 import org.jrebirth.core.wave.WaveTypeBase;
@@ -31,8 +30,7 @@ public final class SampleService extends DefaultService {
      * {@inheritDoc}
      */
     @Override
-    public void ready() throws CoreException {
-        super.ready();
+    public void initService() {
 
         // Define the service method
         registerCallback(DO_SOMETHING, RE_SOMETHING_DONE);

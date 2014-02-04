@@ -44,8 +44,8 @@ public class TestFXMLModel extends DefaultFXMLModel<TestFXMLModel> {
      */
     @Override
     protected void fxmlPreInitialize() {
-        if (getModelObject() != null) {
-            this.fxmlPath = getModelObject().toString();
+        if (getFirstKeyPart() != null) {
+            this.fxmlPath = getFirstKeyPart().toString();
         }
     }
 

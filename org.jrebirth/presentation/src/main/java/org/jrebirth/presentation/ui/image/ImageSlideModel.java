@@ -40,7 +40,7 @@ public final class ImageSlideModel extends AbstractSlideModel<ImageSlideModel, I
      * {@inheritDoc}
      */
     @Override
-    public void showSlideStep(final SlideStep slideStep, final boolean forward) {
+    public void showSlideStep(final SlideStep slideStep) {
         // Nothing to do yet
     }
 

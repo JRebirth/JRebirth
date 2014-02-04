@@ -17,13 +17,13 @@
  */
 package org.jrebirth.core.service;
 
+import static org.jrebirth.core.resource.Resources.create;
+
 import org.jrebirth.core.log.JRLevel;
 import org.jrebirth.core.log.JRebirthMarkers;
 import org.jrebirth.core.resource.i18n.LogMessage;
 import org.jrebirth.core.resource.i18n.MessageContainer;
 import org.jrebirth.core.resource.i18n.MessageItem;
-
-import static org.jrebirth.core.resource.Resources.create;
 
 /**
  * The class <strong>ServiceMessages</strong>.
@@ -60,5 +60,10 @@ public interface ServiceMessages extends MessageContainer {
 
     /** "Unable to perform the Service Task {0}" . */
     MessageItem SERVICE_TASK_ERROR = create(new LogMessage("jrebirth.service.serviceTaskError", JRLevel.Error, JRebirthMarkers.SERVICE));
+
+    /** ServiceUtility. */
+
+    /** "Impossible to count lines for file: {0}" . */
+    MessageItem COUNT_LINES_ERROR = create(new LogMessage("jrebirth.service.countLinesError", JRLevel.Error, JRebirthMarkers.SERVICE));
 
 }

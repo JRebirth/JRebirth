@@ -44,7 +44,7 @@ public @interface KeyGenerator {
     /**
      * Define the method to call to get a string.
      * 
-     * This value can be interpretd for Whole Type or for each method return object
+     * This value can be interpreted for Whole Type or for each method return object
      * 
      * The default value is {@link #toString()}
      */

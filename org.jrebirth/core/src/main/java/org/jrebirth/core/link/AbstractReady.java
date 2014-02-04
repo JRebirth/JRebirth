@@ -25,6 +25,7 @@ import org.jrebirth.core.exception.CoreException;
 import org.jrebirth.core.facade.FacadeReady;
 import org.jrebirth.core.facade.JRebirthEventType;
 import org.jrebirth.core.facade.LocalFacade;
+import org.jrebirth.core.key.MultitonKey;
 import org.jrebirth.core.key.UniqueKey;
 import org.jrebirth.core.service.Service;
 import org.jrebirth.core.ui.Model;
@@ -80,17 +81,48 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
     }
 
     /**
-     * @return Returns the modelObject.
+     * Return the first key part of the {@link MultitonKey} or the component class type for {@link UniqueKey}.
+     * 
+     * @return Returns the first key part or the component type.
      */
     @SuppressWarnings("unchecked")
-    public Object getModelObject() {
-        Object modelObject = null;
+    public Object getFirstKeyPart() {
+        Object keyPart = null;
         if (this.key.getValue() instanceof List && !((List<Object>) this.key.getValue()).isEmpty()) {
-            modelObject = ((List<Object>) this.key.getValue()).get(0);
+            keyPart = ((List<Object>) this.key.getValue()).get(0);
         } else {
-            modelObject = this.key.getValue();
+            // UniqueKey or MultitontKey with only one key part
+            keyPart = this.key.getValue();
         }
-        return modelObject;
+        return keyPart;
+    }
+
+    /**
+     * Return the second key part of the {@link MultitonKey} if any or null.
+     * 
+     * @return Returns the second key part or null.
+     */
+    @SuppressWarnings("unchecked")
+    public Object getSecondKeyPart() {
+        Object keyPart = null;
+        if (this.key.getValue() instanceof List && ((List<Object>) this.key.getValue()).size() > 1) {
+            keyPart = ((List<Object>) this.key.getValue()).get(1);
+        }
+        return keyPart;
+    }
+
+    /**
+     * Return the third key part of the {@link MultitonKey} if any or null.
+     * 
+     * @return Returns the third key part or null.
+     */
+    @SuppressWarnings("unchecked")
+    public Object getThirdKeyPart() {
+        Object keyPart = null;
+        if (this.key.getValue() instanceof List && ((List<Object>) this.key.getValue()).size() > 1) {
+            keyPart = ((List<Object>) this.key.getValue()).get(1);
+        }
+        return keyPart;
     }
 
     /**
@@ -101,7 +133,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * @return Returns a list composed by all model object (= component key parts).
      */
     @SuppressWarnings("unchecked")
-    public List<Object> getListModelObject() {
+    public List<Object> getListKeyPart() {
         List<Object> listModelObject = null;
         if (this.key.getValue() instanceof List) {
             listModelObject = (List<Object>) this.key.getValue();

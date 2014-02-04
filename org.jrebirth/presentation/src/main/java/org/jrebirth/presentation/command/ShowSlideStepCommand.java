@@ -40,7 +40,7 @@ public final class ShowSlideStepCommand extends DefaultUICommand {
         final SlideModel<SlideStep> model = getModel(wave.get(ShowSlideWaves.SLIDE_MODEL_CLASS));
 
         // Show the the next slide step
-        model.showSlideStep(wave.get(ShowSlideWaves.SLIDE_STEP_TYPE), true); // FIXME ADD Wave data for the direction
+        model.showSlideStep(wave.get(ShowSlideWaves.SLIDE_STEP_TYPE));
     }
 
 }
