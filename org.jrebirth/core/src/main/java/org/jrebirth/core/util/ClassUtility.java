@@ -184,13 +184,13 @@ public final class ClassUtility implements UtilMessages {
      * Return the generic class for the given parent class and index.
      * 
      * @param mainClass the parent class
-     * @param assignableClasses if the array contains only one class it define the type of the generic to build, otherwise it defines the types to skip to find the obejct to build
+     * @param excludedClasses if the array contains only one class it define the type of the generic to build, otherwise it defines the types to skip to find the object to build
      * 
      * @return the class of the generic type according to the index provided or null if not found
      */
-    public static Class<?> findGenericClass(final Class<?> mainClass, final Class<?>[] assignableClasses) {
+    public static Class<?> findGenericClass(final Class<?> mainClass, final Class<?>[] excludedClasses) {
 
-        final boolean excludeMode = assignableClasses.length > 1;
+        final boolean excludeMode = excludedClasses.length > 1;
 
         // Retrieve the generic super class Parameterized type
         final ParameterizedType paramType = (ParameterizedType) mainClass.getGenericSuperclass();
@@ -199,12 +199,12 @@ public final class ClassUtility implements UtilMessages {
         Class<?> tempClass = null;
         for (int i = 0; genericClass == null && i < paramType.getActualTypeArguments().length; i++) {
             tempClass = getClassFromType(paramType.getActualTypeArguments()[i]);
-            if (!excludeMode && assignableClasses[0].isAssignableFrom(tempClass)) {
+            if (!excludeMode && excludedClasses[0].isAssignableFrom(tempClass)) {
                 genericClass = tempClass;
             }
             if (excludeMode) {
                 boolean excludeIt = false;
-                for (final Class<?> excludeClass : assignableClasses) {
+                for (final Class<?> excludeClass : excludedClasses) {
                     if (excludeClass.isAssignableFrom(tempClass)) {
                         excludeIt = true;
                     }

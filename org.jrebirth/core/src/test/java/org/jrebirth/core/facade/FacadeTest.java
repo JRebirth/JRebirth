@@ -1,5 +1,7 @@
 package org.jrebirth.core.facade;
 
+import static junit.framework.Assert.assertNotNull;
+
 import org.jrebirth.core.application.TestApplication;
 import org.jrebirth.core.command.basic.SwitchFullScreenCommand;
 
@@ -81,7 +83,7 @@ public class FacadeTest {
         final long key = System.currentTimeMillis();
         final SwitchFullScreenCommand command = this.commandFacade.retrieve(SwitchFullScreenCommand.class, key);
         this.commandFacade.unregister(command, key);
-        Assert.assertNotNull(this.commandFacade.exists(SwitchFullScreenCommand.class, key));
+        assertNotNull(this.commandFacade.exists(SwitchFullScreenCommand.class, key));
     }
 
     /**

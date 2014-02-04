@@ -180,7 +180,7 @@ public final class CheckerUtility implements UtilMessages {
                 }
 
                 // Log informative message and throw an error
-                if (missingWaveItems.size() > 0) {
+                if (!missingWaveItems.isEmpty()) {
 
                     LOGGER.log(BROKEN_WAVE_SENT, wave.toString());
 

@@ -62,17 +62,12 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     @Override
     protected void bindInternal() {
 
-        // Bind model object if any or do nothing
-        bindObject();
+        // Manage auto-bound mechanism
+        // ...
 
         // Do custom binding stuff
         bind();
     }
-
-    /**
-     * Bind object, store model object if key part is provided.
-     */
-    protected abstract void bindObject();
 
     /**
      * {@inheritDoc}

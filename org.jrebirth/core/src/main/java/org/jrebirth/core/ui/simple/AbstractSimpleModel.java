@@ -19,11 +19,6 @@ package org.jrebirth.core.ui.simple;
 
 import javafx.scene.Node;
 
-import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.AbstractModel;
-import org.jrebirth.core.ui.Model;
-import org.jrebirth.core.ui.NullView;
-
 /**
  * 
  * The interface <strong>AbstractSimpleModel</strong>.
@@ -34,48 +29,6 @@ import org.jrebirth.core.ui.NullView;
  * 
  * @param <N> the root node type
  */
-public abstract class AbstractSimpleModel<N extends Node> extends AbstractModel<Model, NullView> {
-
-    /** The root node. */
-    private N rootNode;
-
-    /**
-     * Prepare the root node.
-     * 
-     * With simple model no view neither controller are created.<br />
-     * You must manage them yourself.
-     * 
-     * @return the model root node
-     */
-    protected abstract N prepareNode();
-
-    /**
-     * Initialize the model.
-     * 
-     * @throws CoreException if the creation of the view fails
-     */
-    @Override
-    protected void initInternalModel() throws CoreException {
-
-        // Initiailze model with custom method
-        initModel();
-
-        // Prepare the root node
-        this.rootNode = prepareNode();
-    }
-
-    @Override
-    protected void bindObject() {
-        // Nothing to do yet FIXME
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public N getRootNode() {
-        return this.rootNode;
-    }
+public abstract class AbstractSimpleModel<N extends Node> extends AbstractSimpleObjectModel<N, Object> {
 
 }

@@ -17,26 +17,16 @@
  */
 package org.jrebirth.presentation.resources;
 
-import static org.jrebirth.core.resource.Resources.create;
-
+import org.jrebirth.core.resource.Resources;
 import org.jrebirth.core.resource.image.ImageExtension;
 import org.jrebirth.core.resource.image.ImageItem;
 import org.jrebirth.core.resource.image.LocalImage;
 
 /**
- * The MTImages interface providing all images.
+ * The PrezImages interface providing all images.
  */
 public interface PrezImages {
 
-    /** The application main title image. */
-    ImageItem MT_TITLE = create(new LocalImage("Title", ImageExtension.PNG));
+    ImageItem HEADER_LOGO = Resources.create(new LocalImage("HeaderLogo", ImageExtension.PNG));
 
-    /** Monster used into Result page (Monster is reading a book). */
-    ImageItem RESULT_MONSTER = create(new LocalImage("Result_Monster", ImageExtension.PNG));
-
-    /** The success icon used to count a good answer. */
-    ImageItem RESULT_SUCCESS_ICON = create(new LocalImage("Result_Success_Icon", ImageExtension.PNG));
-
-    /** The failure icon used to count a bad answer. */
-    ImageItem RESULT_FAILURE_ICON = create(new LocalImage("Result_Failure_Icon", ImageExtension.PNG));
 }
