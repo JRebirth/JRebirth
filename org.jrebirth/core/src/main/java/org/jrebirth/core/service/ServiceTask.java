@@ -177,6 +177,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
      * 
      * @throws CoreException if the wave generation has failed
      */
+    @SuppressWarnings("unchecked")
     private void sendReturnWave(final T res) throws CoreException {
 
         Wave returnWave = null;
@@ -193,9 +194,9 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
             }
 
             // Get the first (and unique) WaveItem used to define the service result type
-            final WaveItem<T> waveItem = (WaveItem<T>) ((WaveTypeBase) responseWaveType).getWaveItemList().get(0);
+            final WaveItem<T> resultWaveItem = (WaveItem<T>) ((WaveTypeBase) responseWaveType).getWaveItemList().get(0);
 
-            // Try to retrieve the command class, cold be null
+            // Try to retrieve the command class, could be null
             final Class<? extends Command> responseCommandClass = this.service.getReturnCommand(this.wave.getWaveType());
 
             if (responseCommandClass != null) {
@@ -205,7 +206,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
                         .waveGroup(WaveGroup.CALL_COMMAND)
                         .fromClass(this.service.getClass())
                         .relatedClass(responseCommandClass)
-                        .data(WaveData.build(waveItem, res))
+                        .data(WaveData.build(resultWaveItem, res))
                         .build();
             } else {
 
@@ -213,7 +214,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
                 returnWave = WaveBuilder.create()
                         .waveType(responseWaveType)
                         .fromClass(this.service.getClass())
-                        .data(WaveData.build(waveItem, res))
+                        .data(WaveData.build(resultWaveItem, res))
                         .build();
             }
 

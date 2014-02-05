@@ -168,7 +168,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
         // Store a link between call Wave Type and return wave type that store the result type ino a WaveItem
         this.returnWaveTypeMap.put(callType, responseType);
 
-        // Store the Command Class that will handle the service result
+        // Store the Command Class that will handle the service result (optional)
         if (returnCommandClass != null) {
             this.returnCommandClass.put(callType, returnCommandClass);
         }
