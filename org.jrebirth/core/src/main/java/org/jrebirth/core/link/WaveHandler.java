@@ -105,8 +105,12 @@ public class WaveHandler implements LinkMessages {
 
         final Method customMethod = retrieveCustomMethod(wave);
 
+        if (customMethod == null) {
+            throw new WaveException(wave);
+        }
+
         // Grab the run type annotation (if exists)
-        final RunInto runInto = customMethod.getAnnotation(RunInto.class); // FIX ME
+        final RunInto runInto = customMethod.getAnnotation(RunInto.class);
 
         // Retrieve the annotation runnable priority (if any)
         final RunnablePriority priority = runInto == null ? RunnablePriority.Normal : runInto.priority();
