@@ -45,7 +45,7 @@ public final class ServiceUtility implements ServiceMessages {
             // Extract the current line number
             res = reader.getLineNumber();
 
-        } catch (IOException e) {
+        } catch (final IOException e) {
             LOGGER.error(COUNT_LINES_ERROR, e, file.getAbsolutePath());
         }
         return res;

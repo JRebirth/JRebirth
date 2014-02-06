@@ -64,7 +64,7 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
     @SuppressWarnings("unchecked")
     protected void buildObject() {
 
-        Class<?> objectType = ClassUtility.findGenericClass(this.getClass(), OBJECT_EXCLUDED_CLASSES);
+        final Class<?> objectType = ClassUtility.findGenericClass(this.getClass(), OBJECT_EXCLUDED_CLASSES);
 
         // If not generic type is defined for Object, object field will remain null
         if (objectType != null) {
