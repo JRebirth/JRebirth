@@ -142,7 +142,8 @@ public final class JRebirth {
      * @return true if currentThread == one of JTP slot
      */
     public static boolean isJTPSlot() {
-        return Thread.currentThread().getName().startsWith(GlobalFacadeBase.JTP_BASE_NAME);
+        return Thread.currentThread().getName().startsWith(GlobalFacadeBase.JTP_BASE_NAME)
+                || Thread.currentThread().getName().startsWith(GlobalFacadeBase.HPTP_BASE_NAME);
     }
 
     /**
