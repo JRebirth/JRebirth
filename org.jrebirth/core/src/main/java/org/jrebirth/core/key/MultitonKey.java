@@ -185,7 +185,7 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
                 final List<Method> converterList = ClassUtility.retrieveMethodList(keyValue.getClass(), methodGenerator.value());
 
                 Method converter = null;
-                for (Method m : converterList) {
+                for (final Method m : converterList) {
                     if (m.getParameterTypes().length == 0) {
                         converter = m;
                     }
