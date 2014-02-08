@@ -26,7 +26,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">//<![CDATA[
-			var JAVAFX_APP_JNLP='masteringtables/1.0.0-SNAPSHOT/MasteringTables.jnlp';
+			var JAVAFX_APP_JNLP='masteringtables/latest/MasteringTables.jnlp';
 			var JAVAFX_APP_WIDTH=800;
 			var JAVAFX_APP_HEIGHT=600;
 		//]]></script>

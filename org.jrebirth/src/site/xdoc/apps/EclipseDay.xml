@@ -26,7 +26,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">//<![CDATA[
-			var JAVAFX_APP_JNLP='eclipseday/1.0.0-SNAPSHOT/EclipseDayToulouse.jnlp';
+			var JAVAFX_APP_JNLP='eclipseday/latest/EclipseDayToulouse.jnlp';
 			var JAVAFX_APP_WIDTH=1024;
 			var JAVAFX_APP_HEIGHT=768;
 		//]]></script>
