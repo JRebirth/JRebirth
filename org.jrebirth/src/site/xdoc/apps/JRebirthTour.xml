@@ -26,7 +26,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">//<![CDATA[
-			var JAVAFX_APP_JNLP='jaf/1.0.0/JRebirthTour.jnlp';
+			var JAVAFX_APP_JNLP='jaf/latest/JRebirthTour.jnlp';
 			var JAVAFX_APP_WIDTH=1024;
 			var JAVAFX_APP_HEIGHT=768;
 		//]]></script>

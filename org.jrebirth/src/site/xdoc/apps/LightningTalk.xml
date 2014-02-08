@@ -26,7 +26,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">//<![CDATA[
-			var JAVAFX_APP_JNLP='lightningtalk/1.0.0/LightningTalk.jnlp';
+			var JAVAFX_APP_JNLP='lightningtalk/latest/LightningTalk.jnlp';
 			var JAVAFX_APP_WIDTH=1024;
 			var JAVAFX_APP_HEIGHT=768;
 		//]]></script>
