@@ -28,7 +28,7 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd" name="JRebirth">
 		</menu>
 		
 		<menu name="Demo">
-			<item name="ToulouseJug" href="apps/ToulouseJug.html" />
+			<!-- <item name="ToulouseJug" href="apps/ToulouseJug.html" /> -->
 			<item name="EclipseDay" href="apps/EclipseDay.html" />
 			<item name="Breizhcamp" href="apps/Breizhcamp.html" />
 			<item name="LightningTalk" href="apps/LightningTalk.html" />
