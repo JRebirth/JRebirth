@@ -78,7 +78,7 @@
 			
 				<macro name="include">
 					<param name="highlight-theme" value="eclipse"/>
-					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/ui/editor/EditorWaves.java" />
+					<param name="source" value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/ui/editor/EditorWaves.java" />
 					<param name="snippet" value="aj:..EVENTS_FILE" />
 					<param name="snippet-start-offset" value="1" />
 					<param name="snippet-end-offset" value="1"/>
@@ -116,7 +116,7 @@
 				</ul>
 
 				<macro name="include">
-					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/ui/editor/EditorWaves.java" />
+					<param name="source" value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/ui/editor/EditorWaves.java" />
 					<param name="snippet" value="aj:..DO_UNLOAD" />
 					<param name="snippet-start-offset" value="1" />
 				</macro>
@@ -128,7 +128,7 @@
 				</ul>
 
 				<macro name="include">
-					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java" />
+					<param name="source" value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java" />
 					<param name="snippet" value="aj:..DO_LOAD_EVENTS" />
 					<param name="snippet-start-offset" value="1" />
 				</macro>

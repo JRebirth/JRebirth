@@ -20,7 +20,7 @@
 		<!-- Analyzer Tool -->
 		<!-- oooooooooo -->
 		<fileSet>
-			<directory>../analyzer/target/jnlp</directory>
+			<directory>../showcase/analyzer/target/jnlp</directory>
 			<outputDirectory>Analyzer</outputDirectory>
 		</fileSet>
 
