@@ -65,7 +65,7 @@
 
                 <macro name="include">
                     <param name="highlight-theme" value="eclipse"/>
-                    <param name="source" value="../../../analyzer/pom.xml"/>
+                    <param name="source" value="../../../showcase/pom.xml"/>
                     <param name="snippet" value="xp:project/dependencies"/>
                 </macro>
 
@@ -86,7 +86,7 @@
                     <a href="http://oss.jfrog.org">oss.jfrog.org</a>
                 </li>
                 <li>
-                    <a href="bintray">Our public repository powered by Bintray (On demand Jenkins build)</a>
+                    <a href="#bintray">Our public repository powered by Bintray (On demand Jenkins build)</a>
                 </li>
                 <li>
                     <a href="#jcenter">JCenter Bintray repository (Only Releases)</a>
@@ -137,7 +137,8 @@
                         </li>
                     </ol>
                 </p>
-
+                
+				<a name="ojopom" />
                 <h4>OJO into Pom.xml</h4>
                 <p>You can simply add this declaration into your
                     <b>pom.xml</b>
@@ -154,7 +155,7 @@
                     <param name="snippet" value="xp://repositories"/>
                 </macro>
 
-
+				<a name="ojosettings" />
                 <h4>OJO into Settings.xml</h4>
                 <p>This way is so far better but has an important drawback, your build won't work if you don't use
                     the right profile.
@@ -169,7 +170,7 @@
 
             </subsection>
 
-            <subsection name="Bintray" id="bintray2" >
+             <subsection name="Bintray" id="bintray">
 
                 <p>JRebirth artifacts are pushed to
                     <a href="https://bintray.com/pkg/show/general/jrebirth/JRebirth/JRebirth">Bintray</a>
@@ -182,6 +183,7 @@
             </subsection>
 
             <subsection id="jcenter" name="JCenter">
+            
                 <p>JCenter is a new social Java repository hosted on Bintray website. It allows to broadcast thousand of
                     libraries without the pitfall to
                     update your pom.xml in order to push them on a proxy
@@ -192,10 +194,13 @@
                 <p>If you want to use JCenter repository, you must add this into your Maven settings.xml.
                     Pay attention that at this time JCenter contains only 'Release' artifacts, no 'snapshot' versions
                 </p>
+                
                 <macro name="include">
                     <param name="source" value="../includes/JCenter_Profile_Settings.xml"/>
                     <param name="snippet" value="xp://profiles" />
                 </macro>
+				
+				<p></p>
 
             </subsection>
 
@@ -218,6 +223,7 @@
                     </ol>
                 </p>
 
+				<a name="jrreposettings" />
                 <h4>JRebirth repo into Settings.xml</h4>
                 <macro name="include">
                     <param name="source" value="../includes/Artifactory_Profile_Settings.xml"/>
@@ -231,24 +237,25 @@
             </subsection>
 
 
-            <subsection id="hybrid" name="Hybrid Configuration">
+            <subsection name="Hybrid Configuration" id="hybrid">
                 <p>You can add both OJO, JCenter, and JRebirth Artifactory repositories, if you want to
                     be up-to-date at any time.
                 </p>
 
                 <p>If you just want to deal with stable release use only OJO (Release repo) and JCenter.<br />
-                    If sometims you need to test a
+                    If sometimes you need to test a
                     snapshot version use OJO (Snapshot repo) and our Artifactory instance or ask us a custom build.
                 </p>
 
-             <!--    <h4 id="AllInOneProfile">All-In-One Profile</h4> -->
+			 <a name="AllInOneProfile" />
+             <h4>All-In-One Profile</h4>
                 <p></p>
                 <macro name="include">
                     <param name="source" value="../includes/All-In-One_Profile_Settings.xml"/>
                     <param name="snippet" value="xp://profiles"/>
                 </macro>
 
-            </subsection>
+           </subsection>
 
         </section>
 

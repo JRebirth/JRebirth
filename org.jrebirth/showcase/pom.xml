@@ -19,14 +19,23 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<storepass>defaultpass</storepass>
-		<keypass>defaultpass</keypass>
+		<storepass>storepass</storepass>
+		<storetype>JKS</storetype>
+		<keyalias>keyalias</keyalias>
+		<keypass>keypass</keypass>
 
-		<permissions>all-permissions</permissions> <!-- sandbox -->
+		<deletekeystore>true</deletekeystore>
+		<genkeystore>true</genkeystore>
+
+		<permissions>all-permissions</permissions> <!-- or sandbox -->
 		<deployUrl>http://showcases.jrebirth.org</deployUrl>
 		<deployPath>${project.artifactId}/${project.version}</deployPath>
+		<codebase>${deployUrl}/${deployPath}</codebase>
 
-		<!-- <jnlpFilename>.jnlp</jnlpFilename> <appClass>org.jrebirth.showcase</appClass> -->
+		<jnlpFilename>JRebirth.jnlp</jnlpFilename>
+		<preloaderClass>org.jrebirth.preloader.JRebirthPreloader</preloaderClass>
+
+		<appClass>org.jrebirth.YourApplication</appClass>
 
 		<appletWidth>800</appletWidth>
 		<appletHeight>600</appletHeight>
@@ -37,6 +46,7 @@
 	</properties>
 
 	<modules>
+		<module>analyzer</module>
 		<module>undoredo</module>
 		<module>fxml</module>
 	</modules>
@@ -58,122 +68,139 @@
 				<includes>
 					<include>**/*.*</include>
 				</includes>
+					<excludes>
+					<exclude>**/*.ttf</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.ttf</include>
+				</includes>
 			</resource>
 		</resources>
 
 		<plugins>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<!-- inherited from root parent pom <version>3.1</version>-->
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<!-- inherited from root parent pom <version>2.4</version>-->
+
+					<configuration>
+						<archive>
+							<manifestEntries>
+								<JavaFX-Version>2.0</JavaFX-Version>
+								<Main-Class>${appClass}</Main-Class>
+								<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
+								<!-- <JavaFX-Class-Path> jaxb-api-2.2.1.jar stax-api-1.0-2.jar activation-1.1.jar jaxb-impl-2.2.1.jar presentation-0.7.6-SNAPSHOT.jar core-0.7.6-SNAPSHOT.jar logback-classic-1.0.13.jar logback-core-1.0.13.jar 
+									slf4j-api-1.7.5.jar </JavaFX-Class-Path> -->
+							</manifestEntries>
+
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+								<addClasspath>true</addClasspath>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
 
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>webstart-maven-plugin</artifactId>
+					<version>1.0-beta-6</version>
 
-				<executions>
-					<execution>
-						<id>produce_jar</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
-							<archive>
-								<manifestEntries>
-									<JavaFX-Version>2.0</JavaFX-Version>
-									<Main-Class>${appClass}</Main-Class>
-									<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>jnlp-inline</goal>
+							</goals>
+						</execution>
+					</executions>
 
-									<!-- <implementation-vendor>JRebirth</implementation-vendor> <implementation-title>JRebirthAnalyzer</implementation-title> <implementation-version>1.0</implementation-version> -->
+					<configuration>
 
-									<!-- not automated yet -->
-									<!-- <JavaFX-Class-Path>logback-classic-1.0.13.jar logback-core-1.0.13.jar slf4j-api-1.7.5.jar core-0.7.4-SNAPSHOT.jar</JavaFX-Class-Path> -->
+						<filenameMapping>full</filenameMapping>
 
-									<Permissions>${permissions}</Permissions>
-									<Codebase>${deployUrl}</Codebase>
-								</manifestEntries>
-								<manifest>
-									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-									<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-									<addClasspath>true</addClasspath>
-								</manifest>
-							</archive>
+						<updateManifestEntries>
+							<Application-Name>${project.name}</Application-Name>
+							<Trusted-Library>true</Trusted-Library>
+							<Permissions>${permissions}</Permissions>
+							<Codebase>${codebase}</Codebase>
+							<Trusted-Only>true</Trusted-Only>
+						</updateManifestEntries>
 
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>webstart-maven-plugin</artifactId>
-				<version>1.0-beta-3</version>
+						<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
+						<excludeTransitive>false</excludeTransitive>
 
-				<configuration>
+						<libPath>lib</libPath>
+						<codebase>${codebase}</codebase>
 
-					<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
-					<excludeTransitive>false</excludeTransitive>
-					<libPath>lib</libPath>
+						<jnlp>
+							<outputFile>${jnlpFilename}</outputFile>
+							<mainClass>${appClass}</mainClass>
+							<offlineAllowed>true</offlineAllowed>
+							<allPermissions>true</allPermissions>
+						</jnlp>
 
-					<resourcesDirectory>${project.basedir}/src/main/jnlp/resources</resourcesDirectory>
-					<codebase>${deployUrl}/${deployPath}</codebase>
+						<sign>
+							<keystore>${keystore}</keystore>
+							<keypass>${keypass}</keypass>
+							<storepass>${storepass}</storepass>
+							<storetype>${storetype}</storetype>
 
-					<jnlp>
-						<!-- <inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath> <inputTemplate>src/main/jnlp/template.vm</inputTemplate> -->
-						<outputFile>${jnlpFilename}</outputFile>
+							<alias>${keyalias}</alias>
 
-						<mainClass>${appClass}</mainClass>
-						<offlineAllowed>true</offlineAllowed>
-						<allPermissions>true</allPermissions>
-					</jnlp>
+							<validity>360</validity>
+							<dnameCn>JRebirth Self-signed Certificate</dnameCn>
+							<dnameOu>JRebirth OSS</dnameOu>
+							<dnameO>JRebirth</dnameO>
+							<dnameL>Toulouse</dnameL>
+							<dnameSt>Haute-Garonne</dnameSt>
+							<dnameC>FR</dnameC>
+							<verify>true</verify>
 
-					<sign>
-						<keystore>${basedir}/JRebirth-Showcase.jks</keystore>
-						<!-- MUST BE PROVIDED BY COMMAND LINE ARGUMENTS -->
-						<!-- -Dstorepass=xxx -Dkeypass=xxx -->
-						<keypass>${keypass}</keypass>
-						<storepass>${storepass}</storepass>
-						<!-- <storetype>fillme</storetype> -->
-						<alias>masteringtables</alias>
+							<keystoreConfig>
+								<delete>${deletekeystore}</delete>
+								<gen>${genkeystore}</gen>
+							</keystoreConfig>
 
-						<validity>360</validity>
-						<dnameCn>www.jrebirth.org</dnameCn>
-						<dnameOu>None</dnameOu>
-						<dnameO>JRebirth</dnameO>
-						<dnameL>Toulouse</dnameL>
-						<dnameSt>HG</dnameSt>
-						<dnameC>FR</dnameC>
+						</sign>
 
-						<verify>true</verify>
+						<pack200>
+							<enabled>true</enabled>
+						</pack200>
+						<gzip>true</gzip>
 
-						<keystoreConfig>
-							<delete>true</delete>
-							<gen>true</gen>
-						</keystoreConfig>
-					</sign>
+						<outputJarVersions>false</outputJarVersions>
 
-					<pack200>false</pack200>
-					<gzip>false</gzip>
+						<install>false</install>
+						<verbose>true</verbose>
+					</configuration>
 
-					<outputJarVersions>false</outputJarVersions>
-					<install>false</install>
-					<verbose>true</verbose>
-				</configuration>
-			</plugin>
+				</plugin>
 
 		</plugins>
 
 	</build>
 
 	<dependencies>
+	
 		<!-- Use logback logger -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -181,6 +208,12 @@
 			<version>1.0.13</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>preloader</artifactId>
+			<version>7.7.0-SNAPSHOT</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>

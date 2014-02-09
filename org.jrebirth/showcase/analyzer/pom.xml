@@ -1,25 +1,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
 	<parent>
-		<groupId>org.jrebirth</groupId>
 		<artifactId>showcase</artifactId>
+		<groupId>org.jrebirth</groupId>
 		<version>7.7.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
-
-	<groupId>org.jrebirth.showcase</groupId>
-	<artifactId>fxml</artifactId>
+	<groupId>org.jrebirth</groupId>
+	<artifactId>analyzer</artifactId>
 	<packaging>jar</packaging>
 
-	<name>FXML</name>
-	<description>Sample application to describe JRebirth FXMLUndo features</description>
-
+	<name>Analyzer</name>
+	<description>An application used to analyze JRebirth logs</description>
 
 	<properties>
 
-		<jnlpFilename>FXML-Showcase.jnlp</jnlpFilename>
-		<appClass>org.jrebirth.showcase.fxml.FXMLApplication</appClass>
+		<deployUrl>http://apps.jrebirth.org</deployUrl>
+		<deployPath>${project.artifactId}/${project.version}</deployPath>
+
+		<jnlpFilename>JRebirthAnalyzer.jnlp</jnlpFilename>
+		<appClass>org.jrebirth.analyzer.JRebirthAnalyzer</appClass>
+
+		<appletWidth>1024</appletWidth>
+		<appletHeight>768</appletHeight>
 
 	</properties>
 
@@ -31,14 +34,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
-	<dependencies>
-		<dependency>
-			<groupId>org.jrebirth</groupId>
-			<artifactId>component</artifactId>
-			<version>7.7.0-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
 
 </project>

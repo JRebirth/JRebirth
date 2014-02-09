@@ -114,7 +114,7 @@
 					application classpath:
 
 					<macro name="include">
-						<param name="source" value="../../../analyzer/src/main/resources/logback.xml" />
+						<param name="source" value="../../../showcase/analyzer/src/main/resources/logback.xml" />
 					</macro>
 				</p>
 			</subsection>

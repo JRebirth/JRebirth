@@ -279,7 +279,7 @@
                 </p>
 
                 <macro name="include">
-                    <param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/JRebirthAnalyzer.java"/>
+                    <param name="source" value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/JRebirthAnalyzer.java"/>
                     <param name="snippet" value="aj:..JRebirthAnalyzer.getPostBootWaveList(..)"/>
                 </macro>
 
