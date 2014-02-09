@@ -4,17 +4,65 @@ Release Notes
 ==============
 
 
-7.7.0 - ["Wanna Rock"](https://www.youtube.com/watch?v=4xmckWVPRaI) Release 2013-12-31
+7.7.0 - ["Wanna Rock"](https://www.youtube.com/watch?v=SRwrg0db_zY) Release 2014-02-09
 -----------------------------------------
 
-The first 7.x.x version that only supports Java 7
+The first version of the  7.x.x branch that only supports Java 7
 
 
-- WAVE_HANDLER_METHOD_REQUIRED failure [#85](https://github.com/JRebirth/JRebirth/issues/85)
+- Allow Service to call a command to handle its result - [#94](https://github.com/JRebirth/JRebirth/issues/94)<br/>
+It's now possible to define a command that will be called asynchronously when the service task has terminated.<br/>
+You can use one of the following method:<br/>
+	- void registerCallback(final WaveType callType, final WaveType responseType, final Class<? extends Command> returnCommandClass)
+	- void registerCallback(final WaveChecker waveChecker, final WaveType callType, final WaveType responseType, final Class<? extends Command> returnCommandClass)
+
+
+- Customize Thread used when handling a Wave - [#92](https://github.com/JRebirth/JRebirth/issues/92)<br/>
+It's now possible to use @runInto annoation to define the thread to use when handling a wave.
+ie:
+@OnWave("mySuperWave")
+@RunInto(RunType.JTP, RunnablePriority.Highest)
+public void handleIt(Object myFirstParam, Wave wave){
+
+
+- Allow the possibility to specify a WaveChecker for the registerCallback method - [#91](https://github.com/JRebirth/JRebirth/issues/91)<br/>
+Add some method to allow usage of WaveChecker also for registerCallback methods (already done  for listen methods)
+
+
+- Bad usage of immutable list bug - [#90](https://github.com/JRebirth/JRebirth/issues/90)<br/>
+Collections.emptyList() was misused into DefaultFXMLModel, thanks to [Regis](https://groups.google.com/forum/#!topic/jrebirth-users/OPdytZz1oKY) to have found this bug
+
+
+- Publish to Maven Central deployment - [#89](https://github.com/JRebirth/JRebirth/issues/89)<br/>
+JRebirth artifacts is now pushed on Maven Central repository
+
+
+- Retrieve model from different KeyParts (but same content) - [#88](https://github.com/JRebirth/JRebirth/issues/88)<br/>
+Each JRebirth Component can now use object that embed @KeyGenerator annotation to define how unique string key will be generated
+
+
+- ServiceTask state set to success even if the task actually fails - [#87](https://github.com/JRebirth/JRebirth/issues/87)<br/>
+ServiceTask will set the wave status to failed if it fails itself
+
+
+- TaskTrackerService is broken - [#86](https://github.com/JRebirth/JRebirth/issues/86)<br/>
+This is not a bug for Java 7u51
+
+
+- WAVE_HANDLER_METHOD_REQUIRED failure - [#85](https://github.com/JRebirth/JRebirth/issues/85)<br/>
 A custom log was badly formatted, error message is also improved to facilitate trouble diagnosis
 
-- Retrieve model from different KeyParts (but same content) enhancement [#88](https://github.com/JRebirth/JRebirth/issues/85)
-Each JRebirth Component can now use object that embed @KeyGenerator annotation to define how unique string key will be generated
+
+- Check WaveContract when sending a Wave - [#84](https://github.com/JRebirth/JRebirth/issues/84)<br/>
+When a wave is sent, its wave contract will be checked in developer mode
+
+
+- Improve All Object Model - [#69](https://github.com/JRebirth/JRebirth/issues/69)<br/>
+All object model have been refactored and homogenized
+
+
+- Add @OnWave feature - [#50](https://github.com/JRebirth/JRebirth/issues/50)<br/>
+It's now possible to define wave handler method by using the @OnWave annotation
 
 
 

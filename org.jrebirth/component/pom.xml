@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org</groupId>
 		<artifactId>jrebirth</artifactId>
-		<version>7.7.0-SNAPSHOT</version>
+		<version>7.7.0</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
-			<version>7.7.0-SNAPSHOT</version>
+			<version>7.7.0</version>
 		</dependency>
 	</dependencies>
 
