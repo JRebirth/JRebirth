@@ -191,7 +191,7 @@
 				</p>
 
 
-				<a name="Indirect" />
+				<a name="indirect" />
 				<h4>Indirect way</h4>
 				<p>
 					You can trigger a command execution by calling
@@ -221,7 +221,7 @@
 				<p>It's also possible to add a callback function, in example to manage double-click detection (see <strong>LinkedCallback</strong>).</p>
 
 				<macro name="include">
-					<param name="source" value="analyzer/src/main/java/org/jrebirth/analyzer/ui/controls/ControlsController.java" />
+					<param name="source" value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/ui/controls/ControlsController.java" />
 					<param name="snippet" value="re:linkCommand" />
 				</macro>
 

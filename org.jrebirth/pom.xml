@@ -23,7 +23,6 @@
 	<modules>
 		<module>core</module>
 		<module>component</module>
-		<module>analyzer</module>
 		<module>archetype</module>
 		<module>sample</module>
 		<module>presentation</module>
