@@ -50,7 +50,7 @@
 		<module>undoredo</module>
 		<module>fxml</module>
 	</modules>
-	
+
 	<build>
 		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
 		<resources>
@@ -68,7 +68,7 @@
 				<includes>
 					<include>**/*.*</include>
 				</includes>
-					<excludes>
+				<excludes>
 					<exclude>**/*.ttf</exclude>
 				</excludes>
 			</resource>
@@ -81,12 +81,13 @@
 			</resource>
 		</resources>
 
-		<plugins>
+		<pluginManagement>
+			<plugins>
 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<!-- inherited from root parent pom <version>3.1</version>-->
+					<!-- inherited from root parent pom <version>3.1</version> -->
 					<configuration>
 						<source>1.7</source>
 						<target>1.7</target>
@@ -97,7 +98,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<!-- inherited from root parent pom <version>2.4</version>-->
+					<!-- inherited from root parent pom <version>2.4</version> -->
 
 					<configuration>
 						<archive>
@@ -118,16 +119,16 @@
 					</configuration>
 				</plugin>
 
-			<plugin>
+				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>webstart-maven-plugin</artifactId>
 					<version>1.0-beta-6</version>
 
 					<executions>
 						<execution>
-							<phase>package</phase>
+							<phase>verify</phase>
 							<goals>
-								<goal>jnlp-inline</goal>
+								<goal>jnlp</goal>
 							</goals>
 						</execution>
 					</executions>
@@ -195,12 +196,13 @@
 
 				</plugin>
 
-		</plugins>
+			</plugins>
+		</pluginManagement>
 
 	</build>
 
 	<dependencies>
-	
+
 		<!-- Use logback logger -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -213,7 +215,7 @@
 			<artifactId>preloader</artifactId>
 			<version>7.7.0-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jrebirth</groupId>
 			<artifactId>core</artifactId>
