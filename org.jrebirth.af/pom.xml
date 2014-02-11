@@ -4,12 +4,11 @@
 
 	<parent>
 		<groupId>org.jrebirth</groupId>
-		<artifactId>parent</artifactId>
-		<version>1.1.0</version>
+		<artifactId>organization</artifactId>
+		<version>1.0.0</version>
 	</parent>
 
-	<groupId>org</groupId>
-	<artifactId>jrebirth</artifactId>
+	<groupId>org.jrebirth</groupId>
 	<version>7.7.0</version>
 
 	<packaging>pom</packaging>
@@ -275,4 +274,5 @@
 		</site>
 	</distributionManagement>
 
+	<artifactId>af</artifactId>
 </project>
