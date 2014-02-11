@@ -46,11 +46,11 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>org.jrebirth:core:</include>
-				<include>org.jrebirth:presentation:</include>
-				<include>org.jrebirth:component:</include>
-				<include>org.jrebirth:transition:*</include>
-				<!-- <include>org.jrebirth:undoredo:*</include> -->
+				<include>org.jrebirth.af:core:</include>
+				<include>org.jrebirth.af:presentation:</include>
+				<include>org.jrebirth.af:component:</include>
+				<include>org.jrebirth.af:transition:*</include>
+				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
 			</includes>
 
 			<!-- Javadoc -->
@@ -70,11 +70,11 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>org.jrebirth:core:*</include>
-				<include>org.jrebirth:component:*</include>
-				<include>org.jrebirth:presentation:*</include>
-				<include>org.jrebirth:transition:*</include>
-				<!-- <include>org.jrebirth:undoredo:*</include> -->
+				<include>org.jrebirth.af:core:*</include>
+				<include>org.jrebirth.af:component:*</include>
+				<include>org.jrebirth.af:presentation:*</include>
+				<include>org.jrebirth.af:transition:*</include>
+				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
 			</includes>
 			<binaries>
 				<dependencySets>
@@ -93,7 +93,7 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>org:jrebirth:*</include>
+				<include>org:jrebirth.af:*</include>
 			</includes>
 
 			<!-- Root site -->
@@ -112,11 +112,11 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>org.jrebirth:core:*</include>
-				<include>org.jrebirth:presentation:*</include>
-				<include>org.jrebirth:component:*</include>
-				<include>org.jrebirth:transition:*</include>
-				<!-- <include>org.jrebirth:undoredo:*</include> -->
+				<include>org.jrebirth.af:core:*</include>
+				<include>org.jrebirth.af:presentation:*</include>
+				<include>org.jrebirth.af:component:*</include>
+				<include>org.jrebirth.af:transition:*</include>
+				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
 			</includes>
 
 			<!-- Javadoc -->
@@ -135,11 +135,11 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>org.jrebirth:core:*</include>
-				<include>org.jrebirth:presentation:*</include>
-				<include>org.jrebirth:component:*</include>
-				<include>org.jrebirth:transition:*</include>
-				<!-- <include>org.jrebirth:undoredo:*</include> -->
+				<include>org.jrebirth.af:core:*</include>
+				<include>org.jrebirth.af:presentation:*</include>
+				<include>org.jrebirth.af:component:*</include>
+				<include>org.jrebirth.af:transition:*</include>
+				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
 			</includes>
 
 			<!-- Sources -->
@@ -158,11 +158,11 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>org.jrebirth:core:*</include>
-				<include>org.jrebirth:presentation:*</include>
-				<include>org.jrebirth:component:*</include>
-				<include>org.jrebirth:transition:*</include>
-				<!-- <include>org.jrebirth:undoredo:*</include> -->
+				<include>org.jrebirth.af:core:*</include>
+				<include>org.jrebirth.af:presentation:*</include>
+				<include>org.jrebirth.af:component:*</include>
+				<include>org.jrebirth.af:transition:*</include>
+				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
 			</includes>
 
 			<excludes>
@@ -186,7 +186,7 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>org.jrebirth:sample:*</include>
+				<include>org.jrebirth.af:sample:*</include>
 			</includes>
 			<excludes>
 				<exclude>*:jar:*</exclude>

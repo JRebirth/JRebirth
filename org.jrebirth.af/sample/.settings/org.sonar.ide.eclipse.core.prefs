@@ -1,7 +1,7 @@
 analyseLocally=true
 eclipse.preferences.version=1
-extraProperties=sonar.host.url\=http\://quality.jrebirth.org\r\nsonar.jdbc.url\=jdbc\:mysql\://localhost\:3306/sonar?useUnicode\=true&characterEncoding\=utf8\r\nsonar.jdbc.driver\=com.mysql.jdbc.Driver\r\nsonar.language\=java
+extraProperties=sonar.host.url\=http\://quality.jrebirth.org\r\nsonar.jdbc.url\=jdbc\:mysql\://localhost\:3306/sonar?useUnicode\r\nsonar.jdbc.driver\=com.mysql.jdbc.Driver\r\nsonar.language\=java
 lastAnalysisDate=1373315139291
-projectKey=org.jrebirth\:sample
+projectKey=org.jrebirth.af\:sample
 serverUrl=http\://quality.jrebirth.org
 version=2

@@ -2,13 +2,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<artifactId>jrebirth</artifactId>
-		<groupId>org</groupId>
+		<artifactId>af</artifactId>
+		<groupId>org.jrebirth</groupId>
 		<version>7.7.0</version>
 		<relativePath>..</relativePath>
 	</parent>
 
-	<groupId>org.jrebirth</groupId>
+	<groupId>org.jrebirth.af</groupId>
 	<artifactId>showcase</artifactId>
 	<packaging>pom</packaging>
 
@@ -211,13 +211,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.jrebirth</groupId>
+			<groupId>org.jrebirth.af</groupId>
 			<artifactId>preloader</artifactId>
 			<version>7.7.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.jrebirth</groupId>
+			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
 			<version>7.7.0</version>
 		</dependency>
