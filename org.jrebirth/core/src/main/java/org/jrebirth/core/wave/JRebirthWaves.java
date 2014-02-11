@@ -20,6 +20,7 @@ package org.jrebirth.core.wave;
 import java.util.List;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ProgressBar;
@@ -72,5 +73,13 @@ public interface JRebirthWaves {
 
     /** This wave item will be used only into a WaveData to pass the right progress bar used by service task. */
     WaveItem<ProgressBar> PROGRESS_BAR = new WaveItem<ProgressBar>(false) {
+    };
+
+    /** This wave item will be used only into a WaveData to pass the right string property used to display the task title. */
+    WaveItem<StringProperty> TASK_TITLE = new WaveItem<StringProperty>(false) {
+    };
+
+    /** This wave item will be used only into a WaveData to pass the right string property used to display the task message. */
+    WaveItem<StringProperty> TASK_MESSAGE = new WaveItem<StringProperty>(false) {
     };
 }
