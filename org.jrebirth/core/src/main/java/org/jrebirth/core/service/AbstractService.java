@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.scene.control.ProgressBar;
@@ -157,6 +158,16 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
             bindProgressBar(task, sourceWave.getData(JRebirthWaves.PROGRESS_BAR).getValue());
         }
 
+        // Bind Title
+        if (sourceWave.containsNotNull(JRebirthWaves.TASK_TITLE)) {
+            bindTitle(task, sourceWave.getData(JRebirthWaves.TASK_TITLE).getValue());
+        }
+
+        // Bind ProgressBar
+        if (sourceWave.containsNotNull(JRebirthWaves.TASK_MESSAGE)) {
+            bindMessage(task, sourceWave.getData(JRebirthWaves.TASK_MESSAGE).getValue());
+        }
+
         // Call the task into the JRebirth Thread Pool
         JRebirth.runIntoJTP(task);
 
@@ -186,6 +197,50 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
             }
         });
 
+    }
+
+    /**
+     * Bind a task to a string property that will display the task title.
+     * 
+     * @param task the service task that we need to follow the progression
+     * @param titleProperty the title presenter
+     */
+    private void bindTitle(final ServiceTask<?> task, final StringProperty titleProperty) {
+
+        // Perform this binding into the JAT to respect widget and task API
+        JRebirth.runIntoJAT(new AbstractJrbRunnable("Bind Title for " + task.getServiceHandlerName()) {
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            protected void runInto() throws JRebirthThreadException {
+                // Bind the task title
+                titleProperty.bind(task.titleProperty());
+            }
+        });
+    }
+
+    /**
+     * Bind a task to a string property that will display the task message.
+     * 
+     * @param task the service task that we need to follow the progression
+     * @param messageProperty the message presenter
+     */
+    private void bindMessage(final ServiceTask<?> task, final StringProperty messageProperty) {
+
+        // Perform this binding into the JAT to respect widget and task API
+        JRebirth.runIntoJAT(new AbstractJrbRunnable("Bind Message for " + task.getServiceHandlerName()) {
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            protected void runInto() throws JRebirthThreadException {
+                // Bind the task title
+                messageProperty.bind(task.messageProperty());
+            }
+        });
     }
 
     /**
