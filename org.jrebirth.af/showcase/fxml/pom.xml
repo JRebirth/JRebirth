@@ -2,13 +2,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>org.jrebirth</groupId>
+		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
 		<version>7.7.0</version>
 		<relativePath>..</relativePath>
 	</parent>
 
-	<groupId>org.jrebirth.showcase</groupId>
+	<groupId>org.jrebirth.af.showcase</groupId>
 	<artifactId>fxml</artifactId>
 	<packaging>jar</packaging>
 
@@ -35,7 +35,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.jrebirth</groupId>
+			<groupId>org.jrebirth.af</groupId>
 			<artifactId>component</artifactId>
 			<version>7.7.0</version>
 		</dependency>

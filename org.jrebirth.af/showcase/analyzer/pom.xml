@@ -2,11 +2,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>showcase</artifactId>
-		<groupId>org.jrebirth</groupId>
+		<groupId>org.jrebirth.af</groupId>
 		<version>7.7.0</version>
 		<relativePath>..</relativePath>
 	</parent>
-	<groupId>org.jrebirth</groupId>
+	<groupId>org.jrebirth.af.showcase</groupId>
 	<artifactId>analyzer</artifactId>
 	<packaging>jar</packaging>
 
