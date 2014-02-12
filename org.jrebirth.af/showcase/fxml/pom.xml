@@ -19,7 +19,7 @@
 	<properties>
 
 		<jnlpFilename>FXML-Showcase.jnlp</jnlpFilename>
-		<appClass>org.jrebirth.showcase.fxml.FXMLApplication</appClass>
+		<appClass>org.jrebirth.af.showcase.fxml.FXMLApplication</appClass>
 
 	</properties>
 

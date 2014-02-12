@@ -19,7 +19,7 @@
 		<deployPath>${project.artifactId}/${project.version}</deployPath>
 
 		<jnlpFilename>JRebirthAnalyzer.jnlp</jnlpFilename>
-		<appClass>org.jrebirth.analyzer.JRebirthAnalyzer</appClass>
+		<appClass>org.jrebirth.af.showcase.analyzer.JRebirthAnalyzer</appClass>
 
 		<appletWidth>1024</appletWidth>
 		<appletHeight>768</appletHeight>
