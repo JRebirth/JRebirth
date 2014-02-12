@@ -33,7 +33,7 @@
 		<codebase>${deployUrl}/${deployPath}</codebase>
 
 		<jnlpFilename>JRebirth.jnlp</jnlpFilename>
-		<preloaderClass>org.jrebirth.preloader.JRebirthPreloader</preloaderClass>
+		<preloaderClass>org.jrebirth.af.preloader.JRebirthPreloader</preloaderClass>
 
 		<appClass>org.jrebirth.YourApplication</appClass>
 
