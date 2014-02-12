@@ -21,10 +21,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBuilder;
 import javafx.scene.layout.VBox;
 
-import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.DefaultView;
-import org.jrebirth.core.ui.annotation.OnRotate.RotateType;
-import org.jrebirth.core.ui.annotation.OnSwipe.SwipeType;
+import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.ui.DefaultView;
+import org.jrebirth.af.core.ui.annotation.OnRotate;
+import org.jrebirth.af.core.ui.annotation.OnSwipe;
+import org.jrebirth.af.core.ui.annotation.OnRotate.RotateType;
+import org.jrebirth.af.core.ui.annotation.OnSwipe.SwipeType;
 
 /**
  * 

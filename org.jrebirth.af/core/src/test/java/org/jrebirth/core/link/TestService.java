@@ -20,10 +20,10 @@ package org.jrebirth.core.link;
 import java.util.List;
 import java.util.Set;
 
-import org.jrebirth.core.service.DefaultService;
-import org.jrebirth.core.wave.WaveBase;
-import org.jrebirth.core.wave.WaveItem;
-import org.jrebirth.core.wave.WaveTypeBase;
+import org.jrebirth.af.core.service.DefaultService;
+import org.jrebirth.af.core.wave.WaveBase;
+import org.jrebirth.af.core.wave.WaveItem;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

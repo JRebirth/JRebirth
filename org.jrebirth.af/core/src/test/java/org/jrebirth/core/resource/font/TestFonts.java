@@ -20,7 +20,12 @@ package org.jrebirth.core.resource.font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
-import static org.jrebirth.core.resource.Resources.create;
+import org.jrebirth.af.core.resource.font.FamilyFont;
+import org.jrebirth.af.core.resource.font.FontItem;
+import org.jrebirth.af.core.resource.font.RealFont;
+
+import static org.jrebirth.af.core.resource.Resources.create;
+
 
 /**
  * The class <strong>TestFonts</strong>.

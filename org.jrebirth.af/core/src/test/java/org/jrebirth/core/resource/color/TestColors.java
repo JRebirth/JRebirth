@@ -17,7 +17,14 @@
  */
 package org.jrebirth.core.resource.color;
 
-import static org.jrebirth.core.resource.Resources.create;
+import org.jrebirth.af.core.resource.color.ColorItem;
+import org.jrebirth.af.core.resource.color.GrayColor;
+import org.jrebirth.af.core.resource.color.HSBColor;
+import org.jrebirth.af.core.resource.color.RGB01Color;
+import org.jrebirth.af.core.resource.color.RGB255Color;
+import org.jrebirth.af.core.resource.color.WebColor;
+
+import static org.jrebirth.af.core.resource.Resources.create;
 
 /**
  * The class <strong>TestColors</strong>.

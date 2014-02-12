@@ -5,8 +5,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import junit.framework.Assert;
 
+import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
+import org.jrebirth.af.core.concurrent.JRebirth;
+import org.jrebirth.af.core.concurrent.JRebirthRunnable;
+import org.jrebirth.af.core.concurrent.RunnablePriority;
+import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.core.application.ApplicationTest;
-import org.jrebirth.core.exception.JRebirthThreadException;
 
 import org.junit.Ignore;
 import org.junit.Test;

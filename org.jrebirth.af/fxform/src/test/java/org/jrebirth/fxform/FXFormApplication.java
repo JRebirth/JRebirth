@@ -3,8 +3,8 @@ package org.jrebirth.fxform;
 import javafx.application.Application;
 import javafx.scene.layout.StackPane;
 
-import org.jrebirth.core.application.DefaultApplication;
-import org.jrebirth.core.ui.Model;
+import org.jrebirth.af.core.application.DefaultApplication;
+import org.jrebirth.af.core.ui.Model;
 
 /**
  * The class <strong>FXFormApplication</strong>.

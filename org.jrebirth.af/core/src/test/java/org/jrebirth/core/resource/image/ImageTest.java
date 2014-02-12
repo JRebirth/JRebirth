@@ -2,8 +2,10 @@ package org.jrebirth.core.resource.image;
 
 import javafx.scene.image.Image;
 
-import org.jrebirth.core.resource.AbstractBaseParams;
-import org.jrebirth.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.AbstractBaseParams;
+import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.image.ImageItem;
+import org.jrebirth.af.core.resource.image.LocalImage;
 
 import org.junit.After;
 import org.junit.AfterClass;

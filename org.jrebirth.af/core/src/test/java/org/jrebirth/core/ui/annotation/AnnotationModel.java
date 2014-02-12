@@ -17,8 +17,8 @@
  */
 package org.jrebirth.core.ui.annotation;
 
-import org.jrebirth.core.ui.DefaultModel;
-import org.jrebirth.core.wave.Wave;
+import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.core.wave.Wave;
 
 /**
  * The class <strong>AnnotationModel</strong>.

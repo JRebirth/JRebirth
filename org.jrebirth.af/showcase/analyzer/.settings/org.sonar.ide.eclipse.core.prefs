@@ -4,6 +4,6 @@ extraProperties=sonar.host.url\=http\://quality.jrebirth.org\r\nsonar.jdbc.url\=
 projectArtifactId=analyzer
 projectBranch=
 projectGroupId=org.jrebirth
-projectKey=org.jrebirth\:analyzer
+projectKey=org.jrebirth.af.showcase\:analyzer
 serverUrl=http\://quality.jrebirth.org
 version=2
