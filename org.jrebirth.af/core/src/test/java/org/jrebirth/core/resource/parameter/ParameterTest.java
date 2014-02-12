@@ -1,6 +1,7 @@
 package org.jrebirth.core.resource.parameter;
 
-import org.jrebirth.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.parameter.ParameterItem;
 
 import org.junit.After;
 import org.junit.AfterClass;

@@ -2,8 +2,10 @@ package org.jrebirth.core.facade;
 
 import static junit.framework.Assert.assertNotNull;
 
+import org.jrebirth.af.core.command.basic.SwitchFullScreenCommand;
+import org.jrebirth.af.core.facade.CommandFacade;
+import org.jrebirth.af.core.facade.GlobalFacadeBase;
 import org.jrebirth.core.application.TestApplication;
-import org.jrebirth.core.command.basic.SwitchFullScreenCommand;
 
 import org.junit.After;
 import org.junit.AfterClass;

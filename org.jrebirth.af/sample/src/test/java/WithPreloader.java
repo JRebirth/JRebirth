@@ -1,5 +1,5 @@
-import org.jrebirth.preloader.JRebirthPreloader;
-import org.jrebirth.sample.SampleApplication;
+import org.jrebirth.af.preloader.JRebirthPreloader;
+import org.jrebirth.af.sample.SampleApplication;
 
 import org.junit.Test;
 

@@ -3,6 +3,8 @@ package org.jrebirth.core.ui.fxml;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 
+import org.jrebirth.af.core.ui.fxml.FXMLComponent;
+import org.jrebirth.af.core.ui.fxml.FXMLUtils;
 import org.jrebirth.core.test.AbstractTest;
 
 import org.junit.After;

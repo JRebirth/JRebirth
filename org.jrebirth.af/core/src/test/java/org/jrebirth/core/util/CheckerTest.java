@@ -2,16 +2,17 @@ package org.jrebirth.core.util;
 
 import junit.framework.Assert;
 
-import org.jrebirth.core.exception.CoreRuntimeException;
-import org.jrebirth.core.resource.provided.JRebirthParameters;
-import org.jrebirth.core.ui.DefaultModel;
-import org.jrebirth.core.ui.NullView;
-import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.WaveBuilder;
-import org.jrebirth.core.wave.WaveData;
-import org.jrebirth.core.wave.WaveItem;
-import org.jrebirth.core.wave.WaveType;
-import org.jrebirth.core.wave.WaveTypeBase;
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.core.ui.NullView;
+import org.jrebirth.af.core.util.CheckerUtility;
+import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.core.wave.WaveBuilder;
+import org.jrebirth.af.core.wave.WaveData;
+import org.jrebirth.af.core.wave.WaveItem;
+import org.jrebirth.af.core.wave.WaveType;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 
 import org.junit.Before;
 import org.junit.Rule;

@@ -17,7 +17,12 @@
  */
 package org.jrebirth.core.resource.image;
 
-import static org.jrebirth.core.resource.Resources.create;
+import org.jrebirth.af.core.resource.image.ImageExtension;
+import org.jrebirth.af.core.resource.image.ImageItem;
+import org.jrebirth.af.core.resource.image.LocalImage;
+import org.jrebirth.af.core.resource.image.WebImage;
+
+import static org.jrebirth.af.core.resource.Resources.create;
 
 /**
  * The class <strong>TestColors</strong>.

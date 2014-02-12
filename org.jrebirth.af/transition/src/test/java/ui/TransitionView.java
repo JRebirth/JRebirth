@@ -19,8 +19,8 @@ package ui;
 
 import javafx.scene.layout.StackPane;
 
-import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.AbstractView;
+import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.ui.AbstractView;
 
 /**
  * 

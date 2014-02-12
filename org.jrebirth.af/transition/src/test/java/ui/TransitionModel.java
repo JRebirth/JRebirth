@@ -17,13 +17,13 @@
  */
 package ui;
 
-import org.jrebirth.core.resource.Resources;
-import org.jrebirth.core.resource.image.LocalImage;
-import org.jrebirth.core.ui.DefaultModel;
-import org.jrebirth.core.wave.Wave;
-import org.jrebirth.transition.command.slicer.NodeSlicerCommand;
-import org.jrebirth.transition.slicer.RandomFadingService;
-import org.jrebirth.transition.slicer.SlidingDoorService;
+import org.jrebirth.af.core.resource.Resources;
+import org.jrebirth.af.core.resource.image.LocalImage;
+import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.transition.command.slicer.NodeSlicerCommand;
+import org.jrebirth.af.transition.slicer.RandomFadingService;
+import org.jrebirth.af.transition.slicer.SlidingDoorService;
 
 /**
  * The class <strong>TransitionModel</strong>.

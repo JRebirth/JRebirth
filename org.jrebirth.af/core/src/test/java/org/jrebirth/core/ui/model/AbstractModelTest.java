@@ -6,9 +6,9 @@ import static junit.framework.Assert.assertNotSame;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertSame;
 
+import org.jrebirth.af.core.ui.AbstractModel;
+import org.jrebirth.af.core.ui.object.AbstractObjectModel;
 import org.jrebirth.core.test.AbstractTest;
-import org.jrebirth.core.ui.AbstractModel;
-import org.jrebirth.core.ui.object.AbstractObjectModel;
 
 import org.junit.After;
 import org.junit.Before;

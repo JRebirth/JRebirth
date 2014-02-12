@@ -2,7 +2,13 @@ package org.jrebirth.core.resource.color;
 
 import javafx.scene.paint.Color;
 
-import org.jrebirth.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.color.ColorItem;
+import org.jrebirth.af.core.resource.color.GrayColor;
+import org.jrebirth.af.core.resource.color.HSBColor;
+import org.jrebirth.af.core.resource.color.RGB01Color;
+import org.jrebirth.af.core.resource.color.RGB255Color;
+import org.jrebirth.af.core.resource.color.WebColor;
 
 import org.junit.After;
 import org.junit.AfterClass;

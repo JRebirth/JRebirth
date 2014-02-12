@@ -1,5 +1,7 @@
 package org.jrebirth.core.resource.font;
 
+import org.jrebirth.af.core.resource.font.FontName;
+
 /**
  * The class <strong>TestFontNames</strong>.
  * 

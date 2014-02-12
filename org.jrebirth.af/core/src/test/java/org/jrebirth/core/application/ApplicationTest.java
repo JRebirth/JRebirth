@@ -3,7 +3,10 @@ package org.jrebirth.core.application;
 import javafx.application.Application;
 import javafx.application.Platform;
 
-import org.jrebirth.core.concurrent.JRebirthThread;
+import org.jrebirth.af.core.application.AbstractApplication;
+import org.jrebirth.af.core.application.DefaultApplication;
+import org.jrebirth.af.core.application.JRebirthApplication;
+import org.jrebirth.af.core.concurrent.JRebirthThread;
 
 import org.junit.After;
 import org.junit.Before;
