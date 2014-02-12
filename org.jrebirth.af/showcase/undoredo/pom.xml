@@ -19,7 +19,7 @@
 	<properties>
 
 		<jnlpFilename>UndoRedo-Showcase.jnlp</jnlpFilename>
-		<appClass>org.jrebirth.showcase.undoredo.UndoRedoApplication</appClass>
+		<appClass>org.jrebirth.af.showcase.undoredo.UndoRedoApplication</appClass>
 
 	</properties>
 

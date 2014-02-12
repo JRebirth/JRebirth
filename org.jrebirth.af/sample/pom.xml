@@ -23,7 +23,7 @@
 		<deployPath>${project.artifactId}/${project.version}</deployPath>
 
 		<jnlpFilename>sample.jnlp</jnlpFilename>
-		<appClass>org.jrebirth.sample.SampleApplication</appClass>
+		<appClass>org.jrebirth.af.sample.SampleApplication</appClass>
 
 		<appletWidth>1024</appletWidth>
 		<appletHeight>768</appletHeight>
