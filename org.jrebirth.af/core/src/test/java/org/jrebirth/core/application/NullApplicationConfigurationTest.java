@@ -1,6 +1,6 @@
 package org.jrebirth.core.application;
 
-import org.jrebirth.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 
 import org.junit.Assert;
 import org.junit.Ignore;

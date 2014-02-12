@@ -1,7 +1,7 @@
 package org.jrebirth.fxform;
 
-import org.jrebirth.core.ui.DefaultController;
-import org.jrebirth.core.ui.fxform.AbstractFormView;
+import org.jrebirth.af.core.ui.DefaultController;
+import org.jrebirth.af.core.ui.fxform.AbstractFormView;
 
 /**
  * The class <strong>PersonFormView</strong>.

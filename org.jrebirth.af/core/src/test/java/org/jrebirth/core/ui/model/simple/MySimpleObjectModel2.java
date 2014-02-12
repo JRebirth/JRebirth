@@ -3,8 +3,8 @@ package org.jrebirth.core.ui.model.simple;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderPaneBuilder;
 
+import org.jrebirth.af.core.ui.simple.DefaultSimpleObjectModel;
 import org.jrebirth.core.ui.model.ModelBean2;
-import org.jrebirth.core.ui.simple.DefaultSimpleObjectModel;
 
 public class MySimpleObjectModel2 extends DefaultSimpleObjectModel<BorderPane, ModelBean2> {
 

@@ -17,7 +17,10 @@
  */
 package org.jrebirth.core.resource.parameter;
 
-import static org.jrebirth.core.resource.Resources.create;
+import org.jrebirth.af.core.resource.parameter.ObjectParameter;
+import org.jrebirth.af.core.resource.parameter.ParameterItem;
+
+import static org.jrebirth.af.core.resource.Resources.create;
 
 /**
  * The class <strong>TestParameters</strong>.

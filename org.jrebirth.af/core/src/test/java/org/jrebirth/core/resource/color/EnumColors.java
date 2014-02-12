@@ -19,7 +19,11 @@ package org.jrebirth.core.resource.color;
 
 import javafx.scene.paint.Color;
 
-import org.jrebirth.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.color.ColorBuilder;
+import org.jrebirth.af.core.resource.color.ColorItem;
+import org.jrebirth.af.core.resource.color.ColorParams;
+import org.jrebirth.af.core.resource.color.WebColor;
 
 /**
  * The class <strong>EnumColors</strong>.

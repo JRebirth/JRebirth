@@ -1,5 +1,7 @@
 package org.jrebirth.core.util;
 
+import org.jrebirth.af.core.util.ObjectUtility;
+
 import junit.framework.Assert;
 
 import org.junit.Test;

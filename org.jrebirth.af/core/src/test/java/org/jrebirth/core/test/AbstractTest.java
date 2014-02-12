@@ -1,8 +1,8 @@
 package org.jrebirth.core.test;
 
+import org.jrebirth.af.core.concurrent.JRebirthThread;
+import org.jrebirth.af.core.facade.GlobalFacade;
 import org.jrebirth.core.application.TestApplication;
-import org.jrebirth.core.concurrent.JRebirthThread;
-import org.jrebirth.core.facade.GlobalFacade;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

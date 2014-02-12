@@ -6,10 +6,10 @@ import static junit.framework.Assert.assertNotSame;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertSame;
 
+import org.jrebirth.af.core.ui.object.AbstractObjectModel;
 import org.jrebirth.core.ui.model.AbstractModelTest;
 import org.jrebirth.core.ui.model.ModelBean;
 import org.jrebirth.core.ui.model.ModelBean2;
-import org.jrebirth.core.ui.object.AbstractObjectModel;
 
 import org.junit.After;
 import org.junit.Before;

@@ -3,16 +3,18 @@ package org.jrebirth.core.command.basic.stage;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import org.jrebirth.af.core.command.basic.stage.StageAction;
+import org.jrebirth.af.core.command.basic.stage.StageWaveBuilder;
+import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
+import org.jrebirth.af.core.concurrent.JRebirth;
+import org.jrebirth.af.core.concurrent.JRebirthThread;
+import org.jrebirth.af.core.exception.JRebirthThreadException;
+import org.jrebirth.af.core.facade.CommandFacade;
+import org.jrebirth.af.core.facade.GlobalFacadeBase;
+import org.jrebirth.af.core.service.basic.StageService;
+import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.core.wave.WaveListener;
 import org.jrebirth.core.application.TestApplication;
-import org.jrebirth.core.concurrent.AbstractJrbRunnable;
-import org.jrebirth.core.concurrent.JRebirth;
-import org.jrebirth.core.concurrent.JRebirthThread;
-import org.jrebirth.core.exception.JRebirthThreadException;
-import org.jrebirth.core.facade.CommandFacade;
-import org.jrebirth.core.facade.GlobalFacadeBase;
-import org.jrebirth.core.service.basic.StageService;
-import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.WaveListener;
 
 import org.junit.After;
 import org.junit.AfterClass;
