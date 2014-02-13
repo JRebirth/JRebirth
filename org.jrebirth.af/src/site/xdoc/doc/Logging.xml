@@ -154,7 +154,7 @@
             <p>JRebirth provides its own LoggerFactory that you can initialize like this:</p>
 
             <macro name="include">
-                <param name="source" value="core/src/main/java/org/jrebirth/core/concurrent/JRebirthThread.java" />
+                <param name="source" value="core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java" />
                 <param name="snippet" value="re:JRLoggerFactory.getLogger" />
                 <param name="snippet-start-offset" value="1" />
             </macro>
@@ -162,14 +162,14 @@
             <p>Then you can log your message like this:</p>
 
             <macro name="include">
-                <param name="source" value="core/src/main/java/org/jrebirth/core/concurrent/JRebirthThread.java" />
+                <param name="source" value="core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java" />
                 <param name="snippet" value="re:LOGGER\." />
             </macro>
 
             <p>All these log messages are store into an interface implemented by the class to let them accessible</p>
 
             <macro name="include">
-                <param name="source" value="core/src/main/java/org/jrebirth/core/concurrent/ConcurrentMessages.java" />
+                <param name="source" value="core/src/main/java/org/jrebirth/af/core/concurrent/ConcurrentMessages.java" />
                 <param name="snippet" value="aj:ConcurrentMessages" />
             </macro>
 

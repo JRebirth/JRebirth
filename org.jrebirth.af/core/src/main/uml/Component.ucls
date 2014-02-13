@@ -2,7 +2,7 @@
 <class-diagram version="1.1.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <interface id="1" language="java" name="org.jrebirth.core.key.UniqueKey" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/key/UniqueKey.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/key/UniqueKey.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="391" y="45"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -11,7 +11,7 @@
     </display>  
   </interface>  
   <class id="2" language="java" name="org.jrebirth.core.key.MultitonKey" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/key/MultitonKey.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/key/MultitonKey.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="395" y="384"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -20,7 +20,7 @@
     </display>  
   </class>  
   <class id="3" language="java" name="org.jrebirth.core.key.ClassKey" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/key/ClassKey.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/key/ClassKey.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="392" y="210"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      

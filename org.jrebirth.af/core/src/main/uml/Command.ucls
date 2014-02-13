@@ -2,7 +2,7 @@
 <class-diagram version="1.1.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <interface id="1" language="java" name="org.jrebirth.core.command.MultiCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/MultiCommand.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/MultiCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="603" y="105"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -12,7 +12,7 @@
     </display>  
   </interface>  
   <interface id="2" language="java" name="org.jrebirth.core.command.Command" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/Command.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/Command.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-108" y="105"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -21,7 +21,7 @@
     </display>  
   </interface>  
   <class id="3" language="java" name="org.jrebirth.core.command.DefaultPoolCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/DefaultPoolCommand.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/DefaultPoolCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-216" y="815"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -31,7 +31,7 @@
     </display>  
   </class>  
   <class id="4" language="java" name="org.jrebirth.core.command.AbstractSingleCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/AbstractSingleCommand.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/AbstractSingleCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-98" y="514"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -41,7 +41,7 @@
     </display>  
   </class>  
   <class id="5" language="java" name="org.jrebirth.core.command.AbstractBaseCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/AbstractBaseCommand.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/AbstractBaseCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="258" y="385"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -51,7 +51,7 @@
     </display>  
   </class>  
   <class id="6" language="java" name="org.jrebirth.core.command.DefaultUICommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/DefaultUICommand.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/DefaultUICommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-4" y="815"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -61,7 +61,7 @@
     </display>  
   </class>  
   <class id="7" language="java" name="org.jrebirth.core.command.DefaultBeanCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/DefaultBeanCommand.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/DefaultBeanCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="189" y="702"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -71,12 +71,12 @@
     </display>  
   </class>  
   <package id="8" language="java" name="org.jrebirth.core.command" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-145" y="31"/>    
     <display autosize="true" stereotype="false" accessors="true"/>  
   </package>  
   <class id="9" language="java" name="org.jrebirth.core.command.DefaultMultiCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/DefaultMultiCommand.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/DefaultMultiCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="616" y="815"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -86,7 +86,7 @@
     </display>  
   </class>  
   <class id="10" language="java" name="org.jrebirth.core.command.AbstractMultiCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/AbstractMultiCommand.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/AbstractMultiCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="605" y="377"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -96,7 +96,7 @@
     </display>  
   </class>  
   <annotation id="11" language="java" name="org.jrebirth.core.concurrent.RunInto" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/RunInto.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/RunInto.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="279" y="924"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -106,7 +106,7 @@
     </display>  
   </annotation>  
   <enumeration id="12" language="java" name="org.jrebirth.core.concurrent.RunType" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/RunType.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/RunType.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="385" y="713"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -116,7 +116,7 @@
     </display>  
   </enumeration>  
   <interface id="13" language="java" name="org.jrebirth.core.wave.WaveListener" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveListener.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/wave/WaveListener.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="711" y="188"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" accessors="true" 
@@ -126,7 +126,7 @@
     </display>  
   </interface>  
   <class id="14" language="java" name="org.jrebirth.core.link.AbstractWaveReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/link/AbstractWaveReady.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/link/AbstractWaveReady.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-103" y="223"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -136,7 +136,7 @@
     </display>  
   </class>  
   <class id="15" language="java" name="org.jrebirth.core.command.CommandRunnable" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/CommandRunnable.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/CommandRunnable.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-119" y="350"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" accessors="true" 
@@ -146,7 +146,7 @@
     </display>  
   </class>  
   <class id="16" language="java" name="org.jrebirth.core.command.CommandWaveBuilder" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/CommandWaveBuilder.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/CommandWaveBuilder.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="647" y="914"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -156,7 +156,7 @@
     </display>  
   </class>  
   <interface id="17" language="java" name="org.jrebirth.core.command.CommandBean" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/CommandBean.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/CommandBean.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="258" y="105"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -166,7 +166,7 @@
     </display>  
   </interface>  
   <class id="18" language="java" name="org.jrebirth.core.command.DefaultUIBeanCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/DefaultUIBeanCommand.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/DefaultUIBeanCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-6" y="702"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -176,7 +176,7 @@
     </display>  
   </class>  
   <class id="19" language="java" name="org.jrebirth.core.command.DefaultPoolBeanCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/DefaultPoolBeanCommand.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/DefaultPoolBeanCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-214" y="702"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -186,7 +186,7 @@
     </display>  
   </class>  
   <class id="20" language="java" name="org.jrebirth.core.command.DefaultCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/DefaultCommand.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/DefaultCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="186" y="815"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -196,7 +196,7 @@
     </display>  
   </class>  
   <class id="21" language="java" name="org.jrebirth.core.command.DefaultMultiBeanCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/command/DefaultMultiBeanCommand.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/DefaultMultiBeanCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="622" y="653"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 

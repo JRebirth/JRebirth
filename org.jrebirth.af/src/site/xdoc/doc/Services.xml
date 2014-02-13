@@ -99,7 +99,7 @@
                 <macro name="include">
                		<param name="highlight-theme" value="eclipse"/>
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java"/>
                     <param name="snippet" value="re:DO_LOAD_EVENTS ="/>
                     <param name="snippet-start-offset" value="1"/>
                 </macro>
@@ -115,7 +115,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/ui/editor/EditorWaves.java"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java"/>
                     <param name="snippet" value="re:EVENTS_FILE ="/>
                     <param name="snippet-start-offset" value="1"/>
                     <param name="snippet-end-offset" value="1"/>
@@ -125,7 +125,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java"/>
                     <param name="snippet" value="re:RE_EVENTS_LOADED ="/>
                     <param name="snippet-start-offset" value="1"/>
                 </macro>
@@ -138,7 +138,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/ui/editor/EditorWaves.java"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java"/>
                     <param name="snippet" value="re:EVENTS ="/>
                     <param name="snippet-start-offset" value="1"/>
                     <param name="snippet-end-offset" value="1"/>
@@ -160,7 +160,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java"/>
                     <param name="snippet" value="aj:....LoadEdtFileService.initService(..)"/>
                     <!--<param name="snippet-start-offset" value="3" />-->
                     <param name="highlight-lines" value="grep:registerCallback"/>
@@ -181,7 +181,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java"/>
                     <param name="snippet" value="aj:....LoadEdtFileService.doLoadEvents(..)"/>
                     <param name="snippet-start-offset" value="8"/>
                 </macro>
@@ -211,7 +211,7 @@
                 <p>Hereafter you will fin an example of service call with only one arguments passed:</p>
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/command/OpenEventTrackerFileCommand.java"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/command/OpenEventTrackerFileCommand.java"/>
                     <param name="snippet" value="re:returnData"/>
                     <param name="snippet-end-offset" value="2"/>
                 </macro>
@@ -247,7 +247,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/ui/controls/ControlsModel.java"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/controls/ControlsModel.java"/>
                     <param name="snippet" value="aj:..ControlsModel.initModel(..)"/>
                 </macro>
 
@@ -266,7 +266,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/ui/controls/ControlsModel.java"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/controls/ControlsModel.java"/>
                     <param name="snippet" value="aj:..ControlsModel.doEventsLoaded(..)"/>
                 </macro>
 
@@ -307,7 +307,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java"/>
                     <param name="snippet" value="re:doLoadEvents"/>
                     <param name="snippet-start-offset" value="1"/>
                 </macro>
@@ -331,7 +331,7 @@
                 </p>
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java"/>
                     <param name="snippet" value="re:updateMessage"/>
                 </macro>
                 <p>
@@ -341,7 +341,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/service/LoadEdtFileService.java"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java"/>
                     <param name="snippet" value="re:updateProgress"/>
                 </macro>
 

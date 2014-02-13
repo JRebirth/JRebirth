@@ -2,7 +2,7 @@
 <class-diagram version="1.1.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <interface id="1" language="java" name="org.jrebirth.core.facade.GlobalFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/GlobalFacade.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/GlobalFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="161" y="178"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -12,7 +12,7 @@
     </display>  
   </interface>  
   <class id="2" language="java" name="org.jrebirth.core.facade.GlobalFacadeBase" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/GlobalFacadeBase.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/GlobalFacadeBase.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="159" y="518"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -22,7 +22,7 @@
     </display>  
   </class>  
   <interface id="3" language="java" name="org.jrebirth.core.facade.GlobalReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/GlobalReady.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/GlobalReady.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="548" y="45"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -32,7 +32,7 @@
     </display>  
   </interface>  
   <interface id="4" language="java" name="org.jrebirth.core.facade.Facade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/Facade.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/Facade.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="814" y="70"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -41,7 +41,7 @@
     </display>  
   </interface>  
   <class id="5" language="java" name="org.jrebirth.core.facade.ServiceFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/ServiceFacade.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/ServiceFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="509" y="384"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -51,7 +51,7 @@
     </display>  
   </class>  
   <class id="6" language="java" name="org.jrebirth.core.facade.CommandFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/CommandFacade.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/CommandFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="514" y="488"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -61,7 +61,7 @@
     </display>  
   </class>  
   <class id="7" language="java" name="org.jrebirth.core.facade.UiFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/UiFacade.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/UiFacade.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="511" y="593"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -70,7 +70,7 @@
     </display>  
   </class>  
   <class id="8" language="java" name="org.jrebirth.core.facade.AbstractFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/AbstractFacade.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/AbstractFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="816" y="450"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -80,7 +80,7 @@
     </display>  
   </class>  
   <class id="9" language="java" name="org.jrebirth.core.facade.AbstractGlobalReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/AbstractGlobalReady.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/AbstractGlobalReady.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="528" y="210"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -90,12 +90,12 @@
     </display>  
   </class>  
   <package id="10" language="java" name="org.jrebirth.core.facade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade" binary="false" corner="BOTTOM_RIGHT">    
     <position height="29" width="191" x="18" y="13"/>    
     <display autosize="false" stereotype="false" accessors="true"/>  
   </package>  
   <class id="11" language="java" name="org.jrebirth.core.facade.NamedThreadBuilder" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/NamedThreadBuilder.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/NamedThreadBuilder.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="161" y="793"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -105,7 +105,7 @@
     </display>  
   </class>  
   <interface id="12" language="java" name="org.jrebirth.core.key.UniqueKey" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/key/UniqueKey.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/key/UniqueKey.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1121" y="749"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -114,7 +114,7 @@
     </display>  
   </interface>  
   <class id="13" language="java" name="org.jrebirth.core.key.MultitonKey" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/key/MultitonKey.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/key/MultitonKey.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="672" y="754"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -123,7 +123,7 @@
     </display>  
   </class>  
   <class id="14" language="java" name="org.jrebirth.core.key.ClassKey" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/key/ClassKey.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/key/ClassKey.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="892" y="750"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -132,7 +132,7 @@
     </display>  
   </class>  
   <interface id="15" language="java" name="org.jrebirth.core.facade.LocalFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/LocalFacade.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/LocalFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="795" y="229"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -142,7 +142,7 @@
     </display>  
   </interface>  
   <interface id="16" language="java" name="org.jrebirth.core.facade.WaveReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/WaveReady.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/WaveReady.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1338" y="511"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -151,7 +151,7 @@
     </display>  
   </interface>  
   <interface id="17" language="java" name="org.jrebirth.core.facade.FacadeReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/FacadeReady.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/FacadeReady.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1109" y="226"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 

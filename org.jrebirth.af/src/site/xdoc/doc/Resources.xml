@@ -78,14 +78,14 @@
 				<p>Static import declaration:</p>
 				<macro name="include">
 					<param name="highlight-theme" value="eclipse"/>
-					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" />
+					<param name="source" value="core/src/test/java/org/jrebirth/af/core/resource/color/TestColors.java" />
 					<param name="snippet" value="re:import static" />
 					<param name="snippet-start-offset" value="1" />
 				</macro>
 				
 				<p>Example of Web color declaration:</p>
 				<macro name="include">
-					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" />
+					<param name="source" value="core/src/test/java/org/jrebirth/af/core/resource/color/TestColors.java" />
 					<param name="snippet" value="re:TEST_COLOR_WEB_1" />
 					<param name="snippet-start-offset" value="1" />
 				</macro>
@@ -120,28 +120,28 @@
 
 				<p>For example to manage web color, (basic hexadecimal string #00CC00), you have to use this declaration:</p>
 				<macro name="include">
-					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" />
+					<param name="source" value="core/src/test/java/org/jrebirth/af/core/resource/color/TestColors.java" />
 					<param name="snippet" value="re:TEST_COLOR_WEB_1" />
 					<param name="snippet-start-offset" value="1" />
 				</macro>
 
 				<p>Hereafter an example of an interface that hold multiple colors.</p>
 				<macro name="include">
-					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/color/TestColors.java" />
+					<param name="source" value="core/src/test/java/org/jrebirth/af/core/resource/color/TestColors.java" />
 					<param name="snippet" value="aj:..TestColors" />
 					<param name="expand-snippets" value="true" />
 				</macro>
 
 
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/resource/color/WebColor.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/resource/color/WebColor.java" />
 					<!-- <param name="snippet" value="aj:*.WebColor" /> <param name="expand-snippets" value="true" /> -->
 				</macro>
 
 
 				<p>But this interface doesn't explain how to register a resource, so let's see an example.</p>
 				<macro name="include">
-					<param name="source" value="presentation/src/main/java/org/jrebirth/presentation/resources/PrezColors.java" />
+					<param name="source" value="presentation/src/main/java/org/jrebirth/af/presentation/resources/PrezColors.java" />
 					<!-- <param name="snippet" value="aj:..PrezColors" /> <param name="expand-snippets" value="true" /> -->
 				</macro>
 
@@ -152,7 +152,7 @@
 
 			<p>For example to manage the <strong>Turtles</strong>font, you have to use this declaration:</p>
 				<macro name="include">
-					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/font/TestFonts.java" />
+					<param name="source" value="core/src/test/java/org/jrebirth/af/core/resource/font/TestFonts.java" />
 					<param name="snippet" value="re:TEST_REAL_FONT_1" />
 					<param name="snippet-start-offset" value="1" />
 				</macro>
@@ -160,7 +160,7 @@
 				<p>Hereafter an example of an interface that hold multiple colors.</p>
 				
 				<macro name="include">
-					<param name="source" value="core/src/test/java/org/jrebirth/core/resource/font/TestFonts.java" />
+					<param name="source" value="core/src/test/java/org/jrebirth/af/core/resource/font/TestFonts.java" />
 					<param name="snippet" value="aj:..TestFonts" />
 					<param name="expand-snippets" value="true" />
 				</macro>

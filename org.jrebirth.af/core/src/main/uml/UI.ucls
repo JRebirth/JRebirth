@@ -2,7 +2,7 @@
 <class-diagram version="1.1.3" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <interface id="1" language="java" name="org.jrebirth.core.ui.Model" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/Model.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/Model.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="207" y="174"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -11,7 +11,7 @@
     </display>  
   </interface>  
   <interface id="2" language="java" name="org.jrebirth.core.ui.View" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/View.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/View.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="631" y="226"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -20,7 +20,7 @@
     </display>  
   </interface>  
   <interface id="3" language="java" name="org.jrebirth.core.ui.Controller" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1068" y="171"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -29,7 +29,7 @@
     </display>  
   </interface>  
   <class id="4" language="java" name="org.jrebirth.core.ui.DefaultView" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/DefaultView.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/DefaultView.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="625" y="784"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -38,7 +38,7 @@
     </display>  
   </class>  
   <class id="5" language="java" name="org.jrebirth.core.ui.LinkedCallback" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/LinkedCallback.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/LinkedCallback.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="622" y="1021"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -48,7 +48,7 @@
     </display>  
   </class>  
   <class id="6" language="java" name="org.jrebirth.core.ui.AbstractController" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractController.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/AbstractController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1068" y="828"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -58,7 +58,7 @@
     </display>  
   </class>  
   <class id="7" language="java" name="org.jrebirth.core.ui.DefaultModel" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/DefaultModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/DefaultModel.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="297" y="1107"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -67,7 +67,7 @@
     </display>  
   </class>  
   <class id="8" language="java" name="org.jrebirth.core.ui.AbstractBaseController" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractBaseController.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/AbstractBaseController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1068" y="461"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -77,7 +77,7 @@
     </display>  
   </class>  
   <interface id="9" language="java" name="org.jrebirth.core.ui.InnerModel" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/InnerModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/InnerModel.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="498" y="26"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -86,7 +86,7 @@
     </display>  
   </interface>  
   <class id="10" language="java" name="org.jrebirth.core.ui.AbstractView" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractView.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/AbstractView.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="626" y="524"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -95,7 +95,7 @@
     </display>  
   </class>  
   <class id="11" language="java" name="org.jrebirth.core.ui.AbstractModel" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/AbstractModel.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="297" y="807"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -104,7 +104,7 @@
     </display>  
   </class>  
   <class id="12" language="java" name="org.jrebirth.core.ui.DefaultController" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/DefaultController.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/DefaultController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1068" y="1029"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -114,7 +114,7 @@
     </display>  
   </class>  
   <package id="13" language="java" name="org.jrebirth.core.ui" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="80" y="15"/>    
     <display autosize="true" stereotype="true" accessors="true"/>  
   </package>  
@@ -128,7 +128,7 @@
     </display>  
   </interface>  
   <class id="15" language="java" name="org.jrebirth.core.ui.AbstractBaseModel" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractBaseModel.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/AbstractBaseModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="216" y="516"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -138,7 +138,7 @@
     </display>  
   </class>  
   <class id="16" language="java" name="org.jrebirth.core.ui.object.AbstractObjectModel" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/object/AbstractObjectModel.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/object/AbstractObjectModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="94" y="927"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -148,7 +148,7 @@
     </display>  
   </class>  
   <class id="17" language="java" name="org.jrebirth.core.ui.object.DefaultObjectModel" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/object/DefaultObjectModel.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/object/DefaultObjectModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="95" y="1113"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -158,7 +158,7 @@
     </display>  
   </class>  
   <class id="18" language="java" name="org.jrebirth.core.ui.simple.DefaultSimpleModel" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/simple/DefaultSimpleModel.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/simple/DefaultSimpleModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="482" y="1138"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -168,7 +168,7 @@
     </display>  
   </class>  
   <class id="19" language="java" name="org.jrebirth.core.ui.simple.AbstractSimpleModel" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/simple/AbstractSimpleModel.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/simple/AbstractSimpleModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="479" y="928"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -178,7 +178,7 @@
     </display>  
   </class>  
   <interface id="20" language="java" name="org.jrebirth.core.facade.WaveReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/WaveReady.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/WaveReady.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="238" y="18"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      

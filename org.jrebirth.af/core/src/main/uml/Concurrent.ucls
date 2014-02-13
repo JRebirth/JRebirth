@@ -2,7 +2,7 @@
 <class-diagram version="1.1.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <enumeration id="1" language="java" name="org.jrebirth.core.concurrent.RunType" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/RunType.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/RunType.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="105" y="106"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -12,7 +12,7 @@
     </display>  
   </enumeration>  
   <class id="2" language="java" name="org.jrebirth.core.concurrent.JRebirthThread" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/JRebirthThread.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java" binary="false" 
     corner="BOTTOM_LEFT">    
     <position height="-1" width="-1" x="386" y="301"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -22,7 +22,7 @@
     </display>  
   </class>  
   <class id="3" language="java" name="org.jrebirth.core.concurrent.AbstractJrbRunnable" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/AbstractJrbRunnable.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/AbstractJrbRunnable.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="709" y="454"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -32,7 +32,7 @@
     </display>  
   </class>  
   <class id="4" language="java" name="org.jrebirth.core.concurrent.JRebirth" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/JRebirth.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/JRebirth.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="107" y="302"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -42,7 +42,7 @@
     </display>  
   </class>  
   <package id="5" language="java" name="org.jrebirth.core.concurrent" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="96" y="10"/>    
     <display autosize="true" stereotype="false" accessors="true"/>  
   </package>  
@@ -56,7 +56,7 @@
     </display>  
   </interface>  
   <interface id="7" language="java" name="org.jrebirth.core.facade.GlobalFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/GlobalFacade.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/GlobalFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="342" y="21"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -66,7 +66,7 @@
     </display>  
   </interface>  
   <interface id="8" language="java" name="org.jrebirth.core.application.JRebirthApplication" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/application/JRebirthApplication.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/JRebirthApplication.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="488" y="20"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -76,7 +76,7 @@
     </display>  
   </interface>  
   <annotation id="9" language="java" name="org.jrebirth.core.concurrent.RunInto" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/RunInto.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/RunInto.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="142" y="521"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -86,7 +86,7 @@
     </display>  
   </annotation>  
   <enumeration id="10" language="java" name="org.jrebirth.core.concurrent.RunnablePriority" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/RunnablePriority.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/RunnablePriority.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="415" y="555"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -96,7 +96,7 @@
     </display>  
   </enumeration>  
   <interface id="11" language="java" name="org.jrebirth.core.concurrent.JRebirthRunnable" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/JRebirthRunnable.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthRunnable.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="705" y="268"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
