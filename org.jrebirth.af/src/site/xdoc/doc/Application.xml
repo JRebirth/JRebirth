@@ -59,7 +59,7 @@
                   in order to call one of the static protected method provided :</p>
 
                 <macro name="include">
-                    <param name="source" value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java"/>
+                    <param name="source" value="core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java"/>
                     <param name="snippet" value="re:(void launchNow)|(void preloadAndLaunch)"/>
                 </macro>
 
@@ -68,7 +68,7 @@
                 </p>
 
                 <macro name="include">
-                    <param name="source" value="sample/src/main/java/org/jrebirth/sample/SampleApplication.java"/>
+                    <param name="source" value="sample/src/main/java/org/jrebirth/af/sample/SampleApplication.java"/>
                     <param name="snippet" value="aj:..SampleApplication.main(..)"/>
                     <param name="highlight-theme" value="eclipse"/>
                 </macro>
@@ -89,7 +89,7 @@
 				<p>Hereafter you have the default <b>JRebirthPreloader</b> implementation.</p>
 				
 				<macro name="include">
-                    <param name="source" value="preloader/src/main/java/org/jrebirth/preloader/JRebirthPreloader.java"/>
+                    <param name="source" value="preloader/src/main/java/org/jrebirth/af/preloader/JRebirthPreloader.java"/>
                     <param name="snippet" value="aj:org.jrebirth.preloader.JRebirthPreloader"/>
                 </macro>
                 
@@ -121,7 +121,7 @@
                 </p>
 
                 <macro name="include">
-                    <param name="source" value="sample/src/main/java/org/jrebirth/sample/SampleApplication.java"/>
+                    <param name="source" value="sample/src/main/java/org/jrebirth/af/sample/SampleApplication.java"/>
                     <param name="snippet" value="aj:SampleApplication"/>
                 </macro>
 
@@ -279,7 +279,7 @@
                 </p>
 
                 <macro name="include">
-                    <param name="source" value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/JRebirthAnalyzer.java"/>
+                    <param name="source" value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/JRebirthAnalyzer.java"/>
                     <param name="snippet" value="aj:..JRebirthAnalyzer.getPostBootWaveList(..)"/>
                 </macro>
 
@@ -290,7 +290,7 @@
                     <li>
                         <macro name="include">
                             <param name="source"
-                                   value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java"/>
+                                   value="core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java"/>
                             <param name="snippet" value="re:(KeyCode getFullScreenKeyCode)"/>
                         </macro>
                         <em>KeyCode getFullScreenKeyCode()</em>
@@ -302,7 +302,7 @@
                     <li>
                         <macro name="include">
                             <param name="source"
-                                   value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java"/>
+                                   value="core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java"/>
                             <param name="snippet" value="re:(KeyCode getIconifiedKeyCode)"/>
                         </macro>
                         <em>KeyCode getIconifiedKeyCode()</em>=&gt;
@@ -333,19 +333,19 @@
                     <li>Exception handler of the JavaFX Application Thread</li>
                     <macro name="include">
                         <param name="source"
-                               value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java"/>
+                               value="core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java"/>
                         <param name="snippet" value="re:(UncaughtExceptionHandler getJatUncaughtExceptionHandler)"/>
                     </macro>
                     <li>Exception handler of the JRebirth Internal Thread</li>
                     <macro name="include">
                         <param name="source"
-                               value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java"/>
+                               value="core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java"/>
                         <param name="snippet" value="re:(UncaughtExceptionHandler getJitUncaughtExceptionHandler)"/>
                     </macro>
                     <li>Default Exception handler of all other threads</li>
                     <macro name="include">
                         <param name="source"
-                               value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java"/>
+                               value="core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java"/>
                         <param name="snippet" value="re:(UncaughtExceptionHandler getDefaultUncaughtExceptionHandler)"/>
                     </macro>
                 </ul>
@@ -377,7 +377,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java"/>
+                           value="core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java"/>
                     <param name="snippet" value="re:void preInit\(\)"/>
                     <param name="snippet-start-offset" value="3" />
                 </macro>
@@ -389,7 +389,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java"/>
+                           value="core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java"/>
                     <param name="snippet" value="re:void postInit\(\)"/>
                     <param name="snippet-start-offset" value="3" />
                 </macro>
@@ -425,7 +425,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java"/>
+                           value="core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java"/>
                     <param name="snippet" value="re:(@Configuration)"/>
                 </macro>
 
@@ -434,7 +434,7 @@
                 </p>
                 <macro name="include">
                     <param name="source"
-                           value="core/src/test/java/org/jrebirth/core/application/FullConfApplication.java"/>
+                           value="core/src/test/java/org/jrebirth/af/core/application/FullConfApplication.java"/>
                     <param name="snippet" value="re:(@Configuration)"/>
                 </macro>
 
@@ -490,7 +490,7 @@
                 </p>
                 <macro name="include">
                     <param name="source"
-                           value="core/src/test/java/org/jrebirth/core/application/NullConfApplication.java"/>
+                           value="core/src/test/java/org/jrebirth/af/core/application/NullConfApplication.java"/>
                     <param name="snippet" value="re:(@Configuration)"/>
                 </macro>
 
@@ -516,7 +516,7 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="core/src/main/java/org/jrebirth/core/application/AbstractApplication.java"/>
+                           value="core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java"/>
                     <param name="snippet" value="re:(@Localized)"/>
                 </macro>
 
@@ -561,7 +561,7 @@
                 </p>
                 <macro name="include">
                     <param name="source"
-                           value="core/src/test/java/org/jrebirth/core/application/NullConfApplication.java"/>
+                           value="core/src/test/java/org/jrebirth/af/core/application/NullConfApplication.java"/>
                     <param name="snippet" value="re:(@Localized)"/>
                 </macro>
 

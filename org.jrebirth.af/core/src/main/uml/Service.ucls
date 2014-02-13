@@ -3,7 +3,7 @@
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="org.jrebirth.core.service.ServiceTaskReturnWaveListener" 
     project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/ServiceTaskReturnWaveListener.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/service/ServiceTaskReturnWaveListener.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="874" y="658"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -13,7 +13,7 @@
     </display>  
   </class>  
   <interface id="2" language="java" name="org.jrebirth.core.service.Service" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/Service.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/service/Service.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="221" y="75"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -22,7 +22,7 @@
     </display>  
   </interface>  
   <class id="3" language="java" name="org.jrebirth.core.service.ServiceTask" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/ServiceTask.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/service/ServiceTask.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="373" y="718"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -32,7 +32,7 @@
     </display>  
   </class>  
   <class id="4" language="java" name="org.jrebirth.core.service.AbstractService" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/AbstractService.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/service/AbstractService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="219" y="319"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -42,12 +42,12 @@
     </display>  
   </class>  
   <package id="5" language="java" name="org.jrebirth.core.service" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/service" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="82" y="-12"/>    
     <display autosize="true" stereotype="false" accessors="true"/>  
   </package>  
   <interface id="6" language="java" name="org.jrebirth.core.wave.WaveListener" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/wave/WaveListener.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/wave/WaveListener.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="774" y="272"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -66,7 +66,7 @@
     </display>  
   </class>  
   <class id="8" language="java" name="org.jrebirth.core.link.AbstractWaveReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/link/AbstractWaveReady.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/link/AbstractWaveReady.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="488" y="202"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -76,7 +76,7 @@
     </display>  
   </class>  
   <interface id="9" language="java" name="org.jrebirth.core.facade.FacadeReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/FacadeReady.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/FacadeReady.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="641" y="86"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -86,7 +86,7 @@
     </display>  
   </interface>  
   <interface id="10" language="java" name="org.jrebirth.core.facade.WaveReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/WaveReady.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/WaveReady.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="730" y="31"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -95,7 +95,7 @@
     </display>  
   </interface>  
   <class id="11" language="java" name="org.jrebirth.core.link.AbstractReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/link/AbstractReady.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/link/AbstractReady.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="574" y="148"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -105,7 +105,7 @@
     </display>  
   </class>  
   <class id="12" language="java" name="org.jrebirth.core.service.DefaultService" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/DefaultService.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/service/DefaultService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="93" y="558"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -115,7 +115,7 @@
     </display>  
   </class>  
   <interface id="13" language="java" name="org.jrebirth.core.service.ServiceMessages" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/ServiceMessages.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/service/ServiceMessages.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="496" y="25"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -125,7 +125,7 @@
     </display>  
   </interface>  
   <class id="14" language="java" name="org.jrebirth.core.service.ServiceTaskWaveListener" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/service/ServiceTaskWaveListener.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/service/ServiceTaskWaveListener.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="666" y="552"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -135,7 +135,7 @@
     </display>  
   </class>  
   <enumeration id="15" language="java" name="org.jrebirth.core.concurrent.RunnablePriority" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/RunnablePriority.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/RunnablePriority.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="94" y="718"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -145,7 +145,7 @@
     </display>  
   </enumeration>  
   <interface id="16" language="java" name="org.jrebirth.core.concurrent.JRebirthRunnable" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/JRebirthRunnable.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthRunnable.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="307" y="508"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 

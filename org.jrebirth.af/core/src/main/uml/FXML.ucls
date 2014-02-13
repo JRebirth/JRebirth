@@ -2,12 +2,12 @@
 <class-diagram version="1.1.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <package id="1" language="java" name="org.jrebirth.core.ui.fxml" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/fxml" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/fxml" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="86" y="33"/>    
     <display autosize="true" stereotype="false" accessors="true"/>  
   </package>  
   <interface id="2" language="java" name="org.jrebirth.core.ui.fxml.FXMLController" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/fxml/FXMLController.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/fxml/FXMLController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="400" y="248"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -17,7 +17,7 @@
     </display>  
   </interface>  
   <class id="3" language="java" name="org.jrebirth.core.ui.fxml.AbstractFXMLController" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/fxml/AbstractFXMLController.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/fxml/AbstractFXMLController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="399" y="433"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -27,7 +27,7 @@
     </display>  
   </class>  
   <class id="4" language="java" name="org.jrebirth.core.ui.fxml.FXMLComponent" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/fxml/FXMLComponent.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/fxml/FXMLComponent.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="742" y="248"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -46,7 +46,7 @@
     </display>  
   </class>  
   <interface id="6" language="java" name="org.jrebirth.core.ui.View" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/View.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/View.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="90" y="248"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -64,7 +64,7 @@
     </display>  
   </interface>  
   <class id="8" language="java" name="org.jrebirth.core.ui.AbstractView" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/ui/AbstractView.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/AbstractView.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="90" y="434"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      

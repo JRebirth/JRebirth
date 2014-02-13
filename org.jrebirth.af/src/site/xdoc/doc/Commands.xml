@@ -72,7 +72,7 @@
 
 				<macro name="include">
 					<param name="highlight-theme" value="eclipse"/>
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/showmodel/ShowModelCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/ShowModelCommand.java" />
 					<param name="snippet" value="aj:org.jrebirth.core.command.basic.showmodel.ShowModelCommand" />
 				</macro>
 
@@ -159,11 +159,11 @@
 					Class and its unique key (if required).
 				</p>
 
-				<!-- <macro name="include"> <param name="source" value="core/src/main/java/org/jrebirth/core/facade/AbstractFacade.java" /> <param name="snippet" value="re:E 
+				<!-- <macro name="include"> <param name="source" value="core/src/main/java/org/jrebirth/af/core/facade/AbstractFacade.java" /> <param name="snippet" value="re:E 
 					retrieve" /> </macro> -->
 
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/link/CommandReady.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/link/CommandReady.java" />
 					<param name="snippet" value="re:getCommand" />
 				</macro>
 
@@ -175,7 +175,7 @@
 				</p>
 
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/Command.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/Command.java" />
 					<param name="snippet" value="re:run\(\)" />
 				</macro>
 
@@ -204,7 +204,7 @@
 					that will be hold by the wave and so available into the command.
 				</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/link/AbstractWaveReady.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/link/AbstractWaveReady.java" />
 					<param name="snippet" value="re:callCommand" />
 				</macro>
 
@@ -221,7 +221,7 @@
 				<p>It's also possible to add a callback function, in example to manage double-click detection (see <strong>LinkedCallback</strong>).</p>
 
 				<macro name="include">
-					<param name="source" value="showcase/analyzer/src/main/java/org/jrebirth/analyzer/ui/controls/ControlsController.java" />
+					<param name="source" value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/controls/ControlsController.java" />
 					<param name="snippet" value="re:linkCommand" />
 				</macro>
 
@@ -321,19 +321,19 @@
 
 				<p>To run a command into the JAT (JavaFX Application Thread), use this annotation :</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/DefaultUICommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/DefaultUICommand.java" />
 					<param name="snippet" value="re:@RunInto" />
 				</macro>
 
 				<p>To run a command into the JIT (JRebirth Internal Thread), use this annotation :</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/DefaultCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/DefaultCommand.java" />
 					<param name="snippet" value="re:@RunInto" />
 				</macro>
 
 				<p>To run a command into JTP (JRebirth Thread Pool, the command will be run into a slot), use this annotation :</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/DefaultPoolCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/DefaultPoolCommand.java" />
 					<param name="snippet" value="re:@RunInto" />
 				</macro>
 
@@ -346,7 +346,7 @@
 					class :
 				</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/showmodel/AttachModelCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/AttachModelCommand.java" />
 					<param name="snippet" value="re:extends DefaultUIBeanCommand" />
 				</macro>
 
@@ -356,7 +356,7 @@
 					class :
 				</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/ChainWaveCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/basic/ChainWaveCommand.java" />
 					<param name="snippet" value="re:extends DefaultCommand" />
 				</macro>
 				<p>
@@ -369,7 +369,7 @@
 					class :
 				</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/basic/showmodel/PrepareModelCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/PrepareModelCommand.java" />
 					<param name="snippet" value="re:extends DefaultPoolBeanCommand" />
 				</macro>
 
@@ -383,7 +383,7 @@
 					enum value to the command constructor.
 				</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/core/command/AbstractBaseCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/AbstractBaseCommand.java" />
 					<param name="snippet" value="re:RunType runType" />
 				</macro>
 
