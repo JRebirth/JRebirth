@@ -2,7 +2,7 @@
 <class-diagram version="1.1.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <interface id="1" language="java" name="org.jrebirth.core.application.JRebirthApplication" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/application/JRebirthApplication.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/JRebirthApplication.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="364" y="115"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" accessors="true" 
@@ -12,7 +12,7 @@
     </display>  
   </interface>  
   <class id="2" language="java" name="org.jrebirth.core.application.AbstractApplication" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/application/AbstractApplication.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="359" y="501"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -22,7 +22,7 @@
     </display>  
   </class>  
   <interface id="3" language="java" name="org.jrebirth.core.facade.GlobalFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/facade/GlobalFacade.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/GlobalFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="761" y="314"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -32,7 +32,7 @@
     </display>  
   </interface>  
   <class id="4" language="java" name="org.jrebirth.core.concurrent.JRebirthThread" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/concurrent/JRebirthThread.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="761" y="115"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -42,7 +42,7 @@
     </display>  
   </class>  
   <package id="5" language="java" name="org.jrebirth.core.application" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/application" binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="95" y="30"/>    
     <display autosize="true" stereotype="false" accessors="true"/>  
   </package>  
@@ -77,7 +77,7 @@
     </display>  
   </class>  
   <class id="9" language="java" name="org.jrebirth.core.application.DefaultApplication" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/application/DefaultApplication.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/DefaultApplication.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="739" y="702"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -88,7 +88,7 @@
   </class>  
   <interface id="10" language="java" name="org.jrebirth.core.application.ApplicationMessages" 
     project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/application/ApplicationMessages.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/ApplicationMessages.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="55" y="345"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -98,7 +98,7 @@
     </display>  
   </interface>  
   <annotation id="11" language="java" name="org.jrebirth.core.application.Configuration" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/application/Configuration.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/Configuration.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="55" y="495"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -108,7 +108,7 @@
     </display>  
   </annotation>  
   <annotation id="12" language="java" name="org.jrebirth.core.application.Localized" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/application/Localized.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/Localized.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="59" y="653"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 

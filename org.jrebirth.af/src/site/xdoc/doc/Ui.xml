@@ -56,7 +56,7 @@
 
 				<macro name="include">
 					<param name="highlight-theme" value="eclipse"/>
-					<param name="source" value="sample/src/main/java/org/jrebirth/sample/ui/SampleModel.java" />
+					<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleModel.java" />
 					<param name="snippet" value="aj:SampleModel" />
 				</macro>
 
@@ -70,7 +70,7 @@
 			<subsection name="Views">
 
 				<macro name="include">
-					<param name="source" value="sample/src/main/java/org/jrebirth/sample/ui/SampleView.java" />
+					<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleView.java" />
 					<!-- <param name="snippet" value="aj:SampleView" /> -->
 				</macro>
 
@@ -79,7 +79,7 @@
 			<subsection name="Controllers">
 
 				<macro name="include">
-					<param name="source" value="sample/src/main/java/org/jrebirth/sample/ui/SampleController.java" />
+					<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleController.java" />
 					<!-- <param name="snippet" value="aj:..SampleController" /> -->
 				</macro>
 			</subsection>

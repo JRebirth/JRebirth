@@ -2,7 +2,7 @@
 <class-diagram version="1.1.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="org.jrebirth.core.resource.color.HSBColor" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/HSBColor.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/color/HSBColor.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="803" y="1031"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -12,7 +12,7 @@
     </display>  
   </class>  
   <interface id="2" language="java" name="org.jrebirth.core.resource.font.FontName" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/FontName.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/font/FontName.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="45" y="306"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -22,7 +22,7 @@
     </display>  
   </interface>  
   <class id="3" language="java" name="org.jrebirth.core.resource.font.FamilyFont" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/FamilyFont.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/font/FamilyFont.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="137" y="1032"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -32,7 +32,7 @@
     </display>  
   </class>  
   <interface id="4" language="java" name="org.jrebirth.core.resource.font.JRebirthFont" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/JRebirthFont.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/font/JRebirthFont.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1395" y="165"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -43,7 +43,7 @@
   </interface>  
   <class id="5" language="java" name="org.jrebirth.core.resource.factory.AbstractResourceBuilder" 
     project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/factory/AbstractResourceBuilder.java" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/factory/AbstractResourceBuilder.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="383" y="55"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -53,7 +53,7 @@
     </display>  
   </class>  
   <class id="6" language="java" name="org.jrebirth.core.resource.color.RGB255Color" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/RGB255Color.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/color/RGB255Color.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1014" y="1030"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -63,7 +63,7 @@
     </display>  
   </class>  
   <class id="7" language="java" name="org.jrebirth.core.resource.font.RealFont" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/RealFont.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/font/RealFont.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="374" y="964"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -73,7 +73,7 @@
     </display>  
   </class>  
   <class id="8" language="java" name="org.jrebirth.core.resource.font.AbstractBaseFont" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/AbstractBaseFont.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/font/AbstractBaseFont.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="165" y="727"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -83,7 +83,7 @@
     </display>  
   </class>  
   <enumeration id="9" language="java" name="org.jrebirth.core.resource.color.AppColors" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/AppColors.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/color/AppColors.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1389" y="291"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -93,7 +93,7 @@
     </display>  
   </enumeration>  
   <class id="10" language="java" name="org.jrebirth.core.resource.color.AbstractBaseColor" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/AbstractBaseColor.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/color/AbstractBaseColor.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="922" y="708"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -103,7 +103,7 @@
     </display>  
   </class>  
   <class id="11" language="java" name="org.jrebirth.core.resource.color.RGB01Color" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/RGB01Color.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/color/RGB01Color.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1404" y="995"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -113,7 +113,7 @@
     </display>  
   </class>  
   <interface id="12" language="java" name="org.jrebirth.core.resource.color.ColorParams" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/ColorParams.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/color/ColorParams.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="434" y="306"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -123,7 +123,7 @@
     </display>  
   </interface>  
   <interface id="13" language="java" name="org.jrebirth.core.resource.color.ResourceParams" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/ResourceParams.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/color/ResourceParams.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="366" y="480"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -133,7 +133,7 @@
     </display>  
   </interface>  
   <interface id="14" language="java" name="org.jrebirth.core.resource.font.FontParams" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/FontParams.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/font/FontParams.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="202" y="311"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -143,7 +143,7 @@
     </display>  
   </interface>  
   <class id="15" language="java" name="org.jrebirth.core.resource.font.FontBuilder" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/FontBuilder.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/font/FontBuilder.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="128" y="204"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -153,7 +153,7 @@
     </display>  
   </class>  
   <class id="16" language="java" name="org.jrebirth.core.resource.color.GrayColor" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/GrayColor.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/color/GrayColor.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="599" y="969"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -163,7 +163,7 @@
     </display>  
   </class>  
   <class id="17" language="java" name="org.jrebirth.core.resource.color.ColorBuilder" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/ColorBuilder.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/color/ColorBuilder.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="445" y="207"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -174,7 +174,7 @@
   </class>  
   <interface id="18" language="java" name="org.jrebirth.core.resource.factory.ResourceBuilder" 
     project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/factory/ResourceBuilder.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/factory/ResourceBuilder.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="104" y="46"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -184,7 +184,7 @@
     </display>  
   </interface>  
   <class id="19" language="java" name="org.jrebirth.core.resource.color.WebColor" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/WebColor.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/color/WebColor.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1196" y="991"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -194,7 +194,7 @@
     </display>  
   </class>  
   <class id="20" language="java" name="org.jrebirth.core.resource.color.ColorItemBase" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/ColorItemBase.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/color/ColorItemBase.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1230" y="305"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -204,7 +204,7 @@
     </display>  
   </class>  
   <interface id="21" language="java" name="org.jrebirth.core.resource.color.ColorItem" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/color/ColorItem.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/color/ColorItem.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1213" y="157"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -214,7 +214,7 @@
     </display>  
   </interface>  
   <interface id="22" language="java" name="org.jrebirth.core.resource.ResourceItem" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/ResourceItem.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/ResourceItem.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1413" y="45"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -224,7 +224,7 @@
     </display>  
   </interface>  
   <class id="23" language="java" name="org.jrebirth.core.resource.AbstractBaseParams" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/AbstractBaseParams.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/AbstractBaseParams.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="535" y="739"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -234,7 +234,7 @@
     </display>  
   </class>  
   <interface id="24" language="java" name="org.jrebirth.core.resource.font.FontItem" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/FontItem.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/font/FontItem.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1564" y="160"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -244,7 +244,7 @@
     </display>  
   </interface>  
   <class id="25" language="java" name="org.jrebirth.core.resource.font.FontItemBase" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/font/FontItemBase.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/font/FontItemBase.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1551" y="310"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -254,7 +254,7 @@
     </display>  
   </class>  
   <interface id="26" language="java" name="org.jrebirth.core.resource.image.ImageItem" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/image/ImageItem.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/image/ImageItem.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1044" y="157"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -264,7 +264,7 @@
     </display>  
   </interface>  
   <interface id="27" language="java" name="org.jrebirth.core.resource.image.ImageParams" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/image/ImageParams.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/image/ImageParams.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="699" y="335"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -274,7 +274,7 @@
     </display>  
   </interface>  
   <class id="28" language="java" name="org.jrebirth.core.resource.image.ImageBuilder" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/image/ImageBuilder.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/image/ImageBuilder.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="742" y="206"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -284,7 +284,7 @@
     </display>  
   </class>  
   <class id="29" language="java" name="org.jrebirth.core.resource.image.LocalImage" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/image/LocalImage.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/image/LocalImage.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="889" y="496"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -294,7 +294,7 @@
     </display>  
   </class>  
   <class id="30" language="java" name="org.jrebirth.core.resource.image.ImageItemBase" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/core/resource/image/ImageItemBase.java" binary="false" 
+    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/resource/image/ImageItemBase.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1052" y="305"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 

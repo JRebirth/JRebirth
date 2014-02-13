@@ -286,7 +286,7 @@ The 0.7.2 archetype has been upgraded to fit with new command and application cl
 
 
 - Add OnAction annotation
-JRebirth provides a new feature that allow handling events with annotation, a sample is available here : [Annotation Junit tests](https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth/core/src/test/java/org/jrebirth/core/ui/annotation).
+JRebirth provides a new feature that allow handling events with annotation, a sample is available here : [Annotation Junit tests](https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth/core/src/test/java/org/jrebirth/af/core/ui/annotation).
 
 
 - Add Touch and Gesture events
@@ -310,7 +310,7 @@ WaveType usage has been improved (most convenient ot use)
 
 
 - Provide FXMLModel
-FXML integration has been simplified, you can just use a FXMLModel with a fxml file, check a sample here : [FXML Junit test](https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth/core/src/test/java/org/jrebirth/core/ui/fxml).
+FXML integration has been simplified, you can just use a FXMLModel with a fxml file, check a sample here : [FXML Junit test](https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth/core/src/test/java/org/jrebirth/af/core/ui/fxml).
 
 
 - Merge Event Tracking with new Logging way
@@ -322,7 +322,7 @@ A new mecanism to load properties has been created, it allows to use custom para
 
 
 - Refactor Resources Management
-Usage of resources has been improved (font, colors, parameters), check sample test classes to learn more : [Junit Tests](https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth/core/src/test/java/org/jrebirth/core/resource).
+Usage of resources has been improved (font, colors, parameters), check sample test classes to learn more : [Junit Tests](https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth/core/src/test/java/org/jrebirth/af/core/resource).
 
 
 - Improve site deployment
