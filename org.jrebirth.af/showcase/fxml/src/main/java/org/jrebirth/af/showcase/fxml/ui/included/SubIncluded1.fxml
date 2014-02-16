@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<BorderPane id="BorderPane" xmlns:fx="http://javafx.com/fxml" fx:controller="org.jrebirth.showcase.fxml.ui.included.Sub1Controller">
+<BorderPane id="BorderPane" xmlns:fx="http://javafx.com/fxml" fx:controller="org.jrebirth.af.showcase.fxml.ui.included.Sub1Controller">
 	<center>
 		<TextArea fx:id="textArea" prefWidth="400.0" prefHeight="200" wrapText="true" />
 	</center>
