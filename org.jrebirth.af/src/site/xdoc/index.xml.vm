@@ -67,14 +67,15 @@
 
 			<ul>
 				<li>
-					<a name="Maven Central" href="http://search.maven.org/#search|ga|1|g%3A%22org.jrebirth%22">GetIt from Maven Central</a>
+					<a name="Maven Central" href="http://search.maven.org/#search|ga|1|g%3A%22org.jrebirth%22">from Maven Central</a>
                 </li>
 				<li>
-                    <a name="Oss.JFrog.Org" href="https://oss.jfrog.org/repo/org/jrebirth/af/">Get It from OJO</a>
-                </li>
-				<li>
-					<a name="JCenter" href="http://jcenter.bintray.com/org/jrebirth/af">Get It from JCenter</a>
+					<a name="JCenter" href="http://jcenter.bintray.com/org/jrebirth/af">from JCenter</a>
 				</li>
+				<li>
+                    <a name="Oss.JFrog.Org" href="https://oss.jfrog.org/repo/org/jrebirth/af/">from OJO</a>
+                </li>
+				
 				<li>
 					<a href="http://apps.jrebirth.org/org.jrebirth.af/JRebirth-${project.version}.tar.gz">JRebirth ${project.version} .tar.gz</a>
 				</li>
