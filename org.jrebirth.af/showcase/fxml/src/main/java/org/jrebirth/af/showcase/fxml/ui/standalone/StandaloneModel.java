@@ -14,7 +14,7 @@ public class StandaloneModel extends DefaultFXMLModel<StandaloneModel> {
      */
     @Override
     protected String getFXMLPath() {
-        return "org/jrebirth/showcase/fxml/ui/standalone/Standalone.fxml";
+        return "org/jrebirth/af/showcase/fxml/ui/standalone/Standalone.fxml";
     }
 
     /**
@@ -22,7 +22,7 @@ public class StandaloneModel extends DefaultFXMLModel<StandaloneModel> {
      */
     @Override
     protected String getFXMLBundlePath() {
-        return "org/jrebirth/showcase/fxml/ui/standalone/Standalone";
+        return "org/jrebirth/af/showcase/fxml/ui/standalone/Standalone";
     }
 
     /**
