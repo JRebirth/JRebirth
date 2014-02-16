@@ -11,7 +11,7 @@ import org.jrebirth.af.core.ui.DefaultView;
 
 public class EmbeddedView extends DefaultView<EmbeddedModel, AnchorPane, EmbeddedController> {
 
-    FXMLItem ROOT_EMBEDDED_FXML = Resources.create(new FXML("org.jrebirth.showcase.fxml.ui.embedded", "Embedded"));
+    FXMLItem ROOT_EMBEDDED_FXML = Resources.create(new FXML("org.jrebirth.af.showcase.fxml.ui.embedded", "Embedded"));
 
     private BorderPane borderPane;
 
