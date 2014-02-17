@@ -68,6 +68,13 @@
 			<repository>http://repo.jrebirth.org/jrebirth-snapshot-local</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
+		<archetype>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>archetype</artifactId>
+			<version>7.7.1-SNAPSHOT</version>
+			<repository>http://repo.jrebirth.org/jrebirth-snapshot-local</repository>
+			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
+		</archetype>
 		<!-- Releases version -->
 		<archetype>
 			<groupId>org.jrebirth</groupId>
