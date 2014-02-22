@@ -24,7 +24,7 @@
 		<div id="catcherTitle">
 			Simplest
 			<br />
-			JavaFX 2
+			JavaFX
 			<br />
 			Framework
 		</div>
@@ -37,7 +37,7 @@
 			Built according to
 			<a title="KISS principle" href="http://en.wikipedia.org/wiki/KISS_principle" target="_blank">KISS principle</a>
 			<br />
-			Lightweight (lower than 65kb with Pack200)
+			Lightweight (lower than 110kb with Pack200)
 			<br />
 			<a title="Apache 2 Licensed" href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Free</a>
 			&amp;
@@ -47,17 +47,15 @@
 		</div>
 
 		<div id="features"><!-- <h2>JRebirth, Write your JavaFX2 Application more simply !</h2> -->
-			JRebirth JavaFX 2 Application Framework provides a
+			JRebirth JavaFX Application Framework provides a
 			<strong>really simple way to write sophisticated and powerful RIA's applications</strong>
 			. By leveraging the best of previous RIA framework, we can deliver the ultimate one to work cleanly and efficiently with this
 			<strong>awesome API</strong>
 			. Check our
 			<a href="doc/overview.html">overview page</a>
 			to see a diagram illustrating features and layers. Have also a look to
-			<a href="apps/lightningtalk.html">demo applications</a>
-			which were used as
-			<strong>JavaFX 2</strong>
-			presentations.
+			<a href="apps/JRebirthTour.html">JRebirth Tour</a> presentation  
+            which was built with <strong>JRebirth</strong> presentation engine.
 		</div>
 
 		<div id="download" class="box">
