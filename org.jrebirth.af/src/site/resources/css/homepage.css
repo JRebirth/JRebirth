@@ -3,14 +3,14 @@
 /*----------------------------------*/
 
 div#catcher_block h1 {
-	font-size:48px;
+	font-size:44px;
 	margin: 15px 80px 15px 80px;
 	float: left;
 }
 
 div#catcher_block div.catchme {
 	float:left;
-	font-size:26px;
+	font-size:24px;
 	line-height:30px;
 	padding-top:15px;
 	padding-left:40px;
