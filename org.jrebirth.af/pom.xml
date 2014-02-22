@@ -64,11 +64,45 @@
 			<id>jr1</id>
 			<name>Bordes Sébastien</name>
 			<email>seb@jrebirth.org</email>
-			<url>blog.webeo.fr</url>
+			<url>blog.jrebirth.org</url>
 			<organization>JRebirth</organization>
 			<organizationUrl>www.jrebirth.org</organizationUrl>
 			<roles>
 				<role>JRebirth Designer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>jr2</id>
+			<name>Bordes Céline</name>
+			<email>celine@jrebirth.org</email>
+			<url>www.jrebirth.org</url>
+			<organization>JRebirth</organization>
+			<organizationUrl>www.jrebirth.org</organizationUrl>
+			<roles>
+				<role>Graphic Designer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>jr3</id>
+			<name>Rajmahendra Hegde</name>
+			<email>rajmahendra.hegde@jrebirth.org</email>
+			<url>http://twitter.come/rajonjava</url>
+			<organization>JUGChennai</organization>
+			<organizationUrl>http://jugchennai.in</organizationUrl>
+			<roles>
+				<role>JRebirth Developer</role>
+			</roles>
+		</developer>
+
+		<developer>
+			<id>jr4</id>
+			<name>Guruprasad Shenoy</name>
+			<email>guruprasad.shenoy@jrebirth.org</email>
+			<url></url>
+			<organization>JUGChennai</organization>
+			<organizationUrl>http://jugchennai.in</organizationUrl>
+			<roles>
+				<role>JRebirth Developer</role>
 			</roles>
 		</developer>
 	</developers>
