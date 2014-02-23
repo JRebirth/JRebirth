@@ -1,4 +1,4 @@
-package org.jrebirth.af.showcase.fxml.ui.standalone;
+package org.jrebirth.af.showcase.fxml.ui.hybrid;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -7,11 +7,11 @@ import org.jrebirth.af.core.ui.View;
 import org.jrebirth.af.core.ui.fxml.AbstractFXMLController;
 
 /**
- * The class <strong>StandaloneController</strong>.
+ * The class <strong>HybridController</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class StandaloneController extends AbstractFXMLController<StandaloneModel, View<StandaloneModel, ?, ?>> {
+public class HybridController extends AbstractFXMLController<HybridModel, View<HybridModel, ?, ?>> {
 
     /**
      * {@inheritDoc}
