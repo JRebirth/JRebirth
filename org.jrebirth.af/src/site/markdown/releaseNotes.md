@@ -3,7 +3,7 @@
 Release Notes
 ==============
 
-7.7.22 - ["Palladium"](https://www.youtube.com/watch?v=Eo4-_9OE3YA) Release 2014-03-31
+7.7.1 - ["Palladium"](https://www.youtube.com/watch?v=Eo4-_9OE3YA) Release 2014-03-31
 -----------------------------------------
 
 This version provides some enhancements
