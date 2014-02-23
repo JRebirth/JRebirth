@@ -31,10 +31,16 @@ import org.jrebirth.af.core.resource.Resources;
 public class FXML extends AbstractBaseParams implements FXMLParams {
 
     /** The path separator used by fxml declaration. */
-    private static final String PATH_SEPARATOR = "/";
+    public static final String PATH_SEPARATOR = "/";
 
     /** The dot separator used by fxml declaration. */
-    private static final String DOT_SEPARATOR = ".";
+    public static final String DOT_SEPARATOR = "\\.";
+
+    /** The fxml file extension. */
+    public static final String FXML_EXT = ".fxml";
+
+    /** The resource bundle file extension. */
+    // public static final String BUNDLE_EXT = ".properties";
 
     /** The absolute path used to retrieved fxml file and resource bundle. */
     private final StringProperty absolutePath = new SimpleStringProperty(""); // Avoid NPE for absolute path
@@ -58,9 +64,9 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
      */
     public FXML(final String fxmlPath, final String fxmlName, final String bundlePath, final String bundleName) {
         super();
-        this.absolutePath.set(fxmlPath.replace(DOT_SEPARATOR, PATH_SEPARATOR));
+        this.absolutePath.set(fxmlPath.replaceAll(DOT_SEPARATOR, PATH_SEPARATOR));
         this.fxmlName.set(fxmlName);
-        this.absoluteBundlePath.set(bundlePath.replace(DOT_SEPARATOR, PATH_SEPARATOR));
+        this.absoluteBundlePath.set(bundlePath.replaceAll(DOT_SEPARATOR, PATH_SEPARATOR));
         this.bundleName.set(bundleName);
     }
 

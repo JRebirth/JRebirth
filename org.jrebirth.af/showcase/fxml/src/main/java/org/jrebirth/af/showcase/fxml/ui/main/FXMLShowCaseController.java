@@ -41,16 +41,16 @@ public final class FXMLShowCaseController extends DefaultController<FXMLShowCase
 
         // Manage Ui Command Button
         linkWave(getView().getShowIncluded(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
-                WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.IncludedFxml)/* , stackName */);
+                WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.IncludedFxml));
 
         linkWave(getView().getShowEmbedded(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
-                WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.ViewEmbeddedFxml)/* , stackName */);
+                WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.ViewEmbeddedFxml));
 
         linkWave(getView().getShowStandalone(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
-                WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.StandaloneFxml)/* , stackName */);
+                WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.StandaloneFxml));
 
         linkWave(getView().getShowHybrid(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
-                WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.HybridFxml)/* , stackName */);
+                WaveData.build(StackWaves.PAGE_ENUM, FXMLPage.HybridFxml));
 
     }
 }
