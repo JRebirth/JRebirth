@@ -13,35 +13,8 @@ public class StandaloneModel extends DefaultFXMLModel<StandaloneModel> {
      * {@inheritDoc}
      */
     @Override
-    protected String getFXMLPath() {
-        return "org/jrebirth/af/showcase/fxml/ui/standalone/Standalone.fxml";
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getFXMLBundlePath() {
-        return "org/jrebirth/af/showcase/fxml/ui/standalone/Standalone";
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void fxmlPreInitialize() {
-        // if (getModelObject() != null) {
-        // this.fxmlPath = getModelObject().toString();
-        // }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void initModel() {
         // Nothing to do yet
-
     }
 
 }

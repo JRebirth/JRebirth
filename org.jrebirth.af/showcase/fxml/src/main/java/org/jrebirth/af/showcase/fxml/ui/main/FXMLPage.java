@@ -4,6 +4,7 @@ import org.jrebirth.af.component.ui.stack.PageEnum;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.ui.Model;
+import org.jrebirth.af.core.ui.fxml.DefaultFXMLModel;
 import org.jrebirth.af.showcase.fxml.beans.LoremIpsum;
 import org.jrebirth.af.showcase.fxml.ui.embedded.EmbeddedModel;
 import org.jrebirth.af.showcase.fxml.ui.hybrid.HybridModel;
@@ -48,7 +49,7 @@ public enum FXMLPage implements PageEnum {
                 modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(StandaloneModel.class);
                 break;
             case HybridFxml:
-                modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(HybridModel.class);
+                modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(HybridModel.class, DefaultFXMLModel.KEYPART_FXML_PREFIX + "org.jrebirth.af.showcase.fxml.ui.hybrid.Hybrid");
                 break;
             case IncludedFxml:
                 modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(IncludedModel.class, new LoremIpsum());

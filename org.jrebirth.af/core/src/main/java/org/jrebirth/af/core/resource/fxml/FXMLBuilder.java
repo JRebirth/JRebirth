@@ -33,12 +33,6 @@ public final class FXMLBuilder extends AbstractResourceBuilder<FXMLItem, FXMLPar
     /** The class logger. */
     // private static final Logger LOGGER = LoggerFactory.getLogger(FXMLBuilder.class);
 
-    /** The fxml file extension. */
-    private static final String FXML_EXT = ".fxml";
-
-    /** The resource bundle file extension. */
-    // private static final String BUNDLE_EXT = ".properties";
-
     /**
      * {@inheritDoc}
      */
@@ -61,7 +55,7 @@ public final class FXMLBuilder extends AbstractResourceBuilder<FXMLItem, FXMLPar
      */
     private FXMLComponent buildFXMLComponent(final FXML fxmlParam) {
 
-        return FXMLUtils.loadFXML(null, fxmlParam.getFxmlPath() + FXML_EXT, fxmlParam.getBundlePath());
+        return FXMLUtils.loadFXML(null, fxmlParam.getFxmlPath() + FXML.FXML_EXT, fxmlParam.getBundlePath());
     }
 
 }

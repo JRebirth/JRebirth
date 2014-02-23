@@ -119,7 +119,7 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
      * 
      * @return the FXML controller
      */
-    public FXMLController getFXMLController() {
+    public FXMLController<M, ?> getFXMLController() {
         return this.fxmlComponent.getController();
     }
 

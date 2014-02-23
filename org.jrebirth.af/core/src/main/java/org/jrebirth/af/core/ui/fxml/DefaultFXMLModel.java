@@ -17,6 +17,7 @@
  */
 package org.jrebirth.af.core.ui.fxml;
 
+import org.jrebirth.af.core.resource.fxml.FXML;
 import org.jrebirth.af.core.resource.fxml.FXMLItem;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.Wave;
@@ -30,6 +31,12 @@ import org.jrebirth.af.core.wave.Wave;
  * @author Sébastien Bordes
  */
 public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
+
+    /** The key part prefix used to attach the fxml path to this class. */
+    public static final String KEYPART_FXML_PREFIX = "fxml:";
+
+    /** The key part prefix used to attach the resource bundle path to this class. */
+    public static final String KEYPART_RB_PREFIX = "rb:";
 
     /** The fxml path. */
     private String fxmlPath;
@@ -69,17 +76,41 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
      */
     @Override
     protected void fxmlPreInitialize() {
+
+        // Define fxml path and resource bundle path according to key parts provided
+
+        // If an FXMLItem is provided, simply map it to the internal item handle
         if (!getListKeyPart().isEmpty() && getListKeyPart().get(0) instanceof FXMLItem) {
 
             this.fxmlItem = (FXMLItem) getListKeyPart().get(0);
 
+            // if the first key part is a string that begins with fxml:
+        } else if (!getListKeyPart().isEmpty() && getListKeyPart().get(0).toString().startsWith(KEYPART_FXML_PREFIX)) {
+
+            // Use the string provided and append FXML extension
+            final String baseName = getListKeyPart().get(0).toString().substring(KEYPART_FXML_PREFIX.length());
+            this.fxmlPath = baseName.replaceAll(FXML.DOT_SEPARATOR, FXML.PATH_SEPARATOR) + FXML.FXML_EXT;
+
+            // if the second key part is a string that begins with rb:
+            if (getListKeyPart().size() > 1 && getListKeyPart().get(1).toString().startsWith(KEYPART_RB_PREFIX)) {
+                this.resourcePath = getListKeyPart().get(1).toString().substring(KEYPART_RB_PREFIX.length()).replaceAll(FXML.DOT_SEPARATOR, FXML.PATH_SEPARATOR);
+            } else {
+                // Otherwise use the same base name as fxml file
+                this.resourcePath = baseName;
+            }
+
         } else {
-            if (!getListKeyPart().isEmpty()) {
-                this.fxmlPath = getListKeyPart().get(0).toString();
-            }
-            if (getListKeyPart().size() > 1) {
-                this.resourcePath = getListKeyPart().get(1).toString();
-            }
+
+            // Otherwise use the current class name to define the fxml and resource bundle file names
+            String baseName = this.getClass().getCanonicalName();
+            // Remove the Model suffix if any
+            baseName = baseName.substring(0, baseName.lastIndexOf(Model.class.getSimpleName()));
+            // Replace . by / for the fxml loader
+            baseName = baseName.replaceAll(FXML.DOT_SEPARATOR, FXML.PATH_SEPARATOR);
+
+            this.fxmlPath = baseName + FXML.FXML_EXT;
+            this.resourcePath = baseName;
+
         }
     }
 
