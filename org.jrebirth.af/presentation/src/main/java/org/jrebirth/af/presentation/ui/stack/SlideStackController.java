@@ -37,12 +37,12 @@ import org.jrebirth.af.presentation.command.ShowPreviousSlideCommand;
 import org.jrebirth.af.presentation.command.ShowSlideMenuCommand;
 
 /**
- * The class <strong>StackController</strong>.
+ * The class <strong>SlideStackController</strong>.
  * 
  * @author Sébastien Bordes
  * 
  */
-public final class StackController extends AbstractController<StackModel, StackView> implements ActionAdapter {
+public final class SlideStackController extends AbstractController<SlideStackModel, SlideStackView> implements ActionAdapter {
 
     /**
      * Default Constructor.
@@ -51,7 +51,7 @@ public final class StackController extends AbstractController<StackModel, StackV
      * 
      * @throws CoreException if an error occurred while creating event handlers
      */
-    public StackController(final StackView view) throws CoreException {
+    public SlideStackController(final SlideStackView view) throws CoreException {
         super(view);
     }
 
@@ -104,7 +104,7 @@ public final class StackController extends AbstractController<StackModel, StackV
      * 
      * @author Sébastien Bordes
      */
-    private class SlideKeyAdapter extends DefaultKeyAdapter<StackController> {
+    private class SlideKeyAdapter extends DefaultKeyAdapter<SlideStackController> {
 
         /**
          * {@inheritDoc}
@@ -128,7 +128,7 @@ public final class StackController extends AbstractController<StackModel, StackV
      * 
      * @author Sébastien Bordes
      */
-    private class SlideMouseAdapter extends DefaultMouseAdapter<StackController> {
+    private class SlideMouseAdapter extends DefaultMouseAdapter<SlideStackController> {
 
         /**
          * {@inheritDoc}

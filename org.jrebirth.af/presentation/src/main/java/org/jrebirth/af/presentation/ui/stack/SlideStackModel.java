@@ -25,6 +25,7 @@ import javafx.animation.ParallelTransitionBuilder;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 
+import org.jrebirth.af.core.annotation.Singleton;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.Wave;
@@ -37,15 +38,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The class <strong>StackModel</strong>.
+ * The class <strong>SlideStackModel</strong>.
  * 
  * @author Sébastien Bordes
  * 
  */
-public final class StackModel extends DefaultModel<StackModel, StackView> {
+public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideStackView> {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(StackModel.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SlideStackModel.class);
 
     /** The Current Slide Position. */
     private int slidePosition;
@@ -57,6 +58,7 @@ public final class StackModel extends DefaultModel<StackModel, StackView> {
     private SlideModel<SlideStep> selectedSlideModel;
 
     /** Store a strong reference to the service to avoid reloading. */
+    @Singleton
     private PresentationService presentationService;
 
     // private final Map<String, Double> animationRate = new HashMap<>();
@@ -109,10 +111,7 @@ public final class StackModel extends DefaultModel<StackModel, StackView> {
     /**
      * @return Returns the presentationService.
      */
-    public PresentationService getPresentationService() {
-        if (this.presentationService == null) {
-            this.presentationService = getService(PresentationService.class);
-        }
+    protected PresentationService getPresentationService() {
         return this.presentationService;
     }
 
