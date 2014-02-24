@@ -27,7 +27,7 @@ import org.jrebirth.af.core.ui.annotation.RootNodeId;
 
 /**
  * 
- * The class <strong>SlidesView</strong>.
+ * The class <strong>SlideStackView</strong>.
  * 
  * The main view of the JavaFX 2.0 Presentation.
  * 
@@ -35,7 +35,7 @@ import org.jrebirth.af.core.ui.annotation.RootNodeId;
  * 
  */
 @RootNodeId("SlideStack")
-public final class StackView extends AbstractView<StackModel, StackPane, StackController> {
+public final class SlideStackView extends AbstractView<SlideStackModel, StackPane, SlideStackController> {
 
     /**
      * Default Constructor.
@@ -44,7 +44,7 @@ public final class StackView extends AbstractView<StackModel, StackPane, StackCo
      * 
      * @throws CoreException if build fails
      */
-    public StackView(final StackModel model) throws CoreException {
+    public SlideStackView(final SlideStackModel model) throws CoreException {
         super(model);
     }
 
