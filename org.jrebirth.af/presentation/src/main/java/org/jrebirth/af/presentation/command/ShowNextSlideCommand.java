@@ -19,7 +19,7 @@ package org.jrebirth.af.presentation.command;
 
 import org.jrebirth.af.core.command.DefaultUICommand;
 import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.presentation.ui.stack.StackModel;
+import org.jrebirth.af.presentation.ui.stack.SlideStackModel;
 
 /**
  * The class <strong>ShowNextSlideCommand</strong>.
@@ -34,7 +34,7 @@ public final class ShowNextSlideCommand extends DefaultUICommand {
      */
     @Override
     protected void execute(final Wave wave) {
-        getModel(StackModel.class).next();
+        getModel(SlideStackModel.class).next();
     }
 
 }
