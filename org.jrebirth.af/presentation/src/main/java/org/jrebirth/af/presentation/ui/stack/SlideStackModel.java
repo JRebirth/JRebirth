@@ -25,7 +25,6 @@ import javafx.animation.ParallelTransitionBuilder;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.annotation.Singleton;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.Wave;
@@ -58,7 +57,7 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
     private SlideModel<SlideStep> selectedSlideModel;
 
     /** Store a strong reference to the service to avoid reloading. */
-    @Singleton
+    // @Singleton
     private PresentationService presentationService;
 
     // private final Map<String, Double> animationRate = new HashMap<>();
@@ -112,6 +111,9 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
      * @return Returns the presentationService.
      */
     protected PresentationService getPresentationService() {
+        if (this.presentationService == null) {
+            this.presentationService = getService(PresentationService.class);
+        }
         return this.presentationService;
     }
 
