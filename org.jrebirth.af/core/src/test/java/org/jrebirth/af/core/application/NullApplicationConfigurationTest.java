@@ -3,7 +3,6 @@ package org.jrebirth.af.core.application;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -11,7 +10,7 @@ import org.junit.Test;
  * 
  * @author Sébastien Bordes
  */
-@Ignore("JavaFX can't be run in headless mode yet")
+// @Ignore("JavaFX can't be run in headless mode yet")
 public class NullApplicationConfigurationTest extends ApplicationTest<NullConfApplication> {
 
     public NullApplicationConfigurationTest() {
