@@ -32,7 +32,7 @@ public class ShowModelCommand extends DefaultMultiBeanCommand<DisplayModelWaveBe
      * {@inheritDoc}
      */
     @Override
-    protected void addSubCommand() {
+    protected void manageSubCommand() {
         addCommandClass(PrepareModelCommand.class);
         addCommandClass(AttachModelCommand.class);
 

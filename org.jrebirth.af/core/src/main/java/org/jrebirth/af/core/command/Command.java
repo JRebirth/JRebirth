@@ -30,15 +30,19 @@ public interface Command extends WaveReady<Command> {
 
     /**
      * Run the command.
+     * 
+     * @return the wave created to launch the command, it allows to track its internal process
      */
-    void run();
+    Wave run();
 
     /**
      * Run the command.
      * 
      * @param wave the wave that have triggered this command
+     * 
+     * @return the wave created to launch the command, it allows to track its internal process
      */
-    void run(final Wave wave);
+    Wave run(final Wave wave);
 
     // /**
     // * Link a parent command.

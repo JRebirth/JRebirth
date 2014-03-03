@@ -32,7 +32,7 @@ public class ShowFadingModelCommand extends DefaultMultiBeanCommand<DisplayModel
      * {@inheritDoc}
      */
     @Override
-    protected void addSubCommand() {
+    protected void manageSubCommand() {
         addCommandClass(ShowModelCommand.class);
         addCommandClass(FadeTransitionCommand.class);
         addCommandClass(DetachModelCommand.class);

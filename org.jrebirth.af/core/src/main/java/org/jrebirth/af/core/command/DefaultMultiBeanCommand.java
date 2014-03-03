@@ -19,7 +19,6 @@ package org.jrebirth.af.core.command;
 
 import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBean;
 
 /**
@@ -79,49 +78,7 @@ public class DefaultMultiBeanCommand<WB extends WaveBean> extends AbstractMultiC
      * {@inheritDoc}
      */
     @Override
-    protected void addSubCommand() {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveCancelled(final Wave wave) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveDestroyed(final Wave wave) {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveCreated(final Wave wave) {
-        // Nothing to do yet
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveSent(final Wave wave) {
-        // Nothing to do yet
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void waveProcessed(final Wave wave) {
+    protected void manageSubCommand() {
         // Nothing to do yet
     }
 
