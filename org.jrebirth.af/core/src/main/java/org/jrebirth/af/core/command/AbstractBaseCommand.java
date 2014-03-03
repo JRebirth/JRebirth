@@ -94,7 +94,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
     public AbstractBaseCommand(final RunType runType, final RunnablePriority priority) {
         super();
         // Try to retrieve the RunInto annotation at class level within class hierarchy
-        final RunInto ria = ClassUtility.extractAnnotation(this.getClass(), RunInto.class);
+        final RunInto ria = ClassUtility.getLastClassAnnotation(this.getClass(), RunInto.class);
 
         // First try to get the annotation value
         // Secondly by provided runtType argument
@@ -133,16 +133,16 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      * {@inheritDoc}
      */
     @Override
-    public final void run() {
+    public final Wave run() {
         // No wave was created
-        run(null);
+        return run(null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void run(final Wave wave) {
+    public final Wave run(final Wave wave) {
 
         // If given wave is null
         // Build a default Wave to avoid NullPointerException when
@@ -157,6 +157,8 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
         // Create the runnable that will be run
         // Add the runnable to the runner queue run it as soon as possible
         JRebirth.run(getRunInto(), new CommandRunnable(this.getClass().getSimpleName(), this, commandWave));
+
+        return commandWave;
     }
 
     /**
