@@ -18,12 +18,15 @@
 package org.jrebirth.af.core.command;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.jrebirth.af.core.annotation.Sequential;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.concurrent.RunnablePriority;
 import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBean;
 import org.jrebirth.af.core.wave.WaveBuilder;
@@ -41,14 +44,20 @@ import org.jrebirth.af.core.wave.WaveListener;
  */
 public abstract class AbstractMultiCommand<WB extends WaveBean> extends AbstractBaseCommand<WB> implements MultiCommand<WB>, WaveListener {
 
+    /** The default sequential value, could be overridden by annotation or constructor argument. */
+    private static final Boolean DEFAULT_SEQUENTIAL_VALUE = Boolean.TRUE;
+
     /** The command is running. */
     private final AtomicBoolean running = new AtomicBoolean(false);
 
     /** The list of command that will be chained. */
     private final List<Class<? extends Command>> commandList = new ArrayList<>();
 
+    /** The list of pending waves triggered by each command when launched in parallel. */
+    private final List<Wave> pendingWaves = Collections.synchronizedList(new ArrayList<Wave>());
+
     /** Flag that indicate if commands must be run sequentially(true) or in parallel(false). */
-    private final boolean sequential;
+    private boolean sequential;
 
     /** The index of the last command performed. */
     private int commandRunIndex;
@@ -63,6 +72,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      */
     public AbstractMultiCommand(final RunType runInto) {
         this(runInto, true);
+        initSequential(null);
     }
 
     /**
@@ -72,7 +82,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      */
     public AbstractMultiCommand(final boolean sequential) {
         super();
-        this.sequential = sequential;
+        initSequential(sequential);
     }
 
     /**
@@ -83,7 +93,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      */
     public AbstractMultiCommand(final RunType runInto, final boolean sequential) {
         super(runInto, null);
-        this.sequential = sequential;
+        initSequential(sequential);
     }
 
     /**
@@ -95,6 +105,39 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      */
     public AbstractMultiCommand(final RunType runInto, final RunnablePriority priority, final boolean sequential) {
         super(runInto, priority);
+        initSequential(sequential);
+    }
+
+    /**
+     * Define the sequential value.
+     * 
+     * It will try to load the annotation value, then the parameter given to constructor. If none of them have been used the default false value will be used.
+     * 
+     * @param sequential the constructor parameter
+     */
+    private void initSequential(Boolean sequential) {
+
+        // Try to retrieve the Sequential annotation at class level within class hierarchy
+        final Sequential seq = ClassUtility.getLastClassAnnotation(this.getClass(), Sequential.class);
+
+        // First try to get the annotation value (if present
+        // Secondly by provided runtType argument
+        // Thirdly (default case) use FALSE value
+        setSequential(seq == null ? sequential == null ? DEFAULT_SEQUENTIAL_VALUE : sequential : seq.value());
+
+    }
+
+    /**
+     * @return Returns the sequential.
+     */
+    protected boolean isSequential() {
+        return sequential;
+    }
+
+    /**
+     * @param sequential The sequential to set.
+     */
+    protected void setSequential(boolean sequential) {
         this.sequential = sequential;
     }
 
@@ -104,14 +147,11 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     @Override
     public final void ready() throws CoreException {
 
-        addSubCommand();
+        manageSubCommand();
 
         for (final Class<? extends Command> commandClass : this.commandList) {
             getLocalFacade().retrieve(commandClass);
         }
-
-        // Search OnWave annotation to manage auto wave handler setup
-        manageOnWaveAnnotation();
 
         initCommand();
     }
@@ -124,9 +164,9 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     protected abstract void initCommand();
 
     /**
-     * This method must be used to add sub command.
+     * This method must be used to add sub command by calling {@link #addCommandClass(Class)}.
      */
-    protected abstract void addSubCommand();
+    protected abstract void manageSubCommand();
 
     /**
      * {@inheritDoc}
@@ -157,7 +197,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     @Override
     protected void execute(final Wave wave) {
 
-        if (this.sequential) {
+        if (isSequential()) {
 
             // Store the wave when we are running the first command
             synchronized (this) {
@@ -178,9 +218,16 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
             }
 
         } else {
+            // Store the orignal wave to be able to mark it as consumed when all of these sub comamnds are achieved
+            this.waveSource = wave;
+
             // Launch all sub command in parallel
             for (final Class<? extends Command> commandClass : this.commandList) {
-                getLocalFacade().retrieve(commandClass).run();
+                Wave commandWave = getLocalFacade().retrieve(commandClass).run();
+                // register to Wave status of all command triggered
+                commandWave.addWaveListener(this);
+                // Store the pending command to know when all command are achieved
+                pendingWaves.add(commandWave);
             }
         }
 
@@ -191,7 +238,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      */
     @Override
     public void waveConsumed(final Wave wave) {
-        if (this.sequential) {
+        if (isSequential()) {
 
             synchronized (this) {
 
@@ -208,6 +255,16 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                     fireConsumed(this.waveSource);
                 }
             }
+        } else {
+
+            // Remove each command that has been performed
+            pendingWaves.remove(wave);
+
+            // If there is no pending waves left, send the waveConsumed event on the MultiCommand wave
+            if (pendingWaves.size() == 0) {
+                fireConsumed(this.waveSource);
+            }
+
         }
     }
 
@@ -221,7 +278,57 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                 // A sub command has failed
                 fireFailed(this.waveSource);
             }
+        } else {
+            synchronized (this) {
+                // A sub command has failed
+                fireFailed(this.waveSource);
+            }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveCancelled(final Wave wave) {
+        // TODO stop pending waves
+        if (isSequential()) {
+
+        } else {
+
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveDestroyed(final Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveCreated(final Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveSent(final Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveProcessed(final Wave wave) {
+        // Nothing to do yet
     }
 
     /**

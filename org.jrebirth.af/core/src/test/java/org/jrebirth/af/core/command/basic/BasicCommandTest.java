@@ -3,28 +3,29 @@ package org.jrebirth.af.core.command.basic;
 import javafx.application.Application;
 
 import org.jrebirth.af.core.application.TestApplication;
+import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
-import org.jrebirth.af.core.facade.CommandFacade;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
+import org.jrebirth.af.core.wave.DefaultWaveListener;
+import org.jrebirth.af.core.wave.Wave;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
 
 /**
  * The class <strong>StageTest</strong>.
  * 
  * @author Sébastien Bordes
  */
-@Ignore("JavaFX can't be run in headless mode yet")
 public class BasicCommandTest {
 
     private static GlobalFacadeBase globalFacade;
 
-    private CommandFacade commandFacade;
+    // private CommandFacade commandFacade;.
+
+    private boolean wait = false;
 
     /**
      * TODO To complete.
@@ -56,12 +57,7 @@ public class BasicCommandTest {
     public void setUp() throws Exception {
 
         // new TestApplication().start(new Stage());
-        this.commandFacade = globalFacade.getCommandFacade();
-    }
-
-    @Test
-    public void openDefaultStage() {
-
+        // this.commandFacade = globalFacade.getCommandFacade();
     }
 
     /**
@@ -71,7 +67,7 @@ public class BasicCommandTest {
      */
     @After
     public void tearDown() throws Exception {
-        this.commandFacade = null;
+        // this.commandFacade = null;
     }
 
     /**
@@ -85,4 +81,30 @@ public class BasicCommandTest {
         globalFacade = null;
     }
 
+    public void runCommand(Class<? extends Command> commandClass) {
+
+        wait = true;
+
+        Wave wave = globalFacade.getCommandFacade().retrieve(commandClass).run();
+
+        wave.addWaveListener(new DefaultWaveListener() {
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void waveConsumed(Wave wave) {
+                wait = false;
+            }
+
+        });
+
+        while (wait) {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
