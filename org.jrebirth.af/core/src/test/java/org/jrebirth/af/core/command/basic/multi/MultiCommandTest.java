@@ -2,9 +2,10 @@ package org.jrebirth.af.core.command.basic.multi;
 
 import org.jrebirth.af.core.command.basic.BasicCommandTest;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
-//@Ignore("JavaFX can't be run in headless mode yet")
+@Ignore("JavaFX can't be run in headless mode yet")
 public class MultiCommandTest extends BasicCommandTest {
 
     @Test
