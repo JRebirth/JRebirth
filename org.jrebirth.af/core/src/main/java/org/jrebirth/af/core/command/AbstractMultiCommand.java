@@ -118,7 +118,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     private void initSequential(Boolean sequential) {
 
         // Try to retrieve the Sequential annotation at class level within class hierarchy
-        final Sequential seq = ClassUtility.getLastClassAnnotation(this.getClass(), Sequential.class);
+        final Sequential seq = ClassUtility.extractAnnotation(this.getClass(), Sequential.class);
 
         // First try to get the annotation value (if present
         // Secondly by provided runtType argument
