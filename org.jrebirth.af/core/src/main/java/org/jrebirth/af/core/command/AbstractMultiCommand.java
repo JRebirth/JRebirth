@@ -115,10 +115,10 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * 
      * @param sequential the constructor parameter
      */
-    private void initSequential(Boolean sequential) {
+    private void initSequential(final Boolean sequential) {
 
         // Try to retrieve the Sequential annotation at class level within class hierarchy
-        final Sequential seq = ClassUtility.extractAnnotation(this.getClass(), Sequential.class);
+        final Sequential seq = ClassUtility.getLastClassAnnotation(this.getClass(), Sequential.class);
 
         // First try to get the annotation value (if present
         // Secondly by provided runtType argument
@@ -131,13 +131,13 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * @return Returns the sequential.
      */
     protected boolean isSequential() {
-        return sequential;
+        return this.sequential;
     }
 
     /**
      * @param sequential The sequential to set.
      */
-    protected void setSequential(boolean sequential) {
+    protected void setSequential(final boolean sequential) {
         this.sequential = sequential;
     }
 
@@ -223,11 +223,11 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
             // Launch all sub command in parallel
             for (final Class<? extends Command> commandClass : this.commandList) {
-                Wave commandWave = getLocalFacade().retrieve(commandClass).run();
+                final Wave commandWave = getLocalFacade().retrieve(commandClass).run();
                 // register to Wave status of all command triggered
                 commandWave.addWaveListener(this);
                 // Store the pending command to know when all command are achieved
-                pendingWaves.add(commandWave);
+                this.pendingWaves.add(commandWave);
             }
         }
 
@@ -258,10 +258,10 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
         } else {
 
             // Remove each command that has been performed
-            pendingWaves.remove(wave);
+            this.pendingWaves.remove(wave);
 
             // If there is no pending waves left, send the waveConsumed event on the MultiCommand wave
-            if (pendingWaves.size() == 0) {
+            if (this.pendingWaves.size() == 0) {
                 fireConsumed(this.waveSource);
             }
 

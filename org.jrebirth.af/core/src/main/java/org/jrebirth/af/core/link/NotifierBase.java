@@ -39,8 +39,8 @@ import org.jrebirth.af.core.service.basic.TaskTrackerService;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.JRebirthWaves;
 import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.Wave.Status;
+import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.checker.WaveChecker;
 
 /**

@@ -21,7 +21,6 @@ import org.jrebirth.af.core.resource.style.StyleSheetItem;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
-
 /**
  * The class <strong>JRebirthStyles</strong>.
  * 

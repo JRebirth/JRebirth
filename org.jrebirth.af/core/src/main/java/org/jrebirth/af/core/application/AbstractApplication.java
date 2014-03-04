@@ -238,7 +238,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     private void loadConfigurationFiles() {
 
         // Parse the first annotation found (manage overriding)
-        final Configuration conf = ClassUtility.extractAnnotation(this.getClass(), Configuration.class);
+        final Configuration conf = ClassUtility.getLastClassAnnotation(this.getClass(), Configuration.class);
 
         // Conf variable cannot be null because it was defined in this class
         // It's possible to discard default behaviour by setting an empty string to the value.
@@ -256,7 +256,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     private void loadMessagesFiles() {
 
         // Parse the first annotation found (manage overriding)
-        final Localized local = ClassUtility.extractAnnotation(this.getClass(), Localized.class);
+        final Localized local = ClassUtility.getLastClassAnnotation(this.getClass(), Localized.class);
 
         // Conf variable cannot be null because it was defined in this class
         // It's possible to discard default behavior by setting an empty string to the value.

@@ -262,14 +262,4 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
         return obj;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Object getFirstValue() {
-        Object obj = null;
-        if (this.keyPartList.size() >= 1) {
-            obj = this.keyPartList.get(0);
-        }
-        return obj;
-    }
 }

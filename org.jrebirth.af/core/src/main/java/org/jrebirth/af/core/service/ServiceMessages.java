@@ -25,7 +25,6 @@ import org.jrebirth.af.core.resource.i18n.MessageItem;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
-
 /**
  * The class <strong>ServiceMessages</strong>.
  * 

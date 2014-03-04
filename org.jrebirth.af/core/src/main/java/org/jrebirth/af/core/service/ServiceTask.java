@@ -33,13 +33,13 @@ import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.core.wave.Wave.Status;
 import org.jrebirth.af.core.wave.WaveBuilder;
 import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.core.wave.WaveGroup;
 import org.jrebirth.af.core.wave.WaveItem;
 import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.WaveTypeBase;
-import org.jrebirth.af.core.wave.Wave.Status;
 
 /**
  * The class <strong>ServiceTask</strong>.

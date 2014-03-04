@@ -69,9 +69,6 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
     @Override
     public final void ready() throws CoreException {
 
-        // Search OnWave annotation to manage auto wave handler setup
-        manageOnWaveAnnotation();
-
         // Call the custom method
         initCommand();
     }
