@@ -21,7 +21,6 @@ import org.jrebirth.af.core.resource.image.ImageItem;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
-
 /**
  * The class <strong>JRebirthImages</strong>.
  * 

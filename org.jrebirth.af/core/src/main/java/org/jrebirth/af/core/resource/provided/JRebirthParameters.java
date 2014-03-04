@@ -27,7 +27,6 @@ import org.jrebirth.af.core.resource.style.StyleSheet;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
-
 /**
  * The class <strong>JRebirthParameters</strong>.
  * 

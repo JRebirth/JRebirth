@@ -39,7 +39,7 @@ public interface FacadeReady<R extends FacadeReady<R>> extends ModelReady {
      * 
      * @throws CoreException if the initialization fails
      */
-    void ready() throws CoreException;
+    void setup() throws CoreException;
 
     /**
      * Return the local facade used to manage singleton.

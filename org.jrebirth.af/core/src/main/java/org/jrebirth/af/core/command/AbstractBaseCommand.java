@@ -94,7 +94,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
     public AbstractBaseCommand(final RunType runType, final RunnablePriority priority) {
         super();
         // Try to retrieve the RunInto annotation at class level within class hierarchy
-        final RunInto ria = ClassUtility.extractAnnotation(this.getClass(), RunInto.class);
+        final RunInto ria = ClassUtility.getLastClassAnnotation(this.getClass(), RunInto.class);
 
         // First try to get the annotation value
         // Secondly by provided runtType argument

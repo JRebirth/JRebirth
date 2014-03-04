@@ -18,7 +18,6 @@
 package org.jrebirth.af.core.ui.handler;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
@@ -201,11 +200,9 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
         try {
             final Method method = ctrlClass.getDeclaredMethod(methodName, event.getClass());
 
-            method.setAccessible(true);
-            method.invoke(this.callbackObject, event);
-            method.setAccessible(false);
+            ClassUtility.callMethod(method, this.callbackObject, event);
 
-        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+        } catch (NoSuchMethodException | SecurityException | IllegalArgumentException | CoreException e) {
             LOGGER.log(EVENT_HANDLING_IMPOSSIBLE, e);
         }
 

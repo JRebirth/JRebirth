@@ -181,7 +181,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                 register(uniqueKey, readyObject);
 
                 // The component is accessible from facade, let's start its initialization
-                readyObject.ready();
+                readyObject.setup();
 
             } catch (final CoreException ce) {
                 LOGGER.error(COMPONENT_RETRIEVAL_ERROR, ce);

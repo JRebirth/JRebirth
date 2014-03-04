@@ -66,9 +66,6 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
     @Override
     public final void ready() throws CoreException {
 
-        // Search OnWave annotation to manage auto wave handler setup
-        manageOnWaveAnnotation();
-
         // Call the custom method
         initService();
     }

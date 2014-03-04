@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jrebirth.af.core.command.Command;
-import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.facade.FacadeReady;
 import org.jrebirth.af.core.facade.JRebirthEventType;
 import org.jrebirth.af.core.facade.LocalFacade;
@@ -38,7 +37,7 @@ import org.jrebirth.af.core.ui.Model;
  * 
  * @param <R> the class type of the subclass
  */
-public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeReady<R>, ModelReady {
+public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeReady<R> {
 
     /**
      * The facade that manage same kind of object (from Service, Command and Model).
@@ -178,11 +177,5 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_MODEL, this.getClass(), clazz);
         return getLocalFacade().getGlobalFacade().getUiFacade().retrieve(clazz, keyPart);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public abstract void ready() throws CoreException;
 
 }

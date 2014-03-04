@@ -54,7 +54,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
      * {@inheritDoc}
      */
     @Override
-    public final void ready() throws CoreException {
+    protected final void ready() throws CoreException {
 
         // Initialize the current model
         initInternalModel();
@@ -137,7 +137,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
         // Sometimes view can be null
         if (getView() != null) {
             if (this.viewDisplayed) {
-                // Relaod the view
+                // Reload the view
                 getView().reload();
             } else {
                 // Start the view for the first time

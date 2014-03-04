@@ -49,9 +49,6 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
         listen(JRebirthWaves.SHOW_VIEW);
         listen(JRebirthWaves.HIDE_VIEW);
 
-        // Search OnWave annotation
-        manageOnWaveAnnotation();
-
         // Do custom stuff
         initModel();
     }
