@@ -36,10 +36,10 @@ import org.jrebirth.af.core.facade.JRebirthEventType;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.annotation.AutoHandler;
+import org.jrebirth.af.core.ui.annotation.AutoHandler.CallbackObject;
 import org.jrebirth.af.core.ui.annotation.EnumEventType;
 import org.jrebirth.af.core.ui.annotation.OnFinished;
 import org.jrebirth.af.core.ui.annotation.RootNodeId;
-import org.jrebirth.af.core.ui.annotation.AutoHandler.CallbackObject;
 import org.jrebirth.af.core.ui.handler.AnnotationEventHandler;
 import org.jrebirth.af.core.util.ClassUtility;
 
@@ -158,7 +158,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     private void processViewAnnotation() {
 
         // Find the AutoHandler annotation if any because it's optional
-        final AutoHandler ah = ClassUtility.extractAnnotation(this.getClass(), AutoHandler.class);
+        final AutoHandler ah = ClassUtility.getLastClassAnnotation(this.getClass(), AutoHandler.class);
         if (ah != null && ah.value() == CallbackObject.View) {
             this.callbackObject = this;
         } else {
@@ -167,7 +167,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         }
 
         // Find the RootNodeId annotation
-        final RootNodeId rni = ClassUtility.extractAnnotation(this.getClass(), RootNodeId.class);
+        final RootNodeId rni = ClassUtility.getLastClassAnnotation(this.getClass(), RootNodeId.class);
         if (rni != null) {
             getRootNode().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
         }

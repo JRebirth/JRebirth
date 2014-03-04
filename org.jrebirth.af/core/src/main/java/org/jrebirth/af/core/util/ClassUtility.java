@@ -363,7 +363,7 @@ public final class ClassUtility implements UtilMessages {
     }
 
     /**
-     * Extract the first annotation requested found into the class hierarchy.<br />
+     * Extract the last annotation requested found into the class hierarchy.<br />
      * Interfaces are not yet supported.
      * 
      * @param sourceClass the class (wit its parent classes) to inspect
@@ -373,7 +373,7 @@ public final class ClassUtility implements UtilMessages {
      * 
      * @return the request annotation or null if none have been found into the class hierarchy
      */
-    public static <A extends Annotation> A extractAnnotation(final Class<?> sourceClass, final Class<A> annotationClass) {
+    public static <A extends Annotation> A getLastClassAnnotation(final Class<?> sourceClass, final Class<A> annotationClass) {
         A annotation = null;
         Class<?> currentClass = sourceClass;
         while (annotation == null && currentClass != null) {
@@ -457,6 +457,32 @@ public final class ClassUtility implements UtilMessages {
     }
 
     /**
+     * Retrieve all annotation of the given type from the given class.
+     * 
+     * @param cls the class that we want to inspect
+     * @param annotationClass the type of Annotation to find
+     * 
+     * @return the list of annotated fields
+     */
+    public static List<Field> getAnnotatedFields(final Class<?> cls, final Class<? extends Annotation> annotationClass) {
+
+        final List<Field> fieldList = new ArrayList<>();
+
+        for (final Field f : cls.getDeclaredFields()) {
+            if (f.getAnnotation(annotationClass) != null) {
+                fieldList.add(f);
+            }
+        }
+
+        // Add super class methods
+        if (cls.getSuperclass() != null) {
+            fieldList.addAll(getAnnotatedFields(cls.getSuperclass(), annotationClass));
+        }
+
+        return fieldList;
+    }
+
+    /**
      * Call the given method for the instance object even if its visibility is private or protected.
      * 
      * @param method the method to call
@@ -466,7 +492,7 @@ public final class ClassUtility implements UtilMessages {
      * @return the method return
      * @throws CoreException if the method call has failed
      */
-    public static Object callMethod(final Method method, final Object instance, final Object[] parameters) throws CoreException {
+    public static Object callMethod(final Method method, final Object instance, final Object... parameters) throws CoreException {
 
         Object res = null;
 
@@ -487,5 +513,28 @@ public final class ClassUtility implements UtilMessages {
             throw new CoreException(e);
         }
         return res;
+    }
+
+    /**
+     * 
+     */
+    public static void setFieldValue(final Field field, final Object instance, final Object value) throws CoreException {
+
+        try {
+            // store current visibility
+            final boolean accessible = field.isAccessible();
+
+            // let it accessible anyway
+            field.setAccessible(true);
+
+            // Call this method with right parameters
+            field.set(instance, value);
+
+            // Reset default visibility
+            field.setAccessible(accessible);
+
+        } catch (IllegalAccessException | IllegalArgumentException e) {
+            throw new CoreException(e);
+        }
     }
 }

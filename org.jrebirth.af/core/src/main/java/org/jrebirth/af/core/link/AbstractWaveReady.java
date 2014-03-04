@@ -17,14 +17,19 @@
  */
 package org.jrebirth.af.core.link;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.jrebirth.af.core.annotation.BeforeInit;
+import org.jrebirth.af.core.annotation.SkipAnnotation;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.command.CommandBean;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
+import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.facade.JRebirthEventType;
 import org.jrebirth.af.core.facade.WaveReady;
@@ -34,15 +39,13 @@ import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
-import org.jrebirth.af.core.wave.OnWave;
 import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.core.wave.Wave.Status;
 import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveBean;
 import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.core.wave.WaveGroup;
 import org.jrebirth.af.core.wave.WaveType;
-import org.jrebirth.af.core.wave.WaveTypeBase;
-import org.jrebirth.af.core.wave.Wave.Status;
 import org.jrebirth.af.core.wave.checker.WaveChecker;
 
 /**
@@ -58,6 +61,7 @@ import org.jrebirth.af.core.wave.checker.WaveChecker;
  * 
  * @param <R> the class type of the subclass
  */
+@SkipAnnotation(false)
 public abstract class AbstractWaveReady<R extends WaveReady<R>> extends AbstractReady<R> implements WaveReady<R>, LinkMessages {
 
     /** The default fallback wave handle method. */
@@ -71,6 +75,8 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /** The return command class map. */
     private final Map<WaveType, Class<? extends Command>> returnCommandClass = new HashMap<>();
+
+    private Map<String, List<Method>> lifecycleMethod;
 
     /**
      * Short cut method used to retrieve the notifier.
@@ -445,58 +451,48 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     protected abstract void processWave(final Wave wave);
 
     /**
-     * Manage {@link OnWave} annotation (defined on type and method).
+     * {@inheritDoc}
      */
-    protected void manageOnWaveAnnotation() {
+    @SuppressWarnings("unchecked")
+    @Override
+    public void setup() throws CoreException {
 
-        // Retrieve class annotation
-        final OnWave clsOnWave = this.getClass().getAnnotation(OnWave.class);
-        if (clsOnWave != null) {
-            manageUniqueWaveTypeAction(clsOnWave.value(), null);
-            manageMultipleWaveTypeAction(clsOnWave, null);
+        if (ComponentEnhancer.canProcessAnnotation((Class<? extends WaveReady<?>>) this.getClass())) {
+
+            // Search Singleton and Multiton annotation on field
+            ComponentEnhancer.injectComponent(this);
+
+            // Attach custom method configured with custom Lifecycle annotation
+            lifecycleMethod = ComponentEnhancer.defineLifecycleMethod(this);
+
+            // Search OnWave annotation to manage auto wave handler setup
+            ComponentEnhancer.manageOnWaveAnnotation(this);
+
         }
 
-        // Iterate over each annotated Method
-        OnWave onWave = null;
-        for (final Method method : ClassUtility.getAnnotatedMethods(this.getClass(), OnWave.class)) {
-            onWave = method.getAnnotation(OnWave.class);
-            manageUniqueWaveTypeAction(onWave.value(), method);
-            manageMultipleWaveTypeAction(onWave, method);
-        }
+        callAnnotatedMethod(BeforeInit.class);
 
+        ready();
+
+        callAnnotatedMethod(BeforeInit.class);
     }
 
-    /**
-     * Manage unique {@link WaveType} subscription (from value field of {@link OnWave} annotation).
-     * 
-     * @param waveActionName the {@link WaveType} unique name
-     * @param method the wave handler method
-     */
-    private void manageUniqueWaveTypeAction(final String waveActionName, final Method method) {
-
-        // Get the WaveType from the WaveType registry
-        final WaveType wt = WaveTypeBase.getWaveType(waveActionName);
-        if (wt != null) {
-            // Method is not defined or is the default fallback one
-            if (method == null || AbstractWaveReady.PROCESS_WAVE_METHOD_NAME.equals(method.getName())) {
-                // Just listen the WaveType
-                listen(wt);
-            } else {
-                // Listen the WaveType and specify the right method handler
-                listen(null, method, wt);
+    private void callAnnotatedMethod(Class<? extends Annotation> annotationClass) {
+        for (Method method : lifecycleMethod.get(annotationClass.getName())) {
+            try {
+                ClassUtility.callMethod(method, this);
+            } catch (CoreException e) {
+                e.printStackTrace();
             }
         }
+
     }
 
     /**
-     * Manage several {@link WaveType} subscriptions (from types field of {@link OnWave} annotation).
+     * The component is now ready to do custom initialization tasks.
      * 
-     * @param onWave the {@link OnWave} annotation to explore
-     * @param method the wave handler method
+     * @throws CoreException if an error occurred
      */
-    private void manageMultipleWaveTypeAction(final OnWave onWave, final Method method) {
-        for (final String action : onWave.types()) {
-            manageUniqueWaveTypeAction(action, method);
-        }
-    }
+    protected abstract void ready() throws CoreException;
+
 }

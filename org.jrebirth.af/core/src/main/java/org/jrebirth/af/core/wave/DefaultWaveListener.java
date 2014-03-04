@@ -13,7 +13,7 @@ public class DefaultWaveListener implements WaveListener {
      * {@inheritDoc}
      */
     @Override
-    public void waveCreated(Wave wave) {
+    public void waveCreated(final Wave wave) {
         // Nothing to do yet
     }
 
@@ -21,7 +21,7 @@ public class DefaultWaveListener implements WaveListener {
      * {@inheritDoc}
      */
     @Override
-    public void waveSent(Wave wave) {
+    public void waveSent(final Wave wave) {
         // Nothing to do yet
     }
 
@@ -29,7 +29,7 @@ public class DefaultWaveListener implements WaveListener {
      * {@inheritDoc}
      */
     @Override
-    public void waveProcessed(Wave wave) {
+    public void waveProcessed(final Wave wave) {
         // Nothing to do yet
     }
 
@@ -37,7 +37,7 @@ public class DefaultWaveListener implements WaveListener {
      * {@inheritDoc}
      */
     @Override
-    public void waveCancelled(Wave wave) {
+    public void waveCancelled(final Wave wave) {
         // Nothing to do yet
     }
 
@@ -45,7 +45,7 @@ public class DefaultWaveListener implements WaveListener {
      * {@inheritDoc}
      */
     @Override
-    public void waveConsumed(Wave wave) {
+    public void waveConsumed(final Wave wave) {
         // Nothing to do yet
     }
 
@@ -53,7 +53,7 @@ public class DefaultWaveListener implements WaveListener {
      * {@inheritDoc}
      */
     @Override
-    public void waveFailed(Wave wave) {
+    public void waveFailed(final Wave wave) {
         // Nothing to do yet
     }
 
@@ -61,7 +61,7 @@ public class DefaultWaveListener implements WaveListener {
      * {@inheritDoc}
      */
     @Override
-    public void waveDestroyed(Wave wave) {
+    public void waveDestroyed(final Wave wave) {
         // Nothing to do yet
     }
 
