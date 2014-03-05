@@ -477,15 +477,22 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
         callAnnotatedMethod(BeforeInit.class);
     }
 
+    /**
+     * TODO To complete.
+     * 
+     * @param annotationClass
+     */
     private void callAnnotatedMethod(Class<? extends Annotation> annotationClass) {
-        for (Method method : lifecycleMethod.get(annotationClass.getName())) {
-            try {
-                ClassUtility.callMethod(method, this);
-            } catch (CoreException e) {
-                e.printStackTrace();
+        if (lifecycleMethod.get(annotationClass.getName()) != null) {
+            for (Method method : lifecycleMethod.get(annotationClass.getName())) {
+
+                try {
+                    ClassUtility.callMethod(method, this);
+                } catch (CoreException e) {
+                    e.printStackTrace();
+                }
             }
         }
-
     }
 
     /**
