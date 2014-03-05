@@ -147,14 +147,6 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
-    public void release() {
-        this.key = null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public final <S extends Service> S getService(final Class<S> clazz, final Object... keyPart) {
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_SERVICE, this.getClass(), clazz);
         return getLocalFacade().getGlobalFacade().getServiceFacade().retrieve(clazz, keyPart);

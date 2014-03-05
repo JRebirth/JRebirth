@@ -65,6 +65,9 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     /** The source wave that trigger this command. */
     private Wave waveSource;
 
+    /** Cancellation has been requested. */
+    private final AtomicBoolean cancelRequested = new AtomicBoolean(false);
+
     /**
      * Default Constructor.
      * 
@@ -197,40 +200,42 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     @Override
     protected void execute(final Wave wave) {
 
-        if (isSequential()) {
+        // Avoid to continue launching next command if cancellation has been requested
+        if (!this.cancelRequested.get()) {
+            if (isSequential()) {
 
-            // Store the wave when we are running the first command
-            synchronized (this) {
-                if (this.commandRunIndex == 0) {
-                    this.waveSource = wave;
+                // Store the wave when we are running the first command
+                synchronized (this) {
+                    if (this.commandRunIndex == 0) {
+                        this.waveSource = wave;
+                    }
+
+                    if (this.commandList.size() > this.commandRunIndex) {
+                        final Wave subCommandWave = WaveBuilder.create()
+                                .waveGroup(WaveGroup.CALL_COMMAND)
+                                .relatedClass(this.commandList.get(this.commandRunIndex))
+                                .build();
+
+                        subCommandWave.linkWaveBean(wave.getWaveBean());
+                        subCommandWave.addWaveListener(this);
+                        sendWave(subCommandWave);
+                    }
                 }
 
-                if (this.commandList.size() > this.commandRunIndex) {
-                    final Wave subCommandWave = WaveBuilder.create()
-                            .waveGroup(WaveGroup.CALL_COMMAND)
-                            .relatedClass(this.commandList.get(this.commandRunIndex))
-                            .build();
+            } else {
+                // Store the original wave to be able to mark it as consumed when all of these sub comamnds are achieved
+                this.waveSource = wave;
 
-                    subCommandWave.linkWaveBean(wave.getWaveBean());
-                    subCommandWave.addWaveListener(this);
-                    sendWave(subCommandWave);
+                // Launch all sub command in parallel
+                for (final Class<? extends Command> commandClass : this.commandList) {
+                    final Wave commandWave = getLocalFacade().retrieve(commandClass).run();
+                    // register to Wave status of all command triggered
+                    commandWave.addWaveListener(this);
+                    // Store the pending command to know when all command are achieved
+                    this.pendingWaves.add(commandWave);
                 }
-            }
-
-        } else {
-            // Store the orignal wave to be able to mark it as consumed when all of these sub comamnds are achieved
-            this.waveSource = wave;
-
-            // Launch all sub command in parallel
-            for (final Class<? extends Command> commandClass : this.commandList) {
-                final Wave commandWave = getLocalFacade().retrieve(commandClass).run();
-                // register to Wave status of all command triggered
-                commandWave.addWaveListener(this);
-                // Store the pending command to know when all command are achieved
-                this.pendingWaves.add(commandWave);
             }
         }
-
     }
 
     /**
@@ -238,9 +243,8 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      */
     @Override
     public void waveConsumed(final Wave wave) {
-        if (isSequential()) {
-
-            synchronized (this) {
+        synchronized (this) {
+            if (isSequential()) {
 
                 // Move the index to retrieve the next command to run
                 this.commandRunIndex++;
@@ -254,17 +258,16 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                     // No more command to run the MultiCommand is achieved
                     fireConsumed(this.waveSource);
                 }
+            } else {
+
+                // Remove each command that has been performed
+                this.pendingWaves.remove(wave);
+
+                // If there is no pending waves left, send the waveConsumed event on the MultiCommand wave
+                if (this.pendingWaves.size() == 0) {
+                    fireConsumed(this.waveSource);
+                }
             }
-        } else {
-
-            // Remove each command that has been performed
-            this.pendingWaves.remove(wave);
-
-            // If there is no pending waves left, send the waveConsumed event on the MultiCommand wave
-            if (this.pendingWaves.size() == 0) {
-                fireConsumed(this.waveSource);
-            }
-
         }
     }
 
@@ -291,12 +294,13 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      */
     @Override
     public void waveCancelled(final Wave wave) {
-        // TODO stop pending waves
-        if (isSequential()) {
-
-        } else {
-
-        }
+        // Nothing to do yet
+        // cancelRequested.set(true);
+        // if (isSequential()) {
+        //
+        // } else {
+        //
+        // }
     }
 
     /**

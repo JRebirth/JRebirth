@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The class <strong>AfterInit</strong>.
+ * The class <strong>OnRelease</strong>.
  * 
  * @author Sébastien Bordes
  */
@@ -16,12 +16,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface AfterInit {
+public @interface OnRelease {
 
     /**
-     * Define the execution order of all methods performed after initialization.
+     * Define the execution order of all methods performed after release.
      * 
-     * There is no default value
+     * The default level is MethodPriority.NORMAL
      */
     MethodPriority value() default MethodPriority.NORMAL;
 

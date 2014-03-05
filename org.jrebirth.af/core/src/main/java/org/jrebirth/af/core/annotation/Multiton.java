@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  * 
  * @author Sébastien Bordes
  */
-@Target({ ElementType.FIELD })
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
