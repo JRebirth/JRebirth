@@ -60,6 +60,9 @@ public interface LinkMessages extends MessageContainer {
     /** "Error while dispatching a wave". */
     MessageItem WAVE_DISPATCH_ERROR = create(new LogMessage("jrebirth.link.waveDispatchError", JRLevel.Error, JRebirthMarkers.WAVE));
 
+    /** "Error while trying to call annoated method {0} for component {1}. " */
+    MessageItem CALL_ANNOTATED_METHOD_ERROR = create(new LogMessage("jrebirth.link.callAnnotatedMethodError", JRLevel.Error, JRebirthMarkers.LINK));
+
     /** NotifierBase. */
 
     /** "Impossible to load the UnprocessedWaveHandler , will use the default one". */

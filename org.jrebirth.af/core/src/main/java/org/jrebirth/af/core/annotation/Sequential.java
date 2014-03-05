@@ -14,7 +14,7 @@ import org.jrebirth.af.core.command.MultiCommand;
  * 
  * @author Sébastien Bordes
  */
-@Target({ ElementType.TYPE })
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
