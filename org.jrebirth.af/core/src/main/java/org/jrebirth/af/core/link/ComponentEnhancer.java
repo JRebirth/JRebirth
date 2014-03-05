@@ -28,6 +28,7 @@ import java.util.Map;
 import org.jrebirth.af.core.annotation.AfterInit;
 import org.jrebirth.af.core.annotation.BeforeInit;
 import org.jrebirth.af.core.annotation.Multiton;
+import org.jrebirth.af.core.annotation.OnRelease;
 import org.jrebirth.af.core.annotation.Singleton;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
 import org.jrebirth.af.core.command.Command;
@@ -42,7 +43,7 @@ import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
- * The class <strong>ComponentEnhancer</strong>.
+ * The class <strong>ComponentEnhancer</strong> is an utility class used to manage Components Annotations.
  * 
  * @author Sébastien Bordes
  */
@@ -90,12 +91,11 @@ public class ComponentEnhancer {
     }
 
     /**
-     * Inject.
+     * Inject a component into the property of an other.
      * 
      * @param component the component
      * @param field the field
      * @param keyParts the key parts
-     * @throws CoreException the core exception
      */
     private static void inject(final FacadeReady<?> component, final Field field, final Object... keyParts) {
 
@@ -114,28 +114,31 @@ public class ComponentEnhancer {
     }
 
     /**
-     * TODO To complete.
+     * Parse all method to search annotated methods that are attached to a lifecylce phase.
      * 
-     * @param component
-     * @return
+     * @param component the JRebirth component to manage
+     * 
+     * @return the map that store all method that sdhould be call sorted by lefecycle phase
      */
     public static Map<String, List<Method>> defineLifecycleMethod(final WaveReady<?> component) {
 
-        Map<String, List<Method>> lifecycleMethod = new HashMap<>();
+        final Map<String, List<Method>> lifecycleMethod = new HashMap<>();
 
         manageLifecycleAnnotation(component, lifecycleMethod, BeforeInit.class);
         manageLifecycleAnnotation(component, lifecycleMethod, AfterInit.class);
+        manageLifecycleAnnotation(component, lifecycleMethod, OnRelease.class);
 
         return lifecycleMethod;
     }
 
     /**
-     * TODO To complete.
+     * Store annotated method related to a lifecycle phase.
      * 
-     * @param component
-     * @param lifecycleMethod
+     * @param component the JRebirth component to manage
+     * @param lifecycleMethod the map that store methods
+     * @param annotationClass the annotation related to lifecycle phase
      */
-    private static void manageLifecycleAnnotation(final WaveReady<?> component, Map<String, List<Method>> lifecycleMethod, Class<? extends Annotation> annotationClass) {
+    private static void manageLifecycleAnnotation(final WaveReady<?> component, final Map<String, List<Method>> lifecycleMethod, final Class<? extends Annotation> annotationClass) {
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), annotationClass)) {
             if (!lifecycleMethod.containsKey(annotationClass.getName())) {
                 lifecycleMethod.put(annotationClass.getName(), new ArrayList<Method>());

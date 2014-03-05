@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.af.core.annotation.BeforeInit;
+import org.jrebirth.af.core.annotation.OnRelease;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.command.CommandBean;
@@ -76,6 +77,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     /** The return command class map. */
     private final Map<WaveType, Class<? extends Command>> returnCommandClass = new HashMap<>();
 
+    /** A map that store all annotated methods to call sorted by lifecycle phase. */
     private Map<String, List<Method>> lifecycleMethod;
 
     /**
@@ -463,7 +465,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
             ComponentEnhancer.injectComponent(this);
 
             // Attach custom method configured with custom Lifecycle annotation
-            lifecycleMethod = ComponentEnhancer.defineLifecycleMethod(this);
+            this.lifecycleMethod = ComponentEnhancer.defineLifecycleMethod(this);
 
             // Search OnWave annotation to manage auto wave handler setup
             ComponentEnhancer.manageOnWaveAnnotation(this);
@@ -478,18 +480,29 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     }
 
     /**
-     * TODO To complete.
-     * 
-     * @param annotationClass
+     * {@inheritDoc}
      */
-    private void callAnnotatedMethod(Class<? extends Annotation> annotationClass) {
-        if (lifecycleMethod.get(annotationClass.getName()) != null) {
-            for (Method method : lifecycleMethod.get(annotationClass.getName())) {
+    @Override
+    public void release() {
+
+        setKey(null);
+
+        callAnnotatedMethod(OnRelease.class);
+    }
+
+    /**
+     * Call annotated methods corresponding at given lifecycle annotation.
+     * 
+     * @param annotationClass the annotation related to the lifecycle
+     */
+    private void callAnnotatedMethod(final Class<? extends Annotation> annotationClass) {
+        if (this.lifecycleMethod.get(annotationClass.getName()) != null) {
+            for (final Method method : this.lifecycleMethod.get(annotationClass.getName())) {
 
                 try {
                     ClassUtility.callMethod(method, this);
-                } catch (CoreException e) {
-                    e.printStackTrace();
+                } catch (final CoreException e) {
+                    LOGGER.error(CALL_ANNOTATED_METHOD_ERROR, e);
                 }
             }
         }

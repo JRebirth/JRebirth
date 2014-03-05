@@ -22,7 +22,6 @@ import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.concurrent.RunnablePriority;
 import org.jrebirth.af.core.exception.CommandException;
-import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.facade.JRebirthEventType;
 import org.jrebirth.af.core.link.AbstractWaveReady;
 import org.jrebirth.af.core.util.ClassUtility;
@@ -106,12 +105,6 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public abstract void ready() throws CoreException;
-
-    /**
      * Execute the command code.
      * 
      * @param wave the wave that contain data to be processed
@@ -134,7 +127,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      */
     @Override
     public final Wave run() {
-        // No wave was created
+        // No wave was created to trigger this command
         return run(null);
     }
 
