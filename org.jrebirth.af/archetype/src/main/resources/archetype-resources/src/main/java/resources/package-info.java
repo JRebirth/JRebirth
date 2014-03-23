@@ -1,4 +1,4 @@
 /**
  * Provides Resources declaration.
  */
-package org.jrebirth.sample.resources;
+package org.jrebirth.af.sample.resources;

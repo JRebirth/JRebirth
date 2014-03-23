@@ -1,16 +1,4 @@
 /**
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.jrebirth.core.service.ServiceBase;
-import org.jrebirth.core.wave.WaveBuilder;
-import org.jrebirth.core.wave.WaveData;
-import org.jrebirth.undoredo.command.UndoRedoWaves;
-import org.jrebirth.undoredo.command.Undoable;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
@@ -38,9 +26,6 @@ import org.jrebirth.af.core.wave.WaveBuilder;
 import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.undoredo.command.UndoRedoWaves;
 import org.jrebirth.af.undoredo.command.Undoable;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The Class UndoRedoService is used to manage a stack of {@link Undoable} command.
