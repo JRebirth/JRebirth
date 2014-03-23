@@ -27,6 +27,9 @@ import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.undoredo.command.UndoRedoWaves;
 import org.jrebirth.af.undoredo.command.Undoable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * The Class UndoRedoService is used to manage a stack of {@link Undoable} command.
  * 
