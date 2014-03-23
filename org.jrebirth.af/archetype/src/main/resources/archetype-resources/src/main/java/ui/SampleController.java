@@ -5,14 +5,14 @@ package ${package}.ui;
 
 import javafx.scene.input.MouseEvent;
 
-import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.AbstractController;
-import org.jrebirth.core.ui.adapter.DefaultMouseAdapter;
-import org.jrebirth.core.wave.WaveBuilder;
-import org.jrebirth.core.wave.WaveGroup;
-import org.jrebirth.sample.command.SampleCommand;
-import org.jrebirth.sample.command.SamplePoolCommand;
-import org.jrebirth.sample.command.SampleUICommand;
+import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.ui.AbstractController;
+import org.jrebirth.af.core.ui.adapter.DefaultMouseAdapter;
+import org.jrebirth.af.core.wave.WaveBuilder;
+import org.jrebirth.af.core.wave.WaveGroup;
+import org.jrebirth.af.sample.command.SampleCommand;
+import org.jrebirth.af.sample.command.SamplePoolCommand;
+import org.jrebirth.af.sample.command.SampleUICommand;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

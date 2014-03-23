@@ -8,9 +8,9 @@ import javafx.scene.control.LabelBuilder;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPaneBuilder;
 
-import org.jrebirth.core.exception.CoreException;
-import org.jrebirth.core.ui.AbstractView;
-import org.jrebirth.core.ui.annotation.OnMouse;
+import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.ui.AbstractView;
+import org.jrebirth.af.core.ui.annotation.OnMouse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

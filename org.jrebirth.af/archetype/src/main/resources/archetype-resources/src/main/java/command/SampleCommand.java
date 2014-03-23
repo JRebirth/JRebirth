@@ -3,9 +3,9 @@
 #set( $symbol_escape = '\' )
 package ${package}.command;
 
-import org.jrebirth.core.command.DefaultCommand;
-import org.jrebirth.core.wave.Wave;
-import org.jrebirth.sample.command.SampleCommand;
+import org.jrebirth.af.core.command.DefaultCommand;
+import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.sample.command.SampleCommand;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

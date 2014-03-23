@@ -1,4 +1,4 @@
 /**
  * Provides Sample Commands classes.
  */
-package org.jrebirth.sample.command;
+package org.jrebirth.af.sample.command;

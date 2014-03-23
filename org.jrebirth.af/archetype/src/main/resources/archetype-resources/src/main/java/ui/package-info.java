@@ -1,4 +1,4 @@
 /**
  * Provides User Interface classes.
  */
-package org.jrebirth.sample.ui;
+package org.jrebirth.af.sample.ui;

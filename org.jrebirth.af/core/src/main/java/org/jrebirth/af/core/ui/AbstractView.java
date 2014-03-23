@@ -61,7 +61,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractView.class);
 
     /** The base name of all JRebirth Annotation. */
-    private static final String BASE_ANNOTATION_NAME = "org.jrebirth.core.ui.annotation.On";
+    private static final String BASE_ANNOTATION_NAME = "org.jrebirth.af.core.ui.annotation.On";
 
     /** The view model. */
     private final transient M model;

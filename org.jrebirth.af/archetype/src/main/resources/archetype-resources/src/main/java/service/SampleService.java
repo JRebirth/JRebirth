@@ -3,9 +3,9 @@
 #set( $symbol_escape = '\' )
 package ${package}.service;
 
-import org.jrebirth.core.service.DefaultService;
-import org.jrebirth.core.wave.Wave;
-import org.jrebirth.core.wave.WaveTypeBase;
+import org.jrebirth.af.core.service.DefaultService;
+import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

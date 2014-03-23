@@ -3,10 +3,10 @@
 #set( $symbol_escape = '\' )
 package ${package}.resources;
 
-import static org.jrebirth.core.resource.Resources.create;
+import static org.jrebirth.af.core.resource.Resources.create;
 
-import org.jrebirth.core.resource.style.StyleSheet;
-import org.jrebirth.core.resource.style.StyleSheetItem;
+import org.jrebirth.af.core.resource.style.StyleSheet;
+import org.jrebirth.af.core.resource.style.StyleSheetItem;
 
 /**
  * The SampleStyles interface providing all style sheets.
