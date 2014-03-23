@@ -124,7 +124,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
      * Show the view.<br />
      * In example : start the show transition
      * 
-     * This method is a hook to manage generic code before initializing the view's node tree. It will call {@link #org.jrebirth.core.ui.View.start()} or {@link #org.jrebirth.core.ui.View.reload()}
+     * This method is a hook to manage generic code before initializing the view's node tree. It will call {@link #org.jrebirth.af.core.ui.View.start()} or {@link #org.jrebirth.af.core.ui.View.reload()}
      * method
      * 
      * You must implement the {@link #showView()} method to setup your view.
@@ -157,7 +157,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
      * Hide the view.<br />
      * In example : start the hide transition
      * 
-     * Will call the {@link #org.jrebirth.core.ui.View.hide()} method
+     * Will call the {@link #org.jrebirth.af.core.ui.View.hide()} method
      */
     protected final void hideInternalView() {
 

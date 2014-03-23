@@ -3,10 +3,10 @@
 #set( $symbol_escape = '\' )
 package ${package}.resources;
 
-import static org.jrebirth.core.resource.Resources.create;
+import static org.jrebirth.af.core.resource.Resources.create;
 
-import org.jrebirth.core.resource.font.FontItem;
-import org.jrebirth.core.resource.font.RealFont;
+import org.jrebirth.af.core.resource.font.FontItem;
+import org.jrebirth.af.core.resource.font.RealFont;
 
 /**
  * The class <strong>SampleFonts</strong>.

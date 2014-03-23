@@ -1,4 +1,4 @@
 /**
  * Provides Services classes.
  */
-package org.jrebirth.sample.service;
+package org.jrebirth.af.sample.service;

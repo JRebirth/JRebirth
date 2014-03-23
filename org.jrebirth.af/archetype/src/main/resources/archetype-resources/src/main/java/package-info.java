@@ -1,4 +1,4 @@
 /**
  * Provides Main Class.
  */
-package org.jrebirth.sample;
+package org.jrebirth.af.sample;
