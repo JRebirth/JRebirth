@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.color;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
@@ -73,13 +76,8 @@ public class GrayColor extends AbstractBaseColor {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        append(sb, gray());
-        append(sb, opacity());
-
-        return cleanString(sb);
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(gray(), opacity());
     }
 
     /**

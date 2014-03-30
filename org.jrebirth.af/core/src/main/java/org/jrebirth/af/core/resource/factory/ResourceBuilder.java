@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.resource.factory;
 
+import org.jrebirth.af.core.resource.color.ResourceParams;
+
 /**
  * The interface <strong>ResourceFactory</strong>.
  * 
@@ -45,6 +47,15 @@ public interface ResourceBuilder<E, P, R> {
     P getParam(final E key);
 
     /**
+     * Retrieve the parameter key.
+     * 
+     * @param key the parameter key
+     * 
+     * @return the parameter key
+     */
+    String getKey(final E key);
+
+    /**
      * Retrieve the resource. And build it if it didn't be done before.
      * 
      * @param key the enum as a key
@@ -56,8 +67,8 @@ public interface ResourceBuilder<E, P, R> {
     /**
      * Store a new resource.
      * 
-     * @param key the enum used as a key
+     * @param key the serialized {@link ResourceParams} used
      * @param resource the resource to weakly store
      */
-    void set(final E key, final R resource);
+    void set(final String key, final R resource);
 }

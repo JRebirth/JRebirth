@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.color;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -71,19 +74,6 @@ public class WebColor extends AbstractBaseColor {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        append(sb, hex());
-        append(sb, opacity());
-
-        return cleanString(sb);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void parse(final String[] parameters) {
         if (parameters.length >= 1) {
 
@@ -120,4 +110,13 @@ public class WebColor extends AbstractBaseColor {
         }
 
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(hex(), opacity());
+    }
+
 }
