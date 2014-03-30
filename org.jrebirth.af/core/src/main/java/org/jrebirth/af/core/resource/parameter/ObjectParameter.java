@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.parameter;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 import org.jrebirth.af.core.resource.ParameterEntry;
@@ -85,14 +88,6 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      */
     public O object() {
         return this.object;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        return name();
     }
 
     /**
@@ -176,5 +171,13 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
     @Override
     public void parse(final String[] string) {
         // Nothing to do, method added to be compliant with API
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(name());
     }
 }

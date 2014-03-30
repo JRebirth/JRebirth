@@ -18,6 +18,7 @@
 package org.jrebirth.af.core.resource;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
@@ -43,7 +44,17 @@ public abstract class AbstractBaseParams implements ResourceParams {
     private boolean changed;
 
     /** The dynamic key used to store the resource into a map. */
-    private String dynamicKey;
+    private String key;
+
+    /**
+     * Default Constructor.
+     * 
+     * Set the hasChnaged boolean to true to force the first creation of the resource.
+     */
+    public AbstractBaseParams() {
+        super();
+        hasChanged(true);
+    }
 
     /**
      * {@inheritDoc}
@@ -105,16 +116,28 @@ public abstract class AbstractBaseParams implements ResourceParams {
      * @return Returns the dynamicKey.
      */
     @Override
-    public String getDynamicKey() {
-        return this.dynamicKey;
+    public String getKey() {
+        if (hasChanged()) {
+
+            final StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < getFieldValues().size(); i++) {
+                sb.append(getFieldValues().get(i).toString());
+                if (i < getFieldValues().size() - 1) {
+                    sb.append(PARAMETER_SEPARATOR);
+                }
+            }
+            setKey(sb.toString());
+        }
+        return this.key;
     }
 
     /**
-     * @param dynamicKey The dynamicKey to set.
+     * @param key The key to set.
      */
     @Override
-    public void setDynamicKey(final String dynamicKey) {
-        this.dynamicKey = dynamicKey;
+    public void setKey(final String key) {
+        this.key = key;
     }
 
     /**
@@ -162,35 +185,18 @@ public abstract class AbstractBaseParams implements ResourceParams {
     }
 
     /**
-     * Append a string parameter with its separator.
-     * 
-     * @param sb the string container
-     * @param parameter the parameter to append
+     * {@inheritDoc}
      */
-    protected void append(final StringBuilder sb, final String parameter) {
-        sb.append(parameter).append(PARAMETER_SEPARATOR);
+    @Override
+    public String toString() {
+        return getKey();
     }
 
     /**
-     * Append a number parameter with its separator.
+     * Return all values of {@link ParameterEntry} object.
      * 
-     * @param sb the string container
-     * @param parameter the number parameter to append
+     * @return the list of parameters describing the resource to build
      */
-    protected void append(final StringBuilder sb, final Number parameter) {
-        append(sb, parameter.toString());
-    }
-
-    /**
-     * Remove the last parameter separator and return the string of the given builder.
-     * 
-     * @param sb the string builder toc lean
-     * 
-     * @return the cleaned string
-     */
-    protected String cleanString(final StringBuilder sb) {
-        final String res = sb.toString();
-        return res.substring(0, res.length() - PARAMETER_SEPARATOR.length());
-    }
+    protected abstract List<? extends Object> getFieldValues();
 
 }

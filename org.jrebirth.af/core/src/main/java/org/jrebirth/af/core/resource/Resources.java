@@ -145,7 +145,7 @@ public final class Resources {
      * @return a new fresh color item object
      */
     public static ColorItem create(final ColorParams colorParams, final String dynamicKey) {
-        colorParams.setDynamicKey(dynamicKey);
+        colorParams.setKey(dynamicKey);
         final ColorItem colorItem = create(colorParams);
 
         if (!colorMap.containsKey(dynamicKey)) {

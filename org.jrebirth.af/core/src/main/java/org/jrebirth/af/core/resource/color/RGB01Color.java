@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.color;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
@@ -123,21 +126,6 @@ public class RGB01Color extends AbstractBaseColor {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        append(sb, red());
-        append(sb, green());
-        append(sb, blue());
-        append(sb, opacity());
-
-        return cleanString(sb);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void parse(final String[] parameters) {
         // Manage red composite
         if (parameters.length >= 1) {
@@ -157,4 +145,11 @@ public class RGB01Color extends AbstractBaseColor {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(red(), green(), blue(), opacity());
+    }
 }

@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.color;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
@@ -123,21 +126,6 @@ public class HSBColor extends AbstractBaseColor {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        append(sb, hue());
-        append(sb, saturation());
-        append(sb, brightness());
-        append(sb, opacity());
-
-        return cleanString(sb);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void parse(final String[] parameters) {
         // Manage hue composite
         if (parameters.length >= 1) {
@@ -155,6 +143,14 @@ public class HSBColor extends AbstractBaseColor {
         if (parameters.length >= 4) {
             opacityProperty().set(readDouble(parameters[3], 0.0, 1.0));
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(hue(), saturation(), brightness(), opacity());
     }
 
 }

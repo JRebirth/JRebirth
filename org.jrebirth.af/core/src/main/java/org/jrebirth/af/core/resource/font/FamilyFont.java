@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.font;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -151,21 +154,6 @@ public class FamilyFont extends AbstractBaseFont {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        append(sb, family());
-        append(sb, size());
-        append(sb, weight().toString());
-        append(sb, posture().toString());
-
-        return cleanString(sb);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void parse(final String[] parameters) {
         if (parameters.length >= 1) {
             familyProperty().set(parameters[0]);
@@ -180,4 +168,13 @@ public class FamilyFont extends AbstractBaseFont {
             postureProperty().set(FontPosture.findByName(parameters[3]));
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(family(), size(), weight().toString(), posture().toString());
+    }
+
 }
