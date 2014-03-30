@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.image;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -116,22 +119,6 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        append(sb, website());
-        append(sb, secured().toString());
-        append(sb, path());
-        append(sb, name());
-        append(sb, extension().toString());
-
-        return cleanString(sb);
-    }
-
-    /**
      * Parse the serialized Web Image string to build a fresh instance.
      * 
      * @param serializedImage the serialized string
@@ -157,6 +144,14 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
             nameProperty().set(parameters[3]);
             extensionProperty().set(ImageExtension.valueOf(parameters[4]));
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(website(), secured().toString(), path(), name(), extension().toString());
     }
 
 }

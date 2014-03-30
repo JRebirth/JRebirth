@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.font;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * The interface <strong>RealFont</strong>.
  * 
@@ -38,19 +41,6 @@ public class RealFont extends AbstractBaseFont {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        append(sb, name().toString());
-        append(sb, size());
-
-        return cleanString(sb);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void parse(final String[] parameters) {
         if (parameters.length >= 1) {
             nameProperty().set(new CustomFontName(parameters[0]));
@@ -59,4 +49,13 @@ public class RealFont extends AbstractBaseFont {
             sizeProperty().set(Double.parseDouble(parameters[1]));
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(name().toString(), size());
+    }
+
 }
