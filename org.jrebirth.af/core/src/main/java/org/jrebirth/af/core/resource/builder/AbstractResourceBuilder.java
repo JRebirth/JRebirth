@@ -18,7 +18,6 @@
 package org.jrebirth.af.core.resource.builder;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -41,7 +40,7 @@ import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?>, P extends ResourceParams, R> implements ResourceBuilder<E, P, R> {
 
     /** The resource weak Map. */
-    private final Map<E, P> paramsMap = new HashMap<E, P>();
+    private final Map<E, P> paramsMap = new WeakHashMap<E, P>();
 
     /** The resource weak Map. */
     private final Map<String, WeakReference<R>> resourceMap = new WeakHashMap<>();
@@ -73,7 +72,7 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?>, P ex
      * {@inheritDoc}
      */
     @Override
-    public String getKey(final E key) {
+    public String getParamKey(final E key) {
         return getParam(key).getKey();
     }
 

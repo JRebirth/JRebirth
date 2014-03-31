@@ -213,6 +213,6 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
      */
     public void define(final MessageItem key, final MessageResource forcedValue) {
         this.overriddenMessageMap.put(key, forcedValue);
-        set(getKey(key), forcedValue);
+        set(getParamKey(key), forcedValue);
     }
 }
