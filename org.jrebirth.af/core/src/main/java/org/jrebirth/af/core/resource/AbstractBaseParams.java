@@ -137,6 +137,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
     @Override
     public void setKey(final String key) {
         this.key = key;
+        hasChanged(false);
     }
 
     /**
