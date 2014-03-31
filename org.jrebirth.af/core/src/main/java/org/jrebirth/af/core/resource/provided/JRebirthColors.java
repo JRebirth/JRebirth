@@ -38,3 +38,18 @@ public interface JRebirthColors {
     ColorItem SCENE_BG_COLOR = create(JRebirthParameters.APPLICATION_SCENE_BG_COLOR.get());
 
 }
+
+// Vision of future with Java 8
+
+// public enum JRebirthColors implements ColorItem {
+
+/**************************************************************************************/
+/** _____________________________Application Core Colors.____________________________ */
+/**************************************************************************************/
+
+// /** The default background color of the scene. */
+// SCENE_BG_COLOR {
+// {
+// set(JRebirthParameters.APPLICATION_SCENE_BG_COLOR.get());
+// }
+// }

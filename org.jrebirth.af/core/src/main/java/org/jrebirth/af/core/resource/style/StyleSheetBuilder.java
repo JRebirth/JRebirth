@@ -20,7 +20,7 @@ package org.jrebirth.af.core.resource.style;
 import java.net.URL;
 
 import org.jrebirth.af.core.resource.Resources;
-import org.jrebirth.af.core.resource.factory.AbstractResourceBuilder;
+import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 
 import org.slf4j.Logger;

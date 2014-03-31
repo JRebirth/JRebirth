@@ -23,7 +23,7 @@ import java.util.List;
 import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 import org.jrebirth.af.core.resource.ParameterEntry;
-import org.jrebirth.af.core.resource.color.ResourceParams;
+import org.jrebirth.af.core.resource.ResourceParams;
 
 /**
  * The interface <strong>ObjectParameter</strong>.

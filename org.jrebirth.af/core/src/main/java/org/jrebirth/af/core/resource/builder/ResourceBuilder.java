@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.resource.factory;
+package org.jrebirth.af.core.resource.builder;
 
-import org.jrebirth.af.core.resource.color.ResourceParams;
+import org.jrebirth.af.core.resource.ResourceParams;
 
 /**
  * The interface <strong>ResourceFactory</strong>.
