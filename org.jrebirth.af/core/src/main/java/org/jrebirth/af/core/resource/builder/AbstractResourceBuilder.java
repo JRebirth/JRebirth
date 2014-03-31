@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.resource.factory;
+package org.jrebirth.af.core.resource.builder;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -23,8 +23,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.jrebirth.af.core.resource.ResourceItem;
+import org.jrebirth.af.core.resource.ResourceParams;
 import org.jrebirth.af.core.resource.Resources;
-import org.jrebirth.af.core.resource.color.ResourceParams;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 
 /**

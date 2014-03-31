@@ -20,6 +20,9 @@ package org.jrebirth.af.core.resource.color;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 /**
  * The interface <strong>RGB255Color</strong>.
  * 
@@ -28,13 +31,13 @@ import java.util.List;
 public final class RGB255Color extends AbstractBaseColor {
 
     /** The green value [0-255]. */
-    private int redProperty = 0;
+    private final IntegerProperty redProperty = new SimpleIntegerProperty();
 
     /** The green value [0-255]. */
-    private int greenProperty = 0;
+    private final IntegerProperty greenProperty = new SimpleIntegerProperty();
 
     /** The blue value [0-255]. */
-    private int blueProperty = 0;
+    private final IntegerProperty blueProperty = new SimpleIntegerProperty();
 
     /**
      * Default Constructor.
@@ -45,9 +48,9 @@ public final class RGB255Color extends AbstractBaseColor {
      */
     public RGB255Color(final int red, final int green, final int blue) {
         super();
-        this.redProperty = red;
-        this.greenProperty = green;
-        this.blueProperty = blue;
+        this.redProperty.set(red);
+        this.greenProperty.set(green);
+        this.blueProperty.set(blue);
     }
 
     /**
@@ -60,52 +63,52 @@ public final class RGB255Color extends AbstractBaseColor {
      */
     public RGB255Color(final int red, final int green, final int blue, final double opacity) {
         super(opacity);
-        this.redProperty = red;
-        this.greenProperty = green;
-        this.blueProperty = blue;
+        this.redProperty.set(red);
+        this.greenProperty.set(green);
+        this.blueProperty.set(blue);
     }
 
     /**
      * @return Returns the red [0-255].
      */
     public int red() {
-        return this.redProperty;
+        return this.redProperty.get();
     }
 
-    // /**
-    // * @return Returns the red property.
-    // */
-    // public IntegerProperty redProperty() {
-    // return this.redProperty;
-    // }
+    /**
+     * @return Returns the red property.
+     */
+    public IntegerProperty redProperty() {
+        return this.redProperty;
+    }
 
     /**
      * @return Returns the green [0-255].
      */
     public int green() {
+        return this.greenProperty.get();
+    }
+
+    /**
+     * @return Returns the green property.
+     */
+    public IntegerProperty greenProperty() {
         return this.greenProperty;
     }
 
-    // /**
-    // * @return Returns the green property.
-    // */
-    // public IntegerProperty greenProperty() {
-    // return this.greenProperty;
-    // }
-
     /**
-     * @return Returns the blue [0-255].
+     * @return Returns the green [0-255].
      */
     public int blue() {
-        return this.blueProperty;
+        return this.blueProperty.get();
     }
 
-    // /**
-    // * @return Returns the blue property.
-    // */
-    // public IntegerProperty blueProperty() {
-    // return this.blueProperty;
-    // }
+    /**
+     * @return Returns the blue property.
+     */
+    public IntegerProperty blueProperty() {
+        return this.blueProperty;
+    }
 
     /**
      * {@inheritDoc}
@@ -114,15 +117,15 @@ public final class RGB255Color extends AbstractBaseColor {
     public void parse(final String[] parameters) {
         // Manage red composite
         if (parameters.length >= 1) {
-            redProperty = readInteger(parameters[0], 0, 255);
+            redProperty().set(readInteger(parameters[0], 0, 255));
         }
         // Manage green composite
         if (parameters.length >= 2) {
-            greenProperty = readInteger(parameters[1], 0, 255);
+            greenProperty().set(readInteger(parameters[1], 0, 255));
         }
         // Manage blue composite
         if (parameters.length >= 3) {
-            blueProperty = readInteger(parameters[2], 0, 255);
+            blueProperty().set(readInteger(parameters[2], 0, 255));
         }
         // Manage opacity
         if (parameters.length >= 4) {

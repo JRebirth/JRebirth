@@ -6,11 +6,13 @@
 <booleanAttribute key="M2_OFFLINE" value="false"/>
 <stringAttribute key="M2_PROFILES" value="!GPG"/>
 <listAttribute key="M2_PROPERTIES"/>
-<stringAttribute key="M2_RUNTIME" value="E:\JREBIRTH\TOOLS\apache-maven-3.1.1"/>
+<stringAttribute key="M2_RUNTIME" value="/home/seb/JRebirth/TOOLS/apache-maven-3.2.1"/>
 <booleanAttribute key="M2_SKIP_TESTS" value="false"/>
+<intAttribute key="M2_THREADS" value="1"/>
 <booleanAttribute key="M2_UPDATE_SNAPSHOTS" value="false"/>
 <booleanAttribute key="M2_WORKSPACE_RESOLUTION" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
+<stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_51"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx1g -XX:MaxPermSize=256m"/>
 <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:/org.jrebirth.af}"/>
 </launchConfiguration>

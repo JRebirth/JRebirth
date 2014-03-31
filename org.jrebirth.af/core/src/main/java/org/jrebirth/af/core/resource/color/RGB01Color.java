@@ -19,7 +19,6 @@ package org.jrebirth.af.core.resource.color;
 
 import java.util.Arrays;
 import java.util.List;
-
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 

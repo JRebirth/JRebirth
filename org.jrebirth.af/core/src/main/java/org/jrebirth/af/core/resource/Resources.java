@@ -24,7 +24,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.jrebirth.af.core.resource.color.ColorItem;
 import org.jrebirth.af.core.resource.color.ColorItemBase;
 import org.jrebirth.af.core.resource.color.ColorParams;
-import org.jrebirth.af.core.resource.color.ResourceParams;
 import org.jrebirth.af.core.resource.font.FontItemBase;
 import org.jrebirth.af.core.resource.font.FontParams;
 import org.jrebirth.af.core.resource.fxml.FXMLItemBase;

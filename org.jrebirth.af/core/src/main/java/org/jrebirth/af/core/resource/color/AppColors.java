@@ -28,6 +28,15 @@ import org.jrebirth.af.core.resource.ResourceBuilders;
  */
 public enum AppColors implements ColorItem {
 
+    // Vision of future with Java 8
+    //
+    // /** The stage background color. */
+    // STAGE_BG {
+    // {
+    // set(new RGB255Color(240, 240, 255, 1.0));
+    // }
+    // };
+
     /** The stage background color. */
     STAGE_BG(new RGB255Color(240, 240, 255, 1.0));
 

@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.resource.i18n;
 
-import org.jrebirth.af.core.resource.color.ResourceParams;
+import org.jrebirth.af.core.resource.ResourceParams;
 
 /**
  * The class <strong>MessageParams</strong>.
