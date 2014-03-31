@@ -53,7 +53,7 @@ public interface ResourceBuilder<E, P, R> {
      * 
      * @return the parameter key
      */
-    String getKey(final E key);
+    String getParamKey(final E key);
 
     /**
      * Retrieve the resource. And build it if it didn't be done before.

@@ -191,6 +191,6 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
      */
     public void define(final ParameterItem<?> key, final Object forcedValue) {
         this.overriddenParametersMap.put(key, forcedValue);
-        set(getKey(key), forcedValue);
+        set(getParamKey(key), forcedValue);
     }
 }
