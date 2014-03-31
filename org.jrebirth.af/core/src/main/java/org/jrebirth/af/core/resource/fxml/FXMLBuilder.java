@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.resource.fxml;
 
-import org.jrebirth.af.core.resource.factory.AbstractResourceBuilder;
+import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.ui.fxml.FXMLComponent;
 import org.jrebirth.af.core.ui.fxml.FXMLUtils;
 

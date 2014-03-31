@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 import org.jrebirth.af.core.log.JRebirthMarkers;
-import org.jrebirth.af.core.resource.factory.AbstractResourceBuilder;
+import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.util.ClasspathUtility;
 

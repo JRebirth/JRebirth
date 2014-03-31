@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.ParameterEntry;
-import org.jrebirth.af.core.resource.factory.AbstractResourceBuilder;
+import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.util.ClasspathUtility;
 
 /**
