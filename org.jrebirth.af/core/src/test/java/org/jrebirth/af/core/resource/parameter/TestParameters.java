@@ -17,9 +17,6 @@
  */
 package org.jrebirth.af.core.resource.parameter;
 
-import org.jrebirth.af.core.resource.parameter.ObjectParameter;
-import org.jrebirth.af.core.resource.parameter.ParameterItem;
-
 import static org.jrebirth.af.core.resource.Resources.create;
 
 /**
@@ -34,8 +31,8 @@ public interface TestParameters {
     /**************************************************************************************/
 
     /** The web color. */
-    ParameterItem<String> TEST_STRING_PARAM_1 = create(new ObjectParameter<String>("fonts"));
-    ParameterItem<String> TEST_STRING_PARAM_2 = create(new ObjectParameter<String>("fontsFolder"));
+    ParameterItem<String> TEST_STRING_PARAM_1 = create(new ObjectParameter<String>("paramA", "fonts"));
+    ParameterItem<String> TEST_STRING_PARAM_2 = create(new ObjectParameter<String>("paramB", "fontsFolder"));
     ParameterItem<String> TEST_STRING_PARAM_3 = create("fontsFolderFake", "font");
     ParameterItem<String> TEST_STRING_PARAM_4 = create("fontsFolder", "font");
 
