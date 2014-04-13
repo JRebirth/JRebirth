@@ -22,7 +22,9 @@ import javafx.scene.Node;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.ui.NullView;
+import org.jrebirth.af.core.ui.annotation.RootNodeId;
 import org.jrebirth.af.core.ui.object.AbstractObjectModel;
+import org.jrebirth.af.core.util.ClassUtility;
 
 /**
  * 
@@ -41,29 +43,40 @@ public abstract class AbstractSimpleObjectModel<N extends Node, O extends Object
     private N rootNode;
 
     /**
-     * Prepare the root node.
-     * 
-     * With simple model no view neither controller are created.<br />
-     * You must manage them yourself.
-     * 
-     * @return the model root node
-     */
-    protected abstract N prepareNode();
-
-    /**
      * Initialize the model.
      * 
      * @throws CoreException if the creation of the view fails
      */
+    @SuppressWarnings("unchecked")
     @Override
     protected void initInternalModel() throws CoreException {
 
-        // Initiailze model with custom method
+        // Initialize model with custom method
         initModel();
 
         // Prepare the root node
-        this.rootNode = prepareNode();
+        this.rootNode = (N) ClassUtility.buildGenericType(this.getClass(), Node.class);
+
+        // Find the RootNodeId annotation
+        final RootNodeId rni = ClassUtility.getLastClassAnnotation(this.getClass(), RootNodeId.class);
+        if (rni != null) {
+            getRootNode().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
+        }
+
+        // Set up the model view
+        initSimpleView();
     }
+
+    /**
+     * Prepare the visual node hierarchy for this simple model.
+     * 
+     * This method is equivalent to View.initView
+     * 
+     * With simple model no View neither Controller are created.<br />
+     * 
+     * You must manage them yourself.
+     */
+    protected abstract void initSimpleView();
 
     /**
      * {@inheritDoc}
