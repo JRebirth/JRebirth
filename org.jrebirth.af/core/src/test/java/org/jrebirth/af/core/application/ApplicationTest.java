@@ -3,16 +3,12 @@ package org.jrebirth.af.core.application;
 import javafx.application.Application;
 import javafx.application.Platform;
 
-import org.jrebirth.af.core.application.AbstractApplication;
-import org.jrebirth.af.core.application.DefaultApplication;
-import org.jrebirth.af.core.application.JRebirthApplication;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 
-@Ignore("Only one application at the same time")
+//@Ignore("Only one application at the same time")
 public class ApplicationTest<A extends DefaultApplication<?>> {
 
     private final Class<A> appClass;

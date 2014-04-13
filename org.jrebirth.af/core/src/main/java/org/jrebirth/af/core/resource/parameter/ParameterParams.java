@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.resource.parameter;
 
-import org.jrebirth.af.core.resource.color.ResourceParams;
+import org.jrebirth.af.core.resource.ResourceParams;
 
 /**
  * The class <strong>ParameterParams</strong>.

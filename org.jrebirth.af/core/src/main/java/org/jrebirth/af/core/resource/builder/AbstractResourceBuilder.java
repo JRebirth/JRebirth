@@ -15,16 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.resource.factory;
+package org.jrebirth.af.core.resource.builder;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.jrebirth.af.core.resource.ResourceItem;
+import org.jrebirth.af.core.resource.ResourceParams;
 import org.jrebirth.af.core.resource.Resources;
-import org.jrebirth.af.core.resource.color.ResourceParams;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 
 /**
@@ -41,10 +40,10 @@ import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?>, P extends ResourceParams, R> implements ResourceBuilder<E, P, R> {
 
     /** The resource weak Map. */
-    private final Map<E, P> paramsMap = new HashMap<E, P>();
+    private final Map<E, P> paramsMap = new WeakHashMap<E, P>();
 
     /** The resource weak Map. */
-    private final Map<E, WeakReference<R>> resourceMap = new WeakHashMap<>();
+    private final Map<String, WeakReference<R>> resourceMap = new WeakHashMap<>();
 
     /**
      * {@inheritDoc}
@@ -73,18 +72,32 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?>, P ex
      * {@inheritDoc}
      */
     @Override
+    public String getParamKey(final E key) {
+        return getParam(key).getKey();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public R get(final E key) {
-        // Retrieve the resource into the map
-        WeakReference<R> resource = this.resourceMap.get(key);
 
         final P params = getParam(key);
+
+        String paramsKey = params.getKey();
+
+        // Retrieve the resource into the map
+        WeakReference<R> resource = this.resourceMap.get(paramsKey);
+
         // The resource may be null if nobody use it
-        if (params.hasChanged() || resource == null || resource.get() == null) {
+        if (resource == null || resource.get() == null) {
             // So we must rebuild an instance and then store it weakly
-            set(key, buildResource(key, params));
+            set(paramsKey, buildResource(key, params));
 
             // Get the WeakReference
-            resource = this.resourceMap.get(key);
+            resource = this.resourceMap.get(paramsKey);
+
+            params.hasChanged(false);
         }
         return resource.get();
     }
@@ -93,7 +106,7 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?>, P ex
      * {@inheritDoc}
      */
     @Override
-    public void set(final E key, final R resource) {
+    public void set(final String key, final R resource) {
         this.resourceMap.put(key, new WeakReference<R>(resource));
     }
 

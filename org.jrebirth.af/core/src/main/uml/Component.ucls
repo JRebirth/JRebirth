@@ -1,45 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+<class-diagram version="1.1.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <interface id="1" language="java" name="org.jrebirth.core.key.UniqueKey" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/key/UniqueKey.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="391" y="45"/>    
+  <class id="1" language="java" name="org.jrebirth.af.core.link.AbstractReady" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/link/AbstractReady.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-160" y="210"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="org.jrebirth.af.core.link.AbstractWaveReady" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/link/AbstractWaveReady.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-186" y="598"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="org.jrebirth.af.core.facade.FacadeReady" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/FacadeReady.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="294" y="248"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="2" language="java" name="org.jrebirth.core.key.MultitonKey" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/key/MultitonKey.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="395" y="384"/>    
+  <interface id="4" language="java" name="org.jrebirth.af.core.link.ModelReady" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/link/ModelReady.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="550" y="136"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
-  </class>  
-  <class id="3" language="java" name="org.jrebirth.core.key.ClassKey" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/key/ClassKey.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="392" y="210"/>    
+  </interface>  
+  <interface id="5" language="java" name="org.jrebirth.af.core.link.ServiceReady" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/link/ServiceReady.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="715" y="42"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
-  </class>  
-  <generalization id="4">    
+  </interface>  
+  <interface id="6" language="java" name="org.jrebirth.af.core.link.CommandReady" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/link/CommandReady.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="878" y="-64"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="7" language="java" name="org.jrebirth.af.core.facade.WaveReady" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/WaveReady.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="312" y="601"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <generalization id="8">    
     <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="9">    
+    <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="3"/>  
   </generalization>  
-  <realization id="5">    
+  <generalization id="10">    
     <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="11">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <realization id="12">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <generalization id="13">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <realization id="14">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="7"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
-    <attributes public="true" package="true" protected="true" private="false"/>    
-    <operations public="true" package="true" protected="true" private="false"/>  
+    <attributes public="true" package="true" protected="true" private="false" static="true"/>    
+    <operations public="true" package="true" protected="true" private="false" static="true"/>  
   </classifier-display>  
   <association-display labels="true" multiplicity="true"/>
 </class-diagram>

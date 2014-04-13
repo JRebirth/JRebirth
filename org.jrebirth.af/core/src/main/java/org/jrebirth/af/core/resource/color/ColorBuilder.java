@@ -19,7 +19,7 @@ package org.jrebirth.af.core.resource.color;
 
 import javafx.scene.paint.Color;
 
-import org.jrebirth.af.core.resource.factory.AbstractResourceBuilder;
+import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 
 /**
  * The class <strong>ColorBuilder</strong>.

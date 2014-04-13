@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.fxml;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -192,21 +195,6 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        append(sb, absolutePath());
-        append(sb, fxmlName());
-        append(sb, absoluteBundlePath());
-        append(sb, bundleName());
-
-        return cleanString(sb);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void parse(final String[] parameters) {
 
         switch (parameters.length) {
@@ -226,6 +214,14 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
             default:
                 fxmlNameProperty().set(parameters[0]);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(absolutePath(), fxmlName(), absoluteBundlePath(), bundleName());
     }
 
 }

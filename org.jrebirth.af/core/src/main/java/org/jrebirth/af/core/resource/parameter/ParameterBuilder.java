@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.ParameterEntry;
-import org.jrebirth.af.core.resource.factory.AbstractResourceBuilder;
+import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.util.ClasspathUtility;
 
 /**
@@ -191,6 +191,6 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
      */
     public void define(final ParameterItem<?> key, final Object forcedValue) {
         this.overriddenParametersMap.put(key, forcedValue);
-        set(key, forcedValue);
+        set(getParamKey(key), forcedValue);
     }
 }

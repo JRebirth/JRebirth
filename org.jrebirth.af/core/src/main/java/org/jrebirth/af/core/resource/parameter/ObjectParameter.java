@@ -17,10 +17,13 @@
  */
 package org.jrebirth.af.core.resource.parameter;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 import org.jrebirth.af.core.resource.ParameterEntry;
-import org.jrebirth.af.core.resource.color.ResourceParams;
+import org.jrebirth.af.core.resource.ResourceParams;
 
 /**
  * The interface <strong>ObjectParameter</strong>.
@@ -32,25 +35,25 @@ import org.jrebirth.af.core.resource.color.ResourceParams;
 public class ObjectParameter<O extends Object> extends AbstractBaseParams implements ParameterParams {
 
     /** The parameter name. */
-    private String parameterName;
+    private final String parameterName;
 
     /** The parameter object. */
     private final O object;
 
-    /**
-     * Default Constructor.
-     * 
-     * @param object the parameter object
-     */
-    public ObjectParameter(final O object) {
-        super();
-        this.object = object;
-
-        // Object must be not null
-        if (object == null) {
-            throw new CoreRuntimeException("ObjectParameter must have a non null object for unamed parameter");
-        }
-    }
+    // /**
+    // * Default Constructor.
+    // *
+    // * @param object the parameter object
+    // */
+    // public ObjectParameter(final O object) {
+    // super();
+    // this.object = object;
+    //
+    // // Object must be not null
+    // if (object == null) {
+    // throw new CoreRuntimeException("ObjectParameter must have a non null object for unamed parameter");
+    // }
+    // }
 
     /**
      * Default Constructor.
@@ -85,14 +88,6 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      */
     public O object() {
         return this.object;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        return name();
     }
 
     /**
@@ -176,5 +171,13 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
     @Override
     public void parse(final String[] string) {
         // Nothing to do, method added to be compliant with API
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(name());
     }
 }

@@ -47,7 +47,6 @@ public abstract class AbstractBaseColor extends AbstractBaseParams implements Co
     public AbstractBaseColor(final Double opacity) {
         super();
         this.opacityProperty.set(opacity);
-        hasChanged(true);
     }
 
     /**

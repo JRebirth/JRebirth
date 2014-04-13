@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 import org.jrebirth.af.core.log.JRebirthMarkers;
-import org.jrebirth.af.core.resource.factory.AbstractResourceBuilder;
+import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.util.ClasspathUtility;
 
@@ -140,36 +140,40 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
 
         MessageResource messageResource = null;
 
-        if (!(messageParams instanceof LogMessageParams) || messageParams instanceof LogMessageParams && JRebirthParameters.LOG_RESOLUTION.get()) {
+        // Load overridden values first
+        if (messageParams.name() != null && this.overriddenMessageMap.containsKey(messageItem)) {
 
-            // Load overridden values first
-            if (messageParams.name() != null && this.overriddenMessageMap.containsKey(messageItem)) {
-
-                // Retrieve the customized parameter
-                messageResource = this.overriddenMessageMap.get(messageItem);
-            }
-
-            // No overridden value is defined
-            // Check if the message has a message key and
-            // check if the message has been loaded from any customized Messages file
-            if (messageResource == null && messageParams.name() != null /* && this.propertiesParametersMap.containsKey(op.name()) */) {
-
-                String rawMessage = findMessage(messageParams.name());
-                // No translation found, the message will be the key with wrapped by <>
-                if (rawMessage == null) {
-                    rawMessage = '<' + messageParams.name() + '>';
-                }
-
-                if (messageParams instanceof LogMessageParams) {
-                    // Use default log marker and log level
-                    messageResource = new MessageResource(rawMessage, ((LogMessageParams) messageParams).marker(), ((LogMessageParams) messageParams).level());
-                } else {
-                    // Just convert the code into message
-                    messageResource = new MessageResource(rawMessage);
-                }
-            }
-
+            // Retrieve the customized parameter
+            messageResource = this.overriddenMessageMap.get(messageItem);
         }
+
+        // No overridden value is defined
+        // Check if the message has a message key and
+        // check if the message has been loaded from any customized Messages file
+        if (messageResource == null && messageParams.name() != null /* && this.propertiesParametersMap.containsKey(op.name()) */) {
+
+            // Translation is always allowed for all Message
+            // It depends on LOG_RESOLUTION parameter for all LogMessage
+            boolean translationAllowed = !(messageParams instanceof LogMessageParams)
+                    || messageParams instanceof LogMessageParams && JRebirthParameters.LOG_RESOLUTION.get();
+
+            // Translate the message code as required
+            String rawMessage = translationAllowed ? findMessage(messageParams.name()) : null;
+
+            // No translation found, the message will be the key with wrapped by <>
+            if (rawMessage == null) {
+                rawMessage = '<' + messageParams.name() + '>';
+            }
+
+            if (messageParams instanceof LogMessageParams) {
+                // Use default log marker and log level
+                messageResource = new MessageResource(rawMessage, ((LogMessageParams) messageParams).marker(), ((LogMessageParams) messageParams).level());
+            } else {
+                // Just convert the code into message
+                messageResource = new MessageResource(rawMessage);
+            }
+        }
+
         return messageResource;
     }
 
@@ -209,6 +213,6 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
      */
     public void define(final MessageItem key, final MessageResource forcedValue) {
         this.overriddenMessageMap.put(key, forcedValue);
-        set(key, forcedValue);
+        set(getParamKey(key), forcedValue);
     }
 }
