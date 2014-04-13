@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.style;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -94,19 +97,6 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        append(sb, path());
-        append(sb, name());
-
-        return cleanString(sb);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void parse(final String[] parameters) {
         if (parameters.length >= 1) {
             pathProperty().set(parameters[0]);
@@ -114,6 +104,14 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
         if (parameters.length == 2) {
             nameProperty().set(parameters[1]);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(path(), name());
     }
 
 }

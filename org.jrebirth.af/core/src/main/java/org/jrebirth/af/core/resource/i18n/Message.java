@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.i18n;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 
 /**
@@ -51,15 +54,15 @@ public class Message extends AbstractBaseParams implements MessageParams {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-        return name();
+    public void parse(final String[] string) {
+        // Nothing to do, method added to be compliant with API
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] string) {
-        // Nothing to do, method added to be compliant with API
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(name());
     }
 }

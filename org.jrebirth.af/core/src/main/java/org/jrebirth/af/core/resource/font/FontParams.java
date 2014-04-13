@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.resource.font;
 
-import org.jrebirth.af.core.resource.color.ResourceParams;
+import org.jrebirth.af.core.resource.ResourceParams;
 
 /**
  * The class <strong>FontParams</strong>.
