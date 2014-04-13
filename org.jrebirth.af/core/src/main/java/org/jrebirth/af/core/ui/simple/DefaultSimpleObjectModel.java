@@ -19,7 +19,6 @@ package org.jrebirth.af.core.ui.simple;
 
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.wave.Wave;
 
 /**
@@ -39,8 +38,8 @@ public class DefaultSimpleObjectModel<N extends Node, O extends Object> extends 
      * {@inheritDoc}
      */
     @Override
-    protected N prepareNode() {
-        throw new CoreRuntimeException("You must return a JavaFX node for Simple Model");
+    protected void initSimpleView() {
+        // Nothing to do yet but you should initialize visual components
     }
 
     /**
