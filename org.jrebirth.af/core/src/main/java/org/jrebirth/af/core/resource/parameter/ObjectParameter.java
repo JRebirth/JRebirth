@@ -35,25 +35,25 @@ import org.jrebirth.af.core.resource.ResourceParams;
 public class ObjectParameter<O extends Object> extends AbstractBaseParams implements ParameterParams {
 
     /** The parameter name. */
-    private String parameterName;
+    private final String parameterName;
 
     /** The parameter object. */
     private final O object;
 
-    /**
-     * Default Constructor.
-     * 
-     * @param object the parameter object
-     */
-    public ObjectParameter(final O object) {
-        super();
-        this.object = object;
-
-        // Object must be not null
-        if (object == null) {
-            throw new CoreRuntimeException("ObjectParameter must have a non null object for unamed parameter");
-        }
-    }
+    // /**
+    // * Default Constructor.
+    // *
+    // * @param object the parameter object
+    // */
+    // public ObjectParameter(final O object) {
+    // super();
+    // this.object = object;
+    //
+    // // Object must be not null
+    // if (object == null) {
+    // throw new CoreRuntimeException("ObjectParameter must have a non null object for unamed parameter");
+    // }
+    // }
 
     /**
      * Default Constructor.
