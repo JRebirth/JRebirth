@@ -11,6 +11,12 @@ This version provides some enhancements
 - Simplify FXML usage - [#98](https://github.com/JRebirth/JRebirth/issues/98)<br/>
 DefaultFXMLModel will now load by default the fxml file that has the same name of the model class name (and at the same location)
 
+- Improve Simple Model - [#103](https://github.com/JRebirth/JRebirth/issues/103)<br/>
+Simple now supports auto instantiation of the root anode according to generic type used, it also supports @RootNodeId annotation for SimpleModel.
+
+
+API Change
+- AbstractSimpleModel.prepareNode => AbstractSimpleModel.initSimpleView
 
 
 7.7.0 - ["Wanna Rock"](https://www.youtube.com/watch?v=SRwrg0db_zY) Release 2014-02-09
