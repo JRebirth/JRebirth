@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.color;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -94,7 +97,7 @@ public final class RGB255Color extends AbstractBaseColor {
     }
 
     /**
-     * @return Returns the blue [0-255].
+     * @return Returns the green [0-255].
      */
     public int blue() {
         return this.blueProperty.get();
@@ -105,21 +108,6 @@ public final class RGB255Color extends AbstractBaseColor {
      */
     public IntegerProperty blueProperty() {
         return this.blueProperty;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        append(sb, red());
-        append(sb, green());
-        append(sb, blue());
-        append(sb, opacity());
-
-        return cleanString(sb);
     }
 
     /**
@@ -144,4 +132,13 @@ public final class RGB255Color extends AbstractBaseColor {
             opacityProperty().set(readDouble(parameters[3], 0.0, 1.0));
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(red(), green(), blue(), opacity());
+    }
+
 }

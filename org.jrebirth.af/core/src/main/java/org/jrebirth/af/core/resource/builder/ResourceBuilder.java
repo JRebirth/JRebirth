@@ -15,7 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.resource.factory;
+package org.jrebirth.af.core.resource.builder;
+
+import org.jrebirth.af.core.resource.ResourceParams;
 
 /**
  * The interface <strong>ResourceFactory</strong>.
@@ -45,6 +47,15 @@ public interface ResourceBuilder<E, P, R> {
     P getParam(final E key);
 
     /**
+     * Retrieve the parameter key.
+     * 
+     * @param key the parameter key
+     * 
+     * @return the parameter key
+     */
+    String getParamKey(final E key);
+
+    /**
      * Retrieve the resource. And build it if it didn't be done before.
      * 
      * @param key the enum as a key
@@ -56,8 +67,8 @@ public interface ResourceBuilder<E, P, R> {
     /**
      * Store a new resource.
      * 
-     * @param key the enum used as a key
+     * @param key the serialized {@link ResourceParams} used
      * @param resource the resource to weakly store
      */
-    void set(final E key, final R resource);
+    void set(final String key, final R resource);
 }

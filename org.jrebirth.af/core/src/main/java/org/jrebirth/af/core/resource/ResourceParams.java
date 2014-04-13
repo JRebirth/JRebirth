@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.resource.color;
+package org.jrebirth.af.core.resource;
 
 /**
  * The class <strong>ResourceParams</strong>.
@@ -51,14 +51,14 @@ public interface ResourceParams {
      * 
      * @return the unique dynamic key
      */
-    String getDynamicKey();
+    String getKey();
 
     /**
      * Define the dynamic key used to hold resources without static field.
      * 
      * @param dynamicKey the unique dynamic key
      */
-    void setDynamicKey(final String dynamicKey);
+    void setKey(final String dynamicKey);
 
     /**
      * Parse a string to initialize fields.

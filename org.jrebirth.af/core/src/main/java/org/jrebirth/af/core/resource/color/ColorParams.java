@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.resource.color;
 
+import org.jrebirth.af.core.resource.ResourceParams;
+
 /**
  * The class <strong>ColorParams</strong>.
  * 

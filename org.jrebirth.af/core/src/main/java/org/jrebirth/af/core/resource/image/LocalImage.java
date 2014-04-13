@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.resource.image;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * The interface <strong>LocalImage</strong>.
  * 
@@ -58,20 +61,6 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        append(sb, path());
-        append(sb, name());
-        append(sb, extension().toString());
-
-        return cleanString(sb);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void parse(final String[] parameters) {
         if (parameters.length == 1) {
             nameProperty().set(parameters[0]);
@@ -86,4 +75,13 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
             extensionProperty().set(ImageExtension.valueOf(parameters[2]));
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends Object> getFieldValues() {
+        return Arrays.asList(path(), name(), extension().toString());
+    }
+
 }
