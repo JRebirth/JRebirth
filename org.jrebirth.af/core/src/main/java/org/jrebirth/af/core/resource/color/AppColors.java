@@ -17,10 +17,6 @@
  */
 package org.jrebirth.af.core.resource.color;
 
-import javafx.scene.paint.Color;
-
-import org.jrebirth.af.core.resource.ResourceBuilders;
-
 /**
  * The class <strong>AppColors</strong>.
  * 
@@ -28,40 +24,11 @@ import org.jrebirth.af.core.resource.ResourceBuilders;
  */
 public enum AppColors implements ColorItem {
 
-    // Vision of future with Java 8
-    //
-    // /** The stage background color. */
-    // STAGE_BG {
-    // {
-    // set(new RGB255Color(240, 240, 255, 1.0));
-    // }
-    // };
-
     /** The stage background color. */
-    STAGE_BG(new RGB255Color(240, 240, 255, 1.0));
+    STAGE_BG {
+        {
+            rgb255(240, 240, 255, 1.0);
+        }
+    };
 
-    /**
-     * Private Constructor.
-     * 
-     * @param colorParams the primitive values for the color
-     */
-    private AppColors(final ColorParams colorParams) {
-        builder().storeParams(this, colorParams);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Color get() {
-        return builder().get(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ColorBuilder builder() {
-        return ResourceBuilders.COLOR_BUILDER;
-    }
 }

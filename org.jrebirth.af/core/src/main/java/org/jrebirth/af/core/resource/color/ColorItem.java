@@ -19,6 +19,7 @@ package org.jrebirth.af.core.resource.color;
 
 import javafx.scene.paint.Color;
 
+import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.ResourceItem;
 
 /**
@@ -28,31 +29,41 @@ import org.jrebirth.af.core.resource.ResourceItem;
  */
 public interface ColorItem extends ResourceItem<Color, ColorBuilder> {
 
-    // Vision of future with Java 8
+    /**
+     * Attach the color param.
+     *
+     * @param colorParams the primitive values for the color
+     */
+    default void set(final ColorParams colorParams) {
+        builder().storeParams(this, colorParams);
+    }
 
-    // /**
-    // * Attach the color param.
-    // *
-    // * @param colorParams the primitive values for the color
-    // */
-    // default void set(final ColorParams colorParams) {
-    // builder().storeParams(this, colorParams);
-    // }
-    //
-    // /**
-    // * {@inheritDoc}
-    // */
-    // @Override
-    // default Color get() {
-    // return builder().get(this);
-    // }
-    //
-    // /**
-    // * {@inheritDoc}
-    // */
-    // @Override
-    // default ColorBuilder builder() {
-    // return ResourceBuilders.COLOR_BUILDER;
-    // }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default Color get() {
+        return builder().get(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default ColorBuilder builder() {
+        return ResourceBuilders.COLOR_BUILDER;
+    }
+
+    /**
+     * .
+     * 
+     * @param red
+     * @param green
+     * @param blue
+     * @param opacity
+     */
+    default void rgb255(int red, int green, int blue, double opacity) {
+        set(new RGB255Color(red, green, blue, opacity));
+    }
 
 }
