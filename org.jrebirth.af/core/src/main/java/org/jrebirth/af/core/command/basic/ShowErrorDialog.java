@@ -33,7 +33,7 @@ public class ShowErrorDialog extends DefaultUICommand {
      * {@inheritDoc}
      */
     @Override
-    public void execute(final Wave wave) {
+    public void perform(final Wave wave) {
 
         final Stage stage = getLocalFacade().getGlobalFacade().getApplication().getStage();
 

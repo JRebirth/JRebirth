@@ -50,7 +50,7 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
 
         // The first time we store the list of wave to run into the command field
         if (this.index == 0) {
@@ -65,7 +65,7 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
      * {@inheritDoc}
      */
     @Override
-    public void postExecute(final Wave wave) {
+    public void afterPerform(final Wave wave) {
         // Nothing
     }
 

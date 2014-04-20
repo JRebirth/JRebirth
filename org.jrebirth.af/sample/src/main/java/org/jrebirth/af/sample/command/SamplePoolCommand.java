@@ -28,7 +28,7 @@ public final class SamplePoolCommand extends DefaultPoolCommand {
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
 
         LOGGER.info("Perform a short or long action into a decicated thread from JTP");
         LOGGER.info("Be careful the JTP size depend on configuration");

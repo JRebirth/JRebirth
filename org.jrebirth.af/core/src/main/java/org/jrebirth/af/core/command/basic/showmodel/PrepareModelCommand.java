@@ -40,7 +40,7 @@ public class PrepareModelCommand extends DefaultPoolBeanCommand<DisplayModelWave
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
 
         // Retrieved the model class
         // final Class<? extends Model> modelClass = (Class<? extends Model>) getWaveBean(wave).getShowModelKey().getClass();

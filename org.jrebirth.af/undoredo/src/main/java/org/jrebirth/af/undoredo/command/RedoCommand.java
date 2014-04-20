@@ -39,7 +39,7 @@ public class RedoCommand extends DefaultCommand {
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) throws CommandException {
+    protected void perform(final Wave wave) throws CommandException {
         this.stackName = wave.get(UndoRedoWaves.STACK_NAME);
         getService(UndoRedoService.class, this.stackName).redo();
     }

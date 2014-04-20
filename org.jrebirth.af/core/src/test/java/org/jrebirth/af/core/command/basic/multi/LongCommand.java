@@ -19,7 +19,7 @@ public class LongCommand extends DefaultCommand {
      * {@inheritDoc}
      */
     @Override
-    protected void execute(Wave wave) throws CommandException {
+    protected void perform(Wave wave) throws CommandException {
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

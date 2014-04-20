@@ -33,7 +33,7 @@ public final class ShowNextSlideCommand extends DefaultUICommand {
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
         getModel(SlideStackModel.class).next();
     }
 

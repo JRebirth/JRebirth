@@ -38,7 +38,7 @@ public final class OpenEventTrackerFileCommand extends DefaultUICommand {
      * {@inheritDoc}
      */
     @Override
-    public void execute(final Wave wave) {
+    public void perform(final Wave wave) {
 
         File selected = wave.get(EditorWaves.EVENTS_FILE);
 
