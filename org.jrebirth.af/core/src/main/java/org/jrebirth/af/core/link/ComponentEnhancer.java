@@ -27,9 +27,8 @@ import java.util.Map;
 
 import org.jrebirth.af.core.annotation.AfterInit;
 import org.jrebirth.af.core.annotation.BeforeInit;
-import org.jrebirth.af.core.annotation.Multiton;
+import org.jrebirth.af.core.annotation.Component;
 import org.jrebirth.af.core.annotation.OnRelease;
-import org.jrebirth.af.core.annotation.Singleton;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.exception.CoreException;
@@ -78,14 +77,9 @@ public class ComponentEnhancer {
      */
     public static void injectComponent(final WaveReady<?> component) {
 
-        // Retrieve all fields annotated with Singleton
-        for (final Field field : ClassUtility.getAnnotatedFields(component.getClass(), Singleton.class)) {
-            inject(component, field);
-        }
-
         // Retrieve all fields annotated with Multiton
-        for (final Field field : ClassUtility.getAnnotatedFields(component.getClass(), Multiton.class)) {
-            inject(component, field, field.getAnnotation(Multiton.class).value());
+        for (final Field field : ClassUtility.getAnnotatedFields(component.getClass(), Component.class)) {
+            inject(component, field, field.getAnnotation(Component.class).value());
         }
 
     }
@@ -97,6 +91,7 @@ public class ComponentEnhancer {
      * @param field the field
      * @param keyParts the key parts
      */
+    @SuppressWarnings("unchecked")
     private static void inject(final FacadeReady<?> component, final Field field, final Object... keyParts) {
 
         try {
