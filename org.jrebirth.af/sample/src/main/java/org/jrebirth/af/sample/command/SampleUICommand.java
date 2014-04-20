@@ -35,7 +35,7 @@ public final class SampleUICommand extends DefaultUIBeanCommand<WaveBean> {
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
 
         LOGGER.info("Display a pop up from JAT");
 

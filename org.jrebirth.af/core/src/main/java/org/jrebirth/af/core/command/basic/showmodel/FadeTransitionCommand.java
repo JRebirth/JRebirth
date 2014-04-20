@@ -57,7 +57,7 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
 
         // The old node is the one that exists into the parent container (or null if none)
         Node oldNode = getWaveBean(wave).getHideModel() == null ? null : getWaveBean(wave).getHideModel().getRootNode();

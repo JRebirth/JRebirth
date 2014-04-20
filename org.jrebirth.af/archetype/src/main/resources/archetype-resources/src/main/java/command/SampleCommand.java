@@ -32,7 +32,7 @@ public final class SampleCommand extends DefaultCommand {
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
 
         LOGGER.info("Perform a short action JIT");
         LOGGER.info("Be careful it locks wave processing");

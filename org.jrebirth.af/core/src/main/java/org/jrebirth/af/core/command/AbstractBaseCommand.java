@@ -105,21 +105,21 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
     }
 
     /**
-     * Execute the command code.
+     * Perform the command code.
      * 
      * @param wave the wave that contain data to be processed
      * 
      * @throws CommandException if an error occurred while processing the command
      */
-    protected abstract void execute(final Wave wave) throws CommandException;
+    protected abstract void perform(final Wave wave) throws CommandException;
 
     /**
      * {@inheritDoc}
      */
     @Override
     protected void processWave(final Wave wave) {
-        // Command must not be run a long time, so they can't handle wave types
-        LOGGER.warn("Command don't manage wave type handling"); // FIXME
+        // Command that listen WaveType are retained in memory by the notifier
+        LOGGER.warn(this.getClass() + " should manage custom code to handle the wave " + wave.toString() + " or unlisten this type");
     }
 
     /**
@@ -162,9 +162,9 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      * @throws CommandException if an error occurred
      */
     final void innerRun(final Wave wave) throws CommandException {
-        preExecute(wave);
-        execute(wave);
-        postExecute(wave);
+        beforePerform(wave);
+        perform(wave);
+        afterPerform(wave);
     }
 
     /**
@@ -172,14 +172,14 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
      * 
      * @param wave the wave that triggered this command
      */
-    protected abstract void preExecute(final Wave wave);
+    protected abstract void beforePerform(final Wave wave);
 
     /**
      * Actions to perform after the command into the executor thread.
      * 
      * @param wave the wave that triggered this command
      */
-    protected abstract void postExecute(final Wave wave);
+    protected abstract void afterPerform(final Wave wave);
 
     /**
      * @return Returns the runInto.

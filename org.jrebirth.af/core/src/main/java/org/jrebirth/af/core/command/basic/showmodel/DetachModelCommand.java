@@ -40,7 +40,7 @@ public class DetachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBea
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
 
         Model hideModel = getWaveBean(wave).getHideModel();
         if (hideModel == null && getWaveBean(wave).getHideModelKey() != null) {

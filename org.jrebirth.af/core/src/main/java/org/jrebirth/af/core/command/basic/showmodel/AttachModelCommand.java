@@ -39,7 +39,7 @@ public class AttachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBea
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
 
         // final Pane parentNode = getWaveBean(wave).getParentNode();
         final Node createdNode = getWaveBean(wave).getShowModel().getRootNode();

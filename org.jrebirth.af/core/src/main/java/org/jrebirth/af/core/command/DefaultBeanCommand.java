@@ -47,7 +47,7 @@ public class DefaultBeanCommand<WB extends WaveBean> extends AbstractSingleComma
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) throws CommandException {
+    protected void perform(final Wave wave) throws CommandException {
         // Nothing to do yet by the default command, must be overridden
     }
 

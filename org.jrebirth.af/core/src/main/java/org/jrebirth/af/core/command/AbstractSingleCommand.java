@@ -84,7 +84,7 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
      * {@inheritDoc}
      */
     @Override
-    public void preExecute(final Wave wave) {
+    public void beforePerform(final Wave wave) {
         this.running.set(true);
     }
 
@@ -92,7 +92,7 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
      * {@inheritDoc}
      */
     @Override
-    public void postExecute(final Wave wave) {
+    public void afterPerform(final Wave wave) {
         this.running.set(false);
         fireConsumed(wave);
     }

@@ -34,7 +34,7 @@ public final class AccessBallCommand extends DefaultUICommand {
      * {@inheritDoc}
      */
     @Override
-    public void execute(final Wave wave) {
+    public void perform(final Wave wave) {
 
         final JRebirthEvent event = wave.get(EditorWaves.EVENT);
         final BallModel targetBallModel = getModel(BallModel.class, event);

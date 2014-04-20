@@ -38,7 +38,7 @@ public class StageCommand extends DefaultUIBeanCommand<StageWaveBean> {
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
 
         final StageService ss = getService(StageService.class);
 

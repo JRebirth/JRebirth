@@ -34,7 +34,7 @@ public class DisplayInfoPropertiesCommand extends DefaultUICommand {
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
         // Nothing to do yet
     }
 

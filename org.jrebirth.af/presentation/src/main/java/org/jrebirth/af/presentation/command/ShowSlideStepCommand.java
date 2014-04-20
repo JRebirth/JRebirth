@@ -35,7 +35,7 @@ public final class ShowSlideStepCommand extends DefaultUICommand {
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
         // Retrieve the slide model
         final SlideModel<SlideStep> model = getModel(wave.get(ShowSlideWaves.SLIDE_MODEL_CLASS));
 

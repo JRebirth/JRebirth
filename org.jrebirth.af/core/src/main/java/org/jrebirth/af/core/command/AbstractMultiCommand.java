@@ -175,7 +175,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * {@inheritDoc}
      */
     @Override
-    public void preExecute(final Wave wave) {
+    public void beforePerform(final Wave wave) {
         this.running.set(true);
     }
 
@@ -183,7 +183,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * {@inheritDoc}
      */
     @Override
-    public void postExecute(final Wave wave) {
+    public void afterPerform(final Wave wave) {
         // Nothing to do
     }
 
@@ -198,7 +198,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
 
         // Avoid to continue launching next command if cancellation has been requested
         if (!this.cancelRequested.get()) {
@@ -252,7 +252,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                 // Run next command if any
                 if (this.commandList.size() > this.commandRunIndex) {
                     // Recurse to handle next command
-                    execute(wave);
+                    perform(wave);
                 } else {
                     this.running.set(false);
                     // No more command to run the MultiCommand is achieved
