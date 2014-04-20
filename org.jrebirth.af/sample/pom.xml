@@ -96,65 +96,86 @@
 				<artifactId>webstart-maven-plugin</artifactId>
 				<version>1.0-beta-6</version>
 
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>keytool-api-1.7</artifactId>
+						<version>1.4</version>
+					</dependency>
+				</dependencies>
+
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<phase>verify</phase>
 						<goals>
-							<goal>jnlp</goal> <!-- use jnlp, jnlp-inline or jnlp-single as appropriate -->
+							<goal>jnlp</goal>
 						</goals>
 					</execution>
 				</executions>
 
 				<configuration>
 
+					<filenameMapping>full</filenameMapping>
+
+					<updateManifestEntries>
+						<Application-Name>${project.name}</Application-Name>
+						<Trusted-Library>true</Trusted-Library>
+						<Permissions>${permissions}</Permissions>
+						<Codebase>${codebase}</Codebase>
+						<Trusted-Only>true</Trusted-Only>
+					</updateManifestEntries>
+
+
 					<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
 					<excludeTransitive>false</excludeTransitive>
-					<libPath>lib</libPath>
 
-					<resourcesDirectory>${project.basedir}/src/main/jnlp/resources</resourcesDirectory>
-					<codebase>${deployUrl}/${deployPath}</codebase>
+					<libPath>lib</libPath>
+					<codebase>${codebase}</codebase>
 
 					<jnlp>
-						<!-- <inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath> <inputTemplate>src/main/jnlp/template.vm</inputTemplate> -->
 						<outputFile>${jnlpFilename}</outputFile>
-
 						<mainClass>${appClass}</mainClass>
 						<offlineAllowed>true</offlineAllowed>
+						<allPermissions>true</allPermissions>
 					</jnlp>
 
 					<sign>
-						<keystore>${basedir}/yourkey.jks</keystore>
-						<!-- MUST BE PROVIDED BY COMMAND LINE ARGUMENTS -->
-						<!-- -Dstorepass=xxx -Dkeypass=xxx -->
+						<keystore>${keystore}</keystore>
 						<keypass>${keypass}</keypass>
 						<storepass>${storepass}</storepass>
-						<!-- <storetype>fillme</storetype> -->
-						<alias>sample</alias>
+						<storetype>${storetype}</storetype>
+
+						<alias>${keyalias}</alias>
 
 						<validity>360</validity>
-						<dnameCn>www.sample.org</dnameCn>
-						<dnameOu>None</dnameOu>
-						<dnameO>Sample</dnameO>
+						<dnameCn>JRebirth Self-signed Certificate</dnameCn>
+						<dnameOu>JRebirth OSS</dnameOu>
+						<dnameO>JRebirth</dnameO>
 						<dnameL>Toulouse</dnameL>
-						<dnameSt>HG</dnameSt>
+						<dnameSt>Haute-Garonne</dnameSt>
 						<dnameC>FR</dnameC>
-
 						<verify>true</verify>
 
 						<keystoreConfig>
-							<delete>true</delete>
-							<gen>true</gen>
+							<delete>${deletekeystore}</delete>
+							<gen>${genkeystore}</gen>
 						</keystoreConfig>
+
 					</sign>
 
-					<pack200>true</pack200>
+					<pack200>
+						<enabled>false</enabled>
+					</pack200>
 					<gzip>true</gzip>
 
 					<outputJarVersions>false</outputJarVersions>
+
 					<install>false</install>
 					<verbose>true</verbose>
 				</configuration>
+
 			</plugin>
+
 		</plugins>
 	</build>
 
