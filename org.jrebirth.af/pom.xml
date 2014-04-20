@@ -20,6 +20,15 @@
 	<description>JRebirth is an Application Framework dedicated to JavaFX 2+ technology.</description>
 	<inceptionYear>2011</inceptionYear>
 
+	<properties>
+		<lightningtalk.version>1.1.1</lightningtalk.version>
+		<masteringtables.version>1.1.0</masteringtables.version>
+		<jaf.version>1.1.0</jaf.version>
+		<breizhcamp.version>1.1.0</breizhcamp.version>
+		<eclipseday.version>1.0.0</eclipseday.version>
+		<eclipsecon.version>1.0.0</eclipsecon.version>
+	</properties>
+
 	<modules>
 		<module>core</module>
 		<module>component</module>
@@ -112,10 +121,6 @@
 
 		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, it's not yet implemented: see MNG-2216 -->
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
-
-		<filters>
-			<filter>src/main/filters/versions.properties</filter>
-		</filters>
 		
 		<plugins>
 		
