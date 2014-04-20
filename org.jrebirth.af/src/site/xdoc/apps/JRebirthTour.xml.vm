@@ -12,33 +12,34 @@
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
 	<properties>
-		<title>Mastering Tables - Game for Kids</title>
+		<title>JRebirth AF Tour</title>
 		<author>Sébastien Bordes</author>
-		<date>05/06/2013</date>
+		<date>30/11/2012</date>
 	</properties>
 
 	<head>
 
-		<meta name="keywords" lang="Fr" content="JavaFX Mind Game Mastering Tables" />
-		<meta name="keywords" lang="En" content="JavaFX Mind Game Mastering Tables" />
-		<meta name="description" content="JavaFX Mind Game Mastering Tables" />
+		<meta name="keywords" lang="Fr" content="JavaFX 2 Demo Application Presentation" />
+		<meta name="keywords" lang="En" content="JavaFX 2 Demo Application Presentation" />
+		<meta name="description" content="JavaFx 2 JavaFx 2.0 Demo Application Presentation JRebirth Framework Tour" />
 
 	</head>
 	<body>
 		<script type="text/javascript">//<![CDATA[
-			var JAVAFX_APP_JNLP='masteringtables/1.1.0-SNAPSHOT/MasteringTables.jnlp';
-			var JAVAFX_APP_WIDTH=800;
-			var JAVAFX_APP_HEIGHT=600;
+			var JAVAFX_APP_JNLP='jaf/${jaf.version}/JRebirthTour.jnlp';
+			var JAVAFX_APP_WIDTH=1024;
+			var JAVAFX_APP_HEIGHT=768;
 		//]]></script>
+		
 		<script type="text/javascript" src="../web-files/dtjava.js"></script>
 		<script type="text/javascript" src="../web-files/javafxApp.js"></script>
 
-		<section id="MasteringTables" name="Mastering Tables Mind Game" title="Mastering Tables Mind Game">
+		<section id="prez" name="JRebirth Application Framework" title="JRebirth Application Framework">
 
-			<div id="catcherTitle">Mastering Tables - Game for Kids</div>
-			<div id="catcherContent">Help kids learning their Math Tables</div>
+			<div id="catcherTitle">JRebirth Presentation</div>
+			<div id="catcherContent">Discovering JRebirth Features</div>
 
-			<p>This application has been used as Workshop support during EclipseCON France JavaFX workshop</p>
+			<p>This application has been shown during Heroes Event at ToulouseJUG</p>
 			<p>
 				Require
 				<a href="http://www.oracle.com/technetwork/java/javafx/downloads/index.html">Java 7 with JavaFX 2 Runtime</a>
@@ -50,18 +51,19 @@
 				<strong>You can launch the application with Java Webstart:</strong>
 				<a id="launchApp" href="#" title="Launch Application with Java WebStart">Click to launch this application with Java WebStart</a>
 				<br />
+				Press F11 to activate fullscreen mode, use left-click to show the next slide (or page down), right click for previous slide (or page up).
 			</p>
 			<p>
 				You can download the whole application here :
-				<a href="http://apps.jrebirth.org/masteringtables/masteringtables-1.0.0-SNASPHOT.zip">Mastering Tables Game</a>
+				<a href="http://apps.jrebirth.org/jaf/jaf-${jaf.version}.zip">JRebirth-Presentation</a>
 			</p>
 			<p>
 				You can browse the source code on
-				<a title="JRebirth Mastering Tables Repository" href="https://github.com/JRebirth/MasteringTables" target="_blank">GitHub MasteringTables repository</a>
+				<a title="JRebirth Presentation Repository" href="https://github.com/JRebirth/JRebirth-Presentation" target="_blank">GitHub JRebirth-Presentation repository</a>
 				.
 			</p>
 
-			<div id="javafx-app-placeholder" style="margin: auto; width:800px; padding: 0;">
+			<div id="javafx-app-placeholder" style="margin: 0 -27px; padding: 0;">
 			</div>
 
 		</section>

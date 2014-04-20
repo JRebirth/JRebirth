@@ -26,7 +26,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">//<![CDATA[
-			var JAVAFX_APP_JNLP='eclipseday/1.0.0-SNAPSHOT/EclipseDayToulouse.jnlp';
+			var JAVAFX_APP_JNLP='eclipseday/${eclipseday.version}/EclipseDayToulouse.jnlp';
 			var JAVAFX_APP_WIDTH=1024;
 			var JAVAFX_APP_HEIGHT=768;
 		//]]></script>
@@ -56,6 +56,12 @@
 				<a title="JRebirth EclipseDay Repository" href="https://github.com/JRebirth/EclipseDay-Presentation" target="_blank">GitHub</a>
 				.
 			</p>
+			
+			<p>
+				You can download the whole application here :
+				<a href="http://apps.jrebirth.org/eclipseday/eclipseday-${eclipseday.version}.zip">EclipseDay Slides</a>
+			</p>
+			
 			<div id="javafx-app-placeholder" style="margin: 0 -27px; padding: 0;">
 			</div>
 

@@ -113,6 +113,10 @@
 		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, it's not yet implemented: see MNG-2216 -->
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
 
+		<filters>
+			<filter>src/main/filters/versions.properties</filter>
+		</filters>
+		
 		<plugins>
 		
 		<plugin>
@@ -122,7 +126,6 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-					<!-- <compilerArguments> <bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jfxrt.jar</bootclasspath> </compilerArguments> -->
 				</configuration>
 			</plugin>
 
@@ -319,5 +322,5 @@
 			<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url>
 		</site>
 	</distributionManagement>
-
+	
 </project>
