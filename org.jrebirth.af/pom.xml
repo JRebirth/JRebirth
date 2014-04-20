@@ -114,7 +114,7 @@
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
 
 		<filters>
-			<filter>src/main/filters/v.properties</filter>
+			<filter>src/main/filters/versions.properties</filter>
 		</filters>
 		
 		<plugins>
