@@ -40,7 +40,7 @@ public class StackUpCommand extends DefaultCommand {
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) throws CommandException {
+    protected void perform(final Wave wave) throws CommandException {
 
         this.stackName = wave.get(UndoRedoWaves.STACK_NAME);
         final UndoRedoService service = getService(UndoRedoService.class, this.stackName);

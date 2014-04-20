@@ -38,7 +38,7 @@ public abstract class AbstractUndoableCommand<WB extends WaveBean> extends Abstr
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) throws CommandException {
+    protected void perform(final Wave wave) throws CommandException {
 
         // Get the undo/redo flag to know which action to perform
         if (wave.contains(UndoRedoWaves.UNDO_REDO)) {

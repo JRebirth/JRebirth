@@ -20,7 +20,7 @@ public class UiCommand extends DefaultUICommand {
      * {@inheritDoc}
      */
     @Override
-    protected void execute(Wave wave) {
+    protected void perform(Wave wave) {
 
         Stage s = new Stage();
         s.show();

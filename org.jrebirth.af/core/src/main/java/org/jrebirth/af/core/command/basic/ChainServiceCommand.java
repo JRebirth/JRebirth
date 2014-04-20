@@ -38,7 +38,7 @@ public class ChainServiceCommand extends DefaultCommand implements WaveListener 
      * {@inheritDoc}
      */
     @Override
-    protected void execute(final Wave wave) {
+    protected void perform(final Wave wave) {
         LOGGER.info("execute");
         // Nothing to do yet
     }
@@ -47,7 +47,7 @@ public class ChainServiceCommand extends DefaultCommand implements WaveListener 
      * {@inheritDoc}
      */
     @Override
-    public void postExecute(final Wave wave) {
+    public void afterPerform(final Wave wave) {
         // Nothing
     }
 
