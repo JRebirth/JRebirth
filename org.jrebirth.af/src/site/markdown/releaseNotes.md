@@ -8,15 +8,36 @@ Release Notes
 
 This version provides some enhancements
 
+- Manage dynamic resources [#48](http://github.com/JRebirth/JRebirth/issues/issue/48)<br/>
+Resource Management has been improved by retaining all resources by their toString ResourceParams object.<br />
+Moreover same parameters are now only retained once.<br />
+New Resource Item usage will be available with 8.0.0 version using Java 8 features.
+
+- Add Annotation for common phase of components [#51](http://github.com/JRebirth/JRebirth/issues/issue/51)<br/>
+It's now possible to add method by using one of these annotations: @BefeoreInit, @AfterInit, @OnRelease.<br />
+You can use @MethodPriority to define a custom call order or @SkipAnnotation to avoid usage of them for performance consideration.
+
+- Component injection [#96](http://github.com/JRebirth/JRebirth/issues/issue/96)<br/>
+You can use @Component on any Component field to automatically inject another component, this injection is performed during component initialization phase.
+
 - Simplify FXML usage - [#98](https://github.com/JRebirth/JRebirth/issues/98)<br/>
-DefaultFXMLModel will now load by default the fxml file that has the same name of the model class name (and at the same location)
+DefaultFXMLModel will now load by default the fxml file that has the same name of the model class name (and at the same location).
 
 - Improve Simple Model - [#103](https://github.com/JRebirth/JRebirth/issues/103)<br/>
-Simple now supports auto instantiation of the root anode according to generic type used, it also supports @RootNodeId annotation for SimpleModel.
+Simple now supports auto instantiation of the root node according to generic type used, it also supports @RootNodeId annotation for SimpleModel.
+
+- @OnXXX are broken into 7.7.0 [#99](http://github.com/JRebirth/JRebirth/issues/issue/99)<br/>
+A regression had been introduced into 7.7.0 due to package refactoring, Event handler annotations are not operational into 7.7.0 but fixed into 7.7.1
+
+- Rename execute Command method [#105](http://github.com/JRebirth/JRebirth/issues/issue/105)<br/>
+This API change is a cosmetic one because "execute" has a sad connotation and is now replaced by "perform".
 
 
-API Change
-- AbstractSimpleModel.prepareNode => AbstractSimpleModel.initSimpleView
+API Changes
+
+- AbstractSimpleModel.prepareNode() => AbstractSimpleModel.initSimpleView()
+
+- Command.execute(Wave) => Command.perform(Wave)
 
 
 7.7.0 - ["Wanna Rock"](https://www.youtube.com/watch?v=SRwrg0db_zY) Release 2014-02-09
