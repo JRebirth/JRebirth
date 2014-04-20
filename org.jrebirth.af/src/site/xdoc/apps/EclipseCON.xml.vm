@@ -12,35 +12,33 @@
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
 	<properties>
-		<title>Breizhcamp - JavaFX 2</title>
+		<title>EclipseCON France 2013 - JavaFX Workshop</title>
 		<author>Sébastien Bordes</author>
-		<date>15/06/2012</date>
+		<date>05/06/2013</date>
 	</properties>
 
 	<head>
-		<meta name="keywords" lang="Fr" content="JavaFX 2 Demo Application Presentation" />
-		<meta name="keywords" lang="En" content="JavaFX 2 Demo Application Presentation" />
-		<meta name="description" content="JavaFx 2 JavaFx 2.0 Demo Application Presentation JRebirth Framework Lightning Talk" />
+
+		<meta name="keywords" lang="Fr" content="JavaFx 2 Demo Application Presentation JRebirth Framework EclipseCON France 2013 Workshop" />
+		<meta name="keywords" lang="En" content="JavaFx 2 Demo Application Presentation JRebirth Framework EclipseCON France 2013 Workshop" />
+		<meta name="description" content="JavaFx 2 Demo Application Presentation JRebirth Framework EclipseCON France 2013 Workshop" />
+
 	</head>
 	<body>
 		<script type="text/javascript">//<![CDATA[
-			var JAVAFX_APP_JNLP='breizhcamp/1.1.0-SNAPSHOT/Breizhcamp.jnlp';
+			var JAVAFX_APP_JNLP='eclipsecon/${eclipsecon.version}/EclipseCON.jnlp';
 			var JAVAFX_APP_WIDTH=1024;
 			var JAVAFX_APP_HEIGHT=768;
 		//]]></script>
 		<script type="text/javascript" src="../web-files/dtjava.js"></script>
 		<script type="text/javascript" src="../web-files/javafxApp.js"></script>
 
-		<section id="Breizhcamp" name="JRebirth JavaFX 2 Presentation">
+		<section id="EclipseCON" name="EclipseCON France 2013 - JavaFX Workshop" title="EclipseCON France 2013 - JavaFX Workshop">
 
-			<div id="catcherTitle">JRebirth JavaFX 2 Presentation Demo</div>
-			<div id="catcherContent">DogFooding like JavaFX 2 Presentation</div>
+			<div id="catcherTitle">JRebirth - JavaFX Workshop - EclipseCON France 2013</div>
+			<div id="catcherContent">Support slides for JavaFX Workshop</div>
 
-			<p>
-				This application has been shown during my JavaFX 2 Presentation at
-				<a href="http://app.breizhcamp.cloudbees.net/talk/5.htm">Breizhcamp</a>
-				.
-			</p>
+			<p>This application has been shown during Heroes Event at ToulouseJUG</p>
 			<p>
 				Require
 				<a href="http://www.oracle.com/technetwork/java/javafx/downloads/index.html">Java 7 with JavaFX 2 Runtime</a>
@@ -49,19 +47,28 @@
 				)
 			</p>
 			<p>
-				<strong>Launch by Java Webstart:</strong>
+				<strong>You can launch the application with Java Webstart:</strong>
 				<a id="launchApp" href="#" title="Launch Application with Java WebStart">Click to launch this application with Java WebStart</a>
+				<br />
+				Press F11 to activate fullscreen mode, use left-click to show the next slide (or page down), right click for previous slide (or page up).
 			</p>
 			<p>
-				Press F11 to activate fullscreen mode, use left-click to show the next slide, right click for previous slide
-				You can browse the source code on
-				<a title="JRebirth Demo Source Code" href="https://github.com/JRebirth/JFX-Presentation/tree/master/org.jrebirth.presentation.javafx2" target="_blank">GitHub</a>
-				.
+				You can download the whole application here :
+				<a href="http://apps.jrebirth.org/eclipsecon/eclipsecon-${eclipsecon.version}.zip">EclipseCON Workshop</a>
 			</p>
+			<p>
+				You can download workshop files (Eclipse Juno + m2eclipse + efxclipse + Maven standalone + Jdk7u21) :
+				<a href="http://apps.jrebirth.org/eclipsecon/EclipseCON-Workshop.7z">EclipseCON Workshop</a>
+			</p>
+			<p>
+				You can browse the source code on
+				<a title="JRebirth EclipseCON-France Repository" href="https://github.com/JRebirth/EclipseCON-France" target="_blank">GitHub EclipseCON-France repository</a>.
+			</p>
+
 			<div id="javafx-app-placeholder" style="margin: 0 -27px; padding: 0;">
 			</div>
-		</section>
 
+		</section>
 	</body>
 </document>
 

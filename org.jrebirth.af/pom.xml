@@ -9,6 +9,7 @@
 	</parent>
 
 	<groupId>org.jrebirth</groupId>
+	<artifactId>af</artifactId>
 	<version>7.7.1</version>
 
 	<packaging>pom</packaging>
@@ -112,6 +113,10 @@
 		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, it's not yet implemented: see MNG-2216 -->
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
 
+		<filters>
+			<filter>src/main/filters/v.properties</filter>
+		</filters>
+		
 		<plugins>
 
 			<plugin>
@@ -307,6 +312,5 @@
 			<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url>
 		</site>
 	</distributionManagement>
-
-	<artifactId>af</artifactId>
+	
 </project>
