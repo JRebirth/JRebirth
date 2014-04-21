@@ -26,7 +26,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">//<![CDATA[
-			var JAVAFX_APP_JNLP='jaf/${jaf.version}/JRebirthTour.jnlp';
+			var JAVAFX_APP_JNLP='jaf/${Jaf-version}/JRebirthTour.jnlp';
 			var JAVAFX_APP_WIDTH=1024;
 			var JAVAFX_APP_HEIGHT=768;
 		//]]></script>
@@ -55,7 +55,7 @@
 			</p>
 			<p>
 				You can download the whole application here :
-				<a href="http://apps.jrebirth.org/jaf/jaf-${jaf.version}.zip">JRebirth-Presentation</a>
+				<a href="http://apps.jrebirth.org/jaf/jaf-${Jaf-version}.zip">JRebirth-Presentation</a>
 			</p>
 			<p>
 				You can browse the source code on
