@@ -26,7 +26,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">//<![CDATA[
-			var JAVAFX_APP_JNLP='masteringtables/${masteringtables.version}/MasteringTables.jnlp';
+			var JAVAFX_APP_JNLP='masteringtables/${MasteringTables-version}/MasteringTables.jnlp';
 			var JAVAFX_APP_WIDTH=800;
 			var JAVAFX_APP_HEIGHT=600;
 		//]]></script>
@@ -53,7 +53,7 @@
 			</p>
 			<p>
 				You can download the whole application here :
-				<a href="http://apps.jrebirth.org/masteringtables/masteringtables-${masteringtables.version}.zip">Mastering Tables Game</a>
+				<a href="http://apps.jrebirth.org/masteringtables/masteringtables-${MasteringTables-version}.zip">Mastering Tables Game</a>
 			</p>
 			<p>
 				You can browse the source code on

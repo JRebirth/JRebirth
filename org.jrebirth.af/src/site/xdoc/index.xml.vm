@@ -78,13 +78,13 @@
 					<a href="http://apps.jrebirth.org/org.jrebirth.af/JRebirth-${project.version}.tar.gz">JRebirth ${project.version} .tar.gz</a>
 				</li>
 				<li>
-					<a href="http://apps.jrebirth.org/breizhcamp/javafx2-${breizhcamp.version}.zip">JavaFX Prez</a>
+					<a href="http://apps.jrebirth.org/breizhcamp/javafx2-${Breizhcamp-version}.zip">JavaFX Prez</a>
 				</li>
 				<li>
-					<a href="http://apps.jrebirth.org/jaf/jaf-${jaf.version}.zip">JRebirth Tour</a>
+					<a href="http://apps.jrebirth.org/jaf/jaf-${Jaf-version}.zip">JRebirth Tour</a>
 				</li>
 				<li>
-					<a href="http://apps.jrebirth.org/masteringtables/masteringtables-${masteringtables.version}.zip">Mastering Tables</a>
+					<a href="http://apps.jrebirth.org/masteringtables/masteringtables-${MasteringTables-version}.zip">Mastering Tables</a>
 				</li>
 			</ul>
 		</div>
