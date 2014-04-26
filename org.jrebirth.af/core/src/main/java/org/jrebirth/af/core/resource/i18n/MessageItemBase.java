@@ -21,7 +21,7 @@ import java.text.MessageFormat;
 
 import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.log.JRLevel;
-import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.AbstractResourceItem;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 
 import org.slf4j.Marker;
@@ -31,28 +31,10 @@ import org.slf4j.Marker;
  * 
  * @author Sébastien Bordes
  */
-public final class MessageItemBase implements MessageItem {
+public final class MessageItemBase extends AbstractResourceItem<MessageResource, MessageItem, MessageParams, MessageBuilder> implements MessageItem {
 
-    /** The unique identifier of the color item. */
-    private int uid;
-
-    /**
-     * Default Constructor.
-     * 
-     * You should not use this constructor, see #{@link org.jrebirth.af.core.resource.Resources}
-     * 
-     * @param messageParams the params for i18n message
-     */
-    public MessageItemBase(final MessageParams messageParams) {
-        builder().storeParams(this, messageParams);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MessageResource get() {
-        return builder().get(this);
+    public static MessageItemBase create() {
+        return new MessageItemBase();
     }
 
     /**
@@ -87,32 +69,6 @@ public final class MessageItemBase implements MessageItem {
     public void define(final MessageResource forcedValue) {
         // The default programmatic value (stored into ObjectParameter) is not updated but overridden into the local map
         builder().define(this, forcedValue);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MessageBuilder builder() {
-        return ResourceBuilders.MESSAGE_BUILDER;
-    }
-
-    /**
-     * Gets the uid.
-     * 
-     * @return Returns the uid.
-     */
-    public int getUid() {
-        return this.uid;
-    }
-
-    /**
-     * Sets the uid.
-     * 
-     * @param uid The uid to set.
-     */
-    public void setUid(final int uid) {
-        this.uid = uid;
     }
 
     /**

@@ -17,24 +17,28 @@
  */
 package org.jrebirth.af.core.resource;
 
-import java.util.Hashtable;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.jrebirth.af.core.resource.color.ColorItem;
 import org.jrebirth.af.core.resource.color.ColorItemBase;
 import org.jrebirth.af.core.resource.color.ColorParams;
+import org.jrebirth.af.core.resource.font.FontItem;
 import org.jrebirth.af.core.resource.font.FontItemBase;
 import org.jrebirth.af.core.resource.font.FontParams;
+import org.jrebirth.af.core.resource.fxml.FXMLItem;
 import org.jrebirth.af.core.resource.fxml.FXMLItemBase;
 import org.jrebirth.af.core.resource.fxml.FXMLParams;
 import org.jrebirth.af.core.resource.i18n.Message;
+import org.jrebirth.af.core.resource.i18n.MessageItem;
 import org.jrebirth.af.core.resource.i18n.MessageItemBase;
+import org.jrebirth.af.core.resource.image.ImageItem;
 import org.jrebirth.af.core.resource.image.ImageItemBase;
 import org.jrebirth.af.core.resource.image.ImageParams;
 import org.jrebirth.af.core.resource.parameter.ObjectParameter;
+import org.jrebirth.af.core.resource.parameter.ParameterItem;
 import org.jrebirth.af.core.resource.parameter.ParameterItemBase;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.style.StyleSheetItem;
 import org.jrebirth.af.core.resource.style.StyleSheetItemBase;
 import org.jrebirth.af.core.resource.style.StyleSheetParams;
 
@@ -69,9 +73,6 @@ public final class Resources {
     /** The generator of unique id for message items. */
     private static AtomicInteger messageIdGenerator = new AtomicInteger();
 
-    /** The dynamic color map. */
-    private static Map<String, ColorItem> colorMap = new Hashtable<>();
-
     /**
      * Private Constructor.
      */
@@ -92,13 +93,9 @@ public final class Resources {
      * 
      * @return a new fresh color item object
      */
-    public static <O extends Object> ParameterItemBase<O> create(final ObjectParameter<O> parameterParams) {
-        final ParameterItemBase<O> parameterItem = new ParameterItemBase<O>(parameterParams);
-
+    public static <O extends Object> ParameterItem<O> create(final ObjectParameter<O> parameterParams) {
         // Ensure that the uid will be unique at runtime
-        parameterItem.setUid(parameterIdGenerator.incrementAndGet());
-
-        return parameterItem;
+        return ParameterItemBase.create(parameterParams.object()).uid(parameterIdGenerator.incrementAndGet()).set(parameterParams);
     }
 
     /**
@@ -111,7 +108,7 @@ public final class Resources {
      * 
      * @return a new fresh color item object
      */
-    public static <O extends Object> ParameterItemBase<O> create(final String name, final O defaultValue) {
+    public static <O extends Object> ParameterItem<O> create(final String name, final O defaultValue) {
         return create(new ObjectParameter<O>(name, defaultValue));
     }
 
@@ -127,30 +124,7 @@ public final class Resources {
      * @return a new fresh color item object
      */
     public static ColorItem create(final ColorParams colorParams) {
-        final ColorItemBase colorItem = new ColorItemBase(colorParams);
-
-        // Ensure that the uid will be unique at runtime
-        colorItem.setUid(colorIdGenerator.incrementAndGet());
-
-        return colorItem;
-    }
-
-    /**
-     * Build a color item.
-     * 
-     * @param colorParams the primitive values for the color
-     * @param dynamicKey the dynamic key used to register this color
-     * 
-     * @return a new fresh color item object
-     */
-    public static ColorItem create(final ColorParams colorParams, final String dynamicKey) {
-        colorParams.setKey(dynamicKey);
-        final ColorItem colorItem = create(colorParams);
-
-        if (!colorMap.containsKey(dynamicKey)) {
-            colorMap.put(dynamicKey, colorItem);
-        }
-        return colorItem;
+        return ColorItemBase.create().uid(colorIdGenerator.incrementAndGet()).set(colorParams);
     }
 
     /*************************************************************************/
@@ -164,13 +138,9 @@ public final class Resources {
      * 
      * @return a new fresh font item object
      */
-    public static FontItemBase create(final FontParams fontParams) {
-        final FontItemBase fontItem = new FontItemBase(fontParams);
-
+    public static FontItem create(final FontParams fontParams) {
         // Ensure that the uid will be unique at runtime
-        fontItem.setUid(fontIdGenerator.incrementAndGet());
-
-        return fontItem;
+        return FontItemBase.create().uid(fontIdGenerator.incrementAndGet()).set(fontParams);
     }
 
     /*************************************************************************/
@@ -184,14 +154,9 @@ public final class Resources {
      * 
      * @return a new fresh image item object
      */
-    public static ImageItemBase create(final ImageParams imageParams) {
-
-        final ImageItemBase imageItem = new ImageItemBase(imageParams);
-
+    public static ImageItem create(final ImageParams imageParams) {
         // Ensure that the uid will be unique at runtime
-        imageItem.setUid(imageIdGenerator.incrementAndGet());
-
-        return imageItem;
+        return ImageItemBase.create().uid(imageIdGenerator.incrementAndGet()).set(imageParams);
     }
 
     /*************************************************************************/
@@ -205,14 +170,9 @@ public final class Resources {
      * 
      * @return a new fresh file
      */
-    public static StyleSheetItemBase create(final StyleSheetParams styleSheetParams) {
-
-        final StyleSheetItemBase styleSheetItem = new StyleSheetItemBase(styleSheetParams);
-
+    public static StyleSheetItem create(final StyleSheetParams styleSheetParams) {
         // Ensure that the uid will be unique at runtime
-        styleSheetItem.setUid(styleSheetIdGenerator.incrementAndGet());
-
-        return styleSheetItem;
+        return StyleSheetItemBase.create().uid(styleSheetIdGenerator.incrementAndGet()).set(styleSheetParams);
     }
 
     /*************************************************************************/
@@ -226,14 +186,9 @@ public final class Resources {
      * 
      * @return a new fresh FXML item
      */
-    public static FXMLItemBase create(final FXMLParams fxmlParams) {
-
-        final FXMLItemBase fxmlItem = new FXMLItemBase(fxmlParams);
-
+    public static FXMLItem create(final FXMLParams fxmlParams) {
         // Ensure that the uid will be unique at runtime
-        fxmlItem.setUid(fxmlIdGenerator.incrementAndGet());
-
-        return fxmlItem;
+        return FXMLItemBase.create().uid(fxmlIdGenerator.incrementAndGet()).set(fxmlParams);
     }
 
     /*************************************************************************/
@@ -247,14 +202,9 @@ public final class Resources {
      * 
      * @return a new fresh Message item
      */
-    public static MessageItemBase create(final Message messageParams) {
-
-        final MessageItemBase messageItem = new MessageItemBase(messageParams);
-
+    public static MessageItem create(final Message messageParams) {
         // Ensure that the uid will be unique at runtime
-        messageItem.setUid(messageIdGenerator.incrementAndGet());
-
-        return messageItem;
+        return MessageItemBase.create().uid(messageIdGenerator.incrementAndGet()).set(messageParams);
     }
 
     /**

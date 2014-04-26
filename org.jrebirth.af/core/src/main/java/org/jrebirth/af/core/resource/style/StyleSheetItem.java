@@ -19,6 +19,7 @@ package org.jrebirth.af.core.resource.style;
 
 import java.net.URL;
 
+import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.ResourceItem;
 
 /**
@@ -26,6 +27,30 @@ import org.jrebirth.af.core.resource.ResourceItem;
  * 
  * @author Sébastien Bordes
  */
-public interface StyleSheetItem extends ResourceItem<URL, StyleSheetBuilder> {
+public interface StyleSheetItem extends ResourceItem<URL, StyleSheetItem, StyleSheetParams, StyleSheetBuilder> {
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default StyleSheetItem set(final StyleSheetParams styleSheetParams) {
+        builder().storeParams(this, styleSheetParams);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default URL get() {
+        return builder().get(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default StyleSheetBuilder builder() {
+        return ResourceBuilders.STYLE_SHEET_BUILDER;
+    }
 }

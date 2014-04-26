@@ -17,6 +17,7 @@
  */
 package org.jrebirth.af.core.resource.fxml;
 
+import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.ResourceItem;
 import org.jrebirth.af.core.ui.fxml.FXMLComponent;
 
@@ -25,6 +26,31 @@ import org.jrebirth.af.core.ui.fxml.FXMLComponent;
  * 
  * @author Sébastien Bordes
  */
-public interface FXMLItem extends ResourceItem<FXMLComponent, FXMLBuilder> {
+public interface FXMLItem extends ResourceItem<FXMLComponent, FXMLItem, FXMLParams, FXMLBuilder> {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default FXMLItem set(final FXMLParams fxmlParams) {
+        builder().storeParams(this, fxmlParams);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default FXMLComponent get() {
+        return builder().get(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default FXMLBuilder builder() {
+        return ResourceBuilders.FXML_BUILDER;
+    }
 
 }

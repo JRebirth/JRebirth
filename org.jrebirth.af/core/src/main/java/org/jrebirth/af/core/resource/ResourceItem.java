@@ -25,10 +25,19 @@ package org.jrebirth.af.core.resource;
  * 
  * @author Sébastien Bordes
  * 
+ * @param <I> the resource item
  * @param <R> The resource managed
+ * @param <P> the resource parameter
  * @param <B> The resource builder to use
  */
-public interface ResourceItem<R, B> {
+public interface ResourceItem<R, I, P, B> {
+
+    /**
+     * Attach the resource parameter.
+     *
+     * @param params the primitive values for this resource
+     */
+    I set(P params);
 
     /**
      * Return the resource unique instance.

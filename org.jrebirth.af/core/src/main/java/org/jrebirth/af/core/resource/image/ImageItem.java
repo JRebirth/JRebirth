@@ -19,6 +19,7 @@ package org.jrebirth.af.core.resource.image;
 
 import javafx.scene.image.Image;
 
+import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.ResourceItem;
 
 /**
@@ -26,6 +27,93 @@ import org.jrebirth.af.core.resource.ResourceItem;
  * 
  * @author Sébastien Bordes
  */
-public interface ImageItem extends ResourceItem<Image, ImageBuilder> {
+public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, ImageBuilder> {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default ImageItem set(final ImageParams imageParams) {
+        builder().storeParams(this, imageParams);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default Image get() {
+        return builder().get(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default ImageBuilder builder() {
+        return ResourceBuilders.IMAGE_BUILDER;
+    }
+
+    public interface Local extends ImageItem {
+
+        /**
+         * .
+         * 
+         * @param path the image local path
+         * @param name the file name
+         * @param extension the image extension
+         */
+        default void local(final String path, final String name, final ImageExtension extension) {
+            set(new LocalImage(path, name, extension));
+        }
+
+        /**
+         * .
+         * 
+         * @param name the file name
+         * @param extension the image extension
+         */
+        default void local(final String name, final ImageExtension extension) {
+            set(new LocalImage(name, extension));
+        }
+
+        /**
+         * .
+         * 
+         * @param fullName the full file name (including path and image extension)
+         */
+        default void local(final String fullName) {
+            set(new LocalImage(fullName));
+        }
+
+    }
+
+    public interface Web extends ImageItem {
+
+        /**
+         * Default Constructor.
+         * 
+         * @param website the website base url
+         * @param path the path of the image to load
+         * @param name the image file name to use.
+         * @param extension the image extension to use
+         */
+        default void web(final String website, final String path, final String name, final ImageExtension extension) {
+            set(new WebImage(website, path, name, extension));
+        }
+
+        /**
+         * Default Constructor.
+         * 
+         * @param website the website base url
+         * @param secured the http protocol to use (http or https)
+         * @param path the path of the image to load
+         * @param name the image file name to use.
+         * @param extension the image extension to use
+         */
+        default void web(final String website, final boolean secured, final String path, final String name, final ImageExtension extension) {
+            set(new WebImage(website, secured, path, name, extension));
+        }
+    }
 
 }

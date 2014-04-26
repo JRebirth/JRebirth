@@ -19,6 +19,7 @@
 package org.jrebirth.af.core.resource.i18n;
 
 import org.jrebirth.af.core.log.JRLevel;
+import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.ResourceItem;
 
 import org.slf4j.Marker;
@@ -32,7 +33,7 @@ import org.slf4j.Marker;
  * 
  * @author Sébastien Bordes
  */
-public interface MessageItem extends ResourceItem<MessageResource, MessageBuilder> {
+public interface MessageItem extends ResourceItem<MessageResource, MessageItem, MessageParams, MessageBuilder> {
 
     /**
      * Get the message formatted text with or without parameterized objects.
@@ -71,4 +72,48 @@ public interface MessageItem extends ResourceItem<MessageResource, MessageBuilde
      */
     void persist();
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default MessageItem set(final MessageParams messageParams) {
+        builder().storeParams(this, messageParams);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default MessageResource get() {
+        return builder().get(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default MessageBuilder builder() {
+        return ResourceBuilders.MESSAGE_BUILDER;
+    }
+
+    public interface Log extends MessageItem {
+
+        default void log(final String parameterName, final JRLevel level, final Marker marker) {
+            set(new LogMessage(parameterName, level, marker));
+        }
+
+    }
+
+    public interface Msg extends MessageItem {
+
+        /**
+         * Default Constructor.
+         * 
+         * @param parameterName the name of the parameter
+         */
+        default void msg(final String parameterName) {
+            set(new Message(parameterName));
+        }
+    }
 }

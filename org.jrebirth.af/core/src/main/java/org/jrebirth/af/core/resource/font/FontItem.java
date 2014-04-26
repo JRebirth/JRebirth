@@ -18,7 +18,10 @@
 package org.jrebirth.af.core.resource.font;
 
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
+import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.ResourceItem;
 
 /**
@@ -26,6 +29,95 @@ import org.jrebirth.af.core.resource.ResourceItem;
  * 
  * @author Sébastien Bordes
  */
-public interface FontItem extends ResourceItem<Font, FontBuilder> {
+public interface FontItem extends ResourceItem<Font, FontItem, FontParams, FontBuilder> {
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default FontItem set(final FontParams fontParams) {
+        builder().storeParams(this, fontParams);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default Font get() {
+        return builder().get(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default FontBuilder builder() {
+        return ResourceBuilders.FONT_BUILDER;
+    }
+
+    public interface Real extends FontItem {
+
+        /**
+         * .
+         * 
+         * @param name
+         * @param size
+         */
+        default void real(FontName name, double size) {
+            set(new RealFont(name, size));
+        }
+
+    }
+
+    public interface Family extends FontItem {
+
+        /**
+         * .
+         * 
+         * @param family
+         * @param size
+         */
+        default void family(String family, double size) {
+            set(new FamilyFont(family, size));
+        }
+
+        /**
+         * 
+         * TODO To complete.
+         * 
+         * @param family
+         * @param size
+         * @param weight
+         */
+        default void family(final String family, final double size, final FontWeight weight) {
+            set(new FamilyFont(family, size, weight));
+        }
+
+        /**
+         * 
+         * TODO To complete.
+         * 
+         * @param family
+         * @param size
+         * @param posture
+         */
+        default void family(final String family, final double size, final FontPosture posture) {
+            set(new FamilyFont(family, size, posture));
+        }
+
+        /**
+         * 
+         * TODO To complete.
+         * 
+         * @param family
+         * @param size
+         * @param weight
+         * @param posture
+         */
+        default void family(final String family, final double size, final FontWeight weight, final FontPosture posture) {
+            set(new FamilyFont(family, size, weight, posture));
+        }
+
+    }
 }

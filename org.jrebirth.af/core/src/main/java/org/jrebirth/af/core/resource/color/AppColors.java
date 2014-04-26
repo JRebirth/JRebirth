@@ -22,7 +22,7 @@ package org.jrebirth.af.core.resource.color;
  * 
  * @author Sébastien Bordes
  */
-public enum AppColors implements ColorItem {
+public enum AppColors implements ColorEnum {
 
     /** The stage background color. */
     STAGE_BG {

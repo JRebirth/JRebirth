@@ -19,61 +19,17 @@ package org.jrebirth.af.core.resource.image;
 
 import javafx.scene.image.Image;
 
-import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.AbstractResourceItem;
 
 /**
  * The class <strong>ImageItemBase</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class ImageItemBase implements ImageItem {
+public final class ImageItemBase extends AbstractResourceItem<Image, ImageItem, ImageParams, ImageBuilder> implements ImageItem {
 
-    /** The unique identifier of the image item. */
-    private int uid;
-
-    /**
-     * Default Constructor.
-     * 
-     * You should not use this constructor, see #{@link org.jrebirth.af.core.resource.Resources}
-     * 
-     * @param imageParams the primitive values for the image
-     */
-    public ImageItemBase(final ImageParams imageParams) {
-        builder().storeParams(this, imageParams);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Image get() {
-        return builder().get(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ImageBuilder builder() {
-        return ResourceBuilders.IMAGE_BUILDER;
-    }
-
-    /**
-     * Gets the uid.
-     * 
-     * @return Returns the uid.
-     */
-    public int getUid() {
-        return this.uid;
-    }
-
-    /**
-     * Sets the uid.
-     * 
-     * @param uid The uid to set.
-     */
-    public void setUid(final int uid) {
-        this.uid = uid;
+    public static ImageItemBase create() {
+        return new ImageItemBase();
     }
 
 }

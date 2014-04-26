@@ -18,6 +18,7 @@
  */
 package org.jrebirth.af.core.resource.parameter;
 
+import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.ResourceItem;
 
 /**
@@ -31,7 +32,7 @@ import org.jrebirth.af.core.resource.ResourceItem;
  * 
  * @author Sébastien Bordes
  */
-public interface ParameterItem<T extends Object> extends ResourceItem<T, ParameterBuilder> {
+public interface ParameterItem<T extends Object> extends ResourceItem<T, ParameterItem<T>, ParameterParams, ParameterBuilder> {
 
     /**
      * Define a new forced value.
@@ -46,4 +47,30 @@ public interface ParameterItem<T extends Object> extends ResourceItem<T, Paramet
      * Persist a parameter value.
      */
     void persist();
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default ParameterItem<T> set(final ParameterParams parameterParams) {
+        builder().storeParams(this, parameterParams);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    default T get() {
+        return (T) builder().get(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default ParameterBuilder builder() {
+        return ResourceBuilders.PARAMETER_BUILDER;
+    }
 }

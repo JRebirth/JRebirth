@@ -19,61 +19,16 @@ package org.jrebirth.af.core.resource.style;
 
 import java.net.URL;
 
-import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.AbstractResourceItem;
 
 /**
  * The class <strong>StyleSheetItemBase</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class StyleSheetItemBase implements StyleSheetItem {
+public final class StyleSheetItemBase extends AbstractResourceItem<URL, StyleSheetItem, StyleSheetParams, StyleSheetBuilder> implements StyleSheetItem {
 
-    /** The unique identifier of the image item. */
-    private int uid;
-
-    /**
-     * Default Constructor.
-     * 
-     * You should not use this constructor, see #{@link org.jrebirth.af.core.resource.Resources}
-     * 
-     * @param imageParams the primitive values for the image
-     */
-    public StyleSheetItemBase(final StyleSheetParams imageParams) {
-        builder().storeParams(this, imageParams);
+    public static StyleSheetItemBase create() {
+        return new StyleSheetItemBase();
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public URL get() {
-        return builder().get(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public StyleSheetBuilder builder() {
-        return ResourceBuilders.STYLE_SHEET_BUILDER;
-    }
-
-    /**
-     * Gets the uid.
-     * 
-     * @return Returns the uid.
-     */
-    public int getUid() {
-        return this.uid;
-    }
-
-    /**
-     * Sets the uid.
-     * 
-     * @param uid The uid to set.
-     */
-    public void setUid(final int uid) {
-        this.uid = uid;
-    }
-
 }

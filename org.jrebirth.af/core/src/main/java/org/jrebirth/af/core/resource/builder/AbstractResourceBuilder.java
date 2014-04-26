@@ -37,7 +37,7 @@ import org.jrebirth.af.core.resource.provided.JRebirthParameters;
  * @param <P> The params type
  * @param <R> The resource managed
  */
-public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?>, P extends ResourceParams, R> implements ResourceBuilder<E, P, R> {
+public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?, ?, ?>, P extends ResourceParams, R> implements ResourceBuilder<E, P, R> {
 
     /** The resource weak Map. */
     private final Map<E, P> paramsMap = new WeakHashMap<E, P>();

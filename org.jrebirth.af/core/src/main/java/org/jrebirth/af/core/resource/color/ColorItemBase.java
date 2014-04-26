@@ -19,61 +19,17 @@ package org.jrebirth.af.core.resource.color;
 
 import javafx.scene.paint.Color;
 
-import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.AbstractResourceItem;
 
 /**
  * The class <strong>ColorItemBase</strong>.
  * 
  * @author Sébastien Bordes
  */
-public final class ColorItemBase implements ColorItem {
+public final class ColorItemBase extends AbstractResourceItem<Color, ColorItem, ColorParams, ColorBuilder> implements ColorItem {
 
-    /** The unique identifier of the color item. */
-    private int uid;
-
-    /**
-     * Default Constructor.
-     * 
-     * You should not use this constructor, see #{@link org.jrebirth.af.core.resource.Resources}
-     * 
-     * @param colorParams the primitive values for the color
-     */
-    public ColorItemBase(final ColorParams colorParams) {
-        builder().storeParams(this, colorParams);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Color get() {
-        return builder().get(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ColorBuilder builder() {
-        return ResourceBuilders.COLOR_BUILDER;
-    }
-
-    /**
-     * Gets the uid.
-     * 
-     * @return Returns the uid.
-     */
-    public int getUid() {
-        return this.uid;
-    }
-
-    /**
-     * Sets the uid.
-     * 
-     * @param uid The uid to set.
-     */
-    public void setUid(final int uid) {
-        this.uid = uid;
+    public static ColorItemBase create() {
+        return new ColorItemBase();
     }
 
 }
