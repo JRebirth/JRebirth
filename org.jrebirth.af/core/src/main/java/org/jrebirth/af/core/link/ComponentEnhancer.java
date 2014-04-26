@@ -149,19 +149,16 @@ public class ComponentEnhancer {
      */
     public static void manageOnWaveAnnotation(final WaveReady<?> component) {
 
-        // Retrieve class annotation
-        final OnWave clsOnWave = component.getClass().getAnnotation(OnWave.class);
-        if (clsOnWave != null) {
+        // Retrieve class annotations (Java 8 add support for repeatable annotations)
+        for (OnWave clsOnWave : component.getClass().getAnnotationsByType(OnWave.class)) {
             manageUniqueWaveTypeAction(component, clsOnWave.value(), null);
-            manageMultipleWaveTypeAction(component, clsOnWave, null);
         }
 
-        // Iterate over each annotated Method
-        OnWave onWave = null;
+        // Iterate over each annotated Method and all annotations
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), OnWave.class)) {
-            onWave = method.getAnnotation(OnWave.class);
-            manageUniqueWaveTypeAction(component, onWave.value(), method);
-            manageMultipleWaveTypeAction(component, onWave, method);
+            for (OnWave clsOnWave : method.getAnnotationsByType(OnWave.class)) {
+                manageUniqueWaveTypeAction(component, clsOnWave.value(), null);
+            }
         }
 
     }
@@ -186,19 +183,6 @@ public class ComponentEnhancer {
                 // Listen the WaveType and specify the right method handler
                 component.listen(null, method, wt);
             }
-        }
-    }
-
-    /**
-     * Manage several {@link WaveType} subscriptions (from types field of {@link OnWave} annotation).
-     * 
-     * @param waveReady the wave ready
-     * @param onWave the {@link OnWave} annotation to explore
-     * @param method the wave handler method
-     */
-    private static void manageMultipleWaveTypeAction(final WaveReady<?> waveReady, final OnWave onWave, final Method method) {
-        for (final String action : onWave.types()) {
-            manageUniqueWaveTypeAction(waveReady, action, method);
         }
     }
 

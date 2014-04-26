@@ -430,7 +430,7 @@ public final class ClassUtility implements UtilMessages {
      * Retrieve all annotation of the given type from the given class.
      * 
      * @param cls the class that we want to inspect
-     * @param annotationClass the type of Annaotion to find
+     * @param annotationClass the type of Annotation to find
      * 
      * @return the list of annotated method
      */
