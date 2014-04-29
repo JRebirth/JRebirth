@@ -31,8 +31,8 @@ import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.ui.UIMessages;
 import org.jrebirth.af.core.ui.annotation.EnumEventType;
-import org.jrebirth.af.core.ui.annotation.OnAction;
-import org.jrebirth.af.core.ui.annotation.OnKey;
+import org.jrebirth.af.core.ui.annotation.type.Action;
+import org.jrebirth.af.core.ui.annotation.type.Key;
 import org.jrebirth.af.core.util.ClassUtility;
 
 /**
@@ -124,7 +124,7 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
             // Don't change the case for all other letters
             methodName.append(this.annotation.annotationType().getSimpleName().substring(1));
             // Append if necessary the sub type if not equals to any
-            methodName.append(OnKey.KeyType.Any.name().equals(annotationType.toString()) || OnAction.ActionType.Action.name().equals(annotationType.toString()) ? "" : annotationType.name());
+            methodName.append(Key.Any.name().equals(annotationType.toString()) || Action.Action.name().equals(annotationType.toString()) ? "" : annotationType.name());
 
             // Add suffix if handling method is named
             final String uniqueName = getAnnotationName();

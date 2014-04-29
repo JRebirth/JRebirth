@@ -24,8 +24,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javafx.event.Event;
-import javafx.event.EventType;
 import javafx.scene.input.ZoomEvent;
+
+import org.jrebirth.af.core.ui.annotation.type.Zoom;
 
 /**
  * This annotation is used to automatically attached a Zoom event handler to a property node.
@@ -38,51 +39,11 @@ import javafx.scene.input.ZoomEvent;
 public @interface OnZoom {
 
     /**
-     * The Zoom event type.<br />
-     * The zoom type will be appended to method name to use.
-     */
-    public enum ZoomType implements EnumEventType {
-
-        /** Any Zoom Event. */
-        Any(ZoomEvent.ANY),
-
-        /** Zoom started event. */
-        Started(ZoomEvent.ZOOM_STARTED),
-
-        /** Zoom event. */
-        Zoom(ZoomEvent.ZOOM),
-
-        /** Zoom finished event. */
-        Finished(ZoomEvent.ZOOM_FINISHED);
-
-        /** The JavaFX internal api name. */
-        private EventType<?> eventType;
-
-        /**
-         * Default constructor used to link the apiName.
-         * 
-         * @param eventType the javafx event type
-         */
-        private ZoomType(final EventType<?> eventType) {
-            this.eventType = eventType;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public EventType<?> eventType() {
-            return this.eventType;
-        }
-
-    }
-
-    /**
      * Define the event type to manage.
      * 
      * The default value is ZoomType.Any
      */
-    ZoomType[] value() default ZoomType.Any;
+    Zoom[] value() default Zoom.Any;
 
     /**
      * Define a unique name used to avoid sharing same handler.

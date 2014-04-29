@@ -25,7 +25,8 @@ import java.lang.annotation.Target;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventType;
+
+import org.jrebirth.af.core.ui.annotation.type.Finished;
 
 /**
  * This annotation is used to automatically attached a Finished event handler to an Animation.
@@ -38,42 +39,11 @@ import javafx.event.EventType;
 public @interface OnFinished {
 
     /**
-     * The Finished event type.<br />
-     * The Finished type will be appended to method name to use.
-     */
-    enum FinishedType implements EnumEventType {
-
-        /** Unique Action event type. */
-        Action(ActionEvent.ACTION);
-
-        /** The JavaFX internal api name. */
-        private EventType<?> eventType;
-
-        /**
-         * Default constructor used to link the apiName.
-         * 
-         * @param eventType the javafx event type
-         */
-        private FinishedType(final EventType<?> eventType) {
-            this.eventType = eventType;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public EventType<?> eventType() {
-            return this.eventType;
-        }
-
-    }
-
-    /**
      * Define the event type to manage.
      * 
      * The default value is FinishedType.Action, no other type can be defined
      */
-    FinishedType[] value() default FinishedType.Action;
+    Finished[] value() default Finished.Action;
 
     /**
      * Define a unique name used to avoid sharing same handler.

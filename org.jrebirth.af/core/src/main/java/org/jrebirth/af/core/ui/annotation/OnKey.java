@@ -24,8 +24,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javafx.event.Event;
-import javafx.event.EventType;
 import javafx.scene.input.KeyEvent;
+
+import org.jrebirth.af.core.ui.annotation.type.Key;
 
 /**
  * This annotation is used to automatically attached a Key event handler to a property node.
@@ -38,51 +39,11 @@ import javafx.scene.input.KeyEvent;
 public @interface OnKey {
 
     /**
-     * The Key event type.<br />
-     * The Key type will be appended to method name to use.
-     */
-    enum KeyType implements EnumEventType {
-
-        /** Any Key Event. */
-        Any(KeyEvent.ANY),
-
-        /** Key pressed event. */
-        Pressed(KeyEvent.KEY_PRESSED),
-
-        /** Key released event. */
-        Released(KeyEvent.KEY_RELEASED),
-
-        /** Key typed event. */
-        Typed(KeyEvent.KEY_TYPED);
-
-        /** The JavaFX internal api name. */
-        private EventType<?> eventType;
-
-        /**
-         * Default constructor used to link the apiName.
-         * 
-         * @param eventType the javafx event type
-         */
-        private KeyType(final EventType<?> eventType) {
-            this.eventType = eventType;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public EventType<?> eventType() {
-            return this.eventType;
-        }
-
-    }
-
-    /**
      * Define the event type to manage.
      * 
      * The default value is KeyType.Any
      */
-    KeyType value() default KeyType.Any;
+    Key[] value() default Key.Any;
 
     /**
      * Define a unique name used to avoid sharing same handler.

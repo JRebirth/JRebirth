@@ -25,7 +25,8 @@ import java.lang.annotation.Target;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventType;
+
+import org.jrebirth.af.core.ui.annotation.type.Action;
 
 /**
  * This annotation is used to automatically attached an action event handler to a property node.
@@ -38,42 +39,11 @@ import javafx.event.EventType;
 public @interface OnAction {
 
     /**
-     * The Action event type.<br />
-     * The Action type will be appended to method name to use.
-     */
-    enum ActionType implements EnumEventType {
-
-        /** Unique Action event type. */
-        Action(ActionEvent.ACTION);
-
-        /** The JavaFX internal api name. */
-        private EventType<?> eventType;
-
-        /**
-         * Default constructor used to link the apiName.
-         * 
-         * @param eventType the javafx event type
-         */
-        private ActionType(final EventType<?> eventType) {
-            this.eventType = eventType;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public EventType<?> eventType() {
-            return this.eventType;
-        }
-
-    }
-
-    /**
      * Define the event type to manage.
      * 
      * The default value is ActionType.Action, no other type can be defined
      */
-    ActionType[] value() default ActionType.Action;
+    Action[] value() default Action.Action;
 
     /**
      * Define a unique name used to avoid sharing same handler.

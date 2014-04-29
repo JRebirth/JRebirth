@@ -24,8 +24,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javafx.event.Event;
-import javafx.event.EventType;
 import javafx.scene.input.ScrollEvent;
+
+import org.jrebirth.af.core.ui.annotation.type.Scroll;
 
 /**
  * This annotation is used to automatically attached an Scroll event handler to a property node.
@@ -38,51 +39,11 @@ import javafx.scene.input.ScrollEvent;
 public @interface OnScroll {
 
     /**
-     * The Scroll event type.<br />
-     * The scroll type will be appended to method name to use.
-     */
-    enum ScrollType implements EnumEventType {
-
-        /** Any Scroll Event. */
-        Any(ScrollEvent.ANY),
-
-        /** Scroll started event. */
-        Started(ScrollEvent.SCROLL_STARTED),
-
-        /** Scroll event. */
-        Rotate(ScrollEvent.SCROLL),
-
-        /** Scroll finished event. */
-        Finished(ScrollEvent.SCROLL_FINISHED);
-
-        /** The JavaFX internal api name. */
-        private EventType<?> eventType;
-
-        /**
-         * Default constructor used to link the apiName.
-         * 
-         * @param eventType the javafx event type
-         */
-        private ScrollType(final EventType<?> eventType) {
-            this.eventType = eventType;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public EventType<?> eventType() {
-            return this.eventType;
-        }
-
-    }
-
-    /**
      * Define the event type to manage.
      * 
      * The default value is ScrollType.Any
      */
-    ScrollType[] value() default ScrollType.Any;
+    Scroll[] value() default Scroll.Any;
 
     /**
      * Define a unique name used to avoid sharing same handler.

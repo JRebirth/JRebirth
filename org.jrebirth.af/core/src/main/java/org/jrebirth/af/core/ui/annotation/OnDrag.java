@@ -24,8 +24,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javafx.event.Event;
-import javafx.event.EventType;
 import javafx.scene.input.DragEvent;
+
+import org.jrebirth.af.core.ui.annotation.type.Drag;
 
 /**
  * This annotation is used to automatically attached a Drag event handler to a property node.
@@ -38,63 +39,11 @@ import javafx.scene.input.DragEvent;
 public @interface OnDrag {
 
     /**
-     * The Drag event type.<br />
-     * The Drag type will be appended to method name to use.
-     */
-    enum DragType implements EnumEventType {
-
-        /** Any Drag Event. */
-        Any(DragEvent.ANY),
-
-        /** Drag done event. */
-        Done(DragEvent.DRAG_DONE),
-
-        /** Drag dropped event. */
-        Dropped(DragEvent.DRAG_DROPPED),
-
-        /** Drag entered event. */
-        Entered(DragEvent.DRAG_ENTERED),
-
-        /** Drag entered target event. */
-        EnteredTarget(DragEvent.DRAG_ENTERED_TARGET),
-
-        /** Drag exited event. */
-        Exited(DragEvent.DRAG_EXITED),
-
-        /** Drag exited target event. */
-        ExitedTarget(DragEvent.DRAG_EXITED_TARGET),
-
-        /** Drag over event. */
-        Over(DragEvent.DRAG_OVER);
-
-        /** The JavaFX internal api name. */
-        private EventType<?> eventType;
-
-        /**
-         * Default constructor used to link the apiName.
-         * 
-         * @param eventType the javafx event type
-         */
-        private DragType(final EventType<?> eventType) {
-            this.eventType = eventType;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public EventType<?> eventType() {
-            return this.eventType;
-        }
-
-    }
-
-    /**
      * Define the event type to manage.
      * 
      * The default value is DragType.Any
      */
-    DragType value() default DragType.Any;
+    Drag[] value() default Drag.Any;
 
     /**
      * Define a unique name used to avoid sharing same handler.

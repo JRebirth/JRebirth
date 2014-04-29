@@ -24,8 +24,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javafx.event.Event;
-import javafx.event.EventType;
 import javafx.scene.input.TouchEvent;
+
+import org.jrebirth.af.core.ui.annotation.type.Touch;
 
 /**
  * This annotation is used to automatically attached a touch event handler to a property node.
@@ -38,54 +39,11 @@ import javafx.scene.input.TouchEvent;
 public @interface OnTouch {
 
     /**
-     * The Touch event type.<br />
-     * The Touch type will be appended to method name to use.
-     */
-    enum TouchType implements EnumEventType {
-
-        /** Any Swipe Event. */
-        Any(TouchEvent.ANY),
-
-        /** Touch pressed event. */
-        Pressed(TouchEvent.TOUCH_PRESSED),
-
-        /** Touch released event. */
-        Released(TouchEvent.TOUCH_RELEASED),
-
-        /** Touch moved event. */
-        Moved(TouchEvent.TOUCH_MOVED),
-
-        /** Touch stationary event. */
-        Stationary(TouchEvent.TOUCH_STATIONARY);
-
-        /** The JavaFX internal api name. */
-        private EventType<?> eventType;
-
-        /**
-         * Default constructor used to link the apiName.
-         * 
-         * @param eventType the javafx event type
-         */
-        private TouchType(final EventType<?> eventType) {
-            this.eventType = eventType;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public EventType<?> eventType() {
-            return this.eventType;
-        }
-
-    }
-
-    /**
      * Define the event type to manage.
      * 
      * The default value is TouchType.Any
      */
-    TouchType[] value() default TouchType.Any;
+    Touch[] value() default Touch.Any;
 
     /**
      * Define a unique name used to avoid sharing same handler.

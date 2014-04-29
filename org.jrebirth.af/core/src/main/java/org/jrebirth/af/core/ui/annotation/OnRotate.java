@@ -24,8 +24,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javafx.event.Event;
-import javafx.event.EventType;
 import javafx.scene.input.RotateEvent;
+
+import org.jrebirth.af.core.ui.annotation.type.Rotate;
 
 /**
  * This annotation is used to automatically attached a Rotate event handler to a property node.
@@ -38,51 +39,11 @@ import javafx.scene.input.RotateEvent;
 public @interface OnRotate {
 
     /**
-     * The Rotate event type.<br />
-     * The rotate type will be appended to method name to use.
-     */
-    enum RotateType implements EnumEventType {
-
-        /** Any Rotate Event. */
-        Any(RotateEvent.ANY),
-
-        /** Rotation started event. */
-        Started(RotateEvent.ROTATION_STARTED),
-
-        /** Rotate event. */
-        Rotate(RotateEvent.ROTATE),
-
-        /** Rotation finished event. */
-        Finished(RotateEvent.ROTATION_FINISHED);
-
-        /** The JavaFX internal api name. */
-        private EventType<?> eventType;
-
-        /**
-         * Default constructor used to link the apiName.
-         * 
-         * @param eventType the javafx event type
-         */
-        private RotateType(final EventType<?> eventType) {
-            this.eventType = eventType;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public EventType<?> eventType() {
-            return this.eventType;
-        }
-
-    }
-
-    /**
      * Define the event type to manage.
      * 
      * The default value is RotateType.Any
      */
-    RotateType[] value() default RotateType.Any;
+    Rotate[] value() default Rotate.Any;
 
     /**
      * Define a unique name used to avoid sharing same handler.

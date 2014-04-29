@@ -25,8 +25,8 @@ import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultView;
 import org.jrebirth.af.core.ui.annotation.OnRotate;
 import org.jrebirth.af.core.ui.annotation.OnSwipe;
-import org.jrebirth.af.core.ui.annotation.OnRotate.RotateType;
-import org.jrebirth.af.core.ui.annotation.OnSwipe.SwipeType;
+import org.jrebirth.af.core.ui.annotation.type.Rotate;
+import org.jrebirth.af.core.ui.annotation.type.Swipe;
 
 /**
  * 
@@ -41,10 +41,10 @@ public final class AnnotationView extends DefaultView<AnnotationModel, VBox, Ann
     /********************/
     /** Swipe Buttons. */
     /********************/
-    @OnSwipe({ SwipeType.Up, SwipeType.Down })
+    @OnSwipe({ Swipe.Up, Swipe.Down })
     private Button swipeVerticalButton;
 
-    @OnSwipe({ SwipeType.Left, SwipeType.Right })
+    @OnSwipe({ Swipe.Left, Swipe.Right })
     private Button swipeHorizontalButton;
 
     @OnSwipe
@@ -56,10 +56,10 @@ public final class AnnotationView extends DefaultView<AnnotationModel, VBox, Ann
     @OnRotate
     private Button rotateAllButton;
 
-    @OnRotate(RotateType.Rotate)
+    @OnRotate(Rotate.Rotate)
     private Button rotateButton;
 
-    @OnRotate({ RotateType.Started, RotateType.Finished })
+    @OnRotate({ Rotate.Started, Rotate.Finished })
     private Button rotateStartFinishButton;
 
     /**
