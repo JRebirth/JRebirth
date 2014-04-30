@@ -46,7 +46,7 @@ import org.jrebirth.af.core.exception.handler.PoolUncaughtExceptionHandler;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.ResourceBuilders;
-import org.jrebirth.af.core.resource.font.FontItem;
+import org.jrebirth.af.core.resource.ResourceItem;
 import org.jrebirth.af.core.resource.provided.JRebirthColors;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.resource.provided.JRebirthStyles;
@@ -173,7 +173,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
             // Preload fonts to allow them to be used by CSS
             notifyPreloader(new ProgressNotification(700));
-            preloadFonts();
+            preloadResources();
             notifyPreloader(new ProgressNotification(0.7));
 
             postInit(); // 800 , 900
@@ -368,22 +368,24 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * {@inheritDoc}
      */
     @Override
-    public void preloadFonts() {
-        final List<FontItem> fontList = getFontToPreload();
-        if (fontList != null) {
-            for (final FontItem font : fontList) {
+    public void preloadResources() {
+        final List<? extends ResourceItem<?, ?, ?, ?>> resourceList = getResourceToPreload();
+        if (resourceList != null) {
+            for (final ResourceItem<?, ?, ?, ?> resource : resourceList) {
                 // Access the font to load it and allow it to be used by CSS
-                font.get();
+                resource.get();
             }
         }
     }
 
     /**
-     * Return the list of FontEnum to load for CSS.
+     * Return the list of Resources to load.
      * 
-     * @return the list of fontEnum to load
+     * In example it could be useful to load fonts for usage into CSS.
+     * 
+     * @return the list of {@link ResourceItem} to preload
      */
-    protected abstract List<FontItem> getFontToPreload();
+    protected abstract List<? extends ResourceItem<?, ?, ?, ?>> getResourceToPreload();
 
     /**
      * Customize the default scene.

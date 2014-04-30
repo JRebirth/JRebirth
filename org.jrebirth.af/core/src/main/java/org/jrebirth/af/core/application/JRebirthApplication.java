@@ -80,6 +80,6 @@ public interface JRebirthApplication<P extends Pane> {
     /**
      * Preload JRebirth wrapped fonts to allow them to be used directly by CSS.
      */
-    void preloadFonts();
+    void preloadResources();
 
 }
