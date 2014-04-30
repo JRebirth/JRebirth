@@ -5,7 +5,7 @@ package org.jrebirth.af.core.resource;
  * 
  * @author Sébastien Bordes
  */
-public abstract class AbstractResourceItem<R, I, P, B> implements ResourceItem<R, I, P, B> {
+public abstract class AbstractResourceItem<R, I, P extends ResourceParams, B> implements ResourceItem<R, I, P, B> {
 
     /** The unique identifier of the font item. */
     private int uid;
@@ -24,9 +24,10 @@ public abstract class AbstractResourceItem<R, I, P, B> implements ResourceItem<R
      * 
      * @param uid The uid to set.
      */
-    public AbstractResourceItem<R, I, P, B> uid(final int uid) {
+    @SuppressWarnings("unchecked")
+    public I uid(final int uid) {
         this.uid = uid;
-        return this;
+        return (I) this;
     }
 
 }

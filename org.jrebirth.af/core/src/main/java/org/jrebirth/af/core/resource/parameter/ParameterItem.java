@@ -51,7 +51,6 @@ public interface ParameterItem<T extends Object> extends ResourceItem<T, Paramet
     /**
      * {@inheritDoc}
      */
-    @Override
     default ParameterItem<T> set(final ParameterParams parameterParams) {
         builder().storeParams(this, parameterParams);
         return this;
@@ -61,7 +60,6 @@ public interface ParameterItem<T extends Object> extends ResourceItem<T, Paramet
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    @Override
     default T get() {
         return (T) builder().get(this);
     }

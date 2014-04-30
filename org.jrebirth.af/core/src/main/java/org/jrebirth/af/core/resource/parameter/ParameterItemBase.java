@@ -29,6 +29,10 @@ import org.jrebirth.af.core.resource.AbstractResourceItem;
  */
 public final class ParameterItemBase<T> extends AbstractResourceItem<T, ParameterItem<T>, ParameterParams, ParameterBuilder> implements ParameterItem<T> {
 
+    public static <T extends Object> ParameterItemBase<T> create(T o) {
+        return new ParameterItemBase<T>();
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -44,10 +48,6 @@ public final class ParameterItemBase<T> extends AbstractResourceItem<T, Paramete
     @Override
     public void persist() {
         throw new CoreRuntimeException("Not Implemented yet");
-    }
-
-    public static <O extends Object> ParameterItemBase<O> create(O o) {
-        return new ParameterItemBase<O>();
     }
 
 }

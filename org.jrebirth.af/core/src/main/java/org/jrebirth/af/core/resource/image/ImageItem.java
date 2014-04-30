@@ -32,7 +32,6 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
     /**
      * {@inheritDoc}
      */
-    @Override
     default ImageItem set(final ImageParams imageParams) {
         builder().storeParams(this, imageParams);
         return this;
@@ -41,7 +40,6 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
     /**
      * {@inheritDoc}
      */
-    @Override
     default Image get() {
         return builder().get(this);
     }

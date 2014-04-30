@@ -95,4 +95,12 @@ public final class MessageItemBase extends AbstractResourceItem<MessageResource,
         return get().getLevel();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MessageItem set(final MessageParams messageParams) {
+        builder().storeParams(this, messageParams);
+        return this;
+    }
 }

@@ -32,7 +32,6 @@ public interface StyleSheetItem extends ResourceItem<URL, StyleSheetItem, StyleS
     /**
      * {@inheritDoc}
      */
-    @Override
     default StyleSheetItem set(final StyleSheetParams styleSheetParams) {
         builder().storeParams(this, styleSheetParams);
         return this;
@@ -41,7 +40,6 @@ public interface StyleSheetItem extends ResourceItem<URL, StyleSheetItem, StyleS
     /**
      * {@inheritDoc}
      */
-    @Override
     default URL get() {
         return builder().get(this);
     }

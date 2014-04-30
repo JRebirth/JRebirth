@@ -31,7 +31,6 @@ public interface FXMLItem extends ResourceItem<FXMLComponent, FXMLItem, FXMLPara
     /**
      * {@inheritDoc}
      */
-    @Override
     default FXMLItem set(final FXMLParams fxmlParams) {
         builder().storeParams(this, fxmlParams);
         return this;
@@ -40,7 +39,6 @@ public interface FXMLItem extends ResourceItem<FXMLComponent, FXMLItem, FXMLPara
     /**
      * {@inheritDoc}
      */
-    @Override
     default FXMLComponent get() {
         return builder().get(this);
     }

@@ -32,7 +32,6 @@ public interface ColorItem extends ResourceItem<Color, ColorItem, ColorParams, C
     /**
      * {@inheritDoc}
      */
-    @Override
     default ColorItem set(final ColorParams colorParams) {
         builder().storeParams(this, colorParams);
         return this;
@@ -41,7 +40,6 @@ public interface ColorItem extends ResourceItem<Color, ColorItem, ColorParams, C
     /**
      * {@inheritDoc}
      */
-    @Override
     default Color get() {
         return builder().get(this);
     }

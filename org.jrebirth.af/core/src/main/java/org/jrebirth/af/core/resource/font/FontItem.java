@@ -34,7 +34,6 @@ public interface FontItem extends ResourceItem<Font, FontItem, FontParams, FontB
     /**
      * {@inheritDoc}
      */
-    @Override
     default FontItem set(final FontParams fontParams) {
         builder().storeParams(this, fontParams);
         return this;
@@ -43,7 +42,6 @@ public interface FontItem extends ResourceItem<Font, FontItem, FontParams, FontB
     /**
      * {@inheritDoc}
      */
-    @Override
     default Font get() {
         return builder().get(this);
     }

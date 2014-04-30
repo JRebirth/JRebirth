@@ -75,7 +75,6 @@ public interface MessageItem extends ResourceItem<MessageResource, MessageItem, 
     /**
      * {@inheritDoc}
      */
-    @Override
     default MessageItem set(final MessageParams messageParams) {
         builder().storeParams(this, messageParams);
         return this;
@@ -84,7 +83,6 @@ public interface MessageItem extends ResourceItem<MessageResource, MessageItem, 
     /**
      * {@inheritDoc}
      */
-    @Override
     default MessageResource get() {
         return builder().get(this);
     }

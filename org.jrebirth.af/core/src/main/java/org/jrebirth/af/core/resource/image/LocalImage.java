@@ -54,7 +54,7 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
      * @param fullName the full file name (including path and image extension)
      */
     public LocalImage(final String fullName) {
-        this("", fullName, null);
+        this("", fullName, ImageExtension.NONE);
     }
 
     /**

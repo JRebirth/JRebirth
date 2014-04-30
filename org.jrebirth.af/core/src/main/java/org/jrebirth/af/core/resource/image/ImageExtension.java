@@ -25,6 +25,9 @@ package org.jrebirth.af.core.resource.image;
  */
 public enum ImageExtension {
 
+    /** The empty file extension. */
+    NONE,
+
     /** The .png image file extension. */
     PNG,
 
@@ -39,7 +42,7 @@ public enum ImageExtension {
      */
     @Override
     public String toString() {
-        return "." + name().toLowerCase();
+        return (this != NONE) ? "." + name().toLowerCase() : "";
     }
 
 }
