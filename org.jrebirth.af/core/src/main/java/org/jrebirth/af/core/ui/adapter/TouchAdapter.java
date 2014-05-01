@@ -19,6 +19,8 @@ package org.jrebirth.af.core.ui.adapter;
 
 import javafx.scene.input.TouchEvent;
 
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+
 /**
  * The class <strong>TouchAdapter</strong>.
  * 
@@ -33,34 +35,44 @@ public interface TouchAdapter extends EventAdapter {
      * 
      * @param touchEvent the event to manage
      */
-    void touch(final TouchEvent touchEvent);
+    default void touch(final TouchEvent touchEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void touch(final TouchEvent touchEvent)");
+    }
 
     /**
      * Manage events when touch point is moved.
      * 
      * @param touchEvent the event to manage
      */
-    void touchMoved(final TouchEvent touchEvent);
+    default void touchMoved(final TouchEvent touchEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void touchMoved(final TouchEvent touchEvent)");
+    }
 
     /**
      * Manage events when touch point is touched for the first time.
      * 
      * @param touchEvent the event to manage
      */
-    void touchPressed(final TouchEvent touchEvent);
+    default void touchPressed(final TouchEvent touchEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void touchPressed(final TouchEvent touchEvent)");
+    }
 
     /**
      * Manage events when touch point is released.
      * 
      * @param touchEvent the event to manage
      */
-    void touchReleased(final TouchEvent touchEvent);
+    default void touchReleased(final TouchEvent touchEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void touchReleased(final TouchEvent touchEvent)");
+    }
 
     /**
      * Manage events when touch point is pressed and still (doesn't move)..
      * 
      * @param touchEvent the event to manage
      */
-    void touchStationary(final TouchEvent touchEvent);
+    default void touchStationary(final TouchEvent touchEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void touchStationary(final TouchEvent touchEvent)");
+    }
 
 }

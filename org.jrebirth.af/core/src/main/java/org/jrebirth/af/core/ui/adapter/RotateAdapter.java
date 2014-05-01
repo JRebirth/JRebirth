@@ -1,5 +1,5 @@
 /**
- * Get more info at : www.jrebirth.org .
+v * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
  * 
@@ -19,6 +19,8 @@ package org.jrebirth.af.core.ui.adapter;
 
 import javafx.scene.input.RotateEvent;
 
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+
 /**
  * The class <strong>RotateAdapter</strong>.
  * 
@@ -33,27 +35,35 @@ public interface RotateAdapter extends EventAdapter {
      * 
      * @param rotateEvent the event to manage
      */
-    void anyRotate(final RotateEvent rotateEvent);
+    default void anyRotate(final RotateEvent rotateEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void anyRotate(final RotateEvent rotateEvent)");
+    }
 
     /**
      * Manage events when a rotating gesture is detected.
      * 
      * @param rotateEvent the event to manage
      */
-    void rotationStarted(final RotateEvent rotateEvent);
+    default void rotationStarted(final RotateEvent rotateEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void rotationStarted(final RotateEvent rotateEvent)");
+    }
 
     /**
      * Manage events when user performs a rotating gesture such as dragging two fingers around each other.
      * 
      * @param rotateEvent the event to manage
      */
-    void rotate(final RotateEvent rotateEvent);
+    default void rotate(final RotateEvent rotateEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void rotate(final RotateEvent rotateEvent)");
+    }
 
     /**
      * Manage events when a rotating gesture ends.
      * 
      * @param rotateEvent the event to manage
      */
-    void rotationFinished(final RotateEvent rotateEvent);
+    default void rotationFinished(final RotateEvent rotateEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void rotationFinished(final RotateEvent rotateEvent)");
+    }
 
 }

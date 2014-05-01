@@ -19,6 +19,8 @@ package org.jrebirth.af.core.ui.adapter;
 
 import javafx.scene.input.SwipeEvent;
 
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+
 /**
  * The class <strong>SwipeAdapter</strong>.
  * 
@@ -33,33 +35,44 @@ public interface SwipeAdapter extends EventAdapter {
      * 
      * @param swipeEvent the event to manage
      */
-    void anySwipe(final SwipeEvent swipeEvent);
+    default void anySwipe(final SwipeEvent swipeEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void anySwipe(final SwipeEvent swipeEvent)");
+    }
 
     /**
      * Manage events when user performs downward swipe gesture.
      * 
      * @param swipeEvent the event to manage
      */
-    void swipeDown(final SwipeEvent swipeEvent);
+    default void swipeDown(final SwipeEvent swipeEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void swipeDown(final SwipeEvent swipeEvent)");
+    }
 
     /**
      * Manage events when user performs leftward swipe gesture.
      * 
      * @param swipeEvent the event to manage
      */
-    void swipeLeft(final SwipeEvent swipeEvent);
+    default void swipeLeft(final SwipeEvent swipeEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void swipeLeft(final SwipeEvent swipeEvent)");
+    }
 
     /**
      * Manage events when user performs rightward swipe gesture.
      * 
      * @param swipeEvent the event to manage
      */
-    void swipeRight(final SwipeEvent swipeEvent);
+    default void swipeRight(final SwipeEvent swipeEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void swipeRight(final SwipeEvent swipeEvent)");
+    }
 
     /**
      * Manage events when user performs upward swipe gesture.
      * 
      * @param swipeEvent the event to manage
      */
-    void swipeUp(final SwipeEvent swipeEvent);
+    default void swipeUp(final SwipeEvent swipeEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void swipeUp(final SwipeEvent swipeEvent)");
+    }
+
 }

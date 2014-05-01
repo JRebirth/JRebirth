@@ -19,6 +19,8 @@ package org.jrebirth.af.core.ui.adapter;
 
 import javafx.scene.input.ScrollEvent;
 
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+
 /**
  * The class <strong>ScrollAdapter</strong>.
  * 
@@ -33,27 +35,35 @@ public interface ScrollAdapter extends EventAdapter {
      * 
      * @param scrollEvent the event to manage
      */
-    void anyScroll(final ScrollEvent scrollEvent);
+    default void anyScroll(final ScrollEvent scrollEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void anyScroll(final ScrollEvent scrollEvent)");
+    }
 
     /**
      * Manage events when a scrolling gesture is detected.
      * 
      * @param scrollEvent the event to manage
      */
-    void scrollStarted(final ScrollEvent scrollEvent);
+    default void scrollStarted(final ScrollEvent scrollEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void scrollStarted(final ScrollEvent scrollEvent)");
+    }
 
     /**
      * Manage events when user performs a scrolling gesture such as rotating mouse wheel or dragging a finger over touch screen.
      * 
      * @param scrollEvent the event to manage
      */
-    void scroll(final ScrollEvent scrollEvent);
+    default void scroll(final ScrollEvent scrollEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void scroll(final ScrollEvent scrollEvent)");
+    }
 
     /**
      * Manage events when a scrolling gesture ends.
      * 
      * @param scrollEvent the event to manage
      */
-    void scrollFinished(final ScrollEvent scrollEvent);
+    default void scrollFinished(final ScrollEvent scrollEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void scrollFinished(final ScrollEvent scrollEvent)");
+    }
 
 }

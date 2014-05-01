@@ -3,7 +3,7 @@
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License") {
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * 
@@ -19,6 +19,8 @@ package org.jrebirth.af.core.ui.adapter;
 
 import javafx.stage.WindowEvent;
 
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+
 /**
  * The class <strong>WindowAdapter</strong>.
  * 
@@ -33,7 +35,9 @@ public interface WindowAdapter extends EventAdapter {
      * 
      * @param windowEvent the event to manage
      */
-    void window(final WindowEvent windowEvent);
+    default void window(final WindowEvent windowEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void window(final WindowEvent windowEvent)");
+    }
 
     /**
      * Manage window close request events.
@@ -42,7 +46,9 @@ public interface WindowAdapter extends EventAdapter {
      * 
      * @param windowEvent the event to manage
      */
-    void windowCloseRequest(final WindowEvent windowEvent);
+    default void windowCloseRequest(final WindowEvent windowEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void windowCloseRequest(final WindowEvent windowEvent)");
+    }
 
     /**
      * Manage window hidden events.
@@ -51,7 +57,9 @@ public interface WindowAdapter extends EventAdapter {
      * 
      * @param windowEvent the event to manage
      */
-    void windowHidden(final WindowEvent windowEvent);
+    default void windowHidden(final WindowEvent windowEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void windowHidden(final WindowEvent windowEvent)");
+    }
 
     /**
      * Manage window hiding events.
@@ -60,7 +68,9 @@ public interface WindowAdapter extends EventAdapter {
      * 
      * @param windowEvent the event to manage
      */
-    void windowHiding(final WindowEvent windowEvent);
+    default void windowHiding(final WindowEvent windowEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void windowHiding(final WindowEvent windowEvent)");
+    }
 
     /**
      * Manage window showing events.
@@ -69,7 +79,9 @@ public interface WindowAdapter extends EventAdapter {
      * 
      * @param windowEvent the event to manage
      */
-    void windowShowing(final WindowEvent windowEvent);
+    default void windowShowing(final WindowEvent windowEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void windowShowing(final WindowEvent windowEvent)");
+    }
 
     /**
      * Manage window shown events.
@@ -78,6 +90,8 @@ public interface WindowAdapter extends EventAdapter {
      * 
      * @param windowEvent the event to manage
      */
-    void windowShown(final WindowEvent windowEvent);
+    default void windowShown(final WindowEvent windowEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void windowShown(final WindowEvent windowEvent)");
+    }
 
 }

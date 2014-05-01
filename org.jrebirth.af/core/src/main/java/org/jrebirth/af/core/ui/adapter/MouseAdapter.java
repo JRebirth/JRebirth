@@ -19,6 +19,8 @@ package org.jrebirth.af.core.ui.adapter;
 
 import javafx.scene.input.MouseEvent;
 
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+
 /**
  * The class <strong>MouseAdapter</strong>.
  * 
@@ -33,7 +35,9 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouse(final MouseEvent mouseEvent);
+    default void mouse(final MouseEvent mouseEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void mouse(final MouseEvent mouseEvent)");
+    }
 
     /**
      * Manage mouse drag detected events.
@@ -42,7 +46,9 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseDragDetected(final MouseEvent mouseEvent);
+    default void mouseDragDetected(final MouseEvent mouseEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void mouseDragDetected(final MouseEvent mouseEvent)");
+    }
 
     /**
      * Manage mouse clicked events.
@@ -51,7 +57,9 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseClicked(final MouseEvent mouseEvent);
+    default void mouseClicked(final MouseEvent mouseEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void mouseClicked(final MouseEvent mouseEvent)");
+    }
 
     /**
      * Manage mouse dragged events.
@@ -60,7 +68,9 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseDragged(final MouseEvent mouseEvent);
+    default void mouseDragged(final MouseEvent mouseEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void mouseDragged(final MouseEvent mouseEvent)");
+    }
 
     /**
      * Manage mouse entered events.
@@ -69,7 +79,9 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseEntered(final MouseEvent mouseEvent);
+    default void mouseEntered(final MouseEvent mouseEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void mouseEntered(final MouseEvent mouseEvent)");
+    }
 
     /**
      * Manage mouse entered target events.
@@ -78,7 +90,9 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseEnteredTarget(final MouseEvent mouseEvent);
+    default void mouseEnteredTarget(final MouseEvent mouseEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void mouseEnteredTarget(final MouseEvent mouseEvent)");
+    }
 
     /**
      * Manage mouse exited events.
@@ -87,7 +101,9 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseExited(final MouseEvent mouseEvent);
+    default void mouseExited(final MouseEvent mouseEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void mouseExited(final MouseEvent mouseEvent)");
+    }
 
     /**
      * Manage mouse exited target events.
@@ -96,7 +112,9 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseExitedTarget(final MouseEvent mouseEvent);
+    default void mouseExitedTarget(final MouseEvent mouseEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void mouseExitedTarget(final MouseEvent mouseEvent)");
+    }
 
     /**
      * Manage mouse moved events.
@@ -105,7 +123,9 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseMoved(final MouseEvent mouseEvent);
+    default void mouseMoved(final MouseEvent mouseEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void mouseMoved(final MouseEvent mouseEvent)");
+    }
 
     /**
      * Manage mouse pressed events.
@@ -114,7 +134,9 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mousePressed(final MouseEvent mouseEvent);
+    default void mousePressed(final MouseEvent mouseEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void mousePressed(final MouseEvent mouseEvent)");
+    }
 
     /**
      * Manage mouse released events.
@@ -123,6 +145,8 @@ public interface MouseAdapter extends EventAdapter {
      * 
      * @param mouseEvent the event to manage
      */
-    void mouseReleased(final MouseEvent mouseEvent);
+    default void mouseReleased(final MouseEvent mouseEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void mouseReleased(final MouseEvent mouseEvent)");
+    }
 
 }

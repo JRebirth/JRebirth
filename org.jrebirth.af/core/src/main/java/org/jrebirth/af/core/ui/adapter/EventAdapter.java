@@ -31,9 +31,11 @@ import javafx.scene.input.TouchEvent;
 import javafx.scene.input.ZoomEvent;
 import javafx.stage.WindowEvent;
 
+import org.jrebirth.af.core.resource.Resources;
+import org.jrebirth.af.core.resource.i18n.Message;
+import org.jrebirth.af.core.resource.i18n.MessageItem;
 import org.jrebirth.af.core.ui.handler.ActionHandler;
 import org.jrebirth.af.core.ui.handler.DragHandler;
-import org.jrebirth.af.core.ui.handler.FinishedHandler;
 import org.jrebirth.af.core.ui.handler.KeyHandler;
 import org.jrebirth.af.core.ui.handler.MouseHandler;
 import org.jrebirth.af.core.ui.handler.RotateHandler;
@@ -50,6 +52,9 @@ import org.jrebirth.af.core.ui.handler.ZoomHandler;
  */
 public interface EventAdapter {
 
+    /** . */
+    MessageItem NOT_IMPLEMENTED_YET = Resources.create(new Message("jrebirth.ui.adapter.notImplementedYet"));
+
     // /**
     // * @param controller The controller to set.
     // */
@@ -65,9 +70,6 @@ public interface EventAdapter {
 
         /** The Action Event linker. */
         Action(ActionEvent.ACTION, ActionAdapter.class, ActionHandler.class),
-
-        /** The Finished Event linker. */
-        Finished(ActionEvent.ACTION, FinishedAdapter.class, FinishedHandler.class),
 
         /** The Mouse Event linker. */
         Mouse(MouseEvent.ANY, MouseAdapter.class, MouseHandler.class),

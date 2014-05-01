@@ -19,6 +19,8 @@ package org.jrebirth.af.core.ui.adapter;
 
 import javafx.scene.input.ZoomEvent;
 
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+
 /**
  * The class <strong>ZoomAdapter</strong>.
  * 
@@ -33,27 +35,35 @@ public interface ZoomAdapter extends EventAdapter {
      * 
      * @param zoomEvent the event to manage
      */
-    void anyZoom(final ZoomEvent zoomEvent);
+    default void anyZoom(final ZoomEvent zoomEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void anyZoom(final ZoomEvent zoomEvent)");
+    }
 
     /**
      * Manage events when a zooming gesture is detected.
      * 
      * @param zoomEvent the event to manage
      */
-    void zoomStarted(final ZoomEvent zoomEvent);
+    default void zoomStarted(final ZoomEvent zoomEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void zoomStarted(final ZoomEvent zoomEvent)");
+    }
 
     /**
      * Manage events when user performs a zooming gesture such as dragging two fingers apart.
      * 
      * @param zoomEvent the event to manage
      */
-    void zoom(final ZoomEvent zoomEvent);
+    default void zoom(final ZoomEvent zoomEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void zoom(final ZoomEvent zoomEvent)");
+    }
 
     /**
      * Manage events when a zooming gesture ends.
      * 
      * @param zoomEvent the event to manage
      */
-    void zoomFinished(final ZoomEvent zoomEvent);
+    default void zoomFinished(final ZoomEvent zoomEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void zoomFinished(final ZoomEvent zoomEvent)");
+    }
 
 }
