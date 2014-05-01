@@ -19,6 +19,8 @@ package org.jrebirth.af.core.ui.adapter;
 
 import javafx.scene.input.DragEvent;
 
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+
 /**
  * The class <strong>DragAdapter</strong>.
  * 
@@ -31,55 +33,71 @@ public interface DragAdapter extends EventAdapter {
      * 
      * @param dragEvent the event to manage
      */
-    void drag(final DragEvent dragEvent);
+    default void drag(final DragEvent dragEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void drag(final DragEvent dragEvent)");
+    }
 
     /**
      * Manage drag done events. This event occurs on drag-and-drop gesture source after its data has been dropped on a drop target.
      * 
      * @param dragEvent the event to manage
      */
-    void dragDone(final DragEvent dragEvent);
+    default void dragDone(final DragEvent dragEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void dragDone(final DragEvent dragEvent)");
+    }
 
     /**
      * Manage drag dropped events. This event occurs when the mouse button is released during drag and drop gesture on a drop target.
      * 
      * @param dragEvent the event to manage
      */
-    void dragDropped(final DragEvent dragEvent);
+    default void dragDropped(final DragEvent dragEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void dragDropped(final DragEvent dragEvent)");
+    }
 
     /**
      * Manage drag entered events. This event occurs when drag gesture enters a node.
      * 
      * @param dragEvent the event to manage
      */
-    void dragEntered(final DragEvent dragEvent);
+    default void dragEntered(final DragEvent dragEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void dragEntered(final DragEvent dragEvent)");
+    }
 
     /**
      * Manage drag entered target events. This event occurs when drag gesture enters a node.
      * 
      * @param dragEvent the event to manage
      */
-    void dragEnteredTarget(final DragEvent dragEvent);
+    default void dragEnteredTarget(final DragEvent dragEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void dragEnteredTarget(final DragEvent dragEvent)");
+    }
 
     /**
      * Manage drag exited events. This event occurs when drag gesture exits a node.
      * 
      * @param dragEvent the event to manage
      */
-    void dragExited(final DragEvent dragEvent);
+    default void dragExited(final DragEvent dragEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void dragExited(final DragEvent dragEvent)");
+    }
 
     /**
-     * Manage drag exited target events. This event occurs when drag gesture exitenters a node.
+     * Manage drag exited target events. This event occurs when drag gesture exits a node.
      * 
      * @param dragEvent the event to manage
      */
-    void dragExitedTarget(final DragEvent dragEvent);
+    default void dragExitedTarget(final DragEvent dragEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void dragExitedTarget(final DragEvent dragEvent)");
+    }
 
     /**
      * Manage drag over events. his event occurs when drag gesture progresses within this node.
      * 
      * @param dragEvent the event to manage
      */
-    void dragOver(final DragEvent dragEvent);
+    default void dragOver(final DragEvent dragEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void dragOver(final DragEvent dragEvent)");
+    }
 
 }

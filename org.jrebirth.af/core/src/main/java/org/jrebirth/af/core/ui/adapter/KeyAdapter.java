@@ -19,6 +19,8 @@ package org.jrebirth.af.core.ui.adapter;
 
 import javafx.scene.input.KeyEvent;
 
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+
 /**
  * The class <strong>KeyAdapter</strong>.
  * 
@@ -33,7 +35,9 @@ public interface KeyAdapter extends EventAdapter {
      * 
      * @param keyEvent the event to manage
      */
-    void key(final KeyEvent keyEvent);
+    default void key(final KeyEvent keyEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void key(final KeyEvent keyEvent)");
+    }
 
     /**
      * Manage key pressed events.
@@ -42,7 +46,9 @@ public interface KeyAdapter extends EventAdapter {
      * 
      * @param keyEvent the event to manage
      */
-    void keyPressed(final KeyEvent keyEvent);
+    default void keyPressed(final KeyEvent keyEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void keyPressed(final KeyEvent keyEvent)");
+    }
 
     /**
      * Manage key released events.
@@ -51,7 +57,9 @@ public interface KeyAdapter extends EventAdapter {
      * 
      * @param keyEvent the event to manage
      */
-    void keyReleased(final KeyEvent keyEvent);
+    default void keyReleased(final KeyEvent keyEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void keyReleased(final KeyEvent keyEvent)");
+    }
 
     /**
      * Manage key typed events.
@@ -60,6 +68,8 @@ public interface KeyAdapter extends EventAdapter {
      * 
      * @param keyEvent the event to manage
      */
-    void keyTyped(final KeyEvent keyEvent);
+    default void keyTyped(final KeyEvent keyEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void keyTyped(final KeyEvent keyEvent)");
+    }
 
 }

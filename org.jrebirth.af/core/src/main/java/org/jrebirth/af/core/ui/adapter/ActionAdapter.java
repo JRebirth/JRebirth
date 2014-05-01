@@ -19,6 +19,8 @@ package org.jrebirth.af.core.ui.adapter;
 
 import javafx.event.ActionEvent;
 
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+
 /**
  * The class <strong>ActionAdapter</strong>.
  * 
@@ -31,6 +33,8 @@ public interface ActionAdapter extends EventAdapter {
      * 
      * @param actionEvent the event to manage
      */
-    void action(final ActionEvent actionEvent);
+    default void action(final ActionEvent actionEvent) {
+        throw new CoreRuntimeException(NOT_IMPLEMENTED_YET, this.getClass(), "void action(final ActionEvent actionEvent)");
+    }
 
 }

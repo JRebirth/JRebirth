@@ -19,7 +19,7 @@ package org.jrebirth.af.core.ui.handler;
 
 import javafx.event.ActionEvent;
 
-import org.jrebirth.af.core.ui.adapter.FinishedAdapter;
+import org.jrebirth.af.core.ui.adapter.ActionAdapter;
 
 /**
  * The class <strong>FinishedHandler</strong>.
@@ -28,26 +28,26 @@ import org.jrebirth.af.core.ui.adapter.FinishedAdapter;
  */
 public final class FinishedHandler extends AbstractNamedEventHandler<ActionEvent> {
 
-    /** The Finished adapter. */
-    private final FinishedAdapter finishedAdapter;
+    /** The Action adapter. */
+    private final ActionAdapter actionAdapter;
 
     /**
      * Default Constructor.
      * 
-     * @param finishedAdapter the adapter to use
+     * @param actionAdapter the adapter to use
      */
-    public FinishedHandler(final FinishedAdapter finishedAdapter) {
+    public FinishedHandler(final ActionAdapter actionAdapter) {
         super(FinishedHandler.class.getSimpleName());
-        this.finishedAdapter = finishedAdapter;
+        this.actionAdapter = actionAdapter;
     }
 
     /**
-     * Return the implementation of the finished adapter interface.
+     * Return the implementation of the action adapter interface.
      * 
      * @return Returns the finishedAdapter.
      */
-    public FinishedAdapter getFinishedAdapter() {
-        return this.finishedAdapter;
+    public ActionAdapter getActionAdapter() {
+        return this.actionAdapter;
     }
 
     /**
@@ -56,7 +56,7 @@ public final class FinishedHandler extends AbstractNamedEventHandler<ActionEvent
     @Override
     public void handle(final ActionEvent actionEvent) {
 
-        getFinishedAdapter().action(actionEvent);
+        getActionAdapter().action(actionEvent);
 
     }
 }
