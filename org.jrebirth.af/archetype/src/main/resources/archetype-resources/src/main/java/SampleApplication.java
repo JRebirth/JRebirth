@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import org.jrebirth.af.core.application.DefaultApplication;
+import org.jrebirth.af.core.resource.ResourceItem;
 import org.jrebirth.af.core.resource.font.FontItem;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.sample.resources.SampleFonts;
@@ -62,7 +63,7 @@ public final class SampleApplication extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public List<FontItem> getFontToPreload() {
+    protected List<? extends ResourceItem<?, ?, ?, ?>> getResourceToPreload() {
         return Arrays.asList(new FontItem[] {
                 SampleFonts.SPLASH,
         });

@@ -28,7 +28,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import org.jrebirth.af.core.application.DefaultApplication;
-import org.jrebirth.af.core.resource.font.FontItem;
+import org.jrebirth.af.core.resource.ResourceItem;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBuilder;
@@ -134,7 +134,7 @@ public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    protected List<FontItem> getFontToPreload() {
+    protected List<? extends ResourceItem<?, ?, ?, ?>> getResourceToPreload() {
         return Collections.emptyList();
     }
 }

@@ -30,18 +30,17 @@ package org.jrebirth.af.core.resource;
  * @param <P> the resource parameter
  * @param <B> The resource builder to use
  */
-public interface ResourceItem<R extends Object, I, P, B> {
+public interface ResourceItem<R, I, P, B> {
 
-    // /**
-    // * Attach the resource parameter.
-    // *
-    // * @param params the primitive values for this resource
-    // */
+    /**
+     * Attach the resource parameter.
+     *
+     * @param params the primitive values for this resource
+     */
+    @SuppressWarnings("unchecked")
     default I set(P params) {
         return (I) this;
     }
-
-    // Commented otherwise AbstractMethod error is raised !!!
 
     /**
      * Return the resource unique instance.
