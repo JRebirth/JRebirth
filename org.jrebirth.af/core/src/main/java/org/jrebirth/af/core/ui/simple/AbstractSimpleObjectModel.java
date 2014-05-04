@@ -22,6 +22,7 @@ import javafx.scene.Node;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.ui.NullView;
+import org.jrebirth.af.core.ui.annotation.RootNodeClass;
 import org.jrebirth.af.core.ui.annotation.RootNodeId;
 import org.jrebirth.af.core.ui.object.AbstractObjectModel;
 import org.jrebirth.af.core.util.ClassUtility;
@@ -61,6 +62,16 @@ public abstract class AbstractSimpleObjectModel<N extends Node, O extends Object
         final RootNodeId rni = ClassUtility.getLastClassAnnotation(this.getClass(), RootNodeId.class);
         if (rni != null) {
             getRootNode().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
+        }
+
+        // Find the RootNodeClass annotation
+        final RootNodeClass rnc = ClassUtility.getLastClassAnnotation(this.getClass(), RootNodeClass.class);
+        if (rnc != null && rnc.value().length > 0) {
+            for (String styleClass : rnc.value()) {
+                if (styleClass != null && !styleClass.isEmpty()) {
+                    getRootNode().getStyleClass().add(styleClass);
+                }
+            }
         }
 
         // Set up the model view

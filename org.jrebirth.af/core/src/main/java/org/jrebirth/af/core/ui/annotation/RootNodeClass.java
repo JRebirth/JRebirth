@@ -24,20 +24,20 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to automatically give an ID for the root node of a view.
+ * This annotation is used to automatically define CSS style class for the root node of a view.
  * 
  * @author Sébastien Bordes
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface RootNodeId {
+public @interface RootNodeClass {
 
     /**
-     * Define the event type to manage.
+     * Define a set of style class.
      * 
-     * The default value is an empty id, it's so useless add your own identifier
+     * The default value is no additional style class, it's so useless add your class
      */
-    String value() default "";
+    String[] value() default "";
 
 }
