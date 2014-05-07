@@ -23,8 +23,8 @@
 
 		<section name="Overview">
 
-			<div id="catcherTitle">Overview of the JRebirth Core Architecture</div>
-			<div id="catcherContent">JRebirth Application Framework offers a very efficient pattern for build real Professional JavaFX 2.0 applications.</div>
+			<div id="catcherTitle">Overview of JRebirth Application Framework Core Architecture</div>
+			<div id="catcherContent">JRebirth Application Framework offers a very efficient pattern to build real Professional JavaFX applications.</div>
 
 			<subsection name="How does JRebirth work ?">
 
