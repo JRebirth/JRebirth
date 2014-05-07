@@ -24,7 +24,7 @@ import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.ui.DefaultView;
-import org.jrebirth.af.core.ui.annotation.RootNodeId;
+import org.jrebirth.af.core.ui.annotation.RootNodeClass;
 
 /**
  * The Class WorkbenchView .
@@ -33,7 +33,7 @@ import org.jrebirth.af.core.ui.annotation.RootNodeId;
  * 
  * @author Sébastien Bordes
  */
-@RootNodeId("Workbench")
+@RootNodeClass("Workbench")
 public class WorkbenchView extends DefaultView<WorkbenchModel, Pane, DefaultController<WorkbenchModel, WorkbenchView>> {
 
     /** The Constant LOGGER. */

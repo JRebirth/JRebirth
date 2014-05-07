@@ -28,6 +28,7 @@ import javafx.scene.Node;
 
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.facade.JRebirthEventType;
+import org.jrebirth.af.core.ui.adapter.AbstractDefaultAdapter;
 import org.jrebirth.af.core.ui.adapter.EventAdapter;
 
 /**
@@ -155,6 +156,10 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
     @SuppressWarnings("unchecked")
     protected final void addAdapter(final EventAdapter eventAdapter) throws CoreException {
 
+    	if(eventAdapter instanceof AbstractDefaultAdapter){
+    		((AbstractDefaultAdapter)eventAdapter).setController(this);
+    	}
+    	
         // Parse all event to find the right to manage
         for (final EventAdapter.Linker linker : EventAdapter.Linker.values()) {
             if (linker.adapterClass().isAssignableFrom(eventAdapter.getClass())) {

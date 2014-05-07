@@ -37,7 +37,13 @@ import org.jrebirth.af.core.util.ClassUtility;
  */
 public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
 
-    /** The class logger. */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6051573419682436386L;
+	
+
+	/** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(MultitonKey.class);
 
     /** The key formatted into a string. */

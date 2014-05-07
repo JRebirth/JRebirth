@@ -52,7 +52,7 @@ import org.jrebirth.af.core.ui.handler.ZoomHandler;
  */
 public interface EventAdapter {
 
-    /** . */
+    /** "The class {0} shall implement the method : {1}" . */
     MessageItem NOT_IMPLEMENTED_YET = Resources.create(new Message("jrebirth.ui.adapter.notImplementedYet"));
 
     // /**

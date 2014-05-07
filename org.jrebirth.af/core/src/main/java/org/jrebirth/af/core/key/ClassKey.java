@@ -26,7 +26,13 @@ package org.jrebirth.af.core.key;
  */
 public class ClassKey<R> implements UniqueKey<R> {
 
-    /** The class definition of the component registered by the current key. */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6535088425529890897L;
+	
+	
+	/** The class definition of the component registered by the current key. */
     private final Class<R> classField;
 
     /**

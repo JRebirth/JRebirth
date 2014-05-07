@@ -24,7 +24,7 @@ import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.ui.DefaultView;
-import org.jrebirth.af.core.ui.annotation.RootNodeId;
+import org.jrebirth.af.core.ui.annotation.RootNodeClass;
 
 /**
  * The Class DockView only creates a TabPane like component that will handle Model Components.
@@ -33,7 +33,7 @@ import org.jrebirth.af.core.ui.annotation.RootNodeId;
  * 
  * @author Sébastien Bordes
  */
-@RootNodeId("DockPanel")
+@RootNodeClass("DockPanel")
 public class DockView extends DefaultView<DockModel, TabPane, DefaultController<DockModel, DockView>> {
 
     /** The Constant LOGGER. */

@@ -17,8 +17,24 @@
  */
 package org.jrebirth.af.component.ui.tab;
 
-import org.jrebirth.af.core.ui.DefaultModel;
+import java.util.Observable;
 
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import org.jrebirth.af.component.ui.beans.Tab;
+import org.jrebirth.af.component.ui.beans.TabConfig;
+import org.jrebirth.af.component.workbench.ui.DockableModel;
+import org.jrebirth.af.core.key.UniqueKey;
+import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.core.ui.Model;
+import org.jrebirth.af.core.ui.object.DefaultObjectModel;
+import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.core.wave.WaveItem;
+import org.jrebirth.af.core.wave.WaveType;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +43,19 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Sébastien Bordes
  */
-public class TabModel extends DefaultModel<TabModel, TabView> {
+public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
+
+    public static WaveItem<Model> MODEL = new WaveItem<Model>() {};
+
+    public static WaveType ADD = WaveTypeBase.build("addTab", MODEL);
+
+    public static WaveType REMOVE = WaveTypeBase.build("removeTab", MODEL);
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(TabModel.class);
+    
+    
+    private ObservableList<Tab> tabs = FXCollections.observableArrayList();
 
     /**
      * {@inheritDoc}
@@ -45,6 +70,19 @@ public class TabModel extends DefaultModel<TabModel, TabView> {
      */
     @Override
     protected void showView() {
+
     }
 
+    public void addTab(DockableModel model, Wave wave) {
+    	
+    	Tab t = Tab.create().name(model.modelName()).modelKey((UniqueKey<? extends DockableModel>) model.getKey());
+    	
+   		tabs.add(0, t);
+    	
+    	getView().addTab(t);
+    }
+
+    public void removeTab(Model model, Wave wave) {
+
+    }
 }

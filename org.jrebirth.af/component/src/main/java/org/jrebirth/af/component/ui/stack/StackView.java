@@ -22,7 +22,7 @@ import javafx.scene.layout.StackPane;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.ui.DefaultView;
-import org.jrebirth.af.core.ui.annotation.RootNodeId;
+import org.jrebirth.af.core.ui.annotation.RootNodeClass;
 
 /**
  * The Class StackView only creates a StackPane.
@@ -31,7 +31,7 @@ import org.jrebirth.af.core.ui.annotation.RootNodeId;
  * 
  * @author Sébastien Bordes
  */
-@RootNodeId("StackPanel")
+@RootNodeClass("StackPanel")
 public class StackView extends DefaultView<StackModel, StackPane, DefaultController<StackModel, StackView>> {
 
     /** The Constant LOGGER. */

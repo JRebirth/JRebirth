@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.layout.StackPane;
 
 import org.jrebirth.af.component.ui.workbench.WorkbenchModel;
+import org.jrebirth.af.component.workbench.ui.TabDemoModel;
 import org.jrebirth.af.core.application.DefaultApplication;
 import org.jrebirth.af.core.ui.Model;
 
@@ -28,7 +29,7 @@ public final class WorkbenchApplication extends DefaultApplication<StackPane> {
      */
     @Override
     public Class<? extends Model> getFirstModelClass() {
-        return WorkbenchModel.class;
+        return TabDemoModel.class;
     }
 
 }

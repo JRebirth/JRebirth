@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.key;
 
+import java.io.Serializable;
+
 /**
  * The class <strong>UniqueKey</strong>.
  * 
@@ -24,7 +26,7 @@ package org.jrebirth.af.core.key;
  * 
  * @param <R> the type of the classfield managed by this key
  */
-public interface UniqueKey<R> {
+public interface UniqueKey<R> extends Serializable {
 
     /**
      * Return the unique key.
