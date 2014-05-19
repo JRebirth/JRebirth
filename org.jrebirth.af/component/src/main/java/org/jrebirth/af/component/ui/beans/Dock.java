@@ -4,38 +4,36 @@ import java.io.Serializable;
 
 import org.jrebirth.af.component.ui.Dockable;
 import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.Model;
 
-public class Tab<M extends Model & Dockable> implements Serializable {
+public class Dock implements Serializable {
 
     /**
      *
      */
-    private static final long serialVersionUID = 8137109665415403740L;
+    private static final long serialVersionUID = 8111826206258276488L;
 
     private String name;
 
-    private UniqueKey<M> modelKey;
+    private UniqueKey<? extends Dockable> modelKey;
 
-    @SuppressWarnings("rawtypes")
-    public static Tab create() {
-        return new Tab();
+    public static Dock create() {
+        return new Dock();
     }
 
     public String name() {
         return this.name;
     }
 
-    public Tab<M> name(final String name) {
+    public Dock name(final String name) {
         this.name = name;
         return this;
     }
 
-    public UniqueKey<M> modelKey() {
+    public UniqueKey<? extends Dockable> modelKey() {
         return this.modelKey;
     }
 
-    public Tab<M> modelKey(final UniqueKey<M> modelKey) {
+    public Dock modelKey(final UniqueKey<? extends Dockable> modelKey) {
         this.modelKey = modelKey;
         return this;
     }

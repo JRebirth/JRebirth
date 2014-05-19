@@ -17,39 +17,30 @@
  */
 package org.jrebirth.af.component.ui.tab;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 
-import org.jrebirth.af.component.ui.CustomDataFormat;
+import org.jrebirth.af.component.ui.beans.Tab;
 import org.jrebirth.af.core.ui.adapter.AbstractDefaultAdapter;
-import org.jrebirth.af.core.ui.adapter.MouseAdapter;
+import org.jrebirth.af.core.ui.adapter.ActionAdapter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TabSourceDragAdapter.
+ * The Class TabActionAdapter.
  */
-class TabSourceDragAdapter
-extends AbstractDefaultAdapter<TabController> implements MouseAdapter {
+class TabActionAdapter extends AbstractDefaultAdapter<TabController> implements ActionAdapter {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void mouseDragDetected(final MouseEvent mouseEvent) {
+    public void action(final ActionEvent actionEvent) {
 
-        final Button b = (Button) mouseEvent.getSource();
+        final Tab t = (Tab) ((Button) actionEvent.getSource()).getUserData();
 
-        final Dragboard db = b.startDragAndDrop(TransferMode.MOVE);
+        getController().getView().selectTab(t);
 
-        // Put a string on a dragboard
-        final ClipboardContent content = new ClipboardContent();
-        content.put(CustomDataFormat.TAB, b.getUserData());
-        db.setContent(content);
-
-        mouseEvent.consume();
+        getController().getModel().getObject().tabs().remove(t);
     }
 
 }

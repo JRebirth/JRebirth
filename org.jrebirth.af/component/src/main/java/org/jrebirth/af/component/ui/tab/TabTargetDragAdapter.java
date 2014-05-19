@@ -1,136 +1,188 @@
+/**
+ * Get more info at : www.jrebirth.org .
+ * Copyright JRebirth.org © 2011-2013
+ * Contact : sebastien.bordes@jrebirth.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.jrebirth.af.component.ui.tab;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import org.jrebirth.af.component.ui.CustomDataFormat;
+import org.jrebirth.af.component.ui.Dockable;
 import org.jrebirth.af.component.ui.beans.Tab;
-import org.jrebirth.af.core.ui.AbstractBaseController;
+import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.ui.adapter.AbstractDefaultAdapter;
-import org.jrebirth.af.core.ui.adapter.DefaultDragAdapter;
 import org.jrebirth.af.core.ui.adapter.DragAdapter;
-import org.jrebirth.af.core.ui.adapter.MouseAdapter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TabTargetDragAdapter.
+ */
 class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> implements DragAdapter {
 
-	//http://stackoverflow.com/questions/18929161/how-to-move-items-with-in-vboxchange-order-by-dragging-in-javafx
-	
-	
-	@Override
-	public void dragOver(DragEvent dragEvent) {
-	        /* data is dragged over the target */
-	        /* accept it only if it is not dragged from the same node 
-	         * and if it has a string data */
-	        if (dragEvent.getGestureSource() != getController().getView().getBox() &&
-	        		dragEvent.getDragboard().hasContent(CustomDataFormat.TAB)) {
-	            /* allow for both copying and moving, whatever user chooses */
-	        	
-	        	dragEvent.acceptTransferModes(TransferMode.MOVE);
-	        }
-	        
-	        dragEvent.consume();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dragOver(final DragEvent dragEvent) {
+        // System.out.println("drag OVER");
 
-	@Override
-	public void dragEntered(DragEvent dragEvent) {
-	    /* the drag-and-drop gesture entered the target */
-	    /* show to the user that it is an actual gesture target */
-	         if (dragEvent.getGestureSource() != getController().getView().getBox() &&
-	        		 dragEvent.getDragboard().hasString()) {
-	        	// box.setFill(Color.GREEN);
-	         }
-	                
-	         dragEvent.consume();
-	    }
+        if (dragEvent.getGestureSource() != getController().getView().getBox()
+                && dragEvent.getDragboard().hasContent(CustomDataFormat.TAB)) {
 
-	@Override
-	public void dragExited(DragEvent dragEvent) {
-        /* mouse moved away, remove the graphical cues */
-    	//box.setFill(Color.BLACK);
+            dragEvent.acceptTransferModes(TransferMode.MOVE);
 
-		dragEvent.consume();
+            getController().getView().drawMarker((Button) dragEvent.getGestureSource(), dragEvent.getX(), dragEvent.getY());
+        }
+
+        dragEvent.consume();
     }
 
-	@Override
-	public void dragDropped(DragEvent dragEvent) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dragEnteredTarget(final DragEvent dragEvent) {
+        System.out.println("drag ENTERED TARGET");
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dragEntered(final DragEvent dragEvent) {
+        System.out.println("drag ENTERED");
+        if (dragEvent.getGestureSource() != getController().getView().getBox()
+                && dragEvent.getDragboard().hasContent(CustomDataFormat.TAB)) {
+
+            // getController().getView().drawMarker(dragEvent.getX(), dragEvent.getY());
+
+            // getController().getView().getBox().setBorder(new Border(new BorderStroke(Color.AQUAMARINE, BorderStrokeStyle.SOLID, new CornerRadii(1.0), BorderStroke.THICK)));
+        }
+
+        dragEvent.consume();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dragExited(final DragEvent dragEvent) {
+        System.out.println("drag EXITED");
+        if (dragEvent.getGestureSource() != getController().getView().getBox() &&
+                dragEvent.getDragboard().hasContent(CustomDataFormat.TAB)) {
+
+            getController().getView().removeMarker();
+            // getController().getView().getBox().setBorder(null);
+        }
+
+        dragEvent.consume();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dragExitedTarget(final DragEvent dragEvent) {
+        // System.out.println("drag EXIT TARGET");
+        // if (/*
+        // * dragEvent.getGestureSource() != getController().getView().getBox() &&
+        // */dragEvent.getDragboard().hasContent(CustomDataFormat.TAB)) {
+        //
+        // getController().getView().removeMarker();
+        // // getController().getView().getBox().setBorder(null);
+        // }
+        //
+        // dragEvent.consume();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dragDropped(final DragEvent dragEvent) {
+
+        System.out.println("drag DROPPED");
+
         /* data dropped */
         /* if there is a string data on dragboard, read it and use it */
-        Dragboard db = dragEvent.getDragboard();
+        final Dragboard db = dragEvent.getDragboard();
         boolean success = false;
-        
+
         if (db.hasContent(CustomDataFormat.TAB)) {
-        	
-        	Tab t = (Tab)db.getContent(CustomDataFormat.TAB);
-        	Button b = getController().getView().getButtonByTab(t);
-        	
-        	Pane box = getController().getView().getBox();
-        	
-//        	Button b = null;
-//        	for(Node n : box.getChildren()){
-//        		if(n instanceof Button && n.getUserData().equals(t)){
-//        			b =(Button) n;
-//        		}
-//        	}
-        	
-        	if(box.getChildren().contains(b)){
-        		//box.getChildren().remove(b);
-        		
-               
-                Object source = dragEvent.getGestureSource();
-                int sourceIndex = box.getChildren().indexOf(source);
-                int targetIndex = box.getChildren().indexOf(dragEvent.getTarget());
-                List<Node> nodes = new ArrayList<Node>(box.getChildren());
-                if (sourceIndex < targetIndex) {
-                    Collections.rotate(
-                            nodes.subList(sourceIndex, targetIndex + 1), -1);
-                } else {
-                    Collections.rotate(
-                            nodes.subList(targetIndex, sourceIndex + 1), 1);
-                }
-                box.getChildren().clear();
-                box.getChildren().addAll(nodes);
-        		
-        		
-//        		int idx = box.getChildren().indexOf(dragEvent.getTarget());
-//        		if(idx>=0 && idx < box.getChildren().size()){
-//            		box.getChildren().add(idx, b);
-//            		box.requestLayout();
-//            			
-//        		}
-        		
-        		b.fire();
-        	}else{
-        		getController().getModel().addTab(getController().getModel().getLocalFacade().retrieve(t.modelKey()), null);
-        	}
-        	
-        	
-           success = true;
+
+            final Tab t = (Tab) db.getContent(CustomDataFormat.TAB);
+            final Button b = getController().getView().getButtonByTab(t);
+
+            final Pane targetBox = getController().getView().getBox();
+
+            final int idx = getController().getView().removeMarker();
+
+            System.out.println("Add tab " + t.name() + " at " + idx);
+
+            if (targetBox.getChildren().contains(b)) {
+
+                final int currentIdx = targetBox.getChildren().indexOf(b);
+                // if (currentIdx < idx) {
+                // idx--;
+                // }
+                // targetBox.getChildren().remove(b);
+                // targetBox.getChildren().add(idx, b);
+                // getController().getView().removeMarker();
+
+                getController().getModel().getObject().tabs().remove(t);
+                getController().getModel().getObject().tabs().add(idx, t);
+
+                b.fire();
+            } else {
+
+                final Node n = (Node) dragEvent.getGestureSource();
+                ((Pane) n.getParent()).getChildren().remove(n);
+
+                getController().getModel().insertTab(idx, getController().getModel().getLocalFacade().retrieve((UniqueKey<Dockable>) t.modelKey()), null);
+            }
+            success = true;
         }
-        /* let the source know whether the string was successfully 
-         * transferred and used */
+        /*
+         * let the source know whether the string was successfully transferred and used
+         */
         dragEvent.setDropCompleted(success);
-        
+
         dragEvent.consume();
-     }
-	
-	@Override
-	public void dragDone(DragEvent dragEvent) {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dragDone(final DragEvent dragEvent) {
+
+        System.out.println("drag DONE");
+
         /* the drag and drop gesture ended */
         /* if the data was successfully moved, clear it */
-        if (dragEvent.getTransferMode() == TransferMode.MOVE) {
-        	Button b = ((Button)dragEvent.getGestureSource());
-        	//((Pane)b.getParent()).getChildren().remove(b);
-        }
+        // if (dragEvent.getTransferMode() == TransferMode.MOVE) {
+        // Button b = ((Button) dragEvent.getGestureSource());
+        // ((Pane) b.getParent()).getChildren().remove(b);
+        // }
         dragEvent.consume();
     }
 

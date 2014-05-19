@@ -8,9 +8,9 @@ import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  * The class <strong>StackWaves</strong>.
- * 
+ *
  * All {@link WaveItem} and {@link WaveType} used to manage the stack model.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface StackWaves {

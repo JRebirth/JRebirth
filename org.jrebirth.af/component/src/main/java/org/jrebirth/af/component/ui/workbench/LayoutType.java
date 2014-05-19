@@ -1,6 +1,6 @@
 package org.jrebirth.af.component.ui.workbench;
 
-public enum LayoutType{
+public enum LayoutType {
 
     BASIC,
     LEFT_COLUMN,
