@@ -56,7 +56,7 @@ public abstract class AbstractUndoableCommand<WB extends WaveBean> extends Abstr
             // If the flag is not set we must initialize the command
             init(wave);
             // Get existing wave data
-            final List<WaveData<?>> data = wave.getWaveItems();
+            final List<WaveData<?>> data = wave.waveDatas();
             // and add the undoable command
             data.add(WaveData.build(UndoRedoWaves.UNDOABLE_COMMAND, this));
             // in order to register it into the right command stack

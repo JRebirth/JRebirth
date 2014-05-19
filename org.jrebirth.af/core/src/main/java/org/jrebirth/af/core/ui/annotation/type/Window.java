@@ -34,7 +34,7 @@ public enum Window implements EnumEventType {
 
     /**
      * Default constructor used to link the apiName.
-     * 
+     *
      * @param eventType the javafx event type
      */
     private Window(final EventType<?> eventType) {

@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -42,11 +42,11 @@ import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveData;
 
 /**
- * 
+ *
  * The class <strong>ServiceBase</strong>.
- * 
+ *
  * Base implementation of the service.
- * 
+ *
  * @author Sébastien Bordes
  */
 public abstract class AbstractService extends AbstractWaveReady<Service> implements Service, ServiceMessages {
@@ -72,7 +72,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
     /**
      * Custom method used to initialize the service.
-     * 
+     *
      * Called into JIT by ready method.
      */
     protected abstract void initService();
@@ -96,7 +96,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
         try {
             // Build parameter list of the searched method
             final List<Object> parameterValues = new ArrayList<>();
-            for (final WaveData<?> wd : sourceWave.getWaveItems()) {
+            for (final WaveData<?> wd : sourceWave.waveDatas()) {
                 // Add only wave items defined as parameter
                 if (wd.getKey().isParameter()) {
                     parameterValues.add(wd.getValue());
@@ -105,12 +105,12 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
             // Add the current wave to process
             // parameterValues.add(wave);
 
-            if (sourceWave.getWaveType() == null) {
+            if (sourceWave.waveType() == null) {
                 LOGGER.error(NO_WAVE_TYPE_DEFINED, this.getClass().getSimpleName());
             }
 
             // Search the wave handler method
-            final Method method = ClassUtility.getMethodByName(this.getClass(), ClassUtility.underscoreToCamelCase(sourceWave.getWaveType().toString()));
+            final Method method = ClassUtility.getMethodByName(this.getClass(), ClassUtility.underscoreToCamelCase(sourceWave.waveType().toString()));
             if (method != null) {
 
                 // final Class<T> returnClass = (Class<T>) method.getReturnType();
@@ -127,13 +127,13 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
     /**
      * Run the wave type method.
-     * 
+     *
      * @param sourceWave the source wave
      * @param parameterValues values to pass to the method
      * @param method method to call
-     * 
+     *
      * @param <T> the type of the returned type
-     * 
+     *
      * @return the service task created
      */
     private <T> ServiceTask<T> runTask(final Wave sourceWave, final Method method, final Object[] parameterValues) {
@@ -148,7 +148,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
         this.pendingTasks.put(sourceWave.getWUID(), task);
 
         // Attach ServiceTask to the source wave
-        sourceWave.addData(WaveData.build(JRebirthWaves.SERVICE_TASK, task));
+        sourceWave.addDatas(WaveData.build(JRebirthWaves.SERVICE_TASK, task));
 
         // Bind ProgressBar
         if (sourceWave.containsNotNull(JRebirthWaves.PROGRESS_BAR)) { // Check double call
@@ -173,7 +173,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
     /**
      * Bind a task to a progress bar widget to follow its progression.
-     * 
+     *
      * @param task the service task that we need to follow the progression
      * @param progressBar graphical progress bar
      */
@@ -198,7 +198,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
     /**
      * Bind a task to a string property that will display the task title.
-     * 
+     *
      * @param task the service task that we need to follow the progression
      * @param titleProperty the title presenter
      */
@@ -220,7 +220,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
     /**
      * Bind a task to a string property that will display the task message.
-     * 
+     *
      * @param task the service task that we need to follow the progression
      * @param messageProperty the message presenter
      */
@@ -274,9 +274,9 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
     /**
      * Update the progress of the service task related to the given wave.
-     * 
+     *
      * This method will use a 1.0 block increment
-     * 
+     *
      * @param wave the wave that trigger the service task call
      * @param workDone the amount of overall work done
      * @param totalWork the amount of total work to do
@@ -287,7 +287,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
     /**
      * Update the progress of the service task related to the given wave.
-     * 
+     *
      * @param wave the wave that trigger the service task call
      * @param workDone the amount of overall work done
      * @param totalWork the amount of total work to do
@@ -314,9 +314,9 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
     /**
      * Update the progress of the service task related to the given wave.
-     * 
+     *
      * This method will use a 1.0 block increment
-     * 
+     *
      * @param wave the wave that trigger the service task call
      * @param workDone the amount of overall work done
      * @param totalWork the amount of total work to do
@@ -327,7 +327,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
     /**
      * Update the progress of the service task related to the given wave.
-     * 
+     *
      * @param wave the wave that trigger the service task call
      * @param workDone the amount of overall work done
      * @param totalWork the amount of total work to do
@@ -354,7 +354,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
     /**
      * Update the current message of the service task related to the given wave.
-     * 
+     *
      * @param wave the wave that trigger the service task call
      * @param message the current message of the service task processed
      */
@@ -376,7 +376,7 @@ public abstract class AbstractService extends AbstractWaveReady<Service> impleme
 
     /**
      * Update the current message of the service task related to the given wave.
-     * 
+     *
      * @param wave the wave that trigger the service task call
      * @param title the title of the service task processed
      */

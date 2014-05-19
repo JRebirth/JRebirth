@@ -2,9 +2,9 @@ package org.jrebirth.af.core.wave;
 
 /**
  * The class <strong>DefaultWaveListener</strong> is the default empty implementation.
- * 
+ *
  * You can use it as base class to only override the method you need.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class DefaultWaveListener implements WaveListener {

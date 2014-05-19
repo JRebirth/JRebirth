@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,7 +24,7 @@ import org.jrebirth.af.core.resource.ResourceItem;
 
 /**
  * The class <strong>ImageItem</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, ImageBuilder> {
@@ -32,6 +32,7 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
     /**
      * {@inheritDoc}
      */
+    @Override
     default ImageItem set(final ImageParams imageParams) {
         builder().storeParams(this, imageParams);
         return this;
@@ -40,6 +41,7 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
     /**
      * {@inheritDoc}
      */
+    @Override
     default Image get() {
         return builder().get(this);
     }
@@ -56,7 +58,7 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
 
         /**
          * .
-         * 
+         *
          * @param path the image local path
          * @param name the file name
          * @param extension the image extension
@@ -67,7 +69,7 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
 
         /**
          * .
-         * 
+         *
          * @param name the file name
          * @param extension the image extension
          */
@@ -77,7 +79,7 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
 
         /**
          * .
-         * 
+         *
          * @param fullName the full file name (including path and image extension)
          */
         default void local(final String fullName) {
@@ -90,7 +92,7 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
 
         /**
          * Default Constructor.
-         * 
+         *
          * @param website the website base url
          * @param path the path of the image to load
          * @param name the image file name to use.
@@ -102,7 +104,7 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
 
         /**
          * Default Constructor.
-         * 
+         *
          * @param website the website base url
          * @param secured the http protocol to use (http or https)
          * @param path the path of the image to load

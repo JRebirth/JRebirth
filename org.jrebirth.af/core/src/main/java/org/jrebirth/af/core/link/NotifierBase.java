@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,7 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jrebirth.af.core.command.Command;
-import org.jrebirth.af.core.command.basic.showmodel.ShowModelWaveBuilder;
+import org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean;
+import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.exception.WaveException;
@@ -36,19 +37,19 @@ import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.service.ServiceTask;
 import org.jrebirth.af.core.service.basic.TaskTrackerService;
-import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.JRebirthWaves;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.Wave.Status;
+import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.checker.WaveChecker;
 
 /**
- * 
+ *
  * The class <strong>NotifierImpl</strong>.
- * 
+ *
  * An implementation that allow to send and to rpocess wave message.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkMessages {
@@ -64,7 +65,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param globalFacade the global facade of the application
      */
     public NotifierBase(final GlobalFacade globalFacade) {
@@ -88,13 +89,13 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
     @Override
     public void sendWave(final Wave wave) throws JRebirthThreadException {
 
-        wave.setStatus(Status.Processing);
+        wave.status(Status.Processing);
 
         JRebirth.checkJIT();
 
         // Perform different action according to Wave Group used
         try {
-            switch (wave.getWaveGroup()) {
+            switch (wave.waveGroup()) {
                 case CALL_COMMAND:
                     callCommand(wave);
                     break;
@@ -115,13 +116,13 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
     /**
      * Call dynamically a command.
-     * 
+     *
      * According to its runIntoType the command will be run into JAT, JIT or a Thread Pool
-     * 
+     *
      * Each time a new fresh command will be retrieved.
-     * 
+     *
      * This method is called from the JIT (JRebirth Internal Thread)<br>
-     * 
+     *
      * @param wave the wave that contains all informations
      */
     @SuppressWarnings("unchecked")
@@ -129,8 +130,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
         // Use the Wave UID to guarantee that a new fresh command is built and used !
         final Command command = wave.contains(JRebirthWaves.REUSE_COMMAND) && wave.get(JRebirthWaves.REUSE_COMMAND)
-                ? getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.getRelatedClass())
-                : getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.getRelatedClass(), wave.getWUID());
+                ? getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.componentClass())
+                : getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.componentClass(), wave.getWUID());
 
         if (command == null) {
             LOGGER.error(COMMAND_NOT_FOUND_ERROR, wave.toString());
@@ -145,18 +146,18 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
     /**
      * Call a service method by using a task worker.
-     * 
+     *
      * The same service will be retrieved each time this method is called.
-     * 
+     *
      * This method is called from the JIT (JRebirth Internal Thread)<br />
-     * 
+     *
      * @param wave the wave that contains all informations
      */
     @SuppressWarnings("unchecked")
     private void returnData(final Wave wave) {
 
         // Use only the Service class to retrieve the same instance each time
-        final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<Service>) wave.getRelatedClass());
+        final Service service = getGlobalFacade().getServiceFacade().retrieve((Class<Service>) wave.componentClass());
 
         if (service == null) {
             LOGGER.error(SERVICE_NOT_FOUND_ERROR, wave.toString());
@@ -175,22 +176,22 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
     /**
      * Display dynamically an Ui model.<br>
-     * 
+     *
      * This method is called from the JIT (JRebirth Internal Thread)<br>
-     * 
+     *
      * Creates the model and its root node.<br>
      * Then attach it according to the placeholder defined into the wave:<br>
      * <ul>
      * <li>JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER : to replace a property node by the model's root node</li>
      * <li>JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER : to add the model's root node into a children list</li>
      * </ul>
-     * 
+     *
      * @param wave the wave that contains all informations
      */
     @SuppressWarnings("unchecked")
     private void displayUi(final Wave wave) {
 
-        if (wave.getRelatedClass() != null) {
+        if (wave.componentClass() != null) {
             LOGGER.error(MODEL_NOT_FOUND_ERROR, wave.toString());
             if (JRebirthParameters.DEVELOPER_MODE.get()) {
                 this.unprocessedWaveHandler.manageUnprocessedWave(MODEL_NOT_FOUND_MESSAGE.getText(), wave);
@@ -199,38 +200,37 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         // This key method could be managed in another way (fully sync with JAT), to see if it could be useful
 
         // Build the wave used to call the required command
-        final ShowModelWaveBuilder smwb = ShowModelWaveBuilder.create()
-                .showModelKey(getGlobalFacade().getUiFacade().buildKey((Class<Model>) wave.getRelatedClass()));
+        final DisplayModelWaveBean waveBean = DisplayModelWaveBean.create();
 
         if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
             // Add the Ui view into the place holder provided
-            smwb.uniquePlaceHolder(wave.get(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER));
+            waveBean.uniquePlaceHolder(wave.get(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER));
 
         } else if (wave.contains(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER)) {
             // Add the Ui view into the children list of its parent container
-            smwb.childrenPlaceHolder(wave.get(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER));
+            waveBean.childrenPlaceHolder(wave.get(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER));
         }
 
         // Call the command that manage the display UI in 2 steps
         // 1 - Create the model into the Thread Pool
         // 2 - Attach it to the graphical tree model according to their placeholder type
-        callCommand(smwb.build());
+        callCommand(WaveBase.callCommand(ShowModelCommand.class).waveBean(waveBean));
     }
 
     /**
      * Dispatch a standard wave which could be handled by a custom method of the component.
-     * 
+     *
      * This method is called from the JIT (JRebirth Internal Thread)<br>
-     * 
+     *
      * @param wave the wave that contains all information
-     * 
+     *
      * @throws WaveException if wave dispatching fails
      */
     private void processUndefinedWave(final Wave wave) throws WaveException {
 
         // Retrieve all interested object from the map
-        if (this.notifierMap.containsKey(wave.getWaveType())) {
-            final WaveSubscription ws = this.notifierMap.get(wave.getWaveType());
+        if (this.notifierMap.containsKey(wave.waveType())) {
+            final WaveSubscription ws = this.notifierMap.get(wave.waveType());
             // For each object interested in that wave type, process the action
             for (final WaveHandler waveHandler : ws.getWaveHandlers()) {
 
@@ -249,14 +249,14 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
                 }
             }
         } else {
-            LOGGER.warn(NO_WAVE_LISTENER, wave.getWaveType().toString());
+            LOGGER.warn(NO_WAVE_LISTENER, wave.waveType().toString());
             if (JRebirthParameters.DEVELOPER_MODE.get()) {
-                this.unprocessedWaveHandler.manageUnprocessedWave(NO_WAVE_LISTENER.getText(wave.getWaveType().toString()), wave);
+                this.unprocessedWaveHandler.manageUnprocessedWave(NO_WAVE_LISTENER.getText(wave.waveType().toString()), wave);
             }
         }
 
         LOGGER.info(NOTIFIER_CONSUMES, wave.toString());
-        wave.setStatus(Status.Consumed);
+        wave.status(Status.Consumed);
     }
 
     // /**
@@ -345,9 +345,9 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
     /**
      * The class <strong>LoopBuilder</strong>.
-     * 
+     *
      * Used to instantiate object into loop.
-     * 
+     *
      * @author Sébastien Bordes
      */
     private static final class LoopBuilder {
@@ -361,9 +361,9 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
         /**
          * Build a new {@link WaveSubscription}.
-         * 
+         *
          * @param waveType the Wave Type listened
-         * 
+         *
          * @return a new {@link WaveSubscription} instance
          */
         public static WaveSubscription newSubscription(final WaveType waveType) {
@@ -372,11 +372,11 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
         /**
          * Build a new empty component wrapper.
-         * 
+         *
          * @param linkedObject the object to wrap into an handler
          * @param waveChecker the wave checker
          * @param method the method used to handle the wave (could be null)
-         * 
+         *
          * @return a new instance of WaveHandler
          */
         public static WaveHandler newHandler(final WaveReady<?> linkedObject, final WaveChecker waveChecker, final Method method) {

@@ -4,7 +4,7 @@ import org.jrebirth.af.core.wave.Wave;
 
 /**
  * The class <strong>DefaultService</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class DefaultService extends AbstractService {

@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,11 +22,11 @@ import java.lang.reflect.Type;
 
 /**
  * The class <strong>WaveItem</strong>.
- * 
+ *
  * Wave item is used to identify an object into a wave or a parameter.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <T> the type of the object mapped by this WaveItem
  */
 public class WaveItem<T> {
@@ -48,7 +48,7 @@ public class WaveItem<T> {
 
     /**
      * Default Constructor.
-     * 
+     *
      * Set the name to null and the the isParameter flag to true
      */
     protected WaveItem() {
@@ -57,9 +57,9 @@ public class WaveItem<T> {
 
     /**
      * Default Constructor.
-     * 
+     *
      * Set the isParameter flag to true
-     * 
+     *
      * @param name the unique name of this wave item
      */
     protected WaveItem(final String name) {
@@ -68,9 +68,9 @@ public class WaveItem<T> {
 
     /**
      * Default Constructor.
-     * 
+     *
      * Set the name to null
-     * 
+     *
      * @param isParameter the flag that indicates if this WaveItem must be considered by wave handlers
      */
     protected WaveItem(final boolean isParameter) {
@@ -79,7 +79,7 @@ public class WaveItem<T> {
 
     /**
      * Constructor with all parameters.
-     * 
+     *
      * @param name the unique name of this wave item
      * @param isParameter the flag that indicates if this WaveItem must be considered by wave handlers
      */
@@ -183,7 +183,7 @@ public class WaveItem<T> {
 
     /**
      * Set the name (optionally).
-     * 
+     *
      * @param name the name to set
      */
     private void setName(final String name) {
@@ -228,7 +228,7 @@ public class WaveItem<T> {
 
     /**
      * Initialize a WaveItem for a WaveItems.
-     * 
+     *
      * @param waveItemEnum the enumerated wave item
      * @param wi the real waveItem
      */

@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,9 +35,9 @@ import org.jrebirth.af.core.util.ClasspathUtility;
 
 /**
  * The class <strong>ParameterBuilder</strong>.
- * 
+ *
  * Class used to manage parameters with weak reference.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class ParameterBuilder extends AbstractResourceBuilder<ParameterItem<?>, ParameterParams, Object> implements ParameterMessages {
@@ -59,7 +59,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /**
      * Search configuration files according to the parameters provided.
-     * 
+     *
      * @param wildcard the regex wildcard (must not be null)
      * @param extension the file extension without the first dot (ie: properties) (must not be null)
      */
@@ -99,7 +99,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /**
      * Read a customized configuration file to load parameters values.
-     * 
+     *
      * @param custConfFileName the file to load
      */
     private void readPropertiesFile(final String custConfFileName) {
@@ -134,7 +134,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
     /**
      * Store a parameter read from properties files.<br />
      * The parameter is wrapped into a parameterEntry
-     * 
+     *
      * @param entry the entry to store
      */
     private void storePropertiesParameter(final Map.Entry<Object, Object> entry) {
@@ -185,7 +185,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /**
      * Override a parameter value.
-     * 
+     *
      * @param key the parameter item key
      * @param forcedValue the overridden value
      */

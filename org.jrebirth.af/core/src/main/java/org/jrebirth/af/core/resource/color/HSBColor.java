@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +25,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 /**
  * The class <strong>HSBColor</strong> used to create an HSB color.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class HSBColor extends AbstractBaseColor {
@@ -41,7 +41,7 @@ public class HSBColor extends AbstractBaseColor {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param hue the color hue [0.0-360.0] in degrees
      * @param saturation the color saturation [0.0-1.0]
      * @param brightness the color brightness [0.0-1.0]
@@ -55,7 +55,7 @@ public class HSBColor extends AbstractBaseColor {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param hue the color hue [0.0-360.0] in degrees
      * @param saturation the color saturation [0.0-1.0]
      * @param brightness the color brightness [0.0-1.0]
@@ -70,7 +70,7 @@ public class HSBColor extends AbstractBaseColor {
 
     /**
      * Return the hue value [0.0-360.0] in degrees.
-     * 
+     *
      * @return Returns the hue.
      */
     public double hue() {
@@ -79,7 +79,7 @@ public class HSBColor extends AbstractBaseColor {
 
     /**
      * Return the hue property.
-     * 
+     *
      * @return Returns the hue property.
      */
     public DoubleProperty hueProperty() {
@@ -88,7 +88,7 @@ public class HSBColor extends AbstractBaseColor {
 
     /**
      * Return the saturation value 0.0-1.0.
-     * 
+     *
      * @return Returns the saturation.
      */
     public double saturation() {
@@ -97,7 +97,7 @@ public class HSBColor extends AbstractBaseColor {
 
     /**
      * Return the saturation property.
-     * 
+     *
      * @return Returns the saturation property.
      */
     public DoubleProperty saturationProperty() {
@@ -106,7 +106,7 @@ public class HSBColor extends AbstractBaseColor {
 
     /**
      * Return the brightness value 0.0-1.0.
-     * 
+     *
      * @return Returns the brightness.
      */
     public double brightness() {
@@ -115,7 +115,7 @@ public class HSBColor extends AbstractBaseColor {
 
     /**
      * Return the brightness property.
-     * 
+     *
      * @return Returns the brightness property.
      */
     public DoubleProperty brightnessProperty() {

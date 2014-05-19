@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,7 +33,7 @@ import org.jrebirth.af.core.ui.Model;
 
 /**
  * The class <strong>FXMLUtils</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class FXMLUtils implements FXMLMessages {
@@ -50,18 +50,18 @@ public final class FXMLUtils implements FXMLMessages {
 
     /**
      * Load a FXML component without resource bundle.
-     * 
+     *
      * The fxml path could be :
      * <ul>
      * <li>Relative : fxml file will be loaded with the classloader of the given model class</li>
      * <li>Absolute : fxml file will be loaded with default thread class loader, packages must be separated by / character</li>
      * </ul>
-     * 
+     *
      * @param model the model that will manage the fxml node
      * @param fxmlPath the fxml string path
-     * 
+     *
      * @return a FXMLComponent object that wrap a fxml node with its controller
-     * 
+     *
      * @param <M> the model type that will manage this fxml node
      */
     public static <M extends Model> FXMLComponent loadFXML(final M model, final String fxmlPath) {
@@ -70,19 +70,19 @@ public final class FXMLUtils implements FXMLMessages {
 
     /**
      * Load a FXML component.
-     * 
+     *
      * The fxml path could be :
      * <ul>
      * <li>Relative : fxml file will be loaded with the classloader of the given model class</li>
      * <li>Absolute : fxml file will be loaded with default thread class loader, packages must be separated by / character</li>
      * </ul>
-     * 
+     *
      * @param model the model that will manage the fxml node
      * @param fxmlPath the fxml string path
      * @param bundlePath the bundle string path
-     * 
+     *
      * @return a FXMLComponent object that wrap a fxml node with its controller
-     * 
+     *
      * @param <M> the model type that will manage this fxml node
      */
     @SuppressWarnings("unchecked")
@@ -134,12 +134,12 @@ public final class FXMLUtils implements FXMLMessages {
 
     /**
      * Convert The url of fxml files to allow local and path loading.
-     * 
+     *
      * @param model the model class that will be used for relative loading
      * @param fxmlPath the path of the fxml file (relative or absolute)
-     * 
+     *
      * @return the FXML file URL
-     * 
+     *
      * @param <M> the model type that will manage this fxml node
      */
     private static <M extends Model> URL convertFxmlUrl(final M model, final String fxmlPath) {

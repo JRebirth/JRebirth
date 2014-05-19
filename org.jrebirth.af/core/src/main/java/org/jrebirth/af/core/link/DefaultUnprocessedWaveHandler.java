@@ -5,7 +5,7 @@ import org.jrebirth.af.core.wave.Wave;
 
 /**
  * The class <strong>DefaultUnprocessedWaveHandler</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class DefaultUnprocessedWaveHandler implements UnprocessedWaveHandler, LinkMessages {

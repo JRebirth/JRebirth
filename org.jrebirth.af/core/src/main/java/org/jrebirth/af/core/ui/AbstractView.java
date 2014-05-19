@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -45,13 +45,13 @@ import org.jrebirth.af.core.ui.handler.AnnotationEventHandler;
 import org.jrebirth.af.core.util.ClassUtility;
 
 /**
- * 
+ *
  * The class <strong>AbstractView</strong>.
- * 
+ *
  * Base implementation of the view.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <M> The class type of the model of the view
  * @param <N> Any object that is a JavaFx2 Node
  * @param <C> The class type of the controller of the view
@@ -81,7 +81,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param model the dedicated view model
      */
     public AbstractView(final M model) {
@@ -110,7 +110,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Build the errorNode to display the error taht occured.
-     * 
+     *
      * @param ce the CoreException to display
      */
     private void buildErrorNode(final CoreException ce) {
@@ -153,7 +153,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Process view annotation.
-     * 
+     *
      * This will define if callback action will the view itself or its dedicated controller
      */
     private void processViewAnnotation() {
@@ -176,7 +176,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         // Find the RootNodeClass annotation
         final RootNodeClass rnc = ClassUtility.getLastClassAnnotation(this.getClass(), RootNodeClass.class);
         if (rnc != null && rnc.value().length > 0) {
-            for (String styleClass : rnc.value()) {
+            for (final String styleClass : rnc.value()) {
                 if (styleClass != null && !styleClass.isEmpty()) {
                     getRootNode().getStyleClass().add(styleClass);
                 }
@@ -203,7 +203,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Process all fields' annotations to auto-link them with event handler.
-     * 
+     *
      * @throws CoreException if annotation processing fails
      */
     private void processFields() throws CoreException {
@@ -237,9 +237,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Process all OnXxxx Annotation to attach event handler on this field.
-     * 
+     *
      * @param property the field to analyze
-     * 
+     *
      * @throws CoreException if annotation processing fails
      */
     private void processAnnotations(final Field property) throws CoreException {
@@ -289,10 +289,10 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Add an event handler on the given node according to annotation OnXxxxx.
-     * 
+     *
      * @param node the graphical node, must be not null
      * @param annotation the OnXxxx annotation
-     * 
+     *
      * @throws CoreException if an error occurred while linking the event handler
      */
     private void addHandler(final Node node, final Annotation annotation) throws CoreException {
@@ -307,10 +307,10 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Add an event handler on the given animation according to annotation OnFinished.
-     * 
+     *
      * @param animation the animation, must be not null
      * @param annotation the OnXxxx annotation (only OnFinished is supported)
-     * 
+     *
      * @throws CoreException if an error occurred while linking the event handler
      */
     private void addHandler(final Animation animation, final Annotation annotation) throws CoreException {
@@ -342,9 +342,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Build the root node.
-     * 
+     *
      * @return the root node of the view
-     * 
+     *
      * @throws CoreException if introspection fails
      */
     @SuppressWarnings("unchecked")
@@ -354,7 +354,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Build the view controller.
-     * 
+     *
      * @throws CoreException if introspection fails
      */
     @SuppressWarnings("unchecked")
@@ -400,9 +400,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Initialize the view.
-     * 
+     *
      * This method is a hook to manage generic code before initializing the view's node tree.
-     * 
+     *
      * You must implement the {@link #initView()} method to setup your view.
      */
     protected final void initInternalView() {
@@ -414,7 +414,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
     /**
      * Custom method used to initialize components.
-     * 
+     *
      * This method must be overridden by user to create its own graphical tree
      */
     protected abstract void initView();

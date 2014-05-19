@@ -31,7 +31,7 @@ import org.jrebirth.af.core.application.DefaultApplication;
 import org.jrebirth.af.core.resource.ResourceItem;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveBuilder;
+import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.core.wave.WaveGroup;
 import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;
@@ -111,20 +111,15 @@ public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
 
                 // Call the service that will load and parse the log file
                 waveList.add(
-                        WaveBuilder.create()
+                        WaveBase.create()
                                 .waveGroup(WaveGroup.RETURN_DATA)
                                 .waveType(LoadEdtFileService.DO_LOAD_EVENTS)
-                                .relatedClass(LoadEdtFileService.class)
-                                .data(WaveData.build(EditorWaves.EVENTS_FILE, logFile))
-                                .build()
+                                .componentClass(LoadEdtFileService.class)
+                                .addDatas(WaveData.build(EditorWaves.EVENTS_FILE, logFile))
                         );
 
                 // Start the animation to show all components creation
-                waveList.add(
-                        WaveBuilder.create()
-                                .waveType(EditorWaves.DO_PLAY)
-                                .build()
-                        );
+                waveList.add(WaveBase.create().waveType(EditorWaves.DO_PLAY));
             }
         }
         return waveList;

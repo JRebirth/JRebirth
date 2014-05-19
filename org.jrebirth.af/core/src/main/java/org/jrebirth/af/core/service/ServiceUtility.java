@@ -10,7 +10,7 @@ import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
  * The class <strong>ServiceUtility</strong> is used to provide convenient method related to Service tasks.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class ServiceUtility implements ServiceMessages {
@@ -28,9 +28,9 @@ public final class ServiceUtility implements ServiceMessages {
     /**
      * Count the number of line of the given file. <br />
      * If an exception occurred it will be logged and then return -1
-     * 
+     *
      * @param file the file to inspect
-     * 
+     *
      * @return the number of lines of the file or -1
      */
     public static int countFileLines(final File file) {

@@ -28,7 +28,7 @@ public enum Rotate implements EnumEventType {
 
     /**
      * Default constructor used to link the apiName.
-     * 
+     *
      * @param eventType the javafx event type
      */
     private Rotate(final EventType<?> eventType) {

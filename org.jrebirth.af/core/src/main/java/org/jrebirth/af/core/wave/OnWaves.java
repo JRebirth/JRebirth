@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * The class <strong>OnWaves</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 @Target({ ElementType.TYPE, ElementType.METHOD })
@@ -20,7 +20,7 @@ public @interface OnWaves {
 
     /**
      * The list of {@link OnWave} annotations.
-     * 
+     *
      * There is no default value
      */
     OnWave[] value();

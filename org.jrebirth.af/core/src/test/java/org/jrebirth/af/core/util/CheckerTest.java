@@ -6,14 +6,12 @@ import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.core.ui.NullView;
-import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveBuilder;
+import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.core.wave.WaveItem;
 import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.WaveTypeBase;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -113,36 +111,36 @@ public class CheckerTest {
     @Test()
     public void checkWave0() {
 
-        checkWave(WaveBuilder.create().waveType(TYPE_0)
-                .build(), null);
+        checkWave(WaveBase.create().waveType(TYPE_0)
+                , null);
     }
 
     @Test()
     public void checkWave1() {
 
         // Right wave item
-        checkWave(WaveBuilder.create().waveType(TYPE_1)
-                .data(WaveData.build(StringItem, "string"))
-                .build(), null);
+        checkWave(WaveBase.create().waveType(TYPE_1)
+                .addDatas(WaveData.build(StringItem, "string"))
+                , null);
 
         // Right wave item + extra one
-        checkWave(WaveBuilder.create().waveType(TYPE_1)
-                .data(WaveData.build(StringItem, "string"), WaveData.build(StringItem, "string"))
-                .build(), null);
+        checkWave(WaveBase.create().waveType(TYPE_1)
+                .addDatas(WaveData.build(StringItem, "string"), WaveData.build(StringItem, "string"))
+                , null);
 
         // No WaveItem instead of one
-        checkWave(WaveBuilder.create().waveType(TYPE_1)
-                .build(), CoreRuntimeException.class);
+        checkWave(WaveBase.create().waveType(TYPE_1)
+                , CoreRuntimeException.class);
 
         // Bad WaveItem
-        checkWave(WaveBuilder.create().waveType(TYPE_1)
-                .data(WaveData.build(IntegerItem, 0))
-                .build(), CoreRuntimeException.class);
+        checkWave(WaveBase.create().waveType(TYPE_1)
+                .addDatas(WaveData.build(IntegerItem, 0))
+                , CoreRuntimeException.class);
 
         // Bad WaveItem + Right one
-        checkWave(WaveBuilder.create().waveType(TYPE_1)
-                .data(WaveData.build(IntegerItem, 0), WaveData.build(StringItem, "string"))
-                .build(), null);
+        checkWave(WaveBase.create().waveType(TYPE_1)
+                .addDatas(WaveData.build(IntegerItem, 0), WaveData.build(StringItem, "string"))
+                , null);
 
     }
 
@@ -150,57 +148,57 @@ public class CheckerTest {
     public void checkWave2() {
 
         // Right wave item
-        checkWave(WaveBuilder.create().waveType(TYPE_2)
-                .data(WaveData.build(StringItem, "string"), WaveData.build(IntegerItem, Integer.MIN_VALUE))
-                .build(), null);
+        checkWave(WaveBase.create().waveType(TYPE_2)
+                .addDatas(WaveData.build(StringItem, "string"), WaveData.build(IntegerItem, Integer.MIN_VALUE))
+                , null);
 
         // Right wave item + extra one
-        checkWave(WaveBuilder.create().waveType(TYPE_2)
-                .data(WaveData.build(StringItem, "string"), WaveData.build(IntegerItem, Integer.MIN_VALUE), WaveData.build(ObjectItem, new Object()))
-                .build(), null);
+        checkWave(WaveBase.create().waveType(TYPE_2)
+                .addDatas(WaveData.build(StringItem, "string"), WaveData.build(IntegerItem, Integer.MIN_VALUE), WaveData.build(ObjectItem, new Object()))
+                , null);
 
         // No WaveItem instead of two
-        checkWave(WaveBuilder.create().waveType(TYPE_2)
-                .build(), CoreRuntimeException.class);
+        checkWave(WaveBase.create().waveType(TYPE_2)
+                , CoreRuntimeException.class);
 
         // Only one WaveItem instead of two
-        checkWave(WaveBuilder.create().waveType(TYPE_2)
-                .data(WaveData.build(StringItem, "string"))
-                .build(), CoreRuntimeException.class);
+        checkWave(WaveBase.create().waveType(TYPE_2)
+                .addDatas(WaveData.build(StringItem, "string"))
+                , CoreRuntimeException.class);
 
         // Bad WaveItem
-        checkWave(WaveBuilder.create().waveType(TYPE_1)
-                .data(WaveData.build(IntegerItem, 0), WaveData.build(ObjectItem, new Object()))
-                .build(), CoreRuntimeException.class);
+        checkWave(WaveBase.create().waveType(TYPE_1)
+                .addDatas(WaveData.build(IntegerItem, 0), WaveData.build(ObjectItem, new Object()))
+                , CoreRuntimeException.class);
 
         // Bad WaveItem + Right one (2)
-        checkWave(WaveBuilder.create().waveType(TYPE_1)
-                .data(WaveData.build(ObjectItem, new Object()), WaveData.build(IntegerItem, 0), WaveData.build(StringItem, "string"))
-                .build(), null);
+        checkWave(WaveBase.create().waveType(TYPE_1)
+                .addDatas(WaveData.build(ObjectItem, new Object()), WaveData.build(IntegerItem, 0), WaveData.build(StringItem, "string"))
+                , null);
     }
 
     @Test()
     public void checkWave3() {
 
-        checkWave(WaveBuilder.create().waveType(TYPE_3)
-                .data(WaveData.build(StringItem, "string"), WaveData.build(IntegerItem, Integer.MIN_VALUE), WaveData.build(ObjectItem, new Object()))
-                .build(), null);
+        checkWave(WaveBase.create().waveType(TYPE_3)
+                .addDatas(WaveData.build(StringItem, "string"), WaveData.build(IntegerItem, Integer.MIN_VALUE), WaveData.build(ObjectItem, new Object()))
+                , null);
     }
 
     @Test()
     public void checkWave4() {
 
-        checkWave(WaveBuilder.create().waveType(TYPE_4)
-                .data(WaveData.build(IntegerItem, 42), WaveData.build(IntegerItem, Integer.MIN_VALUE), WaveData.build(IntegerItem, 12))
-                .build(), null);
+        checkWave(WaveBase.create().waveType(TYPE_4)
+                .addDatas(WaveData.build(IntegerItem, 42), WaveData.build(IntegerItem, Integer.MIN_VALUE), WaveData.build(IntegerItem, 12))
+                , null);
     }
 
     @Test()
     public void checkWave5() {
 
-        checkWave(WaveBuilder.create().waveType(TYPE_5)
-                .data(WaveData.build(StringItem, "string"), WaveData.build(IntegerItem, Integer.MIN_VALUE), WaveData.build(ObjectItem, new Object()))
-                .build(), null);
+        checkWave(WaveBase.create().waveType(TYPE_5)
+                .addDatas(WaveData.build(StringItem, "string"), WaveData.build(IntegerItem, Integer.MIN_VALUE), WaveData.build(ObjectItem, new Object()))
+                , null);
     }
 
     private void checkWave(final Wave wave, final Class<? extends Throwable> exceptionClass) {

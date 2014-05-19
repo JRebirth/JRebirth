@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,22 +29,26 @@ import org.jrebirth.af.core.service.ServiceTask;
 
 /**
  * The class <strong>JRebirthWaveItem</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface JRebirthWaves {
 
     /** The waveItem that hold the attached node. */
-    WaveItem<ObjectProperty<Node>> ATTACH_UI_NODE_PLACEHOLDER = new WaveItem<ObjectProperty<Node>>() {};
+    WaveItem<ObjectProperty<Node>> ATTACH_UI_NODE_PLACEHOLDER = new WaveItem<ObjectProperty<Node>>() {
+    };
 
     /** The waveItem that hold the children list of the parent node. */
-    WaveItem<ObservableList<Node>> ADD_UI_CHILDREN_PLACEHOLDER = new WaveItem<ObservableList<Node>>() {};
+    WaveItem<ObservableList<Node>> ADD_UI_CHILDREN_PLACEHOLDER = new WaveItem<ObservableList<Node>>() {
+    };
 
     /** The waveItem that hold the list of wave to be executed back to back. */
-    WaveItem<List<Wave>> CHAINED_WAVES = new WaveItem<List<Wave>>() {};
+    WaveItem<List<Wave>> CHAINED_WAVES = new WaveItem<List<Wave>>() {
+    };
 
     /** The waveItem that indicates if command instance must be reused or if another must created. DEfault value is false. */
-    WaveItem<Boolean> REUSE_COMMAND = new WaveItem<Boolean>() {};
+    WaveItem<Boolean> REUSE_COMMAND = new WaveItem<Boolean>() {
+    };
 
     /** . */
     WaveData<Boolean> REUSE = WaveData.build(REUSE_COMMAND, true);
@@ -64,14 +68,18 @@ public interface JRebirthWaves {
     /********************************/
 
     /** This wave item will be used only into a WaveData to pass the current Service task handled by the wave. */
-    WaveItem<ServiceTask<?>> SERVICE_TASK = new WaveItem<ServiceTask<?>>(false) {};
+    WaveItem<ServiceTask<?>> SERVICE_TASK = new WaveItem<ServiceTask<?>>(false) {
+    };
 
     /** This wave item will be used only into a WaveData to pass the right progress bar used by service task. */
-    WaveItem<ProgressBar> PROGRESS_BAR = new WaveItem<ProgressBar>(false) {};
+    WaveItem<ProgressBar> PROGRESS_BAR = new WaveItem<ProgressBar>(false) {
+    };
 
     /** This wave item will be used only into a WaveData to pass the right string property used to display the task title. */
-    WaveItem<StringProperty> TASK_TITLE = new WaveItem<StringProperty>(false) {};
+    WaveItem<StringProperty> TASK_TITLE = new WaveItem<StringProperty>(false) {
+    };
 
     /** This wave item will be used only into a WaveData to pass the right string property used to display the task message. */
-    WaveItem<StringProperty> TASK_MESSAGE = new WaveItem<StringProperty>(false) {};
+    WaveItem<StringProperty> TASK_MESSAGE = new WaveItem<StringProperty>(false) {
+    };
 }

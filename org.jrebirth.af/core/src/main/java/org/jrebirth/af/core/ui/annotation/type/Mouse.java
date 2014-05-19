@@ -49,7 +49,7 @@ public enum Mouse implements EnumEventType {
 
     /**
      * Default constructor used to link the apiName.
-     * 
+     *
      * @param eventType the javafx event type
      */
     private Mouse(final EventType<?> eventType) {

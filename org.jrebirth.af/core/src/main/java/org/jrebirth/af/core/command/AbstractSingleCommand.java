@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,9 +27,9 @@ import org.jrebirth.af.core.wave.WaveBean;
 
 /**
  * The class <strong>AbstractSingleCommand</strong>.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  */
 public abstract class AbstractSingleCommand<WB extends WaveBean> extends AbstractBaseCommand<WB> {
@@ -46,7 +46,7 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
 
     /**
      * Default constructor.
-     * 
+     *
      * @param runInto the way to launch this command
      */
     public AbstractSingleCommand(final RunType runInto) {
@@ -55,7 +55,7 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
 
     /**
      * Default constructor.
-     * 
+     *
      * @param runInto the way to launch this command
      * @param priority the runnable priority
      */
@@ -75,7 +75,7 @@ public abstract class AbstractSingleCommand<WB extends WaveBean> extends Abstrac
 
     /**
      * Custom method used to initialize the command.
-     * 
+     *
      * Called into JIT by ready method.
      */
     protected abstract void initCommand();

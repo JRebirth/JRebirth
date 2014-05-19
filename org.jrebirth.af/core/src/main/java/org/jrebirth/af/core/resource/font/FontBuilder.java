@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,15 +24,14 @@ import javafx.scene.text.Font;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>FontBuilder</strong>.
- * 
+ *
  * Class used to manage font with weak reference.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontParams, Font> {
@@ -61,9 +60,9 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
     /**
      * Build a real font with name and size.
-     * 
+     *
      * @param rFont the real font enum
-     * 
+     *
      * @return the javafx font
      */
     private Font buildRealFont(final RealFont rFont) {
@@ -76,9 +75,9 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
     /**
      * Build a Family Font with name and size.
-     * 
+     *
      * @param familyFont the family font enum
-     * 
+     *
      * @return the javafx font
      */
     private Font buildFamilyFont(final FamilyFont familyFont) {
@@ -97,7 +96,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
     /**
      * TRansform the font name by replacing _ by space.
-     * 
+     *
      * @param fontName the font name to transform
      * @return the transformed font
      */
@@ -107,7 +106,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
     /**
      * Load the font file.
-     * 
+     *
      * @param realFont the name of the font to load
      */
     private void checkFontStatus(final FontParams realFont) {

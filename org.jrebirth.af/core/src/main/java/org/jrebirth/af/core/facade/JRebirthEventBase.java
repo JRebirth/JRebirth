@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,9 +22,9 @@ import java.util.StringTokenizer;
 import org.jrebirth.af.core.util.ClassUtility;
 
 /**
- * 
+ *
  * The class <strong>JRebirthEventBase</strong>.
- * 
+ *
  * This Bean is used to store event data.
  */
 public final class JRebirthEventBase implements JRebirthEvent {
@@ -46,7 +46,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
 
     /**
      * Default Constructor with mandatory fields.
-     * 
+     *
      * @param sequence the sequence number
      * @param eventType the type of the event
      * @param source the source class of the event
@@ -65,7 +65,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
 
     /**
      * Default Constructor used to parse a string.
-     * 
+     *
      * @param eventSerialized the serialized event
      */
     public JRebirthEventBase(final String eventSerialized) {
@@ -173,7 +173,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
 
     /**
      * Parse the serialized string.
-     * 
+     *
      * @param eventSerialized the serialized string
      */
     private void parseString(final String eventSerialized) {

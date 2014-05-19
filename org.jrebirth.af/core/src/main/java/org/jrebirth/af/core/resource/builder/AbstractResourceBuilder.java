@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,11 +28,11 @@ import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 
 /**
  * The abstract class <strong>AbstractResourceBuilder</strong>.
- * 
+ *
  * The base abstract class used to manage resource weakly.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <E> The enumeration used to wrap the resource
  * @param <P> The params type
  * @param <R> The resource managed
@@ -84,7 +84,7 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?, ?, ?>
 
         final P params = getParam(key);
 
-        String paramsKey = params.getKey();
+        final String paramsKey = params.getKey();
 
         // Retrieve the resource into the map
         WeakReference<R> resource = this.resourceMap.get(paramsKey);
@@ -112,10 +112,10 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?, ?, ?>
 
     /**
      * Build the resource requested.
-     * 
+     *
      * @param item the parameter item used to identify the resource element
      * @param params the primitive parameters used to build the resource
-     * 
+     *
      * @return the resource built and weakly stored with a WeakReference
      */
     protected abstract R buildResource(final E item, final P params);

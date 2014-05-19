@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,7 +26,7 @@ import org.jrebirth.af.core.resource.ResourceItem;
 
 /**
  * The class <strong>FontItem</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface FontItem extends ResourceItem<Font, FontItem, FontParams, FontBuilder> {
@@ -34,6 +34,7 @@ public interface FontItem extends ResourceItem<Font, FontItem, FontParams, FontB
     /**
      * {@inheritDoc}
      */
+    @Override
     default FontItem set(final FontParams fontParams) {
         builder().storeParams(this, fontParams);
         return this;
@@ -42,6 +43,7 @@ public interface FontItem extends ResourceItem<Font, FontItem, FontParams, FontB
     /**
      * {@inheritDoc}
      */
+    @Override
     default Font get() {
         return builder().get(this);
     }
@@ -58,11 +60,11 @@ public interface FontItem extends ResourceItem<Font, FontItem, FontParams, FontB
 
         /**
          * .
-         * 
+         *
          * @param name
          * @param size
          */
-        default void real(FontName name, double size) {
+        default void real(final FontName name, final double size) {
             set(new RealFont(name, size));
         }
 
@@ -72,18 +74,18 @@ public interface FontItem extends ResourceItem<Font, FontItem, FontParams, FontB
 
         /**
          * .
-         * 
+         *
          * @param family
          * @param size
          */
-        default void family(String family, double size) {
+        default void family(final String family, final double size) {
             set(new FamilyFont(family, size));
         }
 
         /**
-         * 
+         *
          * TODO To complete.
-         * 
+         *
          * @param family
          * @param size
          * @param weight
@@ -93,9 +95,9 @@ public interface FontItem extends ResourceItem<Font, FontItem, FontParams, FontB
         }
 
         /**
-         * 
+         *
          * TODO To complete.
-         * 
+         *
          * @param family
          * @param size
          * @param posture
@@ -105,9 +107,9 @@ public interface FontItem extends ResourceItem<Font, FontItem, FontParams, FontB
         }
 
         /**
-         * 
+         *
          * TODO To complete.
-         * 
+         *
          * @param family
          * @param size
          * @param weight

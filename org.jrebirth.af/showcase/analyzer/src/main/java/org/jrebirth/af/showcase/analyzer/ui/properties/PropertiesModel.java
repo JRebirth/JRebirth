@@ -52,7 +52,7 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
     @Override
     @OnWave(EditorWaves.DO_SELECT_EVENT_ACTION)
     protected void processWave(final Wave wave) {
-        if (EditorWaves.DO_SELECT_EVENT == wave.getWaveType()) {
+        if (EditorWaves.DO_SELECT_EVENT == wave.waveType()) {
 
             final JRebirthEvent event = wave.get(PropertiesWaves.EVENT_OBJECT);
 

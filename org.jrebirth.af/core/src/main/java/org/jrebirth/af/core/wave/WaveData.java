@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,13 +18,13 @@
 package org.jrebirth.af.core.wave;
 
 /**
- * 
+ *
  * The class <strong>WaveData</strong>.
- * 
+ *
  * Used to contain a value and its unique name.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <T> the type of the data hold
  */
 public final class WaveData<T> implements Comparable<WaveData<?>> {
@@ -42,7 +42,7 @@ public final class WaveData<T> implements Comparable<WaveData<?>> {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param waveItem the enumeration used as key property
      * @param value the data
      */
@@ -53,12 +53,12 @@ public final class WaveData<T> implements Comparable<WaveData<?>> {
 
     /**
      * Build a wave data.
-     * 
+     *
      * @param waveItem the wave item used as the key into the wave
      * @param value the data hold by he wave data wrapper
-     * 
+     *
      * @return a new fresh wave Data object
-     * 
+     *
      * @param <T> the type of the object wrapped by this WaveData
      */
     public static <T extends Object> WaveData<T> build(final WaveItem<T> waveItem, final T value) {

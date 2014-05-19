@@ -7,7 +7,7 @@ import org.jrebirth.af.core.wave.Wave.Status;
 
 /**
  * The class <strong>WaveStatusChangeListener</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface WaveStatusChangeListener extends ChangeListener<Wave.Status> {

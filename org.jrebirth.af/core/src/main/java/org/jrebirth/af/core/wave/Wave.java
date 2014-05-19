@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,16 +23,16 @@ import javafx.beans.property.ObjectProperty;
 
 /**
  * The interface <strong>Wave</strong>.
- * 
+ *
  * A Wave is a message which contain a type and a map of object.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface Wave {
 
     /**
      * The class <strong>Status</strong>.
-     * 
+     *
      * @author Sébastien Bordes
      */
     enum Status {
@@ -62,16 +62,16 @@ public interface Wave {
     /**
      * @return Returns the Wave Status.
      */
-    Status getStatus();
+    Status status();
 
     /**
      * @param status The status to set.
      */
-    void setStatus(final Status status);
+    Wave status(final Status status);
 
     /**
      * Return the status property to allow binding.
-     * 
+     *
      * @return the status property
      */
     ObjectProperty<Status> statusProperty();
@@ -89,161 +89,155 @@ public interface Wave {
     /**
      * @return Returns the waveGroup.
      */
-    WaveGroup getWaveGroup();
+    WaveGroup waveGroup();
 
     /**
      * @param waveGroup The waveGroup to set.
      */
-    void setWaveGroup(final WaveGroup waveGroup);
+    Wave waveGroup(final WaveGroup waveGroup);
 
     /**
      * @return Returns the waveType.
      */
-    WaveType getWaveType();
+    WaveType waveType();
 
     /**
      * @param waveType The waveType to set.
      */
-    void setWaveType(final WaveType waveType);
+    Wave waveType(final WaveType waveType);
 
     /**
      * @return Returns the fromClass.
      */
-    Class<?> getFromClass();
+    Class<?> fromClass();
 
     /**
      * @param fromClass The fromClass to set.
      */
-    void setFromClass(final Class<?> fromClass);
+    Wave fromClass(final Class<?> fromClass);
 
     /**
-     * @return Returns the relatedClass.
+     * @return Returns the class of the component that will handle this wave.
      */
-    Class<?> getRelatedClass();
+    Class<?> componentClass();
 
     /**
-     * @param relatedClass The relatedClass to set.
+     * @param componentClass the class of the component that will handle this wave.
      */
-    void setRelatedClass(final Class<?> relatedClass);
+    Wave componentClass(final Class<?> componentClass);
 
     /**
      * @return Returns the priority.
      */
-    int getPriority();
+    int priority();
 
     /**
      * @param priority The priority to set.
      */
-    void setPriority(final int priority);
+    Wave priority(final int priority);
 
     /**
      * @return Returns the relatedWave.
      */
-    Wave getRelatedWave();
+    Wave relatedWave();
 
     /**
      * @param relatedWave The related Wave to set.
+     *
+     * @return the current wave
      */
-    void setRelatedWave(final Wave relatedWave);
+    Wave relatedWave(final Wave relatedWave);
 
     /**
      * Return all wave items sorted by order.
-     * 
+     *
      * @return Returns the the wave items.
      */
-    List<WaveData<?>> getWaveItems();
+    List<WaveData<?>> waveDatas();
 
     /**
      * Add a wave data. Store an object and indexize it.
-     * 
-     * @param waveData the object to store
-     * 
-     * @param <T> the type of the wave data to add
-     */
-    <T> void addData(final WaveData<T> waveData);
-
-    /**
-     * Add a list of wave data. Store objects and indexize them.
-     * 
-     * @param waveDatas the list of wave data to store
-     */
-    void addDatas(final WaveData<?>[] waveDatas);
-
-    /**
-     * Add a wave data. Store an object and indexize it.
-     * 
+     *
      * @param waveItem the wave item used as hashkey
      * @param value the data to store
-     * 
+     *
      * @param <T> the type of the wave data to add
      */
-    <T> void add(final WaveItem<T> waveItem, final T value);
-
-    /**
-     * Retrieve a wave data object.
-     * 
-     * @param waveItem the waveItem of the object to retrieve
-     * 
-     * @return the waveData registered by the key
-     * 
-     * @param <T> the type of the wave data to add
-     */
-    <T> WaveData<T> getData(final WaveItem<T> waveItem);
+    <T> Wave add(final WaveItem<T> waveItem, final T value);
 
     /**
      * Retrieve a value.
-     * 
+     *
      * @param waveItem waveItem of the object to retrieve
-     * 
+     *
      * @return the data registered by the key
-     * 
+     *
      * @param <T> the type of the wave data to add
      */
     <T> T get(final WaveItem<T> waveItem);
 
     /**
+     * Retrieve a wave data object.
+     *
+     * @param waveItem the waveItem of the object to retrieve
+     *
+     * @return the waveData registered by the key
+     *
+     * @param <T> the type of the wave data to add
+     */
+    <T> WaveData<T> getData(final WaveItem<T> waveItem);
+
+    /**
+     * Add a list of wave data. Store objects and indexize them.
+     *
+     * @param waveDatas the list of wave data to store
+     */
+    Wave addDatas(final WaveData<?>... waveDatas);
+
+    /**
      * Check if an object exists.
-     * 
+     *
      * @param waveItem the waveItem of the object to check
-     * 
+     *
      * @return true if the waveData is registered
      */
     boolean contains(final WaveItem<?> waveItem);
 
     /**
      * Check if an object exists and if it isn't null.
-     * 
+     *
      * @param waveItem the waveItem of the object to check
-     * 
+     *
      * @return true if the waveData is registered and the value is not null
      */
     boolean containsNotNull(final WaveItem<?> waveItem);
 
     /**
      * Return the wave bean used to wrap wave properties.
-     * 
+     *
      * @return the wave bean, could be null
      */
-    WaveBean getWaveBean();
+    WaveBean waveBean();
 
     /**
      * Add a wave listener.
-     * 
+     *
      * @param waveListener the wave listener that will be notified of wave status
      */
-    void addWaveListener(final WaveListener waveListener);
+    Wave addWaveListener(final WaveListener waveListener);
 
     /**
      * Remove a wave listener.
-     * 
+     *
      * @param waveListener the wave listener to removed
      */
-    void removeWaveListener(final WaveListener waveListener);
+    Wave removeWaveListener(final WaveListener waveListener);
 
     /**
      * Link a wave bean.
-     * 
+     *
      * @param waveBean the wave bean already built to link
      */
-    void linkWaveBean(final WaveBean waveBean);
+    Wave waveBean(final WaveBean waveBean);
+
 }

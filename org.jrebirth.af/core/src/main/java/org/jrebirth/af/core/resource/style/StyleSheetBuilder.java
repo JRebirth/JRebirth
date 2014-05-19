@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,15 +22,14 @@ import java.net.URL;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>StyleSheetBuilder</strong>.
- * 
+ *
  * Class used to manage style sheet with weak reference.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetItem, StyleSheetParams, URL> {
@@ -56,9 +55,9 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
 
     /**
      * Build a local image with its local path.
-     * 
+     *
      * @param ss the local image params
-     * 
+     *
      * @return the JavaFX image object
      */
     private URL buildStyleSheetUrl(final StyleSheet ss) {
@@ -82,9 +81,9 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
 
     /**
      * Get a style sheet URL.
-     * 
+     *
      * @param styleSheetPath the path of the style sheet, path must be separated by '/'
-     * 
+     *
      * @return the stylesheet url
      */
     private URL buildUrl(final String styleSheetPath) {
