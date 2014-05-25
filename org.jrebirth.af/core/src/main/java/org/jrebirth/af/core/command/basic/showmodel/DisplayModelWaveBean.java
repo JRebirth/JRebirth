@@ -64,6 +64,13 @@ public class DisplayModelWaveBean implements WaveBean {
     }
 
     /**
+     * Hide the default constructor.
+     */
+    private DisplayModelWaveBean() {
+        super();
+    }
+
+    /**
      * Gets the show model key.
      *
      * @return the show model key
