@@ -147,5 +147,12 @@
 			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
+		<archetype>
+			<groupId>org.jrebirth</groupId>
+			<artifactId>archetype</artifactId>
+			<version>7.7.2</version>
+			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
+		</archetype>
 	</archetypes>
 </archetype-catalog>

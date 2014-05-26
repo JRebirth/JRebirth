@@ -3,6 +3,12 @@
 Release Notes
 ==============
 
+7.7.2 - Release 2014-05-31
+-----------------------------------------
+
+This version fix a regression introduced with newer resource engine, it was backported from 8.x branch.
+
+
 7.7.1 - ["Palladium"](https://www.youtube.com/watch?v=Eo4-_9OE3YA) Release 2014-03-31
 -----------------------------------------
 
