@@ -3,10 +3,13 @@
 Release Notes
 ==============
 
-7.7.2 - Release 2014-05-31
+7.7.2 - ["Paradise City"](https://www.youtube.com/watch?v=Rbm6GXllBiw) Release 2014-05-31
 -----------------------------------------
 
 This version fix a regression introduced with newer resource engine, it was backported from 8.x branch.
+
+- NPE when using LocalImage without ImageExtension [#117](http://github.com/JRebirth/JRebirth/issues/issue/117)<br/>
+The newer resource engine has introduced a NPE when LocalImage are used without an ImageExtension defined (it's retrieved from filename).<br />
 
 
 7.7.1 - ["Palladium"](https://www.youtube.com/watch?v=Eo4-_9OE3YA) Release 2014-03-31
