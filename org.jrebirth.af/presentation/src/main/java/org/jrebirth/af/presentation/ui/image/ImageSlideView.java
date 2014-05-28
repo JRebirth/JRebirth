@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.presentation.ui.image;
 
+import java.lang.Math;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -205,7 +207,7 @@ public final class ImageSlideView extends
      * @return a duration object
      */
     private Duration getRandomDuration() {
-        return Duration.millis(RANDOM.nextLong() % 900 + 300);
+        return Duration.millis(Math.abs(RANDOM.nextLong()) % 900 + 300);
     }
 
     /**
