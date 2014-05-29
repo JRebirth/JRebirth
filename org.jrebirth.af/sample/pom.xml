@@ -94,7 +94,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>webstart-maven-plugin</artifactId>
-				<version>1.0-beta-3</version>
+				<version>1.0-beta-6</version>
 
 				<executions>
 					<execution>
@@ -147,10 +147,13 @@
 						</keystoreConfig>
 					</sign>
 
-					<pack200>true</pack200>
+					<pack200>
+						<enabled>true</enabled>
+					</pack200>
 					<gzip>true</gzip>
 
 					<outputJarVersions>false</outputJarVersions>
+
 					<install>false</install>
 					<verbose>true</verbose>
 				</configuration>
