@@ -231,7 +231,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     private boolean hasStep(SlideContent slideContent) {
         boolean res = false;
         for (S step : this.stepList) {
-            if (step.name().equalsIgnoreCase(slideContent.getName())) {
+            if (step.name() == null && slideContent.getName() == null || step.name() != null && step.name().equalsIgnoreCase(slideContent.getName())) {
                 res = true;
             }
         }
