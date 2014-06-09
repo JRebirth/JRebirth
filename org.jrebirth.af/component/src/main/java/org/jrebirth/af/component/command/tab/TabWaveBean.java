@@ -1,13 +1,13 @@
 package org.jrebirth.af.component.command.tab;
 
-import org.jrebirth.af.component.ui.beans.Tab;
+import org.jrebirth.af.component.ui.beans.TabBB;
 import org.jrebirth.af.core.wave.WaveBean;
 
 public class TabWaveBean implements WaveBean {
 
     private String tabHolderKey;
 
-    private Tab[] tab;
+    private TabBB[] tab;
 
     public static TabWaveBean create() {
         return new TabWaveBean();
@@ -31,14 +31,14 @@ public class TabWaveBean implements WaveBean {
     /**
      * @return Returns the tab.
      */
-    public Tab[] tab() {
+    public TabBB[] tab() {
         return this.tab;
     }
 
     /**
      * @param tab The tab to set.
      */
-    public TabWaveBean tab(final Tab... tab) {
+    public TabWaveBean tab(final TabBB... tab) {
         this.tab = tab;
         return this;
     }

@@ -6,7 +6,7 @@ import javafx.scene.control.SplitPane;
 import org.jrebirth.af.component.command.tab.AddTabCommand;
 import org.jrebirth.af.component.command.tab.TabWaveBean;
 import org.jrebirth.af.component.ui.Dockable;
-import org.jrebirth.af.component.ui.beans.Tab;
+import org.jrebirth.af.component.ui.beans.TabBB;
 import org.jrebirth.af.component.ui.beans.TabConfig;
 import org.jrebirth.af.component.ui.beans.TabOrientation;
 import org.jrebirth.af.component.ui.tab.TabModel;
@@ -42,7 +42,7 @@ public class TabDemoModel extends DefaultSimpleModel<SplitPane> {
         		TabWaveBean.create()
         		.tabHolderKey("top")
         		.tab(
-        				Tab.create()
+        				TabBB.create()
         				.name(model.modelName())
         				.modelKey((UniqueKey<? extends Dockable>) model.getKey())
         				));

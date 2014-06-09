@@ -23,7 +23,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 
 import org.jrebirth.af.component.ui.Dockable;
-import org.jrebirth.af.component.ui.beans.Tab;
+import org.jrebirth.af.component.ui.beans.TabBB;
 import org.jrebirth.af.component.ui.beans.TabConfig;
 import org.jrebirth.af.component.ui.beans.TabOrientation;
 import org.jrebirth.af.core.ui.Model;
@@ -34,6 +34,7 @@ import org.jrebirth.af.core.wave.WaveItem;
 import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.jrebirth.af.core.wave.checker.WaveChecker;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -96,7 +97,7 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
 
     }
 
-    private void onTabsChanged(final ListChangeListener.Change<? extends Tab> change) {
+    private void onTabsChanged(final ListChangeListener.Change<? extends TabBB> change) {
         while (change.next()) {
             System.err.println(change);
             if (change.wasPermutated()) {
@@ -104,7 +105,7 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
                 // getView().addTab(0, change.getList().get(change.getFrom()));
             }
             if (change.wasRemoved()) {
-                getView().removeTab((List<Tab>) change.getRemoved());
+                getView().removeTab((List<TabBB>) change.getRemoved());
             }
             if (change.wasAdded()) {
                 getView().addTab(0, change.getList().get(change.getFrom()));
@@ -151,10 +152,12 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
      * @param wave the wave
      */
     @SuppressWarnings("unchecked")
-    public <M extends Dockable> void insertTab(int idx, final M model, final Wave wave) {
-        final Tab<M> t = Tab.create()
-                .name(model.modelName())
-                .modelKey(model.getKey());
+    public void insertTab(int idx, final Model model, final Wave wave) {
+        // final TabBB<M> t = TabBB.create()
+        // //.name(model.modelName())
+        // .modelKey(model.getKey());
+
+        TabBB t = null;// model.getBehaviorBean(TabBehavior.class);
 
         if (idx < 0) {
             idx = getObject().tabs().isEmpty() ? 0 : getObject().tabs().size() - 1;

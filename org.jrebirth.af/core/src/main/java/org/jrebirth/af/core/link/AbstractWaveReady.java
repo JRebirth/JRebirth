@@ -27,6 +27,8 @@ import org.jrebirth.af.core.annotation.AfterInit;
 import org.jrebirth.af.core.annotation.BeforeInit;
 import org.jrebirth.af.core.annotation.OnRelease;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
+import org.jrebirth.af.core.behavior.Behavior;
+import org.jrebirth.af.core.behavior.BehaviorBean;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.command.CommandBean;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
@@ -41,6 +43,7 @@ import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.util.MultiMap;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.Wave.Status;
 import org.jrebirth.af.core.wave.WaveBase;
@@ -79,8 +82,17 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     private final Map<WaveType, Class<? extends Command>> returnCommandClass = new HashMap<>();
 
     /** A map that store all annotated methods to call sorted by lifecycle phase. */
-    private Map<String, List<Method>> lifecycleMethod;
+    private MultiMap<String, Method> lifecycleMethod;
 
+
+
+	private final MultiMap<Class<Behavior<BehaviorBean>>, BehaviorBean> behaviors = new MultiMap<>();
+
+    @Override
+	public BehaviorBean getBehaviorBean(Class<Behavior<BehaviorBean>> behavior) {
+		return behaviors.get(behavior).get(0);
+	}
+    
     /**
      * Short cut method used to retrieve the notifier.
      *

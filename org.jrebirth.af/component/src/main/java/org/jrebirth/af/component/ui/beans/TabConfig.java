@@ -11,7 +11,7 @@ public class TabConfig {
 
     private final ObjectProperty<TabOrientation> orientationPy = new SimpleObjectProperty<>(TabOrientation.top);
 
-    private final ObservableList<Tab> tabs = FXCollections.observableArrayList();
+    private final ObservableList<TabBB> tabs = FXCollections.observableArrayList();
 
     public static TabConfig create() {
         return new TabConfig();
@@ -39,7 +39,7 @@ public class TabConfig {
         return this;
     }
 
-    public ObservableList<Tab> tabs() {
+    public ObservableList<TabBB> tabs() {
         return this.tabs;
     }
 

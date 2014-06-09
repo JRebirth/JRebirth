@@ -26,7 +26,7 @@ import javafx.scene.layout.Pane;
 
 import org.jrebirth.af.component.ui.CustomDataFormat;
 import org.jrebirth.af.component.ui.Dockable;
-import org.jrebirth.af.component.ui.beans.Tab;
+import org.jrebirth.af.component.ui.beans.TabBB;
 import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.ui.adapter.AbstractDefaultAdapter;
 import org.jrebirth.af.core.ui.adapter.DragAdapter;
@@ -129,7 +129,7 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
 
         if (db.hasContent(CustomDataFormat.TAB)) {
 
-            final Tab t = (Tab) db.getContent(CustomDataFormat.TAB);
+            final TabBB t = (TabBB) db.getContent(CustomDataFormat.TAB);
             final Button b = getController().getView().getButtonByTab(t);
 
             final Pane targetBox = getController().getView().getBox();

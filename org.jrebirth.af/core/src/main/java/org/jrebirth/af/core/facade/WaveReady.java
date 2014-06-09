@@ -19,7 +19,10 @@ package org.jrebirth.af.core.facade;
 
 import java.lang.reflect.Method;
 
+import org.jrebirth.af.core.behavior.Behavior;
+import org.jrebirth.af.core.behavior.BehaviorBean;
 import org.jrebirth.af.core.command.Command;
+import org.jrebirth.af.core.exception.WaveException;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.core.wave.WaveType;
@@ -158,4 +161,5 @@ public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
      */
     // void handle(final Wave wave) throws WaveException;
 
+    BehaviorBean getBehaviorBean(Class<Behavior<BehaviorBean>> behavior);
 }

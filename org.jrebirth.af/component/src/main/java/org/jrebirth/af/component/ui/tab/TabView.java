@@ -31,7 +31,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import org.jrebirth.af.component.ui.beans.Tab;
+import org.jrebirth.af.component.ui.beans.TabBB;
 import org.jrebirth.af.component.ui.beans.TabOrientation;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.log.JRLogger;
@@ -124,7 +124,7 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
      * @param idx the idx
      * @param tab the tab
      */
-    public void addTab(int idx, final Tab tab) {
+    public void addTab(int idx, final TabBB tab) {
 
         final Button b = new Button(tab.name());
         b.setUserData(tab);
@@ -143,8 +143,8 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
 
     }
 
-    public void removeTab(final List<Tab> tabs) {
-        for (final Tab tab : tabs) {
+    public void removeTab(final List<TabBB> tabs) {
+        for (final TabBB tab : tabs) {
             final Button b = this.buttonByTab.get(tab.name());
             this.box.getChildren().remove(b);
         }
@@ -155,7 +155,7 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
      *
      * @param t the t
      */
-    void selectTab(final Tab t) {
+    void selectTab(final TabBB t) {
         this.stackPane.getChildren().clear();
         this.stackPane.getChildren().add(getModel().getLocalFacade().retrieve(t.modelKey()).getRootNode());
     }
@@ -175,7 +175,7 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
      * @param t the t
      * @return the button by tab
      */
-    public Button getButtonByTab(final Tab t) {
+    public Button getButtonByTab(final TabBB t) {
         return this.buttonByTab.get(t.name());
     }
 

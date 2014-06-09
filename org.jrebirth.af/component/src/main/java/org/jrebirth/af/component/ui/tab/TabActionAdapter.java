@@ -20,7 +20,7 @@ package org.jrebirth.af.component.ui.tab;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
-import org.jrebirth.af.component.ui.beans.Tab;
+import org.jrebirth.af.component.ui.beans.TabBB;
 import org.jrebirth.af.core.ui.adapter.AbstractDefaultAdapter;
 import org.jrebirth.af.core.ui.adapter.ActionAdapter;
 
@@ -36,7 +36,7 @@ class TabActionAdapter extends AbstractDefaultAdapter<TabController> implements 
     @Override
     public void action(final ActionEvent actionEvent) {
 
-        final Tab t = (Tab) ((Button) actionEvent.getSource()).getUserData();
+        final TabBB t = (TabBB) ((Button) actionEvent.getSource()).getUserData();
 
         getController().getView().selectTab(t);
 

@@ -7,7 +7,7 @@ public class DockConfig {
 
     private TabOrientation orientation = TabOrientation.top;
 
-    private final ObservableList<Tab> panes = FXCollections.observableArrayList();
+    private final ObservableList<TabBB> panes = FXCollections.observableArrayList();
 
     public static DockConfig create() {
         return new DockConfig();
@@ -22,7 +22,7 @@ public class DockConfig {
         return this;
     }
 
-    public ObservableList<Tab> panes() {
+    public ObservableList<TabBB> panes() {
         return this.panes;
     }
 }
