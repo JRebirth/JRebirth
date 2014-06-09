@@ -48,4 +48,52 @@ public interface UniqueKey<R> extends Serializable {
      * @return Returns the classField.
      */
     Class<R> getClassField();
+
+    /**
+     * Build an unique key.
+     *
+     * @param clazz the class type of the component
+     * @param keyPart all complementary part of the key
+     *
+     * @return the unique key for the given class and keyParts array
+     *
+     * @param <E> The type of the object registered by this ClassKey
+     */
+    static <R> UniqueKey<R> key(final Class<R> clazz, final Object... keyPart) {
+
+        UniqueKey<R> uniqueKey;
+        if (keyPart == null || keyPart.length == 0 || keyPart[0].toString().isEmpty()) {
+            uniqueKey = classKey(clazz);
+        } else {
+            uniqueKey = multitonKey(clazz, keyPart);
+        }
+        return uniqueKey;
+    }
+
+    /**
+     * Build a singleton key.
+     *
+     * @param clazz the class type of the component
+     *
+     * @return the unique key for a singleton
+     *
+     * @param <E> The type of the object registered by this ClassKey
+     */
+    static <R> UniqueKey<R> classKey(final Class<R> clazz) {
+        return new ClassKey<R>(clazz);
+    }
+
+    /**
+     * Build a multiton key.
+     *
+     * @param clazz the class type of the component
+     * @param keyPart all complementary part of the key
+     *
+     * @return the unique key for a multiton
+     *
+     * @param <E> The type of the object registered by this ClassKey
+     */
+    static <R> UniqueKey<R> multitonKey(final Class<R> clazz, final Object... keyPart) {
+        return new MultitonKey<R>(clazz, keyPart);
+    }
 }

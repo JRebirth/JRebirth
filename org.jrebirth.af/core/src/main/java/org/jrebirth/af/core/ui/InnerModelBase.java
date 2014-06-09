@@ -28,7 +28,7 @@ public final class InnerModelBase implements InnerModel {
      */
     private InnerModelBase(final Class<? extends Model> modelClass, final Object... keyPart) {
 
-        this.modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(modelClass, keyPart);
+        this.modelKey = UniqueKey.key(modelClass, keyPart);
     }
 
     /**

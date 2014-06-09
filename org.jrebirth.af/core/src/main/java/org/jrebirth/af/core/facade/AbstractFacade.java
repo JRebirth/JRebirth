@@ -19,14 +19,14 @@ package org.jrebirth.af.core.facade;
 
 import java.lang.ref.WeakReference;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.util.stream.Collectors;
 
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.CoreRuntimeException;
-import org.jrebirth.af.core.key.ClassKey;
-import org.jrebirth.af.core.key.MultitonKey;
 import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
@@ -42,10 +42,12 @@ import org.jrebirth.af.core.ui.Model;
  *
  * @param <R> A type that implements FacadeReady
  */
-public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractGlobalReady implements LocalFacade<R>, FacadeMessages {
+public abstract class AbstractFacade<R extends FacadeReady<R>> extends
+        AbstractGlobalReady implements LocalFacade<R>, FacadeMessages {
 
     /** The class logger. */
-    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractFacade.class);
+    private static final JRLogger LOGGER = JRLoggerFactory
+            .getLogger(AbstractFacade.class);
 
     /** The map that store FacadeReady singletons. */
     private final Map<UniqueKey<? extends R>, WeakReference<R>> componentMap;
@@ -58,7 +60,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     public AbstractFacade(final GlobalFacade globalFacade) {
         super(globalFacade);
         // Initialize the synchronized map for singletons
-        this.componentMap = Collections.synchronizedMap(new WeakHashMap<UniqueKey<? extends R>, WeakReference<R>>());
+        this.componentMap = Collections
+                .synchronizedMap(new WeakHashMap<UniqueKey<? extends R>, WeakReference<R>>());
     }
 
     /**
@@ -66,7 +69,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      */
     @SuppressWarnings("unchecked")
     @Override
-    public <E extends R> void register(final UniqueKey<E> uniqueKey, final E readyObject) {
+    public <E extends R> void register(final UniqueKey<E> uniqueKey,
+            final E readyObject) {
 
         // Synchronize the registration
         synchronized (this.componentMap) {
@@ -78,7 +82,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             readyObject.setLocalFacade(this);
 
             // Store the component into the singleton map
-            this.componentMap.put(readyObject.getKey(), new WeakReference<R>(readyObject));
+            this.componentMap.put(readyObject.getKey(), new WeakReference<R>(
+                    readyObject));
         }
 
     }
@@ -88,9 +93,11 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      */
     @Override
     @SuppressWarnings("unchecked")
-    public <E extends R> void register(final E readyObject, final Object... keyPart) {
+    public <E extends R> void register(final E readyObject,
+            final Object... keyPart) {
 
-        register(buildKey((Class<R>) readyObject.getClass(), keyPart), readyObject);
+        register(UniqueKey.key((Class<R>) readyObject.getClass(), keyPart),
+                readyObject);
     }
 
     /**
@@ -122,9 +129,10 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      */
     @SuppressWarnings("unchecked")
     @Override
-    public <E extends R> void unregister(final E readyObject, final Object... keyPart) {
+    public <E extends R> void unregister(final E readyObject,
+            final Object... keyPart) {
 
-        unregister(buildKey((Class<R>) readyObject.getClass(), keyPart));
+        unregister(UniqueKey.key((Class<R>) readyObject.getClass(), keyPart));
     }
 
     /**
@@ -135,8 +143,10 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         boolean res;
 
         synchronized (this.componentMap) {
-            // Check from singleton map it he key exists and if the weak reference is not null
-            res = this.componentMap.containsKey(uniqueKey) && this.componentMap.get(uniqueKey).get() != null;
+            // Check from singleton map it he key exists and if the weak
+            // reference is not null
+            res = this.componentMap.containsKey(uniqueKey)
+                    && this.componentMap.get(uniqueKey).get() != null;
         }
 
         return res;
@@ -146,8 +156,26 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * {@inheritDoc}
      */
     @Override
-    public <E extends R> boolean exists(final Class<E> clazz, final Object... keyPart) {
-        return exists(buildKey(clazz, keyPart));
+    public <E extends R> boolean exists(final Class<E> clazz,
+            final Object... keyPart) {
+        return exists(UniqueKey.key(clazz, keyPart));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public <E extends R> List<E> retrieveAll(final UniqueKey<E> uniqueKey) {
+
+        // TODO evaluate performances !!!!!
+
+        return (List<E>) componentMap
+                .entrySet()
+                .parallelStream()
+                .filter(entry -> entry.getKey().getClassField() == uniqueKey
+                        .getClassField()).map(e -> e.getValue().get())
+                .filter(e -> e != null).collect(Collectors.toList());
     }
 
     /**
@@ -171,7 +199,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         }
 
         if (readyObject == null) {
-            // If the component isn't contained into the component map, create and register it
+            // If the component isn't contained into the component map, create
+            // and register it
             try {
 
                 // Build the new instance of the component
@@ -180,12 +209,15 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                 // Register it
                 register(uniqueKey, readyObject);
 
-                // The component is accessible from facade, let's start its initialization
+                // The component is accessible from facade, let's start its
+                // initialization
                 readyObject.setup();
 
             } catch (final CoreException ce) {
                 LOGGER.error(COMPONENT_RETRIEVAL_ERROR, ce);
-                throw new CoreRuntimeException(ce); // Pop up the exception wrapped into a runtime exception
+                throw new CoreRuntimeException(ce); // Pop up the exception
+                                                    // wrapped into a runtime
+                                                    // exception
             }
         }
 
@@ -196,9 +228,10 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * {@inheritDoc}
      */
     @Override
-    public <E extends R> E retrieve(final Class<E> clazz, final Object... keyPart) {
+    public <E extends R> E retrieve(final Class<E> clazz,
+            final Object... keyPart) {
 
-        return retrieve(buildKey(clazz, keyPart));
+        return retrieve(UniqueKey.key(clazz, keyPart));
     }
 
     /**
@@ -213,10 +246,12 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * @throws CoreException if an error occurred
      */
     @SuppressWarnings("unchecked")
-    protected <E extends R> E buildComponent(final UniqueKey<E> uniqueKey) throws CoreException {
+    protected <E extends R> E buildComponent(final UniqueKey<E> uniqueKey)
+            throws CoreException {
 
         // Build a new instance of the component
-        final E readyObject = getGlobalFacade().getComponentFactory().buildComponent(uniqueKey.getClassField());
+        final E readyObject = getGlobalFacade().getComponentFactory()
+                .buildComponent(uniqueKey.getClassField());
 
         // Retrieve the right event type to track
         JRebirthEventType type = JRebirthEventType.NONE;
@@ -228,7 +263,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             type = JRebirthEventType.CREATE_COMMAND;
         }
         // Track this instantiation event
-        getGlobalFacade().trackEvent(type, this.getClass(), readyObject.getClass());
+        getGlobalFacade().trackEvent(type, this.getClass(),
+                readyObject.getClass());
 
         // Attach the local facade
         readyObject.setLocalFacade(this);
@@ -240,53 +276,56 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         return readyObject;
     }
 
-    /**
-     * Build an unique key.
-     *
-     * @param clazz the class type of the component
-     * @param keyPart all complementary part of the key
-     *
-     * @return the unique key for the given class and keyParts array
-     *
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    @Override
-    public <E extends R> UniqueKey<E> buildKey(final Class<E> clazz, final Object... keyPart) {
-
-        UniqueKey<E> uniqueKey;
-        if (keyPart == null || keyPart.length == 0 || keyPart[0].toString().isEmpty()) {
-            uniqueKey = buildClassKey(clazz);
-        } else {
-            uniqueKey = buildMultitonKey(clazz, keyPart);
-        }
-        return uniqueKey;
-    }
-
-    /**
-     * Build a singleton key.
-     *
-     * @param clazz the class type of the component
-     *
-     * @return the unique key for a singleton
-     *
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    private <E extends R> UniqueKey<E> buildClassKey(final Class<E> clazz) {
-        return new ClassKey<E>(clazz);
-    }
-
-    /**
-     * Build a multiton key.
-     *
-     * @param clazz the class type of the component
-     * @param keyPart all complementary part of the key
-     *
-     * @return the unique key for a multiton
-     *
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    private <E extends R> UniqueKey<E> buildMultitonKey(final Class<E> clazz, final Object... keyPart) {
-        return new MultitonKey<E>(clazz, keyPart);
-    }
+    // /**
+    // * Build an unique key.
+    // *
+    // * @param clazz the class type of the component
+    // * @param keyPart all complementary part of the key
+    // *
+    // * @return the unique key for the given class and keyParts array
+    // *
+    // * @param <E> The type of the object registered by this ClassKey
+    // */
+    // @Override
+    // public <E extends R> UniqueKey<E> buildKey(final Class<E> clazz, final
+    // Object... keyPart) {
+    //
+    // UniqueKey<E> uniqueKey;
+    // if (keyPart == null || keyPart.length == 0 ||
+    // keyPart[0].toString().isEmpty()) {
+    // uniqueKey = buildClassKey(clazz);
+    // } else {
+    // uniqueKey = buildMultitonKey(clazz, keyPart);
+    // }
+    // return uniqueKey;
+    // }
+    //
+    // /**
+    // * Build a singleton key.
+    // *
+    // * @param clazz the class type of the component
+    // *
+    // * @return the unique key for a singleton
+    // *
+    // * @param <E> The type of the object registered by this ClassKey
+    // */
+    // private <E extends R> UniqueKey<E> buildClassKey(final Class<E> clazz) {
+    // return new ClassKey<E>(clazz);
+    // }
+    //
+    // /**
+    // * Build a multiton key.
+    // *
+    // * @param clazz the class type of the component
+    // * @param keyPart all complementary part of the key
+    // *
+    // * @return the unique key for a multiton
+    // *
+    // * @param <E> The type of the object registered by this ClassKey
+    // */
+    // private <E extends R> UniqueKey<E> buildMultitonKey(final Class<E> clazz,
+    // final Object... keyPart) {
+    // return new MultitonKey<E>(clazz, keyPart);
+    // }
 
 }

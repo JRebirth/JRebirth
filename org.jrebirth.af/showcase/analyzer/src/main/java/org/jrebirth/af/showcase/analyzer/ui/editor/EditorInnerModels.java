@@ -47,7 +47,7 @@ public enum EditorInnerModels implements InnerModel {
      * @param modelClass the class to set
      */
     EditorInnerModels(final Class<? extends Model> modelClass) {
-        this.modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(modelClass);
+        this.modelKey = UniqueKey.key(modelClass);
     }
 
     /**

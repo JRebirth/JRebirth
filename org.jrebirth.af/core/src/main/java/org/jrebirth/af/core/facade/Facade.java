@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.facade;
 
+import java.util.List;
+
 import org.jrebirth.af.core.key.UniqueKey;
 
 /**
@@ -118,14 +120,25 @@ public interface Facade<R extends FacadeReady<R>> {
     <E extends R> boolean exists(final Class<E> clazz, final Object... keyPart);
 
     /**
-     * Build an unique key.
+     * Return the list of component that have the same classField than the given key.
      *
-     * @param clazz the class type of the component
-     * @param keyPart all complementary part of the key
+     * @param uniqueKey the key used to retrieve all component matching its classField
      *
-     * @return the unique key for the given class and keyParts array
+     * @return the list of component matching the classField of the UniqueKey
      *
      * @param <E> The type of the object registered by this ClassKey
      */
-    <E extends R> UniqueKey<E> buildKey(final Class<E> clazz, final Object... keyPart);
+    <E extends R> List<E> retrieveAll(UniqueKey<E> uniqueKey);
+
+    // /**
+    // * Build an unique key.
+    // *
+    // * @param clazz the class type of the component
+    // * @param keyPart all complementary part of the key
+    // *
+    // * @return the unique key for the given class and keyParts array
+    // *
+    // * @param <E> The type of the object registered by this ClassKey
+    // */
+    // <E extends R> UniqueKey<E> buildKey(final Class<E> clazz, final Object... keyPart);
 }

@@ -33,6 +33,7 @@ import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.facade.GlobalFacade;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
+import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
@@ -302,7 +303,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
             firstWave = WaveBase.callCommand(ShowModelCommand.class).waveBean(
                     DisplayModelWaveBean.create()
                             .childrenPlaceHolder(this.application.getRootNode().getChildren())
-                            .showModelKey(getFacade().getUiFacade().buildKey((Class<Model>) this.application.getFirstModelClass()))
+                            .showModelKey(UniqueKey.key((Class<Model>) this.application.getFirstModelClass()))
                     );
             //
             //

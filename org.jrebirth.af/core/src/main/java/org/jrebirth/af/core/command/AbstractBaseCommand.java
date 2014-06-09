@@ -50,12 +50,12 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractW
     /**
      * The field that indicates how this command must be launched.
      */
-    private final RunType runIntoThread;
+    protected RunType runIntoThread;
 
     /**
      * The field that indicates the threading priority.
      */
-    private RunnablePriority runnablePriority;
+    protected RunnablePriority runnablePriority;
 
     // /**
     // * The parent command, useful when chained or multi commands are used.

@@ -142,6 +142,14 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
         }
         return listModelObject;
     }
+    
+    @SuppressWarnings("unchecked")
+	public <KP extends Object> KP getKeyPart(Class<KP> keyPartClass){
+    	return (KP) getListKeyPart().stream()
+    			.filter(kp-> kp != null && keyPartClass.isAssignableFrom(kp.getClass()))
+    			.findFirst()
+    			.get();
+    }
 
     /**
      * {@inheritDoc}
