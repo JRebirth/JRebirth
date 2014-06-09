@@ -8,6 +8,7 @@ import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
 import org.jrebirth.af.core.wave.DefaultWaveListener;
 import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.core.wave.Wave.Status;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -81,11 +82,11 @@ public class BasicCommandTest {
         globalFacade = null;
     }
 
-    public void runCommand(Class<? extends Command> commandClass) {
+    public void runCommand(Class<? extends Command> commandClass, Object... keyPart) {
 
         wait = true;
 
-        Wave wave = globalFacade.getCommandFacade().retrieve(commandClass).run();
+        Wave wave = globalFacade.getCommandFacade().retrieve(commandClass, keyPart).run();
 
         wave.addWaveListener(new DefaultWaveListener() {
 
@@ -99,6 +100,10 @@ public class BasicCommandTest {
 
         });
 
+        if (wave.status() == Status.Consumed) {
+            wait = false;
+        }
+        
         while (wait) {
             try {
                 Thread.sleep(200);
@@ -106,5 +111,6 @@ public class BasicCommandTest {
                 e.printStackTrace();
             }
         }
+
     }
 }
