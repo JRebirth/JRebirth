@@ -37,6 +37,7 @@ import org.jrebirth.af.core.facade.WaveReady;
 import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.util.MultiMap;
 import org.jrebirth.af.core.wave.OnWave;
 import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.WaveTypeBase;
@@ -115,9 +116,9 @@ public class ComponentEnhancer {
      *
      * @return the map that store all method that sdhould be call sorted by lefecycle phase
      */
-    public static Map<String, List<Method>> defineLifecycleMethod(final WaveReady<?> component) {
+    public static MultiMap<String, Method> defineLifecycleMethod(final WaveReady<?> component) {
 
-        final Map<String, List<Method>> lifecycleMethod = new HashMap<>();
+        final MultiMap<String, Method> lifecycleMethod = new MultiMap<>();
 
         manageLifecycleAnnotation(component, lifecycleMethod, BeforeInit.class);
         manageLifecycleAnnotation(component, lifecycleMethod, AfterInit.class);
@@ -133,12 +134,11 @@ public class ComponentEnhancer {
      * @param lifecycleMethod the map that store methods
      * @param annotationClass the annotation related to lifecycle phase
      */
-    private static void manageLifecycleAnnotation(final WaveReady<?> component, final Map<String, List<Method>> lifecycleMethod, final Class<? extends Annotation> annotationClass) {
+    private static void manageLifecycleAnnotation(final WaveReady<?> component, final MultiMap<String, Method> lifecycleMethod, final Class<? extends Annotation> annotationClass) {
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), annotationClass)) {
-            if (!lifecycleMethod.containsKey(annotationClass.getName())) {
-                lifecycleMethod.put(annotationClass.getName(), new ArrayList<Method>());
-            }
-            lifecycleMethod.get(annotationClass.getName()).add(method); // TODO sort
+            
+        	//
+            lifecycleMethod.put(annotationClass.getName(), method); // TODO sort
         }
     }
 
