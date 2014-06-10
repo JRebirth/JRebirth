@@ -212,7 +212,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
                     if (this.commandList.size() > this.commandRunIndex) {
 
-                        final Wave subCommandWave = WaveBase.callCommand((Class<Command>)this.commandList.get(this.commandRunIndex).getClass())
+                        final Wave subCommandWave = WaveBase.callCommand(this.commandList.get(this.commandRunIndex).getClassField())
                                 .waveBean(wave.waveBean())
                                 .addWaveListener(this);
 
@@ -340,19 +340,19 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     public void addCommandClass(final Class<? extends Command> commandClass) {
         this.commandList.add(UniqueKey.key(commandClass));
     }
-    
+
     /**
      * {@inheritDoc}
      */
-    //@Override TODO FIXME
+    // @Override TODO FIXME
     public void addCommandKey(final Class<? extends Command> commandClass, final Object... keyPart) {
         this.commandList.add(UniqueKey.key(commandClass, keyPart));
     }
-    
+
     /**
      * {@inheritDoc}
      */
-    //@Override TODO FIXME
+    // @Override TODO FIXME
     public void addCommandKey(final UniqueKey<? extends Command> commandKey) {
         this.commandList.add(commandKey);
     }

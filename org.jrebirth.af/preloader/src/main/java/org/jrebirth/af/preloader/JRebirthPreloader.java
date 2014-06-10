@@ -45,7 +45,7 @@ public class JRebirthPreloader extends Preloader {
     /** The Progress Bar. */
     private ProgressBar progressBar;
 
-    /** The prelaoder Stage. */
+    /** The preloader Stage. */
     private Stage preloaderStage;
 
     /** The text that will display message received. */

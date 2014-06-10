@@ -20,10 +20,6 @@ package org.jrebirth.af.core.link;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.jrebirth.af.core.annotation.AfterInit;
 import org.jrebirth.af.core.annotation.BeforeInit;
@@ -136,9 +132,9 @@ public class ComponentEnhancer {
      */
     private static void manageLifecycleAnnotation(final WaveReady<?> component, final MultiMap<String, Method> lifecycleMethod, final Class<? extends Annotation> annotationClass) {
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), annotationClass)) {
-            
-        	//
-            lifecycleMethod.put(annotationClass.getName(), method); // TODO sort
+
+            //
+            lifecycleMethod.putItem(annotationClass.getName(), method); // TODO sort
         }
     }
 
