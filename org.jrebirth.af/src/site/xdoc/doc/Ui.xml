@@ -87,12 +87,12 @@
 				
 			</subsection>
 					
-			</section>
+		</section>
 
-			<section name="Models">
+		<section name="Models">
 				<p>Models are directly synchronized with the UIFacade and can send &amp; receive Waves, they can also use any other components.</p>
 				<p>The goal of Models is to retrieve data from other layers, and to define Business Logic (business rules, authorizations ...).</p>
-				<p>The Model automatically build its attached view.</p>
+				<p>The Model automatically build its attached view (except SimpleModel).</p>
 
 				<macro name="include">
 					<param name="highlight-theme" value="eclipse"/>
@@ -108,22 +108,42 @@
 		</section>	
 			
 		<section name="Views">
+		
+			<p>As explained before, the main goal of a View is to create the rootNode attached to the Model.<br />
+		Fortunately the rootNode is automatically created according to the generic type used in the View header.
+			</p>
+			
+			<h4>View's initialization</h4>
+			<p>
+			The View's initialization code perform several operations:
+			</p>
+			<ol>
+				<li>Link the model (strong reference)</li>
+				<li>Create the root Node object according to the first generic type that extends Node.class</li>
+				<li>Create the Controller according to the first generic type that extends Controller.class</li>
+			</ol>
+
+			<p>If the construction fails, mainly due to Controller error, a custom error Node is created in order to display the stack trace of the exception.			
+			</p>
 
 				<macro name="include">
 					<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleView.java" />
 					<!-- <param name="snippet" value="aj:SampleView" /> -->
 				</macro>
+				
+				<h4>Annotation Event Handler</h4>
+				<p></p>
 
 		</section>	
+		
+		
 		<section name="Controllers">
 
-				<macro name="include">
-					<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleController.java" />
-					<!-- <param name="snippet" value="aj:..SampleController" /> -->
-				</macro>
-			</subsection>
-			</subsection>
-
+			<macro name="include">
+				<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleController.java" />
+				<!-- <param name="snippet" value="aj:..SampleController" /> -->
+			</macro>
+			
 			<subsection name="Adapters &amp; Handlers"></subsection>
 
 		</section>
@@ -141,4 +161,4 @@
 		</div>
 
 	</body>
-</document> 	
+</document>

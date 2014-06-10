@@ -3,6 +3,24 @@
 Release Notes
 ==============
 
+8.0.0 - [""]() Release 2014-09-22
+-----------------------------------------
+
+
+
+7.7.2 - ["Paradise City"](https://www.youtube.com/watch?v=Rbm6GXllBiw) Release 2014-05-31
+-----------------------------------------
+
+This version fix a regression introduced with newer resource engine, it was backported from 8.x branch.
+
+- NPE when using LocalImage without ImageExtension [#117](http://github.com/JRebirth/JRebirth/issues/issue/117)<br/>
+The newer resource engine has introduced a NPE when LocalImage are used without an ImageExtension defined (it's retrieved from filename).<br />
+
+- Fix all Demo application<br />
+Some slides were broken due to negative cycle duration produced by a negative randomized number.<br />
+Fix also all stable version.<br />
+ 
+ 
 7.7.1 - ["Palladium"](https://www.youtube.com/watch?v=Eo4-_9OE3YA) Release 2014-03-31
 -----------------------------------------
 
