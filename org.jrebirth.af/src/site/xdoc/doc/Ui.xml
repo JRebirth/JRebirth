@@ -87,9 +87,9 @@
 				
 			</subsection>
 					
-			</section>
+		</section>
 
-			<section name="Models">
+		<section name="Models">
 				<p>Models are directly synchronized with the UIFacade and can send &amp; receive Waves, they can also use any other components.</p>
 				<p>The goal of Models is to retrieve data from other layers, and to define Business Logic (business rules, authorizations ...).</p>
 				<p>The Model automatically build its attached view (except SimpleModel).</p>
@@ -114,7 +114,7 @@
 			</p>
 			
 			<h4>View's initialization</h4>
-			
+			<p>
 			The View's initialization code perform several operations:
 			</p>
 			<ol>
@@ -135,15 +135,15 @@
 				<p></p>
 
 		</section>	
+		
+		
 		<section name="Controllers">
 
-				<macro name="include">
-					<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleController.java" />
-					<!-- <param name="snippet" value="aj:..SampleController" /> -->
-				</macro>
-			</subsection>
-			</subsection>
-
+			<macro name="include">
+				<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleController.java" />
+				<!-- <param name="snippet" value="aj:..SampleController" /> -->
+			</macro>
+			
 			<subsection name="Adapters &amp; Handlers"></subsection>
 
 		</section>
