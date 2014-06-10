@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,9 +33,9 @@ import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
  * The class <strong>ClassUtility</strong>.
- * 
+ *
  * Some Useful class utilities to perform introspection.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class ClasspathUtility implements UtilMessages {
@@ -61,9 +61,9 @@ public final class ClasspathUtility implements UtilMessages {
 
     /**
      * Retrieve all resources that match the search pattern from the java.class.path.
-     * 
+     *
      * @param searchPattern the pattern used to filter all matching files
-     * 
+     *
      * @return Sorted list of resources that match the pattern
      */
     public static Collection<String> getClasspathResources(final Pattern searchPattern) {
@@ -83,10 +83,10 @@ public final class ClasspathUtility implements UtilMessages {
 
     /**
      * Search all files that match the given Regex pattern.
-     * 
+     *
      * @param classpathEntryPath the root folder used for search
      * @param searchPattern the regex pattern used as a filter
-     * 
+     *
      * @return list of resources that match the pattern
      */
     private static List<String> getResources(final String classpathEntryPath, final Pattern searchPattern) {
@@ -107,10 +107,10 @@ public final class ClasspathUtility implements UtilMessages {
 
     /**
      * Browse a directory to search resources that match the pattern.
-     * 
+     *
      * @param directory the root directory to browse
      * @param searchPattern the regex pattern used as a filter
-     * 
+     *
      * @return list of resources that match the pattern
      */
     private static List<String> getResourcesFromDirectory(final File directory, final Pattern searchPattern) {
@@ -137,10 +137,10 @@ public final class ClasspathUtility implements UtilMessages {
 
     /**
      * Browse the jar content to search resources that match the pattern.
-     * 
+     *
      * @param jarOrZipFile the jar to explore
      * @param searchPattern the regex pattern used as a filter
-     * 
+     *
      * @return list of resources that match the pattern
      */
     @SuppressWarnings("unchecked")
@@ -163,7 +163,7 @@ public final class ClasspathUtility implements UtilMessages {
 
     /**
      * Check if the resource match the regex.
-     * 
+     *
      * @param resources the list of found resources
      * @param searchPattern the regex pattern
      * @param resourceName the resource to check and to add

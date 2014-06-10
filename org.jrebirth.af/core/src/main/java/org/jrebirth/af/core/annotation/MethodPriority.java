@@ -2,7 +2,7 @@ package org.jrebirth.af.core.annotation;
 
 /**
  * The class <strong>MethodPriority</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public enum MethodPriority {

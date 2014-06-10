@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,15 +25,14 @@ import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthImages;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>ImageBuilder</strong>.
- * 
+ *
  * Class used to manage images with weak reference.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, ImageParams, Image> {
@@ -63,9 +62,9 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
 
     /**
      * Build a local image with its local path.
-     * 
+     *
      * @param jrImage the local image params
-     * 
+     *
      * @return the JavaFX image object
      */
     private Image buildLocalImage(final LocalImage jrImage) {
@@ -85,9 +84,9 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
 
     /**
      * Build a web image with its url parameters.
-     * 
+     *
      * @param jrImage the web image params
-     * 
+     *
      * @return the JavaFX image object
      */
     private Image buildWebImage(final WebImage jrImage) {
@@ -105,9 +104,9 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
 
     /**
      * Load an image.
-     * 
+     *
      * @param resourceName the name of the image, path must be separated by '/'
-     * 
+     *
      * @return the image loaded
      */
     private Image loadImage(final String resourceName) {

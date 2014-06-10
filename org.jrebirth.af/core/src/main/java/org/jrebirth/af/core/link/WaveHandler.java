@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -42,7 +42,7 @@ import org.jrebirth.af.core.wave.checker.WaveChecker;
 
 /**
  * The class <strong>WaveHandler</strong> is used to define how to manage a Wave for wave type subscribers.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class WaveHandler implements LinkMessages {
@@ -61,7 +61,7 @@ public class WaveHandler implements LinkMessages {
 
     /**
      * Instantiates a new wave handler.
-     * 
+     *
      * @param waveReady the wave ready component that will handle the wave
      * @param waveChecker the wave checker, could be null
      * @param defaultMethod the default method to call, could be null
@@ -75,9 +75,9 @@ public class WaveHandler implements LinkMessages {
 
     /**
      * Check the wave if the wave checker is not null anf if it returns true.
-     * 
+     *
      * @param wave the wave to check
-     * 
+     *
      * @return true, if check succeeded or if wave checker is null
      */
     public boolean check(final Wave wave) {
@@ -87,7 +87,7 @@ public class WaveHandler implements LinkMessages {
 
     /**
      * Gets the wave ready.
-     * 
+     *
      * @return Returns the waveReady.
      */
     public WaveReady<?> getWaveReady() {
@@ -96,9 +96,9 @@ public class WaveHandler implements LinkMessages {
 
     /**
      * Handle the wave into JAT for model component or into current thread for others.
-     * 
+     *
      * @param wave the wave to manage
-     * 
+     *
      * @throws WaveException if an error occurred while processing the wave
      */
     public void handle(final Wave wave) throws WaveException {
@@ -138,11 +138,11 @@ public class WaveHandler implements LinkMessages {
 
     /**
      * Build the wave runnable handler that will handle the wave into the right thread.
-     * 
+     *
      * @param wave the wave to handle
      * @param customMethod the custom method to call (could be null)
      * @param priority the runnable priority to use
-     * 
+     *
      * @return the right JRebirth Runnable
      */
     private JRebirthRunnable buildWaveRunnable(final Wave wave, final Method customMethod, final RunnablePriority priority) {
@@ -165,9 +165,9 @@ public class WaveHandler implements LinkMessages {
 
     /**
      * Retrieve the custom wave handler method.
-     * 
+     *
      * @param wave the wave to be handled
-     * 
+     *
      * @return the custom handler emthod or null if none exists
      */
     private Method retrieveCustomMethod(final Wave wave) {
@@ -178,7 +178,7 @@ public class WaveHandler implements LinkMessages {
                     // Method defined with annotation
                     ? this.defaultMethod
                     // Method computed according to wave prefix and wave type action name
-                    : ClassUtility.getMethodByName(getWaveReady().getClass(), ClassUtility.underscoreToCamelCase(wave.getWaveType().toString()));
+                    : ClassUtility.getMethodByName(getWaveReady().getClass(), ClassUtility.underscoreToCamelCase(wave.waveType().toString()));
 
         } catch (final NoSuchMethodException e) {
 
@@ -189,17 +189,17 @@ public class WaveHandler implements LinkMessages {
 
     /**
      * Perform the handle independently of thread used.
-     * 
+     *
      * @param wave the wave to manage
      * @param method the handler method to call, could be null
-     * 
+     *
      * @throws WaveException if an error occurred while processing the wave
      */
     private final void performHandle(final Wave wave, final Method method) throws WaveException {
 
         // Build parameter list of the searched method
         final List<Object> parameterValues = new ArrayList<>();
-        for (final WaveData<?> wd : wave.getWaveItems()) {
+        for (final WaveData<?> wd : wave.waveDatas()) {
             // Add only wave items defined as parameter
             if (wd.getKey().isParameter()) {
                 parameterValues.add(wd.getValue());

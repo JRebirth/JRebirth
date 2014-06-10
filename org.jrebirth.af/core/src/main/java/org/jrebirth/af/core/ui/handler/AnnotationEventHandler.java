@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,9 +37,9 @@ import org.jrebirth.af.core.util.ClassUtility;
 
 /**
  * The interface <strong>AnnotationEventHandler</strong>.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <E> the event type to handle
  */
 public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventHandler<E> implements EventHandler<E>, UIMessages {
@@ -55,10 +55,10 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param callbackObject the object that will handle the event by reflection
      * @param annotation the annotation that configure the event handling
-     * 
+     *
      * @throws CoreException if handler is not correctly initialized
      */
     public AnnotationEventHandler(final Object callbackObject, final Annotation annotation) throws CoreException {
@@ -74,7 +74,7 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
 
     /**
      * For each annotation event type, check if the callback method exists.
-     * 
+     *
      * @throws CoreException an exception if the current class doesn't have the right handling method
      */
     private void checkCallbackMethods() throws CoreException {
@@ -109,9 +109,9 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
 
     /**
      * Build the handling method name used to manage this event.
-     * 
+     *
      * @param annotationType the custom annotation event type used to define the kind of event to manage
-     * 
+     *
      * @return the method name to trigger into the callback object
      */
     private String buildHandlingMethodName(final EnumEventType annotationType) {
@@ -137,7 +137,7 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
 
     /**
      * Return the name of the annotation to define the unique callback method name.
-     * 
+     *
      * @return the annotation name attribute
      */
     private String getAnnotationName() {
@@ -146,7 +146,7 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
 
     /**
      * Return the value of the annotation used to define type of handler to manage.
-     * 
+     *
      * @return the annotation value attribute
      */
     private EnumEventType[] getAnnotationValue() {
@@ -155,7 +155,7 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
 
     /**
      * Return the api event class used by the annotation.
-     * 
+     *
      * @return the annotation apiEventClass attribute
      */
     @SuppressWarnings("unchecked")
@@ -165,9 +165,9 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
 
     /**
      * Convert a JavaFX event type into an annotation event type.
-     * 
+     *
      * @param eventType the JavaFX event type
-     * 
+     *
      * @return the Annotation event type or null if not found
      */
     private EnumEventType convertEventToEnum(final EventType<? extends Event> eventType) {
@@ -190,7 +190,7 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
 
     /**
      * Call the method into the callback object.
-     * 
+     *
      * @param methodName the method name to call
      * @param event the event to trigger
      */

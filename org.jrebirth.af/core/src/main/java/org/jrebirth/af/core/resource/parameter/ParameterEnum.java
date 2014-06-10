@@ -4,7 +4,7 @@ public interface ParameterEnum extends ParameterItem {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param parameterName the name of the parameter
      * @param object the parameter object
      */

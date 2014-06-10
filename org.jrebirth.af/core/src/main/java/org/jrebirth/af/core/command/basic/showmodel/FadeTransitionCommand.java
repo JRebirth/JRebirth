@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,13 +30,12 @@ import org.jrebirth.af.core.command.AbstractSingleCommand;
 import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.wave.Wave;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * The Class FadeTransitionCommand.
- * 
+ *
  * Add a fading transition to switch 2 model node hold into a stackpane (or equivalent).
  */
 @RunInto(RunType.JAT)
@@ -60,15 +59,15 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
     protected void perform(final Wave wave) {
 
         // The old node is the one that exists into the parent container (or null if none)
-        Node oldNode = getWaveBean(wave).getHideModel() == null ? null : getWaveBean(wave).getHideModel().getRootNode();
+        Node oldNode = getWaveBean(wave).hideModel() == null ? null : getWaveBean(wave).hideModel().getRootNode();
 
         if (oldNode == null) {
-            final ObservableList<Node> parentContainer = getWaveBean(wave).getChidrenPlaceHolder();
-            oldNode = parentContainer.size() > 1 ? parentContainer.get(getWaveBean(wave).getChidrenPlaceHolder().size() - 1) : null;
+            final ObservableList<Node> parentContainer = getWaveBean(wave).childrenPlaceHolder();
+            oldNode = parentContainer.size() > 1 ? parentContainer.get(getWaveBean(wave).childrenPlaceHolder().size() - 1) : null;
         }
 
         // The new node is the one create by PrepareModelCommand
-        final Node newNode = getWaveBean(wave).getShowModel() == null ? null : getWaveBean(wave).getShowModel().getRootNode();
+        final Node newNode = getWaveBean(wave).showModel() == null ? null : getWaveBean(wave).showModel().getRootNode();
 
         if (oldNode != null || newNode != null) {
             final ParallelTransition animation = ParallelTransitionBuilder.create()
@@ -105,12 +104,12 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
                 public void handle(final ActionEvent arg0) {
                     if (oldNodeLink != null) {
                         // remove the old nod from the stack to hide it
-                        getWaveBean(wave).getChidrenPlaceHolder().remove(oldNodeLink);
+                        getWaveBean(wave).childrenPlaceHolder().remove(oldNodeLink);
 
                         LOGGER.info("Remove " + oldNodeLink.toString() + " from stack container");
                     }
                     // FIXME do it in the right way
-                    getWaveBean(wave).getShowModel().doShowView(wave);
+                    getWaveBean(wave).showModel().doShowView(wave);
                 }
             });
             animation.playFromStart();

@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,13 +25,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 import org.jrebirth.af.core.util.ObjectUtility;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>AbstractBaseParams</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public abstract class AbstractBaseParams implements ResourceParams {
@@ -47,7 +46,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
 
     /**
      * Default Constructor.
-     * 
+     *
      * Set the hasChnaged boolean to true to force the first creation of the resource.
      */
     public AbstractBaseParams() {
@@ -66,7 +65,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
 
             /**
              * Called when the value is updated.
-             * 
+             *
              * @param value the observable value
              * @param oldValue the old value
              * @param newValue the new value
@@ -142,11 +141,11 @@ public abstract class AbstractBaseParams implements ResourceParams {
 
     /**
      * Read a double string value.
-     * 
+     *
      * @param doubleString the double value
      * @param min the minimum value allowed
      * @param max the maximum value allowed
-     * 
+     *
      * @return the value parsed according to its range
      */
     protected double readDouble(final String doubleString, final double min, final double max) {
@@ -155,11 +154,11 @@ public abstract class AbstractBaseParams implements ResourceParams {
 
     /**
      * Read ab integer string value.
-     * 
+     *
      * @param intString the integer value
      * @param min the minimum value allowed
      * @param max the maximum value allowed
-     * 
+     *
      * @return the value parsed according to its range
      */
     protected int readInteger(final String intString, final int min, final int max) {
@@ -174,9 +173,9 @@ public abstract class AbstractBaseParams implements ResourceParams {
      * <li>yes</li>
      * <li>1</li>
      * </ul>
-     * 
+     *
      * @param parameter the boolean string value
-     * 
+     *
      * @return the boolean or false
      */
     protected boolean readBoolean(final String parameter) {
@@ -194,7 +193,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
 
     /**
      * Return all values of {@link ParameterEntry} object.
-     * 
+     *
      * @return the list of parameters describing the resource to build
      */
     protected abstract List<? extends Object> getFieldValues();

@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,14 +22,14 @@ import java.util.List;
 
 /**
  * The interface <strong>LocalImage</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class LocalImage extends AbstractBaseImage implements ImageParams {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param path the image local path
      * @param name the file name
      * @param extension the image extension
@@ -40,7 +40,7 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param name the file name
      * @param extension the image extension
      */
@@ -50,7 +50,7 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param fullName the full file name (including path and image extension)
      */
     public LocalImage(final String fullName) {

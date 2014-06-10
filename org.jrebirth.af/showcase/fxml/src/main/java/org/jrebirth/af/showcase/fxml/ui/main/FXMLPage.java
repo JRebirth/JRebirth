@@ -43,16 +43,16 @@ public enum FXMLPage implements PageEnum {
 
             default:
             case ViewEmbeddedFxml:
-                modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(EmbeddedModel.class);
+                modelKey = UniqueKey.key(EmbeddedModel.class);
                 break;
             case StandaloneFxml:
-                modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(StandaloneModel.class);
+                modelKey = UniqueKey.key(StandaloneModel.class);
                 break;
             case HybridFxml:
-                modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(HybridModel.class, DefaultFXMLModel.KEYPART_FXML_PREFIX + "org.jrebirth.af.showcase.fxml.ui.hybrid.Hybrid");
+                modelKey = UniqueKey.key(HybridModel.class, DefaultFXMLModel.KEYPART_FXML_PREFIX + "org.jrebirth.af.showcase.fxml.ui.hybrid.Hybrid");
                 break;
             case IncludedFxml:
-                modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(IncludedModel.class, new LoremIpsum());
+                modelKey = UniqueKey.key(IncludedModel.class, new LoremIpsum());
                 break;
         }
 

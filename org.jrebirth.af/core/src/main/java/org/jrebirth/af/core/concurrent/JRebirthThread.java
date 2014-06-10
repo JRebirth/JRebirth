@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,11 +27,13 @@ import javafx.scene.Scene;
 
 import org.jrebirth.af.core.application.JRebirthApplication;
 import org.jrebirth.af.core.command.basic.ChainWaveCommand;
-import org.jrebirth.af.core.command.basic.showmodel.ShowModelWaveBuilder;
+import org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean;
+import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.facade.GlobalFacade;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
+import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
@@ -39,13 +41,13 @@ import org.jrebirth.af.core.service.basic.StyleSheetTrackerService;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.JRebirthWaves;
 import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveBuilder;
+import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.core.wave.WaveGroup;
 
 /**
  * The class <strong>JRebirthThread</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class JRebirthThread extends Thread implements ConcurrentMessages {
@@ -79,7 +81,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
     /**
      * private final boolean readyToShutdown = false;
-     * 
+     *
      * /** Build the JRebirth Thread.
      */
     private JRebirthThread() {
@@ -94,10 +96,10 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
     /**
      * Run into thread pool.
-     * 
+     *
      * If a slot is available the task will be run immediately.<br />
      * Otherwise it will run as soon as a slot will be available according to the existing task queue
-     * 
+     *
      * @param runnable the task to run
      */
     public void runIntoJTP(final JRebirthRunnable runnable) {
@@ -114,7 +116,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
     /**
      * Run this task as soon as possible. Enqueue the task to be run at the next event pulse. Run into the JRebirth Thread
-     * 
+     *
      * @param runnable the task to run
      */
     public void runLater(final JRebirthRunnable runnable) {
@@ -123,7 +125,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
     /**
      * Launch the JRebirth thread.
-     * 
+     *
      * @param application the javaFX application instance
      */
     public void prepare(final JRebirthApplication<?> application) {
@@ -139,7 +141,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
     /**
      * Return true if JRebirth has been correctly started (boot action is done).
-     * 
+     *
      * @return true if JRebirth has been correctly started
      */
     public boolean hasStarted() {
@@ -182,7 +184,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
     /**
      * Manage style sheet reloading by using a custom service provide by JRebirth Core.
-     * 
+     *
      * @param scene the scene to reload in case of Style Sheet update
      */
     private void manageStyleSheetReloading(final Scene scene) {
@@ -198,7 +200,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
     /**
      * Attach the first view and run pre and post command.
-     * 
+     *
      * @throws JRebirthThreadException if a problem occurred while calling the command
      */
     public void bootUp() throws JRebirthThreadException {
@@ -226,11 +228,10 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
         if (!chainedWaveList.isEmpty()) {
             getFacade().getNotifier().sendWave(
-                    WaveBuilder.create()
+                    WaveBase.create()
                             .waveGroup(WaveGroup.CALL_COMMAND)
-                            .relatedClass(ChainWaveCommand.class)
-                            .data(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList))
-                            .build());
+                            .componentClass(ChainWaveCommand.class)
+                            .addDatas(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList)));
         }
     }
 
@@ -247,7 +248,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
     /**
      * This method can be called a lot of time while application is running.
-     * 
+     *
      * The first time to stop the infinite loop, then to purge all queues and let the thread terminate itself.
      */
     public void close() {
@@ -290,7 +291,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
     /**
      * Launch the first view by adding it into the root node.
-     * 
+     *
      * @return the wave responsible of the creation of the first view
      */
     @SuppressWarnings("unchecked")
@@ -298,10 +299,18 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         Wave firstWave = null;
         // Generates the command wave directly to win a Wave cycle
         if (this.application != null && this.application.getRootNode() != null && this.application.getFirstModelClass() != null) {
-            firstWave = ShowModelWaveBuilder.create()
-                    .childrenPlaceHolder(this.application.getRootNode().getChildren())
-                    .showModelKey(getFacade().getUiFacade().buildKey((Class<Model>) this.application.getFirstModelClass()))
-                    .build();
+
+            firstWave = WaveBase.callCommand(ShowModelCommand.class).waveBean(
+                    DisplayModelWaveBean.create()
+                            .childrenPlaceHolder(this.application.getRootNode().getChildren())
+                            .showModelKey(UniqueKey.key((Class<Model>) this.application.getFirstModelClass()))
+                    );
+            //
+            //
+            // ShowModelWaveBuilder.create()
+            // .childrenPlaceHolder(this.application.getRootNode().getChildren())
+            // .showModelKey(getFacade().getUiFacade().buildKey((Class<Model>) this.application.getFirstModelClass()))
+            // .build();
         }
         return firstWave;
 
@@ -323,7 +332,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
     /**
      * Return the JRebirthThread used to manage facades and waves.
-     * 
+     *
      * @return the JRebirthThread
      */
     public static JRebirthThread getThread() {

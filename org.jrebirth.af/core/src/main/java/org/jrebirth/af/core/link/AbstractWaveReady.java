@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,9 +23,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jrebirth.af.core.annotation.AfterInit;
 import org.jrebirth.af.core.annotation.BeforeInit;
 import org.jrebirth.af.core.annotation.OnRelease;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
+import org.jrebirth.af.core.behavior.Behavior;
+import org.jrebirth.af.core.behavior.BehaviorBean;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.command.CommandBean;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
@@ -40,6 +43,7 @@ import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.util.MultiMap;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.Wave.Status;
 import org.jrebirth.af.core.wave.WaveBase;
@@ -50,16 +54,16 @@ import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.checker.WaveChecker;
 
 /**
- * 
+ *
  * The class <strong>AbstractWaveReady</strong>.
- * 
+ *
  * This is the base class for all of each of JRebirth pattern subclasses.<br />
  * It allow to send waves.
- * 
+ *
  * All things related to wave management must be execute into the JRebirth Thread
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <R> the class type of the subclass
  */
 @SkipAnnotation(false)
@@ -78,11 +82,20 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     private final Map<WaveType, Class<? extends Command>> returnCommandClass = new HashMap<>();
 
     /** A map that store all annotated methods to call sorted by lifecycle phase. */
-    private Map<String, List<Method>> lifecycleMethod;
+    private MultiMap<String, Method> lifecycleMethod;
 
+
+
+	private final MultiMap<Class<Behavior<BehaviorBean>>, BehaviorBean> behaviors = new MultiMap<>();
+
+    @Override
+	public BehaviorBean getBehaviorBean(Class<Behavior<BehaviorBean>> behavior) {
+		return behaviors.get(behavior).get(0);
+	}
+    
     /**
      * Short cut method used to retrieve the notifier.
-     * 
+     *
      * @return the notifier retrieved from global facade
      */
     private Notifier getNotifier() {
@@ -109,9 +122,9 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Return the human-readable list of Wave Type.
-     * 
+     *
      * @param waveTypes the list of wave type
-     * 
+     *
      * @return the string list of Wave Type
      */
     private String getWaveTypesString(final WaveType[] waveTypes) {
@@ -225,8 +238,8 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     @Override
     public final void sendWave(final Wave wave) {
         // Define the from class if it didn't been done before (manually)
-        if (wave.getFromClass() == null) {
-            wave.setFromClass(this.getClass());
+        if (wave.fromClass() == null) {
+            wave.fromClass(this.getClass());
         }
         sendWaveIntoJit(wave);
     }
@@ -273,16 +286,16 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Send the given wave using the JRebirth Thread.
-     * 
+     *
      * @param wave the wave to send
-     * 
+     *
      * @return the wave sent to JIT (with Sent status)
      */
     private Wave sendWaveIntoJit(final Wave wave) {
 
         CheckerUtility.checkWave(wave);
 
-        wave.setStatus(Status.Sent);
+        wave.status(Status.Sent);
 
         // Use the JRebirth Thread to manage Waves
         JRebirth.runIntoJIT(new AbstractJrbRunnable(SEND_WAVE.getText(wave.toString())) {
@@ -297,26 +310,22 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Build a wave object.
-     * 
+     *
      * @param waveGroup the group of the wave
      * @param waveType the type of the wave
-     * @param relatedClass the related class if any
+     * @param componentClass the related component class if any
      * @param waveData wave data to use
-     * 
+     *
      * @return the wave built
      */
-    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData<?>... waveData) {
+    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveData<?>... waveData) {
 
-        final Wave wave = new WaveBase();
-
-        wave.setWaveGroup(waveGroup);
-        wave.setWaveType(waveType);
-        wave.setFromClass(this.getClass());
-        wave.setRelatedClass(relatedClass);
-
-        for (final WaveData<?> wd : waveData) {
-            wave.addData(wd);
-        }
+        final Wave wave = WaveBase.create()
+                .waveGroup(waveGroup)
+                .waveType(waveType)
+                .fromClass(this.getClass())
+                .componentClass(componentClass)
+                .addDatas(waveData);
 
         // Track wave creation
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
@@ -326,24 +335,22 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Build a wave object with its dedicated WaveBean.
-     * 
+     *
      * @param waveGroup the group of the wave
      * @param waveType the type of the wave
-     * @param relatedClass the related class if any
+     * @param componentClass the related component class if any
      * @param waveBean the wave bean that holds all required wave data
-     * 
+     *
      * @return the wave built
      */
-    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveBean waveBean) {
+    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveBean waveBean) {
 
-        final Wave wave = new WaveBase();
-
-        wave.setWaveGroup(waveGroup);
-        wave.setWaveType(waveType);
-        wave.setFromClass(this.getClass());
-        wave.setRelatedClass(relatedClass);
-
-        wave.linkWaveBean(waveBean);
+        final Wave wave = WaveBase.create()
+                .waveGroup(waveGroup)
+                .waveType(waveType)
+                .fromClass(this.getClass())
+                .componentClass(componentClass)
+                .waveBean(waveBean);
 
         // Track wave creation
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
@@ -404,7 +411,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Customizable method used to perform more action before command execution.
-     * 
+     *
      * @param wave the given wave to parser before command execution
      */
     // protected abstract void parseWave(final Wave wave);
@@ -447,7 +454,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Process the wave. Typically by using a switch on the waveType.
-     * 
+     *
      * @param wave the wave received
      */
     protected abstract void processWave(final Wave wave);
@@ -476,7 +483,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
         ready();
 
-        callAnnotatedMethod(BeforeInit.class);
+        callAnnotatedMethod(AfterInit.class);
     }
 
     /**
@@ -492,7 +499,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Call annotated methods corresponding at given lifecycle annotation.
-     * 
+     *
      * @param annotationClass the annotation related to the lifecycle
      */
     private void callAnnotatedMethod(final Class<? extends Annotation> annotationClass) {
@@ -510,7 +517,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * The component is now ready to do custom initialization tasks.
-     * 
+     *
      * @throws CoreException if an error occurred
      */
     protected abstract void ready() throws CoreException;

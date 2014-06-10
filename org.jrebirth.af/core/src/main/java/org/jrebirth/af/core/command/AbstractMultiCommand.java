@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,20 +26,20 @@ import org.jrebirth.af.core.annotation.Sequential;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.concurrent.RunnablePriority;
 import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveBean;
-import org.jrebirth.af.core.wave.WaveBuilder;
-import org.jrebirth.af.core.wave.WaveGroup;
 import org.jrebirth.af.core.wave.WaveListener;
 
 /**
  * The class <strong>AbstractMultiCommand</strong>.
- * 
+ *
  * The base multi command class for Internal commands.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  */
 public abstract class AbstractMultiCommand<WB extends WaveBean> extends AbstractBaseCommand<WB> implements MultiCommand<WB>, WaveListener {
@@ -51,7 +51,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     private final AtomicBoolean running = new AtomicBoolean(false);
 
     /** The list of command that will be chained. */
-    private final List<Class<? extends Command>> commandList = new ArrayList<>();
+    private final List<UniqueKey<? extends Command>> commandList = new ArrayList<>();
 
     /** The list of pending waves triggered by each command when launched in parallel. */
     private final List<Wave> pendingWaves = Collections.synchronizedList(new ArrayList<Wave>());
@@ -70,7 +70,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param runInto The run into thread type
      */
     public AbstractMultiCommand(final RunType runInto) {
@@ -80,7 +80,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
      */
     public AbstractMultiCommand(final boolean sequential) {
@@ -90,7 +90,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param runInto The run into thread type
      * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
      */
@@ -101,7 +101,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param runInto The run into thread type
      * @param priority the runnable priority
      * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
@@ -113,9 +113,9 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
     /**
      * Define the sequential value.
-     * 
+     *
      * It will try to load the annotation value, then the parameter given to constructor. If none of them have been used the default false value will be used.
-     * 
+     *
      * @param sequential the constructor parameter
      */
     private void initSequential(final Boolean sequential) {
@@ -152,8 +152,8 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
         manageSubCommand();
 
-        for (final Class<? extends Command> commandClass : this.commandList) {
-            getLocalFacade().retrieve(commandClass);
+        for (final UniqueKey<? extends Command> commandKey : this.commandList) {
+            getLocalFacade().retrieve(commandKey);
         }
 
         initCommand();
@@ -161,7 +161,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
     /**
      * Custom method used to initialize the command.
-     * 
+     *
      * Called into JIT by ready method.
      */
     protected abstract void initCommand();
@@ -211,13 +211,11 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                     }
 
                     if (this.commandList.size() > this.commandRunIndex) {
-                        final Wave subCommandWave = WaveBuilder.create()
-                                .waveGroup(WaveGroup.CALL_COMMAND)
-                                .relatedClass(this.commandList.get(this.commandRunIndex))
-                                .build();
 
-                        subCommandWave.linkWaveBean(wave.getWaveBean());
-                        subCommandWave.addWaveListener(this);
+                        final Wave subCommandWave = WaveBase.callCommand((Class<Command>)this.commandList.get(this.commandRunIndex).getClass())
+                                .waveBean(wave.waveBean())
+                                .addWaveListener(this);
+
                         sendWave(subCommandWave);
                     }
                 }
@@ -227,8 +225,8 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                 this.waveSource = wave;
 
                 // Launch all sub command in parallel
-                for (final Class<? extends Command> commandClass : this.commandList) {
-                    final Wave commandWave = getLocalFacade().retrieve(commandClass).run();
+                for (final UniqueKey<? extends Command> commandKey : this.commandList) {
+                    final Wave commandWave = getLocalFacade().retrieve(commandKey).run();
                     // register to Wave status of all command triggered
                     commandWave.addWaveListener(this);
                     // Store the pending command to know when all command are achieved
@@ -340,7 +338,23 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      */
     @Override
     public void addCommandClass(final Class<? extends Command> commandClass) {
-        this.commandList.add(commandClass);
+        this.commandList.add(UniqueKey.key(commandClass));
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    //@Override TODO FIXME
+    public void addCommandKey(final Class<? extends Command> commandClass, final Object... keyPart) {
+        this.commandList.add(UniqueKey.key(commandClass, keyPart));
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    //@Override TODO FIXME
+    public void addCommandKey(final UniqueKey<? extends Command> commandKey) {
+        this.commandList.add(commandKey);
     }
 
 }

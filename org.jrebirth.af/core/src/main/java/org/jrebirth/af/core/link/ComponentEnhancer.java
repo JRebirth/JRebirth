@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,13 +37,14 @@ import org.jrebirth.af.core.facade.WaveReady;
 import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.util.MultiMap;
 import org.jrebirth.af.core.wave.OnWave;
 import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  * The class <strong>ComponentEnhancer</strong> is an utility class used to manage Components Annotations.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class ComponentEnhancer {
@@ -57,9 +58,9 @@ public class ComponentEnhancer {
 
     /**
      * Check if annotation can be processed for the given class.
-     * 
+     *
      * @param componentClass the class to check
-     * 
+     *
      * @return true if annotation can be processed
      */
     public static boolean canProcessAnnotation(final Class<? extends WaveReady<?>> componentClass) {
@@ -72,7 +73,7 @@ public class ComponentEnhancer {
 
     /**
      * Inject component.
-     * 
+     *
      * @param component the component
      */
     public static void injectComponent(final WaveReady<?> component) {
@@ -86,7 +87,7 @@ public class ComponentEnhancer {
 
     /**
      * Inject a component into the property of an other.
-     * 
+     *
      * @param component the component
      * @param field the field
      * @param keyParts the key parts
@@ -109,15 +110,15 @@ public class ComponentEnhancer {
     }
 
     /**
-     * Parse all method to search annotated methods that are attached to a lifecylce phase.
-     * 
+     * Parse all methods to search annotated methods that are attached to a lifecylce phase.
+     *
      * @param component the JRebirth component to manage
-     * 
+     *
      * @return the map that store all method that sdhould be call sorted by lefecycle phase
      */
-    public static Map<String, List<Method>> defineLifecycleMethod(final WaveReady<?> component) {
+    public static MultiMap<String, Method> defineLifecycleMethod(final WaveReady<?> component) {
 
-        final Map<String, List<Method>> lifecycleMethod = new HashMap<>();
+        final MultiMap<String, Method> lifecycleMethod = new MultiMap<>();
 
         manageLifecycleAnnotation(component, lifecycleMethod, BeforeInit.class);
         manageLifecycleAnnotation(component, lifecycleMethod, AfterInit.class);
@@ -128,35 +129,34 @@ public class ComponentEnhancer {
 
     /**
      * Store annotated method related to a lifecycle phase.
-     * 
+     *
      * @param component the JRebirth component to manage
      * @param lifecycleMethod the map that store methods
      * @param annotationClass the annotation related to lifecycle phase
      */
-    private static void manageLifecycleAnnotation(final WaveReady<?> component, final Map<String, List<Method>> lifecycleMethod, final Class<? extends Annotation> annotationClass) {
+    private static void manageLifecycleAnnotation(final WaveReady<?> component, final MultiMap<String, Method> lifecycleMethod, final Class<? extends Annotation> annotationClass) {
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), annotationClass)) {
-            if (!lifecycleMethod.containsKey(annotationClass.getName())) {
-                lifecycleMethod.put(annotationClass.getName(), new ArrayList<Method>());
-            }
-            lifecycleMethod.get(annotationClass.getName()).add(method); // TODO sort
+            
+        	//
+            lifecycleMethod.put(annotationClass.getName(), method); // TODO sort
         }
     }
 
     /**
      * Manage {@link OnWave} annotation (defined on type and method).
-     * 
+     *
      * @param component the wave ready
      */
     public static void manageOnWaveAnnotation(final WaveReady<?> component) {
 
         // Retrieve class annotations (Java 8 add support for repeatable annotations)
-        for (OnWave clsOnWave : component.getClass().getAnnotationsByType(OnWave.class)) {
+        for (final OnWave clsOnWave : component.getClass().getAnnotationsByType(OnWave.class)) {
             manageUniqueWaveTypeAction(component, clsOnWave.value(), null);
         }
 
         // Iterate over each annotated Method and all annotations
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), OnWave.class)) {
-            for (OnWave clsOnWave : method.getAnnotationsByType(OnWave.class)) {
+            for (final OnWave clsOnWave : method.getAnnotationsByType(OnWave.class)) {
                 manageUniqueWaveTypeAction(component, clsOnWave.value(), null);
             }
         }
@@ -165,7 +165,7 @@ public class ComponentEnhancer {
 
     /**
      * Manage unique {@link WaveType} subscription (from value field of {@link OnWave} annotation).
-     * 
+     *
      * @param component the wave ready
      * @param waveActionName the {@link WaveType} unique name
      * @param method the wave handler method

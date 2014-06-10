@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,7 +34,7 @@ import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.Wave.Status;
-import org.jrebirth.af.core.wave.WaveBuilder;
+import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.core.wave.WaveGroup;
 import org.jrebirth.af.core.wave.WaveItem;
@@ -43,9 +43,9 @@ import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  * The class <strong>ServiceTask</strong>.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <T> the current Service Task type
  */
 public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, ServiceMessages {
@@ -87,7 +87,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
     /**
      * Default Constructor only visible by service package.
-     * 
+     *
      * @param parameterValues the list of function parameter
      * @param method the method to call
      * @param service the service object
@@ -110,9 +110,9 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
     /**
      * Return the full service handler name.
-     * 
+     *
      * ServiceName + method + ( parameters types )
-     * 
+     *
      * @return the full service handler name
      */
     public String getServiceHandlerName() {
@@ -128,7 +128,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @throws CoreException if return WaveType has bad API
      */
     @SuppressWarnings("unchecked")
@@ -151,7 +151,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
             if (Void.TYPE.equals(this.method.getReturnType())) {
                 // No return wave required because the service method will return nothing (VOID)
                 LOGGER.log(NO_RETURN_WAVE_CONSUMED, this.service.getClass().getSimpleName(), this.wave.toString());
-                this.wave.setStatus(Status.Consumed);
+                this.wave.status(Status.Consumed);
 
                 // Otherwise prepare the return wave
             } else {
@@ -163,18 +163,18 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             LOGGER.log(SERVICE_TASK_ERROR, e, getServiceHandlerName());
-            this.wave.setStatus(Status.Failed);
+            this.wave.status(Status.Failed);
         }
         return res;
     }
 
     /**
      * Send a wave that will carry the service result.
-     * 
+     *
      * 2 Kinds of wave can be sent according to service configuration
-     * 
+     *
      * @param res the service result
-     * 
+     *
      * @throws CoreException if the wave generation has failed
      */
     @SuppressWarnings("unchecked")
@@ -183,7 +183,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
         Wave returnWave = null;
 
         // Try to retrieve the return Wave type, could be null
-        final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.getWaveType());
+        final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.waveType());
 
         if (responseWaveType != null) {
 
@@ -197,36 +197,34 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
             final WaveItem<T> resultWaveItem = (WaveItem<T>) ((WaveTypeBase) responseWaveType).getWaveItemList().get(0);
 
             // Try to retrieve the command class, could be null
-            final Class<? extends Command> responseCommandClass = this.service.getReturnCommand(this.wave.getWaveType());
+            final Class<? extends Command> responseCommandClass = this.service.getReturnCommand(this.wave.waveType());
 
             if (responseCommandClass != null) {
 
                 // If a Command Class is provided, call it with the right WaveItem to get the real result type
-                returnWave = WaveBuilder.create()
+                returnWave = WaveBase.create()
                         .waveGroup(WaveGroup.CALL_COMMAND)
                         .fromClass(this.service.getClass())
-                        .relatedClass(responseCommandClass)
-                        .data(WaveData.build(resultWaveItem, res))
-                        .build();
+                        .componentClass(responseCommandClass)
+                        .addDatas(WaveData.build(resultWaveItem, res));
             } else {
 
                 // Otherwise send a generic wave that can be handled by any component
-                returnWave = WaveBuilder.create()
+                returnWave = WaveBase.create()
                         .waveType(responseWaveType)
                         .fromClass(this.service.getClass())
-                        .data(WaveData.build(resultWaveItem, res))
-                        .build();
+                        .addDatas(WaveData.build(resultWaveItem, res));
             }
 
-            returnWave.setRelatedWave(this.wave);
+            returnWave.relatedWave(this.wave);
             returnWave.addWaveListener(new ServiceTaskReturnWaveListener());
 
             // Send the return wave to interested components
             this.service.sendWave(returnWave);
         } else {
             // No service return wave Type defined
-            LOGGER.log(NO_RETURNED_WAVE_TYPE_DEFINED, this.wave.getWaveType());
-            throw new CoreException(NO_RETURNED_WAVE_ITEM, this.wave.getWaveType());
+            LOGGER.log(NO_RETURNED_WAVE_TYPE_DEFINED, this.wave.waveType());
+            throw new CoreException(NO_RETURNED_WAVE_ITEM, this.wave.waveType());
         }
     }
 
@@ -270,7 +268,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
     /**
      * The task has been terminated because the source wave was consumed or has failed.
-     * 
+     *
      * Remove the task from the service pending list
      */
     public void taskAchieved() {
@@ -280,13 +278,13 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
     /**
      * Check if the task has enough progressed according to the given threshold.
-     * 
+     *
      * This method can be called outside the JAT, it's useful to filter useless call to JAT
-     * 
+     *
      * @param newWorkDone the amount of work done
      * @param totalWork the total amount of work
      * @param amountThreshold the minimum threshold amount to return true; range is [0.0 - 100.0] (typically 1.0 for 1%)
-     * 
+     *
      * @return true if the threshold is reached
      */
     public boolean checkProgressRatio(final double newWorkDone, final double totalWork, final double amountThreshold) {

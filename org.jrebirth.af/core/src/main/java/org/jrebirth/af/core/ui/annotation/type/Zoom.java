@@ -28,7 +28,7 @@ public enum Zoom implements EnumEventType {
 
     /**
      * Default constructor used to link the apiName.
-     * 
+     *
      * @param eventType the javafx event type
      */
     private Zoom(final EventType<?> eventType) {

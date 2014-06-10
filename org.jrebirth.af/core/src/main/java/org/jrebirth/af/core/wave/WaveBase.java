@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,15 +28,16 @@ import java.util.UUID;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.link.LinkMessages;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
- * 
+ *
  * The class <strong>WaveBase</strong>.
- * 
+ *
  * This Bean is used to move wave's data through layer. It allow to manage priorities.
  */
 public class WaveBase implements Wave, LinkMessages {
@@ -67,8 +68,8 @@ public class WaveBase implements Wave, LinkMessages {
     /** The from class to used for create waves. */
     private Class<?> fromClass;
 
-    /** The related class to used for create waves. */
-    private Class<?> relatedClass;
+    /** The related component class to used for create waves. */
+    private Class<?> componentClass;
 
     /** The priority used to process wave according to a custom order. */
     private int priority;
@@ -95,10 +96,18 @@ public class WaveBase implements Wave, LinkMessages {
      */
     private final List<WaveListener> waveListeners = Collections.synchronizedList(new ArrayList<WaveListener>());
 
+    public static WaveBase create() {
+        return new WaveBase();
+    }
+
+    public static Wave callCommand(final Class<? extends Command> commandClass) {
+        return create().waveGroup(WaveGroup.CALL_COMMAND).componentClass(commandClass);
+    }
+
     /**
      * Default Constructor.
      */
-    public WaveBase() {
+    private WaveBase() {
         super();
         // Generate a random but unique identifier
         this.wuid = UUID.randomUUID().toString();
@@ -110,7 +119,7 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public WaveGroup getWaveGroup() {
+    public WaveGroup waveGroup() {
         return this.waveGroup;
     }
 
@@ -118,15 +127,16 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void setWaveGroup(final WaveGroup waveGroup) {
+    public Wave waveGroup(final WaveGroup waveGroup) {
         this.waveGroup = waveGroup;
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public WaveType getWaveType() {
+    public WaveType waveType() {
         return this.waveType;
     }
 
@@ -134,15 +144,16 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void setWaveType(final WaveType waveType) {
+    public Wave waveType(final WaveType waveType) {
         this.waveType = waveType;
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Class<?> getFromClass() {
+    public Class<?> fromClass() {
         return this.fromClass;
     }
 
@@ -150,31 +161,33 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void setFromClass(final Class<?> fromClass) {
+    public Wave fromClass(final Class<?> fromClass) {
         this.fromClass = fromClass;
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Class<?> getRelatedClass() {
-        return this.relatedClass;
+    public Class<?> componentClass() {
+        return this.componentClass;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setRelatedClass(final Class<?> relatedClass) {
-        this.relatedClass = relatedClass;
+    public Wave componentClass(final Class<?> componentClass) {
+        this.componentClass = componentClass;
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public int getPriority() {
+    public int priority() {
         return this.priority;
     }
 
@@ -182,15 +195,16 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void setPriority(final int priority) {
+    public Wave priority(final int priority) {
         this.priority = priority;
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Wave getRelatedWave() {
+    public Wave relatedWave() {
         return this.relatedWave;
     }
 
@@ -198,15 +212,16 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void setRelatedWave(final Wave nextWave) {
+    public Wave relatedWave(final Wave nextWave) {
         this.relatedWave = nextWave;
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<WaveData<?>> getWaveItems() {
+    public List<WaveData<?>> waveDatas() {
         return this.waveDataList;
     }
 
@@ -214,28 +229,11 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public <T extends Object> void addData(final WaveData<T> waveData) {
-
-        // Init the order of the wave Data
-        waveData.setOrder(getWaveItems().size());
-        // Store into the map to allow access by WaveItem
-        this.waveItemsMap.put(waveData.getKey(), waveData);
-        // Ad into the list to enable sorting
-        this.waveDataList.add(waveData);
-
-        // Sort the list
-        Collections.sort(this.waveDataList);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addDatas(final WaveData<?>[] waveDatas) {
+    public Wave addDatas(final WaveData<?>... waveDatas) {
 
         for (final WaveData<?> waveData : waveDatas) {
             // Init the order of the wave Data
-            waveData.setOrder(getWaveItems().size());
+            waveData.setOrder(waveDatas().size());
             // Store into the map to allow access by WaveItem
             this.waveItemsMap.put(waveData.getKey(), waveData);
             // Ad into the list to enable sorting
@@ -244,15 +242,17 @@ public class WaveBase implements Wave, LinkMessages {
             // Sort the list
             Collections.sort(this.waveDataList);
         }
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public <T> void add(final WaveItem<T> waveItem, final T value) {
+    public <T> Wave add(final WaveItem<T> waveItem, final T value) {
         final WaveData<T> waveData = WaveData.build(waveItem, value);
-        addData(waveData);
+        addDatas(waveData);
+        return this;
     }
 
     /**
@@ -309,7 +309,7 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public WaveBean getWaveBean() {
+    public WaveBean waveBean() {
         if (this.waveBean == null) {
             if (this.waveBeanClass == null || WaveBean.class.equals(this.waveBeanClass)) {
                 // Build an empty wave bean to avoid null pointer exception
@@ -348,23 +348,25 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void addWaveListener(final WaveListener waveListener) {
+    public Wave addWaveListener(final WaveListener waveListener) {
         this.waveListeners.add(waveListener);
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void removeWaveListener(final WaveListener waveListener) {
+    public Wave removeWaveListener(final WaveListener waveListener) {
         this.waveListeners.remove(waveListener);
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Status getStatus() {
+    public Status status() {
         synchronized (this) {
             return this.statusProperty.get();
         }
@@ -382,7 +384,7 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void setStatus(final Status status) {
+    public Wave status(final Status status) {
         synchronized (this) {
             if (this.statusProperty.get() == status) {
                 throw new CoreRuntimeException("The status " + status.toString() + " has been already set for this wave " + toString());
@@ -391,6 +393,7 @@ public class WaveBase implements Wave, LinkMessages {
                 fireStatusChanged();
             }
         }
+        return this;
     }
 
     /**
@@ -431,26 +434,26 @@ public class WaveBase implements Wave, LinkMessages {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        if (getWaveGroup() != null) {
-            sb.append(getWaveGroup()).append(SPACE_SEP);
+        if (waveGroup() != null) {
+            sb.append(waveGroup()).append(SPACE_SEP);
         }
-        if (getFromClass() != null) {
-            sb.append("fromClass=").append(getFromClass().getSimpleName()).append(SPACE_SEP);
+        if (fromClass() != null) {
+            sb.append("fromClass=").append(fromClass().getSimpleName()).append(SPACE_SEP);
         }
-        if (getRelatedClass() != null) {
-            sb.append("relatedClass=").append(getRelatedClass().getSimpleName()).append(SPACE_SEP);
+        if (componentClass() != null) {
+            sb.append("relatedClass=").append(componentClass().getSimpleName()).append(SPACE_SEP);
         }
-        if (getWaveType() != null) {
-            sb.append(getWaveType()).append(SPACE_SEP);
+        if (waveType() != null) {
+            sb.append(waveType()).append(SPACE_SEP);
         }
 
         if (getWUID() != null) {
             sb.append("(").append(getWUID()).append(") ");
         }
 
-        if (getWaveItems().size() > 0) {
+        if (waveDatas().size() > 0) {
             sb.append("\r\nData=>");
-            for (final WaveData<?> wd : getWaveItems()) {
+            for (final WaveData<?> wd : waveDatas()) {
                 sb.append(wd.getKey()).append("=").append(wd.getValue());
             }
         }
@@ -462,11 +465,12 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void linkWaveBean(final WaveBean waveBean) {
+    public Wave waveBean(final WaveBean waveBean) {
         if (waveBean != null) {
             this.waveBean = waveBean;
             this.waveBeanClass = waveBean.getClass();
         }
+        return this;
     }
 
 }

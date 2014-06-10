@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -47,12 +47,12 @@ import org.jrebirth.af.core.ui.handler.ZoomHandler;
 
 /**
  * The class <strong>EventAdapter</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface EventAdapter {
 
-    /** . */
+    /** "The class {0} shall implement the method : {1}" . */
     MessageItem NOT_IMPLEMENTED_YET = Resources.create(new Message("jrebirth.ui.adapter.notImplementedYet"));
 
     // /**
@@ -61,9 +61,9 @@ public interface EventAdapter {
     // void setController(final C controller);
 
     /**
-     * 
+     *
      * The class <strong>Linker</strong> is used to link Event with adapter and handler classes.
-     * 
+     *
      * @author Sébastien Bordes
      */
     enum Linker {
@@ -109,7 +109,7 @@ public interface EventAdapter {
 
         /**
          * Default constructor used to link the apiName.
-         * 
+         *
          * @param <E> the element type
          * @param eventType the javafx event type
          * @param adapterClass the adapter class
@@ -123,7 +123,7 @@ public interface EventAdapter {
 
         /**
          * Return Event type.
-         * 
+         *
          * @return the event type<?>
          */
         public EventType<?> eventType() {
@@ -132,7 +132,7 @@ public interface EventAdapter {
 
         /**
          * Return Adapter class.
-         * 
+         *
          * @return the class<? extends event adapter>
          */
         public Class<? extends EventAdapter> adapterClass() {
@@ -141,7 +141,7 @@ public interface EventAdapter {
 
         /**
          * Return Handler class.
-         * 
+         *
          * @return the class<? extends event handler<?>>
          */
         public Class<? extends EventHandler<?>> handlerClass() {

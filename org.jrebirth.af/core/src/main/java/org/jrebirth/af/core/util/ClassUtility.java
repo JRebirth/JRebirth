@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -36,9 +36,9 @@ import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
  * The class <strong>ClassUtility</strong>.
- * 
+ *
  * Some Useful class utilities to perform introspection.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class ClassUtility implements UtilMessages {
@@ -72,13 +72,13 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Build the nth generic type of a class.
-     * 
+     *
      * @param mainClass The main class used (that contain at least one generic type)
      * @param assignableClass the parent type of the generic to build
      * @param parameters used by the constructor of the generic type
-     * 
+     *
      * @return a new instance of the generic type
-     * 
+     *
      * @throws CoreException if the instantiation fails
      */
     public static Object buildGenericType(final Class<?> mainClass, final Class<?> assignableClass, final Object... parameters) throws CoreException {
@@ -87,13 +87,13 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Build the nth generic type of a class.
-     * 
+     *
      * @param mainClass The main class used (that contain at least one generic type)
      * @param assignableClasses if the array contains only one class it define the type of the generic to build, otherwise it defines the types to skip to find the obejct to build
      * @param parameters used by the constructor of the generic type
-     * 
+     *
      * @return a new instance of the generic type
-     * 
+     *
      * @throws CoreException if the instantiation fails
      */
     public static Object buildGenericType(final Class<?> mainClass, final Class<?>[] assignableClasses, final Object... parameters) throws CoreException {
@@ -148,10 +148,10 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Retrieve the constructor of a Type.
-     * 
+     *
      * @param genericClass the type of the object
      * @param parameterTypes an array of parameters' type
-     * 
+     *
      * @return the right constructor that matchers parameters
      */
     private static Constructor<?> getConstructor(final Class<?> genericClass, final Class<?>[] parameterTypes) {
@@ -170,10 +170,10 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Return the generic class for the given parent class and index.
-     * 
+     *
      * @param mainClass the parent class
      * @param assignableClass the parent type of the generic to build
-     * 
+     *
      * @return the class of the generic type according to the index provided or null if not found
      */
     public static Class<?> findGenericClass(final Class<?> mainClass, final Class<?> assignableClass) {
@@ -182,10 +182,10 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Return the generic class for the given parent class and index.
-     * 
+     *
      * @param mainClass the parent class
      * @param excludedClasses if the array contains only one class it define the type of the generic to build, otherwise it defines the types to skip to find the object to build
-     * 
+     *
      * @return the class of the generic type according to the index provided or null if not found
      */
     public static Class<?> findGenericClass(final Class<?> mainClass, final Class<?>[] excludedClasses) {
@@ -220,9 +220,9 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Convert A_STRING_UNDESCORED into aStringUnderscored.
-     * 
+     *
      * @param undescoredString the string to convert
-     * 
+     *
      * @return the string with camelCase
      */
     public static String underscoreToCamelCase(final String undescoredString) {
@@ -245,9 +245,9 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Convert aStringUnderscored into A_STRING_UNDESCORED.
-     * 
+     *
      * @param camelCaseString the string to convert
-     * 
+     *
      * @return the underscored string
      */
     public static String camelCaseToUnderscore(final String camelCaseString) {
@@ -264,7 +264,7 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Return the method that exactly match the action name. The name must be unique into the class.
-     * 
+     *
      * @param cls the class which contain the searched method
      * @param action the name of the method to find
      * @return the method
@@ -281,9 +281,9 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * List all properties for the given class.
-     * 
+     *
      * @param cls the class to inspect by reflection
-     * 
+     *
      * @return the field list
      */
     public static List<Field> retrievePropertyList(final Class<?> cls) {
@@ -296,11 +296,11 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Retrieve a field according to the item name first, then according to searched class.
-     * 
+     *
      * @param sourceClass the class to inspect
      * @param itemName the item name to find (LIKE_THIS)
      * @param searchedClass the property class to find if item name query has failed
-     * 
+     *
      * @return the source class field that match provided criterion
      */
     public static Field findProperty(final Class<?> sourceClass, final String itemName, final Class<?> searchedClass) {
@@ -328,10 +328,10 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Check if the given method exists in the given class.
-     * 
+     *
      * @param cls the class to search into
      * @param methodName the name of the method to check (camelCased or in upper case with underscore separator)
-     * 
+     *
      * @return true if the method exists
      */
     public static List<Method> retrieveMethodList(final Class<?> cls, final String methodName) {
@@ -347,9 +347,9 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Return the Class object for the given type.
-     * 
+     *
      * @param type the given type to cast into Class
-     * 
+     *
      * @return the Class casted object
      */
     public static Class<?> getClassFromType(final Type type) {
@@ -365,12 +365,12 @@ public final class ClassUtility implements UtilMessages {
     /**
      * Extract the last annotation requested found into the class hierarchy.<br />
      * Interfaces are not yet supported.
-     * 
+     *
      * @param sourceClass the class (wit its parent classes) to inspect
      * @param annotationClass the annotation to find
-     * 
+     *
      * @param <A> the type of the requested annotation
-     * 
+     *
      * @return the request annotation or null if none have been found into the class hierarchy
      */
     public static <A extends Annotation> A getLastClassAnnotation(final Class<?> sourceClass, final Class<A> annotationClass) {
@@ -385,10 +385,10 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Retrieve an annotation property dynamically by reflection.
-     * 
+     *
      * @param annotation the annotation to explore
      * @param attributeName the name of the method to call
-     * 
+     *
      * @return the property value
      */
     public static Object getAnnotationAttribute(final Annotation annotation, final String attributeName) {
@@ -410,9 +410,9 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Return the class used by the Nth level of the current call stack.
-     * 
+     *
      * @param classDeepLevel the deep level to use to find the right class
-     * 
+     *
      * @return the Nth level ancestor class
      */
     @SuppressWarnings("unchecked")
@@ -428,10 +428,10 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Retrieve all annotation of the given type from the given class.
-     * 
+     *
      * @param cls the class that we want to inspect
      * @param annotationClass the type of Annotation to find
-     * 
+     *
      * @return the list of annotated method
      */
     public static List<Method> getAnnotatedMethods(final Class<?> cls, final Class<? extends Annotation> annotationClass) {
@@ -458,10 +458,10 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Retrieve all annotation of the given type from the given class.
-     * 
+     *
      * @param cls the class that we want to inspect
      * @param annotationClass the type of Annotation to find
-     * 
+     *
      * @return the list of annotated fields
      */
     public static List<Field> getAnnotatedFields(final Class<?> cls, final Class<? extends Annotation> annotationClass) {
@@ -484,11 +484,11 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Call the given method for the instance object even if its visibility is private or protected.
-     * 
+     *
      * @param method the method to call
      * @param instance the object instance to use
      * @param parameters the list of method parameters to use
-     * 
+     *
      * @return the method return
      * @throws CoreException if the method call has failed
      */
@@ -516,7 +516,7 @@ public final class ClassUtility implements UtilMessages {
     }
 
     /**
-     * 
+     *
      */
     public static void setFieldValue(final Field field, final Object instance, final Object value) throws CoreException {
 

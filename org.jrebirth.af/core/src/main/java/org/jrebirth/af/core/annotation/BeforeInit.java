@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * The class <strong>BeforeInit</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 @Target(ElementType.METHOD)
@@ -20,7 +20,7 @@ public @interface BeforeInit {
 
     /**
      * Define the execution order of all methods performed before initialization.
-     * 
+     *
      * There is no default value
      */
     MethodPriority value() default MethodPriority.NORMAL;

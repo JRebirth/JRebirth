@@ -31,7 +31,7 @@ public enum Touch implements EnumEventType {
 
     /**
      * Default constructor used to link the apiName.
-     * 
+     *
      * @param eventType the javafx event type
      */
     private Touch(final EventType<?> eventType) {

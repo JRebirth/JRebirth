@@ -1,6 +1,6 @@
 /**
  * Provides JRebirth exception classes.
- * 
+ *
  * <ul>
  * <li>{@link org.jrebirth.af.core.exception.CoreException} : used when an error occurred into JRebirth core.</li>
  * <li>{@link org.jrebirth.af.core.exception.CoreRuntimeException} : used when a problem occurred into JRebirth core.</li>

@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,12 +17,11 @@
  */
 package org.jrebirth.af.core.log;
 
-import ch.qos.logback.classic.Logger;
-
 import org.jrebirth.af.core.resource.i18n.MessageItem;
-
 import org.slf4j.Marker;
 import org.slf4j.spi.LocationAwareLogger;
+
+import ch.qos.logback.classic.Logger;
 
 /**
  * The Class LogbackAdapter.
@@ -39,7 +38,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
 
     /**
      * Instantiates a new logger adapter.
-     * 
+     *
      * @param logger the wrapped logger
      */
     public LogbackAdapter(final Logger logger) {
@@ -48,9 +47,9 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
 
     /**
      * Convert JRebirth LogLevel to Logback one.
-     * 
+     *
      * @param level the JRebirth log level to convert
-     * 
+     *
      * @return the logback log level
      */
     private int convertLevel(final JRLevel level) {

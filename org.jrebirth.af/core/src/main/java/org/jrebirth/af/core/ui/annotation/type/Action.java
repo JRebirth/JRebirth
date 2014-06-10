@@ -19,7 +19,7 @@ public enum Action implements EnumEventType {
 
     /**
      * Default constructor used to link the apiName.
-     * 
+     *
      * @param eventType the javafx event type
      */
     private Action(final EventType<?> eventType) {

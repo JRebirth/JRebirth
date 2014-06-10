@@ -28,7 +28,7 @@ public enum Scroll implements EnumEventType {
 
     /**
      * Default constructor used to link the apiName.
-     * 
+     *
      * @param eventType the javafx event type
      */
     private Scroll(final EventType<?> eventType) {

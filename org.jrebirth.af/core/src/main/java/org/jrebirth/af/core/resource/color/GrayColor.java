@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +25,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 /**
  * The interface <strong>GrayColor</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class GrayColor extends AbstractBaseColor {
@@ -35,7 +35,7 @@ public class GrayColor extends AbstractBaseColor {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param gray the gray component [0.0-1.0]
      */
     public GrayColor(final double gray) {
@@ -45,7 +45,7 @@ public class GrayColor extends AbstractBaseColor {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param gray the gray component [0.0-1.0]
      * @param opacity the color opacity [0.0-1.0]
      */
@@ -56,7 +56,7 @@ public class GrayColor extends AbstractBaseColor {
 
     /**
      * Return the gray value.
-     * 
+     *
      * @return Returns the gray [0.0-1.0].
      */
     public double gray() {
@@ -65,7 +65,7 @@ public class GrayColor extends AbstractBaseColor {
 
     /**
      * Return the gray property.
-     * 
+     *
      * @return Returns the gray property.
      */
     public DoubleProperty grayProperty() {

@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.link;
 
+import static org.jrebirth.af.core.resource.Resources.create;
+
 import org.jrebirth.af.core.log.JRLevel;
 import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.i18n.LogMessage;
@@ -24,13 +26,11 @@ import org.jrebirth.af.core.resource.i18n.Message;
 import org.jrebirth.af.core.resource.i18n.MessageContainer;
 import org.jrebirth.af.core.resource.i18n.MessageItem;
 
-import static org.jrebirth.af.core.resource.Resources.create;
-
 /**
  * The class <strong>LinkMessages</strong>.
- * 
+ *
  * Messages used by the Link package.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface LinkMessages extends MessageContainer {

@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,7 +26,7 @@ import org.jrebirth.af.core.resource.AbstractBaseParams;
 
 /**
  * The interface <strong>AbstractBaseImage</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public abstract class AbstractBaseImage extends AbstractBaseParams implements ImageParams {
@@ -57,7 +57,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param path the path of the image to load
      * @param name the image file name to use.
      * @param extension the image extension to use
@@ -68,7 +68,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param path the path of the image to load
      * @param name the image file name to use.
      * @param extension the image extension to use
@@ -102,7 +102,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
 
     /**
      * Path property.
-     * 
+     *
      * @return the string property
      */
     public StringProperty pathProperty() {
@@ -119,7 +119,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
 
     /**
      * Name property.
-     * 
+     *
      * @return the string property
      */
     public StringProperty nameProperty() {
@@ -136,7 +136,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
 
     /**
      * Extension property.
-     * 
+     *
      * @return the object property
      */
     public ObjectProperty<ImageExtension> extensionProperty() {
@@ -145,7 +145,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
 
     /**
      * Requested width.
-     * 
+     *
      * @return Returns the requestedWidth.
      */
     public double requestedWidth() {
@@ -154,7 +154,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
 
     /**
      * Requested height.
-     * 
+     *
      * @return Returns the requestedHeight.
      */
     public double requestedHeight() {
@@ -163,7 +163,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
 
     /**
      * Preserve ratio.
-     * 
+     *
      * @return Returns the preserveRatio.
      */
     public boolean preserveRatio() {
@@ -172,7 +172,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
 
     /**
      * Smooth.
-     * 
+     *
      * @return Returns the smooth.
      */
     public boolean smooth() {
@@ -181,7 +181,7 @@ public abstract class AbstractBaseImage extends AbstractBaseParams implements Im
 
     /**
      * Background loading.
-     * 
+     *
      * @return Returns the backgroundLoading.
      */
     public boolean backgroundLoading() {

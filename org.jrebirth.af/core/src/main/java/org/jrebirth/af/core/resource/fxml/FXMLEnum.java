@@ -11,9 +11,9 @@ public interface FXMLEnum extends FXMLItem {
     }
 
     /**
-     * 
+     *
      * TODO To complete.
-     * 
+     *
      * @param name the fxml and resource bundle file name
      */
     default void fxml(final String name) {

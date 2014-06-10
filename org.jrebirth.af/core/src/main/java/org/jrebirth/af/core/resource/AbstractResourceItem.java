@@ -2,7 +2,7 @@ package org.jrebirth.af.core.resource;
 
 /**
  * The class <strong>AbstractResourceItem</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public abstract class AbstractResourceItem<R, I, P extends ResourceParams, B> implements ResourceItem<R, I, P, B> {
@@ -12,7 +12,7 @@ public abstract class AbstractResourceItem<R, I, P extends ResourceParams, B> im
 
     /**
      * Gets the uid.
-     * 
+     *
      * @return Returns the uid.
      */
     public int uid() {
@@ -21,7 +21,7 @@ public abstract class AbstractResourceItem<R, I, P extends ResourceParams, B> im
 
     /**
      * Sets the uid.
-     * 
+     *
      * @param uid The uid to set.
      */
     @SuppressWarnings("unchecked")

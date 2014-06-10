@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  * The interface <strong>LocalImage</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class WebImage extends AbstractBaseImage implements ImageParams {
@@ -40,7 +40,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param website the website base url
      * @param path the path of the image to load
      * @param name the image file name to use.
@@ -53,7 +53,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param website the website base url
      * @param secured the http protocol to use (http or https)
      * @param path the path of the image to load
@@ -67,7 +67,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
 
     /**
      * Return the website base url.
-     * 
+     *
      * @return the website
      */
     public String website() {
@@ -76,7 +76,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
 
     /**
      * Return the website property.
-     * 
+     *
      * @return the website property
      */
     public StringProperty websiteProperty() {
@@ -85,7 +85,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
 
     /**
      * Return the secured flag.
-     * 
+     *
      * @return the secured
      */
     public Boolean secured() {
@@ -94,7 +94,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
 
     /**
      * Return the secured property.
-     * 
+     *
      * @return the secured property
      */
     public BooleanProperty securedProperty() {
@@ -103,7 +103,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
 
     /**
      * Build the image url.
-     * 
+     *
      * @return the full image url string
      */
     public String getUrl() {
@@ -120,9 +120,9 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
 
     /**
      * Parse the serialized Web Image string to build a fresh instance.
-     * 
+     *
      * @param serializedImage the serialized string
-     * 
+     *
      * @return a new fresh instance of {@link WebImage}
      */
 

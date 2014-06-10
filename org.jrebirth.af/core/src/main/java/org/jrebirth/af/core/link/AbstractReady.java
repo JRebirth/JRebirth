@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,11 +30,11 @@ import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.ui.Model;
 
 /**
- * 
+ *
  * The class <strong>AbstractReady</strong>.
- * 
+ *
  * It allow to retrieve any of available singleton.
- * 
+ *
  * @param <R> the class type of the subclass
  */
 public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeReady<R> {
@@ -81,7 +81,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
 
     /**
      * Return the first key part of the {@link MultitonKey} or the component class type for {@link UniqueKey}.
-     * 
+     *
      * @return Returns the first key part or the component type.
      */
     @SuppressWarnings("unchecked")
@@ -98,7 +98,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
 
     /**
      * Return the second key part of the {@link MultitonKey} if any or null.
-     * 
+     *
      * @return Returns the second key part or null.
      */
     @SuppressWarnings("unchecked")
@@ -112,7 +112,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
 
     /**
      * Return the third key part of the {@link MultitonKey} if any or null.
-     * 
+     *
      * @return Returns the third key part or null.
      */
     @SuppressWarnings("unchecked")
@@ -126,9 +126,9 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
 
     /**
      * Return the list of key parts (considered as model objects).
-     * 
+     *
      * If the key value is an instance of List it will return it as is otherwise it will create a new list and add the unique key part object
-     * 
+     *
      * @return Returns a list composed by all model object (= component key parts).
      */
     @SuppressWarnings("unchecked")
@@ -141,6 +141,14 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
             listModelObject.add(this.key.getValue());
         }
         return listModelObject;
+    }
+    
+    @SuppressWarnings("unchecked")
+	public <KP extends Object> KP getKeyPart(Class<KP> keyPartClass){
+    	return (KP) getListKeyPart().stream()
+    			.filter(kp-> kp != null && keyPartClass.isAssignableFrom(kp.getClass()))
+    			.findFirst()
+    			.get();
     }
 
     /**

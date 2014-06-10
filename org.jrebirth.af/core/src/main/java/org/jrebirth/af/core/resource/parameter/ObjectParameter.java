@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,9 +27,9 @@ import org.jrebirth.af.core.resource.ResourceParams;
 
 /**
  * The interface <strong>ObjectParameter</strong>.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <O> the parameter type
  */
 public class ObjectParameter<O extends Object> extends AbstractBaseParams implements ParameterParams {
@@ -57,7 +57,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param parameterName the name of the parameter
      * @param object the parameter object
      */
@@ -74,7 +74,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
 
     /**
      * Return the parameter name.
-     * 
+     *
      * @return Returns the parameter name.
      */
     public String name() {
@@ -83,7 +83,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
 
     /**
      * Return the parameter object value.
-     * 
+     *
      * @return Returns the object.
      */
     public O object() {
@@ -92,9 +92,9 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
 
     /**
      * Parse the serialized object.
-     * 
+     *
      * @param parameterEntry the parameter entry to convert that wrap the serialized string
-     * 
+     *
      * @return the real object
      */
     public Object parseObject(final ParameterEntry parameterEntry) {
@@ -119,9 +119,9 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
 
     /**
      * Parse a class definition by calling to call Class.forName.
-     * 
+     *
      * @param serializedObject the full class name
-     * 
+     *
      * @return the class object
      */
     private Object parseClassParameter(final String serializedObject) {
@@ -136,9 +136,9 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
 
     /**
      * Parse primitive serialized object.
-     * 
+     *
      * @param serializedObject the serialized string to parse
-     * 
+     *
      * @return a new fresh instance of the object
      */
     private Object parsePrimitive(final String serializedObject) {

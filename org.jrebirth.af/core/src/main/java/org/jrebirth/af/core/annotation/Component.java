@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 
 /**
  * The class <strong>Component</strong> is used to auto inject a JRebirth component.
- * 
+ *
  * It currently supports only components that have a string key part.
- * 
+ *
  * @author Sébastien Bordes
  */
 @Target(ElementType.FIELD)
@@ -22,9 +22,9 @@ public @interface Component {
 
     /**
      * Define default string key part.
-     * 
+     *
      * If no value is defined a ClassKey will be used otherwise a MultitonKey will be used with a single key part
-     * 
+     *
      * There is no default value
      */
     String value() default "";

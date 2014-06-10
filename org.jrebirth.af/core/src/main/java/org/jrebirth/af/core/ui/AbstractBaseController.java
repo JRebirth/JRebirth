@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,15 +28,16 @@ import javafx.scene.Node;
 
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.facade.JRebirthEventType;
+import org.jrebirth.af.core.ui.adapter.AbstractDefaultAdapter;
 import org.jrebirth.af.core.ui.adapter.EventAdapter;
 
 /**
  * The abstract class <strong>AbstractBaseController</strong>.
- * 
+ *
  * Base implementation of the controller.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <M> the class type of the model of the view controlled
  * @param <V> the class type of the view controlled
  */
@@ -50,9 +51,9 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param view the controlled view
-     * 
+     *
      * @throws CoreException if an error occurred while creating event handlers
      */
     public AbstractBaseController(final V view) throws CoreException {
@@ -77,11 +78,11 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
 
     /**
      * Initialize event Adapters.
-     * 
+     *
      * This method is a hook to manage generic code before initializing the user event adapters.
-     * 
+     *
      * You must implement the {@link #initEventAdapters()} method to prepare your controller.
-     * 
+     *
      * @throws CoreException if an error occurred while creating event adapters
      */
     protected final void initInternalEventAdapters() throws CoreException {
@@ -93,18 +94,18 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
 
     /**
      * Custom method used to initialize event Adapters.
-     * 
+     *
      * @throws CoreException if an error occurred while creating event adapters
      */
     protected abstract void initEventAdapters() throws CoreException;
 
     /**
      * Initialize event Handlers.
-     * 
+     *
      * This method is a hook to manage generic code before initializing the user event handlers.
-     * 
+     *
      * You must implement the {@link #initEventHandlers()} method to prepare your controller.
-     * 
+     *
      * @throws CoreException if an error occurred while creating event handlers
      */
     protected final void initInternalEventHandlers() throws CoreException {
@@ -116,7 +117,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
 
     /**
      * Custom method used to initialize event handlers.
-     * 
+     *
      * @throws CoreException if an error occurred while creating event handlers
      */
     protected abstract void initEventHandlers() throws CoreException;
@@ -147,13 +148,17 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
 
     /**
      * Add an event adapter and automatically generate the associated event handler. It could be accessed by calling {@link #getHandler(EventType)}
-     * 
+     *
      * @param eventAdapter the {@link EventAdapter} used to route event
-     * 
+     *
      * @throws CoreException it the local api contract is not respected
      */
     @SuppressWarnings("unchecked")
     protected final void addAdapter(final EventAdapter eventAdapter) throws CoreException {
+
+        if (eventAdapter instanceof AbstractDefaultAdapter) {
+            ((AbstractDefaultAdapter) eventAdapter).setController(this);
+        }
 
         // Parse all event to find the right to manage
         for (final EventAdapter.Linker linker : EventAdapter.Linker.values()) {
@@ -166,13 +171,13 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
 
     /**
      * Return an {@link EventHandler}.
-     * 
+     *
      * @param eventType the event type of the handler we want to return
-     * 
+     *
      * @return the right event handler
-     * 
+     *
      * @param <E> the Event type to manage
-     * 
+     *
      * @throws CoreException an exception if the current class doesn't implement the right EventAdapter interface.
      */
     @SuppressWarnings("unchecked")
@@ -204,15 +209,15 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
 
     /**
      * Build an event handler by reflection to wrap the event adapter given.
-     * 
+     *
      * @param eventAdapter the instance of an eventAdapter
      * @param adapterClass the adapter class used by the handler constructor
      * @param handlerClass the handler class to build
-     * 
+     *
      * @return the required event handler
-     * 
+     *
      * @param <E> the Event type to manage
-     * 
+     *
      * @throws CoreException if an error occurred while creating the event handler
      */
     private <E extends Event> EventHandler<E> wrapbuildHandler(final EventAdapter eventAdapter, final Class<? extends EventAdapter> adapterClass, final Class<? extends EventHandler<E>> handlerClass)
@@ -226,14 +231,14 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
 
     /**
      * Build an event handler by reflection using the Controller object as eventAdapter.
-     * 
+     *
      * @param adapterClass the event adapter class to used
      * @param handlerClass the event handler class to used
-     * 
+     *
      * @return the required event handler
-     * 
+     *
      * @param <E> the Event type to manage
-     * 
+     *
      * @throws CoreException if the local api contract is not respected
      */
     private <E extends Event> EventHandler<E> buildEventHandler(final Class<? extends EventAdapter> adapterClass, final Class<? extends EventHandler<E>> handlerClass) throws CoreException {
@@ -250,10 +255,10 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
 
     /**
      * Check the event type given and check the super level if necessary to always return the ANy event type.
-     * 
+     *
      * @param testEventType the sub event type or any instance
      * @param anyEventType the eventype.ANY instance
-     * 
+     *
      * @return true if the ANY event type is the same for both objects
      */
     private boolean isEventType(final EventType<? extends Event> testEventType, final EventType<? extends Event> anyEventType) {

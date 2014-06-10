@@ -4,7 +4,7 @@ import org.jrebirth.af.core.exception.CoreException;
 
 /**
  * The class <strong>DefaultComponentFactory</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class DefaultComponentFactory implements ComponentFactory, FacadeMessages {

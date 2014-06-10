@@ -6,7 +6,7 @@ import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  * The class <strong>InnerModelBase</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class InnerModelBase implements InnerModel {
@@ -22,21 +22,21 @@ public final class InnerModelBase implements InnerModel {
 
     /**
      * Default constructor.
-     * 
+     *
      * @param modelClass the model class
      * @param keyPart the list of model keys
      */
     private InnerModelBase(final Class<? extends Model> modelClass, final Object... keyPart) {
 
-        this.modelKey = JRebirthThread.getThread().getFacade().getUiFacade().buildKey(modelClass, keyPart);
+        this.modelKey = UniqueKey.key(modelClass, keyPart);
     }
 
     /**
      * Build an InnerModel.
-     * 
+     *
      * @param modelClass the model class
      * @param keyPart the list of model keys
-     * 
+     *
      * @return a new fresh InnerModel type object
      */
     public static InnerModelBase build(final Class<? extends Model> modelClass, final Object... keyPart) {
@@ -59,7 +59,7 @@ public final class InnerModelBase implements InnerModel {
 
     /**
      * Gets the uid.
-     * 
+     *
      * @return Returns the uid.
      */
     public int getUid() {
@@ -68,7 +68,7 @@ public final class InnerModelBase implements InnerModel {
 
     /**
      * Sets the uid.
-     * 
+     *
      * @param uid The uid to set.
      */
     public void setUid(final int uid) {
