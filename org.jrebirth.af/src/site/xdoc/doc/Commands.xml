@@ -73,7 +73,7 @@
 				<macro name="include">
 					<param name="highlight-theme" value="eclipse"/>
 					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/ShowModelCommand.java" />
-					<param name="snippet" value="aj:org.jrebirth.core.command.basic.showmodel.ShowModelCommand" />
+					<param name="snippet" value="aj:org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand" />
 				</macro>
 
 				<p>

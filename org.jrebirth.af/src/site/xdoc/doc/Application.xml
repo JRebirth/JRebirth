@@ -90,7 +90,7 @@
 				
 				<macro name="include">
                     <param name="source" value="preloader/src/main/java/org/jrebirth/af/preloader/JRebirthPreloader.java"/>
-                    <param name="snippet" value="aj:org.jrebirth.preloader.JRebirthPreloader"/>
+                    <param name="snippet" value="aj:org.jrebirth.af.preloader.JRebirthPreloader"/>
                 </macro>
                 
             </subsection>
