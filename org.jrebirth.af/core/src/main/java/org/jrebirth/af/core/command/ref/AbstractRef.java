@@ -5,27 +5,25 @@ import org.jrebirth.af.core.concurrent.RunnablePriority;
 
 public abstract class AbstractRef<R extends AbstractRef<R>> implements Ref {
 
-	private RunType runType;
-	private RunnablePriority priority;
-	
-	public RunType runType() {
-		return runType;
-	}
-	
-	public R runType(RunType runType) {
-		this.runType = runType;
-		return (R)this;
-	}
-	
-	public RunnablePriority priority() {
-		return priority;
-	}
-	
-	public R priority(RunnablePriority priority) {
-		this.priority = priority;
-		return (R)this;
-	}
-	
-	
+    private RunType runType;
+    private RunnablePriority priority;
+
+    public RunType runInto() {
+        return runType;
+    }
+
+    public R runInto(RunType runType) {
+        this.runType = runType;
+        return (R) this;
+    }
+
+    public RunnablePriority priority() {
+        return priority;
+    }
+
+    public R priority(RunnablePriority priority) {
+        this.priority = priority;
+        return (R) this;
+    }
 
 }

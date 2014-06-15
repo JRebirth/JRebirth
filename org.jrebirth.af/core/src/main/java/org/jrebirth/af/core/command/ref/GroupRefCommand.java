@@ -23,7 +23,7 @@ public class GroupRefCommand extends AbstractMultiCommand<WaveBean> {
             	
 				setSequential(groupRef.sequential());
 				
-				this.runIntoThread = groupRef.runType();
+				this.runIntoThread = groupRef.runInto();
 				this.runnablePriority = groupRef.priority();
 				
 				for(Ref ref  : groupRef.children()){
@@ -32,7 +32,7 @@ public class GroupRefCommand extends AbstractMultiCommand<WaveBean> {
 					}else if(ref instanceof SingleRef){
 						addCommandKey(RefCommand.class, ref);
 					}else if(ref instanceof RealRef){
-						addCommandKey(((RealRef) ref).commandKey());
+						addCommandKey(((RealRef) ref).key());
 					}
 				}
 				

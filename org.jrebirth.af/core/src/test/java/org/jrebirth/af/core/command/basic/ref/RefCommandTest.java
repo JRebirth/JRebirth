@@ -22,8 +22,8 @@ public class RefCommandTest extends BasicCommandTest {
 
         Ref ref = Ref.single()
 				.priority(RunnablePriority.Highest)
-				.runType(RunType.JTP)
-				.runner(this::sayHello);
+				.runInto(RunType.JTP)
+				.run(this::sayHello);
 
         runCommand(RefCommand.class, ref);
     }
@@ -34,8 +34,8 @@ public class RefCommandTest extends BasicCommandTest {
 
         Ref ref = Ref.single()
 				.priority(RunnablePriority.Highest)
-				.runType(RunType.JTP)
-				.waveRunner(this::sayHelloWave);
+				.runInto(RunType.JTP)
+				.runWave(this::sayHelloWave);
 
         runCommand(RefCommand.class, ref);
     }

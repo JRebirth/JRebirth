@@ -26,10 +26,10 @@ public class RefCommand extends AbstractSingleCommand<WaveBean> {
 
     	 		SingleRef ref = getKeyPart(SingleRef.class);
                 // runnerList.add(ref.runner());
-                this.commandRunner = ref.runner();
-                this.commandWaveRunner = ref.waveRunner();
+                this.commandRunner = ref.run();
+                this.commandWaveRunner = ref.runWave();
 
-                this.runIntoThread = ref.runType();
+                this.runIntoThread = ref.runInto();
                 this.runnablePriority = ref.priority();
 
                // break;

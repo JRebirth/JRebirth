@@ -11,11 +11,11 @@ public class RealRef implements Ref {
 		return new RealRef();
 	}
 	
-	public UniqueKey<? extends Command> commandKey() {
+	public UniqueKey<? extends Command> key() {
 		return commandKey;
 	}
 
-	public RealRef commandKey(UniqueKey<? extends Command> commandKey) {
+	public RealRef key(UniqueKey<? extends Command> commandKey) {
 		this.commandKey = commandKey;
 		return this;
 	}

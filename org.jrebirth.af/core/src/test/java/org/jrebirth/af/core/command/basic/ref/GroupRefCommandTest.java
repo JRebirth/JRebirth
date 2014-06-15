@@ -22,17 +22,17 @@ public class GroupRefCommandTest extends BasicCommandTest {
 
         Ref ref = Ref.group()
                 .sequential(true)
-                .runType(RunType.JTP)
+                .runInto(RunType.JTP)
                 .priority(RunnablePriority.Highest)
                 .add(
                         Ref.single()
                                 .priority(RunnablePriority.Highest)
-                                .runType(RunType.JTP)
-                                .runner(this::sayHello),
+                                .runInto(RunType.JTP)
+                                .run(this::sayHello),
                         Ref.single()
                                 .priority(RunnablePriority.Highest)
-                                .runType(RunType.JTP)
-                                .waveRunner(this::sayHelloWave)
+                                .runInto(RunType.JTP)
+                                .runWave(this::sayHelloWave)
                 );
 
         runCommand(GroupRefCommand.class, ref);
@@ -44,37 +44,37 @@ public class GroupRefCommandTest extends BasicCommandTest {
 
         Ref ref = Ref.group()
                 .sequential(true)
-                .runType(RunType.JTP)
+                .runInto(RunType.JTP)
                 .priority(RunnablePriority.Highest)
                 .add(
                         // Ref.real().commandKey(UniqueKey.key(UpdateCursorCommand.class, Cursor.WAIT)),
 
                         Ref.single()
                                 .priority(RunnablePriority.Highest)
-                                .runType(RunType.JTP)
-                                .runner(this::sayHello),
+                                .runInto(RunType.JTP)
+                                .run(this::sayHello),
 
                         Ref.group()
                                 .sequential(true)
-                                .runType(RunType.JTP)
+                                .runInto(RunType.JTP)
                                 .priority(RunnablePriority.Highest)
                                 .add(
                                         Ref.single()
                                                 .priority(RunnablePriority.Highest)
-                                                .runType(RunType.JTP)
-                                                .runner(this::sayHello),
+                                                .runInto(RunType.JTP)
+                                                .run(this::sayHello),
                                         Ref.single()
                                                 .priority(RunnablePriority.Highest)
-                                                .runType(RunType.JTP)
-                                                .waveRunner(this::sayHelloWave),
+                                                .runInto(RunType.JTP)
+                                                .runWave(this::sayHelloWave),
                                         Ref.real()
-                                                .commandKey(null)
+                                                .key(null)
                                 ),
 
                         Ref.single()
                                 .priority(RunnablePriority.Highest)
-                                .runType(RunType.JTP)
-                                .waveRunner(this::sayHelloWave)/*
+                                .runInto(RunType.JTP)
+                                .runWave(this::sayHelloWave)/*
                                                                 * ,
                                                                 * 
                                                                 * Ref.real().commandKey(UniqueKey.key(UpdateCursorCommand.class, Cursor.DEFAULT))
