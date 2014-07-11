@@ -20,6 +20,7 @@ package org.jrebirth.af.core.ui.fxml;
 import javafx.scene.Node;
 
 import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.resource.fxml.FXML;
 import org.jrebirth.af.core.resource.fxml.FXMLItem;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.ui.NullView;
@@ -38,26 +39,23 @@ import org.jrebirth.af.core.wave.JRebirthWaves;
  */
 public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object> extends AbstractObjectModel<M, NullView, O> {
 
+    /** The key part prefix used to attach the fxml path to this class. */
+    public static final String KEYPART_FXML_PREFIX = "fxml:";
+
+    /** The key part prefix used to attach the resource bundle path to this class. */
+    public static final String KEYPART_RB_PREFIX = "rb:";
+
+    /** The fxml path. */
+    private String fxmlPath;
+
+    /** The resource path. */
+    private String resourcePath;
+
+    /** The fxml resource. */
+    private FXMLItem fxmlItem;
+
     /** The fxmlComponent that wrap the node and its controller. */
     private FXMLComponent fxmlComponent;
-
-    /**
-     * Return the fxml path of the the file to load.
-     *
-     * @see FXMLUtils
-     *
-     * @return the fxml path
-     */
-    protected abstract String getFXMLPath();
-
-    /**
-     * Return the bundle path of the the properties file to load.
-     *
-     * @see FXMLUtils
-     *
-     * @return the bundle path
-     */
-    protected abstract String getFXMLBundlePath();
 
     /**
      * Return the fxml item used used to build the fxml component.
@@ -66,7 +64,31 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
      *
      * @return the fxml item used used to build the fxml component
      */
-    protected abstract FXMLItem getFXMLItem();
+    protected FXMLItem getFXMLItem() {
+        return this.fxmlItem;
+    }
+
+    /**
+     * Return the fxml path of the the file to load.
+     *
+     * @see FXMLUtils
+     *
+     * @return the fxml path
+     */
+    protected String getFXMLPath() {
+        return this.fxmlPath;
+    }
+
+    /**
+     * Return the bundle path of the the properties file to load.
+     *
+     * @see FXMLUtils
+     *
+     * @return the bundle path
+     */
+    protected String getFXMLBundlePath() {
+        return this.resourcePath;
+    }
 
     /**
      * {@inheritDoc}
@@ -104,7 +126,44 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
     /**
      * Pre init.
      */
-    protected abstract void fxmlPreInitialize();
+    protected void fxmlPreInitialize() {
+
+        // Define fxml path and resource bundle path according to key parts provided
+
+        // If an FXMLItem is provided, simply map it to the internal item handle
+        if (!getListKeyPart().isEmpty() && getListKeyPart().get(0) instanceof FXMLItem) {
+
+            this.fxmlItem = (FXMLItem) getListKeyPart().get(0);
+
+            // if the first key part is a string that begins with fxml:
+        } else if (!getListKeyPart().isEmpty() && getListKeyPart().get(0).toString().startsWith(KEYPART_FXML_PREFIX)) {
+
+            // Use the string provided and append FXML extension
+            final String baseName = getListKeyPart().get(0).toString().substring(KEYPART_FXML_PREFIX.length());
+            this.fxmlPath = baseName.replaceAll(FXML.DOT_SEPARATOR, FXML.PATH_SEPARATOR) + FXML.FXML_EXT;
+
+            // if the second key part is a string that begins with rb:
+            if (getListKeyPart().size() > 1 && getListKeyPart().get(1).toString().startsWith(KEYPART_RB_PREFIX)) {
+                this.resourcePath = getListKeyPart().get(1).toString().substring(KEYPART_RB_PREFIX.length()).replaceAll(FXML.DOT_SEPARATOR, FXML.PATH_SEPARATOR);
+            } else {
+                // Otherwise use the same base name as fxml file
+                this.resourcePath = baseName;
+            }
+
+        } else {
+
+            // Otherwise use the current class name to define the fxml and resource bundle file names
+            String baseName = this.getClass().getCanonicalName();
+            // Remove the Model suffix if any
+            baseName = baseName.substring(0, baseName.lastIndexOf(Model.class.getSimpleName()));
+            // Replace . by / for the fxml loader
+            baseName = baseName.replaceAll(FXML.DOT_SEPARATOR, FXML.PATH_SEPARATOR);
+
+            this.fxmlPath = baseName + FXML.FXML_EXT;
+            this.resourcePath = baseName;
+
+        }
+    }
 
     /**
      * {@inheritDoc}
@@ -119,6 +178,7 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
      *
      * @return the FXML controller
      */
+    @SuppressWarnings("unchecked")
     public FXMLController<M, ?> getFXMLController() {
         return this.fxmlComponent.getController();
     }
