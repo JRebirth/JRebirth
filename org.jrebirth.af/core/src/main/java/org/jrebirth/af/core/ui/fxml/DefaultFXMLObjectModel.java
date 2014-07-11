@@ -17,7 +17,6 @@
  */
 package org.jrebirth.af.core.ui.fxml;
 
-import org.jrebirth.af.core.resource.fxml.FXMLItem;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.Wave;
 
@@ -32,58 +31,6 @@ import org.jrebirth.af.core.wave.Wave;
  * @author Sébastien Bordes
  */
 public class DefaultFXMLObjectModel<M extends Model, O extends Object> extends AbstractFXMLObjectModel<M, O> {
-
-    /** The fxml path. */
-    private String fxmlPath;
-
-    /** The resource path. */
-    private String resourcePath;
-
-    /** The fxml resource. */
-    private FXMLItem fxmlItem;
-
-    /**
-     * @return Returns the fxmlItem.
-     */
-    @Override
-    protected FXMLItem getFXMLItem() {
-        return this.fxmlItem;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getFXMLPath() {
-        return this.fxmlPath;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getFXMLBundlePath() {
-        return this.resourcePath;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void fxmlPreInitialize() {
-        if (!getListKeyPart().isEmpty() && getListKeyPart().get(0) instanceof FXMLItem) {
-
-            this.fxmlItem = (FXMLItem) getListKeyPart().get(0);
-
-        } else {
-            if (!getListKeyPart().isEmpty()) {
-                this.fxmlPath = getListKeyPart().get(0).toString();
-            }
-            if (getListKeyPart().size() > 1) {
-                this.resourcePath = getListKeyPart().get(1).toString();
-            }
-        }
-    }
 
     /**
      * {@inheritDoc}
