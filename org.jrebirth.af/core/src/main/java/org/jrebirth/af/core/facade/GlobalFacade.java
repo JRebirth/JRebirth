@@ -18,9 +18,11 @@
 package org.jrebirth.af.core.facade;
 
 import org.jrebirth.af.core.application.JRebirthApplication;
+import org.jrebirth.af.core.behavior.Behavior;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.concurrent.JRebirthThreadPoolExecutor;
 import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.facade.factory.ComponentFactory;
 import org.jrebirth.af.core.link.Notifier;
 import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.ui.Model;
@@ -58,6 +60,11 @@ public interface GlobalFacade {
      * @return Returns the commandFacade.
      */
     LocalFacade<Command> getCommandFacade();
+
+    /**
+     * @return Returns the behaviorFacade.
+     */
+    LocalFacade<Behavior<?>> getBehaviorFacade();
 
     /**
      * @return the application

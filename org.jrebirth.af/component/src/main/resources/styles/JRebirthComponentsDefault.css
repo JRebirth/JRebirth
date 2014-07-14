@@ -1,0 +1,12 @@
+/********************************************************************/
+/** 				. 												*/
+/********************************************************************/
+
+.HorizontalTabbedContainer{
+	-fx-background-color: yellow;
+}
+
+
+.VerticalTabbedContainer{
+	-fx-background-color: yellow;
+}

@@ -15,36 +15,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.component.ui.workbench;
+package org.jrebirth.af.component.resources;
 
-import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.core.resource.style.StyleSheet;
+import org.jrebirth.af.core.resource.style.StyleSheetItem;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static org.jrebirth.af.core.resource.Resources.create;
 
 /**
- * The Class WorkbenchModel is used to .
- *
- * @author Sébastien Bordes
+ * The ComponentStyles interface providing all style sheets.
  */
-public class WorkbenchModel extends DefaultModel<WorkbenchModel, WorkbenchView> {
+public interface ComponentStyles {
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(WorkbenchModel.class);
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initModel() {
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void showView() {
-    }
+    /** The component default style sheet. */
+    StyleSheetItem DEFAULT = create(new StyleSheet("JRebirthComponentsDefault"));
 
 }

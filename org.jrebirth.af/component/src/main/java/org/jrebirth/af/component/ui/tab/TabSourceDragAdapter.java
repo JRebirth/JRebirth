@@ -31,8 +31,7 @@ import org.jrebirth.af.core.ui.adapter.MouseAdapter;
 /**
  * The Class TabSourceDragAdapter.
  */
-class TabSourceDragAdapter
-extends AbstractDefaultAdapter<TabController> implements MouseAdapter {
+class TabSourceDragAdapter extends AbstractDefaultAdapter<TabController> implements MouseAdapter {
 
     /**
      * {@inheritDoc}
@@ -44,9 +43,9 @@ extends AbstractDefaultAdapter<TabController> implements MouseAdapter {
 
         final Dragboard db = b.startDragAndDrop(TransferMode.MOVE);
 
-        // Put a string on a dragboard
+        // Put a TabBB on a dragboard
         final ClipboardContent content = new ClipboardContent();
-        content.put(CustomDataFormat.TAB, b.getUserData());
+        content.put(CustomDataFormat.DOCKABLE, b.getUserData());
         db.setContent(content);
 
         mouseEvent.consume();

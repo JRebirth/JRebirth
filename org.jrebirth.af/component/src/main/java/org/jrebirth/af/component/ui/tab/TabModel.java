@@ -19,26 +19,23 @@ package org.jrebirth.af.component.ui.tab;
 
 import java.util.List;
 
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 
-import org.jrebirth.af.component.ui.Dockable;
-import org.jrebirth.af.component.ui.beans.TabBB;
+import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.ui.beans.TabConfig;
 import org.jrebirth.af.component.ui.beans.TabOrientation;
-import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.ui.object.DefaultObjectModel;
 import org.jrebirth.af.core.util.ObjectUtility;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveItem;
 import org.jrebirth.af.core.wave.WaveType;
-import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.jrebirth.af.core.wave.checker.WaveChecker;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TabModel is used to.
  *
@@ -46,19 +43,19 @@ import org.slf4j.LoggerFactory;
  */
 public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
 
-    /** The model. */
-    public static WaveItem<String> TAB_KEY = new WaveItem<String>() {
+    /** The key of the tab model used as filter by wave checker. */
+    public static WaveItem<String> TAB_KEY = new WaveItem<String>(false) {
     };
 
     /** The model. */
-    public static WaveItem<Model> MODEL = new WaveItem<Model>() {
+    public static WaveItem<Dockable> TAB = new WaveItem<Dockable>() {
     };
 
     /** The add. */
-    public static WaveType ADD = WaveTypeBase.build("addTab", MODEL);
+    public static WaveType ADD = WaveType.create("ADD_TAB").items(TAB);
 
     /** The remove. */
-    public static WaveType REMOVE = WaveTypeBase.build("removeTab", MODEL);
+    public static WaveType REMOVE = WaveType.create("REMOVE_TAB").items(TAB);
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(TabModel.class);
@@ -95,20 +92,36 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
 
     private void onOrientationChanged(final ObservableValue<? extends TabOrientation> property, final TabOrientation oldValue, final TabOrientation newValue) {
 
+        getView().reloadButtonBar();
+
+        for (final Dockable tab : getObject().tabs()) {
+            getView().addTab(getObject().tabs().size(), tab);
+        }
+
     }
 
-    private void onTabsChanged(final ListChangeListener.Change<? extends TabBB> change) {
+    @SuppressWarnings("unchecked")
+    private void onTabsChanged(final ListChangeListener.Change<? extends Dockable> change) {
         while (change.next()) {
-            System.err.println(change);
+
+            System.out.println(change);
+
             if (change.wasPermutated()) {
+                System.err.println("PERMUTATION -------------------------------------------------------------------");
                 // getView().removeTab(change.getList().get(change.getFrom()));
                 // getView().addTab(0, change.getList().get(change.getFrom()));
             }
+
             if (change.wasRemoved()) {
-                getView().removeTab((List<TabBB>) change.getRemoved());
+                Platform.runLater(
+                        () -> getView().removeTab((List<Dockable>) change.getRemoved())
+                        );
             }
+
             if (change.wasAdded()) {
-                getView().addTab(0, change.getList().get(change.getFrom()));
+                Platform.runLater(
+                        () -> getView().addTab(change.getFrom(), change.getList().get(change.getFrom()))
+                        );
             }
 
         }
@@ -125,22 +138,24 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
     /**
      * Adds the tab.
      *
-     * @param model the model
+     * @param tab the tab
      * @param wave the wave
      */
-    public <M extends Dockable> void addTab(final M model, final Wave wave) {
-        // TO FIX
-        insertTab(-1, model, wave);
+    public void addTab(final Dockable tab, final Wave wave) {
+        // FIXME
+        // if(model.hasBehavior()){
+        insertTab(-1, tab, wave);
+        // }
 
     }
 
     /**
      * Removes the tab.
      *
-     * @param model the model
+     * @param tab the tab
      * @param wave the wave
      */
-    public void removeTab(final Model model, final Wave wave) {
+    public void removeTab(final Dockable tab, final Wave wave) {
 
     }
 
@@ -148,22 +163,21 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
      * Insert tab.
      *
      * @param idx the idx
-     * @param model the model
+     * @param tab the tab
      * @param wave the wave
      */
-    @SuppressWarnings("unchecked")
-    public void insertTab(int idx, final Model model, final Wave wave) {
+    public void insertTab(int idx, final Dockable tab, final Wave wave) {
         // final TabBB<M> t = TabBB.create()
         // //.name(model.modelName())
         // .modelKey(model.getKey());
 
-        TabBB t = null;// model.getBehaviorBean(TabBehavior.class);
+        // Tab t = model.getBehaviorBean(TabBehavior.class);
 
         if (idx < 0) {
-            idx = getObject().tabs().isEmpty() ? 0 : getObject().tabs().size() - 1;
+            idx = getObject().tabs().isEmpty() ? 0 : getObject().tabs().size();
         }
 
-        getObject().tabs().add(idx, t);
+        getObject().tabs().add(idx, tab);
 
         // getView().addTab(idx, t);
 

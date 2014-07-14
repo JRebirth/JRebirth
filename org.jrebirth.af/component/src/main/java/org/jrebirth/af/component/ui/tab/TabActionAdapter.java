@@ -20,11 +20,10 @@ package org.jrebirth.af.component.ui.tab;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
-import org.jrebirth.af.component.ui.beans.TabBB;
+import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.core.ui.adapter.AbstractDefaultAdapter;
 import org.jrebirth.af.core.ui.adapter.ActionAdapter;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TabActionAdapter.
  */
@@ -36,11 +35,14 @@ class TabActionAdapter extends AbstractDefaultAdapter<TabController> implements 
     @Override
     public void action(final ActionEvent actionEvent) {
 
-        final TabBB t = (TabBB) ((Button) actionEvent.getSource()).getUserData();
+        final Dockable t = (Dockable) ((Button) actionEvent.getSource()).getUserData();
 
         getController().getView().selectTab(t);
 
-        getController().getModel().getObject().tabs().remove(t);
+        // if(actionEvent.){
+        // getController().getModel().removeTab(model, wave);
+        // getController().getModel().getObject().tabs().remove(t);
+        // }
     }
 
 }

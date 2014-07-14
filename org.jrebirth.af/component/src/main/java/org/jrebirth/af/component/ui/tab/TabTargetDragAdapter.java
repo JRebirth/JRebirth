@@ -17,17 +17,17 @@
  */
 package org.jrebirth.af.component.ui.tab;
 
+import javafx.animation.ScaleTransition;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
+import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.ui.CustomDataFormat;
-import org.jrebirth.af.component.ui.Dockable;
-import org.jrebirth.af.component.ui.beans.TabBB;
-import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.ui.adapter.AbstractDefaultAdapter;
 import org.jrebirth.af.core.ui.adapter.DragAdapter;
 
@@ -45,14 +45,15 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
         // System.out.println("drag OVER");
 
         if (dragEvent.getGestureSource() != getController().getView().getBox()
-                && dragEvent.getDragboard().hasContent(CustomDataFormat.TAB)) {
+                && dragEvent.getDragboard().hasContent(CustomDataFormat.DOCKABLE)) {
 
             dragEvent.acceptTransferModes(TransferMode.MOVE);
 
             getController().getView().drawMarker((Button) dragEvent.getGestureSource(), dragEvent.getX(), dragEvent.getY());
+
+            dragEvent.consume();
         }
 
-        dragEvent.consume();
     }
 
     /**
@@ -60,7 +61,7 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
      */
     @Override
     public void dragEnteredTarget(final DragEvent dragEvent) {
-        System.out.println("drag ENTERED TARGET");
+        // System.out.println("drag ENTERED TARGET");
 
     }
 
@@ -69,9 +70,9 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
      */
     @Override
     public void dragEntered(final DragEvent dragEvent) {
-        System.out.println("drag ENTERED");
+        // System.out.println("drag ENTERED");
         if (dragEvent.getGestureSource() != getController().getView().getBox()
-                && dragEvent.getDragboard().hasContent(CustomDataFormat.TAB)) {
+                && dragEvent.getDragboard().hasContent(CustomDataFormat.DOCKABLE)) {
 
             // getController().getView().drawMarker(dragEvent.getX(), dragEvent.getY());
 
@@ -86,9 +87,9 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
      */
     @Override
     public void dragExited(final DragEvent dragEvent) {
-        System.out.println("drag EXITED");
+        // System.out.println("drag EXITED");
         if (dragEvent.getGestureSource() != getController().getView().getBox() &&
-                dragEvent.getDragboard().hasContent(CustomDataFormat.TAB)) {
+                dragEvent.getDragboard().hasContent(CustomDataFormat.DOCKABLE)) {
 
             getController().getView().removeMarker();
             // getController().getView().getBox().setBorder(null);
@@ -120,26 +121,27 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
     @Override
     public void dragDropped(final DragEvent dragEvent) {
 
-        System.out.println("drag DROPPED");
+        // System.out.println("drag DROPPED");
 
         /* data dropped */
         /* if there is a string data on dragboard, read it and use it */
         final Dragboard db = dragEvent.getDragboard();
         boolean success = false;
 
-        if (db.hasContent(CustomDataFormat.TAB)) {
+        if (db.hasContent(CustomDataFormat.DOCKABLE)) {
 
-            final TabBB t = (TabBB) db.getContent(CustomDataFormat.TAB);
-            final Button b = getController().getView().getButtonByTab(t);
+            final Dockable serializedTab = (Dockable) db.getContent(CustomDataFormat.DOCKABLE);
+            final Button b = getController().getView().getButtonByTab(serializedTab);
 
             final Pane targetBox = getController().getView().getBox();
 
             final int idx = getController().getView().removeMarker();
 
-            System.out.println("Add tab " + t.name() + " at " + idx);
+            System.out.println("Add tab " + serializedTab.name() + " at " + idx);
 
             if (targetBox.getChildren().contains(b)) {
 
+                final Dockable realTab = (Dockable) b.getUserData();
                 final int currentIdx = targetBox.getChildren().indexOf(b);
                 // if (currentIdx < idx) {
                 // idx--;
@@ -147,17 +149,26 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
                 // targetBox.getChildren().remove(b);
                 // targetBox.getChildren().add(idx, b);
                 // getController().getView().removeMarker();
+                if (currentIdx != idx) {
+                    getController().getModel().getObject().tabs().remove(realTab);
 
-                getController().getModel().getObject().tabs().remove(t);
-                getController().getModel().getObject().tabs().add(idx, t);
+                    getController().getModel().getObject().tabs().add(idx, realTab);
 
-                b.fire();
+                    b.fire();
+                }
             } else {
 
                 final Node n = (Node) dragEvent.getGestureSource();
-                ((Pane) n.getParent()).getChildren().remove(n);
 
-                getController().getModel().insertTab(idx, getController().getModel().getLocalFacade().retrieve((UniqueKey<Dockable>) t.modelKey()), null);
+                final ScaleTransition st = new ScaleTransition(Duration.millis(600));
+                st.setNode(n);
+                st.setFromX(1.0);
+                st.setToX(0.0);
+                st.setOnFinished(event -> ((Pane) n.getParent()).getChildren().remove(n));
+
+                st.play();
+
+                getController().getModel().insertTab(idx, serializedTab, null);
             }
             success = true;
         }
@@ -175,7 +186,7 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
     @Override
     public void dragDone(final DragEvent dragEvent) {
 
-        System.out.println("drag DONE");
+        // System.out.println("drag DONE");
 
         /* the drag and drop gesture ended */
         /* if the data was successfully moved, clear it */

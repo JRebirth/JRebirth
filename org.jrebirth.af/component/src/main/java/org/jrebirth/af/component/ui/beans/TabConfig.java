@@ -5,13 +5,15 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import org.jrebirth.af.component.behavior.dockable.data.Dockable;
+
 public class TabConfig {
 
     private String tabKey;
 
     private final ObjectProperty<TabOrientation> orientationPy = new SimpleObjectProperty<>(TabOrientation.top);
 
-    private final ObservableList<TabBB> tabs = FXCollections.observableArrayList();
+    private final ObservableList<Dockable> tabs = FXCollections.observableArrayList();
 
     public static TabConfig create() {
         return new TabConfig();
@@ -39,7 +41,7 @@ public class TabConfig {
         return this;
     }
 
-    public ObservableList<TabBB> tabs() {
+    public ObservableList<Dockable> tabs() {
         return this.tabs;
     }
 

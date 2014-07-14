@@ -4,7 +4,6 @@ import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.WaveItem;
 import org.jrebirth.af.core.wave.WaveType;
-import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  * The class <strong>StackWaves</strong>.
@@ -40,9 +39,9 @@ public interface StackWaves {
     /*****************************************************************************************************/
 
     /** Show Page (with Model) action. */
-    WaveType SHOW_PAGE_MODEL = WaveTypeBase.build("SHOW_PAGE_MODEL", PAGE_MODEL_KEY, STACK_NAME);
+    WaveType SHOW_PAGE_MODEL = WaveType.create("SHOW_PAGE_MODEL").items(PAGE_MODEL_KEY, STACK_NAME);
 
     /** Show Page (with Enum) action. */
-    WaveType SHOW_PAGE_ENUM = WaveTypeBase.build("SHOW_PAGE_ENUM", PAGE_ENUM/* , STACK_PAGES */);
+    WaveType SHOW_PAGE_ENUM = WaveType.create("SHOW_PAGE_ENUM").items(PAGE_ENUM/* , STACK_PAGES */);
 
 }

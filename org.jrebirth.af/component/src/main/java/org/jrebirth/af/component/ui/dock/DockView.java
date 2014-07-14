@@ -17,12 +17,16 @@
  */
 package org.jrebirth.af.component.ui.dock;
 
+import java.util.List;
+
+import javafx.geometry.Orientation;
 import javafx.scene.control.SplitPane;
 
+import org.jrebirth.af.component.ui.beans.TabConfig;
+import org.jrebirth.af.component.ui.tab.TabModel;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.ui.DefaultView;
 import org.jrebirth.af.core.ui.annotation.RootNodeClass;
 
@@ -34,7 +38,7 @@ import org.jrebirth.af.core.ui.annotation.RootNodeClass;
  * @author Sébastien Bordes
  */
 @RootNodeClass("DockPanel")
-public class DockView extends DefaultView<DockModel, SplitPane, DefaultController<DockModel, DockView>> {
+public class DockView extends DefaultView<DockModel, SplitPane, DockController> {
 
     /** The Constant LOGGER. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(DockView.class);
@@ -48,6 +52,37 @@ public class DockView extends DefaultView<DockModel, SplitPane, DefaultControlle
      */
     public DockView(final DockModel model) throws CoreException {
         super(model);
+    }
+
+    @Override
+    protected void initView() {
+        super.initView();
+
+        switch (getModel().getObject().orientation()) {
+            case horizontal:
+                getRootNode().setOrientation(Orientation.HORIZONTAL);
+                break;
+            case vertical:
+                getRootNode().setOrientation(Orientation.VERTICAL);
+                break;
+        }
+
+    }
+
+    void removeContainer(final List<TabConfig> removed) {
+
+        for (final TabConfig tabConfig : removed) {
+            final TabModel model = getModel().getModel(TabModel.class, tabConfig);
+
+            getRootNode().getItems().remove(model.getRootNode());
+        }
+    }
+
+    void addContainer(final int from, final TabConfig tabConfig) {
+
+        final TabModel model = getModel().getModel(TabModel.class, tabConfig);
+
+        getRootNode().getItems().add(model.getRootNode());
     }
 
 }

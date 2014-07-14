@@ -40,6 +40,8 @@ public enum JRebirthEventType {
     CREATE_SERVICE_FACADE,
     /** Create UI Facade class. */
     CREATE_UI_FACADE,
+    /** Create Behavior Facade class. */
+    CREATE_BEHAVIOR_FACADE,
     /** Create Command class. */
     CREATE_COMMAND,
     /** Create Service class. */
@@ -81,6 +83,6 @@ public enum JRebirthEventType {
     /** */
     DESTROY_CONTROLLER,
     /** */
-    DESTROY_WAVE,
+    DESTROY_WAVE
 
 }

@@ -21,17 +21,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.animation.ScaleTransition;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
-import org.jrebirth.af.component.ui.beans.TabBB;
+import org.jrebirth.af.component.behavior.dockable.DockableBehavior;
+import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.ui.beans.TabOrientation;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.log.JRLogger;
@@ -84,6 +89,16 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
     @Override
     protected void initView() {
 
+        initButtonBar();
+
+        this.stackPane = new StackPane();
+
+        getRootNode().setCenter(this.stackPane);
+
+    }
+
+    private void initButtonBar() {
+
         switch (getModel().getObject().orientation()) {
             case top:
                 getRootNode().setTop(buildButtonBar(true));
@@ -98,11 +113,16 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
                 getRootNode().setRight(buildButtonBar(false));
                 break;
         }
+    }
 
-        this.stackPane = new StackPane();
+    void reloadButtonBar() {
 
-        getRootNode().setCenter(this.stackPane);
+        getRootNode().setTop(null);
+        getRootNode().setBottom(null);
+        getRootNode().setLeft(null);
+        getRootNode().setRight(null);
 
+        initButtonBar();
     }
 
     /**
@@ -113,7 +133,18 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
      */
     private Pane buildButtonBar(final boolean isHorizontal) {
 
-        this.box = isHorizontal ? new HBox() : new VBox();
+        if (isHorizontal) {
+            this.box = new HBox();
+            this.box.setMaxWidth(Region.USE_COMPUTED_SIZE);
+
+            this.box.getStyleClass().add("HorizontalTabbedContainer");
+
+        } else {
+            this.box = new VBox();
+            this.box.setMaxHeight(Region.USE_COMPUTED_SIZE);
+
+            this.box.getStyleClass().add("VerticalTabbedContainer");
+        }
 
         return this.box;
     }
@@ -124,9 +155,9 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
      * @param idx the idx
      * @param tab the tab
      */
-    public void addTab(int idx, final TabBB tab) {
+    public void addTab(int idx, final Dockable tab) {
 
-        final Button b = new Button(tab.name());
+        final Button b = new Button(tab.name(), new ImageView(getModel().getBehavior(DockableBehavior.class).modelIcon()));
         b.setUserData(tab);
 
         this.buttonByTab.put(tab.name(), b);
@@ -139,14 +170,28 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
             idx = this.box.getChildren().size();
         }
 
+        b.setScaleX(0.0);
         this.box.getChildren().add(idx, b);
 
+        final ScaleTransition st = new ScaleTransition(Duration.millis(600));
+        st.setNode(b);
+        st.setFromX(0.0);
+        st.setToX(1.0);
+
+        st.play();
     }
 
-    public void removeTab(final List<TabBB> tabs) {
-        for (final TabBB tab : tabs) {
+    public void removeTab(final List<Dockable> tabs) {
+        for (final Dockable tab : tabs) {
             final Button b = this.buttonByTab.get(tab.name());
-            this.box.getChildren().remove(b);
+
+            final ScaleTransition st = new ScaleTransition(Duration.millis(600));
+            st.setNode(b);
+            st.setFromX(1.0);
+            st.setToX(0.0);
+            st.setOnFinished(event -> this.box.getChildren().remove(b));
+
+            st.play();
         }
     }
 
@@ -155,9 +200,11 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
      *
      * @param t the t
      */
-    void selectTab(final TabBB t) {
+    void selectTab(final Dockable t) {
+        // Remove all previously displayed children
         this.stackPane.getChildren().clear();
-        this.stackPane.getChildren().add(getModel().getLocalFacade().retrieve(t.modelKey()).getRootNode());
+        //
+        this.stackPane.getChildren().add(getModel().getModel(t.modelKey()).getRootNode());
     }
 
     /**
@@ -175,7 +222,7 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
      * @param t the t
      * @return the button by tab
      */
-    public Button getButtonByTab(final TabBB t) {
+    public Button getButtonByTab(final Dockable t) {
         return this.buttonByTab.get(t.name());
     }
 
@@ -222,9 +269,9 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
                 this.marker = getModel().getObject().orientation() == TabOrientation.bottom || getModel().getObject().orientation() == TabOrientation.top ?
                         new Rectangle(10, getBox().getHeight()) : new Rectangle(getBox().getWidth(), 4);
 
-                this.marker.setFill(Color.LIGHTGREEN);
+                        this.marker.setFill(Color.LIGHTGREEN);
 
-                getBox().getChildren().add(idx, this.marker);
+                        getBox().getChildren().add(idx, this.marker);
             }
         }
 

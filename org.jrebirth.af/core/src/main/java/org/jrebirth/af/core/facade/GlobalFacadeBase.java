@@ -21,6 +21,8 @@ import org.jrebirth.af.core.application.AbstractApplication;
 import org.jrebirth.af.core.application.JRebirthApplication;
 import org.jrebirth.af.core.concurrent.JRebirthThreadPoolExecutor;
 import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.facade.factory.ComponentFactory;
+import org.jrebirth.af.core.facade.factory.DefaultComponentFactory;
 import org.jrebirth.af.core.link.Notifier;
 import org.jrebirth.af.core.link.NotifierBase;
 import org.jrebirth.af.core.log.JRLogger;
@@ -66,6 +68,9 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
 
     /** The facade for Commands components. */
     private final transient CommandFacade commandFacade;
+
+    /** The facade for Behaviors components. */
+    private final transient BehaviorFacade behaviorFacade;
 
     /** The default executor. */
     private final JRebirthThreadPoolExecutor executorService;
@@ -127,6 +132,10 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
         // Build the Ui Facade
         this.uiFacade = buildUiFacade();
         trackEvent(JRebirthEventType.CREATE_UI_FACADE, getClass(), this.uiFacade.getClass());
+
+        // Build the Behavior Facade
+        this.behaviorFacade = buildBehaviorFacade();
+        trackEvent(JRebirthEventType.CREATE_BEHAVIOR_FACADE, getClass(), this.behaviorFacade.getClass());
     }
 
     /**
@@ -137,8 +146,8 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
         if (LOGGER.isInfoEnabled()) {
             final JRebirthEvent event = new JRebirthEventBase(this.eventSequence++, eventType,
                     source == null ? null : source.getCanonicalName(),
-                    target == null ? null : target.getCanonicalName()
-                    , eventData);
+                            target == null ? null : target.getCanonicalName()
+                                    , eventData);
             LOGGER.info(JREBIRTH_EVENT, event);
         }
     }
@@ -189,6 +198,14 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
     @Override
     public final CommandFacade getCommandFacade() {
         return this.commandFacade;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final BehaviorFacade getBehaviorFacade() {
+        return this.behaviorFacade;
     }
 
     /**
@@ -265,6 +282,17 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      */
     protected UiFacade buildUiFacade() {
         return new UiFacade(this);
+    }
+
+    /**
+     * Build the BehaviorFacade singleton to use.
+     *
+     * Can be overridden by sub class to customize its facade behaviors.
+     *
+     * @return the behaviors facade
+     */
+    protected BehaviorFacade buildBehaviorFacade() {
+        return new BehaviorFacade(this);
     }
 
     /**

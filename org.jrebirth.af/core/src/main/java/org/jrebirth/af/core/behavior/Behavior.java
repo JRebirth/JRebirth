@@ -1,9 +1,11 @@
 package org.jrebirth.af.core.behavior;
 
-public interface Behavior<BB extends BehaviorBean> {
+import org.jrebirth.af.core.facade.WaveReady;
 
-    default BB getBean() {
-        return null;
-    }
+public interface Behavior<D extends BehaviorData> extends WaveReady<Behavior<?>> {
+
+    D getData();
+
+    WaveReady<?> getComponent();
 
 }
