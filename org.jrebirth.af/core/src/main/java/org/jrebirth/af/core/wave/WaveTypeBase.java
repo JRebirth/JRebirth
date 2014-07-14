@@ -19,10 +19,7 @@ package org.jrebirth.af.core.wave;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.util.ObjectUtility;
@@ -34,23 +31,27 @@ import org.jrebirth.af.core.util.ObjectUtility;
  */
 public final class WaveTypeBase implements WaveType {
 
-    /** The generator of unique id. */
-    private static int idGenerator;
-
-    /** Map that store WaveType used according to their unique identifier. */
-    private static Map<String, WaveType> waveTypeMap = Collections.synchronizedMap(new HashMap<String, WaveType>());
-
     /** The unique identifier of the wave type. */
     private int uid;
 
     /** The action to performed, basically the name of the method to call. */
-    private final String action;
+    private String action;
+
+    /** Define arguments types to use. */
+    private final List<WaveItem<?>> waveItemList = new ArrayList<>();
+
+    /** The action called after, basically the name of the method to call. */
+    private String returnAction;
+
+    /** Define returned value type (if any). */
+    private WaveItem<?> returnItem;
 
     /** The wave type of the wave returned after processing. */
     private WaveType returnWaveType;
 
-    /** Define arguments types to use. */
-    private final List<WaveItem<?>> waveItemList = new ArrayList<>();
+    public static WaveType create() {
+        return new WaveTypeBase();
+    }
 
     /**
      * Default constructor.
@@ -59,74 +60,10 @@ public final class WaveTypeBase implements WaveType {
      *
      * @param waveItems the list of #WaveItem{@link WaveItem} required by this wave
      */
-    private WaveTypeBase(final String action, final WaveItem<?>... waveItems) {
-
-        // The action name will be used to define the name of the wave handler method
-        // Prepend do the the action name to force wave handler method to begin with do (convention parameterizable)
-        this.action = JRebirthParameters.WAVE_HANDLER_PREFIX.get() + action;
-
-        // Add each wave item to manage method argument
-        for (final WaveItem<?> waveItem : waveItems) {
-            this.waveItemList.add(waveItem);
-        }
-    }
-
-    /**
-     * Build a wave type.
-     *
-     * @param action The action to perform, "DO_" keyword (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to generate the handler method
-     *
-     * @param waveItems the list of {@link WaveItem} required by this wave
-     *
-     * @return a new fresh wave type object
-     */
-    public static WaveTypeBase build(final String action, final WaveItem<?>... waveItems) {
-        final WaveTypeBase waveType = new WaveTypeBase(action, waveItems);
+    private WaveTypeBase() {
 
         // Ensure that the uid will be unique at runtime
-        synchronized (WaveTypeBase.class) {
-            waveType.setUid(++idGenerator);
-        }
-
-        // it uses action without any prefix
-        if (!waveTypeMap.containsKey(action)) {
-            waveTypeMap.put(action, waveType);
-        }
-
-        return waveType;
-    }
-
-    /**
-     * Retrieve a WaveType according to its unique action name.
-     *
-     * Be careful it could return null if the {@link WaveType} has not been initialized yet.
-     *
-     * @param action the unique action name used to register the WaveType
-     *
-     * @return the WaveType found into registry or null
-     */
-    public static WaveType getWaveType(final String action) {
-
-        WaveType waveType = null;
-        if (waveTypeMap.containsKey(action)) {
-            waveType = waveTypeMap.get(action);
-        }
-        return waveType;
-    }
-
-    /**
-     * Build a wave type.
-     *
-     * @param action The action to perform "DO_" (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) keyword will be prepended to the action name to generate the handler method
-     * @param returnWaveType the return wave Type to call after having processing the current
-     * @param waveItems the list of {@link WaveItem} required by this wave
-     *
-     * @return a new fresh wave type object
-     */
-    public static WaveTypeBase build(final String action, final WaveType returnWaveType, final WaveItem<?>... waveItems) {
-        final WaveTypeBase waveType = build(action, waveItems);
-        waveType.setReturnWaveType(waveType);
-        return waveType;
+        uid(WaveTypeRegistry.getNextUid());
     }
 
     /**
@@ -134,7 +71,8 @@ public final class WaveTypeBase implements WaveType {
      *
      * @return Returns the uid.
      */
-    public int getUid() {
+    @Override
+    public int uid() {
         return this.uid;
     }
 
@@ -143,8 +81,10 @@ public final class WaveTypeBase implements WaveType {
      *
      * @param uid The uid to set.
      */
-    public void setUid(final int uid) {
+    @Override
+    public WaveType uid(final int uid) {
         this.uid = uid;
+        return this;
     }
 
     /**
@@ -152,8 +92,26 @@ public final class WaveTypeBase implements WaveType {
      *
      * @return Returns the action.
      */
-    public String getAction() {
+    @Override
+    public String action() {
         return this.action;
+    }
+
+    /**
+     * Sets the uid.
+     *
+     * @param uid The uid to set.
+     */
+    @Override
+    public WaveType action(final String action) {
+
+        WaveTypeRegistry.store(action, this);
+
+        // The action name will be used to define the name of the wave handler method
+        // Prepend do the the action name to force wave handler method to begin with do (convention parameterizable)
+        this.action = JRebirthParameters.WAVE_HANDLER_PREFIX.get() + action;
+
+        return this;
     }
 
     /**
@@ -161,8 +119,69 @@ public final class WaveTypeBase implements WaveType {
      *
      * @return Returns the waveItemList.
      */
-    public List<WaveItem<?>> getWaveItemList() {
+    @Override
+    public List<WaveItem<?>> items() {
         return this.waveItemList;
+    }
+
+    @Override
+    public WaveType items(final WaveItem<?>... items) {
+        // Add each wave item to manage method argument
+        for (final WaveItem<?> waveItem : items) {
+            this.waveItemList.add(waveItem);
+        }
+        return this;
+    }
+
+    /**
+     * Gets the action.
+     *
+     * @return Returns the action.
+     */
+    @Override
+    public String returnAction() {
+        return this.returnAction;
+    }
+
+    /**
+     * Sets the uid.
+     *
+     * @param uid The uid to set.
+     */
+    @Override
+    public WaveType returnAction(final String returnAction) {
+        this.returnAction = returnAction;
+        buildReturnWaveType();
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public WaveItem<?> returnItem() {
+        return this.returnItem;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public WaveType returnItem(final WaveItem<?> returnItem) {
+        this.returnItem = returnItem;
+        buildReturnWaveType();
+        return this;
+    }
+
+    private void buildReturnWaveType() {
+        if (this.returnAction != null && this.returnItem != null) {
+            this.returnWaveType = WaveType.create(this.returnAction).items(returnItem());
+        }
+    }
+
+    @Override
+    public WaveType returnWaveType() {
+        return this.returnWaveType;
     }
 
     /**
@@ -173,7 +192,7 @@ public final class WaveTypeBase implements WaveType {
     public String getItems() {
         final StringBuilder sb = new StringBuilder();
         boolean first = true;
-        for (final WaveItem<?> waveItem : getWaveItemList()) {
+        for (final WaveItem<?> waveItem : items()) {
             if (first) {
                 first = false;
             } else {
@@ -193,23 +212,23 @@ public final class WaveTypeBase implements WaveType {
         return sb.toString();
     }
 
-    /**
-     * Gets the return wave type.
-     *
-     * @return the return wave type
-     */
-    public WaveType getReturnWaveType() {
-        return this.returnWaveType;
-    }
-
-    /**
-     * Sets the return wave type.
-     *
-     * @param returnWaveType the new return wave type
-     */
-    public void setReturnWaveType(final WaveType returnWaveType) {
-        this.returnWaveType = returnWaveType;
-    }
+    // /**
+    // * Gets the return wave type.
+    // *
+    // * @return the return wave type
+    // */
+    // public WaveType getReturnWaveType() {
+    // return this.returnWaveType;
+    // }
+    //
+    // /**
+    // * Sets the return wave type.
+    // *
+    // * @param returnWaveType the new return wave type
+    // */
+    // public void setReturnWaveType(final WaveType returnWaveType) {
+    // this.returnWaveType = returnWaveType;
+    // }
 
     /**
      * {@inheritDoc}
@@ -224,7 +243,7 @@ public final class WaveTypeBase implements WaveType {
      */
     @Override
     public boolean equals(final Object waveType) {
-        return waveType instanceof WaveTypeBase && getUid() == ((WaveTypeBase) waveType).getUid();
+        return waveType instanceof WaveTypeBase && uid() == ((WaveTypeBase) waveType).uid();
     }
 
     /**
@@ -232,7 +251,7 @@ public final class WaveTypeBase implements WaveType {
      */
     @Override
     public int hashCode() {
-        return getUid();
+        return uid();
     }
 
 }

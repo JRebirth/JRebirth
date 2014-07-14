@@ -17,6 +17,10 @@
  */
 package org.jrebirth.af.core.wave;
 
+import java.util.List;
+
+import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+
 /**
  *
  * The interface <strong>WaveType</strong>.
@@ -26,6 +30,28 @@ package org.jrebirth.af.core.wave;
  * @author Sébastien Bordes
  */
 public interface WaveType {
+
+    int uid();
+
+    WaveType uid(int uid);
+
+    String action();
+
+    WaveType action(String action);
+
+    List<WaveItem<?>> items();
+
+    WaveType items(WaveItem<?>... items);
+
+    String returnAction();
+
+    WaveType returnAction(String action);
+
+    WaveItem<?> returnItem();
+
+    WaveType returnItem(WaveItem<?> returnItem);
+
+    WaveType returnWaveType();
 
     /**
      * Return the name of the wave type, commonly bound on enum.name() method.
@@ -40,5 +66,34 @@ public interface WaveType {
      * @return a method name or null
      */
     // String getAction();
+
+    /**
+     * Build a wave type.
+     *
+     * @param action The action to perform, "DO_" keyword (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to generate the handler method
+     *
+     * @param waveItems the list of {@link WaveItem} required by this wave
+     *
+     * @return a new fresh wave type object
+     */
+    static WaveType create(final String action/* , final WaveItem<?>... waveItems */) {
+
+        return WaveTypeBase.create().action(action/* , waveItems */);
+    }
+
+    // /**
+    // * Build a wave type.
+    // *
+    // * @param action The action to perform "DO_" (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) keyword will be prepended to the action name to generate the handler method
+    // * @param returnWaveType the return wave Type to call after having processing the current
+    // * @param waveItems the list of {@link WaveItem} required by this wave
+    // *
+    // * @return a new fresh wave type object
+    // */
+    // static WaveTypeBase create(final String action, final WaveType returnWaveType, final WaveItem<?>... waveItems) {
+    // final WaveTypeBase waveType = create(action, waveItems);
+    // waveType.setReturnWaveType(waveType);
+    // return waveType;
+    // }
 
 }

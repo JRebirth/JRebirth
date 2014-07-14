@@ -18,7 +18,6 @@
 package org.jrebirth.af.core.wave;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -112,7 +111,7 @@ public class WaveBase implements Wave, LinkMessages {
         // Generate a random but unique identifier
         this.wuid = UUID.randomUUID().toString();
         // Store the creation date
-        this.timestamp = Calendar.getInstance().getTimeInMillis();
+        this.timestamp = System.currentTimeMillis();
     }
 
     /**
