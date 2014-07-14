@@ -20,9 +20,8 @@ package org.jrebirth.af.core.facade;
 import java.lang.reflect.Method;
 
 import org.jrebirth.af.core.behavior.Behavior;
-import org.jrebirth.af.core.behavior.BehaviorBean;
+import org.jrebirth.af.core.behavior.BehaviorData;
 import org.jrebirth.af.core.command.Command;
-import org.jrebirth.af.core.exception.WaveException;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.core.wave.WaveType;
@@ -83,7 +82,7 @@ public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
      * @param responseType the wave type of the wave emitted in return
      * @param returnCommandClass the command class to call to process the service result
      */
-    void registerCallback(final WaveChecker waveChecker, final WaveType callType, final WaveType responseType, Class<? extends Command> returnCommandClass);
+    void registerCallback(final WaveChecker waveChecker, final WaveType callType/* , final WaveType responseType */, Class<? extends Command> returnCommandClass);
 
     /**
      * Register a wave call back contract.
@@ -94,7 +93,7 @@ public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
      * @param responseType the wave type of the wave emitted in return
      * @param returnCommandClass the command class to call to process the service result
      */
-    void registerCallback(final WaveType callType, final WaveType responseType, Class<? extends Command> returnCommandClass);
+    void registerCallback(final WaveType callType/* , final WaveType responseType */, Class<? extends Command> returnCommandClass);
 
     /**
      * Register a wave call back contract.
@@ -104,7 +103,7 @@ public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
      * @param callType the wave type mapped to this service.
      * @param responseType the wave type of the wave emitted in return
      */
-    void registerCallback(final WaveType callType, final WaveType responseType);
+    // void registerCallback(final WaveType callType, final WaveType responseType);
 
     /**
      * Stop to listen the type of wave for the current component.
@@ -141,7 +140,7 @@ public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
      *
      * @return Returns the waveType for return wave.
      */
-    WaveType getReturnWaveType(final WaveType waveType);
+    // WaveType getReturnWaveType(final WaveType waveType);
 
     /**
      * Return the return Command to call for given wave type.
@@ -161,5 +160,39 @@ public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
      */
     // void handle(final Wave wave) throws WaveException;
 
-    BehaviorBean getBehaviorBean(Class<Behavior<BehaviorBean>> behavior);
+    /**
+     *
+     * @param behaviorClass
+     *
+     * @return
+     */
+    boolean hasBehavior(Class<Behavior<?>> behaviorClass);
+
+    /**
+     *
+     * @param data
+     */
+    <BD extends BehaviorData, B extends Behavior<BD>> R addBehavior(Class<B> behaviorClass);
+
+    /**
+     *
+     * @param data
+     */
+    <BD extends BehaviorData, B extends Behavior<BD>> R addBehavior(BD data);
+
+    /**
+     *
+     * @param behaviorClass
+     *
+     * @return
+     */
+    <BD extends BehaviorData, B extends Behavior<BD>> BD getBehaviorData(Class<B> behaviorClass);
+
+    /**
+     *
+     * @param behaviorClass
+     * @return
+     */
+    <BD extends BehaviorData, B extends Behavior<BD>> B getBehavior(Class<B> behaviorClass);
+
 }

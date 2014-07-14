@@ -1,6 +1,8 @@
-package org.jrebirth.af.core.facade;
+package org.jrebirth.af.core.facade.factory;
 
 import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.facade.FacadeReady;
+import org.jrebirth.af.core.facade.WaveReady;
 
 /**
  * The interface <strong>ComponentFactory</strong> is used to build Component (Model, Service, Command) classes.
@@ -8,6 +10,14 @@ import org.jrebirth.af.core.exception.CoreException;
  * @author Sébastien Bordes
  */
 public interface ComponentFactory {
+
+    /**
+     * .
+     *
+     * @param interfaceClass
+     * @param implClass
+     */
+    void register(Class<? extends WaveReady<?>> interfaceClass, Class<? extends WaveReady<?>> implClass);
 
     /**
      * Build a fresh instance of a component.<br />
