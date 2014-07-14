@@ -21,7 +21,7 @@ public class ApplicationTest<A extends DefaultApplication<?>> {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @Before
@@ -31,7 +31,7 @@ public class ApplicationTest<A extends DefaultApplication<?>> {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @After

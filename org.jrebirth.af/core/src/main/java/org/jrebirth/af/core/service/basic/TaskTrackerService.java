@@ -26,6 +26,7 @@ import javafx.event.EventHandler;
 
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.service.ServiceTask;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

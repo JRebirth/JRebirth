@@ -14,6 +14,7 @@ import org.jrebirth.af.core.service.basic.StageService;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveListener;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -24,7 +25,7 @@ import org.junit.Test;
 
 /**
  * The class <strong>StageTest</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 @Ignore("JavaFX can't be run in headless mode yet")
@@ -36,7 +37,7 @@ public class StageTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @BeforeClass
@@ -57,7 +58,7 @@ public class StageTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @Before
@@ -71,10 +72,10 @@ public class StageTest {
     public void openDefaultStage() {
 
         final String stageKey = "defaultStage";
-        final Wave wave =  WaveBase.callCommand(StageCommand.class)
-        		.waveBean(StageWaveBean.create()
-                .action(StageAction.show)
-                .stageKey(stageKey));
+        final Wave wave = WaveBase.callCommand(StageCommand.class)
+                .waveBean(StageWaveBean.create()
+                        .action(StageAction.show)
+                        .stageKey(stageKey));
 
         wave.addWaveListener(new WaveListener() {
 
@@ -139,7 +140,7 @@ public class StageTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @After
@@ -149,7 +150,7 @@ public class StageTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @AfterClass

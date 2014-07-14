@@ -9,19 +9,19 @@ public abstract class AbstractRef<R extends AbstractRef<R>> implements Ref {
     private RunnablePriority priority;
 
     public RunType runInto() {
-        return runType;
+        return this.runType;
     }
 
-    public R runInto(RunType runType) {
+    public R runInto(final RunType runType) {
         this.runType = runType;
         return (R) this;
     }
 
     public RunnablePriority priority() {
-        return priority;
+        return this.priority;
     }
 
-    public R priority(RunnablePriority priority) {
+    public R priority(final RunnablePriority priority) {
         this.priority = priority;
         return (R) this;
     }

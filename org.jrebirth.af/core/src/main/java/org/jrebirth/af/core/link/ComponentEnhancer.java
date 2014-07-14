@@ -28,6 +28,7 @@ import org.jrebirth.af.core.annotation.OnRelease;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.facade.FacadeReady;
 import org.jrebirth.af.core.facade.WaveReady;
 import org.jrebirth.af.core.service.Service;
@@ -36,7 +37,7 @@ import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.MultiMap;
 import org.jrebirth.af.core.wave.OnWave;
 import org.jrebirth.af.core.wave.WaveType;
-import org.jrebirth.af.core.wave.WaveTypeBase;
+import org.jrebirth.af.core.wave.WaveTypeRegistry;
 
 /**
  * The class <strong>ComponentEnhancer</strong> is an utility class used to manage Components Annotations.
@@ -134,7 +135,7 @@ public class ComponentEnhancer {
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), annotationClass)) {
 
             //
-            lifecycleMethod.putItem(annotationClass.getName(), method); // TODO sort
+            lifecycleMethod.add(annotationClass.getName(), method); // TODO sort
         }
     }
 
@@ -169,7 +170,7 @@ public class ComponentEnhancer {
     private static void manageUniqueWaveTypeAction(final WaveReady<?> component, final String waveActionName, final Method method) {
 
         // Get the WaveType from the WaveType registry
-        final WaveType wt = WaveTypeBase.getWaveType(waveActionName);
+        final WaveType wt = WaveTypeRegistry.getWaveType(waveActionName);
         if (wt != null) {
             // Method is not defined or is the default fallback one
             if (method == null || AbstractWaveReady.PROCESS_WAVE_METHOD_NAME.equals(method.getName())) {
@@ -179,6 +180,8 @@ public class ComponentEnhancer {
                 // Listen the WaveType and specify the right method handler
                 component.listen(null, method, wt);
             }
+        } else {
+            throw new CoreRuntimeException("WaveType '" + waveActionName + "' not found into WaveTypeRegistry.");
         }
     }
 

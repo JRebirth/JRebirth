@@ -25,6 +25,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 import org.jrebirth.af.core.util.ObjectUtility;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -189,6 +190,23 @@ public abstract class AbstractBaseParams implements ResourceParams {
     @Override
     public String toString() {
         return getKey();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        // The key is never null, return its hashCode
+        return getKey().hashCode();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object params) {
+        return params == null && !(params instanceof AbstractBaseParams) ? false : getKey().equals(((AbstractBaseParams) params).getKey());
     }
 
     /**

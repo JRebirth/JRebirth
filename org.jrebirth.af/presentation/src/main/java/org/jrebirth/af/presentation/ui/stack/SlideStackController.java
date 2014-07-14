@@ -18,7 +18,6 @@
 package org.jrebirth.af.presentation.ui.stack;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Control;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -28,10 +27,8 @@ import javafx.scene.input.SwipeEvent;
 import javafx.scene.web.WebView;
 
 import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.ui.AbstractController;
+import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.ui.adapter.ActionAdapter;
-import org.jrebirth.af.core.ui.adapter.DefaultKeyAdapter;
-import org.jrebirth.af.core.ui.adapter.DefaultMouseAdapter;
 import org.jrebirth.af.presentation.command.ShowNextSlideCommand;
 import org.jrebirth.af.presentation.command.ShowPreviousSlideCommand;
 import org.jrebirth.af.presentation.command.ShowSlideMenuCommand;
@@ -42,7 +39,7 @@ import org.jrebirth.af.presentation.command.ShowSlideMenuCommand;
  * @author Sébastien Bordes
  * 
  */
-public final class SlideStackController extends AbstractController<SlideStackModel, SlideStackView> implements ActionAdapter {
+public final class SlideStackController extends DefaultController<SlideStackModel, SlideStackView> implements ActionAdapter {
 
     /**
      * Default Constructor.
@@ -55,17 +52,17 @@ public final class SlideStackController extends AbstractController<SlideStackMod
         super(view);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initEventAdapters() throws CoreException {
-
-        // Use the inner class
-        addAdapter(new SlideKeyAdapter());
-        // Use the inner class
-        addAdapter(new SlideMouseAdapter());
-    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // protected void initEventAdapters() throws CoreException {
+    //
+    // // Use the inner class
+    // addAdapter(new SlideKeyAdapter());
+    // // Use the inner class
+    // addAdapter(new SlideMouseAdapter());
+    // }
 
     /**
      * {@inheritDoc}
@@ -74,90 +71,153 @@ public final class SlideStackController extends AbstractController<SlideStackMod
     protected void initEventHandlers() throws CoreException {
 
         // Listen keys event on the root node
-        getRootNode().setOnKeyPressed(getHandler(KeyEvent.KEY_PRESSED));
+        getView().getCircle().setOnAction(getHandler(ActionEvent.ACTION));
 
-        // Listen mouse event on the root node
-        getRootNode().setOnMousePressed(getHandler(MouseEvent.MOUSE_PRESSED));
+    }
 
-        getRootNode().setOnSwipeLeft(new EventHandler<SwipeEvent>() {
+    // Listen mouse event on the root node
+    // getRootNode().setOnMouseReleased(getHandler(MouseEvent.MOUSE_RELEASED));
+    //
+    // // getRootNode().setOnSwipeLeft(new EventHandler<SwipeEvent>() {
+    // //
+    // // @Override
+    // // public void handle(final SwipeEvent swipeEvent) {
+    // // getModel().callCommand(ShowNextSlideCommand.class);
+    // // swipeEvent.consume();
+    // // }
+    // // });
+    // //
+    // // getRootNode().setOnSwipeRight(new EventHandler<SwipeEvent>() {
+    // //
+    // // @Override
+    // // public void handle(final SwipeEvent swipeEvent) {
+    // // getModel().callCommand(ShowPreviousSlideCommand.class);
+    // // swipeEvent.consume();
+    // // }
+    // // });
+    // }
 
-            @Override
-            public void handle(final SwipeEvent swipeEvent) {
-                getModel().callCommand(ShowNextSlideCommand.class);
-                swipeEvent.consume();
-            }
-        });
-
-        getRootNode().setOnSwipeRight(new EventHandler<SwipeEvent>() {
-
-            @Override
-            public void handle(final SwipeEvent swipeEvent) {
-                getModel().callCommand(ShowPreviousSlideCommand.class);
-                swipeEvent.consume();
-            }
-        });
+    /**
+     * .
+     * 
+     * @param keyEvent
+     */
+    protected void onKeyPressed(final KeyEvent keyEvent) {
+        System.out.println("Key " + keyEvent);
+        if (keyEvent.getCode() == KeyCode.PAGE_DOWN) {
+            getModel().callCommand(ShowNextSlideCommand.class);
+            keyEvent.consume();
+        } else if (keyEvent.getCode() == KeyCode.PAGE_UP) {
+            getModel().callCommand(ShowPreviousSlideCommand.class);
+            keyEvent.consume();
+        }
     }
 
     /**
+     * .
      * 
-     * The class <strong>SlideKeyAdapter</strong>.
-     * 
-     * @author Sébastien Bordes
+     * @param mouseEvent
      */
-    private class SlideKeyAdapter extends DefaultKeyAdapter<SlideStackController> {
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void keyPressed(final KeyEvent keyEvent) {
-
-            if (keyEvent.getCode() == KeyCode.PAGE_DOWN) {
+    protected void onMouseReleased(final MouseEvent mouseEvent) {
+        System.out.println("Mouse " + mouseEvent);
+        if (!(mouseEvent.getTarget() instanceof Control) && !(mouseEvent.getTarget() instanceof WebView)) {
+            if (mouseEvent.getButton() == MouseButton.PRIMARY) {
                 getModel().callCommand(ShowNextSlideCommand.class);
-                keyEvent.consume();
-            } else if (keyEvent.getCode() == KeyCode.PAGE_UP) {
+                mouseEvent.consume();
+            } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 getModel().callCommand(ShowPreviousSlideCommand.class);
-                keyEvent.consume();
+                mouseEvent.consume();
+            } else if (mouseEvent.getButton() == MouseButton.MIDDLE) {
+                getModel().callCommand(ShowSlideMenuCommand.class);
+                mouseEvent.consume();
             }
         }
     }
 
     /**
+     * .
      * 
-     * The class <strong>SlideMouseAdapter</strong>.
-     * 
-     * @author Sébastien Bordes
+     * @param swipeEvent
      */
-    private class SlideMouseAdapter extends DefaultMouseAdapter<SlideStackController> {
+    protected void onSwipeLeft(SwipeEvent swipeEvent) {
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void mousePressed(final MouseEvent mouseEvent) {
-            if (!(mouseEvent.getTarget() instanceof Control) && !(mouseEvent.getTarget() instanceof WebView)) {
-                if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-                    getModel().callCommand(ShowNextSlideCommand.class);
-                    mouseEvent.consume();
-                } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                    getModel().callCommand(ShowPreviousSlideCommand.class);
-                    mouseEvent.consume();
-                } else if (mouseEvent.getButton() == MouseButton.MIDDLE) {
-                    getModel().callCommand(ShowSlideMenuCommand.class);
-                    mouseEvent.consume();
-                }
-            }
-        }
+        System.out.println("swipe left");
+        getView().getCircle().fireEvent(new ActionEvent());
 
+        getModel().callCommand(ShowNextSlideCommand.class);
+        swipeEvent.consume();
+    }
+
+    /**
+     * .
+     * 
+     * @param swipeEvent
+     */
+    protected void onSwipeRight(SwipeEvent swipeEvent) {
+        System.out.println("swipe right");
+        getModel().callCommand(ShowPreviousSlideCommand.class);
+        swipeEvent.consume();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void action(final ActionEvent actionEvent) {
-        // Nothing to do yet
-
+    public void action(ActionEvent actionEvent) {
+        System.err.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     }
+
+    // /**
+    // *
+    // * The class <strong>SlideKeyAdapter</strong>.
+    // *
+    // * @author Sébastien Bordes
+    // */
+    // private class SlideKeyAdapter extends DefaultKeyAdapter<SlideStackController> {
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void keyPressed(final KeyEvent keyEvent) {
+    //
+    // if (keyEvent.getCode() == KeyCode.PAGE_DOWN) {
+    // getModel().callCommand(ShowNextSlideCommand.class);
+    // keyEvent.consume();
+    // } else if (keyEvent.getCode() == KeyCode.PAGE_UP) {
+    // getModel().callCommand(ShowPreviousSlideCommand.class);
+    // keyEvent.consume();
+    // }
+    // }
+    // }
+    //
+    // /**
+    // *
+    // * The class <strong>SlideMouseAdapter</strong>.
+    // *
+    // * @author Sébastien Bordes
+    // */
+    // private class SlideMouseAdapter extends DefaultMouseAdapter<SlideStackController> {
+    //
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mouseReleased(final MouseEvent mouseEvent) {
+    // if (!(mouseEvent.getTarget() instanceof Control) && !(mouseEvent.getTarget() instanceof WebView)) {
+    // if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+    // getModel().callCommand(ShowNextSlideCommand.class);
+    // mouseEvent.consume();
+    // } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+    // getModel().callCommand(ShowPreviousSlideCommand.class);
+    // mouseEvent.consume();
+    // } else if (mouseEvent.getButton() == MouseButton.MIDDLE) {
+    // getModel().callCommand(ShowSlideMenuCommand.class);
+    // mouseEvent.consume();
+    // }
+    // }
+    // }
+    //
+    // }
 
 }

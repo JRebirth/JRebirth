@@ -1,5 +1,7 @@
 package org.jrebirth.af.core.concurrent;
 
+import java.time.Instant;
+
 /**
  * The class <strong>JRebirthRunnable</strong>.
  *
@@ -19,5 +21,5 @@ public interface JRebirthRunnable extends Runnable {
      *
      * @return the creation time in milliseconds
      */
-    long getCreationTime();
+    Instant getCreationTime();
 }

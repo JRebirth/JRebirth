@@ -57,8 +57,8 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
      * @param classField the descriptive class object
      * @param keyPart a list of immutable objects that guarantee component unicity
      */
-    public MultitonKey(final Class<R> classField, final Object... keyPart) {
-        super(classField);
+    public MultitonKey(final Class<R> classField, final Object[] keyPart, final Object... optionalData) {
+        super(classField, optionalData);
 
         // Store all keys
         for (final Object k : keyPart) {

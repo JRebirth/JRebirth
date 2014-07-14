@@ -46,7 +46,7 @@ public class JRebirthRunnableComparator implements Comparator<Runnable>, Seriali
             res = -1;
         } else if (jrr1.getPriority().getLevel() == jrr2.getPriority().getLevel()) {
             // Compare creation time
-            res = ((Long) jrr1.getCreationTime()).compareTo(jrr2.getCreationTime());
+            res = jrr1.getCreationTime().compareTo(jrr2.getCreationTime());
         } else {
             res = ((Integer) jrr1.getPriority().getLevel()).compareTo(jrr2.getPriority().getLevel()) * -1;
         }

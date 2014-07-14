@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -40,18 +40,18 @@ import org.jrebirth.af.showcase.analyzer.ui.workbench.WorkbenchModel;
 
 /**
  * The class <strong>JRebirthAnalyzer</strong>.
- * 
+ *
  * The application that demonstrate how to use JRebirth Framework.
- * 
+ *
  * It also allows showing all JRebirth events.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
 
     /**
      * Application launcher.
-     * 
+     *
      * @param args the command line arguments
      */
     public static void main(final String... args) {
@@ -112,10 +112,10 @@ public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
                 // Call the service that will load and parse the log file
                 waveList.add(
                         WaveBase.create()
-                                .waveGroup(WaveGroup.RETURN_DATA)
-                                .waveType(LoadEdtFileService.DO_LOAD_EVENTS)
-                                .componentClass(LoadEdtFileService.class)
-                                .addDatas(WaveData.build(EditorWaves.EVENTS_FILE, logFile))
+                        .waveGroup(WaveGroup.RETURN_DATA)
+                        .waveType(LoadEdtFileService.DO_LOAD_EVENTS)
+                        .componentClass(LoadEdtFileService.class)
+                        .addDatas(WaveData.build(EditorWaves.EVENTS_FILE, logFile))
                         );
 
                 // Start the animation to show all components creation

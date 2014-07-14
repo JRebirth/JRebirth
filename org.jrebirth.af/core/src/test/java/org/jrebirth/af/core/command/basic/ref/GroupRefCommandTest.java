@@ -11,7 +11,7 @@ import org.junit.Test;
 
 /**
  * The class <strong>GroupRefCommandTest</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class GroupRefCommandTest extends BasicCommandTest {
@@ -20,20 +20,20 @@ public class GroupRefCommandTest extends BasicCommandTest {
     public void groupRefTest1() {
         System.out.println("Sequential Test default");
 
-        Ref ref = Ref.group()
+        final Ref ref = Ref.group()
                 .sequential(true)
                 .runInto(RunType.JTP)
                 .priority(RunnablePriority.Highest)
                 .add(
                         Ref.single()
-                                .priority(RunnablePriority.Highest)
-                                .runInto(RunType.JTP)
-                                .run(this::sayHello),
+                        .priority(RunnablePriority.Highest)
+                        .runInto(RunType.JTP)
+                        .run(this::sayHello),
                         Ref.single()
-                                .priority(RunnablePriority.Highest)
-                                .runInto(RunType.JTP)
-                                .runWave(this::sayHelloWave)
-                );
+                        .priority(RunnablePriority.Highest)
+                        .runInto(RunType.JTP)
+                        .runWave(this::sayHelloWave)
+                        );
 
         runCommand(GroupRefCommand.class, ref);
     }
@@ -42,7 +42,7 @@ public class GroupRefCommandTest extends BasicCommandTest {
     public void groupRefTest2() {
         System.out.println("Sequential Test default");
 
-        Ref ref = Ref.group()
+        final Ref ref = Ref.group()
                 .sequential(true)
                 .runInto(RunType.JTP)
                 .priority(RunnablePriority.Highest)
@@ -50,36 +50,36 @@ public class GroupRefCommandTest extends BasicCommandTest {
                         // Ref.real().commandKey(UniqueKey.key(UpdateCursorCommand.class, Cursor.WAIT)),
 
                         Ref.single()
+                        .priority(RunnablePriority.Highest)
+                        .runInto(RunType.JTP)
+                        .run(this::sayHello),
+
+                        Ref.group()
+                        .sequential(true)
+                        .runInto(RunType.JTP)
+                        .priority(RunnablePriority.Highest)
+                        .add(
+                                Ref.single()
                                 .priority(RunnablePriority.Highest)
                                 .runInto(RunType.JTP)
                                 .run(this::sayHello),
-
-                        Ref.group()
-                                .sequential(true)
-                                .runInto(RunType.JTP)
+                                Ref.single()
                                 .priority(RunnablePriority.Highest)
-                                .add(
-                                        Ref.single()
-                                                .priority(RunnablePriority.Highest)
-                                                .runInto(RunType.JTP)
-                                                .run(this::sayHello),
-                                        Ref.single()
-                                                .priority(RunnablePriority.Highest)
-                                                .runInto(RunType.JTP)
-                                                .runWave(this::sayHelloWave),
-                                        Ref.real()
-                                                .key(null)
+                                .runInto(RunType.JTP)
+                                .runWave(this::sayHelloWave),
+                                Ref.real()
+                                .key(null)
                                 ),
 
-                        Ref.single()
+                                Ref.single()
                                 .priority(RunnablePriority.Highest)
                                 .runInto(RunType.JTP)
                                 .runWave(this::sayHelloWave)/*
-                                                                * ,
-                                                                * 
-                                                                * Ref.real().commandKey(UniqueKey.key(UpdateCursorCommand.class, Cursor.DEFAULT))
-                                                                */
-                );
+                                                             * ,
+                                                             * 
+                                                             * Ref.real().commandKey(UniqueKey.key(UpdateCursorCommand.class, Cursor.DEFAULT))
+                                                             */
+                        );
 
         runCommand(GroupRefCommand.class, ref);
     }
@@ -88,7 +88,7 @@ public class GroupRefCommandTest extends BasicCommandTest {
         System.out.println("hello");
     }
 
-    public void sayHelloWave(Wave wave) {
+    public void sayHelloWave(final Wave wave) {
         System.out.println("hello " + wave.getWUID());
     }
 

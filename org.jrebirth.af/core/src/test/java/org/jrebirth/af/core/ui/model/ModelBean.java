@@ -15,21 +15,21 @@ public class ModelBean {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param name
      */
-    public ModelBean(String name) {
+    public ModelBean(final String name) {
         super();
         this.name = name;
     }
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param name
      * @param count
      */
-    public ModelBean(String name, int count) {
+    public ModelBean(final String name, final int count) {
         super();
         this.name = name;
         this.count = count;
@@ -39,13 +39,13 @@ public class ModelBean {
      * @return Returns the name.
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
      * @param name The name to set.
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -53,13 +53,13 @@ public class ModelBean {
      * @return Returns the count.
      */
     public int getCount() {
-        return count;
+        return this.count;
     }
 
     /**
      * @param count The count to set.
      */
-    public void setCount(int count) {
+    public void setCount(final int count) {
         this.count = count;
     }
 

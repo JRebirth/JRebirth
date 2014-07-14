@@ -15,13 +15,13 @@ public class UpdateCursorCommand extends DefaultUICommand {
     @Override
     public void perform(final Wave wave) {
 
-        Cursor cursor = getKeyPart(Cursor.class);
+        final Cursor cursor = getKeyPart(Cursor.class);
 
         if (cursor == null) {
             throw new CoreRuntimeException("You must use a Cursor instance as a key part.");
         }
 
-        Node node = getKeyPart(Node.class);
+        final Node node = getKeyPart(Node.class);
 
         //
         if (node == null) {

@@ -4,41 +4,37 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jrebirth.af.core.concurrent.RunInto;
-import org.jrebirth.af.core.concurrent.RunType;
-import org.jrebirth.af.core.concurrent.RunnablePriority;
-
 public final class GroupRef extends AbstractRef<GroupRef> {
-	
-	private List<Ref> children = new ArrayList<>();
-	
-	private boolean sequential;
-	
-	public static GroupRef create(){
-		return new GroupRef();
-	}
 
-	public List<Ref> children() {
-		return children;
-	}
-	
-	public GroupRef add(Ref... ref) {
-		children.addAll(Arrays.asList(ref));
-		return this;
-	}
-	
-	public GroupRef remove(Ref... ref) {
-		children.removeAll(Arrays.asList(ref));
-		return this;
-	}
-	
-	public boolean sequential() {
-		return sequential;
-	}
+    private final List<Ref> children = new ArrayList<>();
 
-	public GroupRef sequential(boolean sequential) {
-		this.sequential = sequential;
-		return this;
-	}
+    private boolean sequential;
+
+    public static GroupRef create() {
+        return new GroupRef();
+    }
+
+    public List<Ref> children() {
+        return this.children;
+    }
+
+    public GroupRef add(final Ref... ref) {
+        this.children.addAll(Arrays.asList(ref));
+        return this;
+    }
+
+    public GroupRef remove(final Ref... ref) {
+        this.children.removeAll(Arrays.asList(ref));
+        return this;
+    }
+
+    public boolean sequential() {
+        return this.sequential;
+    }
+
+    public GroupRef sequential(final boolean sequential) {
+        this.sequential = sequential;
+        return this;
+    }
 
 }

@@ -22,20 +22,32 @@ package org.jrebirth.af.core.concurrent;
  */
 public enum RunnablePriority {
 
+    /** The Ultimate. */
+    Ultimate(7),
+
     /** The Highest. */
-    Highest(5),
+    Highest(7),
+
+    /** The Higher. */
+    Higher(6),
 
     /** The High. */
-    High(4),
+    High(5),
 
     /** The Normal. */
-    Normal(3),
+    Normal(4),
 
     /** The Low. */
-    Low(2),
+    Low(3),
+
+    /** The Lower. */
+    Lower(2),
 
     /** The Lowest. */
-    Lowest(1);
+    Lowest(1),
+
+    /** The None. */
+    None(0);
 
     /** The level. */
     private final int level;

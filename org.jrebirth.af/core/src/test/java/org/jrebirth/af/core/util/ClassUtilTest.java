@@ -1,7 +1,5 @@
 package org.jrebirth.af.core.util;
 
-import org.jrebirth.af.core.util.ClassUtility;
-
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -10,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>UtilTest</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class ClassUtilTest {

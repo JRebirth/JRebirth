@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,7 +32,7 @@ import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.service.ServiceUtility;
 import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveTypeBase;
+import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 
 import org.slf4j.Logger;
@@ -40,16 +40,16 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>LoadEdtFileService</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class LoadEdtFileService extends DefaultService {
 
     /** Wave type use to load events. */
-    public static final WaveTypeBase DO_LOAD_EVENTS = WaveTypeBase.build("LOAD_EVENTS", EditorWaves.EVENTS_FILE);
+    public static final WaveType DO_LOAD_EVENTS = WaveType.create("LOAD_EVENTS").items(EditorWaves.EVENTS_FILE).returnAction("EVENTS_LOADED").returnItem(EditorWaves.EVENTS);
 
     /** Wave type to return events loaded. */
-    public static final WaveTypeBase RE_EVENTS_LOADED = WaveTypeBase.build("EVENTS_LOADED", EditorWaves.EVENTS);
+    // public static final WaveType RE_EVENTS_LOADED = WaveType.create("EVENTS_LOADED").items(EditorWaves.EVENTS);
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(LoadEdtFileService.class);
@@ -60,15 +60,15 @@ public class LoadEdtFileService extends DefaultService {
     @Override
     public void initService() {
 
-        registerCallback(DO_LOAD_EVENTS, RE_EVENTS_LOADED);
+        listen(DO_LOAD_EVENTS);
     }
 
     /**
      * Parse the event file.
-     * 
+     *
      * @param selecteFile the event file selected
      * @param wave the wave that trigger the action
-     * 
+     *
      * @return the list of loaded events
      */
     @Priority(RunnablePriority.High)
@@ -79,7 +79,7 @@ public class LoadEdtFileService extends DefaultService {
         updateMessage(wave, "Parsing events");
 
         // Get number of line to calculate the task progression
-        int totalLines = ServiceUtility.countFileLines(selecteFile);
+        final int totalLines = ServiceUtility.countFileLines(selecteFile);
 
         try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));)
         {
@@ -111,7 +111,7 @@ public class LoadEdtFileService extends DefaultService {
 
     /**
      * Add an event to the event list.
-     * 
+     *
      * @param eventList the list of events
      * @param strLine the string to use
      */

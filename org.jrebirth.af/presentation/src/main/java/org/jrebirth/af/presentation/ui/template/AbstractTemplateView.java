@@ -489,7 +489,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     protected void addSlideItem(final VBox vbox, final SlideItem item) {
 
         Node node = null;
-        if (item.getLink()) {
+        if (item.isLink()) {
 
             final Hyperlink link = HyperlinkBuilder.create()
                     .opacity(1.0)
@@ -508,7 +508,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
             });
             node = link;
 
-        } else if (item.getHtml()) {
+        } else if (item.isHtml()) {
 
             final WebView web = WebViewBuilder.create()
                     .fontScale(1.4)

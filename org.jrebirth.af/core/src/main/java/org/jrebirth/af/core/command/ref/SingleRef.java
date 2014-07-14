@@ -11,19 +11,19 @@ public final class SingleRef extends AbstractRef<SingleRef> {
     }
 
     public CommandRunner run() {
-        return commandRunner;
+        return this.commandRunner;
     }
 
-    public SingleRef run(CommandRunner commandRunner) {
+    public SingleRef run(final CommandRunner commandRunner) {
         this.commandRunner = commandRunner;
         return this;
     }
 
     public CommandWaveRunner runWave() {
-        return commandWaveRunner;
+        return this.commandWaveRunner;
     }
 
-    public SingleRef runWave(CommandWaveRunner commandWaveRunner) {
+    public SingleRef runWave(final CommandWaveRunner commandWaveRunner) {
         this.commandWaveRunner = commandWaveRunner;
         return this;
     }

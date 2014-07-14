@@ -16,6 +16,7 @@ import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveItem;
 import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.WaveTypeBase;
+import org.jrebirth.af.core.wave.WaveTypeRegistry;
 
 /**
  * The class <strong>CheckerUtility</strong>.
@@ -66,7 +67,7 @@ public final class CheckerUtility implements UtilMessages {
                     int methodParameters = 0;
                     boolean hasCompliantMethod = false;
 
-                    final List<WaveItem<?>> wParams = ((WaveTypeBase) waveType).getWaveItemList();
+                    final List<WaveItem<?>> wParams = ((WaveTypeBase) waveType).items();
 
                     for (int j = 0; j < methods.size() && !hasCompliantMethod; j++) {
                         hasCompliantMethod = checkMethodSignature(methods.get(j), wParams);
@@ -77,7 +78,7 @@ public final class CheckerUtility implements UtilMessages {
 
                     if (!hasCompliantMethod) {
                         for (int j = 0; j < annotatedMethods.size() && !hasCompliantMethod; j++) {
-                            if (WaveTypeBase.getWaveType(annotatedMethods.get(j).getAnnotation(OnWave.class).value()) == waveType) {
+                            if (WaveTypeRegistry.getWaveType(annotatedMethods.get(j).getAnnotation(OnWave.class).value()) == waveType) {
                                 hasCompliantMethod = checkMethodSignature(annotatedMethods.get(j), wParams);
                                 if (!hasCompliantMethod) {
                                     methodName = annotatedMethods.get(j).getName();
@@ -89,14 +90,14 @@ public final class CheckerUtility implements UtilMessages {
 
                     if (!hasCompliantMethod) {
                         LOGGER.log(BROKEN_API_WRONG_PARAMETERS, waveReadyClass.getSimpleName(), methodName,
-                                ((WaveTypeBase) waveType).getWaveItemList().size(), methodParameters);
+                                ((WaveTypeBase) waveType).items().size(), methodParameters);
 
                         LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(),
                                 methodName, ((WaveTypeBase) waveType).getItems());
 
                         throw new CoreRuntimeException(BROKEN_API_WRONG_PARAMETERS.getText(waveReadyClass.getSimpleName(),
                                 methodName,
-                                ((WaveTypeBase) waveType).getWaveItemList().size(),
+                                ((WaveTypeBase) waveType).items().size(),
                                 methodParameters));
                     }
                 }
@@ -153,7 +154,7 @@ public final class CheckerUtility implements UtilMessages {
 
                 // List missing wave items not held by WaveData wrapper
                 final List<WaveItem<?>> missingWaveItems = new ArrayList<>();
-                for (final WaveItem<?> item : ((WaveTypeBase) wave.waveType()).getWaveItemList()) {
+                for (final WaveItem<?> item : ((WaveTypeBase) wave.waveType()).items()) {
 
                     if (!wave.contains(item)) {
                         missingWaveItems.add(item);

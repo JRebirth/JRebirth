@@ -5,18 +5,18 @@ import org.jrebirth.af.core.key.UniqueKey;
 
 public class RealRef implements Ref {
 
-	private UniqueKey<? extends Command> commandKey;
+    private UniqueKey<? extends Command> commandKey;
 
-	public static RealRef create() {
-		return new RealRef();
-	}
-	
-	public UniqueKey<? extends Command> key() {
-		return commandKey;
-	}
+    public static RealRef create() {
+        return new RealRef();
+    }
 
-	public RealRef key(UniqueKey<? extends Command> commandKey) {
-		this.commandKey = commandKey;
-		return this;
-	}
+    public UniqueKey<? extends Command> key() {
+        return this.commandKey;
+    }
+
+    public RealRef key(final UniqueKey<? extends Command> commandKey) {
+        this.commandKey = commandKey;
+        return this;
+    }
 }

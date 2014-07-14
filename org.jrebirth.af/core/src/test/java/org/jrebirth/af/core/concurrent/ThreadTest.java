@@ -1,15 +1,11 @@
 package org.jrebirth.af.core.concurrent;
 
-import java.util.Calendar;
+import java.time.Instant;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import junit.framework.Assert;
 
 import org.jrebirth.af.core.application.ApplicationTest;
-import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
-import org.jrebirth.af.core.concurrent.JRebirth;
-import org.jrebirth.af.core.concurrent.JRebirthRunnable;
-import org.jrebirth.af.core.concurrent.RunnablePriority;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
 
 import org.junit.Ignore;
@@ -19,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>ThreadTest</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 @Ignore("JavaFX can't be run in headless mode yet")
@@ -109,7 +105,7 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
             JRebirth.runIntoJTP(new LongTask("15", RunnablePriority.Lowest));
             JRebirth.runIntoJTP(new LongTask("16", RunnablePriority.Low));
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
         // checkBoolean(ok);
@@ -119,40 +115,40 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
 
         String name;
         RunnablePriority priority;
-        long time;
+        Instant time;
 
-        public LongTask(String string, RunnablePriority normal) {
-            name = string;
-            priority = normal;
-            time = Calendar.getInstance().getTimeInMillis();
+        public LongTask(final String string, final RunnablePriority normal) {
+            this.name = string;
+            this.priority = normal;
+            this.time = Instant.now();
 
-            LOGGER.info("Creating " + name + "(" + priority.name() + ") into " + Thread.currentThread().getName());
+            LOGGER.info("Creating " + this.name + "(" + this.priority.name() + ") into " + Thread.currentThread().getName());
         }
 
         @Override
         public void run() {
             try {
                 Thread.sleep(5000);
-            } catch (InterruptedException e) {
+            } catch (final InterruptedException e) {
                 e.printStackTrace();
             }
-            LOGGER.info("Running " + name + "(" + priority.name() + ") into " + Thread.currentThread().getName());
+            LOGGER.info("Running " + this.name + "(" + this.priority.name() + ") into " + Thread.currentThread().getName());
         }
 
         @Override
         public RunnablePriority getPriority() {
-            return priority;
+            return this.priority;
         }
 
         @Override
-        public long getCreationTime() {
-            return time;
+        public Instant getCreationTime() {
+            return this.time;
         }
     }
 
     /**
      * TODO To complete.
-     * 
+     *
      * @param ok
      */
     private void checkBoolean(final AtomicBoolean ok) {

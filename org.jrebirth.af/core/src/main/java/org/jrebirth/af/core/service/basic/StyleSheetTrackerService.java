@@ -22,7 +22,7 @@ import java.io.File;
 import javafx.scene.Scene;
 
 import org.jrebirth.af.core.service.DefaultService;
-import org.jrebirth.af.core.wave.WaveTypeBase;
+import org.jrebirth.af.core.wave.WaveType;
 
 /**
  * The class <strong>StyleSheetTrackerService</strong>.
@@ -32,10 +32,10 @@ import org.jrebirth.af.core.wave.WaveTypeBase;
 public class StyleSheetTrackerService extends DefaultService {
 
     /** Wave type use to load events. */
-    public static final WaveTypeBase DO_OPEN_STAGE = WaveTypeBase.build("OPEN_STAGE");
+    public static final WaveType DO_OPEN_STAGE = WaveType.create("OPEN_STAGE").returnAction("STAGE_OPENED");
 
     /** Wave type to return events loaded. */
-    public static final WaveTypeBase RE_STAGE_OPENED = WaveTypeBase.build("STAGE_OPENED");
+    // public static final WaveType RE_STAGE_OPENED = WaveType.create("STAGE_OPENED");
 
     /** The class logger. */
     // private static final Logger LOGGER = LoggerFactory.getLogger(StyleSheetTrackerService.class);

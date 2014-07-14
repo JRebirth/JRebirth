@@ -1,6 +1,5 @@
 package org.jrebirth.af.core.ui;
 
-import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.wave.WaveTypeBase;
 

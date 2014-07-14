@@ -11,7 +11,7 @@ import org.junit.Test;
 
 /**
  * The class <strong>AnnotationTest</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 @Ignore
@@ -21,7 +21,7 @@ public class AnnotationTest extends AbstractTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @Before
@@ -80,7 +80,7 @@ public class AnnotationTest extends AbstractTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @After

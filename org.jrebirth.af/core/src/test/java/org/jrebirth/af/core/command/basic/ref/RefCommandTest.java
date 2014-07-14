@@ -11,7 +11,7 @@ import org.junit.Test;
 
 /**
  * The class <strong>RefCommandTest</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class RefCommandTest extends BasicCommandTest {
@@ -20,10 +20,10 @@ public class RefCommandTest extends BasicCommandTest {
     public void refTest1() {
         System.out.println("Sequential Test default");
 
-        Ref ref = Ref.single()
-				.priority(RunnablePriority.Highest)
-				.runInto(RunType.JTP)
-				.run(this::sayHello);
+        final Ref ref = Ref.single()
+                .priority(RunnablePriority.Highest)
+                .runInto(RunType.JTP)
+                .run(this::sayHello);
 
         runCommand(RefCommand.class, ref);
     }
@@ -32,10 +32,10 @@ public class RefCommandTest extends BasicCommandTest {
     public void refTest2() {
         System.out.println("Sequential Test default");
 
-        Ref ref = Ref.single()
-				.priority(RunnablePriority.Highest)
-				.runInto(RunType.JTP)
-				.runWave(this::sayHelloWave);
+        final Ref ref = Ref.single()
+                .priority(RunnablePriority.Highest)
+                .runInto(RunType.JTP)
+                .runWave(this::sayHelloWave);
 
         runCommand(RefCommand.class, ref);
     }
@@ -44,7 +44,7 @@ public class RefCommandTest extends BasicCommandTest {
         System.out.println("hello");
     }
 
-    public void sayHelloWave(Wave wave) {
+    public void sayHelloWave(final Wave wave) {
         System.out.println("hello " + wave.getWUID());
     }
 

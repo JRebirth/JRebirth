@@ -6,7 +6,7 @@ import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBean;
 
 /**
- * 
+ *
  */
 public class RefCommand extends AbstractSingleCommand<WaveBean> {
 
@@ -18,33 +18,33 @@ public class RefCommand extends AbstractSingleCommand<WaveBean> {
     protected void initCommand() {
 
         // Copy all runner stored as key part
-//        for (Object keyPart : getListKeyPart()) {
-//
-//            if (keyPart instanceof SingleRef) {
+        // for (Object keyPart : getListKeyPart()) {
+        //
+        // if (keyPart instanceof SingleRef) {
 
-               // SingleRef ref = (SingleRef) keyPart;
+        // SingleRef ref = (SingleRef) keyPart;
 
-    	 		SingleRef ref = getKeyPart(SingleRef.class);
-                // runnerList.add(ref.runner());
-                this.commandRunner = ref.run();
-                this.commandWaveRunner = ref.runWave();
+        final SingleRef ref = getKeyPart(SingleRef.class);
+        // runnerList.add(ref.runner());
+        this.commandRunner = ref.run();
+        this.commandWaveRunner = ref.runWave();
 
-                this.runIntoThread = ref.runInto();
-                this.runnablePriority = ref.priority();
+        this.runIntoThread = ref.runInto();
+        this.runnablePriority = ref.priority();
 
-               // break;
-//            }
-//        }
+        // break;
+        // }
+        // }
     }
 
     @Override
-    protected void perform(Wave wave) throws CommandException {
+    protected void perform(final Wave wave) throws CommandException {
 
         // for(Runner runner : runnerList){
-        if (commandRunner != null) {
-            commandRunner.perform();
-        } else if (commandWaveRunner != null) {
-            commandWaveRunner.perform(wave);
+        if (this.commandRunner != null) {
+            this.commandRunner.perform();
+        } else if (this.commandWaveRunner != null) {
+            this.commandWaveRunner.perform(wave);
         }
         // }
 

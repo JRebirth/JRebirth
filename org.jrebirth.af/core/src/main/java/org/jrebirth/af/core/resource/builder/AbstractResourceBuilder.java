@@ -33,14 +33,14 @@ import org.jrebirth.af.core.resource.provided.JRebirthParameters;
  *
  * @author Sébastien Bordes
  *
- * @param <E> The enumeration used to wrap the resource
+ * @param <I> The item used to wrap the resource
  * @param <P> The params type
  * @param <R> The resource managed
  */
-public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?, ?, ?>, P extends ResourceParams, R> implements ResourceBuilder<E, P, R> {
+public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?, ?>, P extends ResourceParams, R> implements ResourceBuilder<I, P, R> {
 
     /** The resource weak Map. */
-    private final Map<E, P> paramsMap = new WeakHashMap<E, P>();
+    private final Map<I, P> paramsMap = new WeakHashMap<I, P>();
 
     /** The resource weak Map. */
     private final Map<String, WeakReference<R>> resourceMap = new WeakHashMap<>();
@@ -49,7 +49,7 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?, ?, ?>
      * {@inheritDoc}
      */
     @Override
-    public void storeParams(final E key, final P params) {
+    public void storeParams(final I key, final P params) {
         // Store the resource into the map
         this.paramsMap.put(key, params);
 
@@ -63,7 +63,7 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?, ?, ?>
      * {@inheritDoc}
      */
     @Override
-    public P getParam(final E key) {
+    public P getParam(final I key) {
         // Retrieve the resource from the map
         return this.paramsMap.get(key);
     }
@@ -72,7 +72,7 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?, ?, ?>
      * {@inheritDoc}
      */
     @Override
-    public String getParamKey(final E key) {
+    public String getParamKey(final I key) {
         return getParam(key).getKey();
     }
 
@@ -80,7 +80,7 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?, ?, ?>
      * {@inheritDoc}
      */
     @Override
-    public R get(final E key) {
+    public R get(final I key) {
 
         final P params = getParam(key);
 
@@ -118,6 +118,6 @@ public abstract class AbstractResourceBuilder<E extends ResourceItem<?, ?, ?, ?>
      *
      * @return the resource built and weakly stored with a WeakReference
      */
-    protected abstract R buildResource(final E item, final P params);
+    protected abstract R buildResource(final I item, final P params);
 
 }

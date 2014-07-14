@@ -22,6 +22,7 @@ import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBean;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

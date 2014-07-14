@@ -19,6 +19,7 @@ package org.jrebirth.af.core.command;
 
 import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
+import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBean;
 
@@ -46,7 +47,7 @@ public class DefaultUIBeanCommand<WB extends WaveBean> extends AbstractSingleCom
      * {@inheritDoc}
      */
     @Override
-    protected void perform(final Wave wave) {
+    protected void perform(final Wave wave) throws CommandException {
         // Nothing to do yet by the default UI command, must be overridden
     }
 

@@ -66,13 +66,13 @@ public final class JRebirth {
      * @param runnable the task to run
      */
     public static void runIntoJAT(final JRebirthRunnable runnable) {
-        // if (Platform.isFxApplicationThread()) {
-        // // We are into a JAT so just run it synchronously
-        // runnable.run();
-        // } else {
-        // The runnable will be run into the JAT during the next round
-        Platform.runLater(runnable);
-        // }
+        if (Platform.isFxApplicationThread()) {
+            // We are into a JAT so just run it synchronously
+            runnable.run();
+        } else {
+            // The runnable will be run into the JAT during the next round
+            Platform.runLater(runnable);
+        }
     }
 
     /**

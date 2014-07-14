@@ -17,11 +17,12 @@
  */
 package org.jrebirth.af.core.log;
 
+import ch.qos.logback.classic.Logger;
+
 import org.jrebirth.af.core.resource.i18n.MessageItem;
+
 import org.slf4j.Marker;
 import org.slf4j.spi.LocationAwareLogger;
-
-import ch.qos.logback.classic.Logger;
 
 /**
  * The Class LogbackAdapter.

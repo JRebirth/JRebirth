@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,7 +33,7 @@ import org.jrebirth.af.showcase.analyzer.ui.editor.ball.BallModel;
 
 /**
  * The class <strong>EditorModel</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
@@ -56,7 +56,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
     @Override
     protected void initModel() {
 
-        listen(LoadEdtFileService.RE_EVENTS_LOADED);
+        listen(LoadEdtFileService.DO_LOAD_EVENTS.returnWaveType());
 
         listen(EditorWaves.DO_UNLOAD);
         listen(EditorWaves.DO_PLAY);
@@ -69,7 +69,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
 
     /**
      * Call when event are loaded.
-     * 
+     *
      * @param eventList the lsit of events loaded
      * @param wave the wave received
      */
@@ -79,7 +79,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
 
     /**
      * Unload the event list.
-     * 
+     *
      * @param wave the wave received
      */
     public void doUnload(final Wave wave) {
@@ -94,7 +94,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
 
     /**
      * Call when event play button is pressed.
-     * 
+     *
      * @param wave the wave received
      */
     public void doPlay(final Wave wave) {
@@ -111,7 +111,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
 
     /**
      * Called when an event is processed.
-     * 
+     *
      * @param wave the wave that contains data related to the event processed
      */
     public void doEventProcessed(final Wave wave) {
@@ -122,7 +122,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
 
     /**
      * Call when event next button is pressed.
-     * 
+     *
      * @param wave the wave received
      */
     public void doNext(final Wave wave) {
@@ -133,7 +133,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
 
     /**
      * Show next element.
-     * 
+     *
      * @param event the next event to show
      */
     private void showNext(final JRebirthEvent event) {
@@ -143,7 +143,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
 
     /**
      * Call when event previous button is pressed.
-     * 
+     *
      * @param wave the wave received
      */
     public void doPrevious(final Wave wave) {
@@ -154,7 +154,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
 
     /**
      * Hide the current.
-     * 
+     *
      * @param event the event to hide
      */
     private void hideCurrent(final JRebirthEvent event) {
@@ -164,7 +164,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
 
     /**
      * Call when event stop button is pressed.
-     * 
+     *
      * @param wave the wave received
      */
     public void doStop(final Wave wave) {
@@ -182,7 +182,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
 
     /**
      * Register a ball model.
-     * 
+     *
      * @param ballModel the ball model to register
      */
     public void registerBall(final BallModel ballModel) {
@@ -194,7 +194,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
 
     /**
      * Unregister a ball model.
-     * 
+     *
      * @param ballModel the ball model to unregister
      */
     public void unregisterBall(final BallModel ballModel) {
@@ -204,7 +204,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
 
     /**
      * Return the right ball model for the given class.
-     * 
+     *
      * @param source the class of the source event.
      * @return the right ball model
      */

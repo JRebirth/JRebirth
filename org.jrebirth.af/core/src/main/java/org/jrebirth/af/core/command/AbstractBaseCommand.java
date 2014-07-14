@@ -28,6 +28,7 @@ import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveBean;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

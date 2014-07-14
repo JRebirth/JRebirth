@@ -20,7 +20,6 @@ package org.jrebirth.af.core.link;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.af.core.annotation.AfterInit;
@@ -28,7 +27,8 @@ import org.jrebirth.af.core.annotation.BeforeInit;
 import org.jrebirth.af.core.annotation.OnRelease;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
 import org.jrebirth.af.core.behavior.Behavior;
-import org.jrebirth.af.core.behavior.BehaviorBean;
+import org.jrebirth.af.core.behavior.BehaviorData;
+import org.jrebirth.af.core.behavior.BehaviorDataFor;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.command.CommandBean;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
@@ -37,6 +37,7 @@ import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.facade.JRebirthEventType;
 import org.jrebirth.af.core.facade.WaveReady;
+import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.service.Service;
@@ -76,23 +77,17 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractWaveReady.class);
 
     /** The return wave type map. */
-    private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
+    // private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
 
     /** The return command class map. */
-    private final Map<WaveType, Class<? extends Command>> returnCommandClass = new HashMap<>();
+    private Map<WaveType, Class<? extends Command>> returnCommandClass;
 
     /** A map that store all annotated methods to call sorted by lifecycle phase. */
     private MultiMap<String, Method> lifecycleMethod;
 
+    /** A map that store all behavior implementations s tore . */
+    private MultiMap<Class<? extends Behavior<?>>, Behavior<?>> behaviors;
 
-
-	private final MultiMap<Class<Behavior<BehaviorBean>>, BehaviorBean> behaviors = new MultiMap<>();
-
-    @Override
-	public BehaviorBean getBehaviorBean(Class<Behavior<BehaviorBean>> behavior) {
-		return behaviors.get(behavior).get(0);
-	}
-    
     /**
      * Short cut method used to retrieve the notifier.
      *
@@ -157,58 +152,61 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
         });
     }
 
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public final void registerCallback(final WaveType callType, final WaveType responseType) {
+    //
+    // // Call the generic method
+    // registerCallback(null, callType, responseType, null);
+    // }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void registerCallback(final WaveType callType, final WaveType responseType) {
+    public final void registerCallback(final WaveType callType/* , final WaveType responseType */, final Class<? extends Command> returnCommandClass) {
 
         // Call the generic method
-        registerCallback(null, callType, responseType, null);
+        registerCallback(null, callType/* , responseType */, returnCommandClass);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void registerCallback(final WaveType callType, final WaveType responseType, final Class<? extends Command> returnCommandClass) {
-
-        // Call the generic method
-        registerCallback(null, callType, responseType, returnCommandClass);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void registerCallback(final WaveChecker waveChecker, final WaveType callType, final WaveType responseType, final Class<? extends Command> returnCommandClass) {
+    public final void registerCallback(final WaveChecker waveChecker, final WaveType callType/* , final WaveType responseType */, final Class<? extends Command> returnCommandClass) {
 
         // Perform the subscription
         listen(waveChecker, callType);
 
         // Store a link between call Wave Type and return wave type that store the result type ino a WaveItem
-        this.returnWaveTypeMap.put(callType, responseType);
+        // this.returnWaveTypeMap.put(callType, responseType);
 
         // Store the Command Class that will handle the service result (optional)
         if (returnCommandClass != null) {
+            if (this.returnCommandClass == null) {
+                this.returnCommandClass = new HashMap<>();
+            }
             this.returnCommandClass.put(callType, returnCommandClass);
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final WaveType getReturnWaveType(final WaveType waveType) {
-        return this.returnWaveTypeMap.get(waveType);
-    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public final WaveType getReturnWaveType(final WaveType waveType) {
+    // return this.returnWaveTypeMap.get(waveType);
+    // }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public final Class<? extends Command> getReturnCommand(final WaveType waveType) {
-        return this.returnCommandClass.get(waveType);
+        return this.returnCommandClass == null ? null : this.returnCommandClass.get(waveType);
     }
 
     /**
@@ -481,9 +479,33 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
         callAnnotatedMethod(BeforeInit.class);
 
+        manageOptionalData();
+
         ready();
 
         callAnnotatedMethod(AfterInit.class);
+    }
+
+    /**
+     *
+     */
+    @SuppressWarnings("unchecked")
+    private void manageOptionalData() {
+
+        for (final Object data : getKey().getOptionalData()) {
+
+            if (data instanceof BehaviorData) {
+
+                addBehavior((BehaviorData) data);
+
+            } else if (data instanceof Class && ((Class<?>) data).isAssignableFrom(Behavior.class)) {
+
+                addBehavior((Class<Behavior<BehaviorData>>) data);
+
+            }
+
+        }
+
     }
 
     /**
@@ -521,5 +543,73 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      * @throws CoreException if an error occurred
      */
     protected abstract void ready() throws CoreException;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasBehavior(final Class<Behavior<?>> behaviorClass) {
+        return this.behaviors != null && this.behaviors.containsKey(behaviorClass);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <BD extends BehaviorData, B extends Behavior<BD>> R addBehavior(final Class<B> behaviorClass) {
+
+        final UniqueKey<B> key = UniqueKey.key(behaviorClass, new Object[] { this }, getKey());
+
+        final B behavior = getLocalFacade().getGlobalFacade().getBehaviorFacade().retrieve(key);
+
+        this.behaviors.add(behaviorClass, behavior);
+
+        return (R) this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <BD extends BehaviorData, B extends Behavior<BD>> R addBehavior(final BD data) {
+
+        if (this.behaviors == null) {
+            this.behaviors = new MultiMap<Class<? extends Behavior<?>>, Behavior<?>>();
+        }
+
+        // FIXME fix leaks
+        final BehaviorDataFor annotation = data.getClass().getAnnotation(BehaviorDataFor.class);
+        final Class<B> behaviorClass = (Class<B>) annotation.value();
+
+        final Object[] optionalData = new Object[] { data, this };
+
+        final UniqueKey<B> key = UniqueKey.key(behaviorClass, optionalData, getKey());
+
+        final B behavior = getLocalFacade().getGlobalFacade().getBehaviorFacade().retrieve(key);
+
+        this.behaviors.add(behaviorClass, behavior);
+
+        return (R) this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <BD extends BehaviorData, B extends Behavior<BD>> BD getBehaviorData(final Class<B> behaviorClass) {
+        return this.behaviors == null ? null : (BD) this.behaviors.get(behaviorClass).get(0).getData();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <BD extends BehaviorData, B extends Behavior<BD>> B getBehavior(final Class<B> behaviorClass) {
+        return this.behaviors == null ? null : (B) this.behaviors.get(behaviorClass);
+    }
 
 }

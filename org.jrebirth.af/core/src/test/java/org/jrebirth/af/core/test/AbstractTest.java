@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 
 /**
  * The class <strong>AbstractTest</strong>. TODO To complete
- * 
+ *
  * @author Sébastien Bordes
  */
 public abstract class AbstractTest {
@@ -18,7 +18,7 @@ public abstract class AbstractTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @BeforeClass
@@ -31,7 +31,7 @@ public abstract class AbstractTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @AfterClass

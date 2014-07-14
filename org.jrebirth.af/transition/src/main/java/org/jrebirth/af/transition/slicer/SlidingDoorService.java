@@ -38,7 +38,7 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 
 import org.jrebirth.af.core.service.DefaultService;
-import org.jrebirth.af.core.wave.WaveTypeBase;
+import org.jrebirth.af.core.wave.WaveType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,10 +51,10 @@ import org.slf4j.LoggerFactory;
 public class SlidingDoorService extends DefaultService {
 
     /** Wave type use to load events. */
-    public static final WaveTypeBase DO_SLICE_NODE = WaveTypeBase.build("SLICE_NODE", TransitionWaves.NODE);
+    public static final WaveType DO_SLICE_NODE = WaveType.create("SLICE_NODE").items(TransitionWaves.NODE);
 
     /** Wave type to return events loaded. */
-    public static final WaveTypeBase RE_NODE_SLICED = WaveTypeBase.build("NODE_SLICED", TransitionWaves.NODE);
+    public static final WaveType RE_NODE_SLICED = WaveType.create("NODE_SLICED").items(TransitionWaves.NODE);
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SlidingDoorService.class);

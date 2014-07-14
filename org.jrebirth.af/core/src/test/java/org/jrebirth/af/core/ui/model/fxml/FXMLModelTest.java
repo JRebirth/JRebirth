@@ -6,7 +6,7 @@ import org.junit.Test;
 
 /**
  * The class <strong>FxmlTest</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class FXMLModelTest extends AbstractModelTest {

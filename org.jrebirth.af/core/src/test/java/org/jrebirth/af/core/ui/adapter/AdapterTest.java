@@ -14,7 +14,7 @@ public class AdapterTest {
     @Before
     public void setUp() {
         try {
-            controller = new AdapterController(null);
+            this.controller = new AdapterController(null);
         } catch (NullPointerException | CoreException e) {
         }
     }
@@ -22,7 +22,7 @@ public class AdapterTest {
     @Test()
     public void checkWaveTypes() {
 
-        controller.getButton().fireEvent(new ActionEvent());
+        this.controller.getButton().fireEvent(new ActionEvent());
 
     }
 

@@ -34,7 +34,7 @@ import javafx.scene.shape.RectangleBuilder;
 
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveTypeBase;
+import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.transition.slicer.TransitionWaves;
 
 import org.slf4j.Logger;
@@ -48,10 +48,10 @@ import org.slf4j.LoggerFactory;
 public class NodeSlicerCommand extends DefaultService {
 
     /** Wave type use to load events. */
-    public static final WaveTypeBase DO_SLICE_NODE = WaveTypeBase.build("SLICE_NODE", TransitionWaves.NODE);
+    public static final WaveType DO_SLICE_NODE = WaveType.create("SLICE_NODE").items(TransitionWaves.NODE).returnAction("NODE_SLICED").returnItem(TransitionWaves.SLICES);
 
     /** Wave type to return events loaded. */
-    public static final WaveTypeBase RE_NODE_SLICED = WaveTypeBase.build("NODE_SLICED", TransitionWaves.SLICES);
+    // public static final WaveType RE_NODE_SLICED = WaveType.create("NODE_SLICED").items(TransitionWaves.SLICES);
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(NodeSlicerCommand.class);
@@ -80,7 +80,7 @@ public class NodeSlicerCommand extends DefaultService {
     @Override
     public void initService() {
 
-        registerCallback(DO_SLICE_NODE, RE_NODE_SLICED/* , TransitionWaves.NODE */);
+        listen(DO_SLICE_NODE);
     }
 
     /**

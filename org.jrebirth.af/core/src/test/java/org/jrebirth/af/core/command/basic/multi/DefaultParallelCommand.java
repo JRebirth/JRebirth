@@ -5,7 +5,7 @@ import org.jrebirth.af.core.command.DefaultMultiCommand;
 public class DefaultParallelCommand extends DefaultMultiCommand {
 
     /**
-     * 
+     *
      */
     public DefaultParallelCommand() {
         super();

@@ -18,6 +18,7 @@
 package org.jrebirth.af.core.key;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * The class <strong>UniqueKey</strong>.
@@ -50,6 +51,12 @@ public interface UniqueKey<R> extends Serializable {
     Class<R> getClassField();
 
     /**
+     *
+     * @return
+     */
+    List<Object> getOptionalData();
+
+    /**
      * Build an unique key.
      *
      * @param clazz the class type of the component
@@ -63,9 +70,30 @@ public interface UniqueKey<R> extends Serializable {
 
         UniqueKey<R> uniqueKey;
         if (keyPart == null || keyPart.length == 0 || keyPart[0].toString().isEmpty()) {
-            uniqueKey = classKey(clazz);
+            uniqueKey = singleKey(clazz);
         } else {
-            uniqueKey = multitonKey(clazz, keyPart);
+            uniqueKey = multiKey(clazz, keyPart);
+        }
+        return uniqueKey;
+    }
+
+    /**
+     * Build an unique key.
+     *
+     * @param clazz the class type of the component
+     * @param keyPart all complementary part of the key
+     *
+     * @return the unique key for the given class and keyParts array
+     *
+     * @param <E> The type of the object registered by this ClassKey
+     */
+    static <R> UniqueKey<R> key(final Class<R> clazz, final Object[] optionalData, final Object... keyPart) {
+
+        UniqueKey<R> uniqueKey;
+        if (keyPart == null || keyPart.length == 0 || keyPart[0].toString().isEmpty()) {
+            uniqueKey = singleKey(clazz, optionalData);
+        } else {
+            uniqueKey = multiKey(clazz, keyPart, optionalData);
         }
         return uniqueKey;
     }
@@ -79,8 +107,8 @@ public interface UniqueKey<R> extends Serializable {
      *
      * @param <E> The type of the object registered by this ClassKey
      */
-    static <R> UniqueKey<R> classKey(final Class<R> clazz) {
-        return new ClassKey<R>(clazz);
+    static <R> UniqueKey<R> singleKey(final Class<R> clazz, final Object... optionalData) {
+        return new ClassKey<R>(clazz, optionalData);
     }
 
     /**
@@ -93,7 +121,21 @@ public interface UniqueKey<R> extends Serializable {
      *
      * @param <E> The type of the object registered by this ClassKey
      */
-    static <R> UniqueKey<R> multitonKey(final Class<R> clazz, final Object... keyPart) {
+    static <R> UniqueKey<R> multiKey(final Class<R> clazz, final Object... keyPart) {
         return new MultitonKey<R>(clazz, keyPart);
+    }
+
+    /**
+     * Build a multiton key.
+     *
+     * @param clazz the class type of the component
+     * @param keyPart all complementary part of the key
+     *
+     * @return the unique key for a multiton
+     *
+     * @param <E> The type of the object registered by this ClassKey
+     */
+    static <R> UniqueKey<R> multiKey(final Class<R> clazz, final Object[] keyPart, final Object... optionalData) {
+        return new MultitonKey<R>(clazz, keyPart, optionalData);
     }
 }

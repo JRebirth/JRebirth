@@ -19,6 +19,8 @@ package org.jrebirth.af.core.link;
 
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.command.CommandBean;
+import org.jrebirth.af.core.key.UniqueKey;
+import org.jrebirth.af.core.wave.JRebirthItems;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBean;
 import org.jrebirth.af.core.wave.WaveData;
@@ -29,7 +31,7 @@ import org.jrebirth.af.core.wave.WaveData;
  *
  * @author Sébastien Bordes
  */
-public interface CommandReady {
+public interface CommandReady extends JRebirthItems {
 
     /**
      * Return the command singleton or part of multiton.
@@ -42,6 +44,17 @@ public interface CommandReady {
      * @return a command instance
      */
     <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart);
+
+    /**
+     * Return the command singleton or part of multiton according to {@link UniqueKey}.
+     *
+     * @param commandKey the key that describe the searched {@link Command} component
+     *
+     * @param <C> a sub class of {@link Command}
+     *
+     * @return a command instance
+     */
+    <C extends Command> C getCommand(final UniqueKey<C> commandKey);
 
     /**
      * Send a wave used to call a command.

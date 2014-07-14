@@ -17,7 +17,7 @@ import org.junit.BeforeClass;
 
 /**
  * The class <strong>StageTest</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class BasicCommandTest {
@@ -30,7 +30,7 @@ public class BasicCommandTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @BeforeClass
@@ -51,7 +51,7 @@ public class BasicCommandTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @Before
@@ -63,7 +63,7 @@ public class BasicCommandTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @After
@@ -73,7 +73,7 @@ public class BasicCommandTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @AfterClass
@@ -82,11 +82,11 @@ public class BasicCommandTest {
         globalFacade = null;
     }
 
-    public void runCommand(Class<? extends Command> commandClass, Object... keyPart) {
+    public void runCommand(final Class<? extends Command> commandClass, final Object... keyPart) {
 
-        wait = true;
+        this.wait = true;
 
-        Wave wave = globalFacade.getCommandFacade().retrieve(commandClass, keyPart).run();
+        final Wave wave = globalFacade.getCommandFacade().retrieve(commandClass, keyPart).run();
 
         wave.addWaveListener(new DefaultWaveListener() {
 
@@ -94,20 +94,20 @@ public class BasicCommandTest {
              * {@inheritDoc}
              */
             @Override
-            public void waveConsumed(Wave wave) {
-                wait = false;
+            public void waveConsumed(final Wave wave) {
+                BasicCommandTest.this.wait = false;
             }
 
         });
 
         if (wave.status() == Status.Consumed) {
-            wait = false;
+            this.wait = false;
         }
-        
-        while (wait) {
+
+        while (this.wait) {
             try {
                 Thread.sleep(200);
-            } catch (InterruptedException e) {
+            } catch (final InterruptedException e) {
                 e.printStackTrace();
             }
         }

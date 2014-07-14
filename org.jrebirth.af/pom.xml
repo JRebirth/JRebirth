@@ -33,7 +33,7 @@
 		<module>core</module>
 		<module>component</module>
 		<module>archetype</module>
-		<module>sample</module>
+		 <module>sample</module>
 		<module>presentation</module>
 		<module>transition</module>
 		<module>distribution</module>
@@ -42,6 +42,9 @@
 		<module>undoredo</module>
 		<module>showcase</module>
 		<module>preloader</module>
+		<module>processor</module>
+		<!-- <module>modular</module>
+		<module>security</module> -->
 	</modules>
 
 	<issueManagement>

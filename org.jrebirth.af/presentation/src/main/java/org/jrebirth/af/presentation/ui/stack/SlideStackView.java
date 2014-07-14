@@ -18,24 +18,31 @@
 package org.jrebirth.af.presentation.ui.stack;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
 import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.ui.AbstractView;
+import org.jrebirth.af.core.ui.DefaultView;
+import org.jrebirth.af.core.ui.annotation.OnSwipe;
 import org.jrebirth.af.core.ui.annotation.RootNodeId;
+import org.jrebirth.af.core.ui.annotation.type.Swipe;
 
 /**
  * 
  * The class <strong>SlideStackView</strong>.
  * 
- * The main view of the JavaFX 2.0 Presentation.
+ * The main slide stack view of the Presentation engine.
  * 
  * @author Sébastien Bordes
- * 
  */
 @RootNodeId("SlideStack")
-public final class SlideStackView extends AbstractView<SlideStackModel, StackPane, SlideStackController> {
+// @OnKey(Key.Pressed)
+// @OnMouse(Mouse.Released)
+@OnSwipe({ Swipe.Left, Swipe.Right })
+public final class SlideStackView extends DefaultView<SlideStackModel, StackPane, SlideStackController> {
+
+    private Button circle;
 
     /**
      * Default Constructor.
@@ -60,6 +67,11 @@ public final class SlideStackView extends AbstractView<SlideStackModel, StackPan
         getRootNode().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         getRootNode().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         getRootNode().setAlignment(Pos.CENTER);
+
+        circle = new Button();
+
+        getRootNode().setOnKeyPressed(getMyController()::onKeyPressed);
+
         // getRootNode().setPadding(new Insets(5, 5, 5, 5));
 
         // Blend blend = new Blend();
@@ -76,12 +88,15 @@ public final class SlideStackView extends AbstractView<SlideStackModel, StackPan
         // getRootNode().setEffect(blend);
     }
 
+    public SlideStackController getMyController() {
+        return getController();
+    }
+
     /**
-     * {@inheritDoc}
+     * @return Returns the circle.
      */
-    @Override
-    public void start() {
-        // Nothing to do yet
+    protected Button getCircle() {
+        return circle;
     }
 
     /**
@@ -90,15 +105,8 @@ public final class SlideStackView extends AbstractView<SlideStackModel, StackPan
     @Override
     public void hide() {
         // Nothing to do yet
+        super.hide();
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void reload() {
-        // Nothing to do yet
-
-    }
 }

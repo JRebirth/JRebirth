@@ -22,6 +22,7 @@ import javafx.scene.Node;
 import org.jrebirth.af.core.command.DefaultUIBeanCommand;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.Wave;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,11 +1,7 @@
 package org.jrebirth.af.core.facade;
 
-import static junit.framework.Assert.assertNotNull;
-
 import org.jrebirth.af.core.application.TestApplication;
 import org.jrebirth.af.core.command.basic.SwitchFullScreenCommand;
-import org.jrebirth.af.core.facade.CommandFacade;
-import org.jrebirth.af.core.facade.GlobalFacadeBase;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,9 +10,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static junit.framework.Assert.assertNotNull;
+
 /**
  * The class <strong>FacadeTest</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class FacadeTest {
@@ -27,7 +25,7 @@ public class FacadeTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @BeforeClass
@@ -37,7 +35,7 @@ public class FacadeTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @Before
@@ -90,7 +88,7 @@ public class FacadeTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @After
@@ -100,7 +98,7 @@ public class FacadeTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @AfterClass

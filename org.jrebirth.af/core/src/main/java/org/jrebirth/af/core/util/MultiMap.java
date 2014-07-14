@@ -13,23 +13,23 @@ public class MultiMap<K, V> implements Map<K, List<V>> {
 
     @Override
     public int size() {
-        return map.size();
+        return this.map.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return map.isEmpty();
+        return this.map.isEmpty();
     }
 
     @Override
-    public boolean containsKey(Object key) {
-        return map.containsKey(key);
+    public boolean containsKey(final Object key) {
+        return this.map.containsKey(key);
     }
 
     @Override
-    public boolean containsValue(Object value) {
+    public boolean containsValue(final Object value) {
         boolean res = false;
-        for (List<V> list : map.values()) {
+        for (final List<V> list : this.map.values()) {
             if (list.contains(value)) {
                 res = true;
                 break;
@@ -39,50 +39,50 @@ public class MultiMap<K, V> implements Map<K, List<V>> {
     }
 
     @Override
-    public List<V> get(Object key) {
-        return map.get(key);
+    public List<V> get(final Object key) {
+        return this.map.get(key);
     }
 
-    public boolean putItem(K key, V value) {
-        if (!map.containsKey(key)) {
-            map.put(key, new ArrayList<V>());
+    public boolean add(final K key, final V value) {
+        if (!this.map.containsKey(key)) {
+            this.map.put(key, new ArrayList<V>());
         }
-        return map.get(key).add(value);
+        return this.map.get(key).add(value);
     }
 
     @Override
-    public List<V> put(K key, List<V> value) {
-        return map.put(key, value);
+    public List<V> put(final K key, final List<V> value) {
+        return this.map.put(key, value);
     }
 
     @Override
-    public List<V> remove(Object key) {
-        return map.remove(key);
+    public List<V> remove(final Object key) {
+        return this.map.remove(key);
     }
 
     @Override
     public void clear() {
-        map.clear();
+        this.map.clear();
     }
 
     @Override
     public Set<K> keySet() {
-        return map.keySet();
+        return this.map.keySet();
     }
 
     @Override
     public Collection<List<V>> values() {
-        return map.values();
+        return this.map.values();
     }
 
     @Override
     public Set<java.util.Map.Entry<K, List<V>>> entrySet() {
-        return map.entrySet();
+        return this.map.entrySet();
     }
 
     @Override
-    public void putAll(Map<? extends K, ? extends List<V>> m) {
-        map.putAll(m);
+    public void putAll(final Map<? extends K, ? extends List<V>> m) {
+        this.map.putAll(m);
     }
 
 }

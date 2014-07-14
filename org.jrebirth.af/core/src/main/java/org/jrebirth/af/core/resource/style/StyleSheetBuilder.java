@@ -22,6 +22,7 @@ import java.net.URL;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

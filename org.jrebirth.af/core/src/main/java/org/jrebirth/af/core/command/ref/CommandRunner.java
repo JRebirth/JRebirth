@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.jrebirth.af.core.command.ref;
 

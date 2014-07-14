@@ -11,17 +11,17 @@ public class AdapterController extends DefaultController implements ActionAdapte
 
     private final Button button;
 
-    public AdapterController(View view) throws CoreException {
+    public AdapterController(final View view) throws CoreException {
         super(view);
 
-        button = new Button();
+        this.button = new Button();
     }
 
     /**
      * @return Returns the button.
      */
     protected Button getButton() {
-        return button;
+        return this.button;
     }
 
     /**
@@ -31,7 +31,7 @@ public class AdapterController extends DefaultController implements ActionAdapte
     protected void initEventHandlers() throws CoreException {
         super.initEventHandlers();
 
-        button.setOnAction(getHandler(ActionEvent.ACTION));
+        this.button.setOnAction(getHandler(ActionEvent.ACTION));
     }
 
 }

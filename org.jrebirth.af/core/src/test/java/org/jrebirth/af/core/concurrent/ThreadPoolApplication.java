@@ -9,7 +9,7 @@ import org.jrebirth.af.core.ui.Model;
 
 /**
  * The class <strong>ThreadApplication</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 @Configuration(value = ".*-jrebirth", extension = "properties", schedule = 60)

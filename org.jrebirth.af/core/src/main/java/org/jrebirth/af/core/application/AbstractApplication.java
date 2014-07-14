@@ -32,6 +32,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import com.sun.javafx.application.LauncherImpl;
+
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
@@ -51,8 +53,6 @@ import org.jrebirth.af.core.resource.provided.JRebirthStyles;
 import org.jrebirth.af.core.resource.style.StyleSheetItem;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.preloader.JRebirthPreloader;
-
-import com.sun.javafx.application.LauncherImpl;
 
 /**
  *

@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,11 +43,11 @@ import org.jrebirth.af.showcase.analyzer.ui.editor.BallColors;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 
 /**
- * 
+ *
  * The class <strong>BallView</strong>.
- * 
+ *
  * The view used to display a vent node.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class BallView extends DefaultView<BallModel, StackPane, BallController> {
@@ -70,9 +70,9 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param model the controls view model
-     * 
+     *
      * @throws CoreException if build fails
      */
     public BallView(final BallModel model) throws CoreException {
@@ -105,25 +105,25 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
         this.showTransition = ParallelTransitionBuilder.create()
                 .children(
                         ScaleTransitionBuilder.create()
-                                .duration(Duration.millis(400))
-                                .node(getRootNode())
-                                .fromX(0.0)
-                                .fromY(0.0)
-                                .toX(1f)
-                                .toY(1f)
-                                .build(),
+                        .duration(Duration.millis(400))
+                        .node(getRootNode())
+                        .fromX(0.0)
+                        .fromY(0.0)
+                        .toX(1f)
+                        .toY(1f)
+                        .build(),
                         TranslateTransitionBuilder.create()
-                                .duration(Duration.millis(500))
-                                .node(getRootNode())
-                                .fromX(0.0)
-                                .fromY(0.0)
-                                .toX(getX())
-                                .toY(getY())
-                                .build()
-                )
-                .cycleCount(1)
-                .autoReverse(false)
-                .build();
+                        .duration(Duration.millis(500))
+                        .node(getRootNode())
+                        .fromX(0.0)
+                        .fromY(0.0)
+                        .toX(getX())
+                        .toY(getY())
+                        .build()
+                        )
+                        .cycleCount(1)
+                        .autoReverse(false)
+                        .build();
 
         this.showTransition.setOnFinished(new EventHandler<ActionEvent>() {
 
@@ -173,7 +173,7 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
 
     /**
      * Define the ball style.
-     * 
+     *
      * @param eventType the type of event for this ball
      */
     public void setStyle(final JRebirthEventType eventType) {
@@ -230,14 +230,14 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
      */
     public void resetScale() {
         ScaleTransitionBuilder.create()
-                .duration(Duration.millis(400))
-                .node(getRootNode())
-                .toX(1f)
-                .toY(1f)
-                .cycleCount(1)
-                .autoReverse(false)
-                .build()
-                .play();
+        .duration(Duration.millis(400))
+        .node(getRootNode())
+        .toX(1f)
+        .toY(1f)
+        .cycleCount(1)
+        .autoReverse(false)
+        .build()
+        .play();
     }
 
     /**
@@ -294,7 +294,7 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
 
     /**
      * Return the x coordinate.
-     * 
+     *
      * @return the x value
      */
     private double getX() {
@@ -326,7 +326,7 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
 
     /**
      * Return the y coordinate.
-     * 
+     *
      * @return the y value
      */
     private double getY() {

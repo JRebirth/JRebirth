@@ -17,6 +17,10 @@
  */
 package org.jrebirth.af.core.key;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * The class <strong>ClassKey</strong>.
  *
@@ -34,14 +38,26 @@ public class ClassKey<R> implements UniqueKey<R> {
     /** The class definition of the component registered by the current key. */
     private final Class<R> classField;
 
+    /** List of optional data to be transmit to the component. */
+    private final List<Object> optionalDatas;
+
     /**
      * Default Constructor.
      *
      * @param classField the class type of the registered component
      */
-    public ClassKey(final Class<R> classField) {
+    public ClassKey(final Class<R> classField, final Object... optionalData) {
         super();
         this.classField = classField;
+        if (optionalData.length > 0) {
+            this.optionalDatas = new ArrayList<Object>();
+            for (final Object data : optionalData) {
+                this.optionalDatas.add(data);
+            }
+        } else {
+            // No optional data
+            this.optionalDatas = null;
+        }
     }
 
     /**
@@ -91,5 +107,13 @@ public class ClassKey<R> implements UniqueKey<R> {
     @Override
     public Class<R> getClassField() {
         return this.classField;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Object> getOptionalData() {
+        return this.optionalDatas == null ? Collections.emptyList() : this.optionalDatas;
     }
 }

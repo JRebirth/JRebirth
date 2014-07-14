@@ -131,17 +131,17 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         // Use the Wave UID to guarantee that a new fresh command is built and used !
         final Command command = wave.contains(JRebirthWaves.REUSE_COMMAND) && wave.get(JRebirthWaves.REUSE_COMMAND)
                 ? getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.componentClass())
-                : getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.componentClass(), wave.getWUID());
+                        : getGlobalFacade().getCommandFacade().retrieve((Class<Command>) wave.componentClass(), wave.getWUID());
 
-        if (command == null) {
-            LOGGER.error(COMMAND_NOT_FOUND_ERROR, wave.toString());
-            if (JRebirthParameters.DEVELOPER_MODE.get()) {
-                this.unprocessedWaveHandler.manageUnprocessedWave(COMMAND_NOT_FOUND_MESSAGE.getText(), wave);
-            }
-        } else {
-            // Run the command into the predefined thread
-            command.run(wave);
-        }
+                if (command == null) {
+                    LOGGER.error(COMMAND_NOT_FOUND_ERROR, wave.toString());
+                    if (JRebirthParameters.DEVELOPER_MODE.get()) {
+                        this.unprocessedWaveHandler.manageUnprocessedWave(COMMAND_NOT_FOUND_MESSAGE.getText(), wave);
+                    }
+                } else {
+                    // Run the command into the predefined thread
+                    command.run(wave);
+                }
     }
 
     /**
@@ -292,7 +292,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             if (!this.notifierMap.containsKey(waveType)) {
                 this.notifierMap.put(waveType, LoopBuilder.newSubscription(waveType));
             }
-            // Retrieve he list associated to this Wave Type
+            // Retrieve the list associated to this Wave Type
             final WaveSubscription ws = this.notifierMap.get(waveType);
 
             // Remove the linked object to unregister it
@@ -306,6 +306,12 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
                 // Add the linked object if the list is empty or if the object isn't yet contained
                 ws.getWaveHandlers().add(LoopBuilder.newHandler(linkedObject, waveChecker, method));
             }
+
+            // // Manage return wave type registration
+            // WaveType returnWaveType = waveType.returnWaveType();
+            // if (returnWaveType != null) {
+            // listen(linkedObject, waveChecker, method, returnWaveType);
+            // }
         }
     }
 

@@ -38,7 +38,7 @@ import org.jrebirth.af.core.util.ClassUtility;
  * @param <V> the class type of the view managed by this model
  * @param <O> the class type of the bindable object
  */
-public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, ?>, O extends Object> extends AbstractModel<M, V> {
+public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, ?>, O extends Object> extends AbstractModel<M, V> implements ModelObject<O> {
 
     /** The list of type to exclude in order to find the object type from generics declaration. */
     private static final Class<?>[] OBJECT_EXCLUDED_CLASSES = new Class<?>[] { Model.class, View.class, Node.class, Controller.class };

@@ -19,8 +19,8 @@ package org.jrebirth.af.core.service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javafx.concurrent.Task;
@@ -83,7 +83,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
     private final RunnablePriority priority;
 
     /** The creation timestamp in milliseconds. */
-    private final long creationTime;
+    private final Instant creationTime;
 
     /**
      * Default Constructor only visible by service package.
@@ -96,7 +96,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
     ServiceTask(final Service service, final Method method, final Object[] parameterValues, final Wave wave) {
         super();
 
-        this.creationTime = Calendar.getInstance().getTimeInMillis();
+        this.creationTime = Instant.now();
 
         this.service = service;
         this.method = method;
@@ -183,18 +183,18 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
         Wave returnWave = null;
 
         // Try to retrieve the return Wave type, could be null
-        final WaveType responseWaveType = this.service.getReturnWaveType(this.wave.waveType());
+        final WaveType responseWaveType = /* this.service.getReturnWaveType( */this.wave.waveType().returnWaveType();
 
         if (responseWaveType != null) {
 
             // No service result type defined into a WaveItem
-            if (((WaveTypeBase) responseWaveType).getWaveItemList().isEmpty()) {
+            if (((WaveTypeBase) responseWaveType).items().isEmpty()) {
                 LOGGER.log(NO_RETURNED_WAVE_ITEM);
                 throw new CoreException(NO_RETURNED_WAVE_ITEM);
             }
 
             // Get the first (and unique) WaveItem used to define the service result type
-            final WaveItem<T> resultWaveItem = (WaveItem<T>) ((WaveTypeBase) responseWaveType).getWaveItemList().get(0);
+            final WaveItem<T> resultWaveItem = (WaveItem<T>) ((WaveTypeBase) responseWaveType).items().get(0);
 
             // Try to retrieve the command class, could be null
             final Class<? extends Command> responseCommandClass = this.service.getReturnCommand(this.wave.waveType());
@@ -314,7 +314,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
      * {@inheritDoc}
      */
     @Override
-    public long getCreationTime() {
+    public Instant getCreationTime() {
         return this.creationTime;
     }
 

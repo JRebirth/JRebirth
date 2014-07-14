@@ -7,9 +7,6 @@ import javafx.scene.text.FontWeight;
 import junit.framework.Assert;
 
 import org.jrebirth.af.core.resource.ResourceBuilders;
-import org.jrebirth.af.core.resource.font.AbstractBaseFont;
-import org.jrebirth.af.core.resource.font.FamilyFont;
-import org.jrebirth.af.core.resource.font.FontItem;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -23,7 +20,7 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * The class <strong>ColorTest</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class FontTest {

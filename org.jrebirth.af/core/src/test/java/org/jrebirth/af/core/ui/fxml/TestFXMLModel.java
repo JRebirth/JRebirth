@@ -1,11 +1,10 @@
 package org.jrebirth.af.core.ui.fxml;
 
-import org.jrebirth.af.core.ui.fxml.DefaultFXMLModel;
 import org.jrebirth.af.core.wave.Wave;
 
 /**
  * The class <strong>TestFXMLModel</strong>. TODO To complete
- * 
+ *
  * @author Sébastien Bordes
  */
 public class TestFXMLModel extends DefaultFXMLModel<TestFXMLModel> {

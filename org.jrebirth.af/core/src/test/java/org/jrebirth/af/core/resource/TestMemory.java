@@ -22,22 +22,22 @@ public class TestMemory extends ApplicationTest<FullConfApplication> {
 
     @Test
     public void checkFullConf() {
-        int mb = 1024 * 1024;
+        final int mb = 1024 * 1024;
 
         // Getting the runtime reference from system
-        Runtime runtime = Runtime.getRuntime();
+        final Runtime runtime = Runtime.getRuntime();
 
         System.out.println("Used Memory1:"
                 + (runtime.totalMemory() - runtime.freeMemory()) / mb);
 
-        List<Color> list = new ArrayList<>();
+        final List<Color> list = new ArrayList<>();
         for (int red = 0; red < 256; red++) {
 
             for (int green = 0; green < 256; green++) {
 
                 for (int blue = 0; blue < 2; blue++) {
 
-                    ColorItem ci = Resources.create(new RGB255Color(red, green, blue));
+                    final ColorItem ci = Resources.create(new RGB255Color(red, green, blue));
                     list.add(ci.get());
                 }
 
@@ -67,14 +67,14 @@ public class TestMemory extends ApplicationTest<FullConfApplication> {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws InterruptedException
      */
     private void callGC() {
         System.gc();
         try {
             Thread.sleep(2000);
-        } catch (InterruptedException e) {
+        } catch (final InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

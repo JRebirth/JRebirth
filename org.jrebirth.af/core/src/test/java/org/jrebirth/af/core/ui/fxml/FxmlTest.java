@@ -4,8 +4,6 @@ import javafx.scene.Node;
 import javafx.scene.text.Text;
 
 import org.jrebirth.af.core.test.AbstractTest;
-import org.jrebirth.af.core.ui.fxml.FXMLComponent;
-import org.jrebirth.af.core.ui.fxml.FXMLUtils;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -14,7 +12,7 @@ import org.junit.Test;
 
 /**
  * The class <strong>FxmlTest</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class FxmlTest extends AbstractTest {
@@ -23,7 +21,7 @@ public class FxmlTest extends AbstractTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @Before
@@ -102,7 +100,7 @@ public class FxmlTest extends AbstractTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @param node
      */
     private void checkFxmlNode(final Node node) {
@@ -118,7 +116,7 @@ public class FxmlTest extends AbstractTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @After

@@ -1,11 +1,5 @@
 package org.jrebirth.af.core.ui.model;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNotSame;
-import static junit.framework.Assert.assertNull;
-import static junit.framework.Assert.assertSame;
-
 import org.jrebirth.af.core.test.AbstractTest;
 import org.jrebirth.af.core.ui.AbstractModel;
 import org.jrebirth.af.core.ui.object.AbstractObjectModel;
@@ -13,16 +7,22 @@ import org.jrebirth.af.core.ui.object.AbstractObjectModel;
 import org.junit.After;
 import org.junit.Before;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNotSame;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertSame;
+
 /**
  * The class <strong>FxmlTest</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public abstract class AbstractModelTest extends AbstractTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @Before
@@ -33,26 +33,26 @@ public abstract class AbstractModelTest extends AbstractTest {
     /**
      * TODO To complete.
      */
-    protected <M extends AbstractModel> void basicModel(Class<M> modelClass) {
+    protected <M extends AbstractModel> void basicModel(final Class<M> modelClass) {
 
-        M msm1 = globalFacade.getUiFacade().retrieve(modelClass);
-        M msm1bis = globalFacade.getUiFacade().retrieve(modelClass);
+        final M msm1 = globalFacade.getUiFacade().retrieve(modelClass);
+        final M msm1bis = globalFacade.getUiFacade().retrieve(modelClass);
 
-        M msm2 = globalFacade.getUiFacade().retrieve(modelClass, "keypart");
-        M msm2bis = globalFacade.getUiFacade().retrieve(modelClass, "keypart");
+        final M msm2 = globalFacade.getUiFacade().retrieve(modelClass, "keypart");
+        final M msm2bis = globalFacade.getUiFacade().retrieve(modelClass, "keypart");
 
-        M msm3 = globalFacade.getUiFacade().retrieve(modelClass, "key", "part", 18);
-        M msm3bis = globalFacade.getUiFacade().retrieve(modelClass, "key", "part", 18);
+        final M msm3 = globalFacade.getUiFacade().retrieve(modelClass, "key", "part", 18);
+        final M msm3bis = globalFacade.getUiFacade().retrieve(modelClass, "key", "part", 18);
 
-        M msm4 = globalFacade.getUiFacade().retrieve(modelClass, "key", new ModelBean("bean"));
-        M msm4bis = globalFacade.getUiFacade().retrieve(modelClass, "key", new ModelBean("bean"));
+        final M msm4 = globalFacade.getUiFacade().retrieve(modelClass, "key", new ModelBean("bean"));
+        final M msm4bis = globalFacade.getUiFacade().retrieve(modelClass, "key", new ModelBean("bean"));
 
-        ModelBean bean5 = new ModelBean("bean5");
-        M msm5 = globalFacade.getUiFacade().retrieve(modelClass, bean5);
-        M msm5bis = globalFacade.getUiFacade().retrieve(modelClass, new ModelBean("bean5"));
+        final ModelBean bean5 = new ModelBean("bean5");
+        final M msm5 = globalFacade.getUiFacade().retrieve(modelClass, bean5);
+        final M msm5bis = globalFacade.getUiFacade().retrieve(modelClass, new ModelBean("bean5"));
 
-        M msm6 = globalFacade.getUiFacade().retrieve(modelClass, new ModelBean2("bean", 1));
-        M msm7 = globalFacade.getUiFacade().retrieve(modelClass, new ModelBean2("bean", 2));
+        final M msm6 = globalFacade.getUiFacade().retrieve(modelClass, new ModelBean2("bean", 1));
+        final M msm7 = globalFacade.getUiFacade().retrieve(modelClass, new ModelBean2("bean", 2));
 
         assertSame(msm1, msm1bis);
         assertNotSame(msm1, msm2);
@@ -97,27 +97,27 @@ public abstract class AbstractModelTest extends AbstractTest {
     /**
      * TODO To complete.
      */
-    protected <M extends AbstractObjectModel, M2 extends AbstractObjectModel> void objectModel(Class<M> modelClass, Class<M2> modelClass2) {
+    protected <M extends AbstractObjectModel, M2 extends AbstractObjectModel> void objectModel(final Class<M> modelClass, final Class<M2> modelClass2) {
 
-        M msom1 = globalFacade.getUiFacade().retrieve(modelClass);
-        M msom1bis = globalFacade.getUiFacade().retrieve(modelClass);
+        final M msom1 = globalFacade.getUiFacade().retrieve(modelClass);
+        final M msom1bis = globalFacade.getUiFacade().retrieve(modelClass);
 
-        M msom2 = globalFacade.getUiFacade().retrieve(modelClass, "keypart");
-        M msom2bis = globalFacade.getUiFacade().retrieve(modelClass, "keypart");
+        final M msom2 = globalFacade.getUiFacade().retrieve(modelClass, "keypart");
+        final M msom2bis = globalFacade.getUiFacade().retrieve(modelClass, "keypart");
 
-        M msom3 = globalFacade.getUiFacade().retrieve(modelClass, "key", "part", 18);
-        M msom3bis = globalFacade.getUiFacade().retrieve(modelClass, "key", "part", 18);
+        final M msom3 = globalFacade.getUiFacade().retrieve(modelClass, "key", "part", 18);
+        final M msom3bis = globalFacade.getUiFacade().retrieve(modelClass, "key", "part", 18);
 
-        M msom4 = globalFacade.getUiFacade().retrieve(modelClass, "key", new ModelBean("bean"));
-        M msom4bis = globalFacade.getUiFacade().retrieve(modelClass, "key", new ModelBean("bean"));
+        final M msom4 = globalFacade.getUiFacade().retrieve(modelClass, "key", new ModelBean("bean"));
+        final M msom4bis = globalFacade.getUiFacade().retrieve(modelClass, "key", new ModelBean("bean"));
 
-        ModelBean bean5 = new ModelBean("bean5");
-        M msom5 = globalFacade.getUiFacade().retrieve(modelClass, bean5);
-        M msom5bis = globalFacade.getUiFacade().retrieve(modelClass, new ModelBean("bean5"));
-        M msom5ter = globalFacade.getUiFacade().retrieve(modelClass, new ModelBean("beanTER"));
+        final ModelBean bean5 = new ModelBean("bean5");
+        final M msom5 = globalFacade.getUiFacade().retrieve(modelClass, bean5);
+        final M msom5bis = globalFacade.getUiFacade().retrieve(modelClass, new ModelBean("bean5"));
+        final M msom5ter = globalFacade.getUiFacade().retrieve(modelClass, new ModelBean("beanTER"));
 
-        M2 msom6 = globalFacade.getUiFacade().retrieve(modelClass2, new ModelBean2("bean", 1));
-        M2 msom7 = globalFacade.getUiFacade().retrieve(modelClass2, new ModelBean2("bean", 2));
+        final M2 msom6 = globalFacade.getUiFacade().retrieve(modelClass2, new ModelBean2("bean", 1));
+        final M2 msom7 = globalFacade.getUiFacade().retrieve(modelClass2, new ModelBean2("bean", 2));
 
         assertSame(msom1, msom1bis);
         assertNotSame(msom1, msom2);
@@ -161,7 +161,7 @@ public abstract class AbstractModelTest extends AbstractTest {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @throws java.lang.Exception
      */
     @After

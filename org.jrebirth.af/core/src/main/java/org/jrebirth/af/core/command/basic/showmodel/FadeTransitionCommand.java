@@ -30,6 +30,7 @@ import org.jrebirth.af.core.command.AbstractSingleCommand;
 import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.wave.Wave;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,20 +77,20 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
             if (oldNode != null) {
                 animation.getChildren().add(
                         FadeTransitionBuilder.create()
-                                .duration(Duration.millis(600))
-                                .node(oldNode)
-                                .fromValue(1.0)
-                                .toValue(0.0)
-                                .build());
+                        .duration(Duration.millis(600))
+                        .node(oldNode)
+                        .fromValue(1.0)
+                        .toValue(0.0)
+                        .build());
             }
             if (newNode != null) {
                 animation.getChildren().add(
                         FadeTransitionBuilder.create()
-                                .duration(Duration.millis(600))
-                                .node(newNode)
-                                .fromValue(0.0)
-                                .toValue(1.0)
-                                .build());
+                        .duration(Duration.millis(600))
+                        .node(newNode)
+                        .fromValue(0.0)
+                        .toValue(1.0)
+                        .build());
             }
 
             final Node oldNodeLink = oldNode;

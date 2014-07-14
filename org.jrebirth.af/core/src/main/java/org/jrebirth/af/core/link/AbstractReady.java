@@ -142,13 +142,13 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
         }
         return listModelObject;
     }
-    
+
     @SuppressWarnings("unchecked")
-	public <KP extends Object> KP getKeyPart(Class<KP> keyPartClass){
-    	return (KP) getListKeyPart().stream()
-    			.filter(kp-> kp != null && keyPartClass.isAssignableFrom(kp.getClass()))
-    			.findFirst()
-    			.get();
+    public <KP extends Object> KP getKeyPart(final Class<KP> keyPartClass) {
+        return (KP) getListKeyPart().stream()
+                .filter(kp -> kp != null && keyPartClass.isAssignableFrom(kp.getClass()))
+                .findFirst()
+                .get();
     }
 
     /**
@@ -164,6 +164,15 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
+    public final <S extends Service> S getService(final UniqueKey<S> serviceKey) {
+        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_SERVICE, this.getClass(), serviceKey.getClassField());
+        return getLocalFacade().getGlobalFacade().getServiceFacade().retrieve(serviceKey);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public final <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart) {
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_COMMAND, this.getClass(), clazz);
         return getLocalFacade().getGlobalFacade().getCommandFacade().retrieve(clazz, keyPart);
@@ -173,9 +182,27 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
+    public final <C extends Command> C getCommand(final UniqueKey<C> commandKey) {
+        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_COMMAND, this.getClass(), commandKey.getClassField());
+        return getLocalFacade().getGlobalFacade().getCommandFacade().retrieve(commandKey);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public final <M extends Model> M getModel(final Class<M> clazz, final Object... keyPart) {
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_MODEL, this.getClass(), clazz);
         return getLocalFacade().getGlobalFacade().getUiFacade().retrieve(clazz, keyPart);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final <M extends Model> M getModel(final UniqueKey<M> modelKey) {
+        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_MODEL, this.getClass(), modelKey.getClassField());
+        return getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelKey);
     }
 
 }
