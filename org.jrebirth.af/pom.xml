@@ -43,8 +43,8 @@
 		<module>showcase</module>
 		<module>preloader</module>
 		<module>processor</module>
-		<!-- <module>modular</module>
-		<module>security</module> -->
+		<module>modular</module>
+		<module>security</module>
 	</modules>
 
 	<issueManagement>

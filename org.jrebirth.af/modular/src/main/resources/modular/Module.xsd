@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.jrebirth.org/Module" xmlns:tns="http://www.jrebirth.org/Module"
+	elementFormDefault="qualified">
+
+	<element name="module" type="tns:Module" />
+
+	<complexType name="Module">
+
+		<all>
+			<element name="name" minOccurs="0" maxOccurs="1"></element>
+
+			<element name="registrations" type="tns:RegistrationList" minOccurs="0" maxOccurs="1"></element>
+		</all>
+	</complexType>
+
+	<complexType name="RegistrationList">
+		<sequence>
+			<element name="registration" type="tns:Registration" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Registration">
+
+		<all>
+			<element name="registrationEntries" type="tns:RegistrationEntryList" minOccurs="0" maxOccurs="1"></element>
+		</all>
+		
+		<attribute name="class" type="string" use="required" />
+		<attribute name="exclusive" type="boolean" use="optional" default="true" />
+		
+	</complexType>
+	
+	<complexType name="RegistrationEntryList">
+		<sequence>
+			<element name="registrationEntry" type="tns:RegistrationEntry" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="RegistrationEntry">
+
+		<attribute name="class" type="string" />
+		<attribute name="priority" type="string"/>
+
+	</complexType>
+
+	
+</schema>
