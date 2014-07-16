@@ -17,6 +17,7 @@
  */
 package org.jrebirth.af.core.resource.parameter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -106,6 +107,8 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
             res = this.object;
         } else if (this.object instanceof Class<?>) {
             res = parseClassParameter(parameterEntry.getSerializedString());
+        } else if (this.object instanceof List<?>) {
+            res = parseListParameter(parameterEntry.getSerializedString());
         } else {
             res = parsePrimitive(parameterEntry.getSerializedString());
         }
@@ -134,6 +137,23 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
         return res;
     }
 
+    /**
+     * Parse a generic list.
+     * 
+     * @param serializedObject the concatenated list
+     * 
+     * @return the list object
+     */
+    private Object parseListParameter(final String serializedObject) {
+        List<Object> res = new ArrayList<>();
+            
+        for(String item : serializedObject.split(";")){
+            res.add(item);
+        }
+            
+        return res;
+    }
+    
     /**
      * Parse primitive serialized object.
      *

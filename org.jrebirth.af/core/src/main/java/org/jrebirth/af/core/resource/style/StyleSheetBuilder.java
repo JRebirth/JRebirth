@@ -18,6 +18,7 @@
 package org.jrebirth.af.core.resource.style;
 
 import java.net.URL;
+import java.util.List;
 
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
@@ -64,8 +65,6 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
 
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(JRebirthParameters.STYLE_FOLDER.get()).append(Resources.PATH_SEP);
-
         if (!ss.path().isEmpty()) {
             sb.append(ss.path()).append(Resources.PATH_SEP);
         }
@@ -88,10 +87,18 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
      */
     private URL buildUrl(final String styleSheetPath) {
 
-        final URL cssResource = Thread.currentThread().getContextClassLoader().getResource(styleSheetPath);
-
+        URL cssResource = null;
+        
+        List<String> stylePaths = JRebirthParameters.STYLE_FOLDER.get();
+        for(int i = 0 ; i < stylePaths.size() && cssResource == null ;i++){
+            
+            String stylePath = stylePaths.get(i);
+            
+            cssResource = Thread.currentThread().getContextClassLoader().getResource(stylePath + Resources.PATH_SEP + styleSheetPath);
+        }
+        
         if (cssResource == null) {
-            LOGGER.error("Style Sheet : " + styleSheetPath + " not found !");
+            LOGGER.error("Style Sheet : {} not found into base folder: {}", styleSheetPath , JRebirthParameters.STYLE_FOLDER.get());
         }
         return cssResource;
     }
