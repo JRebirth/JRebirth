@@ -14,7 +14,7 @@
 	<properties>
 		<title>EclipseDay Toulouse - Use JavaFX with Eclipse</title>
 		<author>Sébastien Bordes</author>
-		<date>11/16/2012</date>
+		<!--<date>11/16/2012</date>-->
 	</properties>
 
 	<head>
