@@ -43,6 +43,9 @@ public interface TestImages {
 
     /** The local image. */
     ImageItem TEST_LOCAL_IMAGE_3 = create(new LocalImage("logo", ImageExtension.PNG));
+    
+    /** The local image. */
+    ImageItem TEST_LOCAL_IMAGE_4 = create(new LocalImage("logoBiss", ImageExtension.PNG));
 
     /**************************************************************************************/
     /** ___________________________________Web Image.____________________________________ */

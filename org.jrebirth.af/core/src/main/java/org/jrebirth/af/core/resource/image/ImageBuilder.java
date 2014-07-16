@@ -18,6 +18,7 @@
 package org.jrebirth.af.core.resource.image;
 
 import java.io.InputStream;
+import java.util.List;
 
 import javafx.scene.image.Image;
 
@@ -25,7 +26,6 @@ import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthImages;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,10 +54,18 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             // Build the requested font
             image = buildWebImage((WebImage) jrImage);
         }
-        if (image == null) {
+        
+        // Try to get the default image when an image is not found
+        if (image == null && !JRebirthParameters.NOT_AVAILABLE_IMAGE_NAME.equals(jrImage.name())) {
             // Return the default image
             image = JRebirthImages.NOT_AVAILABLE.get();
         }
+        
+        // Default image was not found
+        if(image == null){
+            //Build one programmatically TODO
+        }
+        
         return image;
     }
 
@@ -112,12 +120,18 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      */
     private Image loadImage(final String resourceName) {
         Image image = null;
-        final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(JRebirthParameters.IMAGE_FOLDER.get() + Resources.PATH_SEP + resourceName);
-        if (imageInputStream != null) {
-            image = new Image(imageInputStream);
+        
+        List<String> imagePaths = JRebirthParameters.IMAGE_FOLDER.get();
+        for(int i = 0 ; i < imagePaths.size() && image == null ;i++){
+            
+            String imagePath = imagePaths.get(i);
+            final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(imagePath + Resources.PATH_SEP + resourceName);
+            if (imageInputStream != null) {
+                image = new Image(imageInputStream);
+            }
         }
         if (image == null) {
-            LOGGER.error("Image : {} not found into base folder: {}", resourceName, JRebirthParameters.IMAGE_FOLDER.get() + Resources.PATH_SEP);
+            LOGGER.error("Image : {} not found into base folder: {}", resourceName, JRebirthParameters.IMAGE_FOLDER.get());
         }
         return image;
     }

@@ -1,12 +1,14 @@
 package org.jrebirth.af.core.resource.image;
 
+import java.util.Arrays;
+
 import javafx.scene.image.Image;
 
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.image.ImageItem;
 import org.jrebirth.af.core.resource.image.LocalImage;
-
+import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,7 +31,7 @@ public class ImageTest {
 
     @Before
     public void setUp() throws Exception {
-
+        JRebirthParameters.IMAGE_FOLDER.define(Arrays.asList("images", "imagesBis"));
     }
 
     @Test
@@ -38,6 +40,7 @@ public class ImageTest {
         checkLocalImage(TestImages.TEST_LOCAL_IMAGE_1);
         checkLocalImage(TestImages.TEST_LOCAL_IMAGE_2);
         checkLocalImage(TestImages.TEST_LOCAL_IMAGE_3);
+        checkLocalImage(TestImages.TEST_LOCAL_IMAGE_4);
     }
 
     private void checkLocalImage(final ImageItem imageItem) {
