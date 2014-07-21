@@ -18,6 +18,7 @@
 package org.jrebirth.af.core.resource.style;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 
 import org.jrebirth.af.core.resource.Resources;
@@ -75,26 +76,30 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
             sb.append(CSS_EXT);
         }
 
-        return buildUrl(sb.toString());
+        return buildUrl(sb.toString(), ss.skipStylesFolder());
     }
 
     /**
      * Get a style sheet URL.
      * 
      * @param styleSheetPath the path of the style sheet, path must be separated by '/'
+     * @param skipStylesFolder skip stylesFolder usage
      * 
      * @return the stylesheet url
      */
-    private URL buildUrl(final String styleSheetPath) {
+    private URL buildUrl(final String styleSheetPath, final boolean skipStylesFolder) {
 
         URL cssResource = null;
         
-        List<String> stylePaths = JRebirthParameters.STYLE_FOLDER.get();
+        List<String> stylePaths = (skipStylesFolder) ? Collections.singletonList("") : JRebirthParameters.STYLE_FOLDER.get();
+        
         for(int i = 0 ; i < stylePaths.size() && cssResource == null ;i++){
             
             String stylePath = stylePaths.get(i);
-            
-            cssResource = Thread.currentThread().getContextClassLoader().getResource(stylePath + Resources.PATH_SEP + styleSheetPath);
+            if(!stylePath.isEmpty()){
+                stylePath += Resources.PATH_SEP;
+            }
+            cssResource = Thread.currentThread().getContextClassLoader().getResource(stylePath + styleSheetPath);
         }
         
         if (cssResource == null) {

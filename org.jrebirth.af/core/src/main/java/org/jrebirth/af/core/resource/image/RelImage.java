@@ -20,12 +20,14 @@ package org.jrebirth.af.core.resource.image;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+
 /**
  * The interface <strong>LocalImage</strong>.
  * 
  * @author Sébastien Bordes
  */
-public class LocalImage extends AbstractBaseImage implements ImageParams {
+public class RelImage extends AbstractBaseImage implements ImageParams {
 
     /**
      * Default Constructor.
@@ -34,17 +36,17 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
      * @param name the file name
      * @param extension the image extension
      */
-    public LocalImage(final String path, final String name, final ImageExtension extension) {
+    public RelImage(final String path, final String name, final ImageExtension extension) {
         super(path, name, extension);
     }
-
+    
     /**
      * Default Constructor.
      * 
      * @param name the file name
      * @param extension the image extension
      */
-    public LocalImage(final String name, final ImageExtension extension) {
+    public RelImage(final String name, final ImageExtension extension) {
         this("", name, extension);
     }
 
@@ -53,7 +55,7 @@ public class LocalImage extends AbstractBaseImage implements ImageParams {
      * 
      * @param fullName the full file name (including path and image extension)
      */
-    public LocalImage(final String fullName) {
+    public RelImage(final String fullName) {
         this("", fullName, ImageExtension.NONE);
     }
 

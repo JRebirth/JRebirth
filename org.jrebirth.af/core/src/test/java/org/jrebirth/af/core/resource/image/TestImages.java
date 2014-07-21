@@ -19,7 +19,7 @@ package org.jrebirth.af.core.resource.image;
 
 import org.jrebirth.af.core.resource.image.ImageExtension;
 import org.jrebirth.af.core.resource.image.ImageItem;
-import org.jrebirth.af.core.resource.image.LocalImage;
+import org.jrebirth.af.core.resource.image.RelImage;
 import org.jrebirth.af.core.resource.image.WebImage;
 
 import static org.jrebirth.af.core.resource.Resources.create;
@@ -36,16 +36,16 @@ public interface TestImages {
     /**************************************************************************************/
 
     /** The local image. */
-    ImageItem TEST_LOCAL_IMAGE_1 = create(new LocalImage("path1", "logo", ImageExtension.PNG));
+    ImageItem TEST_LOCAL_IMAGE_1 = create(new RelImage("path1", "logo", ImageExtension.PNG));
 
     /** The local image. */
-    ImageItem TEST_LOCAL_IMAGE_2 = create(new LocalImage("path1/path2", "logo", ImageExtension.PNG));
+    ImageItem TEST_LOCAL_IMAGE_2 = create(new RelImage("path1/path2", "logo", ImageExtension.PNG));
 
     /** The local image. */
-    ImageItem TEST_LOCAL_IMAGE_3 = create(new LocalImage("logo", ImageExtension.PNG));
+    ImageItem TEST_LOCAL_IMAGE_3 = create(new RelImage("logo", ImageExtension.PNG));
     
     /** The local image. */
-    ImageItem TEST_LOCAL_IMAGE_4 = create(new LocalImage("logoBiss", ImageExtension.PNG));
+    ImageItem TEST_LOCAL_IMAGE_4 = create(new RelImage("logoBiss", ImageExtension.PNG));
 
     /**************************************************************************************/
     /** ___________________________________Web Image.____________________________________ */

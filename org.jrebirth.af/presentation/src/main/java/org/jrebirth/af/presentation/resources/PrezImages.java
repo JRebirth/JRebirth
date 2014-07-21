@@ -20,13 +20,13 @@ package org.jrebirth.af.presentation.resources;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.image.ImageExtension;
 import org.jrebirth.af.core.resource.image.ImageItem;
-import org.jrebirth.af.core.resource.image.LocalImage;
+import org.jrebirth.af.core.resource.image.RelImage;
 
 /**
  * The PrezImages interface providing all images.
  */
 public interface PrezImages {
 
-    ImageItem HEADER_LOGO = Resources.create(new LocalImage("HeaderLogo", ImageExtension.PNG));
+    ImageItem HEADER_LOGO = Resources.create(new RelImage("HeaderLogo", ImageExtension.PNG));
 
 }
