@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.ui.fxml;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 
 import org.jrebirth.af.core.exception.CoreException;
@@ -107,6 +109,18 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
         } else if (getFXMLPath() != null) {
             this.fxmlComponent = FXMLUtils.loadFXML(this, getFXMLPath(), getFXMLBundlePath());
         }
+
+        // Allow to release the model if the root business object doesn't exist anymore
+        getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
+
+            @Override
+            public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
+                if (newValue == null) {
+                    release();
+                }
+            }
+
+        });
 
         // Do custom stuff
         initModel();
