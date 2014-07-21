@@ -17,13 +17,14 @@
  */
 package org.jrebirth.af.core.resource.provided;
 
-import static org.jrebirth.af.core.resource.Resources.create;
+import java.util.Collections;
+import java.util.List;
 
 import org.jrebirth.af.core.facade.factory.DefaultComponentFactory;
 import org.jrebirth.af.core.link.DefaultUnprocessedWaveHandler;
 import org.jrebirth.af.core.resource.color.WebColor;
 import org.jrebirth.af.core.resource.image.ImageExtension;
-import org.jrebirth.af.core.resource.image.LocalImage;
+import org.jrebirth.af.core.resource.image.RelImage;
 import org.jrebirth.af.core.resource.parameter.ParameterItem;
 import org.jrebirth.af.core.resource.style.StyleSheet;
 
@@ -38,6 +39,9 @@ public interface JRebirthParameters {
 
     /** The name of the AUTO_REFRESH parameter which is quite special because it modify how other parameters will be processed. */
     String AUTO_REFRESH_NAME = "autoRefreshResource";
+    
+    /** The image name of the NOT_AVAILABLE_IMAGE parameter, this image can lead to StackOverFlowError when it was not available. */
+    String NOT_AVAILABLE_IMAGE_NAME = "NotAvailableImage";
 
     /**************************************************************************************/
     /** __________________________Application Core Parameters.___________________________ */
@@ -84,18 +88,18 @@ public interface JRebirthParameters {
     /**************************************************************************************/
 
     /** Fonts default folder, Multiple folder can be managed by separating them with a comma ','. */
-    ParameterItem<String> FONT_FOLDER = create("fontsFolder", "fonts");
+    ParameterItem<List<String>> FONT_FOLDER = create("fontsFolder", Collections.singletonList("fonts"));
 
     /** Images default folder, Multiple folder can be managed by separating them with a comma ','. */
-    ParameterItem<String> IMAGE_FOLDER = create("imagesFolder", "images");
+    ParameterItem<List<String>> IMAGE_FOLDER = create("imagesFolder", Collections.singletonList("images"));
 
     /**
      * The <code>NOT_AVAILABLE_IMAGE</code> field is used to define the image to use when an image is missing.
      */
-    ParameterItem<LocalImage> NOT_AVAILABLE_IMAGE = create("notAvailableImage", new LocalImage("NotAvailableImage", ImageExtension.PNG));
+    ParameterItem<RelImage> NOT_AVAILABLE_IMAGE = create("notAvailableImage", new RelImage(NOT_AVAILABLE_IMAGE_NAME, ImageExtension.PNG));
 
     /** Styles default folder, Multiple folder can be managed by separating them with a comma ','. */
-    ParameterItem<String> STYLE_FOLDER = create("stylesFolder", "styles");
+    ParameterItem<List<String>> STYLE_FOLDER = create("stylesFolder", Collections.singletonList("styles"));
 
     /**
      * The <code>DEFAULT_CSS</code> field is used to parameterize the name of the default style sheet.

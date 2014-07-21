@@ -22,9 +22,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jrebirth.af.core.log.JRLogger;
@@ -50,12 +52,21 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /** Store all overridden values defined by the call of define method. */
     private final Map<ParameterItem<?>, Object> overriddenParametersMap = new ConcurrentHashMap<>();
+    
+    /** Store all translated environment variable. */
+    private final Map<String, String> varenvMap = new HashMap<>();
 
     /** The file extension used by configuration files. */
     private String configurationFileExtension;
 
     /** The Wildcard used to load configuration files. */
     private String configurationFileWildcard;
+
+    /** The pattern that matches Environment Variable ${varname} . */
+    private static final Pattern ENV_VAR_PATTERN1 = Pattern.compile("(.*)\\$\\{(\\w+)\\}(.*)");
+    
+    /** The pattern that matches Environment Variable $varname . */
+    private static final Pattern ENV_VAR_PATTERN2 = Pattern.compile("(.*)\\$(\\w+)(.*)");
 
     /**
      * Search configuration files according to the parameters provided.
@@ -138,7 +149,50 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
      * @param entry the entry to store
      */
     private void storePropertiesParameter(final Map.Entry<Object, Object> entry) {
-        this.propertiesParametersMap.put(entry.getKey().toString(), new ParameterEntry(entry.getValue().toString()));
+        this.propertiesParametersMap.put(entry.getKey().toString(), new ParameterEntry(resolveVarEnv(entry.getValue().toString())));
+    }
+
+    /**
+     * Resolve any environment variable found into the string.
+     * 
+     * @param entryValue the string to check and resolve
+     * 
+     * @return the final value with environment variable resolved
+     */
+    private String resolveVarEnv(final String entryValue) {
+        
+        String value = entryValue;
+        if(value != null){
+            value = checkPattern(value, ENV_VAR_PATTERN1, true);
+            value = checkPattern(value, ENV_VAR_PATTERN2, false);
+        }
+        return value;
+    }
+
+    /**
+     * Check if the given string contains an environment variable.
+     * 
+     * @param value the string value to parse
+     * @param pattern the regex pattern to use
+     * @param withBrace true for ${varname}, false for $varname
+     * 
+     * @return the given string updated with right environment variable content
+     */
+    private String checkPattern(String value, Pattern pattern, boolean withBrace) {
+        Matcher matcher = pattern.matcher(value);
+        while(matcher.find()){
+            String envName = matcher.group(2);
+            if(!varenvMap.containsKey(envName)){
+                String envValue = System.getenv(envName);
+                varenvMap.put(envName, envValue);
+            }
+            if(withBrace){
+                value = value.replace("${"+envName+"}", varenvMap.get(envName));
+            }else{
+                value = value.replace("$"+envName, varenvMap.get(envName));
+            }
+        }
+        return value;
     }
 
     /**
@@ -171,6 +225,10 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
             if (object == null) {
                 // No customized (properties and overridden) parameter has been loaded, gets the default programmatic one
                 object = op.object();
+                
+                if(object instanceof String){
+                    object = resolveVarEnv((String)object);
+                }
             }
 
             // // Don't store the parameter into the map if it hasn't got any parameter name

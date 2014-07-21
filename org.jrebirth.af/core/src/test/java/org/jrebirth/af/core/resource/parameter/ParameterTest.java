@@ -1,7 +1,10 @@
 package org.jrebirth.af.core.resource.parameter;
 
+import junit.framework.Assert;
+
 import org.jrebirth.af.core.resource.ResourceBuilders;
 
+import org.jrebirth.af.core.resource.parameter.ParameterItem;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -71,6 +74,28 @@ public class ParameterTest {
 
         assertEquals(2000, TestParameters.OVERRIDABLE_PARAM.get().intValue());
 
+    }
+    
+    @Test
+    public void varenvParameter() {
+
+        String tmp = System.getenv("TMP");
+        
+        // Test properties redefined into file
+        //System.out.println(TestParameters.VARENV_PARAM0.get());
+        Assert.assertEquals(tmp, TestParameters.VARENV_PARAM0.get());
+        
+        //System.out.println(TestParameters.VARENV_PARAM1.get());
+        Assert.assertEquals(tmp + "/first", TestParameters.VARENV_PARAM1.get());
+        //System.out.println(TestParameters.VARENV_PARAM2.get());
+        Assert.assertEquals(tmp + "/second", TestParameters.VARENV_PARAM2.get());
+        
+        // Test default values
+        //System.out.println(TestParameters.VARENV_PARAM3.get());
+        Assert.assertEquals(tmp + "/third", TestParameters.VARENV_PARAM3.get());
+        //System.out.println(TestParameters.VARENV_PARAM4.get());
+        Assert.assertEquals(tmp + "/fourth", TestParameters.VARENV_PARAM4.get());
+        
     }
 
     @After
