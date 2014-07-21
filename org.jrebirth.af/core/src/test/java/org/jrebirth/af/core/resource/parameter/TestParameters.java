@@ -48,5 +48,14 @@ public interface TestParameters {
     /**************************************************************************************/
 
     ParameterItem<Integer> OVERRIDABLE_PARAM = create("minDuration", 1000);
-
+    
+    /**************************************************************************************/
+    /** ______________________________VARENV Parameters.________________________________ */
+    /**************************************************************************************/
+    
+    ParameterItem<String> VARENV_PARAM0 = create("temp0", "${TMP}");
+    ParameterItem<String> VARENV_PARAM1 = create("temp1", "${TMP}");
+    ParameterItem<String> VARENV_PARAM2 = create("temp2", "$TMP");
+    ParameterItem<String> VARENV_PARAM3 = create("temp3", "$TMP/third");
+    ParameterItem<String> VARENV_PARAM4 = create("temp4", "${TMP}/fourth");
 }

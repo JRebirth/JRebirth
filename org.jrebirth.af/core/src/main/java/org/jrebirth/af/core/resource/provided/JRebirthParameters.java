@@ -24,7 +24,7 @@ import org.jrebirth.af.core.facade.DefaultComponentFactory;
 import org.jrebirth.af.core.link.DefaultUnprocessedWaveHandler;
 import org.jrebirth.af.core.resource.color.WebColor;
 import org.jrebirth.af.core.resource.image.ImageExtension;
-import org.jrebirth.af.core.resource.image.LocalImage;
+import org.jrebirth.af.core.resource.image.RelImage;
 import org.jrebirth.af.core.resource.parameter.ParameterItem;
 import org.jrebirth.af.core.resource.style.StyleSheet;
 
@@ -98,7 +98,7 @@ public interface JRebirthParameters {
     /**
      * The <code>NOT_AVAILABLE_IMAGE</code> field is used to define the image to use when an image is missing.
      */
-    ParameterItem<LocalImage> NOT_AVAILABLE_IMAGE = create("notAvailableImage", new LocalImage(NOT_AVAILABLE_IMAGE_NAME, ImageExtension.PNG));
+    ParameterItem<RelImage> NOT_AVAILABLE_IMAGE = create("notAvailableImage", new RelImage(NOT_AVAILABLE_IMAGE_NAME, ImageExtension.PNG));
 
     /** Styles default folder, Multiple folder can be managed by separating them with a comma ','. */
     ParameterItem<List<String>> STYLE_FOLDER = create("stylesFolder", Collections.singletonList("styles"));
