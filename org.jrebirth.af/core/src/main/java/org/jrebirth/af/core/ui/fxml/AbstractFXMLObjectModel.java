@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.ui.fxml;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 
 import org.jrebirth.af.core.exception.CoreException;
@@ -29,11 +31,11 @@ import org.jrebirth.af.core.wave.JRebirthWaves;
 
 /**
  * The interface <strong>FXMLModel</strong>.
- *
+ * 
  * Default implementation used to manage FXML file.
- *
+ * 
  * @author Sébastien Bordes
- *
+ * 
  * @param <M> the class type of the current model
  * @param <O> the class type of the bindable object
  */
@@ -59,9 +61,9 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
 
     /**
      * Return the fxml item used used to build the fxml component.
-     *
+     * 
      * @see FXMLItem
-     *
+     * 
      * @return the fxml item used used to build the fxml component
      */
     protected FXMLItem getFXMLItem() {
@@ -107,6 +109,18 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
         } else if (getFXMLPath() != null) {
             this.fxmlComponent = FXMLUtils.loadFXML(this, getFXMLPath(), getFXMLBundlePath());
         }
+
+        // Allow to release the model if the root business object doesn't exist anymore
+        getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
+
+            @Override
+            public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
+                if (newValue == null) {
+                    release();
+                }
+            }
+
+        });
 
         // Do custom stuff
         initModel();
@@ -175,7 +189,7 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
 
     /**
      * Return the Controller associated to the FXML file.
-     *
+     * 
      * @return the FXML controller
      */
     @SuppressWarnings("unchecked")
