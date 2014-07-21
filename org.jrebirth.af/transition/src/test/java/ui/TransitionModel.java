@@ -18,7 +18,7 @@
 package ui;
 
 import org.jrebirth.af.core.resource.Resources;
-import org.jrebirth.af.core.resource.image.LocalImage;
+import org.jrebirth.af.core.resource.image.RelImage;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.transition.command.slicer.NodeSlicerCommand;
@@ -76,7 +76,7 @@ public final class TransitionModel extends DefaultModel<TransitionModel, Transit
 
         this.imageSlicerService = getService(NodeSlicerCommand.class, "Properties");
 
-        this.imageSlicerService.setImage(Resources.create(new LocalImage("Properties.png")).get());
+        this.imageSlicerService.setImage(Resources.create(new RelImage("Properties.png")).get());
         this.imageSlicerService.setTileHeight(600);
         this.imageSlicerService.setTileWidth(4);
 

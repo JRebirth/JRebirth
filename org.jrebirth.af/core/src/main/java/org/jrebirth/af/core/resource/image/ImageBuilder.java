@@ -18,6 +18,7 @@
 package org.jrebirth.af.core.resource.image;
 
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.List;
 
 import javafx.scene.image.Image;
@@ -47,11 +48,14 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
     @Override
     protected Image buildResource(final ImageItem imageItem, final ImageParams jrImage) {
         Image image = null;
-        if (jrImage instanceof LocalImage) {
-            // Build the requested font
-            image = buildLocalImage((LocalImage) jrImage);
+        if (jrImage instanceof RelImage) {
+            // Build the requested relative image
+            image = buildLocalImage((RelImage) jrImage, false);
+        } else if (jrImage instanceof AbsImage) {
+            // Build the requested absolute image
+            image = buildLocalImage((AbsImage) jrImage, true);
         } else if (jrImage instanceof WebImage) {
-            // Build the requested font
+            // Build the requested web image
             image = buildWebImage((WebImage) jrImage);
         }
         
@@ -73,10 +77,15 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      * Build a local image with its local path.
      *
      * @param jrImage the local image params
+<<<<<<< 8.x
      *
+=======
+     * @param skipImagesFolder skip imagesFolder prefix addition
+     * 
+>>>>>>> 895028c Fix #122 Manage multiple loation for images, fonts and style Manage localimage with relative and absolute resource params
      * @return the JavaFX image object
      */
-    private Image buildLocalImage(final LocalImage jrImage) {
+    private Image buildLocalImage(final AbstractBaseImage jrImage, final boolean skipImagesFolder) {
         final StringBuilder sb = new StringBuilder();
 
         if (jrImage.path() != null && !jrImage.path().isEmpty()) {
@@ -88,9 +97,9 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
         if (jrImage.extension() != null) {
             sb.append(jrImage.extension());
         }
-        return loadImage(sb.toString());
+        return loadImage(sb.toString(), skipImagesFolder);
     }
-
+    
     /**
      * Build a web image with its url parameters.
      *
@@ -116,16 +125,21 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      *
      * @param resourceName the name of the image, path must be separated by '/'
      *
+     * @param skipImagesFolder skip imagesFolder prefix addition
+     * 
      * @return the image loaded
      */
-    private Image loadImage(final String resourceName) {
+    private Image loadImage(final String resourceName, final boolean skipImagesFolder) {
         Image image = null;
         
-        List<String> imagePaths = JRebirthParameters.IMAGE_FOLDER.get();
+        List<String> imagePaths = (skipImagesFolder) ? Collections.singletonList("") : JRebirthParameters.IMAGE_FOLDER.get();
         for(int i = 0 ; i < imagePaths.size() && image == null ;i++){
             
             String imagePath = imagePaths.get(i);
-            final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(imagePath + Resources.PATH_SEP + resourceName);
+            if(!imagePath.isEmpty()){
+                imagePath += Resources.PATH_SEP;
+            }
+            final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(imagePath + resourceName);
             if (imageInputStream != null) {
                 image = new Image(imageInputStream);
             }

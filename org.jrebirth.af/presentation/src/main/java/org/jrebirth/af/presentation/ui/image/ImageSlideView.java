@@ -40,7 +40,7 @@ import javafx.util.Duration;
 
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.resource.Resources;
-import org.jrebirth.af.core.resource.image.LocalImage;
+import org.jrebirth.af.core.resource.image.RelImage;
 import org.jrebirth.af.presentation.ui.base.AbstractSlideView;
 import org.jrebirth.presentation.model.AnimationType;
 
@@ -88,7 +88,7 @@ public final class ImageSlideView extends
     @Override
     protected void initView() {
 
-        this.image = Resources.create(new LocalImage(getModel().getImage())).get();
+        this.image = Resources.create(new RelImage(getModel().getImage())).get();
 
         if (getModel().getSlide().getShowAnimation() == null || !"Tile".equalsIgnoreCase(getModel().getSlide().getShowAnimation().name())
                 && !"Tile_60_k".equalsIgnoreCase(getModel().getSlide().getShowAnimation().name())) {

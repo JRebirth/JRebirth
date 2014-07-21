@@ -20,6 +20,9 @@ package org.jrebirth.af.core.resource.font;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * The interface <strong>RealFont</strong>.
  *
@@ -27,6 +30,19 @@ import java.util.List;
  */
 public class RealFont extends AbstractBaseFont {
 
+    /** The flag used to skip the fontsFolder prefix addition. */
+    private BooleanProperty skipFontsFolderProperty = new SimpleBooleanProperty();
+    
+    /**
+     * Default Constructor.
+     * 
+     * @param name the font name
+     * @param size the default font size
+     */
+    public RealFont(final FontName name, final double size, final boolean skipFontsFolder) {
+        super(name, size);
+        this.skipFontsFolderProperty.set(skipFontsFolder);
+    }
     /**
      * Default Constructor.
      *
@@ -34,7 +50,25 @@ public class RealFont extends AbstractBaseFont {
      * @param size the default font size
      */
     public RealFont(final FontName name, final double size) {
-        super(name, size);
+        this(name, size, false);
+    }
+    
+    /**
+     * Return the skipFontsFolder flag.
+     * 
+     * @return the skipFontsFolder flag
+     */
+    public boolean skipFontsFolder() {
+        return this.skipFontsFolderProperty.get();
+    }
+
+    /**
+     * Return the skipFontsFolderProperty property.
+     * 
+     * @return the skipFontsFolderProperty property
+     */
+    public BooleanProperty skipFontsFolderProperty() {
+        return skipFontsFolderProperty;
     }
 
     /**
@@ -45,8 +79,11 @@ public class RealFont extends AbstractBaseFont {
         if (parameters.length >= 1) {
             nameProperty().set(new CustomFontName(parameters[0]));
         }
-        if (parameters.length == 2) {
-            sizeProperty().set(Double.parseDouble(parameters[1]));
+        if (parameters.length >= 2) {
+            sizeProperty().set(readDouble(parameters[1], 1.0, 1000.0));
+        }
+        if (parameters.length == 3) {
+            skipFontsFolderProperty().set(readBoolean(parameters[2]));
         }
     }
 
@@ -55,7 +92,7 @@ public class RealFont extends AbstractBaseFont {
      */
     @Override
     protected List<? extends Object> getFieldValues() {
-        return Arrays.asList(name().toString(), size());
+        return Arrays.asList(name().toString(), size(), skipFontsFolder());
     }
 
 }

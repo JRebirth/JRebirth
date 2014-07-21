@@ -8,7 +8,7 @@ import org.jrebirth.af.core.resource.AbstractBaseParams;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 
 import org.jrebirth.af.core.resource.image.ImageItem;
-import org.jrebirth.af.core.resource.image.LocalImage;
+import org.jrebirth.af.core.resource.image.RelImage;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -46,7 +46,7 @@ public class ImageTest {
 
     private void checkLocalImage(final ImageItem imageItem) {
         final Image image = imageItem.get();
-        final LocalImage wc = (LocalImage) ResourceBuilders.IMAGE_BUILDER.getParam(imageItem);
+        final RelImage wc = (RelImage) ResourceBuilders.IMAGE_BUILDER.getParam(imageItem);
 
         assertEquals(image.getProgress(), 1.0, 0.0);
 

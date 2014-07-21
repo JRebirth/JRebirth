@@ -20,6 +20,8 @@ package org.jrebirth.af.core.resource.style;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -37,7 +39,25 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
 
     /** The style sheet name (without .css extension). */
     private final StringProperty nameProperty = new SimpleStringProperty();
+    
+    /** The flag used to skip the fontsFolder prefix addition. */
+    private BooleanProperty skipStylesFolderProperty = new SimpleBooleanProperty();
 
+    /**
+     * Default Constructor.
+     * 
+     * @param path the style sheet local path
+     * 
+     * @param name the style sheet name
+     * @param skipStylesFolder skip fontsFolder usage
+     */
+    public StyleSheet(final String path, final String name, final boolean skipStylesFolder) {
+        super();
+        this.pathProperty.set(path);
+        this.nameProperty.set(name);
+        this.skipStylesFolderProperty.set(skipStylesFolder);
+    }
+    
     /**
      * Default Constructor.
      *
@@ -45,9 +65,7 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
      * @param name the style sheet name
      */
     public StyleSheet(final String path, final String name) {
-        super();
-        this.pathProperty.set(path);
-        this.nameProperty.set(name);
+        this(path, name, false);
     }
 
     /**
@@ -56,7 +74,7 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
      * @param name the style sheet file name
      */
     public StyleSheet(final String name) {
-        this("", name);
+        this("", name, false);
     }
 
     /**
@@ -94,6 +112,24 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
     }
 
     /**
+     * Return the skipStylesFolder flag.
+     * 
+     * @return the skipStylesFolder flag
+     */
+    public boolean skipStylesFolder() {
+        return this.skipStylesFolderProperty.get();
+    }
+
+    /**
+     * Return the skipStylesFolderProperty property.
+     * 
+     * @return the skipStylesFolderProperty property
+     */
+    public BooleanProperty skipStylesFolderProperty() {
+        return skipStylesFolderProperty;
+    }
+    
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -101,8 +137,11 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
         if (parameters.length >= 1) {
             pathProperty().set(parameters[0]);
         }
-        if (parameters.length == 2) {
+        if (parameters.length >= 2) {
             nameProperty().set(parameters[1]);
+        }
+        if (parameters.length == 3) {
+            skipStylesFolderProperty().set(readBoolean(parameters[2]));
         }
     }
 
@@ -111,7 +150,7 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
      */
     @Override
     protected List<? extends Object> getFieldValues() {
-        return Arrays.asList(path(), name());
+        return Arrays.asList(path(), name(), skipStylesFolder());
     }
 
 }

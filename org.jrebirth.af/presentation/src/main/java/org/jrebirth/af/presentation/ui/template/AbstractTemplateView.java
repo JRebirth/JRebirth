@@ -69,7 +69,7 @@ import javafx.util.Duration;
 
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.resource.Resources;
-import org.jrebirth.af.core.resource.image.LocalImage;
+import org.jrebirth.af.core.resource.image.RelImage;
 import org.jrebirth.af.presentation.resources.PrezColors;
 import org.jrebirth.af.presentation.resources.PrezFonts;
 import org.jrebirth.af.presentation.resources.PrezImages;
@@ -489,7 +489,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     protected void addSlideItem(final VBox vbox, final SlideItem item) {
 
         Node node = null;
-        if (item.isLink()) {
+        if (item.getLink()) {
 
             final Hyperlink link = HyperlinkBuilder.create()
                     .opacity(1.0)
@@ -508,7 +508,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
             });
             node = link;
 
-        } else if (item.isHtml()) {
+        } else if (item.getHtml()) {
 
             final WebView web = WebViewBuilder.create()
                     .fontScale(1.4)
@@ -522,7 +522,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
         } else if (item.getImage() != null) {
 
-            final Image image = Resources.create(new LocalImage(item.getImage())).get();
+            final Image image = Resources.create(new RelImage(item.getImage())).get();
             final ImageView imageViewer = ImageViewBuilder.create()
                     .styleClass(ITEM_CLASS_PREFIX + item.getLevel())
                     .image(image)
@@ -659,3 +659,4 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         return this.slideContent;
     }
 }
+>>>>>>> 895028c Fix #122 Manage multiple loation for images, fonts and style Manage localimage with relative and absolute resource params
