@@ -98,4 +98,14 @@ public interface Notifier {
      */
     void unlisten(final WaveReady<?> linkedObject, final WaveType... waveType) throws JRebirthThreadException;
 
+    /**
+     * Stop to listen all waveType listened by the component.
+     * 
+     * MUST BE CALLED into the JRebirthThread.
+     * 
+     * @param linkedObject an object that can process the content of a wave
+     * 
+     * @throws JRebirthThreadException if called outside the JRebirthThread
+     */
+    void unlistenAll(final WaveReady<?> linkedObject) throws JRebirthThreadException;
 }

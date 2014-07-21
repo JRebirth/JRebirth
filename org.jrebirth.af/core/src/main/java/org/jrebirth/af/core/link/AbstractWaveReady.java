@@ -485,9 +485,34 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     @Override
     public void release() {
 
-        setKey(null);
+        JRebirth.runIntoJIT(new AbstractJrbRunnable("Release ") {
 
-        callAnnotatedMethod(OnRelease.class);
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            protected void runInto() throws JRebirthThreadException {
+                try {
+                    setKey(null);
+
+                    getNotifier().unlistenAll(getWaveReady());
+
+                    callAnnotatedMethod(OnRelease.class);
+                } catch (JRebirthThreadException jte) {
+                    LOGGER.error(CALL_ANNOTATED_METHOD_ERROR, jte);// FIXME
+                }
+            }
+        });
+
+    }
+
+    /**
+     * Private method used to grab the right WaveType<?> java type.
+     * 
+     * @return the this instance with the right generic type
+     */
+    private WaveReady<?> getWaveReady() {
+        return this;
     }
 
     /**
