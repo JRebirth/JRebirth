@@ -2,13 +2,20 @@ package org.jrebirth.af.core.resource.parameter;
 
 import junit.framework.Assert;
 
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.core.log.JRLevel;
+import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.i18n.MessageResource;
 import org.jrebirth.af.core.resource.parameter.ParameterItem;
+import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,9 +26,16 @@ import static org.junit.Assert.assertEquals;
  */
 public class ParameterTest {
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+    
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        ResourceBuilders.PARAMETER_BUILDER.searchConfigurationFiles(".*jrebirth", "properties");
+        
+        ResourceBuilders.MESSAGE_BUILDER.searchMessagesFiles(".*_rb");
+        ResourceBuilders.PARAMETER_BUILDER.searchConfigurationFiles(".*test-jrebirth", "properties");
+        ParameterMessages.UNDEFINED_ENV_VAR.define(new MessageResource("Fatal Error ! environment variable {0} not found ", JRebirthMarkers.PARAMETER, JRLevel.Exception));
+        JRebirthParameters.DEVELOPER_MODE.define(true);
     }
 
     @Before
@@ -94,7 +108,18 @@ public class ParameterTest {
         Assert.assertEquals(tmp + "/third", TestParameters.VARENV_PARAM3.get());
         //System.out.println(TestParameters.VARENV_PARAM4.get());
         Assert.assertEquals(tmp + "/fourth", TestParameters.VARENV_PARAM4.get());
+
+        // Test not found envvar
+        this.thrown.expect(CoreRuntimeException.class);
+        //System.out.println(TestParameters.VARENV_PARAM3.get());
+        Assert.assertEquals(tmp + "/fifth", TestParameters.VARENV_PARAM5.get());
         
+    }
+    
+    @Test(expected=CoreRuntimeException.class)
+    public void varenvParameterException() {
+        //System.out.println(TestParameters.VARENV_PARAM4.get());
+        Assert.assertEquals("$TMP2/sixth",TestParameters.VARENV_PARAM6.get());
     }
 
     @After

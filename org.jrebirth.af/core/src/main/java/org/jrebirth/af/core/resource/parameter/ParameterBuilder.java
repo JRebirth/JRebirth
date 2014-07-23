@@ -149,7 +149,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
      * @param entry the entry to store
      */
     private void storePropertiesParameter(final Map.Entry<Object, Object> entry) {
-        this.propertiesParametersMap.put(entry.getKey().toString(), new ParameterEntry(resolveVarEnv(entry.getValue().toString())));
+        this.propertiesParametersMap.put(entry.getKey().toString(), new ParameterEntry(entry.getValue().toString()));
     }
 
     /**
@@ -186,10 +186,15 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
                 String envValue = System.getenv(envName);
                 varenvMap.put(envName, envValue);
             }
-            if(withBrace){
-                value = value.replace("${"+envName+"}", varenvMap.get(envName));
+            //Check if the var env is ready
+            if(varenvMap.get(envName) != null){
+                if(withBrace){
+                    value = value.replace("${"+envName+"}", varenvMap.get(envName));
+                }else{
+                    value = value.replace("$"+envName, varenvMap.get(envName));
+                }
             }else{
-                value = value.replace("$"+envName, varenvMap.get(envName));
+                LOGGER.log(UNDEFINED_ENV_VAR, envName);
             }
         }
         return value;
@@ -225,10 +230,10 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
             if (object == null) {
                 // No customized (properties and overridden) parameter has been loaded, gets the default programmatic one
                 object = op.object();
-                
-                if(object instanceof String){
-                    object = resolveVarEnv((String)object);
-                }
+            }
+            
+            if(object instanceof String){
+                object = resolveVarEnv((String)object);
             }
 
             // // Don't store the parameter into the map if it hasn't got any parameter name

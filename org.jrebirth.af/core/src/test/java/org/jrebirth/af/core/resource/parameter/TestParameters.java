@@ -58,4 +58,6 @@ public interface TestParameters {
     ParameterItem<String> VARENV_PARAM2 = create("temp2", "$TMP");
     ParameterItem<String> VARENV_PARAM3 = create("temp3", "$TMP/third");
     ParameterItem<String> VARENV_PARAM4 = create("temp4", "${TMP}/fourth");
+    ParameterItem<String> VARENV_PARAM5 = create("temp5", "${TMP2}/fifth");
+    ParameterItem<String> VARENV_PARAM6 = create("temp6", "${TMP}/sixth");
 }
