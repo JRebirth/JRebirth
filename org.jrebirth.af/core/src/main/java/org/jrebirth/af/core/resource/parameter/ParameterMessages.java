@@ -37,18 +37,21 @@ public interface ParameterMessages extends MessageContainer {
     /** "Configuration Loading is skipped". */
     MessageItem SKIP_CONF_LOADING = create(new LogMessage("jrebirth.parameter.skipConfLoading", JRLevel.Info, JRebirthMarkers.PARAMETER));
 
-    /** "{} configuration file{} found.". */
+    /** "{0} configuration file{1} found.". */
     MessageItem CONFIG_FOUND = create(new LogMessage("jrebirth.parameter.configFound", JRLevel.Info, JRebirthMarkers.PARAMETER));
 
-    /** "Read configuration file : {} ". */
+    /** "Read configuration file : {0} ". */
     MessageItem READ_CONF_FILE = create(new LogMessage("jrebirth.parameter.readConfFile", JRLevel.Info, JRebirthMarkers.PARAMETER));
 
-    /** "Update key {} with value= {}". */
+    /** "Update key {0} with value= {1}". */
     MessageItem UPDATE_PARAMETER = create(new LogMessage("jrebirth.parameter.updateParameter", JRLevel.Trace, JRebirthMarkers.PARAMETER));
 
-    /** "Store key {} with value= {}". */
+    /** "Store key {0} with value= {1}". */
     MessageItem STORE_PARAMETER = create(new LogMessage("jrebirth.parameter.storeParameter", JRLevel.Trace, JRebirthMarkers.PARAMETER));
 
-    /** "Impossible to read the properties file : {}". */
+    /** "Impossible to read the properties file : {0}". */
     MessageItem CONF_READING_ERROR = create(new LogMessage("jrebirth.parameter.confReadingError", JRLevel.Error, JRebirthMarkers.PARAMETER));
+    
+    /** "Undefined Environment Variable : {0}". */
+    MessageItem UNDEFINED_ENV_VAR = create(new LogMessage("jrebirth.parameter.undefinedEnvVar", JRLevel.Error, JRebirthMarkers.PARAMETER));
 }
