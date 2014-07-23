@@ -81,8 +81,8 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
                 warn(messageItem, t, parameters);
                 break;
             case Error:
+            case Exception:
                 error(messageItem, t, parameters);
-                throwError(messageItem, t, parameters);
                 break;
             case Info:
                 info(messageItem, t, parameters);

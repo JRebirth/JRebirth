@@ -83,9 +83,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
     @Override
     public void log(final MessageItem messageItem) {
         this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.getText(), null, null);
-        if (messageItem.getLevel() == JRLevel.Error) {
-            throwError(messageItem, null);
-        }
+        throwError(messageItem, null);
     }
 
     /**
@@ -94,9 +92,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
     @Override
     public void log(final MessageItem messageItem, final Throwable t) {
         this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.getText(), null, t);
-        if (messageItem.getLevel() == JRLevel.Error) {
-            throwError(messageItem, t);
-        }
+        throwError(messageItem, t);
     }
 
     /**
@@ -105,9 +101,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
     @Override
     public void log(final MessageItem messageItem, final Object... parameters) {
         this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.getText(parameters), null, null);
-        if (messageItem.getLevel() == JRLevel.Error) {
-            throwError(messageItem, null, parameters);
-        }
+        throwError(messageItem, null, parameters);
     }
 
     /**
@@ -116,9 +110,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
     @Override
     public void log(final MessageItem messageItem, final Throwable t, final Object... parameters) {
         this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.getText(parameters), null, t);
-        if (messageItem.getLevel() == JRLevel.Error) {
-            throwError(messageItem, t, parameters);
-        }
+        throwError(messageItem, t, parameters);
     }
 
     /**
