@@ -53,8 +53,12 @@
 				Press F11 to activate fullscreen mode, use left-click to show the next slide, right click for previous slide.
 			</p>
 			<p>
+				You can download the whole application here :
+				<a href="http://apps.jrebirth.org/analyzer/org.jrebirth.analyzer-{project.version}.zip">JRebirth Analyzer Archive</a>
+			</p>
+			<p>
 				You can browse the source code on
-				<a title="JRebirth EclipseDay Repository" href="https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth/analyzer" target="_blank">GitHub</a>
+				<a title="JRebirth EclipseDay Repository" href="https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth.af/showcase/analyzer" target="_blank">GitHub</a>
 				.
 			</p>
 			<div id="javafx-app-placeholder" style="margin: 0 -27px; padding: 0;">
