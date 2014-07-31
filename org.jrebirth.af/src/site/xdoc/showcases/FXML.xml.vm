@@ -54,11 +54,11 @@
 			</p>
 			<p>
 				You can download the whole application here :
-				<a href="http://showcases.jrebirth.org/fxml/fxml-0.7.5-SNASPHOT.zip">FXML Showcase Zip</a>
+				<a href="http://showcases.jrebirth.org/fxml/fxml-${project.version}.zip">FXML Showcase Zip</a>
 			</p>
 			<p>
 				You can browse all showcases source code on
-				<a title="JRebirth Showcases Repository" href="https://github.com/JRebirth/JRebirth-Showcase" target="_blank">GitHub JRebirth Showcase repository</a>
+				<a title="JRebirth Showcases Repository" href="https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth.af/showcase/fxml" target="_blank">GitHub JRebirth Showcase repository</a>
 				.
 			</p>
 
