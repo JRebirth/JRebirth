@@ -135,8 +135,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         boolean res;
 
         synchronized (this.componentMap) {
-            // Check from singleton map it he key exists and if the weak
-            // reference is not null
+            // Check from singleton map it he key exists and if the weak reference is not null
             res = this.componentMap.containsKey(uniqueKey) && this.componentMap.get(uniqueKey).get() != null;
         }
 
@@ -187,8 +186,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         }
 
         if (readyObject == null) {
-            // If the component isn't contained into the component map, create
-            // and register it
+            // If the component isn't contained into the component map, create and register it
             try {
 
                 // Build the new instance of the component
@@ -197,15 +195,12 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                 // Register it
                 register(uniqueKey, readyObject);
 
-                // The component is accessible from facade, let's start its
-                // initialization
+                // The component is accessible from facade, let's start its initialization
                 readyObject.setup();
 
             } catch (final CoreException ce) {
                 LOGGER.error(COMPONENT_RETRIEVAL_ERROR, ce);
-                throw new CoreRuntimeException(ce); // Pop up the exception
-                                                    // wrapped into a runtime
-                                                    // exception
+                throw new CoreRuntimeException(ce); // Pop up the exception wrapped into a runtime exception
             }
         }
 
@@ -260,56 +255,53 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         return readyObject;
     }
 
-    // /**
-    // * Build an unique key.
-    // *
-    // * @param clazz the class type of the component
-    // * @param keyPart all complementary part of the key
-    // *
-    // * @return the unique key for the given class and keyParts array
-    // *
-    // * @param <E> The type of the object registered by this ClassKey
-    // */
-    // @Override
-    // public <E extends R> UniqueKey<E> buildKey(final Class<E> clazz, final
-    // Object... keyPart) {
-    //
-    // UniqueKey<E> uniqueKey;
-    // if (keyPart == null || keyPart.length == 0 ||
-    // keyPart[0].toString().isEmpty()) {
-    // uniqueKey = buildClassKey(clazz);
-    // } else {
-    // uniqueKey = buildMultitonKey(clazz, keyPart);
-    // }
-    // return uniqueKey;
-    // }
-    //
-    // /**
-    // * Build a singleton key.
-    // *
-    // * @param clazz the class type of the component
-    // *
-    // * @return the unique key for a singleton
-    // *
-    // * @param <E> The type of the object registered by this ClassKey
-    // */
-    // private <E extends R> UniqueKey<E> buildClassKey(final Class<E> clazz) {
-    // return new ClassKey<E>(clazz);
-    // }
-    //
-    // /**
-    // * Build a multiton key.
-    // *
-    // * @param clazz the class type of the component
-    // * @param keyPart all complementary part of the key
-    // *
-    // * @return the unique key for a multiton
-    // *
-    // * @param <E> The type of the object registered by this ClassKey
-    // */
-    // private <E extends R> UniqueKey<E> buildMultitonKey(final Class<E> clazz,
-    // final Object... keyPart) {
-    // return new MultitonKey<E>(clazz, keyPart);
-    // }
+    /**
+     * Build an unique key.
+     * 
+     * @param clazz the class type of the component
+     * @param keyPart all complementary part of the key
+     * 
+     * @return the unique key for the given class and keyParts array
+     * 
+     * @param <E> The type of the object registered by this ClassKey
+     */
+    @Override
+    public <E extends R> UniqueKey<E> buildKey(final Class<E> clazz, final Object... keyPart) {
+
+        UniqueKey<E> uniqueKey;
+        if (keyPart == null || keyPart.length == 0) {
+            uniqueKey = buildClassKey(clazz);
+        } else {
+            uniqueKey = buildMultitonKey(clazz, keyPart);
+        }
+        return uniqueKey;
+    }
+
+    /**
+     * Build a singleton key.
+     * 
+     * @param clazz the class type of the component
+     * 
+     * @return the unique key for a singleton
+     * 
+     * @param <E> The type of the object registered by this ClassKey
+     */
+    private <E extends R> UniqueKey<E> buildClassKey(final Class<E> clazz) {
+        return new ClassKey<E>(clazz);
+    }
+
+    /**
+     * Build a multiton key.
+     * 
+     * @param clazz the class type of the component
+     * @param keyPart all complementary part of the key
+     * 
+     * @return the unique key for a multiton
+     * 
+     * @param <E> The type of the object registered by this ClassKey
+     */
+    private <E extends R> UniqueKey<E> buildMultitonKey(final Class<E> clazz, final Object... keyPart) {
+        return new MultitonKey<E>(clazz, keyPart);
+    }
 
 }
