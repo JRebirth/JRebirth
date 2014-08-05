@@ -139,6 +139,7 @@ public final class ClasspathUtility implements UtilMessages {
     private static List<String> getResources(final String classpathEntryPath, final Pattern searchPattern, final boolean cachedJar) {
         final List<String> resources = new ArrayList<>();
         
+        //System.out.println("Search into "+classpathEntryPath);
         final File classpathEntryFile = new File(classpathEntryPath);
         // The classpath entry could be a jar or a folder
         if (classpathEntryFile.isDirectory()) {
@@ -196,6 +197,7 @@ public final class ClasspathUtility implements UtilMessages {
     @SuppressWarnings("unchecked")
     private static List<String> getResourcesFromJarOrZipFile(final File jarOrZipFile, final Pattern searchPattern) {
         final List<String> resources = new ArrayList<>();
+
         try (ZipFile zf = new ZipFile(jarOrZipFile);) {
 
             final Enumeration<ZipEntry> e = (Enumeration<ZipEntry>) zf.entries();
