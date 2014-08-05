@@ -254,7 +254,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     public <E extends R> UniqueKey<E> buildKey(final Class<E> clazz, final Object... keyPart) {
 
         UniqueKey<E> uniqueKey;
-        if (keyPart == null || keyPart.length == 0 || keyPart[0].toString().isEmpty()) {
+        if (keyPart == null || keyPart.length == 0) {
             uniqueKey = buildClassKey(clazz);
         } else {
             uniqueKey = buildMultitonKey(clazz, keyPart);
