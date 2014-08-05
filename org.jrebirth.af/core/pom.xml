@@ -39,6 +39,18 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- 
+		Dependency used at compile time to manage Java Webstart classpath scan
+		If this jar is not available the related code will not be called
+		 -->
+		<dependency>
+			<groupId>javax.jnlp</groupId>
+			<artifactId>jnlp-api</artifactId>
+			<version>7.0</version>
+			<scope>system</scope>
+			<systemPath>${java.home}/lib/javaws.jar</systemPath>
+		</dependency>
+
 	</dependencies>
 
 </project>
