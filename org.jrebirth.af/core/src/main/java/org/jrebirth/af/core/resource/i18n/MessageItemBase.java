@@ -65,6 +65,14 @@ public final class MessageItemBase implements MessageItem {
             try {
                 // Use the message formatter
                 res = MessageFormat.format(res, stringParameters);
+                
+                if(res.startsWith("<") && res.endsWith(">")){
+                    res += " values: ";
+                    for(Object param : stringParameters){
+                        res += ((param)!=null ? param.toString() : "") + "|";
+                    }
+                }
+                
 
             } catch (final IllegalArgumentException e) {
 
