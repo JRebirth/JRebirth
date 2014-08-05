@@ -24,12 +24,16 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.jar.JarFile;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
+
+import com.sun.javaws.jnl.JARDesc;
+import com.sun.jnlp.JNLPClassLoaderIf;
 
 /**
  * The class <strong>ClassUtility</strong>.
@@ -70,15 +74,58 @@ public final class ClasspathUtility implements UtilMessages {
 
         final List<String> resources = new ArrayList<>();
 
-        final String[] classpathEntries = CLASSPATH.split(CLASSPATH_SEPARATOR);
-        for (final String classpathEntry : classpathEntries) {
-            // Parse the classpath entry and apply the given pattern as filter
-            resources.addAll(getResources(classpathEntry, searchPattern));
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
+
+        if (hasJavaWebstartLibrary() && cl instanceof JNLPClassLoaderIf) {
+            
+            LOGGER.log(USE_JNLP_CLASSLOADER);
+            
+            JNLPClassLoaderIf wsLoader = (JNLPClassLoaderIf) cl;
+            
+            //System.out.println("URLs "+ wsLoader.getURLs());
+            for (JARDesc jd : wsLoader.getLaunchDesc().getResources().getLocalJarDescs()) {
+                try {
+                    
+                    JarFile jarFile = wsLoader.getJarFile(jd.getLocation());
+                    
+                    LOGGER.log(PARSE_CACHED_JAR_FILE, jarFile.getName(), jd.getLocationString());
+
+                    resources.addAll(getResources(jarFile.getName(), searchPattern, true));
+                } catch (IOException e) {
+                    LOGGER.log(CANT_READ_CACHED_JAR_FILE, jd.getLocation());
+                }
+            }
+            
+        }else{
+            
+            LOGGER.log(USE_DEFAULT_CLASSLOADER);
+            
+            final String[] classpathEntries = CLASSPATH.split(CLASSPATH_SEPARATOR);
+            for (final String urlEntry : classpathEntries) {
+                // Parse the classpath entry and apply the given pattern as filter
+                resources.addAll(getResources(urlEntry, searchPattern, false));
+            }
         }
+        
         // Sort resources
         Collections.sort(resources);
 
         return resources;
+    }
+
+    /**
+     * Check that javaws.jar is accessible.
+     *
+     * @return true if javaws.jar is accessible
+     */
+    private static boolean hasJavaWebstartLibrary() {
+        boolean hasWebStartLibrary = true;
+        try {
+            Class.forName("com.sun.jnlp.JNLPClassLoaderIf");
+        } catch (ClassNotFoundException e) {
+            hasWebStartLibrary = false;
+        }
+        return hasWebStartLibrary;
     }
 
     /**
@@ -89,14 +136,16 @@ public final class ClasspathUtility implements UtilMessages {
      *
      * @return list of resources that match the pattern
      */
-    private static List<String> getResources(final String classpathEntryPath, final Pattern searchPattern) {
+    private static List<String> getResources(final String classpathEntryPath, final Pattern searchPattern, final boolean cachedJar) {
         final List<String> resources = new ArrayList<>();
+        
+        System.out.println("Search into "+classpathEntryPath);
         final File classpathEntryFile = new File(classpathEntryPath);
         // The classpath entry could be a jar or a folder
         if (classpathEntryFile.isDirectory()) {
             // Browse the folder content
             resources.addAll(getResourcesFromDirectory(classpathEntryFile, searchPattern));
-        } else if (classpathEntryFile.getName().endsWith(".jar") || classpathEntryFile.getName().endsWith(".zip")) {
+        } else if (classpathEntryFile.getName().endsWith(".jar") || classpathEntryFile.getName().endsWith(".zip") || cachedJar) {
             // Explode and browse jar|zip content
             resources.addAll(getResourcesFromJarOrZipFile(classpathEntryFile, searchPattern));
         } else {
@@ -119,16 +168,18 @@ public final class ClasspathUtility implements UtilMessages {
         // Filter only properties files
         final File[] fileList = directory.listFiles();
 
-        // Iterate over each relevant file
-        for (final File file : fileList) {
-            // If the file is a directory process a recursive call to explorer the tree
-            if (file.isDirectory()) {
-                resources.addAll(getResourcesFromDirectory(file, searchPattern));
-            } else {
-                try {
-                    checkResource(resources, searchPattern, file.getCanonicalPath());
-                } catch (final IOException e) {
-                    LOGGER.log(BAD_CANONICAL_PATH, e);
+        if(fileList != null && fileList.length > 0){
+            // Iterate over each relevant file
+            for (final File file : fileList) {
+                // If the file is a directory process a recursive call to explorer the tree
+                if (file.isDirectory()) {
+                    resources.addAll(getResourcesFromDirectory(file, searchPattern));
+                } else {
+                    try {
+                        checkResource(resources, searchPattern, file.getCanonicalPath());
+                    } catch (final IOException e) {
+                        LOGGER.log(BAD_CANONICAL_PATH, e);
+                    }
                 }
             }
         }
@@ -146,7 +197,6 @@ public final class ClasspathUtility implements UtilMessages {
     @SuppressWarnings("unchecked")
     private static List<String> getResourcesFromJarOrZipFile(final File jarOrZipFile, final Pattern searchPattern) {
         final List<String> resources = new ArrayList<>();
-
         try (ZipFile zf = new ZipFile(jarOrZipFile);) {
 
             final Enumeration<ZipEntry> e = (Enumeration<ZipEntry>) zf.entries();
