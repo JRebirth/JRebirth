@@ -16,6 +16,7 @@
 	</properties>
 
 	<head>
+		<title></title>
 		<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
 	</head>
 	
@@ -66,7 +67,7 @@
 			Event Handler can be attached from View-to-Controller, or from Controller-to-View (preferred way, to centralize event handlers declarations).<br />
 			</p>
 			
-			<h4>About Generics:</h4>
+			<h5>About Generics:</h5>
 			<p>You can ask why do MVC objects use so much generics type that hurt eyes !! The reason is really simple: To avoid lot of cast !
 			When you want to call a method from another part you will have a method to grab the part with the right type, so no cast are needed.
 			An alternative would be to write ourselves getter method with right cast but it's really painful and doesn't have any value. 
@@ -86,26 +87,27 @@
 				
 			</subsection>
 					
+		</section>
 
-		<subsection name="Models">
-			<p>Models are directly synchronized with the UIFacade and can send and receive Waves, they can also use any other components.</p>
-			<p>The goal of Models is to retrieve data from other layers, and to define Business Logic (business rules, authorizations ...).</p>
-			<p>The Model automatically build its attached view (except SimpleModel).</p>
+		<section name="Models">
+				<p>Models are directly synchronized with the UIFacade and can send &amp; receive Waves, they can also use any other components.</p>
+				<p>The goal of Models is to retrieve data from other layers, and to define Business Logic (business rules, authorizations ...).</p>
+				<p>The Model automatically build its attached view (except SimpleModel).</p>
 
-			<macro name="include">
-				<param name="highlight-theme" value="eclipse"/>
-				<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleModel.java" />
-				<!--<param name="snippet" value="aj:..SampleModel" />-->
-			</macro>
-
-			<h4>InnerModels</h4>
-			<p>TODO</p>
+				<macro name="include">
+					<param name="highlight-theme" value="eclipse"/>
+					<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleModel.java" />
+					<param name="snippet" value="aj:SampleModel" />
+				</macro>
 
 
-		</subsection>	
-		
-		
-		<subsection name="Views">
+			<subsection name="InnerModels">
+
+			</subsection>
+
+		</section>	
+			
+		<section name="Views">
 		
 			<p>As explained before, the main goal of a View is to create the rootNode attached to the Model.<br />
 		Fortunately the rootNode is automatically created according to the generic type used in the View header.
@@ -115,7 +117,6 @@
 			<p>
 			The View's initialization code perform several operations:
 			</p>
-			
 			<ol>
 				<li>Link the model (strong reference)</li>
 				<li>Create the root Node object according to the first generic type that extends Node.class</li>
@@ -125,47 +126,39 @@
 			<p>If the construction fails, mainly due to Controller error, a custom error Node is created in order to display the stack trace of the exception.			
 			</p>
 
-			
 				<macro name="include">
 					<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleView.java" />
-					<!--<param name="snippet" value="aj:..SampleView" /> -->
+					<!-- <param name="snippet" value="aj:SampleView" /> -->
 				</macro>
 				
 				<h4>Annotation Event Handler</h4>
-				<p>TODO</p>
+				<p></p>
 
-		</subsection>
+		</section>	
 		
-		<subsection name="Controllers">
-			
-			<p>TODO</p>
-			
+		
+		<section name="Controllers">
+
 			<macro name="include">
 				<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleController.java" />
-				<!--<param name="snippet" value="aj:..SampleController" />-->
+				<!-- <param name="snippet" value="aj:..SampleController" /> -->
 			</macro>
 			
-			
-			<h4>Adapters and Handlers</h4>
-			<p>TODO</p>
-		
-		
-		</subsection>
-		
-		</section>
+			<subsection name="Adapters &amp; Handlers"></subsection>
 
+		</section>
 		
-			<div class="bottomLinks">
-				<div class="previousDocPage">
-					<a href="Services.html">Services</a>
-				</div>
-				<div class="nextDocPage">
-					<a href="Resources.html">Resources</a>
-				</div>
-				<div class="tocDocPage">
-					<a href="Toc.html">TOC</a>
-				</div>
+		<div class="bottomLinks">
+			<div class="previousDocPage">
+				<a href="Services.html">Services</a>
 			</div>
+			<div class="nextDocPage">
+				<a href="Resources.html">Resources</a>
+			</div>
+			<div class="tocDocPage">
+				<a href="Toc.html">TOC</a>
+			</div>
+		</div>
 
 	</body>
 </document>
