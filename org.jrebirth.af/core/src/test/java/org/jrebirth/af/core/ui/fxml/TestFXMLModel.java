@@ -10,44 +10,12 @@ import org.jrebirth.af.core.wave.Wave;
  */
 public class TestFXMLModel extends DefaultFXMLModel<TestFXMLModel> {
 
-    private String fxmlPath;
-
-    private String resourcePath;
-
     /**
      * @param fxmlPath
      * @param resourcePath
      */
     public TestFXMLModel(/* final String fxmlPath, final String resourcePath */) {
         super();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getFXMLPath() {
-        // Nothing to do yet
-        return this.fxmlPath;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getFXMLBundlePath() {
-        // Nothing to do yet
-        return this.resourcePath;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void fxmlPreInitialize() {
-        if (getFirstKeyPart() != null) {
-            this.fxmlPath = getFirstKeyPart().toString();
-        }
     }
 
     /**
