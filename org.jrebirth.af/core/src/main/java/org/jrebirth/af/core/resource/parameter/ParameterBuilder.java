@@ -119,9 +119,9 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
         final Properties p = new Properties();
 
-        LOGGER.log(READ_CONF_FILE, custConfFile.getAbsolutePath());
+        LOGGER.log(READ_CONF_FILE, custConfFileName);
 
-        try (InputStream is = new FileInputStream(custConfFile)) {
+        try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(custConfFileName) ) {
 
             // Read the properties file
             p.load(is);
@@ -137,7 +137,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
             }
 
         } catch (final IOException e) {
-            LOGGER.error(CONF_READING_ERROR, custConfFile.getAbsolutePath());
+            LOGGER.error(CONF_READING_ERROR, custConfFileName);
         }
 
     }
