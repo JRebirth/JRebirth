@@ -43,6 +43,8 @@
 			</ul>
 			<p>Each of these must do predefined tasks to maintain a good Separation of Concerns (SoC).</p>
 			<p>Models are JRebirth Components like Commands and Services, they are mandatory whereas Views and Controllers are optionals.</p>
+
+
 			<p>
 				<span style="text-decoration: underline;">Short UML Diagram:</span>
 			</p>
@@ -50,33 +52,40 @@
 				<img class="redux" src="uploads/images/uml/UI.png" alt="" />
 			</div>
 			
-			<h4>Models</h4>
+			<subsection name="Models">
+			
 			<p>Model are JRebirth Components, they are retrievable from UiFacade and they can be dynamically attached to any placeholder.
 				They are able to listen Wave and to communicate with other components. <br />
 				Models store business objects with custom method that allow to bound an object to a model and then to use its internal properties to bound them to UI widget.<br />
 				Models' aim is to manage UI lifecycle and communication, you can place into some part of your business logic. 
 			</p>
+			</subsection>
 			
-			<h4>Views</h4>
+			<subsection name="Views">
 			<p>Views are automatically created by Models according to generic type used, their main objectives is to build and wrap the graphical root Node.
 			You can manage Model-View interaction in both direction: Model-to-View by adding some 'package' Node getters into the view (preferred way for binding declarations), or View-to-Model by adding some 'package' methods into Model (only for some call).<br />
 			</p>
+			</subsection>
 			
-			<h4>Controllers</h4>
+			<subsection name="Controllers">
 			<p>Controllers are dedicated to manage event handling by providing several ways to facilitate developers' life. They are automatically created by the view according to generic type used.<br />
 			Event Handler can be attached from View-to-Controller, or from Controller-to-View (preferred way, to centralize event handlers declarations).<br />
 			</p>
+			</subsection>
 			
-			<h5>About Generics:</h5>
+			<subsection name="About Generics">
 			<p>You can ask why do MVC objects use so much generics type that hurt eyes !! The reason is really simple: To avoid lot of cast !
 			When you want to call a method from another part you will have a method to grab the part with the right type, so no cast are needed.
 			An alternative would be to write ourselves getter method with right cast but it's really painful and doesn't have any value. 
 			So you will write once this quite complex (especially when you use intermediate classes) class declaration with its generic type and you will enjoy coding without having to cast them.</p>
+			</subsection>
+			
 			
 			<subsection name="Main Usage">
 			
 			<p>User Interface layer is versatile and will adapt itself to your use case to avoid boiler plate code.
 			Hereafter you will find a list of all possible ways to use a Model:</p>
+			
 			<ul>
 				<li>M - Only Model: rely on SimpleModel implementation</li>
 				<li>MV - Model with a View: Controller is omitted</li>
@@ -86,7 +95,7 @@
 			</ul>
 				
 			</subsection>
-					
+
 		</section>
 
 		<section name="Models">
@@ -106,17 +115,19 @@
 			</subsection>
 
 		</section>	
-			
-		<section name="Views">
+		
+		<section name="Views Overview">
 		
 			<p>As explained before, the main goal of a View is to create the rootNode attached to the Model.<br />
 		Fortunately the rootNode is automatically created according to the generic type used in the View header.
 			</p>
 			
-			<h4>View's initialization</h4>
+			<subsection name="View's initialization">
+			
 			<p>
 			The View's initialization code perform several operations:
 			</p>
+			
 			<ol>
 				<li>Link the model (strong reference)</li>
 				<li>Create the root Node object according to the first generic type that extends Node.class</li>
@@ -125,14 +136,19 @@
 
 			<p>If the construction fails, mainly due to Controller error, a custom error Node is created in order to display the stack trace of the exception.			
 			</p>
-
 				<macro name="include">
 					<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleView.java" />
-					<!-- <param name="snippet" value="aj:SampleView" /> -->
+<!-- 
+					<param name="snippet" value="aj:SampleView" />
+ -->
 				</macro>
+			</subsection>
+			
+			<subsection name="Annotation Event Handler">
 				
-				<h4>Annotation Event Handler</h4>
 				<p></p>
+
+			</subsection>
 
 		</section>	
 		
@@ -141,12 +157,15 @@
 
 			<macro name="include">
 				<param name="source" value="sample/src/main/java/org/jrebirth/af/sample/ui/SampleController.java" />
-				<!-- <param name="snippet" value="aj:..SampleController" /> -->
+		<!-- 
+				<param name="snippet" value="aj:..SampleController" />
+		-->
 			</macro>
 			
 			<subsection name="Adapters &amp; Handlers"></subsection>
 
 		</section>
+		
 		
 		<div class="bottomLinks">
 			<div class="previousDocPage">

@@ -22,9 +22,9 @@
 	<body>
 
 		<div id="catcherTitle">
-			Simplest
+			Outstanding
 			<br />
-			JavaFX
+			Application
 			<br />
 			Framework
 		</div>
@@ -48,10 +48,10 @@
 
 		<div id="features"><!-- <h2>JRebirth, Write your JavaFX2 Application more simply !</h2> -->
 			JRebirth JavaFX Application Framework provides a
-			<strong>really simple way to write sophisticated and powerful RIA's applications</strong>
-			. By leveraging the best of previous RIA framework, we can deliver the ultimate one to work cleanly and efficiently with this
-			<strong>awesome API</strong>
-			. Check our
+			<strong>really simple way to write sophisticated and powerful RIA and Desktop applications</strong>.
+			By leveraging the best of previous RIA framework, we can deliver the ultimate one to work cleanly and efficiently with this
+			<strong>awesome API</strong>.
+			Check our
 			<a href="doc/Overview.html">overview page</a>
 			to see a diagram illustrating features and layers. Have also a look to
 			<a href="apps/JRebirthTour.html">JRebirth Tour</a> presentation  
@@ -117,11 +117,13 @@
 		<!-- id="ohloh" -->
 		<div id="ohloh">
 			<div>
-				<script type="text/javascript" src="http://www.ohloh.net/p/599672/widgets/project_users.js?style=gray"></script>
+				<script type="text/javascript" src="http://www.openhub.net/p/599672/widgets/project_users.js?style=blue"></script>
 			</div>
+			<!--
 			<div>
-				<script type="text/javascript" src="http://www.ohloh.net/p/599672/widgets/project_thin_badge.js"></script>
+				<script type="text/javascript" src="http://www.openhub.net/p/599672/widgets/project_thin_badge.js"></script>
 			</div>
+			-->
 			
 			<div id="pp">
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -142,26 +144,20 @@
 			used for Memory &amp; CPU Java profiling with a free license.
 			</p>
 			<p>
-			<a title="Structure 101" href="http://www.structure101.com/" target="_blank">Structure101 guys</a>
-			,
-			for offering us a free license of
-			<a href="http://structure101.com/products/#/refactor">ReStructure 101</a>
-			.
+			<a title="Certum" href="http://www.certum.eu/certum/cert,offer_code_signing.xml" target="_blank">Certum</a>,
+			for offering us an Open Source <a href="http://www.certum.eu/certum/cert,offer_en_open_source_cs.xml">Code Signing Certificate</a>.
 			</p>
 			<p>
-			<a title="Jet Brains" href="http://www.jetbrains.com" target="_blank">Jet Brains</a>
-			,
+			<a title="Jet Brains" href="http://www.jetbrains.com" target="_blank">Jet Brains</a>,
 			for offering us a free license of
-			<a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>
-			.
+			<a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>.
 			</p>
-			<!-- Undone yet
 			<p>
-			<a title="GlobalSign" href="https://www.globalsign.com" target="_blank">Global Sign</a>
-			,
-			for offering us free <a href="https://www.globalsign.com/ssl/">SSL</a> &amp; <a href="https://www.globalsign.com/code-signing/">Code Signing</a> certicates.
-			.
-			</p>-->
+			<a title="Structure 101" href="http://www.structure101.com/" target="_blank">Structure101 guys</a>,
+			for offering us a free license of
+			<a href="http://structure101.com/products/#/refactor">ReStructure 101</a>.
+			</p>
+			
 		</div>
 
 	</body>
