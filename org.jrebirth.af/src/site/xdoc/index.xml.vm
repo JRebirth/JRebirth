@@ -22,9 +22,9 @@
 	<body>
 
 		<div id="catcherTitle">
-			Simplest
-			<br />
 			JavaFX
+			<br />
+			Application
 			<br />
 			Framework
 		</div>
@@ -48,11 +48,11 @@
 
 		<div id="features"><!-- <h2>JRebirth, Write your JavaFX2 Application more simply !</h2> -->
 			JRebirth JavaFX Application Framework provides a
-			<strong>really simple way to write sophisticated and powerful RIA's applications</strong>
-			. By leveraging the best of previous RIA framework, we can deliver the ultimate one to work cleanly and efficiently with this
-			<strong>awesome API</strong>
-			. Check our
-			<a href="doc/overview.html">overview page</a>
+			<strong>really simple way to write sophisticated and powerful RIA and Desktop applications</strong>.
+			By leveraging the best of previous RIA framework, we can deliver the ultimate one to work cleanly and efficiently with this
+			<strong>awesome API</strong>.
+			Check our
+			<a href="doc/Overview.html">overview page</a>
 			to see a diagram illustrating features and layers. Have also a look to
 			<a href="apps/JRebirthTour.html">JRebirth Tour</a> presentation  
             which was built with <strong>JRebirth</strong> presentation engine.
@@ -155,13 +155,13 @@
 			<a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>
 			.
 			</p>
-			<!-- Undone yet
+			
 			<p>
 			<a title="GlobalSign" href="https://www.globalsign.com" target="_blank">Global Sign</a>
 			,
 			for offering us free <a href="https://www.globalsign.com/ssl/">SSL</a> &amp; <a href="https://www.globalsign.com/code-signing/">Code Signing</a> certicates.
 			.
-			</p>-->
+			</p>
 		</div>
 
 	</body>
