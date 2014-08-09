@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,7 @@ import org.jrebirth.af.core.util.ObjectUtility;
 
 /**
  * The class <strong>WaveTypeBase</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class WaveTypeBase implements WaveType {
@@ -54,9 +54,9 @@ public final class WaveTypeBase implements WaveType {
 
     /**
      * Default constructor.
-     * 
+     *
      * @param action The action to perform, "DO_" (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) keyword will be prepended to the action name to generate the handler method
-     * 
+     *
      * @param waveItems the list of #WaveItem{@link WaveItem} required by this wave
      */
     private WaveTypeBase(final String action, final WaveItem<?>... waveItems) {
@@ -73,11 +73,11 @@ public final class WaveTypeBase implements WaveType {
 
     /**
      * Build a wave type.
-     * 
+     *
      * @param action The action to perform, "DO_" keyword (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to generate the handler method
-     * 
+     *
      * @param waveItems the list of {@link WaveItem} required by this wave
-     * 
+     *
      * @return a new fresh wave type object
      */
     public static WaveTypeBase build(final String action, final WaveItem<?>... waveItems) {
@@ -98,11 +98,11 @@ public final class WaveTypeBase implements WaveType {
 
     /**
      * Retrieve a WaveType according to its unique action name.
-     * 
+     *
      * Be careful it could return null if the {@link WaveType} has not been initialized yet.
-     * 
+     *
      * @param action the unique action name used to register the WaveType
-     * 
+     *
      * @return the WaveType found into registry or null
      */
     public static WaveType getWaveType(final String action) {
@@ -116,11 +116,11 @@ public final class WaveTypeBase implements WaveType {
 
     /**
      * Build a wave type.
-     * 
+     *
      * @param action The action to perform "DO_" (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) keyword will be prepended to the action name to generate the handler method
      * @param returnWaveType the return wave Type to call after having processing the current
      * @param waveItems the list of {@link WaveItem} required by this wave
-     * 
+     *
      * @return a new fresh wave type object
      */
     public static WaveTypeBase build(final String action, final WaveType returnWaveType, final WaveItem<?>... waveItems) {
@@ -131,7 +131,7 @@ public final class WaveTypeBase implements WaveType {
 
     /**
      * Gets the uid.
-     * 
+     *
      * @return Returns the uid.
      */
     public int getUid() {
@@ -140,7 +140,7 @@ public final class WaveTypeBase implements WaveType {
 
     /**
      * Sets the uid.
-     * 
+     *
      * @param uid The uid to set.
      */
     public void setUid(final int uid) {
@@ -149,7 +149,7 @@ public final class WaveTypeBase implements WaveType {
 
     /**
      * Gets the action.
-     * 
+     *
      * @return Returns the action.
      */
     public String getAction() {
@@ -158,7 +158,7 @@ public final class WaveTypeBase implements WaveType {
 
     /**
      * Gets the wave item list.
-     * 
+     *
      * @return Returns the waveItemList.
      */
     public List<WaveItem<?>> getWaveItemList() {
@@ -167,7 +167,7 @@ public final class WaveTypeBase implements WaveType {
 
     /**
      * Return the required method parameter list to handle this WaveType.
-     * 
+     *
      * @return the parameter list (Type1 arg1, Type2 arg2 ...)
      */
     public String getItems() {
@@ -195,7 +195,7 @@ public final class WaveTypeBase implements WaveType {
 
     /**
      * Gets the return wave type.
-     * 
+     *
      * @return the return wave type
      */
     public WaveType getReturnWaveType() {
@@ -204,7 +204,7 @@ public final class WaveTypeBase implements WaveType {
 
     /**
      * Sets the return wave type.
-     * 
+     *
      * @param returnWaveType the new return wave type
      */
     public void setReturnWaveType(final WaveType returnWaveType) {

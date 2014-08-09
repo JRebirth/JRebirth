@@ -9,7 +9,7 @@ import org.jrebirth.af.core.ui.View;
 
 /**
  * The class <strong>DefaultFXMLControllerBuilder</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class DefaultFXMLControllerBuilder implements Callback<Class<?>, Object> {
@@ -22,7 +22,7 @@ public class DefaultFXMLControllerBuilder implements Callback<Class<?>, Object> 
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param relatedModel the root model for fx/include or hte main model
      */
     public DefaultFXMLControllerBuilder(final Model relatedModel) {

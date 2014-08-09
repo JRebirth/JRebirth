@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,17 +25,17 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 /**
  * The interface <strong>RealFont</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class RealFont extends AbstractBaseFont {
 
     /** The flag used to skip the fontsFolder prefix addition. */
-    private BooleanProperty skipFontsFolderProperty = new SimpleBooleanProperty();
-    
+    private final BooleanProperty skipFontsFolderProperty = new SimpleBooleanProperty();
+
     /**
      * Default Constructor.
-     * 
+     *
      * @param name the font name
      * @param size the default font size
      */
@@ -43,19 +43,20 @@ public class RealFont extends AbstractBaseFont {
         super(name, size);
         this.skipFontsFolderProperty.set(skipFontsFolder);
     }
+
     /**
      * Default Constructor.
-     * 
+     *
      * @param name the font name
      * @param size the default font size
      */
     public RealFont(final FontName name, final double size) {
         this(name, size, false);
     }
-    
+
     /**
      * Return the skipFontsFolder flag.
-     * 
+     *
      * @return the skipFontsFolder flag
      */
     public boolean skipFontsFolder() {
@@ -64,11 +65,11 @@ public class RealFont extends AbstractBaseFont {
 
     /**
      * Return the skipFontsFolderProperty property.
-     * 
+     *
      * @return the skipFontsFolderProperty property
      */
     public BooleanProperty skipFontsFolderProperty() {
-        return skipFontsFolderProperty;
+        return this.skipFontsFolderProperty;
     }
 
     /**

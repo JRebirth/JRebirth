@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,14 +28,14 @@ import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 
 /**
- * 
+ *
  * The class <strong>GlobalFacadeBase</strong>.
- * 
+ *
  * This class is a facade that helps to retrieve any JRebirth RIA pattern component of the application.
- * 
+ *
  * It uses 3 facades that store services, commands and models of the application. It allows to dispatch waves to all required components.
- * 
- * 
+ *
+ *
  * @author Sébastien Bordes
  */
 public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
@@ -78,7 +78,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
 
     /**
      * Default Constructor. Initialize all facades.
-     * 
+     *
      * @param application the current application launched
      */
     public GlobalFacadeBase(final JRebirthApplication<?> application) {
@@ -236,9 +236,9 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
 
     /**
      * Build the CommandFacade singleton to use.
-     * 
+     *
      * Can be overridden by sub class to customize its behaviors.
-     * 
+     *
      * @return the command facade
      */
     protected CommandFacade buildCommandFacade() {
@@ -247,9 +247,9 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
 
     /**
      * Build the ServiceFacade singleton to use.
-     * 
+     *
      * Can be overridden by sub class to customize its behaviors.
-     * 
+     *
      * @return the service facade
      */
     protected ServiceFacade buildServiceFacade() {
@@ -258,9 +258,9 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
 
     /**
      * Build the UiFacade singleton to use.
-     * 
+     *
      * Can be overridden by sub class to customize its behaviors.
-     * 
+     *
      * @return the ui facade
      */
     protected UiFacade buildUiFacade() {
@@ -269,9 +269,9 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
 
     /**
      * Build the notifier singleton to use.
-     * 
+     *
      * Can be overridden by sub class to customize its behaviors.
-     * 
+     *
      * @return the notifier
      */
     protected NotifierBase buildNotifier() {

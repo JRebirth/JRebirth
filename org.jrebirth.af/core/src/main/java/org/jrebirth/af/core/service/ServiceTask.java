@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,9 +43,9 @@ import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  * The class <strong>ServiceTask</strong>.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <T> the current Service Task type
  */
 public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, ServiceMessages {
@@ -87,7 +87,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
     /**
      * Default Constructor only visible by service package.
-     * 
+     *
      * @param parameterValues the list of function parameter
      * @param method the method to call
      * @param service the service object
@@ -110,9 +110,9 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
     /**
      * Return the full service handler name.
-     * 
+     *
      * ServiceName + method + ( parameters types )
-     * 
+     *
      * @return the full service handler name
      */
     public String getServiceHandlerName() {
@@ -128,7 +128,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @throws CoreException if return WaveType has bad API
      */
     @SuppressWarnings("unchecked")
@@ -170,11 +170,11 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
     /**
      * Send a wave that will carry the service result.
-     * 
+     *
      * 2 Kinds of wave can be sent according to service configuration
-     * 
+     *
      * @param res the service result
-     * 
+     *
      * @throws CoreException if the wave generation has failed
      */
     @SuppressWarnings("unchecked")
@@ -270,7 +270,7 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
     /**
      * The task has been terminated because the source wave was consumed or has failed.
-     * 
+     *
      * Remove the task from the service pending list
      */
     public void taskAchieved() {
@@ -280,13 +280,13 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
     /**
      * Check if the task has enough progressed according to the given threshold.
-     * 
+     *
      * This method can be called outside the JAT, it's useful to filter useless call to JAT
-     * 
+     *
      * @param newWorkDone the amount of work done
      * @param totalWork the total amount of work
      * @param amountThreshold the minimum threshold amount to return true; range is [0.0 - 100.0] (typically 1.0 for 1%)
-     * 
+     *
      * @return true if the threshold is reached
      */
     public boolean checkProgressRatio(final double newWorkDone, final double totalWork, final double amountThreshold) {

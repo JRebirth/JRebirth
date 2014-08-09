@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,7 @@ import javafx.scene.text.FontWeight;
 
 /**
  * The interface <strong>FamilyFont</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class FamilyFont extends AbstractBaseFont {
@@ -45,9 +45,9 @@ public class FamilyFont extends AbstractBaseFont {
 
     /**
      * Default Constructor.
-     * 
+     *
      * Normal font weight and regular font posture will be used
-     * 
+     *
      * @param family the font family
      * @param size the font size
      */
@@ -57,9 +57,9 @@ public class FamilyFont extends AbstractBaseFont {
 
     /**
      * Default Constructor.
-     * 
+     *
      * Regular font posture will be used
-     * 
+     *
      * @param family the font family
      * @param size the font size
      * @param weight the font weight {@link FontWeight}
@@ -70,9 +70,9 @@ public class FamilyFont extends AbstractBaseFont {
 
     /**
      * Default Constructor.
-     * 
+     *
      * Normal font weight will be used
-     * 
+     *
      * @param family the font family
      * @param size the font size
      * @param posture the font posture {@link FontPosture}
@@ -83,7 +83,7 @@ public class FamilyFont extends AbstractBaseFont {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param family the font family
      * @param size the font size
      * @param weight the font weight {@link FontWeight}
@@ -98,7 +98,7 @@ public class FamilyFont extends AbstractBaseFont {
 
     /**
      * Return the family name.
-     * 
+     *
      * @return the family name
      */
     public String family() {
@@ -107,7 +107,7 @@ public class FamilyFont extends AbstractBaseFont {
 
     /**
      * Return the family name property.
-     * 
+     *
      * @return the family name property
      */
     public StringProperty familyProperty() {
@@ -116,7 +116,7 @@ public class FamilyFont extends AbstractBaseFont {
 
     /**
      * Return the font posture.
-     * 
+     *
      * @return the font posture
      */
     public FontPosture posture() {
@@ -125,7 +125,7 @@ public class FamilyFont extends AbstractBaseFont {
 
     /**
      * Return the font posture property.
-     * 
+     *
      * @return the font posture property
      */
     public ObjectProperty<FontPosture> postureProperty() {
@@ -134,7 +134,7 @@ public class FamilyFont extends AbstractBaseFont {
 
     /**
      * Return the font weight.
-     * 
+     *
      * @return the font weight
      */
     public FontWeight weight() {
@@ -143,7 +143,7 @@ public class FamilyFont extends AbstractBaseFont {
 
     /**
      * Return the font weight property.
-     * 
+     *
      * @return the font weight property
      */
     public ObjectProperty<FontWeight> weightProperty() {

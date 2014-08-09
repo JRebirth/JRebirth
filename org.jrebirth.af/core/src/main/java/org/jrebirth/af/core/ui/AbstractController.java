@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,11 +33,11 @@ import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  * The abstract class <strong>AbstractController</strong>.
- * 
+ *
  * Base implementation of the controller.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <M> the class type of the model of the view controlled
  * @param <V> the class type of the view controlled
  */
@@ -45,9 +45,9 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param view the controlled view
-     * 
+     *
      * @throws CoreException if an error occurred while creating event handlers
      */
     public AbstractController(final V view) throws CoreException {
@@ -56,14 +56,14 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
     /**
      * Link the creation of a wave to an event triggered on a node.
-     * 
+     *
      * This method doesn't use any callback function to trigger the launch the wave.
-     * 
+     *
      * @param node the node to follow
      * @param eventType the type of the event to follow
      * @param waveType the type of the wave to create
      * @param waveData additional Wave data
-     * 
+     *
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveType waveType,
@@ -74,13 +74,13 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
     /**
      * Link the creation of a wave to an event triggered on a node.
-     * 
+     *
      * @param node the node to follow
      * @param eventType the type of the event to follow
      * @param waveType the type of the wave to create
      * @param callback the call back to use to check if the wave can be sent
      * @param waveData additional Wave data
-     * 
+     *
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveType waveType, final Callback<E, Boolean> callback,
@@ -102,14 +102,14 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
     /**
      * Link a command to an event triggered on a node.
-     * 
+     *
      * This method doesn't use any callback function to trigger the command.
-     * 
+     *
      * @param node the node to follow
      * @param eventType the type of the event to follow
      * @param commandClass the command to launch
      * @param waveData additional Wave data
-     * 
+     *
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkCommand(final Node node, final javafx.event.EventType<E> eventType,
@@ -120,13 +120,13 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
     /**
      * Link a command to an event triggered on a node.
-     * 
+     *
      * @param node the node to follow
      * @param eventType the type of the event to follow
      * @param commandClass the command to launch
      * @param callback the call back to use to check if the command can be called
      * @param waveData additional Wave data
-     * 
+     *
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkCommand(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Command> commandClass,
@@ -149,17 +149,17 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
     /**
      * Link an User Interface action to an event triggered on a node.
-     * 
+     *
      * This method doesn't use any callback function to trigger attach the node.
-     * 
+     *
      * Don't forget to add a placeholder to indicate where to attach the model node created
-     * 
+     *
      * @param node the node to follow
      * @param eventType the type of the event to follow
      * @param modelClass the model to display
      * @param waveData additional Wave data, Must contain either #JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER or #JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER wave data to indicate where to attach the
      *        created model
-     * 
+     *
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkUi(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Model> modelClass,
@@ -170,16 +170,16 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
     /**
      * Link an User Interface action to an event triggered on a node.
-     * 
+     *
      * Don't forget to add a placeholder to indicate where to attach the model node created
-     * 
+     *
      * @param node the node to follow
      * @param eventType the type of the event to follow
      * @param modelClass the model to display
      * @param callback the call back to use to check if the ui can be attached
      * @param waveData additional Wave data, Must contain either #JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER or #JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER wave data to indicate where to attach the
      *        created model
-     * 
+     *
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkUi(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Model> modelClass, final Callback<E, Boolean> callback,
@@ -215,15 +215,15 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
     /**
      * Link a Service to an event triggered on a node.
-     * 
+     *
      * This method doesn't use any callback function to call the service.
-     * 
+     *
      * @param node the node to follow
      * @param eventType the type of the event to follow
      * @param serviceClass the service to call
      * @param waveType the method of the service call
      * @param waveData additional Wave data
-     * 
+     *
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkService(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Service> serviceClass, final WaveTypeBase waveType,
@@ -234,14 +234,14 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
 
     /**
      * Link a Service to an event triggered on a node.
-     * 
+     *
      * @param node the node to follow
      * @param eventType the type of the event to follow
      * @param serviceClass the service to call
      * @param waveType the method of the service call
      * @param callback the call back to use to check if the service can be called
      * @param waveData additional Wave data
-     * 
+     *
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkService(final Node node, final javafx.event.EventType<E> eventType,

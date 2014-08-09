@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -40,7 +40,7 @@ import org.jrebirth.af.core.resource.style.StyleSheetParams;
 
 /**
  * The class <strong>Resources</strong> is the first access point when you want to declare a resource for your application.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class Resources {
@@ -85,11 +85,11 @@ public final class Resources {
 
     /**
      * Build a parameter item.
-     * 
+     *
      * @param <O> the type of parameterized object
-     * 
+     *
      * @param parameterParams the primitive values for the color
-     * 
+     *
      * @return a new fresh color item object
      */
     public static <O extends Object> ParameterItemBase<O> create(final ObjectParameter<O> parameterParams) {
@@ -103,12 +103,12 @@ public final class Resources {
 
     /**
      * Build a parameter item.
-     * 
+     *
      * @param <O> the type of parameterized object
-     * 
+     *
      * @param name the parameter unique name
      * @param defaultValue the default object value
-     * 
+     *
      * @return a new fresh color item object
      */
     public static <O extends Object> ParameterItemBase<O> create(final String name, final O defaultValue) {
@@ -121,9 +121,9 @@ public final class Resources {
 
     /**
      * Build a color item.
-     * 
+     *
      * @param colorParams the primitive values for the color
-     * 
+     *
      * @return a new fresh color item object
      */
     public static ColorItem create(final ColorParams colorParams) {
@@ -137,10 +137,10 @@ public final class Resources {
 
     /**
      * Build a color item.
-     * 
+     *
      * @param colorParams the primitive values for the color
      * @param dynamicKey the dynamic key used to register this color
-     * 
+     *
      * @return a new fresh color item object
      */
     public static ColorItem create(final ColorParams colorParams, final String dynamicKey) {
@@ -159,9 +159,9 @@ public final class Resources {
 
     /**
      * Build a font item.
-     * 
+     *
      * @param fontParams the primitive values for the font
-     * 
+     *
      * @return a new fresh font item object
      */
     public static FontItemBase create(final FontParams fontParams) {
@@ -179,9 +179,9 @@ public final class Resources {
 
     /**
      * Build an image item.
-     * 
+     *
      * @param imageParams the primitive values for the image
-     * 
+     *
      * @return a new fresh image item object
      */
     public static ImageItemBase create(final ImageParams imageParams) {
@@ -200,9 +200,9 @@ public final class Resources {
 
     /**
      * Build a style sheet item.
-     * 
+     *
      * @param styleSheetParams the primitive values for the style sheet
-     * 
+     *
      * @return a new fresh file
      */
     public static StyleSheetItemBase create(final StyleSheetParams styleSheetParams) {
@@ -221,9 +221,9 @@ public final class Resources {
 
     /**
      * Build a fxml item.
-     * 
+     *
      * @param fxmlParams the primitive values for the fxml resource
-     * 
+     *
      * @return a new fresh FXML item
      */
     public static FXMLItemBase create(final FXMLParams fxmlParams) {
@@ -242,9 +242,9 @@ public final class Resources {
 
     /**
      * Build a Message item.
-     * 
+     *
      * @param messageParams the key of the i18n message
-     * 
+     *
      * @return a new fresh Message item
      */
     public static MessageItemBase create(final Message messageParams) {
@@ -260,9 +260,9 @@ public final class Resources {
     /**
      * This utility method allow to avoid doing something if the parameter given is tahe AutoRefresh one. <br />
      * Because this parameter is used to control how other parameters can be updated.
-     * 
+     *
      * @param params the ResourceParams to check
-     * 
+     *
      * @return true if the resource params is not the auto refresh parameter
      */
     public static boolean isNotAutoRefreshParam(final ResourceParams params) {

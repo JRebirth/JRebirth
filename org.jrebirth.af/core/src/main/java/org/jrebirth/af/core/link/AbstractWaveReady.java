@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -50,16 +50,16 @@ import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.checker.WaveChecker;
 
 /**
- * 
+ *
  * The class <strong>AbstractWaveReady</strong>.
- * 
+ *
  * This is the base class for all of each of JRebirth pattern subclasses.<br />
  * It allow to send waves.
- * 
+ *
  * All things related to wave management must be execute into the JRebirth Thread
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <R> the class type of the subclass
  */
 @SkipAnnotation(false)
@@ -82,7 +82,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Short cut method used to retrieve the notifier.
-     * 
+     *
      * @return the notifier retrieved from global facade
      */
     private Notifier getNotifier() {
@@ -109,9 +109,9 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Return the human-readable list of Wave Type.
-     * 
+     *
      * @param waveTypes the list of wave type
-     * 
+     *
      * @return the string list of Wave Type
      */
     private String getWaveTypesString(final WaveType[] waveTypes) {
@@ -273,9 +273,9 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Send the given wave using the JRebirth Thread.
-     * 
+     *
      * @param wave the wave to send
-     * 
+     *
      * @return the wave sent to JIT (with Sent status)
      */
     private Wave sendWaveIntoJit(final Wave wave) {
@@ -297,12 +297,12 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Build a wave object.
-     * 
+     *
      * @param waveGroup the group of the wave
      * @param waveType the type of the wave
      * @param relatedClass the related class if any
      * @param waveData wave data to use
-     * 
+     *
      * @return the wave built
      */
     private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData<?>... waveData) {
@@ -326,12 +326,12 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Build a wave object with its dedicated WaveBean.
-     * 
+     *
      * @param waveGroup the group of the wave
      * @param waveType the type of the wave
      * @param relatedClass the related class if any
      * @param waveBean the wave bean that holds all required wave data
-     * 
+     *
      * @return the wave built
      */
     private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveBean waveBean) {
@@ -404,7 +404,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Customizable method used to perform more action before command execution.
-     * 
+     *
      * @param wave the given wave to parser before command execution
      */
     // protected abstract void parseWave(final Wave wave);
@@ -447,7 +447,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Process the wave. Typically by using a switch on the waveType.
-     * 
+     *
      * @param wave the wave received
      */
     protected abstract void processWave(final Wave wave);
@@ -498,7 +498,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
                     getNotifier().unlistenAll(getWaveReady());
 
                     callAnnotatedMethod(OnRelease.class);
-                } catch (JRebirthThreadException jte) {
+                } catch (final JRebirthThreadException jte) {
                     LOGGER.error(CALL_ANNOTATED_METHOD_ERROR, jte);// FIXME
                 }
             }
@@ -508,7 +508,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Private method used to grab the right WaveType<?> java type.
-     * 
+     *
      * @return the this instance with the right generic type
      */
     private WaveReady<?> getWaveReady() {
@@ -517,7 +517,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Call annotated methods corresponding at given lifecycle annotation.
-     * 
+     *
      * @param annotationClass the annotation related to the lifecycle
      */
     private void callAnnotatedMethod(final Class<? extends Annotation> annotationClass) {
@@ -535,7 +535,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * The component is now ready to do custom initialization tasks.
-     * 
+     *
      * @throws CoreException if an error occurred
      */
     protected abstract void ready() throws CoreException;

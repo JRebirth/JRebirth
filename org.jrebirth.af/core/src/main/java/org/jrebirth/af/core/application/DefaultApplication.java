@@ -13,13 +13,13 @@ import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.Wave;
 
 /**
- * 
+ *
  * The Default class <strong>DefaultApplication</strong> is the base class of a JRebirth Application.
- * 
+ *
  * This the class to extend if you want to build an application using JRebirth WCS-MVC (Wave-Command-Service-Model-View-Controller) without override all abstract methods.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <P> The root node of the stage, must extends Pane to allow children management
  */
 public class DefaultApplication<P extends Pane> extends AbstractApplication<P> {

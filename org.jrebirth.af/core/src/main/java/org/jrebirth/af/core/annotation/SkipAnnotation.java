@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * The class <strong>SkipAnnotation</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 @Target(ElementType.TYPE)
@@ -20,9 +20,9 @@ public @interface SkipAnnotation {
 
     /**
      * The value property manage skip annotation feature.
-     * 
+     *
      * When true (or empty) it deactivates annotation processing for the given component.
-     * 
+     *
      * When false, it doesn't skip annotation processing
      */
     boolean value() default true;

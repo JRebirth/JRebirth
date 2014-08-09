@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +30,7 @@ import org.jrebirth.af.core.wave.WaveBean;
 
 /**
  * The class <strong>DisplayModelWaveBean</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class DisplayModelWaveBean implements WaveBean {
@@ -61,7 +61,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Gets the show model key.
-     * 
+     *
      * @return the show model key
      */
     public UniqueKey<? extends Model> getShowModelKey() {
@@ -70,7 +70,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Sets the show model key.
-     * 
+     *
      * @param showModelKey the new show model key
      */
     public void setShowModelKey(final UniqueKey<? extends Model> showModelKey) {
@@ -79,7 +79,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Gets the hide model key.
-     * 
+     *
      * @return the hide model key
      */
     public UniqueKey<? extends Model> getHideModelKey() {
@@ -88,7 +88,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Sets the hide model key.
-     * 
+     *
      * @param hideModelKey the new hide model key
      */
     public void setHideModelKey(final UniqueKey<? extends Model> hideModelKey) {
@@ -97,7 +97,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Gets the key part.
-     * 
+     *
      * @return Returns the keyPart.
      */
     public List<Object> getKeyPart() {
@@ -109,7 +109,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Sets the key part.
-     * 
+     *
      * @param keyPart The keyPart to set.
      */
     public void setKeyPart(final List<Object> keyPart) {
@@ -118,7 +118,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Gets the unique place holder.
-     * 
+     *
      * @return Returns the uniquePlaceHolder.
      */
     public ObjectProperty<Node> getUniquePlaceHolder() {
@@ -127,7 +127,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Sets the unique place holder.
-     * 
+     *
      * @param uniquePlaceHolder The uniquePlaceHolder to set.
      */
     public void setUniquePlaceHolder(final ObjectProperty<Node> uniquePlaceHolder) {
@@ -136,7 +136,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Gets the chidren place holder.
-     * 
+     *
      * @return Returns the chidrenPlaceHolder.
      */
     public ObservableList<Node> getChidrenPlaceHolder() {
@@ -145,7 +145,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Sets the children place holder.
-     * 
+     *
      * @param chidrenPlaceHolder The chidrenPlaceHolder to set.
      */
     public void setChidrenPlaceHolder(final ObservableList<Node> chidrenPlaceHolder) {
@@ -154,7 +154,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Checks if is flag that indicates if the child node must be added at the end (true) or at the beginning (false).
-     * 
+     *
      * @return Returns the appendChild.
      */
     public boolean isAppendChild() {
@@ -163,7 +163,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Sets the flag that indicates if the child node must be added at the end (true) or at the beginning (false).
-     * 
+     *
      * @param appendChild The appendChild to set.
      */
     public void setAppendChild(final boolean appendChild) {
@@ -172,7 +172,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Gets the created node.
-     * 
+     *
      * @return the created node
      */
     public Model getShowModel() {
@@ -181,7 +181,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Sets the created node.
-     * 
+     *
      * @param model the new created node
      */
     public void setShowModel(final Model model) {
@@ -190,7 +190,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Gets the model instance to hide (ie: with an animation).
-     * 
+     *
      * @return the model instance to hide (ie: with an animation)
      */
     public Model getHideModel() {
@@ -199,7 +199,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Sets the model instance to hide (ie: with an animation).
-     * 
+     *
      * @param hideModel the new model instance to hide (ie: with an animation)
      */
     public void setHideModel(final Model hideModel) {

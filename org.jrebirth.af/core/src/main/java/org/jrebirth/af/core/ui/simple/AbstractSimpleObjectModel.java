@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,13 +27,13 @@ import org.jrebirth.af.core.ui.object.AbstractObjectModel;
 import org.jrebirth.af.core.util.ClassUtility;
 
 /**
- * 
+ *
  * The interface <strong>AbstractSimpleModel</strong>.
- * 
+ *
  * Base implementation for simple model without View-Controller part.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <N> the root node type
  * @param <O> the class type of the bindable object
  */
@@ -44,7 +44,7 @@ public abstract class AbstractSimpleObjectModel<N extends Node, O extends Object
 
     /**
      * Initialize the model.
-     * 
+     *
      * @throws CoreException if the creation of the view fails
      */
     @SuppressWarnings("unchecked")
@@ -69,11 +69,11 @@ public abstract class AbstractSimpleObjectModel<N extends Node, O extends Object
 
     /**
      * Prepare the visual node hierarchy for this simple model.
-     * 
+     *
      * This method is equivalent to View.initView
-     * 
+     *
      * With simple model no View neither Controller are created.<br />
-     * 
+     *
      * You must manage them yourself.
      */
     protected abstract void initSimpleView();

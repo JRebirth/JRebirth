@@ -1,5 +1,5 @@
 /*
- * 
+ *
  */
 package org.jrebirth.af.core.log;
 
@@ -8,9 +8,9 @@ import org.slf4j.MarkerFactory;
 
 /**
  * The class <strong>JRebirthMarkers</strong>.
- * 
+ *
  * Only 5 characters per marker name.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface JRebirthMarkers {

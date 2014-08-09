@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +30,7 @@ import org.jrebirth.af.core.wave.WaveBase;
 
 /**
  * The class <strong>ShowModelWaveBuilder</strong>. is used to build a new Show Model Wave.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWaveBuilder, DisplayModelWaveBean> {
@@ -56,7 +56,7 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
 
     /**
      * Static method to build a default builder.
-     * 
+     *
      * @return a new fresh ShowModelWaveBuilder instance
      */
     public static ShowModelWaveBuilder create() {
@@ -86,9 +86,9 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
 
     /**
      * Define the unique place holder.
-     * 
+     *
      * @param uniquePlaceHolder the property that handle the view's node
-     * 
+     *
      * @return the builder
      */
     public ShowModelWaveBuilder uniquePlaceHolder(final ObjectProperty<Node> uniquePlaceHolder) {
@@ -99,9 +99,9 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
 
     /**
      * Define the children list observable list.
-     * 
+     *
      * @param chidrenPlaceHolder the children list of the parent pane that will handle the view's node
-     * 
+     *
      * @return the builder
      */
     public ShowModelWaveBuilder childrenPlaceHolder(final ObservableList<Node> chidrenPlaceHolder) {
@@ -112,9 +112,9 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
 
     /**
      * Define the unique key of the model to show.
-     * 
+     *
      * @param showModelKey the unique key of the model to show
-     * 
+     *
      * @return the builder
      */
     public ShowModelWaveBuilder showModelKey(final UniqueKey<Model> showModelKey) {
@@ -125,9 +125,9 @@ public final class ShowModelWaveBuilder extends CommandWaveBuilder<ShowModelWave
 
     /**
      * Part of unique model key.
-     * 
+     *
      * @param keyPart keyPart for the model class
-     * 
+     *
      * @return the builder
      */
     public ShowModelWaveBuilder keyPart(final Object... keyPart) {

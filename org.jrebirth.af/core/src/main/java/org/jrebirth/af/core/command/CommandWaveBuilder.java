@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,11 +26,11 @@ import org.jrebirth.af.core.wave.WaveGroup;
 
 /**
  * The class <strong>WaveBuilder</strong>.
- * 
+ *
  * Base builder used to build a custom wave.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <B> The builder generic type
  * @param <WB> the waveBean sub type to use
  */
@@ -44,7 +44,7 @@ public class CommandWaveBuilder<B extends CommandWaveBuilder<B, WB>, WB extends 
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param commandClass the command class to use
      */
     @SuppressWarnings("unchecked")
@@ -54,7 +54,7 @@ public class CommandWaveBuilder<B extends CommandWaveBuilder<B, WB>, WB extends 
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param commandClass the class of the command to launch
      * @param waveBeanClass the class of the wave bean to use
      */
@@ -78,9 +78,9 @@ public class CommandWaveBuilder<B extends CommandWaveBuilder<B, WB>, WB extends 
 
     /**
      * Get the wave Bean from the wave and cast it.
-     * 
+     *
      * @param wave the wave that hold the bean
-     * 
+     *
      * @return the casted wavebean
      */
     @SuppressWarnings("unchecked")

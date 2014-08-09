@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +25,7 @@ import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
  * The class <strong>AbstractJrbRunnable</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public abstract class AbstractJrbRunnable implements JRebirthRunnable, ConcurrentMessages {
@@ -44,7 +44,7 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param runnableName the name of the runnable to allow live debugging
      */
     public AbstractJrbRunnable(final String runnableName) {
@@ -53,7 +53,7 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param runnableName the name of the runnable to allow live debugging
      * @param priority the runnable priority
      */
@@ -84,7 +84,7 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
 
     /**
      * Run task and allow to throw a JRebirthException.
-     * 
+     *
      * @throws JRebirthThreadException it thread error
      */
     protected abstract void runInto() throws JRebirthThreadException;

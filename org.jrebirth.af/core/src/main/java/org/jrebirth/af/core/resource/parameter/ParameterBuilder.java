@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,7 +18,6 @@
 package org.jrebirth.af.core.resource.parameter;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -37,9 +36,9 @@ import org.jrebirth.af.core.util.ClasspathUtility;
 
 /**
  * The class <strong>ParameterBuilder</strong>.
- * 
+ *
  * Class used to manage parameters with weak reference.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class ParameterBuilder extends AbstractResourceBuilder<ParameterItem<?>, ParameterParams, Object> implements ParameterMessages {
@@ -52,7 +51,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /** Store all overridden values defined by the call of define method. */
     private final Map<ParameterItem<?>, Object> overriddenParametersMap = new ConcurrentHashMap<>();
-    
+
     /** Store all translated environment variable. */
     private final Map<String, String> varenvMap = new HashMap<>();
 
@@ -64,13 +63,13 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /** The pattern that matches Environment Variable ${varname} . */
     private static final Pattern ENV_VAR_PATTERN1 = Pattern.compile("(.*)\\$\\{(\\w+)\\}(.*)");
-    
+
     /** The pattern that matches Environment Variable $varname . */
     private static final Pattern ENV_VAR_PATTERN2 = Pattern.compile("(.*)\\$(\\w+)(.*)");
 
     /**
      * Search configuration files according to the parameters provided.
-     * 
+     *
      * @param wildcard the regex wildcard (must not be null)
      * @param extension the file extension without the first dot (ie: properties) (must not be null)
      */
@@ -110,18 +109,16 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /**
      * Read a customized configuration file to load parameters values.
-     * 
+     *
      * @param custConfFileName the file to load
      */
     private void readPropertiesFile(final String custConfFileName) {
-
-        final File custConfFile = new File(custConfFileName);
 
         final Properties p = new Properties();
 
         LOGGER.log(READ_CONF_FILE, custConfFileName);
 
-        try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(custConfFileName) ) {
+        try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(custConfFileName)) {
 
             // Read the properties file
             p.load(is);
@@ -145,7 +142,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
     /**
      * Store a parameter read from properties files.<br />
      * The parameter is wrapped into a parameterEntry
-     * 
+     *
      * @param entry the entry to store
      */
     private void storePropertiesParameter(final Map.Entry<Object, Object> entry) {
@@ -154,15 +151,15 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /**
      * Resolve any environment variable found into the string.
-     * 
+     *
      * @param entryValue the string to check and resolve
-     * 
+     *
      * @return the final value with environment variable resolved
      */
     private String resolveVarEnv(final String entryValue) {
-        
+
         String value = entryValue;
-        if(value != null){
+        if (value != null) {
             value = checkPattern(value, ENV_VAR_PATTERN1, true);
             value = checkPattern(value, ENV_VAR_PATTERN2, false);
         }
@@ -171,29 +168,29 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /**
      * Check if the given string contains an environment variable.
-     * 
+     *
      * @param value the string value to parse
      * @param pattern the regex pattern to use
      * @param withBrace true for ${varname}, false for $varname
-     * 
+     *
      * @return the given string updated with right environment variable content
      */
-    private String checkPattern(String value, Pattern pattern, boolean withBrace) {
-        Matcher matcher = pattern.matcher(value);
-        while(matcher.find()){
-            String envName = matcher.group(2);
-            if(!varenvMap.containsKey(envName)){
-                String envValue = System.getenv(envName);
-                varenvMap.put(envName, envValue);
+    private String checkPattern(String value, final Pattern pattern, final boolean withBrace) {
+        final Matcher matcher = pattern.matcher(value);
+        while (matcher.find()) {
+            final String envName = matcher.group(2);
+            if (!this.varenvMap.containsKey(envName)) {
+                final String envValue = System.getenv(envName);
+                this.varenvMap.put(envName, envValue);
             }
-            //Check if the var env is ready
-            if(varenvMap.get(envName) != null){
-                if(withBrace){
-                    value = value.replace("${"+envName+"}", varenvMap.get(envName));
-                }else{
-                    value = value.replace("$"+envName, varenvMap.get(envName));
+            // Check if the var env is ready
+            if (this.varenvMap.get(envName) != null) {
+                if (withBrace) {
+                    value = value.replace("${" + envName + "}", this.varenvMap.get(envName));
+                } else {
+                    value = value.replace("$" + envName, this.varenvMap.get(envName));
                 }
-            }else{
+            } else {
                 LOGGER.log(UNDEFINED_ENV_VAR, envName);
             }
         }
@@ -231,9 +228,9 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
                 // No customized (properties and overridden) parameter has been loaded, gets the default programmatic one
                 object = op.object();
             }
-            
-            if(object instanceof String){
-                object = resolveVarEnv((String)object);
+
+            if (object instanceof String) {
+                object = resolveVarEnv((String) object);
             }
 
             // // Don't store the parameter into the map if it hasn't got any parameter name
@@ -248,7 +245,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /**
      * Override a parameter value.
-     * 
+     *
      * @param key the parameter item key
      * @param forcedValue the overridden value
      */

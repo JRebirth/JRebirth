@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,13 +30,13 @@ import org.jrebirth.af.core.link.AbstractWaveReady;
 import org.jrebirth.af.core.wave.Wave;
 
 /**
- * 
+ *
  * The interface <strong>AbstractBaseModel</strong>.
- * 
+ *
  * Base implementation of the model.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <M> the class type of the current model
  */
 public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveReady<Model> implements Model {
@@ -73,25 +73,25 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
 
     /**
      * Initialize the model.
-     * 
+     *
      * @throws CoreException if the creation of the view fails
      */
     protected abstract void initInternalModel() throws CoreException;
 
     /**
      * Initialize method to implement for adding custom processes.
-     * 
+     *
      * This method is a hook to manage generic code before initializing current model.
-     * 
+     *
      * You must implement the {@link #initModel()} method to setup your model.
      */
     protected abstract void initModel();
 
     /**
      * Initialize the included models.
-     * 
+     *
      * This method is a hook to manage generic code before initializing inner models.
-     * 
+     *
      * You must implement the {@link #initInnerModels()} method to setup your inner models.
      */
     protected final void initInternalInnerModels() {
@@ -108,9 +108,9 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
 
     /**
      * Bind current object to view's widget.
-     * 
+     *
      * This method is a hook to manage generic code before binding model's object.
-     * 
+     *
      * You must implement the {@link #bind()} method to add your bindings.
      */
     protected abstract void bindInternal();
@@ -123,10 +123,10 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
     /**
      * Show the view.<br />
      * In example : start the show transition
-     * 
-     * This method is a hook to manage generic code before initializing the view's node tree. It will call {@link #org.jrebirth.af.core.ui.View.start()} or {@link #org.jrebirth.af.core.ui.View.reload()}
-     * method
-     * 
+     *
+     * This method is a hook to manage generic code before initializing the view's node tree. It will call {@link #org.jrebirth.af.core.ui.View.start()} or
+     * {@link #org.jrebirth.af.core.ui.View.reload()} method
+     *
      * You must implement the {@link #showView()} method to setup your view.
      */
     protected final void showInternalView() {
@@ -156,7 +156,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
     /**
      * Hide the view.<br />
      * In example : start the hide transition
-     * 
+     *
      * Will call the {@link #org.jrebirth.af.core.ui.View.hide()} method
      */
     protected final void hideInternalView() {

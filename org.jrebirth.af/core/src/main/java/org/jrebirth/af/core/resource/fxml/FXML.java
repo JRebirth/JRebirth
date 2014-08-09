@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,7 +28,7 @@ import org.jrebirth.af.core.resource.Resources;
 
 /**
  * The interface <strong>FXML</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class FXML extends AbstractBaseParams implements FXMLParams {
@@ -59,7 +59,7 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param fxmlPath the fxml file absolute path
      * @param fxmlName the fxml file name
      * @param bundlePath the resource bundle absolute path
@@ -75,7 +75,7 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param globalPath the path iused to laod fxml and resource bundle files
      * @param globalName the fxml and resource bundle name (without suffix)
      */
@@ -85,7 +85,7 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param name the fxml and resource bundle file name
      */
     public FXML(final String name) {
@@ -102,7 +102,7 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
 
     /**
      * Absolute path property.
-     * 
+     *
      * @return the string property
      */
     public StringProperty absolutePathProperty() {
@@ -119,7 +119,7 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
 
     /**
      * Fxml name property.
-     * 
+     *
      * @return the string property
      */
     public StringProperty fxmlNameProperty() {
@@ -136,7 +136,7 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
 
     /**
      * Absolute bundle path property.
-     * 
+     *
      * @return the string property
      */
     public StringProperty absoluteBundlePathProperty() {
@@ -153,7 +153,7 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
 
     /**
      * Bundle name property.
-     * 
+     *
      * @return the string property
      */
     public StringProperty bundleNameProperty() {

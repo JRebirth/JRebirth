@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,9 +37,9 @@ import com.sun.jnlp.JNLPClassLoaderIf;
 
 /**
  * The class <strong>ClassUtility</strong>.
- * 
+ *
  * Some Useful class utilities to perform introspection.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class ClasspathUtility implements UtilMessages {
@@ -65,48 +65,48 @@ public final class ClasspathUtility implements UtilMessages {
 
     /**
      * Retrieve all resources that match the search pattern from the java.class.path.
-     * 
+     *
      * @param searchPattern the pattern used to filter all matching files
-     * 
+     *
      * @return Sorted list of resources that match the pattern
      */
     public static Collection<String> getClasspathResources(final Pattern searchPattern) {
 
         final List<String> resources = new ArrayList<>();
 
-        ClassLoader cl = Thread.currentThread().getContextClassLoader();
+        final ClassLoader cl = Thread.currentThread().getContextClassLoader();
 
         if (hasJavaWebstartLibrary() && cl instanceof JNLPClassLoaderIf) {
-            
+
             LOGGER.log(USE_JNLP_CLASSLOADER);
-            
-            JNLPClassLoaderIf wsLoader = (JNLPClassLoaderIf) cl;
-            
-            //System.out.println("URLs "+ wsLoader.getURLs());
-            for (JARDesc jd : wsLoader.getLaunchDesc().getResources().getLocalJarDescs()) {
+
+            final JNLPClassLoaderIf wsLoader = (JNLPClassLoaderIf) cl;
+
+            // System.out.println("URLs "+ wsLoader.getURLs());
+            for (final JARDesc jd : wsLoader.getLaunchDesc().getResources().getLocalJarDescs()) {
                 try {
-                    
-                    JarFile jarFile = wsLoader.getJarFile(jd.getLocation());
-                    
+
+                    final JarFile jarFile = wsLoader.getJarFile(jd.getLocation());
+
                     LOGGER.log(PARSE_CACHED_JAR_FILE, jarFile.getName(), jd.getLocationString());
 
                     resources.addAll(getResources(jarFile.getName(), searchPattern, true));
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     LOGGER.log(CANT_READ_CACHED_JAR_FILE, jd.getLocation());
                 }
             }
-            
-        }else{
-            
+
+        } else {
+
             LOGGER.log(USE_DEFAULT_CLASSLOADER);
-            
+
             final String[] classpathEntries = CLASSPATH.split(CLASSPATH_SEPARATOR);
             for (final String urlEntry : classpathEntries) {
                 // Parse the classpath entry and apply the given pattern as filter
                 resources.addAll(getResources(urlEntry, searchPattern, false));
             }
         }
-        
+
         // Sort resources
         Collections.sort(resources);
 
@@ -122,7 +122,7 @@ public final class ClasspathUtility implements UtilMessages {
         boolean hasWebStartLibrary = true;
         try {
             Class.forName("com.sun.jnlp.JNLPClassLoaderIf");
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
             hasWebStartLibrary = false;
         }
         return hasWebStartLibrary;
@@ -130,15 +130,15 @@ public final class ClasspathUtility implements UtilMessages {
 
     /**
      * Search all files that match the given Regex pattern.
-     * 
+     *
      * @param classpathEntryPath the root folder used for search
      * @param searchPattern the regex pattern used as a filter
-     * 
+     *
      * @return list of resources that match the pattern
      */
     private static List<String> getResources(final String classpathEntryPath, final Pattern searchPattern, final boolean cachedJar) {
         final List<String> resources = new ArrayList<>();
-        
+
         final File classpathEntryFile = new File(classpathEntryPath);
         // The classpath entry could be a jar or a folder
         if (classpathEntryFile.isDirectory()) {
@@ -155,10 +155,10 @@ public final class ClasspathUtility implements UtilMessages {
 
     /**
      * Browse a directory to search resources that match the pattern.
-     * 
+     *
      * @param directory the root directory to browse
      * @param searchPattern the regex pattern used as a filter
-     * 
+     *
      * @return list of resources that match the pattern
      */
     private static List<String> getResourcesFromDirectory(final File directory, final Pattern searchPattern) {
@@ -167,7 +167,7 @@ public final class ClasspathUtility implements UtilMessages {
         // Filter only properties files
         final File[] fileList = directory.listFiles();
 
-        if(fileList != null && fileList.length > 0){
+        if (fileList != null && fileList.length > 0) {
             // Iterate over each relevant file
             for (final File file : fileList) {
                 // If the file is a directory process a recursive call to explorer the tree
@@ -187,10 +187,10 @@ public final class ClasspathUtility implements UtilMessages {
 
     /**
      * Browse the jar content to search resources that match the pattern.
-     * 
+     *
      * @param jarOrZipFile the jar to explore
      * @param searchPattern the regex pattern used as a filter
-     * 
+     *
      * @return list of resources that match the pattern
      */
     @SuppressWarnings("unchecked")
@@ -212,7 +212,7 @@ public final class ClasspathUtility implements UtilMessages {
 
     /**
      * Check if the resource match the regex.
-     * 
+     *
      * @param resources the list of found resources
      * @param searchPattern the regex pattern
      * @param resourceName the resource to check and to add

@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,19 +17,19 @@
  */
 package org.jrebirth.af.core.util;
 
+import static org.jrebirth.af.core.resource.Resources.create;
+
 import org.jrebirth.af.core.log.JRLevel;
 import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.i18n.LogMessage;
 import org.jrebirth.af.core.resource.i18n.MessageContainer;
 import org.jrebirth.af.core.resource.i18n.MessageItem;
 
-import static org.jrebirth.af.core.resource.Resources.create;
-
 /**
  * The class <strong>UtilMessages</strong>.
- * 
+ *
  * Messages used by the Util package.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface UtilMessages extends MessageContainer {
@@ -61,20 +61,19 @@ public interface UtilMessages extends MessageContainer {
 
     /** "Impossible to read the file" . */
     MessageItem FILE_UNREADABLE = create(new LogMessage("jrebirth.util.fileUnreadable", JRLevel.Error, JRebirthMarkers.UTIL));
-    
+
     /** "Use JNLPClassLoader to search properties files" . */
     MessageItem USE_JNLP_CLASSLOADER = create(new LogMessage("jrebirth.util.useJNLPClassLoader", JRLevel.Debug, JRebirthMarkers.UTIL));
-    
+
     /** "Parse Cached Jar File [{0}] for resource [{1}]" . */
     MessageItem PARSE_CACHED_JAR_FILE = create(new LogMessage("jrebirth.util.parseCachedJarFile", JRLevel.Debug, JRebirthMarkers.UTIL));
-    
+
     /** "Can not read Cached Jar File : {0}" . */
     MessageItem CANT_READ_CACHED_JAR_FILE = create(new LogMessage("jrebirth.util.cantReadCachedJarFile", JRLevel.Error, JRebirthMarkers.UTIL));
-    
+
     /** "Use Default ClassLoader to search properties files" . */
     MessageItem USE_DEFAULT_CLASSLOADER = create(new LogMessage("jrebirth.util.useDefaultClassLoader", JRLevel.Debug, JRebirthMarkers.UTIL));
 
-    
     /** ClassUtility. */
 
     /** "Impossible to build the object assignable to {0} for the class {1}" . */

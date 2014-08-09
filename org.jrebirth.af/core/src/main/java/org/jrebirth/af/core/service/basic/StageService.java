@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,13 +31,12 @@ import org.jrebirth.af.core.command.basic.stage.StageWaveBean;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveTypeBase;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>StageService</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class StageService extends DefaultService {
@@ -79,7 +78,7 @@ public class StageService extends DefaultService {
 
     /**
      * Open a stage.
-     * 
+     *
      * @param wave the source wave
      */
     public void doOpenStage(final Wave wave) {
@@ -108,7 +107,7 @@ public class StageService extends DefaultService {
 
     /**
      * Gets the root pane.
-     * 
+     *
      * @param swb the swb
      * @return the root pane
      */
@@ -122,7 +121,7 @@ public class StageService extends DefaultService {
 
     /**
      * Gets the scene.
-     * 
+     *
      * @param swb the swb
      * @param region the region
      * @return the scene
@@ -141,7 +140,7 @@ public class StageService extends DefaultService {
 
     /**
      * Gets the stage.
-     * 
+     *
      * @param swb the swb
      * @param scene the scene
      * @return the stage
@@ -161,7 +160,7 @@ public class StageService extends DefaultService {
 
     /**
      * Close a stage. (Hide it)
-     * 
+     *
      * @param wave the source wave
      */
     public void doCloseStage(final Wave wave) {
@@ -171,7 +170,7 @@ public class StageService extends DefaultService {
 
     /**
      * Destroy the stage and dereference it.
-     * 
+     *
      * @param wave the source wave
      */
     public void doDestroyStage(final Wave wave) {
@@ -182,9 +181,9 @@ public class StageService extends DefaultService {
 
     /**
      * Get the wave bean and cast it.
-     * 
+     *
      * @param wave the wave that hold the bean
-     * 
+     *
      * @return the casted wave bean
      */
     public StageWaveBean getWaveBean(final Wave wave) {
@@ -193,9 +192,9 @@ public class StageService extends DefaultService {
 
     /**
      * Retrieve a stage according to its key.
-     * 
+     *
      * @param stageKey the unique key for the requested stage
-     * 
+     *
      * @return the stage or null if not mapped
      */
     public Stage getStage(final String stageKey) {

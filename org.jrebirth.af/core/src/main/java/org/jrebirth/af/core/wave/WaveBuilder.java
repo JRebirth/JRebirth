@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,11 +21,11 @@ import javafx.util.Builder;
 
 /**
  * The class <strong>WaveBuilder</strong>.
- * 
+ *
  * Base builder used to build a custom wave.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <B> the builder recursive type
  */
 public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> {
@@ -53,7 +53,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
 
     /**
      * Create a WaveBuilder instance.
-     * 
+     *
      * @return new instance of WaveBuilder
      */
     @SuppressWarnings("rawtypes")
@@ -63,7 +63,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
 
     /**
      * Apply all wave properties.
-     * 
+     *
      * @param paramWave the wave that need to be initialized with builder values
      */
     public void applyTo(final WaveBase paramWave) {
@@ -90,11 +90,11 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
 
     /**
      * Define the wave group.
-     * 
+     *
      * Default value is WaveGroup.UNDEFINED
-     * 
+     *
      * @param waveGroup the wave group to set
-     * 
+     *
      * @return the builder
      */
     @SuppressWarnings("unchecked")
@@ -106,9 +106,9 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
 
     /**
      * Define the wave type.
-     * 
+     *
      * @param waveType the wave type to set
-     * 
+     *
      * @return the builder
      */
     @SuppressWarnings("unchecked")
@@ -120,9 +120,9 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
 
     /**
      * Define the from class.
-     * 
+     *
      * @param fromClass the from class to set
-     * 
+     *
      * @return the builder
      */
     @SuppressWarnings("unchecked")
@@ -134,9 +134,9 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
 
     /**
      * Define the related class.
-     * 
+     *
      * @param relatedClass the related class to set
-     * 
+     *
      * @return the builder
      */
     @SuppressWarnings("unchecked")
@@ -148,9 +148,9 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
 
     /**
      * Define the wave bean class.
-     * 
+     *
      * @param waveBeanClass the wave bean class to set
-     * 
+     *
      * @return the builder
      */
     @SuppressWarnings("unchecked")
@@ -162,9 +162,9 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
 
     /**
      * Define the list of WaveData.
-     * 
+     *
      * @param waveData the list of waveData to set
-     * 
+     *
      * @return the builder
      */
     @SuppressWarnings("unchecked")
@@ -186,7 +186,7 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
 
     /**
      * Add a bit to the mask.
-     * 
+     *
      * @param bit the bit to add
      */
     protected void addBit(final int bit) {
@@ -195,9 +195,9 @@ public class WaveBuilder<B extends WaveBuilder<B>> implements Builder<WaveBase> 
 
     /**
      * Check if the mask contains the requested bit.
-     * 
+     *
      * @param bit the requested bit
-     * 
+     *
      * @return true if the mask contains the requested bit
      */
     protected boolean hasBit(final int bit) {

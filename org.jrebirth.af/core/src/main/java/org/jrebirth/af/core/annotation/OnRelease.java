@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * The class <strong>OnRelease</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 @Target(ElementType.METHOD)
@@ -20,7 +20,7 @@ public @interface OnRelease {
 
     /**
      * Define the execution order of all methods performed after release.
-     * 
+     *
      * The default level is MethodPriority.NORMAL
      */
     MethodPriority value() default MethodPriority.NORMAL;

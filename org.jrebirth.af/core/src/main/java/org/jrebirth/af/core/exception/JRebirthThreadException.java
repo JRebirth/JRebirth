@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,11 +18,11 @@
 package org.jrebirth.af.core.exception;
 
 /**
- * 
+ *
  * The class <strong>JRebirthThreadException</strong>.
- * 
+ *
  * This is the exception that can be thrown if JRebirth code is executed outside the right JRebirth Thread.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class JRebirthThreadException extends Exception {
@@ -49,7 +49,7 @@ public class JRebirthThreadException extends Exception {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param threadType the type of error to thrown.
      */
     public JRebirthThreadException(final Type threadType) {
@@ -59,9 +59,9 @@ public class JRebirthThreadException extends Exception {
 
     /**
      * Return the concerned thread name.
-     * 
+     *
      * @param threadType the thread type concerned
-     * 
+     *
      * @return the thread name concerned
      */
     private static String getThreadName(final Type threadType) {

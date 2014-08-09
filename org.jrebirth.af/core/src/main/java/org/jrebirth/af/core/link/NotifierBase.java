@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -45,11 +45,11 @@ import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.checker.WaveChecker;
 
 /**
- * 
+ *
  * The class <strong>NotifierImpl</strong>.
- * 
+ *
  * An implementation that allow to send and to rpocess wave message.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkMessages {
@@ -65,7 +65,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param globalFacade the global facade of the application
      */
     public NotifierBase(final GlobalFacade globalFacade) {
@@ -116,13 +116,13 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
     /**
      * Call dynamically a command.
-     * 
+     *
      * According to its runIntoType the command will be run into JAT, JIT or a Thread Pool
-     * 
+     *
      * Each time a new fresh command will be retrieved.
-     * 
+     *
      * This method is called from the JIT (JRebirth Internal Thread)<br>
-     * 
+     *
      * @param wave the wave that contains all informations
      */
     @SuppressWarnings("unchecked")
@@ -146,11 +146,11 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
     /**
      * Call a service method by using a task worker.
-     * 
+     *
      * The same service will be retrieved each time this method is called.
-     * 
+     *
      * This method is called from the JIT (JRebirth Internal Thread)<br />
-     * 
+     *
      * @param wave the wave that contains all informations
      */
     @SuppressWarnings("unchecked")
@@ -176,16 +176,16 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
     /**
      * Display dynamically an Ui model.<br>
-     * 
+     *
      * This method is called from the JIT (JRebirth Internal Thread)<br>
-     * 
+     *
      * Creates the model and its root node.<br>
      * Then attach it according to the placeholder defined into the wave:<br>
      * <ul>
      * <li>JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER : to replace a property node by the model's root node</li>
      * <li>JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER : to add the model's root node into a children list</li>
      * </ul>
-     * 
+     *
      * @param wave the wave that contains all informations
      */
     @SuppressWarnings("unchecked")
@@ -220,11 +220,11 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
     /**
      * Dispatch a standard wave which could be handled by a custom method of the component.
-     * 
+     *
      * This method is called from the JIT (JRebirth Internal Thread)<br>
-     * 
+     *
      * @param wave the wave that contains all information
-     * 
+     *
      * @throws WaveException if wave dispatching fails
      */
     private void processUndefinedWave(final Wave wave) throws WaveException {
@@ -348,14 +348,14 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
      * {@inheritDoc}
      */
     @Override
-    public void unlistenAll(WaveReady<?> linkedObject) throws JRebirthThreadException {
+    public void unlistenAll(final WaveReady<?> linkedObject) throws JRebirthThreadException {
 
         JRebirth.checkJIT();
 
-        for (WaveSubscription ws : notifierMap.values()) {
+        for (final WaveSubscription ws : this.notifierMap.values()) {
 
-            List<WaveHandler> removalList = new ArrayList<>();
-            for (WaveHandler wh : ws.getWaveHandlers()) {
+            final List<WaveHandler> removalList = new ArrayList<>();
+            for (final WaveHandler wh : ws.getWaveHandlers()) {
                 if (wh.getWaveReady() == linkedObject) {
                     removalList.add(wh);
                 }
@@ -363,7 +363,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             ws.getWaveHandlers().removeAll(removalList);
 
             if (ws.getWaveHandlers().isEmpty()) {
-                notifierMap.remove(ws);
+                this.notifierMap.remove(ws);
             }
         }
 
@@ -371,9 +371,9 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
     /**
      * The class <strong>LoopBuilder</strong>.
-     * 
+     *
      * Used to instantiate object into loop.
-     * 
+     *
      * @author Sébastien Bordes
      */
     private static final class LoopBuilder {
@@ -387,9 +387,9 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
         /**
          * Build a new {@link WaveSubscription}.
-         * 
+         *
          * @param waveType the Wave Type listened
-         * 
+         *
          * @return a new {@link WaveSubscription} instance
          */
         public static WaveSubscription newSubscription(final WaveType waveType) {
@@ -398,11 +398,11 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
         /**
          * Build a new empty component wrapper.
-         * 
+         *
          * @param linkedObject the object to wrap into an handler
          * @param waveChecker the wave checker
          * @param method the method used to handle the wave (could be null)
-         * 
+         *
          * @return a new instance of WaveHandler
          */
         public static WaveHandler newHandler(final WaveReady<?> linkedObject, final WaveChecker waveChecker, final Method method) {

@@ -19,9 +19,9 @@ import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  * The class <strong>CheckerUtility</strong>.
- * 
+ *
  * Some Useful method utilities to check if API is respected.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class CheckerUtility implements UtilMessages {
@@ -38,9 +38,9 @@ public final class CheckerUtility implements UtilMessages {
 
     /**
      * Check if wave Type contract is respected for the the given {@link WaveReady} class.
-     * 
+     *
      * Throws a Runtime exception is Wave Contract is broken.
-     * 
+     *
      * @param waveReadyClass the {@link WaveReady} class to check
      * @param waveTypes the contract to respect (could be several WaveType)
      */
@@ -106,10 +106,10 @@ public final class CheckerUtility implements UtilMessages {
 
     /**
      * Compare method parameters with wave parameters.
-     * 
+     *
      * @param method the method to check
      * @param wParams the wave parameters taht define the contract
-     * 
+     *
      * @return true if the method has the right signature
      */
     private static boolean checkMethodSignature(final Method method, final List<WaveItem<?>> wParams) {
@@ -141,11 +141,11 @@ public final class CheckerUtility implements UtilMessages {
 
     /**
      * Check that wave has all data required by the WaveType contract (if any).
-     * 
+     *
      * Data can be stored into WaveData wrapper or WaveBean
-     * 
+     *
      * @param wave the wave to check
-     * 
+     *
      */
     public static void checkWave(final Wave wave) {
         if (JRebirthParameters.DEVELOPER_MODE.get()) {

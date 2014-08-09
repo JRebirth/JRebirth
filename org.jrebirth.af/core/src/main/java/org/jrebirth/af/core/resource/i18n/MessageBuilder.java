@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,22 +31,21 @@ import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.util.ClasspathUtility;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>MessageBuilder</strong>.
- * 
+ *
  * Class used to manage message with weak reference.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, MessageParams, MessageResource> {
 
     /**
      * The class logger.
-     * 
+     *
      * All Logs of this class are hard coded because l10n engine is not started.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageBuilder.class);
@@ -72,7 +71,7 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
 
     /**
      * Search configuration files according to the parameters provided.
-     * 
+     *
      * @param wildcard the regex wildcard (must not be null)
      */
     public void searchMessagesFiles(final String wildcard) {
@@ -110,7 +109,7 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
 
     /**
      * Read a customized Message file to load all translated messages.
-     * 
+     *
      * @param rbFilename the resource bundle file to load
      */
     private void readPropertiesFile(final String rbFilename) {
@@ -154,7 +153,7 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
 
             // Translation is always allowed for all Message
             // It depends on LOG_RESOLUTION parameter for all LogMessage
-            boolean translationAllowed = !(messageParams instanceof LogMessageParams)
+            final boolean translationAllowed = !(messageParams instanceof LogMessageParams)
                     || messageParams instanceof LogMessageParams && JRebirthParameters.LOG_RESOLUTION.get();
 
             // Translate the message code as required
@@ -179,11 +178,11 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
 
     /**
      * Retrieved the message mapped with the given key.
-     * 
+     *
      * Perform the search by iterating over all resource bundles available in reverse order.
-     * 
+     *
      * @param messageKey the key of the message to translate
-     * 
+     *
      * @return the translated message or null
      */
     private String findMessage(final String messageKey) {
@@ -207,7 +206,7 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
 
     /**
      * Override a parameter value.
-     * 
+     *
      * @param key the parameter item key
      * @param forcedValue the overridden value
      */

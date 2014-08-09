@@ -2,7 +2,7 @@ package org.jrebirth.af.core.wave;
 
 /**
  * The class <strong>WaveItems</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public enum WaveItems implements WaveItemEnum {
@@ -21,7 +21,7 @@ public enum WaveItems implements WaveItemEnum {
 
     /**
      * Private constructor.
-     * 
+     *
      * @param wi the wave item to initialize
      */
     private WaveItems(final WaveItem<?> wi) {

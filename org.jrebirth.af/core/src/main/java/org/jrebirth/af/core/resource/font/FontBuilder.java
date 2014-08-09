@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,9 +30,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>FontBuilder</strong>.
- * 
+ *
  * Class used to manage font with weak reference.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontParams, Font> {
@@ -61,9 +61,9 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
     /**
      * Build a real font with name and size.
-     * 
+     *
      * @param rFont the real font enum
-     * 
+     *
      * @return the javafx font
      */
     private Font buildRealFont(final RealFont rFont) {
@@ -76,9 +76,9 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
     /**
      * Build a Family Font with name and size.
-     * 
+     *
      * @param familyFont the family font enum
-     * 
+     *
      * @return the javafx font
      */
     private Font buildFamilyFont(final FamilyFont familyFont) {
@@ -97,7 +97,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
     /**
      * Transform the font name by replacing _ by space.
-     * 
+     *
      * @param fontName the font name to transform
      * @return the transformed font
      */
@@ -107,7 +107,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
     /**
      * Load the font file.
-     * 
+     *
      * @param fontParams the name of the font to load
      */
     private void checkFontStatus(final FontParams fontParams) {
@@ -117,26 +117,26 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
         Font font = null;
         String fontName = null;
-        
+
         if (fonts.isEmpty()) {
-            
-            List<String> fontPaths = (fontParams instanceof RealFont && ((RealFont)fontParams).skipFontsFolder()) 
-                    ? Collections.singletonList("") 
+
+            final List<String> fontPaths = fontParams instanceof RealFont && ((RealFont) fontParams).skipFontsFolder()
+                    ? Collections.singletonList("")
                     : JRebirthParameters.FONT_FOLDER.get();
-            
-            for(int i = 0 ; i < fontPaths.size() && font == null ;i++){
-                
+
+            for (int i = 0; i < fontPaths.size() && font == null; i++) {
+
                 String fontPath = fontPaths.get(i);
-                if(!fontPath.isEmpty()){
+                if (!fontPath.isEmpty()) {
                     fontPath += Resources.PATH_SEP;
                 }
 
                 // This variable will hold the 2 alternative font names
                 fontName = fontPath + transformFontName(fontParams.name().name()) + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
-    
+
                 LOGGER.trace("Try to load Transformed Font  {}", fontName);
                 font = Font.loadFont(Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), fontParams.size());
-            
+
                 // The font name contains '_' in its file name to replace ' '
                 if (font == null) {
                     fontName = fontPath + fontParams.name().name() + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
@@ -151,7 +151,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
                     // Transformed font has been loaded
                     LOGGER.info("{} Transformed Font loaded", fontName);
                 }
-            
+
             }
 
             if (font == null) {

@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,11 +35,11 @@ import org.jrebirth.af.core.ui.Model;
 
 /**
  * The class <strong>AbstractFacade</strong>.
- * 
+ *
  * An abstract facade can manage singleton of object which implements the FacadeReady interface
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <R> A type that implements FacadeReady
  */
 public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractGlobalReady implements LocalFacade<R>, FacadeMessages {
@@ -52,7 +52,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param globalFacade the global facade of the application
      */
     public AbstractFacade(final GlobalFacade globalFacade) {
@@ -203,13 +203,13 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
     /**
      * Build a new instance of the ready object class.
-     * 
+     *
      * @param uniqueKey the unique key for the component to get
-     * 
+     *
      * @return a new instance of the given clazz and key
-     * 
+     *
      * @param <E> the type of the ready object to retrieve
-     * 
+     *
      * @throws CoreException if an error occurred
      */
     @SuppressWarnings("unchecked")
@@ -242,12 +242,12 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
     /**
      * Build an unique key.
-     * 
+     *
      * @param clazz the class type of the component
      * @param keyPart all complementary part of the key
-     * 
+     *
      * @return the unique key for the given class and keyParts array
-     * 
+     *
      * @param <E> The type of the object registered by this ClassKey
      */
     @Override
@@ -264,11 +264,11 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
     /**
      * Build a singleton key.
-     * 
+     *
      * @param clazz the class type of the component
-     * 
+     *
      * @return the unique key for a singleton
-     * 
+     *
      * @param <E> The type of the object registered by this ClassKey
      */
     private <E extends R> UniqueKey<E> buildClassKey(final Class<E> clazz) {
@@ -277,12 +277,12 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
     /**
      * Build a multiton key.
-     * 
+     *
      * @param clazz the class type of the component
      * @param keyPart all complementary part of the key
-     * 
+     *
      * @return the unique key for a multiton
-     * 
+     *
      * @param <E> The type of the object registered by this ClassKey
      */
     private <E extends R> UniqueKey<E> buildMultitonKey(final Class<E> clazz, final Object... keyPart) {

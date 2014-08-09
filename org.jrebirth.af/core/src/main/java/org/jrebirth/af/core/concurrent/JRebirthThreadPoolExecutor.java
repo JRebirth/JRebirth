@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,9 +31,9 @@ import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
- * 
+ *
  * The class <strong>JRebirthThreadPoolExecutor</strong> is used to to manage the JRebirth Thread Pool (<b>JTP</b>).
- * 
+ *
  * @author Sébastien Bordes
  */
 public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements ConcurrentMessages {
@@ -46,7 +46,7 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param threadNumber the number of thread managed by the pool
      * @param threadFactory the factory used to add a thread into the pool
      */
@@ -57,9 +57,9 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
 
     /**
      * Check if a slot is available for the given task priority.
-     * 
+     *
      * @param taskPriority the priority to check
-     * 
+     *
      * @return true if this priority can be run right now
      */
     public boolean checkAvailability(final RunnablePriority taskPriority) {
@@ -73,9 +73,9 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
 
     /**
      * Check given priority with current pending list.
-     * 
+     *
      * @param taskPriority the priority to check
-     * 
+     *
      * @return true if the priority is greater than those pending
      */
     private boolean checkPriority(final RunnablePriority taskPriority) {

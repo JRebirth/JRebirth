@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,7 @@ import org.jrebirth.af.core.resource.AbstractBaseParams;
 
 /**
  * The interface <strong>StyleSheet</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
@@ -39,15 +39,15 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
 
     /** The style sheet name (without .css extension). */
     private final StringProperty nameProperty = new SimpleStringProperty();
-    
+
     /** The flag used to skip the fontsFolder prefix addition. */
-    private BooleanProperty skipStylesFolderProperty = new SimpleBooleanProperty();
+    private final BooleanProperty skipStylesFolderProperty = new SimpleBooleanProperty();
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param path the style sheet local path
-     * 
+     *
      * @param name the style sheet name
      * @param skipStylesFolder skip fontsFolder usage
      */
@@ -57,10 +57,10 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
         this.nameProperty.set(name);
         this.skipStylesFolderProperty.set(skipStylesFolder);
     }
-    
+
     /**
      * Default Constructor.
-     * 
+     *
      * @param path the style sheet local path
      * @param name the style sheet name
      */
@@ -70,7 +70,7 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param name the style sheet file name
      */
     public StyleSheet(final String name) {
@@ -87,7 +87,7 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
 
     /**
      * Path property.
-     * 
+     *
      * @return the string property
      */
     public StringProperty pathProperty() {
@@ -104,7 +104,7 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
 
     /**
      * Name property.
-     * 
+     *
      * @return the string property
      */
     public StringProperty nameProperty() {
@@ -113,7 +113,7 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
 
     /**
      * Return the skipStylesFolder flag.
-     * 
+     *
      * @return the skipStylesFolder flag
      */
     public boolean skipStylesFolder() {
@@ -122,13 +122,13 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
 
     /**
      * Return the skipStylesFolderProperty property.
-     * 
+     *
      * @return the skipStylesFolderProperty property
      */
     public BooleanProperty skipStylesFolderProperty() {
-        return skipStylesFolderProperty;
+        return this.skipStylesFolderProperty;
     }
-    
+
     /**
      * {@inheritDoc}
      */

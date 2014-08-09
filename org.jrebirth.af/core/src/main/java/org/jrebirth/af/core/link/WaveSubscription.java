@@ -6,7 +6,7 @@ import org.jrebirth.af.core.wave.WaveType;
 
 /**
  * The class <strong>WaveSubscription</strong> is used to store all wave handler related to a wave type.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class WaveSubscription {
@@ -19,7 +19,7 @@ public class WaveSubscription {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param waveType the listened wave type
      * @param waveHandlers the list of handler attached to this wave type
      */
