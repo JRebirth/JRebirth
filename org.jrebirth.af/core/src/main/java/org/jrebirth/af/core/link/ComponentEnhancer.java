@@ -34,6 +34,8 @@ import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.facade.FacadeReady;
 import org.jrebirth.af.core.facade.WaveReady;
+import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.util.ClassUtility;
@@ -46,7 +48,10 @@ import org.jrebirth.af.core.wave.WaveTypeBase;
  *
  * @author Sébastien Bordes
  */
-public class ComponentEnhancer {
+public final class ComponentEnhancer implements LinkMessages {
+
+    /** The class logger. */
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(ComponentEnhancer.class);
 
     /**
      * Private Constructor.
@@ -103,7 +108,7 @@ public class ComponentEnhancer {
                 ClassUtility.setFieldValue(field, component, component.getLocalFacade().getGlobalFacade().getUiFacade().retrieve((Class<Model>) field.getType(), keyParts));
             }
         } catch (IllegalArgumentException | CoreException e) {
-            e.printStackTrace();
+            LOGGER.error(COMPONENT_INJECTION_FAILURE, component.getClass(), e);
         }
 
     }

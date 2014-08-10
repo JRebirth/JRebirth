@@ -38,6 +38,7 @@ public class RealFont extends AbstractBaseFont {
      *
      * @param name the font name
      * @param size the default font size
+     * @param skipFontsFolder skip default fonts folder search
      */
     public RealFont(final FontName name, final double size, final boolean skipFontsFolder) {
         super(name, size);

@@ -17,7 +17,6 @@
  */
 package org.jrebirth.af.core.resource.parameter;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -46,6 +45,12 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(ParameterBuilder.class);
 
+    /** The pattern that matches Environment Variable ${varname} . */
+    private static final Pattern ENV_VAR_PATTERN1 = Pattern.compile("(.*)\\$\\{(\\w+)\\}(.*)");
+
+    /** The pattern that matches Environment Variable $varname . */
+    private static final Pattern ENV_VAR_PATTERN2 = Pattern.compile("(.*)\\$(\\w+)(.*)");
+
     /** Store all parameter values defined into properties files. */
     private final Map<String, ParameterEntry> propertiesParametersMap = new ConcurrentHashMap<>();
 
@@ -60,12 +65,6 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /** The Wildcard used to load configuration files. */
     private String configurationFileWildcard;
-
-    /** The pattern that matches Environment Variable ${varname} . */
-    private static final Pattern ENV_VAR_PATTERN1 = Pattern.compile("(.*)\\$\\{(\\w+)\\}(.*)");
-
-    /** The pattern that matches Environment Variable $varname . */
-    private static final Pattern ENV_VAR_PATTERN2 = Pattern.compile("(.*)\\$(\\w+)(.*)");
 
     /**
      * Search configuration files according to the parameters provided.
@@ -175,7 +174,8 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
      *
      * @return the given string updated with right environment variable content
      */
-    private String checkPattern(String value, final Pattern pattern, final boolean withBrace) {
+    private String checkPattern(final String value, final Pattern pattern, final boolean withBrace) {
+        String res = value;
         final Matcher matcher = pattern.matcher(value);
         while (matcher.find()) {
             final String envName = matcher.group(2);
@@ -186,15 +186,15 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
             // Check if the var env is ready
             if (this.varenvMap.get(envName) != null) {
                 if (withBrace) {
-                    value = value.replace("${" + envName + "}", this.varenvMap.get(envName));
+                    res = res.replace("${" + envName + "}", this.varenvMap.get(envName));
                 } else {
-                    value = value.replace("$" + envName, this.varenvMap.get(envName));
+                    res = res.replace("$" + envName, this.varenvMap.get(envName));
                 }
             } else {
                 LOGGER.log(UNDEFINED_ENV_VAR, envName);
             }
         }
-        return value;
+        return res;
     }
 
     /**

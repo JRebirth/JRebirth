@@ -133,6 +133,7 @@ public final class ClasspathUtility implements UtilMessages {
      *
      * @param classpathEntryPath the root folder used for search
      * @param searchPattern the regex pattern used as a filter
+     * @param cachedJar is a jar cached by Java Webstart without any extension
      *
      * @return list of resources that match the pattern
      */

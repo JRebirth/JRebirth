@@ -499,7 +499,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
                     callAnnotatedMethod(OnRelease.class);
                 } catch (final JRebirthThreadException jte) {
-                    LOGGER.error(CALL_ANNOTATED_METHOD_ERROR, jte);// FIXME
+                    LOGGER.error(CALL_ANNOTATED_METHOD_ERROR, jte); // FIXME
                 }
             }
         });

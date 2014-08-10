@@ -22,6 +22,8 @@ import java.util.Collections;
 import java.util.List;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
+import javafx.scene.text.Text;
 
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
@@ -67,7 +69,11 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
 
         // Default image was not found
         if (image == null) {
-            // Build one programmatically TODO
+            WritableImage img = new WritableImage(30, 30);
+            final Text text = new Text();
+            text.setText("N/A");
+            img = text.snapshot(null, img);
+            image = img;
         }
 
         return image;

@@ -20,7 +20,6 @@ package org.jrebirth.af.core.link;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.af.core.command.Command;
@@ -354,16 +353,14 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
         for (final WaveSubscription ws : this.notifierMap.values()) {
 
-            final List<WaveHandler> removalList = new ArrayList<>();
             for (final WaveHandler wh : ws.getWaveHandlers()) {
                 if (wh.getWaveReady() == linkedObject) {
-                    removalList.add(wh);
+                    ws.getWaveHandlers().remove(wh);
                 }
             }
-            ws.getWaveHandlers().removeAll(removalList);
 
             if (ws.getWaveHandlers().isEmpty()) {
-                this.notifierMap.remove(ws);
+                this.notifierMap.remove(ws.getWaveType());
             }
         }
 

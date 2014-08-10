@@ -26,8 +26,6 @@ public @interface Sequential {
      * - a True value (default) will configure the {@link MultiCommand} to run sub commands sequentially according to order of addition. <br />
      *
      * - a False value will run all command in the same order but without waiting the end of each command
-     *
-     * @return the sequential value
      */
     boolean value() default true;
 }
