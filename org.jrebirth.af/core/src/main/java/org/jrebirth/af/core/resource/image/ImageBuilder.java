@@ -22,6 +22,8 @@ import java.util.Collections;
 import java.util.List;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
+import javafx.scene.text.Text;
 
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
@@ -66,8 +68,12 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
         }
         
         // Default image was not found
-        if(image == null){
-            //Build one programmatically TODO
+        if (image == null) {
+            WritableImage img = new WritableImage(30, 30);
+            final Text text = new Text();
+            text.setText("N/A");
+            img = text.snapshot(null, img);
+            image = img;
         }
         
         return image;
@@ -77,12 +83,8 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      * Build a local image with its local path.
      *
      * @param jrImage the local image params
-<<<<<<< 8.x
-     *
-=======
      * @param skipImagesFolder skip imagesFolder prefix addition
      * 
->>>>>>> 895028c Fix #122 Manage multiple loation for images, fonts and style Manage localimage with relative and absolute resource params
      * @return the JavaFX image object
      */
     private Image buildLocalImage(final AbstractBaseImage jrImage, final boolean skipImagesFolder) {

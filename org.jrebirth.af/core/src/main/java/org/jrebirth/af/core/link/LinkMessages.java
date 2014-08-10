@@ -101,4 +101,8 @@ public interface LinkMessages extends MessageContainer {
     /** "Impossible to build WaveBean instance : {0}". */
     MessageItem WAVE_BEAN_CREATION_ERROR = create(new LogMessage("jrebirth.link.waveBeanCreationError", JRLevel.Error, JRebirthMarkers.WAVE));
 
+    /** ComponentEnhancer. */
+
+    /** "Component {0} injection has failed". */
+    MessageItem COMPONENT_INJECTION_FAILURE = create(new LogMessage("jrebirth.link.componentInjectionFailure", JRLevel.Error, JRebirthMarkers.LINK));
 }

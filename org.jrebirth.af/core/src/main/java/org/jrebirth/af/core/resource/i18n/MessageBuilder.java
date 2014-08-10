@@ -153,13 +153,13 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
 
             // Translation is always allowed for all Message
             // It depends on LOG_RESOLUTION parameter for all LogMessage
-            final boolean translationAllowed = !(messageParams instanceof LogMessageParams)
-                    || messageParams instanceof LogMessageParams && JRebirthParameters.LOG_RESOLUTION.get();
+            final boolean translationAllowed = !(messageParams instanceof LogMessageParams) || JRebirthParameters.LOG_RESOLUTION.get();
 
             // Translate the message code as required
             String rawMessage = translationAllowed ? findMessage(messageParams.name()) : null;
 
             // No translation found, the message will be the key with wrapped by <>
+
             if (rawMessage == null) {
                 rawMessage = '<' + messageParams.name() + '>';
             }

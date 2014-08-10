@@ -20,6 +20,10 @@ package org.jrebirth.af.core.link;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.jrebirth.af.core.annotation.AfterInit;
 import org.jrebirth.af.core.annotation.BeforeInit;
@@ -28,23 +32,26 @@ import org.jrebirth.af.core.annotation.OnRelease;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.facade.FacadeReady;
 import org.jrebirth.af.core.facade.WaveReady;
+import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.util.ClassUtility;
-import org.jrebirth.af.core.util.MultiMap;
 import org.jrebirth.af.core.wave.OnWave;
 import org.jrebirth.af.core.wave.WaveType;
-import org.jrebirth.af.core.wave.WaveTypeRegistry;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  * The class <strong>ComponentEnhancer</strong> is an utility class used to manage Components Annotations.
  *
  * @author Sébastien Bordes
  */
-public class ComponentEnhancer {
+public final class ComponentEnhancer implements LinkMessages {
+
+    /** The class logger. */
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(ComponentEnhancer.class);
 
     /**
      * Private Constructor.
@@ -101,21 +108,21 @@ public class ComponentEnhancer {
                 ClassUtility.setFieldValue(field, component, component.getLocalFacade().getGlobalFacade().getUiFacade().retrieve((Class<Model>) field.getType(), keyParts));
             }
         } catch (IllegalArgumentException | CoreException e) {
-            e.printStackTrace();
+            LOGGER.error(COMPONENT_INJECTION_FAILURE, component.getClass(), e);
         }
 
     }
 
     /**
-     * Parse all methods to search annotated methods that are attached to a lifecylce phase.
+     * Parse all method to search annotated methods that are attached to a lifecylce phase.
      *
      * @param component the JRebirth component to manage
      *
      * @return the map that store all method that sdhould be call sorted by lefecycle phase
      */
-    public static MultiMap<String, Method> defineLifecycleMethod(final WaveReady<?> component) {
+    public static Map<String, List<Method>> defineLifecycleMethod(final WaveReady<?> component) {
 
-        final MultiMap<String, Method> lifecycleMethod = new MultiMap<>();
+        final Map<String, List<Method>> lifecycleMethod = new HashMap<>();
 
         manageLifecycleAnnotation(component, lifecycleMethod, BeforeInit.class);
         manageLifecycleAnnotation(component, lifecycleMethod, AfterInit.class);
@@ -131,11 +138,12 @@ public class ComponentEnhancer {
      * @param lifecycleMethod the map that store methods
      * @param annotationClass the annotation related to lifecycle phase
      */
-    private static void manageLifecycleAnnotation(final WaveReady<?> component, final MultiMap<String, Method> lifecycleMethod, final Class<? extends Annotation> annotationClass) {
+    private static void manageLifecycleAnnotation(final WaveReady<?> component, final Map<String, List<Method>> lifecycleMethod, final Class<? extends Annotation> annotationClass) {
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), annotationClass)) {
-
-            //
-            lifecycleMethod.add(annotationClass.getName(), method); // TODO sort
+            if (!lifecycleMethod.containsKey(annotationClass.getName())) {
+                lifecycleMethod.put(annotationClass.getName(), new ArrayList<Method>());
+            }
+            lifecycleMethod.get(annotationClass.getName()).add(method); // TODO sort
         }
     }
 
@@ -146,16 +154,19 @@ public class ComponentEnhancer {
      */
     public static void manageOnWaveAnnotation(final WaveReady<?> component) {
 
-        // Retrieve class annotations (Java 8 add support for repeatable annotations)
-        for (final OnWave clsOnWave : component.getClass().getAnnotationsByType(OnWave.class)) {
+        // Retrieve class annotation
+        final OnWave clsOnWave = component.getClass().getAnnotation(OnWave.class);
+        if (clsOnWave != null) {
             manageUniqueWaveTypeAction(component, clsOnWave.value(), null);
+            manageMultipleWaveTypeAction(component, clsOnWave, null);
         }
 
-        // Iterate over each annotated Method and all annotations
+        // Iterate over each annotated Method
+        OnWave onWave = null;
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), OnWave.class)) {
-            for (final OnWave clsOnWave : method.getAnnotationsByType(OnWave.class)) {
-                manageUniqueWaveTypeAction(component, clsOnWave.value(), null);
-            }
+            onWave = method.getAnnotation(OnWave.class);
+            manageUniqueWaveTypeAction(component, onWave.value(), method);
+            manageMultipleWaveTypeAction(component, onWave, method);
         }
 
     }
@@ -170,7 +181,7 @@ public class ComponentEnhancer {
     private static void manageUniqueWaveTypeAction(final WaveReady<?> component, final String waveActionName, final Method method) {
 
         // Get the WaveType from the WaveType registry
-        final WaveType wt = WaveTypeRegistry.getWaveType(waveActionName);
+        final WaveType wt = WaveTypeBase.getWaveType(waveActionName);
         if (wt != null) {
             // Method is not defined or is the default fallback one
             if (method == null || AbstractWaveReady.PROCESS_WAVE_METHOD_NAME.equals(method.getName())) {
@@ -180,8 +191,19 @@ public class ComponentEnhancer {
                 // Listen the WaveType and specify the right method handler
                 component.listen(null, method, wt);
             }
-        } else {
-            throw new CoreRuntimeException("WaveType '" + waveActionName + "' not found into WaveTypeRegistry.");
+        }
+    }
+
+    /**
+     * Manage several {@link WaveType} subscriptions (from types field of {@link OnWave} annotation).
+     *
+     * @param waveReady the wave ready
+     * @param onWave the {@link OnWave} annotation to explore
+     * @param method the wave handler method
+     */
+    private static void manageMultipleWaveTypeAction(final WaveReady<?> waveReady, final OnWave onWave, final Method method) {
+        for (final String action : onWave.types()) {
+            manageUniqueWaveTypeAction(waveReady, action, method);
         }
     }
 

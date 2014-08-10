@@ -516,7 +516,13 @@ public final class ClassUtility implements UtilMessages {
     }
 
     /**
+     * Update an object field even if it has a private or protected visibility.
      *
+     * @param field the field to update
+     * @param instance the object instance that hold this field
+     * @param value the value to set into this field
+     *
+     * @throws CoreException if the new value cannot be set
      */
     public static void setFieldValue(final Field field, final Object instance, final Object value) throws CoreException {
 

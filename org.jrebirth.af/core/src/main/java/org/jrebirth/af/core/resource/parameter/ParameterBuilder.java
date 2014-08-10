@@ -47,6 +47,12 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(ParameterBuilder.class);
 
+    /** The pattern that matches Environment Variable ${varname} . */
+    private static final Pattern ENV_VAR_PATTERN1 = Pattern.compile("(.*)\\$\\{(\\w+)\\}(.*)");
+
+    /** The pattern that matches Environment Variable $varname . */
+    private static final Pattern ENV_VAR_PATTERN2 = Pattern.compile("(.*)\\$(\\w+)(.*)");
+
     /** Store all parameter values defined into properties files. */
     private final Map<String, ParameterEntry> propertiesParametersMap = new ConcurrentHashMap<>();
 
@@ -61,12 +67,6 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /** The Wildcard used to load configuration files. */
     private String configurationFileWildcard;
-
-    /** The pattern that matches Environment Variable ${varname} . */
-    private static final Pattern ENV_VAR_PATTERN1 = Pattern.compile("(.*)\\$\\{(\\w+)\\}(.*)");
-    
-    /** The pattern that matches Environment Variable $varname . */
-    private static final Pattern ENV_VAR_PATTERN2 = Pattern.compile("(.*)\\$(\\w+)(.*)");
 
     /**
      * Search configuration files according to the parameters provided.
@@ -178,26 +178,27 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
      * 
      * @return the given string updated with right environment variable content
      */
-    private String checkPattern(String value, Pattern pattern, boolean withBrace) {
-        Matcher matcher = pattern.matcher(value);
-        while(matcher.find()){
-            String envName = matcher.group(2);
-            if(!varenvMap.containsKey(envName)){
-                String envValue = System.getenv(envName);
-                varenvMap.put(envName, envValue);
+    private String checkPattern(final String value, final Pattern pattern, final boolean withBrace) {
+        String res = value;
+        final Matcher matcher = pattern.matcher(value);
+        while (matcher.find()) {
+            final String envName = matcher.group(2);
+            if (!this.varenvMap.containsKey(envName)) {
+                final String envValue = System.getenv(envName);
+                this.varenvMap.put(envName, envValue);
             }
-            //Check if the var env is ready
-            if(varenvMap.get(envName) != null){
-                if(withBrace){
-                    value = value.replace("${"+envName+"}", varenvMap.get(envName));
-                }else{
-                    value = value.replace("$"+envName, varenvMap.get(envName));
+            // Check if the var env is ready
+            if (this.varenvMap.get(envName) != null) {
+                if (withBrace) {
+                    res = res.replace("${" + envName + "}", this.varenvMap.get(envName));
+                } else {
+                    res = res.replace("$" + envName, this.varenvMap.get(envName));
                 }
             }else{
                 LOGGER.log(UNDEFINED_ENV_VAR, envName);
             }
         }
-        return value;
+        return res;
     }
 
     /**

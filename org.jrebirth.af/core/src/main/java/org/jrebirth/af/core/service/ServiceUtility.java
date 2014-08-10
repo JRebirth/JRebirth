@@ -40,7 +40,7 @@ public final class ServiceUtility implements ServiceMessages {
 
             // Read each line to increment the line number of the reader
             while (reader.readLine() != null) {
-                ;
+                ;// NOSONAR Just Count lines
             }
             // Extract the current line number
             res = reader.getLineNumber();

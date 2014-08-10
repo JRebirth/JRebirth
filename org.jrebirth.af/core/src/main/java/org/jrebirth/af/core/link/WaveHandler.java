@@ -195,7 +195,7 @@ public class WaveHandler implements LinkMessages {
      *
      * @throws WaveException if an error occurred while processing the wave
      */
-    private final void performHandle(final Wave wave, final Method method) throws WaveException {
+    private void performHandle(final Wave wave, final Method method) throws WaveException {
 
         // Build parameter list of the searched method
         final List<Object> parameterValues = new ArrayList<>();
