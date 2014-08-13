@@ -223,5 +223,20 @@
 		</dependency>
 
 	</dependencies>
-
+	<profiles>
+	   <profile>
+	      <activation>
+		 <jdk>1.7</jdk>
+	      </activation>
+	      <dependencies>
+		 <dependency>
+		    <groupId>com.oracle</groupId>
+		    <artifactId>javafx-runtime</artifactId>
+		    <version>2.2</version>
+		    <systemPath>${env.JAVA_HOME}/jre/lib/jfxrt.jar</systemPath>
+		    <scope>system</scope>
+		 </dependency>
+	      </dependencies>
+	   </profile>
+	</profiles>
 </project>
