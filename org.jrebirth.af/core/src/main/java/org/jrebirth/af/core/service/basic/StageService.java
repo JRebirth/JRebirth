@@ -31,7 +31,6 @@ import org.jrebirth.af.core.command.basic.stage.StageWaveBean;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveType;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -117,7 +116,7 @@ public class StageService extends DefaultService {
         return swb.rootPane() == null
                 ? StackPaneBuilder.create()
                         .build()
-                        : swb.rootPane();
+                : swb.rootPane();
     }
 
     /**

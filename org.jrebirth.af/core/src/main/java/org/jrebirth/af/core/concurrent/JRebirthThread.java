@@ -229,9 +229,9 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         if (!chainedWaveList.isEmpty()) {
             getFacade().getNotifier().sendWave(
                     WaveBase.create()
-                    .waveGroup(WaveGroup.CALL_COMMAND)
-                    .componentClass(ChainWaveCommand.class)
-                    .addDatas(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList)));
+                            .waveGroup(WaveGroup.CALL_COMMAND)
+                            .componentClass(ChainWaveCommand.class)
+                            .addDatas(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList)));
         }
     }
 
@@ -302,8 +302,8 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
             firstWave = WaveBase.callCommand(ShowModelCommand.class).waveBean(
                     DisplayModelWaveBean.create()
-                    .childrenPlaceHolder(this.application.getRootNode().getChildren())
-                    .showModelKey(UniqueKey.key((Class<Model>) this.application.getFirstModelClass()))
+                            .childrenPlaceHolder(this.application.getRootNode().getChildren())
+                            .showModelKey(UniqueKey.key((Class<Model>) this.application.getFirstModelClass()))
                     );
             //
             //

@@ -177,8 +177,8 @@ public class WaveHandler implements LinkMessages {
             customMethod = this.defaultMethod != null
                     // Method defined with annotation
                     ? this.defaultMethod
-                            // Method computed according to wave prefix and wave type action name
-                            : ClassUtility.getMethodByName(getWaveReady().getClass(), ClassUtility.underscoreToCamelCase(wave.waveType().toString()));
+                    // Method computed according to wave prefix and wave type action name
+                    : ClassUtility.getMethodByName(getWaveReady().getClass(), ClassUtility.underscoreToCamelCase(wave.waveType().toString()));
 
         } catch (final NoSuchMethodException e) {
 

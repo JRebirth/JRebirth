@@ -27,4 +27,22 @@ public final class SingleRef extends AbstractRef<SingleRef> {
         this.commandWaveRunner = commandWaveRunner;
         return this;
     }
+
+    @Override
+    public SingleRef single() {
+        // Nothing to do yet
+        return null;
+    }
+
+    @Override
+    public GroupRef group() {
+        // Nothing to do yet
+        return null;
+    }
+
+    @Override
+    public RealRef real() {
+        // Nothing to do yet
+        return null;
+    }
 }

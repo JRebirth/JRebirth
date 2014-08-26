@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.resource.provided;
 
+import static org.jrebirth.af.core.resource.Resources.create;
+
 import org.jrebirth.af.core.facade.factory.DefaultComponentFactory;
 import org.jrebirth.af.core.link.DefaultUnprocessedWaveHandler;
 import org.jrebirth.af.core.resource.color.WebColor;
@@ -24,8 +26,6 @@ import org.jrebirth.af.core.resource.image.ImageExtension;
 import org.jrebirth.af.core.resource.image.LocalImage;
 import org.jrebirth.af.core.resource.parameter.ParameterItem;
 import org.jrebirth.af.core.resource.style.StyleSheet;
-
-import static org.jrebirth.af.core.resource.Resources.create;
 
 /**
  * The class <strong>JRebirthParameters</strong>.

@@ -86,13 +86,13 @@ public class WebColor extends AbstractBaseColor {
             }
 
             switch (hexValue.length()) {
-                // 0x r g b
+            // 0x r g b
                 case 3:
                     this.hexProperty.set(hexValue);
                     break;
-                    // 0x rr gg bb
+                // 0x rr gg bb
 
-                    // 0x rr gg bb oo
+                // 0x rr gg bb oo
                 case 8:
                     // Not managed yet
                     break;

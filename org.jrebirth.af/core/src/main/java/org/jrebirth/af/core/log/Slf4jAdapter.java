@@ -18,7 +18,6 @@
 package org.jrebirth.af.core.log;
 
 import org.jrebirth.af.core.resource.i18n.MessageItem;
-
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 

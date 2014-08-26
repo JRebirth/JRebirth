@@ -90,7 +90,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     @SuppressWarnings("unchecked")
     public <E extends R> void register(final E readyObject, final Object... keyPart) {
 
-        register(UniqueKey.key((Class<R>) readyObject.getClass(), keyPart), readyObject);
+        register(UniqueKey.key(readyObject.getClass(), keyPart), readyObject);
     }
 
     /**
@@ -124,7 +124,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     @Override
     public <E extends R> void unregister(final E readyObject, final Object... keyPart) {
 
-        unregister(UniqueKey.key((Class<R>) readyObject.getClass(), keyPart));
+        unregister(UniqueKey.key(readyObject.getClass(), keyPart));
     }
 
     /**

@@ -23,7 +23,6 @@ import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.log.JRLevel;
 import org.jrebirth.af.core.resource.AbstractResourceItem;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
-
 import org.slf4j.Marker;
 
 /**
@@ -102,5 +101,17 @@ public final class MessageItemBase extends AbstractResourceItem<MessageResource,
     public MessageItem set(final MessageParams messageParams) {
         builder().storeParams(this, messageParams);
         return this;
+    }
+
+    @Override
+    public MessageResource get() {
+        // Nothing to do yet
+        return null;
+    }
+
+    @Override
+    public MessageBuilder builder() {
+        // Nothing to do yet
+        return null;
     }
 }
