@@ -254,10 +254,4 @@ public final class WaveTypeBase implements WaveType {
         return uid();
     }
 
-    @Override
-    public WaveType create(String action) {
-        // Nothing to do yet
-        return null;
-    }
-
 }

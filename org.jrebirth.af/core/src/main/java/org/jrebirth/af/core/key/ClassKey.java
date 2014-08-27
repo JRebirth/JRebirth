@@ -117,33 +117,4 @@ public class ClassKey<R> implements UniqueKey<R> {
         return this.optionalDatas == null ? Collections.emptyList() : this.optionalDatas;
     }
 
-    @Override
-    public <R> UniqueKey<R> key(Class<R> clazz, Object[] keyPart) {
-        // Nothing to do yet
-        return null;
-    }
-
-    @Override
-    public <R> UniqueKey<R> key(Class<R> clazz, Object[] optionalData, Object[] keyPart) {
-        // Nothing to do yet
-        return null;
-    }
-
-    @Override
-    public <R> UniqueKey<R> singleKey(Class<R> clazz, Object[] optionalData) {
-        // Nothing to do yet
-        return null;
-    }
-
-    @Override
-    public <R> UniqueKey<R> multiKey(Class<R> clazz, Object[] keyPart) {
-        // Nothing to do yet
-        return null;
-    }
-
-    @Override
-    public <R> UniqueKey<R> multiKey(Class<R> clazz, Object[] keyPart, Object[] optionalData) {
-        // Nothing to do yet
-        return null;
-    }
 }

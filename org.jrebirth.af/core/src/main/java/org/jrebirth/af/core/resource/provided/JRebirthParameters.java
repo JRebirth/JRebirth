@@ -17,11 +17,12 @@
  */
 package org.jrebirth.af.core.resource.provided;
 
+import static org.jrebirth.af.core.resource.Resources.create;
+
 import java.util.Collections;
 import java.util.List;
 
 import org.jrebirth.af.core.facade.factory.DefaultComponentFactory;
-import org.jrebirth.af.core.facade.DefaultComponentFactory;
 import org.jrebirth.af.core.link.DefaultUnprocessedWaveHandler;
 import org.jrebirth.af.core.resource.color.WebColor;
 import org.jrebirth.af.core.resource.image.ImageExtension;
@@ -40,7 +41,7 @@ public interface JRebirthParameters {
 
     /** The name of the AUTO_REFRESH parameter which is quite special because it modify how other parameters will be processed. */
     String AUTO_REFRESH_NAME = "autoRefreshResource";
-    
+
     /** The image name of the NOT_AVAILABLE_IMAGE parameter, this image can lead to StackOverFlowError when it was not available. */
     String NOT_AVAILABLE_IMAGE_NAME = "NotAvailableImage";
 

@@ -57,6 +57,14 @@
 			<scope>system</scope>
 			<systemPath>${java.home}/lib/javaws.jar</systemPath>
 		</dependency>
+		
+		<dependency>
+			<groupId>javax.jnlp</groupId>
+			<artifactId>deploy</artifactId>
+			<version>8.0</version>
+			<scope>system</scope>
+			<systemPath>${java.home}/lib/deploy.jar</systemPath>
+		</dependency>
  
 	</dependencies>
 

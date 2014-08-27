@@ -23,9 +23,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jrebirth.af.core.annotation.AfterInit;
 import org.jrebirth.af.core.annotation.BeforeInit;
 import org.jrebirth.af.core.annotation.OnRelease;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
+import org.jrebirth.af.core.behavior.Behavior;
+import org.jrebirth.af.core.behavior.BehaviorData;
+import org.jrebirth.af.core.behavior.BehaviorDataFor;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.command.CommandBean;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
@@ -34,12 +38,14 @@ import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.facade.JRebirthEventType;
 import org.jrebirth.af.core.facade.WaveReady;
+import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.util.MultiMap;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.Wave.Status;
 import org.jrebirth.af.core.wave.WaveBase;
@@ -75,10 +81,13 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
 
     /** The return command class map. */
-    private final Map<WaveType, Class<? extends Command>> returnCommandClass = new HashMap<>();
+    private Map<WaveType, Class<? extends Command>> returnCommandClass;
 
     /** A map that store all annotated methods to call sorted by lifecycle phase. */
     private Map<String, List<Method>> lifecycleMethod;
+
+    /** A map that store all behavior implementations s tore . */
+    private MultiMap<Class<? extends Behavior<?>>, Behavior<?>> behaviors;
 
     /**
      * Short cut method used to retrieve the notifier.
@@ -144,58 +153,61 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
         });
     }
 
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public final void registerCallback(final WaveType callType, final WaveType responseType) {
+    //
+    // // Call the generic method
+    // registerCallback(null, callType, responseType, null);
+    // }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void registerCallback(final WaveType callType, final WaveType responseType) {
+    public final void registerCallback(final WaveType callType/* , final WaveType responseType */, final Class<? extends Command> returnCommandClass) {
 
         // Call the generic method
-        registerCallback(null, callType, responseType, null);
+        registerCallback(null, callType/* , responseType */, returnCommandClass);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void registerCallback(final WaveType callType, final WaveType responseType, final Class<? extends Command> returnCommandClass) {
-
-        // Call the generic method
-        registerCallback(null, callType, responseType, returnCommandClass);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void registerCallback(final WaveChecker waveChecker, final WaveType callType, final WaveType responseType, final Class<? extends Command> returnCommandClass) {
+    public final void registerCallback(final WaveChecker waveChecker, final WaveType callType/* , final WaveType responseType */, final Class<? extends Command> returnCommandClass) {
 
         // Perform the subscription
         listen(waveChecker, callType);
 
         // Store a link between call Wave Type and return wave type that store the result type ino a WaveItem
-        this.returnWaveTypeMap.put(callType, responseType);
+        // this.returnWaveTypeMap.put(callType, responseType);
 
         // Store the Command Class that will handle the service result (optional)
         if (returnCommandClass != null) {
+            if (this.returnCommandClass == null) {
+                this.returnCommandClass = new HashMap<>();
+            }
             this.returnCommandClass.put(callType, returnCommandClass);
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final WaveType getReturnWaveType(final WaveType waveType) {
-        return this.returnWaveTypeMap.get(waveType);
-    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public final WaveType getReturnWaveType(final WaveType waveType) {
+    // return this.returnWaveTypeMap.get(waveType);
+    // }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public final Class<? extends Command> getReturnCommand(final WaveType waveType) {
-        return this.returnCommandClass.get(waveType);
+        return this.returnCommandClass == null ? null : this.returnCommandClass.get(waveType);
     }
 
     /**
@@ -225,8 +237,8 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     @Override
     public final void sendWave(final Wave wave) {
         // Define the from class if it didn't been done before (manually)
-        if (wave.getFromClass() == null) {
-            wave.setFromClass(this.getClass());
+        if (wave.fromClass() == null) {
+            wave.fromClass(this.getClass());
         }
         sendWaveIntoJit(wave);
     }
@@ -282,7 +294,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
         CheckerUtility.checkWave(wave);
 
-        wave.setStatus(Status.Sent);
+        wave.status(Status.Sent);
 
         // Use the JRebirth Thread to manage Waves
         JRebirth.runIntoJIT(new AbstractJrbRunnable(SEND_WAVE.getText(wave.toString())) {
@@ -300,23 +312,19 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      * 
      * @param waveGroup the group of the wave
      * @param waveType the type of the wave
-     * @param relatedClass the related class if any
+     * @param componentClass the component class if any
      * @param waveData wave data to use
      * 
      * @return the wave built
      */
-    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveData<?>... waveData) {
+    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveData<?>... waveData) {
 
-        final Wave wave = new WaveBase();
-
-        wave.setWaveGroup(waveGroup);
-        wave.setWaveType(waveType);
-        wave.setFromClass(this.getClass());
-        wave.setRelatedClass(relatedClass);
-
-        for (final WaveData<?> wd : waveData) {
-            wave.addData(wd);
-        }
+        final Wave wave = WaveBase.create()
+                .waveGroup(waveGroup)
+                .waveType(waveType)
+                .fromClass(this.getClass())
+                .componentClass(componentClass)
+                .addDatas(waveData);
 
         // Track wave creation
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
@@ -329,21 +337,19 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      * 
      * @param waveGroup the group of the wave
      * @param waveType the type of the wave
-     * @param relatedClass the related class if any
+     * @param componentClass the component class if any
      * @param waveBean the wave bean that holds all required wave data
      * 
      * @return the wave built
      */
-    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> relatedClass, final WaveBean waveBean) {
+    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveBean waveBean) {
 
-        final Wave wave = new WaveBase();
-
-        wave.setWaveGroup(waveGroup);
-        wave.setWaveType(waveType);
-        wave.setFromClass(this.getClass());
-        wave.setRelatedClass(relatedClass);
-
-        wave.linkWaveBean(waveBean);
+        final Wave wave = WaveBase.create()
+                .waveGroup(waveGroup)
+                .waveType(waveType)
+                .fromClass(this.getClass())
+                .componentClass(componentClass)
+                .waveBean(waveBean);
 
         // Track wave creation
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
@@ -453,60 +459,6 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     protected abstract void processWave(final Wave wave);
 
     /**
-     * {@inheritDoc}
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public void setup() throws CoreException {
-
-        if (ComponentEnhancer.canProcessAnnotation((Class<? extends WaveReady<?>>) this.getClass())) {
-
-            // Search Singleton and Multiton annotation on field
-            ComponentEnhancer.injectComponent(this);
-
-            // Attach custom method configured with custom Lifecycle annotation
-            this.lifecycleMethod = ComponentEnhancer.defineLifecycleMethod(this);
-
-            // Search OnWave annotation to manage auto wave handler setup
-            ComponentEnhancer.manageOnWaveAnnotation(this);
-
-        }
-
-        callAnnotatedMethod(BeforeInit.class);
-
-        ready();
-
-        callAnnotatedMethod(BeforeInit.class);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void release() {
-
-        JRebirth.runIntoJIT(new AbstractJrbRunnable("Release ") {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                try {
-                    setKey(null);
-
-                    getNotifier().unlistenAll(getWaveReady());
-
-                    callAnnotatedMethod(OnRelease.class);
-                } catch (final JRebirthThreadException jte) {
-                    LOGGER.error(CALL_ANNOTATED_METHOD_ERROR, jte); // FIXME
-                }
-            }
-        });
-
-    }
-
-    /**
      * Private method used to grab the right WaveType<?> java type.
      * 
      * @return the this instance with the right generic type
@@ -539,5 +491,150 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      * @throws CoreException if an error occurred
      */
     protected abstract void ready() throws CoreException;
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public void setup() throws CoreException {
+
+        if (ComponentEnhancer.canProcessAnnotation((Class<? extends WaveReady<?>>) this.getClass())) {
+
+            // Search Singleton and Multiton annotation on field
+            ComponentEnhancer.injectComponent(this);
+
+            // Attach custom method configured with custom Lifecycle annotation
+            this.lifecycleMethod = ComponentEnhancer.defineLifecycleMethod(this);
+
+            // Search OnWave annotation to manage auto wave handler setup
+            ComponentEnhancer.manageOnWaveAnnotation(this);
+
+        }
+
+        callAnnotatedMethod(BeforeInit.class);
+
+        manageOptionalData();
+
+        ready();
+
+        callAnnotatedMethod(AfterInit.class);
+    }
+
+    /**
+     *
+     */
+    @SuppressWarnings("unchecked")
+    private void manageOptionalData() {
+
+        for (final Object data : getKey().getOptionalData()) {
+
+            if (data instanceof BehaviorData) {
+
+                addBehavior((BehaviorData) data);
+
+            } else if (data instanceof Class && ((Class<?>) data).isAssignableFrom(Behavior.class)) {
+
+                addBehavior((Class<Behavior<BehaviorData>>) data);
+
+            }
+
+        }
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void release() {
+
+        JRebirth.runIntoJIT(new AbstractJrbRunnable("Release ") {
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            protected void runInto() throws JRebirthThreadException {
+                try {
+                    setKey(null);
+
+                    getNotifier().unlistenAll(getWaveReady());
+
+                    callAnnotatedMethod(OnRelease.class);
+                } catch (final JRebirthThreadException jte) {
+                    LOGGER.error(CALL_ANNOTATED_METHOD_ERROR, jte); // FIXME
+                }
+            }
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasBehavior(final Class<Behavior<?>> behaviorClass) {
+        return this.behaviors != null && this.behaviors.containsKey(behaviorClass);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <BD extends BehaviorData, B extends Behavior<BD>> R addBehavior(final Class<B> behaviorClass) {
+
+        final UniqueKey<B> key = UniqueKey.key(behaviorClass, new Object[] { this }, getKey());
+
+        final B behavior = getLocalFacade().getGlobalFacade().getBehaviorFacade().retrieve(key);
+
+        this.behaviors.add(behaviorClass, behavior);
+
+        return (R) this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <BD extends BehaviorData, B extends Behavior<BD>> R addBehavior(final BD data) {
+
+        if (this.behaviors == null) {
+            this.behaviors = new MultiMap<Class<? extends Behavior<?>>, Behavior<?>>();
+        }
+
+        // FIXME fix leaks
+        final BehaviorDataFor annotation = data.getClass().getAnnotation(BehaviorDataFor.class);
+        final Class<B> behaviorClass = (Class<B>) annotation.value();
+
+        final Object[] optionalData = new Object[] { data, this };
+
+        final UniqueKey<B> key = UniqueKey.key(behaviorClass, optionalData, getKey());
+
+        final B behavior = getLocalFacade().getGlobalFacade().getBehaviorFacade().retrieve(key);
+
+        this.behaviors.add(behaviorClass, behavior);
+
+        return (R) this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <BD extends BehaviorData, B extends Behavior<BD>> BD getBehaviorData(final Class<B> behaviorClass) {
+        return this.behaviors == null ? null : (BD) this.behaviors.get(behaviorClass).get(0).getData();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <BD extends BehaviorData, B extends Behavior<BD>> B getBehavior(final Class<B> behaviorClass) {
+        return this.behaviors == null ? null : (B) this.behaviors.get(behaviorClass);
+    }
 
 }

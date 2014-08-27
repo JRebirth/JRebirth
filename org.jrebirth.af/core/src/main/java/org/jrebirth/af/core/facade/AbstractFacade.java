@@ -90,7 +90,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     @SuppressWarnings("unchecked")
     public <E extends R> void register(final E readyObject, final Object... keyPart) {
 
-        register(UniqueKey.key(readyObject.getClass(), keyPart), readyObject);
+        register(UniqueKey.key((Class<R>) readyObject.getClass(), keyPart), readyObject);
     }
 
     /**
@@ -124,7 +124,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     @Override
     public <E extends R> void unregister(final E readyObject, final Object... keyPart) {
 
-        unregister(UniqueKey.key(readyObject.getClass(), keyPart));
+        unregister(UniqueKey.key((Class<R>) readyObject.getClass(), keyPart));
     }
 
     /**
@@ -253,55 +253,6 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
         // Component Ready !
         return readyObject;
-    }
-
-    /**
-     * Build an unique key.
-     * 
-     * @param clazz the class type of the component
-     * @param keyPart all complementary part of the key
-     * 
-     * @return the unique key for the given class and keyParts array
-     * 
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    @Override
-    public <E extends R> UniqueKey<E> buildKey(final Class<E> clazz, final Object... keyPart) {
-
-        UniqueKey<E> uniqueKey;
-        if (keyPart == null || keyPart.length == 0) {
-            uniqueKey = buildClassKey(clazz);
-        } else {
-            uniqueKey = buildMultitonKey(clazz, keyPart);
-        }
-        return uniqueKey;
-    }
-
-    /**
-     * Build a singleton key.
-     * 
-     * @param clazz the class type of the component
-     * 
-     * @return the unique key for a singleton
-     * 
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    private <E extends R> UniqueKey<E> buildClassKey(final Class<E> clazz) {
-        return new ClassKey<E>(clazz);
-    }
-
-    /**
-     * Build a multiton key.
-     * 
-     * @param clazz the class type of the component
-     * @param keyPart all complementary part of the key
-     * 
-     * @return the unique key for a multiton
-     * 
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    private <E extends R> UniqueKey<E> buildMultitonKey(final Class<E> clazz, final Object... keyPart) {
-        return new MultitonKey<E>(clazz, keyPart);
     }
 
 }
