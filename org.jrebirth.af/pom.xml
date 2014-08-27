@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.jrebirth</groupId>
 		<artifactId>organization</artifactId>
-		<version>1.0.1</version>
+		<version>1.1.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.jrebirth</groupId>
@@ -22,7 +22,7 @@
 
 	<properties>
 		<LightningTalk-version>1.1.1</LightningTalk-version>
-		<MasteringTables-version>1.1.0</MasteringTables-version>
+		<MasteringTables-version>1.2.0-SNAPSHOT</MasteringTables-version>
 		<Jaf-version>1.1.1</Jaf-version>
 		<Breizhcamp-version>1.1.0</Breizhcamp-version>
 		<EclipseDay-version>1.0.0</EclipseDay-version>
@@ -42,6 +42,9 @@
 		<module>undoredo</module>
 		<module>showcase</module>
 		<module>preloader</module>
+		<module>processor</module>
+		<module>modular</module>
+		<module>security</module>
 	</modules>
 
 	<issueManagement>
@@ -247,7 +250,7 @@
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ssh</artifactId>
-				<version>2.4</version>
+				<version>2.6</version>
 			</extension>
 		</extensions>
 
@@ -287,7 +290,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.8.2</version>
+				<version>4.11</version>
 			</dependency>
 			<dependency>
 				<groupId>org.easytesting</groupId>
