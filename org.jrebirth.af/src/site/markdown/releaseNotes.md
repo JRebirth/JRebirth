@@ -7,6 +7,41 @@ Release Notes
 -----------------------------------------
 
 
+7.7.3 - [""](https://www.youtube.com/watch?v=Rbm6GXllBiw) Release 2014-09-03
+-----------------------------------------
+
+This version is a maintenance release that fixes several troubles listed below, obviously all these changes have been ported to 8.x branch.
+
+- All FXML model shall use naming convention [#121](http://github.com/JRebirth/JRebirth/issues/issue/121)<br/>
+DefaultFXMLModel now automatically load FXML file that share the same base name.<br />
+
+Manage Multiple Image Location [#122](http://github.com/JRebirth/JRebirth/issues/issue/122)<br/>
+Images, fonts and styles can now be accessed from different default folders.<br />
+
+Add Environment Variable Support [#123](http://github.com/JRebirth/JRebirth/issues/issue/123)<br/>
+Environment variable resolution is now possible for all JRebirth parameters.<br />
+
+FXMLModel should be released too [#124](http://github.com/JRebirth/JRebirth/issues/issue/124)<br/>
+FXMLModel are now also released from memory (like othr Models) when their rootNode it not linked to the current scene.<br />
+
+Improve release method [#125](http://github.com/JRebirth/JRebirth/issues/issue/125)<br/>
+Annotated method with @OnRelease are called when the JRebirth component is released.<br />
+
+Add Exception to JRebirth log level [#127](http://github.com/JRebirth/JRebirth/issues/issue/127)<br/>
+A special log level is now active to throw an exception.<br />
+
+Properties files not loaded with Java Webstart [#128](http://github.com/JRebirth/JRebirth/issues/issue/128)<br/>
+Properties files were not correctly load when launching applications with Java Webstart, JWS classpath is now scanned at bootup to search and load them.<br />
+
+Dont check the first key part [#129](http://github.com/JRebirth/JRebirth/issues/issue/129)<br/>
+The first key part was checked and could could lead to misrepresentation of Component Key.<br />
+
+Add string values for log message not formatted [#130](http://github.com/JRebirth/JRebirth/issues/issue/130)<br/>
+When log messages are not resolved, the logged message now include the message key and values (if any).<br />
+
+Showcase compilation error [#131](http://github.com/JRebirth/JRebirth/issues/issue/131)<br/>
+JRebirth compilation with Jdk 7 was using a bootclasspath hack, now it relies on a custom Maven profile.<br />
+
 
 7.7.2 - ["Paradise City"](https://www.youtube.com/watch?v=Rbm6GXllBiw) Release 2014-05-31
 -----------------------------------------
@@ -20,21 +55,42 @@ The newer resource engine has introduced a NPE when LocalImage are used without 
 Some slides were broken due to negative cycle duration produced by a negative randomized number.<br />
 Fix also all stable version.<br />
  
- 
+
 7.7.1 - ["Palladium"](https://www.youtube.com/watch?v=Eo4-_9OE3YA) Release 2014-03-31
 -----------------------------------------
 
 This version provides some enhancements
 
+- Manage dynamic resources [#48](http://github.com/JRebirth/JRebirth/issues/issue/48)<br/>
+Resource Management has been improved by retaining all resources by their toString ResourceParams object.<br />
+Moreover same parameters are now only retained once.<br />
+New Resource Item usage will be available with 8.0.0 version using Java 8 features.
+
+- Add Annotation for common phase of components [#51](http://github.com/JRebirth/JRebirth/issues/issue/51)<br/>
+It's now possible to add method by using one of these annotations: @BefeoreInit, @AfterInit, @OnRelease.<br />
+You can use @MethodPriority to define a custom call order or @SkipAnnotation to avoid usage of them for performance consideration.
+
+- Component injection [#96](http://github.com/JRebirth/JRebirth/issues/issue/96)<br/>
+You can use @Component on any Component field to automatically inject another component, this injection is performed during component initialization phase.
+
 - Simplify FXML usage - [#98](https://github.com/JRebirth/JRebirth/issues/98)<br/>
-DefaultFXMLModel will now load by default the fxml file that has the same name of the model class name (and at the same location)
+DefaultFXMLModel will now load by default the fxml file that has the same name of the model class name (and at the same location).
 
 - Improve Simple Model - [#103](https://github.com/JRebirth/JRebirth/issues/103)<br/>
-Simple now supports auto instantiation of the root anode according to generic type used, it also supports @RootNodeId annotation for SimpleModel.
+Simple now supports auto instantiation of the root node according to generic type used, it also supports @RootNodeId annotation for SimpleModel.
+
+- @OnXXX are broken into 7.7.0 [#99](http://github.com/JRebirth/JRebirth/issues/issue/99)<br/>
+A regression had been introduced into 7.7.0 due to package refactoring, Event handler annotations are not operational into 7.7.0 but fixed into 7.7.1
+
+- Rename execute Command method [#105](http://github.com/JRebirth/JRebirth/issues/issue/105)<br/>
+This API change is a cosmetic one because "execute" has a sad connotation and is now replaced by "perform".
 
 
-API Change
-- AbstractSimpleModel.prepareNode => AbstractSimpleModel.initSimpleView
+API Changes
+
+- AbstractSimpleModel.prepareNode() => AbstractSimpleModel.initSimpleView()
+
+- Command.execute(Wave) => Command.perform(Wave)
 
 
 7.7.0 - ["Wanna Rock"](https://www.youtube.com/watch?v=SRwrg0db_zY) Release 2014-02-09
