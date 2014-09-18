@@ -13,19 +13,30 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
-		<deployUrl>http://apps.sample.org</deployUrl>
+
+		<storepass>storepass</storepass>
+		<storetype>JKS</storetype>
+		<keyalias>keyalias</keyalias>
+		<keypass>keypass</keypass>
+
+		<deletekeystore>true</deletekeystore>
+		<genkeystore>true</genkeystore>
+
+		<permissions>all-permissions</permissions> <!-- or sandbox -->
+		<deployUrl>http://apps.jrebirth.org</deployUrl>
 		<deployPath>${project.artifactId}/${project.version}</deployPath>
+		<codebase>${deployUrl}/${deployPath}</codebase>
 
 		<jnlpFilename>${artifactId}.jnlp</jnlpFilename>
+		<preloaderClass>org.jrebirth.af.preloader.JRebirthPreloader</preloaderClass>
 		<appClass>${groupId}.${artifactId}.SampleApplication</appClass>
 
 		<appletWidth>1024</appletWidth>
 		<appletHeight>768</appletHeight>
 
-		<updateCheck>timeout</updateCheck>
+		<updateCheck>background</updateCheck>
 		<updatePolicy>prompt-update</updatePolicy>
-		
+
 	</properties>
 
 	<organization>
@@ -35,18 +46,31 @@
 
 
 	<build>
+		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
 		<resources>
 			<resource>
 				<directory>${basedir}/src/main/java</directory>
 				<includes>
 					<include>**/*.fxml</include>
+					<include>**/*.properties</include>
 					<include>**/*.txt</include>
 				</includes>
 			</resource>
 			<resource>
+				<filtering>true</filtering>
 				<directory>${basedir}/src/main/resources</directory>
 				<includes>
 					<include>**/*.*</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.ttf</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.ttf</include>
 				</includes>
 			</resource>
 		</resources>
@@ -56,7 +80,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.1</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
@@ -75,11 +99,12 @@
 							<JavaFX-Version>2.0</JavaFX-Version>
 							<Main-Class>${appClass}</Main-Class>
 							<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
-							<implementation-version>1.0</implementation-version>
-							<!-- not automated yet -->
-							<JavaFX-Class-Path></JavaFX-Class-Path>
+							<!-- <JavaFX-Class-Path> jaxb-api-2.2.1.jar stax-api-1.0-2.jar activation-1.1.jar jaxb-impl-2.2.1.jar presentation-0.7.6-SNAPSHOT.jar core-0.7.6-SNAPSHOT.jar logback-classic-1.0.13.jar logback-core-1.0.13.jar 
+								slf4j-api-1.7.5.jar </JavaFX-Class-Path> -->
 						</manifestEntries>
 						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 							<addClasspath>true</addClasspath>
 						</manifest>
 					</archive>
@@ -93,59 +118,70 @@
 
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<phase>verify</phase>
 						<goals>
-							<goal>jnlp</goal> <!-- use jnlp, jnlp-inline or jnlp-single as appropriate -->
+							<goal>jnlp</goal>
 						</goals>
 					</execution>
 				</executions>
 
 				<configuration>
 
+					<filenameMapping>full</filenameMapping>
+
+					<updateManifestEntries>
+						<Application-Name>${project.name}</Application-Name>
+						<Trusted-Library>true</Trusted-Library>
+						<Permissions>${permissions}</Permissions>
+						<Codebase>${codebase}</Codebase>
+						<Trusted-Only>true</Trusted-Only>
+					</updateManifestEntries>
+
+
 					<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
 					<excludeTransitive>false</excludeTransitive>
-					<libPath>lib</libPath>
 
-					<resourcesDirectory>${project.basedir}/src/main/jnlp/resources</resourcesDirectory>
-					<codebase>${deployUrl}/${deployPath}</codebase>
+					<libPath>lib</libPath>
+					<codebase>${codebase}</codebase>
 
 					<jnlp>
-						<!-- <inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath> <inputTemplate>src/main/jnlp/template.vm</inputTemplate> -->
 						<outputFile>${jnlpFilename}</outputFile>
-
 						<mainClass>${appClass}</mainClass>
 						<offlineAllowed>true</offlineAllowed>
+						<allPermissions>true</allPermissions>
 					</jnlp>
 
 					<sign>
-						<keystore>${basedir}/yourkey.jks</keystore>
-						<!-- MUST BE PROVIDED BY COMMAND LINE ARGUMENTS -->
-						<!-- -Dstorepass=xxx -Dkeypass=xxx -->
+						<keystore>${keystore}</keystore>
 						<keypass>${keypass}</keypass>
 						<storepass>${storepass}</storepass>
-						<!-- <storetype>fillme</storetype> -->
-						<alias>sample</alias>
+						<storetype>${storetype}</storetype>
+
+						<alias>${keyalias}</alias>
 
 						<validity>360</validity>
-						<dnameCn>www.sample.org</dnameCn>
-						<dnameOu>None</dnameOu>
-						<dnameO>Sample</dnameO>
+						<dnameCn>JRebirth Self-signed Certificate</dnameCn>
+						<dnameOu>JRebirth OSS</dnameOu>
+						<dnameO>JRebirth</dnameO>
 						<dnameL>Toulouse</dnameL>
-						<dnameSt>HG</dnameSt>
+						<dnameSt>Haute-Garonne</dnameSt>
 						<dnameC>FR</dnameC>
-
 						<verify>true</verify>
 
 						<keystoreConfig>
-							<delete>true</delete>
-							<gen>true</gen>
+							<delete>${deletekeystore}</delete>
+							<gen>${genkeystore}</gen>
 						</keystoreConfig>
+
 					</sign>
 
-					<pack200>true</pack200>
+					<pack200>
+						<enabled>true</enabled>
+					</pack200>
 					<gzip>true</gzip>
 
 					<outputJarVersions>false</outputJarVersions>
+					
 					<install>false</install>
 					<verbose>true</verbose>
 				</configuration>
@@ -160,17 +196,17 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.0.13</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
 			<version>8.0.0-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>preloader</artifactId>
-			<version>7.7.3</version>
+			<version>8.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
