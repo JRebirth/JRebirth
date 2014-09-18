@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jnlp spec="1.0+" xmlns:jfx="http://javafx.com" href="SampleApplication.jnlp">
+<jnlp spec="1.0+" xmlns:jfx="http://javafx.com">
 <!-- codebase="http://www.jrebirth.org/sample" -->
 	<information>
 		<title>${project.name}</title>
