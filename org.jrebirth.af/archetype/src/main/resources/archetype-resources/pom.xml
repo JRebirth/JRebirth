@@ -170,6 +170,11 @@
 			<version>7.7.3</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>preloader</artifactId>
+			<version>7.7.3</version>
+		</dependency>
 	</dependencies>
 
 </project>
