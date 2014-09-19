@@ -59,18 +59,18 @@
 					<a href="images/tuto/Maven_Archetype_CLI_OneLine.png" rel="lightbox">
 						<img src="images/icons/view.gif" />
 					</a>
-					mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DarchetypeGroupId=org.jrebirth
+					mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DarchetypeGroupId=org.jrebirth.af
 					-DarchetypeArtifactId=archetype
-					-DarchetypeVersion=${project.version} -DarchetypeRepository=http://repo.jrebirth.org/jrebirth-snapshot-local -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
-					-Dpackage=org.jrebirth.sample
+					-DarchetypeVersion=${project.version} -DarchetypeRepository=http://oss.jfrog.org/artifactory/simple/oss-release-local/ -DgroupId=org.jrebirth.af -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
+					-Dpackage=org.jrebirth.af.sample
 				
 					</p>
 				</subsection>
 
 				<subsection name="Interactive pre-filled">
 					<p>
-						mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DgroupId=org.jrebirth -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
-					-Dpackage=org.jrebirth.sample
+						mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DgroupId=org.jrebirth.af -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
+					-Dpackage=org.jrebirth.af.sample
 					</p>
 				</subsection>
 
