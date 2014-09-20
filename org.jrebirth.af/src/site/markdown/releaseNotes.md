@@ -3,11 +3,12 @@
 Release Notes
 ==============
 
+<<<<<<< 8.x
 8.0.0 - [""]() Release 2014-09-22
 -----------------------------------------
 
 
-7.7.3 - [""](https://www.youtube.com/watch?v=Rbm6GXllBiw) Release 2014-09-03
+7.7.3 - ["Radioactive"](https://www.youtube.com/watch?v=ktvTqknDobU) Release 2014-09-20
 -----------------------------------------
 
 This version is a maintenance release that fixes several troubles listed below, obviously all these changes have been ported to 8.x branch.
@@ -15,31 +16,31 @@ This version is a maintenance release that fixes several troubles listed below, 
 - All FXML model shall use naming convention [#121](http://github.com/JRebirth/JRebirth/issues/issue/121)<br/>
 DefaultFXMLModel now automatically load FXML file that share the same base name.<br />
 
-Manage Multiple Image Location [#122](http://github.com/JRebirth/JRebirth/issues/issue/122)<br/>
+- Manage Multiple Image Location [#122](http://github.com/JRebirth/JRebirth/issues/issue/122)<br/>
 Images, fonts and styles can now be accessed from different default folders.<br />
 
-Add Environment Variable Support [#123](http://github.com/JRebirth/JRebirth/issues/issue/123)<br/>
+- Add Environment Variable Support [#123](http://github.com/JRebirth/JRebirth/issues/issue/123)<br/>
 Environment variable resolution is now possible for all JRebirth parameters.<br />
 
-FXMLModel should be released too [#124](http://github.com/JRebirth/JRebirth/issues/issue/124)<br/>
+- FXMLModel should be released too [#124](http://github.com/JRebirth/JRebirth/issues/issue/124)<br/>
 FXMLModel are now also released from memory (like othr Models) when their rootNode it not linked to the current scene.<br />
 
-Improve release method [#125](http://github.com/JRebirth/JRebirth/issues/issue/125)<br/>
+- Improve release method [#125](http://github.com/JRebirth/JRebirth/issues/issue/125)<br/>
 Annotated method with @OnRelease are called when the JRebirth component is released.<br />
 
-Add Exception to JRebirth log level [#127](http://github.com/JRebirth/JRebirth/issues/issue/127)<br/>
+- Add Exception to JRebirth log level [#127](http://github.com/JRebirth/JRebirth/issues/issue/127)<br/>
 A special log level is now active to throw an exception.<br />
 
-Properties files not loaded with Java Webstart [#128](http://github.com/JRebirth/JRebirth/issues/issue/128)<br/>
-Properties files were not correctly load when launching applications with Java Webstart, JWS classpath is now scanned at bootup to search and load them.<br />
+- Properties files not loaded with Java Webstart [#128](http://github.com/JRebirth/JRebirth/issues/issue/128)<br/>
+Properties files were not correctly load when launching applications with Java Webstart, JWS classpath is now scanned at boot-up to search and load them.<br />
 
-Dont check the first key part [#129](http://github.com/JRebirth/JRebirth/issues/issue/129)<br/>
+- Don't check the first key part [#129](http://github.com/JRebirth/JRebirth/issues/issue/129)<br/>
 The first key part was checked and could could lead to misrepresentation of Component Key.<br />
 
-Add string values for log message not formatted [#130](http://github.com/JRebirth/JRebirth/issues/issue/130)<br/>
+- Add string values for log message not formatted [#130](http://github.com/JRebirth/JRebirth/issues/issue/130)<br/>
 When log messages are not resolved, the logged message now include the message key and values (if any).<br />
 
-Showcase compilation error [#131](http://github.com/JRebirth/JRebirth/issues/issue/131)<br/>
+- Showcase compilation error [#131](http://github.com/JRebirth/JRebirth/issues/issue/131)<br/>
 JRebirth compilation with Jdk 7 was using a bootclasspath hack, now it relies on a custom Maven profile.<br />
 
 - Fix Archetype usage [#135](http://github.com/JRebirth/JRebirth/issues/issue/135)<br/>
