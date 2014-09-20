@@ -46,3 +46,5 @@ Useful links
 	* Also available on Bintray Organization repo:  {{{https://bintray.com/repo/browse/jrebirth/JRebirth}https://bintray.com/repo/browse/jrebirth/JRebirth}}
 
 	* And JCenter (top level Bintray repository): {{{http://jcenter.bintray.com/org/jrebirth}jcenter.bintray.com}}
+	
+	* And obviously on Maven Central : {{{http://search.maven.org/#search|ga|1|g%3A%22org.jrebirth.af%22}search.maven.org}}
