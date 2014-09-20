@@ -121,7 +121,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
         LOGGER.log(READ_CONF_FILE, custConfFileName);
 
-        try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(custConfFileName) ) {
+        try (InputStream is = ClasspathUtility.loadInputStream(custConfFileName)) {
 
             // Read the properties file
             p.load(is);

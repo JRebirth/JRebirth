@@ -18,7 +18,10 @@
 package org.jrebirth.af.core.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -224,5 +227,30 @@ public final class ClasspathUtility implements UtilMessages {
         if (searchPattern.matcher(resourceName).matches()) {
             resources.add(resourceName);
         }
+    }
+
+    /**
+     * TRy to load a custom resource file.
+     * 
+     * @param custConfFileName the custom resource file to load
+     * 
+     * @return the load input stream
+     */
+    public static InputStream loadInputStream(String custConfFileName) {
+        InputStream is = null;
+        final File resourceFile = new File(custConfFileName);
+        // Check if the file could be find
+        if (resourceFile.exists()) {
+            try {
+                is = new FileInputStream(resourceFile);
+            } catch (final FileNotFoundException e) {
+                // Nothing to do
+            }
+        } else {
+            // Otherwise try to load from context classloader
+            is = Thread.currentThread().getContextClassLoader().getResourceAsStream(custConfFileName);
+        }
+
+        return is;
     }
 }
