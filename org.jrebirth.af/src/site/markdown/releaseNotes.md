@@ -38,6 +38,9 @@ When log messages are not resolved, the logged message now include the message k
 - Showcase compilation error [#131](http://github.com/JRebirth/JRebirth/issues/issue/131)<br/>
 JRebirth compilation with Jdk 7 was using a bootclasspath hack, now it relies on a custom Maven profile.<br />
 
+- Fix Archetype usage [#135](http://github.com/JRebirth/JRebirth/issues/issue/135)<br/>
+Fix usage of JRebirth archetype and pdate command line described into the tutorial page.<br />
+
 
 7.7.2 - ["Paradise City"](https://www.youtube.com/watch?v=Rbm6GXllBiw) Release 2014-05-31
 -----------------------------------------
