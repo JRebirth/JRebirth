@@ -51,13 +51,13 @@
 
 	<ciManagement>
 		<system>Jenkins</system>
-		<url>http://ci.jrebirth.org/job/JRebirth-master</url>
+		<url>http://ci.jrebirth.org/job/JRebirth-7x/</url>
 	</ciManagement>
 
 	<scm>
 		<connection>scm:git:git://github.com/JRebirth/JRebirth.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth.git</developerConnection>
-		<url>https://github.com/JRebirth/JRebirth</url>
+		<url>https://github.com/JRebirth/JRebirth/tree/7.x</url>
 	</scm>
 
 	<licenses>
