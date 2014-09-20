@@ -3,7 +3,7 @@
 Release Notes
 ==============
 
-7.7.3 - ["Radioactive"](https://www.youtube.com/watch?v=ktvTqknDobU) Release 2014-09-09
+7.7.3 - ["Radioactive"](https://www.youtube.com/watch?v=ktvTqknDobU) Release 2014-09-20
 -----------------------------------------
 
 This version is a maintenance release that fixes several troubles listed below, obviously all these changes have been ported to 8.x branch.
