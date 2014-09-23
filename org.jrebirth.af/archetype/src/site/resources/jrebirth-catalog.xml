@@ -89,6 +89,13 @@
 			<repository>http://oss.jfrog.org/simple/oss-snapshot-local</repository>
 			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
 		</archetype>
+		<archetype>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>archetype</artifactId>
+			<version>7.7.4-SNAPSHOT</version>
+			<repository>http://oss.jfrog.org/simple/oss-snapshot-local</repository>
+			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
+		</archetype>
 		
 		<!-- Releases version -->
 		<archetype>
