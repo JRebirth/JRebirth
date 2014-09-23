@@ -353,18 +353,25 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
      * {@inheritDoc}
      */
     @Override
-    public void unlistenAll(WaveReady<?> linkedObject) throws JRebirthThreadException {
+    public void unlistenAll(final WaveReady<?> linkedObject) throws JRebirthThreadException {
 
+        // This method is called into JIT (all method call are serialized)
+        // to avoid any thread concurrency trouble
         JRebirth.checkJIT();
 
-        for (WaveSubscription ws : notifierMap.values()) {
+        // Iterate over all WaveSubscription
+        for (final WaveSubscription ws : this.notifierMap.values()) {
 
-            for (final WaveHandler wh : ws.getWaveHandlers()) {
+            for (int i = ws.getWaveHandlers().size() - 1; i >= 0; i--) {
+                final WaveHandler wh = ws.getWaveHandlers().get(i);
+                // If the WaveHandler concern the linked object
                 if (wh.getWaveReady() == linkedObject) {
-                    ws.getWaveHandlers().remove(wh);
+                    // Remove it from registration list
+                    ws.getWaveHandlers().remove(i);
                 }
             }
 
+            // If this WaveSubscription doesn't contain any WaveHandler remove the entry.
             if (ws.getWaveHandlers().isEmpty()) {
                 this.notifierMap.remove(ws.getWaveType());
             }
