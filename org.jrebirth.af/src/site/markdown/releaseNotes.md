@@ -3,6 +3,15 @@
 Release Notes
 ==============
 
+7.7.4 - ["Dark Horse"](https://www.youtube.com/watch?v=0KSOMA3QBU0) Release 2014-09-27
+-----------------------------------------
+
+This version is a maintenance release that fixes a regression that throw an exception when trying to release some memory.
+
+- ConcurrentModificationException On StackModel [#136](http://github.com/JRebirth/JRebirth/issues/issue/136)<br/>
+The error was thrown by StackModel component when trying to release some models, it was a fatal bad coding practice.....<br />
+
+
 7.7.3 - ["Radioactive"](https://www.youtube.com/watch?v=ktvTqknDobU) Release 2014-09-20
 -----------------------------------------
 
