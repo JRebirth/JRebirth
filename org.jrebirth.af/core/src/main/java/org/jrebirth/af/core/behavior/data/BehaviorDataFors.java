@@ -15,27 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.behavior;
+package org.jrebirth.af.core.behavior.data;
 
-import javafx.scene.Node;
-
-import org.jrebirth.af.core.behavior.data.BehaviorData;
-import org.jrebirth.af.core.ui.Model;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * The Class AbstractModelBehavior.
- *
- * @param <D> the generic type
+ * The Interface BehaviorDataFors.
  */
-public abstract class AbstractModelBehavior<D extends BehaviorData> extends AbstractBehavior<D> {
+@Target({ ElementType.TYPE, ElementType.METHOD })
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface BehaviorDataFors {
 
     /**
-     * Gets the root node.
+     * The list of {@link BehaviorDataFors} annotations.
      *
-     * @return the root node
+     * There is no default value
      */
-    public Node getRootNode() {
-        return ((Model) getComponent()).getRootNode();
-    }
-
+    BehaviorDataFor[] value();
 }

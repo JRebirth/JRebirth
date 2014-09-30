@@ -15,30 +15,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.behavior;
+package org.jrebirth.af.core.behavior.data;
 
-import org.jrebirth.af.core.behavior.data.BehaviorData;
-import org.jrebirth.af.core.facade.WaveReady;
+import java.util.List;
+
+import org.jrebirth.af.core.behavior.Behavior;
 
 /**
- * The Interface Behavior.
- *
- * @param <D> the generic type
+ * The Interface BehaviorData.
  */
-public interface Behavior<D extends BehaviorData> extends WaveReady<Behavior<?>> {
+public interface BehaviorData {
 
     /**
-     * Gets the data.
-     *
-     * @return the data
+     * .
+     * 
+     * @return
      */
-    D getData();
-
-    /**
-     * Gets the component.
-     *
-     * @return the component
-     */
-    WaveReady<?> getComponent();
+    List<Class<? extends Behavior<?>>> getBehaviors();
 
 }

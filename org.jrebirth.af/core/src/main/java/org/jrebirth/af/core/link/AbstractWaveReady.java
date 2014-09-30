@@ -28,8 +28,7 @@ import org.jrebirth.af.core.annotation.BeforeInit;
 import org.jrebirth.af.core.annotation.OnRelease;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
 import org.jrebirth.af.core.behavior.Behavior;
-import org.jrebirth.af.core.behavior.BehaviorData;
-import org.jrebirth.af.core.behavior.BehaviorDataFor;
+import org.jrebirth.af.core.behavior.data.BehaviorData;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.command.CommandBean;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
@@ -78,7 +77,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractWaveReady.class);
 
     /** The return wave type map. */
-    private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
+    // private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
 
     /** The return command class map. */
     private Map<WaveType, Class<? extends Command>> returnCommandClass;
@@ -588,7 +587,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
         final B behavior = getLocalFacade().getGlobalFacade().getBehaviorFacade().retrieve(key);
 
-        this.behaviors.add(behaviorClass, behavior);
+        addBehavior(behavior);
 
         return (R) this;
     }
@@ -598,34 +597,32 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      */
     @Override
     @SuppressWarnings("unchecked")
-    public <BD extends BehaviorData, B extends Behavior<BD>> R addBehavior(final BD data) {
+    public <BD extends BehaviorData> R addBehavior(final BD data) {
+
+        for (final Class<? extends Behavior<?>> behaviorClass : data.getBehaviors()) {
+
+            final Object[] optionalData = new Object[] { data, this };
+
+            final UniqueKey<? extends Behavior<?>> key = UniqueKey.key(behaviorClass, optionalData, getKey());
+
+            addBehavior(getLocalFacade().getGlobalFacade().getBehaviorFacade().retrieve(key));
+        }
+        return (R) this;
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param behaviorClass
+     * @param behavior
+     */
+    @SuppressWarnings("unchecked")
+    private <B extends Behavior<?>> void addBehavior(final B behavior) {
 
         if (this.behaviors == null) {
             this.behaviors = new MultiMap<Class<? extends Behavior<?>>, Behavior<?>>();
         }
-
-        // FIXME fix leaks
-        final BehaviorDataFor annotation = data.getClass().getAnnotation(BehaviorDataFor.class);
-        final Class<B> behaviorClass = (Class<B>) annotation.value();
-
-        final Object[] optionalData = new Object[] { data, this };
-
-        final UniqueKey<B> key = UniqueKey.key(behaviorClass, optionalData, getKey());
-
-        final B behavior = getLocalFacade().getGlobalFacade().getBehaviorFacade().retrieve(key);
-
-        this.behaviors.add(behaviorClass, behavior);
-
-        return (R) this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public <BD extends BehaviorData, B extends Behavior<BD>> BD getBehaviorData(final Class<B> behaviorClass) {
-        return this.behaviors == null ? null : (BD) this.behaviors.get(behaviorClass).get(0).getData();
+        this.behaviors.add((Class<Behavior<?>>) behavior.getClass(), behavior);
     }
 
     /**
@@ -635,6 +632,15 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     @SuppressWarnings("unchecked")
     public <BD extends BehaviorData, B extends Behavior<BD>> B getBehavior(final Class<B> behaviorClass) {
         return this.behaviors == null ? null : (B) this.behaviors.get(behaviorClass);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <BD extends BehaviorData, B extends Behavior<BD>> BD getBehaviorData(final Class<B> behaviorClass) {
+        return this.behaviors == null ? null : (BD) this.behaviors.get(behaviorClass).get(0).getData();
     }
 
 }

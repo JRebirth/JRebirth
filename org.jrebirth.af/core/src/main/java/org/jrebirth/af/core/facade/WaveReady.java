@@ -20,7 +20,7 @@ package org.jrebirth.af.core.facade;
 import java.lang.reflect.Method;
 
 import org.jrebirth.af.core.behavior.Behavior;
-import org.jrebirth.af.core.behavior.BehaviorData;
+import org.jrebirth.af.core.behavior.data.BehaviorData;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveData;
@@ -178,7 +178,7 @@ public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
      *
      * @param data
      */
-    <BD extends BehaviorData, B extends Behavior<BD>> R addBehavior(BD data);
+    <BD extends BehaviorData> R addBehavior(BD data);
 
     /**
      *

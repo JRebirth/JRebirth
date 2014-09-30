@@ -3,17 +3,16 @@ package org.jrebirth.af.component.behavior.dockable.data;
 import java.io.Serializable;
 
 import org.jrebirth.af.component.behavior.dockable.DockableBehavior;
-import org.jrebirth.af.core.behavior.BehaviorData;
-import org.jrebirth.af.core.behavior.BehaviorDataFor;
+import org.jrebirth.af.core.behavior.data.AbstractBehaviorData;
+import org.jrebirth.af.core.behavior.data.BasicBehaviorData;
+import org.jrebirth.af.core.behavior.data.BehaviorDataFor;
 import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.ui.Model;
 
 @BehaviorDataFor(DockableBehavior.class)
-public class Dockable implements Serializable, BehaviorData {
+public class Dockable extends BasicBehaviorData implements Serializable {
 
-    /**
-     *
-     */
+    /** The generated serial version uid. */
     private static final long serialVersionUID = 8137109665415403740L;
 
     private String name;
