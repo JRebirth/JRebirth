@@ -28,7 +28,7 @@ public final class WorkbenchApplication extends DefaultApplication<StackPane> {
      * @param args the command line arguments
      */
     public static void main(final String... args) {
-        Application.launch(WorkbenchApplication.class, args);
+        launch(WorkbenchApplication.class, args);
     }
 
     /**

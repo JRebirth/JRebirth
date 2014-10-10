@@ -17,51 +17,31 @@
  */
 package org.jrebirth.af.showcase.analyzer.service;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jrebirth.af.core.concurrent.Priority;
 import org.jrebirth.af.core.concurrent.RunnablePriority;
 import org.jrebirth.af.core.facade.JRebirthEvent;
-import org.jrebirth.af.core.facade.JRebirthEventBase;
-import org.jrebirth.af.core.log.JRebirthMarkers;
-import org.jrebirth.af.core.service.DefaultService;
-import org.jrebirth.af.core.service.ServiceUtility;
+import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveType;
+import org.jrebirth.af.processor.annotation.RegistrationPoint;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>LoadEdtFileService</strong>.
  *
  * @author Sébastien Bordes
  */
-public class LoadEdtFileService extends DefaultService {
+@RegistrationPoint(exclusive = true)
+public interface LoadEdtFileService extends Service {
 
     /** Wave type use to load events. */
-    public static final WaveType DO_LOAD_EVENTS = WaveType.create("LOAD_EVENTS").items(EditorWaves.EVENTS_FILE).returnAction("EVENTS_LOADED").returnItem(EditorWaves.EVENTS);
-
-    /** Wave type to return events loaded. */
-    // public static final WaveType RE_EVENTS_LOADED = WaveType.create("EVENTS_LOADED").items(EditorWaves.EVENTS);
-
-    /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoadEdtFileService.class);
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initService() {
-
-        listen(DO_LOAD_EVENTS);
-    }
+    WaveType DO_LOAD_EVENTS = WaveType.create("LOAD_EVENTS")
+            .items(EditorWaves.EVENTS_FILE)
+            .returnAction("EVENTS_LOADED")
+            .returnItem(EditorWaves.EVENTS);
 
     /**
      * Parse the event file.
@@ -72,50 +52,6 @@ public class LoadEdtFileService extends DefaultService {
      * @return the list of loaded events
      */
     @Priority(RunnablePriority.High)
-    public List<JRebirthEvent> doLoadEvents(final File selecteFile, final Wave wave) {
+    List<JRebirthEvent> doLoadEvents(final File selecteFile, final Wave wave);
 
-        final List<JRebirthEvent> eventList = new ArrayList<>();
-
-        updateMessage(wave, "Parsing events");
-
-        // Get number of line to calculate the task progression
-        final int totalLines = ServiceUtility.countFileLines(selecteFile);
-
-        try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));)
-        {
-            int processedLines = 0;
-
-            String strLine = br.readLine();
-
-            // Read File Line By Line
-            while (strLine != null) {
-                processedLines++;
-
-                updateProgress(wave, processedLines, totalLines);
-
-                if (strLine.contains(JRebirthMarkers.JREVENT.getName())) {
-                    // Convert the string to a JRebirth event and add it to the list
-                    addEvent(eventList, strLine.substring(strLine.indexOf(">>") + 2));
-                }
-
-                // Read the next line to process
-                strLine = br.readLine();
-            }
-
-        } catch (final IOException e) {
-            LOGGER.error("Error while processing event file", e);
-        }
-        return eventList;
-
-    }
-
-    /**
-     * Add an event to the event list.
-     *
-     * @param eventList the list of events
-     * @param strLine the string to use
-     */
-    private void addEvent(final List<JRebirthEvent> eventList, final String strLine) {
-        eventList.add(new JRebirthEventBase(strLine));
-    }
 }

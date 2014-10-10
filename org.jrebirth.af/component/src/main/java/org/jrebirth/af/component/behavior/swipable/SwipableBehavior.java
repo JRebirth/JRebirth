@@ -1,8 +1,10 @@
 package org.jrebirth.af.component.behavior.swipable;
 
-import org.jrebirth.af.component.behavior.dockable.data.Dockable;
+import org.jrebirth.af.component.behavior.swipable.data.Swipable;
 import org.jrebirth.af.core.behavior.Behavior;
+import org.jrebirth.af.processor.annotation.RegistrationPoint;
 
-public interface SwipableBehavior extends Behavior<Dockable> {
+@RegistrationPoint
+public interface SwipableBehavior extends Behavior<Swipable> {
 
 }
