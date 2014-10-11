@@ -20,7 +20,7 @@ package org.jrebirth.af.core.link;
 import java.lang.reflect.Method;
 
 import org.jrebirth.af.core.exception.JRebirthThreadException;
-import org.jrebirth.af.core.facade.WaveReady;
+import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.checker.WaveChecker;
@@ -84,7 +84,7 @@ public interface Notifier {
      *
      * @throws JRebirthThreadException if called outside the JRebirthThread
      */
-    void listen(final WaveReady<?> linkedObject, final WaveChecker waveChecker, final Method method, final WaveType... waveTypes) throws JRebirthThreadException;
+    void listen(final Component<?> linkedObject, final WaveChecker waveChecker, final Method method, final WaveType... waveTypes) throws JRebirthThreadException;
 
     /**
      * Stop to listen a defined type of wave.
@@ -96,16 +96,16 @@ public interface Notifier {
      *
      * @throws JRebirthThreadException if called outside the JRebirthThread
      */
-    void unlisten(final WaveReady<?> linkedObject, final WaveType... waveType) throws JRebirthThreadException;
+    void unlisten(final Component<?> linkedObject, final WaveType... waveType) throws JRebirthThreadException;
 
     /**
      * Stop to listen all waveType listened by the component.
-     * 
+     *
      * MUST BE CALLED into the JRebirthThread.
-     * 
+     *
      * @param linkedObject an object that can process the content of a wave
-     * 
+     *
      * @throws JRebirthThreadException if called outside the JRebirthThread
      */
-    void unlistenAll(final WaveReady<?> linkedObject) throws JRebirthThreadException;
+    void unlistenAll(final Component<?> linkedObject) throws JRebirthThreadException;
 }

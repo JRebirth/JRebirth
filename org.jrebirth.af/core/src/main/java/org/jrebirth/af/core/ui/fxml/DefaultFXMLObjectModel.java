@@ -53,7 +53,7 @@ public class DefaultFXMLObjectModel<M extends Model, O extends Object> extends A
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Nothing to do yet
     }
 

@@ -60,13 +60,13 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             // Build the requested web image
             image = buildWebImage((WebImage) jrImage);
         }
-        
+
         // Try to get the default image when an image is not found
         if (image == null && !JRebirthParameters.NOT_AVAILABLE_IMAGE_NAME.equals(jrImage.name())) {
             // Return the default image
             image = JRebirthImages.NOT_AVAILABLE.get();
         }
-        
+
         // Default image was not found
         if (image == null) {
             WritableImage img = new WritableImage(30, 30);
@@ -75,7 +75,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             img = text.snapshot(null, img);
             image = img;
         }
-        
+
         return image;
     }
 
@@ -84,7 +84,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      *
      * @param jrImage the local image params
      * @param skipImagesFolder skip imagesFolder prefix addition
-     * 
+     *
      * @return the JavaFX image object
      */
     private Image buildLocalImage(final AbstractBaseImage jrImage, final boolean skipImagesFolder) {
@@ -101,7 +101,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
         }
         return loadImage(sb.toString(), skipImagesFolder);
     }
-    
+
     /**
      * Build a web image with its url parameters.
      *
@@ -128,17 +128,17 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      * @param resourceName the name of the image, path must be separated by '/'
      *
      * @param skipImagesFolder skip imagesFolder prefix addition
-     * 
+     *
      * @return the image loaded
      */
     private Image loadImage(final String resourceName, final boolean skipImagesFolder) {
         Image image = null;
-        
-        List<String> imagePaths = (skipImagesFolder) ? Collections.singletonList("") : JRebirthParameters.IMAGE_FOLDER.get();
-        for(int i = 0 ; i < imagePaths.size() && image == null ;i++){
-            
+
+        final List<String> imagePaths = skipImagesFolder ? Collections.singletonList("") : JRebirthParameters.IMAGE_FOLDER.get();
+        for (int i = 0; i < imagePaths.size() && image == null; i++) {
+
             String imagePath = imagePaths.get(i);
-            if(!imagePath.isEmpty()){
+            if (!imagePath.isEmpty()) {
                 imagePath += Resources.PATH_SEP;
             }
             final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(imagePath + resourceName);

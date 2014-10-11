@@ -46,14 +46,13 @@ public final class MessageItemBase extends AbstractResourceItem<MessageResource,
             try {
                 // Use the message formatter
                 res = MessageFormat.format(res, stringParameters);
-                
-                if(res.startsWith("<") && res.endsWith(">")){
+
+                if (res.startsWith("<") && res.endsWith(">")) {
                     res += " values: ";
-                    for(Object param : stringParameters){
-                        res += ((param)!=null ? param.toString() : "") + "|";
+                    for (final Object param : stringParameters) {
+                        res += (param != null ? param.toString() : "") + "|";
                     }
                 }
-                
 
             } catch (final IllegalArgumentException e) {
 
@@ -111,15 +110,4 @@ public final class MessageItemBase extends AbstractResourceItem<MessageResource,
         return this;
     }
 
-    @Override
-    public MessageResource get() {
-        // Nothing to do yet
-        return null;
-    }
-
-    @Override
-    public MessageBuilder builder() {
-        // Nothing to do yet
-        return null;
-    }
 }

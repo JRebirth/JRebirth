@@ -21,6 +21,8 @@ import javafx.scene.layout.BorderPane;
 
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultView;
+import org.jrebirth.af.showcase.analyzer.ui.controls.ControlsModel;
+
 
 /**
  *
@@ -52,14 +54,14 @@ public final class WorkbenchView extends DefaultView<WorkbenchModel, BorderPane,
         getRootNode().setPrefSize(800, 600);
 
         // Attach the controls view to the top place of the root border pane
-        getRootNode().setTop(getModel().getInnerModel(WorkbenchInnerModels.CONTROLS).getRootNode());
+        getRootNode().setTop(getModel().getInnerComponent(WorkbenchModel.CONTROLS).getRootNode());
 
         // Attach the properties view to the right place of the root border pane
-        getRootNode().setRight(getModel().getInnerModel(WorkbenchInnerModels.PROPERTIES).getRootNode());
+        getRootNode().setRight(getModel().getInnerComponent(WorkbenchModel.PROPERTIES).getRootNode());
 
         // Attach the properties view to the center place of the root border
         // pane
-        getRootNode().setCenter(getModel().getInnerModel(WorkbenchInnerModels.EDITOR).getRootNode());
+        getRootNode().setCenter(getModel().getInnerComponent(WorkbenchModel.EDITOR).getRootNode());
     }
 
 }

@@ -17,16 +17,11 @@
  */
 package org.jrebirth.af.core.ui;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javafx.scene.Node;
 
 import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.facade.JRebirthEventType;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.link.AbstractWaveReady;
+import org.jrebirth.af.core.link.AbstractComponent;
 import org.jrebirth.af.core.wave.Wave;
 
 /**
@@ -39,13 +34,7 @@ import org.jrebirth.af.core.wave.Wave;
  *
  * @param <M> the class type of the current model
  */
-public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveReady<Model> implements Model {
-
-    /** The root model not null for inner model. */
-    private Model rootModel;
-
-    /** The map that store inner models loaded. */
-    private final Map<InnerModel, Model> innerModelMap = new HashMap<>();
+public abstract class AbstractBaseModel<M extends Model> extends AbstractComponent<Model> implements Model {
 
     /** Flag used to determine if a view has been already displayed, useful to manage first time animation. */
     private boolean viewDisplayed;
@@ -60,7 +49,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
         initInternalModel();
 
         // Initialize inner models (if any)
-        initInternalInnerModels();
+        initInternalInnerComponents();
 
         // Model and InnerModels are OK, let's prepare the view
         if (getView() != null) {
@@ -86,25 +75,6 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
      * You must implement the {@link #initModel()} method to setup your model.
      */
     protected abstract void initModel();
-
-    /**
-     * Initialize the included models.
-     *
-     * This method is a hook to manage generic code before initializing inner models.
-     *
-     * You must implement the {@link #initInnerModels()} method to setup your inner models.
-     */
-    protected final void initInternalInnerModels() {
-        // Do generic stuff
-
-        // Do custom stuff
-        initInnerModels();
-    }
-
-    /**
-     * Initialize method for inner models to implement for adding custom processes.
-     */
-    protected abstract void initInnerModels();
 
     /**
      * Bind current object to view's widget.
@@ -182,51 +152,6 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractWaveRea
     @Override
     public Node getRootNode() {
         return getView().getRootNode();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Model getRootModel() {
-        return this.rootModel;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setRootModel(final Model rootModel) {
-        this.rootModel = rootModel;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final Model getInnerModel(final InnerModel innerModel) {
-
-        // The model to return
-        Model model;
-
-        final UniqueKey<?> key = innerModel.getKey();
-
-        if (key == null) {
-            throw new CoreRuntimeException("InnerModel must have a valid key ( " + innerModel.toString() + ")");
-        }
-
-        // If the inner model hasn't been loaded before, get it from UIFacade
-        if (!this.innerModelMap.containsKey(innerModel)) {
-
-            // Store the component into the multitonKey map
-            this.innerModelMap.put(innerModel, getLocalFacade().retrieve(innerModel.getKey()));
-
-            // Link the current root model
-            this.innerModelMap.get(innerModel).setRootModel(this);
-        }
-        model = this.innerModelMap.get(innerModel);
-
-        return model;
     }
 
     /**

@@ -116,4 +116,8 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
         }
     }
 
+    @Override
+    protected void initInnerComponents() {
+    }
+
 }

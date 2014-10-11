@@ -24,6 +24,9 @@ public interface JRebirthMarkers {
     /** The Marker used by Message Engine. */
     Marker MESSAGE = MarkerFactory.getMarker("MESSG");
 
+    /** The Marker used by Module Engine. */
+    Marker MODULE = MarkerFactory.getMarker("MODUL");
+
     /** The Marker used by Parameter Engine. */
     Marker PARAMETER = MarkerFactory.getMarker("PARAM");
 

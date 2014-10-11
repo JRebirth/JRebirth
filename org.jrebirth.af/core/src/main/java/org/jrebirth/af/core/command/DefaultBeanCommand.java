@@ -51,6 +51,10 @@ public class DefaultBeanCommand<WB extends WaveBean> extends AbstractSingleComma
         // Nothing to do yet by the default command, must be overridden
     }
 
+    @Override
+    protected void initInnerComponents() {
+    }
+
     // @Override
     // public void setParentCommand(Command parentCommand) {
     // // Nothing to do yet

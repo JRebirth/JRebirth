@@ -18,7 +18,6 @@
 package org.jrebirth.af.showcase.analyzer.ui.editor;
 
 import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.InnerModel;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.showcase.analyzer.ui.editor.ball.BallModel;
 
@@ -29,7 +28,7 @@ import org.jrebirth.af.showcase.analyzer.ui.editor.ball.BallModel;
  *
  * @author Sébastien Bordes
  */
-public enum EditorInnerModels implements InnerModel {
+public enum EditorInnerModels /*implements InnerModel*/ {
 
     /** The controls UI. */
     BALLS(BallModel.class);
@@ -49,12 +48,12 @@ public enum EditorInnerModels implements InnerModel {
         this.modelKey = UniqueKey.key(modelClass);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UniqueKey<? extends Model> getKey() {
-        return this.modelKey;
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public UniqueKey<? extends Model> getKey() {
+//        return this.modelKey;
+//    }
 
 }

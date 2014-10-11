@@ -20,17 +20,20 @@ package org.jrebirth.af.core.link;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 
 import org.jrebirth.af.core.annotation.AfterInit;
 import org.jrebirth.af.core.annotation.BeforeInit;
-import org.jrebirth.af.core.annotation.Component;
+import org.jrebirth.af.core.annotation.LinkComponent;
+import org.jrebirth.af.core.annotation.LinkInnerComponent;
 import org.jrebirth.af.core.annotation.OnRelease;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.facade.FacadeReady;
-import org.jrebirth.af.core.facade.WaveReady;
+import org.jrebirth.af.core.inner.InnerComponent;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.service.Service;
@@ -65,7 +68,7 @@ public final class ComponentEnhancer implements LinkMessages {
      *
      * @return true if annotation can be processed
      */
-    public static boolean canProcessAnnotation(final Class<? extends WaveReady<?>> componentClass) {
+    public static boolean canProcessAnnotation(final Class<? extends Component<?>> componentClass) {
 
         final SkipAnnotation skip = ClassUtility.getLastClassAnnotation(componentClass, SkipAnnotation.class);
 
@@ -78,11 +81,11 @@ public final class ComponentEnhancer implements LinkMessages {
      *
      * @param component the component
      */
-    public static void injectComponent(final WaveReady<?> component) {
+    public static void injectComponent(final Component<?> component) {
 
-        // Retrieve all fields annotated with Multiton
-        for (final Field field : ClassUtility.getAnnotatedFields(component.getClass(), Component.class)) {
-            inject(component, field, field.getAnnotation(Component.class).value());
+        // Retrieve all fields annotated with LinkComponent
+        for (final Field field : ClassUtility.getAnnotatedFields(component.getClass(), LinkComponent.class)) {
+            inject(component, field, field.getAnnotation(LinkComponent.class).value());
         }
 
     }
@@ -112,13 +115,50 @@ public final class ComponentEnhancer implements LinkMessages {
     }
 
     /**
+     * Inject Inner component.
+     *
+     * @param component the component
+     */
+    public static void injectInnerComponent(final Component<?> component) {
+
+        // Retrieve all fields annotated with LinkInnerComponent
+        for (final Field field : ClassUtility.getAnnotatedFields(component.getClass(), LinkInnerComponent.class)) {
+            injectInner(component, field, field.getAnnotation(LinkInnerComponent.class).value());
+        }
+
+    }
+
+    /**
+     * Inject a component into the property of an other.
+     *
+     * @param component the component
+     * @param field the field
+     * @param keyParts the key parts
+     */
+    @SuppressWarnings("unchecked")
+    private static void injectInner(final FacadeReady<?> component, final Field field, final Object... keyParts) {
+
+        final ParameterizedType innerComponentType = (ParameterizedType) field.getGenericType();
+        final Class<?> componentType = (Class<?>) innerComponentType.getActualTypeArguments()[0];
+
+        try {
+
+            ClassUtility.setFieldValue(field, component, InnerComponent.create((Class<Command>) componentType, keyParts));
+
+        } catch (IllegalArgumentException | CoreException e) {
+            LOGGER.error(COMPONENT_INJECTION_FAILURE, component.getClass(), e);
+        }
+
+    }
+
+    /**
      * Parse all methods to search annotated methods that are attached to a lifecycle phase.
      *
      * @param component the JRebirth component to manage
      *
      * @return the map that store all method that should be call sorted by lifecycle phase
      */
-    public static MultiMap<String, Method> defineLifecycleMethod(final WaveReady<?> component) {
+    public static MultiMap<String, Method> defineLifecycleMethod(final Component<?> component) {
 
         final MultiMap<String, Method> lifecycleMethod = new MultiMap<>();
 
@@ -136,7 +176,7 @@ public final class ComponentEnhancer implements LinkMessages {
      * @param lifecycleMethod the map that store methods
      * @param annotationClass the annotation related to lifecycle phase
      */
-    private static void manageLifecycleAnnotation(final WaveReady<?> component, final MultiMap<String, Method> lifecycleMethod, final Class<? extends Annotation> annotationClass) {
+    private static void manageLifecycleAnnotation(final Component<?> component, final MultiMap<String, Method> lifecycleMethod, final Class<? extends Annotation> annotationClass) {
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), annotationClass)) {
 
             // Add a method to the multimap entry
@@ -149,7 +189,7 @@ public final class ComponentEnhancer implements LinkMessages {
      *
      * @param component the wave ready
      */
-    public static void manageOnWaveAnnotation(final WaveReady<?> component) {
+    public static void manageOnWaveAnnotation(final Component<?> component) {
 
         // Retrieve class annotations (Java 8 add support for repeatable annotations)
         for (final OnWave clsOnWave : component.getClass().getAnnotationsByType(OnWave.class)) {
@@ -172,13 +212,13 @@ public final class ComponentEnhancer implements LinkMessages {
      * @param waveActionName the {@link WaveType} unique name
      * @param method the wave handler method
      */
-    private static void manageUniqueWaveTypeAction(final WaveReady<?> component, final String waveActionName, final Method method) {
+    private static void manageUniqueWaveTypeAction(final Component<?> component, final String waveActionName, final Method method) {
 
         // Get the WaveType from the WaveType registry
         final WaveType wt = WaveTypeRegistry.getWaveType(waveActionName);
         if (wt != null) {
             // Method is not defined or is the default fallback one
-            if (method == null || AbstractWaveReady.PROCESS_WAVE_METHOD_NAME.equals(method.getName())) {
+            if (method == null || AbstractComponent.PROCESS_WAVE_METHOD_NAME.equals(method.getName())) {
                 // Just listen the WaveType
                 component.listen(wt);
             } else {

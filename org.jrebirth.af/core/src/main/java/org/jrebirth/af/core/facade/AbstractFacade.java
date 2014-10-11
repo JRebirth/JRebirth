@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
@@ -104,6 +105,16 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             final R readyObject = this.componentMap.get(uniqueKey).get();
 
             if (readyObject != null) {
+
+                // Unlisten all previously listened WaveType
+                if (readyObject instanceof Component<?>) {
+                    try {
+                        getGlobalFacade().getNotifier().unlistenAll((Component<?>) readyObject);
+                    } catch (final JRebirthThreadException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 // Release the key
                 readyObject.setKey(null);
 
@@ -246,6 +257,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         getGlobalFacade().trackEvent(type, this.getClass(), readyObject.getClass());
 
         // Attach the local facade
+        // Already Done by register method
         readyObject.setLocalFacade(this);
 
         // Create the unique key

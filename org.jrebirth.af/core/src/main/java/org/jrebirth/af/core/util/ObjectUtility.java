@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.util;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -79,6 +82,31 @@ public final class ObjectUtility {
      */
     public static boolean nullOrEmpty(final String str) {
         return str == null || str.isEmpty();
+    }
+
+    /**
+     * Check if all given methods return true or if the list is empty.
+     *
+     * @param instance the context object
+     * @param methods the list of method to check
+     *
+     * @return true if all method return true or if the list is empty
+     */
+    public static boolean checkAllMethodReturnTrue(final Object instance, final List<Method> methods) {
+        boolean res = true;
+
+        if (!methods.isEmpty()) {
+            for (final Method method : methods) {
+                Object returnValue;
+                try {
+                    returnValue = method.invoke(instance);
+                    res &= returnValue instanceof Boolean && ((Boolean) returnValue).booleanValue();
+                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                    res = false;
+                }
+            }
+        }
+        return res;
     }
 
 }

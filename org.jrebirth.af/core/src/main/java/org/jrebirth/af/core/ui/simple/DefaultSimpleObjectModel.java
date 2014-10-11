@@ -55,7 +55,7 @@ public class DefaultSimpleObjectModel<N extends Node, O extends Object> extends 
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Nothing to do yet
     }
 

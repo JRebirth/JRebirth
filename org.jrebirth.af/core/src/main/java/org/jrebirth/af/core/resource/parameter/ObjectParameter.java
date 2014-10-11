@@ -139,21 +139,21 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
 
     /**
      * Parse a generic list.
-     * 
+     *
      * @param serializedObject the concatenated list
-     * 
+     *
      * @return the list object
      */
     private Object parseListParameter(final String serializedObject) {
-        List<Object> res = new ArrayList<>();
-            
-        for(String item : serializedObject.split(";")){
+        final List<Object> res = new ArrayList<>();
+
+        for (final String item : serializedObject.split(";")) {
             res.add(item);
         }
-            
+
         return res;
     }
-    
+
     /**
      * Parse primitive serialized object.
      *

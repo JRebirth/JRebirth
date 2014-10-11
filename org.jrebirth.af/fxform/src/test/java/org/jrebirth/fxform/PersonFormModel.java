@@ -17,7 +17,7 @@ public class PersonFormModel extends AbstractFormModel<PersonFormModel, PersonFo
     }
 
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Nothing to do yet
 
     }

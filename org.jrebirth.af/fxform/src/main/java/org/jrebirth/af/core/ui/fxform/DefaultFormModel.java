@@ -25,7 +25,7 @@ public class DefaultFormModel<M extends AbstractFormModel<?, ?, ?>, V extends Ab
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Nothing to do generic
     }
 

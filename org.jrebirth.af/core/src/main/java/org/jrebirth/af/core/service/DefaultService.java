@@ -25,4 +25,9 @@ public class DefaultService extends AbstractService {
         // Must be overridden to manage action handling by service
     }
 
+    @Override
+    protected void initInnerComponents() {
+        // Noting to do
+    }
+
 }

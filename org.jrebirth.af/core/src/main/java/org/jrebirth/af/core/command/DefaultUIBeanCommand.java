@@ -51,6 +51,10 @@ public class DefaultUIBeanCommand<WB extends WaveBean> extends AbstractSingleCom
         // Nothing to do yet by the default UI command, must be overridden
     }
 
+    @Override
+    protected void initInnerComponents() {
+    }
+
     // @Override
     // public void setParentCommand(Command parentCommand) {
     // // Nothing to do yet

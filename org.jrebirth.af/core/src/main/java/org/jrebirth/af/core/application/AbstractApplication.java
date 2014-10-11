@@ -19,7 +19,9 @@ package org.jrebirth.af.core.application;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.net.URL;
+import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javafx.application.Application;
 import javafx.application.Preloader;
@@ -31,6 +33,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
@@ -41,6 +44,7 @@ import org.jrebirth.af.core.exception.handler.DefaultUncaughtExceptionHandler;
 import org.jrebirth.af.core.exception.handler.JatUncaughtExceptionHandler;
 import org.jrebirth.af.core.exception.handler.JitUncaughtExceptionHandler;
 import org.jrebirth.af.core.exception.handler.PoolUncaughtExceptionHandler;
+import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.ResourceBuilders;
@@ -50,6 +54,8 @@ import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.resource.provided.JRebirthStyles;
 import org.jrebirth.af.core.resource.style.StyleSheetItem;
 import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.util.ClasspathUtility;
+import org.jrebirth.af.modular.ModuleConfigFileParser;
 import org.jrebirth.af.preloader.JRebirthPreloader;
 
 import com.sun.javafx.application.LauncherImpl;
@@ -176,7 +182,12 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             preloadResources();
             notifyPreloader(new ProgressNotification(0.7));
 
-            postInit(); // 800 , 900
+            // Preload Modules to load all Component registrations
+            notifyPreloader(new ProgressNotification(800));
+            preloadModules();
+            notifyPreloader(new ProgressNotification(0.8));
+
+            postInit(); // 900
 
             notifyPreloader(new ProgressNotification(1000));
             notifyPreloader(new ProgressNotification(1.0));
@@ -376,6 +387,50 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
                 resource.get();
             }
         }
+    }
+
+    /**
+     * Preload Module.xml files.
+     */
+    @SuppressWarnings("unchecked")
+    protected void preloadModules() {
+
+        if (JRebirthParameters.PARSE_MODULE_CONFIG_FILE.get() && hasModuleLibrary()) {
+
+            // Assemble the regex pattern
+            final Pattern filePattern = Pattern.compile(".*module\\.xml");
+
+            // Retrieve all resources from default classpath
+            final Collection<String> list = ClasspathUtility.getClasspathResources(filePattern);
+
+            // LOGGER.info(JRebirthMarkers.MODULE, "{} Module.xml file{} found.", list.size(), list.size() > 1 ? "s" : "");
+
+            for (final String moduleFile : list) {
+                final List<Pair<Class<?>, Class<?>>> pairList = ModuleConfigFileParser.parseFile(moduleFile);
+                for (final Pair<Class<?>, Class<?>> pair : pairList) {
+
+                    final Class<? extends Component<?>> interfaceClass = (Class<? extends Component<?>>) pair.getKey();
+                    final Class<? extends Component<?>> implClass = (Class<? extends Component<?>>) pair.getValue();
+
+                    JRebirthThread.getThread().getFacade().getComponentFactory().register(interfaceClass, implClass);
+                }
+            }
+        }
+    }
+
+    /**
+     * Check that org.jrebirth.af.modular.jar is accessible.
+     *
+     * @return true if org.jrebirth.af.modular.jar is accessible
+     */
+    private boolean hasModuleLibrary() {
+        boolean hasModuleLibrary = true;
+        try {
+            Class.forName("org.jrebirth.af.modular.ModuleConfigFileParser");
+        } catch (final ClassNotFoundException e) {
+            hasModuleLibrary = false;
+        }
+        return hasModuleLibrary;
     }
 
     /**

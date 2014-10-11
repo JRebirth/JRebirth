@@ -2,8 +2,8 @@ package org.jrebirth.af.core.facade.factory;
 
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.facade.FacadeMessages;
-import org.jrebirth.af.core.facade.WaveReady;
 import org.jrebirth.af.core.util.MultiMap;
 
 /**
@@ -23,7 +23,7 @@ public final class AnnotatedComponentFactory implements ComponentFactory, Facade
     }
 
     @Override
-    public void register(final Class<? extends WaveReady<?>> interfaceClass, final Class<? extends WaveReady<?>> implClass) {
+    public void register(final Class<? extends Component<?>> interfaceClass, final Class<? extends Component<?>> implClass) {
 
         if (interfaceClass.isAssignableFrom(implClass)) {
 

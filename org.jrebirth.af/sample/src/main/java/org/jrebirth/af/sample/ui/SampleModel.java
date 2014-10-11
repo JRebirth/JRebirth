@@ -29,7 +29,7 @@ public final class SampleModel extends DefaultModel<SampleModel, SampleView> {
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Put the code to initialize inner models here (if any)
     }
 

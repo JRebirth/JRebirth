@@ -20,6 +20,7 @@ package org.jrebirth.af.core.link;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.af.core.command.Command;
@@ -29,8 +30,8 @@ import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.exception.WaveException;
 import org.jrebirth.af.core.facade.AbstractGlobalReady;
+import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.facade.GlobalFacade;
-import org.jrebirth.af.core.facade.WaveReady;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
@@ -281,7 +282,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
      * {@inheritDoc}
      */
     @Override
-    public void listen(final WaveReady<?> linkedObject, final WaveChecker waveChecker, final Method method, final WaveType... waveTypes) throws JRebirthThreadException {
+    public void listen(final Component<?> linkedObject, final WaveChecker waveChecker, final Method method, final WaveType... waveTypes) throws JRebirthThreadException {
 
         JRebirth.checkJIT();
 
@@ -319,7 +320,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
      * {@inheritDoc}
      */
     @Override
-    public void unlisten(final WaveReady<?> linkedObject, final WaveType... waveTypes) throws JRebirthThreadException {
+    public void unlisten(final Component<?> linkedObject, final WaveType... waveTypes) throws JRebirthThreadException {
 
         JRebirth.checkJIT();
 
@@ -353,12 +354,13 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
      * {@inheritDoc}
      */
     @Override
-    public void unlistenAll(final WaveReady<?> linkedObject) throws JRebirthThreadException {
+    public void unlistenAll(final Component<?> linkedObject) throws JRebirthThreadException {
 
         // This method is called into JIT (all method call are serialized)
         // to avoid any thread concurrency trouble
         JRebirth.checkJIT();
 
+        final List<WaveSubscription> toRemove = new ArrayList<WaveSubscription>();
         // Iterate over all WaveSubscription
         for (final WaveSubscription ws : this.notifierMap.values()) {
 
@@ -373,8 +375,12 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
             // If this WaveSubscription doesn't contain any WaveHandler remove the entry.
             if (ws.getWaveHandlers().isEmpty()) {
-                this.notifierMap.remove(ws.getWaveType());
+                toRemove.add(ws);
             }
+        }
+
+        for (final WaveSubscription ws : toRemove) {
+            this.notifierMap.remove(ws.getWaveType());
         }
 
     }
@@ -415,7 +421,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
          *
          * @return a new instance of WaveHandler
          */
-        public static WaveHandler newHandler(final WaveReady<?> linkedObject, final WaveChecker waveChecker, final Method method) {
+        public static WaveHandler newHandler(final Component<?> linkedObject, final WaveChecker waveChecker, final Method method) {
             return new WaveHandler(linkedObject, waveChecker, method);
         }
 

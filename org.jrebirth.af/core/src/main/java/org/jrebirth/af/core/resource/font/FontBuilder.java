@@ -97,9 +97,9 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
     /**
      * Transform the font name by replacing _ by space.
-     * 
+     *
      * @param fontName the font name to transform
-     * 
+     *
      * @return the transformed font
      */
     private String transformFontName(final String fontName) {
@@ -118,26 +118,26 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
         Font font = null;
         String fontName = null;
-        
+
         if (fonts.isEmpty()) {
-            
-            List<String> fontPaths = (fontParams instanceof RealFont && ((RealFont)fontParams).skipFontsFolder()) 
-                    ? Collections.singletonList("") 
+
+            final List<String> fontPaths = fontParams instanceof RealFont && ((RealFont) fontParams).skipFontsFolder()
+                    ? Collections.singletonList("")
                     : JRebirthParameters.FONT_FOLDER.get();
-            
-            for(int i = 0 ; i < fontPaths.size() && font == null ;i++){
-                
+
+            for (int i = 0; i < fontPaths.size() && font == null; i++) {
+
                 String fontPath = fontPaths.get(i);
-                if(!fontPath.isEmpty()){
+                if (!fontPath.isEmpty()) {
                     fontPath += Resources.PATH_SEP;
                 }
 
                 // This variable will hold the 2 alternative font names
                 fontName = fontPath + transformFontName(fontParams.name().name()) + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
-    
+
                 LOGGER.trace("Try to load Transformed Font  {}", fontName);
                 font = Font.loadFont(Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), fontParams.size());
-            
+
                 // The font name contains '_' in its file name to replace ' '
                 if (font == null) {
                     fontName = fontPath + fontParams.name().name() + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
@@ -152,7 +152,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
                     // Transformed font has been loaded
                     LOGGER.info("{} Transformed Font loaded", fontName);
                 }
-            
+
             }
 
             if (font == null) {

@@ -17,8 +17,13 @@
  */
 package org.jrebirth.af.showcase.analyzer.ui.workbench;
 
+import org.jrebirth.af.core.annotation.LinkInnerComponent;
+import org.jrebirth.af.core.inner.InnerComponent;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.showcase.analyzer.ui.controls.ControlsModel;
+import org.jrebirth.af.showcase.analyzer.ui.editor.EditorModel;
+import org.jrebirth.af.showcase.analyzer.ui.properties.PropertiesModel;
 
 /**
  * The class <strong>WorkbenchModel</strong>.
@@ -27,6 +32,15 @@ import org.jrebirth.af.core.wave.Wave;
  */
 public final class WorkbenchModel extends DefaultModel<WorkbenchModel, WorkbenchView> {
 
+    @LinkInnerComponent
+    static InnerComponent<ControlsModel> CONTROLS ;//= InnerComponent.create(ControlsModel.class);
+    
+    @LinkInnerComponent
+    static InnerComponent<PropertiesModel> PROPERTIES ;//= InnerComponent.create(PropertiesModel.class);
+    
+    @LinkInnerComponent
+    static InnerComponent<EditorModel> EDITOR ;//= InnerComponent.create(EditorModel.class);
+    
     /**
      * {@inheritDoc}
      */
@@ -37,15 +51,15 @@ public final class WorkbenchModel extends DefaultModel<WorkbenchModel, Workbench
 
     /**
      * {@inheritDoc}
-     */
+     * /
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
 
         // Do stuff on the model !
-        getInnerModel(WorkbenchInnerModels.CONTROLS);
-        getInnerModel(WorkbenchInnerModels.PROPERTIES);
+        addInnerComponent(CONTROLS);
+        addInnerComponent(PROPERTIES);
 
-    }
+    }*/
 
     /**
      * {@inheritDoc}

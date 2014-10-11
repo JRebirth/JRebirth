@@ -56,4 +56,7 @@ public class SwipableBehaviorImpl extends AbstractModelBehavior<Swipable> implem
 
     }
 
+    protected void initInnerComponents() {
+    }
+
 }

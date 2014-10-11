@@ -72,7 +72,7 @@ public final class TransitionModel extends DefaultModel<TransitionModel, Transit
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
 
         this.imageSlicerService = getService(NodeSlicerCommand.class, "Properties");
 

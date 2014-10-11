@@ -50,6 +50,10 @@ public class DefaultPoolBeanCommand<WB extends WaveBean> extends AbstractSingleC
         // Nothing to do yet by the default Pool command, must be overridden
     }
 
+    @Override
+    protected void initInnerComponents() {
+    }
+
     // @Override
     // public void setParentCommand(Command parentCommand) {
     // // Nothing to do yet

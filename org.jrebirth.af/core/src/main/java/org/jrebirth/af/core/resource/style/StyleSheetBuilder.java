@@ -85,26 +85,26 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
      * @param styleSheetPath the path of the style sheet, path must be separated by '/'
      *
      * @param skipStylesFolder skip stylesFolder usage
-     * 
+     *
      * @return the stylesheet url
      */
     private URL buildUrl(final String styleSheetPath, final boolean skipStylesFolder) {
 
         URL cssResource = null;
-        
-        List<String> stylePaths = (skipStylesFolder) ? Collections.singletonList("") : JRebirthParameters.STYLE_FOLDER.get();
-        
-        for(int i = 0 ; i < stylePaths.size() && cssResource == null ;i++){
-            
+
+        final List<String> stylePaths = skipStylesFolder ? Collections.singletonList("") : JRebirthParameters.STYLE_FOLDER.get();
+
+        for (int i = 0; i < stylePaths.size() && cssResource == null; i++) {
+
             String stylePath = stylePaths.get(i);
-            if(!stylePath.isEmpty()){
+            if (!stylePath.isEmpty()) {
                 stylePath += Resources.PATH_SEP;
             }
             cssResource = Thread.currentThread().getContextClassLoader().getResource(stylePath + styleSheetPath);
         }
-        
+
         if (cssResource == null) {
-            LOGGER.error("Style Sheet : {} not found into base folder: {}", styleSheetPath , JRebirthParameters.STYLE_FOLDER.get());
+            LOGGER.error("Style Sheet : {} not found into base folder: {}", styleSheetPath, JRebirthParameters.STYLE_FOLDER.get());
         }
         return cssResource;
     }

@@ -61,4 +61,7 @@ public class DefaultUndoableCommand<WB extends WaveBean> extends AbstractUndoabl
         // Nothing to do yet
     }
 
+    protected void initInnerComponents() {
+    }
+
 }

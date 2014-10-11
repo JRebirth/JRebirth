@@ -33,7 +33,7 @@ import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.facade.JRebirthEventType;
-import org.jrebirth.af.core.link.AbstractWaveReady;
+import org.jrebirth.af.core.link.AbstractComponent;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.ClassUtility;
@@ -49,7 +49,7 @@ import org.jrebirth.af.core.wave.WaveData;
  *
  * @author Sébastien Bordes
  */
-public abstract class AbstractService extends AbstractWaveReady<Service> implements Service, ServiceMessages {
+public abstract class AbstractService extends AbstractComponent<Service> implements Service, ServiceMessages {
 
     /** The string used to separate the workdone and total work of a service task. */
     private static final String RATIO_SEPARATOR = " / ";

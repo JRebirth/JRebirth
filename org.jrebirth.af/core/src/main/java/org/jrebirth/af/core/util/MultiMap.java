@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.jrebirth.af.core.concurrent.RunnablePriority;
+
 public class MultiMap<K, V> implements Map<K, List<V>> {
 
     private final Map<K, List<V>> map = new HashMap<>();
@@ -83,6 +85,51 @@ public class MultiMap<K, V> implements Map<K, List<V>> {
     @Override
     public void putAll(final Map<? extends K, ? extends List<V>> m) {
         this.map.putAll(m);
+    }
+
+    public class Entry<V> {
+
+        private final String id;
+        private final String description;
+        private final RunnablePriority priority;
+        private final V value;
+
+        public Entry(final String id, final String description, final RunnablePriority priority, final V value) {
+            super();
+            this.id = id;
+            this.description = description;
+            this.priority = priority;
+            this.value = value;
+        }
+
+        /**
+         * @return the id
+         */
+        public String getId() {
+            return this.id;
+        }
+
+        /**
+         * @return the description
+         */
+        public String getDescription() {
+            return this.description;
+        }
+
+        /**
+         * @return the priority
+         */
+        public RunnablePriority getPriority() {
+            return this.priority;
+        }
+
+        /**
+         * @return the value
+         */
+        public V getValue() {
+            return this.value;
+        }
+
     }
 
 }

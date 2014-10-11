@@ -23,4 +23,7 @@ public class ConstructorSequentialCommand extends AbstractMultiCommand<WaveBean>
         // Nothing to do yet
 
     }
+
+    protected void initInnerComponents() {
+    }
 }

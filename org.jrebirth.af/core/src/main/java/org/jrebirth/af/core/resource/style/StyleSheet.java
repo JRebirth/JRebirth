@@ -39,15 +39,15 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
 
     /** The style sheet name (without .css extension). */
     private final StringProperty nameProperty = new SimpleStringProperty();
-    
+
     /** The flag used to skip the fontsFolder prefix addition. */
-    private BooleanProperty skipStylesFolderProperty = new SimpleBooleanProperty();
+    private final BooleanProperty skipStylesFolderProperty = new SimpleBooleanProperty();
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param path the style sheet local path
-     * 
+     *
      * @param name the style sheet name
      * @param skipStylesFolder skip fontsFolder usage
      */
@@ -57,7 +57,7 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
         this.nameProperty.set(name);
         this.skipStylesFolderProperty.set(skipStylesFolder);
     }
-    
+
     /**
      * Default Constructor.
      *
@@ -113,7 +113,7 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
 
     /**
      * Return the skipStylesFolder flag.
-     * 
+     *
      * @return the skipStylesFolder flag
      */
     public boolean skipStylesFolder() {
@@ -122,13 +122,13 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
 
     /**
      * Return the skipStylesFolderProperty property.
-     * 
+     *
      * @return the skipStylesFolderProperty property
      */
     public BooleanProperty skipStylesFolderProperty() {
-        return skipStylesFolderProperty;
+        return this.skipStylesFolderProperty;
     }
-    
+
     /**
      * {@inheritDoc}
      */

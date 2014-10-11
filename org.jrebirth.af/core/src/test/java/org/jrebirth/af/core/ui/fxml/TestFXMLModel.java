@@ -39,7 +39,7 @@ public class TestFXMLModel extends DefaultFXMLModel<TestFXMLModel> {
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Nothing to do yet
 
     }

@@ -18,7 +18,6 @@
 package org.jrebirth.af.core.resource.parameter;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -58,7 +57,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /** Store all overridden values defined by the call of define method. */
     private final Map<ParameterItem<?>, Object> overriddenParametersMap = new ConcurrentHashMap<>();
-    
+
     /** Store all translated environment variable. */
     private final Map<String, String> varenvMap = new HashMap<>();
 
@@ -154,15 +153,15 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /**
      * Resolve any environment variable found into the string.
-     * 
+     *
      * @param entryValue the string to check and resolve
-     * 
+     *
      * @return the final value with environment variable resolved
      */
     private String resolveVarEnv(final String entryValue) {
-        
+
         String value = entryValue;
-        if(value != null){
+        if (value != null) {
             value = checkPattern(value, ENV_VAR_PATTERN1, true);
             value = checkPattern(value, ENV_VAR_PATTERN2, false);
         }
@@ -171,11 +170,11 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
     /**
      * Check if the given string contains an environment variable.
-     * 
+     *
      * @param value the string value to parse
      * @param pattern the regex pattern to use
      * @param withBrace true for ${varname}, false for $varname
-     * 
+     *
      * @return the given string updated with right environment variable content
      */
     private String checkPattern(final String value, final Pattern pattern, final boolean withBrace) {
@@ -194,7 +193,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
                 } else {
                     res = res.replace("$" + envName, this.varenvMap.get(envName));
                 }
-            }else{
+            } else {
                 LOGGER.log(UNDEFINED_ENV_VAR, envName);
             }
         }
@@ -232,9 +231,9 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
                 // No customized (properties and overridden) parameter has been loaded, gets the default programmatic one
                 object = op.object();
             }
-            
-            if(object instanceof String){
-                object = resolveVarEnv((String)object);
+
+            if (object instanceof String) {
+                object = resolveVarEnv((String) object);
             }
 
             // // Don't store the parameter into the map if it hasn't got any parameter name

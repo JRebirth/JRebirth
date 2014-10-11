@@ -140,7 +140,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Nothing to do generic
     }
 

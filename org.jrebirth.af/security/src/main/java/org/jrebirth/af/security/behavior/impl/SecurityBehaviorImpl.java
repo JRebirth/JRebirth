@@ -17,4 +17,7 @@ public class SecurityBehaviorImpl extends AbstractBehavior<Securable> implements
 
     }
 
+    protected void initInnerComponents() {
+    }
+
 }

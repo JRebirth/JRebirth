@@ -50,6 +50,10 @@ public class RefCommand extends AbstractSingleCommand<WaveBean> {
 
     }
 
+    @Override
+    protected void initInnerComponents() {
+    }
+
     /*
      * public List<Runner> runnerList() { return runnerList; }
      */

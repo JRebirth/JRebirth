@@ -11,10 +11,10 @@ public abstract class AbstractBehaviorData implements BehaviorData {
 
     public AbstractBehaviorData() {
         super();
-        
+
         // Manage Behavior added by method overriding
-        List<? extends Class<? extends Behavior<?>>> list = getCustomBehaviors();
-        if(!list.isEmpty()){
+        final List<? extends Class<? extends Behavior<?>>> list = getCustomBehaviors();
+        if (!list.isEmpty()) {
             getBehaviors().addAll(list);
         }
     }
@@ -25,17 +25,16 @@ public abstract class AbstractBehaviorData implements BehaviorData {
     @Override
     public List<Class<? extends Behavior<?>>> getBehaviors() {
 
-        if (behaviors == null) {
-            behaviors = new ArrayList<Class<? extends Behavior<?>>>();
+        if (this.behaviors == null) {
+            this.behaviors = new ArrayList<Class<? extends Behavior<?>>>();
         }
 
         for (final BehaviorDataFor annotation : getClass().getAnnotationsByType(BehaviorDataFor.class)) {
-            behaviors.add(annotation.value());
+            this.behaviors.add(annotation.value());
         }
 
-        return behaviors;
+        return this.behaviors;
     }
 
-    
     protected abstract List<? extends Class<? extends Behavior<?>>> getCustomBehaviors();
 }

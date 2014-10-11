@@ -79,7 +79,7 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Nothing to do yet
     }
 

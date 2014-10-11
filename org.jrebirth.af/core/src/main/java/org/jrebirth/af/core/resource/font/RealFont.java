@@ -31,11 +31,11 @@ import javafx.beans.property.SimpleBooleanProperty;
 public class RealFont extends AbstractBaseFont {
 
     /** The flag used to skip the fontsFolder prefix addition. */
-    private BooleanProperty skipFontsFolderProperty = new SimpleBooleanProperty();
-    
+    private final BooleanProperty skipFontsFolderProperty = new SimpleBooleanProperty();
+
     /**
      * Default Constructor.
-     * 
+     *
      * @param name the font name
      * @param size the default font size
      * @param skipFontsFolder skip default fonts folder search
@@ -44,6 +44,7 @@ public class RealFont extends AbstractBaseFont {
         super(name, size);
         this.skipFontsFolderProperty.set(skipFontsFolder);
     }
+
     /**
      * Default Constructor.
      *
@@ -53,10 +54,10 @@ public class RealFont extends AbstractBaseFont {
     public RealFont(final FontName name, final double size) {
         this(name, size, false);
     }
-    
+
     /**
      * Return the skipFontsFolder flag.
-     * 
+     *
      * @return the skipFontsFolder flag
      */
     public boolean skipFontsFolder() {
@@ -65,11 +66,11 @@ public class RealFont extends AbstractBaseFont {
 
     /**
      * Return the skipFontsFolderProperty property.
-     * 
+     *
      * @return the skipFontsFolderProperty property
      */
     public BooleanProperty skipFontsFolderProperty() {
-        return skipFontsFolderProperty;
+        return this.skipFontsFolderProperty;
     }
 
     /**

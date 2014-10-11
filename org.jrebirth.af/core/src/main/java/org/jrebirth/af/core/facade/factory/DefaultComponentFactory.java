@@ -1,8 +1,8 @@
 package org.jrebirth.af.core.facade.factory;
 
 import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.facade.FacadeMessages;
-import org.jrebirth.af.core.facade.WaveReady;
 
 /**
  * The class <strong>DefaultComponentFactory</strong>.
@@ -28,7 +28,7 @@ public final class DefaultComponentFactory implements ComponentFactory, FacadeMe
      * {@inheritDoc}
      */
     @Override
-    public void register(final Class<? extends WaveReady<?>> interfaceClass, final Class<? extends WaveReady<?>> implClass) {
+    public void register(final Class<? extends Component<?>> interfaceClass, final Class<? extends Component<?>> implClass) {
         // Nothing to do yet
     }
 

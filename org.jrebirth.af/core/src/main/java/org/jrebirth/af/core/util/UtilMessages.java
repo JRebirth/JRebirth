@@ -61,20 +61,19 @@ public interface UtilMessages extends MessageContainer {
 
     /** "Impossible to read the file" . */
     MessageItem FILE_UNREADABLE = create(new LogMessage("jrebirth.util.fileUnreadable", JRLevel.Error, JRebirthMarkers.UTIL));
-    
+
     /** "Use JNLPClassLoader to search properties files" . */
     MessageItem USE_JNLP_CLASSLOADER = create(new LogMessage("jrebirth.util.useJNLPClassLoader", JRLevel.Debug, JRebirthMarkers.UTIL));
-    
+
     /** "Parse Cached Jar File [{0}] for resource [{1}]" . */
     MessageItem PARSE_CACHED_JAR_FILE = create(new LogMessage("jrebirth.util.parseCachedJarFile", JRLevel.Debug, JRebirthMarkers.UTIL));
-    
+
     /** "Can not read Cached Jar File : {0}" . */
     MessageItem CANT_READ_CACHED_JAR_FILE = create(new LogMessage("jrebirth.util.cantReadCachedJarFile", JRLevel.Error, JRebirthMarkers.UTIL));
-    
+
     /** "Use Default ClassLoader to search properties files" . */
     MessageItem USE_DEFAULT_CLASSLOADER = create(new LogMessage("jrebirth.util.useDefaultClassLoader", JRLevel.Debug, JRebirthMarkers.UTIL));
 
-    
     /** ClassUtility. */
 
     /** "Impossible to build the object assignable to {0} for the class {1}" . */

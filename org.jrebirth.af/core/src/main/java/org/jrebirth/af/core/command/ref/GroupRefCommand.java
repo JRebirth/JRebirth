@@ -44,4 +44,8 @@ public class GroupRefCommand extends AbstractMultiCommand<WaveBean> {
         // Nothing to do
     }
 
+    @Override
+    protected void initInnerComponents() {
+    }
+
 }

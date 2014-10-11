@@ -48,7 +48,7 @@ public class DefaultObjectModel<M extends Model, V extends View<?, ?, ?>, O exte
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Nothing to do yet
 
     }

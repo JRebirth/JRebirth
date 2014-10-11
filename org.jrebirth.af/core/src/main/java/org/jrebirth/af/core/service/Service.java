@@ -21,7 +21,7 @@ import java.util.Collection;
 
 import javafx.collections.ObservableMap;
 
-import org.jrebirth.af.core.facade.WaveReady;
+import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.wave.Wave;
 
 /**
@@ -31,7 +31,7 @@ import org.jrebirth.af.core.wave.Wave;
  *
  * @author Sébastien Bordes
  */
-public interface Service extends WaveReady<Service> {
+public interface Service extends Component<Service> {
 
     /**
      * Do a specific action by processing the wave.

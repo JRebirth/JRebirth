@@ -22,4 +22,7 @@ public class DockableBehaviorImpl extends AbstractModelBehavior<Dockable> implem
         // Nothing to init
     }
 
+    protected void initInnerComponents() {
+    }
+
 }

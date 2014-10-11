@@ -54,7 +54,7 @@ public class DefaultSimpleModel<N extends Node> extends AbstractSimpleModel<N> {
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Nothing to do yet
     }
 

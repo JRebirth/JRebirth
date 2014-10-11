@@ -15,8 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.ui;
+package org.jrebirth.af.core.inner;
 
+import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.key.UniqueKey;
 
 /**
@@ -29,7 +30,14 @@ import org.jrebirth.af.core.key.UniqueKey;
  * @author Sébastien Bordes
  *
  */
-public interface InnerModel {
+public interface InnerComponent<C extends Component<?>> {
+
+    // /**
+    // * {@inheritDoc}
+    // */
+    // default InnerModelRegistry registry() {
+    // return InnerModelRegistry.getInstance();
+    // }
 
     /**
      * Return the key of the model.
@@ -38,6 +46,33 @@ public interface InnerModel {
      *
      * @return the unique key used to load the right Model, must be not null
      */
-    UniqueKey<? extends Model> getKey();
+    UniqueKey<C> getKey();
+
+    static <CC extends Component<?>> InnerComponent<CC> create(final Class<CC> modelClass, final Object... keyPart) {
+        return new InnerComponentEntry<CC>(modelClass, keyPart);
+    }
+
+    // default UniqueKey getKey(){
+    // return registry().getKey(this);
+    // }
+
+    // /**
+    // *
+    // * @param key
+    // */
+    // @SuppressWarnings("unchecked")
+    // default void key(UniqueKey<? extends Model> key) {
+    // registry().storeKey((InnerModel)this, (UniqueKey)key);
+    // }
+
+    // /**
+    // *
+    // * @param modelClass
+    // * @param keyPart
+    // */
+    // @SuppressWarnings("unchecked")
+    // default void key(final Class<? extends Model> modelClass, final Object... keyPart) {
+    // registry().storeKey((InnerModel<IM>)this, (UniqueKey<IM>)UniqueKey.key(modelClass, keyPart));
+    // }
 
 }

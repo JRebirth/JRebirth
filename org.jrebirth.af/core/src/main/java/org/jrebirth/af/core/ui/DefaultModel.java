@@ -44,7 +44,7 @@ public class DefaultModel<M extends Model, V extends View<?, ?, ?>> extends Abst
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Nothing to do generic
     }
 

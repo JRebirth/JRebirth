@@ -70,6 +70,9 @@ public interface JRebirthParameters {
     /** The factory used to create components. */
     ParameterItem<Class> COMPONENT_FACTORY = create("componentFactory", (Class) DefaultComponentFactory.class);
 
+    /** Flag that activates the module.xml file parsing to register components using annotations. */
+    ParameterItem<Boolean> PARSE_MODULE_CONFIG_FILE = create("parseModuleConfigFile", false);
+
     /** First Close Retry Delay in milliseconds, time to wait when application try to close the first time. */
     ParameterItem<Integer> CLOSE_RETRY_DELAY_FIRST = create("closeRetryDelayFirst", 4000);
 

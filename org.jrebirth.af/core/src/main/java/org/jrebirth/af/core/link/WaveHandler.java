@@ -31,7 +31,7 @@ import org.jrebirth.af.core.concurrent.RunnablePriority;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.exception.WaveException;
-import org.jrebirth.af.core.facade.WaveReady;
+import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.Model;
@@ -51,7 +51,7 @@ public class WaveHandler implements LinkMessages {
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(WaveHandler.class);
 
     /** The wave ready component that will handle the wave. */
-    private final WaveReady<?> waveReady;
+    private final Component<?> waveReady;
 
     /** The default method to call, will been used when annotation is put on a method, otherwise could be null. */
     private final Method defaultMethod;
@@ -66,7 +66,7 @@ public class WaveHandler implements LinkMessages {
      * @param waveChecker the wave checker, could be null
      * @param defaultMethod the default method to call, could be null
      */
-    public WaveHandler(final WaveReady<?> waveReady, final WaveChecker waveChecker, final Method defaultMethod) {
+    public WaveHandler(final Component<?> waveReady, final WaveChecker waveChecker, final Method defaultMethod) {
         super();
         this.waveReady = waveReady;
         this.waveChecker = waveChecker;
@@ -90,7 +90,7 @@ public class WaveHandler implements LinkMessages {
      *
      * @return Returns the waveReady.
      */
-    public WaveReady<?> getWaveReady() {
+    public Component<?> getWaveReady() {
         return this.waveReady;
     }
 
@@ -224,7 +224,7 @@ public class WaveHandler implements LinkMessages {
         } else {
             // If no custom method was proviced, call the default method named 'processWave(wave)'
             try {
-                ClassUtility.getMethodByName(getWaveReady().getClass(), AbstractWaveReady.PROCESS_WAVE_METHOD_NAME).invoke(getWaveReady(), wave);
+                ClassUtility.getMethodByName(getWaveReady().getClass(), AbstractComponent.PROCESS_WAVE_METHOD_NAME).invoke(getWaveReady(), wave);
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
                 LOGGER.error(WAVE_DISPATCH_ERROR, e);
                 // Propagate the wave exception

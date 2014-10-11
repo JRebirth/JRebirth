@@ -19,7 +19,7 @@ package org.jrebirth.af.core.ui;
 
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.facade.WaveReady;
+import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.wave.Wave;
 
 /**
@@ -29,7 +29,7 @@ import org.jrebirth.af.core.wave.Wave;
  *
  * @author Sébastien Bordes
  */
-public interface Model extends WaveReady<Model> {
+public interface Model extends Component<Model> {
 
     /**
      * Return the view.
@@ -44,31 +44,6 @@ public interface Model extends WaveReady<Model> {
      * @return the root node of the managed view
      */
     Node getRootNode();
-
-    /**
-     * Return the root model (for inner model).
-     *
-     * @return the root model or null
-     */
-    Model getRootModel();
-
-    /**
-     * Define the root model for an inner model.
-     *
-     * @param rootModel The rootModel to set.
-     */
-    void setRootModel(final Model rootModel);
-
-    /**
-     * Get an inner model.
-     *
-     * If the model isn't registered create it
-     *
-     * @param innerModel the enumeration entry that describe the inner model
-     *
-     * @return the inner model instance
-     */
-    Model getInnerModel(final InnerModel innerModel);
 
     /**
      * Perform the show view action triggered by a wave.

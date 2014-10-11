@@ -42,7 +42,7 @@ public final class PropertiesModel extends DefaultModel<PropertiesModel, Propert
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Nothing to do yet
     }
 

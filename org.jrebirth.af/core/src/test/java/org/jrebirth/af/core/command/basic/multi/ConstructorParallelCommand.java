@@ -23,4 +23,7 @@ public class ConstructorParallelCommand extends AbstractMultiCommand<WaveBean> {
         // Nothing to do yet
 
     }
+
+    protected void initInnerComponents() {
+    }
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jrebirth.af.core.exception.CoreRuntimeException;
-import org.jrebirth.af.core.facade.WaveReady;
+import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
@@ -38,14 +38,14 @@ public final class CheckerUtility implements UtilMessages {
     }
 
     /**
-     * Check if wave Type contract is respected for the the given {@link WaveReady} class.
+     * Check if wave Type contract is respected for the the given {@link Component} class.
      *
      * Throws a Runtime exception is Wave Contract is broken.
      *
-     * @param waveReadyClass the {@link WaveReady} class to check
+     * @param waveReadyClass the {@link Component} class to check
      * @param waveTypes the contract to respect (could be several WaveType)
      */
-    public static void checkWaveTypeContract(final Class<? extends WaveReady> waveReadyClass, final WaveType... waveTypes) {
+    public static void checkWaveTypeContract(final Class<? extends Component> waveReadyClass, final WaveType... waveTypes) {
 
         // Perform the check only if Developer Mode is activated
         if (JRebirthParameters.DEVELOPER_MODE.get()) {

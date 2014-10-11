@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface Component {
+public @interface LinkComponent {
 
     /**
      * Define default string key part.

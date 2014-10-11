@@ -38,7 +38,7 @@ public final class AnnotationModel extends DefaultModel<AnnotationModel, Annotat
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
     }
 
     /**

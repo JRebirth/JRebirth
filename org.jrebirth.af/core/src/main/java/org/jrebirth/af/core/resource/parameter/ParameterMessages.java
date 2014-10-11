@@ -51,7 +51,7 @@ public interface ParameterMessages extends MessageContainer {
 
     /** "Impossible to read the properties file : {0}". */
     MessageItem CONF_READING_ERROR = create(new LogMessage("jrebirth.parameter.confReadingError", JRLevel.Error, JRebirthMarkers.PARAMETER));
-    
+
     /** "Undefined Environment Variable : {0}". */
     MessageItem UNDEFINED_ENV_VAR = create(new LogMessage("jrebirth.parameter.undefinedEnvVar", JRLevel.Error, JRebirthMarkers.PARAMETER));
 }

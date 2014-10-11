@@ -22,13 +22,15 @@ import java.lang.reflect.Method;
 import org.jrebirth.af.core.behavior.Behavior;
 import org.jrebirth.af.core.behavior.data.BehaviorData;
 import org.jrebirth.af.core.command.Command;
+import org.jrebirth.af.core.inner.InnerComponent;
+import org.jrebirth.af.core.link.AbstractComponent;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.checker.WaveChecker;
 
 /**
- * The interface <strong>WaveReady</strong>.
+ * The interface <strong>Component</strong>.
  *
  * Define the contract used to manage waves.
  *
@@ -36,7 +38,7 @@ import org.jrebirth.af.core.wave.checker.WaveChecker;
  *
  * @param <R> A type that implements FacadeReady
  */
-public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
+public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
 
     /**
      * Begin to listen the type of wave for the current component.
@@ -159,6 +161,44 @@ public interface WaveReady<R extends WaveReady<R>> extends FacadeReady<R> {
      * @throws WaveException if an error occurred while dispatching the wave
      */
     // void handle(final Wave wave) throws WaveException;
+
+    /**
+     * Return the root component (for inner component).
+     *
+     * @return the root component or null
+     */
+    Component<?> getRootComponent();
+
+    /**
+     * Define the root component for an inner component.
+     *
+     * @param rootComponent The root component to set.
+     */
+    void setRootComponent(final Component<?> rootComponent);
+
+    /**
+     * Add an inner component.
+     *
+     * It will instantiate the component from the right Facade and store it into the current component.
+     *
+     * Shall be called from {@link AbstractComponent}.initInnerComponent (protected API)
+     *
+     * @param innerComponent the entry that describes the inner component
+     * @param keyPart additional object that are part of the inner component's unique key
+     */
+    <C extends Component<?>> void addInnerComponent(final InnerComponent<C> innerComponent);
+
+    /**
+     * Get an inner component.
+     *
+     * If the component isn't registered try to create it
+     *
+     * @param innerComponent the entry that describes the inner component
+     * @param keyPart additional object that are part of the inner component's unique key
+     *
+     * @return the inner component instance
+     */
+    <C extends Component<?>> C getInnerComponent(final InnerComponent<C> innerComponent);
 
     /**
      *

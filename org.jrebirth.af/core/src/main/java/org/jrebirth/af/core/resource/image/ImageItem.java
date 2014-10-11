@@ -54,7 +54,7 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
         return ResourceBuilders.IMAGE_BUILDER;
     }
 
-    public interface Local extends ImageItem {
+    public interface Relative extends ImageItem {
 
         /**
          * .
@@ -63,8 +63,8 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
          * @param name the file name
          * @param extension the image extension
          */
-        default void local(final String path, final String name, final ImageExtension extension) {
-            set(new LocalImage(path, name, extension));
+        default void rel(final String path, final String name, final ImageExtension extension) {
+            set(new RelImage(path, name, extension));
         }
 
         /**
@@ -73,8 +73,8 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
          * @param name the file name
          * @param extension the image extension
          */
-        default void local(final String name, final ImageExtension extension) {
-            set(new LocalImage(name, extension));
+        default void rel(final String name, final ImageExtension extension) {
+            set(new RelImage(name, extension));
         }
 
         /**
@@ -82,8 +82,42 @@ public interface ImageItem extends ResourceItem<Image, ImageItem, ImageParams, I
          *
          * @param fullName the full file name (including path and image extension)
          */
-        default void local(final String fullName) {
-            set(new LocalImage(fullName));
+        default void rel(final String fullName) {
+            set(new RelImage(fullName));
+        }
+
+    }
+
+    public interface Absolute extends ImageItem {
+
+        /**
+         * .
+         *
+         * @param path the image local path
+         * @param name the file name
+         * @param extension the image extension
+         */
+        default void abs(final String path, final String name, final ImageExtension extension) {
+            set(new AbsImage(path, name, extension));
+        }
+
+        /**
+         * .
+         *
+         * @param name the file name
+         * @param extension the image extension
+         */
+        default void abs(final String name, final ImageExtension extension) {
+            set(new AbsImage(name, extension));
+        }
+
+        /**
+         * .
+         *
+         * @param fullName the full file name (including path and image extension)
+         */
+        default void abs(final String fullName) {
+            set(new AbsImage(fullName));
         }
 
     }

@@ -23,7 +23,7 @@ import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.concurrent.RunnablePriority;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.facade.JRebirthEventType;
-import org.jrebirth.af.core.link.AbstractWaveReady;
+import org.jrebirth.af.core.link.AbstractComponent;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBase;
@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  *
  * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  */
-public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractWaveReady<Command> implements CommandBean<WB> {
+public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractComponent<Command> implements CommandBean<WB> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBaseCommand.class);

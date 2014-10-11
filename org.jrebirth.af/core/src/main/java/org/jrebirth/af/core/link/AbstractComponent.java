@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,12 +20,14 @@ package org.jrebirth.af.core.link;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.af.core.annotation.AfterInit;
 import org.jrebirth.af.core.annotation.BeforeInit;
 import org.jrebirth.af.core.annotation.OnRelease;
+import org.jrebirth.af.core.annotation.Releasable;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
 import org.jrebirth.af.core.behavior.Behavior;
 import org.jrebirth.af.core.behavior.data.BehaviorData;
@@ -34,9 +36,11 @@ import org.jrebirth.af.core.command.CommandBean;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
+import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.facade.JRebirthEventType;
-import org.jrebirth.af.core.facade.WaveReady;
+import org.jrebirth.af.core.inner.InnerComponent;
 import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
@@ -45,6 +49,7 @@ import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.MultiMap;
+import org.jrebirth.af.core.util.ObjectUtility;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.Wave.Status;
 import org.jrebirth.af.core.wave.WaveBase;
@@ -55,26 +60,26 @@ import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.checker.WaveChecker;
 
 /**
- * 
- * The class <strong>AbstractWaveReady</strong>.
- * 
+ *
+ * The class <strong>AbstractComponent</strong>.
+ *
  * This is the base class for all of each of JRebirth pattern subclasses.<br />
  * It allow to send waves.
- * 
+ *
  * All things related to wave management must be execute into the JRebirth Thread
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <R> the class type of the subclass
  */
 @SkipAnnotation(false)
-public abstract class AbstractWaveReady<R extends WaveReady<R>> extends AbstractReady<R> implements WaveReady<R>, LinkMessages {
+public abstract class AbstractComponent<R extends Component<R>> extends AbstractReady<R> implements Component<R>, LinkMessages {
 
     /** The default fallback wave handle method. */
     public static final String PROCESS_WAVE_METHOD_NAME = "processWave";
 
     /** The class logger. */
-    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractWaveReady.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractComponent.class);
 
     /** The return wave type map. */
     // private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
@@ -88,9 +93,15 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     /** A map that store all behavior implementations s tore . */
     private MultiMap<Class<? extends Behavior<?>>, Behavior<?>> behaviors;
 
+    /** The root component not null for inner component. */
+    protected Component<?> rootComponent;
+
+    /** The map that store inner models loaded. */
+    protected final Map<InnerComponent<?>, Component<?>> innerComponentMap = new IdentityHashMap<>(10);
+
     /**
      * Short cut method used to retrieve the notifier.
-     * 
+     *
      * @return the notifier retrieved from global facade
      */
     private Notifier getNotifier() {
@@ -117,9 +128,9 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Return the human-readable list of Wave Type.
-     * 
+     *
      * @param waveTypes the list of wave type
-     * 
+     *
      * @return the string list of Wave Type
      */
     private String getWaveTypesString(final WaveType[] waveTypes) {
@@ -139,7 +150,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
         // Check API compliance
         CheckerUtility.checkWaveTypeContract(this.getClass(), waveTypes);
 
-        final WaveReady<?> waveReady = this;
+        final Component<?> waveReady = this;
 
         LOGGER.trace(LinkMessages.LISTEN_WAVE_TYPE, getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName());
 
@@ -216,7 +227,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     public final void unlisten(final WaveType... waveTypes) {
 
         // Store an hard link to be able to use current class into the closure
-        final WaveReady waveReady = this;
+        final Component waveReady = this;
 
         LOGGER.trace(LinkMessages.UNLISTEN_WAVE_TYPE, getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName());
 
@@ -284,9 +295,9 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Send the given wave using the JRebirth Thread.
-     * 
+     *
      * @param wave the wave to send
-     * 
+     *
      * @return the wave sent to JIT (with Sent status)
      */
     private Wave sendWaveIntoJit(final Wave wave) {
@@ -308,12 +319,12 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Build a wave object.
-     * 
+     *
      * @param waveGroup the group of the wave
      * @param waveType the type of the wave
      * @param componentClass the component class if any
      * @param waveData wave data to use
-     * 
+     *
      * @return the wave built
      */
     private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveData<?>... waveData) {
@@ -333,12 +344,12 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Build a wave object with its dedicated WaveBean.
-     * 
+     *
      * @param waveGroup the group of the wave
      * @param waveType the type of the wave
      * @param componentClass the component class if any
      * @param waveBean the wave bean that holds all required wave data
-     * 
+     *
      * @return the wave built
      */
     private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveBean waveBean) {
@@ -409,7 +420,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Customizable method used to perform more action before command execution.
-     * 
+     *
      * @param wave the given wave to parser before command execution
      */
     // protected abstract void parseWave(final Wave wave);
@@ -452,23 +463,23 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * Process the wave. Typically by using a switch on the waveType.
-     * 
+     *
      * @param wave the wave received
      */
     protected abstract void processWave(final Wave wave);
 
     /**
      * Private method used to grab the right WaveType<?> java type.
-     * 
+     *
      * @return the this instance with the right generic type
      */
-    private WaveReady<?> getWaveReady() {
+    private Component<?> getWaveReady() {
         return this;
     }
 
     /**
      * Call annotated methods corresponding at given lifecycle annotation.
-     * 
+     *
      * @param annotationClass the annotation related to the lifecycle
      */
     private void callAnnotatedMethod(final Class<? extends Annotation> annotationClass) {
@@ -486,7 +497,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * The component is now ready to do custom initialization tasks.
-     * 
+     *
      * @throws CoreException if an error occurred
      */
     protected abstract void ready() throws CoreException;
@@ -498,7 +509,8 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     @Override
     public void setup() throws CoreException {
 
-        if (ComponentEnhancer.canProcessAnnotation((Class<? extends WaveReady<?>>) this.getClass())) {
+        final boolean canProcessAnnotation = ComponentEnhancer.canProcessAnnotation((Class<? extends Component<?>>) this.getClass());
+        if (canProcessAnnotation) {
 
             // Search Singleton and Multiton annotation on field
             ComponentEnhancer.injectComponent(this);
@@ -515,6 +527,14 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
         manageOptionalData();
 
+        if (canProcessAnnotation) {
+            ComponentEnhancer.injectInnerComponent(this);
+        }
+
+        // Initialize all inner components
+        initInternalInnerComponents();
+
+        // Prepare the current component
         ready();
 
         callAnnotatedMethod(AfterInit.class);
@@ -548,25 +568,44 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     @Override
     public void release() {
 
-        JRebirth.runIntoJIT(new AbstractJrbRunnable("Release ") {
+        // Check if some method annotated by Releasable annotation are available
+        if (ObjectUtility.checkAllMethodReturnTrue(this, ClassUtility.getAnnotatedMethods(this.getClass(), Releasable.class))) {
 
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                try {
-                    setKey(null);
+            JRebirth.runIntoJIT(new AbstractJrbRunnable("Release " + this.getClass().getCanonicalName()) {
 
-                    getNotifier().unlistenAll(getWaveReady());
+                /**
+                 * {@inheritDoc}
+                 */
+                @Override
+                protected void runInto() throws JRebirthThreadException {
+                    // try {
+
+                    // setKey(null);
+
+                    // getNotifier().unlistenAll(getWaveReady());
 
                     callAnnotatedMethod(OnRelease.class);
-                } catch (final JRebirthThreadException jte) {
-                    LOGGER.error(CALL_ANNOTATED_METHOD_ERROR, jte); // FIXME
+
+                    getLocalFacade().unregister(getKey());
+
+                    // thisObject.ready = false;
+
+                    // } catch (final JRebirthThreadException jte) {
+                    // LOGGER.error(COMPONENT_RELEASE_ERROR, jte);
+                    // }
                 }
-            }
-        });
+            });
+        }
+
+        // Shall also release all InnerComponent
+        for (final Component<?> innerComponent : this.innerComponentMap.values()) {
+            innerComponent.release();
+        }
     }
+
+    // public boolean isReady() {
+    // return ready;
+    // }
 
     /**
      * {@inheritDoc}
@@ -612,7 +651,7 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
 
     /**
      * TODO To complete.
-     * 
+     *
      * @param behaviorClass
      * @param behavior
      */
@@ -642,5 +681,93 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
     public <BD extends BehaviorData, B extends Behavior<BD>> BD getBehaviorData(final Class<B> behaviorClass) {
         return this.behaviors == null ? null : (BD) this.behaviors.get(behaviorClass).get(0).getData();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final <C extends Component<?>> void addInnerComponent(final InnerComponent<C> innerComponent) {
+
+        // If the inner model hasn't been loaded before, build it from UIFacade
+        if (!this.innerComponentMap.containsKey(innerComponent)) {
+
+            final Class<C> componentClass = innerComponent.getKey().getClassField();
+
+            // Initialize the inner model
+            C childComponent = null;
+            if (Model.class.isAssignableFrom(componentClass)) {
+                childComponent = (C) getLocalFacade().getGlobalFacade().getCommandFacade().retrieve((UniqueKey<Command>) innerComponent.getKey());
+            } else if (Service.class.isAssignableFrom(componentClass)) {
+                childComponent = (C) getLocalFacade().getGlobalFacade().getServiceFacade().retrieve((UniqueKey<Service>) innerComponent.getKey());
+            } else if (Model.class.isAssignableFrom(componentClass)) {
+                childComponent = (C) getLocalFacade().getGlobalFacade().getUiFacade().retrieve((UniqueKey<Model>) innerComponent.getKey());
+            } else if (Behavior.class.isAssignableFrom(componentClass)) {
+                throw new CoreRuntimeException("Behaviors can not be used as Inner Component");
+            }
+
+            if (childComponent == null) {
+                throw new CoreRuntimeException("Impossible to create Inner Component"); // FIXME
+            }
+
+            // Store the component into the multitonKey map
+            this.innerComponentMap.put(innerComponent, childComponent);
+
+            // Link the current root model
+            childComponent.setRootComponent(this);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final <C extends Component<?>> C getInnerComponent(final InnerComponent<C> innerModel) {
+        if (!this.innerComponentMap.containsKey(innerModel)) {
+
+            // This InnerModel should be initialized into the initInnerModel method instead
+            // but in some cases a late initialization can help
+            addInnerComponent(innerModel);
+        }
+        return (C) this.innerComponentMap.get(innerModel);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Component<?> getRootComponent() {
+        return this.rootComponent;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setRootComponent(final Component<?> rootComponent) {
+        this.rootComponent = rootComponent;
+    }
+
+    /**
+     * Initialize the included models.
+     *
+     * This method is a hook to manage generic code before initializing inner models.
+     *
+     * You must implement the {@link #initInnerComponents()} method to setup your inner models.
+     */
+    protected final void initInternalInnerComponents() {
+        // Do generic stuff
+
+        // Do custom stuff
+        initInnerComponents();
+    }
+
+    /**
+     * Initialize method that should wrap all creation of {@link InnerComponent}.
+     *
+     * It shall contain only {@link Component}.addInnerComponent calls.
+     */
+    protected abstract void initInnerComponents();
 
 }
