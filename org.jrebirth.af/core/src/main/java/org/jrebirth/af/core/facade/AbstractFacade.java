@@ -25,9 +25,11 @@ import java.util.WeakHashMap;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.key.ClassKey;
 import org.jrebirth.af.core.key.MultitonKey;
 import org.jrebirth.af.core.key.UniqueKey;
+import org.jrebirth.af.core.link.AbstractWaveReady;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.service.Service;
@@ -104,6 +106,16 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             final R readyObject = this.componentMap.get(uniqueKey).get();
 
             if (readyObject != null) {
+
+                // Unlisten all previously listened WaveType
+                if (readyObject instanceof AbstractWaveReady<?>) {
+                    try {
+                        getGlobalFacade().getNotifier().unlistenAll((AbstractWaveReady<?>) readyObject);
+                    } catch (final JRebirthThreadException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 // Release the key
                 readyObject.setKey(null);
 

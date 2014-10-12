@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.jrebirth.af.core.annotation.BeforeInit;
 import org.jrebirth.af.core.annotation.OnRelease;
+import org.jrebirth.af.core.annotation.Releasable;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.command.CommandBean;
@@ -40,6 +41,7 @@ import org.jrebirth.af.core.service.Service;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.util.ObjectUtility;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.Wave.Status;
 import org.jrebirth.af.core.wave.WaveBase;
@@ -484,26 +486,26 @@ public abstract class AbstractWaveReady<R extends WaveReady<R>> extends Abstract
      */
     @Override
     public void release() {
-
-        JRebirth.runIntoJIT(new AbstractJrbRunnable("Release ") {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                try {
-                    setKey(null);
-
-                    getNotifier().unlistenAll(getWaveReady());
-
+        // Check if some method annotated by Releasable annotation are available
+        if (ObjectUtility.checkAllMethodReturnTrue(this, ClassUtility.getAnnotatedMethods(this.getClass(), Releasable.class))) {
+            JRebirth.runIntoJIT(new AbstractJrbRunnable("Release " + this.getClass().getCanonicalName()) {
+                /**
+                 * {@inheritDoc}
+                 */
+                @Override
+                protected void runInto() throws JRebirthThreadException {
+                    // try {
+                    // setKey(null);
+                    // getNotifier().unlistenAll(getWaveReady());
                     callAnnotatedMethod(OnRelease.class);
-                } catch (final JRebirthThreadException jte) {
-                    LOGGER.error(CALL_ANNOTATED_METHOD_ERROR, jte); // FIXME
+                    getLocalFacade().unregister(getKey());
+                    // thisObject.ready = false;
+                    // } catch (final JRebirthThreadException jte) {
+                    // LOGGER.error(COMPONENT_RELEASE_ERROR, jte);
+                    // }
                 }
-            }
-        });
-
+            });
+        }
     }
 
     /**

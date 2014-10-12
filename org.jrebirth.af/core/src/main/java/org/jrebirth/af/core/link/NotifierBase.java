@@ -20,6 +20,7 @@ package org.jrebirth.af.core.link;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.af.core.command.Command;
@@ -200,7 +201,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
         // Build the wave used to call the required command
         final ShowModelWaveBuilder smwb = ShowModelWaveBuilder.create()
-                .showModelKey(getGlobalFacade().getUiFacade().buildKey((Class<Model>) wave.getRelatedClass()));
+                                                              .showModelKey(getGlobalFacade().getUiFacade().buildKey((Class<Model>) wave.getRelatedClass()));
 
         if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
             // Add the Ui view into the place holder provided
@@ -353,6 +354,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         // to avoid any thread concurrency trouble
         JRebirth.checkJIT();
 
+        final List<WaveSubscription> toRemove = new ArrayList<WaveSubscription>();
         // Iterate over all WaveSubscription
         for (final WaveSubscription ws : this.notifierMap.values()) {
 
@@ -367,8 +369,12 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
             // If this WaveSubscription doesn't contain any WaveHandler remove the entry.
             if (ws.getWaveHandlers().isEmpty()) {
-                this.notifierMap.remove(ws.getWaveType());
+                toRemove.add(ws);
             }
+        }
+
+        for (final WaveSubscription ws : toRemove) {
+            this.notifierMap.remove(ws.getWaveType());
         }
 
     }
