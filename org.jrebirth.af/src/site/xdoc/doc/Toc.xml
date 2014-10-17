@@ -66,6 +66,9 @@
 				<li>
 					<a title="Ui" href="Ui.html">User Interface</a>
 				</li>
+				<li>
+					<a title="Behavior" href="Behavior.html">Behaviors</a>
+				</li>
 				<!-- <ol> <li> <a title="Model" href="Model.html">Model</a> </li> <li> <a title="View" href="View.html">View</a> </li> <li> <a title="Controller" href="Controller.html">Controller</a> </li> <li> <a 
 					title="Annotation" href="Annotation.html">Annotation</a> </li> </ol> -->
 				<li>

@@ -87,6 +87,11 @@
                 <param name="source" value="xdoc/doc/Ui.xml" />
                 <param name="source-content-type" value="xdoc" />
             </macro>
+            
+            <macro name="include">
+                <param name="source" value="xdoc/doc/Behavior.xml" />
+                <param name="source-content-type" value="xdoc" />
+            </macro>
 
             <macro name="include">
                 <param name="source" value="xdoc/doc/Resources.xml" />
