@@ -30,7 +30,6 @@ import org.jrebirth.af.core.annotation.OnRelease;
 import org.jrebirth.af.core.annotation.Releasable;
 import org.jrebirth.af.core.annotation.SkipAnnotation;
 import org.jrebirth.af.core.behavior.Behavior;
-import org.jrebirth.af.core.behavior.data.BehaviorData;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.command.CommandBean;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
@@ -330,11 +329,11 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
     private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveData<?>... waveData) {
 
         final Wave wave = WaveBase.create()
-                .waveGroup(waveGroup)
-                .waveType(waveType)
-                .fromClass(this.getClass())
-                .componentClass(componentClass)
-                .addDatas(waveData);
+                                  .waveGroup(waveGroup)
+                                  .waveType(waveType)
+                                  .fromClass(this.getClass())
+                                  .componentClass(componentClass)
+                                  .addDatas(waveData);
 
         // Track wave creation
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
@@ -355,11 +354,11 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
     private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveBean waveBean) {
 
         final Wave wave = WaveBase.create()
-                .waveGroup(waveGroup)
-                .waveType(waveType)
-                .fromClass(this.getClass())
-                .componentClass(componentClass)
-                .waveBean(waveBean);
+                                  .waveGroup(waveGroup)
+                                  .waveType(waveType)
+                                  .fromClass(this.getClass())
+                                  .componentClass(componentClass)
+                                  .waveBean(waveBean);
 
         // Track wave creation
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
@@ -543,24 +542,25 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
     /**
      *
      */
-    @SuppressWarnings("unchecked")
-    private void manageOptionalData() {
+    protected abstract void manageOptionalData();
 
-        for (final Object data : getKey().getOptionalData()) {
-
-            if (data instanceof BehaviorData) {
-
-                addBehavior((BehaviorData) data);
-
-            } else if (data instanceof Class && ((Class<?>) data).isAssignableFrom(Behavior.class)) {
-
-                addBehavior((Class<Behavior<BehaviorData>>) data);
-
-            }
-
-        }
-
-    }
+    // {
+    //
+    // for (final Object data : getKey().getOptionalData()) {
+    //
+    // if (data instanceof BehaviorData) {
+    //
+    // addBehavior((BehaviorData) data);
+    //
+    // } else if (data instanceof Class && ((Class<?>) data).isAssignableFrom(Behavior.class)) {
+    //
+    // addBehavior((Class<Behavior<BehaviorData>>) data);
+    //
+    // }
+    //
+    // }
+    //
+    // }
 
     /**
      * {@inheritDoc}
@@ -606,81 +606,6 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
     // public boolean isReady() {
     // return ready;
     // }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasBehavior(final Class<Behavior<?>> behaviorClass) {
-        return this.behaviors != null && this.behaviors.containsKey(behaviorClass);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public <BD extends BehaviorData, B extends Behavior<BD>> R addBehavior(final Class<B> behaviorClass) {
-
-        final UniqueKey<B> key = UniqueKey.key(behaviorClass, new Object[] { this }, getKey());
-
-        final B behavior = getLocalFacade().getGlobalFacade().getBehaviorFacade().retrieve(key);
-
-        addBehavior(behavior);
-
-        return (R) this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public <BD extends BehaviorData> R addBehavior(final BD data) {
-
-        for (final Class<? extends Behavior<?>> behaviorClass : data.getBehaviors()) {
-
-            final Object[] optionalData = new Object[] { data, this };
-
-            final UniqueKey<? extends Behavior<?>> key = UniqueKey.key(behaviorClass, optionalData, getKey());
-
-            addBehavior(getLocalFacade().getGlobalFacade().getBehaviorFacade().retrieve(key));
-        }
-        return (R) this;
-    }
-
-    /**
-     * TODO To complete.
-     *
-     * @param behaviorClass
-     * @param behavior
-     */
-    @SuppressWarnings("unchecked")
-    private <B extends Behavior<?>> void addBehavior(final B behavior) {
-
-        if (this.behaviors == null) {
-            this.behaviors = new MultiMap<Class<? extends Behavior<?>>, Behavior<?>>();
-        }
-        this.behaviors.add((Class<Behavior<?>>) behavior.getClass(), behavior);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public <BD extends BehaviorData, B extends Behavior<BD>> B getBehavior(final Class<B> behaviorClass) {
-        return this.behaviors == null ? null : (B) this.behaviors.get(behaviorClass);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public <BD extends BehaviorData, B extends Behavior<BD>> BD getBehaviorData(final Class<B> behaviorClass) {
-        return this.behaviors == null ? null : (BD) this.behaviors.get(behaviorClass).get(0).getData();
-    }
 
     /**
      * {@inheritDoc}

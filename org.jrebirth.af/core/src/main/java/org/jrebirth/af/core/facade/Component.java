@@ -19,8 +19,6 @@ package org.jrebirth.af.core.facade;
 
 import java.lang.reflect.Method;
 
-import org.jrebirth.af.core.behavior.Behavior;
-import org.jrebirth.af.core.behavior.data.BehaviorData;
 import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.inner.InnerComponent;
 import org.jrebirth.af.core.link.AbstractComponent;
@@ -199,40 +197,5 @@ public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
      * @return the inner component instance
      */
     <C extends Component<?>> C getInnerComponent(final InnerComponent<C> innerComponent);
-
-    /**
-     *
-     * @param behaviorClass
-     *
-     * @return
-     */
-    boolean hasBehavior(Class<Behavior<?>> behaviorClass);
-
-    /**
-     *
-     * @param data
-     */
-    <BD extends BehaviorData, B extends Behavior<BD>> R addBehavior(Class<B> behaviorClass);
-
-    /**
-     *
-     * @param data
-     */
-    <BD extends BehaviorData> R addBehavior(BD data);
-
-    /**
-     *
-     * @param behaviorClass
-     *
-     * @return
-     */
-    <BD extends BehaviorData, B extends Behavior<BD>> BD getBehaviorData(Class<B> behaviorClass);
-
-    /**
-     *
-     * @param behaviorClass
-     * @return
-     */
-    <BD extends BehaviorData, B extends Behavior<BD>> B getBehavior(Class<B> behaviorClass);
 
 }
