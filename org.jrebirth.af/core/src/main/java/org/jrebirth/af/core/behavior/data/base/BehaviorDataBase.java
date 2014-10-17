@@ -1,11 +1,11 @@
-package org.jrebirth.af.core.behavior.data;
+package org.jrebirth.af.core.behavior.data.base;
 
 import java.util.Collections;
 import java.util.List;
 
 import org.jrebirth.af.core.behavior.Behavior;
 
-public class BasicBehaviorData extends AbstractBehaviorData {
+public class BehaviorDataBase extends AbstractBehaviorData {
 
     /**
      * {@inheritDoc}

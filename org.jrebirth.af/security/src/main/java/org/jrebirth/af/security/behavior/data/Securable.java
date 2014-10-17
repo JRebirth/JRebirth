@@ -2,12 +2,12 @@ package org.jrebirth.af.security.behavior.data;
 
 import java.io.Serializable;
 
-import org.jrebirth.af.core.behavior.data.BasicBehaviorData;
-import org.jrebirth.af.core.behavior.data.BehaviorDataFor;
+import org.jrebirth.af.core.behavior.annotation.BehaviorDataFor;
+import org.jrebirth.af.core.behavior.data.base.BehaviorDataBase;
 import org.jrebirth.af.security.behavior.SecurityBehavior;
 
 @BehaviorDataFor(SecurityBehavior.class)
-public class Securable extends BasicBehaviorData implements Serializable {
+public class Securable extends BehaviorDataBase implements Serializable {
     
     
     /** The generated serial version uid. */

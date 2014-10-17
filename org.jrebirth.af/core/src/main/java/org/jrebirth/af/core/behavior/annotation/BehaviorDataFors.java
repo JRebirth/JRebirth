@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.behavior.data;
+package org.jrebirth.af.core.behavior.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

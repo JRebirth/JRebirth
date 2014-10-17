@@ -6,16 +6,14 @@ import javafx.event.EventType;
 import javafx.scene.Node;
 import javafx.scene.input.SwipeEvent;
 
-import org.jrebirth.af.component.behavior.dockable.DockableBehavior;
 import org.jrebirth.af.component.behavior.swipable.SwipableBehavior;
-import org.jrebirth.af.core.behavior.data.AbstractBehaviorData;
-import org.jrebirth.af.core.behavior.data.BasicBehaviorData;
-import org.jrebirth.af.core.behavior.data.BehaviorDataFor;
+import org.jrebirth.af.core.behavior.annotation.BehaviorDataFor;
+import org.jrebirth.af.core.behavior.data.base.BehaviorDataBase;
 import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.ui.Model;
 
 @BehaviorDataFor(SwipableBehavior.class)
-public class Swipable extends BasicBehaviorData implements Serializable {
+public class Swipable extends BehaviorDataBase implements Serializable {
 
     /** The generated serial version uid. */
     private static final long serialVersionUID = 8137109665415403740L;

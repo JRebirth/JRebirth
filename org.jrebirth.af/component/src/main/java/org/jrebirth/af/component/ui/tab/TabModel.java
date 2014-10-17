@@ -32,7 +32,6 @@ import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveItem;
 import org.jrebirth.af.core.wave.WaveType;
 import org.jrebirth.af.core.wave.checker.WaveChecker;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

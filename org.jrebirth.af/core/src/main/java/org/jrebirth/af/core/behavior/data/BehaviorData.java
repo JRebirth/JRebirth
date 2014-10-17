@@ -20,16 +20,21 @@ package org.jrebirth.af.core.behavior.data;
 import java.util.List;
 
 import org.jrebirth.af.core.behavior.Behavior;
+import org.jrebirth.af.core.facade.Component;
 
 /**
- * The Interface BehaviorData.
+ * The Interface <b>BehaviorData</b> is used to define basic methods used to store some data used by Behaviors.
+ *
+ * A BehaviorData can be used by several different {@link Behavior}.
+ *
+ * A Behavior can be attached to a {@link Component} by sending to it a Behavior Data.
  */
 public interface BehaviorData {
 
     /**
-     * .
+     * Return the list of {@link Behavior} supported by this Data.
      *
-     * @return
+     * @return the list behavior classes
      */
     List<Class<? extends Behavior<?>>> getBehaviors();
 

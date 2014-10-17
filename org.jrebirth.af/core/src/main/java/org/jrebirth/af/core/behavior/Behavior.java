@@ -18,27 +18,33 @@
 package org.jrebirth.af.core.behavior;
 
 import org.jrebirth.af.core.behavior.data.BehaviorData;
+import org.jrebirth.af.core.facade.BehaviorFacade;
+import org.jrebirth.af.core.facade.BehavioredComponent;
 import org.jrebirth.af.core.facade.Component;
 
 /**
- * The Interface Behavior.
+ * The Interface <b>Behavior</b> is used to define basic methods that each Behavior shall implements.
  *
- * @param <D> the generic type
+ * A Behavior represents a piece of code that could be plugged and unplugged to any {@link BehavioredComponent} at any time.
+ *
+ * A behavior is also a {@link Component} and is stored into the {@link BehaviorFacade}.
+ *
+ * @param <D> the generic type of the behavior data
  */
 public interface Behavior<D extends BehaviorData> extends Component<Behavior<?>> {
 
     /**
-     * Gets the data.
+     * Gets the {@link BehaviorData} used by this Behavior.
      *
-     * @return the data
+     * @return the behavior data
      */
     D getData();
 
     /**
-     * Gets the component.
+     * Gets the {@link Component} concerned by this Behavior.
      *
      * @return the component
      */
-    Component<?> getComponent();
+    BehavioredComponent<?> getComponent();
 
 }

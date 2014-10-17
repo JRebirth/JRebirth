@@ -15,11 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.behavior;
+package org.jrebirth.af.core.behavior.base;
 
+import org.jrebirth.af.core.behavior.Behavior;
 import org.jrebirth.af.core.behavior.data.BehaviorData;
 import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.facade.Component;
+import org.jrebirth.af.core.facade.BehavioredComponent;
 import org.jrebirth.af.core.link.AbstractComponent;
 import org.jrebirth.af.core.wave.Wave;
 
@@ -34,7 +35,7 @@ public abstract class AbstractBehavior<D extends BehaviorData> extends AbstractC
     private D data;
 
     /** The component. */
-    private Component<?> component;
+    private BehavioredComponent<?> component;
 
     /**
      * {@inheritDoc}
@@ -48,7 +49,7 @@ public abstract class AbstractBehavior<D extends BehaviorData> extends AbstractC
      * {@inheritDoc}
      */
     @Override
-    public Component<?> getComponent() {
+    public BehavioredComponent<?> getComponent() {
         return this.component;
     }
 
@@ -69,24 +70,40 @@ public abstract class AbstractBehavior<D extends BehaviorData> extends AbstractC
 
         // FIXME fix leaks
         this.data = (D) getKey().getOptionalData()
-                .stream()
-                .filter(d -> d instanceof BehaviorData)
-                .findFirst()
-                .get();
+                                .stream()
+                                .filter(d -> d instanceof BehaviorData)
+                                .findFirst()
+                                .get();
 
-        this.component = (Component<?>) getKey().getOptionalData()
-                .stream()
-                .filter(d -> d instanceof Component<?>)
-                .findFirst()
-                .get();
+        this.component = (BehavioredComponent<?>) getKey().getOptionalData()
+                                                          .stream()
+                                                          .filter(d -> d instanceof BehavioredComponent<?>)
+                                                          .findFirst()
+                                                          .get();
 
         initBehavior();
 
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void manageOptionalData() {
+        // Nothing to do
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initInnerComponents() {
+        // Nothing to do
+    }
+
+    /**
      * Inits the behavior.
      */
-    public abstract void initBehavior();
+    protected abstract void initBehavior();
 
 }

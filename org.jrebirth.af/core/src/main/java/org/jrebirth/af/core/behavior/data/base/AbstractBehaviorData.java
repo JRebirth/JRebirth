@@ -1,9 +1,11 @@
-package org.jrebirth.af.core.behavior.data;
+package org.jrebirth.af.core.behavior.data.base;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jrebirth.af.core.behavior.Behavior;
+import org.jrebirth.af.core.behavior.annotation.BehaviorDataFor;
+import org.jrebirth.af.core.behavior.data.BehaviorData;
 
 public abstract class AbstractBehaviorData implements BehaviorData {
 
@@ -36,5 +38,9 @@ public abstract class AbstractBehaviorData implements BehaviorData {
         return this.behaviors;
     }
 
+    /**
+     *
+     * @return
+     */
     protected abstract List<? extends Class<? extends Behavior<?>>> getCustomBehaviors();
 }

@@ -2,7 +2,7 @@ package org.jrebirth.af.component.behavior.dockable.impl;
 
 import org.jrebirth.af.component.behavior.dockable.DockableBehavior;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
-import org.jrebirth.af.core.behavior.AbstractModelBehavior;
+import org.jrebirth.af.core.behavior.base.AbstractModelBehavior;
 import org.jrebirth.af.processor.annotation.Register;
 import org.jrebirth.af.processor.annotation.RegistrationPriority;
 
