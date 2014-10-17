@@ -531,11 +531,11 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      */
     protected final Scene buildScene() throws CoreException {
         return SceneBuilder.create()
-                .root(buildRootPane())
-                .width(JRebirthParameters.APPLICATION_SCENE_WIDTH.get())
-                .height(JRebirthParameters.APPLICATION_SCENE_HEIGHT.get())
-                .fill(JRebirthColors.SCENE_BG_COLOR.get())
-                .build();
+                           .root(buildRootPane())
+                           .width(JRebirthParameters.APPLICATION_SCENE_WIDTH.get())
+                           .height(JRebirthParameters.APPLICATION_SCENE_HEIGHT.get())
+                           .fill(JRebirthColors.SCENE_BG_COLOR.get())
+                           .build();
     }
 
     /**

@@ -19,7 +19,7 @@ package org.jrebirth.af.core.ui;
 
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.facade.Component;
+import org.jrebirth.af.core.facade.BehavioredComponent;
 import org.jrebirth.af.core.wave.Wave;
 
 /**
@@ -29,7 +29,7 @@ import org.jrebirth.af.core.wave.Wave;
  *
  * @author Sébastien Bordes
  */
-public interface Model extends Component<Model> {
+public interface Model extends BehavioredComponent<Model> {
 
     /**
      * Return the view.

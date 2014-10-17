@@ -203,17 +203,17 @@ public final class ServiceTask<T> extends Task<T> implements JRebirthRunnable, S
 
                 // If a Command Class is provided, call it with the right WaveItem to get the real result type
                 returnWave = WaveBase.create()
-                        .waveGroup(WaveGroup.CALL_COMMAND)
-                        .fromClass(this.service.getClass())
-                        .componentClass(responseCommandClass)
-                        .addDatas(WaveData.build(resultWaveItem, res));
+                                     .waveGroup(WaveGroup.CALL_COMMAND)
+                                     .fromClass(this.service.getClass())
+                                     .componentClass(responseCommandClass)
+                                     .addDatas(WaveData.build(resultWaveItem, res));
             } else {
 
                 // Otherwise send a generic wave that can be handled by any component
                 returnWave = WaveBase.create()
-                        .waveType(responseWaveType)
-                        .fromClass(this.service.getClass())
-                        .addDatas(WaveData.build(resultWaveItem, res));
+                                     .waveType(responseWaveType)
+                                     .fromClass(this.service.getClass())
+                                     .addDatas(WaveData.build(resultWaveItem, res));
             }
 
             returnWave.relatedWave(this.wave);

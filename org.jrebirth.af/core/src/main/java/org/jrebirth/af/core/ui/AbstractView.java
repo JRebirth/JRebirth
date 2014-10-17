@@ -115,8 +115,8 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      */
     private void buildErrorNode(final CoreException ce) {
         final TextArea ta = TextAreaBuilder.create()
-                .text(ce.getMessage())
-                .build();
+                                           .text(ce.getMessage())
+                                           .build();
         this.errorNode = PaneBuilder.create().children(ta).build();
     }
 

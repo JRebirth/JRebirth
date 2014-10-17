@@ -25,7 +25,6 @@ import javafx.scene.layout.PaneBuilder;
 
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.ui.AbstractView;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

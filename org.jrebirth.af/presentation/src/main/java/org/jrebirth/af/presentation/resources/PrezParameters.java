@@ -1,10 +1,10 @@
 package org.jrebirth.af.presentation.resources;
 
 
+import static org.jrebirth.af.core.resource.Resources.create;
+
 import org.jrebirth.af.core.resource.parameter.ObjectParameter;
 import org.jrebirth.af.core.resource.parameter.ParameterItem;
-
-import static org.jrebirth.af.core.resource.Resources.create;
 
 /**
  * The interface <strong>PrezParameters</strong>.

@@ -32,7 +32,6 @@ import org.jrebirth.af.presentation.service.PresentationService;
 import org.jrebirth.af.presentation.ui.base.SlideModel;
 import org.jrebirth.af.presentation.ui.base.SlideStep;
 import org.jrebirth.presentation.model.Slide;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

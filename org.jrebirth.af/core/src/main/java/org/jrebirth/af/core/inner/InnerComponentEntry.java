@@ -1,6 +1,7 @@
 package org.jrebirth.af.core.inner;
 
 import org.jrebirth.af.core.facade.Component;
+import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.key.UniqueKey;
 
 /**
@@ -27,7 +28,7 @@ public final class InnerComponentEntry<C extends Component<?>> implements InnerC
      */
     InnerComponentEntry(final Class<C> componentClass, final Object... keyPart) {
 
-        this.modelKey = UniqueKey.key(componentClass, keyPart);
+        this.modelKey = Key.create(componentClass, keyPart);
     }
 
     // /**

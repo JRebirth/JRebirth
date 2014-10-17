@@ -23,7 +23,6 @@ import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.undoredo.command.UndoRedoWaves;
 import org.jrebirth.af.undoredo.service.UndoRedoService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

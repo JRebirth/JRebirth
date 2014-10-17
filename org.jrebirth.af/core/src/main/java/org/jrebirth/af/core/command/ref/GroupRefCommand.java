@@ -21,8 +21,8 @@ public class GroupRefCommand extends AbstractMultiCommand<WaveBean> {
 
         // if (keyPart instanceof GroupRef) {
 
-        List<UniqueKey<? extends Command>> commandList = new ArrayList<>();
-        
+        final List<UniqueKey<? extends Command>> commandList = new ArrayList<>();
+
         // GroupRef groupRef = (GroupRef) keyPart;
         final GroupRef groupRef = getKeyPart(GroupRef.class);
 

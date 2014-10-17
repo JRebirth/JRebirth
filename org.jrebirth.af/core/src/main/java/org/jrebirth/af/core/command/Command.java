@@ -18,7 +18,6 @@
 package org.jrebirth.af.core.command;
 
 import org.jrebirth.af.core.facade.BehavioredComponent;
-import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBean;
 

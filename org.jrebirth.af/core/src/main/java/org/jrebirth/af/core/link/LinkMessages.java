@@ -108,4 +108,9 @@ public interface LinkMessages extends MessageContainer {
 
     /** "Component {0} injection has failed". */
     MessageItem COMPONENT_INJECTION_FAILURE = create(new LogMessage("jrebirth.link.componentInjectionFailure", JRLevel.Error, JRebirthMarkers.LINK));
+
+    /** BehavioredComponent. */
+
+    /** Add behavior {0} to Component {1}. */
+    MessageItem ADD_BEHAVIOR = create(new LogMessage("jrebirth.link.addBehavior", JRLevel.Info, JRebirthMarkers.LINK));
 }

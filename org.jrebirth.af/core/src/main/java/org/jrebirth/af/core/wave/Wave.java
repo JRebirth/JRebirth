@@ -103,6 +103,8 @@ public interface Wave {
 
     /**
      * @param waveType The waveType to set.
+     *
+     * @return the current Wave to chain other method call
      */
     Wave waveType(final WaveType waveType);
 
@@ -113,6 +115,8 @@ public interface Wave {
 
     /**
      * @param fromClass The fromClass to set.
+     *
+     * @return the current Wave to chain other method call
      */
     Wave fromClass(final Class<?> fromClass);
 
@@ -123,6 +127,8 @@ public interface Wave {
 
     /**
      * @param componentClass the class of the component that will handle this wave.
+     *
+     * @return the current Wave to chain other method call
      */
     Wave componentClass(final Class<?> componentClass);
 
@@ -133,6 +139,8 @@ public interface Wave {
 
     /**
      * @param priority The priority to set.
+     *
+     * @return the current Wave to chain other method call
      */
     Wave priority(final int priority);
 
@@ -144,7 +152,7 @@ public interface Wave {
     /**
      * @param relatedWave The related Wave to set.
      *
-     * @return the current wave
+     * @return the current Wave to chain other method call
      */
     Wave relatedWave(final Wave relatedWave);
 
@@ -162,6 +170,8 @@ public interface Wave {
      * @param value the data to store
      *
      * @param <T> the type of the wave data to add
+     *
+     * @return the current Wave to chain other method call
      */
     <T> Wave add(final WaveItem<T> waveItem, final T value);
 
@@ -191,6 +201,8 @@ public interface Wave {
      * Add a list of wave data. Store objects and indexize them.
      *
      * @param waveDatas the list of wave data to store
+     *
+     * @return the current Wave to chain other method call
      */
     Wave addDatas(final WaveData<?>... waveDatas);
 
@@ -223,6 +235,8 @@ public interface Wave {
      * Add a wave listener.
      *
      * @param waveListener the wave listener that will be notified of wave status
+     *
+     * @return the current Wave to chain other method call
      */
     Wave addWaveListener(final WaveListener waveListener);
 
@@ -230,6 +244,8 @@ public interface Wave {
      * Remove a wave listener.
      *
      * @param waveListener the wave listener to removed
+     *
+     * @return the current Wave to chain other method call
      */
     Wave removeWaveListener(final WaveListener waveListener);
 
@@ -237,6 +253,8 @@ public interface Wave {
      * Link a wave bean.
      *
      * @param waveBean the wave bean already built to link
+     *
+     * @return the current Wave to chain other method call
      */
     Wave waveBean(final WaveBean waveBean);
 

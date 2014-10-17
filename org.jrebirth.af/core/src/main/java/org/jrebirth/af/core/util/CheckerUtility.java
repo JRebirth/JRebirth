@@ -90,15 +90,15 @@ public final class CheckerUtility implements UtilMessages {
 
                     if (!hasCompliantMethod) {
                         LOGGER.log(BROKEN_API_WRONG_PARAMETERS, waveReadyClass.getSimpleName(), methodName,
-                                ((WaveTypeBase) waveType).items().size(), methodParameters);
+                                   ((WaveTypeBase) waveType).items().size(), methodParameters);
 
                         LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(),
-                                methodName, ((WaveTypeBase) waveType).getItems());
+                                   methodName, ((WaveTypeBase) waveType).getItems());
 
                         throw new CoreRuntimeException(BROKEN_API_WRONG_PARAMETERS.getText(waveReadyClass.getSimpleName(),
-                                methodName,
-                                ((WaveTypeBase) waveType).items().size(),
-                                methodParameters));
+                                                                                           methodName,
+                                                                                           ((WaveTypeBase) waveType).items().size(),
+                                                                                           methodParameters));
                     }
                 }
             }

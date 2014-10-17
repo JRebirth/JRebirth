@@ -115,7 +115,7 @@ public class StageService extends DefaultService {
 
         return swb.rootPane() == null
                 ? StackPaneBuilder.create()
-                        .build()
+                                  .build()
                 : swb.rootPane();
     }
 
@@ -130,8 +130,8 @@ public class StageService extends DefaultService {
         Scene scene = swb.scene();
         if (scene == null) {
             scene = SceneBuilder.create()
-                    .root(region)
-                    .build();
+                                .root(region)
+                                .build();
         } else {
             scene.setRoot(region);
         }
@@ -150,8 +150,8 @@ public class StageService extends DefaultService {
         Stage stage = swb.stage();
         if (swb.stage() == null) {
             stage = StageBuilder.create()
-                    .scene(scene)
-                    .build();
+                                .scene(scene)
+                                .build();
         } else {
             stage.setScene(scene);
         }

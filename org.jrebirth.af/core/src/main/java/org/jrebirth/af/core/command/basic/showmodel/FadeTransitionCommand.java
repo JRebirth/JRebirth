@@ -71,25 +71,25 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
 
         if (oldNode != null || newNode != null) {
             final ParallelTransition animation = ParallelTransitionBuilder.create()
-                    .build();
+                                                                          .build();
 
             if (oldNode != null) {
                 animation.getChildren().add(
-                        FadeTransitionBuilder.create()
-                                .duration(Duration.millis(600))
-                                .node(oldNode)
-                                .fromValue(1.0)
-                                .toValue(0.0)
-                                .build());
+                                            FadeTransitionBuilder.create()
+                                                                 .duration(Duration.millis(600))
+                                                                 .node(oldNode)
+                                                                 .fromValue(1.0)
+                                                                 .toValue(0.0)
+                                                                 .build());
             }
             if (newNode != null) {
                 animation.getChildren().add(
-                        FadeTransitionBuilder.create()
-                                .duration(Duration.millis(600))
-                                .node(newNode)
-                                .fromValue(0.0)
-                                .toValue(1.0)
-                                .build());
+                                            FadeTransitionBuilder.create()
+                                                                 .duration(Duration.millis(600))
+                                                                 .node(newNode)
+                                                                 .fromValue(0.0)
+                                                                 .toValue(1.0)
+                                                                 .build());
             }
 
             final Node oldNodeLink = oldNode;

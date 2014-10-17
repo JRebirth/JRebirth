@@ -109,11 +109,11 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
 
         // Launch the default executor
         this.executorService = new JRebirthThreadPoolExecutor(poolSize,
-                new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(), JTP_BASE_NAME));
+                                                              new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(), JTP_BASE_NAME));
 
         // Launch the High Priority executor
         this.highPriorityExecutorService = new JRebirthThreadPoolExecutor(poolSize,
-                new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(), HPTP_BASE_NAME));
+                                                                          new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(), HPTP_BASE_NAME));
 
         trackEvent(JRebirthEventType.CREATE_GLOBAL_FACADE, getApplication().getClass(), this.getClass());
 
@@ -145,9 +145,9 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
     public final void trackEvent(final JRebirthEventType eventType, final Class<?> source, final Class<?> target, final String... eventData) {
         if (LOGGER.isInfoEnabled()) {
             final JRebirthEvent event = new JRebirthEventBase(this.eventSequence++, eventType,
-                    source == null ? null : source.getCanonicalName(),
-                    target == null ? null : target.getCanonicalName()
-                    , eventData);
+                                                              source == null ? null : source.getCanonicalName(),
+                                                              target == null ? null : target.getCanonicalName()
+                                                              , eventData);
             LOGGER.info(JREBIRTH_EVENT, event);
         }
     }

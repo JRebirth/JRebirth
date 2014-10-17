@@ -21,7 +21,6 @@ import javafx.scene.layout.BorderPane;
 
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultView;
-import org.jrebirth.af.showcase.analyzer.ui.controls.ControlsModel;
 
 
 /**

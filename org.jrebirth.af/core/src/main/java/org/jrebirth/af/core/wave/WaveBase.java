@@ -231,11 +231,22 @@ public class WaveBase implements Wave, LinkMessages {
     public Wave addDatas(final WaveData<?>... waveDatas) {
 
         for (final WaveData<?> waveData : waveDatas) {
+
             // Init the order of the wave Data
             waveData.setOrder(waveDatas().size());
+
+            // Grab the previous value if any
+            final WaveData<?> previous = this.waveItemsMap.get(waveData.getKey());
+
             // Store into the map to allow access by WaveItem
             this.waveItemsMap.put(waveData.getKey(), waveData);
-            // Ad into the list to enable sorting
+
+            // Remove the old value from the list
+            if (previous != null) {
+                this.waveDataList.remove(previous);
+            }
+
+            // Add into the list to enable sorting
             this.waveDataList.add(waveData);
 
             // Sort the list

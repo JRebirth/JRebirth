@@ -158,10 +158,10 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
         this.subCommandList = defineSubCommand();
 
-        if(this.subCommandList == null || this.subCommandList.isEmpty()){
+        if (this.subCommandList == null || this.subCommandList.isEmpty()) {
             throw new CoreRuntimeException("Warning, 'defineSubCommand' should return at least one Command Key.");
         }
-        
+
         for (final UniqueKey<? extends Command> commandKey : this.subCommandList) {
             getLocalFacade().retrieve(commandKey);
         }
@@ -178,9 +178,9 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
     /**
      * This method must be used to return the list of sub command keys.
-     * 
+     *
      * Keys can be build using {@link #getCommandKey(Class, Object...)}.
-     * 
+     *
      * @return the list of Command Key that will be performed
      */
     protected abstract List<UniqueKey<? extends Command>> defineSubCommand();
@@ -227,10 +227,10 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                     if (this.subCommandList.size() > this.commandRunIndex) {
 
                         final Wave subCommandWave = WaveBase.callCommand(this.subCommandList.get(this.commandRunIndex).getClassField())
-                                .waveBean(wave.waveBean())
-                                // Recopy the WaveData from the previous wave
-                                .addDatas(wave.waveDatas().toArray(new WaveData[0]))
-                                .addWaveListener(this);
+                                                            .waveBean(wave.waveBean())
+                                                            // Recopy the WaveData from the previous wave
+                                                            .addDatas(wave.waveDatas().toArray(new WaveData[0]))
+                                                            .addWaveListener(this);
 
                         sendWave(subCommandWave);
                     }
@@ -349,13 +349,13 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
         // Nothing to do yet
     }
 
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    public void addCommandClass(final Class<? extends Command> commandClass) {
-//        this.commandList.add(UniqueKey.key(commandClass));
-//    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void addCommandClass(final Class<? extends Command> commandClass) {
+    // this.commandList.add(UniqueKey.key(commandClass));
+    // }
 
     /**
      * {@inheritDoc}
@@ -364,11 +364,11 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
         return Key.create(commandClass, keyPart);
     }
 
-//    /**
-//     * {@inheritDoc}
-//     */
-//    protected void addSubCommand(final UniqueKey<? extends Command> commandKey) {
-//        this.commandList.add(commandKey);
-//    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // protected void addSubCommand(final UniqueKey<? extends Command> commandKey) {
+    // this.commandList.add(commandKey);
+    // }
 
 }

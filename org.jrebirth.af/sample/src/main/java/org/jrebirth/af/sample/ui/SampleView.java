@@ -9,7 +9,6 @@ import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.ui.AbstractView;
 import org.jrebirth.af.core.ui.annotation.OnMouse;
 import org.jrebirth.af.core.ui.annotation.type.Mouse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

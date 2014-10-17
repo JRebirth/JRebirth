@@ -21,7 +21,7 @@ import javafx.scene.Node;
 
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.facade.JRebirthEventType;
-import org.jrebirth.af.core.link.AbstractComponent;
+import org.jrebirth.af.core.link.AbstractBehavioredComponent;
 import org.jrebirth.af.core.wave.Wave;
 
 /**
@@ -34,7 +34,7 @@ import org.jrebirth.af.core.wave.Wave;
  *
  * @param <M> the class type of the current model
  */
-public abstract class AbstractBaseModel<M extends Model> extends AbstractComponent<Model> implements Model {
+public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavioredComponent<Model> implements Model {
 
     /** Flag used to determine if a view has been already displayed, useful to manage first time animation. */
     private boolean viewDisplayed;

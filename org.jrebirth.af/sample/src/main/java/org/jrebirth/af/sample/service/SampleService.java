@@ -3,7 +3,6 @@ package org.jrebirth.af.sample.service;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveType;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

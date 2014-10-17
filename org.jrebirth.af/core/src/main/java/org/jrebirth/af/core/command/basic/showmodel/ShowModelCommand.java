@@ -39,11 +39,9 @@ public class ShowModelCommand extends DefaultMultiBeanCommand<DisplayModelWaveBe
     @Override
     protected List<UniqueKey<? extends Command>> defineSubCommand() {
         return Arrays.asList(
-                getCommandKey(PrepareModelCommand.class),
-                getCommandKey(AttachModelCommand.class)
-            );
+                             getCommandKey(PrepareModelCommand.class),
+                             getCommandKey(AttachModelCommand.class)
+                     );
     }
-    
-    
 
 }

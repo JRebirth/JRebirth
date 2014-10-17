@@ -26,7 +26,6 @@ import org.jrebirth.af.core.concurrent.RunnablePriority;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.facade.JRebirthEventType;
 import org.jrebirth.af.core.link.AbstractBehavioredComponent;
-import org.jrebirth.af.core.link.AbstractComponent;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBase;

@@ -133,4 +133,15 @@ public final class WaveData<T> implements Comparable<WaveData<?>> {
         return getOrder() - waveData.getOrder();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Item: ").append(getKey().toString());
+        sb.append(" Value:").append(getValue().toString());
+        return sb.toString();
+    }
+
 }

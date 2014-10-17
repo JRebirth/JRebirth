@@ -17,8 +17,6 @@
  */
 package org.jrebirth.af.presentation.ui.image;
 
-import java.lang.Math;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

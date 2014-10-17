@@ -17,9 +17,6 @@
  */
 package org.jrebirth.af.core.resource.color;
 
-import javafx.scene.paint.Color;
-
-import org.jrebirth.af.core.resource.ResourceBuilders;
 
 /**
  * The class <strong>EnumColors</strong>.
@@ -27,41 +24,20 @@ import org.jrebirth.af.core.resource.ResourceBuilders;
  * @author Sébastien Bordes
  *
  */
-public enum EnumColors implements ColorItem {
+public enum EnumColors implements ColorEnum {
 
+    // @formatter:off
+    
     /** Color for slide title, white. */
-    SLIDE_TITLE(new WebColor("FFFFFF", 1.0)),
-
+    SLIDE_TITLE {{ web("FFFFFF", 1.0); }},
+    
     /** Color for blue shape, xxx. */
-    SHAPE_BLUE(new WebColor("3495CE", 1.0)),
+    SHAPE_BLUE{{ web("3495CE", 1.0); }},
 
     /** Color for drop shadow, black. */
-    DROP_SHADOW(new WebColor("000000", 0.8)),
+    DROP_SHADOW{{ web("000000", 0.8); }},
+    
     /** Color for inner shadow, white. */
-    INNER_SHADOW(new WebColor("FFFFFE", 0.3));
+    INNER_SHADOW{{ web("FFFFFE", 0.3); }};
 
-    /**
-     * Private Constructor.
-     *
-     * @param colorParams the primitive values for the color
-     */
-    private EnumColors(final ColorParams colorParams) {
-        builder().storeParams(this, colorParams);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Color get() {
-        return builder().get(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ColorBuilder builder() {
-        return ResourceBuilders.COLOR_BUILDER;
-    }
 }

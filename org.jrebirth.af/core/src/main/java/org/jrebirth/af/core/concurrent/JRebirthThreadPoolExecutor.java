@@ -52,7 +52,7 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements Co
      */
     public JRebirthThreadPoolExecutor(final int threadNumber, final ThreadFactory threadFactory) {
         super(threadNumber, threadNumber, 0L, TimeUnit.MILLISECONDS, new PriorityBlockingQueue<Runnable>(threadNumber, new JRebirthRunnableComparator()),
-                threadFactory);
+              threadFactory);
     }
 
     /**

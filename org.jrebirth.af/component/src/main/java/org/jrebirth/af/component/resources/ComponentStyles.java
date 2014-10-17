@@ -17,10 +17,10 @@
  */
 package org.jrebirth.af.component.resources;
 
+import static org.jrebirth.af.core.resource.Resources.create;
+
 import org.jrebirth.af.core.resource.style.StyleSheet;
 import org.jrebirth.af.core.resource.style.StyleSheetItem;
-
-import static org.jrebirth.af.core.resource.Resources.create;
 
 /**
  * The ComponentStyles interface providing all style sheets.

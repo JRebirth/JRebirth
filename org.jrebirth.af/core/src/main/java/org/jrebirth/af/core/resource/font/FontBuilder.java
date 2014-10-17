@@ -69,9 +69,9 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
     private Font buildRealFont(final RealFont rFont) {
         checkFontStatus(rFont);
         return javafx.scene.text.FontBuilder.create()
-                .name(transformFontName(rFont.name().name()))
-                .size(rFont.size())
-                .build();
+                                            .name(transformFontName(rFont.name().name()))
+                                            .size(rFont.size())
+                                            .build();
     }
 
     /**

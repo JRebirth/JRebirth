@@ -6,7 +6,6 @@ import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.ui.AbstractController;
 import org.jrebirth.af.core.ui.adapter.DefaultMouseAdapter;
 import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveGroup;
 import org.jrebirth.af.sample.command.SampleCommand;
 import org.jrebirth.af.sample.command.SamplePoolCommand;
 import org.jrebirth.af.sample.command.SampleUICommand;

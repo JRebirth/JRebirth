@@ -39,9 +39,9 @@ public class ShowFadingModelCommand extends DefaultMultiBeanCommand<DisplayModel
     @Override
     protected List<UniqueKey<? extends Command>> defineSubCommand() {
         return Arrays.asList(
-                getCommandKey(ShowModelCommand.class),
-                getCommandKey(FadeTransitionCommand.class),
-                getCommandKey(DetachModelCommand.class)
-                );
+                             getCommandKey(ShowModelCommand.class),
+                             getCommandKey(FadeTransitionCommand.class),
+                             getCommandKey(DetachModelCommand.class)
+                     );
     }
 }

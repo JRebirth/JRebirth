@@ -55,13 +55,13 @@ public interface FXMLItem extends ResourceItem<FXMLComponent, FXMLItem, FXMLPara
 
     /**
      * Build a new FXMLComponent without storing it.
-     * 
+     *
      * If you call 'n' times this method you will obtain 'n' {@link FXMLComponent} instances.
-     * 
+     *
      * @return a new {@link FXMLComponent} instance
      */
-    default FXMLComponent getNew(){
+    default FXMLComponent getNew() {
         return builder().buildResource(this, builder().getParam(this));
     }
-    
+
 }

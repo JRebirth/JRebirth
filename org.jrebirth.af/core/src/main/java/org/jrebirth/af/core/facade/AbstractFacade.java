@@ -28,6 +28,7 @@ import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
+import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
@@ -91,7 +92,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     @SuppressWarnings("unchecked")
     public <E extends R> void register(final E readyObject, final Object... keyPart) {
 
-        register(UniqueKey.key((Class<R>) readyObject.getClass(), keyPart), readyObject);
+        register(Key.create((Class<R>) readyObject.getClass(), keyPart), readyObject);
     }
 
     /**
@@ -135,7 +136,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     @Override
     public <E extends R> void unregister(final E readyObject, final Object... keyPart) {
 
-        unregister(UniqueKey.key((Class<R>) readyObject.getClass(), keyPart));
+        unregister(Key.create((Class<R>) readyObject.getClass(), keyPart));
     }
 
     /**
@@ -158,7 +159,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      */
     @Override
     public <E extends R> boolean exists(final Class<E> clazz, final Object... keyPart) {
-        return exists(UniqueKey.key(clazz, keyPart));
+        return exists(Key.create(clazz, keyPart));
     }
 
     /**
@@ -171,9 +172,9 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         // TODO evaluate performances !!!!!
 
         return (List<E>) this.componentMap.entrySet().stream()
-                .filter(entry -> entry.getKey().getClassField() == uniqueKey.getClassField())
-                .map(e -> e.getValue().get()).filter(e -> e != null)
-                .collect(Collectors.toList());
+                                          .filter(entry -> entry.getKey().getClassField() == uniqueKey.getClassField())
+                                          .map(e -> e.getValue().get()).filter(e -> e != null)
+                                          .collect(Collectors.toList());
     }
 
     /**
@@ -224,7 +225,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     @Override
     public <E extends R> E retrieve(final Class<E> clazz, final Object... keyPart) {
 
-        return retrieve(UniqueKey.key(clazz, keyPart));
+        return retrieve(Key.create(clazz, keyPart));
     }
 
     /**
