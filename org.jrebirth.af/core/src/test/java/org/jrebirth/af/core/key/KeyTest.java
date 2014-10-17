@@ -72,7 +72,7 @@ public class KeyTest {
 
         final long begin = System.currentTimeMillis();
 
-        final List<UpdateCursorCommand> kcList = this.commandFacade.retrieveAll(UniqueKey.key(UpdateCursorCommand.class));
+        final List<UpdateCursorCommand> kcList = this.commandFacade.retrieveAll(Key.create(UpdateCursorCommand.class));
 
         System.out.println(System.currentTimeMillis() - begin + " ms");
 

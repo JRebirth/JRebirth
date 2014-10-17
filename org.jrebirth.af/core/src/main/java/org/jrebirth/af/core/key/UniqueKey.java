@@ -51,91 +51,10 @@ public interface UniqueKey<R> extends Serializable {
     Class<R> getClassField();
 
     /**
+     * Return the list of optional data associated to the key.
      *
-     * @return
+     * @return the optional data list
      */
     List<Object> getOptionalData();
 
-    /**
-     * Build an unique key.
-     *
-     * @param clazz the class type of the component
-     * @param keyPart all complementary part of the key
-     *
-     * @return the unique key for the given class and keyParts array
-     *
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    static <R> UniqueKey<R> key(final Class<R> clazz, final Object... keyPart) {
-
-        UniqueKey<R> uniqueKey;
-        if (keyPart == null || keyPart.length == 0 || keyPart[0].toString().isEmpty()) {
-            uniqueKey = singleKey(clazz);
-        } else {
-            uniqueKey = multiKey(clazz, keyPart);
-        }
-        return uniqueKey;
-    }
-
-    /**
-     * Build an unique key.
-     *
-     * @param clazz the class type of the component
-     * @param keyPart all complementary part of the key
-     *
-     * @return the unique key for the given class and keyParts array
-     *
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    static <R> UniqueKey<R> key(final Class<R> clazz, final Object[] optionalData, final Object... keyPart) {
-
-        UniqueKey<R> uniqueKey;
-        if (keyPart == null || keyPart.length == 0 || keyPart[0].toString().isEmpty()) {
-            uniqueKey = singleKey(clazz, optionalData);
-        } else {
-            uniqueKey = multiKey(clazz, keyPart, optionalData);
-        }
-        return uniqueKey;
-    }
-
-    /**
-     * Build a singleton key.
-     *
-     * @param clazz the class type of the component
-     *
-     * @return the unique key for a singleton
-     *
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    static <R> UniqueKey<R> singleKey(final Class<R> clazz, final Object... optionalData) {
-        return new ClassKey<R>(clazz, optionalData);
-    }
-
-    /**
-     * Build a multiton key.
-     *
-     * @param clazz the class type of the component
-     * @param keyPart all complementary part of the key
-     *
-     * @return the unique key for a multiton
-     *
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    static <R> UniqueKey<R> multiKey(final Class<R> clazz, final Object... keyPart) {
-        return new MultitonKey<R>(clazz, keyPart);
-    }
-
-    /**
-     * Build a multiton key.
-     *
-     * @param clazz the class type of the component
-     * @param keyPart all complementary part of the key
-     *
-     * @return the unique key for a multiton
-     *
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    static <R> UniqueKey<R> multiKey(final Class<R> clazz, final Object[] keyPart, final Object... optionalData) {
-        return new MultitonKey<R>(clazz, keyPart, optionalData);
-    }
 }

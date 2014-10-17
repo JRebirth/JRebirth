@@ -33,7 +33,7 @@ import org.jrebirth.af.core.exception.CoreException;
 import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.facade.GlobalFacade;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
-import org.jrebirth.af.core.key.UniqueKey;
+import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
@@ -228,10 +228,10 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
         if (!chainedWaveList.isEmpty()) {
             getFacade().getNotifier().sendWave(
-                    WaveBase.create()
-                            .waveGroup(WaveGroup.CALL_COMMAND)
-                            .componentClass(ChainWaveCommand.class)
-                            .addDatas(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList)));
+                                               WaveBase.create()
+                                                       .waveGroup(WaveGroup.CALL_COMMAND)
+                                                       .componentClass(ChainWaveCommand.class)
+                                                       .addDatas(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList)));
         }
     }
 
@@ -301,10 +301,10 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         if (this.application != null && this.application.getRootNode() != null && this.application.getFirstModelClass() != null) {
 
             firstWave = WaveBase.callCommand(ShowModelCommand.class).waveBean(
-                    DisplayModelWaveBean.create()
-                            .childrenPlaceHolder(this.application.getRootNode().getChildren())
-                            .showModelKey(UniqueKey.key((Class<Model>) this.application.getFirstModelClass()))
-                    );
+                                                                              DisplayModelWaveBean.create()
+                                                                                                  .childrenPlaceHolder(this.application.getRootNode().getChildren())
+                                                                                                  .showModelKey(Key.create((Class<Model>) this.application.getFirstModelClass()))
+                                );
             //
             //
             // ShowModelWaveBuilder.create()
