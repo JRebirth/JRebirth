@@ -1,7 +1,6 @@
 package org.jrebirth.af.core.command.basic.multi;
 
 import org.jrebirth.af.core.command.basic.BasicCommandTest;
-
 import org.junit.Ignore;
 import org.junit.Test;
 

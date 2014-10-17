@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.command;
+package org.jrebirth.af.core.command.impl.multi;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,14 +23,20 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.jrebirth.af.core.annotation.Sequential;
+import org.jrebirth.af.core.command.Command;
+import org.jrebirth.af.core.command.MultiCommand;
+import org.jrebirth.af.core.command.impl.AbstractBaseCommand;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.concurrent.RunnablePriority;
 import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveBean;
+import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.core.wave.WaveListener;
 
 /**
@@ -50,8 +56,8 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     /** The command is running. */
     private final AtomicBoolean running = new AtomicBoolean(false);
 
-    /** The list of command that will be chained. */
-    private final List<UniqueKey<? extends Command>> commandList = new ArrayList<>();
+    /** The list of sub command that will be chained. */
+    private List<UniqueKey<? extends Command>> subCommandList;
 
     /** The list of pending waves triggered by each command when launched in parallel. */
     private final List<Wave> pendingWaves = Collections.synchronizedList(new ArrayList<Wave>());
@@ -150,9 +156,13 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     @Override
     public final void ready() throws CoreException {
 
-        manageSubCommand();
+        this.subCommandList = defineSubCommand();
 
-        for (final UniqueKey<? extends Command> commandKey : this.commandList) {
+        if(this.subCommandList == null || this.subCommandList.isEmpty()){
+            throw new CoreRuntimeException("Warning, 'defineSubCommand' should return at least one Command Key.");
+        }
+        
+        for (final UniqueKey<? extends Command> commandKey : this.subCommandList) {
             getLocalFacade().retrieve(commandKey);
         }
 
@@ -167,9 +177,13 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     protected abstract void initCommand();
 
     /**
-     * This method must be used to add sub command by calling {@link #addCommandClass(Class)}.
+     * This method must be used to return the list of sub command keys.
+     * 
+     * Keys can be build using {@link #getCommandKey(Class, Object...)}.
+     * 
+     * @return the list of Command Key that will be performed
      */
-    protected abstract void manageSubCommand();
+    protected abstract List<UniqueKey<? extends Command>> defineSubCommand();
 
     /**
      * {@inheritDoc}
@@ -210,10 +224,12 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                         this.waveSource = wave;
                     }
 
-                    if (this.commandList.size() > this.commandRunIndex) {
+                    if (this.subCommandList.size() > this.commandRunIndex) {
 
-                        final Wave subCommandWave = WaveBase.callCommand(this.commandList.get(this.commandRunIndex).getClassField())
+                        final Wave subCommandWave = WaveBase.callCommand(this.subCommandList.get(this.commandRunIndex).getClassField())
                                 .waveBean(wave.waveBean())
+                                // Recopy the WaveData from the previous wave
+                                .addDatas(wave.waveDatas().toArray(new WaveData[0]))
                                 .addWaveListener(this);
 
                         sendWave(subCommandWave);
@@ -225,7 +241,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                 this.waveSource = wave;
 
                 // Launch all sub command in parallel
-                for (final UniqueKey<? extends Command> commandKey : this.commandList) {
+                for (final UniqueKey<? extends Command> commandKey : this.subCommandList) {
                     final Wave commandWave = getLocalFacade().retrieve(commandKey).run();
                     // register to Wave status of all command triggered
                     commandWave.addWaveListener(this);
@@ -248,7 +264,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                 this.commandRunIndex++;
 
                 // Run next command if any
-                if (this.commandList.size() > this.commandRunIndex) {
+                if (this.subCommandList.size() > this.commandRunIndex) {
                     // Recurse to handle next command
                     perform(wave);
                 } else {
@@ -333,28 +349,26 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
         // Nothing to do yet
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addCommandClass(final Class<? extends Command> commandClass) {
-        this.commandList.add(UniqueKey.key(commandClass));
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public void addCommandClass(final Class<? extends Command> commandClass) {
+//        this.commandList.add(UniqueKey.key(commandClass));
+//    }
 
     /**
      * {@inheritDoc}
      */
-    // @Override TODO FIXME
-    public void addCommandKey(final Class<? extends Command> commandClass, final Object... keyPart) {
-        this.commandList.add(UniqueKey.key(commandClass, keyPart));
+    protected UniqueKey<? extends Command> getCommandKey(final Class<? extends Command> commandClass, final Object... keyPart) {
+        return Key.create(commandClass, keyPart);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    // @Override TODO FIXME
-    public void addCommandKey(final UniqueKey<? extends Command> commandKey) {
-        this.commandList.add(commandKey);
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    protected void addSubCommand(final UniqueKey<? extends Command> commandKey) {
+//        this.commandList.add(commandKey);
+//    }
 
 }

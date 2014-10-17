@@ -3,7 +3,7 @@ package org.jrebirth.af.core.command.basic;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.command.DefaultUICommand;
+import org.jrebirth.af.core.command.impl.single.ui.DefaultUICommand;
 import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.wave.Wave;
 

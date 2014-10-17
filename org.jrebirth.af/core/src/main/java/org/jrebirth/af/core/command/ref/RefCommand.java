@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.command.ref;
 
-import org.jrebirth.af.core.command.AbstractSingleCommand;
+import org.jrebirth.af.core.command.impl.single.AbstractSingleCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBean;

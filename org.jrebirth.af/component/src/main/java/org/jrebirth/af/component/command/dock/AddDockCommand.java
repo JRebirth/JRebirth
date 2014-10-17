@@ -3,7 +3,7 @@ package org.jrebirth.af.component.command.dock;
 import org.jrebirth.af.component.ui.beans.TabConfig;
 import org.jrebirth.af.component.ui.dock.DockModel;
 import org.jrebirth.af.component.ui.tab.TabModel;
-import org.jrebirth.af.core.command.DefaultBeanCommand;
+import org.jrebirth.af.core.command.impl.single.syncro.DefaultBeanCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.ui.Model;

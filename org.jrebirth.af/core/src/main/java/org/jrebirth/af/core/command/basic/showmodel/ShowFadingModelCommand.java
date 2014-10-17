@@ -17,7 +17,12 @@
  */
 package org.jrebirth.af.core.command.basic.showmodel;
 
-import org.jrebirth.af.core.command.DefaultMultiBeanCommand;
+import java.util.Arrays;
+import java.util.List;
+
+import org.jrebirth.af.core.command.Command;
+import org.jrebirth.af.core.command.impl.multi.DefaultMultiBeanCommand;
+import org.jrebirth.af.core.key.UniqueKey;
 
 /**
  * The Class ShowFadingModelCommand is used to show a model an then used a fading transition.
@@ -32,9 +37,11 @@ public class ShowFadingModelCommand extends DefaultMultiBeanCommand<DisplayModel
      * {@inheritDoc}
      */
     @Override
-    protected void manageSubCommand() {
-        addCommandClass(ShowModelCommand.class);
-        addCommandClass(FadeTransitionCommand.class);
-        addCommandClass(DetachModelCommand.class);
+    protected List<UniqueKey<? extends Command>> defineSubCommand() {
+        return Arrays.asList(
+                getCommandKey(ShowModelCommand.class),
+                getCommandKey(FadeTransitionCommand.class),
+                getCommandKey(DetachModelCommand.class)
+                );
     }
 }

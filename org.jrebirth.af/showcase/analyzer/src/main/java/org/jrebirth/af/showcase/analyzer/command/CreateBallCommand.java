@@ -17,13 +17,12 @@
  */
 package org.jrebirth.af.showcase.analyzer.command;
 
-import org.jrebirth.af.core.command.DefaultUICommand;
+import org.jrebirth.af.core.command.impl.single.ui.DefaultUICommand;
 import org.jrebirth.af.core.facade.JRebirthEvent;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorModel;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.af.showcase.analyzer.ui.editor.ball.BallModel;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

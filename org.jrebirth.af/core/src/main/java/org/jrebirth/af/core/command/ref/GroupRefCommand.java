@@ -1,6 +1,11 @@
 package org.jrebirth.af.core.command.ref;
 
-import org.jrebirth.af.core.command.AbstractMultiCommand;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jrebirth.af.core.command.Command;
+import org.jrebirth.af.core.command.impl.multi.AbstractMultiCommand;
+import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.wave.WaveBean;
 
 public class GroupRefCommand extends AbstractMultiCommand<WaveBean> {
@@ -11,11 +16,13 @@ public class GroupRefCommand extends AbstractMultiCommand<WaveBean> {
     }
 
     @Override
-    protected void manageSubCommand() {
+    protected List<UniqueKey<? extends Command>> defineSubCommand() {
         // for (Object keyPart : getListKeyPart()) {
 
         // if (keyPart instanceof GroupRef) {
 
+        List<UniqueKey<? extends Command>> commandList = new ArrayList<>();
+        
         // GroupRef groupRef = (GroupRef) keyPart;
         final GroupRef groupRef = getKeyPart(GroupRef.class);
 
@@ -26,14 +33,15 @@ public class GroupRefCommand extends AbstractMultiCommand<WaveBean> {
 
         for (final Ref ref : groupRef.children()) {
             if (ref instanceof GroupRef) {
-                addCommandKey(GroupRefCommand.class, ref);
+                commandList.add(getCommandKey(GroupRefCommand.class, ref));
             } else if (ref instanceof SingleRef) {
-                addCommandKey(RefCommand.class, ref);
+                commandList.add(getCommandKey(RefCommand.class, ref));
             } else if (ref instanceof RealRef) {
-                addCommandKey(((RealRef) ref).key());
+                commandList.add(((RealRef) ref).key());
             }
         }
 
+        return commandList;
         // break;
         // }
         // }

@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.command.basic.showmodel;
 
-import org.jrebirth.af.core.command.DefaultPoolBeanCommand;
+import org.jrebirth.af.core.command.impl.single.pool.DefaultPoolBeanCommand;
 import org.jrebirth.af.core.exception.CoreRuntimeException;
 import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.ui.Model;

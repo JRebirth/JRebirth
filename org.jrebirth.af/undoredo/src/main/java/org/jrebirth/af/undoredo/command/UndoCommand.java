@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.undoredo.command;
 
-import org.jrebirth.af.core.command.DefaultCommand;
+import org.jrebirth.af.core.command.impl.single.syncro.DefaultCommand;
 import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.exception.CommandException;

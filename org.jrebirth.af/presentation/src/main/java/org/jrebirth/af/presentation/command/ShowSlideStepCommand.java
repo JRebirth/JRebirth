@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.presentation.command;
 
-import org.jrebirth.af.core.command.DefaultUICommand;
+import org.jrebirth.af.core.command.impl.single.ui.DefaultUICommand;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.presentation.ui.base.ShowSlideWaves;
 import org.jrebirth.af.presentation.ui.base.SlideModel;

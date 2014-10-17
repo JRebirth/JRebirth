@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.showcase.analyzer.command;
 
-import org.jrebirth.af.core.command.DefaultCommand;
+import org.jrebirth.af.core.command.impl.single.syncro.DefaultCommand;
 import org.jrebirth.af.core.facade.JRebirthEvent;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveData;

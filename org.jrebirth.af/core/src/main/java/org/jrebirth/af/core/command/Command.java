@@ -17,6 +17,7 @@
  */
 package org.jrebirth.af.core.command;
 
+import org.jrebirth.af.core.facade.BehavioredComponent;
 import org.jrebirth.af.core.facade.Component;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBean;
@@ -26,7 +27,7 @@ import org.jrebirth.af.core.wave.WaveBean;
  *
  * @author Sébastien Bordes
  */
-public interface Command extends Component<Command> {
+public interface Command extends BehavioredComponent<Command> {
 
     /**
      * Run the command.

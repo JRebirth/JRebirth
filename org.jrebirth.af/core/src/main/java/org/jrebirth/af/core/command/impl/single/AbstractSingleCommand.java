@@ -15,10 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.command;
+package org.jrebirth.af.core.command.impl.single;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.jrebirth.af.core.command.impl.AbstractBaseCommand;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.concurrent.RunnablePriority;
 import org.jrebirth.af.core.exception.CoreException;

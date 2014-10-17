@@ -21,7 +21,7 @@ import java.io.File;
 
 import javafx.stage.FileChooser;
 
-import org.jrebirth.af.core.command.DefaultUICommand;
+import org.jrebirth.af.core.command.impl.single.ui.DefaultUICommand;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveData;
 import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;

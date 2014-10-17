@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.showcase.analyzer.command;
 
-import org.jrebirth.af.core.command.DefaultUICommand;
+import org.jrebirth.af.core.command.impl.single.ui.DefaultUICommand;
 import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.wave.Wave;

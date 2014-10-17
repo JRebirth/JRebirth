@@ -26,7 +26,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
-import org.jrebirth.af.core.command.AbstractSingleCommand;
+import org.jrebirth.af.core.command.impl.single.AbstractSingleCommand;
 import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.wave.Wave;

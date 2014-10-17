@@ -15,8 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.command;
+package org.jrebirth.af.core.command.impl.single.syncro;
 
+import org.jrebirth.af.core.command.impl.single.AbstractSingleCommand;
 import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.exception.CommandException;
@@ -24,16 +25,16 @@ import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBean;
 
 /**
- * The class <strong>DefaultUIBeanCommand</strong>.
+ * The class <strong>DefaultBeanCommand</strong>.
  *
- * The default empty class for UI commands.
+ * The default empty class for Internal commands.
  *
  * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  *
  * @author Sébastien Bordes
  */
-@RunInto(RunType.JAT)
-public class DefaultUIBeanCommand<WB extends WaveBean> extends AbstractSingleCommand<WB> {
+@RunInto(RunType.JIT)
+public class DefaultBeanCommand<WB extends WaveBean> extends AbstractSingleCommand<WB> {
 
     /**
      * {@inheritDoc}
@@ -48,7 +49,7 @@ public class DefaultUIBeanCommand<WB extends WaveBean> extends AbstractSingleCom
      */
     @Override
     protected void perform(final Wave wave) throws CommandException {
-        // Nothing to do yet by the default UI command, must be overridden
+        // Nothing to do yet by the default command, must be overridden
     }
 
     @Override

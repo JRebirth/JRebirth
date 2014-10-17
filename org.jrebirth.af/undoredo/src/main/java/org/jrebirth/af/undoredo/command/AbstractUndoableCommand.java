@@ -19,7 +19,7 @@ package org.jrebirth.af.undoredo.command;
 
 import java.util.List;
 
-import org.jrebirth.af.core.command.AbstractSingleCommand;
+import org.jrebirth.af.core.command.impl.single.AbstractSingleCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBean;

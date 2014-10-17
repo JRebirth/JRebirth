@@ -2,7 +2,7 @@ package org.jrebirth.af.component.command;
 
 import org.jrebirth.af.component.behavior.dockable.DockableBehavior;
 import org.jrebirth.af.component.behavior.dockable.impl.DockableBehaviorImpl;
-import org.jrebirth.af.core.command.DefaultCommand;
+import org.jrebirth.af.core.command.impl.single.syncro.DefaultCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.Wave;
 

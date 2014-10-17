@@ -30,10 +30,21 @@ import org.jrebirth.af.core.wave.WaveBean;
  */
 public interface MultiCommand<WB extends WaveBean> extends CommandBean<WB> {
 
+//    /**
+//     * Add a command to the queue.
+//     *
+//     * @param commandClass the class of the command to add
+//     */
+//    void addCommandClass(final Class<? extends Command> commandClass);
+
     /**
-     * Add a command to the queue.
+     * Build an {@link UniqueKey} for sub command.
      *
-     * @param commandClass the class of the command to add
+     * @param subCommandClass the class of the sub command to add
+     * @param keyPart the optional key part of the sub command
+     * 
+     * @return the sub command unique key
      */
-    void addCommandClass(final Class<? extends Command> commandClass);
+    // UniqueKey<? extends Command> getCommandKey(final Class<? extends Command> subCommandClass, final Object... keyPart);
+
 }

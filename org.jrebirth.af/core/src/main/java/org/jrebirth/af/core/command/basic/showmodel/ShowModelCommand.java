@@ -17,7 +17,12 @@
  */
 package org.jrebirth.af.core.command.basic.showmodel;
 
-import org.jrebirth.af.core.command.DefaultMultiBeanCommand;
+import java.util.Arrays;
+import java.util.List;
+
+import org.jrebirth.af.core.command.Command;
+import org.jrebirth.af.core.command.impl.multi.DefaultMultiBeanCommand;
+import org.jrebirth.af.core.key.UniqueKey;
 
 /**
  * The class <strong>ShowModelCommand</strong>.
@@ -32,10 +37,13 @@ public class ShowModelCommand extends DefaultMultiBeanCommand<DisplayModelWaveBe
      * {@inheritDoc}
      */
     @Override
-    protected void manageSubCommand() {
-        addCommandClass(PrepareModelCommand.class);
-        addCommandClass(AttachModelCommand.class);
-
+    protected List<UniqueKey<? extends Command>> defineSubCommand() {
+        return Arrays.asList(
+                getCommandKey(PrepareModelCommand.class),
+                getCommandKey(AttachModelCommand.class)
+            );
     }
+    
+    
 
 }

@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.command.basic;
 
-import org.jrebirth.af.core.command.DefaultCommand;
+import org.jrebirth.af.core.command.impl.single.syncro.DefaultCommand;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveListener;
 import org.slf4j.Logger;

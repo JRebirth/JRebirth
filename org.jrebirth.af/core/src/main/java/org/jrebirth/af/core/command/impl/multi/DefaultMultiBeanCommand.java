@@ -15,10 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.command;
+package org.jrebirth.af.core.command.impl.multi;
 
+import java.util.List;
+
+import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
+import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.wave.WaveBean;
 
 /**
@@ -78,18 +83,12 @@ public class DefaultMultiBeanCommand<WB extends WaveBean> extends AbstractMultiC
      * {@inheritDoc}
      */
     @Override
-    protected void manageSubCommand() {
-        // Nothing to do yet
+    protected List<UniqueKey<? extends Command>> defineSubCommand() {
+        throw new CoreRuntimeException(this.getClass() + " shall override List<UniqueKey<? extends Command>> defineSubCommand()");
     }
 
     @Override
     protected void initInnerComponents() {
     }
-
-    // @Override
-    // public void setParentCommand(Command parentCommand) {
-    // // Nothing to do yet
-    //
-    // }
 
 }

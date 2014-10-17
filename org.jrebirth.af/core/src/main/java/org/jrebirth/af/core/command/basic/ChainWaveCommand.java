@@ -19,7 +19,7 @@ package org.jrebirth.af.core.command.basic;
 
 import java.util.List;
 
-import org.jrebirth.af.core.command.DefaultCommand;
+import org.jrebirth.af.core.command.impl.single.syncro.DefaultCommand;
 import org.jrebirth.af.core.wave.JRebirthWaves;
 import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveListener;

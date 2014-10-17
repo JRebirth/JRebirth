@@ -15,18 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.command;
+package org.jrebirth.af.core.command.impl.single.syncro;
 
 import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.wave.DefaultWaveBean;
 
 /**
- * The class <strong>DefaultMultiCommand</strong>.
+ * The class <strong>DefaultCommand</strong>.
+ *
+ * The default empty class for Internal commands.
  *
  * @author Sébastien Bordes
  */
 @RunInto(RunType.JIT)
-public class DefaultMultiCommand extends DefaultMultiBeanCommand<DefaultWaveBean> {
+public class DefaultCommand extends DefaultBeanCommand<DefaultWaveBean> {
 
 }

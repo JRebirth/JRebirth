@@ -19,7 +19,7 @@ package org.jrebirth.af.core.command.basic;
 
 import javafx.stage.Stage;
 
-import org.jrebirth.af.core.command.DefaultUICommand;
+import org.jrebirth.af.core.command.impl.single.ui.DefaultUICommand;
 import org.jrebirth.af.core.wave.Wave;
 
 /**

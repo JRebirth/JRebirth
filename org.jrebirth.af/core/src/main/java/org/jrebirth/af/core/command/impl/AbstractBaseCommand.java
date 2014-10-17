@@ -15,14 +15,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.command;
+package org.jrebirth.af.core.command.impl;
 
+import org.jrebirth.af.core.command.Command;
+import org.jrebirth.af.core.command.CommandBean;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.concurrent.RunnablePriority;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.facade.JRebirthEventType;
+import org.jrebirth.af.core.link.AbstractBehavioredComponent;
 import org.jrebirth.af.core.link.AbstractComponent;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.Wave;
@@ -42,7 +45,7 @@ import org.slf4j.LoggerFactory;
  *
  * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
  */
-public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractComponent<Command> implements CommandBean<WB> {
+public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractBehavioredComponent<Command> implements CommandBean<WB> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBaseCommand.class);

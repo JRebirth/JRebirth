@@ -19,7 +19,7 @@ package org.jrebirth.af.core.command.basic.showmodel;
 
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.command.DefaultUIBeanCommand;
+import org.jrebirth.af.core.command.impl.single.ui.DefaultUIBeanCommand;
 import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.Wave;
 import org.slf4j.Logger;

@@ -15,20 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.command;
+package org.jrebirth.af.core.command.impl.single.ui;
 
 import org.jrebirth.af.core.concurrent.RunInto;
 import org.jrebirth.af.core.concurrent.RunType;
 import org.jrebirth.af.core.wave.DefaultWaveBean;
 
 /**
- * The class <strong>DefaultPoolCommand</strong>.
+ * The class <strong>DefaultUICommand</strong>.
  *
- * The default empty class for commands that must be run into a new thread using a pool.
+ * The default empty class for UI commands.
  *
  * @author Sébastien Bordes
  */
-@RunInto(RunType.JTP)
-public class DefaultPoolCommand extends DefaultPoolBeanCommand<DefaultWaveBean> {
+@RunInto(RunType.JAT)
+public class DefaultUICommand extends DefaultUIBeanCommand<DefaultWaveBean> {
 
 }

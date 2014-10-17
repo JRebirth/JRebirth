@@ -2,7 +2,7 @@ package org.jrebirth.af.component.command.tab;
 
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.ui.tab.TabModel;
-import org.jrebirth.af.core.command.DefaultBeanCommand;
+import org.jrebirth.af.core.command.impl.single.syncro.DefaultBeanCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.Wave;
 

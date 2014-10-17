@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.command.basic.multi;
 
-import org.jrebirth.af.core.command.DefaultCommand;
+import org.jrebirth.af.core.command.impl.single.syncro.DefaultCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.Wave;
 

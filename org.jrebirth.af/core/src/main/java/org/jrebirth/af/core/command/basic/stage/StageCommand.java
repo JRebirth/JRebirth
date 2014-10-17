@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.command.basic.stage;
 
-import org.jrebirth.af.core.command.DefaultUIBeanCommand;
+import org.jrebirth.af.core.command.impl.single.ui.DefaultUIBeanCommand;
 import org.jrebirth.af.core.service.basic.StageService;
 import org.jrebirth.af.core.wave.Wave;
 import org.slf4j.Logger;
