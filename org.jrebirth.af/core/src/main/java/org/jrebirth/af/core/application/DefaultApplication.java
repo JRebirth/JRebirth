@@ -7,10 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import org.jrebirth.af.core.exception.CoreRuntimeException;
-import org.jrebirth.af.core.resource.ResourceItem;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.resource.ResourceItem;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
 
 /**
  *
@@ -68,7 +68,7 @@ public class DefaultApplication<P extends Pane> extends AbstractApplication<P> {
      * {@inheritDoc}
      */
     @Override
-    protected List<? extends ResourceItem<?, ?, ?, ?>> getResourceToPreload() {
+    protected List<? extends ResourceItem<?, ?, ?>> getResourceToPreload() {
         return Collections.emptyList();
     }
 

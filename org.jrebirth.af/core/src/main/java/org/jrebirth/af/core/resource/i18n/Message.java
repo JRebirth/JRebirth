@@ -20,6 +20,7 @@ package org.jrebirth.af.core.resource.i18n;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jrebirth.af.api.resource.i18n.MessageParams;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 
 /**

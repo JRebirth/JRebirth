@@ -25,14 +25,14 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.ui.annotation.EnumEventType;
+import org.jrebirth.af.api.ui.annotation.type.Action;
+import org.jrebirth.af.api.ui.annotation.type.Key;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.ui.UIMessages;
-import org.jrebirth.af.core.ui.annotation.EnumEventType;
-import org.jrebirth.af.core.ui.annotation.type.Action;
-import org.jrebirth.af.core.ui.annotation.type.Key;
 import org.jrebirth.af.core.util.ClassUtility;
 
 /**

@@ -1,7 +1,6 @@
 package org.jrebirth.af.core.ui.model.fxml;
 
 import org.jrebirth.af.core.ui.model.AbstractModelTest;
-
 import org.junit.Test;
 
 /**

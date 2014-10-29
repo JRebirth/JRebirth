@@ -30,8 +30,8 @@ import java.util.Locale;
 
 import javafx.application.Application;
 
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**

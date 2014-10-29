@@ -17,8 +17,8 @@
  */
 package org.jrebirth.af.core.ui.fxml;
 
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
 
 /**
  * The interface <strong>DefaultFXMLModel</strong>.

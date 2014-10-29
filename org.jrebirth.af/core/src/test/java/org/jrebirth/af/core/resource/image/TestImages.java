@@ -17,12 +17,10 @@
  */
 package org.jrebirth.af.core.resource.image;
 
-import org.jrebirth.af.core.resource.image.ImageExtension;
-import org.jrebirth.af.core.resource.image.ImageItem;
-import org.jrebirth.af.core.resource.image.RelImage;
-import org.jrebirth.af.core.resource.image.WebImage;
-
 import static org.jrebirth.af.core.resource.Resources.create;
+
+import org.jrebirth.af.api.resource.image.ImageExtension;
+import org.jrebirth.af.api.resource.image.ImageItem;
 
 /**
  * The class <strong>TestColors</strong>.
@@ -43,7 +41,7 @@ public interface TestImages {
 
     /** The local image. */
     ImageItem TEST_LOCAL_IMAGE_3 = create(new RelImage("logo", ImageExtension.PNG));
-    
+
     /** The local image. */
     ImageItem TEST_LOCAL_IMAGE_4 = create(new RelImage("logoBiss", ImageExtension.PNG));
 

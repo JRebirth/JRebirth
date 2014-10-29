@@ -6,9 +6,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageBuilder;
 import javafx.stage.StageStyle;
 
-import org.jrebirth.af.core.command.impl.single.ui.DefaultUIBeanCommand;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveBean;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.core.command.single.ui.DefaultUIBeanCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

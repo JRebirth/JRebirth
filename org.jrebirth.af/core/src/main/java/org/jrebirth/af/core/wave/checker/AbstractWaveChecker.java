@@ -17,8 +17,9 @@
  */
 package org.jrebirth.af.core.wave.checker;
 
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveItem;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.checker.WaveChecker;
+import org.jrebirth.af.core.wave.WaveItemBase;
 
 /**
  * The class <strong>AbstractWaveChecker</strong> is the base class for checker that use a WaveData.
@@ -31,7 +32,7 @@ import org.jrebirth.af.core.wave.WaveItem;
 public abstract class AbstractWaveChecker<I extends Object, V> implements WaveChecker {
 
     /** The wave item used to store the value into a WaveData. */
-    private final WaveItem<I> waveItem;
+    private final WaveItemBase<I> waveItem;
 
     /** The matching value used as a filter by the call method. */
     private final V matchingValue;
@@ -42,7 +43,7 @@ public abstract class AbstractWaveChecker<I extends Object, V> implements WaveCh
      * @param waveItem the wave item
      * @param matchingValue the matching value
      */
-    public AbstractWaveChecker(final WaveItem<I> waveItem, final V matchingValue) {
+    public AbstractWaveChecker(final WaveItemBase<I> waveItem, final V matchingValue) {
         super();
         this.waveItem = waveItem;
         this.matchingValue = matchingValue;
@@ -57,7 +58,7 @@ public abstract class AbstractWaveChecker<I extends Object, V> implements WaveCh
     /**
      * @return Returns the waveItem.
      */
-    protected WaveItem<I> getWaveItem() {
+    protected WaveItemBase<I> getWaveItem() {
         return this.waveItem;
     }
 

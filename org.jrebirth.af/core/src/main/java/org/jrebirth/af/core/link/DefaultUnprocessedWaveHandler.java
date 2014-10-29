@@ -1,7 +1,8 @@
 package org.jrebirth.af.core.link;
 
-import org.jrebirth.af.core.exception.CoreRuntimeException;
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.link.UnprocessedWaveHandler;
+import org.jrebirth.af.api.wave.Wave;
 
 /**
  * The class <strong>DefaultUnprocessedWaveHandler</strong>.

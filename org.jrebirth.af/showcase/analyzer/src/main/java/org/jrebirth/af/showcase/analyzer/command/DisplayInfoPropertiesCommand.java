@@ -17,10 +17,10 @@
  */
 package org.jrebirth.af.showcase.analyzer.command;
 
-import org.jrebirth.af.core.command.impl.single.ui.DefaultUICommand;
-import org.jrebirth.af.core.concurrent.RunInto;
-import org.jrebirth.af.core.concurrent.RunType;
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.concurrent.RunInto;
+import org.jrebirth.af.api.concurrent.RunType;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.command.single.ui.DefaultUICommand;
 
 /**
  * The class <strong>DisplayInfoPropertiesCommand</strong>.

@@ -1,5 +1,8 @@
 package org.jrebirth.af.core.wave;
 
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveListener;
+
 /**
  * The class <strong>DefaultWaveListener</strong> is the default empty implementation.
  *

@@ -19,28 +19,29 @@ package org.jrebirth.af.core.resource;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.jrebirth.af.core.resource.color.ColorItem;
+import org.jrebirth.af.api.resource.ResourceParams;
+import org.jrebirth.af.api.resource.color.ColorItem;
+import org.jrebirth.af.api.resource.color.ColorParams;
+import org.jrebirth.af.api.resource.font.FontItem;
+import org.jrebirth.af.api.resource.font.FontParams;
+import org.jrebirth.af.api.resource.fxml.FXMLItem;
+import org.jrebirth.af.api.resource.fxml.FXMLParams;
+import org.jrebirth.af.api.resource.i18n.MessageItem;
+import org.jrebirth.af.api.resource.image.ImageItem;
+import org.jrebirth.af.api.resource.image.ImageParams;
+import org.jrebirth.af.api.resource.parameter.ParameterItem;
+import org.jrebirth.af.api.resource.style.StyleSheetItem;
+import org.jrebirth.af.api.resource.style.StyleSheetParams;
 import org.jrebirth.af.core.resource.color.ColorItemBase;
-import org.jrebirth.af.core.resource.color.ColorParams;
-import org.jrebirth.af.core.resource.font.FontItem;
 import org.jrebirth.af.core.resource.font.FontItemBase;
-import org.jrebirth.af.core.resource.font.FontParams;
-import org.jrebirth.af.core.resource.fxml.FXMLItem;
 import org.jrebirth.af.core.resource.fxml.FXMLItemBase;
-import org.jrebirth.af.core.resource.fxml.FXMLParams;
 import org.jrebirth.af.core.resource.i18n.Message;
-import org.jrebirth.af.core.resource.i18n.MessageItem;
 import org.jrebirth.af.core.resource.i18n.MessageItemBase;
-import org.jrebirth.af.core.resource.image.ImageItem;
 import org.jrebirth.af.core.resource.image.ImageItemBase;
-import org.jrebirth.af.core.resource.image.ImageParams;
 import org.jrebirth.af.core.resource.parameter.ObjectParameter;
-import org.jrebirth.af.core.resource.parameter.ParameterItem;
 import org.jrebirth.af.core.resource.parameter.ParameterItemBase;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
-import org.jrebirth.af.core.resource.style.StyleSheetItem;
 import org.jrebirth.af.core.resource.style.StyleSheetItemBase;
-import org.jrebirth.af.core.resource.style.StyleSheetParams;
 
 /**
  * The class <strong>Resources</strong> is the first access point when you want to declare a resource for your application.
@@ -95,7 +96,7 @@ public final class Resources {
      */
     public static <O extends Object> ParameterItem<O> create(final ObjectParameter<O> parameterParams) {
         // Ensure that the uid will be unique at runtime
-        return ParameterItemBase.create(parameterParams.object()).uid(parameterIdGenerator.incrementAndGet()).set(parameterParams);
+        return (ParameterItem<O>) ParameterItemBase.create(parameterParams.object()).uid(parameterIdGenerator.incrementAndGet()).set(parameterParams); // FIXME
     }
 
     /**

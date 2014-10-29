@@ -24,39 +24,42 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jrebirth.af.core.annotation.AfterInit;
-import org.jrebirth.af.core.annotation.BeforeInit;
-import org.jrebirth.af.core.annotation.OnRelease;
-import org.jrebirth.af.core.annotation.Releasable;
-import org.jrebirth.af.core.annotation.SkipAnnotation;
-import org.jrebirth.af.core.behavior.Behavior;
-import org.jrebirth.af.core.command.Command;
-import org.jrebirth.af.core.command.CommandBean;
+import org.jrebirth.af.api.annotation.AfterInit;
+import org.jrebirth.af.api.annotation.BeforeInit;
+import org.jrebirth.af.api.annotation.OnRelease;
+import org.jrebirth.af.api.annotation.Releasable;
+import org.jrebirth.af.api.annotation.SkipAnnotation;
+import org.jrebirth.af.api.behavior.Behavior;
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.command.CommandBean;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.exception.JRebirthThreadException;
+import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.facade.JRebirthEventType;
+import org.jrebirth.af.api.inner.IInnerComponent;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.link.Notifier;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.Wave.Status;
+import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.api.wave.WaveData;
+import org.jrebirth.af.api.wave.WaveGroup;
+import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.exception.CoreRuntimeException;
-import org.jrebirth.af.core.exception.JRebirthThreadException;
-import org.jrebirth.af.core.facade.Component;
-import org.jrebirth.af.core.facade.JRebirthEventType;
 import org.jrebirth.af.core.inner.InnerComponent;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.service.Service;
-import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.MultiMap;
 import org.jrebirth.af.core.util.ObjectUtility;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.Wave.Status;
 import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveBean;
-import org.jrebirth.af.core.wave.WaveData;
-import org.jrebirth.af.core.wave.WaveGroup;
-import org.jrebirth.af.core.wave.WaveType;
-import org.jrebirth.af.core.wave.checker.WaveChecker;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  *
@@ -96,7 +99,7 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
     protected Component<?> rootComponent;
 
     /** The map that store inner models loaded. */
-    protected final Map<InnerComponent<?>, Component<?>> innerComponentMap = new IdentityHashMap<>(10);
+    protected final Map<IInnerComponent<?>, Component<?>> innerComponentMap = new IdentityHashMap<>(10);
 
     /**
      * Short cut method used to retrieve the notifier.
@@ -351,7 +354,7 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
      *
      * @return the wave built
      */
-    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveBean waveBean) {
+    private Wave createWave(final WaveGroup waveGroup, final WaveTypeBase waveType, final Class<?> componentClass, final WaveBean waveBean) {
 
         final Wave wave = WaveBase.create()
                                   .waveGroup(waveGroup)
@@ -612,7 +615,7 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
      */
     @SuppressWarnings("unchecked")
     @Override
-    public final <C extends Component<?>> void addInnerComponent(final InnerComponent<C> innerComponent) {
+    public final <C extends Component<?>> void addInnerComponent(final IInnerComponent<C> innerComponent) {
 
         // If the inner model hasn't been loaded before, build it from UIFacade
         if (!this.innerComponentMap.containsKey(innerComponent)) {
@@ -648,7 +651,7 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
      */
     @SuppressWarnings("unchecked")
     @Override
-    public final <C extends Component<?>> C getInnerComponent(final InnerComponent<C> innerModel) {
+    public final <C extends Component<?>> C getInnerComponent(final IInnerComponent<C> innerModel) {
         if (!this.innerComponentMap.containsKey(innerModel)) {
 
             // This InnerModel should be initialized into the initInnerModel method instead

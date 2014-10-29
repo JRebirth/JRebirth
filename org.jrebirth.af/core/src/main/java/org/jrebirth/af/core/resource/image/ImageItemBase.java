@@ -19,6 +19,8 @@ package org.jrebirth.af.core.resource.image;
 
 import javafx.scene.image.Image;
 
+import org.jrebirth.af.api.resource.image.ImageItem;
+import org.jrebirth.af.api.resource.image.ImageParams;
 import org.jrebirth.af.core.resource.AbstractResourceItem;
 
 /**
@@ -26,7 +28,7 @@ import org.jrebirth.af.core.resource.AbstractResourceItem;
  *
  * @author Sébastien Bordes
  */
-public final class ImageItemBase extends AbstractResourceItem<Image, ImageItem, ImageParams, ImageBuilder> implements ImageItem {
+public final class ImageItemBase extends AbstractResourceItem<ImageItem, ImageParams, Image> implements ImageItemReal {
 
     public static ImageItemBase create() {
         return new ImageItemBase();

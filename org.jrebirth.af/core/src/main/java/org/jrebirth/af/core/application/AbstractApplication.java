@@ -35,24 +35,27 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import org.jrebirth.af.api.application.Configuration;
+import org.jrebirth.af.api.application.JRebirthApplication;
+import org.jrebirth.af.api.application.Localized;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.exception.JRebirthThreadException;
+import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.resource.ResourceItem;
+import org.jrebirth.af.api.resource.style.StyleSheetItem;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.exception.handler.DefaultUncaughtExceptionHandler;
 import org.jrebirth.af.core.exception.handler.JatUncaughtExceptionHandler;
 import org.jrebirth.af.core.exception.handler.JitUncaughtExceptionHandler;
 import org.jrebirth.af.core.exception.handler.PoolUncaughtExceptionHandler;
-import org.jrebirth.af.core.facade.Component;
-import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.ResourceBuilders;
-import org.jrebirth.af.core.resource.ResourceItem;
 import org.jrebirth.af.core.resource.provided.JRebirthColors;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.resource.provided.JRebirthStyles;
-import org.jrebirth.af.core.resource.style.StyleSheetItem;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.ClasspathUtility;
 import org.jrebirth.af.modular.ModuleConfigFileParser;
@@ -380,9 +383,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      */
     @Override
     public void preloadResources() {
-        final List<? extends ResourceItem<?, ?, ?, ?>> resourceList = getResourceToPreload();
+        final List<? extends ResourceItem<?, ?, ?>> resourceList = getResourceToPreload();
         if (resourceList != null) {
-            for (final ResourceItem<?, ?, ?, ?> resource : resourceList) {
+            for (final ResourceItem<?, ?, ?> resource : resourceList) {
                 // Access the font to load it and allow it to be used by CSS
                 resource.get();
             }
@@ -440,7 +443,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      *
      * @return the list of {@link ResourceItem} to preload
      */
-    protected abstract List<? extends ResourceItem<?, ?, ?, ?>> getResourceToPreload();
+    protected abstract List<? extends ResourceItem<?, ?, ?>> getResourceToPreload();
 
     /**
      * Customize the default scene.

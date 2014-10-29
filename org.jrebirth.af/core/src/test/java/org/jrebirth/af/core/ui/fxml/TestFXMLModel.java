@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.ui.fxml;
 
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.wave.Wave;
 
 /**
  * The class <strong>TestFXMLModel</strong>. TODO To complete

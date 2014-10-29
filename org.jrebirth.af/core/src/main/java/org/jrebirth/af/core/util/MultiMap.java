@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jrebirth.af.core.concurrent.RunnablePriority;
+import org.jrebirth.af.api.concurrent.RunnablePriority;
 
 public class MultiMap<K, V> implements Map<K, List<V>> {
 

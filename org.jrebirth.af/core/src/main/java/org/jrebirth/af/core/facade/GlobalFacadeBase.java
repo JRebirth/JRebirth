@@ -17,15 +17,19 @@
  */
 package org.jrebirth.af.core.facade;
 
+import org.jrebirth.af.api.application.JRebirthApplication;
+import org.jrebirth.af.api.concurrent.IJRebirthThreadPoolExecutor;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.facade.GlobalFacade;
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.facade.JRebirthEventType;
+import org.jrebirth.af.api.facade.factory.ComponentFactory;
+import org.jrebirth.af.api.link.Notifier;
+import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.application.AbstractApplication;
-import org.jrebirth.af.core.application.JRebirthApplication;
 import org.jrebirth.af.core.concurrent.JRebirthThreadPoolExecutor;
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.facade.factory.ComponentFactory;
 import org.jrebirth.af.core.facade.factory.DefaultComponentFactory;
-import org.jrebirth.af.core.link.Notifier;
 import org.jrebirth.af.core.link.NotifierBase;
-import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 
@@ -73,10 +77,10 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
     private final transient BehaviorFacade behaviorFacade;
 
     /** The default executor. */
-    private final JRebirthThreadPoolExecutor executorService;
+    private final IJRebirthThreadPoolExecutor executorService;
 
     /** The high priority executor used only for most important runnable. */
-    private final JRebirthThreadPoolExecutor highPriorityExecutorService;
+    private final IJRebirthThreadPoolExecutor highPriorityExecutorService;
 
     /** The index of JRebirth events. */
     private int eventSequence;
@@ -212,7 +216,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      * {@inheritDoc}
      */
     @Override
-    public JRebirthThreadPoolExecutor getExecutorService() {
+    public IJRebirthThreadPoolExecutor getExecutorService() {
         return this.executorService;
     }
 
@@ -220,7 +224,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      * {@inheritDoc}
      */
     @Override
-    public JRebirthThreadPoolExecutor getHighPriorityExecutorService() {
+    public IJRebirthThreadPoolExecutor getHighPriorityExecutorService() {
         return this.highPriorityExecutorService;
     }
 

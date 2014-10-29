@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.wave;
 
+import org.jrebirth.af.api.wave.WaveBean;
+
 /**
  * The class <strong>DefaultWaveBean</strong>.
  *

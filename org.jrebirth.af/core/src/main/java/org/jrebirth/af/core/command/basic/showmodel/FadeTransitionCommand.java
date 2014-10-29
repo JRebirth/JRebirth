@@ -26,10 +26,10 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
-import org.jrebirth.af.core.command.impl.single.AbstractSingleCommand;
-import org.jrebirth.af.core.concurrent.RunInto;
-import org.jrebirth.af.core.concurrent.RunType;
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.concurrent.RunInto;
+import org.jrebirth.af.api.concurrent.RunType;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.command.single.AbstractSingleCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

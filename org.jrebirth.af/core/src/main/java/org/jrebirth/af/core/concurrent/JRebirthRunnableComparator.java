@@ -20,6 +20,8 @@ package org.jrebirth.af.core.concurrent;
 import java.io.Serializable;
 import java.util.Comparator;
 
+import org.jrebirth.af.api.concurrent.JRebirthRunnable;
+
 /**
  * The Class JRebirthRunnableComparator.
  */

@@ -19,7 +19,7 @@ package ui;
 
 import javafx.event.ActionEvent;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.ui.adapter.ActionAdapter;
 

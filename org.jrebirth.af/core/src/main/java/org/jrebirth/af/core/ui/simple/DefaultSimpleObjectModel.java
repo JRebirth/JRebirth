@@ -19,7 +19,7 @@ package org.jrebirth.af.core.ui.simple;
 
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.wave.Wave;
 
 /**
  *

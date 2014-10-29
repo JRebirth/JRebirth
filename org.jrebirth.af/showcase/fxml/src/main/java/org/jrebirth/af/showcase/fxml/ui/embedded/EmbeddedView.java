@@ -7,9 +7,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
+import org.jrebirth.af.api.resource.fxml.FXMLItem;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.fxml.FXML;
-import org.jrebirth.af.core.resource.fxml.FXMLItem;
 import org.jrebirth.af.core.ui.DefaultView;
 
 public class EmbeddedView extends DefaultView<EmbeddedModel, AnchorPane, EmbeddedController> {

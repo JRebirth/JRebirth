@@ -1,8 +1,8 @@
 package org.jrebirth.af.core.ui.fxform;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.ui.Controller;
 import org.jrebirth.af.core.ui.AbstractView;
-import org.jrebirth.af.core.ui.Controller;
 
 import com.dooapp.fxform.FXForm;
 

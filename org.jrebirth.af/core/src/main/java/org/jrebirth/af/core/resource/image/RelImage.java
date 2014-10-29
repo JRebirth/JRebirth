@@ -20,6 +20,9 @@ package org.jrebirth.af.core.resource.image;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jrebirth.af.api.resource.image.ImageExtension;
+import org.jrebirth.af.api.resource.image.ImageParams;
+
 /**
  * The interface <strong>LocalImage</strong>.
  *

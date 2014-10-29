@@ -8,15 +8,15 @@ package org.jrebirth.af.core.wave;
 public enum WaveItems implements WaveItemEnum {
 
     /** . */
-    resourceName(new WaveItem<String>() {
+    resourceName(new WaveItemBase<String>() {
     }),
 
     /** . */
-    fieldName(new WaveItem<String>() {
+    fieldName(new WaveItemBase<String>() {
     }),
 
     /** . */
-    name(new WaveItem<String>() {
+    name(new WaveItemBase<String>() {
     });
 
     /**
@@ -24,8 +24,8 @@ public enum WaveItems implements WaveItemEnum {
      *
      * @param wi the wave item to initialize
      */
-    private WaveItems(final WaveItem<?> wi) {
-        WaveItem.initEnum(this, wi);
+    private WaveItems(final WaveItemBase<?> wi) {
+        WaveItemBase.initEnum(this, wi);
     }
 
 }

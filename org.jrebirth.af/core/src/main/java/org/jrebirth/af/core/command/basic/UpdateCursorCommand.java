@@ -3,9 +3,9 @@ package org.jrebirth.af.core.command.basic;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.command.impl.single.ui.DefaultUICommand;
-import org.jrebirth.af.core.exception.CoreRuntimeException;
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.command.single.ui.DefaultUICommand;
 
 public class UpdateCursorCommand extends DefaultUICommand {
 

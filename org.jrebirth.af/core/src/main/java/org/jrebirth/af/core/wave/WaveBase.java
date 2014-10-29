@@ -27,10 +27,17 @@ import java.util.UUID;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-import org.jrebirth.af.core.command.Command;
-import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.api.wave.WaveData;
+import org.jrebirth.af.api.wave.WaveGroup;
+import org.jrebirth.af.api.wave.WaveItem;
+import org.jrebirth.af.api.wave.WaveListener;
+import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.link.LinkMessages;
-import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
@@ -260,7 +267,7 @@ public class WaveBase implements Wave, LinkMessages {
      */
     @Override
     public <T> Wave add(final WaveItem<T> waveItem, final T value) {
-        final WaveData<T> waveData = WaveData.build(waveItem, value);
+        final WaveDataBase<T> waveData = WaveDataBase.build(waveItem, value);
         addDatas(waveData);
         return this;
     }

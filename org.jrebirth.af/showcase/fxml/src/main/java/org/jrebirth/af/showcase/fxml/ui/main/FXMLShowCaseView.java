@@ -9,9 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPaneBuilder;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.AbstractView;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

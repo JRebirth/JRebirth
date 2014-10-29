@@ -24,9 +24,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.wave.WaveBean;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.WaveBean;
 
 /**
  * The class <strong>DisplayModelWaveBean</strong>.

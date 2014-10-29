@@ -1,22 +1,20 @@
 package org.jrebirth.af.core.resource.image;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
 
 import javafx.scene.image.Image;
 
+import org.jrebirth.af.api.resource.image.ImageItem;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 import org.jrebirth.af.core.resource.ResourceBuilders;
-
-import org.jrebirth.af.core.resource.image.ImageItem;
-import org.jrebirth.af.core.resource.image.RelImage;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * The class <strong>ImageTest</strong>.

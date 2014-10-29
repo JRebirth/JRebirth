@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.service;
 
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.wave.Wave;
 
 /**
  * The class <strong>DefaultService</strong>.

@@ -19,7 +19,7 @@ package org.jrebirth.af.showcase.analyzer.ui.editor.ball.facade.command;
 
 import javafx.scene.shape.Circle;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultView;
 
 /**

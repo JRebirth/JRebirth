@@ -36,8 +36,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.CircleBuilder;
 import javafx.util.Duration;
 
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.facade.JRebirthEventType;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.facade.JRebirthEventType;
 import org.jrebirth.af.core.ui.DefaultView;
 import org.jrebirth.af.showcase.analyzer.ui.editor.BallColors;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;

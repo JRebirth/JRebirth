@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.ui.fxml;
 
-import org.jrebirth.af.core.ui.Model;
+import org.jrebirth.af.api.ui.Model;
 
 /**
  * The base class <strong>AbstractFXMLModel</strong>.

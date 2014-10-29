@@ -2,14 +2,13 @@ package org.jrebirth.af.core.command.basic;
 
 import javafx.application.Application;
 
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.Wave.Status;
 import org.jrebirth.af.core.application.TestApplication;
-import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
 import org.jrebirth.af.core.wave.DefaultWaveListener;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.Wave.Status;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

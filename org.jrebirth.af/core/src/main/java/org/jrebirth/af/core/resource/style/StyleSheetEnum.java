@@ -1,5 +1,7 @@
 package org.jrebirth.af.core.resource.style;
 
+import org.jrebirth.af.api.resource.style.StyleSheetItem;
+
 public interface StyleSheetEnum extends StyleSheetItem {
 
     /**

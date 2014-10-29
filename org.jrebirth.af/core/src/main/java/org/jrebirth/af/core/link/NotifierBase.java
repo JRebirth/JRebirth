@@ -23,27 +23,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jrebirth.af.core.command.Command;
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.exception.JRebirthThreadException;
+import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.facade.GlobalFacade;
+import org.jrebirth.af.api.link.Notifier;
+import org.jrebirth.af.api.link.UnprocessedWaveHandler;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.Wave.Status;
+import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean;
 import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
 import org.jrebirth.af.core.concurrent.JRebirth;
-import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.exception.WaveException;
 import org.jrebirth.af.core.facade.AbstractGlobalReady;
-import org.jrebirth.af.core.facade.Component;
-import org.jrebirth.af.core.facade.GlobalFacade;
-import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
-import org.jrebirth.af.core.service.Service;
-import org.jrebirth.af.core.service.ServiceTask;
+import org.jrebirth.af.core.service.ServiceTaskBase;
 import org.jrebirth.af.core.service.basic.TaskTrackerService;
 import org.jrebirth.af.core.wave.JRebirthWaves;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.Wave.Status;
 import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveType;
-import org.jrebirth.af.core.wave.checker.WaveChecker;
 
 /**
  *
@@ -167,7 +169,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             }
         } else {
             // The inner task will be run into the JRebirth Thread Pool
-            final ServiceTask<?> task = service.returnData(wave);
+            final ServiceTaskBase<?> task = (ServiceTaskBase<?>) service.returnData(wave);
             if (task != null && JRebirthParameters.FOLLOW_UP_SERVICE_TASKS.get()) {
                 getGlobalFacade().getServiceFacade().retrieve(TaskTrackerService.class).trackTask(task);
             }

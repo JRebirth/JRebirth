@@ -5,9 +5,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import junit.framework.Assert;
 
+import org.jrebirth.af.api.concurrent.JRebirthRunnable;
+import org.jrebirth.af.api.concurrent.RunnablePriority;
+import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.core.application.ApplicationTest;
-import org.jrebirth.af.core.exception.JRebirthThreadException;
-
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;

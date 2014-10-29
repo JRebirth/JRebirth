@@ -21,7 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.RotateEvent;
 import javafx.scene.input.SwipeEvent;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultController;
 
 /**

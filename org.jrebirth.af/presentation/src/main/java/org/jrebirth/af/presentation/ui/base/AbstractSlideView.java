@@ -19,7 +19,7 @@ package org.jrebirth.af.presentation.ui.base;
 
 import javafx.scene.Parent;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultView;
 
 /**

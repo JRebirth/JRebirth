@@ -2,11 +2,11 @@ package org.jrebirth.af.component.behavior.dockable.data;
 
 import java.io.Serializable;
 
+import org.jrebirth.af.api.behavior.annotation.BehaviorDataFor;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.component.behavior.dockable.DockableBehavior;
-import org.jrebirth.af.core.behavior.annotation.BehaviorDataFor;
-import org.jrebirth.af.core.behavior.data.base.BehaviorDataBase;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.Model;
+import org.jrebirth.af.core.behavior.data.BehaviorDataBase;
 
 @BehaviorDataFor(DockableBehavior.class)
 public class Dockable extends BehaviorDataBase implements Serializable {

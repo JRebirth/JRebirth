@@ -17,10 +17,10 @@
  */
 package org.jrebirth.af.core.wave.checker;
 
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveData;
 import org.jrebirth.af.core.util.ObjectUtility;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveData;
-import org.jrebirth.af.core.wave.WaveItem;
+import org.jrebirth.af.core.wave.WaveItemBase;
 
 /**
  * The class <strong>DefaultWaveChecker</strong> will check if the provided object type is equals to the wave data object defined.
@@ -37,7 +37,7 @@ public class DefaultWaveChecker<I extends Object> extends AbstractWaveChecker<I,
      * @param waveItem the wave item
      * @param matchingValue the matching value
      */
-    public DefaultWaveChecker(final WaveItem<I> waveItem, final I matchingValue) {
+    public DefaultWaveChecker(final WaveItemBase<I> waveItem, final I matchingValue) {
         super(waveItem, matchingValue);
     }
 

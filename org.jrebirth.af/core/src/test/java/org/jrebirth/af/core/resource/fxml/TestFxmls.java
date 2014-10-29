@@ -19,6 +19,8 @@ package org.jrebirth.af.core.resource.fxml;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
+import org.jrebirth.af.api.resource.fxml.FXMLItem;
+
 /**
  * The class <strong>TestColors</strong>.
  *

@@ -28,18 +28,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.scene.control.ProgressBar;
 
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.exception.JRebirthThreadException;
+import org.jrebirth.af.api.facade.JRebirthEventType;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.service.ServiceTask;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveData;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.exception.JRebirthThreadException;
-import org.jrebirth.af.core.facade.JRebirthEventType;
 import org.jrebirth.af.core.link.AbstractBehavioredComponent;
-import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.JRebirthWaves;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveData;
+import org.jrebirth.af.core.wave.WaveDataBase;
 
 /**
  *
@@ -142,13 +145,13 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
         sourceWave.addWaveListener(new ServiceTaskWaveListener());
 
         // Create a new ServiceTask to handle this request and follow progression
-        final ServiceTask<T> task = new ServiceTask<T>(this, method, parameterValues, sourceWave);
+        final ServiceTaskBase<T> task = new ServiceTaskBase<T>(this, method, parameterValues, sourceWave);
 
         // Store the task into the pending map
         this.pendingTasks.put(sourceWave.getWUID(), task);
 
         // Attach ServiceTask to the source wave
-        sourceWave.addDatas(WaveData.build(JRebirthWaves.SERVICE_TASK, task));
+        sourceWave.addDatas(WaveDataBase.build(JRebirthWaves.SERVICE_TASK, task));
 
         // Bind ProgressBar
         if (sourceWave.containsNotNull(JRebirthWaves.PROGRESS_BAR)) { // Check double call
@@ -177,7 +180,7 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
      * @param task the service task that we need to follow the progression
      * @param progressBar graphical progress bar
      */
-    private void bindProgressBar(final ServiceTask<?> task, final ProgressBar progressBar) {
+    private void bindProgressBar(final ServiceTaskBase<?> task, final ProgressBar progressBar) {
 
         // Perform this binding into the JAT to respect widget and task API
         JRebirth.runIntoJAT(new AbstractJrbRunnable("Bind ProgressBar to " + task.getServiceHandlerName()) {

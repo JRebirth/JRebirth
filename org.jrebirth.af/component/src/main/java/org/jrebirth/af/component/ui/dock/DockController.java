@@ -19,7 +19,7 @@ package org.jrebirth.af.component.ui.dock;
 
 import javafx.scene.input.DragEvent;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultController;
 
 /**

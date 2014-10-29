@@ -24,14 +24,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jrebirth.af.core.concurrent.Priority;
-import org.jrebirth.af.core.concurrent.RunnablePriority;
-import org.jrebirth.af.core.facade.JRebirthEvent;
+import org.jrebirth.af.api.concurrent.Priority;
+import org.jrebirth.af.api.concurrent.RunnablePriority;
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.facade.JRebirthEventBase;
 import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.service.ServiceUtility;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.processor.annotation.Register;
 import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;
 import org.slf4j.Logger;

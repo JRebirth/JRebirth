@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.presentation.ui.base;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultController;
 
 /**

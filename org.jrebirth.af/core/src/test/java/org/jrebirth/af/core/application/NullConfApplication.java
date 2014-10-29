@@ -2,7 +2,9 @@ package org.jrebirth.af.core.application;
 
 import javafx.scene.layout.Pane;
 
-import org.jrebirth.af.core.ui.Model;
+import org.jrebirth.af.api.application.Configuration;
+import org.jrebirth.af.api.application.Localized;
+import org.jrebirth.af.api.ui.Model;
 
 /**
  * The class <strong>NullConfApplication</strong>.

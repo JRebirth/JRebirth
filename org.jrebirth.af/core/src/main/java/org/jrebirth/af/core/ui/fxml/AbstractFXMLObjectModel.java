@@ -21,11 +21,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.resource.fxml.FXMLItem;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.NullView;
+import org.jrebirth.af.api.ui.fxml.FXMLController;
+import org.jrebirth.af.api.ui.fxml.FXMLComponent;
 import org.jrebirth.af.core.resource.fxml.FXML;
-import org.jrebirth.af.core.resource.fxml.FXMLItem;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.ui.NullView;
 import org.jrebirth.af.core.ui.object.AbstractObjectModel;
 import org.jrebirth.af.core.wave.JRebirthWaves;
 

@@ -20,14 +20,14 @@ package org.jrebirth.af.core.link;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jrebirth.af.core.command.Command;
-import org.jrebirth.af.core.facade.FacadeReady;
-import org.jrebirth.af.core.facade.JRebirthEventType;
-import org.jrebirth.af.core.facade.LocalFacade;
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.facade.FacadeReady;
+import org.jrebirth.af.api.facade.JRebirthEventType;
+import org.jrebirth.af.api.facade.LocalFacade;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.key.MultitonKey;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.service.Service;
-import org.jrebirth.af.core.ui.Model;
 
 /**
  *

@@ -27,10 +27,11 @@ import javafx.scene.layout.StackPaneBuilder;
 import javafx.stage.Stage;
 import javafx.stage.StageBuilder;
 
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.command.basic.stage.StageWaveBean;
 import org.jrebirth.af.core.service.DefaultService;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveType;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,22 +43,22 @@ import org.slf4j.LoggerFactory;
 public class StageService extends DefaultService {
 
     /** Wave type use to load events. */
-    public static final WaveType DO_OPEN_STAGE = WaveType.create("OPEN_STAGE").returnAction("STAGE_OPENED");
+    public static final WaveType DO_OPEN_STAGE = WaveTypeBase.create("OPEN_STAGE").returnAction("STAGE_OPENED");
 
     /** Wave type to return events loaded. */
-    // public static final WaveTypeBase RE_STAGE_OPENED = WaveType.create("STAGE_OPENED");
+    // public static final WaveType RE_STAGE_OPENED = WaveType.create("STAGE_OPENED");
 
     /** Wave type use to load events. */
-    public static final WaveType DO_CLOSE_STAGE = WaveType.create("CLOSE_STAGE").returnAction("STAGE_CLOSED");
+    public static final WaveType DO_CLOSE_STAGE = WaveTypeBase.create("CLOSE_STAGE").returnAction("STAGE_CLOSED");
 
     /** Wave type to return events loaded. */
-    // public static final WaveTypeBase RE_STAGE_CLOSED = WaveType.create("STAGE_CLOSED");
+    // public static final WaveType RE_STAGE_CLOSED = WaveType.create("STAGE_CLOSED");
 
     /** Wave type use to load events. */
-    public static final WaveType DO_DESTROY_STAGE = WaveType.create("DESTROY_STAGE").returnAction("STAGE_DESTROYED");
+    public static final WaveType DO_DESTROY_STAGE = WaveTypeBase.create("DESTROY_STAGE").returnAction("STAGE_DESTROYED");
 
     /** Wave type to return events loaded. */
-    // public static final WaveTypeBase RE_STAGE_DESTROYED = WaveType.create("STAGE_DESTROYED");
+    // public static final WaveType RE_STAGE_DESTROYED = WaveType.create("STAGE_DESTROYED");
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(StageService.class);

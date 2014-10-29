@@ -25,7 +25,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ProgressBar;
 
-import org.jrebirth.af.core.service.ServiceTask;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.core.service.ServiceTaskBase;
 
 /**
  * The class <strong>JRebirthWaveItem</strong>.
@@ -35,51 +37,51 @@ import org.jrebirth.af.core.service.ServiceTask;
 public interface JRebirthWaves {
 
     /** The waveItem that hold the attached node. */
-    WaveItem<ObjectProperty<Node>> ATTACH_UI_NODE_PLACEHOLDER = new WaveItem<ObjectProperty<Node>>() {
+    WaveItemBase<ObjectProperty<Node>> ATTACH_UI_NODE_PLACEHOLDER = new WaveItemBase<ObjectProperty<Node>>() {
     };
 
     /** The waveItem that hold the children list of the parent node. */
-    WaveItem<ObservableList<Node>> ADD_UI_CHILDREN_PLACEHOLDER = new WaveItem<ObservableList<Node>>() {
+    WaveItemBase<ObservableList<Node>> ADD_UI_CHILDREN_PLACEHOLDER = new WaveItemBase<ObservableList<Node>>() {
     };
 
     /** The waveItem that hold the list of wave to be executed back to back. */
-    WaveItem<List<Wave>> CHAINED_WAVES = new WaveItem<List<Wave>>() {
+    WaveItemBase<List<Wave>> CHAINED_WAVES = new WaveItemBase<List<Wave>>() {
     };
 
     /** The waveItem that indicates if command instance must be reused or if another must created. DEfault value is false. */
-    WaveItem<Boolean> REUSE_COMMAND = new WaveItem<Boolean>() {
+    WaveItemBase<Boolean> REUSE_COMMAND = new WaveItemBase<Boolean>() {
     };
 
     /** . */
-    WaveData<Boolean> REUSE = WaveData.build(REUSE_COMMAND, true);
+    WaveDataBase<Boolean> REUSE = WaveDataBase.build(REUSE_COMMAND, true);
 
     /******************************/
     /** WaveType related to Model */
     /******************************/
 
     /** The waveType used to show a view (start or reload). */
-    WaveType SHOW_VIEW = WaveType.create("SHOW_VIEW");
+    WaveType SHOW_VIEW = WaveTypeBase.create("SHOW_VIEW");
 
     /** The waveType used to hide a view. */
-    WaveType HIDE_VIEW = WaveType.create("HIDE_VIEW");
+    WaveType HIDE_VIEW = WaveTypeBase.create("HIDE_VIEW");
 
     /********************************/
     /** WaveType related to Service */
     /********************************/
 
     /** This wave item will be used only into a WaveData to pass the current Service task handled by the wave. */
-    WaveItem<ServiceTask<?>> SERVICE_TASK = new WaveItem<ServiceTask<?>>(false) {
+    WaveItemBase<ServiceTaskBase<?>> SERVICE_TASK = new WaveItemBase<ServiceTaskBase<?>>(false) {
     };
 
     /** This wave item will be used only into a WaveData to pass the right progress bar used by service task. */
-    WaveItem<ProgressBar> PROGRESS_BAR = new WaveItem<ProgressBar>(false) {
+    WaveItemBase<ProgressBar> PROGRESS_BAR = new WaveItemBase<ProgressBar>(false) {
     };
 
     /** This wave item will be used only into a WaveData to pass the right string property used to display the task title. */
-    WaveItem<StringProperty> TASK_TITLE = new WaveItem<StringProperty>(false) {
+    WaveItemBase<StringProperty> TASK_TITLE = new WaveItemBase<StringProperty>(false) {
     };
 
     /** This wave item will be used only into a WaveData to pass the right string property used to display the task message. */
-    WaveItem<StringProperty> TASK_MESSAGE = new WaveItem<StringProperty>(false) {
+    WaveItemBase<StringProperty> TASK_MESSAGE = new WaveItemBase<StringProperty>(false) {
     };
 }

@@ -1,17 +1,16 @@
 package org.jrebirth.af.core.ui.model;
 
-import org.jrebirth.af.core.test.AbstractTest;
-import org.jrebirth.af.core.ui.AbstractModel;
-import org.jrebirth.af.core.ui.object.AbstractObjectModel;
-
-import org.junit.After;
-import org.junit.Before;
-
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNotSame;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertSame;
+
+import org.jrebirth.af.core.test.AbstractTest;
+import org.jrebirth.af.core.ui.AbstractModel;
+import org.jrebirth.af.core.ui.object.AbstractObjectModel;
+import org.junit.After;
+import org.junit.Before;
 
 /**
  * The class <strong>FxmlTest</strong>.

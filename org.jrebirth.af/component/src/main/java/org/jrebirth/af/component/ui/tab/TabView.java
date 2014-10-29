@@ -35,14 +35,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.ui.annotation.RootNodeClass;
 import org.jrebirth.af.component.behavior.dockable.DockableBehavior;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.ui.beans.TabOrientation;
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.DefaultView;
-import org.jrebirth.af.core.ui.annotation.RootNodeClass;
 
 /**
  * The Class TabView only creates a TabPane like component that will handle Model Components.

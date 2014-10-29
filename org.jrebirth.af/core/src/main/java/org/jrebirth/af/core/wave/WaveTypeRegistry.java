@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.jrebirth.af.api.wave.WaveType;
+
 public class WaveTypeRegistry {
 
     /** The generator of unique id. */

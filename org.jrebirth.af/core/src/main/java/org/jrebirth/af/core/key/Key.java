@@ -19,6 +19,8 @@ package org.jrebirth.af.core.key;
 
 import java.io.Serializable;
 
+import org.jrebirth.af.api.key.UniqueKey;
+
 /**
  * The class <strong>Key</strong> used as a static factory.
  *

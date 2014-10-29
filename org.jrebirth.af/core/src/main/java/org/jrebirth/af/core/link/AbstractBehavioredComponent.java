@@ -17,13 +17,13 @@
  */
 package org.jrebirth.af.core.link;
 
-import org.jrebirth.af.core.annotation.SkipAnnotation;
-import org.jrebirth.af.core.behavior.Behavior;
-import org.jrebirth.af.core.behavior.data.BehaviorData;
-import org.jrebirth.af.core.facade.BehavioredComponent;
+import org.jrebirth.af.api.annotation.SkipAnnotation;
+import org.jrebirth.af.api.behavior.Behavior;
+import org.jrebirth.af.api.behavior.data.BehaviorData;
+import org.jrebirth.af.api.facade.BehavioredComponent;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.key.Key;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.MultiMap;
 

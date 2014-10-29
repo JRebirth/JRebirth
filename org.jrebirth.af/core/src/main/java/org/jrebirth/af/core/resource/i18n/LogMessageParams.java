@@ -1,6 +1,7 @@
 package org.jrebirth.af.core.resource.i18n;
 
-import org.jrebirth.af.core.log.JRLevel;
+import org.jrebirth.af.api.log.JRLevel;
+import org.jrebirth.af.api.resource.i18n.MessageParams;
 import org.slf4j.Marker;
 
 /**

@@ -19,6 +19,8 @@ package org.jrebirth.af.core.resource.color;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
+import org.jrebirth.af.api.resource.color.ColorItem;
+
 /**
  * The class <strong>TestColors</strong>.
  *

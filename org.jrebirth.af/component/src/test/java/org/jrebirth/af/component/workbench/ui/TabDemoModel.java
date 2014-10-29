@@ -3,6 +3,8 @@ package org.jrebirth.af.component.workbench.ui;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.command.tab.AddTabCommand;
 import org.jrebirth.af.component.command.tab.TabWaveBean;
@@ -12,8 +14,7 @@ import org.jrebirth.af.component.ui.beans.TabConfig;
 import org.jrebirth.af.component.ui.beans.TabOrientation;
 import org.jrebirth.af.component.ui.dock.DockModel;
 import org.jrebirth.af.component.ui.tab.TabModel;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.Model;
+import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.ui.simple.DefaultSimpleModel;
 
 public class TabDemoModel extends DefaultSimpleModel<BorderPane> {
@@ -55,25 +56,25 @@ public class TabDemoModel extends DefaultSimpleModel<BorderPane> {
         // topSplit.getItems().addAll(topLeft.getRootNode(), topRight.getRootNode());
         // bottomSplit.getItems().addAll(bottomRight.getRootNode(), bottomLeft.getRootNode());
 
-        addTabWithCommand(topLeft.getObject(), UniqueKey.key(DockableModel.class, "Tab1"));
-        addTabWithCommand(topLeft.getObject(), UniqueKey.key(DockableModel.class, "Tab2"));
-        addTabWithCommand(topLeft.getObject(), UniqueKey.key(DockableModel.class, "Tab3"));
-        addTabWithCommand(topLeft.getObject(), UniqueKey.key(DockableModel.class, "Tab4"));
-        addTabWithCommand(topLeft.getObject(), UniqueKey.key(DockableModel.class, "Tab5"));
-        addTabWithCommand(topLeft.getObject(), UniqueKey.key(DockableModel.class, "Tab6"));
+        addTabWithCommand(topLeft.getObject(), Key.create(DockableModel.class, "Tab1"));
+        addTabWithCommand(topLeft.getObject(), Key.create(DockableModel.class, "Tab2"));
+        addTabWithCommand(topLeft.getObject(), Key.create(DockableModel.class, "Tab3"));
+        addTabWithCommand(topLeft.getObject(), Key.create(DockableModel.class, "Tab4"));
+        addTabWithCommand(topLeft.getObject(), Key.create(DockableModel.class, "Tab5"));
+        addTabWithCommand(topLeft.getObject(), Key.create(DockableModel.class, "Tab6"));
 
-        addTabWithCommand(topRight.getObject(), UniqueKey.key(DockableModel.class, "Tab7"));
-        addTabWithCommand(topRight.getObject(), UniqueKey.key(DockableModel.class, "Tab8"));
-        addTabWithCommand(topRight.getObject(), UniqueKey.key(DockableModel.class, "Tab9"));
+        addTabWithCommand(topRight.getObject(), Key.create(DockableModel.class, "Tab7"));
+        addTabWithCommand(topRight.getObject(), Key.create(DockableModel.class, "Tab8"));
+        addTabWithCommand(topRight.getObject(), Key.create(DockableModel.class, "Tab9"));
 
-        addTabWithCommand(bottomRight.getObject(), UniqueKey.key(DockableModel.class, "Tab10"));
-        addTabWithCommand(bottomRight.getObject(), UniqueKey.key(DockableModel.class, "Tab11"));
-        addTabWithCommand(bottomRight.getObject(), UniqueKey.key(DockableModel.class, "Tab12"));
-        addTabWithCommand(bottomRight.getObject(), UniqueKey.key(DockableModel.class, "Tab13"));
-        addTabWithCommand(bottomRight.getObject(), UniqueKey.key(DockableModel.class, "Tab14"));
+        addTabWithCommand(bottomRight.getObject(), Key.create(DockableModel.class, "Tab10"));
+        addTabWithCommand(bottomRight.getObject(), Key.create(DockableModel.class, "Tab11"));
+        addTabWithCommand(bottomRight.getObject(), Key.create(DockableModel.class, "Tab12"));
+        addTabWithCommand(bottomRight.getObject(), Key.create(DockableModel.class, "Tab13"));
+        addTabWithCommand(bottomRight.getObject(), Key.create(DockableModel.class, "Tab14"));
 
-        addTabWithCommand(bottomLeft.getObject(), UniqueKey.key(DockableModel.class, "Tab15"));
-        addTabWithCommand(bottomLeft.getObject(), UniqueKey.key(DockableModel.class, "Tab16"));
+        addTabWithCommand(bottomLeft.getObject(), Key.create(DockableModel.class, "Tab15"));
+        addTabWithCommand(bottomLeft.getObject(), Key.create(DockableModel.class, "Tab16"));
 
     }
 

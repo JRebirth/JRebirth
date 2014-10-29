@@ -27,6 +27,10 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
+import org.jrebirth.af.api.resource.builder.ResourceBuilder;
+import org.jrebirth.af.api.resource.i18n.MessageItem;
+import org.jrebirth.af.api.resource.i18n.MessageParams;
+import org.jrebirth.af.api.resource.i18n.MessageResource;
 import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
@@ -41,7 +45,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Sébastien Bordes
  */
-public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, MessageParams, MessageResource> {
+public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, MessageParams, MessageResource> implements ResourceBuilder<MessageItem, MessageParams, MessageResource> {
 
     /**
      * The class logger.
@@ -166,10 +170,10 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
 
             if (messageParams instanceof LogMessageParams) {
                 // Use default log marker and log level
-                messageResource = new MessageResource(rawMessage, ((LogMessageParams) messageParams).marker(), ((LogMessageParams) messageParams).level());
+                messageResource = new MessageResourceBase(rawMessage, ((LogMessageParams) messageParams).marker(), ((LogMessageParams) messageParams).level());
             } else {
                 // Just convert the code into message
-                messageResource = new MessageResource(rawMessage);
+                messageResource = new MessageResourceBase(rawMessage);
             }
         }
 

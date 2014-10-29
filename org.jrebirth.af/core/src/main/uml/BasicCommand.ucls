@@ -1,213 +1,188 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+<class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <package id="1" language="java" name="org.jrebirth.core.command.basic" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic" binary="false" corner="BOTTOM_RIGHT">    
+  <package id="1" language="java" name="org.jrebirth.af.core.command.basic" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="85" y="50"/>    
     <display autosize="true" stereotype="false" accessors="true"/>  
   </package>  
-  <class id="2" language="java" name="org.jrebirth.core.command.basic.ShowErrorDialog" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/ShowErrorDialog.java" binary="false" 
+  <class id="2" language="java" name="org.jrebirth.af.core.command.basic.ShowErrorDialog" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/ShowErrorDialog.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="69" width="124" x="56" y="101"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="org.jrebirth.core.command.basic.SwitchFullScreenCommand" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/SwitchFullScreenCommand.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="org.jrebirth.af.core.command.basic.SwitchFullScreenCommand" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/SwitchFullScreenCommand.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="69" width="181" x="220" y="101"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="org.jrebirth.core.command.basic.ChainWaveCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/ChainWaveCommand.java" binary="false" 
+  <class id="4" language="java" name="org.jrebirth.af.core.command.basic.ChainWaveCommand" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/ChainWaveCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="213" width="165" x="441" y="101"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="org.jrebirth.core.command.basic.ChainServiceCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/ChainServiceCommand.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="org.jrebirth.af.core.command.basic.ChainServiceCommand" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/ChainServiceCommand.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="213" width="165" x="646" y="101"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <package id="6" language="java" name="org.jrebirth.core.command.basic.stage" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/stage" binary="false" corner="BOTTOM_RIGHT">    
+  <package id="6" language="java" name="org.jrebirth.af.core.command.basic.stage" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/stage" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="99" y="372"/>    
     <display autosize="true" stereotype="false" accessors="true"/>  
   </package>  
-  <package id="7" language="java" name="org.jrebirth.core.command.basic.showmodel" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel" binary="false" 
+  <package id="7" language="java" name="org.jrebirth.af.core.command.basic.showmodel" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="133" y="798"/>    
     <display autosize="true" stereotype="false" accessors="true"/>  
   </package>  
-  <enumeration id="8" language="java" name="org.jrebirth.core.command.basic.stage.StageAction" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/stage/StageAction.java" binary="false" 
+  <enumeration id="8" language="java" name="org.jrebirth.af.core.command.basic.stage.StageAction" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/stage/StageAction.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="701" y="480"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="9" language="java" name="org.jrebirth.core.command.basic.stage.StageWaveBean" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/stage/StageWaveBean.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="org.jrebirth.af.core.command.basic.stage.StageWaveBean" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/stage/StageWaveBean.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="409" y="561"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="org.jrebirth.core.command.basic.stage.StageCommand" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/stage/StageCommand.java" binary="false" 
+  <class id="10" language="java" name="org.jrebirth.af.core.command.basic.stage.StageCommand" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/stage/StageCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="97" y="471"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="org.jrebirth.core.command.basic.stage.StageWaveBuilder" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/stage/StageWaveBuilder.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="995" y="489"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
-    </display>  
-  </class>  
-  <class id="12" language="java" name="org.jrebirth.core.command.basic.showmodel.DisplayModelWaveBean" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/DisplayModelWaveBean.java" 
+  <class id="11" language="java" name="org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/DisplayModelWaveBean.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="178" y="1046"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="org.jrebirth.core.command.basic.showmodel.FadeTransitionCommand" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/FadeTransitionCommand.java" 
+  <class id="12" language="java" name="org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/FadeTransitionCommand.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="438" y="938"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="org.jrebirth.core.command.basic.showmodel.PrepareModelCommand" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/PrepareModelCommand.java" 
+  <class id="13" language="java" name="org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/PrepareModelCommand.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="974" y="938"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="org.jrebirth.core.command.basic.showmodel.AttachModelCommand" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/AttachModelCommand.java" 
+  <class id="14" language="java" name="org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/AttachModelCommand.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="672" y="882"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="org.jrebirth.core.command.basic.showmodel.ShowModelCommand" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/ShowModelCommand.java" 
+  <class id="15" language="java" name="org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/ShowModelCommand.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1213" y="929"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="org.jrebirth.core.command.basic.showmodel.DetachModelCommand" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/DetachModelCommand.java" 
+  <class id="16" language="java" name="org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/DetachModelCommand.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="679" y="983"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="org.jrebirth.core.command.basic.showmodel.ShowModelWaveBuilder" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/ShowModelWaveBuilder.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1092" y="1107"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
-    </display>  
-  </class>  
-  <class id="19" language="java" name="org.jrebirth.core.command.basic.showmodel.ShowFadingModelCommand" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/ShowFadingModelCommand.java" 
+  <class id="17" language="java" name="org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/ShowFadingModelCommand.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="438" y="1034"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <association id="20">    
+  <association id="18">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="21" name="action"/>      
-      <multiplicity id="22" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="23">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="24" name="action"/>      
-      <multiplicity id="25" minimum="0" maximum="1"/>    
+      <attribute id="19" name="action"/>      
+      <multiplicity id="20" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
-    <attributes public="true" package="true" protected="true" private="false"/>    
-    <operations public="true" package="true" protected="true" private="false"/>  
+    <attributes public="true" package="true" protected="true" private="false" static="true"/>    
+    <operations public="true" package="true" protected="true" private="false" static="true"/>  
   </classifier-display>  
   <association-display labels="true" multiplicity="true"/>
 </class-diagram>

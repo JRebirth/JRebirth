@@ -27,7 +27,10 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.api.concurrent.IJRebirthThreadPoolExecutor;
+import org.jrebirth.af.api.concurrent.JRebirthRunnable;
+import org.jrebirth.af.api.concurrent.RunnablePriority;
+import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
@@ -36,7 +39,7 @@ import org.jrebirth.af.core.log.JRLoggerFactory;
  *
  * @author Sébastien Bordes
  */
-public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements ConcurrentMessages {
+public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements IJRebirthThreadPoolExecutor, ConcurrentMessages {
 
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(JRebirthThreadPoolExecutor.class);

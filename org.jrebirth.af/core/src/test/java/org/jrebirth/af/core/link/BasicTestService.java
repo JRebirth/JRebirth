@@ -22,11 +22,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveItem;
-import org.jrebirth.af.core.wave.WaveType;
-
+import org.jrebirth.af.core.wave.WaveItemBase;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,18 +38,18 @@ import org.slf4j.LoggerFactory;
 public class BasicTestService extends DefaultService {
 
     /** The file containing all events serialized. */
-    public static final WaveItem<List<String>> STRINGS = new WaveItem<List<String>>() {
+    public static final WaveItemBase<List<String>> STRINGS = new WaveItemBase<List<String>>() {
     };
 
     /** The file containing all events serialized. */
-    public static final WaveItem<Set<String>> SUBSTRINGS = new WaveItem<Set<String>>() {
+    public static final WaveItemBase<Set<String>> SUBSTRINGS = new WaveItemBase<Set<String>>() {
     };
 
     /** Wave type use to load events. */
-    public static final WaveType DO_JOB = WaveType.create("PERFORM_JOB").items(STRINGS).returnAction("JOB_PERFORMED").returnItem(SUBSTRINGS);
+    public static final WaveType DO_JOB = WaveTypeBase.create("PERFORM_JOB").items(STRINGS).returnAction("JOB_PERFORMED").returnItem(SUBSTRINGS);
 
     /** Wave type to return events loaded. */
-    // public static final WaveTypeBase RE_JOB_DONE = WaveType.create("JOB_PERFORMED", SUBSTRINGS);
+    // public static final WaveType RE_JOB_DONE = WaveType.create("JOB_PERFORMED", SUBSTRINGS);
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(BasicTestService.class);

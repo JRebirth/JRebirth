@@ -20,8 +20,8 @@ package org.jrebirth.af.showcase.undoredo;
 import javafx.application.Application;
 import javafx.scene.layout.StackPane;
 
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.application.DefaultApplication;
-import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.showcase.undoredo.ui.UndoModel;
 
 /**

@@ -17,9 +17,9 @@
  */
 package org.jrebirth.af.core.wave.checker;
 
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveData;
-import org.jrebirth.af.core.wave.WaveItem;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveData;
+import org.jrebirth.af.core.wave.WaveItemBase;
 
 /**
  * The class <strong>ClassWaveChecker</strong> will check if the provided type is assignable from the wave data defined.
@@ -36,7 +36,7 @@ public class ClassWaveChecker<I extends Object> extends AbstractWaveChecker<I, C
      * @param waveItem the wave item
      * @param matchingValue the matching value
      */
-    public ClassWaveChecker(final WaveItem<I> waveItem, final Class<I> matchingValue) {
+    public ClassWaveChecker(final WaveItemBase<I> waveItem, final Class<I> matchingValue) {
         super(waveItem, matchingValue);
     }
 

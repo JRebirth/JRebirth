@@ -17,7 +17,9 @@
  */
 package org.jrebirth.af.core.ui;
 
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.View;
+import org.jrebirth.af.api.wave.Wave;
 
 /**
  *

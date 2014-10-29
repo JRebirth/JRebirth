@@ -19,7 +19,7 @@ package org.jrebirth.af.core.resource.provided;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
-import org.jrebirth.af.core.resource.style.StyleSheetItem;
+import org.jrebirth.af.api.resource.style.StyleSheetItem;
 
 /**
  * The class <strong>JRebirthStyles</strong>.

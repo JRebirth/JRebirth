@@ -1,16 +1,15 @@
 package org.jrebirth.af.core.facade;
 
+import static junit.framework.Assert.assertNotNull;
+
 import org.jrebirth.af.core.application.TestApplication;
 import org.jrebirth.af.core.command.basic.SwitchFullScreenCommand;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static junit.framework.Assert.assertNotNull;
 
 /**
  * The class <strong>FacadeTest</strong>.

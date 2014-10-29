@@ -1,15 +1,15 @@
 package org.jrebirth.af.component.command.dock;
 
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.component.ui.beans.TabConfig;
 import org.jrebirth.af.component.ui.dock.DockModel;
 import org.jrebirth.af.component.ui.tab.TabModel;
-import org.jrebirth.af.core.command.impl.single.syncro.DefaultBeanCommand;
+import org.jrebirth.af.core.command.single.internal.DefaultBeanCommand;
 import org.jrebirth.af.core.exception.CommandException;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveData;
+import org.jrebirth.af.core.wave.WaveDataBase;
 
 public class AddDockCommand extends DefaultBeanCommand<DockWaveBean> {
 
@@ -49,7 +49,7 @@ public class AddDockCommand extends DefaultBeanCommand<DockWaveBean> {
         sendWave(WaveBase.create()
                 .waveType(TabModel.ADD)
                 .componentClass(TabModel.class)
-                .addDatas(WaveData.build(DockModel.DOCK_KEY, getWaveBean(wave).dockHolderKey())
+                .addDatas(WaveDataBase.build(DockModel.DOCK_KEY, getWaveBean(wave).dockHolderKey())
                 // ,
                 // WaveData.build(DockModel.MODEL, model )
                 ));

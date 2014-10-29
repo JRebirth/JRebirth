@@ -17,7 +17,8 @@
  */
 package org.jrebirth.af.core.facade;
 
-import org.jrebirth.af.core.service.Service;
+import org.jrebirth.af.api.facade.GlobalFacade;
+import org.jrebirth.af.api.service.Service;
 
 /**
  *

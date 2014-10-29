@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.resource.fxml;
 
-public interface FXMLEnum extends FXMLItem {
+public interface FXMLEnum extends FXMLItemReal {
 
     default void fxml(final String fxmlPath, final String fxmlName, final String bundlePath, final String bundleName) {
         set(new FXML(fxmlPath, fxmlName, bundlePath, bundleName));

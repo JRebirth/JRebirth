@@ -1,11 +1,14 @@
 package org.jrebirth.af.core.resource;
 
+import org.jrebirth.af.api.resource.ResourceItem;
+import org.jrebirth.af.api.resource.ResourceParams;
+
 /**
  * The class <strong>AbstractResourceItem</strong>.
  *
  * @author Sébastien Bordes
  */
-public abstract class AbstractResourceItem<R, I, P extends ResourceParams, B> implements ResourceItem<R, I, P, B> {
+public abstract class AbstractResourceItem<I, P extends ResourceParams, R> implements ResourceItem<I, P, R> {
 
     /** The unique identifier of the font item. */
     private int uid;

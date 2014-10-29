@@ -19,12 +19,12 @@ package org.jrebirth.af.core.link;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
-import org.jrebirth.af.core.log.JRLevel;
+import org.jrebirth.af.api.log.JRLevel;
+import org.jrebirth.af.api.resource.i18n.MessageItem;
 import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.i18n.LogMessage;
 import org.jrebirth.af.core.resource.i18n.Message;
 import org.jrebirth.af.core.resource.i18n.MessageContainer;
-import org.jrebirth.af.core.resource.i18n.MessageItem;
 
 /**
  * The class <strong>LinkMessages</strong>.
@@ -43,7 +43,7 @@ public interface LinkMessages extends MessageContainer {
     /** "Wave Lost [{1}]:  {0}". */
     MessageItem WAVE_LOST_CONTEXT = create(new Message("jrebirth.link.waveLostContext"));
 
-    /** AbstractWaveReady. */
+    /** AbstractComponent. */
 
     /** "Listen {0} by {1}". */
     MessageItem LISTEN_WAVE_TYPE = create(new Message("jrebirth.link.listenWaveType"));

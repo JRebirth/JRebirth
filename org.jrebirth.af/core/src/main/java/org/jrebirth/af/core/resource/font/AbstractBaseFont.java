@@ -22,6 +22,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+import org.jrebirth.af.api.resource.font.FontName;
+import org.jrebirth.af.api.resource.font.FontParams;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 
 /**

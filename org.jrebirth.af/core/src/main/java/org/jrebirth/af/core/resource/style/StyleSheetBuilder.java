@@ -21,6 +21,9 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
+import org.jrebirth.af.api.resource.builder.ResourceBuilder;
+import org.jrebirth.af.api.resource.style.StyleSheetItem;
+import org.jrebirth.af.api.resource.style.StyleSheetParams;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
@@ -34,7 +37,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Sébastien Bordes
  */
-public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetItem, StyleSheetParams, URL> {
+public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetItem, StyleSheetParams, URL> implements ResourceBuilder<StyleSheetItem, StyleSheetParams, URL> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(StyleSheetBuilder.class);

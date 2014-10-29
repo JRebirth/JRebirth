@@ -17,8 +17,11 @@
  */
 package org.jrebirth.af.core.resource.fxml;
 
+import org.jrebirth.af.api.resource.builder.ResourceBuilder;
+import org.jrebirth.af.api.resource.fxml.FXMLItem;
+import org.jrebirth.af.api.resource.fxml.FXMLParams;
+import org.jrebirth.af.api.ui.fxml.FXMLComponent;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
-import org.jrebirth.af.core.ui.fxml.FXMLComponent;
 import org.jrebirth.af.core.ui.fxml.FXMLUtils;
 
 /**
@@ -28,7 +31,7 @@ import org.jrebirth.af.core.ui.fxml.FXMLUtils;
  *
  * @author Sébastien Bordes
  */
-public final class FXMLBuilder extends AbstractResourceBuilder<FXMLItem, FXMLParams, FXMLComponent> {
+public final class FXMLBuilder extends AbstractResourceBuilder<FXMLItem, FXMLParams, FXMLComponent> implements ResourceBuilder<FXMLItem, FXMLParams, FXMLComponent> {
 
     /** The class logger. */
     // private static final Logger LOGGER = LoggerFactory.getLogger(FXMLBuilder.class);

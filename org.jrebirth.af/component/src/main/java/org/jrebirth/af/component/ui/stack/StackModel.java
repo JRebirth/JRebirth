@@ -17,12 +17,12 @@
  */
 package org.jrebirth.af.component.ui.stack;
 
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean;
 import org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand;
-import org.jrebirth.af.core.key.UniqueKey;
 import org.jrebirth.af.core.ui.DefaultModel;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.checker.ClassWaveChecker;
 import org.jrebirth.af.core.wave.checker.DefaultWaveChecker;
 import org.slf4j.Logger;

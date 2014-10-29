@@ -19,6 +19,8 @@ package org.jrebirth.af.core.facade;
 
 import java.util.StringTokenizer;
 
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.facade.JRebirthEventType;
 import org.jrebirth.af.core.util.ClassUtility;
 
 /**

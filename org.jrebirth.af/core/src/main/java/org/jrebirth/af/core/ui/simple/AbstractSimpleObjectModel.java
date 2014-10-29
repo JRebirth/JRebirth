@@ -19,11 +19,11 @@ package org.jrebirth.af.core.ui.simple;
 
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.ui.NullView;
-import org.jrebirth.af.core.ui.annotation.RootNodeClass;
-import org.jrebirth.af.core.ui.annotation.RootNodeId;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.NullView;
+import org.jrebirth.af.api.ui.annotation.RootNodeClass;
+import org.jrebirth.af.api.ui.annotation.RootNodeId;
 import org.jrebirth.af.core.ui.object.AbstractObjectModel;
 import org.jrebirth.af.core.util.ClassUtility;
 

@@ -21,8 +21,9 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.jrebirth.af.core.resource.ResourceItem;
-import org.jrebirth.af.core.resource.ResourceParams;
+import org.jrebirth.af.api.resource.ResourceItem;
+import org.jrebirth.af.api.resource.ResourceParams;
+import org.jrebirth.af.api.resource.builder.ResourceBuilder;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 
@@ -37,7 +38,7 @@ import org.jrebirth.af.core.resource.provided.JRebirthParameters;
  * @param <P> The params type
  * @param <R> The resource managed
  */
-public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?, ?>, P extends ResourceParams, R> implements ResourceBuilder<I, P, R> {
+public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P extends ResourceParams, R> implements ResourceBuilder<I, P, R> {
 
     /** The resource weak Map. */
     private final Map<I, P> paramsMap = new WeakHashMap<I, P>();

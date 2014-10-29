@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.facade;
 
+import org.jrebirth.af.api.facade.GlobalFacade;
+import org.jrebirth.af.api.facade.GlobalReady;
+
 /**
  * The class <strong>AbstractGlobalReady</strong>.
  *

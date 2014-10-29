@@ -17,9 +17,9 @@
  */
 package org.jrebirth.af.presentation.resources;
 
+import org.jrebirth.af.api.resource.image.ImageExtension;
+import org.jrebirth.af.api.resource.image.ImageItem;
 import org.jrebirth.af.core.resource.Resources;
-import org.jrebirth.af.core.resource.image.ImageExtension;
-import org.jrebirth.af.core.resource.image.ImageItem;
 import org.jrebirth.af.core.resource.image.RelImage;
 
 /**

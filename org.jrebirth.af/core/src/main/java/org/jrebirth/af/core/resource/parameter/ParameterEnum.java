@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.resource.parameter;
 
-public interface ParameterEnum extends ParameterItem {
+public interface ParameterEnum extends ParameterItemReal {
 
     /**
      * Default Constructor.

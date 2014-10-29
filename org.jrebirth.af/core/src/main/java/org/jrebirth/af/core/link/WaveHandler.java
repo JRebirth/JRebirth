@@ -22,23 +22,23 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jrebirth.af.api.concurrent.JRebirthRunnable;
+import org.jrebirth.af.api.concurrent.RunInto;
+import org.jrebirth.af.api.concurrent.RunType;
+import org.jrebirth.af.api.concurrent.RunnablePriority;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.exception.JRebirthThreadException;
+import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveData;
+import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
-import org.jrebirth.af.core.concurrent.JRebirthRunnable;
-import org.jrebirth.af.core.concurrent.RunInto;
-import org.jrebirth.af.core.concurrent.RunType;
-import org.jrebirth.af.core.concurrent.RunnablePriority;
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.exception.WaveException;
-import org.jrebirth.af.core.facade.Component;
-import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.util.ClassUtility;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveData;
-import org.jrebirth.af.core.wave.checker.WaveChecker;
 
 /**
  * The class <strong>WaveHandler</strong> is used to define how to manage a Wave for wave type subscribers.

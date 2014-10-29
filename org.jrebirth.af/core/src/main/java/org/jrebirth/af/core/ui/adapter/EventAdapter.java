@@ -31,9 +31,9 @@ import javafx.scene.input.TouchEvent;
 import javafx.scene.input.ZoomEvent;
 import javafx.stage.WindowEvent;
 
+import org.jrebirth.af.api.resource.i18n.MessageItem;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.i18n.Message;
-import org.jrebirth.af.core.resource.i18n.MessageItem;
 import org.jrebirth.af.core.ui.handler.ActionHandler;
 import org.jrebirth.af.core.ui.handler.DragHandler;
 import org.jrebirth.af.core.ui.handler.KeyHandler;

@@ -19,10 +19,10 @@ package org.jrebirth.af.component.ui.stack;
 
 import javafx.scene.layout.StackPane;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.ui.annotation.RootNodeClass;
 import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.ui.DefaultView;
-import org.jrebirth.af.core.ui.annotation.RootNodeClass;
 
 /**
  * The Class StackView only creates a StackPane.

@@ -23,6 +23,8 @@ import java.util.List;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
+import org.jrebirth.af.api.resource.font.FontName;
+
 /**
  * The interface <strong>RealFont</strong>.
  *

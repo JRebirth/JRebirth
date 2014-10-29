@@ -5,16 +5,14 @@ import java.util.List;
 
 import javafx.scene.Cursor;
 import javafx.scene.layout.BorderPane;
-
 import junit.framework.Assert;
 
+import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.core.application.TestApplication;
-import org.jrebirth.af.core.command.Command;
 import org.jrebirth.af.core.command.basic.SwitchFullScreenCommand;
 import org.jrebirth.af.core.command.basic.UpdateCursorCommand;
 import org.jrebirth.af.core.facade.CommandFacade;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

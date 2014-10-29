@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.ui.model;
 
-import org.jrebirth.af.core.key.KeyGenerator;
+import org.jrebirth.af.api.key.KeyGenerator;
 
 @KeyGenerator(value = "getName")
 public class ModelBean {

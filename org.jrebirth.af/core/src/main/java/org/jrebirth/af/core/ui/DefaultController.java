@@ -17,7 +17,9 @@
  */
 package org.jrebirth.af.core.ui;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.View;
 
 /**
  * The class <strong>DefaultController</strong>.

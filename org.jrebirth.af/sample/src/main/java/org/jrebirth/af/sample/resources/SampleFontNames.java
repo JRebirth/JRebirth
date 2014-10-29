@@ -1,6 +1,6 @@
 package org.jrebirth.af.sample.resources;
 
-import org.jrebirth.af.core.resource.font.FontName;
+import org.jrebirth.af.api.resource.font.FontName;
 
 /**
  * The class <strong>SampleFontNames</strong>.

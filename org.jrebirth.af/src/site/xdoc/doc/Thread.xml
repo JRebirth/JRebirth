@@ -190,19 +190,19 @@
 				<h4>Launch a runnable into JAT</h4>
 				<macro name="include">
 					<param name="highlight-theme" value="eclipse" />
-					<param name="source" value="core/src/main/java/org/jrebirth/af/core/link/AbstractWaveReady.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/link/AbstractComponent.java" />
 					<param name="snippet" value="re:callCommand" />
 				</macro>
 
 				<h4>Launch a runnable into JIT</h4>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/af/core/link/AbstractWaveReady.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/link/AbstractComponent.java" />
 					<param name="snippet" value="re:callCommand" />
 				</macro>
 
 				<h4>Launch a runnable into JTP</h4>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/af/core/link/AbstractWaveReady.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/link/AbstractComponent.java" />
 					<param name="snippet" value="re:callCommand" />
 				</macro>
 

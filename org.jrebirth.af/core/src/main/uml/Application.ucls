@@ -1,205 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+<class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <interface id="1" language="java" name="org.jrebirth.core.application.JRebirthApplication" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/JRebirthApplication.java" binary="false" 
+  <interface id="1" language="java" name="org.jrebirth.af.api.application.JRebirthApplication" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/application/JRebirthApplication.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="364" y="115"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="2" language="java" name="org.jrebirth.core.application.AbstractApplication" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java" binary="false" 
+  <class id="2" language="java" name="org.jrebirth.af.core.application.AbstractApplication" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="359" y="501"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="3" language="java" name="org.jrebirth.core.facade.GlobalFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/GlobalFacade.java" binary="false" 
+  <interface id="3" language="java" name="org.jrebirth.af.api.facade.GlobalFacade" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/facade/GlobalFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="761" y="314"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="false" package="false" protected="false" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="4" language="java" name="org.jrebirth.core.concurrent.JRebirthThread" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java" binary="false" 
+  <class id="4" language="java" name="org.jrebirth.af.core.concurrent.JRebirthThread" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="761" y="115"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false"/>      
-      <operations public="false" package="false" protected="false" private="false"/>    
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <package id="5" language="java" name="org.jrebirth.core.application" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application" binary="false" corner="BOTTOM_RIGHT">    
+  <package id="5" language="java" name="org.jrebirth.af.core.application" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/application" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="95" y="30"/>    
     <display autosize="true" stereotype="false" accessors="true"/>  
   </package>  
-  <class id="6" language="java" name="javafx.application.Application" project="org.jrebirth.core" 
-    file="C:/Users/ng1e2b8/Desktop/UsbKey/JRebirth/TOOLS/jdk1.7.0_40/jre/lib/jfxrt.jar" binary="true" 
-    corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="javafx.application.Application" project="org.jrebirth.af.core" 
+    file="C:/Program Files (x86)/Java/jdk1.8.0/jre/lib/ext/jfxrt.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="54" y="146"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="false" package="false" protected="false" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="javafx.scene.Scene" project="org.jrebirth.core" 
-    file="C:/Users/ng1e2b8/Desktop/UsbKey/JRebirth/TOOLS/jdk1.7.0_40/jre/lib/jfxrt.jar" binary="true" 
-    corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="javafx.scene.Scene" project="org.jrebirth.af.core" 
+    file="C:/Program Files (x86)/Java/jdk1.8.0/jre/lib/ext/jfxrt.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="761" y="515"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false"/>      
-      <operations public="false" package="false" protected="false" private="false"/>    
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="javafx.stage.Stage" project="org.jrebirth.core" 
-    file="C:/Users/ng1e2b8/Desktop/UsbKey/JRebirth/TOOLS/jdk1.7.0_40/jre/lib/jfxrt.jar" binary="true" 
-    corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="javafx.stage.Stage" project="org.jrebirth.af.core" 
+    file="C:/Program Files (x86)/Java/jdk1.8.0/jre/lib/ext/jfxrt.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="761" y="424"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false"/>      
-      <operations public="false" package="false" protected="false" private="false"/>    
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="org.jrebirth.core.application.DefaultApplication" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/DefaultApplication.java" binary="false" 
+  <class id="9" language="java" name="org.jrebirth.af.core.application.DefaultApplication" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/application/DefaultApplication.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="739" y="702"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="10" language="java" name="org.jrebirth.core.application.ApplicationMessages" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/ApplicationMessages.java" binary="false" 
+  <interface id="10" language="java" name="org.jrebirth.af.core.application.ApplicationMessages" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/application/ApplicationMessages.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="55" y="345"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <annotation id="11" language="java" name="org.jrebirth.core.application.Configuration" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/Configuration.java" binary="false" 
+  <annotation id="11" language="java" name="org.jrebirth.af.api.application.Configuration" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/application/Configuration.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="55" y="495"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </annotation>  
-  <annotation id="12" language="java" name="org.jrebirth.core.application.Localized" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/application/Localized.java" binary="false" 
+  <annotation id="12" language="java" name="org.jrebirth.af.api.application.Localized" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/application/Localized.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="59" y="653"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </annotation>  
-  <generalization id="13">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <association id="14">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="15" name="facade"/>      
-      <multiplicity id="16" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="17">    
+  <realization id="13">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
-  <association id="18">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="19" name="scene"/>      
-      <multiplicity id="20" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="21">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="2"/>  
-  </generalization>  
-  <association id="22">    
-    <bendpoint x="761" y="32"/>    
-    <bendpoint x="905" y="32"/>    
-    <bendpoint x="905" y="115"/>    
+  <association id="14">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="23" name="internalThread"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="25">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="26" name="stages"/>      
-      <multiplicity id="27" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="28">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="12"/>  
-  </dependency>  
-  <association id="29">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="30" name="stage"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="32">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="10"/>  
-  </realization>  
-  <dependency id="33">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="11"/>  
-  </dependency>  
-  <dependency id="34">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <association id="35">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="36" name="application"/>      
-      <multiplicity id="37" minimum="0" maximum="1"/>    
+      <attribute id="15" name="application"/>      
+      <multiplicity id="16" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="17">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="18" name="stage"/>      
+      <multiplicity id="19" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="20">    
+    <bendpoint x="857" y="110"/>    
+    <bendpoint x="856" y="73"/>    
+    <bendpoint x="756" y="73"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="21" name="internalThread"/>      
+      <multiplicity id="22" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="23">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="24" name="facade"/>      
+      <multiplicity id="25" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="26">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <realization id="27">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <generalization id="28">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="29">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="30" name="stages"/>      
+      <multiplicity id="31" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="33" name="scene"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
-    <attributes public="true" package="true" protected="true" private="false"/>    
-    <operations public="true" package="true" protected="true" private="false"/>  
+    <attributes public="true" package="true" protected="true" private="false" static="true"/>    
+    <operations public="true" package="true" protected="true" private="false" static="true"/>  
   </classifier-display>  
   <association-display labels="true" multiplicity="true"/>
 </class-diagram>

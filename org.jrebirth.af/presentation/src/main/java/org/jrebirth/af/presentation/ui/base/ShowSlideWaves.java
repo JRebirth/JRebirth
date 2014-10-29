@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.presentation.ui.base;
 
-import org.jrebirth.af.core.wave.WaveItem;
+import org.jrebirth.af.core.wave.WaveItemBase;
 
 /**
  * The class <strong>ShowSlideWaveItem</strong>.
@@ -28,11 +28,11 @@ import org.jrebirth.af.core.wave.WaveItem;
 public interface ShowSlideWaves {
 
     /** The slide model class concerned. */
-    WaveItem<Class<SlideModel<SlideStep>>> SLIDE_MODEL_CLASS = new WaveItem<Class<SlideModel<SlideStep>>>() {
+    WaveItemBase<Class<SlideModel<SlideStep>>> SLIDE_MODEL_CLASS = new WaveItemBase<Class<SlideModel<SlideStep>>>() {
     };
 
     /** The Slide step type to show. */
-    WaveItem<SlideStep> SLIDE_STEP_TYPE = new WaveItem<SlideStep>() {
+    WaveItemBase<SlideStep> SLIDE_STEP_TYPE = new WaveItemBase<SlideStep>() {
     };
 
 }

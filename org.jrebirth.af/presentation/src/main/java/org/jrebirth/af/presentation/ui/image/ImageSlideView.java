@@ -36,7 +36,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.RectangleBuilder;
 import javafx.util.Duration;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.image.RelImage;
 import org.jrebirth.af.presentation.ui.base.AbstractSlideView;

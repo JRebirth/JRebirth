@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 
-import org.jrebirth.af.core.ui.View;
+import org.jrebirth.af.api.ui.View;
 import org.jrebirth.af.core.ui.fxml.AbstractFXMLController;
 import org.jrebirth.af.showcase.fxml.beans.LoremIpsum;
 

@@ -21,10 +21,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.resource.ResourceParams;
+import org.jrebirth.af.api.resource.parameter.ParameterParams;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 import org.jrebirth.af.core.resource.ParameterEntry;
-import org.jrebirth.af.core.resource.ResourceParams;
 
 /**
  * The interface <strong>ObjectParameter</strong>.

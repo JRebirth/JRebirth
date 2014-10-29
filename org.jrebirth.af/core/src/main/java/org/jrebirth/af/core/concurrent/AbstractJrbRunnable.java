@@ -19,8 +19,10 @@ package org.jrebirth.af.core.concurrent;
 
 import java.time.Instant;
 
-import org.jrebirth.af.core.exception.JRebirthThreadException;
-import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.api.concurrent.JRebirthRunnable;
+import org.jrebirth.af.api.concurrent.RunnablePriority;
+import org.jrebirth.af.api.exception.JRebirthThreadException;
+import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**

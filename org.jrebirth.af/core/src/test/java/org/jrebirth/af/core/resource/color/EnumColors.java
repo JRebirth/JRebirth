@@ -17,7 +17,6 @@
  */
 package org.jrebirth.af.core.resource.color;
 
-
 /**
  * The class <strong>EnumColors</strong>.
  *
@@ -27,16 +26,16 @@ package org.jrebirth.af.core.resource.color;
 public enum EnumColors implements ColorEnum {
 
     // @formatter:off
-    
+
     /** Color for slide title, white. */
     SLIDE_TITLE {{ web("FFFFFF", 1.0); }},
-    
+
     /** Color for blue shape, xxx. */
     SHAPE_BLUE{{ web("3495CE", 1.0); }},
 
     /** Color for drop shadow, black. */
     DROP_SHADOW{{ web("000000", 0.8); }},
-    
+
     /** Color for inner shadow, white. */
     INNER_SHADOW{{ web("FFFFFE", 0.3); }};
 

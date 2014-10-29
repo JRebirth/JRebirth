@@ -24,8 +24,9 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 
+import org.jrebirth.af.api.service.ServiceTask;
 import org.jrebirth.af.core.service.DefaultService;
-import org.jrebirth.af.core.service.ServiceTask;
+import org.jrebirth.af.core.service.ServiceTaskBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,7 +67,7 @@ public class TaskTrackerService extends DefaultService {
      *
      * @param task the task to track
      */
-    public void trackTask(final ServiceTask<?> task) {
+    public void trackTask(final ServiceTaskBase<?> task) {
 
         LOGGER.trace("track a Task");
 

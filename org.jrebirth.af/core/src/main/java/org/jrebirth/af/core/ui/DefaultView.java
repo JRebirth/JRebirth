@@ -19,6 +19,9 @@ package org.jrebirth.af.core.ui;
 
 import javafx.scene.Node;
 
+import org.jrebirth.af.api.ui.Controller;
+import org.jrebirth.af.api.ui.Model;
+
 /**
  * The class <strong>DefaultView</strong>.
  *

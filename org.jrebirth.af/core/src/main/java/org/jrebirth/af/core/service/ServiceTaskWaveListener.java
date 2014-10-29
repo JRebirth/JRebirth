@@ -17,9 +17,9 @@
  */
 package org.jrebirth.af.core.service;
 
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveListener;
 import org.jrebirth.af.core.wave.JRebirthWaves;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveListener;
 
 /**
  * The class <strong>ServiceReturnWaveListener</strong>.

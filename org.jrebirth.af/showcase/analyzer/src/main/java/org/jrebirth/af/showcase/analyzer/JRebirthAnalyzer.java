@@ -27,13 +27,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import org.jrebirth.af.api.resource.ResourceItem;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveGroup;
 import org.jrebirth.af.core.application.DefaultApplication;
-import org.jrebirth.af.core.resource.ResourceItem;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveData;
-import org.jrebirth.af.core.wave.WaveGroup;
+import org.jrebirth.af.core.wave.WaveDataBase;
 import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.af.showcase.analyzer.ui.workbench.WorkbenchModel;
@@ -115,7 +115,7 @@ public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
                         .waveGroup(WaveGroup.RETURN_DATA)
                         .waveType(LoadEdtFileService.DO_LOAD_EVENTS)
                         .componentClass(LoadEdtFileService.class)
-                        .addDatas(WaveData.build(EditorWaves.EVENTS_FILE, logFile))
+                        .addDatas(WaveDataBase.build(EditorWaves.EVENTS_FILE, logFile))
                         );
 
                 // Start the animation to show all components creation
@@ -129,7 +129,7 @@ public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    protected List<? extends ResourceItem<?, ?, ?, ?>> getResourceToPreload() {
+    protected List<? extends ResourceItem<?, ?, ?>> getResourceToPreload() {
         return Collections.emptyList();
     }
 }

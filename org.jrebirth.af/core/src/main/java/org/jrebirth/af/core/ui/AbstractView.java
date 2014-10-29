@@ -31,16 +31,20 @@ import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.PaneBuilder;
 
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.facade.JRebirthEventType;
-import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.facade.JRebirthEventType;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.ui.Controller;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.NullController;
+import org.jrebirth.af.api.ui.View;
+import org.jrebirth.af.api.ui.annotation.AutoHandler;
+import org.jrebirth.af.api.ui.annotation.AutoHandler.CallbackObject;
+import org.jrebirth.af.api.ui.annotation.EnumEventType;
+import org.jrebirth.af.api.ui.annotation.OnFinished;
+import org.jrebirth.af.api.ui.annotation.RootNodeClass;
+import org.jrebirth.af.api.ui.annotation.RootNodeId;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.ui.annotation.AutoHandler;
-import org.jrebirth.af.core.ui.annotation.AutoHandler.CallbackObject;
-import org.jrebirth.af.core.ui.annotation.EnumEventType;
-import org.jrebirth.af.core.ui.annotation.OnFinished;
-import org.jrebirth.af.core.ui.annotation.RootNodeClass;
-import org.jrebirth.af.core.ui.annotation.RootNodeId;
 import org.jrebirth.af.core.ui.handler.AnnotationEventHandler;
 import org.jrebirth.af.core.util.ClassUtility;
 
@@ -62,7 +66,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractView.class);
 
     /** The base name of all JRebirth Annotation. */
-    private static final String BASE_ANNOTATION_NAME = "org.jrebirth.af.core.ui.annotation.On";
+    private static final String BASE_ANNOTATION_NAME = "org.jrebirth.af.api.ui.annotation.On";
 
     /** The view model. */
     private final transient M model;

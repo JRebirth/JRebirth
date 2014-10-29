@@ -7,12 +7,12 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.component.command.StartUpCommand;
 import org.jrebirth.af.component.resources.ComponentStyles;
 import org.jrebirth.af.component.workbench.ui.TabDemoModel;
 import org.jrebirth.af.core.application.DefaultApplication;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBase;
 
 /**

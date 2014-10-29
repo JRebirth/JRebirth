@@ -17,8 +17,8 @@
  */
 package org.jrebirth.af.showcase.analyzer.ui.properties;
 
-import org.jrebirth.af.core.facade.JRebirthEvent;
-import org.jrebirth.af.core.wave.WaveItem;
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.core.wave.WaveItemBase;
 
 /**
  * The class <strong>EditorWaves</strong>.
@@ -28,11 +28,11 @@ import org.jrebirth.af.core.wave.WaveItem;
 public interface PropertiesWaves {
 
     /** The event object. */
-    WaveItem<JRebirthEvent> EVENT_OBJECT = new WaveItem<JRebirthEvent>() {
+    WaveItemBase<JRebirthEvent> EVENT_OBJECT = new WaveItemBase<JRebirthEvent>() {
     };
 
     /** The type of the node. */
-    WaveItem<JRebirthEvent> NODE_TYPE = new WaveItem<JRebirthEvent>() {
+    WaveItemBase<JRebirthEvent> NODE_TYPE = new WaveItemBase<JRebirthEvent>() {
     };
 
 }

@@ -19,6 +19,8 @@ package org.jrebirth.af.core.resource.parameter;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
+import org.jrebirth.af.api.resource.parameter.ParameterItem;
+
 /**
  * The class <strong>TestParameters</strong>.
  *
@@ -48,11 +50,11 @@ public interface TestParameters {
     /**************************************************************************************/
 
     ParameterItem<Integer> OVERRIDABLE_PARAM = create("minDuration", 1000);
-    
+
     /**************************************************************************************/
     /** ______________________________VARENV Parameters.________________________________ */
     /**************************************************************************************/
-    
+
     ParameterItem<String> VARENV_PARAM0 = create("temp0", "${TMP}");
     ParameterItem<String> VARENV_PARAM1 = create("temp1", "${TMP}");
     ParameterItem<String> VARENV_PARAM2 = create("temp2", "$TMP");

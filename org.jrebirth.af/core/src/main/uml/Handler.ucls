@@ -1,309 +1,315 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+<class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="org.jrebirth.core.ui.handler.WindowHandler" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/handler/WindowHandler.java" binary="false" 
+  <class id="1" language="java" name="org.jrebirth.af.core.ui.handler.WindowHandler" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/handler/WindowHandler.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="442" y="119"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="org.jrebirth.core.ui.handler.ActionHandler" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/handler/ActionHandler.java" binary="false" 
+  <class id="2" language="java" name="org.jrebirth.af.core.ui.handler.ActionHandler" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/handler/ActionHandler.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="175" y="119"/>    
+    <position height="-1" width="-1" x="199" y="120"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="org.jrebirth.core.ui.handler.KeyHandler" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/handler/KeyHandler.java" binary="false" 
+  <class id="3" language="java" name="org.jrebirth.af.core.ui.handler.KeyHandler" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/handler/KeyHandler.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="717" y="119"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="org.jrebirth.core.ui.handler.MouseHandler" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/handler/MouseHandler.java" binary="false" 
+  <class id="4" language="java" name="org.jrebirth.af.core.ui.handler.MouseHandler" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/handler/MouseHandler.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1245" y="119"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="org.jrebirth.core.ui.handler.DragHandler" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/handler/DragHandler.java" binary="false" 
+  <class id="5" language="java" name="org.jrebirth.af.core.ui.handler.DragHandler" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/handler/DragHandler.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="983" y="119"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="org.jrebirth.core.ui.handler.AbstractNamedEventHandler" 
-    project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/handler/AbstractNamedEventHandler.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="org.jrebirth.af.core.ui.handler.AbstractNamedEventHandler" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/handler/AbstractNamedEventHandler.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="716" y="-9"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="org.jrebirth.core.ui.adapter.DefaultWindowAdapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter/DefaultWindowAdapter.java" binary="false" 
+  <class id="7" language="java" name="org.jrebirth.af.core.ui.adapter.DefaultWindowAdapter" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/adapter/DefaultWindowAdapter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="442" y="641"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="org.jrebirth.core.ui.adapter.DefaultActionAdapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter/DefaultActionAdapter.java" binary="false" 
+  <class id="8" language="java" name="org.jrebirth.af.core.ui.adapter.DefaultActionAdapter" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/adapter/DefaultActionAdapter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="175" y="683"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="org.jrebirth.core.ui.adapter.DefaultDragAdapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter/DefaultDragAdapter.java" binary="false" 
+  <class id="9" language="java" name="org.jrebirth.af.core.ui.adapter.DefaultDragAdapter" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/adapter/DefaultDragAdapter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="983" y="666"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="10" language="java" name="org.jrebirth.core.ui.adapter.EventAdapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter/EventAdapter.java" binary="false" 
+  <interface id="10" language="java" name="org.jrebirth.af.api.ui.adapter.EventAdapter" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/ui/adapter/EventAdapter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="624" y="480"/>    
+    <position height="-1" width="-1" x="586" y="490"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="11" language="java" name="org.jrebirth.core.ui.adapter.AbstractDefaultAdapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter/AbstractDefaultAdapter.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="11" language="java" name="org.jrebirth.af.core.ui.adapter.AbstractDefaultAdapter" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/adapter/AbstractDefaultAdapter.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="627" y="875"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="12" language="java" name="org.jrebirth.core.ui.adapter.WindowAdapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter/WindowAdapter.java" binary="false" 
+  <interface id="12" language="java" name="org.jrebirth.af.api.ui.adapter.WindowAdapter" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/ui/adapter/WindowAdapter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="442" y="372"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="13" language="java" name="org.jrebirth.core.ui.adapter.MouseAdapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter/MouseAdapter.java" binary="false" 
+  <interface id="13" language="java" name="org.jrebirth.af.api.ui.adapter.MouseAdapter" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/ui/adapter/MouseAdapter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1245" y="415"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="14" language="java" name="org.jrebirth.core.ui.adapter.KeyAdapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter/KeyAdapter.java" binary="false" 
+  <interface id="14" language="java" name="org.jrebirth.af.api.ui.adapter.KeyAdapter" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/ui/adapter/KeyAdapter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="716" y="355"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="15" language="java" name="org.jrebirth.core.ui.adapter.DragAdapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter/DragAdapter.java" binary="false" 
+  <interface id="15" language="java" name="org.jrebirth.af.api.ui.adapter.DragAdapter" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/ui/adapter/DragAdapter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="983" y="389"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="16" language="java" name="org.jrebirth.core.ui.adapter.DefaultKeyAdapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter/DefaultKeyAdapter.java" binary="false" 
+  <class id="16" language="java" name="org.jrebirth.af.core.ui.adapter.DefaultKeyAdapter" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/adapter/DefaultKeyAdapter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="716" y="626"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="org.jrebirth.core.ui.adapter.DefaultMouseAdapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter/DefaultMouseAdapter.java" binary="false" 
+  <class id="17" language="java" name="org.jrebirth.af.core.ui.adapter.DefaultMouseAdapter" 
+    project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/adapter/DefaultMouseAdapter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1245" y="690"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="18" language="java" name="org.jrebirth.core.ui.adapter.ActionAdapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter/ActionAdapter.java" binary="false" 
+  <interface id="18" language="java" name="org.jrebirth.af.api.ui.adapter.ActionAdapter" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/ui/adapter/ActionAdapter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="175" y="330"/>    
+    <position height="-1" width="-1" x="200" y="331"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false"/>      
-      <operations public="true" package="true" protected="true" private="false"/>    
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <package id="19" language="java" name="org.jrebirth.core.ui.handler" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/handler" binary="false" corner="BOTTOM_RIGHT">    
+  <package id="19" language="java" name="org.jrebirth.af.core.ui.handler" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/handler" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="83" y="-19"/>    
     <display autosize="true" stereotype="false" accessors="true"/>  
   </package>  
-  <package id="20" language="java" name="org.jrebirth.core.ui.adapter" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/ui/adapter" binary="false" corner="BOTTOM_RIGHT">    
+  <package id="20" language="java" name="org.jrebirth.af.core.ui.adapter" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/ui/adapter" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="86" y="222"/>    
     <display autosize="true" stereotype="false" accessors="true"/>  
   </package>  
-  <realization id="21">    
+  <generalization id="21">    
     <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="12"/>  
-  </realization>  
-  <realization id="22">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="10"/>  
-  </realization>  
-  <association id="23">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="24" name="keyAdapter"/>      
-      <multiplicity id="25" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="26">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <generalization id="27">    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <generalization id="22">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <association id="28">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="29" name="actionAdapter"/>      
-      <multiplicity id="30" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="31">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="32" name="dragAdapter"/>      
-      <multiplicity id="33" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="34">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="10"/>  
-  </generalization>  
-  <generalization id="35">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <generalization id="36">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <generalization id="37">    
-    <end type="SOURCE" refId="8"/>    
+  <generalization id="23">    
+    <bendpoint x="1082" y="789"/>    
+    <end type="SOURCE" refId="17"/>    
     <end type="TARGET" refId="11"/>  
   </generalization>  
-  <association id="38">    
+  <association id="24">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="39" name="mouseAdapter"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
+      <attribute id="25" name="mouseAdapter"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="41">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="14"/>  
-  </realization>  
-  <generalization id="42">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
-  <generalization id="43">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
-  <generalization id="44">    
+  <realization id="27">    
     <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
-  <association id="45">    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <association id="28">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="46" name="windowAdapter"/>      
-      <multiplicity id="47" minimum="0" maximum="1"/>    
+      <attribute id="29" name="windowAdapter"/>      
+      <multiplicity id="30" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="48">    
-    <end type="SOURCE" refId="7"/>    
+  <generalization id="31">    
+    <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="11"/>  
   </generalization>  
-  <realization id="49">    
+  <realization id="32">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="18"/>  
   </realization>  
-  <realization id="50">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="15"/>  
-  </realization>  
-  <generalization id="51">    
-    <end type="SOURCE" refId="2"/>    
+  <association id="33">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="34" name="dragAdapter"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="36">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <generalization id="52">    
+  <association id="38">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="39" name="keyAdapter"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="41">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <realization id="42">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <generalization id="43">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="44">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <generalization id="45">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
+  <association id="46">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="47" name="actionAdapter"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="49">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <generalization id="50">    
+    <bendpoint x="310" y="57"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <realization id="51">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <realization id="52">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
-    <attributes public="true" package="true" protected="true" private="false"/>    
-    <operations public="true" package="true" protected="true" private="false"/>  
+    <attributes public="true" package="true" protected="true" private="false" static="true"/>    
+    <operations public="true" package="true" protected="true" private="false" static="true"/>  
   </classifier-display>  
   <association-display labels="true" multiplicity="true"/>
 </class-diagram>

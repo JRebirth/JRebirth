@@ -19,7 +19,7 @@ package org.jrebirth.af.core.ui.adapter;
 
 import javafx.scene.input.SwipeEvent;
 
-import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
 
 /**
  * The class <strong>SwipeAdapter</strong>.

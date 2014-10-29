@@ -23,43 +23,43 @@ package org.jrebirth.af.core.wave;
 public interface JRebirthItems {
 
     /** The class wave item. */
-    WaveItem<Class<?>> classItem = new WaveItem<Class<?>>() {
+    WaveItemBase<Class<?>> classItem = new WaveItemBase<Class<?>>() {
     };
 
     /** The boolean wave item. */
-    WaveItem<Boolean> booleanItem = new WaveItem<Boolean>() {
+    WaveItemBase<Boolean> booleanItem = new WaveItemBase<Boolean>() {
     };
 
     /** The string wave item. */
-    WaveItem<String> stringItem = new WaveItem<String>() {
+    WaveItemBase<String> stringItem = new WaveItemBase<String>() {
     };
 
     /** The character wave item. */
-    WaveItem<Character> characterItem = new WaveItem<Character>() {
+    WaveItemBase<Character> characterItem = new WaveItemBase<Character>() {
     };
 
     /** The byte wave item. */
-    WaveItem<Byte> byteItem = new WaveItem<Byte>() {
+    WaveItemBase<Byte> byteItem = new WaveItemBase<Byte>() {
     };
 
     /** The short wave item. */
-    WaveItem<Short> shortItem = new WaveItem<Short>() {
+    WaveItemBase<Short> shortItem = new WaveItemBase<Short>() {
     };
 
     /** The integer wave item. */
-    WaveItem<Integer> integerItem = new WaveItem<Integer>() {
+    WaveItemBase<Integer> integerItem = new WaveItemBase<Integer>() {
     };
 
     /** The long wave item. */
-    WaveItem<Long> longItem = new WaveItem<Long>() {
+    WaveItemBase<Long> longItem = new WaveItemBase<Long>() {
     };
 
     /** The float wave item. */
-    WaveItem<Float> floatItem = new WaveItem<Float>() {
+    WaveItemBase<Float> floatItem = new WaveItemBase<Float>() {
     };
 
     /** The double wave item. */
-    WaveItem<Double> doubleItem = new WaveItem<Double>() {
+    WaveItemBase<Double> doubleItem = new WaveItemBase<Double>() {
     };
 
 }

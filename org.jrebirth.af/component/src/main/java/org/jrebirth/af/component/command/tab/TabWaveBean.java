@@ -1,8 +1,8 @@
 package org.jrebirth.af.component.command.tab;
 
+import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.ui.beans.TabConfig;
-import org.jrebirth.af.core.wave.WaveBean;
 
 public class TabWaveBean implements WaveBean {
 

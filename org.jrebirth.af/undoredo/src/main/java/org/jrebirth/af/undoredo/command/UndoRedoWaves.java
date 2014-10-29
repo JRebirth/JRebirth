@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.undoredo.command;
 
-import org.jrebirth.af.core.wave.WaveItem;
+import org.jrebirth.af.core.wave.WaveItemBase;
 
 /**
  * The Interface UndoRedoWaves used to define WaveItems used by undo/Redo waves.
@@ -25,15 +25,15 @@ import org.jrebirth.af.core.wave.WaveItem;
 public interface UndoRedoWaves {
 
     /** The name ot the undeo/redo stack to use. */
-    WaveItem<String> STACK_NAME = new WaveItem<String>() {
+    WaveItemBase<String> STACK_NAME = new WaveItemBase<String>() {
     };
 
     /** The undo redo flag to indicate if we must process the {@link AbstractUndoableCommand}.undo method or {@link AbstractUndoableCommand}.redo. */
-    WaveItem<Boolean> UNDO_REDO = new WaveItem<Boolean>() {
+    WaveItemBase<Boolean> UNDO_REDO = new WaveItemBase<Boolean>() {
     };
 
     /** The {@link Undoable} command. */
-    WaveItem<Undoable> UNDOABLE_COMMAND = new WaveItem<Undoable>() {
+    WaveItemBase<Undoable> UNDOABLE_COMMAND = new WaveItemBase<Undoable>() {
     };
 
 }

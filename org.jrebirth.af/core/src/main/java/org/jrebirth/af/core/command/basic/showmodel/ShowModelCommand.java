@@ -20,9 +20,9 @@ package org.jrebirth.af.core.command.basic.showmodel;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jrebirth.af.core.command.Command;
-import org.jrebirth.af.core.command.impl.multi.DefaultMultiBeanCommand;
-import org.jrebirth.af.core.key.UniqueKey;
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.core.command.multi.DefaultMultiBeanCommand;
 
 /**
  * The class <strong>ShowModelCommand</strong>.

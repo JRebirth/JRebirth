@@ -3,9 +3,9 @@ package org.jrebirth.af.core.concurrent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import org.jrebirth.af.core.application.Configuration;
+import org.jrebirth.af.api.application.Configuration;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.application.DefaultApplication;
-import org.jrebirth.af.core.ui.Model;
 
 /**
  * The class <strong>ThreadApplication</strong>.

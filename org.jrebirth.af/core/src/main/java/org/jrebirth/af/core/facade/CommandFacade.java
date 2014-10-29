@@ -17,7 +17,8 @@
  */
 package org.jrebirth.af.core.facade;
 
-import org.jrebirth.af.core.command.Command;
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.facade.GlobalFacade;
 
 /**
  *

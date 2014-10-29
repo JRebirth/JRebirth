@@ -19,6 +19,7 @@ package org.jrebirth.af.core.resource.color;
 
 import javafx.scene.paint.Color;
 
+import org.jrebirth.af.api.resource.color.ColorParams;
 import org.jrebirth.af.core.resource.AbstractResourceItem;
 
 /**
@@ -26,7 +27,7 @@ import org.jrebirth.af.core.resource.AbstractResourceItem;
  *
  * @author Sébastien Bordes
  */
-public final class ColorItemBase extends AbstractResourceItem<Color, ColorItem, ColorParams, ColorBuilder> implements ColorItem {
+public final class ColorItemBase extends AbstractResourceItem<org.jrebirth.af.api.resource.color.ColorItem, ColorParams, Color> implements ColorItemReal {
 
     public static ColorItemBase create() {
         return new ColorItemBase();

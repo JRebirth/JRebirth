@@ -26,10 +26,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.text.TextBuilder;
 
-import org.jrebirth.af.core.exception.CoreRuntimeException;
-import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.fxml.FXMLController;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.ui.Model;
 
 /**
  * The class <strong>FXMLUtils</strong>.
@@ -64,7 +65,7 @@ public final class FXMLUtils implements FXMLMessages {
      *
      * @param <M> the model type that will manage this fxml node
      */
-    public static <M extends Model> FXMLComponent loadFXML(final M model, final String fxmlPath) {
+    public static <M extends Model> FXMLComponentBase loadFXML(final M model, final String fxmlPath) {
         return loadFXML(model, fxmlPath, null);
     }
 
@@ -86,7 +87,7 @@ public final class FXMLUtils implements FXMLMessages {
      * @param <M> the model type that will manage this fxml node
      */
     @SuppressWarnings("unchecked")
-    public static <M extends Model> FXMLComponent loadFXML(final M model, final String fxmlPath, final String bundlePath) {
+    public static <M extends Model> FXMLComponentBase loadFXML(final M model, final String fxmlPath, final String bundlePath) {
 
         final FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -129,7 +130,7 @@ public final class FXMLUtils implements FXMLMessages {
             fxmlController.setModel(model);
         }
 
-        return new FXMLComponent(node, fxmlController);
+        return new FXMLComponentBase(node, fxmlController);
     }
 
     /**

@@ -22,13 +22,13 @@ import java.util.List;
 import javafx.geometry.Orientation;
 import javafx.scene.control.SplitPane;
 
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.ui.annotation.RootNodeClass;
 import org.jrebirth.af.component.ui.beans.TabConfig;
 import org.jrebirth.af.component.ui.tab.TabModel;
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.DefaultView;
-import org.jrebirth.af.core.ui.annotation.RootNodeClass;
 
 /**
  * The Class DockView only creates a TabPane like component that will handle Model Components.

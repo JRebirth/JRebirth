@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.exception;
 
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.wave.Wave;
 
 /***
  *

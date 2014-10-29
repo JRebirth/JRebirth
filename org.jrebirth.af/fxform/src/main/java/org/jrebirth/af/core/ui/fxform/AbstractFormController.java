@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.ui.fxform;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
 
 // public class AbstractFormController<M extends Model, V extends > extends AbstractController<M, V> {
 public class AbstractFormController {

@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveData;
+import org.jrebirth.af.core.wave.WaveDataBase;
 import org.jrebirth.af.undoredo.command.UndoRedoWaves;
 import org.jrebirth.af.undoredo.command.Undoable;
 import org.slf4j.Logger;
@@ -63,7 +63,7 @@ public class UndoRedoService extends DefaultService {
 
         // Call the redo method of the Undoable command
         this.commandStack.get(this.commandStack.size() - 1)
-        	.run(WaveBase.create().addDatas(WaveData.build(UndoRedoWaves.UNDO_REDO, false)));
+        	.run(WaveBase.create().addDatas(WaveDataBase.build(UndoRedoWaves.UNDO_REDO, false)));
     }
 
     /**
@@ -79,7 +79,7 @@ public class UndoRedoService extends DefaultService {
             this.commandStack.remove(this.commandStack.get(this.commandStack.size() - 1));
             // Call Undo method
             this.undoneStack.get(this.undoneStack.size() - 1)
-            	.run(WaveBase.create().addDatas(WaveData.build(UndoRedoWaves.UNDO_REDO, true)));
+            	.run(WaveBase.create().addDatas(WaveDataBase.build(UndoRedoWaves.UNDO_REDO, true)));
         } else {
             // begin of stack, do nothing
             LOGGER.info("No more command to undo, begin of stack");
@@ -99,7 +99,7 @@ public class UndoRedoService extends DefaultService {
             this.undoneStack.remove(this.undoneStack.size() - 1);
             // Call Redo method
             this.commandStack.get(this.commandStack.size() - 1)
-            	.run(WaveBase.create().addDatas(WaveData.build(UndoRedoWaves.UNDO_REDO, false)));
+            	.run(WaveBase.create().addDatas(WaveDataBase.build(UndoRedoWaves.UNDO_REDO, false)));
         } else {
             // End of stack, do nothing
             LOGGER.info("No more command to redo, end of stack");

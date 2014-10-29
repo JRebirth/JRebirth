@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.exception;
 
-import org.jrebirth.af.core.resource.i18n.MessageItem;
+import org.jrebirth.af.api.resource.i18n.MessageItem;
 
 /***
  *

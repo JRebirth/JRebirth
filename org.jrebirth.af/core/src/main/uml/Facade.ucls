@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+<class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <interface id="1" language="java" name="org.jrebirth.core.facade.GlobalFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/GlobalFacade.java" binary="false" 
+  <interface id="1" language="java" name="org.jrebirth.af.api.facade.GlobalFacade" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/facade/GlobalFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="161" y="178"/>    
+    <position height="-1" width="-1" x="159" y="147"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="2" language="java" name="org.jrebirth.core.facade.GlobalFacadeBase" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/GlobalFacadeBase.java" binary="false" 
+  <class id="2" language="java" name="org.jrebirth.af.core.facade.GlobalFacadeBase" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/GlobalFacadeBase.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="159" y="518"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -21,18 +21,19 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="3" language="java" name="org.jrebirth.core.facade.GlobalReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/GlobalReady.java" binary="false" 
+  <interface id="3" language="java" name="org.jrebirth.af.api.facade.GlobalReady" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/facade/GlobalReady.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="548" y="45"/>    
+    <position height="-1" width="-1" x="518" y="45"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="4" language="java" name="org.jrebirth.core.facade.Facade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/Facade.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="4" language="java" name="org.jrebirth.af.api.facade.Facade" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/facade/Facade.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="814" y="70"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -40,8 +41,8 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="org.jrebirth.core.facade.ServiceFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/ServiceFacade.java" binary="false" 
+  <class id="5" language="java" name="org.jrebirth.af.core.facade.ServiceFacade" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/ServiceFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="509" y="384"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -50,52 +51,53 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="org.jrebirth.core.facade.CommandFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/CommandFacade.java" binary="false" 
+  <class id="6" language="java" name="org.jrebirth.af.core.facade.CommandFacade" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/CommandFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="514" y="488"/>    
+    <position height="-1" width="-1" x="509" y="488"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="org.jrebirth.core.facade.UiFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/UiFacade.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="511" y="593"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
-      <operations public="true" package="true" protected="true" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="org.jrebirth.core.facade.AbstractFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/AbstractFacade.java" binary="false" 
+  <class id="7" language="java" name="org.jrebirth.af.core.facade.UiFacade" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/UiFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="816" y="450"/>    
+    <position height="-1" width="-1" x="509" y="573"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="org.jrebirth.core.facade.AbstractGlobalReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/AbstractGlobalReady.java" binary="false" 
+  <class id="8" language="java" name="org.jrebirth.af.core.facade.AbstractFacade" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/AbstractFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="528" y="210"/>    
+    <position height="-1" width="-1" x="804" y="452"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <package id="10" language="java" name="org.jrebirth.core.facade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="29" width="191" x="18" y="13"/>    
+  <class id="9" language="java" name="org.jrebirth.af.core.facade.AbstractGlobalReady" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/AbstractGlobalReady.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="516" y="207"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <package id="10" language="java" name="org.jrebirth.af.core.facade" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="29" width="191" x="3" y="-28"/>    
     <display autosize="false" stereotype="false" accessors="true"/>  
   </package>  
-  <class id="11" language="java" name="org.jrebirth.core.facade.NamedThreadBuilder" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/NamedThreadBuilder.java" binary="false" 
+  <class id="11" language="java" name="org.jrebirth.af.core.facade.NamedThreadBuilder" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/NamedThreadBuilder.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="161" y="793"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -104,162 +106,200 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="12" language="java" name="org.jrebirth.core.key.UniqueKey" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/key/UniqueKey.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1121" y="749"/>    
+  <interface id="12" language="java" name="org.jrebirth.af.api.key.UniqueKey" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/key/UniqueKey.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1110" y="400"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="13" language="java" name="org.jrebirth.core.key.MultitonKey" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/key/MultitonKey.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="672" y="754"/>    
+  <class id="13" language="java" name="org.jrebirth.af.core.key.MultitonKey" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/key/MultitonKey.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1107" y="791"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="org.jrebirth.core.key.ClassKey" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/key/ClassKey.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="892" y="750"/>    
+  <class id="14" language="java" name="org.jrebirth.af.core.key.ClassKey" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/key/ClassKey.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1109" y="587"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="15" language="java" name="org.jrebirth.core.facade.LocalFacade" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/LocalFacade.java" binary="false" 
+  <interface id="15" language="java" name="org.jrebirth.af.api.facade.LocalFacade" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/facade/LocalFacade.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="795" y="229"/>    
+    <position height="-1" width="-1" x="804" y="251"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="16" language="java" name="org.jrebirth.core.facade.WaveReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/WaveReady.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1338" y="511"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
-      <operations public="true" package="true" protected="true" private="false" static="true"/>    
-    </display>  
-  </interface>  
-  <interface id="17" language="java" name="org.jrebirth.core.facade.FacadeReady" project="org.jrebirth.core" 
-    file="/org.jrebirth.core/src/main/java/org/jrebirth/af/core/facade/FacadeReady.java" binary="false" 
+  <interface id="16" language="java" name="org.jrebirth.af.api.facade.FacadeReady" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/facade/FacadeReady.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1109" y="226"/>    
+    <position height="-1" width="-1" x="1108" y="182"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <generalization id="18">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="9"/>  
-  </generalization>  
-  <generalization id="19">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <dependency id="20">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="15"/>  
-  </dependency>  
-  <association id="21">    
+  <class id="17" language="java" name="org.jrebirth.af.core.facade.BehaviorFacade" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/BehaviorFacade.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="509" y="665"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="18" language="java" name="org.jrebirth.af.core.key.Key" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/key/Key.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="773" y="797"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <association id="19">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="22" name="globalFacade"/>      
-      <multiplicity id="23" minimum="0" maximum="1"/>    
+      <attribute id="20" name="globalFacade"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <generalization id="22">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="23">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
   <association id="24">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="25" name="uiFacade"/>      
+      <attribute id="25" name="behaviorFacade"/>      
       <multiplicity id="26" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="27">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="28">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <association id="29">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="30" name="uiFacade"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="27">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <generalization id="28">    
-    <end type="SOURCE" refId="5"/>    
+  <dependency id="32">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <generalization id="33">    
+    <end type="SOURCE" refId="17"/>    
     <end type="TARGET" refId="8"/>  
   </generalization>  
-  <realization id="29">    
+  <realization id="34">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="15"/>  
   </realization>  
-  <dependency id="30">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="17"/>  
-  </dependency>  
-  <association id="31">    
+  <realization id="35">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="36">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="37">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <association id="38">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="32" name="commandFacade"/>      
-      <multiplicity id="33" minimum="0" maximum="1"/>    
+      <attribute id="39" name="commandFacade"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="34">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="17"/>  
+  <dependency id="41">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="12"/>  
   </dependency>  
-  <generalization id="35">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <realization id="36">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <generalization id="37">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <association id="38">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="39" name="serviceFacade"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="41">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="14"/>  
-  </generalization>  
   <dependency id="42">    
-    <end type="SOURCE" refId="17"/>    
+    <bendpoint x="957" y="530"/>    
+    <end type="SOURCE" refId="18"/>    
     <end type="TARGET" refId="12"/>  
   </dependency>  
   <generalization id="43">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="17"/>  
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="3"/>  
   </generalization>  
   <dependency id="44">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
-  <generalization id="45">    
+  <association id="45">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="46" name="serviceFacade"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <dependency id="50">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <generalization id="51">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <dependency id="52">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="14"/>  
+  </dependency>  
+  <dependency id="53">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <generalization id="54">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="4"/>  
   </generalization>  
-  <realization id="46">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="12"/>  
-  </realization>  
   <classifier-display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="false" static="true"/>    

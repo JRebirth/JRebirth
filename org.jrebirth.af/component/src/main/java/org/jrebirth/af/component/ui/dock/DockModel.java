@@ -23,16 +23,17 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 
+import org.jrebirth.af.api.ui.object.ModelObject;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.component.ui.beans.DockConfig;
 import org.jrebirth.af.component.ui.beans.DockOrientation;
 import org.jrebirth.af.component.ui.beans.TabConfig;
 import org.jrebirth.af.core.ui.object.DefaultObjectModel;
-import org.jrebirth.af.core.ui.object.ModelObject;
 import org.jrebirth.af.core.util.ObjectUtility;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveItem;
-import org.jrebirth.af.core.wave.WaveType;
-import org.jrebirth.af.core.wave.checker.WaveChecker;
+import org.jrebirth.af.core.wave.WaveItemBase;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,18 +45,18 @@ import org.slf4j.LoggerFactory;
 public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfig> {
 
     /** The key of the dock model used as filter by wave checker. */
-    public static WaveItem<String> DOCK_KEY = new WaveItem<String>(false) {
+    public static WaveItemBase<String> DOCK_KEY = new WaveItemBase<String>(false) {
     };
 
     /** The model. */
-    public static WaveItem<TabConfig> MODEL = new WaveItem<TabConfig>() {
+    public static WaveItemBase<TabConfig> MODEL = new WaveItemBase<TabConfig>() {
     };
 
     /** The add. */
-    public static WaveType ADD = WaveType.create("ADD_CONTAINER").items(MODEL);
+    public static WaveType ADD = WaveTypeBase.create("ADD_CONTAINER").items(MODEL);
 
     /** The remove. */
-    public static WaveType REMOVE = WaveType.create("REMOVE_CONTAINER").items(MODEL);
+    public static WaveType REMOVE = WaveTypeBase.create("REMOVE_CONTAINER").items(MODEL);
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DockModel.class);

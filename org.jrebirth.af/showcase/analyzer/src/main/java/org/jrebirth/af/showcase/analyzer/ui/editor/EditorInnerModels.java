@@ -17,9 +17,9 @@
  */
 package org.jrebirth.af.showcase.analyzer.ui.editor;
 
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.key.Key;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.showcase.analyzer.ui.editor.ball.BallModel;
 
 /**

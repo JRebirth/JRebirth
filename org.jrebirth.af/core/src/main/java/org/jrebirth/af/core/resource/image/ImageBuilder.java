@@ -25,6 +25,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.text.Text;
 
+import org.jrebirth.af.api.resource.builder.ResourceBuilder;
+import org.jrebirth.af.api.resource.image.ImageItem;
+import org.jrebirth.af.api.resource.image.ImageParams;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthImages;
@@ -39,7 +42,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Sébastien Bordes
  */
-public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, ImageParams, Image> {
+public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, ImageParams, Image> implements ResourceBuilder<ImageItem, ImageParams, Image> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ImageBuilder.class);

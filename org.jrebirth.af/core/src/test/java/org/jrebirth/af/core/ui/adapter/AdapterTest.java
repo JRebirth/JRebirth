@@ -2,8 +2,7 @@ package org.jrebirth.af.core.ui.adapter;
 
 import javafx.event.ActionEvent;
 
-import org.jrebirth.af.core.exception.CoreException;
-
+import org.jrebirth.af.api.exception.CoreException;
 import org.junit.Before;
 import org.junit.Test;
 

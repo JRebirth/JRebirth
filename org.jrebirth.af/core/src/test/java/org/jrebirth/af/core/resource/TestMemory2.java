@@ -5,11 +5,10 @@ import java.util.List;
 
 import javafx.scene.paint.Color;
 
+import org.jrebirth.af.api.resource.color.ColorItem;
 import org.jrebirth.af.core.application.ApplicationTest;
 import org.jrebirth.af.core.application.FullConfApplication;
-import org.jrebirth.af.core.resource.color.ColorItem;
 import org.jrebirth.af.core.resource.color.RGB255Color;
-
 import org.junit.Ignore;
 import org.junit.Test;
 

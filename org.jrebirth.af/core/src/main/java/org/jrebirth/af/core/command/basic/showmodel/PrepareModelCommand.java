@@ -17,11 +17,11 @@
  */
 package org.jrebirth.af.core.command.basic.showmodel;
 
-import org.jrebirth.af.core.command.impl.single.pool.DefaultPoolBeanCommand;
-import org.jrebirth.af.core.exception.CoreRuntimeException;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.command.single.pool.DefaultPoolBeanCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

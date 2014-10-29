@@ -19,7 +19,7 @@ package org.jrebirth.af.showcase.analyzer.ui.controls;
 
 import javafx.scene.input.MouseEvent;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.ui.LinkedCallback;
 import org.jrebirth.af.showcase.analyzer.command.OpenEventTrackerFileCommand;

@@ -2,8 +2,8 @@ package org.jrebirth.af.core.command.basic.multi;
 
 import javafx.stage.Stage;
 
-import org.jrebirth.af.core.command.impl.single.ui.DefaultUICommand;
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.command.single.ui.DefaultUICommand;
 
 public class UiCommand extends DefaultUICommand {
 

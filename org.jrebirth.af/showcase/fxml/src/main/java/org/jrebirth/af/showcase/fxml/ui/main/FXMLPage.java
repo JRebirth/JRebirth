@@ -1,10 +1,9 @@
 package org.jrebirth.af.showcase.fxml.ui.main;
 
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.component.ui.stack.PageEnum;
-import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.jrebirth.af.core.key.Key;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.ui.fxml.DefaultFXMLModel;
 import org.jrebirth.af.showcase.fxml.beans.LoremIpsum;
 import org.jrebirth.af.showcase.fxml.ui.embedded.EmbeddedModel;

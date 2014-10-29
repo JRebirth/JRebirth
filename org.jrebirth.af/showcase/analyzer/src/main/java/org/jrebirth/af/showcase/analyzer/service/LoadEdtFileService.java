@@ -20,12 +20,13 @@ package org.jrebirth.af.showcase.analyzer.service;
 import java.io.File;
 import java.util.List;
 
-import org.jrebirth.af.core.concurrent.Priority;
-import org.jrebirth.af.core.concurrent.RunnablePriority;
-import org.jrebirth.af.core.facade.JRebirthEvent;
-import org.jrebirth.af.core.service.Service;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveType;
+import org.jrebirth.af.api.concurrent.Priority;
+import org.jrebirth.af.api.concurrent.RunnablePriority;
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.jrebirth.af.processor.annotation.RegistrationPoint;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 
@@ -38,7 +39,7 @@ import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 public interface LoadEdtFileService extends Service {
 
     /** Wave type use to load events. */
-    WaveType DO_LOAD_EVENTS = WaveType.create("LOAD_EVENTS")
+    WaveType DO_LOAD_EVENTS = WaveTypeBase.create("LOAD_EVENTS")
             .items(EditorWaves.EVENTS_FILE)
             .returnAction("EVENTS_LOADED")
             .returnItem(EditorWaves.EVENTS);

@@ -19,7 +19,7 @@ package org.jrebirth.af.presentation.ui.base;
 
 import javafx.animation.Animation;
 
-import org.jrebirth.af.core.ui.Model;
+import org.jrebirth.af.api.ui.Model;
 
 /**
  * The class <strong>SlideModel</strong>.

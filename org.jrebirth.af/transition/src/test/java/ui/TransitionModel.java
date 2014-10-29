@@ -17,10 +17,10 @@
  */
 package ui;
 
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.image.RelImage;
 import org.jrebirth.af.core.ui.DefaultModel;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.transition.command.slicer.NodeSlicerCommand;
 import org.jrebirth.af.transition.slicer.RandomFadingService;
 import org.jrebirth.af.transition.slicer.SlidingDoorService;

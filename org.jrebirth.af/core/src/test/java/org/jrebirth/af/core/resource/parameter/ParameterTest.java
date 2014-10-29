@@ -1,15 +1,14 @@
 package org.jrebirth.af.core.resource.parameter;
 
+import static org.junit.Assert.assertEquals;
 import junit.framework.Assert;
 
-import org.jrebirth.af.core.resource.ResourceBuilders;
-
-import org.jrebirth.af.core.exception.CoreRuntimeException;
-import org.jrebirth.af.core.log.JRLevel;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.log.JRLevel;
+import org.jrebirth.af.api.resource.parameter.ParameterItem;
 import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.ResourceBuilders;
-import org.jrebirth.af.core.resource.i18n.MessageResource;
-import org.jrebirth.af.core.resource.parameter.ParameterItem;
+import org.jrebirth.af.core.resource.i18n.MessageResourceBase;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,8 +17,6 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * The class <strong>ParameterTest</strong>.
@@ -30,13 +27,13 @@ public class ParameterTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    
+
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        
+
         ResourceBuilders.MESSAGE_BUILDER.searchMessagesFiles(".*_rb");
         ResourceBuilders.PARAMETER_BUILDER.searchConfigurationFiles(".*test-jrebirth", "properties");
-        ParameterMessages.UNDEFINED_ENV_VAR.define(new MessageResource("Fatal Error ! environment variable {0} not found ", JRebirthMarkers.PARAMETER, JRLevel.Exception));
+        ParameterMessages.UNDEFINED_ENV_VAR.define(new MessageResourceBase("Fatal Error ! environment variable {0} not found ", JRebirthMarkers.PARAMETER, JRLevel.Exception));
         JRebirthParameters.DEVELOPER_MODE.define(true);
     }
 
@@ -90,38 +87,38 @@ public class ParameterTest {
         assertEquals(2000, TestParameters.OVERRIDABLE_PARAM.get().intValue());
 
     }
-    
+
     @Test
     public void varenvParameter() {
 
-        String tmp = System.getenv("TMP");
-        
+        final String tmp = System.getenv("TMP");
+
         // Test properties redefined into file
-        //System.out.println(TestParameters.VARENV_PARAM0.get());
+        // System.out.println(TestParameters.VARENV_PARAM0.get());
         Assert.assertEquals(tmp, TestParameters.VARENV_PARAM0.get());
-        
-        //System.out.println(TestParameters.VARENV_PARAM1.get());
+
+        // System.out.println(TestParameters.VARENV_PARAM1.get());
         Assert.assertEquals(tmp + "/first", TestParameters.VARENV_PARAM1.get());
-        //System.out.println(TestParameters.VARENV_PARAM2.get());
+        // System.out.println(TestParameters.VARENV_PARAM2.get());
         Assert.assertEquals(tmp + "/second", TestParameters.VARENV_PARAM2.get());
-        
+
         // Test default values
-        //System.out.println(TestParameters.VARENV_PARAM3.get());
+        // System.out.println(TestParameters.VARENV_PARAM3.get());
         Assert.assertEquals(tmp + "/third", TestParameters.VARENV_PARAM3.get());
-        //System.out.println(TestParameters.VARENV_PARAM4.get());
+        // System.out.println(TestParameters.VARENV_PARAM4.get());
         Assert.assertEquals(tmp + "/fourth", TestParameters.VARENV_PARAM4.get());
 
         // Test not found envvar
         this.thrown.expect(CoreRuntimeException.class);
-        //System.out.println(TestParameters.VARENV_PARAM3.get());
+        // System.out.println(TestParameters.VARENV_PARAM3.get());
         Assert.assertEquals(tmp + "/fifth", TestParameters.VARENV_PARAM5.get());
-        
+
     }
-    
-    @Test(expected=CoreRuntimeException.class)
+
+    @Test(expected = CoreRuntimeException.class)
     public void varenvParameterException() {
-        //System.out.println(TestParameters.VARENV_PARAM4.get());
-        Assert.assertEquals("$TMP2/sixth",TestParameters.VARENV_PARAM6.get());
+        // System.out.println(TestParameters.VARENV_PARAM4.get());
+        Assert.assertEquals("$TMP2/sixth", TestParameters.VARENV_PARAM6.get());
     }
 
     @After

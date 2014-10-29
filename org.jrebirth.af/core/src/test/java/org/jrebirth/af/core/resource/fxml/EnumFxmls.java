@@ -17,7 +17,6 @@
  */
 package org.jrebirth.af.core.resource.fxml;
 
-
 /**
  * The class <strong>EnumColors</strong>.
  *
@@ -27,7 +26,7 @@ package org.jrebirth.af.core.resource.fxml;
 public enum EnumFxmls implements FXMLEnum {
 
     // @formatter:off
-    
+
     /** . */
     FIRST_FXML {{ fxml("fxml", "first"); }},
 

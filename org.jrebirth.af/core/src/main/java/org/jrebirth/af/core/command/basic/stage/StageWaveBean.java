@@ -21,8 +21,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.wave.WaveBean;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.WaveBean;
 
 /**
  * The class <strong>StageWaveBean</strong>.

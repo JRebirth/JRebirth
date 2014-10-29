@@ -25,25 +25,26 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import javafx.scene.Scene;
 
-import org.jrebirth.af.core.application.JRebirthApplication;
+import org.jrebirth.af.api.application.JRebirthApplication;
+import org.jrebirth.af.api.concurrent.JRebirthRunnable;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.exception.JRebirthThreadException;
+import org.jrebirth.af.api.facade.GlobalFacade;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveGroup;
 import org.jrebirth.af.core.command.basic.ChainWaveCommand;
 import org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean;
 import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.exception.JRebirthThreadException;
-import org.jrebirth.af.core.facade.GlobalFacade;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
 import org.jrebirth.af.core.key.Key;
-import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.service.basic.StyleSheetTrackerService;
-import org.jrebirth.af.core.ui.Model;
 import org.jrebirth.af.core.wave.JRebirthWaves;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveData;
-import org.jrebirth.af.core.wave.WaveGroup;
+import org.jrebirth.af.core.wave.WaveDataBase;
 
 /**
  * The class <strong>JRebirthThread</strong>.
@@ -231,7 +232,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
                                                WaveBase.create()
                                                        .waveGroup(WaveGroup.CALL_COMMAND)
                                                        .componentClass(ChainWaveCommand.class)
-                                                       .addDatas(WaveData.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList)));
+                                                       .addDatas(WaveDataBase.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList)));
         }
     }
 

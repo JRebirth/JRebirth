@@ -17,15 +17,17 @@
  */
 package org.jrebirth.af.core.resource.fxml;
 
+import org.jrebirth.af.api.resource.fxml.FXMLItem;
+import org.jrebirth.af.api.resource.fxml.FXMLParams;
+import org.jrebirth.af.api.ui.fxml.FXMLComponent;
 import org.jrebirth.af.core.resource.AbstractResourceItem;
-import org.jrebirth.af.core.ui.fxml.FXMLComponent;
 
 /**
  * The class <strong>FXMLItemBase</strong>.
  *
  * @author Sébastien Bordes
  */
-public final class FXMLItemBase extends AbstractResourceItem<FXMLComponent, FXMLItem, FXMLParams, FXMLBuilder> implements FXMLItem {
+public final class FXMLItemBase extends AbstractResourceItem<FXMLItem, FXMLParams, FXMLComponent> implements FXMLItemReal {
 
     public static FXMLItemBase create() {
         return new FXMLItemBase();

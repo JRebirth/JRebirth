@@ -22,10 +22,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.CircleBuilder;
 import javafx.scene.shape.RectangleBuilder;
 
-import org.jrebirth.af.core.concurrent.RunInto;
-import org.jrebirth.af.core.concurrent.RunType;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveBean;
+import org.jrebirth.af.api.concurrent.RunInto;
+import org.jrebirth.af.api.concurrent.RunType;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.showcase.undoredo.beans.ShapeType;
 import org.jrebirth.af.showcase.undoredo.beans.UndoAppWaves;
 import org.jrebirth.af.showcase.undoredo.ui.UndoModel;

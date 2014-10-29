@@ -28,7 +28,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.resource.builder.ResourceBuilder;
+import org.jrebirth.af.api.resource.parameter.ParameterItem;
+import org.jrebirth.af.api.resource.parameter.ParameterParams;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.ParameterEntry;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
@@ -41,7 +44,7 @@ import org.jrebirth.af.core.util.ClasspathUtility;
  *
  * @author Sébastien Bordes
  */
-public final class ParameterBuilder extends AbstractResourceBuilder<ParameterItem<?>, ParameterParams, Object> implements ParameterMessages {
+public final class ParameterBuilder extends AbstractResourceBuilder<ParameterItem<?>, ParameterParams, Object> implements ResourceBuilder<ParameterItem<?>, ParameterParams, Object>, ParameterMessages {
 
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(ParameterBuilder.class);

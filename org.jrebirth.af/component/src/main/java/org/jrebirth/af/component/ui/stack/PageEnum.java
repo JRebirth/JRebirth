@@ -1,7 +1,7 @@
 package org.jrebirth.af.component.ui.stack;
 
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.Model;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.ui.Model;
 
 /**
  * The class <strong>PageEnum</strong>.

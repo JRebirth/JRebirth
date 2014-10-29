@@ -1,8 +1,8 @@
 package org.jrebirth.af.core.inner;
 
-import org.jrebirth.af.core.facade.Component;
+import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.core.key.Key;
-import org.jrebirth.af.core.key.UniqueKey;
 
 /**
  * The class <strong>InnerModelBase</strong>.
@@ -43,7 +43,7 @@ public final class InnerComponentEntry<C extends Component<?>> implements InnerC
     // final InnerModelEntry innerModel = new InnerModelEntry(modelClass, keyPart);
     //
     // // Ensure that the uid will be unique at runtime
-    // synchronized (WaveTypeBase.class) {
+    // synchronized (WaveType.class) {
     // innerModel.setUid(++idGenerator);
     // }
     // return innerModel;

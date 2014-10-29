@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.ui.fxform;
 
-import org.jrebirth.af.core.ui.Controller;
+import org.jrebirth.af.api.ui.Controller;
 
 /**
  * The class <strong>DefaultFormView</strong>.

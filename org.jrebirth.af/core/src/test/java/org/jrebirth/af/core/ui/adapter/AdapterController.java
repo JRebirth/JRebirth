@@ -3,9 +3,9 @@ package org.jrebirth.af.core.ui.adapter;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.ui.View;
 import org.jrebirth.af.core.ui.DefaultController;
-import org.jrebirth.af.core.ui.View;
 
 public class AdapterController extends DefaultController implements ActionAdapter {
 

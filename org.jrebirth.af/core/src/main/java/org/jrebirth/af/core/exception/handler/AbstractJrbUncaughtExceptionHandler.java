@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.exception.handler;
 
-import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**

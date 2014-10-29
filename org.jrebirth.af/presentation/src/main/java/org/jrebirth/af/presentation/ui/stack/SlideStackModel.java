@@ -25,9 +25,9 @@ import javafx.animation.ParallelTransitionBuilder;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.ui.DefaultModel;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.presentation.service.PresentationService;
 import org.jrebirth.af.presentation.ui.base.SlideModel;
 import org.jrebirth.af.presentation.ui.base.SlideStep;

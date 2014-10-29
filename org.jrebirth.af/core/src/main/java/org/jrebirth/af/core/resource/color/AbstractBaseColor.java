@@ -20,6 +20,7 @@ package org.jrebirth.af.core.resource.color;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
+import org.jrebirth.af.api.resource.color.ColorParams;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 
 /**

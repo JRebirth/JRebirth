@@ -1,7 +1,7 @@
 package org.jrebirth.af.sample.command;
 
-import org.jrebirth.af.core.command.impl.single.pool.DefaultPoolCommand;
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.command.single.pool.DefaultPoolCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

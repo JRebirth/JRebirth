@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <interface id="1" language="java" name="org.jrebirth.af.core.behavior.Behavior" project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/behavior/Behavior.java" binary="false" 
+  <interface id="1" language="java" name="org.jrebirth.af.api.behavior.Behavior" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/behavior/Behavior.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="253" y="57"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -11,9 +11,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="2" language="java" name="org.jrebirth.af.core.behavior.data.BehaviorData" 
-    project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/behavior/data/BehaviorData.java" binary="false" 
+  <interface id="2" language="java" name="org.jrebirth.af.api.behavior.data.BehaviorData" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/behavior/data/BehaviorData.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="648" y="260"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -22,10 +21,10 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="3" language="java" name="org.jrebirth.af.core.behavior.data.base.BehaviorDataBase" 
+  <class id="3" language="java" name="org.jrebirth.af.core.behavior.data.BehaviorDataBase" 
     project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/behavior/data/base/BehaviorDataBase.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/behavior/data/BehaviorDataBase.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="652" y="573"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -33,9 +32,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="org.jrebirth.af.core.behavior.data.base.AbstractBehaviorData" 
+  <class id="4" language="java" name="org.jrebirth.af.core.behavior.data.AbstractBehaviorData" 
     project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/behavior/data/base/AbstractBehaviorData.java" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/behavior/data/AbstractBehaviorData.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="650" y="407"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -44,9 +43,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="org.jrebirth.af.core.behavior.base.AbstractBehavior" 
-    project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/behavior/base/AbstractBehavior.java" binary="false" 
+  <class id="5" language="java" name="org.jrebirth.af.core.behavior.AbstractBehavior" project="org.jrebirth.af.core" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/behavior/AbstractBehavior.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="257" y="265"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -55,10 +53,10 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="org.jrebirth.af.core.behavior.base.AbstractModelBehavior" 
+  <class id="6" language="java" name="org.jrebirth.af.core.behavior.AbstractModelBehavior" 
     project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/behavior/base/AbstractModelBehavior.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/behavior/AbstractModelBehavior.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="255" y="484"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -66,9 +64,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <annotation id="7" language="java" name="org.jrebirth.af.core.behavior.annotation.BehaviorDataFor" 
+  <annotation id="7" language="java" name="org.jrebirth.af.api.behavior.annotation.BehaviorDataFor" 
     project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/behavior/annotation/BehaviorDataFor.java" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/behavior/annotation/BehaviorDataFor.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="647" y="43"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -77,9 +75,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </annotation>  
-  <annotation id="8" language="java" name="org.jrebirth.af.core.behavior.annotation.BehaviorDataFors" 
+  <annotation id="8" language="java" name="org.jrebirth.af.api.behavior.annotation.BehaviorDataFors" 
     project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/behavior/annotation/BehaviorDataFors.java" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/behavior/annotation/BehaviorDataFors.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="644" y="134"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -88,9 +86,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </annotation>  
-  <interface id="9" language="java" name="org.jrebirth.af.core.facade.BehavioredComponent" 
-    project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/BehavioredComponent.java" binary="false" 
+  <interface id="9" language="java" name="org.jrebirth.af.api.facade.BehavioredComponent" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/facade/BehavioredComponent.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-121" y="362"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
@@ -110,52 +107,52 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="11">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <association id="12">    
+  <association id="11">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="13" name="data"/>      
-      <multiplicity id="14" minimum="0" maximum="1"/>    
+      <attribute id="12" name="data"/>      
+      <multiplicity id="13" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="15">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <realization id="16">    
+  <realization id="14">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
-  <realization id="17">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <association id="18">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="19" name="behaviors"/>      
-      <multiplicity id="20" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="21">    
+  <association id="15">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="22" name="component">        
+      <attribute id="16" name="component">        
         <position height="18" width="61" x="7" y="291"/>      
       </attribute>      
-      <multiplicity id="23" minimum="0" maximum="1"/>    
+      <multiplicity id="17" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="24">    
+  <generalization id="18">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="19">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="20" name="behaviors"/>      
+      <multiplicity id="21" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="22">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <generalization id="23">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="5"/>  
   </generalization>  
+  <realization id="24">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

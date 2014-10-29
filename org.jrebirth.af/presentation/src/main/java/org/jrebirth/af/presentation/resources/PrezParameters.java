@@ -3,8 +3,8 @@ package org.jrebirth.af.presentation.resources;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
+import org.jrebirth.af.api.resource.parameter.ParameterItem;
 import org.jrebirth.af.core.resource.parameter.ObjectParameter;
-import org.jrebirth.af.core.resource.parameter.ParameterItem;
 
 /**
  * The interface <strong>PrezParameters</strong>.

@@ -26,8 +26,11 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.facade.JRebirthEventType;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.facade.JRebirthEventType;
+import org.jrebirth.af.api.ui.Controller;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.View;
 import org.jrebirth.af.core.ui.adapter.AbstractDefaultAdapter;
 import org.jrebirth.af.core.ui.adapter.EventAdapter;
 
@@ -61,7 +64,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
         this.view = view;
 
         // Track this controller creation
-        getModel().getLocalFacade().getGlobalFacade().trackEvent(org.jrebirth.af.core.facade.JRebirthEventType.CREATE_CONTROLLER, getView().getClass(), this.getClass());
+        getModel().getLocalFacade().getGlobalFacade().trackEvent(org.jrebirth.af.api.facade.JRebirthEventType.CREATE_CONTROLLER, getView().getClass(), this.getClass());
     }
 
     /**

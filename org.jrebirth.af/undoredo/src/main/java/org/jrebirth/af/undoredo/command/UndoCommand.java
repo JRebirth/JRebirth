@@ -17,11 +17,11 @@
  */
 package org.jrebirth.af.undoredo.command;
 
-import org.jrebirth.af.core.command.impl.single.syncro.DefaultCommand;
-import org.jrebirth.af.core.concurrent.RunInto;
-import org.jrebirth.af.core.concurrent.RunType;
+import org.jrebirth.af.api.concurrent.RunInto;
+import org.jrebirth.af.api.concurrent.RunType;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.command.single.internal.DefaultCommand;
 import org.jrebirth.af.core.exception.CommandException;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.undoredo.service.UndoRedoService;
 
 /**

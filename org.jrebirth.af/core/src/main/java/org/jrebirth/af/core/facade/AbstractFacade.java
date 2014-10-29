@@ -24,16 +24,21 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.stream.Collectors;
 
-import org.jrebirth.af.core.command.Command;
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.exception.CoreRuntimeException;
-import org.jrebirth.af.core.exception.JRebirthThreadException;
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.exception.JRebirthThreadException;
+import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.facade.FacadeReady;
+import org.jrebirth.af.api.facade.GlobalFacade;
+import org.jrebirth.af.api.facade.JRebirthEventType;
+import org.jrebirth.af.api.facade.LocalFacade;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.key.Key;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.service.Service;
-import org.jrebirth.af.core.ui.Model;
 
 /**
  * The class <strong>AbstractFacade</strong>.

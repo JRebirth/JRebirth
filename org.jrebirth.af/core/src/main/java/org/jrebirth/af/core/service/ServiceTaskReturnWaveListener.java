@@ -17,11 +17,11 @@
  */
 package org.jrebirth.af.core.service;
 
-import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.Wave.Status;
+import org.jrebirth.af.api.wave.WaveListener;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.Wave.Status;
-import org.jrebirth.af.core.wave.WaveListener;
 
 /**
  * The class <strong>ServiceTaskReturnWaveListener</strong>.

@@ -1,10 +1,10 @@
 package org.jrebirth.af.component.command.dock;
 
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.component.ui.beans.DockConfig;
 import org.jrebirth.af.component.ui.beans.TabConfig;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.wave.WaveBean;
 
 public class DockWaveBean implements WaveBean {
 

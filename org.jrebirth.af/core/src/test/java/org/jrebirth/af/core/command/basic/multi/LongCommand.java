@@ -1,8 +1,8 @@
 package org.jrebirth.af.core.command.basic.multi;
 
-import org.jrebirth.af.core.command.impl.single.syncro.DefaultCommand;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.command.single.internal.DefaultCommand;
 import org.jrebirth.af.core.exception.CommandException;
-import org.jrebirth.af.core.wave.Wave;
 
 public class LongCommand extends DefaultCommand {
 

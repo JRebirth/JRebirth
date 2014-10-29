@@ -24,6 +24,7 @@ import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
+import org.jrebirth.af.api.resource.ResourceParams;
 import org.jrebirth.af.core.util.ObjectUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

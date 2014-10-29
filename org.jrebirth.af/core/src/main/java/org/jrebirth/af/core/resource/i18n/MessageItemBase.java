@@ -19,8 +19,11 @@ package org.jrebirth.af.core.resource.i18n;
 
 import java.text.MessageFormat;
 
-import org.jrebirth.af.core.exception.CoreRuntimeException;
-import org.jrebirth.af.core.log.JRLevel;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.log.JRLevel;
+import org.jrebirth.af.api.resource.i18n.MessageItem;
+import org.jrebirth.af.api.resource.i18n.MessageParams;
+import org.jrebirth.af.api.resource.i18n.MessageResource;
 import org.jrebirth.af.core.resource.AbstractResourceItem;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.slf4j.Marker;
@@ -30,7 +33,7 @@ import org.slf4j.Marker;
  *
  * @author Sébastien Bordes
  */
-public final class MessageItemBase extends AbstractResourceItem<MessageResource, MessageItem, MessageParams, MessageBuilder> implements MessageItem {
+public final class MessageItemBase extends AbstractResourceItem<MessageItem, MessageParams, MessageResource> implements MessageItemReal {
 
     public static MessageItemBase create() {
         return new MessageItemBase();
@@ -74,7 +77,7 @@ public final class MessageItemBase extends AbstractResourceItem<MessageResource,
     @Override
     public void define(final MessageResource forcedValue) {
         // The default programmatic value (stored into ObjectParameter) is not updated but overridden into the local map
-        builder().define(this, forcedValue);
+        ((MessageBuilder) builder()).define(this, forcedValue);
     }
 
     /**

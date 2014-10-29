@@ -3,9 +3,9 @@ package org.jrebirth.af.core.inner;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jrebirth.af.core.facade.Component;
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.Model;
+import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.ui.Model;
 
 public class InnerComponentRegistry {
 

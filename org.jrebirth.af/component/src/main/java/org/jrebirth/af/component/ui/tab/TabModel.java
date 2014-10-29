@@ -23,15 +23,16 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.ui.beans.TabConfig;
 import org.jrebirth.af.component.ui.beans.TabOrientation;
 import org.jrebirth.af.core.ui.object.DefaultObjectModel;
 import org.jrebirth.af.core.util.ObjectUtility;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveItem;
-import org.jrebirth.af.core.wave.WaveType;
-import org.jrebirth.af.core.wave.checker.WaveChecker;
+import org.jrebirth.af.core.wave.WaveItemBase;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,18 +44,18 @@ import org.slf4j.LoggerFactory;
 public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
 
     /** The key of the tab model used as filter by wave checker. */
-    public static WaveItem<String> TAB_KEY = new WaveItem<String>(false) {
+    public static WaveItemBase<String> TAB_KEY = new WaveItemBase<String>(false) {
     };
 
     /** The model. */
-    public static WaveItem<Dockable> TAB = new WaveItem<Dockable>() {
+    public static WaveItemBase<Dockable> TAB = new WaveItemBase<Dockable>() {
     };
 
     /** The add. */
-    public static WaveType ADD = WaveType.create("ADD_TAB").items(TAB);
+    public static WaveType ADD = WaveTypeBase.create("ADD_TAB").items(TAB);
 
     /** The remove. */
-    public static WaveType REMOVE = WaveType.create("REMOVE_TAB").items(TAB);
+    public static WaveType REMOVE = WaveTypeBase.create("REMOVE_TAB").items(TAB);
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(TabModel.class);

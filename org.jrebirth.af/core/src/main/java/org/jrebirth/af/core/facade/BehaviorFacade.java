@@ -17,7 +17,8 @@
  */
 package org.jrebirth.af.core.facade;
 
-import org.jrebirth.af.core.behavior.Behavior;
+import org.jrebirth.af.api.behavior.Behavior;
+import org.jrebirth.af.api.facade.GlobalFacade;
 
 /**
  * The class <strong>BehaviorFacade</strong>.

@@ -3,7 +3,8 @@ package org.jrebirth.af.core.resource.fxml;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import org.jrebirth.af.core.ui.fxml.FXMLComponent;
+import org.jrebirth.af.api.resource.fxml.FXMLItem;
+import org.jrebirth.af.api.ui.fxml.FXMLComponent;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -34,28 +35,26 @@ public class FxmlTest {
 
         checkFXML(EnumFxmls.FIRST_FXML);
         checkFXML(EnumFxmls.SECOND_FXML);
-        
+
         checkFXML(TestFxmls.FIRST_FXML);
         checkFXML(TestFxmls.SECOND_FXML);
-        
+
     }
 
     private void checkFXML(final FXMLItem fxmlItem) {
-        
-        FXMLComponent fx1 = fxmlItem.get();
-        FXMLComponent fx2 = fxmlItem.get();
-        
-        FXMLComponent fx3 = fxmlItem.getNew();
-        FXMLComponent fx4 = fxmlItem.getNew();
-        
+
+        final FXMLComponent fx1 = fxmlItem.get();
+        final FXMLComponent fx2 = fxmlItem.get();
+
+        final FXMLComponent fx3 = fxmlItem.getNew();
+        final FXMLComponent fx4 = fxmlItem.getNew();
+
         assertEquals(fx1, fx2);
         assertNotEquals(fx1, fx3);
         assertNotEquals(fx1, fx4);
         assertNotEquals(fx3, fx4);
-        
 
     }
-
 
     @After
     public void tearDown() throws Exception {

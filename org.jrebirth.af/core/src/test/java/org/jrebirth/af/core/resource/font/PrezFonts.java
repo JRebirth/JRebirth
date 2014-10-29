@@ -19,6 +19,8 @@ package org.jrebirth.af.core.resource.font;
 
 import javafx.scene.text.Font;
 
+import org.jrebirth.af.api.resource.font.FontItem;
+import org.jrebirth.af.api.resource.font.FontParams;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 
 /**

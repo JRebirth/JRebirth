@@ -20,6 +20,7 @@ package org.jrebirth.af.core.log;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.jrebirth.af.api.log.JRLogger;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
 

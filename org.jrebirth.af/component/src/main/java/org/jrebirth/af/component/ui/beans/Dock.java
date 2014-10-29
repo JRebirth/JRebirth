@@ -2,8 +2,8 @@ package org.jrebirth.af.component.ui.beans;
 
 import java.io.Serializable;
 
-import org.jrebirth.af.core.key.UniqueKey;
-import org.jrebirth.af.core.ui.Model;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.ui.Model;
 
 public class Dock implements Serializable {
 

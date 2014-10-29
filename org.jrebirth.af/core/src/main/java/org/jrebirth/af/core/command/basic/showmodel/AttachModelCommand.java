@@ -19,8 +19,8 @@ package org.jrebirth.af.core.command.basic.showmodel;
 
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.command.impl.single.ui.DefaultUIBeanCommand;
-import org.jrebirth.af.core.wave.Wave;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.command.single.ui.DefaultUIBeanCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

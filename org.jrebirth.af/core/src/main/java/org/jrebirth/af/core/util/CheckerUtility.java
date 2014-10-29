@@ -6,16 +6,15 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jrebirth.af.core.exception.CoreRuntimeException;
-import org.jrebirth.af.core.facade.Component;
-import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveItem;
+import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.wave.OnWave;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveItem;
-import org.jrebirth.af.core.wave.WaveType;
-import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.jrebirth.af.core.wave.WaveTypeRegistry;
 
 /**
@@ -58,16 +57,16 @@ public final class CheckerUtility implements UtilMessages {
 
                 if (methods.size() < 1 && annotatedMethods.size() < 1) {
                     LOGGER.log(BROKEN_API_NO_METHOD, waveReadyClass.getSimpleName(), methodName);
-                    LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(), methodName, ((WaveTypeBase) waveType).getItems());
+                    LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(), methodName, waveType.items());
                 }
 
-                // Check parameter only for a WaveTypeBase
-                if (waveType instanceof WaveTypeBase) {
+                // Check parameter only for a WaveType
+                if (waveType instanceof WaveType) {
 
                     int methodParameters = 0;
                     boolean hasCompliantMethod = false;
 
-                    final List<WaveItem<?>> wParams = ((WaveTypeBase) waveType).items();
+                    final List<WaveItem<?>> wParams = waveType.items();
 
                     for (int j = 0; j < methods.size() && !hasCompliantMethod; j++) {
                         hasCompliantMethod = checkMethodSignature(methods.get(j), wParams);
@@ -90,14 +89,14 @@ public final class CheckerUtility implements UtilMessages {
 
                     if (!hasCompliantMethod) {
                         LOGGER.log(BROKEN_API_WRONG_PARAMETERS, waveReadyClass.getSimpleName(), methodName,
-                                   ((WaveTypeBase) waveType).items().size(), methodParameters);
+                                   waveType.items().size(), methodParameters);
 
                         LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(),
-                                   methodName, ((WaveTypeBase) waveType).getItems());
+                                   methodName, waveType.items());
 
                         throw new CoreRuntimeException(BROKEN_API_WRONG_PARAMETERS.getText(waveReadyClass.getSimpleName(),
                                                                                            methodName,
-                                                                                           ((WaveTypeBase) waveType).items().size(),
+                                                                                           waveType.items().size(),
                                                                                            methodParameters));
                     }
                 }
@@ -150,11 +149,11 @@ public final class CheckerUtility implements UtilMessages {
      */
     public static void checkWave(final Wave wave) {
         if (JRebirthParameters.DEVELOPER_MODE.get()) {
-            if (wave.waveType() != null && wave.waveType() instanceof WaveTypeBase) {
+            if (wave.waveType() != null && wave.waveType() instanceof WaveType) {
 
                 // List missing wave items not held by WaveData wrapper
                 final List<WaveItem<?>> missingWaveItems = new ArrayList<>();
-                for (final WaveItem<?> item : ((WaveTypeBase) wave.waveType()).items()) {
+                for (final WaveItem<?> item : wave.waveType().items()) {
 
                     if (!wave.contains(item)) {
                         missingWaveItems.add(item);

@@ -32,11 +32,11 @@ import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.image.WritableImage;
 import javafx.scene.shape.RectangleBuilder;
 
+import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveType;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.jrebirth.af.transition.slicer.TransitionWaves;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
 public class NodeSlicerCommand extends DefaultService {
 
     /** Wave type use to load events. */
-    public static final WaveType DO_SLICE_NODE = WaveType.create("SLICE_NODE").items(TransitionWaves.NODE).returnAction("NODE_SLICED").returnItem(TransitionWaves.SLICES);
+    public static final WaveType DO_SLICE_NODE = WaveTypeBase.create("SLICE_NODE").items(TransitionWaves.NODE).returnAction("NODE_SLICED").returnItem(TransitionWaves.SLICES);
 
     /** Wave type to return events loaded. */
     // public static final WaveType RE_NODE_SLICED = WaveType.create("NODE_SLICED").items(TransitionWaves.SLICES);

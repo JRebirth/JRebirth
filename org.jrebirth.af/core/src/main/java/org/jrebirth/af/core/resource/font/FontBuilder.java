@@ -22,6 +22,9 @@ import java.util.List;
 
 import javafx.scene.text.Font;
 
+import org.jrebirth.af.api.resource.builder.ResourceBuilder;
+import org.jrebirth.af.api.resource.font.FontItem;
+import org.jrebirth.af.api.resource.font.FontParams;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
@@ -35,7 +38,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Sébastien Bordes
  */
-public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontParams, Font> {
+public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontParams, Font> implements ResourceBuilder<FontItem, FontParams, Font> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(FontBuilder.class);

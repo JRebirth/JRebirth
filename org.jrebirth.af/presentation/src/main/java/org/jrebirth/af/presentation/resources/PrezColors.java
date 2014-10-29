@@ -19,7 +19,7 @@ package org.jrebirth.af.presentation.resources;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
-import org.jrebirth.af.core.resource.color.ColorItem;
+import org.jrebirth.af.api.resource.color.ColorItem;
 import org.jrebirth.af.core.resource.color.RGB255Color;
 import org.jrebirth.af.core.resource.color.WebColor;
 

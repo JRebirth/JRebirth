@@ -19,9 +19,9 @@ package org.jrebirth.af.showcase.analyzer.ui.controls;
 
 import java.util.List;
 
-import org.jrebirth.af.core.facade.JRebirthEvent;
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.ui.DefaultModel;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 

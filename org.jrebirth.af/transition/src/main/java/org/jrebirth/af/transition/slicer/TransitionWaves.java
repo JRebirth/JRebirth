@@ -21,7 +21,7 @@ import java.util.List;
 
 import javafx.scene.Node;
 
-import org.jrebirth.af.core.wave.WaveItem;
+import org.jrebirth.af.core.wave.WaveItemBase;
 import org.jrebirth.af.transition.command.slicer.SliceItem;
 
 /**
@@ -40,11 +40,11 @@ public interface TransitionWaves {
     /*************************************************************************/
 
     /** The file containing all events serialized. */
-    WaveItem<List<Node>> NODE = new WaveItem<List<Node>>() {
+    WaveItemBase<List<Node>> NODE = new WaveItemBase<List<Node>>() {
     };
 
     /** The list of slice item build from original node. */
-    WaveItem<List<SliceItem>> SLICES = new WaveItem<List<SliceItem>>() {
+    WaveItemBase<List<SliceItem>> SLICES = new WaveItemBase<List<SliceItem>>() {
     };
 
 }

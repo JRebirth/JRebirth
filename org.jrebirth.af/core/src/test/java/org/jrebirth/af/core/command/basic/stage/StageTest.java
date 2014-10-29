@@ -3,18 +3,17 @@ package org.jrebirth.af.core.command.basic.stage;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import org.jrebirth.af.api.exception.JRebirthThreadException;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveListener;
 import org.jrebirth.af.core.application.TestApplication;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
-import org.jrebirth.af.core.exception.JRebirthThreadException;
 import org.jrebirth.af.core.facade.CommandFacade;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
 import org.jrebirth.af.core.service.basic.StageService;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveListener;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -73,9 +72,9 @@ public class StageTest {
 
         final String stageKey = "defaultStage";
         final Wave wave = WaveBase.callCommand(StageCommand.class)
-                .waveBean(StageWaveBean.create()
-                        .action(StageAction.show)
-                        .stageKey(stageKey));
+                                  .waveBean(StageWaveBean.create()
+                                                         .action(StageAction.show)
+                                                         .stageKey(stageKey));
 
         wave.addWaveListener(new WaveListener() {
 

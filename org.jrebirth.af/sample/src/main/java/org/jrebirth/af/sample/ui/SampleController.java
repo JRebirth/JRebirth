@@ -2,7 +2,7 @@ package org.jrebirth.af.sample.ui;
 
 import javafx.scene.input.MouseEvent;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.AbstractController;
 import org.jrebirth.af.core.ui.adapter.DefaultMouseAdapter;
 import org.jrebirth.af.core.wave.WaveBase;

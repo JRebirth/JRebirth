@@ -22,11 +22,11 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
-import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.ui.annotation.OnSwipe;
+import org.jrebirth.af.api.ui.annotation.RootNodeId;
+import org.jrebirth.af.api.ui.annotation.type.Swipe;
 import org.jrebirth.af.core.ui.DefaultView;
-import org.jrebirth.af.core.ui.annotation.OnSwipe;
-import org.jrebirth.af.core.ui.annotation.RootNodeId;
-import org.jrebirth.af.core.ui.annotation.type.Swipe;
 
 /**
  * 

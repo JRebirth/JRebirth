@@ -17,8 +17,8 @@
  */
 package org.jrebirth.af.undoredo.command;
 
-import org.jrebirth.af.core.command.Command;
-import org.jrebirth.af.core.wave.WaveBean;
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.wave.WaveBean;
 
 /**
  * The Interface Undoable.

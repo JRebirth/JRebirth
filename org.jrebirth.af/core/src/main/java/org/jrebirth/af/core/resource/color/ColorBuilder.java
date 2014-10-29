@@ -19,6 +19,9 @@ package org.jrebirth.af.core.resource.color;
 
 import javafx.scene.paint.Color;
 
+import org.jrebirth.af.api.resource.builder.ResourceBuilder;
+import org.jrebirth.af.api.resource.color.ColorItem;
+import org.jrebirth.af.api.resource.color.ColorParams;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 
 /**
@@ -28,7 +31,7 @@ import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
  *
  * @author Sébastien Bordes
  */
-public final class ColorBuilder extends AbstractResourceBuilder<ColorItem, ColorParams, Color> {
+public final class ColorBuilder extends AbstractResourceBuilder<ColorItem, ColorParams, Color> implements ResourceBuilder<ColorItem, ColorParams, Color> {
 
     /** The <code>HEXA_PREFIX</code> field is used before any hexadecimal value. */
     private static final String HEXA_PREFIX = "#";

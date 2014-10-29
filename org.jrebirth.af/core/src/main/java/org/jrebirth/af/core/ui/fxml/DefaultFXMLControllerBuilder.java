@@ -2,10 +2,11 @@ package org.jrebirth.af.core.ui.fxml;
 
 import javafx.util.Callback;
 
-import org.jrebirth.af.core.log.JRLogger;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.View;
+import org.jrebirth.af.api.ui.fxml.FXMLController;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.core.ui.View;
 
 /**
  * The class <strong>DefaultFXMLControllerBuilder</strong>.

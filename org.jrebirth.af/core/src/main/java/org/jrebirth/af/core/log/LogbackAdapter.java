@@ -17,7 +17,8 @@
  */
 package org.jrebirth.af.core.log;
 
-import org.jrebirth.af.core.resource.i18n.MessageItem;
+import org.jrebirth.af.api.log.JRLevel;
+import org.jrebirth.af.api.resource.i18n.MessageItem;
 import org.slf4j.Marker;
 import org.slf4j.spi.LocationAwareLogger;
 

@@ -17,7 +17,9 @@
  */
 package org.jrebirth.af.core.resource.parameter;
 
-import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.resource.parameter.ParameterItem;
+import org.jrebirth.af.api.resource.parameter.ParameterParams;
 import org.jrebirth.af.core.resource.AbstractResourceItem;
 
 /**
@@ -27,7 +29,7 @@ import org.jrebirth.af.core.resource.AbstractResourceItem;
  *
  * @author Sébastien Bordes
  */
-public final class ParameterItemBase<T> extends AbstractResourceItem<T, ParameterItem<T>, ParameterParams, ParameterBuilder> implements ParameterItem<T> {
+public final class ParameterItemBase<T> extends AbstractResourceItem<ParameterItem<?>, ParameterParams, T> implements ParameterItemReal<T> {
 
     public static <T extends Object> ParameterItemBase<T> create(final T o) {
         return new ParameterItemBase<T>();
@@ -39,7 +41,7 @@ public final class ParameterItemBase<T> extends AbstractResourceItem<T, Paramete
     @Override
     public void define(final T forcedValue) {
         // The default programmatic value (stored into ObjectParameter) is not updated but overridden into the local map
-        builder().define(this, forcedValue);
+        ((ParameterBuilder) builder()).define(this, forcedValue);
     }
 
     /**

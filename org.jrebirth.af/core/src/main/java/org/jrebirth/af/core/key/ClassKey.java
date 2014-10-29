@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.jrebirth.af.api.key.UniqueKey;
+
 /**
  * The class <strong>ClassKey</strong>.
  *

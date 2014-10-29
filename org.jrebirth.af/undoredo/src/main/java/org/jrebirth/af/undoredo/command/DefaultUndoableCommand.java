@@ -17,8 +17,8 @@
  */
 package org.jrebirth.af.undoredo.command;
 
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.core.wave.WaveBean;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
 
 /**
  * The Class DefaultUndoableCommand is the default class to build an undoable command.

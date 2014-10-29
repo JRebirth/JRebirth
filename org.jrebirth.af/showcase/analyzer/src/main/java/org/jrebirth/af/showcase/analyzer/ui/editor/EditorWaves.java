@@ -20,9 +20,10 @@ package org.jrebirth.af.showcase.analyzer.ui.editor;
 import java.io.File;
 import java.util.List;
 
-import org.jrebirth.af.core.facade.JRebirthEvent;
-import org.jrebirth.af.core.wave.WaveItem;
-import org.jrebirth.af.core.wave.WaveType;
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.core.wave.WaveItemBase;
+import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  * The class <strong>EditorWaves</strong>.
@@ -36,43 +37,43 @@ public interface EditorWaves {
     /*************************************************************************/
 
     /** Trigger a Unload wave. */
-    WaveType DO_UNLOAD = WaveType.create("UNLOAD");
+    WaveType DO_UNLOAD = WaveTypeBase.create("UNLOAD");
 
     /** Trigger a Play wave. */
-    WaveType DO_PLAY = WaveType.create("PLAY");
+    WaveType DO_PLAY = WaveTypeBase.create("PLAY");
 
     /** Trigger a Next wave. */
-    WaveType DO_NEXT = WaveType.create("NEXT");
+    WaveType DO_NEXT = WaveTypeBase.create("NEXT");
 
     /** Trigger a Previous wave. */
-    WaveType DO_PREVIOUS = WaveType.create("PREVIOUS");
+    WaveType DO_PREVIOUS = WaveTypeBase.create("PREVIOUS");
 
     /** Trigger a Stop wave. */
-    WaveType DO_STOP = WaveType.create("STOP");
+    WaveType DO_STOP = WaveTypeBase.create("STOP");
 
     /** The WaveType key usabe by OnWave annotation. */
     String DO_SELECT_EVENT_ACTION = "EVENT_SELECTED";
 
     /** Wave used to display info into the properties view. */
-    WaveType DO_SELECT_EVENT = WaveType.create(DO_SELECT_EVENT_ACTION);
+    WaveType DO_SELECT_EVENT = WaveTypeBase.create(DO_SELECT_EVENT_ACTION);
 
     /** Wave type used to return the event currently processed. */
-    WaveType RE_EVENT_PROCESSED = WaveType.create("EVENT_PROCESSED");
+    WaveType RE_EVENT_PROCESSED = WaveTypeBase.create("EVENT_PROCESSED");
 
     /*************************************************************************/
     /** Wave Items **/
     /*************************************************************************/
 
     /** The file containing all events serialized. */
-    WaveItem<File> EVENTS_FILE = new WaveItem<File>() {
+    WaveItemBase<File> EVENTS_FILE = new WaveItemBase<File>() {
     };
 
     /** The name of the events. */
-    WaveItem<List<JRebirthEvent>> EVENTS = new WaveItem<List<JRebirthEvent>>() {
+    WaveItemBase<List<JRebirthEvent>> EVENTS = new WaveItemBase<List<JRebirthEvent>>() {
     };
 
     /** An event unserialized. */
-    WaveItem<JRebirthEvent> EVENT = new WaveItem<JRebirthEvent>() {
+    WaveItemBase<JRebirthEvent> EVENT = new WaveItemBase<JRebirthEvent>() {
     };
 
 }

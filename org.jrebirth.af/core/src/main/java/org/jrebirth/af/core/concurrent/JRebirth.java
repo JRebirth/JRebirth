@@ -19,8 +19,9 @@ package org.jrebirth.af.core.concurrent;
 
 import javafx.application.Platform;
 
-import org.jrebirth.af.core.exception.JRebirthThreadException;
-import org.jrebirth.af.core.exception.JRebirthThreadException.Type;
+import org.jrebirth.af.api.concurrent.JRebirthRunnable;
+import org.jrebirth.af.api.concurrent.RunType;
+import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
 
 /**
@@ -153,7 +154,7 @@ public final class JRebirth {
      */
     public static void checkJAT() throws JRebirthThreadException {
         if (!Platform.isFxApplicationThread()) {
-            throw new JRebirthThreadException(Type.NOT_RUN_INTO_JAT);
+            throw new JRebirthThreadException(JRebirthThreadException.Type.NOT_RUN_INTO_JAT);
         }
     }
 
@@ -164,7 +165,7 @@ public final class JRebirth {
      */
     public static void checkJIT() throws JRebirthThreadException {
         if (!isJIT()) {
-            throw new JRebirthThreadException(Type.NOT_RUN_INTO_JIT);
+            throw new JRebirthThreadException(JRebirthThreadException.Type.NOT_RUN_INTO_JIT);
         }
     }
 
@@ -175,7 +176,7 @@ public final class JRebirth {
      */
     public static void checkJTPSlot() throws JRebirthThreadException {
         if (!isJTPSlot()) {
-            throw new JRebirthThreadException(Type.NOT_RUN_INTO_JTP);
+            throw new JRebirthThreadException(JRebirthThreadException.Type.NOT_RUN_INTO_JTP);
         }
     }
 }

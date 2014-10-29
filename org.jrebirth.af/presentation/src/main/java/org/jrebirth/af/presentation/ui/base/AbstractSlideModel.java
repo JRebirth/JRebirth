@@ -34,8 +34,8 @@ import javafx.scene.effect.MotionBlur;
 import javafx.scene.effect.MotionBlurBuilder;
 import javafx.util.Duration;
 
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.ui.DefaultModel;
-import org.jrebirth.af.core.wave.Wave;
 import org.jrebirth.presentation.model.AnimationType;
 import org.jrebirth.presentation.model.Slide;
 import org.jrebirth.presentation.model.SlideContent;

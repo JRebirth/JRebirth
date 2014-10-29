@@ -17,8 +17,8 @@
  */
 package org.jrebirth.af.core.inner;
 
-import org.jrebirth.af.core.facade.Component;
-import org.jrebirth.af.core.key.UniqueKey;
+import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.key.UniqueKey;
 
 /**
  * The interface <strong>InnerModels</strong>.

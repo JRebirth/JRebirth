@@ -17,11 +17,14 @@
  */
 package org.jrebirth.af.core.ui;
 
-import org.jrebirth.af.core.exception.CoreException;
-import org.jrebirth.af.core.exception.CoreRuntimeException;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.NullView;
+import org.jrebirth.af.api.ui.View;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.JRebirthWaves;
-import org.jrebirth.af.core.wave.Wave;
 
 /**
  *

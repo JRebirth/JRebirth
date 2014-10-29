@@ -1,7 +1,7 @@
 package org.jrebirth.fxform;
 
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.ui.fxform.AbstractFormModel;
-import org.jrebirth.af.core.wave.Wave;
 
 /**
  * The class <strong>PersonFormModel</strong>.
