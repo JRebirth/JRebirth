@@ -6,6 +6,7 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.basic.BasicCommandTest;
 import org.jrebirth.af.core.command.ref.GroupRefCommand;
 import org.jrebirth.af.core.command.ref.Ref;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -13,6 +14,7 @@ import org.junit.Test;
  *
  * @author Sébastien Bordes
  */
+@Ignore("Must add call command unique key")
 public class GroupRefCommandTest extends BasicCommandTest {
 
     @Test
@@ -75,7 +77,7 @@ public class GroupRefCommandTest extends BasicCommandTest {
                                    .runInto(RunType.JTP)
                                    .runWave(this::sayHelloWave)/*
                                                                 * ,
-                                                                *
+                                                                * 
                                                                 * Ref.real().commandKey(UniqueKey.key(UpdateCursorCommand.class, Cursor.DEFAULT))
                                                                 */
                            );

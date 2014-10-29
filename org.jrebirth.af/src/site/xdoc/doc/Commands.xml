@@ -163,7 +163,7 @@
 					retrieve" /> </macro> -->
 
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/af/core/link/CommandReady.java" />
+					<param name="source" value="api/src/main/java/org/jrebirth/af/api/link/CommandReady.java" />
 					<param name="snippet" value="re:getCommand" />
 				</macro>
 
@@ -175,7 +175,7 @@
 				</p>
 
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/Command.java" />
+					<param name="source" value="api/src/main/java/org/jrebirth/af/api/command/Command.java" />
 					<param name="snippet" value="re:run\(\)" />
 				</macro>
 
@@ -321,19 +321,19 @@
 
 				<p>To run a command into the JAT (JavaFX Application Thread), use this annotation :</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/impl/single/ui/DefaultUICommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/single/ui/DefaultUICommand.java" />
 					<param name="snippet" value="re:@RunInto" />
 				</macro>
 
 				<p>To run a command into the JIT (JRebirth Internal Thread), use this annotation :</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/impl/single/syncro/DefaultCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/single/internal/DefaultCommand.java" />
 					<param name="snippet" value="re:@RunInto" />
 				</macro>
 
 				<p>To run a command into JTP (JRebirth Thread Pool, the command will be run into a slot), use this annotation :</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/impl/single/pool/DefaultPoolCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/single/pool/DefaultPoolCommand.java" />
 					<param name="snippet" value="re:@RunInto" />
 				</macro>
 
@@ -383,7 +383,7 @@
 					enum value to the command constructor.
 				</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/impl/AbstractBaseCommand.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/command/AbstractBaseCommand.java" />
 					<param name="snippet" value="re:RunType runType" />
 				</macro>
 

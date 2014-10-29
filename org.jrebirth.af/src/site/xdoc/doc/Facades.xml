@@ -93,7 +93,7 @@
 
                 <macro name="include">
                 	<param name="highlight-theme" value="eclipse"/>
-                    <param name="source" value="core/src/main/java/org/jrebirth/af/core/facade/GlobalFacade.java"/>
+                    <param name="source" value="api/src/main/java/org/jrebirth/af/api/facade/GlobalFacade.java"/>
                     <param name="snippet" value="re:LocalFacade"/>
                 </macro>
 
@@ -104,7 +104,7 @@
                 </p>
 
                 <macro name="include">
-                    <param name="source" value="core/src/main/java/org/jrebirth/af/core/facade/GlobalReady.java"/>
+                    <param name="source" value="api/src/main/java/org/jrebirth/af/api/facade/GlobalReady.java"/>
                     <param name="snippet" value="re:getGlobalFacade"/>
                 </macro>
             </subsection>
@@ -129,7 +129,7 @@
                 </ul>
 
                 <macro name="include">
-                    <param name="source" value="core/src/main/java/org/jrebirth/af/core/facade/Facade.java"/>
+                    <param name="source" value="api/src/main/java/org/jrebirth/af/api/facade/Facade.java"/>
                     <param name="snippet" value="re:E extends R"/>
                 </macro>
 

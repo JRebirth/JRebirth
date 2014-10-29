@@ -1,6 +1,7 @@
 package org.jrebirth.af.core.command.dataflow;
 
 import org.jrebirth.af.core.command.basic.BasicCommandTest;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -8,6 +9,7 @@ import org.junit.Test;
  *
  * @author Sébastien Bordes
  */
+@Ignore
 public class DataFlowCommandTest extends BasicCommandTest {
 
     @Test

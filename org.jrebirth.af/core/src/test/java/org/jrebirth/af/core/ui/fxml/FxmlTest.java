@@ -7,6 +7,7 @@ import org.jrebirth.af.core.test.AbstractTest;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -14,6 +15,7 @@ import org.junit.Test;
  *
  * @author Sébastien Bordes
  */
+@Ignore
 public class FxmlTest extends AbstractTest {
 
     private TestFXMLModel model;

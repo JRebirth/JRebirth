@@ -7,8 +7,9 @@ import org.jrebirth.af.api.application.JRebirthApplication;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 
-//@Ignore("Only one application at the same time")
+@Ignore("Only one application at the same time")
 public class ApplicationTest<A extends DefaultApplication<?>> {
 
     private final Class<A> appClass;

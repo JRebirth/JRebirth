@@ -43,26 +43,26 @@
 		<!-- oooooooooo -->
 		<!-- APIDOCS -->
 		<!-- oooooooooo -->
-		<moduleSet>
+<!-- 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
 				<include>org.jrebirth.af:core:</include>
 				<include>org.jrebirth.af:presentation:</include>
 				<include>org.jrebirth.af:component:</include>
 				<include>org.jrebirth.af:transition:*</include>
-				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
+				<include>org.jrebirth.af:undoredo:*</include>
 			</includes>
 
-			<!-- Javadoc -->
+			Javadoc
 			<binaries>
-				<!-- <outputFileNameMapping>apidocs/${module.artifactId}</outputFileNameMapping> -->
+				<outputFileNameMapping>apidocs/${module.artifactId}</outputFileNameMapping>
 				<attachmentClassifier>javadoc</attachmentClassifier>
 				<includeDependencies>false</includeDependencies>
 				<outputDirectory>apidocs/${module.artifactId}</outputDirectory>
 				<unpack>true</unpack>
 			</binaries>
 		</moduleSet>
-
+ -->
 		<!-- oooooooooo -->
 		<!-- LIBS -->
 		<!-- oooooooooo -->
