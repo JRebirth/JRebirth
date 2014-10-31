@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.link;
 
+import static org.jrebirth.af.core.wave.Builders.waveType;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -26,7 +28,6 @@ import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveItemBase;
-import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +47,7 @@ public class BasicTestService extends DefaultService {
     };
 
     /** Wave type use to load events. */
-    public static final WaveType DO_JOB = WaveTypeBase.create("PERFORM_JOB").items(STRINGS).returnAction("JOB_PERFORMED").returnItem(SUBSTRINGS);
+    public static final WaveType DO_JOB = waveType("PERFORM_JOB").items(STRINGS).returnAction("JOB_PERFORMED").returnItem(SUBSTRINGS);
 
     /** Wave type to return events loaded. */
     // public static final WaveType RE_JOB_DONE = WaveType.create("JOB_PERFORMED", SUBSTRINGS);

@@ -14,8 +14,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleUICommand</strong> use to update the user interface.
- * 
- * @author
  */
 public final class SampleUICommand extends DefaultUIBeanCommand<WaveBean> {
 
@@ -39,13 +37,13 @@ public final class SampleUICommand extends DefaultUIBeanCommand<WaveBean> {
         LOGGER.info("Display a pop up from JAT");
 
         final Stage s = StageBuilder.create()
-                .title("Sample Ui Command Test")
-                .style(StageStyle.DECORATED)
-                .scene(SceneBuilder.create()
-                        .root(LabelBuilder.create().text("Run into JAT").build())
-                        .build())
+                                    .title("Sample Ui Command Test")
+                                    .style(StageStyle.DECORATED)
+                                    .scene(SceneBuilder.create()
+                                                       .root(LabelBuilder.create().text("Run into JAT").build())
+                                                       .build())
 
-                .build();
+                                    .build();
 
         s.show();
         // Sample for popup => Attach owner !!!

@@ -19,30 +19,26 @@ package org.jrebirth.af.core.resource.font;
 
 import javafx.scene.text.Font;
 
+import org.jrebirth.af.api.resource.ResourceItem;
+import org.jrebirth.af.api.resource.color.ColorItem;
 import org.jrebirth.af.api.resource.font.FontItem;
 import org.jrebirth.af.api.resource.font.FontParams;
 import org.jrebirth.af.core.resource.AbstractResourceItem;
 
 /**
- * The class <strong>FontItemBase</strong>.
+ * The class <strong>FontItemBase</strong> provides a simple constructor used to build a {@link FontItem} usable from anywhere.
  *
  * @author Sébastien Bordes
  */
 public final class FontItemBase extends AbstractResourceItem<FontItem, FontParams, Font> implements FontItemReal {
 
+    /**
+     * Build a new Font Item instance.
+     * 
+     * @return a new {@link FontItem} instance
+     */
     public static FontItemBase create() {
         return new FontItemBase();
     }
-
-    // /**
-    // * Default Constructor.
-    // *
-    // * You should not use this constructor, see #{@link org.jrebirth.af.core.resource.Resources}
-    // *
-    // * @param fontParams the primitive values for the font
-    // */
-    // public FontItemBase(final FontParams fontParams) {
-    // set(fontParams);
-    // }
 
 }

@@ -20,7 +20,7 @@ package org.jrebirth.af.showcase.analyzer.command;
 import org.jrebirth.af.api.facade.JRebirthEvent;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.single.internal.DefaultCommand;
-import org.jrebirth.af.core.wave.WaveDataBase;
+import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 
 /**
@@ -66,7 +66,7 @@ public final class ProcessEventCommand extends DefaultCommand {
             case CREATE_VIEW:
             case CREATE_CONTROLLER:
                 // final BallModel ballModel = getModel(BallModel.class, event);
-                callCommand(CreateBallCommand.class, WaveDataBase.build(EditorWaves.EVENT, event));
+                callCommand(CreateBallCommand.class, Builders.waveData(EditorWaves.EVENT, event));
                 break;
             case CREATE_WAVE:
             default:
@@ -87,7 +87,7 @@ public final class ProcessEventCommand extends DefaultCommand {
             case ACCESS_SERVICE:
             case ACCESS_VIEW:
                 // final BallModel ballModel = getModel(BallModel.class, event);
-                callCommand(AccessBallCommand.class, WaveDataBase.build(EditorWaves.EVENT, event));
+                callCommand(AccessBallCommand.class, Builders.waveData(EditorWaves.EVENT, event));
                 break;
             default:
         }
@@ -106,7 +106,7 @@ public final class ProcessEventCommand extends DefaultCommand {
             case DESTROY_VIEW:
             case DESTROY_CONTROLLER:
                 // final BallModel ballModel = getModel(BallModel.class, event);
-                callCommand(DestroyBallCommand.class, WaveDataBase.build(EditorWaves.EVENT, event));
+                callCommand(DestroyBallCommand.class, Builders.waveData(EditorWaves.EVENT, event));
                 break;
             case DESTROY_WAVE:
             default:

@@ -11,8 +11,8 @@
 	<artifactId>component</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Components</name>
-	<description>Convenient components to use with JRebirth Core</description>
+	<name>Component</name>
+	<description>Convenient JRebirth Components to use with JRAF</description>
 
 	<dependencies>
 

@@ -40,7 +40,7 @@ public interface ImageItemReal extends ImageItem {
         return ResourceBuilders.IMAGE_BUILDER;
     }
 
-    public interface Relative extends ImageItemReal {
+    interface Relative extends ImageItemReal {
 
         /**
          * .
@@ -74,7 +74,7 @@ public interface ImageItemReal extends ImageItem {
 
     }
 
-    public interface Absolute extends ImageItemReal {
+    interface Absolute extends ImageItemReal {
 
         /**
          * .
@@ -108,7 +108,7 @@ public interface ImageItemReal extends ImageItem {
 
     }
 
-    public interface Web extends ImageItemReal {
+    interface Web extends ImageItemReal {
 
         /**
          * Default Constructor.

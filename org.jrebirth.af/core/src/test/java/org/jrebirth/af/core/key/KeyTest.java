@@ -5,7 +5,6 @@ import java.util.List;
 
 import javafx.scene.Cursor;
 import javafx.scene.layout.BorderPane;
-import junit.framework.Assert;
 
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.core.application.TestApplication;
@@ -15,6 +14,7 @@ import org.jrebirth.af.core.facade.CommandFacade;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -57,24 +57,33 @@ public class KeyTest {
 
         final List<Command> strongList = new ArrayList<>();
 
-        for (int i = 0; i < 200_000; i++) {
+        for (int i = 0; i < 100_000; i++) {
             strongList.add(this.commandFacade.retrieve(SwitchFullScreenCommand.class, new Integer(i)));
-            if (i % 20_000 == 0) {
+            if (i % 10_000 == 0) {
                 System.out.println(i + " added");
             }
         }
 
-        final UpdateCursorCommand kc0 = this.commandFacade.retrieve(UpdateCursorCommand.class);
-        final UpdateCursorCommand kc1 = this.commandFacade.retrieve(UpdateCursorCommand.class, Cursor.WAIT);
-        final UpdateCursorCommand kc2 = this.commandFacade.retrieve(UpdateCursorCommand.class, Cursor.WAIT, new BorderPane());
+        strongList.add(this.commandFacade.retrieve(UpdateCursorCommand.class));
+        strongList.add(this.commandFacade.retrieve(UpdateCursorCommand.class, Cursor.WAIT));
+        strongList.add(this.commandFacade.retrieve(UpdateCursorCommand.class, Cursor.WAIT, new BorderPane()));
 
+        checkComponentCount(UpdateCursorCommand.class, 3);
+        
+        checkComponentCount(SwitchFullScreenCommand.class, 100_000);
+        
+        // retain the strong list even method check to avoid compiler optimization that will release item too early
+        System.out.println(strongList.size() + " items strongly retained");
+    }
+
+    private <C extends Command> void checkComponentCount(Class<C> componentClass, int nb) {
         final long begin = System.currentTimeMillis();
 
-        final List<UpdateCursorCommand> kcList = this.commandFacade.retrieveAll(Key.create(UpdateCursorCommand.class));
+        final List<?> kcList = this.commandFacade.retrieveAll(Key.create(componentClass));
 
         System.out.println(System.currentTimeMillis() - begin + " ms");
 
-        Assert.assertEquals(3, kcList.size());
+        Assert.assertEquals(nb, kcList.size());
     }
 
     /**

@@ -206,7 +206,7 @@ public abstract class AbstractBaseParams implements ResourceParams {
      */
     @Override
     public boolean equals(final Object params) {
-        return params == null && !(params instanceof AbstractBaseParams) ? false : getKey().equals(((AbstractBaseParams) params).getKey());
+        return params == null || !(params instanceof AbstractBaseParams) ? false : getKey().equals(((AbstractBaseParams) params).getKey());
     }
 
     /**

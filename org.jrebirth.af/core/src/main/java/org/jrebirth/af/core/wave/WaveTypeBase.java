@@ -49,25 +49,25 @@ public final class WaveTypeBase implements WaveType {
     private WaveItem<?> returnItem;
 
     /** The wave type of the wave returned after processing. */
-    private WaveTypeBase returnWaveType;
+    private WaveType returnWaveType;
 
-    public static WaveTypeBase create() {
-        return new WaveTypeBase();
-    }
-
-    /**
-     * Build a wave type.
-     *
-     * @param action The action to perform, "DO_" keyword (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to generate the handler method
-     *
-     * @param waveItems the list of {@link WaveItem} required by this wave
-     *
-     * @return a new fresh wave type object
-     */
-    public static WaveTypeBase create(final String action/* , final WaveItem<?>... waveItems */) {
-
-        return WaveTypeBase.create().action(action/* , waveItems */);
-    }
+//    public static WaveTypeBase create() {
+//        return new WaveTypeBase();
+//    }
+//
+//    /**
+//     * Build a wave type.
+//     *
+//     * @param action The action to perform, "DO_" keyword (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to generate the handler method
+//     *
+//     * @param waveItems the list of {@link WaveItem} required by this wave
+//     *
+//     * @return a new fresh wave type object
+//     */
+//    public static WaveTypeBase create(final String action/* , final WaveItem<?>... waveItems */) {
+//
+//        return Builders.waveType().action(action/* , waveItems */);
+//    }
 
     /**
      * Default constructor.
@@ -76,7 +76,7 @@ public final class WaveTypeBase implements WaveType {
      *
      * @param waveItems the list of #WaveItem{@link WaveItem} required by this wave
      */
-    private WaveTypeBase() {
+    WaveTypeBase() {
 
         // Ensure that the uid will be unique at runtime
         uid(WaveTypeRegistry.getNextUid());
@@ -191,12 +191,12 @@ public final class WaveTypeBase implements WaveType {
 
     private void buildReturnWaveType() {
         if (this.returnAction != null && this.returnItem != null) {
-            this.returnWaveType = WaveTypeBase.create(this.returnAction).items(returnItem());
+            this.returnWaveType = Builders.waveType(this.returnAction).items(returnItem());
         }
     }
 
     @Override
-    public WaveTypeBase returnWaveType() {
+    public WaveType returnWaveType() {
         return this.returnWaveType;
     }
 

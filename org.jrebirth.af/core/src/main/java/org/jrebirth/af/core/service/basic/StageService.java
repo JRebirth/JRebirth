@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.service.basic;
 
+import static org.jrebirth.af.core.wave.Builders.waveType;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +33,6 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.command.basic.stage.StageWaveBean;
 import org.jrebirth.af.core.service.DefaultService;
-import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,19 +44,19 @@ import org.slf4j.LoggerFactory;
 public class StageService extends DefaultService {
 
     /** Wave type use to load events. */
-    public static final WaveType DO_OPEN_STAGE = WaveTypeBase.create("OPEN_STAGE").returnAction("STAGE_OPENED");
+    public static final WaveType DO_OPEN_STAGE = waveType("OPEN_STAGE").returnAction("STAGE_OPENED");
 
     /** Wave type to return events loaded. */
     // public static final WaveType RE_STAGE_OPENED = WaveType.create("STAGE_OPENED");
 
     /** Wave type use to load events. */
-    public static final WaveType DO_CLOSE_STAGE = WaveTypeBase.create("CLOSE_STAGE").returnAction("STAGE_CLOSED");
+    public static final WaveType DO_CLOSE_STAGE = waveType("CLOSE_STAGE").returnAction("STAGE_CLOSED");
 
     /** Wave type to return events loaded. */
     // public static final WaveType RE_STAGE_CLOSED = WaveType.create("STAGE_CLOSED");
 
     /** Wave type use to load events. */
-    public static final WaveType DO_DESTROY_STAGE = WaveTypeBase.create("DESTROY_STAGE").returnAction("STAGE_DESTROYED");
+    public static final WaveType DO_DESTROY_STAGE = waveType("DESTROY_STAGE").returnAction("STAGE_DESTROYED");
 
     /** Wave type to return events loaded. */
     // public static final WaveType RE_STAGE_DESTROYED = WaveType.create("STAGE_DESTROYED");

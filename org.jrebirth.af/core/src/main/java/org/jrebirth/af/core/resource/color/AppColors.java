@@ -18,17 +18,15 @@
 package org.jrebirth.af.core.resource.color;
 
 /**
- * The class <strong>AppColors</strong>.
+ * The class <strong>AppColors</strong> hold all colors used by default.
  *
  * @author Sébastien Bordes
  */
 public enum AppColors implements ColorEnum {
 
-    /** The stage background color. */
-    STAGE_BG {
-        {
-            rgb255(240, 240, 255, 1.0);
-        }
-    };
+    // @formatter:off
+    
+    /** The default Stage Background Color. */
+    STAGE_BG {{ rgb255(240, 240, 255, 1.0); }};
 
 }

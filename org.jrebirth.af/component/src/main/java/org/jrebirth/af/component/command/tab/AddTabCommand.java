@@ -40,7 +40,7 @@ public class AddTabCommand extends DefaultBeanCommand<TabWaveBean> {
     }
 
     private void sendWaveToTabModel(final Wave wave, final Dockable tab) {
-        // sendWave(WaveBase.create()
+        // sendWave(Builders.wave()
         // .waveType(TabModel.ADD)
         // .componentClass(TabModel.class)
         // .addDatas( WaveData.build(TabModel.TAB_KEY, getWaveBean(wave).tabHolderKey()),

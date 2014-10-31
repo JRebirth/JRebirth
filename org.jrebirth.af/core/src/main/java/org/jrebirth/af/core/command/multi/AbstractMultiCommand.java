@@ -36,7 +36,7 @@ import org.jrebirth.af.api.wave.WaveListener;
 import org.jrebirth.af.core.command.AbstractBaseCommand;
 import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.util.ClassUtility;
-import org.jrebirth.af.core.wave.WaveBase;
+import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.WaveDataBase;
 
 /**
@@ -226,7 +226,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
                     if (this.subCommandList.size() > this.commandRunIndex) {
 
-                        final Wave subCommandWave = WaveBase.callCommand(this.subCommandList.get(this.commandRunIndex).getClassField())
+                        final Wave subCommandWave = Builders.callCommand(this.subCommandList.get(this.commandRunIndex).getClassField())
                                                             .waveBean(wave.waveBean())
                                                             // Recopy the WaveData from the previous wave
                                                             .addDatas(wave.waveDatas().toArray(new WaveDataBase[0]))

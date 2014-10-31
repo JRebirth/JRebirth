@@ -28,7 +28,7 @@ import org.jrebirth.af.api.resource.font.FontParams;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 
 /**
- * The class <strong>FontItem</strong>.
+ * The interface <strong>FontItemReal</strong> used to provided convenient shortcuts for initializing a {@link Font}.
  *
  * @author Sébastien Bordes
  */
@@ -42,10 +42,13 @@ public interface FontItemReal extends FontItem {
         return ResourceBuilders.FONT_BUILDER;
     }
 
-    public interface Real extends FontItem {
+    /**
+     * The interface <strong>Real</strong> provides shortcuts method used to build and register a {@link RealFont}.
+     */
+    interface Real extends FontItem {
 
         /**
-         * .
+         * Build and register a {@link RealFont} {@link FontParams}.
          *
          * @param name
          * @param size
@@ -56,50 +59,50 @@ public interface FontItemReal extends FontItem {
 
     }
 
-    public interface Family extends FontItem {
+    /**
+     * The interface <strong>Family</strong> provides shortcuts method used to build and register a {@link FamilyFont}.
+     */
+    interface Family extends FontItem {
 
         /**
-         * .
+         * Build and register a {@link FamilyFont} {@link FontParams}.
          *
-         * @param family
-         * @param size
+         * @param family the font family
+         * @param size the font size
          */
         default void family(final String family, final double size) {
             set(new FamilyFont(family, size));
         }
 
         /**
+         * Build and register a {@link FamilyFont} {@link FontParams}.
          *
-         * TODO To complete.
-         *
-         * @param family
-         * @param size
-         * @param weight
+         * @param family the font family
+         * @param size the font size
+         * @param weight the font weight {@link FontWeight}
          */
         default void family(final String family, final double size, final FontWeight weight) {
             set(new FamilyFont(family, size, weight));
         }
 
         /**
+         * Build and register a {@link FamilyFont} {@link FontParams}.
          *
-         * TODO To complete.
-         *
-         * @param family
-         * @param size
-         * @param posture
+         * @param family the font family
+         * @param size the font size
+         * @param posture the font posture {@link FontPosture}
          */
         default void family(final String family, final double size, final FontPosture posture) {
             set(new FamilyFont(family, size, posture));
         }
 
         /**
+         * Build and register a {@link FamilyFont} {@link FontParams}.
          *
-         * TODO To complete.
-         *
-         * @param family
-         * @param size
-         * @param weight
-         * @param posture
+         * @param family the font family
+         * @param size the font size
+         * @param weight the font weight {@link FontWeight}
+         * @param posture the font posture {@link FontPosture}
          */
         default void family(final String family, final double size, final FontWeight weight, final FontPosture posture) {
             set(new FamilyFont(family, size, weight, posture));

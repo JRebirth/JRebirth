@@ -24,7 +24,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
 /**
- * The interface <strong>GrayColor</strong>.
+ * The class <strong>GrayColor</strong> is used to create a Gray Color.
  *
  * @author Sébastien Bordes
  */

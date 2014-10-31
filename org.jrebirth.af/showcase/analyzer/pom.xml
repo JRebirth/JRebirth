@@ -1,17 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>showcase</artifactId>
 		<groupId>org.jrebirth.af</groupId>
+		<artifactId>showcase</artifactId>
 		<version>8.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
+	
 	<groupId>org.jrebirth.af.showcase</groupId>
 	<artifactId>analyzer</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Analyzer</name>
-	<description>An application used to analyze JRebirth logs</description>
+	<name>SC Analyzer</name>
+	<description>Showcase application used to analyze JRebirth logs</description>
 
 	<properties>
 
@@ -44,4 +45,5 @@
 		</dependency>
 	</dependencies>
 
+	<url>http://www.jrebirth.org/apps/Analyzer.html</url>
 </project>

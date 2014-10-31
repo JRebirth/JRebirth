@@ -36,12 +36,12 @@ import org.jrebirth.af.api.facade.FacadeReady;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.OnWave;
 import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.inner.InnerComponent;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.MultiMap;
-import org.jrebirth.af.core.wave.OnWave;
 import org.jrebirth.af.core.wave.WaveTypeRegistry;
 
 /**

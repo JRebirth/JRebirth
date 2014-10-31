@@ -99,7 +99,7 @@ public interface MessageItemReal extends MessageItem {
         return ResourceBuilders.MESSAGE_BUILDER;
     }
 
-    public interface Log extends MessageItem {
+    interface Log extends MessageItem {
 
         default void log(final String parameterName, final JRLevel level, final Marker marker) {
             set(new LogMessage(parameterName, level, marker));
@@ -107,7 +107,7 @@ public interface MessageItemReal extends MessageItem {
 
     }
 
-    public interface Msg extends MessageItem {
+    interface Msg extends MessageItem {
 
         /**
          * Default Constructor.

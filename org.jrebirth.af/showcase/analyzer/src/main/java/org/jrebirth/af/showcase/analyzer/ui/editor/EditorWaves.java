@@ -22,8 +22,8 @@ import java.util.List;
 
 import org.jrebirth.af.api.facade.JRebirthEvent;
 import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.WaveItemBase;
-import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  * The class <strong>EditorWaves</strong>.
@@ -37,28 +37,28 @@ public interface EditorWaves {
     /*************************************************************************/
 
     /** Trigger a Unload wave. */
-    WaveType DO_UNLOAD = WaveTypeBase.create("UNLOAD");
+    WaveType DO_UNLOAD = Builders.waveType("UNLOAD");
 
     /** Trigger a Play wave. */
-    WaveType DO_PLAY = WaveTypeBase.create("PLAY");
+    WaveType DO_PLAY = Builders.waveType("PLAY");
 
     /** Trigger a Next wave. */
-    WaveType DO_NEXT = WaveTypeBase.create("NEXT");
+    WaveType DO_NEXT = Builders.waveType("NEXT");
 
     /** Trigger a Previous wave. */
-    WaveType DO_PREVIOUS = WaveTypeBase.create("PREVIOUS");
+    WaveType DO_PREVIOUS = Builders.waveType("PREVIOUS");
 
     /** Trigger a Stop wave. */
-    WaveType DO_STOP = WaveTypeBase.create("STOP");
+    WaveType DO_STOP = Builders.waveType("STOP");
 
     /** The WaveType key usabe by OnWave annotation. */
     String DO_SELECT_EVENT_ACTION = "EVENT_SELECTED";
 
     /** Wave used to display info into the properties view. */
-    WaveType DO_SELECT_EVENT = WaveTypeBase.create(DO_SELECT_EVENT_ACTION);
+    WaveType DO_SELECT_EVENT = Builders.waveType(DO_SELECT_EVENT_ACTION);
 
     /** Wave type used to return the event currently processed. */
-    WaveType RE_EVENT_PROCESSED = WaveTypeBase.create("EVENT_PROCESSED");
+    WaveType RE_EVENT_PROCESSED = Builders.waveType("EVENT_PROCESSED");
 
     /*************************************************************************/
     /** Wave Items **/

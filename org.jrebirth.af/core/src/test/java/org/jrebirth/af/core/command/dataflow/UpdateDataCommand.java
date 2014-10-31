@@ -4,8 +4,8 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveData;
 import org.jrebirth.af.core.command.single.internal.DefaultCommand;
 import org.jrebirth.af.core.exception.CommandException;
+import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.JRebirthItems;
-import org.jrebirth.af.core.wave.WaveDataBase;
 import org.junit.Assert;
 
 public class UpdateDataCommand extends DefaultCommand {
@@ -21,6 +21,6 @@ public class UpdateDataCommand extends DefaultCommand {
         final WaveData<Integer> wdInteger = wave.getData(JRebirthItems.integerItem);
         wdInteger.setValue(wdInteger.getValue() * 2);
 
-        wave.addDatas(WaveDataBase.build(JRebirthItems.stringItem, "magic"));
+        wave.addDatas(Builders.waveData(JRebirthItems.stringItem, "magic"));
     }
 }

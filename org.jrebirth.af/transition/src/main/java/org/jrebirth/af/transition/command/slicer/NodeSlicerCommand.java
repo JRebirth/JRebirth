@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,21 +34,21 @@ import javafx.scene.shape.RectangleBuilder;
 
 import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
+import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveTypeBase;
 import org.jrebirth.af.transition.slicer.TransitionWaves;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>ImageSlicerService</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class NodeSlicerCommand extends DefaultService {
 
     /** Wave type use to load events. */
-    public static final WaveType DO_SLICE_NODE = WaveTypeBase.create("SLICE_NODE").items(TransitionWaves.NODE).returnAction("NODE_SLICED").returnItem(TransitionWaves.SLICES);
+    public static final WaveType DO_SLICE_NODE = Builders.waveType("SLICE_NODE").items(TransitionWaves.NODE).returnAction("NODE_SLICED").returnItem(TransitionWaves.SLICES);
 
     /** Wave type to return events loaded. */
     // public static final WaveType RE_NODE_SLICED = WaveType.create("NODE_SLICED").items(TransitionWaves.SLICES);
@@ -85,7 +85,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Gets the slices.
-     * 
+     *
      * @return Returns the slices.
      */
     public List<ImageView> getSlices() {
@@ -94,7 +94,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Sets the column.
-     * 
+     *
      * @param column the new column
      */
     public void setColumn(final Integer column) {
@@ -103,7 +103,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Gets the column.
-     * 
+     *
      * @return the column
      */
     public Integer getColumn() {
@@ -112,7 +112,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Column property.
-     * 
+     *
      * @return the integer property
      */
     public IntegerProperty columnProperty() {
@@ -121,7 +121,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Sets the row.
-     * 
+     *
      * @param row the new row
      */
     public void setRow(final Integer row) {
@@ -130,7 +130,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Gets the row.
-     * 
+     *
      * @return the row
      */
     public Integer getRow() {
@@ -139,7 +139,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Row property.
-     * 
+     *
      * @return the integer property
      */
     public IntegerProperty rowProperty() {
@@ -148,7 +148,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Sets the tile width.
-     * 
+     *
      * @param tileWidth the new tile width
      */
     public void setTileWidth(final Integer tileWidth) {
@@ -157,7 +157,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Gets the tile width.
-     * 
+     *
      * @return the tile width
      */
     public Integer getTileWidth() {
@@ -166,7 +166,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Tile width property.
-     * 
+     *
      * @return the integer property
      */
     public IntegerProperty tileWidthProperty() {
@@ -175,7 +175,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Sets the tile height.
-     * 
+     *
      * @param tileHeight the new tile height
      */
     public void setTileHeight(final Integer tileHeight) {
@@ -184,7 +184,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Gets the tile height.
-     * 
+     *
      * @return the tile height
      */
     public Integer getTileHeight() {
@@ -193,7 +193,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Tile height property.
-     * 
+     *
      * @return the integer property
      */
     public IntegerProperty tileHeightProperty() {
@@ -202,7 +202,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Sets the image.
-     * 
+     *
      * @param image the new image
      */
     public void setImage(final Image image) {
@@ -211,7 +211,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Gets the image.
-     * 
+     *
      * @return the image
      */
     public Image getImage() {
@@ -220,7 +220,7 @@ public class NodeSlicerCommand extends DefaultService {
 
     /**
      * Image property.
-     * 
+     *
      * @return the object property
      */
     public ObjectProperty<Image> imageProperty() {
@@ -256,19 +256,19 @@ public class NodeSlicerCommand extends DefaultService {
 
                 // TODO OPTIMIZE
                 final ImageView iv = ImageViewBuilder
-                        .create()
-                        .image(getImage())
-                        .clip(RectangleBuilder.create()
-                                .x(x)
-                                .y(y)
-                                .width(getTileWidth())
-                                .height(getTileHeight())
-                                .build())
-                        .opacity(1.0)
-                        .scaleX(0.9) // TODO
-                        .layoutX(x)
-                        .layoutY(y)
-                        .build();
+                                                     .create()
+                                                     .image(getImage())
+                                                     .clip(RectangleBuilder.create()
+                                                                           .x(x)
+                                                                           .y(y)
+                                                                           .width(getTileWidth())
+                                                                           .height(getTileHeight())
+                                                                           .build())
+                                                     .opacity(1.0)
+                                                     .scaleX(0.9) // TODO
+                                                     .layoutX(x)
+                                                     .layoutY(y)
+                                                     .build();
 
                 this.slices.add(iv);
             }

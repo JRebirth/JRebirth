@@ -27,7 +27,7 @@ import org.jrebirth.af.api.resource.font.FontParams;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 
 /**
- * The interface <strong>AbstractBaseFont</strong>.
+ * The class <strong>AbstractBaseFont</strong> is the base class for other {@link FontParams} classes.
  *
  * @author Sébastien Bordes
  */

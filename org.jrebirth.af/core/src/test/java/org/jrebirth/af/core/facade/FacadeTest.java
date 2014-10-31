@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.facade;
 
-import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertNotNull;
 
 import org.jrebirth.af.core.application.TestApplication;
 import org.jrebirth.af.core.command.basic.SwitchFullScreenCommand;
@@ -17,7 +17,7 @@ import org.junit.Test;
  *
  * @author Sébastien Bordes
  */
-@Ignore
+//@Ignore
 public class FacadeTest {
 
     private static GlobalFacadeBase globalFacade;

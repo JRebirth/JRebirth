@@ -35,8 +35,8 @@ import org.jrebirth.af.core.resource.provided.JRebirthParameters;
  * @author Sébastien Bordes
  *
  * @param <I> The item used to wrap the resource
- * @param <P> The params type
- * @param <R> The resource managed
+ * @param <P> The resource params type
+ * @param <R> The real resource managed
  */
 public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P extends ResourceParams, R> implements ResourceBuilder<I, P, R> {
 

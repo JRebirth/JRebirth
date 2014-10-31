@@ -12,8 +12,8 @@
 	<artifactId>undoredo</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Undo Redo</name>
-	<description>Sample application to describe Undo Redo features</description>
+	<name>SC Undo Redo</name>
+	<description>Showcase application used to describe Undo Redo features</description>
 
 
 	<properties>
@@ -42,4 +42,5 @@
 		
 	</dependencies>
 
+	<url>http://www.jrebirth.org/apps/UndoRedo.html</url>
 </project>

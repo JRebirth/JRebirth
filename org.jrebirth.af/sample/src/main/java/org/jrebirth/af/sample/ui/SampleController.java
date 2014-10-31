@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.AbstractController;
 import org.jrebirth.af.core.ui.adapter.DefaultMouseAdapter;
-import org.jrebirth.af.core.wave.WaveBase;
+import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.sample.command.SampleCommand;
 import org.jrebirth.af.sample.command.SamplePoolCommand;
 import org.jrebirth.af.sample.command.SampleUICommand;
@@ -83,7 +83,7 @@ public final class SampleController extends AbstractController<SampleModel, Samp
 
             LOGGER.debug("MouseClicked => Call Sample Pool Command");
 
-            getModel().sendWave(WaveBase.callCommand(SamplePoolCommand.class));
+            getModel().sendWave(Builders.callCommand(SamplePoolCommand.class));
         }
 
     }

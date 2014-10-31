@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.wave;
 
+import static org.jrebirth.af.core.wave.Builders.waveType;
+
 import java.util.List;
 
 import javafx.beans.property.ObjectProperty;
@@ -26,6 +28,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ProgressBar;
 
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveData;
 import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.service.ServiceTaskBase;
 
@@ -53,17 +56,17 @@ public interface JRebirthWaves {
     };
 
     /** . */
-    WaveDataBase<Boolean> REUSE = WaveDataBase.build(REUSE_COMMAND, true);
+    WaveData<Boolean> REUSE = Builders.waveData(REUSE_COMMAND, true);
 
     /******************************/
     /** WaveType related to Model */
     /******************************/
 
     /** The waveType used to show a view (start or reload). */
-    WaveType SHOW_VIEW = WaveTypeBase.create("SHOW_VIEW");
+    WaveType SHOW_VIEW = waveType("SHOW_VIEW");
 
     /** The waveType used to hide a view. */
-    WaveType HIDE_VIEW = WaveTypeBase.create("HIDE_VIEW");
+    WaveType HIDE_VIEW = waveType("HIDE_VIEW");
 
     /********************************/
     /** WaveType related to Service */

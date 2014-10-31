@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,22 +39,22 @@ import javafx.util.Duration;
 
 import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
-import org.jrebirth.af.core.wave.WaveTypeBase;
+import org.jrebirth.af.core.wave.Builders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>ImageSlicerService</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class SlidingDoorService extends DefaultService {
 
     /** Wave type use to load events. */
-    public static final WaveType DO_SLICE_NODE = WaveTypeBase.create("SLICE_NODE").items(TransitionWaves.NODE);
+    public static final WaveType DO_SLICE_NODE = Builders.waveType("SLICE_NODE").items(TransitionWaves.NODE);
 
     /** Wave type to return events loaded. */
-    public static final WaveType RE_NODE_SLICED = WaveTypeBase.create("NODE_SLICED").items(TransitionWaves.NODE);
+    public static final WaveType RE_NODE_SLICED = Builders.waveType("NODE_SLICED").items(TransitionWaves.NODE);
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SlidingDoorService.class);
@@ -100,7 +100,7 @@ public class SlidingDoorService extends DefaultService {
 
     /**
      * Sets the node delay.
-     * 
+     *
      * @param column the new node delay
      */
     public void setNodeDelay(final Integer column) {
@@ -109,7 +109,7 @@ public class SlidingDoorService extends DefaultService {
 
     /**
      * Gets the node delay.
-     * 
+     *
      * @return the node delay
      */
     public Integer getNodeDelay() {
@@ -118,7 +118,7 @@ public class SlidingDoorService extends DefaultService {
 
     /**
      * Node delay property.
-     * 
+     *
      * @return the integer property
      */
     public IntegerProperty nodeDelayProperty() {
@@ -151,7 +151,7 @@ public class SlidingDoorService extends DefaultService {
 
     /**
      * Gets the full transition.
-     * 
+     *
      * @return Returns the fullTransition.
      */
     public Transition getFullTransition() {
@@ -168,7 +168,7 @@ public class SlidingDoorService extends DefaultService {
 
     /**
      * TODO To complete.
-     * 
+     *
      * @param nodesToAdd the new nodes
      */
     public void setNodes(final List<? extends Node> nodesToAdd) {
@@ -207,7 +207,7 @@ public class SlidingDoorService extends DefaultService {
         // }
 
         final ParallelTransition parallel = ParallelTransitionBuilder.create()
-                .build();
+                                                                     .build();
 
         // // int i = 0;
         // // Collections.shuffle(nodes);
@@ -224,15 +224,15 @@ public class SlidingDoorService extends DefaultService {
         for (final Node node : this.nodes) {
 
             parallel.getChildren().add(
-                    TranslateTransitionBuilder.create()
-                            .delay(Duration.millis(i * getNodeDelay()))
-                            .node(node)
-                            // .fromY(0)
-                            // .toY(1000)
-                            .byY(1000)
-                            .duration(getTranslateDuration())
-                            .interpolator(Interpolator.EASE_IN)
-                            .build()
+                                       TranslateTransitionBuilder.create()
+                                                                 .delay(Duration.millis(i * getNodeDelay()))
+                                                                 .node(node)
+                                                                 // .fromY(0)
+                                                                 // .toY(1000)
+                                                                 .byY(1000)
+                                                                 .duration(getTranslateDuration())
+                                                                 .interpolator(Interpolator.EASE_IN)
+                                                                 .build()
                     );
             // parallel.getChildren().add(
             // TranslateTransitionBuilder.create()
@@ -246,22 +246,22 @@ public class SlidingDoorService extends DefaultService {
             i++;
         }
         final PauseTransition pt = PauseTransitionBuilder.create()
-                .duration(Duration.seconds(1))
-                .build();
+                                                         .duration(Duration.seconds(1))
+                                                         .build();
 
         this.fullTransition = SequentialTransitionBuilder.create()
-                .children(
-                        parallel
-                )
-                .autoReverse(true)
-                .cycleCount(10)
-                .build();
+                                                         .children(
+                                                                   parallel
+                                                         )
+                                                         .autoReverse(true)
+                                                         .cycleCount(10)
+                                                         .build();
 
     }
 
     /**
      * Gets the random duration.
-     * 
+     *
      * @return the random duration
      */
     private Duration getRandomDuration() {

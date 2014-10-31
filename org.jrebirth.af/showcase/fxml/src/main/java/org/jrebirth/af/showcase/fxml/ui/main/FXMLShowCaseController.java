@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.component.ui.stack.StackWaves;
 import org.jrebirth.af.core.ui.DefaultController;
-import org.jrebirth.af.core.wave.WaveDataBase;
+import org.jrebirth.af.core.wave.Builders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,16 +40,16 @@ public final class FXMLShowCaseController extends DefaultController<FXMLShowCase
 
         // Manage Ui Command Button
         linkWave(getView().getShowIncluded(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
-                WaveDataBase.build(StackWaves.PAGE_ENUM, FXMLPage.IncludedFxml));
+                 Builders.waveData(StackWaves.PAGE_ENUM, FXMLPage.IncludedFxml));
 
         linkWave(getView().getShowEmbedded(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
-                WaveDataBase.build(StackWaves.PAGE_ENUM, FXMLPage.ViewEmbeddedFxml));
+                 Builders.waveData(StackWaves.PAGE_ENUM, FXMLPage.ViewEmbeddedFxml));
 
         linkWave(getView().getShowStandalone(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
-                WaveDataBase.build(StackWaves.PAGE_ENUM, FXMLPage.StandaloneFxml));
+                 Builders.waveData(StackWaves.PAGE_ENUM, FXMLPage.StandaloneFxml));
 
         linkWave(getView().getShowHybrid(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
-                WaveDataBase.build(StackWaves.PAGE_ENUM, FXMLPage.HybridFxml));
+                 Builders.waveData(StackWaves.PAGE_ENUM, FXMLPage.HybridFxml));
 
     }
 }

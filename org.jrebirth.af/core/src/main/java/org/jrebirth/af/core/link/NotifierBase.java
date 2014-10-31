@@ -44,8 +44,8 @@ import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.service.ServiceTaskBase;
 import org.jrebirth.af.core.service.basic.TaskTrackerService;
+import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.JRebirthWaves;
-import org.jrebirth.af.core.wave.WaveBase;
 
 /**
  *
@@ -217,7 +217,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         // Call the command that manage the display UI in 2 steps
         // 1 - Create the model into the Thread Pool
         // 2 - Attach it to the graphical tree model according to their placeholder type
-        callCommand(WaveBase.callCommand(ShowModelCommand.class).waveBean(waveBean));
+        callCommand(Builders.callCommand(ShowModelCommand.class).waveBean(waveBean));
     }
 
     /**

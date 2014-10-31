@@ -23,7 +23,7 @@ import javafx.scene.input.MouseEvent;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.ui.adapter.MouseAdapter;
-import org.jrebirth.af.core.wave.WaveDataBase;
+import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.af.showcase.analyzer.ui.properties.PropertiesWaves;
 
@@ -84,7 +84,7 @@ public final class BallController extends DefaultController<BallModel, BallView>
         if (mouseEvent.getSource() instanceof Node) {
             // Send Event Selected Wave
             getModel().sendWave(EditorWaves.DO_SELECT_EVENT,
-                    WaveDataBase.build(PropertiesWaves.EVENT_OBJECT, getModel().getEventModel()));
+                    Builders.waveData(PropertiesWaves.EVENT_OBJECT, getModel().getEventModel()));
         }
 
     }

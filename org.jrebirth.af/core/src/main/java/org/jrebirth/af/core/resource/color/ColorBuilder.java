@@ -25,9 +25,7 @@ import org.jrebirth.af.api.resource.color.ColorParams;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 
 /**
- * The class <strong>ColorBuilder</strong>.
- *
- * Class used to build color instance and store them with weak references.
+ * The class <strong>ColorBuilder</strong> is used to build {@link Color} instance and store them with weak references.
  *
  * @author Sébastien Bordes
  */

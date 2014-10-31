@@ -28,20 +28,20 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 /**
- * The interface <strong>FamilyFont</strong>.
+ * The class <strong>FamilyFont</strong> is used to create a Font by Family type.
  *
  * @author Sébastien Bordes
  */
 public class FamilyFont extends AbstractBaseFont {
 
-    /** the family name. */
-    private final StringProperty familyProperty = new SimpleStringProperty();
+    /** The family name. */
+    private final transient StringProperty familyProperty = new SimpleStringProperty();
 
-    /** the font posture. */
-    private final ObjectProperty<FontPosture> postureProperty = new SimpleObjectProperty<>();
+    /** The font posture. */
+    private final transient ObjectProperty<FontPosture> postureProperty = new SimpleObjectProperty<>();
 
-    /** the font weight. */
-    private final ObjectProperty<FontWeight> weightProperty = new SimpleObjectProperty<>();
+    /** The font weight. */
+    private final transient  ObjectProperty<FontWeight> weightProperty = new SimpleObjectProperty<>();
 
     /**
      * Default Constructor.

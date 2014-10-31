@@ -24,7 +24,7 @@ import org.jrebirth.af.api.resource.color.ColorParams;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 
 /**
- * The interface <strong>AbstractBaseColor</strong>.
+ * The class <strong>AbstractBaseColor</strong> is the base class for other {@link ColorParams} classes.
  *
  * @author Sébastien Bordes
  */

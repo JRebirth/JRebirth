@@ -43,7 +43,7 @@
 		<!-- oooooooooo -->
 		<!-- APIDOCS -->
 		<!-- oooooooooo -->
-<!-- 		<moduleSet>
+ 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
 				<include>org.jrebirth.af:core:</include>
@@ -53,7 +53,7 @@
 				<include>org.jrebirth.af:undoredo:*</include>
 			</includes>
 
-			Javadoc
+			<!-- Javadoc -->
 			<binaries>
 				<outputFileNameMapping>apidocs/${module.artifactId}</outputFileNameMapping>
 				<attachmentClassifier>javadoc</attachmentClassifier>
@@ -62,7 +62,7 @@
 				<unpack>true</unpack>
 			</binaries>
 		</moduleSet>
- -->
+
 		<!-- oooooooooo -->
 		<!-- LIBS -->
 		<!-- oooooooooo -->

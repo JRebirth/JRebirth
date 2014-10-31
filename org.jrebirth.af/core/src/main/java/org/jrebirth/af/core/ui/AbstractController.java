@@ -27,10 +27,10 @@ import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.View;
+import org.jrebirth.af.api.wave.WaveData;
 import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.ui.handler.AbstractNamedEventHandler;
 import org.jrebirth.af.core.wave.JRebirthWaves;
-import org.jrebirth.af.core.wave.WaveDataBase;
 
 /**
  * The abstract class <strong>AbstractController</strong>.
@@ -68,7 +68,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveType waveType,
-            final WaveDataBase<?>... waveData) {
+            final WaveData<?>... waveData) {
 
         linkWave(node, eventType, waveType, null, waveData);
     }
@@ -85,7 +85,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveType waveType, final Callback<E, Boolean> callback,
-            final WaveDataBase<?>... waveData) {
+            final WaveData<?>... waveData) {
 
         node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkWave") {
 
@@ -114,7 +114,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkCommand(final Node node, final javafx.event.EventType<E> eventType,
-            final Class<? extends Command> commandClass, final WaveDataBase<?>... waveData) {
+            final Class<? extends Command> commandClass, final WaveData<?>... waveData) {
 
         linkCommand(node, eventType, commandClass, null, waveData);
     }
@@ -132,7 +132,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      */
     protected <E extends Event> void linkCommand(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Command> commandClass,
             final Callback<E, Boolean> callback,
-            final WaveDataBase<?>... waveData) {
+            final WaveData<?>... waveData) {
 
         node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkCommand") {
 
@@ -164,7 +164,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkUi(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Model> modelClass,
-            final WaveDataBase<?>... waveData) {
+            final WaveData<?>... waveData) {
 
         linkUi(node, eventType, modelClass, null, waveData);
     }
@@ -184,11 +184,11 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkUi(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Model> modelClass, final Callback<E, Boolean> callback,
-            final WaveDataBase<?>... waveData) {
+            final WaveData<?>... waveData) {
 
         boolean noHookFound = true;
         // Check if the contract is respected by searching a placeholder from WaveData
-        WaveDataBase<?> wd;
+        WaveData<?> wd;
         for (int i = 0; i < waveData.length && noHookFound; i++) {
             wd = waveData[i];
             if ((wd.getKey() == JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER || wd.getKey() == JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER)
@@ -228,7 +228,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * @param <E> The type of JavaFX Event to track
      */
     protected <E extends Event> void linkService(final Node node, final javafx.event.EventType<E> eventType, final Class<? extends Service> serviceClass, final WaveType waveType,
-            final WaveDataBase<?>... waveData) {
+            final WaveData<?>... waveData) {
 
         linkService(node, eventType, serviceClass, waveType, null, waveData);
     }
@@ -247,7 +247,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      */
     protected <E extends Event> void linkService(final Node node, final javafx.event.EventType<E> eventType,
             final Class<? extends Service> serviceClass, final WaveType waveType, final Callback<E, Boolean> callback,
-            final WaveDataBase<?>... waveData) {
+            final WaveData<?>... waveData) {
 
         node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkService") {
 

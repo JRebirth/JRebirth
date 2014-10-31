@@ -1,5 +1,6 @@
 package org.jrebirth.af.core.command.basic.stage;
 
+import static org.jrebirth.af.core.wave.Builders.callCommand;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,7 +14,6 @@ import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.jrebirth.af.core.facade.CommandFacade;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
 import org.jrebirth.af.core.service.basic.StageService;
-import org.jrebirth.af.core.wave.WaveBase;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -71,10 +71,10 @@ public class StageTest {
     public void openDefaultStage() {
 
         final String stageKey = "defaultStage";
-        final Wave wave = WaveBase.callCommand(StageCommand.class)
-                                  .waveBean(StageWaveBean.create()
-                                                         .action(StageAction.show)
-                                                         .stageKey(stageKey));
+        final Wave wave = callCommand(StageCommand.class)
+                                                         .waveBean(StageWaveBean.create()
+                                                                                .action(StageAction.show)
+                                                                                .stageKey(stageKey));
 
         wave.addWaveListener(new WaveListener() {
 

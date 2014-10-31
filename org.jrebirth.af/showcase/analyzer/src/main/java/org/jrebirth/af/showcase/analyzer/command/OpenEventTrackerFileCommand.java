@@ -23,7 +23,7 @@ import javafx.stage.FileChooser;
 
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.single.ui.DefaultUICommand;
-import org.jrebirth.af.core.wave.WaveDataBase;
+import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 
@@ -57,7 +57,7 @@ public final class OpenEventTrackerFileCommand extends DefaultUICommand {
 
             returnData(LoadEdtFileService.class,
                     LoadEdtFileService.DO_LOAD_EVENTS,
-                    WaveDataBase.build(EditorWaves.EVENTS_FILE, selected));
+                    Builders.waveData(EditorWaves.EVENTS_FILE, selected));
 
         }
     }

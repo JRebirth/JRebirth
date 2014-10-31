@@ -5,7 +5,7 @@ import javafx.scene.Node;
 
 /**
  * The class <strong>SliceItem</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class SliceItem {
@@ -18,7 +18,7 @@ public class SliceItem {
 
     /**
      * Gets the slice node.
-     * 
+     *
      * @return the slice node
      */
     public Node getSliceNode() {
@@ -27,7 +27,7 @@ public class SliceItem {
 
     /**
      * Sets the node representing the slice.
-     * 
+     *
      * @param sliceNode the new node representing the slice
      */
     public void setSliceNode(final Node sliceNode) {
@@ -36,7 +36,7 @@ public class SliceItem {
 
     /**
      * Gets the original node bounds.
-     * 
+     *
      * @return the original node bounds
      */
     public Bounds getNodeBounds() {
@@ -45,7 +45,7 @@ public class SliceItem {
 
     /**
      * Sets the original node bounds.
-     * 
+     *
      * @param nodeBounds the new original node bounds
      */
     public void setNodeBounds(final Bounds nodeBounds) {

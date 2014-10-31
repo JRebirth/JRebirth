@@ -8,8 +8,7 @@ import org.jrebirth.af.component.ui.dock.DockModel;
 import org.jrebirth.af.component.ui.tab.TabModel;
 import org.jrebirth.af.core.command.single.internal.DefaultBeanCommand;
 import org.jrebirth.af.core.exception.CommandException;
-import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveDataBase;
+import org.jrebirth.af.core.wave.Builders;
 
 public class AddDockCommand extends DefaultBeanCommand<DockWaveBean> {
 
@@ -46,13 +45,13 @@ public class AddDockCommand extends DefaultBeanCommand<DockWaveBean> {
 
     private void sendWaveToTabModel(final Wave wave, final Model model) {
 
-        sendWave(WaveBase.create()
-                .waveType(TabModel.ADD)
-                .componentClass(TabModel.class)
-                .addDatas(WaveDataBase.build(DockModel.DOCK_KEY, getWaveBean(wave).dockHolderKey())
-                // ,
-                // WaveData.build(DockModel.MODEL, model )
-                ));
+        sendWave(Builders.wave()
+                         .waveType(TabModel.ADD)
+                         .componentClass(TabModel.class)
+                         .addDatas(Builders.waveData(DockModel.DOCK_KEY, getWaveBean(wave).dockHolderKey())
+                         // ,
+                         // WaveData.build(DockModel.MODEL, model )
+                         ));
 
         // getModel(TabModel.class, getWaveBean(wave).dockConfig()).addTab(model, wave);
     }

@@ -11,9 +11,8 @@
 	<artifactId>core</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Core Lib</name>
-	<description>The Core library of the JRebirth Framework</description>
-
+	<name>JRAF RI</name>
+	<description>JRebirth Application Framework Reference Implementation</description>
 
 	<dependencies>
 

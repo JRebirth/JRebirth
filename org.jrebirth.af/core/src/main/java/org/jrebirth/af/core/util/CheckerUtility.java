@@ -9,12 +9,12 @@ import java.util.List;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.facade.Component;
 import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.wave.OnWave;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveItem;
 import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
-import org.jrebirth.af.core.wave.OnWave;
 import org.jrebirth.af.core.wave.WaveTypeRegistry;
 
 /**

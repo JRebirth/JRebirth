@@ -9,8 +9,6 @@ import org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseModel;
 
 /**
  * The class <strong>FXMLApplication</strong>.
- * 
- * @author
  */
 public final class FXMLApplication extends DefaultApplication<StackPane> {
 

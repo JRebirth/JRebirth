@@ -26,14 +26,14 @@ import javafx.beans.property.SimpleBooleanProperty;
 import org.jrebirth.af.api.resource.font.FontName;
 
 /**
- * The interface <strong>RealFont</strong>.
+ * The interface <strong>RealFont</strong> is used to create a font according to its name.
  *
  * @author Sébastien Bordes
  */
 public class RealFont extends AbstractBaseFont {
 
     /** The flag used to skip the fontsFolder prefix addition. */
-    private final BooleanProperty skipFontsFolderProperty = new SimpleBooleanProperty();
+    private final transient BooleanProperty skipFontsFolderProperty = new SimpleBooleanProperty();
 
     /**
      * Default Constructor.

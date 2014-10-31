@@ -32,8 +32,7 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveGroup;
 import org.jrebirth.af.core.application.DefaultApplication;
-import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveDataBase;
+import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 import org.jrebirth.af.showcase.analyzer.ui.workbench.WorkbenchModel;
@@ -111,15 +110,15 @@ public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
 
                 // Call the service that will load and parse the log file
                 waveList.add(
-                        WaveBase.create()
+                        Builders.wave()
                         .waveGroup(WaveGroup.RETURN_DATA)
                         .waveType(LoadEdtFileService.DO_LOAD_EVENTS)
                         .componentClass(LoadEdtFileService.class)
-                        .addDatas(WaveDataBase.build(EditorWaves.EVENTS_FILE, logFile))
+                        .addDatas(Builders.waveData(EditorWaves.EVENTS_FILE, logFile))
                         );
 
                 // Start the animation to show all components creation
-                waveList.add(WaveBase.create().waveType(EditorWaves.DO_PLAY));
+                waveList.add(Builders.wave().waveType(EditorWaves.DO_PLAY));
             }
         }
         return waveList;

@@ -27,7 +27,6 @@ import java.util.UUID;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.wave.Wave;
@@ -102,18 +101,10 @@ public class WaveBase implements Wave, LinkMessages {
      */
     private final List<WaveListener> waveListeners = Collections.synchronizedList(new ArrayList<WaveListener>());
 
-    public static WaveBase create() {
-        return new WaveBase();
-    }
-
-    public static Wave callCommand(final Class<? extends Command> commandClass) {
-        return create().waveGroup(WaveGroup.CALL_COMMAND).componentClass(commandClass);
-    }
-
     /**
      * Default Constructor.
      */
-    private WaveBase() {
+    WaveBase() {
         super();
         // Generate a random but unique identifier
         this.wuid = UUID.randomUUID().toString();
@@ -267,7 +258,7 @@ public class WaveBase implements Wave, LinkMessages {
      */
     @Override
     public <T> Wave add(final WaveItem<T> waveItem, final T value) {
-        final WaveDataBase<T> waveData = WaveDataBase.build(waveItem, value);
+        final WaveData<T> waveData = Builders.waveData(waveItem, value);
         addDatas(waveData);
         return this;
     }

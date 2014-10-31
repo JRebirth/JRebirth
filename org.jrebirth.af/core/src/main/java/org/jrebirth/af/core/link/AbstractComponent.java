@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.link;
 
+import static org.jrebirth.af.core.wave.Builders.wave;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -58,7 +60,6 @@ import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.MultiMap;
 import org.jrebirth.af.core.util.ObjectUtility;
-import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
@@ -331,12 +332,12 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
      */
     private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveData<?>... waveData) {
 
-        final Wave wave = WaveBase.create()
-                                  .waveGroup(waveGroup)
-                                  .waveType(waveType)
-                                  .fromClass(this.getClass())
-                                  .componentClass(componentClass)
-                                  .addDatas(waveData);
+        final Wave wave = wave()
+                .waveGroup(waveGroup)
+                .waveType(waveType)
+                .fromClass(this.getClass())
+                .componentClass(componentClass)
+                .addDatas(waveData);
 
         // Track wave creation
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
@@ -356,12 +357,12 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
      */
     private Wave createWave(final WaveGroup waveGroup, final WaveTypeBase waveType, final Class<?> componentClass, final WaveBean waveBean) {
 
-        final Wave wave = WaveBase.create()
-                                  .waveGroup(waveGroup)
-                                  .waveType(waveType)
-                                  .fromClass(this.getClass())
-                                  .componentClass(componentClass)
-                                  .waveBean(waveBean);
+        final Wave wave = wave()
+                .waveGroup(waveGroup)
+                .waveType(waveType)
+                .fromClass(this.getClass())
+                .componentClass(componentClass)
+                .waveBean(waveBean);
 
         // Track wave creation
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
@@ -620,22 +621,27 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
         // If the inner model hasn't been loaded before, build it from UIFacade
         if (!this.innerComponentMap.containsKey(innerComponent)) {
 
-            final Class<C> componentClass = innerComponent.getKey().getClassField();
+            final Class<C> innerComponentClass = innerComponent.getKey().getClassField();
 
-            // Initialize the inner model
             C childComponent = null;
-            if (Model.class.isAssignableFrom(componentClass)) {
+            // Use the right facade according to the inner component type
+            if (Command.class.isAssignableFrom(innerComponentClass)) {
+                // Initialize the Inner Command
                 childComponent = (C) getLocalFacade().getGlobalFacade().getCommandFacade().retrieve((UniqueKey<Command>) innerComponent.getKey());
-            } else if (Service.class.isAssignableFrom(componentClass)) {
+            } else if (Service.class.isAssignableFrom(innerComponentClass)) {
+                // Initialize the Inner Service
                 childComponent = (C) getLocalFacade().getGlobalFacade().getServiceFacade().retrieve((UniqueKey<Service>) innerComponent.getKey());
-            } else if (Model.class.isAssignableFrom(componentClass)) {
+            } else if (Model.class.isAssignableFrom(innerComponentClass)) {
+                // Initialize the Inner Model
                 childComponent = (C) getLocalFacade().getGlobalFacade().getUiFacade().retrieve((UniqueKey<Model>) innerComponent.getKey());
-            } else if (Behavior.class.isAssignableFrom(componentClass)) {
-                throw new CoreRuntimeException("Behaviors can not be used as Inner Component");
+            } else if (Behavior.class.isAssignableFrom(innerComponentClass)) {
+                // Cannot initialize Inner Behavior, they cannot be nested
+                throw new CoreRuntimeException("Behaviors can not be used as Inner Component"); // FIXME add MessageItem
             }
 
+            // Inner Component creation has failed throw an exception
             if (childComponent == null) {
-                throw new CoreRuntimeException("Impossible to create Inner Component"); // FIXME
+                throw new CoreRuntimeException("Impossible to create Inner Component"); // FIXME add MessageItem
             }
 
             // Store the component into the multitonKey map

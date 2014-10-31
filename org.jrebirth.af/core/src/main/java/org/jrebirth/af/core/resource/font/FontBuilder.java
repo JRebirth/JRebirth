@@ -32,9 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The class <strong>FontBuilder</strong>.
- *
- * Class used to manage font with weak reference.
+ * The class <strong>FontBuilder</strong> is used to build {@link Font} instance and store them with weak references..
  *
  * @author Sébastien Bordes
  */

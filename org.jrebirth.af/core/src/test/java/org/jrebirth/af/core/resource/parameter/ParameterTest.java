@@ -1,7 +1,6 @@
 package org.jrebirth.af.core.resource.parameter;
 
 import static org.junit.Assert.assertEquals;
-import junit.framework.Assert;
 
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.log.JRLevel;
@@ -12,6 +11,7 @@ import org.jrebirth.af.core.resource.i18n.MessageResourceBase;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;

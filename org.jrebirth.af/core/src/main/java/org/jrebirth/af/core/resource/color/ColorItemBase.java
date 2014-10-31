@@ -19,16 +19,22 @@ package org.jrebirth.af.core.resource.color;
 
 import javafx.scene.paint.Color;
 
+import org.jrebirth.af.api.resource.color.ColorItem;
 import org.jrebirth.af.api.resource.color.ColorParams;
 import org.jrebirth.af.core.resource.AbstractResourceItem;
 
 /**
- * The class <strong>ColorItemBase</strong>.
+ * The class <strong>ColorItemBase</strong> provides a simple constructor used to build a {@link ColorItem} usable from anywhere.
  *
  * @author Sébastien Bordes
  */
 public final class ColorItemBase extends AbstractResourceItem<org.jrebirth.af.api.resource.color.ColorItem, ColorParams, Color> implements ColorItemReal {
 
+    /**
+     * Build a new Color Item instance.
+     * 
+     * @return a new {@link ColorItem} instance
+     */
     public static ColorItemBase create() {
         return new ColorItemBase();
     }

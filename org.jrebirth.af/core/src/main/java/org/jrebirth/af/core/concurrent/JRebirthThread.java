@@ -42,9 +42,8 @@ import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.service.basic.StyleSheetTrackerService;
+import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.JRebirthWaves;
-import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveDataBase;
 
 /**
  * The class <strong>JRebirthThread</strong>.
@@ -229,10 +228,10 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
         if (!chainedWaveList.isEmpty()) {
             getFacade().getNotifier().sendWave(
-                                               WaveBase.create()
+                                               Builders.wave()
                                                        .waveGroup(WaveGroup.CALL_COMMAND)
                                                        .componentClass(ChainWaveCommand.class)
-                                                       .addDatas(WaveDataBase.build(JRebirthWaves.CHAINED_WAVES, chainedWaveList)));
+                                                       .addDatas(Builders.waveData(JRebirthWaves.CHAINED_WAVES, chainedWaveList)));
         }
     }
 
@@ -301,7 +300,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         // Generates the command wave directly to win a Wave cycle
         if (this.application != null && this.application.getRootNode() != null && this.application.getFirstModelClass() != null) {
 
-            firstWave = WaveBase.callCommand(ShowModelCommand.class).waveBean(
+            firstWave = Builders.callCommand(ShowModelCommand.class).waveBean(
                                                                               DisplayModelWaveBean.create()
                                                                                                   .childrenPlaceHolder(this.application.getRootNode().getChildren())
                                                                                                   .showModelKey(Key.create((Class<Model>) this.application.getFirstModelClass()))

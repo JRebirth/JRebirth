@@ -38,8 +38,7 @@ import org.jrebirth.af.api.wave.Wave.Status;
 import org.jrebirth.af.api.wave.WaveGroup;
 import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.wave.WaveBase;
-import org.jrebirth.af.core.wave.WaveDataBase;
+import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.WaveItemBase;
 
 /**
@@ -116,6 +115,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
      *
      * @return the full service handler name
      */
+    @Override
     public String getServiceHandlerName() {
         final StringBuilder sb = new StringBuilder();
         sb.append(this.service.getClass().getSimpleName()).append(".");
@@ -203,18 +203,18 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
             if (responseCommandClass != null) {
 
                 // If a Command Class is provided, call it with the right WaveItem to get the real result type
-                returnWave = WaveBase.create()
+                returnWave = Builders.wave()
                                      .waveGroup(WaveGroup.CALL_COMMAND)
                                      .fromClass(this.service.getClass())
                                      .componentClass(responseCommandClass)
-                                     .addDatas(WaveDataBase.build(resultWaveItem, res));
+                                     .addDatas(Builders.waveData(resultWaveItem, res));
             } else {
 
                 // Otherwise send a generic wave that can be handled by any component
-                returnWave = WaveBase.create()
+                returnWave = Builders.wave()
                                      .waveType(responseWaveType)
                                      .fromClass(this.service.getClass())
-                                     .addDatas(WaveDataBase.build(resultWaveItem, res));
+                                     .addDatas(Builders.waveData(resultWaveItem, res));
             }
 
             returnWave.relatedWave(this.wave);
@@ -272,6 +272,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
      *
      * Remove the task from the service pending list
      */
+    @Override
     public void taskAchieved() {
         // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
         this.service.removePendingTask(this.wave.getWUID());
@@ -288,6 +289,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
      *
      * @return true if the threshold is reached
      */
+    @Override
     public boolean checkProgressRatio(final double newWorkDone, final double totalWork, final double amountThreshold) {
 
         double currentRatio;

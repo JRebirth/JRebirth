@@ -12,8 +12,8 @@
 	<artifactId>fxml</artifactId>
 	<packaging>jar</packaging>
 
-	<name>FXML</name>
-	<description>Sample application to describe JRebirth FXMLUndo features</description>
+	<name>SC FXML</name>
+	<description>Showcase application used to describe JRebirth FXML integration variants</description>
 
 
 	<properties>
@@ -41,4 +41,5 @@
 		</dependency>
 	</dependencies>
 
+	<url>http://www.jrebirth.org/apps/FXML.html</url>
 </project>
