@@ -69,9 +69,9 @@ public final class CreateBallCommand extends DefaultUICommand {
              * " trY=" + sourceBallModel.getView().getRootNode().getTranslateY());
              */
             targetBallModel.getView().getRootNode()
-            .layoutXProperty().bind(sourceBallModel.getView().getRootNode().layoutXProperty().add(sourceBallModel.getView().getRootNode().translateXProperty()));
+                           .layoutXProperty().bind(sourceBallModel.getView().getRootNode().layoutXProperty().add(sourceBallModel.getView().getRootNode().translateXProperty()));
             targetBallModel.getView().getRootNode()
-            .layoutYProperty().bind(sourceBallModel.getView().getRootNode().layoutYProperty().add(sourceBallModel.getView().getRootNode().translateYProperty()));
+                           .layoutYProperty().bind(sourceBallModel.getView().getRootNode().layoutYProperty().add(sourceBallModel.getView().getRootNode().translateYProperty()));
 
         }
 

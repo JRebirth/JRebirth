@@ -14,7 +14,7 @@ public final class FXMLApplication extends DefaultApplication<StackPane> {
 
     /**
      * Application launcher.
-     * 
+     *
      * @param args the command line arguments
      */
     public static void main(final String... args) {

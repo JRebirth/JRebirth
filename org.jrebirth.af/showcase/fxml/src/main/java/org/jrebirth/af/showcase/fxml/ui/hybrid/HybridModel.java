@@ -4,7 +4,7 @@ import org.jrebirth.af.core.ui.fxml.DefaultFXMLModel;
 
 /**
  * The class <strong>HybridModel</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class HybridModel extends DefaultFXMLModel<HybridModel> {

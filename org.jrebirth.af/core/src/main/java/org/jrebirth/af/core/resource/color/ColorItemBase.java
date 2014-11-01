@@ -32,7 +32,7 @@ public final class ColorItemBase extends AbstractResourceItem<org.jrebirth.af.ap
 
     /**
      * Build a new Color Item instance.
-     * 
+     *
      * @return a new {@link ColorItem} instance
      */
     public static ColorItemBase create() {

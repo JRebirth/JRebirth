@@ -4,11 +4,11 @@ import org.jrebirth.af.api.wave.Wave;
 
 /**
  * The class <strong>DefaultFormModel</strong>.
- * 
+ *
  * @param <M>
  * @param <V>
  * @param <B>
- * 
+ *
  * @author Sébastien Bordes
  */
 public class DefaultFormModel<M extends AbstractFormModel<?, ?, ?>, V extends AbstractFormView<?, ?, B>, B extends Object> extends AbstractFormModel<M, V, B> {

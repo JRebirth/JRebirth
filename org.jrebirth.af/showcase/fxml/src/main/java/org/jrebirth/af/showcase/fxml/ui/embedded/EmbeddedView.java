@@ -39,23 +39,23 @@ public class EmbeddedView extends DefaultView<EmbeddedModel, AnchorPane, Embedde
         getRootNode().setPrefHeight(400);
         getRootNode().setPrefWidth(600);
 
-        box = new VBox();
-        
-        ScrollPane scrollPane = new ScrollPane();
+        this.box = new VBox();
+
+        final ScrollPane scrollPane = new ScrollPane();
         scrollPane.setPrefSize(600, 600);
-        scrollPane.setContent(box);
-        
+        scrollPane.setContent(this.box);
+
         this.borderPane = new BorderPane();
         this.borderPane.setCenter(scrollPane);
 
         getRootNode().getChildren().add(this.borderPane);
 
         addNode(EmbeddedView.ROOT_EMBEDDED_FXML.get().getNode());
-        
+
         // Load 2 more instance
         addNode(EmbeddedView.ROOT_EMBEDDED_FXML.getNew().getNode());
         addNode(EmbeddedView.ROOT_EMBEDDED_FXML.getNew().getNode());
-        
+
     }
 
     public void addNode(final Node node) {

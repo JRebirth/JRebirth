@@ -8,7 +8,7 @@ import org.jrebirth.af.core.ui.fxml.AbstractFXMLController;
 
 /**
  * The class <strong>HybridController</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class HybridController extends AbstractFXMLController<HybridModel, View<HybridModel, ?, ?>> {

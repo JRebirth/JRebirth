@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,11 +29,11 @@ import org.jrebirth.af.api.ui.annotation.type.Swipe;
 import org.jrebirth.af.core.ui.DefaultView;
 
 /**
- * 
+ *
  * The class <strong>SlideStackView</strong>.
- * 
+ *
  * The main slide stack view of the Presentation engine.
- * 
+ *
  * @author Sébastien Bordes
  */
 @RootNodeId("SlideStack")
@@ -46,9 +46,9 @@ public final class SlideStackView extends DefaultView<SlideStackModel, StackPane
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param model the view model
-     * 
+     *
      * @throws CoreException if build fails
      */
     public SlideStackView(final SlideStackModel model) throws CoreException {
@@ -68,7 +68,7 @@ public final class SlideStackView extends DefaultView<SlideStackModel, StackPane
         getRootNode().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         getRootNode().setAlignment(Pos.CENTER);
 
-        circle = new Button();
+        this.circle = new Button();
 
         getRootNode().setOnKeyPressed(getMyController()::onKeyPressed);
 
@@ -96,7 +96,7 @@ public final class SlideStackView extends DefaultView<SlideStackModel, StackPane
      * @return Returns the circle.
      */
     protected Button getCircle() {
-        return circle;
+        return this.circle;
     }
 
     /**

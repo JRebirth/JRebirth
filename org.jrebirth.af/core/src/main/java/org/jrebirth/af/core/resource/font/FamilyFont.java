@@ -41,7 +41,7 @@ public class FamilyFont extends AbstractBaseFont {
     private final transient ObjectProperty<FontPosture> postureProperty = new SimpleObjectProperty<>();
 
     /** The font weight. */
-    private final transient  ObjectProperty<FontWeight> weightProperty = new SimpleObjectProperty<>();
+    private final transient ObjectProperty<FontWeight> weightProperty = new SimpleObjectProperty<>();
 
     /**
      * Default Constructor.

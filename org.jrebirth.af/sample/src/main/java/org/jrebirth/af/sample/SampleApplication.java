@@ -17,14 +17,14 @@ import org.jrebirth.af.sample.ui.SampleModel;
 
 /**
  * The class <strong>SampleApplication</strong>.
- * 
+ *
  * @author
  */
 public final class SampleApplication extends DefaultApplication<StackPane> {
 
     /**
      * Application launcher.
-     * 
+     *
      * @param args the command line arguments
      */
     public static void main(final String... args) {

@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleController</strong>.
- * 
+ *
  * @author
  */
 public final class FXMLShowCaseController extends DefaultController<FXMLShowCaseModel, FXMLShowCaseView> {
@@ -21,9 +21,9 @@ public final class FXMLShowCaseController extends DefaultController<FXMLShowCase
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param view the view to control
-     * 
+     *
      * @throws CoreException if an error occurred while creating event handlers
      */
     public FXMLShowCaseController(final FXMLShowCaseView view) throws CoreException {
@@ -36,7 +36,7 @@ public final class FXMLShowCaseController extends DefaultController<FXMLShowCase
     @Override
     protected void initEventAdapters() throws CoreException {
 
-        // WaveData<Class<? extends PageEnum>> stackName = WaveData.build(StackWaves.STACK_PAGES, FXMLShowCaseModel.STACK_PAGES);
+        // WaveData<Class<? extends PageEnum>> stackName = Builders.waveData(StackWaves.STACK_PAGES, FXMLShowCaseModel.STACK_PAGES);
 
         // Manage Ui Command Button
         linkWave(getView().getShowIncluded(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,

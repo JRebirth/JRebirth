@@ -27,10 +27,10 @@ public class SwipableBehaviorImpl extends AbstractModelBehavior<Swipable> implem
         if (event.getTouchCount() == getData().touchCount()) {
             System.err.println("SWIPEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE TWICE");
 
-            Model model = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(getData().modelKey());
+            final Model model = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(getData().modelKey());
 
             if (model != null) {
-                EventType<SwipeEvent> et = event.getEventType();
+                final EventType<SwipeEvent> et = event.getEventType();
                 if (et == getData().redo()) {
                     // Show
                     model.doShowView(null);
@@ -53,6 +53,7 @@ public class SwipableBehaviorImpl extends AbstractModelBehavior<Swipable> implem
 
     }
 
+    @Override
     protected void initInnerComponents() {
     }
 

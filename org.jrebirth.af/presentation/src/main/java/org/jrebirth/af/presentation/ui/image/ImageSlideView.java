@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,11 +43,11 @@ import org.jrebirth.af.presentation.ui.base.AbstractSlideView;
 import org.jrebirth.presentation.model.AnimationType;
 
 /**
- * 
+ *
  * The class <strong>ImageSlideView</strong>.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  */
 public final class ImageSlideView extends
         AbstractSlideView<ImageSlideModel, StackPane, ImageSlideController> {
@@ -71,9 +71,9 @@ public final class ImageSlideView extends
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param model the splash view model
-     * 
+     *
      * @throws CoreException if build fails
      */
     public ImageSlideView(final ImageSlideModel model) throws CoreException {
@@ -99,7 +99,7 @@ public final class ImageSlideView extends
 
     /**
      * Return the image node.
-     * 
+     *
      * @return the image node
      */
     Image getImage() {
@@ -159,31 +159,31 @@ public final class ImageSlideView extends
                 for (double y = 0; y < height; y += tileHeight) {
 
                     final ImageView iv = ImageViewBuilder
-                            .create()
-                            .image(getImage())
-                            .clip(RectangleBuilder.create().x(x).y(y)
-                                    .width(tileWidth).height(tileHeight)
-                                    .build()).opacity(0.0).layoutX(x)
-                            .layoutY(y).build();
+                                                         .create()
+                                                         .image(getImage())
+                                                         .clip(RectangleBuilder.create().x(x).y(y)
+                                                                               .width(tileWidth).height(tileHeight)
+                                                                               .build()).opacity(0.0).layoutX(x)
+                                                         .layoutY(y).build();
 
                     getRootNode().getChildren().add(iv);
 
                     fades.add(SequentialTransitionBuilder
-                            .create()
-                            .children(
-                                    PauseTransitionBuilder.create()
-                                            .duration(getRandomDuration())
-                                            .build(),
-                                    FadeTransitionBuilder.create().node(iv)
-                                            .fromValue(0.0).toValue(1.0)
-                                            .duration(getRandomDuration())
-                                            .build()).build());
+                                                         .create()
+                                                         .children(
+                                                                   PauseTransitionBuilder.create()
+                                                                                         .duration(getRandomDuration())
+                                                                                         .build(),
+                                                                   FadeTransitionBuilder.create().node(iv)
+                                                                                        .fromValue(0.0).toValue(1.0)
+                                                                                        .duration(getRandomDuration())
+                                                                                        .build()).build());
 
                 }
 
             }
             this.tileTransition = ParallelTransitionBuilder.create()
-                    .children(fades).build();
+                                                           .children(fades).build();
 
             this.tileTransition.setOnFinished(new EventHandler<ActionEvent>() {
 
@@ -201,7 +201,7 @@ public final class ImageSlideView extends
 
     /**
      * Get a random duration from the range [300-1200].
-     * 
+     *
      * @return a duration object
      */
     private Duration getRandomDuration() {

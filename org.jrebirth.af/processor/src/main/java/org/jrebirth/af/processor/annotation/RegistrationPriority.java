@@ -1,6 +1,6 @@
 package org.jrebirth.af.processor.annotation;
 
-public enum RegistrationPriority{
+public enum RegistrationPriority {
     None(0),
     Lowest(1),
     Lower(2),
@@ -10,7 +10,7 @@ public enum RegistrationPriority{
     Higher(6),
     Highest(7),
     Ultimate(8);
-    
+
     /** The level. */
     private final int level;
 

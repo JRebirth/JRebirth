@@ -40,9 +40,9 @@ public interface LoadEdtFileService extends Service {
 
     /** Wave type use to load events. */
     WaveType DO_LOAD_EVENTS = Builders.waveType("LOAD_EVENTS")
-            .items(EditorWaves.EVENTS_FILE)
-            .returnAction("EVENTS_LOADED")
-            .returnItem(EditorWaves.EVENTS);
+                                      .items(EditorWaves.EVENTS_FILE)
+                                      .returnAction("EVENTS_LOADED")
+                                      .returnItem(EditorWaves.EVENTS);
 
     /**
      * Parse the event file.

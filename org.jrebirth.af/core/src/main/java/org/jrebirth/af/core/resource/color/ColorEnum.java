@@ -10,7 +10,7 @@ import org.jrebirth.af.core.resource.color.ColorItemReal.Web;
 
 /**
  * The interface <strong>ColorEnum</strong> should be inherited by any Enumeration that want to manage {@link Color}.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface ColorEnum extends RGB255, RGB01, HSB, Web, Gray {

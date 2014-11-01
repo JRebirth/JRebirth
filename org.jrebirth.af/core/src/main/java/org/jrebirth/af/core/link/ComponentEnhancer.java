@@ -38,7 +38,7 @@ import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.OnWave;
 import org.jrebirth.af.api.wave.WaveType;
-import org.jrebirth.af.core.inner.InnerComponent;
+import org.jrebirth.af.core.inner.InnerComponentBase;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.MultiMap;
@@ -143,7 +143,7 @@ public final class ComponentEnhancer implements LinkMessages {
 
         try {
 
-            ClassUtility.setFieldValue(field, component, InnerComponent.create((Class<Command>) componentType, keyParts));
+            ClassUtility.setFieldValue(field, component, InnerComponentBase.create((Class<Command>) componentType, keyParts));
 
         } catch (IllegalArgumentException | CoreException e) {
             LOGGER.error(COMPONENT_INJECTION_FAILURE, component.getClass(), e);

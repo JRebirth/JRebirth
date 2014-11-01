@@ -30,9 +30,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The Class UndoRedoService is used to manage a stack of {@link Undoable} command.
- * 
+ *
  * It must have an unique name if several stack are managed together. (Use a basic JRebirth component key)
- * 
+ *
  * @author Sébastien Bordes
  */
 public class UndoRedoService extends DefaultService {
@@ -50,9 +50,9 @@ public class UndoRedoService extends DefaultService {
 
     /**
      * Stack up a command.
-     * 
+     *
      * Move internal index and execute the command by triggering a Redo Wave Command
-     * 
+     *
      * @param command the command
      */
     public void stackUp(final Undoable command) {
@@ -62,7 +62,7 @@ public class UndoRedoService extends DefaultService {
 
         // Call the redo method of the Undoable command
         this.commandStack.get(this.commandStack.size() - 1)
-        	.run(Builders.wave().addDatas(Builders.waveData(UndoRedoWaves.UNDO_REDO, false)));
+                         .run(Builders.wave().addDatas(Builders.waveData(UndoRedoWaves.UNDO_REDO, false)));
     }
 
     /**
@@ -78,7 +78,7 @@ public class UndoRedoService extends DefaultService {
             this.commandStack.remove(this.commandStack.get(this.commandStack.size() - 1));
             // Call Undo method
             this.undoneStack.get(this.undoneStack.size() - 1)
-            	.run(Builders.wave().addDatas(Builders.waveData(UndoRedoWaves.UNDO_REDO, true)));
+                            .run(Builders.wave().addDatas(Builders.waveData(UndoRedoWaves.UNDO_REDO, true)));
         } else {
             // begin of stack, do nothing
             LOGGER.info("No more command to undo, begin of stack");
@@ -98,7 +98,7 @@ public class UndoRedoService extends DefaultService {
             this.undoneStack.remove(this.undoneStack.size() - 1);
             // Call Redo method
             this.commandStack.get(this.commandStack.size() - 1)
-            	.run(Builders.wave().addDatas(Builders.waveData(UndoRedoWaves.UNDO_REDO, false)));
+                             .run(Builders.wave().addDatas(Builders.waveData(UndoRedoWaves.UNDO_REDO, false)));
         } else {
             // End of stack, do nothing
             LOGGER.info("No more command to redo, end of stack");

@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,9 +35,9 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
- * 
+ *
  * The class <strong>JRebirthPreloader</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class JRebirthPreloader extends Preloader {
@@ -81,7 +81,7 @@ public class JRebirthPreloader extends Preloader {
 
     /**
      * Creates the preloader scene.
-     * 
+     *
      * @return the scene
      */
     private Scene createPreloaderScene() {
@@ -128,9 +128,9 @@ public class JRebirthPreloader extends Preloader {
 
     /**
      * Gets the message from code.
-     * 
+     *
      * @param messageCode the message code
-     * 
+     *
      * @return the message from code
      */
     private String getMessageFromCode(final int messageCode) {
@@ -212,26 +212,26 @@ public class JRebirthPreloader extends Preloader {
 
     /**
      * Perform actions before the application start.
-     * 
+     *
      * @throws InterruptedException
      */
     private void beforeStart() {
         final Stage stage = this.preloaderStage;
 
         ScaleTransitionBuilder.create()
-                .fromX(1.0)
-                .toX(0.0)
-                .duration(Duration.millis(400))
-                .node(stage.getScene().getRoot())
-                .onFinished(new EventHandler<ActionEvent>() {
+                              .fromX(1.0)
+                              .toX(0.0)
+                              .duration(Duration.millis(400))
+                              .node(stage.getScene().getRoot())
+                              .onFinished(new EventHandler<ActionEvent>() {
 
-                    @Override
-                    public void handle(final ActionEvent arg0) {
-                        stage.hide();
+                                  @Override
+                                  public void handle(final ActionEvent arg0) {
+                                      stage.hide();
 
-                    }
-                })
-                .build().play();
+                                  }
+                              })
+                              .build().play();
 
     }
 

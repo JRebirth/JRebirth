@@ -1,8 +1,5 @@
 package org.jrebirth.af.core.wave;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveData;

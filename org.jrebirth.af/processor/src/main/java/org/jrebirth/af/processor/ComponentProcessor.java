@@ -7,7 +7,6 @@ import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,10 +23,7 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
-import javax.tools.JavaCompiler;
-import javax.tools.StandardJavaFileManager;
 import javax.tools.StandardLocation;
-import javax.tools.ToolProvider;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -60,12 +56,12 @@ public class ComponentProcessor extends AbstractProcessor {
      * {@inheritDoc}
      */
     @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
+    public synchronized void init(final ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
-        factory = new ObjectFactory();
+        this.factory = new ObjectFactory();
         try {
-            jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", ObjectFactory.class.getClassLoader());
+            this.jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", ObjectFactory.class.getClassLoader());
         } catch (final JAXBException e) {
             e.printStackTrace();
         }
@@ -83,14 +79,14 @@ public class ComponentProcessor extends AbstractProcessor {
     }
 
     @Override
-    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+    public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
         if (roundEnv.processingOver()) {
             return false;
         }
 
         final Map<String, Set<String>> services = new HashMap<String, Set<String>>();
 
-        final Elements elements = processingEnv.getElementUtils();
+        final Elements elements = this.processingEnv.getElementUtils();
 
         final Set<? extends Element> registrationPoints = roundEnv.getElementsAnnotatedWith(RegistrationPoint.class);
         final Set<? extends Element> registrations = roundEnv.getElementsAnnotatedWith(Register.class);
@@ -108,7 +104,7 @@ public class ComponentProcessor extends AbstractProcessor {
             // Only managed annotated interfaces
             if (registrationPoint != null && element.getKind().isInterface()) {
 
-                final Registration r = factory.createRegistration();
+                final Registration r = this.factory.createRegistration();
                 r.setClazz(getClassName(element));
                 r.setExclusive(registrationPoint.exclusive());
 
@@ -126,7 +122,7 @@ public class ComponentProcessor extends AbstractProcessor {
             // Only managed annotated concrete classes
             if (registration != null && !element.getKind().isInterface() && element.getKind().isClass()) {
 
-                final RegistrationEntry re = factory.createRegistrationEntry();
+                final RegistrationEntry re = this.factory.createRegistrationEntry();
                 re.setClazz(getClassName(element));
                 re.setPriority(registration.priority().name());
 
@@ -134,18 +130,17 @@ public class ComponentProcessor extends AbstractProcessor {
                 TypeMirror value = null;
                 try {
                     registration.value();
-                } catch (MirroredTypeException mte) {
+                } catch (final MirroredTypeException mte) {
                     value = mte.getTypeMirror();
                 }
 
                 registeredClass = getClassName(value);
 
-                for (Registration r : module.getRegistrations().getRegistration()) {
-                    
-                    
+                for (final Registration r : module.getRegistrations().getRegistration()) {
+
                     if (registeredClass != null && registeredClass.equals(r.getClazz())) {
-                        if(r.getRegistrationEntries() == null){
-                            r.setRegistrationEntries(factory.createRegistrationEntryList());
+                        if (r.getRegistrationEntries() == null) {
+                            r.setRegistrationEntries(this.factory.createRegistrationEntryList());
                         }
                         r.getRegistrationEntries().getRegistrationEntry().add(re);
                     }
@@ -175,19 +170,19 @@ public class ComponentProcessor extends AbstractProcessor {
         return true;
     }
 
-    private void saveModule(Module module) {
+    private void saveModule(final Module module) {
 
-        OutputStreamWriter out;
+        final OutputStreamWriter out;
         try {
 
-            FileObject fileObject = processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "", MODULE_CONFIG_PATH + "/" + MODULE_CONFIG_FILE_NAME);
+            final FileObject fileObject = this.processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "", MODULE_CONFIG_PATH + "/" + MODULE_CONFIG_FILE_NAME);
 
             // final File path = new File(MODULE_CONFIG_PATH);
             // path.mkdirs();
 
             // out = new OutputStreamWriter(new FileOutputStream(MODULE_CONFIG_PATH + "/" + MODULE_CONFIG_FILE_NAME), Charset.forName("UTF-8"));
             // final XMLStreamWriter xmlStreamWriter = XMLOutputFactory.newInstance().createXMLStreamWriter(out);
-            final Marshaller marshaller = jaxbContext.createMarshaller();
+            final Marshaller marshaller = this.jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             //
             // marshaller.marshal(factory.createModule(module), xmlStreamWriter);
@@ -196,8 +191,8 @@ public class ComponentProcessor extends AbstractProcessor {
             // XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
             // XMLStreamWriter writer = outputFactory.createXMLStreamWriter(os);
 
-            marshaller.marshal(factory.createModule(module), fileObject.openOutputStream());
-            marshaller.marshal(factory.createModule(module), System.out);
+            marshaller.marshal(this.factory.createModule(module), fileObject.openOutputStream());
+            marshaller.marshal(this.factory.createModule(module), System.out);
 
             // os.close();
         } catch (final Exception e) {
@@ -207,9 +202,9 @@ public class ComponentProcessor extends AbstractProcessor {
     }
 
     private Module createModule() {
-        final Module module = factory.createModule();
+        final Module module = this.factory.createModule();
 
-        module.setRegistrations(factory.createRegistrationList());
+        module.setRegistrations(this.factory.createRegistrationList());
 
         //
         return module;
@@ -221,7 +216,7 @@ public class ComponentProcessor extends AbstractProcessor {
         final File f = new File(MODULE_CONFIG_PATH + "/" + MODULE_CONFIG_FILE_NAME);
         if (f.exists()) {
             try {
-                final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+                final Unmarshaller unmarshaller = this.jaxbContext.createUnmarshaller();
 
                 final InputStreamReader in = new InputStreamReader(new FileInputStream(f));// InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream(MODULE_CONFIG_PATH +
                                                                                            // "/" + MODULE_CONFIG_FILE_NAME), Charset.forName("UTF-8"));
@@ -236,12 +231,12 @@ public class ComponentProcessor extends AbstractProcessor {
         return module;
     }
 
-    private String getClassName(Element element) {
+    private String getClassName(final Element element) {
         return getClassName(element.asType());
 
     }
 
-    private String getClassName(TypeMirror t) {
+    private String getClassName(final TypeMirror t) {
         String res = null;
 
         if (t instanceof DeclaredType) {
@@ -252,8 +247,8 @@ public class ComponentProcessor extends AbstractProcessor {
         return res;
     }
 
-    private void error(Element source, String msg) {
-        processingEnv.getMessager().printMessage(Kind.ERROR, msg, source);
+    private void error(final Element source, final String msg) {
+        this.processingEnv.getMessager().printMessage(Kind.ERROR, msg, source);
     }
 
     // private TypeElement getContract(TypeElement type, Register a) {

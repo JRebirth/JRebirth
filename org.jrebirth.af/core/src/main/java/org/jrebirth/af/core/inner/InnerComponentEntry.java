@@ -9,7 +9,7 @@ import org.jrebirth.af.core.key.Key;
  *
  * @author Sébastien Bordes
  */
-public final class InnerComponentEntry<C extends Component<?>> implements InnerComponent<C> {
+public final class InnerComponentEntry<C extends Component<?>> implements InnerComponentBase<C> {
 
     /** The generator of unique id. */
     private static int idGenerator;

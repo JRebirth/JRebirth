@@ -4,7 +4,7 @@ import org.jrebirth.af.api.ui.Controller;
 
 /**
  * The class <strong>DefaultFormView</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class DefaultFormView<M extends AbstractFormModel<M, ?, B>, C extends Controller<M, AbstractFormView<M, C, B>>, B extends Object>
@@ -12,7 +12,7 @@ public class DefaultFormView<M extends AbstractFormModel<M, ?, B>, C extends Con
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param model the model of the view
      */
     public DefaultFormView(final M model) {

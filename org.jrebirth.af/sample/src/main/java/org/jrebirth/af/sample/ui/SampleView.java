@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleView</strong>.
- * 
+ *
  * @author
  */
 public final class SampleView extends AbstractView<SampleModel, BorderPane, SampleController> {
@@ -34,9 +34,9 @@ public final class SampleView extends AbstractView<SampleModel, BorderPane, Samp
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param model the controls view model
-     * 
+     *
      * @throws CoreException if build fails
      */
     public SampleView(final SampleModel model) throws CoreException {
@@ -54,16 +54,16 @@ public final class SampleView extends AbstractView<SampleModel, BorderPane, Samp
         this.pooledCommand = new Button("Trigger a pooled Command into JTP");
 
         getRootNode().setCenter(
-                LabelBuilder.create()
-                        .text("JRebirth Sample")
-                        .build()
-                );
+                                LabelBuilder.create()
+                                            .text("JRebirth Sample")
+                                            .build()
+                     );
 
         getRootNode().setBottom(FlowPaneBuilder.create().children(
-                this.defaultCommand,
-                this.uiCommand,
-                this.pooledCommand
-                ).build());
+                                                                  this.defaultCommand,
+                                                                  this.uiCommand,
+                                                                  this.pooledCommand
+                                               ).build());
     }
 
     /**
@@ -95,7 +95,7 @@ public final class SampleView extends AbstractView<SampleModel, BorderPane, Samp
 
     /**
      * Return the button that trigger the default command.
-     * 
+     *
      * @return the button that trigger the default command
      */
     Button getDefaultCommand() {
@@ -104,7 +104,7 @@ public final class SampleView extends AbstractView<SampleModel, BorderPane, Samp
 
     /**
      * Return the button that trigger the UI command.
-     * 
+     *
      * @return the button that trigger the UI command
      */
     Button getUiCommand() {
@@ -113,7 +113,7 @@ public final class SampleView extends AbstractView<SampleModel, BorderPane, Samp
 
     /**
      * Return the button that trigger the pooled command.
-     * 
+     *
      * @return the button that trigger the pooled command
      */
     Button getPooledCommand() {

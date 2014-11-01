@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleCommand</strong> used to process short action into the JRebirth Internal Thread.
- * 
+ *
  * @author
  */
 public final class SampleCommand extends DefaultCommand {

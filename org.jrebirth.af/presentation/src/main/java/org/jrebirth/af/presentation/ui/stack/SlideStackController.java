@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,17 +35,17 @@ import org.jrebirth.af.presentation.command.ShowSlideMenuCommand;
 
 /**
  * The class <strong>SlideStackController</strong>.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  */
 public final class SlideStackController extends DefaultController<SlideStackModel, SlideStackView> implements ActionAdapter {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param view the view to control
-     * 
+     *
      * @throws CoreException if an error occurred while creating event handlers
      */
     public SlideStackController(final SlideStackView view) throws CoreException {
@@ -99,7 +99,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
 
     /**
      * .
-     * 
+     *
      * @param keyEvent
      */
     protected void onKeyPressed(final KeyEvent keyEvent) {
@@ -115,7 +115,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
 
     /**
      * .
-     * 
+     *
      * @param mouseEvent
      */
     protected void onMouseReleased(final MouseEvent mouseEvent) {
@@ -136,10 +136,10 @@ public final class SlideStackController extends DefaultController<SlideStackMode
 
     /**
      * .
-     * 
+     *
      * @param swipeEvent
      */
-    protected void onSwipeLeft(SwipeEvent swipeEvent) {
+    protected void onSwipeLeft(final SwipeEvent swipeEvent) {
 
         System.out.println("swipe left");
         getView().getCircle().fireEvent(new ActionEvent());
@@ -150,10 +150,10 @@ public final class SlideStackController extends DefaultController<SlideStackMode
 
     /**
      * .
-     * 
+     *
      * @param swipeEvent
      */
-    protected void onSwipeRight(SwipeEvent swipeEvent) {
+    protected void onSwipeRight(final SwipeEvent swipeEvent) {
         System.out.println("swipe right");
         getModel().callCommand(ShowPreviousSlideCommand.class);
         swipeEvent.consume();
@@ -163,7 +163,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * {@inheritDoc}
      */
     @Override
-    public void action(ActionEvent actionEvent) {
+    public void action(final ActionEvent actionEvent) {
         System.err.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     }
 

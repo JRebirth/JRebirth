@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 public @interface Register {
 
     Class<?> value() default Class.class;
-    
+
     RegistrationPriority priority() default RegistrationPriority.None;
-    
+
 }

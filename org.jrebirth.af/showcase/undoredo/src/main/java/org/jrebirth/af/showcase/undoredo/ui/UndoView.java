@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>UndoView</strong>. hold a graphical editor and a toolbar with undo/redo buttons.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoController> {
@@ -58,9 +58,9 @@ public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoCont
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param model the controls view model
-     * 
+     *
      * @throws CoreException if build fails
      */
     public UndoView(final UndoModel model) throws CoreException {
@@ -81,8 +81,8 @@ public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoCont
         this.addRectangleButton = new Button("Add Rectangle");
 
         getRootNode().setTop(FlowPaneBuilder.create()
-                .children(this.undoButton, this.redoButton, this.addCircleButton, this.addSquareButton, this.addRectangleButton)
-                .build());
+                                            .children(this.undoButton, this.redoButton, this.addCircleButton, this.addSquareButton, this.addRectangleButton)
+                                            .build());
 
         this.editor = PaneBuilder.create().style("-fx-background-color:beige").build();
 
@@ -119,7 +119,7 @@ public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoCont
 
     /**
      * Gets the undo button.
-     * 
+     *
      * @return Returns the undoButton.
      */
     Button getUndoButton() {
@@ -128,7 +128,7 @@ public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoCont
 
     /**
      * Gets the redo button.
-     * 
+     *
      * @return Returns the redoButton.
      */
     Button getRedoButton() {
@@ -137,7 +137,7 @@ public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoCont
 
     /**
      * Gets the editor.
-     * 
+     *
      * @return Returns the editor.
      */
     Pane getEditor() {
@@ -146,7 +146,7 @@ public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoCont
 
     /**
      * Gets the adds the circle button.
-     * 
+     *
      * @return Returns the addCircleButton.
      */
     Button getAddCircleButton() {
@@ -155,7 +155,7 @@ public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoCont
 
     /**
      * Gets the adds the square button.
-     * 
+     *
      * @return Returns the addSquareButton.
      */
     Button getAddSquareButton() {
@@ -164,7 +164,7 @@ public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoCont
 
     /**
      * Gets the adds the rectangle button.
-     * 
+     *
      * @return Returns the addRectangleButton.
      */
     Button getAddRectangleButton() {

@@ -6,7 +6,7 @@ import org.jrebirth.af.api.exception.CoreException;
 public class AbstractFormController {
     /**
      * Default Constructor.
-     * 
+     *
      * @param view the view controlled
      * @throws org.jrebirth.af.core.exception.CoreException if an error occurred while initialization
      */

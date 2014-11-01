@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleView</strong>.
- * 
+ *
  * @author
  */
 public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, BorderPane, FXMLShowCaseController> {
@@ -34,9 +34,9 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param model the controls view model
-     * 
+     *
      * @throws CoreException if build fails
      */
     public FXMLShowCaseView(final FXMLShowCaseModel model) throws CoreException {
@@ -57,8 +57,8 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
         group.getToggles().addAll(this.showEmbedded, this.showStandalone, this.showHybrid, this.showIncluded);
 
         getRootNode().setTop(FlowPaneBuilder.create()
-                .children(this.showEmbedded, this.showStandalone, this.showIncluded, this.showHybrid)
-                .build());
+                                            .children(this.showEmbedded, this.showStandalone, this.showIncluded, this.showHybrid)
+                                            .build());
 
     }
 

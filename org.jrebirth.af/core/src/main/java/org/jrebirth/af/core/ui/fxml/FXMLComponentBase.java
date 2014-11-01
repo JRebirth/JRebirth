@@ -19,8 +19,8 @@ package org.jrebirth.af.core.ui.fxml;
 
 import javafx.scene.Node;
 
-import org.jrebirth.af.api.ui.fxml.FXMLController;
 import org.jrebirth.af.api.ui.fxml.FXMLComponent;
+import org.jrebirth.af.api.ui.fxml.FXMLController;
 
 /**
  * The class <strong>FXMLComponent</strong>.

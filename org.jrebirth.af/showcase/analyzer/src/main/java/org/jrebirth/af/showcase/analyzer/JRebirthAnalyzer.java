@@ -111,10 +111,10 @@ public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
                 // Call the service that will load and parse the log file
                 waveList.add(
                         Builders.wave()
-                        .waveGroup(WaveGroup.RETURN_DATA)
-                        .waveType(LoadEdtFileService.DO_LOAD_EVENTS)
-                        .componentClass(LoadEdtFileService.class)
-                        .addDatas(Builders.waveData(EditorWaves.EVENTS_FILE, logFile))
+                                .waveGroup(WaveGroup.RETURN_DATA)
+                                .waveType(LoadEdtFileService.DO_LOAD_EVENTS)
+                                .componentClass(LoadEdtFileService.class)
+                                .addDatas(Builders.waveData(EditorWaves.EVENTS_FILE, logFile))
                         );
 
                 // Start the animation to show all components creation

@@ -8,7 +8,7 @@ import org.jrebirth.af.core.ui.fxml.AbstractFXMLController;
 
 /**
  * The class <strong>StandaloneController</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class StandaloneController extends AbstractFXMLController<StandaloneModel, View<StandaloneModel, ?, ?>> {

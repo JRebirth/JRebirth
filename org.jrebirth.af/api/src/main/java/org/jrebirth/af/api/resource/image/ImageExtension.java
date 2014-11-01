@@ -42,7 +42,7 @@ public enum ImageExtension {
      */
     @Override
     public String toString() {
-        return this == NONE ? "" : "." + name().toLowerCase() ;
+        return this == NONE ? "" : "." + name().toLowerCase();
     }
 
 }

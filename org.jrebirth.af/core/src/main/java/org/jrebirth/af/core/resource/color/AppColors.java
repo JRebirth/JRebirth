@@ -25,7 +25,7 @@ package org.jrebirth.af.core.resource.color;
 public enum AppColors implements ColorEnum {
 
     // @formatter:off
-    
+
     /** The default Stage Background Color. */
     STAGE_BG {{ rgb255(240, 240, 255, 1.0); }};
 

@@ -66,7 +66,7 @@ public interface ColorItemReal extends org.jrebirth.af.api.resource.color.ColorI
         default void rgb255(final int red, final int green, final int blue) {
             set(new RGB255Color(red, green, blue));
         }
-        
+
     }
 
     /**
@@ -96,7 +96,7 @@ public interface ColorItemReal extends org.jrebirth.af.api.resource.color.ColorI
         default void rgb(final double red, final double green, final double blue) {
             set(new RGB01Color(red, green, blue));
         }
-        
+
     }
 
     /**
@@ -126,7 +126,7 @@ public interface ColorItemReal extends org.jrebirth.af.api.resource.color.ColorI
         default void hsb(final double hue, final double saturation, final double brightness) {
             set(new HSBColor(hue, saturation, brightness));
         }
-        
+
     }
 
     /**
@@ -152,7 +152,7 @@ public interface ColorItemReal extends org.jrebirth.af.api.resource.color.ColorI
         default void web(final String hex) {
             set(new WebColor(hex));
         }
-        
+
     }
 
     /**
@@ -178,6 +178,6 @@ public interface ColorItemReal extends org.jrebirth.af.api.resource.color.ColorI
         default void gray(final double gray) {
             set(new GrayColor(gray));
         }
-        
+
     }
 }

@@ -18,6 +18,7 @@
 package org.jrebirth.af.core.inner;
 
 import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.inner.InnerComponent;
 import org.jrebirth.af.api.key.UniqueKey;
 
 /**
@@ -30,7 +31,7 @@ import org.jrebirth.af.api.key.UniqueKey;
  * @author Sébastien Bordes
  *
  */
-public interface InnerComponent<C extends Component<?>> {
+public interface InnerComponentBase<C extends Component<?>> extends InnerComponent<C> {
 
     // /**
     // * {@inheritDoc}
@@ -46,9 +47,10 @@ public interface InnerComponent<C extends Component<?>> {
      *
      * @return the unique key used to load the right Model, must be not null
      */
+    @Override
     UniqueKey<C> getKey();
 
-    static <CC extends Component<?>> InnerComponent<CC> create(final Class<CC> modelClass, final Object... keyPart) {
+    static <CC extends Component<?>> InnerComponentBase<CC> create(final Class<CC> modelClass, final Object... keyPart) {
         return new InnerComponentEntry<CC>(modelClass, keyPart);
     }
 

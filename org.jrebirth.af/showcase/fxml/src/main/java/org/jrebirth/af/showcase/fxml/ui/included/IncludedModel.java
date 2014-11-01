@@ -4,7 +4,7 @@ import org.jrebirth.af.core.ui.fxml.DefaultFXMLModel;
 
 /**
  * The class <strong>IncludedModel</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class IncludedModel extends DefaultFXMLModel<IncludedModel> {

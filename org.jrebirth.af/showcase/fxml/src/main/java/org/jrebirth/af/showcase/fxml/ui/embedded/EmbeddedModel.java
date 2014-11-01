@@ -4,7 +4,7 @@ import org.jrebirth.af.core.ui.DefaultModel;
 
 /**
  * The class <strong>StandaloneModel</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class EmbeddedModel extends DefaultModel<EmbeddedModel, EmbeddedView> {

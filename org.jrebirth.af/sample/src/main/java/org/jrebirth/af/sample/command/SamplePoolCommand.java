@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleUICommand</strong> used to process long action (without monitoring)into the JRebirth Thread Pool.
- * 
+ *
  * @author
  */
 public final class SamplePoolCommand extends DefaultPoolCommand {

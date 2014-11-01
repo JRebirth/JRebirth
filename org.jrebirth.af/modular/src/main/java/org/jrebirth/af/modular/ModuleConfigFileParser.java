@@ -25,7 +25,7 @@ import org.jrebirth.af.modular.model.RegistrationEntry;
 
 public class ModuleConfigFileParser {
 
-    public static List<javafx.util.Pair<Class<?>, Class<?>>> parseFile(String fileName) {
+    public static List<javafx.util.Pair<Class<?>, Class<?>>> parseFile(final String fileName) {
 
         final List<javafx.util.Pair<Class<?>, Class<?>>> pairList = new ArrayList<javafx.util.Pair<Class<?>, Class<?>>>();
 
@@ -66,7 +66,7 @@ public class ModuleConfigFileParser {
         return pairList;
     }
 
-    private static Class<?> getClassObject(String className) throws ClassNotFoundException {
+    private static Class<?> getClassObject(final String className) throws ClassNotFoundException {
 
         return Class.forName(className);
     }

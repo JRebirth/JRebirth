@@ -4,7 +4,7 @@ import org.jrebirth.af.core.ui.fxml.DefaultFXMLModel;
 
 /**
  * The class <strong>StandaloneModel</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class StandaloneModel extends DefaultFXMLModel<StandaloneModel> {

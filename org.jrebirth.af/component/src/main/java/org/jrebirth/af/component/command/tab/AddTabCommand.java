@@ -43,8 +43,8 @@ public class AddTabCommand extends DefaultBeanCommand<TabWaveBean> {
         // sendWave(Builders.wave()
         // .waveType(TabModel.ADD)
         // .componentClass(TabModel.class)
-        // .addDatas( WaveData.build(TabModel.TAB_KEY, getWaveBean(wave).tabHolderKey()),
-        // WaveData.build(TabModel.TAB, tab )
+        // .addDatas( Builders.waveData(TabModel.TAB_KEY, getWaveBean(wave).tabHolderKey()),
+        // Builders.waveData(TabModel.TAB, tab )
         // )
         // );
         //

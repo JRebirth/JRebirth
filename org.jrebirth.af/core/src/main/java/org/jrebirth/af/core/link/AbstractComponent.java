@@ -39,7 +39,7 @@ import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.facade.Component;
 import org.jrebirth.af.api.facade.JRebirthEventType;
-import org.jrebirth.af.api.inner.IInnerComponent;
+import org.jrebirth.af.api.inner.InnerComponent;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.link.Notifier;
 import org.jrebirth.af.api.log.JRLogger;
@@ -54,7 +54,6 @@ import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
-import org.jrebirth.af.core.inner.InnerComponent;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
@@ -100,7 +99,7 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
     protected Component<?> rootComponent;
 
     /** The map that store inner models loaded. */
-    protected final Map<IInnerComponent<?>, Component<?>> innerComponentMap = new IdentityHashMap<>(10);
+    protected final Map<InnerComponent<?>, Component<?>> innerComponentMap = new IdentityHashMap<>(10);
 
     /**
      * Short cut method used to retrieve the notifier.
@@ -333,11 +332,11 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
     private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveData<?>... waveData) {
 
         final Wave wave = wave()
-                .waveGroup(waveGroup)
-                .waveType(waveType)
-                .fromClass(this.getClass())
-                .componentClass(componentClass)
-                .addDatas(waveData);
+                                .waveGroup(waveGroup)
+                                .waveType(waveType)
+                                .fromClass(this.getClass())
+                                .componentClass(componentClass)
+                                .addDatas(waveData);
 
         // Track wave creation
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
@@ -358,11 +357,11 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
     private Wave createWave(final WaveGroup waveGroup, final WaveTypeBase waveType, final Class<?> componentClass, final WaveBean waveBean) {
 
         final Wave wave = wave()
-                .waveGroup(waveGroup)
-                .waveType(waveType)
-                .fromClass(this.getClass())
-                .componentClass(componentClass)
-                .waveBean(waveBean);
+                                .waveGroup(waveGroup)
+                                .waveType(waveType)
+                                .fromClass(this.getClass())
+                                .componentClass(componentClass)
+                                .waveBean(waveBean);
 
         // Track wave creation
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
@@ -616,7 +615,7 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
      */
     @SuppressWarnings("unchecked")
     @Override
-    public final <C extends Component<?>> void addInnerComponent(final IInnerComponent<C> innerComponent) {
+    public final <C extends Component<?>> void addInnerComponent(final InnerComponent<C> innerComponent) {
 
         // If the inner model hasn't been loaded before, build it from UIFacade
         if (!this.innerComponentMap.containsKey(innerComponent)) {
@@ -657,7 +656,7 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
      */
     @SuppressWarnings("unchecked")
     @Override
-    public final <C extends Component<?>> C getInnerComponent(final IInnerComponent<C> innerModel) {
+    public final <C extends Component<?>> C getInnerComponent(final InnerComponent<C> innerModel) {
         if (!this.innerComponentMap.containsKey(innerModel)) {
 
             // This InnerModel should be initialized into the initInnerModel method instead

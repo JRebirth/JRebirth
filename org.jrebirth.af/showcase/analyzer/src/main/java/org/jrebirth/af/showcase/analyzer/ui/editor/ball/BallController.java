@@ -84,7 +84,7 @@ public final class BallController extends DefaultController<BallModel, BallView>
         if (mouseEvent.getSource() instanceof Node) {
             // Send Event Selected Wave
             getModel().sendWave(EditorWaves.DO_SELECT_EVENT,
-                    Builders.waveData(PropertiesWaves.EVENT_OBJECT, getModel().getEventModel()));
+                                Builders.waveData(PropertiesWaves.EVENT_OBJECT, getModel().getEventModel()));
         }
 
     }

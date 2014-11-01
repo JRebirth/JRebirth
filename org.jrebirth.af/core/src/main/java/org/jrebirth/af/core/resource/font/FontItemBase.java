@@ -19,8 +19,6 @@ package org.jrebirth.af.core.resource.font;
 
 import javafx.scene.text.Font;
 
-import org.jrebirth.af.api.resource.ResourceItem;
-import org.jrebirth.af.api.resource.color.ColorItem;
 import org.jrebirth.af.api.resource.font.FontItem;
 import org.jrebirth.af.api.resource.font.FontParams;
 import org.jrebirth.af.core.resource.AbstractResourceItem;
@@ -34,7 +32,7 @@ public final class FontItemBase extends AbstractResourceItem<FontItem, FontParam
 
     /**
      * Build a new Font Item instance.
-     * 
+     *
      * @return a new {@link FontItem} instance
      */
     public static FontItemBase create() {

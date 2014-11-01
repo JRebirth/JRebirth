@@ -2,7 +2,7 @@ package org.jrebirth.af.presentation.ui.base;
 
 /**
  * The class <strong>DefaultSlideStep</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class DefaultSlideStep implements SlideStep {
@@ -13,7 +13,7 @@ public final class DefaultSlideStep implements SlideStep {
     /**
      * @param name
      */
-    public DefaultSlideStep(String name) {
+    public DefaultSlideStep(final String name) {
         super();
         this.name = name;
     }
@@ -23,7 +23,7 @@ public final class DefaultSlideStep implements SlideStep {
      */
     @Override
     public String name() {
-        return name;
+        return this.name;
     }
 
 }

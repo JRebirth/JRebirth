@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleModel</strong>.
- * 
+ *
  * @author
  */
 public final class FXMLShowCaseModel extends DefaultModel<FXMLShowCaseModel, FXMLShowCaseView> {

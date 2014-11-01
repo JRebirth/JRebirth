@@ -89,78 +89,78 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
         getRootNode().setScaleY(0);
 
         this.circle = CircleBuilder.create()
-                .radius(22)
-                .fill(Color.ALICEBLUE)
-                .stroke(Color.WHITE)
-                .strokeWidth(4)
-                .build();
+                                   .radius(22)
+                                   .fill(Color.ALICEBLUE)
+                                   .stroke(Color.WHITE)
+                                   .strokeWidth(4)
+                                   .build();
 
         this.label = LabelBuilder.create()
-                .textFill(Color.WHITE)
-                // .effect(arg0)
-                .build();
+                                 .textFill(Color.WHITE)
+                                 // .effect(arg0)
+                                 .build();
 
         getRootNode().getChildren().addAll(this.circle, this.label);
 
         this.showTransition = ParallelTransitionBuilder.create()
-                .children(
-                        ScaleTransitionBuilder.create()
-                        .duration(Duration.millis(400))
-                        .node(getRootNode())
-                        .fromX(0.0)
-                        .fromY(0.0)
-                        .toX(1f)
-                        .toY(1f)
-                        .build(),
-                        TranslateTransitionBuilder.create()
-                        .duration(Duration.millis(500))
-                        .node(getRootNode())
-                        .fromX(0.0)
-                        .fromY(0.0)
-                        .toX(getX())
-                        .toY(getY())
-                        .build()
-                        )
-                        .cycleCount(1)
-                        .autoReverse(false)
-                        .build();
+                                                       .children(
+                                                                 ScaleTransitionBuilder.create()
+                                                                                       .duration(Duration.millis(400))
+                                                                                       .node(getRootNode())
+                                                                                       .fromX(0.0)
+                                                                                       .fromY(0.0)
+                                                                                       .toX(1f)
+                                                                                       .toY(1f)
+                                                                                       .build(),
+                                                                 TranslateTransitionBuilder.create()
+                                                                                           .duration(Duration.millis(500))
+                                                                                           .node(getRootNode())
+                                                                                           .fromX(0.0)
+                                                                                           .fromY(0.0)
+                                                                                           .toX(getX())
+                                                                                           .toY(getY())
+                                                                                           .build()
+                                                       )
+                                                       .cycleCount(1)
+                                                       .autoReverse(false)
+                                                       .build();
 
         this.showTransition.setOnFinished(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(final ActionEvent arg0) {
-                getModel().sendWave(EditorWaves.RE_EVENT_PROCESSED/* , WaveData.build(waveItem, value) */);
+                getModel().sendWave(EditorWaves.RE_EVENT_PROCESSED/* , Builders.waveData(waveItem, value) */);
 
             }
         });
 
         this.scaleTransition = ScaleTransitionBuilder.create()
-                .duration(Duration.millis(600))
-                .node(getRootNode())
-                .fromX(1.1)
-                .fromY(1.1)
-                .toX(0.7)
-                .toY(0.7)
-                .cycleCount(Animation.INDEFINITE)
-                .autoReverse(true)
-                .build();
+                                                     .duration(Duration.millis(600))
+                                                     .node(getRootNode())
+                                                     .fromX(1.1)
+                                                     .fromY(1.1)
+                                                     .toX(0.7)
+                                                     .toY(0.7)
+                                                     .cycleCount(Animation.INDEFINITE)
+                                                     .autoReverse(true)
+                                                     .build();
 
         this.circle.setEffect(InnerShadowBuilder.create()
-                .color(Color.GREY)
-                .blurType(BlurType.GAUSSIAN)
-                .radius(2)
-                .offsetX(1)
-                .offsetY(1)
-                .build());
+                                                .color(Color.GREY)
+                                                .blurType(BlurType.GAUSSIAN)
+                                                .radius(2)
+                                                .offsetX(1)
+                                                .offsetY(1)
+                                                .build());
 
         getRootNode().setEffect(DropShadowBuilder.create()
-                // .input()
-                .color(Color.BLACK)
-                .blurType(BlurType.GAUSSIAN)
-                .radius(4)
-                .offsetX(3)
-                .offsetY(3)
-                .build());
+                                                 // .input()
+                                                 .color(Color.BLACK)
+                                                 .blurType(BlurType.GAUSSIAN)
+                                                 .radius(4)
+                                                 .offsetX(3)
+                                                 .offsetY(3)
+                                                 .build());
 
     }
 
@@ -230,14 +230,14 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
      */
     public void resetScale() {
         ScaleTransitionBuilder.create()
-        .duration(Duration.millis(400))
-        .node(getRootNode())
-        .toX(1f)
-        .toY(1f)
-        .cycleCount(1)
-        .autoReverse(false)
-        .build()
-        .play();
+                              .duration(Duration.millis(400))
+                              .node(getRootNode())
+                              .toX(1f)
+                              .toY(1f)
+                              .cycleCount(1)
+                              .autoReverse(false)
+                              .build()
+                              .play();
     }
 
     /**

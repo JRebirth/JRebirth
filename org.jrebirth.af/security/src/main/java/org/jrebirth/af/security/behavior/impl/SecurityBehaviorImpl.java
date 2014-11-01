@@ -6,7 +6,7 @@ import org.jrebirth.af.security.behavior.data.Securable;
 
 /**
  * The class <strong>SecurityBehaviorImpl</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public class SecurityBehaviorImpl extends AbstractBehavior<Securable> implements SecurityBehavior {
@@ -17,6 +17,7 @@ public class SecurityBehaviorImpl extends AbstractBehavior<Securable> implements
 
     }
 
+    @Override
     protected void initInnerComponents() {
     }
 

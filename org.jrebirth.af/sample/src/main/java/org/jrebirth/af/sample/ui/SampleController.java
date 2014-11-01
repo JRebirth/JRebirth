@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleController</strong>.
- * 
+ *
  * @author
  */
 public final class SampleController extends AbstractController<SampleModel, SampleView> {
@@ -24,9 +24,9 @@ public final class SampleController extends AbstractController<SampleModel, Samp
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param view the view to control
-     * 
+     *
      * @throws CoreException if an error occurred while creating event handlers
      */
     public SampleController(final SampleView view) throws CoreException {
@@ -60,7 +60,7 @@ public final class SampleController extends AbstractController<SampleModel, Samp
 
     /**
      * Manage Mouse click of widget that have annotation.
-     * 
+     *
      * @param event the mouse event
      */
     void onMouseClicked(final MouseEvent event) {

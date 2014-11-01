@@ -11,7 +11,7 @@ public abstract class AbstractFormView<M extends AbstractFormModel<M, ?, ?>, C e
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param model the model of the view
      */
     public AbstractFormView(final M model) {

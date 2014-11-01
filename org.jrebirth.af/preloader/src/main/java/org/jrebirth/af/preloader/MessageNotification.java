@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,7 +33,7 @@ public class MessageNotification implements PreloaderNotification {
 
     /**
      * Instantiates a new message notification.
-     * 
+     *
      * @param message the message
      * @param application the application that triggers this message
      */
@@ -45,7 +45,7 @@ public class MessageNotification implements PreloaderNotification {
 
     /**
      * Gets the message.
-     * 
+     *
      * @return Returns the message.
      */
     public String getMessage() {
@@ -54,7 +54,7 @@ public class MessageNotification implements PreloaderNotification {
 
     /**
      * Gets the application.
-     * 
+     *
      * @return Returns the application.
      */
     public Application getApplication() {

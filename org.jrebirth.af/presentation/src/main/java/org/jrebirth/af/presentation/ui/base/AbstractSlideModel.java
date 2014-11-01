@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -42,9 +42,9 @@ import org.jrebirth.presentation.model.SlideContent;
 
 /**
  * The class <strong>AbstractSlideModel</strong>.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <M> the SlideModel class
  * @param <V> the SlideView class
  * @param <S> the SlideStep to use
@@ -97,22 +97,22 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      * @return Returns the currentFlow.
      */
     public SlideFlow getCurrentFlow() {
-        return currentFlow;
+        return this.currentFlow;
     }
 
     /**
      * Return true if the slide flow is forward
-     * 
+     *
      * @return true if currentFlow == forward
      */
     public boolean isForwardFlow() {
-        return currentFlow == SlideFlow.forward;
+        return this.currentFlow == SlideFlow.forward;
     }
 
     /**
      * @param currentFlow The currentFlow to set.
      */
-    public void setCurrentFlow(SlideFlow currentFlow) {
+    public void setCurrentFlow(final SlideFlow currentFlow) {
         this.currentFlow = currentFlow;
     }
 
@@ -193,7 +193,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
 
     /**
      * Returns true if the slide has at least one step.
-     * 
+     *
      * @return true if the slide step list is not empty
      */
     public boolean hasStep() {
@@ -208,12 +208,12 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
             this.stepList = new ArrayList<>();
             this.stepList.addAll(Arrays.asList(initializeSlideStep()));
 
-            for (SlideContent sc : getSlide().getContent()) {
+            for (final SlideContent sc : getSlide().getContent()) {
                 if (!hasStep(sc)) {
                     if (sc.getIndex() != null) {
-                        stepList.add(sc.getIndex().intValue(), (S) new DefaultSlideStep(sc.getName()));
+                        this.stepList.add(sc.getIndex().intValue(), (S) new DefaultSlideStep(sc.getName()));
                     } else {
-                        stepList.add((S) new DefaultSlideStep(sc.getName()));
+                        this.stepList.add((S) new DefaultSlideStep(sc.getName()));
                     }
                 }
             }
@@ -223,14 +223,14 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
 
     /**
      * Check if step defined in xml exist into current step list.
-     * 
+     *
      * @param slideContent the content to check
-     * 
+     *
      * @return true if the slide content is mapped to a programmatic slidestep
      */
-    private boolean hasStep(SlideContent slideContent) {
+    private boolean hasStep(final SlideContent slideContent) {
         boolean res = false;
-        for (S step : this.stepList) {
+        for (final S step : this.stepList) {
             if (step.name().equalsIgnoreCase(slideContent.getName())) {
                 res = true;
             }
@@ -240,7 +240,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
 
     /**
      * Initialize the SlideStep array.
-     * 
+     *
      * @return the list of slide step for this slide
      */
     protected abstract S[] initializeSlideStep();
@@ -279,7 +279,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
 
     /**
      * Return the default content or null.
-     * 
+     *
      * @return the default SlideContent
      */
     public SlideContent getDefaultContent() {
@@ -292,9 +292,9 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
 
     /**
      * Return the default content or null for the given step.
-     * 
+     *
      * @param slideStep the step to build
-     * 
+     *
      * @return the SlideContent
      */
     public SlideContent getContent(final SlideStep slideStep) {
@@ -339,9 +339,9 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
 
     /**
      * Build an animation.
-     * 
+     *
      * @param animationType the type of the animation to build
-     * 
+     *
      * @return the animation
      */
     private Animation buildAnimation(final AnimationType animationType) {
@@ -414,7 +414,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
 
     /**
      * Build a sliding animation.
-     * 
+     *
      * @return a sliding animation
      */
     private Animation buildSliding() {
@@ -423,44 +423,44 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
 
     /**
      * Build a scaling animation.
-     * 
+     *
      * @param from scale ratio used as from value
      * @param to scale ratio used as to value
      * @param show if true a fade in transition will be performed, otherwise fade out
-     * 
+     *
      * @return a scale animation
      */
     private Animation buildScaleAnimation(final double from, final double to, final boolean show) {
 
         return ParallelTransitionBuilder.create()
-                .children(
-                        ScaleTransitionBuilder.create()
-                                .node(getRootNode())
-                                .fromX(from)
-                                .toX(to)
-                                .fromY(from)
-                                .toY(to)
-                                .duration(Duration.seconds(1))
-                                .build(),
+                                        .children(
+                                                  ScaleTransitionBuilder.create()
+                                                                        .node(getRootNode())
+                                                                        .fromX(from)
+                                                                        .toX(to)
+                                                                        .fromY(from)
+                                                                        .toY(to)
+                                                                        .duration(Duration.seconds(1))
+                                                                        .build(),
 
-                        FadeTransitionBuilder.create()
-                                .node(getRootNode())
-                                .fromValue(show ? 0.0 : 1.0)
-                                .toValue(show ? 1.0 : 0.0)
-                                .duration(Duration.seconds(1))
-                                .build()
-                )
-                .build();
+                                                  FadeTransitionBuilder.create()
+                                                                       .node(getRootNode())
+                                                                       .fromValue(show ? 0.0 : 1.0)
+                                                                       .toValue(show ? 1.0 : 0.0)
+                                                                       .duration(Duration.seconds(1))
+                                                                       .build()
+                                        )
+                                        .build();
     }
 
     /**
      * Build a scaling animation.
-     * 
+     *
      * @param fromX the x starting point coordinate
      * @param toX the x arrival point coordinate
      * @param fromY the y starting point coordinate
      * @param toY the y arrival point coordinate
-     * 
+     *
      * @return a translate animation
      */
     protected Animation buildHorizontalAnimation(final double fromX, final double toX, final double fromY, final double toY) {
@@ -471,37 +471,37 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         getRootNode().setEffect(mb);
 
         return ParallelTransitionBuilder.create()
-                .children(
-                        TranslateTransitionBuilder.create()
-                                .node(getRootNode())
-                                .fromX(fromX)
-                                .toX(toX)
-                                .fromY(fromY)
-                                .toY(toY)
-                                .duration(Duration.seconds(1))
-                                .build(),
+                                        .children(
+                                                  TranslateTransitionBuilder.create()
+                                                                            .node(getRootNode())
+                                                                            .fromX(fromX)
+                                                                            .toX(toX)
+                                                                            .fromY(fromY)
+                                                                            .toY(toY)
+                                                                            .duration(Duration.seconds(1))
+                                                                            .build(),
 
-                        TimelineBuilder.create()
-                                .keyFrames(
-                                        new KeyFrame(Duration.millis(0), new KeyValue(mb.radiusProperty(), 0)),
-                                        new KeyFrame(Duration.millis(100), new KeyValue(mb.radiusProperty(), 50)),
-                                        new KeyFrame(Duration.millis(500), new KeyValue(mb.radiusProperty(), 63)),
-                                        new KeyFrame(Duration.millis(900), new KeyValue(mb.radiusProperty(), 50)),
-                                        new KeyFrame(Duration.millis(1000), new KeyValue(mb.radiusProperty(), 0))
-                                )
-                                .build()
-                )
-                .build();
+                                                  TimelineBuilder.create()
+                                                                 .keyFrames(
+                                                                            new KeyFrame(Duration.millis(0), new KeyValue(mb.radiusProperty(), 0)),
+                                                                            new KeyFrame(Duration.millis(100), new KeyValue(mb.radiusProperty(), 50)),
+                                                                            new KeyFrame(Duration.millis(500), new KeyValue(mb.radiusProperty(), 63)),
+                                                                            new KeyFrame(Duration.millis(900), new KeyValue(mb.radiusProperty(), 50)),
+                                                                            new KeyFrame(Duration.millis(1000), new KeyValue(mb.radiusProperty(), 0))
+                                                                 )
+                                                                 .build()
+                                        )
+                                        .build();
     }
 
     /**
      * Return the right angle for the given coordinate.
-     * 
+     *
      * @param fromX the x starting point coordinate
      * @param toX the x arrival point coordinate
      * @param fromY the y starting point coordinate
      * @param toY the y arrival point coordinate
-     * 
+     *
      * @return the right angle
      */
     private double findAngle(final double fromX, final double fromY, final double toX, final double toY) {

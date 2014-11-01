@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -79,13 +79,13 @@ import org.jrebirth.presentation.model.SlideContent;
 import org.jrebirth.presentation.model.SlideItem;
 
 /**
- * 
+ *
  * The class <strong>AbstractTemplateView</strong>.
- * 
+ *
  * The view used to display a standard template slide.
- * 
+ *
  * @author Sébastien Bordes
- * 
+ *
  * @param <M> the template model class
  * @param <N> the layout node
  * @param <C> the template controller class
@@ -125,9 +125,9 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param model the controls view model
-     * 
+     *
      * @throws CoreException if build fails
      */
     public AbstractTemplateView(final M model) throws CoreException {
@@ -212,7 +212,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /**
      * Add a subslide node.
-     * 
+     *
      * @param defaultSubSlide the subslide node
      */
     private void addSubSlide(final Node defaultSubSlide) {
@@ -240,125 +240,125 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
         ParallelTransitionBuilder.create().children(
 
-                // ParallelTransitionBuilder.create().children(
-                ScaleTransitionBuilder
-                        .create()
-                        .node(this.circle)
-                        .duration(Duration.millis(600))
-                        .fromX(0)
-                        .fromY(0)
-                        .toX(1)
-                        .toY(1)
-                        .build(),
-                TimelineBuilder.create()
-                        .delay(Duration.millis(200))
-                        .keyFrames(
-                                new KeyFrame(Duration.millis(0), new KeyValue(this.rectangle.widthProperty(), 0)),
-                                new KeyFrame(Duration.millis(600), new KeyValue(this.rectangle.widthProperty(), 90))
-                        )
-                        .build(),
-                ParallelTransitionBuilder
-                        .create().delay(Duration.millis(400))
-                        .children(
-                                RotateTransitionBuilder
-                                        .create()
-                                        .duration(Duration.millis(600))
-                                        .fromAngle(-180)
-                                        .toAngle(0)
-                                        .build(),
-                                ScaleTransitionBuilder
-                                        .create()
-                                        .duration(Duration.millis(600))
-                                        .fromX(0)
-                                        .fromY(0)
-                                        .toX(1)
-                                        .toY(1)
-                                        .build()
-                        )
-                        .node(this.slideContent)
-                        .build()
-                )
-                .build().play();
+                                                    // ParallelTransitionBuilder.create().children(
+                                                    ScaleTransitionBuilder
+                                                                          .create()
+                                                                          .node(this.circle)
+                                                                          .duration(Duration.millis(600))
+                                                                          .fromX(0)
+                                                                          .fromY(0)
+                                                                          .toX(1)
+                                                                          .toY(1)
+                                                                          .build(),
+                                                    TimelineBuilder.create()
+                                                                   .delay(Duration.millis(200))
+                                                                   .keyFrames(
+                                                                              new KeyFrame(Duration.millis(0), new KeyValue(this.rectangle.widthProperty(), 0)),
+                                                                              new KeyFrame(Duration.millis(600), new KeyValue(this.rectangle.widthProperty(), 90))
+                                                                   )
+                                                                   .build(),
+                                                    ParallelTransitionBuilder
+                                                                             .create().delay(Duration.millis(400))
+                                                                             .children(
+                                                                                       RotateTransitionBuilder
+                                                                                                              .create()
+                                                                                                              .duration(Duration.millis(600))
+                                                                                                              .fromAngle(-180)
+                                                                                                              .toAngle(0)
+                                                                                                              .build(),
+                                                                                       ScaleTransitionBuilder
+                                                                                                             .create()
+                                                                                                             .duration(Duration.millis(600))
+                                                                                                             .fromX(0)
+                                                                                                             .fromY(0)
+                                                                                                             .toX(1)
+                                                                                                             .toY(1)
+                                                                                                             .build()
+                                                                             )
+                                                                             .node(this.slideContent)
+                                                                             .build()
+                                 )
+                                 .build().play();
     }
 
     /**
      * Build and return the header panel.
-     * 
+     *
      * @return the header panel
      */
     protected Node getHeaderPanel() {
 
         final Pane headerPane = PaneBuilder.create()
-                .styleClass("header")
-                .layoutX(0.0)
-                .layoutY(0.0)
-                .minWidth(1024)
-                .prefWidth(1024)
-                .build();
+                                           .styleClass("header")
+                                           .layoutX(0.0)
+                                           .layoutY(0.0)
+                                           .minWidth(1024)
+                                           .prefWidth(1024)
+                                           .build();
         // sp.getStyleClass().add("header");
 
         final Label primaryTitle = LabelBuilder.create()
-                // .styleClass("slideTitle")
-                .font(PrezFonts.SLIDE_TITLE.get())
-                .textFill(PrezColors.SLIDE_TITLE.get())
-                .text(getModel().getSlide().getTitle().replaceAll("\\\\n", "\n").replaceAll("\\\\t", "\t"))
-                .layoutX(40)
-                .layoutY(45)
-                // .style("-fx-background-color:#CCCB20")
-                .build();
+                                               // .styleClass("slideTitle")
+                                               .font(PrezFonts.SLIDE_TITLE.get())
+                                               .textFill(PrezColors.SLIDE_TITLE.get())
+                                               .text(getModel().getSlide().getTitle().replaceAll("\\\\n", "\n").replaceAll("\\\\t", "\t"))
+                                               .layoutX(40)
+                                               .layoutY(45)
+                                               // .style("-fx-background-color:#CCCB20")
+                                               .build();
 
         this.secondaryTitle = LabelBuilder.create()
-                // .styleClass("slideTitle")
-                .font(PrezFonts.SLIDE_SUB_TITLE.get())
-                .textFill(PrezColors.SLIDE_TITLE.get())
-                // .scaleX(1.5)
-                // .scaleY(1.5)
-                .layoutX(450)
-                .layoutY(14)
-                .minWidth(450)
-                // .style("-fx-background-color:#E53B20")
-                .alignment(Pos.CENTER_RIGHT)
-                .textAlignment(TextAlignment.RIGHT)
-                .build();
+                                          // .styleClass("slideTitle")
+                                          .font(PrezFonts.SLIDE_SUB_TITLE.get())
+                                          .textFill(PrezColors.SLIDE_TITLE.get())
+                                          // .scaleX(1.5)
+                                          // .scaleY(1.5)
+                                          .layoutX(450)
+                                          .layoutY(14)
+                                          .minWidth(450)
+                                          // .style("-fx-background-color:#E53B20")
+                                          .alignment(Pos.CENTER_RIGHT)
+                                          .textAlignment(TextAlignment.RIGHT)
+                                          .build();
 
         final ImageView breizhcamp = ImageViewBuilder.create()
-                .layoutX(680.0)
-                .layoutY(-14.0)
-                .scaleX(0.6)
-                .scaleY(0.6)
-                .image(PrezImages.HEADER_LOGO.get())
-                .build();
+                                                     .layoutX(680.0)
+                                                     .layoutY(-14.0)
+                                                     .scaleX(0.6)
+                                                     .scaleY(0.6)
+                                                     .image(PrezImages.HEADER_LOGO.get())
+                                                     .build();
 
         final Polyline pl = PolylineBuilder.create()
-                .strokeWidth(3)
-                .stroke(Color.BLACK)
-                .points(684.0, 12.0, 946.0, 12.0, 946.0, 107.0)
-                .build();
+                                           .strokeWidth(3)
+                                           .stroke(Color.BLACK)
+                                           .points(684.0, 12.0, 946.0, 12.0, 946.0, 107.0)
+                                           .build();
 
         this.rectangle = RectangleBuilder.create()
-                .layoutX(108.0)
-                .layoutY(95.0)
-                .width(0.0) // 60.0
-                .height(14.0)
-                .fill(Color.web("1C9A9A"))
-                .build();
+                                         .layoutX(108.0)
+                                         .layoutY(95.0)
+                                         .width(0.0) // 60.0
+                                         .height(14.0)
+                                         .fill(Color.web("1C9A9A"))
+                                         .build();
 
         this.circle = CircleBuilder.create()
-                .scaleX(0)
-                .scaleY(0)
-                .layoutX(18 + 54)
-                .layoutY(18 + 54)
-                .radius(54)
-                .fill(Color.web("444442"))
-                .build();
+                                   .scaleX(0)
+                                   .scaleY(0)
+                                   .layoutX(18 + 54)
+                                   .layoutY(18 + 54)
+                                   .radius(54)
+                                   .fill(Color.web("444442"))
+                                   .build();
 
         this.pageLabel = LabelBuilder.create()
-                .layoutX(970)
-                .layoutY(18.0)
-                .text(String.valueOf(getModel().getSlide().getPage()))
-                .font(PrezFonts.PAGE.get())
-                .rotate(90.0)
-                .build();
+                                     .layoutX(970)
+                                     .layoutY(18.0)
+                                     .text(String.valueOf(getModel().getSlide().getPage()))
+                                     .font(PrezFonts.PAGE.get())
+                                     .rotate(90.0)
+                                     .build();
 
         // final FlowPane fp = FlowPaneBuilder.create()
         // .orientation(Orientation.HORIZONTAL)
@@ -387,7 +387,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /**
      * Bind node's scale properties to stage size.
-     * 
+     *
      * @param node the bound node
      */
     protected void bindNode(final Node node) {
@@ -397,7 +397,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /**
      * Returns the height ratio.
-     * 
+     *
      * @return the height ratio
      */
     protected NumberBinding bindHeight() {
@@ -406,7 +406,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /**
      * Returns the width ratio.
-     * 
+     *
      * @return the width ratio
      */
     protected NumberBinding bindWidth() {
@@ -415,34 +415,34 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /**
      * Build and return the content panel.
-     * 
+     *
      * @return the content panel
      */
     protected abstract Node getContentPanel();
 
     /**
      * Build and return the footer panel.
-     * 
+     *
      * @return the footer panel
      */
     protected Node getFooterPanel() {
         this.pageLabel = LabelBuilder.create()
-                .text(String.valueOf(getModel().getSlide().getPage()))
-                .font(PrezFonts.PAGE.get())
-                .build();
+                                     .text(String.valueOf(getModel().getSlide().getPage()))
+                                     .font(PrezFonts.PAGE.get())
+                                     .build();
 
         final AnchorPane ap = AnchorPaneBuilder.create()
-                .children(this.pageLabel)
-                .build();
+                                               .children(this.pageLabel)
+                                               .build();
         AnchorPane.setRightAnchor(this.pageLabel, 20.0);
 
         final StackPane sp = StackPaneBuilder.create()
-                .styleClass("footer")
-                .prefHeight(35.0)
-                .minHeight(Region.USE_PREF_SIZE)
-                .maxHeight(Region.USE_PREF_SIZE)
-                .children(ap)
-                .build();
+                                             .styleClass("footer")
+                                             .prefHeight(35.0)
+                                             .minHeight(Region.USE_PREF_SIZE)
+                                             .maxHeight(Region.USE_PREF_SIZE)
+                                             .children(ap)
+                                             .build();
 
         StackPane.setAlignment(ap, Pos.CENTER_RIGHT);
 
@@ -451,9 +451,9 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /**
      * Build the default content slide.
-     * 
+     *
      * @param slideContent the content of the slide to build
-     * 
+     *
      * @return the vbox with default content items
      */
     protected VBox buildDefaultContent(final SlideContent slideContent) {
@@ -482,7 +482,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /**
      * Add a slide item by managing level.
-     * 
+     *
      * @param vbox the layout node
      * @param item the slide item to add
      */
@@ -492,9 +492,9 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         if (item.isLink()) {
 
             final Hyperlink link = HyperlinkBuilder.create()
-                    .opacity(1.0)
-                    .text(item.getValue())
-                    .build();
+                                                   .opacity(1.0)
+                                                   .text(item.getValue())
+                                                   .build();
 
             link.getStyleClass().add("link" + item.getLevel());
 
@@ -511,9 +511,9 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         } else if (item.isHtml()) {
 
             final WebView web = WebViewBuilder.create()
-                    .fontScale(1.4)
-                    // .effect(ReflectionBuilder.create().fraction(0.4).build())
-                    .build();
+                                              .fontScale(1.4)
+                                              // .effect(ReflectionBuilder.create().fraction(0.4).build())
+                                              .build();
             web.getEngine().loadContent(item.getValue());
 
             VBox.setVgrow(web, Priority.NEVER);
@@ -524,18 +524,18 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
             final Image image = Resources.create(new RelImage(item.getImage())).get();
             final ImageView imageViewer = ImageViewBuilder.create()
-                    .styleClass(ITEM_CLASS_PREFIX + item.getLevel())
-                    .image(image)
-                    // .effect(ReflectionBuilder.create().fraction(0.9).build())
-                    .build();
+                                                          .styleClass(ITEM_CLASS_PREFIX + item.getLevel())
+                                                          .image(image)
+                                                          // .effect(ReflectionBuilder.create().fraction(0.9).build())
+                                                          .build();
 
             node = imageViewer;
         } else {
 
             final Text text = TextBuilder.create()
-                    .styleClass(ITEM_CLASS_PREFIX + item.getLevel())
-                    .text(item.getValue() == null ? "" : item.getValue())
-                    .build();
+                                         .styleClass(ITEM_CLASS_PREFIX + item.getLevel())
+                                         .text(item.getValue() == null ? "" : item.getValue())
+                                         .build();
 
             node = text;
         }
@@ -554,7 +554,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /**
      * Show the slide step store which match with XML file.
-     * 
+     *
      * @param slideStep the slide step to show
      */
     public void showSlideStep(final SlideStep slideStep) {
@@ -575,7 +575,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /**
      * Show a programmatic built node as a sub slide.
-     * 
+     *
      * @param node the node built programmatically
      */
     protected void showCustomSlideStep(final Node node) {
@@ -593,7 +593,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /**
      * Create an Launch the animation between two sub slides.
-     * 
+     *
      * @param nextSlide the next subSlide to show
      */
     private void performStepAnimation(final Node nextSlide) {
@@ -601,53 +601,69 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         setSlideLocked(true);
         final ParallelTransition subSlideTransition = ParallelTransitionBuilder.create()
 
-                .onFinished(new EventHandler<ActionEvent>() {
+                                                                               .onFinished(new EventHandler<ActionEvent>() {
 
-                    @Override
-                    public void handle(final ActionEvent event) {
-                        AbstractTemplateView.this.currentSubSlide = nextSlide;
-                        AbstractTemplateView.this.setSlideLocked(false);
-                    }
-                })
+                                                                                   @Override
+                                                                                   public void handle(final ActionEvent event) {
+                                                                                       AbstractTemplateView.this.currentSubSlide = nextSlide;
+                                                                                       AbstractTemplateView.this.setSlideLocked(false);
+                                                                                   }
+                                                                               })
 
-                .children(
-                        SequentialTransitionBuilder.create()
-                                .node(this.currentSubSlide)
-                                .children(
-                                        TranslateTransitionBuilder.create()
-                                                .duration(Duration.millis(400))
-                                                .fromY(0)
-                                                .toY(-700)
-                                                // .fromZ(-10)
-                                                .build(),
-                                        TimelineBuilder.create()
-                                                .keyFrames(
-                                                        new KeyFrame(Duration.millis(0), new KeyValue(this.currentSubSlide.visibleProperty(), true)),
-                                                        new KeyFrame(Duration.millis(1), new KeyValue(this.currentSubSlide.visibleProperty(), false))
-                                                )
-                                                .build()
-                                )
+                                                                               .children(
+                                                                                         SequentialTransitionBuilder.create()
+                                                                                                                    .node(this.currentSubSlide)
+                                                                                                                    .children(
+                                                                                                                              TranslateTransitionBuilder.create()
+                                                                                                                                                        .duration(Duration.millis(400))
+                                                                                                                                                        .fromY(0)
+                                                                                                                                                        .toY(-700)
+                                                                                                                                                        // .fromZ(-10)
+                                                                                                                                                        .build(),
+                                                                                                                              TimelineBuilder.create()
+                                                                                                                                             .keyFrames(
+                                                                                                                                                        new KeyFrame(
+                                                                                                                                                                     Duration.millis(0),
+                                                                                                                                                                     new KeyValue(
+                                                                                                                                                                                  this.currentSubSlide.visibleProperty(),
+                                                                                                                                                                                  true)),
+                                                                                                                                                        new KeyFrame(
+                                                                                                                                                                     Duration.millis(1),
+                                                                                                                                                                     new KeyValue(
+                                                                                                                                                                                  this.currentSubSlide.visibleProperty(),
+                                                                                                                                                                                  false))
+                                                                                                                                             )
+                                                                                                                                             .build()
+                                                                                                                    )
 
-                                .build(),
-                        SequentialTransitionBuilder.create()
-                                .node(nextSlide)
-                                .children(
-                                        TimelineBuilder.create()
-                                                .keyFrames(
-                                                        new KeyFrame(Duration.millis(0), new KeyValue(nextSlide.visibleProperty(), false)),
-                                                        new KeyFrame(Duration.millis(1), new KeyValue(nextSlide.visibleProperty(), true))
-                                                )
-                                                .build(),
-                                        TranslateTransitionBuilder.create()
-                                                .duration(Duration.millis(400))
-                                                .fromY(700)
-                                                .toY(0)
-                                                // .fromZ(-10)
-                                                .build()
-                                )
-                                .build()
-                )
-                .build();
+                                                                                                                    .build(),
+                                                                                         SequentialTransitionBuilder.create()
+                                                                                                                    .node(nextSlide)
+                                                                                                                    .children(
+                                                                                                                              TimelineBuilder.create()
+                                                                                                                                             .keyFrames(
+                                                                                                                                                        new KeyFrame(
+                                                                                                                                                                     Duration.millis(0),
+                                                                                                                                                                     new KeyValue(
+                                                                                                                                                                                  nextSlide.visibleProperty(),
+                                                                                                                                                                                  false)),
+                                                                                                                                                        new KeyFrame(
+                                                                                                                                                                     Duration.millis(1),
+                                                                                                                                                                     new KeyValue(
+                                                                                                                                                                                  nextSlide.visibleProperty(),
+                                                                                                                                                                                  true))
+                                                                                                                                             )
+                                                                                                                                             .build(),
+                                                                                                                              TranslateTransitionBuilder.create()
+                                                                                                                                                        .duration(Duration.millis(400))
+                                                                                                                                                        .fromY(700)
+                                                                                                                                                        .toY(0)
+                                                                                                                                                        // .fromZ(-10)
+                                                                                                                                                        .build()
+                                                                                                                    )
+                                                                                                                    .build()
+                                                                               )
+                                                                               .build();
         subSlideTransition.play();
 
     }

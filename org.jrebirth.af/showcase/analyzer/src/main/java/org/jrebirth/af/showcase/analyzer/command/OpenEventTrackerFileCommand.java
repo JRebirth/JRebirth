@@ -56,8 +56,8 @@ public final class OpenEventTrackerFileCommand extends DefaultUICommand {
             // getService(LoadEdtFileService.class).processEventFile(selected);
 
             returnData(LoadEdtFileService.class,
-                    LoadEdtFileService.DO_LOAD_EVENTS,
-                    Builders.waveData(EditorWaves.EVENTS_FILE, selected));
+                       LoadEdtFileService.DO_LOAD_EVENTS,
+                       Builders.waveData(EditorWaves.EVENTS_FILE, selected));
 
         }
     }

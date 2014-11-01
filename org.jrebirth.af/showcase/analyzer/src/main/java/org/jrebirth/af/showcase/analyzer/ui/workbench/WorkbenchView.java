@@ -22,7 +22,6 @@ import javafx.scene.layout.BorderPane;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultView;
 
-
 /**
  *
  * The class <strong>WorkbenchView</strong>.

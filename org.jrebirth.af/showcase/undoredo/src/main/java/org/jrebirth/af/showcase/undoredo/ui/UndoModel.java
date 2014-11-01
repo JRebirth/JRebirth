@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,9 +29,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>UndoModel</strong>.
- * 
+ *
  * The mai UI of the Undo/Redo showcase application.
- * 
+ *
  * @author Sébastien Bordes
  */
 public final class UndoModel extends DefaultModel<UndoModel, UndoView> {
@@ -59,7 +59,7 @@ public final class UndoModel extends DefaultModel<UndoModel, UndoView> {
 
     /**
      * Adds the shape.
-     * 
+     *
      * @param createdNode the created node
      */
     public void addShape(final Node createdNode) {
@@ -68,7 +68,7 @@ public final class UndoModel extends DefaultModel<UndoModel, UndoView> {
 
     /**
      * Removes the shape.
-     * 
+     *
      * @param createdNode the created node
      */
     public void removeShape(final Node createdNode) {

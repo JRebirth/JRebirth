@@ -30,7 +30,7 @@ import org.jrebirth.af.api.key.UniqueKey;
  * @author Sébastien Bordes
  *
  */
-public interface IInnerComponent<C extends Component<?>> {
+public interface InnerComponent<C extends Component<?>> {
 
     // /**
     // * {@inheritDoc}

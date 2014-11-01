@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>SampleService</strong>.
- * 
+ *
  * @author
  */
 public final class SampleService extends DefaultService {
@@ -35,7 +35,7 @@ public final class SampleService extends DefaultService {
 
     /**
      * Do something.
-     * 
+     *
      * @param wave the source wave
      */
     public void something(final Wave wave) {

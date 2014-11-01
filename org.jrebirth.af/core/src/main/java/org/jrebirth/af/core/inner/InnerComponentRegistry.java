@@ -9,7 +9,7 @@ import org.jrebirth.af.api.ui.Model;
 
 public class InnerComponentRegistry {
 
-    private final Map<InnerComponent<?>, UniqueKey<? extends Component<?>>> innerModelMap = new HashMap<>();
+    private final Map<InnerComponentBase<?>, UniqueKey<? extends Component<?>>> innerModelMap = new HashMap<>();
 
     public static InnerComponentRegistry instance;
 
@@ -20,12 +20,12 @@ public class InnerComponentRegistry {
         return instance;
     }
 
-    public <C extends Component<C>> void storeKey(final InnerComponent<C> innerModel, final UniqueKey<C> uniqueKey) {
+    public <C extends Component<C>> void storeKey(final InnerComponentBase<C> innerModel, final UniqueKey<C> uniqueKey) {
         this.innerModelMap.put(innerModel, uniqueKey);
     }
 
     @SuppressWarnings("unchecked")
-    public <M extends Model> UniqueKey<M> getKey(final InnerComponent<?> innerModel) {
+    public <M extends Model> UniqueKey<M> getKey(final InnerComponentBase<?> innerModel) {
         final Class<M> cls = (Class<M>) this.innerModelMap.get(innerModel).getClassField();
         return (UniqueKey<M>) this.innerModelMap.get(innerModel);
     }

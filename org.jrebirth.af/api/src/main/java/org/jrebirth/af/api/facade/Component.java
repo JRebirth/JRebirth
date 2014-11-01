@@ -20,7 +20,7 @@ package org.jrebirth.af.api.facade;
 import java.lang.reflect.Method;
 
 import org.jrebirth.af.api.command.Command;
-import org.jrebirth.af.api.inner.IInnerComponent;
+import org.jrebirth.af.api.inner.InnerComponent;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveData;
 import org.jrebirth.af.api.wave.WaveType;
@@ -183,7 +183,7 @@ public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
      * @param innerComponent the entry that describes the inner component
      * @param keyPart additional object that are part of the inner component's unique key
      */
-    <C extends Component<?>> void addInnerComponent(final IInnerComponent<C> innerComponent);
+    <C extends Component<?>> void addInnerComponent(final InnerComponent<C> innerComponent);
 
     /**
      * Get an inner component.
@@ -195,6 +195,6 @@ public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
      *
      * @return the inner component instance
      */
-    <C extends Component<?>> C getInnerComponent(final IInnerComponent<C> innerComponent);
+    <C extends Component<?>> C getInnerComponent(final InnerComponent<C> innerComponent);
 
 }
