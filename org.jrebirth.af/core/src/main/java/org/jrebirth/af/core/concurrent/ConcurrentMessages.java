@@ -19,7 +19,7 @@ package org.jrebirth.af.core.concurrent;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
-import org.jrebirth.af.api.log.JRLevel;
+import org.jrebirth.af.api.resource.i18n.JRLevel;
 import org.jrebirth.af.api.resource.i18n.MessageItem;
 import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.i18n.LogMessage;

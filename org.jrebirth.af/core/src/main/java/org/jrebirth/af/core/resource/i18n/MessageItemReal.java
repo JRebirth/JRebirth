@@ -18,8 +18,8 @@
  */
 package org.jrebirth.af.core.resource.i18n;
 
-import org.jrebirth.af.api.log.JRLevel;
 import org.jrebirth.af.api.resource.builder.ResourceBuilder;
+import org.jrebirth.af.api.resource.i18n.JRLevel;
 import org.jrebirth.af.api.resource.i18n.MessageItem;
 import org.jrebirth.af.api.resource.i18n.MessageParams;
 import org.jrebirth.af.api.resource.i18n.MessageResource;

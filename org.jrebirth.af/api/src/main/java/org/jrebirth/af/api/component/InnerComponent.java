@@ -15,9 +15,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.inner;
+package org.jrebirth.af.api.component;
 
-import org.jrebirth.af.api.facade.Component;
 import org.jrebirth.af.api.key.UniqueKey;
 
 /**

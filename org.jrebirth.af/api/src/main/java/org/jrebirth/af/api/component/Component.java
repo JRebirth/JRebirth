@@ -15,12 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.facade;
+package org.jrebirth.af.api.component;
 
 import java.lang.reflect.Method;
 
 import org.jrebirth.af.api.command.Command;
-import org.jrebirth.af.api.inner.InnerComponent;
+import org.jrebirth.af.api.facade.FacadeReady;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveData;
 import org.jrebirth.af.api.wave.WaveType;
@@ -78,10 +78,9 @@ public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
      *
      * @param waveChecker the wave checker used to forward the wave only if the checker return true
      * @param callType the wave type mapped to this service.
-     * @param responseType the wave type of the wave emitted in return
      * @param returnCommandClass the command class to call to process the service result
      */
-    void registerCallback(final WaveChecker waveChecker, final WaveType callType/* , final WaveType responseType */, Class<? extends Command> returnCommandClass);
+    void registerCallback(final WaveChecker waveChecker, final WaveType callType, Class<? extends Command> returnCommandClass);
 
     /**
      * Register a wave call back contract.
@@ -89,20 +88,9 @@ public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
      * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
      *
      * @param callType the wave type mapped to this service.
-     * @param responseType the wave type of the wave emitted in return
      * @param returnCommandClass the command class to call to process the service result
      */
     void registerCallback(final WaveType callType/* , final WaveType responseType */, Class<? extends Command> returnCommandClass);
-
-    /**
-     * Register a wave call back contract.
-     *
-     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
-     *
-     * @param callType the wave type mapped to this service.
-     * @param responseType the wave type of the wave emitted in return
-     */
-    // void registerCallback(final WaveType callType, final WaveType responseType);
 
     /**
      * Stop to listen the type of wave for the current component.
@@ -131,15 +119,6 @@ public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
      * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
      */
     Wave sendWave(final WaveType waveType, final WaveData<?>... waveData);
-
-    /**
-     * Return the return wave type.
-     *
-     * @param waveType the source wave type
-     *
-     * @return Returns the waveType for return wave.
-     */
-    // WaveType getReturnWaveType(final WaveType waveType);
 
     /**
      * Return the return Command to call for given wave type.

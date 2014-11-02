@@ -20,7 +20,7 @@ package org.jrebirth.af.core.resource.i18n;
 import java.text.MessageFormat;
 
 import org.jrebirth.af.api.exception.CoreRuntimeException;
-import org.jrebirth.af.api.log.JRLevel;
+import org.jrebirth.af.api.resource.i18n.JRLevel;
 import org.jrebirth.af.api.resource.i18n.MessageItem;
 import org.jrebirth.af.api.resource.i18n.MessageParams;
 import org.jrebirth.af.api.resource.i18n.MessageResource;

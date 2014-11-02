@@ -18,7 +18,7 @@
 package org.jrebirth.af.showcase.analyzer.ui.workbench;
 
 import org.jrebirth.af.api.annotation.LinkInnerComponent;
-import org.jrebirth.af.api.inner.InnerComponent;
+import org.jrebirth.af.api.component.InnerComponent;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.showcase.analyzer.ui.controls.ControlsModel;

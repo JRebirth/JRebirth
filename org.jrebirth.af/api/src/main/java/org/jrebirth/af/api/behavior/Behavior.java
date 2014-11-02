@@ -17,8 +17,8 @@
  */
 package org.jrebirth.af.api.behavior;
 
-import org.jrebirth.af.api.facade.BehavioredComponent;
-import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.component.BehavioredComponent;
+import org.jrebirth.af.api.component.Component;
 
 /**
  * The Interface <b>Behavior</b> is used to define basic methods that each Behavior shall implements.

@@ -17,8 +17,8 @@
  */
 package org.jrebirth.af.api.facade.factory;
 
+import org.jrebirth.af.api.component.Component;
 import org.jrebirth.af.api.exception.CoreException;
-import org.jrebirth.af.api.facade.Component;
 import org.jrebirth.af.api.facade.FacadeReady;
 
 /**

@@ -149,7 +149,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="16" language="java" name="org.jrebirth.af.api.facade.Component" project="org.jrebirth.af.core" 
+  <interface id="16" language="java" name="org.jrebirth.af.api.component.Component" project="org.jrebirth.af.core" 
     file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/Component.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="544" y="64"/>    
@@ -159,7 +159,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="17" language="java" name="org.jrebirth.af.api.facade.BehavioredComponent" 
+  <interface id="17" language="java" name="org.jrebirth.af.api.component.BehavioredComponent" 
     project="org.jrebirth.af.core" 
     file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/BehavioredComponent.java" binary="false" 
     corner="BOTTOM_RIGHT">    

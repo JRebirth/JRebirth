@@ -22,13 +22,13 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jrebirth.af.api.component.Component;
 import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.concurrent.RunInto;
 import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
-import org.jrebirth.af.api.facade.Component;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;

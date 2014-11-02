@@ -3,7 +3,7 @@ package org.jrebirth.af.core.resource.parameter;
 import static org.junit.Assert.assertEquals;
 
 import org.jrebirth.af.api.exception.CoreRuntimeException;
-import org.jrebirth.af.api.log.JRLevel;
+import org.jrebirth.af.api.resource.i18n.JRLevel;
 import org.jrebirth.af.api.resource.parameter.ParameterItem;
 import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.ResourceBuilders;

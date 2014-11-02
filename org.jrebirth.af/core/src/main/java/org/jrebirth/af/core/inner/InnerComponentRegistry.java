@@ -3,7 +3,7 @@ package org.jrebirth.af.core.inner;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.component.Component;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 

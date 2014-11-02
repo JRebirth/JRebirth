@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.api.command;
 
-import org.jrebirth.af.api.facade.BehavioredComponent;
+import org.jrebirth.af.api.component.BehavioredComponent;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
 

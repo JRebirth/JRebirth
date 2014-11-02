@@ -1,7 +1,7 @@
 package org.jrebirth.af.core.facade.factory;
 
+import org.jrebirth.af.api.component.Component;
 import org.jrebirth.af.api.exception.CoreException;
-import org.jrebirth.af.api.facade.Component;
 import org.jrebirth.af.api.facade.factory.ComponentFactory;
 import org.jrebirth.af.core.facade.FacadeMessages;
 

@@ -19,8 +19,8 @@ package org.jrebirth.af.api.link;
 
 import java.lang.reflect.Method;
 
+import org.jrebirth.af.api.component.Component;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
-import org.jrebirth.af.api.facade.Component;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.api.wave.checker.WaveChecker;

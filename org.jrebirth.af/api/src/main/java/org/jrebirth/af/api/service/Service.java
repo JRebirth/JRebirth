@@ -21,7 +21,7 @@ import java.util.Collection;
 
 import javafx.collections.ObservableMap;
 
-import org.jrebirth.af.api.facade.BehavioredComponent;
+import org.jrebirth.af.api.component.BehavioredComponent;
 import org.jrebirth.af.api.wave.Wave;
 
 /**

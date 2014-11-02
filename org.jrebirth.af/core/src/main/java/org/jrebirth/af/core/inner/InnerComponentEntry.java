@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.inner;
 
-import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.component.Component;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.core.key.Key;
 

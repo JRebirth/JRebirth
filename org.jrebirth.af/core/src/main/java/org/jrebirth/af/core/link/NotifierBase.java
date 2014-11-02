@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.component.Component;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
-import org.jrebirth.af.api.facade.Component;
 import org.jrebirth.af.api.facade.GlobalFacade;
 import org.jrebirth.af.api.link.Notifier;
 import org.jrebirth.af.api.link.UnprocessedWaveHandler;

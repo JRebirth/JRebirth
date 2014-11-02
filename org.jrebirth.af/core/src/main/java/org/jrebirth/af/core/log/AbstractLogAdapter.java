@@ -1,8 +1,8 @@
 package org.jrebirth.af.core.log;
 
 import org.jrebirth.af.api.exception.CoreRuntimeException;
-import org.jrebirth.af.api.log.JRLevel;
 import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.resource.i18n.JRLevel;
 import org.jrebirth.af.api.resource.i18n.MessageItem;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 

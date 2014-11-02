@@ -19,7 +19,7 @@ package org.jrebirth.af.api.behavior;
 
 import java.util.List;
 
-import org.jrebirth.af.api.facade.Component;
+import org.jrebirth.af.api.component.Component;
 
 /**
  * The Interface <b>BehaviorData</b> is used to define basic methods used to store some data used by Behaviors.

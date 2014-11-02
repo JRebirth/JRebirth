@@ -18,10 +18,7 @@
 package org.jrebirth.af.api.wave;
 
 /**
- *
- * The interface <strong>IWaveData</strong>.
- *
- * Used to contain a value and its unique name.
+ * The interface <strong>WaveData</strong> used to contain a value and its unique name.
  *
  * @author Sébastien Bordes
  *
@@ -32,31 +29,31 @@ public interface WaveData<T> extends Comparable<WaveData<?>> {
     /**
      * @return Returns the waveItem.
      */
-    public WaveItem<T> getKey();
+    WaveItem<T> getKey();
 
     /**
      * @param waveItem the waveItem to set
      */
-    public void setKey(final WaveItem<T> waveItem);
+    void setKey(final WaveItem<T> waveItem);
 
     /**
      * @return Returns the value.
      */
-    public T getValue();
+    T getValue();
 
     /**
      * @param value the value to set
      */
-    public void setValue(final T value);
+    void setValue(final T value);
 
     /**
      * @return Returns the order.
      */
-    public int getOrder();
+    int getOrder();
 
     /**
      * @param order The order to set.
      */
-    public void setOrder(final int order);
+    void setOrder(final int order);
 
 }

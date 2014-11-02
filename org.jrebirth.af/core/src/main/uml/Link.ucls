@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <interface id="1" language="java" name="org.jrebirth.af.api.link.Notifier" project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/link/Notifier.java" binary="false" 
+  <interface id="1" language="java" name="org.jrebirth.af.api.link.Notifier" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/link/Notifier.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="159" y="197"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -56,8 +56,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="org.jrebirth.af.api.link.CommandReady" project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/link/CommandReady.java" binary="false" 
+  <interface id="7" language="java" name="org.jrebirth.af.api.link.CommandReady" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/link/CommandReady.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="298" y="40"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -66,8 +66,8 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="8" language="java" name="org.jrebirth.af.api.link.ServiceReady" project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/link/ServiceReady.java" binary="false" 
+  <interface id="8" language="java" name="org.jrebirth.af.api.link.ServiceReady" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/link/ServiceReady.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="675" y="37"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -76,8 +76,8 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="9" language="java" name="org.jrebirth.af.api.link.ModelReady" project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/link/ModelReady.java" binary="false" 
+  <interface id="9" language="java" name="org.jrebirth.af.api.link.ModelReady" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/link/ModelReady.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1014" y="36"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -125,8 +125,8 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="14" language="java" name="org.jrebirth.af.api.service.Service" project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/service/Service.java" binary="false" 
+  <interface id="14" language="java" name="org.jrebirth.af.api.service.Service" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/service/Service.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="946" y="641"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -135,8 +135,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="15" language="java" name="org.jrebirth.af.api.command.Command" project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/command/Command.java" binary="false" 
+  <interface id="15" language="java" name="org.jrebirth.af.api.command.Command" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/command/Command.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1182" y="647"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -155,8 +155,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="17" language="java" name="org.jrebirth.af.api.command.CommandBean" project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/command/CommandBean.java" binary="false" 
+  <interface id="17" language="java" name="org.jrebirth.af.api.command.CommandBean" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/command/CommandBean.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1177" y="826"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -165,8 +165,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="18" language="java" name="org.jrebirth.af.api.facade.BehavioredComponent" project="org.jrebirth.af.api" 
-    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/facade/BehavioredComponent.java" binary="false" 
+  <interface id="18" language="java" name="org.jrebirth.aorg.jrebirth.af.api.component.BehavioredComponentject="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/component/BehavioredComponent.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="123" width="236" x="935" y="475"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -175,8 +175,8 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="19" language="java" name="org.jrebirth.af.api.facade.Component" project="org.jrebirth.af.api" 
-    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/facade/Component.java" binary="false" 
+  <interface id="19" language="java" name="ororg.jrebirth.af.api.component.Componentt" project="org.jrebirth.af.api" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/component/Component.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="267" width="344" x="861" y="252"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
@@ -207,111 +207,111 @@
     </display>  
   </class>  
   <generalization id="22">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="20"/>  
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
   </generalization>  
   <generalization id="23">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <generalization id="24">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="18"/>  
-  </generalization>  
-  <realization id="25">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="18"/>  
-  </realization>  
-  <realization id="26">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="14"/>  
-  </realization>  
-  <realization id="27">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="19"/>  
-  </realization>  
-  <generalization id="28">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <generalization id="29">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="20"/>  
-  </generalization>  
-  <realization id="30">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <association id="31">    
-    <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="32" name="rootComponent"/>      
-      <multiplicity id="33" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="19" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="34">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <generalization id="35">    
     <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="13"/>  
   </generalization>  
-  <association id="36">    
+  <association id="24">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="37" name="localFacade"/>      
-      <multiplicity id="38" minimum="0" maximum="1"/>    
+      <attribute id="25" name="localFacade"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="39">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="15"/>  
-  </generalization>  
-  <generalization id="40">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <generalization id="41">    
+  <generalization id="27">    
     <end type="SOURCE" refId="18"/>    
     <end type="TARGET" refId="19"/>  
   </generalization>  
-  <generalization id="42">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="21"/>  
-  </generalization>  
-  <nesting id="43">    
+  <realization id="28">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <realization id="29">    
     <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </nesting>  
-  <realization id="44">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="13"/>  
+    <end type="TARGET" refId="1"/>  
   </realization>  
-  <generalization id="45">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="9"/>  
+  <generalization id="30">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="6"/>  
   </generalization>  
-  <realization id="46">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="11"/>  
+  <realization id="31">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="18"/>  
   </realization>  
-  <generalization id="47">    
-    <end type="SOURCE" refId="15"/>    
+  <generalization id="32">    
+    <end type="SOURCE" refId="11"/>    
     <end type="TARGET" refId="18"/>  
   </generalization>  
-  <association id="48">    
+  <association id="33">    
     <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="49" name="innerComponentMap"/>      
-      <multiplicity id="50" minimum="0" maximum="2147483647"/>    
+      <attribute id="34" name="innerComponentMap"/>      
+      <multiplicity id="35" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="19" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <generalization id="36">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <generalization id="38">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <nesting id="39">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </nesting>  
+  <realization id="40">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="19"/>  
+  </realization>  
+  <realization id="41">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <generalization id="42">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="43">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="44" name="rootComponent"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="46">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="47">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <realization id="48">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="50">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
   <generalization id="51">    
-    <end type="SOURCE" refId="11"/>    
+    <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="18"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 

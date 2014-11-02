@@ -26,7 +26,6 @@ import java.lang.annotation.Target;
 
 import org.jrebirth.af.api.behavior.Behavior;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface BehaviorDataFor.
  */

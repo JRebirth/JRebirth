@@ -6,8 +6,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jrebirth.af.api.component.Component;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
-import org.jrebirth.af.api.facade.Component;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.wave.OnWave;
 import org.jrebirth.af.api.wave.Wave;
