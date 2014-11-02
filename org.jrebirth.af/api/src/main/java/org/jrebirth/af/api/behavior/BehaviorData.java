@@ -15,11 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.behavior.data;
+package org.jrebirth.af.api.behavior;
 
 import java.util.List;
 
-import org.jrebirth.af.api.behavior.Behavior;
 import org.jrebirth.af.api.facade.Component;
 
 /**

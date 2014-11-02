@@ -1,7 +1,6 @@
 /**
-
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2014
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +22,7 @@ import org.jrebirth.af.api.resource.ResourceItem;
 import org.slf4j.Marker;
 
 /**
- * The class <strong>IMessageItem</strong>.
+ * The class <strong>MessageItem</strong>.
  *
  * The key of the i18n message.
  *
@@ -70,48 +69,4 @@ public interface MessageItem extends ResourceItem<MessageItem, MessageParams, Me
      */
     void persist();
 
-    // /**
-    // * {@inheritDoc}
-    // */
-    // @Override
-    // default IMessageItem set(final MessageParams messageParams) {
-    // builder().storeParams(this, messageParams);
-    // return this;
-    // }
-    //
-    // /**
-    // * {@inheritDoc}
-    // */
-    // @Override
-    // default MessageResource get() {
-    // return builder().get(this);
-    // }
-    //
-    // /**
-    // * {@inheritDoc}
-    // */
-    // @Override
-    // default MessageBuilder builder() {
-    // return ResourceBuilders.MESSAGE_BUILDER;
-    // }
-
-    // public interface Log extends IMessageItem {
-    //
-    // default void log(final String parameterName, final JRLevel level, final Marker marker) {
-    // set(new LogMessage(parameterName, level, marker));
-    // }
-    //
-    // }
-    //
-    // public interface Msg extends IMessageItem {
-    //
-    // /**
-    // * Default Constructor.
-    // *
-    // * @param parameterName the name of the parameter
-    // */
-    // default void msg(final String parameterName) {
-    // set(new Message(parameterName));
-    // }
-    // }
 }

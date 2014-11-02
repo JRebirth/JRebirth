@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jrebirth.af.api.behavior.Behavior;
+import org.jrebirth.af.api.behavior.BehaviorData;
 import org.jrebirth.af.api.behavior.annotation.BehaviorDataFor;
-import org.jrebirth.af.api.behavior.data.BehaviorData;
 
 public abstract class AbstractBehaviorData implements BehaviorData {
 

@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2014
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

@@ -1,5 +1,6 @@
 /**
- * This package provides all annotation used by JRebirth to simplify its internal management of component' lifecycle.
+ * This package provides all annotations used by JRebirth to simplify its internal management.
+ * Like components' lifecycle, and others.
  */
 package org.jrebirth.af.api.annotation;
 

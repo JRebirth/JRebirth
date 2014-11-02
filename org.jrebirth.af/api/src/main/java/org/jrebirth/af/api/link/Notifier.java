@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2014
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,31 +44,6 @@ public interface Notifier {
      * @throws JRebirthThreadException if called outside the JRebirthThread
      */
     void sendWave(final Wave wave) throws JRebirthThreadException;
-
-    /**
-     * Start to listen a defined type of wave.
-     *
-     * MUST BE CALLED into the JRebirthThread.
-     *
-     * @param linkedObject an object that can process the content of a wave
-     * @param waveTypes the type(s) of wave that interests the object (one or many)
-     *
-     * @throws JRebirthThreadException if called outside the JRebirthThread
-     */
-    // void listen(final WaveReady<?> linkedObject, final WaveType... waveTypes) throws JRebirthThreadException;
-
-    /**
-     * Start to listen a defined type of wave.
-     *
-     * MUST BE CALLED into the JRebirthThread.
-     *
-     * @param linkedObject an object that can process the content of a wave
-     * @param method the default method to call
-     * @param waveTypes the type(s) of wave that interests the object (one or many)
-     *
-     * @throws JRebirthThreadException if called outside the JRebirthThread
-     */
-    // void listen(final WaveReady<?> linkedObject, final Method method, final WaveType... waveTypes) throws JRebirthThreadException;
 
     /**
      * Start to listen a defined type of wave.

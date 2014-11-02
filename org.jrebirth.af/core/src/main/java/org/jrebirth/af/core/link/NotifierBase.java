@@ -262,24 +262,6 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         wave.status(Status.Consumed);
     }
 
-    // /**
-    // * {@inheritDoc}
-    // */
-    // @Override
-    // public void listen(final WaveReady<?> linkedObject, final WaveType... waveTypes) throws JRebirthThreadException {
-    // // Call the other method with null waveChecker
-    // listen(linkedObject, null, null, waveTypes);
-    // }
-    //
-    // /**
-    // * {@inheritDoc}
-    // */
-    // @Override
-    // public void listen(final WaveReady<?> linkedObject, final Method method, final WaveType... waveTypes) throws JRebirthThreadException {
-    // // Call the other method with null waveChecker
-    // listen(linkedObject, null, method, waveTypes);
-    // }
-
     /**
      * {@inheritDoc}
      */
