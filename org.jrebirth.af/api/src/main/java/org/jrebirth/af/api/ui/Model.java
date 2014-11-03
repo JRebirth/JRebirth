@@ -19,7 +19,7 @@ package org.jrebirth.af.api.ui;
 
 import javafx.scene.Node;
 
-import org.jrebirth.af.api.component.BehavioredComponent;
+import org.jrebirth.af.api.behavior.BehavioredComponent;
 import org.jrebirth.af.api.wave.Wave;
 
 /**

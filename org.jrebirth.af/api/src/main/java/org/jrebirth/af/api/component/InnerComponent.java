@@ -28,15 +28,9 @@ import org.jrebirth.af.api.key.UniqueKey;
  *
  * @author Sébastien Bordes
  *
+ * @param <C> The type of the InnerComponent
  */
 public interface InnerComponent<C extends Component<?>> {
-
-    // /**
-    // * {@inheritDoc}
-    // */
-    // default InnerModelRegistry registry() {
-    // return InnerModelRegistry.getInstance();
-    // }
 
     /**
      * Return the key of the model.
@@ -46,32 +40,5 @@ public interface InnerComponent<C extends Component<?>> {
      * @return the unique key used to load the right Model, must be not null
      */
     UniqueKey<C> getKey();
-
-    // static <CC extends Component<?>> InnerComponent<CC> create(final Class<CC> modelClass, final Object... keyPart) {
-    // return new InnerComponentEntry<CC>(modelClass, keyPart);
-    // }
-
-    // default UniqueKey getKey(){
-    // return registry().getKey(this);
-    // }
-
-    // /**
-    // *
-    // * @param key
-    // */
-    // @SuppressWarnings("unchecked")
-    // default void key(UniqueKey<? extends Model> key) {
-    // registry().storeKey((InnerModel)this, (UniqueKey)key);
-    // }
-
-    // /**
-    // *
-    // * @param modelClass
-    // * @param keyPart
-    // */
-    // @SuppressWarnings("unchecked")
-    // default void key(final Class<? extends Model> modelClass, final Object... keyPart) {
-    // registry().storeKey((InnerModel<IM>)this, (UniqueKey<IM>)UniqueKey.key(modelClass, keyPart));
-    // }
 
 }

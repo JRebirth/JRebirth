@@ -31,7 +31,7 @@ import javafx.beans.property.ObjectProperty;
 public interface Wave {
 
     /**
-     * The class <strong>Status</strong>.
+     * The enumeration <strong>Status</strong>.
      *
      * @author Sébastien Bordes
      */
@@ -66,6 +66,8 @@ public interface Wave {
 
     /**
      * @param status The status to set.
+     * 
+     * @return the current Wave to chain other method call
      */
     Wave status(final Status status);
 
@@ -93,6 +95,8 @@ public interface Wave {
 
     /**
      * @param waveGroup The waveGroup to set.
+     * 
+     * @return the current Wave to chain other method call
      */
     Wave waveGroup(final WaveGroup waveGroup);
 

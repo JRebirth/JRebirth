@@ -17,7 +17,6 @@
  */
 package org.jrebirth.af.api.behavior;
 
-import org.jrebirth.af.api.component.BehavioredComponent;
 import org.jrebirth.af.api.component.Component;
 
 /**

@@ -19,6 +19,13 @@ package org.jrebirth.af.api.ui.object;
 
 import org.jrebirth.af.api.ui.Model;
 
+/**
+ * The interface <strong>ModelObject</strong> is used to support a main object for a Model.
+ * 
+ * @author Sébastien Bordes
+ * 
+ * @param <O> the type of the bindable object
+ */
 public interface ModelObject<O> extends Model {
 
     /**
@@ -29,7 +36,9 @@ public interface ModelObject<O> extends Model {
     O getObject();
 
     /**
-     * @param object The object to set.
+     * Set the bindable object.
+     * 
+     * @param object The bindable object to set.
      */
     void setObject(final O object);
 

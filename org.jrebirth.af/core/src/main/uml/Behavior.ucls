@@ -76,7 +76,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </annotation>  
-  <interface id="8" language="java" name="org.jrebirth.af.api.component.BehavioredComponent" 
+  <interface id="8" language="java" name="org.jrebirth.af.api.behavior.BehavioredComponent" 
     project="org.jrebirth.af.api" 
     file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/component/BehavioredComponent.java" binary="false" 
     corner="BOTTOM_RIGHT">    

@@ -21,63 +21,97 @@ import java.util.List;
 
 /**
  *
- * The interface <strong>WaveType</strong>.
- *
- * //A WaveType could be an enumeration that return an action name.
+ * The interface <strong>WaveType</strong> could be used to create a type that return an action name and hold {@link WaveItem} parameters.
  *
  * @author Sébastien Bordes
  */
 public interface WaveType {
 
+    /**
+     * Return the unique identifier of the WaveType.
+     *
+     * @return the unique identifier
+     */
     int uid();
 
+    /**
+     * Sets the unique identifier of the WaveType.
+     *
+     * @param uid the uid to set
+     * 
+     * @return the wave type to chain method call
+     */
     WaveType uid(int uid);
 
+    /**
+     * Return the current action name.
+     *
+     * @return the action name
+     */
     String action();
 
+    /**
+     * Set the action name.
+     *
+     * @param action the action name to set
+     * 
+     * @return the wave type to chain method call
+     */
     WaveType action(String action);
 
+    /**
+     * Return all WaveItems used by this WaveType.
+     *
+     * @return the wave items list
+     */
     List<WaveItem<?>> items();
 
+    /**
+     * Set all WaveItems used by the current WaveType used as parameter during wave handling.
+     *
+     * @param items the wave items to set
+     * 
+     * @return the wave type to chain method call
+     */
     WaveType items(WaveItem<?>... items);
 
+    /**
+     * Return the return Wave Type action name.
+     *
+     * @return the return action name
+     */
     String returnAction();
 
+    /**
+     * Set the return Wave Type action name.
+     *
+     * @param action the return action name to set
+     * 
+     * @return the wave type to chain method call
+     */
     WaveType returnAction(String action);
 
+    /**
+     * Set the WaveItem returned.
+     *
+     * @return the wave item returned
+     */
     WaveItem<?> returnItem();
 
+    /**
+     * Return the WaveItem that hold the type sent to hold the current WaveType result.
+     *
+     * @param returnItem the return WaveItem to set
+     * 
+     * @return the wave type to chain method call
+     */
     WaveType returnItem(WaveItem<?> returnItem);
 
+    /**
+     * Return the WaveType emitted as the result of the current WaveType.
+     *
+     * @return the wave type to chain method call
+     */
     WaveType returnWaveType();
-
-    /**
-     * Return the name of the wave type, commonly bound on enum.name() method.
-     *
-     * @return the name of the wave type
-     */
-    // String getName();
-
-    /**
-     * Return the method to process in the processor class.
-     *
-     * @return a method name or null
-     */
-    // String getAction();
-
-    // /**
-    // * Build a wave type.
-    // *
-    // * @param action The action to perform "DO_" (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) keyword will be prepended to the action name to generate the handler method
-    // * @param returnWaveType the return wave Type to call after having processing the current
-    // * @param waveItems the list of {@link WaveItem} required by this wave
-    // *
-    // * @return a new fresh wave type object
-    // */
-    // static WaveTypeBase create(final String action, final IWaveType returnWaveType, final WaveItem<?>... waveItems) {
-    // final WaveTypeBase waveType = create(action, waveItems);
-    // waveType.setReturnWaveType(waveType);
-    // return waveType;
-    // }
 
 }

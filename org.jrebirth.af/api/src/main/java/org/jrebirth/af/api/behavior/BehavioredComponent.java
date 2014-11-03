@@ -15,10 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.component;
+package org.jrebirth.af.api.behavior;
 
-import org.jrebirth.af.api.behavior.Behavior;
-import org.jrebirth.af.api.behavior.BehaviorData;
+import org.jrebirth.af.api.component.Component;
 
 /**
  * The interface <strong>BehavioredComponent</strong>.
@@ -44,6 +43,8 @@ public interface BehavioredComponent<C extends Component<C>> extends Component<C
      * Add a behavior to the component by providing the {@link Behavior} class.
      *
      * @param behaviorClass the class of the behavior to add
+     * 
+     * @return the current component to chain method call
      */
     <BD extends BehaviorData, B extends Behavior<BD>> C addBehavior(final Class<B> behaviorClass);
 
@@ -53,6 +54,8 @@ public interface BehavioredComponent<C extends Component<C>> extends Component<C
      * The BehaviorData allow to add several {@link Behavior} if many of them rare reference by the BehaviorData.
      *
      * @param data the Behavior Data that references Behavior classes to add
+     * 
+     * @return the current component to chain method call
      */
     <BD extends BehaviorData> C addBehavior(final BD data);
 

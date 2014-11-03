@@ -20,7 +20,7 @@ package org.jrebirth.af.core.link;
 import org.jrebirth.af.api.annotation.SkipAnnotation;
 import org.jrebirth.af.api.behavior.Behavior;
 import org.jrebirth.af.api.behavior.BehaviorData;
-import org.jrebirth.af.api.component.BehavioredComponent;
+import org.jrebirth.af.api.behavior.BehavioredComponent;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.key.Key;

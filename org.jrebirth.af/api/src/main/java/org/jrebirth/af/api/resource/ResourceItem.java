@@ -41,6 +41,7 @@ public interface ResourceItem<I, P, R> {
      */
     @SuppressWarnings("unchecked")
     default I set(final P params) {
+        builder().storeParams((I) this, params);
         return (I) this;
     }
 

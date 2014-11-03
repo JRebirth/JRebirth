@@ -159,7 +159,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="17" language="java" name="org.jrebirth.af.api.component.BehavioredComponent" 
+  <interface id="17" language="java" name="org.jrebirth.af.api.behavior.BehavioredComponent" 
     project="org.jrebirth.af.core" 
     file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/facade/BehavioredComponent.java" binary="false" 
     corner="BOTTOM_RIGHT">    
