@@ -20,8 +20,6 @@ package org.jrebirth.af.api.ui.annotation.type;
 import javafx.event.ActionEvent;
 import javafx.event.EventType;
 
-import org.jrebirth.af.api.ui.annotation.EnumEventType;
-
 /**
  * The Finished event type.<br />
  * The Finished type will be appended to method name to use.

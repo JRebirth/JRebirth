@@ -40,7 +40,7 @@ import org.jrebirth.af.api.ui.NullController;
 import org.jrebirth.af.api.ui.View;
 import org.jrebirth.af.api.ui.annotation.AutoHandler;
 import org.jrebirth.af.api.ui.annotation.AutoHandler.CallbackObject;
-import org.jrebirth.af.api.ui.annotation.EnumEventType;
+import org.jrebirth.af.api.ui.annotation.type.EnumEventType;
 import org.jrebirth.af.api.ui.annotation.OnFinished;
 import org.jrebirth.af.api.ui.annotation.RootNodeClass;
 import org.jrebirth.af.api.ui.annotation.RootNodeId;

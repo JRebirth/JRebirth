@@ -20,8 +20,6 @@ package org.jrebirth.af.api.ui.annotation.type;
 import javafx.event.EventType;
 import javafx.scene.input.KeyEvent;
 
-import org.jrebirth.af.api.ui.annotation.EnumEventType;
-
 /**
  * The Key event type.<br />
  * The Key type will be appended to method name to use.

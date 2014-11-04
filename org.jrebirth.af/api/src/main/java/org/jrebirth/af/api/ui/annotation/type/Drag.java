@@ -20,8 +20,6 @@ package org.jrebirth.af.api.ui.annotation.type;
 import javafx.event.EventType;
 import javafx.scene.input.DragEvent;
 
-import org.jrebirth.af.api.ui.annotation.EnumEventType;
-
 /**
  * The Drag event type.<br />
  * The Drag type will be appended to method name to use.

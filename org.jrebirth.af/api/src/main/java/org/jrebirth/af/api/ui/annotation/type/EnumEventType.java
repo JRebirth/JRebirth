@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.ui.annotation;
+package org.jrebirth.af.api.ui.annotation.type;
 
 import javafx.event.EventType;
 

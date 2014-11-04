@@ -38,6 +38,8 @@ public interface ResourceItem<I, P, R> {
      * Attach the resource parameter.
      *
      * @param params the primitive values for this resource
+     * 
+     * @return the current item to chain method call
      */
     @SuppressWarnings("unchecked")
     default I set(final P params) {

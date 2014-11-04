@@ -18,12 +18,12 @@
 package org.jrebirth.af.core.facade;
 
 import org.jrebirth.af.api.application.JRebirthApplication;
+import org.jrebirth.af.api.component.factory.ComponentFactory;
 import org.jrebirth.af.api.concurrent.IJRebirthThreadPoolExecutor;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.facade.GlobalFacade;
 import org.jrebirth.af.api.facade.JRebirthEvent;
 import org.jrebirth.af.api.facade.JRebirthEventType;
-import org.jrebirth.af.api.facade.factory.ComponentFactory;
 import org.jrebirth.af.api.link.Notifier;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.application.AbstractApplication;

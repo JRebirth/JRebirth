@@ -20,8 +20,6 @@ package org.jrebirth.af.api.ui.annotation.type;
 import javafx.event.EventType;
 import javafx.scene.input.SwipeEvent;
 
-import org.jrebirth.af.api.ui.annotation.EnumEventType;
-
 /**
  * The Swipe event type.<br />
  * The swipe type will be appended to method name to use.

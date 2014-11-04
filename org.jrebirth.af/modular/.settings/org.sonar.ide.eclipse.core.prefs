@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+extraProperties=sonar.language\=java\r\nsonar.host.url\=http\://quality.jrebirth.org\r\nsonar.jdbc.driver\=com.mysql.jdbc.Driver\r\nsonar.jdbc.url\=jdbc\:mysql\://localhost\:3306/sonar?useUnicode\=true&characterEncoding\=utf8
+projectKey=org.jrebirth.af\:modular
+serverUrl=http\://quality.jrebirth.org
+version=2

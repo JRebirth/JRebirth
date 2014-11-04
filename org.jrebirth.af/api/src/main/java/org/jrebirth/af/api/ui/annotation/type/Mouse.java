@@ -20,8 +20,6 @@ package org.jrebirth.af.api.ui.annotation.type;
 import javafx.event.EventType;
 import javafx.scene.input.MouseEvent;
 
-import org.jrebirth.af.api.ui.annotation.EnumEventType;
-
 /**
  * The Mouse event type.<br />
  * The mouse type will be appended to method name to use.

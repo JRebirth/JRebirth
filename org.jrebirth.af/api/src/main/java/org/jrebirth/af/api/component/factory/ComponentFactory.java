@@ -15,11 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.facade.factory;
+package org.jrebirth.af.api.component.factory;
 
 import org.jrebirth.af.api.component.Component;
 import org.jrebirth.af.api.exception.CoreException;
-import org.jrebirth.af.api.facade.FacadeReady;
 
 /**
  * The interface <strong>ComponentFactory</strong> is used to build Component (Model, Service, Command) classes.
@@ -38,7 +37,7 @@ public interface ComponentFactory {
 
     /**
      * Build a fresh instance of a component.<br />
-     * (that implements {@link FacadeReady} interface)
+     * (that implements {@link org.jrebirth.af.api.facade.FacadeReady.FacadeReady} interface)
      *
      * @param clazz the component class
      *

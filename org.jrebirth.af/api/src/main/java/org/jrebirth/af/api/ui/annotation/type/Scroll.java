@@ -20,8 +20,6 @@ package org.jrebirth.af.api.ui.annotation.type;
 import javafx.event.EventType;
 import javafx.scene.input.ScrollEvent;
 
-import org.jrebirth.af.api.ui.annotation.EnumEventType;
-
 /**
  * The Scroll event type.<br />
  * The scroll type will be appended to method name to use.
