@@ -22,8 +22,8 @@ import java.lang.reflect.Method;
 import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
+import org.jrebirth.af.api.wave.contract.WaveType;
 
 /**
  * The interface <strong>Notifier</strong>.

@@ -19,7 +19,7 @@ package org.jrebirth.af.showcase.undoredo.ui;
 
 import javafx.scene.Node;
 
-import org.jrebirth.af.api.wave.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.undoredo.command.UndoRedoWaves;

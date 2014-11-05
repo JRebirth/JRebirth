@@ -15,45 +15,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.wave;
+package org.jrebirth.af.api.wave.annotation;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * The interface <strong>WaveData</strong> used to contain a value and its unique name.
+ * The class <strong>OnWaves</strong>.
  *
  * @author Sébastien Bordes
- *
- * @param <T> the type of the data hold
  */
-public interface WaveData<T> extends Comparable<WaveData<?>> {
+@Target({ ElementType.TYPE, ElementType.METHOD })
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface OnWaves {
 
     /**
-     * @return Returns the waveItem.
+     * The list of {@link OnWave} annotations.
+     *
+     * There is no default value
      */
-    WaveItem<T> getKey();
-
-    /**
-     * @param waveItem the waveItem to set
-     */
-    void setKey(final WaveItem<T> waveItem);
-
-    /**
-     * @return Returns the value.
-     */
-    T getValue();
-
-    /**
-     * @param value the value to set
-     */
-    void setValue(final T value);
-
-    /**
-     * @return Returns the order.
-     */
-    int getOrder();
-
-    /**
-     * @param order The order to set.
-     */
-    void setOrder(final int order);
-
+    OnWave[] value();
 }

@@ -56,4 +56,7 @@ public interface FacadeMessages extends MessageContainer {
     /** "EnhancedComponent Retrieval Error". */
     MessageItem COMPONENT_RETRIEVAL_ERROR = create(new LogMessage("jrebirth.facade.componentRetrievalError", JRLevel.Error, JRebirthMarkers.FACADE));
 
+    /** "Error while unlistening all WaveType for {0}." . */
+    MessageItem UNLISTEN_ALL_ERROR = create(new LogMessage("jrebirth.facade.unlistenAllError", JRLevel.Error, JRebirthMarkers.FACADE));
+
 }

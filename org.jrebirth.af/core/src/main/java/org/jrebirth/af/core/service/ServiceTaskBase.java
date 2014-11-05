@@ -36,7 +36,7 @@ import org.jrebirth.af.api.service.ServiceTask;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.Wave.Status;
 import org.jrebirth.af.api.wave.WaveGroup;
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.WaveItemBase;

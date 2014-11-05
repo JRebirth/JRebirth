@@ -15,30 +15,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.wave;
+package org.jrebirth.af.api.wave.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The class <strong>OnWaves</strong>.
+ * The class <strong>OnWave</strong>.
  *
  * @author Sébastien Bordes
  */
 @Target({ ElementType.TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
+@Repeatable(OnWaves.class)
 @Inherited
 @Documented
-public @interface OnWaves {
+public @interface OnWave {
 
     /**
-     * The list of {@link OnWave} annotations.
+     * Define the Wave Type unique string.
      *
      * There is no default value
      */
-    OnWave[] value();
+    String value() default "";
+
 }

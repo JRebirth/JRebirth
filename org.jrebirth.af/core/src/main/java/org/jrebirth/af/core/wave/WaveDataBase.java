@@ -17,8 +17,8 @@
  */
 package org.jrebirth.af.core.wave;
 
-import org.jrebirth.af.api.wave.WaveData;
-import org.jrebirth.af.api.wave.WaveItem;
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveItem;
 
 /**
  *

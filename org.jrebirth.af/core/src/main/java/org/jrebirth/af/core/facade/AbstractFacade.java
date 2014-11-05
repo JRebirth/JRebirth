@@ -117,7 +117,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                     try {
                         getGlobalFacade().getNotifier().unlistenAll((Component<?>) readyObject);
                     } catch (final JRebirthThreadException e) {
-                        e.printStackTrace();
+                        LOGGER.error(UNLISTEN_ALL_ERROR, readyObject.getClass().getSimpleName(), e);
                     }
                 }
 

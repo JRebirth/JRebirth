@@ -21,7 +21,7 @@ import java.io.File;
 import java.util.List;
 
 import org.jrebirth.af.api.facade.JRebirthEvent;
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.WaveItemBase;
 

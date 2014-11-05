@@ -21,6 +21,10 @@ import java.util.List;
 
 import javafx.beans.property.ObjectProperty;
 
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveItem;
+import org.jrebirth.af.api.wave.contract.WaveType;
+
 /**
  * The interface <strong>Wave</strong>.
  *

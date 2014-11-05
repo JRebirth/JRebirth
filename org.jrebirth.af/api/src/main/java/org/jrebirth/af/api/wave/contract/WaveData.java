@@ -15,44 +15,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.wave;
-
-import java.lang.reflect.Type;
+package org.jrebirth.af.api.wave.contract;
 
 /**
- * The interface <strong>IWaveItem</strong>.
- *
- * Wave item is used to identify an object into a wave or a parameter.
+ * The interface <strong>WaveData</strong> used to contain a value and its unique name.
  *
  * @author Sébastien Bordes
  *
- * @param <T> the type of the object mapped by this WaveItem
+ * @param <T> the type of the data hold
  */
-public interface WaveItem<T> {
+public interface WaveData<T> extends Comparable<WaveData<?>> {
 
     /**
-     * @return Returns the name.
+     * @return Returns the waveItem.
      */
-    String getName();
+    WaveItem<T> getKey();
 
     /**
-     * @return Returns the uid.
+     * @param waveItem the waveItem to set
      */
-    int getUid();
+    void setKey(final WaveItem<T> waveItem);
 
     /**
-     * @return Returns the itemType.
+     * @return Returns the value.
      */
-    Type getItemType();
+    T getValue();
 
     /**
-     * @return Returns the isParameter.
+     * @param value the value to set
      */
-    boolean isParameter();
+    void setValue(final T value);
 
     /**
-     * @param isParameter The isParameter to set.
+     * @return Returns the order.
      */
-    void setParameter(final boolean isParameter);
+    int getOrder();
+
+    /**
+     * @param order The order to set.
+     */
+    void setOrder(final int order);
 
 }

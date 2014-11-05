@@ -2,7 +2,7 @@ package org.jrebirth.af.core.link;
 
 import java.util.List;
 
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveType;
 
 /**
  * The class <strong>WaveSubscription</strong> is used to store all wave handler related to a wave type.

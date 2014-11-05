@@ -20,7 +20,7 @@ package org.jrebirth.af.core.wave;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import org.jrebirth.af.api.wave.WaveItem;
+import org.jrebirth.af.api.wave.contract.WaveItem;
 
 /**
  * The class <strong>WaveItem</strong>.

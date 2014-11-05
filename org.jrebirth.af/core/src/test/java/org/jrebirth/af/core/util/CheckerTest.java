@@ -6,7 +6,7 @@ import static org.jrebirth.af.core.wave.Builders.waveType;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.ui.NullView;
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.core.wave.Builders;

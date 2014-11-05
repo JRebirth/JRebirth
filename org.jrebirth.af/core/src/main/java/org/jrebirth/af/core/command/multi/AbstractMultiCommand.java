@@ -156,14 +156,18 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     @Override
     public final void ready() throws CoreException {
 
-        this.subCommandList = defineSubCommand();
+        synchronized (this) {
 
-        if (this.subCommandList == null || this.subCommandList.isEmpty()) {
-            throw new CoreRuntimeException("Warning, 'defineSubCommand' should return at least one Command Key.");
-        }
+            this.subCommandList = defineSubCommand();
 
-        for (final UniqueKey<? extends Command> commandKey : this.subCommandList) {
-            getLocalFacade().retrieve(commandKey);
+            if (this.subCommandList == null || this.subCommandList.isEmpty()) {
+                throw new CoreRuntimeException("Warning, 'defineSubCommand' should return at least one Command Key.");
+            }
+
+            for (final UniqueKey<? extends Command> commandKey : this.subCommandList) {
+                getLocalFacade().retrieve(commandKey);
+            }
+
         }
 
         initCommand();
@@ -237,16 +241,23 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                 }
 
             } else {
+
                 // Store the original wave to be able to mark it as consumed when all of these sub comamnds are achieved
                 this.waveSource = wave;
 
-                // Launch all sub command in parallel
-                for (final UniqueKey<? extends Command> commandKey : this.subCommandList) {
-                    final Wave commandWave = getLocalFacade().retrieve(commandKey).run();
-                    // register to Wave status of all command triggered
-                    commandWave.addWaveListener(this);
-                    // Store the pending command to know when all command are achieved
-                    this.pendingWaves.add(commandWave);
+                synchronized (this) {
+
+                    // Launch all sub command in parallel
+                    for (final UniqueKey<? extends Command> commandKey : this.subCommandList) {
+
+                        final Wave commandWave = getLocalFacade().retrieve(commandKey).run();
+
+                        // register to Wave status of all command triggered
+                        commandWave.addWaveListener(this);
+
+                        // Store the pending command to know when all command are achieved
+                        this.pendingWaves.add(commandWave);
+                    }
                 }
             }
         }
@@ -278,7 +289,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                 this.pendingWaves.remove(wave);
 
                 // If there is no pending waves left, send the waveConsumed event on the MultiCommand wave
-                if (this.pendingWaves.size() == 0) {
+                if (this.pendingWaves.isEmpty()) {
                     fireConsumed(this.waveSource);
                 }
             }

@@ -24,7 +24,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.core.wave.WaveItemBase;

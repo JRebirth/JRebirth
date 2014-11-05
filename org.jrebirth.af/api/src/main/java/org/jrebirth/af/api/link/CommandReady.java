@@ -22,7 +22,7 @@ import org.jrebirth.af.api.command.CommandBean;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
-import org.jrebirth.af.api.wave.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveData;
 
 /**
  *

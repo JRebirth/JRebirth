@@ -1,7 +1,7 @@
 package org.jrebirth.af.core.command.dataflow;
 
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.command.single.internal.DefaultCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.Builders;

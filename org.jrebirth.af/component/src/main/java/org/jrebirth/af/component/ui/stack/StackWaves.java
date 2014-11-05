@@ -2,7 +2,7 @@ package org.jrebirth.af.component.ui.stack;
 
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.WaveItemBase;
 

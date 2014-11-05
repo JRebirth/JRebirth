@@ -18,7 +18,7 @@
 package org.jrebirth.af.core.wave.checker;
 
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.util.ObjectUtility;
 import org.jrebirth.af.core.wave.WaveItemBase;
 

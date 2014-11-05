@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jrebirth.af.api.command.Command;
-import org.jrebirth.af.api.wave.WaveItem;
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveItem;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.util.ObjectUtility;
 

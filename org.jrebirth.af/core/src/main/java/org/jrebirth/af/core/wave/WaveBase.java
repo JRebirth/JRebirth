@@ -31,11 +31,11 @@ import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
-import org.jrebirth.af.api.wave.WaveData;
 import org.jrebirth.af.api.wave.WaveGroup;
-import org.jrebirth.af.api.wave.WaveItem;
 import org.jrebirth.af.api.wave.WaveListener;
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveItem;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.link.LinkMessages;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 

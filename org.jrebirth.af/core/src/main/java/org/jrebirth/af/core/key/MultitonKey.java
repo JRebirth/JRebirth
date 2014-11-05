@@ -210,10 +210,9 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
                     }
                 }
             } catch (final SecurityException e) {
-                LOGGER.log(NO_TOSTRING_KEY_METHOD, methodGenerator.value(), keyValue.getClass().getSimpleName());
+                LOGGER.log(NO_TOSTRING_KEY_METHOD, methodGenerator.value(), keyValue.getClass().getSimpleName(), e);
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                LOGGER.log(METHOD_KEY_TOSTRING_FAILURE, methodGenerator.value(), keyValue.getClass().getSimpleName());
-                e.printStackTrace();
+                LOGGER.log(METHOD_KEY_TOSTRING_FAILURE, methodGenerator.value(), keyValue.getClass().getSimpleName(), e);
             }
         }
         return res + "|";

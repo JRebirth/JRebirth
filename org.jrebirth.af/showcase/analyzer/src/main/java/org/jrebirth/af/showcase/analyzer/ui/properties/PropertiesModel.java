@@ -18,8 +18,8 @@
 package org.jrebirth.af.showcase.analyzer.ui.properties;
 
 import org.jrebirth.af.api.facade.JRebirthEvent;
-import org.jrebirth.af.api.wave.OnWave;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.annotation.OnWave;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 

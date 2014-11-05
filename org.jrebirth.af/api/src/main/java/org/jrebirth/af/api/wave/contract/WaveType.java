@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.wave;
+package org.jrebirth.af.api.wave.contract;
 
 import java.util.List;
 
@@ -118,6 +118,8 @@ public interface WaveType {
 
     /**
      * Set the Command to call in order to process the returned value.
+     *
+     * @param returnCommandClass the command class to set
      *
      * @return the wave type to chain method call
      */

@@ -24,8 +24,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.ui.beans.TabConfig;
 import org.jrebirth.af.component.ui.beans.TabOrientation;

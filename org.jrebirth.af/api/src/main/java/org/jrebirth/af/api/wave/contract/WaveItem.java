@@ -15,33 +15,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.wave;
+package org.jrebirth.af.api.wave.contract;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Repeatable;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.reflect.Type;
 
 /**
- * The class <strong>OnWave</strong>.
+ * The interface <strong>IWaveItem</strong>.
+ *
+ * Wave item is used to identify an object into a wave or a parameter.
  *
  * @author Sébastien Bordes
+ *
+ * @param <T> the type of the object mapped by this WaveItem
  */
-@Target({ ElementType.TYPE, ElementType.METHOD })
-@Retention(RetentionPolicy.RUNTIME)
-@Repeatable(OnWaves.class)
-@Inherited
-@Documented
-public @interface OnWave {
+public interface WaveItem<T> {
 
     /**
-     * Define the Wave Type unique string.
-     *
-     * There is no default value
+     * @return Returns the name.
      */
-    String value() default "";
+    String getName();
+
+    /**
+     * @return Returns the uid.
+     */
+    int getUid();
+
+    /**
+     * @return Returns the itemType.
+     */
+    Type getItemType();
+
+    /**
+     * @return Returns the isParameter.
+     */
+    boolean isParameter();
+
+    /**
+     * @param isParameter The isParameter to set.
+     */
+    void setParameter(final boolean isParameter);
 
 }

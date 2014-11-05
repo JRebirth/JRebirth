@@ -2,10 +2,10 @@ package org.jrebirth.af.core.wave;
 
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.WaveData;
 import org.jrebirth.af.api.wave.WaveGroup;
-import org.jrebirth.af.api.wave.WaveItem;
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveItem;
+import org.jrebirth.af.api.wave.contract.WaveType;
 
 public interface Builders {
 

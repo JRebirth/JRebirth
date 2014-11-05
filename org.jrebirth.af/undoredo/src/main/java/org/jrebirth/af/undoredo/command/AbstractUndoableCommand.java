@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
-import org.jrebirth.af.api.wave.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.command.single.AbstractSingleCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.Builders;

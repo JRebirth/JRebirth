@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageBuilder;
 
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.command.basic.stage.StageWaveBean;
 import org.jrebirth.af.core.service.DefaultService;
 import org.slf4j.Logger;

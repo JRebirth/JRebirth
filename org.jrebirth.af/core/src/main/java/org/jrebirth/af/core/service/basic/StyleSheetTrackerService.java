@@ -23,7 +23,7 @@ import java.io.File;
 
 import javafx.scene.Scene;
 
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
 
 /**

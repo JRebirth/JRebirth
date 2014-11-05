@@ -21,9 +21,9 @@ import java.lang.reflect.Method;
 
 import org.jrebirth.af.api.facade.FacadeReady;
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.WaveData;
-import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveType;
 
 /**
  * The interface <strong>EnhancedComponent</strong>.

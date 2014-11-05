@@ -32,7 +32,7 @@ import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.image.WritableImage;
 import javafx.scene.shape.RectangleBuilder;
 
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.WaveBase;

@@ -50,7 +50,7 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="6" language="java" name="org.jrebirth.af.api.wave.WaveType" project="org.jrebirth.af.api" 
+  <interface id="6" language="java" name="org.jrebirth.af.api.wave.contract.WaveType" project="org.jrebirth.af.api" 
     file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/wave/WaveType.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="509" y="719"/>    

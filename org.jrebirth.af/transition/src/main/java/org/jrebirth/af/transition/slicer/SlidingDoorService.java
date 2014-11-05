@@ -37,7 +37,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.Builders;
 import org.slf4j.Logger;

@@ -35,7 +35,7 @@ import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.service.ServiceTask;
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.link.AbstractBehavioredComponent;

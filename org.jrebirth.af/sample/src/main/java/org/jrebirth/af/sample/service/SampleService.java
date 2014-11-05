@@ -1,7 +1,7 @@
 package org.jrebirth.af.sample.service;
 
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.WaveType;
+import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.Builders;
 import org.slf4j.Logger;

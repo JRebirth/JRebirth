@@ -18,7 +18,6 @@
 package org.jrebirth.af.api.component.behavior;
 
 import org.jrebirth.af.api.component.basic.Component;
-import org.jrebirth.af.api.component.enhanced.EnhancedComponent;
 
 /**
  * The Interface <b>Behavior</b> is used to define basic methods that each Behavior shall implements.

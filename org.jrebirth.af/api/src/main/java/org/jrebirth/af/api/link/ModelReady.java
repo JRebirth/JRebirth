@@ -20,7 +20,7 @@ package org.jrebirth.af.api.link;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveData;
 
 /**
  * The interface <strong>ModelReady</strong> allows to retrieve a {@link Model} instance.

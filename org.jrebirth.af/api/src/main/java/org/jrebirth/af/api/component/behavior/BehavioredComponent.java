@@ -18,7 +18,6 @@
 package org.jrebirth.af.api.component.behavior;
 
 import org.jrebirth.af.api.component.basic.Component;
-import org.jrebirth.af.api.component.enhanced.EnhancedComponent;
 
 /**
  * The interface <strong>BehavioredComponent</strong>.
