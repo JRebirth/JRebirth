@@ -23,7 +23,7 @@ import org.slf4j.Marker;
 /**
  * The Interface JRebirthLogger.
  */
-public interface JRLogger { // NOSONAR lot of methods !!
+public interface JRLogger {
 
     /**
      * Log with custom level.

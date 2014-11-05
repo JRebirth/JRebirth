@@ -53,7 +53,7 @@ public interface FacadeMessages extends MessageContainer {
 
     /** AbstractFacade. */
 
-    /** "Component Retrieval Error". */
+    /** "EnhancedComponent Retrieval Error". */
     MessageItem COMPONENT_RETRIEVAL_ERROR = create(new LogMessage("jrebirth.facade.componentRetrievalError", JRLevel.Error, JRebirthMarkers.FACADE));
 
 }

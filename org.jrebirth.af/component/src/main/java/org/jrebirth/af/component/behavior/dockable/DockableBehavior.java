@@ -2,7 +2,7 @@ package org.jrebirth.af.component.behavior.dockable;
 
 import javafx.scene.image.Image;
 
-import org.jrebirth.af.api.behavior.Behavior;
+import org.jrebirth.af.api.component.behavior.Behavior;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.resources.ComponentImages;
 import org.jrebirth.af.processor.annotation.RegistrationPoint;

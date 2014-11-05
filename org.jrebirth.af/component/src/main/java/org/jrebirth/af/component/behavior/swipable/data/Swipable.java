@@ -6,7 +6,7 @@ import javafx.event.EventType;
 import javafx.scene.Node;
 import javafx.scene.input.SwipeEvent;
 
-import org.jrebirth.af.api.behavior.annotation.BehaviorDataFor;
+import org.jrebirth.af.api.component.behavior.annotation.BehaviorDataFor;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.component.behavior.swipable.SwipableBehavior;

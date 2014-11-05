@@ -184,7 +184,9 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
         Wave returnWave = null;
 
         // Try to retrieve the return Wave type, could be null
-        final WaveType responseWaveType = /* this.service.getReturnWaveType( */this.wave.waveType().returnWaveType();
+        final WaveType responseWaveType = this.wave.waveType().returnWaveType();
+
+        final Class<? extends Command> responseCommandClass = this.wave.waveType().returnCommandClass();
 
         if (responseWaveType != null) {
 
@@ -198,7 +200,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
             final WaveItemBase<T> resultWaveItem = (WaveItemBase<T>) responseWaveType.items().get(0);
 
             // Try to retrieve the command class, could be null
-            final Class<? extends Command> responseCommandClass = this.service.getReturnCommand(this.wave.waveType());
+            // final Class<? extends Command> responseCommandClass = this.service.getReturnCommand(this.wave.waveType());
 
             if (responseCommandClass != null) {
 
@@ -222,6 +224,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
 
             // Send the return wave to interested components
             this.service.sendWave(returnWave);
+
         } else {
             // No service return wave Type defined
             LOGGER.log(NO_RETURNED_WAVE_TYPE_DEFINED, this.wave.waveType());

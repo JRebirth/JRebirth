@@ -25,7 +25,7 @@ import java.util.WeakHashMap;
 import java.util.stream.Collectors;
 
 import org.jrebirth.af.api.command.Command;
-import org.jrebirth.af.api.component.Component;
+import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
@@ -269,7 +269,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         // Create the unique key
         readyObject.setKey((UniqueKey<R>) uniqueKey);
 
-        // Component Ready !
+        // EnhancedComponent Ready !
         return readyObject;
     }
 

@@ -38,7 +38,7 @@ import javafx.util.Pair;
 import org.jrebirth.af.api.application.Configuration;
 import org.jrebirth.af.api.application.JRebirthApplication;
 import org.jrebirth.af.api.application.Localized;
-import org.jrebirth.af.api.component.Component;
+import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.log.JRLogger;
@@ -185,7 +185,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             preloadResources();
             notifyPreloader(new ProgressNotification(0.7));
 
-            // Preload Modules to load all Component registrations
+            // Preload Modules to load all EnhancedComponent registrations
             notifyPreloader(new ProgressNotification(800));
             preloadModules();
             notifyPreloader(new ProgressNotification(0.8));

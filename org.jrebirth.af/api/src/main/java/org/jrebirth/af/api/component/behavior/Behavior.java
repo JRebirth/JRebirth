@@ -15,16 +15,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.behavior;
+package org.jrebirth.af.api.component.behavior;
 
-import org.jrebirth.af.api.component.Component;
+import org.jrebirth.af.api.component.basic.Component;
+import org.jrebirth.af.api.component.enhanced.EnhancedComponent;
 
 /**
  * The Interface <b>Behavior</b> is used to define basic methods that each Behavior shall implements.
  *
  * A Behavior represents a piece of code that could be plugged and unplugged to any {@link BehavioredComponent} at any time.
  *
- * A behavior is also a {@link Component} and is stored into the {@link BehaviorFacade}.
+ * A behavior is also a {@link EnhancedComponent} and is stored into the {@link BehaviorFacade}.
  *
  * @param <D> the generic type of the behavior data
  */
@@ -38,7 +39,7 @@ public interface Behavior<D extends BehaviorData> extends Component<Behavior<?>>
     D getData();
 
     /**
-     * Gets the {@link Component} concerned by this Behavior.
+     * Gets the {@link EnhancedComponent} concerned by this Behavior.
      *
      * @return the component
      */

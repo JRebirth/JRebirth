@@ -44,6 +44,7 @@ public interface MessageItemReal extends MessageItem {
      *
      * @return Returns right message formatted with given parameters.
      */
+    @Override
     String getText(final Object... stringParameters);
 
     /**
@@ -51,6 +52,7 @@ public interface MessageItemReal extends MessageItem {
      *
      * @return the optional log marker or the Empty one
      */
+    @Override
     Marker getMarker();
 
     /**
@@ -58,6 +60,7 @@ public interface MessageItemReal extends MessageItem {
      *
      * @return the optional log level or the info one
      */
+    @Override
     JRLevel getLevel();
 
     /**
@@ -67,11 +70,13 @@ public interface MessageItemReal extends MessageItem {
      *
      * @param forcedValue the new string for this message
      */
+    @Override
     void define(final MessageResource forcedValue);
 
     /**
      * Persist a message value.
      */
+    @Override
     void persist();
 
     /**

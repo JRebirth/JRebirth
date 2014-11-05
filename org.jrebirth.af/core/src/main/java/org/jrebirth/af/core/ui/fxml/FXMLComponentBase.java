@@ -52,6 +52,7 @@ public class FXMLComponentBase implements FXMLComponent {
     /**
      * @return Returns the node.
      */
+    @Override
     public Node getNode() {
         return this.node;
     }
@@ -61,6 +62,7 @@ public class FXMLComponentBase implements FXMLComponent {
      *
      * @return Returns the controller.
      */
+    @Override
     public FXMLController getController() {
         return this.controller;
     }

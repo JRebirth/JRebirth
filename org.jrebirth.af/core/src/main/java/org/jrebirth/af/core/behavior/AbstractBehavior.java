@@ -17,9 +17,9 @@
  */
 package org.jrebirth.af.core.behavior;
 
-import org.jrebirth.af.api.behavior.Behavior;
-import org.jrebirth.af.api.behavior.BehaviorData;
-import org.jrebirth.af.api.behavior.BehavioredComponent;
+import org.jrebirth.af.api.component.behavior.Behavior;
+import org.jrebirth.af.api.component.behavior.BehaviorData;
+import org.jrebirth.af.api.component.behavior.BehavioredComponent;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.link.AbstractComponent;

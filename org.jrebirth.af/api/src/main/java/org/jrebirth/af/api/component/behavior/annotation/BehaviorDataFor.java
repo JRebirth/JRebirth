@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.behavior.annotation;
+package org.jrebirth.af.api.component.behavior.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -24,7 +24,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.jrebirth.af.api.behavior.Behavior;
+import org.jrebirth.af.api.component.behavior.Behavior;
 
 /**
  * The Interface BehaviorDataFor.

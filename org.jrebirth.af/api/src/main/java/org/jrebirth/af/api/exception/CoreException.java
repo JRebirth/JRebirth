@@ -27,7 +27,7 @@ import org.jrebirth.af.api.resource.i18n.MessageItem;
  *
  * @author Sébastien Bordes
  */
-public class CoreException extends AbstractMessageException {
+public class CoreException extends MessageException {
 
     /**
      * The constant used for serialization.

@@ -19,6 +19,8 @@ package org.jrebirth.af.api.wave;
 
 import java.util.List;
 
+import org.jrebirth.af.api.command.Command;
+
 /**
  *
  * The interface <strong>WaveType</strong> could be used to create a type that return an action name and hold {@link WaveItem} parameters.
@@ -38,7 +40,7 @@ public interface WaveType {
      * Sets the unique identifier of the WaveType.
      *
      * @param uid the uid to set
-     * 
+     *
      * @return the wave type to chain method call
      */
     WaveType uid(int uid);
@@ -54,7 +56,7 @@ public interface WaveType {
      * Set the action name.
      *
      * @param action the action name to set
-     * 
+     *
      * @return the wave type to chain method call
      */
     WaveType action(String action);
@@ -70,7 +72,7 @@ public interface WaveType {
      * Set all WaveItems used by the current WaveType used as parameter during wave handling.
      *
      * @param items the wave items to set
-     * 
+     *
      * @return the wave type to chain method call
      */
     WaveType items(WaveItem<?>... items);
@@ -86,7 +88,7 @@ public interface WaveType {
      * Set the return Wave Type action name.
      *
      * @param action the return action name to set
-     * 
+     *
      * @return the wave type to chain method call
      */
     WaveType returnAction(String action);
@@ -102,7 +104,7 @@ public interface WaveType {
      * Return the WaveItem that hold the type sent to hold the current WaveType result.
      *
      * @param returnItem the return WaveItem to set
-     * 
+     *
      * @return the wave type to chain method call
      */
     WaveType returnItem(WaveItem<?> returnItem);
@@ -110,8 +112,22 @@ public interface WaveType {
     /**
      * Return the WaveType emitted as the result of the current WaveType.
      *
-     * @return the wave type to chain method call
+     * @return the wave type to call after the processing of the current WaveType
      */
     WaveType returnWaveType();
+
+    /**
+     * Set the Command to call in order to process the returned value.
+     *
+     * @return the wave type to chain method call
+     */
+    WaveType returnCommandClass(Class<? extends Command> returnCommandClass);
+
+    /**
+     * Return the Command to call in order to process the returned value.
+     *
+     * @return the command class to call
+     */
+    Class<? extends Command> returnCommandClass();
 
 }

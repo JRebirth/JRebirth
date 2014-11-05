@@ -21,6 +21,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.wave.WaveItem;
 import org.jrebirth.af.api.wave.WaveType;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
@@ -50,6 +51,9 @@ public final class WaveTypeBase implements WaveType {
 
     /** The wave type of the wave returned after processing. */
     private WaveType returnWaveType;
+
+    /** The command to call to process the returned value. */
+    private Class<? extends Command> returnCommandClass;
 
     // public static WaveTypeBase create() {
     // return new WaveTypeBase();
@@ -268,6 +272,23 @@ public final class WaveTypeBase implements WaveType {
     @Override
     public int hashCode() {
         return uid();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Class<? extends Command> returnCommandClass() {
+        return this.returnCommandClass;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public WaveType returnCommandClass(final Class<? extends Command> returnCommandClass) {
+        this.returnCommandClass = returnCommandClass;
+        return this;
     }
 
 }

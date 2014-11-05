@@ -21,7 +21,6 @@ import static org.jrebirth.af.core.wave.Builders.wave;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,11 +30,12 @@ import org.jrebirth.af.api.annotation.BeforeInit;
 import org.jrebirth.af.api.annotation.OnRelease;
 import org.jrebirth.af.api.annotation.Releasable;
 import org.jrebirth.af.api.annotation.SkipAnnotation;
-import org.jrebirth.af.api.behavior.Behavior;
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.command.CommandBean;
-import org.jrebirth.af.api.component.Component;
-import org.jrebirth.af.api.component.InnerComponent;
+import org.jrebirth.af.api.component.basic.Component;
+import org.jrebirth.af.api.component.basic.InnerComponent;
+import org.jrebirth.af.api.component.behavior.Behavior;
+import org.jrebirth.af.api.component.enhanced.EnhancedComponent;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
@@ -57,7 +57,6 @@ import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
-import org.jrebirth.af.core.util.MultiMap;
 import org.jrebirth.af.core.util.ObjectUtility;
 import org.jrebirth.af.core.wave.WaveTypeBase;
 
@@ -72,10 +71,10 @@ import org.jrebirth.af.core.wave.WaveTypeBase;
  *
  * @author Sébastien Bordes
  *
- * @param <R> the class type of the subclass
+ * @param <C> the class type of the subclass
  */
 @SkipAnnotation(false)
-public abstract class AbstractComponent<R extends Component<R>> extends AbstractReady<R> implements Component<R>, LinkMessages {
+public abstract class AbstractComponent<C extends Component<C>> extends AbstractReady<C> implements Component<C>, LinkMessages {
 
     /** The default fallback wave handle method. */
     public static final String PROCESS_WAVE_METHOD_NAME = "processWave";
@@ -86,14 +85,8 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
     /** The return wave type map. */
     // private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
 
-    /** The return command class map. */
-    private Map<WaveType, Class<? extends Command>> returnCommandClass;
-
     /** A map that store all annotated methods to call sorted by lifecycle phase. */
     private Map<String, List<Method>> lifecycleMethod;
-
-    /** A map that store all behavior implementations s tore . */
-    private MultiMap<Class<? extends Behavior<?>>, Behavior<?>> behaviors;
 
     /** The root component not null for inner component. */
     protected Component<?> rootComponent;
@@ -175,37 +168,6 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
     // registerCallback(null, callType, responseType, null);
     // }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void registerCallback(final WaveType callType/* , final WaveType responseType */, final Class<? extends Command> returnCommandClass) {
-
-        // Call the generic method
-        registerCallback(null, callType/* , responseType */, returnCommandClass);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void registerCallback(final WaveChecker waveChecker, final WaveType callType/* , final WaveType responseType */, final Class<? extends Command> returnCommandClass) {
-
-        // Perform the subscription
-        listen(waveChecker, callType);
-
-        // Store a link between call Wave Type and return wave type that store the result type ino a WaveItem
-        // this.returnWaveTypeMap.put(callType, responseType);
-
-        // Store the Command Class that will handle the service result (optional)
-        if (returnCommandClass != null) {
-            if (this.returnCommandClass == null) {
-                this.returnCommandClass = new HashMap<>();
-            }
-            this.returnCommandClass.put(callType, returnCommandClass);
-        }
-    }
-
     // /**
     // * {@inheritDoc}
     // */
@@ -213,14 +175,6 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
     // public final WaveType getReturnWaveType(final WaveType waveType) {
     // return this.returnWaveTypeMap.get(waveType);
     // }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final Class<? extends Command> getReturnCommand(final WaveType waveType) {
-        return this.returnCommandClass == null ? null : this.returnCommandClass.get(waveType);
-    }
 
     /**
      * {@inheritDoc}
@@ -635,12 +589,12 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
                 childComponent = (C) getLocalFacade().getGlobalFacade().getUiFacade().retrieve((UniqueKey<Model>) innerComponent.getKey());
             } else if (Behavior.class.isAssignableFrom(innerComponentClass)) {
                 // Cannot initialize Inner Behavior, they cannot be nested
-                throw new CoreRuntimeException("Behaviors can not be used as Inner Component"); // FIXME add MessageItem
+                throw new CoreRuntimeException("Behaviors can not be used as Inner EnhancedComponent"); // FIXME add MessageItem
             }
 
-            // Inner Component creation has failed throw an exception
+            // Inner EnhancedComponent creation has failed throw an exception
             if (childComponent == null) {
-                throw new CoreRuntimeException("Impossible to create Inner Component"); // FIXME add MessageItem
+                throw new CoreRuntimeException("Impossible to create Inner EnhancedComponent"); // FIXME add MessageItem
             }
 
             // Store the component into the multitonKey map
@@ -699,7 +653,7 @@ public abstract class AbstractComponent<R extends Component<R>> extends Abstract
     /**
      * Initialize method that should wrap all creation of {@link InnerComponent}.
      *
-     * It shall contain only {@link Component}.addInnerComponent calls.
+     * It shall contain only {@link EnhancedComponent}.addInnerComponent calls.
      */
     protected abstract void initInnerComponents();
 

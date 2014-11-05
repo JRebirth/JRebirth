@@ -87,6 +87,7 @@ public class MessageResourceBase implements MessageResource {
      *
      * @return Returns the message.
      */
+    @Override
     public String getMessage() {
         return this.message;
     }
@@ -96,6 +97,7 @@ public class MessageResourceBase implements MessageResource {
      *
      * @param message The message to set.
      */
+    @Override
     public void setMessage(final String message) {
         this.message = message;
     }
@@ -105,6 +107,7 @@ public class MessageResourceBase implements MessageResource {
      *
      * @return Returns the marker.
      */
+    @Override
     public Marker getMarker() {
         return this.marker;
     }
@@ -114,6 +117,7 @@ public class MessageResourceBase implements MessageResource {
      *
      * @return Returns the level.
      */
+    @Override
     public JRLevel getLevel() {
         return this.level;
     }

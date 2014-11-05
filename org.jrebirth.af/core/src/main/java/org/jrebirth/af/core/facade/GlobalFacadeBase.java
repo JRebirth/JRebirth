@@ -100,7 +100,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
             LOGGER.error(COMPONENT_CUSTOM_FACTORY_ERROR, e);
             factory = new DefaultComponentFactory();
         }
-        // Attach the right Component Factory
+        // Attach the right EnhancedComponent Factory
         this.componentFactory = factory;
 
         // Link the application

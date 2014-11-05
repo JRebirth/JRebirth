@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.exception;
 
-import org.jrebirth.af.api.exception.AbstractMessageException;
+import org.jrebirth.af.api.exception.MessageException;
 import org.jrebirth.af.api.resource.i18n.MessageItem;
 
 /***
@@ -28,7 +28,7 @@ import org.jrebirth.af.api.resource.i18n.MessageItem;
  *
  * @author Sébastien Bordes
  */
-public class CommandException extends AbstractMessageException {
+public class CommandException extends MessageException {
 
     /**
      * The constant used for serialization.

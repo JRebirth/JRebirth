@@ -17,7 +17,6 @@
  */
 package org.jrebirth.af.core.resource.parameter;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -116,8 +115,6 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
      * @param custConfFileName the file to load
      */
     private void readPropertiesFile(final String custConfFileName) {
-
-        final File custConfFile = new File(custConfFileName);
 
         final Properties p = new Properties();
 

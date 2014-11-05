@@ -35,6 +35,11 @@ import org.slf4j.Marker;
  */
 public final class MessageItemBase extends AbstractResourceItem<MessageItem, MessageParams, MessageResource> implements MessageItemReal {
 
+    /**
+     * Create a new {@link MessageItem} instance.
+     *
+     * @return a new {@link MessageItem} instance
+     */
     public static MessageItemBase create() {
         return new MessageItemBase();
     }
@@ -44,7 +49,9 @@ public final class MessageItemBase extends AbstractResourceItem<MessageItem, Mes
      */
     @Override
     public String getText(final Object... stringParameters) {
+
         String res = get().getMessage();
+
         if (stringParameters.length > 0) {
             try {
                 // Use the message formatter
@@ -52,9 +59,12 @@ public final class MessageItemBase extends AbstractResourceItem<MessageItem, Mes
 
                 if (res.startsWith("<") && res.endsWith(">")) {
                     res += " values: ";
+
+                    final StringBuilder sb = new StringBuilder();
                     for (final Object param : stringParameters) {
-                        res += (param != null ? param.toString() : "") + "|";
+                        sb.append((param == null ? "" : param.toString()) + "|");
                     }
+                    res += sb.toString();
                 }
 
             } catch (final IllegalArgumentException e) {

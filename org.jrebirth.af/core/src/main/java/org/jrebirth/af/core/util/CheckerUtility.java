@@ -6,7 +6,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jrebirth.af.api.component.Component;
+import org.jrebirth.af.api.component.basic.Component;
+import org.jrebirth.af.api.component.enhanced.EnhancedComponent;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.wave.OnWave;
@@ -37,11 +38,11 @@ public final class CheckerUtility implements UtilMessages {
     }
 
     /**
-     * Check if wave Type contract is respected for the the given {@link Component} class.
+     * Check if wave Type contract is respected for the the given {@link EnhancedComponent} class.
      *
      * Throws a Runtime exception is Wave Contract is broken.
      *
-     * @param waveReadyClass the {@link Component} class to check
+     * @param waveReadyClass the {@link EnhancedComponent} class to check
      * @param waveTypes the contract to respect (could be several WaveType)
      */
     public static void checkWaveTypeContract(final Class<? extends Component> waveReadyClass, final WaveType... waveTypes) {

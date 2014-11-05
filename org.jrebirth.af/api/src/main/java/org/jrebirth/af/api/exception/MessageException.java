@@ -21,13 +21,13 @@ import org.jrebirth.af.api.resource.i18n.MessageItem;
 
 /***
  *
- * The class <strong>AbstractMessageException</strong>.
+ * The class <strong>MessageException</strong>.
  *
  * This is the base exception class that handle Message Item.
  *
  * @author Sébastien Bordes
  */
-public abstract class AbstractMessageException extends Exception {
+public class MessageException extends Exception {
 
     /**
      * The constant used for serialization.
@@ -39,7 +39,7 @@ public abstract class AbstractMessageException extends Exception {
      *
      * @param messageItem the message item to display.
      */
-    public AbstractMessageException(final MessageItem messageItem) {
+    public MessageException(final MessageItem messageItem) {
         super(messageItem.getText());
     }
 
@@ -49,7 +49,7 @@ public abstract class AbstractMessageException extends Exception {
      * @param message the message to display.
      * @param t the base exception thrown
      */
-    public AbstractMessageException(final String message, final Throwable t) {
+    public MessageException(final String message, final Throwable t) {
         super(message, t);
     }
 
@@ -58,7 +58,7 @@ public abstract class AbstractMessageException extends Exception {
      *
      * @param message the message to display.
      */
-    public AbstractMessageException(final String message) {
+    public MessageException(final String message) {
         super(message);
     }
 
@@ -68,7 +68,7 @@ public abstract class AbstractMessageException extends Exception {
      * @param messageItem the message item to display.
      * @param t the base exception thrown
      */
-    public AbstractMessageException(final MessageItem messageItem, final Throwable t) {
+    public MessageException(final MessageItem messageItem, final Throwable t) {
         super(messageItem.getText(), t);
     }
 
@@ -77,7 +77,7 @@ public abstract class AbstractMessageException extends Exception {
      *
      * @param t the base exception thrown
      */
-    public AbstractMessageException(final Throwable t) {
+    public MessageException(final Throwable t) {
         super(t);
     }
 

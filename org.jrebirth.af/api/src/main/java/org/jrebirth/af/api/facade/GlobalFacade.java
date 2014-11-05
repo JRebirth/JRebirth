@@ -18,8 +18,8 @@
 package org.jrebirth.af.api.facade;
 
 import org.jrebirth.af.api.application.JRebirthApplication;
-import org.jrebirth.af.api.behavior.Behavior;
 import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.component.behavior.Behavior;
 import org.jrebirth.af.api.component.factory.ComponentFactory;
 import org.jrebirth.af.api.concurrent.IJRebirthThreadPoolExecutor;
 import org.jrebirth.af.api.exception.CoreException;

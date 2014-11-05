@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.inner;
 
-import org.jrebirth.af.api.component.Component;
+import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.core.key.Key;
 
@@ -53,6 +53,7 @@ public final class InnerComponentEntry<C extends Component<?>> implements InnerC
      * {@inheritDoc}
      */
     // @Override
+    @Override
     public UniqueKey<C> getKey() {
         return this.modelKey;
     }

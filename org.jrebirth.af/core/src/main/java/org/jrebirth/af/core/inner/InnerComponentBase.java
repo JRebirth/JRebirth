@@ -17,8 +17,8 @@
  */
 package org.jrebirth.af.core.inner;
 
-import org.jrebirth.af.api.component.Component;
-import org.jrebirth.af.api.component.InnerComponent;
+import org.jrebirth.af.api.component.basic.Component;
+import org.jrebirth.af.api.component.basic.InnerComponent;
 import org.jrebirth.af.api.key.UniqueKey;
 
 /**

@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jrebirth.af.api.command.Command;
-import org.jrebirth.af.api.component.Component;
+import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.facade.GlobalFacade;
 import org.jrebirth.af.api.link.Notifier;
@@ -82,7 +82,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             LOGGER.error(USE_DEFAULT_WAVE_HANDLER, e);
             waveHandler = new DefaultUnprocessedWaveHandler();
         }
-        // Attach the right Component Factory
+        // Attach the right EnhancedComponent Factory
         this.unprocessedWaveHandler = waveHandler;
     }
 

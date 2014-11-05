@@ -19,7 +19,7 @@ package org.jrebirth.af.core.behavior;
 
 import javafx.scene.Node;
 
-import org.jrebirth.af.api.behavior.BehaviorData;
+import org.jrebirth.af.api.component.behavior.BehaviorData;
 import org.jrebirth.af.api.ui.Model;
 
 /**

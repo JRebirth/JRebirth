@@ -15,18 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.behavior;
+package org.jrebirth.af.api.component.behavior;
 
 import java.util.List;
 
-import org.jrebirth.af.api.component.Component;
+import org.jrebirth.af.api.component.enhanced.EnhancedComponent;
 
 /**
  * The Interface <b>BehaviorData</b> is used to define basic methods used to store some data used by Behaviors.
  *
  * A BehaviorData can be used by several different {@link Behavior}.
  *
- * A Behavior can be attached to a {@link Component} by sending to it a Behavior Data.
+ * A Behavior can be attached to a {@link EnhancedComponent} by sending to it a Behavior Data.
  */
 public interface BehaviorData {
 

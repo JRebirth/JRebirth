@@ -142,6 +142,7 @@ public class WaveItemBase<T> implements WaveItem<T> {
     /**
      * @return Returns the name.
      */
+    @Override
     public String getName() {
         return this.name;
     }
@@ -149,6 +150,7 @@ public class WaveItemBase<T> implements WaveItem<T> {
     /**
      * @return Returns the uid.
      */
+    @Override
     public int getUid() {
         return this.uid;
     }
@@ -163,6 +165,7 @@ public class WaveItemBase<T> implements WaveItem<T> {
     /**
      * @return Returns the itemType.
      */
+    @Override
     public Type getItemType() {
         return this.itemType;
     }
@@ -195,6 +198,7 @@ public class WaveItemBase<T> implements WaveItem<T> {
     /**
      * @return Returns the isParameter.
      */
+    @Override
     public boolean isParameter() {
         return this.isParameter;
     }
@@ -202,6 +206,7 @@ public class WaveItemBase<T> implements WaveItem<T> {
     /**
      * @param isParameter The isParameter to set.
      */
+    @Override
     public void setParameter(final boolean isParameter) {
         this.isParameter = isParameter;
     }

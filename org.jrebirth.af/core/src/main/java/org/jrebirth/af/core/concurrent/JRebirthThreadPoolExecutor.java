@@ -65,6 +65,7 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements IJ
      *
      * @return true if this priority can be run right now
      */
+    @Override
     public boolean checkAvailability(final RunnablePriority taskPriority) {
 
         // The next task could be added if:
