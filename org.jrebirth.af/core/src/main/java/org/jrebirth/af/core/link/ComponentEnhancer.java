@@ -38,7 +38,8 @@ import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.annotation.OnWave;
 import org.jrebirth.af.api.wave.contract.WaveType;
-import org.jrebirth.af.core.inner.InnerComponentBase;
+import org.jrebirth.af.core.component.basic.AbstractComponent;
+import org.jrebirth.af.core.component.basic.InnerComponentBase;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.MultiMap;
@@ -180,7 +181,8 @@ public final class ComponentEnhancer implements LinkMessages {
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), annotationClass)) {
 
             // Add a method to the multimap entry
-            lifecycleMethod.add(annotationClass.getName(), method); // TODO sort
+            // TODO sort
+            lifecycleMethod.add(annotationClass.getName(), method);
         }
     }
 
@@ -216,7 +218,9 @@ public final class ComponentEnhancer implements LinkMessages {
 
         // Get the WaveType from the WaveType registry
         final WaveType wt = WaveTypeRegistry.getWaveType(waveActionName);
-        if (wt != null) {
+        if (wt == null) {
+            throw new CoreRuntimeException("WaveType '" + waveActionName + "' not found into WaveTypeRegistry.");
+        } else {
             // Method is not defined or is the default fallback one
             if (method == null || AbstractComponent.PROCESS_WAVE_METHOD_NAME.equals(method.getName())) {
                 // Just listen the WaveType
@@ -225,8 +229,6 @@ public final class ComponentEnhancer implements LinkMessages {
                 // Listen the WaveType and specify the right method handler
                 component.listen(null, method, wt);
             }
-        } else {
-            throw new CoreRuntimeException("WaveType '" + waveActionName + "' not found into WaveTypeRegistry.");
         }
     }
 

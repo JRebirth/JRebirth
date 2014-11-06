@@ -3,7 +3,7 @@ package org.jrebirth.af.security.behavior.data;
 import java.io.Serializable;
 
 import org.jrebirth.af.api.component.behavior.annotation.BehaviorDataFor;
-import org.jrebirth.af.core.behavior.data.BehaviorDataBase;
+import org.jrebirth.af.core.component.behavior.BehaviorDataBase;
 import org.jrebirth.af.security.behavior.SecurityBehavior;
 
 @BehaviorDataFor(SecurityBehavior.class)

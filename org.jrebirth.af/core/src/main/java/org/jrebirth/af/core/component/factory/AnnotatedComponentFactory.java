@@ -1,4 +1,4 @@
-package org.jrebirth.af.core.facade.factory;
+package org.jrebirth.af.core.component.factory;
 
 import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.component.factory.ComponentFactory;

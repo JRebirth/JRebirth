@@ -57,6 +57,7 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
      *
      * @param classField the descriptive class object
      * @param keyPart a list of immutable objects that guarantee component unicity
+     * @param optionalData the optional data to be transmit to the component
      */
     public MultitonKey(final Class<R> classField, final Object[] keyPart, final Object... optionalData) {
         super(classField, optionalData);
@@ -73,10 +74,9 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
      */
     private void rebuildKey() {
 
-        final StringBuffer sb = new StringBuffer();
+        final StringBuilder sb = new StringBuilder();
 
-        sb.append(getClassField().getCanonicalName());
-        sb.append('|');
+        sb.append(getClassField().getCanonicalName()).append('|');
         for (final Object keyObject : this.keyPartList) {
             sb.append(buildObjectKey(keyObject)).append('|');
         }
@@ -96,11 +96,10 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
         final Class<?> objectClass = object.getClass();
 
         final KeyGenerator typeGenerator = objectClass.getAnnotation(KeyGenerator.class);
-        if (typeGenerator != null) {
-            objectKey = generateTypeKey(object, typeGenerator);
-
-        } else {
+        if (typeGenerator == null) {
             objectKey = generateAggregatedKey(object);
+        } else {
+            objectKey = generateTypeKey(object, typeGenerator);
         }
 
         // If no Type keyGenerator neither Method Generator were used, use the default toString method
@@ -126,11 +125,11 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
             method = object.getClass().getMethod(typeGenerator.value());
             objectKey = (String) method.invoke(object);
         } catch (final NoSuchMethodException e) {
-            LOGGER.log(METHOD_NOT_FOUND, typeGenerator.value(), object.getClass().getSimpleName());
+            LOGGER.log(METHOD_NOT_FOUND, typeGenerator.value(), object.getClass().getSimpleName(), e);
         } catch (final SecurityException e) {
-            LOGGER.log(NO_KEY_GENERATOR_METHOD, typeGenerator.value(), object.getClass().getSimpleName());
+            LOGGER.log(NO_KEY_GENERATOR_METHOD, typeGenerator.value(), object.getClass().getSimpleName(), e);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            LOGGER.log(KEY_GENERATOR_FAILURE, typeGenerator.value(), object.getClass().getSimpleName());
+            LOGGER.log(KEY_GENERATOR_FAILURE, typeGenerator.value(), object.getClass().getSimpleName(), e);
         }
 
         return objectKey;
@@ -158,7 +157,7 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
                     returnedValue = m.invoke(object);
 
                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    LOGGER.log(METHOD_KEY_GENERATOR_FAILURE, m.getName(), object.getClass().getSimpleName());
+                    LOGGER.log(METHOD_KEY_GENERATOR_FAILURE, m.getName(), object.getClass().getSimpleName(), e);
                 }
                 if (returnedValue == null) {
                     // returned value is null

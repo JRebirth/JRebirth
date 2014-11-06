@@ -143,6 +143,13 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
         return listModelObject;
     }
 
+    /**
+     * Return the first object assignable from te given class.
+     *
+     * @param keyPartClass the class used to search the first instance
+     *
+     * @return the first instance found or raise a NoSuchElementException
+     */
     @SuppressWarnings("unchecked")
     public <KP extends Object> KP getKeyPart(final Class<KP> keyPartClass) {
         return (KP) getListKeyPart().stream()

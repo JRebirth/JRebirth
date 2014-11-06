@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.link;
+package org.jrebirth.af.core.component.basic;
 
 import static org.jrebirth.af.core.wave.Builders.wave;
 
@@ -53,6 +53,9 @@ import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
+import org.jrebirth.af.core.link.AbstractReady;
+import org.jrebirth.af.core.link.ComponentEnhancer;
+import org.jrebirth.af.core.link.LinkMessages;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;

@@ -1,4 +1,4 @@
-package org.jrebirth.af.core.inner;
+package org.jrebirth.af.core.component.basic;
 
 import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.key.UniqueKey;

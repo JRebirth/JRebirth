@@ -38,6 +38,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      * @param logger the logger to wrap
      */
     public Slf4jAdapter(final org.slf4j.Logger logger) {
+        super();
         this.slf4jLogger = logger;
     }
 

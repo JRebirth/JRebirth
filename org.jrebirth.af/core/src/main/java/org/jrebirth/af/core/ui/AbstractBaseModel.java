@@ -23,7 +23,7 @@ import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.facade.JRebirthEventType;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.core.link.AbstractBehavioredComponent;
+import org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent;
 
 /**
  *

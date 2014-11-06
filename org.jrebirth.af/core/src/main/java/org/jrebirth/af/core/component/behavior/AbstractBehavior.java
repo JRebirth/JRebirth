@@ -15,14 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.behavior;
+package org.jrebirth.af.core.component.behavior;
 
 import org.jrebirth.af.api.component.behavior.Behavior;
 import org.jrebirth.af.api.component.behavior.BehaviorData;
 import org.jrebirth.af.api.component.behavior.BehavioredComponent;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.core.link.AbstractComponent;
+import org.jrebirth.af.core.component.basic.AbstractComponent;
 
 /**
  * The Class AbstractBehavior.

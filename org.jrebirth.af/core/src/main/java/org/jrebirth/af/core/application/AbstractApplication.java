@@ -155,7 +155,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             notifyPreloader(new ProgressNotification(0.1));
 
             notifyPreloader(new ProgressNotification(100));
-            preInit(); // 200 , 300
+            // 200 , 300
+            preInit();
             notifyPreloader(new ProgressNotification(0.3));
 
             // Load messages Files
@@ -190,7 +191,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             preloadModules();
             notifyPreloader(new ProgressNotification(0.8));
 
-            postInit(); // 900
+            // 900
+            postInit();
 
             notifyPreloader(new ProgressNotification(1000));
             notifyPreloader(new ProgressNotification(1.0));
@@ -316,7 +318,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             LOGGER.log(STOPPED_SUCCESSFULLY, this.getClass().getSimpleName());
 
         } catch (final Exception e) {
-            LOGGER.error(STOP_ERROR, e, this.getClass().getSimpleName());
+            LOGGER.error(STOP_ERROR, e, this.getClass().getSimpleName(), e);
             throw new CoreException(e);
         }
     }
@@ -354,6 +356,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
             this.scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 
+                /**
+                 * {@inheritDoc}
+                 */
                 @Override
                 public void handle(final KeyEvent event) {
                     // Manage F11 button to switch full screen
@@ -491,7 +496,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         final String version = JRebirthParameters.APPLICATION_VERSION.get();
         final StringBuilder sb = new StringBuilder(name);
         if (!"0.0.0".equals(version)) {
-            sb.append(" ").append(version);
+            sb.append(' ').append(version);
         }
         return sb.toString();
     }
@@ -563,6 +568,10 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
         // Initialize the uncaught exception handler for JavaFX Application Thread
         JRebirth.runIntoJAT(new AbstractJrbRunnable(ATTACH_JAT_UEH.getText()) {
+
+            /**
+             * {@inheritDoc}
+             */
             @Override
             public void runInto() throws JRebirthThreadException {
                 Thread.currentThread().setUncaughtExceptionHandler(getJatUncaughtExceptionHandler());
@@ -571,6 +580,10 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
         // Initialize the uncaught exception handler for JRebirth Internal Thread
         JRebirth.runIntoJIT(new AbstractJrbRunnable(ATTACH_JIT_UEH.getText()) {
+
+            /**
+             * {@inheritDoc}
+             */
             @Override
             public void runInto() throws JRebirthThreadException {
                 Thread.currentThread().setUncaughtExceptionHandler(getJitUncaughtExceptionHandler());

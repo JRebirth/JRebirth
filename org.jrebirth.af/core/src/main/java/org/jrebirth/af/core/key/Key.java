@@ -25,23 +25,22 @@ import org.jrebirth.af.api.key.UniqueKey;
  * The class <strong>Key</strong> used as a static factory.
  *
  * @author Sébastien Bordes
- *
  */
 public interface Key extends Serializable {
 
     /**
      * Build an unique key.
      *
+     * @param <C> The type of the object registered by this ClassKey
+     *
      * @param clazz the class type of the component
      * @param keyPart all complementary part of the key
      *
      * @return the unique key for the given class and keyParts array
-     *
-     * @param <E> The type of the object registered by this ClassKey
      */
-    static <R> UniqueKey<R> create(final Class<R> clazz, final Object... keyPart) {
+    static <C> UniqueKey<C> create(final Class<C> clazz, final Object... keyPart) {
 
-        UniqueKey<R> uniqueKey;
+        UniqueKey<C> uniqueKey;
         if (keyPart == null || keyPart.length == 0 || keyPart[0].toString().isEmpty()) {
             uniqueKey = createSingle(clazz);
         } else {
@@ -53,16 +52,17 @@ public interface Key extends Serializable {
     /**
      * Build an unique key.
      *
+     * @param <C> The type of the object registered by this ClassKey
+     *
      * @param clazz the class type of the component
+     * @param optionalData the optional data to be transmit to the component
      * @param keyPart all complementary part of the key
      *
      * @return the unique key for the given class and keyParts array
-     *
-     * @param <E> The type of the object registered by this ClassKey
      */
-    static <R> UniqueKey<R> create(final Class<R> clazz, final Object[] optionalData, final Object... keyPart) {
+    static <C> UniqueKey<C> create(final Class<C> clazz, final Object[] optionalData, final Object... keyPart) {
 
-        UniqueKey<R> uniqueKey;
+        UniqueKey<C> uniqueKey;
         if (keyPart == null || keyPart.length == 0 || keyPart[0].toString().isEmpty()) {
             uniqueKey = createSingle(clazz, optionalData);
         } else {
@@ -74,42 +74,44 @@ public interface Key extends Serializable {
     /**
      * Build a singleton key.
      *
+     * @param <C> The type of the object registered by this ClassKey
+     *
      * @param clazz the class type of the component
+     * @param optionalData the optional data to be transmit to the component
      *
      * @return the unique key for a singleton
-     *
-     * @param <E> The type of the object registered by this ClassKey
      */
-    static <R> UniqueKey<R> createSingle(final Class<R> clazz, final Object... optionalData) {
-        return new ClassKey<R>(clazz, optionalData);
+    static <C> UniqueKey<C> createSingle(final Class<C> clazz, final Object... optionalData) {
+        return new ClassKey<C>(clazz, optionalData);
     }
 
     /**
      * Build a multiton key.
      *
+     * @param <C> The type of the object registered by this ClassKey
+     *
      * @param clazz the class type of the component
      * @param keyPart all complementary part of the key
      *
      * @return the unique key for a multiton
-     *
-     * @param <E> The type of the object registered by this ClassKey
      */
-    static <R> UniqueKey<R> createMulti(final Class<R> clazz, final Object... keyPart) {
-        return new MultitonKey<R>(clazz, keyPart);
+    static <C> UniqueKey<C> createMulti(final Class<C> clazz, final Object... keyPart) {
+        return new MultitonKey<C>(clazz, keyPart);
     }
 
     /**
      * Build a multiton key.
      *
+     * @param <C> The type of the object registered by this ClassKey
+     *
      * @param clazz the class type of the component
      * @param keyPart all complementary part of the key
+     * @param optionalData the optional data to be transmit to the component
      *
      * @return the unique key for a multiton
-     *
-     * @param <E> The type of the object registered by this ClassKey
      */
-    static <R> UniqueKey<R> createMulti(final Class<R> clazz, final Object[] keyPart, final Object... optionalData) {
-        return new MultitonKey<R>(clazz, keyPart, optionalData);
+    static <C> UniqueKey<C> createMulti(final Class<C> clazz, final Object[] keyPart, final Object... optionalData) {
+        return new MultitonKey<C>(clazz, keyPart, optionalData);
     }
 
 }

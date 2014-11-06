@@ -6,7 +6,7 @@ import org.jrebirth.af.api.component.behavior.annotation.BehaviorDataFor;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.component.behavior.dockable.DockableBehavior;
-import org.jrebirth.af.core.behavior.data.BehaviorDataBase;
+import org.jrebirth.af.core.component.behavior.BehaviorDataBase;
 
 @BehaviorDataFor(DockableBehavior.class)
 public class Dockable extends BehaviorDataBase implements Serializable {

@@ -1,4 +1,4 @@
-package org.jrebirth.af.core.behavior.data;
+package org.jrebirth.af.core.component.behavior;
 
 import java.util.Collections;
 import java.util.List;

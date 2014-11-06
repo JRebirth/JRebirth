@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.jrebirth.af.api.resource.image.ImageExtension;
 import org.jrebirth.af.api.resource.parameter.ParameterItem;
-import org.jrebirth.af.core.facade.factory.DefaultComponentFactory;
+import org.jrebirth.af.core.component.factory.DefaultComponentFactory;
 import org.jrebirth.af.core.link.DefaultUnprocessedWaveHandler;
 import org.jrebirth.af.core.resource.color.WebColor;
 import org.jrebirth.af.core.resource.image.RelImage;

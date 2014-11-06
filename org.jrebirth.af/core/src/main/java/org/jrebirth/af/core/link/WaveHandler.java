@@ -34,6 +34,7 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.core.component.basic.AbstractComponent;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.exception.WaveException;
@@ -174,15 +175,15 @@ public class WaveHandler implements LinkMessages {
         Method customMethod = null;
         try {
             // Search the wave handler method to call
-            customMethod = this.defaultMethod != null
-                    // Method defined with annotation
-                    ? this.defaultMethod
+            customMethod = this.defaultMethod == null
                     // Method computed according to wave prefix and wave type action name
-                    : ClassUtility.getMethodByName(getWaveReady().getClass(), ClassUtility.underscoreToCamelCase(wave.waveType().toString()));
+                    ? ClassUtility.getMethodByName(getWaveReady().getClass(), ClassUtility.underscoreToCamelCase(wave.waveType().toString()))
+                    // Method defined with annotation
+                    : this.defaultMethod;
 
         } catch (final NoSuchMethodException e) {
 
-            LOGGER.info(CUSTOM_METHOD_NOT_FOUND, e.getMessage());
+            LOGGER.info(CUSTOM_METHOD_NOT_FOUND, e.getMessage(), e);
         }
         return customMethod;
     }
@@ -209,23 +210,24 @@ public class WaveHandler implements LinkMessages {
         parameterValues.add(wave);
 
         // If custom method exists we call it
-        if (method != null) {
+        if (method == null) {
 
+            // If no custom method was proviced, call the default method named 'processWave(wave)'
             try {
-
-                ClassUtility.callMethod(method, getWaveReady(), parameterValues.toArray());
-
-            } catch (final CoreException e) {
+                ClassUtility.getMethodByName(getWaveReady().getClass(), AbstractComponent.PROCESS_WAVE_METHOD_NAME).invoke(getWaveReady(), wave);
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
                 LOGGER.error(WAVE_DISPATCH_ERROR, e);
                 // Propagate the wave exception
                 throw new WaveException(wave, e);
             }
 
         } else {
-            // If no custom method was proviced, call the default method named 'processWave(wave)'
+
             try {
-                ClassUtility.getMethodByName(getWaveReady().getClass(), AbstractComponent.PROCESS_WAVE_METHOD_NAME).invoke(getWaveReady(), wave);
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
+
+                ClassUtility.callMethod(method, getWaveReady(), parameterValues.toArray());
+
+            } catch (final CoreException e) {
                 LOGGER.error(WAVE_DISPATCH_ERROR, e);
                 // Propagate the wave exception
                 throw new WaveException(wave, e);

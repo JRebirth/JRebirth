@@ -47,6 +47,7 @@ public class ClassKey<R> implements UniqueKey<R> {
      * Default Constructor.
      *
      * @param classField the class type of the registered component
+     * @param optionalData the optional data to be transmit to the component
      */
     public ClassKey(final Class<R> classField, final Object... optionalData) {
         super();

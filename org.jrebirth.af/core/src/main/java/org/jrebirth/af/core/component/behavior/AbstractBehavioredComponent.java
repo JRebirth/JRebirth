@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.link;
+package org.jrebirth.af.core.component.behavior;
 
 import org.jrebirth.af.api.annotation.SkipAnnotation;
 import org.jrebirth.af.api.component.behavior.Behavior;
@@ -23,7 +23,9 @@ import org.jrebirth.af.api.component.behavior.BehaviorData;
 import org.jrebirth.af.api.component.behavior.BehavioredComponent;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.core.component.basic.AbstractComponent;
 import org.jrebirth.af.core.key.Key;
+import org.jrebirth.af.core.link.LinkMessages;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.MultiMap;
 

@@ -72,7 +72,7 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="8" language="java" name="org.jrebirth.af.core.link.AbstractComponent" project="org.jrebirth.af.core" 
+  <class id="8" language="java" name="org.jrebirth.af.core.component.basic.AbstractComponent" project="org.jrebirth.af.core" 
     file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/link/AbstractComponent.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="207" y="773"/>    
@@ -82,7 +82,7 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="org.jrebirth.af.core.link.AbstractBehavioredComponent" 
+  <class id="9" language="java" name="org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent" 
     project="org.jrebirth.af.core" 
     file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/core/link/AbstractBehavioredComponent.java" binary="false" 
     corner="BOTTOM_RIGHT">    
