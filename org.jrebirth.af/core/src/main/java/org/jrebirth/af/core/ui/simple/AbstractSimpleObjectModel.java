@@ -17,13 +17,14 @@
  */
 package org.jrebirth.af.core.ui.simple;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 
-import org.jrebirth.af.api.exception.CoreException;
-import org.jrebirth.af.api.ui.Model;
-import org.jrebirth.af.api.ui.NullView;
-import org.jrebirth.af.api.ui.annotation.RootNodeClass;
-import org.jrebirth.af.api.ui.annotation.RootNodeId;
+import org.jrebirth.af.core.exception.CoreException;
+import org.jrebirth.af.core.ui.Model;
+import org.jrebirth.af.core.ui.NullView;
+import org.jrebirth.af.core.ui.annotation.RootNodeId;
 import org.jrebirth.af.core.ui.object.AbstractObjectModel;
 import org.jrebirth.af.core.util.ClassUtility;
 
@@ -64,15 +65,17 @@ public abstract class AbstractSimpleObjectModel<N extends Node, O extends Object
             getRootNode().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
         }
 
-        // Find the RootNodeClass annotation
-        final RootNodeClass rnc = ClassUtility.getLastClassAnnotation(this.getClass(), RootNodeClass.class);
-        if (rnc != null && rnc.value().length > 0) {
-            for (final String styleClass : rnc.value()) {
-                if (styleClass != null && !styleClass.isEmpty()) {
-                    getRootNode().getStyleClass().add(styleClass);
+        // Allow to release the model if the root business object doesn't exist anymore
+        getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
+
+            @Override
+            public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
+                if (newValue == null) {
+                    release();
                 }
             }
-        }
+
+        });
 
         // Set up the model view
         initSimpleView();
