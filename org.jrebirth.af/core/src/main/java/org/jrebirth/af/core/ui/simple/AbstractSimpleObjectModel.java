@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.ui.simple;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 
 import org.jrebirth.af.core.exception.CoreException;
@@ -62,6 +64,18 @@ public abstract class AbstractSimpleObjectModel<N extends Node, O extends Object
         if (rni != null) {
             getRootNode().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
         }
+
+        // Allow to release the model if the root business object doesn't exist anymore
+        getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
+
+            @Override
+            public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
+                if (newValue == null) {
+                    release();
+                }
+            }
+
+        });
 
         // Set up the model view
         initSimpleView();
