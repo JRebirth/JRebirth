@@ -3,13 +3,66 @@
 Release Notes
 ==============
 
-8.0.0 - [""]() Release 2014-09-22
+8.0.0 - ["Music Sounds Better With You"](https://www.youtube.com/watch?v=JdeMvR--ICk) Release 2015-01-14
 -----------------------------------------
 
-7.7.4 - ["Dark Horse"](https://www.youtube.com/watch?v=0KSOMA3QBU0) Release 2014-09-27
+The 8.x series requires Java 8.
+This version introduces some useful enhancements and new concepts like Behaviors and Modules.
+
+- Get a new fresh FXML instance per FXMLModel [#126](http://github.com/JRebirth/JRebirth/issues/issue/126)<br/>
+It's now possible to get 1000 times the same fxml to 1000 different nodes.<br />
+
+- Add Multimap [#118](http://github.com/JRebirth/JRebirth/issues/issue/118)<br/>
+Add a custom MultiMap implementation.<br />
+
+- Add Reference Command [#116](http://github.com/JRebirth/JRebirth/issues/issue/116)<br/>
+Allow to manage command with custom beans to chain them in an easy and convenient way (support all thread types).<br />
+
+- Add Behavior Map into Component [#115](http://github.com/JRebirth/JRebirth/issues/issue/115)<br/>
+Add Behavior objects to enhance any Component.<br />
+
+- Replace WaveBuilder by Smart Wave [#114](http://github.com/JRebirth/JRebirth/issues/issue/114)<br/>
+Improve internal API to be more convenient.<br />
+
+- Add @RootNodeClass [#112](http://github.com/JRebirth/JRebirth/issues/issue/112)<br/>
+Allow to use annotation to define CSS class.<br />
+
+- Fix method reference usage for event handler  [#111](http://github.com/JRebirth/JRebirth/issues/issue/111)<br/>
+This issue will not be fixed because it's a Java 8 bug, method should be overridden to force the rela object type.<br />
+
+- EventAdapter with default methods [#110](http://github.com/JRebirth/JRebirth/issues/issue/110)<br/>
+Use Java 8 default methods to be more convenient.<br />
+
+- EventTypeEnum should be moved into their own file [#109](http://github.com/JRebirth/JRebirth/issues/issue/109)<br/>
+Extract all enumeration to facilitate their reusability.<br />
+
+- OnKey annotation should handle several OnKey.KeyType value [#108](http://github.com/JRebirth/JRebirth/issues/issue/108)<br/>
+Fix an API issue reltaed to OnKey annotation.<br />
+
+- Allow Resource declaration into enum [#106](http://github.com/JRebirth/JRebirth/issues/issue/106)<br/>
+Re-introduce a nice way to declare resources using an Enumeration.<br />
+
+- Allow repeatable annotations [#104](http://github.com/JRebirth/JRebirth/issues/issue/104)<br/>
+Allow to repeat several annoation thanks to Java8 feature.<br />
+
+- Simplify Service Callback WaveType [#100](http://github.com/JRebirth/JRebirth/issues/issue/100)<br/>
+Service callback method is note more easy to use.<br />
+
+- Manage WaveData through MultiCommand stack [#75](http://github.com/JRebirth/JRebirth/issues/issue/75)<br/>
+WaveData are now copied throught the whole MultiCOmmand stack.<br />
+
+- Manage Multi Module [#34](http://github.com/JRebirth/JRebirth/issues/issue/34)<br/>
+Allow to use different jars as module that will define custom components (CSM).<br />
+
+- Replace InnerModel by InnerComponent [#8](http://github.com/JRebirth/JRebirth/issues/issue/8)<br/>
+InnerComponent are more generic than InnerModel and their lifecycle have been reveiwed.<br />
+
+
+
+7.7.5 - ["Dark Horse"](https://www.youtube.com/watch?v=0KSOMA3QBU0) Release 2014-10-13
 -----------------------------------------
 
-This version is a maintenance release that fixes a regression that throw an exception when trying to release some memory.
+This version is a maintenance release that fixes a regression (not entirely fixed by 7.7.4) that throw an exception when trying to release some memory.
 
 - ConcurrentModificationException On StackModel [#136](http://github.com/JRebirth/JRebirth/issues/issue/136)<br/>
 The error was thrown by StackModel component when trying to release some models, it was a fatal bad coding practice.....<br />
