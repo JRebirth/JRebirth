@@ -46,11 +46,12 @@
  		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>org.jrebirth.af:core:</include>
-				<include>org.jrebirth.af:presentation:</include>
-				<include>org.jrebirth.af:component:</include>
+				<include>org.jrebirth.af:api:*</include>
+				<include>org.jrebirth.af:core:*</include>
+				<include>org.jrebirth.af:presentation:*</include>
+				<include>org.jrebirth.af:component:*</include>
 				<include>org.jrebirth.af:transition:*</include>
-				<include>org.jrebirth.af:undoredo:*</include>
+				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
 			</includes>
 
 			<!-- Javadoc -->
@@ -70,6 +71,7 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
+				<include>org.jrebirth.af:api:*</include>
 				<include>org.jrebirth.af:core:*</include>
 				<include>org.jrebirth.af:component:*</include>
 				<include>org.jrebirth.af:presentation:*</include>
@@ -82,6 +84,11 @@
 						<useTransitiveDependencies>true</useTransitiveDependencies>
 						<useProjectArtifact>false</useProjectArtifact>
 						<outputDirectory>/libs</outputDirectory>
+						<excludes>
+							<exclude>processor*</exclude>
+							<exclude>modular*</exclude>
+							<exclude>core*</exclude>
+						</excludes>
 					</dependencySet>
 				</dependencySets>
 			</binaries>
@@ -93,7 +100,7 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>org:jrebirth.af:*</include>
+				<include>org:jrebirth:af:*</include>
 			</includes>
 
 			<!-- Root site -->
@@ -112,6 +119,7 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
+				<include>org.jrebirth.af:api:*</include>
 				<include>org.jrebirth.af:core:*</include>
 				<include>org.jrebirth.af:presentation:*</include>
 				<include>org.jrebirth.af:component:*</include>
@@ -135,6 +143,7 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
+				<include>org.jrebirth.af:api:*</include>
 				<include>org.jrebirth.af:core:*</include>
 				<include>org.jrebirth.af:presentation:*</include>
 				<include>org.jrebirth.af:component:*</include>
@@ -158,10 +167,11 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>org.jrebirth.af:core:*</include>
-				<include>org.jrebirth.af:presentation:*</include>
-				<include>org.jrebirth.af:component:*</include>
-				<include>org.jrebirth.af:transition:*</include>
+				<include>org.jrebirth.af:api:jar:*</include>
+				<include>org.jrebirth.af:core:jar:*</include>
+				<include>org.jrebirth.af:presentation:jar:*</include>
+				<include>org.jrebirth.af:component:jar:*</include>
+				<include>org.jrebirth.af:transition:jar:*</include>
 				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
 			</includes>
 
@@ -170,13 +180,14 @@
 				<exclude>*:sources</exclude>
 				<exclude>*:site</exclude>
 			</excludes>
+			
 			<sources>
 
 			</sources>
 
 			<!-- Jars -->
 			<binaries>
-				<!-- <outputFileNameMapping>${module.artifactId}</outputFileNameMapping> -->
+				<outputFileNameMapping>${module.groupId}.${module.artifactId}.${module.extension}</outputFileNameMapping>
 				<includeDependencies>false</includeDependencies>
 				<unpack>false</unpack>
 			</binaries>
