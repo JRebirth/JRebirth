@@ -204,7 +204,7 @@
 					that will be hold by the wave and so available into the command.
 				</p>
 				<macro name="include">
-					<param name="source" value="core/src/main/java/org/jrebirth/af/core/link/AbstractComponent.java" />
+					<param name="source" value="core/src/main/java/org/jrebirth/af/core/component/basic/AbstractComponent.java" />
 					<param name="snippet" value="re:callCommand" />
 				</macro>
 
