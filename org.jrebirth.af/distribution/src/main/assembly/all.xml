@@ -41,7 +41,105 @@
 	<moduleSets>
 
 		<!-- oooooooooo -->
+		<!-- LIBS -->
+		<!-- oooooooooo -->
+
+<!-- 		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org.jrebirth.af:api:*</include>
+				<include>org.jrebirth.af:core:*</include>
+				<include>org.jrebirth.af:component:*</include>
+				<include>org.jrebirth.af:presentation:*</include>
+				<include>org.jrebirth.af:transition:*</include>
+				<include>org.jrebirth.af:undoredo:*</include>
+			</includes>
+			<binaries>
+				<dependencySets>
+					<dependencySet>
+						<useTransitiveDependencies>true</useTransitiveDependencies>
+						<useProjectArtifact>false</useProjectArtifact>
+						<outputDirectory>/libs</outputDirectory>
+						<outputFileNameMapping>${module.groupId}.${module.artifactId}-${module.version}.${module.extension}</outputFileNameMapping>
+						<excludes>
+							<exclude>org.jrebirth.af:*</exclude>
+						</excludes>
+					</dependencySet>
+				</dependencySets>
+			</binaries>
+		</moduleSet> -->
+
+		<!-- oooooooooo -->
+		<!-- Root SITE -->
+		<!-- oooooooooo -->
+<!-- 		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org:jrebirth:af:*</include>
+			</includes>
+
+			Root site
+			<binaries>
+				<outputFileNameMapping>site/${module.artifactId}</outputFileNameMapping>
+				<attachmentClassifier>site</attachmentClassifier>
+				<includeDependencies>false</includeDependencies>
+				<outputDirectory>site/</outputDirectory>
+				<unpack>true</unpack>
+			</binaries>
+		</moduleSet> -->
+
+		<!-- oooooooooo -->
+		<!-- SITE -->
+		<!-- oooooooooo -->
+ 		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org.jrebirth.af:api:*:site</include>
+				<include>org.jrebirth.af:core:*:site</include>
+				<include>org.jrebirth.af:presentation:*:site</include>
+				<include>org.jrebirth.af:component:*:site</include>
+				<include>org.jrebirth.af:transition:*:site</include>
+				<include>org.jrebirth.af:undoredo:*:site</include>
+			</includes>
+
+			<!-- Site -->
+			<binaries>
+				<!-- <outputFileNameMapping>site/${module.artifactId}</outputFileNameMapping> -->
+				<attachmentClassifier>site</attachmentClassifier>
+				<includeDependencies>false</includeDependencies>
+				<outputDirectory>site/${module.artifactId}</outputDirectory>
+				<unpack>true</unpack>
+			</binaries>
+		</moduleSet>
+ 
+ 		<!-- oooooooooo -->
 		<!-- APIDOCS -->
+		<!-- oooooooooo -->
+   		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>org.jrebirth.af:api:*</include>
+				<include>org.jrebirth.af:core:*</include>
+				<include>org.jrebirth.af:presentation:*</include>
+				<include>org.jrebirth.af:component:*</include>
+				<include>org.jrebirth.af:transition:*</include>
+				<include>org.jrebirth.af:undoredo:*</include>
+				<include>org.jrebirth.af:sample:*</include>
+				<include>org.jrebirth.af:modular:*</include>
+			</includes>
+
+			<!-- Javadoc -->
+			<binaries>
+				<!-- <outputFileNameMapping>apidocs/${module.artifactId}</outputFileNameMapping> -->
+				<attachmentClassifier>javadoc</attachmentClassifier>
+				<includeDependencies>false</includeDependencies>
+				<outputDirectory>Apidocs/${module.artifactId}</outputDirectory>
+				<unpack>true</unpack>
+			</binaries>
+		</moduleSet>
+		
+		<!-- oooooooooo -->
+		<!-- SOURCES -->
 		<!-- oooooooooo -->
  		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
@@ -51,120 +149,23 @@
 				<include>org.jrebirth.af:presentation:*</include>
 				<include>org.jrebirth.af:component:*</include>
 				<include>org.jrebirth.af:transition:*</include>
-				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
-			</includes>
-
-			<!-- Javadoc -->
-			<binaries>
-				<outputFileNameMapping>apidocs/${module.artifactId}</outputFileNameMapping>
-				<attachmentClassifier>javadoc</attachmentClassifier>
-				<includeDependencies>false</includeDependencies>
-				<outputDirectory>apidocs/${module.artifactId}</outputDirectory>
-				<unpack>true</unpack>
-			</binaries>
-		</moduleSet>
-
-		<!-- oooooooooo -->
-		<!-- LIBS -->
-		<!-- oooooooooo -->
-
-		<moduleSet>
-			<useAllReactorProjects>true</useAllReactorProjects>
-			<includes>
-				<include>org.jrebirth.af:api:*</include>
-				<include>org.jrebirth.af:core:*</include>
-				<include>org.jrebirth.af:component:*</include>
-				<include>org.jrebirth.af:presentation:*</include>
-				<include>org.jrebirth.af:transition:*</include>
-				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
-			</includes>
-			<binaries>
-				<dependencySets>
-					<dependencySet>
-						<useTransitiveDependencies>true</useTransitiveDependencies>
-						<useProjectArtifact>false</useProjectArtifact>
-						<outputDirectory>/libs</outputDirectory>
-						<excludes>
-							<exclude>processor*</exclude>
-							<exclude>modular*</exclude>
-							<exclude>core*</exclude>
-						</excludes>
-					</dependencySet>
-				</dependencySets>
-			</binaries>
-		</moduleSet>
-
-		<!-- oooooooooo -->
-		<!-- Root SITE -->
-		<!-- oooooooooo -->
-		<moduleSet>
-			<useAllReactorProjects>true</useAllReactorProjects>
-			<includes>
-				<include>org:jrebirth:af:*</include>
-			</includes>
-
-			<!-- Root site -->
-			<binaries>
-				<!-- <outputFileNameMapping>site/${module.artifactId}</outputFileNameMapping> -->
-				<attachmentClassifier>site</attachmentClassifier>
-				<includeDependencies>false</includeDependencies>
-				<outputDirectory>site</outputDirectory>
-				<unpack>true</unpack>
-			</binaries>
-		</moduleSet>
-
-		<!-- oooooooooo -->
-		<!-- SITE -->
-		<!-- oooooooooo -->
-		<moduleSet>
-			<useAllReactorProjects>true</useAllReactorProjects>
-			<includes>
-				<include>org.jrebirth.af:api:*</include>
-				<include>org.jrebirth.af:core:*</include>
-				<include>org.jrebirth.af:presentation:*</include>
-				<include>org.jrebirth.af:component:*</include>
-				<include>org.jrebirth.af:transition:*</include>
-				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
-			</includes>
-
-			<!-- Javadoc -->
-			<binaries>
-				<!-- <outputFileNameMapping>site/${module.artifactId}</outputFileNameMapping> -->
-				<attachmentClassifier>site</attachmentClassifier>
-				<includeDependencies>false</includeDependencies>
-				<outputDirectory>site/${module.artifactId}</outputDirectory>
-				<unpack>true</unpack>
-			</binaries>
-		</moduleSet>
-
-		<!-- oooooooooo -->
-		<!-- SOURCES -->
-		<!-- oooooooooo -->
-		<moduleSet>
-			<useAllReactorProjects>true</useAllReactorProjects>
-			<includes>
-				<include>org.jrebirth.af:api:*</include>
-				<include>org.jrebirth.af:core:*</include>
-				<include>org.jrebirth.af:presentation:*</include>
-				<include>org.jrebirth.af:component:*</include>
-				<include>org.jrebirth.af:transition:*</include>
-				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
+				<include>org.jrebirth.af:undoredo:*</include>
 			</includes>
 
 			<!-- Sources -->
 			<binaries>
-				<!-- <outputFileNameMapping>sources/${module.artifactId}</outputFileNameMapping> -->
+				<!-- <outputFileNameMapping>${module.groupId}.${module.artifactId}-${module.version}-${module.classifier}.${module.extension}</outputFileNameMapping> -->
 				<attachmentClassifier>sources</attachmentClassifier>
 				<includeDependencies>false</includeDependencies>
-				<outputDirectory>sources</outputDirectory>
-				<unpack>false</unpack>
+				<outputDirectory>Sources/${module.artifactId}</outputDirectory>
+				<unpack>true</unpack>
 			</binaries>
 		</moduleSet>
 
 		<!-- oooooooooo -->
 		<!-- JARS -->
 		<!-- oooooooooo -->
-		<moduleSet>
+ 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
 				<include>org.jrebirth.af:api:jar:*</include>
@@ -172,7 +173,7 @@
 				<include>org.jrebirth.af:presentation:jar:*</include>
 				<include>org.jrebirth.af:component:jar:*</include>
 				<include>org.jrebirth.af:transition:jar:*</include>
-				<!-- <include>org.jrebirth.af:undoredo:*</include> -->
+				<include>org.jrebirth.af:undoredo:*</include>
 			</includes>
 
 			<excludes>
@@ -181,19 +182,14 @@
 				<exclude>*:site</exclude>
 			</excludes>
 			
-			<sources>
-
-			</sources>
-
 			<!-- Jars -->
 			<binaries>
-				<outputFileNameMapping>${module.groupId}.${module.artifactId}.${module.extension}</outputFileNameMapping>
+				<outputFileNameMapping>${module.groupId}.${module.artifactId}-${module.version}.${module.extension}</outputFileNameMapping>
 				<includeDependencies>false</includeDependencies>
 				<unpack>false</unpack>
 			</binaries>
 		</moduleSet>
-
-
+<!-- 
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
@@ -202,7 +198,7 @@
 			<excludes>
 				<exclude>*:jar:*</exclude>
 			</excludes>
-		</moduleSet>
+		</moduleSet> -->
 	</moduleSets>
 
 </assembly>

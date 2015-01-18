@@ -102,6 +102,7 @@
                            value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java"/>
                     <param name="snippet" value="re:DO_LOAD_EVENTS ="/>
                     <param name="snippet-start-offset" value="1"/>
+                    <param name="snippet-end-offset" value="3"/>
                 </macro>
 
                 <p>This

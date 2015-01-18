@@ -37,7 +37,6 @@
 		<module>sample</module>
 		<module>presentation</module>
 		<module>transition</module>
-		<module>distribution</module>
 		<!-- <module>form</module> -->
 		<module>fxform</module>
 		<module>undoredo</module>
@@ -46,6 +45,7 @@
 		<module>processor</module>
 		<module>modular</module>
 		<module>security</module>
+		<module>distribution</module>
 	</modules>
 
 	<issueManagement>
