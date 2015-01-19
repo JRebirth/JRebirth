@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0
+http://maven.apache.org/xsd/decoration-1.3.0.xsd">
+	<version position="right" />
+	<publishDate position="right" />
+	<body>
+		<head>
+			<meta name="keywords" content="JRebirth, JavaFX, Application, Framework, WCS, MVC, Maven" />
+		</head>
+
+		<breadcrumbs>
+			<item name="JRebirth" href="../index.html" />
+			<item name="${project.name}" href="index.html" />
+		</breadcrumbs>
+
+		<menu name="General">
+			<item name="About" href="index.html" />
+		</menu>
+
+		<menu ref="parent" />
+
+		<menu ref="modules" />
+
+		<menu ref="reports" />
+
+		<menu name="Resources">
+			<item name="Project Website" href="http://www.jrebirth.org" />
+			<item name="Latest Sources" href="${project.scm.url}" />
+			<item name="Built with Jenkins" href="${project.ciManagement.url}/lastSuccessfulBuild/" />
+			<item name="QA'ed by Sonar" href="${sonar.host.url}/dashboard/index/1" />
+		</menu>
+	</body>
+
+	<bannerLeft>
+		<alt>${project.name}</alt>
+		<src>/images/JRebirth_Logo_80px.png</src>
+	</bannerLeft>
+
+	<skin>
+		<groupId>org.jrebirth.site</groupId>
+		<artifactId>jrebirth-skin</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</skin>
+</project> 

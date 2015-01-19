@@ -6,10 +6,11 @@
 		<version>8.0.1-SNAPSHOT</version>
 	</parent>
 
-
 	<groupId>org.jrebirth.af</groupId>
 	<artifactId>processor</artifactId>
 
+	<name>Processor</name>
+	<description>Processor used to create Module.xml file</description>
 
 	<build>
 		<plugins>
