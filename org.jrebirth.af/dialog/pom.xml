@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.jrebirth</groupId>
+		<artifactId>af</artifactId>
+		<version>8.0.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.jrebirth.af</groupId>
+	<artifactId>dialog</artifactId>
+
+	<name>JRAF Dialog</name>
+	<description>Provide classes to manage dialog opening.</description>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.controlsfx</groupId>
+			<artifactId>openjfx-dialogs</artifactId>
+			<version>1.0.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.daytron</groupId>
+			<artifactId>SimpleDialogFX</artifactId>
+			<version>2.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>core</artifactId>
+			<version>8.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>processor</artifactId>
+			<version>8.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+</project>

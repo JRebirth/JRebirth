@@ -38,6 +38,7 @@
 		<module>presentation</module>
 		<module>transition</module>
 		<!-- <module>form</module> -->
+		<module>dialog</module>
 		<module>fxform</module>
 		<module>undoredo</module>
 		<module>showcase</module>
