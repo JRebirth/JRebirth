@@ -21,6 +21,7 @@ import java.lang.reflect.Method;
 
 import org.jrebirth.af.api.facade.FacadeReady;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveType;
@@ -85,6 +86,18 @@ public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
      * @param wave the wave to send
      */
     void sendWave(final Wave wave);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param waveType the type of wave to send
+     * @param waveBean the wave bean
+     *
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
+     */
+    <WB extends WaveBean> Wave sendWave(final WaveType waveType, final WB waveBean);
 
     /**
      * Send a wave to the notifier.

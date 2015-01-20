@@ -60,7 +60,6 @@ import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.ObjectUtility;
-import org.jrebirth.af.core.wave.WaveTypeBase;
 
 /**
  *
@@ -215,6 +214,14 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      * {@inheritDoc}
      */
     @Override
+    public final <WB extends WaveBean> Wave sendWave(final WaveType waveType, final WB waveBean) {
+        return sendWaveIntoJit(createWave(WaveGroup.UNDEFINED, waveType, (Class<?>) null, waveBean));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public final Wave sendWave(final WaveType waveType, final WaveData<?>... waveData) {
         return sendWaveIntoJit(createWave(WaveGroup.UNDEFINED, waveType, null, waveData));
     }
@@ -310,7 +317,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      *
      * @return the wave built
      */
-    private Wave createWave(final WaveGroup waveGroup, final WaveTypeBase waveType, final Class<?> componentClass, final WaveBean waveBean) {
+    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveBean waveBean) {
 
         final Wave wave = wave()
                                 .waveGroup(waveGroup)
