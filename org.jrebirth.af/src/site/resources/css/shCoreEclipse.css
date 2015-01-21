@@ -185,7 +185,7 @@
   color: black !important;
 }
 .syntaxhighlighter.printing .comments, .syntaxhighlighter.printing .comments a {
-  color: #008200 !important;
+  color: #3F7F5F !important;
 }
 .syntaxhighlighter.printing .string, .syntaxhighlighter.printing .string a {
   color: blue !important;
@@ -195,7 +195,7 @@
   font-weight: bold !important;
 }
 .syntaxhighlighter.printing .preprocessor {
-  color: gray !important;
+  color: #7F7F9F !important;
 }
 .syntaxhighlighter.printing .variable {
   color: #aa7700 !important;
@@ -285,7 +285,7 @@
   color: black !important;
 }
 .syntaxhighlighter .comments, .syntaxhighlighter .comments a {
-  color: #3f5fbf !important;
+  color: #3F7F5F !important;
 }
 .syntaxhighlighter .string, .syntaxhighlighter .string a {
   color: #2a00ff !important;
@@ -294,7 +294,7 @@
   color: #7f0055 !important;
 }
 .syntaxhighlighter .preprocessor {
-  color: #646464 !important;
+  color: #7F7F9F !important;
 }
 .syntaxhighlighter .variable {
   color: #aa7700 !important;

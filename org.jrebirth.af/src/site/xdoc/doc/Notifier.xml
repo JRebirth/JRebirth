@@ -63,7 +63,7 @@
 
 
 			<subsection name="Notifier aim">
-				<p>JRebirth have got its own Notification Engine to allow each component to communicate with each other.</p>
+				<p>JRebirth has got its own Notification Engine to allow each component to communicate with each other.</p>
 				<p>All these communications are processed into a dedicated thread.</p>
 				<p>The notification engine uses custom objects to transport data : the Waves.</p>
 				<p>

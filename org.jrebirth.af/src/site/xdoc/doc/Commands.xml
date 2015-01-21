@@ -155,8 +155,8 @@
 				<p>
 					You just need to call the
 					<strong>getCommand</strong>
-					method to build an instance. You must provide the Command
-					Class and its unique key (if required).
+					method to build an instance. You can provide either the Command
+					Class <b>or</b> its unique key (if required).
 				</p>
 
 				<!-- <macro name="include"> <param name="source" value="core/src/main/java/org/jrebirth/af/core/facade/AbstractFacade.java" /> <param name="snippet" value="re:E 
@@ -169,9 +169,11 @@
 
 				<p>
 					Once you have retrieved your command, you can store it with a strong reference to avoid GC collecting it. Your command life will depend on the
-					lifetime of your strong reference. Thus you will be able to configure directly your command properties. Finally to trigger it you must call its
+					lifetime of your strong reference. Thus you will be able to configure directly your command properties.</p>
+				<p> Finally to trigger it you must call its
 					<strong>run()</strong>
 					method.
+					The <a class="apiMethod" href="../apidocs/org/jrebirth/af/core/command/AbstractBaseCommand.html#perform--">perform</a> method of the command will be executed into the <a href="Thread.html#Threading_overview">Thread Type</a> chosen (JAT, JIT, JTP). 
 				</p>
 
 				<macro name="include">
@@ -215,7 +217,7 @@
 					Controllers provide a convenient method named
 					<em>void linkCommand(Node, EventType&lt;E&gt;, Class&lt;? extends Command&gt;, WaveData&lt;?&gt;...)</em>
 				</p>
-				<p>This method useful to declare with only one line of code the trigger of a command when a prefined JavaFX event occured on a node belonging to
+				<p>This method useful to declare with only one line of code the call of a command triggered when the chosen JavaFX event occurred on a node belonging to
 					the View.
 				</p>
 				<p>It's also possible to add a callback function, in example to manage double-click detection (see <strong>LinkedCallback</strong>).</p>
@@ -360,7 +362,7 @@
 					<param name="snippet" value="re:extends DefaultCommand" />
 				</macro>
 				<p>
-					<em>WaveListener implementation is optional</em>
+					<em>(implementation of WaveListener is optional)</em>
 				</p>
 
 				<p>
@@ -392,7 +394,7 @@
 			<subsection name="Component Key" id="key">
 				<p>
 					The component key as described in the
-					<a href="Facade.html">Facade page</a>
+					<a href="Facades.html">Facade page</a>
 					allow storing unique commands.
 				</p>
 				<p>All objects provided as key part will be serialized (toString call) to build the key.</p>
@@ -422,7 +424,7 @@
 				<p>
 					A
 					<strong>WaveBean</strong>
-					is a Java Bean that allow carrying a lot of names properties into a
+					is a Java Bean that allow carrying a lot of named properties into a
 					<strong>Wave</strong>
 					.
 				</p>
