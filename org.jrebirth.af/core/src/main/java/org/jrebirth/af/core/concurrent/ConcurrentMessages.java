@@ -45,10 +45,10 @@ public interface ConcurrentMessages extends MessageContainer {
     /** "An exception occurred during JRebirth BootUp" . */
     MessageItem BOOT_UP_ERROR = create(new LogMessage("jrebirth.concurrent.bootUpError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
 
-    /** "An exception occured into the JRebirth Thread". */
+    /** "An exception occurred into the JRebirth Thread". */
     MessageItem JIT_ERROR = create(new LogMessage("jrebirth.concurrent.jitError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
 
-    /** "An error occurred while shuting down the application ". */
+    /** "An error occurred while shutting down the application ". */
     MessageItem SHUTDOWN_ERROR = create(new LogMessage("jrebirth.concurrent.shutdownError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
 
     /** AbstractJrbRunnable. */

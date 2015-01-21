@@ -130,15 +130,4 @@ public interface Facade<R extends FacadeReady<R>> {
      */
     <E extends R> List<E> retrieveAll(UniqueKey<E> uniqueKey);
 
-    // /**
-    // * Build an unique key.
-    // *
-    // * @param clazz the class type of the component
-    // * @param keyPart all complementary part of the key
-    // *
-    // * @return the unique key for the given class and keyParts array
-    // *
-    // * @param <E> The type of the object registered by this ClassKey
-    // */
-    // <E extends R> UniqueKey<E> buildKey(final Class<E> clazz, final Object... keyPart);
 }
