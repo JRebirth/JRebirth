@@ -18,6 +18,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import org.jrebirth.af.modular.model.Component;
 import org.jrebirth.af.modular.model.Module;
 import org.jrebirth.af.modular.model.ObjectFactory;
 import org.jrebirth.af.modular.model.Registration;
@@ -25,9 +26,9 @@ import org.jrebirth.af.modular.model.RegistrationEntry;
 
 public class ModuleConfigFileParser {
 
-    public static List<javafx.util.Pair<Class<?>, Class<?>>> parseFile(final String fileName) {
+    public static Module parseFile(final String fileName) {
 
-        final List<javafx.util.Pair<Class<?>, Class<?>>> pairList = new ArrayList<javafx.util.Pair<Class<?>, Class<?>>>();
+        Module module = null;
 
         final File file = new File(fileName);
 
@@ -42,28 +43,58 @@ public class ModuleConfigFileParser {
             final XMLStreamReader xsr = XMLInputFactory.newInstance().createXMLStreamReader(in);
             Object o;
             o = unmarshaller.unmarshal(xsr);
-            final Module module = Module.class.cast(JAXBElement.class.cast(o).getValue());
-
-            if (module.getRegistrations() != null) {
-                for (final Registration rl : module.getRegistrations().getRegistration()) {
-
-                    if (rl.getRegistrationEntries() != null) {
-                        for (final RegistrationEntry re : rl.getRegistrationEntries().getRegistrationEntry()) {
-
-                            try {
-                                pairList.add(new Pair<Class<?>, Class<?>>(getClassObject(rl.getClazz()), getClassObject(re.getClazz())));
-                            } catch (final ClassNotFoundException e) {
-                            }
-                        }
-                    }
-                }
-            }
+            module = Module.class.cast(JAXBElement.class.cast(o).getValue());
 
         } catch (JAXBException | FileNotFoundException | XMLStreamException | FactoryConfigurationError e) {
             e.printStackTrace();
         }
 
+        return module;
+    }
+
+    public static List<javafx.util.Pair<Class<?>, Class<?>>> getRegistrations(final String fileName) {
+
+        final Module module = parseFile(fileName);
+
+        final List<javafx.util.Pair<Class<?>, Class<?>>> pairList = new ArrayList<javafx.util.Pair<Class<?>, Class<?>>>();
+
+        if (module.getRegistrations() != null) {
+            for (final Registration rl : module.getRegistrations().getRegistration()) {
+
+                if (rl.getRegistrationEntries() != null) {
+                    for (final RegistrationEntry re : rl.getRegistrationEntries().getRegistrationEntry()) {
+
+                        try {
+                            pairList.add(new Pair<Class<?>, Class<?>>(getClassObject(rl.getClazz()), getClassObject(re.getClazz())));
+                        } catch (final ClassNotFoundException e) {
+                        }
+                    }
+                }
+            }
+        }
         return pairList;
+    }
+
+    public static List<Class<?>> getWarmUp(final String fileName) {
+
+        final Module module = parseFile(fileName);
+
+        final List<Class<?>> warmUpList = new ArrayList<Class<?>>();
+
+        if (module.getClass() != null) {
+            for (final Component component : module.getWarmUp().getComponent()) {
+
+                if (component.getClazz() != null) {
+                    try {
+                        warmUpList.add(Class.forName(component.getClazz()));
+                    } catch (final ClassNotFoundException e) {
+                        // Ignore
+                        // e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return warmUpList;
     }
 
     private static Class<?> getClassObject(final String className) throws ClassNotFoundException {

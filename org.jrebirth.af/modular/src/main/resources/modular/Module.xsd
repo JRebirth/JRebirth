@@ -8,9 +8,21 @@
 
 		<all>
 			<element name="name" minOccurs="0" maxOccurs="1"></element>
-
+			<element name="warmUp" type="tns:WarmUpList" minOccurs="0" maxOccurs="1"></element>
 			<element name="registrations" type="tns:RegistrationList" minOccurs="0" maxOccurs="1"></element>
 		</all>
+	</complexType>
+
+	<complexType name="WarmUpList">
+		<sequence>
+			<element name="component" type="tns:Component" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Component">
+		
+		<attribute name="class" type="string" use="required" />
+		
 	</complexType>
 
 	<complexType name="RegistrationList">

@@ -32,12 +32,14 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
+import org.jrebirth.af.modular.model.Component;
 import org.jrebirth.af.modular.model.Module;
 import org.jrebirth.af.modular.model.ObjectFactory;
 import org.jrebirth.af.modular.model.Registration;
 import org.jrebirth.af.modular.model.RegistrationEntry;
 import org.jrebirth.af.processor.annotation.Register;
 import org.jrebirth.af.processor.annotation.RegistrationPoint;
+import org.jrebirth.af.processor.annotation.WarmUp;
 
 /**
  *
@@ -88,6 +90,7 @@ public class ComponentProcessor extends AbstractProcessor {
 
         final Elements elements = this.processingEnv.getElementUtils();
 
+        final Set<? extends Element> warmUps = roundEnv.getElementsAnnotatedWith(WarmUp.class);
         final Set<? extends Element> registrationPoints = roundEnv.getElementsAnnotatedWith(RegistrationPoint.class);
         final Set<? extends Element> registrations = roundEnv.getElementsAnnotatedWith(Register.class);
 
@@ -97,6 +100,21 @@ public class ComponentProcessor extends AbstractProcessor {
             module = createModule();
         }
 
+        for (final Element element : warmUps) {
+
+            final WarmUp warmUp = element.getAnnotation(WarmUp.class);
+            // Only managed Component
+            if (warmUp != null /* && element.getKind().getClass().isAssignableFrom(AbstractComponent.class) */) {
+
+                final Component c = this.factory.createComponent();
+                c.setClazz(getClassName(element));
+
+                module.getWarmUp().getComponent().add(c);
+
+                // processingEnv.getMessager().printMessage(Kind.MANDATORY_WARNING, r.toString(), element);
+            }
+
+        }
         //
         for (final Element element : registrationPoints) {
 
@@ -204,6 +222,7 @@ public class ComponentProcessor extends AbstractProcessor {
     private Module createModule() {
         final Module module = this.factory.createModule();
 
+        module.setWarmUp(this.factory.createWarmUpList());
         module.setRegistrations(this.factory.createRegistrationList());
 
         //

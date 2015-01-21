@@ -38,12 +38,15 @@ import javafx.util.Pair;
 import org.jrebirth.af.api.application.Configuration;
 import org.jrebirth.af.api.application.JRebirthApplication;
 import org.jrebirth.af.api.application.Localized;
+import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.resource.ResourceItem;
 import org.jrebirth.af.api.resource.style.StyleSheetItem;
+import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
@@ -414,7 +417,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             // LOGGER.info(JRebirthMarkers.MODULE, "{} Module.xml file{} found.", list.size(), list.size() > 1 ? "s" : "");
 
             for (final String moduleFile : list) {
-                final List<Pair<Class<?>, Class<?>>> pairList = ModuleConfigFileParser.parseFile(moduleFile);
+                final List<Pair<Class<?>, Class<?>>> pairList = ModuleConfigFileParser.getRegistrations(moduleFile);
                 for (final Pair<Class<?>, Class<?>> pair : pairList) {
 
                     final Class<? extends Component<?>> interfaceClass = (Class<? extends Component<?>>) pair.getKey();
@@ -422,7 +425,17 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
                     JRebirthThread.getThread().getFacade().getComponentFactory().register(interfaceClass, implClass);
                 }
+                for (final Class<?> componentClass : ModuleConfigFileParser.getWarmUp(moduleFile)) {
+                    if (Command.class.isAssignableFrom(componentClass)) {
+                        JRebirthThread.getThread().getFacade().getCommandFacade().retrieve((Class<Command>) componentClass);
+                    } else if (Service.class.isAssignableFrom(componentClass)) {
+                        JRebirthThread.getThread().getFacade().getServiceFacade().retrieve((Class<Service>) componentClass);
+                    } else if (Model.class.isAssignableFrom(componentClass)) {
+                        JRebirthThread.getThread().getFacade().getUiFacade().retrieve((Class<Model>) componentClass);
+                    }
+                }
             }
+
         }
     }
 
