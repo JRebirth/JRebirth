@@ -41,10 +41,7 @@
 			<p>This application has been shown during Eclipse Day Toulouse 2012.</p>
 			<p>
 				Require
-				<a href="http://www.oracle.com/technetwork/java/javafx/downloads/index.html">Java 7 with JavaFX 2 Runtime</a>
-				(available for windows,
-				<a href="http://www.oracle.com/technetwork/java/javafx/downloads/devpreview-1429449.html">mac and linux since 2.1</a>
-				)
+				<a href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">Java 8 Runtime</a>.
 			</p>
 			<p>
 				<strong>Launch by Java Webstart:</strong>
