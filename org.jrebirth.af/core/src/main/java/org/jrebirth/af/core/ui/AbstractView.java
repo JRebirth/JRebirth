@@ -153,6 +153,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             }
 
         });
+
     }
 
     /**

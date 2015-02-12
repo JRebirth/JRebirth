@@ -29,10 +29,18 @@ public enum RunType {
     /** Run into Java Application Thread. */
     JAT,
 
+    JAT_SYNC,
+
     /** Run into JRebirth Internal Thread. */
     JIT,
 
+    JIT_SYNC,
+
     /** Queue and run into the JRebirth Thread Pool. */
-    JTP;
+    JTP,
+
+    JTP_SYNC,
+
+    SAME;
 
 }

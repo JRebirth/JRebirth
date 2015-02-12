@@ -51,13 +51,21 @@ public final class JRebirth {
             case JAT:
                 runIntoJAT(runnable);
                 break;
+            case JAT_SYNC:
+                runIntoJATSync(runnable);// TODO timeout
+                break;
             case JIT:
                 runIntoJIT(runnable);
+                break;
+            case JIT_SYNC:
+                runIntoJITSync(runnable);// TODO timeout
                 break;
             case JTP:
                 runIntoJTP(runnable);
                 break;
+            case SAME:
             default:
+                runnable.run();
         }
     }
 
@@ -74,6 +82,26 @@ public final class JRebirth {
             // The runnable will be run into the JAT during the next round
             Platform.runLater(runnable);
         }
+    }
+
+    /**
+     * Run the task into the JavaFX Application Thread [JAT].
+     *
+     * @param runnable the task to run
+     */
+    public static void runIntoJATSync(final JRebirthRunnable runnable, final long... timeout) {
+        final SyncRunnable sync = new SyncRunnable(runnable);
+
+        if (Platform.isFxApplicationThread()) {
+            // We are into a JAT so just run it synchronously
+            sync.run();
+        } else {
+            // The runnable will be run into the JAT during the next round
+            Platform.runLater(sync);
+        }
+
+        // Wait the end of the runnable execution
+        sync.waitEnd(timeout);
     }
 
     /**
@@ -103,6 +131,25 @@ public final class JRebirth {
     }
 
     /**
+     * Run the task into the JavaFX Application Thread [JAT].
+     *
+     * @param runnable the task to run
+     */
+    public static void runIntoJITSync(final JRebirthRunnable runnable, final long... timeout) {
+        final SyncRunnable sync = new SyncRunnable(runnable);
+
+        if (JRebirth.isJIT()) {
+            // We are into a JIT so just run it synchronously
+            sync.run();
+        } else {
+            // The runnable will be run into the JIT during the next round
+            JRebirthThread.getThread().runLater(sync);
+        }
+        // Wait the end of the runnable execution
+        sync.waitEnd(timeout);
+    }
+
+    /**
      * Run into the JRebirth Thread Pool [JTP].
      *
      * Be careful this method can be called through any thread.
@@ -117,6 +164,27 @@ public final class JRebirth {
         // The runnable will be run into a JTP slot during the next round
         JRebirthThread.getThread().runIntoJTP(runnable);
         // }
+    }
+
+    /**
+     * Run into the JRebirth Thread Pool [JTP].
+     *
+     * Be careful this method can be called through any thread.
+     *
+     * @param runnable the task to run
+     */
+    public static void runIntoJTPSync(final JRebirthRunnable runnable, final long... timeout) {
+        final SyncRunnable sync = new SyncRunnable(runnable);
+
+        if (JRebirth.isJTPSlot()) {
+            // We are into a JTP slot so just run it synchronously
+            sync.run();
+        } else {
+            // The runnable will be run into the JTP slot during the next round
+            JRebirthThread.getThread().runIntoJTP(sync);
+        }
+        // Wait the end of the runnable execution
+        sync.waitEnd(timeout);
     }
 
     /**

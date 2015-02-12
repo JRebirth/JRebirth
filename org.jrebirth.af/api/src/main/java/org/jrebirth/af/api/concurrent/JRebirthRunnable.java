@@ -24,6 +24,7 @@ import java.time.Instant;
  *
  * @author Sébastien Bordes
  */
+@FunctionalInterface
 public interface JRebirthRunnable extends Runnable {
 
     /**
@@ -31,12 +32,17 @@ public interface JRebirthRunnable extends Runnable {
      *
      * @return the runnable priority
      */
-    RunnablePriority getPriority();
+    default RunnablePriority getPriority() {
+        return RunnablePriority.Normal;
+    }
 
     /**
      * Return the creation time.
      *
      * @return the creation time in milliseconds
      */
-    Instant getCreationTime();
+    default Instant getCreationTime() {
+        return Instant.now();
+    }
+
 }
