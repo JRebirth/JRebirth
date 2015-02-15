@@ -17,34 +17,147 @@
 
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/homepage.css" media="all" />
+		
+		
+		<!-- Important Owl stylesheet -->
+	    <link rel="stylesheet" href="owl-carousel/owl.carousel.css" />
+	     
+	    <!-- Default Theme -->
+	    <link rel="stylesheet" href="owl-carousel/owl.theme.css" />
+	     
+	    <!-- jQuery 1.7+ -->
+	    <script src="js/jquery-1.9.1.min.js"></script>
+	     
+	    <!-- Include js plugin -->
+	    <script src="owl-carousel/owl.carousel.js"></script>
+	    
+	    <script src="js/carousel.js"></script>
+		
 	</head>
 
 	<body>
 
-		<div id="catcherTitle">
-			Outstanding
-			<br />
-			Application
-			<br />
-			Framework
+    <div id="home_catcher" class="owl-carousel owl-theme">
+     
+	    <div class="item">
+    		<div class="catchLeft">
+				<h1 class="bigBlue">Outstanding
+				<br />
+				Application
+				<br />
+				Framework
+				</h1>
+			</div>
+			<div class="catchRight">
+				<p class="mediumOrange">
+				RIA Pattern providing perfect
+				<a title="Separation of Concerns" href="http://en.wikipedia.org/wiki/Separation_of_concerns" target="_blank">SoC</a>
+				<br />
+				Simplify Multithreaded Development
+				<br />
+				Built according to
+				<a title="KISS principle" href="http://en.wikipedia.org/wiki/KISS_principle" target="_blank">KISS principle</a>
+				<br />
+				Lightweight (lower than 110kb with Pack200)
+				<br />
+				<a title="Apache 2 Licensed" href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Free</a>
+				&amp;
+				<a title="Open Source Repository" href="https://github.com/JRebirth/JRebirth" target="_blank">Open Source</a>
+				Library
+				<br /> <!-- <a href="#" title="Click for more info">More Info</a> -->
+				</p>
+			</div>
 		</div>
-		<div id="catcherContent">
-			RIA Pattern providing perfect
-			<a title="Separation of Concerns" href="http://en.wikipedia.org/wiki/Separation_of_concerns" target="_blank">SoC</a>
-			<br />
-			Simplify Multithreaded Development
-			<br />
-			Built according to
-			<a title="KISS principle" href="http://en.wikipedia.org/wiki/KISS_principle" target="_blank">KISS principle</a>
-			<br />
-			Lightweight (lower than 110kb with Pack200)
-			<br />
-			<a title="Apache 2 Licensed" href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Free</a>
-			&amp;
-			<a title="Open Source Repository" href="https://github.com/JRebirth/JRebirth" target="_blank">Open Source</a>
-			Library
-			<br /> <!-- <a href="#" title="Click for more info">More Info</a> -->
+    	
+    	<div class="item">
+			<div class="catchLeft">
+				<h1 class="bigBlue">
+				No More Lags
+				<br />
+				No More Freezes
+				</h1>
+			</div>
+			<div class="catchRight">
+				<p class="mediumOrange">
+					Manage all multithreading concerns efficiently without pain
+					<br />
+					UI tasks are automatically handled into UI thread
+					<br />
+					Long tasks are performed Thread Pools
+					<br />
+					Event Bus has its own thread
+				</p>
+			</div>
 		</div>
+		
+		<div class="item">
+			<div class="catchLeft">
+				<h1 class="bigBlue">Avoid
+				<br />
+				Memory
+				<br />
+				Leaks
+				</h1>
+			</div>
+			<div class="catchRight">
+				<p class="mediumOrange">
+					Release all Components when necessary
+					<br />
+					Manage all resources (Color, Font, Image, CSS, FXML)
+					<br />
+					All errors are caught and traced
+				</p>
+			</div>
+		</div>
+		
+		<div class="item">
+			<div class="catchLeft">
+				<h1 class="bigBlue">Keep Your
+				<br />
+				Project
+				<br />
+				Well Organized
+				</h1>
+			</div>
+			<div class="catchRight">
+				<p class="mediumOrange">
+					Main concerns are divided into Components 
+					<br />
+					(Command Service Model)
+					<br />
+					Code can be shared among Components by using Behaviors
+					<br />
+					UI usage is highly flexible (w|wo FXML)
+					<br />
+					
+				</p>
+			</div>
+		</div>
+		
+		<div class="item">
+			<div class="catchLeft">
+				<h1 class="bigBlue">
+				Modular
+				<br />
+				but not
+				<br />
+				over-engineered
+				</h1>
+			</div>
+			<div class="catchRight">
+				<p class="mediumOrange">
+					Each Component can be overridden at runtime
+					<br />
+					Provide pluggable engine to enhance applications (branding)
+					<br />
+					UI usage is highly flexible (w|wo FXML)
+					<br />
+					
+				</p>
+			</div>
+		</div>
+		
+    </div>
 
 		<div id="features"><!-- <h2>JRebirth, Write your JavaFX2 Application more simply !</h2> -->
 			JRebirth JavaFX Application Framework provides a

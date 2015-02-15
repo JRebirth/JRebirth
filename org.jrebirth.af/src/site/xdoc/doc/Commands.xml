@@ -173,7 +173,7 @@
 				<p> Finally to trigger it you must call its
 					<strong>run()</strong>
 					method.
-					The <a class="apiMethod" href="../apidocs/org/jrebirth/af/core/command/AbstractBaseCommand.html#perform--">perform</a> method of the command will be executed into the <a href="Thread.html#Threading_overview">Thread Type</a> chosen (JAT, JIT, JTP). 
+					The <a class="apiMethod" href="../apidocs/org/jrebirth/af/core/command/AbstractBaseCommand.html#perform-org.jrebirth.af.api.wave.Wave-">perform</a> method of the command will be executed into the <a href="Thread.html#Threading_overview">Thread Type</a> chosen (JAT, JIT, JTP). 
 				</p>
 
 				<macro name="include">
