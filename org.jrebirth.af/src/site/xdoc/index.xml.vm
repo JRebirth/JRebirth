@@ -31,7 +31,14 @@
 	    <!-- Include js plugin -->
 	    <script src="owl-carousel/owl.carousel.js"></script>
 	    
-	    <script src="js/carousel.js"></script>
+	    <script type="text/javascript" src="js/carousel.js"></script>
+		
+		<script type="text/javascript" src="js/jquery.sticky.js"></script>
+		<script>
+		  $(document).ready(function(){
+		    $("#navmenu").sticky({topSpacing:-7});
+		  });
+		</script>
 		
 	</head>
 

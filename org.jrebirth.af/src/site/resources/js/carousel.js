@@ -5,7 +5,7 @@ $(document).ready(function() {
 		//navigation : true, // Show next and prev buttons
 		slideSpeed : 300,
 		paginationSpeed : 400,
-		autoPlay: 10000,
+		autoPlay: 20000,
 		singleItem:true,
 		autoPlay:true
 		 
