@@ -61,6 +61,9 @@ public interface ServiceMessages extends MessageContainer {
     /** "Unable to perform the Service Task {0}" . */
     MessageItem SERVICE_TASK_ERROR = create(new LogMessage("jrebirth.service.serviceTaskError", JRLevel.Error, JRebirthMarkers.SERVICE));
 
+    /** "{0} - thrown by the Service Task {1}" . */
+    MessageItem SERVICE_TASK_EXCEPTION = create(new LogMessage("jrebirth.service.serviceTaskException", JRLevel.Warn, JRebirthMarkers.SERVICE));
+
     /** ServiceUtility. */
 
     /** "Impossible to count lines for file: {0}" . */

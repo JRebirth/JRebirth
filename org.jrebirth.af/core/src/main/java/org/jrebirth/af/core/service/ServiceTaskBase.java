@@ -37,6 +37,7 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.Wave.Status;
 import org.jrebirth.af.api.wave.WaveGroup;
 import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.exception.ServiceException;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.WaveItemBase;
@@ -164,6 +165,9 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
 
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             LOGGER.log(SERVICE_TASK_ERROR, e, getServiceHandlerName());
+            this.wave.status(Status.Failed);
+        } catch (final ServiceException se) {
+            LOGGER.log(SERVICE_TASK_EXCEPTION, se, se.getExplanation(), getServiceHandlerName());
             this.wave.status(Status.Failed);
         }
         return res;
