@@ -101,7 +101,7 @@ public interface WaveType {
     WaveItem<?> returnItem();
 
     /**
-     * Return the WaveItem that hold the type sent to hold the current WaveType result.
+     * Set the WaveItem that hold the type sent to hold the current WaveType result.
      *
      * @param returnItem the return WaveItem to set
      *
@@ -115,6 +115,15 @@ public interface WaveType {
      * @return the wave type to call after the processing of the current WaveType
      */
     WaveType returnWaveType();
+
+    /**
+     * Set the WaveType that will be used a return, override returnItem and returnAction.
+     *
+     * @param returnWaveType the return WaveType to set
+     *
+     * @return the wave type to chain method call
+     */
+    WaveType returnWaveType(WaveType returnWaveType);
 
     /**
      * Set the Command to call in order to process the returned value.
@@ -131,5 +140,12 @@ public interface WaveType {
      * @return the command class to call
      */
     Class<? extends Command> returnCommandClass();
+
+    /**
+     * Return only WaveItem that can be used as method parameter.
+     * 
+     * @return eligible method parameters
+     */
+    List<WaveItem<?>> parameters();
 
 }

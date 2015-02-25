@@ -65,7 +65,8 @@ public final class CheckerUtility implements UtilMessages {
                 int methodParameters = 0;
                 boolean hasCompliantMethod = false;
 
-                final List<WaveItem<?>> wParams = waveType.items();
+                // Remove Wave Item that are not parameters
+                final List<WaveItem<?>> wParams = waveType.parameters();
 
                 for (int j = 0; j < methods.size() && !hasCompliantMethod; j++) {
                     hasCompliantMethod = checkMethodSignature(methods.get(j), wParams);

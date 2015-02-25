@@ -17,49 +17,55 @@
  */
 package org.jrebirth.af.core.wave;
 
+import org.jrebirth.af.api.wave.contract.WaveItem;
+
 /**
  * The Interface JRebirthItems.
  */
 public interface JRebirthItems {
 
+    /** The Void wave item will be used only into a WaveData to wrap the VOID value when nothing is returned. The Void type cannot be used into a method signature. */
+    WaveItem<Void> voidItem = new WaveItemBase<Void>(false) {
+    };
+
     /** The class wave item. */
-    WaveItemBase<Class<?>> classItem = new WaveItemBase<Class<?>>() {
+    WaveItem<Class<?>> classItem = new WaveItemBase<Class<?>>() {
     };
 
     /** The boolean wave item. */
-    WaveItemBase<Boolean> booleanItem = new WaveItemBase<Boolean>() {
+    WaveItem<Boolean> booleanItem = new WaveItemBase<Boolean>() {
     };
 
     /** The string wave item. */
-    WaveItemBase<String> stringItem = new WaveItemBase<String>() {
+    WaveItem<String> stringItem = new WaveItemBase<String>() {
     };
 
     /** The character wave item. */
-    WaveItemBase<Character> characterItem = new WaveItemBase<Character>() {
+    WaveItem<Character> characterItem = new WaveItemBase<Character>() {
     };
 
     /** The byte wave item. */
-    WaveItemBase<Byte> byteItem = new WaveItemBase<Byte>() {
+    WaveItem<Byte> byteItem = new WaveItemBase<Byte>() {
     };
 
     /** The short wave item. */
-    WaveItemBase<Short> shortItem = new WaveItemBase<Short>() {
+    WaveItem<Short> shortItem = new WaveItemBase<Short>() {
     };
 
     /** The integer wave item. */
-    WaveItemBase<Integer> integerItem = new WaveItemBase<Integer>() {
+    WaveItem<Integer> integerItem = new WaveItemBase<Integer>() {
     };
 
     /** The long wave item. */
-    WaveItemBase<Long> longItem = new WaveItemBase<Long>() {
+    WaveItem<Long> longItem = new WaveItemBase<Long>() {
     };
 
     /** The float wave item. */
-    WaveItemBase<Float> floatItem = new WaveItemBase<Float>() {
+    WaveItem<Float> floatItem = new WaveItemBase<Float>() {
     };
 
     /** The double wave item. */
-    WaveItemBase<Double> doubleItem = new WaveItemBase<Double>() {
+    WaveItem<Double> doubleItem = new WaveItemBase<Double>() {
     };
 
 }

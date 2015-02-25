@@ -40,6 +40,8 @@ import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.exception.ServiceException;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.JRebirthItems;
+import org.jrebirth.af.core.wave.JRebirthWaves;
 import org.jrebirth.af.core.wave.WaveItemBase;
 
 /**
@@ -150,7 +152,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
             // Call this method with right parameters
             res = (T) this.method.invoke(this.service, params.toArray());
 
-            if (Void.TYPE.equals(this.method.getReturnType())) {
+            if (Void.TYPE.equals(this.method.getReturnType()) && this.wave.waveType().returnItem() != JRebirthItems.voidItem) {
                 // No return wave required because the service method will return nothing (VOID)
                 LOGGER.log(NO_RETURN_WAVE_CONSUMED, this.service.getClass().getSimpleName(), this.wave.toString());
                 this.wave.status(Status.Consumed);
@@ -194,14 +196,16 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
 
         if (responseWaveType != null) {
 
+            final WaveItemBase<T> resultWaveItem;
+
             // No service result type defined into a WaveItem
-            if (responseWaveType.items().isEmpty()) {
+            if (responseWaveType != JRebirthWaves.RETURN_VOID && responseWaveType.items().isEmpty()) {
                 LOGGER.log(NO_RETURNED_WAVE_ITEM);
                 throw new CoreException(NO_RETURNED_WAVE_ITEM);
+            } else {
+                // Get the first (and unique) WaveItem used to define the service result type
+                resultWaveItem = (WaveItemBase<T>) responseWaveType.items().get(0);
             }
-
-            // Get the first (and unique) WaveItem used to define the service result type
-            final WaveItemBase<T> resultWaveItem = (WaveItemBase<T>) responseWaveType.items().get(0);
 
             // Try to retrieve the command class, could be null
             // final Class<? extends Command> responseCommandClass = this.service.getReturnCommand(this.wave.waveType());
@@ -212,16 +216,20 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
                 returnWave = Builders.wave()
                                      .waveGroup(WaveGroup.CALL_COMMAND)
                                      .fromClass(this.service.getClass())
-                                     .componentClass(responseCommandClass)
-                                     .addDatas(Builders.waveData(resultWaveItem, res));
+                                     .componentClass(responseCommandClass);
             } else {
 
                 // Otherwise send a generic wave that can be handled by any component
                 returnWave = Builders.wave()
                                      .waveType(responseWaveType)
-                                     .fromClass(this.service.getClass())
-                                     .addDatas(Builders.waveData(resultWaveItem, res));
+                                     .fromClass(this.service.getClass());
             }
+
+            // Add the result wrapped into a WaveData with the right WaveItem
+            if (resultWaveItem != null) {
+                returnWave.addDatas(Builders.waveData(resultWaveItem, res));
+            }
+            // Don't add data when method has returned VOID
 
             returnWave.relatedWave(this.wave);
             returnWave.addWaveListener(new ServiceTaskReturnWaveListener());

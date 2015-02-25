@@ -20,6 +20,7 @@ package org.jrebirth.af.core.wave;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.wave.contract.WaveItem;
@@ -199,9 +200,23 @@ public final class WaveTypeBase implements WaveType {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public WaveType returnWaveType() {
         return this.returnWaveType;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public WaveType returnWaveType(WaveType returnWaveType) {
+        this.returnWaveType = returnWaveType;
+        this.returnAction = returnWaveType.action();
+        this.returnItem = returnWaveType.items().stream().findFirst().get();
+        return this;
     }
 
     /**
@@ -289,6 +304,11 @@ public final class WaveTypeBase implements WaveType {
     public WaveType returnCommandClass(final Class<? extends Command> returnCommandClass) {
         this.returnCommandClass = returnCommandClass;
         return this;
+    }
+
+    @Override
+    public List<WaveItem<?>> parameters() {
+        return items().stream().filter(item -> item.isParameter()).collect(Collectors.toList());
     }
 
 }

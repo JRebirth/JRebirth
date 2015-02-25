@@ -43,7 +43,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
     /** Flag used to determine if a view has been already displayed, useful to manage first time animation. */
     private boolean viewDisplayed;
 
-    /** . */
+    /** Force the creation of the View into JAT if set to true. */
     protected boolean createViewIntoJAT = false;
 
     /**

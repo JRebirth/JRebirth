@@ -62,16 +62,12 @@ public class ServiceException extends RuntimeException {
 
     public String getExplanation() {
         final StringBuilder sb = new StringBuilder();
+        if (getMessage() != null) {
+            sb.append(getMessage());
+        }
         if (getCause() != null) {
             sb.append(getCause().getClass().getSimpleName());
         }
-        if (getMessage() != null) {
-            if(getCause() != null){
-            	sb.append(" : ");
-            }
-            sb.append(getMessage());
-        }
-        
 
         return sb.toString();
     }

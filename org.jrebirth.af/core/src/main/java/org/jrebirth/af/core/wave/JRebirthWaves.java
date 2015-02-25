@@ -29,6 +29,7 @@ import javafx.scene.control.ProgressBar;
 
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.service.ServiceTaskBase;
 
@@ -69,22 +70,30 @@ public interface JRebirthWaves {
     WaveType HIDE_VIEW = waveType("HIDE_VIEW");
 
     /********************************/
-    /** WaveType related to Service */
+    /** WaveItem related to Service */
     /********************************/
 
     /** This wave item will be used only into a WaveData to pass the current Service task handled by the wave. */
-    WaveItemBase<ServiceTaskBase<?>> SERVICE_TASK = new WaveItemBase<ServiceTaskBase<?>>(false) {
+    WaveItem<ServiceTaskBase<?>> SERVICE_TASK = new WaveItemBase<ServiceTaskBase<?>>(false) {
     };
 
     /** This wave item will be used only into a WaveData to pass the right progress bar used by service task. */
-    WaveItemBase<ProgressBar> PROGRESS_BAR = new WaveItemBase<ProgressBar>(false) {
+    WaveItem<ProgressBar> PROGRESS_BAR = new WaveItemBase<ProgressBar>(false) {
     };
 
     /** This wave item will be used only into a WaveData to pass the right string property used to display the task title. */
-    WaveItemBase<StringProperty> TASK_TITLE = new WaveItemBase<StringProperty>(false) {
+    WaveItem<StringProperty> TASK_TITLE = new WaveItemBase<StringProperty>(false) {
     };
 
     /** This wave item will be used only into a WaveData to pass the right string property used to display the task message. */
-    WaveItemBase<StringProperty> TASK_MESSAGE = new WaveItemBase<StringProperty>(false) {
+    WaveItem<StringProperty> TASK_MESSAGE = new WaveItemBase<StringProperty>(false) {
     };
+
+    /********************************/
+    /** WaveType related to Service */
+    /********************************/
+
+    /** WaveType used to receive an empty wave when the return action returns void. */
+    WaveType RETURN_VOID = waveType("RETURN_VOID").items(JRebirthItems.voidItem);
+
 }
