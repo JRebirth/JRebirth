@@ -171,8 +171,37 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
         } catch (final ServiceException se) {
             LOGGER.log(SERVICE_TASK_EXCEPTION, se, se.getExplanation(), getServiceHandlerName());
             this.wave.status(Status.Failed);
+        } catch (final Exception e) { // NOSONAR, catch all to try to do something smart !
+
+            handleException(e);
         }
         return res;
+    }
+
+    /**
+     * Handle all exception occurred while doing the task.TODO To complete.
+     * 
+     * @param e the exception to handle
+     */
+    private void handleException(final Exception e) {
+        this.wave.status(Status.Failed);
+
+        // Get the exact exception type
+        final Wave exceptionHandlerWave = this.wave.waveType().waveExceptionHanler().get(e.getClass());
+
+        if (exceptionHandlerWave != null) {
+            // Fill the wave with useful data
+            exceptionHandlerWave.fromClass(this.service.getClass())
+                                .add(JRebirthItems.exceptionItem, e)
+                                .relatedWave(this.wave);
+
+            LOGGER.log(SERVICE_TASK_HANDLE_EXCEPTION, e, e.getClass().getSimpleName(), getServiceHandlerName());
+
+            // Send the exception wave to interested components
+            this.service.sendWave(exceptionHandlerWave);
+        } else {
+            LOGGER.log(SERVICE_TASK_NOT_MANAGED_EXCEPTION, e, e.getClass().getSimpleName(), getServiceHandlerName());
+        }
     }
 
     /**

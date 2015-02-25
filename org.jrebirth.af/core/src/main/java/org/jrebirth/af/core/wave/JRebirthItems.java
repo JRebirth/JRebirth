@@ -28,6 +28,10 @@ public interface JRebirthItems {
     WaveItem<Void> voidItem = new WaveItemBase<Void>(false) {
     };
 
+    /** The exception wave item (not a parameter). */
+    WaveItem<Throwable> exceptionItem = new WaveItemBase<Throwable>(false) {
+    };
+
     /** The class wave item. */
     WaveItem<Class<?>> classItem = new WaveItemBase<Class<?>>() {
     };

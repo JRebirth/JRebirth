@@ -18,8 +18,10 @@
 package org.jrebirth.af.api.wave.contract;
 
 import java.util.List;
+import java.util.Map;
 
 import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.wave.Wave;
 
 /**
  *
@@ -147,5 +149,32 @@ public interface WaveType {
      * @return eligible method parameters
      */
     List<WaveItem<?>> parameters();
+
+    /**
+     * Return the map of wave exception handler.
+     *
+     * @return the waveExceptionHandler map
+     */
+    Map<Class<? extends Throwable>, Wave> waveExceptionHanler();
+
+    /**
+     * Define the Command to call in order to handle given exception types.
+     *
+     * @param exceptionCommandClass the command class to use
+     * @param exceptionTypes the types of exception to manage (none = all)
+     *
+     * @return the wave type to chain method call
+     */
+    WaveType onException(Class<? extends Command> exceptionCommandClass, Class<? extends Throwable>... exceptionTypes);
+
+    /**
+     * Define the {@link WaveType} to send in order to manage given exception types.
+     *
+     * @param exceptionWaveType the WaveType to send to handle the exception
+     * @param exceptionTypes the types of exception to manage (none = all)
+     *
+     * @return the wave type to chain method call
+     */
+    WaveType onException(WaveType exceptionWaveType, Class<? extends Throwable>... exceptionTypes);
 
 }

@@ -200,7 +200,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             notifyPreloader(new ProgressNotification(1000));
             notifyPreloader(new ProgressNotification(1.0));
 
-        } catch (final Exception e) {
+        } catch (final Exception e) { // NOSONAR Catch all exception during init phase
             LOGGER.error(ApplicationMessages.INIT_ERROR, e, this.getClass().getSimpleName());
             throw new CoreException(e);
         }
@@ -320,7 +320,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
             LOGGER.log(STOPPED_SUCCESSFULLY, this.getClass().getSimpleName());
 
-        } catch (final Exception e) {
+        } catch (final Exception e) { // NOSONAR Catch all exception during stopping phase
             LOGGER.error(STOP_ERROR, e, this.getClass().getSimpleName(), e);
             throw new CoreException(e);
         }
@@ -533,7 +533,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * @param scene the scene to check
      */
     private void manageDefaultStyleSheet(final Scene scene) {
-        if (scene.getStylesheets().size() < 1) {
+        if (scene.getStylesheets().isEmpty()) {
             // No style sheet has been added to the scene
             LOGGER.log(NO_CSS_DEFINED);
             addCSS(scene, JRebirthStyles.DEFAULT);

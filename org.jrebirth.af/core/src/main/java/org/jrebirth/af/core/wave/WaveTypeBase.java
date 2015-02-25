@@ -20,9 +20,12 @@ package org.jrebirth.af.core.wave;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
@@ -55,6 +58,8 @@ public final class WaveTypeBase implements WaveType {
 
     /** The command to call to process the returned value. */
     private Class<? extends Command> returnCommandClass;
+
+    private Map<Class<? extends Throwable>, Wave> waveExceptionHanler;
 
     // public static WaveTypeBase create() {
     // return new WaveTypeBase();
@@ -309,6 +314,45 @@ public final class WaveTypeBase implements WaveType {
     @Override
     public List<WaveItem<?>> parameters() {
         return items().stream().filter(item -> item.isParameter()).collect(Collectors.toList());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<Class<? extends Throwable>, Wave> waveExceptionHanler() {
+        if (waveExceptionHanler == null) {
+            waveExceptionHanler = new ConcurrentHashMap<>();
+        }
+        return waveExceptionHanler;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public WaveType onException(Class<? extends Command> exceptionCommandClass, Class<? extends Throwable>... exceptionTypes) {
+
+        final Wave commandWave = Builders.callCommand(exceptionCommandClass);
+
+        for (final Class<? extends Throwable> type : exceptionTypes) {
+            waveExceptionHanler().put(type, commandWave);
+        }
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public WaveType onException(WaveType exceptionWaveType, Class<? extends Throwable>... exceptionTypes) {
+
+        final Wave wave = Builders.wave().waveType(exceptionWaveType);
+
+        for (final Class<? extends Throwable> type : exceptionTypes) {
+            waveExceptionHanler().put(type, wave);
+        }
+        return this;
     }
 
 }

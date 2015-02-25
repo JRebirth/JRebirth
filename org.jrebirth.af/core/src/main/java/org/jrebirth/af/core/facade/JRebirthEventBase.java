@@ -160,16 +160,11 @@ public final class JRebirthEventBase implements JRebirthEvent {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(getSequence());
-        sb.append(ClassUtility.SEPARATOR);
-        sb.append(getEventType());
-        sb.append(ClassUtility.SEPARATOR);
-        sb.append(getSource());
-        sb.append(ClassUtility.SEPARATOR);
-        sb.append(getTarget());
-        sb.append(ClassUtility.SEPARATOR);
-        sb.append(getEventData());
-        sb.append(ClassUtility.SEPARATOR);
+        sb.append(getSequence()).append(ClassUtility.SEPARATOR)
+          .append(getEventType()).append(ClassUtility.SEPARATOR)
+          .append(getSource()).append(ClassUtility.SEPARATOR)
+          .append(getTarget()).append(ClassUtility.SEPARATOR)
+          .append(getEventData()).append(ClassUtility.SEPARATOR);
         return sb.toString();
     }
 
@@ -181,7 +176,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
     private void parseString(final String eventSerialized) {
         final StringTokenizer st = new StringTokenizer(eventSerialized, ClassUtility.SEPARATOR);
         if (st.countTokens() >= 5) {
-            setSequence(Integer.valueOf(st.nextToken()));
+            setSequence(Integer.parseInt(st.nextToken()));
             setEventType(JRebirthEventType.valueOf(st.nextToken()));
             setSource(st.nextToken());
             setTarget(st.nextToken());

@@ -64,6 +64,12 @@ public interface ServiceMessages extends MessageContainer {
     /** "{0} - thrown by the Service Task {1}" . */
     MessageItem SERVICE_TASK_EXCEPTION = create(new LogMessage("jrebirth.service.serviceTaskException", JRLevel.Warn, JRebirthMarkers.SERVICE));
 
+    /** "{0} - thrown by the Service Task {1} and handled with a Wave" . */
+    MessageItem SERVICE_TASK_HANDLE_EXCEPTION = create(new LogMessage("jrebirth.service.serviceTaskHandleException", JRLevel.Warn, JRebirthMarkers.SERVICE));
+
+    /** "{0} - thrown by the Service Task {1} and not managed" . */
+    MessageItem SERVICE_TASK_NOT_MANAGED_EXCEPTION = create(new LogMessage("jrebirth.service.serviceTaskNotManagedException", JRLevel.Warn, JRebirthMarkers.SERVICE));
+
     /** ServiceUtility. */
 
     /** "Impossible to count lines for file: {0}" . */
