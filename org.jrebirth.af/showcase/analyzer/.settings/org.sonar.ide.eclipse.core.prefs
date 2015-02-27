@@ -1,9 +1,10 @@
 analyseLocally=false
 eclipse.preferences.version=1
-extraProperties=sonar.host.url\=http\://quality.jrebirth.org\r\nsonar.jdbc.url\=jdbc\:mysql\://localhost\:3306/sonar?useUnicode\=true&characterEncoding\=utf8\r\nsonar.jdbc.driver\=com.mysql.jdbc.Driver\r\nsonar.language\=java
+extraProperties=sonar.jdbc.driver\=com.mysql.jdbc.Driver\r\nsonar.host.url\=http\://quality.jrebirth.org\r\nsonar.jdbc.url\=jdbc\:mysql\://localhost\:3306/sonar?useUnicode\r\nsonar.language\=java
+lastAnalysisDate=1424887915000
 projectArtifactId=analyzer
 projectBranch=
 projectGroupId=org.jrebirth
-projectKey=org.jrebirth.af.showcase\:analyzer
+projectKey=org.jrebirth.af.showcase\:analyzer\:8.x
 serverUrl=http\://quality.jrebirth.org
 version=2
