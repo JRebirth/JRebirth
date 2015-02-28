@@ -126,7 +126,7 @@ public class RGB01Color extends AbstractBaseColor {
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] parameters) {
+    public void parse(final String... parameters) {
         // Manage red composite
         if (parameters.length >= 1) {
             redProperty().set(Double.parseDouble(parameters[0]));

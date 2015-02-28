@@ -64,7 +64,7 @@ public class RelImage extends AbstractBaseImage implements ImageParams {
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] parameters) {
+    public void parse(final String... parameters) {
         if (parameters.length == 1) {
             nameProperty().set(parameters[0]);
         }

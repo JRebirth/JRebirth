@@ -79,7 +79,7 @@ public class RealFont extends AbstractBaseFont {
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] parameters) {
+    public void parse(final String... parameters) {
         if (parameters.length >= 1) {
             nameProperty().set(new CustomFontName(parameters[0]));
         }

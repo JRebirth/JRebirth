@@ -133,7 +133,7 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] parameters) {
+    public void parse(final String... parameters) {
         if (parameters.length == 4) {
             websiteProperty().set(parameters[0]);
             pathProperty().set(parameters[1]);

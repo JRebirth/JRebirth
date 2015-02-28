@@ -89,8 +89,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<!-- inherited from root parent pom <version>3.1</version> -->
 					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
+						<source>1.8</source>
+						<target>1.8</target>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
@@ -118,6 +118,14 @@
 						</archive>
 					</configuration>
 				</plugin>
+
+				<!--<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jarsigner-plugin</artifactId>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>-->
 
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -190,6 +198,8 @@
 							</keystoreConfig>
 
 						</sign>
+
+						<unsignAlreadySignedJars>true</unsignAlreadySignedJars>
 
 						<pack200>
 							<enabled>false</enabled>

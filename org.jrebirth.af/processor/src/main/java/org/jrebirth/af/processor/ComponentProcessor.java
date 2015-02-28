@@ -1,3 +1,20 @@
+/**
+ * Get more info at : www.jrebirth.org .
+ * Copyright JRebirth.org © 2011-2015
+ * Contact : sebastien.bordes@jrebirth.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.jrebirth.af.processor;
 
 import java.io.File;
@@ -42,16 +59,21 @@ import org.jrebirth.af.processor.annotation.RegistrationPoint;
 import org.jrebirth.af.processor.annotation.WarmUp;
 
 /**
- *
+ * The Class ComponentProcessor.
  */
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class ComponentProcessor extends AbstractProcessor {
 
+    /** The module config path. */
     private static String MODULE_CONFIG_PATH = "JRAF-INF";
 
+    /** The module config file name. */
     private static String MODULE_CONFIG_FILE_NAME = "module.xml";
 
+    /** The factory. */
     private ObjectFactory factory;
+
+    /** The jaxb context. */
     private JAXBContext jaxbContext;
 
     /**
@@ -63,7 +85,7 @@ public class ComponentProcessor extends AbstractProcessor {
 
         this.factory = new ObjectFactory();
         try {
-            this.jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", ObjectFactory.class.getClassLoader());
+            this.jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", Thread.currentThread().getContextClassLoader());
         } catch (final JAXBException e) {
             e.printStackTrace();
         }
@@ -80,6 +102,9 @@ public class ComponentProcessor extends AbstractProcessor {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
         if (roundEnv.processingOver()) {
@@ -188,6 +213,11 @@ public class ComponentProcessor extends AbstractProcessor {
         return true;
     }
 
+    /**
+     * Save module.
+     *
+     * @param module the module
+     */
     private void saveModule(final Module module) {
 
         final OutputStreamWriter out;
@@ -219,6 +249,11 @@ public class ComponentProcessor extends AbstractProcessor {
 
     }
 
+    /**
+     * Creates the module.
+     *
+     * @return the module
+     */
     private Module createModule() {
         final Module module = this.factory.createModule();
 
@@ -229,6 +264,11 @@ public class ComponentProcessor extends AbstractProcessor {
         return module;
     }
 
+    /**
+     * Load module file.
+     *
+     * @return the module
+     */
     private Module loadModuleFile() {
 
         Module module = null;
@@ -250,11 +290,23 @@ public class ComponentProcessor extends AbstractProcessor {
         return module;
     }
 
+    /**
+     * Gets the class name.
+     *
+     * @param element the element
+     * @return the class name
+     */
     private String getClassName(final Element element) {
         return getClassName(element.asType());
 
     }
 
+    /**
+     * Gets the class name.
+     *
+     * @param t the t
+     * @return the class name
+     */
     private String getClassName(final TypeMirror t) {
         String res = null;
 
@@ -266,6 +318,12 @@ public class ComponentProcessor extends AbstractProcessor {
         return res;
     }
 
+    /**
+     * Error.
+     *
+     * @param source the source
+     * @param msg the msg
+     */
     private void error(final Element source, final String msg) {
         this.processingEnv.getMessager().printMessage(Kind.ERROR, msg, source);
     }

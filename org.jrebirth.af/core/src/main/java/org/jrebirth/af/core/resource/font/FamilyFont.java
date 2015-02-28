@@ -154,7 +154,7 @@ public class FamilyFont extends AbstractBaseFont {
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] parameters) {
+    public void parse(final String... parameters) {
         if (parameters.length >= 1) {
             familyProperty().set(parameters[0]);
         }

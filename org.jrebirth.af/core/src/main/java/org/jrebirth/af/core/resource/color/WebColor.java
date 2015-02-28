@@ -74,7 +74,7 @@ public class WebColor extends AbstractBaseColor {
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] parameters) {
+    public void parse(final String... parameters) {
         if (parameters.length >= 1) {
 
             String hexValue = parameters[0];

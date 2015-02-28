@@ -196,7 +196,7 @@ public class FXML extends AbstractBaseParams implements FXMLParams {
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] parameters) {
+    public void parse(final String... parameters) {
 
         switch (parameters.length) {
             case 4:

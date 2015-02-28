@@ -126,7 +126,7 @@ public class HSBColor extends AbstractBaseColor {
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] parameters) {
+    public void parse(final String... parameters) {
         // Manage hue composite
         if (parameters.length >= 1) {
             hueProperty().set(readDouble(parameters[0], 0.0, 360.0));

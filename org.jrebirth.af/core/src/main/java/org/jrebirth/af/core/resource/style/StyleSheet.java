@@ -134,7 +134,7 @@ public class StyleSheet extends AbstractBaseParams implements StyleSheetParams {
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] parameters) {
+    public void parse(final String... parameters) {
         if (parameters.length >= 1) {
             pathProperty().set(parameters[0]);
         }

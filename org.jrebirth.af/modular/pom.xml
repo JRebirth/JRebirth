@@ -38,7 +38,19 @@
 
 
 	<dependencies>
+	
+		<!-- <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency> -->
 
+		<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>api</artifactId>
+			<version>8.0.1-SNAPSHOT</version>
+		</dependency>
+		
 	</dependencies>
 
 </project>

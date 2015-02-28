@@ -156,10 +156,10 @@ public class JRebirthPreloader extends Preloader {
                 res = "Preparing Core Engine";
                 break;
             case 700:
-                res = "Preloading Fonts";
+                res = "Preloading Resources";
                 break;
             case 800:
-                res = "";// Provisioned for custom post-init task
+                res = "Preloading Modules";
                 break;
             case 900:
                 res = "";// Provisioned for custom post-init task

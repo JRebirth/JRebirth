@@ -84,7 +84,7 @@ public class GrayColor extends AbstractBaseColor {
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] parameters) {
+    public void parse(final String... parameters) {
         // Manage gray scale
         if (parameters.length >= 1) {
             grayProperty().set(Double.parseDouble(parameters[0]));

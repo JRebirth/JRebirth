@@ -24,6 +24,7 @@ package org.jrebirth.af.api.facade;
  *
  * @author Sébastien Bordes
  */
+@FunctionalInterface
 public interface GlobalReady {
 
     /**

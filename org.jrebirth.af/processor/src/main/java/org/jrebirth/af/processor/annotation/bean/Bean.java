@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2014
+ * Copyright JRebirth.org © 2011-2015
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,26 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.api.resource.font;
+package org.jrebirth.af.processor.annotation.bean;
 
 /**
- * The interface <strong>FontName</strong>.
- *
- * The font name used is the enum String name() method to retrieved the font name string.<br />
- * It will be transformed (or not) by a custom mechanism that replace '_' by space.
+ * The annotation <strong>Bean</strong> used to generate bean implementation code.
  *
  * @author Sébastien Bordes
  */
-@FunctionalInterface
-public interface FontName {
-
-    /**
-     * Return the unique name of the font.
-     *
-     * When a enumeration implements this interface the name() method is automatically provided.
-     *
-     * @return the system name of the font
-     */
-    String name();
+public @interface Bean {
 
 }

@@ -26,6 +26,7 @@ import java.util.List;
  *
  * A Behavior can be attached to a {@link EnhancedComponent} by sending to it a Behavior Data.
  */
+@FunctionalInterface
 public interface BehaviorData {
 
     /**

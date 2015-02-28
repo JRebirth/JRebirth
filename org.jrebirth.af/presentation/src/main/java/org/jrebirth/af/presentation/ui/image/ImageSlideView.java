@@ -205,7 +205,7 @@ public final class ImageSlideView extends
      * @return a duration object
      */
     private Duration getRandomDuration() {
-        return Duration.millis(Math.abs(RANDOM.nextLong()) % 900 + 300);
+        return Duration.millis(RANDOM.nextInt(Integer.MAX_VALUE) % 900 + 300);
     }
 
     /**

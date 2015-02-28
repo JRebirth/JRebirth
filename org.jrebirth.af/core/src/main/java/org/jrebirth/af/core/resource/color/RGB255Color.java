@@ -114,7 +114,7 @@ public final class RGB255Color extends AbstractBaseColor {
      * {@inheritDoc}
      */
     @Override
-    public void parse(final String[] parameters) {
+    public void parse(final String... parameters) {
         // Manage red composite
         if (parameters.length >= 1) {
             redProperty().set(readInteger(parameters[0], 0, 255));
