@@ -47,6 +47,7 @@
 		<module>modular</module>
 		<module>security</module>
 		<module>distribution</module>
+		<module>rest</module>
 	</modules>
 
 	<issueManagement>
@@ -332,5 +333,22 @@
 			<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url>
 		</site>
 	</distributionManagement>
+	
+	<profiles>
+			<!-- Override Bintray profile to use another Bintray Package -->
+			<profile>
+			<id>Bintray</id>
+			<properties>
+				<!-- Release repository -->
+				<repositoryId>bintray-jrebirth-JRebirth-JRebirthAF</repositoryId>
+				<repositoryName>jrebirth-JRebirth-JRebirthAF</repositoryName>
+				<repositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirthAF/</repositoryUrl>
+				<!-- Snapshot repository -->
+				<snapshotRepositoryId>bintray-jrebirth-JRebirth-JRebirthAF</snapshotRepositoryId>
+				<snapshotRepositoryName>jrebirth-JRebirth-JRebirthAF</snapshotRepositoryName>
+				<snapshotRepositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirthAF/</snapshotRepositoryUrl>
+			</properties>
+		</profile>
+	</profiles>
 	
 </project>
