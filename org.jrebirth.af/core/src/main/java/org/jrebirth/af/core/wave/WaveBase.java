@@ -101,6 +101,9 @@ public class WaveBase implements Wave, LinkMessages {
      */
     private final List<WaveListener> waveListeners = Collections.synchronizedList(new ArrayList<WaveListener>());
 
+    /** The list of Wave Handlers used to manage the Handled status. */
+    private List<? extends Object> waveHandlers;
+
     /**
      * Default Constructor.
      */
@@ -479,6 +482,31 @@ public class WaveBase implements Wave, LinkMessages {
             this.waveBeanClass = waveBean.getClass();
         }
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setWaveHandlers(List<? extends Object> waveHandlers) {
+        this.waveHandlers = waveHandlers;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeWaveHandler(Object waveHandler) {
+        if (waveHandler != null) {
+            // Remove the handler that has terminated
+            this.waveHandlers.remove(waveHandler);
+
+            // Update the status if required
+            if (status() == Status.Consumed && this.waveHandlers.isEmpty()) {
+                status(Status.Handled);
+            }
+        }
+
     }
 
 }

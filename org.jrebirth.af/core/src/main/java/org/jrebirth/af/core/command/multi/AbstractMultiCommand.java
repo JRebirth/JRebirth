@@ -226,6 +226,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                 synchronized (this) {
                     if (this.commandRunIndex == 0) {
                         this.waveSource = wave;
+                        fireConsumed(this.waveSource);
                     }
 
                     if (this.subCommandList.size() > this.commandRunIndex) {
@@ -281,7 +282,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                 } else {
                     this.running.set(false);
                     // No more command to run the MultiCommand is achieved
-                    fireConsumed(this.waveSource);
+                    fireHandled(this.waveSource);
                 }
             } else {
 
@@ -290,7 +291,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
                 // If there is no pending waves left, send the waveConsumed event on the MultiCommand wave
                 if (this.pendingWaves.isEmpty()) {
-                    fireConsumed(this.waveSource);
+                    fireHandled(this.waveSource);
                 }
             }
         }

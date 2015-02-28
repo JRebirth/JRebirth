@@ -234,6 +234,10 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         // Retrieve all interested object from the map
         if (this.notifierMap.containsKey(wave.waveType())) {
             final WaveSubscription ws = this.notifierMap.get(wave.waveType());
+
+            // Store all Wave handler into the wave in order to know if there is any handler left before
+            wave.setWaveHandlers(ws.getWaveHandlers());
+
             // For each object interested in that wave type, process the action
             for (final WaveHandler waveHandler : ws.getWaveHandlers()) {
 

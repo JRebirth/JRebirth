@@ -174,7 +174,8 @@
 					<li>Sent : The wave has been sent to the JRebirth Notifier Engine</li>
 					<li>Processing : The wave is being dispatched</li>
 					<li>Cancelled : The wave has been cancelled by an user action</li>
-					<li>Consumed : The wave task is achieved and is marked as consumed</li>
+					<li>Consumed : All Wave Handlers have been called, or the Service Method or the Command has been called</li>
+					<li>Handled : All Wave Handlers are terminated</li>
 					<li>Failed : The wave process has generated an error</li>
 					<li>Destroyed : the wave is available for garbage collection</li>
 				</ol>

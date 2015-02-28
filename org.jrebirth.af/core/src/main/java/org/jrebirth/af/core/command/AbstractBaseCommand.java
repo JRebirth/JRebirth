@@ -236,6 +236,18 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
     }
 
     /**
+     * Fire an handled event for command listeners.
+     *
+     * And handle the wave that trigger this command
+     *
+     * @param wave forward the wave that has been performed
+     */
+    protected void fireHandled(final Wave wave) {
+        LOGGER.trace(this.getClass().getSimpleName() + " handles  " + wave.toString());
+        wave.status(Wave.Status.Handled);
+    }
+
+    /**
      * Fire a failed event for command listeners.
      *
      * And mark as failed the wave that trigger this command

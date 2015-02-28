@@ -53,8 +53,11 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
 
         // The first time we store the list of wave to run into the command field
         if (this.index == 0) {
+
             this.waveList = wave.get(JRebirthWaves.CHAINED_WAVES);
             this.sourceWave = wave;
+
+            fireConsumed(this.sourceWave);
         }
 
         unqueueWaves();
@@ -130,7 +133,7 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
         if (this.waveList.size() > this.index) {
             unqueueWaves();
         } else {
-            fireConsumed(this.sourceWave);
+            fireHandled(this.sourceWave);
         }
     }
 

@@ -148,6 +148,8 @@ public class WaveHandler implements LinkMessages {
      */
     private JRebirthRunnable buildWaveRunnable(final Wave wave, final Method customMethod, final RunnablePriority priority) {
 
+        final WaveHandler waveHandler = this;
+
         return new AbstractJrbRunnable(getWaveReady().getClass().getSimpleName() + " handle wave " + wave.toString(), priority) {
 
             /**
@@ -159,6 +161,8 @@ public class WaveHandler implements LinkMessages {
                     performHandle(wave, customMethod);
                 } catch (final WaveException e) {
                     LOGGER.error(WAVE_HANDLING_ERROR, e);
+                } finally {
+                    wave.removeWaveHandler(waveHandler);
                 }
             }
         };

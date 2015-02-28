@@ -56,6 +56,9 @@ public interface Wave {
         /** The wave has just been consumed. */
         Consumed,
 
+        /** The wave has been performed by all handlers. */
+        Handled,
+
         /** The wave processing has failed. */
         Failed,
 
@@ -266,4 +269,17 @@ public interface Wave {
      */
     Wave waveBean(final WaveBean waveBean);
 
+    /**
+     * Store all Wave Handler.
+     *
+     * @param waveHandlers the list of WaveHandler
+     */
+    void setWaveHandlers(final List<? extends Object> waveHandlers);
+
+    /**
+     * Release the given WaveHandler
+     * 
+     * @param waveHandler the waveHandler
+     */
+    void removeWaveHandler(final Object waveHandler);
 }

@@ -138,6 +138,9 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
     @SuppressWarnings("unchecked")
     @Override
     protected T call() throws CoreException {
+        
+        this.wave.status(Status.Consumed);
+        
         T res = null;
         try {
 
@@ -155,7 +158,8 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
             if (Void.TYPE.equals(this.method.getReturnType()) && this.wave.waveType().returnItem() != JRebirthItems.voidItem) {
                 // No return wave required because the service method will return nothing (VOID)
                 LOGGER.log(NO_RETURN_WAVE_CONSUMED, this.service.getClass().getSimpleName(), this.wave.toString());
-                this.wave.status(Status.Consumed);
+                // Consumed + Handled because there is only one handler: the service task
+                this.wave.status(Status.Handled);
 
                 // Otherwise prepare the return wave
             } else {
