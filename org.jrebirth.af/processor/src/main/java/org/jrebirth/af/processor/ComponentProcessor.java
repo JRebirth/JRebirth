@@ -85,7 +85,7 @@ public class ComponentProcessor extends AbstractProcessor {
 
         this.factory = new ObjectFactory();
         try {
-            this.jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", Thread.currentThread().getContextClassLoader());
+            this.jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", ObjectFactory.class.getClassLoader()); // NOSONAR
         } catch (final JAXBException e) {
             e.printStackTrace();
         }

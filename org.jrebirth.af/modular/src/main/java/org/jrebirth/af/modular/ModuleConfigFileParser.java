@@ -38,6 +38,7 @@ import javax.xml.stream.XMLStreamReader;
 
 import org.jrebirth.af.modular.model.Component;
 import org.jrebirth.af.modular.model.Module;
+import org.jrebirth.af.modular.model.ObjectFactory;
 import org.jrebirth.af.modular.model.Registration;
 import org.jrebirth.af.modular.model.RegistrationEntry;
 import org.slf4j.Logger;
@@ -72,12 +73,12 @@ public final class ModuleConfigFileParser {
         // Reference the Module.xml file
         final File file = new File(fileName);
 
-        // final ObjectFactory factory = new ObjectFactory();
+        final ObjectFactory factory = new ObjectFactory();
 
         JAXBContext jaxbContext;
         try {
             // Load the JAXB context
-            jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", Thread.currentThread().getContextClassLoader());
+            jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", ObjectFactory.class.getClassLoader());
 
             // Prepare the unmarshaller
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
