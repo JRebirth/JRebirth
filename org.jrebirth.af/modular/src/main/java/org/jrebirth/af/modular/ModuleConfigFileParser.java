@@ -116,7 +116,7 @@ public final class ModuleConfigFileParser {
 
         final List<Pair<Class<?>, Class<?>>> pairList = new ArrayList<Pair<Class<?>, Class<?>>>();
 
-        if (module.getRegistrations() != null) {
+        if (module != null && module.getRegistrations() != null) {
 
             // Iterate over all Component Registration
             for (final Registration rl : module.getRegistrations().getRegistration()) {
@@ -165,7 +165,7 @@ public final class ModuleConfigFileParser {
 
         final List<Class<?>> warmUpList = new ArrayList<Class<?>>();
 
-        if (module.getClass() != null) {
+        if (module != null && module.getClass() != null) {
 
             // Iterate over Component to load during WarmUp
             for (final Component component : module.getWarmUp().getComponent()) {
