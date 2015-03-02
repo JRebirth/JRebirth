@@ -20,6 +20,7 @@ package org.jrebirth.af.modular;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -60,6 +61,31 @@ public final class ModuleConfigFileParser {
     }
 
     /**
+     * TRy to load a custom resource file.
+     *
+     * @param custConfFileName the custom resource file to load
+     *
+     * @return the load input stream
+     */
+    public static InputStream loadInputStream(final String custConfFileName) {
+        InputStream is = null;
+        final File resourceFile = new File(custConfFileName);
+        // Check if the file could be find
+        if (resourceFile.exists()) {
+            try {
+                is = new FileInputStream(resourceFile);
+            } catch (final FileNotFoundException e) {
+                // Nothing to do
+            }
+        } else {
+            // Otherwise try to load from context classloader
+            is = Thread.currentThread().getContextClassLoader().getResourceAsStream(custConfFileName);
+        }
+
+        return is;
+    }
+
+    /**
      * Parses the Module.xml.
      *
      * @param fileName the module file name
@@ -84,7 +110,7 @@ public final class ModuleConfigFileParser {
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
             // Create the input stream reader
-            final InputStreamReader in = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
+            final InputStreamReader in = new InputStreamReader(loadInputStream(fileName), StandardCharsets.UTF_8);
             // Create the XML Stream reader
             final XMLStreamReader xsr = XMLInputFactory.newInstance().createXMLStreamReader(in);
             // ANd finally unmarshall the file into a Java object
@@ -95,7 +121,7 @@ public final class ModuleConfigFileParser {
                 module = Module.class.cast(JAXBElement.class.cast(o).getValue());
             }
 
-        } catch (JAXBException | FileNotFoundException | XMLStreamException | FactoryConfigurationError e) {
+        } catch (JAXBException | /* FileNotFoundException | */XMLStreamException | FactoryConfigurationError e) {
             LOGGER.error("An error occurred while parsing " + fileName, e);
         }
 
