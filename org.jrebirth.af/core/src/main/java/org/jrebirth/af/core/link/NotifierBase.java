@@ -236,7 +236,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             final WaveSubscription ws = this.notifierMap.get(wave.waveType());
 
             // Store all Wave handler into the wave in order to know if there is any handler left before
-            wave.setWaveHandlers(ws.getWaveHandlers());
+            wave.setWaveHandlers(new ArrayList<WaveHandler>(ws.getWaveHandlers()));
 
             // For each object interested in that wave type, process the action
             for (final WaveHandler waveHandler : ws.getWaveHandlers()) {
@@ -264,6 +264,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
         LOGGER.info(NOTIFIER_CONSUMES, wave.toString());
         wave.status(Status.Consumed);
+
     }
 
     /**

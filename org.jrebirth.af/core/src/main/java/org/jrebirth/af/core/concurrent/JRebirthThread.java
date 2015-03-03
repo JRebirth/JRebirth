@@ -32,8 +32,6 @@ import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.facade.GlobalFacade;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.WaveGroup;
-import org.jrebirth.af.core.command.basic.ChainWaveCommand;
 import org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean;
 import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
@@ -42,7 +40,6 @@ import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.service.basic.StyleSheetTrackerService;
 import org.jrebirth.af.core.wave.Builders;
-import org.jrebirth.af.core.wave.JRebirthWaves;
 
 /**
  * The class <strong>JRebirthThread</strong>.
@@ -226,11 +223,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         }
 
         if (!chainedWaveList.isEmpty()) {
-            getFacade().getNotifier().sendWave(
-                                               Builders.wave()
-                                                       .waveGroup(WaveGroup.CALL_COMMAND)
-                                                       .componentClass(ChainWaveCommand.class)
-                                                       .addDatas(Builders.waveData(JRebirthWaves.CHAINED_WAVES, chainedWaveList)));
+            getFacade().getNotifier().sendWave(Builders.chainWaveCommand(chainedWaveList));
         }
     }
 

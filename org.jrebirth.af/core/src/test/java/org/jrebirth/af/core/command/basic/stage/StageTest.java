@@ -116,10 +116,17 @@ public class StageTest {
             }
 
             @Override
+            public void waveHandled(Wave wave) {
+                // Nothing to do yet
+
+            }
+
+            @Override
             public void waveCancelled(final Wave wave) {
                 // Nothing to do yet
 
             }
+
         });
 
         JRebirth.runIntoJIT(new AbstractJrbRunnable("Send Wave " + wave.toString()) {

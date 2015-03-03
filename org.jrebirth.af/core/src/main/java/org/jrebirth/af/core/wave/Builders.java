@@ -17,12 +17,15 @@
  */
 package org.jrebirth.af.core.wave;
 
+import java.util.List;
+
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveGroup;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.command.basic.ChainWaveCommand;
 
 /**
  * The Interface Builders used as a convenient wrapper to build a large variety of JRebirth Internal objects.
@@ -79,6 +82,22 @@ public interface Builders {
      */
     static <T extends Object> WaveData<T> waveData(final WaveItem<T> waveItem, final T value) {
         return new WaveDataBase<>(waveItem, value);
+    }
+
+    /**
+     * Build a fresh Wave use to call the {@link ChainWaveCommand} command.
+     *
+     * @param waveList the list of wave to chain
+     * 
+     * @return the wave
+     */
+    static Wave chainWaveCommand(final List<Wave> waveList) {
+        return wave()
+                     .waveGroup(WaveGroup.CALL_COMMAND)
+                     .componentClass(ChainWaveCommand.class)
+                     .addDatas(
+                               Builders.waveData(JRebirthWaves.CHAINED_WAVES, waveList)
+                     );
     }
 
 }

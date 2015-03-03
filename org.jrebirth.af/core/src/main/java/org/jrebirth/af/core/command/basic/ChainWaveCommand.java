@@ -57,7 +57,7 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
             this.waveList = wave.get(JRebirthWaves.CHAINED_WAVES);
             this.sourceWave = wave;
 
-            fireConsumed(this.sourceWave);
+            fireHandled(this.sourceWave);
         }
 
         unqueueWaves();
@@ -128,6 +128,20 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
      */
     @Override
     public void waveConsumed(final Wave wave) {
+        // this.index++;
+        // // Run next command if any
+        // if (this.waveList.size() > this.index) {
+        // unqueueWaves();
+        // } else {
+        // fireHandled(this.sourceWave);
+        // }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveHandled(final Wave wave) {
         this.index++;
         // Run next command if any
         if (this.waveList.size() > this.index) {

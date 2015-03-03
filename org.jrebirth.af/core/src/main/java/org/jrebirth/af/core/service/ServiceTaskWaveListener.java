@@ -68,6 +68,16 @@ public final class ServiceTaskWaveListener implements WaveListener {
     public void waveConsumed(final Wave wave) {
 
         // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
+        // wave.get(JRebirthWaves.SERVICE_TASK).taskAchieved();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveHandled(final Wave wave) {
+
+        // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
         wave.get(JRebirthWaves.SERVICE_TASK).taskAchieved();
     }
 

@@ -86,6 +86,14 @@ public class ChainServiceCommand extends DefaultCommand implements WaveListener 
      * {@inheritDoc}
      */
     @Override
+    public void waveHandled(final Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void waveFailed(final Wave wave) {
         // Nothing to do yet
     }

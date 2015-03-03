@@ -269,6 +269,14 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      */
     @Override
     public void waveConsumed(final Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void waveHandled(final Wave wave) {
         synchronized (this) {
             if (isSequential()) {
 
