@@ -29,15 +29,16 @@
   </security>
 #end
 
+<!--
 	<resources os="Windows" arch="x86">
 		<jfx:javafx-runtime version="2.0+" href="http://download.oracle.com/otn-pub/java/javafx/javafx-windows-i586__Vlatest.exe "/>
 	</resources>
 	<resources os="Windows" arch="x64">
 		<jfx:javafx-runtime version="2.0+" href="http://download.oracle.com/otn-pub/java/javafx/javafx-windows-x64__Vlatest.exe "/>
 	</resources>
-  
+-->	
   	<resources>
-		<j2se version="1.7+" />
+		<j2se version="1.8+" href="http://java.sun.com/products/autodl/j2se"/>
 		$dependencies
 	</resources>
 	

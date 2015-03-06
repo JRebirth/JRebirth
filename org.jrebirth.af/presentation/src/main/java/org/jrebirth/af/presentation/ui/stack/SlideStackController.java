@@ -17,7 +17,6 @@
  */
 package org.jrebirth.af.presentation.ui.stack;
 
-import javafx.event.ActionEvent;
 import javafx.scene.control.Control;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -71,7 +70,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
     protected void initEventHandlers() throws CoreException {
 
         // Listen keys event on the root node
-        getView().getCircle().setOnAction(getHandler(ActionEvent.ACTION));
+        // getView().getCircle().setOnAction(getHandler(ActionEvent.ACTION));
 
     }
 
@@ -119,8 +118,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * @param mouseEvent
      */
     protected void onMouseReleased(final MouseEvent mouseEvent) {
-        System.out.println("Mouse " + mouseEvent);
-        if (!(mouseEvent.getTarget() instanceof Control) && !(mouseEvent.getTarget() instanceof WebView)) {
+        if (!mouseEvent.isSynthesized() && !(mouseEvent.getTarget() instanceof Control) && !(mouseEvent.getTarget() instanceof WebView)) {
             if (mouseEvent.getButton() == MouseButton.PRIMARY) {
                 getModel().callCommand(ShowNextSlideCommand.class);
                 mouseEvent.consume();
@@ -140,10 +138,6 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * @param swipeEvent
      */
     protected void onSwipeLeft(final SwipeEvent swipeEvent) {
-
-        System.out.println("swipe left");
-        getView().getCircle().fireEvent(new ActionEvent());
-
         getModel().callCommand(ShowNextSlideCommand.class);
         swipeEvent.consume();
     }
@@ -154,17 +148,8 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * @param swipeEvent
      */
     protected void onSwipeRight(final SwipeEvent swipeEvent) {
-        System.out.println("swipe right");
         getModel().callCommand(ShowPreviousSlideCommand.class);
         swipeEvent.consume();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void action(final ActionEvent actionEvent) {
-        System.err.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     }
 
     // /**

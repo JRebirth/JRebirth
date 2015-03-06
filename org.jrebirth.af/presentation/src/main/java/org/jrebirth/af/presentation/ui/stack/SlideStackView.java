@@ -18,13 +18,16 @@
 package org.jrebirth.af.presentation.ui.stack;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
 import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.ui.annotation.OnKey;
+import org.jrebirth.af.api.ui.annotation.OnMouse;
 import org.jrebirth.af.api.ui.annotation.OnSwipe;
 import org.jrebirth.af.api.ui.annotation.RootNodeId;
+import org.jrebirth.af.api.ui.annotation.type.Key;
+import org.jrebirth.af.api.ui.annotation.type.Mouse;
 import org.jrebirth.af.api.ui.annotation.type.Swipe;
 import org.jrebirth.af.core.ui.DefaultView;
 
@@ -37,12 +40,12 @@ import org.jrebirth.af.core.ui.DefaultView;
  * @author Sébastien Bordes
  */
 @RootNodeId("SlideStack")
-// @OnKey(Key.Pressed)
-// @OnMouse(Mouse.Released)
+@OnKey(Key.Pressed)
+@OnMouse(Mouse.Released)
 @OnSwipe({ Swipe.Left, Swipe.Right })
 public final class SlideStackView extends DefaultView<SlideStackModel, StackPane, SlideStackController> {
 
-    private Button circle;
+    // private Button circle;
 
     /**
      * Default Constructor.
@@ -68,9 +71,9 @@ public final class SlideStackView extends DefaultView<SlideStackModel, StackPane
         getRootNode().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         getRootNode().setAlignment(Pos.CENTER);
 
-        this.circle = new Button();
+        // this.circle = new Button();
 
-        getRootNode().setOnKeyPressed(getMyController()::onKeyPressed);
+        // getRootNode().setOnKeyPressed(getController()::onKeyPressed);
 
         // getRootNode().setPadding(new Insets(5, 5, 5, 5));
 
@@ -88,16 +91,12 @@ public final class SlideStackView extends DefaultView<SlideStackModel, StackPane
         // getRootNode().setEffect(blend);
     }
 
-    public SlideStackController getMyController() {
-        return getController();
-    }
-
-    /**
-     * @return Returns the circle.
-     */
-    protected Button getCircle() {
-        return this.circle;
-    }
+    // /**
+    // * @return Returns the circle.
+    // */
+    // protected Button getCircle() {
+    // return this.circle;
+    // }
 
     /**
      * {@inheritDoc}
