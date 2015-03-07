@@ -23,10 +23,10 @@
 	<properties>
 		<LightningTalk-version>2.0.0-SNAPSHOT</LightningTalk-version>
 		<MasteringTables-version>2.0.0-SNAPSHOT</MasteringTables-version>
-		<Jaf-version>1.5.0</Jaf-version>
-		<Breizhcamp-version>1.5.0</Breizhcamp-version>
-		<EclipseDay-version>1.5.0</EclipseDay-version>
-		<EclipseCON-version>1.5.0</EclipseCON-version>
+		<Jaf-version>2.0.0-SNAPSHOT</Jaf-version>
+		<Breizhcamp-version>2.0.0-SNAPSHOT</Breizhcamp-version>
+		<EclipseDay-version>2.0.0-SNAPSHOT</EclipseDay-version>
+		<EclipseCON-version>2.0.0-SNAPSHOT</EclipseCON-version>
 	</properties>
 
 	<modules>
