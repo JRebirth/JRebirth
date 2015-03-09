@@ -9,28 +9,29 @@
 Useful links
 
 
- JRebirth provides 2 websites, one for latest development and one for latest stable.\
- The default website (<www>) is mapped to development version to be more up-to-date than frozen <stable> release.\
+ JRebirth provides 2 websites, one for latest development version and one for latest stable version.\
+ The default website (<www>) is mapped to latest stable version to be sync with the latest released version.\
+ The WorkInProgress web site (<wip>) provides latest changes, useful to track latest change or documentation additions.\
  All previous websites are still available for reference (<sites>).
 
 
 * All web sites
 
-	* Website for latest stable version: {{{http://stable.jrebirth.org} stable.jrebirth.org}}
+	* Website for latest stable version: {{{http://www.jrebirth.org} www.jrebirth.org}}
 
-	* Website for latest development version: {{{http://www.jrebirth.org} www.jrebirth.org}}
+	* Website for latest development version: {{{http://wip.jrebirth.org} wip.jrebirth.org}}
 
 	* List of all generated Websites: {{{http://sites.jrebirth.org} sites.jrebirth.org}}
 
 * Javadoc
 
-	* Latest stable version (all modules mixed): {{{http://stable-api.jrebirth.org} stable-api.jrebirth.org}}
+	* Latest stable version (all modules mixed): {{{http://api.jrebirth.org} stable-api.jrebirth.org}}
 
-	* Latest development version (all modules mixed): {{{http://api.jrebirth.org} api.jrebirth.org}}
+	* Latest development version (all modules mixed): {{{http://wip-api.jrebirth.org} wip-api.jrebirth.org}}
 
-	* Latest stable version of core module only: {{{http://stable-api-core.jrebirth.org} stable-api-core.jrebirth.org}}
+	* Latest stable version of core module only: {{{http://api-core.jrebirth.org} api-core.jrebirth.org}}
 
-	* Latest development version of core module only: {{{http://api-core.jrebirth.org} api-core.jrebirth.org}}
+	* Latest development version of core module only: {{{http://wip-api-core.jrebirth.org} wip-api-core.jrebirth.org}}
 
 
 * Software Factory
@@ -43,7 +44,7 @@ Useful links
 
 	* Distributed by Artifactory:  {{{http://repo.jrebirth.org/repo/org/jrebirth}repo.jrebirth.org}}
 
-	* Also available on Bintray Organization repo:  {{{https://bintray.com/repo/browse/jrebirth/JRebirth}https://bintray.com/repo/browse/jrebirth/JRebirth}}
+	* Also available on Bintray Organization repo:  {{{https://bintray.com/jrebirth/JRebirth/JRebirthAF}bintray.com/jrebirth/JRebirth/JRebirthAF}}
 
 	* And JCenter (top level Bintray repository): {{{http://jcenter.bintray.com/org/jrebirth}jcenter.bintray.com}}
 	
