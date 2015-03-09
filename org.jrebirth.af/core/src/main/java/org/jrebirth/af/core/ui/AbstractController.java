@@ -22,11 +22,14 @@ import javafx.scene.Node;
 import javafx.util.Callback;
 
 import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.command.CommandBean;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.View;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.ui.handler.AbstractNamedEventHandler;
@@ -261,6 +264,32 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
                 }
             }
         });
+    }
+
+    /**
+     * Redirect to {@link Model#callCommand(Class, WaveData...)}.
+     *
+     * @param commandClass the command class to call
+     * @param data the data to transport
+     *
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
+     */
+    protected Wave callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data) {
+        return getModel().callCommand(commandClass, data);
+    }
+
+    /**
+     * Redirect to {@link Model#callCommand(Class, WaveBean)}.
+     *
+     * @param commandClass the command class to call
+     * @param waveBean the WaveBean that holds all required wave data
+     *
+     * @param <WB> the type of the wave bean to used
+     *
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
+     */
+    protected <WB extends WaveBean> Wave callCommand(final Class<? extends CommandBean<WB>> commandClass, final WB waveBean) {
+        return callCommand(commandClass, waveBean);
     }
 
 }
