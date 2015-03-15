@@ -36,9 +36,9 @@
             <div id="catcherTitle">Facades Layer</div>
             <div id="catcherContent">Simplify component accessibility.</div>
 
-            <p>JRebirth provide 3+1
+            <p>JRebirth provide 4+1
                 <b>Facade</b>s
-                used to manage its dedicated pattern <b>wCS-Mvc</b>.
+                used to manage its dedicated pattern <b>wB-CS-Mvc</b>.
             </p>
 
             <subsection name="Overview">
@@ -87,6 +87,7 @@
                     <li>CommandFacade</li>
                     <li>ServiceFacade</li>
                     <li>UiFacade</li>
+                    <li>BehaviorFacade</li>
                 </ul>
 
                 <p>The <b>GlobaleFacadeBase</b> allow to get each of these facades by calling appropriate getters:</p>
@@ -113,7 +114,7 @@
 
         <section name="Local Facades">
 
-            <p>There are 3 <b>LocalFacade</b>, each one is responsible of its layer components.
+            <p>There are 4 <b>LocalFacade</b>, each one is responsible of its layer components.
 
             </p>
 
@@ -125,7 +126,6 @@
                     <li>exists : check if the component is already registered, it could be released</li>
                     <li>register : store a pre-built component</li>
                     <li>unregister : remove a component</li>
-                    <li>buildKey : build a unique key for the given component</li>
                 </ul>
 
                 <macro name="include">
@@ -136,7 +136,31 @@
             </subsection>
 
             <subsection name="Component Key">
-                <p>Define how to manage component Key</p>
+                <p>Each Component (CSM) are registered into the facade using a <a href="../apidocs/org/jrebirth/af/api/key/UniqueKey.html">UniqueKey</a>, there are 2 options:
+                </p>
+                <ul>
+                <li><a href="#classKey">ClassKey</a></li>
+                <li><a href="#multitonKey">MultitonKey</a></li>
+                </ul>
+
+				<a name="classKey"/>
+				<h4>ClassKey</h4>
+				<p>The simplest key is the <a href="../apidocs/org/jrebirth/af/core/key/ClassKey.html">ClassKey</a>, it's only composed by the class object of the component, thus the can only be stored once into the facade (=singleton).</p>
+				
+				<a name="multitonKey"/>
+				<h4>MultitonKey</h4>
+				<p>The <a href="../apidocs/org/jrebirth/af/core/key/MultitonKey.html">MultitonKey</a> uses also the class of the component but add a variable part to be able to store several instances of a same Component.</p>
+				
+				<h4>Convenient Builder</h4>
+				<p>JRebirth API have a lot of method that take the Component Class with additional objects as key parts.<br />
+				But the API also has a convenient class that provides method tused to build key.
+				
+				<macro name="include">
+                    <param name="source" value="core/src/main/java/org/jrebirth/af/core/key/Key.java"/>
+                    <param name="snippet" value="re:static"/>
+                </macro>
+				
+				</p>
 
             </subsection>
 

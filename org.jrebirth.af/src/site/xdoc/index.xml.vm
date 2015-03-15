@@ -238,8 +238,9 @@
 		<div id="ohloh">
 			
 			<div>
-				<script type="text/javascript" src="http://www.openhub.net/p/599672/widgets/project_basic_stats.js"></script>
 				<script type="text/javascript" src="http://www.openhub.net/p/599672/widgets/project_thin_badge.js"></script>
+			</div>
+			<div>
 				<script type="text/javascript" src="http://www.openhub.net/p/599672/widgets/project_users_logo.js"></script>
 			</div>
 			

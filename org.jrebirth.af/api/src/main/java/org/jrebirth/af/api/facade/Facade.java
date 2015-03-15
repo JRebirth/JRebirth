@@ -72,6 +72,29 @@ public interface Facade<R extends FacadeReady<R>> {
     <E extends R> void unregister(final E readyObject, final Object... keyPart);
 
     /**
+     * Check if the component has already been created and stored.
+     *
+     * @param uniqueKey the unique key for the component to get
+     *
+     * @return true if the component exists
+     *
+     * @param <E> The type of the object registered by this ClassKey
+     */
+    <E extends R> boolean exists(final UniqueKey<E> uniqueKey);
+
+    /**
+     * Check if the component has already been created and stored.
+     *
+     * @param clazz the component class to check
+     * @param keyPart the unique key for multiton FacadeReady element, could be omitted for singleton
+     *
+     * @return true if the component exists
+     *
+     * @param <E> The type of the object registered by this ClassKey
+     */
+    <E extends R> boolean exists(final Class<E> clazz, final Object... keyPart);
+
+    /**
      * Retrieve a ready object component.<br />
      * May allow to build it if it hadn't been done previously
      *
@@ -95,29 +118,6 @@ public interface Facade<R extends FacadeReady<R>> {
      * @param <E> the type of the ready object to retrieve
      */
     <E extends R> E retrieve(final Class<E> clazz, final Object... keyPart);
-
-    /**
-     * Check if the component has already been created and stored.
-     *
-     * @param uniqueKey the unique key for the component to get
-     *
-     * @return true if the component exists
-     *
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    <E extends R> boolean exists(final UniqueKey<E> uniqueKey);
-
-    /**
-     * Check if the component has already been created and stored.
-     *
-     * @param clazz the component class to check
-     * @param keyPart the unique key for multiton FacadeReady element, could be omitted for singleton
-     *
-     * @return true if the component exists
-     *
-     * @param <E> The type of the object registered by this ClassKey
-     */
-    <E extends R> boolean exists(final Class<E> clazz, final Object... keyPart);
 
     /**
      * Return the list of component that have the same classField than the given key.

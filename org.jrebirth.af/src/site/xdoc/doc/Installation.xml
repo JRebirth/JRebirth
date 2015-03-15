@@ -41,8 +41,8 @@
                 <p>JRebirth is composed by a set of jar files, you just have to add them
                     into your application classpath to use them.
                 </p>
-                <p>To get them you can download manually JRebirth distribution archive,
-                    but it could be out of date.
+                <p>To get them you can download manually JRebirth distribution archive directly from the home page or here:<br />
+                <a href="http://apps.jrebirth.org/org.jrebirth.af/">apps.jrebirth.org</a>
                 </p>
                 <p>This distribution mode will be improved in the future for those you
                     don't want to deal with an artifact repository.
@@ -52,15 +52,15 @@
 
             <subsection id="Maven" name="Maven Way">
                 <p>
-                    Currently the easy way to get JRebirth jar files is to use maven
+                    Currently the easy way to get all JRebirth jar files is to use maven
                     convention.
                 </p>
 
                 <p>You just need to add these dependencies into your pom.xml to begin to play with
                     JRebirth Core features.<br />
-                    The first one is the core library of JRebirth Application Framework.
-                    The second one is used to displayed basic JRebirth Preloader.<br />
-                    The last one an optional library used to manage logs.
+                    The first one is an optional library used to manage logs.
+                    The second one is the core library of JRebirth Application Framework.
+                    The last one is used to displayed basic JRebirth Preloader.<br />
                 </p>
 
                 <macro name="include">
@@ -76,24 +76,29 @@
         <section name="Maven Repositories" id="MavenRepositories">
 
             <p>Choose your destiny ! <br/>
-                ...and finish it ! (aka your wonderful application :)</p>
+                ...and finish brillantly your wonderful application :)</p>
+                
             <p>All JRebirth libraries are pushed to several repositories and you must choose how you want to retrieve them.<br />
                 They are pushed in this order :
             </p>
             <ol>
                 <li>
-                    <a href="#ojo">OJO, Open Source Repository hosted by JFrog and powered by Artifactory</a>
+                    <a href="#ojo">OJO, Open Source Repository hosted by JFrog and powered by Artifactory (Snapshots and Releases)</a>
                     <a href="http://oss.jfrog.org">oss.jfrog.org</a>
                 </li>
                 <li>
-                    <a href="#bintray">Our public repository powered by Bintray (On demand Jenkins build)</a>
+                    <a href="#bintray">Our public repository powered by Bintray (Only Releases, On demand Jenkins build)</a>
                 </li>
                 <li>
-                    <a href="#jcenter">JCenter Bintray repository (Only Releases)</a>
+                    <a href="#jcenter">JCenter Bintray repository (Only Releases, Superset of Maven Central)</a>
                 </li>
                 <li>
                     <a href="#repo">Our internal repository powered by Artifactory (could be
                         offline)
+                    </a>
+                </li>
+                <li>
+                    <a href="#central">Maven Central, all releases are synchronized with Central repository
                     </a>
                 </li>
                 <li>
@@ -102,17 +107,15 @@
             </ol>
 
             <p>
-                <em>JRebirth is not yet on Maven Central repository because the upload policy is too restrictive
-                    (actually it requires to update your pom to be allowed to send your artifacts on a third-party
-                    repository that will be synchronized with Central).
+                <em>JRebirth is published on Maven Central repository with the help of Bintray synchronization (without having to modify your pom files).
                 </em><br />
-                If you don't want to bother yourself with all these settings, you should just proxy <b>OJO</b> repository.
+                If you don't want to bother yourself with all these settings, you should just proxy <b>JCenter</b> repository.
             </p>
 
             <p>
-                The first location to check is
+                When searching the latest versio of JRebirth, the first location to check is
                 <b>OJO</b>
-                because releases and snapshots are pushed automatically to it, so check it out first !
+                because Releases and Snapshots are pushed automatically to it, so check it out first !
             </p>
 
             <p>Let's have a macro look on all these alternatives.</p>
@@ -175,10 +178,10 @@
                 <p>JRebirth artifacts are pushed to
                     <a href="https://bintray.com/pkg/show/general/jrebirth/JRebirth/JRebirth">Bintray</a>
                     repository and then automatically synchronized to JCenter main Bintray repository.
-                    Only release version are managed.
+                    Only release version are managed. These repository can also host other kind of binaries.
                 </p>
                 <p>It's possible to add only JRebirth Bintray repository to your project, but it's more convenient to
-                    add JCenter repository which aggregate all Bintray repositories.</p>
+                    add JCenter repository which aggregate all configured Bintray repositories .</p>
 
             </subsection>
 
@@ -188,11 +191,11 @@
                     libraries without the pitfall to
                     update your pom.xml in order to push them on a proxy
                     repository.
-                    JCenter is absolutely a fabulous alternative to Maven Central, it can also host other kinf of binaries.
+                    JCenter is absolutely a fabulous alternative to Maven Central, moreover since it has became a superset of Maven Central.
                 </p>
 
                 <p>If you want to use JCenter repository, you must add this into your Maven settings.xml.
-                    Pay attention that at this time JCenter contains only 'Release' artifacts, no 'snapshot' versions
+                    Pay attention that at this time JCenter contains only 'Release' artifacts, no 'Snapshot' versions
                 </p>
                 
                 <macro name="include">
@@ -211,7 +214,7 @@
                     <a href="http://repo.jrebirth.org">repo.jrebirth.org</a>
                     ), but the server is not 7/7 24/24 ready due to energy savings. It could be offline when you need to
                     recompile your application, so you shouldn't use it into your builds.
-                    It's mainly used as proxy for our developers, although it also hosts all JRebirth binaries.
+                    It's mainly used as proxy for our developers, although it also hosts all JRebirth binaries (like Applications) that are not pushed on OJO or Bintray.
                 </p>
 
 
@@ -236,15 +239,21 @@
 
             </subsection>
 
+ 			<subsection id="central" name="Maven Central">
+                <p>
+                    Maven Central is the default repository used by any Maven installation, so you don't have to configure something to be able to grab JRebirth artifacts.<br />
+                    JRebirth artifacts are synchronized with Central since 7.7.0 version.
+                </p>
+            </subsection>
 
             <subsection name="Hybrid Configuration" id="hybrid">
                 <p>You can add both OJO, JCenter, and JRebirth Artifactory repositories, if you want to
                     be up-to-date at any time.
                 </p>
 
-                <p>If you just want to deal with stable release use only OJO (Release repo) and JCenter.<br />
+                <p>If you just want to deal with stable release use only OJO (Release repo) or JCenter.<br />
                     If sometimes you need to test a
-                    snapshot version use OJO (Snapshot repo) and our Artifactory instance or ask us a custom build.
+                    Snapshot version use OJO (Snapshot repo) and our Artifactory instance or ask us a custom build.
                 </p>
 
 			 <a name="AllInOneProfile" />
