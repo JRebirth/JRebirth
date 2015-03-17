@@ -122,10 +122,10 @@
 
                 <p>Each Facade can manage its components (also called readyObject) throught some public methods.</p>
                 <ul>
-                    <li>retrieve : used to get a component (build and register it if needed)</li>
-                    <li>exists : check if the component is already registered, it could be released</li>
                     <li>register : store a pre-built component</li>
                     <li>unregister : remove a component</li>
+                    <li>exists : check if the component is already registered, it could be released</li>
+                    <li>retrieve : used to get a component (build and register it if needed)</li>
                 </ul>
 
                 <macro name="include">

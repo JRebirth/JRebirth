@@ -124,17 +124,10 @@
 
                 <h4>Exit Point Wave Type</h4>
 
-                <macro name="include">
-                    <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java"/>
-                    <param name="snippet" value="re:RE_EVENTS_LOADED ="/>
-                    <param name="snippet-start-offset" value="1"/>
-                </macro>
-
-                <p>This
-                    <em>WaveType</em>
+               <p>The return Wave Type is automatically created with by the using the <em>returnAction</em> value with <em>returnItem</em> as <b>WaveItem</b>.
+               The code above will generate a <b>WaveType</b> that
                     uses only one WaveItem to store the list of events loaded from the given file.
-                </p>
+               </p>
 
 
                 <macro name="include">
@@ -161,10 +154,10 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java"/>
-                    <param name="snippet" value="aj:....LoadEdtFileService.initService(..)"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/impl/LoadEdtFileServiceImpl.java"/>
+                    <param name="snippet" value="aj:....LoadEdtFileServiceImpl.initService(..)"/>
                     <!--<param name="snippet-start-offset" value="3" />-->
-                    <param name="highlight-lines" value="grep:registerCallback"/>
+                    <param name="highlight-lines" value="grep:listen"/>
                 </macro>
 
                 <p>If you don't declare the return
@@ -173,7 +166,8 @@
                     to send back the Service Task output.
                 </p>
 
-                <p>If your Service Task doesn't return anything (void return) you can dismiss this step.</p>
+                <p>If your Service Task doesn't return anything (void return) you can dismiss this step except if you want to receive an empty notification when the Job is done; just use <em>JRebirthItems.voidItem</em>.</p>
+                
 
             </subsection>
 
@@ -182,8 +176,8 @@
 
                 <macro name="include">
                     <param name="source"
-                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java"/>
-                    <param name="snippet" value="aj:....LoadEdtFileService.doLoadEvents(..)"/>
+                           value="showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/impl/LoadEdtFileServiceImpl.java"/>
+                    <param name="snippet" value="aj:....LoadEdtFileServiceImpl.doLoadEvents(..)"/>
                     <param name="snippet-start-offset" value="8"/>
                 </macro>
 
