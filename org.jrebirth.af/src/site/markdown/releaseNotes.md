@@ -3,11 +3,39 @@
 Release Notes
 ==============
 
+8.0.1 - Release 2015-03-17
+-----------------------------------------
+
+This release adds some new features and fixes some small troubles.
+
+- Add Exception Handler to Wave feature [#142](http://github.com/JRebirth/JRebirth/issues/issue/142)<br/>
+An exception handler can be attached to WaveType to handle unplanned cases or generic ones.<br />
+
+- Improve Service Return Wave enhancement [#141](http://github.com/JRebirth/JRebirth/issues/issue/141)<br/>
+Allow to send an empty wave even when the service task return void.<br />
+
+- WebView can't be create into JTP bug [#140](http://github.com/JRebirth/JRebirth/issues/issue/140)<br/>
+WebView is the only node that require to be created into JAT, add a flag into Models to force view creation into JAT.<br />
+
+- Modules don't work with JWS bug [#139](http://github.com/JRebirth/JRebirth/issues/issue/139)<br/>
+Module.xml files are now correctly loaded when using Java WebStart.<br />
+
+- SimpleModel should be released too bug [#138](http://github.com/JRebirth/JRebirth/issues/issue/138)<br/>
+Allow to release SimpleModel when its root node is no more displayed into the current scene (like other Models).<br />
+
+- Undefined waves are consumed before all handlers (running into JTP and JAT) are processed bug [#137](http://github.com/JRebirth/JRebirth/issues/issue/137)<br/>
+Add the WaveHandled status to declare that all handlers have been performed, WaveConsumed is set when all handlers have been triggered.<br />
+
+- Component Interface Management feature [#107](http://github.com/JRebirth/JRebirth/issues/issue/107)<br/>
+Allow to manage Component declaration using an Interface (use the Module engine and AnnotatedComponentFactory in background).<br />
+
+
 8.0.0 - ["Music Sounds Better With You"](https://www.youtube.com/watch?v=JdeMvR--ICk) Release 2015-01-14
 -----------------------------------------
 
 The 8.x series requires Java 8.
 This version introduces some useful enhancements and new concepts like Behaviors and Modules.
+
 
 - Get a new fresh FXML instance per FXMLModel [#126](http://github.com/JRebirth/JRebirth/issues/issue/126)<br/>
 It's now possible to get 1000 times the same fxml to 1000 different nodes.<br />
@@ -56,7 +84,6 @@ Allow to use different jars as module that will define custom components (CSM).<
 
 - Replace InnerModel by InnerComponent [#8](http://github.com/JRebirth/JRebirth/issues/issue/8)<br/>
 InnerComponent are more generic than InnerModel and their lifecycle have been reveiwed.<br />
-
 
 
 7.7.5 - ["Dark Horse"](https://www.youtube.com/watch?v=0KSOMA3QBU0) Release 2014-10-13
@@ -471,13 +498,13 @@ Internal logger has been discarded, and internal event tracker has been upgraded
 
 
 - Add JRebirth properties management
-A new mecanism to load properties has been created, it allows to use custom parameters (JRebirth already use some customizable properties)
+A new mechanism to load properties has been created, it allows to use custom parameters (JRebirth already use some customizable properties)
 
 
 - Refactor Resources Management
-Usage of resources has been improved (font, colors, parameters), check sample test classes to learn more : [Junit Tests](https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth/core/src/test/java/org/jrebirth/af/core/resource).
+Usage of resources has been improved (font, colors, parameters), check sample test classes to learn more : [JUnit Tests](https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth/core/src/test/java/org/jrebirth/af/core/resource).
 
 
 - Improve site deployment
-JRebirth maven web site has been repaired, it provides Javadoc API, you should visit these urls : [api.jrebirth.org] [site.jrebirth.org] [sites.jrebirth.org]
+JRebirth Maven web site has been repaired, it provides Javadoc API, you should visit these urls : [api.jrebirth.org]() [site.jrebirth.org]() [sites.jrebirth.org]()
 
