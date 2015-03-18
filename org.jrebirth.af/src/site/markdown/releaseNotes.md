@@ -8,26 +8,32 @@ Release Notes
 
 This release adds some new features and fixes some small troubles.
 
-- Add Exception Handler to Wave feature [#142](http://github.com/JRebirth/JRebirth/issues/issue/142)<br/>
-An exception handler can be attached to WaveType to handle unplanned cases or generic ones.<br />
+- Add Exception Handler to Wave feature [#142](http://github.com/JRebirth/JRebirth/issues/issue/142)
+An exception handler can be attached to WaveType to handle unplanned cases or generic ones.
 
-- Improve Service Return Wave enhancement [#141](http://github.com/JRebirth/JRebirth/issues/issue/141)<br/>
-Allow to send an empty wave even when the service task return void.<br />
 
-- WebView can't be create into JTP bug [#140](http://github.com/JRebirth/JRebirth/issues/issue/140)<br/>
-WebView is the only node that require to be created into JAT, add a flag into Models to force view creation into JAT.<br />
+- Improve Service Return Wave enhancement [#141](http://github.com/JRebirth/JRebirth/issues/issue/141)
+Allow to send an empty wave even when the service task return void.
 
-- Modules don't work with JWS bug [#139](http://github.com/JRebirth/JRebirth/issues/issue/139)<br/>
-Module.xml files are now correctly loaded when using Java WebStart.<br />
 
-- SimpleModel should be released too bug [#138](http://github.com/JRebirth/JRebirth/issues/issue/138)<br/>
-Allow to release SimpleModel when its root node is no more displayed into the current scene (like other Models).<br />
+- WebView can't be create into JTP bug [#140](http://github.com/JRebirth/JRebirth/issues/issue/140)
+ WebView is the only node that require to be created into JAT, add a flag into Models to force view creation into JAT.
 
-- Undefined waves are consumed before all handlers (running into JTP and JAT) are processed bug [#137](http://github.com/JRebirth/JRebirth/issues/issue/137)<br/>
-Add the WaveHandled status to declare that all handlers have been performed, WaveConsumed is set when all handlers have been triggered.<br />
 
-- Component Interface Management feature [#107](http://github.com/JRebirth/JRebirth/issues/issue/107)<br/>
-Allow to manage Component declaration using an Interface (use the Module engine and AnnotatedComponentFactory in background).<br />
+- Modules don't work with JWS bug [#139](http://github.com/JRebirth/JRebirth/issues/issue/139)
+Module.xml files are now correctly loaded when using Java WebStart.
+
+
+- SimpleModel should be released too bug [#138](http://github.com/JRebirth/JRebirth/issues/issue/138)
+Allow to release SimpleModel when its root node is no more displayed into the current scene (like other Models).
+
+
+- Undefined waves are consumed before all handlers (running into JTP and JAT) are processed bug [#137](http://github.com/JRebirth/JRebirth/issues/issue/137)
+Add the WaveHandled status to declare that all handlers have been performed, WaveConsumed is set when all handlers have been triggered.
+
+
+- Component Interface Management feature [#107](http://github.com/JRebirth/JRebirth/issues/issue/107)
+Allow to manage Component declaration using an Interface (use the Module engine and AnnotatedComponentFactory in background).
 
 
 8.0.0 - ["Music Sounds Better With You"](https://www.youtube.com/watch?v=JdeMvR--ICk) Release 2015-01-14
@@ -38,52 +44,65 @@ This version introduces some useful enhancements and new concepts like Behaviors
 
 
 - Get a new fresh FXML instance per FXMLModel [#126](http://github.com/JRebirth/JRebirth/issues/issue/126)<br/>
-It's now possible to get 1000 times the same fxml to 1000 different nodes.<br />
+It's now possible to get 1000 times the same fxml to 1000 different nodes.
 
 - Add Multimap [#118](http://github.com/JRebirth/JRebirth/issues/issue/118)<br/>
-Add a custom MultiMap implementation.<br />
+Add a custom MultiMap implementation.
+
 
 - Add Reference Command [#116](http://github.com/JRebirth/JRebirth/issues/issue/116)<br/>
-Allow to manage command with custom beans to chain them in an easy and convenient way (support all thread types).<br />
+Allow to manage command with custom beans to chain them in an easy and convenient way (support all thread types).
+
 
 - Add Behavior Map into Component [#115](http://github.com/JRebirth/JRebirth/issues/issue/115)<br/>
-Add Behavior objects to enhance any Component.<br />
+Add Behavior objects to enhance any Component.
+
 
 - Replace WaveBuilder by Smart Wave [#114](http://github.com/JRebirth/JRebirth/issues/issue/114)<br/>
-Improve internal API to be more convenient.<br />
+Improve internal API to be more convenient.
+
 
 - Add @RootNodeClass [#112](http://github.com/JRebirth/JRebirth/issues/issue/112)<br/>
-Allow to use annotation to define CSS class.<br />
+Allow to use annotation to define CSS class.
+
 
 - Fix method reference usage for event handler  [#111](http://github.com/JRebirth/JRebirth/issues/issue/111)<br/>
-This issue will not be fixed because it's a Java 8 bug, method should be overridden to force the rela object type.<br />
+This issue will not be fixed because it's a Java 8 bug, method should be overridden to force the rela object type.
+
 
 - EventAdapter with default methods [#110](http://github.com/JRebirth/JRebirth/issues/issue/110)<br/>
-Use Java 8 default methods to be more convenient.<br />
+Use Java 8 default methods to be more convenient.
+
 
 - EventTypeEnum should be moved into their own file [#109](http://github.com/JRebirth/JRebirth/issues/issue/109)<br/>
-Extract all enumeration to facilitate their reusability.<br />
+Extract all enumeration to facilitate their reusability.
+
 
 - OnKey annotation should handle several OnKey.KeyType value [#108](http://github.com/JRebirth/JRebirth/issues/issue/108)<br/>
-Fix an API issue reltaed to OnKey annotation.<br />
+Fix an API issue reltaed to OnKey annotation.
 
 - Allow Resource declaration into enum [#106](http://github.com/JRebirth/JRebirth/issues/issue/106)<br/>
-Re-introduce a nice way to declare resources using an Enumeration.<br />
+Re-introduce a nice way to declare resources using an Enumeration.
+
 
 - Allow repeatable annotations [#104](http://github.com/JRebirth/JRebirth/issues/issue/104)<br/>
-Allow to repeat several annoation thanks to Java8 feature.<br />
+Allow to repeat several annoation thanks to Java8 feature.
+
 
 - Simplify Service Callback WaveType [#100](http://github.com/JRebirth/JRebirth/issues/issue/100)<br/>
-Service callback method is note more easy to use.<br />
+Service callback method is note more easy to use.
+
 
 - Manage WaveData through MultiCommand stack [#75](http://github.com/JRebirth/JRebirth/issues/issue/75)<br/>
-WaveData are now copied throught the whole MultiCOmmand stack.<br />
+WaveData are now copied throught the whole MultiCOmmand stack.
+
 
 - Manage Multi Module [#34](http://github.com/JRebirth/JRebirth/issues/issue/34)<br/>
-Allow to use different jars as module that will define custom components (CSM).<br />
+Allow to use different jars as module that will define custom components (CSM).
+
 
 - Replace InnerModel by InnerComponent [#8](http://github.com/JRebirth/JRebirth/issues/issue/8)<br/>
-InnerComponent are more generic than InnerModel and their lifecycle have been reveiwed.<br />
+InnerComponent are more generic than InnerModel and their lifecycle have been reveiwed.
 
 
 7.7.5 - ["Dark Horse"](https://www.youtube.com/watch?v=0KSOMA3QBU0) Release 2014-10-13
