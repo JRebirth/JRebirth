@@ -3,9 +3,8 @@
 #set( $symbol_escape = '\' )
 package ${package}.ui;
 
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.ui.DefaultModel;
-import org.jrebirth.af.core.wave.Wave;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +31,7 @@ public final class SampleModel extends DefaultModel<SampleModel, SampleView> {
      * {@inheritDoc}
      */
     @Override
-    protected void initInnerModels() {
+    protected void initInnerComponents() {
         // Put the code to initialize inner models here (if any)
     }
 

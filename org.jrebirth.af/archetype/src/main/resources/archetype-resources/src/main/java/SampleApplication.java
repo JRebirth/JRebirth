@@ -6,19 +6,17 @@ package ${package};
 import java.util.Arrays;
 import java.util.List;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import org.jrebirth.af.api.resource.ResourceItem;
+import org.jrebirth.af.api.resource.font.FontItem;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.application.DefaultApplication;
-import org.jrebirth.af.core.resource.ResourceItem;
-import org.jrebirth.af.core.resource.font.FontItem;
-import org.jrebirth.af.core.ui.Model;
-import org.jrebirth.af.sample.resources.SampleFonts;
-import org.jrebirth.af.sample.resources.SampleStyles;
-import org.jrebirth.af.sample.ui.SampleModel;
-
+import ${package}.resources.SampleFonts;
+import ${package}.resources.SampleStyles;
+import ${package}.ui.SampleModel;
 /**
  * The class <strong>SampleApplication</strong>.
  * 
@@ -63,7 +61,7 @@ public final class SampleApplication extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    protected List<? extends ResourceItem<?, ?, ?, ?>> getResourceToPreload() {
+    protected List<? extends ResourceItem<?, ?, ?>> getResourceToPreload() {
         return Arrays.asList(new FontItem[] {
                 SampleFonts.SPLASH,
         });

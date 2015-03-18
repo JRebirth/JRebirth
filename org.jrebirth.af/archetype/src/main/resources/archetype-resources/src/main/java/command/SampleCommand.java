@@ -3,10 +3,8 @@
 #set( $symbol_escape = '\' )
 package ${package}.command;
 
-import org.jrebirth.af.core.command.DefaultCommand;
-import org.jrebirth.af.core.wave.Wave;
-import org.jrebirth.af.sample.command.SampleCommand;
-
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.command.single.internal.DefaultCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

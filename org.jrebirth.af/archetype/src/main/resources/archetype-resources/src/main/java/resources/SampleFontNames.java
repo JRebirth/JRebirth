@@ -1,9 +1,9 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package};
+package ${package}.resources;
 
-import org.jrebirth.af.core.resource.font.FontName;
+import org.jrebirth.af.api.resource.font.FontName;
 
 /**
  * The class <strong>SampleFontNames</strong>.

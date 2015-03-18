@@ -3,14 +3,13 @@
 #set( $symbol_escape = '\' )
 package ${package}.command;
 
-import org.jrebirth.af.core.command.DefaultPoolCommand;
-import org.jrebirth.af.core.wave.Wave;
-
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.command.single.pool.DefaultPoolCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The class <strong>SampleUICommand</strong> used to process long action (without monitoring)into the JRebirth Thread Pool.
+ * The class <strong>SamplePoolCommand</strong> used to process long action (without monitoring)into the JRebirth Thread Pool.
  * 
  * @author
  */
