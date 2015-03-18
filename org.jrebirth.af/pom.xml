@@ -10,7 +10,7 @@
 
 	<groupId>org.jrebirth</groupId>
 	<artifactId>af</artifactId>
-	<version>8.0.1-SNAPSHOT</version>
+	<version>8.0.1</version>
 
 	<packaging>pom</packaging>
 	<name>JRebirth Application Framework</name>
@@ -64,7 +64,8 @@
 		<connection>scm:git:git://github.com/JRebirth/JRebirth.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth.git</developerConnection>
 		<url>https://github.com/JRebirth/JRebirth/tree/8.x</url>
-	</scm>
+	  <tag>jrebirth-8.0.1</tag>
+  </scm>
 
 	<licenses>
 		<license>
@@ -114,7 +115,7 @@
 			<id>jr4</id>
 			<name>Guruprasad Shenoy</name>
 			<email>guruprasad.shenoy@jrebirth.org</email>
-			<url></url>
+			<url />
 			<organization>JUGChennai</organization>
 			<organizationUrl>http://jugchennai.in</organizationUrl>
 			<roles>
@@ -254,8 +255,7 @@
 			</plugin>
 
 			<!-- Copy UML Class Diagram -->
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> <executions> <execution> <id>UML recopy</id> <phase>pre-site</phase> <configuration> <tasks> <copy 
-				todir="${project.build.directory}/site/doc/uml/"> <fileset dir="${basedir}/src/main/uml/*.png" /> </copy> </tasks> </configuration> <goals> <goal>run</goal> </goals> </execution> </executions> </plugin> -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> <executions> <execution> <id>UML recopy</id> <phase>pre-site</phase> <configuration> <tasks> <copy todir="${project.build.directory}/site/doc/uml/"> <fileset dir="${basedir}/src/main/uml/*.png" /> </copy> </tasks> </configuration> <goals> <goal>run</goal> </goals> </execution> </executions> </plugin> -->
 
 
 			<!-- Project Quality -->
