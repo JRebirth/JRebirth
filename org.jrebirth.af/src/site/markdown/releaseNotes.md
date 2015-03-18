@@ -46,6 +46,7 @@ This version introduces some useful enhancements and new concepts like Behaviors
 - Get a new fresh FXML instance per FXMLModel [#126](http://github.com/JRebirth/JRebirth/issues/issue/126)<br/>
 It's now possible to get 1000 times the same fxml to 1000 different nodes.
 
+
 - Add Multimap [#118](http://github.com/JRebirth/JRebirth/issues/issue/118)<br/>
 Add a custom MultiMap implementation.
 
@@ -81,6 +82,7 @@ Extract all enumeration to facilitate their reusability.
 - OnKey annotation should handle several OnKey.KeyType value [#108](http://github.com/JRebirth/JRebirth/issues/issue/108)<br/>
 Fix an API issue reltaed to OnKey annotation.
 
+
 - Allow Resource declaration into enum [#106](http://github.com/JRebirth/JRebirth/issues/issue/106)<br/>
 Re-introduce a nice way to declare resources using an Enumeration.
 
@@ -94,7 +96,7 @@ Service callback method is note more easy to use.
 
 
 - Manage WaveData through MultiCommand stack [#75](http://github.com/JRebirth/JRebirth/issues/issue/75)<br/>
-WaveData are now copied throught the whole MultiCOmmand stack.
+WaveData are now copied throught the whole MultiCommand stack.
 
 
 - Manage Multi Module [#34](http://github.com/JRebirth/JRebirth/issues/issue/34)<br/>
