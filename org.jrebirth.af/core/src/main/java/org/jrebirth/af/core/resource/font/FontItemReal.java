@@ -45,7 +45,7 @@ public interface FontItemReal extends FontItem {
     /**
      * The interface <strong>Real</strong> provides shortcuts method used to build and register a {@link RealFont}.
      */
-    interface Real extends FontItem {
+    interface Real extends FontItemReal {
 
         /**
          * Build and register a {@link RealFont} {@link FontParams}.
@@ -62,7 +62,7 @@ public interface FontItemReal extends FontItem {
     /**
      * The interface <strong>Family</strong> provides shortcuts method used to build and register a {@link FamilyFont}.
      */
-    interface Family extends FontItem {
+    interface Family extends FontItemReal {
 
         /**
          * Build and register a {@link FamilyFont} {@link FontParams}.
