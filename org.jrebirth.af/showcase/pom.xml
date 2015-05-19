@@ -221,7 +221,6 @@
 
 	<dependencies>
 
-		<!-- Use logback logger -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
