@@ -125,7 +125,7 @@
                     <param name="snippet" value="aj:SampleApplication"/>
                 </macro>
                 
-                <p>The SampleModel.class is shown and explained into the <a href="Ui.html#Models">Ui</a> page.</p>
+                <p>The SampleModel.class is shown and explained into the <a href="Ui.html#Model_Overview">Ui</a> page.</p>
 
                 <h4>Root Node</h4>
                 <p>

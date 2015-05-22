@@ -98,7 +98,7 @@
 
 		</section>
 
-		<section name="Models">
+		<section name="Model Overview">
 				<p>Models are directly synchronized with the UIFacade and can send &amp; receive Waves, they can also use any other components.</p>
 				<p>The goal of Models is to retrieve data from other layers, and to define Business Logic (business rules, authorizations ...).</p>
 				<p>The Model automatically build its attached view (except SimpleModel).</p>
