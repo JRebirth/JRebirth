@@ -70,7 +70,7 @@
             <subsection name="Internal Communication">
                 <p>
                     The global facade create automatically the JRebirth notification engine. You should read the
-                    <a title="Notifier" href="notifier" target="_self">Notifier</a>
+                    <a title="Notifier" href="Notifier.html" target="_self">Notifier</a>
                     page to have more informations.
                 </p>
             </subsection>

@@ -124,6 +124,8 @@
                     <param name="source" value="sample/src/main/java/org/jrebirth/af/sample/SampleApplication.java"/>
                     <param name="snippet" value="aj:SampleApplication"/>
                 </macro>
+                
+                <p>The SampleModel.class is shown and explained into the <a href="Ui.html#Models">Ui</a> page.</p>
 
                 <h4>Root Node</h4>
                 <p>
