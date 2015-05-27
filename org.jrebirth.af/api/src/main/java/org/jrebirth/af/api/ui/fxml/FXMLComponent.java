@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.api.ui.fxml;
 
+import java.util.Set;
+
 import javafx.scene.Node;
 
 /**
@@ -27,7 +29,9 @@ import javafx.scene.Node;
 public interface FXMLComponent {
 
     /**
-     * @return Returns the node.
+     * Return the fxml root node.
+     * 
+     * @return Returns the root fxml root node.
      */
     Node getNode();
 
@@ -38,4 +42,19 @@ public interface FXMLComponent {
      */
     FXMLController getController();
 
+    /**
+     * Return the node or first node matching the selector.
+     *
+     * @return the node or first node matching the selector.
+     * @see {@link Node#lookup(String)}
+     */
+    Node lookup(String selector);
+
+    /**
+     * Return the set of node matching the selector.
+     *
+     * @return the set of node matching the selector.
+     * @see {@link Node#lookupAll(String)}
+     */
+    Set<Node> lookupAll(String selector);
 }
