@@ -1,6 +1,8 @@
 JRebirth
 ========
 
+[![Join the chat at https://gitter.im/JRebirth/JRebirth](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/JRebirth/JRebirth?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 JRebirth Application Framework for JavaFX graphical toolkit
 
 A set of Showcase Applications are provided for live documentation and used as integration test
