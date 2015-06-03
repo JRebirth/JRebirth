@@ -64,10 +64,10 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
         this.view = view;
 
         // Track this controller creation
-        getModel().getLocalFacade().getGlobalFacade().trackEvent(org.jrebirth.af.api.facade.JRebirthEventType.CREATE_CONTROLLER, getView().getClass(), this.getClass());
+        getModel().getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_CONTROLLER, getView().getClass(), this.getClass());
     }
 
-    /**
+    /*
      * {@inheritDoc}
      */
     @Override
