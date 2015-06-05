@@ -112,11 +112,11 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
     public String getUrl() {
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(secured() ? "https://" : "http://");
-        sb.append(website());
-        sb.append(path());
-        sb.append(name());
-        sb.append(extension());
+        sb.append(secured() ? "https://" : "http://")
+          .append(website())
+          .append(path())
+          .append(name())
+          .append(extension());
 
         return sb.toString();
     }

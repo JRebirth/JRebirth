@@ -29,6 +29,11 @@ import org.jrebirth.af.core.resource.AbstractResourceItem;
  */
 public final class FXMLItemBase extends AbstractResourceItem<FXMLItem, FXMLParams, FXMLComponent> implements FXMLItemReal {
 
+    /**
+     * Build a fresh instance of {@link FXMLItemBase}.
+     * 
+     * @return a {@link FXMLItemBase} instance
+     */
     public static FXMLItemBase create() {
         return new FXMLItemBase();
     }

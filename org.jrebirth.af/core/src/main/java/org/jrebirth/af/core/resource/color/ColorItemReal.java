@@ -29,7 +29,7 @@ import org.jrebirth.af.core.resource.ResourceBuilders;
  *
  * @author Sébastien Bordes
  */
-public interface ColorItemReal extends org.jrebirth.af.api.resource.color.ColorItem {
+public interface ColorItemReal extends ColorItem {
 
     /**
      * {@inheritDoc}

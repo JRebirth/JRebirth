@@ -30,6 +30,11 @@ import org.jrebirth.af.core.resource.AbstractResourceItem;
  */
 public final class StyleSheetItemBase extends AbstractResourceItem<StyleSheetItem, StyleSheetParams, URL> implements StyleSheetItemReal {
 
+    /**
+     * Build a fresh instance of {@link StyleSheetItemBase}.
+     * 
+     * @return a {@link StyleSheetItemBase} instance
+     */
     public static StyleSheetItemBase create() {
         return new StyleSheetItemBase();
     }

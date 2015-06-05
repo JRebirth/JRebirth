@@ -130,7 +130,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
                 String fontPath = fontPaths.get(i);
                 if (!fontPath.isEmpty()) {
-                    fontPath += Resources.PATH_SEP;
+                    fontPath += Resources.PATH_SEP; // NO SONAR
                 }
 
                 // This variable will hold the 2 alternative font names
