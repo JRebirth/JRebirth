@@ -60,6 +60,11 @@ public class ServiceException extends RuntimeException {
         super(t);
     }
 
+    /**
+     * Return the explanation of the exception.
+     *
+     * @return the exception explanation
+     */
     public String getExplanation() {
         final StringBuilder sb = new StringBuilder();
         if (getMessage() != null) {

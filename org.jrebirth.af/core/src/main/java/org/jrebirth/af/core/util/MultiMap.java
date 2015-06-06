@@ -11,7 +11,7 @@ import org.jrebirth.af.api.concurrent.RunnablePriority;
 
 /**
  * The class <strong>MultiMap</strong>.
- * 
+ *
  * @author Sébastien Bordes
  *
  * @param <K> The object used as a Key
@@ -69,6 +69,14 @@ public class MultiMap<K, V> implements Map<K, List<V>> {
         return this.map.get(key);
     }
 
+    /**
+     * Add a new entry.
+     *
+     * @param key the key of the entry
+     * @param value the value of the entry
+     *
+     * @return true if the operation has succeeded
+     */
     public boolean add(final K key, final V value) {
         if (!this.map.containsKey(key)) {
             this.map.put(key, new ArrayList<V>());
@@ -134,18 +142,33 @@ public class MultiMap<K, V> implements Map<K, List<V>> {
 
     /**
      * The class <strong>Entry</strong>.
-     * 
+     *
      * @author Sébastien Bordes
-     * 
+     *
      * @param <E> the type of the value stored
      */
     public class Entry<E> {
 
+        /** The id of the entry. */
         private final String id;
+
+        /** The description of the entry. */
         private final String description;
+
+        /** The priority of the entry. */
         private final RunnablePriority priority;
+
+        /** The entry value. */
         private final E value;
 
+        /**
+         * Default Constructor.
+         *
+         * @param id the id entry
+         * @param description the description entry
+         * @param priority the priority entry
+         * @param value the value entry
+         */
         public Entry(final String id, final String description, final RunnablePriority priority, final E value) {
             super();
             this.id = id;

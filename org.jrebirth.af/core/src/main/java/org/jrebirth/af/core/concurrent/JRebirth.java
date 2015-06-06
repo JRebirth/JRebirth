@@ -134,6 +134,7 @@ public final class JRebirth {
      * Run the task into the JavaFX Application Thread [JAT].
      *
      * @param runnable the task to run
+     * @param timeout the optional value for timeout
      */
     public static void runIntoJITSync(final JRebirthRunnable runnable, final long... timeout) {
         final SyncRunnable sync = new SyncRunnable(runnable);

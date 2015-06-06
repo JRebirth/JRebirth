@@ -378,7 +378,10 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     // }
 
     /**
-     * {@inheritDoc}
+     * Return the command key.
+     *
+     * @param commandClass the class of the command to call
+     * @param keyPart the object used as key parts
      */
     protected UniqueKey<? extends Command> getCommandKey(final Class<? extends Command> commandClass, final Object... keyPart) {
         return Key.create(commandClass, keyPart);

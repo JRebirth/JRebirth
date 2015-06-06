@@ -42,7 +42,7 @@ public interface ImageItemReal extends ImageItem {
 
     /**
      * The class <strong>Relative</strong> class is use to build and register {@link RelImage} params.
-     * 
+     *
      * @author Sébastien Bordes
      */
     interface Relative extends ImageItemReal {
@@ -70,7 +70,7 @@ public interface ImageItemReal extends ImageItem {
 
         /**
          * Build and register an {@link Image} using an {@link ImageParams} using {@link RelImage}.
-         * 
+         *
          * @param fullName the full file name (including path and image extension)
          */
         default void rel(final String fullName) {
@@ -81,7 +81,7 @@ public interface ImageItemReal extends ImageItem {
 
     /**
      * The class <strong>Absolute</strong> class is use to build and register {@link AbsImage} params.
-     * 
+     *
      * @author Sébastien Bordes
      */
     interface Absolute extends ImageItemReal {
@@ -120,7 +120,7 @@ public interface ImageItemReal extends ImageItem {
 
     /**
      * The class <strong>Web</strong> class is use to build and register {@link WebImage} params.
-     * 
+     *
      * @author Sébastien Bordes
      */
     interface Web extends ImageItemReal {

@@ -31,7 +31,7 @@ public final class FXMLItemBase extends AbstractResourceItem<FXMLItem, FXMLParam
 
     /**
      * Build a fresh instance of {@link FXMLItemBase}.
-     * 
+     *
      * @return a {@link FXMLItemBase} instance
      */
     public static FXMLItemBase create() {

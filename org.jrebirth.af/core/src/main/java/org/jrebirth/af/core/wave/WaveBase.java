@@ -490,7 +490,7 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void setWaveHandlers(List<? extends Object> waveHandlers) {
+    public void setWaveHandlers(final List<? extends Object> waveHandlers) {
         this.waveHandlers = waveHandlers;
     }
 
@@ -498,7 +498,7 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void removeWaveHandler(Object waveHandler) {
+    public void removeWaveHandler(final Object waveHandler) {
         if (waveHandler != null) {
             // Remove the handler that has terminated
             this.waveHandlers.remove(waveHandler);

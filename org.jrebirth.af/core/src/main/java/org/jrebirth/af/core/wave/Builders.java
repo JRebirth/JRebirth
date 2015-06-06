@@ -64,7 +64,7 @@ public interface Builders {
      * Build a fresh Wave use to call the given command.
      *
      * @param commandClass the command class
-     * 
+     *
      * @return the wave
      */
     static Wave callCommand(final Class<? extends Command> commandClass) {
@@ -77,7 +77,7 @@ public interface Builders {
      * @param <T> the type of the object wrapped by this WaveData
      * @param waveItem the wave item used as the key into the wave
      * @param value the data hold by he wave data wrapper
-     * 
+     *
      * @return a new fresh wave Data object
      */
     static <T extends Object> WaveData<T> waveData(final WaveItem<T> waveItem, final T value) {
@@ -88,7 +88,7 @@ public interface Builders {
      * Build a fresh Wave use to call the {@link ChainWaveCommand} command.
      *
      * @param waveList the list of wave to chain
-     * 
+     *
      * @return the wave
      */
     static Wave chainWaveCommand(final List<Wave> waveList) {

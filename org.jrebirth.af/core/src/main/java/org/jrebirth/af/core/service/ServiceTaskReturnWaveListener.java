@@ -81,7 +81,7 @@ public final class ServiceTaskReturnWaveListener implements WaveListener, Servic
      * {@inheritDoc}
      */
     @Override
-    public void waveHandled(Wave wave) {
+    public void waveHandled(final Wave wave) {
         if (wave.relatedWave() != null) {
             // Return wave has been consumed, so the triggered wave can be consumed too
             LOGGER.trace(SERVICE_TASK_RETURN_CONSUMES, wave.fromClass().getSimpleName(), wave.relatedWave().toString());

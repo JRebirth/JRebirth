@@ -32,7 +32,7 @@ public final class StyleSheetItemBase extends AbstractResourceItem<StyleSheetIte
 
     /**
      * Build a fresh instance of {@link StyleSheetItemBase}.
-     * 
+     *
      * @return a {@link StyleSheetItemBase} instance
      */
     public static StyleSheetItemBase create() {
