@@ -87,8 +87,12 @@ public class DefaultMultiBeanCommand<WB extends WaveBean> extends AbstractMultiC
         throw new CoreRuntimeException(this.getClass() + " shall override List<UniqueKey<? extends Command>> defineSubCommand()");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void initInnerComponents() {
+        // Nothing to do yet
     }
 
 }

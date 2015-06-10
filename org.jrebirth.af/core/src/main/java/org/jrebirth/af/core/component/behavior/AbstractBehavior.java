@@ -25,16 +25,16 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.component.basic.AbstractComponent;
 
 /**
- * The Class AbstractBehavior.
+ * The class AbstractBehavior is the base class for implementing {@link Behavior} interface.
  *
- * @param <D> the generic type
+ * @param <D> the generic type extending {@link BehaviorData}
  */
 public abstract class AbstractBehavior<D extends BehaviorData> extends AbstractComponent<Behavior<?>> implements Behavior<D> {
 
-    /** The data. */
+    /** The behavior data. */
     private D data;
 
-    /** The component. */
+    /** The behaviored component on which the behavior will be used. */
     private BehavioredComponent<?> component;
 
     /**

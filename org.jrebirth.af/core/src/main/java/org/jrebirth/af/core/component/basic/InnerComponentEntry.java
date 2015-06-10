@@ -8,11 +8,13 @@ import org.jrebirth.af.core.key.Key;
  * The class <strong>InnerModelBase</strong>.
  *
  * @author Sébastien Bordes
+ * 
+ * @param <C> the type of the component used
  */
 public final class InnerComponentEntry<C extends Component<?>> implements InnerComponentBase<C> {
 
     /** The generator of unique id. */
-    private static int idGenerator;
+    // private static int idGenerator;
 
     /** The unique identifier of the wave type. */
     private int uid;
