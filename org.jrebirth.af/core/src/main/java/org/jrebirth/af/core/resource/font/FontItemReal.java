@@ -50,8 +50,8 @@ public interface FontItemReal extends FontItem {
         /**
          * Build and register a {@link RealFont} {@link FontParams}.
          *
-         * @param name
-         * @param size
+         * @param name the name of the fonr
+         * @param size the size of the font
          */
         default void real(final FontName name, final double size) {
             set(new RealFont(name, size));

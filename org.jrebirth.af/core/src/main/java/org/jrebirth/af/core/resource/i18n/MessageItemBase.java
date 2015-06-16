@@ -62,7 +62,9 @@ public final class MessageItemBase extends AbstractResourceItem<MessageItem, Mes
 
                     final StringBuilder sb = new StringBuilder();
                     for (final Object param : stringParameters) {
-                        sb.append((param == null ? "" : param.toString()) + "|");
+                        if (param != null) {
+                            sb.append(param.toString()).append("|");
+                        }
                     }
                     res += sb.toString();
                 }

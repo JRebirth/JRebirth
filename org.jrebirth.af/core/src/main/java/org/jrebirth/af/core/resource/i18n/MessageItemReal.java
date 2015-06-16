@@ -27,7 +27,7 @@ import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.slf4j.Marker;
 
 /**
- * The class <strong>MessageItem</strong>.
+ * The class <strong>MessageItem</strong> used to declare Message Resource.
  *
  * The key of the i18n message.
  *
@@ -104,18 +104,33 @@ public interface MessageItemReal extends MessageItem {
         return ResourceBuilders.MESSAGE_BUILDER;
     }
 
+    /**
+     * The interface <strong>Log</strong> used to declare Message Resource fro logging.
+     */
     interface Log extends MessageItem {
 
+        /**
+         * Build and register a {@link LogMessage}.
+         *
+         * @param parameterName the name of the log message
+         * @param level the log level to use
+         * @param marker the log marker to use
+         */
         default void log(final String parameterName, final JRLevel level, final Marker marker) {
             set(new LogMessage(parameterName, level, marker));
         }
 
     }
 
+    /**
+     * The interface <strong>Msg</strong> used to declare Message Resource.
+     *
+     * The key of the i18n message.
+     */
     interface Msg extends MessageItem {
 
         /**
-         * Default Constructor.
+         * Build and register a {@link Message}.
          *
          * @param parameterName the name of the parameter
          */
