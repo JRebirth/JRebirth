@@ -65,9 +65,13 @@
 
                 <macro name="include">
 					<param name="highlight-theme" value="eclipse"/>
-					<param name="source" value="../includes/Basic_Dependencies.xml" />
+<!--	 			<param name="source" value="../includes/Basic_Dependencies.xml" />
 					<param name="snippet" value="xp:/dependencies" />
 					<param name="set-first-line" value="1"/>
+-->					
+					<param name="source" value="../../../sample/pom.xml"/>
+                    <param name="snippet" value="xp://project/dependencies"/>
+					<param name="snippet-end-offset" value="3"/>
 				</macro>
 
                 <p>We will see in the next chapter how to configure your build to get all JRebirth dependencies.</p>
