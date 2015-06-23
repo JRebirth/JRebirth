@@ -3,6 +3,23 @@
 Release Notes
 ==============
 
+
+8.0.2 - Release 2015-06-23
+-----------------------------------------
+
+This release add two minor improvement and fixes sample archetype.
+
+- Fix archetype generation [#152](http://github.com/JRebirth/JRebirth/issues/issue/152)
+Fix version used by sample module, it was using old snapshot version.
+
+- Active pack200 for showcases [#151](http://github.com/JRebirth/JRebirth/issues/issue/151)
+Re-active pack200 for showcases modules, it was broken since Java8 migration.
+
+
+- Add lookup method into FXMLComponent [#149](http://github.com/JRebirth/JRebirth/issues/issue/149)
+Add convenient methods used to search a given node loaded from a fxml file.
+
+
 8.0.1 - Release 2015-03-17
 -----------------------------------------
 
