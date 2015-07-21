@@ -71,7 +71,7 @@ public class DisplayModelWaveBean implements WaveBean {
     /**
      * Hide the default constructor.
      */
-    private DisplayModelWaveBean() {
+    protected DisplayModelWaveBean() {
         super();
     }
 
