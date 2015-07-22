@@ -41,7 +41,7 @@ public interface Key extends Serializable {
     static <C> UniqueKey<C> create(final Class<C> clazz, final Object... keyPart) {
 
         UniqueKey<C> uniqueKey;
-        if (keyPart == null || keyPart.length == 0 || keyPart[0].toString().isEmpty()) {
+        if (keyPart == null || keyPart.length == 0) {
             uniqueKey = createSingle(clazz);
         } else {
             uniqueKey = createMulti(clazz, keyPart);
