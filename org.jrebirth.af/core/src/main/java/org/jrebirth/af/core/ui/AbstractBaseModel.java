@@ -43,7 +43,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
     /** Flag used to determine if a view has been already displayed, useful to manage first time animation. */
     private boolean viewDisplayed;
 
-    /** Force the creation of the View into JAT if set to true. */
+    /** Force the creation of the View into JAT if set to true (useful when the view has got a WebView). */
     protected boolean createViewIntoJAT = false;
 
     /**
@@ -54,9 +54,6 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
 
         // Initialize the current model
         initInternalModel();
-
-        // Initialize inner models (if any)
-        initInternalInnerComponents();
 
         final JRebirthRunnable prepareView = () ->
 
