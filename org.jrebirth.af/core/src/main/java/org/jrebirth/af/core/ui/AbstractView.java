@@ -149,6 +149,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
                 if (newValue == null) {
                     getModel().release();
+                    getRootNode().parentProperty().removeListener(this);
                 }
             }
 

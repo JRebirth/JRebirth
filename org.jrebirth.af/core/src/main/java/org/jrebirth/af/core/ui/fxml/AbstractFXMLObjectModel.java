@@ -119,6 +119,7 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
             public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
                 if (newValue == null) {
                     release();
+                    getRootNode().parentProperty().removeListener(this);
                 }
             }
 
