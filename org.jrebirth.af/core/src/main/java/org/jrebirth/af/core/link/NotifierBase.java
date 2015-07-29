@@ -230,6 +230,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
      * @throws WaveException if wave dispatching fails
      */
     private void processUndefinedWave(final Wave wave) throws WaveException {
+        LOGGER.info(NOTIFIER_CONSUMES, wave.toString());
+        wave.status(Status.Consumed);
 
         // Retrieve all interested object from the map
         if (this.notifierMap.containsKey(wave.waveType())) {
@@ -262,8 +264,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             }
         }
 
-        LOGGER.info(NOTIFIER_CONSUMES, wave.toString());
-        wave.status(Status.Consumed);
+        LOGGER.info(NOTIFIER_HANDLES, wave.toString());
+        wave.status(Status.Handled);
 
     }
 

@@ -53,7 +53,7 @@ public interface Wave {
         /** The wave has just been cancelled. */
         Cancelled,
 
-        /** The wave has just been consumed. */
+        /** The wave is being consumed. */
         Consumed,
 
         /** The wave has been performed by all handlers. */
