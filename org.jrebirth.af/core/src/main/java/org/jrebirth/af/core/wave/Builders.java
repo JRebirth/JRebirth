@@ -20,6 +20,7 @@ package org.jrebirth.af.core.wave;
 import java.util.List;
 
 import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveGroup;
 import org.jrebirth.af.api.wave.contract.WaveData;
@@ -69,6 +70,17 @@ public interface Builders {
      */
     static Wave callCommand(final Class<? extends Command> commandClass) {
         return wave().waveGroup(WaveGroup.CALL_COMMAND).componentClass(commandClass);
+    }
+
+    /**
+     * Build a fresh Wave use to call the given service.
+     *
+     * @param serviceClass the service class
+     *
+     * @return the wave
+     */
+    static Wave returnData(final Class<? extends Service> serviceClass) {
+        return wave().waveGroup(WaveGroup.RETURN_DATA).componentClass(serviceClass);
     }
 
     /**
