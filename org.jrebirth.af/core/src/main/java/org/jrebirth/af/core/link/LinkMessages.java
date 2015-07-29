@@ -98,6 +98,9 @@ public interface LinkMessages extends MessageContainer {
     /** "NB consumes : {0}". */
     MessageItem NOTIFIER_CONSUMES = create(new LogMessage("jrebirth.link.notifierConsumes", JRLevel.Info, JRebirthMarkers.WAVE));
 
+    /** "NB consumes : {0}". */
+    MessageItem NOTIFIER_HANDLES = create(new LogMessage("jrebirth.link.notifierHandles", JRLevel.Info, JRebirthMarkers.WAVE));
+
     /** "Error while handling a wave". */
     MessageItem WAVE_HANDLING_ERROR = create(new LogMessage("jrebirth.link.waveHandlingError", JRLevel.Error, JRebirthMarkers.WAVE));
 
