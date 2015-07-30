@@ -21,7 +21,7 @@ import org.jrebirth.af.api.resource.ResourceItem;
 import org.jrebirth.af.api.ui.fxml.FXMLComponent;
 
 /**
- * The class <strong>FXMLItem</strong>.
+ * The class <strong>FXMLItem</strong> is used to link a {@link FXMLComponent} resource.
  *
  * @author Sébastien Bordes
  */
@@ -38,10 +38,21 @@ public interface FXMLItem extends ResourceItem<FXMLItem, FXMLParams, FXMLCompone
 
     /**
      * {@inheritDoc}
+     * 
+     * Depending on the isSingleton method, it will return a fresh instance or the singleton one
      */
     @Override
     default FXMLComponent get() {
-        return builder().get(this);
+        return isSingleton() ? builder().get(this) : getNew();
+    }
+
+    /**
+     * Return the flag that indicates if the item will help to retrieve the same FXMLComponent instance or another instance at each call.
+     * 
+     * @return true for singleton,false for multiple
+     */
+    default boolean isSingleton() {
+        return true;
     }
 
     /**

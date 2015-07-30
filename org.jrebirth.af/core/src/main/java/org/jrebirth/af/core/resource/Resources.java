@@ -181,7 +181,9 @@ public final class Resources {
     /*************************************************************************/
 
     /**
-     * Build a fxml item.
+     * Build a Singleton FXML item.
+     * 
+     * Each call to FXMLItem.get() will return the same FXML Component instance
      *
      * @param fxmlParams the primitive values for the fxml resource
      *
@@ -189,7 +191,20 @@ public final class Resources {
      */
     public static FXMLItem create(final FXMLParams fxmlParams) {
         // Ensure that the uid will be unique at runtime
-        return FXMLItemBase.create().uid(fxmlIdGenerator.incrementAndGet()).set(fxmlParams);
+        return FXMLItemBase.create(true).uid(fxmlIdGenerator.incrementAndGet()).set(fxmlParams);
+    }
+
+    /**
+     * Build a FXML item with according singleton parameter.
+     *
+     * @param fxmlParams the primitive values for the FXML resource
+     * @param isSingleton the flag that indicates if the FXMLCOmponent will be the same (true) or another instance (false) after each call to FXMLItem.get()
+     *
+     * @return a new fresh FXML item
+     */
+    public static FXMLItem create(final FXMLParams fxmlParams, final boolean isSingleton) {
+        // Ensure that the uid will be unique at runtime
+        return FXMLItemBase.create(isSingleton).uid(fxmlIdGenerator.incrementAndGet()).set(fxmlParams);
     }
 
     /*************************************************************************/

@@ -18,12 +18,12 @@
 package org.jrebirth.af.core.resource.fxml;
 
 /**
- * The class <strong>EnumColors</strong>.
+ * The class <strong>MultitonEnumFxmls</strong>.
  *
  * @author Sébastien Bordes
  *
  */
-public enum EnumFxmls implements FXMLEnum {
+public enum MultitonEnumFxmls implements MultitonFXMLEnum {
 
     // @formatter:off
 

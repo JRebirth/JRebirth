@@ -4,11 +4,13 @@ import org.jrebirth.af.api.resource.fxml.FXMLParams;
 import org.jrebirth.af.api.ui.fxml.FXMLComponent;
 
 /**
- * The interface <strong>FXMLEnum</strong> should be inherited by any Enumeration that want to manage {@link FXMLComponent}.
+ * The interface <strong>SingletonFXMLEnum</strong> should be inherited by any Enumeration that want to manage Singleton {@link FXMLComponent}.
+ *
+ * Each call to FXMLItem will return the same instance of FXMLComponent, anyway please note that a call to FXMLItem.getNew() will return a new instance.
  *
  * @author Sébastien Bordes
  */
-public interface FXMLEnum extends FXMLItemReal {
+public interface SingletonFXMLEnum extends FXMLItemReal {
 
     /**
      * Build and register a {@link FXMLParams}.
