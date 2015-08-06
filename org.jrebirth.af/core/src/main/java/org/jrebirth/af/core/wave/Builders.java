@@ -17,11 +17,17 @@
  */
 package org.jrebirth.af.core.wave;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.api.wave.WaveGroup;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveItem;
@@ -81,6 +87,50 @@ public interface Builders {
      */
     static Wave returnData(final Class<? extends Service> serviceClass) {
         return wave().waveGroup(WaveGroup.RETURN_DATA).componentClass(serviceClass);
+    }
+
+    /**
+     * Build a fresh Wave use to attach a model somewhere.
+     * 
+     * Support these kind of objects:<br>
+     * JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER => ObjectProperty<Node> JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER => ObservableList<Node> JRebirthWaves.SHOW_MODEL_COMMAND => Class<? extends Command>
+     * JRebirthWaves.EXTRA_WAVE_BEANS => WaveBean
+     * 
+     * @param datas a list of object that can be wrapped into a WaveData with Right waveItem
+     *
+     * @return a list of WaveData
+     */
+    @SuppressWarnings("unchecked")
+    static List<WaveData<?>> buildUiData(final Object... datas) {
+
+        final List<WaveData<?>> wdList = new ArrayList<WaveData<?>>();
+
+        List<WaveBean> wbList = null;
+
+        for (final Object data : datas) {
+
+            if (data instanceof ObjectProperty) {
+                wdList.add(waveData(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER, (ObjectProperty<Node>) data));
+            }
+
+            if (data instanceof ObservableList) {
+                wdList.add(waveData(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER, (ObservableList<Node>) data));
+            }
+
+            if (data instanceof Class && Command.class.isAssignableFrom((Class<?>) data)) {
+                wdList.add(waveData(JRebirthWaves.SHOW_MODEL_COMMAND, (Class<? extends Command>) data));
+            }
+
+            if (data instanceof WaveBean) {
+                if (wbList == null) {
+                    wbList = new ArrayList<>();
+                    wdList.add(waveData(JRebirthWaves.EXTRA_WAVE_BEANS, wbList));
+                }
+                wbList.add((WaveBean) data);
+            }
+
+        }
+        return wdList;
     }
 
     /**

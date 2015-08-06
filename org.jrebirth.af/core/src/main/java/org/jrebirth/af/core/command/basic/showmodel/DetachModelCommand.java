@@ -78,7 +78,7 @@ public class DetachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBea
      */
     @Override
     public DisplayModelWaveBean getWaveBean(final Wave wave) {
-        return (DisplayModelWaveBean) wave.waveBean();
+        return wave.waveBean(DisplayModelWaveBean.class);
     }
 
 }

@@ -182,7 +182,7 @@ public final class Resources {
 
     /**
      * Build a Singleton FXML item.
-     * 
+     *
      * Each call to FXMLItem.get() will return the same FXML Component instance
      *
      * @param fxmlParams the primitive values for the fxml resource

@@ -8,7 +8,7 @@ import org.jrebirth.af.core.key.Key;
  * The class <strong>InnerModelBase</strong>.
  *
  * @author Sébastien Bordes
- * 
+ *
  * @param <C> the type of the component used
  */
 public final class InnerComponentEntry<C extends Component<?>> implements InnerComponentBase<C> {

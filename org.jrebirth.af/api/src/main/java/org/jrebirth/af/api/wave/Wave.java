@@ -240,7 +240,32 @@ public interface Wave {
      *
      * @return the wave bean, could be null
      */
-    WaveBean waveBean();
+    <WB extends WaveBean> WB waveBean(Class<WB> waveBeanClass);
+
+    /**
+     * Link a wave bean.
+     *
+     * @param waveBean the wave bean already built to link
+     *
+     * @return the current Wave to chain other method call
+     */
+    Wave waveBean(final WaveBean waveBean);
+
+    /**
+     * Return all wave bean carried by this wave.
+     *
+     * @return the list of wave bean
+     */
+    List<WaveBean> waveBeanList();
+
+    /**
+     * Add several WaveBean in a row.
+     *
+     * @param the list of WaveBean to add
+     *
+     * @return the current Wave to chain other method call
+     */
+    Wave waveBeanList(List<WaveBean> waveBeanList);
 
     /**
      * Add a wave listener.
@@ -261,15 +286,6 @@ public interface Wave {
     Wave removeWaveListener(final WaveListener waveListener);
 
     /**
-     * Link a wave bean.
-     *
-     * @param waveBean the wave bean already built to link
-     *
-     * @return the current Wave to chain other method call
-     */
-    Wave waveBean(final WaveBean waveBean);
-
-    /**
      * Store all Wave Handler.
      *
      * @param waveHandlers the list of WaveHandler
@@ -278,8 +294,16 @@ public interface Wave {
 
     /**
      * Release the given WaveHandler
-     * 
+     *
      * @param waveHandler the waveHandler
      */
     void removeWaveHandler(final Object waveHandler);
+
+    /**
+     * .
+     *
+     * @param class1
+     * @return
+     */
+    boolean hasWaveBean(Class<? extends WaveBean> waveBeanClass);
 }

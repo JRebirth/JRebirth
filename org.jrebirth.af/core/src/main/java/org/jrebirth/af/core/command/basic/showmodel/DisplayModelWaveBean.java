@@ -61,7 +61,7 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /**
      * Build a new instance of {@link DisplayModelWaveBean}.
-     * 
+     *
      * @return a fresh instance
      */
     public static DisplayModelWaveBean create() {
@@ -69,9 +69,9 @@ public class DisplayModelWaveBean implements WaveBean {
     }
 
     /**
-     * Hide the default constructor.
+     * Hide the default constructor but allow subclassing.
      */
-    protected DisplayModelWaveBean() {
+    public DisplayModelWaveBean() {
         super();
     }
 

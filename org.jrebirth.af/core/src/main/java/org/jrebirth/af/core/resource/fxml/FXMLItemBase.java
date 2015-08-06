@@ -43,7 +43,7 @@ public final class FXMLItemBase extends AbstractResourceItem<FXMLItem, FXMLParam
 
     /**
      * Build a fresh instance of {@link FXMLItemBase}.
-     * 
+     *
      * @param isSingleton flag that indicate if the FXML Component is unique or multiple.
      *
      * @return a {@link FXMLItemBase} instance
@@ -54,10 +54,10 @@ public final class FXMLItemBase extends AbstractResourceItem<FXMLItem, FXMLParam
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param isSingleton flag that indicate if the FXML Component is unique or multiple.
      */
-    public FXMLItemBase(boolean isSingleton) {
+    public FXMLItemBase(final boolean isSingleton) {
         super();
         this.isSingleton = isSingleton;
     }

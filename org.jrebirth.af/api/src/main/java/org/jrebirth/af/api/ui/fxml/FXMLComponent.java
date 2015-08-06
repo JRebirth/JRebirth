@@ -30,7 +30,7 @@ public interface FXMLComponent {
 
     /**
      * Return the fxml root node.
-     * 
+     *
      * @return Returns the root fxml root node.
      */
     Node getNode();

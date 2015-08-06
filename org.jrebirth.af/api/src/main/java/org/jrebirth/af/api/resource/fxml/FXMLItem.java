@@ -38,7 +38,7 @@ public interface FXMLItem extends ResourceItem<FXMLItem, FXMLParams, FXMLCompone
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * Depending on the isSingleton method, it will return a fresh instance or the singleton one
      */
     @Override
@@ -48,7 +48,7 @@ public interface FXMLItem extends ResourceItem<FXMLItem, FXMLParams, FXMLCompone
 
     /**
      * Return the flag that indicates if the item will help to retrieve the same FXMLComponent instance or another instance at each call.
-     * 
+     *
      * @return true for singleton,false for multiple
      */
     default boolean isSingleton() {

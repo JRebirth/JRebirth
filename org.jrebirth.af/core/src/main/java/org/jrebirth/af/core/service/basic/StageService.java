@@ -189,7 +189,7 @@ public class StageService extends DefaultService {
      * @return the casted wave bean
      */
     public StageWaveBean getWaveBean(final Wave wave) {
-        return (StageWaveBean) wave.waveBean();
+        return wave.waveBean(StageWaveBean.class);
     }
 
     /**

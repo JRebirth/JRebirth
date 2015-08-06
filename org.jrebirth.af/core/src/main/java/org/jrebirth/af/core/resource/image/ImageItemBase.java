@@ -32,7 +32,7 @@ public final class ImageItemBase extends AbstractResourceItem<ImageItem, ImagePa
 
     /**
      * Create a new ImageItem.
-     * 
+     *
      * @return a fresh instance
      */
     public static ImageItemBase create() {
