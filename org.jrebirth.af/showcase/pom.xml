@@ -19,6 +19,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+		<keystore>${project.build.directory}/keystore.jks</keystore>
+
 		<storepass>storepass</storepass>
 		<storetype>JKS</storetype>
 		<keyalias>keyalias</keyalias>
@@ -157,7 +159,6 @@
 						</updateManifestEntries>
 
 
-						<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
 						<excludeTransitive>false</excludeTransitive>
 
 						<libPath>lib</libPath>
@@ -203,7 +204,6 @@
 
 						<outputJarVersions>false</outputJarVersions>
 
-						<install>false</install>
 						<verbose>true</verbose>
 					</configuration>
 
