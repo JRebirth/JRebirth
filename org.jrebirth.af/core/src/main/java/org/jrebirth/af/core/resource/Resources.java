@@ -135,6 +135,8 @@ public final class Resources {
     /**
      * Build a font item.
      *
+     * Take care of the value used for ({@link JRebirthParameters#FONT_FOLDER}) which will be prepend to the font path.
+     *
      * @param fontParams the primitive values for the font
      *
      * @return a new fresh font item object
@@ -151,6 +153,8 @@ public final class Resources {
     /**
      * Build an image item.
      *
+     * Take care of the value used for ({@link JRebirthParameters#IMAGE_FOLDER}) which will be prepend to the image path.
+     *
      * @param imageParams the primitive values for the image
      *
      * @return a new fresh image item object
@@ -166,6 +170,8 @@ public final class Resources {
 
     /**
      * Build a style sheet item.
+     *
+     * Take care of the value used for ({@link JRebirthParameters#STYLE_FOLDER}) which will be prepend to the style sheet path.
      *
      * @param styleSheetParams the primitive values for the style sheet
      *

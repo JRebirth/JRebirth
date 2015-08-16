@@ -26,7 +26,7 @@ import org.jrebirth.af.api.resource.image.ImageParams;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 
 /**
- * The class <strong>ImageItem</strong>.
+ * The class <strong>ImageItemReal</strong>.
  *
  * @author Sébastien Bordes
  */

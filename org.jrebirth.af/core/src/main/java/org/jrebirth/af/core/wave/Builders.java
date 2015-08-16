@@ -91,11 +91,11 @@ public interface Builders {
 
     /**
      * Build a fresh Wave use to attach a model somewhere.
-     * 
+     *
      * Support these kind of objects:<br>
      * JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER => ObjectProperty<Node> JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER => ObservableList<Node> JRebirthWaves.SHOW_MODEL_COMMAND => Class<? extends Command>
      * JRebirthWaves.EXTRA_WAVE_BEANS => WaveBean
-     * 
+     *
      * @param datas a list of object that can be wrapped into a WaveData with Right waveItem
      *
      * @return a list of WaveData
