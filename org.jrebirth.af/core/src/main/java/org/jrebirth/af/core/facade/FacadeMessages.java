@@ -42,9 +42,6 @@ public interface FacadeMessages extends MessageContainer {
 
     /** GlobalFacadeBase. */
 
-    /** "Impossible to load the custom ComponentFactory, will use the default one". */
-    MessageItem COMPONENT_CUSTOM_FACTORY_ERROR = create(new LogMessage("jrebirth.facade.componentFactoryError", JRLevel.Error, JRebirthMarkers.FACADE));
-
     /** "Create the JRebirth Thread Pool". */
     MessageItem JTP_CREATION = create(new LogMessage("jrebirth.facade.jtpCreation", JRLevel.Trace, JRebirthMarkers.FACADE));
 

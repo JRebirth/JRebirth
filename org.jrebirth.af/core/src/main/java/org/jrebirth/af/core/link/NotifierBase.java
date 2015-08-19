@@ -47,6 +47,7 @@ import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.service.ServiceTaskBase;
 import org.jrebirth.af.core.service.basic.TaskTrackerService;
+import org.jrebirth.af.core.util.ParameterUtility;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.JRebirthWaves;
 
@@ -77,16 +78,11 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
     public NotifierBase(final GlobalFacade globalFacade) {
         super(globalFacade);
 
-        UnprocessedWaveHandler waveHandler;
-        try {
-            waveHandler = (UnprocessedWaveHandler) JRebirthParameters.UNPROCESSED_WAVE_HANDLER.get().newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-
-            LOGGER.error(USE_DEFAULT_WAVE_HANDLER, e);
-            waveHandler = new DefaultUnprocessedWaveHandler();
-        }
         // Attach the right EnhancedComponent Factory
-        this.unprocessedWaveHandler = waveHandler;
+        this.unprocessedWaveHandler = (UnprocessedWaveHandler)
+                ParameterUtility.buildCustomizableClass(JRebirthParameters.UNPROCESSED_WAVE_HANDLER,
+                                                        DefaultUnprocessedWaveHandler.class,
+                                                        "UnprocessedWaveHandler");
     }
 
     /**

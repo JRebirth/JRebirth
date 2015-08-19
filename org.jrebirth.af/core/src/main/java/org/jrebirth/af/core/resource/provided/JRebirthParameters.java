@@ -19,16 +19,19 @@ package org.jrebirth.af.core.resource.provided;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.jrebirth.af.api.resource.image.ImageExtension;
+//import org.jrebirth.af.api.resource.image.ImageParams;
 import org.jrebirth.af.api.resource.parameter.ParameterItem;
 import org.jrebirth.af.core.component.factory.DefaultComponentFactory;
 import org.jrebirth.af.core.link.DefaultUnprocessedWaveHandler;
 import org.jrebirth.af.core.resource.color.WebColor;
 import org.jrebirth.af.core.resource.image.RelImage;
 import org.jrebirth.af.core.resource.style.StyleSheet;
+import org.jrebirth.af.core.ui.fxml.DefaultFXMLControllerFactory;
 
 /**
  * The class <strong>JRebirthParameters</strong>.
@@ -64,12 +67,6 @@ public interface JRebirthParameters {
      */
     ParameterItem<Boolean> LOG_RESOLUTION = create("logResolution", true);
 
-    /** The handler used while running in developer mode to manage unprocessed wave. */
-    ParameterItem<Class> UNPROCESSED_WAVE_HANDLER = create("unprocessedWaveHandler", (Class) DefaultUnprocessedWaveHandler.class);
-
-    /** The factory used to create components. */
-    ParameterItem<Class> COMPONENT_FACTORY = create("componentFactory", (Class) DefaultComponentFactory.class);
-
     /** Flag that activates the module.xml file parsing to register components using annotations. */
     ParameterItem<Boolean> PARSE_MODULE_CONFIG_FILE = create("parseModuleConfigFile", false);
 
@@ -87,6 +84,19 @@ public interface JRebirthParameters {
      * camel case.
      */
     ParameterItem<String> WAVE_HANDLER_PREFIX = create("waveHandlerPrefix", "DO_");
+
+    /**************************************************************************************/
+    /** _______________________________Customizable Classes._____________________________ */
+    /**************************************************************************************/
+
+    /** The handler used while running in developer mode to manage unprocessed wave. */
+    ParameterItem<Class<?>> UNPROCESSED_WAVE_HANDLER = create("unprocessedWaveHandler", (Class<?>) DefaultUnprocessedWaveHandler.class);
+
+    /** The factory used to create components. */
+    ParameterItem<Class<?>> COMPONENT_FACTORY = create("componentFactory", (Class<?>) DefaultComponentFactory.class);
+
+    /** The factory used to create FXMLController. */
+    ParameterItem<Class<?>> FXML_CONTROLLER_FACTORY = create("fxmlControllerFactory", (Class<?>) DefaultFXMLControllerFactory.class);
 
     /**************************************************************************************/
     /** _________________________Application Resource Parameters.___________________________ */
@@ -120,6 +130,17 @@ public interface JRebirthParameters {
     /** _________________________Application Stage Parameters.___________________________ */
     /**************************************************************************************/
 
+    /**
+     * The <code>APPLICATION_ICONS</code> field is used to define the icons used by the stage of the application. "JRebirth_16x16,JRebirth_32x32,JRebirth_64x64,JRebirth_128x128,JRebirth_256x256"
+     */
+/*    ParameterItem<List<ImageParams>> APPLICATION_ICONS = create("applicationIcons", Arrays.asList(
+                                                                                                  JRebirthImages.JR_LOGO_16.getParam(),
+                                                                                                  JRebirthImages.JR_LOGO_32.getParam(),
+                                                                                                  JRebirthImages.JR_LOGO_64.getParam(),
+                                                                                                  JRebirthImages.JR_LOGO_128.getParam(),
+                                                                                                  JRebirthImages.JR_LOGO_256.getParam()
+                                                                                          ));
+*/
     /**
      * The <code>APPLICATION_NAME</code> field is used to define title of the application displayed by stage window.<br />
      * The default value contains a <b>{}</b> that will be replaced by application class simple name.
