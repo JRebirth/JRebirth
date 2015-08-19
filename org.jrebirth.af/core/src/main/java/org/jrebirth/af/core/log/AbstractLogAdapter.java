@@ -5,6 +5,7 @@ import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.resource.i18n.JRLevel;
 import org.jrebirth.af.api.resource.i18n.MessageItem;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.slf4j.Logger;
 
 /**
  * The class <strong>AbstractLogAdapter</strong> shares common code used by {@link LogbackAdapter} and {@link Slf4jAdapter}.
@@ -12,6 +13,25 @@ import org.jrebirth.af.core.resource.provided.JRebirthParameters;
  * @author Sébastien Bordes
  */
 public abstract class AbstractLogAdapter implements JRLogger {
+
+    /** The internal logger. */
+    private final Logger logger; // NOSONAR this is a wrapped logger with custom fqcn to still have the right line number
+
+    /**
+     * Default Constructor.
+     * 
+     * @param logger the underlying logger to use
+     */
+    public AbstractLogAdapter(final Logger logger) {
+        this.logger = logger;
+    }
+
+    /**
+     * @return Returns the logger.
+     */
+    public Logger getLogger() {
+        return logger;
+    }
 
     /**
      * If an error is logged when running in Developer Mode, Throw a Runtime Exception.

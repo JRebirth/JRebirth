@@ -19,7 +19,6 @@ package org.jrebirth.af.core.log;
 
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.resource.i18n.MessageItem;
-import org.slf4j.Logger;
 import org.slf4j.Marker;
 
 /**
@@ -29,17 +28,13 @@ import org.slf4j.Marker;
  */
 public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NOSONAR lot of methods !!
 
-    /** The internal logger. */
-    private final Logger slf4jLogger; // NOSONAR this is a wrapped logger
-
     /**
      * Default Constructor.
      *
      * @param logger the logger to wrap
      */
     public Slf4jAdapter(final org.slf4j.Logger logger) {
-        super();
-        this.slf4jLogger = logger;
+        super(logger);
     }
 
     /**
@@ -99,7 +94,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void trace(final MessageItem messageItem) {
-        this.slf4jLogger.trace(messageItem.getMarker(), messageItem.getText());
+        getLogger().trace(messageItem.getMarker(), messageItem.getText());
     }
 
     /**
@@ -107,7 +102,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void trace(final MessageItem messageItem, final Throwable t) {
-        this.slf4jLogger.trace(messageItem.getMarker(), messageItem.getText(), t);
+        getLogger().trace(messageItem.getMarker(), messageItem.getText(), t);
     }
 
     /**
@@ -115,8 +110,8 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void trace(final MessageItem messageItem, final Object... parameters) {
-        if (this.slf4jLogger.isTraceEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.trace(messageItem.getMarker(), messageItem.getText(parameters));
+        if (getLogger().isTraceEnabled(messageItem.getMarker())) {
+            getLogger().trace(messageItem.getMarker(), messageItem.getText(parameters));
         }
     }
 
@@ -125,8 +120,8 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void trace(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        if (this.slf4jLogger.isTraceEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.trace(messageItem.getMarker(), messageItem.getText(parameters), t);
+        if (getLogger().isTraceEnabled(messageItem.getMarker())) {
+            getLogger().trace(messageItem.getMarker(), messageItem.getText(parameters), t);
         }
     }
 
@@ -135,7 +130,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void debug(final MessageItem messageItem) {
-        this.slf4jLogger.debug(messageItem.getMarker(), messageItem.getText());
+        getLogger().debug(messageItem.getMarker(), messageItem.getText());
     }
 
     /**
@@ -143,7 +138,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void debug(final MessageItem messageItem, final Throwable t) {
-        this.slf4jLogger.debug(messageItem.getMarker(), messageItem.getText(), t);
+        getLogger().debug(messageItem.getMarker(), messageItem.getText(), t);
     }
 
     /**
@@ -151,8 +146,8 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void debug(final MessageItem messageItem, final Object... parameters) {
-        if (this.slf4jLogger.isDebugEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.debug(messageItem.getMarker(), messageItem.getText(parameters));
+        if (getLogger().isDebugEnabled(messageItem.getMarker())) {
+            getLogger().debug(messageItem.getMarker(), messageItem.getText(parameters));
         }
     }
 
@@ -161,8 +156,8 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void debug(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        if (this.slf4jLogger.isDebugEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.debug(messageItem.getMarker(), messageItem.getText(parameters), t);
+        if (getLogger().isDebugEnabled(messageItem.getMarker())) {
+            getLogger().debug(messageItem.getMarker(), messageItem.getText(parameters), t);
         }
     }
 
@@ -171,7 +166,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void info(final MessageItem messageItem) {
-        this.slf4jLogger.info(messageItem.getMarker(), messageItem.getText());
+        getLogger().info(messageItem.getMarker(), messageItem.getText());
     }
 
     /**
@@ -179,7 +174,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void info(final MessageItem messageItem, final Throwable t) {
-        this.slf4jLogger.info(messageItem.getMarker(), messageItem.getText(), t);
+        getLogger().info(messageItem.getMarker(), messageItem.getText(), t);
     }
 
     /**
@@ -187,8 +182,8 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void info(final MessageItem messageItem, final Object... parameters) {
-        if (this.slf4jLogger.isInfoEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.info(messageItem.getMarker(), messageItem.getText(parameters));
+        if (getLogger().isInfoEnabled(messageItem.getMarker())) {
+            getLogger().info(messageItem.getMarker(), messageItem.getText(parameters));
         }
     }
 
@@ -197,8 +192,8 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void info(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        if (this.slf4jLogger.isInfoEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.info(messageItem.getMarker(), messageItem.getText(parameters), t);
+        if (getLogger().isInfoEnabled(messageItem.getMarker())) {
+            getLogger().info(messageItem.getMarker(), messageItem.getText(parameters), t);
         }
     }
 
@@ -207,7 +202,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void warn(final MessageItem messageItem) {
-        this.slf4jLogger.warn(messageItem.getMarker(), messageItem.getText());
+        getLogger().warn(messageItem.getMarker(), messageItem.getText());
     }
 
     /**
@@ -215,7 +210,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void warn(final MessageItem messageItem, final Throwable t) {
-        this.slf4jLogger.warn(messageItem.getMarker(), messageItem.getText(), t);
+        getLogger().warn(messageItem.getMarker(), messageItem.getText(), t);
     }
 
     /**
@@ -223,8 +218,8 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void warn(final MessageItem messageItem, final Object... parameters) {
-        if (this.slf4jLogger.isWarnEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.warn(messageItem.getMarker(), messageItem.getText(parameters));
+        if (getLogger().isWarnEnabled(messageItem.getMarker())) {
+            getLogger().warn(messageItem.getMarker(), messageItem.getText(parameters));
         }
     }
 
@@ -233,8 +228,8 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void warn(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        if (this.slf4jLogger.isWarnEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.warn(messageItem.getMarker(), messageItem.getText(parameters), t);
+        if (getLogger().isWarnEnabled(messageItem.getMarker())) {
+            getLogger().warn(messageItem.getMarker(), messageItem.getText(parameters), t);
         }
     }
 
@@ -243,7 +238,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void error(final MessageItem messageItem) {
-        this.slf4jLogger.error(messageItem.getMarker(), messageItem.getText());
+        getLogger().error(messageItem.getMarker(), messageItem.getText());
         throwError(messageItem, null);
     }
 
@@ -252,7 +247,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void error(final MessageItem messageItem, final Throwable t) {
-        this.slf4jLogger.error(messageItem.getMarker(), messageItem.getText(), t);
+        getLogger().error(messageItem.getMarker(), messageItem.getText(), t);
         throwError(messageItem, t);
     }
 
@@ -261,8 +256,8 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void error(final MessageItem messageItem, final Object... parameters) {
-        if (this.slf4jLogger.isErrorEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.error(messageItem.getMarker(), messageItem.getText(parameters));
+        if (getLogger().isErrorEnabled(messageItem.getMarker())) {
+            getLogger().error(messageItem.getMarker(), messageItem.getText(parameters));
         }
         throwError(messageItem, null, parameters);
     }
@@ -272,8 +267,8 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public void error(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        if (this.slf4jLogger.isErrorEnabled(messageItem.getMarker())) {
-            this.slf4jLogger.error(messageItem.getMarker(), messageItem.getText(parameters), t);
+        if (getLogger().isErrorEnabled(messageItem.getMarker())) {
+            getLogger().error(messageItem.getMarker(), messageItem.getText(parameters), t);
         }
         throwError(messageItem, t, parameters);
     }
@@ -283,7 +278,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public boolean isDebugEnabled() {
-        return this.slf4jLogger.isDebugEnabled();
+        return getLogger().isDebugEnabled();
     }
 
     /**
@@ -291,7 +286,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public boolean isDebugEnabled(final Marker marker) {
-        return this.slf4jLogger.isDebugEnabled(marker);
+        return getLogger().isDebugEnabled(marker);
     }
 
     /**
@@ -299,7 +294,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public boolean isErrorEnabled() {
-        return this.slf4jLogger.isErrorEnabled();
+        return getLogger().isErrorEnabled();
     }
 
     /**
@@ -307,7 +302,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public boolean isErrorEnabled(final Marker marker) {
-        return this.slf4jLogger.isErrorEnabled(marker);
+        return getLogger().isErrorEnabled(marker);
     }
 
     /**
@@ -315,7 +310,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public boolean isInfoEnabled() {
-        return this.slf4jLogger.isInfoEnabled();
+        return getLogger().isInfoEnabled();
     }
 
     /**
@@ -323,7 +318,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public boolean isInfoEnabled(final Marker marker) {
-        return this.slf4jLogger.isInfoEnabled(marker);
+        return getLogger().isInfoEnabled(marker);
     }
 
     /**
@@ -331,7 +326,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public boolean isTraceEnabled() {
-        return this.slf4jLogger.isTraceEnabled();
+        return getLogger().isTraceEnabled();
     }
 
     /**
@@ -339,7 +334,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public boolean isTraceEnabled(final Marker marker) {
-        return this.slf4jLogger.isTraceEnabled(marker);
+        return getLogger().isTraceEnabled(marker);
     }
 
     /**
@@ -347,7 +342,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public boolean isWarnEnabled() {
-        return this.slf4jLogger.isWarnEnabled();
+        return getLogger().isWarnEnabled();
     }
 
     /**
@@ -355,7 +350,7 @@ public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NO
      */
     @Override
     public boolean isWarnEnabled(final Marker marker) {
-        return this.slf4jLogger.isWarnEnabled(marker);
+        return getLogger().isWarnEnabled(marker);
     }
 
 }
