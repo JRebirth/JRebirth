@@ -543,4 +543,62 @@ public final class ClassUtility implements UtilMessages {
             throw new CoreException(e);
         }
     }
+
+    /**
+     * Return the first generic type of the hierarchy that can be assigned to the type searched.
+     *
+     * @param fromClass the base class hosting the generic type
+     * @param typeSearched the searched type, the returned class shall be a subclass of it
+     * 
+     * @return a class that is a subclass of typeSearched or null
+     */
+    public static Class<?> getGenericClassAssigned(Class<?> fromClass, Class<?> typeSearched) {
+
+        Class<?> realType = null;
+
+        final Type superType = fromClass.getGenericSuperclass();
+
+        realType = searchIntoParameterzedType(superType, typeSearched);
+
+        if (realType == null) {
+            for (final Type api : fromClass.getGenericInterfaces()) {
+                realType = searchIntoParameterzedType(api, typeSearched);
+            }
+        }
+
+        if (realType == null && superType instanceof Class<?>) {
+            realType = getGenericClassAssigned((Class<?>) superType, typeSearched);
+        }
+
+        if (realType == null) {
+            for (final Type api : fromClass.getGenericInterfaces()) {
+                if (api instanceof Class<?>) {
+                    realType = getGenericClassAssigned((Class<?>) api, typeSearched);
+                }
+            }
+        }
+
+        return realType;
+    }
+
+    /**
+     * Extract the searched type from a ParamterizedType.
+     * 
+     * @param superType the base class hosting the generic type
+     * @param typeSearched the searched type, the returned class shall be a subclass of it
+     * 
+     * @return the searched type or null
+     */
+    private static Class<?> searchIntoParameterzedType(final Type superType, Class<?> typeSearched) {
+        if (superType instanceof ParameterizedType) {
+            for (final Type genericType : ((ParameterizedType) superType).getActualTypeArguments()) {
+                if (genericType instanceof Class<?> && typeSearched.isAssignableFrom((Class<?>) genericType)) {
+                    return (Class<?>) genericType;
+                } else if (genericType instanceof ParameterizedType && typeSearched.isAssignableFrom((Class<?>) ((ParameterizedType) genericType).getRawType())) {
+                    return (Class<?>) ((ParameterizedType) genericType).getRawType();
+                }
+            }
+        }
+        return null;
+    }
 }

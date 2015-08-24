@@ -17,8 +17,6 @@
  */
 package org.jrebirth.af.core.command;
 
-import java.lang.reflect.ParameterizedType;
-
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.command.CommandBean;
 import org.jrebirth.af.api.concurrent.RunInto;
@@ -32,6 +30,7 @@ import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.DefaultWaveBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -108,20 +107,25 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
         // Do same job for the priority
         this.runnablePriority = ria == null ? priority == null ? RunnablePriority.Normal : priority : ria.priority();
 
-        if (getClass().getGenericInterfaces().length > 0) {
-            try {
-                this.waveBeanClass = (Class<WB>) ClassUtility.getClassFromType(((ParameterizedType) getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0]);
-            } catch (final Exception e) {
-
-            }
+        this.waveBeanClass = (Class<WB>) ClassUtility.getGenericClassAssigned(this.getClass(), WaveBean.class);
+        if (this.waveBeanClass == null) {
+            this.waveBeanClass = (Class<WB>) DefaultWaveBean.class;
         }
-        if (getClass().getGenericSuperclass() != null) {
-            try {
-                this.waveBeanClass = (Class<WB>) ClassUtility.getClassFromType(((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
-            } catch (final Exception e) {
 
-            }
-        }
+        // if (getClass().getGenericInterfaces().length > 0) {
+        // try {
+        // this.waveBeanClass = (Class<WB>) ClassUtility.getClassFromType(((ParameterizedType) getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0]);
+        // } catch (final Exception e) {
+        //
+        // }
+        // }
+        // if (getClass().getGenericSuperclass() != null) {
+        // try {
+        // this.waveBeanClass = (Class<WB>) ClassUtility.getClassFromType(((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
+        // } catch (final Exception e) {
+        //
+        // }
+        // }
     }
 
     /**
