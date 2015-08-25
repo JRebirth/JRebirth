@@ -4,10 +4,39 @@ Release Notes
 ==============
 
 
+8.0.3 - Release 2015-08-27
+-----------------------------------------
+
+This release fixes some migration bugs and add few new features.
+
+- Allow to customize FXMLControllerBuilder enhancement [#164](http://github.com/JRebirth/JRebirth/issues/issue/164)
+A new JRebirth Parameter has been added to allow customization of the FXMLController Factory
+
+
+- Displaying multiple FXML models (with same classField) [#159](http://github.com/JRebirth/JRebirth/issues/issue/159)
+It's now possible to load several instances of a FXMLModel by using FXMLParams.
+
+
+- The listener attached rootNode parent property is never removed [#156](http://github.com/JRebirth/JRebirth/issues/issue/156)
+Fix a memory leak, release listener when rootNode is removed from parent.
+
+
+- InitInternalInnerComponents() is called twice for Model [#155](http://github.com/JRebirth/JRebirth/issues/issue/155)
+Remove a duplicate call to initInternalInnerComponents method.
+
+
+- Key.create() can instantiate a classKey if the first KeyPart is empty [#154](http://github.com/JRebirth/JRebirth/issues/issue/154)
+Fix an issue already resolved into 7.x branch and badly merged.
+
+
+To be able to extend DisplayModelWaveBean. [#153](http://github.com/JRebirth/JRebirth/issues/issue/153)
+Allow to extend existing command more easily, now a Wave can embed several WaveBeans that can be grabbed by any Command.
+
+
 8.0.2 - Release 2015-06-23
 -----------------------------------------
 
-This release add two minor improvement and fixes sample archetype.
+This release add two minor improvements and fixes sample archetype.
 
 - Fix archetype generation [#152](http://github.com/JRebirth/JRebirth/issues/issue/152)
 Fix version used by sample module, it was using old snapshot version.
