@@ -11,11 +11,10 @@ Live feed is available on our [Blog](http://blog.jrebirth.org)
 
 [![Join the chat at https://gitter.im/JRebirth/JRebirth](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/JRebirth/JRebirth?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Build Status](http://ci.jrebirth.org/job/JRebirth-8x/badge/icon)](http://ci.jrebirth.org/job/JRebirth-8x/)
+## Download & Build
 
 [ ![Download](https://api.bintray.com/packages/jrebirth/JRebirth/JRebirthAF/images/download.svg) ](https://bintray.com/jrebirth/JRebirth/JRebirthAF/_latestVersion)
-
-<a href='https://bintray.com/jrebirth/JRebirth/JRebirthAF/view?source=watch' alt='Get automatic notifications about new "JRebirthAF" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
+[![Build Status](http://ci.jrebirth.org/job/JRebirth-8x/badge/icon)](http://ci.jrebirth.org/job/JRebirth-8x/)
 
 
 ## Demo
