@@ -18,6 +18,7 @@
 package org.jrebirth.af.core.component.behavior;
 
 import org.jrebirth.af.api.annotation.SkipAnnotation;
+import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.component.behavior.Behavior;
 import org.jrebirth.af.api.component.behavior.BehaviorData;
 import org.jrebirth.af.api.component.behavior.BehavioredComponent;
@@ -31,7 +32,7 @@ import org.jrebirth.af.core.util.MultiMap;
 
 /**
  *
- * The class <strong>AbstractBehavioredComponent</strong>.
+ * The class <strong>AbstractBehavioredComponent</strong> is the base class to add Behavior support for {@link Component}.
  *
  * This is the base class for all EnhancedComponent that want to use Behavior features.<br />
  *

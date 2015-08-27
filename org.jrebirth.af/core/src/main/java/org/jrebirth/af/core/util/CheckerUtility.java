@@ -1,6 +1,5 @@
 package org.jrebirth.af.core.util;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -160,23 +159,23 @@ public final class CheckerUtility implements UtilMessages {
 
                 }
 
-                // Check provided WaveBean (if any) EXPERIMENTAL
-                if (wave.waveBean() != null) {
-
-                    // Check that WaveItem not present into WaveData wrapper are available into available WaveBean
-                    for (int i = missingWaveItems.size() - 1; i >= 0; i--) {
-                        final WaveItem<?> missing = missingWaveItems.get(i);
-
-                        if (missing.getName() != null && !missing.getName().isEmpty()) {
-
-                            final Field property = ClassUtility.findProperty(wave.waveBean().getClass(), missing.getName(), (Class<?>) missing.getItemType());
-
-                            if (property != null) {
-                                missingWaveItems.remove(missing);
-                            }
-                        }
-                    }
-                }
+                // Check provided WaveBean (if any) EXPERIMENTAL FIXME
+                // if (wave.waveBean() != null) {
+                //
+                // // Check that WaveItem not present into WaveData wrapper are available into available WaveBean
+                // for (int i = missingWaveItems.size() - 1; i >= 0; i--) {
+                // final WaveItem<?> missing = missingWaveItems.get(i);
+                //
+                // if (missing.getName() != null && !missing.getName().isEmpty()) {
+                //
+                // final Field property = ClassUtility.findProperty(wave.waveBean().getClass(), missing.getName(), (Class<?>) missing.getItemType());
+                //
+                // if (property != null) {
+                // missingWaveItems.remove(missing);
+                // }
+                // }
+                // }
+                // }
 
                 // Log informative message and throw an error
                 if (!missingWaveItems.isEmpty()) {

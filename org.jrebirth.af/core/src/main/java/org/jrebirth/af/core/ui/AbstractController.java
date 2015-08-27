@@ -137,16 +137,10 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
             final Callback<E, Boolean> callback,
             final WaveData<?>... waveData) {
 
-        node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkCommand") {
-
-            /**
-             * Handle the triggered event.
-             */
-            @Override
-            public void handle(final E event) {
-                if (callback == null || callback.call(event)) {
-                    getModel().callCommand(commandClass, waveData);
-                }
+        // LinkCommand
+        node.addEventHandler(eventType, event -> {
+            if (callback == null || callback.call(event)) {
+                getModel().callCommand(commandClass, waveData);
             }
         });
     }
@@ -194,7 +188,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
         WaveData<?> wd;
         for (int i = 0; i < waveData.length && noHookFound; i++) {
             wd = waveData[i];
-            if ((wd.getKey() == JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER || wd.getKey() == JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER)
+            if ((JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER.equals(wd.getKey()) || JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER.equals(wd.getKey()))
                     && wd.getValue() != null) {
                 noHookFound = false;
             }
@@ -204,15 +198,10 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
             throw new CoreRuntimeException("LinkUi must be called with either JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER or JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER Wave Data provided");
         }
 
-        node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkUi") {
-            /**
-             * Handle the triggered event.
-             */
-            @Override
-            public void handle(final E event) {
-                if (callback == null || callback.call(event)) {
-                    getModel().attachUi(modelClass, waveData);
-                }
+        // LinkUi
+        node.addEventHandler(eventType, event -> {
+            if (callback == null || callback.call(event)) {
+                getModel().attachUi(modelClass, waveData);
             }
         });
     }
@@ -252,16 +241,10 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
             final Class<? extends Service> serviceClass, final WaveType waveType, final Callback<E, Boolean> callback,
             final WaveData<?>... waveData) {
 
-        node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkService") {
-
-            /**
-             * Handle the triggered event.
-             */
-            @Override
-            public void handle(final E event) {
-                if (callback == null || callback.call(event)) {
-                    getModel().returnData(serviceClass, waveType, waveData);
-                }
+        // LinkService
+        node.addEventHandler(eventType, event -> {
+            if (callback == null || callback.call(event)) {
+                getModel().returnData(serviceClass, waveType, waveData);
             }
         });
     }
@@ -289,7 +272,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
      */
     protected <WB extends WaveBean> Wave callCommand(final Class<? extends CommandBean<WB>> commandClass, final WB waveBean) {
-        return callCommand(commandClass, waveBean);
+        return getModel().callCommand(commandClass, waveBean);
     }
 
 }

@@ -97,4 +97,9 @@ public interface UtilMessages extends MessageContainer {
     /** "Impossible to retrieve value for the annotation property : {0}". */
     MessageItem NO_ANNOTATION_PROPERTY_VALUE = create(new LogMessage("jrebirth.util.noAnnotationPropertyValue", JRLevel.Error, JRebirthMarkers.UTIL));
 
+    /** ParameterUtility. */
+
+    /** "Impossible to load the custom {0}, will use the default one". */
+    MessageItem CUSTOM_CLASS_LOADING_ERROR = create(new LogMessage("jrebirth.util.customClassLoadingError", JRLevel.Error, JRebirthMarkers.UTIL));
+
 }

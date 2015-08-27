@@ -25,12 +25,16 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.text.TextBuilder;
+import javafx.util.Callback;
 
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.fxml.FXMLController;
+import org.jrebirth.af.api.ui.fxml.FXMLControllerFactory;
 import org.jrebirth.af.core.log.JRLoggerFactory;
+import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.util.ParameterUtility;
 
 /**
  * The class <strong>FXMLUtils</strong>.
@@ -91,8 +95,14 @@ public final class FXMLUtils implements FXMLMessages {
 
         final FXMLLoader fxmlLoader = new FXMLLoader();
 
+        final Callback<Class<?>, Object> fxmlControllerFactory = (Callback<Class<?>, Object>) ParameterUtility.buildCustomizableClass(JRebirthParameters.FXML_CONTROLLER_FACTORY,
+                                                                                                                                      DefaultFXMLControllerFactory.class, "FXMLCOntrollerFactory");
+        if (fxmlControllerFactory instanceof FXMLControllerFactory) {
+            ((FXMLControllerFactory) fxmlControllerFactory).setRelatedModel(model);
+        }
+
         // Use Custom controller factory to attach the root model to the controller
-        fxmlLoader.setControllerFactory(new DefaultFXMLControllerBuilder(model));
+        fxmlLoader.setControllerFactory(fxmlControllerFactory);
 
         fxmlLoader.setLocation(convertFxmlUrl(model, fxmlPath));
 

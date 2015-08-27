@@ -34,16 +34,21 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     public static final String FQCN = LogbackAdapter.class.getName();
 
-    /** The internal logger. */
-    private final Logger logbackLogger; // NOSONAR this is a wrapped logger with custom fqcn to still have the right line number
-
     /**
      * Instantiates a new logger adapter.
      *
      * @param logger the wrapped logger
      */
     public LogbackAdapter(final Logger logger) {
-        this.logbackLogger = logger;
+        super(logger);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Logger getLogger() {
+        return (Logger) super.getLogger();
     }
 
     /**
@@ -82,7 +87,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void log(final MessageItem messageItem) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.getText(), null, null);
+        getLogger().log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.getText(), null, null);
         throwError(messageItem, null);
     }
 
@@ -91,7 +96,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void log(final MessageItem messageItem, final Throwable t) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.getText(), null, t);
+        getLogger().log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.getText(), null, t);
         throwError(messageItem, t);
     }
 
@@ -100,7 +105,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void log(final MessageItem messageItem, final Object... parameters) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.getText(parameters), null, null);
+        getLogger().log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.getText(parameters), null, null);
         throwError(messageItem, null, parameters);
     }
 
@@ -109,7 +114,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void log(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.getText(parameters), null, t);
+        getLogger().log(messageItem.getMarker(), FQCN, convertLevel(messageItem.getLevel()), messageItem.getText(parameters), null, t);
         throwError(messageItem, t, parameters);
     }
 
@@ -118,7 +123,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void trace(final MessageItem messageItem) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.getText(), null, null);
+        getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.getText(), null, null);
     }
 
     /**
@@ -126,7 +131,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void trace(final MessageItem messageItem, final Throwable t) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.getText(), null, t);
+        getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.getText(), null, t);
     }
 
     /**
@@ -134,8 +139,8 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void trace(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        if (this.logbackLogger.isTraceEnabled(messageItem.getMarker())) {
-            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.getText(parameters), null, t);
+        if (getLogger().isTraceEnabled(messageItem.getMarker())) {
+            getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.getText(parameters), null, t);
         }
     }
 
@@ -144,8 +149,8 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void trace(final MessageItem messageItem, final Object... parameters) {
-        if (this.logbackLogger.isTraceEnabled(messageItem.getMarker())) {
-            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.getText(parameters), null, null);
+        if (getLogger().isTraceEnabled(messageItem.getMarker())) {
+            getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.TRACE_INT, messageItem.getText(parameters), null, null);
         }
     }
 
@@ -154,7 +159,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void debug(final MessageItem messageItem) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.getText(), null, null);
+        getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.getText(), null, null);
     }
 
     /**
@@ -162,7 +167,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void debug(final MessageItem messageItem, final Throwable t) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.getText(), null, t);
+        getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.getText(), null, t);
     }
 
     /**
@@ -170,8 +175,8 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void debug(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        if (this.logbackLogger.isDebugEnabled(messageItem.getMarker())) {
-            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.getText(parameters), null, t);
+        if (getLogger().isDebugEnabled(messageItem.getMarker())) {
+            getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.getText(parameters), null, t);
         }
     }
 
@@ -180,8 +185,8 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void debug(final MessageItem messageItem, final Object... parameters) {
-        if (this.logbackLogger.isDebugEnabled(messageItem.getMarker())) {
-            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.getText(parameters), null, null);
+        if (getLogger().isDebugEnabled(messageItem.getMarker())) {
+            getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.DEBUG_INT, messageItem.getText(parameters), null, null);
         }
     }
 
@@ -190,7 +195,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void info(final MessageItem messageItem) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.getText(), null, null);
+        getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.getText(), null, null);
     }
 
     /**
@@ -198,7 +203,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void info(final MessageItem messageItem, final Throwable t) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.getText(), null, t);
+        getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.getText(), null, t);
     }
 
     /**
@@ -206,8 +211,8 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void info(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        if (this.logbackLogger.isInfoEnabled(messageItem.getMarker())) {
-            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.getText(parameters), null, t);
+        if (getLogger().isInfoEnabled(messageItem.getMarker())) {
+            getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.getText(parameters), null, t);
         }
     }
 
@@ -216,8 +221,8 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void info(final MessageItem messageItem, final Object... parameters) {
-        if (this.logbackLogger.isInfoEnabled(messageItem.getMarker())) {
-            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.getText(parameters), null, null);
+        if (getLogger().isInfoEnabled(messageItem.getMarker())) {
+            getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.INFO_INT, messageItem.getText(parameters), null, null);
         }
     }
 
@@ -226,7 +231,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void warn(final MessageItem messageItem) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.getText(), null, null);
+        getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.getText(), null, null);
     }
 
     /**
@@ -234,7 +239,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void warn(final MessageItem messageItem, final Throwable t) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.getText(), null, t);
+        getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.getText(), null, t);
     }
 
     /**
@@ -242,8 +247,8 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void warn(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        if (this.logbackLogger.isWarnEnabled(messageItem.getMarker())) {
-            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.getText(parameters), null, t);
+        if (getLogger().isWarnEnabled(messageItem.getMarker())) {
+            getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.getText(parameters), null, t);
         }
     }
 
@@ -252,8 +257,8 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void warn(final MessageItem messageItem, final Object... parameters) {
-        if (this.logbackLogger.isWarnEnabled(messageItem.getMarker())) {
-            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.getText(parameters), null, null);
+        if (getLogger().isWarnEnabled(messageItem.getMarker())) {
+            getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.WARN_INT, messageItem.getText(parameters), null, null);
         }
     }
 
@@ -262,7 +267,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void error(final MessageItem messageItem) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.getText(), null, null);
+        getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.getText(), null, null);
         throwError(messageItem, null);
     }
 
@@ -271,7 +276,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void error(final MessageItem messageItem, final Throwable t) {
-        this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.getText(), null, t);
+        getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.getText(), null, t);
         throwError(messageItem, t);
     }
 
@@ -280,8 +285,8 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void error(final MessageItem messageItem, final Throwable t, final Object... parameters) {
-        if (this.logbackLogger.isErrorEnabled(messageItem.getMarker())) {
-            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.getText(parameters), null, t);
+        if (getLogger().isErrorEnabled(messageItem.getMarker())) {
+            getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.getText(parameters), null, t);
         }
         throwError(messageItem, t, parameters);
     }
@@ -291,8 +296,8 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public void error(final MessageItem messageItem, final Object... parameters) {
-        if (this.logbackLogger.isErrorEnabled(messageItem.getMarker())) {
-            this.logbackLogger.log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.getText(parameters), null, null);
+        if (getLogger().isErrorEnabled(messageItem.getMarker())) {
+            getLogger().log(messageItem.getMarker(), FQCN, LocationAwareLogger.ERROR_INT, messageItem.getText(parameters), null, null);
         }
         throwError(messageItem, null, parameters);
     }
@@ -302,7 +307,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public boolean isDebugEnabled() {
-        return this.logbackLogger.isDebugEnabled();
+        return getLogger().isDebugEnabled();
     }
 
     /**
@@ -310,7 +315,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public boolean isDebugEnabled(final Marker marker) {
-        return this.logbackLogger.isDebugEnabled(marker);
+        return getLogger().isDebugEnabled(marker);
     }
 
     /**
@@ -318,7 +323,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public boolean isErrorEnabled() {
-        return this.logbackLogger.isErrorEnabled();
+        return getLogger().isErrorEnabled();
     }
 
     /**
@@ -326,7 +331,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public boolean isErrorEnabled(final Marker marker) {
-        return this.logbackLogger.isErrorEnabled(marker);
+        return getLogger().isErrorEnabled(marker);
     }
 
     /**
@@ -334,7 +339,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public boolean isInfoEnabled() {
-        return this.logbackLogger.isInfoEnabled();
+        return getLogger().isInfoEnabled();
     }
 
     /**
@@ -342,7 +347,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public boolean isInfoEnabled(final Marker marker) {
-        return this.logbackLogger.isInfoEnabled(marker);
+        return getLogger().isInfoEnabled(marker);
     }
 
     /**
@@ -350,7 +355,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public boolean isTraceEnabled() {
-        return this.logbackLogger.isTraceEnabled();
+        return getLogger().isTraceEnabled();
     }
 
     /**
@@ -358,7 +363,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public boolean isTraceEnabled(final Marker marker) {
-        return this.logbackLogger.isTraceEnabled(marker);
+        return getLogger().isTraceEnabled(marker);
     }
 
     /**
@@ -366,7 +371,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public boolean isWarnEnabled() {
-        return this.logbackLogger.isWarnEnabled();
+        return getLogger().isWarnEnabled();
     }
 
     /**
@@ -374,7 +379,7 @@ public class LogbackAdapter extends AbstractLogAdapter { // NOSONAR lot of metho
      */
     @Override
     public boolean isWarnEnabled(final Marker marker) {
-        return this.logbackLogger.isWarnEnabled(marker);
+        return getLogger().isWarnEnabled(marker);
     }
 
 }

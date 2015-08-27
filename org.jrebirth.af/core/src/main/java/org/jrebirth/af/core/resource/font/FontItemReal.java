@@ -45,13 +45,13 @@ public interface FontItemReal extends FontItem {
     /**
      * The interface <strong>Real</strong> provides shortcuts method used to build and register a {@link RealFont}.
      */
-    interface Real extends FontItem {
+    interface Real extends FontItemReal {
 
         /**
          * Build and register a {@link RealFont} {@link FontParams}.
          *
-         * @param name
-         * @param size
+         * @param name the name of the fonr
+         * @param size the size of the font
          */
         default void real(final FontName name, final double size) {
             set(new RealFont(name, size));
@@ -62,7 +62,7 @@ public interface FontItemReal extends FontItem {
     /**
      * The interface <strong>Family</strong> provides shortcuts method used to build and register a {@link FamilyFont}.
      */
-    interface Family extends FontItem {
+    interface Family extends FontItemReal {
 
         /**
          * Build and register a {@link FamilyFont} {@link FontParams}.

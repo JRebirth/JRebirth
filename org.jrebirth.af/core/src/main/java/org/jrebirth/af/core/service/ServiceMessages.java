@@ -44,6 +44,9 @@ public interface ServiceMessages extends MessageContainer {
     /** "{0} Consumes wave {1}" . */
     MessageItem SERVICE_TASK_RETURN_CONSUMES = create(new LogMessage("jrebirth.service.serviceTaskReturnConsumes", JRLevel.Trace, JRebirthMarkers.SERVICE));
 
+    /** "{0} Consumes wave {1}" . */
+    MessageItem SERVICE_TASK_RETURN_HANDLES = create(new LogMessage("jrebirth.service.serviceTaskReturnHandles", JRLevel.Trace, JRebirthMarkers.SERVICE));
+
     /** "{0} experience a service task failure for wave {1}" . */
     MessageItem SERVICE_TASK_HAS_FAILED = create(new LogMessage("jrebirth.service.serviceTaskHasFailed", JRLevel.Error, JRebirthMarkers.SERVICE));
 

@@ -90,10 +90,10 @@ public class WaveBase implements Wave, LinkMessages {
     /**
      * The wave bean.
      */
-    private WaveBean waveBean;
+    private Map<Class<? extends WaveBean>, WaveBean> waveBeanMap;
 
     /** The type extending WaveBean to use to embed some values. */
-    private Class<? extends WaveBean> waveBeanClass;
+    // private Class<? extends WaveBean> waveBeanClass;
 
     /**
      * The list of wave Listener to warn when wave status changed.
@@ -315,43 +315,120 @@ public class WaveBase implements Wave, LinkMessages {
         return this.timestamp;
     }
 
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public WaveBean waveBean() {
+    // if (this.waveBean == null) {
+    // if (this.waveBeanClass == null || WaveBean.class.equals(this.waveBeanClass)) {
+    // // Build an empty wave bean to avoid null pointer exception
+    // this.waveBean = new DefaultWaveBean();
+    // } else {
+    // try {
+    // this.waveBean = this.waveBeanClass.newInstance();
+    // } catch (InstantiationException | IllegalAccessException e) {
+    // LOGGER.error(WAVE_BEAN_CREATION_ERROR, e, this.waveBeanClass.toString());
+    // } finally {
+    // if (this.waveBean == null) {
+    // this.waveBean = new DefaultWaveBean();
+    // }
+    // }
+    // }
+    // }
+    //
+    // return this.waveBean;
+    // }
+
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public Wave waveBean(final WaveBean waveBean) {
+    // if (waveBean != null) {
+    // this.waveBean = waveBean;
+    // this.waveBeanClass = waveBean.getClass();
+    // }
+    // return this;
+    // }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public WaveBean waveBean() {
-        if (this.waveBean == null) {
-            if (this.waveBeanClass == null || WaveBean.class.equals(this.waveBeanClass)) {
-                // Build an empty wave bean to avoid null pointer exception
-                this.waveBean = new DefaultWaveBean();
-            } else {
-                try {
-                    this.waveBean = this.waveBeanClass.newInstance();
-                } catch (InstantiationException | IllegalAccessException e) {
-                    LOGGER.error(WAVE_BEAN_CREATION_ERROR, e, this.waveBeanClass.toString());
-                } finally {
-                    if (this.waveBean == null) {
-                        this.waveBean = new DefaultWaveBean();
-                    }
-                }
+    public Wave waveBean(final WaveBean waveBean) {
+        if (this.waveBeanMap == null) {
+            this.waveBeanMap = new HashMap<>();
+        }
+        this.waveBeanMap.put(waveBean.getClass(), waveBean);
+        // this.waveBeanClass = waveBean.getClass();
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    // @Override
+    @Override
+    public <WB extends WaveBean> WB waveBean(final Class<WB> waveBeanClass) {
+        if (this.waveBeanMap == null) {
+            this.waveBeanMap = new HashMap<>();
+        }
+        if (!this.waveBeanMap.containsKey(waveBeanClass)) {
+            try {
+                final WB waveBean = waveBeanClass.newInstance();
+
+                this.waveBeanMap.put(waveBeanClass, waveBean);
+
+            } catch (InstantiationException | IllegalAccessException e) {
+                LOGGER.error(WAVE_BEAN_CREATION_ERROR, e, waveBeanClass.toString());
+            } finally {
+                // if (this.waveBean == null) {
+                // this.waveBean = new DefaultWaveBean();
+                // }
             }
+
         }
 
-        return this.waveBean;
+        return (WB) this.waveBeanMap.get(waveBeanClass);
+    }
+
+    //
+    // /**
+    // * @return Returns the waveBeanClass.
+    // */
+    // public Class<? extends WaveBean> getWaveBeanClass() {
+    // return this.waveBeanClass;
+    // }
+
+    // /**
+    // * @param waveBeanClass The waveBeanClass to set.
+    // */
+    // public void setWaveBeanClass(final Class<? extends WaveBean> waveBeanClass) {
+    // this.waveBeanClass = waveBeanClass;
+    // }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<WaveBean> waveBeanList() {
+        return new ArrayList<>(this.waveBeanMap.values());
     }
 
     /**
-     * @return Returns the waveBeanClass.
+     * {@inheritDoc}
      */
-    public Class<? extends WaveBean> getWaveBeanClass() {
-        return this.waveBeanClass;
-    }
+    @Override
+    public Wave waveBeanList(final List<WaveBean> waveBeanList) {
 
-    /**
-     * @param waveBeanClass The waveBeanClass to set.
-     */
-    public void setWaveBeanClass(final Class<? extends WaveBean> waveBeanClass) {
-        this.waveBeanClass = waveBeanClass;
+        if (waveBeanList != null && !waveBeanList.isEmpty()) {
+            if (this.waveBeanMap == null) {
+                this.waveBeanMap = new HashMap<>();
+            }
+            waveBeanList.forEach(wb -> this.waveBeanMap.put(wb.getClass(), wb));
+        }
+        return this;
     }
 
     /**
@@ -474,23 +551,23 @@ public class WaveBase implements Wave, LinkMessages {
         return sb.toString();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Wave waveBean(final WaveBean waveBean) {
-        if (waveBean != null) {
-            this.waveBean = waveBean;
-            this.waveBeanClass = waveBean.getClass();
-        }
-        return this;
-    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public Wave waveBean(final WaveBean waveBean) {
+    // if (waveBean != null) {
+    // this.waveBean = waveBean;
+    // this.waveBeanClass = waveBean.getClass();
+    // }
+    // return this;
+    // }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setWaveHandlers(List<? extends Object> waveHandlers) {
+    public void setWaveHandlers(final List<? extends Object> waveHandlers) {
         this.waveHandlers = waveHandlers;
     }
 
@@ -498,7 +575,7 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void removeWaveHandler(Object waveHandler) {
+    public void removeWaveHandler(final Object waveHandler) {
         if (waveHandler != null) {
             // Remove the handler that has terminated
             this.waveHandlers.remove(waveHandler);
@@ -509,6 +586,17 @@ public class WaveBase implements Wave, LinkMessages {
             }
         }
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasWaveBean(final Class<? extends WaveBean> waveBeanClass) {
+        if (this.waveBeanMap != null && !this.waveBeanMap.isEmpty()) {
+            return this.waveBeanMap.containsKey(waveBeanClass);
+        }
+        return false;
     }
 
 }

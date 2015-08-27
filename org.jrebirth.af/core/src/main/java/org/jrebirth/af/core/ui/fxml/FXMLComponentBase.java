@@ -17,13 +17,15 @@
  */
 package org.jrebirth.af.core.ui.fxml;
 
+import java.util.Set;
+
 import javafx.scene.Node;
 
 import org.jrebirth.af.api.ui.fxml.FXMLComponent;
 import org.jrebirth.af.api.ui.fxml.FXMLController;
 
 /**
- * The class <strong>FXMLComponent</strong>.
+ * The class <strong>FXMLComponent</strong> that wraps the fxml root node and its controller.
  *
  * @author Sébastien Bordes
  */
@@ -50,7 +52,7 @@ public class FXMLComponentBase implements FXMLComponent {
     }
 
     /**
-     * @return Returns the node.
+     * {@inheritDoc}
      */
     @Override
     public Node getNode() {
@@ -58,13 +60,27 @@ public class FXMLComponentBase implements FXMLComponent {
     }
 
     /**
-     * Return the controller or null.
-     *
-     * @return Returns the controller.
+     * {@inheritDoc}
      */
     @Override
     public FXMLController getController() {
         return this.controller;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Node lookup(final String selector) {
+        return getNode().lookup(selector);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Node> lookupAll(final String selector) {
+        return getNode().lookupAll(selector);
     }
 
 }

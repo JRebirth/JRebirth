@@ -90,8 +90,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
      */
     public AbstractMultiCommand(final boolean sequential) {
-        super();
-        initSequential(sequential);
+        this(null, null, sequential);
     }
 
     /**
@@ -101,8 +100,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
      */
     public AbstractMultiCommand(final RunType runInto, final boolean sequential) {
-        super(runInto, null);
-        initSequential(sequential);
+        this(runInto, null, sequential);
     }
 
     /**
@@ -232,7 +230,8 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                     if (this.subCommandList.size() > this.commandRunIndex) {
 
                         final Wave subCommandWave = Builders.callCommand(this.subCommandList.get(this.commandRunIndex).getClassField())
-                                                            .waveBean(wave.waveBean())
+                                                            // Recopy all WaveBeans
+                                                            .waveBeanList(wave.waveBeanList())
                                                             // Recopy the WaveData from the previous wave
                                                             .addDatas(wave.waveDatas().toArray(new WaveDataBase[0]))
                                                             .addWaveListener(this);
@@ -378,7 +377,10 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     // }
 
     /**
-     * {@inheritDoc}
+     * Return the command key.
+     *
+     * @param commandClass the class of the command to call
+     * @param keyPart the object used as key parts
      */
     protected UniqueKey<? extends Command> getCommandKey(final Class<? extends Command> commandClass, final Object... keyPart) {
         return Key.create(commandClass, keyPart);

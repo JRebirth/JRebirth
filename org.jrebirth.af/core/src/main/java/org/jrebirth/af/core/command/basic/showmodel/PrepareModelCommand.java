@@ -83,7 +83,7 @@ public class PrepareModelCommand extends DefaultPoolBeanCommand<DisplayModelWave
      */
     @Override
     public DisplayModelWaveBean getWaveBean(final Wave wave) {
-        return (DisplayModelWaveBean) wave.waveBean();
+        return wave.waveBean(DisplayModelWaveBean.class);
     }
 
 }

@@ -29,13 +29,20 @@ import org.jrebirth.af.api.wave.contract.WaveType;
  *
  * @author Sébastien Bordes
  */
-public class WaveTypeRegistry {
+public final class WaveTypeRegistry {
 
     /** The generator of unique id. */
     public static final AtomicInteger idGenerator = new AtomicInteger();
 
     /** Map that store WaveType used according to their unique identifier. */
     public static final Map<String, WaveType> waveTypeMap = Collections.synchronizedMap(new HashMap<String, WaveType>());
+
+    /**
+     * Private Constructor.
+     */
+    private WaveTypeRegistry() {
+        // Nothing to do
+    }
 
     /**
      * Return the next free unique identifier.

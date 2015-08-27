@@ -22,7 +22,7 @@ import static org.jrebirth.af.core.resource.Resources.create;
 import org.jrebirth.af.api.resource.fxml.FXMLItem;
 
 /**
- * The class <strong>TestColors</strong>.
+ * The class <strong>TestFxmls</strong>.
  *
  * @author Sébastien Bordes
  */
@@ -36,6 +36,12 @@ public interface TestFxmls {
     FXMLItem FIRST_FXML = create(new FXML("fxml", "first"));
 
     /** The second fxml file. */
-    FXMLItem SECOND_FXML = create(new FXML("fxml", "second"));
+    FXMLItem SECOND_FXML = create(new FXML("fxml", "second"), true);
+
+    /** The third fxml file. */
+    FXMLItem THIRD_FXML = create(new FXML("fxml", "third"), false);
+
+    /** The fourth fxml file. */
+    FXMLItem FOURTH_FXML = create(new FXML("fxml", "fourth"), false);
 
 }

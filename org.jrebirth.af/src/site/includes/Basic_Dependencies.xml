@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dependencies>
+
+	<!-- Use logback logger -->
+	<dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-classic</artifactId>
+		<version>1.0.13</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.jrebirth.af</groupId>
+		<artifactId>core</artifactId>
+		<version>${project.version}</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.jrebirth.af</groupId>
+		<artifactId>preloader</artifactId>
+		<version>${project.version}</version>
+	</dependency>
+	
+</dependencies>

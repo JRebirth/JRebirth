@@ -27,7 +27,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ProgressBar;
 
+import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
@@ -46,6 +48,14 @@ public interface JRebirthWaves {
 
     /** The waveItem that hold the children list of the parent node. */
     WaveItemBase<ObservableList<Node>> ADD_UI_CHILDREN_PLACEHOLDER = new WaveItemBase<ObservableList<Node>>() {
+    };
+
+    /** . */
+    WaveItemBase<Class<? extends Command>> SHOW_MODEL_COMMAND = new WaveItemBase<Class<? extends Command>>() {
+    };
+
+    /** . */
+    WaveItemBase<List<WaveBean>> EXTRA_WAVE_BEANS = new WaveItemBase<List<WaveBean>>() {
     };
 
     /** The waveItem that hold the list of wave to be executed back to back. */

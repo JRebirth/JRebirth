@@ -30,6 +30,11 @@ import org.jrebirth.af.core.resource.AbstractResourceItem;
  */
 public final class ImageItemBase extends AbstractResourceItem<ImageItem, ImageParams, Image> implements ImageItemReal {
 
+    /**
+     * Create a new ImageItem.
+     *
+     * @return a fresh instance
+     */
     public static ImageItemBase create() {
         return new ImageItemBase();
     }

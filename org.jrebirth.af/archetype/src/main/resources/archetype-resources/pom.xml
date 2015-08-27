@@ -46,9 +46,10 @@
 
 
 	<build>
-		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+
 		<resources>
 			<resource>
+				<filtering>false</filtering>
 				<directory>${basedir}/src/main/java</directory>
 				<includes>
 					<include>**/*.fxml</include>
@@ -75,126 +76,151 @@
 			</resource>
 		</resources>
 
-		<plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
+					<configuration>
+						<archive>
+							<manifestEntries>
+								<JavaFX-Version>2.0</JavaFX-Version>
+								<Main-Class>${appClass}</Main-Class>
+								<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
+							</manifestEntries>
 
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<JavaFX-Version>2.0</JavaFX-Version>
-							<Main-Class>${appClass}</Main-Class>
-							<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
-							<!-- <JavaFX-Class-Path> jaxb-api-2.2.1.jar stax-api-1.0-2.jar activation-1.1.jar jaxb-impl-2.2.1.jar presentation-0.7.6-SNAPSHOT.jar core-0.7.6-SNAPSHOT.jar logback-classic-1.0.13.jar logback-core-1.0.13.jar 
-								slf4j-api-1.7.5.jar </JavaFX-Class-Path> -->
-						</manifestEntries>
-						<manifest>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<addClasspath>true</addClasspath>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+								<addClasspath>true</addClasspath>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>webstart-maven-plugin</artifactId>
-				<version>1.0-beta-6</version>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>webstart-maven-plugin</artifactId>
+					<version>1.0-beta-6</version>
 
-				<dependencies>
-					<dependency>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>keytool-api-1.7</artifactId>
-						<version>1.4</version>
-					</dependency>
-				</dependencies>
-				
-				<executions>
-					<execution>
-						<phase>verify</phase>
-						<goals>
-							<goal>jnlp</goal>
-						</goals>
-					</execution>
-				</executions>
+					<dependencies>
+						<dependency>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>keytool-api-1.7</artifactId>
+							<version>1.4</version>
+						</dependency>
+						<dependency>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>webstart-pack200-impl</artifactId>
+							<version>1.0-beta-6</version>
+						</dependency>
+					</dependencies>
 
-				<configuration>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>jnlp-inline</goal>
+							</goals>
+						</execution>
+					</executions>
 
-					<filenameMapping>full</filenameMapping>
+					<configuration>
 
-					<updateManifestEntries>
-						<Application-Name>${project.name}</Application-Name>
-						<Trusted-Library>true</Trusted-Library>
-						<Permissions>${permissions}</Permissions>
-						<Codebase>${codebase}</Codebase>
-						<Trusted-Only>true</Trusted-Only>
-					</updateManifestEntries>
+						<filenameMapping>full</filenameMapping>
+
+						<updateManifestEntries>
+							<Application-Name>${project.name}</Application-Name>
+							<Trusted-Library>true</Trusted-Library>
+							<Permissions>${permissions}</Permissions>
+							<Codebase>${codebase}</Codebase>
+							<Trusted-Only>true</Trusted-Only>
+						</updateManifestEntries>
 
 
-					<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
-					<excludeTransitive>false</excludeTransitive>
+						<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
+						<excludeTransitive>false</excludeTransitive>
 
-					<libPath>lib</libPath>
-					<codebase>${codebase}</codebase>
+						<libPath>lib</libPath>
+						<codebase>${codebase}</codebase>
 
-					<jnlp>
-						<outputFile>${jnlpFilename}</outputFile>
-						<mainClass>${appClass}</mainClass>
-						<offlineAllowed>true</offlineAllowed>
-						<allPermissions>true</allPermissions>
-					</jnlp>
+						<jnlp>
+							<outputFile>${jnlpFilename}</outputFile>
+							<mainClass>${appClass}</mainClass>
+							<offlineAllowed>true</offlineAllowed>
+							<allPermissions>true</allPermissions>
+						</jnlp>
 
-					<sign>
-						<keystore>${keystore}</keystore>
-						<keypass>${keypass}</keypass>
-						<storepass>${storepass}</storepass>
-						<storetype>${storetype}</storetype>
+						<sign>
+							<keystore>${keystore}</keystore>
+							<keypass>${keypass}</keypass>
+							<storepass>${storepass}</storepass>
+							<storetype>${storetype}</storetype>
 
-						<alias>${keyalias}</alias>
+							<alias>${keyalias}</alias>
 
-						<validity>360</validity>
-						<dnameCn>JRebirth Self-signed Certificate</dnameCn>
-						<dnameOu>JRebirth OSS</dnameOu>
-						<dnameO>JRebirth</dnameO>
-						<dnameL>Toulouse</dnameL>
-						<dnameSt>Haute-Garonne</dnameSt>
-						<dnameC>FR</dnameC>
-						<verify>true</verify>
+							<validity>360</validity>
+							<dnameCn>JRebirth Self-signed Certificate</dnameCn>
+							<dnameOu>JRebirth OSS</dnameOu>
+							<dnameO>JRebirth</dnameO>
+							<dnameL>Toulouse</dnameL>
+							<dnameSt>Haute-Garonne</dnameSt>
+							<dnameC>FR</dnameC>
+							<verify>true</verify>
 
-						<keystoreConfig>
-							<delete>${deletekeystore}</delete>
-							<gen>${genkeystore}</gen>
-						</keystoreConfig>
+							<keystoreConfig>
+								<delete>${deletekeystore}</delete>
+								<gen>${genkeystore}</gen>
+							</keystoreConfig>
 
-					</sign>
+						</sign>
 
-					<pack200>
-						<enabled>true</enabled>
-					</pack200>
-					<gzip>true</gzip>
+						<unsignAlreadySignedJars>true</unsignAlreadySignedJars>
 
-					<outputJarVersions>false</outputJarVersions>
-					
-					<install>false</install>
-					<verbose>true</verbose>
-				</configuration>
-			</plugin>
-		</plugins>
+						<pack200>
+							<enabled>true</enabled>
+						</pack200>
+						<gzip>true</gzip>
+
+						<outputJarVersions>false</outputJarVersions>
+
+						<install>false</install>
+						<verbose>true</verbose>
+					</configuration>
+
+				</plugin>
+
+
+				<!-- Project Quality -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>2.2</version>
+			</extension>
+		</extensions>
 	</build>
 
 	<dependencies>
@@ -208,13 +234,13 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>8.0.1-SNAPSHOT</version>
+			<version>8.0.3</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>preloader</artifactId>
-			<version>8.0.1-SNAPSHOT</version>
+			<version>8.0.3</version>
 		</dependency>
 	</dependencies>
 

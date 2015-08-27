@@ -30,6 +30,7 @@ import org.jrebirth.af.api.key.UniqueKey;
  *
  * @author Sébastien Bordes
  *
+ * @param <C> the type of the component used
  */
 public interface InnerComponentBase<C extends Component<?>> extends InnerComponent<C> {
 

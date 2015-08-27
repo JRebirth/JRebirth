@@ -145,7 +145,7 @@ public interface WaveType {
 
     /**
      * Return only WaveItem that can be used as method parameter.
-     * 
+     *
      * @return eligible method parameters
      */
     List<WaveItem<?>> parameters();

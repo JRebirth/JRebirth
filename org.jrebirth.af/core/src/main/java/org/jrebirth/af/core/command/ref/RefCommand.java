@@ -24,14 +24,14 @@ import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.core.command.single.AbstractSingleCommand;
 import org.jrebirth.af.core.exception.CommandException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RefCommand.
  */
 public class RefCommand extends AbstractSingleCommand<WaveBean> {
 
     /** The command runner. */
-    private/* List< */CommandRunner/* > */commandRunner/* List */;// = new ArrayList<Runner>();
+    private CommandRunner commandRunner;
+    // private List<Runner> commandRunnerList new ArrayList<Runner>();
 
     /** The command wave runner. */
     private CommandWaveRunner commandWaveRunner;
@@ -83,6 +83,7 @@ public class RefCommand extends AbstractSingleCommand<WaveBean> {
      */
     @Override
     protected void initInnerComponents() {
+        // Nothing to do yet
     }
 
     /*

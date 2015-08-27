@@ -134,8 +134,12 @@ public final class WaveDataBase<T> implements WaveData<T> {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Item: ").append(getKey().toString());
-        sb.append(" Value:").append(getValue().toString());
+
+        sb.append("Item: ")
+          .append(getKey().toString())
+          .append(" Value:")
+          .append(getValue().toString());
+
         return sb.toString();
     }
 

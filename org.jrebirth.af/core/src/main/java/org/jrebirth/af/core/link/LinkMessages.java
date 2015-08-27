@@ -68,9 +68,6 @@ public interface LinkMessages extends MessageContainer {
 
     /** NotifierBase. */
 
-    /** "Impossible to load the UnprocessedWaveHandler , will use the default one". */
-    MessageItem USE_DEFAULT_WAVE_HANDLER = create(new LogMessage("jrebirth.link.useDefaultWaveHandler", JRLevel.Error, JRebirthMarkers.LINK));
-
     /** "Failed to send Wave". */
     MessageItem WAVE_SENDING_ERROR = create(new LogMessage("jrebirth.link.waveSendingError", JRLevel.Error, JRebirthMarkers.WAVE));
 
@@ -97,6 +94,9 @@ public interface LinkMessages extends MessageContainer {
 
     /** "NB consumes : {0}". */
     MessageItem NOTIFIER_CONSUMES = create(new LogMessage("jrebirth.link.notifierConsumes", JRLevel.Info, JRebirthMarkers.WAVE));
+
+    /** "NB consumes : {0}". */
+    MessageItem NOTIFIER_HANDLES = create(new LogMessage("jrebirth.link.notifierHandles", JRLevel.Info, JRebirthMarkers.WAVE));
 
     /** "Error while handling a wave". */
     MessageItem WAVE_HANDLING_ERROR = create(new LogMessage("jrebirth.link.waveHandlingError", JRLevel.Error, JRebirthMarkers.WAVE));

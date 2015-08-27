@@ -5,6 +5,7 @@ package org.jrebirth.af.core.wave;
  *
  * @author Sébastien Bordes
  */
+@FunctionalInterface
 public interface WaveItemEnum {
 
     /**

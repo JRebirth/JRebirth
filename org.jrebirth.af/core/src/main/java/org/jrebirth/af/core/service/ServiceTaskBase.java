@@ -138,9 +138,9 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
     @SuppressWarnings("unchecked")
     @Override
     protected T call() throws CoreException {
-        
+
         this.wave.status(Status.Consumed);
-        
+
         T res = null;
         try {
 
@@ -184,7 +184,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
 
     /**
      * Handle all exception occurred while doing the task.TODO To complete.
-     * 
+     *
      * @param e the exception to handle
      */
     private void handleException(final Exception e) {

@@ -28,7 +28,7 @@ import org.jrebirth.af.core.resource.AbstractResourceItem;
  *
  * @author Sébastien Bordes
  */
-public final class ColorItemBase extends AbstractResourceItem<org.jrebirth.af.api.resource.color.ColorItem, ColorParams, Color> implements ColorItemReal {
+public final class ColorItemBase extends AbstractResourceItem<ColorItem, ColorParams, Color> implements ColorItemReal {
 
     /**
      * Build a new Color Item instance.

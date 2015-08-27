@@ -56,7 +56,7 @@ public class DefaultWaveListener implements WaveListener {
      * {@inheritDoc}
      */
     @Override
-    public void waveHandled(Wave wave) {
+    public void waveHandled(final Wave wave) {
         // Nothing to do yet
     }
 

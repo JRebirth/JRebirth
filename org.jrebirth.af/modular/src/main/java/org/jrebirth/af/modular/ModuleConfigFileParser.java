@@ -191,7 +191,7 @@ public final class ModuleConfigFileParser {
 
         final List<Class<?>> warmUpList = new ArrayList<Class<?>>();
 
-        if (module != null && module.getClass() != null) {
+        if (module != null && module.getWarmUp() != null) {
 
             // Iterate over Component to load during WarmUp
             for (final Component component : module.getWarmUp().getComponent()) {

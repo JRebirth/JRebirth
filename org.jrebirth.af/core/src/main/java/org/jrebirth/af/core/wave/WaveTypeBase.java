@@ -217,7 +217,7 @@ public final class WaveTypeBase implements WaveType {
      * {@inheritDoc}
      */
     @Override
-    public WaveType returnWaveType(WaveType returnWaveType) {
+    public WaveType returnWaveType(final WaveType returnWaveType) {
         this.returnWaveType = returnWaveType;
         this.returnAction = returnWaveType.action();
         this.returnItem = returnWaveType.items().stream().findFirst().get();
@@ -321,17 +321,17 @@ public final class WaveTypeBase implements WaveType {
      */
     @Override
     public Map<Class<? extends Throwable>, Wave> waveExceptionHanler() {
-        if (waveExceptionHanler == null) {
-            waveExceptionHanler = new ConcurrentHashMap<>();
+        if (this.waveExceptionHanler == null) {
+            this.waveExceptionHanler = new ConcurrentHashMap<>();
         }
-        return waveExceptionHanler;
+        return this.waveExceptionHanler;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public WaveType onException(Class<? extends Command> exceptionCommandClass, Class<? extends Throwable>... exceptionTypes) {
+    public WaveType onException(final Class<? extends Command> exceptionCommandClass, final Class<? extends Throwable>... exceptionTypes) {
 
         final Wave commandWave = Builders.callCommand(exceptionCommandClass);
 
@@ -345,7 +345,7 @@ public final class WaveTypeBase implements WaveType {
      * {@inheritDoc}
      */
     @Override
-    public WaveType onException(WaveType exceptionWaveType, Class<? extends Throwable>... exceptionTypes) {
+    public WaveType onException(final WaveType exceptionWaveType, final Class<? extends Throwable>... exceptionTypes) {
 
         final Wave wave = Builders.wave().waveType(exceptionWaveType);
 

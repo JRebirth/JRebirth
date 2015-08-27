@@ -27,10 +27,12 @@ import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.facade.GlobalFacade;
+import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.link.Notifier;
 import org.jrebirth.af.api.link.UnprocessedWaveHandler;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.Wave.Status;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
@@ -40,10 +42,12 @@ import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.exception.WaveException;
 import org.jrebirth.af.core.facade.AbstractGlobalReady;
+import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.service.ServiceTaskBase;
 import org.jrebirth.af.core.service.basic.TaskTrackerService;
+import org.jrebirth.af.core.util.ParameterUtility;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.JRebirthWaves;
 
@@ -74,16 +78,11 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
     public NotifierBase(final GlobalFacade globalFacade) {
         super(globalFacade);
 
-        UnprocessedWaveHandler waveHandler;
-        try {
-            waveHandler = (UnprocessedWaveHandler) JRebirthParameters.UNPROCESSED_WAVE_HANDLER.get().newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-
-            LOGGER.error(USE_DEFAULT_WAVE_HANDLER, e);
-            waveHandler = new DefaultUnprocessedWaveHandler();
-        }
         // Attach the right EnhancedComponent Factory
-        this.unprocessedWaveHandler = waveHandler;
+        this.unprocessedWaveHandler = (UnprocessedWaveHandler)
+                ParameterUtility.buildCustomizableClass(JRebirthParameters.UNPROCESSED_WAVE_HANDLER,
+                                                        DefaultUnprocessedWaveHandler.class,
+                                                        "UnprocessedWaveHandler");
     }
 
     /**
@@ -194,7 +193,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
     @SuppressWarnings("unchecked")
     private void displayUi(final Wave wave) {
 
-        if (wave.componentClass() != null) {
+        if (wave.componentClass() == null) {
             LOGGER.error(MODEL_NOT_FOUND_ERROR, wave.toString());
             if (JRebirthParameters.DEVELOPER_MODE.get()) {
                 this.unprocessedWaveHandler.manageUnprocessedWave(MODEL_NOT_FOUND_MESSAGE.getText(), wave);
@@ -202,22 +201,40 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         }
         // This key method could be managed in another way (fully sync with JAT), to see if it could be useful
 
+        DisplayModelWaveBean displayModelWaveBean;
         // Build the wave used to call the required command
-        final DisplayModelWaveBean waveBean = DisplayModelWaveBean.create();
+        // if (wave.contains(JRebirthWaves.EXTRA_WAVE_BEANS)) {
+        // waveBean = wave.getData(JRebirthWaves.EXTRA_WAVE_BEANS).getValue();
+        // } else {
+        displayModelWaveBean = DisplayModelWaveBean.create();
+        // }
+
+        displayModelWaveBean.showModelKey((UniqueKey<Model>) Key.create(wave.componentClass()));
 
         if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
             // Add the Ui view into the place holder provided
-            waveBean.uniquePlaceHolder(wave.get(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER));
+            displayModelWaveBean.uniquePlaceHolder(wave.get(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER));
 
         } else if (wave.contains(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER)) {
             // Add the Ui view into the children list of its parent container
-            waveBean.childrenPlaceHolder(wave.get(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER));
+            displayModelWaveBean.childrenPlaceHolder(wave.get(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER));
         }
 
         // Call the command that manage the display UI in 2 steps
         // 1 - Create the model into the Thread Pool
         // 2 - Attach it to the graphical tree model according to their placeholder type
-        callCommand(Builders.callCommand(ShowModelCommand.class).waveBean(waveBean));
+        Class<? extends Command> showModelCommandClass;
+        if (wave.contains(JRebirthWaves.SHOW_MODEL_COMMAND)) {
+            showModelCommandClass = wave.getData(JRebirthWaves.SHOW_MODEL_COMMAND).getValue();
+        } else {
+            showModelCommandClass = ShowModelCommand.class;
+        }
+
+        callCommand(Builders.callCommand(showModelCommandClass)
+                            // Add all extra wave beans
+                            .waveBeanList(wave.getData(JRebirthWaves.EXTRA_WAVE_BEANS).getValue())
+                            // Add also DisplayModel Wave Bean
+                            .waveBean(displayModelWaveBean));
     }
 
     /**
@@ -230,6 +247,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
      * @throws WaveException if wave dispatching fails
      */
     private void processUndefinedWave(final Wave wave) throws WaveException {
+        LOGGER.info(NOTIFIER_CONSUMES, wave.toString());
+        wave.status(Status.Consumed);
 
         // Retrieve all interested object from the map
         if (this.notifierMap.containsKey(wave.waveType())) {
@@ -262,8 +281,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             }
         }
 
-        LOGGER.info(NOTIFIER_CONSUMES, wave.toString());
-        wave.status(Status.Consumed);
+        LOGGER.info(NOTIFIER_HANDLES, wave.toString());
+        wave.status(Status.Handled);
 
     }
 

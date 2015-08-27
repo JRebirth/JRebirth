@@ -37,6 +37,9 @@ public interface FXMLMessages extends MessageContainer {
 
     /** FXMLUtils. */
 
+    /** "Impossible to load the custom FXMLControllerFactory, will use the default one". */
+    MessageItem FXML_CONTROLLER_FACTORY_ERROR = create(new LogMessage("jrebirth.ui.fxml.fxmlControllerFactoryError", JRLevel.Error, JRebirthMarkers.FXML));
+
     /** "Resource Bundle is missing: {0}". */
     MessageItem MISSING_RESOURCE_BUNDLE = create(new LogMessage("jrebirth.ui.fxml.missingResourceBundle", JRLevel.Error, JRebirthMarkers.FXML));
 
@@ -54,7 +57,7 @@ public interface FXMLMessages extends MessageContainer {
     /** "Initialize fxml node : {0}". */
     MessageItem INIT_FXML_NODE = create(new LogMessage("jrebirth.ui.fxml.initFxmlNode", JRLevel.Trace, JRebirthMarkers.FXML));
 
-    /** DefaultFXMLControllerBuilder. */
+    /** DefaultFXMLControllerFactory. */
 
     /** "Initialize fxml node : {0}". */
     MessageItem DEFAULT_CTRLR_CREATION_ERROR = create(new LogMessage("jrebirth.ui.fxml.defaultCtrlrCreationError", JRLevel.Trace, JRebirthMarkers.FXML));

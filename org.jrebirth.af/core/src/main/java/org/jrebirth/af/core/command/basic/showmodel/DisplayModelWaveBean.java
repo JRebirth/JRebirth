@@ -59,14 +59,19 @@ public class DisplayModelWaveBean implements WaveBean {
     /** The model instance to hide (ie: with an animation). */
     private Model hideModel;
 
+    /**
+     * Build a new instance of {@link DisplayModelWaveBean}.
+     *
+     * @return a fresh instance
+     */
     public static DisplayModelWaveBean create() {
         return new DisplayModelWaveBean();
     }
 
     /**
-     * Hide the default constructor.
+     * Hide the default constructor but allow subclassing.
      */
-    private DisplayModelWaveBean() {
+    public DisplayModelWaveBean() {
         super();
     }
 

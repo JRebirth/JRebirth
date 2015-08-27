@@ -29,8 +29,45 @@ import org.jrebirth.af.core.resource.AbstractResourceItem;
  */
 public final class FXMLItemBase extends AbstractResourceItem<FXMLItem, FXMLParams, FXMLComponent> implements FXMLItemReal {
 
+    /** Property mapped to FXMLItem.isSingleton getter. */
+    private final boolean isSingleton;
+
+    /**
+     * Build a fresh instance of {@link FXMLItemBase}.
+     *
+     * @return a {@link FXMLItemBase} instance
+     */
     public static FXMLItemBase create() {
-        return new FXMLItemBase();
+        return create(true);
+    }
+
+    /**
+     * Build a fresh instance of {@link FXMLItemBase}.
+     *
+     * @param isSingleton flag that indicate if the FXML Component is unique or multiple.
+     *
+     * @return a {@link FXMLItemBase} instance
+     */
+    public static FXMLItemBase create(final boolean isSingleton) {
+        return new FXMLItemBase(isSingleton);
+    }
+
+    /**
+     * Default Constructor.
+     *
+     * @param isSingleton flag that indicate if the FXML Component is unique or multiple.
+     */
+    public FXMLItemBase(final boolean isSingleton) {
+        super();
+        this.isSingleton = isSingleton;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isSingleton() {
+        return this.isSingleton;
     }
 
 }

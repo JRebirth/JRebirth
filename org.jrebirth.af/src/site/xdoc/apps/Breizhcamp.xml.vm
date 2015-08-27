@@ -51,12 +51,12 @@
 			</p>
 			<p>
 				You can download the whole application here :
-				<a href="http://apps.jrebirth.org/breizhcamp/javafx2-${Breizhcamp-version}.zip">Lightning Talk</a>
+				<a href="http://apps.jrebirth.org/breizhcamp/javafx2-${Breizhcamp-version}.zip">JavaFX 2 Presentation</a>
 			</p>
 			<p>
 				Press F11 to activate fullscreen mode, use left-click to show the next slide, right click for previous slide
 				You can browse the source code on
-				<a title="JRebirth Demo Source Code" href="https://github.com/JRebirth/JFX-Presentation/tree/master/org.jrebirth.presentation.javafx2" target="_blank">GitHub</a>
+				<a title="JRebirth Demo Source Code" href="https://github.com/JRebirth/JFX-Presentation/tree/master/org.jrebirth.af.presentation.javafx2" target="_blank">GitHub</a>
 				.
 			</p>
 			<div id="javafx-app-placeholder" style="margin: 0 -27px; padding: 0;">

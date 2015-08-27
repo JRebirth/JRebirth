@@ -32,6 +32,7 @@ import org.jrebirth.af.core.concurrent.JRebirthThreadPoolExecutor;
 import org.jrebirth.af.core.link.NotifierBase;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.util.ParameterUtility;
 
 /**
  *
@@ -93,15 +94,8 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
     public GlobalFacadeBase(final JRebirthApplication<?> application) {
         super();
 
-        ComponentFactory factory;
-        try {
-            factory = (ComponentFactory) JRebirthParameters.COMPONENT_FACTORY.get().newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            LOGGER.error(COMPONENT_CUSTOM_FACTORY_ERROR, e);
-            factory = new DefaultComponentFactory();
-        }
         // Attach the right EnhancedComponent Factory
-        this.componentFactory = factory;
+        this.componentFactory = (ComponentFactory) ParameterUtility.buildCustomizableClass(JRebirthParameters.COMPONENT_FACTORY, DefaultComponentFactory.class, "ComponentFactory");
 
         // Link the application
         this.application = application;

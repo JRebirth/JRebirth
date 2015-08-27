@@ -97,6 +97,7 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     protected final void initInternalModel() throws CoreException {
 
@@ -108,6 +109,10 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
 
         if (getFXMLItem() != null) {
             this.fxmlComponent = getFXMLItem().get();
+            if (this.fxmlComponent.getController() != null) {
+                // Attach manually the model to the FXMLController, because the FXMLBuilder#buildComponent hadn't done it
+                this.fxmlComponent.getController().setModel(this);
+            }
         } else if (getFXMLPath() != null) {
             this.fxmlComponent = FXMLUtils.loadFXML(this, getFXMLPath(), getFXMLBundlePath());
         }
@@ -119,6 +124,7 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
             public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
                 if (newValue == null) {
                     release();
+                    getRootNode().parentProperty().removeListener(this);
                 }
             }
 
