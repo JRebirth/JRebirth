@@ -7,11 +7,13 @@ import javafx.scene.Cursor;
 import javafx.scene.layout.BorderPane;
 
 import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.core.application.TestApplication;
 import org.jrebirth.af.core.command.basic.SwitchFullScreenCommand;
 import org.jrebirth.af.core.command.basic.UpdateCursorCommand;
 import org.jrebirth.af.core.facade.CommandFacade;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
+import org.jrebirth.af.core.ui.DefaultModel;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -51,6 +53,59 @@ public class KeyTest {
         this.commandFacade = globalFacade.getCommandFacade();
     }
 
+    @Test
+    public void testCrossKeyInequality() {
+        final UniqueKey<DefaultModel> key1 = Key.create(DefaultModel.class);
+        final UniqueKey<DefaultModel> key2 = Key.create(DefaultModel.class, new Object());
+
+        Assert.assertFalse(key1.equals(key2));
+        Assert.assertFalse(key2.equals(key1));
+    }
+
+    @Test
+    public void testClassKeyEquality() {
+        final Object sameObject = new Object();
+
+        final UniqueKey<DefaultModel> key1 = Key.create(DefaultModel.class);
+        final UniqueKey<DefaultModel> key2 = Key.create(DefaultModel.class);
+
+        Assert.assertTrue(key1.equals(key2));
+        Assert.assertTrue(key2.equals(key1));
+    }
+
+    @Test
+    public void testMultitonKeyEquality1() {
+        final Object sameObject = new Object();
+
+        final UniqueKey<DefaultModel> key1 = Key.create(DefaultModel.class, sameObject);
+        final UniqueKey<DefaultModel> key2 = Key.create(DefaultModel.class, sameObject);
+
+        Assert.assertTrue(key1.equals(key2));
+        Assert.assertTrue(key2.equals(key1));
+    }
+
+    @Test
+    public void testMultitonKeyInequality1() {
+
+        final Object sameObject = new Object();
+
+        final UniqueKey<DefaultModel> key1 = Key.create(DefaultModel.class, sameObject, new Object());
+        final UniqueKey<DefaultModel> key2 = Key.create(DefaultModel.class, sameObject);
+
+        Assert.assertFalse(key1.equals(key2));
+        Assert.assertFalse(key2.equals(key1));
+    }
+
+    @Test
+    public void testMultitonKeyInequality2() {
+
+        final UniqueKey<DefaultModel> key1 = Key.create(DefaultModel.class, new Object());
+        final UniqueKey<DefaultModel> key2 = Key.create(DefaultModel.class, new Object());
+
+        Assert.assertFalse(key1.equals(key2));
+        Assert.assertFalse(key2.equals(key1));
+    }
+
     @SuppressWarnings("unused")
     @Test
     public void registerCommandWithKey() {
@@ -69,9 +124,9 @@ public class KeyTest {
         strongList.add(this.commandFacade.retrieve(UpdateCursorCommand.class, Cursor.WAIT, new BorderPane()));
 
         checkComponentCount(UpdateCursorCommand.class, 3);
-        
+
         checkComponentCount(SwitchFullScreenCommand.class, 100_000);
-        
+
         // retain the strong list even method check to avoid compiler optimization that will release item too early
         System.out.println(strongList.size() + " items strongly retained");
     }
