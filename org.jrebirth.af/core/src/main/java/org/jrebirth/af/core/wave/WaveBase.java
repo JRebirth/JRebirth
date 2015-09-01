@@ -17,16 +17,8 @@
  */
 package org.jrebirth.af.core.wave;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
@@ -37,6 +29,8 @@ import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.link.LinkMessages;
 import org.jrebirth.af.core.log.JRLoggerFactory;
+
+import java.util.*;
 
 /**
  *
@@ -90,7 +84,7 @@ public class WaveBase implements Wave, LinkMessages {
     /**
      * The wave bean.
      */
-    private Map<Class<? extends WaveBean>, WaveBean> waveBeanMap;
+    private final Map<Class<? extends WaveBean>, WaveBean> waveBeanMap = new HashMap<>();
 
     /** The type extending WaveBean to use to embed some values. */
     // private Class<? extends WaveBean> waveBeanClass;
@@ -357,9 +351,6 @@ public class WaveBase implements Wave, LinkMessages {
      */
     @Override
     public Wave waveBean(final WaveBean waveBean) {
-        if (this.waveBeanMap == null) {
-            this.waveBeanMap = new HashMap<>();
-        }
         this.waveBeanMap.put(waveBean.getClass(), waveBean);
         // this.waveBeanClass = waveBean.getClass();
         return this;
@@ -371,9 +362,6 @@ public class WaveBase implements Wave, LinkMessages {
     // @Override
     @Override
     public <WB extends WaveBean> WB waveBean(final Class<WB> waveBeanClass) {
-        if (this.waveBeanMap == null) {
-            this.waveBeanMap = new HashMap<>();
-        }
         if (!this.waveBeanMap.containsKey(waveBeanClass)) {
             try {
                 final WB waveBean = waveBeanClass.newInstance();
@@ -428,9 +416,6 @@ public class WaveBase implements Wave, LinkMessages {
     public Wave waveBeanList(final List<WaveBean> waveBeanList) {
 
         if (waveBeanList != null && !waveBeanList.isEmpty()) {
-            if (this.waveBeanMap == null) {
-                this.waveBeanMap = new HashMap<>();
-            }
             waveBeanList.forEach(wb -> this.waveBeanMap.put(wb.getClass(), wb));
         }
         return this;
