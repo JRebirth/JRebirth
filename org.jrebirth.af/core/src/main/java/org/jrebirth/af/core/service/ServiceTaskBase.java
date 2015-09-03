@@ -17,14 +17,7 @@
  */
 package org.jrebirth.af.core.service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.concurrent.Task;
-
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.concurrent.Priority;
@@ -43,6 +36,12 @@ import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.JRebirthItems;
 import org.jrebirth.af.core.wave.JRebirthWaves;
 import org.jrebirth.af.core.wave.WaveItemBase;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class <strong>ServiceTask</strong>.
@@ -324,6 +323,14 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
     public void taskAchieved() {
         // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
         this.service.removePendingTask(this.wave.getWUID());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Wave getAssociatedWave() {
+        return this.wave;
     }
 
     /**
