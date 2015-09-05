@@ -410,10 +410,15 @@ public class WaveBase implements Wave, LinkMessages {
 
     /**
      * {@inheritDoc}
+     * 
+     * Don't use the returned list to add WaveBean.
      */
     @Override
     public List<WaveBean> waveBeanList() {
-        return new ArrayList<>(this.waveBeanMap.values());
+        if (this.waveBeanMap != null && !this.waveBeanMap.isEmpty()) {
+            return new ArrayList<>(this.waveBeanMap.values());
+        }
+        return new ArrayList<>();
     }
 
     /**

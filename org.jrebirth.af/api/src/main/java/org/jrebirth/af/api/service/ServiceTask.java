@@ -18,6 +18,7 @@
 package org.jrebirth.af.api.service;
 
 import javafx.concurrent.Worker;
+import org.jrebirth.af.api.wave.Wave;
 
 /**
  * The class <strong>ServiceTask</strong>.
@@ -43,6 +44,11 @@ public interface ServiceTask<T> extends Worker<T> {
      * Remove the task from the service pending list
      */
     void taskAchieved();
+
+    /**
+     * @return the wave associated to this service task
+     */
+    Wave getAssociatedWave();
 
     /**
      * Check if the task has enough progressed according to the given threshold.
