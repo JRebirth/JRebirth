@@ -41,7 +41,8 @@ public final class WaveTypeBase implements WaveType {
     /** The unique identifier of the wave type. */
     private int uid;
 
-    /** The action to performed, basically the name of the method to call. */
+    /** The action to performed, basically the name of the method to call.
+     * The keyword "DO_" (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to generate the handler method */
     private String action;
 
     /** Define arguments types to use. */
@@ -81,10 +82,6 @@ public final class WaveTypeBase implements WaveType {
 
     /**
      * Default constructor.
-     *
-     * @param action The action to perform, "DO_" (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) keyword will be prepended to the action name to generate the handler method
-     *
-     * @param waveItems the list of #WaveItem{@link WaveItem} required by this wave
      */
     WaveTypeBase() {
 
@@ -93,9 +90,7 @@ public final class WaveTypeBase implements WaveType {
     }
 
     /**
-     * Gets the uid.
-     *
-     * @return Returns the uid.
+     * {@inheritDoc}
      */
     @Override
     public int uid() {
@@ -103,9 +98,7 @@ public final class WaveTypeBase implements WaveType {
     }
 
     /**
-     * Sets the uid.
-     *
-     * @param uid The uid to set.
+     * {@inheritDoc}
      */
     @Override
     public WaveTypeBase uid(final int uid) {
@@ -114,9 +107,7 @@ public final class WaveTypeBase implements WaveType {
     }
 
     /**
-     * Gets the action.
-     *
-     * @return Returns the action.
+     * {@inheritDoc}
      */
     @Override
     public String action() {
@@ -124,32 +115,26 @@ public final class WaveTypeBase implements WaveType {
     }
 
     /**
-     * Sets the uid.
-     *
-     * @param uid The uid to set.
+     * {@inheritDoc}
      */
     @Override
     public WaveTypeBase action(final String action) {
-
         WaveTypeRegistry.store(action, this);
-
-        // The action name will be used to define the name of the wave handler method
-        // Prepend do the the action name to force wave handler method to begin with do (convention parameterizable)
-        this.action = JRebirthParameters.WAVE_HANDLER_PREFIX.get() + action;
-
+        this.action = action;
         return this;
     }
 
     /**
-     * Gets the wave item list.
-     *
-     * @return Returns the waveItemList.
+     * {@inheritDoc}
      */
     @Override
     public List<WaveItem<?>> items() {
         return this.waveItemList;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public WaveTypeBase items(final WaveItem<?>... items) {
         // Add each wave item to manage method argument
@@ -160,9 +145,7 @@ public final class WaveTypeBase implements WaveType {
     }
 
     /**
-     * Gets the action.
-     *
-     * @return Returns the action.
+     * {@inheritDoc}
      */
     @Override
     public String returnAction() {
@@ -170,9 +153,7 @@ public final class WaveTypeBase implements WaveType {
     }
 
     /**
-     * Sets the uid.
-     *
-     * @param uid The uid to set.
+     * {@inheritDoc}
      */
     @Override
     public WaveTypeBase returnAction(final String returnAction) {
@@ -220,7 +201,7 @@ public final class WaveTypeBase implements WaveType {
     public WaveType returnWaveType(final WaveType returnWaveType) {
         this.returnWaveType = returnWaveType;
         this.returnAction = returnWaveType.action();
-        this.returnItem = returnWaveType.items().stream().findFirst().get();
+        this.returnItem = returnWaveType.items().stream().findFirst().orElse(null);
         return this;
     }
 
@@ -275,7 +256,9 @@ public final class WaveTypeBase implements WaveType {
      */
     @Override
     public String toString() {
-        return this.action;
+        // The action name will be used to define the name of the wave handler method
+        // Prepend do before the action name to force wave handler method to begin with do (convention parameterizable)
+        return JRebirthParameters.WAVE_HANDLER_PREFIX.get() + this.action;
     }
 
     /**
