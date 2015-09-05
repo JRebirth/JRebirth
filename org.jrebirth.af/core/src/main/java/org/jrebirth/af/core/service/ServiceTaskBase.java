@@ -191,7 +191,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
         this.wave.status(Status.Failed);
 
         // Get the exact exception type
-        final Wave exceptionHandlerWave = this.wave.waveType().waveExceptionHanler().get(e.getClass());
+        final Wave exceptionHandlerWave = this.wave.waveType().waveExceptionHandler().get(e.getClass());
 
         if (exceptionHandlerWave != null) {
             // Fill the wave with useful data
