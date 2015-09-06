@@ -59,7 +59,7 @@ public final class WaveTypeBase implements WaveType {
     /** The command to call to process the returned value. */
     private Class<? extends Command> returnCommandClass;
 
-    private Map<Class<? extends Throwable>, Wave> waveExceptionHanler;
+    private Map<Class<? extends Throwable>, Wave> waveExceptionHandler;
 
     // public static WaveTypeBase create() {
     // return new WaveTypeBase();
@@ -320,11 +320,11 @@ public final class WaveTypeBase implements WaveType {
      * {@inheritDoc}
      */
     @Override
-    public Map<Class<? extends Throwable>, Wave> waveExceptionHanler() {
-        if (this.waveExceptionHanler == null) {
-            this.waveExceptionHanler = new ConcurrentHashMap<>();
+    public Map<Class<? extends Throwable>, Wave> waveExceptionHandler() {
+        if (this.waveExceptionHandler == null) {
+            this.waveExceptionHandler = new ConcurrentHashMap<>();
         }
-        return this.waveExceptionHanler;
+        return this.waveExceptionHandler;
     }
 
     /**
@@ -336,7 +336,7 @@ public final class WaveTypeBase implements WaveType {
         final Wave commandWave = Builders.callCommand(exceptionCommandClass);
 
         for (final Class<? extends Throwable> type : exceptionTypes) {
-            waveExceptionHanler().put(type, commandWave);
+            waveExceptionHandler().put(type, commandWave);
         }
         return this;
     }
@@ -350,7 +350,7 @@ public final class WaveTypeBase implements WaveType {
         final Wave wave = Builders.wave().waveType(exceptionWaveType);
 
         for (final Class<? extends Throwable> type : exceptionTypes) {
-            waveExceptionHanler().put(type, wave);
+            waveExceptionHandler().put(type, wave);
         }
         return this;
     }

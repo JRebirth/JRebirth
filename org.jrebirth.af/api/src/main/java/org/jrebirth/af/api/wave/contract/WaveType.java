@@ -155,7 +155,7 @@ public interface WaveType {
      *
      * @return the waveExceptionHandler map
      */
-    Map<Class<? extends Throwable>, Wave> waveExceptionHanler();
+    Map<Class<? extends Throwable>, Wave> waveExceptionHandler();
 
     /**
      * Define the Command to call in order to handle given exception types.
