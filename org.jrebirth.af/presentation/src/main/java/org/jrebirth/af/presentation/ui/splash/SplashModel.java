@@ -21,7 +21,7 @@ import org.jrebirth.af.presentation.ui.base.AbstractSlideModel;
 import org.jrebirth.af.presentation.ui.base.SlideStep;
 
 /**
- * The class <strong>SplashModel</strong>.
+ * The class <strong>QandAModel</strong>.
  *
  * @author Sébastien Bordes
  *

@@ -17,7 +17,6 @@
  */
 package org.jrebirth.af.presentation.ui.stack;
 
-import javafx.scene.control.Control;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -118,7 +117,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * @param mouseEvent
      */
     protected void onMouseReleased(final MouseEvent mouseEvent) {
-        if (!mouseEvent.isSynthesized() && !(mouseEvent.getTarget() instanceof Control) && !(mouseEvent.getTarget() instanceof WebView)) {
+        if (!mouseEvent.isSynthesized() && /* !(mouseEvent.getTarget() instanceof Pane) && */!(mouseEvent.getTarget() instanceof WebView)) {
             if (mouseEvent.getButton() == MouseButton.PRIMARY) {
                 getModel().callCommand(ShowNextSlideCommand.class);
                 mouseEvent.consume();

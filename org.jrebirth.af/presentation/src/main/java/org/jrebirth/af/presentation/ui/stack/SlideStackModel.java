@@ -29,6 +29,7 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.presentation.service.PresentationService;
+import org.jrebirth.af.presentation.ui.base.AbstractSlideModel.SlideFlow;
 import org.jrebirth.af.presentation.ui.base.SlideModel;
 import org.jrebirth.af.presentation.ui.base.SlideStep;
 import org.jrebirth.presentation.model.Slide;
@@ -160,6 +161,8 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
 
                 // Play the animation<
                 final ParallelTransition slideAnimation = buildSlideTransition(isReverse, previousSlideModel, this.selectedSlideModel);
+
+                this.selectedSlideModel.setCurrentFlow(isReverse ? SlideFlow.backward : SlideFlow.forward);
 
                 if (isReverse) {
 
