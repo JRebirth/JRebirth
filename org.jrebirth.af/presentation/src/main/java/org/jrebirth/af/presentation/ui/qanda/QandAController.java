@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.presentation.ui.splash;
+package org.jrebirth.af.presentation.ui.qanda;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.presentation.ui.base.AbstractSlideController;
@@ -26,7 +26,7 @@ import org.jrebirth.af.presentation.ui.base.AbstractSlideController;
  * @author Sébastien Bordes
  *
  */
-public class SplashController extends AbstractSlideController<SplashModel, SplashView> {
+public class QandAController extends AbstractSlideController<QandAModel, QandAView> {
 
     /**
      * Default Constructor.
@@ -35,7 +35,7 @@ public class SplashController extends AbstractSlideController<SplashModel, Splas
      *
      * @throws CoreException if an error occurred while creating event handlers
      */
-    public SplashController(final SplashView view) throws CoreException {
+    public QandAController(final QandAView view) throws CoreException {
         super(view);
     }
 

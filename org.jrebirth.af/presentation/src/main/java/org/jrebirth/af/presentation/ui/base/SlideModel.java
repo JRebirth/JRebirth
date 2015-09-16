@@ -20,6 +20,7 @@ package org.jrebirth.af.presentation.ui.base;
 import javafx.animation.Animation;
 
 import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.presentation.ui.base.AbstractSlideModel.SlideFlow;
 
 /**
  * The class <strong>SlideModel</strong>.
@@ -41,6 +42,11 @@ public interface SlideModel<S extends SlideStep> extends Model {
      * @param slideStep the step to show
      */
     void showSlideStep(final S slideStep);
+
+    /**
+     * @param currentFlow The currentFlow to set.
+     */
+    void setCurrentFlow(final SlideFlow currentFlow);
 
     /**
      * Check if the next step is available.
