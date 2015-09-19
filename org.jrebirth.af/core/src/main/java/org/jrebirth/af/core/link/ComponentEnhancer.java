@@ -201,7 +201,7 @@ public final class ComponentEnhancer implements LinkMessages {
         // Iterate over each annotated Method and all annotations
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), OnWave.class)) {
             for (final OnWave clsOnWave : method.getAnnotationsByType(OnWave.class)) {
-                manageUniqueWaveTypeAction(component, clsOnWave.value(), null);
+                manageUniqueWaveTypeAction(component, clsOnWave.value(), method);
             }
         }
 
