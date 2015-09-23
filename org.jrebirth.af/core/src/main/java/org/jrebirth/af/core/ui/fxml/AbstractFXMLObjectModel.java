@@ -21,12 +21,14 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 
+import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.resource.fxml.FXMLItem;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.NullView;
 import org.jrebirth.af.api.ui.fxml.FXMLComponent;
 import org.jrebirth.af.api.ui.fxml.FXMLController;
+import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.resource.fxml.FXML;
 import org.jrebirth.af.core.ui.object.AbstractObjectModel;
 import org.jrebirth.af.core.wave.JRebirthWaves;
@@ -97,29 +99,25 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
     @Override
     protected final void initInternalModel() throws CoreException {
 
+        // Grab FXML definition from keypart, properties or by logical name
         fxmlPreInitialize();
 
         // Do generic stuff
         listen(JRebirthWaves.SHOW_VIEW);
         listen(JRebirthWaves.HIDE_VIEW);
 
-        if (getFXMLItem() != null) {
-            this.fxmlComponent = getFXMLItem().get();
-            if (this.fxmlComponent.getController() != null) {
-                // Attach manually the model to the FXMLController, because the FXMLBuilder#buildComponent hadn't done it
-                this.fxmlComponent.getController().setModel(this);
-            }
-        } else if (getFXMLPath() != null) {
-            this.fxmlComponent = FXMLUtils.loadFXML(this, getFXMLPath(), getFXMLBundlePath());
-        }
+        // Load the fxml file to create scene nodes
+        JRebirth.run(this.createViewIntoJAT ? RunType.JAT_SYNC : RunType.SAME, this::initFXMLView);
 
         // Allow to release the model if the root business object doesn't exist anymore
         getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
 
+            /**
+             * {@inheritDoc}
+             */
             @Override
             public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
                 if (newValue == null) {
@@ -132,6 +130,22 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
 
         // Do custom stuff
         initModel();
+    }
+
+    /**
+     * Initialize the FXML View, by loading the FXML file and creating all Nodes.
+     */
+    @SuppressWarnings("unchecked")
+    private void initFXMLView() {
+        if (getFXMLItem() != null) {
+            this.fxmlComponent = getFXMLItem().get();
+            if (this.fxmlComponent.getController() != null) {
+                // Attach manually the model to the FXMLController, because the FXMLBuilder#buildComponent hadn't done it
+                this.fxmlComponent.getController().setModel(this);
+            }
+        } else if (getFXMLPath() != null) {
+            this.fxmlComponent = FXMLUtils.loadFXML(this, getFXMLPath(), getFXMLBundlePath());
+        }
     }
 
     /**
