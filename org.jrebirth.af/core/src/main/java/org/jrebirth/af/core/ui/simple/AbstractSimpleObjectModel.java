@@ -21,10 +21,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 
+import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.NullView;
 import org.jrebirth.af.api.ui.annotation.RootNodeId;
+import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.ui.object.AbstractObjectModel;
 import org.jrebirth.af.core.util.ClassUtility;
 
@@ -79,7 +81,7 @@ public abstract class AbstractSimpleObjectModel<N extends Node, O extends Object
         });
 
         // Set up the model view
-        initSimpleView();
+        JRebirth.run(this.createViewIntoJAT ? RunType.JAT_SYNC : RunType.SAME, this::initSimpleView);
     }
 
     /**
