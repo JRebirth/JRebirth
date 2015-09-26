@@ -22,13 +22,18 @@ import java.util.List;
 import java.util.Random;
 
 import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.animation.FadeTransitionBuilder;
+import javafx.animation.ParallelTransition;
 import javafx.animation.ParallelTransitionBuilder;
 import javafx.animation.PauseTransitionBuilder;
 import javafx.animation.SequentialTransitionBuilder;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.ImageViewBuilder;
@@ -69,6 +74,8 @@ public final class ImageSlideView extends
     /** The number of tiles per row and column. */
     private int tilePerRow = 50;
 
+    private Label slideLabel;
+
     /**
      * Default Constructor.
      *
@@ -86,14 +93,48 @@ public final class ImageSlideView extends
     @Override
     protected void initView() {
 
+        getRootNode().getStyleClass().add("ImageSlide");
+        if (getModel().getSlide().getStyle() != null) {
+            getRootNode().getStyleClass().add(getModel().getSlide().getStyle());
+        }
+
         this.image = Resources.create(new RelImage(getModel().getImage())).get();
 
-        if (getModel().getSlide().getShowAnimation() == null || !"Tile".equalsIgnoreCase(getModel().getSlide().getShowAnimation().name())
-                && !"Tile_60_k".equalsIgnoreCase(getModel().getSlide().getShowAnimation().name())) {
-            getRootNode().getChildren().add(ImageViewBuilder.create().image(this.image).layoutX(0).layoutY(0).fitWidth(this.image.getWidth()).fitHeight(this.image.getHeight()).build());
+        if (getModel().getSlide().getShowAnimation() == null ||
+                !"TileIn".equalsIgnoreCase(getModel().getSlide().getShowAnimation().value())
+                && !"TileIn60k".equalsIgnoreCase(getModel().getSlide().getShowAnimation().value())) {
+
+            getRootNode().getChildren().add(ImageViewBuilder.create()
+                                                            .image(this.image)
+                                                            .layoutX(0).layoutY(0)
+                                                            .fitWidth(this.image.getWidth()).fitHeight(this.image.getHeight())
+                                                            .build());
+
+            // getRootNode().setOpacity(0);
+
         }
+
+        if (getModel().getSlide().getShowAnimation() != null && AnimationType.TILE_IN == getModel().getSlide().getShowAnimation()) {
+            this.tilePerRow = 5;
+        } else if (getModel().getSlide().getShowAnimation() != null && AnimationType.TILE_IN_60_K == getModel().getSlide().getShowAnimation()) {
+            this.tilePerRow = 50;
+        }
+
         getTileTransition();
         getFadeTransition();
+
+        if (getModel().getTitle() != null) {
+            this.slideLabel = new Label();
+            this.slideLabel.setPrefSize(1200, 80);
+            this.slideLabel.setAlignment(Pos.CENTER);
+            this.slideLabel.getStyleClass().add("ImageTitle");
+            this.slideLabel.setText(getModel().getTitle());
+            getRootNode().getChildren().add(this.slideLabel);
+            this.slideLabel.setOpacity(0.0);
+
+            StackPane.setAlignment(this.slideLabel, Pos.BOTTOM_CENTER);
+            StackPane.setMargin(this.slideLabel, new Insets(0, 0, 100, 0));
+        }
 
     }
 
@@ -117,17 +158,42 @@ public final class ImageSlideView extends
                 n.setOpacity(0.0);
             }
             this.tilePerRow = 5;
-            getTileTransition().play();
+
+            final ParallelTransition st = ParallelTransitionBuilder.create().children(
+                                                                                      getTileTransition(),
+                                                                                      getSlideLabelTransition())
+                                                                   .build();
+
+            st.play();
         } else if (getModel().getSlide().getShowAnimation() != null && AnimationType.TILE_IN_60_K == getModel().getSlide().getShowAnimation()) {
             for (final Node n : getRootNode().getChildren()) {
                 n.setOpacity(0.0);
             }
             this.tilePerRow = 50;
-            getTileTransition().play();
+
+            final ParallelTransition st = ParallelTransitionBuilder.create().children(
+                                                                                      getTileTransition(),
+                                                                                      getSlideLabelTransition())
+                                                                   .build();
+
+            st.play();
         } else {
-            getRootNode().setOpacity(0);
-            getFadeTransition().play();
+            // getFadeTransition().play();
         }
+    }
+
+    /**
+     * TODO To complete.
+     *
+     * @return
+     */
+    private FadeTransition getSlideLabelTransition() {
+        return FadeTransitionBuilder.create()
+                                    .node(this.slideLabel)
+                                    .delay(Duration.millis(1200))
+                                    .duration(Duration.millis(1200))
+                                    .fromValue(0).toValue(1)
+                                    .build();
     }
 
     /**
@@ -135,7 +201,11 @@ public final class ImageSlideView extends
      */
     Animation getFadeTransition() {
         if (this.fadeTransition == null) {
-            this.fadeTransition = FadeTransitionBuilder.create().node(getRootNode()).fromValue(0).toValue(1).duration(Duration.seconds(1)).build();
+            this.fadeTransition = FadeTransitionBuilder.create()
+                                                       .node(getRootNode())
+                                                       .fromValue(0).toValue(1)
+                                                       .duration(Duration.seconds(1))
+                                                       .build();
         }
         return this.fadeTransition;
     }

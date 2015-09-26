@@ -103,8 +103,8 @@ public class QandAView extends AbstractSlideView<QandAModel, BorderPane, QandACo
                                              .children(this.firstText, this.secondText)
                                              .build();
 
-        StackPane.setAlignment(firstText, Pos.CENTER);
-        StackPane.setAlignment(secondText, Pos.CENTER);
+        StackPane.setAlignment(this.firstText, Pos.CENTER);
+        StackPane.setAlignment(this.secondText, Pos.CENTER);
 
         BorderPane.setAlignment(sp, Pos.CENTER);
 
@@ -183,7 +183,7 @@ public class QandAView extends AbstractSlideView<QandAModel, BorderPane, QandACo
         // Nothing to do yet
     }
 
-    public void showNext(String current, String next) {
+    public void showNext(final String current, final String next) {
 
         if (current == null) {
             this.firstText.setText(next);
@@ -196,7 +196,7 @@ public class QandAView extends AbstractSlideView<QandAModel, BorderPane, QandACo
         }
     }
 
-    public void showPrevious(String current, String previous) {
+    public void showPrevious(final String current, final String previous) {
         if (current == null) {
             this.firstText.setText(previous);
         } else {

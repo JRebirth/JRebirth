@@ -57,7 +57,7 @@ public class QandAModel extends AbstractSlideModel<QandAModel, QandAView, SlideS
     protected void hideView() {
         super.hideView();
         // Reset
-        currentSlideContent = null;
+        this.currentSlideContent = null;
     }
 
     /**
@@ -76,8 +76,8 @@ public class QandAModel extends AbstractSlideModel<QandAModel, QandAView, SlideS
         // break;
         // }
 
-        final String currentTitle = currentSlideContent != null ? formatString(currentSlideContent.getTitle()) : null;
-        final int idx = currentTitle != null ? currentSlideContent.getIndex().intValue() : isForwardFlow() ? -1 : getStepCount();
+        final String currentTitle = this.currentSlideContent != null ? formatString(this.currentSlideContent.getTitle()) : null;
+        final int idx = currentTitle != null ? this.currentSlideContent.getIndex().intValue() : isForwardFlow() ? -1 : getStepCount();
 
         if (isForwardFlow()) {
             this.currentSlideContent = getSlide().getContent().get(idx + 1);

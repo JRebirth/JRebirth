@@ -101,7 +101,6 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * @param keyEvent
      */
     protected void onKeyPressed(final KeyEvent keyEvent) {
-        System.out.println("Key " + keyEvent);
         if (keyEvent.getCode() == KeyCode.PAGE_DOWN) {
             getModel().callCommand(ShowNextSlideCommand.class);
             keyEvent.consume();
