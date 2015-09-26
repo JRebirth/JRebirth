@@ -256,7 +256,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      */
     private boolean hasStep(final SlideContent slideContent) {
         boolean res = false;
-        for (final S step : this.stepList) {
+        for (final S step : getStepList()) {
             if (step.name().equalsIgnoreCase(slideContent.getName())) {
                 res = true;
             }
@@ -277,7 +277,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     @Override
     public boolean nextStep() {
         initStepPosition();
-        final boolean res = this.stepPosition.get() < this.stepList.size() - 1;
+        final boolean res = this.stepPosition.get() < getStepList().size() - 1;
         if (res && !getView().isSlideLocked()) {
 
             setCurrentFlow(SlideFlow.forward);
