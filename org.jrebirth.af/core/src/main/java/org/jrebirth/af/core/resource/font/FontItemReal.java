@@ -22,6 +22,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 import org.jrebirth.af.api.resource.builder.ResourceBuilder;
+import org.jrebirth.af.api.resource.font.FontExtension;
 import org.jrebirth.af.api.resource.font.FontItem;
 import org.jrebirth.af.api.resource.font.FontName;
 import org.jrebirth.af.api.resource.font.FontParams;
@@ -50,7 +51,18 @@ public interface FontItemReal extends FontItem {
         /**
          * Build and register a {@link RealFont} {@link FontParams}.
          *
-         * @param name the name of the fonr
+         * @param name the name of the font
+         * @param size the size of the font
+         * @param extension the font extension
+         */
+        default void real(final FontName name, final double size, final FontExtension extension) {
+            set(new RealFont(name, size, extension));
+        }
+
+        /**
+         * Build and register a {@link RealFont} {@link FontParams}.
+         *
+         * @param name the name of the font
          * @param size the size of the font
          */
         default void real(final FontName name, final double size) {
@@ -63,6 +75,54 @@ public interface FontItemReal extends FontItem {
      * The interface <strong>Family</strong> provides shortcuts method used to build and register a {@link FamilyFont}.
      */
     interface Family extends FontItemReal {
+
+        /**
+         * Build and register a {@link FamilyFont} {@link FontParams}.
+         *
+         * @param family the font family
+         * @param size the font size
+         * @param extension the font extension
+         */
+        default void family(final String family, final double size, final FontExtension extension) {
+            set(new FamilyFont(family, size, extension));
+        }
+
+        /**
+         * Build and register a {@link FamilyFont} {@link FontParams}.
+         *
+         * @param family the font family
+         * @param size the font size
+         * @param weight the font weight {@link FontWeight}
+         * @param extension the font extension
+         */
+        default void family(final String family, final double size, final FontWeight weight, final FontExtension extension) {
+            set(new FamilyFont(family, size, extension, weight));
+        }
+
+        /**
+         * Build and register a {@link FamilyFont} {@link FontParams}.
+         *
+         * @param family the font family
+         * @param size the font size
+         * @param extension the font extension
+         * @param posture the font posture {@link FontPosture}
+         */
+        default void family(final String family, final double size, final FontExtension extension, final FontPosture posture) {
+            set(new FamilyFont(family, size, extension, posture));
+        }
+
+        /**
+         * Build and register a {@link FamilyFont} {@link FontParams}.
+         *
+         * @param family the font family
+         * @param size the font size
+         * @param extension the font extension
+         * @param weight the font weight {@link FontWeight}
+         * @param posture the font posture {@link FontPosture}
+         */
+        default void family(final String family, final double size, final FontExtension extension, final FontWeight weight, final FontPosture posture) {
+            set(new FamilyFont(family, size, extension, weight, posture));
+        }
 
         /**
          * Build and register a {@link FamilyFont} {@link FontParams}.

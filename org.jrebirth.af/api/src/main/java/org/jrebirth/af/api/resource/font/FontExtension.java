@@ -17,32 +17,24 @@
  */
 package org.jrebirth.af.api.resource.font;
 
-import org.jrebirth.af.api.resource.ResourceParams;
-
 /**
- * The class <strong>FontParams</strong>.
+ * The enumeration <strong>FontExtension</strong> is used to provides all possible font extension supported by JavaFX toolkit.
  *
  * @author Sébastien Bordes
  */
-public interface FontParams extends ResourceParams {
+public enum FontExtension {
+
+    /** The .ttf file extension. */
+    TTF,
+
+    /** The .otf image file extension. */
+    OTF;
 
     /**
-     * @return Returns the font name.
+     * {@inheritDoc}
      */
-    FontName name();
-
-    /**
-     * Return the font size.
-     *
-     * @return the font size
-     */
-    double size();
-
-    /**
-     * Return the font extension.
-     *
-     * @return the font extension
-     */
-    FontExtension extension();
-
+    @Override
+    public String toString() {
+        return name().toLowerCase();
+    }
 }

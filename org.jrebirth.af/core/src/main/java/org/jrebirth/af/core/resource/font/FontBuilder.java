@@ -134,14 +134,14 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
                 }
 
                 // This variable will hold the 2 alternative font names
-                fontName = fontPath + transformFontName(fontParams.name().name()) + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
+                fontName = fontPath + transformFontName(fontParams.name().name()) + "." + fontParams.extension();
 
                 LOGGER.trace("Try to load Transformed Font  {}", fontName);
                 font = Font.loadFont(Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), fontParams.size());
 
                 // The font name contains '_' in its file name to replace ' '
                 if (font == null) {
-                    fontName = fontPath + fontParams.name().name() + JRebirthParameters.TRUE_TYPE_FONT_EXTENSION.get();
+                    fontName = fontPath + fontParams.name().name() + "." + fontParams.extension();
                     LOGGER.trace("Try to load Raw Font  {}", fontName);
                     font = Font.loadFont(Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), fontParams.size());
 
@@ -158,7 +158,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
             if (font == null) {
                 // Neither transformed nor raw font has been loaded (with or without '_')
-                LOGGER.error("Font : {} not found into base folder: {}", fontParams.name().name(), JRebirthParameters.FONT_FOLDER.get());
+                LOGGER.error("Font : {} not found into base folder: {}", fontParams.name().name() + "." + fontParams.extension(), JRebirthParameters.FONT_FOLDER.get());
             }
         }
     }

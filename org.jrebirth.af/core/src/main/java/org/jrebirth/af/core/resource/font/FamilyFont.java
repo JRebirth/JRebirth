@@ -27,6 +27,8 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
+import org.jrebirth.af.api.resource.font.FontExtension;
+
 /**
  * The class <strong>FamilyFont</strong> is used to create a Font by Family type.
  *
@@ -50,9 +52,36 @@ public class FamilyFont extends AbstractBaseFont {
      *
      * @param family the font family
      * @param size the font size
+     * @param extension the font extension
+     */
+    public FamilyFont(final String family, final double size, final FontExtension extension) {
+        this(family, size, extension, FontWeight.NORMAL, FontPosture.REGULAR);
+    }
+
+    /**
+     * Default Constructor.
+     *
+     * Normal font weight and regular font posture will be used
+     *
+     * @param family the font family
+     * @param size the font size
      */
     public FamilyFont(final String family, final double size) {
         this(family, size, FontWeight.NORMAL, FontPosture.REGULAR);
+    }
+
+    /**
+     * Default Constructor.
+     *
+     * Regular font posture will be used
+     *
+     * @param family the font family
+     * @param size the font size
+     * @param extension the font extension
+     * @param weight the font weight {@link FontWeight}
+     */
+    public FamilyFont(final String family, final double size, final FontExtension extension, final FontWeight weight) {
+        this(family, size, extension, weight, FontPosture.REGULAR);
     }
 
     /**
@@ -75,10 +104,40 @@ public class FamilyFont extends AbstractBaseFont {
      *
      * @param family the font family
      * @param size the font size
+     * @param extension the font extension
+     * @param posture the font posture {@link FontPosture}
+     */
+    public FamilyFont(final String family, final double size, final FontExtension extension, final FontPosture posture) {
+        this(family, size, extension, FontWeight.NORMAL, posture);
+    }
+
+    /**
+     * Default Constructor.
+     *
+     * Normal font weight will be used
+     *
+     * @param family the font family
+     * @param size the font size
      * @param posture the font posture {@link FontPosture}
      */
     public FamilyFont(final String family, final double size, final FontPosture posture) {
         this(family, size, FontWeight.NORMAL, posture);
+    }
+
+    /**
+     * Default Constructor.
+     *
+     * @param family the font family
+     * @param size the font size
+     * @param extension the font extension
+     * @param weight the font weight {@link FontWeight}
+     * @param posture the font posture {@link FontPosture}
+     */
+    public FamilyFont(final String family, final double size, final FontExtension extension, final FontWeight weight, final FontPosture posture) {
+        super(null, size, extension);
+        this.familyProperty.set(family);
+        this.weightProperty.set(weight);
+        this.postureProperty.set(posture);
     }
 
     /**
