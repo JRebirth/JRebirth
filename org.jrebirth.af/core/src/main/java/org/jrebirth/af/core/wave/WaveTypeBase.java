@@ -41,8 +41,10 @@ public final class WaveTypeBase implements WaveType {
     /** The unique identifier of the wave type. */
     private int uid;
 
-    /** The action to performed, basically the name of the method to call.
-     * The keyword "DO_" (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to generate the handler method */
+    /**
+     * The action to performed, basically the name of the method to call. The keyword "DO_" (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to
+     * generate the handler method
+     */
     private String action;
 
     /** Define arguments types to use. */

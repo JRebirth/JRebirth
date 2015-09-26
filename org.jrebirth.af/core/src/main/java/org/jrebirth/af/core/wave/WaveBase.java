@@ -326,7 +326,7 @@ public class WaveBase implements Wave, LinkMessages {
 
     /**
      * Get the Wave Bean map. Create it if it hasn't been done before.
-     * 
+     *
      * @return the wave bean map never null
      */
     private Map<Class<? extends WaveBean>, WaveBean> getWaveBeanMap() {
@@ -363,7 +363,7 @@ public class WaveBase implements Wave, LinkMessages {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * Don't use the returned list to add WaveBean.
      */
     @Override
