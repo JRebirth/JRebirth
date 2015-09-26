@@ -550,10 +550,10 @@ public final class ClassUtility implements UtilMessages {
      *
      * @param fromClass the base class hosting the generic type
      * @param typeSearched the searched type, the returned class shall be a subclass of it
-     * 
+     *
      * @return a class that is a subclass of typeSearched or null
      */
-    public static Class<?> getGenericClassAssigned(Class<?> fromClass, Class<?> typeSearched) {
+    public static Class<?> getGenericClassAssigned(final Class<?> fromClass, final Class<?> typeSearched) {
 
         Class<?> realType = null;
 
@@ -584,13 +584,13 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Extract the searched type from a ParamterizedType.
-     * 
+     *
      * @param superType the base class hosting the generic type
      * @param typeSearched the searched type, the returned class shall be a subclass of it
-     * 
+     *
      * @return the searched type or null
      */
-    private static Class<?> searchIntoParameterzedType(final Type superType, Class<?> typeSearched) {
+    private static Class<?> searchIntoParameterzedType(final Type superType, final Class<?> typeSearched) {
         if (superType instanceof ParameterizedType) {
             for (final Type genericType : ((ParameterizedType) superType).getActualTypeArguments()) {
                 if (genericType instanceof Class<?> && typeSearched.isAssignableFrom((Class<?>) genericType)) {

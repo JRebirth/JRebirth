@@ -19,7 +19,7 @@ public abstract class AbstractLogAdapter implements JRLogger {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param logger the underlying logger to use
      */
     public AbstractLogAdapter(final Logger logger) {
@@ -30,7 +30,7 @@ public abstract class AbstractLogAdapter implements JRLogger {
      * @return Returns the logger.
      */
     public Logger getLogger() {
-        return logger;
+        return this.logger;
     }
 
     /**

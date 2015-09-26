@@ -15,14 +15,14 @@ public abstract class AbstractFXMLControllerFactory implements FXMLControllerFac
      */
     @Override
     public Model getRelatedModel() {
-        return relatedModel;
+        return this.relatedModel;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setRelatedModel(Model relatedModel) {
+    public void setRelatedModel(final Model relatedModel) {
         this.relatedModel = relatedModel;
     }
 }
