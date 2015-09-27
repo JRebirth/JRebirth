@@ -67,7 +67,9 @@ public interface FacadeReady<R extends FacadeReady<R>> extends ModelReady {
 
     /**
      * Release the component by deleting this key used by the WeakHashMap.
+     *
+     * @return true if the release has been performed and false when the released has been rejected/delayed
      */
-    void release();
+    boolean release();
 
 }

@@ -39,6 +39,7 @@ import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
+import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.Builders;
@@ -341,18 +342,9 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
         if (wave.get(JRebirthWaves.SERVICE_TASK).checkProgressRatio(workDone, totalWork, progressIncrement)) {
 
             // Increase the task progression
-            JRebirth.runIntoJAT(new AbstractJrbRunnable("ServiceTask Workdone (dbl) " + workDone + RATIO_SEPARATOR + totalWork) {
-
-                /**
-                 * {@inheritDoc}
-                 */
-                @Override
-                protected void runInto() throws JRebirthThreadException {
-                    wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork);
-                }
-            });
+            JRebirth.runIntoJAT(new JrbReferenceRunnable("ServiceTask Workdone (dbl) " + workDone + RATIO_SEPARATOR + totalWork,
+                                                         () -> wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork)));
         }
-
     }
 
     /**
@@ -364,17 +356,8 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
     public void updateMessage(final Wave wave, final String message) {
 
         // Update the current task message
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("Service Task Message => " + message) {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                wave.get(JRebirthWaves.SERVICE_TASK).updateMessage(message);
-            }
-        });
-
+        JRebirth.runIntoJAT(new JrbReferenceRunnable("Service Task Mesage => " + message,
+                                                     () -> wave.get(JRebirthWaves.SERVICE_TASK).updateMessage(message)));
     }
 
     /**
@@ -385,17 +368,8 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
      */
     public void updateTitle(final Wave wave, final String title) {
 
-        // Update the task title
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("Service Task Title => " + title) {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                wave.get(JRebirthWaves.SERVICE_TASK).updateTitle(title);
-            }
-        });
-
+        // Update the task title into JAT
+        JRebirth.runIntoJAT(new JrbReferenceRunnable("Service Task Title => " + title,
+                                                     () -> wave.get(JRebirthWaves.SERVICE_TASK).updateTitle(title)));
     }
 }
