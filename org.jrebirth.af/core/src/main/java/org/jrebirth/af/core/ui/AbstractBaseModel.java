@@ -131,10 +131,10 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
         if (getView() != null) {
             if (this.viewDisplayed) {
                 // Reload the view
-                getView().reload();
+                reload();
             } else {
                 // Start the view for the first time
-                getView().start();
+                start();
                 this.viewDisplayed = true;
             }
         }
@@ -159,9 +159,36 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
 
         // Sometimes view can be null
         if (getView() != null) {
-            // hide the view
-            getView().hide();
+            hide();
         }
+    }
+
+    private void start() {
+
+        // hide the view
+        getView().start();
+
+        this.innerComponentList.stream()
+                               .filter(s -> s instanceof Model)
+                               .forEach((model) -> ((Model) model).getView().start());
+    }
+
+    private void reload() {
+        // reload the view
+        getView().reload();
+
+        this.innerComponentList.stream()
+                               .filter(s -> s instanceof Model)
+                               .forEach((model) -> ((Model) model).getView().reload());
+    }
+
+    private void hide() {
+        // hide the view
+        getView().hide();
+
+        this.innerComponentList.stream()
+                               .filter(s -> s instanceof Model)
+                               .forEach((model) -> ((Model) model).getView().hide());
     }
 
     /**

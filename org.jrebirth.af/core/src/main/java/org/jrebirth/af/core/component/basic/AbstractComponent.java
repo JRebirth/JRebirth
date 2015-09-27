@@ -21,6 +21,7 @@ import static org.jrebirth.af.core.wave.Builders.wave;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,7 @@ import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
+import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
 import org.jrebirth.af.core.link.AbstractReady;
 import org.jrebirth.af.core.link.ComponentEnhancer;
 import org.jrebirth.af.core.link.LinkMessages;
@@ -94,6 +96,9 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
 
     /** The map that store inner models loaded. */
     protected final Map<InnerComponent<?>, Component<?>> innerComponentMap = new IdentityHashMap<>(10);
+
+    /** The list that store sorted inner models loaded. */
+    protected final List<Component<?>> innerComponentList = new ArrayList<>();
 
     /**
      * Short cut method used to retrieve the notifier.
@@ -532,41 +537,53 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      * {@inheritDoc}
      */
     @Override
-    public void release() {
+    public boolean release() {
 
+        boolean released = false;
         // Check if some method annotated by Releasable annotation are available
         if (ObjectUtility.checkAllMethodReturnTrue(this, ClassUtility.getAnnotatedMethods(this.getClass(), Releasable.class))) {
 
-            JRebirth.runIntoJIT(new AbstractJrbRunnable("Release " + this.getClass().getCanonicalName()) {
+            // Release the component and its internal components into JIT
+            JRebirth.runIntoJIT(new JrbReferenceRunnable("Release " + this.getClass().getCanonicalName(), this::internalRelease));
 
-                /**
-                 * {@inheritDoc}
-                 */
-                @Override
-                protected void runInto() throws JRebirthThreadException {
-                    // try {
-
-                    // setKey(null);
-
-                    // getNotifier().unlistenAll(getWaveReady());
-
-                    callAnnotatedMethod(OnRelease.class);
-
-                    getLocalFacade().unregister(getKey());
-
-                    // thisObject.ready = false;
-
-                    // } catch (final JRebirthThreadException jte) {
-                    // LOGGER.error(COMPONENT_RELEASE_ERROR, jte);
-                    // }
-                }
-            });
+            released = true;
         }
+
+        return released;
+    }
+
+    /**
+     * Perform the internal release.
+     */
+    private void internalRelease() {
+
+        // try {
+
+        // setKey(null);
+
+        // getNotifier().unlistenAll(getWaveReady());
+
+        callAnnotatedMethod(OnRelease.class);
+
+        if (getLocalFacade() != null) {
+            getLocalFacade().unregister(getKey());
+        }
+
+        // thisObject.ready = false;
 
         // Shall also release all InnerComponent
-        for (final Component<?> innerComponent : this.innerComponentMap.values()) {
+        for (final Component<?> innerComponent : this.innerComponentList) {
             innerComponent.release();
+
+            this.innerComponentList.remove(innerComponent);
+            // todo remove from map
+            // innerComponentMap.remove(innerComponent.get)
         }
+
+        // } catch (final JRebirthThreadException jte) {
+        // LOGGER.error(COMPONENT_RELEASE_ERROR, jte);
+        // }
+
     }
 
     // public boolean isReady() {
@@ -608,6 +625,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
 
             // Store the component into the multitonKey map
             this.innerComponentMap.put(innerComponent, childComponent);
+            this.innerComponentList.add(childComponent);
 
             // Link the current root model
             childComponent.setRootComponent(this);
