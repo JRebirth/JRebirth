@@ -21,8 +21,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 import javafx.animation.Animation;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.Node;
@@ -141,19 +139,6 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
         // Process field annotation to attach event handler
         processFields();
-
-        // Allow to release the model if the root business object doesn't exist anymore
-        getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
-
-            @Override
-            public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
-                if (newValue == null) {
-                    getModel().release();
-                    getRootNode().parentProperty().removeListener(this);
-                }
-            }
-
-        });
 
     }
 
