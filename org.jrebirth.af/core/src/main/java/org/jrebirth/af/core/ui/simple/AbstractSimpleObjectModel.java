@@ -17,16 +17,13 @@
  */
 package org.jrebirth.af.core.ui.simple;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 
-import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.NullView;
 import org.jrebirth.af.api.ui.annotation.RootNodeId;
-import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.ui.object.AbstractObjectModel;
 import org.jrebirth.af.core.util.ClassUtility;
 
@@ -47,41 +44,26 @@ public abstract class AbstractSimpleObjectModel<N extends Node, O extends Object
     private N rootNode;
 
     /**
-     * Initialize the model.
-     *
-     * @throws CoreException if the creation of the view fails
+     * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
     @Override
-    protected void initInternalModel() throws CoreException {
+    protected void prepareView() {
+        try {
+            // Prepare the root node
+            this.rootNode = (N) ClassUtility.buildGenericType(this.getClass(), Node.class);
 
-        // Initialize model with custom method
-        initModel();
-
-        // Prepare the root node
-        this.rootNode = (N) ClassUtility.buildGenericType(this.getClass(), Node.class);
-
-        // Find the RootNodeId annotation
-        final RootNodeId rni = ClassUtility.getLastClassAnnotation(this.getClass(), RootNodeId.class);
-        if (rni != null) {
-            getRootNode().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
-        }
-
-        // Allow to release the model if the root business object doesn't exist anymore
-        getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
-
-            @Override
-            public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
-                if (newValue == null) {
-                    release();
-                    getRootNode().parentProperty().removeListener(this);
-                }
+            // Find the RootNodeId annotation
+            final RootNodeId rni = ClassUtility.getLastClassAnnotation(this.getClass(), RootNodeId.class);
+            if (rni != null) {
+                getRootNode().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
             }
 
-        });
+            initSimpleView();
+        } catch (final CoreException ce) {
+            throw new CoreRuntimeException(ce);
+        }
 
-        // Set up the model view
-        JRebirth.run(this.createViewIntoJAT ? RunType.JAT_SYNC : RunType.SAME, this::initSimpleView);
     }
 
     /**

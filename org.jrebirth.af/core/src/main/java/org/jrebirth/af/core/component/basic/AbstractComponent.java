@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.jrebirth.af.api.annotation.AfterInit;
 import org.jrebirth.af.api.annotation.BeforeInit;
@@ -95,10 +96,10 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
     protected Component<?> rootComponent;
 
     /** The map that store inner models loaded. */
-    protected final Map<InnerComponent<?>, Component<?>> innerComponentMap = new IdentityHashMap<>(10);
+    protected Map<InnerComponent<?>, Component<?>> innerComponentMap;
 
     /** The list that store sorted inner models loaded. */
-    protected final List<Component<?>> innerComponentList = new ArrayList<>();
+    protected List<Component<?>> innerComponentList;
 
     /**
      * Short cut method used to retrieve the notifier.
@@ -572,12 +573,26 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
         // thisObject.ready = false;
 
         // Shall also release all InnerComponent
-        for (final Component<?> innerComponent : this.innerComponentList) {
-            innerComponent.release();
+        if (getInnerComponentList().isPresent()) {
 
-            this.innerComponentList.remove(innerComponent);
-            // todo remove from map
-            // innerComponentMap.remove(innerComponent.get)
+            final List<Component<?>> toRemove = new ArrayList<>();
+            for (final Component<?> innerComponent : getInnerComponentList().get()) {
+
+                // Release the InnerComponent
+                innerComponent.release();
+
+                // Store it to avoid co-modification error
+                toRemove.add(innerComponent);
+            }
+
+            for (final Component<?> innerComponent : toRemove) {
+
+                // Remove it from the list
+                getInnerComponentList().get().remove(innerComponent);
+
+                // Then remove it from map
+                getInnerComponentMap().get().remove(innerComponent.getKey());
+            }
         }
 
         // } catch (final JRebirthThreadException jte) {
@@ -595,24 +610,30 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      */
     @SuppressWarnings("unchecked")
     @Override
-    public final <C extends Component<?>> void addInnerComponent(final InnerComponent<C> innerComponent) {
+    public final <IC extends Component<?>> void addInnerComponent(final InnerComponent<IC> innerComponent) {
+
+        if (!getInnerComponentMap().isPresent()) {
+            // Initialize default storage objects only on demand (to save some bits)
+            this.innerComponentMap = new IdentityHashMap<>(10);
+            this.innerComponentList = new ArrayList<Component<?>>();
+        }
 
         // If the inner model hasn't been loaded before, build it from UIFacade
         if (!this.innerComponentMap.containsKey(innerComponent)) {
 
-            final Class<C> innerComponentClass = innerComponent.getKey().getClassField();
+            final Class<IC> innerComponentClass = innerComponent.getKey().getClassField();
 
-            C childComponent = null;
+            IC childComponent = null;
             // Use the right facade according to the inner component type
             if (Command.class.isAssignableFrom(innerComponentClass)) {
                 // Initialize the Inner Command
-                childComponent = (C) getLocalFacade().getGlobalFacade().getCommandFacade().retrieve((UniqueKey<Command>) innerComponent.getKey());
+                childComponent = (IC) getLocalFacade().getGlobalFacade().getCommandFacade().retrieve((UniqueKey<Command>) innerComponent.getKey());
             } else if (Service.class.isAssignableFrom(innerComponentClass)) {
                 // Initialize the Inner Service
-                childComponent = (C) getLocalFacade().getGlobalFacade().getServiceFacade().retrieve((UniqueKey<Service>) innerComponent.getKey());
+                childComponent = (IC) getLocalFacade().getGlobalFacade().getServiceFacade().retrieve((UniqueKey<Service>) innerComponent.getKey());
             } else if (Model.class.isAssignableFrom(innerComponentClass)) {
                 // Initialize the Inner Model
-                childComponent = (C) getLocalFacade().getGlobalFacade().getUiFacade().retrieve((UniqueKey<Model>) innerComponent.getKey());
+                childComponent = (IC) getLocalFacade().getGlobalFacade().getUiFacade().retrieve((UniqueKey<Model>) innerComponent.getKey());
             } else if (Behavior.class.isAssignableFrom(innerComponentClass)) {
                 // Cannot initialize Inner Behavior, they cannot be nested
                 throw new CoreRuntimeException("Behaviors can not be used as Inner EnhancedComponent"); // FIXME add MessageItem
@@ -637,14 +658,15 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      */
     @SuppressWarnings("unchecked")
     @Override
-    public final <C extends Component<?>> C getInnerComponent(final InnerComponent<C> innerModel) {
-        if (!this.innerComponentMap.containsKey(innerModel)) {
+    public final <IC extends Component<?>> IC getInnerComponent(final InnerComponent<IC> innerModel) {
+
+        if (!getInnerComponentMap().isPresent() || !getInnerComponentMap().get().containsKey(innerModel)) {
 
             // This InnerModel should be initialized into the initInnerModel method instead
             // but in some cases a late initialization can help
             addInnerComponent(innerModel);
         }
-        return (C) this.innerComponentMap.get(innerModel);
+        return (IC) getInnerComponentMap().get().get(innerModel);
     }
 
     /**
@@ -683,5 +705,23 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      * It shall contain only {@link EnhancedComponent}.addInnerComponent calls.
      */
     protected abstract void initInnerComponents();
+
+    /**
+     * Return the InnerComponent map wrapped into an Optional because it's initialized only on demand.
+     * 
+     * @return the innerComponentMap.
+     */
+    protected Optional<Map<InnerComponent<?>, Component<?>>> getInnerComponentMap() {
+        return Optional.ofNullable(this.innerComponentMap);
+    }
+
+    /**
+     * Return the InnerComponent list wrapped into an Optional because it's initialized only on demand.
+     * 
+     * @return the innerComponentList.
+     */
+    protected Optional<List<Component<?>>> getInnerComponentList() {
+        return Optional.ofNullable(this.innerComponentList);
+    }
 
 }
