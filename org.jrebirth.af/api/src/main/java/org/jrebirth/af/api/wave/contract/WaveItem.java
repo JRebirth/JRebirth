@@ -20,7 +20,7 @@ package org.jrebirth.af.api.wave.contract;
 import java.lang.reflect.Type;
 
 /**
- * The interface <strong>IWaveItem</strong>.
+ * The interface <strong>WaveItem</strong>.
  *
  * Wave item is used to identify an object into a wave or a parameter.
  *

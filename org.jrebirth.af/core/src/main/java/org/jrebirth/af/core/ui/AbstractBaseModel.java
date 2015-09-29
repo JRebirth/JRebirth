@@ -67,14 +67,14 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
     @Override
     protected final void ready() throws CoreException {
 
+        // Initialize the current model
+        initInternalModel();
+
         // Model and InnerModels are OK, let's prepare the view
         JRebirth.run(this.createViewIntoJAT ? RunType.JAT_SYNC : RunType.SAME, this::prepareView);
 
         // Allow to release the model if the root business object doesn't exist anymore
         attachParentListener();
-
-        // Initialize the current model
-        initInternalModel();
 
         // Bind Object properties to view widget ones
         bindInternal();
