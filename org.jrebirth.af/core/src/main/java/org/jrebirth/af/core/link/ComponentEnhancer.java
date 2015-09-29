@@ -86,7 +86,12 @@ public final class ComponentEnhancer implements LinkMessages {
 
         // Retrieve all fields annotated with LinkComponent
         for (final Field field : ClassUtility.getAnnotatedFields(component.getClass(), LinkComponent.class)) {
-            inject(component, field, field.getAnnotation(LinkComponent.class).value());
+            final String keyPart = field.getAnnotation(LinkComponent.class).value();
+            if (keyPart.isEmpty()) {
+                inject(component, field);
+            } else {
+                inject(component, field, keyPart);
+            }
         }
 
     }
