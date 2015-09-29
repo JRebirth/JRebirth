@@ -25,15 +25,17 @@ import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.ui.annotation.OnKey;
 import org.jrebirth.af.api.ui.annotation.OnMouse;
 import org.jrebirth.af.api.ui.annotation.OnSwipe;
+import org.jrebirth.af.api.ui.annotation.OnTouch;
 import org.jrebirth.af.api.ui.annotation.RootNodeId;
 import org.jrebirth.af.api.ui.annotation.type.Key;
 import org.jrebirth.af.api.ui.annotation.type.Mouse;
 import org.jrebirth.af.api.ui.annotation.type.Swipe;
+import org.jrebirth.af.api.ui.annotation.type.Touch;
 import org.jrebirth.af.core.ui.DefaultView;
 
 /**
  *
- * The class <strong>SlideStackView</strong>.
+ * The class <strong>SlideMenuView</strong>.
  *
  * The main slide stack view of the Presentation engine.
  *
@@ -43,6 +45,7 @@ import org.jrebirth.af.core.ui.DefaultView;
 @OnKey(Key.Pressed)
 @OnMouse(Mouse.Released)
 @OnSwipe({ Swipe.Left, Swipe.Right })
+@OnTouch(Touch.Stationary)
 public final class SlideStackView extends DefaultView<SlideStackModel, StackPane, SlideStackController> {
 
     // private Button circle;

@@ -22,17 +22,21 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.SwipeEvent;
+import javafx.scene.input.TouchEvent;
 import javafx.scene.web.WebView;
 
 import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.ui.adapter.ActionAdapter;
+import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.presentation.PrezWaves;
 import org.jrebirth.af.presentation.command.ShowNextSlideCommand;
 import org.jrebirth.af.presentation.command.ShowPreviousSlideCommand;
 import org.jrebirth.af.presentation.command.ShowSlideMenuCommand;
 
 /**
- * The class <strong>SlideStackController</strong>.
+ * The class <strong>SlideMenuController</strong>.
  *
  * @author Sébastien Bordes
  *
@@ -101,11 +105,14 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * @param keyEvent
      */
     protected void onKeyPressed(final KeyEvent keyEvent) {
+
+        final WaveData<Boolean> data = Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, keyEvent.isControlDown());
+
         if (keyEvent.getCode() == KeyCode.PAGE_DOWN) {
-            getModel().callCommand(ShowNextSlideCommand.class);
+            getModel().callCommand(ShowNextSlideCommand.class, data);
             keyEvent.consume();
         } else if (keyEvent.getCode() == KeyCode.PAGE_UP) {
-            getModel().callCommand(ShowPreviousSlideCommand.class);
+            getModel().callCommand(ShowPreviousSlideCommand.class, data);
             keyEvent.consume();
         }
     }
@@ -117,11 +124,14 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      */
     protected void onMouseReleased(final MouseEvent mouseEvent) {
         if (!mouseEvent.isSynthesized() && /* !(mouseEvent.getTarget() instanceof Pane) && */!(mouseEvent.getTarget() instanceof WebView)) {
+
+            final WaveData<Boolean> data = Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, mouseEvent.isControlDown());
+
             if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-                getModel().callCommand(ShowNextSlideCommand.class);
+                getModel().callCommand(ShowNextSlideCommand.class, data);
                 mouseEvent.consume();
             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                getModel().callCommand(ShowPreviousSlideCommand.class);
+                getModel().callCommand(ShowPreviousSlideCommand.class, data);
                 mouseEvent.consume();
             } else if (mouseEvent.getButton() == MouseButton.MIDDLE) {
                 getModel().callCommand(ShowSlideMenuCommand.class);
@@ -130,13 +140,18 @@ public final class SlideStackController extends DefaultController<SlideStackMode
         }
     }
 
+    protected void onTouchStationary(final TouchEvent touchEvent) {
+        getModel().callCommand(ShowSlideMenuCommand.class);
+        touchEvent.consume();
+    }
+
     /**
      * .
      *
      * @param swipeEvent
      */
     protected void onSwipeLeft(final SwipeEvent swipeEvent) {
-        getModel().callCommand(ShowNextSlideCommand.class);
+        getModel().callCommand(ShowNextSlideCommand.class, Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, swipeEvent.getTouchCount() > 1));
         swipeEvent.consume();
     }
 
@@ -146,7 +161,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * @param swipeEvent
      */
     protected void onSwipeRight(final SwipeEvent swipeEvent) {
-        getModel().callCommand(ShowPreviousSlideCommand.class);
+        getModel().callCommand(ShowPreviousSlideCommand.class, Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, swipeEvent.getTouchCount() > 1));
         swipeEvent.consume();
     }
 
@@ -156,7 +171,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
     // *
     // * @author Sébastien Bordes
     // */
-    // private class SlideKeyAdapter extends DefaultKeyAdapter<SlideStackController> {
+    // private class SlideKeyAdapter extends DefaultKeyAdapter<SlideMenuController> {
     //
     // /**
     // * {@inheritDoc}
@@ -180,7 +195,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
     // *
     // * @author Sébastien Bordes
     // */
-    // private class SlideMouseAdapter extends DefaultMouseAdapter<SlideStackController> {
+    // private class SlideMouseAdapter extends DefaultMouseAdapter<SlideMenuController> {
     //
     // /**
     // * {@inheritDoc}

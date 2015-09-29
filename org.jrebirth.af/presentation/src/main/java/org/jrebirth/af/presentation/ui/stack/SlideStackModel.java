@@ -23,21 +23,25 @@ import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ParallelTransitionBuilder;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.StackPane;
 
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.presentation.service.PresentationService;
 import org.jrebirth.af.presentation.ui.base.AbstractSlideModel.SlideFlow;
 import org.jrebirth.af.presentation.ui.base.SlideModel;
 import org.jrebirth.af.presentation.ui.base.SlideStep;
+import org.jrebirth.af.presentation.ui.slidemenu.SlideMenuModel;
 import org.jrebirth.presentation.model.Slide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The class <strong>SlideStackModel</strong>.
+ * The class <strong>SlideMenuModel</strong>.
  *
  * @author Sébastien Bordes
  *
@@ -262,11 +266,11 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
     /**
      * Got to next slide.
      */
-    public void next() {
+    public void next(final boolean skipSlideStep) {
         synchronized (this) {
             // Try to display the next slide step first
             // If no slide step is remaining, display the next slide
-            if (this.selectedSlideModel.nextStep() && this.slidePosition < getPresentationService().getPresentation().getSlides().getSlide().size() - 1) {
+            if (skipSlideStep || this.selectedSlideModel.nextStep() && this.slidePosition < getPresentationService().getPresentation().getSlides().getSlide().size() - 1) {
                 this.slidePosition = Math.min(this.slidePosition + 1, getPresentationService().getPresentation().getSlides().getSlide().size() - 1);
                 displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition), false);
             }
@@ -276,13 +280,13 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
     /**
      * Go to previous slide.
      */
-    public void previous() {
+    public void previous(final boolean skipSlideStep) {
         synchronized (this) {
             // Try to display the previous slide step first
             // If no slide step is remaining, display the previous slide
-            if (this.selectedSlideModel.previousStep() && this.slidePosition > 0) {
+            if (skipSlideStep || this.selectedSlideModel.previousStep() && this.slidePosition > 0) {
                 this.slidePosition = Math.max(this.slidePosition - 1, 0);
-                displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition), true);
+                displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition), !skipSlideStep);
             }
         }
     }
@@ -291,6 +295,9 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
      * Display the slide menu to navigate.
      */
     public void showSlideMenu() {
-        // Nothing to do yet
+        final SlideMenuModel smm = getModel(Key.create(SlideMenuModel.class, selectedSlide));
+
+        StackPane.setAlignment(smm.getRootNode(), Pos.CENTER);
+        getView().getRootNode().getChildren().add(smm.getRootNode());
     }
 }
