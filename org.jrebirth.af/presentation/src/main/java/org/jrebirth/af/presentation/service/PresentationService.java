@@ -32,6 +32,7 @@ import javax.xml.stream.XMLStreamReader;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.presentation.resources.PrezParameters;
 import org.jrebirth.presentation.model.Presentation;
+import org.jrebirth.presentation.model.Slide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,6 +65,12 @@ public final class PresentationService extends DefaultService {
             final XMLStreamReader xsr = XMLInputFactory.newInstance().createXMLStreamReader(in);
 
             this.presentation = Presentation.class.cast(JAXBElement.class.cast(unmarshaller.unmarshal(xsr)).getValue());
+
+            int index = 0;
+            for (final Slide slide : this.presentation.getSlides().getSlide()) {
+                slide.setPage(index);
+                index++;
+            }
 
         } catch (final JAXBException | XMLStreamException | FactoryConfigurationError e) {
             LOGGER.error("Impossible to open {}.xml", configName, e);

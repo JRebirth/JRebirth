@@ -19,28 +19,21 @@ package org.jrebirth.af.presentation.command;
 
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.single.ui.DefaultUICommand;
-import org.jrebirth.af.presentation.ui.base.ShowSlideWaves;
-import org.jrebirth.af.presentation.ui.base.SlideModel;
-import org.jrebirth.af.presentation.ui.base.SlideStep;
+import org.jrebirth.af.presentation.PrezWaves;
+import org.jrebirth.af.presentation.ui.stack.SlideStackModel;
 
 /**
- * The class <strong>ShowSlideStepCommand</strong>.
+ * The class <strong>ShowSlideCommand</strong>.
  *
  * @author Sébastien Bordes
- *
  */
-public final class ShowSlideStepCommand extends DefaultUICommand {
+public final class ShowSlideCommand extends DefaultUICommand {
 
     /**
      * {@inheritDoc}
      */
     @Override
     protected void perform(final Wave wave) {
-        // Retrieve the slide model
-        final SlideModel<SlideStep> model = getModel(wave.get(ShowSlideWaves.SLIDE_MODEL_CLASS));
-
-        // Show the the next slide step
-        model.showSlideStep(wave.get(ShowSlideWaves.SLIDE_STEP_TYPE));
+        getModel(SlideStackModel.class).gotoSlide(wave.get(PrezWaves.SLIDE));
     }
-
 }
