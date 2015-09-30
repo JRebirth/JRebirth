@@ -18,6 +18,7 @@
 package org.jrebirth.af.presentation.ui.stack;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
@@ -27,6 +28,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
+import org.jrebirth.af.api.annotation.LinkComponent;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.key.Key;
@@ -61,10 +63,19 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
     private SlideModel<SlideStep> selectedSlideModel;
 
     /** Store a strong reference to the service to avoid reloading. */
-    // @Singleton
+    @LinkComponent
     private PresentationService presentationService;
 
+    private final AtomicBoolean menuShown = new AtomicBoolean(false);
+
     // private final Map<String, Double> animationRate = new HashMap<>();
+
+    /**
+     * @return Returns the menuShown.
+     */
+    AtomicBoolean getMenuShown() {
+        return this.menuShown;
+    }
 
     /**
      * {@inheritDoc}
@@ -115,9 +126,6 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
      * @return Returns the presentationService.
      */
     protected PresentationService getPresentationService() {
-        if (this.presentationService == null) {
-            this.presentationService = getService(PresentationService.class);
-        }
         return this.presentationService;
     }
 
@@ -147,7 +155,7 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
                 }
 
                 // Define the slide number
-                slide.setPage(this.slidePosition);
+                // slide.setPage(this.slidePosition);
 
                 final Class<Model> nextClass = (Class<Model>)
                         (slide.getModelClass() == null
@@ -291,13 +299,26 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
         }
     }
 
+    public void gotoSlide(final Slide slide) {
+        displaySlide(slide, false);
+    }
+
     /**
      * Display the slide menu to navigate.
      */
     public void showSlideMenu() {
-        final SlideMenuModel smm = getModel(Key.create(SlideMenuModel.class, selectedSlide));
 
-        StackPane.setAlignment(smm.getRootNode(), Pos.CENTER);
-        getView().getRootNode().getChildren().add(smm.getRootNode());
+        if (!this.menuShown.getAndSet(true)) {
+            final SlideMenuModel smm = getModel(Key.create(SlideMenuModel.class, this.selectedSlide));
+
+            StackPane.setAlignment(smm.getRootNode(), Pos.CENTER);
+            getView().getRootNode().getChildren().add(smm.getRootNode());
+
+            smm.getRootNode().parentProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue == null) {
+                    this.menuShown.set(false);
+                }
+            });
+        }
     }
 }

@@ -123,6 +123,11 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * @param mouseEvent
      */
     protected void onMouseReleased(final MouseEvent mouseEvent) {
+
+        if (getModel().getMenuShown().get()) {
+            mouseEvent.consume();
+        }
+
         if (!mouseEvent.isSynthesized() && /* !(mouseEvent.getTarget() instanceof Pane) && */!(mouseEvent.getTarget() instanceof WebView)) {
 
             final WaveData<Boolean> data = Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, mouseEvent.isControlDown());
@@ -141,8 +146,10 @@ public final class SlideStackController extends DefaultController<SlideStackMode
     }
 
     protected void onTouchStationary(final TouchEvent touchEvent) {
-        getModel().callCommand(ShowSlideMenuCommand.class);
-        touchEvent.consume();
+        if (touchEvent.getTouchCount() == 2) {
+            getModel().callCommand(ShowSlideMenuCommand.class);
+            touchEvent.consume();
+        }
     }
 
     /**

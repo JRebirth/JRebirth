@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.presentation.ui.slidemenu;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import javafx.scene.input.MouseEvent;
 
 import org.jrebirth.af.api.exception.CoreException;
@@ -29,6 +31,8 @@ import org.jrebirth.af.core.ui.adapter.ActionAdapter;
  * @author Sébastien Bordes
  */
 public final class SlideMenuController extends DefaultController<SlideMenuModel, SlideMenuView> implements ActionAdapter {
+
+    private final AtomicBoolean armed = new AtomicBoolean(false);
 
     /**
      * Default Constructor.
@@ -46,7 +50,20 @@ public final class SlideMenuController extends DefaultController<SlideMenuModel,
      *
      * @param mouseEvent
      */
+    protected void onMouseClicked(final MouseEvent mouseEvent) {
+        this.armed.set(true);
+    }
+
+    /**
+     * .
+     *
+     * @param mouseEvent
+     */
     protected void onMouseReleased(final MouseEvent mouseEvent) {
+        if (!this.armed.get()) {
+            mouseEvent.consume();
+        }
+
     }
 
 }

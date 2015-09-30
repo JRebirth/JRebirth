@@ -50,17 +50,19 @@ public final class SlideMenuModel extends DefaultObjectModel<SlideMenuModel, Sli
     @Override
     protected void initModel() {
 
-        final List<Slide> allSlide = presentationService.getPresentation().getSlides().getSlide();
+        final List<Slide> allSlide = this.presentationService.getPresentation().getSlides().getSlide();
 
-        final int index = allSlide.indexOf(getObject());
+        this.slides.addAll(allSlide);
 
-        for (int i = Math.max(0, index - 3); i < index; i++) {
-            slides.add(allSlide.get(i));
-        }
-
-        for (int i = Math.max(allSlide.size() - 1, index + 1); i <= index + 3; i++) {
-            slides.add(allSlide.get(i));
-        }
+        // final int index = allSlide.indexOf(getObject());
+        //
+        // for (int i = Math.max(0, index - 3); i < index; i++) {
+        // slides.add(allSlide.get(i));
+        // }
+        //
+        // for (int i = index + 1; i <= Math.min(allSlide.size() - 1, index + 3); i++) {
+        // slides.add(allSlide.get(i));
+        // }
     }
 
     /**
@@ -96,7 +98,7 @@ public final class SlideMenuModel extends DefaultObjectModel<SlideMenuModel, Sli
     }
 
     public List<Slide> getSlides() {
-        return slides;
+        return this.slides;
     }
 
 }
