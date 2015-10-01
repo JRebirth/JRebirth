@@ -145,7 +145,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
         }
     }
 
-    protected void onTouchStationary(final TouchEvent touchEvent) {
+    protected void onTouchReleased(final TouchEvent touchEvent) {
         if (touchEvent.getTouchCount() == 2) {
             getModel().callCommand(ShowSlideMenuCommand.class);
             touchEvent.consume();
