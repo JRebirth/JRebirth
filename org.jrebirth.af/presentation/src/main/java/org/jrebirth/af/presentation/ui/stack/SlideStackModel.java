@@ -243,7 +243,7 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
                 }
 
                 // Hide all other slides
-                if (psm != null) {
+                if (csm != null) {
                     Node node;
                     for (int i = getView().getRootNode().getChildren().size() - 1; i > 0; i--) {
                         node = getView().getRootNode().getChildren().get(i);
@@ -300,6 +300,7 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
     }
 
     public void gotoSlide(final Slide slide) {
+        this.slidePosition = slide.getPage();
         displaySlide(slide, false);
     }
 
