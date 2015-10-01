@@ -245,7 +245,7 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
                 // Hide all other slides
                 if (csm != null) {
                     Node node;
-                    for (int i = getView().getRootNode().getChildren().size() - 1; i > 0; i--) {
+                    for (int i = getView().getRootNode().getChildren().size() - 1; i >= 0; i--) {
                         node = getView().getRootNode().getChildren().get(i);
                         if (csm.getRootNode() != node) {
                             getView().getRootNode().getChildren().remove(node);
