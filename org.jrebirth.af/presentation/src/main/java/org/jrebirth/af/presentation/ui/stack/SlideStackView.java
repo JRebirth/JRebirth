@@ -45,7 +45,7 @@ import org.jrebirth.af.core.ui.DefaultView;
 @OnKey(Key.Pressed)
 @OnMouse(Mouse.Released)
 @OnSwipe({ Swipe.Left, Swipe.Right })
-@OnTouch(Touch.Stationary)
+@OnTouch(Touch.Released)
 public final class SlideStackView extends DefaultView<SlideStackModel, StackPane, SlideStackController> {
 
     // private Button circle;
