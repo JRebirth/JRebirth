@@ -278,7 +278,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     public boolean nextStep() {
         initStepPosition();
         final boolean res = this.stepPosition.get() < getStepList().size() - 1;
-        if (res && !getView().isSlideLocked()) {
+        if (res && getView().isReadyForSlidesStepUpdate(false)) {
 
             setCurrentFlow(SlideFlow.forward);
 
@@ -296,7 +296,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     public boolean previousStep() {
         initStepPosition();
         final boolean res = this.stepPosition.get() > 0;
-        if (res && !getView().isSlideLocked()) {
+        if (res && getView().isReadyForSlidesStepUpdate(true)) {
 
             setCurrentFlow(SlideFlow.backward);
 

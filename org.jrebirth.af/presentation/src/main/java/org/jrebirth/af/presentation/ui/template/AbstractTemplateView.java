@@ -20,9 +20,9 @@ package org.jrebirth.af.presentation.ui.template;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
-import javafx.animation.ParallelTransition;
 import javafx.animation.ParallelTransitionBuilder;
 import javafx.animation.RotateTransitionBuilder;
 import javafx.animation.ScaleTransitionBuilder;
@@ -122,6 +122,8 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
     /** The rectangle shape used to underline the slide title. */
     private Rectangle rectangle;
+
+    private Animation slideStepAnimation;
 
     /**
      * Default Constructor.
@@ -591,6 +593,18 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         }
     }
 
+    @Override
+    public boolean isReadyForSlidesStepUpdate(boolean isReverse) {
+
+        if (this.slideStepAnimation != null && this.slideStepAnimation.getStatus() == Animation.Status.RUNNING) {
+
+            this.slideStepAnimation.setRate(isReverse ? -5 : 5);
+
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Create an Launch the animation between two sub slides.
      *
@@ -598,73 +612,73 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      */
     private void performStepAnimation(final Node nextSlide) {
 
-        setSlideLocked(true);
-        final ParallelTransition subSlideTransition = ParallelTransitionBuilder.create()
+        // setSlideLocked(true);
+        this.slideStepAnimation = ParallelTransitionBuilder.create()
 
-                                                                               .onFinished(new EventHandler<ActionEvent>() {
+                                                           .onFinished(new EventHandler<ActionEvent>() {
 
-                                                                                   @Override
-                                                                                   public void handle(final ActionEvent event) {
-                                                                                       AbstractTemplateView.this.currentSubSlide = nextSlide;
-                                                                                       AbstractTemplateView.this.setSlideLocked(false);
-                                                                                   }
-                                                                               })
+                                                               @Override
+                                                               public void handle(final ActionEvent event) {
+                                                                   AbstractTemplateView.this.currentSubSlide = nextSlide;
+                                                                   // AbstractTemplateView.this.setSlideLocked(false);
+                                                               }
+                                                           })
 
-                                                                               .children(
-                                                                                         SequentialTransitionBuilder.create()
-                                                                                                                    .node(this.currentSubSlide)
-                                                                                                                    .children(
-                                                                                                                              TranslateTransitionBuilder.create()
-                                                                                                                                                        .duration(Duration.millis(400))
-                                                                                                                                                        .fromY(0)
-                                                                                                                                                        .toY(-700)
-                                                                                                                                                        // .fromZ(-10)
-                                                                                                                                                        .build(),
-                                                                                                                              TimelineBuilder.create()
-                                                                                                                                             .keyFrames(
-                                                                                                                                                        new KeyFrame(
-                                                                                                                                                                     Duration.millis(0),
-                                                                                                                                                                     new KeyValue(
-                                                                                                                                                                                  this.currentSubSlide.visibleProperty(),
-                                                                                                                                                                                  true)),
-                                                                                                                                                        new KeyFrame(
-                                                                                                                                                                     Duration.millis(1),
-                                                                                                                                                                     new KeyValue(
-                                                                                                                                                                                  this.currentSubSlide.visibleProperty(),
-                                                                                                                                                                                  false))
-                                                                                                                                             )
-                                                                                                                                             .build()
-                                                                                                                    )
+                                                           .children(
+                                                                     SequentialTransitionBuilder.create()
+                                                                                                .node(this.currentSubSlide)
+                                                                                                .children(
+                                                                                                          TranslateTransitionBuilder.create()
+                                                                                                                                    .duration(Duration.millis(400))
+                                                                                                                                    .fromY(0)
+                                                                                                                                    .toY(-700)
+                                                                                                                                    // .fromZ(-10)
+                                                                                                                                    .build(),
+                                                                                                          TimelineBuilder.create()
+                                                                                                                         .keyFrames(
+                                                                                                                                    new KeyFrame(
+                                                                                                                                                 Duration.millis(0),
+                                                                                                                                                 new KeyValue(
+                                                                                                                                                              this.currentSubSlide.visibleProperty(),
+                                                                                                                                                              true)),
+                                                                                                                                    new KeyFrame(
+                                                                                                                                                 Duration.millis(1),
+                                                                                                                                                 new KeyValue(
+                                                                                                                                                              this.currentSubSlide.visibleProperty(),
+                                                                                                                                                              false))
+                                                                                                                         )
+                                                                                                                         .build()
+                                                                                                )
 
-                                                                                                                    .build(),
-                                                                                         SequentialTransitionBuilder.create()
-                                                                                                                    .node(nextSlide)
-                                                                                                                    .children(
-                                                                                                                              TimelineBuilder.create()
-                                                                                                                                             .keyFrames(
-                                                                                                                                                        new KeyFrame(
-                                                                                                                                                                     Duration.millis(0),
-                                                                                                                                                                     new KeyValue(
-                                                                                                                                                                                  nextSlide.visibleProperty(),
-                                                                                                                                                                                  false)),
-                                                                                                                                                        new KeyFrame(
-                                                                                                                                                                     Duration.millis(1),
-                                                                                                                                                                     new KeyValue(
-                                                                                                                                                                                  nextSlide.visibleProperty(),
-                                                                                                                                                                                  true))
-                                                                                                                                             )
-                                                                                                                                             .build(),
-                                                                                                                              TranslateTransitionBuilder.create()
-                                                                                                                                                        .duration(Duration.millis(400))
-                                                                                                                                                        .fromY(700)
-                                                                                                                                                        .toY(0)
-                                                                                                                                                        // .fromZ(-10)
-                                                                                                                                                        .build()
-                                                                                                                    )
-                                                                                                                    .build()
-                                                                               )
-                                                                               .build();
-        subSlideTransition.play();
+                                                                                                .build(),
+                                                                     SequentialTransitionBuilder.create()
+                                                                                                .node(nextSlide)
+                                                                                                .children(
+                                                                                                          TimelineBuilder.create()
+                                                                                                                         .keyFrames(
+                                                                                                                                    new KeyFrame(
+                                                                                                                                                 Duration.millis(0),
+                                                                                                                                                 new KeyValue(
+                                                                                                                                                              nextSlide.visibleProperty(),
+                                                                                                                                                              false)),
+                                                                                                                                    new KeyFrame(
+                                                                                                                                                 Duration.millis(1),
+                                                                                                                                                 new KeyValue(
+                                                                                                                                                              nextSlide.visibleProperty(),
+                                                                                                                                                              true))
+                                                                                                                         )
+                                                                                                                         .build(),
+                                                                                                          TranslateTransitionBuilder.create()
+                                                                                                                                    .duration(Duration.millis(400))
+                                                                                                                                    .fromY(700)
+                                                                                                                                    .toY(0)
+                                                                                                                                    // .fromZ(-10)
+                                                                                                                                    .build()
+                                                                                                )
+                                                                                                .build()
+                                                           )
+                                                           .build();
+        this.slideStepAnimation.play();
 
     }
 
