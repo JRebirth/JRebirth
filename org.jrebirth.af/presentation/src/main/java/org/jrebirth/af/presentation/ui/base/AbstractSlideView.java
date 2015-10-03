@@ -35,7 +35,7 @@ public abstract class AbstractSlideView<M extends AbstractSlideModel<?, ?, ?>, N
         DefaultView<M, N, C> {
 
     /** Sub slide animation flag. */
-    private boolean slideLocked;
+    // private boolean slideLocked;
 
     /**
      * Default Constructor.
@@ -48,18 +48,22 @@ public abstract class AbstractSlideView<M extends AbstractSlideModel<?, ?, ?>, N
         super(model);
     }
 
-    /**
-     * @return Returns the slideLocked.
-     */
-    protected boolean isSlideLocked() {
-        return this.slideLocked;
-    }
+    // /**
+    // * @return Returns the slideLocked.
+    // */
+    // protected boolean isSlideLocked() {
+    // return this.slideLocked;
+    // }
+    //
+    // /**
+    // * @param slideLocked The slideLocked to set.
+    // */
+    // protected void setSlideLocked(final boolean slideLocked) {
+    // this.slideLocked = slideLocked;
+    // }
 
-    /**
-     * @param slideLocked The slideLocked to set.
-     */
-    protected void setSlideLocked(final boolean slideLocked) {
-        this.slideLocked = slideLocked;
+    public boolean isReadyForSlidesStepUpdate(boolean isReverse) {
+        return true;
     }
 
 }

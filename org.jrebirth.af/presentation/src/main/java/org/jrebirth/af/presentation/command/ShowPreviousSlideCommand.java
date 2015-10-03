@@ -35,7 +35,9 @@ public final class ShowPreviousSlideCommand extends DefaultUICommand {
      */
     @Override
     protected void perform(final Wave wave) {
-        getModel(SlideStackModel.class).previous(wave.get(PrezWaves.SKIP_SLIDE_STEP));
+        if (getModel(SlideStackModel.class).isReadyForSlideUpdate(true)) {
+            getModel(SlideStackModel.class).previous(wave.get(PrezWaves.SKIP_SLIDE_STEP));
+        }
     }
 
 }

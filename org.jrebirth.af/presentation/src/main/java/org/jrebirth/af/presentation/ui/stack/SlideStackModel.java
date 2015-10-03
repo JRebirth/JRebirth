@@ -68,6 +68,8 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
 
     private final AtomicBoolean menuShown = new AtomicBoolean(false);
 
+    private ParallelTransition slideAnimation;
+
     // private final Map<String, Double> animationRate = new HashMap<>();
 
     /**
@@ -172,7 +174,7 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
                 // final String animationKey = isReverse ? this.slidePosition + "_" + (this.slidePosition + 1) : this.slidePosition - 1 + "_" + this.slidePosition;
 
                 // Play the animation<
-                final ParallelTransition slideAnimation = buildSlideTransition(isReverse, previousSlideModel, this.selectedSlideModel);
+                this.slideAnimation = buildSlideTransition(isReverse, previousSlideModel, this.selectedSlideModel);
 
                 this.selectedSlideModel.setCurrentFlow(isReverse ? SlideFlow.backward : SlideFlow.forward);
 
@@ -269,6 +271,17 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
      */
     public void setSlidePosition(final int slidePosition) {
         this.slidePosition = slidePosition;
+    }
+
+    public boolean isReadyForSlideUpdate(boolean isReverse) {
+
+        if (this.slideAnimation.getStatus() == Animation.Status.RUNNING) {
+
+            this.slideAnimation.setRate(isReverse ? -4 : 4);
+
+            return false;
+        }
+        return true;
     }
 
     /**
