@@ -7,10 +7,10 @@
 	<complexType name="Presentation">
 
 		<all>
-			<element name="title" minOccurs="0" maxOccurs="1"></element>
-			<element name="date" minOccurs="0" maxOccurs="1"></element>
-			<element name="place" minOccurs="0" maxOccurs="1"></element>
-			<element name="event" minOccurs="0" maxOccurs="1"></element>
+			<element name="title" minOccurs="0" maxOccurs="1" type="string"></element>
+			<element name="date" minOccurs="0" maxOccurs="1" type="string"></element>
+			<element name="place" minOccurs="0" maxOccurs="1" type="string"></element>
+			<element name="event" minOccurs="0" maxOccurs="1" type="string"></element>
 			<element name="speakers" type="tns:SpeakerList" minOccurs="0" maxOccurs="1"></element>
 			<element name="slides" type="tns:SlideList" minOccurs="0" maxOccurs="1"></element>
 		</all>

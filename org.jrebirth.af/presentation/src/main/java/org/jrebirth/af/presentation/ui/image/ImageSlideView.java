@@ -161,7 +161,7 @@ public final class ImageSlideView extends
 
             final ParallelTransition st = ParallelTransitionBuilder.create().children(
                                                                                       getTileTransition(),
-                                                                                      getSlideLabelTransition())
+                                                                                      getSlideLabelTransition(Duration.millis(1200)))
                                                                    .build();
 
             st.play();
@@ -173,12 +173,12 @@ public final class ImageSlideView extends
 
             final ParallelTransition st = ParallelTransitionBuilder.create().children(
                                                                                       getTileTransition(),
-                                                                                      getSlideLabelTransition())
+                                                                                      getSlideLabelTransition(Duration.millis(1200)))
                                                                    .build();
 
             st.play();
         } else {
-            // getFadeTransition().play();
+            getSlideLabelTransition(Duration.millis(0)).play();
         }
     }
 
@@ -187,10 +187,10 @@ public final class ImageSlideView extends
      *
      * @return
      */
-    private FadeTransition getSlideLabelTransition() {
+    private FadeTransition getSlideLabelTransition(Duration gap) {
         return FadeTransitionBuilder.create()
                                     .node(this.slideLabel)
-                                    .delay(Duration.millis(1200))
+                                    .delay(gap)
                                     .duration(Duration.millis(1200))
                                     .fromValue(0).toValue(1)
                                     .build();
