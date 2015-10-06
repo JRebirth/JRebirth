@@ -50,7 +50,8 @@ public final class ImageSlideModel extends AbstractSlideModel<ImageSlideModel, I
      * @return the title
      */
     public String getTitle() {
-        return getSlide().getTitle() == null ? "" : getSlide().getTitle().replaceAll("\\\\n", "\n");
+        return getSlide().getContent() == null || getSlide().getContent().isEmpty() || getSlide().getContent().get(0).getTitle() == null ?
+                null : getSlide().getContent().get(0).getTitle().replaceAll("\\\\n", "\n");
     }
 
     /**
