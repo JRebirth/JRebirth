@@ -3,33 +3,67 @@
 Release Notes
 ==============
 
+8.0.4 - Release 2015-10-06
+-----------------------------------------
+
+This release fixes some bugs, it was performed ont the hotfixes branch.
+
+
+- WebView can't be created into JTP [#140](http://github.com/JRebirth/JRebirth/issues/issue/140)<br/>
+WebView require to be created into JAT, thus a custom fiels has been added for all Model to force them to prepare their view into JAT.
+
+
+- Equality between multitonKey and ClassKey (with same classField) bug [#165](http://github.com/JRebirth/JRebirth/issues/issue/165)<br/>
+Fix polymorphic call, a ClassKey can never be equals to a MultitonKey
+
+
+- Improve @OnWave usage [#172](http://github.com/JRebirth/JRebirth/issues/issue/172)<br/>
+Improve annotation management, now right method is called sooner.
+
+
+- Manage .otf font [#173](http://github.com/JRebirth/JRebirth/issues/issue/173)<br/>
+Vision of the future to also support otf font (currently they don't work well)
+
+
+- Sanitize Model hierarchy (Default, Simple, FXML) [#174](http://github.com/JRebirth/JRebirth/issues/issue/174)<br/>
+Some differences were existing within all kind of Models, now they have the same lifecycle.
+
+
+- Add @AutoRelease annotation [#175](http://github.com/JRebirth/JRebirth/issues/issue/175)<br/>
+This new annotation allow to disable the auto-releasing of Model when their root node had been removed from its parent.
+
+
+- LinkComponent with bad keypart [#177](http://github.com/JRebirth/JRebirth/issues/issue/177)<br/>
+LinkComponent was adding an empty string key part that should be considered as null.
+
+
 
 8.0.3 - Release 2015-08-27
 -----------------------------------------
 
 This release fixes some migration bugs and add few new features.
 
-- Allow to customize FXMLControllerBuilder enhancement [#164](http://github.com/JRebirth/JRebirth/issues/issue/164)
+- Allow to customize FXMLControllerBuilder [#164](http://github.com/JRebirth/JRebirth/issues/issue/164)<br/>
 A new JRebirth Parameter has been added to allow customization of the FXMLController Factory
 
 
-- Displaying multiple FXML models (with same classField) [#159](http://github.com/JRebirth/JRebirth/issues/issue/159)
+- Displaying multiple FXML models (with same classField) [#159](http://github.com/JRebirth/JRebirth/issues/issue/159)<br/>
 It's now possible to load several instances of a FXMLModel by using FXMLParams.
 
 
-- The listener attached rootNode parent property is never removed [#156](http://github.com/JRebirth/JRebirth/issues/issue/156)
+- The listener attached rootNode parent property is never removed [#156](http://github.com/JRebirth/JRebirth/issues/issue/156)<br/>
 Fix a memory leak, release listener when rootNode is removed from parent.
 
 
-- InitInternalInnerComponents() is called twice for Model [#155](http://github.com/JRebirth/JRebirth/issues/issue/155)
+- InitInternalInnerComponents() is called twice for Model [#155](http://github.com/JRebirth/JRebirth/issues/issue/155)<br/>
 Remove a duplicate call to initInternalInnerComponents method.
 
 
-- Key.create() can instantiate a classKey if the first KeyPart is empty [#154](http://github.com/JRebirth/JRebirth/issues/issue/154)
+- Key.create() can instantiate a classKey if the first KeyPart is empty [#154](http://github.com/JRebirth/JRebirth/issues/issue/154)<br/>
 Fix an issue already resolved into 7.x branch and badly merged.
 
 
-To be able to extend DisplayModelWaveBean. [#153](http://github.com/JRebirth/JRebirth/issues/issue/153)
+To be able to extend DisplayModelWaveBean. [#153](http://github.com/JRebirth/JRebirth/issues/issue/153)<br/>
 Allow to extend existing command more easily, now a Wave can embed several WaveBeans that can be grabbed by any Command.
 
 
@@ -38,14 +72,15 @@ Allow to extend existing command more easily, now a Wave can embed several WaveB
 
 This release add two minor improvements and fixes sample archetype.
 
-- Fix archetype generation [#152](http://github.com/JRebirth/JRebirth/issues/issue/152)
+- Fix archetype generation [#152](http://github.com/JRebirth/JRebirth/issues/issue/152)<br/>
 Fix version used by sample module, it was using old snapshot version.
 
-- Active pack200 for showcases [#151](http://github.com/JRebirth/JRebirth/issues/issue/151)
+
+- Active pack200 for showcases [#151](http://github.com/JRebirth/JRebirth/issues/issue/151)<br/>
 Re-active pack200 for showcases modules, it was broken since Java8 migration.
 
 
-- Add lookup method into FXMLComponent [#149](http://github.com/JRebirth/JRebirth/issues/issue/149)
+- Add lookup method into FXMLComponent [#149](http://github.com/JRebirth/JRebirth/issues/issue/149)<br/>
 Add convenient methods used to search a given node loaded from a fxml file.
 
 
@@ -54,31 +89,31 @@ Add convenient methods used to search a given node loaded from a fxml file.
 
 This release adds some new features and fixes some small troubles.
 
-- Add Exception Handler to Wave feature [#142](http://github.com/JRebirth/JRebirth/issues/issue/142)
+- Add Exception Handler to Wave feature [#142](http://github.com/JRebirth/JRebirth/issues/issue/142)<br/>
 An exception handler can be attached to WaveType to handle unplanned cases or generic ones.
 
 
-- Improve Service Return Wave enhancement [#141](http://github.com/JRebirth/JRebirth/issues/issue/141)
+- Improve Service Return Wave enhancement [#141](http://github.com/JRebirth/JRebirth/issues/issue/141)<br/>
 Allow to send an empty wave even when the service task return void.
 
 
-- WebView can't be create into JTP bug [#140](http://github.com/JRebirth/JRebirth/issues/issue/140)
+- WebView can't be create into JTP bug [#140](http://github.com/JRebirth/JRebirth/issues/issue/140)<br/>
  WebView is the only node that require to be created into JAT, add a flag into Models to force view creation into JAT.
 
 
-- Modules don't work with JWS bug [#139](http://github.com/JRebirth/JRebirth/issues/issue/139)
+- Modules don't work with JWS bug [#139](http://github.com/JRebirth/JRebirth/issues/issue/139)<br/>
 Module.xml files are now correctly loaded when using Java WebStart.
 
 
-- SimpleModel should be released too bug [#138](http://github.com/JRebirth/JRebirth/issues/issue/138)
+- SimpleModel should be released too bug [#138](http://github.com/JRebirth/JRebirth/issues/issue/138)<br/>
 Allow to release SimpleModel when its root node is no more displayed into the current scene (like other Models).
 
 
-- Undefined waves are consumed before all handlers (running into JTP and JAT) are processed bug [#137](http://github.com/JRebirth/JRebirth/issues/issue/137)
+- Undefined waves are consumed before all handlers (running into JTP and JAT) are processed bug [#137](http://github.com/JRebirth/JRebirth/issues/issue/137)<br/>
 Add the WaveHandled status to declare that all handlers have been performed, WaveConsumed is set when all handlers have been triggered.
 
 
-- Component Interface Management feature [#107](http://github.com/JRebirth/JRebirth/issues/issue/107)
+- Component Interface Management feature [#107](http://github.com/JRebirth/JRebirth/issues/issue/107)<br/>
 Allow to manage Component declaration using an Interface (use the Module engine and AnnotatedComponentFactory in background).
 
 

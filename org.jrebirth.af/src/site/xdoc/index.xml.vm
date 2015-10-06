@@ -263,9 +263,14 @@
 			<a title="YourKit, Java Profiler" href="http://www.yourkit.com" target="_blank">YourKit</a>,
 			used for Memory &amp; CPU Java profiling with a free license.
 			</p>
+			<!--
 			<p>
 			<a title="Certum" href="http://www.certum.eu/certum/cert,offer_code_signing.xml" target="_blank">Certum</a>,
 			for offering us an Open Source <a href="http://www.certum.eu/certum/cert,offer_en_open_source_cs.xml">Code Signing Certificate</a>.
+			</p>-->
+			<p>
+			<a title="EJ Technologies" href="https://www.ej-technologies.com/" target="_blank">EJ Technologies</a>,
+			for offering us <a href="https://www.ej-technologies.com/products/jprofiler/overview.html">Install4j</a> &amp; <a href="https://www.ej-technologies.com/products/install4j/overview.html">JProfiler</a> licenses.
 			</p>
 			<p>
 			<a title="Jet Brains" href="http://www.jetbrains.com" target="_blank">Jet Brains</a>,
