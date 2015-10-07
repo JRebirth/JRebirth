@@ -40,7 +40,7 @@ Maven coordinates:
     <dependency>
         <groupId>org.jrebirth.af</groupId>
         <artifactId>core</artifactId>
-        <version>8.1.0-SNAPSHOT</version>
+        <version>8.0.4</version>
     </dependency>
 
 ## Documentation
