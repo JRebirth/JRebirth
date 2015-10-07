@@ -22,6 +22,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+import org.jrebirth.af.api.resource.font.FontExtension;
 import org.jrebirth.af.api.resource.font.FontName;
 import org.jrebirth.af.api.resource.font.FontParams;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
@@ -39,6 +40,23 @@ public abstract class AbstractBaseFont extends AbstractBaseParams implements Fon
     /** The font size. */
     private final DoubleProperty sizeProperty = new SimpleDoubleProperty();
 
+    /** The font extension. */
+    private final ObjectProperty<FontExtension> extensionProperty = new SimpleObjectProperty<FontExtension>();
+
+    /**
+     * Default Constructor.
+     *
+     * @param name the name to use
+     * @param size the default font size
+     * @param extension the font extension
+     */
+    public AbstractBaseFont(final FontName name, final double size, final FontExtension extension) {
+        super();
+        this.nameProperty.set(name);
+        this.sizeProperty.set(size);
+        this.extensionProperty.set(extension);
+    }
+
     /**
      * Default Constructor.
      *
@@ -46,9 +64,7 @@ public abstract class AbstractBaseFont extends AbstractBaseParams implements Fon
      * @param size the default font size
      */
     public AbstractBaseFont(final FontName name, final double size) {
-        super();
-        this.nameProperty.set(name);
-        this.sizeProperty.set(size);
+        this(name, size, FontExtension.TTF);
     }
 
     /**
@@ -83,5 +99,24 @@ public abstract class AbstractBaseFont extends AbstractBaseParams implements Fon
      */
     public DoubleProperty sizeProperty() {
         return this.sizeProperty;
+    }
+
+    /**
+     * Return the font extension.
+     *
+     * @return the font extension
+     */
+    @Override
+    public FontExtension extension() {
+        return this.extensionProperty.get();
+    }
+
+    /**
+     * Return the font extension property.
+     *
+     * @return the font extension property
+     */
+    public ObjectProperty<FontExtension> extensionProperty() {
+        return this.extensionProperty;
     }
 }

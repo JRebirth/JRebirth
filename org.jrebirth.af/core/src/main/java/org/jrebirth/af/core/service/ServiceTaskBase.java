@@ -327,6 +327,14 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Wave getAssociatedWave() {
+        return this.wave;
+    }
+
+    /**
      * Check if the task has enough progressed according to the given threshold.
      *
      * This method can be called outside the JAT, it's useful to filter useless call to JAT

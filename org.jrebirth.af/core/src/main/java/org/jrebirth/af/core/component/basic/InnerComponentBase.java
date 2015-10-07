@@ -20,6 +20,7 @@ package org.jrebirth.af.core.component.basic;
 import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.component.basic.InnerComponent;
 import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.core.key.Key;
 
 /**
  * The interface <strong>InnerModels</strong>.
@@ -32,50 +33,90 @@ import org.jrebirth.af.api.key.UniqueKey;
  *
  * @param <C> the type of the component used
  */
-public interface InnerComponentBase<C extends Component<?>> extends InnerComponent<C> {
+public class InnerComponentBase<C extends Component<?>> implements InnerComponent<C> {
+
+    public static <CC extends Component<?>> InnerComponentBase<CC> create(final Class<CC> modelClass, final Object... keyPart) {
+        return new InnerComponentBase<CC>(modelClass, keyPart);
+    }
+
+    /** The generator of unique id. */
+    // private static int idGenerator;
+
+    /** The unique identifier of the wave type. */
+    private int uid;
+
+    /** The unique key of the inner model. */
+    private final UniqueKey<C> modelKey;
+
+    /**
+     * Default constructor.
+     *
+     * @param componentClass the model class
+     * @param keyPart the list of model keys
+     */
+    InnerComponentBase(final Class<C> componentClass, final Object... keyPart) {
+
+        this.modelKey = Key.create(componentClass, keyPart);
+    }
 
     // /**
-    // * {@inheritDoc}
+    // * Build an InnerModel.
+    // *
+    // * @param modelClass the model class
+    // * @param keyPart the list of model keys
+    // *
+    // * @return a new fresh InnerModel type object
     // */
-    // default InnerModelRegistry registry() {
-    // return InnerModelRegistry.getInstance();
+    // public static InnerModelEntry build(final Class<? extends Model> modelClass, final Object... keyPart) {
+    // final InnerModelEntry innerModel = new InnerModelEntry(modelClass, keyPart);
+    //
+    // // Ensure that the uid will be unique at runtime
+    // synchronized (WaveType.class) {
+    // innerModel.setUid(++idGenerator);
+    // }
+    // return innerModel;
     // }
 
     /**
-     * Return the key of the model.
-     *
-     * Will return a {@link org.jrebirth.af.core.key.ClassKey} instance for a unique model or a {@link org.jrebirth.af.core.key.MultitonKey} for non unique model
-     *
-     * @return the unique key used to load the right Model, must be not null
+     * {@inheritDoc}
      */
     @Override
-    UniqueKey<C> getKey();
-
-    static <CC extends Component<?>> InnerComponentBase<CC> create(final Class<CC> modelClass, final Object... keyPart) {
-        return new InnerComponentEntry<CC>(modelClass, keyPart);
+    public UniqueKey<C> getKey() {
+        return this.modelKey;
     }
 
-    // default UniqueKey getKey(){
-    // return registry().getKey(this);
-    // }
+    /**
+     * Gets the uid.
+     *
+     * @return Returns the uid.
+     */
+    public int getUid() {
+        return this.uid;
+    }
 
-    // /**
-    // *
-    // * @param key
-    // */
-    // @SuppressWarnings("unchecked")
-    // default void key(UniqueKey<? extends Model> key) {
-    // registry().storeKey((InnerModel)this, (UniqueKey)key);
-    // }
+    /**
+     * Sets the uid.
+     *
+     * @param uid The uid to set.
+     */
+    public void setUid(final int uid) {
+        this.uid = uid;
+    }
 
-    // /**
-    // *
-    // * @param modelClass
-    // * @param keyPart
-    // */
-    // @SuppressWarnings("unchecked")
-    // default void key(final Class<? extends Model> modelClass, final Object... keyPart) {
-    // registry().storeKey((InnerModel<IM>)this, (UniqueKey<IM>)UniqueKey.key(modelClass, keyPart));
-    // }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object innerModel) {
+        return innerModel instanceof InnerComponentBase && getUid() == ((InnerComponentBase<?>) innerModel).getUid();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return getUid();
+    }
 
 }

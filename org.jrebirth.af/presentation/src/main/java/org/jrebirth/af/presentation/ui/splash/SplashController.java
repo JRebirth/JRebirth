@@ -21,7 +21,7 @@ import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.presentation.ui.base.AbstractSlideController;
 
 /**
- * The class <strong>SplashController</strong>.
+ * The class <strong>QandAController</strong>.
  *
  * @author Sébastien Bordes
  *

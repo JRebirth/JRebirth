@@ -95,13 +95,14 @@ public final class JRebirth {
         if (Platform.isFxApplicationThread()) {
             // We are into a JAT so just run it synchronously
             sync.run();
+            // Be careful in this case no timeout protection is achieved
         } else {
             // The runnable will be run into the JAT during the next round
             Platform.runLater(sync);
-        }
 
-        // Wait the end of the runnable execution
-        sync.waitEnd(timeout);
+            // Wait the end of the runnable execution
+            sync.waitEnd(timeout);
+        }
     }
 
     /**
@@ -142,12 +143,13 @@ public final class JRebirth {
         if (JRebirth.isJIT()) {
             // We are into a JIT so just run it synchronously
             sync.run();
+            // Be careful in this case no timeout protection is achieved
         } else {
             // The runnable will be run into the JIT during the next round
             JRebirthThread.getThread().runLater(sync);
+            // Wait the end of the runnable execution
+            sync.waitEnd(timeout);
         }
-        // Wait the end of the runnable execution
-        sync.waitEnd(timeout);
     }
 
     /**
@@ -180,12 +182,13 @@ public final class JRebirth {
         if (JRebirth.isJTPSlot()) {
             // We are into a JTP slot so just run it synchronously
             sync.run();
+            // Be careful in this case no timeout protection is achieved
         } else {
             // The runnable will be run into the JTP slot during the next round
             JRebirthThread.getThread().runIntoJTP(sync);
+            // Wait the end of the runnable execution
+            sync.waitEnd(timeout);
         }
-        // Wait the end of the runnable execution
-        sync.waitEnd(timeout);
     }
 
     /**

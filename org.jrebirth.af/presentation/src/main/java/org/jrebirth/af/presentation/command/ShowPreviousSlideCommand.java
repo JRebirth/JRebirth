@@ -19,6 +19,7 @@ package org.jrebirth.af.presentation.command;
 
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.single.ui.DefaultUICommand;
+import org.jrebirth.af.presentation.PrezWaves;
 import org.jrebirth.af.presentation.ui.stack.SlideStackModel;
 
 /**
@@ -34,7 +35,9 @@ public final class ShowPreviousSlideCommand extends DefaultUICommand {
      */
     @Override
     protected void perform(final Wave wave) {
-        getModel(SlideStackModel.class).previous();
+        if (getModel(SlideStackModel.class).isReadyForSlideUpdate(true)) {
+            getModel(SlideStackModel.class).previous(wave.get(PrezWaves.SKIP_SLIDE_STEP));
+        }
     }
 
 }

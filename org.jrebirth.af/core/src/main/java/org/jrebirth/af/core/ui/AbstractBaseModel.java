@@ -17,16 +17,20 @@
  */
 package org.jrebirth.af.core.ui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 
-import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.facade.JRebirthEventType;
 import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.annotation.AutoRelease;
+import org.jrebirth.af.api.ui.annotation.CreateViewIntoJAT;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent;
 import org.jrebirth.af.core.concurrent.JRebirth;
+import org.jrebirth.af.core.util.ClassUtility;
 
 /**
  *
@@ -44,7 +48,18 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
     private boolean viewDisplayed;
 
     /** Force the creation of the View into JAT if set to true (useful when the view has got a WebView). */
-    protected boolean createViewIntoJAT = false;
+    protected boolean createViewIntoJAT;
+
+    /**
+     * Default Constructor.
+     */
+    public AbstractBaseModel() {
+        super();
+
+        // Initialize the protected field with provided annotation (if present)
+        final CreateViewIntoJAT cvij = this.getClass().getAnnotation(CreateViewIntoJAT.class);
+        this.createViewIntoJAT = cvij == null ? false : cvij.value();
+    }
 
     /**
      * {@inheritDoc}
@@ -55,24 +70,22 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
         // Initialize the current model
         initInternalModel();
 
-        final JRebirthRunnable prepareView = () ->
+        // Model and InnerModels are OK, let's prepare the view
+        JRebirth.run(this.createViewIntoJAT ? RunType.JAT_SYNC : RunType.SAME, this::prepareView);
 
-        {
-            // Model and InnerModels are OK, let's prepare the view
-            if (getView() != null) {
-                try {
-                    getView().prepare();
-                } catch (final CoreException e) {
-                    // FIX ME log something or find a way to rethrow it
-                }
-            }
-        };
-
-        JRebirth.run(this.createViewIntoJAT ? RunType.JAT_SYNC : RunType.SAME, prepareView);
+        // Allow to release the model if the root business object doesn't exist anymore
+        attachParentListener();
 
         // Bind Object properties to view widget ones
         bindInternal();
     }
+
+    /**
+     * Prepare the view by constructing the root node and all its children.
+     * 
+     * By default this method will be called into JTP but could be done into JAT synchronously by setting the field createViewIntoJAT
+     */
+    protected abstract void prepareView();
 
     /**
      * Initialize the model.
@@ -113,7 +126,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
      *
      * You must implement the {@link #showView()} method to setup your view.
      */
-    protected final void showInternalView() {
+    protected final void showInternalView(final Wave wave) {
 
         // Call user code
         showView();
@@ -130,6 +143,12 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
             }
         }
 
+        // Propagate the show view to all Inner Model
+        if (getInnerComponentList().isPresent()) {
+            getInnerComponentList().get().stream()
+                                   .filter(s -> s instanceof AbstractBaseModel<?>)
+                                   .forEach((model) -> ((AbstractBaseModel<?>) model).doShowView(wave));
+        }
     }
 
     /**
@@ -143,15 +162,21 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
      *
      * Will call the {@link #org.jrebirth.af.core.ui.View.hide()} method
      */
-    protected final void hideInternalView() {
+    protected final void hideInternalView(final Wave wave) {
 
         // Call user code
         hideView();
 
         // Sometimes view can be null
         if (getView() != null) {
-            // hide the view
             getView().hide();
+        }
+
+        // Propagate the show view to all Inner Model
+        if (getInnerComponentList().isPresent()) {
+            getInnerComponentList().get().stream()
+                                   .filter(s -> s instanceof AbstractBaseModel<?>)
+                                   .forEach((model) -> ((AbstractBaseModel<?>) model).doHideView(wave));
         }
     }
 
@@ -165,7 +190,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
      */
     @Override
     public Node getRootNode() {
-        return getView().getRootNode();
+        return getView() == null ? null : getView().getRootNode();
     }
 
     /**
@@ -181,6 +206,31 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
     protected void finalize() throws Throwable {
         getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_MODEL, null, this.getClass());
         super.finalize();
+    }
+
+    /**
+     * Attach a custom listener that will release the mode when the rootNode is removed from its parent.
+     */
+    protected void attachParentListener() {
+
+        final AutoRelease ar = ClassUtility.getLastClassAnnotation(this.getClass(), AutoRelease.class);
+
+        // Only manage automatic release when the annotation exists with true value
+        if (ar != null && ar.value() && getRootNode() != null) { // TODO check rootnode null when using NullView
+
+            // Allow to release the model if the root business object doesn't exist anymore
+            getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
+
+                @Override
+                public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
+                    if (newValue == null) {
+                        release();
+                        getRootNode().parentProperty().removeListener(this);
+                    }
+                }
+
+            });
+        }
     }
 
 }

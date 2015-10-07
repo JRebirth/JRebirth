@@ -23,6 +23,7 @@ import java.util.List;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
+import org.jrebirth.af.api.resource.font.FontExtension;
 import org.jrebirth.af.api.resource.font.FontName;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 
@@ -41,6 +42,30 @@ public class RealFont extends AbstractBaseFont {
      *
      * @param name the font name
      * @param size the default font size
+     * @param extension the font extension
+     * @param skipFontsFolder skip default fonts folder search
+     */
+    public RealFont(final FontName name, final double size, final FontExtension extension, final boolean skipFontsFolder) {
+        super(name, size, extension);
+        this.skipFontsFolderProperty.set(skipFontsFolder);
+    }
+
+    /**
+     * Default Constructor.
+     *
+     * @param name the font name
+     * @param size the default font size
+     * @param extension the font extension
+     */
+    public RealFont(final FontName name, final double size, final FontExtension extension) {
+        this(name, size, extension, false);
+    }
+
+    /**
+     * Default Constructor.
+     *
+     * @param name the font name
+     * @param size the default font size
      * @param skipFontsFolder skip default fonts folder search
      */
     public RealFont(final FontName name, final double size, final boolean skipFontsFolder) {
@@ -53,6 +78,7 @@ public class RealFont extends AbstractBaseFont {
      *
      * @param name the font name
      * @param size the default font size
+     * @param extension the font extension
      */
     public RealFont(final FontName name, final double size) {
         this(name, size, false);

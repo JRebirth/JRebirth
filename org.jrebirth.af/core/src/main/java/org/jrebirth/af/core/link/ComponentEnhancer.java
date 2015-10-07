@@ -86,7 +86,12 @@ public final class ComponentEnhancer implements LinkMessages {
 
         // Retrieve all fields annotated with LinkComponent
         for (final Field field : ClassUtility.getAnnotatedFields(component.getClass(), LinkComponent.class)) {
-            inject(component, field, field.getAnnotation(LinkComponent.class).value());
+            final String keyPart = field.getAnnotation(LinkComponent.class).value();
+            if (keyPart.isEmpty()) {
+                inject(component, field);
+            } else {
+                inject(component, field, keyPart);
+            }
         }
 
     }
@@ -201,7 +206,7 @@ public final class ComponentEnhancer implements LinkMessages {
         // Iterate over each annotated Method and all annotations
         for (final Method method : ClassUtility.getAnnotatedMethods(component.getClass(), OnWave.class)) {
             for (final OnWave clsOnWave : method.getAnnotationsByType(OnWave.class)) {
-                manageUniqueWaveTypeAction(component, clsOnWave.value(), null);
+                manageUniqueWaveTypeAction(component, clsOnWave.value(), method);
             }
         }
 

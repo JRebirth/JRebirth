@@ -18,25 +18,32 @@
 package org.jrebirth.af.presentation.ui.stack;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ParallelTransitionBuilder;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.StackPane;
 
+import org.jrebirth.af.api.annotation.LinkComponent;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.presentation.service.PresentationService;
+import org.jrebirth.af.presentation.ui.base.AbstractSlideModel.SlideFlow;
 import org.jrebirth.af.presentation.ui.base.SlideModel;
 import org.jrebirth.af.presentation.ui.base.SlideStep;
+import org.jrebirth.af.presentation.ui.slidemenu.SlideMenuModel;
 import org.jrebirth.presentation.model.Slide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The class <strong>SlideStackModel</strong>.
+ * The class <strong>SlideMenuModel</strong>.
  *
  * @author Sébastien Bordes
  *
@@ -56,10 +63,21 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
     private SlideModel<SlideStep> selectedSlideModel;
 
     /** Store a strong reference to the service to avoid reloading. */
-    // @Singleton
+    @LinkComponent
     private PresentationService presentationService;
 
+    private final AtomicBoolean menuShown = new AtomicBoolean(false);
+
+    private ParallelTransition slideAnimation;
+
     // private final Map<String, Double> animationRate = new HashMap<>();
+
+    /**
+     * @return Returns the menuShown.
+     */
+    AtomicBoolean getMenuShown() {
+        return this.menuShown;
+    }
 
     /**
      * {@inheritDoc}
@@ -110,9 +128,6 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
      * @return Returns the presentationService.
      */
     protected PresentationService getPresentationService() {
-        if (this.presentationService == null) {
-            this.presentationService = getService(PresentationService.class);
-        }
         return this.presentationService;
     }
 
@@ -142,7 +157,7 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
                 }
 
                 // Define the slide number
-                slide.setPage(this.slidePosition);
+                // slide.setPage(this.slidePosition);
 
                 final Class<Model> nextClass = (Class<Model>)
                         (slide.getModelClass() == null
@@ -159,7 +174,9 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
                 // final String animationKey = isReverse ? this.slidePosition + "_" + (this.slidePosition + 1) : this.slidePosition - 1 + "_" + this.slidePosition;
 
                 // Play the animation<
-                final ParallelTransition slideAnimation = buildSlideTransition(isReverse, previousSlideModel, this.selectedSlideModel);
+                this.slideAnimation = buildSlideTransition(isReverse, previousSlideModel, this.selectedSlideModel);
+
+                this.selectedSlideModel.setCurrentFlow(isReverse ? SlideFlow.backward : SlideFlow.forward);
 
                 if (isReverse) {
 
@@ -228,9 +245,9 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
                 }
 
                 // Hide all other slides
-                if (psm != null) {
+                if (csm != null) {
                     Node node;
-                    for (int i = getView().getRootNode().getChildren().size() - 1; i > 0; i--) {
+                    for (int i = getView().getRootNode().getChildren().size() - 1; i >= 0; i--) {
                         node = getView().getRootNode().getChildren().get(i);
                         if (csm.getRootNode() != node) {
                             getView().getRootNode().getChildren().remove(node);
@@ -256,14 +273,25 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
         this.slidePosition = slidePosition;
     }
 
+    public boolean isReadyForSlideUpdate(boolean isReverse) {
+
+        if (this.slideAnimation.getStatus() == Animation.Status.RUNNING) {
+
+            this.slideAnimation.setRate(isReverse ? -4 : 4);
+
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Got to next slide.
      */
-    public void next() {
+    public void next(final boolean skipSlideStep) {
         synchronized (this) {
             // Try to display the next slide step first
             // If no slide step is remaining, display the next slide
-            if (this.selectedSlideModel.nextStep() && this.slidePosition < getPresentationService().getPresentation().getSlides().getSlide().size() - 1) {
+            if (skipSlideStep || this.selectedSlideModel.nextStep() && this.slidePosition < getPresentationService().getPresentation().getSlides().getSlide().size() - 1) {
                 this.slidePosition = Math.min(this.slidePosition + 1, getPresentationService().getPresentation().getSlides().getSlide().size() - 1);
                 displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition), false);
             }
@@ -273,21 +301,38 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
     /**
      * Go to previous slide.
      */
-    public void previous() {
+    public void previous(final boolean skipSlideStep) {
         synchronized (this) {
             // Try to display the previous slide step first
             // If no slide step is remaining, display the previous slide
-            if (this.selectedSlideModel.previousStep() && this.slidePosition > 0) {
+            if (skipSlideStep || this.selectedSlideModel.previousStep() && this.slidePosition > 0) {
                 this.slidePosition = Math.max(this.slidePosition - 1, 0);
-                displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition), true);
+                displaySlide(getPresentationService().getPresentation().getSlides().getSlide().get(this.slidePosition), !skipSlideStep);
             }
         }
+    }
+
+    public void gotoSlide(final Slide slide) {
+        this.slidePosition = slide.getPage();
+        displaySlide(slide, false);
     }
 
     /**
      * Display the slide menu to navigate.
      */
     public void showSlideMenu() {
-        // Nothing to do yet
+
+        if (!this.menuShown.getAndSet(true)) {
+            final SlideMenuModel smm = getModel(Key.create(SlideMenuModel.class, this.selectedSlide));
+
+            StackPane.setAlignment(smm.getRootNode(), Pos.CENTER);
+            getView().getRootNode().getChildren().add(smm.getRootNode());
+
+            smm.getRootNode().parentProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue == null) {
+                    this.menuShown.set(false);
+                }
+            });
+        }
     }
 }

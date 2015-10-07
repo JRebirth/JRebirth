@@ -37,4 +37,12 @@ public interface FontParams extends ResourceParams {
      * @return the font size
      */
     double size();
+
+    /**
+     * Return the font extension.
+     *
+     * @return the font extension
+     */
+    FontExtension extension();
+
 }

@@ -22,6 +22,7 @@ import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.NullView;
 import org.jrebirth.af.api.ui.View;
+import org.jrebirth.af.api.ui.annotation.AutoRelease;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.JRebirthWaves;
@@ -37,10 +38,25 @@ import org.jrebirth.af.core.wave.JRebirthWaves;
  * @param <M> the class type of the current model
  * @param <V> the class type of the view managed by this model
  */
+@AutoRelease
 public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> extends AbstractBaseModel<M> {
 
     /** The dedicated view component. */
     private transient V view;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void prepareView() {
+        try {
+            if (getView() != null) {
+                getView().prepare();
+            }
+        } catch (final CoreException ce) {
+            throw new CoreRuntimeException(ce);
+        }
+    }
 
     /**
      * {@inheritDoc}
@@ -74,7 +90,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
      */
     @Override
     public final void doShowView(final Wave wave) {
-        showInternalView();
+        showInternalView(wave);
     }
 
     /**
@@ -82,7 +98,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
      */
     @Override
     public final void doHideView(final Wave wave) {
-        hideInternalView();
+        hideInternalView(wave);
     }
 
     /**

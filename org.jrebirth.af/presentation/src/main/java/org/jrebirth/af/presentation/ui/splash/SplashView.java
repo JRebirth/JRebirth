@@ -33,7 +33,7 @@ import org.jrebirth.af.presentation.ui.base.AbstractSlideView;
 
 /**
  *
- * The class <strong>SplashView</strong>.
+ * The class <strong>QandAView</strong>.
  *
  * @author Sébastien Bordes
  *
