@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.resource.builder;
 
-import java.lang.ref.WeakReference;
+import java.lang.ref.SoftReference;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -43,8 +43,11 @@ public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P
     /** The resource weak Map. */
     private final Map<I, P> paramsMap = new WeakHashMap<I, P>();
 
-    /** The resource weak Map. */
-    private final Map<String, WeakReference<R>> resourceMap = new WeakHashMap<>();
+    /**
+     * The resource weak Map.<br />
+     * SoftReference can be kept longer in memory depending on the -client or -server jvm argument and on Xms and Xms values.
+     */
+    private final Map<String, SoftReference<R>> resourceMap = new WeakHashMap<>();
 
     /**
      * {@inheritDoc}
@@ -88,12 +91,18 @@ public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P
         final String paramsKey = params.getKey();
 
         // Retrieve the resource weak reference from the map
-        WeakReference<R> resourceWeakRef = this.resourceMap.get(paramsKey);
+        final SoftReference<R> resourceSoftRef = this.resourceMap.get(paramsKey);
 
-        // The resourceWeakRef may be null if nobody use it
-        R resource = resourceWeakRef == null ? null : resourceWeakRef.get();
-        if (resourceWeakRef == null || resource == null) {
-            // So we must rebuild an instance and then store it weakly
+        // Warning the gc can collect gthe resource between the test and the getter call so we have to get the resource immediately
+        // and test it instead of testing the reference value
+
+        // The resourceSoftRef may be null if nobody use it
+        // If the resource reference is not null try to grab its value
+        R resource = resourceSoftRef == null ? null : resourceSoftRef.get();
+
+        // When the reference is null (first access time) or the resource is null (the resource has been collected y gc)
+        if (resourceSoftRef == null || resource == null) {
+            // We must (re)build an instance and then store it weakly
             resource = buildResource(key, params);
             set(paramsKey, resource);
             params.hasChanged(false);
@@ -106,7 +115,7 @@ public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P
      */
     @Override
     public void set(final String key, final R resource) {
-        this.resourceMap.put(key, new WeakReference<R>(resource));
+        this.resourceMap.put(key, new SoftReference<R>(resource));
     }
 
     /**
