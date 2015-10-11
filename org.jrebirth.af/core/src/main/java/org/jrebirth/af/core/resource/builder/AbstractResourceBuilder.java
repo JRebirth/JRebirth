@@ -87,20 +87,18 @@ public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P
 
         final String paramsKey = params.getKey();
 
-        // Retrieve the resource into the map
-        WeakReference<R> resource = this.resourceMap.get(paramsKey);
+        // Retrieve the resource weak reference from the map
+        WeakReference<R> resourceWeakRef = this.resourceMap.get(paramsKey);
 
-        // The resource may be null if nobody use it
-        if (resource == null || resource.get() == null) {
+        // The resourceWeakRef may be null if nobody use it
+        R resource = resourceWeakRef == null ? null : resourceWeakRef.get();
+        if (resourceWeakRef == null || resource == null) {
             // So we must rebuild an instance and then store it weakly
-            set(paramsKey, buildResource(key, params));
-
-            // Get the WeakReference
-            resource = this.resourceMap.get(paramsKey);
-
+            resource = buildResource(key, params);
+            set(paramsKey, resource);
             params.hasChanged(false);
         }
-        return resource.get();
+        return resource;
     }
 
     /**
