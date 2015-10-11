@@ -108,7 +108,8 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
         synchronized (this.componentMap) {
 
-            final R readyObject = this.componentMap.get(uniqueKey).get();
+            // Try to grab the object we want to unregister
+            final E readyObject = getReadyObject(uniqueKey);
 
             if (readyObject != null) {
 
@@ -185,25 +186,14 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
     @Override
     public <E extends R> E retrieve(final UniqueKey<E> uniqueKey) {
 
-        E readyObject = null;
+        E readyObject = getReadyObject(uniqueKey);
 
-        synchronized (this.componentMap) {
-            // retrieve the component from the singleton map
-            // It the component is already registered, get it to return it
-            if (exists(uniqueKey)) {
-
-                // If no key is provided retrieve from the singleton map
-                // Extract the value from the weak reference
-                readyObject = (E) this.componentMap.get(uniqueKey).get();
-            }
-        }
-
+        // If the component isn't contained into the component map, create and register it
+        // or has been collected by the gc
         if (readyObject == null) {
-            // If the component isn't contained into the component map, create and register it
             try {
 
                 // Build the new instance of the component
@@ -221,6 +211,34 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             }
         }
 
+        return readyObject;
+    }
+
+    /**
+     * Check the presence of the Object and return it if possible otherwise return null.
+     * 
+     * @param uniqueKey the unqiueKey of thesearch object
+     * 
+     * @return the readyObject or null
+     */
+    @SuppressWarnings("unchecked")
+    private <E extends R> E getReadyObject(final UniqueKey<E> uniqueKey) {
+
+        E readyObject = null;
+        synchronized (this.componentMap) {
+            // retrieve the component from the singleton map
+            // It the component is already registered, get it to return it
+            if (exists(uniqueKey)) {
+
+                final WeakReference<R> weakReference = this.componentMap.get(uniqueKey);
+                // Check that the reference is not null
+                if (weakReference != null) {
+                    // If no key is provided retrieve from the singleton map
+                    // Extract the value from the weak reference
+                    readyObject = (E) weakReference.get();
+                }
+            }
+        }
         return readyObject;
     }
 
@@ -259,6 +277,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         } else if (readyObject instanceof Command) {
             type = JRebirthEventType.CREATE_COMMAND;
         }
+
         // Track this instantiation event
         getGlobalFacade().trackEvent(type, this.getClass(), readyObject.getClass());
 
