@@ -37,9 +37,9 @@ import javafx.util.Duration;
 
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.ui.DefaultModel;
-import org.jrebirth.presentation.model.AnimationType;
-import org.jrebirth.presentation.model.Slide;
-import org.jrebirth.presentation.model.SlideContent;
+import org.jrebirth.af.presentation.model.AnimationType;
+import org.jrebirth.af.presentation.model.Slide;
+import org.jrebirth.af.presentation.model.SlideContent;
 
 /**
  * The class <strong>AbstractSlideModel</strong>.

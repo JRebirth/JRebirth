@@ -17,9 +17,9 @@
  */
 package org.jrebirth.af.presentation.ui.qanda;
 
+import org.jrebirth.af.presentation.model.SlideContent;
 import org.jrebirth.af.presentation.ui.base.AbstractSlideModel;
 import org.jrebirth.af.presentation.ui.base.SlideStep;
-import org.jrebirth.presentation.model.SlideContent;
 
 /**
  * The class <strong>QandAModel</strong>.

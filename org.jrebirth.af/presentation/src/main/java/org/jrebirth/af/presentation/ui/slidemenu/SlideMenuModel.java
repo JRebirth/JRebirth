@@ -23,8 +23,8 @@ import java.util.List;
 import org.jrebirth.af.api.annotation.LinkComponent;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.ui.object.DefaultObjectModel;
+import org.jrebirth.af.presentation.model.Slide;
 import org.jrebirth.af.presentation.service.PresentationService;
-import org.jrebirth.presentation.model.Slide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

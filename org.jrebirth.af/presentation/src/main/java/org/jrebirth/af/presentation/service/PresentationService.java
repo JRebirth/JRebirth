@@ -30,9 +30,9 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import org.jrebirth.af.core.service.DefaultService;
+import org.jrebirth.af.presentation.model.Presentation;
+import org.jrebirth.af.presentation.model.Slide;
 import org.jrebirth.af.presentation.resources.PrezParameters;
-import org.jrebirth.presentation.model.Presentation;
-import org.jrebirth.presentation.model.Slide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +58,7 @@ public final class PresentationService extends DefaultService {
         final String configName = PrezParameters.XML_FILE_LOCATION.get();
 
         try {
-            final JAXBContext jaxbContext = JAXBContext.newInstance("org.jrebirth.presentation.model");
+            final JAXBContext jaxbContext = JAXBContext.newInstance("org.jrebirth.af.presentation.model");
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
             final InputStreamReader in = new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream(configName + ".xml"), StandardCharsets.UTF_8);

@@ -33,12 +33,12 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.presentation.model.Slide;
 import org.jrebirth.af.presentation.service.PresentationService;
 import org.jrebirth.af.presentation.ui.base.AbstractSlideModel.SlideFlow;
 import org.jrebirth.af.presentation.ui.base.SlideModel;
 import org.jrebirth.af.presentation.ui.base.SlideStep;
 import org.jrebirth.af.presentation.ui.slidemenu.SlideMenuModel;
-import org.jrebirth.presentation.model.Slide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
