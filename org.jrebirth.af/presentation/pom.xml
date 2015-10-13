@@ -31,7 +31,7 @@
 				<configuration>
 					<schemaDirectory>${basedir}/src/main/resources/presentation/</schemaDirectory>
 					<schemaFiles>Presentation.xsd</schemaFiles>
-					<packageName>org.jrebirth.presentation.model</packageName>
+					<packageName>org.jrebirth.af.presentation.model</packageName>
 					<outputDirectory>${basedir}/target/generated-sources</outputDirectory>
 				</configuration>
 			</plugin>

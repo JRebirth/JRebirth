@@ -70,13 +70,13 @@ import javafx.util.Duration;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.image.RelImage;
+import org.jrebirth.af.presentation.model.SlideContent;
+import org.jrebirth.af.presentation.model.SlideItem;
 import org.jrebirth.af.presentation.resources.PrezColors;
 import org.jrebirth.af.presentation.resources.PrezFonts;
 import org.jrebirth.af.presentation.resources.PrezImages;
 import org.jrebirth.af.presentation.ui.base.AbstractSlideView;
 import org.jrebirth.af.presentation.ui.base.SlideStep;
-import org.jrebirth.presentation.model.SlideContent;
-import org.jrebirth.presentation.model.SlideItem;
 
 /**
  *

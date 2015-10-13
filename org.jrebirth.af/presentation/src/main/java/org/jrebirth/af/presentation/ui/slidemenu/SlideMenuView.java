@@ -34,7 +34,7 @@ import org.jrebirth.af.core.ui.DefaultView;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.presentation.PrezWaves;
 import org.jrebirth.af.presentation.command.ShowSlideCommand;
-import org.jrebirth.presentation.model.Slide;
+import org.jrebirth.af.presentation.model.Slide;
 
 /**
  *
