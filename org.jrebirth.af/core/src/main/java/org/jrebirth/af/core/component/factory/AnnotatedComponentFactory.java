@@ -8,21 +8,25 @@ import org.jrebirth.af.core.facade.FacadeMessages;
 import org.jrebirth.af.core.util.MultiMap;
 
 /**
- * The class <strong>DefaultComponentFactory</strong>.
+ * The class <strong>AnnotatedComponentFactory</strong>.
  *
  * @author Sébastien Bordes
  */
 public final class AnnotatedComponentFactory implements ComponentFactory, FacadeMessages {
 
+    /** The MultiMap taht sotore all implementation per interface. */
     private final MultiMap<Class<?>, Class<?>> implementations = new MultiMap<>();
 
     /**
-     *
+     * Default Constructor.
      */
     public AnnotatedComponentFactory() {
         super();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void register(final Class<? extends Component<?>> interfaceClass, final Class<? extends Component<?>> implClass) {
 
@@ -39,6 +43,7 @@ public final class AnnotatedComponentFactory implements ComponentFactory, Facade
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public <R> R buildComponent(final Class<R> clazz) throws CoreException {
 
