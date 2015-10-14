@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.component.behavior;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.jrebirth.af.api.annotation.SkipAnnotation;
 import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.component.behavior.Behavior;
@@ -136,16 +139,31 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
     @Override
     @SuppressWarnings("unchecked")
     public <BD extends BehaviorData, B extends Behavior<BD>> B getBehavior(final Class<B> behaviorClass) {
-        return this.behaviors == null ? null : (B) this.behaviors.get(behaviorClass);
+
+        B behavior = null;
+        if (this.behaviors == null && this.behaviors.get(behaviorClass) instanceof List) {
+
+            final Optional<B> oBehavior = (Optional<B>) this.behaviors.get(behaviorClass).stream().findFirst();
+            if (oBehavior.isPresent()) {
+                behavior = oBehavior.orElse(null);
+            }
+        }
+
+        return behavior;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
     public <BD extends BehaviorData, B extends Behavior<BD>> BD getBehaviorData(final Class<B> behaviorClass) {
-        return this.behaviors == null ? null : (BD) this.behaviors.get(behaviorClass).get(0).getData();
+
+        BD data = null;
+        final B behavior = getBehavior(behaviorClass);
+        if (behavior != null) {
+            data = behavior.getData();
+        }
+        return data;
     }
 
 }
