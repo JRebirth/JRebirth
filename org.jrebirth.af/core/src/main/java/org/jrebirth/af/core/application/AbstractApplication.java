@@ -291,6 +291,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     public final void stop() throws CoreException {
         try {
             LOGGER.log(STOP_APPLICATION, this.getClass().getSimpleName());
+            preStop();
             super.stop();
 
             // Hide the stage is this method wasn't call by user
@@ -318,6 +319,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
                 }
             } while (JRebirthThread.getThread().isAlive());
 
+            postStop();
             LOGGER.log(STOPPED_SUCCESSFULLY, this.getClass().getSimpleName());
 
         } catch (final Exception e) { // NOSONAR Catch all exception during stopping phase
@@ -325,6 +327,18 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             throw new CoreException(e);
         }
     }
+
+    /**
+     * Perform custom task before application stop phase.
+     */
+    protected abstract void preStop();
+
+    /**
+     * Perform custom task after application stop.
+     * Careful: this method if called after JRebirth shutdown process. So you must not effectuate things that would be
+     * used JRebirth action here (like sending a wave, get a service...)
+     */
+    protected abstract void postStop();
 
     /**
      * Customize the primary Stage.
