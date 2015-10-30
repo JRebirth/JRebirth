@@ -1,16 +1,15 @@
 package org.jrebirth.af.core.application;
 
-import java.util.Collections;
-import java.util.List;
-
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.resource.ResourceItem;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -37,6 +36,22 @@ public class DefaultApplication<P extends Pane> extends AbstractApplication<P> {
      */
     @Override
     protected void postInit() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void preStop() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void postStop() {
         // Nothing to do yet
     }
 
