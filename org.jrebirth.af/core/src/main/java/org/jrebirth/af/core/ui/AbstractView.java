@@ -23,11 +23,14 @@ import java.lang.reflect.Field;
 import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventTarget;
 import javafx.scene.Node;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.PaneBuilder;
+import javafx.stage.Window;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.facade.JRebirthEventType;
@@ -237,18 +240,18 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         // For each field annotation we will attach an event handler
         for (final Annotation a : property.getAnnotations()) {
 
-            if (Node.class.isAssignableFrom(property.getType())) {
+            if (EventTarget.class.isAssignableFrom(property.getType())) {
 
                 // Manage only JRebirth OnXxxxx annotations
                 if (a.annotationType().getName().startsWith(BASE_ANNOTATION_NAME)) {
 
                     try {
                         // Retrieve the property value
-                        final Node node = (Node) property.get(this);
+                        final EventTarget target = (EventTarget) property.get(this);
 
                         // Process the annotation if the node is not null
-                        if (node != null && getController() instanceof AbstractController) {
-                            addHandler(node, a);
+                        if (target != null && getController() instanceof AbstractController) {
+                            addHandler(target, a);
                         }
 
                     } catch (IllegalArgumentException | IllegalAccessException e) {
@@ -281,17 +284,30 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     /**
      * Add an event handler on the given node according to annotation OnXxxxx.
      *
-     * @param node the graphical node, must be not null
+     * @param target the graphical node, must be not null (is a subtype of EventTarget)
      * @param annotation the OnXxxx annotation
      *
      * @throws CoreException if an error occurred while linking the event handler
      */
-    private void addHandler(final Node node, final Annotation annotation) throws CoreException {
+    private void addHandler(final EventTarget target, final Annotation annotation) throws CoreException {
 
         // Build the auto event handler for this annotation
         final AnnotationEventHandler<Event> aeh = new AnnotationEventHandler<>(this.callbackObject, annotation);
+
         for (final EnumEventType eet : (EnumEventType[]) ClassUtility.getAnnotationAttribute(annotation, "value")) {
-            node.addEventHandler(eet.eventType(), aeh);
+            if (target instanceof Node) {
+                ((Node) target).addEventHandler(eet.eventType(), aeh);
+            } else if (target instanceof MenuItem) {
+
+                if (eet.eventType() == ActionEvent.ACTION) {
+                    ((MenuItem) target).addEventHandler(ActionEvent.ACTION, new AnnotationEventHandler<>(this.callbackObject, annotation));
+                } else {
+                    ((MenuItem) target).setOnMenuValidation(aeh);
+                }
+            } else if (target instanceof Window) {
+
+                ((Window) target).addEventHandler(eet.eventType(), aeh);
+            }
         }
 
     }
