@@ -3,10 +3,25 @@
 Release Notes
 ==============
 
+8.0.5 - Release 2016-01-10
+-----------------------------------------
+
+This release fixes some bugs, it was performed on the hotfixes branch.
+
+
+-  Add preStop and postStop methods to perform custom task when exiting app [#184](http://github.com/JRebirth/JRebirth/issues/issue/184)<br/>
+Extend Application API to better handle application closure.
+
+
+- Manage OnAction for MenuItem [#183](http://github.com/JRebirth/JRebirth/issues/issue/183)<br/>
+Improve management of Annotation Event Handler to support edge cases.
+
+
+
 8.0.4 - Release 2015-10-06
 -----------------------------------------
 
-This release fixes some bugs, it was performed ont the hotfixes branch.
+This release fixes some bugs, it was performed on the hotfixes branch.
 
 
 - WebView can't be created into JTP [#140](http://github.com/JRebirth/JRebirth/issues/issue/140)<br/>
