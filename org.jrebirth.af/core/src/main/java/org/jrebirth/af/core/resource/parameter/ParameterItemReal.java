@@ -39,6 +39,7 @@ public interface ParameterItemReal<T extends Object> extends ParameterItem<T> {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     default ResourceBuilder<ParameterItem<?>, ParameterParams, T> builder() {
         return (ResourceBuilder<ParameterItem<?>, ParameterParams, T>) ResourceBuilders.PARAMETER_BUILDER;

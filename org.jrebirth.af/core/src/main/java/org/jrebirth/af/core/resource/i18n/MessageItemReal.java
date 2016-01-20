@@ -107,7 +107,7 @@ public interface MessageItemReal extends MessageItem {
     /**
      * The interface <strong>Log</strong> used to declare Message Resource fro logging.
      */
-    interface Log extends MessageItem {
+    interface Log extends MessageItemReal {
 
         /**
          * Build and register a {@link LogMessage}.
@@ -127,7 +127,7 @@ public interface MessageItemReal extends MessageItem {
      *
      * The key of the i18n message.
      */
-    interface Msg extends MessageItem {
+    interface Msg extends MessageItemReal {
 
         /**
          * Build and register a {@link Message}.
