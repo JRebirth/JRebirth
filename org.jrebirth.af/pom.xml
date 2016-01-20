@@ -10,7 +10,7 @@
 
 	<groupId>org.jrebirth</groupId>
 	<artifactId>af</artifactId>
-	<version>8.0.5</version>
+	<version>8.1.0-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 	<name>JRebirth Application Framework</name>
@@ -64,8 +64,7 @@
 		<connection>scm:git:git://github.com/JRebirth/JRebirth.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth.git</developerConnection>
 		<url>https://github.com/JRebirth/JRebirth/tree/8.x</url>
-	  <tag>jrebirth-8.0.5-SNAPSHOT</tag>
-  </scm>
+	</scm>
 
 	<licenses>
 		<license>
@@ -105,7 +104,7 @@
 
 		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, it's not yet implemented: see MNG-2216 -->
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
-		
+
 		<plugins>
 
 			<plugin>
@@ -117,67 +116,18 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 				<version>2.7</version>
 			</plugin>
-<!-- 
-			<plugin>
-				<groupId>org.apache.maven.doxia</groupId>
-				<artifactId>doxia-book-maven-plugin</artifactId>
-				<version>1.3-SNAPSHOT</version>
-				<executions>
-					<execution>
-						<phase>pre-site</phase>
-						<goals>
-							<goal>render-books</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<books>
-						<book>
-							<directory>src/site/xdoc/doc</directory>
-							<descriptor>src/site/jrebirth-book.xml</descriptor>
-							<formats>
-								<format>
-									<id>latex</id>
-								</format>
-								<format>
-									<id>xdoc</id>
-								</format>
-								<format>
-									<id>pdf</id>
-								</format>
-								<format>
-									<id>rtf</id>
-								</format>
-							</formats>
-						</book>
-					</books>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.doxia</groupId>
-						<artifactId>doxia-core</artifactId>
-						<version>1.4</version>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.maven.doxia</groupId>
-						<artifactId>doxia-module-fml</artifactId>
-						<version>1.4</version>
-					</dependency>
-					<dependency>
-						<groupId>org.tinyjee.dim</groupId>
-						<artifactId>doxia-include-macro</artifactId>
-						<version>1.1</version>
-					</dependency>
-				</dependencies>
-			</plugin>
--->
-			
+			<!-- <plugin> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-book-maven-plugin</artifactId> <version>1.3-SNAPSHOT</version> <executions> <execution> <phase>pre-site</phase> <goals> <goal>render-books</goal> 
+				</goals> </execution> </executions> <configuration> <books> <book> <directory>src/site/xdoc/doc</directory> <descriptor>src/site/jrebirth-book.xml</descriptor> <formats> <format> <id>latex</id> </format> 
+				<format> <id>xdoc</id> </format> <format> <id>pdf</id> </format> <format> <id>rtf</id> </format> </formats> </book> </books> </configuration> <dependencies> <dependency> <groupId>org.apache.maven.doxia</groupId> 
+				<artifactId>doxia-core</artifactId> <version>1.4</version> </dependency> <dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-fml</artifactId> <version>1.4</version> </dependency> 
+				<dependency> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> <version>1.1</version> </dependency> </dependencies> </plugin> -->
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
@@ -232,7 +182,8 @@
 			</plugin>
 
 			<!-- Copy UML Class Diagram -->
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> <executions> <execution> <id>UML recopy</id> <phase>pre-site</phase> <configuration> <tasks> <copy todir="${project.build.directory}/site/doc/uml/"> <fileset dir="${basedir}/src/main/uml/*.png" /> </copy> </tasks> </configuration> <goals> <goal>run</goal> </goals> </execution> </executions> </plugin> -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> <executions> <execution> <id>UML recopy</id> <phase>pre-site</phase> <configuration> <tasks> <copy 
+				todir="${project.build.directory}/site/doc/uml/"> <fileset dir="${basedir}/src/main/uml/*.png" /> </copy> </tasks> </configuration> <goals> <goal>run</goal> </goals> </execution> </executions> </plugin> -->
 
 
 			<!-- Project Quality -->
@@ -317,10 +268,10 @@
 			<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url>
 		</site>
 	</distributionManagement>
-	
+
 	<profiles>
-			<!-- Override Bintray profile to use another Bintray Package -->
-			<profile>
+		<!-- Override Bintray profile to use another Bintray Package -->
+		<profile>
 			<id>Bintray</id>
 			<properties>
 				<!-- Release repository -->
@@ -334,5 +285,5 @@
 			</properties>
 		</profile>
 	</profiles>
-	
+
 </project>
