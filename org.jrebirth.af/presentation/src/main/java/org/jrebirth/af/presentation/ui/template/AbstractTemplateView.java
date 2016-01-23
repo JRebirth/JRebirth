@@ -256,8 +256,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                                                                    .delay(Duration.millis(200))
                                                                    .keyFrames(
                                                                               new KeyFrame(Duration.millis(0), new KeyValue(this.rectangle.widthProperty(), 0)),
-                                                                              new KeyFrame(Duration.millis(600), new KeyValue(this.rectangle.widthProperty(), 90))
-                                                                   )
+                                                                              new KeyFrame(Duration.millis(600), new KeyValue(this.rectangle.widthProperty(), 90)))
                                                                    .build(),
                                                     ParallelTransitionBuilder
                                                                              .create().delay(Duration.millis(400))
@@ -275,11 +274,9 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                                                                                                              .fromY(0)
                                                                                                              .toX(1)
                                                                                                              .toY(1)
-                                                                                                             .build()
-                                                                             )
+                                                                                                             .build())
                                                                              .node(this.slideContent)
-                                                                             .build()
-                                 )
+                                                                             .build())
                                  .build().play();
     }
 
@@ -594,7 +591,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     }
 
     @Override
-    public boolean isReadyForSlidesStepUpdate(boolean isReverse) {
+    public boolean isReadyForSlidesStepUpdate(final boolean isReverse) {
 
         if (this.slideStepAnimation != null && this.slideStepAnimation.getStatus() == Animation.Status.RUNNING) {
 
@@ -645,10 +642,8 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                                                                                                                                                  Duration.millis(1),
                                                                                                                                                  new KeyValue(
                                                                                                                                                               this.currentSubSlide.visibleProperty(),
-                                                                                                                                                              false))
-                                                                                                                         )
-                                                                                                                         .build()
-                                                                                                )
+                                                                                                                                                              false)))
+                                                                                                                         .build())
 
                                                                                                 .build(),
                                                                      SequentialTransitionBuilder.create()
@@ -665,18 +660,15 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                                                                                                                                                  Duration.millis(1),
                                                                                                                                                  new KeyValue(
                                                                                                                                                               nextSlide.visibleProperty(),
-                                                                                                                                                              true))
-                                                                                                                         )
+                                                                                                                                                              true)))
                                                                                                                          .build(),
                                                                                                           TranslateTransitionBuilder.create()
                                                                                                                                     .duration(Duration.millis(400))
                                                                                                                                     .fromY(700)
                                                                                                                                     .toY(0)
                                                                                                                                     // .fromZ(-10)
-                                                                                                                                    .build()
-                                                                                                )
-                                                                                                .build()
-                                                           )
+                                                                                                                                    .build())
+                                                                                                .build())
                                                            .build();
         this.slideStepAnimation.play();
 

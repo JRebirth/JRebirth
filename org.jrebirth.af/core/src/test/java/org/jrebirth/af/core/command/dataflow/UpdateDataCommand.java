@@ -6,6 +6,7 @@ import org.jrebirth.af.core.command.single.internal.DefaultCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.JRebirthItems;
+
 import org.junit.Assert;
 
 public class UpdateDataCommand extends DefaultCommand {

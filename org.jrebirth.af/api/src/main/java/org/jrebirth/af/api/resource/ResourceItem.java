@@ -29,7 +29,9 @@ import org.jrebirth.af.api.resource.builder.ResourceBuilder;
  *
  * @param <I> the resource item
  * @param <R> The resource managed
- * @param <P> the resource parameter
+ * @param
+ *        <P>
+ *        the resource parameter
  */
 @FunctionalInterface
 public interface ResourceItem<I, P, R> {

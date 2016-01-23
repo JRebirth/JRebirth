@@ -478,8 +478,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
                                                                        .fromValue(show ? 0.0 : 1.0)
                                                                        .toValue(show ? 1.0 : 0.0)
                                                                        .duration(Duration.seconds(1))
-                                                                       .build()
-                                        )
+                                                                       .build())
                                         .build();
     }
 
@@ -517,10 +516,8 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
                                                                             new KeyFrame(Duration.millis(100), new KeyValue(mb.radiusProperty(), 50)),
                                                                             new KeyFrame(Duration.millis(500), new KeyValue(mb.radiusProperty(), 63)),
                                                                             new KeyFrame(Duration.millis(900), new KeyValue(mb.radiusProperty(), 50)),
-                                                                            new KeyFrame(Duration.millis(1000), new KeyValue(mb.radiusProperty(), 0))
-                                                                 )
-                                                                 .build()
-                                        )
+                                                                            new KeyFrame(Duration.millis(1000), new KeyValue(mb.radiusProperty(), 0)))
+                                                                 .build())
                                         .build();
     }
 

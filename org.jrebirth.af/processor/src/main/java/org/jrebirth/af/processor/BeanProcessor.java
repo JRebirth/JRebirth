@@ -46,15 +46,16 @@ import javax.tools.JavaFileObject;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
 import org.jrebirth.af.modular.model.ObjectFactory;
 import org.jrebirth.af.processor.annotation.Register;
 import org.jrebirth.af.processor.annotation.RegistrationPoint;
 import org.jrebirth.af.processor.annotation.bean.Bean;
 import org.jrebirth.af.processor.util.FXBeanDefinition;
 import org.jrebirth.af.processor.util.FXPropertyDefinition;
+
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 
 /**
  * The Class BeanProcessor.
@@ -83,7 +84,7 @@ public class BeanProcessor extends AbstractProcessor {
 
         this.factory = new ObjectFactory();
         try {
-            this.jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", ObjectFactory.class.getClassLoader());
+            this.jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", Thread.currentThread().getContextClassLoader());
         } catch (final JAXBException e) {
             e.printStackTrace();
         }

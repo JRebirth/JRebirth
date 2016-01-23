@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.jrebirth.af.api.resource.fxml.FXMLItem;
 import org.jrebirth.af.api.ui.fxml.FXMLComponent;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

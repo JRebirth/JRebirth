@@ -1,6 +1,7 @@
 package org.jrebirth.af.core.link;
 
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+
 import org.junit.Before;
 import org.junit.Test;
 

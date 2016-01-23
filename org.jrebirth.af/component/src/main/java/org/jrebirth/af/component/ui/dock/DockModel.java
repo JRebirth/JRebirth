@@ -34,6 +34,7 @@ import org.jrebirth.af.core.ui.object.DefaultObjectModel;
 import org.jrebirth.af.core.util.ObjectUtility;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.WaveItemBase;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -109,14 +110,12 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
 
             if (change.wasRemoved()) {
                 Platform.runLater(
-                        () -> getView().removeContainer((List<TabConfig>) change.getRemoved())
-                        );
+                                  () -> getView().removeContainer((List<TabConfig>) change.getRemoved()));
             }
 
             if (change.wasAdded()) {
                 Platform.runLater(
-                        () -> getView().addContainer(change.getFrom(), change.getList().get(change.getFrom()))
-                        );
+                                  () -> getView().addContainer(change.getFrom(), change.getList().get(change.getFrom())));
             }
 
         }

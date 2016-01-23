@@ -4,12 +4,12 @@ import static org.junit.Assert.assertNotNull;
 
 import org.jrebirth.af.core.application.TestApplication;
 import org.jrebirth.af.core.command.basic.SwitchFullScreenCommand;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -17,7 +17,7 @@ import org.junit.Test;
  *
  * @author Sébastien Bordes
  */
-//@Ignore
+// @Ignore
 public class FacadeTest {
 
     private static GlobalFacadeBase globalFacade;

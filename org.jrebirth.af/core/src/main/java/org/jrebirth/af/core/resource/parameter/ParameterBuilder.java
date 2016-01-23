@@ -43,7 +43,8 @@ import org.jrebirth.af.core.util.ClasspathUtility;
  *
  * @author Sébastien Bordes
  */
-public final class ParameterBuilder extends AbstractResourceBuilder<ParameterItem<?>, ParameterParams, Object> implements ResourceBuilder<ParameterItem<?>, ParameterParams, Object>, ParameterMessages {
+public final class ParameterBuilder extends AbstractResourceBuilder<ParameterItem<?>, ParameterParams, Object>
+        implements ResourceBuilder<ParameterItem<?>, ParameterParams, Object>, ParameterMessages {
 
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(ParameterBuilder.class);

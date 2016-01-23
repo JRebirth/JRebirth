@@ -33,6 +33,7 @@ import org.jrebirth.af.core.ui.object.DefaultObjectModel;
 import org.jrebirth.af.core.util.ObjectUtility;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.WaveItemBase;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -114,14 +115,12 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
 
             if (change.wasRemoved()) {
                 Platform.runLater(
-                        () -> getView().removeTab((List<Dockable>) change.getRemoved())
-                        );
+                                  () -> getView().removeTab((List<Dockable>) change.getRemoved()));
             }
 
             if (change.wasAdded()) {
                 Platform.runLater(
-                        () -> getView().addTab(change.getFrom(), change.getList().get(change.getFrom()))
-                        );
+                                  () -> getView().addTab(change.getFrom(), change.getList().get(change.getFrom())));
             }
 
         }

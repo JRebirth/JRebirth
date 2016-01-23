@@ -5,6 +5,7 @@ import javafx.application.Platform;
 
 import org.jrebirth.af.api.application.JRebirthApplication;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

@@ -14,6 +14,7 @@ import org.jrebirth.af.core.command.basic.UpdateCursorCommand;
 import org.jrebirth.af.core.facade.CommandFacade;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
 import org.jrebirth.af.core.ui.DefaultModel;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -131,7 +132,7 @@ public class KeyTest {
         System.out.println(strongList.size() + " items strongly retained");
     }
 
-    private <C extends Command> void checkComponentCount(Class<C> componentClass, int nb) {
+    private <C extends Command> void checkComponentCount(final Class<C> componentClass, final int nb) {
         final long begin = System.currentTimeMillis();
 
         final List<?> kcList = this.commandFacade.retrieveAll(Key.create(componentClass));

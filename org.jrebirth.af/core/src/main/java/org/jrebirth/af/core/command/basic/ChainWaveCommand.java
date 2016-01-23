@@ -23,6 +23,7 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveListener;
 import org.jrebirth.af.core.command.single.internal.DefaultCommand;
 import org.jrebirth.af.core.wave.JRebirthWaves;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

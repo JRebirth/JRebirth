@@ -18,6 +18,7 @@
 package org.jrebirth.af.api.service;
 
 import javafx.concurrent.Worker;
+
 import org.jrebirth.af.api.wave.Wave;
 
 /**

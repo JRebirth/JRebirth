@@ -25,10 +25,16 @@ import javafx.scene.input.MouseEvent;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultController;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * The Class TabController.
  */
 public class TabController extends DefaultController<TabModel, TabView> {
+
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(TabController.class);
 
     /**
      * The Constructor.
@@ -78,7 +84,7 @@ public class TabController extends DefaultController<TabModel, TabView> {
             tabButton.setOnAction(getHandler(ActionEvent.ACTION));
 
         } catch (final CoreException ce) {
-            ce.printStackTrace();
+            LOGGER.error("Error while attaching event handler", ce);
         }
     }
 

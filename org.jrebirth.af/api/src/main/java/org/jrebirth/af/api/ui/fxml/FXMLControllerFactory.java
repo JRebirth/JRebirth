@@ -6,7 +6,7 @@ import org.jrebirth.af.api.ui.Model;
 
 /**
  * The interface <strong>FXMLControllerFactory</strong>.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface FXMLControllerFactory extends Callback<Class<?>, Object> {

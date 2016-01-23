@@ -126,42 +126,41 @@ public class QandAView extends AbstractSlideView<QandAModel, BorderPane, QandACo
         if (this.transition == null) {
             this.transition =
 
-                    ParallelTransitionBuilder.create().children(
-                                                                ScaleTransitionBuilder.create()
-                                                                                      .node(this.firstText)
-                                                                                      .duration(Duration.millis(800))
-                                                                                      .interpolator(Interpolator.EASE_IN)
-                                                                                      .fromX(1)
-                                                                                      .fromY(1)
-                                                                                      .toX(0)
-                                                                                      .toY(0)
-                                                                                      .build(),
-                                                                TranslateTransitionBuilder.create()
-                                                                                          .node(this.firstText)
-                                                                                          .duration(Duration.millis(800))
-                                                                                          .interpolator(Interpolator.EASE_IN)
-                                                                                          .fromY(0)
-                                                                                          .toY(600)
-                                                                                          .build(),
-                                                                ScaleTransitionBuilder.create()
-                                                                                      .node(this.secondText)
-                                                                                      // .delay(Duration.millis(200))
-                                                                                      .duration(Duration.millis(1000))
-                                                                                      .interpolator(Interpolator.EASE_IN)
-                                                                                      .fromX(100)
-                                                                                      .fromY(100)
-                                                                                      .toX(1)
-                                                                                      .toY(1)
-                                                                                      .build(),
-                                                                TranslateTransitionBuilder.create()
-                                                                                          .node(this.secondText)
-                                                                                          .duration(Duration.millis(800))
-                                                                                          .interpolator(Interpolator.EASE_IN)
-                                                                                          .fromY(-600)
-                                                                                          .toY(0)
-                                                                                          .build()
-                                             )
-                                             .build();
+            ParallelTransitionBuilder.create().children(
+                                                        ScaleTransitionBuilder.create()
+                                                                              .node(this.firstText)
+                                                                              .duration(Duration.millis(800))
+                                                                              .interpolator(Interpolator.EASE_IN)
+                                                                              .fromX(1)
+                                                                              .fromY(1)
+                                                                              .toX(0)
+                                                                              .toY(0)
+                                                                              .build(),
+                                                        TranslateTransitionBuilder.create()
+                                                                                  .node(this.firstText)
+                                                                                  .duration(Duration.millis(800))
+                                                                                  .interpolator(Interpolator.EASE_IN)
+                                                                                  .fromY(0)
+                                                                                  .toY(600)
+                                                                                  .build(),
+                                                        ScaleTransitionBuilder.create()
+                                                                              .node(this.secondText)
+                                                                              // .delay(Duration.millis(200))
+                                                                              .duration(Duration.millis(1000))
+                                                                              .interpolator(Interpolator.EASE_IN)
+                                                                              .fromX(100)
+                                                                              .fromY(100)
+                                                                              .toX(1)
+                                                                              .toY(1)
+                                                                              .build(),
+                                                        TranslateTransitionBuilder.create()
+                                                                                  .node(this.secondText)
+                                                                                  .duration(Duration.millis(800))
+                                                                                  .interpolator(Interpolator.EASE_IN)
+                                                                                  .fromY(-600)
+                                                                                  .toY(0)
+                                                                                  .build())
+                                     .build();
 
         }
         return this.transition;

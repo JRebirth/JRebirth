@@ -26,8 +26,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.util.Pair;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -37,11 +35,13 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import javafx.util.Pair;
+
 import org.jrebirth.af.modular.model.Component;
 import org.jrebirth.af.modular.model.Module;
-import org.jrebirth.af.modular.model.ObjectFactory;
 import org.jrebirth.af.modular.model.Registration;
 import org.jrebirth.af.modular.model.RegistrationEntry;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -89,7 +89,7 @@ public final class ModuleConfigFileParser {
      * Parses the Module.xml.
      *
      * @param fileName the module file name
-     * 
+     *
      * @return the module object
      */
     public static Module parseFile(final String fileName) {
@@ -97,14 +97,14 @@ public final class ModuleConfigFileParser {
         Module module = null;
 
         // Reference the Module.xml file
-        final File file = new File(fileName);
+        // final File file = new File(fileName);
 
-        final ObjectFactory factory = new ObjectFactory();
+        // final ObjectFactory factory = new ObjectFactory();
 
         JAXBContext jaxbContext;
         try {
             // Load the JAXB context
-            jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", ObjectFactory.class.getClassLoader());
+            jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", Thread.currentThread().getContextClassLoader());
 
             // Prepare the unmarshaller
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -132,7 +132,7 @@ public final class ModuleConfigFileParser {
      * Get all Component Registrations by pair Interface + Implementation.
      *
      * @param fileName the Module file name
-     * 
+     *
      * @return the registrations
      */
     public static List<Pair<Class<?>, Class<?>>> getRegistrations(final String fileName) {
@@ -165,12 +165,12 @@ public final class ModuleConfigFileParser {
 
     /**
      * CReate a pair object with interface+implementation.
-     * 
+     *
      * @param rl the interface definition
      * @param re the implementation definition
-     * 
+     *
      * @return the pair object
-     * 
+     *
      * @throws ClassNotFoundException if one of the class cannot be loaded
      */
     private static Pair<Class<?>, Class<?>> createPair(final Registration rl, final RegistrationEntry re) throws ClassNotFoundException {
@@ -181,7 +181,7 @@ public final class ModuleConfigFileParser {
      * Get the list of Component to start during WarmUp.
      *
      * @param fileName the module file name
-     * 
+     *
      * @return the warm up
      */
     public static List<Class<?>> getWarmUp(final String fileName) {
@@ -214,7 +214,7 @@ public final class ModuleConfigFileParser {
      *
      * @param className the class name
      * @return the class object
-     * 
+     *
      * @throws ClassNotFoundException the class not found exception
      */
     private static Class<?> getClassObject(final String className) throws ClassNotFoundException {

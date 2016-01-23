@@ -3,6 +3,7 @@ package org.jrebirth.af.core.ui.annotation;
 import javafx.scene.Node;
 
 import org.jrebirth.af.core.test.AbstractTest;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

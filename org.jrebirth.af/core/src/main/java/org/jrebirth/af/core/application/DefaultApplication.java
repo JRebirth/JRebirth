@@ -1,15 +1,16 @@
 package org.jrebirth.af.core.application;
 
+import java.util.Collections;
+import java.util.List;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.resource.ResourceItem;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  *
@@ -19,7 +20,9 @@ import java.util.List;
  *
  * @author Sébastien Bordes
  *
- * @param <P> The root node of the stage, must extends Pane to allow children management
+ * @param
+ *        <P>
+ *        The root node of the stage, must extends Pane to allow children management
  */
 public class DefaultApplication<P extends Pane> extends AbstractApplication<P> {
 

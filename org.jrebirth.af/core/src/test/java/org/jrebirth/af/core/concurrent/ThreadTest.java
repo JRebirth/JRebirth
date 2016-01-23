@@ -7,6 +7,7 @@ import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.core.application.ApplicationTest;
+
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;

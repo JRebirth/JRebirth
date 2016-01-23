@@ -82,7 +82,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
 
     /**
      * Prepare the view by constructing the root node and all its children.
-     * 
+     *
      * By default this method will be called into JTP but could be done into JAT synchronously by setting the field createViewIntoJAT
      */
     protected abstract void prepareView();

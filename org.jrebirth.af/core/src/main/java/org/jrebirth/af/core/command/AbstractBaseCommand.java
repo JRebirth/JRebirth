@@ -31,6 +31,7 @@ import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.DefaultWaveBean;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

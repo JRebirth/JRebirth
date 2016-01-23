@@ -708,7 +708,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
 
     /**
      * Return the InnerComponent map wrapped into an Optional because it's initialized only on demand.
-     * 
+     *
      * @return the innerComponentMap.
      */
     protected Optional<Map<InnerComponent<?>, Component<?>>> getInnerComponentMap() {
@@ -717,7 +717,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
 
     /**
      * Return the InnerComponent list wrapped into an Optional because it's initialized only on demand.
-     * 
+     *
      * @return the innerComponentList.
      */
     protected Optional<List<Component<?>>> getInnerComponentList() {

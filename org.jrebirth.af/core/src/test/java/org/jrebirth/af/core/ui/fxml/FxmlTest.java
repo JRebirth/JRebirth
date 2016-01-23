@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.text.Text;
 
 import org.jrebirth.af.core.test.AbstractTest;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

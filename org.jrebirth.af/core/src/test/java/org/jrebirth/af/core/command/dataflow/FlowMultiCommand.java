@@ -17,8 +17,7 @@ public class FlowMultiCommand extends DefaultMultiCommand {
         return Arrays.asList(
                              getCommandKey(CreateDataCommand.class),
                              getCommandKey(UpdateDataCommand.class),
-                             getCommandKey(DisplayDataCommand.class)
-                     );
+                             getCommandKey(DisplayDataCommand.class));
     }
 
 }

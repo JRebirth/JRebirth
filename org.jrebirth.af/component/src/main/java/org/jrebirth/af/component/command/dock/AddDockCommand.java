@@ -49,9 +49,9 @@ public class AddDockCommand extends DefaultBeanCommand<DockWaveBean> {
                          .waveType(TabModel.ADD)
                          .componentClass(TabModel.class)
                          .addDatas(Builders.waveData(DockModel.DOCK_KEY, getWaveBean(wave).dockHolderKey())
-                         // ,
-                         // Builders.waveData(DockModel.MODEL, model )
-                         ));
+        // ,
+        // Builders.waveData(DockModel.MODEL, model )
+        ));
 
         // getModel(TabModel.class, getWaveBean(wave).dockConfig()).addTab(model, wave);
     }

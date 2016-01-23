@@ -9,4 +9,3 @@
  * </ul>
  */
 package org.jrebirth.af.core.exception;
-

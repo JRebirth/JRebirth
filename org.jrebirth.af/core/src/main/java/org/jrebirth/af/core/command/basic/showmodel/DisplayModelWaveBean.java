@@ -88,6 +88,8 @@ public class DisplayModelWaveBean implements WaveBean {
      * Sets the show model key.
      *
      * @param showModelKey the new show model key
+     *
+     * @return the DisplayModeWavebean instance being configured
      */
     public DisplayModelWaveBean showModelKey(final UniqueKey<? extends Model> showModelKey) {
         this.showModelKey = showModelKey;
@@ -107,6 +109,8 @@ public class DisplayModelWaveBean implements WaveBean {
      * Sets the hide model key.
      *
      * @param hideModelKey the new hide model key
+     *
+     * @return the DisplayModeWavebean instance being configured
      */
     public DisplayModelWaveBean hideModelKey(final UniqueKey<? extends Model> hideModelKey) {
         this.hideModelKey = hideModelKey;
@@ -129,6 +133,8 @@ public class DisplayModelWaveBean implements WaveBean {
      * Sets the key part.
      *
      * @param keyPart The keyPart to set.
+     *
+     * @return the DisplayModeWavebean instance being configured
      */
     public DisplayModelWaveBean keyPart(final List<Object> keyPart) {
         this.keyPart = keyPart;
@@ -148,6 +154,8 @@ public class DisplayModelWaveBean implements WaveBean {
      * Sets the unique place holder.
      *
      * @param uniquePlaceHolder The uniquePlaceHolder to set.
+     *
+     * @return the DisplayModeWavebean instance being configured
      */
     public DisplayModelWaveBean uniquePlaceHolder(final ObjectProperty<Node> uniquePlaceHolder) {
         this.uniquePlaceHolder = uniquePlaceHolder;
@@ -167,6 +175,8 @@ public class DisplayModelWaveBean implements WaveBean {
      * Sets the children place holder.
      *
      * @param childrenPlaceHolder The childrenPlaceHolder to set.
+     *
+     * @return the DisplayModeWavebean instance being configured
      */
     public DisplayModelWaveBean childrenPlaceHolder(final ObservableList<Node> childrenPlaceHolder) {
         this.childrenPlaceHolder = childrenPlaceHolder;
@@ -186,6 +196,8 @@ public class DisplayModelWaveBean implements WaveBean {
      * Sets the flag that indicates if the child node must be added at the end (true) or at the beginning (false).
      *
      * @param appendChild The appendChild to set.
+     *
+     * @return the DisplayModeWavebean instance being configured
      */
     public DisplayModelWaveBean appendChild(final boolean appendChild) {
         this.appendChild = appendChild;
@@ -205,6 +217,8 @@ public class DisplayModelWaveBean implements WaveBean {
      * Sets the created node.
      *
      * @param model the new created node
+     *
+     * @return the DisplayModeWavebean instance being configured
      */
     public DisplayModelWaveBean showModel(final Model model) {
         this.showModel = model;
@@ -224,6 +238,8 @@ public class DisplayModelWaveBean implements WaveBean {
      * Sets the model instance to hide (ie: with an animation).
      *
      * @param hideModel the new model instance to hide (ie: with an animation)
+     *
+     * @return the DisplayModeWavebean instance being configured
      */
     public DisplayModelWaveBean hideModel(final Model hideModel) {
         this.hideModel = hideModel;

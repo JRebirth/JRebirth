@@ -10,6 +10,7 @@ import org.jrebirth.af.api.resource.image.ImageItem;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

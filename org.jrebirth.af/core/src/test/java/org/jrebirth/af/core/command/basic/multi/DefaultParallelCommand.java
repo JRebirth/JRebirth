@@ -24,7 +24,6 @@ public class DefaultParallelCommand extends DefaultMultiCommand {
     protected List<UniqueKey<? extends Command>> defineSubCommand() {
         return Arrays.asList(
                              getCommandKey(LongCommand.class),
-                             getCommandKey(UiCommand.class)
-                     );
+                             getCommandKey(UiCommand.class));
     }
 }

@@ -102,7 +102,7 @@ public final class ImageSlideView extends
 
         if (getModel().getSlide().getShowAnimation() == null ||
                 !"TileIn".equalsIgnoreCase(getModel().getSlide().getShowAnimation().value())
-                && !"TileIn60k".equalsIgnoreCase(getModel().getSlide().getShowAnimation().value())) {
+                        && !"TileIn60k".equalsIgnoreCase(getModel().getSlide().getShowAnimation().value())) {
 
             getRootNode().getChildren().add(ImageViewBuilder.create()
                                                             .image(this.image)
@@ -187,7 +187,7 @@ public final class ImageSlideView extends
      *
      * @return
      */
-    private FadeTransition getSlideLabelTransition(Duration gap) {
+    private FadeTransition getSlideLabelTransition(final Duration gap) {
         return FadeTransitionBuilder.create()
                                     .node(this.slideLabel)
                                     .delay(gap)
@@ -233,7 +233,8 @@ public final class ImageSlideView extends
                                                          .image(getImage())
                                                          .clip(RectangleBuilder.create().x(x).y(y)
                                                                                .width(tileWidth).height(tileHeight)
-                                                                               .build()).opacity(0.0).layoutX(x)
+                                                                               .build())
+                                                         .opacity(0.0).layoutX(x)
                                                          .layoutY(y).build();
 
                     getRootNode().getChildren().add(iv);
@@ -247,7 +248,8 @@ public final class ImageSlideView extends
                                                                    FadeTransitionBuilder.create().node(iv)
                                                                                         .fromValue(0.0).toValue(1.0)
                                                                                         .duration(getRandomDuration())
-                                                                                        .build()).build());
+                                                                                        .build())
+                                                         .build());
 
                 }
 

@@ -80,11 +80,11 @@ public class TabDemoModel extends DefaultSimpleModel<BorderPane> {
 
     private void addTabWithCommand(final TabConfig tabConfig, final UniqueKey<? extends Model> modelKey) {
         callCommand(AddTabCommand.class,
-                TabWaveBean.create()
-                        // .tabHolderKey(tabHolderKey)
-                        .tabConfig(tabConfig)
-                        // .modelKey(modelKey)
-                        .tab(Dockable.create().modelKey(modelKey).name(modelKey.getValue().toString())));
+                    TabWaveBean.create()
+                               // .tabHolderKey(tabHolderKey)
+                               .tabConfig(tabConfig)
+                               // .modelKey(modelKey)
+                               .tab(Dockable.create().modelKey(modelKey).name(modelKey.getValue().toString())));
     }
 
 }

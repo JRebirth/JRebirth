@@ -31,7 +31,9 @@ import org.jrebirth.af.api.wave.Wave;
  *
  * @author Sébastien Bordes
  *
- * @param <P> the type of the root node of the scene
+ * @param
+ *        <P>
+ *        the type of the root node of the scene
  */
 public interface JRebirthApplication<P extends Pane> {
 

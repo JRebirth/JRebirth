@@ -62,7 +62,7 @@ public abstract class AbstractSlideView<M extends AbstractSlideModel<?, ?, ?>, N
     // this.slideLocked = slideLocked;
     // }
 
-    public boolean isReadyForSlidesStepUpdate(boolean isReverse) {
+    public boolean isReadyForSlidesStepUpdate(final boolean isReverse) {
         return true;
     }
 

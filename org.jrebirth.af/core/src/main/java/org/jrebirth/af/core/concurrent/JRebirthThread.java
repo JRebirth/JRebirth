@@ -295,8 +295,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
             firstWave = Builders.callCommand(ShowModelCommand.class).waveBean(
                                                                               DisplayModelWaveBean.create()
                                                                                                   .childrenPlaceHolder(this.application.getRootNode().getChildren())
-                                                                                                  .showModelKey(Key.create(this.application.getFirstModelClass()))
-                                );
+                                                                                                  .showModelKey(Key.create(this.application.getFirstModelClass())));
             //
             //
             // ShowModelWaveBuilder.create()

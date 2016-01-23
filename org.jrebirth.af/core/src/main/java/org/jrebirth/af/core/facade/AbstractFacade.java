@@ -216,9 +216,9 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
     /**
      * Check the presence of the Object and return it if possible otherwise return null.
-     * 
+     *
      * @param uniqueKey the unqiueKey of thesearch object
-     * 
+     *
      * @return the readyObject or null
      */
     @SuppressWarnings("unchecked")

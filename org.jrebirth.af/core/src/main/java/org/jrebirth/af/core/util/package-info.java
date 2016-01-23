@@ -3,4 +3,3 @@
  *
  */
 package org.jrebirth.af.core.util;
-

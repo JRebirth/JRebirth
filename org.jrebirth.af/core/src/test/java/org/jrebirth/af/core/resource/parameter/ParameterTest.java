@@ -9,6 +9,7 @@ import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.i18n.MessageResourceBase;
 import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;

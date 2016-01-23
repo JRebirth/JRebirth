@@ -33,6 +33,7 @@ import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.presentation.model.Presentation;
 import org.jrebirth.af.presentation.model.Slide;
 import org.jrebirth.af.presentation.resources.PrezParameters;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

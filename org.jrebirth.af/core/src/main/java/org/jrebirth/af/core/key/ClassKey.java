@@ -101,7 +101,7 @@ public class ClassKey<R> implements UniqueKey<R> {
     @SuppressWarnings("unchecked")
     @Override
     public boolean equals(final Object obj) {
-        return obj != null && obj.getClass() == ClassKey.class && this.getClassField().equals(((ClassKey<R>) obj).getClassField());
+        return obj != null && obj.getClass() == this.getClass() && this.getClassField().equals(((ClassKey<R>) obj).getClassField());
     }
 
     /**

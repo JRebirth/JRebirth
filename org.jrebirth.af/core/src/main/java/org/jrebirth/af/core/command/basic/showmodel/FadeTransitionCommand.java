@@ -30,6 +30,7 @@ import org.jrebirth.af.api.concurrent.RunInto;
 import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.single.AbstractSingleCommand;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

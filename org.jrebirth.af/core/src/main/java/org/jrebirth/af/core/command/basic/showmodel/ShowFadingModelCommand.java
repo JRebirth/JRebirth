@@ -41,7 +41,6 @@ public class ShowFadingModelCommand extends DefaultMultiBeanCommand<DisplayModel
         return Arrays.asList(
                              getCommandKey(ShowModelCommand.class),
                              getCommandKey(FadeTransitionCommand.class),
-                             getCommandKey(DetachModelCommand.class)
-                     );
+                             getCommandKey(DetachModelCommand.class));
     }
 }

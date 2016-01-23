@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,11 +18,8 @@
 package org.jrebirth.af.core.command.basic.showmodel;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.FadeTransitionBuilder;
 import javafx.animation.PauseTransition;
-import javafx.animation.PauseTransitionBuilder;
 import javafx.animation.SequentialTransition;
-import javafx.animation.SequentialTransitionBuilder;
 import javafx.scene.Node;
 
 import org.jrebirth.af.api.wave.Wave;
@@ -30,6 +27,9 @@ import org.jrebirth.af.core.command.single.ui.DefaultUIBeanCommand;
 import org.jrebirth.af.core.exception.CommandException;
 
 /**
+ * The Class FadeInOutCommand is used to fade in, wait then fade out the given node.
+ *
+ * The node is retrieved from {@link DisplayModelWaveBean}.showModel root node.
  */
 public class FadeInOutCommand extends DefaultUIBeanCommand<FadeInOutWaveBean> {
 
@@ -52,33 +52,37 @@ public class FadeInOutCommand extends DefaultUIBeanCommand<FadeInOutWaveBean> {
 
         final FadeInOutWaveBean waveBean = getWaveBean(wave);
 
-        final FadeTransition fadeIn = FadeTransitionBuilder.create()
-                                                           .autoReverse(false)
-                                                           .cycleCount(1)
-                                                           .fromValue(0)
-                                                           .toValue(1.0)
-                                                           .duration(waveBean.fadingInDuration())
-                                                           .node(node)
-                                                           .build();
+        final FadeTransition fadeIn = new FadeTransition();
+        fadeIn.setAutoReverse(false);
+        fadeIn.setCycleCount(1);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1.0);
+        fadeIn.setDuration(waveBean.fadingInDuration());
+        fadeIn.setNode(node);
 
-        final PauseTransition pause = PauseTransitionBuilder.create().duration(waveBean.showDuration()).build();
+        final PauseTransition pause = new PauseTransition();
+        pause.setDuration(waveBean.showDuration());
 
-        final FadeTransition fadeOut = FadeTransitionBuilder.create()
-                                                            .autoReverse(false)
-                                                            .cycleCount(1)
-                                                            .fromValue(1.0)
-                                                            .toValue(0)
-                                                            .duration(waveBean.fadingOutDuration())
-                                                            .node(node)
-                                                            .build();
+        final FadeTransition fadeOut = new FadeTransition();
+        fadeOut.setAutoReverse(false);
+        fadeOut.setCycleCount(1);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0);
+        fadeOut.setDuration(waveBean.fadingOutDuration());
+        fadeOut.setNode(node);
 
-        final SequentialTransition pt = SequentialTransitionBuilder.create()
-                                                                   .children(fadeIn, pause, fadeOut)
-                                                                   .build();
+        final SequentialTransition pt = new SequentialTransition();
+        pt.getChildren().addAll(fadeIn, pause, fadeOut);
 
         pt.play();
     }
 
+    /**
+     * Gets the node.
+     *
+     * @param wave the wave
+     * @return the node
+     */
     private Node getNode(final Wave wave) {
         Node node = getWaveBean(wave).node();
 

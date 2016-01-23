@@ -6,6 +6,7 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.basic.BasicCommandTest;
 import org.jrebirth.af.core.command.ref.Ref;
 import org.jrebirth.af.core.command.ref.RefCommand;
+
 import org.junit.Ignore;
 import org.junit.Test;
 

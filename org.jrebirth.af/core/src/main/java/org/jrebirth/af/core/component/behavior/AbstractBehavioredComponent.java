@@ -141,7 +141,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
     public <BD extends BehaviorData, B extends Behavior<BD>> B getBehavior(final Class<B> behaviorClass) {
 
         B behavior = null;
-        if (this.behaviors == null && this.behaviors.get(behaviorClass) instanceof List) {
+        if (this.behaviors != null && this.behaviors.get(behaviorClass) instanceof List) {
 
             final Optional<B> oBehavior = (Optional<B>) this.behaviors.get(behaviorClass).stream().findFirst();
             if (oBehavior.isPresent()) {

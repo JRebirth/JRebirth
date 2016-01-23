@@ -6,6 +6,7 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.basic.BasicCommandTest;
 import org.jrebirth.af.core.command.ref.GroupRefCommand;
 import org.jrebirth.af.core.command.ref.Ref;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -33,8 +34,7 @@ public class GroupRefCommandTest extends BasicCommandTest {
                                 Ref.single()
                                    .priority(RunnablePriority.Highest)
                                    .runInto(RunType.JTP)
-                                   .runWave(this::sayHelloWave)
-                           );
+                                   .runWave(this::sayHelloWave));
 
         runCommand(GroupRefCommand.class, ref);
     }
@@ -69,18 +69,17 @@ public class GroupRefCommandTest extends BasicCommandTest {
                                            .runInto(RunType.JTP)
                                            .runWave(this::sayHelloWave),
                                         Ref.real()
-                                           .key(null)
-                                   ),
+                                           .key(null)),
 
                                 Ref.single()
                                    .priority(RunnablePriority.Highest)
                                    .runInto(RunType.JTP)
                                    .runWave(this::sayHelloWave)/*
                                                                 * ,
-                                                                * 
+                                                                *
                                                                 * Ref.real().commandKey(UniqueKey.key(UpdateCursorCommand.class, Cursor.DEFAULT))
                                                                 */
-                           );
+        );
 
         runCommand(GroupRefCommand.class, ref);
     }

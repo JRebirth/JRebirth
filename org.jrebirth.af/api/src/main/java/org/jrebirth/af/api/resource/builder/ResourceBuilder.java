@@ -25,7 +25,9 @@ import org.jrebirth.af.api.resource.ResourceParams;
  * @author Sébastien Bordes
  *
  * @param <I> The item used to wrap the resource
- * @param <P> The params object that store primitive resources values
+ * @param
+ *        <P>
+ *        The params object that store primitive resources values
  * @param <R> The resource managed
  */
 public interface ResourceBuilder<I, P, R> {

@@ -266,8 +266,8 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
             }
 
             if (draggedIdx != idx) {
-                this.marker = getModel().getObject().orientation() == TabOrientation.bottom || getModel().getObject().orientation() == TabOrientation.top ?
-                        new Rectangle(10, getBox().getHeight()) : new Rectangle(getBox().getWidth(), 4);
+                this.marker = getModel().getObject().orientation() == TabOrientation.bottom || getModel().getObject().orientation() == TabOrientation.top ? new Rectangle(10, getBox().getHeight())
+                        : new Rectangle(getBox().getWidth(), 4);
 
                 this.marker.setFill(Color.LIGHTGREEN);
 

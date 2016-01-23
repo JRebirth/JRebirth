@@ -17,18 +17,19 @@
  */
 package org.jrebirth.af.core.wave;
 
-import junit.framework.Assert;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
+
 import org.junit.Test;
 
+import junit.framework.Assert;
 
 public class WaveTypeTest {
 
     @Test
     public void testTheReturnItemOfReturnWaveType() {
-        WaveType RE_FLUSH = Builders.waveType("RE_FLUSH");
-        WaveType FLUSH = Builders.waveType("FLUSH").returnWaveType(RE_FLUSH);
+        final WaveType RE_FLUSH = Builders.waveType("RE_FLUSH");
+        final WaveType FLUSH = Builders.waveType("FLUSH").returnWaveType(RE_FLUSH);
 
         Assert.assertTrue(FLUSH.returnWaveType().items().isEmpty());
         Assert.assertNull(FLUSH.returnItem());
@@ -36,9 +37,10 @@ public class WaveTypeTest {
 
     @Test
     public void testHandlerMethodName() {
-        WaveItem RESULT = new WaveItemBase<Object>() {};
-        WaveType RE_FLUSH = Builders.waveType("RE_FLUSH").items(RESULT);
-        WaveType FLUSH = Builders.waveType("FLUSH").returnWaveType(RE_FLUSH).returnItem(RESULT);
+        final WaveItem RESULT = new WaveItemBase<Object>() {
+        };
+        final WaveType RE_FLUSH = Builders.waveType("RE_FLUSH").items(RESULT);
+        final WaveType FLUSH = Builders.waveType("FLUSH").returnWaveType(RE_FLUSH).returnItem(RESULT);
 
         Assert.assertEquals("FLUSH", FLUSH.action());
         Assert.assertEquals("DO_FLUSH", FLUSH.toString());

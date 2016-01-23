@@ -79,10 +79,9 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         super(globalFacade);
 
         // Attach the right EnhancedComponent Factory
-        this.unprocessedWaveHandler = (UnprocessedWaveHandler)
-                ParameterUtility.buildCustomizableClass(JRebirthParameters.UNPROCESSED_WAVE_HANDLER,
-                                                        DefaultUnprocessedWaveHandler.class,
-                                                        "UnprocessedWaveHandler");
+        this.unprocessedWaveHandler = (UnprocessedWaveHandler) ParameterUtility.buildCustomizableClass(JRebirthParameters.UNPROCESSED_WAVE_HANDLER,
+                                                                                                       DefaultUnprocessedWaveHandler.class,
+                                                                                                       "UnprocessedWaveHandler");
     }
 
     /**

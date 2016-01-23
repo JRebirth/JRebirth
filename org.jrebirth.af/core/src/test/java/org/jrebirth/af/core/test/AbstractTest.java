@@ -3,6 +3,7 @@ package org.jrebirth.af.core.test;
 import org.jrebirth.af.api.facade.GlobalFacade;
 import org.jrebirth.af.core.application.TestApplication;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 

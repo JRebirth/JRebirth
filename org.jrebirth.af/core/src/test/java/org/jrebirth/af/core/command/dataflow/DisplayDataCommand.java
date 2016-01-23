@@ -4,6 +4,7 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.single.internal.DefaultCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.JRebirthItems;
+
 import org.junit.Assert;
 
 public class DisplayDataCommand extends DefaultCommand {

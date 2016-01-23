@@ -158,8 +158,7 @@ public interface Builders {
                      .waveGroup(WaveGroup.CALL_COMMAND)
                      .componentClass(ChainWaveCommand.class)
                      .addDatas(
-                               Builders.waveData(JRebirthWaves.CHAINED_WAVES, waveList)
-                     );
+                               Builders.waveData(JRebirthWaves.CHAINED_WAVES, waveList));
     }
 
 }

@@ -42,7 +42,6 @@ public class ShowTemporaryCommand extends DefaultMultiBeanCommand<DisplayModelWa
                              getCommandKey(PrepareModelCommand.class),
                              getCommandKey(AttachModelCommand.class),
                              getCommandKey(FadeInOutCommand.class),
-                             getCommandKey(DetachModelCommand.class)
-                     );
+                             getCommandKey(DetachModelCommand.class));
     }
 }

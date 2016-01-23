@@ -1,6 +1,7 @@
 package org.jrebirth.af.core.command.basic.stage;
 
 import static org.jrebirth.af.core.wave.Builders.callCommand;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,6 +15,7 @@ import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.jrebirth.af.core.facade.CommandFacade;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
 import org.jrebirth.af.core.service.basic.StageService;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -116,7 +118,7 @@ public class StageTest {
             }
 
             @Override
-            public void waveHandled(Wave wave) {
+            public void waveHandled(final Wave wave) {
                 // Nothing to do yet
 
             }

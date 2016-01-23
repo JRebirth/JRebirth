@@ -9,6 +9,7 @@ import static org.junit.Assert.assertSame;
 import org.jrebirth.af.core.test.AbstractTest;
 import org.jrebirth.af.core.ui.AbstractModel;
 import org.jrebirth.af.core.ui.object.AbstractObjectModel;
+
 import org.junit.After;
 import org.junit.Before;
 

@@ -9,6 +9,7 @@ import org.jrebirth.af.core.application.TestApplication;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
 import org.jrebirth.af.core.wave.DefaultWaveListener;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

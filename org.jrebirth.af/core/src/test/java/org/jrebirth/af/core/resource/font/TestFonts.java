@@ -18,6 +18,7 @@
 package org.jrebirth.af.core.resource.font;
 
 import static org.jrebirth.af.core.resource.Resources.create;
+
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 

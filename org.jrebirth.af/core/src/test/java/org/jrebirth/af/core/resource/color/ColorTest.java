@@ -1,10 +1,12 @@
 package org.jrebirth.af.core.resource.color;
 
 import static org.junit.Assert.assertEquals;
+
 import javafx.scene.paint.Color;
 
 import org.jrebirth.af.api.resource.color.ColorItem;
 import org.jrebirth.af.core.resource.ResourceBuilders;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

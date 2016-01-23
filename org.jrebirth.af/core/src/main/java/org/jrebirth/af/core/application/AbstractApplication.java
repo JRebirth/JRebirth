@@ -74,7 +74,9 @@ import com.sun.javafx.application.LauncherImpl;
  *
  * @author Sébastien Bordes
  *
- * @param <P> The root node of the stage, must extends Pane to allow children management
+ * @param
+ *        <P>
+ *        The root node of the stage, must extends Pane to allow children management
  */
 @Configuration(".*jrebirth")
 @Localized(".*_rb")
@@ -334,9 +336,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     protected abstract void preStop();
 
     /**
-     * Perform custom task after application stop.
-     * Careful: this method if called after JRebirth shutdown process. So you must not effectuate things that would be
-     * used JRebirth action here (like sending a wave, get a service...)
+     * Perform custom task after application stop. Careful: this method if called after JRebirth shutdown process. So you must not effectuate things that would be used JRebirth action here (like
+     * sending a wave, get a service...)
      */
     protected abstract void postStop();
 

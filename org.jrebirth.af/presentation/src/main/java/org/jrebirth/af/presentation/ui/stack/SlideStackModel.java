@@ -39,6 +39,7 @@ import org.jrebirth.af.presentation.ui.base.AbstractSlideModel.SlideFlow;
 import org.jrebirth.af.presentation.ui.base.SlideModel;
 import org.jrebirth.af.presentation.ui.base.SlideStep;
 import org.jrebirth.af.presentation.ui.slidemenu.SlideMenuModel;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -147,11 +148,9 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
                 SlideModel<SlideStep> previousSlideModel = null;
 
                 if (this.selectedSlide != null) {
-                    final Class<Model> previousClass = (Class<Model>)
-                            (this.selectedSlide.getModelClass() == null
-                                    ? Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass())
-                                    : Class.forName(this.selectedSlide.getModelClass())
-                            );
+                    final Class<Model> previousClass = (Class<Model>) (this.selectedSlide.getModelClass() == null
+                            ? Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass())
+                            : Class.forName(this.selectedSlide.getModelClass()));
 
                     previousSlideModel = (SlideModel<SlideStep>) getModel(previousClass, this.selectedSlide);
                 }
@@ -159,11 +158,9 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
                 // Define the slide number
                 // slide.setPage(this.slidePosition);
 
-                final Class<Model> nextClass = (Class<Model>)
-                        (slide.getModelClass() == null
-                                ? Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass())
-                                : Class.forName(slide.getModelClass())
-                        );
+                final Class<Model> nextClass = (Class<Model>) (slide.getModelClass() == null
+                        ? Class.forName(getPresentationService().getPresentation().getSlides().getDefaultModelClass())
+                        : Class.forName(slide.getModelClass()));
                 this.selectedSlideModel = (SlideModel<SlideStep>) getModel(nextClass, slide);
 
                 // Add the new slide to the stack
@@ -180,11 +177,11 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
 
                 if (isReverse) {
 
-                    slideAnimation.setRate(-1);
-                    slideAnimation.playFrom(slideAnimation.getCycleDuration());
+                    this.slideAnimation.setRate(-1);
+                    this.slideAnimation.playFrom(this.slideAnimation.getCycleDuration());
                 } else {
-                    slideAnimation.setRate(1);
-                    slideAnimation.playFromStart();
+                    this.slideAnimation.setRate(1);
+                    this.slideAnimation.playFromStart();
                 }
 
                 // Store the new default slide
@@ -226,7 +223,7 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
         }
 
         final SlideModel<SlideStep> csm = selectedSlideModel;
-        final SlideModel<SlideStep> psm = previousSlideModel;
+        // final SlideModel<SlideStep> psm = previousSlideModel;
         slideAnimation.setOnFinished(new javafx.event.EventHandler<ActionEvent>() {
 
             @Override
@@ -273,13 +270,14 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
         this.slidePosition = slidePosition;
     }
 
-    public boolean isReadyForSlideUpdate(boolean isReverse) {
+    public boolean isReadyForSlideUpdate(final boolean isReverse) {
+        synchronized (this) {
+            if (this.slideAnimation.getStatus() == Animation.Status.RUNNING) {
 
-        if (this.slideAnimation.getStatus() == Animation.Status.RUNNING) {
+                this.slideAnimation.setRate(isReverse ? -4 : 4);
 
-            this.slideAnimation.setRate(isReverse ? -4 : 4);
-
-            return false;
+                return false;
+            }
         }
         return true;
     }
@@ -321,18 +319,19 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
      * Display the slide menu to navigate.
      */
     public void showSlideMenu() {
+        synchronized (this) {
+            if (!this.menuShown.getAndSet(true)) {
+                final SlideMenuModel smm = getModel(Key.create(SlideMenuModel.class, this.selectedSlide));
 
-        if (!this.menuShown.getAndSet(true)) {
-            final SlideMenuModel smm = getModel(Key.create(SlideMenuModel.class, this.selectedSlide));
+                StackPane.setAlignment(smm.getRootNode(), Pos.CENTER);
+                getView().getRootNode().getChildren().add(smm.getRootNode());
 
-            StackPane.setAlignment(smm.getRootNode(), Pos.CENTER);
-            getView().getRootNode().getChildren().add(smm.getRootNode());
-
-            smm.getRootNode().parentProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue == null) {
-                    this.menuShown.set(false);
-                }
-            });
+                smm.getRootNode().parentProperty().addListener((observable, oldValue, newValue) -> {
+                    if (newValue == null) {
+                        this.menuShown.set(false);
+                    }
+                });
+            }
         }
     }
 }

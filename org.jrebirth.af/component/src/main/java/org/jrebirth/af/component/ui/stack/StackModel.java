@@ -25,6 +25,7 @@ import org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.core.wave.checker.ClassWaveChecker;
 import org.jrebirth.af.core.wave.checker.DefaultWaveChecker;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -3,12 +3,14 @@ package org.jrebirth.af.core.resource.font;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 import org.jrebirth.af.api.resource.font.FontItem;
 import org.jrebirth.af.core.resource.ResourceBuilders;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
