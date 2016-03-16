@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.application;
 
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
 
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -22,8 +22,8 @@ public class NullApplicationConfigurationTest extends ApplicationTest<NullConfAp
     public void checkNullConf() {
 
         // Check that default value is used not those of properties file
-        Assert.assertEquals(new Integer(800), JRebirthParameters.APPLICATION_SCENE_WIDTH.get());
-        Assert.assertEquals(new Integer(600), JRebirthParameters.APPLICATION_SCENE_HEIGHT.get());
+        Assert.assertEquals(new Integer(800), StageParameters.APPLICATION_SCENE_WIDTH.get());
+        Assert.assertEquals(new Integer(600), StageParameters.APPLICATION_SCENE_HEIGHT.get());
 
     }
 

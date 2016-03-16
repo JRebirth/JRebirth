@@ -6,12 +6,12 @@ import org.jrebirth.af.api.resource.builder.ResourceBuilder;
 import org.jrebirth.af.api.resource.style.StyleSheetItem;
 import org.jrebirth.af.api.resource.style.StyleSheetParams;
 import org.jrebirth.af.core.resource.ResourceBuilders;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 
 /**
  * The interface <strong>StyleSheetEnum</strong> should be inherited by any Enumeration that want to manage stylesheet {@link URL}.
  *
- * Take care of the value used for ({@link JRebirthParameters#STYLE_FOLDER}) which will be prepend to the style sheet path.
+ * Take care of the value used for ({@link CoreParameters#STYLE_FOLDER}) which will be prepend to the style sheet path.
  *
  * @author Sébastien Bordes
  */

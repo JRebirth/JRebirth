@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import org.jrebirth.af.api.resource.image.ImageItem;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 import org.jrebirth.af.core.resource.ResourceBuilders;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -33,7 +33,7 @@ public class ImageTest {
 
     @Before
     public void setUp() throws Exception {
-        JRebirthParameters.IMAGE_FOLDER.define(Arrays.asList("images", "imagesBis"));
+        ResourceParameters.IMAGE_FOLDER.define(Arrays.asList("images", "imagesBis"));
     }
 
     @Test

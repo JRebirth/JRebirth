@@ -7,7 +7,7 @@ import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.ui.NullView;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveType;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.WaveItemBase;
@@ -46,7 +46,7 @@ public class CheckerTest {
 
     @Before
     public void setUp() {
-        JRebirthParameters.DEVELOPER_MODE.define(true);
+        CoreParameters.DEVELOPER_MODE.define(true);
     }
 
     @Test()

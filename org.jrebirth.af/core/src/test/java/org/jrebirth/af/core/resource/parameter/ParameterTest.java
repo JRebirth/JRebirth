@@ -8,7 +8,7 @@ import org.jrebirth.af.api.resource.parameter.ParameterItem;
 import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.i18n.MessageResourceBase;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -35,7 +35,7 @@ public class ParameterTest {
         ResourceBuilders.MESSAGE_BUILDER.searchMessagesFiles(".*_rb");
         ResourceBuilders.PARAMETER_BUILDER.searchConfigurationFiles(".*test-jrebirth", "properties");
         ParameterMessages.UNDEFINED_ENV_VAR.define(new MessageResourceBase("Fatal Error ! environment variable {0} not found ", JRebirthMarkers.PARAMETER, JRLevel.Exception));
-        JRebirthParameters.DEVELOPER_MODE.define(true);
+        CoreParameters.DEVELOPER_MODE.define(true);
     }
 
     @Before

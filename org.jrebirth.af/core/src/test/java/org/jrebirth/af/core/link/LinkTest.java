@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.link;
 
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +9,7 @@ public class LinkTest {
 
     @Before
     public void setUp() {
-        JRebirthParameters.DEVELOPER_MODE.define(true);
+        CoreParameters.DEVELOPER_MODE.define(true);
     }
 
     @Test()

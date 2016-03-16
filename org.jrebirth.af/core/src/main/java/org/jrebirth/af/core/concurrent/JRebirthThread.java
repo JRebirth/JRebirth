@@ -37,7 +37,7 @@ import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
 import org.jrebirth.af.core.facade.GlobalFacadeBase;
 import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.service.basic.StyleSheetTrackerService;
 import org.jrebirth.af.core.wave.Builders;
 
@@ -184,7 +184,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
      * @param scene the scene to reload in case of Style Sheet update
      */
     private void manageStyleSheetReloading(final Scene scene) {
-        if (JRebirthParameters.DEVELOPER_MODE.get() && scene != null) {
+        if (CoreParameters.DEVELOPER_MODE.get() && scene != null) {
 
             for (final String styleSheet : scene.getStylesheets()) {
 

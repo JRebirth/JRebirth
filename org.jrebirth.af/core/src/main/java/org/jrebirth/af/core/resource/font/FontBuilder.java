@@ -27,7 +27,7 @@ import org.jrebirth.af.api.resource.font.FontItem;
 import org.jrebirth.af.api.resource.font.FontParams;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,7 +125,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
             final List<String> fontPaths = fontParams instanceof RealFont && ((RealFont) fontParams).skipFontsFolder()
                     ? Collections.singletonList("")
-                    : JRebirthParameters.FONT_FOLDER.get();
+                    : ResourceParameters.FONT_FOLDER.get();
 
             for (int i = 0; i < fontPaths.size() && font == null; i++) {
 
@@ -159,7 +159,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
 
             if (font == null) {
                 // Neither transformed nor raw font has been loaded (with or without '_')
-                LOGGER.error("Font : {} not found into base folder: {}", fontParams.name().name() + "." + fontParams.extension(), JRebirthParameters.FONT_FOLDER.get());
+                LOGGER.error("Font : {} not found into base folder: {}", fontParams.name().name() + "." + fontParams.extension(), ResourceParameters.FONT_FOLDER.get());
             }
         }
     }

@@ -4,7 +4,7 @@ import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.resource.i18n.JRLevel;
 import org.jrebirth.af.api.resource.i18n.MessageItem;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 
 import org.slf4j.Logger;
 
@@ -45,7 +45,7 @@ public abstract class AbstractLogAdapter implements JRLogger {
      */
     protected void throwError(final MessageItem messageItem, final Throwable t, final Object... parameters) {
         if (messageItem.getLevel() == JRLevel.Exception ||
-                messageItem.getLevel() == JRLevel.Error && JRebirthParameters.DEVELOPER_MODE.get()) {
+                messageItem.getLevel() == JRLevel.Error && CoreParameters.DEVELOPER_MODE.get()) {
             throw new CoreRuntimeException(messageItem, t, parameters);
         }
     }

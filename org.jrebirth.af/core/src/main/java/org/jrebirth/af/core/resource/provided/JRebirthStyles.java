@@ -20,6 +20,7 @@ package org.jrebirth.af.core.resource.provided;
 import static org.jrebirth.af.core.resource.Resources.create;
 
 import org.jrebirth.af.api.resource.style.StyleSheetItem;
+import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
 
 /**
  * The class <strong>JRebirthStyles</strong>.
@@ -35,6 +36,6 @@ public interface JRebirthStyles {
     /**************************************************************************************/
 
     /** The default Style Sheet used if none have been atatched. */
-    StyleSheetItem DEFAULT = create(JRebirthParameters.DEFAULT_CSS.get());
+    StyleSheetItem DEFAULT = create(ResourceParameters.DEFAULT_CSS.get());
 
 }

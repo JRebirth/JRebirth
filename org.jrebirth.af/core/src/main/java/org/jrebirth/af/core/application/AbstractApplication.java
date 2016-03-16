@@ -57,8 +57,10 @@ import org.jrebirth.af.core.exception.handler.PoolUncaughtExceptionHandler;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.provided.JRebirthColors;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
 import org.jrebirth.af.core.resource.provided.JRebirthStyles;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
+import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
+import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.ClasspathUtility;
 import org.jrebirth.af.modular.ModuleConfigFileParser;
@@ -314,7 +316,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
                 JRebirthThread.getThread().close();
 
                 // Wait parameterized delay before retrying to close if the thread is still alive
-                Thread.sleep(firstTime ? JRebirthParameters.CLOSE_RETRY_DELAY_FIRST.get() : JRebirthParameters.CLOSE_RETRY_DELAY_OTHER.get());
+                Thread.sleep(firstTime ? CoreParameters.CLOSE_RETRY_DELAY_FIRST.get() : CoreParameters.CLOSE_RETRY_DELAY_OTHER.get());
 
                 if (firstTime) {
                     firstTime = false;
@@ -421,7 +423,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     @SuppressWarnings("unchecked")
     protected void preloadModules() {
 
-        if (JRebirthParameters.PARSE_MODULE_CONFIG_FILE.get() && hasModuleLibrary()) {
+        if (CoreParameters.PARSE_MODULE_CONFIG_FILE.get() && hasModuleLibrary()) {
 
             // Assemble the regex pattern
             final Pattern filePattern = Pattern.compile(".*module\\.xml");
@@ -495,7 +497,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
         final URL styleSheetURL = styleSheetItem.get();
         if (styleSheetURL == null) {
-            LOGGER.error(CSS_LOADING_ERROR, styleSheetItem.toString(), JRebirthParameters.STYLE_FOLDER.get());
+            LOGGER.error(CSS_LOADING_ERROR, styleSheetItem.toString(), ResourceParameters.STYLE_FOLDER.get());
         } else {
             scene.getStylesheets().add(styleSheetURL.toExternalForm());
         }
@@ -507,7 +509,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      *
      * This method could be overridden.
      *
-     * By default it will will return {@link JRebirthParameters.APPLICATION_NAME} {@link JRebirthParameters.APPLICATION_VERSION} string.
+     * By default it will will return {@link CoreParameters.APPLICATION_NAME} {@link CoreParameters.APPLICATION_VERSION} string.
      *
      * The default application is: ApplicationClass powered by JRebirth <br />
      * If version is equals to "0.0.0", it will not be appended
@@ -516,12 +518,12 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      */
     protected String getApplicationTitle() {
         // Add application Name
-        String name = JRebirthParameters.APPLICATION_NAME.get();
+        String name = StageParameters.APPLICATION_NAME.get();
         if (name.contains(PARAM)) {
             name = name.replace(PARAM, getShortClassName());
         }
         // Add version with a space before
-        final String version = JRebirthParameters.APPLICATION_VERSION.get();
+        final String version = StageParameters.APPLICATION_VERSION.get();
         final StringBuilder sb = new StringBuilder(name);
         if (!"0.0.0".equals(version)) {
             sb.append(' ').append(version);
@@ -568,8 +570,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     protected final Scene buildScene() throws CoreException {
         return SceneBuilder.create()
                            .root(buildRootPane())
-                           .width(JRebirthParameters.APPLICATION_SCENE_WIDTH.get())
-                           .height(JRebirthParameters.APPLICATION_SCENE_HEIGHT.get())
+                           .width(StageParameters.APPLICATION_SCENE_WIDTH.get())
+                           .height(StageParameters.APPLICATION_SCENE_HEIGHT.get())
                            .fill(JRebirthColors.SCENE_BG_COLOR.get())
                            .build();
     }

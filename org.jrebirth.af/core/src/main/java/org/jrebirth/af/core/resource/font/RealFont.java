@@ -25,7 +25,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 import org.jrebirth.af.api.resource.font.FontExtension;
 import org.jrebirth.af.api.resource.font.FontName;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 
 /**
  * The interface <strong>RealFont</strong> is used to create a font according to its name.
@@ -34,7 +34,7 @@ import org.jrebirth.af.core.resource.provided.JRebirthParameters;
  */
 public class RealFont extends AbstractBaseFont {
 
-    /** The flag used to skip the fontsFolder prefix addition ({@link JRebirthParameters#FONT_FOLDER}). */
+    /** The flag used to skip the fontsFolder prefix addition ({@link CoreParameters#FONT_FOLDER}). */
     private final transient BooleanProperty skipFontsFolderProperty = new SimpleBooleanProperty();
 
     /**

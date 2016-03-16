@@ -20,6 +20,7 @@ package org.jrebirth.af.core.resource.provided;
 import static org.jrebirth.af.core.resource.Resources.create;
 
 import org.jrebirth.af.api.resource.image.ImageItem;
+import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
 
 /**
  * The class <strong>JRebirthImages</strong>.
@@ -35,6 +36,6 @@ public interface JRebirthImages {
     /**************************************************************************************/
 
     /** The Not/Available default image. */
-    ImageItem NOT_AVAILABLE = create(JRebirthParameters.NOT_AVAILABLE_IMAGE.get());
+    ImageItem NOT_AVAILABLE = create(ResourceParameters.NOT_AVAILABLE_IMAGE.get());
 
 }

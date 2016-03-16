@@ -25,7 +25,7 @@ import org.jrebirth.af.api.resource.ResourceItem;
 import org.jrebirth.af.api.resource.ResourceParams;
 import org.jrebirth.af.api.resource.builder.ResourceBuilder;
 import org.jrebirth.af.core.resource.Resources;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 
 /**
  * The abstract class <strong>AbstractResourceBuilder</strong>.
@@ -60,7 +60,7 @@ public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P
         this.paramsMap.put(key, params);
 
         // Activate the AutoRefresh feature only for other parameters
-        if (Resources.isNotAutoRefreshParam(params) && JRebirthParameters.AUTO_REFRESH_RESOURCE.get()) {
+        if (Resources.isNotAutoRefreshParam(params) && CoreParameters.AUTO_REFRESH_RESOURCE.get()) {
             params.activateAutoRefresh();
         }
     }

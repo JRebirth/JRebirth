@@ -31,7 +31,8 @@ import org.jrebirth.af.core.component.factory.DefaultComponentFactory;
 import org.jrebirth.af.core.concurrent.JRebirthThreadPoolExecutor;
 import org.jrebirth.af.core.link.NotifierBase;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.ExtensionParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.util.ParameterUtility;
 
 /**
@@ -95,7 +96,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
         super();
 
         // Attach the right EnhancedComponent Factory
-        this.componentFactory = (ComponentFactory) ParameterUtility.buildCustomizableClass(JRebirthParameters.COMPONENT_FACTORY, DefaultComponentFactory.class, "ComponentFactory");
+        this.componentFactory = (ComponentFactory) ParameterUtility.buildCustomizableClass(ExtensionParameters.COMPONENT_FACTORY, DefaultComponentFactory.class, "ComponentFactory");
 
         // Link the application
         this.application = application;
@@ -103,7 +104,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
 
         LOGGER.trace(JTP_CREATION);
 
-        final int poolSize = Math.max(1, Math.round(JRebirthParameters.THREAD_POOL_SIZE_RATIO.get() * Runtime.getRuntime().availableProcessors()));
+        final int poolSize = Math.max(1, Math.round(CoreParameters.THREAD_POOL_SIZE_RATIO.get() * Runtime.getRuntime().availableProcessors()));
 
         // Launch the default executor
         this.executorService = new JRebirthThreadPoolExecutor(poolSize,

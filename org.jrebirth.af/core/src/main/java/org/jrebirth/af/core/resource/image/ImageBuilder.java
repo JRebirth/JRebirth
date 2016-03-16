@@ -31,7 +31,7 @@ import org.jrebirth.af.api.resource.image.ImageParams;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthImages;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +66,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
         }
 
         // Try to get the default image when an image is not found
-        if (image == null && !JRebirthParameters.NOT_AVAILABLE_IMAGE_NAME.equals(jrImage.name())) {
+        if (image == null && !ResourceParameters.NOT_AVAILABLE_IMAGE_NAME.equals(jrImage.name())) {
             // Return the default image
             image = JRebirthImages.NOT_AVAILABLE.get();
         }
@@ -138,7 +138,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
     private Image loadImage(final String resourceName, final boolean skipImagesFolder) {
         Image image = null;
 
-        final List<String> imagePaths = skipImagesFolder ? Collections.singletonList("") : JRebirthParameters.IMAGE_FOLDER.get();
+        final List<String> imagePaths = skipImagesFolder ? Collections.singletonList("") : ResourceParameters.IMAGE_FOLDER.get();
         for (int i = 0; i < imagePaths.size() && image == null; i++) {
 
             String imagePath = imagePaths.get(i);
@@ -151,7 +151,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             }
         }
         if (image == null) {
-            LOGGER.error("Image : {} not found into base folder: {}", resourceName, JRebirthParameters.IMAGE_FOLDER.get());
+            LOGGER.error("Image : {} not found into base folder: {}", resourceName, ResourceParameters.IMAGE_FOLDER.get());
         }
         return image;
     }

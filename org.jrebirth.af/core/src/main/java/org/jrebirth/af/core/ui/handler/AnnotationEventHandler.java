@@ -31,7 +31,7 @@ import org.jrebirth.af.api.ui.annotation.type.Action;
 import org.jrebirth.af.api.ui.annotation.type.EnumEventType;
 import org.jrebirth.af.api.ui.annotation.type.Key;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.ui.UIMessages;
 import org.jrebirth.af.core.util.ClassUtility;
 
@@ -67,7 +67,7 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
         this.callbackObject = callbackObject;
         this.annotation = annotation;
 
-        if (JRebirthParameters.DEVELOPER_MODE.get()) {
+        if (CoreParameters.DEVELOPER_MODE.get()) {
             checkCallbackMethods();
         }
     }

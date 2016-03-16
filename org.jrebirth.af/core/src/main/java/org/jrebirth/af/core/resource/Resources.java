@@ -40,7 +40,7 @@ import org.jrebirth.af.core.resource.i18n.MessageItemBase;
 import org.jrebirth.af.core.resource.image.ImageItemBase;
 import org.jrebirth.af.core.resource.parameter.ObjectParameter;
 import org.jrebirth.af.core.resource.parameter.ParameterItemBase;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.resource.style.StyleSheetItemBase;
 
 /**
@@ -135,7 +135,7 @@ public final class Resources {
     /**
      * Build a font item.
      *
-     * Take care of the value used for ({@link JRebirthParameters#FONT_FOLDER}) which will be prepend to the font path.
+     * Take care of the value used for ({@link CoreParameters#FONT_FOLDER}) which will be prepend to the font path.
      *
      * @param fontParams the primitive values for the font
      *
@@ -153,7 +153,7 @@ public final class Resources {
     /**
      * Build an image item.
      *
-     * Take care of the value used for ({@link JRebirthParameters#IMAGE_FOLDER}) which will be prepend to the image path.
+     * Take care of the value used for ({@link CoreParameters#IMAGE_FOLDER}) which will be prepend to the image path.
      *
      * @param imageParams the primitive values for the image
      *
@@ -171,7 +171,7 @@ public final class Resources {
     /**
      * Build a style sheet item.
      *
-     * Take care of the value used for ({@link JRebirthParameters#STYLE_FOLDER}) which will be prepend to the style sheet path.
+     * Take care of the value used for ({@link CoreParameters#STYLE_FOLDER}) which will be prepend to the style sheet path.
      *
      * @param styleSheetParams the primitive values for the style sheet
      *
@@ -238,7 +238,7 @@ public final class Resources {
      * @return true if the resource params is not the auto refresh parameter
      */
     public static boolean isNotAutoRefreshParam(final ResourceParams params) {
-        return !(params instanceof ObjectParameter && JRebirthParameters.AUTO_REFRESH_NAME.equals(((ObjectParameter<?>) params).name()));
+        return !(params instanceof ObjectParameter && CoreParameters.AUTO_REFRESH_NAME.equals(((ObjectParameter<?>) params).name()));
     }
 
 }

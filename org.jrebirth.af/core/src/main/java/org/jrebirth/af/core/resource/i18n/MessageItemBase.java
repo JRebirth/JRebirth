@@ -25,7 +25,7 @@ import org.jrebirth.af.api.resource.i18n.MessageItem;
 import org.jrebirth.af.api.resource.i18n.MessageParams;
 import org.jrebirth.af.api.resource.i18n.MessageResource;
 import org.jrebirth.af.core.resource.AbstractResourceItem;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 
 import org.slf4j.Marker;
 
@@ -76,7 +76,7 @@ public final class MessageItemBase extends AbstractResourceItem<MessageItem, Mes
                 res = "<!!" + builder().getParam(this).toString() + "!!>";
 
                 // In developer mode throw a runtime exception to stop the current task
-                if (JRebirthParameters.DEVELOPER_MODE.get()) {
+                if (CoreParameters.DEVELOPER_MODE.get()) {
                     throw new CoreRuntimeException("Bad formatted Message key : " + res, e);
                 }
             }

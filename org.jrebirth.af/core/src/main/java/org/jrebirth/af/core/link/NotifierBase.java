@@ -44,7 +44,8 @@ import org.jrebirth.af.core.exception.WaveException;
 import org.jrebirth.af.core.facade.AbstractGlobalReady;
 import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.ExtensionParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.service.ServiceTaskBase;
 import org.jrebirth.af.core.service.basic.TaskTrackerService;
 import org.jrebirth.af.core.util.ParameterUtility;
@@ -79,7 +80,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         super(globalFacade);
 
         // Attach the right EnhancedComponent Factory
-        this.unprocessedWaveHandler = (UnprocessedWaveHandler) ParameterUtility.buildCustomizableClass(JRebirthParameters.UNPROCESSED_WAVE_HANDLER,
+        this.unprocessedWaveHandler = (UnprocessedWaveHandler) ParameterUtility.buildCustomizableClass(ExtensionParameters.UNPROCESSED_WAVE_HANDLER,
                                                                                                        DefaultUnprocessedWaveHandler.class,
                                                                                                        "UnprocessedWaveHandler");
     }
@@ -136,7 +137,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
         if (command == null) {
             LOGGER.error(COMMAND_NOT_FOUND_ERROR, wave.toString());
-            if (JRebirthParameters.DEVELOPER_MODE.get()) {
+            if (CoreParameters.DEVELOPER_MODE.get()) {
                 this.unprocessedWaveHandler.manageUnprocessedWave(COMMAND_NOT_FOUND_MESSAGE.getText(), wave);
             }
         } else {
@@ -162,13 +163,13 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
         if (service == null) {
             LOGGER.error(SERVICE_NOT_FOUND_ERROR, wave.toString());
-            if (JRebirthParameters.DEVELOPER_MODE.get()) {
+            if (CoreParameters.DEVELOPER_MODE.get()) {
                 this.unprocessedWaveHandler.manageUnprocessedWave(SERVICE_NOT_FOUND_MESSAGE.getText(), wave);
             }
         } else {
             // The inner task will be run into the JRebirth Thread Pool
             final ServiceTaskBase<?> task = (ServiceTaskBase<?>) service.returnData(wave);
-            if (task != null && JRebirthParameters.FOLLOW_UP_SERVICE_TASKS.get()) {
+            if (task != null && CoreParameters.FOLLOW_UP_SERVICE_TASKS.get()) {
                 getGlobalFacade().getServiceFacade().retrieve(TaskTrackerService.class).trackTask(task);
             }
 
@@ -194,7 +195,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
         if (wave.componentClass() == null) {
             LOGGER.error(MODEL_NOT_FOUND_ERROR, wave.toString());
-            if (JRebirthParameters.DEVELOPER_MODE.get()) {
+            if (CoreParameters.DEVELOPER_MODE.get()) {
                 this.unprocessedWaveHandler.manageUnprocessedWave(MODEL_NOT_FOUND_MESSAGE.getText(), wave);
             }
         }
@@ -275,7 +276,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             }
         } else {
             LOGGER.warn(NO_WAVE_LISTENER, wave.waveType().toString());
-            if (JRebirthParameters.DEVELOPER_MODE.get()) {
+            if (CoreParameters.DEVELOPER_MODE.get()) {
                 this.unprocessedWaveHandler.manageUnprocessedWave(NO_WAVE_LISTENER.getText(wave.waveType().toString()), wave);
             }
         }

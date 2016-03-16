@@ -13,7 +13,7 @@ import org.jrebirth.af.api.wave.annotation.OnWave;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.wave.WaveTypeRegistry;
 
 /**
@@ -46,7 +46,7 @@ public final class CheckerUtility implements UtilMessages {
     public static void checkWaveTypeContract(final Class<? extends Component> waveReadyClass, final WaveType... waveTypes) {
 
         // Perform the check only if Developer Mode is activated
-        if (JRebirthParameters.DEVELOPER_MODE.get()) {
+        if (CoreParameters.DEVELOPER_MODE.get()) {
 
             for (final WaveType waveType : waveTypes) {
 
@@ -146,7 +146,7 @@ public final class CheckerUtility implements UtilMessages {
      *
      */
     public static void checkWave(final Wave wave) {
-        if (JRebirthParameters.DEVELOPER_MODE.get()) {
+        if (CoreParameters.DEVELOPER_MODE.get()) {
             if (wave.waveType() != null) {
 
                 // List missing wave items not held by WaveData wrapper

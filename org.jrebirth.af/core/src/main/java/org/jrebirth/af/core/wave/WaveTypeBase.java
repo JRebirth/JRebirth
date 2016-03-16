@@ -28,7 +28,7 @@ import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.util.ObjectUtility;
 
 /**
@@ -42,7 +42,7 @@ public final class WaveTypeBase implements WaveType {
     private int uid;
 
     /**
-     * The action to performed, basically the name of the method to call. The keyword "DO_" (by default see {@link JRebirthParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to
+     * The action to performed, basically the name of the method to call. The keyword "DO_" (by default see {@link CoreParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to
      * generate the handler method
      */
     private String action;
@@ -260,7 +260,7 @@ public final class WaveTypeBase implements WaveType {
     public String toString() {
         // The action name will be used to define the name of the wave handler method
         // Prepend do before the action name to force wave handler method to begin with do (convention parameterizable)
-        return JRebirthParameters.WAVE_HANDLER_PREFIX.get() + this.action;
+        return CoreParameters.WAVE_HANDLER_PREFIX.get() + this.action;
     }
 
     /**

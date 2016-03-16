@@ -26,7 +26,7 @@ import org.jrebirth.af.api.resource.style.StyleSheetItem;
 import org.jrebirth.af.api.resource.style.StyleSheetParams;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,7 +96,7 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
 
         URL cssResource = null;
 
-        final List<String> stylePaths = skipStylesFolder ? Collections.singletonList("") : JRebirthParameters.STYLE_FOLDER.get();
+        final List<String> stylePaths = skipStylesFolder ? Collections.singletonList("") : ResourceParameters.STYLE_FOLDER.get();
 
         for (int i = 0; i < stylePaths.size() && cssResource == null; i++) {
 
@@ -108,7 +108,7 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
         }
 
         if (cssResource == null) {
-            LOGGER.error("Style Sheet : {} not found into base folder: {}", styleSheetPath, JRebirthParameters.STYLE_FOLDER.get());
+            LOGGER.error("Style Sheet : {} not found into base folder: {}", styleSheetPath, ResourceParameters.STYLE_FOLDER.get());
         }
         return cssResource;
     }

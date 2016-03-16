@@ -20,6 +20,7 @@ package org.jrebirth.af.core.resource.provided;
 import static org.jrebirth.af.core.resource.Resources.create;
 
 import org.jrebirth.af.api.resource.color.ColorItem;
+import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
 
 /**
  * The class <strong>JRebirthColors</strong>.
@@ -35,7 +36,7 @@ public interface JRebirthColors {
     /**************************************************************************************/
 
     /** The default background color of the scene. */
-    ColorItem SCENE_BG_COLOR = create(JRebirthParameters.APPLICATION_SCENE_BG_COLOR.get());
+    ColorItem SCENE_BG_COLOR = create(StageParameters.APPLICATION_SCENE_BG_COLOR.get());
 
 }
 

@@ -33,7 +33,7 @@ import org.jrebirth.af.api.resource.i18n.MessageParams;
 import org.jrebirth.af.api.resource.i18n.MessageResource;
 import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
-import org.jrebirth.af.core.resource.provided.JRebirthParameters;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.util.ClasspathUtility;
 
 import org.slf4j.Logger;
@@ -93,7 +93,7 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
      */
     private void readPropertiesFiles() {
 
-        if (this.messageFileWildcard.isEmpty() || !JRebirthParameters.LOG_RESOLUTION.get()) {
+        if (this.messageFileWildcard.isEmpty() || !CoreParameters.LOG_RESOLUTION.get()) {
             // Skip configuration loading
             LOGGER.info(JRebirthMarkers.MESSAGE, "Messages Loading is skipped");
 
@@ -158,7 +158,7 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
 
             // Translation is always allowed for all Message
             // It depends on LOG_RESOLUTION parameter for all LogMessage
-            final boolean translationAllowed = !(messageParams instanceof LogMessageParams) || JRebirthParameters.LOG_RESOLUTION.get();
+            final boolean translationAllowed = !(messageParams instanceof LogMessageParams) || CoreParameters.LOG_RESOLUTION.get();
 
             // Translate the message code as required
             String rawMessage = translationAllowed ? findMessage(messageParams.name()) : null;
