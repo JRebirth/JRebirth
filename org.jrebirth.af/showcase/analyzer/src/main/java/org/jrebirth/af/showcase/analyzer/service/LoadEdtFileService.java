@@ -23,11 +23,11 @@ import java.util.List;
 import org.jrebirth.af.api.concurrent.Priority;
 import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.module.RegistrationPoint;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.wave.Builders;
-import org.jrebirth.af.processor.annotation.RegistrationPoint;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 
 /**

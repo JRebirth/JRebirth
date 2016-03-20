@@ -2,15 +2,15 @@ package org.jrebirth.af.dialog;
 
 import org.jrebirth.af.api.concurrent.RunInto;
 import org.jrebirth.af.api.concurrent.RunType;
+import org.jrebirth.af.api.module.BootComponent;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.annotation.OnWave;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.command.single.AbstractSingleCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.Builders;
-import org.jrebirth.af.processor.annotation.WarmUp;
 
-@WarmUp
+@BootComponent
 @RunInto(RunType.JIT)
 public class DialogDaemonCommand extends AbstractSingleCommand<DialogWB> {
 

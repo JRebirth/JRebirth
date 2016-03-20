@@ -18,9 +18,10 @@
 package org.jrebirth.af.processor;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Writer;
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,25 +39,23 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.MirroredTypeException;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
-import javax.tools.Diagnostic.Kind;
+import javax.tools.Diagnostic;
 import javax.tools.FileObject;
+import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamReader;
 
-import org.jrebirth.af.modular.model.Component;
-import org.jrebirth.af.modular.model.Module;
-import org.jrebirth.af.modular.model.ObjectFactory;
-import org.jrebirth.af.modular.model.Registration;
-import org.jrebirth.af.modular.model.RegistrationEntry;
-import org.jrebirth.af.processor.annotation.Register;
-import org.jrebirth.af.processor.annotation.RegistrationPoint;
-import org.jrebirth.af.processor.annotation.WarmUp;
+import org.jrebirth.af.api.annotation.Preload;
+import org.jrebirth.af.api.module.BootComponent;
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.module.RegistrationPoint;
+import org.jrebirth.af.core.module.AbstractModuleStarter;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.jboss.forge.roaster.Roaster;
+import org.jboss.forge.roaster.model.source.JavaClassSource;
+import org.jboss.forge.roaster.model.source.MethodSource;
 
 /**
  * The Class ComponentProcessor.
@@ -64,17 +63,7 @@ import org.jrebirth.af.processor.annotation.WarmUp;
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class ComponentProcessor extends AbstractProcessor {
 
-    /** The module config path. */
-    private static String MODULE_CONFIG_PATH = "JRAF-INF";
-
-    /** The module config file name. */
-    private static String MODULE_CONFIG_FILE_NAME = "module.xml";
-
-    /** The factory. */
-    private ObjectFactory factory;
-
-    /** The jaxb context. */
-    private JAXBContext jaxbContext;
+    private static String MODULE_STARTER_SPI_PATH = "META-INF/services/org.jrebirth.af.api.module.ModuleStarter";
 
     /**
      * {@inheritDoc}
@@ -82,14 +71,6 @@ public class ComponentProcessor extends AbstractProcessor {
     @Override
     public synchronized void init(final ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
-
-        this.factory = new ObjectFactory();
-        try {
-            this.jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", ObjectFactory.class.getClassLoader()); // NOSONAR
-        } catch (final JAXBException e) {
-            e.printStackTrace();
-        }
-
     }
 
     /**
@@ -98,7 +79,7 @@ public class ComponentProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
 
-        return new HashSet<>(Arrays.asList(Register.class.getName(), RegistrationPoint.class.getName()));
+        return new HashSet<>(Arrays.asList(Preload.class.getName(), BootComponent.class.getName(), Register.class.getName(), RegistrationPoint.class.getName()));
 
     }
 
@@ -115,102 +96,39 @@ public class ComponentProcessor extends AbstractProcessor {
 
         final Elements elements = this.processingEnv.getElementUtils();
 
-        final Set<? extends Element> warmUps = roundEnv.getElementsAnnotatedWith(WarmUp.class);
-        final Set<? extends Element> registrationPoints = roundEnv.getElementsAnnotatedWith(RegistrationPoint.class);
-        final Set<? extends Element> registrations = roundEnv.getElementsAnnotatedWith(Register.class);
+        final Map<Class<?>, Set<? extends Element>> annotationMap = new HashMap<>();
+        annotationMap.put(Preload.class, roundEnv.getElementsAnnotatedWith(Preload.class));
+        annotationMap.put(BootComponent.class, roundEnv.getElementsAnnotatedWith(BootComponent.class));
+        annotationMap.put(RegistrationPoint.class, roundEnv.getElementsAnnotatedWith(RegistrationPoint.class));
+        annotationMap.put(Register.class, roundEnv.getElementsAnnotatedWith(Register.class));
+        if (!annotationMap.get(BootComponent.class).isEmpty() ||
+                !annotationMap.get(RegistrationPoint.class).isEmpty() ||
+                !annotationMap.get(Register.class).isEmpty() ||
+                !annotationMap.get(Preload.class).isEmpty()) {
 
-        // Load
-        Module module = null;// loadModuleFile();
-        if (module == null) {
-            module = createModule();
+            final String moduleName = createModuleStarter(annotationMap, this.processingEnv);
+            createSPIFile(moduleName);
         }
-
-        for (final Element element : warmUps) {
-
-            final WarmUp warmUp = element.getAnnotation(WarmUp.class);
-            // Only managed Component
-            if (warmUp != null /* && element.getKind().getClass().isAssignableFrom(AbstractComponent.class) */) {
-
-                final Component c = this.factory.createComponent();
-                c.setClazz(getClassName(element));
-
-                module.getWarmUp().getComponent().add(c);
-
-                // processingEnv.getMessager().printMessage(Kind.MANDATORY_WARNING, r.toString(), element);
-            }
-
-        }
-        //
-        for (final Element element : registrationPoints) {
-
-            final RegistrationPoint registrationPoint = element.getAnnotation(RegistrationPoint.class);
-            // Only managed annotated interfaces
-            if (registrationPoint != null && element.getKind().isInterface()) {
-
-                final Registration r = this.factory.createRegistration();
-                r.setClazz(getClassName(element));
-                r.setExclusive(registrationPoint.exclusive());
-
-                module.getRegistrations().getRegistration().add(r);
-
-                // processingEnv.getMessager().printMessage(Kind.MANDATORY_WARNING, r.toString(), element);
-            }
-
-        }
-
-        for (final Element element : registrations) {
-
-            final Register registration = element.getAnnotation(Register.class);
-
-            // Only managed annotated concrete classes
-            if (registration != null && !element.getKind().isInterface() && element.getKind().isClass()) {
-
-                final RegistrationEntry re = this.factory.createRegistrationEntry();
-                re.setClazz(getClassName(element));
-                re.setPriority(registration.priority().name());
-
-                String registeredClass;
-                TypeMirror value = null;
-                try {
-                    registration.value();
-                } catch (final MirroredTypeException mte) {
-                    value = mte.getTypeMirror();
-                }
-
-                registeredClass = getClassName(value);
-
-                for (final Registration r : module.getRegistrations().getRegistration()) {
-
-                    if (registeredClass != null && registeredClass.equals(r.getClazz())) {
-                        if (r.getRegistrationEntries() == null) {
-                            r.setRegistrationEntries(this.factory.createRegistrationEntryList());
-                        }
-                        r.getRegistrationEntries().getRegistrationEntry().add(re);
-                    }
-                }
-
-                // processingEnv.getMessager().printMessage(Kind.MANDATORY_WARNING, re.toString(), element);
-            }
-
-        }
-
-        // // also load up any existing values, since this compilation may be partial
-        // Filer filer = processingEnv.getFiler();
-        // for (Map.Entry<String, Set<String>> e : services.entrySet()) {
-        //
-        // Registration r = factory.createRegistration();
-        // r.setClazz(e.getValue().toString());
-        //
-        // if (module.getRegistrations() == null) {
-        // module.setRegistrations(factory.createRegistrationList());
-        // }
-        // module.getRegistrations().getRegistration().add(r);
-        //
-        // }
-
-        saveModule(module);
 
         return true;
+    }
+
+    private void createSPIFile(String moduleName) {
+        FileObject fo;
+        try {
+            fo = this.processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "", MODULE_STARTER_SPI_PATH);
+            this.processingEnv.getMessager().printMessage(
+                                                          Diagnostic.Kind.NOTE,
+                                                          "creating spi file: " + fo.toUri());
+
+            final Writer writer = fo.openWriter();
+            writer.write(moduleName);
+            writer.close();
+        } catch (final IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -218,76 +136,125 @@ public class ComponentProcessor extends AbstractProcessor {
      *
      * @param module the module
      */
-    private void saveModule(final Module module) {
-
-        final OutputStreamWriter out;
+    private String createModuleStarter(final Map<Class<?>, Set<? extends Element>> annotationMap, ProcessingEnvironment processingEnv) {
+        String moduleName = null;
         try {
 
-            final FileObject fileObject = this.processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "", MODULE_CONFIG_PATH + "/" + MODULE_CONFIG_FILE_NAME);
+            final Field f = processingEnv.getClass().getDeclaredField("options");
+            f.setAccessible(true);
+            final Object options = f.get(processingEnv);
+            final Field ff = options.getClass().getDeclaredField("values");
+            ff.setAccessible(true);
+            final Map<String, String> opt = (Map<String, String>) ff.get(options);
 
-            // final File path = new File(MODULE_CONFIG_PATH);
-            // path.mkdirs();
+            final String outputClasses = opt.get("-d");
+            final String baseDir = outputClasses.substring(0, outputClasses.indexOf("target\\classes"));
+            final MavenXpp3Reader pomReader = new MavenXpp3Reader();
+            final Model model = pomReader.read(new FileReader(new File(baseDir + "pom.xml")));
 
-            // out = new OutputStreamWriter(new FileOutputStream(MODULE_CONFIG_PATH + "/" + MODULE_CONFIG_FILE_NAME), Charset.forName("UTF-8"));
-            // final XMLStreamWriter xmlStreamWriter = XMLOutputFactory.newInstance().createXMLStreamWriter(out);
-            final Marshaller marshaller = this.jaxbContext.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            //
-            // marshaller.marshal(factory.createModule(module), xmlStreamWriter);
+            final String pkg = model.getGroupId() + "." + model.getArtifactId();
+            final String starterName = StringUtils.capitalize(model.getArtifactId()) + "ModuleStarter";
+            moduleName = pkg + "." + starterName;
+            final JavaClassSource javaClass = Roaster.create(JavaClassSource.class);
 
-            // OutputStream os = new FileOutputStream(MODULE_CONFIG_PATH + "/" + MODULE_CONFIG_FILE_NAME);
-            // XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-            // XMLStreamWriter writer = outputFactory.createXMLStreamWriter(os);
+            javaClass.setPackage(pkg).setName(starterName);
 
-            marshaller.marshal(this.factory.createModule(module), fileObject.openOutputStream());
-            marshaller.marshal(this.factory.createModule(module), System.out);
+            javaClass.extendSuperType(AbstractModuleStarter.class);
 
-            // os.close();
+            final StringBuilder body = new StringBuilder();
+
+            appendRegistrations(javaClass, body, annotationMap.get(Register.class));
+
+            appendPreload(javaClass, body, annotationMap.get(Preload.class));
+
+            appendBootComponent(javaClass, body, annotationMap.get(BootComponent.class));
+
+            if (!javaClass.hasMethodSignature("start")) {
+                final MethodSource<?> method = javaClass.addMethod()
+                                                        .setName("start")
+                                                        .setPublic()
+                                                        .setBody(body.toString())
+                                                        .setReturnTypeVoid();
+                method.addAnnotation(Override.class);
+
+            } else {
+                javaClass.getMethod("start").setBody(javaClass.getMethod("start").getBody() + body.toString());
+            }
+
+            System.out.println(javaClass);
+
+            JavaFileObject jfo;
+            try {
+                jfo = this.processingEnv.getFiler().createSourceFile(moduleName);
+                this.processingEnv.getMessager().printMessage(
+                                                              Diagnostic.Kind.NOTE,
+                                                              "creating source file: " + jfo.toUri());
+
+                final Writer writer = jfo.openWriter();
+                writer.write(javaClass.toString());
+                writer.close();
+            } catch (final IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
         } catch (final Exception e) {
             e.printStackTrace();
         }
 
+        return moduleName;
     }
 
-    /**
-     * Creates the module.
-     *
-     * @return the module
-     */
-    private Module createModule() {
-        final Module module = this.factory.createModule();
+    private void appendPreload(JavaClassSource javaClass, StringBuilder body, Set<? extends Element> list) {
+        for (final Element element : list) {
 
-        module.setWarmUp(this.factory.createWarmUpList());
-        module.setRegistrations(this.factory.createRegistrationList());
+            final Preload p = element.getAnnotation(Preload.class);
 
-        //
-        return module;
-    }
+            body.append("\npreloadClass(")
+                .append(getSimpleClassName(element))
+                .append(".class);\n");
 
-    /**
-     * Load module file.
-     *
-     * @return the module
-     */
-    private Module loadModuleFile() {
-
-        Module module = null;
-        final File f = new File(MODULE_CONFIG_PATH + "/" + MODULE_CONFIG_FILE_NAME);
-        if (f.exists()) {
-            try {
-                final Unmarshaller unmarshaller = this.jaxbContext.createUnmarshaller();
-
-                final InputStreamReader in = new InputStreamReader(new FileInputStream(f));// InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream(MODULE_CONFIG_PATH +
-                                                                                           // "/" + MODULE_CONFIG_FILE_NAME), Charset.forName("UTF-8"));
-                final XMLStreamReader xsr = XMLInputFactory.newInstance().createXMLStreamReader(in);
-                final Object o = unmarshaller.unmarshal(xsr);
-                module = Module.class.cast(JAXBElement.class.cast(o).getValue());
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
+            javaClass.addImport(getClassName(element));
         }
 
-        return module;
+    }
+
+    private void appendBootComponent(JavaClassSource javaClass, StringBuilder body, Set<? extends Element> list) {
+        for (final Element element : list) {
+
+            final BootComponent bc = element.getAnnotation(BootComponent.class);
+
+            body.append("\nbootComponent(")
+                .append(getSimpleClassName(element))
+                .append(".class);\n");
+
+            javaClass.addImport(getClassName(element));
+        }
+
+    }
+
+    private void appendRegistrations(JavaClassSource javaClass, StringBuilder body, Set<? extends Element> list) {
+        for (final Element element : list) {
+
+            final Register r = element.getAnnotation(Register.class);
+
+            TypeMirror value = null;
+            try {
+                r.value();
+            } catch (final MirroredTypeException mte) {
+                value = mte.getTypeMirror();
+            }
+
+            body.append("\nregister(")
+                .append(getSimpleClassName(value))
+                .append(".class, ")
+                .append(getSimpleClassName(element))
+                .append(".class);\n");
+
+            javaClass.addImport(getClassName(value));
+            javaClass.addImport(getClassName(element));
+        }
+
     }
 
     /**
@@ -318,6 +285,22 @@ public class ComponentProcessor extends AbstractProcessor {
         return res;
     }
 
+    private String getSimpleClassName(final Element element) {
+        return getSimpleClassName(element.asType());
+
+    }
+
+    private String getSimpleClassName(final TypeMirror t) {
+        String res = null;
+
+        if (t instanceof DeclaredType) {
+            final DeclaredType dt = (DeclaredType) t;
+            res = ((TypeElement) dt.asElement()).getSimpleName().toString();
+        }
+
+        return res;
+    }
+
     /**
      * Error.
      *
@@ -325,7 +308,7 @@ public class ComponentProcessor extends AbstractProcessor {
      * @param msg the msg
      */
     private void error(final Element source, final String msg) {
-        this.processingEnv.getMessager().printMessage(Kind.ERROR, msg, source);
+        // this.processingEnv.getMessager().printMessage(Kind.ERROR, msg, source);
     }
 
     // private TypeElement getContract(TypeElement type, Register a) {
@@ -374,25 +357,4 @@ public class ComponentProcessor extends AbstractProcessor {
     // }
     // }
 
-    // ClassPool pool = ClassPool.getDefault();
-    // CtClass cc;
-    // try {
-    // //cc = pool.get(elements.getBinaryName(type).toString());
-    // cc = pool.getCtClass(elements.getBinaryName(type).toString());
-    // CtField f = new CtField(CtClass.intType, "hiddenValue", cc);
-    // f.setModifiers(java.lang.reflect.Modifier.PUBLIC);
-    // cc.addField(f);
-    //
-    // cc.writeFile();
-    //
-    // } catch (NotFoundException e1) {
-    // // TODO Auto-generated catch block
-    // e1.printStackTrace();
-    // } catch (CannotCompileException e1) {
-    // // TODO Auto-generated catch block
-    // e1.printStackTrace();
-    // } catch (IOException e1) {
-    // // TODO Auto-generated catch block
-    // e1.printStackTrace();
-    // }
 }

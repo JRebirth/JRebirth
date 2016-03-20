@@ -27,13 +27,15 @@ import java.util.List;
 import org.jrebirth.af.api.concurrent.Priority;
 import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.module.RegistrationPriority;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.facade.JRebirthEventBase;
 import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.service.ServiceUtility;
-import org.jrebirth.af.processor.annotation.Register;
 import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +44,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Sébastien Bordes
  */
-@Register()
+@Register(value = LoadEdtFileService.class, priority = RegistrationPriority.Low)
 public class LoadEdtFileServiceImpl extends DefaultService implements LoadEdtFileService {
 
     /** The class logger. */
@@ -71,8 +73,7 @@ public class LoadEdtFileServiceImpl extends DefaultService implements LoadEdtFil
         // Get number of line to calculate the task progression
         final int totalLines = ServiceUtility.countFileLines(selecteFile);
 
-        try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));)
-        {
+        try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));) {
             int processedLines = 0;
 
             String strLine = br.readLine();

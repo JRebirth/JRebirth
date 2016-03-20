@@ -1,9 +1,9 @@
 package org.jrebirth.af.dialog.simpledialog;
 
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.module.RegistrationPriority;
 import org.jrebirth.af.dialog.AbstractDialogCommand;
 import org.jrebirth.af.dialog.DialogCommand;
-import org.jrebirth.af.processor.annotation.Register;
-import org.jrebirth.af.processor.annotation.RegistrationPriority;
 
 import com.github.daytron.simpledialogfx.data.DialogType;
 import com.github.daytron.simpledialogfx.dialog.Dialog;

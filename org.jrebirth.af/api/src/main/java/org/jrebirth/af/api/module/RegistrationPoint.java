@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.processor.annotation;
+package org.jrebirth.af.api.module;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -23,26 +23,19 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+// TODO: Auto-generated Javadoc
 /**
- * The Interface Register.
+ * The Interface RegistrationPoint.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)
 @Documented
-public @interface Register {
+public @interface RegistrationPoint {
 
     /**
-     * Value.
+     * Exclusive.
      *
-     * @return the class
+     * @return true, if successful
      */
-    Class<?> value() default Class.class;
-
-    /**
-     * Priority.
-     *
-     * @return the registration priority
-     */
-    RegistrationPriority priority() default RegistrationPriority.None;
-
+    boolean exclusive() default true;
 }

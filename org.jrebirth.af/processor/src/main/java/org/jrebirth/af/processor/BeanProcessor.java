@@ -18,7 +18,6 @@
 package org.jrebirth.af.processor;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -42,20 +41,12 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 import javax.tools.Diagnostic.Kind;
-import javax.tools.JavaFileObject;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 
-import org.jrebirth.af.modular.model.ObjectFactory;
-import org.jrebirth.af.processor.annotation.Register;
-import org.jrebirth.af.processor.annotation.RegistrationPoint;
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.module.RegistrationPoint;
 import org.jrebirth.af.processor.annotation.bean.Bean;
 import org.jrebirth.af.processor.util.FXBeanDefinition;
 import org.jrebirth.af.processor.util.FXPropertyDefinition;
-
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
 
 /**
  * The Class BeanProcessor.
@@ -69,11 +60,11 @@ public class BeanProcessor extends AbstractProcessor {
     /** The module config file name. */
     private static String MODULE_CONFIG_FILE_NAME = "module.xml";
 
-    /** The factory. */
-    private ObjectFactory factory;
-
-    /** The jaxb context. */
-    private JAXBContext jaxbContext;
+    // /** The factory. */
+    // private ObjectFactory factory;
+    //
+    // /** The jaxb context. */
+    // private JAXBContext jaxbContext;
 
     /**
      * {@inheritDoc}
@@ -82,12 +73,12 @@ public class BeanProcessor extends AbstractProcessor {
     public synchronized void init(final ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
-        this.factory = new ObjectFactory();
-        try {
-            this.jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", Thread.currentThread().getContextClassLoader());
-        } catch (final JAXBException e) {
-            e.printStackTrace();
-        }
+        // this.factory = new ObjectFactory();
+        // try {
+        // this.jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", Thread.currentThread().getContextClassLoader());
+        // } catch (final JAXBException e) {
+        // e.printStackTrace();
+        // }
 
     }
 
@@ -228,33 +219,33 @@ public class BeanProcessor extends AbstractProcessor {
                 e.printStackTrace();
             }
 
-            final VelocityEngine ve = new VelocityEngine(props);
-            ve.init();
+            // final VelocityEngine ve = new VelocityEngine(props);
+            // ve.init();
+            //
+            // final VelocityContext vc = new VelocityContext();
+            //
+            // vc.put("className", "assName");
+            // vc.put("packageName", "ckageName");
+            // vc.put("fieldselds", "");
+            // vc.put("methodsthods", "");
+            //
+            // final Template vt = ve.getTemplate("beaninfo.vm");
+            //
+            // final JavaFileObject jfo = this.processingEnv.getFiler().createSourceFile(fqClassName + "BeanInfo");
+            //
+            // this.processingEnv.getMessager().printMessage(
+            // Diagnostic.Kind.NOTE,
+            // "creating source file: " + jfo.toUri());
+            //
+            // final Writer writer = jfo.openWriter();
+            //
+            // this.processingEnv.getMessager().printMessage(
+            // Diagnostic.Kind.NOTE,
+            // "applying velocity template: " + vt.getName());
+            //
+            // vt.merge(vc, writer);
 
-            final VelocityContext vc = new VelocityContext();
-
-            vc.put("className", "assName");
-            vc.put("packageName", "ckageName");
-            vc.put("fieldselds", "");
-            vc.put("methodsthods", "");
-
-            final Template vt = ve.getTemplate("beaninfo.vm");
-
-            final JavaFileObject jfo = this.processingEnv.getFiler().createSourceFile(fqClassName + "BeanInfo");
-
-            this.processingEnv.getMessager().printMessage(
-                                                          Diagnostic.Kind.NOTE,
-                                                          "creating source file: " + jfo.toUri());
-
-            final Writer writer = jfo.openWriter();
-
-            this.processingEnv.getMessager().printMessage(
-                                                          Diagnostic.Kind.NOTE,
-                                                          "applying velocity template: " + vt.getName());
-
-            vt.merge(vc, writer);
-
-            writer.close();
+            // writer.close();
         }
     }
 

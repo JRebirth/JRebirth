@@ -44,7 +44,6 @@
 		<module>showcase</module>
 		<module>preloader</module>
 		<module>processor</module>
-		<module>modular</module>
 		<module>security</module>
 		<module>distribution</module>
 		<module>rest</module>

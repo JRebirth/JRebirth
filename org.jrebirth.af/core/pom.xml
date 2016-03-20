@@ -37,13 +37,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.jrebirth.af</groupId>
-			<artifactId>processor</artifactId>
-			<version>8.1.0-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- 
 		Dependency used at compile time to manage Java Webstart classpath scan
 		If this jar is not available the related code will not be called
