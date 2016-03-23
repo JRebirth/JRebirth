@@ -26,6 +26,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -56,6 +57,7 @@ import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
+import org.jboss.forge.roaster.model.util.Formatter;
 
 /**
  * The Class ComponentProcessor.
@@ -63,6 +65,7 @@ import org.jboss.forge.roaster.model.source.MethodSource;
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class ComponentProcessor extends AbstractProcessor {
 
+    private static final String FORMATTER_PROPERTIES_FILE = "/org.eclipse.jdt.core.prefs";
     private static String MODULE_STARTER_SPI_PATH = "META-INF/services/org.jrebirth.af.api.module.ModuleStarter";
 
     /**
@@ -175,13 +178,18 @@ public class ComponentProcessor extends AbstractProcessor {
                                                         .setPublic()
                                                         .setBody(body.toString())
                                                         .setReturnTypeVoid();
+                method.getJavaDoc().setFullText("{@inheritDoc}");
                 method.addAnnotation(Override.class);
 
             } else {
                 javaClass.getMethod("start").setBody(javaClass.getMethod("start").getBody() + body.toString());
             }
 
-            System.out.println(javaClass);
+            final Properties prefs = new Properties();
+            prefs.load(this.getClass().getResourceAsStream(FORMATTER_PROPERTIES_FILE));
+            final String formattedSource = Formatter.format(prefs, javaClass);
+
+            System.out.println(formattedSource);
 
             JavaFileObject jfo;
             try {
@@ -191,10 +199,10 @@ public class ComponentProcessor extends AbstractProcessor {
                                                               "creating source file: " + jfo.toUri());
 
                 final Writer writer = jfo.openWriter();
-                writer.write(javaClass.toString());
+                writer.write(formattedSource);
                 writer.close();
+
             } catch (final IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -308,53 +316,7 @@ public class ComponentProcessor extends AbstractProcessor {
      * @param msg the msg
      */
     private void error(final Element source, final String msg) {
-        // this.processingEnv.getMessager().printMessage(Kind.ERROR, msg, source);
+        this.processingEnv.getMessager().printMessage(javax.tools.Diagnostic.Kind.ERROR, msg, source);
     }
-
-    // private TypeElement getContract(TypeElement type, Register a) {
-    // // explicitly specified?
-    // try {
-    // a.value();
-    // throw new AssertionError();
-    // } catch (MirroredTypeException e) {
-    // TypeMirror m = e.getTypeMirror();
-    // if (m.getKind() == TypeKind.VOID) {
-    // // contract inferred from the signature
-    // boolean hasBaseClass = type.getSuperclass().getKind() != TypeKind.NONE && !isObject(type.getSuperclass());
-    // boolean hasInterfaces = !type.getInterfaces().isEmpty();
-    // if (hasBaseClass ^ hasInterfaces) {
-    // if (hasBaseClass)
-    // return (TypeElement) ((DeclaredType) type.getSuperclass()).asElement();
-    // return (TypeElement) ((DeclaredType) type.getInterfaces().get(0)).asElement();
-    // }
-    //
-    // error(type, "Contract type was not specified, but it couldn't be inferred.");
-    // return null;
-    // }
-    //
-    // if (m instanceof DeclaredType) {
-    // DeclaredType dt = (DeclaredType) m;
-    // return (TypeElement) dt.asElement();
-    // } else {
-    // error(type, "Invalid type specified as the contract");
-    // return null;
-    // }
-    // }
-    //
-    // }
-
-    // // now write them back out
-    // for (Map.Entry<String, Set<String>> e : services.entrySet()) {
-    // try {
-    // processingEnv.getMessager().printMessage(Kind.NOTE, "Writing JRAF-INF/registration.jraf");
-    // FileObject f = filer.createResource(StandardLocation.CLASS_OUTPUT, "", "JRAF-INF/registration.jraf");
-    // PrintWriter pw = new PrintWriter(new OutputStreamWriter(f.openOutputStream(), "UTF-8"));
-    // for (String value : e.getValue())
-    // pw.println(value);
-    // pw.close();
-    // } catch (IOException x) {
-    // processingEnv.getMessager().printMessage(Kind.ERROR, "Failed to write service definition files: " + x);
-    // }
-    // }
 
 }

@@ -64,7 +64,7 @@ public interface GlobalFacade {
     /**
      * @return Returns the behaviorFacade.
      */
-    LocalFacade<Behavior<?>> getBehaviorFacade();
+    LocalFacade<Behavior<?, ?>> getBehaviorFacade();
 
     /**
      * @return the application

@@ -25,7 +25,7 @@ import org.jrebirth.af.api.facade.GlobalFacade;
  *
  * @author Sébastien Bordes
  */
-public class BehaviorFacade extends AbstractFacade<Behavior<?>> {
+public class BehaviorFacade extends AbstractFacade<Behavior<?, ?>> {
 
     /**
      * Default Constructor.

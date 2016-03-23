@@ -27,8 +27,9 @@ import org.jrebirth.af.api.component.basic.Component;
  * A behavior is also a {@link EnhancedComponent} and is stored into the {@link BehaviorFacade}.
  *
  * @param <D> the generic type of the behavior data
+ * @param <C> the generic type of the component using this behavior
  */
-public interface Behavior<D extends BehaviorData> extends Component<Behavior<?>> {
+public interface Behavior<D extends BehaviorData, C extends BehavioredComponent<C>> extends Component<Behavior<?, ?>> {
 
     /**
      * Gets the {@link BehaviorData} used by this Behavior.
@@ -42,6 +43,6 @@ public interface Behavior<D extends BehaviorData> extends Component<Behavior<?>>
      *
      * @return the component
      */
-    BehavioredComponent<?> getComponent();
+    C getComponent();
 
 }

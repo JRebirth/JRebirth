@@ -37,7 +37,7 @@ public interface BehavioredComponent<C extends Component<C>> extends Component<C
      *
      * @return true if the component has got this behavior
      */
-    boolean hasBehavior(final Class<Behavior<?>> behaviorClass);
+    boolean hasBehavior(final Class<Behavior<?, ?>> behaviorClass);
 
     /**
      * Add a behavior to the component by providing the {@link Behavior} class.
@@ -46,7 +46,7 @@ public interface BehavioredComponent<C extends Component<C>> extends Component<C
      *
      * @return the current component to chain method call
      */
-    <BD extends BehaviorData, B extends Behavior<BD>> C addBehavior(final Class<B> behaviorClass);
+    <BD extends BehaviorData, B extends Behavior<BD, ?>> C addBehavior(final Class<B> behaviorClass);
 
     /**
      * Add a behavior to the component by providing a {@link BehaviorData}.
@@ -66,7 +66,7 @@ public interface BehavioredComponent<C extends Component<C>> extends Component<C
      *
      * @return the Behavior instance attached to the component
      */
-    <BD extends BehaviorData, B extends Behavior<BD>> B getBehavior(final Class<B> behaviorClass);
+    <BD extends BehaviorData, B extends Behavior<BD, ?>> B getBehavior(final Class<B> behaviorClass);
 
     /**
      * Return the {@link BehaviorData} used by the given Behavior type.
@@ -75,6 +75,6 @@ public interface BehavioredComponent<C extends Component<C>> extends Component<C
      *
      * @return the Behavior Data used by the given Behavior
      */
-    <BD extends BehaviorData, B extends Behavior<BD>> BD getBehaviorData(final Class<B> behaviorClass);
+    <BD extends BehaviorData, B extends Behavior<BD, ?>> BD getBehaviorData(final Class<B> behaviorClass);
 
 }

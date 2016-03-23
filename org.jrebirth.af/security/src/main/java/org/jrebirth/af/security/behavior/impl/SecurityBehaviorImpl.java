@@ -1,5 +1,6 @@
 package org.jrebirth.af.security.behavior.impl;
 
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.component.behavior.AbstractBehavior;
 import org.jrebirth.af.security.behavior.SecurityBehavior;
 import org.jrebirth.af.security.behavior.data.Securable;
@@ -9,7 +10,7 @@ import org.jrebirth.af.security.behavior.data.Securable;
  *
  * @author Sébastien Bordes
  */
-public class SecurityBehaviorImpl extends AbstractBehavior<Securable> implements SecurityBehavior {
+public class SecurityBehaviorImpl extends AbstractBehavior<Securable, Model> implements SecurityBehavior {
 
     @Override
     public void initBehavior() {

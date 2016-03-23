@@ -50,7 +50,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractBehavioredComponent.class);
 
     /** A map that store one or many behavior implementations by their type. */
-    private MultiMap<Class<? extends Behavior<?>>, Behavior<?>> behaviors;
+    private MultiMap<Class<? extends Behavior<?, ?>>, Behavior<?, ?>> behaviors;
 
     /**
      * {@inheritDoc}
@@ -68,7 +68,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
 
             } else if (data instanceof Class && ((Class<?>) data).isAssignableFrom(Behavior.class)) {
 
-                addBehavior((Class<Behavior<BehaviorData>>) data);
+                addBehavior((Class<Behavior<BehaviorData, ?>>) data);
 
             }
 
@@ -80,7 +80,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
      * {@inheritDoc}
      */
     @Override
-    public boolean hasBehavior(final Class<Behavior<?>> behaviorClass) {
+    public boolean hasBehavior(final Class<Behavior<?, ?>> behaviorClass) {
         return this.behaviors != null && this.behaviors.containsKey(behaviorClass);
     }
 
@@ -89,7 +89,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
      */
     @Override
     @SuppressWarnings("unchecked")
-    public <BD extends BehaviorData, B extends Behavior<BD>> C addBehavior(final Class<B> behaviorClass) {
+    public <BD extends BehaviorData, B extends Behavior<BD, ?>> C addBehavior(final Class<B> behaviorClass) {
 
         final UniqueKey<B> key = Key.create(behaviorClass, new Object[] { this }, getKey());
 
@@ -107,11 +107,11 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
     @SuppressWarnings("unchecked")
     public <BD extends BehaviorData> C addBehavior(final BD data) {
 
-        for (final Class<? extends Behavior<?>> behaviorClass : data.getBehaviors()) {
+        for (final Class<? extends Behavior<?, ?>> behaviorClass : data.getBehaviors()) {
 
             final Object[] optionalData = new Object[] { data, this };
 
-            final UniqueKey<? extends Behavior<?>> key = Key.create(behaviorClass, optionalData, getKey());
+            final UniqueKey<? extends Behavior<?, ?>> key = Key.create(behaviorClass, optionalData, getKey());
 
             addBehavior(getLocalFacade().getGlobalFacade().getBehaviorFacade().retrieve(key));
         }
@@ -122,15 +122,15 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    private <B extends Behavior<?>> void addBehavior(final B behavior) {
+    private <B extends Behavior<?, ?>> void addBehavior(final B behavior) {
 
         if (this.behaviors == null) {
-            this.behaviors = new MultiMap<Class<? extends Behavior<?>>, Behavior<?>>();
+            this.behaviors = new MultiMap<Class<? extends Behavior<?, ?>>, Behavior<?, ?>>();
         }
 
         LOGGER.log(ADD_BEHAVIOR, behavior.getClass().getCanonicalName(), this.getClass().getCanonicalName());
 
-        this.behaviors.add((Class<Behavior<?>>) behavior.getClass(), behavior);
+        this.behaviors.add((Class<Behavior<?, ?>>) behavior.getClass(), behavior);
     }
 
     /**
@@ -138,7 +138,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
      */
     @Override
     @SuppressWarnings("unchecked")
-    public <BD extends BehaviorData, B extends Behavior<BD>> B getBehavior(final Class<B> behaviorClass) {
+    public <BD extends BehaviorData, B extends Behavior<BD, ?>> B getBehavior(final Class<B> behaviorClass) {
 
         B behavior = null;
         if (this.behaviors != null && this.behaviors.get(behaviorClass) instanceof List) {
@@ -156,7 +156,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
      * {@inheritDoc}
      */
     @Override
-    public <BD extends BehaviorData, B extends Behavior<BD>> BD getBehaviorData(final Class<B> behaviorClass) {
+    public <BD extends BehaviorData, B extends Behavior<BD, ?>> BD getBehaviorData(final Class<B> behaviorClass) {
 
         BD data = null;
         final B behavior = getBehavior(behaviorClass);

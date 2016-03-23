@@ -30,7 +30,7 @@ import org.jrebirth.af.api.component.behavior.annotation.BehaviorDataFor;
 public abstract class AbstractBehaviorData implements BehaviorData {
 
     /** The list of related behaviors. */
-    private final List<Class<? extends Behavior<?>>> behaviors = new ArrayList<>();
+    private final List<Class<? extends Behavior<?, ?>>> behaviors = new ArrayList<>();
 
     /**
      * Default Constructor..
@@ -39,7 +39,7 @@ public abstract class AbstractBehaviorData implements BehaviorData {
         super();
 
         // Add Behavior Class added by method overriding
-        final List<? extends Class<? extends Behavior<?>>> list = getCustomBehaviors();
+        final List<? extends Class<? extends Behavior<?, ?>>> list = getCustomBehaviors();
         if (!list.isEmpty()) {
             getBehaviors().addAll(list);
         }
@@ -54,7 +54,7 @@ public abstract class AbstractBehaviorData implements BehaviorData {
      * {@inheritDoc}
      */
     @Override
-    public List<Class<? extends Behavior<?>>> getBehaviors() {
+    public List<Class<? extends Behavior<?, ?>>> getBehaviors() {
         return this.behaviors;
     }
 
@@ -63,5 +63,5 @@ public abstract class AbstractBehaviorData implements BehaviorData {
      *
      * @return the custom behaviors
      */
-    protected abstract List<? extends Class<? extends Behavior<?>>> getCustomBehaviors();
+    protected abstract List<? extends Class<? extends Behavior<?, ?>>> getCustomBehaviors();
 }

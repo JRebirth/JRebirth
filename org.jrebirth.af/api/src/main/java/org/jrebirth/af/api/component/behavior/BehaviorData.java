@@ -34,6 +34,6 @@ public interface BehaviorData {
      *
      * @return the list behavior classes
      */
-    List<Class<? extends Behavior<?>>> getBehaviors();
+    List<Class<? extends Behavior<?, ?>>> getBehaviors();
 
 }

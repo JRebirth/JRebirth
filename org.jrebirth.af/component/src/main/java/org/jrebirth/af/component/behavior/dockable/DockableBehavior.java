@@ -4,11 +4,12 @@ import javafx.scene.image.Image;
 
 import org.jrebirth.af.api.component.behavior.Behavior;
 import org.jrebirth.af.api.module.RegistrationPoint;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.resources.ComponentImages;
 
 @RegistrationPoint(exclusive = true)
-public interface DockableBehavior extends Behavior<Dockable> {
+public interface DockableBehavior extends Behavior<Dockable, Model> {
 
     default String modelName() {
         return getClass().getSimpleName().replaceAll("Model", "");

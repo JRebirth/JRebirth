@@ -40,5 +40,5 @@ public @interface BehaviorDataFor {
      *
      * @return the class<? extends behavior<?>>
      */
-    Class<? extends Behavior<?>> value();
+    Class<? extends Behavior<?, ?>> value();
 }

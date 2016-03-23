@@ -11,7 +11,7 @@ public class BehaviorDataBase extends AbstractBehaviorData {
      * {@inheritDoc}
      */
     @Override
-    protected List<? extends Class<? extends Behavior<?>>> getCustomBehaviors() {
+    protected List<? extends Class<? extends Behavior<?, ?>>> getCustomBehaviors() {
         return Collections.emptyList();
     }
 

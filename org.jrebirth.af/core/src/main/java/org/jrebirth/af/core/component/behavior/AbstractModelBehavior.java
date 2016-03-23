@@ -27,7 +27,7 @@ import org.jrebirth.af.api.ui.Model;
  *
  * @param <D> the generic type
  */
-public abstract class AbstractModelBehavior<D extends BehaviorData> extends AbstractBehavior<D> {
+public abstract class AbstractModelBehavior<D extends BehaviorData> extends AbstractBehavior<D, Model> {
 
     /**
      * Gets the root node.
@@ -35,7 +35,7 @@ public abstract class AbstractModelBehavior<D extends BehaviorData> extends Abst
      * @return the root node
      */
     public Node getRootNode() {
-        return ((Model) getComponent()).getRootNode();
+        return getComponent().getRootNode();
     }
 
 }

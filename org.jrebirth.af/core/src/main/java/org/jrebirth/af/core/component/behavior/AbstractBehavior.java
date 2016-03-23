@@ -29,13 +29,13 @@ import org.jrebirth.af.core.component.basic.AbstractComponent;
  *
  * @param <D> the generic type extending {@link BehaviorData}
  */
-public abstract class AbstractBehavior<D extends BehaviorData> extends AbstractComponent<Behavior<?>> implements Behavior<D> {
+public abstract class AbstractBehavior<D extends BehaviorData, C extends BehavioredComponent<C>> extends AbstractComponent<Behavior<?, ?>> implements Behavior<D, C> {
 
     /** The behavior data. */
     private D data;
 
     /** The behaviored component on which the behavior will be used. */
-    private BehavioredComponent<?> component;
+    private C component;
 
     /**
      * {@inheritDoc}
@@ -49,7 +49,7 @@ public abstract class AbstractBehavior<D extends BehaviorData> extends AbstractC
      * {@inheritDoc}
      */
     @Override
-    public BehavioredComponent<?> getComponent() {
+    public C getComponent() {
         return this.component;
     }
 
@@ -75,11 +75,11 @@ public abstract class AbstractBehavior<D extends BehaviorData> extends AbstractC
                                 .findFirst()
                                 .get();
 
-        this.component = (BehavioredComponent<?>) getKey().getOptionalData()
-                                                          .stream()
-                                                          .filter(d -> d instanceof BehavioredComponent<?>)
-                                                          .findFirst()
-                                                          .get();
+        this.component = (C) getKey().getOptionalData()
+                                     .stream()
+                                     .filter(d -> d instanceof BehavioredComponent<?>)
+                                     .findFirst()
+                                     .get();
 
         initBehavior();
 
