@@ -96,7 +96,7 @@ public final class FXMLUtils implements FXMLMessages {
         final FXMLLoader fxmlLoader = new FXMLLoader();
 
         final Callback<Class<?>, Object> fxmlControllerFactory = (Callback<Class<?>, Object>) ParameterUtility.buildCustomizableClass(ExtensionParameters.FXML_CONTROLLER_FACTORY,
-                                                                                                                                      DefaultFXMLControllerFactory.class, "FXMLCOntrollerFactory");
+                                                                                                                                      DefaultFXMLControllerFactory.class, FXMLControllerFactory.class);
         if (fxmlControllerFactory instanceof FXMLControllerFactory) {
             ((FXMLControllerFactory) fxmlControllerFactory).setRelatedModel(model);
         }

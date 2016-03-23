@@ -46,22 +46,22 @@ public final class ParameterUtility implements UtilMessages {
      *
      * @param parameter The parameter class to load
      * @param defaultObject the default object class to use as fallback
-     * @param typeName the wanted type name for log purpose
+     * @param interfaceClass the interface that the wanted type shall implement (for log purpose)
      *
      * @param <D> the type wanted
      *
      * @return a new instance of the generic type
      */
-    public static <D extends Object> Object buildCustomizableClass(final ParameterItem<Class<?>> parameter, final Class<D> defaultObject, final String typeName) {
+    public static <D extends Object> Object buildCustomizableClass(final ParameterItem<Class<?>> parameter, final Class<D> defaultObject, final Class<?> interfaceClass) {
         Object object = null;
         try {
             object = parameter.get().newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            LOGGER.error(CUSTOM_CLASS_LOADING_ERROR, e, typeName);
+            LOGGER.error(CUSTOM_CLASS_LOADING_ERROR, e, interfaceClass.getSimpleName());
             try {
                 object = defaultObject.newInstance();
             } catch (InstantiationException | IllegalAccessException e2) {
-                throw new CoreRuntimeException("Impossible to build Default " + typeName, e2);
+                throw new CoreRuntimeException("Impossible to build Default " + interfaceClass.getSimpleName(), e2);
             }
         }
         return object;

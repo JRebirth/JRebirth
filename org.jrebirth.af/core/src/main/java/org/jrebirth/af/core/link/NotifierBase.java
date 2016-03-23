@@ -44,8 +44,8 @@ import org.jrebirth.af.core.exception.WaveException;
 import org.jrebirth.af.core.facade.AbstractGlobalReady;
 import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.resource.provided.parameter.ExtensionParameters;
 import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
+import org.jrebirth.af.core.resource.provided.parameter.ExtensionParameters;
 import org.jrebirth.af.core.service.ServiceTaskBase;
 import org.jrebirth.af.core.service.basic.TaskTrackerService;
 import org.jrebirth.af.core.util.ParameterUtility;
@@ -82,7 +82,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         // Attach the right EnhancedComponent Factory
         this.unprocessedWaveHandler = (UnprocessedWaveHandler) ParameterUtility.buildCustomizableClass(ExtensionParameters.UNPROCESSED_WAVE_HANDLER,
                                                                                                        DefaultUnprocessedWaveHandler.class,
-                                                                                                       "UnprocessedWaveHandler");
+                                                                                                       UnprocessedWaveHandler.class);
     }
 
     /**
