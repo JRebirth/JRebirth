@@ -12,6 +12,9 @@ import org.jrebirth.af.core.concurrent.JRebirthThread;
 public abstract class AbstractModuleStarter implements ModuleStarter {
 
     protected void register(Class<? extends Component<?>> interfaceClass, Class<? extends Component<?>> implClass) {
+
+        preloadClass(interfaceClass);
+
         getFacade().getComponentFactory().register(interfaceClass, implClass);
     }
 
