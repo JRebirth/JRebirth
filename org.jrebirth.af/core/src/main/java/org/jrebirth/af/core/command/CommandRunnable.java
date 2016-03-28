@@ -52,7 +52,7 @@ final class CommandRunnable extends AbstractJrbRunnable {
      * @param wave the wave that generates this command call
      */
     CommandRunnable(final String runnableName, final AbstractBaseCommand<? extends WaveBean> command, final Wave wave) {
-        super(runnableName, command.getRunnablePriority());
+        super(runnableName, command.getPriorityLevel());
         this.command = command;
         this.wave = wave;
     }

@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.api.link;
 
+import java.util.List;
+
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
@@ -51,6 +53,29 @@ public interface ModelReady extends ServiceReady {
      * @return a model instance
      */
     <M extends Model> M getModel(final UniqueKey<M> modelKey);
+
+    /**
+     * Return the list of model singleton or part of multiton according to key parts provided.
+     *
+     * @param clazz the model class to find
+     * @param keyPart key parts for multiton model (in option), singleton
+     *
+     * @param <M> a sub class of Model
+     *
+     * @return a list of model instance
+     */
+    <M extends Model> List<M> getModels(final Class<M> clazz, final Object... keyPart);
+
+    /**
+     * Return the list of model singleton or part of multiton according to {@link UniqueKey}.
+     *
+     * @param modelKey the key that describe the searched Model component
+     *
+     * @param <M> a sub class of Model
+     *
+     * @return a list of model instance
+     */
+    <M extends Model> List<M> getModels(final UniqueKey<M> modelKey);
 
     /**
      * Send a wave used to display an UI model.

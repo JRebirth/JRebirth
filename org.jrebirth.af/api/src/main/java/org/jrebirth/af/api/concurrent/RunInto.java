@@ -24,6 +24,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
+
 /**
  * This annotation is used to.
  *
@@ -45,7 +47,7 @@ public @interface RunInto {
     /**
      * Define the Runnable Priority value.
      *
-     * The default value is RunnablePriority.Normal
+     * The default value is PriorityLevel.Normal
      */
-    RunnablePriority priority() default RunnablePriority.Normal;
+    PriorityLevel priority() default PriorityLevel.Normal;
 }

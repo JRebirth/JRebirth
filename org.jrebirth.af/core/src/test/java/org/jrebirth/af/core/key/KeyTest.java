@@ -135,7 +135,7 @@ public class KeyTest {
     private <C extends Command> void checkComponentCount(final Class<C> componentClass, final int nb) {
         final long begin = System.currentTimeMillis();
 
-        final List<?> kcList = this.commandFacade.retrieveAll(Key.create(componentClass));
+        final List<?> kcList = this.commandFacade.retrieveFilter(Key.create(componentClass));
 
         System.out.println(System.currentTimeMillis() - begin + " ms");
 

@@ -19,6 +19,8 @@ package org.jrebirth.af.api.concurrent;
 
 import java.util.concurrent.ExecutorService;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
+
 /**
  *
  * The class <strong>JRebirthThreadPoolExecutor</strong> is used to to manage the JRebirth Thread Pool (<b>JTP</b>).
@@ -34,6 +36,6 @@ public interface IJRebirthThreadPoolExecutor extends ExecutorService {
      *
      * @return true if this priority can be run right now
      */
-    boolean checkAvailability(final RunnablePriority taskPriority);
+    boolean checkAvailability(final PriorityLevel taskPriority);
 
 }

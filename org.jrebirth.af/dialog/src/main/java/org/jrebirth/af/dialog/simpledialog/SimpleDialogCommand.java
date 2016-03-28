@@ -1,7 +1,7 @@
 package org.jrebirth.af.dialog.simpledialog;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.module.Register;
-import org.jrebirth.af.api.module.RegistrationPriority;
 import org.jrebirth.af.dialog.AbstractDialogCommand;
 import org.jrebirth.af.dialog.DialogCommand;
 
@@ -14,7 +14,7 @@ import com.github.daytron.simpledialogfx.dialog.Dialog;
  * 
  * @author Sébastien Bordes
  */
-@Register(value = DialogCommand.class, priority = RegistrationPriority.Low)
+@Register(value = DialogCommand.class, priority = PriorityLevel.Low)
 public class SimpleDialogCommand extends AbstractDialogCommand implements DialogCommand {
 
     /**
@@ -26,8 +26,7 @@ public class SimpleDialogCommand extends AbstractDialogCommand implements Dialog
                                          DialogType.INFORMATION,
                                          bean.getTitle(),
                                          bean.getHeader(),
-                                         bean.getMessage()
-                );
+                                         bean.getMessage());
         dialog.showAndWait();
     }
 
@@ -40,8 +39,7 @@ public class SimpleDialogCommand extends AbstractDialogCommand implements Dialog
                                          DialogType.WARNING,
                                          bean.getTitle(),
                                          bean.getHeader(),
-                                         bean.getMessage()
-                );
+                                         bean.getMessage());
         dialog.showAndWait();
     }
 
@@ -54,8 +52,7 @@ public class SimpleDialogCommand extends AbstractDialogCommand implements Dialog
                                          DialogType.ERROR,
                                          bean.getTitle(),
                                          bean.getHeader(),
-                                         bean.getMessage()
-                );
+                                         bean.getMessage());
         dialog.showAndWait();
     }
 

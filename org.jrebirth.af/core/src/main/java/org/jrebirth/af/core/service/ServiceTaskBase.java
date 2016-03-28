@@ -25,10 +25,10 @@ import java.util.List;
 
 import javafx.concurrent.Task;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.concurrent.Priority;
-import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.service.Service;
@@ -83,7 +83,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
     private double localWorkDone;
 
     /** The runnable priority. */
-    private final RunnablePriority priority;
+    private final PriorityLevel priority;
 
     /** The creation timestamp in milliseconds. */
     private final Instant creationTime;
@@ -107,7 +107,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
         this.wave = wave;
 
         final Priority priorityA = method.getAnnotation(Priority.class);
-        this.priority = priorityA == null ? RunnablePriority.Low : priorityA.value();
+        this.priority = priorityA == null ? PriorityLevel.Low : priorityA.value();
 
     }
 
@@ -365,7 +365,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
      * {@inheritDoc}
      */
     @Override
-    public RunnablePriority getPriority() {
+    public PriorityLevel getPriority() {
         return this.priority;
     }
 

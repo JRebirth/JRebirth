@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.api.link;
 
+import java.util.List;
+
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.command.CommandBean;
 import org.jrebirth.af.api.key.UniqueKey;
@@ -54,6 +56,29 @@ public interface CommandReady {
      * @return a command instance
      */
     <C extends Command> C getCommand(final UniqueKey<C> commandKey);
+
+    /**
+     * Return the list of command singleton or part of multiton.
+     *
+     * @param clazz the service class to find
+     * @param keyPart the unique key (in option)
+     *
+     * @param <C> a sub class of command
+     *
+     * @return a list of command instance
+     */
+    <C extends Command> List<C> getCommands(final Class<C> clazz, final Object... keyPart);
+
+    /**
+     * Return the list of command singleton or part of multiton according to {@link UniqueKey}.
+     *
+     * @param commandKey the key that describe the searched {@link Command} component
+     *
+     * @param <C> a sub class of {@link Command}
+     *
+     * @return a list of command instance
+     */
+    <C extends Command> List<C> getCommands(final UniqueKey<C> commandKey);
 
     /**
      * Send a wave used to call a command.

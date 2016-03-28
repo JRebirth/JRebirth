@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.api.link;
 
+import java.util.List;
+
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.wave.Wave;
@@ -53,6 +55,29 @@ public interface ServiceReady extends CommandReady {
      * @return a service instance
      */
     <S extends Service> S getService(final UniqueKey<S> serviceKey);
+
+    /**
+     * Return the list of service singleton or part of multiton.
+     *
+     * @param clazz the service class to find
+     * @param keyPart the unique key (in option)
+     *
+     * @param <S> a sub class of service
+     *
+     * @return a list of service instance
+     */
+    <S extends Service> List<S> getServices(final Class<S> clazz, final Object... keyPart);
+
+    /**
+     * Return the list of service singleton or part of multiton according to {@link UniqueKey}.
+     *
+     * @param serviceKey the key that describe the searched {@link Service} component
+     *
+     * @param <S> a sub class of {@link Service}
+     *
+     * @return a list of service instance
+     */
+    <S extends Service> List<S> getServices(final UniqueKey<S> serviceKey);
 
     /**
      * Send a wave used to return data from a service.

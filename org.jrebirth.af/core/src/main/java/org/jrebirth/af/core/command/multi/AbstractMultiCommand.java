@@ -22,11 +22,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.annotation.Sequential;
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.command.MultiCommand;
 import org.jrebirth.af.api.concurrent.RunType;
-import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.key.UniqueKey;
@@ -110,7 +110,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * @param priority the runnable priority
      * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
      */
-    public AbstractMultiCommand(final RunType runInto, final RunnablePriority priority, final boolean sequential) {
+    public AbstractMultiCommand(final RunType runInto, final PriorityLevel priority, final boolean sequential) {
         super(runInto, priority);
         initSequential(sequential);
     }

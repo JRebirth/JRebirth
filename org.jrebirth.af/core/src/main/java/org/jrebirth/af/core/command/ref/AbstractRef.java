@@ -17,8 +17,8 @@
  */
 package org.jrebirth.af.core.command.ref;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.concurrent.RunType;
-import org.jrebirth.af.api.concurrent.RunnablePriority;
 
 /**
  * The Class AbstractRef.
@@ -31,7 +31,7 @@ public abstract class AbstractRef<R extends AbstractRef<R>> implements Ref {
     private RunType runType;
 
     /** The priority. */
-    private RunnablePriority priority;
+    private PriorityLevel priority;
 
     /**
      * Run into.
@@ -58,7 +58,7 @@ public abstract class AbstractRef<R extends AbstractRef<R>> implements Ref {
      *
      * @return the runnable priority
      */
-    public RunnablePriority priority() {
+    public PriorityLevel priority() {
         return this.priority;
     }
 
@@ -68,7 +68,7 @@ public abstract class AbstractRef<R extends AbstractRef<R>> implements Ref {
      * @param priority the priority
      * @return the r
      */
-    public R priority(final RunnablePriority priority) {
+    public R priority(final PriorityLevel priority) {
         this.priority = priority;
         return (R) this;
     }

@@ -27,9 +27,9 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.concurrent.IJRebirthThreadPoolExecutor;
 import org.jrebirth.af.api.concurrent.JRebirthRunnable;
-import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
@@ -66,7 +66,7 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements IJ
      * @return true if this priority can be run right now
      */
     @Override
-    public boolean checkAvailability(final RunnablePriority taskPriority) {
+    public boolean checkAvailability(final PriorityLevel taskPriority) {
 
         // The next task could be added if:
         // _ a slot is available
@@ -82,10 +82,10 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements IJ
      *
      * @return true if the priority is greater than those pending
      */
-    private boolean checkPriority(final RunnablePriority taskPriority) {
+    private boolean checkPriority(final PriorityLevel taskPriority) {
         boolean highPriority = false;
         for (final JRebirthRunnable jr : this.pending) {
-            highPriority |= taskPriority.getLevel() > jr.getPriority().getLevel();
+            highPriority |= taskPriority.level() > jr.getPriority().level();
         }
         return !highPriority;
     }

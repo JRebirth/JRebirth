@@ -68,7 +68,7 @@ public interface ServiceTask<T> extends Worker<T> {
     // * {@inheritDoc}
     // */
     // @Override
-    // RunnablePriority getPriority() ;
+    // PriorityLevel getPriority() ;
     //
     // /**
     // * {@inheritDoc}

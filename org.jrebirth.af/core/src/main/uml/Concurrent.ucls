@@ -92,9 +92,9 @@
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </enumeration>  
-  <enumeration id="10" language="java" name="org.jrebirth.af.api.concurrent.RunnablePriority" 
+  <enumeration id="10" language="java" name="org.jrebirth.af.api.concurrent.PriorityLevel" 
     project="org.jrebirth.af.api" 
-    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/concurrent/RunnablePriority.java" binary="false" 
+    file="/org.jrebirth.af.api/src/main/java/org/jrebirth/af/api/concurrent/PriorityLevel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="536" y="641"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 

@@ -22,11 +22,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.concurrent.RunInto;
 import org.jrebirth.af.api.concurrent.RunType;
-import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.log.JRLogger;
@@ -114,7 +114,7 @@ public class WaveHandler implements LinkMessages {
         final RunInto runInto = customMethod.getAnnotation(RunInto.class);
 
         // Retrieve the annotation runnable priority (if any)
-        final RunnablePriority priority = runInto == null ? RunnablePriority.Normal : runInto.priority();
+        final PriorityLevel priority = runInto == null ? PriorityLevel.Normal : runInto.priority();
 
         // Retrieve the annotation run type (if any)
         final RunType runType = runInto == null ? null : runInto.value();
@@ -146,7 +146,7 @@ public class WaveHandler implements LinkMessages {
      *
      * @return the right JRebirth Runnable
      */
-    private JRebirthRunnable buildWaveRunnable(final Wave wave, final Method customMethod, final RunnablePriority priority) {
+    private JRebirthRunnable buildWaveRunnable(final Wave wave, final Method customMethod, final PriorityLevel priority) {
 
         final WaveHandler waveHandler = this;
 

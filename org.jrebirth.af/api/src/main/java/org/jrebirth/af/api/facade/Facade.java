@@ -120,6 +120,31 @@ public interface Facade<R extends FacadeReady<R>> {
     <E extends R> E retrieve(final Class<E> clazz, final Object... keyPart);
 
     /**
+     * Retrieve a ready object component.<br />
+     * May allow to build it if it hadn't been done previously
+     *
+     * @param uniqueKey the unique key for the component to get
+     *
+     * @return the singleton of the component
+     *
+     * @param <E> the type of the ready object to retrieve
+     */
+    <E extends R> List<E> retrieveMany(final UniqueKey<E> uniqueKey);
+
+    /**
+     * Retrieve a ready object component.<br />
+     * May allow to build it if it hadn't been done previously
+     *
+     * @param clazz the component class
+     * @param keyPart the unique key for multiton FacadeReady element, could be omitted for singleton
+     *
+     * @return the singleton of the component
+     *
+     * @param <E> the type of the ready object to retrieve
+     */
+    <E extends R> List<E> retrieveMany(final Class<E> clazz, final Object... keyPart);
+
+    /**
      * Return the list of component that have the same classField than the given key.
      *
      * @param uniqueKey the key used to retrieve all component matching its classField
@@ -128,6 +153,6 @@ public interface Facade<R extends FacadeReady<R>> {
      *
      * @param <E> The type of the object registered by this ClassKey
      */
-    <E extends R> List<E> retrieveAll(UniqueKey<E> uniqueKey);
+    <E extends R> List<E> retrieveFilter(UniqueKey<E> uniqueKey);
 
 }

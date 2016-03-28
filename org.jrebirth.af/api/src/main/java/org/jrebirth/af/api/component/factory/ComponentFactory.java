@@ -17,7 +17,8 @@
  */
 package org.jrebirth.af.api.component.factory;
 
-import org.jrebirth.af.api.component.basic.Component;
+import java.util.List;
+
 import org.jrebirth.af.api.exception.CoreException;
 
 /**
@@ -28,12 +29,11 @@ import org.jrebirth.af.api.exception.CoreException;
 public interface ComponentFactory {
 
     /**
-     * .
+     * Register an implementation class for an interface.
      *
-     * @param interfaceClass
-     * @param implClass
+     * @param item the registration item
      */
-    void register(Class<? extends Component<?>> interfaceClass, Class<? extends Component<?>> implClass);
+    void register(final RegistrationItem item);
 
     /**
      * Build a fresh instance of a component.<br />
@@ -41,12 +41,12 @@ public interface ComponentFactory {
      *
      * @param clazz the component class
      *
-     * @return a new fresh instance of component
+     * @return a list of fresh instance of components
      *
      * @param <R> the ReadyObject, it's a component class
      *
      * @throws CoreException CoreException if an error has occurred
      */
-    <R extends Object> R buildComponent(final Class<R> clazz) throws CoreException;
+    <R extends Object> List<R> buildComponents(final Class<R> clazz) throws CoreException;
 
 }

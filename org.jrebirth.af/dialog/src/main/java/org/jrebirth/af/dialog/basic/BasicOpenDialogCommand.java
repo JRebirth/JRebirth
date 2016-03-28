@@ -3,12 +3,12 @@ package org.jrebirth.af.dialog.basic;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.module.Register;
-import org.jrebirth.af.api.module.RegistrationPriority;
 import org.jrebirth.af.dialog.AbstractDialogCommand;
 import org.jrebirth.af.dialog.DialogCommand;
 
-@Register(value = DialogCommand.class, priority = RegistrationPriority.Lowest)
+@Register(value = DialogCommand.class, priority = PriorityLevel.Lowest)
 public class BasicOpenDialogCommand extends AbstractDialogCommand {
 
     /**

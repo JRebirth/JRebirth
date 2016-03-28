@@ -24,6 +24,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
+
 /**
  * This annotation is used to define the runnable priority for a command.
  *
@@ -38,8 +40,8 @@ public @interface Priority {
     /**
      * Define the Runnable Priority value.
      *
-     * The default value is RunnablePriority.Low
+     * The default value is PriorityLevel.Low
      */
-    RunnablePriority value() default RunnablePriority.Low;
+    PriorityLevel value() default PriorityLevel.Low;
 
 }

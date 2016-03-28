@@ -23,6 +23,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
+
 /**
  * The Interface Register.
  */
@@ -43,6 +45,15 @@ public @interface Register {
      *
      * @return the registration priority
      */
-    RegistrationPriority priority() default RegistrationPriority.None;
+    PriorityLevel priority() default PriorityLevel.None;
+
+    /**
+     * Additional Weight to perform priority calculation.
+     * 
+     * Shall be strictly lower than 1000
+     *
+     * @return the registration priority
+     */
+    int weight() default 0;
 
 }

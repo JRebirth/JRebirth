@@ -17,11 +17,11 @@
  */
 package org.jrebirth.af.core.command;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.command.CommandBean;
 import org.jrebirth.af.api.concurrent.RunInto;
 import org.jrebirth.af.api.concurrent.RunType;
-import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.facade.JRebirthEventType;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
@@ -59,7 +59,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
     /**
      * The field that indicates the threading priority.
      */
-    protected RunnablePriority runnablePriority;
+    protected PriorityLevel runnablePriority;
 
     private Class<WB> waveBeanClass;
 
@@ -95,7 +95,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
      * @param priority the runnable priority
      */
     @SuppressWarnings("unchecked")
-    public AbstractBaseCommand(final RunType runType, final RunnablePriority priority) {
+    public AbstractBaseCommand(final RunType runType, final PriorityLevel priority) {
         super();
         // Try to retrieve the RunInto annotation at class level within class hierarchy
         final RunInto ria = ClassUtility.getLastClassAnnotation(this.getClass(), RunInto.class);
@@ -106,7 +106,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
         this.runIntoThread = ria == null ? runType == null ? RunType.JIT : runType : ria.value();
 
         // Do same job for the priority
-        this.runnablePriority = ria == null ? priority == null ? RunnablePriority.Normal : priority : ria.priority();
+        this.runnablePriority = ria == null ? priority == null ? PriorityLevel.Normal : priority : ria.priority();
 
         this.waveBeanClass = (Class<WB>) ClassUtility.getGenericClassAssigned(this.getClass(), WaveBean.class);
         if (this.waveBeanClass == null) {
@@ -211,7 +211,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
     /**
      * @return Returns the runInto.
      */
-    protected final RunnablePriority getRunnablePriority() {
+    protected final PriorityLevel getPriorityLevel() {
         return this.runnablePriority;
     }
 

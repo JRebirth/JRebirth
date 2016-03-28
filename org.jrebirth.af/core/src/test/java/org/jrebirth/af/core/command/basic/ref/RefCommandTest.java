@@ -1,7 +1,7 @@
 package org.jrebirth.af.core.command.basic.ref;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.concurrent.RunType;
-import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.basic.BasicCommandTest;
 import org.jrebirth.af.core.command.ref.Ref;
@@ -23,7 +23,7 @@ public class RefCommandTest extends BasicCommandTest {
         System.out.println("Sequential Test default");
 
         final Ref ref = Ref.single()
-                           .priority(RunnablePriority.Highest)
+                           .priority(PriorityLevel.Highest)
                            .runInto(RunType.JTP)
                            .run(this::sayHello);
 
@@ -35,7 +35,7 @@ public class RefCommandTest extends BasicCommandTest {
         System.out.println("Sequential Test default");
 
         final Ref ref = Ref.single()
-                           .priority(RunnablePriority.Highest)
+                           .priority(PriorityLevel.Highest)
                            .runInto(RunType.JTP)
                            .runWave(this::sayHelloWave);
 

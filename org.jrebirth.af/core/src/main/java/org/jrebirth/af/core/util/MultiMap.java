@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jrebirth.af.api.concurrent.RunnablePriority;
+import org.jrebirth.af.api.annotation.PriorityLevel;
 
 /**
  * The class <strong>MultiMap</strong>.
@@ -156,7 +156,7 @@ public class MultiMap<K, V> implements Map<K, List<V>> {
         private final String description;
 
         /** The priority of the entry. */
-        private final RunnablePriority priority;
+        private final PriorityLevel priority;
 
         /** The entry value. */
         private final E value;
@@ -169,7 +169,7 @@ public class MultiMap<K, V> implements Map<K, List<V>> {
          * @param priority the priority entry
          * @param value the value entry
          */
-        public Entry(final String id, final String description, final RunnablePriority priority, final E value) {
+        public Entry(final String id, final String description, final PriorityLevel priority, final E value) {
             super();
             this.id = id;
             this.description = description;
@@ -194,7 +194,7 @@ public class MultiMap<K, V> implements Map<K, List<V>> {
         /**
          * @return the priority
          */
-        public RunnablePriority getPriority() {
+        public PriorityLevel getPriority() {
             return this.priority;
         }
 

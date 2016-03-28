@@ -19,8 +19,8 @@ package org.jrebirth.af.core.concurrent;
 
 import java.time.Instant;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.concurrent.JRebirthRunnable;
-import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
@@ -39,7 +39,7 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
     private final String runnableName;
 
     /** The runnable priority. */
-    private final RunnablePriority priority;
+    private final PriorityLevel priority;
 
     /** The creation timestamp in milliseconds. */
     private final Instant creationTime;
@@ -50,7 +50,7 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
      * @param runnableName the name of the runnable to allow live debugging
      */
     public AbstractJrbRunnable(final String runnableName) {
-        this(runnableName, RunnablePriority.Normal);
+        this(runnableName, PriorityLevel.Normal);
     }
 
     /**
@@ -59,7 +59,7 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
      * @param runnableName the name of the runnable to allow live debugging
      * @param priority the runnable priority
      */
-    public AbstractJrbRunnable(final String runnableName, final RunnablePriority priority) {
+    public AbstractJrbRunnable(final String runnableName, final PriorityLevel priority) {
 
         this.creationTime = Instant.now();
 
@@ -103,7 +103,7 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
      * {@inheritDoc}
      */
     @Override
-    public RunnablePriority getPriority() {
+    public PriorityLevel getPriority() {
         return this.priority;
     }
 

@@ -3,14 +3,14 @@ package org.jrebirth.af.component.behavior.swipable.impl;
 import javafx.event.EventType;
 import javafx.scene.input.SwipeEvent;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.module.Register;
-import org.jrebirth.af.api.module.RegistrationPriority;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.component.behavior.swipable.SwipableBehavior;
 import org.jrebirth.af.component.behavior.swipable.data.Swipable;
 import org.jrebirth.af.core.component.behavior.AbstractModelBehavior;
 
-@Register(value = SwipableBehavior.class, priority = RegistrationPriority.Normal)
+@Register(value = SwipableBehavior.class, priority = PriorityLevel.Normal)
 public class SwipableBehaviorImpl extends AbstractModelBehavior<Swipable> implements SwipableBehavior {
 
     // private final AtomicBoolean showing = new AtomicBoolean(false);

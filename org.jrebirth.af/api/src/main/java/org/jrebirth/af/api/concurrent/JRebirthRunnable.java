@@ -19,6 +19,8 @@ package org.jrebirth.af.api.concurrent;
 
 import java.time.Instant;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
+
 /**
  * The class <strong>JRebirthRunnable</strong>.
  *
@@ -32,8 +34,8 @@ public interface JRebirthRunnable extends Runnable {
      *
      * @return the runnable priority
      */
-    default RunnablePriority getPriority() {
-        return RunnablePriority.Normal;
+    default PriorityLevel getPriority() {
+        return PriorityLevel.Normal;
     }
 
     /**

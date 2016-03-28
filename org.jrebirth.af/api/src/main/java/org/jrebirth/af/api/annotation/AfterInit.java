@@ -40,6 +40,6 @@ public @interface AfterInit {
      *
      * There is no default value
      */
-    MethodPriority value() default MethodPriority.NORMAL;
+    PriorityLevel value() default PriorityLevel.Normal;
 
 }

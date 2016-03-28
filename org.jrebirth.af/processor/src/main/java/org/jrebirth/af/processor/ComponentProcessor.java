@@ -46,6 +46,7 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
 
 import org.jrebirth.af.api.annotation.Preload;
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.module.BootComponent;
 import org.jrebirth.af.api.module.Register;
 import org.jrebirth.af.api.module.RegistrationPoint;
@@ -257,10 +258,16 @@ public class ComponentProcessor extends AbstractProcessor {
                 .append(getSimpleClassName(value))
                 .append(".class, ")
                 .append(getSimpleClassName(element))
-                .append(".class);\n");
+                .append(".class, ")
+                .append("PriorityLevel.")
+                .append(r.priority().name())
+                .append(", ")
+                .append(r.weight())
+                .append(");\n");
 
             javaClass.addImport(getClassName(value));
             javaClass.addImport(getClassName(element));
+            javaClass.addImport(PriorityLevel.class);
         }
 
     }

@@ -24,11 +24,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.concurrent.Priority;
-import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.facade.JRebirthEvent;
 import org.jrebirth.af.api.module.Register;
-import org.jrebirth.af.api.module.RegistrationPriority;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.facade.JRebirthEventBase;
 import org.jrebirth.af.core.log.JRebirthMarkers;
@@ -44,7 +43,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Sébastien Bordes
  */
-@Register(value = LoadEdtFileService.class, priority = RegistrationPriority.Low)
+@Register(value = LoadEdtFileService.class, priority = PriorityLevel.Low)
 public class LoadEdtFileServiceImpl extends DefaultService implements LoadEdtFileService {
 
     /** The class logger. */
@@ -63,7 +62,7 @@ public class LoadEdtFileServiceImpl extends DefaultService implements LoadEdtFil
      * {@inheritDoc}
      */
     @Override
-    @Priority(RunnablePriority.High)
+    @Priority(PriorityLevel.High)
     public List<JRebirthEvent> doLoadEvents(final File selecteFile, final Wave wave) {
 
         final List<JRebirthEvent> eventList = new ArrayList<>();

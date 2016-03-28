@@ -291,7 +291,7 @@
                     <br/>
                     By default the
                     <b>Priority</b>
-                    is set to RunnablePriority.Low (a level below Normal)
+                    is set to PriorityLevel.Low (a level below Normal)
                     to let other task to be performed
                     into JTP before Service feature calls (like Command).
                 </p>

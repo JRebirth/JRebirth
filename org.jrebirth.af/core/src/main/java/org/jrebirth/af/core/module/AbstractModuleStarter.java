@@ -1,7 +1,9 @@
 package org.jrebirth.af.core.module;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.component.basic.Component;
+import org.jrebirth.af.api.component.factory.RegistrationItem;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.facade.GlobalFacade;
 import org.jrebirth.af.api.module.ModuleStarter;
@@ -11,11 +13,11 @@ import org.jrebirth.af.core.concurrent.JRebirthThread;
 
 public abstract class AbstractModuleStarter implements ModuleStarter {
 
-    protected void register(Class<? extends Component<?>> interfaceClass, Class<? extends Component<?>> implClass) {
+    protected void register(Class<? extends Component<?>> interfaceClass, Class<? extends Component<?>> implClass, PriorityLevel priority, int weigh) {
 
         preloadClass(interfaceClass);
 
-        getFacade().getComponentFactory().register(interfaceClass, implClass);
+        getFacade().getComponentFactory().register(RegistrationItem.create().interfaceClass(interfaceClass).implClass(implClass));
     }
 
     @SuppressWarnings("unchecked")

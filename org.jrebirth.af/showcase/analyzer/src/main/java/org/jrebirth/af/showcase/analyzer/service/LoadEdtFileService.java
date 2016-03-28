@@ -20,8 +20,8 @@ package org.jrebirth.af.showcase.analyzer.service;
 import java.io.File;
 import java.util.List;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.concurrent.Priority;
-import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.facade.JRebirthEvent;
 import org.jrebirth.af.api.module.RegistrationPoint;
 import org.jrebirth.af.api.service.Service;
@@ -52,7 +52,7 @@ public interface LoadEdtFileService extends Service {
      *
      * @return the list of loaded events
      */
-    @Priority(RunnablePriority.High)
+    @Priority(PriorityLevel.High)
     List<JRebirthEvent> doLoadEvents(final File selecteFile, final Wave wave);
 
 }

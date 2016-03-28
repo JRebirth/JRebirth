@@ -117,9 +117,9 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="13" language="java" name="org.jrebirth.af.api.concurrent.RunnablePriority" 
+  <enumeration id="13" language="java" name="org.jrebirth.af.api.concurrent.PriorityLevel" 
     project="org.jrebirth.af.core" 
-    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/concurrent/RunnablePriority.java" binary="false" 
+    file="/org.jrebirth.af.core/src/main/java/org/jrebirth/af/api/concurrent/PriorityLevel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="94" y="718"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 

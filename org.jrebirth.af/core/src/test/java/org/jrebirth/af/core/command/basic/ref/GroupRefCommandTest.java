@@ -1,7 +1,7 @@
 package org.jrebirth.af.core.command.basic.ref;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.concurrent.RunType;
-import org.jrebirth.af.api.concurrent.RunnablePriority;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.basic.BasicCommandTest;
 import org.jrebirth.af.core.command.ref.GroupRefCommand;
@@ -25,14 +25,14 @@ public class GroupRefCommandTest extends BasicCommandTest {
         final Ref ref = Ref.group()
                            .sequential(true)
                            .runInto(RunType.JTP)
-                           .priority(RunnablePriority.Highest)
+                           .priority(PriorityLevel.Highest)
                            .add(
                                 Ref.single()
-                                   .priority(RunnablePriority.Highest)
+                                   .priority(PriorityLevel.Highest)
                                    .runInto(RunType.JTP)
                                    .run(this::sayHello),
                                 Ref.single()
-                                   .priority(RunnablePriority.Highest)
+                                   .priority(PriorityLevel.Highest)
                                    .runInto(RunType.JTP)
                                    .runWave(this::sayHelloWave));
 
@@ -46,33 +46,33 @@ public class GroupRefCommandTest extends BasicCommandTest {
         final Ref ref = Ref.group()
                            .sequential(true)
                            .runInto(RunType.JTP)
-                           .priority(RunnablePriority.Highest)
+                           .priority(PriorityLevel.Highest)
                            .add(
                                 // Ref.real().commandKey(UniqueKey.key(UpdateCursorCommand.class, Cursor.WAIT)),
 
                                 Ref.single()
-                                   .priority(RunnablePriority.Highest)
+                                   .priority(PriorityLevel.Highest)
                                    .runInto(RunType.JTP)
                                    .run(this::sayHello),
 
                                 Ref.group()
                                    .sequential(true)
                                    .runInto(RunType.JTP)
-                                   .priority(RunnablePriority.Highest)
+                                   .priority(PriorityLevel.Highest)
                                    .add(
                                         Ref.single()
-                                           .priority(RunnablePriority.Highest)
+                                           .priority(PriorityLevel.Highest)
                                            .runInto(RunType.JTP)
                                            .run(this::sayHello),
                                         Ref.single()
-                                           .priority(RunnablePriority.Highest)
+                                           .priority(PriorityLevel.Highest)
                                            .runInto(RunType.JTP)
                                            .runWave(this::sayHelloWave),
                                         Ref.real()
                                            .key(null)),
 
                                 Ref.single()
-                                   .priority(RunnablePriority.Highest)
+                                   .priority(PriorityLevel.Highest)
                                    .runInto(RunType.JTP)
                                    .runWave(this::sayHelloWave)/*
                                                                 * ,

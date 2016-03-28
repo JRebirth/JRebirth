@@ -38,8 +38,8 @@ public @interface OnRelease {
     /**
      * Define the execution order of all methods performed after release.
      *
-     * The default level is MethodPriority.NORMAL
+     * The default level is PriorityLevel.Normal
      */
-    MethodPriority value() default MethodPriority.NORMAL;
+    PriorityLevel value() default PriorityLevel.Normal;
 
 }

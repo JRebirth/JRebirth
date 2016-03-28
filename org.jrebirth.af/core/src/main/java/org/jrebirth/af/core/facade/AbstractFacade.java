@@ -17,12 +17,12 @@
  */
 package org.jrebirth.af.core.facade;
 
-import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.WeakHashMap;
-import java.util.stream.Collectors;
 
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.component.basic.Component;
@@ -55,7 +55,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractFacade.class);
 
     /** The map that store FacadeReady singletons. */
-    private final Map<UniqueKey<? extends R>, WeakReference<R>> componentMap;
+    private final Map<UniqueKey<? extends R>, Set<R>> componentMap;
 
     /**
      * Default Constructor.
@@ -65,7 +65,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     public AbstractFacade(final GlobalFacade globalFacade) {
         super(globalFacade);
         // Initialize the synchronized map for singletons
-        this.componentMap = Collections.synchronizedMap(new WeakHashMap<UniqueKey<? extends R>, WeakReference<R>>());
+        this.componentMap = Collections.synchronizedMap(new WeakHashMap<UniqueKey<? extends R>, Set<R>>());
     }
 
     /**
@@ -83,9 +83,12 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
             // Attach the facade to allow to retrieve any components
             readyObject.setLocalFacade(this);
-
-            // Store the component into the singleton map
-            this.componentMap.put(readyObject.getKey(), new WeakReference<R>(readyObject));
+            if (!this.componentMap.containsKey(readyObject.getKey())) {
+                final Set<R> weakHashSet = Collections.newSetFromMap(new WeakHashMap<R, Boolean>());
+                // Store the component into the singleton map
+                this.componentMap.put(readyObject.getKey(), weakHashSet);
+            }
+            this.componentMap.get(readyObject.getKey()).add(readyObject);
         }
 
     }
@@ -109,9 +112,9 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         synchronized (this.componentMap) {
 
             // Try to grab the object we want to unregister
-            final E readyObject = getReadyObject(uniqueKey);
+            final List<E> readyObjectList = getReadyObjectList(uniqueKey);
 
-            if (readyObject != null) {
+            for (final E readyObject : readyObjectList) {
 
                 // Unlisten all previously listened WaveType
                 if (readyObject instanceof Component<?>) {
@@ -154,7 +157,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
         synchronized (this.componentMap) {
             // Check from singleton map it he key exists and if the weak reference is not null
-            res = this.componentMap.containsKey(uniqueKey) && this.componentMap.get(uniqueKey).get() != null;
+            res = this.componentMap.containsKey(uniqueKey) && !this.componentMap.get(uniqueKey).isEmpty();
         }
 
         return res;
@@ -171,39 +174,43 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
     @Override
-    public <E extends R> List<E> retrieveAll(final UniqueKey<E> uniqueKey) {
+    public <E extends R> E retrieve(final UniqueKey<E> uniqueKey) {
 
-        // TODO evaluate performances !!!!!
-
-        return (List<E>) this.componentMap.entrySet().stream()
-                                          .filter(entry -> entry.getKey().getClassField() == uniqueKey.getClassField())
-                                          .map(e -> e.getValue().get()).filter(e -> e != null)
-                                          .collect(Collectors.toList());
+        return retrieveMany(uniqueKey).stream().findFirst().get();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public <E extends R> E retrieve(final UniqueKey<E> uniqueKey) {
+    public <E extends R> E retrieve(final Class<E> clazz, final Object... keyPart) {
 
-        E readyObject = getReadyObject(uniqueKey);
+        return retrieveMany(Key.create(clazz, keyPart)).stream().findFirst().get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public <E extends R> List<E> retrieveMany(final UniqueKey<E> uniqueKey) {
+
+        List<E> readyObjectList = getReadyObjectList(uniqueKey);
 
         // If the component isn't contained into the component map, create and register it
         // or has been collected by the gc
-        if (readyObject == null) {
+        if (readyObjectList == null || readyObjectList.isEmpty()) {
             try {
 
                 // Build the new instance of the component
-                readyObject = buildComponent(uniqueKey);
+                readyObjectList = buildComponentList(uniqueKey);
 
-                // Register it
-                register(uniqueKey, readyObject);
-
-                // The component is accessible from facade, let's start its initialization
-                readyObject.setup();
+                for (final E readyObject : readyObjectList) {
+                    // Register it
+                    register(uniqueKey, readyObject);
+                    // The component is accessible from facade, let's start its initialization
+                    readyObject.setup();
+                }
 
             } catch (final CoreException ce) {
                 LOGGER.error(COMPONENT_RETRIEVAL_ERROR, ce);
@@ -211,7 +218,31 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             }
         }
 
-        return readyObject;
+        return readyObjectList;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public <E extends R> List<E> retrieveMany(final Class<E> clazz, final Object... keyPart) {
+
+        return retrieveMany(Key.create(clazz, keyPart));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public <E extends R> List<E> retrieveFilter(final UniqueKey<E> uniqueKey) {
+
+        // TODO evaluate performances !!!!!
+
+        return null;/*
+                     * (List<E>) this.componentMap.entrySet().stream(); .filter(entry -> entry.getKey().getClassField() == uniqueKey.getClassField()) .map(e -> e.getValue().get()).filter(e -> e !=
+                     * null) .collect(Collectors.toList());
+                     */
     }
 
     /**
@@ -222,33 +253,25 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * @return the readyObject or null
      */
     @SuppressWarnings("unchecked")
-    private <E extends R> E getReadyObject(final UniqueKey<E> uniqueKey) {
+    private <E extends R> List<E> getReadyObjectList(final UniqueKey<E> uniqueKey) {
 
-        E readyObject = null;
+        List<E> readyObjectList = null;
         synchronized (this.componentMap) {
             // retrieve the component from the singleton map
             // It the component is already registered, get it to return it
             if (exists(uniqueKey)) {
 
-                final WeakReference<R> weakReference = this.componentMap.get(uniqueKey);
-                // Check that the reference is not null
-                if (weakReference != null) {
-                    // If no key is provided retrieve from the singleton map
-                    // Extract the value from the weak reference
-                    readyObject = (E) weakReference.get();
-                }
+                readyObjectList = new ArrayList<E>((Set<E>) this.componentMap.get(uniqueKey));
+
+                // // Check that the reference is not null
+                // if (weakHashSet != null) {
+                // // If no key is provided retrieve from the singleton map
+                // // Extract the value from the weak reference
+                // readyObject = (E) weakHashSet.get();
+                // }
             }
         }
-        return readyObject;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E extends R> E retrieve(final Class<E> clazz, final Object... keyPart) {
-
-        return retrieve(Key.create(clazz, keyPart));
+        return readyObjectList;
     }
 
     /**
@@ -263,33 +286,36 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      * @throws CoreException if an error occurred
      */
     @SuppressWarnings("unchecked")
-    protected <E extends R> E buildComponent(final UniqueKey<E> uniqueKey) throws CoreException {
+    protected <E extends R> List<E> buildComponentList(final UniqueKey<E> uniqueKey) throws CoreException {
 
         // Build a new instance of the component
-        final E readyObject = getGlobalFacade().getComponentFactory().buildComponent(uniqueKey.getClassField());
+        final List<E> readyObjectList = getGlobalFacade().getComponentFactory().buildComponents(uniqueKey.getClassField());
 
-        // Retrieve the right event type to track
-        JRebirthEventType type = JRebirthEventType.NONE;
-        if (readyObject instanceof Model) {
-            type = JRebirthEventType.CREATE_MODEL;
-        } else if (readyObject instanceof Service) {
-            type = JRebirthEventType.CREATE_SERVICE;
-        } else if (readyObject instanceof Command) {
-            type = JRebirthEventType.CREATE_COMMAND;
+        for (final E readyObject : readyObjectList) {
+            // Retrieve the right event type to track
+            JRebirthEventType type = JRebirthEventType.NONE;
+            if (readyObject instanceof Model) {
+                type = JRebirthEventType.CREATE_MODEL;
+            } else if (readyObject instanceof Service) {
+                type = JRebirthEventType.CREATE_SERVICE;
+            } else if (readyObject instanceof Command) {
+                type = JRebirthEventType.CREATE_COMMAND;
+            }
+
+            // Track this instantiation event
+            getGlobalFacade().trackEvent(type, this.getClass(), readyObject.getClass());
+
+            // Attach the local facade
+            // Already Done by register method
+            readyObject.setLocalFacade(this);
+
+            // Create the unique key
+            readyObject.setKey((UniqueKey<R>) uniqueKey);
+
         }
 
-        // Track this instantiation event
-        getGlobalFacade().trackEvent(type, this.getClass(), readyObject.getClass());
-
-        // Attach the local facade
-        // Already Done by register method
-        readyObject.setLocalFacade(this);
-
-        // Create the unique key
-        readyObject.setKey((UniqueKey<R>) uniqueKey);
-
         // EnhancedComponent Ready !
-        return readyObject;
+        return readyObjectList;
     }
 
 }
