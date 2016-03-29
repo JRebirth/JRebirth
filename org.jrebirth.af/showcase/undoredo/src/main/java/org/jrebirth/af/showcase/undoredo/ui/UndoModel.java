@@ -19,11 +19,14 @@ package org.jrebirth.af.showcase.undoredo.ui;
 
 import javafx.scene.Node;
 
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.ui.ModuleModel;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.undoredo.command.UndoRedoWaves;
 import org.jrebirth.af.undoredo.service.UndoRedoService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +37,8 @@ import org.slf4j.LoggerFactory;
  *
  * @author Sébastien Bordes
  */
-public final class UndoModel extends DefaultModel<UndoModel, UndoView> {
+@Register(value = ModuleModel.class)
+public final class UndoModel extends DefaultModel<UndoModel, UndoView> implements ModuleModel {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(UndoModel.class);
@@ -73,6 +77,11 @@ public final class UndoModel extends DefaultModel<UndoModel, UndoView> {
      */
     public void removeShape(final Node createdNode) {
         getView().getEditor().getChildren().remove(createdNode);
+    }
+
+    @Override
+    public String moduleName() {
+        return "Undo Redo";
     }
 
 }

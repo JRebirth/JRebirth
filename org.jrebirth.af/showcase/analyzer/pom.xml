@@ -13,6 +13,7 @@
 
 	<name>SC Analyzer</name>
 	<description>Showcase application used to analyze JRebirth logs</description>
+	<url>http://www.jrebirth.org/apps/Analyzer.html</url>
 
 	<properties>
 
@@ -41,9 +42,8 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
 			<version>8.1.0-SNAPSHOT</version>
-			<optional>true</optional>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
-	<url>http://www.jrebirth.org/apps/Analyzer.html</url>
 </project>

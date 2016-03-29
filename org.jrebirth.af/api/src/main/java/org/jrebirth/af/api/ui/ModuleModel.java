@@ -29,4 +29,5 @@ import org.jrebirth.af.api.module.RegistrationPoint;
 @RegistrationPoint(exclusive = false)
 public interface ModuleModel extends Model {
 
+    String moduleName();
 }
