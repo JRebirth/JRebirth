@@ -32,6 +32,7 @@ import org.jrebirth.af.api.annotation.LinkComponent;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.key.Key;
+import org.jrebirth.af.core.ui.AbstractBaseModel;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.presentation.model.Slide;
 import org.jrebirth.af.presentation.service.PresentationService;
@@ -234,11 +235,11 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
                 // }
 
                 // FIX ME NOT APPROPRIATED !!!
-                if (previousSlideModel != null) {
-                    previousSlideModel.doHideView(null);
+                if (previousSlideModel instanceof AbstractBaseModel) {
+                    ((AbstractBaseModel<?>) previousSlideModel).doHideView(null);
                 }
-                if (selectedSlideModel != null) {
-                    selectedSlideModel.doShowView(null);
+                if (selectedSlideModel instanceof AbstractBaseModel) {
+                    ((AbstractBaseModel<?>) selectedSlideModel).doShowView(null);
                 }
 
                 // Hide all other slides

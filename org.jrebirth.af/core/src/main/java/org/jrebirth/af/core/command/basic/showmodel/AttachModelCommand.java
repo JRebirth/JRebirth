@@ -21,6 +21,7 @@ import javafx.scene.Node;
 
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.single.ui.DefaultUIBeanCommand;
+import org.jrebirth.af.core.ui.AbstractBaseModel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +67,12 @@ public class AttachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBea
 
             // FIXME do it in the right way
             if (getWaveBean(wave).appendChild()) {
-                getWaveBean(wave).showModel().doShowView(wave);
+
+                if (getWaveBean(wave).showModel() instanceof AbstractBaseModel) {
+                    ((AbstractBaseModel<?>) getWaveBean(wave).showModel()).doShowView(wave);
+                } else {
+                    // TODO log something
+                }
             }
 
         }

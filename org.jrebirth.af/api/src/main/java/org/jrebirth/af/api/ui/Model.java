@@ -20,7 +20,6 @@ package org.jrebirth.af.api.ui;
 import javafx.scene.Node;
 
 import org.jrebirth.af.api.component.behavior.BehavioredComponent;
-import org.jrebirth.af.api.wave.Wave;
 
 /**
  * The interface <strong>Model</strong>.
@@ -45,21 +44,21 @@ public interface Model extends BehavioredComponent<Model> {
      */
     Node getRootNode();
 
-    /**
-     * Perform the show view action triggered by a wave.
-     *
-     * Method handler for Wave JRebirthWaves.SHOW_VIEW
-     *
-     * @param wave the wave that trigger the action
-     */
-    void doShowView(final Wave wave);
-
-    /**
-     * Perform the hide view action triggered by a wave.
-     *
-     * Method handler for Wave JRebirthWaves.HIDE_VIEW
-     *
-     * @param wave the wave that trigger the action
-     */
-    void doHideView(final Wave wave);
+    // /**
+    // * Perform the show view action triggered by a wave.
+    // *
+    // * Method handler for Wave JRebirthWaves.SHOW_VIEW
+    // *
+    // * @param wave the wave that trigger the action
+    // */
+    // void doShowView(final Wave wave);
+    //
+    // /**
+    // * Perform the hide view action triggered by a wave.
+    // *
+    // * Method handler for Wave JRebirthWaves.HIDE_VIEW
+    // *
+    // * @param wave the wave that trigger the action
+    // */
+    // void doHideView(final Wave wave);
 }

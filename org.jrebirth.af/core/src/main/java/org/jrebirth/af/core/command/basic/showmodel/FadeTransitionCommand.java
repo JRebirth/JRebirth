@@ -30,6 +30,7 @@ import org.jrebirth.af.api.concurrent.RunInto;
 import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.single.AbstractSingleCommand;
+import org.jrebirth.af.core.ui.AbstractBaseModel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -110,7 +111,11 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
                         LOGGER.info("Remove " + oldNodeLink.toString() + " from stack container");
                     }
                     // FIXME do it in the right way
-                    getWaveBean(wave).showModel().doShowView(wave);
+                    if (getWaveBean(wave).showModel() instanceof AbstractBaseModel) {
+                        ((AbstractBaseModel<?>) getWaveBean(wave).showModel()).doShowView(wave);
+                    } else {
+                        // TODO log something
+                    }
                 }
             });
             animation.playFromStart();

@@ -23,9 +23,7 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.NullView;
 import org.jrebirth.af.api.ui.View;
 import org.jrebirth.af.api.ui.annotation.AutoRelease;
-import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.util.ClassUtility;
-import org.jrebirth.af.core.wave.JRebirthWaves;
 
 /**
  *
@@ -65,8 +63,8 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     protected void initInternalModel() throws CoreException {
 
         // Do generic stuff
-        listen(JRebirthWaves.SHOW_VIEW);
-        listen(JRebirthWaves.HIDE_VIEW);
+        // listen(JRebirthWaves.SHOW_VIEW_WT);
+        // listen(JRebirthWaves.HIDE_VIEW_WT);
 
         // Do custom stuff
         initModel();
@@ -83,22 +81,6 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
 
         // Do custom binding stuff
         bind();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void doShowView(final Wave wave) {
-        showInternalView(wave);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void doHideView(final Wave wave) {
-        hideInternalView(wave);
     }
 
     /**

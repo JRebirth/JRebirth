@@ -28,9 +28,11 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.annotation.AutoRelease;
 import org.jrebirth.af.api.ui.annotation.CreateViewIntoJAT;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.annotation.OnWave;
 import org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.wave.JRebirthWaves;
 
 /**
  *
@@ -49,6 +51,8 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
 
     /** Force the creation of the View into JAT if set to true (useful when the view has got a WebView). */
     protected boolean createViewIntoJAT;
+
+    protected boolean hasBeenAttached = false;
 
     /**
      * Default Constructor.
@@ -116,6 +120,30 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
      * Bind method to implement for adding custom bindings.
      */
     protected abstract void bind();
+
+    /**
+     * Perform the show view action triggered by a wave.
+     *
+     * Method handler for Wave JRebirthWaves.SHOW_VIEW
+     *
+     * @param wave the wave that trigger the action
+     */
+    @OnWave(JRebirthWaves.SHOW_VIEW)
+    public final void doShowView(final Wave wave) {
+        showInternalView(wave);
+    }
+
+    /**
+     * Perform the hide view action triggered by a wave.
+     *
+     * Method handler for Wave JRebirthWaves.HIDE_VIEW
+     *
+     * @param wave the wave that trigger the action
+     */
+    @OnWave(JRebirthWaves.HIDE_VIEW)
+    public final void doHideView(final Wave wave) {
+        hideInternalView(wave);
+    }
 
     /**
      * Show the view.<br />
@@ -223,7 +251,11 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
 
                 @Override
                 public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
-                    if (newValue == null) {
+                    if (newValue != null) {
+                        hasBeenAttached = true;
+                    }
+                    if (newValue == null && hasBeenAttached) {
+                        hasBeenAttached = false;
                         release();
                         getRootNode().parentProperty().removeListener(this);
                     }

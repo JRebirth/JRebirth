@@ -73,11 +73,17 @@ public interface JRebirthWaves {
     /** WaveType related to Model */
     /******************************/
 
+    /** The show view constant used by following wave type. */
+    String SHOW_VIEW = "SHOW_VIEW";
+
     /** The waveType used to show a view (start or reload). */
-    WaveType SHOW_VIEW = waveType("SHOW_VIEW");
+    WaveType SHOW_VIEW_WT = waveType(SHOW_VIEW);
+
+    /** The hide view constant used by following wave type. */
+    String HIDE_VIEW = "HIDE_VIEW";
 
     /** The waveType used to hide a view. */
-    WaveType HIDE_VIEW = waveType("HIDE_VIEW");
+    WaveType HIDE_VIEW_WT = waveType(HIDE_VIEW);
 
     /********************************/
     /** WaveItem related to Service */
