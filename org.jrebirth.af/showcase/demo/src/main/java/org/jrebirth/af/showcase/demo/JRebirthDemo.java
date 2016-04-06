@@ -1,3 +1,4 @@
+package org.jrebirth.af.showcase.demo;
 
 /**
  * Get more info at : www.jrebirth.org .

@@ -83,7 +83,7 @@ public final class MainView extends DefaultView<MainModel, BorderPane, MainContr
 
     private Node createModuleButton(ModuleModel mm) {
         final Button b = new Button(mm.moduleName());
-        b.setOnMouseClicked(getController()::onButtonClicked);
+        b.setOnAction(getController()::onButtonFired);
         b.setUserData(Key.create(mm.getClass()));
         buttonList.add(b);
         return b;

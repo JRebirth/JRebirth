@@ -45,9 +45,6 @@ public final class MainModel extends DefaultModel<MainModel, MainView> {
         for (final ModuleModel mm : getModels(ModuleModel.class)) {
             modules.add(mm);
         }
-
-        getView().getRootNode().setCenter(stackModel.getRootNode());
-
     }
 
     /**
@@ -55,8 +52,7 @@ public final class MainModel extends DefaultModel<MainModel, MainView> {
      */
     @Override
     protected void showView() {
-        // Nothing to do yet
-
+        getView().getRootNode().setCenter(stackModel.getRootNode());
     }
 
     /**

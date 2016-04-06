@@ -6,7 +6,7 @@
 		<version>8.1.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
-	
+
 	<groupId>org.jrebirth.af.showcase</groupId>
 	<artifactId>demo</artifactId>
 	<packaging>jar</packaging>
@@ -20,7 +20,9 @@
 		<deployUrl>http://apps.jrebirth.org</deployUrl>
 		<deployPath>${project.artifactId}/${project.version}</deployPath>
 
-		<jnlpFilename>JRebirthAnalyzer.jnlp</jnlpFilename>
+		<appName>JRebirthDemo</appName>
+
+		<jnlpFilename>JRebirthDemo.jnlp</jnlpFilename>
 		<appClass>org.jrebirth.af.showcase.demo.JRebirthDemo</appClass>
 
 		<appletWidth>1024</appletWidth>
@@ -31,12 +33,190 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<JavaFX-Version>8.0</JavaFX-Version>
+							<Main-Class>${appClass}</Main-Class>
+							<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
+						</manifestEntries>
+
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>webstart-maven-plugin</artifactId>
+				<version>1.0-beta-6</version>
+
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>keytool-api-1.7</artifactId>
+						<version>1.4</version>
+					</dependency>
+					<dependency>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>webstart-pack200-impl</artifactId>
+						<version>1.0-beta-6</version>
+					</dependency>
+				</dependencies>
+
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jnlp-inline</goal>
+						</goals>
+					</execution>
+				</executions>
+
+				<configuration>
+
+					<filenameMapping>full</filenameMapping>
+
+					<updateManifestEntries>
+						<Application-Name>${project.name}</Application-Name>
+						<Trusted-Library>true</Trusted-Library>
+						<Permissions>${permissions}</Permissions>
+						<Codebase>${codebase}</Codebase>
+						<Trusted-Only>true</Trusted-Only>
+					</updateManifestEntries>
+
+
+					<excludeTransitive>false</excludeTransitive>
+
+					<libPath>lib</libPath>
+					<codebase>${codebase}</codebase>
+
+					<jnlp>
+						<outputFile>${jnlpFilename}</outputFile>
+						<mainClass>${appClass}</mainClass>
+						<offlineAllowed>true</offlineAllowed>
+						<allPermissions>true</allPermissions>
+					</jnlp>
+
+					<sign>
+						<keystore>${keystore}</keystore>
+						<keypass>${keypass}</keypass>
+						<storepass>${storepass}</storepass>
+						<storetype>${storetype}</storetype>
+
+						<alias>${keyalias}</alias>
+
+						<validity>360</validity>
+						<dnameCn>JRebirth Self-signed Certificate</dnameCn>
+						<dnameOu>JRebirth OSS</dnameOu>
+						<dnameO>JRebirth</dnameO>
+						<dnameL>Toulouse</dnameL>
+						<dnameSt>Haute-Garonne</dnameSt>
+						<dnameC>FR</dnameC>
+						<verify>true</verify>
+
+						<keystoreConfig>
+							<delete>${deletekeystore}</delete>
+							<gen>${genkeystore}</gen>
+						</keystoreConfig>
+
+					</sign>
+
+					<unsignAlreadySignedJars>true</unsignAlreadySignedJars>
+
+					<pack200>
+						<enabled>true</enabled>
+					</pack200>
+					<gzip>true</gzip>
+
+					<outputJarVersions>false</outputJarVersions>
+
+					<verbose>true</verbose>
+				</configuration>
+
 			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.4.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<shadedArtifactAttached>false</shadedArtifactAttached>
+					<shadedClassifierName>shaded</shadedClassifierName>
+					<transformers>
+						<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+						<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<mainClass>${appClass}</mainClass>
+							<manifestEntries>
+								<Class-Path>.</Class-Path>
+							</manifestEntries>
+						</transformer>
+					</transformers>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.akathist.maven.plugins.launch4j</groupId>
+				<artifactId>launch4j-maven-plugin</artifactId>
+				<version>1.5.1</version>
+				<executions>
+					<execution>
+						<id>l4j-clui</id>
+						<phase>package</phase>
+						<goals>
+							<goal>launch4j</goal>
+						</goals>
+						<configuration>
+							<headerType>gui</headerType>
+							<jar>${project.build.directory}/${groupId}.${artifactId}-${version}.jar</jar>
+							<outfile>${project.build.directory}/${appName}.exe</outfile>
+							<downloadUrl>http://java.com/download</downloadUrl>
+							<classPath>
+								<mainClass>${appClass}</mainClass>
+								<addDependencies>false</addDependencies>
+								<preCp>.</preCp>
+							</classPath>
+							<icon>src/main/resources/images/JRebirth_64x64.ico</icon>
+							<jre>
+								<minVersion>1.8.0</minVersion>
+								<jdkPreference>preferJre</jdkPreference>
+							</jre>
+							<versionInfo>
+								<fileVersion>1.0.0.0</fileVersion>
+								<txtFileVersion>${project.version}</txtFileVersion>
+								<fileDescription>${project.name}</fileDescription>
+								<copyright>JRebirth 2016</copyright>
+								<productVersion>1.0.0.0</productVersion>
+								<txtProductVersion>1.0.0.0</txtProductVersion>
+								<productName>${project.name}</productName>
+								<companyName>JRebirth</companyName>
+								<internalName>${project.name}</internalName>
+								<originalFilename>${appName}.exe</originalFilename>
+							</versionInfo>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
@@ -44,19 +224,19 @@
 			<version>8.1.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- Modules -->
-		<dependency>
-			<groupId>org.jrebirth.af.showcase</groupId>
-			<artifactId>fxml</artifactId>
-			<version>8.1.0-SNAPSHOT</version>
-		</dependency>
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>undoredo</artifactId>
 			<version>8.1.0-SNAPSHOT</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.jrebirth.af.showcase</groupId>
+			<artifactId>fxml</artifactId>
+			<version>8.1.0-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 
 </project>

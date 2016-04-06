@@ -17,8 +17,8 @@
  */
 package org.jrebirth.af.showcase.demo.ui;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.key.UniqueKey;
@@ -46,7 +46,7 @@ public final class MainController extends DefaultController<MainModel, MainView>
         super(view);
     }
 
-    public void onButtonClicked(MouseEvent event) {
+    public void onButtonFired(ActionEvent event) {
         final Button b = (Button) event.getSource();
         final UniqueKey<? extends Model> data = (UniqueKey<? extends Model>) b.getUserData();
 
