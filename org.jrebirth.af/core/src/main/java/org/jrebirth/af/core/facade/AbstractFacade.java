@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
+import java.util.stream.Collectors;
 
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.component.basic.Component;
@@ -238,11 +239,11 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     public <E extends R> List<E> retrieveFilter(final UniqueKey<E> uniqueKey) {
 
         // TODO evaluate performances !!!!!
+        return (List<E>) this.componentMap.entrySet().stream()
+                                          .filter(entry -> entry.getKey().getClassField() == uniqueKey.getClassField())
+                                          .flatMap(s -> s.getValue().stream())
+                                          .collect(Collectors.toList());
 
-        return null;/*
-                     * (List<E>) this.componentMap.entrySet().stream(); .filter(entry -> entry.getKey().getClassField() == uniqueKey.getClassField()) .map(e -> e.getValue().get()).filter(e -> e !=
-                     * null) .collect(Collectors.toList());
-                     */
     }
 
     /**
