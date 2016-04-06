@@ -1,0 +1,69 @@
+<head>
+<![CDATA[
+
+	<title>${title}</title>
+	<author>${author}</author>
+	<date>$date</date>
+	
+	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+
+	<meta name="keywords" lang="Fr" content="$keywords" />
+	<meta name="keywords" lang="En" content="$keywords" />
+	<meta name="description" content="$description" />
+
+]]>
+</head>
+
+<div id="catcherTitle">$catcherTitle</div>
+<div id="catcherContent">$catcherContent</div>
+
+<script type="text/javascript">//<![CDATA[
+	var JAVAFX_APP_JNLP='$jnlp';
+	var JAVAFX_APP_WIDTH=$width;
+	var JAVAFX_APP_HEIGHT=$height;
+//]]></script>
+
+<script type="text/javascript" src="../web-files/dtjava.js"></script>
+<script type="text/javascript" src="../web-files/javafxApp.js"></script>
+
+$sectionId
+
+$sectionTitle
+=================================
+
+$appDescription
+			
+Require <a href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">Java 8 Runtime</a>.
+
+**You can launch the application with Java Webstart:**
+
+<a id="launchApp" href="#" title="Launch Application with Java WebStart">Click to launch this application with Java WebStart</a>
+
+Press F11 to activate fullscreen mode.
+
+#if( $isPresentation )
+Use following controls:
+* Open Menu: Double Touch
+* Next Slide: Left-click, Page Down, Swipe Left
+* Previous Slide: Right-click, Page Up, Swipe Right
+* Next Slide(skip step): Ctrl+RightClick, Ctrl+Page Down, Double Swipe Left
+* Previous Slide(skip step): Ctrl+Right-click, Ctrl+Page Up, Double Swipe Right
+#end
+	
+You can download the whole application here :
+
+#if( $zipFile != "" )
+* <a href="$downloadPath$zipFile">$downloadName (zip)</a>
+#end			
+#if( $exeFile != "" )
+* <a href="$downloadPath$exeFile">$downloadName (exe)</a>
+#end
+	
+
+You can browse the source code on: 
+<a title="githubRepoName" href="$githubRepoUrl" target="_blank">$githubRepoName</a>.
+
+<div id="javafx-app-placeholder" style="margin: 0 -27px; padding: 0;">
+</div>
+
+

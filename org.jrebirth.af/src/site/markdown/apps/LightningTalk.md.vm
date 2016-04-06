@@ -1,0 +1,33 @@
+
+#set( $title = "Lightning Talk - JavaFX 2.2 What's Up ?" )
+#set( $author = "Sebastien Bordes" )
+#set( $date="11/16/2012")
+
+#set( $keywords = "JavaFX 2.2 Demo Application Presentation" )
+#set( $description = "JavaFX 2.2 Demo Application Presentation JRebirth Framework Lightning Talk" )
+
+#set( $jnlp = 'lightningtalk/${LightningTalk-version}/LightningTalk.jnlp')
+#set( $width = "1024")
+#set( $height = "768")
+
+#set( $sectionId = "LightningTalk")
+#set( $sectionTitle = "JavaFX 2.2 Lightning Talk ToulouseJUG")
+
+#set( $catcherTitle = "JRebirth - JavaFX 2.2 Lightning Talk ToulouseJUG")
+#set( $catcherContent = "DogFooding like JavaFX 2.2 Presentation")
+
+#set( $appDescription = "<p>This application has been shown during Heroes Event at ToulouseJUG</p>")
+
+#set( $isPresentation = true)
+
+#set( $downloadName = "Lightning Talk")
+#set( $downloadPath = "http://apps.jrebirth.org/lightningtalk/")
+#set( $zipFile = "lightningtalk-${LightningTalk-version}.zip")
+#set( $exeFile = "lightningtalk-${LightningTalk-version}.exe")
+
+#set( $githubRepoName = "GitHub LightningTalk Repository")
+#set( $githubRepoUrl = "https://github.com/JRebirth/LightningTalk")
+			
+
+#parse("Presentation.vm")
+

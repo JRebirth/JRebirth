@@ -1,0 +1,33 @@
+
+#set( $title = "JRebirth Analyzer" )
+#set( $author = "Sebastien Bordes" )
+#set( $date="02/22/2013")
+
+#set( $keywords = "" )
+#set( $description = "" )
+
+#set( $jnlp = 'analyzer/${project.version}/JRebirthAnalyzer.jnlp')
+#set( $width = "1024")
+#set( $height = "768")
+
+#set( $sectionId = "JRebirthAnalyzer")
+#set( $sectionTitle = "JRebirth Analyzer")
+
+#set( $catcherTitle = "JRebirth - Application Analyzer")
+#set( $catcherContent = "Analyze your log trace to see how JRebirth engine works")
+
+#set( $appDescription = "<p>This application is used to replay JRebirth Apps 'log.</p>")
+
+#set( $isPresentation = false)
+
+#set( $downloadName = "JRebirth Analyzer")
+#set( $downloadPath = "http://apps.jrebirth.org/analyzer/")
+#set( $zipFile = "org.jrebirth.analyzer-{project.version}.zip")
+#set( $exeFile = "org.jrebirth.analyzer-{project.version}.exe")
+
+#set( $githubRepoName = "GitHub JRebirth repository")
+#set( $githubRepoUrl = "https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth.af/showcase/analyzer")
+			
+#set ($directive.parse.max.depth = 0)
+
+#parse("Presentation.vm")

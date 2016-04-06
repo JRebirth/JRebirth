@@ -1,0 +1,133 @@
+<head>
+<![CDATA[
+	<title>Wave</title>
+	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+]]>
+</head>
+
+<div id="catcherTitle">Wave Area</div>
+<div id="catcherContent">Allow asynchronous communication between components</div>
+
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
+        
+Wave Overview
+=========================
+
+What's a Wave
+-------------------
+
+A Wave is a temporary object created to carry data througt CS-MVC components.
+They allow JRebirth to handle application internal events asynchronously between each components, at the opposite you can use getModel,	getCommand and getService method to perform synchronous operations.
+
+Waves are handled by the notifier engine which are running within the *JRebirthThread*.
+
+<span style="text-decoration: underline;">Short UML Diagram:</span>
+
+<div class="uml">
+	<a href="uml/Wave.png" rel="lightbox[uml]" title="Wave Class Diagram ">
+		<img class="redux" src="uml/Wave.png" alt="" />
+	</a>
+</div>
+
+### Wave Group
+
+There are 4 main group of waves :
+
+1. Call Command : used to trigger a command action
+2. Call Service : used to call a service, later another wave will be used
+3. Attach Ui : used to link two JavaFX nodes
+4. Undefined : to handle all other waves, the wave type must be defined
+
+
+### Wave ItemType
+
+A wave item designate a Java type (precisely a generic type that can be for example: List&lt;String&gt;).
+It could be used with a custom name or as a parameter.
+
+__Don't forget the opening and closing braces used { } to allow anonymous class to define the super generic type !__
+
+Wave items are used by Wave Type to describe an api contract.
+
+<!-- MACRO{include|highlight-theme=eclipse|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java|snippet=aj:..EVENTS_FILE|snippet-start-offset=1|snippet-end-offset=1} -->
+
+
+Wave items can also be used to define the unique identifier of a value wrapped into a WaveData wrapper stored into a wave.
+
+		
+<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/wave/JRebirthWaves.java|snippet=aj:..SERVICE_TASK|snippet-start-offset=1}-->
+
+<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/service/AbstractService.java|snippet=re:(SERVICE_TASK,\ ).*$|snippet-start-offset=1}-->
+			
+### Wave Type
+
+The wave type is where black magic resides. It defines a contract between the emitter (the one who creates the wave) and the receiver (the one who handles the waves).
+This contract is dynamic because it relies on a String and WaveItem objects.
+
+A *WaveType* has a unique name and a set of *WaveItem* objects. It must be created and stored like this:
+
+* Into an Interface to define wave contract (here without argument)
+
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java|snippet=aj:..DO_UNLOAD|snippet-start-offset=1}-->
+
+* Into a service class (here with on argument) :
+	
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java|snippet=aj:..DO_LOAD_EVENTS|snippet-start-offset=1}-->
+
+
+### WaveType name
+
+__This string is used to link to a component method__, this call is made by reflection when the wave is processed.
+
+
+### WaveItem List
+
+Each *WaveItem* will be passed to the method as an argument.
+
+
+### Wave argument
+
+Each wave procesing method must add a least argument : the source wave, thus it will be possible to know the handling context for this method call.
+The wave argument is useful to access to wave bean or other information like source wave.
+
+
+Wave Lifecycle
+--------------------
+
+Wave lifecycle are defined by the *Status* enumeration:
+
+1. Created : The Wave object has just been built by someone.
+2. Sent : The wave has been sent to the JRebirth Notifier Engine
+3. Processing : The wave is being dispatched
+4. Cancelled : The wave has been cancelled by an user action
+5. Consumed : All Wave Handlers have been called, or the Service Method or the Command has been called
+6. Handled : All Wave Handlers are terminated
+7. Failed : The wave process has generated an error
+8. Destroyed : the wave is available for garbage collection
+
+
+### How they are consumed
+
+
+
+Chained Wave
+------------------
+
+It's possible to chain command by using the	*ChainWaveCommand* class. A sample is used into the *JRebirthThread.bootUp()* method.
+
+
+<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java|highlight-theme=eclipse}-->
+
+<!-- snippet=aj:..bootUp() -->
+
+
+<div class="bottomLinks">
+	<div class="previousDocPage">
+		<a href="Notifier.html">Notifier &amp; Components</a>
+	</div>
+	<div class="nextDocPage">
+		<a href="Commands.html">Commands</a>
+	</div>
+	<div class="tocDocPage">
+		<a href="Toc.html">TOC</a>
+	</div>
+</div>	

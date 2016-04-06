@@ -1,0 +1,34 @@
+
+#set( $title = "Breizhcamp - The JavaFX Revolution" )
+#set( $author = "Sebastien Bordes" )
+#set( $date="06/15/2012")
+
+#set( $keywords = "JavaFX 2 Demo Application Presentation" )
+#set( $description = "JavaFX 2 Demo Application Presentation JRebirth Framework Breizhcamp Talk" )
+
+#set( $jnlp = 'breizhcamp/${Breizhcamp-version}/Breizhcamp.jnlp')
+#set( $width = "1024")
+#set( $height = "768")
+
+#set( $sectionId = "Breizhcamp")
+#set( $sectionTitle = "JavaFX 2 Presentation at Breizhcamp")
+
+#set( $catcherTitle = "JRebirth JavaFX 2 Presentation Demo at Breizhcamp")
+#set( $catcherContent = "DogFooding like JavaFX 2 Presentation")
+
+#set( $appDescription = '<p>This application has been shown during my JavaFX 2 Presentation at
+				<a href="http://app.breizhcamp.cloudbees.net/talk/5.htm">Breizhcamp</a>
+				.</p>')
+
+#set( $isPresentation = true)
+
+#set( $downloadName = "JavaFX Presentation")
+#set( $downloadPath = "http://apps.jrebirth.org/breizhcamp/")
+#set( $zipFile = "javafx2-${Breizhcamp-version}.zip")
+#set( $exeFile = "javafx2-${Breizhcamp-version}.exe")
+
+#set( $githubRepoName = "GitHub JFX-Presentation Repository")
+#set( $githubRepoUrl = "https://github.com/JRebirth/JFX-Presentation")
+			
+
+#parse("Presentation.vm")

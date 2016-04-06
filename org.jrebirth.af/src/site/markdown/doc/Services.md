@@ -1,0 +1,190 @@
+<head>
+<![CDATA[
+	<title>Services</title>
+	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+]]>
+</head>
+
+<div id="catcherTitle">Service Area</div>
+<div id="catcherContent">Process configurable action</div>
+
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
+        
+Services
+=========================
+
+Overview
+-------------
+
+A Service Object is a JRebirth Component (part of CSM pattern, Command-Service-Model).
+	
+It can be retrieved from the *ServiceFacade*.
+
+A *Service* can hold several Tasks defined by a *WaveType*.
+
+Each Task requires:
+
+1. Define Call Wave Type (entry point)
+2. Define Return Wave Type (exit point)
+3. Register the Callback
+4. Define the Task process into the right method name.
+
+That's all ! You don't have to bother about threading issues and asynchronous tasks.
+
+
+**Warning:**
+	
+You must pay attention to the lifecycle of your service instance. As a JRebirth Component, each service object is eligible to garbage collection if it isn't retained by another object currently used.
+
+So your data stored or processed into your service can be loss if you didn't manage correctly your Service life.
+
+The most easy way is to hold your service with a strong reference into a long-living object like a top-level*Model*.
+
+<span style="text-decoration: underline;">Short UML Diagram:</span>
+
+<div class="uml">
+	<a href="uml/Service.png" rel="lightbox[uml]" title="Service Class Diagram">
+		<img class="redux" src="uml/Service.png" alt=""/>
+	</a>
+	<legend>Service Class Diagram</legend>
+</div>
+
+Defining Wave Types
+------------------------
+
+### Entry Point Wave Type
+
+This is the *WaveType* used to process a Wave generated anywhere into the application.
+
+<!-- MACRO{include|highlight-theme=eclipse|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java|snippet=re:DO_LOAD_EVENTS \=|snippet-start-offset=1|snippet-end-offset=3}-->
+
+This *WaveType*	uses only one *WaveItem* to store the file that must be loaded.
+WaveItem wrap the type of the object we want to use, thus it's possible to check that API contract isn't broken.
+
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java|snippet=re:EVENTS_FILE =|snippet-start-offset=1|snippet-end-offset=1}-->
+
+### Exit Point Wave Type
+
+The return Wave Type is automatically created with by the using the *returnAction* value with *returnItem* as **WaveItem**.
+The code above will generate a **WaveType** that uses only one WaveItem to store the list of events loaded from the given file.
+
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java|snippet=re:EVENTS =|snippet-start-offset=1|snippet-end-offset=1}-->
+
+Task Registration
+-------------------
+
+Each Task requires to be registered in order to generate the right WaveType that wrap the return value.
+	
+This registration must be done into the JRebirth's Component **void initService()** method like this:
+
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/impl/LoadEdtFileServiceImpl.java|snippet=aj:....LoadEdtFileServiceImpl.initService(..)|highlight-lines=grep:listen}-->
+	<!--|snippet-start-offset=3" />-->
+
+If you don't declare the return	**WaveType** a exception will be thrown at runtime when trying to send back the Service Task output.
+
+If your Service Task doesn't return anything (void return) you can dismiss this step except if you want to receive an empty notification when the Job is done; just use *JRebirthItems.voidItem*.
+
+
+Perform the Job!
+-------------------
+
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/impl/LoadEdtFileServiceImpl.java|snippet=aj:....LoadEdtFileServiceImpl.doLoadEvents(..)|snippet-start-offset=8}-->
+
+
+How to use the Service Feature
+===================================
+
+Call the Service
+--------------------
+
+To call this **Service Feature**, you can use the *returnData* from any JRebirth's Component.
+It takes at least 2 mandatory arguments:
+
+1. The Service Class Object
+2. The WaveType that is related to the Service Feature
+3. An unordered list of WaveData objects that wrap values required by WaveType contract
+
+
+Hereafter you will fin an example of service call with only one arguments passed:
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/command/OpenEventTrackerFileCommand.java|snippet=re:returnData|snippet-end-offset=2}-->
+
+
+Process the Service Result
+--------------------------------
+
+The Service Feature Result is sent as a Wave that wrap returned value. So to be informed when the result is available, there is two things to do :
+
+* Let your component listening this WaveType.
+* Add Wave handler code to process the result.
+
+
+Each JRebirth's Component are able to listen some WaveType's waves by calling the **listen** method with one or several Wave Types.
+
+This call must be done into one of the following method according to component used:
+
+* *initCommand* : for Command classes
+* *initService* : for Service classes
+* *initModel* : for Model classes
+
+
+Each initXXX method is called into JRebirth Internal Thread by ready method.
+
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/controls/ControlsModel.java|snippet=aj:..ControlsModel.initModel(..)}-->
+
+Add a method that suit the WaveType convention.
+
+The name must used the predefined prefix (in our case DO_ converted to do), then the WaveType's name converted in a camel cased format.
+
+Method parameters must be compliant with Wave Items defined into the Wave Type.
+
+A final parameter must be added, the Wave itself taht could be useful to get extra data, for example when chained waves are used.
+
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/controls/ControlsModel.java|snippet=aj:..ControlsModel.doEventsLoaded(..)}-->
+
+
+Threading
+=============
+
+Which Threads are involved ?
+------------------------------
+
+All communications with Service Component is done into **JIT** and all Service Tasks are performed 
+into one slot of **JTP** or **HPTP** according to priority defined with annotation.
+
+Threading Priority
+-----------------------
+
+Each Service feature call will be processed by the **JTP** (JRebirth Thread Pool) or by the **HPTP** (High Priority Thread Pool) according to their predefined priority.
+By default the **Priority** is set to PriorityLevel.Low (a level below Normal) to let other task to be performed into JTP before Service feature calls (like Command).
+
+Its possible to increase or decrease this value by adding an annotation on the Service Feature method like this:
+
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java|snippet=re:doLoadEvents|snippet-start-offset=1}-->
+
+
+Follow Task progression
+---------------------------
+
+Each Service Task are able to update a progress bar with integer value and message.
+In both cases you must provide the wave provided as a method argument, it will be used to link the associated **ServiceTask** and find the right **ProgressBar** and **Text** widgets to update.
+
+You can update the message test by calling this method:
+
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/impl/LoadEdtFileServiceImpl.java|snippet=re:updateMessage}-->
+
+You can update progress bar indicator by calling this method:
+
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/impl/LoadEdtFileServiceImpl.java|snippet=re:updateProgress}-->
+
+
+<div class="bottomLinks">
+	<div class="previousDocPage">
+		<a href="Notifier.html">Commands</a>
+	</div>
+	<div class="nextDocPage">
+		<a href="Ui.html">User Interface</a>
+	</div>
+	<div class="tocDocPage">
+		<a href="Toc.html">TOC</a>
+	</div>
+</div>

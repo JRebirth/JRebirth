@@ -1,0 +1,36 @@
+
+#set( $title = "EclipseDay Toulouse - Use JavaFX with Eclipse" )
+#set( $author = "Sebastien Bordes" )
+#set( $date="05/06/2013")
+
+#set( $keywords = "JavaFx 2 Demo Application Presentation JRebirth Framework EclipseCON France 2013 Workshop" )
+#set( $description = "JavaFx 2 Demo Application Presentation JRebirth Framework EclipseCON France 2013 Workshop" )
+
+#set( $jnlp = 'eclipsecon/${EclipseCON-version}/EclipseCON.jnlp')
+#set( $width = "1024")
+#set( $height = "768")
+
+#set( $sectionId = "EclipseCON")
+#set( $sectionTitle = "EclipseCON France 2013 - JavaFX Workshop")
+
+#set( $catcherTitle = "JRebirth - JavaFX Workshop - EclipseCON France 2013")
+#set( $catcherContent = "Support slides for JavaFX Workshop")
+
+#set( $appDescription = '<p>This application has been shown during EclipseCON France 2013.</p>
+			<p>
+				You can download workshop files (Eclipse Juno + m2eclipse + efxclipse + Maven standalone + Jdk7u21) :
+				<a href="http://apps.jrebirth.org/eclipsecon/EclipseCON-Workshop.7z">EclipseCON Workshop</a>
+			</p>')
+
+#set( $isPresentation = true)
+
+#set( $downloadName = "EclipseDay Presentation")
+#set( $downloadPath = "http://apps.jrebirth.org/eclipsecon/")
+#set( $zipFile = "eclipsecon-${EclipseCON-version}.zip")
+#set( $exeFile = "eclipsecon-${EclipseCON-version}.exe")
+
+#set( $githubRepoName = "GitHub EclipseCON-France repository")
+#set( $githubRepoUrl = "https://github.com/JRebirth/EclipseCON-France")
+			
+
+#parse("Presentation.vm")

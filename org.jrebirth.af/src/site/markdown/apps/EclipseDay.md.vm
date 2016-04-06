@@ -1,0 +1,36 @@
+
+#set( $title = "EclipseDay Toulouse - Use JavaFX with Eclipse" )
+#set( $author = "Sebastien Bordes" )
+#set( $date="11/16/2012")
+
+#set( $keywords = "JavaFX 2 Demo Application Presentation EclipseDay" )
+#set( $description = "JavaFX 2 Demo Application Presentation JRebirth Framework EclipseDay Talk" )
+
+#set( $jnlp = 'eclipseday/${EclipseDay-version}/EclipseDayToulouse.jnlp')
+#set( $width = "1024")
+#set( $height = "768")
+
+#set( $sectionId = "EclipseDay")
+#set( $sectionTitle = "Eclipse Day Toulouse 2012 JavaFX Slides")
+
+#set( $catcherTitle = "JRebirth JavaFX 2 Presentation Demo at EclipseDay")
+#set( $catcherContent = "DogFooding like JavaFX 2 Presentation")
+
+#set( $appDescription = "<p>This application has been shown during Eclipse Day Toulouse 2012.</p>")
+
+#set( $isPresentation = true)
+
+#set( $downloadName = "EclipseDay Presentation")
+#set( $downloadPath = "http://apps.jrebirth.org/eclipseday/")
+#set( $zipFile = "eclipseday-${EclipseDay-version}.zip")
+#set( $exeFile = "eclipseday-${EclipseDay-version}.exe")
+
+#set( $githubRepoName = "GitHub EclipseDay Presentation Repository")
+#set( $githubRepoUrl = "https://github.com/JRebirth/EclipseDay-Presentation")
+			
+
+#parse("Presentation.vm")
+
+
+
+

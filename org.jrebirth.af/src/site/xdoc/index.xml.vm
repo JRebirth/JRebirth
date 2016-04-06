@@ -39,7 +39,6 @@
 		    $("#navmenu").sticky({topSpacing:-7});
 		  });
 		</script>
-		
 	</head>
 
 	<body>

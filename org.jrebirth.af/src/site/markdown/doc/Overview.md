@@ -1,0 +1,143 @@
+<head>
+<![CDATA[
+	<title>Overview</title>
+	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+]]>
+</head>
+
+<div id="catcherTitle">Overview of JRebirth Application Framework Core Architecture</div>
+<div id="catcherContent">JRebirth Application Framework offers a very efficient pattern to build real Professional JavaFX applications.</div>
+
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
+        
+Overview
+=========================
+
+How does JRebirth work ?
+------------------------------
+
+JRebirth uses a **WB-CS-MVC** pattern with 7 main layers of abstractions:
+
+* Wave
+* Behavior
+* Command
+* Service
+* Model
+* View
+* Controller
+	
+
+The illustration below shows 5 of them (Waves and Behaviors are not shown).
+
+<div class="uml">
+	<a title="JRebirth Overview" rel="lightbox" href="uml/JRebirth_WCS_MVC.png">
+		<img class="redux" alt="" src="uml/JRebirth_WCS_MVC.png" />
+	</a>
+</div>
+
+Components
+----------------
+
+3 of these elements are considered as JRebirth Components:
+
+* Command
+* Service
+* Model
+	
+Each Component can do generic things, like communicating with others Components synchronously or asynchronously.
+All these components are handled by 3 Facades (**CF**, **CF**, **UF**).  
+
+[Learn more about Components](Notifier.html)
+	
+
+Application
+----------------
+
+The Application (**App**) is the starting class to extends to build a JavaFX 8 application that uses JRebirth Application Framework.
+Default implementation contains some convenient method to speed up development and to start the JRebirth engine.
+
+[Learn more about Application](Application.html)
+
+
+GlobalFacade
+----------------
+	
+The GlobalFacade (**GF**) is started by the Application and is just used to simplify access to all Components.
+
+[Learn more about GlobalFacade](Facades.html)
+
+
+Notifier and Wave
+----------------
+
+The Notifier (**N**) is the event bus that carry on small notifications called Waves (**W**). This notification engine is integrated into the core of JRebirth. Its role is to manage communication throught all JRebirth Components.
+A Wave is a quick and lightweight message that can be addressed to one or several other Components.
+There are a lot of convenient method available to create and launch Waves into the application.
+
+[Learn more about Notifier](Notifier.html)
+	
+
+CommandFacade and Commands
+----------------
+
+Command Components are used to manage complex group of actions: MultiCommand (**MC**) synchronously or asynchronously, or atomic reusable action :Command (**C**).
+They can be processed into one of the 3 kinds of thread managed by using annotation or class inheritance.
+All interactions between layers should be managed by Commands to keep control on thread involved.
+
+[Learn more about Commands](Commands.html)
+
+
+ServiceFacade and Services
+----------------
+
+Service (**S**) Components are used to communicate with others Applications (like a Server), to perform long tasks (computations).
+It can use Spring HttpRequests, Web Services, Restlets, files or whatever you want. Service's methods are called into a dedicated thread pool, and their results are sent to other Components that have declared they are interested in. It also manages the thread in which the receiver will process the result.
+
+[Learn more about Services](Service.html)
+
+
+UiFacade and Models
+----------------
+
+Model (**M**) Components are used to manage the User Interface, it has control on the View element and shall provide data to display for example by calling a Service.
+A Model creates its attached View automatically by reflection.
+A Model manage the View logic.
+
+[Learn more about Models](Ui.html)
+	
+
+Views
+----------------
+
+The View (**V**) elements are not Components, they are used to create user interface by using JavaFX visual components (with plain java code or by loading FXML files).
+
+Each view has a Model used to load data and to be linked with other Components.
+Each view have a Controller used to manage JavaFX nodes events, the View creates its Controller automatically by reflection.
+Each JavaFX Node that need to be controlled by a Controller can declare a getter with package visibility to restrict access from other packages.
+It can also use an annotation to automatically call a dedicated method into the controller.
+
+
+Controllers
+----------------
+
+Controller (**C**) elements are not Components, they are used to manage the View's Interactions logic. They intercept all JavaFX components' events.
+A controller can implements custom Adapters to manage events (like MouseAdapter) and link its built-in Handler to the View's nodes (like MouseHandler).
+Or it can simply implement custom methods if annotations are used.
+They also provide a set of convenient methods used to perform common event handling, ie: sending a wave when a button click is performed.
+
+
+
+<div class="bottomLinks">
+	<div class="previousDocPage">
+		<a href="Installation.html">Installation</a>
+	</div>
+	<div class="nextDocPage">
+		<a href="Application.html">Create your first Application</a>
+	</div>
+	<div class="tocDocPage">
+		<a href="Toc.html">TOC</a>
+	</div>
+</div>
+
+
+<div style="clear:both"></div>
