@@ -28,6 +28,4 @@
 #set( $githubRepoName = "GitHub JRebirth repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth.af/showcase/analyzer")
 			
-#set ($directive.parse.max.depth = 0)
-
 #parse("Presentation.vm")

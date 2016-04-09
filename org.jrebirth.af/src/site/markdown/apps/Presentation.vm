@@ -1,16 +1,12 @@
 <head>
 <![CDATA[
-
 	<title>${title}</title>
 	<author>${author}</author>
 	<date>$date</date>
-	
 	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
-
 	<meta name="keywords" lang="Fr" content="$keywords" />
 	<meta name="keywords" lang="En" content="$keywords" />
 	<meta name="description" content="$description" />
-
 ]]>
 </head>
 
@@ -26,7 +22,6 @@
 <script type="text/javascript" src="../web-files/dtjava.js"></script>
 <script type="text/javascript" src="../web-files/javafxApp.js"></script>
 
-$sectionId
 
 $sectionTitle
 =================================
