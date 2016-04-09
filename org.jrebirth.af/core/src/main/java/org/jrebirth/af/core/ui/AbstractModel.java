@@ -23,6 +23,7 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.NullView;
 import org.jrebirth.af.api.ui.View;
 import org.jrebirth.af.api.ui.annotation.AutoRelease;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.util.ClassUtility;
 
 /**
@@ -68,6 +69,30 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
 
         // Do custom stuff
         initModel();
+    }
+
+    /**
+     * Perform the show view action triggered by a wave.
+     *
+     * Method handler for Wave JRebirthWaves.SHOW_VIEW
+     *
+     * @param wave the wave that trigger the action
+     */
+    @Override
+    public final void doShowView(final Wave wave) {
+        showInternalView(wave);
+    }
+
+    /**
+     * Perform the hide view action triggered by a wave.
+     *
+     * Method handler for Wave JRebirthWaves.HIDE_VIEW
+     *
+     * @param wave the wave that trigger the action
+     */
+    @Override
+    public final void doHideView(final Wave wave) {
+        hideInternalView(wave);
     }
 
     /**

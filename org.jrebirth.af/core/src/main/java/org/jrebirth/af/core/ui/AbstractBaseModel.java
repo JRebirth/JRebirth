@@ -28,11 +28,9 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.annotation.AutoRelease;
 import org.jrebirth.af.api.ui.annotation.CreateViewIntoJAT;
 import org.jrebirth.af.api.wave.Wave;
-import org.jrebirth.af.api.wave.annotation.OnWave;
 import org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.util.ClassUtility;
-import org.jrebirth.af.core.wave.JRebirthWaves;
 
 /**
  *
@@ -122,30 +120,6 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
     protected abstract void bind();
 
     /**
-     * Perform the show view action triggered by a wave.
-     *
-     * Method handler for Wave JRebirthWaves.SHOW_VIEW
-     *
-     * @param wave the wave that trigger the action
-     */
-    @OnWave(JRebirthWaves.SHOW_VIEW)
-    public final void doShowView(final Wave wave) {
-        showInternalView(wave);
-    }
-
-    /**
-     * Perform the hide view action triggered by a wave.
-     *
-     * Method handler for Wave JRebirthWaves.HIDE_VIEW
-     *
-     * @param wave the wave that trigger the action
-     */
-    @OnWave(JRebirthWaves.HIDE_VIEW)
-    public final void doHideView(final Wave wave) {
-        hideInternalView(wave);
-    }
-
-    /**
      * Show the view.<br />
      * In example : start the show transition
      *
@@ -174,8 +148,8 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
         // Propagate the show view to all Inner Model
         if (getInnerComponentList().isPresent()) {
             getInnerComponentList().get().stream()
-                                   .filter(s -> s instanceof AbstractBaseModel<?>)
-                                   .forEach((model) -> ((AbstractBaseModel<?>) model).doShowView(wave));
+                                   .filter(s -> s instanceof Model)
+                                   .forEach((model) -> ((Model) model).doShowView(wave));
         }
     }
 
@@ -203,8 +177,8 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
         // Propagate the show view to all Inner Model
         if (getInnerComponentList().isPresent()) {
             getInnerComponentList().get().stream()
-                                   .filter(s -> s instanceof AbstractBaseModel<?>)
-                                   .forEach((model) -> ((AbstractBaseModel<?>) model).doHideView(wave));
+                                   .filter(s -> s instanceof Model)
+                                   .forEach((model) -> ((Model) model).doHideView(wave));
         }
     }
 

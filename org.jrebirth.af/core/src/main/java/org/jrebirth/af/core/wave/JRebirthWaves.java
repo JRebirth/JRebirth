@@ -30,6 +30,7 @@ import javafx.scene.control.ProgressBar;
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.api.wave.WaveConstants;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
@@ -73,17 +74,11 @@ public interface JRebirthWaves {
     /** WaveType related to Model */
     /******************************/
 
-    /** The show view constant used by following wave type. */
-    String SHOW_VIEW = "SHOW_VIEW";
-
     /** The waveType used to show a view (start or reload). */
-    WaveType SHOW_VIEW_WT = waveType(SHOW_VIEW);
-
-    /** The hide view constant used by following wave type. */
-    String HIDE_VIEW = "HIDE_VIEW";
+    WaveType SHOW_VIEW_WT = waveType(WaveConstants.SHOW_VIEW);
 
     /** The waveType used to hide a view. */
-    WaveType HIDE_VIEW_WT = waveType(HIDE_VIEW);
+    WaveType HIDE_VIEW_WT = waveType(WaveConstants.HIDE_VIEW);
 
     /********************************/
     /** WaveItem related to Service */
@@ -110,6 +105,6 @@ public interface JRebirthWaves {
     /********************************/
 
     /** WaveType used to receive an empty wave when the return action returns void. */
-    WaveType RETURN_VOID = waveType("RETURN_VOID").items(JRebirthItems.voidItem);
+    WaveType RETURN_VOID_WT = waveType(WaveConstants.RETURN_VOID).items(JRebirthItems.voidItem);
 
 }

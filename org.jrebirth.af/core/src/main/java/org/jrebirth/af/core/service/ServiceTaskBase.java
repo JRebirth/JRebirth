@@ -232,7 +232,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
             final WaveItemBase<T> resultWaveItem;
 
             // No service result type defined into a WaveItem
-            if (responseWaveType != JRebirthWaves.RETURN_VOID && responseWaveType.items().isEmpty()) {
+            if (responseWaveType != JRebirthWaves.RETURN_VOID_WT && responseWaveType.items().isEmpty()) {
                 LOGGER.log(NO_RETURNED_WAVE_ITEM);
                 throw new CoreException(NO_RETURNED_WAVE_ITEM);
             } else {
