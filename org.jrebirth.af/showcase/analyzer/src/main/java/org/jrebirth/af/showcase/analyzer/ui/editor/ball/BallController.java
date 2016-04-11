@@ -52,7 +52,7 @@ public final class BallController extends DefaultController<BallModel, BallView>
     protected void initEventHandlers() throws CoreException {
 
         // Register mouse clicked handler
-        getView().getRootNode().setOnMouseClicked(getHandler(MouseEvent.MOUSE_CLICKED));
+        view().node().setOnMouseClicked(getHandler(MouseEvent.MOUSE_CLICKED));
 
         // getView().getShowTransition().setOnFinished(getActionHandler());
     }
@@ -83,8 +83,8 @@ public final class BallController extends DefaultController<BallModel, BallView>
 
         if (mouseEvent.getSource() instanceof Node) {
             // Send Event Selected Wave
-            getModel().sendWave(EditorWaves.DO_SELECT_EVENT,
-                                Builders.waveData(PropertiesWaves.EVENT_OBJECT, getModel().getEventModel()));
+            model().sendWave(EditorWaves.DO_SELECT_EVENT,
+                                Builders.waveData(PropertiesWaves.EVENT_OBJECT, model().getEventModel()));
         }
 
     }

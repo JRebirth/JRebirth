@@ -45,7 +45,7 @@ public final class CreateBallCommand extends DefaultUICommand {
 
         final JRebirthEvent event = wave.get(EditorWaves.EVENT);
 
-        LOGGER.trace("Process " + event.getEventType() + " of type " + event.getTarget());
+        LOGGER.trace("Process " + event.eventType() + " of type " + event.target());
 
         final EditorModel editorModel = getModel(EditorModel.class);
 
@@ -53,15 +53,15 @@ public final class CreateBallCommand extends DefaultUICommand {
 
         editorModel.registerBall(targetBallModel);
 
-        if (editorModel.retrieveBall(targetBallModel.getEventModel().getSource()) == null) {
+        if (editorModel.retrieveBall(targetBallModel.getEventModel().source()) == null) {
 
             // it's the application node, we shall center it !!! minus 70 because it's the globalFacade node that resides in the center
-            targetBallModel.getView().getRootNode().layoutXProperty().bind(editorModel.getView().getRootNode().widthProperty().divide(2).subtract(70).subtract(24));
-            targetBallModel.getView().getRootNode().layoutYProperty().bind(editorModel.getView().getRootNode().heightProperty().divide(2).subtract(24));
+            targetBallModel.view().node().layoutXProperty().bind(editorModel.view().node().widthProperty().divide(2).subtract(70).subtract(24));
+            targetBallModel.view().node().layoutYProperty().bind(editorModel.view().node().heightProperty().divide(2).subtract(24));
 
         } else {
 
-            final BallModel sourceBallModel = editorModel.retrieveBall(targetBallModel.getEventModel().getSource());
+            final BallModel sourceBallModel = editorModel.retrieveBall(targetBallModel.getEventModel().source());
 
             // All other nodes shall be positionned relatively to their parent
             /*
@@ -69,10 +69,10 @@ public final class CreateBallCommand extends DefaultUICommand {
              * sourceBallModel.getView().getRootNode().getCenterX() + " trX=" + sourceBallModel.getView().getRootNode().getTranslateX() + " y=" + sourceBallModel.getView().getRootNode().getCenterY() +
              * " trY=" + sourceBallModel.getView().getRootNode().getTranslateY());
              */
-            targetBallModel.getView().getRootNode()
-                           .layoutXProperty().bind(sourceBallModel.getView().getRootNode().layoutXProperty().add(sourceBallModel.getView().getRootNode().translateXProperty()));
-            targetBallModel.getView().getRootNode()
-                           .layoutYProperty().bind(sourceBallModel.getView().getRootNode().layoutYProperty().add(sourceBallModel.getView().getRootNode().translateYProperty()));
+            targetBallModel.view().node()
+                           .layoutXProperty().bind(sourceBallModel.view().node().layoutXProperty().add(sourceBallModel.view().node().translateXProperty()));
+            targetBallModel.view().node()
+                           .layoutYProperty().bind(sourceBallModel.view().node().layoutYProperty().add(sourceBallModel.view().node().translateYProperty()));
 
         }
 

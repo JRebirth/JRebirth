@@ -67,16 +67,16 @@ public class ClassKey<R> implements UniqueKey<R> {
      * {@inheritDoc}
      */
     @Override
-    public String getKey() {
-        return this.getClassField().getName();
+    public String key() {
+        return this.classField().getName();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Object getValue() {
-        return this.getClassField();
+    public Object value() {
+        return this.classField();
     }
 
     /**
@@ -84,7 +84,7 @@ public class ClassKey<R> implements UniqueKey<R> {
      */
     @Override
     public String toString() {
-        return this.getClassField().toString();
+        return this.classField().toString();
     }
 
     /**
@@ -92,7 +92,7 @@ public class ClassKey<R> implements UniqueKey<R> {
      */
     @Override
     public int hashCode() {
-        return this.getClassField().hashCode();
+        return this.classField().hashCode();
     }
 
     /**
@@ -101,14 +101,14 @@ public class ClassKey<R> implements UniqueKey<R> {
     @SuppressWarnings("unchecked")
     @Override
     public boolean equals(final Object obj) {
-        return obj != null && obj.getClass() == this.getClass() && this.getClassField().equals(((ClassKey<R>) obj).getClassField());
+        return obj != null && obj.getClass() == this.getClass() && this.classField().equals(((ClassKey<R>) obj).classField());
     }
 
     /**
      * @return Returns the classField.
      */
     @Override
-    public Class<R> getClassField() {
+    public Class<R> classField() {
         return this.classField;
     }
 
@@ -116,7 +116,7 @@ public class ClassKey<R> implements UniqueKey<R> {
      * {@inheritDoc}
      */
     @Override
-    public List<Object> getOptionalData() {
+    public List<Object> optionalData() {
         return this.optionalDatas == null ? Collections.emptyList() : this.optionalDatas;
     }
 

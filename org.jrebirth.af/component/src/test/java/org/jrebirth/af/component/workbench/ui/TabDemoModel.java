@@ -34,14 +34,14 @@ public class TabDemoModel extends DefaultSimpleModel<BorderPane> {
         final Rectangle r = new Rectangle(100, 600);
         r.setFocusTraversable(true);
 
-        getRootNode().setLeft(r);
+        node().setLeft(r);
 
         final Rectangle r2 = new Rectangle(100, 600);
         r2.setFocusTraversable(true);
-        getRootNode().setRight(r2);
+        node().setRight(r2);
 
         final DockModel rootDock = getModel(DockModel.class, DockConfig.create().dockKey("RootDock").orientation(DockOrientation.vertical));
-        getRootNode().setCenter(rootDock.getRootNode());
+        node().setCenter(rootDock.node());
 
         final TabModel topLeft = getModel(TabModel.class, TabConfig.create().tabKey("TopLeft").orientation(TabOrientation.top));
         final TabModel topRight = getModel(TabModel.class, TabConfig.create().tabKey("TopRight").orientation(TabOrientation.right));
@@ -56,25 +56,25 @@ public class TabDemoModel extends DefaultSimpleModel<BorderPane> {
         // topSplit.getItems().addAll(topLeft.getRootNode(), topRight.getRootNode());
         // bottomSplit.getItems().addAll(bottomRight.getRootNode(), bottomLeft.getRootNode());
 
-        addTabWithCommand(topLeft.getObject(), Key.create(DockableModel.class, "Tab1"));
-        addTabWithCommand(topLeft.getObject(), Key.create(DockableModel.class, "Tab2"));
-        addTabWithCommand(topLeft.getObject(), Key.create(DockableModel.class, "Tab3"));
-        addTabWithCommand(topLeft.getObject(), Key.create(DockableModel.class, "Tab4"));
-        addTabWithCommand(topLeft.getObject(), Key.create(DockableModel.class, "Tab5"));
-        addTabWithCommand(topLeft.getObject(), Key.create(DockableModel.class, "Tab6"));
+        addTabWithCommand(topLeft.object(), Key.create(DockableModel.class, "Tab1"));
+        addTabWithCommand(topLeft.object(), Key.create(DockableModel.class, "Tab2"));
+        addTabWithCommand(topLeft.object(), Key.create(DockableModel.class, "Tab3"));
+        addTabWithCommand(topLeft.object(), Key.create(DockableModel.class, "Tab4"));
+        addTabWithCommand(topLeft.object(), Key.create(DockableModel.class, "Tab5"));
+        addTabWithCommand(topLeft.object(), Key.create(DockableModel.class, "Tab6"));
 
-        addTabWithCommand(topRight.getObject(), Key.create(DockableModel.class, "Tab7"));
-        addTabWithCommand(topRight.getObject(), Key.create(DockableModel.class, "Tab8"));
-        addTabWithCommand(topRight.getObject(), Key.create(DockableModel.class, "Tab9"));
+        addTabWithCommand(topRight.object(), Key.create(DockableModel.class, "Tab7"));
+        addTabWithCommand(topRight.object(), Key.create(DockableModel.class, "Tab8"));
+        addTabWithCommand(topRight.object(), Key.create(DockableModel.class, "Tab9"));
 
-        addTabWithCommand(bottomRight.getObject(), Key.create(DockableModel.class, "Tab10"));
-        addTabWithCommand(bottomRight.getObject(), Key.create(DockableModel.class, "Tab11"));
-        addTabWithCommand(bottomRight.getObject(), Key.create(DockableModel.class, "Tab12"));
-        addTabWithCommand(bottomRight.getObject(), Key.create(DockableModel.class, "Tab13"));
-        addTabWithCommand(bottomRight.getObject(), Key.create(DockableModel.class, "Tab14"));
+        addTabWithCommand(bottomRight.object(), Key.create(DockableModel.class, "Tab10"));
+        addTabWithCommand(bottomRight.object(), Key.create(DockableModel.class, "Tab11"));
+        addTabWithCommand(bottomRight.object(), Key.create(DockableModel.class, "Tab12"));
+        addTabWithCommand(bottomRight.object(), Key.create(DockableModel.class, "Tab13"));
+        addTabWithCommand(bottomRight.object(), Key.create(DockableModel.class, "Tab14"));
 
-        addTabWithCommand(bottomLeft.getObject(), Key.create(DockableModel.class, "Tab15"));
-        addTabWithCommand(bottomLeft.getObject(), Key.create(DockableModel.class, "Tab16"));
+        addTabWithCommand(bottomLeft.object(), Key.create(DockableModel.class, "Tab15"));
+        addTabWithCommand(bottomLeft.object(), Key.create(DockableModel.class, "Tab16"));
 
     }
 
@@ -84,7 +84,7 @@ public class TabDemoModel extends DefaultSimpleModel<BorderPane> {
                                // .tabHolderKey(tabHolderKey)
                                .tabConfig(tabConfig)
                                // .modelKey(modelKey)
-                               .tab(Dockable.create().modelKey(modelKey).name(modelKey.getValue().toString())));
+                               .tab(Dockable.create().modelKey(modelKey).name(modelKey.value().toString())));
     }
 
 }

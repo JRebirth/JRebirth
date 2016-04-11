@@ -46,7 +46,7 @@ public abstract class AbstractFXMLController<M extends Model, V extends View<M, 
      * {@inheritDoc}
      */
     @Override
-    public void setModel(final M model) {
+    public void model(final M model) {
         this.model = model;
     }
 
@@ -54,7 +54,7 @@ public abstract class AbstractFXMLController<M extends Model, V extends View<M, 
      * {@inheritDoc}
      */
     @Override
-    public M getModel() {
+    public M model() {
         return this.model;
     }
 
@@ -63,8 +63,8 @@ public abstract class AbstractFXMLController<M extends Model, V extends View<M, 
      */
     @SuppressWarnings("unchecked")
     @Override
-    public V getView() {
-        return (V) this.model.getView();
+    public V view() {
+        return (V) this.model.view();
     }
 
     /**

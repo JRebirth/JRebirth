@@ -2,7 +2,7 @@ package org.jrebirth.af.api.wave;
 
 /**
  * The class <strong>WaveConstants</strong> stores some String constant used by default JRebirth Wazve Types.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface WaveConstants {

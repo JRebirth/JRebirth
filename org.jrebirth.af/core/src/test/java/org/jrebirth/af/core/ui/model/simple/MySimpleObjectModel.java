@@ -9,7 +9,7 @@ public class MySimpleObjectModel extends DefaultSimpleObjectModel<BorderPane, Mo
 
     @Override
     protected void initSimpleView() {
-        getRootNode().setCenter(new BorderPane());
+        node().setCenter(new BorderPane());
     }
 
 }

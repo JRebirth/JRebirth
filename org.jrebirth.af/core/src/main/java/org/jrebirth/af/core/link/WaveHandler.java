@@ -206,8 +206,8 @@ public class WaveHandler implements LinkMessages {
         final List<Object> parameterValues = new ArrayList<>();
         for (final WaveData<?> wd : wave.waveDatas()) {
             // Add only wave items defined as parameter
-            if (wd.getKey().isParameter()) {
-                parameterValues.add(wd.getValue());
+            if (wd.key().isParameter()) {
+                parameterValues.add(wd.value());
             }
         }
         // Add the current wave to process

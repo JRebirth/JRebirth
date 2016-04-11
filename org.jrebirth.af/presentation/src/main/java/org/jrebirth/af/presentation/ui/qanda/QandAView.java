@@ -71,7 +71,7 @@ public class QandAView extends AbstractSlideView<QandAModel, BorderPane, QandACo
     @Override
     protected void initView() {
 
-        getRootNode().getStyleClass().add(getModel().getStyleClass() == null ? "qandaContainer" : getModel().getStyleClass());
+        node().getStyleClass().add(model().getStyleClass() == null ? "qandaContainer" : model().getStyleClass());
 
         this.firstText = TextBuilder.create()
                                     // .text(getModel().getQuestion())
@@ -81,7 +81,7 @@ public class QandAView extends AbstractSlideView<QandAModel, BorderPane, QandACo
                                     .smooth(true)
                                     .cache(true)
                                     .cacheHint(CacheHint.SPEED)
-                                    .fill(getModel().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get())
+                                    .fill(model().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get())
                                     .scaleX(1)
                                     .scaleY(1)
                                     .build();
@@ -94,7 +94,7 @@ public class QandAView extends AbstractSlideView<QandAModel, BorderPane, QandACo
                                      .smooth(true)
                                      .cache(true)
                                      .cacheHint(CacheHint.SPEED)
-                                     .fill(getModel().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get())
+                                     .fill(model().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get())
                                      .scaleX(0)
                                      .scaleY(0)
                                      .build();
@@ -108,7 +108,7 @@ public class QandAView extends AbstractSlideView<QandAModel, BorderPane, QandACo
 
         BorderPane.setAlignment(sp, Pos.CENTER);
 
-        getRootNode().setCenter(sp);
+        node().setCenter(sp);
     }
 
     /**

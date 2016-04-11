@@ -33,14 +33,14 @@ public interface FXMLComponent {
      *
      * @return Returns the root fxml root node.
      */
-    Node getNode();
+    Node node();
 
     /**
      * Return the controller or null.
      *
      * @return Returns the controller.
      */
-    FXMLController getController();
+    FXMLController controller();
 
     /**
      * Return the node or first node matching the selector.

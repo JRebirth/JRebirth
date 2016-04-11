@@ -64,11 +64,11 @@ public class TabController extends DefaultController<TabModel, TabView> {
     @Override
     protected void initEventHandlers() throws CoreException {
 
-        getView().getBox().setOnDragOver(getHandler(DragEvent.DRAG_OVER));
-        getView().getBox().setOnDragEntered(getHandler(DragEvent.DRAG_ENTERED_TARGET));
-        getView().getBox().setOnDragExited(getHandler(DragEvent.DRAG_EXITED_TARGET));
-        getView().getBox().setOnDragDropped(getHandler(DragEvent.DRAG_DROPPED));
-        getView().getBox().setOnDragDone(getHandler(DragEvent.DRAG_DONE));
+        view().getBox().setOnDragOver(getHandler(DragEvent.DRAG_OVER));
+        view().getBox().setOnDragEntered(getHandler(DragEvent.DRAG_ENTERED_TARGET));
+        view().getBox().setOnDragExited(getHandler(DragEvent.DRAG_EXITED_TARGET));
+        view().getBox().setOnDragDropped(getHandler(DragEvent.DRAG_DROPPED));
+        view().getBox().setOnDragDone(getHandler(DragEvent.DRAG_DONE));
 
     }
 

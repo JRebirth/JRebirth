@@ -21,8 +21,6 @@ import javafx.scene.Node;
 
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.single.ui.DefaultUIBeanCommand;
-import org.jrebirth.af.core.wave.Builders;
-import org.jrebirth.af.core.wave.JRebirthWaves;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,32 +42,32 @@ public class AttachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBea
     protected void perform(final Wave wave) {
 
         // final Pane parentNode = getWaveBean(wave).getParentNode();
-        final Node createdNode = getWaveBean(wave).showModel().getRootNode();
+        final Node createdNode = waveBean(wave).showModel().node();
 
         if (createdNode == null) {
-            LOGGER.warn("Impossible to attach model {} because the created node is null", getWaveBean(wave).showModelKey().toString());
+            LOGGER.warn("Impossible to attach model {} because the created node is null", waveBean(wave).showModelKey().toString());
         } else {
-            if (getWaveBean(wave).uniquePlaceHolder() != null) {
-                getWaveBean(wave).uniquePlaceHolder().set(createdNode);
+            if (waveBean(wave).uniquePlaceHolder() != null) {
+                waveBean(wave).uniquePlaceHolder().set(createdNode);
             }
-            if (getWaveBean(wave).childrenPlaceHolder() != null) {
-                if (getWaveBean(wave).appendChild()) {
-                    getWaveBean(wave).childrenPlaceHolder().add(createdNode);
+            if (waveBean(wave).childrenPlaceHolder() != null) {
+                if (waveBean(wave).appendChild()) {
+                    waveBean(wave).childrenPlaceHolder().add(createdNode);
                 } else {
-                    getWaveBean(wave).childrenPlaceHolder().add(0, createdNode);
+                    waveBean(wave).childrenPlaceHolder().add(0, createdNode);
                 }
             }
-            if (getWaveBean(wave).uniquePlaceHolder() == null && getWaveBean(wave).childrenPlaceHolder() == null) {
-                LOGGER.warn("Impossible to attach model {}, no place holder found", getWaveBean(wave).showModelKey().toString());
+            if (waveBean(wave).uniquePlaceHolder() == null && waveBean(wave).childrenPlaceHolder() == null) {
+                LOGGER.warn("Impossible to attach model {}, no place holder found", waveBean(wave).showModelKey().toString());
             }
 
             // Try to give focus to the new node added (Could be managed by a boolean ??)
             // createdNode.requestFocus();
 
             // FIXME do it in the right way
-            if (getWaveBean(wave).appendChild()) {
-                getWaveBean(wave).showModel().doShowView(wave);
-                //sendWave(Builders.wave().waveType(JRebirthWaves.SHOW_VIEW_WT).componentClass(getWaveBean(wave).showModel().getClass()));
+            if (waveBean(wave).appendChild()) {
+                waveBean(wave).showModel().doShowView(wave);
+                // sendWave(Builders.wave().waveType(JRebirthWaves.SHOW_VIEW_WT).componentClass(getWaveBean(wave).showModel().getClass()));
             }
 
         }

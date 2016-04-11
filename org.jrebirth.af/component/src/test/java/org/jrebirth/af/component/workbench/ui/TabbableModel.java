@@ -12,7 +12,7 @@ public class TabbableModel extends DefaultSimpleModel<Text> {
     protected void initSimpleView() {
 
         final Dockable bean = getBehaviorData(DockableBehavior.class);
-        getRootNode().setText(bean.name());
+        node().setText(bean.name());
 
     }
 

@@ -67,12 +67,12 @@ public final class SlideStackView extends DefaultView<SlideStackModel, StackPane
     @Override
     protected void initView() {
 
-        getRootNode().setFocusTraversable(true);
+        node().setFocusTraversable(true);
 
-        getRootNode().setPrefSize(1024, 768);
-        getRootNode().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        getRootNode().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        getRootNode().setAlignment(Pos.CENTER);
+        node().setPrefSize(1024, 768);
+        node().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        node().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        node().setAlignment(Pos.CENTER);
 
         // this.circle = new Button();
 

@@ -49,10 +49,10 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
     public void doEventSelected(final JRebirthEvent eventSelected, final Wave wave) {
         // Same object (reference)
         if (getEventModel() == eventSelected) {
-            getView().getScaleTransition().play();
+            view().getScaleTransition().play();
         } else {
-            getView().getScaleTransition().stop();
-            getView().resetScale();
+            view().getScaleTransition().stop();
+            view().resetScale();
         }
     }
 
@@ -74,22 +74,22 @@ public final class BallModel extends DefaultModel<BallModel, BallView> {
      * Show the ball node.
      */
     public void show() {
-        getView().setStyle(getEventModel().getEventType()); // TODO remove
-        getView().start();
+        view().setStyle(getEventModel().eventType()); // TODO remove
+        view().start();
     }
 
     /**
      * TODO To complete.
      */
     public void hide() {
-        getView().hide();
+        view().hide();
     }
 
     /**
      * TODO To complete.
      */
     public void destroy() {
-        getView().hide();
+        view().hide();
     }
 
     /**

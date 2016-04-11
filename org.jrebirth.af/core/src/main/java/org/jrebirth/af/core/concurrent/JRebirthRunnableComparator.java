@@ -46,11 +46,11 @@ public class JRebirthRunnableComparator implements Comparator<Runnable>, Seriali
             res = jrr2 == null ? 0 : 1;
         } else if (jrr2 == null) {
             res = -1;
-        } else if (jrr1.getPriority().level() == jrr2.getPriority().level()) {
+        } else if (jrr1.priority().level() == jrr2.priority().level()) {
             // Compare creation time
-            res = jrr1.getCreationTime().compareTo(jrr2.getCreationTime());
+            res = jrr1.creationTime().compareTo(jrr2.creationTime());
         } else {
-            res = ((Integer) jrr1.getPriority().level()).compareTo(jrr2.getPriority().level()) * -1;
+            res = ((Integer) jrr1.priority().level()).compareTo(jrr2.priority().level()) * -1;
         }
         return res;
     }

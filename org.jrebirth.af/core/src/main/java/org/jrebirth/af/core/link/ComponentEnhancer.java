@@ -108,11 +108,11 @@ public final class ComponentEnhancer implements LinkMessages {
 
         try {
             if (Command.class.isAssignableFrom(field.getType())) {
-                ClassUtility.setFieldValue(field, component, component.getLocalFacade().getGlobalFacade().getCommandFacade().retrieve((Class<Command>) field.getType(), keyParts));
+                ClassUtility.setFieldValue(field, component, component.localFacade().getGlobalFacade().commandFacade().retrieve((Class<Command>) field.getType(), keyParts));
             } else if (Service.class.isAssignableFrom(field.getType())) {
-                ClassUtility.setFieldValue(field, component, component.getLocalFacade().getGlobalFacade().getServiceFacade().retrieve((Class<Service>) field.getType(), keyParts));
+                ClassUtility.setFieldValue(field, component, component.localFacade().getGlobalFacade().serviceFacade().retrieve((Class<Service>) field.getType(), keyParts));
             } else if (Model.class.isAssignableFrom(field.getType())) {
-                ClassUtility.setFieldValue(field, component, component.getLocalFacade().getGlobalFacade().getUiFacade().retrieve((Class<Model>) field.getType(), keyParts));
+                ClassUtility.setFieldValue(field, component, component.localFacade().getGlobalFacade().uiFacade().retrieve((Class<Model>) field.getType(), keyParts));
             }
         } catch (IllegalArgumentException | CoreException e) {
             LOGGER.error(COMPONENT_INJECTION_FAILURE, component.getClass(), e);

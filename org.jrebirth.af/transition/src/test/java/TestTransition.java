@@ -53,7 +53,7 @@ public final class TestTransition extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public Class<? extends Model> getFirstModelClass() {
+    public Class<? extends Model> firstModelClass() {
         return TransitionModel.class;
     }
 
@@ -88,7 +88,7 @@ public final class TestTransition extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public List<Wave> getPreBootWaveList() {
+    public List<Wave> preBootWaveList() {
         return Collections.emptyList();
     }
 
@@ -96,7 +96,7 @@ public final class TestTransition extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public List<Wave> getPostBootWaveList() {
+    public List<Wave> postBootWaveList() {
         return Collections.emptyList();
     }
 

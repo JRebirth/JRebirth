@@ -63,25 +63,25 @@ public final class SlideMenuView extends DefaultView<SlideMenuModel, ListView<Sl
     @Override
     protected void initView() {
 
-        getRootNode().setPrefSize(600, 600);
-        getRootNode().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        getRootNode().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        node().setPrefSize(600, 600);
+        node().setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        node().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
-        final ObservableList<Slide> items = FXCollections.observableArrayList(getModel().getSlides());
-        getRootNode().setItems(items);
+        final ObservableList<Slide> items = FXCollections.observableArrayList(model().getSlides());
+        node().setItems(items);
 
-        getRootNode().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        node().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        getRootNode().getSelectionModel().select(getModel().getObject());
-        getRootNode().scrollTo(getModel().getObject());
+        node().getSelectionModel().select(model().object());
+        node().scrollTo(model().object());
 
-        getRootNode().getSelectionModel().selectedItemProperty().addListener(
+        node().getSelectionModel().selectedItemProperty().addListener(
                                                                              (final ObservableValue<? extends Slide> ov, final Slide old_val, final Slide new_val) -> {
-                                                                                 getModel().callCommand(ShowSlideCommand.class, Builders.waveData(PrezWaves.SLIDE, new_val));
-                                                                                 ((Pane) getRootNode().getParent()).getChildren().remove(getRootNode());
+                                                                                 model().callCommand(ShowSlideCommand.class, Builders.waveData(PrezWaves.SLIDE, new_val));
+                                                                                 ((Pane) node().getParent()).getChildren().remove(node());
                                                                              });
 
-        getRootNode().setCellFactory(list -> {
+        node().setCellFactory(list -> {
             return new ListCell<Slide>() {
 
                 @Override

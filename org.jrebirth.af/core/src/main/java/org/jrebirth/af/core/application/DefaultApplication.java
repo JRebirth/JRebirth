@@ -62,7 +62,7 @@ public class DefaultApplication<P extends Pane> extends AbstractApplication<P> {
      * {@inheritDoc}
      */
     @Override
-    public Class<? extends Model> getFirstModelClass() {
+    public Class<? extends Model> firstModelClass() {
         throw new CoreRuntimeException(OVERRIDE_FIRST_MODEL_CLASS);
     }
 
@@ -94,7 +94,7 @@ public class DefaultApplication<P extends Pane> extends AbstractApplication<P> {
      * {@inheritDoc}
      */
     @Override
-    public List<Wave> getPreBootWaveList() {
+    public List<Wave> preBootWaveList() {
         return Collections.emptyList();
     }
 
@@ -102,7 +102,7 @@ public class DefaultApplication<P extends Pane> extends AbstractApplication<P> {
      * {@inheritDoc}
      */
     @Override
-    public List<Wave> getPostBootWaveList() {
+    public List<Wave> postBootWaveList() {
         return Collections.emptyList();
     }
 

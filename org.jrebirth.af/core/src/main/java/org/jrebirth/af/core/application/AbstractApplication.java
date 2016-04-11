@@ -293,8 +293,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             super.stop();
 
             // Hide the stage is this method wasn't call by user
-            if (getStage().isShowing()) {
-                getStage().hide();
+            if (stage().isShowing()) {
+                stage().hide();
             }
 
             // Now nothing is visible by users, Let's kill and release all JRebirth folks
@@ -626,7 +626,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * {@inheritDoc}
      */
     @Override
-    public Stage getStage() {
+    public Stage stage() {
         return this.stage;
     }
 
@@ -634,7 +634,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * {@inheritDoc}
      */
     @Override
-    public final Scene getScene() {
+    public final Scene scene() {
         return this.scene;
     }
 
@@ -642,7 +642,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * {@inheritDoc}
      */
     @Override
-    public P getRootNode() {
+    public P rootNode() {
         return this.rootNode;
     }
 

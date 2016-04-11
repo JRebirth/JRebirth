@@ -100,7 +100,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
 
         // Link the application
         this.application = application;
-        trackEvent(JRebirthEventType.CREATE_APPLICATION, null, getApplication().getClass());
+        trackEvent(JRebirthEventType.CREATE_APPLICATION, null, application().getClass());
 
         LOGGER.trace(JTP_CREATION);
 
@@ -114,7 +114,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
         this.highPriorityExecutorService = new JRebirthThreadPoolExecutor(poolSize,
                                                                           new NamedThreadBuilder(((AbstractApplication<?>) application).getPoolUncaughtExceptionHandler(), HPTP_BASE_NAME));
 
-        trackEvent(JRebirthEventType.CREATE_GLOBAL_FACADE, getApplication().getClass(), this.getClass());
+        trackEvent(JRebirthEventType.CREATE_GLOBAL_FACADE, application().getClass(), this.getClass());
 
         // Build the notifier manager
         this.notifier = buildNotifier();
@@ -154,7 +154,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      * @return Returns the componentFactory.
      */
     @Override
-    public ComponentFactory getComponentFactory() {
+    public ComponentFactory componentFactory() {
         return this.componentFactory;
     }
 
@@ -162,7 +162,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      * {@inheritDoc}
      */
     @Override
-    public final JRebirthApplication<?> getApplication() {
+    public final JRebirthApplication<?> application() {
         return this.application;
     }
 
@@ -170,7 +170,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      * {@inheritDoc}
      */
     @Override
-    public final Notifier getNotifier() {
+    public final Notifier notifier() {
         return this.notifier;
     }
 
@@ -178,7 +178,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      * {@inheritDoc}
      */
     @Override
-    public final UiFacade getUiFacade() {
+    public final UiFacade uiFacade() {
         return this.uiFacade;
     }
 
@@ -186,7 +186,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      * {@inheritDoc}
      */
     @Override
-    public final ServiceFacade getServiceFacade() {
+    public final ServiceFacade serviceFacade() {
         return this.serviceFacade;
     }
 
@@ -194,7 +194,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      * {@inheritDoc}
      */
     @Override
-    public final CommandFacade getCommandFacade() {
+    public final CommandFacade commandFacade() {
         return this.commandFacade;
     }
 
@@ -202,7 +202,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      * {@inheritDoc}
      */
     @Override
-    public final BehaviorFacade getBehaviorFacade() {
+    public final BehaviorFacade behaviorFacade() {
         return this.behaviorFacade;
     }
 
@@ -210,7 +210,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      * {@inheritDoc}
      */
     @Override
-    public IJRebirthThreadPoolExecutor getExecutorService() {
+    public IJRebirthThreadPoolExecutor executorService() {
         return this.executorService;
     }
 
@@ -218,7 +218,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
      * {@inheritDoc}
      */
     @Override
-    public IJRebirthThreadPoolExecutor getHighPriorityExecutorService() {
+    public IJRebirthThreadPoolExecutor highPriorityExecutorService() {
         return this.highPriorityExecutorService;
     }
 
@@ -232,13 +232,13 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
         customStop();
 
         // Stop the thread pool
-        if (getExecutorService() != null) {
-            getExecutorService().shutdown();
+        if (executorService() != null) {
+            executorService().shutdown();
         }
 
         // Stop the high priority thread pool
-        if (getHighPriorityExecutorService() != null) {
-            getHighPriorityExecutorService().shutdown();
+        if (highPriorityExecutorService() != null) {
+            highPriorityExecutorService().shutdown();
         }
     }
 

@@ -36,13 +36,13 @@ public interface Behavior<D extends BehaviorData, C extends BehavioredComponent<
      *
      * @return the behavior data
      */
-    D getData();
+    D data();
 
     /**
      * Gets the {@link EnhancedComponent} concerned by this Behavior.
      *
      * @return the component
      */
-    C getComponent();
+    C component();
 
 }

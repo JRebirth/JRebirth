@@ -85,7 +85,7 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements IJ
     private boolean checkPriority(final PriorityLevel taskPriority) {
         boolean highPriority = false;
         for (final JRebirthRunnable jr : this.pending) {
-            highPriority |= taskPriority.level() > jr.getPriority().level();
+            highPriority |= taskPriority.level() > jr.priority().level();
         }
         return !highPriority;
     }

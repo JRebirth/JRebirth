@@ -33,13 +33,13 @@ public interface ModelObject<O> extends Model {
      *
      * @return the bindable object
      */
-    O getObject();
+    O object();
 
     /**
      * Set the bindable object.
      *
      * @param object The bindable object to set.
      */
-    void setObject(final O object);
+    void object(final O object);
 
 }

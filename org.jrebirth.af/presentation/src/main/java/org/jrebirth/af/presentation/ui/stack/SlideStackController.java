@@ -109,10 +109,10 @@ public final class SlideStackController extends DefaultController<SlideStackMode
         final WaveData<Boolean> data = Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, keyEvent.isControlDown());
 
         if (keyEvent.getCode() == KeyCode.PAGE_DOWN) {
-            getModel().callCommand(ShowNextSlideCommand.class, data);
+            model().callCommand(ShowNextSlideCommand.class, data);
             keyEvent.consume();
         } else if (keyEvent.getCode() == KeyCode.PAGE_UP) {
-            getModel().callCommand(ShowPreviousSlideCommand.class, data);
+            model().callCommand(ShowPreviousSlideCommand.class, data);
             keyEvent.consume();
         }
     }
@@ -124,7 +124,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      */
     protected void onMouseReleased(final MouseEvent mouseEvent) {
 
-        if (getModel().getMenuShown().get()) {
+        if (model().getMenuShown().get()) {
             mouseEvent.consume();
         }
 
@@ -133,13 +133,13 @@ public final class SlideStackController extends DefaultController<SlideStackMode
             final WaveData<Boolean> data = Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, mouseEvent.isControlDown());
 
             if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-                getModel().callCommand(ShowNextSlideCommand.class, data);
+                model().callCommand(ShowNextSlideCommand.class, data);
                 mouseEvent.consume();
             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                getModel().callCommand(ShowPreviousSlideCommand.class, data);
+                model().callCommand(ShowPreviousSlideCommand.class, data);
                 mouseEvent.consume();
             } else if (mouseEvent.getButton() == MouseButton.MIDDLE) {
-                getModel().callCommand(ShowSlideMenuCommand.class);
+                model().callCommand(ShowSlideMenuCommand.class);
                 mouseEvent.consume();
             }
         }
@@ -147,7 +147,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
 
     protected void onTouchReleased(final TouchEvent touchEvent) {
         if (touchEvent.getTouchCount() == 2) {
-            getModel().callCommand(ShowSlideMenuCommand.class);
+            model().callCommand(ShowSlideMenuCommand.class);
             touchEvent.consume();
         }
     }
@@ -158,7 +158,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * @param swipeEvent
      */
     protected void onSwipeLeft(final SwipeEvent swipeEvent) {
-        getModel().callCommand(ShowNextSlideCommand.class, Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, swipeEvent.getTouchCount() > 1));
+        model().callCommand(ShowNextSlideCommand.class, Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, swipeEvent.getTouchCount() > 1));
         swipeEvent.consume();
     }
 
@@ -168,7 +168,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * @param swipeEvent
      */
     protected void onSwipeRight(final SwipeEvent swipeEvent) {
-        getModel().callCommand(ShowPreviousSlideCommand.class, Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, swipeEvent.getTouchCount() > 1));
+        model().callCommand(ShowPreviousSlideCommand.class, Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, swipeEvent.getTouchCount() > 1));
         swipeEvent.consume();
     }
 

@@ -186,9 +186,9 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * @param ballModel the ball model to register
      */
     public void registerBall(final BallModel ballModel) {
-        if (!this.ballMap.containsKey(ballModel.getEventModel().getTarget())) {
-            this.ballMap.put(ballModel.getEventModel().getTarget(), ballModel);
-            getView().getPanel().getChildren().add(ballModel.getRootNode());
+        if (!this.ballMap.containsKey(ballModel.getEventModel().target())) {
+            this.ballMap.put(ballModel.getEventModel().target(), ballModel);
+            view().getPanel().getChildren().add(ballModel.node());
         }
     }
 
@@ -198,8 +198,8 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      * @param ballModel the ball model to unregister
      */
     public void unregisterBall(final BallModel ballModel) {
-        this.ballMap.remove(ballModel.getEventModel().getTarget());
-        getView().getPanel().getChildren().remove(ballModel.getRootNode());
+        this.ballMap.remove(ballModel.getEventModel().target());
+        view().getPanel().getChildren().remove(ballModel.node());
     }
 
     /**

@@ -39,47 +39,47 @@ public interface GlobalFacade {
     /**
      * @return Returns the componentFactory.
      */
-    ComponentFactory getComponentFactory();
+    ComponentFactory componentFactory();
 
     /**
      * @return Returns the notifier.
      */
-    Notifier getNotifier();
+    Notifier notifier();
 
     /**
      * @return Returns the uiFacade.
      */
-    LocalFacade<Model> getUiFacade();
+    LocalFacade<Model> uiFacade();
 
     /**
      * @return Returns the serviceFacade.
      */
-    LocalFacade<Service> getServiceFacade();
+    LocalFacade<Service> serviceFacade();
 
     /**
      * @return Returns the commandFacade.
      */
-    LocalFacade<Command> getCommandFacade();
+    LocalFacade<Command> commandFacade();
 
     /**
      * @return Returns the behaviorFacade.
      */
-    LocalFacade<Behavior<?, ?>> getBehaviorFacade();
+    LocalFacade<Behavior<?, ?>> behaviorFacade();
 
     /**
      * @return the application
      */
-    JRebirthApplication<?> getApplication();
+    JRebirthApplication<?> application();
 
     /**
      * @return Returns the executorService.
      */
-    IJRebirthThreadPoolExecutor getExecutorService();
+    IJRebirthThreadPoolExecutor executorService();
 
     /**
      * @return Returns the highPriorityExecutorService.
      */
-    IJRebirthThreadPoolExecutor getHighPriorityExecutorService();
+    IJRebirthThreadPoolExecutor highPriorityExecutorService();
 
     /**
      * Track an event.

@@ -64,12 +64,12 @@ public final class EditorView extends DefaultView<EditorModel, ScrollPane, Edito
         this.panel.getStyleClass().add("editor");
 
         final Circle c = new Circle(200 + 25, Color.BEIGE);
-        c.centerXProperty().bind(getRootNode().widthProperty().divide(2)/* .add(70) */);
-        c.centerYProperty().bind(getRootNode().heightProperty().divide(2));
+        c.centerXProperty().bind(node().widthProperty().divide(2)/* .add(70) */);
+        c.centerYProperty().bind(node().heightProperty().divide(2));
 
         this.panel.getChildren().add(c);
 
-        getRootNode().setContent(this.panel);
+        node().setContent(this.panel);
 
         // this.panel.scaleXProperty().bind(this.panel.prefWidthProperty().divide(getRootNode().widthProperty()));
         // this.panel.scaleYProperty().bind(this.panel.prefHeightProperty().divide(getRootNode().heightProperty()));

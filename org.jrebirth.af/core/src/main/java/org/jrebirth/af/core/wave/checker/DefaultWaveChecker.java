@@ -48,7 +48,7 @@ public class DefaultWaveChecker<I extends Object> extends AbstractWaveChecker<I,
     public Boolean call(final Wave wave) {
 
         final WaveData<I> waveData = wave.getData(getWaveItem());
-        final I currentValue = waveData == null ? null : waveData.getValue();
+        final I currentValue = waveData == null ? null : waveData.value();
 
         return ObjectUtility.equalsOrBothNull(currentValue, getMatchingValue());
     }

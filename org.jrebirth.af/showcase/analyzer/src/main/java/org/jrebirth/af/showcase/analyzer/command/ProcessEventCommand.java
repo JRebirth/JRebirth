@@ -38,11 +38,11 @@ public final class ProcessEventCommand extends DefaultCommand {
 
         final JRebirthEvent event = wave.get(EditorWaves.EVENT);
 
-        if (event.getEventType().name().startsWith("CREATE")) {
+        if (event.eventType().name().startsWith("CREATE")) {
             createBallModel(event);
-        } else if (event.getEventType().name().startsWith("ACCESS")) {
+        } else if (event.eventType().name().startsWith("ACCESS")) {
             accessBallModel(event);
-        } else if (event.getEventType().name().startsWith("DESTROY")) {
+        } else if (event.eventType().name().startsWith("DESTROY")) {
             destroyBallModel(event);
         }
     }
@@ -53,7 +53,7 @@ public final class ProcessEventCommand extends DefaultCommand {
      * @param event the create event
      */
     private void createBallModel(final JRebirthEvent event) {
-        switch (event.getEventType()) {
+        switch (event.eventType()) {
             case CREATE_APPLICATION:
             case CREATE_NOTIFIER:
             case CREATE_GLOBAL_FACADE:
@@ -80,7 +80,7 @@ public final class ProcessEventCommand extends DefaultCommand {
      * @param event the access event
      */
     private void accessBallModel(final JRebirthEvent event) {
-        switch (event.getEventType()) {
+        switch (event.eventType()) {
             case ACCESS_COMMAND:
             case ACCESS_CONTROLLER:
             case ACCESS_MODEL:
@@ -99,7 +99,7 @@ public final class ProcessEventCommand extends DefaultCommand {
      * @param event the destroy event
      */
     private void destroyBallModel(final JRebirthEvent event) {
-        switch (event.getEventType()) {
+        switch (event.eventType()) {
             case DESTROY_COMMAND:
             case DESTROY_SERVICE:
             case DESTROY_MODEL:

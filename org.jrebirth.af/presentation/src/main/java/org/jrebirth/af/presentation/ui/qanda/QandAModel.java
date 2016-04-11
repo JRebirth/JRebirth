@@ -81,10 +81,10 @@ public class QandAModel extends AbstractSlideModel<QandAModel, QandAView, SlideS
 
         if (isForwardFlow()) {
             this.currentSlideContent = getSlide().getContent().get(idx + 1);
-            getView().showNext(currentTitle, formatString(this.currentSlideContent.getTitle()));
+            view().showNext(currentTitle, formatString(this.currentSlideContent.getTitle()));
         } else {
             this.currentSlideContent = getSlide().getContent().get(idx == 0 ? getStepCount() - 1 : idx - 1);
-            getView().showPrevious(currentTitle, formatString(this.currentSlideContent.getTitle()));
+            view().showPrevious(currentTitle, formatString(this.currentSlideContent.getTitle()));
         }
     }
 

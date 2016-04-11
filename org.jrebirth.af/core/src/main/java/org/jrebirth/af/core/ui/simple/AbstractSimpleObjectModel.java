@@ -56,7 +56,7 @@ public abstract class AbstractSimpleObjectModel<N extends Node, O extends Object
             // Find the RootNodeId annotation
             final RootNodeId rni = ClassUtility.getLastClassAnnotation(this.getClass(), RootNodeId.class);
             if (rni != null) {
-                getRootNode().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
+                node().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
             }
 
             initSimpleView();
@@ -81,7 +81,7 @@ public abstract class AbstractSimpleObjectModel<N extends Node, O extends Object
      * {@inheritDoc}
      */
     @Override
-    public N getRootNode() {
+    public N node() {
         return this.rootNode;
     }
 

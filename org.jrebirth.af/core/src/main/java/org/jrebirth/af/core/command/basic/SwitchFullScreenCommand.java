@@ -35,7 +35,7 @@ public class SwitchFullScreenCommand extends DefaultUICommand {
     @Override
     public void perform(final Wave wave) {
 
-        final Stage stage = getLocalFacade().getGlobalFacade().getApplication().getStage();
+        final Stage stage = localFacade().getGlobalFacade().application().stage();
 
         // Switch the full screen state
         stage.setFullScreen(!stage.isFullScreen());

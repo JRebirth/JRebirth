@@ -56,14 +56,14 @@ public final class PropertiesView extends DefaultView<PropertiesModel, VBox, Pro
     @Override
     protected void initView() {
 
-        getRootNode().setMinWidth(200);
+        node().setMinWidth(200);
 
         final HBox hbox = HBoxBuilder.create().build();
         final Label label = new Label("Node Name :");
         this.nodeName = new Text();
         hbox.getChildren().addAll(label, this.nodeName);
 
-        getRootNode().getChildren().add(hbox);
+        node().getChildren().add(hbox);
     }
 
     /**

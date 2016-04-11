@@ -50,7 +50,7 @@ public class FadeInOutCommand extends DefaultUIBeanCommand<FadeInOutWaveBean> {
 
         final Node node = getNode(wave);
 
-        final FadeInOutWaveBean waveBean = getWaveBean(wave);
+        final FadeInOutWaveBean waveBean = waveBean(wave);
 
         final FadeTransition fadeIn = new FadeTransition();
         fadeIn.setAutoReverse(false);
@@ -84,10 +84,10 @@ public class FadeInOutCommand extends DefaultUIBeanCommand<FadeInOutWaveBean> {
      * @return the node
      */
     private Node getNode(final Wave wave) {
-        Node node = getWaveBean(wave).node();
+        Node node = waveBean(wave).node();
 
         if (node == null && wave.hasWaveBean(DisplayModelWaveBean.class)) {
-            node = wave.waveBean(DisplayModelWaveBean.class).showModel().getRootNode();
+            node = wave.waveBean(DisplayModelWaveBean.class).showModel().node();
         }
         return node;
     }

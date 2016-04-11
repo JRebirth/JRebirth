@@ -14,10 +14,10 @@ public interface FXMLControllerFactory extends Callback<Class<?>, Object> {
     /**
      * @return Returns the relatedModel.
      */
-    Model getRelatedModel();
+    Model relatedModel();
 
     /**
      * @param relatedModel The relatedModel to set.
      */
-    void setRelatedModel(Model relatedModel);
+    void relatedModel(Model relatedModel);
 }

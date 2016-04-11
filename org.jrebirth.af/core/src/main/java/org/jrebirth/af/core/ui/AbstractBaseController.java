@@ -64,7 +64,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
         this.view = view;
 
         // Track this controller creation
-        getModel().getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_CONTROLLER, getView().getClass(), this.getClass());
+        model().localFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_CONTROLLER, view().getClass(), this.getClass());
     }
 
     /*
@@ -129,7 +129,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      * @return Returns the view.
      */
     @Override
-    public final V getView() {
+    public final V view() {
         return this.view;
     }
 
@@ -137,16 +137,16 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      * @return Returns the model.
      */
     @Override
-    public final M getModel() {
-        return getView().getModel();
+    public final M model() {
+        return view().model();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final Node getRootNode() {
-        return getView().getRootNode();
+    public final Node node() {
+        return view().node();
     }
 
     /**
@@ -273,7 +273,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      */
     @Override
     protected void finalize() throws Throwable {
-        getModel().getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_CONTROLLER, null, this.getClass());
+        model().localFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_CONTROLLER, null, this.getClass());
         super.finalize();
     }
 

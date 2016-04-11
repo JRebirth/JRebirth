@@ -103,9 +103,9 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
         // Initialize the FXML View, by loading the FXML file and creating all Nodes.
         if (getFXMLItem() != null) {
             this.fxmlComponent = getFXMLItem().get();
-            if (this.fxmlComponent.getController() != null) {
+            if (this.fxmlComponent.controller() != null) {
                 // Attach manually the model to the FXMLController, because the FXMLBuilder#buildComponent hadn't done it
-                this.fxmlComponent.getController().setModel(this);
+                this.fxmlComponent.controller().model(this);
             }
         } else if (getFXMLPath() != null) {
             this.fxmlComponent = FXMLUtils.loadFXML(this, getFXMLPath(), getFXMLBundlePath());
@@ -170,8 +170,8 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
      * {@inheritDoc}
      */
     @Override
-    public Node getRootNode() {
-        return this.fxmlComponent.getNode();
+    public Node node() {
+        return this.fxmlComponent.node();
     }
 
     /**
@@ -181,7 +181,7 @@ public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object>
      */
     @SuppressWarnings("unchecked")
     public FXMLController<M, ?> getFXMLController() {
-        return this.fxmlComponent.getController();
+        return this.fxmlComponent.controller();
     }
 
 }

@@ -40,6 +40,6 @@ public interface InnerComponent<C extends Component<?>> {
      *
      * @return the unique key used to load the right Model, must be not null
      */
-    UniqueKey<C> getKey();
+    UniqueKey<C> key();
 
 }

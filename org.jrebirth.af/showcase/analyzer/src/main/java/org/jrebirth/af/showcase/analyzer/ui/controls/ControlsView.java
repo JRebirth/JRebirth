@@ -98,7 +98,7 @@ public final class ControlsView extends DefaultView<ControlsModel, HBox, Control
         HBox.setHgrow(this.stopButton, Priority.ALWAYS);
         this.stopButton.setMaxWidth(Double.MAX_VALUE);
 
-        getRootNode().getChildren().addAll(
+        node().getChildren().addAll(
                                            this.openButton,
                                            this.unloadButton,
                                            this.playPauseButton,

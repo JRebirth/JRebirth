@@ -35,7 +35,7 @@ public final class SampleApplication extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public Class<? extends Model> getFirstModelClass() {
+    public Class<? extends Model> firstModelClass() {
         return SampleModel.class;
     }
 

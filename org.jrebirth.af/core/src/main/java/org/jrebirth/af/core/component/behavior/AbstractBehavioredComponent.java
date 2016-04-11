@@ -60,7 +60,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
     protected void manageOptionalData() {
 
         // Parse optional data provided to search Behavior Class or BehaviorData
-        for (final Object data : getKey().getOptionalData()) {
+        for (final Object data : key().optionalData()) {
 
             if (data instanceof BehaviorData) {
 
@@ -91,9 +91,9 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
     @SuppressWarnings("unchecked")
     public <BD extends BehaviorData, B extends Behavior<BD, ?>> C addBehavior(final Class<B> behaviorClass) {
 
-        final UniqueKey<B> key = Key.create(behaviorClass, new Object[] { this }, getKey());
+        final UniqueKey<B> key = Key.create(behaviorClass, new Object[] { this }, key());
 
-        final B behavior = getLocalFacade().getGlobalFacade().getBehaviorFacade().retrieve(key);
+        final B behavior = localFacade().getGlobalFacade().behaviorFacade().retrieve(key);
 
         addBehavior(behavior);
 
@@ -111,9 +111,9 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
 
             final Object[] optionalData = new Object[] { data, this };
 
-            final UniqueKey<? extends Behavior<?, ?>> key = Key.create(behaviorClass, optionalData, getKey());
+            final UniqueKey<? extends Behavior<?, ?>> key = Key.create(behaviorClass, optionalData, key());
 
-            addBehavior(getLocalFacade().getGlobalFacade().getBehaviorFacade().retrieve(key));
+            addBehavior(localFacade().getGlobalFacade().behaviorFacade().retrieve(key));
         }
         return (C) this;
     }
@@ -161,7 +161,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
         BD data = null;
         final B behavior = getBehavior(behaviorClass);
         if (behavior != null) {
-            data = behavior.getData();
+            data = behavior.data();
         }
         return data;
     }

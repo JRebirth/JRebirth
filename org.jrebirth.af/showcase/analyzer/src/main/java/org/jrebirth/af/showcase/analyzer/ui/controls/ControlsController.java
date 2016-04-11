@@ -51,13 +51,13 @@ public final class ControlsController extends DefaultController<ControlsModel, C
     @Override
     protected void initEventHandlers() throws CoreException {
 
-        linkCommand(getView().getOpenButton(), MouseEvent.MOUSE_CLICKED, OpenEventTrackerFileCommand.class, LinkedCallback.CHECK_MOUSE_SINGLE_CLICK);
+        linkCommand(view().getOpenButton(), MouseEvent.MOUSE_CLICKED, OpenEventTrackerFileCommand.class, LinkedCallback.CHECK_MOUSE_SINGLE_CLICK);
 
-        linkWave(getView().getUnloadButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_UNLOAD);
-        linkWave(getView().getPlayPauseButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_PLAY);
-        linkWave(getView().getBackwardButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_PREVIOUS);
-        linkWave(getView().getForwardButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_NEXT);
-        linkWave(getView().getStopButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_STOP);
+        linkWave(view().getUnloadButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_UNLOAD);
+        linkWave(view().getPlayPauseButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_PLAY);
+        linkWave(view().getBackwardButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_PREVIOUS);
+        linkWave(view().getForwardButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_NEXT);
+        linkWave(view().getStopButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_STOP);
 
         // Register mouse clicked handler
         // getView().getOpenButton().setOnMouseClicked(getMouseHandler());

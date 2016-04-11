@@ -29,51 +29,51 @@ public interface JRebirthEvent {
     /**
      * @return Returns the sequence number.
      */
-    int getSequence();
+    int sequence();
 
     /**
      * @param sequence The sequence to set.
      */
-    void setSequence(final int sequence);
+    JRebirthEvent sequence(final int sequence);
 
     /**
      * @return Returns the eventType.
      */
-    JRebirthEventType getEventType();
+    JRebirthEventType eventType();
 
     /**
      * @param eventType The eventType to set.
      */
-    void setEventType(final JRebirthEventType eventType);
+    JRebirthEvent eventType(final JRebirthEventType eventType);
 
     /**
      * @return Returns the source class.
      */
-    String getSource();
+    String source();
 
     /**
      * @param source The source class to set.
      */
-    void setSource(final String source);
+    JRebirthEvent source(final String source);
 
     /**
      * @return Returns the target class.
      */
-    String getTarget();
+    String target();
 
     /**
      * @param target The data to set.
      */
-    void setTarget(final String target);
+    JRebirthEvent target(final String target);
 
     /**
      * @return Returns the data.
      */
-    String getEventData();
+    String eventData();
 
     /**
      * @param data The data to set.
      */
-    void setEventData(final String data);
+    JRebirthEvent eventData(final String data);
 
 }

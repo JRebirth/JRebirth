@@ -132,7 +132,7 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
         // Create the Wave Bean that will hold all data processed by chained commands
         final DisplayModelWaveBean waveBean = DisplayModelWaveBean.create()
                                                                   // Define the placeholder that will receive the content
-                                                                  .childrenPlaceHolder(getView().getRootNode().getChildren())
+                                                                  .childrenPlaceHolder(view().node().getChildren())
                                                                   // Allow to add element behind the stack to allow transition
                                                                   .appendChild(false)
                                                                   .showModelKey(pageModelKey)

@@ -48,7 +48,7 @@ public final class ClassicView extends AbstractTemplateView<ClassicModel, Anchor
      */
     @Override
     protected Node getContentPanel() {
-        return buildDefaultContent(getModel().getDefaultContent());
+        return buildDefaultContent(model().getDefaultContent());
     }
 
 }

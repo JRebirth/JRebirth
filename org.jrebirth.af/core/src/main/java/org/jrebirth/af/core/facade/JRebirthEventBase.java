@@ -78,7 +78,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * {@inheritDoc}
      */
     @Override
-    public int getSequence() {
+    public int sequence() {
         return this.sequence;
     }
 
@@ -86,15 +86,16 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * {@inheritDoc}
      */
     @Override
-    public void setSequence(final int sequence) {
+    public JRebirthEvent sequence(final int sequence) {
         this.sequence = sequence;
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public JRebirthEventType getEventType() {
+    public JRebirthEventType eventType() {
         return this.eventType;
     }
 
@@ -102,15 +103,16 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * {@inheritDoc}
      */
     @Override
-    public void setEventType(final JRebirthEventType eventType) {
+    public JRebirthEvent eventType(final JRebirthEventType eventType) {
         this.eventType = eventType;
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getSource() {
+    public String source() {
         return this.source;
     }
 
@@ -118,15 +120,16 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * {@inheritDoc}
      */
     @Override
-    public void setSource(final String source) {
+    public JRebirthEvent source(final String source) {
         this.source = source;
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getTarget() {
+    public String target() {
         return this.target;
     }
 
@@ -134,15 +137,16 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * {@inheritDoc}
      */
     @Override
-    public void setTarget(final String target) {
+    public JRebirthEvent target(final String target) {
         this.target = target;
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getEventData() {
+    public String eventData() {
         return this.eventData;
     }
 
@@ -150,8 +154,9 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * {@inheritDoc}
      */
     @Override
-    public void setEventData(final String eventData) {
+    public JRebirthEvent eventData(final String eventData) {
         this.eventData = eventData;
+        return this;
     }
 
     /**
@@ -160,11 +165,11 @@ public final class JRebirthEventBase implements JRebirthEvent {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(getSequence()).append(ClassUtility.SEPARATOR)
-          .append(getEventType()).append(ClassUtility.SEPARATOR)
-          .append(getSource()).append(ClassUtility.SEPARATOR)
-          .append(getTarget()).append(ClassUtility.SEPARATOR)
-          .append(getEventData()).append(ClassUtility.SEPARATOR);
+        sb.append(sequence()).append(ClassUtility.SEPARATOR)
+          .append(eventType()).append(ClassUtility.SEPARATOR)
+          .append(source()).append(ClassUtility.SEPARATOR)
+          .append(target()).append(ClassUtility.SEPARATOR)
+          .append(eventData()).append(ClassUtility.SEPARATOR);
         return sb.toString();
     }
 
@@ -176,11 +181,11 @@ public final class JRebirthEventBase implements JRebirthEvent {
     private void parseString(final String eventSerialized) {
         final StringTokenizer st = new StringTokenizer(eventSerialized, ClassUtility.SEPARATOR);
         if (st.countTokens() >= 5) {
-            setSequence(Integer.parseInt(st.nextToken()));
-            setEventType(JRebirthEventType.valueOf(st.nextToken()));
-            setSource(st.nextToken());
-            setTarget(st.nextToken());
-            setEventData(st.nextToken());
+            sequence(Integer.parseInt(st.nextToken()))
+                                                      .eventType(JRebirthEventType.valueOf(st.nextToken()))
+                                                      .source(st.nextToken())
+                                                      .target(st.nextToken())
+                                                      .eventData(st.nextToken());
         }
     }
 

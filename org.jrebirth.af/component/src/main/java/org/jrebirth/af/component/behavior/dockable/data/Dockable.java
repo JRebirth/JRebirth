@@ -44,7 +44,7 @@ public class Dockable extends BehaviorDataBase implements Serializable {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName()).append(" [");
-        sb.append(this.name).append(" ").append(this.modelKey.getKey()).append("]");
+        sb.append(this.name).append(" ").append(this.modelKey.key()).append("]");
         return sb.toString();
     }
 

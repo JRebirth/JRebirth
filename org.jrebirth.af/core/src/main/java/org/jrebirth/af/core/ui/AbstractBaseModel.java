@@ -134,13 +134,13 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
         showView();
 
         // Sometimes view can be null
-        if (getView() != null) {
+        if (view() != null) {
             if (this.viewDisplayed) {
                 // Reload the view
-                getView().reload();
+                view().reload();
             } else {
                 // Start the view for the first time
-                getView().start();
+                view().start();
                 this.viewDisplayed = true;
             }
         }
@@ -170,8 +170,8 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
         hideView();
 
         // Sometimes view can be null
-        if (getView() != null) {
-            getView().hide();
+        if (view() != null) {
+            view().hide();
         }
 
         // Propagate the show view to all Inner Model
@@ -191,8 +191,8 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
      * {@inheritDoc}
      */
     @Override
-    public Node getRootNode() {
-        return getView() == null ? null : getView().getRootNode();
+    public Node node() {
+        return view() == null ? null : view().node();
     }
 
     /**
@@ -206,7 +206,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
      */
     @Override
     protected void finalize() throws Throwable {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_MODEL, null, this.getClass());
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_MODEL, null, this.getClass());
         super.finalize();
     }
 
@@ -218,20 +218,20 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
         final AutoRelease ar = ClassUtility.getLastClassAnnotation(this.getClass(), AutoRelease.class);
 
         // Only manage automatic release when the annotation exists with true value
-        if (ar != null && ar.value() && getRootNode() != null) { // TODO check rootnode null when using NullView
+        if (ar != null && ar.value() && node() != null) { // TODO check rootnode null when using NullView
 
             // Allow to release the model if the root business object doesn't exist anymore
-            getRootNode().parentProperty().addListener(new ChangeListener<Node>() {
+            node().parentProperty().addListener(new ChangeListener<Node>() {
 
                 @Override
                 public void changed(final ObservableValue<? extends Node> observable, final Node oldValue, final Node newValue) {
                     if (newValue != null) {
-                        hasBeenAttached = true;
+                        AbstractBaseModel.this.hasBeenAttached = true;
                     }
-                    if (newValue == null && hasBeenAttached) {
-                        hasBeenAttached = false;
+                    if (newValue == null && AbstractBaseModel.this.hasBeenAttached) {
+                        AbstractBaseModel.this.hasBeenAttached = false;
                         release();
-                        getRootNode().parentProperty().removeListener(this);
+                        node().parentProperty().removeListener(this);
                     }
                 }
 

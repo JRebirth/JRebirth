@@ -44,7 +44,7 @@ public final class UndoRedoApplication extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public Class<? extends Model> getFirstModelClass() {
+    public Class<? extends Model> firstModelClass() {
         return UndoModel.class;
     }
 

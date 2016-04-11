@@ -233,13 +233,13 @@ public class WaveBase implements Wave, LinkMessages {
         for (final WaveData<?> waveData : waveDatas) {
 
             // Init the order of the wave Data
-            waveData.setOrder(waveDatas().size());
+            waveData.order(waveDatas().size());
 
             // Grab the previous value if any
-            final WaveData<?> previous = this.waveItemsMap.get(waveData.getKey());
+            final WaveData<?> previous = this.waveItemsMap.get(waveData.key());
 
             // Store into the map to allow access by WaveItem
-            this.waveItemsMap.put(waveData.getKey(), waveData);
+            this.waveItemsMap.put(waveData.key(), waveData);
 
             // Remove the old value from the list
             if (previous != null) {
@@ -280,7 +280,7 @@ public class WaveBase implements Wave, LinkMessages {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T get(final WaveItem<T> waveItem) {
-        return (T) (this.waveItemsMap.containsKey(waveItem) ? this.waveItemsMap.get(waveItem).getValue() : null);
+        return (T) (this.waveItemsMap.containsKey(waveItem) ? this.waveItemsMap.get(waveItem).value() : null);
     }
 
     /**
@@ -296,14 +296,14 @@ public class WaveBase implements Wave, LinkMessages {
      */
     @Override
     public boolean containsNotNull(final WaveItem<?> waveItem) {
-        return contains(waveItem) && getData(waveItem).getValue() != null;
+        return contains(waveItem) && getData(waveItem).value() != null;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getWUID() {
+    public String wUID() {
         return this.wuid;
     }
 
@@ -311,7 +311,7 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public long getTimestamp() {
+    public long timestamp() {
         return this.timestamp;
     }
 
@@ -492,14 +492,14 @@ public class WaveBase implements Wave, LinkMessages {
             sb.append(waveType()).append(SPACE_SEP);
         }
 
-        if (getWUID() != null) {
-            sb.append("(").append(getWUID()).append(") ");
+        if (wUID() != null) {
+            sb.append("(").append(wUID()).append(") ");
         }
 
         if (waveDatas().size() > 0) {
             sb.append("\r\nData=>");
             for (final WaveData<?> wd : waveDatas()) {
-                sb.append(wd.getKey()).append("=").append(wd.getValue());
+                sb.append(wd.key()).append("=").append(wd.value());
             }
         }
 

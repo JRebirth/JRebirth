@@ -100,11 +100,11 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
      */
     public void runIntoJTP(final JRebirthRunnable runnable) {
 
-        if (getFacade().getExecutorService().checkAvailability(runnable.getPriority())) {
-            getFacade().getExecutorService().execute(runnable);
+        if (getFacade().executorService().checkAvailability(runnable.priority())) {
+            getFacade().executorService().execute(runnable);
             LOGGER.log(JTP_QUEUED, runnable.toString());
         } else {
-            getFacade().getHighPriorityExecutorService().execute(runnable);
+            getFacade().highPriorityExecutorService().execute(runnable);
             LOGGER.log(HPTP_QUEUED, runnable.toString());
         }
 
@@ -150,7 +150,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
     @Override
     public void run() {
 
-        manageStyleSheetReloading(this.application.getScene());
+        manageStyleSheetReloading(this.application.scene());
 
         // Attach the first view and run pre and post command
         try {
@@ -188,9 +188,9 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
             for (final String styleSheet : scene.getStylesheets()) {
 
-                getFacade().getServiceFacade().retrieve(StyleSheetTrackerService.class).listen(styleSheet, this.application.getScene());
+                getFacade().serviceFacade().retrieve(StyleSheetTrackerService.class).listen(styleSheet, this.application.scene());
             }
-            getFacade().getServiceFacade().retrieve(StyleSheetTrackerService.class).start();
+            getFacade().serviceFacade().retrieve(StyleSheetTrackerService.class).start();
         }
     }
 
@@ -204,7 +204,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         final List<Wave> chainedWaveList = new ArrayList<>();
 
         // Manage waves to run before the First node creation
-        final List<Wave> preBootList = getApplication().getPreBootWaveList();
+        final List<Wave> preBootList = getApplication().preBootWaveList();
         if (preBootList != null && !preBootList.isEmpty()) {
             chainedWaveList.addAll(preBootList);
         }
@@ -217,13 +217,13 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         }
 
         // Manage waves to run after the First node creation
-        final List<Wave> postBootList = getApplication().getPostBootWaveList();
+        final List<Wave> postBootList = getApplication().postBootWaveList();
         if (postBootList != null && !postBootList.isEmpty()) {
             chainedWaveList.addAll(postBootList);
         }
 
         if (!chainedWaveList.isEmpty()) {
-            getFacade().getNotifier().sendWave(Builders.chainWaveCommand(chainedWaveList));
+            getFacade().notifier().sendWave(Builders.chainWaveCommand(chainedWaveList));
         }
     }
 
@@ -290,12 +290,12 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
     protected Wave getLaunchFirstViewWave() {
         Wave firstWave = null;
         // Generates the command wave directly to win a Wave cycle
-        if (this.application != null && this.application.getRootNode() != null && this.application.getFirstModelClass() != null) {
+        if (this.application != null && this.application.rootNode() != null && this.application.firstModelClass() != null) {
 
             firstWave = Builders.callCommand(ShowModelCommand.class).waveBean(
                                                                               DisplayModelWaveBean.create()
-                                                                                                  .childrenPlaceHolder(this.application.getRootNode().getChildren())
-                                                                                                  .showModelKey(Key.create(this.application.getFirstModelClass())));
+                                                                                                  .childrenPlaceHolder(this.application.rootNode().getChildren())
+                                                                                                  .showModelKey(Key.create(this.application.firstModelClass())));
             //
             //
             // ShowModelWaveBuilder.create()

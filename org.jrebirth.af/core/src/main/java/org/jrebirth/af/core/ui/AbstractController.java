@@ -98,7 +98,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
             @Override
             public void handle(final E event) {
                 if (callback == null || callback.call(event)) {
-                    getModel().sendWave(waveType, waveData);
+                    model().sendWave(waveType, waveData);
                 }
             }
         });
@@ -140,7 +140,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
         // LinkCommand
         node.addEventHandler(eventType, event -> {
             if (callback == null || callback.call(event)) {
-                getModel().callCommand(commandClass, waveData);
+                model().callCommand(commandClass, waveData);
             }
         });
     }
@@ -188,8 +188,8 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
         WaveData<?> wd;
         for (int i = 0; i < waveData.length && noHookFound; i++) {
             wd = waveData[i];
-            if ((JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER.equals(wd.getKey()) || JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER.equals(wd.getKey()))
-                    && wd.getValue() != null) {
+            if ((JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER.equals(wd.key()) || JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER.equals(wd.key()))
+                    && wd.value() != null) {
                 noHookFound = false;
             }
         }
@@ -201,7 +201,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
         // LinkUi
         node.addEventHandler(eventType, event -> {
             if (callback == null || callback.call(event)) {
-                getModel().attachUi(modelClass, waveData);
+                model().attachUi(modelClass, waveData);
             }
         });
     }
@@ -244,7 +244,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
         // LinkService
         node.addEventHandler(eventType, event -> {
             if (callback == null || callback.call(event)) {
-                getModel().returnData(serviceClass, waveType, waveData);
+                model().returnData(serviceClass, waveType, waveData);
             }
         });
     }
@@ -258,7 +258,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
      */
     protected Wave callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data) {
-        return getModel().callCommand(commandClass, data);
+        return model().callCommand(commandClass, data);
     }
 
     /**
@@ -272,7 +272,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
      */
     protected <WB extends WaveBean> Wave callCommand(final Class<? extends CommandBean<WB>> commandClass, final WB waveBean) {
-        return getModel().callCommand(commandClass, waveBean);
+        return model().callCommand(commandClass, waveBean);
     }
 
 }

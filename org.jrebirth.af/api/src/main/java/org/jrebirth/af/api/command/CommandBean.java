@@ -37,5 +37,5 @@ public interface CommandBean<WB extends WaveBean> extends Command {
      * @return the casted wave bean
      */
     @Override
-    WB getWaveBean(final Wave wave);
+    WB waveBean(final Wave wave);
 }

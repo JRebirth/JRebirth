@@ -55,7 +55,7 @@ public final class JRebirthDemo extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public Class<? extends Model> getFirstModelClass() {
+    public Class<? extends Model> firstModelClass() {
         return MainModel.class;
     }
 

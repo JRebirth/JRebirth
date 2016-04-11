@@ -50,7 +50,7 @@ public final class MainController extends DefaultController<MainModel, MainView>
         final Button b = (Button) event.getSource();
         final UniqueKey<? extends Model> data = (UniqueKey<? extends Model>) b.getUserData();
 
-        getModel().sendWave(StackWaves.SHOW_PAGE_MODEL,
+        model().sendWave(StackWaves.SHOW_PAGE_MODEL,
                             Builders.waveData(StackWaves.PAGE_MODEL_KEY, data),
                             Builders.waveData(StackWaves.STACK_NAME, "DemoStack"));
     }

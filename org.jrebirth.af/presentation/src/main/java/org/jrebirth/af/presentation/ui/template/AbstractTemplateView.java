@@ -185,7 +185,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         //
         // bp.setMinHeight(642);
 
-        if (!getModel().hasStep()) {
+        if (!model().hasStep()) {
             addSubSlide(getContentPanel());
         }
 
@@ -202,14 +202,14 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         AnchorPane.setLeftAnchor(this.slideContent, 48.0);
         // AnchorPane.setBottomAnchor(footer, 95.0);
 
-        getRootNode().getChildren().addAll(/* footer, */this.slideContent, header);
+        node().getChildren().addAll(/* footer, */this.slideContent, header);
     }
 
     /**
      * Show en aempty slide.
      */
     protected void showEmptySlide() {
-        this.subSlides.add(getModel().getStepPosition(), null);
+        this.subSlides.add(model().getStepPosition(), null);
     }
 
     /**
@@ -219,7 +219,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      */
     private void addSubSlide(final Node defaultSubSlide) {
 
-        this.subSlides.add(getModel().getStepPosition(), defaultSubSlide);
+        this.subSlides.add(model().getStepPosition(), defaultSubSlide);
         this.slideContent.getChildren().add(defaultSubSlide);
 
         StackPane.setAlignment(defaultSubSlide, Pos.CENTER);
@@ -300,7 +300,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                                                // .styleClass("slideTitle")
                                                .font(PrezFonts.SLIDE_TITLE.get())
                                                .textFill(PrezColors.SLIDE_TITLE.get())
-                                               .text(getModel().getSlide().getTitle().replaceAll("\\\\n", "\n").replaceAll("\\\\t", "\t"))
+                                               .text(model().getSlide().getTitle().replaceAll("\\\\n", "\n").replaceAll("\\\\t", "\t"))
                                                .layoutX(40)
                                                .layoutY(45)
                                                // .style("-fx-background-color:#CCCB20")
@@ -354,7 +354,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         this.pageLabel = LabelBuilder.create()
                                      .layoutX(970)
                                      .layoutY(18.0)
-                                     .text(String.valueOf(getModel().getSlide().getPage()))
+                                     .text(String.valueOf(model().getSlide().getPage()))
                                      .font(PrezFonts.PAGE.get())
                                      .rotate(90.0)
                                      .build();
@@ -400,7 +400,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * @return the height ratio
      */
     protected NumberBinding bindHeight() {
-        return Bindings.divide(getModel().getLocalFacade().getGlobalFacade().getApplication().getStage().heightProperty(), 768);
+        return Bindings.divide(model().localFacade().getGlobalFacade().application().stage().heightProperty(), 768);
     }
 
     /**
@@ -409,7 +409,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * @return the width ratio
      */
     protected NumberBinding bindWidth() {
-        return Bindings.divide(getModel().getLocalFacade().getGlobalFacade().getApplication().getStage().widthProperty(), 1024);
+        return Bindings.divide(model().localFacade().getGlobalFacade().application().stage().widthProperty(), 1024);
     }
 
     /**
@@ -426,7 +426,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      */
     protected Node getFooterPanel() {
         this.pageLabel = LabelBuilder.create()
-                                     .text(String.valueOf(getModel().getSlide().getPage()))
+                                     .text(String.valueOf(model().getSlide().getPage()))
                                      .font(PrezFonts.PAGE.get())
                                      .build();
 
@@ -461,8 +461,8 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
         // vbox.getStyleClass().add("content");
 
         // Link the class style of this slide content
-        if (getModel().getSlide().getStyle() != null) {
-            vbox.getStyleClass().add(getModel().getSlide().getStyle());
+        if (model().getSlide().getStyle() != null) {
+            vbox.getStyleClass().add(model().getSlide().getStyle());
         }
 
         if (slideContent != null) {
@@ -558,10 +558,10 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      */
     public void showSlideStep(final SlideStep slideStep) {
 
-        if (this.subSlides.size() >= getModel().getStepPosition() || this.subSlides.get(getModel().getStepPosition()) == null) {
-            addSubSlide(buildDefaultContent(getModel().getContent(slideStep)));
+        if (this.subSlides.size() >= model().getStepPosition() || this.subSlides.get(model().getStepPosition()) == null) {
+            addSubSlide(buildDefaultContent(model().getContent(slideStep)));
         }
-        final Node nextSlide = this.subSlides.get(getModel().getStepPosition());
+        final Node nextSlide = this.subSlides.get(model().getStepPosition());
 
         if (this.currentSubSlide == null || nextSlide == null) {
             // No Animation
@@ -580,7 +580,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
     protected void showCustomSlideStep(final Node node) {
 
         addSubSlide(node);
-        final Node nextSlide = this.subSlides.get(getModel().getStepPosition());
+        final Node nextSlide = this.subSlides.get(model().getStepPosition());
 
         if (this.currentSubSlide == null || nextSlide == null) {
             // No Animation

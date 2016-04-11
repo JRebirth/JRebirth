@@ -47,7 +47,7 @@ public class RefCommandTest extends BasicCommandTest {
     }
 
     public void sayHelloWave(final Wave wave) {
-        System.out.println("hello " + wave.getWUID());
+        System.out.println("hello " + wave.wUID());
     }
 
 }

@@ -37,7 +37,7 @@ class TabActionAdapter extends AbstractDefaultAdapter<TabController> implements 
 
         final Dockable t = (Dockable) ((Button) actionEvent.getSource()).getUserData();
 
-        getController().getView().selectTab(t);
+        getController().view().selectTab(t);
 
         // if(actionEvent.){
         // getController().getModel().removeTab(model, wave);

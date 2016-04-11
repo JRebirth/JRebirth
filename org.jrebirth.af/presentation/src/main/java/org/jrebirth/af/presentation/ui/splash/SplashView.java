@@ -63,20 +63,20 @@ public class SplashView extends AbstractSlideView<SplashModel, BorderPane, Splas
     @Override
     protected void initView() {
 
-        getRootNode().getStyleClass().add(getModel().getStyleClass() == null ? "splashContainer" : getModel().getStyleClass());
+        node().getStyleClass().add(model().getStyleClass() == null ? "splashContainer" : model().getStyleClass());
 
         this.splashText = TextBuilder.create()
-                                     .text(getModel().getTitle())
+                                     .text(model().getTitle())
                                      .styleClass("splashText")
                                      .textAlignment(TextAlignment.JUSTIFY)
                                      .wrappingWidth(600)
                                      .smooth(true)
-                                     .fill(getModel().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get())
+                                     .fill(model().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get())
                                      .scaleX(0)
                                      .scaleY(0)
                                      .build();
 
-        getRootNode().setCenter(this.splashText);
+        node().setCenter(this.splashText);
     }
 
     /**

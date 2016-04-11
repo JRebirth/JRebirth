@@ -41,7 +41,7 @@ public abstract class AbstractBehavior<D extends BehaviorData, C extends Behavio
      * {@inheritDoc}
      */
     @Override
-    public D getData() {
+    public D data() {
         return this.data;
     }
 
@@ -49,7 +49,7 @@ public abstract class AbstractBehavior<D extends BehaviorData, C extends Behavio
      * {@inheritDoc}
      */
     @Override
-    public C getComponent() {
+    public C component() {
         return this.component;
     }
 
@@ -69,17 +69,17 @@ public abstract class AbstractBehavior<D extends BehaviorData, C extends Behavio
     protected void ready() throws CoreException {
 
         // FIXME fix leaks
-        this.data = (D) getKey().getOptionalData()
-                                .stream()
-                                .filter(d -> d instanceof BehaviorData)
-                                .findFirst()
-                                .get();
+        this.data = (D) key().optionalData()
+                             .stream()
+                             .filter(d -> d instanceof BehaviorData)
+                             .findFirst()
+                             .get();
 
-        this.component = (C) getKey().getOptionalData()
-                                     .stream()
-                                     .filter(d -> d instanceof BehavioredComponent<?>)
-                                     .findFirst()
-                                     .get();
+        this.component = (C) key().optionalData()
+                                  .stream()
+                                  .filter(d -> d instanceof BehavioredComponent<?>)
+                                  .findFirst()
+                                  .get();
 
         initBehavior();
 

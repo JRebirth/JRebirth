@@ -34,7 +34,7 @@ public interface JRebirthRunnable extends Runnable {
      *
      * @return the runnable priority
      */
-    default PriorityLevel getPriority() {
+    default PriorityLevel priority() {
         return PriorityLevel.Normal;
     }
 
@@ -43,7 +43,7 @@ public interface JRebirthRunnable extends Runnable {
      *
      * @return the creation time in milliseconds
      */
-    default Instant getCreationTime() {
+    default Instant creationTime() {
         return Instant.now();
     }
 

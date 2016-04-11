@@ -70,13 +70,13 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
     @Override
     protected void initModel() {
 
-        final WaveChecker waveChecker = wave -> ObjectUtility.equalsOrBothNull(wave.get(TAB_KEY), getObject().tabKey());
+        final WaveChecker waveChecker = wave -> ObjectUtility.equalsOrBothNull(wave.get(TAB_KEY), object().tabKey());
 
         listen(waveChecker, ADD);
         listen(waveChecker, REMOVE);
 
-        if (ObjectUtility.nullOrEmpty(getObject().tabKey())) {
-            getObject().tabKey(TabModel.class.getSimpleName() + TAB_COUNTER++);
+        if (ObjectUtility.nullOrEmpty(object().tabKey())) {
+            object().tabKey(TabModel.class.getSimpleName() + TAB_COUNTER++);
         }
     }
 
@@ -86,17 +86,17 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
     @Override
     protected void bind() {
 
-        getObject().orientationPy().addListener(this::onOrientationChanged);
+        object().orientationPy().addListener(this::onOrientationChanged);
 
-        getObject().tabs().addListener(this::onTabsChanged);
+        object().tabs().addListener(this::onTabsChanged);
     }
 
     private void onOrientationChanged(final ObservableValue<? extends TabOrientation> property, final TabOrientation oldValue, final TabOrientation newValue) {
 
-        getView().reloadButtonBar();
+        view().reloadButtonBar();
 
-        for (final Dockable tab : getObject().tabs()) {
-            getView().addTab(getObject().tabs().size(), tab);
+        for (final Dockable tab : object().tabs()) {
+            view().addTab(object().tabs().size(), tab);
         }
 
     }
@@ -115,12 +115,12 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
 
             if (change.wasRemoved()) {
                 Platform.runLater(
-                                  () -> getView().removeTab((List<Dockable>) change.getRemoved()));
+                                  () -> view().removeTab((List<Dockable>) change.getRemoved()));
             }
 
             if (change.wasAdded()) {
                 Platform.runLater(
-                                  () -> getView().addTab(change.getFrom(), change.getList().get(change.getFrom())));
+                                  () -> view().addTab(change.getFrom(), change.getList().get(change.getFrom())));
             }
 
         }
@@ -173,10 +173,10 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
         // Tab t = model.getBehaviorBean(TabBehavior.class);
 
         if (idx < 0) {
-            idx = getObject().tabs().isEmpty() ? 0 : getObject().tabs().size();
+            idx = object().tabs().isEmpty() ? 0 : object().tabs().size();
         }
 
-        getObject().tabs().add(idx, tab);
+        object().tabs().add(idx, tab);
 
         // getView().addTab(idx, t);
 

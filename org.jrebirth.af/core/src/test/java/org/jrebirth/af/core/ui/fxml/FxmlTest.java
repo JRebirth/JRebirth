@@ -34,70 +34,70 @@ public class FxmlTest extends AbstractTest {
     @Test
     public void loadFXML1() {
 
-        this.model = AbstractTest.globalFacade.getUiFacade().retrieve(TestFXMLModel.class);
+        this.model = AbstractTest.globalFacade.uiFacade().retrieve(TestFXMLModel.class);
 
         final FXMLComponentBase comp = FXMLUtils.loadFXML(this.model, "fxml:org/jrebirth/core/ui/fxml/Test1.fxml");
-        checkFxmlNode(comp.getNode());
+        checkFxmlNode(comp.node());
     }
 
     @Test
     public void loadFXML2() {
 
-        this.model = AbstractTest.globalFacade.getUiFacade().retrieve(TestFXMLModel.class);
+        this.model = AbstractTest.globalFacade.uiFacade().retrieve(TestFXMLModel.class);
 
         final FXMLComponentBase comp = FXMLUtils.loadFXML(this.model, "fxml:Test1.fxml");
-        checkFxmlNode(comp.getNode());
+        checkFxmlNode(comp.node());
     }
 
     @Test
     public void loadFXML3() {
 
-        this.model = AbstractTest.globalFacade.getUiFacade().retrieve(TestFXMLModel.class);
+        this.model = AbstractTest.globalFacade.uiFacade().retrieve(TestFXMLModel.class);
 
         final FXMLComponentBase comp = FXMLUtils.loadFXML(this.model, "fxml:org/jrebirth/core/ui/fxml/Test1.fxml", "rb:org.jrebirth.af.core.ui.fxml.Test1");
-        checkFxmlNode(comp.getNode());
+        checkFxmlNode(comp.node());
 
     }
 
     @Test
     public void loadFXML4() {
 
-        this.model = AbstractTest.globalFacade.getUiFacade().retrieve(TestFXMLModel.class);
+        this.model = AbstractTest.globalFacade.uiFacade().retrieve(TestFXMLModel.class);
 
         final FXMLComponentBase comp = FXMLUtils.loadFXML(this.model, "fxml:Test1.fxml", "rb:org.jrebirth.af.core.ui.fxml.Test1");
-        checkFxmlNode(comp.getNode());
+        checkFxmlNode(comp.node());
     }
 
     @Test
     public void loadFXMLModel1() {
 
-        this.model = AbstractTest.globalFacade.getUiFacade().retrieve(TestFXMLModel.class, "fxml:Test1.fxml");
+        this.model = AbstractTest.globalFacade.uiFacade().retrieve(TestFXMLModel.class, "fxml:Test1.fxml");
 
-        checkFxmlNode(this.model.getRootNode());
+        checkFxmlNode(this.model.node());
     }
 
     @Test
     public void loadFXMLModel2() {
 
-        this.model = AbstractTest.globalFacade.getUiFacade().retrieve(TestFXMLModel.class, "fxml:org/jrebirth/core/ui/fxml/Test1.fxml");
+        this.model = AbstractTest.globalFacade.uiFacade().retrieve(TestFXMLModel.class, "fxml:org/jrebirth/core/ui/fxml/Test1.fxml");
 
-        checkFxmlNode(this.model.getRootNode());
+        checkFxmlNode(this.model.node());
     }
 
     @Test
     public void loadFXMLModel3() {
 
-        this.model = AbstractTest.globalFacade.getUiFacade().retrieve(TestFXMLModel.class, "fxml:Test1.fxml", "rb:Test1");
+        this.model = AbstractTest.globalFacade.uiFacade().retrieve(TestFXMLModel.class, "fxml:Test1.fxml", "rb:Test1");
 
-        checkFxmlNode(this.model.getRootNode());
+        checkFxmlNode(this.model.node());
     }
 
     @Test
     public void loadFXMLModel4() {
 
-        this.model = AbstractTest.globalFacade.getUiFacade().retrieve(TestFXMLModel.class, "fxml:org/jrebirth/core/ui/fxml/Test1.fxml", "rb:Test1");
+        this.model = AbstractTest.globalFacade.uiFacade().retrieve(TestFXMLModel.class, "fxml:org/jrebirth/core/ui/fxml/Test1.fxml", "rb:Test1");
 
-        checkFxmlNode(this.model.getRootNode());
+        checkFxmlNode(this.model.node());
     }
 
     /**

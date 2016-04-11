@@ -32,8 +32,8 @@ public class AddTabCommand extends DefaultBeanCommand<TabWaveBean> {
         // }
         // }
 
-        if (getWaveBean(wave).tab() != null) {
-            for (final Dockable tab : getWaveBean(wave).tab()) {
+        if (waveBean(wave).tab() != null) {
+            for (final Dockable tab : waveBean(wave).tab()) {
                 sendWaveToTabModel(wave, tab);
             }
         }
@@ -48,7 +48,7 @@ public class AddTabCommand extends DefaultBeanCommand<TabWaveBean> {
         // )
         // );
         //
-        getModel(TabModel.class, getWaveBean(wave).tabConfig()).addTab(tab, wave);
+        getModel(TabModel.class, waveBean(wave).tabConfig()).addTab(tab, wave);
     }
 
 }

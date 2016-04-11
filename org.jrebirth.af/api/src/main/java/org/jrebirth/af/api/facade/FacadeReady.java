@@ -46,24 +46,24 @@ public interface FacadeReady<R extends FacadeReady<R>> extends ModelReady {
      *
      * @return the local facade
      */
-    LocalFacade<R> getLocalFacade();
+    LocalFacade<R> localFacade();
 
     /**
      * Attach the local facade for this object type.
      *
      * @param localFacade the local facade to set
      */
-    void setLocalFacade(final LocalFacade<R> localFacade);
+    void localFacade(final LocalFacade<R> localFacade);
 
     /**
      * @return Returns the key.
      */
-    UniqueKey<R> getKey();
+    UniqueKey<R> key();
 
     /**
      * @param key The key to set.
      */
-    void setKey(final UniqueKey<R> key);
+    void key(final UniqueKey<R> key);
 
     /**
      * Release the component by deleting this key used by the WeakHashMap.

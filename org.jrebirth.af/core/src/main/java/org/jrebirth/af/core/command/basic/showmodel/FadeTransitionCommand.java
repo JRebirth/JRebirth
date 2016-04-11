@@ -60,15 +60,15 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
     protected void perform(final Wave wave) {
 
         // The old node is the one that exists into the parent container (or null if none)
-        Node oldNode = getWaveBean(wave).hideModel() == null ? null : getWaveBean(wave).hideModel().getRootNode();
+        Node oldNode = waveBean(wave).hideModel() == null ? null : waveBean(wave).hideModel().node();
 
         if (oldNode == null) {
-            final ObservableList<Node> parentContainer = getWaveBean(wave).childrenPlaceHolder();
-            oldNode = parentContainer.size() > 1 ? parentContainer.get(getWaveBean(wave).childrenPlaceHolder().size() - 1) : null;
+            final ObservableList<Node> parentContainer = waveBean(wave).childrenPlaceHolder();
+            oldNode = parentContainer.size() > 1 ? parentContainer.get(waveBean(wave).childrenPlaceHolder().size() - 1) : null;
         }
 
         // The new node is the one create by PrepareModelCommand
-        final Node newNode = getWaveBean(wave).showModel() == null ? null : getWaveBean(wave).showModel().getRootNode();
+        final Node newNode = waveBean(wave).showModel() == null ? null : waveBean(wave).showModel().node();
 
         if (oldNode != null || newNode != null) {
             final ParallelTransition animation = ParallelTransitionBuilder.create()
@@ -105,12 +105,12 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
                 public void handle(final ActionEvent arg0) {
                     if (oldNodeLink != null) {
                         // remove the old nod from the stack to hide it
-                        getWaveBean(wave).childrenPlaceHolder().remove(oldNodeLink);
+                        waveBean(wave).childrenPlaceHolder().remove(oldNodeLink);
 
                         LOGGER.info("Remove " + oldNodeLink.toString() + " from stack container");
                     }
                     // FIXME do it in the right way
-                    getWaveBean(wave).showModel().doShowView(wave);
+                    waveBean(wave).showModel().doShowView(wave);
                 }
             });
             animation.playFromStart();

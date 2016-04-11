@@ -24,7 +24,7 @@ public class TestApplication extends DefaultApplication<Pane> {
      * {@inheritDoc}
      */
     @Override
-    public Class<? extends Model> getFirstModelClass() {
+    public Class<? extends Model> firstModelClass() {
         return null;
     }
 

@@ -26,23 +26,23 @@ public class AnnotationTest extends AbstractTest {
      */
     @Before
     public void setUp() throws Exception {
-        this.model = AbstractTest.globalFacade.getUiFacade().retrieve(AnnotationModel.class);
+        this.model = AbstractTest.globalFacade.uiFacade().retrieve(AnnotationModel.class);
     }
 
     @Test
     public void triggerSwipe() {
 
-        fireAllSwipeEvents(this.model.getView().getSwipeVerticalButton());
-        fireAllSwipeEvents(this.model.getView().getSwipeHorizontalButton());
-        fireAllSwipeEvents(this.model.getView().getSwipeAllButton());
+        fireAllSwipeEvents(this.model.view().getSwipeVerticalButton());
+        fireAllSwipeEvents(this.model.view().getSwipeHorizontalButton());
+        fireAllSwipeEvents(this.model.view().getSwipeAllButton());
     }
 
     @Test
     public void triggerRotate() {
 
-        fireAllRotateEvents(this.model.getView().getRotateAllButton());
-        fireAllRotateEvents(this.model.getView().getRotateButton());
-        fireAllRotateEvents(this.model.getView().getRotateStartFinishButton());
+        fireAllRotateEvents(this.model.view().getRotateAllButton());
+        fireAllRotateEvents(this.model.view().getRotateButton());
+        fireAllRotateEvents(this.model.view().getRotateStartFinishButton());
     }
 
     /**

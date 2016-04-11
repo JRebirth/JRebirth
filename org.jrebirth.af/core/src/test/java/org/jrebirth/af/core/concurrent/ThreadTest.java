@@ -137,12 +137,12 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
         }
 
         @Override
-        public PriorityLevel getPriority() {
+        public PriorityLevel priority() {
             return this.priority;
         }
 
         @Override
-        public Instant getCreationTime() {
+        public Instant creationTime() {
             return this.time;
         }
     }

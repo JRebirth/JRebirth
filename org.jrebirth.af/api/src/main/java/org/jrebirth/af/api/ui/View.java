@@ -40,28 +40,28 @@ public interface View<M extends Model, N extends Node, C extends Controller<?, ?
      *
      * @return the view base javafx node
      */
-    N getRootNode();
+    N node();
 
     /**
-     * Return the error node.
+     * Return the error javafx node.
      *
-     * @return the error node
+     * @return the error javafx node
      */
-    Pane getErrorNode();
+    Pane errorNode();
 
     /**
      * Return the view model.
      *
      * @return the view model
      */
-    M getModel();
+    M model();
 
     /**
      * Return the view controller.
      *
      * @return the view controller
      */
-    C getController();
+    C controller();
 
     /**
      * Prepare the view by creating all visual nodes.

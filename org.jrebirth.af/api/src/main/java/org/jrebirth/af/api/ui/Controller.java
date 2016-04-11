@@ -37,17 +37,17 @@ public interface Controller<M extends Model, V extends View<M, ?, ?>> {
     /**
      * @return Returns the view.
      */
-    V getView();
+    V view();
 
     /**
      * @return Returns the root node.
      */
-    Node getRootNode();
+    Node node();
 
     /**
      * @return Returns the model.
      */
-    M getModel();
+    M model();
 
     /**
      * Activate the controller by initializing all event handler.

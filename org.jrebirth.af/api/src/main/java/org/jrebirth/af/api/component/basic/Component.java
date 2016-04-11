@@ -116,14 +116,14 @@ public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
      *
      * @return the root component of the inner component
      */
-    Component<?> getRootComponent();
+    Component<?> rootComponent();
 
     /**
      * Define the root component for an inner component.
      *
      * @param rootComponent The root component to set.
      */
-    void setRootComponent(final Component<?> rootComponent);
+    void rootComponent(final Component<?> rootComponent);
 
     /**
      * Add an inner component.
@@ -147,6 +147,6 @@ public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
      *
      * @return the inner component instance
      */
-    <C extends Component<?>> C getInnerComponent(final InnerComponent<C> innerComponent);
+    <C extends Component<?>> C findInnerComponent(final InnerComponent<C> innerComponent);
 
 }

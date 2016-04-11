@@ -88,7 +88,7 @@ public class WaveItemBase<T> implements WaveItem<T> {
     protected WaveItemBase(final String name, final boolean isParameter) {
         this.itemType = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
-        setParameter(isParameter);
+        isParameter(isParameter);
         setName(name);
 
         // Ensure that the uid will be unique at runtime
@@ -143,7 +143,7 @@ public class WaveItemBase<T> implements WaveItem<T> {
      * @return Returns the name.
      */
     @Override
-    public String getName() {
+    public String name() {
         return this.name;
     }
 
@@ -151,7 +151,7 @@ public class WaveItemBase<T> implements WaveItem<T> {
      * @return Returns the uid.
      */
     @Override
-    public int getUid() {
+    public int uid() {
         return this.uid;
     }
 
@@ -166,7 +166,7 @@ public class WaveItemBase<T> implements WaveItem<T> {
      * @return Returns the itemType.
      */
     @Override
-    public Type getItemType() {
+    public Type type() {
         return this.itemType;
     }
 
@@ -175,7 +175,7 @@ public class WaveItemBase<T> implements WaveItem<T> {
      */
     @Override
     public boolean equals(final Object waveItem) {
-        return waveItem instanceof WaveItemBase && getUid() == ((WaveItemBase<?>) waveItem).getUid();
+        return waveItem instanceof WaveItemBase && uid() == ((WaveItemBase<?>) waveItem).uid();
     }
 
     /**
@@ -183,7 +183,7 @@ public class WaveItemBase<T> implements WaveItem<T> {
      */
     @Override
     public int hashCode() {
-        return getUid();
+        return uid();
     }
 
     /**
@@ -207,7 +207,7 @@ public class WaveItemBase<T> implements WaveItem<T> {
      * @param isParameter The isParameter to set.
      */
     @Override
-    public void setParameter(final boolean isParameter) {
+    public void isParameter(final boolean isParameter) {
         this.isParameter = isParameter;
     }
 
@@ -218,16 +218,16 @@ public class WaveItemBase<T> implements WaveItem<T> {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        if (getItemType() != null) {
-            if (getItemType() instanceof ParameterizedType) {
-                sb.append(((ParameterizedType) getItemType()).toString());
+        if (type() != null) {
+            if (type() instanceof ParameterizedType) {
+                sb.append(((ParameterizedType) type()).toString());
             } else {
-                sb.append(getItemType().toString());
+                sb.append(type().toString());
             }
         }
 
-        if (getName() != null) {
-            sb.append(" ").append(getName());
+        if (name() != null) {
+            sb.append(" ").append(name());
         }
 
         return sb.toString();

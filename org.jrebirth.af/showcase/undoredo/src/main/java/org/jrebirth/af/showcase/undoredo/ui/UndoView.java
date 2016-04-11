@@ -80,13 +80,13 @@ public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoCont
         this.addSquareButton = new Button("Add Square");
         this.addRectangleButton = new Button("Add Rectangle");
 
-        getRootNode().setTop(FlowPaneBuilder.create()
+        node().setTop(FlowPaneBuilder.create()
                                             .children(this.undoButton, this.redoButton, this.addCircleButton, this.addSquareButton, this.addRectangleButton)
                                             .build());
 
         this.editor = PaneBuilder.create().style("-fx-background-color:beige").build();
 
-        getRootNode().setCenter(this.editor);
+        node().setCenter(this.editor);
 
     }
 

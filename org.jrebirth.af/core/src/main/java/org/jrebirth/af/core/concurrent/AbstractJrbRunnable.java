@@ -103,7 +103,7 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
      * {@inheritDoc}
      */
     @Override
-    public PriorityLevel getPriority() {
+    public PriorityLevel priority() {
         return this.priority;
     }
 
@@ -111,7 +111,7 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
      * {@inheritDoc}
      */
     @Override
-    public Instant getCreationTime() {
+    public Instant creationTime() {
         return this.creationTime;
     }
 

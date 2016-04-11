@@ -53,7 +53,7 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
      * @return the bindable object
      */
     @Override
-    public final O getObject() {
+    public final O object() {
         if (this.object == null) {
             buildObject();
         }
@@ -97,7 +97,7 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
      * @param object The object to set.
      */
     @Override
-    public void setObject(final O object) {
+    public void object(final O object) {
         this.object = object;
 
         // Rebind current object

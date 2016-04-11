@@ -38,7 +38,7 @@ public final class FXMLShowCaseModel extends DefaultModel<FXMLShowCaseModel, FXM
     @Override
     protected void showView() {
         super.showView();
-        getView().getRootNode().setCenter(stackModel.getRootNode());
+        view().node().setCenter(stackModel.node());
 
         // getModel(StackModel.class, FXMLPage.class).doShowView(null);
     }

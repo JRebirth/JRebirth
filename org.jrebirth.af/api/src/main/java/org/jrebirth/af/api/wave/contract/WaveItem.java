@@ -33,17 +33,17 @@ public interface WaveItem<T> {
     /**
      * @return Returns the name.
      */
-    String getName();
+    String name();
 
     /**
      * @return Returns the uid.
      */
-    int getUid();
+    int uid();
 
     /**
      * @return Returns the itemType.
      */
-    Type getItemType();
+    Type type();
 
     /**
      * @return Returns the isParameter.
@@ -53,6 +53,6 @@ public interface WaveItem<T> {
     /**
      * @param isParameter The isParameter to set.
      */
-    void setParameter(final boolean isParameter);
+    void isParameter(final boolean isParameter);
 
 }

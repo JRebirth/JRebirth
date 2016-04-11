@@ -220,7 +220,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
      */
     @Override
     protected void finalize() throws Throwable {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_COMMAND, null, this.getClass());
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_COMMAND, null, this.getClass());
         super.finalize();
     }
 
@@ -243,7 +243,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
      * {@inheritDoc}
      */
     @Override
-    public WB getWaveBean(final Wave wave) {
+    public WB waveBean(final Wave wave) {
         return wave.waveBean(this.waveBeanClass);
     }
 

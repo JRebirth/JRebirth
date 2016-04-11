@@ -80,16 +80,16 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
         synchronized (this.componentMap) {
 
             // reload the key
-            readyObject.setKey((UniqueKey<R>) uniqueKey);
+            readyObject.key((UniqueKey<R>) uniqueKey);
 
             // Attach the facade to allow to retrieve any components
-            readyObject.setLocalFacade(this);
-            if (!this.componentMap.containsKey(readyObject.getKey())) {
+            readyObject.localFacade(this);
+            if (!this.componentMap.containsKey(readyObject.key())) {
                 final Set<R> weakHashSet = Collections.newSetFromMap(new WeakHashMap<R, Boolean>());
                 // Store the component into the singleton map
-                this.componentMap.put(readyObject.getKey(), weakHashSet);
+                this.componentMap.put(readyObject.key(), weakHashSet);
             }
-            this.componentMap.get(readyObject.getKey()).add(readyObject);
+            this.componentMap.get(readyObject.key()).add(readyObject);
         }
 
     }
@@ -120,17 +120,17 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                 // Unlisten all previously listened WaveType
                 if (readyObject instanceof Component<?>) {
                     try {
-                        getGlobalFacade().getNotifier().unlistenAll((Component<?>) readyObject);
+                        getGlobalFacade().notifier().unlistenAll((Component<?>) readyObject);
                     } catch (final JRebirthThreadException e) {
                         LOGGER.error(UNLISTEN_ALL_ERROR, readyObject.getClass().getSimpleName(), e);
                     }
                 }
 
                 // Release the key
-                readyObject.setKey(null);
+                readyObject.key(null);
 
                 // Release the facade link
-                readyObject.setLocalFacade(null);
+                readyObject.localFacade(null);
             }
 
             // Remove the component from the singleton map
@@ -240,7 +240,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
         // TODO evaluate performances !!!!!
         return (List<E>) this.componentMap.entrySet().stream()
-                                          .filter(entry -> entry.getKey().getClassField() == uniqueKey.getClassField())
+                                          .filter(entry -> entry.getKey().classField() == uniqueKey.classField())
                                           .flatMap(s -> s.getValue().stream())
                                           .collect(Collectors.toList());
 
@@ -290,7 +290,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     protected <E extends R> List<E> buildComponentList(final UniqueKey<E> uniqueKey) throws CoreException {
 
         // Build a new instance of the component
-        final List<E> readyObjectList = getGlobalFacade().getComponentFactory().buildComponents(uniqueKey.getClassField());
+        final List<E> readyObjectList = getGlobalFacade().componentFactory().buildComponents(uniqueKey.classField());
 
         for (final E readyObject : readyObjectList) {
             // Retrieve the right event type to track
@@ -308,10 +308,10 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
             // Attach the local facade
             // Already Done by register method
-            readyObject.setLocalFacade(this);
+            readyObject.localFacade(this);
 
             // Create the unique key
-            readyObject.setKey((UniqueKey<R>) uniqueKey);
+            readyObject.key((UniqueKey<R>) uniqueKey);
 
         }
 

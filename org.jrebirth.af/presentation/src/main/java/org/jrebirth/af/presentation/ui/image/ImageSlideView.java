@@ -93,18 +93,18 @@ public final class ImageSlideView extends
     @Override
     protected void initView() {
 
-        getRootNode().getStyleClass().add("ImageSlide");
-        if (getModel().getSlide().getStyle() != null) {
-            getRootNode().getStyleClass().add(getModel().getSlide().getStyle());
+        node().getStyleClass().add("ImageSlide");
+        if (model().getSlide().getStyle() != null) {
+            node().getStyleClass().add(model().getSlide().getStyle());
         }
 
-        this.image = Resources.create(new RelImage(getModel().getImage())).get();
+        this.image = Resources.create(new RelImage(model().getImage())).get();
 
-        if (getModel().getSlide().getShowAnimation() == null ||
-                !"TileIn".equalsIgnoreCase(getModel().getSlide().getShowAnimation().value())
-                        && !"TileIn60k".equalsIgnoreCase(getModel().getSlide().getShowAnimation().value())) {
+        if (model().getSlide().getShowAnimation() == null ||
+                !"TileIn".equalsIgnoreCase(model().getSlide().getShowAnimation().value())
+                        && !"TileIn60k".equalsIgnoreCase(model().getSlide().getShowAnimation().value())) {
 
-            getRootNode().getChildren().add(ImageViewBuilder.create()
+            node().getChildren().add(ImageViewBuilder.create()
                                                             .image(this.image)
                                                             .layoutX(0).layoutY(0)
                                                             .fitWidth(this.image.getWidth()).fitHeight(this.image.getHeight())
@@ -114,22 +114,22 @@ public final class ImageSlideView extends
 
         }
 
-        if (getModel().getSlide().getShowAnimation() != null && AnimationType.TILE_IN == getModel().getSlide().getShowAnimation()) {
+        if (model().getSlide().getShowAnimation() != null && AnimationType.TILE_IN == model().getSlide().getShowAnimation()) {
             this.tilePerRow = 5;
-        } else if (getModel().getSlide().getShowAnimation() != null && AnimationType.TILE_IN_60_K == getModel().getSlide().getShowAnimation()) {
+        } else if (model().getSlide().getShowAnimation() != null && AnimationType.TILE_IN_60_K == model().getSlide().getShowAnimation()) {
             this.tilePerRow = 50;
         }
 
         getTileTransition();
         getFadeTransition();
 
-        if (getModel().getTitle() != null) {
+        if (model().getTitle() != null) {
             this.slideLabel = new Label();
             this.slideLabel.setPrefSize(1200, 80);
             this.slideLabel.setAlignment(Pos.CENTER);
             this.slideLabel.getStyleClass().add("ImageTitle");
-            this.slideLabel.setText(getModel().getTitle());
-            getRootNode().getChildren().add(this.slideLabel);
+            this.slideLabel.setText(model().getTitle());
+            node().getChildren().add(this.slideLabel);
             this.slideLabel.setOpacity(0.0);
 
             StackPane.setAlignment(this.slideLabel, Pos.BOTTOM_CENTER);
@@ -153,8 +153,8 @@ public final class ImageSlideView extends
     @Override
     public void start() {
 
-        if (getModel().getSlide().getShowAnimation() != null && AnimationType.TILE_IN == getModel().getSlide().getShowAnimation()) {
-            for (final Node n : getRootNode().getChildren()) {
+        if (model().getSlide().getShowAnimation() != null && AnimationType.TILE_IN == model().getSlide().getShowAnimation()) {
+            for (final Node n : node().getChildren()) {
                 n.setOpacity(0.0);
             }
             this.tilePerRow = 5;
@@ -165,8 +165,8 @@ public final class ImageSlideView extends
                                                                    .build();
 
             st.play();
-        } else if (getModel().getSlide().getShowAnimation() != null && AnimationType.TILE_IN_60_K == getModel().getSlide().getShowAnimation()) {
-            for (final Node n : getRootNode().getChildren()) {
+        } else if (model().getSlide().getShowAnimation() != null && AnimationType.TILE_IN_60_K == model().getSlide().getShowAnimation()) {
+            for (final Node n : node().getChildren()) {
                 n.setOpacity(0.0);
             }
             this.tilePerRow = 50;
@@ -202,7 +202,7 @@ public final class ImageSlideView extends
     Animation getFadeTransition() {
         if (this.fadeTransition == null) {
             this.fadeTransition = FadeTransitionBuilder.create()
-                                                       .node(getRootNode())
+                                                       .node(node())
                                                        .fromValue(0).toValue(1)
                                                        .duration(Duration.seconds(1))
                                                        .build();
@@ -237,7 +237,7 @@ public final class ImageSlideView extends
                                                          .opacity(0.0).layoutX(x)
                                                          .layoutY(y).build();
 
-                    getRootNode().getChildren().add(iv);
+                    node().getChildren().add(iv);
 
                     fades.add(SequentialTransitionBuilder
                                                          .create()
@@ -261,7 +261,7 @@ public final class ImageSlideView extends
 
                 @Override
                 public void handle(final ActionEvent arg0) {
-                    for (final Node n : getRootNode().getChildren()) {
+                    for (final Node n : node().getChildren()) {
                         n.setOpacity(1.0);
                     }
 

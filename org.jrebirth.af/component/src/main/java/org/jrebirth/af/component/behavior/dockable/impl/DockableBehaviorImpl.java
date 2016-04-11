@@ -14,7 +14,7 @@ public class DockableBehaviorImpl extends AbstractModelBehavior<Dockable> implem
      */
     @Override
     public String modelName() {
-        return getData().name();
+        return data().name();
     }
 
     @Override

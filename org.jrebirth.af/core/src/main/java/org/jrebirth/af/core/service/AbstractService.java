@@ -86,7 +86,7 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
      */
     @Override
     protected void finalize() throws Throwable {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_SERVICE, null, this.getClass());
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_SERVICE, null, this.getClass());
         super.finalize();
     }
 
@@ -102,8 +102,8 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
             final List<Object> parameterValues = new ArrayList<>();
             for (final WaveData<?> wd : sourceWave.waveDatas()) {
                 // Add only wave items defined as parameter
-                if (wd.getKey().isParameter()) {
-                    parameterValues.add(wd.getValue());
+                if (wd.key().isParameter()) {
+                    parameterValues.add(wd.value());
                 }
             }
             // Add the current wave to process
@@ -149,24 +149,24 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
         final ServiceTaskBase<T> task = new ServiceTaskBase<T>(this, method, parameterValues, sourceWave);
 
         // Store the task into the pending map
-        this.pendingTasks.put(sourceWave.getWUID(), task);
+        this.pendingTasks.put(sourceWave.wUID(), task);
 
         // Attach ServiceTask to the source wave
         sourceWave.addDatas(Builders.waveData(JRebirthWaves.SERVICE_TASK, task));
 
         // Bind ProgressBar
         if (sourceWave.containsNotNull(JRebirthWaves.PROGRESS_BAR)) { // Check double call
-            bindProgressBar(task, sourceWave.getData(JRebirthWaves.PROGRESS_BAR).getValue());
+            bindProgressBar(task, sourceWave.getData(JRebirthWaves.PROGRESS_BAR).value());
         }
 
         // Bind Title
         if (sourceWave.containsNotNull(JRebirthWaves.TASK_TITLE)) {
-            bindTitle(task, sourceWave.getData(JRebirthWaves.TASK_TITLE).getValue());
+            bindTitle(task, sourceWave.getData(JRebirthWaves.TASK_TITLE).value());
         }
 
         // Bind ProgressBar
         if (sourceWave.containsNotNull(JRebirthWaves.TASK_MESSAGE)) {
-            bindMessage(task, sourceWave.getData(JRebirthWaves.TASK_MESSAGE).getValue());
+            bindMessage(task, sourceWave.getData(JRebirthWaves.TASK_MESSAGE).value());
         }
 
         // Call the task into the JRebirth Thread Pool

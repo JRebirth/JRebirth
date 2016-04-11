@@ -38,14 +38,14 @@ public interface Model extends BehavioredComponent<Model> {
      *
      * @return the view managed
      */
-    View<?, ?, ?> getView();
+    View<?, ?, ?> view();
 
     /**
      * Return the root node.
      *
      * @return the root node of the managed view
      */
-    Node getRootNode();
+    Node node();
 
     /**
      * Perform the show view action triggered by a wave.

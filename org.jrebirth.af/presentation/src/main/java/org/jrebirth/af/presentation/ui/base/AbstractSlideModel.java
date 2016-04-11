@@ -278,7 +278,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     public boolean nextStep() {
         initStepPosition();
         final boolean res = this.stepPosition.get() < getStepList().size() - 1;
-        if (res && getView().isReadyForSlidesStepUpdate(false)) {
+        if (res && view().isReadyForSlidesStepUpdate(false)) {
 
             setCurrentFlow(SlideFlow.forward);
 
@@ -296,7 +296,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
     public boolean previousStep() {
         initStepPosition();
         final boolean res = this.stepPosition.get() > 0;
-        if (res && getView().isReadyForSlidesStepUpdate(true)) {
+        if (res && view().isReadyForSlidesStepUpdate(true)) {
 
             setCurrentFlow(SlideFlow.backward);
 
@@ -404,10 +404,10 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
                 animation = buildHorizontalAnimation(0, 0, 1000, 0);
                 break;
             case FADE_IN:
-                animation = FadeTransitionBuilder.create().node(getRootNode()).fromValue(0).toValue(1.0).duration(Duration.seconds(1)).build();
+                animation = FadeTransitionBuilder.create().node(node()).fromValue(0).toValue(1.0).duration(Duration.seconds(1)).build();
                 break;
             case FADE_OUT:
-                animation = FadeTransitionBuilder.create().node(getRootNode()).fromValue(1.0).toValue(0.0).duration(Duration.seconds(1)).build();
+                animation = FadeTransitionBuilder.create().node(node()).fromValue(1.0).toValue(0.0).duration(Duration.seconds(1)).build();
                 break;
 
             case SCALE_FROM_MAX:
@@ -465,7 +465,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         return ParallelTransitionBuilder.create()
                                         .children(
                                                   ScaleTransitionBuilder.create()
-                                                                        .node(getRootNode())
+                                                                        .node(node())
                                                                         .fromX(from)
                                                                         .toX(to)
                                                                         .fromY(from)
@@ -474,7 +474,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
                                                                         .build(),
 
                                                   FadeTransitionBuilder.create()
-                                                                       .node(getRootNode())
+                                                                       .node(node())
                                                                        .fromValue(show ? 0.0 : 1.0)
                                                                        .toValue(show ? 1.0 : 0.0)
                                                                        .duration(Duration.seconds(1))
@@ -497,12 +497,12 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         final double angle = findAngle(fromX, toX, fromY, toY);
 
         final MotionBlur mb = MotionBlurBuilder.create().angle(angle).build();
-        getRootNode().setEffect(mb);
+        node().setEffect(mb);
 
         return ParallelTransitionBuilder.create()
                                         .children(
                                                   TranslateTransitionBuilder.create()
-                                                                            .node(getRootNode())
+                                                                            .node(node())
                                                                             .fromX(fromX)
                                                                             .toX(toX)
                                                                             .fromY(fromY)

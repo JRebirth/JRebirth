@@ -42,8 +42,8 @@ public final class WaveTypeBase implements WaveType {
     private int uid;
 
     /**
-     * The action to performed, basically the name of the method to call. The keyword "DO_" (by default see {@link CoreParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to
-     * generate the handler method
+     * The action to performed, basically the name of the method to call. The keyword "DO_" (by default see {@link CoreParameters.WAVE_HANDLER_PREFIX}) will be prepended to the action name to generate
+     * the handler method
      */
     private String action;
 
@@ -221,15 +221,15 @@ public final class WaveTypeBase implements WaveType {
             } else {
                 sb.append(", ");
             }
-            String fullName = waveItem.getItemType() instanceof ParameterizedType ? ((ParameterizedType) waveItem.getItemType()).toString()
-                    : ((Class<?>) waveItem.getItemType()).getName();
+            String fullName = waveItem.type() instanceof ParameterizedType ? ((ParameterizedType) waveItem.type()).toString()
+                    : ((Class<?>) waveItem.type()).getName();
             sb.append(fullName).append(" ");
 
             fullName = fullName.replaceAll("[<>]", "");
-            if (waveItem.getName() == null || waveItem.getName().isEmpty()) {
+            if (waveItem.name() == null || waveItem.name().isEmpty()) {
                 sb.append(ObjectUtility.lowerFirstChar(fullName.substring(fullName.lastIndexOf('.') + 1)));
             } else {
-                sb.append(waveItem.getName());
+                sb.append(waveItem.name());
             }
         }
         return sb.toString();

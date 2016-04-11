@@ -59,9 +59,9 @@ public final class MainView extends DefaultView<MainModel, BorderPane, MainContr
     @Override
     protected void initView() {
 
-        getRootNode().setPrefSize(800, 600);
+        node().setPrefSize(800, 600);
 
-        getRootNode().setLeft(createMenu());
+        node().setLeft(createMenu());
 
     }
 
@@ -75,7 +75,7 @@ public final class MainView extends DefaultView<MainModel, BorderPane, MainContr
 
     private Node createMenu() {
         final VBox box = new VBox();
-        for (final ModuleModel mm : getModel().getModules()) {
+        for (final ModuleModel mm : model().getModules()) {
             box.getChildren().add(createModuleButton(mm));
         }
         return box;
@@ -83,7 +83,7 @@ public final class MainView extends DefaultView<MainModel, BorderPane, MainContr
 
     private Node createModuleButton(ModuleModel mm) {
         final Button b = new Button(mm.moduleName());
-        b.setOnAction(getController()::onButtonFired);
+        b.setOnAction(controller()::onButtonFired);
         b.setUserData(Key.create(mm.getClass()));
         buttonList.add(b);
         return b;

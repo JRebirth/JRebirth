@@ -52,11 +52,11 @@ public class DockController extends DefaultController<DockModel, DockView> {
     @Override
     protected void initEventHandlers() throws CoreException {
 
-        getRootNode().setOnDragOver(getHandler(DragEvent.DRAG_OVER));
-        getRootNode().setOnDragEntered(getHandler(DragEvent.DRAG_ENTERED_TARGET));
-        getRootNode().setOnDragExited(getHandler(DragEvent.DRAG_EXITED_TARGET));
-        getRootNode().setOnDragDropped(getHandler(DragEvent.DRAG_DROPPED));
-        getRootNode().setOnDragDone(getHandler(DragEvent.DRAG_DONE));
+        node().setOnDragOver(getHandler(DragEvent.DRAG_OVER));
+        node().setOnDragEntered(getHandler(DragEvent.DRAG_ENTERED_TARGET));
+        node().setOnDragExited(getHandler(DragEvent.DRAG_EXITED_TARGET));
+        node().setOnDragDropped(getHandler(DragEvent.DRAG_DROPPED));
+        node().setOnDragDone(getHandler(DragEvent.DRAG_DONE));
 
     }
 

@@ -58,6 +58,6 @@ public interface Command extends BehavioredComponent<Command> {
      *
      * @return the casted wave bean
      */
-    WaveBean getWaveBean(final Wave wave);
+    WaveBean waveBean(final Wave wave);
 
 }

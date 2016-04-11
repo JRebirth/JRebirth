@@ -71,13 +71,13 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
     @Override
     protected void initModel() {
 
-        final WaveChecker waveChecker = wave -> ObjectUtility.equalsOrBothNull(wave.get(DOCK_KEY), getObject().dockKey());
+        final WaveChecker waveChecker = wave -> ObjectUtility.equalsOrBothNull(wave.get(DOCK_KEY), object().dockKey());
 
         listen(waveChecker, ADD);
         listen(waveChecker, REMOVE);
 
-        if (ObjectUtility.nullOrEmpty(getObject().dockKey())) {
-            getObject().dockKey(DockModel.class.getSimpleName() + DOCK_COUNTER++);
+        if (ObjectUtility.nullOrEmpty(object().dockKey())) {
+            object().dockKey(DockModel.class.getSimpleName() + DOCK_COUNTER++);
         }
     }
 
@@ -87,9 +87,9 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
     @Override
     protected void bind() {
 
-        getObject().orientationPy().addListener(this::onOrientationChanged);
+        object().orientationPy().addListener(this::onOrientationChanged);
 
-        getObject().panes().addListener(this::onPanesChanged);
+        object().panes().addListener(this::onPanesChanged);
     }
 
     private void onOrientationChanged(final ObservableValue<? extends DockOrientation> property, final DockOrientation oldValue, final DockOrientation newValue) {
@@ -110,12 +110,12 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
 
             if (change.wasRemoved()) {
                 Platform.runLater(
-                                  () -> getView().removeContainer((List<TabConfig>) change.getRemoved()));
+                                  () -> view().removeContainer((List<TabConfig>) change.getRemoved()));
             }
 
             if (change.wasAdded()) {
                 Platform.runLater(
-                                  () -> getView().addContainer(change.getFrom(), change.getList().get(change.getFrom())));
+                                  () -> view().addContainer(change.getFrom(), change.getList().get(change.getFrom())));
             }
 
         }
@@ -141,13 +141,13 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
         // //.name(model.modelName())
         // .modelKey(model.getKey());
 
-        final TabConfig t = model.getObject();// BehaviorBean(TabBehavior.class);
+        final TabConfig t = model.object();// BehaviorBean(TabBehavior.class);
 
         if (idx < 0) {
-            idx = getObject().panes().isEmpty() ? 0 : getObject().panes().size();
+            idx = object().panes().isEmpty() ? 0 : object().panes().size();
         }
 
-        getObject().panes().add(idx, t);
+        object().panes().add(idx, t);
 
         // getView().addTab(idx, t);
 

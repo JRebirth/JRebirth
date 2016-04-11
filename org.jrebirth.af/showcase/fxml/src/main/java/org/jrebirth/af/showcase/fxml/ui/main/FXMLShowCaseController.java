@@ -39,16 +39,16 @@ public final class FXMLShowCaseController extends DefaultController<FXMLShowCase
         // WaveData<Class<? extends PageEnum>> stackName = Builders.waveData(StackWaves.STACK_PAGES, FXMLShowCaseModel.STACK_PAGES);
 
         // Manage Ui Command Button
-        linkWave(getView().getShowIncluded(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
+        linkWave(view().getShowIncluded(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
                  Builders.waveData(StackWaves.PAGE_ENUM, FXMLPage.IncludedFxml));
 
-        linkWave(getView().getShowEmbedded(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
+        linkWave(view().getShowEmbedded(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
                  Builders.waveData(StackWaves.PAGE_ENUM, FXMLPage.ViewEmbeddedFxml));
 
-        linkWave(getView().getShowStandalone(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
+        linkWave(view().getShowStandalone(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
                  Builders.waveData(StackWaves.PAGE_ENUM, FXMLPage.StandaloneFxml));
 
-        linkWave(getView().getShowHybrid(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
+        linkWave(view().getShowHybrid(), ActionEvent.ACTION, StackWaves.SHOW_PAGE_ENUM,
                  Builders.waveData(StackWaves.PAGE_ENUM, FXMLPage.HybridFxml));
 
     }

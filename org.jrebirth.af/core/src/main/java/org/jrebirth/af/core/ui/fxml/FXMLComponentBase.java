@@ -55,7 +55,7 @@ public class FXMLComponentBase implements FXMLComponent {
      * {@inheritDoc}
      */
     @Override
-    public Node getNode() {
+    public Node node() {
         return this.node;
     }
 
@@ -63,7 +63,7 @@ public class FXMLComponentBase implements FXMLComponent {
      * {@inheritDoc}
      */
     @Override
-    public FXMLController getController() {
+    public FXMLController controller() {
         return this.controller;
     }
 
@@ -72,7 +72,7 @@ public class FXMLComponentBase implements FXMLComponent {
      */
     @Override
     public Node lookup(final String selector) {
-        return getNode().lookup(selector);
+        return node().lookup(selector);
     }
 
     /**
@@ -80,7 +80,7 @@ public class FXMLComponentBase implements FXMLComponent {
      */
     @Override
     public Set<Node> lookupAll(final String selector) {
-        return getNode().lookupAll(selector);
+        return node().lookupAll(selector);
     }
 
 }

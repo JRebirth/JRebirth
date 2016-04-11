@@ -165,8 +165,8 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
                 this.selectedSlideModel = (SlideModel<SlideStep>) getModel(nextClass, slide);
 
                 // Add the new slide to the stack
-                if (!getView().getRootNode().getChildren().contains(this.selectedSlideModel.getRootNode())) {
-                    getView().getRootNode().getChildren().add(this.selectedSlideModel.getRootNode());
+                if (!view().node().getChildren().contains(this.selectedSlideModel.node())) {
+                    view().node().getChildren().add(this.selectedSlideModel.node());
                 }
 
                 // final String animationKey = isReverse ? this.slidePosition + "_" + (this.slidePosition + 1) : this.slidePosition - 1 + "_" + this.slidePosition;
@@ -245,10 +245,10 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
                 // Hide all other slides
                 if (csm != null) {
                     Node node;
-                    for (int i = getView().getRootNode().getChildren().size() - 1; i >= 0; i--) {
-                        node = getView().getRootNode().getChildren().get(i);
-                        if (csm.getRootNode() != node) {
-                            getView().getRootNode().getChildren().remove(node);
+                    for (int i = view().node().getChildren().size() - 1; i >= 0; i--) {
+                        node = view().node().getChildren().get(i);
+                        if (csm.node() != node) {
+                            view().node().getChildren().remove(node);
                         }
                     }
                 }
@@ -324,10 +324,10 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
             if (!this.menuShown.getAndSet(true)) {
                 final SlideMenuModel smm = getModel(Key.create(SlideMenuModel.class, this.selectedSlide));
 
-                StackPane.setAlignment(smm.getRootNode(), Pos.CENTER);
-                getView().getRootNode().getChildren().add(smm.getRootNode());
+                StackPane.setAlignment(smm.node(), Pos.CENTER);
+                view().node().getChildren().add(smm.node());
 
-                smm.getRootNode().parentProperty().addListener((observable, oldValue, newValue) -> {
+                smm.node().parentProperty().addListener((observable, oldValue, newValue) -> {
                     if (newValue == null) {
                         this.menuShown.set(false);
                     }

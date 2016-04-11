@@ -323,7 +323,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
     @Override
     public void taskAchieved() {
         // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
-        this.service.removePendingTask(this.wave.getWUID());
+        this.service.removePendingTask(this.wave.wUID());
     }
 
     /**
@@ -365,7 +365,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
      * {@inheritDoc}
      */
     @Override
-    public PriorityLevel getPriority() {
+    public PriorityLevel priority() {
         return this.priority;
     }
 
@@ -373,7 +373,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
      * {@inheritDoc}
      */
     @Override
-    public Instant getCreationTime() {
+    public Instant creationTime() {
         return this.creationTime;
     }
 

@@ -28,7 +28,7 @@ public final class WorkbenchApplication extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public Class<? extends Model> getFirstModelClass() {
+    public Class<? extends Model> firstModelClass() {
         return TabDemoModel.class;
     }
 

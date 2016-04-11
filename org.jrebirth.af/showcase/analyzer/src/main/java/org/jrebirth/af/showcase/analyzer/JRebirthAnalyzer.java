@@ -61,7 +61,7 @@ public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public Class<? extends Model> getFirstModelClass() {
+    public Class<? extends Model> firstModelClass() {
         return WorkbenchModel.class;
     }
 
@@ -94,7 +94,7 @@ public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    public List<Wave> getPostBootWaveList() {
+    public List<Wave> postBootWaveList() {
 
         final List<Wave> waveList = new ArrayList<>();
 
@@ -110,12 +110,11 @@ public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
 
                 // Call the service that will load and parse the log file
                 waveList.add(
-                        Builders.wave()
-                                .waveGroup(WaveGroup.RETURN_DATA)
-                                .waveType(LoadEdtFileService.DO_LOAD_EVENTS)
-                                .componentClass(LoadEdtFileService.class)
-                                .addDatas(Builders.waveData(EditorWaves.EVENTS_FILE, logFile))
-                        );
+                             Builders.wave()
+                                     .waveGroup(WaveGroup.RETURN_DATA)
+                                     .waveType(LoadEdtFileService.DO_LOAD_EVENTS)
+                                     .componentClass(LoadEdtFileService.class)
+                                     .addDatas(Builders.waveData(EditorWaves.EVENTS_FILE, logFile)));
 
                 // Start the animation to show all components creation
                 waveList.add(Builders.wave().waveType(EditorWaves.DO_PLAY));

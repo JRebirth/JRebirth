@@ -40,7 +40,7 @@ public final class ClassicModel extends AbstractTemplateModel<ClassicModel, Clas
      */
     @Override
     public void showSlideStep(final SlideStep slideStep) {
-        getView().showSlideStep(slideStep);
+        view().showSlideStep(slideStep);
     }
 
 }

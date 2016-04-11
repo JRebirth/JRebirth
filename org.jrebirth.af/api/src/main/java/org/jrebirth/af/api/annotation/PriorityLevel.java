@@ -74,7 +74,7 @@ public enum PriorityLevel {
 
     /**
      * Gets the level be adding an extra weight.
-     * 
+     *
      * @param weight the weight value shall be strictly lower than 1000
      *
      * @return the level

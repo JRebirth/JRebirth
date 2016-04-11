@@ -49,17 +49,17 @@ public final class WorkbenchView extends DefaultView<WorkbenchModel, BorderPane,
     @Override
     protected void initView() {
 
-        getRootNode().setPrefSize(800, 600);
+        node().setPrefSize(800, 600);
 
         // Attach the controls view to the top place of the root border pane
-        getRootNode().setTop(getModel().getInnerComponent(WorkbenchModel.CONTROLS).getRootNode());
+        node().setTop(model().findInnerComponent(WorkbenchModel.CONTROLS).node());
 
         // Attach the properties view to the right place of the root border pane
-        getRootNode().setRight(getModel().getInnerComponent(WorkbenchModel.PROPERTIES).getRootNode());
+        node().setRight(model().findInnerComponent(WorkbenchModel.PROPERTIES).node());
 
         // Attach the properties view to the center place of the root border
         // pane
-        getRootNode().setCenter(getModel().getInnerComponent(WorkbenchModel.EDITOR).getRootNode());
+        node().setCenter(model().findInnerComponent(WorkbenchModel.EDITOR).node());
     }
 
 }

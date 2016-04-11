@@ -95,7 +95,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         this.model = model;
 
         // Track this view creation
-        getModel().getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_VIEW, getModel().getClass(), this.getClass());
+        model().localFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_VIEW, model().getClass(), this.getClass());
 
         try {
             // Build the root node of the view
@@ -135,7 +135,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         initInternalView();
 
         // Activate the controller to listen all components (this+children)
-        getController().activate();
+        controller().activate();
 
         // Process class annotation
         processViewAnnotation();
@@ -158,13 +158,13 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             this.callbackObject = this;
         } else {
             // by default use the controller object as callback object
-            this.callbackObject = this.getController();
+            this.callbackObject = this.controller();
         }
 
         // Find the RootNodeId annotation
         final RootNodeId rni = ClassUtility.getLastClassAnnotation(this.getClass(), RootNodeId.class);
         if (rni != null) {
-            getRootNode().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
+            node().setId(rni.value().isEmpty() ? this.getClass().getSimpleName() : rni.value());
         }
 
         // Find the RootNodeClass annotation
@@ -172,7 +172,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         if (rnc != null && rnc.value().length > 0) {
             for (final String styleClass : rnc.value()) {
                 if (styleClass != null && !styleClass.isEmpty()) {
-                    getRootNode().getStyleClass().add(styleClass);
+                    node().getStyleClass().add(styleClass);
                 }
             }
         }
@@ -184,8 +184,8 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             if (a.annotationType().getName().startsWith(BASE_ANNOTATION_NAME)) {
                 try {
                     // Process the annotation if the node is not null
-                    if (getRootNode() != null && getController() instanceof AbstractController) {
-                        addHandler(getRootNode(), a);
+                    if (node() != null && controller() instanceof AbstractController) {
+                        addHandler(node(), a);
                     }
                 } catch (IllegalArgumentException | CoreException e) {
                     LOGGER.log(UIMessages.VIEW_ANNO_PROCESSING_FAILURE, e, this.getClass().getName());
@@ -250,7 +250,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
                         final EventTarget target = (EventTarget) property.get(this);
 
                         // Process the annotation if the node is not null
-                        if (target != null && getController() instanceof AbstractController) {
+                        if (target != null && controller() instanceof AbstractController) {
                             addHandler(target, a);
                         }
 
@@ -268,7 +268,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
                     final Animation animation = (Animation) property.get(this);
 
                     // Process the annotation if the node is not null
-                    if (animation != null && getController() instanceof AbstractController) {
+                    if (animation != null && controller() instanceof AbstractController) {
                         addHandler(animation, a);
                     }
 
@@ -377,7 +377,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * {@inheritDoc}
      */
     @Override
-    public final M getModel() {
+    public final M model() {
         return this.model;
     }
 
@@ -385,7 +385,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * {@inheritDoc}
      */
     @Override
-    public final C getController() {
+    public final C controller() {
         return this.controller;
     }
 
@@ -393,7 +393,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * {@inheritDoc}
      */
     @Override
-    public final N getRootNode() {
+    public final N node() {
         return this.rootNode;
     }
 
@@ -401,7 +401,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * {@inheritDoc}
      */
     @Override
-    public final Pane getErrorNode() {
+    public final Pane errorNode() {
         return this.errorNode;
     }
 
@@ -431,7 +431,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      */
     @Override
     protected void finalize() throws Throwable {
-        getModel().getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_VIEW, null, this.getClass());
+        model().localFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_VIEW, null, this.getClass());
         super.finalize();
     }
 

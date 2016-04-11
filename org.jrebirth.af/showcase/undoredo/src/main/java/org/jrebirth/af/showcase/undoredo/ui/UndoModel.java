@@ -58,7 +58,7 @@ public final class UndoModel extends DefaultModel<UndoModel, UndoView> implement
 
         // Get a strong reference to service to avoid any garbage collection.
         // Be careful it can hold a lot of objects
-        this.undoRedoService = getService(UndoRedoService.class, stackName.getValue());
+        this.undoRedoService = getService(UndoRedoService.class, stackName.value());
     }
 
     /**
@@ -67,7 +67,7 @@ public final class UndoModel extends DefaultModel<UndoModel, UndoView> implement
      * @param createdNode the created node
      */
     public void addShape(final Node createdNode) {
-        getView().getEditor().getChildren().add(createdNode);
+        view().getEditor().getChildren().add(createdNode);
     }
 
     /**
@@ -76,7 +76,7 @@ public final class UndoModel extends DefaultModel<UndoModel, UndoView> implement
      * @param createdNode the created node
      */
     public void removeShape(final Node createdNode) {
-        getView().getEditor().getChildren().remove(createdNode);
+        view().getEditor().getChildren().remove(createdNode);
     }
 
     @Override

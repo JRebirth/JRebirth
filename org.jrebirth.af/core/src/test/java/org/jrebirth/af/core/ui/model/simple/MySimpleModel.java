@@ -8,7 +8,7 @@ public class MySimpleModel extends DefaultSimpleModel<BorderPane> {
 
     @Override
     protected void initSimpleView() {
-        getRootNode().setCenter(new BorderPane());
+        node().setCenter(new BorderPane());
     }
 
 }

@@ -58,12 +58,12 @@ public class DockView extends DefaultView<DockModel, SplitPane, DockController> 
     protected void initView() {
         super.initView();
 
-        switch (getModel().getObject().orientation()) {
+        switch (model().object().orientation()) {
             case horizontal:
-                getRootNode().setOrientation(Orientation.HORIZONTAL);
+                node().setOrientation(Orientation.HORIZONTAL);
                 break;
             case vertical:
-                getRootNode().setOrientation(Orientation.VERTICAL);
+                node().setOrientation(Orientation.VERTICAL);
                 break;
         }
 
@@ -72,17 +72,17 @@ public class DockView extends DefaultView<DockModel, SplitPane, DockController> 
     void removeContainer(final List<TabConfig> removed) {
 
         for (final TabConfig tabConfig : removed) {
-            final TabModel model = getModel().getModel(TabModel.class, tabConfig);
+            final TabModel model = model().getModel(TabModel.class, tabConfig);
 
-            getRootNode().getItems().remove(model.getRootNode());
+            node().getItems().remove(model.node());
         }
     }
 
     void addContainer(final int from, final TabConfig tabConfig) {
 
-        final TabModel model = getModel().getModel(TabModel.class, tabConfig);
+        final TabModel model = model().getModel(TabModel.class, tabConfig);
 
-        getRootNode().getItems().add(model.getRootNode());
+        node().getItems().add(model.node());
     }
 
 }

@@ -86,7 +86,7 @@ public class BasicCommandTest {
 
         this.wait = true;
 
-        final Wave wave = globalFacade.getCommandFacade().retrieve(commandClass, keyPart).run();
+        final Wave wave = globalFacade.commandFacade().retrieve(commandClass, keyPart).run();
 
         wave.addWaveListener(new DefaultWaveListener() {
 

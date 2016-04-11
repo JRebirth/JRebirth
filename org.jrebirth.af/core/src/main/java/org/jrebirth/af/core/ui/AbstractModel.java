@@ -49,8 +49,8 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     @Override
     protected void prepareView() {
         try {
-            if (getView() != null) {
-                getView().prepare();
+            if (view() != null) {
+                view().prepare();
             }
         } catch (final CoreException ce) {
             throw new CoreRuntimeException(ce);
@@ -114,7 +114,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
      * @throws CoreException
      */
     @Override
-    public final V getView() {
+    public final V view() {
         if (this.view == null) {
             buildView();
         }

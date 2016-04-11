@@ -56,7 +56,7 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
         final ToggleGroup group = new PersistentButtonToggleGroup();
         group.getToggles().addAll(this.showEmbedded, this.showStandalone, this.showHybrid, this.showIncluded);
 
-        getRootNode().setTop(FlowPaneBuilder.create()
+        node().setTop(FlowPaneBuilder.create()
                                             .children(this.showEmbedded, this.showStandalone, this.showIncluded, this.showHybrid)
                                             .build());
 

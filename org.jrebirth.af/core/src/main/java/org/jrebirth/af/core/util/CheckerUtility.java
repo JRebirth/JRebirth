@@ -123,7 +123,7 @@ public final class CheckerUtility implements UtilMessages {
             boolean skipMethod = false;
             // Check each parameter
             for (int i = 0; !skipMethod && i < mParams.length - 1 && !isCompliant; i++) {
-                if (!ClassUtility.getClassFromType(mParams[i]).isAssignableFrom(ClassUtility.getClassFromType(wParams.get(i).getItemType()))) {
+                if (!ClassUtility.getClassFromType(mParams[i]).isAssignableFrom(ClassUtility.getClassFromType(wParams.get(i).type()))) {
                     // This method has not the right parameters
                     skipMethod = true;
                 }

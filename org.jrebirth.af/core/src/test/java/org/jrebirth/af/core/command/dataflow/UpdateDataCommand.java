@@ -20,7 +20,7 @@ public class UpdateDataCommand extends DefaultCommand {
         Assert.assertEquals("half", wave.get(JRebirthItems.stringItem));
 
         final WaveData<Integer> wdInteger = wave.getData(JRebirthItems.integerItem);
-        wdInteger.setValue(wdInteger.getValue() * 2);
+        wdInteger.value(wdInteger.value() * 2);
 
         wave.addDatas(Builders.waveData(JRebirthItems.stringItem, "magic"));
     }

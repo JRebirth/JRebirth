@@ -55,15 +55,15 @@ public final class TransitionView extends AbstractView<TransitionModel, StackPan
     @Override
     public void start() {
 
-        getRootNode().setPrefWidth(getModel().getImageSlicerService().getImage().getWidth());
-        getRootNode().setPrefHeight(getModel().getImageSlicerService().getImage().getHeight());
+        node().setPrefWidth(model().getImageSlicerService().getImage().getWidth());
+        node().setPrefHeight(model().getImageSlicerService().getImage().getHeight());
 
-        getRootNode().getChildren().addAll(getModel().getImageSlicerService().getSlices());
+        node().getChildren().addAll(model().getImageSlicerService().getSlices());
 
         // getModel().getService2().getTimeline().play();
 
         // getModel().getRandomFadingService().getTimeline().play();
-        getModel().getSlidingDoorService().getFullTransition().play();
+        model().getSlidingDoorService().getFullTransition().play();
     }
 
     /**
@@ -80,15 +80,15 @@ public final class TransitionView extends AbstractView<TransitionModel, StackPan
      */
     @Override
     public void reload() {
-        getRootNode().setPrefWidth(getModel().getImageSlicerService().getImage().getWidth());
-        getRootNode().setPrefHeight(getModel().getImageSlicerService().getImage().getHeight());
+        node().setPrefWidth(model().getImageSlicerService().getImage().getWidth());
+        node().setPrefHeight(model().getImageSlicerService().getImage().getHeight());
 
-        getRootNode().getChildren().addAll(getModel().getImageSlicerService().getSlices());
+        node().getChildren().addAll(model().getImageSlicerService().getSlices());
 
         // getModel().getService2().getTimeline().play();
 
         // getModel().getRandomFadingService().getTimeline().play();
-        getModel().getSlidingDoorService().getFullTransition().play();
+        model().getSlidingDoorService().getFullTransition().play();
 
     }
 }

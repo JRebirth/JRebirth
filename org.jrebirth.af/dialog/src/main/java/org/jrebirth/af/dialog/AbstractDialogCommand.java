@@ -20,7 +20,7 @@ public abstract class AbstractDialogCommand extends AbstractSingleCommand<Dialog
     @Override
     protected void perform(Wave wave) throws CommandException {
 
-        bean = getWaveBean(wave);
+        bean = waveBean(wave);
 
         switch (bean.getDialogType()) {
 

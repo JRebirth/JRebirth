@@ -21,7 +21,7 @@ public class Sub1Controller extends AbstractFXMLController<IncludedModel, View<I
     @Override
     public void initialize(final URL url, final ResourceBundle resource) {
 
-        this.textArea.setText(((LoremIpsum) getModel().getFirstKeyPart()).getPart1());
+        this.textArea.setText(((LoremIpsum) model().getFirstKeyPart()).getPart1());
 
     }
 }

@@ -50,15 +50,15 @@ public final class WaveDataBase<T> implements WaveData<T> {
      * @param value the data
      */
     public WaveDataBase(final WaveItem<T> waveItem, final T value) {
-        setKey(waveItem);
-        setValue(value);
+        key(waveItem);
+        value(value);
     }
 
     /**
      * @return Returns the waveItem.
      */
     @Override
-    public WaveItem<T> getKey() {
+    public WaveItem<T> key() {
         return this.waveItem;
     }
 
@@ -66,7 +66,7 @@ public final class WaveDataBase<T> implements WaveData<T> {
      * @param waveItem the waveItem to set
      */
     @Override
-    public void setKey(final WaveItem<T> waveItem) {
+    public void key(final WaveItem<T> waveItem) {
         this.waveItem = waveItem;
     }
 
@@ -74,7 +74,7 @@ public final class WaveDataBase<T> implements WaveData<T> {
      * @return Returns the value.
      */
     @Override
-    public T getValue() {
+    public T value() {
         return this.value;
     }
 
@@ -82,7 +82,7 @@ public final class WaveDataBase<T> implements WaveData<T> {
      * @param value the value to set
      */
     @Override
-    public void setValue(final T value) {
+    public void value(final T value) {
         this.value = value;
     }
 
@@ -90,7 +90,7 @@ public final class WaveDataBase<T> implements WaveData<T> {
      * @return Returns the order.
      */
     @Override
-    public int getOrder() {
+    public int order() {
         return this.order;
     }
 
@@ -98,7 +98,7 @@ public final class WaveDataBase<T> implements WaveData<T> {
      * @param order The order to set.
      */
     @Override
-    public void setOrder(final int order) {
+    public void order(final int order) {
         this.order = order;
     }
 
@@ -107,7 +107,7 @@ public final class WaveDataBase<T> implements WaveData<T> {
      */
     @Override
     public int hashCode() {
-        return getOrder();
+        return order();
     }
 
     /**
@@ -117,7 +117,7 @@ public final class WaveDataBase<T> implements WaveData<T> {
     @Override
     public boolean equals(final Object obj) {
         // A wave data is unique into a wave, no equals needed
-        return obj instanceof WaveData && getOrder() == ((WaveData<T>) obj).getOrder();
+        return obj instanceof WaveData && order() == ((WaveData<T>) obj).order();
     }
 
     /**
@@ -125,7 +125,7 @@ public final class WaveDataBase<T> implements WaveData<T> {
      */
     @Override
     public int compareTo(final WaveData<?> waveData) {
-        return getOrder() - waveData.getOrder();
+        return order() - waveData.order();
     }
 
     /**
@@ -136,9 +136,9 @@ public final class WaveDataBase<T> implements WaveData<T> {
         final StringBuilder sb = new StringBuilder();
 
         sb.append("Item: ")
-          .append(getKey().toString())
+          .append(key().toString())
           .append(" Value:")
-          .append(getValue().toString());
+          .append(value().toString());
 
         return sb.toString();
     }

@@ -21,13 +21,13 @@ public class RegistrationItem implements Comparable<RegistrationItem> {
      * @return Returns the interfaceClass.
      */
     public Class<? extends Component<?>> interfaceClass() {
-        return interfaceClass;
+        return this.interfaceClass;
     }
 
     /**
      * @param interfaceClass The interfaceClass to set.
      */
-    public RegistrationItem interfaceClass(Class<? extends Component<?>> interfaceClass) {
+    public RegistrationItem interfaceClass(final Class<? extends Component<?>> interfaceClass) {
         this.interfaceClass = interfaceClass;
         return this;
     }
@@ -36,13 +36,13 @@ public class RegistrationItem implements Comparable<RegistrationItem> {
      * @return Returns the implClass.
      */
     public Class<? extends Component<?>> implClass() {
-        return implClass;
+        return this.implClass;
     }
 
     /**
      * @param implClass The implClass to set.
      */
-    public RegistrationItem implClass(Class<? extends Component<?>> implClass) {
+    public RegistrationItem implClass(final Class<? extends Component<?>> implClass) {
         this.implClass = implClass;
         return this;
     }
@@ -51,13 +51,13 @@ public class RegistrationItem implements Comparable<RegistrationItem> {
      * @return Returns the priority.
      */
     public PriorityLevel priority() {
-        return priority;
+        return this.priority;
     }
 
     /**
      * @param priority The priority to set.
      */
-    public RegistrationItem priority(PriorityLevel priority) {
+    public RegistrationItem priority(final PriorityLevel priority) {
         this.priority = priority;
         return this;
     }
@@ -66,23 +66,23 @@ public class RegistrationItem implements Comparable<RegistrationItem> {
      * @return Returns the weight.
      */
     public int weight() {
-        return weight;
+        return this.weight;
     }
 
     /**
      * @param weight The weight to set.
      */
-    public RegistrationItem weight(int weight) {
+    public RegistrationItem weight(final int weight) {
         this.weight = weight;
         return this;
     }
 
     @Override
-    public int compareTo(RegistrationItem o) {
+    public int compareTo(final RegistrationItem o) {
         int priorityDiff = 0;
-        if (priority != null) {
+        if (this.priority != null) {
             if (o.priority != null) {
-                priorityDiff = priority.level(weight) - o.priority.level(o.weight);
+                priorityDiff = this.priority.level(this.weight) - o.priority.level(o.weight);
             } else {
                 priorityDiff = 1;
             }
@@ -91,7 +91,7 @@ public class RegistrationItem implements Comparable<RegistrationItem> {
                 priorityDiff = -1;
             }
         }
-        return priorityDiff == 0 ? implClass.getName().compareTo(o.implClass().getName()) : priorityDiff;
+        return priorityDiff == 0 ? this.implClass.getName().compareTo(o.implClass().getName()) : priorityDiff;
     }
 
 }

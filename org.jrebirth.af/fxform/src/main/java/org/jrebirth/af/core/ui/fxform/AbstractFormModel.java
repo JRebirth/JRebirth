@@ -20,6 +20,6 @@ public abstract class AbstractFormModel<M extends AbstractFormModel<?, ?, ?>, V 
     @Override
     protected void bind() {
         // super.bind();
-        getView().getRootNode().setSource(getObject());
+        view().node().setSource(object());
     }
 }

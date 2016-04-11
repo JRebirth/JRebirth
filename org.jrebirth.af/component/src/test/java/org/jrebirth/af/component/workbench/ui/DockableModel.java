@@ -10,14 +10,14 @@ public class DockableModel extends DefaultSimpleObjectModel<Text, String> {
     @Override
     protected void initModel() {
         addBehavior(Dockable.create()
-                            .name(getObject())
-                            .modelKey(getKey()));
+                            .name(object())
+                            .modelKey(key()));
     }
 
     @Override
     protected void initSimpleView() {
 
-        getRootNode().setText(getObject());
+        node().setText(object());
 
     }
 

@@ -49,7 +49,7 @@ public @interface Register {
 
     /**
      * Additional Weight to perform priority calculation.
-     * 
+     *
      * Shall be strictly lower than 1000
      *
      * @return the registration priority

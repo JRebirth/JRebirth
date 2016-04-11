@@ -88,12 +88,12 @@ public interface Wave {
     /**
      * @return Returns the Wave Unique Identifier.
      */
-    String getWUID();
+    String wUID();
 
     /**
      * @return Returns the Wave timestamp (for creation).
      */
-    long getTimestamp();
+    long timestamp();
 
     /**
      * @return Returns the waveGroup.
@@ -300,10 +300,11 @@ public interface Wave {
     void removeWaveHandler(final Object waveHandler);
 
     /**
-     * .
+     * Returns true if the wave holds the given {@link WaveBean} class.
      *
-     * @param class1
-     * @return
+     * @param waveBeanClass the type of the searched {@link WaveBean}
+     *
+     * @return true if the wave holds the given {@link WaveBean} type
      */
     boolean hasWaveBean(Class<? extends WaveBean> waveBeanClass);
 }

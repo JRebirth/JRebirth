@@ -79,7 +79,7 @@ public final class AnnotationView extends DefaultView<AnnotationModel, VBox, Ann
     @Override
     protected void initView() {
 
-        getRootNode().setMinWidth(200);
+        node().setMinWidth(200);
 
         this.swipeVerticalButton = ButtonBuilder.create().text("Swipe Vertical Button").build();
         this.swipeHorizontalButton = ButtonBuilder.create().text("Swipe Horizontal Button").build();
@@ -89,7 +89,7 @@ public final class AnnotationView extends DefaultView<AnnotationModel, VBox, Ann
         this.rotateButton = ButtonBuilder.create().text("Rotate Button").build();
         this.rotateStartFinishButton = ButtonBuilder.create().text("Rotate Started & Finished Button").build();
 
-        getRootNode().getChildren().add(this.swipeVerticalButton);
+        node().getChildren().add(this.swipeVerticalButton);
     }
 
     public Button getSwipeVerticalButton() {

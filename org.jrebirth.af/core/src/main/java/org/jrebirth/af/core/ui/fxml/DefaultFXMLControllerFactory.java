@@ -26,7 +26,7 @@ public class DefaultFXMLControllerFactory extends AbstractFXMLControllerFactory 
         try {
 
             controller = (FXMLController<Model, View<Model, ?, ?>>) controllerClass.newInstance();
-            controller.setModel(getRelatedModel());
+            controller.model(relatedModel());
 
         } catch (InstantiationException | IllegalAccessException e) {
             LOGGER.log(FXMLMessages.DEFAULT_CTRLR_CREATION_ERROR, e, e.getMessage());

@@ -76,7 +76,7 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
 
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(getClassField().getCanonicalName()).append('|');
+        sb.append(classField().getCanonicalName()).append('|');
         for (final Object keyObject : this.keyPartList) {
             sb.append(buildObjectKey(keyObject)).append('|');
         }
@@ -230,7 +230,7 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
      */
     @Override
     public int hashCode() {
-        return getKey().hashCode();
+        return key().hashCode();
     }
 
     /**
@@ -238,14 +238,14 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
      */
     @Override
     public String toString() {
-        return getKey();
+        return key();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getKey() {
+    public String key() {
         if (this.key == null) {
             rebuildKey();
         }
@@ -256,7 +256,7 @@ public class MultitonKey<R> extends ClassKey<R> implements KeyMessages {
      * {@inheritDoc}
      */
     @Override
-    public Object getValue() {
+    public Object value() {
         Object obj = null;
         if (this.keyPartList.size() > 1) {
             obj = this.keyPartList;

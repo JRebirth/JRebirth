@@ -47,14 +47,14 @@ public class PrepareModelCommand extends DefaultPoolBeanCommand<DisplayModelWave
 
         // final Object[] keyPart = getWaveBean(wave).getKeyPart() == null ? null : getWaveBean(wave).getKeyPart().toArray();
 
-        final UniqueKey<? extends Model> showModelKey = getWaveBean(wave).showModelKey();
+        final UniqueKey<? extends Model> showModelKey = waveBean(wave).showModelKey();
 
         if (showModelKey == null) {
             LOGGER.error("ModelClass is null");
             throw new CoreRuntimeException("Illegal action : Model Class is null");
         }
         // Retrieve the mode according to its keyPart
-        final Model modelInstance = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(showModelKey);
+        final Model modelInstance = localFacade().getGlobalFacade().uiFacade().retrieve(showModelKey);
 
         //
         // if (keyPart == null) {
@@ -64,12 +64,12 @@ public class PrepareModelCommand extends DefaultPoolBeanCommand<DisplayModelWave
         // }
 
         if (modelInstance == null) {
-            LOGGER.error("Model " + showModelKey.getClassField().getSimpleName() + " couldn't be created");
-            throw new CoreRuntimeException("Illegal action : Model Instance is null: " + showModelKey.getClassField().getName());
+            LOGGER.error("Model " + showModelKey.classField().getSimpleName() + " couldn't be created");
+            throw new CoreRuntimeException("Illegal action : Model Instance is null: " + showModelKey.classField().getName());
         }
 
         // Attach the model to allow reuse later in the process
-        getWaveBean(wave).showModel(modelInstance);
+        waveBean(wave).showModel(modelInstance);
 
         // Build the first root node into the thread pool and link it to the waveBean
         // getWaveBean(wave).setCreatedNode(modelInstance.getRootNode());
@@ -83,7 +83,7 @@ public class PrepareModelCommand extends DefaultPoolBeanCommand<DisplayModelWave
      * @return the casted wave bean
      */
     @Override
-    public DisplayModelWaveBean getWaveBean(final Wave wave) {
+    public DisplayModelWaveBean waveBean(final Wave wave) {
         return wave.waveBean(DisplayModelWaveBean.class);
     }
 

@@ -51,7 +51,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
-    public final LocalFacade<R> getLocalFacade() {
+    public final LocalFacade<R> localFacade() {
         return this.localFacade;
     }
 
@@ -59,7 +59,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
-    public final void setLocalFacade(final LocalFacade<R> localFacade) {
+    public final void localFacade(final LocalFacade<R> localFacade) {
         this.localFacade = localFacade;
     }
 
@@ -67,7 +67,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
-    public UniqueKey<R> getKey() {
+    public UniqueKey<R> key() {
         return this.key;
     }
 
@@ -75,7 +75,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      * {@inheritDoc}
      */
     @Override
-    public void setKey(final UniqueKey<R> key) {
+    public void key(final UniqueKey<R> key) {
         this.key = key;
     }
 
@@ -87,11 +87,11 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
     @SuppressWarnings("unchecked")
     public Object getFirstKeyPart() {
         Object keyPart = null;
-        if (this.key.getValue() instanceof List && !((List<Object>) this.key.getValue()).isEmpty()) {
-            keyPart = ((List<Object>) this.key.getValue()).get(0);
+        if (this.key.value() instanceof List && !((List<Object>) this.key.value()).isEmpty()) {
+            keyPart = ((List<Object>) this.key.value()).get(0);
         } else {
             // UniqueKey or MultitontKey with only one key part
-            keyPart = this.key.getValue();
+            keyPart = this.key.value();
         }
         return keyPart;
     }
@@ -104,8 +104,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
     @SuppressWarnings("unchecked")
     public Object getSecondKeyPart() {
         Object keyPart = null;
-        if (this.key.getValue() instanceof List && ((List<Object>) this.key.getValue()).size() > 1) {
-            keyPart = ((List<Object>) this.key.getValue()).get(1);
+        if (this.key.value() instanceof List && ((List<Object>) this.key.value()).size() > 1) {
+            keyPart = ((List<Object>) this.key.value()).get(1);
         }
         return keyPart;
     }
@@ -118,8 +118,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
     @SuppressWarnings("unchecked")
     public Object getThirdKeyPart() {
         Object keyPart = null;
-        if (this.key.getValue() instanceof List && ((List<Object>) this.key.getValue()).size() > 1) {
-            keyPart = ((List<Object>) this.key.getValue()).get(1);
+        if (this.key.value() instanceof List && ((List<Object>) this.key.value()).size() > 1) {
+            keyPart = ((List<Object>) this.key.value()).get(1);
         }
         return keyPart;
     }
@@ -134,11 +134,11 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
     @SuppressWarnings("unchecked")
     public List<Object> getListKeyPart() {
         List<Object> listModelObject = null;
-        if (this.key.getValue() instanceof List) {
-            listModelObject = (List<Object>) this.key.getValue();
+        if (this.key.value() instanceof List) {
+            listModelObject = (List<Object>) this.key.value();
         } else {
             listModelObject = new ArrayList<>();
-            listModelObject.add(this.key.getValue());
+            listModelObject.add(this.key.value());
         }
         return listModelObject;
     }
@@ -163,8 +163,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <S extends Service> S getService(final Class<S> clazz, final Object... keyPart) {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_SERVICE, this.getClass(), clazz);
-        return getLocalFacade().getGlobalFacade().getServiceFacade().retrieve(clazz, keyPart);
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_SERVICE, this.getClass(), clazz);
+        return localFacade().getGlobalFacade().serviceFacade().retrieve(clazz, keyPart);
     }
 
     /**
@@ -172,8 +172,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <S extends Service> S getService(final UniqueKey<S> serviceKey) {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_SERVICE, this.getClass(), serviceKey.getClassField());
-        return getLocalFacade().getGlobalFacade().getServiceFacade().retrieve(serviceKey);
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_SERVICE, this.getClass(), serviceKey.classField());
+        return localFacade().getGlobalFacade().serviceFacade().retrieve(serviceKey);
     }
 
     /**
@@ -181,8 +181,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <S extends Service> List<S> getServices(final Class<S> clazz, final Object... keyPart) {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_SERVICE, this.getClass(), clazz);
-        return getLocalFacade().getGlobalFacade().getServiceFacade().retrieveMany(clazz, keyPart);
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_SERVICE, this.getClass(), clazz);
+        return localFacade().getGlobalFacade().serviceFacade().retrieveMany(clazz, keyPart);
     }
 
     /**
@@ -190,8 +190,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <S extends Service> List<S> getServices(final UniqueKey<S> serviceKey) {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_SERVICE, this.getClass(), serviceKey.getClassField());
-        return getLocalFacade().getGlobalFacade().getServiceFacade().retrieveMany(serviceKey);
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_SERVICE, this.getClass(), serviceKey.classField());
+        return localFacade().getGlobalFacade().serviceFacade().retrieveMany(serviceKey);
     }
 
     /**
@@ -199,8 +199,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart) {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_COMMAND, this.getClass(), clazz);
-        return getLocalFacade().getGlobalFacade().getCommandFacade().retrieve(clazz, keyPart);
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_COMMAND, this.getClass(), clazz);
+        return localFacade().getGlobalFacade().commandFacade().retrieve(clazz, keyPart);
     }
 
     /**
@@ -208,8 +208,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <C extends Command> C getCommand(final UniqueKey<C> commandKey) {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_COMMAND, this.getClass(), commandKey.getClassField());
-        return getLocalFacade().getGlobalFacade().getCommandFacade().retrieve(commandKey);
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_COMMAND, this.getClass(), commandKey.classField());
+        return localFacade().getGlobalFacade().commandFacade().retrieve(commandKey);
     }
 
     /**
@@ -217,8 +217,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <C extends Command> List<C> getCommands(final Class<C> clazz, final Object... keyPart) {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_COMMAND, this.getClass(), clazz);
-        return getLocalFacade().getGlobalFacade().getCommandFacade().retrieveMany(clazz, keyPart);
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_COMMAND, this.getClass(), clazz);
+        return localFacade().getGlobalFacade().commandFacade().retrieveMany(clazz, keyPart);
     }
 
     /**
@@ -226,8 +226,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <C extends Command> List<C> getCommands(final UniqueKey<C> commandKey) {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_COMMAND, this.getClass(), commandKey.getClassField());
-        return getLocalFacade().getGlobalFacade().getCommandFacade().retrieveMany(commandKey);
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_COMMAND, this.getClass(), commandKey.classField());
+        return localFacade().getGlobalFacade().commandFacade().retrieveMany(commandKey);
     }
 
     /**
@@ -235,8 +235,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <M extends Model> M getModel(final Class<M> clazz, final Object... keyPart) {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_MODEL, this.getClass(), clazz);
-        return getLocalFacade().getGlobalFacade().getUiFacade().retrieve(clazz, keyPart);
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_MODEL, this.getClass(), clazz);
+        return localFacade().getGlobalFacade().uiFacade().retrieve(clazz, keyPart);
     }
 
     /**
@@ -244,8 +244,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <M extends Model> M getModel(final UniqueKey<M> modelKey) {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_MODEL, this.getClass(), modelKey.getClassField());
-        return getLocalFacade().getGlobalFacade().getUiFacade().retrieve(modelKey);
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_MODEL, this.getClass(), modelKey.classField());
+        return localFacade().getGlobalFacade().uiFacade().retrieve(modelKey);
     }
 
     /**
@@ -253,8 +253,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <M extends Model> List<M> getModels(final Class<M> clazz, final Object... keyPart) {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_MODEL, this.getClass(), clazz);
-        return getLocalFacade().getGlobalFacade().getUiFacade().retrieveMany(clazz, keyPart);
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_MODEL, this.getClass(), clazz);
+        return localFacade().getGlobalFacade().uiFacade().retrieveMany(clazz, keyPart);
     }
 
     /**
@@ -262,8 +262,8 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
      */
     @Override
     public final <M extends Model> List<M> getModels(final UniqueKey<M> modelKey) {
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_MODEL, this.getClass(), modelKey.getClassField());
-        return getLocalFacade().getGlobalFacade().getUiFacade().retrieveMany(modelKey);
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.ACCESS_MODEL, this.getClass(), modelKey.classField());
+        return localFacade().getGlobalFacade().uiFacade().retrieveMany(modelKey);
     }
 
 }

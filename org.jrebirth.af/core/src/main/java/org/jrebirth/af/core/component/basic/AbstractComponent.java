@@ -107,7 +107,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      * @return the notifier retrieved from global facade
      */
     private Notifier getNotifier() {
-        return getLocalFacade().getGlobalFacade().getNotifier();
+        return localFacade().getGlobalFacade().notifier();
     }
 
     /**
@@ -308,7 +308,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
                                 .addDatas(waveData);
 
         // Track wave creation
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
 
         return wave;
     }
@@ -333,7 +333,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
                                 .waveBean(waveBean);
 
         // Track wave creation
-        getLocalFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
+        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
 
         return wave;
     }
@@ -566,8 +566,8 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
 
         callAnnotatedMethod(OnRelease.class);
 
-        if (getLocalFacade() != null) {
-            getLocalFacade().unregister(getKey());
+        if (localFacade() != null) {
+            localFacade().unregister(key());
         }
 
         // thisObject.ready = false;
@@ -591,7 +591,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
                 getInnerComponentList().get().remove(innerComponent);
 
                 // Then remove it from map
-                getInnerComponentMap().get().remove(innerComponent.getKey());
+                getInnerComponentMap().get().remove(innerComponent.key());
             }
         }
 
@@ -621,19 +621,19 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
         // If the inner model hasn't been loaded before, build it from UIFacade
         if (!this.innerComponentMap.containsKey(innerComponent)) {
 
-            final Class<IC> innerComponentClass = innerComponent.getKey().getClassField();
+            final Class<IC> innerComponentClass = innerComponent.key().classField();
 
             IC childComponent = null;
             // Use the right facade according to the inner component type
             if (Command.class.isAssignableFrom(innerComponentClass)) {
                 // Initialize the Inner Command
-                childComponent = (IC) getLocalFacade().getGlobalFacade().getCommandFacade().retrieve((UniqueKey<Command>) innerComponent.getKey());
+                childComponent = (IC) localFacade().getGlobalFacade().commandFacade().retrieve((UniqueKey<Command>) innerComponent.key());
             } else if (Service.class.isAssignableFrom(innerComponentClass)) {
                 // Initialize the Inner Service
-                childComponent = (IC) getLocalFacade().getGlobalFacade().getServiceFacade().retrieve((UniqueKey<Service>) innerComponent.getKey());
+                childComponent = (IC) localFacade().getGlobalFacade().serviceFacade().retrieve((UniqueKey<Service>) innerComponent.key());
             } else if (Model.class.isAssignableFrom(innerComponentClass)) {
                 // Initialize the Inner Model
-                childComponent = (IC) getLocalFacade().getGlobalFacade().getUiFacade().retrieve((UniqueKey<Model>) innerComponent.getKey());
+                childComponent = (IC) localFacade().getGlobalFacade().uiFacade().retrieve((UniqueKey<Model>) innerComponent.key());
             } else if (Behavior.class.isAssignableFrom(innerComponentClass)) {
                 // Cannot initialize Inner Behavior, they cannot be nested
                 throw new CoreRuntimeException("Behaviors can not be used as Inner EnhancedComponent"); // FIXME add MessageItem
@@ -649,7 +649,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
             this.innerComponentList.add(childComponent);
 
             // Link the current root model
-            childComponent.setRootComponent(this);
+            childComponent.rootComponent(this);
         }
     }
 
@@ -658,7 +658,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      */
     @SuppressWarnings("unchecked")
     @Override
-    public final <IC extends Component<?>> IC getInnerComponent(final InnerComponent<IC> innerModel) {
+    public final <IC extends Component<?>> IC findInnerComponent(final InnerComponent<IC> innerModel) {
 
         if (!getInnerComponentMap().isPresent() || !getInnerComponentMap().get().containsKey(innerModel)) {
 
@@ -673,7 +673,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      * {@inheritDoc}
      */
     @Override
-    public Component<?> getRootComponent() {
+    public Component<?> rootComponent() {
         return this.rootComponent;
     }
 
@@ -681,7 +681,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      * {@inheritDoc}
      */
     @Override
-    public void setRootComponent(final Component<?> rootComponent) {
+    public void rootComponent(final Component<?> rootComponent) {
         this.rootComponent = rootComponent;
     }
 

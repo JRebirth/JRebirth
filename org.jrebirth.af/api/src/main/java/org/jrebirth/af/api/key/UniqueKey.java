@@ -34,27 +34,27 @@ public interface UniqueKey<R> extends Serializable {
      *
      * @return the unique key
      */
-    String getKey();
+    String key();
 
     /**
      * Return the unique object if any or null.
      *
      * @return the unique object or null if none
      */
-    Object getValue();
+    Object value();
 
     /**
      * Return the class type of the component.
      *
      * @return Returns the classField.
      */
-    Class<R> getClassField();
+    Class<R> classField();
 
     /**
      * Return the list of optional data associated to the key.
      *
      * @return the optional data list
      */
-    List<Object> getOptionalData();
+    List<Object> optionalData();
 
 }

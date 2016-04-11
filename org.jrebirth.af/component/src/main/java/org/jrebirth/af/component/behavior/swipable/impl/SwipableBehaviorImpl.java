@@ -19,24 +19,24 @@ public class SwipableBehaviorImpl extends AbstractModelBehavior<Swipable> implem
     @Override
     public void initBehavior() {
 
-        getData().node().addEventHandler(SwipeEvent.ANY, this::onSwipe);
+        data().node().addEventHandler(SwipeEvent.ANY, this::onSwipe);
 
     }
 
     public void onSwipe(final SwipeEvent event) {
 
-        if (event.getTouchCount() == getData().touchCount()) {
+        if (event.getTouchCount() == data().touchCount()) {
             System.err.println("SWIPEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE TWICE");
 
-            final Model model = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(getData().modelKey());
+            final Model model = localFacade().getGlobalFacade().uiFacade().retrieve(data().modelKey());
 
             if (model != null) {
                 final EventType<SwipeEvent> et = event.getEventType();
                 if (model instanceof AbstractBaseModel) {
-                    if (et == getData().redo()) {
+                    if (et == data().redo()) {
                         // Show
                         ((AbstractBaseModel<?>) model).doShowView(null);
-                    } else if (et == getData().undo()) {
+                    } else if (et == data().undo()) {
                         // Hide
                         ((AbstractBaseModel<?>) model).doHideView(null);
                     }

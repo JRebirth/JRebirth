@@ -52,7 +52,7 @@ public final class MainModel extends DefaultModel<MainModel, MainView> {
      */
     @Override
     protected void showView() {
-        getView().getRootNode().setCenter(stackModel.getRootNode());
+        view().node().setCenter(stackModel.node());
     }
 
     /**

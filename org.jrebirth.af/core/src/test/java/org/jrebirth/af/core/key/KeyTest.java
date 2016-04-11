@@ -51,7 +51,7 @@ public class KeyTest {
     @Before
     public void setUp() throws Exception {
         // new TestApplication().start(new Stage());
-        this.commandFacade = globalFacade.getCommandFacade();
+        this.commandFacade = globalFacade.commandFacade();
     }
 
     @Test

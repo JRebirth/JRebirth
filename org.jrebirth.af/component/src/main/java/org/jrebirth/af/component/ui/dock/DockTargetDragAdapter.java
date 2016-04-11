@@ -59,7 +59,7 @@ public class DockTargetDragAdapter extends AbstractDefaultAdapter<DockController
 
             // getController().getView().drawMarker(dragEvent.getX(), dragEvent.getY());
 
-            getController().getView().getRootNode().setBorder(new Border(new BorderStroke(Color.AQUAMARINE, BorderStrokeStyle.SOLID, new CornerRadii(1.0), BorderStroke.THICK)));
+            getController().view().node().setBorder(new Border(new BorderStroke(Color.AQUAMARINE, BorderStrokeStyle.SOLID, new CornerRadii(1.0), BorderStroke.THICK)));
         }
 
         dragEvent.consume();
@@ -75,7 +75,7 @@ public class DockTargetDragAdapter extends AbstractDefaultAdapter<DockController
         dragEvent.getDragboard().hasContent(CustomDataFormat.DOCKABLE)) {
 
             // getController().getView().removeMarker();
-            getController().getView().getRootNode().setBorder(null);
+            getController().view().node().setBorder(null);
         }
 
         dragEvent.consume();
@@ -116,9 +116,9 @@ public class DockTargetDragAdapter extends AbstractDefaultAdapter<DockController
             final Dockable serializedTab = (Dockable) db.getContent(CustomDataFormat.DOCKABLE);
             // final Button b = getController().getView().getButtonByTab(serializedTab);
 
-            final TabModel model = getController().getModel().getModel(TabModel.class, TabConfig.create().tabKey("ddddd").orientation(TabOrientation.top));
+            final TabModel model = getController().model().getModel(TabModel.class, TabConfig.create().tabKey("ddddd").orientation(TabOrientation.top));
 
-            getController().getModel().addContainer(model, null);
+            getController().model().addContainer(model, null);
 
             success = true;
         }

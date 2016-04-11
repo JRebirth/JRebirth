@@ -29,31 +29,31 @@ public interface WaveData<T> extends Comparable<WaveData<?>> {
     /**
      * @return Returns the waveItem.
      */
-    WaveItem<T> getKey();
+    WaveItem<T> key();
 
     /**
      * @param waveItem the waveItem to set
      */
-    void setKey(final WaveItem<T> waveItem);
+    void key(final WaveItem<T> waveItem);
 
     /**
      * @return Returns the value.
      */
-    T getValue();
+    T value();
 
     /**
      * @param value the value to set
      */
-    void setValue(final T value);
+    void value(final T value);
 
     /**
      * @return Returns the order.
      */
-    int getOrder();
+    int order();
 
     /**
      * @param order The order to set.
      */
-    void setOrder(final int order);
+    void order(final int order);
 
 }

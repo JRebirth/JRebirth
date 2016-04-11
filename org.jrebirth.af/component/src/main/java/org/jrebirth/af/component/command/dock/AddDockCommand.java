@@ -24,20 +24,20 @@ public class AddDockCommand extends DefaultBeanCommand<DockWaveBean> {
         // This command is running into JTP
         // So launch another wave that will processed by Model into JAT
 
-        if (getWaveBean(wave).model() != null) {
-            for (final Model model : getWaveBean(wave).model()) {
+        if (waveBean(wave).model() != null) {
+            for (final Model model : waveBean(wave).model()) {
                 sendWaveToTabModel(wave, model);
             }
         }
 
-        if (getWaveBean(wave).modelKey() != null) {
-            for (final UniqueKey<? extends Model> modelKey : getWaveBean(wave).modelKey()) {
+        if (waveBean(wave).modelKey() != null) {
+            for (final UniqueKey<? extends Model> modelKey : waveBean(wave).modelKey()) {
                 sendWaveToTabModel(wave, getModel(modelKey));
             }
         }
 
-        if (getWaveBean(wave).tab() != null) {
-            for (final TabConfig tab : getWaveBean(wave).tab()) {
+        if (waveBean(wave).tab() != null) {
+            for (final TabConfig tab : waveBean(wave).tab()) {
                 // sendWaveToTabModel(wave, getModel(tab.modelKey()));
             }
         }
@@ -48,7 +48,7 @@ public class AddDockCommand extends DefaultBeanCommand<DockWaveBean> {
         sendWave(Builders.wave()
                          .waveType(TabModel.ADD)
                          .componentClass(TabModel.class)
-                         .addDatas(Builders.waveData(DockModel.DOCK_KEY, getWaveBean(wave).dockHolderKey())
+                         .addDatas(Builders.waveData(DockModel.DOCK_KEY, waveBean(wave).dockHolderKey())
         // ,
         // Builders.waveData(DockModel.MODEL, model )
         ));

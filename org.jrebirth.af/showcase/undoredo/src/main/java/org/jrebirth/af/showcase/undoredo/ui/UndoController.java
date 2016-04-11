@@ -58,12 +58,12 @@ public final class UndoController extends DefaultController<UndoModel, UndoView>
     protected void initEventAdapters() throws CoreException {
 
         // Manage Ui Command Button
-        linkCommand(getView().getUndoButton(), MouseEvent.MOUSE_CLICKED, UndoCommand.class, UndoModel.stackName);
-        linkCommand(getView().getRedoButton(), MouseEvent.MOUSE_CLICKED, RedoCommand.class, UndoModel.stackName);
+        linkCommand(view().getUndoButton(), MouseEvent.MOUSE_CLICKED, UndoCommand.class, UndoModel.stackName);
+        linkCommand(view().getRedoButton(), MouseEvent.MOUSE_CLICKED, RedoCommand.class, UndoModel.stackName);
 
-        linkCommand(getView().getAddCircleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, Builders.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Circle), UndoModel.stackName);
-        linkCommand(getView().getAddSquareButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, Builders.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Square), UndoModel.stackName);
-        linkCommand(getView().getAddRectangleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, Builders.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Rectangle), UndoModel.stackName);
+        linkCommand(view().getAddCircleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, Builders.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Circle), UndoModel.stackName);
+        linkCommand(view().getAddSquareButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, Builders.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Square), UndoModel.stackName);
+        linkCommand(view().getAddRectangleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, Builders.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Rectangle), UndoModel.stackName);
 
     }
 

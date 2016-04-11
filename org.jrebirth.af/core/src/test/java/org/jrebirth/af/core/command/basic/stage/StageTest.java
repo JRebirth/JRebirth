@@ -66,7 +66,7 @@ public class StageTest {
     public void setUp() throws Exception {
 
         // new TestApplication().start(new Stage());
-        this.commandFacade = globalFacade.getCommandFacade();
+        this.commandFacade = globalFacade.commandFacade();
     }
 
     @Test
@@ -112,7 +112,7 @@ public class StageTest {
 
             @Override
             public void waveConsumed(final Wave wave) {
-                final Stage stage = StageTest.globalFacade.getServiceFacade().retrieve(StageService.class).getStage(stageKey);
+                final Stage stage = StageTest.globalFacade.serviceFacade().retrieve(StageService.class).getStage(stageKey);
                 Assert.assertNotNull(stage);
                 System.out.println("dddd");
             }
@@ -134,7 +134,7 @@ public class StageTest {
         JRebirth.runIntoJIT(new AbstractJrbRunnable("Send Wave " + wave.toString()) {
             @Override
             public void runInto() throws JRebirthThreadException {
-                StageTest.globalFacade.getNotifier().sendWave(wave);
+                StageTest.globalFacade.notifier().sendWave(wave);
             }
         });
 

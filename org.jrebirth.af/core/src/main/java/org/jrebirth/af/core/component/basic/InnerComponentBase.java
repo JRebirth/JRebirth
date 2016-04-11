@@ -81,7 +81,7 @@ public class InnerComponentBase<C extends Component<?>> implements InnerComponen
      * {@inheritDoc}
      */
     @Override
-    public UniqueKey<C> getKey() {
+    public UniqueKey<C> key() {
         return this.modelKey;
     }
 

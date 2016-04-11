@@ -93,34 +93,34 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
 
         this.stackPane = new StackPane();
 
-        getRootNode().setCenter(this.stackPane);
+        node().setCenter(this.stackPane);
 
     }
 
     private void initButtonBar() {
 
-        switch (getModel().getObject().orientation()) {
+        switch (model().object().orientation()) {
             case top:
-                getRootNode().setTop(buildButtonBar(true));
+                node().setTop(buildButtonBar(true));
                 break;
             case bottom:
-                getRootNode().setBottom(buildButtonBar(true));
+                node().setBottom(buildButtonBar(true));
                 break;
             case left:
-                getRootNode().setLeft(buildButtonBar(false));
+                node().setLeft(buildButtonBar(false));
                 break;
             case right:
-                getRootNode().setRight(buildButtonBar(false));
+                node().setRight(buildButtonBar(false));
                 break;
         }
     }
 
     void reloadButtonBar() {
 
-        getRootNode().setTop(null);
-        getRootNode().setBottom(null);
-        getRootNode().setLeft(null);
-        getRootNode().setRight(null);
+        node().setTop(null);
+        node().setBottom(null);
+        node().setLeft(null);
+        node().setRight(null);
 
         initButtonBar();
     }
@@ -157,14 +157,14 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
      */
     public void addTab(int idx, final Dockable tab) {
 
-        final Button b = new Button(tab.name(), new ImageView(getModel().getBehavior(DockableBehavior.class).modelIcon()));
+        final Button b = new Button(tab.name(), new ImageView(model().getBehavior(DockableBehavior.class).modelIcon()));
         b.setUserData(tab);
 
         this.buttonByTab.put(tab.name(), b);
 
         selectTab(tab);
 
-        getController().initTabEventHandler(b);
+        controller().initTabEventHandler(b);
 
         if (idx < 0) {
             idx = this.box.getChildren().size();
@@ -204,7 +204,7 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
         // Remove all previously displayed children
         this.stackPane.getChildren().clear();
         //
-        this.stackPane.getChildren().add(getModel().getModel(t.modelKey()).getRootNode());
+        this.stackPane.getChildren().add(model().getModel(t.modelKey()).node());
     }
 
     /**
@@ -266,7 +266,7 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
             }
 
             if (draggedIdx != idx) {
-                this.marker = getModel().getObject().orientation() == TabOrientation.bottom || getModel().getObject().orientation() == TabOrientation.top ? new Rectangle(10, getBox().getHeight())
+                this.marker = model().object().orientation() == TabOrientation.bottom || model().object().orientation() == TabOrientation.top ? new Rectangle(10, getBox().getHeight())
                         : new Rectangle(getBox().getWidth(), 4);
 
                 this.marker.setFill(Color.LIGHTGREEN);

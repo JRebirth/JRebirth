@@ -42,42 +42,42 @@ public interface JRebirthApplication<P extends Pane> {
      *
      * @return Returns the stage.
      */
-    Stage getStage();
+    Stage stage();
 
     /**
      * Return the scene of the main stage of this application.
      *
      * @return Returns the scene.
      */
-    Scene getScene();
+    Scene scene();
 
     /**
      * Return the root node of the main scene of this application.
      *
      * @return Returns the rootNode.
      */
-    P getRootNode();
+    P rootNode();
 
     /**
      * This method must be implemented to declare which JRebirth UI Model will be displayed first.
      *
      * @return the class of the first UI Model to launch it must extend the {@link Model}
      */
-    Class<? extends Model> getFirstModelClass();
+    Class<? extends Model> firstModelClass();
 
     /**
      * Return the Pre-Boot Waves called after displaying the first view.
      *
      * @return the list of wave to be run before the boot
      */
-    List<Wave> getPreBootWaveList();
+    List<Wave> preBootWaveList();
 
     /**
      * Return the Post-Boot Waves called after displaying the first view.
      *
      * @return the list of wave to be run after the boot
      */
-    List<Wave> getPostBootWaveList();
+    List<Wave> postBootWaveList();
 
     /**
      * Preload JRebirth wrapped fonts to allow them to be used directly by CSS.

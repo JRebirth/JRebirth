@@ -98,7 +98,7 @@ public final class FXMLUtils implements FXMLMessages {
         final Callback<Class<?>, Object> fxmlControllerFactory = (Callback<Class<?>, Object>) ParameterUtility.buildCustomizableClass(ExtensionParameters.FXML_CONTROLLER_FACTORY,
                                                                                                                                       DefaultFXMLControllerFactory.class, FXMLControllerFactory.class);
         if (fxmlControllerFactory instanceof FXMLControllerFactory) {
-            ((FXMLControllerFactory) fxmlControllerFactory).setRelatedModel(model);
+            ((FXMLControllerFactory) fxmlControllerFactory).relatedModel(model);
         }
 
         // Use Custom controller factory to attach the root model to the controller
@@ -137,7 +137,7 @@ public final class FXMLUtils implements FXMLMessages {
                 throw new CoreRuntimeException(BAD_FXML_CONTROLLER_ANCESTOR.getText(fxmlLoader.getController().getClass().getCanonicalName()));
             }
             // Link the View component with the fxml controller
-            fxmlController.setModel(model);
+            fxmlController.model(model);
         }
 
         return new FXMLComponentBase(node, fxmlController);

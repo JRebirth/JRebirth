@@ -25,7 +25,7 @@ public class DialogDaemonCommand extends AbstractSingleCommand<DialogWB> {
 
     @Override
     protected void perform(Wave wave) throws CommandException {
-        callCommand(DialogCommand.class, getWaveBean(wave));
+        callCommand(DialogCommand.class, waveBean(wave));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DialogDaemonCommand extends AbstractSingleCommand<DialogWB> {
     protected void processWave(final Wave wave) {
         if (OPEN_DIALOG.equals(wave.waveType())) {
 
-            callCommand(DialogCommand.class, getWaveBean(wave));
+            callCommand(DialogCommand.class, waveBean(wave));
 
         }
     }

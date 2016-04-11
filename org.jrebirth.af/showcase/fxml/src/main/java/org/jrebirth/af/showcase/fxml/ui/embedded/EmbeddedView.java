@@ -31,13 +31,13 @@ public class EmbeddedView extends DefaultView<EmbeddedModel, AnchorPane, Embedde
     protected void initView() {
         super.initView();
 
-        getRootNode().setMaxHeight(Region.USE_PREF_SIZE);
-        getRootNode().setMaxWidth(Region.USE_PREF_SIZE);
-        getRootNode().setMinHeight(Region.USE_PREF_SIZE);
-        getRootNode().setMinWidth(Region.USE_PREF_SIZE);
+        node().setMaxHeight(Region.USE_PREF_SIZE);
+        node().setMaxWidth(Region.USE_PREF_SIZE);
+        node().setMinHeight(Region.USE_PREF_SIZE);
+        node().setMinWidth(Region.USE_PREF_SIZE);
 
-        getRootNode().setPrefHeight(400);
-        getRootNode().setPrefWidth(600);
+        node().setPrefHeight(400);
+        node().setPrefWidth(600);
 
         this.box = new VBox();
 
@@ -48,13 +48,13 @@ public class EmbeddedView extends DefaultView<EmbeddedModel, AnchorPane, Embedde
         this.borderPane = new BorderPane();
         this.borderPane.setCenter(scrollPane);
 
-        getRootNode().getChildren().add(this.borderPane);
+        node().getChildren().add(this.borderPane);
 
-        addNode(EmbeddedView.ROOT_EMBEDDED_FXML.get().getNode());
+        addNode(EmbeddedView.ROOT_EMBEDDED_FXML.get().node());
 
         // Load 2 more instance
-        addNode(EmbeddedView.ROOT_EMBEDDED_FXML.getNew().getNode());
-        addNode(EmbeddedView.ROOT_EMBEDDED_FXML.getNew().getNode());
+        addNode(EmbeddedView.ROOT_EMBEDDED_FXML.getNew().node());
+        addNode(EmbeddedView.ROOT_EMBEDDED_FXML.getNew().node());
 
     }
 

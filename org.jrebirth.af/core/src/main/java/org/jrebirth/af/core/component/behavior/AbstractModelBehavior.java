@@ -35,7 +35,7 @@ public abstract class AbstractModelBehavior<D extends BehaviorData> extends Abst
      * @return the root node
      */
     public Node getRootNode() {
-        return getComponent().getRootNode();
+        return component().node();
     }
 
 }

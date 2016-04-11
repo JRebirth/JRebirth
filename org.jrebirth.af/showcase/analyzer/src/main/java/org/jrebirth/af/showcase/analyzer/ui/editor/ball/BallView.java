@@ -85,8 +85,8 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
     @Override
     protected void initView() {
 
-        getRootNode().setScaleX(0);
-        getRootNode().setScaleY(0);
+        node().setScaleX(0);
+        node().setScaleY(0);
 
         this.circle = CircleBuilder.create()
                                    .radius(22)
@@ -100,13 +100,13 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
                                  // .effect(arg0)
                                  .build();
 
-        getRootNode().getChildren().addAll(this.circle, this.label);
+        node().getChildren().addAll(this.circle, this.label);
 
         this.showTransition = ParallelTransitionBuilder.create()
                                                        .children(
                                                                  ScaleTransitionBuilder.create()
                                                                                        .duration(Duration.millis(400))
-                                                                                       .node(getRootNode())
+                                                                                       .node(node())
                                                                                        .fromX(0.0)
                                                                                        .fromY(0.0)
                                                                                        .toX(1f)
@@ -114,13 +114,12 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
                                                                                        .build(),
                                                                  TranslateTransitionBuilder.create()
                                                                                            .duration(Duration.millis(500))
-                                                                                           .node(getRootNode())
+                                                                                           .node(node())
                                                                                            .fromX(0.0)
                                                                                            .fromY(0.0)
                                                                                            .toX(getX())
                                                                                            .toY(getY())
-                                                                                           .build()
-                                                       )
+                                                                                           .build())
                                                        .cycleCount(1)
                                                        .autoReverse(false)
                                                        .build();
@@ -129,14 +128,14 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
 
             @Override
             public void handle(final ActionEvent arg0) {
-                getModel().sendWave(EditorWaves.RE_EVENT_PROCESSED/* , Builders.waveData(waveItem, value) */);
+                model().sendWave(EditorWaves.RE_EVENT_PROCESSED/* , Builders.waveData(waveItem, value) */);
 
             }
         });
 
         this.scaleTransition = ScaleTransitionBuilder.create()
                                                      .duration(Duration.millis(600))
-                                                     .node(getRootNode())
+                                                     .node(node())
                                                      .fromX(1.1)
                                                      .fromY(1.1)
                                                      .toX(0.7)
@@ -153,14 +152,14 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
                                                 .offsetY(1)
                                                 .build());
 
-        getRootNode().setEffect(DropShadowBuilder.create()
-                                                 // .input()
-                                                 .color(Color.BLACK)
-                                                 .blurType(BlurType.GAUSSIAN)
-                                                 .radius(4)
-                                                 .offsetX(3)
-                                                 .offsetY(3)
-                                                 .build());
+        node().setEffect(DropShadowBuilder.create()
+                                          // .input()
+                                          .color(Color.BLACK)
+                                          .blurType(BlurType.GAUSSIAN)
+                                          .radius(4)
+                                          .offsetX(3)
+                                          .offsetY(3)
+                                          .build());
 
     }
 
@@ -231,7 +230,7 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
     public void resetScale() {
         ScaleTransitionBuilder.create()
                               .duration(Duration.millis(400))
-                              .node(getRootNode())
+                              .node(node())
                               .toX(1f)
                               .toY(1f)
                               .cycleCount(1)
@@ -299,7 +298,7 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
      */
     private double getX() {
         double res;
-        switch (getModel().getEventModel().getEventType()) {
+        switch (model().getEventModel().eventType()) {
             case CREATE_APPLICATION:
             case CREATE_COMMAND:
             case CREATE_COMMAND_FACADE:
@@ -331,7 +330,7 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
      */
     private double getY() {
         double res;
-        switch (getModel().getEventModel().getEventType()) {
+        switch (model().getEventModel().eventType()) {
             case CREATE_COMMAND_FACADE:
             case CREATE_COMMAND:
                 res = -200 * Math.sin(Math.PI / 2);

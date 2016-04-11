@@ -44,12 +44,12 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
     public void dragOver(final DragEvent dragEvent) {
         // System.out.println("drag OVER");
 
-        if (dragEvent.getGestureSource() != getController().getView().getBox()
+        if (dragEvent.getGestureSource() != getController().view().getBox()
                 && dragEvent.getDragboard().hasContent(CustomDataFormat.DOCKABLE)) {
 
             dragEvent.acceptTransferModes(TransferMode.MOVE);
 
-            getController().getView().drawMarker((Button) dragEvent.getGestureSource(), dragEvent.getX(), dragEvent.getY());
+            getController().view().drawMarker((Button) dragEvent.getGestureSource(), dragEvent.getX(), dragEvent.getY());
 
             dragEvent.consume();
         }
@@ -71,7 +71,7 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
     @Override
     public void dragEntered(final DragEvent dragEvent) {
         // System.out.println("drag ENTERED");
-        if (dragEvent.getGestureSource() != getController().getView().getBox()
+        if (dragEvent.getGestureSource() != getController().view().getBox()
                 && dragEvent.getDragboard().hasContent(CustomDataFormat.DOCKABLE)) {
 
             // getController().getView().drawMarker(dragEvent.getX(), dragEvent.getY());
@@ -88,10 +88,10 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
     @Override
     public void dragExited(final DragEvent dragEvent) {
         // System.out.println("drag EXITED");
-        if (dragEvent.getGestureSource() != getController().getView().getBox() &&
+        if (dragEvent.getGestureSource() != getController().view().getBox() &&
                 dragEvent.getDragboard().hasContent(CustomDataFormat.DOCKABLE)) {
 
-            getController().getView().removeMarker();
+            getController().view().removeMarker();
             // getController().getView().getBox().setBorder(null);
         }
 
@@ -131,11 +131,11 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
         if (db.hasContent(CustomDataFormat.DOCKABLE)) {
 
             final Dockable serializedTab = (Dockable) db.getContent(CustomDataFormat.DOCKABLE);
-            final Button b = getController().getView().getButtonByTab(serializedTab);
+            final Button b = getController().view().getButtonByTab(serializedTab);
 
-            final Pane targetBox = getController().getView().getBox();
+            final Pane targetBox = getController().view().getBox();
 
-            final int idx = getController().getView().removeMarker();
+            final int idx = getController().view().removeMarker();
 
             System.out.println("Add tab " + serializedTab.name() + " at " + idx);
 
@@ -150,9 +150,9 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
                 // targetBox.getChildren().add(idx, b);
                 // getController().getView().removeMarker();
                 if (currentIdx != idx) {
-                    getController().getModel().getObject().tabs().remove(realTab);
+                    getController().model().object().tabs().remove(realTab);
 
-                    getController().getModel().getObject().tabs().add(idx, realTab);
+                    getController().model().object().tabs().add(idx, realTab);
 
                     b.fire();
                 }
@@ -168,7 +168,7 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
 
                 st.play();
 
-                getController().getModel().insertTab(idx, serializedTab, null);
+                getController().model().insertTab(idx, serializedTab, null);
             }
             success = true;
         }

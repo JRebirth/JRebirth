@@ -163,7 +163,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
             }
 
             for (final UniqueKey<? extends Command> commandKey : this.subCommandList) {
-                getLocalFacade().retrieve(commandKey);
+                localFacade().retrieve(commandKey);
             }
 
         }
@@ -229,7 +229,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
                     if (this.subCommandList.size() > this.commandRunIndex) {
 
-                        final Wave subCommandWave = Builders.callCommand(this.subCommandList.get(this.commandRunIndex).getClassField())
+                        final Wave subCommandWave = Builders.callCommand(this.subCommandList.get(this.commandRunIndex).classField())
                                                             // Recopy all WaveBeans
                                                             .waveBeanList(wave.waveBeanList())
                                                             // Recopy the WaveData from the previous wave
@@ -250,7 +250,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                     // Launch all sub command in parallel
                     for (final UniqueKey<? extends Command> commandKey : this.subCommandList) {
 
-                        final Wave commandWave = getLocalFacade().retrieve(commandKey).run();
+                        final Wave commandWave = localFacade().retrieve(commandKey).run();
 
                         // register to Wave status of all command triggered
                         commandWave.addWaveListener(this);

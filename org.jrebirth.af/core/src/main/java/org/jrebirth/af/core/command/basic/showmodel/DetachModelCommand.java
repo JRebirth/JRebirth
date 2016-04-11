@@ -42,9 +42,9 @@ public class DetachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBea
     @Override
     protected void perform(final Wave wave) {
 
-        Model hideModel = getWaveBean(wave).hideModel();
-        if (hideModel == null && getWaveBean(wave).hideModelKey() != null) {
-            hideModel = getLocalFacade().getGlobalFacade().getUiFacade().retrieve(getWaveBean(wave).hideModelKey());
+        Model hideModel = waveBean(wave).hideModel();
+        if (hideModel == null && waveBean(wave).hideModelKey() != null) {
+            hideModel = localFacade().getGlobalFacade().uiFacade().retrieve(waveBean(wave).hideModelKey());
         }
 
         Node hideNode = null;
@@ -55,15 +55,15 @@ public class DetachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBea
 
             hideModel.doHideView(wave);
 
-            hideNode = hideModel.getRootNode();
+            hideNode = hideModel.node();
 
             if (hideNode == null) {
                 LOGGER.warn("Impossible to dettach model {} because the node is null", hideModel.getClass().getSimpleName());
             } else {
-                if (getWaveBean(wave).uniquePlaceHolder() != null) {
-                    getWaveBean(wave).uniquePlaceHolder().set(null);
-                } else if (getWaveBean(wave).childrenPlaceHolder() != null) {
-                    getWaveBean(wave).childrenPlaceHolder().remove(hideNode);
+                if (waveBean(wave).uniquePlaceHolder() != null) {
+                    waveBean(wave).uniquePlaceHolder().set(null);
+                } else if (waveBean(wave).childrenPlaceHolder() != null) {
+                    waveBean(wave).childrenPlaceHolder().remove(hideNode);
                 } else {
                     LOGGER.warn("Impossible to detach model {}, no place holder found", hideModel.getClass().getSimpleName());
                 }
@@ -80,7 +80,7 @@ public class DetachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBea
      * @return the casted wave bean
      */
     @Override
-    public DisplayModelWaveBean getWaveBean(final Wave wave) {
+    public DisplayModelWaveBean waveBean(final Wave wave) {
         return wave.waveBean(DisplayModelWaveBean.class);
     }
 

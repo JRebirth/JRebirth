@@ -28,7 +28,7 @@ import org.jrebirth.af.api.wave.annotation.OnWave;
 
 /**
  * The annotation <strong>Preload</strong> is used to force loading of the current class.
- * 
+ *
  * In example it will create WaveType and register them to be managed using {@link OnWave} annotation.
  *
  * @author Sébastien Bordes

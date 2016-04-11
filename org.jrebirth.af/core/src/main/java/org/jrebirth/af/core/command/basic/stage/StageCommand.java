@@ -42,9 +42,9 @@ public class StageCommand extends DefaultUIBeanCommand<StageWaveBean> {
 
         final StageService ss = getService(StageService.class);
 
-        LOGGER.info("Trigger stage action " + getWaveBean(wave).action());
+        LOGGER.info("Trigger stage action " + waveBean(wave).action());
 
-        switch (getWaveBean(wave).action()) {
+        switch (waveBean(wave).action()) {
             case show:
                 ss.doOpenStage(wave);
                 break;
@@ -68,7 +68,7 @@ public class StageCommand extends DefaultUIBeanCommand<StageWaveBean> {
      * @return the casted wave bean
      */
     @Override
-    public StageWaveBean getWaveBean(final Wave wave) {
+    public StageWaveBean waveBean(final Wave wave) {
         return wave.waveBean(StageWaveBean.class);
     }
 
