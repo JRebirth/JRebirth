@@ -27,6 +27,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ProgressBar;
 
+import org.jrebirth.af.api.annotation.Preload;
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
@@ -41,6 +42,7 @@ import org.jrebirth.af.core.service.ServiceTaskBase;
  *
  * @author Sébastien Bordes
  */
+@Preload
 public interface JRebirthWaves {
 
     /** The waveItem that hold the attached node. */

@@ -9,6 +9,7 @@ import static org.junit.Assert.assertSame;
 import org.jrebirth.af.core.test.AbstractTest;
 import org.jrebirth.af.core.ui.AbstractModel;
 import org.jrebirth.af.core.ui.object.AbstractObjectModel;
+import org.jrebirth.af.core.wave.JRebirthWaves;
 
 import org.junit.After;
 import org.junit.Before;
@@ -27,7 +28,8 @@ public abstract class AbstractModelTest extends AbstractTest {
      */
     @Before
     public void setUp() throws Exception {
-
+        // equivalent to @Preload annotation FIXME do it properly
+        Class.forName(JRebirthWaves.class.getName());
     }
 
     /**

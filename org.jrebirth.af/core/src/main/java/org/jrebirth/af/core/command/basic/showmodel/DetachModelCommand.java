@@ -50,7 +50,7 @@ public class DetachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBea
         Node hideNode = null;
 
         if (hideModel == null) {
-            LOGGER.warn("Impossible to dettach a model because hideModel is null");
+            LOGGER.warn("Impossible to detach a model because hideModel is null");
         } else {
 
             hideModel.doHideView(wave);

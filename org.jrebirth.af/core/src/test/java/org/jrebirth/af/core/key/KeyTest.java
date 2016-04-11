@@ -113,9 +113,9 @@ public class KeyTest {
 
         final List<Command> strongList = new ArrayList<>();
 
-        for (int i = 0; i < 100_000; i++) {
+        for (int i = 0; i < 10_000; i++) {
             strongList.add(this.commandFacade.retrieve(SwitchFullScreenCommand.class, new Integer(i)));
-            if (i % 10_000 == 0) {
+            if (i % 1_000 == 0) {
                 System.out.println(i + " added");
             }
         }
@@ -126,7 +126,7 @@ public class KeyTest {
 
         checkComponentCount(UpdateCursorCommand.class, 3);
 
-        checkComponentCount(SwitchFullScreenCommand.class, 100_000);
+        checkComponentCount(SwitchFullScreenCommand.class, 10_000);
 
         // retain the strong list even method check to avoid compiler optimization that will release item too early
         System.out.println(strongList.size() + " items strongly retained");
