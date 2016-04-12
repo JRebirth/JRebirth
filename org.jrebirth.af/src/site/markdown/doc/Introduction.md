@@ -68,6 +68,7 @@ Moreover you will have the capability to customize your layer to fit your need b
 ## JRebirth Key features
 
 Main features of JRebirth Application Framework are:
+
 1. Simplify Thread Management
 2. Avoid memory leak
 3. Maintain a good SoC 

@@ -8,12 +8,11 @@
 <div id="catcherTitle">Application Starter</div>
 <div id="catcherContent">How to create your first start class.</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+<!-- MACRO{toc|section=0|fromDepth=0|toDepth=4|class=toc} -->
 
 
 # Application
 
-<!-- MACRO{toc|section=0|fromDepth=0|toDepth=4|class=toc} -->
 
 ## Overview
 JRebirth Application Framework offers a custom class that extends the

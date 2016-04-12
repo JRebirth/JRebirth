@@ -152,7 +152,7 @@ public class ComponentProcessor extends AbstractProcessor {
             final Map<String, String> opt = (Map<String, String>) ff.get(options);
 
             final String outputClasses = opt.get("-d");
-            final String baseDir = outputClasses.substring(0, outputClasses.indexOf("target\\classes"));
+            final String baseDir = outputClasses.substring(0, outputClasses.indexOf("target"));
             final MavenXpp3Reader pomReader = new MavenXpp3Reader();
             final Model model = pomReader.read(new FileReader(new File(baseDir + "pom.xml")));
 
