@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.showcase.analyzer.ui.workbench;
 
-import org.jrebirth.af.api.annotation.LinkInnerComponent;
+import org.jrebirth.af.api.annotation.Link;
 import org.jrebirth.af.api.component.basic.InnerComponent;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.component.basic.InnerComponentEnum;
@@ -33,14 +33,14 @@ import org.jrebirth.af.showcase.analyzer.ui.properties.PropertiesModel;
  */
 public final class WorkbenchModel extends DefaultModel<WorkbenchModel, WorkbenchView> {
 
-    @LinkInnerComponent
-    static InnerComponent<ControlsModel> CONTROLS;// = InnerComponent.create(ControlsModel.class);
+    @Link
+    static InnerComponent<ControlsModel> CONTROLS;
 
-    @LinkInnerComponent
-    static InnerComponent<PropertiesModel> PROPERTIES;// = InnerComponent.create(PropertiesModel.class);
+    @Link
+    static InnerComponent<PropertiesModel> PROPERTIES;
 
-    @LinkInnerComponent
-    static InnerComponent<EditorModel> EDITOR;// = InnerComponent.create(EditorModel.class);
+    @Link
+    static InnerComponent<EditorModel> EDITOR;
 
     // @formatter:off
     enum Components implements InnerComponentEnum {

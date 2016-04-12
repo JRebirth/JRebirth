@@ -28,7 +28,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
-import org.jrebirth.af.api.annotation.LinkComponent;
+import org.jrebirth.af.api.annotation.Link;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.key.Key;
@@ -65,7 +65,7 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
     private SlideModel<SlideStep> selectedSlideModel;
 
     /** Store a strong reference to the service to avoid reloading. */
-    @LinkComponent
+    @Link
     private PresentationService presentationService;
 
     private final AtomicBoolean menuShown = new AtomicBoolean(false);

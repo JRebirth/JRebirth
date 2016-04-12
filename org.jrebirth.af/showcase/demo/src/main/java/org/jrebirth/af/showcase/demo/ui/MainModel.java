@@ -20,7 +20,7 @@ package org.jrebirth.af.showcase.demo.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jrebirth.af.api.annotation.LinkComponent;
+import org.jrebirth.af.api.annotation.Link;
 import org.jrebirth.af.api.ui.ModuleModel;
 import org.jrebirth.af.component.ui.stack.StackModel;
 import org.jrebirth.af.core.ui.DefaultModel;
@@ -34,7 +34,7 @@ public final class MainModel extends DefaultModel<MainModel, MainView> {
 
     private final List<ModuleModel> modules = new ArrayList<>();
 
-    @LinkComponent("DemoStack")
+    @Link("DemoStack")
     private StackModel stackModel;
 
     /**

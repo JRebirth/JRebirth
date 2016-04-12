@@ -20,7 +20,7 @@ package org.jrebirth.af.presentation.ui.slidemenu;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jrebirth.af.api.annotation.LinkComponent;
+import org.jrebirth.af.api.annotation.Link;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.ui.object.DefaultObjectModel;
 import org.jrebirth.af.presentation.model.Slide;
@@ -40,7 +40,7 @@ public final class SlideMenuModel extends DefaultObjectModel<SlideMenuModel, Sli
     private static final Logger LOGGER = LoggerFactory.getLogger(SlideMenuModel.class);
 
     /** Store a strong reference to the service to avoid reloading. */
-    @LinkComponent
+    @Link
     private PresentationService presentationService;
 
     private final List<Slide> slides = new ArrayList<>();

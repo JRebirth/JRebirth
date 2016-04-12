@@ -24,12 +24,12 @@ import java.lang.reflect.ParameterizedType;
 
 import org.jrebirth.af.api.annotation.AfterInit;
 import org.jrebirth.af.api.annotation.BeforeInit;
-import org.jrebirth.af.api.annotation.LinkComponent;
-import org.jrebirth.af.api.annotation.LinkInnerComponent;
+import org.jrebirth.af.api.annotation.Link;
 import org.jrebirth.af.api.annotation.OnRelease;
 import org.jrebirth.af.api.annotation.SkipAnnotation;
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.component.basic.Component;
+import org.jrebirth.af.api.component.basic.InnerComponent;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.facade.FacadeReady;
@@ -78,19 +78,50 @@ public final class ComponentEnhancer implements LinkMessages {
     }
 
     /**
+     * Inject components.
+     *
+     * @param component the parent component
+     */
+    public static void injectComponent(final Component<?> component) {
+        injectComponent(component, false);
+    }
+
+    /**
+     * Inject inner components.
+     *
+     * @param component the parent component
+     */
+    public static void injectInnerComponent(final Component<?> component) {
+        injectComponent(component, true);
+    }
+
+    /**
      * Inject component.
      *
      * @param component the component
+     * @param inner only manage innercomponent otherwise mange component
      */
-    public static void injectComponent(final Component<?> component) {
+    private static void injectComponent(final Component<?> component, boolean inner) {
 
-        // Retrieve all fields annotated with LinkComponent
-        for (final Field field : ClassUtility.getAnnotatedFields(component.getClass(), LinkComponent.class)) {
-            final String keyPart = field.getAnnotation(LinkComponent.class).value();
-            if (keyPart.isEmpty()) {
-                inject(component, field);
+        // Retrieve all fields annotated with Link
+        for (final Field field : ClassUtility.getAnnotatedFields(component.getClass(), Link.class)) {
+            final String keyPart = field.getAnnotation(Link.class).value();
+            if (inner) {
+                if (InnerComponent.class.isAssignableFrom(field.getType())) {
+                    if (keyPart.isEmpty()) {
+                        injectInnerComponent(component, field);
+                    } else {
+                        injectInnerComponent(component, field, keyPart);
+                    }
+                }
             } else {
-                inject(component, field, keyPart);
+                if (Component.class.isAssignableFrom(field.getType())) {
+                    if (keyPart.isEmpty()) {
+                        injectComponent(component, field);
+                    } else {
+                        injectComponent(component, field, keyPart);
+                    }
+                }
             }
         }
 
@@ -104,7 +135,7 @@ public final class ComponentEnhancer implements LinkMessages {
      * @param keyParts the key parts
      */
     @SuppressWarnings("unchecked")
-    private static void inject(final FacadeReady<?> component, final Field field, final Object... keyParts) {
+    private static void injectComponent(final FacadeReady<?> component, final Field field, final Object... keyParts) {
 
         try {
             if (Command.class.isAssignableFrom(field.getType())) {
@@ -124,31 +155,16 @@ public final class ComponentEnhancer implements LinkMessages {
      * Inject Inner component.
      *
      * @param component the component
-     */
-    public static void injectInnerComponent(final Component<?> component) {
-
-        // Retrieve all fields annotated with LinkInnerComponent
-        for (final Field field : ClassUtility.getAnnotatedFields(component.getClass(), LinkInnerComponent.class)) {
-            injectInner(component, field, field.getAnnotation(LinkInnerComponent.class).value());
-        }
-
-    }
-
-    /**
-     * Inject a component into the property of an other.
-     *
-     * @param component the component
      * @param field the field
      * @param keyParts the key parts
      */
     @SuppressWarnings("unchecked")
-    private static void injectInner(final FacadeReady<?> component, final Field field, final Object... keyParts) {
+    private static void injectInnerComponent(final Component<?> component, final Field field, final Object... keyParts) {
 
         final ParameterizedType innerComponentType = (ParameterizedType) field.getGenericType();
         final Class<?> componentType = (Class<?>) innerComponentType.getActualTypeArguments()[0];
 
         try {
-
             ClassUtility.setFieldValue(field, component, InnerComponentBase.create((Class<Command>) componentType, keyParts));
 
         } catch (IllegalArgumentException | CoreException e) {
@@ -156,6 +172,17 @@ public final class ComponentEnhancer implements LinkMessages {
         }
 
     }
+
+    // /**
+    // * Inject a component into the property of an other.
+    // *
+    // * @param component the component
+    // * @param field the field
+    // * @param keyParts the key parts
+    // */
+    // private static void injectInner(final FacadeReady<?> component, final Field field, final Object... keyParts) {
+    //
+    // }
 
     /**
      * Parse all methods to search annotated methods that are attached to a lifecycle phase.
