@@ -39,7 +39,7 @@ import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.service.basic.StyleSheetTrackerService;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 
 /**
  * The class <strong>JRebirthThread</strong>.
@@ -223,7 +223,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         }
 
         if (!chainedWaveList.isEmpty()) {
-            getFacade().notifier().sendWave(Builders.chainWaveCommand(chainedWaveList));
+            getFacade().notifier().sendWave(WBuilder.chainWaveCommand(chainedWaveList));
         }
     }
 
@@ -292,7 +292,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         // Generates the command wave directly to win a Wave cycle
         if (this.application != null && this.application.rootNode() != null && this.application.firstModelClass() != null) {
 
-            firstWave = Builders.callCommand(ShowModelCommand.class).waveBean(
+            firstWave = WBuilder.callCommand(ShowModelCommand.class).waveBean(
                                                                               DisplayModelWaveBean.create()
                                                                                                   .childrenPlaceHolder(this.application.rootNode().getChildren())
                                                                                                   .showModelKey(Key.create(this.application.firstModelClass())));

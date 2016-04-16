@@ -39,7 +39,7 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.annotation.OnWave;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.component.basic.AbstractComponent;
-import org.jrebirth.af.core.component.basic.InnerComponentBase;
+import org.jrebirth.af.core.component.basic.CBuilder;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.MultiMap;
@@ -101,7 +101,7 @@ public final class ComponentEnhancer implements LinkMessages {
      * @param component the component
      * @param inner only manage innercomponent otherwise mange component
      */
-    private static void injectComponent(final Component<?> component, boolean inner) {
+    private static void injectComponent(final Component<?> component, final boolean inner) {
 
         // Retrieve all fields annotated with Link
         for (final Field field : ClassUtility.getAnnotatedFields(component.getClass(), Link.class)) {
@@ -165,7 +165,7 @@ public final class ComponentEnhancer implements LinkMessages {
         final Class<?> componentType = (Class<?>) innerComponentType.getActualTypeArguments()[0];
 
         try {
-            ClassUtility.setFieldValue(field, component, InnerComponentBase.create((Class<Command>) componentType, keyParts));
+            ClassUtility.setFieldValue(field, component, CBuilder.innerComponent((Class<Command>) componentType, keyParts).host(component));
 
         } catch (IllegalArgumentException | CoreException e) {
             LOGGER.error(COMPONENT_INJECTION_FAILURE, component.getClass(), e);

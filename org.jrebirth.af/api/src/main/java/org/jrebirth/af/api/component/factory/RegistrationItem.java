@@ -1,97 +1,94 @@
+/**
+ * Get more info at : www.jrebirth.org .
+ * Copyright JRebirth.org © 2011-2016
+ * Contact : sebastien.bordes@jrebirth.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.jrebirth.af.api.component.factory;
 
 import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.component.basic.Component;
 
-public class RegistrationItem implements Comparable<RegistrationItem> {
-
-    private Class<? extends Component<?>> interfaceClass;
-
-    private Class<? extends Component<?>> implClass;
-
-    private PriorityLevel priority;
-
-    private int weight;
-
-    public static RegistrationItem create() {
-        return new RegistrationItem();
-    }
+/**
+ * The class <strong>RegistrationItem</strong> allow to store registration information.
+ *
+ * @author Sébastien Bordes
+ */
+public interface RegistrationItem extends Comparable<RegistrationItem> {
 
     /**
+     * Return the interface class implemented by the registered class.
+     *
      * @return Returns the interfaceClass.
      */
-    public Class<? extends Component<?>> interfaceClass() {
-        return this.interfaceClass;
-    }
+    Class<? extends Component<?>> interfaceClass();
 
     /**
+     * Set the interface class implemented by the registered class.
+     *
      * @param interfaceClass The interfaceClass to set.
+     *
+     * @return the current RegistrationItem
      */
-    public RegistrationItem interfaceClass(final Class<? extends Component<?>> interfaceClass) {
-        this.interfaceClass = interfaceClass;
-        return this;
-    }
+    RegistrationItem interfaceClass(final Class<? extends Component<?>> interfaceClass);
 
     /**
+     * Return the implementation class.
+     *
      * @return Returns the implClass.
      */
-    public Class<? extends Component<?>> implClass() {
-        return this.implClass;
-    }
+    Class<? extends Component<?>> implClass();
 
     /**
-     * @param implClass The implClass to set.
+     * Set the implementation class.
+     *
+     * @param implClass The implementation Class to set.
+     *
+     * @return the current RegistrationItem
      */
-    public RegistrationItem implClass(final Class<? extends Component<?>> implClass) {
-        this.implClass = implClass;
-        return this;
-    }
+    RegistrationItem implClass(final Class<? extends Component<?>> implClass);
 
     /**
+     * Return the registration priority level.
+     *
      * @return Returns the priority.
      */
-    public PriorityLevel priority() {
-        return this.priority;
-    }
+    PriorityLevel priority();
 
     /**
-     * @param priority The priority to set.
+     * Set the registration priority level.
+     *
+     * @param priority The priority level to set.
+     *
+     * @return the current RegistrationItem
      */
-    public RegistrationItem priority(final PriorityLevel priority) {
-        this.priority = priority;
-        return this;
-    }
+    RegistrationItem priority(final PriorityLevel priority);
 
     /**
+     * return the registration priority weight
+     *
      * @return Returns the weight.
      */
-    public int weight() {
-        return this.weight;
-    }
+    int weight();
 
     /**
+     * Set the registration priority weight.
+     *
      * @param weight The weight to set.
+     *
+     * @return the current RegistrationItem
      */
-    public RegistrationItem weight(final int weight) {
-        this.weight = weight;
-        return this;
-    }
-
-    @Override
-    public int compareTo(final RegistrationItem o) {
-        int priorityDiff = 0;
-        if (this.priority != null) {
-            if (o.priority != null) {
-                priorityDiff = this.priority.level(this.weight) - o.priority.level(o.weight);
-            } else {
-                priorityDiff = 1;
-            }
-        } else {
-            if (o.priority != null) {
-                priorityDiff = -1;
-            }
-        }
-        return priorityDiff == 0 ? this.implClass.getName().compareTo(o.implClass().getName()) : priorityDiff;
-    }
+    RegistrationItem weight(final int weight);
 
 }

@@ -28,8 +28,8 @@ public class WaveTypeTest {
 
     @Test
     public void testTheReturnItemOfReturnWaveType() {
-        final WaveType RE_FLUSH = Builders.waveType("RE_FLUSH");
-        final WaveType FLUSH = Builders.waveType("FLUSH").returnWaveType(RE_FLUSH);
+        final WaveType RE_FLUSH = WBuilder.waveType("RE_FLUSH");
+        final WaveType FLUSH = WBuilder.waveType("FLUSH").returnWaveType(RE_FLUSH);
 
         Assert.assertTrue(FLUSH.returnWaveType().items().isEmpty());
         Assert.assertNull(FLUSH.returnItem());
@@ -39,8 +39,8 @@ public class WaveTypeTest {
     public void testHandlerMethodName() {
         final WaveItem RESULT = new WaveItemBase<Object>() {
         };
-        final WaveType RE_FLUSH = Builders.waveType("RE_FLUSH").items(RESULT);
-        final WaveType FLUSH = Builders.waveType("FLUSH").returnWaveType(RE_FLUSH).returnItem(RESULT);
+        final WaveType RE_FLUSH = WBuilder.waveType("RE_FLUSH").items(RESULT);
+        final WaveType FLUSH = WBuilder.waveType("FLUSH").returnWaveType(RE_FLUSH).returnItem(RESULT);
 
         Assert.assertEquals("FLUSH", FLUSH.action());
         Assert.assertEquals("DO_FLUSH", FLUSH.toString());

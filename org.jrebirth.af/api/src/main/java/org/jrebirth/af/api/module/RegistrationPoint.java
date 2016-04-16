@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2015
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,17 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-// TODO: Auto-generated Javadoc
+import org.jrebirth.af.api.component.basic.Component;
+import org.jrebirth.af.api.component.factory.ComponentFactory;
+
 /**
- * The Interface RegistrationPoint.
+ * The Interface RegistrationPoint is used to declare that this type can be extended.
+ *
+ * Implementations of this interface shall be declared using {@link Register} annotation.
+ *
+ * Commonly this an interface extending {@link Component} and defining a contract.
+ *
+ * At runtime implementation(s) will be retrieved according to {@link ComponentFactory} settings.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)

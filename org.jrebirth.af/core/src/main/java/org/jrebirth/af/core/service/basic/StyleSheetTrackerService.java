@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.service.basic;
 
-import static org.jrebirth.af.core.wave.Builders.waveType;
+import static org.jrebirth.af.core.wave.WBuilder.waveType;
 
 import java.io.File;
 

@@ -49,8 +49,8 @@ import org.jrebirth.af.core.resource.provided.parameter.ExtensionParameters;
 import org.jrebirth.af.core.service.ServiceTaskBase;
 import org.jrebirth.af.core.service.basic.TaskTrackerService;
 import org.jrebirth.af.core.util.ParameterUtility;
-import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.JRebirthWaves;
+import org.jrebirth.af.core.wave.WBuilder;
 
 /**
  *
@@ -230,7 +230,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             showModelCommandClass = ShowModelCommand.class;
         }
 
-        callCommand(Builders.callCommand(showModelCommandClass)
+        callCommand(WBuilder.callCommand(showModelCommandClass)
                             // Add all extra wave beans
                             .waveBeanList(wave.getData(JRebirthWaves.EXTRA_WAVE_BEANS).value())
                             // Add also DisplayModel Wave Bean

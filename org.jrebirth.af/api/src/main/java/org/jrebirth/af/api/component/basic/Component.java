@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2014
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -125,17 +125,17 @@ public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
      */
     void rootComponent(final Component<?> rootComponent);
 
-    /**
-     * Add an inner component.
-     *
-     * It will instantiate the component from the right Facade and store it into the current component.
-     *
-     * Shall be called from {@link AbstractComponent}.initInnerComponent (protected API)
-     *
-     * @param innerComponent the entry that describes the inner component
-     * @param keyPart additional object that are part of the inner component's unique key
-     */
-    <C extends Component<?>> void addInnerComponent(final InnerComponent<C> innerComponent);
+    // /**
+    // * Add an inner component.
+    // *
+    // * It will instantiate the component from the right Facade and store it into the current component.
+    // *
+    // * Shall be called from {@link AbstractComponent}.initInnerComponent (protected API)
+    // *
+    // * @param innerComponent the entry that describes the inner component
+    // * @param keyPart additional object that are part of the inner component's unique key
+    // */
+    // <C extends Component<?>> void addInnerComponent(final InnerComponent<C> innerComponent);
 
     /**
      * Get an inner component.
@@ -144,6 +144,8 @@ public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
      *
      * @param innerComponent the entry that describes the inner component
      * @param keyPart additional object that are part of the inner component's unique key
+     *
+     * @param <C> the type of the inner component
      *
      * @return the inner component instance
      */

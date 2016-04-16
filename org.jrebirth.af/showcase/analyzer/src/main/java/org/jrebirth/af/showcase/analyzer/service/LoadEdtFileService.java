@@ -27,7 +27,7 @@ import org.jrebirth.af.api.module.RegistrationPoint;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveType;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 
 /**
@@ -39,7 +39,7 @@ import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 public interface LoadEdtFileService extends Service {
 
     /** Wave type use to load events. */
-    WaveType DO_LOAD_EVENTS = Builders.waveType("LOAD_EVENTS")
+    WaveType DO_LOAD_EVENTS = WBuilder.waveType("LOAD_EVENTS")
                                       .items(EditorWaves.EVENTS_FILE)
                                       .returnAction("EVENTS_LOADED")
                                       .returnItem(EditorWaves.EVENTS);

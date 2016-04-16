@@ -26,7 +26,7 @@ import java.util.Map;
 import org.jrebirth.af.api.facade.JRebirthEvent;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.ui.DefaultModel;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.showcase.analyzer.command.ProcessEventCommand;
 import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;
 import org.jrebirth.af.showcase.analyzer.ui.editor.ball.BallModel;
@@ -138,7 +138,7 @@ public final class EditorModel extends DefaultModel<EditorModel, EditorView> {
      */
     private void showNext(final JRebirthEvent event) {
         this.timeFrame++;
-        callCommand(ProcessEventCommand.class, Builders.waveData(EditorWaves.EVENT, event));
+        callCommand(ProcessEventCommand.class, WBuilder.waveData(EditorWaves.EVENT, event));
     }
 
     /**

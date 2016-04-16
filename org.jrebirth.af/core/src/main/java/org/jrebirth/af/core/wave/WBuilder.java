@@ -35,9 +35,9 @@ import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.command.basic.ChainWaveCommand;
 
 /**
- * The Interface Builders used as a convenient wrapper to build a large variety of JRebirth Internal objects.
+ * The Interface WBuilders used as a convenient wrapper to build wave related JRebirth Internal objects.
  */
-public interface Builders {
+public interface WBuilder {
 
     /**
      * Build a fresh Wave type.
@@ -158,7 +158,7 @@ public interface Builders {
                      .waveGroup(WaveGroup.CALL_COMMAND)
                      .componentClass(ChainWaveCommand.class)
                      .addDatas(
-                               Builders.waveData(JRebirthWaves.CHAINED_WAVES, waveList));
+                               WBuilder.waveData(JRebirthWaves.CHAINED_WAVES, waveList));
     }
 
 }

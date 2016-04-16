@@ -199,7 +199,7 @@ It's possible to customize them by overriding methods listed hereafter:
 
 ## Initialization Phases
 
-- [init](#Init_Phase)
+- [init] (#Init_Phase)
 - [start] (#Start_Phase)
 
 

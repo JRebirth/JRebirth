@@ -39,9 +39,9 @@ import org.jrebirth.af.api.wave.WaveGroup;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.exception.ServiceException;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.JRebirthItems;
 import org.jrebirth.af.core.wave.JRebirthWaves;
+import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.WaveItemBase;
 
 /**
@@ -246,21 +246,21 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
             if (responseCommandClass != null) {
 
                 // If a Command Class is provided, call it with the right WaveItem to get the real result type
-                returnWave = Builders.wave()
+                returnWave = WBuilder.wave()
                                      .waveGroup(WaveGroup.CALL_COMMAND)
                                      .fromClass(this.service.getClass())
                                      .componentClass(responseCommandClass);
             } else {
 
                 // Otherwise send a generic wave that can be handled by any component
-                returnWave = Builders.wave()
+                returnWave = WBuilder.wave()
                                      .waveType(responseWaveType)
                                      .fromClass(this.service.getClass());
             }
 
             // Add the result wrapped into a WaveData with the right WaveItem
             if (resultWaveItem != null) {
-                returnWave.addDatas(Builders.waveData(resultWaveItem, res));
+                returnWave.addDatas(WBuilder.waveData(resultWaveItem, res));
             }
             // Don't add data when method has returned VOID
 

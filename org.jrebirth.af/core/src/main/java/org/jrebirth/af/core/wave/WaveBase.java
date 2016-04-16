@@ -260,7 +260,7 @@ public class WaveBase implements Wave, LinkMessages {
      */
     @Override
     public <T> Wave add(final WaveItem<T> waveItem, final T value) {
-        final WaveData<T> waveData = Builders.waveData(waveItem, value);
+        final WaveData<T> waveData = WBuilder.waveData(waveItem, value);
         addDatas(waveData);
         return this;
     }

@@ -29,7 +29,7 @@ import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.ui.adapter.ActionAdapter;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.presentation.PrezWaves;
 import org.jrebirth.af.presentation.command.ShowNextSlideCommand;
 import org.jrebirth.af.presentation.command.ShowPreviousSlideCommand;
@@ -106,7 +106,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      */
     protected void onKeyPressed(final KeyEvent keyEvent) {
 
-        final WaveData<Boolean> data = Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, keyEvent.isControlDown());
+        final WaveData<Boolean> data = WBuilder.waveData(PrezWaves.SKIP_SLIDE_STEP, keyEvent.isControlDown());
 
         if (keyEvent.getCode() == KeyCode.PAGE_DOWN) {
             model().callCommand(ShowNextSlideCommand.class, data);
@@ -130,7 +130,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
 
         if (!mouseEvent.isSynthesized() && /* !(mouseEvent.getTarget() instanceof Pane) && */!(mouseEvent.getTarget() instanceof WebView)) {
 
-            final WaveData<Boolean> data = Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, mouseEvent.isControlDown());
+            final WaveData<Boolean> data = WBuilder.waveData(PrezWaves.SKIP_SLIDE_STEP, mouseEvent.isControlDown());
 
             if (mouseEvent.getButton() == MouseButton.PRIMARY) {
                 model().callCommand(ShowNextSlideCommand.class, data);
@@ -158,7 +158,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * @param swipeEvent
      */
     protected void onSwipeLeft(final SwipeEvent swipeEvent) {
-        model().callCommand(ShowNextSlideCommand.class, Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, swipeEvent.getTouchCount() > 1));
+        model().callCommand(ShowNextSlideCommand.class, WBuilder.waveData(PrezWaves.SKIP_SLIDE_STEP, swipeEvent.getTouchCount() > 1));
         swipeEvent.consume();
     }
 
@@ -168,7 +168,7 @@ public final class SlideStackController extends DefaultController<SlideStackMode
      * @param swipeEvent
      */
     protected void onSwipeRight(final SwipeEvent swipeEvent) {
-        model().callCommand(ShowPreviousSlideCommand.class, Builders.waveData(PrezWaves.SKIP_SLIDE_STEP, swipeEvent.getTouchCount() > 1));
+        model().callCommand(ShowPreviousSlideCommand.class, WBuilder.waveData(PrezWaves.SKIP_SLIDE_STEP, swipeEvent.getTouchCount() > 1));
         swipeEvent.consume();
     }
 

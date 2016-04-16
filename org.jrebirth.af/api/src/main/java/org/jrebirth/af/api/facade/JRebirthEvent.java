@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2014
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,6 +33,8 @@ public interface JRebirthEvent {
 
     /**
      * @param sequence The sequence to set.
+     *
+     * @return the current JRebirthEvent
      */
     JRebirthEvent sequence(final int sequence);
 
@@ -43,6 +45,8 @@ public interface JRebirthEvent {
 
     /**
      * @param eventType The eventType to set.
+     *
+     * @return the current JRebirthEvent
      */
     JRebirthEvent eventType(final JRebirthEventType eventType);
 
@@ -53,6 +57,8 @@ public interface JRebirthEvent {
 
     /**
      * @param source The source class to set.
+     *
+     * @return the current JRebirthEvent
      */
     JRebirthEvent source(final String source);
 
@@ -63,6 +69,8 @@ public interface JRebirthEvent {
 
     /**
      * @param target The data to set.
+     *
+     * @return the current JRebirthEvent
      */
     JRebirthEvent target(final String target);
 
@@ -73,6 +81,8 @@ public interface JRebirthEvent {
 
     /**
      * @param data The data to set.
+     *
+     * @return the current JRebirthEvent
      */
     JRebirthEvent eventData(final String data);
 

@@ -26,7 +26,7 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.component.ui.stack.StackWaves;
 import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.ui.adapter.ActionAdapter;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 
 /**
  * The class <strong>MainController</strong>.
@@ -51,8 +51,8 @@ public final class MainController extends DefaultController<MainModel, MainView>
         final UniqueKey<? extends Model> data = (UniqueKey<? extends Model>) b.getUserData();
 
         model().sendWave(StackWaves.SHOW_PAGE_MODEL,
-                            Builders.waveData(StackWaves.PAGE_MODEL_KEY, data),
-                            Builders.waveData(StackWaves.STACK_NAME, "DemoStack"));
+                            WBuilder.waveData(StackWaves.PAGE_MODEL_KEY, data),
+                            WBuilder.waveData(StackWaves.STACK_NAME, "DemoStack"));
     }
 
 }

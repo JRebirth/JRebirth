@@ -1,7 +1,7 @@
 package org.jrebirth.af.core.util;
 
-import static org.jrebirth.af.core.wave.Builders.wave;
-import static org.jrebirth.af.core.wave.Builders.waveType;
+import static org.jrebirth.af.core.wave.WBuilder.wave;
+import static org.jrebirth.af.core.wave.WBuilder.waveType;
 
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.ui.NullView;
@@ -9,7 +9,7 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.ui.DefaultModel;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.WaveItemBase;
 
 import org.junit.Assert;
@@ -120,12 +120,12 @@ public class CheckerTest {
 
         // Right wave item
         checkWave(wave().waveType(this.TYPE_1)
-                        .addDatas(Builders.waveData(this.StringItem, "string")),
+                        .addDatas(WBuilder.waveData(this.StringItem, "string")),
                   null);
 
         // Right wave item + extra one
         checkWave(wave().waveType(this.TYPE_1)
-                        .addDatas(Builders.waveData(this.StringItem, "string"), Builders.waveData(this.StringItem, "string")),
+                        .addDatas(WBuilder.waveData(this.StringItem, "string"), WBuilder.waveData(this.StringItem, "string")),
                   null);
 
         // No WaveItem instead of one
@@ -133,12 +133,12 @@ public class CheckerTest {
 
         // Bad WaveItem
         checkWave(wave().waveType(this.TYPE_1)
-                        .addDatas(Builders.waveData(this.IntegerItem, 0)),
+                        .addDatas(WBuilder.waveData(this.IntegerItem, 0)),
                   CoreRuntimeException.class);
 
         // Bad WaveItem + Right one
         checkWave(wave().waveType(this.TYPE_1)
-                        .addDatas(Builders.waveData(this.IntegerItem, 0), Builders.waveData(this.StringItem, "string")),
+                        .addDatas(WBuilder.waveData(this.IntegerItem, 0), WBuilder.waveData(this.StringItem, "string")),
                   null);
 
     }
@@ -148,12 +148,12 @@ public class CheckerTest {
 
         // Right wave item
         checkWave(wave().waveType(this.TYPE_2)
-                        .addDatas(Builders.waveData(this.StringItem, "string"), Builders.waveData(this.IntegerItem, Integer.MIN_VALUE)),
+                        .addDatas(WBuilder.waveData(this.StringItem, "string"), WBuilder.waveData(this.IntegerItem, Integer.MIN_VALUE)),
                   null);
 
         // Right wave item + extra one
         checkWave(wave().waveType(this.TYPE_2)
-                        .addDatas(Builders.waveData(this.StringItem, "string"), Builders.waveData(this.IntegerItem, Integer.MIN_VALUE), Builders.waveData(this.ObjectItem, new Object())),
+                        .addDatas(WBuilder.waveData(this.StringItem, "string"), WBuilder.waveData(this.IntegerItem, Integer.MIN_VALUE), WBuilder.waveData(this.ObjectItem, new Object())),
                   null);
 
         // No WaveItem instead of two
@@ -161,17 +161,17 @@ public class CheckerTest {
 
         // Only one WaveItem instead of two
         checkWave(wave().waveType(this.TYPE_2)
-                        .addDatas(Builders.waveData(this.StringItem, "string")),
+                        .addDatas(WBuilder.waveData(this.StringItem, "string")),
                   CoreRuntimeException.class);
 
         // Bad WaveItem
         checkWave(wave().waveType(this.TYPE_1)
-                        .addDatas(Builders.waveData(this.IntegerItem, 0), Builders.waveData(this.ObjectItem, new Object())),
+                        .addDatas(WBuilder.waveData(this.IntegerItem, 0), WBuilder.waveData(this.ObjectItem, new Object())),
                   CoreRuntimeException.class);
 
         // Bad WaveItem + Right one (2)
         checkWave(wave().waveType(this.TYPE_1)
-                        .addDatas(Builders.waveData(this.ObjectItem, new Object()), Builders.waveData(this.IntegerItem, 0), Builders.waveData(this.StringItem, "string")),
+                        .addDatas(WBuilder.waveData(this.ObjectItem, new Object()), WBuilder.waveData(this.IntegerItem, 0), WBuilder.waveData(this.StringItem, "string")),
                   null);
     }
 
@@ -179,7 +179,7 @@ public class CheckerTest {
     public void checkWave3() {
 
         checkWave(wave().waveType(this.TYPE_3)
-                        .addDatas(Builders.waveData(this.StringItem, "string"), Builders.waveData(this.IntegerItem, Integer.MIN_VALUE), Builders.waveData(this.ObjectItem, new Object())),
+                        .addDatas(WBuilder.waveData(this.StringItem, "string"), WBuilder.waveData(this.IntegerItem, Integer.MIN_VALUE), WBuilder.waveData(this.ObjectItem, new Object())),
                   null);
     }
 
@@ -187,7 +187,7 @@ public class CheckerTest {
     public void checkWave4() {
 
         checkWave(wave().waveType(this.TYPE_4)
-                        .addDatas(Builders.waveData(this.IntegerItem, 42), Builders.waveData(this.IntegerItem, Integer.MIN_VALUE), Builders.waveData(this.IntegerItem, 12)),
+                        .addDatas(WBuilder.waveData(this.IntegerItem, 42), WBuilder.waveData(this.IntegerItem, Integer.MIN_VALUE), WBuilder.waveData(this.IntegerItem, 12)),
                   null);
     }
 
@@ -195,7 +195,7 @@ public class CheckerTest {
     public void checkWave5() {
 
         checkWave(wave().waveType(this.TYPE_5)
-                        .addDatas(Builders.waveData(this.StringItem, "string"), Builders.waveData(this.IntegerItem, Integer.MIN_VALUE), Builders.waveData(this.ObjectItem, new Object())),
+                        .addDatas(WBuilder.waveData(this.StringItem, "string"), WBuilder.waveData(this.IntegerItem, Integer.MIN_VALUE), WBuilder.waveData(this.ObjectItem, new Object())),
                   null);
     }
 

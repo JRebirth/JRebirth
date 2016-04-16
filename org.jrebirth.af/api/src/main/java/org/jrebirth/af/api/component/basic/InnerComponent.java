@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2014
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,6 @@ import org.jrebirth.af.api.key.UniqueKey;
  *
  * @param <C> The type of the InnerComponent
  */
-@FunctionalInterface
 public interface InnerComponent<C extends Component<?>> {
 
     /**
@@ -41,5 +40,21 @@ public interface InnerComponent<C extends Component<?>> {
      * @return the unique key used to load the right Model, must be not null
      */
     UniqueKey<C> key();
+
+    /**
+     * Return the component hosting this inner component.
+     *
+     * @return the host component
+     */
+    Component<?> host();
+
+    /**
+     * Return the inner component instance.
+     *
+     * During the first call it will delegate to host component inner component creation using the embedded key.
+     *
+     * @return the inner component instance
+     */
+    C get();
 
 }

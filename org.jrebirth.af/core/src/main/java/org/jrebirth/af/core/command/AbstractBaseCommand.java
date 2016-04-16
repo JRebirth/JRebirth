@@ -29,8 +29,8 @@ import org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.util.ClassUtility;
-import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.DefaultWaveBean;
+import org.jrebirth.af.core.wave.WBuilder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -165,7 +165,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
         // If given wave is null
         // Build a default Wave to avoid NullPointerException when
         // command was directly called by its run() method
-        final Wave commandWave = wave == null ? Builders.callCommand(this.getClass()) : wave;
+        final Wave commandWave = wave == null ? WBuilder.callCommand(this.getClass()) : wave;
 
         // Create the runnable that will be run
         // Add the runnable to the runner queue run it as soon as possible

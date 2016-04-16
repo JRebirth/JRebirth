@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.link;
 
-import static org.jrebirth.af.core.wave.Builders.waveType;
+import static org.jrebirth.af.core.wave.WBuilder.waveType;
 
 import java.util.Collections;
 import java.util.HashSet;

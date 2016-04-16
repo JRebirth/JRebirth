@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultController;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.showcase.undoredo.beans.ShapeType;
 import org.jrebirth.af.showcase.undoredo.beans.UndoAppWaves;
 import org.jrebirth.af.showcase.undoredo.command.CreateShapeCommand;
@@ -61,9 +61,9 @@ public final class UndoController extends DefaultController<UndoModel, UndoView>
         linkCommand(view().getUndoButton(), MouseEvent.MOUSE_CLICKED, UndoCommand.class, UndoModel.stackName);
         linkCommand(view().getRedoButton(), MouseEvent.MOUSE_CLICKED, RedoCommand.class, UndoModel.stackName);
 
-        linkCommand(view().getAddCircleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, Builders.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Circle), UndoModel.stackName);
-        linkCommand(view().getAddSquareButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, Builders.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Square), UndoModel.stackName);
-        linkCommand(view().getAddRectangleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, Builders.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Rectangle), UndoModel.stackName);
+        linkCommand(view().getAddCircleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WBuilder.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Circle), UndoModel.stackName);
+        linkCommand(view().getAddSquareButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WBuilder.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Square), UndoModel.stackName);
+        linkCommand(view().getAddRectangleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WBuilder.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Rectangle), UndoModel.stackName);
 
     }
 

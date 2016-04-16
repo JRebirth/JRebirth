@@ -1,6 +1,6 @@
 package org.jrebirth.af.core.command.basic.stage;
 
-import static org.jrebirth.af.core.wave.Builders.callCommand;
+import static org.jrebirth.af.core.wave.WBuilder.callCommand;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

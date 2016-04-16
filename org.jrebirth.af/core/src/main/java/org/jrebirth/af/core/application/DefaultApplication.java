@@ -20,9 +20,7 @@ import org.jrebirth.af.api.wave.Wave;
  *
  * @author Sébastien Bordes
  *
- * @param
- *        <P>
- *        The root node of the stage, must extends Pane to allow children management
+ * @param <P> The root node of the stage, must extends Pane to allow children management
  */
 public class DefaultApplication<P extends Pane> extends AbstractApplication<P> {
 

@@ -34,7 +34,7 @@ import javafx.scene.shape.RectangleBuilder;
 
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.transition.slicer.TransitionWaves;
 import org.slf4j.Logger;
@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
 public class NodeSlicerCommand extends DefaultService {
 
     /** Wave type use to load events. */
-    public static final WaveType DO_SLICE_NODE = Builders.waveType("SLICE_NODE").items(TransitionWaves.NODE).returnAction("NODE_SLICED").returnItem(TransitionWaves.SLICES);
+    public static final WaveType DO_SLICE_NODE = WBuilder.waveType("SLICE_NODE").items(TransitionWaves.NODE).returnAction("NODE_SLICED").returnItem(TransitionWaves.SLICES);
 
     /** Wave type to return events loaded. */
     // public static final WaveType RE_NODE_SLICED = WaveType.create("NODE_SLICED").items(TransitionWaves.SLICES);

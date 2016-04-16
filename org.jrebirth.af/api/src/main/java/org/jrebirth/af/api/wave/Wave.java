@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2014
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -238,6 +238,9 @@ public interface Wave {
     /**
      * Return the wave bean used to wrap wave properties.
      *
+     * @param waveBeanClass the {@link WaveBean} subtype to create
+     * @param <WB> the {@link WaveBean} type used to chain methods call
+     *
      * @return the wave bean, could be null
      */
     <WB extends WaveBean> WB waveBean(Class<WB> waveBeanClass);
@@ -261,7 +264,7 @@ public interface Wave {
     /**
      * Add several WaveBean in a row.
      *
-     * @param the list of WaveBean to add
+     * @param waveBeanList the list of WaveBean to add
      *
      * @return the current Wave to chain other method call
      */

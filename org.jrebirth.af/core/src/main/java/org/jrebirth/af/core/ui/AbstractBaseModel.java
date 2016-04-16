@@ -146,10 +146,10 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
         }
 
         // Propagate the show view to all Inner Model
-        if (getInnerComponentList().isPresent()) {
-            getInnerComponentList().get().stream()
-                                   .filter(s -> s instanceof Model)
-                                   .forEach((model) -> ((Model) model).doShowView(wave));
+        if (getInnerComponentMap().isPresent()) {
+            getInnerComponentMap().get().values().stream()
+                                  .filter(s -> s instanceof Model)
+                                  .forEach((model) -> ((Model) model).doShowView(wave));
         }
     }
 
@@ -175,10 +175,10 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
         }
 
         // Propagate the show view to all Inner Model
-        if (getInnerComponentList().isPresent()) {
-            getInnerComponentList().get().stream()
-                                   .filter(s -> s instanceof Model)
-                                   .forEach((model) -> ((Model) model).doHideView(wave));
+        if (getInnerComponentMap().isPresent()) {
+            getInnerComponentMap().get().values().stream()
+                                  .filter(s -> s instanceof Model)
+                                  .forEach((model) -> ((Model) model).doHideView(wave));
         }
     }
 

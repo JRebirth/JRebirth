@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2014
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,9 +25,7 @@ import org.jrebirth.af.api.resource.ResourceParams;
  * @author Sébastien Bordes
  *
  * @param <I> The item used to wrap the resource
- * @param
- *        <P>
- *        The params object that store primitive resources values
+ * @param <P> The params object that store primitive resources values
  * @param <R> The resource managed
  */
 public interface ResourceBuilder<I, P, R> {

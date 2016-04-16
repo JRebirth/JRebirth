@@ -70,9 +70,7 @@ import com.sun.javafx.application.LauncherImpl;
  *
  * @author Sébastien Bordes
  *
- * @param
- *        <P>
- *        The root node of the stage, must extends Pane to allow children management
+ * @param <P> The root node of the stage, must extends Pane to allow children management
  */
 @Configuration(".*jrebirth")
 @Localized(".*_rb")

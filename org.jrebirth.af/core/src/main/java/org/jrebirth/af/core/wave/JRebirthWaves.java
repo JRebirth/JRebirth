@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.wave;
 
-import static org.jrebirth.af.core.wave.Builders.waveType;
+import static org.jrebirth.af.core.wave.WBuilder.waveType;
 
 import java.util.List;
 
@@ -70,7 +70,7 @@ public interface JRebirthWaves {
     };
 
     /** . */
-    WaveData<Boolean> REUSE = Builders.waveData(REUSE_COMMAND, true);
+    WaveData<Boolean> REUSE = WBuilder.waveData(REUSE_COMMAND, true);
 
     /******************************/
     /** WaveType related to Model */

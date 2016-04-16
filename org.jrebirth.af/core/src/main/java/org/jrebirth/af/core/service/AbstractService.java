@@ -42,8 +42,8 @@ import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.ClassUtility;
-import org.jrebirth.af.core.wave.Builders;
 import org.jrebirth.af.core.wave.JRebirthWaves;
+import org.jrebirth.af.core.wave.WBuilder;
 
 /**
  *
@@ -152,7 +152,7 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
         this.pendingTasks.put(sourceWave.wUID(), task);
 
         // Attach ServiceTask to the source wave
-        sourceWave.addDatas(Builders.waveData(JRebirthWaves.SERVICE_TASK, task));
+        sourceWave.addDatas(WBuilder.waveData(JRebirthWaves.SERVICE_TASK, task));
 
         // Bind ProgressBar
         if (sourceWave.containsNotNull(JRebirthWaves.PROGRESS_BAR)) { // Check double call

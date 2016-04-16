@@ -24,7 +24,7 @@ import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.command.single.AbstractSingleCommand;
 import org.jrebirth.af.core.exception.CommandException;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.WaveDataBase;
 
 /**
@@ -60,7 +60,7 @@ public abstract class AbstractUndoableCommand<WB extends WaveBean> extends Abstr
             // Get existing wave data
             final List<WaveData<?>> data = wave.waveDatas();
             // and add the undoable command
-            data.add(Builders.waveData(UndoRedoWaves.UNDOABLE_COMMAND, this));
+            data.add(WBuilder.waveData(UndoRedoWaves.UNDOABLE_COMMAND, this));
             // in order to register it into the right command stack
             callCommand(StackUpCommand.class, data.toArray(new WaveDataBase[data.size()]));
         }

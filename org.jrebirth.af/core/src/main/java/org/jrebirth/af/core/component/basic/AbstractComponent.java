@@ -17,7 +17,7 @@
  */
 package org.jrebirth.af.core.component.basic;
 
-import static org.jrebirth.af.core.wave.Builders.wave;
+import static org.jrebirth.af.core.wave.WBuilder.wave;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -99,7 +99,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
     protected Map<InnerComponent<?>, Component<?>> innerComponentMap;
 
     /** The list that store sorted inner models loaded. */
-    protected List<Component<?>> innerComponentList;
+    // protected List<Component<?>> innerComponentList;
 
     /**
      * Short cut method used to retrieve the notifier.
@@ -573,10 +573,10 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
         // thisObject.ready = false;
 
         // Shall also release all InnerComponent
-        if (getInnerComponentList().isPresent()) {
+        if (getInnerComponentMap().isPresent()) {
 
             final List<Component<?>> toRemove = new ArrayList<>();
-            for (final Component<?> innerComponent : getInnerComponentList().get()) {
+            for (final Component<?> innerComponent : getInnerComponentMap().get().values()) {
 
                 // Release the InnerComponent
                 innerComponent.release();
@@ -588,7 +588,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
             for (final Component<?> innerComponent : toRemove) {
 
                 // Remove it from the list
-                getInnerComponentList().get().remove(innerComponent);
+                // getInnerComponentList().get().remove(innerComponent);
 
                 // Then remove it from map
                 getInnerComponentMap().get().remove(innerComponent.key());
@@ -609,13 +609,12 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    @Override
-    public final <IC extends Component<?>> void addInnerComponent(final InnerComponent<IC> innerComponent) {
+    private <IC extends Component<?>> void addInnerComponent(final InnerComponent<IC> innerComponent) {
 
         if (!getInnerComponentMap().isPresent()) {
             // Initialize default storage objects only on demand (to save some bits)
             this.innerComponentMap = new IdentityHashMap<>(10);
-            this.innerComponentList = new ArrayList<Component<?>>();
+            // this.innerComponentList = new ArrayList<Component<?>>();
         }
 
         // If the inner model hasn't been loaded before, build it from UIFacade
@@ -646,7 +645,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
 
             // Store the component into the multitonKey map
             this.innerComponentMap.put(innerComponent, childComponent);
-            this.innerComponentList.add(childComponent);
+            // this.innerComponentList.add(childComponent);
 
             // Link the current root model
             childComponent.rootComponent(this);
@@ -658,15 +657,15 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      */
     @SuppressWarnings("unchecked")
     @Override
-    public final <IC extends Component<?>> IC findInnerComponent(final InnerComponent<IC> innerModel) {
+    public final <IC extends Component<?>> IC findInnerComponent(final InnerComponent<IC> innerComponent) {
 
-        if (!getInnerComponentMap().isPresent() || !getInnerComponentMap().get().containsKey(innerModel)) {
+        if (!getInnerComponentMap().isPresent() || !getInnerComponentMap().get().containsKey(innerComponent)) {
 
             // This InnerModel should be initialized into the initInnerModel method instead
             // but in some cases a late initialization can help
-            addInnerComponent(innerModel);
+            addInnerComponent(innerComponent);
         }
-        return (IC) getInnerComponentMap().get().get(innerModel);
+        return (IC) getInnerComponentMap().get().get(innerComponent);
     }
 
     /**
@@ -720,8 +719,8 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      *
      * @return the innerComponentList.
      */
-    protected Optional<List<Component<?>>> getInnerComponentList() {
-        return Optional.ofNullable(this.innerComponentList);
-    }
+    // protected Optional<List<Component<?>>> getInnerComponentList() {
+    // return Optional.ofNullable(getInnerComponentMap().isPresent() ? getInnerComponentMap().get().values().as : null);
+    // }
 
 }

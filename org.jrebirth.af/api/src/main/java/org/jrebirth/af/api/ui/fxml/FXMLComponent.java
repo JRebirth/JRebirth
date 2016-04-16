@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2014
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,7 +45,10 @@ public interface FXMLComponent {
     /**
      * Return the node or first node matching the selector.
      *
+     * @param selector The css selector of the nodes to find
+     *
      * @return the node or first node matching the selector.
+     *
      * @see {@link Node#lookup(String)}
      */
     Node lookup(String selector);
@@ -53,7 +56,10 @@ public interface FXMLComponent {
     /**
      * Return the set of node matching the selector.
      *
+     * @param selector The css selector of the nodes to find
+     *
      * @return the set of node matching the selector.
+     *
      * @see {@link Node#lookupAll(String)}
      */
     Set<Node> lookupAll(String selector);

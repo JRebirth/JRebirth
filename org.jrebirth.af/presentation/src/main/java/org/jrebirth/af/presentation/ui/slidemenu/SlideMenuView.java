@@ -31,7 +31,7 @@ import org.jrebirth.af.api.ui.annotation.OnMouse;
 import org.jrebirth.af.api.ui.annotation.RootNodeId;
 import org.jrebirth.af.api.ui.annotation.type.Mouse;
 import org.jrebirth.af.core.ui.DefaultView;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.presentation.PrezWaves;
 import org.jrebirth.af.presentation.command.ShowSlideCommand;
 import org.jrebirth.af.presentation.model.Slide;
@@ -77,7 +77,7 @@ public final class SlideMenuView extends DefaultView<SlideMenuModel, ListView<Sl
 
         node().getSelectionModel().selectedItemProperty().addListener(
                                                                              (final ObservableValue<? extends Slide> ov, final Slide old_val, final Slide new_val) -> {
-                                                                                 model().callCommand(ShowSlideCommand.class, Builders.waveData(PrezWaves.SLIDE, new_val));
+                                                                                 model().callCommand(ShowSlideCommand.class, WBuilder.waveData(PrezWaves.SLIDE, new_val));
                                                                                  ((Pane) node().getParent()).getChildren().remove(node());
                                                                              });
 

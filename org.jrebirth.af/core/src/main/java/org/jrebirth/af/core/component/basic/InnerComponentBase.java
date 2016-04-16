@@ -35,10 +35,6 @@ import org.jrebirth.af.core.key.Key;
  */
 public class InnerComponentBase<C extends Component<?>> implements InnerComponent<C> {
 
-    public static <CC extends Component<?>> InnerComponentBase<CC> create(final Class<CC> modelClass, final Object... keyPart) {
-        return new InnerComponentBase<CC>(modelClass, keyPart);
-    }
-
     /** The generator of unique id. */
     // private static int idGenerator;
 
@@ -46,7 +42,11 @@ public class InnerComponentBase<C extends Component<?>> implements InnerComponen
     private int uid;
 
     /** The unique key of the inner model. */
-    private final UniqueKey<C> modelKey;
+    private final UniqueKey<C> innerComponentKey;
+
+    private Component<?> hostComponent;
+
+    private C innerComponent;
 
     /**
      * Default constructor.
@@ -56,7 +56,17 @@ public class InnerComponentBase<C extends Component<?>> implements InnerComponen
      */
     InnerComponentBase(final Class<C> componentClass, final Object... keyPart) {
 
-        this.modelKey = Key.create(componentClass, keyPart);
+        this.innerComponentKey = Key.create(componentClass, keyPart);
+    }
+
+    /**
+     * Default constructor.
+     *
+     * @param innerComponentKey the inner component key
+     */
+    InnerComponentBase(final UniqueKey<C> innerComponentKey) {
+
+        this.innerComponentKey = innerComponentKey;
     }
 
     // /**
@@ -82,7 +92,7 @@ public class InnerComponentBase<C extends Component<?>> implements InnerComponen
      */
     @Override
     public UniqueKey<C> key() {
-        return this.modelKey;
+        return this.innerComponentKey;
     }
 
     /**
@@ -99,8 +109,9 @@ public class InnerComponentBase<C extends Component<?>> implements InnerComponen
      *
      * @param uid The uid to set.
      */
-    public void setUid(final int uid) {
+    public InnerComponent<C> setUid(final int uid) {
         this.uid = uid;
+        return this;
     }
 
     /**
@@ -117,6 +128,33 @@ public class InnerComponentBase<C extends Component<?>> implements InnerComponen
     @Override
     public int hashCode() {
         return getUid();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Component<?> host() {
+        return this.hostComponent;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public InnerComponent<C> host(final Component<?> hostComponent) {
+        this.hostComponent = hostComponent;
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public C get() {
+        if (this.innerComponent == null) {
+            this.innerComponent = this.hostComponent.findInnerComponent(this);
+        }
+        return this.innerComponent;
     }
 
 }

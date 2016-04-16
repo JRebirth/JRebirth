@@ -184,7 +184,7 @@ public final class WaveTypeBase implements WaveType {
 
     private void buildReturnWaveType() {
         if (this.returnAction != null && this.returnItem != null) {
-            this.returnWaveType = Builders.waveType(this.returnAction).items(returnItem());
+            this.returnWaveType = WBuilder.waveType(this.returnAction).items(returnItem());
         }
     }
 
@@ -318,7 +318,7 @@ public final class WaveTypeBase implements WaveType {
     @Override
     public WaveType onException(final Class<? extends Command> exceptionCommandClass, final Class<? extends Throwable>... exceptionTypes) {
 
-        final Wave commandWave = Builders.callCommand(exceptionCommandClass);
+        final Wave commandWave = WBuilder.callCommand(exceptionCommandClass);
 
         for (final Class<? extends Throwable> type : exceptionTypes) {
             waveExceptionHandler().put(type, commandWave);
@@ -332,7 +332,7 @@ public final class WaveTypeBase implements WaveType {
     @Override
     public WaveType onException(final WaveType exceptionWaveType, final Class<? extends Throwable>... exceptionTypes) {
 
-        final Wave wave = Builders.wave().waveType(exceptionWaveType);
+        final Wave wave = WBuilder.wave().waveType(exceptionWaveType);
 
         for (final Class<? extends Throwable> type : exceptionTypes) {
             waveExceptionHandler().put(type, wave);

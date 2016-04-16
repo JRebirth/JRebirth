@@ -32,7 +32,7 @@ import org.jrebirth.af.component.ui.beans.DockOrientation;
 import org.jrebirth.af.component.ui.beans.TabConfig;
 import org.jrebirth.af.core.ui.object.DefaultObjectModel;
 import org.jrebirth.af.core.util.ObjectUtility;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.WaveItemBase;
 
 import org.slf4j.Logger;
@@ -54,10 +54,10 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
     };
 
     /** The add. */
-    public static WaveType ADD = Builders.waveType("ADD_CONTAINER").items(MODEL);
+    public static WaveType ADD = WBuilder.waveType("ADD_CONTAINER").items(MODEL);
 
     /** The remove. */
-    public static WaveType REMOVE = Builders.waveType("REMOVE_CONTAINER").items(MODEL);
+    public static WaveType REMOVE = WBuilder.waveType("REMOVE_CONTAINER").items(MODEL);
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DockModel.class);
