@@ -76,7 +76,7 @@ public interface RegistrationItem extends Comparable<RegistrationItem> {
     RegistrationItem priority(final PriorityLevel priority);
 
     /**
-     * return the registration priority weight
+     * Return the registration priority weight.
      *
      * @return Returns the weight.
      */

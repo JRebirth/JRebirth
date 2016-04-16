@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2014
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,33 +20,48 @@ package org.jrebirth.af.core.component.basic;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jrebirth.af.api.key.UniqueKey;
-import org.jrebirth.af.core.key.Key;
+import org.jrebirth.af.api.component.basic.Component;
+import org.jrebirth.af.api.component.basic.InnerComponent;
 
 /**
  * The interface <strong>InnerComponentEnum</strong>.
  *
  * @author Sébastien Bordes
- *
- * @param <C> The type of the InnerComponent
  */
 public interface InnerComponentEnum {
 
-    static Map<InnerComponentEnum, UniqueKey<?>> map = new HashMap<>();
+    /** The map that stores an InnerComponent wrapper per enum entry. */
+    static Map<InnerComponentEnum, InnerComponent<?>> map = new HashMap<>();
 
-    default void set(final Class<?> clazz, final Object[] optionalData, final Object... keyPart) {
-        map.put(this, Key.create(clazz, optionalData, keyPart));
+    /**
+     * Define an inner component.
+     *
+     * @param <C> the generic type
+     * @param clazz the clazz
+     * @param optionalData the optional data
+     * @param keyPart the key part
+     */
+    default <C extends Component<C>> void set(final Class<C> clazz, final Object[] optionalData, final Object... keyPart) {
+        map.put(this, CBuilder.innerComponent(clazz, keyPart));
     }
 
-    default void set(final Class<?> clazz, final Object... keyPart) {
-        map.put(this, Key.create(clazz, keyPart));
+    /**
+     * Define an inner component.
+     * 
+     * @param <C> the generic type
+     * @param clazz the clazz
+     * @param keyPart the key part
+     */
+    default <C extends Component<C>> void set(final Class<C> clazz, final Object... keyPart) {
+        map.put(this, CBuilder.innerComponent(clazz, keyPart));
     }
 
-    default void set(final UniqueKey<?> key) {
-        map.put(this, key);
-    }
-
-    default UniqueKey<?> get() {
+    /**
+     * Gets the innerComponent wrapper for the enumeration entry.
+     *
+     * @return the inner component
+     */
+    default InnerComponent<?> get() {
         return map.get(this);
     }
 

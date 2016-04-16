@@ -296,7 +296,7 @@ public interface Wave {
     void setWaveHandlers(final List<? extends Object> waveHandlers);
 
     /**
-     * Release the given WaveHandler
+     * Release the given WaveHandler.
      *
      * @param waveHandler the waveHandler
      */

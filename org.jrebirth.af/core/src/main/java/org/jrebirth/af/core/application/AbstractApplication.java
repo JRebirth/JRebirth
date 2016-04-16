@@ -26,7 +26,6 @@ import java.util.ServiceLoader;
 import javafx.application.Application;
 import javafx.application.Preloader;
 import javafx.application.Preloader.ProgressNotification;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.SceneBuilder;
 import javafx.scene.input.KeyCode;
@@ -366,24 +365,18 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         // Attach the handler only if necessary, these 2 method can be overridden to return null
         if (fullKeyCode != null && iconKeyCode != null) {
 
-            this.scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            this.scene.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
 
-                /**
-                 * {@inheritDoc}
-                 */
-                @Override
-                public void handle(final KeyEvent event) {
-                    // Manage F11 button to switch full screen
-                    if (fullKeyCode != null && fullKeyCode == event.getCode()) {
-                        currentStage.setFullScreen(!currentStage.isFullScreen());
-                        event.consume();
-                        // Manage F10 button to iconify
-                    } else if (iconKeyCode != null && iconKeyCode == event.getCode()) {
-                        currentStage.setIconified(!currentStage.isIconified());
-                        event.consume();
-                    }
-
+                // Manage F11 button to switch full screen
+                if (fullKeyCode != null && fullKeyCode == keyEvent.getCode()) {
+                    currentStage.setFullScreen(!currentStage.isFullScreen());
+                    keyEvent.consume();
+                    // Manage F10 button to iconify
+                } else if (iconKeyCode != null && iconKeyCode == keyEvent.getCode()) {
+                    currentStage.setIconified(!currentStage.isIconified());
+                    keyEvent.consume();
                 }
+
             });
         }
 
