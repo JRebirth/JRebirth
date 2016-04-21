@@ -22,7 +22,7 @@ Then I was upset by the single thread used by Flash and Flex application, even i
 Making extension of Flex components was also sometimes pretty hard due to inheritance of Flash widgets (partially resolved with new spark components).
 
 
-Unfortunately I also worked several month with Silverlight (C#) provided by Microsoft, the language itself have some interesting feature but ecosystem is not as good as the Java one. The MVVM pattern (Model-View-ViewModel) is a fake that hide a MVVCVM (Model-View-ViewController-ViewModel) where VC is the .xaml.cs file...
+Unfortunately I also worked several month with Silverlight (C#) provided by Microsoft, the language itself has got some interesting feature but ecosystem is not as good as the Java one. The MVVM pattern (Model-View-ViewModel) is a fake that hide a MVVCVM (Model-View-ViewController-ViewModel) where VC is the .xaml.cs file...
 		
 
 Before working with RIA, I obviously worked with Swing and SWT/JFace toolkit. And finally Swing was not so bad !
@@ -49,18 +49,19 @@ The main goal of building yet another application framework is to be the more co
 
 The major issue when building graphical application is to create unresponsive memory-hungry application, while dealing with ugly code hard to maintain.
 		
-To address the first point JRebirth offers a way to <strong>manage threads</strong> on your behalf, for the second JRebirth <strong>defines layers</strong> to maintain a good Separation of Concern (SoC).
+To address the first point JRebirth offers a way to <strong>manage threads</strong> on your behalf, for the second JRebirth **defines 'layers'** to maintain a good Separation of Concern (SoC).
 
 		
 <span class="question">Why don't manage myself my application thread ?</span>
 		
 
-Writing concurrent program is more complex than you can think, problems can occur whenever and always when you are demo-ing your application with your client.
+Writing concurrent program is more complex than you can think, you should find a way to make it easier unless you will be probably struggle with incomprehensible problems so hard to debug.
+Moreover this kind of problems always occur when you are demo-ing your application to your client.
 		
 		
 <span class="question">Layers sucks !</span>
 
-Are you sure ? *Layer* is the more basic way to organize and reuse smartly your code. It could seem to add some overhead to it but when you are working with a small or big team over years, you will enjoy to retrieve at the same place the same logic. It requires to respect some rules, within JRebirth *Layers* shall be seen as **Area** because there is no hierarchy between them, all **Areas** can communicate with others but they provide real concerns separation.
+Are you sure ? _Layer_ is the more basic way to organize and reuse smartly your code. It could seem to add some overhead to it but when you are working with a small or big team over years, you will enjoy to retrieve at the same place the same logic. It requires to respect some rules, within JRebirth _Layers_ shall be seen as **Area** because there is no hierarchy between them, all **Areas** can communicate with others but they provide real concerns separation.
 
 Moreover you will have the capability to customize your layer to fit your need by factorizing your code.
 	
@@ -72,8 +73,8 @@ Main features of JRebirth Application Framework are:
 1. Simplify Thread Management
 2. Avoid memory leak
 3. Maintain a good SoC 
-4. Be the more convenient as possible for developpers
-5. Be lightweight (and modularizable)
+4. Be the more convenient as possible for developers
+5. Be lightweight and modularizable
 6. Follow OSS spirit and Java Best Practices
 	
 
