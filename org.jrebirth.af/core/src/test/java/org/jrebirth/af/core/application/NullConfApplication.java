@@ -27,7 +27,7 @@ public class NullConfApplication extends DefaultApplication<Pane> {
      * {@inheritDoc}
      */
     @Override
-    protected String getApplicationTitle() {
+    protected String applicationTitle() {
         return "Test Application";
     }
 

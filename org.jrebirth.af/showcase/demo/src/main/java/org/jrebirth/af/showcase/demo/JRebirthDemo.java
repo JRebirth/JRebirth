@@ -63,7 +63,7 @@ public final class JRebirthDemo extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    protected String getApplicationTitle() {
+    protected String applicationTitle() {
         return "JRebirth Demo Application";
     }
 

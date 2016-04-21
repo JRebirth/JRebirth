@@ -41,7 +41,7 @@ public class ThreadPoolApplication extends DefaultApplication<Pane> {
      * {@inheritDoc}
      */
     @Override
-    protected String getApplicationTitle() {
+    protected String applicationTitle() {
         return "Thread Application";
     }
 

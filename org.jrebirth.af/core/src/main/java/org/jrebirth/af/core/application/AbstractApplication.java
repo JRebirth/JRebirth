@@ -339,7 +339,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      */
     private void initializeStage() {
         // Define the stage title
-        this.stage.setTitle(getApplicationTitle());
+        this.stage.setTitle(applicationTitle());
 
         // and allow customization
         customizeStage(this.stage);
@@ -359,8 +359,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
         final Stage currentStage = this.stage;
 
-        final KeyCode fullKeyCode = getFullScreenKeyCode();
-        final KeyCode iconKeyCode = getIconifiedKeyCode();
+        final KeyCode fullKeyCode = fullScreenKeyCode();
+        final KeyCode iconKeyCode = iconifiedKeyCode();
 
         // Attach the handler only if necessary, these 2 method can be overridden to return null
         if (fullKeyCode != null && iconKeyCode != null) {
@@ -415,53 +415,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             ms.start();
         }
 
-        // if (CoreParameters.PARSE_MODULE_CONFIG_FILE.get() && hasModuleLibrary()) {
-        //
-        // // Assemble the regex pattern
-        // final Pattern filePattern = Pattern.compile(".*module\\.xml");
-        //
-        // // Retrieve all resources from default classpath
-        // final Collection<String> list = ClasspathUtility.getClasspathResources(filePattern);
-        //
-        // // LOGGER.info(JRebirthMarkers.MODULE, "{} Module.xml file{} found.", list.size(), list.size() > 1 ? "s" : "");
-        //
-        // for (final String moduleFile : list) {
-        // final List<Pair<Class<?>, Class<?>>> pairList = ModuleConfigFileParser.getRegistrations(moduleFile);
-        // for (final Pair<Class<?>, Class<?>> pair : pairList) {
-        //
-        // final Class<? extends Component<?>> interfaceClass = (Class<? extends Component<?>>) pair.getKey();
-        // final Class<? extends Component<?>> implClass = (Class<? extends Component<?>>) pair.getValue();
-        //
-        // JRebirthThread.getThread().getFacade().getComponentFactory().register(interfaceClass, implClass);
-        // }
-        // for (final Class<?> componentClass : ModuleConfigFileParser.getWarmUp(moduleFile)) {
-        // if (Command.class.isAssignableFrom(componentClass)) {
-        // JRebirthThread.getThread().getFacade().getCommandFacade().retrieve((Class<Command>) componentClass);
-        // } else if (Service.class.isAssignableFrom(componentClass)) {
-        // JRebirthThread.getThread().getFacade().getServiceFacade().retrieve((Class<Service>) componentClass);
-        // } else if (Model.class.isAssignableFrom(componentClass)) {
-        // JRebirthThread.getThread().getFacade().getUiFacade().retrieve((Class<Model>) componentClass);
-        // }
-        // }
-        // }
-        //
-        // }
     }
-
-    // /**
-    // * Check that org.jrebirth.af.modular.jar is accessible.
-    // *
-    // * @return true if org.jrebirth.af.modular.jar is accessible
-    // */
-    // private boolean hasModuleLibrary() {
-    // boolean hasModuleLibrary = true;
-    // try {
-    // Class.forName("org.jrebirth.af.modular.ModuleConfigFileParser");
-    // } catch (final ClassNotFoundException e) {
-    // hasModuleLibrary = false;
-    // }
-    // return hasModuleLibrary;
-    // }
 
     /**
      * Return the list of Resources to load.
@@ -508,11 +462,11 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      *
      * @return the application title
      */
-    protected String getApplicationTitle() {
+    protected String applicationTitle() {
         // Add application Name
         String name = StageParameters.APPLICATION_NAME.get();
         if (name.contains(PARAM)) {
-            name = name.replace(PARAM, getShortClassName());
+            name = name.replace(PARAM, computeShortClassName());
         }
         // Add version with a space before
         final String version = StageParameters.APPLICATION_VERSION.get();
@@ -528,7 +482,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      *
      * @return the application class short name
      */
-    private String getShortClassName() {
+    private String computeShortClassName() {
         String name = this.getClass().getSimpleName();
         if (name.endsWith(APP_SUFFIX_CLASSNAME)) {
             name = name.substring(0, name.indexOf(APP_SUFFIX_CLASSNAME));
@@ -644,7 +598,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      *
      * @return the full screen shortcut
      */
-    protected KeyCode getFullScreenKeyCode() {
+    protected KeyCode fullScreenKeyCode() {
         return KeyCode.F11;
     }
 
@@ -655,7 +609,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      *
      * @return the iconify shortcut
      */
-    protected KeyCode getIconifiedKeyCode() {
+    protected KeyCode iconifiedKeyCode() {
         return KeyCode.F10;
     }
 

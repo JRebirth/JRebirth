@@ -40,7 +40,7 @@ public class TestApplication extends DefaultApplication<Pane> {
      * {@inheritDoc}
      */
     @Override
-    protected String getApplicationTitle() {
+    protected String applicationTitle() {
         return "Test Application";
     }
 

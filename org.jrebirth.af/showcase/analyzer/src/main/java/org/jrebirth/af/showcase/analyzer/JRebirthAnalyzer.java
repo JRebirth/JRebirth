@@ -69,7 +69,7 @@ public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    protected String getApplicationTitle() {
+    protected String applicationTitle() {
         return "JavaFX 2.0 - JRebirth Event Analyzer";
     }
 

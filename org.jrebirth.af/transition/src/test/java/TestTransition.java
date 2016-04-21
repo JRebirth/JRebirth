@@ -61,7 +61,7 @@ public final class TestTransition extends DefaultApplication<StackPane> {
      * {@inheritDoc}
      */
     @Override
-    protected String getApplicationTitle() {
+    protected String applicationTitle() {
         return "Test Transition";
     }
 
