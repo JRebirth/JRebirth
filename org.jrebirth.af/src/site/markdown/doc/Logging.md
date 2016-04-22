@@ -14,7 +14,7 @@
 Logging
 =========================
 
-My first idea about logging for JavaFX was to build myself a small lightweight and powerful module to add log capability to JRebirth Framework.
+My first idea about logging for JavaFX apps was to build myself a small lightweight and powerful module to add log capability to JRebirth Framework.
 
 But after some hundred of lines of code written, I realized that using a real logging library could be interesting and not too heavy to embed.
 
@@ -23,7 +23,7 @@ Logging Facade
 --------------------
 		
 I choose to add dependency to slf4j-api :
-<a href="http://www.slf4j.org/">Simple Logging Facade 4 Java</a>
+[Simple Logging Facade 4 Java)](http://www.slf4j.org/)
 
 
 This API is lightweight because the jar is near to 10 kb.
@@ -31,10 +31,8 @@ This API is lightweight because the jar is near to 10 kb.
 <!-- MACRO{include|highlight-theme=eclipse|source=../includes/Logging_Dependencies.xml|snippet=xp:/dependencies/dependency[1]|first-line=1}-->
 
 
-NOP
---------
-
 The slf4j api allow to declare logger for JRebirth Framework but doesn't provide any logger implementation.
+So you need to add another dependency to choose the implementation you want to use.
 
 By default all logs are rejected and you will have this message into the Java console at startup:
 
@@ -44,13 +42,21 @@ SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See <a target="_blank" href="http://www.slf4j.org/codes.html#StaticLoggerBinder">http://www.slf4j.org/codes.html#StaticLoggerBinder</a> for further details.
 </p>
 
-To avoid this error message to appear you can add the No-OPeration dependency:
+There are 3 implementations available:
+
+- NOP
+- LOGback
+- SimpleLogger
+
+
+### NOP
+
+To avoid this error message to appear you can add the No-OPeration dependency, it will log nothing but avoid the previous error message:
 
 <!-- MACRO{include|source=../includes/Logging_Dependencies.xml|snippet=xp:/dependencies/dependency[2]|set-first-line=1}-->
 
 
-LOGback
--------------
+### LOGback
 
 Personally I choose LOGback implementation because it represents a good	compromise between performances and customization.
 It was finely integrated because it was written by the same team as slf4j.
@@ -60,18 +66,14 @@ To use it you must add this dependency into your pom.xml :
 
 <!-- MACRO{include|source=../includes/Logging_Dependencies.xml|snippet=xp:/dependencies/dependency[3]|set-first-line=1}-->
 
-
-
 Then you must add a configuration file like this one into the application classpath:
 
 <!-- MACRO{include|source=../../../showcase/analyzer/src/main/resources/logback.xml}-->
 		
 
-SimpleLogger
--------------------------
+### SimpleLogger
 
 If you don't want to embed 800 kb of jar to provide logging feature you	can use the simple logger provided by slf4j, it's only a 10 kb jar file.
-
 
 You just have to add this dependency to your pom.xml:
 
@@ -81,29 +83,28 @@ You just have to add this dependency to your pom.xml:
 JRebirth Logs
 =====================
 
-
 All JRebirth logs use an internationalized engine allowing us to provide extensible log messaging.
 
 It could be seen as an overkill feature but it has some advantages:
  
 * Provide localized log message
 * Manage log level activation automatically
-* Parameterize log level, to increase or decrease it by custo
+* Parameterize log level, to increase or decrease it by customization
 * Disable Message resolution for high performance
 
- Note that you can still use your logger basic features.
+Note that you can still use your logger basic features.
 
- JRebirth provides its own LoggerFactory that you can initialize like this:
+JRebirth provides its own LoggerFactory that you can initialize like this:
 
- <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java|snippet=re:JRLoggerFactory.getLogger|snippet-start-offset=1}-->
+<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java|snippet=re:JRLoggerFactory.getLogger|snippet-start-offset=1}-->
 
- Then you can log your message like this:
+Then you can log your message like this:
 
- <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java|snippet=re:LOGGER\.}-->
+<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java|snippet=re:LOGGER\.}-->
 
- All these log messages are store into an interface implemented by the class to let them accessible
+All these log messages are store into an interface implemented by the class to let them accessible
 
- <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/ConcurrentMessages.java|snippet=aj:ConcurrentMessages}-->
+<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/ConcurrentMessages.java|snippet=aj:ConcurrentMessages}-->
 
 
 <div class="bottomLinks">

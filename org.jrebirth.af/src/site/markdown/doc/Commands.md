@@ -40,15 +40,13 @@ JAT and JIT will process command one after the other. JTP will act in the same m
 MultiCommand
 -------------------------
 
-MultiCommand provides the ability to run some Single Commands sequentially or in parallel.
+MultiCommand provides the ability to run some Single Commands sequentially (even across several threads) or in parallel.
 
 Hereafter you will find an example of MultiCommand used to display a model UI:
 
 <!-- MACRO{include|highlight-theme=eclipse|source=core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/ShowModelCommand.java|snippet=aj:org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand}-->
 
-The multi command code will be run into JIT, but its sub-command will be run respectively into JTP and JAT (according to their own
-configuration).
-
+The multi command code will be run into JIT, but its sub-command will be run respectively into JTP and JAT (according to their own configuration).
 
 **Why are they using these threads ?**
 
@@ -56,26 +54,25 @@ configuration).
 
 *PrepareModelCommand* use the annotation defined into *DefaultPoolCommand* to run into **JTP**.
 
-*ShowModelCommand* use the annotation defined into *DefaultUICommand* to run into **JAT** (it's mandatory to update scene's nodes).
+*ShowModelCommand* use the annotation defined into *DefaultUICommand* to run into **JAT** (it's mandatory to update scene's nodes within JAT).
 
 
 How to trigger a Command
 --------------------------------
 
-Commands are designed to be disposable after usage, but they could be retained by strong references to be executed twice or more.
-Each call will return a new instance of the command class, because each command was stored with a timestamp key-based Timestamp is added to the default key and also for custom key).
+Commands are designed to be disposable after usage, but they could be retained by strong references to be executed twice or more or store data.
+Each call will return a new instance of the command class, because each command was stored with a timestamp key-based. (Timestamp is added to the default key and also for custom key).
 
-You can create a command by four different ways:
+You can create a command using four different ways:
 
 * [Direct way : getCommand(Command.class).run()](#direct)
 * [Indirect way (Wave)](#indirect)
 * [From Controller by using *linkCommand* method](#link)
-* [Component Callback](#callback)
+* [Messaging way](#messaging)
 
-Please note that Commands are JRebirth top components (with Services and Models), they follow the component lifecycle as described in [Facade Page](Facades.html).
+Please note that Commands are JRebirth top-level components (with Services and Models), they follow the component lifecycle as described in [Facade Page](Facades.html).
 
 Thus *AbstractBaseCommand* extends *BehavioredComponent* and *Component* and their descendants must provide *initCommand()*, *processAction()* and *execute()* methods.
-
 
 
 <a name="direct"></a>
@@ -85,56 +82,53 @@ It's possible to call a command from any JRebirth component (Command, Service, M
 
 You just need to call the **getCommand** method to build an instance. You can provide either the Command Class **or** its unique key (if required).
 
-
-<!-- {include |source=core/src/main/java/org/jrebirth/af/core/facade/AbstractFacade.java
- |snippet=re:E retrieve" /> } -->
+<!-- {include |source=core/src/main/java/org/jrebirth/af/core/facade/AbstractFacade.java|snippet=re:E retrieve" /> } -->
 
 <!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/link/CommandReady.java|snippet=re:getCommand}-->
 
-
-Once you have retrieved your command, you can store it with a strong reference to avoid GC collecting it. Your command life will depend on the
-lifetime of your strong reference. Thus you will be able to configure directly your command properties.
+Once you have retrieved your command, you can store it with a strong reference to avoid GC collecting it. Your command life will depend on the lifetime of your strong reference.
+Thus you will be able to configure directly your command properties.
 Finally to trigger it you must call its **run()** method.
-The <a class="apiMethod" href="../apidocs/org/jrebirth/af/core/command/AbstractBaseCommand.html#perform-org.jrebirth.af.api.wave.Wave-">perform</a> method of the command will be executed into the [Thread Type](Thread.html#Threading_overview) chosen (JAT, JIT, JTP).
+The <a class="apiMethod" href="../apidocs/org/jrebirth/af/core/command/AbstractBaseCommand.html#perform-org.jrebirth.af.api.wave.Wave-">perform</a> method of the command will be executed into the [Thread Type](Thread.html#Threading_overview) chosen (JAT, JIT, JTP) by the Command declaration.
 
 <!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/command/Command.java|snippet=re:run\(\)}-->
 
-**Be careful**: As explained [here](#key) each call to **getCommand** could retrieve the same *OR* another instance of the command class depending on key parts provided and instance's strong references.
+**Be careful**: As explained [here](#key) each call to **getCommand** could retrieve the same *OR* another instance of the command class depending on key parts provided and instance's strong references. (in this case no timestamp is added to the command key)
 
 
 <a name="indirect"></a>
 ### Indirect way
 
-You can trigger a command execution by calling **callCommand** from any component.
+You can trigger a command execution by calling **callCommand** from any component, it will use JIT to trigger the command then the command will be run using the thread declared.
 
 You can provide some parameters into **WaveData** that will be hold by the wave and so available into the command.
 
 <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/component/basic/AbstractComponent.java|snippet=re:callCommand}-->
 
+You can also provide a **WaveBean** object to store all data.
 
 <a name="link"></a>
 ### Convenient Link method
 
-Controllers provide a convenient method named *void linkCommand(Node, EventType&lt;E&gt;, Class&lt;? extends Command&gt;, WaveData&lt;?&gt;...)*
+UI's controllers provide a convenient method named *void linkCommand(Node, EventType&lt;E&gt;, Class&lt;? extends Command&gt;, WaveData&lt;?&gt;...)*
 
-This method useful to declare with only one line of code the call of a command triggered when the chosen JavaFX event occurred on a node belonging to the View.
+This method is useful to declare with only one line of code the call of a command triggered when the chosen JavaFX event occurred on a node belonging to the View.
 
 It's also possible to add a callback function, in example to manage double-click detection (see **LinkedCallback**).
 
 <!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/controls/ControlsController.java|snippet=re:linkCommand}-->
 
 
-<a name="callback"></a>
-### Component Callback way
+<a name="messaging"></a>
+### Messaging way
 
-Any **Command** is a JRebirth component and can benefits of *Observer* features.
-It's possible to listen a **WaveType** (registration done into the *initModel*, *initService* and *initCommand* methods) in order to be notified when a such wave is sent.
+Any **Command** is a JRebirth component and can benefits of _Observer_ features.
+It's possible to listen a **WaveType** (registration done into the _initModel_, _initService_ and _initCommand_ methods, or using @OnWave) in order to be notified when a such wave is sent.
 You can manage custom methods called by reflection to handle waves and can you catch all waves into the *processAction(Wave)* method.
 
 More information is available in [Notifier &amp; Component page](Notifier.html).
 
 Be careful, commands can handle asynchronous wave only if they haven't been collected by the Garbage Collector! So you need to create a instance and to keep a strong references on it somewhere.
-
 
 
 Command Properties
@@ -144,25 +138,20 @@ A command is an atomic action reusable or not that can be run into a predefined 
 
 * A property indicating	[in which thread](#threading) it must be run
 * A	[Component Key](#key), built with Class Name and an additional string
-* An [Action to process](#action) (*execute(Wave)* method)
-
-<!-- *  A [#parent">Parent Command]() for chained use case  -->
-
+* An [Action to process](#action) (*perform(Wave)* method)
 * A [Wave Bean Generic Type](#wavebean) that will hold all required data to process the action
 * [Optional custom properties](#props) (useful for reusable commands)
-
+<!-- *  A [#parent">Parent Command]() for chained use case  -->
 
 <a name="threading"></a>
-How to manage Threading issues
---------------------------------
+### How to manage Threading issues
 
 Each command will be launch by JRebirth Internal engine and run into a dedicated thread.
 Threads involved in a JRebirth application are explained into the [Thread page](Thread.html).
 
-The runner thread can be configured by two ways:
+The runner thread can be configured using two ways:
 
 * [Annotation](#annotation)
-
 * [Constructor argument and class inheritance](#inheritance)
 
 The priority rule is : Annotation &gt; Constructor argument &gt; Default value.
@@ -171,7 +160,7 @@ The top-level annotation will be systematically used overriding lower ones and a
 
 
 <a name="annotation"></a>
-### Annotation usage
+#### Annotation usage
 
 To run a command into the JAT (JavaFX Application Thread), use this annotation :
 <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/command/single/ui/DefaultUICommand.java|snippet=re:@RunInto}-->
@@ -184,7 +173,7 @@ To run a command into JTP (JRebirth Thread Pool, the command will be run into a 
 
 
 <a name="inheritance"></a>
-### Class inheritance usage
+#### Class inheritance usage
 
 To run a command into the JAT (JavaFX Application Thread), extends the *DefaultUICommand* class :
 
@@ -202,7 +191,7 @@ To run a command into JTP (JRebirth Thread Pool, the command will be run into a 
 
 <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/PrepareModelCommand.java|snippet=re:extends DefaultPoolBeanCommand}-->
 
-### Constructor argument usage
+#### Constructor argument usage
 
 It's also possible to define the runType (The thread which will handle the command) by passing **RunType**, each descendant classes of **AbstractBaseCommand** offer at least one constructor allowing this enum value to the command constructor.
 
@@ -210,47 +199,44 @@ It's also possible to define the runType (The thread which will handle the comma
 
 
 <a name="key"></a> 
-Component Key
---------------------------------------
+### Component Key
 
 The component key as described in the [Facade page](Facades.html) allow storing unique commands.
 
 All objects provided as key part will be serialized (toString call) to build the key.
 Warning : When a command is built consequently to a wave reception, the wave UID will be concatenated to the class name instead of using key parts.
 
+
 <a name="action"></a> 
-Execute Code
------------------------------
+### Execute Code
 
 Command are run in a custom thread in 3 steps:
 
-* preExecute
-* execute
-* postExecute
+* beforePerform
+* perform
+* afterPerform
 
-Only the **execute** method must be implemented to perform your action.
+Only the **perform** method must be implemented to execute your action.
+
 
 <a name="wavebean"></a> 
-Wave Bean
-------------------------
+### Wave Bean
 
 A **WaveBean** is a Java Bean that allow carrying a lot of named properties into a **Wave**.
 
 Command Classes can declare a generic type that allow to cast the Wave Bean into the right one, it allows to use *getWaveBean().getMyProperty()* into source code which is more convenient than parsing **WaveData** (but it implies to create a dedicated Java Class).
 
 
-<!-- <subsection name="Parent Command" id="parent">  When you use a command into a **MultiCommand** , this property will hold a strong 
-reference to it.   -->
-
 <a name="props"></a> 
-Custom properties
-------------------------------
+### Custom properties
 
 Each command is a simple Java Object, you can add fields or JavaFX Properties to help configuring your execution code.
 You must pay attention that these values will be kept until the command is disposed (after execution if no strong references exists).
 
-For example you can attach a command to a **Model** and launch it several times while updating its internal properties.
+For example you can attach a command to a **Model** and launch it several times while updating command's properties.
 
+
+<!-- Parent Command  When you use a command into a **MultiCommand** , this property will hold a strong reference to it.   -->
 
 <div class="bottomLinks">
 	<div class="previousDocPage">

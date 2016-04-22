@@ -18,12 +18,12 @@ A component is a top-level actor of the __wB-CS-Mvc__ pattern.
 Each component can communicate with other in a simple way. 
 They are loosely coupled with each other and with the engine itself.
 
-There are three kinds of components:
+There are 3+1 kinds of components:
 
 * Command
 * Service
 * Model
-
+* Behavior
 
 Wave, View and Controller are not JRebirth Components.
 
@@ -39,15 +39,11 @@ Notifier aim
 ---------------
 
 JRebirth has got its own Notification Engine to allow each component to communicate with each other.
-All these communications are processed into a dedicated thread.
-The notification engine uses custom objects to transport data : the Waves.
-	
-<span style="text-decoration: underline;">Short UML Diagram:</span>
-<div class="uml">
-	<a href="uml/Link.png" rel="lightbox[uml]" title="Notifier Class Diagram ">
-		<img class="redux" src="uml/Link.png" alt="" />
-	</a>
-</div>
+All these communications are processed into a dedicated thread described [before](Thread.html).
+The notification engine uses custom objects to transport data : Waves.
+
+We will have an overview of them within the next section.
+
 
 
 <div class="bottomLinks">

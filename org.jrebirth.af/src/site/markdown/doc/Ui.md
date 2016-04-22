@@ -84,22 +84,19 @@ Hereafter you will find a list of all possible ways to use a Model:
 * MVC \- Model, View, Controller: Basic Implementation
 * FMFFC \- FxmlModel , Fxml, FxmlController: View and Controller are respectively replaced by Fxml and FxmlController
 * MVCFFC \- FxmlModel, View, Controller, Fxml, FxmlController: Basic + Fxml files
-
 	
 
 Model Overview
 ===============
 
-<p>Models are directly synchronized with the UIFacade and can send &amp; receive Waves, they can also use any other components.</p>
-<p>The goal of Models is to retrieve data from other layers, and to define Business Logic (business rules, authorizations ...).</p>
-<p>The Model automatically build its attached view (except SimpleModel).</p>
+Models are directly synchronized with the UIFacade and can send &amp; receive Waves, they can also use any other components.
+
+The goal of Models is to retrieve data from other layers, and to define Business Logic (business rules, authorizations ...).
+
+The Model automatically build its attached view (except SimpleModel).
 
 <!-- MACRO{include|source=sample/src/main/java/org/jrebirth/af/sample/ui/SampleModel.java|snippet=aj:SampleModel|highlight-theme=eclipse} -->
 
-
-InnerModels
-------------------
-	
 
 Views Overview
 ==================
@@ -121,9 +118,8 @@ The View's initialization code perform several operations:
 If the construction fails, mainly due to Controller error, a custom error Node is created in order to display the stack trace of the exception.			
 
 <!-- MACRO{include|source=sample/src/main/java/org/jrebirth/af/sample/ui/SampleView.java} -->
-<!-- 
-		<param name="snippet" value="aj:SampleView" />
--->
+<!--|snippet=aj:..SampleView-->
+
 
 Annotation Event Handler
 --------------------------
@@ -134,9 +130,7 @@ Controllers
 =============
 
 <!-- MACRO{include|source=sample/src/main/java/org/jrebirth/af/sample/ui/SampleController.java} -->
-<!-- 
-		<param name="snippet" value="aj:..SampleController" />
--->
+<!-- |snippet=aj:public final class SampleController -->
 	
 Adapters & Handlers
 --------------------------

@@ -19,8 +19,10 @@ The JRebirth Framework provides an useful way to deal with your local resources,
 * Fonts
 * Images
 * Parameters
-* CSS (WIP)
-* FXML (WIP)
+* CSS
+* FXML
+* AudioClip (WIP)
+* Media (WIP)
 
 These resources can consume a lot of memory if you don't dispose them (especially big images and fonts) when you stop using them. 
 JRebirth provides a mechanism to store them weakly and to rebuild them if necessary in order to	use the less memory as required.
@@ -35,6 +37,16 @@ This one is linked by a **ResourceItem** to facilitate its usage.
 	</a>
 </div>
 
+Resource loading
+----------------------
+
+Heavyweight resource object can be retrieved by calling the _get()_ method of **ResourceItem**.
+If the resource was already loaded it is retrieved from cache otherwise it's loaded another time and stored weakly.
+When system goes low memory, all resrouces not strictly retained by a Component or a **Scene**'s node will elligible for garbage collection to release some bits. 
+
+ResourceItem
+-----------------
+
 There are 3 ways to declare resources, each one is available for all kind of resources with special feature for parameters.
 
 * [With Resources.create(ResourceParam)](#create)
@@ -43,8 +55,7 @@ There are 3 ways to declare resources, each one is available for all kind of res
 
 
 <a name="create"></a>
-With Resources.create(ResourceParam)
-----------------------------------------
+### With Resources.create(ResourceParam)
 	
 The first way is to hold static field declaration instantiated  with custom 'factory' Resources (not named, with an overloaded create method to avoid later cast).
 This static fields can be hold in any class you want but we recommend to store them into an **Interface** used 'as' an enum.
@@ -58,60 +69,46 @@ Example of Web color declaration:
 <!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/color/TestColors.java|snippet=re:TEST_COLOR_WEB_1|snippet-start-offset=1}-->
 
 <a name="enum"></a>
-With Enumeration
------------------------------
+### With Enumeration
 
-The other way to declare is a little bit complex, it implies to create an **enum** that implements a *ResourceItem* interface.
-But it requires to add some copy/paste code into implemented methods.
-	
+The other way to declare is a little bit complex, it implies to create an _enum_ that implements a **ResourceItem** interface.
+But it requires to add use a custom syntax to use default method.
+
+<!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/color/EnumColors.java|snippet=aj:..EnumColors}-->
+
+Severals default methods exist, at least one per **ResourceParams** to create.
+
 
 <a name="dynamic"></a>
-Dynamically
-------------------
+### Dynamically
 
-Not implemented yet
+We can load dynamicalli resource by creating "anonymous" **ResourceItem**, the resource will be kept within cache if memory is not constrained otherwise it will be deleted.
+Another call with the same path will hit the cache and the image will be only stored once, but created as many times as deleted and retrieved again.
 
-	
-To manage these resources we use a *enum* hack to cleanly define them and most important to have a concise way to use them without calling singleton getter or another complex set of methods.
+<!-- MACRO {include|source=presentation/src/main/java/org/jrebirth/af/presentation/ui/template/AbstractTemplateView.java|snippet=re:new RelImage}-->
 
-So if you want to handle resources with JRebirth mechanism, you just have to create an enumeration that implement the interface of the resource you want, with a custom constructor.
+In this sample _item.getImage()_ return the relative srtring path of the image.
 
 
-Color
-----------
+Samples
+----------------
+
+### Color
 
 For example to manage web color, (basic hexadecimal string #00CC00), you have to use this declaration:
 <!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/color/TestColors.java|snippet=re:TEST_COLOR_WEB_1|snippet-start-offset=1}-->
 
-Hereafter an example of an interface that hold multiple colors.
-<!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/color/TestColors.java|snippet=aj:..TestColors|expand-snippets=true}-->
 
+### Font
 
-<!-- MACRO {include|source=core/src/main/java/org/jrebirth/af/core/resource/color/WebColor.java}-->
-<!-- |snippet=aj:*.WebColor|expand-snippets=true -->
-
-
-
-But this interface doesn't explain how to register a resource, so let's see an example.
-<!-- MACRO {include|source=presentation/src/main/java/org/jrebirth/af/presentation/resources/PrezColors.java}-->
-	<!-- |snippet=aj:..PrezColors |expand-snippets=true -->
-
-
-Font
----------
-
-For example to manage the **Turtles**font, you have to use this declaration:
+For example to manage the **Turtles** font, you have to use this declaration:
 <!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/font/TestFonts.java|snippet=re:TEST_REAL_FONT_1|snippet-start-offset=1}-->
 
-Hereafter an example of an interface that hold multiple colors.
+Hereafter the enumeration that stores font names.
 
-<!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/font/TestFonts.java|snippet=aj:..TestFonts|expand-snippets=true}-->
+<!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/font/TestFontNames.java|snippet=aj:..TestFontNames}-->
 
-	
-Parameters
-------------
 
-todo
 
 
 <div class="bottomLinks">

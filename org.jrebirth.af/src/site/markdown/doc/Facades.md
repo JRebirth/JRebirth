@@ -13,8 +13,7 @@
 Facade(s)
 =========================
 
-JRebirth provides 4+1 **Facade**s
- used to manage its dedicated pattern **wB-CS-Mvc**.
+JRebirth provides 4+1 **Facade**s used to manage its dedicated pattern **wB-CS-Mvc**.
 
 Overview
 -------------
@@ -32,26 +31,25 @@ Global Facade
 
 *One Facade to rule them all*
 
-JRebirth uses a global facade automatically created by JRebirth	__AbstractApplication__	class.
+JRebirth uses a global facade automatically created by JRebirth	__AbstractApplication__	class. Its main role is to manage all JRebirth components by using Facades.
 
 
 Internal Communication
 ---------------------------
 	
-The global facade create automatically the JRebirth notification engine. You should read the [Notifier](Notifier.html) page to have more informations.
+The global facade creates automatically the JRebirth notification engine. You should read the [Notifier](Notifier.html) page to have more informations.
 	
 
 Linked with Application
 ---------------------------
 
-The global facade also allow to communicate with the Application class and therefore with its stage	and scene.
+The global facade also allows to communicate with the Application class and therefore with its stage and scene.
 	
-
 
 Manage Local Facades
 -----------------------------
 
-It allows to manage the three main facades:
+It allows to manage the three main facades (+extra one):
 
 * CommandFacade
 * ServiceFacade
@@ -59,15 +57,13 @@ It allows to manage the three main facades:
 * BehaviorFacade
 
 
-The __GlobaleFacadeBase__ allow to get each of these facades by calling appropriate getters:
+The __GlobaleFacadeBase__ allows to get each of these facades by calling appropriate getters:
 
 <!-- MACRO{include|highlight-theme=eclipse|source=api/src/main/java/org/jrebirth/af/api/facade/GlobalFacade.java|snippet=re:LocalFacade}-->
 
 This link is bidirectionnal because global facade is accessible from the 3 main facades by calling :
-	*getGlobalFacade()*
-	(each facade extends the
-	__AbstractGlobalReady__ abstract class which implement __GlobalReady__ interface.
 
+- *getGlobalFacade()* (each facade extends the __AbstractGlobalReady__ abstract class which implement __GlobalReady__ interface.
 
 <!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/facade/GlobalReady.java|snippet=re:getGlobalFacade}-->
 
@@ -76,7 +72,7 @@ This link is bidirectionnal because global facade is accessible from the 3 main 
 Local Facades
 ===================
 
-There are 4 __LocalFacade__, each one is responsible of its layer components.
+There are 4 __LocalFacade__, each one is responsible of an area storing same kind of components.
 
 
 Basic Features
@@ -95,7 +91,7 @@ Each Facade can manage its components (also called readyObject) throught some pu
 Component Key
 -------------------
 
-Each Component (CSM) are registered into the facade using a [UniqueKey](../apidocs/org/jrebirth/af/api/key/UniqueKey.html), there are 2 options:
+Each Component (b-CSM) are registered into the facade using a [UniqueKey](../apidocs/org/jrebirth/af/api/key/UniqueKey.html), there are 2 options:
 
 * [ClassKey](#ClassKey)
 * [MultitonKey](#MultitonKey)
@@ -111,8 +107,7 @@ The [MultitonKey](../apidocs/org/jrebirth/af/core/key/MultitonKey.html) uses als
 
 ### Convenient Builder
 
-JRebirth API have a lot of method that take the Component Class with additional objects as key parts.
-But the API also has a convenient class that provides method tused to build key.
+JRebirth API has got a lot of methods that take the Component Class with additional objects as key parts, but the API also provides a convenient class used to build key.
 
 <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/key/Key.java|snippet=re:static}-->
 	
@@ -120,9 +115,9 @@ But the API also has a convenient class that provides method tused to build key.
 Provide Tracking
 --------------------
 
-JRebirth allows to track all creation &amp; finalization of each component (Command, Service, Model, View) and also track the emission of waves and their path.
+JRebirth allows to track all creation &amp; finalization of each component (Command, Service, Model, Behavior) and also track the emission of waves and their path.
 	
-They are logged in order to be processed by the JRebirthAnalyzer tool.
+They are logged in order to be processed later by the JRebirthAnalyzer tool.
 
 
 <div class="bottomLinks">

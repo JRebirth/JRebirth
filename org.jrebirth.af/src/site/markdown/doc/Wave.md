@@ -16,10 +16,10 @@ Wave Overview
 What's a Wave
 -------------------
 
-A Wave is a temporary object created to carry data througt CS-MVC components.
-They allow JRebirth to handle application internal events asynchronously between each components, at the opposite you can use getModel,	getCommand and getService method to perform synchronous operations.
+A Wave is a temporary object created to carry data througt CSM components.
+They allow JRebirth to handle application internal events asynchronously between each component, at the opposite you can use getModel, getCommand and getService method to perform synchronous operations.
 
-Waves are handled by the notifier engine which are running within the *JRebirthThread*.
+Waves are handled by the notifier engine which are running within the *JRebirthThread* (JIT).
 
 <span style="text-decoration: underline;">Short UML Diagram:</span>
 
@@ -39,24 +39,25 @@ There are 4 main group of waves :
 4. Undefined : to handle all other waves, the wave type must be defined
 
 
-### Wave ItemType
+### Wave Item
 
 A wave item designate a Java type (precisely a generic type that can be for example: List&lt;String&gt;).
 It could be used with a custom name or as a parameter.
 
 __Don't forget the opening and closing braces used { } to allow anonymous class to define the super generic type !__
 
+This is the only way to reference a generic type at compile time.
+
 Wave items are used by Wave Type to describe an api contract.
 
 <!-- MACRO{include|highlight-theme=eclipse|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java|snippet=aj:..EVENTS_FILE|snippet-start-offset=1|snippet-end-offset=1} -->
 
-
 Wave items can also be used to define the unique identifier of a value wrapped into a WaveData wrapper stored into a wave.
-
-		
+	
 <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/wave/JRebirthWaves.java|snippet=aj:..SERVICE_TASK|snippet-start-offset=1}-->
 
 <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/service/AbstractService.java|snippet=re:(SERVICE_TASK,\ ).*$|snippet-start-offset=1}-->
+
 			
 ### Wave Type
 
@@ -76,12 +77,14 @@ A *WaveType* has a unique name and a set of *WaveItem* objects. It must be creat
 
 ### WaveType name
 
-__This string is used to link to a component method__, this call is made by reflection when the wave is processed.
+**This string is used to link to a component method**, this call is made by reflection when the wave is processed.
+
+_A best practice is to store them within static final field or within an interface to avoid their replication (possible source of error) especially when used within @OnWave annotation._
 
 
 ### WaveItem List
 
-Each *WaveItem* will be passed to the method as an argument.
+Each **WaveItem** will be passed to the method as an argument.
 
 
 ### Wave argument
@@ -105,14 +108,10 @@ Wave lifecycle are defined by the *Status* enumeration:
 8. Destroyed : the wave is available for garbage collection
 
 
-### How they are consumed
-
-
-
 Chained Wave
 ------------------
 
-It's possible to chain command by using the	*ChainWaveCommand* class. A sample is used into the *JRebirthThread.bootUp()* method.
+It's possible to chain command by using the	**ChainWaveCommand** class. A sample is used into the _JRebirthThread.bootUp()_ method.
 
 
 <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java|highlight-theme=eclipse}-->

@@ -18,9 +18,9 @@ Overview
 
 A Service Object is a JRebirth Component (part of CSM pattern, Command-Service-Model).
 	
-It can be retrieved from the *ServiceFacade*.
+It can be retrieved from the **ServiceFacade**.
 
-A *Service* can hold several Tasks defined by a *WaveType*.
+A **Service** can hold several Tasks defined by a **WaveType**.
 
 Each Task requires:
 
@@ -40,6 +40,8 @@ So your data stored or processed into your service can be loss if you didn't man
 
 The most easy way is to hold your service with a strong reference into a long-living object like a top-level*Model*.
 
+Any service listening a WaveType will be retained by Notifier so it will not be elligible for garbage colelction.
+
 <span style="text-decoration: underline;">Short UML Diagram:</span>
 
 <div class="uml">
@@ -58,14 +60,14 @@ This is the *WaveType* used to process a Wave generated anywhere into the applic
 
 <!-- MACRO{include|highlight-theme=eclipse|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java|snippet=re:DO_LOAD_EVENTS \=|snippet-start-offset=1|snippet-end-offset=3}-->
 
-This *WaveType*	uses only one *WaveItem* to store the file that must be loaded.
+This **WaveType** uses only one **WaveItem** to store the file that must be loaded.
 WaveItem wrap the type of the object we want to use, thus it's possible to check that API contract isn't broken.
 
 <!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java|snippet=re:EVENTS_FILE =|snippet-start-offset=1|snippet-end-offset=1}-->
 
 ### Exit Point Wave Type
 
-The return Wave Type is automatically created with by the using the *returnAction* value with *returnItem* as **WaveItem**.
+The return Wave Type is automatically created with by the using the _returnAction_ value with _returnItem_ as **WaveItem**.
 The code above will generate a **WaveType** that uses only one WaveItem to store the list of events loaded from the given file.
 
 <!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java|snippet=re:EVENTS =|snippet-start-offset=1|snippet-end-offset=1}-->
@@ -84,6 +86,8 @@ If you don't declare the return	**WaveType** a exception will be thrown at runti
 
 If your Service Task doesn't return anything (void return) you can dismiss this step except if you want to receive an empty notification when the Job is done; just use *JRebirthItems.voidItem*.
 
+You can also register your service task by putting **@OnWave** annoation using the action name of the **WaveType**. A best practice is to add annoation within interface methods, thus all implementations can avoid to use _listen_ methods.
+
 
 Perform the Job!
 -------------------
@@ -97,7 +101,7 @@ How to use the Service Feature
 Call the Service
 --------------------
 
-To call this **Service Feature**, you can use the *returnData* from any JRebirth's Component.
+To call this **Service Feature**, you can use the _returnData_ from any JRebirth's Component.
 It takes at least 2 mandatory arguments:
 
 1. The Service Class Object
@@ -112,7 +116,7 @@ Hereafter you will fin an example of service call with only one arguments passed
 Process the Service Result
 --------------------------------
 
-The Service Feature Result is sent as a Wave that wrap returned value. So to be informed when the result is available, there is two things to do :
+The Service Feature Result is sent as a Wave that wrap returned value. So to be informed when the result is available, there is two things to do:
 
 * Let your component listening this WaveType.
 * Add Wave handler code to process the result.
@@ -131,7 +135,7 @@ Each initXXX method is called into JRebirth Internal Thread by ready method.
 
 <!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/controls/ControlsModel.java|snippet=aj:..ControlsModel.initModel(..)}-->
 
-Add a method that suit the WaveType convention.
+Add a method that suits the **WaveType** convention.
 
 The name must used the predefined prefix (in our case DO_ converted to do), then the WaveType's name converted in a camel cased format.
 
