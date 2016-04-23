@@ -63,6 +63,7 @@ import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.ObjectUtility;
+import org.jrebirth.af.core.wave.JRebirthItems;
 
 /**
  *
@@ -78,7 +79,7 @@ import org.jrebirth.af.core.util.ObjectUtility;
  * @param <C> the class type of the subclass
  */
 @SkipAnnotation(false)
-public abstract class AbstractComponent<C extends Component<C>> extends AbstractReady<C> implements Component<C>, LinkMessages {
+public abstract class AbstractComponent<C extends Component<C>> extends AbstractReady<C> implements Component<C>, JRebirthItems, LinkMessages {
 
     /** The default fallback wave handle method. */
     public static final String PROCESS_WAVE_METHOD_NAME = "processWave";

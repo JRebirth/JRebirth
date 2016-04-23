@@ -94,6 +94,16 @@ It could be seen as an overkill feature but it has some advantages:
 
 Note that you can still use your logger basic features.
 
+<span style="text-decoration: underline;">Short UML Diagram:</span>
+
+<div class="uml">
+<a title="Logging Class Diagram " rel="lightbox" href="uml/Logging.png">
+<img class="redux" alt="" src="uml/Logging.png" />
+</a>
+<legend>Logging Class Diagram</legend>
+</div>
+
+
 JRebirth provides its own LoggerFactory that you can initialize like this:
 
 <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java|snippet=re:JRLoggerFactory.getLogger|snippet-start-offset=1}-->

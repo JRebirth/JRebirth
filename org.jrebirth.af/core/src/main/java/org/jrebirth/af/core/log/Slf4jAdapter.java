@@ -17,7 +17,6 @@
  */
 package org.jrebirth.af.core.log;
 
-import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.resource.i18n.MessageItem;
 
 import org.slf4j.Marker;
@@ -27,7 +26,7 @@ import org.slf4j.Marker;
  *
  * @author Sébastien Bordes
  */
-public class Slf4jAdapter extends AbstractLogAdapter implements JRLogger { // NOSONAR lot of methods !!
+public class Slf4jAdapter extends AbstractLogAdapter { // NOSONAR lot of methods !!
 
     /**
      * Default Constructor.
