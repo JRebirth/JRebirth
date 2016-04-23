@@ -5,7 +5,9 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd">
 	<publishDate position="right" />
 	<body>
 		<head>
-			<meta name="keywords" content="JRebirth, JavaFX, Application, Framework, WCS, MVC, Maven" />
+			<![CDATA[
+				<meta name="keywords" content="JRebirth, JavaFX, Application, Framework, WCS, MVC, Maven" />
+			]]>
 		</head>
 		
 		<breadcrumbs>
