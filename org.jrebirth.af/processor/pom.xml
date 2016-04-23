@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.jrebirth</groupId>
 		<artifactId>af</artifactId>
-		<version>8.1.0-SNAPSHOT</version>
+		<version>8.5.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.jrebirth.af</groupId>
@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>8.1.0-SNAPSHOT</version>
+			<version>8.5.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>

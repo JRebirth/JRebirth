@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
-		<version>8.1.0-SNAPSHOT</version>
+		<version>8.5.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -221,7 +221,7 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>8.1.0-SNAPSHOT</version>
+			<version>8.5.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -229,12 +229,12 @@
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>undoredo</artifactId>
-			<version>8.1.0-SNAPSHOT</version>
+			<version>8.5.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>fxml</artifactId>
-			<version>8.1.0-SNAPSHOT</version>
+			<version>8.5.0-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
