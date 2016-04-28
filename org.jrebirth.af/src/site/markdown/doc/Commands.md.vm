@@ -238,14 +238,5 @@ For example you can attach a command to a **Model** and launch it several times 
 
 <!-- Parent Command  When you use a command into a **MultiCommand** , this property will hold a strong reference to it.   -->
 
-<div class="bottomLinks">
-	<div class="previousDocPage">
-		[Wave](Facades.html)
-	</div>
-	<div class="nextDocPage">
-		[Services](Services.html)
-	</div>
-	<div class="tocDocPage">
-		[TOC](Toc.html)
-	</div>
-</div>
+#parse("TocList.vm")
+#displayFooterToc("Commands")

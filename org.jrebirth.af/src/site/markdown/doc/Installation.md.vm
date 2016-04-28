@@ -186,14 +186,5 @@ If sometimes you need to test a Snapshot version use OJO (Snapshot repo) and our
 <!-- MACRO{include|source=../includes/All-In-One_Profile_Settings.xml}-->
 <!-- snippet=xp://profiles -->
 
-<div class="bottomLinks">
-    <div class="previousDocPage">
-        <a href="Introduction.html">Introduction</a>
-    </div>
-    <div class="nextDocPage">
-        <a href="Application.html">Your first Application</a>
-    </div>
-    <div class="tocDocPage">
-        <a href="Toc.html">TOC</a>
-    </div>
-</div>
+#parse("TocList.vm")
+#displayFooterToc("Installation")

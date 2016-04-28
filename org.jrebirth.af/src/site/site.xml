@@ -53,6 +53,7 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd" name="JRebirth">
 
 		<menu name="Documentation">
 			<item name="Documentation" href="doc/Toc.html" />
+			<!--
 			<item name="Introduction" href="doc/Introduction.html" />
 			<item name="Installation" href="doc/Installation.html" />
 			<item name="Application" href="doc/Application.html" />
@@ -66,6 +67,7 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd" name="JRebirth">
 			<item name="Ui" href="doc/Ui.html" />
 			<item name="Behavior" href="doc/Behavior.html" />
 			<item name="Resources" href="doc/Resources.html" />
+			-->
 		</menu>
 		
 		<menu name="Community">

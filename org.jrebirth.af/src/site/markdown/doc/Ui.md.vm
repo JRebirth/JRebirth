@@ -137,14 +137,5 @@ Adapters & Handlers
 
 
 
-<div class="bottomLinks">
-	<div class="previousDocPage">
-		<a href="Services.html">Services</a>
-	</div>
-	<div class="nextDocPage">
-		<a href="Behavior.html">Behavior</a>
-	</div>
-	<div class="tocDocPage">
-		<a href="Toc.html">TOC</a>
-	</div>
-</div>
+#parse("TocList.vm")
+#displayFooterToc("Ui")

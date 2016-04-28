@@ -1,0 +1,64 @@
+#set( $items = [
+    {"link":"Introduction",	"name":"Introduction"},
+    {"link":"Installation",	"name":"Installation"},
+    {"link":"Overview",		"name":"Framework Overview"},
+    {"link":"Application",	"name":"Create your first Application"}, 
+    {"link":"Thread",		"name":"Thread Management"},
+    {"link":"Logging",		"name":"Configure Logging system"},
+    {"link":"Component",	"name":"Create your Components"},
+    {"link":"Facades",		"name":"How Facades work"},
+    {"link":"Modularization","name":"Modularize your code"},
+    {"link":"Notifier",		"name":"Notifier"},
+	{"link":"Wave",			"name":"Wave"},
+    {"link":"Commands",		"name":"Commands"},
+    {"link":"Services",		"name":"Services"},
+    {"link":"Ui",			"name":"User Interface"},
+    {"link":"Behavior",		"name":"Behaviors"},
+    {"link":"Resources",	"name":"Resources"}
+	] ) 
+	
+	
+#*
+## Display Full Table of Content
+*#
+#macro( displayToc )
+
+<ol>
+#foreach( $item in $items )
+    <li><a href="${item.link}.html" >${item.name}</a></li>
+#end
+</ol>
+
+#end
+
+#*
+## Display Foot links
+*#
+#macro( displayFooterToc $fileName )
+
+	#foreach( $item in $items )
+		#if ($item.link == $fileName)
+			#set($index = $velocityCount - 1)
+		#end
+	#end
+	
+	#set( $previous = $index - 1 )
+	#set( $next = $index + 1 )
+	
+<div class="bottomLinks">
+#if( $previous >= 0 )
+	<div class="previousDocPage">
+		<a href="${items.get($previous).link}.html">${items.get($previous).name}</a>
+	</div>
+#end	
+#if( $next < $items.size() )
+	<div class="nextDocPage">
+		<a href="${items.get($next).link}.html">${items.get($next).name}</a>
+	</div>
+#end
+	<div class="tocDocPage">
+		<a href="Toc.html">TOC</a>
+	</div>
+</div>
+
+#end

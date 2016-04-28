@@ -119,14 +119,5 @@ It's possible to chain command by using the	**ChainWaveCommand** class. A sample
 <!-- snippet=aj:..bootUp() -->
 
 
-<div class="bottomLinks">
-	<div class="previousDocPage">
-		<a href="Notifier.html">Notifier &amp; Components</a>
-	</div>
-	<div class="nextDocPage">
-		<a href="Commands.html">Commands</a>
-	</div>
-	<div class="tocDocPage">
-		<a href="Toc.html">TOC</a>
-	</div>
-</div>	
+#parse("TocList.vm")
+#displayFooterToc("Wave")

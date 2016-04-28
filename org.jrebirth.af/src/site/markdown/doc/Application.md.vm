@@ -345,15 +345,5 @@ You can disable it by setting an empty **@Localized** annotation.
 
 <!-- MACRO{include|source=core/src/test/java/org/jrebirth/af/core/application/NullConfApplication.java|snippet=re:(@Localized)} -->
 
-
-<div class="bottomLinks">
-<div class="previousDocPage">
-<a href="Overview.html">Framework Overview</a>
-</div>
-<div class="nextDocPage">
-<a href="Thread.html">Thread Management</a>
-</div>
-<div class="tocDocPage">
-<a href="Toc.html">TOC</a>
-</div>
-</div>
+#parse("TocList.vm")
+#displayFooterToc("Application")

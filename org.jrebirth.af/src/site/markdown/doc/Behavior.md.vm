@@ -33,15 +33,5 @@ Behavior Data
 ============================
     
 
-<div class="bottomLinks">
-	<div class="previousDocPage">
-		<a href="Ui.html">Ui</a>
-	</div>
-	<div class="nextDocPage">
-		<a href="Resources.html">Resources</a>
-	</div>
-	<div class="tocDocPage">
-		<a href="Toc.html">TOC</a>
-	</div>
-</div>
-	
+#parse("TocList.vm")
+#displayFooterToc("Behavior")

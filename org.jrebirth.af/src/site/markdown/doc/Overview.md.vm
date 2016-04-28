@@ -127,17 +127,8 @@ They also provide a set of convenient methods used to perform common event handl
 
 
 
-<div class="bottomLinks">
-	<div class="previousDocPage">
-		<a href="Installation.html">Installation</a>
-	</div>
-	<div class="nextDocPage">
-		<a href="Application.html">Create your first Application</a>
-	</div>
-	<div class="tocDocPage">
-		<a href="Toc.html">TOC</a>
-	</div>
-</div>
+#parse("TocList.vm")
+#displayFooterToc("Overview")
 
 
 <div style="clear:both"></div>

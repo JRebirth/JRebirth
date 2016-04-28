@@ -186,14 +186,5 @@ The default behavior is:
 - callCommand => Depends on Command called
 
 
-<div class="bottomLinks">
-	<div class="previousDocPage">
-		<a href="Application.html">Create your first Application</a>
-	</div>
-	<div class="nextDocPage">
-		<a href="Logging.html">Configure Logging System</a>
-	</div>
-	<div class="tocDocPage">
-		<a href="Toc.html">TOC</a>
-	</div>
-</div>
+#parse("TocList.vm")
+#displayFooterToc("Thread")

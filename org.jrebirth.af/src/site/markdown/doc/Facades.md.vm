@@ -120,14 +120,5 @@ JRebirth allows to track all creation &amp; finalization of each component (Comm
 They are logged in order to be processed later by the JRebirthAnalyzer tool.
 
 
-<div class="bottomLinks">
-	<div class="previousDocPage">
-		<a href="Logging.html">Configure Logging system</a>
-	</div>
-	<div class="nextDocPage">
-		<a href="Notifier.html">Notifier &amp; Components</a>
-	</div>
-	<div class="tocDocPage">
-		<a href="Toc.html">TOC</a>
-	</div>
-</div>	
+#parse("TocList.vm")
+#displayFooterToc("Facades")

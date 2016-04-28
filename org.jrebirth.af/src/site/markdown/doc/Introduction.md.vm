@@ -72,20 +72,11 @@ Main features of JRebirth Application Framework are:
 
 1. Simplify Thread Management
 2. Avoid memory leak
-3. Maintain a good SoC 
+3. Maintain a good SoC
 4. Be the more convenient as possible for developers
 5. Be lightweight and modularizable
 6. Follow OSS spirit and Java Best Practices
-	
 
-<div class="bottomLinks">
-	<div class="previousDocPage">
-		<a href="Toc.html">TOC</a>
-	</div>
-	<div class="nextDocPage">
-		<a href="Installation.html"> How to install JRebirth</a>
-	</div>
-	<div class="tocDocPage">
-		<a href="Toc.html">TOC</a>
-	</div>
-</div>
+
+#parse("TocList.vm")
+#displayFooterToc("Introduction")

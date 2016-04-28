@@ -181,14 +181,5 @@ You can update progress bar indicator by calling this method:
 <!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/impl/LoadEdtFileServiceImpl.java|snippet=re:updateProgress}-->
 
 
-<div class="bottomLinks">
-	<div class="previousDocPage">
-		<a href="Notifier.html">Commands</a>
-	</div>
-	<div class="nextDocPage">
-		<a href="Ui.html">User Interface</a>
-	</div>
-	<div class="tocDocPage">
-		<a href="Toc.html">TOC</a>
-	</div>
-</div>
+#parse("TocList.vm")
+#displayFooterToc("Services")
