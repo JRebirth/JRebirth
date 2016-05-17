@@ -70,13 +70,13 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
     @Override
     protected void initModel() {
 
-        final WaveChecker waveChecker = wave -> ObjectUtility.equalsOrBothNull(wave.get(TAB_KEY), object().tabKey());
+        final WaveChecker waveChecker = wave -> ObjectUtility.equalsOrBothNull(wave.get(TAB_KEY), object().key());
 
         listen(waveChecker, ADD);
         listen(waveChecker, REMOVE);
 
-        if (ObjectUtility.nullOrEmpty(object().tabKey())) {
-            object().tabKey(TabModel.class.getSimpleName() + TAB_COUNTER++);
+        if (ObjectUtility.nullOrEmpty(object().key())) {
+            object().key(TabModel.class.getSimpleName() + TAB_COUNTER++);
         }
     }
 

@@ -5,11 +5,12 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.component.ui.beans.PartConfig;
 import org.jrebirth.af.component.ui.dock.DockModel;
+import org.jrebirth.af.component.ui.tab.TabModel;
 import org.jrebirth.af.core.command.single.ui.DefaultUIBeanCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.WBuilder;
 
-public class AddDockCommand extends DefaultUIBeanCommand<DockWaveBean> {
+public class RemoveDockCommand extends DefaultUIBeanCommand<DockWaveBean> {
 
     @Override
     protected void initCommand() {
@@ -36,8 +37,8 @@ public class AddDockCommand extends DefaultUIBeanCommand<DockWaveBean> {
         }
 
         if (waveBean(wave).parts() != null) {
-            for (final PartConfig<?> part : waveBean(wave).parts()) {
-                sendWaveToTabModel(wave, getModel(part.modelClass(), part));
+            for (final PartConfig<?> partConfig : waveBean(wave).parts()) {
+                sendWaveToTabModel(wave, getModel(partConfig.modelClass(), partConfig));
             }
         }
     }
@@ -45,11 +46,9 @@ public class AddDockCommand extends DefaultUIBeanCommand<DockWaveBean> {
     private void sendWaveToTabModel(final Wave wave, final Model model) {
 
         sendWave(WBuilder.wave()
-                         .waveType(DockModel.ADD)
-                         .componentClass(DockModel.class)
-                         .addDatas(
-                                   WBuilder.waveData(DockModel.DOCK_KEY, waveBean(wave).dockConfig().key()),
-                                   WBuilder.waveData(DockModel.MODEL, model)
+                         .waveType(TabModel.ADD)
+                         .componentClass(TabModel.class)
+                         .addDatas(WBuilder.waveData(DockModel.DOCK_KEY, waveBean(wave).dockHolderKey())
         // ,
         // Builders.waveData(DockModel.MODEL, model )
         ));

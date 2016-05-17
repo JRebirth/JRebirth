@@ -5,25 +5,21 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class DockConfig {
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.component.ui.dock.DockModel;
+
+public class DockConfig extends PartConfig<DockConfig> {
 
     private final ObjectProperty<DockOrientation> orientationPy = new SimpleObjectProperty<>(DockOrientation.vertical);
 
-    private final ObservableList<TabConfig> panes = FXCollections.observableArrayList();
-
-    private String dockKey;
+    private final ObservableList<PartConfig<?>> panes = FXCollections.observableArrayList();
 
     public static DockConfig create() {
-        return new DockConfig();
+        return new DockConfig(DockModel.class);
     }
 
-    public String dockKey() {
-        return this.dockKey;
-    }
-
-    public DockConfig dockKey(final String dockKey) {
-        this.dockKey = dockKey;
-        return this;
+    public DockConfig(final Class<? extends Model> modelClass) {
+        super(modelClass);
     }
 
     public ObjectProperty<DockOrientation> orientationPy() {
@@ -39,7 +35,12 @@ public class DockConfig {
         return this;
     }
 
-    public ObservableList<TabConfig> panes() {
+    public DockConfig panes(final PartConfig<?>... configs) {
+        this.panes.addAll(configs);
+        return this;
+    }
+
+    public ObservableList<PartConfig<?>> panes() {
         return this.panes;
     }
 }

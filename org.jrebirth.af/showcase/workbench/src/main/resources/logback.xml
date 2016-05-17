@@ -1,7 +1,7 @@
 <configuration>
 
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>JRebirthComponentTest.log</file>
+		<file>Workbench.log</file>
 		<encoder>
 			<pattern>%date %level [%thread{6}] %logger{10} [%file:%line] %msg%n</pattern>
 		</encoder>
@@ -19,4 +19,7 @@
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="FILE" />
 	</root>
+	
+	<logger name="org.jrebirth.af" level="WARN" />
+	
 </configuration>

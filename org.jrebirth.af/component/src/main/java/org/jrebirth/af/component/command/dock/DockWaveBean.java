@@ -4,7 +4,7 @@ import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.component.ui.beans.DockConfig;
-import org.jrebirth.af.component.ui.beans.TabConfig;
+import org.jrebirth.af.component.ui.beans.PartConfig;
 
 public class DockWaveBean implements WaveBean {
 
@@ -16,7 +16,7 @@ public class DockWaveBean implements WaveBean {
 
     private UniqueKey<? extends Model>[] modelKey;
 
-    private TabConfig[] tab;
+    private PartConfig<?>[] parts;
 
     public static DockWaveBean create() {
         return new DockWaveBean();
@@ -69,17 +69,17 @@ public class DockWaveBean implements WaveBean {
     }
 
     /**
-     * @return Returns the tab.
+     * @return Returns the parts.
      */
-    public TabConfig[] tab() {
-        return this.tab;
+    public PartConfig<?>[] parts() {
+        return this.parts;
     }
 
     /**
-     * @param tab The tab to set.
+     * @param parts The parts to set.
      */
-    public DockWaveBean tab(final TabConfig... tab) {
-        this.tab = tab;
+    public DockWaveBean parts(final PartConfig<?>... parts) {
+        this.parts = parts;
         return this;
     }
 

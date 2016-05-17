@@ -17,19 +17,23 @@
  */
 package org.jrebirth.af.component.ui.dock;
 
+import java.util.Collections;
 import java.util.List;
 
-import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.object.ModelObject;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.component.command.dock.AddDockCommand;
+import org.jrebirth.af.component.command.dock.DockWaveBean;
+import org.jrebirth.af.component.command.dock.RemoveDockCommand;
 import org.jrebirth.af.component.ui.beans.DockConfig;
 import org.jrebirth.af.component.ui.beans.DockOrientation;
-import org.jrebirth.af.component.ui.beans.TabConfig;
+import org.jrebirth.af.component.ui.beans.PartConfig;
 import org.jrebirth.af.core.ui.object.DefaultObjectModel;
 import org.jrebirth.af.core.util.ObjectUtility;
 import org.jrebirth.af.core.wave.WBuilder;
@@ -50,14 +54,14 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
     };
 
     /** The model. */
-    public static WaveItemBase<TabConfig> MODEL = new WaveItemBase<TabConfig>() {
+    public static WaveItemBase<Model> MODEL = new WaveItemBase<Model>() {
     };
 
     /** The add. */
-    public static WaveType ADD = WBuilder.waveType("ADD_CONTAINER").items(MODEL);
+    public static WaveType ADD = WBuilder.waveType("ADD_PART").items(MODEL);
 
     /** The remove. */
-    public static WaveType REMOVE = WBuilder.waveType("REMOVE_CONTAINER").items(MODEL);
+    public static WaveType REMOVE = WBuilder.waveType("REMOVE_PART").items(MODEL);
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DockModel.class);
@@ -71,13 +75,19 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
     @Override
     protected void initModel() {
 
-        final WaveChecker waveChecker = wave -> ObjectUtility.equalsOrBothNull(wave.get(DOCK_KEY), object().dockKey());
+        final WaveChecker waveChecker = wave -> ObjectUtility.equalsOrBothNull(wave.get(DOCK_KEY), object().key());
 
         listen(waveChecker, ADD);
         listen(waveChecker, REMOVE);
 
-        if (ObjectUtility.nullOrEmpty(object().dockKey())) {
-            object().dockKey(DockModel.class.getSimpleName() + DOCK_COUNTER++);
+        if (ObjectUtility.nullOrEmpty(object().key())) {
+            object().key(DockModel.class.getSimpleName() + DOCK_COUNTER++);
+        }
+
+        for (final PartConfig<?> pc : object().panes()) {
+
+            callCommand(AddDockCommand.class, DockWaveBean.create().dockConfig(object()).parts(pc));
+
         }
     }
 
@@ -97,7 +107,7 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
     }
 
     @SuppressWarnings("unchecked")
-    private void onPanesChanged(final ListChangeListener.Change<? extends TabConfig> change) {
+    private void onPanesChanged(final ListChangeListener.Change<? extends PartConfig<?>> change) {
         while (change.next()) {
 
             System.out.println(change);
@@ -109,13 +119,13 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
             }
 
             if (change.wasRemoved()) {
-                Platform.runLater(
-                                  () -> view().removeContainer((List<TabConfig>) change.getRemoved()));
+                final List<PartConfig<?>> rList = (List<PartConfig<?>>) change.getRemoved();
+                callCommand(RemoveDockCommand.class, DockWaveBean.create().dockConfig(object()).parts(rList.toArray(new PartConfig<?>[0])));
             }
 
             if (change.wasAdded()) {
-                Platform.runLater(
-                                  () -> view().addContainer(change.getFrom(), change.getList().get(change.getFrom())));
+                // index change.getFrom()
+                callCommand(AddDockCommand.class, DockWaveBean.create().dockConfig(object()).parts(change.getList().get(change.getFrom())));
             }
 
         }
@@ -128,26 +138,30 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
     protected void showView() {
     }
 
-    public void addContainer(final ModelObject<TabConfig> model, final Wave wave) {
-        insertContainer(-1, model, wave);
+    public void addPart(final ModelObject<PartConfig<?>> model, final Wave wave) {
+        if (!object().panes().contains(model.object())) {
+            insertPart(-1, model, wave);
+        }
+        view().addItem(-1, model.node());
     }
 
-    public void removeContainer(final ModelObject<TabConfig> model, final Wave wave) {
-
+    public void removePart(final ModelObject<PartConfig<?>> model, final Wave wave) {
+        object().panes().remove(model.object());
+        view().removeItem(Collections.singletonList(model.node()));
     }
 
-    public void insertContainer(int idx, final ModelObject<TabConfig> model, final Wave wave) {
+    public void insertPart(int idx, final ModelObject<PartConfig<?>> model, final Wave wave) {
         // final TabBB<M> t = TabBB.create()
         // //.name(model.modelName())
         // .modelKey(model.getKey());
 
-        final TabConfig t = model.object();// BehaviorBean(TabBehavior.class);
+        final PartConfig<?> partConfig = model.object();// BehaviorBean(TabBehavior.class);
 
         if (idx < 0) {
             idx = object().panes().isEmpty() ? 0 : object().panes().size();
         }
 
-        object().panes().add(idx, t);
+        object().panes().add(idx, partConfig);
 
         // getView().addTab(idx, t);
 

@@ -3,10 +3,10 @@ package org.jrebirth.af.component.command.tab;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.ui.tab.TabModel;
-import org.jrebirth.af.core.command.single.internal.DefaultBeanCommand;
+import org.jrebirth.af.core.command.single.ui.DefaultUIBeanCommand;
 import org.jrebirth.af.core.exception.CommandException;
 
-public class AddTabCommand extends DefaultBeanCommand<TabWaveBean> {
+public class AddTabCommand extends DefaultUIBeanCommand<TabWaveBean> {
 
     @Override
     protected void initCommand() {

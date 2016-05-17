@@ -20,13 +20,12 @@ package org.jrebirth.af.component.ui.dock;
 import java.util.List;
 
 import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.annotation.RootNodeClass;
-import org.jrebirth.af.component.ui.beans.TabConfig;
-import org.jrebirth.af.component.ui.tab.TabModel;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.DefaultView;
 
@@ -69,20 +68,19 @@ public class DockView extends DefaultView<DockModel, SplitPane, DockController> 
 
     }
 
-    void removeContainer(final List<TabConfig> removed) {
+    void removeItem(final List<Node> removed) {
 
-        for (final TabConfig tabConfig : removed) {
-            final TabModel model = model().getModel(TabModel.class, tabConfig);
-
-            node().getItems().remove(model.node());
+        for (final Node node : removed) {
+            node().getItems().remove(node);
         }
+
     }
 
-    void addContainer(final int from, final TabConfig tabConfig) {
+    void addItem(final int from, final Node node) {
+        if (!node().getItems().contains(node)) {
+            node().getItems().add(node);
+        }
 
-        final TabModel model = model().getModel(TabModel.class, tabConfig);
-
-        node().getItems().add(model.node());
     }
 
 }
