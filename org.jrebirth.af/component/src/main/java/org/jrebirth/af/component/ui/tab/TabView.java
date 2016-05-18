@@ -24,7 +24,6 @@ import java.util.Map;
 import javafx.animation.ScaleTransition;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -38,7 +37,6 @@ import javafx.util.Duration;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.annotation.RootNodeClass;
-import org.jrebirth.af.component.behavior.dockable.DockableBehavior;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.ui.beans.TabOrientation;
 import org.jrebirth.af.core.log.JRLoggerFactory;
@@ -157,7 +155,7 @@ public class TabView extends DefaultView<TabModel, BorderPane, TabController> {
      */
     public void addTab(int idx, final Dockable tab) {
 
-        final Button b = new Button(tab.name(), new ImageView(model().getBehavior(DockableBehavior.class).modelIcon()));
+        final Button b = new Button(tab.name());// , new ImageView(model().getBehavior(DockableBehavior.class).modelIcon()));
         b.setUserData(tab);
 
         this.buttonByTab.put(tab.name(), b);

@@ -138,19 +138,19 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
     protected void showView() {
     }
 
-    public void addPart(final ModelObject<PartConfig<?>> model, final Wave wave) {
+    public void doAddPart(final ModelObject<PartConfig<?>> model, final Wave wave) {
         if (!object().panes().contains(model.object())) {
-            insertPart(-1, model, wave);
+            doInsertPart(-1, model, wave);
         }
         view().addItem(-1, model.node());
     }
 
-    public void removePart(final ModelObject<PartConfig<?>> model, final Wave wave) {
+    public void doRemovePart(final ModelObject<PartConfig<?>> model, final Wave wave) {
         object().panes().remove(model.object());
         view().removeItem(Collections.singletonList(model.node()));
     }
 
-    public void insertPart(int idx, final ModelObject<PartConfig<?>> model, final Wave wave) {
+    public void doInsertPart(int idx, final ModelObject<PartConfig<?>> model, final Wave wave) {
         // final TabBB<M> t = TabBB.create()
         // //.name(model.modelName())
         // .modelKey(model.getKey());

@@ -168,7 +168,7 @@ class TabTargetDragAdapter extends AbstractDefaultAdapter<TabController> impleme
 
                 st.play();
 
-                getController().model().insertTab(idx, serializedTab, null);
+                getController().model().doInsertTab(idx, serializedTab, null);
             }
             success = true;
         }

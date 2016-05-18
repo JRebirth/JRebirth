@@ -140,10 +140,10 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
      * @param tab the tab
      * @param wave the wave
      */
-    public void addTab(final Dockable tab, final Wave wave) {
+    public void doAddTab(final Dockable tab, final Wave wave) {
         // FIXME
         // if(model.hasBehavior()){
-        insertTab(-1, tab, wave);
+        doInsertTab(-1, tab, wave);
         // }
 
     }
@@ -154,7 +154,7 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
      * @param tab the tab
      * @param wave the wave
      */
-    public void removeTab(final Dockable tab, final Wave wave) {
+    public void doRemoveTab(final Dockable tab, final Wave wave) {
 
     }
 
@@ -165,7 +165,7 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
      * @param tab the tab
      * @param wave the wave
      */
-    public void insertTab(int idx, final Dockable tab, final Wave wave) {
+    public void doInsertTab(int idx, final Dockable tab, final Wave wave) {
         // final TabBB<M> t = TabBB.create()
         // //.name(model.modelName())
         // .modelKey(model.getKey());
@@ -175,10 +175,9 @@ public class TabModel extends DefaultObjectModel<TabModel, TabView, TabConfig> {
         if (idx < 0) {
             idx = object().tabs().isEmpty() ? 0 : object().tabs().size();
         }
+        //view().addTab(idx, tab);
 
         object().tabs().add(idx, tab);
-
-        // getView().addTab(idx, t);
 
     }
 }
