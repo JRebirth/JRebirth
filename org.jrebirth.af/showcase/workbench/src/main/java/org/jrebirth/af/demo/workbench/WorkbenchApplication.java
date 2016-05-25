@@ -4,8 +4,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
 import org.jrebirth.af.api.ui.Model;
-import org.jrebirth.af.component.resources.ComponentStyles;
 import org.jrebirth.af.core.application.DefaultApplication;
+import org.jrebirth.af.demo.workbench.resources.WorkbenchStyles;
 import org.jrebirth.af.demo.workbench.ui.TabDemoModel;
 
 /**
@@ -36,7 +36,7 @@ public final class WorkbenchApplication extends DefaultApplication<StackPane> {
     protected void customizeScene(final Scene scene) {
         super.customizeScene(scene);
 
-        addCSS(scene, ComponentStyles.DEFAULT);
+        addCSS(scene, WorkbenchStyles.DEFAULT);
     }
 
 }

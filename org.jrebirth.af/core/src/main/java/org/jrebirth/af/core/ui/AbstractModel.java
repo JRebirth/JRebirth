@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.ui;
 
+import java.util.List;
+
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.ui.Model;
@@ -24,6 +26,7 @@ import org.jrebirth.af.api.ui.NullView;
 import org.jrebirth.af.api.ui.View;
 import org.jrebirth.af.api.ui.annotation.AutoRelease;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.ui.object.ModelConfig;
 import org.jrebirth.af.core.util.ClassUtility;
 
 /**
@@ -63,12 +66,47 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     @Override
     protected void initInternalModel() throws CoreException {
 
+        if (key().value() instanceof ModelConfig<?>) {
+            applyStyle((ModelConfig<?>) key().value());
+        }
+
+        if (key().value() instanceof List<?>) {
+            for (final Object data : (List<?>) key().value()) {
+                if (data instanceof ModelConfig<?>) {
+                    applyStyle((ModelConfig<?>) key().value());
+                }
+            }
+        }
+
+        for (final Object data : key().optionalData()) {
+            if (data instanceof ModelConfig<?>) {
+                applyStyle((ModelConfig<?>) data);
+            }
+        }
+
         // Do generic stuff
         // listen(JRebirthWaves.SHOW_VIEW_WT);
         // listen(JRebirthWaves.HIDE_VIEW_WT);
 
         // Do custom stuff
         initModel();
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param mc
+     */
+    protected void applyStyle(final ModelConfig<?> mc) {
+        if (!ModelConfig.UNDETERMINED.equals(mc.id())) {
+            node().setId(mc.id());
+        }
+        if (!ModelConfig.UNDETERMINED.equals(mc.style())) {
+            node().setStyle(mc.style());
+        }
+        if (!ModelConfig.UNDETERMINED.equals(mc.styleClass())) {
+            node().getStyleClass().addAll(mc.styleClass().split(" "));
+        }
     }
 
     /**

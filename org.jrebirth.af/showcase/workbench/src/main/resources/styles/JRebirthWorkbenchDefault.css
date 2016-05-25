@@ -1,0 +1,31 @@
+/********************************************************************/
+/** 				. 												*/
+/********************************************************************/
+
+.split-pane > .split-pane-divider {
+    -fx-padding: 0 0.5em 0 0.5em; /* 0 3 0 3 */
+	-fx-background-color: red;
+}
+
+.HorizontalTabbedContainer{
+	-fx-background-color: black;
+}
+
+
+.VerticalTabbedContainer{
+	-fx-background-color: orange;
+}
+
+
+BorderPane.TabModel{
+	
+	-fx-background-color: cyan;
+}
+
+BorderPane.Top StackPane{
+	-fx-background-color: yellow;
+}
+
+BorderPane.Bottom StackPane{
+	-fx-background-color: grey;
+}

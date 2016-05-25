@@ -48,7 +48,7 @@ public class AddDockCommand extends DefaultUIBeanCommand<DockWaveBean> {
                          .waveType(DockModel.ADD)
                          .componentClass(DockModel.class)
                          .addDatas(
-                                   WBuilder.waveData(DockModel.DOCK_KEY, waveBean(wave).dockConfig().key()),
+                                   WBuilder.waveData(DockModel.DOCK_KEY, waveBean(wave).dockConfig().id()),
                                    WBuilder.waveData(DockModel.MODEL, model)
         // ,
         // Builders.waveData(DockModel.MODEL, model )

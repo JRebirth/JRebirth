@@ -75,13 +75,13 @@ public class DockModel extends DefaultObjectModel<DockModel, DockView, DockConfi
     @Override
     protected void initModel() {
 
-        final WaveChecker waveChecker = wave -> ObjectUtility.equalsOrBothNull(wave.get(DOCK_KEY), object().key());
+        final WaveChecker waveChecker = wave -> ObjectUtility.equalsOrBothNull(wave.get(DOCK_KEY), object().id());
 
         listen(waveChecker, ADD);
         listen(waveChecker, REMOVE);
 
-        if (ObjectUtility.nullOrEmpty(object().key())) {
-            object().key(DockModel.class.getSimpleName() + DOCK_COUNTER++);
+        if (ObjectUtility.nullOrEmpty(object().id())) {
+            object().id(DockModel.class.getSimpleName() + DOCK_COUNTER++);
         }
 
         for (final PartConfig<?> pc : object().panes()) {

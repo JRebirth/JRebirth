@@ -37,6 +37,9 @@ public class Dockable extends BehaviorDataBase implements Serializable {
 
     public Dockable modelKey(final UniqueKey<? extends Model> modelKey) {
         this.modelKey = modelKey;
+        if (!this.modelKey.optionalData().contains(this)) {
+            this.modelKey.optionalData().add(this);
+        }
         return this;
     }
 

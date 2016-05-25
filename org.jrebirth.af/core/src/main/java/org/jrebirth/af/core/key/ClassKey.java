@@ -18,7 +18,6 @@
 package org.jrebirth.af.core.key;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.jrebirth.af.api.key.UniqueKey;
@@ -117,7 +116,7 @@ public class ClassKey<R> implements UniqueKey<R> {
      */
     @Override
     public List<Object> optionalData() {
-        return this.optionalDatas == null ? Collections.emptyList() : this.optionalDatas;
+        return this.optionalDatas == null ? new ArrayList<>() : this.optionalDatas;
     }
 
 }

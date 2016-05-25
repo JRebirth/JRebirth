@@ -116,7 +116,7 @@ public class DockTargetDragAdapter extends AbstractDefaultAdapter<DockController
             final Dockable serializedTab = (Dockable) db.getContent(CustomDataFormat.DOCKABLE);
             // final Button b = getController().getView().getButtonByTab(serializedTab);
 
-            final TabModel model = getController().model().getModel(TabModel.class, TabConfig.create().key("ddddd").orientation(TabOrientation.top));
+            final TabModel model = getController().model().getModel(TabModel.class, TabConfig.create().id("ddddd").orientation(TabOrientation.top));
 
             // getController().model().addPart(model, null);
 

@@ -1,29 +1,12 @@
 package org.jrebirth.af.component.ui.beans;
 
 import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.core.ui.object.ModelConfig;
 
-public class PartConfig<PC extends PartConfig<PC>> {
-
-    private final Class<? extends Model> modelClass;
-
-    private String key;
+public class PartConfig<PC extends PartConfig<PC>> extends ModelConfig<PC> {
 
     public PartConfig(final Class<? extends Model> modelClass) {
-        this.modelClass = modelClass;
-    }
-
-    public Class<? extends Model> modelClass() {
-        return this.modelClass;
-    }
-
-    public String key() {
-        return this.key;
-    }
-
-    @SuppressWarnings("unchecked")
-    public PC key(final String key) {
-        this.key = key;
-        return (PC) this;
+        super(modelClass);
     }
 
 }
