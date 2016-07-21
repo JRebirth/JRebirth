@@ -17,10 +17,7 @@
  */
 package org.jrebirth.af.processor;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -45,6 +42,7 @@ import javax.tools.FileObject;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
 
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.jrebirth.af.api.annotation.Preload;
 import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.module.BootComponent;
@@ -66,8 +64,10 @@ import org.jboss.forge.roaster.model.util.Formatter;
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class ComponentProcessor extends AbstractProcessor {
 
+    private static final String JREBIRTH_PROPERTIES_PATH = "jrebirth.properties";
+    private static final String MODULE_STARTER_CLASS_PROPERTY = "moduleStarterClass";
     private static final String FORMATTER_PROPERTIES_FILE = "/org.eclipse.jdt.core.prefs";
-    private static String MODULE_STARTER_SPI_PATH = "META-INF/services/org.jrebirth.af.api.module.ModuleStarter";
+    private static final String MODULE_STARTER_SPI_PATH = "META-INF/services/org.jrebirth.af.api.module.ModuleStarter";
 
     /**
      * {@inheritDoc}
@@ -143,22 +143,10 @@ public class ComponentProcessor extends AbstractProcessor {
     private String createModuleStarter(final Map<Class<?>, Set<? extends Element>> annotationMap, ProcessingEnvironment processingEnv) {
         String moduleName = null;
         try {
+            moduleName = getModuleStarterName(processingEnv);
+            String starterName = moduleName.substring(moduleName.lastIndexOf('.'));
+            String pkg = moduleName.replace(starterName, "");
 
-            final Field f = processingEnv.getClass().getDeclaredField("options");
-            f.setAccessible(true);
-            final Object options = f.get(processingEnv);
-            final Field ff = options.getClass().getDeclaredField("values");
-            ff.setAccessible(true);
-            final Map<String, String> opt = (Map<String, String>) ff.get(options);
-
-            final String outputClasses = opt.get("-d");
-            final String baseDir = outputClasses.substring(0, outputClasses.indexOf("target"));
-            final MavenXpp3Reader pomReader = new MavenXpp3Reader();
-            final Model model = pomReader.read(new FileReader(new File(baseDir + "pom.xml")));
-
-            final String pkg = model.getGroupId() + "." + model.getArtifactId();
-            final String starterName = StringUtils.capitalize(model.getArtifactId()) + "ModuleStarter";
-            moduleName = pkg + "." + starterName;
             final JavaClassSource javaClass = Roaster.create(JavaClassSource.class);
 
             javaClass.setPackage(pkg).setName(starterName);
@@ -324,6 +312,40 @@ public class ComponentProcessor extends AbstractProcessor {
      */
     private void error(final Element source, final String msg) {
         this.processingEnv.getMessager().printMessage(javax.tools.Diagnostic.Kind.ERROR, msg, source);
+    }
+
+    private String getModuleStarterName(ProcessingEnvironment processingEnv) throws IOException, XmlPullParserException, NoSuchFieldException, IllegalAccessException {
+        String name = null;
+
+        InputStream propertiesStream = getClass().getClassLoader().getResourceAsStream(JREBIRTH_PROPERTIES_PATH);
+        if (propertiesStream != null) {
+            Properties properties = new Properties();
+            properties.load(propertiesStream);
+            name = properties.getProperty(MODULE_STARTER_CLASS_PROPERTY);
+        }
+
+        if (name == null || name.isEmpty()) {
+            name = getModuleStarterNameFromMaven(processingEnv);
+        }
+
+        return name;
+    }
+
+    private String getModuleStarterNameFromMaven(ProcessingEnvironment processingEnv) throws IOException, NoSuchFieldException, IllegalAccessException, XmlPullParserException {
+        final Field f = processingEnv.getClass().getDeclaredField("options");
+        f.setAccessible(true);
+        final Object options = f.get(processingEnv);
+        final Field ff = options.getClass().getDeclaredField("values");
+        ff.setAccessible(true);
+        final Map opt = (Map) ff.get(options);
+        final String outputClasses = (String) opt.get("-d");
+        final String baseDir = outputClasses.substring(0, outputClasses.indexOf("target"));
+        final MavenXpp3Reader pomReader = new MavenXpp3Reader();
+        final Model model = pomReader.read(new FileReader(new File(baseDir + "pom.xml")));
+
+        final String pkg = model.getGroupId() + "." + model.getArtifactId();
+        final String starterName = StringUtils.capitalize(model.getArtifactId()) + "ModuleStarter";
+        return pkg + "." + starterName;
     }
 
 }
