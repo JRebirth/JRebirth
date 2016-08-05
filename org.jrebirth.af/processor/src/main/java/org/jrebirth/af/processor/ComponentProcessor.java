@@ -317,12 +317,13 @@ public class ComponentProcessor extends AbstractProcessor {
     private String getModuleStarterName(ProcessingEnvironment processingEnv) throws IOException, XmlPullParserException, NoSuchFieldException, IllegalAccessException {
         String name = null;
 
-        InputStream propertiesStream = getClass().getClassLoader().getResourceAsStream(JREBIRTH_PROPERTIES_PATH);
-        if (propertiesStream != null) {
+        try {
+            FileObject resource = processingEnv.getFiler().getResource(StandardLocation.CLASS_PATH, "", JREBIRTH_PROPERTIES_PATH);
+            InputStream propertiesStream = resource.openInputStream();
             Properties properties = new Properties();
             properties.load(propertiesStream);
             name = properties.getProperty(MODULE_STARTER_CLASS_PROPERTY);
-        }
+        } catch (IOException ignored) {} // File jrebirth.properties was not found in classpath
 
         if (name == null || name.isEmpty()) {
             name = getModuleStarterNameFromMaven(processingEnv);
