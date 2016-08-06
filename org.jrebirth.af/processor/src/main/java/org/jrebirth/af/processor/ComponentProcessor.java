@@ -1,4 +1,4 @@
-/**
+/*
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2015
  * Contact : sebastien.bordes@jrebirth.org
@@ -17,14 +17,20 @@
  */
 package org.jrebirth.af.processor;
 
-import java.io.*;
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.jboss.forge.roaster.Roaster;
+import org.jboss.forge.roaster.model.source.JavaClassSource;
+import org.jboss.forge.roaster.model.source.MethodSource;
+import org.jboss.forge.roaster.model.util.Formatter;
+import org.jrebirth.af.api.annotation.Preload;
+import org.jrebirth.af.api.annotation.PriorityLevel;
+import org.jrebirth.af.api.module.BootComponent;
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.module.RegistrationPoint;
+import org.jrebirth.af.core.module.AbstractModuleStarter;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
@@ -36,27 +42,13 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.MirroredTypeException;
 import javax.lang.model.type.TypeMirror;
-import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic;
 import javax.tools.FileObject;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
-
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
-import org.jrebirth.af.api.annotation.Preload;
-import org.jrebirth.af.api.annotation.PriorityLevel;
-import org.jrebirth.af.api.module.BootComponent;
-import org.jrebirth.af.api.module.Register;
-import org.jrebirth.af.api.module.RegistrationPoint;
-import org.jrebirth.af.core.module.AbstractModuleStarter;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.jboss.forge.roaster.Roaster;
-import org.jboss.forge.roaster.model.source.JavaClassSource;
-import org.jboss.forge.roaster.model.source.MethodSource;
-import org.jboss.forge.roaster.model.util.Formatter;
+import java.io.*;
+import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * The Class ComponentProcessor.
@@ -96,10 +88,6 @@ public class ComponentProcessor extends AbstractProcessor {
             return false;
         }
 
-        final Map<String, Set<String>> services = new HashMap<String, Set<String>>();
-
-        final Elements elements = this.processingEnv.getElementUtils();
-
         final Map<Class<?>, Set<? extends Element>> annotationMap = new HashMap<>();
         annotationMap.put(Preload.class, roundEnv.getElementsAnnotatedWith(Preload.class));
         annotationMap.put(BootComponent.class, roundEnv.getElementsAnnotatedWith(BootComponent.class));
@@ -117,31 +105,35 @@ public class ComponentProcessor extends AbstractProcessor {
         return true;
     }
 
+    /**
+     * Creates SPI file to expose the module stater
+     *
+     * @param moduleName the name of the module
+     */
     private void createSPIFile(String moduleName) {
-        FileObject fo;
         try {
-            fo = this.processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "", MODULE_STARTER_SPI_PATH);
-            this.processingEnv.getMessager().printMessage(
-                                                          Diagnostic.Kind.NOTE,
-                                                          "creating spi file: " + fo.toUri());
+            FileObject fo = this.processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "", MODULE_STARTER_SPI_PATH);
+            this.processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "creating spi file: " + fo.toUri());
 
             final Writer writer = fo.openWriter();
             writer.write(moduleName);
             writer.close();
         } catch (final IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
     }
 
     /**
-     * Save module.
+     * Creates module stater class according to the annotations
      *
-     * @param module the module
+     * @param annotationMap map of annotations to process
+     * @param processingEnv environment to access facilities the tool framework provides to the processor
+     * @return Module name
      */
     private String createModuleStarter(final Map<Class<?>, Set<? extends Element>> annotationMap, ProcessingEnvironment processingEnv) {
-        String moduleName = null;
+        String moduleName;
         try {
             moduleName = getModuleStarterName(processingEnv);
             String starterName = moduleName.substring(moduleName.lastIndexOf('.'));
@@ -180,23 +172,15 @@ public class ComponentProcessor extends AbstractProcessor {
 
             System.out.println(formattedSource);
 
-            JavaFileObject jfo;
-            try {
-                jfo = this.processingEnv.getFiler().createSourceFile(moduleName);
-                this.processingEnv.getMessager().printMessage(
-                                                              Diagnostic.Kind.NOTE,
-                                                              "creating source file: " + jfo.toUri());
+            JavaFileObject jfo = this.processingEnv.getFiler().createSourceFile(moduleName);
+            this.processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "creating source file: " + jfo.toUri());
 
-                final Writer writer = jfo.openWriter();
-                writer.write(formattedSource);
-                writer.close();
-
-            } catch (final IOException e) {
-                e.printStackTrace();
-            }
-
+            final Writer writer = jfo.openWriter();
+            writer.write(formattedSource);
+            writer.close();
         } catch (final Exception e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return moduleName;
@@ -204,23 +188,16 @@ public class ComponentProcessor extends AbstractProcessor {
 
     private void appendPreload(JavaClassSource javaClass, StringBuilder body, Set<? extends Element> list) {
         for (final Element element : list) {
-
-            final Preload p = element.getAnnotation(Preload.class);
-
             body.append("\npreloadClass(")
                 .append(getSimpleClassName(element))
                 .append(".class);\n");
 
             javaClass.addImport(getClassName(element));
         }
-
     }
 
     private void appendBootComponent(JavaClassSource javaClass, StringBuilder body, Set<? extends Element> list) {
         for (final Element element : list) {
-
-            final BootComponent bc = element.getAnnotation(BootComponent.class);
-
             body.append("\nbootComponent(")
                 .append(getSimpleClassName(element))
                 .append(".class);\n");
@@ -268,13 +245,12 @@ public class ComponentProcessor extends AbstractProcessor {
      */
     private String getClassName(final Element element) {
         return getClassName(element.asType());
-
     }
 
     /**
      * Gets the class name.
      *
-     * @param t the t
+     * @param t the type
      * @return the class name
      */
     private String getClassName(final TypeMirror t) {
@@ -298,20 +274,10 @@ public class ComponentProcessor extends AbstractProcessor {
 
         if (t instanceof DeclaredType) {
             final DeclaredType dt = (DeclaredType) t;
-            res = ((TypeElement) dt.asElement()).getSimpleName().toString();
+            res = dt.asElement().getSimpleName().toString();
         }
 
         return res;
-    }
-
-    /**
-     * Error.
-     *
-     * @param source the source
-     * @param msg the msg
-     */
-    private void error(final Element source, final String msg) {
-        this.processingEnv.getMessager().printMessage(javax.tools.Diagnostic.Kind.ERROR, msg, source);
     }
 
     private String getModuleStarterName(ProcessingEnvironment processingEnv) throws IOException, XmlPullParserException, NoSuchFieldException, IllegalAccessException {
