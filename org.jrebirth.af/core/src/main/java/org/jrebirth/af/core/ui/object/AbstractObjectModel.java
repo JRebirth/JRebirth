@@ -21,11 +21,14 @@ import javafx.scene.Node;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.Controller;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.View;
 import org.jrebirth.af.api.ui.object.ModelObject;
+import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.AbstractModel;
+import org.jrebirth.af.core.ui.UIMessages;
 import org.jrebirth.af.core.util.ClassUtility;
 
 /**
@@ -41,6 +44,9 @@ import org.jrebirth.af.core.util.ClassUtility;
  */
 public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, ?>, O extends Object> extends AbstractModel<M, V> implements ModelObject<O> {
 
+    /** The class logger. */
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractObjectModel.class);
+    
     /** The list of type to exclude in order to find the object type from generics declaration. */
     private static final Class<?>[] OBJECT_EXCLUDED_CLASSES = new Class<?>[] { Model.class, View.class, Node.class, Controller.class };
 
@@ -83,11 +89,12 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
             }
 
             if (this.object == null) {
-                // Build the current default object by reflection if it hadn't been provided into the key
+                // Build the current default object by reflection if it hadn't been provided into the key without any constructor parameters
                 try {
                     this.object = (O) ClassUtility.buildGenericType(this.getClass(), OBJECT_EXCLUDED_CLASSES);
-                } catch (final CoreException e) {
-                    throw new CoreRuntimeException("Failure while building the bindable object for model " + getClass(), e);
+                } catch (final CoreException ce) {
+                	LOGGER.log(UIMessages.CREATION_FAILURE, ce, this.getClass().getName());
+                    throw new CoreRuntimeException(ce);
                 }
             }
         }

@@ -20,12 +20,10 @@ package org.jrebirth.af.api.ui;
 import javafx.scene.Node;
 
 /**
- * The class <strong>NullView</strong>.
+ * The class <strong>NullView</strong>, this kind of {@link View} can be used into generic declaration when view is omitted.
  *
  * @author Sébastien Bordes
  */
 public interface NullView extends View<Model, Node, Controller<?, ?>> {
 
-    /** The default view used when no view is required. */
-    NullView NULL_VIEW = null;
 }

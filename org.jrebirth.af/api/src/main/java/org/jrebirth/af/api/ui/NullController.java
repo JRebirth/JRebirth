@@ -18,7 +18,7 @@
 package org.jrebirth.af.api.ui;
 
 /**
- * The class <strong>NullController</strong>.
+ * The class <strong>NullController</strong>, this kind of {@link Controller} can be used into generic declaration when controller is omitted..
  *
  * @author Sébastien Bordes
  */

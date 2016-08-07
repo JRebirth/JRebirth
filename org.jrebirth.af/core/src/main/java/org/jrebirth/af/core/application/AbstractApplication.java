@@ -530,6 +530,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      */
     @SuppressWarnings("unchecked")
     protected P buildRootPane() throws CoreException {
+    	
+    	// Build the root node by reflection without any parameter or excluded class
         this.rootNode = (P) ClassUtility.buildGenericType(this.getClass(), Pane.class);
         return this.rootNode;
     }

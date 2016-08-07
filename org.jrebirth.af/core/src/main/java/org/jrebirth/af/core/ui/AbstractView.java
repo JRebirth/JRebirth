@@ -102,13 +102,15 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             this.rootNode = buildRootNode();
 
             // Manage components controller
-            buildController();
+            this.controller = buildController();
 
         } catch (final CoreException ce) {
-            this.controller = null;
+            
+        	this.controller = null;
             this.rootNode = null;
 
             LOGGER.log(UIMessages.CREATION_FAILURE, ce, this.getClass().getName());
+            // Don't send any RuntimeException but display an error node
             buildErrorNode(ce);
         }
     }
@@ -356,7 +358,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      */
     @SuppressWarnings("unchecked")
     protected N buildRootNode() throws CoreException {
-        return (N) ClassUtility.buildGenericType(this.getClass(), Node.class);
+    	
+    	// Build the node by reflection without any parameter or excluded class
+    	return (N) ClassUtility.buildGenericType(this.getClass(), Node.class);
     }
 
     /**
@@ -365,12 +369,10 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * @throws CoreException if introspection fails
      */
     @SuppressWarnings("unchecked")
-    protected void buildController() throws CoreException {
+    protected C buildController() throws CoreException {
 
-        if (!NullController.class.equals(ClassUtility.findGenericClass(this.getClass(), Controller.class))) {
-            // Build the controller by introspection
-            this.controller = (C) ClassUtility.buildGenericType(this.getClass(), Controller.class, this);
-        }
+    	// Build the controller by reflection excluding NullController
+    	return (C) ClassUtility.findAndBuildGenericType(this.getClass(), Controller.class, NullController.class,this);
     }
 
     /**

@@ -32,6 +32,8 @@ import javafx.application.Application;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.ui.NullView;
+import org.jrebirth.af.api.ui.View;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
@@ -86,36 +88,35 @@ public final class ClassUtility implements UtilMessages {
     }
 
     /**
-     * Build the nth generic type of a class.
+     *  Build the generic type according to assignable class.
      *
      * @param mainClass The main class used (that contain at least one generic type)
      * @param assignableClasses if the array contains only one class it define the type of the generic to build, otherwise it defines the types to skip to find the obejct to build
-     * @param parameters used by the constructor of the generic type
+     * @param constructorParameters used by the constructor of the generic type
      *
      * @return a new instance of the generic type
      *
      * @throws CoreException if the instantiation fails
      */
-    public static Object buildGenericType(final Class<?> mainClass, final Class<?>[] assignableClasses, final Object... parameters) throws CoreException {
+    public static Object buildGenericType(final Class<?> mainClass, final Class<?>[] assignableClasses, final Object... constructorParameters) throws CoreException {
         Class<?> genericClass = null;
         // Copy parameters type to find the right constructor
-        final Class<?>[] parameterTypes = new Class<?>[parameters.length];
+        final Class<?>[] constructorParameterTypes = new Class<?>[constructorParameters.length];
 
         try {
 
             int i = 0;
-            for (final Object obj : parameters) {
-                parameterTypes[i] = obj.getClass();
+            for (final Object obj : constructorParameters) {
+                constructorParameterTypes[i] = obj.getClass();
                 i++;
             }
 
             genericClass = findGenericClass(mainClass, assignableClasses);
 
-            // Find the right constructor and use arguments to create a new
-            // instance
-            final Constructor<?> constructor = getConstructor(genericClass, parameterTypes);
+            // Find the right constructor and use arguments to create a new instance
+            final Constructor<?> constructor = getConstructor(genericClass, constructorParameterTypes);
 
-            return constructor.newInstance(parameters);
+            return constructor.newInstance(constructorParameters);
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | SecurityException e) {
@@ -134,8 +135,8 @@ public final class ClassUtility implements UtilMessages {
 
             if (e instanceof IllegalArgumentException) {
                 LOGGER.log(ARGUMENT_LIST);
-                for (int i = 0; i < parameterTypes.length; i++) {
-                    LOGGER.log(ARGUMENT_DETAIL, parameterTypes[i].toString(), parameters[i].toString());
+                for (int i = 0; i < constructorParameterTypes.length; i++) {
+                    LOGGER.log(ARGUMENT_DETAIL, constructorParameterTypes[i].toString(), constructorParameters[i].toString());
                 }
             }
             if (genericClass == null) {
@@ -147,17 +148,40 @@ public final class ClassUtility implements UtilMessages {
     }
 
     /**
+	 * Find and Build the generic type according to assignable and excluded classes. 
+	 * 
+	 * @param mainClass The main class used (that contains at least one generic type)
+	 * @param assignableClasses if the array contains only one class it define the type of the generic to build, otherwise it defines the types to skip to find the obejct to build
+	 * @param excludedClass the class that shouldn't be retrieved (ie: NullXX class)
+	 * @param parameters used by the constructor of the generic type
+	 * 
+	 * @return the first generic type of a class that is compatible with provided assignable class.
+	 * 
+	 * @throws CoreException if the class cannot be found and is not an excluded class
+	 */
+	public static Object findAndBuildGenericType(final Class<?> mainClass, final Class<?> assignableClass, final Class<?> excludedClass, final Object... parameters) throws CoreException {
+	
+		Object object = null;
+		final Class<?> objectClass = ClassUtility.findGenericClass(mainClass, assignableClass);
+	
+		if (objectClass != null && (excludedClass == null || !excludedClass.equals(objectClass))) {
+			object = buildGenericType(mainClass, new Class<?>[] { assignableClass }, parameters);
+		}
+		return object;
+	}
+
+	/**
      * Retrieve the constructor of a Type.
      *
      * @param genericClass the type of the object
-     * @param parameterTypes an array of parameters' type
+     * @param constructorParameterTypes an array of parameters' type to find the right constructor
      *
      * @return the right constructor that matchers parameters
      */
-    private static Constructor<?> getConstructor(final Class<?> genericClass, final Class<?>[] parameterTypes) {
+    private static Constructor<?> getConstructor(final Class<?> genericClass, final Class<?>[] constructorParameterTypes) {
         Constructor<?> constructor = null;
         try {
-            constructor = genericClass.getConstructor(parameterTypes);
+            constructor = genericClass.getConstructor(constructorParameterTypes);
         } catch (final NoSuchMethodException e) {
             // Return the first constructor as a workaround
             constructor = genericClass.getConstructors()[0];

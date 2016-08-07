@@ -21,11 +21,13 @@ import java.util.List;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.NullView;
 import org.jrebirth.af.api.ui.View;
 import org.jrebirth.af.api.ui.annotation.AutoRelease;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.object.ModelConfig;
 import org.jrebirth.af.core.util.ClassUtility;
 
@@ -43,6 +45,9 @@ import org.jrebirth.af.core.util.ClassUtility;
 @AutoRelease
 public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> extends AbstractBaseModel<M> {
 
+    /** The class logger. */
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractModel.class);
+    
     /** The dedicated view component. */
     private transient V view;
 
@@ -154,26 +159,24 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     @Override
     public final V view() {
         if (this.view == null) {
-            buildView();
+        	try {
+				this.view = buildView();
+			} catch (CoreException ce) {
+				LOGGER.log(UIMessages.CREATION_FAILURE, ce, this.getClass().getName());
+				throw new CoreRuntimeException(ce);
+			}
         }
         return this.view;
     }
 
     /**
      * Create the view it was null.
+     * @throws CoreException 
      */
     @SuppressWarnings("unchecked")
-    protected void buildView() {
+    protected V buildView() throws CoreException {
 
-        final Class<?> viewClass = ClassUtility.findGenericClass(this.getClass(), View.class);
-
-        if (viewClass != null && !NullView.class.equals(viewClass)) {
-            // Build the current view by reflection
-            try {
-                this.view = (V) ClassUtility.buildGenericType(this.getClass(), View.class, this);
-            } catch (final CoreException e) {
-                throw new CoreRuntimeException("Failure while building the view for model " + getClass(), e);
-            }
-        }
+    	return (V) ClassUtility.findAndBuildGenericType(this.getClass(), View.class, NullView.class, this);
     }
+    
 }
