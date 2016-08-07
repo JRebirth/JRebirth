@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,6 +30,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.PaneBuilder;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Window;
 
 import org.jrebirth.af.api.exception.CoreException;
@@ -75,6 +76,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     /** The view controller. */
     private transient C controller;
 
+    /** The Pane that hold the view's root node. */
+    private transient Pane viewPane;
+
     /** The root node of this view. */
     private transient N rootNode;
 
@@ -101,12 +105,27 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             // Build the root node of the view
             this.rootNode = buildRootNode();
 
+            viewPane = new StackPane() {
+
+                /**
+                 * {@inheritDoc}
+                 */
+                @Override
+                public String getTypeSelector() {
+                    return model().getClass().getSimpleName().replace("Model", "");
+                }
+
+            };
+
+            viewPane.getChildren().add(rootNode);
+
             // Manage components controller
             this.controller = buildController();
 
         } catch (final CoreException ce) {
             
         	this.controller = null;
+            this.viewPane = null;
             this.rootNode = null;
 
             LOGGER.log(UIMessages.CREATION_FAILURE, ce, this.getClass().getName());
@@ -397,6 +416,14 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     @Override
     public final N node() {
         return this.rootNode;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final Pane pane() {
+        return this.viewPane;
     }
 
     /**

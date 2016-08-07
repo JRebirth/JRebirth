@@ -192,7 +192,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
      */
     @Override
     public Node node() {
-        return view() == null ? null : view().node();
+        return view() == null ? null : view().pane();
     }
 
     /**
