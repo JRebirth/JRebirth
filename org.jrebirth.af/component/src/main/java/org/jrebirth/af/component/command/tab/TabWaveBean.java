@@ -2,13 +2,13 @@ package org.jrebirth.af.component.command.tab;
 
 import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
-import org.jrebirth.af.component.ui.beans.TabConfig;
+import org.jrebirth.af.component.ui.beans.TabbedPaneConfig;
 
 public class TabWaveBean implements WaveBean {
 
     private String tabHolderKey;
 
-    private TabConfig tabConfig;
+    private TabbedPaneConfig tabConfig;
 
     // private Model[] model;
 
@@ -81,11 +81,11 @@ public class TabWaveBean implements WaveBean {
         return this;
     }
 
-    public TabConfig tabConfig() {
+    public TabbedPaneConfig tabConfig() {
         return this.tabConfig;
     }
 
-    public TabWaveBean tabConfig(final TabConfig tabConfig) {
+    public TabWaveBean tabConfig(final TabbedPaneConfig tabConfig) {
         this.tabConfig = tabConfig;
         return this;
     }

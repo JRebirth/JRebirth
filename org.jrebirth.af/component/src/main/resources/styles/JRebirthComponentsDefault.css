@@ -2,11 +2,11 @@
 /** 				. 												*/
 /********************************************************************/
 
-.HorizontalTabbedContainer{
+TabbedPane.HorizontalTabbedPane {
 	-fx-background-color: yellow;
 }
 
 
-.VerticalTabbedContainer{
-	-fx-background-color: yellow;
+TabbedPane.VerticalTabbedPane{
+	-fx-background-color: orange;
 }

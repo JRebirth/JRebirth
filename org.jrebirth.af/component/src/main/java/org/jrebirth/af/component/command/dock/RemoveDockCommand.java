@@ -4,8 +4,8 @@ import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.component.ui.beans.PartConfig;
-import org.jrebirth.af.component.ui.dock.DockModel;
-import org.jrebirth.af.component.ui.tab.TabModel;
+import org.jrebirth.af.component.ui.dock.DockPaneModel;
+import org.jrebirth.af.component.ui.tab.TabbedPaneModel;
 import org.jrebirth.af.core.command.single.ui.DefaultUIBeanCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.WBuilder;
@@ -46,9 +46,9 @@ public class RemoveDockCommand extends DefaultUIBeanCommand<DockWaveBean> {
     private void sendWaveToTabModel(final Wave wave, final Model model) {
 
         sendWave(WBuilder.wave()
-                         .waveType(TabModel.ADD)
-                         .componentClass(TabModel.class)
-                         .addDatas(WBuilder.waveData(DockModel.DOCK_KEY, waveBean(wave).dockHolderKey())
+                         .waveType(TabbedPaneModel.ADD)
+                         .componentClass(TabbedPaneModel.class)
+                         .addDatas(WBuilder.waveData(DockPaneModel.DOCK_KEY, waveBean(wave).dockHolderKey())
         // ,
         // Builders.waveData(DockModel.MODEL, model )
         ));

@@ -2,7 +2,7 @@ package org.jrebirth.af.component.command.tab;
 
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
-import org.jrebirth.af.component.ui.tab.TabModel;
+import org.jrebirth.af.component.ui.tab.TabbedPaneModel;
 import org.jrebirth.af.core.command.single.ui.DefaultUIBeanCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.WBuilder;
@@ -42,10 +42,10 @@ public class AddTabCommand extends DefaultUIBeanCommand<TabWaveBean> {
 
     private void sendWaveToTabModel(final Wave wave, final Dockable tab) {
         sendWave(WBuilder.wave()
-                         .waveType(TabModel.ADD)
-                         .componentClass(TabModel.class)
-                         .addDatas(WBuilder.waveData(TabModel.TAB_KEY, waveBean(wave).tabHolderKey()),
-                                   WBuilder.waveData(TabModel.TAB, tab)));
+                         .waveType(TabbedPaneModel.ADD)
+                         .componentClass(TabbedPaneModel.class)
+                         .addDatas(WBuilder.waveData(TabbedPaneModel.TAB_KEY, waveBean(wave).tabHolderKey()),
+                                   WBuilder.waveData(TabbedPaneModel.TAB, tab)));
 
         // getModel(TabModel.class, waveBean(wave).tabConfig()).addTab(tab, wave);
     }

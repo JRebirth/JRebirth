@@ -3,14 +3,14 @@ package org.jrebirth.af.component.command.dock;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.WaveBean;
-import org.jrebirth.af.component.ui.beans.DockConfig;
+import org.jrebirth.af.component.ui.beans.DockPaneConfig;
 import org.jrebirth.af.component.ui.beans.PartConfig;
 
 public class DockWaveBean implements WaveBean {
 
     private String dockHolderKey;
 
-    private DockConfig dockConfig;
+    private DockPaneConfig dockConfig;
 
     private Model[] model;
 
@@ -83,11 +83,11 @@ public class DockWaveBean implements WaveBean {
         return this;
     }
 
-    public DockConfig dockConfig() {
+    public DockPaneConfig dockConfig() {
         return this.dockConfig;
     }
 
-    public DockWaveBean dockConfig(final DockConfig dockConfig) {
+    public DockWaveBean dockConfig(final DockPaneConfig dockConfig) {
         this.dockConfig = dockConfig;
         return this;
     }

@@ -8,11 +8,11 @@ import org.jrebirth.af.api.ui.annotation.AutoRelease;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.command.tab.AddTabCommand;
 import org.jrebirth.af.component.command.tab.TabWaveBean;
-import org.jrebirth.af.component.ui.beans.DockConfig;
-import org.jrebirth.af.component.ui.beans.DockOrientation;
-import org.jrebirth.af.component.ui.beans.TabConfig;
-import org.jrebirth.af.component.ui.beans.TabOrientation;
-import org.jrebirth.af.component.ui.dock.DockModel;
+import org.jrebirth.af.component.ui.beans.DockPaneConfig;
+import org.jrebirth.af.component.ui.beans.DockPaneOrientation;
+import org.jrebirth.af.component.ui.beans.TabbedPaneConfig;
+import org.jrebirth.af.component.ui.beans.TabbedPaneOrientation;
+import org.jrebirth.af.component.ui.dock.DockPaneModel;
 import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.ui.simple.DefaultSimpleModel;
 
@@ -29,35 +29,35 @@ public class TabDemoModel extends DefaultSimpleModel<BorderPane> implements Modu
         String topRight = "TopRight";
         String bottomLeft = "BottomLeft";
         String bottomRight = "BottomRight";
-        final DockModel rootDock = getModel(DockModel.class,
-                                            DockConfig.create()
+        final DockPaneModel rootDock = getModel(DockPaneModel.class,
+                                            DockPaneConfig.create()
                                                       .id("RootDock")
-                                                      .orientation(DockOrientation.vertical)
+                                                      .orientation(DockPaneOrientation.vertical)
                                                       .panes(
-                                                             DockConfig.create()
+                                                             DockPaneConfig.create()
                                                                        .id("TopDock")
-                                                                       .orientation(DockOrientation.horizontal)
+                                                                       .orientation(DockPaneOrientation.horizontal)
                                                                        .panes(
-                                                                              TabConfig.create()
+                                                                              TabbedPaneConfig.create()
                                                                                        .id(topLeft)
                                                                                        .styleClass("Top Left")
-                                                                                       .orientation(TabOrientation.top),
-                                                                              TabConfig.create()
+                                                                                       .orientation(TabbedPaneOrientation.top),
+                                                                              TabbedPaneConfig.create()
                                                                                        .id(topRight)
                                                                                        .styleClass("Top Right")
-                                                                                       .orientation(TabOrientation.right)),
-                                                             DockConfig.create()
+                                                                                       .orientation(TabbedPaneOrientation.right)),
+                                                             DockPaneConfig.create()
                                                                        .id("BottomDock")
-                                                                       .orientation(DockOrientation.horizontal)
+                                                                       .orientation(DockPaneOrientation.horizontal)
                                                                        .panes(
-                                                                              TabConfig.create()
+                                                                              TabbedPaneConfig.create()
                                                                                        .id(bottomLeft)
                                                                                        .styleClass("Bottom Left")
-                                                                                       .orientation(TabOrientation.bottom),
-                                                                              TabConfig.create()
+                                                                                       .orientation(TabbedPaneOrientation.bottom),
+                                                                              TabbedPaneConfig.create()
                                                                                        .id(bottomRight)
                                                                                        .styleClass("Bottom Right")
-                                                                                       .orientation(TabOrientation.left))));
+                                                                                       .orientation(TabbedPaneOrientation.left))));
         node().setCenter(rootDock.node());
 
     }

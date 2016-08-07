@@ -4,7 +4,7 @@ import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.component.ui.beans.PartConfig;
-import org.jrebirth.af.component.ui.dock.DockModel;
+import org.jrebirth.af.component.ui.dock.DockPaneModel;
 import org.jrebirth.af.core.command.single.ui.DefaultUIBeanCommand;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.wave.WBuilder;
@@ -45,11 +45,11 @@ public class AddDockCommand extends DefaultUIBeanCommand<DockWaveBean> {
     private void sendWaveToTabModel(final Wave wave, final Model model) {
 
         sendWave(WBuilder.wave()
-                         .waveType(DockModel.ADD)
-                         .componentClass(DockModel.class)
+                         .waveType(DockPaneModel.ADD)
+                         .componentClass(DockPaneModel.class)
                          .addDatas(
-                                   WBuilder.waveData(DockModel.DOCK_KEY, waveBean(wave).dockConfig().id()),
-                                   WBuilder.waveData(DockModel.MODEL, model)
+                                   WBuilder.waveData(DockPaneModel.DOCK_KEY, waveBean(wave).dockConfig().id()),
+                                   WBuilder.waveData(DockPaneModel.MODEL, model)
         // ,
         // Builders.waveData(DockModel.MODEL, model )
         ));
