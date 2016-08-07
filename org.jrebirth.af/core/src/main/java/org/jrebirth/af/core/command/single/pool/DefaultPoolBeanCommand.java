@@ -22,6 +22,7 @@ import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.core.command.single.AbstractSingleCommand;
+import org.jrebirth.af.core.exception.CommandException;
 
 /**
  * The class <strong>DefaultPoolBeanCommand</strong>.
@@ -47,7 +48,7 @@ public class DefaultPoolBeanCommand<WB extends WaveBean> extends AbstractSingleC
      * {@inheritDoc}
      */
     @Override
-    protected void perform(final Wave wave) {
+    protected void perform(final Wave wave) throws CommandException {
         // Nothing to do yet by the default Pool command, must be overridden
     }
 
