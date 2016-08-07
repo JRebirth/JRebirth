@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,10 +27,7 @@ import org.jrebirth.af.core.ui.adapter.MouseAdapter;
  *
  * @author Sébastien Bordes
  */
-public final class MouseHandler extends AbstractNamedEventHandler<MouseEvent> {
-
-    /** The Mouse adapter. */
-    private final MouseAdapter mouseAdapter;
+public final class MouseHandler extends AbstractNamedEventHandler<MouseEvent, MouseAdapter> {
 
     /**
      * Default Constructor.
@@ -38,17 +35,7 @@ public final class MouseHandler extends AbstractNamedEventHandler<MouseEvent> {
      * @param mouseAdapter the adapter to use
      */
     public MouseHandler(final MouseAdapter mouseAdapter) {
-        super(MouseHandler.class.getSimpleName());
-        this.mouseAdapter = mouseAdapter;
-    }
-
-    /**
-     * Return the implementation of the mouse adapter interface.
-     *
-     * @return Returns the mouseAdapter.
-     */
-    public MouseAdapter getMouseAdapter() {
-        return this.mouseAdapter;
+        super(MouseHandler.class.getSimpleName(), mouseAdapter);
     }
 
     /**
@@ -60,27 +47,27 @@ public final class MouseHandler extends AbstractNamedEventHandler<MouseEvent> {
         final EventType<?> type = mouseEvent.getEventType();
 
         if (MouseEvent.DRAG_DETECTED == type) {
-            getMouseAdapter().mouseDragDetected(mouseEvent);
+            adapter().mouseDragDetected(mouseEvent);
         } else if (MouseEvent.MOUSE_CLICKED == type) {
-            getMouseAdapter().mouseClicked(mouseEvent);
+            adapter().mouseClicked(mouseEvent);
         } else if (MouseEvent.MOUSE_DRAGGED == type) {
-            getMouseAdapter().mouseDragged(mouseEvent);
+            adapter().mouseDragged(mouseEvent);
         } else if (MouseEvent.MOUSE_ENTERED == type) {
-            getMouseAdapter().mouseEntered(mouseEvent);
+            adapter().mouseEntered(mouseEvent);
         } else if (MouseEvent.MOUSE_ENTERED_TARGET == type) {
-            getMouseAdapter().mouseEnteredTarget(mouseEvent);
+            adapter().mouseEnteredTarget(mouseEvent);
         } else if (MouseEvent.MOUSE_EXITED == type) {
-            getMouseAdapter().mouseExited(mouseEvent);
+            adapter().mouseExited(mouseEvent);
         } else if (MouseEvent.MOUSE_EXITED_TARGET == type) {
-            getMouseAdapter().mouseExitedTarget(mouseEvent);
+            adapter().mouseExitedTarget(mouseEvent);
         } else if (MouseEvent.MOUSE_MOVED == type) {
-            getMouseAdapter().mouseMoved(mouseEvent);
+            adapter().mouseMoved(mouseEvent);
         } else if (MouseEvent.MOUSE_PRESSED == type) {
-            getMouseAdapter().mousePressed(mouseEvent);
+            adapter().mousePressed(mouseEvent);
         } else if (MouseEvent.MOUSE_RELEASED == type) {
-            getMouseAdapter().mouseReleased(mouseEvent);
+            adapter().mouseReleased(mouseEvent);
         } else {
-            getMouseAdapter().mouse(mouseEvent);
+            adapter().mouse(mouseEvent);
         }
 
     }

@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,10 +27,7 @@ import org.jrebirth.af.core.ui.adapter.ScrollAdapter;
  *
  * @author Sébastien Bordes
  */
-public final class ScrollHandler extends AbstractNamedEventHandler<ScrollEvent> {
-
-    /** The Scroll adapter. */
-    private final ScrollAdapter scrollAdapter;
+public final class ScrollHandler extends AbstractNamedEventHandler<ScrollEvent, ScrollAdapter> {
 
     /**
      * Default Constructor.
@@ -38,17 +35,7 @@ public final class ScrollHandler extends AbstractNamedEventHandler<ScrollEvent> 
      * @param scrollAdapter the adapter to use
      */
     public ScrollHandler(final ScrollAdapter scrollAdapter) {
-        super(ScrollHandler.class.getSimpleName());
-        this.scrollAdapter = scrollAdapter;
-    }
-
-    /**
-     * Return the implementation of the scroll adapter interface.
-     *
-     * @return Returns the scrollAdapter.
-     */
-    public ScrollAdapter getScrollAdapter() {
-        return this.scrollAdapter;
+        super(ScrollHandler.class.getSimpleName(), scrollAdapter);
     }
 
     /**
@@ -60,13 +47,13 @@ public final class ScrollHandler extends AbstractNamedEventHandler<ScrollEvent> 
         final EventType<?> type = scrollEvent.getEventType();
 
         if (ScrollEvent.SCROLL_STARTED == type) {
-            getScrollAdapter().scrollStarted(scrollEvent);
+            adapter().scrollStarted(scrollEvent);
         } else if (ScrollEvent.SCROLL == type) {
-            getScrollAdapter().scroll(scrollEvent);
+            adapter().scroll(scrollEvent);
         } else if (ScrollEvent.SCROLL_FINISHED == type) {
-            getScrollAdapter().scrollFinished(scrollEvent);
+            adapter().scrollFinished(scrollEvent);
         } else {
-            getScrollAdapter().anyScroll(scrollEvent);
+            adapter().anyScroll(scrollEvent);
         }
 
     }

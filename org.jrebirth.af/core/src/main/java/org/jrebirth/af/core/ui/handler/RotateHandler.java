@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,10 +27,7 @@ import org.jrebirth.af.core.ui.adapter.RotateAdapter;
  *
  * @author Sébastien Bordes
  */
-public final class RotateHandler extends AbstractNamedEventHandler<RotateEvent> {
-
-    /** The Rotate adapter. */
-    private final RotateAdapter rotateAdapter;
+public final class RotateHandler extends AbstractNamedEventHandler<RotateEvent, RotateAdapter> {
 
     /**
      * Default Constructor.
@@ -38,17 +35,7 @@ public final class RotateHandler extends AbstractNamedEventHandler<RotateEvent> 
      * @param rotateAdapter the adapter to use
      */
     public RotateHandler(final RotateAdapter rotateAdapter) {
-        super(RotateHandler.class.getSimpleName());
-        this.rotateAdapter = rotateAdapter;
-    }
-
-    /**
-     * Return the implementation of the rotate adapter interface.
-     *
-     * @return Returns the rotateAdapter.
-     */
-    public RotateAdapter getRotateAdapter() {
-        return this.rotateAdapter;
+        super(RotateHandler.class.getSimpleName(), rotateAdapter);
     }
 
     /**
@@ -60,13 +47,13 @@ public final class RotateHandler extends AbstractNamedEventHandler<RotateEvent> 
         final EventType<?> type = rotateEvent.getEventType();
 
         if (RotateEvent.ROTATION_STARTED == type) {
-            getRotateAdapter().rotationStarted(rotateEvent);
+            adapter().rotationStarted(rotateEvent);
         } else if (RotateEvent.ROTATE == type) {
-            getRotateAdapter().rotate(rotateEvent);
+            adapter().rotate(rotateEvent);
         } else if (RotateEvent.ROTATION_FINISHED == type) {
-            getRotateAdapter().rotationFinished(rotateEvent);
+            adapter().rotationFinished(rotateEvent);
         } else {
-            getRotateAdapter().anyRotate(rotateEvent);
+            adapter().anyRotate(rotateEvent);
         }
 
     }

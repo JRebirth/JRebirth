@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,10 +27,7 @@ import org.jrebirth.af.core.ui.adapter.DragAdapter;
  *
  * @author Sébastien Bordes
  */
-public final class DragHandler extends AbstractNamedEventHandler<DragEvent> {
-
-    /** The Drag adapter. */
-    private final DragAdapter dragAdapter;
+public final class DragHandler extends AbstractNamedEventHandler<DragEvent, DragAdapter> {
 
     /**
      * Default Constructor.
@@ -38,17 +35,7 @@ public final class DragHandler extends AbstractNamedEventHandler<DragEvent> {
      * @param dragAdapter the adapter to use
      */
     public DragHandler(final DragAdapter dragAdapter) {
-        super(DragHandler.class.getSimpleName());
-        this.dragAdapter = dragAdapter;
-    }
-
-    /**
-     * Return the implementation of the drag adapter interface.
-     *
-     * @return Returns the mouseAdapter.
-     */
-    public DragAdapter getDragAdapter() {
-        return this.dragAdapter;
+        super(DragHandler.class.getSimpleName(), dragAdapter);
     }
 
     /**
@@ -60,21 +47,21 @@ public final class DragHandler extends AbstractNamedEventHandler<DragEvent> {
         final EventType<?> type = dragEvent.getEventType();
 
         if (DragEvent.DRAG_DONE == type) {
-            getDragAdapter().dragDone(dragEvent);
+            adapter().dragDone(dragEvent);
         } else if (DragEvent.DRAG_DROPPED == type) {
-            getDragAdapter().dragDropped(dragEvent);
+            adapter().dragDropped(dragEvent);
         } else if (DragEvent.DRAG_ENTERED == type) {
-            getDragAdapter().dragEntered(dragEvent);
+            adapter().dragEntered(dragEvent);
         } else if (DragEvent.DRAG_ENTERED_TARGET == type) {
-            getDragAdapter().dragEnteredTarget(dragEvent);
+            adapter().dragEnteredTarget(dragEvent);
         } else if (DragEvent.DRAG_EXITED == type) {
-            getDragAdapter().dragExited(dragEvent);
+            adapter().dragExited(dragEvent);
         } else if (DragEvent.DRAG_EXITED_TARGET == type) {
-            getDragAdapter().dragExitedTarget(dragEvent);
+            adapter().dragExitedTarget(dragEvent);
         } else if (DragEvent.DRAG_OVER == type) {
-            getDragAdapter().dragOver(dragEvent);
+            adapter().dragOver(dragEvent);
         } else {
-            getDragAdapter().drag(dragEvent);
+            adapter().drag(dragEvent);
         }
 
     }

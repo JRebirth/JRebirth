@@ -32,6 +32,7 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.ui.adapter.EventAdapter;
 import org.jrebirth.af.core.ui.handler.AbstractNamedEventHandler;
 import org.jrebirth.af.core.wave.JRebirthWaves;
 
@@ -90,7 +91,7 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
     protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveType waveType, final Callback<E, Boolean> callback,
             final WaveData<?>... waveData) {
 
-        node.addEventHandler(eventType, new AbstractNamedEventHandler<E>("LinkWave") {
+        node.addEventHandler(eventType, new AbstractNamedEventHandler<E, EventAdapter>("LinkWave", null) {
 
             /**
              * Handle the triggered event.

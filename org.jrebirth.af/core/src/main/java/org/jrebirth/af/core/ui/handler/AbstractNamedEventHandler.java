@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +20,8 @@ package org.jrebirth.af.core.ui.handler;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
+import org.jrebirth.af.core.ui.adapter.EventAdapter;
+
 /**
  * The class <strong>AbstractNamedEventHandler</strong>.
  *
@@ -27,21 +29,24 @@ import javafx.event.EventHandler;
  *
  * @param <E> the event to handle
  */
-public abstract class AbstractNamedEventHandler<E extends Event> implements EventHandler<E> {
+public abstract class AbstractNamedEventHandler<E extends Event, A extends EventAdapter> implements EventHandler<E> {
 
     /**
      * The name of the event handler. It should give some information about the call context
      */
     private final String name;
+    /** The Action adapter. */
+    protected final A adapter;
 
     /**
      * Default Constructor.
      *
      * @param name the name of this event handler
      */
-    public AbstractNamedEventHandler(final String name) {
+    public AbstractNamedEventHandler(final String name, final A adapter) {
         super();
         this.name = name;
+        this.adapter = adapter;
     }
 
     /**
@@ -49,6 +54,15 @@ public abstract class AbstractNamedEventHandler<E extends Event> implements Even
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Return the implementation of the adapter interface.
+     *
+     * @return Returns the adapter.
+     */
+    public A adapter() {
+        return this.adapter;
     }
 
     /**

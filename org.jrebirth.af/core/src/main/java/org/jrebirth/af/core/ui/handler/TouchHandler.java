@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,10 +27,7 @@ import org.jrebirth.af.core.ui.adapter.TouchAdapter;
  *
  * @author Sébastien Bordes
  */
-public final class TouchHandler extends AbstractNamedEventHandler<TouchEvent> {
-
-    /** The Touch adapter. */
-    private final TouchAdapter touchAdapter;
+public final class TouchHandler extends AbstractNamedEventHandler<TouchEvent, TouchAdapter> {
 
     /**
      * Default Constructor.
@@ -38,17 +35,7 @@ public final class TouchHandler extends AbstractNamedEventHandler<TouchEvent> {
      * @param touchAdapter the adapter to use
      */
     public TouchHandler(final TouchAdapter touchAdapter) {
-        super(TouchHandler.class.getSimpleName());
-        this.touchAdapter = touchAdapter;
-    }
-
-    /**
-     * Return the implementation of the touch adapter interface.
-     *
-     * @return Returns the touchAdapter.
-     */
-    public TouchAdapter getTouchAdapter() {
-        return this.touchAdapter;
+        super(TouchHandler.class.getSimpleName(), touchAdapter);
     }
 
     /**
@@ -60,15 +47,15 @@ public final class TouchHandler extends AbstractNamedEventHandler<TouchEvent> {
         final EventType<?> type = touchEvent.getEventType();
 
         if (TouchEvent.TOUCH_PRESSED == type) {
-            getTouchAdapter().touchPressed(touchEvent);
+            adapter().touchPressed(touchEvent);
         } else if (TouchEvent.TOUCH_RELEASED == type) {
-            getTouchAdapter().touchReleased(touchEvent);
+            adapter().touchReleased(touchEvent);
         } else if (TouchEvent.TOUCH_MOVED == type) {
-            getTouchAdapter().touchMoved(touchEvent);
+            adapter().touchMoved(touchEvent);
         } else if (TouchEvent.TOUCH_STATIONARY == type) {
-            getTouchAdapter().touchStationary(touchEvent);
+            adapter().touchStationary(touchEvent);
         } else {
-            getTouchAdapter().touch(touchEvent);
+            adapter().touch(touchEvent);
         }
 
     }

@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,10 +27,7 @@ import org.jrebirth.af.core.ui.adapter.KeyAdapter;
  *
  * @author Sébastien Bordes
  */
-public final class KeyHandler extends AbstractNamedEventHandler<KeyEvent> {
-
-    /** The Key adapter. */
-    private final KeyAdapter keyAdapter;
+public final class KeyHandler extends AbstractNamedEventHandler<KeyEvent, KeyAdapter> {
 
     /**
      * Default Constructor.
@@ -38,17 +35,7 @@ public final class KeyHandler extends AbstractNamedEventHandler<KeyEvent> {
      * @param keyAdapter the adapter to use
      */
     public KeyHandler(final KeyAdapter keyAdapter) {
-        super(KeyHandler.class.getSimpleName());
-        this.keyAdapter = keyAdapter;
-    }
-
-    /**
-     * Return the implementation of the key adapter interface.
-     *
-     * @return Returns the keyAdapter.
-     */
-    public KeyAdapter getKeyAdapter() {
-        return this.keyAdapter;
+        super(KeyHandler.class.getSimpleName(), keyAdapter);
     }
 
     /**
@@ -60,13 +47,13 @@ public final class KeyHandler extends AbstractNamedEventHandler<KeyEvent> {
         final EventType<?> type = keyEvent.getEventType();
 
         if (KeyEvent.KEY_PRESSED == type) {
-            getKeyAdapter().keyPressed(keyEvent);
+            adapter().keyPressed(keyEvent);
         } else if (KeyEvent.KEY_RELEASED == type) {
-            getKeyAdapter().keyReleased(keyEvent);
+            adapter().keyReleased(keyEvent);
         } else if (KeyEvent.KEY_TYPED == type) {
-            getKeyAdapter().keyTyped(keyEvent);
+            adapter().keyTyped(keyEvent);
         } else {
-            getKeyAdapter().key(keyEvent);
+            adapter().key(keyEvent);
         }
 
     }

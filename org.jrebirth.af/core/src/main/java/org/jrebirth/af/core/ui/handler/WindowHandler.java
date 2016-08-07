@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,10 +27,7 @@ import org.jrebirth.af.core.ui.adapter.WindowAdapter;
  *
  * @author Sébastien Bordes
  */
-public final class WindowHandler extends AbstractNamedEventHandler<WindowEvent> {
-
-    /** The Window adapter. */
-    private final WindowAdapter windowAdapter;
+public final class WindowHandler extends AbstractNamedEventHandler<WindowEvent, WindowAdapter> {
 
     /**
      * Default Constructor.
@@ -38,17 +35,7 @@ public final class WindowHandler extends AbstractNamedEventHandler<WindowEvent> 
      * @param windowAdapter the adapter to use
      */
     public WindowHandler(final WindowAdapter windowAdapter) {
-        super(WindowHandler.class.getSimpleName());
-        this.windowAdapter = windowAdapter;
-    }
-
-    /**
-     * Return the implementation of the window adapter interface.
-     *
-     * @return Returns the WindowAdapter.
-     */
-    public WindowAdapter getWindowAdapter() {
-        return this.windowAdapter;
+        super(WindowHandler.class.getSimpleName(), windowAdapter);
     }
 
     /**
@@ -60,17 +47,17 @@ public final class WindowHandler extends AbstractNamedEventHandler<WindowEvent> 
         final EventType<?> type = windowEvent.getEventType();
 
         if (WindowEvent.WINDOW_CLOSE_REQUEST == type) {
-            getWindowAdapter().windowCloseRequest(windowEvent);
+            adapter().windowCloseRequest(windowEvent);
         } else if (WindowEvent.WINDOW_HIDDEN == type) {
-            getWindowAdapter().windowHidden(windowEvent);
+            adapter().windowHidden(windowEvent);
         } else if (WindowEvent.WINDOW_HIDING == type) {
-            getWindowAdapter().windowHiding(windowEvent);
+            adapter().windowHiding(windowEvent);
         } else if (WindowEvent.WINDOW_SHOWING == type) {
-            getWindowAdapter().windowShowing(windowEvent);
+            adapter().windowShowing(windowEvent);
         } else if (WindowEvent.WINDOW_SHOWN == type) {
-            getWindowAdapter().windowShown(windowEvent);
+            adapter().windowShown(windowEvent);
         } else {
-            getWindowAdapter().window(windowEvent);
+            adapter().window(windowEvent);
         }
 
     }

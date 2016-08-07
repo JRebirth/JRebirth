@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,10 +27,7 @@ import org.jrebirth.af.core.ui.adapter.ZoomAdapter;
  *
  * @author Sébastien Bordes
  */
-public final class ZoomHandler extends AbstractNamedEventHandler<ZoomEvent> {
-
-    /** The Zoom adapter. */
-    private final ZoomAdapter zoomAdapter;
+public final class ZoomHandler extends AbstractNamedEventHandler<ZoomEvent, ZoomAdapter> {
 
     /**
      * Default Constructor.
@@ -38,17 +35,7 @@ public final class ZoomHandler extends AbstractNamedEventHandler<ZoomEvent> {
      * @param zoomAdapter the adapter to use
      */
     public ZoomHandler(final ZoomAdapter zoomAdapter) {
-        super(ZoomHandler.class.getSimpleName());
-        this.zoomAdapter = zoomAdapter;
-    }
-
-    /**
-     * Return the implementation of the zoom adapter interface.
-     *
-     * @return Returns the zoomAdapter.
-     */
-    public ZoomAdapter getZoomAdapter() {
-        return this.zoomAdapter;
+        super(ZoomHandler.class.getSimpleName(), zoomAdapter);
     }
 
     /**
@@ -60,13 +47,13 @@ public final class ZoomHandler extends AbstractNamedEventHandler<ZoomEvent> {
         final EventType<?> type = zoomEvent.getEventType();
 
         if (ZoomEvent.ZOOM_STARTED == type) {
-            getZoomAdapter().zoomStarted(zoomEvent);
+            adapter().zoomStarted(zoomEvent);
         } else if (ZoomEvent.ZOOM == type) {
-            getZoomAdapter().zoom(zoomEvent);
+            adapter().zoom(zoomEvent);
         } else if (ZoomEvent.ZOOM_FINISHED == type) {
-            getZoomAdapter().zoomFinished(zoomEvent);
+            adapter().zoomFinished(zoomEvent);
         } else {
-            getZoomAdapter().anyZoom(zoomEvent);
+            adapter().anyZoom(zoomEvent);
         }
 
     }

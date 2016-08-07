@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,10 +27,7 @@ import org.jrebirth.af.core.ui.adapter.SwipeAdapter;
  *
  * @author Sébastien Bordes
  */
-public final class SwipeHandler extends AbstractNamedEventHandler<SwipeEvent> {
-
-    /** The Swipe adapter. */
-    private final SwipeAdapter swipeAdapter;
+public final class SwipeHandler extends AbstractNamedEventHandler<SwipeEvent, SwipeAdapter> {
 
     /**
      * Default Constructor.
@@ -38,17 +35,7 @@ public final class SwipeHandler extends AbstractNamedEventHandler<SwipeEvent> {
      * @param swipeAdapter the adapter to use
      */
     public SwipeHandler(final SwipeAdapter swipeAdapter) {
-        super(SwipeHandler.class.getSimpleName());
-        this.swipeAdapter = swipeAdapter;
-    }
-
-    /**
-     * Return the implementation of the swipe adapter interface.
-     *
-     * @return Returns the swipeAdapter.
-     */
-    public SwipeAdapter getSwipeAdapter() {
-        return this.swipeAdapter;
+        super(SwipeHandler.class.getSimpleName(), swipeAdapter);
     }
 
     /**
@@ -60,15 +47,15 @@ public final class SwipeHandler extends AbstractNamedEventHandler<SwipeEvent> {
         final EventType<?> type = swipeEvent.getEventType();
 
         if (SwipeEvent.SWIPE_DOWN == type) {
-            getSwipeAdapter().swipeDown(swipeEvent);
+            adapter().swipeDown(swipeEvent);
         } else if (SwipeEvent.SWIPE_LEFT == type) {
-            getSwipeAdapter().swipeLeft(swipeEvent);
+            adapter().swipeLeft(swipeEvent);
         } else if (SwipeEvent.SWIPE_RIGHT == type) {
-            getSwipeAdapter().swipeRight(swipeEvent);
+            adapter().swipeRight(swipeEvent);
         } else if (SwipeEvent.SWIPE_UP == type) {
-            getSwipeAdapter().swipeUp(swipeEvent);
+            adapter().swipeUp(swipeEvent);
         } else {
-            getSwipeAdapter().anySwipe(swipeEvent);
+            adapter().anySwipe(swipeEvent);
         }
 
     }

@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,6 +33,7 @@ import org.jrebirth.af.api.ui.annotation.type.Key;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.ui.UIMessages;
+import org.jrebirth.af.core.ui.adapter.EventAdapter;
 import org.jrebirth.af.core.util.ClassUtility;
 
 /**
@@ -42,7 +43,7 @@ import org.jrebirth.af.core.util.ClassUtility;
  *
  * @param <E> the event type to handle
  */
-public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventHandler<E> implements EventHandler<E>, UIMessages {
+public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventHandler<E, EventAdapter> implements EventHandler<E>, UIMessages {
 
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AnnotationEventHandler.class);
@@ -62,7 +63,7 @@ public class AnnotationEventHandler<E extends Event> extends AbstractNamedEventH
      * @throws CoreException if handler is not correctly initialized
      */
     public AnnotationEventHandler(final Object callbackObject, final Annotation annotation) throws CoreException {
-        super(AnnotationEventHandler.class.getSimpleName() + "-" + annotation.annotationType().getName());
+        super(AnnotationEventHandler.class.getSimpleName() + "-" + annotation.annotationType().getName(), null);
 
         this.callbackObject = callbackObject;
         this.annotation = annotation;

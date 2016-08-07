@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,10 +26,7 @@ import org.jrebirth.af.core.ui.adapter.ActionAdapter;
  *
  * @author Sébastien Bordes
  */
-public final class FinishedHandler extends AbstractNamedEventHandler<ActionEvent> {
-
-    /** The Action adapter. */
-    private final ActionAdapter actionAdapter;
+public final class FinishedHandler extends AbstractNamedEventHandler<ActionEvent, ActionAdapter> {
 
     /**
      * Default Constructor.
@@ -37,17 +34,7 @@ public final class FinishedHandler extends AbstractNamedEventHandler<ActionEvent
      * @param actionAdapter the adapter to use
      */
     public FinishedHandler(final ActionAdapter actionAdapter) {
-        super(FinishedHandler.class.getSimpleName());
-        this.actionAdapter = actionAdapter;
-    }
-
-    /**
-     * Return the implementation of the action adapter interface.
-     *
-     * @return Returns the finishedAdapter.
-     */
-    public ActionAdapter getActionAdapter() {
-        return this.actionAdapter;
+        super(FinishedHandler.class.getSimpleName(), actionAdapter);
     }
 
     /**
@@ -56,7 +43,7 @@ public final class FinishedHandler extends AbstractNamedEventHandler<ActionEvent
     @Override
     public void handle(final ActionEvent actionEvent) {
 
-        getActionAdapter().action(actionEvent);
+        adapter().action(actionEvent);
 
     }
 }
