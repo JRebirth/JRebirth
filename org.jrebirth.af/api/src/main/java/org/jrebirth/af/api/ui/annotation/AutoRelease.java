@@ -36,7 +36,7 @@ public @interface AutoRelease {
     /**
      * Define id the Model can be automatically released.
      *
-     * The default value is true, you shall add an annoation with false value to disable the automatic release
+     * The default value is true, you shall add an annotation with false value to disable the automatic release
      */
     boolean value() default true;
 
