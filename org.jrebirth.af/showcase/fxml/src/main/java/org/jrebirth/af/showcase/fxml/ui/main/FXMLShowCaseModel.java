@@ -1,17 +1,18 @@
 package org.jrebirth.af.showcase.fxml.ui.main;
 
+import org.jrebirth.af.api.component.basic.InnerComponent;
 import org.jrebirth.af.api.module.Register;
 import org.jrebirth.af.api.ui.ModuleModel;
 import org.jrebirth.af.component.ui.stack.StackModel;
+import org.jrebirth.af.core.component.basic.CBuilder;
 import org.jrebirth.af.core.ui.DefaultModel;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The class <strong>SampleModel</strong>.
+ * The class <strong>FXMLShowCaseModel</strong>.
  *
- * @author
+ * @author Sébastien Bordes
  */
 @Register(value = ModuleModel.class)
 public final class FXMLShowCaseModel extends DefaultModel<FXMLShowCaseModel, FXMLShowCaseView> implements ModuleModel {
@@ -28,7 +29,9 @@ public final class FXMLShowCaseModel extends DefaultModel<FXMLShowCaseModel, FXM
     protected void initModel() {
         super.initModel();
 
-        stackModel = getModel(StackModel.class, FXMLPage.class);
+        InnerComponent<StackModel> stack = CBuilder.innerComponent(StackModel.class, FXMLPage.class);
+        stackModel = findInnerComponent(stack);
+        //stackModel = getModel(StackModel.class, FXMLPage.class);
 
     }
 
