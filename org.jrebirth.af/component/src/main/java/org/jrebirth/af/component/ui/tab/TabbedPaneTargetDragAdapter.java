@@ -19,7 +19,6 @@ package org.jrebirth.af.component.ui.tab;
 
 import javafx.animation.ScaleTransition;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;

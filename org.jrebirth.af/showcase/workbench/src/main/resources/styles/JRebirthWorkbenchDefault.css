@@ -34,12 +34,49 @@ TabbedPane BorderPane VBox {
 }
 
 TabbedPane HBox ToggleButton, TabbedPane VBox ToggleButton {
-	-fx-border-color: aquamarine ;
+	-fx-border-color: #654b00;
 	-fx-border-style: solid ;
-	-fx-border-width: 1 1 0 1;
-	-fx-border-insets: 2 0 0 0;
-	-fx-border-radius: 5 5 0 0;
+
 	-fx-padding: 0 10 0 10;
+	-fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #654b00;
+}
+
+TabbedPane HBox.Top, TabbedPane HBox.Bottom{
+	-fx-padding: 0 10 0 10;
+}
+TabbedPane VBox.Left, TabbedPane VBox.Right{
+	-fx-padding: 10 0 10 0;
+}
+
+TabbedPane HBox.Top ToggleButton{
+	-fx-border-width: 		1 1 0 1;
+	-fx-border-radius:		5 5 0 0;
+	-fx-background-radius: 	5 5 0 0;
+	-fx-border-insets: 		2 0 0 0;
+	-fx-background-insets: 	2 0 0 0;
+}
+TabbedPane HBox.Bottom ToggleButton{
+	-fx-border-width: 		0 1 1 1;
+	-fx-border-radius:		0 0 5 5;
+	-fx-background-radius: 	0 0 5 5;
+	-fx-border-insets: 		0 0 2 0;
+	-fx-background-insets: 	0 0 2 0;
+}
+TabbedPane VBox.Left ToggleButton {
+	-fx-border-width: 		1 0 1 1;
+	-fx-border-radius:		5 0 0 5;
+	-fx-background-radius: 	5 0 0 5;
+	-fx-border-insets: 		0 0 0 2;
+	-fx-background-insets: 	0 0 0 2;
+}
+TabbedPane VBox.Right ToggleButton {
+	-fx-border-width: 		1 1 1 0;
+	-fx-border-radius:		0 5 5 0;
+	-fx-background-radius: 	0 5 5 0;
+	-fx-background-insets: 	0 2 0 0;
+	-fx-border-insets: 		0 2 0 0;
 }
 
 TabbedPane HBox ToggleButton:selected, TabbedPane VBox ToggleButton:selected {

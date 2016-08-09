@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.animation.ScaleTransition;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
@@ -141,13 +142,29 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
             this.box.setMaxWidth(Region.USE_COMPUTED_SIZE);
 
             this.box.getStyleClass().add("HorizontalTabbedPane");
-
+            
         } else {
             this.box = new VBox();
             this.box.setMaxHeight(Region.USE_COMPUTED_SIZE);
 
             this.box.getStyleClass().add("VerticalTabbedPane");
         }
+        
+        switch(model().object().orientation()){
+	        case top:
+	        	this.box.getStyleClass().add("Top");
+	            break;
+	        case bottom:
+	        	this.box.getStyleClass().add("Bottom");
+	            break;
+	        case left:
+	        	this.box.getStyleClass().add("Left");
+	            break;
+	        case right:
+	        	this.box.getStyleClass().add("Right");
+	            break;
+        }
+        
 
         return this.box;
     }
@@ -177,6 +194,12 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
 
         b.setScaleX(0.0);
         this.box.getChildren().add(idx, b);
+        
+        if(this.box instanceof HBox){
+        	HBox.setMargin(b, new Insets(0, 1, 0, 0));
+        }else if(this.box instanceof VBox){
+        	VBox.setMargin(b, new Insets(1, 0, 0, 0));
+        }
 
         final ScaleTransition st = new ScaleTransition(Duration.millis(600));
         st.setNode(b);
