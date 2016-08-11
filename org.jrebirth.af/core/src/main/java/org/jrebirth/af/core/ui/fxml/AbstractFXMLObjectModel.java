@@ -24,6 +24,7 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.NullView;
 import org.jrebirth.af.api.ui.fxml.FXMLComponent;
 import org.jrebirth.af.api.ui.fxml.FXMLController;
+import org.jrebirth.af.api.ui.fxml.FXMLModel;
 import org.jrebirth.af.core.resource.fxml.FXML;
 import org.jrebirth.af.core.ui.object.AbstractObjectModel;
 
@@ -37,13 +38,7 @@ import org.jrebirth.af.core.ui.object.AbstractObjectModel;
  * @param <M> the class type of the current model
  * @param <O> the class type of the bindable object
  */
-public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object> extends AbstractObjectModel<M, NullView, O> {
-
-    /** The key part prefix used to attach the fxml path to this class. */
-    public static final String KEYPART_FXML_PREFIX = "fxml:";
-
-    /** The key part prefix used to attach the resource bundle path to this class. */
-    public static final String KEYPART_RB_PREFIX = "rb:";
+public abstract class AbstractFXMLObjectModel<M extends Model, O extends Object> extends AbstractObjectModel<M, NullView, O> implements FXMLModel {
 
     /** The fxml path. */
     private String fxmlPath;
