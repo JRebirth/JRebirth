@@ -32,8 +32,6 @@ import javafx.application.Application;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.log.JRLogger;
-import org.jrebirth.af.api.ui.NullView;
-import org.jrebirth.af.api.ui.View;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
@@ -88,7 +86,7 @@ public final class ClassUtility implements UtilMessages {
     }
 
     /**
-     *  Build the generic type according to assignable class.
+     * Build the generic type according to assignable class.
      *
      * @param mainClass The main class used (that contain at least one generic type)
      * @param assignableClasses if the array contains only one class it define the type of the generic to build, otherwise it defines the types to skip to find the obejct to build
@@ -148,29 +146,29 @@ public final class ClassUtility implements UtilMessages {
     }
 
     /**
-	 * Find and Build the generic type according to assignable and excluded classes. 
-	 * 
-	 * @param mainClass The main class used (that contains at least one generic type)
-	 * @param assignableClasses if the array contains only one class it define the type of the generic to build, otherwise it defines the types to skip to find the obejct to build
-	 * @param excludedClass the class that shouldn't be retrieved (ie: NullXX class)
-	 * @param parameters used by the constructor of the generic type
-	 * 
-	 * @return the first generic type of a class that is compatible with provided assignable class.
-	 * 
-	 * @throws CoreException if the class cannot be found and is not an excluded class
-	 */
-	public static Object findAndBuildGenericType(final Class<?> mainClass, final Class<?> assignableClass, final Class<?> excludedClass, final Object... parameters) throws CoreException {
-	
-		Object object = null;
-		final Class<?> objectClass = ClassUtility.findGenericClass(mainClass, assignableClass);
-	
-		if (objectClass != null && (excludedClass == null || !excludedClass.equals(objectClass))) {
-			object = buildGenericType(mainClass, new Class<?>[] { assignableClass }, parameters);
-		}
-		return object;
-	}
+     * Find and Build the generic type according to assignable and excluded classes.
+     * 
+     * @param mainClass The main class used (that contains at least one generic type)
+     * @param assignableClasses if the array contains only one class it define the type of the generic to build, otherwise it defines the types to skip to find the obejct to build
+     * @param excludedClass the class that shouldn't be retrieved (ie: NullXX class)
+     * @param parameters used by the constructor of the generic type
+     * 
+     * @return the first generic type of a class that is compatible with provided assignable class.
+     * 
+     * @throws CoreException if the class cannot be found and is not an excluded class
+     */
+    public static Object findAndBuildGenericType(final Class<?> mainClass, final Class<?> assignableClass, final Class<?> excludedClass, final Object... parameters) throws CoreException {
 
-	/**
+        Object object = null;
+        final Class<?> objectClass = ClassUtility.findGenericClass(mainClass, assignableClass);
+
+        if (objectClass != null && (excludedClass == null || !excludedClass.equals(objectClass))) {
+            object = buildGenericType(mainClass, new Class<?>[] { assignableClass }, parameters);
+        }
+        return object;
+    }
+
+    /**
      * Retrieve the constructor of a Type.
      *
      * @param genericClass the type of the object

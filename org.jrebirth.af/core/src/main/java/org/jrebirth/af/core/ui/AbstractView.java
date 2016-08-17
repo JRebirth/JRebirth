@@ -105,7 +105,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
             // Build the root node of the view
             this.rootNode = buildRootNode();
 
-            viewPane = new StackPane() {
+            this.viewPane = new StackPane() {
 
                 /**
                  * {@inheritDoc}
@@ -117,14 +117,14 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
             };
 
-            viewPane.getChildren().add(rootNode);
+            this.viewPane.getChildren().add(this.rootNode);
 
             // Manage components controller
             this.controller = buildController();
 
         } catch (final CoreException ce) {
-            
-        	this.controller = null;
+
+            this.controller = null;
             this.viewPane = null;
             this.rootNode = null;
 
@@ -377,9 +377,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      */
     @SuppressWarnings("unchecked")
     protected N buildRootNode() throws CoreException {
-    	
-    	// Build the node by reflection without any parameter or excluded class
-    	return (N) ClassUtility.buildGenericType(this.getClass(), Node.class);
+
+        // Build the node by reflection without any parameter or excluded class
+        return (N) ClassUtility.buildGenericType(this.getClass(), Node.class);
     }
 
     /**
@@ -390,8 +390,8 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
     @SuppressWarnings("unchecked")
     protected C buildController() throws CoreException {
 
-    	// Build the controller by reflection excluding NullController
-    	return (C) ClassUtility.findAndBuildGenericType(this.getClass(), Controller.class, NullController.class,this);
+        // Build the controller by reflection excluding NullController
+        return (C) ClassUtility.findAndBuildGenericType(this.getClass(), Controller.class, NullController.class, this);
     }
 
     /**

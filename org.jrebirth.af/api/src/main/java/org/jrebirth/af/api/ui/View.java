@@ -41,7 +41,7 @@ public interface View<M extends Model, N extends Node, C extends Controller<?, ?
      * @return the view base javafx node
      */
     N node();
-    
+
     /**
      * Return the view's pane that hold the root node.
      *

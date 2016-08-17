@@ -58,10 +58,13 @@ public final class DefaultComponentFactory implements ComponentFactory, FacadeMe
             if (clazz.isInterface()) {
 
                 final List<RegistrationItem> items = this.implementations.get(clazz);
-                Collections.sort(items);// FIXME Manage NPE
+                if (items != null) {
 
-                for (final RegistrationItem item : items) {
-                    components.add((R) item.implClass().newInstance());
+                    Collections.sort(items);
+
+                    for (final RegistrationItem item : items) {
+                        components.add((R) item.implClass().newInstance());
+                    }
                 }
 
             } else {

@@ -25,7 +25,6 @@ import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.NullView;
 import org.jrebirth.af.api.ui.View;
-import org.jrebirth.af.api.ui.annotation.AutoRelease;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.object.ModelConfig;
@@ -42,12 +41,11 @@ import org.jrebirth.af.core.util.ClassUtility;
  * @param <M> the class type of the current model
  * @param <V> the class type of the view managed by this model
  */
-@AutoRelease
 public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> extends AbstractBaseModel<M> {
 
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractModel.class);
-    
+
     /** The dedicated view component. */
     private transient V view;
 
@@ -99,7 +97,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
 
     /**
      * TODO To complete.
-     * 
+     *
      * @param mc
      */
     protected void applyStyle(final ModelConfig<?> mc) {
@@ -159,24 +157,25 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     @Override
     public final V view() {
         if (this.view == null) {
-        	try {
-				this.view = buildView();
-			} catch (CoreException ce) {
-				LOGGER.log(UIMessages.CREATION_FAILURE, ce, this.getClass().getName());
-				throw new CoreRuntimeException(ce);
-			}
+            try {
+                this.view = buildView();
+            } catch (final CoreException ce) {
+                LOGGER.log(UIMessages.CREATION_FAILURE, ce, this.getClass().getName());
+                throw new CoreRuntimeException(ce);
+            }
         }
         return this.view;
     }
 
     /**
      * Create the view it was null.
-     * @throws CoreException 
+     * 
+     * @throws CoreException when han't been built correctly
      */
     @SuppressWarnings("unchecked")
     protected V buildView() throws CoreException {
 
-    	return (V) ClassUtility.findAndBuildGenericType(this.getClass(), View.class, NullView.class, this);
+        return (V) ClassUtility.findAndBuildGenericType(this.getClass(), View.class, NullView.class, this);
     }
-    
+
 }
