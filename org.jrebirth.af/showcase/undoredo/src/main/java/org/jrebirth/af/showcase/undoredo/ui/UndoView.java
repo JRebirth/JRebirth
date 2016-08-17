@@ -25,6 +25,7 @@ import javafx.scene.layout.PaneBuilder;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.AbstractView;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,8 +82,8 @@ public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoCont
         this.addRectangleButton = new Button("Add Rectangle");
 
         node().setTop(FlowPaneBuilder.create()
-                                            .children(this.undoButton, this.redoButton, this.addCircleButton, this.addSquareButton, this.addRectangleButton)
-                                            .build());
+                                     .children(this.undoButton, this.redoButton, this.addCircleButton, this.addSquareButton, this.addRectangleButton)
+                                     .build());
 
         this.editor = PaneBuilder.create().style("-fx-background-color:beige").build();
 

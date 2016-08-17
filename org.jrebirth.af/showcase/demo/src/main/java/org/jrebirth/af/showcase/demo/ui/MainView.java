@@ -20,6 +20,7 @@ package org.jrebirth.af.showcase.demo.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -70,22 +71,27 @@ public final class MainView extends DefaultView<MainModel, BorderPane, MainContr
      */
     @Override
     public void start() {
-        buttonList.stream().findFirst().ifPresent(button -> button.fire());
+        this.buttonList.stream().findFirst().ifPresent(button -> button.fire());
     }
 
     private Node createMenu() {
         final VBox box = new VBox();
+
         for (final ModuleModel mm : model().getModules()) {
-            box.getChildren().add(createModuleButton(mm));
+            final Node n = createModuleButton(mm);
+            VBox.setMargin(n, new Insets(4, 4, 4, 4));
+            box.getChildren().add(n);
         }
         return box;
     }
 
-    private Node createModuleButton(ModuleModel mm) {
+    private Node createModuleButton(final ModuleModel mm) {
         final Button b = new Button(mm.moduleName());
+        b.getStyleClass().add("menuButton");
+        b.setPrefSize(100, 50);
         b.setOnAction(controller()::onButtonFired);
         b.setUserData(Key.create(mm.getClass()));
-        buttonList.add(b);
+        this.buttonList.add(b);
         return b;
     }
 

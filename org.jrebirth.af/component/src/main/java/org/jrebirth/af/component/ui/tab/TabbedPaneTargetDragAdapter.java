@@ -134,7 +134,7 @@ class TabbedPaneTargetDragAdapter extends AbstractDefaultAdapter<TabbedPaneContr
 
             final Pane targetBox = getController().view().getBox();
 
-            final int idx = getController().view().removeMarker();
+            int idx = getController().view().removeMarker();
 
             System.out.println("Add tab " + serializedTab.name() + " at " + idx);
 
@@ -142,9 +142,11 @@ class TabbedPaneTargetDragAdapter extends AbstractDefaultAdapter<TabbedPaneContr
 
                 final Dockable realTab = (Dockable) b.getUserData();
                 final int currentIdx = targetBox.getChildren().indexOf(b);
-                // if (currentIdx < idx) {
-                // idx--;
-                // }
+                
+                // Same tab is moved at the end so we have to remove one to the marker position
+                if (currentIdx < idx) {
+                	 idx--;
+                }
                 // targetBox.getChildren().remove(b);
                 // targetBox.getChildren().add(idx, b);
                 // getController().getView().removeMarker();

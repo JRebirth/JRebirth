@@ -127,20 +127,25 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
      * @param pageModelKey the mdoelKey for the page to show
      */
     private void showPage(final UniqueKey<? extends Model> pageModelKey) {
-        LOGGER.info("Show Page Model: " + pageModelKey.toString());
+        if(pageModelKey != null && !pageModelKey.equals(this.currentModelKey)){
+        	
+        	LOGGER.info("Show Page Model: " + pageModelKey.toString());
 
-        // Create the Wave Bean that will hold all data processed by chained commands
-        final DisplayModelWaveBean waveBean = DisplayModelWaveBean.create()
-                                                                  // Define the placeholder that will receive the content
-                                                                  .childrenPlaceHolder(view().node().getChildren())
-                                                                  // Allow to add element behind the stack to allow transition
-                                                                  .appendChild(false)
-                                                                  .showModelKey(pageModelKey)
-                                                                  .hideModelKey(this.currentModelKey);
-
-        this.currentModelKey = waveBean.showModelKey();
-
-        callCommand(ShowFadingModelCommand.class, waveBean);
+	        // Create the Wave Bean that will hold all data processed by chained commands
+	        final DisplayModelWaveBean waveBean = DisplayModelWaveBean.create()
+	                                                                  // Define the placeholder that will receive the content
+	                                                                  .childrenPlaceHolder(view().node().getChildren())
+	                                                                  // Allow to add element behind the stack to allow transition
+	                                                                  .appendChild(false)
+	                                                                  .showModelKey(pageModelKey)
+	                                                                  .hideModelKey(this.currentModelKey);
+	
+	        this.currentModelKey = waveBean.showModelKey();
+	
+	        callCommand(ShowFadingModelCommand.class, waveBean);
+        } else {
+        	LOGGER.debug("Page Model currently displayed: " + pageModelKey.toString());
+        }
     }
 
     /**

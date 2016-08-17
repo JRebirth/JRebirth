@@ -46,13 +46,13 @@ public final class MainController extends DefaultController<MainModel, MainView>
         super(view);
     }
 
-    public void onButtonFired(ActionEvent event) {
+    public void onButtonFired(final ActionEvent event) {
         final Button b = (Button) event.getSource();
         final UniqueKey<? extends Model> data = (UniqueKey<? extends Model>) b.getUserData();
 
         model().sendWave(StackWaves.SHOW_PAGE_MODEL,
-                            WBuilder.waveData(StackWaves.PAGE_MODEL_KEY, data),
-                            WBuilder.waveData(StackWaves.STACK_NAME, "DemoStack"));
+                         WBuilder.waveData(StackWaves.PAGE_MODEL_KEY, data),
+                         WBuilder.waveData(StackWaves.STACK_NAME, "DemoStack"));
     }
 
 }

@@ -19,6 +19,7 @@ package org.jrebirth.af.component.ui.tab;
 
 import java.util.List;
 
+import javafx.animation.SequentialTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
@@ -29,6 +30,7 @@ import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.ui.beans.TabbedPaneConfig;
 import org.jrebirth.af.component.ui.beans.TabbedPaneOrientation;
+import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.ui.object.DefaultObjectModel;
 import org.jrebirth.af.core.util.ObjectUtility;
 import org.jrebirth.af.core.wave.WBuilder;
@@ -105,9 +107,17 @@ public class TabbedPaneModel extends DefaultObjectModel<TabbedPaneModel, TabbedP
 
     }
 
-    @SuppressWarnings("unchecked")
     private void onTabsChanged(final ListChangeListener.Change<? extends Dockable> change) {
-        while (change.next()) {
+    	JRebirth.runIntoJAT(
+				  () -> onTabsChangedJAT(change)
+				  );
+    }
+    	
+				  
+    @SuppressWarnings("unchecked")
+	private void onTabsChangedJAT(final ListChangeListener.Change<? extends Dockable> change) {
+        SequentialTransition st = new SequentialTransition();
+    	while (change.next()) {
 
             System.out.println(change);
 
@@ -118,16 +128,15 @@ public class TabbedPaneModel extends DefaultObjectModel<TabbedPaneModel, TabbedP
             }
 
             if (change.wasRemoved()) {
-                Platform.runLater(
-                                  () -> view().removeTab((List<Dockable>) change.getRemoved()));
+            	st.getChildren().add(view().removeTab((List<Dockable>) change.getRemoved()));
             }
 
             if (change.wasAdded()) {
-                Platform.runLater(
-                                  () -> view().addTab(change.getFrom(), change.getList().get(change.getFrom())));
+            	st.getChildren().add(view().addTab(change.getFrom(), change.getList().get(change.getFrom())));
             }
 
         }
+    	st.play();
     }
 
     /**

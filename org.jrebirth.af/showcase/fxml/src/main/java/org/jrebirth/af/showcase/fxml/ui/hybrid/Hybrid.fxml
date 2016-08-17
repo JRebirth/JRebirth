@@ -7,21 +7,18 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.jrebirth.af.showcase.fxml.ui.hybrid.HybridController">
-  <children>
-    <BorderPane layoutX="7.0" layoutY="-7.0" prefHeight="400.0" prefWidth="600.0">
-      <center>
-        <VBox prefHeight="120.0" prefWidth="600.0">
-          <children>
-            <Label prefWidth="273.0" text="%title">
-              <font>
-                <Font name="System Bold" size="16.0" />
-              </font>
-            </Label>
-            <TextArea prefHeight="225.0" prefWidth="600.0" text="This page is composed by:&#10;- A main Model =&gt; HybridModel&#10;- A Main FXML file + properties =&gt; Hybrid.fxml + Hybrid.properties&#10;- A FXML Controller class =&gt; HybridController&#10;&#10;It doesn't contain : &#10;_ a View ( = ModelView from JRebirth hierarchy classes)&#10;_ a Controller ( = ModelController from JRebirth hierarchy classes)&#10;&#10;The FXML file is loaded according to Key Part provided" wrapText="true" />
-          </children>
-        </VBox>
-      </center>
-    </BorderPane>
-  </children>
-</AnchorPane>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jrebirth.af.showcase.fxml.ui.hybrid.HybridController">
+<center>
+  <VBox prefHeight="120.0" prefWidth="600.0">
+    <children>
+      <Label prefWidth="273.0" text="%title">
+        <font>
+          <Font name="System Bold" size="16.0" />
+        </font>
+      </Label>
+      <TextArea prefHeight="225.0" prefWidth="600.0" text="This page is composed by:&#10;- A main Model =&gt; HybridModel&#10;- A Main FXML file + properties =&gt; Hybrid.fxml + Hybrid.properties&#10;- A FXML Controller class =&gt; HybridController&#10;&#10;It doesn't contain : &#10;_ a View ( = ModelView from JRebirth hierarchy classes)&#10;_ a Controller ( = ModelController from JRebirth hierarchy classes)&#10;&#10;The FXML file is loaded according to Key Part provided" wrapText="true" />
+    </children>
+  </VBox>
+</center>
+</BorderPane>

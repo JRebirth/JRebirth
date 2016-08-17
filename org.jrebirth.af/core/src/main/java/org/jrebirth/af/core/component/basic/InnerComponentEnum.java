@@ -47,7 +47,7 @@ public interface InnerComponentEnum {
 
     /**
      * Define an inner component.
-     * 
+     *
      * @param <C> the generic type
      * @param clazz the clazz
      * @param keyPart the key part

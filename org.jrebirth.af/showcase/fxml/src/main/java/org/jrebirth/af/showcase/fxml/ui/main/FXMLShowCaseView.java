@@ -2,15 +2,17 @@ package org.jrebirth.af.showcase.fxml.ui.main;
 
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPaneBuilder;
+import javafx.scene.layout.FlowPane;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.AbstractView;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,9 +58,13 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
         final ToggleGroup group = new PersistentButtonToggleGroup();
         group.getToggles().addAll(this.showEmbedded, this.showStandalone, this.showHybrid, this.showIncluded);
 
-        node().setTop(FlowPaneBuilder.create()
-                                            .children(this.showEmbedded, this.showStandalone, this.showIncluded, this.showHybrid)
-                                            .build());
+        final FlowPane fp = new FlowPane();
+        fp.setStyle("-fx-background-color: #2f4f4f;");
+        fp.setAlignment(Pos.CENTER);
+        fp.setHgap(4);
+        fp.getChildren().addAll(this.showEmbedded, this.showStandalone, this.showIncluded, this.showHybrid);
+
+        node().setTop(fp);
 
     }
 

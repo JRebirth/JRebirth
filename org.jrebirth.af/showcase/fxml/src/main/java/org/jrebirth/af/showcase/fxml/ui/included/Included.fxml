@@ -8,37 +8,34 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-preview-i18n-resource Included.properties?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
-  <children>
-    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0">
-      <center>
-        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-          <tabs>
-            <Tab text="%include1">
-              <content>
-                <fx:include source="SubIncluded1.fxml" prefHeight="103.0" prefWidth="179.0" />
-              </content>
-            </Tab>
-            <Tab text="Include FXML #2">
-              <content>
-                <fx:include source="SubIncluded2.fxml" prefHeight="103.0" prefWidth="179.0" />
-              </content>
-            </Tab>
-          </tabs>
-        </TabPane>
-      </center>
-      <top>
-        <VBox prefHeight="120.0" prefWidth="600.0">
-          <children>
-            <Label prefWidth="273.0" text="%title">
-              <font>
-                <Font name="System Bold" size="16.0" />
-              </font>
-            </Label>
-            <TextArea prefHeight="100.0" prefWidth="600.0" text="This page is composed by:&#10;- A main Model =&gt; IncludeModel&#10;- A Main FXML file + properties =&gt; Included.fxml + Included.properties&#10;- two fxml files included with fx:include&#10;- two FXML Controller that allow getting the model object of the main model" wrapText="true" />
-          </children>
-        </VBox>
-      </top>
-    </BorderPane>
-  </children>
-</AnchorPane>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<center>
+  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+    <tabs>
+      <Tab text="%include1">
+        <content>
+          <fx:include prefHeight="103.0" prefWidth="179.0" source="SubIncluded1.fxml" />
+        </content>
+      </Tab>
+      <Tab text="Include FXML #2">
+        <content>
+          <fx:include prefHeight="103.0" prefWidth="179.0" source="SubIncluded2.fxml" />
+        </content>
+      </Tab>
+    </tabs>
+  </TabPane>
+</center>
+<top>
+  <VBox prefHeight="120.0" prefWidth="600.0">
+    <children>
+      <Label prefWidth="273.0" text="%title">
+        <font>
+          <Font name="System Bold" size="16.0" />
+        </font>
+      </Label>
+      <TextArea prefHeight="100.0" prefWidth="600.0" text="This page is composed by:&#10;- A main Model =&gt; IncludeModel&#10;- A Main FXML file + properties =&gt; Included.fxml + Included.properties&#10;- two fxml files included with fx:include&#10;- two FXML Controller that allow getting the model object of the main model" wrapText="true" />
+    </children>
+  </VBox>
+</top>
+</BorderPane>

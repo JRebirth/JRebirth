@@ -30,6 +30,7 @@ import org.jrebirth.af.api.resource.ResourceItem;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.application.DefaultApplication;
 import org.jrebirth.af.demo.workbench.resources.WorkbenchStyles;
+import org.jrebirth.af.showcase.demo.resources.DemoStyles;
 import org.jrebirth.af.showcase.demo.ui.MainModel;
 
 /**
@@ -75,6 +76,7 @@ public final class JRebirthDemo extends DefaultApplication<StackPane> {
     protected void customizeScene(final Scene scene) {
         super.customizeScene(scene);
 
+        addCSS(scene, DemoStyles.DEFAULT);
         addCSS(scene, WorkbenchStyles.DEFAULT);
     }
 

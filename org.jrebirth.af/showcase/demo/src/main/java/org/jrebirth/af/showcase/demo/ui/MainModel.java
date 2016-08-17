@@ -43,7 +43,7 @@ public final class MainModel extends DefaultModel<MainModel, MainView> {
     @Override
     protected void initModel() {
         for (final ModuleModel mm : getModels(ModuleModel.class)) {
-            modules.add(mm);
+            this.modules.add(mm);
         }
     }
 
@@ -52,7 +52,7 @@ public final class MainModel extends DefaultModel<MainModel, MainView> {
      */
     @Override
     protected void showView() {
-        view().node().setCenter(stackModel.node());
+        view().node().setCenter(this.stackModel.node());
     }
 
     /**
@@ -68,7 +68,7 @@ public final class MainModel extends DefaultModel<MainModel, MainView> {
      * @return Returns the modules.
      */
     List<ModuleModel> getModules() {
-        return modules;
+        return this.modules;
     }
 
 }

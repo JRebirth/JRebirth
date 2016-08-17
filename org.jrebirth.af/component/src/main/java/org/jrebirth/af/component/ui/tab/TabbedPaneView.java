@@ -22,7 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
@@ -153,15 +155,19 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
         switch(model().object().orientation()){
 	        case top:
 	        	this.box.getStyleClass().add("Top");
+	        	((HBox)this.box).setAlignment(Pos.BOTTOM_LEFT);
 	            break;
 	        case bottom:
 	        	this.box.getStyleClass().add("Bottom");
+	        	((HBox)this.box).setAlignment(Pos.TOP_RIGHT);
 	            break;
 	        case left:
 	        	this.box.getStyleClass().add("Left");
-	            break;
+	        	((VBox)this.box).setAlignment(Pos.TOP_RIGHT);
+	        	break;
 	        case right:
 	        	this.box.getStyleClass().add("Right");
+	        	((VBox)this.box).setAlignment(Pos.TOP_LEFT);
 	            break;
         }
         
@@ -175,15 +181,23 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
      * @param idx the idx
      * @param tab the tab
      */
-    public void addTab(int idx, final Dockable tab) {
+    public SequentialTransition addTab(int idx, final Dockable tab) {
 
+    	SequentialTransition seq = new SequentialTransition();
+    	
         final ToggleButton b = new ToggleButton(tab.name());// , new ImageView(model().getBehavior(DockableBehavior.class).modelIcon()));
         b.setToggleGroup(this.group);
         b.getStyleClass().clear();
         b.setUserData(tab);
+        
+        
 
-        this.buttonByTab.put(tab.name(), b);
-
+        ToggleButton oldButton = this.buttonByTab.put(tab.name(), b);
+        int previousIndex = this.box.getChildren().indexOf(oldButton);
+        if(previousIndex >= 0 && previousIndex < idx){
+        	idx++;
+        }
+        
         selectTab(tab);
 
         controller().initTabEventHandler(b);
@@ -191,9 +205,10 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
         if (idx < 0) {
             idx = this.box.getChildren().size();
         }
-
+        
         b.setScaleX(0.0);
         this.box.getChildren().add(idx, b);
+        
         
         if(this.box instanceof HBox){
         	HBox.setMargin(b, new Insets(0, 1, 0, 0));
@@ -206,10 +221,13 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
         st.setFromX(0.0);
         st.setToX(1.0);
 
-        st.play();
+        seq.getChildren().add(st);
+        
+        return seq;
     }
 
-    public void removeTab(final List<Dockable> tabs) {
+    public SequentialTransition removeTab(final List<Dockable> tabs) {
+    	SequentialTransition seq = new SequentialTransition();
         for (final Dockable tab : tabs) {
             final ToggleButton b = this.buttonByTab.get(tab.name());
 
@@ -219,8 +237,10 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
             st.setToX(0.0);
             st.setOnFinished(event -> this.box.getChildren().remove(b));
 
-            st.play();
+            seq.getChildren().add(st);
         }
+        
+        return seq;
     }
 
     /**

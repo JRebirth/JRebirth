@@ -6,6 +6,7 @@ import org.jrebirth.af.api.ui.ModuleModel;
 import org.jrebirth.af.component.ui.stack.StackModel;
 import org.jrebirth.af.core.component.basic.CBuilder;
 import org.jrebirth.af.core.ui.DefaultModel;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,9 +30,9 @@ public final class FXMLShowCaseModel extends DefaultModel<FXMLShowCaseModel, FXM
     protected void initModel() {
         super.initModel();
 
-        InnerComponent<StackModel> stack = CBuilder.innerComponent(StackModel.class, FXMLPage.class);
-        stackModel = findInnerComponent(stack);
-        //stackModel = getModel(StackModel.class, FXMLPage.class);
+        final InnerComponent<StackModel> stack = CBuilder.innerComponent(StackModel.class, FXMLPage.class);
+        this.stackModel = findInnerComponent(stack);
+        // stackModel = getModel(StackModel.class, FXMLPage.class);
 
     }
 
@@ -41,7 +42,7 @@ public final class FXMLShowCaseModel extends DefaultModel<FXMLShowCaseModel, FXM
     @Override
     protected void showView() {
         super.showView();
-        view().node().setCenter(stackModel.node());
+        view().node().setCenter(this.stackModel.node());
 
         // getModel(StackModel.class, FXMLPage.class).doShowView(null);
     }
