@@ -54,7 +54,7 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements IJ
      * @param threadFactory the factory used to add a thread into the pool
      */
     public JRebirthThreadPoolExecutor(final int threadNumber, final ThreadFactory threadFactory) {
-        super(threadNumber, threadNumber, 0L, TimeUnit.MILLISECONDS, new PriorityBlockingQueue<Runnable>(threadNumber, new JRebirthRunnableComparator()),
+        super(threadNumber, threadNumber, 0L, TimeUnit.MILLISECONDS, new PriorityBlockingQueue<>(threadNumber, new JRebirthRunnableComparator()),
               threadFactory);
     }
 
@@ -84,8 +84,11 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements IJ
      */
     private boolean checkPriority(final PriorityLevel taskPriority) {
         boolean highPriority = false;
-        for (final JRebirthRunnable jr : this.pending) {
-            highPriority |= taskPriority.level() > jr.priority().level();
+
+        synchronized (this.pending) {
+            for (final JRebirthRunnable jr : this.pending) {
+                highPriority |= taskPriority.level() > jr.priority().level();
+            }
         }
         return !highPriority;
     }
@@ -105,7 +108,9 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements IJ
     @Override
     protected void beforeExecute(final Thread t, final Runnable r) {
 
-        this.pending.add((JRebirthRunnable) r);
+        synchronized (this.pending) {
+            this.pending.add((JRebirthRunnable) r);
+        }
 
         super.beforeExecute(t, r);
     }
@@ -117,7 +122,9 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements IJ
     protected void afterExecute(final Runnable r, final Throwable t) {
         super.afterExecute(r, t);
 
-        this.pending.remove(r);
+        synchronized (this.pending) {
+            this.pending.remove(r);
+        }
 
         Throwable rootCause = null;
         if (t == null && r instanceof Future<?>) {
