@@ -119,7 +119,7 @@ public abstract class AbstractReady<R extends FacadeReady<R>> implements FacadeR
     public Object getThirdKeyPart() {
         Object keyPart = null;
         if (this.key.value() instanceof List && ((List<Object>) this.key.value()).size() > 1) {
-            keyPart = ((List<Object>) this.key.value()).get(1);
+            keyPart = ((List<Object>) this.key.value()).get(2);
         }
         return keyPart;
     }
