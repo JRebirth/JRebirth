@@ -3,6 +3,62 @@
 Release Notes
 ==============
 
+
+8.5.0 - Release 2016-09-13
+-----------------------------------------
+
+This release fixes some bugs and introduces some API changes (method renamed), it was performed on the 8.x branch.
+
+
+- ConcurrentModificationException when launching a wave bug [#202](http://github.com/JRebirth/JRebirth/issues/issue/202)<br/>
+A list was 100% synchronized
+
+
+- Add gradle support to 'processor' module enhancement [#199](http://github.com/JRebirth/JRebirth/issues/issue/199)<br/>
+WHen building application using gradle the annoation processor as fully operational
+
+
+- Homegenize NullView & NullController usage enhancement [#196](http://github.com/JRebirth/JRebirth/issues/issue/196)<br/>
+Clean some code to have same pattern for NullView and NullController
+
+
+- Merge @LinkComponent & @LinkInnerComponent enhancement [#195](http://github.com/JRebirth/JRebirth/issues/issue/195)<br/>
+Unify annotation to have a clearer API
+
+
+- Simplify API: remove get and set prefix enhancement [#194](http://github.com/JRebirth/JRebirth/issues/issue/194)<br/>
+Shorten all getters and setters methods to have a fluent like API
+
+
+- Manage ShowView and HideView WaveType with annotation enhancement [#193](http://github.com/JRebirth/JRebirth/issues/issue/193)<br/>
+Purify management if SHowView and HideView wave events to be simple and more efficient
+
+
+- Switch to markdown for documentation enhancement [#192](http://github.com/JRebirth/JRebirth/issues/issue/192)<br/>
+Startong now e can write all website documentation using markdown instead of Xdoc
+
+
+- Replace JRAF-INF/module.xml feature  [#190](http://github.com/JRebirth/JRebirth/issues/issue/190)<br/>
+Generate Java code instead of XML file to parse, it's faster at runtime
+
+
+- Allow to retrieve all components implementing same interface feature [#188](http://github.com/JRebirth/JRebirth/issues/issue/188)<br/>
+Add convenient method to retrieve several components using same alues for their key part
+
+
+- Split parameters feature  [#187](http://github.com/JRebirth/JRebirth/issues/issue/187)<br/>
+Allow to categorize each JRebirth parameters, thus they could be grouped into an editable suer interface
+
+
+- Improve usability of InnerComponent enhancement [#176](http://github.com/JRebirth/JRebirth/issues/issue/176)<br/>
+Refactor the InnerComponent API, works for all component and not only Models.
+
+
+- Modularize Showcase feature [#162](http://github.com/JRebirth/JRebirth/issues/issue/162)<br/>
+Create a new Demo application that is loading several JRebirth modules, each one will load a sample showcase
+
+
+
 8.0.5 - Release 2016-01-10
 -----------------------------------------
 

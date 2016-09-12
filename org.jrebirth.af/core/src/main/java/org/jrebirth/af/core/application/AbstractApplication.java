@@ -27,7 +27,6 @@ import javafx.application.Application;
 import javafx.application.Preloader;
 import javafx.application.Preloader.ProgressNotification;
 import javafx.scene.Scene;
-import javafx.scene.SceneBuilder;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -514,12 +513,13 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * @throws CoreException if build fails
      */
     protected final Scene buildScene() throws CoreException {
-        return SceneBuilder.create()
-                           .root(buildRootPane())
-                           .width(StageParameters.APPLICATION_SCENE_WIDTH.get())
-                           .height(StageParameters.APPLICATION_SCENE_HEIGHT.get())
-                           .fill(JRebirthColors.SCENE_BG_COLOR.get())
-                           .build();
+
+        final Scene scene = new Scene(buildRootPane(),
+                                      StageParameters.APPLICATION_SCENE_WIDTH.get(),
+                                      StageParameters.APPLICATION_SCENE_HEIGHT.get(),
+                                      JRebirthColors.SCENE_BG_COLOR.get());
+
+        return scene;
     }
 
     /**
@@ -530,8 +530,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      */
     @SuppressWarnings("unchecked")
     protected P buildRootPane() throws CoreException {
-    	
-    	// Build the root node by reflection without any parameter or excluded class
+
+        // Build the root node by reflection without any parameter or excluded class
         this.rootNode = (P) ClassUtility.buildGenericType(this.getClass(), Pane.class);
         return this.rootNode;
     }

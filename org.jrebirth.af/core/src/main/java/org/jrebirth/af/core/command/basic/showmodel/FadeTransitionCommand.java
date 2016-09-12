@@ -17,12 +17,9 @@
  */
 package org.jrebirth.af.core.command.basic.showmodel;
 
-import javafx.animation.FadeTransitionBuilder;
+import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
-import javafx.animation.ParallelTransitionBuilder;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
@@ -71,50 +68,44 @@ public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWav
         final Node newNode = waveBean(wave).showModel() == null ? null : waveBean(wave).showModel().node();
 
         if (oldNode != null || newNode != null) {
-            final ParallelTransition animation = ParallelTransitionBuilder.create()
-                                                                          .build();
+            final ParallelTransition animation = new ParallelTransition();
 
             if (oldNode != null) {
-                animation.getChildren().add(
-                                            FadeTransitionBuilder.create()
-                                                                 .duration(Duration.millis(600))
-                                                                 .node(oldNode)
-                                                                 .fromValue(1.0)
-                                                                 .toValue(0.0)
-                                                                 .build());
+                final FadeTransition ft = new FadeTransition();
+                ft.setDuration(Duration.millis(600));
+                ft.setNode(oldNode);
+                ft.setFromValue(1.0);
+                ft.setToValue(0.0);
+
+                animation.getChildren().add(ft);
             }
             if (newNode != null) {
-                animation.getChildren().add(
-                                            FadeTransitionBuilder.create()
-                                                                 .duration(Duration.millis(600))
-                                                                 .node(newNode)
-                                                                 .fromValue(0.0)
-                                                                 .toValue(1.0)
-                                                                 .build());
+
+                final FadeTransition ft = new FadeTransition();
+                ft.setDuration(Duration.millis(600));
+                ft.setNode(newNode);
+                ft.setFromValue(0.0);
+                ft.setToValue(1.0);
+
+                animation.getChildren().add(ft);
             }
 
             final Node oldNodeLink = oldNode;
 
             // When animation is finished remove the hidden node from the stack to let only one node at the same time
-            animation.setOnFinished(new EventHandler<ActionEvent>() {
+            animation.setOnFinished(event -> {
+                if (oldNodeLink != null) {
+                    // remove the old nod from the stack to hide it
+                    waveBean(wave).childrenPlaceHolder().remove(oldNodeLink);
 
-                /**
-                 * {@inheritDoc}
-                 */
-                @Override
-                public void handle(final ActionEvent arg0) {
-                    if (oldNodeLink != null) {
-                        // remove the old nod from the stack to hide it
-                        waveBean(wave).childrenPlaceHolder().remove(oldNodeLink);
-
-                        LOGGER.info("Remove " + oldNodeLink.toString() + " from stack container");
-                    }
-                    // FIXME do it in the right way
-                    waveBean(wave).showModel().doShowView(wave);
+                    LOGGER.info("Remove " + oldNodeLink.toString() + " from stack container");
                 }
+                // FIXME do it in the right way
+                waveBean(wave).showModel().doShowView(wave);
             });
             animation.playFromStart();
         }
+
     }
 
     /**

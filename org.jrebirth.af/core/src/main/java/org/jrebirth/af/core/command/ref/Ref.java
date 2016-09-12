@@ -17,9 +17,8 @@
  */
 package org.jrebirth.af.core.command.ref;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface Ref.
+ * The Interface Ref provides two methods allowing to create reference commands that implements it.
  */
 public interface Ref {
 

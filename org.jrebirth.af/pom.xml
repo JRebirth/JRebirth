@@ -10,7 +10,7 @@
 
 	<groupId>org.jrebirth</groupId>
 	<artifactId>af</artifactId>
-	<version>8.5.0-SNAPSHOT</version>
+	<version>8.5.0</version>
 
 	<packaging>pom</packaging>
 	<name>JRebirth Application Framework</name>
@@ -131,7 +131,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.5</version>
+				<version>3.5.1</version>
 
 				<executions>
 					<!-- <execution> <id>attach-sites</id> <goals> <goal>jar</goal> </goals> </execution> -->
@@ -225,7 +225,7 @@
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ssh</artifactId>
-				<version>2.6</version>
+				<version>2.10</version>
 			</extension>
 		</extensions>
 
