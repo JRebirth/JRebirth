@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2015
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,13 @@ import org.jrebirth.af.api.concurrent.JRebirthRunnable;
  */
 public class SyncRunnable implements JRebirthRunnable {
 
-    /** The interna runnable that shall be synchronized. */
+    /** The default timeout value. */
+    public static final Long DEFAULT_TIME_OUT = 1000L;
+
+    /** The default sleep time. */
+    public static final Long SLEEP_TIME = 100L;
+
+    /** The internal runnable that shall be synchronized. */
     private final JRebirthRunnable innerRunnable;
 
     /** The bullet-proof flag taht indicates if the runnable has finished. */
@@ -62,12 +68,12 @@ public class SyncRunnable implements JRebirthRunnable {
         if (timeout.length == 1) {
             start += timeout[0];
         } else {
-            start += 1000;
+            start += DEFAULT_TIME_OUT;
         }
 
         while (!this.hasRun.get()) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(SLEEP_TIME);
             } catch (final InterruptedException e) {
                 break;
             }

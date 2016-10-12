@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2015
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,6 +24,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.wave.Wave;
@@ -103,7 +104,7 @@ public interface WBuilder {
     @SuppressWarnings("unchecked")
     static List<WaveData<?>> buildUiData(final Object... datas) {
 
-        final List<WaveData<?>> wdList = new ArrayList<WaveData<?>>();
+        final List<WaveData<?>> wdList = new ArrayList<>();
 
         List<WaveBean> wbList = null;
 
@@ -159,6 +160,39 @@ public interface WBuilder {
                      .componentClass(ChainWaveCommand.class)
                      .addDatas(
                                WBuilder.waveData(JRebirthWaves.CHAINED_WAVES, waveList));
+    }
+
+    /**
+     * Create a {@link WaveItem} holding a {@link PriorityLevel}.
+     *
+     * @param level the level to embed
+     * 
+     * @return the configured wave data
+     */
+    static WaveData<PriorityLevel> priority(final PriorityLevel level) {
+        return waveData(JRebirthItems.priority, level);
+    }
+
+    /**
+     * Create a {@link WaveItem} holding a timeout value.
+     *
+     * @param timeout the number of millisecond to embed
+     * 
+     * @return the configured wave data
+     */
+    static WaveData<Long> timeout(final long timeout) {
+        return waveData(JRebirthItems.syncTimeout, timeout);
+    }
+
+    /**
+     * Create a {@link WaveItem} holding a boolean flag indicating if the task shall be run synchronously.
+     *
+     * @param sync the flag indicating synchronously execution
+     * 
+     * @return the configured wave data
+     */
+    static WaveData<Boolean> sync(final boolean sync) {
+        return waveData(JRebirthItems.runSynchronously, sync);
     }
 
 }

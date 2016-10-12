@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,23 +45,27 @@ public final class JRebirth {
      *
      * @param runInto the targeted thread
      * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
      */
-    public static void run(final RunType runInto, final JRebirthRunnable runnable) {
+    public static void run(final RunType runInto, final JRebirthRunnable runnable, final long... timeout) {
         switch (runInto) {
             case JAT:
                 runIntoJAT(runnable);
                 break;
             case JAT_SYNC:
-                runIntoJATSync(runnable);// TODO timeout
+                runIntoJATSync(runnable, timeout);
                 break;
             case JIT:
                 runIntoJIT(runnable);
                 break;
             case JIT_SYNC:
-                runIntoJITSync(runnable);// TODO timeout
+                runIntoJITSync(runnable, timeout);
                 break;
             case JTP:
                 runIntoJTP(runnable);
+                break;
+            case JTP_SYNC:
+                runIntoJTPSync(runnable);
                 break;
             case SAME:
             default:
@@ -88,6 +92,7 @@ public final class JRebirth {
      * Run the task into the JavaFX Application Thread [JAT].
      *
      * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
      */
     public static void runIntoJATSync(final JRebirthRunnable runnable, final long... timeout) {
         final SyncRunnable sync = new SyncRunnable(runnable);
@@ -135,7 +140,7 @@ public final class JRebirth {
      * Run the task into the JavaFX Application Thread [JAT].
      *
      * @param runnable the task to run
-     * @param timeout the optional value for timeout
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
      */
     public static void runIntoJITSync(final JRebirthRunnable runnable, final long... timeout) {
         final SyncRunnable sync = new SyncRunnable(runnable);

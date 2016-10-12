@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2014
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +17,7 @@
  */
 package org.jrebirth.af.core.wave;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 
 /**
@@ -70,6 +71,18 @@ public interface JRebirthItems {
 
     /** The double wave item. */
     WaveItem<Double> doubleItem = new WaveItemBase<Double>() {
+    };
+
+    /** The special WaveItem used to declare that an execution shall be done synchronously in the the given thread that is processing this wave. */
+    WaveItem<Boolean> runSynchronously = new WaveItemBase<Boolean>() {
+    };
+
+    /** The special WaveItem used to define the timeout to use for all synchronized execution. */
+    WaveItem<Long> syncTimeout = new WaveItemBase<Long>() {
+    };
+
+    /** The special WaveItem used to define the priority for te given thread that will process the wave. */
+    WaveItem<PriorityLevel> priority = new WaveItemBase<PriorityLevel>() {
     };
 
 }

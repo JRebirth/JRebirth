@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,6 +30,7 @@ import java.util.Optional;
 import org.jrebirth.af.api.annotation.AfterInit;
 import org.jrebirth.af.api.annotation.BeforeInit;
 import org.jrebirth.af.api.annotation.OnRelease;
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.annotation.Releasable;
 import org.jrebirth.af.api.annotation.SkipAnnotation;
 import org.jrebirth.af.api.command.Command;
@@ -37,6 +38,7 @@ import org.jrebirth.af.api.command.CommandBean;
 import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.component.basic.InnerComponent;
 import org.jrebirth.af.api.component.behavior.Behavior;
+import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
@@ -56,6 +58,7 @@ import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
+import org.jrebirth.af.core.concurrent.SyncRunnable;
 import org.jrebirth.af.core.link.AbstractReady;
 import org.jrebirth.af.core.link.ComponentEnhancer;
 import org.jrebirth.af.core.link.LinkMessages;
@@ -191,7 +194,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
     public final void unlisten(final WaveType... waveTypes) {
 
         // Store an hard link to be able to use current class into the closure
-        final Component waveReady = this;
+        final Component<C> waveReady = this;
 
         LOGGER.trace(LinkMessages.UNLISTEN_WAVE_TYPE, getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName());
 
@@ -278,13 +281,17 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
 
         wave.status(Status.Sent);
 
+        final PriorityLevel priority = wave.contains(JRebirthItems.priority) ? wave.get(JRebirthItems.priority) : PriorityLevel.Normal;
+        final RunType runType = wave.get(JRebirthItems.runSynchronously) ? RunType.JIT_SYNC : RunType.JIT;
+        final Long timeout = wave.contains(JRebirthItems.syncTimeout) ? wave.get(JRebirthItems.syncTimeout) : SyncRunnable.DEFAULT_TIME_OUT;
+
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJIT(new AbstractJrbRunnable(SEND_WAVE.getText(wave.toString())) {
+        JRebirth.run(runType, new AbstractJrbRunnable(SEND_WAVE.getText(wave.toString()), priority) {
             @Override
             public void runInto() throws JRebirthThreadException {
                 getNotifier().sendWave(wave);
             }
-        });
+        }, timeout);
 
         return wave;
     }
