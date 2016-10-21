@@ -30,18 +30,17 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd" name="JRebirth">
 		</menu>
 		
 		<menu name="Demo">
+			<item name="Showcase Demo" href="apps/Demo.html" />
+			<item name="Mastering Tables" href="apps/MasteringTables.html" />
+		</menu>
+		
+		<menu name="Slides">
 			<!-- <item name="ToulouseJug" href="apps/ToulouseJug.html" /> -->
 			<item name="EclipseDay" href="apps/EclipseDay.html" />
 			<item name="Breizhcamp" href="apps/Breizhcamp.html" />
 			<item name="LightningTalk" href="apps/LightningTalk.html" />
 			<item name="EclipseCON" href="apps/EclipseCON.html" />
-			<item name="Mastering Tables" href="apps/MasteringTables.html" />
 			<item name="JRebirth Tour" href="apps/JRebirthTour.html" />
-		</menu>
-		
-		<menu name="Showcase">
-			<item name="FXML" href="showcases/FXML.html" />
-			<item name="UndoRedo" href="showcases/UndoRedo.html" />
 		</menu>
 		
 		<menu name="Overview"> 

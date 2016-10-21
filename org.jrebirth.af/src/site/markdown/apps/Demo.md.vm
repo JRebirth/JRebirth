@@ -1,0 +1,34 @@
+
+#set( $title = "Showcase Demo - Modular Application" )
+#set( $author = "Sebastien Bordes" )
+#set( $date="25/09/2016")
+
+#set( $keywords = "JRebirth Showcase Modular Demo Application" )
+#set( $description = "JRebirth Showcase Modular Demo Application" )
+
+#set( $version = "${project.version}")
+#set( $path = "demo")
+#set( $archiveName = "JRebirthDemo")
+#set( $downloadName = "JRebirth Demo")
+
+#set( $width = "1024")
+#set( $height = "768")
+
+#set( $sectionId = "ShowcaseDemo")
+#set( $sectionTitle = "Showcase Demo")
+
+#set( $catcherTitle = "Modular Demo Application")
+#set( $catcherContent = "See JRebirth in Action with different modules")
+
+#set( $appDescription = "<p>This application demonstrates JRebirth capabilities</p>")
+
+#set( $isPresentation = false)
+#set( $hasZip = true)
+#set( $hasJar = true)
+#set( $hasExe = true)
+
+#set( $githubRepoName = "GitHub JRebirth Demo sub repository")
+#set( $githubRepoUrl = "https://github.com/JRebirth/JRebirth/tree/8.x-dev/org.jrebirth.af/showcase/demo")
+			
+
+#parse("Presentation.vm")

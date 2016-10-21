@@ -6,7 +6,11 @@
 #set( $keywords = "JavaFX 2 Demo Application Presentation" )
 #set( $description = "JavaFX 2 Demo Application Presentation JRebirth Framework Breizhcamp Talk" )
 
-#set( $jnlp = 'breizhcamp/${Breizhcamp-version}/Breizhcamp.jnlp')
+#set( $version = "${Breizhcamp-version}")
+#set( $path = "javafx2")
+#set( $archiveName = "Breizhcamp")
+#set( $downloadName = "JavaFX Presentation")
+
 #set( $width = "1024")
 #set( $height = "768")
 
@@ -21,11 +25,9 @@
 				.</p>')
 
 #set( $isPresentation = true)
-
-#set( $downloadName = "JavaFX Presentation")
-#set( $downloadPath = "http://apps.jrebirth.org/breizhcamp/")
-#set( $zipFile = "javafx2-${Breizhcamp-version}.zip")
-#set( $exeFile = "javafx2-${Breizhcamp-version}.exe")
+#set( $hasZip = true)
+#set( $hasJar = true)
+#set( $hasExe = true)
 
 #set( $githubRepoName = "GitHub JFX-Presentation Repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/JFX-Presentation")

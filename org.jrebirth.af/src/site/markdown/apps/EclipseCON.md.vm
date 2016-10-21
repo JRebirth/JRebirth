@@ -1,12 +1,16 @@
 
-#set( $title = "EclipseDay Toulouse - Use JavaFX with Eclipse" )
+#set( $title = "EclipseCON France - Let's code a JavaFX application with Eclipse" )
 #set( $author = "Sebastien Bordes" )
 #set( $date="05/06/2013")
 
 #set( $keywords = "JavaFx 2 Demo Application Presentation JRebirth Framework EclipseCON France 2013 Workshop" )
 #set( $description = "JavaFx 2 Demo Application Presentation JRebirth Framework EclipseCON France 2013 Workshop" )
 
-#set( $jnlp = 'eclipsecon/${EclipseCON-version}/EclipseCON.jnlp')
+#set( $version = "${EclipseCON-version}")
+#set( $path = "eclipsecon")
+#set( $archiveName = "EclipseCON")
+#set( $downloadName = "EclipseCON Presentation")
+
 #set( $width = "1024")
 #set( $height = "768")
 
@@ -23,11 +27,9 @@
 			</p>')
 
 #set( $isPresentation = true)
-
-#set( $downloadName = "EclipseDay Presentation")
-#set( $downloadPath = "http://apps.jrebirth.org/eclipsecon/")
-#set( $zipFile = "eclipsecon-${EclipseCON-version}.zip")
-#set( $exeFile = "eclipsecon-${EclipseCON-version}.exe")
+#set( $hasZip = true)
+#set( $hasJar = true)
+#set( $hasExe = true)
 
 #set( $githubRepoName = "GitHub EclipseCON-France repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/EclipseCON-France")

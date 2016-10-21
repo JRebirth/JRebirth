@@ -8,7 +8,6 @@
 		<version>2.0.1</version>
 	</parent>
 
-	<groupId>org.jrebirth</groupId>
 	<artifactId>af</artifactId>
 	<version>8.5.0</version>
 
@@ -21,12 +20,12 @@
 	<inceptionYear>2011</inceptionYear>
 
 	<properties>
-		<LightningTalk-version>2.0.0</LightningTalk-version>
-		<MasteringTables-version>2.5.0-SNAPSHOT</MasteringTables-version>
-		<Jaf-version>2.0.0</Jaf-version>
-		<Breizhcamp-version>2.0.0</Breizhcamp-version>
-		<EclipseDay-version>2.0.0</EclipseDay-version>
-		<EclipseCON-version>2.0.0</EclipseCON-version>
+		<LightningTalk-version>3.0.0</LightningTalk-version>
+		<MasteringTables-version>3.0.0</MasteringTables-version>
+		<Jaf-version>3.0.0</Jaf-version>
+		<Breizhcamp-version>3.0.0</Breizhcamp-version>
+		<EclipseDay-version>3.0.0</EclipseDay-version>
+		<EclipseCON-version>3.0.0</EclipseCON-version>
 	</properties>
 
 	<modules>
@@ -62,7 +61,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/JRebirth/JRebirth.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth.git</developerConnection>
-		<url>https://github.com/JRebirth/JRebirth/tree/8.x</url>
+		<url>https://github.com/JRebirth/JRebirth/tree/8.x-dev</url>
 	</scm>
 
 	<licenses>

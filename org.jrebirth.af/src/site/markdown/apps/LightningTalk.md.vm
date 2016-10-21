@@ -6,7 +6,11 @@
 #set( $keywords = "JavaFX 2.2 Demo Application Presentation" )
 #set( $description = "JavaFX 2.2 Demo Application Presentation JRebirth Framework Lightning Talk" )
 
-#set( $jnlp = 'lightningtalk/${LightningTalk-version}/LightningTalk.jnlp')
+#set( $version = "${LightningTalk-version}")
+#set( $path = "lightningtalk")
+#set( $archiveName = "LightningTalk")
+#set( $downloadName = "Lightning Talk")
+
 #set( $width = "1024")
 #set( $height = "768")
 
@@ -19,11 +23,9 @@
 #set( $appDescription = "<p>This application has been shown during Heroes Event at ToulouseJUG</p>")
 
 #set( $isPresentation = true)
-
-#set( $downloadName = "Lightning Talk")
-#set( $downloadPath = "http://apps.jrebirth.org/lightningtalk/")
-#set( $zipFile = "lightningtalk-${LightningTalk-version}.zip")
-#set( $exeFile = "lightningtalk-${LightningTalk-version}.exe")
+#set( $hasZip = true)
+#set( $hasJar = true)
+#set( $hasExe = true)
 
 #set( $githubRepoName = "GitHub LightningTalk Repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/LightningTalk")

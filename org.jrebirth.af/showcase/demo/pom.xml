@@ -17,205 +17,383 @@
 
 	<properties>
 
-		<deployUrl>http://apps.jrebirth.org</deployUrl>
-		<deployPath>${project.artifactId}/${project.version}</deployPath>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<appName>JRebirthDemo</appName>
-
-		<jnlpFilename>JRebirthDemo.jnlp</jnlpFilename>
+		<archiveName>JRebirthDemo</archiveName>
+		<exeIcon>src/main/resources/images/JRebirth_64x64.ico</exeIcon>
 		<appClass>org.jrebirth.af.showcase.demo.JRebirthDemo</appClass>
 
-		<appletWidth>1024</appletWidth>
-		<appletHeight>768</appletHeight>
+		<appletWidth>800</appletWidth>
+		<appletHeight>600</appletHeight>
 
 	</properties>
 
+
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
 
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<JavaFX-Version>8.0</JavaFX-Version>
-							<Main-Class>${appClass}</Main-Class>
-							<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
-						</manifestEntries>
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/java</directory>
+				<includes>
+					<include>**/*.fxml</include>
+					<include>**/*.properties</include>
+					<include>**/*.txt</include>
+				</includes>
+			</resource>
+			<resource>
+				<filtering>true</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.ttf</exclude>
+					<exclude>**/*.ico</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.ttf</include>
+					<include>**/*.ico</include>
+				</includes>
+			</resource>
+		</resources>
 
-						<manifest>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<addClasspath>true</addClasspath>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.3</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>webstart-maven-plugin</artifactId>
-				<version>1.0-beta-6</version>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.5</version>
 
-				<dependencies>
-					<dependency>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>keytool-api-1.7</artifactId>
-						<version>1.4</version>
-					</dependency>
-					<dependency>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>webstart-pack200-impl</artifactId>
-						<version>1.0-beta-6</version>
-					</dependency>
-				</dependencies>
-
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>jnlp-inline</goal>
-						</goals>
-					</execution>
-				</executions>
-
-				<configuration>
-
-					<filenameMapping>full</filenameMapping>
-
-					<updateManifestEntries>
-						<Application-Name>${project.name}</Application-Name>
-						<Trusted-Library>true</Trusted-Library>
-						<Permissions>${permissions}</Permissions>
-						<Codebase>${codebase}</Codebase>
-						<Trusted-Only>true</Trusted-Only>
-					</updateManifestEntries>
-
-
-					<excludeTransitive>false</excludeTransitive>
-
-					<libPath>lib</libPath>
-					<codebase>${codebase}</codebase>
-
-					<jnlp>
-						<outputFile>${jnlpFilename}</outputFile>
-						<mainClass>${appClass}</mainClass>
-						<offlineAllowed>true</offlineAllowed>
-						<allPermissions>true</allPermissions>
-					</jnlp>
-
-					<sign>
-						<keystore>${keystore}</keystore>
-						<keypass>${keypass}</keypass>
-						<storepass>${storepass}</storepass>
-						<storetype>${storetype}</storetype>
-
-						<alias>${keyalias}</alias>
-
-						<validity>360</validity>
-						<dnameCn>JRebirth Self-signed Certificate</dnameCn>
-						<dnameOu>JRebirth OSS</dnameOu>
-						<dnameO>JRebirth</dnameO>
-						<dnameL>Toulouse</dnameL>
-						<dnameSt>Haute-Garonne</dnameSt>
-						<dnameC>FR</dnameC>
-						<verify>true</verify>
-
-						<keystoreConfig>
-							<delete>${deletekeystore}</delete>
-							<gen>${genkeystore}</gen>
-						</keystoreConfig>
-
-					</sign>
-
-					<unsignAlreadySignedJars>true</unsignAlreadySignedJars>
-
-					<pack200>
-						<enabled>true</enabled>
-					</pack200>
-					<gzip>true</gzip>
-
-					<outputJarVersions>false</outputJarVersions>
-
-					<verbose>true</verbose>
-				</configuration>
-
-			</plugin>
-
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.4.3</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<shadedArtifactAttached>false</shadedArtifactAttached>
-					<shadedClassifierName>shaded</shadedClassifierName>
-					<transformers>
-						<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-						<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-							<mainClass>${appClass}</mainClass>
+					<configuration>
+						<archive>
 							<manifestEntries>
-								<Class-Path>.</Class-Path>
+								<JavaFX-Version>8.0</JavaFX-Version>
+								<Main-Class>${appClass}</Main-Class>
+								<!--<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class> -->
 							</manifestEntries>
-						</transformer>
-					</transformers>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.akathist.maven.plugins.launch4j</groupId>
-				<artifactId>launch4j-maven-plugin</artifactId>
-				<version>1.7.10</version>
-				<executions>
-					<execution>
-						<id>l4j-clui</id>
-						<phase>package</phase>
-						<goals>
-							<goal>launch4j</goal>
-						</goals>
-						<configuration>
-							<headerType>gui</headerType>
-							<jar>${project.build.directory}/${groupId}.${artifactId}-${version}.jar</jar>
-							<outfile>${project.build.directory}/${appName}.exe</outfile>
-							<downloadUrl>http://java.com/download</downloadUrl>
-							<classPath>
-								<mainClass>${appClass}</mainClass>
-								<addDependencies>false</addDependencies>
-								<preCp>.</preCp>
-							</classPath>
-							<icon>src/main/resources/images/JRebirth_64x64.ico</icon>
-							<jre>
-								<minVersion>1.8.0</minVersion>
-								<jdkPreference>preferJre</jdkPreference>
-							</jre>
-							<versionInfo>
-								<fileVersion>1.0.0.0</fileVersion>
-								<txtFileVersion>${project.version}</txtFileVersion>
-								<fileDescription>${project.name}</fileDescription>
-								<copyright>JRebirth 2016</copyright>
-								<productVersion>1.0.0.0</productVersion>
-								<txtProductVersion>1.0.0.0</txtProductVersion>
-								<productName>${project.name}</productName>
-								<companyName>JRebirth</companyName>
-								<internalName>${project.name}</internalName>
-								<originalFilename>${appName}.exe</originalFilename>
-							</versionInfo>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 
-		</plugins>
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+								<addClasspath>true</addClasspath>
+								<classpathLayoutType>custom</classpathLayoutType>
+								<customClasspathLayout>${artifact.groupId}-${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}</customClasspathLayout>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>2.4.3</version>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>shade</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<shadedArtifactAttached>false</shadedArtifactAttached>
+						<shadedClassifierName>shaded</shadedClassifierName>
+						<transformers>
+							<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+								<mainClass>${appClass}</mainClass>
+								<manifestEntries>
+									<Class-Path>.</Class-Path>
+								</manifestEntries>
+							</transformer>
+						</transformers>
+						<finalName>${archiveName}-${project.version}</finalName>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>com.akathist.maven.plugins.launch4j</groupId>
+					<artifactId>launch4j-maven-plugin</artifactId>
+					<version>1.7.12</version>
+					<executions>
+						<execution>
+							<id>l4j-clui</id>
+							<phase>package</phase>
+							<goals>
+								<goal>launch4j</goal>
+							</goals>
+							<configuration>
+								<headerType>gui</headerType>
+								<jar>${project.build.directory}/${archiveName}-${project.version}.jar</jar>
+								<outfile>${project.build.directory}/${archiveName}-${project.version}.exe</outfile>
+								<downloadUrl>http://java.com/download</downloadUrl>
+								<classPath>
+									<mainClass>${appClass}</mainClass>
+									<addDependencies>false</addDependencies>
+									<preCp>.</preCp>
+								</classPath>
+								<icon>${exeIcon}</icon>
+								<jre>
+									<minVersion>1.8.0</minVersion>
+									<jdkPreference>preferJre</jdkPreference>
+								</jre>
+								<versionInfo>
+									<fileVersion>1.0.0.0</fileVersion>
+									<txtFileVersion>${project.version}</txtFileVersion>
+									<fileDescription>${project.name}</fileDescription>
+									<copyright>JRebirth 2016</copyright>
+									<productVersion>1.0.0.0</productVersion>
+									<txtProductVersion>1.0.0.0</txtProductVersion>
+									<productName>${project.name}</productName>
+									<companyName>JRebirth</companyName>
+									<internalName>${archiveName}</internalName>
+									<originalFilename>${archiveName}.exe</originalFilename>
+								</versionInfo>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>webstart-maven-plugin</artifactId>
+					<version>1.0-beta-6</version>
+
+					<dependencies>
+						<dependency>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>keytool-api-1.7</artifactId>
+							<version>1.4</version>
+						</dependency>
+						<dependency>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>webstart-pack200-impl</artifactId>
+							<version>1.0-beta-6</version>
+						</dependency>
+					</dependencies>
+
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>jnlp-inline</goal>
+							</goals>
+						</execution>
+					</executions>
+
+					<configuration>
+
+						<filenameMapping>full</filenameMapping>
+
+						<updateManifestEntries>
+							<Application-Name>${project.name}</Application-Name>
+							<Trusted-Library>true</Trusted-Library>
+							<Permissions>${permissions}</Permissions>
+							<Codebase>${codebase}</Codebase>
+							<Trusted-Only>true</Trusted-Only>
+						</updateManifestEntries>
+
+
+						<jnlpFiles>${archiveName}.jnlp</jnlpFiles>
+						<excludeTransitive>false</excludeTransitive>
+
+						<libPath>lib</libPath>
+						<codebase>${codebase}</codebase>
+
+						<jnlp>
+							<outputFile>${archiveName}.jnlp</outputFile>
+							<mainClass>${appClass}</mainClass>
+							<offlineAllowed>true</offlineAllowed>
+							<allPermissions>true</allPermissions>
+						</jnlp>
+
+						<sign>
+							<keystore>${keystore}</keystore>
+							<keypass>${keypass}</keypass>
+							<storepass>${storepass}</storepass>
+							<storetype>${storetype}</storetype>
+
+							<alias>${keyalias}</alias>
+
+							<validity>360</validity>
+							<dnameCn>JRebirth Self-signed Certificate</dnameCn>
+							<dnameOu>JRebirth OSS</dnameOu>
+							<dnameO>JRebirth</dnameO>
+							<dnameL>Toulouse</dnameL>
+							<dnameSt>Haute-Garonne</dnameSt>
+							<dnameC>FR</dnameC>
+							<verify>true</verify>
+
+							<keystoreConfig>
+								<delete>${deletekeystore}</delete>
+								<gen>${genkeystore}</gen>
+							</keystoreConfig>
+
+						</sign>
+
+						<unsignAlreadySignedJars>true</unsignAlreadySignedJars>
+
+						<pack200>
+							<enabled>true</enabled>
+						</pack200>
+						<gzip>true</gzip>
+						<archive>${project.build.directory}/${archiveName}-${project.version}.zip</archive>
+
+						<outputJarVersions>false</outputJarVersions>
+
+						<install>false</install>
+						<verbose>true</verbose>
+					</configuration>
+
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>wagon-maven-plugin</artifactId>
+					<version>1.0</version>
+					<configuration>
+						<serverId>JRebirth_Sites</serverId>
+						<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/apps</url>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>2.2</version>
+			</extension>
+
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>2.10</version>
+			</extension>
+
+		</extensions>
 	</build>
+
+	<profiles>
+
+		<profile>
+			<id>WebStart</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>webstart-maven-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>wagon-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>deploy-webstart-archive</id>
+								<phase>site-deploy</phase>
+								<goals>
+									<goal>upload-single</goal>
+								</goals>
+								<configuration>
+									<fromFile>${project.build.directory}/${archiveName}-${project.version}.zip</fromFile>
+									<toFile>${deployPath}/${archiveName}-${project.version}.zip</toFile>
+								</configuration>
+							</execution>
+							<execution>
+								<id>deploy-webstart-jnlp</id>
+								<phase>site-deploy</phase>
+								<goals>
+									<goal>upload</goal>
+								</goals>
+								<configuration>
+									<fromDir>${project.build.directory}/jnlp</fromDir>
+									<toDir>${deployPath}/jnlp</toDir>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>AutoJar</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jar-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-shade-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>wagon-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>deploy-self-jar</id>
+								<phase>site-deploy</phase>
+								<goals>
+									<goal>upload-single</goal>
+								</goals>
+								<configuration>
+									<fromFile>${project.build.directory}/${archiveName}-${project.version}.jar</fromFile>
+									<toFile>${deployPath}/${archiveName}-${project.version}.jar</toFile>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>WinExe</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.akathist.maven.plugins.launch4j</groupId>
+						<artifactId>launch4j-maven-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>wagon-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>deploy-winexe</id>
+								<phase>site-deploy</phase>
+								<goals>
+									<goal>upload-single</goal>
+								</goals>
+								<configuration>
+									<fromFile>${project.build.directory}/${archiveName}-${project.version}.exe</fromFile>
+									<toFile>${deployPath}/${archiveName}-${project.version}.exe</toFile>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<dependencies>
 		<dependency>
@@ -242,6 +420,7 @@
 			<artifactId>workbench</artifactId>
 			<version>8.5.0</version>
 		</dependency>
+
 	</dependencies>
 
 </project>

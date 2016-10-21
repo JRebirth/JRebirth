@@ -6,9 +6,13 @@
 #set( $keywords = "JavaFX Mind Game Mastering Tables" )
 #set( $description = "JavaFX Mind Game Mastering Tables" )
 
-#set( $jnlp = 'masteringtables/${MasteringTables-version}/MasteringTables.jnlp')
-#set( $width = "1024")
-#set( $height = "768")
+#set( $version = "${MasteringTables-version}")
+#set( $path = "masteringtables")
+#set( $archiveName = "MasteringTables")
+#set( $downloadName = "Mastering Tables")
+
+#set( $width = "800")
+#set( $height = "600")
 
 #set( $sectionId = "MasteringTables")
 #set( $sectionTitle = "Mastering Tables Mind Game")
@@ -19,11 +23,9 @@
 #set( $appDescription = "<p>This application has been used as Workshop support during EclipseCON France JavaFX workshop</p>")
 
 #set( $isPresentation = false)
-
-#set( $downloadName = "Mastering Tables")
-#set( $downloadPath = "http://apps.jrebirth.org/masteringtables/")
-#set( $zipFile = "masteringtables-${MasteringTables-version}.zip")
-#set( $exeFile = "masteringtables-${MasteringTables-version}.exe")
+#set( $hasZip = true)
+#set( $hasJar = true)
+#set( $hasExe = true)
 
 #set( $githubRepoName = "GitHub MasteringTables repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/MasteringTables")

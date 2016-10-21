@@ -184,7 +184,7 @@
 
 			<ul>
 				<li>
-					<a name="Maven Central" href="http://search.maven.org/#search|ga|1|g%3A%22org.jrebirth%22">from Maven Central</a>
+					<a name="Maven Central" href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jrebirth.af%22">from Maven Central</a>
                 </li>
 				<li>
 					<a name="JCenter" href="http://jcenter.bintray.com/org/jrebirth/af">from JCenter</a>
@@ -197,13 +197,13 @@
 					<a href="http://apps.jrebirth.org/org.jrebirth.af/JRebirth-${project.version}.tar.gz">JRebirth ${project.version} .tar.gz</a>
 				</li>
 				<li>
-					<a href="http://apps.jrebirth.org/breizhcamp/javafx2-${Breizhcamp-version}.zip">JavaFX Prez</a>
+					<a href="http://apps.jrebirth.org/javafx2/Breizhcamp-${Breizhcamp-version}.zip">JavaFX Prez</a>
 				</li>
 				<li>
-					<a href="http://apps.jrebirth.org/jaf/jaf-${Jaf-version}.zip">JRebirth Tour</a>
+					<a href="http://apps.jrebirth.org/jaf/JRebirthTour-${Jaf-version}.zip">JRebirth Tour</a>
 				</li>
 				<li>
-					<a href="http://apps.jrebirth.org/masteringtables/masteringtables-${MasteringTables-version}.zip">Mastering Tables</a>
+					<a href="http://apps.jrebirth.org/masteringtables/MasteringTables-${MasteringTables-version}.zip">Mastering Tables</a>
 				</li>
 			</ul>
 		</div>
