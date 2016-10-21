@@ -30,9 +30,9 @@
 		<genkeystore>true</genkeystore>
 
 		<permissions>all-permissions</permissions> <!-- or sandbox -->
-		<deployUrl>http://showcases.jrebirth.org</deployUrl>
+		<deployUrl>http://apps.jrebirth.org</deployUrl>
 		<deployPath>${project.artifactId}/${project.version}</deployPath>
-		<codebase>${deployUrl}/${deployPath}</codebase>
+		<codebase>${deployUrl}/${deployPath}/jnlp</codebase>
 
 		<jnlpFilename>JRebirth.jnlp</jnlpFilename>
 		<preloaderClass>org.jrebirth.af.preloader.JRebirthPreloader</preloaderClass>

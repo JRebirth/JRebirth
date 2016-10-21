@@ -6,7 +6,11 @@
 #set( $keywords = "" )
 #set( $description = "" )
 
-#set( $jnlp = 'analyzer/${project.version}/JRebirthAnalyzer.jnlp')
+#set( $version = "${project.version}")
+#set( $path = "analyzer")
+#set( $archiveName = "JRebirthAnalyzer")
+#set( $downloadName = "JRebirth Analyzer")
+
 #set( $width = "1024")
 #set( $height = "768")
 
@@ -19,11 +23,9 @@
 #set( $appDescription = "<p>This application is used to replay JRebirth Apps 'log.</p>")
 
 #set( $isPresentation = false)
-
-#set( $downloadName = "JRebirth Analyzer")
-#set( $downloadPath = "http://apps.jrebirth.org/analyzer/")
-#set( $zipFile = "org.jrebirth.analyzer-{project.version}.zip")
-#set( $exeFile = "org.jrebirth.analyzer-{project.version}.exe")
+#set( $hasZip = true)
+#set( $hasJar = true)
+#set( $hasExe = true)
 
 #set( $githubRepoName = "GitHub JRebirth repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/JRebirth/tree/master/org.jrebirth.af/showcase/analyzer")

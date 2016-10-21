@@ -2,10 +2,15 @@
 #set( $title = "JRebirth AF Tour" )
 #set( $author = "Sebastien Bordes" )
 #set( $date="10/10/2015")
+
 #set( $keywords = "JavaFX 2 JavaFX 8 Demo Application Presentation JRebirth Framework Tour" )
 #set( $description = "JavaFX 2 JavaFX 8 Demo Application Presentation JRebirth Framework Tour" )
 
-#set( $jnlp = 'jaf/${Jaf-version}/JRebirthTour.jnlp')
+#set( $version = "${Jaf-version}")
+#set( $path = "jaf")
+#set( $archiveName = "JRebirthTour")
+#set( $downloadName = "JRebirth Tour")
+
 #set( $width = "1024")
 #set( $height = "768")
 
@@ -18,11 +23,9 @@
 #set( $appDescription = "<p>This application has been shown during SoftShake 2015</p>")
 
 #set( $isPresentation = true)
-
-#set( $downloadName = "JRebirth Tour")
-#set( $downloadPath = "http://apps.jrebirth.org/jaf/")
-#set( $zipFile = "JRebirthTour-${Jaf-version}.zip")
-#set( $exeFile = "JRebirthTour-${Jaf-version}.exe")
+#set( $hasZip = true)
+#set( $hasJar = true)
+#set( $hasExe = true)
 
 #set( $githubRepoName = "GitHub JRebirth Tour Repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/JRebirth-Tour")

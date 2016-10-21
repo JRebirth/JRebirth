@@ -6,7 +6,11 @@
 #set( $keywords = "JavaFX 2 Demo Application Presentation EclipseDay" )
 #set( $description = "JavaFX 2 Demo Application Presentation JRebirth Framework EclipseDay Talk" )
 
-#set( $jnlp = 'eclipseday/${EclipseDay-version}/EclipseDayToulouse.jnlp')
+#set( $version = "${EclipseDay-version}")
+#set( $path = "eclipseday")
+#set( $archiveName = "EclipseDayToulouse")
+#set( $downloadName = "EclipseDay Presentation")
+
 #set( $width = "1024")
 #set( $height = "768")
 
@@ -19,11 +23,9 @@
 #set( $appDescription = "<p>This application has been shown during Eclipse Day Toulouse 2012.</p>")
 
 #set( $isPresentation = true)
-
-#set( $downloadName = "EclipseDay Presentation")
-#set( $downloadPath = "http://apps.jrebirth.org/eclipseday/")
-#set( $zipFile = "eclipseday-${EclipseDay-version}.zip")
-#set( $exeFile = "eclipseday-${EclipseDay-version}.exe")
+#set( $hasZip = true)
+#set( $hasJar = true)
+#set( $hasExe = true)
 
 #set( $githubRepoName = "GitHub EclipseDay Presentation Repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/EclipseDay-Presentation")

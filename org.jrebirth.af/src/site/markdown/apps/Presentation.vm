@@ -14,7 +14,7 @@
 <div id="catcherContent">$catcherContent</div>
 
 <script type="text/javascript">//<![CDATA[
-	var JAVAFX_APP_JNLP='$jnlp';
+	var JAVAFX_APP_JNLP='${path}/${version}/jnlp/${archiveName}.jnlp';
 	var JAVAFX_APP_WIDTH=$width;
 	var JAVAFX_APP_HEIGHT=$height;
 //]]></script>
@@ -38,27 +38,33 @@ Press F11 to activate fullscreen mode.
 
 #if( $isPresentation )
 Use following controls:
-* Open Menu: Double Touch
-* Next Slide: Left-click, Page Down, Swipe Left
-* Previous Slide: Right-click, Page Up, Swipe Right
-* Next Slide(skip step): Ctrl+RightClick, Ctrl+Page Down, Double Swipe Left
-* Previous Slide(skip step): Ctrl+Right-click, Ctrl+Page Up, Double Swipe Right
+
+* Open Menu: Double Touch, Middle Mouse click
+* Next Slide: Mouse Left-click, Page Down, Swipe Left
+* Previous Slide: Mouse Right-click, Page Up, Swipe Right
+* Next Slide(skip step): Ctrl + Mouse Right-Click, Ctrl + Page Down, Double Swipe Left
+* Previous Slide(skip step): Ctrl + Mouse Right-click, Ctrl + Page Up, Double Swipe Right
+
 #end
-	
+
+
 You can download the whole application here :
 
-#if( $zipFile != "" )
-* <a href="$downloadPath$zipFile">$downloadName (zip)</a>
-#end			
-#if( $exeFile != "" )
-* <a href="$downloadPath$exeFile">$downloadName (exe)</a>
+#if( $hasZip )
+* <a href="http://apps.jrebirth.org/${path}/${version}/${archiveName}-${version}.zip">$downloadName (WebStart Archive)</a>
+#end
+#if( $hasJar )
+* <a href="http://apps.jrebirth.org/${path}/${version}/${archiveName}-${version}.jar">$downloadName (Self-Executable Jar)</a>
+#end		
+#if( $hasExe )
+* <a href="http://apps.jrebirth.org/${path}/${version}/${archiveName}-${version}.exe">$downloadName (Windows Executable)</a>
 #end
 	
 
 You can browse the source code on: 
 <a title="githubRepoName" href="$githubRepoUrl" target="_blank">$githubRepoName</a>.
 
-<div id="javafx-app-placeholder" style="margin: 0 -27px; padding: 0;">
+<div id="javafx-app-placeholder" style="margin: 0 auto; padding: 0; width:${width}px;">
 </div>
 
 
