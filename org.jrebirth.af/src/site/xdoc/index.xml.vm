@@ -197,13 +197,13 @@
 					<a href="http://apps.jrebirth.org/org.jrebirth.af/JRebirth-${project.version}.tar.gz">JRebirth ${project.version} .tar.gz</a>
 				</li>
 				<li>
-					<a href="http://apps.jrebirth.org/javafx2/Breizhcamp-${Breizhcamp-version}.zip">JavaFX Prez</a>
+					<a href="http://apps.jrebirth.org/javafx2/${Breizhcamp-version}/Breizhcamp-${Breizhcamp-version}.zip">JavaFX Prez</a>
 				</li>
 				<li>
-					<a href="http://apps.jrebirth.org/jaf/JRebirthTour-${Jaf-version}.zip">JRebirth Tour</a>
+					<a href="http://apps.jrebirth.org/jaf/${Jaf-version}/JRebirthTour-${Jaf-version}.zip">JRebirth Tour</a>
 				</li>
 				<li>
-					<a href="http://apps.jrebirth.org/masteringtables/MasteringTables-${MasteringTables-version}.zip">Mastering Tables</a>
+					<a href="http://apps.jrebirth.org/masteringtables/${MasteringTables-version}/MasteringTables-${MasteringTables-version}.zip">Mastering Tables</a>
 				</li>
 			</ul>
 		</div>
