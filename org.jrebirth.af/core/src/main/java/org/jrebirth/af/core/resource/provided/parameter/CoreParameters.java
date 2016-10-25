@@ -57,9 +57,6 @@ public interface CoreParameters {
      */
     ParameterItem<Boolean> LOG_RESOLUTION = create("logResolution", true);
 
-    /** Flag that activates the module.xml file parsing to register components using annotations. */
-    ParameterItem<Boolean> PARSE_MODULE_CONFIG_FILE = create("parseModuleConfigFile", false);
-
     /** First Close Retry Delay in milliseconds, time to wait when application try to close the first time. */
     ParameterItem<Integer> CLOSE_RETRY_DELAY_FIRST = create("closeRetryDelayFirst", 4000);
 
