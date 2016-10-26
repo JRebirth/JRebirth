@@ -466,6 +466,12 @@ public class WaveBase implements Wave, LinkMessages {
                 case Failed:
                     waveListener.waveFailed(this);
                     break;
+                case Cancelled:
+                    waveListener.waveCancelled(this);
+                    break;
+                case Destroyed:
+                    waveListener.waveDestroyed(this);
+                    break;
                 default:
                     break;
             }
