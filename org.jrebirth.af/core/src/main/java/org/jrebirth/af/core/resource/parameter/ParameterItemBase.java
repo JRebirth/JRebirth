@@ -31,8 +31,15 @@ import org.jrebirth.af.core.resource.AbstractResourceItem;
  */
 public final class ParameterItemBase<T> extends AbstractResourceItem<ParameterItem<?>, ParameterParams, T> implements ParameterItemReal<T> {
 
+    /**
+     * Create a new Parameter Item.
+     * 
+     * @param o the object used for its type
+     * 
+     * @return a fresh new {@link ParameterItem}
+     */
     public static <T extends Object> ParameterItemBase<T> create(final T o) {
-        return new ParameterItemBase<T>();
+        return new ParameterItemBase<>();
     }
 
     /**

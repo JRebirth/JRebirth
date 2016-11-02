@@ -50,6 +50,11 @@ public class ParameterTest {
         checkStringParameter(TestParameters.TEST_STRING_PARAM_2, "fontsFolder");
         checkStringParameter(TestParameters.TEST_STRING_PARAM_3, "font");// Default value
         checkStringParameter(TestParameters.TEST_STRING_PARAM_4, "fonts");// properties value, default one is ignored
+
+        checkStringParameter(EnumParameters.param1, "astring");
+        checkStringParameter(EnumParameters.param2, "to");
+        checkStringParameter(EnumParameters.param3, "test");
+
     }
 
     private void checkStringParameter(final ParameterItem<String> parameterItem, final String checkedName) {
@@ -62,10 +67,28 @@ public class ParameterTest {
     public void integerParameter() {
 
         checkIntegerParameter(TestParameters.TEST_INTEGER_WIDTH, 800);
+
     }
 
-    private void checkIntegerParameter(final ParameterItem<Integer> parameterItem, final Integer checkedValue) {
+    @Test
+    public void objectParameter() {
+
+        checkObjectParameter(NumberParameters.number1, 1);
+
+        checkObjectParameter(NumberParameters.number2, 3.333f);
+
+        checkObjectParameter(NumberParameters.number3, 1_000_000_000_000L);
+
+    }
+
+    private void checkIntegerParameter(final ParameterItem<? extends Integer> parameterItem, final Integer checkedValue) {
         final Integer param = parameterItem.get();
+        assertEquals("Check Integer", checkedValue, param);
+
+    }
+
+    private <O extends Object> void checkObjectParameter(final ParameterItem<O> parameterItem, final O checkedValue) {
+        final O param = parameterItem.get();
         assertEquals("Check Integer", checkedValue, param);
 
     }

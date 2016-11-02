@@ -17,6 +17,7 @@
  */
 package org.jrebirth.af.api.resource.parameter;
 
+import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.resource.ResourceItem;
 
 /**
@@ -39,12 +40,16 @@ public interface ParameterItem<T extends Object> extends ResourceItem<ParameterI
      *
      * @param forcedValue the new value for this parameter
      */
-    void define(final T forcedValue);
+    default void define(final T forcedValue) {
+        throw new CoreRuntimeException("Not Implemented yet");
+    }
 
     /**
      * Persist a parameter value.
      */
-    void persist();
+    default void persist() {
+        throw new CoreRuntimeException("Not Implemented yet");
+    }
 
     /**
      * {@inheritDoc}
