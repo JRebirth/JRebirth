@@ -19,9 +19,11 @@ package org.jrebirth.af.core.command.basic;
 
 import java.util.List;
 
+import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveListener;
 import org.jrebirth.af.core.command.single.internal.DefaultCommand;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.wave.JRebirthWaves;
 
 import org.slf4j.Logger;
@@ -67,7 +69,7 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
      */
     @Override
     public void afterPerform(final Wave wave) {
-        // Nothing
+        // Nothing and don't call the parent method
     }
 
     /**
@@ -81,11 +83,16 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
         // The wave is null skip it and launch the next one
         if (waveToRun == null) {
 
+            if (CoreParameters.DEVELOPER_MODE.get()) {
+                throw new CoreRuntimeException("ChainWaveCommand shouldn't be called with null wave");
+            }
+
             this.index++;
             // Run next command if any
             if (this.waveList.size() > this.index) {
                 unqueueWaves();
             } else {
+                // The null wave was the last so we can declare the command as fully handled
                 fireHandled(this.sourceWave);
             }
         } else {
@@ -129,13 +136,7 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
      */
     @Override
     public void waveConsumed(final Wave wave) {
-        // this.index++;
-        // // Run next command if any
-        // if (this.waveList.size() > this.index) {
-        // unqueueWaves();
-        // } else {
-        // fireHandled(this.sourceWave);
-        // }
+        // Nothing to do yet
     }
 
     /**
@@ -146,8 +147,10 @@ public class ChainWaveCommand extends DefaultCommand implements WaveListener {
         this.index++;
         // Run next command if any
         if (this.waveList.size() > this.index) {
+            // Try to run the next wave
             unqueueWaves();
         } else {
+            // No more wave to process, we can declare the command as fully handled
             fireHandled(this.sourceWave);
         }
     }
