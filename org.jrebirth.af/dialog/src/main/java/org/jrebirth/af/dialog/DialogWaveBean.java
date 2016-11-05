@@ -1,7 +1,7 @@
 package org.jrebirth.af.dialog;
 
+import org.jrebirth.af.api.annotation.bean.Bean;
 import org.jrebirth.af.api.wave.WaveBean;
-import org.jrebirth.af.processor.annotation.bean.Bean;
 
 @Bean
 public interface DialogWaveBean extends WaveBean {

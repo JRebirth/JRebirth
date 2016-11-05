@@ -31,8 +31,19 @@ public class FXBeanDefinition {
     /** The class name. */
     private String className;
 
+    private String superType;
+
     /** The properties. */
     private List<FXPropertyDefinition> properties = new ArrayList<>();
+
+    /**
+     * Gets the full class name.
+     *
+     * @return Returns the full class name.
+     */
+    public String getFullClassName() {
+        return this.packageName + "." + this.className;
+    }
 
     /**
      * Gets the package name.
@@ -68,6 +79,20 @@ public class FXBeanDefinition {
      */
     public void setClassName(final String className) {
         this.className = className;
+    }
+
+    /**
+     * @return Returns the superType.
+     */
+    public String getSuperType() {
+        return superType;
+    }
+
+    /**
+     * @param superType The superType to set.
+     */
+    public void setSuperType(String superType) {
+        this.superType = superType;
     }
 
     /**

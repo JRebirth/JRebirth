@@ -126,4 +126,74 @@ public class FXPropertyDefinition {
     public void setNeedSetter(final boolean needSetter) {
         this.needSetter = needSetter;
     }
+
+    public String getPropertyName() {
+        return "p" + this.name.substring(0, 1).toUpperCase() + this.name.substring(1);
+    }
+
+    public String getPropertyType() {
+
+        if (getType().startsWith("java.util.List")) {
+            return getType().replace("java.util.List", "javafx.collections.ObservableList");
+        } else if (getType().startsWith("java.util.Map")) {
+            return getType().replace("java.util.Map", "javafx.collections.ObservableMap");
+        } else {
+            switch (getType()) {
+                case "boolean":
+                    return "javafx.beans.property.BooleanProperty";
+                case "int":
+                    return "javafx.beans.property.IntegerProperty";
+                case "long":
+                    return "javafx.beans.property.LongProperty";
+                case "float":
+                    return "javafx.beans.property.FloatProperty";
+                case "double":
+                    return "javafx.beans.property.DoubleProperty";
+                case "string":
+                    return "javafx.beans.property.StringProperty";
+
+                default:
+                    return "javafx.beans.property.ObjectProperty<" + getType() + ">";
+
+            }
+        }
+
+        // return null;
+    }
+
+    public String getConcretePropertyType() {
+
+        if (getType().startsWith("java.util.List")) {
+            return "FXCollections.observableList";
+        } else if (getType().startsWith("java.util.Map")) {
+            return "FXCollections.observableMap";
+        } else {
+            switch (getType()) {
+                case "boolean":
+                    return "javafx.beans.property.SimpleBooleanProperty";
+                case "int":
+                    return "javafx.beans.property.SimpleIntegerProperty";
+                case "long":
+                    return "javafx.beans.property.SimpleLongProperty";
+                case "float":
+                    return "javafx.beans.property.SimpleFloatProperty";
+                case "double":
+                    return "javafx.beans.property.SimpleDoubleProperty";
+                case "string":
+                    return "javafx.beans.property.SimpleStringProperty";
+                default:
+                    return "javafx.beans.property.SimpleObjectProperty<" + getType() + ">";
+            }
+        }
+
+        // return null;
+    }
+
+    public boolean isList() {
+        return getConcretePropertyType().contains("observableList");
+    }
+
+    public boolean isMap() {
+        return getConcretePropertyType().contains("observableMap");
+    }
 }

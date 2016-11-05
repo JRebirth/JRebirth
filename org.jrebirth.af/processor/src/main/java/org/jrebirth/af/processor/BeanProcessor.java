@@ -17,8 +17,7 @@
  */
 package org.jrebirth.af.processor;
 
-import java.io.IOException;
-import java.net.URL;
+import java.io.Writer;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
@@ -38,15 +37,23 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.PrimitiveType;
 import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 import javax.tools.Diagnostic.Kind;
+import javax.tools.JavaFileObject;
 
-import org.jrebirth.af.api.module.Register;
-import org.jrebirth.af.api.module.RegistrationPoint;
-import org.jrebirth.af.processor.annotation.bean.Bean;
+import org.jrebirth.af.api.annotation.bean.Bean;
+import org.jrebirth.af.api.annotation.bean.Getter;
+import org.jrebirth.af.api.annotation.bean.Setter;
 import org.jrebirth.af.processor.util.FXBeanDefinition;
 import org.jrebirth.af.processor.util.FXPropertyDefinition;
+
+import org.jboss.forge.roaster.Roaster;
+import org.jboss.forge.roaster.model.source.FieldSource;
+import org.jboss.forge.roaster.model.source.JavaClassSource;
+import org.jboss.forge.roaster.model.source.MethodSource;
+import org.jboss.forge.roaster.model.util.Formatter;
 
 /**
  * The Class BeanProcessor.
@@ -54,17 +61,7 @@ import org.jrebirth.af.processor.util.FXPropertyDefinition;
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class BeanProcessor extends AbstractProcessor {
 
-    /** The module config path. */
-    private static String MODULE_CONFIG_PATH = "JRAF-INF";
-
-    /** The module config file name. */
-    private static String MODULE_CONFIG_FILE_NAME = "module.xml";
-
-    // /** The factory. */
-    // private ObjectFactory factory;
-    //
-    // /** The jaxb context. */
-    // private JAXBContext jaxbContext;
+    private static final String FORMATTER_PROPERTIES_FILE = "/org.eclipse.jdt.core.prefs";
 
     /**
      * {@inheritDoc}
@@ -72,14 +69,6 @@ public class BeanProcessor extends AbstractProcessor {
     @Override
     public synchronized void init(final ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
-
-        // this.factory = new ObjectFactory();
-        // try {
-        // this.jaxbContext = JAXBContext.newInstance("org.jrebirth.af.modular.model", Thread.currentThread().getContextClassLoader());
-        // } catch (final JAXBException e) {
-        // e.printStackTrace();
-        // }
-
     }
 
     /**
@@ -88,7 +77,7 @@ public class BeanProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
 
-        return new HashSet<>(Arrays.asList(Register.class.getName(), RegistrationPoint.class.getName()));
+        return new HashSet<>(Arrays.asList(Bean.class.getName(), Getter.class.getName(), Setter.class.getName(), Properties.class.getName()));
 
     }
 
@@ -98,13 +87,15 @@ public class BeanProcessor extends AbstractProcessor {
     @Override
     public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
 
-        final Map<String, VariableElement> fields = new ConcurrentHashMap<String, VariableElement>();
+        final Map<String, VariableElement> fields = new ConcurrentHashMap<>();
 
-        final Map<String, ExecutableElement> methods = new ConcurrentHashMap<String, ExecutableElement>();
+        final Map<String, ExecutableElement> methods = new ConcurrentHashMap<>();
 
         for (final Element e : roundEnv.getElementsAnnotatedWith(Bean.class)) {
 
             if (e.getKind() == ElementKind.CLASS) {
+
+                final Bean bean = e.getAnnotation(Bean.class);
 
                 final FXBeanDefinition beanDef = new FXBeanDefinition();
 
@@ -114,8 +105,9 @@ public class BeanProcessor extends AbstractProcessor {
                 this.processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "annotated class: " + classElement.getQualifiedName(), e);
 
                 // fqClassName = classElement.getQualifiedName().toString();
-                beanDef.setClassName(classElement.getSimpleName().toString());
+                beanDef.setClassName(bean.value());
                 beanDef.setPackageName(packageElement.getQualifiedName().toString());
+                beanDef.setSuperType(classElement.getSimpleName().toString());
 
                 for (final Element child : classElement.getEnclosedElements()) {
 
@@ -126,6 +118,15 @@ public class BeanProcessor extends AbstractProcessor {
                         final FXPropertyDefinition propertyDef = new FXPropertyDefinition();
                         propertyDef.setType(method.getReturnType().toString());
                         propertyDef.setName(method.getSimpleName().toString());
+                        beanDef.getProperties().add(propertyDef);
+
+                    } else if (child.getKind().isField()) {
+
+                        final VariableElement field = (VariableElement) child;
+
+                        final FXPropertyDefinition propertyDef = new FXPropertyDefinition();
+                        propertyDef.setType(getClassName(field));
+                        propertyDef.setName(field.getSimpleName().toString());
                         beanDef.getProperties().add(propertyDef);
 
                     }
@@ -141,6 +142,8 @@ public class BeanProcessor extends AbstractProcessor {
                 //
                 // fields.put(varElement.getSimpleName().toString(), varElement);
 
+                createBeanClass(processingEnv, beanDef);
+
             } else if (e.getKind() == ElementKind.METHOD) {
 
                 final ExecutableElement exeElement = (ExecutableElement) e;
@@ -152,12 +155,6 @@ public class BeanProcessor extends AbstractProcessor {
                 methods.put(exeElement.getSimpleName().toString(), exeElement);
             }
 
-            try {
-                loadTemplate("fqClassName");
-            } catch (final IOException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
         }
 
         return true;
@@ -186,6 +183,22 @@ public class BeanProcessor extends AbstractProcessor {
         if (t instanceof DeclaredType) {
             final DeclaredType dt = (DeclaredType) t;
             res = ((TypeElement) dt.asElement()).getQualifiedName().toString();
+            if (!dt.getTypeArguments().isEmpty()) {
+                res += "<";
+                boolean first = true;
+                for (final TypeMirror tm : dt.getTypeArguments()) {
+                    if (first) {
+                        first = false;
+                    } else {
+                        res += ",";
+                    }
+                    res += getClassName(tm);
+                }
+                res += ">";
+            }
+
+        } else if (t instanceof PrimitiveType) {
+            res = ((PrimitiveType) t).toString();
         }
 
         return res;
@@ -201,51 +214,228 @@ public class BeanProcessor extends AbstractProcessor {
         this.processingEnv.getMessager().printMessage(Kind.ERROR, msg, source);
     }
 
+    private void createBeanClass(ProcessingEnvironment processingEnv, FXBeanDefinition beanDef) {
+        try {
+
+            final JavaClassSource javaClass = Roaster.create(JavaClassSource.class);
+
+            javaClass.setPackage(beanDef.getPackageName()).setName(beanDef.getClassName());
+
+            javaClass.setSuperType(beanDef.getPackageName() + "." + beanDef.getSuperType());
+
+            beanDef.getProperties().stream().forEach(propDef -> writeProperty(javaClass, propDef));
+
+            beanDef.getProperties().stream().forEach(propDef -> {
+                writeGetter(javaClass, propDef);
+                writeSetter(javaClass, propDef);
+                writePropertyGetter(javaClass, propDef);
+
+            });
+
+            final Properties prefs = new Properties();
+            prefs.load(this.getClass().getResourceAsStream(FORMATTER_PROPERTIES_FILE));
+            final String formattedSource = Formatter.format(prefs, javaClass);
+
+            System.out.println(formattedSource);
+
+            final JavaFileObject jfo = this.processingEnv.getFiler().createSourceFile(beanDef.getFullClassName());
+            this.processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "creating source file: " + jfo.toUri());
+
+            final Writer writer = jfo.openWriter();
+            writer.write(formattedSource);
+            writer.close();
+
+        } catch (final Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    protected void writeProperty(final JavaClassSource javaClass, FXPropertyDefinition propDef) {
+        if (!javaClass.hasField(propDef.getPropertyName())) {
+
+            final StringBuilder javadoc = new StringBuilder();
+            javadoc
+                   .append("The property for ")
+                   .append(propDef.getName());
+
+            final FieldSource<?> method = javaClass.addField()
+                                                   .setType(propDef.getPropertyType())
+                                                   .setName(propDef.getPropertyName())
+                                                   .setPrivate();
+            method.getJavaDoc().setFullText(javadoc.toString());
+
+        } else {
+            // javaClass.getMethod(propDef.getName()).setBody(javaClass.getMethod(propDef.getName()).getBody() + body.toString());
+        }
+    }
+
     /**
-     * Load template.
-     *
-     * @param fqClassName the fq class name
-     * @throws IOException Signals that an I/O exception has occurred.
+     * TODO To complete.
+     * 
+     * @param javaClass
+     * @param body
      */
-    private void loadTemplate(final String fqClassName) throws IOException {
+    protected void writeGetter(final JavaClassSource javaClass, FXPropertyDefinition propDef) {
+        if (!javaClass.hasMethodSignature(propDef.getName())) {
 
-        if (fqClassName != null) {
+            // /**
+            // * @return the sourcePath
+            // */
+            // public File getSourcePath() {
+            // if (pSourcePath != null) {
+            // return pSourcePath.get();
+            // }
+            // return sourcePath;
+            // }
+            final StringBuilder javadoc = new StringBuilder();
+            javadoc
+                   .append("@return the sourcePath\n");
 
-            final Properties props = new Properties();
-            final URL url = this.getClass().getClassLoader().getResource("velocity.properties");
-            try {
-                props.load(url.openStream());
-            } catch (final IOException e) {
-                e.printStackTrace();
+            final StringBuilder body = new StringBuilder();
+            if (propDef.isList() || propDef.isMap()) {
+
+                javaClass.addImport("java.util.stream.Collectors");
+                javaClass.addImport("java.util.ArrayList");
+
+                // if(pLastResult != null) {
+                // return pLastResult.stream().collect(Collectors.toList());
+                // }
+
+                body
+                    .append("if (").append(propDef.getPropertyName()).append(" != null) {\n")
+                    .append("return ").append(propDef.getPropertyName()).append(".stream().collect(Collectors.toList());\n")
+                    .append("}\n")
+                    .append("if (").append(propDef.getName()).append(" == null) {\n")
+                    .append("this.").append(propDef.getName()).append(" = new ArrayList<>();\n")
+                    .append("}\n")
+                    .append("return this.").append(propDef.getName()).append(";");
+
+            } else {
+                body
+                    .append("if (").append(propDef.getPropertyName()).append(" != null) {\n")
+                    .append("return ").append(propDef.getPropertyName()).append(".get();\n")
+                    .append("}\n")
+                    .append("return this.").append(propDef.getName()).append(";");
+            }
+            final MethodSource<?> method = javaClass.addMethod()
+                                                    .setName(propDef.getName())
+                                                    .setPublic()
+                                                    .setBody(body.toString())
+                                                    .setReturnType(propDef.getType());
+            method.getJavaDoc().setFullText(javadoc.toString());
+
+        } else {
+            // javaClass.getMethod(propDef.getName()).setBody(javaClass.getMethod(propDef.getName()).getBody() + body.toString());
+        }
+    }
+
+    protected void writeSetter(final JavaClassSource javaClass, FXPropertyDefinition propDef) {
+        //
+        // /**
+        // * @param sourcePath
+        // * the sourcePath to set
+        // */
+        // public void setSourcePath(File sourcePath) {
+        // if (pLastResult != null) {
+        // pLastResult.setAll(lastResult);
+        // }
+        // this.sourcePath = sourcePath;
+        // }
+
+        // if (!javaClass.hasMethodSignature(propDef.getName())) {
+        final StringBuilder javadoc = new StringBuilder();
+        javadoc
+               .append("@return the sourcePath\n");
+
+        final StringBuilder body = new StringBuilder();
+
+        if (propDef.isList() || propDef.isMap()) {
+
+            body
+                .append("if (").append(propDef.getPropertyName()).append(" != null) {\n")
+                .append(propDef.getPropertyName()).append(".setAll(").append(propDef.getName()).append(");\n")
+                .append("}\n")
+                .append("this.").append(propDef.getName()).append(" = ").append(propDef.getName()).append(";");
+
+        } else {
+            body
+                .append("if (").append(propDef.getPropertyName()).append(" != null) {\n")
+                .append(propDef.getPropertyName()).append(".set(").append(propDef.getName()).append(");\n")
+                .append("}\n")
+                .append("this.").append(propDef.getName()).append(" = ").append(propDef.getName()).append(";");
+        }
+        final MethodSource<?> method = javaClass.addMethod()
+                                                .setName(propDef.getName())
+                                                .setPublic()
+                                                .setBody(body.toString())
+                                                .setReturnTypeVoid();
+        method.addParameter(propDef.getType(), propDef.getName());
+        method.getJavaDoc().setFullText(javadoc.toString());
+
+        /*
+         * } else { javaClass.getMethod(propDef.getName()).setBody(javaClass.getMethod(propDef.getName()).getBody() + body.toString()); }
+         */
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param javaClass
+     * @param body
+     */
+    protected void writePropertyGetter(final JavaClassSource javaClass, FXPropertyDefinition propDef) {
+        if (!javaClass.hasMethodSignature(propDef.getPropertyName())) {
+
+            //
+            // /**
+            // * @return the sourcePathPy
+            // */
+            // public ObjectProperty<File> pSourcePath() {
+            // if (pSourcePath == null) {
+            // pSourcePath = new SimpleObjectProperty<>();
+            // pSourcePath.set(sourcePath);
+            // }
+            // return pSourcePath;
+            // }
+            //
+
+            final StringBuilder javadoc = new StringBuilder();
+            javadoc
+                   .append("@return the pSourcePath\n");
+
+            final StringBuilder body = new StringBuilder();
+
+            if (propDef.isList() || propDef.isMap()) {
+
+                javaClass.addImport("javafx.collections.FXCollections");
+
+                body
+                    .append("if (").append(propDef.getPropertyName()).append(" == null) {\n")
+                    .append(propDef.getPropertyName()).append(" =  ").append(propDef.getConcretePropertyType()).append("(this.").append(propDef.getName()).append("());\n")
+                    .append("}\n")
+                    .append("return this.").append(propDef.getPropertyName()).append(";");
+
+            } else {
+
+                body
+                    .append("if (").append(propDef.getPropertyName()).append(" == null) {\n")
+                    .append(propDef.getPropertyName()).append(" = new ").append(propDef.getConcretePropertyType()).append("();\n")
+                    .append(propDef.getPropertyName()).append(".set(").append(propDef.getName()).append(");\n")
+                    .append("}\n")
+                    .append("return this.").append(propDef.getPropertyName()).append(";");
             }
 
-            // final VelocityEngine ve = new VelocityEngine(props);
-            // ve.init();
-            //
-            // final VelocityContext vc = new VelocityContext();
-            //
-            // vc.put("className", "assName");
-            // vc.put("packageName", "ckageName");
-            // vc.put("fieldselds", "");
-            // vc.put("methodsthods", "");
-            //
-            // final Template vt = ve.getTemplate("beaninfo.vm");
-            //
-            // final JavaFileObject jfo = this.processingEnv.getFiler().createSourceFile(fqClassName + "BeanInfo");
-            //
-            // this.processingEnv.getMessager().printMessage(
-            // Diagnostic.Kind.NOTE,
-            // "creating source file: " + jfo.toUri());
-            //
-            // final Writer writer = jfo.openWriter();
-            //
-            // this.processingEnv.getMessager().printMessage(
-            // Diagnostic.Kind.NOTE,
-            // "applying velocity template: " + vt.getName());
-            //
-            // vt.merge(vc, writer);
+            final MethodSource<?> method = javaClass.addMethod()
+                                                    .setName(propDef.getPropertyName())
+                                                    .setPublic()
+                                                    .setBody(body.toString())
+                                                    .setReturnType(propDef.getPropertyType());
+            method.getJavaDoc().setFullText(javadoc.toString());
 
-            // writer.close();
+        } else {
+            // javaClass.getMethod(propDef.getName()).setBody(javaClass.getMethod(propDef.getName()).getBody() + body.toString());
         }
     }
 
