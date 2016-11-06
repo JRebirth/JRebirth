@@ -282,7 +282,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
         wave.status(Status.Sent);
 
         final PriorityLevel priority = wave.contains(JRebirthItems.priority) ? wave.get(JRebirthItems.priority) : PriorityLevel.Normal;
-        final RunType runType = wave.get(JRebirthItems.runSynchronously) ? RunType.JIT_SYNC : RunType.JIT;
+        final RunType runType = wave.contains(JRebirthItems.runSynchronously) && wave.get(JRebirthItems.runSynchronously) ? RunType.JIT_SYNC : RunType.JIT;
         final Long timeout = wave.contains(JRebirthItems.syncTimeout) ? wave.get(JRebirthItems.syncTimeout) : SyncRunnable.DEFAULT_TIME_OUT;
 
         // Use the JRebirth Thread to manage Waves
