@@ -18,6 +18,7 @@
 package org.jrebirth.af.core.wave;
 
 import org.jrebirth.af.api.annotation.PriorityLevel;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 
 /**
@@ -27,6 +28,10 @@ public interface JRebirthItems {
 
     /** The Void wave item will be used only into a WaveData to wrap the VOID value when nothing is returned. The Void type cannot be used into a method signature. */
     WaveItem<Void> voidItem = new WaveItemBase<Void>(false) {
+    };
+
+    /** The wave wave item (not a parameter). */
+    WaveItem<Wave> waveItem = new WaveItemBase<Wave>(false) {
     };
 
     /** The exception wave item (not a parameter). */

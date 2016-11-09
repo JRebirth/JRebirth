@@ -169,34 +169,50 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
 
             }
 
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            LOGGER.log(SERVICE_TASK_ERROR, e, getServiceHandlerName());
-            this.wave.status(Status.Failed);
+        } catch (IllegalAccessException | IllegalArgumentException e) {
+            handleException(e);
+        } catch (final InvocationTargetException e) {
+            if (e.getTargetException() != null) {
+                handleException(e.getTargetException());
+            } else {
+                handleException(e);
+            }
         } catch (final ServiceException se) {
-            LOGGER.log(SERVICE_TASK_EXCEPTION, se, se.getExplanation(), getServiceHandlerName());
-            this.wave.status(Status.Failed);
+            handleException(se.getCause());
         } catch (final Exception e) { // NOSONAR, catch all to try to do something smart !
-
             handleException(e);
         }
         return res;
     }
 
     /**
-     * Handle all exception occurred while doing the task.TODO To complete.
+     * Handle all exception occurred while doing the task.
      *
      * @param e the exception to handle
      */
-    private void handleException(final Exception e) {
+    private void handleException(final Throwable e) {
+
+        if (e instanceof ServiceException) {
+            final ServiceException se = (ServiceException) e;
+            // Only log with warn level to let the application continue its workflow even in developer mode
+            LOGGER.log(SERVICE_TASK_EXCEPTION, se, se.getExplanation(), getServiceHandlerName());
+        } else {
+            // In developer mode it will stop the application throwing another exception
+            LOGGER.log(SERVICE_TASK_ERROR, e, getServiceHandlerName());
+        }
+
         this.wave.status(Status.Failed);
 
+        final Class<? extends Throwable> managedException = e instanceof ServiceException ? e.getCause().getClass() : e.getClass();
+
         // Get the exact exception type
-        final Wave exceptionHandlerWave = this.wave.waveType().waveExceptionHandler().get(e.getClass());
+        final Wave exceptionHandlerWave = this.wave.waveType().waveExceptionHandler().get(managedException);
 
         if (exceptionHandlerWave != null) {
             // Fill the wave with useful data
             exceptionHandlerWave.fromClass(this.service.getClass())
                                 .add(JRebirthItems.exceptionItem, e)
+                                .add(JRebirthItems.waveItem, this.wave)
                                 .relatedWave(this.wave);
 
             LOGGER.log(SERVICE_TASK_HANDLE_EXCEPTION, e, e.getClass().getSimpleName(), getServiceHandlerName());
