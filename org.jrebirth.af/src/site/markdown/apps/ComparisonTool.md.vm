@@ -4,7 +4,7 @@
 #set( $date="11/11/2016")
 
 #set( $keywords = "Bundle Version Compare Artifact Qualifier Updated Upgraded Downgraded Same Missing New" )
-#set( $description = "Coparison Tool will help you to compare bundles from 2 folders to find differences" )
+#set( $description = "Comparison Tool will help you to compare bundles from 2 folders to find differences" )
 
 #set( $version = "${ComparisonTool-version}")
 #set( $path = "comparisontool")
@@ -18,9 +18,9 @@
 #set( $sectionTitle = "Comparison Tool - Bundle utility")
 
 #set( $catcherTitle = "Comparison Tool - Bundle Utility")
-#set( $catcherContent = "Find version difference between your bundle set")
+#set( $catcherContent = "Find version differences between your bundle set")
 
-#set( $appDescription = "<p>This application is sued to find version difference between 2 folder conatinnig some OSGI bundles</p>")
+#set( $appDescription = "<p>This application is used to find version differences between 2 folders containing some OSGI bundles. It could be extended to manage more file types using rexep or another custom algorithm.</p>")
 
 #set( $isPresentation = false)
 #set( $hasZip = true)
