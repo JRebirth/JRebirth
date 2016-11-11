@@ -32,6 +32,7 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd" name="JRebirth">
 		<menu name="Demo">
 			<item name="Showcase Demo" href="apps/Demo.html" />
 			<item name="Mastering Tables" href="apps/MasteringTables.html" />
+			<item name="Comparison Tool" href="apps/ComparisonTool.html" />
 		</menu>
 		
 		<menu name="Slides">

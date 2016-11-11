@@ -20,12 +20,13 @@
 	<inceptionYear>2011</inceptionYear>
 
 	<properties>
-		<LightningTalk-version>3.0.0</LightningTalk-version>
-		<MasteringTables-version>3.0.0</MasteringTables-version>
-		<Jaf-version>3.0.0</Jaf-version>
-		<Breizhcamp-version>3.0.0</Breizhcamp-version>
 		<EclipseDay-version>3.0.0</EclipseDay-version>
+		<Breizhcamp-version>3.0.0</Breizhcamp-version>
 		<EclipseCON-version>3.0.0</EclipseCON-version>
+		<LightningTalk-version>3.0.0</LightningTalk-version>
+		<Jaf-version>3.0.0</Jaf-version>
+		<MasteringTables-version>3.0.0</MasteringTables-version>
+		<ComparisonTool-version>1.0.0-SNAPSHOT</ComparisonTool-version>
 	</properties>
 
 	<modules>

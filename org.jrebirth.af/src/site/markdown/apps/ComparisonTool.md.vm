@@ -1,0 +1,34 @@
+
+#set( $title = "Comparison Tool - Compare your bundles" )
+#set( $author = "Sebastien Bordes" )
+#set( $date="11/11/2016")
+
+#set( $keywords = "Bundle Version Compare Artifact Qualifier Updated Upgraded Downgraded Same Missing New" )
+#set( $description = "Coparison Tool will help you to compare bundles from 2 folders to find differences" )
+
+#set( $version = "${ComparisonTool-version}")
+#set( $path = "comparisontool")
+#set( $archiveName = "ComparisonTool")
+#set( $downloadName = "Comparison Tool")
+
+#set( $width = "800")
+#set( $height = "600")
+
+#set( $sectionId = "ComparisonTool")
+#set( $sectionTitle = "Comparison Tool - Bundle utility")
+
+#set( $catcherTitle = "Comparison Tool - Bundle Utility")
+#set( $catcherContent = "Find version difference between your bundle set")
+
+#set( $appDescription = "<p>This application is sued to find version difference between 2 folder conatinnig some OSGI bundles</p>")
+
+#set( $isPresentation = false)
+#set( $hasZip = true)
+#set( $hasJar = true)
+#set( $hasExe = true)
+
+#set( $githubRepoName = "GitHub ComparisonTool repository")
+#set( $githubRepoUrl = "https://github.com/JRebirth/ComparisonTool")
+			
+
+#parse("Presentation.vm")
