@@ -30,9 +30,8 @@ $appDescription
 			
 Require <a href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">Java 8 Runtime</a>.
 
-**You can launch the application with Java Webstart:**
-
-<a id="launchApp" href="#" title="Launch Application with Java WebStart">Click to launch this application with Java WebStart</a>
+**You can launch the application using Java Webstart:**
+<a href="http://apps.jrebirth.org/${path}/${version}/jnlp/${archiveName}.jnlp" title="Launch Application with Java WebStart">Click and Open with Java WebStart</a>
 
 Press F11 to activate fullscreen mode.
 
