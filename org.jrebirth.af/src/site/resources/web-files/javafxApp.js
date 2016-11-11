@@ -16,12 +16,12 @@ function launchApplication(jnlpfile) {
 }
 function javafxEmbed() {
 
-	var startAppAnchor = document.getElementById("launchApp");
+	/*var startAppAnchor = document.getElementById("launchApp");
 	if(startAppAnchor != null){
 		startAppAnchor.onclick = function(){
 			return launchApplication();
 		}
-	}
+	}*/
 	
 	dtjava.embed(
 		{
