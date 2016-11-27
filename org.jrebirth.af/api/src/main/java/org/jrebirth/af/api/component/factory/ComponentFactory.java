@@ -29,6 +29,13 @@ import org.jrebirth.af.api.exception.CoreException;
 public interface ComponentFactory {
 
     /**
+     * Define a Component contract.
+     *
+     * @param item the registration point item
+     */
+    void define(final RegistrationPointItem item);
+
+    /**
      * Register an implementation class for an interface.
      *
      * @param item the registration item

@@ -22,7 +22,7 @@ import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.component.factory.RegistrationItem;
 
 /**
- * The class <strong>RegistrationItem</strong> alow to store registration information.
+ * The class <strong>RegistrationItem</strong> allows to store component registration information.
  *
  * @author Sébastien Bordes
  */
@@ -129,7 +129,7 @@ public class RegistrationItemBase implements RegistrationItem {
     }
 
     /**
-     * Set the registration priority weight.
+     * Set the registration priority weight (strictly less than 1000).
      *
      * @param weight The weight to set.
      *
@@ -137,7 +137,7 @@ public class RegistrationItemBase implements RegistrationItem {
      */
     @Override
     public RegistrationItemBase weight(final int weight) {
-        this.weight = weight;
+        this.weight = weight % 1000;
         return this;
     }
 

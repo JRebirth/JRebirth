@@ -27,6 +27,7 @@ import org.jrebirth.af.api.module.ModuleStarter;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.component.factory.RegistrationItemBase;
+import org.jrebirth.af.core.component.factory.RegistrationPointItemBase;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
@@ -39,18 +40,41 @@ public abstract class AbstractModuleStarter implements ModuleStarter, ModuleMess
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractModuleStarter.class);
 
     /**
+     * Define a new component interface definition.
+     *
+     * @param interfaceClass the interface class implemented
+     * @param exclusive the exclusive flag
+     * @param reverse the reverse flag
+     */
+    protected void define(final Class<? extends Component<?>> interfaceClass, final boolean exclusive, final boolean reverse) {
+
+        preloadClass(interfaceClass);
+
+        getFacade().componentFactory().define(
+                                              RegistrationPointItemBase.create()
+                                                                       .interfaceClass(interfaceClass)
+                                                                       .exclusive(exclusive)
+                                                                       .reverse(reverse));
+    }
+
+    /**
      * Register a new component implementation.
      *
      * @param interfaceClass the interface class implemented
      * @param implClass the implementation class
      * @param priority the priority level
-     * @param weight the priority weight
+     * @param weight the priority weight strictly less than 1000
      */
     protected void register(final Class<? extends Component<?>> interfaceClass, final Class<? extends Component<?>> implClass, final PriorityLevel priority, final int weight) {
 
         preloadClass(interfaceClass);
 
-        getFacade().componentFactory().register(RegistrationItemBase.create().interfaceClass(interfaceClass).implClass(implClass));
+        getFacade().componentFactory().register(
+                                                RegistrationItemBase.create()
+                                                                    .interfaceClass(interfaceClass)
+                                                                    .implClass(implClass)
+                                                                    .priority(priority)
+                                                                    .weight(weight));
     }
 
     /**

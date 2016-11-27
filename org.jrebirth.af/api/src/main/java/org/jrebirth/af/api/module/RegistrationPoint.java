@@ -41,9 +41,16 @@ import org.jrebirth.af.api.component.factory.ComponentFactory;
 public @interface RegistrationPoint {
 
     /**
-     * Exclusive.
+     * Exclusive flag.
      *
-     * @return true, if successful
+     * @return true, when only one component shall be built
      */
     boolean exclusive() default true;
+
+    /**
+     * Reverse flag.
+     *
+     * @return true, when lower priority are retrieved first
+     */
+    boolean reverse() default false;
 }
