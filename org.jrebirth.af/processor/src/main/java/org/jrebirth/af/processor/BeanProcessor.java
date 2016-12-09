@@ -357,20 +357,22 @@ public class BeanProcessor extends AbstractProcessor {
                 .append("if (").append(propDef.getPropertyName()).append(" != null) {\n")
                 .append(propDef.getPropertyName()).append(".setAll(").append(propDef.getName()).append(");\n")
                 .append("}\n")
-                .append("this.").append(propDef.getName()).append(" = ").append(propDef.getName()).append(";");
-
+                .append("this.").append(propDef.getName()).append(" = ").append(propDef.getName()).append(";")
+                .append("return this;");
         } else {
             body
                 .append("if (").append(propDef.getPropertyName()).append(" != null) {\n")
                 .append(propDef.getPropertyName()).append(".set(").append(propDef.getName()).append(");\n")
                 .append("}\n")
-                .append("this.").append(propDef.getName()).append(" = ").append(propDef.getName()).append(";");
+                .append("this.").append(propDef.getName()).append(" = ").append(propDef.getName()).append(";")
+                .append("return this;");
         }
         final MethodSource<?> method = javaClass.addMethod()
                                                 .setName(propDef.getName())
                                                 .setPublic()
                                                 .setBody(body.toString())
-                                                .setReturnTypeVoid();
+                                                // .setReturnTypeVoid();
+                                                .setReturnType(javaClass);
         method.addParameter(propDef.getType(), propDef.getName());
         method.getJavaDoc().setFullText(javadoc.toString());
 

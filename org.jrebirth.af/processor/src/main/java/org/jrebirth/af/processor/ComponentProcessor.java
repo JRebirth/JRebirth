@@ -103,6 +103,7 @@ public class ComponentProcessor extends AbstractProcessor {
         annotationMap.put(BootComponent.class, roundEnv.getElementsAnnotatedWith(BootComponent.class));
         annotationMap.put(RegistrationPoint.class, roundEnv.getElementsAnnotatedWith(RegistrationPoint.class));
         annotationMap.put(Register.class, roundEnv.getElementsAnnotatedWith(Register.class));
+
         if (!annotationMap.get(BootComponent.class).isEmpty() ||
                 !annotationMap.get(RegistrationPoint.class).isEmpty() ||
                 !annotationMap.get(Register.class).isEmpty() ||
@@ -146,8 +147,8 @@ public class ComponentProcessor extends AbstractProcessor {
         String moduleName;
         try {
             moduleName = getModuleStarterName(processingEnv);
-            final String starterName = moduleName.substring(moduleName.lastIndexOf('.'));
-            final String pkg = moduleName.replace(starterName, "");
+            final String starterName = moduleName.substring(moduleName.lastIndexOf('.') + 1);
+            final String pkg = moduleName.substring(0, moduleName.lastIndexOf('.'));
 
             final JavaClassSource javaClass = Roaster.create(JavaClassSource.class);
 
@@ -156,6 +157,8 @@ public class ComponentProcessor extends AbstractProcessor {
             javaClass.extendSuperType(AbstractModuleStarter.class);
 
             final StringBuilder body = new StringBuilder();
+
+            appendRegistrationPoints(javaClass, body, annotationMap.get(RegistrationPoint.class));
 
             appendRegistrations(javaClass, body, annotationMap.get(Register.class));
 
@@ -180,7 +183,7 @@ public class ComponentProcessor extends AbstractProcessor {
             prefs.load(this.getClass().getResourceAsStream(FORMATTER_PROPERTIES_FILE));
             final String formattedSource = Formatter.format(prefs, javaClass);
 
-            System.out.println(formattedSource);
+            // System.out.println(formattedSource);
 
             final JavaFileObject jfo = this.processingEnv.getFiler().createSourceFile(moduleName);
             this.processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "creating source file: " + jfo.toUri());
@@ -247,6 +250,24 @@ public class ComponentProcessor extends AbstractProcessor {
 
     }
 
+    private void appendRegistrationPoints(JavaClassSource javaClass, StringBuilder body, Set<? extends Element> list) {
+        for (final Element element : list) {
+
+            final RegistrationPoint r = element.getAnnotation(RegistrationPoint.class);
+
+            body.append("\ndefine(")
+                .append(getSimpleClassName(element))
+                .append(".class, ")
+                .append(Boolean.toString(r.exclusive()))
+                .append(", ")
+                .append(Boolean.toString(r.reverse()))
+                .append(");\n");
+
+            javaClass.addImport(getClassName(element));
+        }
+
+    }
+
     /**
      * Gets the class name.
      *
@@ -299,7 +320,7 @@ public class ComponentProcessor extends AbstractProcessor {
             final Properties properties = new Properties();
             properties.load(propertiesStream);
             name = properties.getProperty(MODULE_STARTER_CLASS_PROPERTY);
-        } catch (final IOException ignored) {
+        } catch (final Exception ignored) {
         } // File jrebirth.properties was not found in classpath
 
         if (name == null || name.isEmpty()) {
@@ -319,7 +340,7 @@ public class ComponentProcessor extends AbstractProcessor {
 
             // generationForPath.delete();
 
-            return sourcePath.substring(0, sourcePath.indexOf("target"));
+            return sourcePath.substring(0, sourcePath.indexOf("/target"));
         } catch (final IOException e) {
             processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING, "Unable to determine source file path!");
         }
