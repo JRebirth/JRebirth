@@ -34,16 +34,23 @@ import java.lang.annotation.Target;
 public @interface Field {
 
     String name() default "";
-    
+
     GeneratorKind kind() default GeneratorKind.GetterSetterProperty;
-    
+
     Visibility visibility() default Visibility.public$;
-    
+
     boolean onlyProperty() default false;
-    
+
     String propertyPrefix() default "p";
-    
+
     String getterPrefix() default "";
-    
+
     String setterPrefix() default "";
+
+    /**
+     * Fluent mode allow to chain setter.
+     * 
+     * @return the fluent mode
+     */
+    boolean fluent() default true;
 }

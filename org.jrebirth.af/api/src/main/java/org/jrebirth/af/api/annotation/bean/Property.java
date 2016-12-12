@@ -23,19 +23,17 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.jrebirth.af.api.component.basic.Component;
-import org.jrebirth.af.api.component.factory.ComponentFactory;
-
-
 @Target({ ElementType.TYPE, ElementType.FIELD })
 @Retention(RetentionPolicy.SOURCE)
 @Documented
 public @interface Property {
 
     /**
-     * Default prefix used by generated accessor method.
+     * Default prefix used by generated property method.
      *
      * @return the getter prefix
      */
     String prefix() default "";
+
+    Visibility visibility() default Visibility.public$;
 }

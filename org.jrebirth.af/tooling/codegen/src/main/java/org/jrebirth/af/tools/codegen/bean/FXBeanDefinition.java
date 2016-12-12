@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.processor.util;
+package org.jrebirth.af.tools.codegen.bean;
 
 import java.util.ArrayList;
 import java.util.List;

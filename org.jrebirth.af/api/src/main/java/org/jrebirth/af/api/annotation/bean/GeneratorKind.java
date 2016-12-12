@@ -26,7 +26,7 @@ public enum GeneratorKind {
 
     /** . */
     Getter,
-    
+
     /** . */
     Setter,
 
@@ -35,15 +35,17 @@ public enum GeneratorKind {
 
     /** . */
     Property,
-    
+
     /** . */
     GetterProperty,
-    
+
     /** . */
     SetterProperty,
-    
+
     /** . */
-    GetterSetterProperty
-    ;
+    GetterSetterProperty,
+
+    /** . */
+    None;
 
 }

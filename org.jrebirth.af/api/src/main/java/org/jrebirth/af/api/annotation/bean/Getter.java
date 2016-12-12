@@ -36,4 +36,6 @@ public @interface Getter {
      * @return the getter prefix
      */
     String prefix() default "";
+
+    Visibility visibility() default Visibility.public$;
 }

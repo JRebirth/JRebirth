@@ -33,17 +33,24 @@ import java.lang.annotation.Target;
 @Documented
 public @interface Bean {
 
+    /**
+     * The name of the class name generated TODO To complete.
+     * 
+     * @return
+     */
     String value() default "";
-    
-    GeneratorKind kind() default GeneratorKind.GetterSetterProperty;
-    
+
+    GeneratorKind kind() default GeneratorKind.None;
+
     Visibility visibility() default Visibility.public$;
-    
+
     boolean onlyProperty() default false;
-    
+
     String propertyPrefix() default "p";
-    
+
     String getterPrefix() default "";
-    
+
     String setterPrefix() default "";
+
+    boolean fluent() default true;
 }

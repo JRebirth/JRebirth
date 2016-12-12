@@ -23,9 +23,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.jrebirth.af.api.component.basic.Component;
-import org.jrebirth.af.api.component.factory.ComponentFactory;
-
 @Target({ ElementType.TYPE, ElementType.FIELD })
 @Retention(RetentionPolicy.SOURCE)
 @Documented
@@ -37,4 +34,13 @@ public @interface Setter {
      * @return the setter prefix
      */
     String prefix() default "";
+
+    Visibility visibility() default Visibility.public$;
+
+    /**
+     * Fluent mode allow to chain setter.
+     * 
+     * @return the fluent mode
+     */
+    boolean fluent() default true;
 }
