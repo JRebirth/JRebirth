@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.AbstractController;
 import org.jrebirth.af.core.ui.adapter.DefaultMouseAdapter;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 
 import ${package}.command.SampleCommand;
 import ${package}.command.SamplePoolCommand;
@@ -45,7 +45,7 @@ public final class SampleController extends AbstractController<SampleModel, Samp
     protected void initEventAdapters() throws CoreException {
 
         // Manage Ui Command Button
-        linkCommand(getView().getUiCommand(), MouseEvent.MOUSE_CLICKED, SampleUICommand.class);
+        linkCommand(view().getUiCommand(), MouseEvent.MOUSE_CLICKED, SampleUICommand.class);
 
         // Use the inner class
         addAdapter(new SampleMouseAdapter());
@@ -60,7 +60,7 @@ public final class SampleController extends AbstractController<SampleModel, Samp
         // Listen events
 
         // Manage Pooled Command Button
-        getView().getPooledCommand().setOnMouseClicked(getHandler(MouseEvent.MOUSE_CLICKED));
+        view().getPooledCommand().setOnMouseClicked(getHandler(MouseEvent.MOUSE_CLICKED));
     }
 
     /**
@@ -73,7 +73,7 @@ public final class SampleController extends AbstractController<SampleModel, Samp
         LOGGER.debug("MouseClicked => Call Sample Command");
 
         // Manage Default Command Button
-        getModel().getCommand(SampleCommand.class).run();
+        model().getCommand(SampleCommand.class).run();
 
     }
 
@@ -88,7 +88,7 @@ public final class SampleController extends AbstractController<SampleModel, Samp
 
             LOGGER.debug("MouseClicked => Call Sample Pool Command");
 
-            getModel().sendWave(Builders.callCommand(SamplePoolCommand.class));
+            model().sendWave(WBuilder.callCommand(SamplePoolCommand.class));
             
         }
 

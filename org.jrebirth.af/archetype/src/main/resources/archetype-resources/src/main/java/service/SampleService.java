@@ -6,7 +6,7 @@ package ${package}.service;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
-import org.jrebirth.af.core.wave.Builders;
+import org.jrebirth.af.core.wave.WBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public final class SampleService extends DefaultService {
 
     /** Perform something. */
-    public static final WaveType DO_SOMETHING = Builders.waveType("SOMETHING").returnAction("SOMETHING_DONE");
+    public static final WaveType DO_SOMETHING = WBuilder.waveType("SOMETHING").returnAction("SOMETHING_DONE");
 
     /** Wave type to return when something was done. */
     // public static final WaveType RE_SOMETHING_DONE = WaveType.create("SOMETHING_DONE");

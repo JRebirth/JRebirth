@@ -56,13 +56,13 @@ public final class SampleView extends AbstractView<SampleModel, BorderPane, Samp
         this.uiCommand = new Button("Trigger an UI Command into JAT");
         this.pooledCommand = new Button("Trigger a pooled Command into JTP");
 
-        getRootNode().setCenter(
+        node().setCenter(
                 LabelBuilder.create()
                         .text("JRebirth Sample")
                         .build()
                 );
 
-        getRootNode().setBottom(FlowPaneBuilder.create().children(
+        node().setBottom(FlowPaneBuilder.create().children(
                 this.defaultCommand,
                 this.uiCommand,
                 this.pooledCommand
