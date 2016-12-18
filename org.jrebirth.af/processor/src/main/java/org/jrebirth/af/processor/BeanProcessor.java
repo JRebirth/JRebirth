@@ -43,9 +43,9 @@ import javax.tools.Diagnostic.Kind;
 import javax.tools.JavaFileObject;
 
 import org.jrebirth.af.api.annotation.bean.Bean;
-import org.jrebirth.af.tools.codegen.bean.FXBeanDefinition;
-import org.jrebirth.af.tools.codegen.bean.FXPropertyDefinition;
-import org.jrebirth.af.tools.codegen.generator.BeanGenerator;
+import org.jrebirth.af.tooling.codegen.bean.FXBeanDefinition;
+import org.jrebirth.af.tooling.codegen.bean.FXPropertyDefinition;
+import org.jrebirth.af.tooling.codegen.generator.Generators;
 
 /**
  * The Class BeanProcessor.
@@ -133,7 +133,7 @@ public class BeanProcessor extends AbstractProcessor {
                 // fields.put(varElement.getSimpleName().toString(), varElement);
 
                 try {
-                    final String formattedSource = BeanGenerator.createBeanClass(beanDef);
+                    final String formattedSource = Generators.beanGenerator.generate(beanDef);
 
                     final JavaFileObject jfo = this.processingEnv.getFiler().createSourceFile(beanDef.getFullClassName());
                     this.processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "creating source file: " + jfo.toUri());

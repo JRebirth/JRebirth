@@ -32,6 +32,19 @@
 			<version>${roaster.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.x5dev</groupId>
+			<artifactId>chunk-templates</artifactId>
+			<version>3.2.4</version>
+
+			<exclusions>
+				<exclusion>
+					<groupId>net.minidev</groupId>
+					<artifactId>json-smart</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 	</dependencies>
 
 </project>

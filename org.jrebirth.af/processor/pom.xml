@@ -71,7 +71,7 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.jrebirth.af.tools</groupId>
+			<groupId>org.jrebirth.af.tooling</groupId>
 			<artifactId>codegen</artifactId>
 			<version>8.5.1-SNAPSHOT</version>
 		</dependency>

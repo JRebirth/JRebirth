@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.tools.codegen.bean;
+package org.jrebirth.af.tooling.codegen.bean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,13 +85,13 @@ public class FXBeanDefinition {
      * @return Returns the superType.
      */
     public String getSuperType() {
-        return superType;
+        return this.superType;
     }
 
     /**
      * @param superType The superType to set.
      */
-    public void setSuperType(String superType) {
+    public void setSuperType(final String superType) {
         this.superType = superType;
     }
 

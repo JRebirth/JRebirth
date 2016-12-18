@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.tools.codegen.bean;
+package org.jrebirth.af.tooling.codegen.bean;
 
 /**
  * The Class FXPropertyDefinition.
@@ -27,6 +27,9 @@ public class FXPropertyDefinition {
 
     /** The name. */
     private String name;
+
+    /** The require field. */
+    private boolean requireField;
 
     /** The need property. */
     private boolean needProperty;
@@ -71,6 +74,20 @@ public class FXPropertyDefinition {
      */
     public void setName(final String name) {
         this.name = name;
+    }
+
+    /**
+     * @return Returns the requireField.
+     */
+    public boolean requireField() {
+        return requireField;
+    }
+
+    /**
+     * @param requireField The requireField to set.
+     */
+    public void requireField(boolean requireField) {
+        this.requireField = requireField;
     }
 
     /**
