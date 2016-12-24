@@ -27,7 +27,7 @@ public class BeanGenerator extends AbstractGenerator<FXBeanDefinition> {
         javaClass.setPackage(beanDef.getPackageName()).setName(beanDef.getClassName());
 
         if (beanDef.getSuperType() != null) {
-            javaClass.setSuperType(beanDef.getPackageName() + "." + beanDef.getSuperType());
+            javaClass.setSuperType(/* beanDef.getPackageName() + "." + */beanDef.getSuperType());
         }
 
         beanDef.getProperties().stream().forEach(propDef -> {
