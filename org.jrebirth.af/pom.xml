@@ -47,6 +47,7 @@
 		<module>security</module>
 		<module>distribution</module>
 		<module>rest</module>
+		<module>resources</module>
 	</modules>
 
 	<issueManagement>

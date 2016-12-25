@@ -17,9 +17,8 @@
  */
 package org.jrebirth.af.core.resource.provided;
 
-import static org.jrebirth.af.core.resource.Resources.create;
-
-import org.jrebirth.af.api.resource.image.ImageItem;
+import org.jrebirth.af.api.resource.image.ImageExtension;
+import org.jrebirth.af.core.resource.image.ImageEnum;
 import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
 
 /**
@@ -29,13 +28,25 @@ import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
  *
  * @author Sébastien Bordes
  */
-public interface JRebirthImages {
+public enum JRebirthImages implements ImageEnum {
 
     /**************************************************************************************/
     /** _____________________________Application Core Images.____________________________ */
     /**************************************************************************************/
 
+    // @formatter:off
+
     /** The Not/Available default image. */
-    ImageItem NOT_AVAILABLE = create(ResourceParameters.NOT_AVAILABLE_IMAGE.get());
+    NOT_AVAILABLE {{ set(ResourceParameters.NOT_AVAILABLE_IMAGE.get()); }},
+
+    JR_LOGO_16 {{ rel("JRebirth_16x16", ImageExtension.PNG); }},
+
+    JR_LOGO_32 {{ rel("JRebirth_32x32", ImageExtension.PNG); }},
+
+    JR_LOGO_64 {{ rel("JRebirth_64x64", ImageExtension.PNG); }},
+
+    JR_LOGO_128 {{ rel("JRebirth_128x128", ImageExtension.PNG); }},
+
+    JR_LOGO_256 {{ rel("JRebirth_256x256", ImageExtension.PNG); }};
 
 }

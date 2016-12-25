@@ -70,12 +70,12 @@ public class RelImage extends AbstractBaseImage implements ImageParams {
         }
         if (parameters.length == 2) {
             nameProperty().set(parameters[0]);
-            extensionProperty().set(ImageExtension.valueOf(parameters[1]));
+            extensionProperty().set(ImageExtension.of(parameters[1]));
         }
         if (parameters.length == 3) {
             pathProperty().set(parameters[0]);
             nameProperty().set(parameters[1]);
-            extensionProperty().set(ImageExtension.valueOf(parameters[2]));
+            extensionProperty().set(ImageExtension.of(parameters[2]));
         }
     }
 

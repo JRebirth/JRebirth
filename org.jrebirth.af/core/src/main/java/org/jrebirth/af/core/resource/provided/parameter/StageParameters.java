@@ -19,9 +19,14 @@ package org.jrebirth.af.core.resource.provided.parameter;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.jrebirth.af.api.resource.image.ImageParams;
 //import org.jrebirth.af.api.resource.image.ImageParams;
 import org.jrebirth.af.api.resource.parameter.ParameterItem;
 import org.jrebirth.af.core.resource.color.WebColor;
+import org.jrebirth.af.core.resource.provided.JRebirthImages;
 
 /**
  * The class <strong>StageParameters</strong>.
@@ -37,12 +42,16 @@ public interface StageParameters {
     /**************************************************************************************/
 
     /**
-     * The <code>APPLICATION_ICONS</code> field is used to define the icons used by the stage of the application. "JRebirth_16x16,JRebirth_32x32,JRebirth_64x64,JRebirth_128x128,JRebirth_256x256"
+     * The <code>APPLICATION_ICONS</code> field is used to define the icons used by the stage of the application. ie :
+     * "JRebirth_16x16.png,JRebirth_32x32.png,JRebirth_64x64.png,JRebirth_128x128.png,JRebirth_256x256.png"
      */
-    /*
-     * ParameterItem<List<ImageParams>> APPLICATION_ICONS = create("applicationIcons", Arrays.asList( JRebirthImages.JR_LOGO_16.getParam(), JRebirthImages.JR_LOGO_32.getParam(),
-     * JRebirthImages.JR_LOGO_64.getParam(), JRebirthImages.JR_LOGO_128.getParam(), JRebirthImages.JR_LOGO_256.getParam() ));
-     */
+    ParameterItem<List<ImageParams>> APPLICATION_ICONS = create("applicationIcons", Arrays.asList(
+                                                                                                  JRebirthImages.JR_LOGO_16.param(),
+                                                                                                  JRebirthImages.JR_LOGO_32.param(),
+                                                                                                  JRebirthImages.JR_LOGO_64.param(),
+                                                                                                  JRebirthImages.JR_LOGO_128.param(),
+                                                                                                  JRebirthImages.JR_LOGO_256.param()));
+
     /**
      * The <code>APPLICATION_NAME</code> field is used to define title of the application displayed by stage window.<br />
      * The default value contains a <b>{}</b> that will be replaced by application class simple name.

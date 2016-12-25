@@ -28,6 +28,13 @@
 			<version>8.5.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Optionnal dependency storing resources, can be exluded from dependency list -->
+		<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>resources</artifactId>
+			<version>8.5.1-SNAPSHOT</version>
+		</dependency>
 
 
 		<dependency>

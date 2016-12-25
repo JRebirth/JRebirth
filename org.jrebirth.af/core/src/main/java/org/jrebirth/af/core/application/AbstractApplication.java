@@ -22,11 +22,13 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ServiceLoader;
+import java.util.stream.Collectors;
 
 import javafx.application.Application;
 import javafx.application.Preloader;
 import javafx.application.Preloader.ProgressNotification;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -50,6 +52,7 @@ import org.jrebirth.af.core.exception.handler.JitUncaughtExceptionHandler;
 import org.jrebirth.af.core.exception.handler.PoolUncaughtExceptionHandler;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.provided.JRebirthColors;
 import org.jrebirth.af.core.resource.provided.JRebirthStyles;
 import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
@@ -259,8 +262,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         // launch the configuration search engine
         ResourceBuilders.PARAMETER_BUILDER.searchConfigurationFiles(conf.value(), conf.extension());
 
-        // Take into account the log resolution parameter
-        // ResourceBuilders.MESSAGE_BUILDER.setLogResolutionActivated(JRebirthParameters.LOG_RESOLUTION.get());
     }
 
     /**
@@ -339,6 +340,12 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     private void initializeStage() {
         // Define the stage title
         this.stage.setTitle(applicationTitle());
+
+        // Define stage icons, the toolkit will use the best size
+        final List<Image> stageIcons = stageIcons();
+        if (stageIcons != null && !stageIcons.isEmpty()) {
+            this.stage.getIcons().addAll(stageIcons);
+        }
 
         // and allow customization
         customizeStage(this.stage);
@@ -454,7 +461,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      *
      * This method could be overridden.
      *
-     * By default it will will return {@link CoreParameters.APPLICATION_NAME} {@link CoreParameters.APPLICATION_VERSION} string.
+     * By default it will return {@link StageParameters.APPLICATION_NAME} {@link StageParameters.APPLICATION_VERSION} string.
      *
      * The default application is: ApplicationClass powered by JRebirth <br />
      * If version is equals to "0.0.0", it will not be appended
@@ -474,6 +481,25 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
             sb.append(' ').append(version);
         }
         return sb.toString();
+    }
+
+    /**
+     * Return the application stage icon.
+     *
+     * This method could be overridden.
+     *
+     * By default it will return {@link StageParameters.APPLICATION_ICONS} list of JRebirth icons.
+     *
+     * Image Params parameterized will be converted as Image using anonymous ImageItem
+     *
+     * @return the list of image to use as stage icons
+     */
+    protected List<Image> stageIcons() {
+        // TODO to be rewritten with ImageSet Resource when available
+        return StageParameters.APPLICATION_ICONS.get()
+                                                .stream()
+                                                .map(p -> Resources.create(p).get())
+                                                .collect(Collectors.toList());
     }
 
     /**

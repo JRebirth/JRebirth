@@ -57,6 +57,16 @@ public interface ResourceItem<I, P, R> {
     }
 
     /**
+     * Return the registered {@link ResourceParams} element
+     * 
+     * @return the resource params
+     */
+    @SuppressWarnings("unchecked")
+    default P param() {
+        return builder().getParam((I) this);
+    }
+
+    /**
      * Return the resource builder.
      *
      * @return the resource builder

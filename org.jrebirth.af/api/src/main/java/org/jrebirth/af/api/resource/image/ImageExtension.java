@@ -45,4 +45,25 @@ public enum ImageExtension {
         return this == NONE ? "" : "." + name().toLowerCase();
     }
 
+    /**
+     * Get an ImageExtension value for the given string or return NONE.
+     * 
+     * @param imageExtension the string to convert
+     * 
+     * @return a valid IMageExtension or NONE if the string is invalid
+     */
+    public static ImageExtension of(String imageExtension) {
+        final ImageExtension ext = ImageExtension.NONE;
+
+        if (imageExtension != null && !imageExtension.isEmpty()) {
+            try {
+                return ImageExtension.valueOf(imageExtension.toUpperCase());
+            } catch (final IllegalArgumentException e) {
+                // Silently catch trouble and return the NONE image extension
+            }
+        }
+
+        return ext;
+    }
+
 }

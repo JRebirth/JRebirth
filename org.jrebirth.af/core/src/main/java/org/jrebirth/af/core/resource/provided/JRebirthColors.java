@@ -17,9 +17,7 @@
  */
 package org.jrebirth.af.core.resource.provided;
 
-import static org.jrebirth.af.core.resource.Resources.create;
-
-import org.jrebirth.af.api.resource.color.ColorItem;
+import org.jrebirth.af.core.resource.color.ColorEnum;
 import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
 
 /**
@@ -29,28 +27,15 @@ import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
  *
  * @author Sébastien Bordes
  */
-public interface JRebirthColors {
+public enum JRebirthColors implements ColorEnum {
 
     /**************************************************************************************/
     /** _____________________________Application Core Colors.____________________________ */
     /**************************************************************************************/
 
+    // @formatter:off
+    
     /** The default background color of the scene. */
-    ColorItem SCENE_BG_COLOR = create(StageParameters.APPLICATION_SCENE_BG_COLOR.get());
+    SCENE_BG_COLOR {{ set(StageParameters.APPLICATION_SCENE_BG_COLOR.get()); }};
 
 }
-
-// Vision of future with Java 8
-
-// public enum JRebirthColors implements ColorItem {
-
-/**************************************************************************************/
-/** _____________________________Application Core Colors.____________________________ */
-/**************************************************************************************/
-
-// /** The default background color of the scene. */
-// SCENE_BG_COLOR {
-// {
-// set(JRebirthParameters.APPLICATION_SCENE_BG_COLOR.get());
-// }
-// }

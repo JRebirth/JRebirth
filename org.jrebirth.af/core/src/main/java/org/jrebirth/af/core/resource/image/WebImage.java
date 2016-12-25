@@ -138,14 +138,14 @@ public class WebImage extends AbstractBaseImage implements ImageParams {
             websiteProperty().set(parameters[0]);
             pathProperty().set(parameters[1]);
             nameProperty().set(parameters[2]);
-            extensionProperty().set(ImageExtension.valueOf(parameters[3]));
+            extensionProperty().set(ImageExtension.of(parameters[3]));
         }
         if (parameters.length == 5) {
             websiteProperty().set(parameters[0]);
             securedProperty().set(readBoolean(parameters[1]));
             pathProperty().set(parameters[2]);
             nameProperty().set(parameters[3]);
-            extensionProperty().set(ImageExtension.valueOf(parameters[4]));
+            extensionProperty().set(ImageExtension.of(parameters[4]));
         }
     }
 
