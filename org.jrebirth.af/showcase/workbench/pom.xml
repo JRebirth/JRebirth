@@ -35,11 +35,13 @@
 
 
 	<dependencies>
+	
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>component</artifactId>
 			<version>8.5.1-SNAPSHOT</version>
 		</dependency>
+	
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>

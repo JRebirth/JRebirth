@@ -43,6 +43,8 @@ import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.module.ModuleStarter;
 import org.jrebirth.af.api.resource.ResourceItem;
 import org.jrebirth.af.api.resource.style.StyleSheetItem;
+import org.jrebirth.af.api.ui.ModuleModel;
+import org.jrebirth.af.core.component.factory.RegistrationPointItemBase;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
@@ -412,6 +414,13 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * Preload Module.xml files.
      */
     protected void preloadModules() {
+
+        // Add default ModuleModel component interface (because it cannot be added by module starter, API is not processed with annotation engine)
+        JRebirthThread.getThread().getFacade().componentFactory().define(
+                                                                         RegistrationPointItemBase.create()
+                                                                                                  .interfaceClass(ModuleModel.class)
+                                                                                                  .exclusive(false)
+                                                                                                  .reverse(false));
 
         final ServiceLoader<ModuleStarter> loader = ServiceLoader.load(ModuleStarter.class);
 
