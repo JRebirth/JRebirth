@@ -64,6 +64,22 @@ public interface WaveType {
     WaveType action(String action);
 
     /**
+     * Return the current prefix name, if null default one will be retrieved from Parameter.
+     *
+     * @return the prefix name
+     */
+    String prefix();
+
+    /**
+     * Set the forced prefix name.
+     *
+     * @param prefix the forced prefix name to set
+     *
+     * @return the wave type to chain method call
+     */
+    WaveType prefix(String prefix);
+
+    /**
      * Return all WaveItems used by this WaveType.
      *
      * @return the wave items list

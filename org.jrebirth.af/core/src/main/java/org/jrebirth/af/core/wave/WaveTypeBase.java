@@ -47,6 +47,11 @@ public final class WaveTypeBase implements WaveType {
      */
     private String action;
 
+    /**
+     * The forced prefix defined for this wave type.
+     */
+    private String prefix;
+
     /** Define arguments types to use. */
     private final List<WaveItem<?>> waveItemList = new ArrayList<>();
 
@@ -130,6 +135,23 @@ public final class WaveTypeBase implements WaveType {
      * {@inheritDoc}
      */
     @Override
+    public String prefix() {
+        return prefix == null ? CoreParameters.WAVE_HANDLER_PREFIX.get() : prefix;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public WaveType prefix(String prefix) {
+        this.prefix = prefix;
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<WaveItem<?>> items() {
         return this.waveItemList;
     }
@@ -160,7 +182,6 @@ public final class WaveTypeBase implements WaveType {
     @Override
     public WaveTypeBase returnAction(final String returnAction) {
         this.returnAction = returnAction;
-        buildReturnWaveType();
         return this;
     }
 
@@ -178,13 +199,14 @@ public final class WaveTypeBase implements WaveType {
     @Override
     public WaveTypeBase returnItem(final WaveItem<?> returnItem) {
         this.returnItem = returnItem;
+        // Build the corresponding return wave type only when item is defined
         buildReturnWaveType();
         return this;
     }
 
     private void buildReturnWaveType() {
         if (this.returnAction != null && this.returnItem != null) {
-            this.returnWaveType = WBuilder.waveType(this.returnAction).items(returnItem());
+            returnWaveType(WBuilder.waveType(this.returnAction).items(returnItem()));
         }
     }
 
@@ -201,6 +223,9 @@ public final class WaveTypeBase implements WaveType {
      */
     @Override
     public WaveType returnWaveType(final WaveType returnWaveType) {
+        // Also store the return wave type into registry to let it being handled using OnWave annotation
+        WaveTypeRegistry.store(returnWaveType.action(), returnWaveType);
+
         this.returnWaveType = returnWaveType;
         this.returnAction = returnWaveType.action();
         this.returnItem = returnWaveType.items().stream().findFirst().orElse(null);
@@ -260,7 +285,7 @@ public final class WaveTypeBase implements WaveType {
     public String toString() {
         // The action name will be used to define the name of the wave handler method
         // Prepend do before the action name to force wave handler method to begin with do (convention parameterizable)
-        return CoreParameters.WAVE_HANDLER_PREFIX.get() + this.action;
+        return prefix() + this.action;
     }
 
     /**

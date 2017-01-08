@@ -53,10 +53,22 @@ public interface WBuilder {
      * Build a fresh Wave type with action name.
      *
      * @param action the action
+     * 
      * @return the wave type
      */
     static WaveType waveType(final String action) {
         return waveType().action(action);
+    }
+
+    /**
+     * Build a fresh Wave type with action name using default hard coded prefix "DO_".
+     *
+     * @param action the action
+     * 
+     * @return the wave type
+     */
+    static WaveType waveTypeDo(final String action) {
+        return waveType().action(action).prefix("DO_");
     }
 
     /**

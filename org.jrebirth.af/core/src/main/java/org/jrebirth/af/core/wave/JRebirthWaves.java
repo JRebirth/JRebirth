@@ -72,16 +72,6 @@ public interface JRebirthWaves {
     /** . */
     WaveData<Boolean> REUSE = WBuilder.waveData(REUSE_COMMAND, true);
 
-    /******************************/
-    /** WaveType related to Model */
-    /******************************/
-
-    /** The waveType used to show a view (start or reload). */
-    WaveType SHOW_VIEW_WT = waveType(WaveConstants.SHOW_VIEW);
-
-    /** The waveType used to hide a view. */
-    WaveType HIDE_VIEW_WT = waveType(WaveConstants.HIDE_VIEW);
-
     /********************************/
     /** WaveItem related to Service */
     /********************************/
