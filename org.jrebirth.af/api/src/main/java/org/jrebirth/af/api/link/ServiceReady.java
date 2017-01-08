@@ -22,6 +22,7 @@ import java.util.List;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveType;
 
@@ -78,6 +79,21 @@ public interface ServiceReady extends CommandReady {
      * @return a list of service instance
      */
     <S extends Service> List<S> getServices(final UniqueKey<S> serviceKey);
+
+    /**
+     * Send a wave used to return data from a service.
+     *
+     * The service will be called from JRebirthThread and could execute itself from another thread.
+     *
+     * @param serviceClass the service called
+     * @param waveType the type of the wave
+     * @param waveBean the WaveBean that holds all required wave data
+     * 
+     * @param <WB> the type of the wave bean to used
+     *
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
+     */
+    <WB extends WaveBean> Wave returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WB waveBean);
 
     /**
      * Send a wave used to return data from a service.

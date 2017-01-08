@@ -62,6 +62,27 @@ public abstract class AbstractModuleStarter implements ModuleStarter, ModuleMess
      *
      * @param interfaceClass the interface class implemented
      * @param implClass the implementation class
+     */
+    protected void register(final Class<? extends Component<?>> interfaceClass, final Class<? extends Component<?>> implClass) {
+        register(interfaceClass, implClass, PriorityLevel.Normal, 0);
+    }
+
+    /**
+     * Register a new component implementation.
+     *
+     * @param interfaceClass the interface class implemented
+     * @param implClass the implementation class
+     * @param priority the priority level
+     */
+    protected void register(final Class<? extends Component<?>> interfaceClass, final Class<? extends Component<?>> implClass, final PriorityLevel priority) {
+        register(interfaceClass, implClass, priority, 0);
+    }
+
+    /**
+     * Register a new component implementation.
+     *
+     * @param interfaceClass the interface class implemented
+     * @param implClass the implementation class
      * @param priority the priority level
      * @param weight the priority weight strictly less than 1000
      */

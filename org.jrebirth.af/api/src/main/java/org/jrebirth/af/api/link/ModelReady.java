@@ -22,6 +22,7 @@ import java.util.List;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.api.wave.contract.WaveData;
 
 /**
@@ -76,6 +77,20 @@ public interface ModelReady extends ServiceReady {
      * @return a list of model instance
      */
     <M extends Model> List<M> getModels(final UniqueKey<M> modelKey);
+
+    /**
+     * Send a wave used to display an UI model.
+     *
+     * The command will be called from JRebirthThread but will execute itself from the JavaFX Application thread.
+     *
+     * @param modelClass the model class to display
+     * @param waveBean the WaveBean that holds all required wave data
+     * 
+     * @param <WB> the type of the wave bean to used
+     *
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
+     */
+    <WB extends WaveBean> Wave attachUi(final Class<? extends Model> modelClass, final WB waveBean);
 
     /**
      * Send a wave used to display an UI model.

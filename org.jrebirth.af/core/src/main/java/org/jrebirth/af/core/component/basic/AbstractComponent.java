@@ -256,8 +256,24 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      * {@inheritDoc}
      */
     @Override
+    public final <WB extends WaveBean> Wave returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WB waveBean) {
+        return sendWaveIntoJit(createWave(WaveGroup.RETURN_DATA, waveType, serviceClass, waveBean));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public final Wave returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WaveData<?>... data) {
         return sendWaveIntoJit(createWave(WaveGroup.RETURN_DATA, waveType, serviceClass, data));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final <WB extends WaveBean> Wave attachUi(final Class<? extends Model> modelClass, final WB waveBean) {
+        return sendWaveIntoJit(createWave(WaveGroup.ATTACH_UI, null, modelClass, waveBean));
     }
 
     /**
