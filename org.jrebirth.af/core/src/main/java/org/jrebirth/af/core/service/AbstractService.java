@@ -29,7 +29,6 @@ import javafx.collections.ObservableMap;
 import javafx.scene.control.ProgressBar;
 
 import org.jrebirth.af.api.exception.CoreException;
-import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.facade.JRebirthEventType;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.service.Service;
@@ -37,7 +36,6 @@ import org.jrebirth.af.api.service.ServiceTask;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent;
-import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
 import org.jrebirth.af.core.log.JRLoggerFactory;
@@ -146,7 +144,7 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
         sourceWave.addWaveListener(new ServiceTaskWaveListener());
 
         // Create a new ServiceTask to handle this request and follow progression
-        final ServiceTaskBase<T> task = new ServiceTaskBase<T>(this, method, parameterValues, sourceWave);
+        final ServiceTaskBase<T> task = new ServiceTaskBase<>(this, method, parameterValues, sourceWave);
 
         // Store the task into the pending map
         this.pendingTasks.put(sourceWave.wUID(), task);
@@ -184,19 +182,13 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
     private void bindProgressBar(final ServiceTaskBase<?> task, final ProgressBar progressBar) {
 
         // Perform this binding into the JAT to respect widget and task API
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("Bind ProgressBar to " + task.getServiceHandlerName()) {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                // Avoid the progress bar to display 100% at start up
-                task.updateProgress(0, 0);
-                // Bind the progress bar
-                progressBar.progressProperty().bind(task.workDoneProperty().divide(task.totalWorkProperty()));
-            }
-        });
+        JRebirth.runIntoJAT(new JrbReferenceRunnable("Bind ProgressBar to " + task.getServiceHandlerName(),
+                                                     () -> {
+                                                         // Avoid the progress bar to display 100% at start up
+                                                         task.updateProgress(0, 0);
+                                                         // Bind the progress bar
+                                                         progressBar.progressProperty().bind(task.workDoneProperty().divide(task.totalWorkProperty()));
+                                                     }));
 
     }
 
@@ -209,17 +201,9 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
     private void bindTitle(final ServiceTask<?> task, final StringProperty titleProperty) {
 
         // Perform this binding into the JAT to respect widget and task API
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("Bind Title for " + task.getServiceHandlerName()) {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                // Bind the task title
-                titleProperty.bind(task.titleProperty());
-            }
-        });
+        JRebirth.runIntoJAT(new JrbReferenceRunnable("Bind Title for " + task.getServiceHandlerName(),
+                                                     // Bind the task title
+                                                     () -> titleProperty.bind(task.titleProperty())));
     }
 
     /**
@@ -231,17 +215,9 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
     private void bindMessage(final ServiceTask<?> task, final StringProperty messageProperty) {
 
         // Perform this binding into the JAT to respect widget and task API
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("Bind Message for " + task.getServiceHandlerName()) {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                // Bind the task title
-                messageProperty.bind(task.messageProperty());
-            }
-        });
+        JRebirth.runIntoJAT(new JrbReferenceRunnable("Bind Message for " + task.getServiceHandlerName(),
+                                                     // Bind the task title
+                                                     () -> messageProperty.bind(task.messageProperty())));
     }
 
     /**
@@ -302,17 +278,8 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
         if (wave.get(JRebirthWaves.SERVICE_TASK).checkProgressRatio(workDone, totalWork, progressIncrement)) {
 
             // Increase the task progression
-            JRebirth.runIntoJAT(new AbstractJrbRunnable("ServiceTask Workdone (lng) " + workDone + RATIO_SEPARATOR + totalWork + "[" + workDone * 100 / totalWork + "%]") {
-
-                /**
-                 * {@inheritDoc}
-                 */
-                @Override
-                protected void runInto() throws JRebirthThreadException {
-
-                    wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork);
-                }
-            });
+            JRebirth.runIntoJAT(new JrbReferenceRunnable("ServiceTask Workdone (lng) " + workDone + RATIO_SEPARATOR + totalWork + "[" + workDone * 100 / totalWork + "%]",
+                                                         () -> wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork)));
         }
     }
 

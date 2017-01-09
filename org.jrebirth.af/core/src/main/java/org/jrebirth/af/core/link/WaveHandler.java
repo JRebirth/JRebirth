@@ -28,15 +28,14 @@ import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.concurrent.RunInto;
 import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.exception.CoreException;
-import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.component.basic.AbstractComponent;
-import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
+import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
 import org.jrebirth.af.core.exception.WaveException;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.ClassUtility;
@@ -150,22 +149,18 @@ public class WaveHandler implements LinkMessages {
 
         final WaveHandler waveHandler = this;
 
-        return new AbstractJrbRunnable(getWaveReady().getClass().getSimpleName() + " handle wave " + wave.toString(), priority) {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            protected void runInto() throws JRebirthThreadException {
-                try {
-                    performHandle(wave, customMethod);
-                } catch (final WaveException e) {
-                    LOGGER.error(WAVE_HANDLING_ERROR, e);
-                } finally {
-                    wave.removeWaveHandler(waveHandler);
-                }
-            }
-        };
+        return new JrbReferenceRunnable(
+                                        getWaveReady().getClass().getSimpleName() + " handle wave " + wave.toString(),
+                                        priority,
+                                        () -> {
+                                            try {
+                                                performHandle(wave, customMethod);
+                                            } catch (final WaveException e) {
+                                                LOGGER.error(WAVE_HANDLING_ERROR, e);
+                                            } finally {
+                                                wave.removeWaveHandler(waveHandler);
+                                            }
+                                        });
     }
 
     /**

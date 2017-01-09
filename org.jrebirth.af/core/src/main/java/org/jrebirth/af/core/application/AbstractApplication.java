@@ -38,16 +38,15 @@ import org.jrebirth.af.api.application.Configuration;
 import org.jrebirth.af.api.application.JRebirthApplication;
 import org.jrebirth.af.api.application.Localized;
 import org.jrebirth.af.api.exception.CoreException;
-import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.module.ModuleStarter;
 import org.jrebirth.af.api.resource.ResourceItem;
 import org.jrebirth.af.api.resource.style.StyleSheetItem;
 import org.jrebirth.af.api.ui.ModuleModel;
 import org.jrebirth.af.core.component.factory.RegistrationPointItemBase;
-import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
+import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
 import org.jrebirth.af.core.exception.handler.DefaultUncaughtExceptionHandler;
 import org.jrebirth.af.core.exception.handler.JatUncaughtExceptionHandler;
 import org.jrebirth.af.core.exception.handler.JitUncaughtExceptionHandler;
@@ -580,28 +579,10 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         Thread.setDefaultUncaughtExceptionHandler(getDefaultUncaughtExceptionHandler());
 
         // Initialize the uncaught exception handler for JavaFX Application Thread
-        JRebirth.runIntoJAT(new AbstractJrbRunnable(ATTACH_JAT_UEH.getText()) {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void runInto() throws JRebirthThreadException {
-                Thread.currentThread().setUncaughtExceptionHandler(getJatUncaughtExceptionHandler());
-            }
-        });
+        JRebirth.runIntoJAT(new JrbReferenceRunnable(ATTACH_JAT_UEH.getText(), () -> Thread.currentThread().setUncaughtExceptionHandler(getJatUncaughtExceptionHandler())));
 
         // Initialize the uncaught exception handler for JRebirth Internal Thread
-        JRebirth.runIntoJIT(new AbstractJrbRunnable(ATTACH_JIT_UEH.getText()) {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void runInto() throws JRebirthThreadException {
-                Thread.currentThread().setUncaughtExceptionHandler(getJitUncaughtExceptionHandler());
-            }
-        });
+        JRebirth.runIntoJIT(new JrbReferenceRunnable(ATTACH_JIT_UEH.getText(), () -> Thread.currentThread().setUncaughtExceptionHandler(getJitUncaughtExceptionHandler())));
     }
 
     /**

@@ -25,7 +25,7 @@ package org.jrebirth.af.api.exception;
  *
  * @author Sébastien Bordes
  */
-public class JRebirthThreadException extends Exception {
+public class JRebirthThreadException extends RuntimeException {
 
     /**
      * The constant used for serialization.

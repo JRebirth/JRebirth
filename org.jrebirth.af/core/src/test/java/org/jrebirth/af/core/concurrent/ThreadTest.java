@@ -7,7 +7,6 @@ import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.core.application.ApplicationTest;
-
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -34,15 +33,10 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
 
         final AtomicBoolean ok = new AtomicBoolean(false);
 
-        JRebirth.runIntoJAT(new AbstractJrbRunnable("Jat test") {
-
-            @Override
-            protected void runInto() throws JRebirthThreadException {
+        JRebirth.runIntoJAT(new JrbReferenceRunnable("Jat test", () -> {
                 LOGGER.info("Running into " + Thread.currentThread().getName());
                 ok.set(JRebirth.isJAT());
-
-            }
-        });
+            } ));
 
         checkBoolean(ok);
     }
@@ -52,15 +46,10 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
 
         final AtomicBoolean ok = new AtomicBoolean(false);
 
-        JRebirth.runIntoJIT(new AbstractJrbRunnable("JIT test") {
-
-            @Override
-            protected void runInto() throws JRebirthThreadException {
+        JRebirth.runIntoJIT(new JrbReferenceRunnable("JIT test", () -> {
                 LOGGER.info("Running into " + Thread.currentThread().getName());
                 ok.set(JRebirth.isJIT());
-            }
-
-        });
+            } ));
 
         checkBoolean(ok);
     }
@@ -70,15 +59,10 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
 
         final AtomicBoolean ok = new AtomicBoolean(false);
 
-        JRebirth.runIntoJTP(new AbstractJrbRunnable("JTP test") {
-
-            @Override
-            protected void runInto() throws JRebirthThreadException {
+        JRebirth.runIntoJTP(new JrbReferenceRunnable("JTP test", () -> {
                 LOGGER.info("Running into " + Thread.currentThread().getName());
                 ok.set(JRebirth.isJTPSlot());
-            }
-
-        });
+            } ));
 
         checkBoolean(ok);
     }
