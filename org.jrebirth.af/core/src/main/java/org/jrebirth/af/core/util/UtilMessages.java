@@ -37,13 +37,13 @@ public interface UtilMessages extends MessageContainer {
     /** CheckerUtility. */
 
     /** "{0} must have a method => void {1} ({2}, Wave wave)\{\}". */
-    MessageItem WAVE_HANDLER_METHOD_REQUIRED = create(new LogMessage("jrebirth.util.waveHandlerMethodRequired", JRLevel.Error, JRebirthMarkers.UTIL));
+    MessageItem WAVE_HANDLER_METHOD_REQUIRED = create(new LogMessage("jrebirth.util.waveHandlerMethodRequired", JRLevel.Exception, JRebirthMarkers.UTIL));
 
     /** "{0} API is broken, no method {1} is available". */
-    MessageItem BROKEN_API_NO_METHOD = create(new LogMessage("jrebirth.util.brokenApiNoMethod", JRLevel.Error, JRebirthMarkers.UTIL));
+    MessageItem BROKEN_API_NO_METHOD = create(new LogMessage("jrebirth.util.brokenApiNoMethod", JRLevel.Warn, JRebirthMarkers.UTIL));
 
-    /** "{0} API is broken, the method {1} has wrong parameters, expected:{2}  provided:{3}" . */
-    MessageItem BROKEN_API_WRONG_PARAMETERS = create(new LogMessage("jrebirth.util.brokenApiWrongParameters", JRLevel.Error, JRebirthMarkers.UTIL));
+    /** "{0} API is broken, the method {1} has wrong parameters, expected:{2} provided:{3}" . */
+    MessageItem BROKEN_API_WRONG_PARAMETERS = create(new LogMessage("jrebirth.util.brokenApiWrongParameters", JRLevel.Warn, JRebirthMarkers.UTIL));
 
     /** "Broken Wave sent : {0}" . */
     MessageItem BROKEN_WAVE_SENT = create(new LogMessage("jrebirth.util.brokenWaveSent", JRLevel.Warn, JRebirthMarkers.UTIL));

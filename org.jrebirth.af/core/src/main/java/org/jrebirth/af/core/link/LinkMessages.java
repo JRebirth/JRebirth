@@ -37,10 +37,10 @@ public interface LinkMessages extends MessageContainer {
 
     /** DefaultUnprocessedWaveHandler. */
 
-    /** "Wave Lost :  {0}". */
+    /** "Wave Lost : {0}". */
     MessageItem WAVE_LOST = create(new Message("jrebirth.link.waveLost"));
 
-    /** "Wave Lost [{1}]:  {0}". */
+    /** "Wave Lost [{1}]: {0}". */
     MessageItem WAVE_LOST_CONTEXT = create(new Message("jrebirth.link.waveLostContext"));
 
     /** AbstractComponent. */
@@ -54,7 +54,7 @@ public interface LinkMessages extends MessageContainer {
     /** "Send Wave {0}". */
     MessageItem SEND_WAVE = create(new Message("jrebirth.link.sendWave"));
 
-    /** "Custom method not found {0}". */
+    /** "Custom method not found". */
     MessageItem CUSTOM_METHOD_NOT_FOUND = create(new LogMessage("jrebirth.link.customMethodNotFound", JRLevel.Info, JRebirthMarkers.LINK));
 
     /** "Error while dispatching a wave". */

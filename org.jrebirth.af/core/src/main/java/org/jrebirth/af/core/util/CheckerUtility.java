@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
@@ -51,10 +52,14 @@ public final class CheckerUtility implements UtilMessages {
             for (final WaveType waveType : waveTypes) {
 
                 String methodName = ClassUtility.underscoreToCamelCase(waveType.toString());
-                final List<Method> methods = ClassUtility.retrieveMethodList(waveReadyClass, waveType.toString());
-                final List<Method> annotatedMethods = ClassUtility.getAnnotatedMethods(waveReadyClass, OnWave.class);
 
-                if (methods.size() < 1 && annotatedMethods.size() < 1) {
+                final List<Method> methods = ClassUtility.retrieveMethodList(waveReadyClass, waveType.toString());
+
+                final List<Method> annotatedMethods = ClassUtility.getAnnotatedMethods(waveReadyClass, OnWave.class).stream()
+                                                                  .filter(m -> WaveTypeRegistry.getWaveType(m.getAnnotation(OnWave.class).value()) == waveType)
+                                                                  .collect(Collectors.toList());
+
+                if (methods.isEmpty() && annotatedMethods.isEmpty()) {
                     LOGGER.log(BROKEN_API_NO_METHOD, waveReadyClass.getSimpleName(), methodName);
                     LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(), methodName, waveType.items());
                 }
@@ -76,12 +81,10 @@ public final class CheckerUtility implements UtilMessages {
 
                 if (!hasCompliantMethod) {
                     for (int j = 0; j < annotatedMethods.size() && !hasCompliantMethod; j++) {
-                        if (WaveTypeRegistry.getWaveType(annotatedMethods.get(j).getAnnotation(OnWave.class).value()) == waveType) {
-                            hasCompliantMethod = checkMethodSignature(annotatedMethods.get(j), wParams);
-                            if (!hasCompliantMethod) {
-                                methodName = annotatedMethods.get(j).getName();
-                                methodParameters = annotatedMethods.get(j).getParameterTypes().length - 1; // Remove the wave parameters
-                            }
+                        hasCompliantMethod = checkMethodSignature(annotatedMethods.get(j), wParams);
+                        if (!hasCompliantMethod) {
+                            methodName = annotatedMethods.get(j).getName();
+                            methodParameters = annotatedMethods.get(j).getParameterTypes().length - 1; // Remove the wave parameters
                         }
                     }
                 }
@@ -90,13 +93,7 @@ public final class CheckerUtility implements UtilMessages {
                     LOGGER.log(BROKEN_API_WRONG_PARAMETERS, waveReadyClass.getSimpleName(), methodName,
                                waveType.items().size(), methodParameters);
 
-                    LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(),
-                               methodName, waveType.items());
-
-                    throw new CoreRuntimeException(BROKEN_API_WRONG_PARAMETERS.getText(waveReadyClass.getSimpleName(),
-                                                                                       methodName,
-                                                                                       waveType.items().size(),
-                                                                                       methodParameters));
+                    LOGGER.log(WAVE_HANDLER_METHOD_REQUIRED, waveReadyClass.getSimpleName(), methodName, waveType.items());
                 }
             }
         }
@@ -110,7 +107,7 @@ public final class CheckerUtility implements UtilMessages {
      *
      * @return true if the method has the right signature
      */
-    private static boolean checkMethodSignature(final Method method, final List<WaveItem<?>> wParams) {
+    public static boolean checkMethodSignature(final Method method, final List<WaveItem<?>> wParams) {
         boolean isCompliant = false;
 
         final Type[] mParams = method.getGenericParameterTypes();

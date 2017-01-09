@@ -17,7 +17,6 @@
  */
 package org.jrebirth.af.core.link;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +37,7 @@ import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
 import org.jrebirth.af.core.exception.WaveException;
 import org.jrebirth.af.core.log.JRLoggerFactory;
+import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
 
 /**
@@ -103,10 +103,18 @@ public class WaveHandler implements LinkMessages {
      */
     public void handle(final Wave wave) throws WaveException {
 
-        final Method customMethod = retrieveCustomMethod(wave);
+        Method customMethod = retrieveCustomMethod(wave);
 
         if (customMethod == null) {
-            throw new WaveException(wave);
+
+            // If no custom method was provided, call the default method named 'processWave(wave)'
+            try {
+                customMethod = getWaveReady().getClass().getDeclaredMethod(AbstractComponent.PROCESS_WAVE_METHOD_NAME, Wave.class);
+            } catch (IllegalArgumentException | NoSuchMethodException e) {
+                LOGGER.error(WAVE_DISPATCH_ERROR, e);
+                // Propagate the wave exception
+                throw new WaveException(wave, e);
+            }
         }
 
         // Grab the run type annotation (if exists)
@@ -124,10 +132,11 @@ public class WaveHandler implements LinkMessages {
         // We must perform this action into the JavaFX Application Thread
         // only if the run type hasn't been overridden
         if (runType != null && runType == RunType.JAT || runType == null && getWaveReady() instanceof Model) {
+
             JRebirth.runIntoJAT(waveHandlerRunnable);
 
-            // Launch the wave handling into JRebirth Thread Pool
         } else if (runType != null && runType == RunType.JTP) {
+            // Launch the wave handling into JRebirth Thread Pool
             JRebirth.runIntoJTP(waveHandlerRunnable);
         } else {
             // Otherwise we can perform it right now into the current thread (JRebirthThread - JIT)
@@ -168,21 +177,23 @@ public class WaveHandler implements LinkMessages {
      *
      * @param wave the wave to be handled
      *
-     * @return the custom handler emthod or null if none exists
+     * @return the custom handler method or null if none exists
      */
     private Method retrieveCustomMethod(final Wave wave) {
         Method customMethod = null;
-        try {
-            // Search the wave handler method to call
-            customMethod = this.defaultMethod == null
-                    // Method computed according to wave prefix and wave type action name
-                    ? ClassUtility.getMethodByName(getWaveReady().getClass(), ClassUtility.underscoreToCamelCase(wave.waveType().toString()))
-                    // Method defined with annotation
-                    : this.defaultMethod;
+        // Search the wave handler method to call
+        customMethod = this.defaultMethod == null
+                // Method computed according to wave prefix and wave type action name
+                ? ClassUtility.retrieveMethodList(getWaveReady().getClass(), wave.waveType().toString())
+                              .stream()
+                              .filter(m -> {
+                                  return CheckerUtility.checkMethodSignature(m, wave.waveType().items());
+                              }).findFirst().orElse(null)
+                // Method defined with annotation
+                : this.defaultMethod;
 
-        } catch (final NoSuchMethodException e) {
-
-            LOGGER.info(CUSTOM_METHOD_NOT_FOUND, e.getMessage(), e);
+        if (customMethod == null) {
+            LOGGER.info(CUSTOM_METHOD_NOT_FOUND);
         }
         return customMethod;
     }
@@ -199,38 +210,28 @@ public class WaveHandler implements LinkMessages {
 
         // Build parameter list of the searched method
         final List<Object> parameterValues = new ArrayList<>();
-        for (final WaveData<?> wd : wave.waveDatas()) {
-            // Add only wave items defined as parameter
-            if (wd.key().isParameter()) {
-                parameterValues.add(wd.value());
+
+        // Don't add WaveType parameters if we us the default processWave method
+        if (!AbstractComponent.PROCESS_WAVE_METHOD_NAME.equals(method.getName())) {
+            for (final WaveData<?> wd : wave.waveDatas()) {
+                // Add only wave items defined as parameter
+                if (wd.key().isParameter()) {
+                    parameterValues.add(wd.value());
+                }
             }
         }
+
         // Add the current wave to process
         parameterValues.add(wave);
 
-        // If custom method exists we call it
-        if (method == null) {
+        try {
 
-            // If no custom method was proviced, call the default method named 'processWave(wave)'
-            try {
-                ClassUtility.getMethodByName(getWaveReady().getClass(), AbstractComponent.PROCESS_WAVE_METHOD_NAME).invoke(getWaveReady(), wave);
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
-                LOGGER.error(WAVE_DISPATCH_ERROR, e);
-                // Propagate the wave exception
-                throw new WaveException(wave, e);
-            }
+            ClassUtility.callMethod(method, getWaveReady(), parameterValues.toArray());
 
-        } else {
-
-            try {
-
-                ClassUtility.callMethod(method, getWaveReady(), parameterValues.toArray());
-
-            } catch (final CoreException e) {
-                LOGGER.error(WAVE_DISPATCH_ERROR, e);
-                // Propagate the wave exception
-                throw new WaveException(wave, e);
-            }
+        } catch (final CoreException e) {
+            LOGGER.error(WAVE_DISPATCH_ERROR, e);
+            // Propagate the wave exception
+            throw new WaveException(wave, e);
         }
 
     }

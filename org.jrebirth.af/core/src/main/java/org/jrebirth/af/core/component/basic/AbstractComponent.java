@@ -88,8 +88,8 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractComponent.class);
 
-    /** The return wave type map. */
-    // private final Map<WaveType, WaveType> returnWaveTypeMap = new HashMap<>();
+    /** Flag indicating if processWave handle method will manage uncaught wave (but obviously listened). */
+    protected boolean processUncaughtWave = false;
 
     /** A map that store all annotated methods to call sorted by lifecycle phase. */
     private Map<String, List<Method>> lifecycleMethod;
@@ -152,7 +152,9 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
     public final void listen(final WaveChecker waveChecker, final Method method, final WaveType... waveTypes) {
 
         // Check API compliance
-        CheckerUtility.checkWaveTypeContract(this.getClass(), waveTypes);
+        if (!this.processUncaughtWave) {
+            CheckerUtility.checkWaveTypeContract(this.getClass(), waveTypes);
+        }
 
         final Component<?> waveReady = this;
 
