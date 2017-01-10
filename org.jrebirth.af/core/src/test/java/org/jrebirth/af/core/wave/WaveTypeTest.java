@@ -22,7 +22,7 @@ import org.jrebirth.af.api.wave.contract.WaveType;
 
 import org.junit.Test;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class WaveTypeTest {
 
@@ -37,7 +37,7 @@ public class WaveTypeTest {
 
     @Test
     public void testHandlerMethodName() {
-        final WaveItem RESULT = new WaveItemBase<Object>() {
+        final WaveItem<Object> RESULT = new WaveItemBase<Object>() {
         };
         final WaveType RE_FLUSH = WBuilder.waveType("RE_FLUSH").items(RESULT);
         final WaveType FLUSH = WBuilder.waveType("FLUSH").returnWaveType(RE_FLUSH).returnItem(RESULT);
