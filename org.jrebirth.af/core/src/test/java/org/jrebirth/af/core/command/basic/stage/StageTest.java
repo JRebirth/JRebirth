@@ -2,25 +2,12 @@ package org.jrebirth.af.core.command.basic.stage;
 
 import static org.jrebirth.af.core.wave.WBuilder.callCommand;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-
-import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveListener;
-import org.jrebirth.af.core.application.TestApplication;
-import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.concurrent.JRebirth;
-import org.jrebirth.af.core.concurrent.JRebirthThread;
-import org.jrebirth.af.core.facade.CommandFacade;
-import org.jrebirth.af.core.facade.GlobalFacadeBase;
-import org.jrebirth.af.core.service.basic.StageService;
+import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
+import org.jrebirth.af.core.test.AbstractTest;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -29,45 +16,8 @@ import org.junit.Test;
  *
  * @author Sébastien Bordes
  */
-@Ignore("JavaFX can't be run in headless mode yet")
-public class StageTest {
-
-    private static GlobalFacadeBase globalFacade;
-
-    private CommandFacade commandFacade;
-
-    /**
-     * TODO To complete.
-     *
-     * @throws java.lang.Exception
-     */
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-        // globalFacade = new GlobalFacadeBase(new TestApplication());
-        // JRebirthThread.getThread().launch(globalFacade.getApplication());
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                Application.launch(TestApplication.class);
-
-            }
-        }).start();
-        Thread.sleep(1000);
-        globalFacade = (GlobalFacadeBase) JRebirthThread.getThread().getFacade();
-    }
-
-    /**
-     * TODO To complete.
-     *
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-
-        // new TestApplication().start(new Stage());
-        this.commandFacade = globalFacade.commandFacade();
-    }
+@Ignore("StageService not ready yet")
+public class StageTest extends AbstractTest {
 
     @Test
     public void openDefaultStage() {
@@ -112,9 +62,9 @@ public class StageTest {
 
             @Override
             public void waveConsumed(final Wave wave) {
-                final Stage stage = StageTest.globalFacade.serviceFacade().retrieve(StageService.class).getStage(stageKey);
-                Assert.assertNotNull(stage);
-                System.out.println("dddd");
+                // final Stage stage = StageTest.globalFacade.serviceFacade().retrieve(StageService.class).getStage(stageKey);
+                // Assert.assertNotNull(stage);
+                // System.out.println("dddd");
             }
 
             @Override
@@ -131,12 +81,7 @@ public class StageTest {
 
         });
 
-        JRebirth.runIntoJIT(new AbstractJrbRunnable("Send Wave " + wave.toString()) {
-            @Override
-            public void runInto() throws JRebirthThreadException {
-                StageTest.globalFacade.notifier().sendWave(wave);
-            }
-        });
+        JRebirth.runIntoJIT(new JrbReferenceRunnable("Send Wave " + wave.toString(), () -> AbstractTest.globalFacade.notifier().sendWave(wave)));
 
         try {
             Thread.sleep(2000);
@@ -144,27 +89,6 @@ public class StageTest {
             e.printStackTrace();
         }
 
-    }
-
-    /**
-     * TODO To complete.
-     *
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
-        this.commandFacade = null;
-    }
-
-    /**
-     * TODO To complete.
-     *
-     * @throws java.lang.Exception
-     */
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-        globalFacade.stop();
-        globalFacade = null;
     }
 
 }

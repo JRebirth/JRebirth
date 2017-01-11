@@ -230,6 +230,7 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                     if (this.subCommandList.size() > this.commandRunIndex) {
 
                         final Wave subCommandWave = WBuilder.callCommand(this.subCommandList.get(this.commandRunIndex).classField())
+                        		// FIXME UNIQUE KEY of sub command
                                                             // Recopy all WaveBeans
                                                             .waveBeanList(wave.waveBeanList())
                                                             // Recopy the WaveData from the previous wave

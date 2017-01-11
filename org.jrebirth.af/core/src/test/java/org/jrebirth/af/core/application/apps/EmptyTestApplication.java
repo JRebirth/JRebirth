@@ -1,4 +1,4 @@
-package org.jrebirth.af.core.concurrent;
+package org.jrebirth.af.core.application.apps;
 
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -8,16 +8,16 @@ import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.application.DefaultApplication;
 
 /**
- * The class <strong>ThreadApplication</strong>.
+ * The class <strong>EmptyTestApplication</strong>.
  *
  * @author Sébastien Bordes
  */
-@Configuration // (value = ".*-jrebirth", extension = "properties", schedule = 60)
-public class ThreadApplication extends DefaultApplication<Pane> {
+@Configuration(".-jrebirth")
+public class EmptyTestApplication extends DefaultApplication<Pane> {
 
-    private static ThreadApplication instance;
+    private static EmptyTestApplication instance;
 
-    public static ThreadApplication getInstance() {
+    public static EmptyTestApplication getInstance() {
         return instance;
     }
 
@@ -42,7 +42,7 @@ public class ThreadApplication extends DefaultApplication<Pane> {
      */
     @Override
     protected String applicationTitle() {
-        return "Thread Application";
+        return "Test Application";
     }
 
 }

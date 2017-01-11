@@ -10,12 +10,11 @@ import org.jrebirth.af.api.resource.image.ImageItem;
 import org.jrebirth.af.core.resource.AbstractBaseParams;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
+import org.jrebirth.af.core.test.AbstractTest;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -23,14 +22,9 @@ import org.junit.Test;
  *
  * @author Sébastien Bordes
  */
-@Ignore
-public class ImageTest {
+public class ImageTest extends AbstractTest {
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-
-    }
-
+    @Override
     @Before
     public void setUp() throws Exception {
         ResourceParameters.IMAGE_FOLDER.define(Arrays.asList("images", "imagesBis"));

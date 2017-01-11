@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
+@Ignore("Salle be rewritten using model and view")
 public class AdapterTest {
 
     private AdapterController controller;

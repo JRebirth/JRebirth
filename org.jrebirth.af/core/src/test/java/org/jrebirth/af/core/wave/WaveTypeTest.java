@@ -20,9 +20,8 @@ package org.jrebirth.af.core.wave;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
 
-import org.junit.Test;
-
 import org.junit.Assert;
+import org.junit.Test;
 
 public class WaveTypeTest {
 

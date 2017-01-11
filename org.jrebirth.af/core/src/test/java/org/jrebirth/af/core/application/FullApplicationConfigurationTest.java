@@ -1,21 +1,27 @@
 package org.jrebirth.af.core.application;
 
+import org.jrebirth.af.core.application.apps.FullConfApplication;
 import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
 
 import org.junit.Assert;
-import org.junit.Ignore;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.testfx.framework.junit.ApplicationTest;
 
 /**
  * The class <strong>StageTest</strong>.
  *
  * @author Sébastien Bordes
  */
-@Ignore("JavaFX can't be run in headless mode yet")
-public class FullApplicationConfigurationTest extends ApplicationTest<FullConfApplication> {
+public class FullApplicationConfigurationTest extends JRebirthApplicationTest<FullConfApplication> {
 
     public FullApplicationConfigurationTest() {
         super(FullConfApplication.class);
+    }
+
+    @BeforeClass
+    public static void startUp() throws Exception {
+        ApplicationTest.launch(FullConfApplication.class);
     }
 
     @Test

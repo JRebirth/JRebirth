@@ -15,7 +15,7 @@ import org.junit.Test;
  *
  * @author Sébastien Bordes
  */
-@Ignore("Must add call command unique key")
+@Ignore("Keypart not propagated for single ref into groupref")
 public class GroupRefCommandTest extends BasicCommandTest {
 
     @Test

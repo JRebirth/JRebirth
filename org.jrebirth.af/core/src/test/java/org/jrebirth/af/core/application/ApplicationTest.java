@@ -1,6 +1,5 @@
 package org.jrebirth.af.core.application;
 
-import javafx.application.Application;
 import javafx.application.Platform;
 
 import org.jrebirth.af.api.application.JRebirthApplication;
@@ -8,14 +7,15 @@ import org.jrebirth.af.core.concurrent.JRebirthThread;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.testfx.api.FxRobot;
+import org.testfx.api.FxToolkit;
 
-@Ignore("Only one application at the same time")
-public class ApplicationTest<A extends DefaultApplication<?>> {
+//@Ignore("Only one application at the same time")
+public class ApplicationTest<A extends DefaultApplication<?>> extends FxRobot {
 
     private final Class<A> appClass;
 
-    private A application;
+    protected A application;
 
     public ApplicationTest(final Class<A> appClass) {
         this.appClass = appClass;
@@ -31,6 +31,16 @@ public class ApplicationTest<A extends DefaultApplication<?>> {
         this.application = launchApplication(this.appClass);
     }
 
+    // @Before
+    // public void setup() throws Exception {
+    // ApplicationTest.launch(DemoApplication.class);
+    // }
+
+    @After
+    public void cleanup() throws Exception {
+        FxToolkit.cleanupStages();
+    }
+
     /**
      * TODO To complete.
      *
@@ -42,18 +52,20 @@ public class ApplicationTest<A extends DefaultApplication<?>> {
     }
 
     public static <APP extends AbstractApplication<?>> APP launchApplication(
-            final Class<APP> applicationClass) {
+            final Class<APP> applicationClass) throws Exception {
 
         // globalFacade = new GlobalFacadeBase(new TestApplication());
         // JRebirthThread.getThread().launch(globalFacade.getApplication());
-        final Thread launcherThread = new Thread(new Runnable() {
+        // final Thread launcherThread = new Thread(new Runnable() {
+        //
+        // @Override
+        // public void run() {
+        // Application.launch(applicationClass);
+        // }
+        // });
+        // launcherThread.start();
 
-            @Override
-            public void run() {
-                Application.launch(applicationClass);
-            }
-        });
-        launcherThread.start();
+        org.testfx.framework.junit.ApplicationTest.launch(applicationClass);
 
         JRebirthApplication<?> app;
         do {

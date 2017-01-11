@@ -26,6 +26,7 @@ public abstract class AbstractModelTest extends AbstractTest {
      *
      * @throws java.lang.Exception
      */
+    @Override
     @Before
     public void setUp() throws Exception {
         // equivalent to @Preload annotation FIXME do it properly

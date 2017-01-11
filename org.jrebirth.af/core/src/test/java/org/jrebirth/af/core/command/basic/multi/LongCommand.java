@@ -21,7 +21,7 @@ public class LongCommand extends DefaultCommand {
     @Override
     protected void perform(final Wave wave) throws CommandException {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(4000);
         } catch (final InterruptedException e) {
             e.printStackTrace();
         }

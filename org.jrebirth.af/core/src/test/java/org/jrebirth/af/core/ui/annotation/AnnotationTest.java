@@ -6,7 +6,6 @@ import org.jrebirth.af.core.test.AbstractTest;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -14,7 +13,6 @@ import org.junit.Test;
  *
  * @author Sébastien Bordes
  */
-@Ignore
 public class AnnotationTest extends AbstractTest {
 
     private AnnotationModel model;
@@ -24,6 +22,7 @@ public class AnnotationTest extends AbstractTest {
      *
      * @throws java.lang.Exception
      */
+    @Override
     @Before
     public void setUp() throws Exception {
         this.model = AbstractTest.globalFacade.uiFacade().retrieve(AnnotationModel.class);

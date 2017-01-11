@@ -40,19 +40,17 @@ public class StageCommand extends DefaultUIBeanCommand<StageWaveBean> {
     @Override
     protected void perform(final Wave wave) {
 
-        final StageService ss = getService(StageService.class);
-
         LOGGER.info("Trigger stage action " + waveBean(wave).action());
 
         switch (waveBean(wave).action()) {
             case show:
-                ss.doOpenStage(wave);
+                returnData(StageService.class, StageService.DO_OPEN_STAGE, waveBean(wave));
                 break;
             case hide:
-                ss.doCloseStage(wave);
+                returnData(StageService.class, StageService.DO_CLOSE_STAGE, waveBean(wave));
                 break;
             case destroy:
-                ss.doDestroyStage(wave);
+                returnData(StageService.class, StageService.DO_DESTROY_STAGE, waveBean(wave));
                 break;
             default:
                 LOGGER.error("Undefined StageAction");

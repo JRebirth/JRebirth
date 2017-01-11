@@ -1,52 +1,36 @@
 package org.jrebirth.af.core.command.basic;
 
-import javafx.application.Application;
-
 import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.facade.GlobalFacade;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.Wave.Status;
-import org.jrebirth.af.core.application.TestApplication;
+import org.jrebirth.af.core.application.JRebirthApplicationTest;
+import org.jrebirth.af.core.application.apps.EmptyTestApplication;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
-import org.jrebirth.af.core.facade.GlobalFacadeBase;
 import org.jrebirth.af.core.wave.DefaultWaveListener;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.testfx.framework.junit.ApplicationTest;
 
 /**
  * The class <strong>StageTest</strong>.
  *
  * @author Sébastien Bordes
  */
-public class BasicCommandTest {
+public class BasicCommandTest extends JRebirthApplicationTest<EmptyTestApplication> {
 
-    private static GlobalFacadeBase globalFacade;
+    public BasicCommandTest() {
+        super(EmptyTestApplication.class);
+    }
 
-    // private CommandFacade commandFacade;.
+    private GlobalFacade globalFacade;
 
     private boolean wait = false;
 
-    /**
-     * TODO To complete.
-     *
-     * @throws java.lang.Exception
-     */
     @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-        // globalFacade = new GlobalFacadeBase(new TestApplication());
-        // JRebirthThread.getThread().launch(globalFacade.getApplication());
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                Application.launch(TestApplication.class);
-
-            }
-        }).start();
-        Thread.sleep(1000);
-        globalFacade = (GlobalFacadeBase) JRebirthThread.getThread().getFacade();
+    public static void startUp() throws Exception {
+        ApplicationTest.launch(EmptyTestApplication.class);
     }
 
     /**
@@ -55,38 +39,15 @@ public class BasicCommandTest {
      * @throws java.lang.Exception
      */
     @Before
-    public void setUp() throws Exception {
-
-        // new TestApplication().start(new Stage());
-        // this.commandFacade = globalFacade.getCommandFacade();
-    }
-
-    /**
-     * TODO To complete.
-     *
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
-        // this.commandFacade = null;
-    }
-
-    /**
-     * TODO To complete.
-     *
-     * @throws java.lang.Exception
-     */
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-        globalFacade.stop();
-        globalFacade = null;
+    public void localSetUp() throws Exception {
+        this.globalFacade = JRebirthThread.getThread().getFacade();
     }
 
     public void runCommand(final Class<? extends Command> commandClass, final Object... keyPart) {
 
         this.wait = true;
 
-        final Wave wave = globalFacade.commandFacade().retrieve(commandClass, keyPart).run();
+        final Wave wave = this.globalFacade.commandFacade().retrieve(commandClass, keyPart).run();
 
         wave.addWaveListener(new DefaultWaveListener() {
 
@@ -94,13 +55,13 @@ public class BasicCommandTest {
              * {@inheritDoc}
              */
             @Override
-            public void waveConsumed(final Wave wave) {
+            public void waveHandled(final Wave wave) {
                 BasicCommandTest.this.wait = false;
             }
 
         });
 
-        if (wave.status() == Status.Consumed) {
+        if (wave.status() == Status.Handled) {
             this.wait = false;
         }
 
@@ -113,4 +74,5 @@ public class BasicCommandTest {
         }
 
     }
+
 }

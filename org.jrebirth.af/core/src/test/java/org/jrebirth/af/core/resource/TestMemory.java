@@ -6,18 +6,24 @@ import java.util.List;
 import javafx.scene.paint.Color;
 
 import org.jrebirth.af.api.resource.color.ColorItem;
-import org.jrebirth.af.core.application.ApplicationTest;
-import org.jrebirth.af.core.application.FullConfApplication;
+import org.jrebirth.af.core.application.JRebirthApplicationTest;
+import org.jrebirth.af.core.application.apps.EmptyTestApplication;
+import org.jrebirth.af.core.application.apps.FullConfApplication;
 import org.jrebirth.af.core.resource.color.RGB255Color;
 
-import org.junit.Ignore;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.testfx.framework.junit.ApplicationTest;
 
-@Ignore
-public class TestMemory extends ApplicationTest<FullConfApplication> {
+public class TestMemory extends JRebirthApplicationTest<FullConfApplication> {
 
     public TestMemory() {
         super(FullConfApplication.class);
+    }
+
+    @BeforeClass
+    public static void startUp() throws Exception {
+        ApplicationTest.launch(EmptyTestApplication.class);
     }
 
     @Test

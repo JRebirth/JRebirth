@@ -5,24 +5,29 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.concurrent.JRebirthRunnable;
-import org.jrebirth.af.api.exception.JRebirthThreadException;
-import org.jrebirth.af.core.application.ApplicationTest;
+import org.jrebirth.af.core.application.JRebirthApplicationTest;
+
 import org.junit.Assert;
-import org.junit.Ignore;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testfx.framework.junit.ApplicationTest;
 
 /**
  * The class <strong>ThreadTest</strong>.
  *
  * @author Sébastien Bordes
  */
-@Ignore("JavaFX can't be run in headless mode yet")
-public class ThreadTest extends ApplicationTest<ThreadApplication> {
+public class ThreadTest extends JRebirthApplicationTest<ThreadApplication> {
 
     public ThreadTest() {
         super(ThreadApplication.class);
+    }
+
+    @BeforeClass
+    public static void startUp() throws Exception {
+        ApplicationTest.launch(ThreadApplication.class);
     }
 
     /** The class logger. */
@@ -34,9 +39,9 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
         final AtomicBoolean ok = new AtomicBoolean(false);
 
         JRebirth.runIntoJAT(new JrbReferenceRunnable("Jat test", () -> {
-                LOGGER.info("Running into " + Thread.currentThread().getName());
-                ok.set(JRebirth.isJAT());
-            } ));
+            LOGGER.info("Running into " + Thread.currentThread().getName());
+            ok.set(JRebirth.isJAT());
+        }));
 
         checkBoolean(ok);
     }
@@ -47,9 +52,9 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
         final AtomicBoolean ok = new AtomicBoolean(false);
 
         JRebirth.runIntoJIT(new JrbReferenceRunnable("JIT test", () -> {
-                LOGGER.info("Running into " + Thread.currentThread().getName());
-                ok.set(JRebirth.isJIT());
-            } ));
+            LOGGER.info("Running into " + Thread.currentThread().getName());
+            ok.set(JRebirth.isJIT());
+        }));
 
         checkBoolean(ok);
     }
@@ -60,9 +65,9 @@ public class ThreadTest extends ApplicationTest<ThreadApplication> {
         final AtomicBoolean ok = new AtomicBoolean(false);
 
         JRebirth.runIntoJTP(new JrbReferenceRunnable("JTP test", () -> {
-                LOGGER.info("Running into " + Thread.currentThread().getName());
-                ok.set(JRebirth.isJTPSlot());
-            } ));
+            LOGGER.info("Running into " + Thread.currentThread().getName());
+            ok.set(JRebirth.isJTPSlot());
+        }));
 
         checkBoolean(ok);
     }

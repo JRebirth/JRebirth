@@ -5,12 +5,12 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.jrebirth.af.api.resource.fxml.FXMLItem;
 import org.jrebirth.af.api.ui.fxml.FXMLComponent;
+import org.jrebirth.af.core.test.AbstractTest;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -18,14 +18,14 @@ import org.junit.Test;
  *
  * @author Sébastien Bordes
  */
-@Ignore("Must launch the Toolkit before")
-public class FxmlTest {
+public class FxmlTest extends AbstractTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
 
     }
 
+    @Override
     @Before
     public void setUp() throws Exception {
 

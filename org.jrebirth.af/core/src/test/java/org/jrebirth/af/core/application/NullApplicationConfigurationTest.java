@@ -1,21 +1,27 @@
 package org.jrebirth.af.core.application;
 
+import org.jrebirth.af.core.application.apps.NullConfApplication;
 import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
 
 import org.junit.Assert;
-import org.junit.Ignore;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.testfx.framework.junit.ApplicationTest;
 
 /**
  * The class <strong>StageTest</strong>.
  *
  * @author Sébastien Bordes
  */
-@Ignore("JavaFX can't be run in headless mode yet")
-public class NullApplicationConfigurationTest extends ApplicationTest<NullConfApplication> {
+public class NullApplicationConfigurationTest extends JRebirthApplicationTest<NullConfApplication> {
 
     public NullApplicationConfigurationTest() {
         super(NullConfApplication.class);
+    }
+
+    @BeforeClass
+    public static void startUp() throws Exception {
+        ApplicationTest.launch(NullConfApplication.class);
     }
 
     @Test

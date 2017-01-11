@@ -10,8 +10,7 @@ import org.jrebirth.af.core.command.multi.DefaultMultiCommand;
 public class ConstructorSequentialCommand extends DefaultMultiCommand {
 
     public ConstructorSequentialCommand() {
-        super();
-        setSequential(true);
+        super(true);
     }
 
     /**

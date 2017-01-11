@@ -21,14 +21,14 @@
 			<artifactId>api</artifactId>
 			<version>8.5.1-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>preloader</artifactId>
 			<version>8.5.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- Optionnal dependency storing resources, can be exluded from dependency list -->
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
@@ -44,10 +44,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- 
-		Dependency used at compile time to manage Java Webstart classpath scan
-		If this jar is not available the related code will not be called
-		 -->
+		<!-- Dependency used at compile time to manage Java Webstart classpath scan If this jar is not available the related code will not be called -->
 		<dependency>
 			<groupId>javax.jnlp</groupId>
 			<artifactId>jnlp-api</artifactId>
@@ -55,7 +52,7 @@
 			<scope>system</scope>
 			<systemPath>${java.home}/lib/javaws.jar</systemPath>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.jnlp</groupId>
 			<artifactId>deploy</artifactId>
@@ -63,7 +60,21 @@
 			<scope>system</scope>
 			<systemPath>${java.home}/lib/deploy.jar</systemPath>
 		</dependency>
- 
+
+		<dependency>
+			<groupId>org.testfx</groupId>
+			<artifactId>testfx-core</artifactId>
+			<version>4.0.1-alpha</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testfx</groupId>
+			<artifactId>testfx-junit</artifactId>
+			<version>4.0.1-alpha</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 </project>

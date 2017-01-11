@@ -256,7 +256,7 @@ The **AbstractApplication** class use a default one:
 Hereafter you have a full annotation usage:
 
 
-<!-- MACRO{include|source=core/src/test/java/org/jrebirth/af/core/application/FullConfApplication.java|snippet=re:(@Configuration)} -->
+<!-- MACRO{include|source=core/src/test/java/org/jrebirth/af/core/application/apps/FullConfApplication.java|snippet=re:(@Configuration)} -->
 
 
 This annotation has 3 properties:
@@ -298,7 +298,7 @@ It's possible to avoid configuration mechanism, for example if you want to use y
 
 You can disable it by setting an empty **@Configuration** annotation.
 
-<!-- MACRO{include|source=core/src/test/java/org/jrebirth/af/core/application/NullConfApplication.java|snippet=re:(@Configuration)} -->
+<!-- MACRO{include|source=core/src/test/java/org/jrebirth/af/core/application/apps/NullConfApplication.java|snippet=re:(@Configuration)} -->
 
 
 # Manage Localization
@@ -343,7 +343,7 @@ It's possible to avoid localization mechanism, for example if you want to improv
 
 You can disable it by setting an empty **@Localized** annotation.
 
-<!-- MACRO{include|source=core/src/test/java/org/jrebirth/af/core/application/NullConfApplication.java|snippet=re:(@Localized)} -->
+<!-- MACRO{include|source=core/src/test/java/org/jrebirth/af/core/application/apps/NullConfApplication.java|snippet=re:(@Localized)} -->
 
 #parse("TocList.vm")
 #displayFooterToc("Application")

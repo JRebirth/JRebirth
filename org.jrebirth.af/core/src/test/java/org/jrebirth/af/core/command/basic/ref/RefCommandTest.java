@@ -7,7 +7,7 @@ import org.jrebirth.af.core.command.basic.BasicCommandTest;
 import org.jrebirth.af.core.command.ref.Ref;
 import org.jrebirth.af.core.command.ref.RefCommand;
 
-import org.junit.Ignore;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -15,7 +15,6 @@ import org.junit.Test;
  *
  * @author Sébastien Bordes
  */
-@Ignore
 public class RefCommandTest extends BasicCommandTest {
 
     @Test
@@ -44,10 +43,12 @@ public class RefCommandTest extends BasicCommandTest {
 
     public void sayHello() {
         System.out.println("hello");
+        Assert.assertTrue(true);
     }
 
     public void sayHelloWave(final Wave wave) {
         System.out.println("hello " + wave.wUID());
+        Assert.assertTrue(true);
     }
 
 }

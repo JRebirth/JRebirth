@@ -8,7 +8,7 @@ import javafx.scene.layout.BorderPane;
 
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.key.UniqueKey;
-import org.jrebirth.af.core.application.TestApplication;
+import org.jrebirth.af.core.application.apps.EmptyTestApplication;
 import org.jrebirth.af.core.command.basic.SwitchFullScreenCommand;
 import org.jrebirth.af.core.command.basic.UpdateCursorCommand;
 import org.jrebirth.af.core.facade.CommandFacade;
@@ -40,7 +40,7 @@ public class KeyTest {
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        globalFacade = new GlobalFacadeBase(new TestApplication());
+        globalFacade = new GlobalFacadeBase(new EmptyTestApplication());
     }
 
     /**
@@ -50,7 +50,7 @@ public class KeyTest {
      */
     @Before
     public void setUp() throws Exception {
-        // new TestApplication().start(new Stage());
+        // new EmptyTestApplication().start(new Stage());
         this.commandFacade = globalFacade.commandFacade();
     }
 
