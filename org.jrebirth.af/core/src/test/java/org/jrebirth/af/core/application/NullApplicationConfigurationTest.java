@@ -15,10 +15,6 @@ import org.testfx.framework.junit.ApplicationTest;
  */
 public class NullApplicationConfigurationTest extends JRebirthApplicationTest<NullConfApplication> {
 
-    public NullApplicationConfigurationTest() {
-        super(NullConfApplication.class);
-    }
-
     @BeforeClass
     public static void startUp() throws Exception {
         ApplicationTest.launch(NullConfApplication.class);

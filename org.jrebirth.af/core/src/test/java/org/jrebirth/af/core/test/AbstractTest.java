@@ -10,15 +10,11 @@ import org.junit.BeforeClass;
 import org.testfx.framework.junit.ApplicationTest;
 
 /**
- * The class <strong>AbstractTest</strong>. TODO To complete
+ * The class <strong>AbstractTest</strong>.
  *
  * @author Sébastien Bordes
  */
 public abstract class AbstractTest extends JRebirthApplicationTest<EmptyTestApplication> {
-
-    public AbstractTest() {
-        super(EmptyTestApplication.class);
-    }
 
     protected static GlobalFacade globalFacade;
 
@@ -28,21 +24,5 @@ public abstract class AbstractTest extends JRebirthApplicationTest<EmptyTestAppl
         globalFacade = JRebirthThread.getThread().getFacade();
         Class.forName(Showable.class.getName());
     }
-
-    // /**
-    // * TODO To complete.
-    // *
-    // * @throws java.lang.Exception
-    // */
-    // @AfterClass
-    // public static void tearDownAfterClass() throws Exception {
-    // do {
-    // // Try to stop the JRebirth Thread
-    // JRebirthThread.getThread().close();
-    //
-    // // Wait parameterized delay before retrying to close if the thread is still alive
-    // Thread.sleep(500);
-    // } while (JRebirthThread.getThread().isAlive());
-    // }
 
 }

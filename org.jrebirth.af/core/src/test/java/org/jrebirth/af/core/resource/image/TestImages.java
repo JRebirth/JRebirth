@@ -43,7 +43,7 @@ public interface TestImages {
     ImageItem TEST_LOCAL_IMAGE_3 = create(new RelImage("logo", ImageExtension.PNG));
 
     /** The local image. */
-    ImageItem TEST_LOCAL_IMAGE_4 = create(new RelImage("logoBiss", ImageExtension.PNG));
+    ImageItem TEST_LOCAL_IMAGE_4 = create(new RelImage("logoBis", ImageExtension.PNG));
 
     /**************************************************************************************/
     /** ___________________________________Web Image.____________________________________ */

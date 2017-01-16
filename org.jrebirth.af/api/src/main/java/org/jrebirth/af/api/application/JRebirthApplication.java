@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 
@@ -82,4 +83,11 @@ public interface JRebirthApplication<P extends Pane> {
      */
     void preloadResources();
 
+    
+    /**
+     * Stop the application.
+     * 
+     * @throws CoreException when a trouble occurred during JRebirth engine shutdown.
+     */
+    void stop() throws CoreException;
 }

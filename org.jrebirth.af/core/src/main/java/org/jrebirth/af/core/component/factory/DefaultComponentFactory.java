@@ -51,7 +51,10 @@ public final class DefaultComponentFactory implements ComponentFactory, FacadeMe
     public void register(final RegistrationItem item) {
 
         if (item.interfaceClass().isAssignableFrom(item.implClass())) {
-
+            this.definitions.put(item.interfaceClass(), RegistrationPointItemBase.create()
+                                                                                 .interfaceClass(item.interfaceClass())
+                                                                                 .exclusive(false)
+                                                                                 .reverse(false));
             this.implementations.add(item.interfaceClass(), item);
 
         } else {

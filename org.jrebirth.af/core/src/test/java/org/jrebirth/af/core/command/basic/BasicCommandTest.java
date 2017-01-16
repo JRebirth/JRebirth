@@ -1,5 +1,7 @@
 package org.jrebirth.af.core.command.basic;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.facade.GlobalFacade;
 import org.jrebirth.af.api.wave.Wave;
@@ -20,13 +22,9 @@ import org.testfx.framework.junit.ApplicationTest;
  */
 public class BasicCommandTest extends JRebirthApplicationTest<EmptyTestApplication> {
 
-    public BasicCommandTest() {
-        super(EmptyTestApplication.class);
-    }
-
     private GlobalFacade globalFacade;
 
-    private boolean wait = false;
+    private final AtomicBoolean wait = new AtomicBoolean(false);
 
     @BeforeClass
     public static void startUp() throws Exception {
@@ -34,7 +32,6 @@ public class BasicCommandTest extends JRebirthApplicationTest<EmptyTestApplicati
     }
 
     /**
-     * TODO To complete.
      *
      * @throws java.lang.Exception
      */
@@ -45,7 +42,7 @@ public class BasicCommandTest extends JRebirthApplicationTest<EmptyTestApplicati
 
     public void runCommand(final Class<? extends Command> commandClass, final Object... keyPart) {
 
-        this.wait = true;
+        this.wait.set(true);
 
         final Wave wave = this.globalFacade.commandFacade().retrieve(commandClass, keyPart).run();
 
@@ -56,16 +53,16 @@ public class BasicCommandTest extends JRebirthApplicationTest<EmptyTestApplicati
              */
             @Override
             public void waveHandled(final Wave wave) {
-                BasicCommandTest.this.wait = false;
+                BasicCommandTest.this.wait.set(false);
             }
 
         });
 
         if (wave.status() == Status.Handled) {
-            this.wait = false;
+            this.wait.set(false);
         }
 
-        while (this.wait) {
+        while (this.wait.get()) {
             try {
                 Thread.sleep(200);
             } catch (final InterruptedException e) {

@@ -9,15 +9,11 @@ import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
 /**
- * The class <strong>StageTest</strong>.
+ * The class <strong>FullApplicationConfigurationTest</strong>.
  *
  * @author Sébastien Bordes
  */
 public class FullApplicationConfigurationTest extends JRebirthApplicationTest<FullConfApplication> {
-
-    public FullApplicationConfigurationTest() {
-        super(FullConfApplication.class);
-    }
 
     @BeforeClass
     public static void startUp() throws Exception {

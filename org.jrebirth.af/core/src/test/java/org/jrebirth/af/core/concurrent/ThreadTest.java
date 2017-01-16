@@ -21,19 +21,15 @@ import org.testfx.framework.junit.ApplicationTest;
  */
 public class ThreadTest extends JRebirthApplicationTest<ThreadApplication> {
 
-    public ThreadTest() {
-        super(ThreadApplication.class);
-    }
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThreadTest.class);
 
     @BeforeClass
     public static void startUp() throws Exception {
         ApplicationTest.launch(ThreadApplication.class);
     }
 
-    /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ThreadTest.class);
-
-    // @Test
+    @Test
     public void testJAT() {
 
         final AtomicBoolean ok = new AtomicBoolean(false);
@@ -46,7 +42,7 @@ public class ThreadTest extends JRebirthApplicationTest<ThreadApplication> {
         checkBoolean(ok);
     }
 
-    // @Test
+    @Test
     public void testJIT() {
 
         final AtomicBoolean ok = new AtomicBoolean(false);
@@ -59,7 +55,7 @@ public class ThreadTest extends JRebirthApplicationTest<ThreadApplication> {
         checkBoolean(ok);
     }
 
-    // @Test
+    @Test
     public void testJTP() {
 
         final AtomicBoolean ok = new AtomicBoolean(false);

@@ -1,7 +1,5 @@
 package org.jrebirth.af.core.facade;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.jrebirth.af.core.application.apps.EmptyTestApplication;
 import org.jrebirth.af.core.command.basic.SwitchFullScreenCommand;
 
@@ -58,6 +56,8 @@ public class FacadeTest {
 
         final SwitchFullScreenCommand command = new SwitchFullScreenCommand();
         this.commandFacade.register(command);
+
+        // The command shall not exist into facade registry
         Assert.assertTrue(this.commandFacade.exists(SwitchFullScreenCommand.class));
     }
 
@@ -66,7 +66,9 @@ public class FacadeTest {
 
         final long key = System.currentTimeMillis();
         final SwitchFullScreenCommand command = this.commandFacade.retrieve(SwitchFullScreenCommand.class, key);
+
         Assert.assertNotNull(command);
+        Assert.assertTrue(this.commandFacade.exists(SwitchFullScreenCommand.class, key));
     }
 
     @Test
@@ -74,7 +76,9 @@ public class FacadeTest {
 
         final SwitchFullScreenCommand command = this.commandFacade.retrieve(SwitchFullScreenCommand.class);
         this.commandFacade.unregister(command);
-        Assert.assertNotNull(this.commandFacade.exists(SwitchFullScreenCommand.class));
+
+        // The command shall not exist anymore
+        Assert.assertFalse(this.commandFacade.exists(SwitchFullScreenCommand.class));
     }
 
     @Test
@@ -83,7 +87,9 @@ public class FacadeTest {
         final long key = System.currentTimeMillis();
         final SwitchFullScreenCommand command = this.commandFacade.retrieve(SwitchFullScreenCommand.class, key);
         this.commandFacade.unregister(command, key);
-        assertNotNull(this.commandFacade.exists(SwitchFullScreenCommand.class, key));
+
+        // The command shall not exist anymore
+        Assert.assertFalse(this.commandFacade.exists(SwitchFullScreenCommand.class, key));
     }
 
     /**
