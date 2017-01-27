@@ -2,13 +2,13 @@
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,16 +17,8 @@
  */
 package org.jrebirth.af.core.wave;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
@@ -38,30 +30,43 @@ import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.link.LinkMessages;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
+import java.util.*;
+
 /**
- *
  * The class <strong>WaveBase</strong>.
- *
+ * <p>
  * This Bean is used to move wave's data through layer. It allow to manage priorities.
  */
 public class WaveBase implements Wave, LinkMessages {
 
-    /** The class logger. */
+    /**
+     * The class logger.
+     */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(WaveBase.class);
 
-    /** The space separator. */
+    /**
+     * The space separator.
+     */
     private static final String SPACE_SEP = " ";
 
-    /** The Wave Unique Identifier. */
+    /**
+     * The Wave Unique Identifier.
+     */
     private final String wuid;
 
-    /** The Wave timestamp. */
+    /**
+     * The Wave timestamp.
+     */
     private final long timestamp;
 
-    /** The wave status (can be bound). */
+    /**
+     * The wave status (can be bound).
+     */
     private final ObjectProperty<Status> statusProperty = new SimpleObjectProperty<>(Status.Created);
 
-    /** The group of the wave used to dispatch the right event. */
+    /**
+     * The group of the wave used to dispatch the right event.
+     */
     private WaveGroup waveGroup = WaveGroup.UNDEFINED;
 
     /**
@@ -69,22 +74,34 @@ public class WaveBase implements Wave, LinkMessages {
      */
     private WaveType waveType;
 
-    /** The from class to used for create waves. */
+    /**
+     * The from class to used for create waves.
+     */
     private Class<?> fromClass;
 
-    /** The related component class to used for create waves. */
+    /**
+     * The related component class to used for create waves.
+     */
     private Class<?> componentClass;
 
-    /** The priority used to process wave according to a custom order. */
+    /**
+     * The priority used to process wave according to a custom order.
+     */
     private int priority;
 
-    /** The related wave to the current wave, cold be a parent wave or child wave according context. */
+    /**
+     * The related wave to the current wave, cold be a parent wave or child wave according context.
+     */
     private Wave relatedWave;
 
-    /** A map used to contain all data. */
+    /**
+     * A map used to contain all data.
+     */
     private final Map<WaveItem<?>, WaveData<?>> waveItemsMap = new HashMap<>();
 
-    /** A sorted list that contains all data. */
+    /**
+     * A sorted list that contains all data.
+     */
     private final List<WaveData<?>> waveDataList = new ArrayList<>();
 
     /**
@@ -100,7 +117,9 @@ public class WaveBase implements Wave, LinkMessages {
      */
     private final List<WaveListener> waveListeners = Collections.synchronizedList(new ArrayList<WaveListener>());
 
-    /** The list of Wave Handlers used to manage the Handled status. */
+    /**
+     * The list of Wave Handlers used to manage the Handled status.
+     */
     private List<? extends Object> waveHandlers;
 
     /**
@@ -363,7 +382,7 @@ public class WaveBase implements Wave, LinkMessages {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Don't use the returned list to add WaveBean.
      */
     @Override
