@@ -156,6 +156,8 @@ public interface Wave {
     Wave priority(final int priority);
 
     /**
+     * Returns the wave considered as ancestor of the current wave.
+     * 
      * @return Returns the relatedWave.
      */
     Wave relatedWave();
@@ -166,6 +168,22 @@ public interface Wave {
      * @return the current Wave to chain other method call
      */
     Wave relatedWave(final Wave relatedWave);
+
+    /**
+     * Returns true if this wave is stored as related wave into another wave.
+     * 
+     * @return true if is related
+     */
+    boolean isRelated();
+
+    /**
+     * Set the flag indicating if this wave is a related wave.
+     * 
+     * @param isRelated the related flag to set
+     * 
+     * @return the current Wave to chain other method call
+     */
+    Wave isRelated(boolean isRelated);
 
     /**
      * Return all wave items sorted by order.
@@ -310,4 +328,5 @@ public interface Wave {
      * @return true if the wave holds the given {@link WaveBean} type
      */
     boolean hasWaveBean(Class<? extends WaveBean> waveBeanClass);
+
 }

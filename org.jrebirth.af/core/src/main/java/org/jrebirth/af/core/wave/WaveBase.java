@@ -78,8 +78,11 @@ public class WaveBase implements Wave, LinkMessages {
     /** The priority used to process wave according to a custom order. */
     private int priority;
 
-    /** The related wave to the current wave, cold be a parent wave or child wave according context. */
+    /** The related wave to the current wave, considered as ancestor wave that should be marked as handled only when current wave is. */
     private Wave relatedWave;
+
+    /** Flag indicating that that this wave is linked as a related wave. */
+    private boolean isRelated;
 
     /** A map used to contain all data. */
     private final Map<WaveItem<?>, WaveData<?>> waveItemsMap = new HashMap<>();
@@ -211,8 +214,26 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public Wave relatedWave(final Wave nextWave) {
-        this.relatedWave = nextWave;
+    public Wave relatedWave(final Wave relatedWave) {
+        this.relatedWave = relatedWave;
+        this.relatedWave.isRelated(true);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isRelated() {
+        return isRelated;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Wave isRelated(boolean isRelated) {
+        this.isRelated = isRelated;
         return this;
     }
 
@@ -531,7 +552,10 @@ public class WaveBase implements Wave, LinkMessages {
 
             // Update the status if required
             if (status() == Status.Consumed && this.waveHandlers.isEmpty()) {
-                status(Status.Handled);
+                if (!isRelated()) {
+                    LOGGER.info(NOTIFIER_HANDLES, toString());
+                    status(Status.Handled);
+                }
             }
         }
 

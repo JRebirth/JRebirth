@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.component.basic.Component;
@@ -254,25 +255,16 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         if (this.notifierMap.containsKey(wave.waveType())) {
             final WaveSubscription ws = this.notifierMap.get(wave.waveType());
 
-            // Store all Wave handler into the wave in order to know if there is any handler left before
-            wave.setWaveHandlers(new ArrayList<WaveHandler>(ws.getWaveHandlers()));
+            // Filter and store all Wave handlers into the wave
+            // They will be removed from the list when they are handled in order to know if there is any handler left before
+            wave.setWaveHandlers(ws.getWaveHandlers().stream().filter(wh -> wh.check(wave)).collect(Collectors.toList()));
 
             // For each object interested in that wave type, process the action
             for (final WaveHandler waveHandler : ws.getWaveHandlers()) {
 
-                if (waveHandler.check(wave)) {
+                // The handler will be performed in the right thread according to RunType annotation
+                waveHandler.handle(wave);
 
-                    waveHandler.handle(wave);
-
-                    // // If the notified class is part of the UI
-                    // // We must perform this action into the JavaFX Application Thread
-                    // if (waveHandler.getWaveReady() instanceof Model) {
-                    // JRebirth.runIntoJAT(LoopBuilder.newRunnable(waveHandler.getWaveReady(), wave));
-                    // } else {
-                    // // Otherwise can perform it right now into the current thread (JRebirthThread - JIT)
-                    // waveHandler.getWaveReady().handle(wave);
-                    // }
-                }
             }
         } else {
             LOGGER.warn(NO_WAVE_LISTENER, wave.waveType().toString());
@@ -281,8 +273,11 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             }
         }
 
-        LOGGER.info(NOTIFIER_HANDLES, wave.toString());
-        wave.status(Status.Handled);
+        // The current wave will be marked as Handled when all Wave Handlers will be terminated
+        // if(!wave.isRelated()){
+        // LOGGER.info(NOTIFIER_HANDLES, wave.toString());
+        // wave.status(Status.Handled);
+        // }
 
     }
 
@@ -368,7 +363,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         // to avoid any thread concurrency trouble
         JRebirth.checkJIT();
 
-        final List<WaveSubscription> toRemove = new ArrayList<WaveSubscription>();
+        final List<WaveSubscription> toRemove = new ArrayList<>();
         // Iterate over all WaveSubscription
         for (final WaveSubscription ws : this.notifierMap.values()) {
 
