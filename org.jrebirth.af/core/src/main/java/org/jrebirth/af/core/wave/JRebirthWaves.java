@@ -65,12 +65,19 @@ public interface JRebirthWaves {
     WaveItemBase<List<Wave>> CHAINED_WAVES = new WaveItemBase<List<Wave>>() {
     };
 
-    /** The waveItem that indicates if command instance must be reused or if another must created. DEfault value is false. */
+    /** The waveItem that indicates if command instance must be reused or if another must created. Default value is false. */
     WaveItemBase<Boolean> REUSE_COMMAND = new WaveItemBase<Boolean>() {
+    };
+
+    /** The waveItem that indicates if command instance must be run synchronously. Default value is false. */
+    WaveItemBase<Boolean> FORCE_SYNC_COMMAND = new WaveItemBase<Boolean>() {
     };
 
     /** . */
     WaveData<Boolean> REUSE = WBuilder.waveData(REUSE_COMMAND, true);
+
+    /** . */
+    WaveData<Boolean> FORCE_SYNC = WBuilder.waveData(FORCE_SYNC_COMMAND, true);
 
     /********************************/
     /** WaveItem related to Service */

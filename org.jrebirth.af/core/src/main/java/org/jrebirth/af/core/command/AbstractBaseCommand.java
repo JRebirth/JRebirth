@@ -25,11 +25,13 @@ import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.facade.JRebirthEventType;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.exception.CommandException;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.DefaultWaveBean;
+import org.jrebirth.af.core.wave.JRebirthWaves;
 import org.jrebirth.af.core.wave.WBuilder;
 
 import org.slf4j.Logger;
@@ -167,9 +169,20 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
         // command was directly called by its run() method
         final Wave commandWave = wave == null ? WBuilder.callCommand(this.getClass()) : wave;
 
+        final CommandRunnable commandRunnable = new CommandRunnable(this.getClass().getSimpleName(), this, commandWave);
+
+        final WaveData<Boolean> syncData = wave != null ? wave.getData(JRebirthWaves.FORCE_SYNC_COMMAND) : null;
+
         // Create the runnable that will be run
         // Add the runnable to the runner queue run it as soon as possible
-        JRebirth.run(getRunInto(), new CommandRunnable(this.getClass().getSimpleName(), this, commandWave));
+        // But force synchronous execution if the wave contains the flag
+        if (syncData != null && syncData.value()) {
+            // Force sync run
+            JRebirth.runSync(getRunInto(), commandRunnable, 5000);
+        } else {
+            // Normal run
+            JRebirth.run(getRunInto(), commandRunnable);
+        }
 
         return commandWave;
     }

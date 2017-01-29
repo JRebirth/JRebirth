@@ -65,7 +65,27 @@ public final class JRebirth {
                 runIntoJTP(runnable);
                 break;
             case JTP_SYNC:
-                runIntoJTPSync(runnable);
+                runIntoJTPSync(runnable, timeout);
+                break;
+            case SAME:
+            default:
+                runnable.run();
+        }
+    }
+
+    public static void runSync(final RunType runInto, final JRebirthRunnable runnable, final long... timeout) {
+        switch (runInto) {
+            case JAT:
+            case JAT_SYNC:
+                runIntoJATSync(runnable, timeout);
+                break;
+            case JIT:
+            case JIT_SYNC:
+                runIntoJITSync(runnable, timeout);
+                break;
+            case JTP:
+            case JTP_SYNC:
+                runIntoJTPSync(runnable, timeout);
                 break;
             case SAME:
             default:
