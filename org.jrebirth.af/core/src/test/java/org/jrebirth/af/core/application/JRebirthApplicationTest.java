@@ -1,6 +1,7 @@
 package org.jrebirth.af.core.application;
 
 import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
 
@@ -42,6 +43,27 @@ public class JRebirthApplicationTest<A extends DefaultApplication<?>> extends Fx
 
         while (JRebirthThread.getThread() != null && JRebirthThread.getThread().isAlive()) {
             Thread.sleep(250);
+        }
+    }
+
+    protected void hold(long... time) {
+        try {
+            Thread.sleep(time.length > 0 ? time[0] : 100);
+        } catch (final InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param wave
+     */
+    protected void waitWave(Wave wave) {
+        while (wave.status() != Wave.Status.Handled) {
+            try {
+                Thread.sleep(10);
+            } catch (final InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

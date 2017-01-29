@@ -20,9 +20,13 @@ package org.jrebirth.af.component.ui.stack;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.component.ui.beans.StackConfig;
 import org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean;
 import org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand;
-import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.core.service.ServiceTaskReturnWaveListener;
+import org.jrebirth.af.core.ui.object.DefaultObjectModel;
+import org.jrebirth.af.core.wave.JRebirthWaves;
+import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.checker.ClassWaveChecker;
 import org.jrebirth.af.core.wave.checker.DefaultWaveChecker;
 
@@ -34,7 +38,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Sébastien Bordes
  */
-public class StackModel extends DefaultModel<StackModel, StackView> {
+public class StackModel extends DefaultObjectModel<StackModel, StackView, StackConfig> {
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(StackModel.class);
@@ -69,7 +73,7 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
     public void doShowPageModel(final UniqueKey<? extends Model> pageModelKey, final String stackName, final Wave wave) {
 
         if (getStackName() != null && getStackName().equals(stackName)) {
-            showPage(pageModelKey);
+            showPage(pageModelKey, wave);
         }
 
     }
@@ -86,7 +90,7 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
 
         LOGGER.info("Show Page Enum: " + pageEnum.toString());
         if (getPageEnumClass() != null && getPageEnumClass().equals(pageEnum.getClass())) {
-            showPage(pageEnum.getModelKey());
+            showPage(pageEnum.getModelKey(), wave);
         }
     }
 
@@ -100,7 +104,9 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
     @SuppressWarnings("unchecked")
     private Class<PageEnum> getPageEnumClass() {
         Class<PageEnum> res = null;
-        if (getFirstKeyPart() instanceof Class && PageEnum.class.isAssignableFrom((Class<?>) getFirstKeyPart())) {
+        if (object() != null && object().pageEnumClass() != null) {
+            res = (Class<PageEnum>) object().pageEnumClass();
+        } else if (getFirstKeyPart() instanceof Class && PageEnum.class.isAssignableFrom((Class<?>) getFirstKeyPart())) {
             res = (Class<PageEnum>) getFirstKeyPart();
         }
         return res;
@@ -115,7 +121,9 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
      */
     private String getStackName() {
         String res = null;
-        if (getFirstKeyPart() instanceof String) {
+        if (object() != null && object().stackName() != null) {
+            res = object().stackName();
+        } else if (getFirstKeyPart() instanceof String) {
             res = (String) getFirstKeyPart();
         }
         return res;
@@ -126,25 +134,38 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
      *
      * @param pageModelKey the mdoelKey for the page to show
      */
-    private void showPage(final UniqueKey<? extends Model> pageModelKey) {
-        if(pageModelKey != null && !pageModelKey.equals(this.currentModelKey)){
-        	
-        	LOGGER.info("Show Page Model: " + pageModelKey.toString());
+    private void showPage(final UniqueKey<? extends Model> pageModelKey, final Wave wave) {
+        if (pageModelKey != null && !pageModelKey.equals(this.currentModelKey)) {
 
-	        // Create the Wave Bean that will hold all data processed by chained commands
-	        final DisplayModelWaveBean waveBean = DisplayModelWaveBean.create()
-	                                                                  // Define the placeholder that will receive the content
-	                                                                  .childrenPlaceHolder(view().node().getChildren())
-	                                                                  // Allow to add element behind the stack to allow transition
-	                                                                  .appendChild(false)
-	                                                                  .showModelKey(pageModelKey)
-	                                                                  .hideModelKey(this.currentModelKey);
-	
-	        this.currentModelKey = waveBean.showModelKey();
-	
-	        callCommand(ShowFadingModelCommand.class, waveBean);
+            LOGGER.info("Show Page Model: " + pageModelKey.toString());
+
+            // Create the Wave Bean that will hold all data processed by chained commands
+            final DisplayModelWaveBean waveBean = DisplayModelWaveBean.create()
+                                                                      // Define the placeholder that will receive the content
+                                                                      .childrenPlaceHolder(view().node().getChildren())
+                                                                      // Allow to add element behind the stack to allow transition
+                                                                      .appendChild(false)
+                                                                      .showModelKey(pageModelKey)
+                                                                      .hideModelKey(this.currentModelKey);
+
+            this.currentModelKey = waveBean.showModelKey();
+
+            if (wave != null) {
+                sendWave(WBuilder.callCommand(ShowFadingModelCommand.class)
+                                 .waveBean(waveBean)
+                                 .relatedWave(wave)
+                                 .addWaveListener(new ServiceTaskReturnWaveListener()));
+            } else {
+                final Wave showWave = WBuilder.callCommand(ShowFadingModelCommand.class)
+                                              .waveBean(waveBean)
+                                              .addDatas(JRebirthWaves.FORCE_SYNC);
+                // Run synchronously into JAT
+                getCommand(ShowFadingModelCommand.class).run(showWave);
+
+            }
+
         } else {
-        	LOGGER.debug("Page Model currently displayed: " + pageModelKey.toString());
+            LOGGER.debug("Page Model currently displayed: " + pageModelKey.toString());
         }
     }
 
@@ -171,6 +192,13 @@ public class StackModel extends DefaultModel<StackModel, StackView> {
      */
     public UniqueKey<? extends Model> getDefaultPageModelKey() {
         return this.defaultPageModelKey;
+    }
+
+    /**
+     * @param defaultPageModelKey the defaultPageModelKey to set
+     */
+    protected void setDefaultPageModelKey(UniqueKey<? extends Model> defaultPageModelKey) {
+        this.defaultPageModelKey = defaultPageModelKey;
     }
 
 }
