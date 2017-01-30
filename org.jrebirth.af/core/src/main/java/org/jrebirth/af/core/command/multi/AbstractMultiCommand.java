@@ -191,16 +191,45 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
      * {@inheritDoc}
      */
     @Override
-    public void beforePerform(final Wave wave) {
+    public final void beforePerform(final Wave wave) {
         this.running.set(true);
+        before(wave);
     }
+
+    /**
+     * Hook called before execution of all sub commands.
+     * 
+     * @param wave the wave that triggered the multi command
+     */
+    protected abstract void before(Wave wave);
+
+    /**
+     * Hook called after execution of all sub commands.
+     * 
+     * @param wave the wave that triggered the multi command
+     */
+    protected abstract void after(Wave wave);
+
+    /**
+     * Hook called before each call of sub commands.
+     * 
+     * @param wave the wave that triggered the multi command
+     */
+    protected abstract void beforeEach(Wave wave, Wave childWave);
+
+    /**
+     * Hook called after each call of sub commands. Command is probably not completed.
+     * 
+     * @param wave the wave that triggered the multi command
+     */
+    protected abstract void afterEach(Wave wave, Wave childWave);
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void afterPerform(final Wave wave) {
-        // Nothing to do
+    public final void afterPerform(final Wave wave) {
+        after(wave);
     }
 
     /**
@@ -230,14 +259,15 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                     if (this.subCommandList.size() > this.commandRunIndex) {
 
                         final Wave subCommandWave = WBuilder.callCommand(this.subCommandList.get(this.commandRunIndex).classField())
-                        		// FIXME UNIQUE KEY of sub command
+                                                            // FIXME UNIQUE KEY of sub command
                                                             // Recopy all WaveBeans
                                                             .waveBeanList(wave.waveBeanList())
                                                             // Recopy the WaveData from the previous wave
                                                             .addDatas(wave.waveDatas().toArray(new WaveDataBase[0]))
                                                             .addWaveListener(this);
-
+                        beforeEach(wave, subCommandWave);
                         sendWave(subCommandWave);
+                        afterEach(wave, subCommandWave);
                     }
                 }
 
@@ -250,9 +280,9 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
                     // Launch all sub command in parallel
                     for (final UniqueKey<? extends Command> commandKey : this.subCommandList) {
-
+                        beforeEach(wave, null);
                         final Wave commandWave = localFacade().retrieve(commandKey).run();
-
+                        afterEach(wave, commandWave);
                         // register to Wave status of all command triggered
                         commandWave.addWaveListener(this);
 

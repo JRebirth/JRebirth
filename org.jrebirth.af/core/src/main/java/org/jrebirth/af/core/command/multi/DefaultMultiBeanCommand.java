@@ -24,6 +24,7 @@ import org.jrebirth.af.api.concurrent.RunInto;
 import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
 
 /**
@@ -92,6 +93,38 @@ public class DefaultMultiBeanCommand<WB extends WaveBean> extends AbstractMultiC
      */
     @Override
     protected void initInnerComponents() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void before(Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void after(Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void beforeEach(Wave wave, Wave childWave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void afterEach(Wave wave, Wave childWave) {
         // Nothing to do yet
     }
 

@@ -37,6 +37,15 @@ public class ShowTemporaryCommand extends DefaultMultiBeanCommand<DisplayModelWa
      * {@inheritDoc}
      */
     @Override
+    protected void before(Wave wave) {
+        // Map the showModel key to hideModel key to detach the model temporary displayed
+        waveBean(wave).hideModelKey(waveBean(wave).showModelKey());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected List<UniqueKey<? extends Command>> defineSubCommand() {
         return Arrays.asList(
                              getCommandKey(PrepareModelCommand.class),
