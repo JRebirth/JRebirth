@@ -50,7 +50,6 @@ public class StackModelTest extends AbstractBorderPaneTest {
 
         final String stackName = "Stack #0";
         final BorderPaneModel model = getBorderPaneModel();
-        hold(3000);
 
         final Wave wave = model.callCommand(ShowModelCommand.class).waveBean(
                                                                              DisplayModelWaveBean.create()
