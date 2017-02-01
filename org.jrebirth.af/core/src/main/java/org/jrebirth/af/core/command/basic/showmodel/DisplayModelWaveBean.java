@@ -27,6 +27,7 @@ import javafx.scene.Node;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.core.ui.object.ModelConfig;
 
 /**
  * The class <strong>DisplayModelWaveBean</strong>.
@@ -37,6 +38,9 @@ public class DisplayModelWaveBean implements WaveBean {
 
     /** The show model key. */
     private UniqueKey<? extends Model> showModelKey;
+
+    /** The show model data. */
+    private ModelConfig<? extends Model, ?> showModelData;
 
     /** The hide model key. */
     private UniqueKey<? extends Model> hideModelKey;
@@ -93,6 +97,27 @@ public class DisplayModelWaveBean implements WaveBean {
      */
     public DisplayModelWaveBean showModelKey(final UniqueKey<? extends Model> showModelKey) {
         this.showModelKey = showModelKey;
+        return this;
+    }
+
+    /**
+     * Gets the show model data.
+     *
+     * @return the show model data
+     */
+    public ModelConfig<? extends Model, ?> showModelData() {
+        return this.showModelData;
+    }
+
+    /**
+     * Sets the show model data.
+     *
+     * @param showModelData the new show model data
+     *
+     * @return the DisplayModeWavebean instance being configured
+     */
+    public DisplayModelWaveBean showModelData(final ModelConfig<? extends Model, ?> showModelData) {
+        this.showModelData = showModelData;
         return this;
     }
 

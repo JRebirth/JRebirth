@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.multi.DefaultMultiBeanCommand;
 
 /**

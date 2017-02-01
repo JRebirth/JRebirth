@@ -22,10 +22,10 @@ import java.util.List;
 
 import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.core.command.multi.AbstractMultiCommand;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GroupRefCommand.
  */
@@ -87,6 +87,38 @@ public class GroupRefCommand extends AbstractMultiCommand<WaveBean> {
      */
     @Override
     protected void initInnerComponents() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void before(Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void after(Wave wave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void beforeEach(Wave wave, Wave childWave) {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void afterEach(Wave wave, Wave childWave) {
         // Nothing to do yet
     }
 

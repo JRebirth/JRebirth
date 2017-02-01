@@ -22,6 +22,8 @@ import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.single.pool.DefaultPoolBeanCommand;
+import org.jrebirth.af.core.key.Key;
+import org.jrebirth.af.core.ui.object.ModelConfig;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +49,10 @@ public class PrepareModelCommand extends DefaultPoolBeanCommand<DisplayModelWave
 
         // final Object[] keyPart = getWaveBean(wave).getKeyPart() == null ? null : getWaveBean(wave).getKeyPart().toArray();
 
-        final UniqueKey<? extends Model> showModelKey = waveBean(wave).showModelKey();
+        final DisplayModelWaveBean wb = waveBean(wave);
+        final ModelConfig<?, ?> data = wb.showModelData();
+
+        final UniqueKey<? extends Model> showModelKey = data != null ? Key.create(data.modelClass(), data) : wb.showModelKey();
 
         if (showModelKey == null) {
             LOGGER.error("ModelClass is null");

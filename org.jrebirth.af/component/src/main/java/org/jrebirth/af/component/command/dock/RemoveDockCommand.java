@@ -37,7 +37,7 @@ public class RemoveDockCommand extends DefaultUIBeanCommand<DockWaveBean> {
         }
 
         if (waveBean(wave).parts() != null) {
-            for (final PartConfig<?> partConfig : waveBean(wave).parts()) {
+            for (final PartConfig<?, ?> partConfig : waveBean(wave).parts()) {
                 sendWaveToTabModel(wave, getModel(partConfig.modelClass(), partConfig));
             }
         }

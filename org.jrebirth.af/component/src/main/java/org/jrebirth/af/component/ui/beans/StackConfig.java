@@ -1,11 +1,10 @@
 package org.jrebirth.af.component.ui.beans;
 
-import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.component.ui.stack.PageEnum;
 import org.jrebirth.af.component.ui.stack.StackModel;
 import org.jrebirth.af.core.ui.object.ModelConfig;
 
-public class StackConfig extends ModelConfig<StackConfig> {
+public class StackConfig extends ModelConfig<StackModel, StackConfig> {
 
     private String stackName;
 
@@ -15,7 +14,7 @@ public class StackConfig extends ModelConfig<StackConfig> {
         super(StackModel.class);
     }
 
-    public StackConfig(Class<? extends Model> modelClass) {
+    public StackConfig(Class<StackModel> modelClass) {
         super(modelClass);
     }
 

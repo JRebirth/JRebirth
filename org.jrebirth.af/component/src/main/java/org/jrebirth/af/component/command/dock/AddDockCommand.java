@@ -36,7 +36,7 @@ public class AddDockCommand extends DefaultUIBeanCommand<DockWaveBean> {
         }
 
         if (waveBean(wave).parts() != null) {
-            for (final PartConfig<?> part : waveBean(wave).parts()) {
+            for (final PartConfig<?, ?> part : waveBean(wave).parts()) {
                 sendWaveToTabModel(wave, getModel(part.modelClass(), part));
             }
         }

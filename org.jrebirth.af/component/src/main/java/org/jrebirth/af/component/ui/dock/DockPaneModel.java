@@ -84,7 +84,7 @@ public class DockPaneModel extends DefaultObjectModel<DockPaneModel, DockPaneVie
             object().id(DockPaneModel.class.getSimpleName() + DOCK_COUNTER++);
         }
 
-        for (final PartConfig<?> pc : object().panes()) {
+        for (final PartConfig<?, ?> pc : object().panes()) {
 
             callCommand(AddDockCommand.class, DockWaveBean.create().dockConfig(object()).parts(pc));
 
@@ -107,7 +107,7 @@ public class DockPaneModel extends DefaultObjectModel<DockPaneModel, DockPaneVie
     }
 
     @SuppressWarnings("unchecked")
-    private void onPanesChanged(final ListChangeListener.Change<? extends PartConfig<?>> change) {
+    private void onPanesChanged(final ListChangeListener.Change<? extends PartConfig<?, ?>> change) {
         while (change.next()) {
 
             System.out.println(change);
@@ -119,8 +119,8 @@ public class DockPaneModel extends DefaultObjectModel<DockPaneModel, DockPaneVie
             }
 
             if (change.wasRemoved()) {
-                final List<PartConfig<?>> rList = (List<PartConfig<?>>) change.getRemoved();
-                callCommand(RemoveDockCommand.class, DockWaveBean.create().dockConfig(object()).parts(rList.toArray(new PartConfig<?>[0])));
+                final List<PartConfig<?, ?>> rList = (List<PartConfig<?, ?>>) change.getRemoved();
+                callCommand(RemoveDockCommand.class, DockWaveBean.create().dockConfig(object()).parts(rList.toArray(new PartConfig<?, ?>[0])));
             }
 
             if (change.wasAdded()) {
@@ -138,24 +138,24 @@ public class DockPaneModel extends DefaultObjectModel<DockPaneModel, DockPaneVie
     protected void showView() {
     }
 
-    public void doAddPart(final ModelObject<PartConfig<?>> model, final Wave wave) {
+    public void doAddPart(final ModelObject<PartConfig<?, ?>> model, final Wave wave) {
         if (!object().panes().contains(model.object())) {
             doInsertPart(-1, model, wave);
         }
         view().addItem(-1, model.node());
     }
 
-    public void doRemovePart(final ModelObject<PartConfig<?>> model, final Wave wave) {
+    public void doRemovePart(final ModelObject<PartConfig<?, ?>> model, final Wave wave) {
         object().panes().remove(model.object());
         view().removeItem(Collections.singletonList(model.node()));
     }
 
-    public void doInsertPart(int idx, final ModelObject<PartConfig<?>> model, final Wave wave) {
+    public void doInsertPart(int idx, final ModelObject<PartConfig<?, ?>> model, final Wave wave) {
         // final TabBB<M> t = TabBB.create()
         // //.name(model.modelName())
         // .modelKey(model.getKey());
 
-        final PartConfig<?> partConfig = model.object();// BehaviorBean(TabBehavior.class);
+        final PartConfig<?, ?> partConfig = model.object();// BehaviorBean(TabBehavior.class);
 
         if (idx < 0) {
             idx = object().panes().isEmpty() ? 0 : object().panes().size();

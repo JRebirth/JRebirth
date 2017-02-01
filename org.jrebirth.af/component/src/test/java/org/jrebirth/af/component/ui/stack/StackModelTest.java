@@ -46,11 +46,29 @@ public class StackModelTest extends AbstractBorderPaneTest {
     }
 
     @Test
+    public void stackNameConfigData() {
+
+        final String stackName = "Stack #0";
+        final BorderPaneModel model = getBorderPaneModel();
+        hold(3000);
+
+        final Wave wave = model.callCommand(ShowModelCommand.class).waveBean(
+                                                                             DisplayModelWaveBean.create()
+                                                                                                 .uniquePlaceHolder(model.node().centerProperty())
+                                                                                                 .showModelData(StackConfig.create().stackName(stackName)));
+        waitWave(wave);
+        switchStackModels(model, stackName);
+
+    }
+
+    @Test
     public void stackNameString() {
+
+        final String stackName = "Stack #1";
 
         final BorderPaneModel model = getBorderPaneModel();
 
-        final UniqueKey<? extends org.jrebirth.af.api.ui.Model> stack1 = Key.create(StackModel.class, "Stack #1");
+        final UniqueKey<? extends org.jrebirth.af.api.ui.Model> stack1 = Key.create(StackModel.class, stackName);
 
         final DisplayModelWaveBean dmwb = DisplayModelWaveBean.create()
                                                               .uniquePlaceHolder(model.node().centerProperty())
@@ -66,51 +84,53 @@ public class StackModelTest extends AbstractBorderPaneTest {
         // FIXME Dont work
         // sm.setDefaultPageModelKey(Key.create(TextModel.class, "text0"));
 
-        switchStackModels(model);
+        switchStackModels(model, stackName);
 
     }
 
     @Test
     public void stackNameConfig() {
 
+        final String stackName = "Stack #2";
+
         final BorderPaneModel model = getBorderPaneModel();
 
-        final UniqueKey<? extends org.jrebirth.af.api.ui.Model> stack2 = Key.create(StackModel.class, StackConfig.create().stackName("Stack #1"));
+        final UniqueKey<? extends org.jrebirth.af.api.ui.Model> stack2 = Key.create(StackModel.class, StackConfig.create().stackName(stackName));
 
-        model.callCommand(ShowModelCommand.class).waveBean(
-                                                           DisplayModelWaveBean.create()
-                                                                               .uniquePlaceHolder(model.node().centerProperty())
-                                                                               .showModelKey(stack2));
-        switchStackModels(model);
+        final Wave wave = model.callCommand(ShowModelCommand.class).waveBean(
+                                                                             DisplayModelWaveBean.create()
+                                                                                                 .uniquePlaceHolder(model.node().centerProperty())
+                                                                                                 .showModelKey(stack2));
+        waitWave(wave);
+        switchStackModels(model, stackName);
 
     }
 
-    private void switchStackModels(final BorderPaneModel model) {
-        hold(100);
+    private void switchStackModels(final BorderPaneModel model, String stackName) {
 
         Wave wave = null;
 
         wave = model.sendWave(StackWaves.SHOW_PAGE_MODEL,
                               WBuilder.waveData(StackWaves.PAGE_MODEL_KEY, Key.create(TextModel.class, "text1")),
-                              WBuilder.waveData(StackWaves.STACK_NAME, "Stack #1"));
+                              WBuilder.waveData(StackWaves.STACK_NAME, stackName));
 
         check(wave, "text1");
 
         wave = model.sendWave(StackWaves.SHOW_PAGE_MODEL,
                               WBuilder.waveData(StackWaves.PAGE_MODEL_KEY, Key.create(TextModel.class, "text2")),
-                              WBuilder.waveData(StackWaves.STACK_NAME, "Stack #1"));
+                              WBuilder.waveData(StackWaves.STACK_NAME, stackName));
 
         check(wave, "text2");
 
         wave = model.sendWave(StackWaves.SHOW_PAGE_MODEL,
                               WBuilder.waveData(StackWaves.PAGE_MODEL_KEY, Key.create(TextModel.class, "text3")),
-                              WBuilder.waveData(StackWaves.STACK_NAME, "Stack #1"));
+                              WBuilder.waveData(StackWaves.STACK_NAME, stackName));
 
         check(wave, "text3");
 
         wave = model.sendWave(StackWaves.SHOW_PAGE_MODEL,
                               WBuilder.waveData(StackWaves.PAGE_MODEL_KEY, Key.create(TextModel.class, "text4")),
-                              WBuilder.waveData(StackWaves.STACK_NAME, "Stack #1"));
+                              WBuilder.waveData(StackWaves.STACK_NAME, stackName));
 
         check(wave, "text4");
     }
@@ -122,10 +142,11 @@ public class StackModelTest extends AbstractBorderPaneTest {
 
         final UniqueKey<? extends org.jrebirth.af.api.ui.Model> stack3 = Key.create(StackModel.class, Pages.class);
 
-        model.callCommand(ShowModelCommand.class).waveBean(
-                                                           DisplayModelWaveBean.create()
-                                                                               .uniquePlaceHolder(model.node().centerProperty())
-                                                                               .showModelKey(stack3));
+        final Wave wave = model.callCommand(ShowModelCommand.class).waveBean(
+                                                                             DisplayModelWaveBean.create()
+                                                                                                 .uniquePlaceHolder(model.node().centerProperty())
+                                                                                                 .showModelKey(stack3));
+        waitWave(wave);
         switchStackPages(model, Pages.values());
 
     }
@@ -137,17 +158,16 @@ public class StackModelTest extends AbstractBorderPaneTest {
 
         final UniqueKey<? extends org.jrebirth.af.api.ui.Model> stack4 = Key.create(StackModel.class, StackConfig.create().pageEnumClass(Pages2.class));
 
-        model.callCommand(ShowModelCommand.class).waveBean(
-                                                           DisplayModelWaveBean.create()
-                                                                               .uniquePlaceHolder(model.node().centerProperty())
-                                                                               .showModelKey(stack4));
+        final Wave wave = model.callCommand(ShowModelCommand.class).waveBean(
+                                                                             DisplayModelWaveBean.create()
+                                                                                                 .uniquePlaceHolder(model.node().centerProperty())
+                                                                                                 .showModelKey(stack4));
+        waitWave(wave);
         switchStackPages(model, Pages2.values());
 
     }
 
     private void switchStackPages(final BorderPaneModel model, final PageEnum[] values) {
-
-        hold(100);
 
         Wave wave = null;
 

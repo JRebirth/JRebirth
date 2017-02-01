@@ -5,22 +5,21 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
 import org.jrebirth.af.component.ui.tab.TabbedPaneModel;
 
-public class TabbedPaneConfig extends PartConfig<TabbedPaneConfig> {
+public class TabbedPaneConfig extends PartConfig<TabbedPaneModel, TabbedPaneConfig> {
 
     private final ObjectProperty<TabbedPaneOrientation> orientationPy = new SimpleObjectProperty<>(TabbedPaneOrientation.top);
 
     private final ObservableList<Dockable> tabs = FXCollections.observableArrayList();
 
-    public TabbedPaneConfig(final Class<? extends Model> modelClass) {
-        super(modelClass);
-    }
-
     public static TabbedPaneConfig create() {
         return new TabbedPaneConfig(TabbedPaneModel.class);
+    }
+
+    public TabbedPaneConfig(final Class<TabbedPaneModel> modelClass) {
+        super(modelClass);
     }
 
     public ObjectProperty<TabbedPaneOrientation> orientationPy() {

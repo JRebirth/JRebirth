@@ -16,7 +16,7 @@ public class DockWaveBean implements WaveBean {
 
     private UniqueKey<? extends Model>[] modelKey;
 
-    private PartConfig<?>[] parts;
+    private PartConfig<?, ?>[] parts;
 
     public static DockWaveBean create() {
         return new DockWaveBean();
@@ -71,14 +71,14 @@ public class DockWaveBean implements WaveBean {
     /**
      * @return Returns the parts.
      */
-    public PartConfig<?>[] parts() {
+    public PartConfig<?, ?>[] parts() {
         return this.parts;
     }
 
     /**
      * @param parts The parts to set.
      */
-    public DockWaveBean parts(final PartConfig<?>... parts) {
+    public DockWaveBean parts(final PartConfig<?, ?>... parts) {
         this.parts = parts;
         return this;
     }

@@ -69,21 +69,21 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
     @Override
     protected void initInternalModel() throws CoreException {
 
-        if (key().value() instanceof ModelConfig<?>) {
-            applyStyle((ModelConfig<?>) key().value());
+        if (key().value() instanceof ModelConfig<?, ?>) {
+            applyStyle((ModelConfig<?, ?>) key().value());
         }
 
         if (key().value() instanceof List<?>) {
             for (final Object data : (List<?>) key().value()) {
-                if (data instanceof ModelConfig<?>) {
-                    applyStyle((ModelConfig<?>) key().value());
+                if (data instanceof ModelConfig<?, ?>) {
+                    applyStyle((ModelConfig<?, ?>) key().value());
                 }
             }
         }
 
         for (final Object data : key().optionalData()) {
-            if (data instanceof ModelConfig<?>) {
-                applyStyle((ModelConfig<?>) data);
+            if (data instanceof ModelConfig<?, ?>) {
+                applyStyle((ModelConfig<?, ?>) data);
             }
         }
 
@@ -100,7 +100,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
      *
      * @param mc
      */
-    protected void applyStyle(final ModelConfig<?> mc) {
+    protected void applyStyle(final ModelConfig<?, ?> mc) {
         if (!ModelConfig.UNDETERMINED.equals(mc.id())) {
             node().setId(mc.id());
         }

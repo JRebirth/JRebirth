@@ -2,7 +2,7 @@ package org.jrebirth.af.core.ui.object;
 
 import org.jrebirth.af.api.ui.Model;
 
-public class ModelConfig<MC extends ModelConfig<MC>> {
+public class ModelConfig<M extends Model, MC extends ModelConfig<M, MC>> {
 
     public static final String UNDETERMINED = "Undetermined";
 
@@ -12,13 +12,13 @@ public class ModelConfig<MC extends ModelConfig<MC>> {
 
     private String styleClass = UNDETERMINED;
 
-    protected final Class<? extends Model> modelClass;
+    protected final Class<M> modelClass;
 
-    public ModelConfig(final Class<? extends Model> modelClass) {
+    public ModelConfig(final Class<M> modelClass) {
         this.modelClass = modelClass;
     }
 
-    public Class<? extends Model> modelClass() {
+    public Class<M> modelClass() {
         return this.modelClass;
     }
 
