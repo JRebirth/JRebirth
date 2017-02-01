@@ -93,15 +93,6 @@ public class JRebirthThreadPoolExecutor extends ThreadPoolExecutor implements IJ
         return !highPriority;
     }
 
-    // /**
-    // * Execute the JRebirthRunnable.
-    // *
-    // * @param task to run
-    // */
-    // public void execute(final JRebirthRunnable task) {
-    // super.execute(task);
-    // }
-
     /**
      * {@inheritDoc}
      */

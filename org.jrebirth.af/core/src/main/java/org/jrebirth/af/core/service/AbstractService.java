@@ -37,7 +37,6 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent;
 import org.jrebirth.af.core.concurrent.JRebirth;
-import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.JRebirthWaves;
@@ -182,13 +181,13 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
     private void bindProgressBar(final ServiceTaskBase<?> task, final ProgressBar progressBar) {
 
         // Perform this binding into the JAT to respect widget and task API
-        JRebirth.runIntoJAT(new JrbReferenceRunnable("Bind ProgressBar to " + task.getServiceHandlerName(),
-                                                     () -> {
-                                                         // Avoid the progress bar to display 100% at start up
-                                                         task.updateProgress(0, 0);
-                                                         // Bind the progress bar
-                                                         progressBar.progressProperty().bind(task.workDoneProperty().divide(task.totalWorkProperty()));
-                                                     }));
+        JRebirth.runIntoJAT("Bind ProgressBar to " + task.getServiceHandlerName(),
+                            () -> {
+                                // Avoid the progress bar to display 100% at start up
+                                task.updateProgress(0, 0);
+                                // Bind the progress bar
+                                progressBar.progressProperty().bind(task.workDoneProperty().divide(task.totalWorkProperty()));
+                            });
 
     }
 
@@ -201,9 +200,9 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
     private void bindTitle(final ServiceTask<?> task, final StringProperty titleProperty) {
 
         // Perform this binding into the JAT to respect widget and task API
-        JRebirth.runIntoJAT(new JrbReferenceRunnable("Bind Title for " + task.getServiceHandlerName(),
-                                                     // Bind the task title
-                                                     () -> titleProperty.bind(task.titleProperty())));
+        JRebirth.runIntoJAT("Bind Title for " + task.getServiceHandlerName(),
+                            // Bind the task title
+                            () -> titleProperty.bind(task.titleProperty()));
     }
 
     /**
@@ -215,9 +214,9 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
     private void bindMessage(final ServiceTask<?> task, final StringProperty messageProperty) {
 
         // Perform this binding into the JAT to respect widget and task API
-        JRebirth.runIntoJAT(new JrbReferenceRunnable("Bind Message for " + task.getServiceHandlerName(),
-                                                     // Bind the task title
-                                                     () -> messageProperty.bind(task.messageProperty())));
+        JRebirth.runIntoJAT("Bind Message for " + task.getServiceHandlerName(),
+                            // Bind the task title
+                            () -> messageProperty.bind(task.messageProperty()));
     }
 
     /**
@@ -278,8 +277,8 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
         if (wave.get(JRebirthWaves.SERVICE_TASK).checkProgressRatio(workDone, totalWork, progressIncrement)) {
 
             // Increase the task progression
-            JRebirth.runIntoJAT(new JrbReferenceRunnable("ServiceTask Workdone (lng) " + workDone + RATIO_SEPARATOR + totalWork + "[" + workDone * 100 / totalWork + "%]",
-                                                         () -> wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork)));
+            JRebirth.runIntoJAT("ServiceTask Workdone (lng) " + workDone + RATIO_SEPARATOR + totalWork + "[" + workDone * 100 / totalWork + "%]",
+                                () -> wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork));
         }
     }
 
@@ -309,8 +308,8 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
         if (wave.get(JRebirthWaves.SERVICE_TASK).checkProgressRatio(workDone, totalWork, progressIncrement)) {
 
             // Increase the task progression
-            JRebirth.runIntoJAT(new JrbReferenceRunnable("ServiceTask Workdone (dbl) " + workDone + RATIO_SEPARATOR + totalWork,
-                                                         () -> wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork)));
+            JRebirth.runIntoJAT("ServiceTask Workdone (dbl) " + workDone + RATIO_SEPARATOR + totalWork,
+                                () -> wave.get(JRebirthWaves.SERVICE_TASK).updateProgress(workDone, totalWork));
         }
     }
 
@@ -323,8 +322,8 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
     public void updateMessage(final Wave wave, final String message) {
 
         // Update the current task message
-        JRebirth.runIntoJAT(new JrbReferenceRunnable("Service Task Mesage => " + message,
-                                                     () -> wave.get(JRebirthWaves.SERVICE_TASK).updateMessage(message)));
+        JRebirth.runIntoJAT("Service Task Mesage => " + message,
+                            () -> wave.get(JRebirthWaves.SERVICE_TASK).updateMessage(message));
     }
 
     /**
@@ -336,7 +335,7 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
     public void updateTitle(final Wave wave, final String title) {
 
         // Update the task title into JAT
-        JRebirth.runIntoJAT(new JrbReferenceRunnable("Service Task Title => " + title,
-                                                     () -> wave.get(JRebirthWaves.SERVICE_TASK).updateTitle(title)));
+        JRebirth.runIntoJAT("Service Task Title => " + title,
+                            () -> wave.get(JRebirthWaves.SERVICE_TASK).updateTitle(title));
     }
 }

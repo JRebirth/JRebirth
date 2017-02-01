@@ -55,7 +55,6 @@ import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.concurrent.JRebirth;
-import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
 import org.jrebirth.af.core.concurrent.SyncRunnable;
 import org.jrebirth.af.core.link.AbstractReady;
 import org.jrebirth.af.core.link.ComponentEnhancer;
@@ -161,10 +160,8 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
         LOGGER.trace(LinkMessages.LISTEN_WAVE_TYPE, getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName());
 
         // Use the JRebirth Thread to add new subscriptions for given Wave Type
-        JRebirth.runIntoJIT(new JrbReferenceRunnable(
-                                                     LISTEN_WAVE_TYPE.getText(getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName()), () -> {
-                                                         getNotifier().listen(waveReady, waveChecker, method, waveTypes);
-                                                     }));
+        JRebirth.runIntoJIT(LISTEN_WAVE_TYPE.getText(getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName()),
+                            () -> getNotifier().listen(waveReady, waveChecker, method, waveTypes));
     }
 
     // /**
@@ -197,9 +194,8 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
         LOGGER.trace(LinkMessages.UNLISTEN_WAVE_TYPE, getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName());
 
         // Use the JRebirth Thread to manage Waves
-        JRebirth.runIntoJIT(new JrbReferenceRunnable(
-                                                     UNLISTEN_WAVE_TYPE.getText(getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName()),
-                                                     () -> getNotifier().unlisten(waveReady, waveTypes)));
+        JRebirth.runIntoJIT(UNLISTEN_WAVE_TYPE.getText(getWaveTypesString(waveTypes), waveReady.getClass().getSimpleName()),
+                            () -> getNotifier().unlisten(waveReady, waveTypes));
     }
 
     /**
@@ -296,7 +292,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
         final Long timeout = wave.contains(JRebirthItems.syncTimeout) ? wave.get(JRebirthItems.syncTimeout) : SyncRunnable.DEFAULT_TIME_OUT;
 
         // Use the JRebirth Thread to manage Waves
-        JRebirth.run(runType, new JrbReferenceRunnable(SEND_WAVE.getText(wave.toString()), priority, () -> getNotifier().sendWave(wave)), timeout);
+        JRebirth.run(runType, SEND_WAVE.getText(wave.toString()), priority, () -> getNotifier().sendWave(wave), timeout);
 
         return wave;
     }
@@ -558,7 +554,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
         if (ObjectUtility.checkAllMethodReturnTrue(this, ClassUtility.getAnnotatedMethods(this.getClass(), Releasable.class))) {
 
             // Release the component and its internal components into JIT
-            JRebirth.runIntoJIT(new JrbReferenceRunnable("Release " + this.getClass().getCanonicalName(), this::internalRelease));
+            JRebirth.runIntoJIT("Release " + this.getClass().getCanonicalName(), this::internalRelease);
 
             released = true;
         }

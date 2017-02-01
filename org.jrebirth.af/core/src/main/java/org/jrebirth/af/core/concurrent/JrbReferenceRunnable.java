@@ -18,7 +18,6 @@
 package org.jrebirth.af.core.concurrent;
 
 import org.jrebirth.af.api.annotation.PriorityLevel;
-import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
 
 /**
@@ -28,21 +27,28 @@ import org.jrebirth.af.api.exception.JRebirthThreadException;
  */
 public class JrbReferenceRunnable extends AbstractJrbRunnable {
 
-    private final JRebirthRunnable runnable;
+    /** The runnable to run into the right thread. */
+    private final Runnable runnable;
 
     /**
-     * @param runnableName
-     * @param priority
+     * Default constructor using name and priority.
+     *
+     * @param runnableName the name of the runnable for log purpose
+     * @param priority the runnable priority to try to apply
+     * @param runnable the runnable to perform into the right thread
      */
-    public JrbReferenceRunnable(final String runnableName, final PriorityLevel priority, final JRebirthRunnable runnable) {
+    public JrbReferenceRunnable(final String runnableName, final PriorityLevel priority, final Runnable runnable) {
         super(runnableName, priority);
         this.runnable = runnable;
     }
 
     /**
-     * @param runnableName
+     * Default constructor using name and Normal priority.
+     *
+     * @param runnableName the name of the runnable for log purpose
+     * @param runnable the runnable to perform into the right thread
      */
-    public JrbReferenceRunnable(final String runnableName, final JRebirthRunnable runnable) {
+    public JrbReferenceRunnable(final String runnableName, final Runnable runnable) {
         super(runnableName);
         this.runnable = runnable;
     }

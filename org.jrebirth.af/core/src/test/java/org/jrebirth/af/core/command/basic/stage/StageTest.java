@@ -81,7 +81,7 @@ public class StageTest extends AbstractTest {
 
         });
 
-        JRebirth.runIntoJIT(new JrbReferenceRunnable("Send Wave " + wave.toString(), () -> AbstractTest.globalFacade.notifier().sendWave(wave)));
+        JRebirth.runIntoJIT("Send Wave " + wave.toString(), () -> AbstractTest.globalFacade.notifier().sendWave(wave));
 
         try {
             Thread.sleep(2000);

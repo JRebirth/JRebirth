@@ -74,7 +74,7 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
     @Override
     public final void run() {
 
-        LOGGER.trace(RUN_IT, this.runnableName);
+        LOGGER.trace(RUN_IT, runnableName());
 
         try {
             runInto();
@@ -96,7 +96,7 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
      */
     @Override
     public String toString() {
-        return "JRebirthRunnable - " + this.runnableName;
+        return "JRebirthRunnable - " + runnableName();
     }
 
     /**
@@ -105,6 +105,14 @@ public abstract class AbstractJrbRunnable implements JRebirthRunnable, Concurren
     @Override
     public PriorityLevel priority() {
         return this.priority;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String runnableName() {
+        return this.runnableName;
     }
 
     /**

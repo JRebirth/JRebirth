@@ -19,6 +19,7 @@ package org.jrebirth.af.core.concurrent;
 
 import javafx.application.Platform;
 
+import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
@@ -38,6 +39,31 @@ public final class JRebirth {
      */
     private JRebirth() {
         super();
+    }
+
+    /**
+     * Run the task into the appropriated thread.
+     *
+     * @param runInto the targeted thread
+     * @param runnableName the name of the runnable for logging purpose
+     * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
+     */
+    public static void run(final RunType runInto, final String runnableName, final Runnable runnable, final long... timeout) {
+        run(runInto, new JrbReferenceRunnable(runnableName, runnable), timeout);
+    }
+
+    /**
+     * Run the task into the appropriated thread.
+     *
+     * @param runInto the targeted thread
+     * @param runnableName the name of the runnable for logging purpose
+     * @param runnablePriority the priority to try to apply to the runnable
+     * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
+     */
+    public static void run(final RunType runInto, final String runnableName, final PriorityLevel runnablePriority, final Runnable runnable, final long... timeout) {
+        run(runInto, new JrbReferenceRunnable(runnableName, runnablePriority, runnable), timeout);
     }
 
     /**
@@ -73,6 +99,38 @@ public final class JRebirth {
         }
     }
 
+    /**
+     * Run the task into the appropriated thread <b>Synchronously</b> even if the run type is not synchrone.
+     *
+     * @param runInto the targeted thread
+     * @param runnableName the name of the runnable for logging purpose
+     * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
+     */
+    public static void runSync(final RunType runInto, final String runnableName, final Runnable runnable, final long... timeout) {
+        run(runInto, new JrbReferenceRunnable(runnableName, runnable), timeout);
+    }
+
+    /**
+     * Run the task into the appropriated thread <b>Synchronously</b> even if the run type is not synchrone.
+     *
+     * @param runInto the targeted thread
+     * @param runnableName the name of the runnable for logging purpose
+     * @param runnablePriority the priority to try to apply to the runnable
+     * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
+     */
+    public static void runSync(final RunType runInto, final String runnableName, final PriorityLevel runnablePriority, final Runnable runnable, final long... timeout) {
+        run(runInto, new JrbReferenceRunnable(runnableName, runnablePriority, runnable), timeout);
+    }
+
+    /**
+     * Run the task into the appropriated thread <b>Synchronously</b> even if the run type is not synchrone.
+     *
+     * @param runInto the targeted thread
+     * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
+     */
     public static void runSync(final RunType runInto, final JRebirthRunnable runnable, final long... timeout) {
         switch (runInto) {
             case JAT:
@@ -96,6 +154,16 @@ public final class JRebirth {
     /**
      * Run the task into the JavaFX Application Thread [JAT].
      *
+     * @param runnableName the name of the runnable for logging purpose
+     * @param runnable the task to run
+     */
+    public static void runIntoJAT(final String runnableName, final Runnable runnable) {
+        runIntoJAT(new JrbReferenceRunnable(runnableName, runnable));
+    }
+
+    /**
+     * Run the task into the JavaFX Application Thread [JAT].
+     *
      * @param runnable the task to run
      */
     public static void runIntoJAT(final JRebirthRunnable runnable) {
@@ -109,7 +177,18 @@ public final class JRebirth {
     }
 
     /**
-     * Run the task into the JavaFX Application Thread [JAT].
+     * Run the task into the JavaFX Application Thread [JAT] <b>Synchronously</b>.
+     *
+     * @param runnableName the name of the runnable for logging purpose
+     * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
+     */
+    public static void runIntoJATSync(final String runnableName, final Runnable runnable, final long... timeout) {
+        runIntoJATSync(new JrbReferenceRunnable(runnableName, runnable), timeout);
+    }
+
+    /**
+     * Run the task into the JavaFX Application Thread [JAT] <b>Synchronously</b>.
      *
      * @param runnable the task to run
      * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
@@ -144,20 +223,81 @@ public final class JRebirth {
      *
      * Be careful this method can be called through any thread.
      *
+     * @param runnableName the name of the runnable for logging purpose
      * @param runnable the task to run
      */
-    public static void runIntoJIT(final JRebirthRunnable runnable) {
-        // if (JRebirth.isJIT()) {
-        // // We are into JIT so just run it synchronously
-        // runnable.run();
-        // } else {
-        // The runnable will be run into the JIT during the next round
-        JRebirthThread.getThread().runLater(runnable);
-        // }
+    public static void runIntoJIT(final String runnableName, final Runnable runnable) {
+        runIntoJIT(new JrbReferenceRunnable(runnableName, runnable));
     }
 
     /**
-     * Run the task into the JavaFX Application Thread [JAT].
+     * Run into the JRebirth Internal Thread [JIT].
+     *
+     * Actually only few methods are allowed to execute themselves into JRebirthThread.
+     * <ul>
+     * <li>Uncaught Exception Handler initialization</li>
+     * <li>Wave queuing</li>
+     * <li>Run a default Command (neither UI nor Pooled)</li>
+     * <li>Listen a Wave Type</li>
+     * <li>UnListen a Wave Type</li>
+     * </ul>
+     *
+     * Be careful this method can be called through any thread.
+     *
+     * @param runnableName the name of the runnable for logging purpose
+     * @param runnablePriority the priority to try to apply to the runnable
+     * @param runnable the task to run
+     */
+    public static void runIntoJIT(final String runnableName, final PriorityLevel runnablePriority, final Runnable runnable) {
+        runIntoJIT(new JrbReferenceRunnable(runnableName, runnablePriority, runnable));
+    }
+
+    /**
+     * Run into the JRebirth Internal Thread [JIT].
+     *
+     * Actually only few methods are allowed to execute themselves into JRebirthThread.
+     * <ul>
+     * <li>Uncaught Exception Handler initialization</li>
+     * <li>Wave queuing</li>
+     * <li>Run a default Command (neither UI nor Pooled)</li>
+     * <li>Listen a Wave Type</li>
+     * <li>UnListen a Wave Type</li>
+     * </ul>
+     *
+     * Be careful this method can be called through any thread.
+     *
+     * @param runnable the task to run
+     */
+    public static void runIntoJIT(final JRebirthRunnable runnable) {
+        // The runnable will be run into the JIT during the next round according to existing runnable priorities
+        JRebirthThread.getThread().runLater(runnable);
+    }
+
+    /**
+     * Run the task into the JRebirth Internal Thread [JIT] <b>Synchronously</b>.
+     *
+     * @param runnableName the name of the runnable for logging purpose
+     * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
+     */
+    public static void runIntoJITSync(final String runnableName, final Runnable runnable, final long... timeout) {
+        runIntoJITSync(new JrbReferenceRunnable(runnableName, runnable), timeout);
+    }
+
+    /**
+     * Run the task into the JRebirth Internal Thread [JIT] <b>Synchronously</b>.
+     *
+     * @param runnableName the name of the runnable for logging purpose
+     * @param runnablePriority the priority to try to apply to the runnable
+     * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
+     */
+    public static void runIntoJITSync(final String runnableName, final PriorityLevel runnablePriority, final Runnable runnable, final long... timeout) {
+        runIntoJITSync(new JrbReferenceRunnable(runnableName, runnablePriority, runnable), timeout);
+    }
+
+    /**
+     * Run the task into the JRebirth Internal Thread [JIT] <b>Synchronously</b>.
      *
      * @param runnable the task to run
      * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
@@ -170,7 +310,7 @@ public final class JRebirth {
             sync.run();
             // Be careful in this case no timeout protection is achieved
         } else {
-            // The runnable will be run into the JIT during the next round
+            // The runnable will be run into the JIT during the next round according to existing runnable priorities
             JRebirthThread.getThread().runLater(sync);
             // Wait the end of the runnable execution
             sync.waitEnd(timeout);
@@ -182,16 +322,24 @@ public final class JRebirth {
      *
      * Be careful this method can be called through any thread.
      *
+     * @param runnableName the name of the runnable for logging purpose
      * @param runnable the task to run
      */
-    public static void runIntoJTP(final JRebirthRunnable runnable) {
-        // if (JRebirth.isJTPSlot()) {
-        // // We are into a JTP slot so just run it synchronously
-        // runnable.run();
-        // } else {
-        // The runnable will be run into a JTP slot during the next round
-        JRebirthThread.getThread().runIntoJTP(runnable);
-        // }
+    public static void runIntoJTP(final String runnableName, final Runnable runnable) {
+        runIntoJTP(new JrbReferenceRunnable(runnableName, runnable));
+    }
+
+    /**
+     * Run into the JRebirth Thread Pool [JTP].
+     *
+     * Be careful this method can be called through any thread.
+     *
+     * @param runnableName the name of the runnable for logging purpose
+     * @param runnablePriority the priority to try to apply to the runnable
+     * @param runnable the task to run
+     */
+    public static void runIntoJTP(final String runnableName, final PriorityLevel runnablePriority, final Runnable runnable) {
+        runIntoJTP(new JrbReferenceRunnable(runnableName, runnablePriority, runnable));
     }
 
     /**
@@ -200,6 +348,46 @@ public final class JRebirth {
      * Be careful this method can be called through any thread.
      *
      * @param runnable the task to run
+     */
+    public static void runIntoJTP(final JRebirthRunnable runnable) {
+        // The runnable will be run into a JTP slot during the next round according to existing runnable priorities
+        JRebirthThread.getThread().runIntoJTP(runnable);
+    }
+
+    /**
+     * Run into the JRebirth Thread Pool [JTP] <b>Synchronously</b>.
+     *
+     * Be careful this method can be called through any thread.
+     *
+     * @param runnableName the name of the runnable for logging purpose
+     * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
+     */
+    public static void runIntoJTPSync(final String runnableName, final Runnable runnable, final long... timeout) {
+        runIntoJTPSync(new JrbReferenceRunnable(runnableName, runnable), timeout);
+    }
+
+    /**
+     * Run into the JRebirth Thread Pool [JTP] <b>Synchronously</b>.
+     *
+     * Be careful this method can be called through any thread.
+     *
+     * @param runnableName the name of the runnable for logging purpose
+     * @param runnablePriority the priority to try to apply to the runnable
+     * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
+     */
+    public static void runIntoJTPSync(final String runnableName, final PriorityLevel runnablePriority, final Runnable runnable, final long... timeout) {
+        runIntoJTPSync(new JrbReferenceRunnable(runnableName, runnablePriority, runnable), timeout);
+    }
+
+    /**
+     * Run into the JRebirth Thread Pool [JTP] <b>Synchronously</b>.
+     *
+     * Be careful this method can be called through any thread.
+     *
+     * @param runnable the task to run
+     * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
      */
     public static void runIntoJTPSync(final JRebirthRunnable runnable, final long... timeout) {
         final SyncRunnable sync = new SyncRunnable(runnable);

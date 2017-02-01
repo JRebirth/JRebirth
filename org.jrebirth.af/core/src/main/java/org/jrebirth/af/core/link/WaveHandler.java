@@ -23,7 +23,6 @@ import java.util.List;
 
 import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.component.basic.Component;
-import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.concurrent.RunInto;
 import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.exception.CoreException;
@@ -34,7 +33,6 @@ import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.component.basic.AbstractComponent;
 import org.jrebirth.af.core.concurrent.JRebirth;
-import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
 import org.jrebirth.af.core.exception.WaveException;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.CheckerUtility;
@@ -126,50 +124,35 @@ public class WaveHandler implements LinkMessages {
         // Retrieve the annotation run type (if any)
         final RunType runType = runInto == null ? null : runInto.value();
 
-        final JRebirthRunnable waveHandlerRunnable = buildWaveRunnable(wave, customMethod, priority);
+        final WaveHandler waveHandler = this;
+        final Method method = customMethod;
+        final String runnableName = getWaveReady().getClass().getSimpleName() + " handle wave " + wave.toString();
+
+        final Runnable waveHandlerRunnable = () -> {
+            try {
+                performHandle(wave, method);
+            } catch (final WaveException e) {
+                LOGGER.error(WAVE_HANDLING_ERROR, e);
+            } finally {
+                wave.removeWaveHandler(waveHandler);
+            }
+        };
 
         // If the notified class is part of the UI
         // We must perform this action into the JavaFX Application Thread
         // only if the run type hasn't been overridden
         if (runType != null && runType == RunType.JAT || runType == null && getWaveReady() instanceof Model) {
 
-            JRebirth.runIntoJAT(waveHandlerRunnable);
+            JRebirth.runIntoJAT(runnableName, waveHandlerRunnable);
 
         } else if (runType != null && runType == RunType.JTP) {
             // Launch the wave handling into JRebirth Thread Pool
-            JRebirth.runIntoJTP(waveHandlerRunnable);
+            JRebirth.runIntoJTP(runnableName, priority, waveHandlerRunnable);
         } else {
             // Otherwise we can perform it right now into the current thread (JRebirthThread - JIT)
             waveHandlerRunnable.run();
         }
 
-    }
-
-    /**
-     * Build the wave runnable handler that will handle the wave into the right thread.
-     *
-     * @param wave the wave to handle
-     * @param customMethod the custom method to call (could be null)
-     * @param priority the runnable priority to use
-     *
-     * @return the right JRebirth Runnable
-     */
-    private JRebirthRunnable buildWaveRunnable(final Wave wave, final Method customMethod, final PriorityLevel priority) {
-
-        final WaveHandler waveHandler = this;
-
-        return new JrbReferenceRunnable(
-                                        getWaveReady().getClass().getSimpleName() + " handle wave " + wave.toString(),
-                                        priority,
-                                        () -> {
-                                            try {
-                                                performHandle(wave, customMethod);
-                                            } catch (final WaveException e) {
-                                                LOGGER.error(WAVE_HANDLING_ERROR, e);
-                                            } finally {
-                                                wave.removeWaveHandler(waveHandler);
-                                            }
-                                        });
     }
 
     /**

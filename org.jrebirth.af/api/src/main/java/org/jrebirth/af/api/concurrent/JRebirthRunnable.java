@@ -29,6 +29,18 @@ import org.jrebirth.af.api.annotation.PriorityLevel;
 @FunctionalInterface
 public interface JRebirthRunnable extends Runnable {
 
+	/** The default text used for unnamed runnable. */
+	String UNNAMED_RUNNABLE = "Unnamed Runnable";
+
+	/**
+	 * Return the runnable name used to distinguish all runnable.
+	 *  
+	 * @return the runnable name 
+	 */
+	default String runnableName() {
+		return UNNAMED_RUNNABLE;
+	}
+	
     /**
      * Return the runnable priority.
      *

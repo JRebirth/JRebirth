@@ -87,7 +87,7 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         setDaemon(true);
 
         // Initialize the queue
-        this.processingTasks = new PriorityBlockingQueue<JRebirthRunnable>(10, new JRebirthRunnableComparator());
+        this.processingTasks = new PriorityBlockingQueue<>(10, new JRebirthRunnableComparator());
     }
 
     /**

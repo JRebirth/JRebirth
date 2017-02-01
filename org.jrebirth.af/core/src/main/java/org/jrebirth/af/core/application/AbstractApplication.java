@@ -46,7 +46,6 @@ import org.jrebirth.af.api.ui.ModuleModel;
 import org.jrebirth.af.core.component.factory.RegistrationPointItemBase;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
-import org.jrebirth.af.core.concurrent.JrbReferenceRunnable;
 import org.jrebirth.af.core.exception.handler.DefaultUncaughtExceptionHandler;
 import org.jrebirth.af.core.exception.handler.JatUncaughtExceptionHandler;
 import org.jrebirth.af.core.exception.handler.JitUncaughtExceptionHandler;
@@ -579,10 +578,10 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         Thread.setDefaultUncaughtExceptionHandler(getDefaultUncaughtExceptionHandler());
 
         // Initialize the uncaught exception handler for JavaFX Application Thread
-        JRebirth.runIntoJAT(new JrbReferenceRunnable(ATTACH_JAT_UEH.getText(), () -> Thread.currentThread().setUncaughtExceptionHandler(getJatUncaughtExceptionHandler())));
+        JRebirth.runIntoJAT(ATTACH_JAT_UEH.getText(), () -> Thread.currentThread().setUncaughtExceptionHandler(getJatUncaughtExceptionHandler()));
 
         // Initialize the uncaught exception handler for JRebirth Internal Thread
-        JRebirth.runIntoJIT(new JrbReferenceRunnable(ATTACH_JIT_UEH.getText(), () -> Thread.currentThread().setUncaughtExceptionHandler(getJitUncaughtExceptionHandler())));
+        JRebirth.runIntoJIT(ATTACH_JIT_UEH.getText(), () -> Thread.currentThread().setUncaughtExceptionHandler(getJitUncaughtExceptionHandler()));
     }
 
     /**

@@ -5,11 +5,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.concurrent.JRebirthRunnable;
+import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.core.application.JRebirthApplicationTest;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testfx.framework.junit.ApplicationTest;
@@ -29,25 +32,76 @@ public class ThreadTest extends JRebirthApplicationTest<ThreadApplication> {
         ApplicationTest.launch(ThreadApplication.class);
     }
 
+    @Rule
+    public final ExpectedException jrte = ExpectedException.none();
+
+    @Test
+    public void checkJATok() {
+        JRebirth.runIntoJAT("Check JAT OK", () -> JRebirth.checkJAT());
+    }
+
+    @Test(expected = JRebirthThreadException.class)
+    public void checkJATko() {
+        JRebirth.checkJAT();
+    }
+
+    // @Test
+    public void checkJATko2() {
+        JRebirth.runIntoJIT("Check JAT KO", () -> {
+            jrte.expect(JRebirthThreadException.class);
+            JRebirth.checkJAT();
+        });
+    }
+
+    @Test
+    public void checkJITok() {
+        JRebirth.runIntoJIT("Check JIT OK", () -> JRebirth.checkJIT());
+    }
+
+    @Test(expected = JRebirthThreadException.class)
+    public void checkJITko() {
+        JRebirth.checkJIT();
+    }
+
+    // @Test(expected=JRebirthThreadException.class)
+    public void checkJITko2() {
+        JRebirth.runIntoJTP("Check JIT KO", () -> JRebirth.checkJIT());
+    }
+
+    @Test
+    public void checkJTPok() {
+        JRebirth.runIntoJTP("Check JTP OK", () -> JRebirth.checkJTPSlot());
+    }
+
+    @Test(expected = JRebirthThreadException.class)
+    public void checkJTPko() {
+        JRebirth.checkJTPSlot();
+    }
+
+    // @Test(expected=JRebirthThreadException.class)
+    public void checkJTPko2() {
+        JRebirth.runIntoJAT("Check JTP KO", () -> JRebirth.checkJTPSlot());
+    }
+
     @Test
     public void testJAT() {
 
         final AtomicBoolean ok = new AtomicBoolean(false);
 
-        JRebirth.runIntoJAT(new JrbReferenceRunnable("Jat test", () -> {
+        JRebirth.runIntoJAT("Jat test", () -> {
             LOGGER.info("Running into " + Thread.currentThread().getName());
             ok.set(JRebirth.isJAT());
-        }));
+        });
 
         checkBoolean(ok);
     }
 
     @Test
-    public void testJIT() {
+    public void testJIT1() {
 
         final AtomicBoolean ok = new AtomicBoolean(false);
 
-        JRebirth.runIntoJIT(new JrbReferenceRunnable("JIT test", () -> {
+        JRebirth.runIntoJIT(new JrbReferenceRunnable("JIT test 1", () -> {
             LOGGER.info("Running into " + Thread.currentThread().getName());
             ok.set(JRebirth.isJIT());
         }));
@@ -56,14 +110,66 @@ public class ThreadTest extends JRebirthApplicationTest<ThreadApplication> {
     }
 
     @Test
-    public void testJTP() {
+    public void testJIT2() {
 
         final AtomicBoolean ok = new AtomicBoolean(false);
 
-        JRebirth.runIntoJTP(new JrbReferenceRunnable("JTP test", () -> {
+        JRebirth.runIntoJIT("JIT test 2", () -> {
+            LOGGER.info("Running into " + Thread.currentThread().getName());
+            ok.set(JRebirth.isJIT());
+        });
+
+        checkBoolean(ok);
+    }
+
+    @Test
+    public void testJIT3() {
+
+        final AtomicBoolean ok = new AtomicBoolean(false);
+
+        JRebirth.runIntoJIT("JIT test 3", PriorityLevel.Highest, () -> {
+            LOGGER.info("Running into " + Thread.currentThread().getName());
+            ok.set(JRebirth.isJIT());
+        });
+
+        checkBoolean(ok);
+    }
+
+    @Test
+    public void testJTP1() {
+
+        final AtomicBoolean ok = new AtomicBoolean(false);
+
+        JRebirth.runIntoJTP(new JrbReferenceRunnable("JTP test 1", () -> {
             LOGGER.info("Running into " + Thread.currentThread().getName());
             ok.set(JRebirth.isJTPSlot());
         }));
+
+        checkBoolean(ok);
+    }
+
+    @Test
+    public void testJTP2() {
+
+        final AtomicBoolean ok = new AtomicBoolean(false);
+
+        JRebirth.runIntoJTP("JTP test 2", () -> {
+            LOGGER.info("Running into " + Thread.currentThread().getName());
+            ok.set(JRebirth.isJTPSlot());
+        });
+
+        checkBoolean(ok);
+    }
+
+    @Test
+    public void testJTP3() {
+
+        final AtomicBoolean ok = new AtomicBoolean(false);
+
+        JRebirth.runIntoJTP("JTP test 3", PriorityLevel.Highest, () -> {
+            LOGGER.info("Running into " + Thread.currentThread().getName());
+            ok.set(JRebirth.isJTPSlot());
+        });
 
         checkBoolean(ok);
     }
