@@ -121,6 +121,7 @@
 									<Class-Path>.</Class-Path>
 								</manifestEntries>
 							</transformer>
+							<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
 						</transformers>
 						<finalName>${archiveName}-${project.version}</finalName>
 					</configuration>
