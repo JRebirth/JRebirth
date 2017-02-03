@@ -1,6 +1,11 @@
 package org.jrebirth.af.core.application;
 
+import java.lang.reflect.Field;
+
+import javafx.scene.Node;
+
 import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
@@ -46,7 +51,7 @@ public class JRebirthApplicationTest<A extends DefaultApplication<?>> extends Fx
         }
     }
 
-    protected void hold(long... time) {
+    protected void hold(final long... time) {
         try {
             Thread.sleep(time.length > 0 ? time[0] : 100);
         } catch (final InterruptedException e) {
@@ -57,7 +62,7 @@ public class JRebirthApplicationTest<A extends DefaultApplication<?>> extends Fx
     /**
      * @param wave
      */
-    protected void waitWave(Wave wave) {
+    protected void waitWave(final Wave wave) {
         while (wave.status() != Wave.Status.Handled) {
             try {
                 Thread.sleep(10);
@@ -65,6 +70,22 @@ public class JRebirthApplicationTest<A extends DefaultApplication<?>> extends Fx
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * @param model
+     * @throws IllegalAccessException
+     */
+    protected Node grabInternalNode(final Model model, final String nodeName) {
+        try {
+            final Field f = model.view().getClass().getDeclaredField(nodeName);
+            f.setAccessible(true);
+            return (Node) f.get(model.view());
+
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
