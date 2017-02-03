@@ -15,26 +15,12 @@ import org.jrebirth.af.core.application.DefaultApplication;
 @Configuration(".-jrebirth")
 public class EmptyTestApplication extends DefaultApplication<Pane> {
 
-    private static EmptyTestApplication instance;
-
-    public static EmptyTestApplication getInstance() {
-        return instance;
-    }
-
     /**
      * {@inheritDoc}
      */
     @Override
     public Class<? extends Model> firstModelClass() {
         return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void customizeStage(final Stage stage) {
-        instance = this;
     }
 
     /**

@@ -38,7 +38,7 @@ public final class JRebirth {
      * Private Constructor.
      */
     private JRebirth() {
-        super();
+        // Nothing to do
     }
 
     /**
@@ -108,7 +108,7 @@ public final class JRebirth {
      * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
      */
     public static void runSync(final RunType runInto, final String runnableName, final Runnable runnable, final long... timeout) {
-        run(runInto, new JrbReferenceRunnable(runnableName, runnable), timeout);
+        runSync(runInto, new JrbReferenceRunnable(runnableName, runnable), timeout);
     }
 
     /**
@@ -121,7 +121,7 @@ public final class JRebirth {
      * @param timeout the optional timeout value after which the thread will be released (default is 1000 ms)
      */
     public static void runSync(final RunType runInto, final String runnableName, final PriorityLevel runnablePriority, final Runnable runnable, final long... timeout) {
-        run(runInto, new JrbReferenceRunnable(runnableName, runnablePriority, runnable), timeout);
+    	runSync(runInto, new JrbReferenceRunnable(runnableName, runnablePriority, runnable), timeout);
     }
 
     /**

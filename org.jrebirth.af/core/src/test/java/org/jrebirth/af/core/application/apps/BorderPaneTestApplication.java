@@ -15,26 +15,12 @@ import org.jrebirth.af.core.application.DefaultApplication;
 @Configuration(".-jrebirth")
 public class BorderPaneTestApplication extends DefaultApplication<Pane> {
 
-    private static BorderPaneTestApplication instance;
-
-    public static BorderPaneTestApplication getInstance() {
-        return instance;
-    }
-
     /**
      * {@inheritDoc}
      */
     @Override
     public Class<? extends Model> firstModelClass() {
         return BorderPaneModel.class;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void customizeStage(final Stage stage) {
-        instance = this;
     }
 
     /**
