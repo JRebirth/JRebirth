@@ -9,7 +9,6 @@ import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseModel;
 
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
 /**
@@ -24,7 +23,7 @@ public class FXMLApplicationTest extends JRebirthApplicationTest<FXMLApplication
         ApplicationTest.launch(FXMLApplication.class);
     }
 
-    @Test
+    // @Test
     public void fxmlApp() {
 
         sleep(500, TimeUnit.MILLISECONDS);
