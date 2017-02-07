@@ -8,9 +8,12 @@
 <div id="catcherTitle">How to use JRebirth Application Framework</div>
 <div id="catcherContent">This page will help you setting up your project to work with JRebirth.</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
 
-        
+#[[
+       
 Installation
 =========================
 
@@ -186,5 +189,9 @@ If sometimes you need to test a Snapshot version use OJO (Snapshot repo) and our
 <!-- MACRO{include|source=../includes/All-In-One_Profile_Settings.xml}-->
 <!-- snippet=xp://profiles -->
 
-#parse("TocList.vm")
-#displayFooterToc("Installation")
+]]#
+
+#if( !$all )
+	#parse("TocList.vm")
+	#displayFooterToc("Installation")
+#end

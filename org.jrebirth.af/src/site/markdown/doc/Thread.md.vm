@@ -7,7 +7,11 @@
 <div id="catcherTitle">Thread Management</div>
 <div id="catcherContent">Writing concurrent application could be painful ! Not with JRebirth</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
+
+#[[
 
 Thread Management
 ====================
@@ -185,6 +189,10 @@ The default behavior is:
 - returnData => always into JTP
 - callCommand => Depends on Command called
 
+]]#
 
+
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Thread")
+#end

@@ -7,7 +7,12 @@
 <div id="catcherTitle">Modularization</div>
 <div id="catcherContent">How to modularize your application at runtime</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
+
+#[[
+
 
 Modularization
 ====================
@@ -36,7 +41,9 @@ Module Auto-loading
 
 To automate management of modules, JRebirth uses an annotation processor (at compilation time).
 
+]]#
 
-
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Modularization")
+#end

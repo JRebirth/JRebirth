@@ -8,7 +8,12 @@
 <div id="catcherTitle">Notifier &amp; Components</div>
 <div id="catcherContent">Provide a communication means between top-level components</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
+
+#[[
+
         
 Messaging engine
 =========================
@@ -33,7 +38,9 @@ The notification engine uses custom objects to transport data : Waves.
 
 We will have an overview of them within the next section.
 
+]]#
 
-
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Notifier")
+#end

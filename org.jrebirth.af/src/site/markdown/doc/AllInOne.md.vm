@@ -1,0 +1,31 @@
+<div id="catcherTitle">JRebirth Application Framework Documentation</div>
+<div id="catcherContent">Learn how to use JRebirth to help you building sophisticated application in minutes.</div>
+
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+
+#set( $all = true)
+
+# All In One Documentation Page
+
+#parse("Introduction.md.vm")
+#parse("Installation.md.vm")
+#parse("Overview.md.vm")
+#parse("Application.md.vm")
+#parse("Thread.md.vm")
+#parse("Logging.md.vm")
+#parse("Facades.md.vm")
+#parse("Notifier.md.vm")
+#parse("Wave.md.vm")
+#parse("Commands.md.vm")
+#parse("Services.md.vm")
+#parse("Ui.md.vm")
+#parse("Behavior.md.vm")
+#parse("Resources.md.vm")
+
+
+<head>
+<![CDATA[
+	<title>JRebirth All-In-One Documentation Page</title>
+]]>
+</head> 
+

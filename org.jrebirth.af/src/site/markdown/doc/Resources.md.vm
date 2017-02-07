@@ -8,7 +8,11 @@
 <div id="catcherTitle">Using Resources</div>
 <div id="catcherContent">Decrease your memory footprint by using resource wrapper</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} --> 
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
+
+#[[
 
 Resources
 =========================
@@ -108,6 +112,9 @@ Hereafter the enumeration that stores font names.
 
 <!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/font/TestFontNames.java|snippet=aj:..TestFontNames}-->
 
+]]#
 
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Resources")
+#end

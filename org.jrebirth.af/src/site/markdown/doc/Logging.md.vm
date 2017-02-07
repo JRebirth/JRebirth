@@ -8,8 +8,12 @@
 <div id="catcherTitle">To log or not to log !</div>
 <div id="catcherContent">Logging is so important to diagnose UI bugs.</div>
 
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
+#[[
+
         
 Logging
 =========================
@@ -116,6 +120,9 @@ All these log messages are store into an interface implemented by the class to l
 
 <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/ConcurrentMessages.java|snippet=aj:ConcurrentMessages}-->
 
+]]#
 
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Logging")
+#end

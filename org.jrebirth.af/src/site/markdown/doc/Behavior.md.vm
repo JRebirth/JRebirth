@@ -9,8 +9,11 @@
 <div id="catcherContent">Extend your Components.</div>
 
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
 
+#[[
 
 Behavior
 ==============
@@ -32,6 +35,9 @@ Overview
 Behavior Data
 ============================
     
+]]#
 
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Behavior")
+#end

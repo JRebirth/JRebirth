@@ -8,7 +8,12 @@
 <div id="catcherTitle">Overview of JRebirth Application Framework Core Architecture</div>
 <div id="catcherContent">JRebirth Application Framework offers a very efficient pattern to build real Professional JavaFX applications.</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
+
+#[[
+
         
 Overview
 =========================
@@ -125,10 +130,11 @@ A controller can implements custom Adapters to manage events (like MouseAdapter)
 Or it can simply implement custom methods if annotations are used.
 They also provide a set of convenient methods used to perform common event handling, ie: sending a wave when a button click is performed.
 
+]]#
 
-
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Overview")
-
+#end
 
 <div style="clear:both"></div>

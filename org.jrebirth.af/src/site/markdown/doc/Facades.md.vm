@@ -8,8 +8,12 @@
 <div id="catcherTitle">Facades Area</div>
 <div id="catcherContent">Simplify component accessibility.</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
-        
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
+
+#[[
+  
 Facade(s)
 =========================
 
@@ -119,6 +123,9 @@ JRebirth allows to track all creation &amp; finalization of each component (Comm
 	
 They are logged in order to be processed later by the JRebirthAnalyzer tool.
 
+]]#
 
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Facades")
+#end

@@ -8,8 +8,11 @@
 <div id="catcherTitle">Application Starter</div>
 <div id="catcherContent">How to create your first start class.</div>
 
-<!-- MACRO{toc|section=0|fromDepth=0|toDepth=4|class=toc} -->
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
 
+#[[
 
 # Application
 
@@ -345,5 +348,9 @@ You can disable it by setting an empty **@Localized** annotation.
 
 <!-- MACRO{include|source=core/src/test/java/org/jrebirth/af/core/application/apps/NullConfApplication.java|snippet=re:(@Localized)} -->
 
+]]#
+
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Application")
+#end

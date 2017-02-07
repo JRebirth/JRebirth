@@ -8,11 +8,18 @@
 <div id="catcherTitle">Cosntroller Area</div>
 <div id="catcherContent">Allow to handle user events</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
-        
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
+
+#[[   
+       
 Constrollers
 =========================
 
+]]#
 
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Controllers")
+#end

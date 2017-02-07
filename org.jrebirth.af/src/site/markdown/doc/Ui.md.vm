@@ -7,10 +7,12 @@
 <div id="catcherTitle">User Interface Area</div>
 <div id="catcherContent">Use a custom MVC pattern with a lot of convenient tricks</div>
 
-<div class="toc">
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
-</div>
 
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=0|toDepth=6|class=toc} -->
+#end   
+
+#[[
         
 UI Roles
 ===========
@@ -135,7 +137,10 @@ Controllers
 Adapters & Handlers
 --------------------------
 
+]]#
 
 
+#if(!$all)
 #parse("TocList.vm")
 #displayFooterToc("Ui")
+#end

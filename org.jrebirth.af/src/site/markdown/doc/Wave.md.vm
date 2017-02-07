@@ -8,8 +8,12 @@
 <div id="catcherTitle">Wave Area</div>
 <div id="catcherContent">Allow asynchronous communication between components</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
-        
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
+
+#[[
+       
 Wave Overview
 =========================
 
@@ -118,6 +122,10 @@ It's possible to chain command by using the	**ChainWaveCommand** class. A sample
 
 <!-- snippet=aj:..bootUp() -->
 
+]]#
 
-#parse("TocList.vm")
-#displayFooterToc("Wave")
+
+#if( !$all )
+	#parse("TocList.vm")
+	#displayFooterToc("Wave")
+#end

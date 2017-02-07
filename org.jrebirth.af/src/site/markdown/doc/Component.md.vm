@@ -7,8 +7,11 @@
 <div id="catcherTitle">Create your Components</div>
 <div id="catcherContent">Component allow reusability and provide good SoC</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
 
+#[[
 
 Component definition
 =========================
@@ -37,7 +40,9 @@ Wave, View and Controller are not JRebirth Components.
 Component Registration
 -----------------------
 
+]]#
 
-
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Component")
+#end

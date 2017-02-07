@@ -8,8 +8,12 @@
 <div id="catcherTitle">Service Area</div>
 <div id="catcherContent">Process configurable action</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4} -->
-        
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
+
+#[[
+     
 Services
 =========================
 
@@ -180,6 +184,9 @@ You can update progress bar indicator by calling this method:
 
 <!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/impl/LoadEdtFileServiceImpl.java|snippet=re:updateProgress}-->
 
+]]#
 
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Services")
+#end

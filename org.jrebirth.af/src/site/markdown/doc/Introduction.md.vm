@@ -7,6 +7,7 @@
 <div id="catcherTitle">JRebirth Origins</div>
 <div id="catcherContent">The small story of JRebirth project.</div>
 
+#[[
         
 Introduction
 =========================
@@ -77,6 +78,9 @@ Main features of JRebirth Application Framework are:
 5. Be lightweight and modularizable
 6. Follow OSS spirit and Java Best Practices
 
+]]#
 
+#if( !$all )
 #parse("TocList.vm")
 #displayFooterToc("Introduction")
+#end

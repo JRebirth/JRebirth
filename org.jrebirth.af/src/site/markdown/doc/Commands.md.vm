@@ -8,8 +8,13 @@
 <div id="catcherTitle">Command Area</div>
 <div id="catcherContent">Reuse common code and don't be scared by threading issue</div>
 
-<!-- MACRO{toc|section=0|fromDepth=0|toDepth=4} -->
-        
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end   
+
+#[[   
+
+
 Command Overview
 =========================
 
@@ -238,5 +243,9 @@ For example you can attach a command to a **Model** and launch it several times 
 
 <!-- Parent Command  When you use a command into a **MultiCommand** , this property will hold a strong reference to it.   -->
 
-#parse("TocList.vm")
+]]#
+
+#if( !$all )
+parse("TocList.vm")
 #displayFooterToc("Commands")
+#end
