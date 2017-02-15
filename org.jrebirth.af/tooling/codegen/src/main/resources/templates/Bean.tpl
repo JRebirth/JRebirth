@@ -1,3 +1,11 @@
+{!-- Create Template --}
+{#Creator}
+
+return new {$bean.class_name}();
+
+{#}
+
+
 {!-- Simple Getter Template --}
 {#Getter}
 

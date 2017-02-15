@@ -35,6 +35,8 @@ public class BeanGenerator extends AbstractGenerator<FXBeanDefinition> {
             writeProperty(javaClass, propDef);
         });
 
+        writeCreator(javaClass, beanDef);
+
         beanDef.getProperties().stream().forEach(propDef -> {
             writeGetter(javaClass, propDef);
             writeSetter(javaClass, propDef);
@@ -44,6 +46,29 @@ public class BeanGenerator extends AbstractGenerator<FXBeanDefinition> {
 
         return formatClass(javaClass);
 
+    }
+
+    private void writeCreator(final JavaClassSource javaClass, final FXBeanDefinition beanDef) {
+
+        if (!javaClass.hasMethodSignature("create")) {
+
+            final StringBuilder javadoc = new StringBuilder();
+            javadoc
+                   .append("Build a new instance of {@link ").append(beanDef.getClassName()).append("}.");
+
+            final String body = Templates.use(TemplateName.Creator, beanDef);
+
+            final MethodSource<?> method = javaClass.addMethod()
+                                                    .setName("create")
+                                                    .setPublic()
+                                                    .setStatic(true)
+                                                    .setBody(body)
+                                                    .setReturnType(beanDef.getClassName());
+            method.getJavaDoc().setFullText(javadoc.toString())
+                  .addTagValue("@return", "a fresh instance");
+        } else {
+            // javaClass.getMethod(propDef.getName()).setBody(javaClass.getMethod(propDef.getName()).getBody() + body.toString());
+        }
     }
 
     private void writeField(final JavaClassSource javaClass, final FXPropertyDefinition propDef) {

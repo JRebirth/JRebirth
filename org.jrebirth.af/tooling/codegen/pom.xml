@@ -16,7 +16,7 @@
 	<description>Code generator tool module</description>
 
 	<properties>
-		<roaster.version>2.18.4.Final</roaster.version>
+		<roaster.version>2.19.5.Final</roaster.version>
 	</properties>
 
 	<dependencies>

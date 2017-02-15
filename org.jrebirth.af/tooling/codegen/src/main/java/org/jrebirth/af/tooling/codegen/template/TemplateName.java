@@ -8,7 +8,9 @@ public enum TemplateName {
 
     PropertyGetter, PropertyGetter_List, PropertyGetter_Map,
 
-    Property
+    Property,
+
+    Creator
 
     ;
 }
