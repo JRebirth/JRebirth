@@ -4,7 +4,9 @@ import java.lang.reflect.Field;
 
 import javafx.scene.Node;
 
+import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.concurrent.JRebirth;
@@ -86,6 +88,22 @@ public class JRebirthApplicationTest<A extends DefaultApplication<?>> extends Fx
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * @param model
+     * @throws IllegalAccessException
+     */
+    protected <M extends Model> M model(final Class<M> modelClass) {
+        return JRebirthThread.getThread().getFacade().uiFacade().retrieve(modelClass);
+    }
+
+    protected <S extends Service> S service(final Class<S> serviceClass) {
+        return JRebirthThread.getThread().getFacade().serviceFacade().retrieve(serviceClass);
+    }
+
+    protected <C extends Command> C command(final Class<C> commandClass) {
+        return JRebirthThread.getThread().getFacade().commandFacade().retrieve(commandClass);
     }
 
 }
