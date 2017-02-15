@@ -198,28 +198,28 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
 
     /**
      * Hook called before execution of all sub commands.
-     * 
+     *
      * @param wave the wave that triggered the multi command
      */
     protected abstract void before(Wave wave);
 
     /**
      * Hook called after execution of all sub commands.
-     * 
+     *
      * @param wave the wave that triggered the multi command
      */
     protected abstract void after(Wave wave);
 
     /**
      * Hook called before each call of sub commands.
-     * 
+     *
      * @param wave the wave that triggered the multi command
      */
     protected abstract void beforeEach(Wave wave, Wave childWave);
 
     /**
      * Hook called after each call of sub commands. Command is probably not completed.
-     * 
+     *
      * @param wave the wave that triggered the multi command
      */
     protected abstract void afterEach(Wave wave, Wave childWave);
@@ -266,23 +266,25 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
                                                             .addDatas(wave.waveDatas().toArray(new WaveDataBase[0]))
                                                             .addWaveListener(this);
                         beforeEach(wave, subCommandWave);
+
                         sendWave(subCommandWave);
-                        afterEach(wave, subCommandWave);
                     }
                 }
 
             } else {
 
-                // Store the original wave to be able to mark it as consumed when all of these sub comamnds are achieved
+                // Store the original wave to be able to mark it as consumed when all of these sub commands are achieved
                 this.waveSource = wave;
 
                 synchronized (this) {
 
                     // Launch all sub command in parallel
                     for (final UniqueKey<? extends Command> commandKey : this.subCommandList) {
+
                         beforeEach(wave, null);
+
                         final Wave commandWave = localFacade().retrieve(commandKey).run();
-                        afterEach(wave, commandWave);
+
                         // register to Wave status of all command triggered
                         commandWave.addWaveListener(this);
 
@@ -308,6 +310,9 @@ public abstract class AbstractMultiCommand<WB extends WaveBean> extends Abstract
     @Override
     public void waveHandled(final Wave wave) {
         synchronized (this) {
+
+            afterEach(this.waveSource, wave);
+
             if (isSequential()) {
 
                 // Move the index to retrieve the next command to run
