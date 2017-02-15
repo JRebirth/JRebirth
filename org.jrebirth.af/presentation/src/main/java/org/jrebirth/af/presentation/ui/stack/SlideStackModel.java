@@ -284,6 +284,13 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
     }
 
     /**
+     * @return Returns the slideAnimation.
+     */
+    public ParallelTransition getSlideAnimation() {
+        return slideAnimation;
+    }
+
+    /**
      * Got to next slide.
      */
     public void next(final boolean skipSlideStep) {
