@@ -98,12 +98,13 @@ public interface CommandReady {
      * The command will be called from JRebirthThread and could execute itself from another thread.
      *
      * @param commandClass the command class to call
-     * @param waveBean the WaveBean that holds all required wave data
+     * @param waveBean the WaveBean that holds all required data
+     * @param waveBeans the extra Wave Beans that holds all other required data
      *
      * @param <WB> the type of the wave bean to used
      *
      * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
      */
-    <WB extends WaveBean> Wave callCommand(final Class<? extends CommandBean<WB>> commandClass, final WB waveBean);
+    Wave callCommand(final Class<? extends CommandBean<? extends WaveBean>> commandClass, final WaveBean waveBean, final WaveBean... waveBeans);
 
 }

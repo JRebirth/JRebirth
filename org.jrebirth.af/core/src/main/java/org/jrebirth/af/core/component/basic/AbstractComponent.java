@@ -22,6 +22,7 @@ import static org.jrebirth.af.core.wave.WBuilder.wave;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -230,8 +231,8 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      * {@inheritDoc}
      */
     @Override
-    public final <WB extends WaveBean> Wave callCommand(final Class<? extends CommandBean<WB>> commandClass, final WB waveBean) {
-        return sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, waveBean));
+    public final Wave callCommand(final Class<? extends CommandBean<? extends WaveBean>> commandClass, final WaveBean waveBean, final WaveBean... waveBeans) {
+        return sendWaveIntoJit(createWave(WaveGroup.CALL_COMMAND, null, commandClass, waveBean, waveBeans));
     }
 
     /**
@@ -328,18 +329,25 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      * @param waveGroup the group of the wave
      * @param waveType the type of the wave
      * @param componentClass the component class if any
-     * @param waveBean the wave bean that holds all required wave data
+     * @param waveBean the wave bean that holds all required data
+     * @param waveBeans the extra Wave Beans that holds all other required data
      *
      * @return the wave built
      */
-    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveBean waveBean) {
+    private Wave createWave(final WaveGroup waveGroup, final WaveType waveType, final Class<?> componentClass, final WaveBean waveBean, final WaveBean... waveBeans) {
+
+        final List<WaveBean> waveBeanList = new ArrayList<>();
+        waveBeanList.add(waveBean);
+        if (waveBeans.length > 0) {
+            waveBeanList.addAll(Arrays.asList(waveBeans));
+        }
 
         final Wave wave = wave()
                                 .waveGroup(waveGroup)
                                 .waveType(waveType)
                                 .fromClass(this.getClass())
                                 .componentClass(componentClass)
-                                .waveBean(waveBean);
+                                .waveBeanList(waveBeanList);
 
         // Track wave creation
         localFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
