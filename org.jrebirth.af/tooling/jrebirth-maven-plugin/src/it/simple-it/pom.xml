@@ -24,10 +24,10 @@
             <id>GenerateCode</id>
             <phase>validate</phase>
             <goals>
-              <goal>ecore-maven-plugin</goal>
+              <goal>fromEcore</goal>
             </goals>
             <configuration>
-            	<ecore>Model.ecore</ecore>
+            	<ecore>model.ecore</ecore>
             </configuration>
           </execution>
         </executions>

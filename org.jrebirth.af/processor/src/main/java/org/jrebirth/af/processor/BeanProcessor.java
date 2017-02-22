@@ -43,9 +43,12 @@ import javax.tools.Diagnostic.Kind;
 import javax.tools.JavaFileObject;
 
 import org.jrebirth.af.api.annotation.bean.Bean;
-import org.jrebirth.af.tooling.codegen.bean.FXBeanDefinition;
-import org.jrebirth.af.tooling.codegen.bean.FXPropertyDefinition;
+import org.jrebirth.af.tooling.codegen.bean.Class;
+import org.jrebirth.af.tooling.codegen.bean.Property;
 import org.jrebirth.af.tooling.codegen.generator.Generators;
+
+import org.jboss.forge.roaster.Roaster;
+import org.jboss.forge.roaster.model.source.JavaClassSource;
 
 /**
  * The Class BeanProcessor.
@@ -87,7 +90,7 @@ public class BeanProcessor extends AbstractProcessor {
 
                 final Bean bean = element.getAnnotation(Bean.class);
 
-                final FXBeanDefinition beanDef = new FXBeanDefinition();
+                final Class beanDef = new Class();
 
                 final TypeElement classElement = (TypeElement) element;
                 final PackageElement packageElement = (PackageElement) classElement.getEnclosingElement();
@@ -95,9 +98,13 @@ public class BeanProcessor extends AbstractProcessor {
                 this.processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "annotated class: " + classElement.getQualifiedName(), element);
 
                 // fqClassName = classElement.getQualifiedName().toString();
-                beanDef.setClassName(bean.value());
-                beanDef.setPackageName(packageElement.getQualifiedName().toString());
-                beanDef.setSuperType(classElement.getSimpleName().toString());
+                beanDef.name(bean.value());
+                beanDef._package(org.jrebirth.af.tooling.codegen.bean.Package.create().qualifiedName(packageElement.getQualifiedName().toString()));
+
+                final Class td = new Class();
+                td.qualifiedName(classElement.getQualifiedName().toString());
+
+                beanDef.setSuperType(td);
 
                 for (final Element child : classElement.getEnclosedElements()) {
 
@@ -105,19 +112,19 @@ public class BeanProcessor extends AbstractProcessor {
 
                         final ExecutableElement method = (ExecutableElement) child;
 
-                        final FXPropertyDefinition propertyDef = new FXPropertyDefinition();
-                        propertyDef.setType(method.getReturnType().toString());
-                        propertyDef.setName(method.getSimpleName().toString());
-                        beanDef.getProperties().add(propertyDef);
+                        final Property propertyDef = new Property();
+                        propertyDef.type(Class.of(method.getReturnType().toString()));
+                        propertyDef.name(method.getSimpleName().toString());
+                        beanDef.properties().add(propertyDef);
 
                     } else if (child.getKind().isField()) {
 
                         final VariableElement field = (VariableElement) child;
 
-                        final FXPropertyDefinition propertyDef = new FXPropertyDefinition();
-                        propertyDef.setType(getClassName(field));
-                        propertyDef.setName(field.getSimpleName().toString());
-                        beanDef.getProperties().add(propertyDef);
+                        final Property propertyDef = new Property();
+                        propertyDef.type(Class.of(getClassName(field)));
+                        propertyDef.name(field.getSimpleName().toString());
+                        beanDef.properties().add(propertyDef);
 
                     }
                 }
@@ -133,9 +140,9 @@ public class BeanProcessor extends AbstractProcessor {
                 // fields.put(varElement.getSimpleName().toString(), varElement);
 
                 try {
-                    final String formattedSource = Generators.beanGenerator.generate(beanDef);
+                    final String formattedSource = Generators.beanGenerator.generate(beanDef, Roaster.create(JavaClassSource.class));
 
-                    final JavaFileObject jfo = this.processingEnv.getFiler().createSourceFile(beanDef.getFullClassName());
+                    final JavaFileObject jfo = this.processingEnv.getFiler().createSourceFile(beanDef.qualifiedName());
                     this.processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "creating source file: " + jfo.toUri());
 
                     final Writer writer = jfo.openWriter();

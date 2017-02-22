@@ -26,7 +26,7 @@ public class SnapshotCommand extends DefaultUIBeanCommand<SnapshotWaveBean> {
 
         } else {
 
-            image = wb.node().snapshot(wb.parameters, image);
+            image = wb.node().snapshot(wb.parameters(), image);
         }
 
         wb.image(image);

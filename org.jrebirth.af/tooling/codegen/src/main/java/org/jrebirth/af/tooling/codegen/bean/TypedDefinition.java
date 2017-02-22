@@ -15,18 +15,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.tooling.codegen.generator;
+package org.jrebirth.af.tooling.codegen.bean;
 
-import org.jboss.forge.roaster.model.source.JavaClassSource;
-import org.jboss.forge.roaster.model.source.JavaEnumSource;
-import org.jboss.forge.roaster.model.source.JavaInterfaceSource;
-import org.jrebirth.af.tooling.codegen.bean.Class;
+public class TypedDefinition<T extends TypedDefinition<T>> extends Nameable<T> {
 
-public interface Generators {
+    /** The type. */
+    private Class type;
 
-    AbstractGenerator<Class, JavaClassSource> beanGenerator = new BeanGenerator();
-    
-    AbstractGenerator<Class, JavaInterfaceSource> interfaceGenerator = new InterfaceGenerator();
-    
-    AbstractGenerator<Class, JavaEnumSource> enumGenerator = new EnumGenerator();
+    /**
+     * Gets the type.
+     *
+     * @return Returns the type.
+     */
+    public Class type() {
+        return this.type;
+    }
+
+    /**
+     * Sets the type.
+     *
+     * @param type The type to set.
+     */
+    public T type(final Class type) {
+        this.type = type;
+        return (T) this;
+    }
+
 }

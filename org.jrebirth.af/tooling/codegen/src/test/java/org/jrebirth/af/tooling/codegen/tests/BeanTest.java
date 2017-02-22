@@ -18,44 +18,66 @@
 package org.jrebirth.af.tooling.codegen.tests;
 
 
-import org.jrebirth.af.tooling.codegen.bean.FXBeanDefinition;
-import org.jrebirth.af.tooling.codegen.bean.FXPropertyDefinition;
+import org.jboss.forge.roaster.Roaster;
+import org.jboss.forge.roaster.model.source.JavaClassSource;
+import org.jboss.forge.roaster.model.source.JavaEnumSource;
+import org.jboss.forge.roaster.model.source.JavaInterfaceSource;
+import org.jrebirth.af.tooling.codegen.bean.Class;
+import org.jrebirth.af.tooling.codegen.bean.Operation;
+import org.jrebirth.af.tooling.codegen.bean.Parameter;
+import org.jrebirth.af.tooling.codegen.bean.Property;
+import org.jrebirth.af.tooling.codegen.bean.TypedDefinition;
 import org.jrebirth.af.tooling.codegen.generator.Generators;
 import org.junit.Test;
 
 public class BeanTest {
 
     @Test
-    public void testTheReturnItemOfReturnWaveType() {
+    public void testGenerateClass() {
        
-        FXBeanDefinition bean  =new FXBeanDefinition();
-        bean.setClassName("MyBean");
-        bean.setPackageName("org.jrebirth.af.tooling.codegen");
+        Class bean  = Class.of("org.jrebirth.af.tooling.codegen.MyBean");
        
-        FXPropertyDefinition p1 = new FXPropertyDefinition();
-        p1.setName("property1");
-        p1.setType("java.lang.String");
+        Property p1 = Property.of("property1")
+        		.type(Class.of("java.lang.String"));
        
-        FXPropertyDefinition p2 = new FXPropertyDefinition();
-        p2.setName("property2");
-        p2.setType("java.lang.String");
+        Property p2 = Property.of("property2")
+        .type(Class.of("java.lang.String"));
        
        
-        FXPropertyDefinition p3 = new FXPropertyDefinition();
-        p3.setName("property1");
-        p3.setType("java.lang.String");
+        Property p3 = Property.of("property1")
+        .type(Class.of("java.util.List<java.lang.String>"));
        
        
-        FXPropertyDefinition p4 = new FXPropertyDefinition();
-        p4.setName("property4");
-        p4.setType("java.lang.String");
+        Property p4 = Property.of("property4")
+        .type(Class.of("java.util.Map<java.lang.String>"));
        
-        bean.getProperties().add(p1);
-        bean.getProperties().add(p2);
-        bean.getProperties().add(p3);
-        bean.getProperties().add(p4);
+        bean.addProperty(p1, p2 ,p3, p4);
 
-        String output = Generators.beanGenerator.generate(bean);
+        String output = Generators.beanGenerator.generate(bean, Roaster.create(JavaClassSource.class));
+       
+        System.out.println(output);
+    }
+    
+    @Test
+    public void testGenerateInterface() {
+       
+        Class bean  = Class.of("org.jrebirth.af.tooling.codegen.MyInterface");
+       
+        Operation op = Operation.of("operation1").returnType(Class.of("java.lang.String")).addParameter(Parameter.of("param1").type(Class.of("java.lang.String")));
+        
+        bean.operations().add(op);
+        
+        String output = Generators.interfaceGenerator.generate(bean, Roaster.create(JavaInterfaceSource.class));
+       
+        System.out.println(output);
+    }
+    
+    @Test
+    public void testGenerateEnum() {
+       
+        Class bean  = Class.of("org.jrebirth.af.tooling.codegen.MyEnum");
+       
+        String output = Generators.enumGenerator.generate(bean, Roaster.create(JavaEnumSource.class));
        
         System.out.println(output);
     }

@@ -1,7 +1,7 @@
 {!-- Create Template --}
 {#Creator}
 
-return new {$bean.class_name}();
+return new {$bean.name}();
 
 {#}
 
@@ -100,8 +100,52 @@ return this;
 {#PropertyGetter_Map}
 
 if ({$bean.property_name} == null) {
-    {$bean.property_name} = FXCollections.observableList(this.$getter());
+    {$bean.property_name} = FXCollections.observableList(this.{$bean.name}());
 }
 return this.{$bean.property_name};
+
+{#}
+
+
+{#PropertyAddList}
+
+if ({$bean.property_name} != null) {
+	this.{$bean.property_name}.addAll(Arrays.asList({$bean.name}));
+} else {
+	this.{$bean.name}.addAll(Arrays.asList({$bean.name}));
+}
+return this;
+
+{#}
+
+
+{#PropertyRemoveList}
+
+if ({$bean.property_name} != null) {
+	this.{$bean.property_name}.removeAll(Arrays.asList({$bean.name}));
+} else {
+	this.{$bean.name}.removeAll(Arrays.asList({$bean.name}));
+}
+return this;
+
+{#}
+
+
+{#PropertyPutMap}
+
+// TODO
+return this;
+
+{#}
+
+
+{#PropertyRemoveMap}
+
+// TODO
+return this;
+
+{#}
+
+{#Operation}
 
 {#}

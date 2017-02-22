@@ -99,6 +99,7 @@
 				<configuration>
 					<goalPrefix>jrebirth</goalPrefix>
 					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+
 				</configuration>
 				<executions>
 					<execution>

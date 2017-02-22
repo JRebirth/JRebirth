@@ -15,18 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.tooling.codegen.generator;
+package org.jrebirth.af.tooling.codegen.bean;
 
-import org.jboss.forge.roaster.model.source.JavaClassSource;
-import org.jboss.forge.roaster.model.source.JavaEnumSource;
-import org.jboss.forge.roaster.model.source.JavaInterfaceSource;
-import org.jrebirth.af.tooling.codegen.bean.Class;
+public enum Visibility {
 
-public interface Generators {
-
-    AbstractGenerator<Class, JavaClassSource> beanGenerator = new BeanGenerator();
-    
-    AbstractGenerator<Class, JavaInterfaceSource> interfaceGenerator = new InterfaceGenerator();
-    
-    AbstractGenerator<Class, JavaEnumSource> enumGenerator = new EnumGenerator();
+    _public, _private, _protected, _package
 }
