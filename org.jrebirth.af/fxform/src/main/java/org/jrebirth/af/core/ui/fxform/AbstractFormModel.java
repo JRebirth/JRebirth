@@ -22,4 +22,13 @@ public abstract class AbstractFormModel<M extends AbstractFormModel<?, ?, ?>, V 
         // super.bind();
         view().node().setSource(object());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void unbind() {
+        // super.unbind();
+        view().node().setSource(null);
+    }
 }

@@ -46,7 +46,14 @@ public class DefaultFXMLObjectModel<M extends Model, O extends Object> extends A
     @Override
     protected void bind() {
         // Nothing to do yet
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void unbind() {
+        // Nothing to do yet
     }
 
     /**

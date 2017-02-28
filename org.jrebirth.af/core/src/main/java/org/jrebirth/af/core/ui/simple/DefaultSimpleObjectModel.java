@@ -83,16 +83,36 @@ public class DefaultSimpleObjectModel<N extends Node, O extends Object> extends 
         // Nothing to do yet
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void bindInternal() {
         // Nothing to do yet
-
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void bind() {
         // Nothing to do yet
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void unbindInternal() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void unbind() {
+        // Nothing to do yet
     }
 
 }

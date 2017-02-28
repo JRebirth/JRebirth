@@ -46,7 +46,7 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
 
     /** The class logger. */
     private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractObjectModel.class);
-    
+
     /** The list of type to exclude in order to find the object type from generics declaration. */
     private static final Class<?>[] OBJECT_EXCLUDED_CLASSES = new Class<?>[] { Model.class, View.class, Node.class, Controller.class };
 
@@ -93,7 +93,7 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
                 try {
                     this.object = (O) ClassUtility.buildGenericType(this.getClass(), OBJECT_EXCLUDED_CLASSES);
                 } catch (final CoreException ce) {
-                	LOGGER.log(UIMessages.CREATION_FAILURE, ce, this.getClass().getName());
+                    LOGGER.log(UIMessages.CREATION_FAILURE, ce, this.getClass().getName());
                     throw new CoreRuntimeException(ce);
                 }
             }
@@ -105,10 +105,17 @@ public abstract class AbstractObjectModel<M extends Model, V extends View<?, ?, 
      */
     @Override
     public void object(final O object) {
+        // Unbind previous object
+        if (this.object != null) {
+            unbindInternal();
+        }
+
         this.object = object;
 
         // Rebind current object
-        bindInternal();
+        if (this.object != null) {
+            bindInternal();
+        }
     }
 
 }

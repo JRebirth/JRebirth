@@ -19,6 +19,7 @@ package org.jrebirth.af.core.ui;
 
 import java.util.List;
 
+import org.jrebirth.af.api.annotation.OnRelease;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.log.JRLogger;
@@ -147,6 +148,20 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
 
         // Do custom binding stuff
         bind();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @OnRelease
+    @Override
+    protected void unbindInternal() {
+
+        // Manage auto-bound mechanism
+        // ...
+
+        // Do custom binding stuff
+        unbind();
     }
 
     /**

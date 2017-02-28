@@ -59,7 +59,14 @@ public class DefaultObjectModel<M extends Model, V extends View<?, ?, ?>, O exte
     @Override
     protected void bind() {
         // Nothing to do yet
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void unbind() {
+        // Nothing to do yet
     }
 
     /**

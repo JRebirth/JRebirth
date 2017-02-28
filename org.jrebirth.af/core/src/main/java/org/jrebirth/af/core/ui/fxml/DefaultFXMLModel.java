@@ -51,6 +51,15 @@ public class DefaultFXMLModel<M extends Model> extends AbstractFXMLModel<M> {
      * {@inheritDoc}
      */
     @Override
+    protected void unbind() {
+        // Nothing to do yet
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void initInnerComponents() {
         // Nothing to do yet
     }

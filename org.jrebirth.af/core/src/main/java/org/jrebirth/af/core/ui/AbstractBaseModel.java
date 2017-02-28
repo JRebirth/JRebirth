@@ -120,6 +120,20 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
     protected abstract void bind();
 
     /**
+     * Unbind current object to view's widget.
+     *
+     * This method is a hook to manage generic code before binding model's object.
+     *
+     * You must implement the {@link #unbind()} method to remove your bindings.
+     */
+    protected abstract void unbindInternal();
+
+    /**
+     * Unbind method to implement for adding custom bindings.
+     */
+    protected abstract void unbind();
+
+    /**
      * Show the view.<br />
      * In example : start the show transition
      *
