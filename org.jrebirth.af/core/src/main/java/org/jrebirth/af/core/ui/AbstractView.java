@@ -156,7 +156,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         initInternalView();
 
         // Activate the controller to listen all components (this+children)
-        controller().activate();
+        if (controller() != null) {
+            controller().activate();
+        }
 
         // Process class annotation
         processViewAnnotation();
@@ -175,7 +177,10 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
         // Find the AutoHandler annotation if any because it's optional
         final AutoHandler ah = ClassUtility.getLastClassAnnotation(this.getClass(), AutoHandler.class);
-        if (ah != null && ah.value() == CallbackObject.View) {
+
+        // Use the annotation value to define the callbackObject : View or Controller
+        // When controller is null always use the view as callbackObject
+        if (ah != null && ah.value() == CallbackObject.View || controller() == null) {
             this.callbackObject = this;
         } else {
             // by default use the controller object as callback object
