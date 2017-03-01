@@ -42,7 +42,6 @@
 		<module>fxform</module>
 		<module>undoredo</module>
 		<module>showcase</module>
-		<module>tooling</module>
 		<module>preloader</module>
 		<module>processor</module>
 		<module>security</module>
