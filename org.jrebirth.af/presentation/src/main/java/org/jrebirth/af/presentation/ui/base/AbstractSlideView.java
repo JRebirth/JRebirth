@@ -20,6 +20,7 @@ package org.jrebirth.af.presentation.ui.base;
 import javafx.scene.Parent;
 
 import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.ui.Controller;
 import org.jrebirth.af.core.ui.DefaultView;
 
 /**
@@ -31,7 +32,7 @@ import org.jrebirth.af.core.ui.DefaultView;
  * @param <N> the layout node
  * @param <C> the slide controller class
  */
-public abstract class AbstractSlideView<M extends AbstractSlideModel<?, ?, ?>, N extends Parent, C extends AbstractSlideController<?, ?>> extends
+public abstract class AbstractSlideView<M extends AbstractSlideModel<?, ?, ?>, N extends Parent, C extends Controller<?, ?>> extends
         DefaultView<M, N, C> {
 
     /** Sub slide animation flag. */
