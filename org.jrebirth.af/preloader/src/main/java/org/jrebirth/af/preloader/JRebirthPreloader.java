@@ -45,6 +45,7 @@ public class JRebirthPreloader extends AbstractJRebirthPreloader {
     protected Scene createPreloaderScene() {
 
         final StackPane p = new StackPane();
+        p.setStyle("-fx-background-color: transparent;");
 
         final ImageView logo = new ImageView(new Image("JRebirth_Title.png"));
         p.getChildren().add(logo);
@@ -61,7 +62,8 @@ public class JRebirthPreloader extends AbstractJRebirthPreloader {
         StackPane.setAlignment(this.messageText, Pos.BOTTOM_CENTER);
         StackPane.setMargin(this.messageText, new Insets(10));
 
-        return new Scene(p, 600, 200, Color.TRANSPARENT);
+        final Scene scene = new Scene(p, 600, 200, Color.TRANSPARENT);
+        return scene;
     }
 
     /**
@@ -78,6 +80,10 @@ public class JRebirthPreloader extends AbstractJRebirthPreloader {
         st.setNode(stage.getScene().getRoot());
         st.setOnFinished(actionEvent -> stage.hide());
         st.play();
+    }
+
+    public static void main(String... args) {
+        launch(args);
     }
 
 }
