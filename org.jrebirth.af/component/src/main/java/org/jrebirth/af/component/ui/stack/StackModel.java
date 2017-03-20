@@ -151,16 +151,22 @@ public class StackModel extends DefaultObjectModel<StackModel, StackView, StackC
             this.currentModelKey = waveBean.showModelKey();
 
             if (wave != null) {
+                // The method was called after having received a wave
+                // It will show the next page by sending a regular command, processed asynchronously into JAT after a JIT cycle
+                // This call is non-blocking
                 sendWave(WBuilder.callCommand(ShowFadingModelCommand.class)
                                  .waveBean(waveBean)
                                  .relatedWave(wave)
                                  .addWaveListener(new ServiceTaskReturnWaveListener()));
             } else {
+                // The showPage method has been called programmatically without any wave provided
+                // This is the first call used to initialize the stack so we perform the show transition immediately
                 final Wave showWave = WBuilder.callCommand(ShowFadingModelCommand.class)
                                               .waveBean(waveBean)
                                               .addDatas(JRebirthWaves.FORCE_SYNC);
-                // Run synchronously into JAT
-                getCommand(ShowFadingModelCommand.class).run(showWave);
+                // Run synchronously into JAT immediately without a waiting a JIT cycle
+                // This call will block current thread until page is shown
+                getCommand(ShowFadingModelCommand.class, showWave.wUID()).run(showWave);
 
             }
 

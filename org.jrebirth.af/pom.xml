@@ -210,6 +210,11 @@
 						<artifactId>doxia-module-markdown</artifactId>
 						<version>1.7</version>
 					</dependency>
+					<dependency>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoctor-maven-plugin</artifactId>
+						<version>1.5.5</version>
+					</dependency>
 				</dependencies>
 			</plugin>
 

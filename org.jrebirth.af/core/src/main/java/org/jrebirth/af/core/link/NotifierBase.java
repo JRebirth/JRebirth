@@ -133,8 +133,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
 
         // Use the Wave UID to guarantee that a new fresh command is built and used !
         final Command command = wave.contains(JRebirthWaves.REUSE_COMMAND) && wave.get(JRebirthWaves.REUSE_COMMAND)
-                ? getGlobalFacade().commandFacade().retrieve((Class<Command>) wave.componentClass())
-                : getGlobalFacade().commandFacade().retrieve((Class<Command>) wave.componentClass(), wave.wUID());
+                ? globalFacade().commandFacade().retrieve((Class<Command>) wave.componentClass())
+                : globalFacade().commandFacade().retrieve((Class<Command>) wave.componentClass(), wave.wUID());
 
         if (command == null) {
             LOGGER.error(COMMAND_NOT_FOUND_ERROR, wave.toString());
@@ -160,7 +160,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
     private void returnData(final Wave wave) {
 
         // Use only the Service class to retrieve the same instance each time
-        final Service service = getGlobalFacade().serviceFacade().retrieve((Class<Service>) wave.componentClass());
+        final Service service = globalFacade().serviceFacade().retrieve((Class<Service>) wave.componentClass());
 
         if (service == null) {
             LOGGER.error(SERVICE_NOT_FOUND_ERROR, wave.toString());
@@ -171,7 +171,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             // The inner task will be run into the JRebirth Thread Pool
             final ServiceTaskBase<?> task = (ServiceTaskBase<?>) service.returnData(wave);
             if (task != null && CoreParameters.FOLLOW_UP_SERVICE_TASKS.get()) {
-                getGlobalFacade().serviceFacade().retrieve(TaskTrackerService.class).trackTask(task);
+                globalFacade().serviceFacade().retrieve(TaskTrackerService.class).trackTask(task);
             }
 
         }

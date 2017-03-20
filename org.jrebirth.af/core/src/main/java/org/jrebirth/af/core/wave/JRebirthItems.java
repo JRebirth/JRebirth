@@ -86,7 +86,7 @@ public interface JRebirthItems {
     WaveItem<Long> syncTimeout = new WaveItemBase<Long>() {
     };
 
-    /** The special WaveItem used to define the priority for te given thread that will process the wave. */
+    /** The special WaveItem used to define the priority for the given thread that will process the wave. */
     WaveItem<PriorityLevel> priority = new WaveItemBase<PriorityLevel>() {
     };
 

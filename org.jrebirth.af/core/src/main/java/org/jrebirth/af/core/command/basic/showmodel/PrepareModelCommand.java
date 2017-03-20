@@ -59,7 +59,7 @@ public class PrepareModelCommand extends DefaultPoolBeanCommand<DisplayModelWave
             throw new CoreRuntimeException("Illegal action : Model Class is null");
         }
         // Retrieve the mode according to its keyPart
-        final Model modelInstance = localFacade().getGlobalFacade().uiFacade().retrieve(showModelKey);
+        final Model modelInstance = localFacade().globalFacade().uiFacade().retrieve(showModelKey);
 
         //
         // if (keyPart == null) {

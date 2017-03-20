@@ -83,7 +83,7 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
      */
     @Override
     protected void finalize() throws Throwable {
-        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_SERVICE, null, this.getClass());
+        localFacade().globalFacade().trackEvent(JRebirthEventType.DESTROY_SERVICE, null, this.getClass());
         super.finalize();
     }
 

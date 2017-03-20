@@ -109,7 +109,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
      * @return the notifier retrieved from global facade
      */
     private Notifier getNotifier() {
-        return localFacade().getGlobalFacade().notifier();
+        return localFacade().globalFacade().notifier();
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
                                 .addDatas(waveData);
 
         // Track wave creation
-        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
+        localFacade().globalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
 
         return wave;
     }
@@ -350,7 +350,7 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
                                 .waveBeanList(waveBeanList);
 
         // Track wave creation
-        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
+        localFacade().globalFacade().trackEvent(JRebirthEventType.CREATE_WAVE, this.getClass(), wave.getClass());
 
         return wave;
     }
@@ -643,13 +643,13 @@ public abstract class AbstractComponent<C extends Component<C>> extends Abstract
             // Use the right facade according to the inner component type
             if (Command.class.isAssignableFrom(innerComponentClass)) {
                 // Initialize the Inner Command
-                childComponent = (IC) localFacade().getGlobalFacade().commandFacade().retrieve((UniqueKey<Command>) innerComponent.key());
+                childComponent = (IC) localFacade().globalFacade().commandFacade().retrieve((UniqueKey<Command>) innerComponent.key());
             } else if (Service.class.isAssignableFrom(innerComponentClass)) {
                 // Initialize the Inner Service
-                childComponent = (IC) localFacade().getGlobalFacade().serviceFacade().retrieve((UniqueKey<Service>) innerComponent.key());
+                childComponent = (IC) localFacade().globalFacade().serviceFacade().retrieve((UniqueKey<Service>) innerComponent.key());
             } else if (Model.class.isAssignableFrom(innerComponentClass)) {
                 // Initialize the Inner Model
-                childComponent = (IC) localFacade().getGlobalFacade().uiFacade().retrieve((UniqueKey<Model>) innerComponent.key());
+                childComponent = (IC) localFacade().globalFacade().uiFacade().retrieve((UniqueKey<Model>) innerComponent.key());
             } else if (Behavior.class.isAssignableFrom(innerComponentClass)) {
                 // Cannot initialize Inner Behavior, they cannot be nested
                 throw new CoreRuntimeException("Behaviors can not be used as Inner EnhancedComponent"); // FIXME add MessageItem

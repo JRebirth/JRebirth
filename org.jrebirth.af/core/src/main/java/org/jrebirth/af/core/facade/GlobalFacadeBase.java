@@ -144,8 +144,8 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
     public final void trackEvent(final JRebirthEventType eventType, final Class<?> source, final Class<?> target, final String... eventData) {
         if (LOGGER.isInfoEnabled()) {
             final JRebirthEvent event = new JRebirthEventBase(this.eventSequence++, eventType,
-                                                              source == null ? null : source.getCanonicalName(),
-                                                              target == null ? null : target.getCanonicalName(), eventData);
+                                                              source == null ? null : source.getName(),
+                                                              target == null ? null : target.getName(), eventData);
             LOGGER.info(JREBIRTH_EVENT, event);
         }
     }

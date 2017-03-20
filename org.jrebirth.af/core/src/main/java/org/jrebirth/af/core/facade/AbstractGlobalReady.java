@@ -46,7 +46,7 @@ public abstract class AbstractGlobalReady implements GlobalReady {
      * {@inheritDoc}
      */
     @Override
-    public final GlobalFacade getGlobalFacade() {
+    public final GlobalFacade globalFacade() {
         return this.globalFacade;
     }
 }

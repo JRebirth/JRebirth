@@ -93,7 +93,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
 
         final UniqueKey<B> key = Key.create(behaviorClass, new Object[] { this }, key());
 
-        final B behavior = localFacade().getGlobalFacade().behaviorFacade().retrieve(key);
+        final B behavior = localFacade().globalFacade().behaviorFacade().retrieve(key);
 
         addBehavior(behavior);
 
@@ -113,7 +113,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
 
             final UniqueKey<? extends Behavior<?, ?>> key = Key.create(behaviorClass, optionalData, key());
 
-            addBehavior(localFacade().getGlobalFacade().behaviorFacade().retrieve(key));
+            addBehavior(localFacade().globalFacade().behaviorFacade().retrieve(key));
         }
         return (C) this;
     }

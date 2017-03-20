@@ -47,7 +47,7 @@ public class UpdateCursorCommand extends DefaultUICommand {
         // Check if a node has been provided
         if (node == null) {
             // Define the cursor on the application's root node
-            localFacade().getGlobalFacade().application().rootNode().setCursor(cursor);
+            localFacade().globalFacade().application().rootNode().setCursor(cursor);
         } else {
             // Define the cursor for the given node
             node.setCursor(cursor);

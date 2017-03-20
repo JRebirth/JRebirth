@@ -120,7 +120,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                 // Unlisten all previously listened WaveType
                 if (readyObject instanceof Component<?>) {
                     try {
-                        getGlobalFacade().notifier().unlistenAll((Component<?>) readyObject);
+                        globalFacade().notifier().unlistenAll((Component<?>) readyObject);
                     } catch (final JRebirthThreadException e) {
                         LOGGER.error(UNLISTEN_ALL_ERROR, readyObject.getClass().getSimpleName(), e);
                     }
@@ -290,7 +290,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     protected <E extends R> List<E> buildComponentList(final UniqueKey<E> uniqueKey) throws CoreException {
 
         // Build a new instance of the component
-        final List<E> readyObjectList = getGlobalFacade().componentFactory().buildComponents(uniqueKey.classField());
+        final List<E> readyObjectList = globalFacade().componentFactory().buildComponents(uniqueKey.classField());
 
         for (final E readyObject : readyObjectList) {
             // Retrieve the right event type to track
@@ -304,7 +304,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             }
 
             // Track this instantiation event
-            getGlobalFacade().trackEvent(type, this.getClass(), readyObject.getClass());
+            globalFacade().trackEvent(type, this.getClass(), readyObject.getClass());
 
             // Attach the local facade
             // Already Done by register method

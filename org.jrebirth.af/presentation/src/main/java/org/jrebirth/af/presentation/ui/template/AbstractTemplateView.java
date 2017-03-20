@@ -400,7 +400,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * @return the height ratio
      */
     protected NumberBinding bindHeight() {
-        return Bindings.divide(model().localFacade().getGlobalFacade().application().stage().heightProperty(), 768);
+        return Bindings.divide(model().localFacade().globalFacade().application().stage().heightProperty(), 768);
     }
 
     /**
@@ -409,7 +409,7 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      * @return the width ratio
      */
     protected NumberBinding bindWidth() {
-        return Bindings.divide(model().localFacade().getGlobalFacade().application().stage().widthProperty(), 1024);
+        return Bindings.divide(model().localFacade().globalFacade().application().stage().widthProperty(), 1024);
     }
 
     /**

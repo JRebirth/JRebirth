@@ -99,7 +99,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         this.model = model;
 
         // Track this view creation
-        model().localFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_VIEW, model().getClass(), this.getClass());
+        model().localFacade().globalFacade().trackEvent(JRebirthEventType.CREATE_VIEW, model().getClass(), this.getClass());
 
         try {
             // Build the root node of the view
@@ -465,7 +465,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      */
     @Override
     protected void finalize() throws Throwable {
-        model().localFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_VIEW, null, this.getClass());
+        model().localFacade().globalFacade().trackEvent(JRebirthEventType.DESTROY_VIEW, null, this.getClass());
         super.finalize();
     }
 

@@ -32,6 +32,6 @@ public interface GlobalReady {
      *
      * @return the global facade
      */
-    GlobalFacade getGlobalFacade();
+    GlobalFacade globalFacade();
 
 }

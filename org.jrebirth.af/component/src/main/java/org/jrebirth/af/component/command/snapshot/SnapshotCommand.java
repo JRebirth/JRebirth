@@ -20,7 +20,7 @@ public class SnapshotCommand extends DefaultUIBeanCommand<SnapshotWaveBean> {
         WritableImage image = wb.image();
 
         if (wb.node() == null) {
-            final Scene scene = localFacade().getGlobalFacade().application().scene();
+            final Scene scene = localFacade().globalFacade().application().scene();
 
             image = scene.snapshot(image);
 

@@ -220,7 +220,7 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
      */
     @Override
     protected void finalize() throws Throwable {
-        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_MODEL, null, this.getClass());
+        localFacade().globalFacade().trackEvent(JRebirthEventType.DESTROY_MODEL, null, this.getClass());
         super.finalize();
     }
 

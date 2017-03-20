@@ -35,7 +35,7 @@ public class ShowErrorDialog extends DefaultUICommand {
     @Override
     public void perform(final Wave wave) {
 
-        final Stage stage = localFacade().getGlobalFacade().application().stage();
+        final Stage stage = localFacade().globalFacade().application().stage();
 
         // Switch the full screen state
         stage.setFullScreen(!stage.isFullScreen());

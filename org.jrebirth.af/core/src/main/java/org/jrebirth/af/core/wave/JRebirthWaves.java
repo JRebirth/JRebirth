@@ -35,48 +35,63 @@ import org.jrebirth.af.api.wave.WaveConstants;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
 import org.jrebirth.af.core.service.ServiceTaskBase;
 
 /**
- * The class <strong>JRebirthWaveItem</strong>.
- *
+ * The class <strong>JRebirthWaves</strong> stores some predefined {@link WaveItem} and {@link WaveType}.
+ * 
+ * This class will be preloaded to allow registration of {@link WaveType} into {@link WaveTypeRegistry}.
+ * 
  * @author Sébastien Bordes
  */
 @Preload
 public interface JRebirthWaves {
 
+    /********************************/
+    /** WaveItem related to UI */
+    /********************************/
+
     /** The waveItem that hold the attached node. */
-    WaveItemBase<ObjectProperty<Node>> ATTACH_UI_NODE_PLACEHOLDER = new WaveItemBase<ObjectProperty<Node>>() {
+    WaveItem<ObjectProperty<Node>> ATTACH_UI_NODE_PLACEHOLDER = new WaveItemBase<ObjectProperty<Node>>() {
     };
 
     /** The waveItem that hold the children list of the parent node. */
-    WaveItemBase<ObservableList<Node>> ADD_UI_CHILDREN_PLACEHOLDER = new WaveItemBase<ObservableList<Node>>() {
+    WaveItem<ObservableList<Node>> ADD_UI_CHILDREN_PLACEHOLDER = new WaveItemBase<ObservableList<Node>>() {
     };
 
-    /** . */
-    WaveItemBase<Class<? extends Command>> SHOW_MODEL_COMMAND = new WaveItemBase<Class<? extends Command>>() {
+    /** This item allow to use another Command to attach a model into another one, it replaces the default {@link ShowModelCommand}. */
+    WaveItem<Class<? extends Command>> SHOW_MODEL_COMMAND = new WaveItemBase<Class<? extends Command>>() {
     };
 
-    /** . */
-    WaveItemBase<List<WaveBean>> EXTRA_WAVE_BEANS = new WaveItemBase<List<WaveBean>>() {
+    /** This item is used to store several {@link WaveBean} into a wave. */
+    WaveItem<List<WaveBean>> EXTRA_WAVE_BEANS = new WaveItemBase<List<WaveBean>>() {
     };
+
+    /********************************/
+    /** WaveItem related to Command */
+    /********************************/
 
     /** The waveItem that hold the list of wave to be executed back to back. */
-    WaveItemBase<List<Wave>> CHAINED_WAVES = new WaveItemBase<List<Wave>>() {
+    WaveItem<List<Wave>> CHAINED_WAVES = new WaveItemBase<List<Wave>>() {
     };
 
     /** The waveItem that indicates if command instance must be reused or if another must created. Default value is false. */
-    WaveItemBase<Boolean> REUSE_COMMAND = new WaveItemBase<Boolean>() {
+    WaveItem<Boolean> REUSE_COMMAND = new WaveItemBase<Boolean>() {
     };
 
     /** The waveItem that indicates if command instance must be run synchronously. Default value is false. */
-    WaveItemBase<Boolean> FORCE_SYNC_COMMAND = new WaveItemBase<Boolean>() {
+    WaveItem<Boolean> FORCE_SYNC_COMMAND = new WaveItemBase<Boolean>() {
     };
 
-    /** . */
+    /********************************/
+    /** WaveData related to Command */
+    /********************************/
+
+    /** This WaveData allows to reuse a command instead of creating another one using an unique key timestamp. */
     WaveData<Boolean> REUSE = WBuilder.waveData(REUSE_COMMAND, true);
 
-    /** . */
+    /** This WaveData allows to force the exceution of a command synchronously into the required thread. */
     WaveData<Boolean> FORCE_SYNC = WBuilder.waveData(FORCE_SYNC_COMMAND, true);
 
     /********************************/

@@ -25,7 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to manage the Messages file service.
+ * This annotation is used to manage the properties service allowing to retrieve localized messages.
  *
  * @author Sébastien Bordes
  */

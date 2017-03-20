@@ -44,7 +44,7 @@ public class DetachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBea
 
         Model hideModel = waveBean(wave).hideModel();
         if (hideModel == null && waveBean(wave).hideModelKey() != null) {
-            hideModel = localFacade().getGlobalFacade().uiFacade().retrieve(waveBean(wave).hideModelKey());
+            hideModel = localFacade().globalFacade().uiFacade().retrieve(waveBean(wave).hideModelKey());
         }
 
         Node hideNode = null;

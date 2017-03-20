@@ -28,7 +28,7 @@ public class SwipableBehaviorImpl extends AbstractModelBehavior<Swipable> implem
         if (event.getTouchCount() == data().touchCount()) {
             System.err.println("SWIPEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE TWICE");
 
-            final Model model = localFacade().getGlobalFacade().uiFacade().retrieve(data().modelKey());
+            final Model model = localFacade().globalFacade().uiFacade().retrieve(data().modelKey());
 
             if (model != null) {
                 final EventType<SwipeEvent> et = event.getEventType();

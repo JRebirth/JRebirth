@@ -36,7 +36,7 @@ public class SaveImageCommand extends DefaultUIBeanCommand<SaveImageWaveBean> {
 
             fc.getExtensionFilters().addAll(wb.fileExtension());
 
-            file = fc.showSaveDialog(wb.popupOwner() != null ? wb.popupOwner() : localFacade().getGlobalFacade().application().stage());
+            file = fc.showSaveDialog(wb.popupOwner() != null ? wb.popupOwner() : localFacade().globalFacade().application().stage());
 
         }
 

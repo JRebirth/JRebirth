@@ -169,15 +169,15 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
         // command was directly called by its run() method
         final Wave commandWave = wave == null ? WBuilder.callCommand(this.getClass()) : wave;
 
+        // Wrap the command into a custom runnable that will be run
         final CommandRunnable commandRunnable = new CommandRunnable(this.getClass().getSimpleName(), this, commandWave);
 
         final WaveData<Boolean> syncData = wave != null ? wave.getData(JRebirthWaves.FORCE_SYNC_COMMAND) : null;
 
-        // Create the runnable that will be run
         // Add the runnable to the runner queue run it as soon as possible
         // But force synchronous execution if the wave contains the flag
         if (syncData != null && syncData.value()) {
-            // Force sync run
+            // Force sync run (blocking call)
             JRebirth.runSync(getRunInto(), commandRunnable, 5000);
         } else {
             // Normal run
@@ -233,7 +233,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
      */
     @Override
     protected void finalize() throws Throwable {
-        localFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_COMMAND, null, this.getClass());
+        localFacade().globalFacade().trackEvent(JRebirthEventType.DESTROY_COMMAND, null, this.getClass());
         super.finalize();
     }
 

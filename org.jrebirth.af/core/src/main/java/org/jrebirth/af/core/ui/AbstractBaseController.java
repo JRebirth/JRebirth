@@ -64,7 +64,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
         this.view = view;
 
         // Track this controller creation
-        model().localFacade().getGlobalFacade().trackEvent(JRebirthEventType.CREATE_CONTROLLER, view().getClass(), this.getClass());
+        model().localFacade().globalFacade().trackEvent(JRebirthEventType.CREATE_CONTROLLER, view().getClass(), this.getClass());
     }
 
     /*
@@ -273,7 +273,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
      */
     @Override
     protected void finalize() throws Throwable {
-        model().localFacade().getGlobalFacade().trackEvent(JRebirthEventType.DESTROY_CONTROLLER, null, this.getClass());
+        model().localFacade().globalFacade().trackEvent(JRebirthEventType.DESTROY_CONTROLLER, null, this.getClass());
         super.finalize();
     }
 
