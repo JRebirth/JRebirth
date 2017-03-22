@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultController;
-import org.jrebirth.af.core.ui.LinkedCallback;
+import org.jrebirth.af.core.ui.EventFilter;
 import org.jrebirth.af.showcase.analyzer.command.OpenEventTrackerFileCommand;
 import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
 
@@ -30,7 +30,7 @@ import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
  *
  * @author Sébastien Bordes
  */
-public final class ControlsController extends DefaultController<ControlsModel, ControlsView> {
+public final class ControlsController extends DefaultController<ControlsModel, ControlsView> implements EventFilter {
 
     /* implements MouseAdapter */
 
@@ -51,7 +51,7 @@ public final class ControlsController extends DefaultController<ControlsModel, C
     @Override
     protected void initEventHandlers() throws CoreException {
 
-        linkCommand(view().getOpenButton(), MouseEvent.MOUSE_CLICKED, OpenEventTrackerFileCommand.class, LinkedCallback.CHECK_MOUSE_SINGLE_CLICK);
+        linkCommand(view().getOpenButton(), MouseEvent.MOUSE_CLICKED, OpenEventTrackerFileCommand.class, CHECK_MOUSE_SINGLE_CLICK);
 
         linkWave(view().getUnloadButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_UNLOAD);
         linkWave(view().getPlayPauseButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_PLAY);
