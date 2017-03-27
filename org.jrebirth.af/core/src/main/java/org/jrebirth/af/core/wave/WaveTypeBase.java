@@ -136,14 +136,14 @@ public final class WaveTypeBase implements WaveType {
      */
     @Override
     public String prefix() {
-        return prefix == null ? CoreParameters.WAVE_HANDLER_PREFIX.get() : prefix;
+        return this.prefix == null ? CoreParameters.WAVE_HANDLER_PREFIX.get() : this.prefix;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public WaveType prefix(String prefix) {
+    public WaveType prefix(final String prefix) {
         this.prefix = prefix;
         return this;
     }

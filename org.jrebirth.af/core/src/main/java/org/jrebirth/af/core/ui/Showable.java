@@ -9,7 +9,7 @@ import org.jrebirth.af.api.wave.contract.WaveType;
 
 /**
  * The interface <strong>Showable</strong> defines the contract for model that can be shown and hidden.
- * 
+ *
  * @author Sébastien Bordes
  */
 public interface Showable extends WaveConstants {
@@ -22,14 +22,14 @@ public interface Showable extends WaveConstants {
 
     /**
      * Called when a {@link View} is shown.
-     * 
+     *
      * @param wave the wave carrying the wave type
      */
     void doShowView(Wave wave);
 
     /**
      * Called when a {@link View} is hidden.
-     * 
+     *
      * @param wave the wave carrying the wave type
      */
     void doHideView(Wave wave);

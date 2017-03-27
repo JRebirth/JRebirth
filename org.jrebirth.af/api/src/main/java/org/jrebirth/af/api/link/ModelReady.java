@@ -85,7 +85,7 @@ public interface ModelReady extends ServiceReady {
      *
      * @param modelClass the model class to display
      * @param waveBean the WaveBean that holds all required wave data
-     * 
+     *
      * @param <WB> the type of the wave bean to used
      *
      * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects

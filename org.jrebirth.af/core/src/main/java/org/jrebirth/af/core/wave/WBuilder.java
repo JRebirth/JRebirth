@@ -53,7 +53,7 @@ public interface WBuilder {
      * Build a fresh Wave type with action name.
      *
      * @param action the action
-     * 
+     *
      * @return the wave type
      */
     static WaveType waveType(final String action) {
@@ -64,7 +64,7 @@ public interface WBuilder {
      * Build a fresh Wave type with action name using default hard coded prefix "DO_".
      *
      * @param action the action
-     * 
+     *
      * @return the wave type
      */
     static WaveType waveTypeDo(final String action) {
@@ -178,7 +178,7 @@ public interface WBuilder {
      * Create a {@link WaveItem} holding a {@link PriorityLevel}.
      *
      * @param level the level to embed
-     * 
+     *
      * @return the configured wave data
      */
     static WaveData<PriorityLevel> priority(final PriorityLevel level) {
@@ -189,7 +189,7 @@ public interface WBuilder {
      * Create a {@link WaveItem} holding a timeout value.
      *
      * @param timeout the number of millisecond to embed
-     * 
+     *
      * @return the configured wave data
      */
     static WaveData<Long> timeout(final long timeout) {
@@ -200,7 +200,7 @@ public interface WBuilder {
      * Create a {@link WaveItem} holding a boolean flag indicating if the task shall be run synchronously.
      *
      * @param sync the flag indicating synchronously execution
-     * 
+     *
      * @return the configured wave data
      */
     static WaveData<Boolean> sync(final boolean sync) {

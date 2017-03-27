@@ -31,6 +31,7 @@ import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.api.wave.WaveGroup;
+import org.jrebirth.af.api.wave.WaveHandler;
 import org.jrebirth.af.api.wave.WaveListener;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.api.wave.contract.WaveItem;
@@ -104,7 +105,7 @@ public class WaveBase implements Wave, LinkMessages {
     private final List<WaveListener> waveListeners = Collections.synchronizedList(new ArrayList<WaveListener>());
 
     /** The list of Wave Handlers used to manage the Handled status. */
-    private List<? extends Object> waveHandlers;
+    private List<WaveHandler> waveHandlers;
 
     /**
      * Default Constructor.
@@ -225,14 +226,14 @@ public class WaveBase implements Wave, LinkMessages {
      */
     @Override
     public boolean isRelated() {
-        return isRelated;
+        return this.isRelated;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Wave isRelated(boolean isRelated) {
+    public Wave isRelated(final boolean isRelated) {
         this.isRelated = isRelated;
         return this;
     }
@@ -537,7 +538,7 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void setWaveHandlers(final List<? extends Object> waveHandlers) {
+    public void setWaveHandlers(final List<WaveHandler> waveHandlers) {
         this.waveHandlers = waveHandlers;
     }
 
@@ -545,7 +546,15 @@ public class WaveBase implements Wave, LinkMessages {
      * {@inheritDoc}
      */
     @Override
-    public void removeWaveHandler(final Object waveHandler) {
+    public List<WaveHandler> getWaveHandlers() {
+        return this.waveHandlers;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeWaveHandler(final WaveHandler waveHandler) {
         if (waveHandler != null) {
             // Remove the handler that has terminated
             this.waveHandlers.remove(waveHandler);

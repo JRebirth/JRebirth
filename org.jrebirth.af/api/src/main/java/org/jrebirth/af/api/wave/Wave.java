@@ -157,7 +157,7 @@ public interface Wave {
 
     /**
      * Returns the wave considered as ancestor of the current wave.
-     * 
+     *
      * @return Returns the relatedWave.
      */
     Wave relatedWave();
@@ -171,16 +171,16 @@ public interface Wave {
 
     /**
      * Returns true if this wave is stored as related wave into another wave.
-     * 
+     *
      * @return true if is related
      */
     boolean isRelated();
 
     /**
      * Set the flag indicating if this wave is a related wave.
-     * 
+     *
      * @param isRelated the related flag to set
-     * 
+     *
      * @return the current Wave to chain other method call
      */
     Wave isRelated(boolean isRelated);
@@ -311,14 +311,21 @@ public interface Wave {
      *
      * @param waveHandlers the list of WaveHandler
      */
-    void setWaveHandlers(final List<? extends Object> waveHandlers);
+    void setWaveHandlers(final List<WaveHandler> waveHandlers);
+
+    /**
+     * Retrieve all Wave Handler.
+     *
+     * @returns the list of WaveHandler
+     */
+    List<WaveHandler> getWaveHandlers();
 
     /**
      * Release the given WaveHandler.
      *
      * @param waveHandler the waveHandler
      */
-    void removeWaveHandler(final Object waveHandler);
+    void removeWaveHandler(final WaveHandler waveHandler);
 
     /**
      * Returns true if the wave holds the given {@link WaveBean} class.

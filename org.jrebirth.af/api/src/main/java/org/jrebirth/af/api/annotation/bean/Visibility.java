@@ -26,7 +26,7 @@ public enum Visibility {
 
     /** . */
     private$,
-    
+
     /** . */
     protected$,
 
@@ -35,7 +35,7 @@ public enum Visibility {
 
     /** . */
     public$
-    
+
     ;
 
 }

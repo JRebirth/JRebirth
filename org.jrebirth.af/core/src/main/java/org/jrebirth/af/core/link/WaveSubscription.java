@@ -2,6 +2,7 @@ package org.jrebirth.af.core.link;
 
 import java.util.List;
 
+import org.jrebirth.af.api.wave.WaveHandler;
 import org.jrebirth.af.api.wave.contract.WaveType;
 
 /**

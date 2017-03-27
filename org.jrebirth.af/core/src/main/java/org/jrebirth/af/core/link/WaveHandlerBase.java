@@ -29,11 +29,12 @@ import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveException;
+import org.jrebirth.af.api.wave.WaveHandler;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.api.wave.contract.WaveData;
 import org.jrebirth.af.core.component.basic.AbstractComponent;
 import org.jrebirth.af.core.concurrent.JRebirth;
-import org.jrebirth.af.core.exception.WaveException;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.util.CheckerUtility;
 import org.jrebirth.af.core.util.ClassUtility;
@@ -43,18 +44,22 @@ import org.jrebirth.af.core.util.ClassUtility;
  *
  * @author Sébastien Bordes
  */
-public class WaveHandler implements LinkMessages {
+public class WaveHandlerBase implements WaveHandler, LinkMessages {
 
     /** The class logger. */
-    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(WaveHandler.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(WaveHandlerBase.class);
 
     /** The wave ready component that will handle the wave. */
     private final Component<?> waveReady;
 
-    /** The default method to call, will been used when annotation is put on a method, otherwise could be null. */
+    /**
+     * The default method to call, will been used when annotation is put on a method, otherwise could be null.
+     */
     private final Method defaultMethod;
 
-    /** The wave checker taht check if the wave could be handled, could be null. */
+    /**
+     * The wave checker taht check if the wave could be handled, could be null.
+     */
     private final WaveChecker waveChecker;
 
     /**
@@ -64,7 +69,7 @@ public class WaveHandler implements LinkMessages {
      * @param waveChecker the wave checker, could be null
      * @param defaultMethod the default method to call, could be null
      */
-    public WaveHandler(final Component<?> waveReady, final WaveChecker waveChecker, final Method defaultMethod) {
+    public WaveHandlerBase(final Component<?> waveReady, final WaveChecker waveChecker, final Method defaultMethod) {
         super();
         this.waveReady = waveReady;
         this.waveChecker = waveChecker;
@@ -72,40 +77,34 @@ public class WaveHandler implements LinkMessages {
     }
 
     /**
-     * Check the wave if the wave checker is not null anf if it returns true.
-     *
-     * @param wave the wave to check
-     *
-     * @return true, if check succeeded or if wave checker is null
+     * {@inheritDoc}
      */
+    @Override
     public boolean check(final Wave wave) {
         // Skip the check if there isn't any checker
         return this.waveChecker == null || this.waveChecker.call(wave);
     }
 
     /**
-     * Gets the wave ready.
-     *
-     * @return Returns the waveReady.
+     * {@inheritDoc}
      */
+    @Override
     public Component<?> getWaveReady() {
         return this.waveReady;
     }
 
     /**
-     * Handle the wave into JAT for model component or into current thread for others.
-     *
-     * @param wave the wave to manage
-     *
-     * @throws WaveException if an error occurred while processing the wave
+     * {@inheritDoc}
      */
+    @Override
     public void handle(final Wave wave) throws WaveException {
 
         Method customMethod = retrieveCustomMethod(wave);
 
         if (customMethod == null) {
 
-            // If no custom method was provided, call the default method named 'processWave(wave)'
+            // If no custom method was provided, call the default method named
+            // 'processWave(wave)'
             try {
                 customMethod = getWaveReady().getClass().getDeclaredMethod(AbstractComponent.PROCESS_WAVE_METHOD_NAME, Wave.class);
             } catch (IllegalArgumentException | NoSuchMethodException e) {
@@ -124,7 +123,7 @@ public class WaveHandler implements LinkMessages {
         // Retrieve the annotation run type (if any)
         final RunType runType = runInto == null ? null : runInto.value();
 
-        final WaveHandler waveHandler = this;
+        final WaveHandlerBase waveHandler = this;
         final Method method = customMethod;
         final String runnableName = getWaveReady().getClass().getSimpleName() + " handle wave " + wave.toString();
 
@@ -149,7 +148,8 @@ public class WaveHandler implements LinkMessages {
             // Launch the wave handling into JRebirth Thread Pool
             JRebirth.runIntoJTP(runnableName, priority, waveHandlerRunnable);
         } else {
-            // Otherwise we can perform it right now into the current thread (JRebirthThread - JIT)
+            // Otherwise we can perform it right now into the current thread
+            // (JRebirthThread - JIT)
             waveHandlerRunnable.run();
         }
 
@@ -166,12 +166,12 @@ public class WaveHandler implements LinkMessages {
         Method customMethod = null;
         // Search the wave handler method to call
         customMethod = this.defaultMethod == null
-                // Method computed according to wave prefix and wave type action name
+                // Method computed according to wave prefix and wave type action
+                // name
                 ? ClassUtility.retrieveMethodList(getWaveReady().getClass(), wave.waveType().toString())
                               .stream()
-                              .filter(m -> {
-                                  return CheckerUtility.checkMethodSignature(m, wave.waveType().items());
-                              }).findFirst().orElse(null)
+                              .filter(m -> CheckerUtility.checkMethodSignature(m, wave.waveType().items()))
+                              .findFirst().orElse(null)
                 // Method defined with annotation
                 : this.defaultMethod;
 

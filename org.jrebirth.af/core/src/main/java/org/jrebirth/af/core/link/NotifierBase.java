@@ -36,12 +36,13 @@ import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.Wave.Status;
+import org.jrebirth.af.api.wave.WaveException;
+import org.jrebirth.af.api.wave.WaveHandler;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean;
 import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
 import org.jrebirth.af.core.concurrent.JRebirth;
-import org.jrebirth.af.core.exception.WaveException;
 import org.jrebirth.af.core.facade.AbstractGlobalReady;
 import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.log.JRLoggerFactory;
@@ -260,7 +261,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             wave.setWaveHandlers(ws.getWaveHandlers().stream().filter(wh -> wh.check(wave)).collect(Collectors.toList()));
 
             // For each object interested in that wave type, process the action
-            for (final WaveHandler waveHandler : ws.getWaveHandlers()) {
+            for (final WaveHandler waveHandler : wave.getWaveHandlers()) {
 
                 // The handler will be performed in the right thread according to RunType annotation
                 waveHandler.handle(wave);
@@ -424,8 +425,8 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
          *
          * @return a new instance of WaveHandler
          */
-        public static WaveHandler newHandler(final Component<?> linkedObject, final WaveChecker waveChecker, final Method method) {
-            return new WaveHandler(linkedObject, waveChecker, method);
+        public static WaveHandlerBase newHandler(final Component<?> linkedObject, final WaveChecker waveChecker, final Method method) {
+            return new WaveHandlerBase(linkedObject, waveChecker, method);
         }
 
     }

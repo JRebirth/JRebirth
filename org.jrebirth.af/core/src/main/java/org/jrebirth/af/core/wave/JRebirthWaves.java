@@ -40,9 +40,9 @@ import org.jrebirth.af.core.service.ServiceTaskBase;
 
 /**
  * The class <strong>JRebirthWaves</strong> stores some predefined {@link WaveItem} and {@link WaveType}.
- * 
+ *
  * This class will be preloaded to allow registration of {@link WaveType} into {@link WaveTypeRegistry}.
- * 
+ *
  * @author Sébastien Bordes
  */
 @Preload
