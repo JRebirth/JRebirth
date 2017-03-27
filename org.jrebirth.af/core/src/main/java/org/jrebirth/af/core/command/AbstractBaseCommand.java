@@ -22,6 +22,7 @@ import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.command.CommandBean;
 import org.jrebirth.af.api.concurrent.RunInto;
 import org.jrebirth.af.api.concurrent.RunType;
+import org.jrebirth.af.api.concurrent.SyncRun;
 import org.jrebirth.af.api.facade.JRebirthEventType;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
@@ -57,6 +58,8 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
      * The field that indicates how this command must be launched.
      */
     protected RunType runIntoThread;
+
+    protected boolean syncRun;
 
     /**
      * The field that indicates the threading priority.
@@ -106,6 +109,9 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
         // Secondly by provided runtType argument
         // Thirdly (default case) use JIT
         this.runIntoThread = ria == null ? runType == null ? RunType.JIT : runType : ria.value();
+
+        final SyncRun sra = ClassUtility.getLastClassAnnotation(this.getClass(), SyncRun.class);
+        this.syncRun = sra == null ? false : sra.value();
 
         // Do same job for the priority
         this.runnablePriority = ria == null ? priority == null ? PriorityLevel.Normal : priority : ria.priority();
@@ -176,7 +182,7 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
 
         // Add the runnable to the runner queue run it as soon as possible
         // But force synchronous execution if the wave contains the flag
-        if (syncData != null && syncData.value()) {
+        if (syncData == null && isSyncRun() || syncData != null && syncData.value()) {
             // Force sync run (blocking call)
             JRebirth.runSync(getRunInto(), commandRunnable, 5000);
         } else {
@@ -219,6 +225,13 @@ public abstract class AbstractBaseCommand<WB extends WaveBean> extends AbstractB
      */
     protected final RunType getRunInto() {
         return this.runIntoThread;
+    }
+
+    /**
+     * @return Returns the syncRun.
+     */
+    protected final boolean isSyncRun() {
+        return this.syncRun;
     }
 
     /**
