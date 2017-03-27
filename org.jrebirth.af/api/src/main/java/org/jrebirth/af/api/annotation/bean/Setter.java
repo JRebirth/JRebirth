@@ -39,7 +39,7 @@ public @interface Setter {
 
     /**
      * Fluent mode allow to chain setter.
-     * 
+     *
      * @return the fluent mode
      */
     boolean fluent() default true;

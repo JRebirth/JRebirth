@@ -147,14 +147,14 @@ public final class ClassUtility implements UtilMessages {
 
     /**
      * Find and Build the generic type according to assignable and excluded classes.
-     * 
+     *
      * @param mainClass The main class used (that contains at least one generic type)
      * @param assignableClasses if the array contains only one class it define the type of the generic to build, otherwise it defines the types to skip to find the obejct to build
      * @param excludedClass the class that shouldn't be retrieved (ie: NullXX class)
      * @param parameters used by the constructor of the generic type
-     * 
+     *
      * @return the first generic type of a class that is compatible with provided assignable class.
-     * 
+     *
      * @throws CoreException if the class cannot be found and is not an excluded class
      */
     public static Object findAndBuildGenericType(final Class<?> mainClass, final Class<?> assignableClass, final Class<?> excludedClass, final Object... parameters) throws CoreException {

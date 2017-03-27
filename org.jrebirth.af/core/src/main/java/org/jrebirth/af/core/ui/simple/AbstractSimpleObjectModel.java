@@ -50,8 +50,8 @@ public abstract class AbstractSimpleObjectModel<N extends Node, O extends Object
     @Override
     protected void prepareView() {
         try {
-        	
-        	// Build the node by reflection without any parameter or excluded class
+
+            // Build the node by reflection without any parameter or excluded class
             this.rootNode = (N) ClassUtility.buildGenericType(this.getClass(), Node.class);
 
             // Find the RootNodeId annotation
@@ -61,7 +61,7 @@ public abstract class AbstractSimpleObjectModel<N extends Node, O extends Object
             }
 
             initSimpleView();
-            
+
         } catch (final CoreException ce) {
             throw new CoreRuntimeException(ce);
         }

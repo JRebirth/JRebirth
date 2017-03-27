@@ -29,39 +29,39 @@ import org.jrebirth.af.core.wave.DefaultWaveBean;
 @RunInto(RunType.JIT)
 public class DefaultMultiCommand extends DefaultMultiBeanCommand<DefaultWaveBean> {
 
-	/**
-	 * Constructor from ancestor.
-	 */
-	public DefaultMultiCommand() {
-		super();
-	}
+    /**
+     * Constructor from ancestor.
+     */
+    public DefaultMultiCommand() {
+        super();
+    }
 
-	/**
-	 * Constructor from ancestor. Annotation will be used to define run type (default is JIT)
+    /**
+     * Constructor from ancestor. Annotation will be used to define run type (default is JIT)
      *
      * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
      */
-	public DefaultMultiCommand(boolean sequential) {
-		super(sequential);
-	}
+    public DefaultMultiCommand(final boolean sequential) {
+        super(sequential);
+    }
 
-	/**
-	 * Constructor from ancestor.
-	 * 
+    /**
+     * Constructor from ancestor.
+     *
      * @param runInto The run into thread type
      * @param sequential indicate if commands must be run sequentially(true) or in parallel(false)
      */
-	public DefaultMultiCommand(RunType runInto, boolean sequential) {
-		super(runInto, sequential);
-	}
+    public DefaultMultiCommand(final RunType runInto, final boolean sequential) {
+        super(runInto, sequential);
+    }
 
-	/**
-	 * Constructor from ancestor.
-	 * 
+    /**
+     * Constructor from ancestor.
+     *
      * @param runInto The run into thread type
      */
-	public DefaultMultiCommand(RunType runInto) {
-		super(runInto);
-	}
-	
+    public DefaultMultiCommand(final RunType runInto) {
+        super(runInto);
+    }
+
 }

@@ -40,11 +40,13 @@ public class SaveImageCommand extends DefaultUIBeanCommand<SaveImageWaveBean> {
 
         }
 
-        final BufferedImage bi = SwingFXUtils.fromFXImage(wb.image(), null);
-        try {
-            ImageIO.write(bi, "png", file);
-        } catch (final IOException e) {
-            throw new CoreRuntimeException(e);
+        if (file != null) {
+	        final BufferedImage bi = SwingFXUtils.fromFXImage(wb.image(), null);
+	        try {
+	            ImageIO.write(bi, "png", file);
+	        } catch (final IOException e) {
+	            throw new CoreRuntimeException(e);
+	        }
         }
 
     }

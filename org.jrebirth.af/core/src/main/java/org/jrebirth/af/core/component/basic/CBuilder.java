@@ -36,7 +36,7 @@ public interface CBuilder {
      * @return
      */
     static <C extends Component<?>> InnerComponentBase<C> innerComponent(final Class<C> modelClass, final Object... keyPart) {
-        return new InnerComponentBase<C>(modelClass, keyPart);
+        return new InnerComponentBase<>(modelClass, keyPart);
     }
 
     /**
@@ -48,7 +48,7 @@ public interface CBuilder {
      * @return
      */
     static <C extends Component<?>> InnerComponentBase<C> innerComponent(final UniqueKey<C> key) {
-        return new InnerComponentBase<C>(key);
+        return new InnerComponentBase<>(key);
     }
 
 }

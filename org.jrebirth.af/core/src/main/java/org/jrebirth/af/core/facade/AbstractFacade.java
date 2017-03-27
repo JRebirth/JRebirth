@@ -262,7 +262,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             // It the component is already registered, get it to return it
             if (exists(uniqueKey)) {
 
-                readyObjectList = new ArrayList<E>((Set<E>) this.componentMap.get(uniqueKey));
+                readyObjectList = new ArrayList<>((Set<E>) this.componentMap.get(uniqueKey));
 
                 // // Check that the reference is not null
                 // if (weakHashSet != null) {

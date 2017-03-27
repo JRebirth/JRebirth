@@ -100,7 +100,7 @@ public class DefaultMultiBeanCommand<WB extends WaveBean> extends AbstractMultiC
      * {@inheritDoc}
      */
     @Override
-    protected void before(Wave wave) {
+    protected void before(final Wave wave) {
         // Nothing to do yet
     }
 
@@ -108,7 +108,7 @@ public class DefaultMultiBeanCommand<WB extends WaveBean> extends AbstractMultiC
      * {@inheritDoc}
      */
     @Override
-    protected void after(Wave wave) {
+    protected void after(final Wave wave) {
         // Nothing to do yet
     }
 
@@ -116,7 +116,7 @@ public class DefaultMultiBeanCommand<WB extends WaveBean> extends AbstractMultiC
      * {@inheritDoc}
      */
     @Override
-    protected void beforeEach(Wave wave, Wave childWave) {
+    protected void beforeEach(final Wave wave, final Wave childWave) {
         // Nothing to do yet
     }
 
@@ -124,7 +124,7 @@ public class DefaultMultiBeanCommand<WB extends WaveBean> extends AbstractMultiC
      * {@inheritDoc}
      */
     @Override
-    protected void afterEach(Wave wave, Wave childWave) {
+    protected void afterEach(final Wave wave, final Wave childWave) {
         // Nothing to do yet
     }
 

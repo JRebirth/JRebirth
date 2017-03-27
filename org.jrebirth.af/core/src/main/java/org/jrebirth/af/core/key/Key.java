@@ -82,7 +82,7 @@ public interface Key extends Serializable {
      * @return the unique key for a singleton
      */
     static <C> UniqueKey<C> createSingle(final Class<C> clazz, final Object... optionalData) {
-        return new ClassKey<C>(clazz, optionalData);
+        return new ClassKey<>(clazz, optionalData);
     }
 
     /**
@@ -96,7 +96,7 @@ public interface Key extends Serializable {
      * @return the unique key for a multiton
      */
     static <C> UniqueKey<C> createMulti(final Class<C> clazz, final Object... keyPart) {
-        return new MultitonKey<C>(clazz, keyPart);
+        return new MultitonKey<>(clazz, keyPart);
     }
 
     /**
@@ -111,7 +111,7 @@ public interface Key extends Serializable {
      * @return the unique key for a multiton
      */
     static <C> UniqueKey<C> createMulti(final Class<C> clazz, final Object[] keyPart, final Object... optionalData) {
-        return new MultitonKey<C>(clazz, keyPart, optionalData);
+        return new MultitonKey<>(clazz, keyPart, optionalData);
     }
 
 }

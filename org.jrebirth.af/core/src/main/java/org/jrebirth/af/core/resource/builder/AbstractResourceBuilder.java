@@ -41,7 +41,7 @@ import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P extends ResourceParams, R> implements ResourceBuilder<I, P, R> {
 
     /** The resource weak Map. */
-    private final Map<I, P> paramsMap = new WeakHashMap<I, P>();
+    private final Map<I, P> paramsMap = new WeakHashMap<>();
 
     /**
      * The resource weak Map.<br />
@@ -115,7 +115,7 @@ public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P
      */
     @Override
     public void set(final String key, final R resource) {
-        this.resourceMap.put(key, new SoftReference<R>(resource));
+        this.resourceMap.put(key, new SoftReference<>(resource));
     }
 
     /**

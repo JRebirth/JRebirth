@@ -52,7 +52,7 @@ public class ClassKey<R> implements UniqueKey<R> {
         super();
         this.classField = classField;
         if (optionalData.length > 0) {
-            this.optionalDatas = new ArrayList<Object>();
+            this.optionalDatas = new ArrayList<>();
             for (final Object data : optionalData) {
                 this.optionalDatas.add(data);
             }

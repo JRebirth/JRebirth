@@ -34,7 +34,7 @@ public enum JRebirthColors implements ColorEnum {
     /**************************************************************************************/
 
     // @formatter:off
-    
+
     /** The default background color of the scene. */
     SCENE_BG_COLOR {{ set(StageParameters.APPLICATION_SCENE_BG_COLOR.get()); }};
 

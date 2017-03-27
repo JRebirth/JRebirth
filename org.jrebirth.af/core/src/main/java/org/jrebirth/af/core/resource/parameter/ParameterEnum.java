@@ -26,7 +26,7 @@ public interface ParameterEnum<T extends Object> extends ParameterItemReal<T> {
 
     /**
      * Return the enum name.
-     * 
+     *
      * @return the name
      */
     String name();

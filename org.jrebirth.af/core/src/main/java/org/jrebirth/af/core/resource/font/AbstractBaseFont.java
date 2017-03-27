@@ -41,7 +41,7 @@ public abstract class AbstractBaseFont extends AbstractBaseParams implements Fon
     private final DoubleProperty sizeProperty = new SimpleDoubleProperty();
 
     /** The font extension. */
-    private final ObjectProperty<FontExtension> extensionProperty = new SimpleObjectProperty<FontExtension>();
+    private final ObjectProperty<FontExtension> extensionProperty = new SimpleObjectProperty<>();
 
     /**
      * Default Constructor.

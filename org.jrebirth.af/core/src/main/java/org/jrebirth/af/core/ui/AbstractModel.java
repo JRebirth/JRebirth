@@ -184,7 +184,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
 
     /**
      * Create the view it was null.
-     * 
+     *
      * @throws CoreException when han't been built correctly
      */
     @SuppressWarnings("unchecked")

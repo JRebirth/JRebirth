@@ -125,7 +125,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
     private <B extends Behavior<?, ?>> void addBehavior(final B behavior) {
 
         if (this.behaviors == null) {
-            this.behaviors = new MultiMap<Class<? extends Behavior<?, ?>>, Behavior<?, ?>>();
+            this.behaviors = new MultiMap<>();
         }
 
         LOGGER.log(ADD_BEHAVIOR, behavior.getClass().getCanonicalName(), this.getClass().getCanonicalName());

@@ -33,9 +33,9 @@ public final class ParameterItemBase<T> extends AbstractResourceItem<ParameterIt
 
     /**
      * Create a new Parameter Item.
-     * 
+     *
      * @param o the object used for its type
-     * 
+     *
      * @return a fresh new {@link ParameterItem}
      */
     public static <T extends Object> ParameterItemBase<T> create(final T o) {

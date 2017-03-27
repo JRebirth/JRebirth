@@ -47,12 +47,12 @@ public enum ImageExtension {
 
     /**
      * Get an ImageExtension value for the given string or return NONE.
-     * 
+     *
      * @param imageExtension the string to convert
-     * 
+     *
      * @return a valid IMageExtension or NONE if the string is invalid
      */
-    public static ImageExtension of(String imageExtension) {
+    public static ImageExtension of(final String imageExtension) {
         final ImageExtension ext = ImageExtension.NONE;
 
         if (imageExtension != null && !imageExtension.isEmpty()) {

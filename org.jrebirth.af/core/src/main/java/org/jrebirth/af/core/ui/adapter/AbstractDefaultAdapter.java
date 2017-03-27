@@ -34,14 +34,14 @@ public abstract class AbstractDefaultAdapter<C extends AbstractBaseController<?,
     /**
      * @param controller The controller to set.
      */
-    public void setController(final C controller) {
+    public void controller(final C controller) {
         this.controller = controller;
     }
 
     /**
      * @return Returns the controller.
      */
-    public C getController() {
+    public C controller() {
         return this.controller;
     }
 

@@ -58,7 +58,7 @@ public interface ResourceItem<I, P, R> {
 
     /**
      * Return the registered {@link ResourceParams} element
-     * 
+     *
      * @return the resource params
      */
     @SuppressWarnings("unchecked")

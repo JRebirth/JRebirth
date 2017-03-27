@@ -160,7 +160,7 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
     protected final void addAdapter(final EventAdapter eventAdapter) throws CoreException {
 
         if (eventAdapter instanceof AbstractDefaultAdapter) {
-            ((AbstractDefaultAdapter) eventAdapter).setController(this);
+            ((AbstractDefaultAdapter) eventAdapter).controller(this);
         }
 
         // Parse all event to find the right to manage
@@ -186,12 +186,20 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
     @SuppressWarnings("unchecked")
     protected final <E extends Event> EventHandler<E> getHandler(final EventType<E> eventType) throws CoreException {
 
-        EventHandler<E> handler = (EventHandler<E>) this.eventHandlerMap.get(eventType);
+        EventType<?> temp = eventType;
 
-        // Check supertype (ANY)
-        if (handler == null) {
-            handler = (EventHandler<E>) this.eventHandlerMap.get(eventType.getSuperType());
+        EventHandler<E> handler = null;
+
+        while (temp != null && handler == null) {
+            handler = (EventHandler<E>) this.eventHandlerMap.get(temp);
+            temp = temp.getSuperType();
         }
+
+        // // Check supertype (ANY)
+        // if (handler == null) {
+        //
+        // handler = (EventHandler<E>) this.eventHandlerMap.get();
+        // }
 
         // Check if the handler has been created or not
         if (handler == null) {

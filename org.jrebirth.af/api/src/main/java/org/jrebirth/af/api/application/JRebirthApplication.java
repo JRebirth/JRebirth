@@ -83,10 +83,9 @@ public interface JRebirthApplication<P extends Pane> {
      */
     void preloadResources();
 
-    
     /**
      * Stop the application.
-     * 
+     *
      * @throws CoreException when a trouble occurred during JRebirth engine shutdown.
      */
     void stop() throws CoreException;

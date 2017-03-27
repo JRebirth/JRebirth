@@ -110,7 +110,7 @@ public final class Resources {
      * @return a new fresh color item object
      */
     public static <O extends Object> ParameterItem<O> create(final String name, final O defaultValue) {
-        return create(new ObjectParameter<O>(name, defaultValue));
+        return create(new ObjectParameter<>(name, defaultValue));
     }
 
     /*************************************************************************/
