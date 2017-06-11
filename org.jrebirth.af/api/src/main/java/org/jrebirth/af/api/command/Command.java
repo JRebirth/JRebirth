@@ -36,7 +36,7 @@ public interface Command extends BehavioredComponent<Command> {
     Wave run();
 
     /**
-     * Run the command.
+     * Run the command into the configured thread.
      *
      * @param wave the wave that have triggered this command
      *

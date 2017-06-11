@@ -52,6 +52,7 @@
 		<module>analyzer</module>
 		<module>undoredo</module>
 		<module>fxml</module>
+		<module>wave</module>
 		<module>workbench</module>
 	</modules>
 

@@ -106,8 +106,12 @@ public interface WBuilder {
      * Build a fresh Wave use to attach a model somewhere.
      *
      * Support these kind of objects:<br>
-     * JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER => ObjectProperty<Node> JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER => ObservableList<Node> JRebirthWaves.SHOW_MODEL_COMMAND => Class<? extends Command>
-     * JRebirthWaves.EXTRA_WAVE_BEANS => WaveBean
+     * <ul>
+     * <li>JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER => ObjectProperty&lt;Node&gt;</li> 
+     * <li>JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER => ObservableList&lt;Node&gt;</li> 
+     * <li>JRebirthWaves.SHOW_MODEL_COMMAND => Class&lt;? extends Command&gt;</li>
+     * <li>JRebirthWaves.EXTRA_WAVE_BEANS => WaveBean</li>
+     * </ul>
      *
      * @param datas a list of object that can be wrapped into a WaveData with Right waveItem
      *

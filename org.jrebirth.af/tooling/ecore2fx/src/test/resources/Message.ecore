@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="message" nsURI="Message" nsPrefix="org.jrebirth.data">
+  <eClassifiers xsi:type="ecore:EClass" name="Message">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="creationTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="producer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="consumer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1">
+      <eGenericType eClassifier="#//Action">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true" interface="true">
+    <eTypeParameters name="A"/>
+    <eOperations name="code" eType="#//ActionCode"/>
+    <eOperations name="code">
+      <eGenericType eTypeParameter="#//Action/A"/>
+      <eParameters name="code" eType="#//ActionCode"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ActionCode">
+    <eLiterals name="NO_ACTION"/>
+    <eLiterals name="UPDATE" value="1"/>
+    <eLiterals name="SET" value="2"/>
+    <eLiterals name="UNSET" value="3"/>
+    <eLiterals name="ADD" value="4"/>
+    <eLiterals name="REMOVE" value="5"/>
+    <eLiterals name="ADD_MANY" value="6"/>
+    <eLiterals name="REMOVE_MANY" value="7"/>
+    <eLiterals name="MOVE" value="8"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Key">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+        eType="#//Key"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractAction" abstract="true">
+    <eTypeParameters name="A"/>
+    <eOperations name="defaultParentKey"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//ActionCode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentKey" eType="#//Key"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentNewKey" eType="#//Key"/>
+    <eGenericSuperTypes eClassifier="#//Action">
+      <eTypeArguments eTypeParameter="#//AbstractAction/A"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="object" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eGenericSuperTypes eClassifier="#//AbstractAction">
+      <eTypeArguments eClassifier="#//AttributeAction"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1">
+      <eGenericType eClassifier="#//Action">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//Key"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newKey" eType="#//Key"/>
+    <eGenericSuperTypes eClassifier="#//AbstractAction">
+      <eTypeArguments eClassifier="#//ObjectAction"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ListAction" abstract="true" interface="true">
+    <eTypeParameters name="A"/>
+    <eOperations name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eOperations name="index">
+      <eGenericType eTypeParameter="#//ListAction/A"/>
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eOperations>
+    <eGenericSuperTypes eClassifier="#//Action">
+      <eTypeArguments eTypeParameter="#//ListAction/A"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeListAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eGenericSuperTypes eClassifier="#//AttributeAction"/>
+    <eGenericSuperTypes eClassifier="#//ListAction">
+      <eTypeArguments eClassifier="#//AttributeListAction"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectListAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eGenericSuperTypes eClassifier="#//ObjectAction"/>
+    <eGenericSuperTypes eClassifier="#//ListAction">
+      <eTypeArguments eClassifier="#//ObjectListAction"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+</ecore:EPackage>

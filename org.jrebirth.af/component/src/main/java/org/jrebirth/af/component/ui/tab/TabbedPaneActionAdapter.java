@@ -39,7 +39,7 @@ class TabbedPaneActionAdapter extends AbstractDefaultAdapter<TabbedPaneControlle
 
         final Dockable t = (Dockable) b.getUserData();
 
-        getController().view().selectTab(t);
+        controller().view().selectTab(t);
 
         // if(actionEvent.){
         // getController().getModel().removeTab(model, wave);

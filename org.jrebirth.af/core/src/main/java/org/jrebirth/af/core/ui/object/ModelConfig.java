@@ -52,4 +52,9 @@ public class ModelConfig<M extends Model, MC extends ModelConfig<M, MC>> {
         return (MC) this;
     }
 
+    @Override
+    public String toString() {
+        return this.modelClass.getName() + "|" + this.id;
+    }
+
 }

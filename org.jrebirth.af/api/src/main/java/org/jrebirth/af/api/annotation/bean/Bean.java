@@ -35,7 +35,7 @@ public @interface Bean {
 
     /**
      * The name of the class name generated TODO To complete.
-     * 
+     *
      * @return
      */
     String value() default "";

@@ -41,7 +41,9 @@ public class AddTabCommand extends DefaultUIBeanCommand<TabWaveBean> {
     }
 
     private void sendWaveToTabModel(final Wave wave, final Dockable tab) {
-        sendWave(WBuilder.wave()
+        
+    	System.out.println("AddtabWave " + tab.name());
+    	sendWave(WBuilder.wave()
                          .waveType(TabbedPaneModel.ADD)
                          .componentClass(TabbedPaneModel.class)
                          .addDatas(WBuilder.waveData(TabbedPaneModel.TAB_KEY, waveBean(wave).tabHolderKey()),

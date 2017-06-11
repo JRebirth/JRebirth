@@ -38,5 +38,10 @@ public class TabbedPaneConfig extends PartConfig<TabbedPaneModel, TabbedPaneConf
     public ObservableList<Dockable> tabs() {
         return this.tabs;
     }
+    
+    public TabbedPaneConfig tabs(final Dockable... tabs) {
+        this.tabs.addAll(tabs);
+        return this;
+    }
 
 }

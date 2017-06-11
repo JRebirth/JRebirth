@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jrebirth.af.showcase.wave.ui.main.MainController">
+	<children>
+		<Button layoutX="113.0" layoutY="106.0" mnemonicParsing="false" onAction="#onOk" text="Button" />
+		<TextField fx:id="txtMessage" layoutX="52.0" layoutY="178.0" />
+	</children>
+</AnchorPane>

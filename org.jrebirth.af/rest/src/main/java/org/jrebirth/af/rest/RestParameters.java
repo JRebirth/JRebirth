@@ -34,7 +34,19 @@ public interface RestParameters {
     /** _________________________________Rest Parameters.________________________________ */
     /**************************************************************************************/
 
+	// http://localhost:8080/JRebirth
+
     /** The default address of the remote rest server to use. */
-    ParameterItem<String> DEFAULT_REST_SERVER = create("defaultRestServer", "http://localhost:8080/JRebirth");
+    ParameterItem<String> DEFAULT_REST_SERVER_PROTOCOL = create("defaultRestServerProtocol", "http");
+    
+    /** The default address of the remote rest server to use. */
+    ParameterItem<String> DEFAULT_REST_SERVER_ADDRESS = create("defaultRestServerAddress", "localhost");
+    
+    /** The default address of the remote rest server to use. */
+    ParameterItem<String> DEFAULT_REST_SERVER_PORT = create("defaultRestServerPort", "8080");
+    
+    /** The default address of the remote rest server to use. */
+    ParameterItem<String> DEFAULT_REST_SERVER_PATH = create("defaultRestServerPath", "JRebirth");
+    
 
 }

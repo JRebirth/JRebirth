@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jrebirth.af</groupId>
+		<artifactId>tooling</artifactId>
+		<version>8.5.1-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	
+	<groupId>org.jrebirth.af.tooling</groupId>
+	<artifactId>ecore2fx</artifactId>
+	<name>Ecore to FX</name>
+	<description>Generate FX classes from Ecore</description>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>20.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<version>2.11.0-v20150805-0538</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<version>2.11.1-v20150805-0538</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+			<version>2.11.1-v20150805-0538</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth.af.tooling</groupId>
+			<artifactId>codegen</artifactId>
+			<version>8.5.1-SNAPSHOT</version>
+		</dependency>
+
+
+	</dependencies>
+</project>

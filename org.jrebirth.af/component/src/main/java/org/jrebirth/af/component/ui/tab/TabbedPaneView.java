@@ -202,7 +202,7 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
 
         controller().initTabEventHandler(b);
 
-        if (idx < 0) {
+        if (idx < 0 || idx > this.box.getChildren().size()) {
             idx = this.box.getChildren().size();
         }
         

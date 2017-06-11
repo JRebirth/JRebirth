@@ -11,34 +11,10 @@
 <!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
 #end   
 
+#include("_Component.md")
+
 #[[
 
-Component definition
-=========================
-
-A component is a top-level actor of the __wB-CS-Mvc__ pattern.
-
-Each component can communicate with other in a simple way. 
-They are loosely coupled with each other and with the engine itself.
-
-There are 3+1 kinds of components:
-
-* Command
-* Service
-* Model
-* Behavior
-
-Wave, View and Controller are not JRebirth Components.
-
-<div class="uml">
-	<a href="uml/ComponentOverview.png" rel="lightbox" title="Component Overview Class Diagram ">
-		<img class="redux" src="uml/ComponentOverview.png" alt="" />
-	</a>
-	<legend>Component Overview - Class Diagram</legend>
-</div>
-
-Component Registration
------------------------
 
 ]]#
 

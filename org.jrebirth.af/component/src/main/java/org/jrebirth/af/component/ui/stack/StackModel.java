@@ -23,9 +23,9 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.component.ui.beans.StackConfig;
 import org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean;
 import org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand;
-import org.jrebirth.af.core.service.ServiceTaskReturnWaveListener;
 import org.jrebirth.af.core.ui.object.DefaultObjectModel;
 import org.jrebirth.af.core.wave.JRebirthWaves;
+import org.jrebirth.af.core.wave.RelatedWaveListener;
 import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.checker.ClassWaveChecker;
 import org.jrebirth.af.core.wave.checker.DefaultWaveChecker;
@@ -157,7 +157,7 @@ public class StackModel extends DefaultObjectModel<StackModel, StackView, StackC
                 sendWave(WBuilder.callCommand(ShowFadingModelCommand.class)
                                  .waveBean(waveBean)
                                  .relatedWave(wave)
-                                 .addWaveListener(new ServiceTaskReturnWaveListener()));
+                                 .addWaveListener(new RelatedWaveListener()));
             } else {
                 // The showPage method has been called programmatically without any wave provided
                 // This is the first call used to initialize the stack so we perform the show transition immediately

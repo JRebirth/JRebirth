@@ -51,12 +51,28 @@ public class DockPaneController extends DefaultController<DockPaneModel, DockPan
      */
     @Override
     protected void initEventHandlers() throws CoreException {
-
-        node().setOnDragOver(getHandler(DragEvent.DRAG_OVER));
-        node().setOnDragEntered(getHandler(DragEvent.DRAG_ENTERED_TARGET));
-        node().setOnDragExited(getHandler(DragEvent.DRAG_EXITED_TARGET));
-        node().setOnDragDropped(getHandler(DragEvent.DRAG_DROPPED));
-        node().setOnDragDone(getHandler(DragEvent.DRAG_DONE));
+    	
+    	node().addEventHandler(DragEvent.DRAG_OVER, getHandler(DragEvent.DRAG_OVER));
+    	node().addEventHandler(DragEvent.DRAG_ENTERED_TARGET, getHandler(DragEvent.DRAG_ENTERED_TARGET));
+        node().addEventHandler(DragEvent.DRAG_EXITED_TARGET,getHandler(DragEvent.DRAG_EXITED_TARGET));
+        node().addEventHandler(DragEvent.DRAG_DROPPED,getHandler(DragEvent.DRAG_DROPPED));
+        node().addEventHandler(DragEvent.DRAG_DONE, getHandler(DragEvent.DRAG_DONE));
+    	
+//    	node().addEventFilter(DragEvent.DRAG_OVER, getHandler(DragEvent.DRAG_OVER));
+//    	node().addEventFilter(DragEvent.DRAG_ENTERED_TARGET, getHandler(DragEvent.DRAG_ENTERED_TARGET));
+//        node().addEventFilter(DragEvent.DRAG_EXITED_TARGET,getHandler(DragEvent.DRAG_EXITED_TARGET));
+//        node().addEventFilter(DragEvent.DRAG_DROPPED,getHandler(DragEvent.DRAG_DROPPED));
+//        node().addEventFilter(DragEvent.DRAG_DONE, getHandler(DragEvent.DRAG_DONE));
+    	
+    	
+//        node().setOnDragOver(getHandler(DragEvent.DRAG_OVER));
+//        node().setOnDragEntered(getHandler(DragEvent.DRAG_ENTERED));
+//        node().setOnDragExited(getHandler(DragEvent.DRAG_EXITED));
+//        node().setOnDragDropped(getHandler(DragEvent.DRAG_DROPPED));
+//        node().setOnDragDone(getHandler(DragEvent.DRAG_DONE));
+        
+        //node().setOnMousePressed(e -> System.out.println("Pressed=>"+ model().key().toString()) );
+        //node().setOnMouseMoved(e -> System.out.println("Moved=>"+ model().key().toString()) );
 
     }
 

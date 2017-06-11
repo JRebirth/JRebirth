@@ -41,6 +41,7 @@ import org.jrebirth.af.core.exception.ServiceException;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.wave.JRebirthItems;
 import org.jrebirth.af.core.wave.JRebirthWaves;
+import org.jrebirth.af.core.wave.RelatedWaveListener;
 import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.WaveItemBase;
 
@@ -281,7 +282,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
             // Don't add data when method has returned VOID
 
             returnWave.relatedWave(this.wave);
-            returnWave.addWaveListener(new ServiceTaskReturnWaveListener());
+            returnWave.addWaveListener(new RelatedWaveListener());
 
             // Send the return wave to interested components
             this.service.sendWave(returnWave);

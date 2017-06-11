@@ -19,15 +19,13 @@ package org.jrebirth.af.component.ui.tab;
 
 import java.util.List;
 
-import javafx.animation.SequentialTransition;
-import javafx.application.Platform;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
-
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
+import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
+import org.jrebirth.af.component.command.tab.AddTabCommand;
+import org.jrebirth.af.component.command.tab.TabWaveBean;
 import org.jrebirth.af.component.ui.beans.TabbedPaneConfig;
 import org.jrebirth.af.component.ui.beans.TabbedPaneOrientation;
 import org.jrebirth.af.core.concurrent.JRebirth;
@@ -35,9 +33,12 @@ import org.jrebirth.af.core.ui.object.DefaultObjectModel;
 import org.jrebirth.af.core.util.ObjectUtility;
 import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.WaveItemBase;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javafx.animation.SequentialTransition;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 
 /**
  * The Class TabbedPaneModel is used to.
@@ -47,7 +48,7 @@ import org.slf4j.LoggerFactory;
 public class TabbedPaneModel extends DefaultObjectModel<TabbedPaneModel, TabbedPaneView, TabbedPaneConfig> {
 
     /** The key of the tab model used as filter by wave checker. */
-    public static WaveItemBase<String> TAB_KEY = new WaveItemBase<String>(false) {
+    public static WaveItem<String> TAB_KEY = new WaveItemBase<String>(false) {
     };
 
     /** The model. */
@@ -83,6 +84,15 @@ public class TabbedPaneModel extends DefaultObjectModel<TabbedPaneModel, TabbedP
 
         // Manage Style
         node().getStyleClass().add(this.getClass().getSimpleName());
+        
+        
+        for (final Dockable d : object().tabs()) {
+
+            callCommand(AddTabCommand.class, TabWaveBean.create()
+					.tabHolderKey(object().id())
+					.tab(d));
+
+        }
 
     }
 

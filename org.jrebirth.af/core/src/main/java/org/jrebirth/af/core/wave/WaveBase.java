@@ -27,6 +27,7 @@ import java.util.UUID;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
@@ -451,7 +452,7 @@ public class WaveBase implements Wave, LinkMessages {
     public Wave status(final Status status) {
         synchronized (this) {
             if (this.statusProperty.get() == status) {
-                // throw new CoreRuntimeException("The status " + status.toString() + " has been already set for this wave " + toString());
+                throw new CoreRuntimeException("The status " + status.toString() + " has been already set for this wave " + toString());
             } else {
                 this.statusProperty.set(status);
                 fireStatusChanged();
