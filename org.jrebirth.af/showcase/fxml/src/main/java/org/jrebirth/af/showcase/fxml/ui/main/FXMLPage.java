@@ -18,45 +18,27 @@ import org.jrebirth.af.showcase.fxml.ui.standalone.StandaloneModel;
  */
 public enum FXMLPage implements PageEnum {
 
-    /** . */
     StandaloneFxml,
-
-    /** . */
     IncludedFxml,
-
-    /** . */
     ViewEmbeddedFxml,
-
-    /** . */
-    HybridFxml
-
-    ;
+    HybridFxml;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public UniqueKey<? extends Model> getModelKey() {
-        UniqueKey<? extends Model> modelKey;
-
         switch (this) {
-
             default:
             case ViewEmbeddedFxml:
-                modelKey = Key.create(EmbeddedModel.class);
-                break;
+                return Key.create(EmbeddedModel.class);
             case StandaloneFxml:
-                modelKey = Key.create(StandaloneModel.class);
-                break;
+            	return Key.create(StandaloneModel.class);
             case HybridFxml:
-                modelKey = Key.create(HybridModel.class, FXMLModel.KEYPART_FXML_PREFIX + "org.jrebirth.af.showcase.fxml.ui.hybrid.Hybrid");
-                break;
+            	return Key.create(HybridModel.class, FXMLModel.KEYPART_FXML_PREFIX + "org.jrebirth.af.showcase.fxml.ui.hybrid.Hybrid");
             case IncludedFxml:
-                modelKey = Key.create(IncludedModel.class, new LoremIpsum());
-                break;
+            	return Key.create(IncludedModel.class, new LoremIpsum());
         }
-
-        return modelKey;
     }
 
 }

@@ -53,6 +53,8 @@
 		<module>undoredo</module>
 		<module>fxml</module>
 		<module>wave</module>
+		<module>todos</module>
+		<module>data</module>
 		<module>workbench</module>
 	</modules>
 

@@ -46,7 +46,9 @@ import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.WaveItemBase;
 
 /**
- * The class <strong>ServiceTask</strong>.
+ * The class <strong>ServiceTask</strong> is used to wrap a service method call.
+ * 
+ * The call will be performed into JTP thread pool.
  *
  * @author Sébastien Bordes
  *
@@ -63,12 +65,12 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
     private final Object[] parameterValues;
 
     /**
-     * The <code>method</code>.
+     * The <code>method</code> of the service to call.
      */
     private final Method method;
 
     /**
-     * The <code>localService</code>.
+     * The <code>service</code> instance used to perform the task by calling one of its method.
      */
     private final Service service;
 
@@ -79,7 +81,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
 
     /**
      * The workdone copied property stored locally to allow access outside JAT.<br/>
-     * It implies to synchronize each access/modification
+     * It implies to synchronize each access/modification.
      */
     private double localWorkDone;
 
@@ -115,7 +117,7 @@ public final class ServiceTaskBase<T> extends Task<T> implements JRebirthRunnabl
     /**
      * Return the full service handler name.
      *
-     * ServiceName + method + ( parameters types )
+     * <ServiceName>.<method> ( <parameter type1>, <parameter type2>...., <parameter typeN> )
      *
      * @return the full service handler name
      */

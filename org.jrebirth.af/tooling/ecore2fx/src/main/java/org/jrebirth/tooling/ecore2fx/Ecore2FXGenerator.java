@@ -327,6 +327,8 @@ public class Ecore2FXGenerator {
             return "double";
         } else if (typeID == EcorePackage.EBYTE_OBJECT || typeID == EcorePackage.EBYTE) {
             return "byte";
+        } else if (typeID == EcorePackage.EBOOLEAN) {
+            return "boolean";
         } else if (typeID == EcorePackage.EBIG_INTEGER) {
             return BigInteger.class.getCanonicalName();
         } else if (typeID == EcorePackage.EBIG_DECIMAL) {

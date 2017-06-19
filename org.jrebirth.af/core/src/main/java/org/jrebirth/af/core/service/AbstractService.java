@@ -28,6 +28,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.scene.control.ProgressBar;
 
+import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.facade.JRebirthEventType;
 import org.jrebirth.af.api.log.JRLogger;
@@ -35,6 +36,7 @@ import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.service.ServiceTask;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.core.component.basic.AbstractComponent;
 import org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.log.JRLoggerFactory;
@@ -44,9 +46,7 @@ import org.jrebirth.af.core.wave.WBuilder;
 
 /**
  *
- * The class <strong>ServiceBase</strong>.
- *
- * Base implementation of the service.
+ * The class <strong>AbstractService</strong> is the Base class for all implementations of {@link Service}.
  *
  * @author Sébastien Bordes
  */
@@ -74,7 +74,7 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
     /**
      * Custom method used to initialize the service.
      *
-     * Called into JIT by ready method.
+     * Called into JIT by {@link AbstractComponent#ready()} method.
      */
     protected abstract void initService();
 

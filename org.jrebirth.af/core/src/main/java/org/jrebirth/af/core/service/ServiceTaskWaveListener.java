@@ -22,7 +22,7 @@ import org.jrebirth.af.api.wave.WaveListener;
 import org.jrebirth.af.core.wave.JRebirthWaves;
 
 /**
- * The class <strong>ServiceReturnWaveListener</strong>.
+ * The class <strong>ServiceTaskWaveListener</strong> is used to track Progression of ServiceTask.
  *
  * @author Sébastien Bordes
  */
@@ -57,7 +57,7 @@ public final class ServiceTaskWaveListener implements WaveListener {
      */
     @Override
     public void waveCancelled(final Wave wave) {
-        // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
+        // We can now remove the pending task (even if the return wave isn't processed TODO CHECK it)
         wave.get(JRebirthWaves.SERVICE_TASK).taskAchieved();
     }
 
@@ -75,7 +75,7 @@ public final class ServiceTaskWaveListener implements WaveListener {
     @Override
     public void waveHandled(final Wave wave) {
 
-        // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
+        // We can now remove the pending task (even if the return wave isn't processed TODO CHECK it)
         wave.get(JRebirthWaves.SERVICE_TASK).taskAchieved();
     }
 
@@ -84,7 +84,7 @@ public final class ServiceTaskWaveListener implements WaveListener {
      */
     @Override
     public void waveFailed(final Wave wave) {
-        // We can now remove the pending task (even if the return wave isn't processed TO CHECK)
+        // We can now remove the pending task (even if the return wave isn't processed TODO CHECK it)
         wave.get(JRebirthWaves.SERVICE_TASK).taskAchieved();
     }
 

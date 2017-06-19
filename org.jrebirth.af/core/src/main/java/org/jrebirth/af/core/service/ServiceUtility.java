@@ -9,7 +9,7 @@ import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
- * The class <strong>ServiceUtility</strong> is used to provide convenient method related to Service tasks.
+ * The class <strong>ServiceUtility</strong> is used to provide convenient methods related to Service tasks.
  *
  * @author Sébastien Bordes
  */
