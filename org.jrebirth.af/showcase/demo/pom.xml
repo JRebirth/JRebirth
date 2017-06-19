@@ -418,6 +418,12 @@
 
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
+			<artifactId>todos</artifactId>
+			<version>8.5.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>workbench</artifactId>
 			<version>8.5.1-SNAPSHOT</version>
 		</dependency>

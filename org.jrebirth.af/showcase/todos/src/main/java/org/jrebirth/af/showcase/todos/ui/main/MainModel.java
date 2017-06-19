@@ -21,16 +21,18 @@ public class MainModel extends DefaultModel<MainModel, MainView> {
     @Link
     protected InnerComponent<StatusModel> statusModel;
 
+    /** Provides getter to model. */
+
     HeaderModel headerModel() {
-        return headerModel.get();
+        return this.headerModel.get();
     }
 
     ContentModel contentModel() {
-        return contentModel.get();
+        return this.contentModel.get();
     }
 
     StatusModel statusModel() {
-        return statusModel.get();
+        return this.statusModel.get();
     }
 
 }

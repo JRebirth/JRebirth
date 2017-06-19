@@ -1,11 +1,15 @@
 package org.jrebirth.af.showcase.todos.service;
 
+import javafx.beans.property.StringProperty;
+
+import org.jrebirth.af.api.module.Register;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.service.DefaultService;
 
 import bean.Todo;
 import bean.TodoList;
 
+@Register(value = TodoService.class)
 public class TodoServiceImpl extends DefaultService implements TodoService {
 
     TodoList todoList = new TodoList();
@@ -13,18 +17,31 @@ public class TodoServiceImpl extends DefaultService implements TodoService {
     /**
      * @return Returns the todoList.
      */
-    TodoList getTodoList() {
-        return todoList;
+    @Override
+    public TodoList getTodoList() {
+        return this.todoList;
     }
 
     @Override
-    public boolean doAdd(String text, Wave wave) {
+    public boolean doAdd(final StringProperty text, final Wave wave) {
 
-        final Todo t = Todo.of().test(text).done(false);
+        final Todo t = Todo.of().text(text.getValue()).done(false);
+        this.todoList.addTodo(t);
+        return true;
+    }
 
-        todoList.pTodo().set(t);
+    @Override
+    public boolean doRemove(final Todo todo, final Wave wave) {
+
+        this.todoList.removeTodo(todo);
 
         return true;
+    }
+
+    @Override
+    public org.jrebirth.af.showcase.todos.service.TodoList getTodoList() {
+        // Nothing to do yet
+        return null;
     }
 
 }

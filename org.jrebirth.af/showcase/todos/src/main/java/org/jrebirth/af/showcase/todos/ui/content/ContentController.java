@@ -5,7 +5,7 @@ import org.jrebirth.af.core.ui.DefaultController;
 
 public final class ContentController extends DefaultController<ContentModel, ContentView> {
 
-    public ContentController(ContentView view) throws CoreException {
+    public ContentController(final ContentView view) throws CoreException {
         super(view);
     }
 

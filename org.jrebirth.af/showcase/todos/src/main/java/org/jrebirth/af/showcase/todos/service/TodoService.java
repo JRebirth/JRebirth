@@ -2,7 +2,7 @@ package org.jrebirth.af.showcase.todos.service;
 
 import static org.jrebirth.af.core.wave.WBuilder.waveType;
 
-import java.util.List;
+import javafx.beans.property.StringProperty;
 
 import org.jrebirth.af.api.module.RegistrationPoint;
 import org.jrebirth.af.api.service.Service;
@@ -12,6 +12,7 @@ import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.wave.JRebirthItems;
 import org.jrebirth.af.core.wave.WaveItemBase;
 
+import bean.Todo;
 import bean.TodoList;
 
 /**
@@ -24,18 +25,30 @@ public interface TodoService extends Service {
 
     String ADDED = "ADDED";
 
-    WaveItem<String> TODO = new WaveItemBase<String>() {
+    String REMOVED = "REMOVED";
+
+    WaveItem<StringProperty> TODO_STRING = new WaveItemBase<StringProperty>() {
     };
 
-    WaveItem<List<TodoList>> RESULT = new WaveItemBase<List<TodoList>>() {
+    WaveItem<Todo> TODO = new WaveItemBase<Todo>() {
     };
 
-    /** Perform something. */
-    WaveType DO_COMPARE = waveType("ADD")
-                                         .items(TODO)
-                                         .returnItem(JRebirthItems.booleanItem)
-                                         .returnAction(ADDED);
+    // WaveItem<List<TodoList>> RESULT = new WaveItemBase<List<TodoList>>() {
+    // };
 
-    boolean doAdd(final String text, final Wave wave);
+    WaveType DO_ADD = waveType("ADD")
+                                     .items(TODO_STRING)
+                                     .returnItem(JRebirthItems.booleanItem)
+                                     .returnAction(ADDED);
 
+    WaveType DO_REMOVE = waveType("REMOVE")
+                                           .items(TODO)
+                                           .returnItem(JRebirthItems.booleanItem)
+                                           .returnAction(REMOVED);
+
+    boolean doAdd(final StringProperty text, final Wave wave);
+
+    boolean doRemove(final Todo todo, final Wave wave);
+
+    TodoList getTodoList();
 }

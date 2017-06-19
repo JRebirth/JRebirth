@@ -5,7 +5,7 @@ import org.jrebirth.af.core.ui.DefaultController;
 
 public final class MainController extends DefaultController<MainModel, MainView> {
 
-    public MainController(MainView view) throws CoreException {
+    public MainController(final MainView view) throws CoreException {
         super(view);
     }
 

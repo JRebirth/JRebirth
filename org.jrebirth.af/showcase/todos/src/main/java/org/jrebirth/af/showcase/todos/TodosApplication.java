@@ -8,7 +8,7 @@ import org.jrebirth.af.showcase.todos.ui.main.MainModel;
 
 public class TodosApplication extends DefaultApplication<StackPane> {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         launch(args);
     }
 

@@ -1,15 +1,16 @@
 package org.jrebirth.af.showcase.todos.ui.main;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
 
 import org.jrebirth.af.core.ui.DefaultView;
+import org.jrebirth.af.showcase.todos.resource.TodosImages;
 
 public class MainView extends DefaultView<MainModel, BorderPane, MainController> {
 
     private BorderPane borderPane;
 
-    public MainView(MainModel model) {
+    public MainView(final MainModel model) {
         super(model);
     }
 
@@ -20,15 +21,15 @@ public class MainView extends DefaultView<MainModel, BorderPane, MainController>
     protected void initView() {
         super.initView();
 
-        final Text appName = new Text("Todos");
+        final ImageView appName = new ImageView(TodosImages.HEADER_LOGO.get());
         node().setTop(appName);
 
-        borderPane = new BorderPane();
-        node().setCenter(borderPane);
+        this.borderPane = new BorderPane();
+        node().setCenter(this.borderPane);
 
-        borderPane.setTop(model().headerModel().node());
-        borderPane.setCenter(model().contentModel().node());
-        borderPane.setBottom(model().statusModel().node());
+        this.borderPane.setTop(model().headerModel().node());
+        this.borderPane.setCenter(model().contentModel().node());
+        this.borderPane.setBottom(model().statusModel().node());
 
     }
 
@@ -36,6 +37,6 @@ public class MainView extends DefaultView<MainModel, BorderPane, MainController>
      * @return Returns the borderPane.
      */
     BorderPane borderPane() {
-        return borderPane;
+        return this.borderPane;
     }
 }
