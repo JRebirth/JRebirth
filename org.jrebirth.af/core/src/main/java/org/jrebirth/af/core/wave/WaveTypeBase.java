@@ -182,6 +182,7 @@ public final class WaveTypeBase implements WaveType {
     @Override
     public WaveTypeBase returnAction(final String returnAction) {
         this.returnAction = returnAction;
+        buildReturnWaveType();
         return this;
     }
 
