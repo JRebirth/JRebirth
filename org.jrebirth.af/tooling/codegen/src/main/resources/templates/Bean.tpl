@@ -110,9 +110,9 @@ return this.{$bean.property_name};
 {#PropertyAddList}
 
 if ({$bean.property_name} != null) {
-	this.{$bean.property_name}.addAll(Arrays.asList({$bean.name}));
+	{$bean.property_name}.addAll(Arrays.asList({$bean.name}));
 } else {
-	this.{$bean.name}.addAll(Arrays.asList({$bean.name}));
+	{$bean.name}().addAll(Arrays.asList({$bean.name}));
 }
 return {$bean.fluent_type}this;
 
@@ -122,9 +122,9 @@ return {$bean.fluent_type}this;
 {#PropertyRemoveList}
 
 if ({$bean.property_name} != null) {
-	this.{$bean.property_name}.removeAll(Arrays.asList({$bean.name}));
+	{$bean.property_name}.removeAll(Arrays.asList({$bean.name}));
 } else {
-	this.{$bean.name}.removeAll(Arrays.asList({$bean.name}));
+	{$bean.name}().removeAll(Arrays.asList({$bean.name}));
 }
 return {$bean.fluent_type}this;
 

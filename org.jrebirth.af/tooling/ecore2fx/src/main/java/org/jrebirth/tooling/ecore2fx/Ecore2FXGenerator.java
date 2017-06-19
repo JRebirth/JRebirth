@@ -186,7 +186,7 @@ public class Ecore2FXGenerator {
                                            .needGetter(true)
                                            .needSetter(true)
                                            .needProperty(true)
-                                           .type(Class.of(getFullName(ref.getEReferenceType())));
+                                           .type(Class.of(wrapWithList(ref, getFullName(ref.getEReferenceType()))));
 
             // Avoid adding ecore stuff
             if (!field.type().qualifiedName().contains("ecore")) {
@@ -210,7 +210,14 @@ public class Ecore2FXGenerator {
         return bean;
     }
 
-    private Class getReturnType(EOperation o) {
+    private String wrapWithList(EReference ref, String fullName) {
+		if(ref.getUpperBound() == -1 || ref.getUpperBound() > 1){
+			return "java.util.List<"+ fullName + ">";
+		}
+		return fullName;
+	}
+
+	private Class getReturnType(EOperation o) {
 
         if (o.getEGenericType() != null) {
             return Class.of(getGenericTypeName(o.getEGenericType()));

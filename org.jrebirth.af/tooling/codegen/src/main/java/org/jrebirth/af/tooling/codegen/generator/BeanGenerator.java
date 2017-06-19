@@ -313,7 +313,7 @@ public class BeanGenerator extends AbstractGenerator<Class, JavaClassSource> {
                                                     .setBody(body.toString())
                                                     .setReturnType(javaClass.getTypeVariables().isEmpty() ? javaClass.getName() : javaClass.getTypeVariables().get(0).getName());
 
-            method.addParameter(propDef.type().qualifiedName(), propDef.name()).setVarArgs(true);
+            method.addParameter(propDef.subtype(), propDef.name()).setVarArgs(true);
 
             method.getJavaDoc().setFullText(javadoc.toString());
 
