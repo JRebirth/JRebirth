@@ -12,7 +12,7 @@ import bean.TodoList;
 @Register(value = TodoService.class)
 public class TodoServiceImpl extends DefaultService implements TodoService {
 
-    TodoList todoList = new TodoList();
+    private TodoList todoList = new TodoList();
 
     /**
      * @return Returns the todoList.
@@ -25,8 +25,8 @@ public class TodoServiceImpl extends DefaultService implements TodoService {
     @Override
     public boolean doAdd(final StringProperty text, final Wave wave) {
 
-        final Todo t = Todo.of().text(text.getValue()).done(false);
-        this.todoList.addTodo(t);
+        this.todoList.addTodo(Todo.of().text(text.getValue()).done(false));
+
         return true;
     }
 
@@ -36,12 +36,6 @@ public class TodoServiceImpl extends DefaultService implements TodoService {
         this.todoList.removeTodo(todo);
 
         return true;
-    }
-
-    @Override
-    public org.jrebirth.af.showcase.todos.service.TodoList getTodoList() {
-        // Nothing to do yet
-        return null;
     }
 
 }

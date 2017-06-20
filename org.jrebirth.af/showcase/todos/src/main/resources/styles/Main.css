@@ -1,0 +1,12 @@
+
+.todoCell {
+	-fx-text-alignment:left;
+}
+
+.done .text {
+	-fx-strikethrough:true;
+}
+
+.undone .text {
+	-fx-strikethrough:false;
+}

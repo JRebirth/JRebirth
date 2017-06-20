@@ -39,12 +39,15 @@ public class StatusView extends DefaultView<StatusModel, HBox, StatusController>
         this.group = new ToggleGroup();
 
         this.all = new ToggleButton("All");
+        this.all.setUserData(FilterKind.All);
         this.all.setToggleGroup(this.group);
 
         this.active = new ToggleButton("Active");
+        this.active.setUserData(FilterKind.Undone);
         this.active.setToggleGroup(this.group);
 
         this.completed = new ToggleButton("Done");
+        this.completed.setUserData(FilterKind.Done);
         this.completed.setToggleGroup(this.group);
 
         this.all.setSelected(true);
@@ -55,6 +58,15 @@ public class StatusView extends DefaultView<StatusModel, HBox, StatusController>
 
     public ToggleGroup getGroup() {
         return this.group;
+    }
+
+    public void updateStatus(long count) {
+        if (count > 1) {
+            this.summary.setText(count + " items left");
+        } else {
+            this.summary.setText(count + " item left");
+        }
+
     }
 
 }

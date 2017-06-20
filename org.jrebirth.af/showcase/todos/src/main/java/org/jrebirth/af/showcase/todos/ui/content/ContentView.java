@@ -2,6 +2,8 @@ package org.jrebirth.af.showcase.todos.ui.content;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Pos;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -39,14 +41,22 @@ public class ContentView extends DefaultView<ContentModel, BorderPane, ContentCo
         doneColumn.setMaxWidth(40);
         doneColumn.setMinWidth(40);
         doneColumn.setCellValueFactory(cdf -> cdf.getValue().pDone());
-        doneColumn.setCellFactory(tc -> new CheckBoxTableCell<>());
+        doneColumn.setCellFactory(tc -> new CheckBoxTableCell<Todo, Boolean>() {
+
+            @Override
+            public void updateItem(Boolean item, boolean empty) {
+                super.updateItem(item, empty);
+                // model().sendWave(WWaves.UPDATE_STATUS_WT);
+            }
+
+        });
 
         final TableColumn<Todo, String> textColumn = new TableColumn<>("Text");
         textColumn.setId(TEXT_COLUMN);
         textColumn.setPrefWidth(200);
         textColumn.setMinWidth(100);
         textColumn.setCellValueFactory(this::getColumnContent);
-        // sourceVersionColumn.setCellFactory(this::getTableCell);
+        textColumn.setCellFactory(this::getTableCell);
 
         this.table.getColumns().setAll(doneColumn, textColumn);
 
@@ -72,6 +82,37 @@ public class ContentView extends DefaultView<ContentModel, BorderPane, ContentCo
                 break;
         }
         return new SimpleStringProperty(res);
+    }
+
+    private TableCell<Todo, String> getTableCell(final TableColumn<Todo, String> column) {
+        final TableCell<Todo, String> tc = new TableCell<Todo, String>() {
+            @Override
+            protected void updateItem(final String item, final boolean empty) {
+                super.updateItem(item, empty);
+
+                if (item == null || empty) {
+                    setText(null);
+                    setStyle("");
+                    setBackground(null);
+                } else {
+                    setText(item);
+
+                    final Todo t = column.getTableView().getItems().get(getTableRow().getIndex());
+
+                    getStyleClass().add("todoCell");
+                    if (t.done()) {
+                        getStyleClass().removeAll("undone");
+                        getStyleClass().add("done");
+                    } else {
+                        getStyleClass().removeAll("done");
+                        getStyleClass().add("undone");
+                    }
+
+                }
+            }
+        };
+        tc.setAlignment(Pos.CENTER);
+        return tc;
     }
 
     public TableView<Todo> getTable() {
