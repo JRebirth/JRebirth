@@ -17,57 +17,37 @@
  */
 package org.jrebirth.af.core.resource.fxml;
 
+import org.jrebirth.af.api.resource.builder.ResourceBuilder;
 import org.jrebirth.af.api.resource.fxml.FXMLItem;
 import org.jrebirth.af.api.resource.fxml.FXMLParams;
 import org.jrebirth.af.api.ui.fxml.FXMLComponent;
-import org.jrebirth.af.core.resource.AbstractResourceItem;
+import org.jrebirth.af.core.resource.ResourceBuilders;
 
 /**
- * The class <strong>FXMLItemBase</strong>.
+ * The class <strong>FXMLItem</strong>.
  *
  * @author Sébastien Bordes
  */
-public final class FXMLItemBase extends AbstractResourceItem<FXMLItem, FXMLParams, FXMLComponent> implements FXMLItemReal {
-
-    /** Property mapped to FXMLItem.isSingleton getter. */
-    private final boolean isSingleton;
-
-    /**
-     * Build a fresh instance of {@link FXMLItemBase}.
-     *
-     * @return a {@link FXMLItemBase} instance
-     */
-    public static FXMLItemBase create() {
-        return create(true);
-    }
-
-    /**
-     * Build a fresh instance of {@link FXMLItemBase}.
-     *
-     * @param isSingleton flag that indicate if the FXML Component is unique or multiple.
-     *
-     * @return a {@link FXMLItemBase} instance
-     */
-    public static FXMLItemBase create(final boolean isSingleton) {
-        return new FXMLItemBase(isSingleton);
-    }
-
-    /**
-     * Default Constructor.
-     *
-     * @param isSingleton flag that indicate if the FXML Component is unique or multiple.
-     */
-    public FXMLItemBase(final boolean isSingleton) {
-        super();
-        this.isSingleton = isSingleton;
-    }
+public interface FXMLItemBase extends FXMLItem {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean isSingleton() {
-        return this.isSingleton;
+    default ResourceBuilder<FXMLItem, FXMLParams, FXMLComponent> builder() {
+        return ResourceBuilders.FXML_BUILDER;
+    }
+
+    /**
+     * Build a new FXMLComponent without storing it.
+     *
+     * If you call 'n' times this method you will obtain 'n' {@link FXMLComponent} instances.
+     *
+     * @return a new {@link FXMLComponent} instance
+     */
+    @Override
+    default FXMLComponent getNew() {
+        return ((FXMLBuilder) builder()).buildResource(this, builder().getParam(this));
     }
 
 }

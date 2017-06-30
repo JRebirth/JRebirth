@@ -1,4 +1,5 @@
 /**
+
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
@@ -17,113 +18,125 @@
  */
 package org.jrebirth.af.core.resource.i18n;
 
-import java.text.MessageFormat;
-
-import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.resource.builder.ResourceBuilder;
 import org.jrebirth.af.api.resource.i18n.JRLevel;
 import org.jrebirth.af.api.resource.i18n.MessageItem;
 import org.jrebirth.af.api.resource.i18n.MessageParams;
 import org.jrebirth.af.api.resource.i18n.MessageResource;
-import org.jrebirth.af.core.resource.AbstractResourceItem;
-import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
+import org.jrebirth.af.core.resource.ResourceBuilders;
 
 import org.slf4j.Marker;
 
 /**
- * The class <strong>MessageItemBase</strong> is used to build i18n Message.
+ * The class <strong>MessageItem</strong> used to declare Message Resource.
+ *
+ * The key of the i18n message.
+ *
+ * The name will be transformed : camelCase => CAMEL_CASE
  *
  * @author Sébastien Bordes
  */
-public final class MessageItemBase extends AbstractResourceItem<MessageItem, MessageParams, MessageResource> implements MessageItemReal {
+public interface MessageItemBase extends MessageItem {
 
     /**
-     * Create a new {@link MessageItem} instance.
+     * Get the message formatted text with or without parameterized objects.
      *
-     * @return a new {@link MessageItem} instance
+     * @param stringParameters the list of object used as string parameter
+     *
+     * @return Returns right message formatted with given parameters.
      */
-    public static MessageItemBase create() {
-        return new MessageItemBase();
-    }
+    @Override
+    String getText(final Object... stringParameters);
+
+    /**
+     * Return the optional log marker if any.
+     *
+     * @return the optional log marker or the Empty one
+     */
+    @Override
+    Marker getMarker();
+
+    /**
+     * Return the optional log level if any.
+     *
+     * @return the optional log level or the info one
+     */
+    @Override
+    JRLevel getLevel();
+
+    /**
+     * Define a new forced string.
+     *
+     * This forced value will be used instead of default programmatic one and all other retrieved from properties files.
+     *
+     * @param forcedValue the new string for this message
+     */
+    @Override
+    void define(final MessageResource forcedValue);
+
+    /**
+     * Persist a message value.
+     */
+    @Override
+    void persist();
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getText(final Object... stringParameters) {
-
-        String res = get().getMessage();
-
-        if (stringParameters.length > 0) {
-            try {
-                // Use the message formatter
-                res = MessageFormat.format(res, stringParameters);
-
-                if (res.startsWith("<") && res.endsWith(">")) {
-                    res += " values: ";
-
-                    final StringBuilder sb = new StringBuilder();
-                    for (final Object param : stringParameters) {
-                        if (param != null) {
-                            sb.append(param.toString()).append("|");
-                        }
-                    }
-                    res += sb.toString();
-                }
-
-            } catch (final IllegalArgumentException e) {
-
-                // Display special markups
-                res = "<!!" + builder().getParam(this).toString() + "!!>";
-
-                // In developer mode throw a runtime exception to stop the current task
-                if (CoreParameters.DEVELOPER_MODE.get()) {
-                    throw new CoreRuntimeException("Bad formatted Message key : " + res, e);
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void define(final MessageResource forcedValue) {
-        // The default programmatic value (stored into ObjectParameter) is not updated but overridden into the local map
-        ((MessageBuilder) builder()).define(this, forcedValue);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void persist() {
-        throw new CoreRuntimeException("Not Implemented yet");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Marker getMarker() {
-        return get().getMarker();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JRLevel getLevel() {
-        return get().getLevel();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MessageItem set(final MessageParams messageParams) {
+    default MessageItem set(final MessageParams messageParams) {
         builder().storeParams(this, messageParams);
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default MessageResource get() {
+        return builder().get(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default ResourceBuilder<MessageItem, MessageParams, MessageResource> builder() {
+        return ResourceBuilders.MESSAGE_BUILDER;
+    }
+
+    /**
+     * The interface <strong>Log</strong> used to declare Message Resource fro logging.
+     */
+    interface Log extends MessageItemBase {
+
+        /**
+         * Build and register a {@link LogMessage}.
+         *
+         * @param parameterName the name of the log message
+         * @param level the log level to use
+         * @param marker the log marker to use
+         */
+        default void log(final String parameterName, final JRLevel level, final Marker marker) {
+            set(new LogMessage(parameterName, level, marker));
+        }
+
+    }
+
+    /**
+     * The interface <strong>Msg</strong> used to declare Message Resource.
+     *
+     * The key of the i18n message.
+     */
+    interface Msg extends MessageItemBase {
+
+        /**
+         * Build and register a {@link Message}.
+         *
+         * @param parameterName the name of the parameter
+         */
+        default void msg(final String parameterName) {
+            set(new Message(parameterName));
+        }
+    }
 }

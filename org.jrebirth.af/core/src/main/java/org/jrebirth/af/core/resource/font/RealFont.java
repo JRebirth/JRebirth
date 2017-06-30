@@ -123,7 +123,7 @@ public class RealFont extends AbstractBaseFont {
      */
     @Override
     protected List<? extends Object> getFieldValues() {
-        return Arrays.asList(name().toString(), size(), skipFontsFolder());
+        return Arrays.asList(name().name(), size(), skipFontsFolder());
     }
 
 }

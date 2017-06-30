@@ -22,10 +22,13 @@ package org.jrebirth.af.api.resource;
  *
  * @author Sébastien Bordes
  */
-public interface ResourceParams {
+public interface ResourceParams extends Cloneable {
 
     /** The separator used between parameters into serialized string. */
-    String PARAMETER_SEPARATOR = "\\|\\|";
+    String PARAMETER_SEPARATOR = "||";
+
+    /** The Regex used to split according to PARAMETER_SEPARATOR. */
+    String PARAMETER_SEPARATOR_REGEX = "\\|\\|";
 
     /**
      * Activate AutoRefresh that will mark the {@link ResourceParams} as 'Updated' to force the rebuild of the resource on next call.
@@ -66,5 +69,7 @@ public interface ResourceParams {
      * @param parameters split from resource properties file
      */
     void parse(final String... parameters);
+
+    Object clone() throws CloneNotSupportedException;
 
 }

@@ -103,7 +103,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
         Object res = null;
         if (this.object instanceof ResourceParams) {
             // Setup the default object
-            ((ResourceParams) this.object).parse(parameterEntry.getSerializedString().split(PARAMETER_SEPARATOR));
+            ((ResourceParams) this.object).parse(parameterEntry.getSerializedString().split(PARAMETER_SEPARATOR_REGEX));
             // return the new value
             res = this.object;
         } else if (this.object instanceof Class<?>) {

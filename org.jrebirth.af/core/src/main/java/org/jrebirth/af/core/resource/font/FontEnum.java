@@ -2,8 +2,8 @@ package org.jrebirth.af.core.resource.font;
 
 import javafx.scene.text.Font;
 
-import org.jrebirth.af.core.resource.font.FontItemReal.Family;
-import org.jrebirth.af.core.resource.font.FontItemReal.Real;
+import org.jrebirth.af.core.resource.font.FontItemBase.Family;
+import org.jrebirth.af.core.resource.font.FontItemBase.Real;
 import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 
 /**

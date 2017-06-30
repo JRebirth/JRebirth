@@ -32,16 +32,16 @@ import org.jrebirth.af.api.resource.image.ImageParams;
 import org.jrebirth.af.api.resource.parameter.ParameterItem;
 import org.jrebirth.af.api.resource.style.StyleSheetItem;
 import org.jrebirth.af.api.resource.style.StyleSheetParams;
-import org.jrebirth.af.core.resource.color.ColorItemBase;
-import org.jrebirth.af.core.resource.font.FontItemBase;
-import org.jrebirth.af.core.resource.fxml.FXMLItemBase;
+import org.jrebirth.af.core.resource.color.ColorItemImpl;
+import org.jrebirth.af.core.resource.font.FontItemImpl;
+import org.jrebirth.af.core.resource.fxml.FXMLItemImpl;
 import org.jrebirth.af.core.resource.i18n.Message;
-import org.jrebirth.af.core.resource.i18n.MessageItemBase;
-import org.jrebirth.af.core.resource.image.ImageItemBase;
+import org.jrebirth.af.core.resource.i18n.MessageItemImpl;
+import org.jrebirth.af.core.resource.image.ImageItemImpl;
 import org.jrebirth.af.core.resource.parameter.ObjectParameter;
-import org.jrebirth.af.core.resource.parameter.ParameterItemBase;
+import org.jrebirth.af.core.resource.parameter.ParameterItemImpl;
 import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
-import org.jrebirth.af.core.resource.style.StyleSheetItemBase;
+import org.jrebirth.af.core.resource.style.StyleSheetItemImpl;
 
 /**
  * The class <strong>Resources</strong> is the first access point when you want to declare a resource for your application.
@@ -96,7 +96,7 @@ public final class Resources {
      */
     public static <O extends Object> ParameterItem<O> create(final ObjectParameter<O> parameterParams) {
         // Ensure that the uid will be unique at runtime
-        return (ParameterItem<O>) ParameterItemBase.create(parameterParams.object()).uid(parameterIdGenerator.incrementAndGet()).set(parameterParams); // FIXME
+        return (ParameterItem<O>) ParameterItemImpl.create(parameterParams.object()).uid(parameterIdGenerator.incrementAndGet()).set(parameterParams); // FIXME
     }
 
     /**
@@ -125,7 +125,7 @@ public final class Resources {
      * @return a new fresh color item object
      */
     public static ColorItem create(final ColorParams colorParams) {
-        return ColorItemBase.create().uid(colorIdGenerator.incrementAndGet()).set(colorParams);
+        return ColorItemImpl.create().uid(colorIdGenerator.incrementAndGet()).set(colorParams);
     }
 
     /*************************************************************************/
@@ -143,7 +143,7 @@ public final class Resources {
      */
     public static FontItem create(final FontParams fontParams) {
         // Ensure that the uid will be unique at runtime
-        return FontItemBase.create().uid(fontIdGenerator.incrementAndGet()).set(fontParams);
+        return FontItemImpl.create().uid(fontIdGenerator.incrementAndGet()).set(fontParams);
     }
 
     /*************************************************************************/
@@ -161,7 +161,7 @@ public final class Resources {
      */
     public static ImageItem create(final ImageParams imageParams) {
         // Ensure that the uid will be unique at runtime
-        return ImageItemBase.create().uid(imageIdGenerator.incrementAndGet()).set(imageParams);
+        return ImageItemImpl.create().uid(imageIdGenerator.incrementAndGet()).set(imageParams);
     }
 
     /*************************************************************************/
@@ -179,7 +179,7 @@ public final class Resources {
      */
     public static StyleSheetItem create(final StyleSheetParams styleSheetParams) {
         // Ensure that the uid will be unique at runtime
-        return StyleSheetItemBase.create().uid(styleSheetIdGenerator.incrementAndGet()).set(styleSheetParams);
+        return StyleSheetItemImpl.create().uid(styleSheetIdGenerator.incrementAndGet()).set(styleSheetParams);
     }
 
     /*************************************************************************/
@@ -197,7 +197,7 @@ public final class Resources {
      */
     public static FXMLItem create(final FXMLParams fxmlParams) {
         // Ensure that the uid will be unique at runtime
-        return FXMLItemBase.create(true).uid(fxmlIdGenerator.incrementAndGet()).set(fxmlParams);
+        return FXMLItemImpl.create(true).uid(fxmlIdGenerator.incrementAndGet()).set(fxmlParams);
     }
 
     /**
@@ -210,7 +210,7 @@ public final class Resources {
      */
     public static FXMLItem create(final FXMLParams fxmlParams, final boolean isSingleton) {
         // Ensure that the uid will be unique at runtime
-        return FXMLItemBase.create(isSingleton).uid(fxmlIdGenerator.incrementAndGet()).set(fxmlParams);
+        return FXMLItemImpl.create(isSingleton).uid(fxmlIdGenerator.incrementAndGet()).set(fxmlParams);
     }
 
     /*************************************************************************/
@@ -226,7 +226,7 @@ public final class Resources {
      */
     public static MessageItem create(final Message messageParams) {
         // Ensure that the uid will be unique at runtime
-        return MessageItemBase.create().uid(messageIdGenerator.incrementAndGet()).set(messageParams);
+        return MessageItemImpl.create().uid(messageIdGenerator.incrementAndGet()).set(messageParams);
     }
 
     /**

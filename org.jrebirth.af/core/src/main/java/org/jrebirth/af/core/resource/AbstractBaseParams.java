@@ -217,4 +217,14 @@ public abstract class AbstractBaseParams implements ResourceParams {
      */
     protected abstract List<? extends Object> getFieldValues();
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        final AbstractBaseParams params = (AbstractBaseParams) super.clone();
+        params.parse(toString().split(PARAMETER_SEPARATOR_REGEX));
+        return params;
+    }
+
 }

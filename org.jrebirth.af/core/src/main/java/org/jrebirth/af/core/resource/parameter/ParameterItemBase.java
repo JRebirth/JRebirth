@@ -1,4 +1,5 @@
 /**
+
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013
  * Contact : sebastien.bordes@jrebirth.org
@@ -17,46 +18,30 @@
  */
 package org.jrebirth.af.core.resource.parameter;
 
-import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.resource.builder.ResourceBuilder;
 import org.jrebirth.af.api.resource.parameter.ParameterItem;
 import org.jrebirth.af.api.resource.parameter.ParameterParams;
-import org.jrebirth.af.core.resource.AbstractResourceItem;
+import org.jrebirth.af.core.resource.ResourceBuilders;
 
 /**
- * The class <strong>ParameterItemBase</strong> is used to build Parameterized Object.
+ * The class <strong>ParameterItem</strong>.
+ *
+ * The name of the parameter.
+ *
+ * The name will be transformed : camelCase => CAMEL_CASE
  *
  * @param <T> the object type of the parameter
  *
  * @author Sébastien Bordes
  */
-public final class ParameterItemBase<T> extends AbstractResourceItem<ParameterItem<?>, ParameterParams, T> implements ParameterItemReal<T> {
-
-    /**
-     * Create a new Parameter Item.
-     *
-     * @param o the object used for its type
-     *
-     * @return a fresh new {@link ParameterItem}
-     */
-    public static <T extends Object> ParameterItemBase<T> create(final T o) {
-        return new ParameterItemBase<>();
-    }
+public interface ParameterItemBase<T extends Object> extends ParameterItem<T> {
 
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public void define(final T forcedValue) {
-        // The default programmatic value (stored into ObjectParameter) is not updated but overridden into the local map
-        ((ParameterBuilder) builder()).define(this, forcedValue);
+    default ResourceBuilder<ParameterItem<?>, ParameterParams, T> builder() {
+        return (ResourceBuilder<ParameterItem<?>, ParameterParams, T>) ResourceBuilders.PARAMETER_BUILDER;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void persist() {
-        throw new CoreRuntimeException("Not Implemented yet");
-    }
-
 }

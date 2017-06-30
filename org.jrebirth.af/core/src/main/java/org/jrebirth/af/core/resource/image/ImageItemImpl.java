@@ -15,27 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.resource.style;
+package org.jrebirth.af.core.resource.image;
 
-import java.net.URL;
+import javafx.scene.image.Image;
 
-import org.jrebirth.af.api.resource.builder.ResourceBuilder;
-import org.jrebirth.af.api.resource.style.StyleSheetItem;
-import org.jrebirth.af.api.resource.style.StyleSheetParams;
-import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.api.resource.image.ImageItem;
+import org.jrebirth.af.api.resource.image.ImageParams;
+import org.jrebirth.af.core.resource.AbstractResourceItem;
 
 /**
- * The class <strong>StyleSheetItem</strong>.
+ * The class <strong>ImageItemBase</strong>.
  *
  * @author Sébastien Bordes
  */
-public interface StyleSheetItemBase extends StyleSheetItem {
+public final class ImageItemImpl extends AbstractResourceItem<ImageItem, ImageParams, Image> implements ImageItemBase {
 
     /**
-     * {@inheritDoc}
+     * Create a new ImageItem.
+     *
+     * @return a fresh instance
      */
-    @Override
-    default ResourceBuilder<StyleSheetItem, StyleSheetParams, URL> builder() {
-        return ResourceBuilders.STYLE_SHEET_BUILDER;
+    public static ImageItemImpl create() {
+        return new ImageItemImpl();
     }
+
 }

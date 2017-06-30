@@ -2,9 +2,9 @@ package org.jrebirth.af.core.resource.image;
 
 import javafx.scene.image.Image;
 
-import org.jrebirth.af.core.resource.image.ImageItemReal.Absolute;
-import org.jrebirth.af.core.resource.image.ImageItemReal.Relative;
-import org.jrebirth.af.core.resource.image.ImageItemReal.Web;
+import org.jrebirth.af.core.resource.image.ImageItemBase.Absolute;
+import org.jrebirth.af.core.resource.image.ImageItemBase.Relative;
+import org.jrebirth.af.core.resource.image.ImageItemBase.Web;
 import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 
 /**

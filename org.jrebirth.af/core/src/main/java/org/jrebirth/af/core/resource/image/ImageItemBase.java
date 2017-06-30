@@ -19,24 +19,137 @@ package org.jrebirth.af.core.resource.image;
 
 import javafx.scene.image.Image;
 
+import org.jrebirth.af.api.resource.builder.ResourceBuilder;
+import org.jrebirth.af.api.resource.image.ImageExtension;
 import org.jrebirth.af.api.resource.image.ImageItem;
 import org.jrebirth.af.api.resource.image.ImageParams;
-import org.jrebirth.af.core.resource.AbstractResourceItem;
+import org.jrebirth.af.core.resource.ResourceBuilders;
 
 /**
- * The class <strong>ImageItemBase</strong>.
+ * The class <strong>ImageItemReal</strong>.
  *
  * @author Sébastien Bordes
  */
-public final class ImageItemBase extends AbstractResourceItem<ImageItem, ImageParams, Image> implements ImageItemReal {
+public interface ImageItemBase extends ImageItem {
 
     /**
-     * Create a new ImageItem.
-     *
-     * @return a fresh instance
+     * {@inheritDoc}
      */
-    public static ImageItemBase create() {
-        return new ImageItemBase();
+    @Override
+    default ResourceBuilder<ImageItem, ImageParams, Image> builder() {
+        return ResourceBuilders.IMAGE_BUILDER;
+    }
+
+    /**
+     * The class <strong>Relative</strong> class is use to build and register {@link RelImage} params.
+     *
+     * @author Sébastien Bordes
+     */
+    interface Relative extends ImageItemBase {
+
+        /**
+         * Build and register an {@link Image} using an {@link ImageParams} using {@link RelImage}.
+         *
+         * @param path the image local path
+         * @param name the file name
+         * @param extension the image extension
+         */
+        default void rel(final String path, final String name, final ImageExtension extension) {
+            set(new RelImage(path, name, extension));
+        }
+
+        /**
+         * Build and register an {@link Image} using an {@link ImageParams} using {@link RelImage}.
+         *
+         * @param name the file name
+         * @param extension the image extension
+         */
+        default void rel(final String name, final ImageExtension extension) {
+            set(new RelImage(name, extension));
+        }
+
+        /**
+         * Build and register an {@link Image} using an {@link ImageParams} using {@link RelImage}.
+         *
+         * @param fullName the full file name (including path and image extension)
+         */
+        default void rel(final String fullName) {
+            set(new RelImage(fullName));
+        }
+
+    }
+
+    /**
+     * The class <strong>Absolute</strong> class is use to build and register {@link AbsImage} params.
+     *
+     * @author Sébastien Bordes
+     */
+    interface Absolute extends ImageItemBase {
+
+        /**
+         * Build and register an {@link Image} using an {@link ImageParams} using {@link AbsImage}.
+         *
+         * @param path the image local path
+         * @param name the file name
+         * @param extension the image extension
+         */
+        default void abs(final String path, final String name, final ImageExtension extension) {
+            set(new AbsImage(path, name, extension));
+        }
+
+        /**
+         * Build and register an {@link Image} using an {@link ImageParams} using {@link AbsImage}.
+         *
+         * @param name the file name
+         * @param extension the image extension
+         */
+        default void abs(final String name, final ImageExtension extension) {
+            set(new AbsImage(name, extension));
+        }
+
+        /**
+         * Build and register an {@link Image} using an {@link ImageParams} using {@link AbsImage}.
+         *
+         * @param fullName the full file name (including path and image extension)
+         */
+        default void abs(final String fullName) {
+            set(new AbsImage(fullName));
+        }
+
+    }
+
+    /**
+     * The class <strong>Web</strong> class is use to build and register {@link WebImage} params.
+     *
+     * @author Sébastien Bordes
+     */
+    interface Web extends ImageItemBase {
+
+        /**
+         * Build and register an {@link Image} using an {@link ImageParams} using {@link WebImage}.
+         *
+         * @param website the website base url
+         * @param path the path of the image to load
+         * @param name the image file name to use.
+         * @param extension the image extension to use
+         */
+        default void web(final String website, final String path, final String name, final ImageExtension extension) {
+            set(new WebImage(website, path, name, extension));
+        }
+
+        /**
+         * Build and register an {@link Image} using an {@link ImageParams} using {@link WebImage}.
+         *
+         * @param website the website base url
+         * @param secured the http protocol to use (http or https)
+         * @param path the path of the image to load
+         * @param name the image file name to use.
+         * @param extension the image extension to use
+         */
+        default void web(final String website, final boolean secured, final String path, final String name, final ImageExtension extension) {
+            set(new WebImage(website, secured, path, name, extension));
+        }
+
     }
 
 }

@@ -119,4 +119,5 @@ public abstract class AbstractBaseFont extends AbstractBaseParams implements Fon
     public ObjectProperty<FontExtension> extensionProperty() {
         return this.extensionProperty;
     }
+
 }

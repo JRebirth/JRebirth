@@ -10,7 +10,7 @@ import org.jrebirth.af.api.ui.fxml.FXMLComponent;
  *
  * @author Sébastien Bordes
  */
-public interface SingletonFXMLEnum extends FXMLItemReal {
+public interface SingletonFXMLEnum extends FXMLItemBase {
 
     /**
      * Build and register a {@link FXMLParams}.

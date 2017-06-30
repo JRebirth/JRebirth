@@ -22,11 +22,11 @@ import java.util.List;
 
 import javafx.scene.text.Font;
 
-import org.jrebirth.af.api.resource.builder.ResourceBuilder;
+import org.jrebirth.af.api.resource.builder.VariantResourceBuilder;
 import org.jrebirth.af.api.resource.font.FontItem;
 import org.jrebirth.af.api.resource.font.FontParams;
 import org.jrebirth.af.core.resource.Resources;
-import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
+import org.jrebirth.af.core.resource.builder.AbstractVariantResourceBuilder;
 import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
 
 import org.slf4j.Logger;
@@ -37,10 +37,23 @@ import org.slf4j.LoggerFactory;
  *
  * @author Sébastien Bordes
  */
-public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontParams, Font> implements ResourceBuilder<FontItem, FontParams, Font> {
+public final class FontBuilder extends AbstractVariantResourceBuilder<FontItem, FontParams, Font, Double> implements VariantResourceBuilder<FontItem, FontParams, Font, Double> {
 
     /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(FontBuilder.class);
+
+    @Override
+    protected Font buildResource(final FontItem fontItem, final FontParams jrFont, final Double variant) {
+        AbstractBaseFont vParams;
+        try {
+            vParams = (AbstractBaseFont) jrFont.clone();
+            vParams.sizeProperty().set(variant);
+            vParams.hasChanged(true);
+            return buildResource(fontItem, vParams);
+        } catch (final CloneNotSupportedException e) {
+            return null;
+        }
+    }
 
     /**
      * {@inheritDoc}
@@ -70,10 +83,7 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
      */
     private Font buildRealFont(final RealFont rFont) {
         checkFontStatus(rFont);
-        return javafx.scene.text.FontBuilder.create()
-                                            .name(transformFontName(rFont.name().name()))
-                                            .size(rFont.size())
-                                            .build();
+        return Font.font(transformFontName(rFont.name().name()), rFont.size());
     }
 
     /**
@@ -163,4 +173,5 @@ public final class FontBuilder extends AbstractResourceBuilder<FontItem, FontPar
             }
         }
     }
+
 }

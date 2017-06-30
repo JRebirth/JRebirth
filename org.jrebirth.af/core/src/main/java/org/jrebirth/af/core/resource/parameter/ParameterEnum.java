@@ -22,7 +22,7 @@ package org.jrebirth.af.core.resource.parameter;
  *
  * @param <T> the generic type
  */
-public interface ParameterEnum<T extends Object> extends ParameterItemReal<T> {
+public interface ParameterEnum<T extends Object> extends ParameterItemBase<T> {
 
     /**
      * Return the enum name.

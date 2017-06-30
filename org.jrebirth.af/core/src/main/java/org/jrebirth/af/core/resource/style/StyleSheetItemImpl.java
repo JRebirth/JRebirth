@@ -19,23 +19,23 @@ package org.jrebirth.af.core.resource.style;
 
 import java.net.URL;
 
-import org.jrebirth.af.api.resource.builder.ResourceBuilder;
 import org.jrebirth.af.api.resource.style.StyleSheetItem;
 import org.jrebirth.af.api.resource.style.StyleSheetParams;
-import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.AbstractResourceItem;
 
 /**
- * The class <strong>StyleSheetItem</strong>.
+ * The class <strong>StyleSheetItemBase</strong>.
  *
  * @author Sébastien Bordes
  */
-public interface StyleSheetItemBase extends StyleSheetItem {
+public final class StyleSheetItemImpl extends AbstractResourceItem<StyleSheetItem, StyleSheetParams, URL> implements StyleSheetItemBase {
 
     /**
-     * {@inheritDoc}
+     * Build a fresh instance of {@link StyleSheetItemImpl}.
+     *
+     * @return a {@link StyleSheetItemImpl} instance
      */
-    @Override
-    default ResourceBuilder<StyleSheetItem, StyleSheetParams, URL> builder() {
-        return ResourceBuilders.STYLE_SHEET_BUILDER;
+    public static StyleSheetItemImpl create() {
+        return new StyleSheetItemImpl();
     }
 }

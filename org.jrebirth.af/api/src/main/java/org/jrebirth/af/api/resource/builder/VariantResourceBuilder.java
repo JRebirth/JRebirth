@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,27 +15,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.resource.style;
-
-import java.net.URL;
-
-import org.jrebirth.af.api.resource.builder.ResourceBuilder;
-import org.jrebirth.af.api.resource.style.StyleSheetItem;
-import org.jrebirth.af.api.resource.style.StyleSheetParams;
-import org.jrebirth.af.core.resource.ResourceBuilders;
+package org.jrebirth.af.api.resource.builder;
 
 /**
- * The class <strong>StyleSheetItem</strong>.
+ * The interface <strong>ResourceBuilder</strong>.
  *
  * @author Sébastien Bordes
+ *
+ * @param <I> The item used to wrap the resource
+ * @param <P> The params object that store primitive resources values
+ * @param <R> The resource managed
  */
-public interface StyleSheetItemBase extends StyleSheetItem {
+public interface VariantResourceBuilder<I, P, R, V> extends ResourceBuilder<I, P, R> {
 
     /**
-     * {@inheritDoc}
+     * Retrieve the resource. And build it if it didn't be done before.
+     *
+     * @param item the item as a key
+     *
+     * @return the resource
      */
-    @Override
-    default ResourceBuilder<StyleSheetItem, StyleSheetParams, URL> builder() {
-        return ResourceBuilders.STYLE_SHEET_BUILDER;
-    }
+    R get(final I item, final V variant);
+
 }

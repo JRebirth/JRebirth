@@ -44,4 +44,12 @@ public class CustomFontName implements FontName {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return name();
+    }
+
 }

@@ -18,14 +18,9 @@
 package org.jrebirth.af.core.resource.builder;
 
 import java.lang.ref.SoftReference;
-import java.util.Map;
-import java.util.WeakHashMap;
 
 import org.jrebirth.af.api.resource.ResourceItem;
 import org.jrebirth.af.api.resource.ResourceParams;
-import org.jrebirth.af.api.resource.builder.ResourceBuilder;
-import org.jrebirth.af.core.resource.Resources;
-import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 
 /**
  * The abstract class <strong>AbstractResourceBuilder</strong>.
@@ -38,62 +33,18 @@ import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
  * @param <P> The resource params type
  * @param <R> The real resource managed
  */
-public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P extends ResourceParams, R> implements ResourceBuilder<I, P, R> {
+public abstract class AbstractVariantResourceBuilder<I extends ResourceItem<?, ?, ?>, P extends ResourceParams, R, V> extends AbstractResourceBuilder<I, P, R> {
 
-    /** The resource weak Map. */
-    private final Map<I, P> paramsMap = new WeakHashMap<>();
-
-    /**
-     * The resource weak Map.<br />
-     * SoftReference can be kept longer in memory depending on the -client or -server jvm argument and on Xms and Xms values.
-     */
-    protected final Map<String, SoftReference<R>> resourceMap = new WeakHashMap<>();
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void storeParams(final I key, final P params) {
-        // Store the resource into the map
-        this.paramsMap.put(key, params);
-
-        // Activate the AutoRefresh feature only for other parameters
-        if (Resources.isNotAutoRefreshParam(params) && CoreParameters.AUTO_REFRESH_RESOURCE.get()) {
-            params.activateAutoRefresh();
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public P getParam(final I key) {
-        // Retrieve the resource from the map
-        return this.paramsMap.get(key);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getParamKey(final I key) {
-        return getParam(key).getKey();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public R get(final I key) {
+    public R get(final I key, final V variant) {
 
         final P params = getParam(key);
 
-        final String paramsKey = params.getKey();
+        final String paramsKey = params.getKey() + variant.toString();
 
         // Retrieve the resource weak reference from the map
         final SoftReference<R> resourceSoftRef = this.resourceMap.get(paramsKey);
 
-        // Warning the gc can collect gthe resource between the test and the getter call so we have to get the resource immediately
+        // Warning the gc can collect the resource between the test and the getter call so we have to get the resource immediately
         // and test it instead of testing the reference value
 
         // The resourceSoftRef may be null if nobody use it
@@ -103,19 +54,11 @@ public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P
         // When the reference is null (first access time) or the resource is null (the resource has been collected y gc)
         if (resourceSoftRef == null || resource == null) {
             // We must (re)build an instance and then store it weakly
-            resource = buildResource(key, params);
+            resource = buildResource(key, params, variant);
             set(paramsKey, resource);
             params.hasChanged(false);
         }
         return resource;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void set(final String key, final R resource) {
-        this.resourceMap.put(key, new SoftReference<>(resource));
     }
 
     /**
@@ -126,6 +69,6 @@ public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P
      *
      * @return the resource built and weakly stored with a WeakReference
      */
-    protected abstract R buildResource(final I item, final P params);
+    protected abstract R buildResource(final I item, final P params, final V variant);
 
 }

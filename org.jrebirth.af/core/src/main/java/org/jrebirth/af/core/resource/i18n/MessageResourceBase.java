@@ -60,7 +60,7 @@ public class MessageResourceBase implements MessageResource {
     public MessageResourceBase(final String rawMessage, final Marker defaultMarker, final JRLevel defaultLevel) {
         super();
 
-        final String[] messageContent = rawMessage.split(ResourceParams.PARAMETER_SEPARATOR);
+        final String[] messageContent = rawMessage.split(ResourceParams.PARAMETER_SEPARATOR_REGEX);
 
         this.message = messageContent[0];
 

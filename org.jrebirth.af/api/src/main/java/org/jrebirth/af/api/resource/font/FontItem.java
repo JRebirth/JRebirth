@@ -19,14 +19,14 @@ package org.jrebirth.af.api.resource.font;
 
 import javafx.scene.text.Font;
 
-import org.jrebirth.af.api.resource.ResourceItem;
+import org.jrebirth.af.api.resource.VariantResourceItem;
 
 /**
  * The class <strong>FontItem</strong>.
  *
  * @author Sébastien Bordes
  */
-public interface FontItem extends ResourceItem<FontItem, FontParams, Font> {
+public interface FontItem extends VariantResourceItem<FontItem, FontParams, Font, Double> {
 
     /**
      * {@inheritDoc}
@@ -44,5 +44,21 @@ public interface FontItem extends ResourceItem<FontItem, FontParams, Font> {
     default Font get() {
         return builder().get(this);
     }
+
+    @Override
+    default Font get(final Double size) {
+        return builder().get(this, size);
+    }
+
+    // @Override
+    // default Font get(int fontSize) {
+    // FontParams fp = builder().getParam(this);
+    // fp.copy();
+    //
+    // FontItem fi = new FontItemBase();
+    //
+    //
+    // return builder().get(this);
+    // }
 
 }

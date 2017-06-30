@@ -15,27 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.resource.style;
+package org.jrebirth.af.core.resource.color;
 
-import java.net.URL;
+import javafx.scene.paint.Color;
 
-import org.jrebirth.af.api.resource.builder.ResourceBuilder;
-import org.jrebirth.af.api.resource.style.StyleSheetItem;
-import org.jrebirth.af.api.resource.style.StyleSheetParams;
-import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.api.resource.color.ColorItem;
+import org.jrebirth.af.api.resource.color.ColorParams;
+import org.jrebirth.af.core.resource.AbstractResourceItem;
 
 /**
- * The class <strong>StyleSheetItem</strong>.
+ * The class <strong>ColorItemBase</strong> provides a simple constructor used to build a {@link ColorItem} usable from anywhere.
  *
  * @author Sébastien Bordes
  */
-public interface StyleSheetItemBase extends StyleSheetItem {
+public final class ColorItemImpl extends AbstractResourceItem<ColorItem, ColorParams, Color> implements ColorItemBase {
 
     /**
-     * {@inheritDoc}
+     * Build a new Color Item instance.
+     *
+     * @return a new {@link ColorItem} instance
      */
-    @Override
-    default ResourceBuilder<StyleSheetItem, StyleSheetParams, URL> builder() {
-        return ResourceBuilders.STYLE_SHEET_BUILDER;
+    public static ColorItemImpl create() {
+        return new ColorItemImpl();
     }
+
 }

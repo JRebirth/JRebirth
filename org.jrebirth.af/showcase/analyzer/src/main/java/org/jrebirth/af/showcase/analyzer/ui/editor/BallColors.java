@@ -22,7 +22,7 @@ import javafx.scene.paint.Color;
 import org.jrebirth.af.api.resource.color.ColorParams;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.color.ColorBuilder;
-import org.jrebirth.af.core.resource.color.ColorItemReal;
+import org.jrebirth.af.core.resource.color.ColorItemBase;
 import org.jrebirth.af.core.resource.color.WebColor;
 
 /**
@@ -31,7 +31,7 @@ import org.jrebirth.af.core.resource.color.WebColor;
  * @author Sébastien Bordes
  *
  */
-public enum BallColors implements ColorItemReal {
+public enum BallColors implements ColorItemBase {
 
     /** The application ball background color. */
     APPLICATION(new WebColor("70CD43")),

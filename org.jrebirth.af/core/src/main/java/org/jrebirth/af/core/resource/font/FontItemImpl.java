@@ -15,27 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.core.resource.style;
+package org.jrebirth.af.core.resource.font;
 
-import java.net.URL;
+import javafx.scene.text.Font;
 
-import org.jrebirth.af.api.resource.builder.ResourceBuilder;
-import org.jrebirth.af.api.resource.style.StyleSheetItem;
-import org.jrebirth.af.api.resource.style.StyleSheetParams;
-import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.api.resource.font.FontItem;
+import org.jrebirth.af.api.resource.font.FontParams;
+import org.jrebirth.af.core.resource.AbstractResourceItem;
 
 /**
- * The class <strong>StyleSheetItem</strong>.
+ * The class <strong>FontItemBase</strong> provides a simple constructor used to build a {@link FontItem} usable from anywhere.
  *
  * @author Sébastien Bordes
  */
-public interface StyleSheetItemBase extends StyleSheetItem {
+public final class FontItemImpl extends AbstractResourceItem<FontItem, FontParams, Font> implements FontItemBase {
 
     /**
-     * {@inheritDoc}
+     * Build a new Font Item instance.
+     *
+     * @return a new {@link FontItem} instance
      */
-    @Override
-    default ResourceBuilder<StyleSheetItem, StyleSheetParams, URL> builder() {
-        return ResourceBuilders.STYLE_SHEET_BUILDER;
+    public static FontItemImpl create() {
+        return new FontItemImpl();
     }
+
 }
