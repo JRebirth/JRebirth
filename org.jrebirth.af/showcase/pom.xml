@@ -56,6 +56,7 @@
 		<module>todos</module>
 		<!-- <module>data</module> -->
 		<module>workbench</module>
+		<module>fonticon</module>
 	</modules>
 
 	<build>
@@ -147,6 +148,12 @@
 			<version>8.5.1-SNAPSHOT</version>
 			<classifier>tests</classifier>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>component</artifactId>
+			<version>8.5.1-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>

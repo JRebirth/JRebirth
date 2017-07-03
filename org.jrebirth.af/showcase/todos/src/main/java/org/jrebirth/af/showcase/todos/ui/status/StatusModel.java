@@ -33,7 +33,7 @@ public class StatusModel extends DefaultModel<StatusModel, StatusView> {
     }
 
     @OnWave(WWaves.UPDATE_STATUS)
-    public void updateStatus(Wave wave) {
+    public void updateStatus(final Wave wave) {
 
         view().updateStatus(getService(TodoService.class).getTodoList().todo().stream().filter(t -> !t.done()).count());
     }

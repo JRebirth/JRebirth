@@ -56,6 +56,14 @@ public class DefaultView<M extends Model, N extends Node, C extends Controller<?
      * {@inheritDoc}
      */
     @Override
+    protected void bootView() {
+        // Custom code used to update the root node and add some children
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void start() {
         // Custom code to process when the view is displayed the first time
     }

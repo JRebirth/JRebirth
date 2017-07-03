@@ -135,4 +135,10 @@ public final class FXMLShowCaseView extends AbstractView<FXMLShowCaseModel, Bord
         }
     }
 
+    @Override
+    protected void bootView() {
+        // Nothing to do yet
+
+    }
+
 }

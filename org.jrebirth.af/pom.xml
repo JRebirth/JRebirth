@@ -49,6 +49,7 @@
 		<module>distribution</module>
 		<module>rest</module>
 		<module>resources</module>
+		<module>iconfont-bridge</module>
 	</modules>
 
 	<issueManagement>

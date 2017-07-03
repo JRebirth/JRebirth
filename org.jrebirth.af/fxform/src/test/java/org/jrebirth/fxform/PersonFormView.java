@@ -38,4 +38,10 @@ public class PersonFormView extends AbstractFormView<PersonFormModel, DefaultCon
 
     }
 
+    @Override
+    protected void bootView() {
+        // Nothing to do yet
+
+    }
+
 }

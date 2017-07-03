@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.jrebirth.af</groupId>
+		<artifactId>showcase</artifactId>
+		<version>8.5.1-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<groupId>org.jrebirth.af.showcase</groupId>
+	<artifactId>fonticon</artifactId>
+	<packaging>jar</packaging>
+
+	<name>SC FontIcon</name>
+	<description>Showcase application used to display all FontIcon icons</description>
+	<url>http://www.jrebirth.org/apps/FontIcon.html</url>
+
+	<properties>
+
+		<jnlpFilename>FontIcon-Showcase.jnlp</jnlpFilename>
+		<appClass>org.jrebirth.af.showcase.fonticon.FontIconApplication</appClass>
+
+	</properties>
+
+<!-- 	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>webstart-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build> -->
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>processor</artifactId>
+			<version>8.5.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth.af.iconfont-bridge</groupId>
+			<artifactId>fontawesome</artifactId>
+			<version>8.5.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+</project>

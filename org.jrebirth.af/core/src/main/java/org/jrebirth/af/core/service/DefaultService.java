@@ -5,7 +5,7 @@ import org.jrebirth.af.api.wave.Wave;
 
 /**
  * The class <strong>DefaultService</strong> is a basic empty implementation of {@link Service} interface.
- * 
+ *
  * It's used as an adapter providing all methods in order to override only required ones.
  *
  * @author Sébastien Bordes

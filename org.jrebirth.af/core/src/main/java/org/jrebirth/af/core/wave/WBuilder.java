@@ -107,8 +107,8 @@ public interface WBuilder {
      *
      * Support these kind of objects:<br>
      * <ul>
-     * <li>JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER => ObjectProperty&lt;Node&gt;</li> 
-     * <li>JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER => ObservableList&lt;Node&gt;</li> 
+     * <li>JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER => ObjectProperty&lt;Node&gt;</li>
+     * <li>JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER => ObservableList&lt;Node&gt;</li>
      * <li>JRebirthWaves.SHOW_MODEL_COMMAND => Class&lt;? extends Command&gt;</li>
      * <li>JRebirthWaves.EXTRA_WAVE_BEANS => WaveBean</li>
      * </ul>
@@ -136,6 +136,10 @@ public interface WBuilder {
 
             if (data instanceof Class && Command.class.isAssignableFrom((Class<?>) data)) {
                 wdList.add(waveData(JRebirthWaves.SHOW_MODEL_COMMAND, (Class<? extends Command>) data));
+            }
+
+            if (data instanceof List<?>) {
+                wdList.add(waveData(JRebirthWaves.KEY_PARTS, (List<?>) data));
             }
 
             if (data instanceof WaveBean) {

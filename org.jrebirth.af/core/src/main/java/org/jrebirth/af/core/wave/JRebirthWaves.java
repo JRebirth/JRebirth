@@ -64,6 +64,10 @@ public interface JRebirthWaves {
     WaveItem<Class<? extends Command>> SHOW_MODEL_COMMAND = new WaveItemBase<Class<? extends Command>>() {
     };
 
+    /** This item allow to define Key Parts. */
+    WaveItem<List<?>> KEY_PARTS = new WaveItemBase<List<?>>() {
+    };
+
     /** This item is used to store several {@link WaveBean} into a wave. */
     WaveItem<List<WaveBean>> EXTRA_WAVE_BEANS = new WaveItemBase<List<WaveBean>>() {
     };

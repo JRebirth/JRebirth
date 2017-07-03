@@ -84,7 +84,7 @@ public final class DefaultComponentFactory implements ComponentFactory, FacadeMe
                     Collections.sort(items);
 
                     // Reverse the order of registration items when we want o inverse the priorities
-                    if (definition.reverse()) {
+                    if (!definition.reverse()) {
                         Collections.reverse(items);
                     }
 

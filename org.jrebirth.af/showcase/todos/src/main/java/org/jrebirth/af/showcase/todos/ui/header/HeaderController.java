@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.wave.WBuilder;
@@ -26,14 +25,14 @@ public final class HeaderController extends DefaultController<HeaderModel, Heade
 
     public void onAction(final ActionEvent event) {
 
-    	if(event.getSource() == view().selectAll()){
-    		model().selectAll(view().selectAll().isSelected());
-    	}
+        if (event.getSource() == view().selectAll()) {
+            model().selectAll(view().selectAll().isSelected());
+        }
         /*
          * if(event.getCode() == KeyCode.ENTER){
-         * 
+         *
          * model().returnData(TodoService.class, TodoService.DO_ADD, WBuilder.waveData(TodoService.TODO, view().todoText().getText()));
-         * 
+         *
          * }
          */
 

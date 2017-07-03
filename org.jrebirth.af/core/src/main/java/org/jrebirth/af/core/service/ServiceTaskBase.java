@@ -47,7 +47,7 @@ import org.jrebirth.af.core.wave.WaveItemBase;
 
 /**
  * The class <strong>ServiceTask</strong> is used to wrap a service method call.
- * 
+ *
  * The call will be performed into JTP thread pool.
  *
  * @author Sébastien Bordes

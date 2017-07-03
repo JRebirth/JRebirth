@@ -68,6 +68,14 @@ public final class SampleView extends AbstractView<SampleModel, BorderPane, Samp
                 this.pooledCommand
                 ).build());
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void bootView() {
+        // Nothing to do yet
+    }
 
     /**
      * {@inheritDoc}

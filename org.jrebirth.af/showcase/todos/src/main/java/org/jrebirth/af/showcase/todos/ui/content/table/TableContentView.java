@@ -1,5 +1,10 @@
-package org.jrebirth.af.showcase.todos.ui.content;
+package org.jrebirth.af.showcase.todos.ui.content.table;
 
+
+import org.jrebirth.af.core.ui.DefaultView;
+import org.jrebirth.af.showcase.todos.ui.WWaves;
+
+import bean.Todo;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
@@ -8,13 +13,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.util.converter.DefaultStringConverter;
 
-import org.jrebirth.af.core.ui.DefaultView;
-
-import bean.Todo;
-
-public class ContentView extends DefaultView<ContentModel, BorderPane, ContentController> {
+public class TableContentView extends DefaultView<TableContentModel, BorderPane, TableContentController> {
 
     private static final String DONE_COLUMN = "DoneColumn";
 
@@ -22,7 +26,7 @@ public class ContentView extends DefaultView<ContentModel, BorderPane, ContentCo
 
     private TableView<Todo> table;
 
-    public ContentView(final ContentModel model) {
+    public TableContentView(final TableContentModel model) {
         super(model);
     }
 
@@ -38,34 +42,30 @@ public class ContentView extends DefaultView<ContentModel, BorderPane, ContentCo
 
         final TableColumn<Todo, Boolean> doneColumn = new TableColumn<>("Done");
         doneColumn.setId(DONE_COLUMN);
+        doneColumn.setPrefWidth(40);
         doneColumn.setMaxWidth(40);
         doneColumn.setMinWidth(40);
         doneColumn.setCellValueFactory(cdf -> cdf.getValue().pDone());
-        doneColumn.setCellFactory(tc -> new CheckBoxTableCell<Todo, Boolean>() {
-
-            @Override
-            public void updateItem(Boolean item, boolean empty) {
-                super.updateItem(item, empty);
-                // model().sendWave(WWaves.UPDATE_STATUS_WT);
-            }
-
-        });
-
+        doneColumn.setCellFactory(tc -> new CheckBoxTableCell<Todo, Boolean>());
+       
         final TableColumn<Todo, String> textColumn = new TableColumn<>("Text");
         textColumn.setId(TEXT_COLUMN);
         textColumn.setPrefWidth(200);
         textColumn.setMinWidth(100);
+        textColumn.setEditable(true);
         textColumn.setCellValueFactory(this::getColumnContent);
         textColumn.setCellFactory(this::getTableCell);
-
+       
         this.table.getColumns().setAll(doneColumn, textColumn);
 
-        this.table.setPrefWidth(450);
-
+        this.table.setPrefWidth(240);
         this.table.setPrefHeight(300);
 
         this.table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.table.setEditable(true);
+       
+        // Refresh status bar when a checkbox is updated
+        this.table.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> model().sendWave(WWaves.UPDATE_STATUS_WT));
 
         node().setCenter(this.table);
     }
@@ -85,9 +85,9 @@ public class ContentView extends DefaultView<ContentModel, BorderPane, ContentCo
     }
 
     private TableCell<Todo, String> getTableCell(final TableColumn<Todo, String> column) {
-        final TableCell<Todo, String> tc = new TableCell<Todo, String>() {
+        final TextFieldTableCell<Todo, String> tc = new TextFieldTableCell<Todo, String>() {
             @Override
-            protected void updateItem(final String item, final boolean empty) {
+            public void updateItem(final String item, final boolean empty) {
                 super.updateItem(item, empty);
 
                 if (item == null || empty) {
@@ -111,7 +111,8 @@ public class ContentView extends DefaultView<ContentModel, BorderPane, ContentCo
                 }
             }
         };
-        tc.setAlignment(Pos.CENTER);
+        tc.setConverter(new DefaultStringConverter());
+        tc.setAlignment(Pos.CENTER_LEFT);
         return tc;
     }
 

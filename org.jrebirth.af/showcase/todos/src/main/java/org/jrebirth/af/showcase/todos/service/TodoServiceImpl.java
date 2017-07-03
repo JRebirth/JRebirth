@@ -12,7 +12,7 @@ import bean.TodoList;
 @Register(value = TodoService.class)
 public class TodoServiceImpl extends DefaultService implements TodoService {
 
-    private TodoList todoList = new TodoList();
+    private final TodoList todoList = new TodoList();
 
     /**
      * @return Returns the todoList.

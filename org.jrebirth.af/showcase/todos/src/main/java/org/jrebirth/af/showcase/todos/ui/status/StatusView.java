@@ -60,7 +60,7 @@ public class StatusView extends DefaultView<StatusModel, HBox, StatusController>
         return this.group;
     }
 
-    public void updateStatus(long count) {
+    public void updateStatus(final long count) {
         if (count > 1) {
             this.summary.setText(count + " items left");
         } else {

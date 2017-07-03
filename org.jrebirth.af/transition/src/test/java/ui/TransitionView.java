@@ -91,4 +91,10 @@ public final class TransitionView extends AbstractView<TransitionModel, StackPan
         model().getSlidingDoorService().getFullTransition().play();
 
     }
+
+    @Override
+    protected void bootView() {
+        // Nothing to do yet
+
+    }
 }

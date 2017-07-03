@@ -66,7 +66,7 @@ public final class ServiceTaskWaveListener implements WaveListener {
      */
     @Override
     public void waveConsumed(final Wave wave) {
-    	// Nothing to do yet
+        // Nothing to do yet
     }
 
     /**

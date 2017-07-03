@@ -1,6 +1,5 @@
 package org.jrebirth.af.showcase.todos.ui.header;
 
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,7 +13,7 @@ import org.jrebirth.af.core.ui.DefaultView;
 
 public class HeaderView extends DefaultView<HeaderModel, HBox, HeaderController> {
 
-	@OnAction
+    @OnAction
     private CheckBox selectAll;
 
     private TextField todoText;
@@ -40,21 +39,20 @@ public class HeaderView extends DefaultView<HeaderModel, HBox, HeaderController>
         this.todoText = new TextField();
         this.todoText.setPrefWidth(Integer.MAX_VALUE);
         HBox.setHgrow(this.todoText, Priority.ALWAYS);
-        
+
         node().getChildren().addAll(this.selectAll, this.todoText);
-        
-        
+
         this.todoText.focusedProperty().addListener(this::textFocused);
 
     }
-    
-	public void textFocused (ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-		if(!newValue && todoText.getText().isEmpty()){
-			todoText.setText("Enter Something todo");
-		}else if(newValue && todoText.getText().equals("Enter Something todo")){
-			todoText.setText("");
-		}
-	}
+
+    public void textFocused(final ObservableValue<? extends Boolean> observable, final Boolean oldValue, final Boolean newValue) {
+        if (!newValue && this.todoText.getText().isEmpty()) {
+            this.todoText.setText("Enter Something todo");
+        } else if (newValue && this.todoText.getText().equals("Enter Something todo")) {
+            this.todoText.setText("");
+        }
+    }
 
     /**
      * @return Returns the selectAll.

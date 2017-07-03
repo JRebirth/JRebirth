@@ -142,7 +142,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             // When developer mode is activated an error will be thrown by logger
             // Otherwise the wave will be managed by UnprocessedWaveHandler
             this.unprocessedWaveHandler.manageUnprocessedWave(COMMAND_NOT_FOUND_MESSAGE.getText(), wave);
-            
+
         } else {
             // Run the command into the predefined thread
             command.run(wave);
@@ -169,7 +169,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             // When developer mode is activated an error will be thrown by logger
             // Otherwise the wave will be managed by UnprocessedWaveHandler
             this.unprocessedWaveHandler.manageUnprocessedWave(SERVICE_NOT_FOUND_MESSAGE.getText(), wave);
-            
+
         } else {
             // The inner task will be run into the JRebirth Thread Pool
             final ServiceTaskBase<?> task = (ServiceTaskBase<?>) service.returnData(wave);
@@ -202,37 +202,42 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             // When developer mode is activated an error will be thrown by logger
             // Otherwise the wave will be managed by UnprocessedWaveHandler
             this.unprocessedWaveHandler.manageUnprocessedWave(MODEL_NOT_FOUND_MESSAGE.getText(), wave);
-        
+
         } else {
-	        
-        	// This key method could be managed in another way (fully sync with JAT), to see if it could be useful
-	        DisplayModelWaveBean displayModelWaveBean = DisplayModelWaveBean.create();
-	        displayModelWaveBean.showModelKey((UniqueKey<Model>) Key.create(wave.componentClass()));
-	
-	        if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
-	            // Add the Ui view into the place holder provided
-	            displayModelWaveBean.uniquePlaceHolder(wave.get(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER));
-	
-	        } else if (wave.contains(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER)) {
-	            // Add the Ui view into the children list of its parent container
-	            displayModelWaveBean.childrenPlaceHolder(wave.get(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER));
-	        }
-	
-	        // Call the command that manage the display UI in 2 steps
-	        // 1 - Create the model into the Thread Pool
-	        // 2 - Attach it to the graphical tree model according to their placeholder type
-	        Class<? extends Command> showModelCommandClass;
-	        if (wave.contains(JRebirthWaves.SHOW_MODEL_COMMAND)) {
-	            showModelCommandClass = wave.getData(JRebirthWaves.SHOW_MODEL_COMMAND).value();
-	        } else {
-	            showModelCommandClass = ShowModelCommand.class;
-	        }
-	
-	        callCommand(WBuilder.callCommand(showModelCommandClass)
-	                            // Add all extra wave beans
-	                            .waveBeanList(wave.getData(JRebirthWaves.EXTRA_WAVE_BEANS).value())
-	                            // Add also DisplayModel Wave Bean
-	                            .waveBean(displayModelWaveBean));
+
+            // This key method could be managed in another way (fully sync with JAT), to see if it could be useful
+            final DisplayModelWaveBean displayModelWaveBean = DisplayModelWaveBean.create();
+
+            if (wave.contains(JRebirthWaves.KEY_PARTS)) {
+                displayModelWaveBean.showModelKey((UniqueKey<Model>) Key.create(wave.componentClass(), wave.get(JRebirthWaves.KEY_PARTS).toArray()));
+            } else {
+                displayModelWaveBean.showModelKey((UniqueKey<Model>) Key.create(wave.componentClass()));
+            }
+
+            if (wave.contains(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER)) {
+                // Add the Ui view into the place holder provided
+                displayModelWaveBean.uniquePlaceHolder(wave.get(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER));
+
+            } else if (wave.contains(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER)) {
+                // Add the Ui view into the children list of its parent container
+                displayModelWaveBean.childrenPlaceHolder(wave.get(JRebirthWaves.ADD_UI_CHILDREN_PLACEHOLDER));
+            }
+
+            // Call the command that manage the display UI in 2 steps
+            // 1 - Create the model into the Thread Pool
+            // 2 - Attach it to the graphical tree model according to their placeholder type
+            Class<? extends Command> showModelCommandClass;
+            if (wave.contains(JRebirthWaves.SHOW_MODEL_COMMAND)) {
+                showModelCommandClass = wave.getData(JRebirthWaves.SHOW_MODEL_COMMAND).value();
+            } else {
+                showModelCommandClass = ShowModelCommand.class;
+            }
+
+            callCommand(WBuilder.callCommand(showModelCommandClass)
+                                // Add all extra wave beans
+                                .waveBeanList(wave.getData(JRebirthWaves.EXTRA_WAVE_BEANS).value())
+                                // Add also DisplayModel Wave Bean
+                                .waveBean(displayModelWaveBean));
         }
     }
 
@@ -328,7 +333,7 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
         // For each given wave type, remove linked Object to avoid calling them anymore
         for (final WaveType waveType : waveTypes) {
             WaveSubscription ws;
-            
+
             if (this.notifierMap.containsKey(waveType)) {
 
                 // Retrieve the list of linked object associated to this Wave Type

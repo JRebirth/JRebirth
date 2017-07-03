@@ -192,10 +192,10 @@ public final class CheckerView extends AbstractView<CheckerModel, BorderPane, Ch
 
     /**
      * .
-     * 
+     *
      * @return
      */
-    private ToggleButton buildFilterButton(String name, ColorItem colorItem) {
+    private ToggleButton buildFilterButton(final String name, final ColorItem colorItem) {
         final ToggleButton tb = new ToggleButton(name);
         tb.getStyleClass().add("filterButton");
         // tb.setPrefSize(120, 30);

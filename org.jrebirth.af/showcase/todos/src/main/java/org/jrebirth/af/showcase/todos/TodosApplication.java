@@ -19,12 +19,10 @@ public class TodosApplication extends DefaultApplication<StackPane> {
         return MainModel.class;
     }
 
-	@Override
-	protected void customizeScene(Scene scene) {
-		super.customizeScene(scene);
-		addCSS(scene, TodosStyles.MAIN);
-	}
-    
-    
+    @Override
+    protected void customizeScene(final Scene scene) {
+        super.customizeScene(scene);
+        addCSS(scene, TodosStyles.MAIN);
+    }
 
 }

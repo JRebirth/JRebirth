@@ -172,4 +172,10 @@ public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoCont
         return this.addRectangleButton;
     }
 
+    @Override
+    protected void bootView() {
+        // Nothing to do yet
+
+    }
+
 }

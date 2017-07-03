@@ -26,7 +26,6 @@ import javafx.animation.SequentialTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -100,7 +99,19 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
         this.stackPane = new StackPane();
 
         node().setCenter(this.stackPane);
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void bootView() {
+
+        final SequentialTransition st = new SequentialTransition();
+
+        model().object().tabs().stream().forEach(t -> st.getChildren().add(addTab(-1, t)));
+
+        st.play();
     }
 
     private void initButtonBar() {
@@ -144,33 +155,32 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
             this.box.setMaxWidth(Region.USE_COMPUTED_SIZE);
 
             this.box.getStyleClass().add("HorizontalTabbedPane");
-            
+
         } else {
             this.box = new VBox();
             this.box.setMaxHeight(Region.USE_COMPUTED_SIZE);
 
             this.box.getStyleClass().add("VerticalTabbedPane");
         }
-        
-        switch(model().object().orientation()){
-	        case top:
-	        	this.box.getStyleClass().add("Top");
-	        	((HBox)this.box).setAlignment(Pos.BOTTOM_LEFT);
-	            break;
-	        case bottom:
-	        	this.box.getStyleClass().add("Bottom");
-	        	((HBox)this.box).setAlignment(Pos.TOP_RIGHT);
-	            break;
-	        case left:
-	        	this.box.getStyleClass().add("Left");
-	        	((VBox)this.box).setAlignment(Pos.TOP_RIGHT);
-	        	break;
-	        case right:
-	        	this.box.getStyleClass().add("Right");
-	        	((VBox)this.box).setAlignment(Pos.TOP_LEFT);
-	            break;
+
+        switch (model().object().orientation()) {
+            case top:
+                this.box.getStyleClass().add("Top");
+                ((HBox) this.box).setAlignment(Pos.BOTTOM_LEFT);
+                break;
+            case bottom:
+                this.box.getStyleClass().add("Bottom");
+                ((HBox) this.box).setAlignment(Pos.TOP_RIGHT);
+                break;
+            case left:
+                this.box.getStyleClass().add("Left");
+                ((VBox) this.box).setAlignment(Pos.TOP_RIGHT);
+                break;
+            case right:
+                this.box.getStyleClass().add("Right");
+                ((VBox) this.box).setAlignment(Pos.TOP_LEFT);
+                break;
         }
-        
 
         return this.box;
     }
@@ -183,21 +193,19 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
      */
     public SequentialTransition addTab(int idx, final Dockable tab) {
 
-    	SequentialTransition seq = new SequentialTransition();
-    	
+        final SequentialTransition seq = new SequentialTransition();
+
         final ToggleButton b = new ToggleButton(tab.name());// , new ImageView(model().getBehavior(DockableBehavior.class).modelIcon()));
         b.setToggleGroup(this.group);
-        b.getStyleClass().clear();
+        // b.getStyleClass().clear();
         b.setUserData(tab);
-        
-        
 
-        ToggleButton oldButton = this.buttonByTab.put(tab.name(), b);
-        int previousIndex = this.box.getChildren().indexOf(oldButton);
-        if(previousIndex >= 0 && previousIndex < idx){
-        	idx++;
+        final ToggleButton oldButton = this.buttonByTab.put(tab.name(), b);
+        final int previousIndex = this.box.getChildren().indexOf(oldButton);
+        if (previousIndex >= 0 && previousIndex < idx) {
+            idx++;
         }
-        
+
         selectTab(tab);
 
         controller().initTabEventHandler(b);
@@ -205,15 +213,14 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
         if (idx < 0 || idx > this.box.getChildren().size()) {
             idx = this.box.getChildren().size();
         }
-        
+
         b.setScaleX(0.0);
         this.box.getChildren().add(idx, b);
-        
-        
-        if(this.box instanceof HBox){
-        	HBox.setMargin(b, new Insets(0, 1, 0, 0));
-        }else if(this.box instanceof VBox){
-        	VBox.setMargin(b, new Insets(1, 0, 0, 0));
+
+        if (this.box instanceof HBox) {
+            HBox.setMargin(b, new Insets(0, 1, 0, 0));
+        } else if (this.box instanceof VBox) {
+            VBox.setMargin(b, new Insets(1, 0, 0, 0));
         }
 
         final ScaleTransition st = new ScaleTransition(Duration.millis(600));
@@ -222,12 +229,12 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
         st.setToX(1.0);
 
         seq.getChildren().add(st);
-        
+
         return seq;
     }
 
     public SequentialTransition removeTab(final List<Dockable> tabs) {
-    	SequentialTransition seq = new SequentialTransition();
+        final SequentialTransition seq = new SequentialTransition();
         for (final Dockable tab : tabs) {
             final ToggleButton b = this.buttonByTab.get(tab.name());
 
@@ -239,7 +246,7 @@ public class TabbedPaneView extends DefaultView<TabbedPaneModel, BorderPane, Tab
 
             seq.getChildren().add(st);
         }
-        
+
         return seq;
     }
 

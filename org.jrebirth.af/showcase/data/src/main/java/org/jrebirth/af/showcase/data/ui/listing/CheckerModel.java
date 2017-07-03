@@ -53,8 +53,8 @@ public final class CheckerModel extends DefaultObjectModel<CheckerModel, Checker
                 .upgraded(false)
                 .downgraded(false);
 
-        filteredList = new FilteredList<>(object().pLastResult(), this::filter);
-        sortedList = new SortedList<>(filteredList);
+        this.filteredList = new FilteredList<>(object().pLastResult(), this::filter);
+        this.sortedList = new SortedList<>(this.filteredList);
 
     }
 
@@ -75,8 +75,8 @@ public final class CheckerModel extends DefaultObjectModel<CheckerModel, Checker
         Bindings.bindBidirectional(view().sourceText().textProperty(), object().pSourcePath(), new FileStringConverter());
         Bindings.bindBidirectional(view().targetText().textProperty(), object().pTargetPath(), new FileStringConverter());
 
-        sortedList.comparatorProperty().bind(view().getTable().comparatorProperty());
-        view().getTable().setItems(sortedList);
+        this.sortedList.comparatorProperty().bind(view().getTable().comparatorProperty());
+        view().getTable().setItems(this.sortedList);
 
         bindFilterButton();
 
@@ -191,10 +191,10 @@ public final class CheckerModel extends DefaultObjectModel<CheckerModel, Checker
     }
 
     public void updateFilter(final ObservableValue<? extends Boolean> observable, final Boolean oldValue, final Boolean newValue) {
-        filteredList.setPredicate(this::filter);
+        this.filteredList.setPredicate(this::filter);
     }
 
-    private boolean filter(FileComparison fc) {
+    private boolean filter(final FileComparison fc) {
 
         if (fc.isMissing() && object().missing() ||
                 fc.isNewer() && object().newer() ||

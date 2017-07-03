@@ -9,6 +9,7 @@ import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.ui.annotation.OnMouse;
 import org.jrebirth.af.api.ui.annotation.type.Mouse;
 import org.jrebirth.af.core.ui.AbstractView;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,16 +55,23 @@ public final class SampleView extends AbstractView<SampleModel, BorderPane, Samp
         this.pooledCommand = new Button("Trigger a pooled Command into JTP");
 
         node().setCenter(
-                                LabelBuilder.create()
-                                            .text("JRebirth Sample")
-                                            .build()
-                     );
+                         LabelBuilder.create()
+                                     .text("JRebirth Sample")
+                                     .build());
 
         node().setBottom(FlowPaneBuilder.create().children(
-                                                                  this.defaultCommand,
-                                                                  this.uiCommand,
-                                                                  this.pooledCommand
-                                               ).build());
+                                                           this.defaultCommand,
+                                                           this.uiCommand,
+                                                           this.pooledCommand)
+                                        .build());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void bootView() {
+        // Nothing to do yet
     }
 
     /**

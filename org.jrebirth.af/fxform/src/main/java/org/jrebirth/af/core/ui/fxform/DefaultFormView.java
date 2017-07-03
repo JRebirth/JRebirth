@@ -51,4 +51,10 @@ public class DefaultFormView<M extends AbstractFormModel<M, ?, B>, C extends Con
         // Custom code to process when the view is hidden
     }
 
+    @Override
+    protected void bootView() {
+        // Nothing to do yet
+
+    }
+
 }

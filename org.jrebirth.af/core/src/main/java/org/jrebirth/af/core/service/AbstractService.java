@@ -28,7 +28,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.scene.control.ProgressBar;
 
-import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.facade.JRebirthEventType;
 import org.jrebirth.af.api.log.JRLogger;

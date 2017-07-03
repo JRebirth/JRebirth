@@ -17,5 +17,5 @@ public interface WaveMessages extends MessageContainer {
 
     /** "{0} experience a service task failure for wave {1}" . */
     MessageItem RELATED_WAVE_HAS_FAILED = create(new LogMessage("jrebirth.wave.relatedWaveHasFailed", JRLevel.Error, JRebirthMarkers.WAVE));
-    
+
 }

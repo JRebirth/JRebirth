@@ -46,6 +46,7 @@ import org.jrebirth.af.api.ui.annotation.OnFinished;
 import org.jrebirth.af.api.ui.annotation.RootNodeClass;
 import org.jrebirth.af.api.ui.annotation.RootNodeId;
 import org.jrebirth.af.api.ui.annotation.type.EnumEventType;
+import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.handler.AnnotationEventHandler;
 import org.jrebirth.af.core.util.ClassUtility;
@@ -165,6 +166,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
 
         // Process field annotation to attach event handler
         processFields();
+
+        // Boot the view, ie to load data
+        bootView();
 
     }
 
@@ -459,6 +463,27 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * This method must be overridden by user to create its own graphical tree
      */
     protected abstract void initView();
+
+    /**
+     * Initialize the view.
+     *
+     * This method is a hook to manage generic code before initializing the view's node tree.
+     *
+     * You must implement the {@link #initView()} method to setup your view.
+     */
+    protected final void bootInternalView() {
+        // Do some generic stuff to set up the view
+
+        // Call the user method used to set up the graphical tree of nodes
+        JRebirth.runIntoJAT(this::bootView);
+    }
+
+    /**
+     * Custom method used to initialize components.
+     *
+     * This method must be overridden by user to create its own graphical tree
+     */
+    protected abstract void bootView();
 
     /**
      * {@inheritDoc}

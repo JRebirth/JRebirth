@@ -21,7 +21,7 @@ public class HeaderModel extends DefaultModel<HeaderModel, HeaderView> {
     protected void bind() {
         super.bind();
 
-        view().selectAll().visibleProperty().bind(Bindings.size(contentModel.getFilteredList()).greaterThan(0));
+        view().selectAll().visibleProperty().bind(Bindings.size(this.contentModel.getFilteredList()).greaterThan(0));
 
     }
 
@@ -30,16 +30,14 @@ public class HeaderModel extends DefaultModel<HeaderModel, HeaderView> {
 
         if (added) {
             view().todoText().setText("");
-
-            sendWave(WWaves.UPDATE_STATUS_WT);
         } else {
             // warn user
         }
-
+        sendWave(WWaves.UPDATE_STATUS_WT);
     }
 
-    public void selectAll(boolean selected) {
-        for (final Todo t : contentModel.getFilteredList()) {
+    public void selectAll(final boolean selected) {
+        for (final Todo t : this.contentModel.getFilteredList()) {
             t.done(selected);
         }
         sendWave(WWaves.UPDATE_STATUS_WT);

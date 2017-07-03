@@ -34,7 +34,7 @@ public interface JRebirthRunnable extends Runnable {
 
     /**
      * Return the runnable name used to distinguish all runnable.
-     * 
+     *
      * @return the runnable name
      */
     default String runnableName() {

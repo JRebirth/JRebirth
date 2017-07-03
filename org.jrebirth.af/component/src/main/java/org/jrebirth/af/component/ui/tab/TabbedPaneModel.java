@@ -19,13 +19,15 @@ package org.jrebirth.af.component.ui.tab;
 
 import java.util.List;
 
+import javafx.animation.SequentialTransition;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
+
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
-import org.jrebirth.af.component.command.tab.AddTabCommand;
-import org.jrebirth.af.component.command.tab.TabWaveBean;
 import org.jrebirth.af.component.ui.beans.TabbedPaneConfig;
 import org.jrebirth.af.component.ui.beans.TabbedPaneOrientation;
 import org.jrebirth.af.core.concurrent.JRebirth;
@@ -33,12 +35,9 @@ import org.jrebirth.af.core.ui.object.DefaultObjectModel;
 import org.jrebirth.af.core.util.ObjectUtility;
 import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.WaveItemBase;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javafx.animation.SequentialTransition;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
 
 /**
  * The Class TabbedPaneModel is used to.
@@ -84,15 +83,6 @@ public class TabbedPaneModel extends DefaultObjectModel<TabbedPaneModel, TabbedP
 
         // Manage Style
         node().getStyleClass().add(this.getClass().getSimpleName());
-        
-        
-        for (final Dockable d : object().tabs()) {
-
-            callCommand(AddTabCommand.class, TabWaveBean.create()
-					.tabHolderKey(object().id())
-					.tab(d));
-
-        }
 
     }
 
@@ -110,24 +100,23 @@ public class TabbedPaneModel extends DefaultObjectModel<TabbedPaneModel, TabbedP
     private void onOrientationChanged(final ObservableValue<? extends TabbedPaneOrientation> property, final TabbedPaneOrientation oldValue, final TabbedPaneOrientation newValue) {
 
         view().reloadButtonBar();
-
+        final SequentialTransition st = new SequentialTransition();
         for (final Dockable tab : object().tabs()) {
-            view().addTab(object().tabs().size(), tab);
+            st.getChildren().add(view().addTab(object().tabs().size(), tab));
         }
+        st.play();
 
     }
 
     private void onTabsChanged(final ListChangeListener.Change<? extends Dockable> change) {
-    	JRebirth.runIntoJAT(
-				  () -> onTabsChangedJAT(change)
-				  );
+        JRebirth.runIntoJAT(
+                            () -> onTabsChangedJAT(change));
     }
-    	
-				  
+
     @SuppressWarnings("unchecked")
-	private void onTabsChangedJAT(final ListChangeListener.Change<? extends Dockable> change) {
-        SequentialTransition st = new SequentialTransition();
-    	while (change.next()) {
+    private void onTabsChangedJAT(final ListChangeListener.Change<? extends Dockable> change) {
+        final SequentialTransition st = new SequentialTransition();
+        while (change.next()) {
 
             System.out.println(change);
 
@@ -138,15 +127,15 @@ public class TabbedPaneModel extends DefaultObjectModel<TabbedPaneModel, TabbedP
             }
 
             if (change.wasRemoved()) {
-            	st.getChildren().add(view().removeTab((List<Dockable>) change.getRemoved()));
+                st.getChildren().add(view().removeTab((List<Dockable>) change.getRemoved()));
             }
 
             if (change.wasAdded()) {
-            	st.getChildren().add(view().addTab(change.getFrom(), change.getList().get(change.getFrom())));
+                st.getChildren().add(view().addTab(change.getFrom(), change.getList().get(change.getFrom())));
             }
 
         }
-    	st.play();
+        st.play();
     }
 
     /**

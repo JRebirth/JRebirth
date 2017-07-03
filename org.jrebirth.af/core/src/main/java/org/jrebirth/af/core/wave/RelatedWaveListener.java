@@ -22,7 +22,6 @@ import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.Wave.Status;
 import org.jrebirth.af.api.wave.WaveListener;
 import org.jrebirth.af.core.log.JRLoggerFactory;
-import org.jrebirth.af.core.service.ServiceMessages;
 
 /**
  * The class <strong>RelatedWaveListener</strong>.
@@ -71,12 +70,12 @@ public final class RelatedWaveListener implements WaveListener, WaveMessages {
      */
     @Override
     public void waveConsumed(final Wave wave) {
-//        if (wave.relatedWave() != null) {
-//            // Return wave has been consumed, so the triggered wave can be consumed too
-//            LOGGER.trace(SERVICE_TASK_RETURN_CONSUMES, wave.fromClass().getSimpleName(), wave.relatedWave().toString());
-//            wave.relatedWave().status(Status.Consumed);
-//        }
-    	// Nothing to do yet
+        // if (wave.relatedWave() != null) {
+        // // Return wave has been consumed, so the triggered wave can be consumed too
+        // LOGGER.trace(SERVICE_TASK_RETURN_CONSUMES, wave.fromClass().getSimpleName(), wave.relatedWave().toString());
+        // wave.relatedWave().status(Status.Consumed);
+        // }
+        // Nothing to do yet
     }
 
     /**

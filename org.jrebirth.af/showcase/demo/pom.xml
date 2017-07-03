@@ -11,7 +11,7 @@
 	<artifactId>demo</artifactId>
 	<packaging>jar</packaging>
 
-	<name>JRebirth Demo</name>
+	<name>SC JRebirth Demo</name>
 	<description>All Showcases applications bundled into one</description>
 	<url>http://www.jrebirth.org/apps/Demo.html</url>
 
@@ -121,7 +121,7 @@
 									<Class-Path>.</Class-Path>
 								</manifestEntries>
 							</transformer>
-							<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+							<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 						</transformers>
 						<finalName>${archiveName}-${project.version}</finalName>
 					</configuration>
@@ -419,6 +419,18 @@
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>todos</artifactId>
+			<version>8.5.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jrebirth.af.showcase</groupId>
+			<artifactId>fonticon</artifactId>
+			<version>8.5.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth.af.showcase</groupId>
+			<artifactId>wave</artifactId>
 			<version>8.5.1-SNAPSHOT</version>
 		</dependency>
 
