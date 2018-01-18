@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.ui;
 
+import java.util.Optional;
+import java.util.function.Supplier;
+
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.util.Callback;
@@ -31,11 +34,15 @@ import org.jrebirth.af.api.ui.View;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.ui.adapter.EventAdapter;
 import org.jrebirth.af.core.ui.handler.AbstractNamedEventHandler;
+import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.wave.JRebirthWaves;
 
+// TODO: Auto-generated Javadoc
 /**
  * The abstract class <strong>AbstractController</strong>.
  *
@@ -275,6 +282,120 @@ public abstract class AbstractController<M extends Model, V extends View<M, ?, ?
      */
     protected Wave callCommand(final Class<? extends CommandBean<? extends WaveBean>> commandClass, final WaveBean waveBean, final WaveBean... waveBeans) {
         return model().callCommand(commandClass, waveBean, waveBeans);
+    }
+
+    /**
+     * Gets the user data.
+     *
+     * @param node the node
+     * @param waveItem the wave item
+     * 
+     * @return the user data
+     * 
+     * @param <T> the generic type
+     */
+    protected <T> Optional<T> getUserData(Optional<? extends Node> node, WaveItem<T> waveItem) {
+        if (node.isPresent()) {
+            final Node n = node.get();
+            return getValue(n, n::getUserData, waveItem);
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Gets the user data.
+     *
+     * @param node the node
+     * @param type the cls
+     * 
+     * @param <T> the generic type
+     * 
+     * @return the user data
+     */
+    protected <T> Optional<T> getUserData(Optional<? extends Node> node, Class<T> type) {
+        if (node.isPresent()) {
+            final Node n = node.get();
+            return getValue(n, n::getUserData, type);
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Gets the source.
+     *
+     * @param event the event
+     * @param type the cls
+     * 
+     * @param <T> the generic type
+     * 
+     * @return the source
+     */
+    protected <T> Optional<T> getSource(Event event, Class<T> type) {
+        return getValue(event, event::getSource, type);
+    }
+
+    /**
+     * Gets the target.
+     *
+     * @param event the event
+     * @param type the cls
+     * 
+     * @param <T> the generic type
+     * 
+     * @return the target
+     */
+    protected <T> Optional<T> getTarget(Event event, Class<T> type) {
+        return getValue(event, event::getTarget, type);
+    }
+
+    /**
+     * Gets the value.
+     *
+     * @param object the object
+     * @param method the method
+     * @param cls the cls
+     * 
+     * @param <T> the generic type
+     * 
+     * @return the value
+     */
+    @SuppressWarnings("unchecked")
+    private <T> Optional<T> getValue(Object object, Supplier<Object> method, Class<T> cls) {
+
+        T source = null;
+        if (cls.isInstance(method.get())) {
+            source = (T) method.get();
+        } else {
+            if (CoreParameters.DEVELOPER_MODE.get()) {
+                throw new CoreRuntimeException("Cannot cast object " + method.get() + " to " + cls.toGenericString());
+            }
+        }
+        return Optional.ofNullable(source);
+    }
+
+    /**
+     * Gets the value.
+     *
+     * @param object the object
+     * @param method the method
+     * @param waveItem the wave item
+     * 
+     * @return the value
+     * 
+     * @param <T> the generic type
+     */
+    @SuppressWarnings("unchecked")
+    private <T> Optional<T> getValue(Object object, Supplier<Object> method, WaveItem<T> waveItem) {
+
+        T source = null;
+        if (ClassUtility.getClassFromType(waveItem.type()).isInstance(method.get())) {
+            source = (T) method.get();
+        } else {
+            if (CoreParameters.DEVELOPER_MODE.get()) {
+                throw new CoreRuntimeException("Cannot cast object " + method.get() + " to " + waveItem.type().toString());
+            }
+        }
+        return Optional.ofNullable(source);
     }
 
 }

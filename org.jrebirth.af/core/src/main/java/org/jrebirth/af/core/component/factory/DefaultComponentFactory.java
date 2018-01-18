@@ -88,7 +88,7 @@ public final class DefaultComponentFactory implements ComponentFactory, FacadeMe
                         Collections.reverse(items);
                     }
 
-                    // Limit the number of component to build to onl one when exclusive mode is activated
+                    // Limit the number of component to build to only one when exclusive mode is activated
                     final int nbComponent = definition.exclusive() ? 1 : Integer.MAX_VALUE;
 
                     for (final RegistrationItem item : items.stream().limit(nbComponent).collect(Collectors.toList())) {

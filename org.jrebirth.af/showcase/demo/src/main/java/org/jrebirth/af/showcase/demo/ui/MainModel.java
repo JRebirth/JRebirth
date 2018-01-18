@@ -42,9 +42,7 @@ public final class MainModel extends DefaultModel<MainModel, MainView> {
      */
     @Override
     protected void initModel() {
-        for (final ModuleModel mm : getModels(ModuleModel.class)) {
-            this.modules.add(mm);
-        }
+        this.modules.addAll(getModels(ModuleModel.class));
     }
 
     /**
@@ -52,6 +50,7 @@ public final class MainModel extends DefaultModel<MainModel, MainView> {
      */
     @Override
     protected void showView() {
+        // Attach stack model
         view().node().setCenter(this.stackModel.node());
     }
 
@@ -61,10 +60,11 @@ public final class MainModel extends DefaultModel<MainModel, MainView> {
     @Override
     protected void hideView() {
         // Nothing to do yet
-
     }
 
     /**
+     * Return the ModuleModels. Only package visibility to let access to view or controller but not other models.
+     * 
      * @return Returns the modules.
      */
     List<ModuleModel> getModules() {

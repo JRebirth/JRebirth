@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.showcase.demo.ui;
 
+import java.util.Optional;
+
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
@@ -46,13 +48,23 @@ public final class MainController extends DefaultController<MainModel, MainView>
         super(view);
     }
 
-    public void onButtonFired(final ActionEvent event) {
-        final Button b = (Button) event.getSource();
-        final UniqueKey<? extends Model> data = (UniqueKey<? extends Model>) b.getUserData();
+    /**
+     * When a button is fired display the related ModuleModel.
+     * 
+     * @param event the action event
+     */
+    void onButtonFired(final ActionEvent event) {
 
-        model().sendWave(StackWaves.SHOW_PAGE_MODEL,
-                         WBuilder.waveData(StackWaves.PAGE_MODEL_KEY, data),
-                         WBuilder.waveData(StackWaves.STACK_NAME, "DemoStack"));
+        final Optional<Button> b = getTarget(event, Button.class);
+
+        final Optional<UniqueKey<? extends Model>> data = getUserData(b, StackWaves.PAGE_MODEL_KEY);
+
+        if (data.isPresent()) {
+            model().sendWave(StackWaves.SHOW_PAGE_MODEL,
+                             WBuilder.waveData(StackWaves.PAGE_MODEL_KEY, data.get()),
+                             WBuilder.waveData(StackWaves.STACK_NAME, "DemoStack"));
+
+        }
     }
 
 }

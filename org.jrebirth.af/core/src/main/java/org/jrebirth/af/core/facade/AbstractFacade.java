@@ -38,7 +38,9 @@ import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.core.key.ClassKey;
 import org.jrebirth.af.core.key.Key;
+import org.jrebirth.af.core.key.MultitonKey;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
@@ -208,7 +210,7 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
 
                 for (final E readyObject : readyObjectList) {
                     // Register it
-                    register(uniqueKey, readyObject);
+                    register(readyObject.key(), readyObject);
                     // The component is accessible from facade, let's start its initialization
                     readyObject.setup();
                 }
@@ -310,8 +312,18 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             // Already Done by register method
             readyObject.localFacade(this);
 
+            UniqueKey<?> readyKey = null;
+            if (uniqueKey instanceof MultitonKey) {
+                final Object keyPart = ((MultitonKey<?>) uniqueKey).value();
+                readyKey = Key.createMulti(readyObject.getClass(),
+                                           keyPart instanceof List ? ((List<?>) keyPart).toArray() : new Object[] { keyPart },
+                                           uniqueKey.optionalData().toArray());
+            } else if (uniqueKey instanceof ClassKey) {
+                readyKey = Key.createSingle(readyObject.getClass(), uniqueKey.optionalData().toArray());
+            }
+
             // Create the unique key
-            readyObject.key((UniqueKey<R>) uniqueKey);
+            readyObject.key((UniqueKey<R>) readyKey);
 
         }
 

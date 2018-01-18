@@ -28,7 +28,6 @@ import javafx.scene.layout.VBox;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.ui.ModuleModel;
-import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.ui.DefaultView;
 
 /**
@@ -71,27 +70,30 @@ public final class MainView extends DefaultView<MainModel, BorderPane, MainContr
      */
     @Override
     public void start() {
-        this.buttonList.stream().findFirst().ifPresent(button -> button.fire());
+        this.buttonList.stream().findFirst().ifPresent(Button::fire);
     }
 
     private Node createMenu() {
         final VBox box = new VBox();
 
-        for (final ModuleModel mm : model().getModules()) {
-            final Node n = createModuleButton(mm);
-            VBox.setMargin(n, new Insets(4, 4, 4, 4));
-            box.getChildren().add(n);
-        }
+        model().getModules().stream()
+               .map(this::createModuleButton)
+               .forEach(box.getChildren()::add);
+
         return box;
     }
 
-    private Node createModuleButton(final ModuleModel mm) {
+    private Button createModuleButton(final ModuleModel mm) {
         final Button b = new Button(mm.moduleName());
+
         b.getStyleClass().add("menuButton");
         b.setPrefSize(100, 50);
         b.setOnAction(controller()::onButtonFired);
-        b.setUserData(Key.create(mm.getClass()));
+        b.setUserData(mm.key());
+
+        VBox.setMargin(b, new Insets(4, 4, 4, 4));
         this.buttonList.add(b);
+
         return b;
     }
 
