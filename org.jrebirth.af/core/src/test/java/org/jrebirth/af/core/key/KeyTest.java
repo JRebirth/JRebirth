@@ -1,7 +1,8 @@
 package org.jrebirth.af.core.key;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javafx.scene.Cursor;
 import javafx.scene.layout.BorderPane;
@@ -111,25 +112,41 @@ public class KeyTest {
     @Test
     public void registerCommandWithKey() {
 
-        final List<Command> strongList = new ArrayList<>();
+        final Set<Command> strongSet = new HashSet<>();
 
         for (int i = 0; i < 10_000; i++) {
-            strongList.add(this.commandFacade.retrieve(SwitchFullScreenCommand.class, new Integer(i)));
+            strongSet.add(this.commandFacade.retrieve(SwitchFullScreenCommand.class, new Integer(i)));
             if (i % 1_000 == 0) {
                 System.out.println(i + " added");
             }
         }
 
-        strongList.add(this.commandFacade.retrieve(UpdateCursorCommand.class));
-        strongList.add(this.commandFacade.retrieve(UpdateCursorCommand.class, Cursor.WAIT));
-        strongList.add(this.commandFacade.retrieve(UpdateCursorCommand.class, Cursor.WAIT, new BorderPane()));
+        strongSet.add(this.commandFacade.retrieve(UpdateCursorCommand.class));
+        strongSet.add(this.commandFacade.retrieve(UpdateCursorCommand.class));
+        strongSet.add(this.commandFacade.retrieve(UpdateCursorCommand.class));
+        strongSet.add(this.commandFacade.retrieve(UpdateCursorCommand.class));
+        strongSet.add(this.commandFacade.retrieve(UpdateCursorCommand.class));
+        strongSet.add(this.commandFacade.retrieve(UpdateCursorCommand.class, Cursor.WAIT));
+        strongSet.add(this.commandFacade.retrieve(UpdateCursorCommand.class, Cursor.WAIT, new BorderPane()));
 
         checkComponentCount(UpdateCursorCommand.class, 3);
 
         checkComponentCount(SwitchFullScreenCommand.class, 10_000);
 
+        Assert.assertEquals(strongSet.size(), 10_003);
+
         // retain the strong list even method check to avoid compiler optimization that will release item too early
-        System.out.println(strongList.size() + " items strongly retained");
+        System.out.println(strongSet.size() + " items strongly retained");
+
+        // Break all strong references to release all components
+        strongSet.clear();
+
+        System.gc();
+
+        checkComponentCount(UpdateCursorCommand.class, 0);
+
+        checkComponentCount(SwitchFullScreenCommand.class, 0);
+
     }
 
     private <C extends Command> void checkComponentCount(final Class<C> componentClass, final int nb) {
@@ -137,7 +154,7 @@ public class KeyTest {
 
         final List<?> kcList = this.commandFacade.retrieveFilter(Key.create(componentClass));
 
-        System.out.println(System.currentTimeMillis() - begin + " ms");
+        System.out.println(kcList.size() + " components of " + nb + " retrieved in " + (System.currentTimeMillis() - begin) + " ms");
 
         Assert.assertEquals(nb, kcList.size());
     }
