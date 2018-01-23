@@ -55,6 +55,19 @@ public interface IconFont {
     }
 
     /**
+     * Builds the {@link FontItem} used to retrieve the {@link Font} resource.
+     *
+     * @param fontName the font name
+     * @param iconFontClass the icon font class
+     * @param fontExtension the font extension to use
+     *
+     * @return the unique font item with default size
+     */
+    static FontItem buildItem(final String fontName, final Class<? extends IconFont> iconFontClass, final FontExtension fontExtension) {
+        return Resources.create(new RealFont(new CustomFontName(fontName), 16, fontExtension));
+    }
+
+    /**
      * Use current icon for given {@link Labeled}.
      *
      * @param l the label to update with current icon

@@ -20,6 +20,10 @@
 
 	<modules>
 		<module>fontawesome</module>
+		<module>weathericons</module>
+		<module>525icons</module>
+		<module>emojione</module>
+		<module>typicons</module>
 	</modules>
 
 	<build>
@@ -42,6 +46,7 @@
 				</includes>
 				<excludes>
 					<exclude>**/*.ttf</exclude>
+					<exclude>**/*.otf</exclude>
 				</excludes>
 			</resource>
 			<resource>
@@ -49,6 +54,7 @@
 				<directory>${basedir}/src/main/resources</directory>
 				<includes>
 					<include>**/*.ttf</include>
+					<include>**/*.otf</include>
 				</includes>
 			</resource>
 		</resources>
