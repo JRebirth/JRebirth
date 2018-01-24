@@ -57,4 +57,17 @@ public interface UniqueKey<R> extends Serializable {
      */
     List<Object> optionalData();
 
+    /**
+     * Sets the registration key.
+     *
+     * @param registrationKey the new registration key
+     */
+    void registrationKey(UniqueKey<? super R> registrationKey);
+
+    /**
+     * Gets the registration key.
+     *
+     * @return the registration key
+     */
+    UniqueKey<? super R> registrationKey();
 }

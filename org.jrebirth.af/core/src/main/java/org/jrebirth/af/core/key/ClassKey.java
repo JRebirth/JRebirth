@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,9 +31,7 @@ import org.jrebirth.af.api.key.UniqueKey;
  */
 public class ClassKey<R> implements UniqueKey<R> {
 
-    /**
-     *
-     */
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -6535088425529890897L;
 
     /** The class definition of the component registered by the current key. */
@@ -41,6 +39,9 @@ public class ClassKey<R> implements UniqueKey<R> {
 
     /** List of optional data to be transmit to the component. */
     private final List<Object> optionalDatas;
+
+    /** The registration key used when registered into a set of implementations. */
+    private UniqueKey<? super R> registrationKey;
 
     /**
      * Default Constructor.
@@ -117,6 +118,22 @@ public class ClassKey<R> implements UniqueKey<R> {
     @Override
     public List<Object> optionalData() {
         return this.optionalDatas == null ? new ArrayList<>() : this.optionalDatas;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void registrationKey(UniqueKey<? super R> uniqueKey) {
+        this.registrationKey = uniqueKey;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UniqueKey<? super R> registrationKey() {
+        return registrationKey;
     }
 
 }

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.stream.Collectors;
@@ -76,22 +77,24 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      */
     @SuppressWarnings("unchecked")
     @Override
-    public <E extends R> void register(final UniqueKey<E> uniqueKey, final E readyObject) {
+    public <E extends R> void register(final UniqueKey<E> registrationKey, final E readyObject) {
 
         // Synchronize the registration
         synchronized (this.componentMap) {
 
-            // reload the key
-            readyObject.key((UniqueKey<R>) uniqueKey);
+            // Set the key if not set before otherwise does nothing because the registrationKey can be different from the real component key
+            if (readyObject.key() == null) {
+                readyObject.key((UniqueKey<R>) registrationKey);
+            }
 
             // Attach the facade to allow to retrieve any components
             readyObject.localFacade(this);
-            if (!this.componentMap.containsKey(readyObject.key())) {
+            if (!this.componentMap.containsKey(registrationKey)) {
                 final Set<R> weakHashSet = Collections.newSetFromMap(new WeakHashMap<R, Boolean>());
                 // Store the component into the singleton map
-                this.componentMap.put(readyObject.key(), weakHashSet);
+                this.componentMap.put(registrationKey, weakHashSet);
             }
-            this.componentMap.get(readyObject.key()).add(readyObject);
+            this.componentMap.get(registrationKey).add(readyObject);
         }
 
     }
@@ -180,7 +183,9 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
     @Override
     public <E extends R> E retrieve(final UniqueKey<E> uniqueKey) {
 
-        return retrieveMany(uniqueKey).stream().findFirst().get();
+        final Optional<E> first = retrieveMany(uniqueKey).stream().findFirst();
+
+        return first.orElseThrow(() -> new CoreRuntimeException("Impossible to load component " + uniqueKey.classField().getCanonicalName() + " with key parts " + uniqueKey.value().toString()));
     }
 
     /**
@@ -188,13 +193,13 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
      */
     @Override
     public <E extends R> E retrieve(final Class<E> clazz, final Object... keyPart) {
-
-        return retrieveMany(Key.create(clazz, keyPart)).stream().findFirst().get();
+        return retrieve(Key.create(clazz, keyPart));
     }
 
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public <E extends R> List<E> retrieveMany(final UniqueKey<E> uniqueKey) {
 
@@ -211,6 +216,10 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
                 for (final E readyObject : readyObjectList) {
                     // Register it
                     register(readyObject.key(), readyObject);
+                    // Double registration, one by Concrete class and another one by Interface (if available)
+                    if (readyObject.key().registrationKey() != null) {
+                        register((UniqueKey<E>) readyObject.key().registrationKey(), readyObject);
+                    }
                     // The component is accessible from facade, let's start its initialization
                     readyObject.setup();
                 }
@@ -312,15 +321,16 @@ public abstract class AbstractFacade<R extends FacadeReady<R>> extends AbstractG
             // Already Done by register method
             readyObject.localFacade(this);
 
-            UniqueKey<?> readyKey = null;
+            UniqueKey<E> readyKey = null;
             if (uniqueKey instanceof MultitonKey) {
                 final Object keyPart = ((MultitonKey<?>) uniqueKey).value();
-                readyKey = Key.createMulti(readyObject.getClass(),
-                                           keyPart instanceof List ? ((List<?>) keyPart).toArray() : new Object[] { keyPart },
-                                           uniqueKey.optionalData().toArray());
+                readyKey = (UniqueKey<E>) Key.createMulti(readyObject.getClass(),
+                                                          keyPart instanceof List ? ((List<?>) keyPart).toArray() : new Object[] { keyPart },
+                                                          uniqueKey.optionalData().toArray());
             } else if (uniqueKey instanceof ClassKey) {
-                readyKey = Key.createSingle(readyObject.getClass(), uniqueKey.optionalData().toArray());
+                readyKey = (UniqueKey<E>) Key.createSingle(readyObject.getClass(), uniqueKey.optionalData().toArray());
             }
+            readyKey.registrationKey(uniqueKey);
 
             // Create the unique key
             readyObject.key((UniqueKey<R>) readyKey);
