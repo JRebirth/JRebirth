@@ -262,8 +262,9 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             // They will be removed from the list when they are handled in order to know if there is any handler left before
             wave.setWaveHandlers(ws.getWaveHandlers().stream().filter(wh -> wh.check(wave)).collect(Collectors.toList()));
 
-            // For each object interested in that wave type, process the action
-            for (final WaveHandler waveHandler : wave.getWaveHandlers()) {
+            // For each object interested in that wave type, process the action        
+            // Make a defensive copy to protect from concurrent modification exception when the wavehandler will be removed from list
+            for (final WaveHandler waveHandler : new ArrayList<>(wave.getWaveHandlers())) {
 
                 // The handler will be performed in the right thread according to RunType annotation
                 waveHandler.handle(wave);
