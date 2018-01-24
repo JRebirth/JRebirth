@@ -11,7 +11,7 @@ import org.jrebirth.af.showcase.wave.ui.main.MainModel;
 public class SecondController extends AbstractFXMLController<SecondModel, View<SecondModel, ?, ?>> {
 
     public void onSayHello(ActionEvent actionEvent) {
-        final MainController controller = (MainController) model().getModel(MainModel.class).getFXMLController();
+        final MainController controller = model().getModel(MainModel.class).getFXMLController();
         controller.txtMessage.setText("Hello, world");
     }
 

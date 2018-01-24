@@ -12,12 +12,17 @@ public class MainModel extends DefaultFXMLModel<MainModel> implements ModuleMode
 
     @OnWave(WWaves.CHANGE)
     protected void whatyouwant(Wave wave) {
-        System.out.println("MainModel " + wave.waveType().action());
+        getFXMLController().txtMessage.setText("Wave received : " + wave.waveType().action());
     }
 
     @Override
     public String moduleName() {
         return "Wave";
+    }
+
+    @Override
+    public MainController getFXMLController() {
+        return (MainController) super.getFXMLController();
     }
 
 }

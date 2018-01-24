@@ -9,6 +9,6 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jrebirth.af.showcase.wave.ui.second.SecondController">
 	<children>
 		<Button layoutX="76.0" layoutY="58.0" mnemonicParsing="false" onAction="#onSayHello" text="Say Hello" />
-		<Button layoutX="306.0" layoutY="52.0" mnemonicParsing="false" onAction="#onButton2" text="Button" />
+		<Button layoutX="306.0" layoutY="52.0" mnemonicParsing="false" onAction="#onButton2" text="Send Wave" />
 	</children>
 </AnchorPane>
