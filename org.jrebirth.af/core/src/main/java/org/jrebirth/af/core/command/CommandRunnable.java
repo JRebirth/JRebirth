@@ -66,9 +66,9 @@ final class CommandRunnable extends AbstractJrbRunnable {
         try {
             // Call the innerRun available with package visibility
             this.command.innerRun(this.wave);
-        } catch (final CommandException ce) {
+        } catch (final Exception e) {
             // Log any error occurred during the execution of this command
-            LOGGER.error("Command has failed :", ce);
+            LOGGER.error("Command has failed :", e);
             // Then update the wave status in order to perform right task after this failure
             this.wave.status(Wave.Status.Failed);
         }
