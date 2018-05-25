@@ -51,6 +51,9 @@ public interface JRebirthMarkers {
     /** The Marker used to report Wave related message. */
     Marker WAVE = MarkerFactory.getMarker("WAVE ");
 
+    /** The Marker used by JRebirth Command layer. */
+    Marker COMMAND = MarkerFactory.getMarker("CMD  ");
+
     /** The Marker used by JRebirth Service layer. */
     Marker SERVICE = MarkerFactory.getMarker("SERVC");
 

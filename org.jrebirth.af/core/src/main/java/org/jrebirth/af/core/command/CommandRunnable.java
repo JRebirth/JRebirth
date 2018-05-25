@@ -18,23 +18,22 @@
 package org.jrebirth.af.core.command;
 
 import org.jrebirth.af.api.exception.JRebirthThreadException;
+import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.core.concurrent.AbstractJrbRunnable;
 import org.jrebirth.af.core.exception.CommandException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jrebirth.af.core.log.JRLoggerFactory;
 
 /**
  * The class <strong>CommandRunnable</strong>.
  *
  * @author Sébastien Bordes
  */
-final class CommandRunnable extends AbstractJrbRunnable {
+final class CommandRunnable extends AbstractJrbRunnable implements CommandMessages {
 
     /** The class logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CommandRunnable.class);
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(CommandRunnable.class);
 
     /**
      * The <code>wave</code>.
@@ -66,9 +65,14 @@ final class CommandRunnable extends AbstractJrbRunnable {
         try {
             // Call the innerRun available with package visibility
             this.command.innerRun(this.wave);
-        } catch (final Exception e) {
-            // Log any error occurred during the execution of this command
-            LOGGER.error("Command has failed :", e);
+        } catch (final CommandException ce) {
+            // Log all exception thrown during the execution of this command
+            LOGGER.error(CMD_EXCEPTION, ce);
+            // Then update the wave status in order to perform right task after this failure
+            this.wave.status(Wave.Status.Failed);
+        } catch (final RuntimeException re) {
+            // Log any unplanned error occurred during the execution of this command
+            LOGGER.error(UNPLANNED_FAILURE, re);
             // Then update the wave status in order to perform right task after this failure
             this.wave.status(Wave.Status.Failed);
         }
