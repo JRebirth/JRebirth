@@ -24,4 +24,12 @@ public class CoreStarter extends AbstractModuleStarter {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int priority() {
+        return Integer.MAX_VALUE;
+    }
+
 }

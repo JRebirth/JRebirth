@@ -19,7 +19,7 @@ package org.jrebirth.af.core.application;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.net.URL;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.stream.Collectors;
@@ -422,11 +422,12 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
         final ServiceLoader<ModuleStarter> loader = ServiceLoader.load(ModuleStarter.class);
 
-        final Iterator<ModuleStarter> iter = loader.iterator();
-        while (iter.hasNext()) {
-            final ModuleStarter ms = iter.next();
-            ms.start();
-        }
+        final List<ModuleStarter> modules = new ArrayList<>();
+        loader.iterator().forEachRemaining(modules::add);
+
+        modules.stream()
+               .sorted((m1, m2) -> -1 * Integer.compare(m1.priority(), m2.priority()))
+               .forEach(ModuleStarter::start);
 
     }
 

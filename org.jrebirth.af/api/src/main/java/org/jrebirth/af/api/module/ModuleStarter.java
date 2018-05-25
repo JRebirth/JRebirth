@@ -33,4 +33,15 @@ public interface ModuleStarter {
      * This method will be called when all modules are started during application boot up.
      */
     void start();
+
+    /**
+     * Priority used to launch Modules according to custom order.
+     * 
+     * The higher priority value will be called first.
+     * 
+     * @return the module priority from 0 to Integer.MAX_VALUE.
+     */
+    default int priority() {
+        return 0;
+    }
 }
