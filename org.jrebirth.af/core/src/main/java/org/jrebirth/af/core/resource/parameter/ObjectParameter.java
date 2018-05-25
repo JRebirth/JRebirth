@@ -17,6 +17,7 @@
  */
 package org.jrebirth.af.core.resource.parameter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -108,6 +109,8 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
             res = this.object;
         } else if (this.object instanceof Class<?>) {
             res = parseClassParameter(parameterEntry.getSerializedString());
+        } else if (this.object instanceof File) {
+            res = parseFileParameter(parameterEntry.getSerializedString());
         } else if (this.object instanceof List<?>) {
             res = parseListParameter(parameterEntry.getSerializedString());
         } else {
@@ -134,6 +137,21 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
             res = Class.forName(serializedObject);
         } catch (final ClassNotFoundException e) {
             throw new CoreRuntimeException("Impossible to load class " + serializedObject, e);
+        }
+        return res;
+    }
+
+    /**
+     * Parse a file definition by using canonical path.
+     *
+     * @param serializedObject the full file path
+     *
+     * @return the File object
+     */
+    private Object parseFileParameter(final String serializedObject) {
+        final File res = new File(serializedObject);
+        if (!res.exists()) {
+            throw new CoreRuntimeException("Impossible to load file " + serializedObject);
         }
         return res;
     }

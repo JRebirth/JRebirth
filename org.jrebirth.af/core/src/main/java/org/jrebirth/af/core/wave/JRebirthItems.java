@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.core.wave;
 
+import java.io.File;
+
 import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveItem;
@@ -26,56 +28,60 @@ import org.jrebirth.af.api.wave.contract.WaveItem;
  */
 public interface JRebirthItems {
 
-    /** The Void wave item will be used only into a WaveData to wrap the VOID value when nothing is returned. The Void type cannot be used into a method signature. */
+    /** The {@link Void} wave item will be used only into a WaveData to wrap the VOID value when nothing is returned. The Void type cannot be used into a method signature. */
     WaveItem<Void> voidItem = new WaveItemBase<Void>(false) {
     };
 
-    /** The wave wave item (not a parameter). */
+    /** The {@link Wave} wave item (not a parameter). */
     WaveItem<Wave> waveItem = new WaveItemBase<Wave>(false) {
     };
 
-    /** The exception wave item (not a parameter). */
+    /** The {@link Exception} wave item (not a parameter). */
     WaveItem<Throwable> exceptionItem = new WaveItemBase<Throwable>(false) {
     };
 
-    /** The class wave item. */
+    /** The {@link Class} wave item. */
     WaveItem<Class<?>> classItem = new WaveItemBase<Class<?>>() {
     };
 
-    /** The boolean wave item. */
+    /** The {@link Boolean} wave item. */
     WaveItem<Boolean> booleanItem = new WaveItemBase<Boolean>() {
     };
 
-    /** The string wave item. */
+    /** The {@link String} wave item. */
     WaveItem<String> stringItem = new WaveItemBase<String>() {
     };
 
-    /** The character wave item. */
+    /** The {@link Character} wave item. */
     WaveItem<Character> characterItem = new WaveItemBase<Character>() {
     };
 
-    /** The byte wave item. */
+    /** The {@link Byte} wave item. */
     WaveItem<Byte> byteItem = new WaveItemBase<Byte>() {
     };
 
-    /** The short wave item. */
+    /** The {@link Short} wave item. */
     WaveItem<Short> shortItem = new WaveItemBase<Short>() {
     };
 
-    /** The integer wave item. */
+    /** The {@link Integer} wave item. */
     WaveItem<Integer> integerItem = new WaveItemBase<Integer>() {
     };
 
-    /** The long wave item. */
+    /** The {@link Long} wave item. */
     WaveItem<Long> longItem = new WaveItemBase<Long>() {
     };
 
-    /** The float wave item. */
+    /** The {@link Float} wave item. */
     WaveItem<Float> floatItem = new WaveItemBase<Float>() {
     };
 
-    /** The double wave item. */
+    /** The {@link Double} wave item. */
     WaveItem<Double> doubleItem = new WaveItemBase<Double>() {
+    };
+
+    /** The {@link File} wave item. */
+    WaveItem<File> fileItem = new WaveItemBase<File>() {
     };
 
     /** The special WaveItem used to declare that an execution shall be done synchronously in the the given thread that is processing this wave. */
