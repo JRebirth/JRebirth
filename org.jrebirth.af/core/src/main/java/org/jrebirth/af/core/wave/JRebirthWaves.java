@@ -21,6 +21,7 @@ import static org.jrebirth.af.core.wave.WBuilder.waveType;
 
 import java.util.List;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
@@ -95,7 +96,7 @@ public interface JRebirthWaves {
     /** This WaveData allows to reuse a command instead of creating another one using an unique key timestamp. */
     WaveData<Boolean> REUSE = WBuilder.waveData(REUSE_COMMAND, true);
 
-    /** This WaveData allows to force the exceution of a command synchronously into the required thread. */
+    /** This WaveData allows to force the execution of a command synchronously into the required thread. */
     WaveData<Boolean> FORCE_SYNC = WBuilder.waveData(FORCE_SYNC_COMMAND, true);
 
     /********************************/
@@ -104,6 +105,10 @@ public interface JRebirthWaves {
 
     /** This wave item will be used only into a WaveData to pass the current Service task handled by the wave. */
     WaveItem<ServiceTaskBase<?>> SERVICE_TASK = new WaveItemBase<ServiceTaskBase<?>>(false) {
+    };
+
+    /** This wave item will be used only into a WaveData to pass the right progress property used by service task. */
+    WaveItem<DoubleProperty> PROGRESS_PROPERTY = new WaveItemBase<DoubleProperty>(false) {
     };
 
     /** This wave item will be used only into a WaveData to pass the right progress bar used by service task. */

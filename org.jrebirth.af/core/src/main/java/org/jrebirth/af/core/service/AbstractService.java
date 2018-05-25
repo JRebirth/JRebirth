@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
@@ -150,6 +151,11 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
         // Attach ServiceTask to the source wave
         sourceWave.addDatas(WBuilder.waveData(JRebirthWaves.SERVICE_TASK, task));
 
+        // Bind Progress Property
+        if (sourceWave.containsNotNull(JRebirthWaves.PROGRESS_PROPERTY)) { // Check double call
+            bindProgressProperty(task, sourceWave.getData(JRebirthWaves.PROGRESS_PROPERTY).value());
+        }
+
         // Bind ProgressBar
         if (sourceWave.containsNotNull(JRebirthWaves.PROGRESS_BAR)) { // Check double call
             bindProgressBar(task, sourceWave.getData(JRebirthWaves.PROGRESS_BAR).value());
@@ -169,6 +175,25 @@ public abstract class AbstractService extends AbstractBehavioredComponent<Servic
         JRebirth.runIntoJTP(task);
 
         return task;
+    }
+
+    /**
+     * Bind a task to a progress property to follow its progression.
+     *
+     * @param task the service task that we need to follow the progression
+     * @param progressBar graphical progress bar
+     */
+    private void bindProgressProperty(final ServiceTaskBase<?> task, final DoubleProperty progressProperty) {
+
+        // Perform this binding into the JAT to respect widget and task API
+        JRebirth.runIntoJAT("Bind Progress Property to " + task.getServiceHandlerName(),
+                            () -> {
+                                // Avoid the progress bar to display 100% at start up
+                                task.updateProgress(0, 0);
+                                // Bind the progress bar
+                                progressProperty.bind(task.workDoneProperty().divide(task.totalWorkProperty()));
+                            });
+
     }
 
     /**
