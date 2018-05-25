@@ -1,13 +1,12 @@
 package org.jrebirth.af.showcase.todos.service;
 
-import javafx.beans.property.StringProperty;
-
 import org.jrebirth.af.api.module.Register;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.service.DefaultService;
+import org.jrebirth.af.showcase.todos.bean.Todo;
+import org.jrebirth.af.showcase.todos.bean.TodoList;
 
-import bean.Todo;
-import bean.TodoList;
+import javafx.beans.property.StringProperty;
 
 @Register(value = TodoService.class)
 public class TodoServiceImpl extends DefaultService implements TodoService {

@@ -1,16 +1,16 @@
 package org.jrebirth.af.showcase.todos.ui.status;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
-
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.annotation.OnWave;
 import org.jrebirth.af.core.ui.DefaultModel;
 import org.jrebirth.af.showcase.todos.service.TodoService;
 import org.jrebirth.af.showcase.todos.ui.WWaves;
 import org.jrebirth.af.showcase.todos.ui.content.ContentModel;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
 
 public class StatusModel extends DefaultModel<StatusModel, StatusView> {
 

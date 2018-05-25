@@ -1,22 +1,21 @@
 package org.jrebirth.af.showcase.todos.ui.content.list;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.transformation.FilteredList;
-import javafx.scene.layout.Pane;
-
 import org.jrebirth.af.api.annotation.Link;
 import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.module.Register;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.annotation.OnWave;
 import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.showcase.todos.bean.Todo;
 import org.jrebirth.af.showcase.todos.service.TodoService;
 import org.jrebirth.af.showcase.todos.ui.WWaves;
 import org.jrebirth.af.showcase.todos.ui.content.ContentModel;
 import org.jrebirth.af.showcase.todos.ui.status.FilterKind;
 
-import bean.Todo;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.FilteredList;
+import javafx.scene.layout.Pane;
 
 @Register(value = ContentModel.class, priority = PriorityLevel.Lower)
 public class ListContentModel extends DefaultModel<ListContentModel, ListContentView> implements ContentModel {

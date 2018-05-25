@@ -2,9 +2,9 @@ package org.jrebirth.af.showcase.todos.ui.content.table;
 
 
 import org.jrebirth.af.core.ui.DefaultView;
+import org.jrebirth.af.showcase.todos.bean.Todo;
 import org.jrebirth.af.showcase.todos.ui.WWaves;
 
-import bean.Todo;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
@@ -12,7 +12,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -46,7 +45,7 @@ public class TableContentView extends DefaultView<TableContentModel, BorderPane,
         doneColumn.setMaxWidth(40);
         doneColumn.setMinWidth(40);
         doneColumn.setCellValueFactory(cdf -> cdf.getValue().pDone());
-        doneColumn.setCellFactory(tc -> new CheckBoxTableCell<Todo, Boolean>());
+        //doneColumn.setCellFactory(tc -> new CheckBoxTableCell<Todo, Boolean>());
        
         final TableColumn<Todo, String> textColumn = new TableColumn<>("Text");
         textColumn.setId(TEXT_COLUMN);

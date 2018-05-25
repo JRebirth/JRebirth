@@ -11,14 +11,13 @@ import org.jrebirth.af.api.module.Register;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.annotation.OnWave;
 import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.showcase.todos.bean.Todo;
 import org.jrebirth.af.showcase.todos.service.TodoService;
 import org.jrebirth.af.showcase.todos.ui.WWaves;
 import org.jrebirth.af.showcase.todos.ui.content.ContentModel;
 import org.jrebirth.af.showcase.todos.ui.status.FilterKind;
 
-import bean.Todo;
-
-@Register(value=ContentModel.class, priority=PriorityLevel.High)
+@Register(value = ContentModel.class, priority = PriorityLevel.High)
 public class TableContentModel extends DefaultModel<TableContentModel, TableContentView> implements ContentModel {
 
     @Link
@@ -48,6 +47,7 @@ public class TableContentModel extends DefaultModel<TableContentModel, TableCont
     /**
      * @return Returns the filteredList.
      */
+    @Override
     public FilteredList<Todo> getFilteredList() {
         return filteredList;
     }
@@ -64,6 +64,7 @@ public class TableContentModel extends DefaultModel<TableContentModel, TableCont
         }
     }
 
+    @Override
     public void setFilterId(final Object id) {
         filterId = (FilterKind) id;
     }
@@ -71,7 +72,7 @@ public class TableContentModel extends DefaultModel<TableContentModel, TableCont
     @Override
     protected void showView() {
         super.showView();
-       
+
         view().getTable().widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> obs, Number oldValue, Number newValue) {
@@ -87,19 +88,16 @@ public class TableContentModel extends DefaultModel<TableContentModel, TableCont
 
     }
 
+    @Override
     @OnWave(WWaves.UPDATE_STATUS)
     public void updateStatus(Wave wave) {
         refresh();
     }
 
+    @Override
     public void refresh() {
         filteredList.setPredicate(this::filter);
         view().getTable().refresh();
     }
 
 }
-
-
-
-
-

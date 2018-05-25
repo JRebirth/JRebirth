@@ -30,6 +30,15 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>webstart-maven-plugin</artifactId>
 			</plugin>
+<!--
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<useIncrementalCompilation>false</useIncrementalCompilation>
+				</configuration>
+			</plugin>-->
 
 			<plugin>
 				<groupId>org.jrebirth.af.tooling</groupId>
@@ -37,7 +46,7 @@
 				<version>8.5.1-SNAPSHOT</version>
 				<configuration>
 					<ecoreFile>model/Todos.ecore</ecoreFile>
-					<outputDirectory>target/generated-sources/model</outputDirectory>
+					<outputDirectory>${project.build.directory}/generated-sources/model</outputDirectory>
 				</configuration>
 				<executions>
 					<execution>
@@ -60,7 +69,7 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>target/generated-sources/model</source>
+								<source>${project.build.directory}/generated-sources/model</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -71,7 +80,7 @@
 	</build>
 
 	<dependencies>
-		<dependency>
+ 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
 			<version>8.5.1-SNAPSHOT</version>

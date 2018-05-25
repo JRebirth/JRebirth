@@ -1,5 +1,9 @@
 package org.jrebirth.af.showcase.todos.ui.content.list;
 
+import org.jrebirth.af.core.ui.DefaultView;
+import org.jrebirth.af.showcase.todos.bean.Todo;
+import org.jrebirth.af.showcase.todos.ui.WWaves;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
@@ -7,16 +11,10 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.util.converter.DefaultStringConverter;
-
-import org.jrebirth.af.core.ui.DefaultView;
-import org.jrebirth.af.showcase.todos.ui.WWaves;
-
-import bean.Todo;
 
 public class ListContentView extends DefaultView<ListContentModel, BorderPane, ListContentController> {
 
@@ -33,7 +31,7 @@ public class ListContentView extends DefaultView<ListContentModel, BorderPane, L
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "restriction" })
     @Override
     protected void initView() {
         super.initView();
@@ -46,7 +44,7 @@ public class ListContentView extends DefaultView<ListContentModel, BorderPane, L
         doneColumn.setMaxWidth(40);
         doneColumn.setMinWidth(40);
         doneColumn.setCellValueFactory(cdf -> cdf.getValue().pDone());
-        doneColumn.setCellFactory(tc -> new CheckBoxTableCell<>());
+        //doneColumn.setCellFactory(tc -> new CheckBoxTableCell<>());
 
         final TableColumn<Todo, String> textColumn = new TableColumn<>("Text");
         textColumn.setId(TEXT_COLUMN);

@@ -6,11 +6,10 @@ import org.jrebirth.af.api.annotation.Link;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.annotation.OnWave;
 import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.showcase.todos.bean.Todo;
 import org.jrebirth.af.showcase.todos.service.TodoService;
 import org.jrebirth.af.showcase.todos.ui.WWaves;
 import org.jrebirth.af.showcase.todos.ui.content.ContentModel;
-
-import bean.Todo;
 
 public class HeaderModel extends DefaultModel<HeaderModel, HeaderView> {
 

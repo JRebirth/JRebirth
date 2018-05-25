@@ -1,12 +1,12 @@
 package org.jrebirth.af.showcase.todos;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.application.DefaultApplication;
 import org.jrebirth.af.showcase.todos.resource.TodosStyles;
 import org.jrebirth.af.showcase.todos.ui.main.MainModel;
+
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 
 public class TodosApplication extends DefaultApplication<StackPane> {
 

@@ -1,13 +1,13 @@
 package org.jrebirth.af.showcase.todos.ui.status;
 
+import org.jrebirth.af.core.ui.DefaultView;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
-
-import org.jrebirth.af.core.ui.DefaultView;
 
 public class StatusView extends DefaultView<StatusModel, HBox, StatusController> {
 

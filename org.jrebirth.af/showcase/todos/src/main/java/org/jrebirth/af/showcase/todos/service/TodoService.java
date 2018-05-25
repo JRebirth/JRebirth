@@ -2,8 +2,6 @@ package org.jrebirth.af.showcase.todos.service;
 
 import static org.jrebirth.af.core.wave.WBuilder.waveType;
 
-import javafx.beans.property.StringProperty;
-
 import org.jrebirth.af.api.module.RegistrationPoint;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.wave.Wave;
@@ -11,9 +9,10 @@ import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.wave.JRebirthItems;
 import org.jrebirth.af.core.wave.WaveItemBase;
+import org.jrebirth.af.showcase.todos.bean.Todo;
+import org.jrebirth.af.showcase.todos.bean.TodoList;
 
-import bean.Todo;
-import bean.TodoList;
+import javafx.beans.property.StringProperty;
 
 /**
  * The interface <strong>TodoService</strong>.

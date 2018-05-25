@@ -1,8 +1,7 @@
 package org.jrebirth.af.showcase.todos.ui.content.list;
 
 import org.jrebirth.af.core.ui.object.DefaultObjectModel;
-
-import bean.Todo;
+import org.jrebirth.af.showcase.todos.bean.Todo;
 
 public class ListRowModel extends DefaultObjectModel<ListRowModel, ListRowView, Todo> {
 
