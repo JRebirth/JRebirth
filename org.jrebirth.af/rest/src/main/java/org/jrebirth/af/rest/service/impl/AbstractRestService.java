@@ -1,19 +1,20 @@
-package org.jrebirth.af.rest.service;
+package org.jrebirth.af.rest.service.impl;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
-import org.jrebirth.af.api.annotation.OnRelease;
+import org.jrebirth.af.api.annotation.Link;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.service.AbstractService;
+import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.rest.RestParameters;
 import org.jrebirth.af.rest.annotation.RestPath;
 import org.jrebirth.af.rest.annotation.RestTarget;
+import org.jrebirth.af.rest.service.ClientProviderService;
 
 public abstract class AbstractRestService extends AbstractService {
 
-    private Client client;
+    @Link
+    private ClientProviderService clientProvider;
 
     private WebTarget baseWebTarget;
 
@@ -25,9 +26,7 @@ public abstract class AbstractRestService extends AbstractService {
     @Override
     protected void initService() {
 
-        final RestTarget rt = this.getClass().getAnnotation(RestTarget.class);
-
-        client = ClientBuilder.newClient();
+        final RestTarget rt = ClassUtility.getLastClassAnnotation(this.getClass(), RestTarget.class);
 
         final StringBuilder url = new StringBuilder();
         if (rt != null && rt.value() != null) {
@@ -42,9 +41,9 @@ public abstract class AbstractRestService extends AbstractService {
                .append("/")
                .append(rt.path() != null ? rt.path() : RestParameters.DEFAULT_REST_SERVER_PATH.get());
         }
-        baseWebTarget = client.target(url.toString());
+        baseWebTarget = clientProvider.client().target(url.toString());
 
-        final RestPath rp = this.getClass().getAnnotation(RestPath.class);
+        final RestPath rp = ClassUtility.getLastClassAnnotation(this.getClass(), RestPath.class);
         if (rp != null && rp.value() != null) {
             localPath = rp.value();
         }
@@ -69,14 +68,6 @@ public abstract class AbstractRestService extends AbstractService {
     @Override
     protected void initInnerComponents() {
         // Nothing to do yet
-    }
-
-    /**
-     * When the service is released close the client.
-     */
-    @OnRelease
-    public void closeClient() {
-        client.close();
     }
 
     /**

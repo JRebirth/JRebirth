@@ -6,8 +6,8 @@ import org.jrebirth.af.api.wave.checker.WaveChecker;
 import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.wave.WaveItemBase;
-import org.jrebirth.af.rest.service.AbstractCRUDRestService;
-import org.jrebirth.af.rest.service.DefaultCRUDService;
+import org.jrebirth.af.rest.service.impl.AbstractCRUDRestService;
+import org.jrebirth.af.rest.service.impl.DefaultCRUDService;
 
 public class PlanetService extends AbstractCRUDRestService<Planet> {
 

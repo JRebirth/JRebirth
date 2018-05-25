@@ -1,4 +1,4 @@
-package org.jrebirth.af.rest.service;
+package org.jrebirth.af.rest.service.impl;
 
 import java.util.List;
 
