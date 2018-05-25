@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -139,7 +140,19 @@ public class Ecore2FXGenerator {
         ));
 
         bean.name(cls.getName());
-        bean._package(org.jrebirth.af.tooling.codegen.bean.Package.create().qualifiedName(cls.getEPackage().getName()));
+        
+        //
+        org.jrebirth.af.tooling.codegen.bean.Package clsPkg = org.jrebirth.af.tooling.codegen.bean.Package.create().qualifiedName(cls.getEPackage().getName());
+        bean._package(clsPkg);
+        org.jrebirth.af.tooling.codegen.bean.Package parent = null;
+        EPackage superPkg = cls.getEPackage().getESuperPackage();
+        while(superPkg != null) {
+            parent = org.jrebirth.af.tooling.codegen.bean.Package.create().qualifiedName(superPkg.getName());
+            clsPkg._package(parent);
+            clsPkg = parent;
+            superPkg = superPkg.getESuperPackage();
+        }
+        
 
         cls.getEGenericSuperTypes().stream().forEach(st -> {
             if (!getFullName(st).contains("ecore")) {
@@ -347,6 +360,23 @@ public class Ecore2FXGenerator {
     }
 
     private void managePackage(final File output, final EPackage obj) throws IOException {
+        
+        if(obj.getNsPrefix() != null){
+            
+            EPackage parent = null;
+            for(String pkgName : obj.getNsPrefix().split("\\.")) {
+                EPackage pkg = EcoreFactory.eINSTANCE.createEPackage();
+                pkg.setName(pkgName);
+                if(parent != null) {
+                    parent.getESubpackages().add(pkg);
+                }
+                parent = pkg;
+            }
+            if(parent != null) {
+                parent.getESubpackages().add(obj);
+            }
+        }
+        
         for (final EClassifier cls : obj.getEClassifiers()) {
             manageObject(output, cls);
         }
