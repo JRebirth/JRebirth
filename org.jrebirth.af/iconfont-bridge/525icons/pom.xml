@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>iconfont-bridge</artifactId>
-		<version>8.5.1-SNAPSHOT</version>
+		<version>8.6.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
