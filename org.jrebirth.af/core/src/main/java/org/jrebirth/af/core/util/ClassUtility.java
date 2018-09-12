@@ -31,6 +31,7 @@ import java.util.Locale;
 import javafx.application.Application;
 
 import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
@@ -533,7 +534,8 @@ public final class ClassUtility implements UtilMessages {
             method.setAccessible(accessible);
 
         } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
-            throw new CoreException(e);
+            final String methodName = instance.getClass().getSimpleName() + "." + method.getName();
+            throw new CoreException("Impossible to call method " + methodName, e);
         }
         return res;
     }
@@ -565,6 +567,37 @@ public final class ClassUtility implements UtilMessages {
         } catch (IllegalAccessException | IllegalArgumentException e) {
             throw new CoreException(e);
         }
+    }
+
+    /**
+     * Retrieve an object field even if it has a private or protected visibility.
+     *
+     * @param field the field to update
+     * @param instance the object instance that hold this field
+     * 
+     * @return value the value stored into this field
+     *
+     * @throws CoreException if the new value cannot be set
+     */
+    public static Object getFieldValue(final Field field, final Object instance) throws CoreRuntimeException {
+        Object value = null;
+        try {
+            // store current visibility
+            final boolean accessible = field.isAccessible();
+
+            // let it accessible anyway
+            field.setAccessible(true);
+
+            // Call this method with right parameters
+            value = field.get(instance);
+
+            // Reset default visibility
+            field.setAccessible(accessible);
+
+        } catch (IllegalAccessException | IllegalArgumentException e) {
+            throw new CoreRuntimeException(e);
+        }
+        return value;
     }
 
     /**
