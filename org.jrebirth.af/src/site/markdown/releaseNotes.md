@@ -3,6 +3,51 @@
 Release Notes
 ==============
 
+8.6.0 - Release 2018-06-06
+-----------------------------------------
+
+This release fixes some bugs and introduces some new features like JRebirth modules, JRebirth maven plugin, bean generation using annotation and ecore file, basic rest services.
+
+- Improve ModelConfig enhancement [#219](http://github.com/JRebirth/JRebirth/issues/issue/219)<br/>
+Add custom object type manage by Model Component
+
+- Wave are marked handled before all handlers have terminated regression [#218](http://github.com/JRebirth/JRebirth/issues/issue/218)<br/>
+Fix the way wave handlers works
+
+- Open MultiCommand API to add hook enhancement [#216](http://github.com/JRebirth/JRebirth/issues/issue/216)<br/>
+Improve Command API to be able to made fine customizations
+
+- Add support for headless unit tes enhancement [#215](http://github.com/JRebirth/JRebirth/issues/issue/215)<br/>
+It's now possible to launch JRebirth UI test in headless mode
+
+- processWave can be no more called bug [#213](http://github.com/JRebirth/JRebirth/issues/issue/213)<br/>
+Fix processWave usage
+
+- Allow to manage forced WaveType prefix enhancement [#212](http://github.com/JRebirth/JRebirth/issues/issue/212)<br/>
+Manage DO_ prefix according to JRebirth parameter
+
+- WaveListeners never notified on cancelled and destroyed bug [#207](http://github.com/JRebirth/JRebirth/issues/issue/207)<br/>
+Fix WaveListeners calls
+
+- Website links doesn't work bug [#206](http://github.com/JRebirth/JRebirth/issues/issue/206)<br/>
+Fix all website links
+
+- Calling returnData in the release method might result in a NullPointerException in AbstractComponent enhancement [#204](http://github.com/JRebirth/JRebirth/issues/issue/204)<br/>
+Fix potential NPE
+
+- Auto Generate Smart Beans feature [#189](http://github.com/JRebirth/JRebirth/issues/issue/189)<br/>
+Its now possible to generate JavaFX beans using annotation ot from an ecore file with a maven plugin
+
+- Manage Stage icons for Application feature [#161](http://github.com/JRebirth/JRebirth/issues/issue/161)<br/>
+Allow to cutomize stage icons of the application
+
+- Refactor AbstractJrbRunnable enhancement [#120](http://github.com/JRebirth/JRebirth/issues/issue/120)<br/>
+Improve code related to Runnable
+
+- Add jrebirth-maven-plugin feature  [#31](http://github.com/JRebirth/JRebirth/issues/issue/31)<br/>
+Add customMaven plugin used to generate some code
+
+
 
 8.5.0 - Release 2016-09-13
 -----------------------------------------

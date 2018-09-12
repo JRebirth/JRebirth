@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
-		<version>8.6.0-SNAPSHOT</version>
+		<version>8.7.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -37,38 +37,38 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>8.6.0-SNAPSHOT</version>
+			<version>8.7.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.iconfont-bridge</groupId>
 			<artifactId>fontawesome</artifactId>
-			<version>8.6.0-SNAPSHOT</version>
+			<version>8.7.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.iconfont-bridge</groupId>
 			<artifactId>525icons</artifactId>
-			<version>8.6.0-SNAPSHOT</version>
+			<version>8.7.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.iconfont-bridge</groupId>
 			<artifactId>emojione</artifactId>
-			<version>8.6.0-SNAPSHOT</version>
+			<version>8.7.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.iconfont-bridge</groupId>
 			<artifactId>weathericons</artifactId>
-			<version>8.6.0-SNAPSHOT</version>
+			<version>8.7.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.iconfont-bridge</groupId>
 			<artifactId>typicons</artifactId>
-			<version>8.6.0-SNAPSHOT</version>
+			<version>8.7.0-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
