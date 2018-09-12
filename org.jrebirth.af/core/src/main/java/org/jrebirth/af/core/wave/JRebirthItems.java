@@ -85,7 +85,7 @@ public interface JRebirthItems {
     };
 
     /** The special WaveItem used to declare that an execution shall be done synchronously in the the given thread that is processing this wave. */
-    WaveItem<Boolean> runSynchronously = new WaveItemBase<Boolean>() {
+    WaveItem<Boolean> runSynchronously = new WaveItemBase<Boolean>("runSynchronously") {
     };
 
     /** The special WaveItem used to define the timeout to use for all synchronized execution. */

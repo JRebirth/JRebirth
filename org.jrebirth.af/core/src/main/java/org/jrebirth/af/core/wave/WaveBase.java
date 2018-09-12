@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2016
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -39,6 +40,7 @@ import org.jrebirth.af.api.wave.contract.WaveItem;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.link.LinkMessages;
 import org.jrebirth.af.core.log.JRLoggerFactory;
+import org.jrebirth.af.core.util.ClassUtility;
 
 /**
  *
@@ -303,7 +305,9 @@ public class WaveBase implements Wave, LinkMessages {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T get(final WaveItem<T> waveItem) {
-        return (T) (this.waveItemsMap.containsKey(waveItem) ? this.waveItemsMap.get(waveItem).value() : null);
+        return (T) (this.waveItemsMap.containsKey(waveItem)
+                ? this.waveItemsMap.get(waveItem).value()
+                : waveItem.name() != null ? waveBeanGet(waveItem) : null);
     }
 
     /**
@@ -311,7 +315,41 @@ public class WaveBase implements Wave, LinkMessages {
      */
     @Override
     public boolean contains(final WaveItem<?> waveItem) {
-        return this.waveItemsMap.containsKey(waveItem);
+        return this.waveItemsMap.containsKey(waveItem) || waveItem.name() != null && waveBeanContains(waveItem);
+    }
+
+    /**
+     * Check if this item is contained into on Wave bean .
+     *
+     * @param waveItem the wave item to find
+     * 
+     * @return true, if successful
+     */
+    private boolean waveBeanContains(WaveItem<?> waveItem) {
+        return waveBeanList().stream()
+                             .flatMap(wb -> Stream.of(wb.getClass().getDeclaredFields()))
+                             .map(f -> f.getName())
+                             .anyMatch(n -> waveItem.name().equals(n));
+    }
+
+    /**
+     * Retrieve the field value from wave bean
+     *
+     * @param waveItem the wave item to retrieve
+     * 
+     * @return the object value
+     */
+    private Object waveBeanGet(WaveItem<?> waveItem) {
+        for (final WaveBean wb : waveBeanList()) {
+
+            final Object o = Stream.of(wb.getClass().getDeclaredFields())
+                                   .filter(f -> waveItem.name().equals(f.getName()))
+                                   .map(f -> ClassUtility.getFieldValue(f, wb)).findFirst().get();
+            if (o != null) {
+                return o;
+            }
+        }
+        return null;
     }
 
     /**
@@ -344,6 +382,7 @@ public class WaveBase implements Wave, LinkMessages {
     @Override
     public Wave waveBean(final WaveBean waveBean) {
         getWaveBeanMap().put(waveBean.getClass(), waveBean);
+
         return this;
     }
 
