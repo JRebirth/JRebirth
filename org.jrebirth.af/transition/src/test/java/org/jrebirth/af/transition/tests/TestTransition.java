@@ -1,3 +1,4 @@
+package org.jrebirth.af.transition.tests;
 /**
  * Get more info at : www.jrebirth.org .
  * Copyright JRebirth.org © 2011-2013

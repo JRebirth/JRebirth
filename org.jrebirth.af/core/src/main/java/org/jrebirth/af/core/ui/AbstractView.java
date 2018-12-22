@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.core.ui;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+
 import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -44,9 +47,6 @@ import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.handler.AnnotationEventHandler;
 import org.jrebirth.af.core.util.ClassUtility;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 
 /**
  *
@@ -138,10 +138,9 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * @param ce the CoreException to display
      */
     private void buildErrorNode(final CoreException ce) {
-        final TextArea ta = new TextArea();
-        ta.setText(ce.getMessage());
+        final TextArea ta = new TextArea(ce.getMessage());
         this.errorNode = new Pane();
-        errorNode.getChildren().setAll(ta);
+        this.errorNode.getChildren().add(ta);
     }
 
     /**

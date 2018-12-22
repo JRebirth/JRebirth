@@ -1,0 +1,20 @@
+package org.preloader;
+
+import org.junit.jupiter.api.Test;
+
+/**
+ * Unit test for simple App.
+ */
+public class AppTest
+{
+
+
+    /**
+     * Rigourous Test :-)
+     */
+    @Test
+    public void testApp()
+    {
+        // com.sun.javafx.application.LauncherImpl.launchApplication(DefaultApplication.class, JRebirthPreloader.class, null);
+    }
+}

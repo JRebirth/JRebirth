@@ -17,8 +17,18 @@
  */
 package org.jrebirth.af.presentation.ui.template;
 
-import com.sun.javafx.fxml.builder.web.WebViewBuilder;
-import javafx.animation.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.event.ActionEvent;
@@ -31,7 +41,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polyline;
@@ -40,6 +55,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
+
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.image.RelImage;
@@ -50,9 +66,6 @@ import org.jrebirth.af.presentation.resources.PrezFonts;
 import org.jrebirth.af.presentation.resources.PrezImages;
 import org.jrebirth.af.presentation.ui.base.AbstractSlideView;
 import org.jrebirth.af.presentation.ui.base.SlideStep;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -215,25 +228,25 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      */
     @Override
     public void reload() {
-        ParallelTransition parallelTransition = new ParallelTransition();
-        ScaleTransition scaleTransition = new ScaleTransition();
+        final ParallelTransition parallelTransition = new ParallelTransition();
+        final ScaleTransition scaleTransition = new ScaleTransition();
         scaleTransition.setNode(this.circle);
         scaleTransition.setDuration(Duration.millis(600));
         scaleTransition.setFromY(0);
         scaleTransition.setFromY(0);
         scaleTransition.setToX(1);
         scaleTransition.setToY(1);
-        Timeline timeline = new Timeline();
+        final Timeline timeline = new Timeline();
         timeline.setDelay(Duration.millis(200));
         timeline.getKeyFrames().setAll(
-                new KeyFrame(Duration.millis(0), new KeyValue(this.rectangle.widthProperty(), 0)),
-                new KeyFrame(Duration.millis(600), new KeyValue(this.rectangle.widthProperty(), 90)));
-        ParallelTransition parallelTransition1 = new ParallelTransition();
-        RotateTransition rotateTransition = new RotateTransition();
+                                       new KeyFrame(Duration.millis(0), new KeyValue(this.rectangle.widthProperty(), 0)),
+                                       new KeyFrame(Duration.millis(600), new KeyValue(this.rectangle.widthProperty(), 90)));
+        final ParallelTransition parallelTransition1 = new ParallelTransition();
+        final RotateTransition rotateTransition = new RotateTransition();
 
         rotateTransition.setFromAngle(-180);
         rotateTransition.setToAngle(0);
-        ScaleTransition scaleTransition1 = new ScaleTransition();
+        final ScaleTransition scaleTransition1 = new ScaleTransition();
         scaleTransition1.setDuration(Duration.millis(600));
         scaleTransition1.setFromX(0);
         scaleTransition1.setFromY(0);
@@ -461,10 +474,9 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
         } else if (item.isHtml()) {
 
-            final WebView web = WebViewBuilder.create()
-                    .fontScale(1.4)
-                    // .effect(ReflectionBuilder.create().fraction(0.4).build())
-                    .build();
+            final WebView web = new WebView();
+            web.setFontScale(1.4);
+            // .effect(ReflectionBuilder.create().fraction(0.4).build())
             web.getEngine().loadContent(item.getValue());
 
             VBox.setVgrow(web, Priority.NEVER);
@@ -569,42 +581,41 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
                 // AbstractTemplateView.this.setSlideLocked(false);
             }
         });
-        TranslateTransition translateTransition = new TranslateTransition();
+        final TranslateTransition translateTransition = new TranslateTransition();
         translateTransition.setDuration(Duration.millis(400));
         translateTransition.setFromY(0);
         translateTransition.setToY(-700);
-        Timeline timeline = new Timeline();
+        final Timeline timeline = new Timeline();
         timeline.getKeyFrames().setAll(
-                new KeyFrame(
-                        Duration.millis(0),
-                        new KeyValue(
-                                this.currentSubSlide.visibleProperty(),
-                                true)),
-                new KeyFrame(
-                        Duration.millis(1),
-                        new KeyValue(
-                                this.currentSubSlide.visibleProperty(),
-                                false)));
-        Timeline timeline1 = new Timeline();
+                                       new KeyFrame(
+                                                    Duration.millis(0),
+                                                    new KeyValue(
+                                                                 this.currentSubSlide.visibleProperty(),
+                                                                 true)),
+                                       new KeyFrame(
+                                                    Duration.millis(1),
+                                                    new KeyValue(
+                                                                 this.currentSubSlide.visibleProperty(),
+                                                                 false)));
+        final Timeline timeline1 = new Timeline();
         timeline1.getKeyFrames().setAll(
-                new KeyFrame(
-                        Duration.millis(0),
-                        new KeyValue(
-                                nextSlide.visibleProperty(),
-                                false)),
-                new KeyFrame(
-                        Duration.millis(1),
-                        new KeyValue(
-                                nextSlide.visibleProperty(),
-                                true)));
-        TranslateTransition translateTransition1 = new TranslateTransition();
+                                        new KeyFrame(
+                                                     Duration.millis(0),
+                                                     new KeyValue(
+                                                                  nextSlide.visibleProperty(),
+                                                                  false)),
+                                        new KeyFrame(
+                                                     Duration.millis(1),
+                                                     new KeyValue(
+                                                                  nextSlide.visibleProperty(),
+                                                                  true)));
+        final TranslateTransition translateTransition1 = new TranslateTransition();
         translateTransition1.setDuration(Duration.millis(400));
         translateTransition1.setFromY(700);
         translateTransition1.setToY(0);
         ((ParallelTransition) this.slideStepAnimation).getChildren().setAll(
-                new SequentialTransition(this.currentSubSlide, translateTransition, timeline),
-                new SequentialTransition(nextSlide, timeline1, translateTransition1)
-        );
+                                                                            new SequentialTransition(this.currentSubSlide, translateTransition, timeline),
+                                                                            new SequentialTransition(nextSlide, timeline1, translateTransition1));
         this.slideStepAnimation.play();
 
     }

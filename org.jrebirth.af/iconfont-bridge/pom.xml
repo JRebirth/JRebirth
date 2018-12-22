@@ -9,7 +9,7 @@
 	</parent>
 
 	<groupId>org.jrebirth.af</groupId>
-	<artifactId>iconfont-bridge</artifactId>
+	<artifactId>iconfont.bridge</artifactId>
 	<packaging>pom</packaging>
 
 	<name>JR IconFont Bridge</name>

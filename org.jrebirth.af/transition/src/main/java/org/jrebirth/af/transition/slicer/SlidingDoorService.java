@@ -17,7 +17,15 @@
  */
 package org.jrebirth.af.transition.slicer;
 
-import javafx.animation.*;
+import java.util.List;
+import java.util.Random;
+
+import javafx.animation.Interpolator;
+import javafx.animation.ParallelTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.Transition;
+import javafx.animation.TranslateTransition;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -26,14 +34,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.util.Duration;
+
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.WBuilder;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
-import java.util.Random;
 
 /**
  * The class <strong>ImageSlicerService</strong>.
@@ -70,18 +77,11 @@ public class SlidingDoorService extends DefaultService {
      */
     private enum SlidingType {
 
-        FromBottomLeft,
-        FromBottomRight,
-        FromTopLeft,
-        FromTopRight,
+        FromBottomLeft, FromBottomRight, FromTopLeft, FromTopRight,
 
-        FromLeftBottom,
-        FromRightBottom,
-        FromLeftTop,
-        FromRightTop,
+        FromLeftBottom, FromRightBottom, FromLeftTop, FromRightTop,
 
-        FromHorizontalMiddle,
-        FromVerticalMiddle
+        FromHorizontalMiddle, FromVerticalMiddle
     }
 
     /** The nodes. */
@@ -213,15 +213,18 @@ public class SlidingDoorService extends DefaultService {
 
         int i = 0;
         for (final Node node : this.nodes) {
-            TranslateTransition translateTransition = new TranslateTransition();
-            translateTransition.setDelay(Duration.millis(i * getNodeDelay()));
-            translateTransition.setNode(node);
-                    // .fromY(0)
-                    // .toY(1000)
-            translateTransition.setByY(1000);
-            translateTransition.setDuration(getTranslateDuration());
-            translateTransition.setInterpolator(Interpolator.EASE_IN);
-            parallel.getChildren().add(translateTransition);
+
+            final TranslateTransition tt = new TranslateTransition();
+            tt.setDelay(Duration.millis(i * getNodeDelay()));
+            tt.setNode(node);
+            // .fromY(0)
+            // .toY(1000)
+            tt.setByY(1000);
+            tt.setDuration(getTranslateDuration());
+            tt.setInterpolator(Interpolator.EASE_IN);
+
+            parallel.getChildren().add(tt);
+
             // parallel.getChildren().add(
             // TranslateTransitionBuilder.create()
             // .delay(getRandomDuration())
@@ -233,13 +236,12 @@ public class SlidingDoorService extends DefaultService {
             // );
             i++;
         }
-        final PauseTransition pt = new PauseTransition();
-        pt.setDuration(Duration.seconds(1));
+        final PauseTransition pt = new PauseTransition(Duration.seconds(1));
 
         this.fullTransition = new SequentialTransition();
-        ((SequentialTransition) this.fullTransition).getChildren().setAll(parallel);
-        fullTransition.setAutoReverse(true);
-        fullTransition.setCycleCount(10);
+        ((SequentialTransition) fullTransition).getChildren().addAll(parallel);
+        ((SequentialTransition) fullTransition).setAutoReverse(true);
+        ((SequentialTransition) fullTransition).setCycleCount(10);
 
     }
 

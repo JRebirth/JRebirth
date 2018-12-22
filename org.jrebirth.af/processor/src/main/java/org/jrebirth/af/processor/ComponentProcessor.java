@@ -44,13 +44,6 @@ import javax.tools.FileObject;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
 
-import org.jrebirth.af.api.annotation.Preload;
-import org.jrebirth.af.api.annotation.PriorityLevel;
-import org.jrebirth.af.api.module.BootComponent;
-import org.jrebirth.af.api.module.Register;
-import org.jrebirth.af.api.module.RegistrationPoint;
-import org.jrebirth.af.core.module.AbstractModuleStarter;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -59,6 +52,12 @@ import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
 import org.jboss.forge.roaster.model.util.Formatter;
+import org.jrebirth.af.api.annotation.Preload;
+import org.jrebirth.af.api.annotation.PriorityLevel;
+import org.jrebirth.af.api.module.BootComponent;
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.module.RegistrationPoint;
+import org.jrebirth.af.core.module.AbstractModuleStarter;
 
 /**
  * The Class ComponentProcessor.
@@ -181,7 +180,7 @@ public class ComponentProcessor extends AbstractProcessor {
 
             final Properties prefs = new Properties();
             prefs.load(this.getClass().getResourceAsStream(FORMATTER_PROPERTIES_FILE));
-            final String formattedSource = Formatter.format(prefs, javaClass);
+			final String formattedSource = Formatter.format(prefs, javaClass);
 
             // System.out.println(formattedSource);
 
@@ -356,7 +355,7 @@ public class ComponentProcessor extends AbstractProcessor {
          * outputClasses.substring(0, outputClasses.indexOf("target"));
          */
 
-        final String baseDir = getProjectPath() + "/";
+		final String baseDir = getProjectPath() != null && !getProjectPath().isEmpty() ? getProjectPath() + "/" : "";
         final MavenXpp3Reader pomReader = new MavenXpp3Reader();
         final Model model = pomReader.read(new FileReader(new File(baseDir + "pom.xml")));
 

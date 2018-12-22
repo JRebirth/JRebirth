@@ -15,9 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class SampleUICommand extends DefaultUIBeanCommand<WaveBean> {
 
-    /**
-     * The class logger.
-     */
+    /** The class logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SampleUICommand.class);
 
     /**
@@ -36,10 +34,10 @@ public final class SampleUICommand extends DefaultUIBeanCommand<WaveBean> {
 
         LOGGER.info("Display a pop up from JAT");
 
-        final Stage s = new Stage();
+        final Stage s = new Stage(StageStyle.DECORATED);
         s.setTitle("Sample Ui Command Test");
-        s.initStyle(StageStyle.DECORATED);
-        s.setScene(new Scene(new Label("Run into JAT")));
+        final Scene sc = new Scene(new Label("Run into JAT"));
+        s.setScene(sc);
 
         s.show();
         // Sample for popup => Attach owner !!!

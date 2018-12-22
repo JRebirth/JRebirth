@@ -1,15 +1,10 @@
 package org.jrebirth.af.component.command.snapshot;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
-import javafx.embed.swing.SwingFXUtils;
+//import javafx.embed.swing.SwingFXUtils;
 import javafx.stage.FileChooser;
 
-import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.single.ui.DefaultUIBeanCommand;
 import org.jrebirth.af.core.exception.CommandException;
@@ -40,14 +35,15 @@ public class SaveImageCommand extends DefaultUIBeanCommand<SaveImageWaveBean> {
 
         }
 
-        if (file != null) {
-	        final BufferedImage bi = SwingFXUtils.fromFXImage(wb.image(), null);
-	        try {
-	            ImageIO.write(bi, "png", file);
-	        } catch (final IOException e) {
-	            throw new CoreRuntimeException(e);
-	        }
-        }
+        // FIXME
+        // if (file != null) {
+        // final BufferedImage bi = SwingFXUtils.fromFXImage(wb.image(), null);
+        // try {
+        // ImageIO.write(bi, "png", file);
+        // } catch (final IOException e) {
+        // throw new CoreRuntimeException(e);
+        // }
+        // }
 
     }
 

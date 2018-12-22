@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.transition.command.slicer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -27,16 +30,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.shape.Rectangle;
+
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.transition.slicer.TransitionWaves;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The class <strong>ImageSlicerService</strong>.
@@ -67,7 +69,7 @@ public class NodeSlicerCommand extends DefaultService {
     private final IntegerProperty tileHeightProperty = new SimpleIntegerProperty();
 
     /** The image property. */
-    private final ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
+    private final ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>();
 
     /** The slices. */
     private final List<ImageView> slices = new ArrayList<>();
@@ -253,14 +255,10 @@ public class NodeSlicerCommand extends DefaultService {
             for (double y = 0; y < height; y += getTileHeight()) {
 
                 // TODO OPTIMIZE
-                final ImageView iv = new ImageView();
-                iv.setImage(getImage());
-                Rectangle rectangle = new Rectangle();
-                rectangle.setX(x);
-                rectangle.setY(y);
-                rectangle.setWidth(getTileWidth());
-                rectangle.setHeight(getTileHeight());
-                iv.setClip(rectangle);
+                final ImageView iv = new ImageView(getImage());
+
+                final Rectangle rect = new Rectangle(x, y, getTileWidth(), getTileHeight());
+                iv.setClip(rect);
                 iv.setOpacity(1.0);
                 iv.setScaleX(0.9); // TODO
                 iv.setLayoutX(x);

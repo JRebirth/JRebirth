@@ -20,7 +20,7 @@ public class Demo extends Application {
     @Override
     public void start(Stage primaryStage) {
         parent = new Pane();
-        StackPane root = new StackPane();
+        final StackPane root = new StackPane();
         root.getChildren().addAll(parent, getOverlay());
 
         root.setOnMouseMoved(this::onMouseMoved);
@@ -38,7 +38,7 @@ public class Demo extends Application {
 
     private void onMouseMoved(MouseEvent event) {
 
-        double space = 5.0;
+        final double space = 5.0;
 
         if (event.getX() < parent.getWidth() / 3 || event.getX() > parent.getWidth() * 2 / 3) {
             // left right
@@ -50,7 +50,7 @@ public class Demo extends Application {
             r2.setLayoutX(overlay.getWidth() / 2 + space / 2);
             r2.setLayoutY(5);
             r2.setWidth((overlay.getWidth() - space * 3) / 2);
-            r2.setHeight((overlay.getHeight() - space * 2 / 1));
+            r2.setHeight(overlay.getHeight() - space * 2 / 1);
 
         } else {
             // topbottom
@@ -71,7 +71,7 @@ public class Demo extends Application {
 
         overlay = new Pane();
 
-        double stroke = 2.0;
+        final double stroke = 2.0;
 
         r1 = buidlRectangle(stroke);
         // r1.widthProperty().bind(p.widthProperty().subtract(space*2).divide(1));
@@ -91,7 +91,7 @@ public class Demo extends Application {
     }
 
     private Rectangle buidlRectangle(double stroke) {
-        Rectangle r = new Rectangle();
+        final Rectangle r = new Rectangle();
         r.setStrokeType(StrokeType.INSIDE);
         r.setStrokeWidth(stroke);
         r.setStroke(Color.RED);

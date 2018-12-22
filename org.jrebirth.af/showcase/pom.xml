@@ -18,33 +18,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-		<keystore>${project.build.directory}/keystore.jks</keystore>
-
-		<storepass>storepass</storepass>
-		<storetype>JKS</storetype>
-		<keyalias>keyalias</keyalias>
-		<keypass>keypass</keypass>
-
-		<deletekeystore>true</deletekeystore>
-		<genkeystore>true</genkeystore>
-
-		<permissions>all-permissions</permissions> <!-- or sandbox -->
-		<deployUrl>http://apps.jrebirth.org</deployUrl>
-		<deployPath>${project.artifactId}/${project.version}</deployPath>
-		<codebase>${deployUrl}/${deployPath}/jnlp</codebase>
-
-		<jnlpFilename>JRebirth.jnlp</jnlpFilename>
 		<preloaderClass>org.jrebirth.af.preloader.JRebirthPreloader</preloaderClass>
-
 		<appClass>org.jrebirth.YourApplication</appClass>
-
-		<appletWidth>800</appletWidth>
-		<appletHeight>600</appletHeight>
-
-		<updateCheck>background</updateCheck>
-		<updatePolicy>prompt-update</updatePolicy>
-
 	</properties>
 
 	<modules>
@@ -95,19 +70,13 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.1</version>
+					<version>3.8.0</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
+						<source>11</source>
+						<target>11</target>
+						<release>11</release>
 						<encoding>UTF-8</encoding>
 					</configuration>
-				</plugin>
-
-				<!-- Project Quality -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>sonar-maven-plugin</artifactId>
-					<version>2.5</version>
 				</plugin>
 
 			</plugins>
@@ -127,7 +96,7 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.0.13</version>
+			<version>1.3.0-alpha4</version>
 		</dependency>
 
 		<dependency>

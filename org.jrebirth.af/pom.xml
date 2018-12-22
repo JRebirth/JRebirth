@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -27,24 +28,31 @@
 		<Jaf-version>3.0.0</Jaf-version>
 		<MasteringTables-version>3.0.0</MasteringTables-version>
 		<ComparisonTool-version>1.0.0-SNAPSHOT</ComparisonTool-version>
+
+		<maven.version>3.5.4</maven.version>
+
+		<surefire.version>2.18.1</surefire.version>
+		<slf4j.version>1.8.0-beta2</slf4j.version>
+		<openjfx.version>11.0.2</openjfx.version>
+
 	</properties>
 
 	<modules>
+		<module>codeshaded</module>
 		<module>api</module>
+ 		<module>preloader</module>
 		<module>core</module>
+		<module>tooling</module>
+		<module>processor</module>
 		<module>component</module>
 		<module>archetype</module>
 		<module>sample</module>
 		<module>presentation</module>
 		<module>transition</module>
-		<!-- <module>form</module> -->
 		<module>dialog</module>
 		<module>fxform</module>
 		<module>undoredo</module>
 		<module>showcase</module>
-		<module>tooling</module>
-		<module>preloader</module>
-		<module>processor</module>
 		<module>security</module>
 		<module>distribution</module>
 		<module>rest</module>
@@ -116,34 +124,26 @@
 				<configuration>
 					<source>11</source>
 					<target>11</target>
+					<release>11</release>
 				</configuration>
+<!-- 				<dependencies>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm</artifactId>
+						<version>6.2</version> Use newer version of ASM
+					</dependency>
+				</dependencies> -->
 			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.7</version>
-
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.shared</groupId>
-						<artifactId>maven-shared-jar</artifactId>
-						<version>1.1</version>
-						<exclusions>
-							<exclusion>
-								<groupId>org.apache.bcel</groupId>
-								<artifactId>bcel</artifactId>
-							</exclusion>
-						</exclusions>
-					</dependency>
-					<dependency>
-						<groupId>com.google.code.findbugs</groupId>
-						<artifactId>bcel-findbugs</artifactId>
-						<version>6.0</version>
-					</dependency>
-				</dependencies>
-
+				<artifactId>maven-resource-plugin</artifactId>
+				<version>2.6.0</version>
 			</plugin>
+
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-project-info-reports-plugin</artifactId> <version>2.7</version> <dependencies> <dependency> <groupId>org.apache.maven.shared</groupId> 
+				<artifactId>maven-shared-jar</artifactId> <version>1.1</version> <exclusions> <exclusion> <groupId>org.apache.bcel</groupId> <artifactId>bcel</artifactId> </exclusion> </exclusions> </dependency> <dependency> 
+				<groupId>com.google.code.findbugs</groupId> <artifactId>bcel-findbugs</artifactId> <version>6.0</version> </dependency> </dependencies> </plugin> -->
 			<!-- <plugin> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-book-maven-plugin</artifactId> <version>1.3-SNAPSHOT</version> <executions> <execution> <phase>pre-site</phase> <goals> <goal>render-books</goal> 
 				</goals> </execution> </executions> <configuration> <books> <book> <directory>src/site/markdown/doc</directory> <descriptor>src/site/jrebirth-book.xml</descriptor> <formats> <format> <id>latex</id> </format> 
 				<format> <id>xdoc</id> </format> <format> <id>pdf</id> </format> <format> <id>rtf</id> </format> </formats> </book> </books> </configuration> <dependencies> <dependency> <groupId>org.apache.maven.doxia</groupId> 
@@ -151,107 +151,28 @@
 				<dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-markdown</artifactId> <version>1.7</version> </dependency> <dependency> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> 
 				<version>1.1</version> </dependency> </dependencies> </plugin> -->
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.5.1</version>
-
-				<executions>
-					<!-- <execution> <id>attach-sites</id> <goals> <goal>jar</goal> </goals> </execution> -->
-					<execution>
-						<id>build-sites</id>
-						<phase>site</phase>
-						<goals>
-							<goal>site</goal>
-							<goal>jar</goal>
-							<goal>stage</goal>
-						</goals>
-					</execution>
-					<!-- <execution> <id>package-sites</id> <phase>package</phase> <goals> <goal>jar</goal> </goals> </execution> -->
-					<execution>
-						<id>deploy-sites</id>
-						<phase>site-deploy</phase>
-						<goals>
-							<goal>stage-deploy</goal>
-						</goals>
-					</execution>
-				</executions>
-
-				<configuration>
-					<stagingDirectory>${project.build.directory}/staging-site</stagingDirectory>
-					<stagingSiteURL>${project.distributionManagement.site.url}</stagingSiteURL>
-					<inputEncoding>UTF-8</inputEncoding>
-					<outputEncoding>UTF-8</outputEncoding>
-				</configuration>
-
-				<dependencies>
-
-					<dependency>
-						<groupId>org.apache.maven.doxia</groupId>
-						<artifactId>doxia-site-renderer</artifactId>
-						<version>1.7.1</version>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.maven.doxia</groupId>
-						<artifactId>doxia-core</artifactId>
-						<version>1.7</version>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.maven.wagon</groupId>
-						<artifactId>wagon-ssh</artifactId>
-						<version>2.10</version>
-					</dependency>
-
-					<dependency>
-						<groupId>org.tinyjee.dim</groupId>
-						<artifactId>doxia-include-macro</artifactId>
-						<version>1.1</version>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.maven.doxia</groupId>
-						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.7</version>
-					</dependency>
-					<dependency>
-						<groupId>org.asciidoctor</groupId>
-						<artifactId>asciidoctor-maven-plugin</artifactId>
-						<version>1.5.5</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-site-plugin</artifactId> <version>3.5.1</version> <executions> <execution> <id>attach-sites</id> <goals> <goal>jar</goal> 
+				</goals> </execution> <execution> <id>build-sites</id> <phase>site</phase> <goals> <goal>site</goal> <goal>jar</goal> <goal>stage</goal> </goals> </execution> <execution> <id>package-sites</id> <phase>package</phase> 
+				<goals> <goal>jar</goal> </goals> </execution> <execution> <id>deploy-sites</id> <phase>site-deploy</phase> <goals> <goal>stage-deploy</goal> </goals> </execution> </executions> <configuration> <stagingDirectory>${project.build.directory}/staging-site</stagingDirectory> 
+				<stagingSiteURL>${project.distributionManagement.site.url}</stagingSiteURL> <inputEncoding>UTF-8</inputEncoding> <outputEncoding>UTF-8</outputEncoding> </configuration> <dependencies> <dependency> <groupId>org.apache.maven.doxia</groupId> 
+				<artifactId>doxia-site-renderer</artifactId> <version>1.7.1</version> </dependency> <dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-core</artifactId> <version>1.7</version> </dependency> 
+				<dependency> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-ssh</artifactId> <version>2.10</version> </dependency> <dependency> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> 
+				<version>1.1</version> </dependency> <dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-markdown</artifactId> <version>1.7</version> </dependency> <dependency> <groupId>org.asciidoctor</groupId> 
+				<artifactId>asciidoctor-maven-plugin</artifactId> <version>1.5.5</version> </dependency> </dependencies> </plugin> -->
 			<!-- Copy UML Class Diagram -->
 			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> <executions> <execution> <id>UML recopy</id> <phase>pre-site</phase> <configuration> <tasks> <copy 
 				todir="${project.build.directory}/site/doc/uml/"> <fileset dir="${basedir}/src/main/uml/*.png" /> </copy> </tasks> </configuration> <goals> <goal>run</goal> </goals> </execution> </executions> </plugin> -->
 
-			<plugin>
-				<groupId>org.tinyjee.dim</groupId>
-				<artifactId>doxia-include-macro</artifactId>
-				<version>1.1</version>
-				<executions>
-					<execution>
-						<id>initialize-doxia-include-macro</id>
-						<!-- Use "initialize" when the 'site' was not given as 'phase'. -->
-						<!-- phase>initialize</phase -->
-						<phase>pre-site</phase>
-						<goals>
-							<goal>initialize</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- <plugin> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> <version>1.1</version> <executions> <execution> <id>initialize-doxia-include-macro</id> Use "initialize" 
+				when the 'site' was not given as 'phase'. phase>initialize</phase <phase>pre-site</phase> <goals> <goal>initialize</goal> </goals> </execution> </executions> </plugin> -->
 
 			<!-- Add Headless test engine, require open-jfx-monocle.jar deployed into jdk/jre/lib/ext -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M3</version>
-				<configuration>
-					<argLine>${argLine} -Dtestfx.robot=glass -Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw</argLine>
-				</configuration>
 			</plugin>
-
-			<!-- Code coverage -->
+				
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -274,11 +195,7 @@
 			</plugin>
 
 			<!-- Project Quality -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>2.5</version>
-			</plugin>
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>sonar-maven-plugin</artifactId> <version>2.5</version> </plugin> -->
 		</plugins>
 
 		<extensions>
@@ -306,96 +223,44 @@
 					</reportSet>
 				</reportSets>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.20.1</version>
+				<version>${surefire.version}</version>
 				<configuration>
 					<skipFailsafeReport>true</skipFailsafeReport>
 					<skipSurefireReport>true</skipSurefireReport>
+					<reuseForks>false</reuseForks>
 					<reportsDirectories>
 						<reportsDirectory>${basedir}/target/failsafe-reports</reportsDirectory>
 					</reportsDirectories>
 				</configuration>
 			</plugin>
-
-			<plugin>
+<!-- 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.0</version>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</reporting>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.12</version>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>5.3.1</version>
 			</dependency>
-			<dependency>
-				<groupId>org.easytesting</groupId>
-				<artifactId>fest-assert</artifactId>
-				<version>1.4</version>
-			</dependency>
+			<!-- <dependency> <groupId>org.easytesting</groupId> <artifactId>fest-assert</artifactId> <version>1.4</version> </dependency> -->
 		</dependencies>
 	</dependencyManagement>
-
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.easytesting</groupId>
-			<artifactId>fest-assert</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- JavaFX -->
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-base</artifactId>
-			<version>11.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-controls</artifactId>
-			<version>11.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-graphics</artifactId>
-			<version>11.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-fxml</artifactId>
-			<version>11.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-web</artifactId>
-			<version>11.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-media</artifactId>
-			<version>11.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-swing</artifactId>
-			<version>11.0.2</version>
 		</dependency>
 
-		<dependency>
-			<groupId>io.github.classgraph</groupId>
-			<artifactId>classgraph</artifactId>
-			<version>4.8.12</version>
-		</dependency>
 	</dependencies>
 
 	<distributionManagement>

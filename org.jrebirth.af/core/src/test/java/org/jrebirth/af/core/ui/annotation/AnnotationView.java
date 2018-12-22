@@ -79,19 +79,13 @@ public final class AnnotationView extends DefaultView<AnnotationModel, VBox, Ann
 
         node().setMinWidth(200);
 
-        this.swipeVerticalButton = new Button();
-        this.swipeVerticalButton.setText("Swipe Vertical Button");
-        this.swipeHorizontalButton = new Button();
-        this.swipeHorizontalButton.setText("Swipe Horizontal Button");
-        this.swipeAllButton = new Button();
-        this.swipeAllButton.setText("Swipe All Button");
+        this.swipeVerticalButton = new Button("Swipe Vertical Button");
+        this.swipeHorizontalButton = new Button("Swipe Horizontal Button");
+        this.swipeAllButton = new Button("Swipe All Button");
 
-        this.rotateAllButton = new Button();
-        this.rotateAllButton.setText("Rotate All Button");
-        this.rotateButton = new Button();
-        this.rotateButton.setText("Rotate Button");
-        this.rotateStartFinishButton = new Button();
-        this.rotateStartFinishButton.setText("Rotate Started & Finished Button");
+        this.rotateAllButton = new Button("Rotate All Button");
+        this.rotateButton = new Button("Rotate Button");
+        this.rotateStartFinishButton = new Button("Rotate Started & Finished Button");
 
         node().getChildren().add(this.swipeVerticalButton);
     }

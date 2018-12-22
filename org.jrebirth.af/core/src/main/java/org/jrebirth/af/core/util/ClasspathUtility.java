@@ -17,11 +17,6 @@
  */
 package org.jrebirth.af.core.util;
 
-import io.github.classgraph.ClassGraph;
-import io.github.classgraph.ScanResult;
-import org.jrebirth.af.api.log.JRLogger;
-import org.jrebirth.af.core.log.JRLoggerFactory;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,6 +26,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.core.log.JRLoggerFactory;
+
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ScanResult;
 
 /**
  * The class <strong>ClassUtility</strong>.
@@ -72,8 +73,7 @@ public final class ClasspathUtility implements UtilMessages {
         final List<String> resources = new ArrayList<>();
 
         try (ScanResult scanResult = new ClassGraph()
-                .whitelistPaths("/").
-                        scan()) {
+                                                     .whitelistPaths("/").scan()) {
             resources.addAll(scanResult.getResourcesMatchingPattern(searchPattern).asMap().keySet());
         }
         // Sort resources

@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.jrebirth</groupId>
@@ -14,7 +16,39 @@
 	<name>Component</name>
 	<description>Convenient JRebirth Components to use with JRAF</description>
 
+	<build>
+
+		<plugins>
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.jrebirth.af</groupId>
+							<artifactId>processor</artifactId>
+							<version>8.7.0-SNAPSHOT</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>api</artifactId>
+			<version>8.7.0-SNAPSHOT</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
@@ -26,6 +60,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
 			<version>8.7.0-SNAPSHOT</version>
+			<classifier>4ide</classifier>
 			<optional>true</optional>
 		</dependency>
 
@@ -37,19 +72,14 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.5</version>
-		</dependency>
-
-
-		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>1.0.13</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
+
+		<!-- Tests Dependencies -->
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
@@ -57,7 +87,7 @@
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.testfx</groupId>
 			<artifactId>testfx-core</artifactId>

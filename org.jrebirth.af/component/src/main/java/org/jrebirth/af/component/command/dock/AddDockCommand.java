@@ -43,7 +43,7 @@ public class AddDockCommand extends DefaultUIBeanCommand<DockWaveBean> {
     }
 
     private void sendWaveToTabModel(final Wave wave, final Model model) {
-System.out.println("Send Add  "+model.key());
+        System.out.println("Send Add  "+model.key());
         sendWave(WBuilder.wave()
                          .waveType(DockPaneModel.ADD)
                          .componentClass(DockPaneModel.class)
