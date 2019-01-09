@@ -109,6 +109,8 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
             res = this.object;
         } else if (this.object instanceof Class<?>) {
             res = parseClassParameter(parameterEntry.getSerializedString());
+        } else if (this.object instanceof Enum<?>) {
+            res = parseEnumParameter((Enum<?>) this.object, parameterEntry.getSerializedString());
         } else if (this.object instanceof File) {
             res = parseFileParameter(parameterEntry.getSerializedString());
         } else if (this.object instanceof List<?>) {
@@ -125,7 +127,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
     }
 
     /**
-     * Parse a class definition by calling to call Class.forName.
+     * Parse a class definition by calling Class.forName.
      *
      * @param serializedObject the full class name
      *
@@ -138,6 +140,19 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
         } catch (final ClassNotFoundException e) {
             throw new CoreRuntimeException("Impossible to load class " + serializedObject, e);
         }
+        return res;
+    }
+
+    /**
+     * Parse an Enum definition by calling Enum.valueOf.
+     *
+     * @param serializedObject the full enumerated value
+     *
+     * @return the class object
+     */
+    @SuppressWarnings("unchecked")
+    private Object parseEnumParameter(final Enum<?> e, final String serializedObject) {
+        final Object res = Enum.valueOf(e.getClass(), serializedObject);
         return res;
     }
 
