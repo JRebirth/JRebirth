@@ -18,6 +18,10 @@
 package org.jrebirth.af.core.ui;
 
 import java.util.List;
+import java.util.function.Consumer;
+
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.value.ObservableValue;
 
 import org.jrebirth.af.api.annotation.OnRelease;
 import org.jrebirth.af.api.exception.CoreException;
@@ -162,6 +166,25 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
 
         // Do custom binding stuff
         unbind();
+    }
+
+    /**
+     * Listen object change.
+     * 
+     * @param objectProperty the object to listen
+     * @param consumeOld process the old object
+     * @param consumeNew process the new object
+     */
+    protected <T> void listenObject(ObjectProperty<T> objectProperty, Consumer<T> consumeOld, Consumer<T> consumeNew) {
+        objectProperty.addListener(
+                                   (final ObservableValue<? extends T> ov, final T old_val, final T new_val) -> {
+                                       if (old_val != null && consumeOld != null) {
+                                           consumeOld.accept(old_val);
+                                       }
+                                       if (new_val != null && consumeNew != null) {
+                                           consumeNew.accept(new_val);
+                                       }
+                                   });
     }
 
     /**
