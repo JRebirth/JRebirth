@@ -102,27 +102,51 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
      */
     public Object parseObject(final ParameterEntry parameterEntry) {
         Object res = null;
-        if (this.object instanceof ResourceParams) {
-            // Setup the default object
-            ((ResourceParams) this.object).parse(parameterEntry.getSerializedString().split(PARAMETER_SEPARATOR_REGEX));
-            // return the new value
-            res = this.object;
-        } else if (this.object instanceof Class<?>) {
-            res = parseClassParameter(parameterEntry.getSerializedString());
-        } else if (this.object instanceof Enum<?>) {
-            res = parseEnumParameter((Enum<?>) this.object, parameterEntry.getSerializedString());
-        } else if (this.object instanceof File) {
-            res = parseFileParameter(parameterEntry.getSerializedString());
-        } else if (this.object instanceof List<?>) {
-            res = parseListParameter(parameterEntry.getSerializedString());
-        } else {
-            res = parsePrimitive(parameterEntry.getSerializedString());
-        }
+
+        res = parseObjectString(this.object.getClass(), parameterEntry.getSerializedString());
 
         // Store the parsed object directly into the entry instance
         // for later access
         parameterEntry.setObject(res);
 
+        return res;
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param parameterEntry
+     * @return
+     */
+    private Object parseObjectString(Class<?> objectType, final String objectString) {
+        Object res;
+        if (ResourceParams.class.isAssignableFrom(objectType)) {
+            // Setup the default object
+            if (this.object instanceof List<?>) {
+                ResourceParams rp = (ResourceParams) ((List<?>) this.object).get(0);
+                try {
+                    rp = (ResourceParams) rp.clone();
+                    rp.parse(objectString.split(PARAMETER_SEPARATOR_REGEX));
+                    rp.getKey();
+                } catch (final CloneNotSupportedException e) {
+                }
+                res = rp;
+            } else {
+                ((ResourceParams) this.object).parse(objectString.split(PARAMETER_SEPARATOR_REGEX));
+                // return the new value
+                res = this.object;
+            }
+        } else if (Class.class.isAssignableFrom(objectType)) {
+            res = parseClassParameter(objectString);
+        } else if (Enum.class.isAssignableFrom(objectType)) {
+            res = parseEnumParameter((Enum<?>) this.object, objectString);
+        } else if (File.class.isAssignableFrom(objectType)) {
+            res = parseFileParameter(objectString);
+        } else if (List.class.isAssignableFrom(objectType)) {
+            res = parseListParameter(objectString);
+        } else {
+            res = parsePrimitive(objectString);
+        }
         return res;
     }
 
@@ -181,8 +205,10 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
     private Object parseListParameter(final String serializedObject) {
         final List<Object> res = new ArrayList<>();
 
+        final Class<?> objectType = ((List<?>) this.object).get(0).getClass();
+
         for (final String item : serializedObject.split(";")) {
-            res.add(item);
+            res.add(parseObjectString(objectType, item));
         }
 
         return res;
