@@ -30,7 +30,9 @@ import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
 import org.jrebirth.af.api.facade.GlobalFacade;
+import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean;
 import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
@@ -286,16 +288,16 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
      *
      * @return the wave responsible of the creation of the first view
      */
-    @SuppressWarnings("unchecked")
     protected Wave getLaunchFirstViewWave() {
         Wave firstWave = null;
         // Generates the command wave directly to win a Wave cycle
         if (this.application != null && this.application.rootNode() != null && this.application.firstModelClass() != null) {
 
+            final UniqueKey<? extends Model> modelKey = Key.create(this.application.firstModelClass(), this.application.firstModelOptionalData(), this.application.firstModelKeyParts());
             firstWave = WBuilder.callCommand(ShowModelCommand.class).waveBean(
                                                                               DisplayModelWaveBean.create()
                                                                                                   .childrenPlaceHolder(this.application.rootNode().getChildren())
-                                                                                                  .showModelKey(Key.create(this.application.firstModelClass())));
+                                                                                                  .showModelKey(modelKey));
             //
             //
             // ShowModelWaveBuilder.create()

@@ -666,4 +666,21 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     public UncaughtExceptionHandler getPoolUncaughtExceptionHandler() {
         return new PoolUncaughtExceptionHandler();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object[] firstModelKeyParts() {
+        return new Object[0];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object[] firstModelOptionalData() {
+        return new Object[0];
+    }
+
 }

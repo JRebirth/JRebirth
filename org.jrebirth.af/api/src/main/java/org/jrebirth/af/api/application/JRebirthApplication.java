@@ -65,6 +65,16 @@ public interface JRebirthApplication<P extends Pane> {
     Class<? extends Model> firstModelClass();
 
     /**
+     * Provides key parts for the first model.
+     */
+    Object[] firstModelKeyParts();
+
+    /**
+     * Provides optional data for the first model.
+     */
+    Object[] firstModelOptionalData();
+
+    /**
      * Return the Pre-Boot Waves called after displaying the first view.
      *
      * @return the list of wave to be run before the boot
