@@ -113,10 +113,12 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
     }
 
     /**
-     * TODO To complete.
+     * Parse a string representation of an object.
      * 
-     * @param parameterEntry
-     * @return
+     * @param objectType the type of the object parsed
+     * @param objectString the serialized object
+     * 
+     * @return the real object
      */
     private Object parseObjectString(Class<?> objectType, final String objectString) {
         Object res;
@@ -145,7 +147,7 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
         } else if (List.class.isAssignableFrom(objectType)) {
             res = parseListParameter(objectString);
         } else {
-            res = parsePrimitive(objectString);
+            res = parsePrimitive(objectType, objectString);
         }
         return res;
     }
@@ -217,29 +219,31 @@ public class ObjectParameter<O extends Object> extends AbstractBaseParams implem
     /**
      * Parse primitive serialized object.
      *
+     * @param objectType the type of the object parsed
      * @param serializedObject the serialized string to parse
      *
      * @return a new fresh instance of the object
      */
-    private Object parsePrimitive(final String serializedObject) {
+    private Object parsePrimitive(Class<?> objectType, final String serializedObject) {
         Object res = null;
-        if (this.object instanceof Boolean) {
+
+        if (Boolean.class.isAssignableFrom(objectType)) {
             res = Boolean.valueOf(serializedObject);
-        } else if (this.object instanceof String) {
+        } else if (String.class.isAssignableFrom(objectType)) {
             res = serializedObject;
-        } else if (this.object instanceof Character) {
+        } else if (Character.class.isAssignableFrom(objectType)) {
             res = Character.valueOf(serializedObject.charAt(0));
-        } else if (this.object instanceof Byte) {
+        } else if (Byte.class.isAssignableFrom(objectType)) {
             res = Byte.parseByte(serializedObject);
-        } else if (this.object instanceof Short) {
+        } else if (Short.class.isAssignableFrom(objectType)) {
             res = Short.parseShort(serializedObject);
-        } else if (this.object instanceof Integer) {
+        } else if (Integer.class.isAssignableFrom(objectType)) {
             res = Integer.parseInt(serializedObject);
-        } else if (this.object instanceof Long) {
+        } else if (Long.class.isAssignableFrom(objectType)) {
             res = Long.parseLong(serializedObject);
-        } else if (this.object instanceof Float) {
+        } else if (Float.class.isAssignableFrom(objectType)) {
             res = Float.parseFloat(serializedObject);
-        } else if (this.object instanceof Double) {
+        } else if (Double.class.isAssignableFrom(objectType)) {
             res = Double.parseDouble(serializedObject);
         }
         return res;
