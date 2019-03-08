@@ -17,19 +17,17 @@
  */
 package org.jrebirth.af.transition.slicer;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.TimelineBuilder;
 import javafx.beans.property.DoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-
 import org.jrebirth.af.core.service.DefaultService;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * The class <strong>ImageSlicerService</strong>.
@@ -120,9 +118,8 @@ public class RandomFadingService extends DefaultService {
             // }
         }
 
-        this.timeline = TimelineBuilder.create()
-                                       .keyFrames(keyFrames)
-                                       .build();
+        this.timeline = new Timeline();
+        this.timeline.getKeyFrames().setAll(keyFrames);
 
     }
 

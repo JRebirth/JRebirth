@@ -17,20 +17,14 @@
  */
 package org.jrebirth.af.presentation.ui.qanda;
 
-import javafx.animation.Animation;
-import javafx.animation.Interpolator;
-import javafx.animation.ParallelTransitionBuilder;
-import javafx.animation.ScaleTransitionBuilder;
-import javafx.animation.TranslateTransitionBuilder;
+import javafx.animation.*;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.StackPaneBuilder;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextBuilder;
 import javafx.util.Duration;
 
 import org.jrebirth.af.api.exception.CoreException;
@@ -73,35 +67,31 @@ public class QandAView extends AbstractSlideView<QandAModel, BorderPane, QandACo
 
         node().getStyleClass().add(model().getStyleClass() == null ? "qandaContainer" : model().getStyleClass());
 
-        this.firstText = TextBuilder.create()
+        this.firstText = new Text();
                                     // .text(getModel().getQuestion())
                                     // .styleClass("firstText")
-                                    .textAlignment(TextAlignment.JUSTIFY)
+        this.firstText.setTextAlignment(TextAlignment.JUSTIFY);
                                     // .wrappingWidth(600)
-                                    .smooth(true)
-                                    .cache(true)
-                                    .cacheHint(CacheHint.SPEED)
-                                    .fill(model().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get())
-                                    .scaleX(1)
-                                    .scaleY(1)
-                                    .build();
+        this.firstText.setSmooth(true);
+        this.firstText.setCache(true);
+        this.firstText.setCacheHint(CacheHint.SPEED);
+        this.firstText.setFill(model().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get());
+        this.firstText.setScaleX(1);
+        this.firstText.setScaleY(1);
 
-        this.secondText = TextBuilder.create()
+        this.secondText = new Text();
                                      // .text(getModel().getAnswer())
                                      // .styleClass("secondText")
-                                     .textAlignment(TextAlignment.JUSTIFY)
+        this.secondText.setTextAlignment(TextAlignment.JUSTIFY);
                                      // .wrappingWidth(600)
-                                     .smooth(true)
-                                     .cache(true)
-                                     .cacheHint(CacheHint.SPEED)
-                                     .fill(model().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get())
-                                     .scaleX(0)
-                                     .scaleY(0)
-                                     .build();
+        this.secondText.setSmooth(true);
+        this.secondText.setCache(true);
+        this.secondText.setCacheHint(CacheHint.SPEED);
+        this.secondText.setFill(model().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get());
+        this.secondText.setScaleX(0);
+        this.secondText.setScaleY(0);
 
-        final StackPane sp = StackPaneBuilder.create()
-                                             .children(this.firstText, this.secondText)
-                                             .build();
+        final StackPane sp = new StackPane(this.firstText, this.secondText);
 
         StackPane.setAlignment(this.firstText, Pos.CENTER);
         StackPane.setAlignment(this.secondText, Pos.CENTER);
@@ -124,44 +114,37 @@ public class QandAView extends AbstractSlideView<QandAModel, BorderPane, QandACo
      */
     Animation getTransition() {
         if (this.transition == null) {
-            this.transition =
-
-            ParallelTransitionBuilder.create().children(
-                                                        ScaleTransitionBuilder.create()
-                                                                              .node(this.firstText)
-                                                                              .duration(Duration.millis(800))
-                                                                              .interpolator(Interpolator.EASE_IN)
-                                                                              .fromX(1)
-                                                                              .fromY(1)
-                                                                              .toX(0)
-                                                                              .toY(0)
-                                                                              .build(),
-                                                        TranslateTransitionBuilder.create()
-                                                                                  .node(this.firstText)
-                                                                                  .duration(Duration.millis(800))
-                                                                                  .interpolator(Interpolator.EASE_IN)
-                                                                                  .fromY(0)
-                                                                                  .toY(600)
-                                                                                  .build(),
-                                                        ScaleTransitionBuilder.create()
-                                                                              .node(this.secondText)
-                                                                              // .delay(Duration.millis(200))
-                                                                              .duration(Duration.millis(1000))
-                                                                              .interpolator(Interpolator.EASE_IN)
-                                                                              .fromX(100)
-                                                                              .fromY(100)
-                                                                              .toX(1)
-                                                                              .toY(1)
-                                                                              .build(),
-                                                        TranslateTransitionBuilder.create()
-                                                                                  .node(this.secondText)
-                                                                                  .duration(Duration.millis(800))
-                                                                                  .interpolator(Interpolator.EASE_IN)
-                                                                                  .fromY(-600)
-                                                                                  .toY(0)
-                                                                                  .build())
-                                     .build();
-
+            ScaleTransition scaleTransition1 = new ScaleTransition();
+            scaleTransition1.setNode(this.firstText);
+            scaleTransition1.setDuration(Duration.millis(800));
+            scaleTransition1.setInterpolator(Interpolator.EASE_IN);
+            scaleTransition1.setFromX(1);
+            scaleTransition1.setFromY(1);
+            scaleTransition1.setToX(0);
+            scaleTransition1.setToY(0);
+            TranslateTransition translateTransition1 = new TranslateTransition();
+            translateTransition1.setNode(this.firstText);
+            translateTransition1.setDuration(Duration.millis(800));
+            translateTransition1.setInterpolator(Interpolator.EASE_IN);
+            translateTransition1.setFromY(0);
+            translateTransition1.setToY(600);
+            ScaleTransition scaleTransition2 = new ScaleTransition();
+            scaleTransition2.setNode(this.secondText);
+                    // .delay(Duration.millis(200))
+            scaleTransition2.setDuration(Duration.millis(1000));
+            scaleTransition2.setInterpolator(Interpolator.EASE_IN);
+            scaleTransition2.setFromX(100);
+            scaleTransition2.setFromY(100);
+            scaleTransition2.setToX(1);
+            scaleTransition2.setToY(1);
+            TranslateTransition translateTransition2 = new TranslateTransition();
+            translateTransition2.setNode(this.secondText);
+            translateTransition2.setDuration(Duration.millis(800));
+            translateTransition2.setInterpolator(Interpolator.EASE_IN);
+            translateTransition2.setFromY(-600);
+            translateTransition2.setToY(0);
+            this.transition = new ParallelTransition(scaleTransition1,
+                    translateTransition1, scaleTransition2, translateTransition2);
         }
         return this.transition;
     }
