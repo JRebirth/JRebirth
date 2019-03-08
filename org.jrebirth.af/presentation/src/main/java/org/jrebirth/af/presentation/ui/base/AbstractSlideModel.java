@@ -22,17 +22,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javafx.animation.Animation;
-import javafx.animation.FadeTransitionBuilder;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.ParallelTransitionBuilder;
-import javafx.animation.ScaleTransitionBuilder;
-import javafx.animation.TimelineBuilder;
-import javafx.animation.TranslateTransition;
-import javafx.animation.TranslateTransitionBuilder;
+import javafx.animation.*;
 import javafx.scene.effect.MotionBlur;
-import javafx.scene.effect.MotionBlurBuilder;
 import javafx.util.Duration;
 
 import org.jrebirth.af.api.wave.Wave;
@@ -404,10 +395,18 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
                 animation = buildHorizontalAnimation(0, 0, 1000, 0);
                 break;
             case FADE_IN:
-                animation = FadeTransitionBuilder.create().node(node()).fromValue(0).toValue(1.0).duration(Duration.seconds(1)).build();
+                animation = new FadeTransition();
+                ((FadeTransition) animation).setNode(node());
+                ((FadeTransition) animation).setFromValue(0.0);
+                ((FadeTransition) animation).setToValue(1.0);
+                ((FadeTransition) animation).setDuration(Duration.seconds(1));
                 break;
             case FADE_OUT:
-                animation = FadeTransitionBuilder.create().node(node()).fromValue(1.0).toValue(0.0).duration(Duration.seconds(1)).build();
+                animation = new FadeTransition();
+                ((FadeTransition) animation).setNode(node());
+                ((FadeTransition) animation).setFromValue(1.0);
+                ((FadeTransition) animation).setToValue(0.0);
+                ((FadeTransition) animation).setDuration(Duration.seconds(1));
                 break;
 
             case SCALE_FROM_MAX:
@@ -461,25 +460,21 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
      * @return a scale animation
      */
     private Animation buildScaleAnimation(final double from, final double to, final boolean show) {
-
-        return ParallelTransitionBuilder.create()
-                                        .children(
-                                                  ScaleTransitionBuilder.create()
-                                                                        .node(node())
-                                                                        .fromX(from)
-                                                                        .toX(to)
-                                                                        .fromY(from)
-                                                                        .toY(to)
-                                                                        .duration(Duration.seconds(1))
-                                                                        .build(),
-
-                                                  FadeTransitionBuilder.create()
-                                                                       .node(node())
-                                                                       .fromValue(show ? 0.0 : 1.0)
-                                                                       .toValue(show ? 1.0 : 0.0)
-                                                                       .duration(Duration.seconds(1))
-                                                                       .build())
-                                        .build();
+        ParallelTransition parallelTransition = new ParallelTransition();
+        ScaleTransition scaleTransition = new ScaleTransition();
+        scaleTransition.setNode(node());
+        scaleTransition.setFromX(from);
+        scaleTransition.setToX(to);
+        scaleTransition.setFromY(from);
+        scaleTransition.setToY(to);
+        scaleTransition.setDuration(Duration.seconds(1));
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setNode(node());
+        fadeTransition.setFromValue(show ? 0.0 : 1.0);
+        fadeTransition.setToValue(show ? 1.0 : 0.0);
+        fadeTransition.setDuration(Duration.seconds(1));
+        parallelTransition.getChildren().setAll(parallelTransition, fadeTransition);
+        return parallelTransition;
     }
 
     /**
@@ -496,29 +491,26 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
 
         final double angle = findAngle(fromX, toX, fromY, toY);
 
-        final MotionBlur mb = MotionBlurBuilder.create().angle(angle).build();
+        final MotionBlur mb = new MotionBlur();
+        mb.setAngle(angle);
         node().setEffect(mb);
-
-        return ParallelTransitionBuilder.create()
-                                        .children(
-                                                  TranslateTransitionBuilder.create()
-                                                                            .node(node())
-                                                                            .fromX(fromX)
-                                                                            .toX(toX)
-                                                                            .fromY(fromY)
-                                                                            .toY(toY)
-                                                                            .duration(Duration.seconds(1))
-                                                                            .build(),
-
-                                                  TimelineBuilder.create()
-                                                                 .keyFrames(
-                                                                            new KeyFrame(Duration.millis(0), new KeyValue(mb.radiusProperty(), 0)),
-                                                                            new KeyFrame(Duration.millis(100), new KeyValue(mb.radiusProperty(), 50)),
-                                                                            new KeyFrame(Duration.millis(500), new KeyValue(mb.radiusProperty(), 63)),
-                                                                            new KeyFrame(Duration.millis(900), new KeyValue(mb.radiusProperty(), 50)),
-                                                                            new KeyFrame(Duration.millis(1000), new KeyValue(mb.radiusProperty(), 0)))
-                                                                 .build())
-                                        .build();
+        ParallelTransition parallelTransition = new ParallelTransition();
+        TranslateTransition translateTransition = new TranslateTransition();
+        translateTransition.setNode(node());
+        translateTransition.setFromX(fromX);
+        translateTransition.setToX(toX);
+        translateTransition.setFromY(fromY);
+        translateTransition.setToY(toY);
+        translateTransition.setDuration(Duration.seconds(1));
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().setAll(
+                new KeyFrame(Duration.millis(0), new KeyValue(mb.radiusProperty(), 0)),
+                new KeyFrame(Duration.millis(100), new KeyValue(mb.radiusProperty(), 50)),
+                new KeyFrame(Duration.millis(500), new KeyValue(mb.radiusProperty(), 63)),
+                new KeyFrame(Duration.millis(900), new KeyValue(mb.radiusProperty(), 50)),
+                new KeyFrame(Duration.millis(1000), new KeyValue(mb.radiusProperty(), 0)));
+        parallelTransition.getChildren().setAll(translateTransition, timeline);
+        return parallelTransition;
     }
 
     /**

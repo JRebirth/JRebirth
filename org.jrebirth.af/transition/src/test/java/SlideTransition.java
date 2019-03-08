@@ -15,26 +15,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import java.io.InputStream;
-
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
-import javafx.animation.ParallelTransitionBuilder;
 import javafx.animation.TranslateTransition;
-import javafx.animation.TranslateTransitionBuilder;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.DropShadowBuilder;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageViewBuilder;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.RectangleBuilder;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.InputStream;
 
 /**
  * The class <strong>JRebirthAnalyzer</strong>.
@@ -79,10 +76,9 @@ public final class SlideTransition extends Application {
         // RectangleBuilder.create().x(700).y(0).width(100).height(600).fill(Color.BEIGE).build()
         // );
 
-        final DropShadow shadow = DropShadowBuilder.create()
-                .radius(4)
-                .color(Color.GREY)
-                .build();
+        final DropShadow shadow = new DropShadow();
+                shadow.setRadius(4);
+                shadow.setColor(Color.GREY);
 
         Image image = null;
         final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("Properties.png");
@@ -91,28 +87,16 @@ public final class SlideTransition extends Application {
         }
 
         for (int i = 0; i < 40; i++) {
-            p.getChildren().add(
-                    ImageViewBuilder.create()
-                            .image(image)
-                            .clip(RectangleBuilder.create()
-                                    .x(i * 20)
-                                    .y(0)
-                                    .width(20)
-                                    .height(600)
-                                    .build())
-                            // RectangleBuilder.create()
-                            // .x(i * 40)
-                            // .y(0)
-                            // .fitWidth(40)
-                            // .fitHeight(600)
-                            // .width(40)
-                            // .height(600)
-                            // .fill(Color.AZURE)
-                            .effect(shadow)
-                            // .strokeDashArray(2.0, 4.0)
-                            // .stroke(Color.CHOCOLATE)
-                            .build()
-                    );
+            Rectangle rectangle = new Rectangle();
+            rectangle.setX(i * 20);
+            rectangle.setY(0);
+            rectangle.setWidth(20);
+            rectangle.setHeight(600);
+            ImageView imageView = new ImageView();
+            imageView.setImage(image);
+            imageView.setClip(rectangle);
+            imageView.setEffect(shadow);
+            p.getChildren().add(imageView);
         }
         stage.show();
 
@@ -125,21 +109,21 @@ public final class SlideTransition extends Application {
 
         };
 
-        final ParallelTransition st = ParallelTransitionBuilder.create().delay(Duration.seconds(1)).autoReverse(true).cycleCount(10).build();
+        final ParallelTransition st = new ParallelTransition();
+        st.setDelay(Duration.seconds(1));
+        st.setAutoReverse(true);
+        st.setCycleCount(10);
         int i = 0;
         for (final Node n : p.getChildren()) {
-
-            st.getChildren().add(
-                    TranslateTransitionBuilder.create()
-                            .delay(Duration.millis(i * 50))
-                            .node(n)
-                            .fromY(0)
-                            .toY(1000)
-                            .duration(Duration.millis(1000))
-                            .interpolator(Interpolator.EASE_IN)
-                            .onFinished(shadowRemover)
-                            .build()
-                    );
+            TranslateTransition translateTransition = new TranslateTransition();
+            translateTransition.setDelay(Duration.millis(i * 50));
+            translateTransition.setNode(n);
+            translateTransition.setFromY(0);
+            translateTransition.setToY(1000);
+            translateTransition.setDuration(Duration.millis(1000));
+            translateTransition.setInterpolator(Interpolator.EASE_IN);
+            translateTransition.setOnFinished(shadowRemover); ;
+            st.getChildren().add(translateTransition);
             i++;
         }
 

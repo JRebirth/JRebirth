@@ -1,15 +1,13 @@
 package org.jrebirth.af.sample.ui;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.LabelBuilder;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPaneBuilder;
-
+import javafx.scene.layout.FlowPane;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.ui.annotation.OnMouse;
 import org.jrebirth.af.api.ui.annotation.type.Mouse;
 import org.jrebirth.af.core.ui.AbstractView;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,17 +51,12 @@ public final class SampleView extends AbstractView<SampleModel, BorderPane, Samp
         this.defaultCommand = new Button("Trigger a default Command into JIT");
         this.uiCommand = new Button("Trigger an UI Command into JAT");
         this.pooledCommand = new Button("Trigger a pooled Command into JTP");
+        node().setCenter(new Label("JRebirth Sample"));
 
-        node().setCenter(
-                         LabelBuilder.create()
-                                     .text("JRebirth Sample")
-                                     .build());
-
-        node().setBottom(FlowPaneBuilder.create().children(
+        node().setBottom(new FlowPane(
                                                            this.defaultCommand,
                                                            this.uiCommand,
-                                                           this.pooledCommand)
-                                        .build());
+                                                           this.pooledCommand));
     }
 
     /**

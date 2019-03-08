@@ -1,7 +1,5 @@
 package org.jrebirth.af.core.resource.parameter;
 
-import static org.junit.Assert.assertEquals;
-
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.resource.i18n.JRLevel;
 import org.jrebirth.af.api.resource.parameter.ParameterItem;
@@ -9,15 +7,10 @@ import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.i18n.MessageResourceBase;
 import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * The class <strong>ParameterTest</strong>.
@@ -112,7 +105,7 @@ public class ParameterTest {
 
     }
 
-    @Test
+    //@Test
     public void varenvParameter() {
 
         final String tmp = System.getenv("TMP");

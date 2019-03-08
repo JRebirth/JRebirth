@@ -19,14 +19,11 @@ package org.jrebirth.af.presentation.ui.splash;
 
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
-import javafx.animation.ScaleTransitionBuilder;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextBuilder;
 import javafx.util.Duration;
-
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.presentation.resources.PrezColors;
 import org.jrebirth.af.presentation.ui.base.AbstractSlideView;
@@ -65,16 +62,16 @@ public class SplashView extends AbstractSlideView<SplashModel, BorderPane, Splas
 
         node().getStyleClass().add(model().getStyleClass() == null ? "splashContainer" : model().getStyleClass());
 
-        this.splashText = TextBuilder.create()
-                                     .text(model().getTitle())
-                                     .styleClass("splashText")
-                                     .textAlignment(TextAlignment.JUSTIFY)
-                                     .wrappingWidth(600)
-                                     .smooth(true)
-                                     .fill(model().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get())
-                                     .scaleX(0)
-                                     .scaleY(0)
-                                     .build();
+        this.splashText = new Text();
+
+        this.splashText.setText(model().getTitle());
+        this.splashText.getStyleClass().add("splashText");
+        this.splashText.setTextAlignment(TextAlignment.JUSTIFY);
+        this.splashText.setWrappingWidth(600);
+        this.splashText.setSmooth(true);
+        this.splashText.setFill(model().getStyleClass() == null ? Color.WHITE : PrezColors.SPLASH_TEXT.get());
+        this.splashText.setScaleX(0);
+        this.splashText.setScaleY(0);
 
         node().setCenter(this.splashText);
     }
@@ -100,15 +97,14 @@ public class SplashView extends AbstractSlideView<SplashModel, BorderPane, Splas
      */
     ScaleTransition getTextTransition() {
         if (this.textTransition == null) {
-            this.textTransition = ScaleTransitionBuilder.create()
-                                                        .node(this.splashText)
-                                                        .duration(Duration.millis(800))
-                                                        .interpolator(Interpolator.EASE_IN)
-                                                        .fromX(0)
-                                                        .fromY(0)
-                                                        .byX(2)
-                                                        .byY(2)
-                                                        .build();
+            this.textTransition = new ScaleTransition();
+            this.textTransition.setNode(this.splashText);
+            this.textTransition.setDuration(Duration.millis(800));
+            this.textTransition.setInterpolator(Interpolator.EASE_IN);
+            this.textTransition.setFromX(0);
+            this.textTransition.setFromY(0);
+            this.textTransition.setByX(2);
+            this.textTransition.setByY(2);
         }
         return this.textTransition;
     }

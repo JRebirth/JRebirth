@@ -17,17 +17,7 @@
  */
 package org.jrebirth.af.transition.slicer;
 
-import java.util.List;
-import java.util.Random;
-
-import javafx.animation.Interpolator;
-import javafx.animation.ParallelTransition;
-import javafx.animation.ParallelTransitionBuilder;
-import javafx.animation.PauseTransition;
-import javafx.animation.PauseTransitionBuilder;
-import javafx.animation.SequentialTransitionBuilder;
-import javafx.animation.Transition;
-import javafx.animation.TranslateTransitionBuilder;
+import javafx.animation.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -36,12 +26,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.util.Duration;
-
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.WBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * The class <strong>ImageSlicerService</strong>.
@@ -206,8 +198,7 @@ public class SlidingDoorService extends DefaultService {
         // p.getChildren().add(RectangleBuilder.create().x(i * 40).y(0).width(40).height(600).fill(Color.AZURE).build());
         // }
 
-        final ParallelTransition parallel = ParallelTransitionBuilder.create()
-                                                                     .build();
+        final ParallelTransition parallel = new ParallelTransition();
 
         // // int i = 0;
         // // Collections.shuffle(nodes);
@@ -222,18 +213,15 @@ public class SlidingDoorService extends DefaultService {
 
         int i = 0;
         for (final Node node : this.nodes) {
-
-            parallel.getChildren().add(
-                                       TranslateTransitionBuilder.create()
-                                                                 .delay(Duration.millis(i * getNodeDelay()))
-                                                                 .node(node)
-                                                                 // .fromY(0)
-                                                                 // .toY(1000)
-                                                                 .byY(1000)
-                                                                 .duration(getTranslateDuration())
-                                                                 .interpolator(Interpolator.EASE_IN)
-                                                                 .build()
-                    );
+            TranslateTransition translateTransition = new TranslateTransition();
+            translateTransition.setDelay(Duration.millis(i * getNodeDelay()));
+            translateTransition.setNode(node);
+                    // .fromY(0)
+                    // .toY(1000)
+            translateTransition.setByY(1000);
+            translateTransition.setDuration(getTranslateDuration());
+            translateTransition.setInterpolator(Interpolator.EASE_IN);
+            parallel.getChildren().add(translateTransition);
             // parallel.getChildren().add(
             // TranslateTransitionBuilder.create()
             // .delay(getRandomDuration())
@@ -245,17 +233,13 @@ public class SlidingDoorService extends DefaultService {
             // );
             i++;
         }
-        final PauseTransition pt = PauseTransitionBuilder.create()
-                                                         .duration(Duration.seconds(1))
-                                                         .build();
+        final PauseTransition pt = new PauseTransition();
+        pt.setDuration(Duration.seconds(1));
 
-        this.fullTransition = SequentialTransitionBuilder.create()
-                                                         .children(
-                                                                   parallel
-                                                         )
-                                                         .autoReverse(true)
-                                                         .cycleCount(10)
-                                                         .build();
+        this.fullTransition = new SequentialTransition();
+        ((SequentialTransition) this.fullTransition).getChildren().setAll(parallel);
+        fullTransition.setAutoReverse(true);
+        fullTransition.setCycleCount(10);
 
     }
 
