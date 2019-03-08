@@ -44,34 +44,24 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Dependency used at compile time to manage Java Webstart classpath scan If this jar is not available the related code will not be called -->
-		<dependency>
-			<groupId>javax.jnlp</groupId>
-			<artifactId>jnlp-api</artifactId>
-			<version>8.0</version>
-			<scope>system</scope>
-			<systemPath>${java.home}/lib/javaws.jar</systemPath>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.jnlp</groupId>
-			<artifactId>deploy</artifactId>
-			<version>8.0</version>
-			<scope>system</scope>
-			<systemPath>${java.home}/lib/deploy.jar</systemPath>
-		</dependency>
-
 		<dependency>
 			<groupId>org.testfx</groupId>
 			<artifactId>testfx-core</artifactId>
-			<version>4.0.1-alpha</version>
+			<version>4.0.15-alpha</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.testfx</groupId>
 			<artifactId>testfx-junit</artifactId>
-			<version>4.0.1-alpha</version>
+			<version>4.0.15-alpha</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testfx</groupId>
+			<artifactId>openjfx-monocle</artifactId>
+			<version>jdk-11+26</version>
 			<scope>test</scope>
 		</dependency>
 

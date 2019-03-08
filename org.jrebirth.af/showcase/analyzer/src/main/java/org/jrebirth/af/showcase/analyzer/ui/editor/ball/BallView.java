@@ -19,21 +19,17 @@ package org.jrebirth.af.showcase.analyzer.ui.editor.ball;
 
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
-import javafx.animation.ParallelTransitionBuilder;
 import javafx.animation.ScaleTransition;
-import javafx.animation.ScaleTransitionBuilder;
-import javafx.animation.TranslateTransitionBuilder;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
-import javafx.scene.control.LabelBuilder;
 import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadowBuilder;
-import javafx.scene.effect.InnerShadowBuilder;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.CircleBuilder;
 import javafx.util.Duration;
 
 import org.jrebirth.af.api.exception.CoreException;
@@ -88,41 +84,33 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
         node().setScaleX(0);
         node().setScaleY(0);
 
-        this.circle = CircleBuilder.create()
-                                   .radius(22)
-                                   .fill(Color.ALICEBLUE)
-                                   .stroke(Color.WHITE)
-                                   .strokeWidth(4)
-                                   .build();
+        this.circle = new Circle();
+        this.circle.setRadius(22);
+        this.circle.setFill(Color.ALICEBLUE);
+        this.circle.setStroke(Color.WHITE);
+        this.circle.setStrokeWidth(4);
 
-        this.label = LabelBuilder.create()
-                                 .textFill(Color.WHITE)
-                                 // .effect(arg0)
-                                 .build();
+        this.label = new Label();
+        this.label.setTextFill(Color.WHITE);
 
         node().getChildren().addAll(this.circle, this.label);
-
-        this.showTransition = ParallelTransitionBuilder.create()
-                                                       .children(
-                                                                 ScaleTransitionBuilder.create()
-                                                                                       .duration(Duration.millis(400))
-                                                                                       .node(node())
-                                                                                       .fromX(0.0)
-                                                                                       .fromY(0.0)
-                                                                                       .toX(1f)
-                                                                                       .toY(1f)
-                                                                                       .build(),
-                                                                 TranslateTransitionBuilder.create()
-                                                                                           .duration(Duration.millis(500))
-                                                                                           .node(node())
-                                                                                           .fromX(0.0)
-                                                                                           .fromY(0.0)
-                                                                                           .toX(getX())
-                                                                                           .toY(getY())
-                                                                                           .build())
-                                                       .cycleCount(1)
-                                                       .autoReverse(false)
-                                                       .build();
+        ScaleTransition scaleTransition = new ScaleTransition();
+        scaleTransition.setDuration(Duration.millis(400));
+        scaleTransition.setNode(node());
+        scaleTransition.setFromX(0.0);
+        scaleTransition.setFromY(0.0);
+        scaleTransition.setToX(1f);
+        scaleTransition.setToY(1f);
+        TranslateTransition translateTransition = new TranslateTransition();
+        translateTransition.setDuration(Duration.millis(500));
+        translateTransition.setNode(node());
+        translateTransition.setFromX(0.0);
+        translateTransition.setFromY(0.0);
+        translateTransition.setToX(getX());
+        translateTransition.setToY(getY());
+        this.showTransition = new ParallelTransition(scaleTransition, translateTransition);
+        this.showTransition.setCycleCount(1);
+        this.showTransition.setAutoReverse(false);
 
         this.showTransition.setOnFinished(new EventHandler<ActionEvent>() {
 
@@ -133,33 +121,30 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
             }
         });
 
-        this.scaleTransition = ScaleTransitionBuilder.create()
-                                                     .duration(Duration.millis(600))
-                                                     .node(node())
-                                                     .fromX(1.1)
-                                                     .fromY(1.1)
-                                                     .toX(0.7)
-                                                     .toY(0.7)
-                                                     .cycleCount(Animation.INDEFINITE)
-                                                     .autoReverse(true)
-                                                     .build();
+        this.scaleTransition = new ScaleTransition();
+        this.scaleTransition.setDuration(Duration.millis(600));
+        this.scaleTransition.setNode(node());
+        this.scaleTransition.setFromX(1.1);
+        this.scaleTransition.setFromY(1.1);
+        this.scaleTransition.setToX(0.7);
+        this.scaleTransition.setToY(0.7);
+        this.scaleTransition.setCycleCount(Animation.INDEFINITE);
+        this.scaleTransition.setAutoReverse(true);
+        InnerShadow innerShadow = new InnerShadow();
+        innerShadow.setColor(Color.GREY);
+        innerShadow.setBlurType(BlurType.GAUSSIAN);
+        innerShadow.setRadius(2);
+        innerShadow.setOffsetX(1);
+        innerShadow.setOffsetY(1);
+        this.circle.setEffect(innerShadow);
 
-        this.circle.setEffect(InnerShadowBuilder.create()
-                                                .color(Color.GREY)
-                                                .blurType(BlurType.GAUSSIAN)
-                                                .radius(2)
-                                                .offsetX(1)
-                                                .offsetY(1)
-                                                .build());
-
-        node().setEffect(DropShadowBuilder.create()
-                                          // .input()
-                                          .color(Color.BLACK)
-                                          .blurType(BlurType.GAUSSIAN)
-                                          .radius(4)
-                                          .offsetX(3)
-                                          .offsetY(3)
-                                          .build());
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setColor(Color.BLACK);
+        dropShadow.setBlurType(BlurType.GAUSSIAN);
+        dropShadow.setRadius(4);
+        dropShadow.setOffsetX(3);
+        dropShadow.setOffsetY(3);
+        node().setEffect(dropShadow);
 
     }
 
@@ -228,15 +213,14 @@ public final class BallView extends DefaultView<BallModel, StackPane, BallContro
      * To complete.
      */
     public void resetScale() {
-        ScaleTransitionBuilder.create()
-                              .duration(Duration.millis(400))
-                              .node(node())
-                              .toX(1f)
-                              .toY(1f)
-                              .cycleCount(1)
-                              .autoReverse(false)
-                              .build()
-                              .play();
+        ScaleTransition scaleTransition = new ScaleTransition();
+        scaleTransition.setDuration(Duration.millis(400));
+        scaleTransition.setNode(node());
+        scaleTransition.setToX(1f);
+        scaleTransition.setToY(1f);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setAutoReverse(false);
+        scaleTransition.play();
     }
 
     /**
