@@ -154,7 +154,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.5.1</version>
+				<version>3.7.1</version>
 
 				<executions>
 					<!-- <execution> <id>attach-sites</id> <goals> <goal>jar</goal> </goals> </execution> -->
@@ -189,17 +189,17 @@
 					<dependency>
 						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-site-renderer</artifactId>
-						<version>1.7.1</version>
+						<version>1.8.1</version>
 					</dependency>
 					<dependency>
 						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-core</artifactId>
-						<version>1.7</version>
+						<version>1.8</version>
 					</dependency>
 					<dependency>
 						<groupId>org.apache.maven.wagon</groupId>
 						<artifactId>wagon-ssh</artifactId>
-						<version>2.10</version>
+						<version>3.3.1</version>
 					</dependency>
 
 					<dependency>
@@ -210,12 +210,12 @@
 					<dependency>
 						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.7</version>
+						<version>1.8</version>
 					</dependency>
 					<dependency>
 						<groupId>org.asciidoctor</groupId>
 						<artifactId>asciidoctor-maven-plugin</artifactId>
-						<version>1.5.5</version>
+						<version>1.5.6</version>
 					</dependency>
 				</dependencies>
 			</plugin>

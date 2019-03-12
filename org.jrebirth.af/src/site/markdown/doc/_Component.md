@@ -60,7 +60,7 @@ Any **Component** is able to emit a new **Wave** and let the **Notifier** dispat
 
 <!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/facade/FacadeReady.java|snippet=re:(setup\()\|(release\()} -->
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/facade/FacadeReady.java|snippet=re:(localfacade\()} -->
+<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/facade/FacadeReady.java|snippet=re:(localFacade\()} -->
 
 <!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/facade/FacadeReady.java|snippet=re:(key\()} -->
 

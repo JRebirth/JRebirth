@@ -29,13 +29,17 @@ public class Ecore2FXMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project.build.directory}/generated-sources")
     private File outputDirectory;
 
+    @Parameter(defaultValue = "false")
+    private boolean generateWaveItems;
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void execute() throws MojoExecutionException {
         final Ecore2FXGenerator g = new Ecore2FXGenerator();
-        g.generate(this.outputDirectory, this.ecoreFile);
+        g.setGenerateWaveItems(this.generateWaveItems);
+        g.generate(this.outputDirectory, this.ecoreFile, generateWaveItems);
     }
 
 }

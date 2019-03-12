@@ -1,6 +1,7 @@
 package org.jrebirth.tooling.ecore2fx;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -45,10 +46,12 @@ import com.google.common.io.Files;
 
 public class Ecore2FXGenerator {
 
+    private boolean generateWaveItems;
+
     /**
     *
     */
-    public void generate(final File output, final File ecoreFile) {
+    public void generate(final File output, final File ecoreFile, boolean generateWaveItems) {
         final ResourceSet rs = new ResourceSetImpl();
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
 
@@ -117,7 +120,78 @@ public class Ecore2FXGenerator {
             Files.write(formattedSource, temp, Charsets.UTF_8);
 
         }
+
+        if (isGenerateWaveItems()) {
+            manageWaveItems(output, beans);
+        }
+
         return beans;
+    }
+
+    /**
+     * TODO To complete.
+     * 
+     * @param output
+     * @param beans
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
+    private void manageWaveItems(final File output, final List<Packageable<?>> beans) throws IOException, FileNotFoundException {
+
+        org.jrebirth.af.tooling.codegen.bean.Package p = null;
+
+        if (p == null && !beans.isEmpty()) {
+            p = beans.get(0)._package();
+
+            final String[] parts = p.qualifiedName().split("\\.");
+
+            File temp = output;
+            for (final String n : parts) {
+
+                temp = new File(temp, n);
+
+            }
+
+            final String interfaceName = p.name().substring(0, 1).toUpperCase() + p.name().substring(1) + "WaveItems";
+            temp = new File(temp, interfaceName + ".java");
+            Files.createParentDirs(temp);
+
+            final Class waveItemInterface = Class.of(p.qualifiedName() + "." + interfaceName).addImplementedType(Class.of("org.jrebirth.af.core.wave.JRebirthItems"));
+            // public interface QobuzItems extends JRebirthItems {
+            for (final Packageable<?> bean : beans) {
+
+                waveItemInterface.addProperty(
+                                              Property.of(bean.name().toLowerCase() + "Item")
+                                                      .type(Class.of("org.jrebirth.af.api.wave.contract.WaveItem")
+                                                                 .addTypeVariable(TypeVariable.of(bean.name()))));
+                // WaveItem<Album> albumItem = new WaveItemBase<Album>() {
+                // };
+            }
+
+            JavaType<?> javaType = null;
+            if (temp.exists()) {
+                javaType = Roaster.parse(temp);
+            }
+            final String formattedSource = Generators.interfaceGenerator.generate(waveItemInterface,
+                                                                                  javaType instanceof JavaInterfaceSource ? (JavaInterfaceSource) javaType : Roaster.create(JavaInterfaceSource.class));
+
+            Files.write(formattedSource, temp, Charsets.UTF_8);
+
+        }
+        // import org.jrebirth.af.api.wave.contract.WaveItem;
+        // import org.jrebirth.af.core.wave.JRebirthItems;
+        // import org.jrebirth.af.core.wave.WaveItemBase;
+        //
+        // import qobuz.bean.Album;
+        // import qobuz.bean.AlbumSearch;
+        // import qobuz.bean.Artist;
+        // import qobuz.bean.ArtistSearch;
+        // import qobuz.bean.Track;
+        // import qobuz.bean.TrackSearch;
+        // import qobuz.bean.TrackUrl;
+        // import qobuz.bean.WishItem;
+        //
+        //
     }
 
     private Enum manageEnum(EEnum obj) {
@@ -135,24 +209,23 @@ public class Ecore2FXGenerator {
         cls.getETypeParameters().stream()
            .forEach(tp -> bean.addTypeVariable(
                                                TypeVariable.of(tp.getName())
-        // .relation(TypeVariable.Kind._extends)
-        // .type(Class.of(tp.getEBounds().get(0).getEClassifier().getName()))
-        ));
+           // .relation(TypeVariable.Kind._extends)
+           // .type(Class.of(tp.getEBounds().get(0).getEClassifier().getName()))
+           ));
 
         bean.name(cls.getName());
-        
+
         //
         org.jrebirth.af.tooling.codegen.bean.Package clsPkg = org.jrebirth.af.tooling.codegen.bean.Package.create().qualifiedName(cls.getEPackage().getName());
         bean._package(clsPkg);
         org.jrebirth.af.tooling.codegen.bean.Package parent = null;
         EPackage superPkg = cls.getEPackage().getESuperPackage();
-        while(superPkg != null) {
+        while (superPkg != null) {
             parent = org.jrebirth.af.tooling.codegen.bean.Package.create().qualifiedName(superPkg.getName());
             clsPkg._package(parent);
             clsPkg = parent;
             superPkg = superPkg.getESuperPackage();
         }
-        
 
         cls.getEGenericSuperTypes().stream().forEach(st -> {
             if (!getFullName(st).contains("ecore")) {
@@ -224,13 +297,13 @@ public class Ecore2FXGenerator {
     }
 
     private String wrapWithList(EReference ref, String fullName) {
-		if(ref.getUpperBound() == -1 || ref.getUpperBound() > 1){
-			return "java.util.List<"+ fullName + ">";
-		}
-		return fullName;
-	}
+        if (ref.getUpperBound() == -1 || ref.getUpperBound() > 1) {
+            return "java.util.List<" + fullName + ">";
+        }
+        return fullName;
+    }
 
-	private Class getReturnType(EOperation o) {
+    private Class getReturnType(EOperation o) {
 
         if (o.getEGenericType() != null) {
             return Class.of(getGenericTypeName(o.getEGenericType()));
@@ -360,26 +433,40 @@ public class Ecore2FXGenerator {
     }
 
     private void managePackage(final File output, final EPackage obj) throws IOException {
-        
-        if(obj.getNsPrefix() != null){
-            
+
+        if (obj.getNsPrefix() != null) {
+
             EPackage parent = null;
-            for(String pkgName : obj.getNsPrefix().split("\\.")) {
-                EPackage pkg = EcoreFactory.eINSTANCE.createEPackage();
+            for (final String pkgName : obj.getNsPrefix().split("\\.")) {
+                final EPackage pkg = EcoreFactory.eINSTANCE.createEPackage();
                 pkg.setName(pkgName);
-                if(parent != null) {
+                if (parent != null) {
                     parent.getESubpackages().add(pkg);
                 }
                 parent = pkg;
             }
-            if(parent != null) {
+            if (parent != null) {
                 parent.getESubpackages().add(obj);
             }
         }
-        
+
         for (final EClassifier cls : obj.getEClassifiers()) {
             manageObject(output, cls);
         }
 
+    }
+
+    /**
+     * @return Returns the generateWaveItems.
+     */
+    public boolean isGenerateWaveItems() {
+        return generateWaveItems;
+    }
+
+    /**
+     * @param generateWaveItems The generateWaveItems to set.
+     */
+    public void setGenerateWaveItems(boolean generateWaveItems) {
+        this.generateWaveItems = generateWaveItems;
     }
 }

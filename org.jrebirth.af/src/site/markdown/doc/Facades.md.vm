@@ -69,7 +69,7 @@ This link is bidirectionnal because global facade is accessible from the 3 main 
 
 - *getGlobalFacade()* (each facade extends the __AbstractGlobalReady__ abstract class which implement __GlobalReady__ interface.
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/facade/GlobalReady.java|snippet=re:getGlobalFacade}-->
+<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/facade/GlobalReady.java|snippet=re:globalFacade}-->
 
 
 

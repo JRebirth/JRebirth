@@ -11,13 +11,20 @@
 	<dependency>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>core</artifactId>
-		<version>${project.version}</version>
+		<version>${jrebirth.version}</version>
 	</dependency>
 
 	<dependency>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>preloader</artifactId>
-		<version>${project.version}</version>
+		<version>${jrebirth.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.jrebirth.af</groupId>
+		<artifactId>processor</artifactId>
+		<version>${jrebirth.version}</version>
+		<scope>provided</scope>
 	</dependency>
 	
 </dependencies>

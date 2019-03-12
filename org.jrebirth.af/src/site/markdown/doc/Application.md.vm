@@ -173,7 +173,7 @@ Don't forget that you can chain your waves if you need to do more than one thing
 
 <span style="text-decoration: underline;">JRebirth Analyzer example :</span>
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/JRebirthAnalyzer.java|snippet=aj:..JRebirthAnalyzer.getPostBootWaveList(..)} -->
+<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/JRebirthAnalyzer.java|snippet=aj:..JRebirthAnalyzer.postBootWaveList(..)} -->
 
 
 ### Default key shortcuts

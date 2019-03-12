@@ -1,46 +1,20 @@
 <head>
 <![CDATA[
-<title>Thread</title>
-<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />]]>
+<title>Modularization</title>
+<!--<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />-->
+]]>
 </head>
 
 <div id="catcherTitle">Modularization</div>
 <div id="catcherContent">How to modularize your application at runtime</div>
 
 #if(!$all)
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+<!-- MACRO{toc|section=0|fromDepth=0|toDepth=5|class=toc} -->
 #end   
 
+//#include("_Modularization.md")
+
 #[[
-
-
-Modularization
-====================
-
-Module overview
----------------------
-
-
-
-<div class="uml">
-	<a href="uml/Module.png" rel="lightbox" title="Module Class Diagram">
-		<img class="redux" src="uml/Module.png" alt="" />
-	</a>
-	<legend>Module Class Diagram</legend>
-</div>
-
-
-Component Registration
------------------------
-
-Each extensible component shall be registered using one **@RegistrationPoint** and one or many **@Register** declaration.
-
-
-Module Auto-loading
----------------------
-
-To automate management of modules, JRebirth uses an annotation processor (at compilation time).
-
 ]]#
 
 #if( !$all )

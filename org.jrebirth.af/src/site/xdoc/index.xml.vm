@@ -25,6 +25,8 @@
 	    <!-- Default Theme -->
 	    <link rel="stylesheet" href="owl-carousel/owl.theme.css" />
 	     
+	    <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+	     
 	    <!-- jQuery 1.7+ -->
 	    <script src="js/jquery-1.9.1.min.js"></script>
 	     
@@ -34,6 +36,8 @@
 	    <script type="text/javascript" src="js/carousel.js"></script>
 		
 		<script type="text/javascript" src="js/jquery.sticky.js"></script>
+		
+		
 		<script>
 		  $(document).ready(function(){
 		    $("#navmenu").sticky({topSpacing:-7});

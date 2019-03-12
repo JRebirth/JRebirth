@@ -43,6 +43,7 @@ public class InterfaceGenerator extends AbstractGenerator<Class, JavaInterfaceSo
         beanDef.implementedTypes().stream().forEach(i -> javaInterface.addInterface(i.qualifiedNameWithParameter()));
 
         beanDef.properties().stream().forEach(propDef -> {
+            // Ste visibility public propDef.v
             writeField(javaInterface, propDef);
         });
 
