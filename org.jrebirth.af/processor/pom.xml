@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jrebirth</groupId>
 		<artifactId>af</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
+		<version>11.0.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.jrebirth.af</groupId>
@@ -15,7 +15,7 @@
 
 
 	<properties>
-		<roaster.version>2.20.7.Final</roaster.version>
+		<roaster.version>2.20.9-SNAPSHOT</roaster.version>
 	</properties>
 
 	<build>
@@ -54,7 +54,7 @@
 
 	<dependencies>
 
-<!-- 		<dependency>
+		<dependency>
 			<groupId>org.jboss.forge.roaster</groupId>
 			<artifactId>roaster-api</artifactId>
 			<version>${roaster.version}</version>
@@ -64,24 +64,31 @@
 			<groupId>org.jboss.forge.roaster</groupId>
 			<artifactId>roaster-jdt</artifactId>
 			<version>${roaster.version}</version>
-		</dependency> -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.eclipse.jdt</groupId>
+					<artifactId>org.eclipse.jdt.core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>api</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>11.0.0-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>11.0.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.tooling</groupId>
 			<artifactId>codegen</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>11.0.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>af</artifactId>
-	<version>8.7.0-SNAPSHOT</version>
+	<version>11.0.0-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 	<name>JRebirth Application Framework</name>
@@ -38,7 +38,7 @@
 	</properties>
 
 	<modules>
-		<module>codeshaded</module>
+		<!-- <module>codeshaded</module> -->
 		<module>api</module>
  		<module>preloader</module>
 		<module>core</module>

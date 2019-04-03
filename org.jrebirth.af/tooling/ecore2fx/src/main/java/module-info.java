@@ -13,5 +13,4 @@ module org.jrebirth.af.tooling.ecore2fx {
     requires org.jrebirth.af.tooling.codegen;
     requires com.google.common;
 
-	requires codeshaded;
 }

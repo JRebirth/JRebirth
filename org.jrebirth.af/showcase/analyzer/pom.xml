@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
+		<version>11.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 	
@@ -263,7 +263,7 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>11.0.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

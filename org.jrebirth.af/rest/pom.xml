@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.jrebirth</groupId>
 		<artifactId>af</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
+		<version>11.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.jrebirth.af</groupId>
 	<artifactId>rest</artifactId>
@@ -15,13 +15,13 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>11.0.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>11.0.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 

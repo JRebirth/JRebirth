@@ -1,12 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>tooling</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
+		<version>11.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -18,37 +17,42 @@
 	<description>Code generator tool module</description>
 
 	<properties>
-		<roaster.version>2.20.8.Final</roaster.version>
+		<roaster.version>2.20.9-SNAPSHOT</roaster.version>
 	</properties>
 
 	<dependencies>
 
+		<!-- <dependency> <groupId>org.jrebirth.af</groupId> <artifactId>codeshaded</artifactId> <version>11.0.0-SNAPSHOT</version> <exclusions> <exclusion> <groupId>org.jboss.forge.roaster</groupId> <artifactId>roaster-api</artifactId> 
+			</exclusion> <exclusion> <groupId>org.jboss.forge.roaster</groupId> <artifactId>roaster-jdt</artifactId> </exclusion> <exclusion> <groupId>com.x5dev</groupId> <artifactId>chunk-templates</artifactId> </exclusion> 
+			</exclusions> </dependency> -->
+
 		<dependency>
-			<groupId>org.jrebirth.af</groupId>
-			<artifactId>codeshaded</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<groupId>org.jboss.forge.roaster</groupId>
+			<artifactId>roaster-api</artifactId>
+			<version>${roaster.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.forge.roaster</groupId>
+			<artifactId>roaster-jdt</artifactId>
+			<version>${roaster.version}</version>
 			<exclusions>
 				<exclusion>
-					<groupId>org.jboss.forge.roaster</groupId>
-					<artifactId>roaster-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.jboss.forge.roaster</groupId>
-					<artifactId>roaster-jdt</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.x5dev</groupId>
-					<artifactId>chunk-templates</artifactId>
+					<groupId>org.eclipse.jdt</groupId>
+					<artifactId>org.eclipse.jdt.core</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
-
-		<!-- <dependency> <groupId>org.jboss.forge.roaster</groupId> <artifactId>roaster-api</artifactId> 
-			<version>${roaster.version}</version> </dependency> <dependency> <groupId>org.jboss.forge.roaster</groupId> 
-			<artifactId>roaster-jdt</artifactId> <version>${roaster.version}</version> 
-			</dependency> <dependency> <groupId>com.x5dev</groupId> <artifactId>chunk-templates</artifactId> 
-			<version>3.2.4</version> <exclusions> <exclusion> <groupId>net.minidev</groupId> 
-			<artifactId>json-smart</artifactId> </exclusion> </exclusions> </dependency> -->
+		<dependency>
+			<groupId>com.x5dev</groupId>
+			<artifactId>chunk-templates</artifactId>
+			<version>3.2.4</version>
+			<exclusions>
+				<exclusion>
+					<groupId>net.minidev</groupId>
+					<artifactId>json-smart</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 	</dependencies>
 

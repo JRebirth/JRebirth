@@ -1,6 +1,5 @@
 /**
- * The class <strong>module-info</strong>.
- * TODO To complete
+ * The class <strong>module-info</strong>. TODO To complete
  * 
  * @author Sébastien Bordes
  */
@@ -14,9 +13,11 @@ module org.jrebirth.af.processor {
 
     requires transitive org.jrebirth.af.api;
     requires transitive org.jrebirth.af.core;
-	requires codeshaded;
     requires transitive org.jrebirth.af.tooling.codegen;
 
-	provides javax.annotation.processing.Processor with org.jrebirth.af.processor.BeanProcessor, org.jrebirth.af.processor.ComponentProcessor;
+    requires roaster.api;
+    requires roaster.jdt;
+
+    provides javax.annotation.processing.Processor with org.jrebirth.af.processor.BeanProcessor, org.jrebirth.af.processor.ComponentProcessor;
 
 }
