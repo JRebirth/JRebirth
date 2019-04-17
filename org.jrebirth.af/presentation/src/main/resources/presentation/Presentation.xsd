@@ -2,8 +2,8 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.jrebirth.org/Presentation" xmlns:tns="http://www.jrebirth.org/Presentation"
 	elementFormDefault="qualified">
 
-	<element name="presentation" type="tns:Presentation" />
-
+	<element name="presentation" type="Presentation" />
+<!--
 	<complexType name="Presentation">
 
 		<all>
@@ -101,6 +101,6 @@
 			<enumeration value="TileIn60k" />
 			<enumeration value="TileOut60k" />
 		</restriction>
-	</simpleType>
+	</simpleType>-->
 
 </schema>

@@ -38,7 +38,6 @@
 	</properties>
 
 	<modules>
-		<!-- <module>codeshaded</module> -->
 		<module>api</module>
  		<module>preloader</module>
 		<module>core</module>
@@ -47,7 +46,7 @@
 		<module>component</module>
 		<module>archetype</module>
 		<module>sample</module>
-		<module>presentation</module>
+		<!-- <module>presentation</module> -->
 		<module>transition</module>
 		<module>dialog</module>
 		<module>fxform</module>
@@ -193,6 +192,12 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.6.0.1398</version>
+      </plugin>
 
 			<!-- Project Quality -->
 			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>sonar-maven-plugin</artifactId> <version>2.5</version> </plugin> -->

@@ -10,6 +10,7 @@ module org.jrebirth.af.presentation {
 	requires org.jrebirth.af.api;
     requires org.jrebirth.af.core;
 
+    requires javax.activation.api;
     requires java.xml.bind;
 
     requires org.slf4j;

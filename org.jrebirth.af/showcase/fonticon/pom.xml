@@ -40,6 +40,14 @@
 			<version>11.0.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		
+				<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>processor</artifactId>
+			<version>11.0.0-SNAPSHOT</version>
+			<classifier>4ide</classifier>
+			<optional>true</optional>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.iconfont-bridge</groupId>

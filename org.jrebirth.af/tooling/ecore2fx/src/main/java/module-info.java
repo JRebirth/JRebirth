@@ -12,5 +12,6 @@ module org.jrebirth.af.tooling.ecore2fx {
     requires org.eclipse.emf.ecore.xmi;
     requires org.jrebirth.af.tooling.codegen;
     requires com.google.common;
+    requires roaster.api;
 
 }

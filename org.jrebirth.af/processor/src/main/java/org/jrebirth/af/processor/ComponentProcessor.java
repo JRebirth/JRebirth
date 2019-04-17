@@ -180,7 +180,7 @@ public class ComponentProcessor extends AbstractProcessor {
 
             final Properties prefs = new Properties();
             prefs.load(this.getClass().getResourceAsStream(FORMATTER_PROPERTIES_FILE));
-			final String formattedSource = Formatter.format(prefs, javaClass);
+			final String formattedSource = /*Formatter.format(prefs, */javaClass.toString();//);
 
             // System.out.println(formattedSource);
 

@@ -22,7 +22,8 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
 			<version>11.0.0-SNAPSHOT</version>
-			<scope>provided</scope>
+			<classifier>4ide</classifier>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>

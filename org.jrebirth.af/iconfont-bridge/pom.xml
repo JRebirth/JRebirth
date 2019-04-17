@@ -9,7 +9,7 @@
 	</parent>
 
 	<groupId>org.jrebirth.af</groupId>
-	<artifactId>iconfont.bridge</artifactId>
+	<artifactId>iconfont-bridge</artifactId>
 	<packaging>pom</packaging>
 
 	<name>JR IconFont Bridge</name>
@@ -64,19 +64,11 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.1</version>
+					<version>3.8.0</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
+						<release>11</release>
 						<encoding>UTF-8</encoding>
 					</configuration>
-				</plugin>
-
-				<!-- Project Quality -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>sonar-maven-plugin</artifactId>
-					<version>2.5</version>
 				</plugin>
 
 			</plugins>
@@ -98,6 +90,12 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.0.13</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
@@ -105,13 +103,13 @@
 			<version>11.0.0-SNAPSHOT</version>
 		</dependency>
 		
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
 			<version>11.0.0-SNAPSHOT</version>
 			<classifier>tests</classifier>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 
 	</dependencies>
 

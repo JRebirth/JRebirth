@@ -35,7 +35,6 @@ import org.jboss.forge.roaster.model.source.GenericCapableSource;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodHolderSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
-import org.jboss.forge.roaster.model.util.Formatter;
 
 public abstract class AbstractGenerator<B, J> implements CodeGenerator<B, J> {
 
@@ -51,7 +50,7 @@ public abstract class AbstractGenerator<B, J> implements CodeGenerator<B, J> {
         } catch (final IOException e) {
             e.printStackTrace();
         }
-        final String formattedSource = prefs != null ? Formatter.format(prefs, javaClass) : Formatter.format(javaClass);
+        final String formattedSource = javaClass.toString();// prefs != null ? Formatter.format(prefs, javaClass) : Formatter.format(javaClass);
 
         // System.out.println(formattedSource);
 

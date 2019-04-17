@@ -17,14 +17,27 @@
 	<description>Code generator tool module</description>
 
 	<properties>
-		<roaster.version>2.20.9-SNAPSHOT</roaster.version>
+		<roaster.version>2.20.8.Final</roaster.version>
 	</properties>
 
-	<dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
 
-		<!-- <dependency> <groupId>org.jrebirth.af</groupId> <artifactId>codeshaded</artifactId> <version>11.0.0-SNAPSHOT</version> <exclusions> <exclusion> <groupId>org.jboss.forge.roaster</groupId> <artifactId>roaster-api</artifactId> 
-			</exclusion> <exclusion> <groupId>org.jboss.forge.roaster</groupId> <artifactId>roaster-jdt</artifactId> </exclusion> <exclusion> <groupId>com.x5dev</groupId> <artifactId>chunk-templates</artifactId> </exclusion> 
-			</exclusions> </dependency> -->
+				<configuration>
+					<compilerArgs>
+						<arg>--add-reads</arg>
+						<arg>org.jrebirth.af.tooling.codegen=ALL-UNNAMED</arg>
+					</compilerArgs>
+				</configuration>
+
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
 
 		<dependency>
 			<groupId>org.jboss.forge.roaster</groupId>
@@ -35,12 +48,6 @@
 			<groupId>org.jboss.forge.roaster</groupId>
 			<artifactId>roaster-jdt</artifactId>
 			<version>${roaster.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.eclipse.jdt</groupId>
-					<artifactId>org.eclipse.jdt.core</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.x5dev</groupId>

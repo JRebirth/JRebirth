@@ -17,68 +17,65 @@
  */
 package org.jrebirth.af.tooling.codegen.tests;
 
+import org.jrebirth.af.tooling.codegen.bean.Class;
+import org.jrebirth.af.tooling.codegen.bean.Operation;
+import org.jrebirth.af.tooling.codegen.bean.Parameter;
+import org.jrebirth.af.tooling.codegen.bean.Property;
+import org.jrebirth.af.tooling.codegen.generator.Generators;
 
 import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.JavaEnumSource;
 import org.jboss.forge.roaster.model.source.JavaInterfaceSource;
-import org.jrebirth.af.tooling.codegen.bean.Class;
-import org.jrebirth.af.tooling.codegen.bean.Operation;
-import org.jrebirth.af.tooling.codegen.bean.Parameter;
-import org.jrebirth.af.tooling.codegen.bean.Property;
-import org.jrebirth.af.tooling.codegen.bean.TypedDefinition;
-import org.jrebirth.af.tooling.codegen.generator.Generators;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BeanTest {
 
     @Test
     public void testGenerateClass() {
-       
-        Class bean  = Class.of("org.jrebirth.af.tooling.codegen.MyBean");
-       
-        Property p1 = Property.of("property1")
-        		.type(Class.of("java.lang.String"));
-       
-        Property p2 = Property.of("property2")
-        .type(Class.of("java.lang.String"));
-       
-       
-        Property p3 = Property.of("property1")
-        .type(Class.of("java.util.List<java.lang.String>"));
-       
-       
-        Property p4 = Property.of("property4")
-        .type(Class.of("java.util.Map<java.lang.String>"));
-       
-        bean.addProperty(p1, p2 ,p3, p4);
 
-        String output = Generators.beanGenerator.generate(bean, Roaster.create(JavaClassSource.class));
-       
+        final Class bean = Class.of("org.jrebirth.af.tooling.codegen.MyBean");
+
+        final Property p1 = Property.of("property1")
+                                    .type(Class.of("java.lang.String"));
+
+        final Property p2 = Property.of("property2")
+                                    .type(Class.of("java.lang.String"));
+
+        final Property p3 = Property.of("property1")
+                                    .type(Class.of("java.util.List<java.lang.String>"));
+
+        final Property p4 = Property.of("property4")
+                                    .type(Class.of("java.util.Map<java.lang.String>"));
+
+        bean.addProperty(p1, p2, p3, p4);
+
+        final String output = Generators.beanGenerator.generate(bean, Roaster.create(JavaClassSource.class));
+
         System.out.println(output);
     }
-    
+
     @Test
     public void testGenerateInterface() {
-       
-        Class bean  = Class.of("org.jrebirth.af.tooling.codegen.MyInterface");
-       
-        Operation op = Operation.of("operation1").returnType(Class.of("java.lang.String")).addParameter(Parameter.of("param1").type(Class.of("java.lang.String")));
-        
+
+        final Class bean = Class.of("org.jrebirth.af.tooling.codegen.MyInterface");
+
+        final Operation op = Operation.of("operation1").returnType(Class.of("java.lang.String")).addParameter(Parameter.of("param1").type(Class.of("java.lang.String")));
+
         bean.operations().add(op);
-        
-        String output = Generators.interfaceGenerator.generate(bean, Roaster.create(JavaInterfaceSource.class));
-       
+
+        final String output = Generators.interfaceGenerator.generate(bean, Roaster.create(JavaInterfaceSource.class));
+
         System.out.println(output);
     }
-    
+
     @Test
     public void testGenerateEnum() {
-       
-        org.jrebirth.af.tooling.codegen.bean.Enum bean  = org.jrebirth.af.tooling.codegen.bean.Enum.of("org.jrebirth.af.tooling.codegen.MyEnum");
-       
-        String output = Generators.enumGenerator.generate(bean, Roaster.create(JavaEnumSource.class));
-       
+
+        final org.jrebirth.af.tooling.codegen.bean.Enum bean = org.jrebirth.af.tooling.codegen.bean.Enum.of("org.jrebirth.af.tooling.codegen.MyEnum");
+
+        final String output = Generators.enumGenerator.generate(bean, Roaster.create(JavaEnumSource.class));
+
         System.out.println(output);
     }
 
