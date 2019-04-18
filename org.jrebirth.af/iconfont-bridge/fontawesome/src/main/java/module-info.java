@@ -7,6 +7,6 @@ module org.jrebirth.af.iconfont.bridge.fontawesome {
 
     exports org.jrebirth.af.iconfontbridge.fontawesome;
 
-    requires org.jrebirth.af.api;
-    requires org.jrebirth.af.core;
+    requires transitive org.jrebirth.af.api;
+    requires transitive org.jrebirth.af.core;
 }

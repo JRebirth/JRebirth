@@ -6,6 +6,6 @@
 module org.jrebirth.af.iconfont.bridge.typicons {
     exports org.jrebirth.af.iconfontbridge.typicons;
 
-    requires org.jrebirth.af.api;
-    requires org.jrebirth.af.core;
+    requires transitive org.jrebirth.af.api;
+    requires transitive org.jrebirth.af.core;
 }

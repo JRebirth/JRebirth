@@ -47,6 +47,7 @@
 				<configuration>
 					<ecoreFile>model/Todos.ecore</ecoreFile>
 					<outputDirectory>${project.build.directory}/generated-sources/model</outputDirectory>
+					<outputKind>custom</outputKind>
 				</configuration>
 				<executions>
 					<execution>

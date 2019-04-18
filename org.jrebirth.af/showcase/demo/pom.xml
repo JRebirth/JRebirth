@@ -415,11 +415,11 @@
 			<version>11.0.0-SNAPSHOT</version>
 		</dependency>
 
-<!-- 		<dependency>
+ 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>todos</artifactId>
 			<version>11.0.0-SNAPSHOT</version>
-		</dependency> -->
+		</dependency>
 		
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>

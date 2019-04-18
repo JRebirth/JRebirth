@@ -10,7 +10,7 @@
 	</parent>
 
 	<groupId>org.jrebirth.af.tooling</groupId>
-	<artifactId>jrebirth.maven.plugin</artifactId>
+	<artifactId>jrebirth-maven-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
 
 	<name>JRebirth Maven Plugin</name>
