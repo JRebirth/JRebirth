@@ -239,16 +239,15 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
                 // If a property was private, it must set to accessible = false after processing action
                 boolean needToHide = false;
                 // For private properties, set them accessible temporary
-                if (!f.isAccessible()) {
+                if (f.canAccess(this)) {
                     f.setAccessible(true);
                     needToHide = true;
                 }
-
                 // Process all existing annotation for the current field
                 processAnnotations(f);
 
                 // Reset the property visibility
-                if (needToHide && f.isAccessible()) {
+                if (needToHide && f.canAccess(this)) {
                     f.setAccessible(false);
                 }
             }

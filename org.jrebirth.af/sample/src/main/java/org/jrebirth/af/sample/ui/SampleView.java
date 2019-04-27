@@ -24,7 +24,7 @@ public final class SampleView extends AbstractView<SampleModel, BorderPane, Samp
 
     /** Button used to trigger the SampleCommand. */
     @OnMouse(Mouse.Clicked)
-    private Button defaultCommand;
+    public Button defaultCommand;
 
     /** Button used to trigger the SampleUICommand. */
     private Button uiCommand;
@@ -59,6 +59,7 @@ public final class SampleView extends AbstractView<SampleModel, BorderPane, Samp
         fp.getChildren().addAll(this.defaultCommand,
                                 this.uiCommand,
                                 this.pooledCommand);
+        node().setBottom(fp);
     }
 
     /**

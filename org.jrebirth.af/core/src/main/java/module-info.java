@@ -15,6 +15,9 @@ module org.jrebirth.af.core {
 
     requires io.github.classgraph;
 
+    uses org.jrebirth.af.api.module.ModuleStarter;
+    provides org.jrebirth.af.api.module.ModuleStarter with org.jrebirth.af.core.module.CoreStarter;
+    
     exports org.jrebirth.af.core.module;
     exports org.jrebirth.af.core.command.basic.stage;
     exports org.jrebirth.af.core.exception;
