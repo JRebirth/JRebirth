@@ -80,7 +80,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
      * {@inheritDoc}
      */
     @Override
-    public boolean hasBehavior(final Class<Behavior<?, ?>> behaviorClass) {
+    public boolean hasBehavior(final Class<? extends Behavior<?, ?>> behaviorClass) {
         return this.behaviors != null && this.behaviors.containsKey(behaviorClass);
     }
 
@@ -95,7 +95,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
 
         final B behavior = localFacade().globalFacade().behaviorFacade().retrieve(key);
 
-        addBehavior(behavior);
+        addBehavior(behaviorClass, behavior);
 
         return (C) this;
     }
@@ -113,7 +113,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
 
             final UniqueKey<? extends Behavior<?, ?>> key = Key.create(behaviorClass, optionalData, key());
 
-            addBehavior(localFacade().globalFacade().behaviorFacade().retrieve(key));
+            addBehavior(behaviorClass, localFacade().globalFacade().behaviorFacade().retrieve(key));
         }
         return (C) this;
     }
@@ -121,8 +121,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
-    private <B extends Behavior<?, ?>> void addBehavior(final B behavior) {
+    private <B extends Behavior<?, ?>> void addBehavior(final Class<? extends Behavior<?, ?>> behaviorClass, final B behavior) {
 
         if (this.behaviors == null) {
             this.behaviors = new MultiMap<>();
@@ -130,7 +129,7 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
 
         LOGGER.log(ADD_BEHAVIOR, behavior.getClass().getCanonicalName(), this.getClass().getCanonicalName());
 
-        this.behaviors.add((Class<Behavior<?, ?>>) behavior.getClass(), behavior);
+        this.behaviors.add(behaviorClass, behavior);
     }
 
     /**

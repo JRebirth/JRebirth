@@ -37,7 +37,7 @@ public interface BehavioredComponent<C extends Component<C>> extends Component<C
      *
      * @return true if the component has got this behavior
      */
-    boolean hasBehavior(final Class<Behavior<?, ?>> behaviorClass);
+    boolean hasBehavior(final Class<? extends Behavior<?, ?>> behaviorClass);
 
     /**
      * Add a behavior to the component by providing the {@link Behavior} class.
