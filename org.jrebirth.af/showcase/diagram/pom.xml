@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.jrebirth.af</groupId>
+		<artifactId>showcase</artifactId>
+		<version>8.7.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<groupId>org.jrebirth.af.showcase</groupId>
+	<artifactId>diagram</artifactId>
+	<packaging>jar</packaging>
+
+	<name>SC Diagram</name>
+	<description>Showcase application used to describe Undo Redo features</description>
+	<url>http://www.jrebirth.org/apps/Diagram.html</url>
+
+	<properties>
+
+		<jnlpFilename>Diagram-Showcase.jnlp</jnlpFilename>
+		<appClass>org.jrebirth.af.showcase.diagram.DiagramApplication</appClass>
+
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>webstart-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>undoredo</artifactId>
+			<version>8.7.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>processor</artifactId>
+			<version>8.7.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+</project>

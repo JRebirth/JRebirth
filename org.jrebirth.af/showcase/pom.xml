@@ -50,6 +50,7 @@
 	<modules>
 		<module>demo</module>
 		<module>analyzer</module>
+		<module>diagram</module>
 		<module>undoredo</module>
 		<module>fxml</module>
 		<module>wave</module>

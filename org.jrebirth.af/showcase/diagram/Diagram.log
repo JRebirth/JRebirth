@@ -1,0 +1,595 @@
+2019-06-18 22:52:12,580 DEBUG [JavaFX-Launcher] o.j.a.c.u.ClasspathUtility [ClasspathUtility.java:104] <jrebirth.util.useDefaultClassLoader>
+2019-06-18 22:52:12,798 INFO [JavaFX-Launcher] o.j.a.c.r.i.MessageBuilder [MessageBuilder.java:107] 1 Messages file found.
+2019-06-18 22:52:12,799 INFO [JavaFX-Launcher] o.j.a.c.r.i.MessageBuilder [MessageBuilder.java:130] Store ResourceBundle : Messages_rb 
+2019-06-18 22:52:12,804 DEBUG [JavaFX-Launcher] o.j.a.c.u.ClasspathUtility [ClasspathUtility.java:104] <jrebirth.util.useDefaultClassLoader>
+2019-06-18 22:52:12,904 INFO [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:105] 1 configuration file found.
+2019-06-18 22:52:12,904 INFO [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:122] Read configuration file : C:\JREBIRTH\CACHE\GIT\JRebirth\org.jrebirth.af\showcase\diagram\target\classes\jrebirth.properties 
+2019-06-18 22:52:12,905 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key closeRetryDelayOther with value= 1000
+2019-06-18 22:52:12,906 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key closeRetryDelayFirst with value= 4000
+2019-06-18 22:52:12,906 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key stylesFolder with value= styles
+2019-06-18 22:52:12,906 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key threadPoolSizeRatio with value= 2
+2019-06-18 22:52:12,906 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationSceneBgColor with value= FFF||1.0
+2019-06-18 22:52:12,907 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key fontsFolder with value= fonts
+2019-06-18 22:52:12,907 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key waveHandlerPrefix with value= DO_
+2019-06-18 22:52:12,907 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationSceneWidth with value= 800
+2019-06-18 22:52:12,907 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationVersion with value= 1.0
+2019-06-18 22:52:12,907 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationName with value= {} powered by JRebirth
+2019-06-18 22:52:12,907 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key trueTypeFontExtension with value= .ttf
+2019-06-18 22:52:12,907 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key followUpServiceTasks with value= false
+2019-06-18 22:52:12,908 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key developerMode with value= false
+2019-06-18 22:52:12,908 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key notAvailableImage with value= NotAvailableImage||png
+2019-06-18 22:52:12,908 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key defaultStyleSheet with value= default
+2019-06-18 22:52:12,908 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key logResolution with value= true
+2019-06-18 22:52:12,908 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key unprocessedWaveHandler with value= org.jrebirth.af.core.link.DefaultUnprocessedWaveHandler
+2019-06-18 22:52:12,908 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationSceneHeight with value= 600
+2019-06-18 22:52:12,908 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key autoRefreshResource with value= false
+2019-06-18 22:52:12,909 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key imagesFolder with value= images
+2019-06-18 22:52:12,909 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key componentFactory with value= org.jrebirth.af.core.component.factory.DefaultComponentFactory
+2019-06-18 22:52:12,926 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Attach JAT Uncaught Exception Handler
+2019-06-18 22:52:12,938 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>0|CREATE_APPLICATION|null|org.jrebirth.af.showcase.diagram.DiagramApplication|null|
+2019-06-18 22:52:12,938 TRACE [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:105] Create the JRebirth Thread Pool
+2019-06-18 22:52:12,941 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>1|CREATE_GLOBAL_FACADE|org.jrebirth.af.showcase.diagram.DiagramApplication|org.jrebirth.af.core.facade.GlobalFacadeBase|null|
+2019-06-18 22:52:12,943 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>2|CREATE_NOTIFIER|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.link.NotifierBase|null|
+2019-06-18 22:52:12,945 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>3|CREATE_COMMAND_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.CommandFacade|null|
+2019-06-18 22:52:12,945 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>4|CREATE_SERVICE_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.ServiceFacade|null|
+2019-06-18 22:52:12,946 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>5|CREATE_UI_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.UiFacade|null|
+2019-06-18 22:52:12,947 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>6|CREATE_BEHAVIOR_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.BehaviorFacade|null|
+2019-06-18 22:52:13,025 TRACE [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:223] Starting DiagramApplication
+2019-06-18 22:52:13,205 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:111] Style Sheet : Main.css not found into base folder: [styles]
+2019-06-18 22:52:13,206 ERROR [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:460] Impossible to load CSS: org.jrebirth.af.core.resource.style.StyleSheetItemImpl@20702574 using folder: [styles]/
+2019-06-18 22:52:13,206 WARN [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:534] No style sheet has been added to the scene, will link the default.css
+2019-06-18 22:52:13,208 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:111] Style Sheet : default/default.css not found into base folder: [styles]
+2019-06-18 22:52:13,208 ERROR [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:460] Impossible to load CSS: org.jrebirth.af.core.resource.style.StyleSheetItemImpl@6784703 using folder: [styles]/
+2019-06-18 22:52:13,320 TRACE [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:243] DiagramApplication has started successfully
+2019-06-18 22:52:13,652 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>7|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.ChainWaveCommand|null|
+2019-06-18 22:52:13,667 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Attach JIT Uncaught Exception Handler
+2019-06-18 22:52:13,668 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> ChainWaveCommand
+2019-06-18 22:52:13,668 TRACE [JIT] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] ChainWaveCommand consumes  CALL_COMMAND relatedClass=ChainWaveCommand (59204579-e419-4ccd-85ed-1e12ea76a758) 
+Data=>java.util.List<org.jrebirth.af.api.wave.Wave>=[CALL_COMMAND relatedClass=ShowModelCommand (b9823d9e-4dee-4f8b-ae66-3d749fc0a8ae) ]
+2019-06-18 22:52:13,669 TRACE [JIT] o.j.a.c.c.b.ChainWaveCommand [ChainWaveCommand.java:100] Unqueue wave N° 0 >> CALL_COMMAND relatedClass=ShowModelCommand (b9823d9e-4dee-4f8b-ae66-3d749fc0a8ae) 
+2019-06-18 22:52:13,675 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=ChainWaveCommand relatedClass=ShowModelCommand (b9823d9e-4dee-4f8b-ae66-3d749fc0a8ae) 
+2019-06-18 22:52:13,677 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>8|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+2019-06-18 22:52:13,683 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>9|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+2019-06-18 22:52:13,685 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>10|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+2019-06-18 22:52:13,686 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> ShowModelCommand
+2019-06-18 22:52:13,687 TRACE [JIT] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] ShowModelCommand consumes  CALL_COMMAND fromClass=ChainWaveCommand relatedClass=ShowModelCommand (b9823d9e-4dee-4f8b-ae66-3d749fc0a8ae) 
+2019-06-18 22:52:13,688 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=ShowModelCommand relatedClass=PrepareModelCommand (dd34229c-9480-4db0-bc45-7f47f2dc90f9) 
+2019-06-18 22:52:13,688 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>11|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+2019-06-18 22:52:13,690 TRACE [JIT] o.j.a.c.c.JRebirthThread [JRebirthThread.java:107] Runnable submitted to JTP with hashCode=JRebirthRunnable - PrepareModelCommand
+2019-06-18 22:52:13,690 TRACE [JTP Slot 1] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> PrepareModelCommand
+2019-06-18 22:52:13,691 TRACE [JTP Slot 1] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] PrepareModelCommand consumes  CALL_COMMAND fromClass=ShowModelCommand relatedClass=PrepareModelCommand (dd34229c-9480-4db0-bc45-7f47f2dc90f9) 
+2019-06-18 22:52:13,696 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>12|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|null|
+2019-06-18 22:52:13,701 TRACE [JTP Slot 1] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by DiagramModel
+2019-06-18 22:52:13,702 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by DiagramModel
+2019-06-18 22:52:13,702 TRACE [JTP Slot 1] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by DiagramModel
+2019-06-18 22:52:13,703 TRACE [JTP Slot 1] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by DiagramModel
+2019-06-18 22:52:13,703 TRACE [JTP Slot 1] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by DiagramModel
+2019-06-18 22:52:13,704 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>13|ACCESS_SERVICE|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:52:13,706 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>14|CREATE_SERVICE|org.jrebirth.af.core.facade.ServiceFacade|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:52:13,707 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by DiagramModel
+2019-06-18 22:52:13,707 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by DiagramModel
+2019-06-18 22:52:13,707 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by DiagramModel
+2019-06-18 22:52:13,714 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>15|CREATE_VIEW|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramView|null|
+2019-06-18 22:52:13,724 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>16|CREATE_CONTROLLER|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramView|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramController|null|
+2019-06-18 22:52:13,749 TRACE [JTP Slot 1] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] PrepareModelCommand handles  CALL_COMMAND fromClass=ShowModelCommand relatedClass=PrepareModelCommand (dd34229c-9480-4db0-bc45-7f47f2dc90f9) 
+2019-06-18 22:52:13,750 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=ShowModelCommand relatedClass=AttachModelCommand (5adaa89a-030a-4705-8b67-2225dfa63c6a) 
+2019-06-18 22:52:13,750 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>17|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+2019-06-18 22:52:13,770 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> AttachModelCommand
+2019-06-18 22:52:13,771 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] AttachModelCommand consumes  CALL_COMMAND fromClass=ShowModelCommand relatedClass=AttachModelCommand (5adaa89a-030a-4705-8b67-2225dfa63c6a) 
+2019-06-18 22:52:13,800 DEBUG [JavaFX Application Thread] o.j.a.s.d.u.d.DiagramView [DiagramView.java:99] Start the Sample View
+2019-06-18 22:52:13,800 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] AttachModelCommand handles  CALL_COMMAND fromClass=ShowModelCommand relatedClass=AttachModelCommand (5adaa89a-030a-4705-8b67-2225dfa63c6a) 
+2019-06-18 22:52:13,800 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] ShowModelCommand handles  CALL_COMMAND fromClass=ChainWaveCommand relatedClass=ShowModelCommand (b9823d9e-4dee-4f8b-ae66-3d749fc0a8ae) 
+2019-06-18 22:52:13,801 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] ChainWaveCommand handles  CALL_COMMAND relatedClass=ChainWaveCommand (59204579-e419-4ccd-85ed-1e12ea76a758) 
+Data=>java.util.List<org.jrebirth.af.api.wave.Wave>=[CALL_COMMAND fromClass=ChainWaveCommand relatedClass=ShowModelCommand (b9823d9e-4dee-4f8b-ae66-3d749fc0a8ae) ]
+2019-06-18 22:52:13,903 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>18|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+2019-06-18 22:52:13,904 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>19|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+2019-06-18 22:52:13,905 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>20|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+2019-06-18 22:52:13,905 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>21|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+2019-06-18 22:52:13,905 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>22|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.ChainWaveCommand|null|
+2019-06-18 22:52:13,905 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>23|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+2019-06-18 22:52:15,500 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>24|CREATE_WAVE|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:52:15,500 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (fd247018-e4ba-438f-b8c3-01c66c6f3483) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Regionclass java.lang.String=main
+2019-06-18 22:52:15,501 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>25|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|null|
+2019-06-18 22:52:15,502 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:52:15,502 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (fd247018-e4ba-438f-b8c3-01c66c6f3483) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Regionclass java.lang.String=main
+2019-06-18 22:52:15,503 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>26|CREATE_WAVE|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:52:15,503 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] CreateShapeCommand handles  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (fd247018-e4ba-438f-b8c3-01c66c6f3483) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Regionclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@66df904b
+2019-06-18 22:52:15,503 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (c86c6cd4-6f09-4993-941c-4ce29dc10d2b) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Regionclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@66df904b
+2019-06-18 22:52:15,504 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>27|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.undoredo.command.StackUpCommand|null|
+2019-06-18 22:52:15,504 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> StackUpCommand
+2019-06-18 22:52:15,504 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] StackUpCommand consumes  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (c86c6cd4-6f09-4993-941c-4ce29dc10d2b) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Regionclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@66df904b
+2019-06-18 22:52:15,505 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>28|ACCESS_SERVICE|org.jrebirth.af.undoredo.command.StackUpCommand|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:52:15,505 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:52:15,505 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  UNDEFINED (35e6fe77-9079-42d7-b491-6c456a995b29) 
+Data=>class java.lang.Boolean=false
+2019-06-18 22:52:15,508 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>29|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.region.RegionModel|null|
+2019-06-18 22:52:15,509 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>30|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.diagram.ui.region.RegionModel|null|
+2019-06-18 22:52:15,510 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by RegionModel
+2019-06-18 22:52:15,510 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by RegionModel
+2019-06-18 22:52:15,510 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by RegionModel
+2019-06-18 22:52:15,510 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by RegionModel
+2019-06-18 22:52:15,510 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by RegionModel
+2019-06-18 22:52:15,510 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by RegionModel
+2019-06-18 22:52:15,511 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by RegionModel
+2019-06-18 22:52:15,511 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by RegionModel
+2019-06-18 22:52:15,514 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>31|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|null|
+2019-06-18 22:52:15,515 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] CreateShapeCommand handles  UNDEFINED (35e6fe77-9079-42d7-b491-6c456a995b29) 
+Data=>class java.lang.Boolean=false
+2019-06-18 22:52:15,515 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] StackUpCommand handles  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (c86c6cd4-6f09-4993-941c-4ce29dc10d2b) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Regionclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@66df904b
+2019-06-18 22:52:16,204 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>32|CREATE_WAVE|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:52:16,205 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (199f3ff4-379e-4fff-b7f2-b7bf059be423) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=main
+2019-06-18 22:52:16,205 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>33|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|null|
+2019-06-18 22:52:16,206 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:52:16,206 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (199f3ff4-379e-4fff-b7f2-b7bf059be423) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=main
+2019-06-18 22:52:16,206 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>34|CREATE_WAVE|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:52:16,206 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] CreateShapeCommand handles  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (199f3ff4-379e-4fff-b7f2-b7bf059be423) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@722438c0
+2019-06-18 22:52:16,206 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (697835f1-1292-4c25-a312-0edb26783aa7) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@722438c0
+2019-06-18 22:52:16,207 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>35|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.undoredo.command.StackUpCommand|null|
+2019-06-18 22:52:16,208 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> StackUpCommand
+2019-06-18 22:52:16,208 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] StackUpCommand consumes  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (697835f1-1292-4c25-a312-0edb26783aa7) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@722438c0
+2019-06-18 22:52:16,208 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>36|ACCESS_SERVICE|org.jrebirth.af.undoredo.command.StackUpCommand|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:52:16,208 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:52:16,209 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  UNDEFINED (a60da16d-7697-4837-b8d2-f5ee9ef8d654) 
+Data=>class java.lang.Boolean=false
+2019-06-18 22:52:16,209 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>37|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.state.StateModel|null|
+2019-06-18 22:52:16,210 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>38|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.diagram.ui.state.StateModel|null|
+2019-06-18 22:52:16,211 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by StateModel
+2019-06-18 22:52:16,211 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by StateModel
+2019-06-18 22:52:16,211 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by StateModel
+2019-06-18 22:52:16,212 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by StateModel
+2019-06-18 22:52:16,212 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by StateModel
+2019-06-18 22:52:16,212 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by StateModel
+2019-06-18 22:52:16,212 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by StateModel
+2019-06-18 22:52:16,212 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by StateModel
+2019-06-18 22:52:16,214 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>39|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|null|
+2019-06-18 22:52:16,215 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] CreateShapeCommand handles  UNDEFINED (a60da16d-7697-4837-b8d2-f5ee9ef8d654) 
+Data=>class java.lang.Boolean=false
+2019-06-18 22:52:16,215 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] StackUpCommand handles  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (697835f1-1292-4c25-a312-0edb26783aa7) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@722438c0
+2019-06-18 22:52:18,772 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>40|CREATE_WAVE|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:52:18,772 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (5190b93f-a70f-477b-b7ed-7b5c3ef538e3) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=main
+2019-06-18 22:52:18,773 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>41|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|null|
+2019-06-18 22:52:18,774 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:52:18,774 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (5190b93f-a70f-477b-b7ed-7b5c3ef538e3) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=main
+2019-06-18 22:52:18,775 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>42|CREATE_WAVE|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:52:18,775 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] CreateShapeCommand handles  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (5190b93f-a70f-477b-b7ed-7b5c3ef538e3) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@535362cc
+2019-06-18 22:52:18,775 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (df3243bf-5560-4b32-9951-b9bd6354c50f) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@535362cc
+2019-06-18 22:52:18,776 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>43|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.undoredo.command.StackUpCommand|null|
+2019-06-18 22:52:18,777 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> StackUpCommand
+2019-06-18 22:52:18,777 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] StackUpCommand consumes  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (df3243bf-5560-4b32-9951-b9bd6354c50f) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@535362cc
+2019-06-18 22:52:18,777 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>44|ACCESS_SERVICE|org.jrebirth.af.undoredo.command.StackUpCommand|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:52:18,778 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:52:18,778 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  UNDEFINED (4590ff06-66d0-44ab-8d91-82465516de2c) 
+Data=>class java.lang.Boolean=false
+2019-06-18 22:52:18,778 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>45|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.state.StateModel|null|
+2019-06-18 22:52:18,778 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>46|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|null|
+2019-06-18 22:52:18,784 ERROR [JavaFX Application Thread] o.j.a.c.c.CommandRunnable [CommandRunnable.java:75] Unplanned failure while performing command :
+java.lang.IllegalArgumentException: Children: duplicate children added: parent = Pane@459081c4
+	at javafx.scene.Parent$2.onProposedChange(Parent.java:454) ~[jfxrt.jar:na]
+	at com.sun.javafx.collections.VetoableListDecorator.add(VetoableListDecorator.java:206) ~[jfxrt.jar:na]
+	at org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel.addShapeModel(DiagramModel.java:69) ~[classes/:na]
+	at org.jrebirth.af.showcase.diagram.command.CreateShapeCommand.redo(CreateShapeCommand.java:52) ~[classes/:na]
+	at org.jrebirth.af.undoredo.command.AbstractUndoableCommand.perform(AbstractUndoableCommand.java:53) ~[classes/:na]
+	at org.jrebirth.af.core.command.AbstractBaseCommand.innerRun(AbstractBaseCommand.java:205) [classes/:na]
+	at org.jrebirth.af.core.command.CommandRunnable.runInto(CommandRunnable.java:67) [classes/:na]
+	at org.jrebirth.af.core.concurrent.AbstractJrbRunnable.run(AbstractJrbRunnable.java:80) [classes/:na]
+	at org.jrebirth.af.core.concurrent.JRebirth.runIntoJAT(JRebirth.java:172) [classes/:na]
+	at org.jrebirth.af.core.concurrent.JRebirth.run(JRebirth.java:79) [classes/:na]
+	at org.jrebirth.af.core.command.AbstractBaseCommand.run(AbstractBaseCommand.java:190) [classes/:na]
+	at org.jrebirth.af.undoredo.service.UndoRedoService.stackUp(UndoRedoService.java:65) [classes/:na]
+	at org.jrebirth.af.undoredo.command.StackUpCommand.perform(StackUpCommand.java:49) [classes/:na]
+	at org.jrebirth.af.core.command.AbstractBaseCommand.innerRun(AbstractBaseCommand.java:205) [classes/:na]
+	at org.jrebirth.af.core.command.CommandRunnable.runInto(CommandRunnable.java:67) [classes/:na]
+	at org.jrebirth.af.core.concurrent.AbstractJrbRunnable.run(AbstractJrbRunnable.java:80) [classes/:na]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) [jfxrt.jar:na]
+	at java.security.AccessController.doPrivileged(Native Method) ~[na:1.8.0_112]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) [jfxrt.jar:na]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:na]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:na]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:na]
+	at java.lang.Thread.run(Thread.java:745) ~[na:1.8.0_112]
+2019-06-18 22:52:18,784 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] StackUpCommand handles  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (df3243bf-5560-4b32-9951-b9bd6354c50f) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@535362cc
+2019-06-18 22:52:19,828 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>47|CREATE_WAVE|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:52:19,829 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (45fe671f-9846-46bc-b0d6-fc1c2950b9d1) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=StateMachineclass java.lang.String=main
+2019-06-18 22:52:19,829 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>48|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|null|
+2019-06-18 22:52:19,829 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:52:19,830 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (45fe671f-9846-46bc-b0d6-fc1c2950b9d1) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=StateMachineclass java.lang.String=main
+2019-06-18 22:52:19,830 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>49|CREATE_WAVE|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:52:19,830 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] CreateShapeCommand handles  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (45fe671f-9846-46bc-b0d6-fc1c2950b9d1) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=StateMachineclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@20190682
+2019-06-18 22:52:19,830 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (50b46bda-db0c-400d-9108-28ea94b3ffcf) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=StateMachineclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@20190682
+2019-06-18 22:52:19,830 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>50|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.undoredo.command.StackUpCommand|null|
+2019-06-18 22:52:19,831 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> StackUpCommand
+2019-06-18 22:52:19,831 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] StackUpCommand consumes  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (50b46bda-db0c-400d-9108-28ea94b3ffcf) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=StateMachineclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@20190682
+2019-06-18 22:52:19,831 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>51|ACCESS_SERVICE|org.jrebirth.af.undoredo.command.StackUpCommand|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:52:19,832 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:52:19,832 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  UNDEFINED (7c687269-a269-40d3-b61f-f27c1fa33244) 
+Data=>class java.lang.Boolean=false
+2019-06-18 22:52:19,833 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>52|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.statemachine.StateMachineModel|null|
+2019-06-18 22:52:19,833 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>53|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.diagram.ui.statemachine.StateMachineModel|null|
+2019-06-18 22:52:19,834 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by StateMachineModel
+2019-06-18 22:52:19,834 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by StateMachineModel
+2019-06-18 22:52:19,834 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by StateMachineModel
+2019-06-18 22:52:19,834 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by StateMachineModel
+2019-06-18 22:52:19,834 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by StateMachineModel
+2019-06-18 22:52:19,834 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by StateMachineModel
+2019-06-18 22:52:19,834 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by StateMachineModel
+2019-06-18 22:52:19,835 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by StateMachineModel
+2019-06-18 22:52:19,837 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>54|NONE|org.jrebirth.af.core.facade.BehaviorFacade|org.jrebirth.af.component.behavior.swipable.impl.SwipableBehaviorImpl|null|
+2019-06-18 22:52:19,839 ERROR [JavaFX Application Thread] o.j.a.c.c.CommandRunnable [CommandRunnable.java:75] Unplanned failure while performing command :
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[na:1.8.0_112]
+	at org.jrebirth.af.core.component.behavior.AbstractBehavior.ready(AbstractBehavior.java:76) ~[classes/:na]
+	at org.jrebirth.af.core.component.basic.AbstractComponent.setup(AbstractComponent.java:526) ~[classes/:na]
+	at org.jrebirth.af.core.facade.AbstractFacade.retrieveMany(AbstractFacade.java:224) ~[classes/:na]
+	at org.jrebirth.af.core.facade.AbstractFacade.retrieve(AbstractFacade.java:186) ~[classes/:na]
+	at org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent.addBehavior(AbstractBehavioredComponent.java:96) ~[classes/:na]
+	at org.jrebirth.af.showcase.diagram.ui.statemachine.StateMachineModel.initSimpleView(StateMachineModel.java:50) ~[classes/:na]
+	at org.jrebirth.af.core.ui.simple.AbstractSimpleObjectModel.prepareView(AbstractSimpleObjectModel.java:63) ~[classes/:na]
+	at org.jrebirth.af.core.concurrent.JRebirth.run(JRebirth.java:98) [classes/:na]
+	at org.jrebirth.af.core.ui.AbstractBaseModel.ready(AbstractBaseModel.java:76) ~[classes/:na]
+	at org.jrebirth.af.core.component.basic.AbstractComponent.setup(AbstractComponent.java:526) ~[classes/:na]
+	at org.jrebirth.af.core.facade.AbstractFacade.retrieveMany(AbstractFacade.java:224) ~[classes/:na]
+	at org.jrebirth.af.core.facade.AbstractFacade.retrieve(AbstractFacade.java:186) ~[classes/:na]
+	at org.jrebirth.af.core.facade.AbstractFacade.retrieve(AbstractFacade.java:196) ~[classes/:na]
+	at org.jrebirth.af.core.link.AbstractReady.getModel(AbstractReady.java:239) ~[classes/:na]
+	at org.jrebirth.af.showcase.diagram.command.CreateShapeCommand.redo(CreateShapeCommand.java:41) ~[classes/:na]
+	at org.jrebirth.af.undoredo.command.AbstractUndoableCommand.perform(AbstractUndoableCommand.java:53) ~[classes/:na]
+	at org.jrebirth.af.core.command.AbstractBaseCommand.innerRun(AbstractBaseCommand.java:205) [classes/:na]
+	at org.jrebirth.af.core.command.CommandRunnable.runInto(CommandRunnable.java:67) [classes/:na]
+	at org.jrebirth.af.core.concurrent.AbstractJrbRunnable.run(AbstractJrbRunnable.java:80) [classes/:na]
+	at org.jrebirth.af.core.concurrent.JRebirth.runIntoJAT(JRebirth.java:172) [classes/:na]
+	at org.jrebirth.af.core.concurrent.JRebirth.run(JRebirth.java:79) [classes/:na]
+	at org.jrebirth.af.core.command.AbstractBaseCommand.run(AbstractBaseCommand.java:190) [classes/:na]
+	at org.jrebirth.af.undoredo.service.UndoRedoService.stackUp(UndoRedoService.java:65) [classes/:na]
+	at org.jrebirth.af.undoredo.command.StackUpCommand.perform(StackUpCommand.java:49) [classes/:na]
+	at org.jrebirth.af.core.command.AbstractBaseCommand.innerRun(AbstractBaseCommand.java:205) [classes/:na]
+	at org.jrebirth.af.core.command.CommandRunnable.runInto(CommandRunnable.java:67) [classes/:na]
+	at org.jrebirth.af.core.concurrent.AbstractJrbRunnable.run(AbstractJrbRunnable.java:80) [classes/:na]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) [jfxrt.jar:na]
+	at java.security.AccessController.doPrivileged(Native Method) ~[na:1.8.0_112]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) [jfxrt.jar:na]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:na]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:na]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:na]
+	at java.lang.Thread.run(Thread.java:745) ~[na:1.8.0_112]
+2019-06-18 22:52:19,839 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] StackUpCommand handles  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (50b46bda-db0c-400d-9108-28ea94b3ffcf) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=StateMachineclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@20190682
+2019-06-18 22:52:20,749 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>55|CREATE_WAVE|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:52:20,749 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (d3bb5b5e-469e-4a38-b012-d95ad11b2e6c) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Regionclass java.lang.String=main
+2019-06-18 22:52:20,749 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>56|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|null|
+2019-06-18 22:52:20,750 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:52:20,750 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (d3bb5b5e-469e-4a38-b012-d95ad11b2e6c) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Regionclass java.lang.String=main
+2019-06-18 22:52:20,750 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>57|CREATE_WAVE|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:52:20,751 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] CreateShapeCommand handles  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (d3bb5b5e-469e-4a38-b012-d95ad11b2e6c) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Regionclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@7444c5db
+2019-06-18 22:52:20,751 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (81c650f2-9cab-4976-b3fb-6ba4660bd8f7) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Regionclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@7444c5db
+2019-06-18 22:52:20,751 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>58|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.undoredo.command.StackUpCommand|null|
+2019-06-18 22:52:20,751 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> StackUpCommand
+2019-06-18 22:52:20,752 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] StackUpCommand consumes  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (81c650f2-9cab-4976-b3fb-6ba4660bd8f7) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Regionclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@7444c5db
+2019-06-18 22:52:20,752 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>59|ACCESS_SERVICE|org.jrebirth.af.undoredo.command.StackUpCommand|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:52:20,752 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:52:20,752 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  UNDEFINED (930f0471-7503-441f-8acc-f6ff4d158158) 
+Data=>class java.lang.Boolean=false
+2019-06-18 22:52:20,752 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>60|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.region.RegionModel|null|
+2019-06-18 22:52:20,752 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>61|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|null|
+2019-06-18 22:52:20,753 ERROR [JavaFX Application Thread] o.j.a.c.c.CommandRunnable [CommandRunnable.java:75] Unplanned failure while performing command :
+java.lang.IllegalArgumentException: Children: duplicate children added: parent = Pane@459081c4
+	at javafx.scene.Parent$2.onProposedChange(Parent.java:454) ~[jfxrt.jar:na]
+	at com.sun.javafx.collections.VetoableListDecorator.add(VetoableListDecorator.java:206) ~[jfxrt.jar:na]
+	at org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel.addShapeModel(DiagramModel.java:69) ~[classes/:na]
+	at org.jrebirth.af.showcase.diagram.command.CreateShapeCommand.redo(CreateShapeCommand.java:52) ~[classes/:na]
+	at org.jrebirth.af.undoredo.command.AbstractUndoableCommand.perform(AbstractUndoableCommand.java:53) ~[classes/:na]
+	at org.jrebirth.af.core.command.AbstractBaseCommand.innerRun(AbstractBaseCommand.java:205) [classes/:na]
+	at org.jrebirth.af.core.command.CommandRunnable.runInto(CommandRunnable.java:67) [classes/:na]
+	at org.jrebirth.af.core.concurrent.AbstractJrbRunnable.run(AbstractJrbRunnable.java:80) [classes/:na]
+	at org.jrebirth.af.core.concurrent.JRebirth.runIntoJAT(JRebirth.java:172) [classes/:na]
+	at org.jrebirth.af.core.concurrent.JRebirth.run(JRebirth.java:79) [classes/:na]
+	at org.jrebirth.af.core.command.AbstractBaseCommand.run(AbstractBaseCommand.java:190) [classes/:na]
+	at org.jrebirth.af.undoredo.service.UndoRedoService.stackUp(UndoRedoService.java:65) [classes/:na]
+	at org.jrebirth.af.undoredo.command.StackUpCommand.perform(StackUpCommand.java:49) [classes/:na]
+	at org.jrebirth.af.core.command.AbstractBaseCommand.innerRun(AbstractBaseCommand.java:205) [classes/:na]
+	at org.jrebirth.af.core.command.CommandRunnable.runInto(CommandRunnable.java:67) [classes/:na]
+	at org.jrebirth.af.core.concurrent.AbstractJrbRunnable.run(AbstractJrbRunnable.java:80) [classes/:na]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) [jfxrt.jar:na]
+	at java.security.AccessController.doPrivileged(Native Method) ~[na:1.8.0_112]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) [jfxrt.jar:na]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:na]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:na]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:na]
+	at java.lang.Thread.run(Thread.java:745) ~[na:1.8.0_112]
+2019-06-18 22:52:20,753 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] StackUpCommand handles  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (81c650f2-9cab-4976-b3fb-6ba4660bd8f7) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Regionclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@7444c5db
+2019-06-18 22:52:21,436 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>62|CREATE_WAVE|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:52:21,437 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (04923b53-6cf8-4ac6-b6a1-4d138d177b91) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=main
+2019-06-18 22:52:21,437 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>63|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|null|
+2019-06-18 22:52:21,438 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:52:21,438 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (04923b53-6cf8-4ac6-b6a1-4d138d177b91) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=main
+2019-06-18 22:52:21,438 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>64|CREATE_WAVE|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:52:21,438 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] CreateShapeCommand handles  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (04923b53-6cf8-4ac6-b6a1-4d138d177b91) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@298c6acb
+2019-06-18 22:52:21,438 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (846de8d8-06cb-456b-9763-b7f435e86114) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@298c6acb
+2019-06-18 22:52:21,439 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>65|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.undoredo.command.StackUpCommand|null|
+2019-06-18 22:52:21,439 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> StackUpCommand
+2019-06-18 22:52:21,439 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] StackUpCommand consumes  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (846de8d8-06cb-456b-9763-b7f435e86114) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@298c6acb
+2019-06-18 22:52:21,439 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>66|ACCESS_SERVICE|org.jrebirth.af.undoredo.command.StackUpCommand|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:52:21,439 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:52:21,440 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  UNDEFINED (6f8d2840-2b20-475e-9edd-6fa331f61e80) 
+Data=>class java.lang.Boolean=false
+2019-06-18 22:52:21,440 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>67|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.state.StateModel|null|
+2019-06-18 22:52:21,440 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>68|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|null|
+2019-06-18 22:52:21,440 ERROR [JavaFX Application Thread] o.j.a.c.c.CommandRunnable [CommandRunnable.java:75] Unplanned failure while performing command :
+java.lang.IllegalArgumentException: Children: duplicate children added: parent = Pane@459081c4
+	at javafx.scene.Parent$2.onProposedChange(Parent.java:454) ~[jfxrt.jar:na]
+	at com.sun.javafx.collections.VetoableListDecorator.add(VetoableListDecorator.java:206) ~[jfxrt.jar:na]
+	at org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel.addShapeModel(DiagramModel.java:69) ~[classes/:na]
+	at org.jrebirth.af.showcase.diagram.command.CreateShapeCommand.redo(CreateShapeCommand.java:52) ~[classes/:na]
+	at org.jrebirth.af.undoredo.command.AbstractUndoableCommand.perform(AbstractUndoableCommand.java:53) ~[classes/:na]
+	at org.jrebirth.af.core.command.AbstractBaseCommand.innerRun(AbstractBaseCommand.java:205) [classes/:na]
+	at org.jrebirth.af.core.command.CommandRunnable.runInto(CommandRunnable.java:67) [classes/:na]
+	at org.jrebirth.af.core.concurrent.AbstractJrbRunnable.run(AbstractJrbRunnable.java:80) [classes/:na]
+	at org.jrebirth.af.core.concurrent.JRebirth.runIntoJAT(JRebirth.java:172) [classes/:na]
+	at org.jrebirth.af.core.concurrent.JRebirth.run(JRebirth.java:79) [classes/:na]
+	at org.jrebirth.af.core.command.AbstractBaseCommand.run(AbstractBaseCommand.java:190) [classes/:na]
+	at org.jrebirth.af.undoredo.service.UndoRedoService.stackUp(UndoRedoService.java:65) [classes/:na]
+	at org.jrebirth.af.undoredo.command.StackUpCommand.perform(StackUpCommand.java:49) [classes/:na]
+	at org.jrebirth.af.core.command.AbstractBaseCommand.innerRun(AbstractBaseCommand.java:205) [classes/:na]
+	at org.jrebirth.af.core.command.CommandRunnable.runInto(CommandRunnable.java:67) [classes/:na]
+	at org.jrebirth.af.core.concurrent.AbstractJrbRunnable.run(AbstractJrbRunnable.java:80) [classes/:na]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) [jfxrt.jar:na]
+	at java.security.AccessController.doPrivileged(Native Method) ~[na:1.8.0_112]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) [jfxrt.jar:na]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:na]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:na]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:na]
+	at java.lang.Thread.run(Thread.java:745) ~[na:1.8.0_112]
+2019-06-18 22:52:21,440 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] StackUpCommand handles  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (846de8d8-06cb-456b-9763-b7f435e86114) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@298c6acb
+2019-06-18 22:52:30,486 TRACE [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:288] Stopping DiagramApplication" 
+2019-06-18 22:52:34,487 TRACE [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:318] DiagramApplication has stopped successfully
+2019-06-18 22:53:20,232 DEBUG [JavaFX-Launcher] o.j.a.c.u.ClasspathUtility [ClasspathUtility.java:104] <jrebirth.util.useDefaultClassLoader>
+2019-06-18 22:53:20,465 INFO [JavaFX-Launcher] o.j.a.c.r.i.MessageBuilder [MessageBuilder.java:107] 1 Messages file found.
+2019-06-18 22:53:20,466 INFO [JavaFX-Launcher] o.j.a.c.r.i.MessageBuilder [MessageBuilder.java:130] Store ResourceBundle : Messages_rb 
+2019-06-18 22:53:20,471 DEBUG [JavaFX-Launcher] o.j.a.c.u.ClasspathUtility [ClasspathUtility.java:104] <jrebirth.util.useDefaultClassLoader>
+2019-06-18 22:53:20,580 INFO [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:105] 1 configuration file found.
+2019-06-18 22:53:20,581 INFO [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:122] Read configuration file : C:\JREBIRTH\CACHE\GIT\JRebirth\org.jrebirth.af\showcase\diagram\target\classes\jrebirth.properties 
+2019-06-18 22:53:20,581 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key closeRetryDelayOther with value= 1000
+2019-06-18 22:53:20,582 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key closeRetryDelayFirst with value= 4000
+2019-06-18 22:53:20,583 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key stylesFolder with value= styles
+2019-06-18 22:53:20,583 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key threadPoolSizeRatio with value= 2
+2019-06-18 22:53:20,583 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationSceneBgColor with value= FFF||1.0
+2019-06-18 22:53:20,583 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key fontsFolder with value= fonts
+2019-06-18 22:53:20,584 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key waveHandlerPrefix with value= DO_
+2019-06-18 22:53:20,584 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationSceneWidth with value= 800
+2019-06-18 22:53:20,584 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationVersion with value= 1.0
+2019-06-18 22:53:20,584 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationName with value= {} powered by JRebirth
+2019-06-18 22:53:20,584 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key trueTypeFontExtension with value= .ttf
+2019-06-18 22:53:20,581 DEBUG [JavaFX-Launcher] o.j.a.c.u.ClasspathUtility [ClasspathUtility.java:104] <jrebirth.util.useDefaultClassLoader>
+2019-06-18 22:53:20,585 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key followUpServiceTasks with value= false
+2019-06-18 22:53:20,585 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key developerMode with value= false
+2019-06-18 22:53:20,585 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key notAvailableImage with value= NotAvailableImage||png
+2019-06-18 22:53:20,585 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key defaultStyleSheet with value= default
+2019-06-18 22:53:20,585 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key logResolution with value= true
+2019-06-18 22:53:20,586 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key unprocessedWaveHandler with value= org.jrebirth.af.core.link.DefaultUnprocessedWaveHandler
+2019-06-18 22:53:20,586 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationSceneHeight with value= 600
+2019-06-18 22:53:20,586 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key autoRefreshResource with value= false
+2019-06-18 22:53:20,586 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key imagesFolder with value= images
+2019-06-18 22:53:20,586 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key componentFactory with value= org.jrebirth.af.core.component.factory.DefaultComponentFactory
+2019-06-18 22:53:20,599 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Attach JAT Uncaught Exception Handler
+2019-06-18 22:53:20,613 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>0|CREATE_APPLICATION|null|org.jrebirth.af.showcase.diagram.DiagramApplication|null|
+2019-06-18 22:53:20,614 TRACE [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:105] Create the JRebirth Thread Pool
+2019-06-18 22:53:20,617 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>1|CREATE_GLOBAL_FACADE|org.jrebirth.af.showcase.diagram.DiagramApplication|org.jrebirth.af.core.facade.GlobalFacadeBase|null|
+2019-06-18 22:53:20,620 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>2|CREATE_NOTIFIER|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.link.NotifierBase|null|
+2019-06-18 22:53:20,623 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>3|CREATE_COMMAND_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.CommandFacade|null|
+2019-06-18 22:53:20,624 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>4|CREATE_SERVICE_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.ServiceFacade|null|
+2019-06-18 22:53:20,625 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>5|CREATE_UI_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.UiFacade|null|
+2019-06-18 22:53:20,626 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>6|CREATE_BEHAVIOR_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.BehaviorFacade|null|
+2019-06-18 22:53:20,699 TRACE [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:223] Starting DiagramApplication
+2019-06-18 22:53:20,802 INFO [JavaFX-Launcher] o.j.a.c.r.i.MessageBuilder [MessageBuilder.java:107] 1 Messages file found.
+2019-06-18 22:53:20,802 INFO [JavaFX-Launcher] o.j.a.c.r.i.MessageBuilder [MessageBuilder.java:130] Store ResourceBundle : Messages_rb 
+2019-06-18 22:53:20,807 DEBUG [JavaFX-Launcher] o.j.a.c.u.ClasspathUtility [ClasspathUtility.java:104] <jrebirth.util.useDefaultClassLoader>
+2019-06-18 22:53:20,866 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:111] Style Sheet : Main.css not found into base folder: [styles]
+2019-06-18 22:53:20,866 ERROR [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:460] Impossible to load CSS: org.jrebirth.af.core.resource.style.StyleSheetItemImpl@20702574 using folder: [styles]/
+2019-06-18 22:53:20,867 WARN [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:534] No style sheet has been added to the scene, will link the default.css
+2019-06-18 22:53:20,868 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:111] Style Sheet : default/default.css not found into base folder: [styles]
+2019-06-18 22:53:20,868 ERROR [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:460] Impossible to load CSS: org.jrebirth.af.core.resource.style.StyleSheetItemImpl@6784703 using folder: [styles]/
+2019-06-18 22:53:20,922 INFO [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:105] 1 configuration file found.
+2019-06-18 22:53:20,923 INFO [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:122] Read configuration file : C:\JREBIRTH\CACHE\GIT\JRebirth\org.jrebirth.af\showcase\diagram\target\classes\jrebirth.properties 
+2019-06-18 22:53:20,924 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key closeRetryDelayOther with value= 1000
+2019-06-18 22:53:20,925 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key closeRetryDelayFirst with value= 4000
+2019-06-18 22:53:20,925 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key stylesFolder with value= styles
+2019-06-18 22:53:20,926 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key threadPoolSizeRatio with value= 2
+2019-06-18 22:53:20,926 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationSceneBgColor with value= FFF||1.0
+2019-06-18 22:53:20,927 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key fontsFolder with value= fonts
+2019-06-18 22:53:20,927 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key waveHandlerPrefix with value= DO_
+2019-06-18 22:53:20,927 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationSceneWidth with value= 800
+2019-06-18 22:53:20,928 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationVersion with value= 1.0
+2019-06-18 22:53:20,928 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationName with value= {} powered by JRebirth
+2019-06-18 22:53:20,928 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key trueTypeFontExtension with value= .ttf
+2019-06-18 22:53:20,928 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key followUpServiceTasks with value= false
+2019-06-18 22:53:20,929 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key developerMode with value= false
+2019-06-18 22:53:20,929 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key notAvailableImage with value= NotAvailableImage||png
+2019-06-18 22:53:20,929 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key defaultStyleSheet with value= default
+2019-06-18 22:53:20,930 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key logResolution with value= true
+2019-06-18 22:53:20,930 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key unprocessedWaveHandler with value= org.jrebirth.af.core.link.DefaultUnprocessedWaveHandler
+2019-06-18 22:53:20,930 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key applicationSceneHeight with value= 600
+2019-06-18 22:53:20,931 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key autoRefreshResource with value= false
+2019-06-18 22:53:20,931 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key imagesFolder with value= images
+2019-06-18 22:53:20,931 TRACE [JavaFX-Launcher] o.j.a.c.r.p.ParameterBuilder [ParameterBuilder.java:133] Store key componentFactory with value= org.jrebirth.af.core.component.factory.DefaultComponentFactory
+2019-06-18 22:53:20,946 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Attach JAT Uncaught Exception Handler
+2019-06-18 22:53:20,965 TRACE [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:243] DiagramApplication has started successfully
+2019-06-18 22:53:20,965 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>0|CREATE_APPLICATION|null|org.jrebirth.af.showcase.diagram.DiagramApplication|null|
+2019-06-18 22:53:20,965 TRACE [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:105] Create the JRebirth Thread Pool
+2019-06-18 22:53:20,970 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>1|CREATE_GLOBAL_FACADE|org.jrebirth.af.showcase.diagram.DiagramApplication|org.jrebirth.af.core.facade.GlobalFacadeBase|null|
+2019-06-18 22:53:20,974 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>2|CREATE_NOTIFIER|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.link.NotifierBase|null|
+2019-06-18 22:53:20,979 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>3|CREATE_COMMAND_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.CommandFacade|null|
+2019-06-18 22:53:20,980 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>4|CREATE_SERVICE_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.ServiceFacade|null|
+2019-06-18 22:53:20,982 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>5|CREATE_UI_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.UiFacade|null|
+2019-06-18 22:53:20,983 INFO [JavaFX-Launcher] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>6|CREATE_BEHAVIOR_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.BehaviorFacade|null|
+2019-06-18 22:53:21,067 TRACE [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:223] Starting DiagramApplication
+2019-06-18 22:53:21,221 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:111] Style Sheet : Main.css not found into base folder: [styles]
+2019-06-18 22:53:21,221 ERROR [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:460] Impossible to load CSS: org.jrebirth.af.core.resource.style.StyleSheetItemImpl@20702574 using folder: [styles]/
+2019-06-18 22:53:21,222 WARN [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:534] No style sheet has been added to the scene, will link the default.css
+2019-06-18 22:53:21,223 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:111] Style Sheet : default/default.css not found into base folder: [styles]
+2019-06-18 22:53:21,223 ERROR [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:460] Impossible to load CSS: org.jrebirth.af.core.resource.style.StyleSheetItemImpl@6784703 using folder: [styles]/
+2019-06-18 22:53:21,329 TRACE [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:243] DiagramApplication has started successfully
+2019-06-18 22:53:21,358 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>7|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.ChainWaveCommand|null|
+2019-06-18 22:53:21,386 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Attach JIT Uncaught Exception Handler
+2019-06-18 22:53:21,387 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> ChainWaveCommand
+2019-06-18 22:53:21,388 TRACE [JIT] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] ChainWaveCommand consumes  CALL_COMMAND relatedClass=ChainWaveCommand (476e66b9-9602-479c-94a7-f5a01ef135dd) 
+Data=>java.util.List<org.jrebirth.af.api.wave.Wave>=[CALL_COMMAND relatedClass=ShowModelCommand (8aa37ebc-6164-4590-a6f4-d2ed2b69f49a) ]
+2019-06-18 22:53:21,388 TRACE [JIT] o.j.a.c.c.b.ChainWaveCommand [ChainWaveCommand.java:100] Unqueue wave N° 0 >> CALL_COMMAND relatedClass=ShowModelCommand (8aa37ebc-6164-4590-a6f4-d2ed2b69f49a) 
+2019-06-18 22:53:21,397 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=ChainWaveCommand relatedClass=ShowModelCommand (8aa37ebc-6164-4590-a6f4-d2ed2b69f49a) 
+2019-06-18 22:53:21,400 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>8|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+2019-06-18 22:53:21,406 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>9|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+2019-06-18 22:53:21,408 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>10|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+2019-06-18 22:53:21,410 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> ShowModelCommand
+2019-06-18 22:53:21,411 TRACE [JIT] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] ShowModelCommand consumes  CALL_COMMAND fromClass=ChainWaveCommand relatedClass=ShowModelCommand (8aa37ebc-6164-4590-a6f4-d2ed2b69f49a) 
+2019-06-18 22:53:21,413 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=ShowModelCommand relatedClass=PrepareModelCommand (305fcd3a-5384-4b52-b0dc-6b0e982532e5) 
+2019-06-18 22:53:21,414 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>11|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+2019-06-18 22:53:21,416 TRACE [JIT] o.j.a.c.c.JRebirthThread [JRebirthThread.java:107] Runnable submitted to JTP with hashCode=JRebirthRunnable - PrepareModelCommand
+2019-06-18 22:53:21,416 TRACE [JTP Slot 1] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> PrepareModelCommand
+2019-06-18 22:53:21,417 TRACE [JTP Slot 1] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] PrepareModelCommand consumes  CALL_COMMAND fromClass=ShowModelCommand relatedClass=PrepareModelCommand (305fcd3a-5384-4b52-b0dc-6b0e982532e5) 
+2019-06-18 22:53:21,423 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>12|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|null|
+2019-06-18 22:53:21,430 TRACE [JTP Slot 1] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by DiagramModel
+2019-06-18 22:53:21,432 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by DiagramModel
+2019-06-18 22:53:21,432 TRACE [JTP Slot 1] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by DiagramModel
+2019-06-18 22:53:21,433 TRACE [JTP Slot 1] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by DiagramModel
+2019-06-18 22:53:21,434 TRACE [JTP Slot 1] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by DiagramModel
+2019-06-18 22:53:21,435 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>13|ACCESS_SERVICE|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:53:21,440 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by DiagramModel
+2019-06-18 22:53:21,440 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>14|CREATE_SERVICE|org.jrebirth.af.core.facade.ServiceFacade|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:53:21,440 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by DiagramModel
+2019-06-18 22:53:21,442 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by DiagramModel
+2019-06-18 22:53:21,451 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>15|CREATE_VIEW|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramView|null|
+2019-06-18 22:53:21,467 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>16|CREATE_CONTROLLER|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramView|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramController|null|
+2019-06-18 22:53:21,496 TRACE [JTP Slot 1] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] PrepareModelCommand handles  CALL_COMMAND fromClass=ShowModelCommand relatedClass=PrepareModelCommand (305fcd3a-5384-4b52-b0dc-6b0e982532e5) 
+2019-06-18 22:53:21,499 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=ShowModelCommand relatedClass=AttachModelCommand (f76062c9-0190-465c-87c3-15d6a31889e0) 
+2019-06-18 22:53:21,499 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>17|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+2019-06-18 22:53:21,512 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> AttachModelCommand
+2019-06-18 22:53:21,513 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] AttachModelCommand consumes  CALL_COMMAND fromClass=ShowModelCommand relatedClass=AttachModelCommand (f76062c9-0190-465c-87c3-15d6a31889e0) 
+2019-06-18 22:53:21,544 DEBUG [JavaFX Application Thread] o.j.a.s.d.u.d.DiagramView [DiagramView.java:99] Start the Sample View
+2019-06-18 22:53:21,544 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] AttachModelCommand handles  CALL_COMMAND fromClass=ShowModelCommand relatedClass=AttachModelCommand (f76062c9-0190-465c-87c3-15d6a31889e0) 
+2019-06-18 22:53:21,544 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] ShowModelCommand handles  CALL_COMMAND fromClass=ChainWaveCommand relatedClass=ShowModelCommand (8aa37ebc-6164-4590-a6f4-d2ed2b69f49a) 
+2019-06-18 22:53:21,545 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] ChainWaveCommand handles  CALL_COMMAND relatedClass=ChainWaveCommand (476e66b9-9602-479c-94a7-f5a01ef135dd) 
+Data=>java.util.List<org.jrebirth.af.api.wave.Wave>=[CALL_COMMAND fromClass=ChainWaveCommand relatedClass=ShowModelCommand (8aa37ebc-6164-4590-a6f4-d2ed2b69f49a) ]
+2019-06-18 22:53:21,649 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>18|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.ChainWaveCommand|null|
+2019-06-18 22:53:21,650 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>19|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+2019-06-18 22:53:21,650 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>20|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+2019-06-18 22:53:21,650 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>21|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+2019-06-18 22:53:21,651 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>22|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+2019-06-18 22:53:21,651 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>23|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+2019-06-18 22:53:21,751 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>7|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.ChainWaveCommand|null|
+2019-06-18 22:53:21,767 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Attach JIT Uncaught Exception Handler
+2019-06-18 22:53:21,767 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> ChainWaveCommand
+2019-06-18 22:53:21,768 TRACE [JIT] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] ChainWaveCommand consumes  CALL_COMMAND relatedClass=ChainWaveCommand (f51e1f50-8514-42bf-9d9f-c50ea6d55c51) 
+Data=>java.util.List<org.jrebirth.af.api.wave.Wave>=[CALL_COMMAND relatedClass=ShowModelCommand (5a8fe6e7-dd19-4583-af22-c020f4ba6a08) ]
+2019-06-18 22:53:21,768 TRACE [JIT] o.j.a.c.c.b.ChainWaveCommand [ChainWaveCommand.java:100] Unqueue wave N° 0 >> CALL_COMMAND relatedClass=ShowModelCommand (5a8fe6e7-dd19-4583-af22-c020f4ba6a08) 
+2019-06-18 22:53:21,773 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=ChainWaveCommand relatedClass=ShowModelCommand (5a8fe6e7-dd19-4583-af22-c020f4ba6a08) 
+2019-06-18 22:53:21,775 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>8|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+2019-06-18 22:53:21,779 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>9|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+2019-06-18 22:53:21,781 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>10|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+2019-06-18 22:53:21,782 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> ShowModelCommand
+2019-06-18 22:53:21,783 TRACE [JIT] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] ShowModelCommand consumes  CALL_COMMAND fromClass=ChainWaveCommand relatedClass=ShowModelCommand (5a8fe6e7-dd19-4583-af22-c020f4ba6a08) 
+2019-06-18 22:53:21,784 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=ShowModelCommand relatedClass=PrepareModelCommand (983001d8-d688-4ad5-ba16-32c3c4ae5b8b) 
+2019-06-18 22:53:21,784 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>11|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+2019-06-18 22:53:21,786 TRACE [JIT] o.j.a.c.c.JRebirthThread [JRebirthThread.java:107] Runnable submitted to JTP with hashCode=JRebirthRunnable - PrepareModelCommand
+2019-06-18 22:53:21,786 TRACE [JTP Slot 1] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> PrepareModelCommand
+2019-06-18 22:53:21,786 TRACE [JTP Slot 1] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] PrepareModelCommand consumes  CALL_COMMAND fromClass=ShowModelCommand relatedClass=PrepareModelCommand (983001d8-d688-4ad5-ba16-32c3c4ae5b8b) 
+2019-06-18 22:53:21,791 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>12|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|null|
+2019-06-18 22:53:21,795 TRACE [JTP Slot 1] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by DiagramModel
+2019-06-18 22:53:21,797 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by DiagramModel
+2019-06-18 22:53:21,797 TRACE [JTP Slot 1] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by DiagramModel
+2019-06-18 22:53:21,798 TRACE [JTP Slot 1] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by DiagramModel
+2019-06-18 22:53:21,798 TRACE [JTP Slot 1] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by DiagramModel
+2019-06-18 22:53:21,798 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>13|ACCESS_SERVICE|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:53:21,800 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>14|CREATE_SERVICE|org.jrebirth.af.core.facade.ServiceFacade|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:53:21,801 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by DiagramModel
+2019-06-18 22:53:21,802 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by DiagramModel
+2019-06-18 22:53:21,802 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by DiagramModel
+2019-06-18 22:53:21,807 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>15|CREATE_VIEW|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramView|null|
+2019-06-18 22:53:21,814 INFO [JTP Slot 1] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>16|CREATE_CONTROLLER|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramView|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramController|null|
+2019-06-18 22:53:21,832 TRACE [JTP Slot 1] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] PrepareModelCommand handles  CALL_COMMAND fromClass=ShowModelCommand relatedClass=PrepareModelCommand (983001d8-d688-4ad5-ba16-32c3c4ae5b8b) 
+2019-06-18 22:53:21,833 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=ShowModelCommand relatedClass=AttachModelCommand (cc657239-17b6-4f04-bef9-a57fcb3f5ee0) 
+2019-06-18 22:53:21,833 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>17|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+2019-06-18 22:53:21,847 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> AttachModelCommand
+2019-06-18 22:53:21,847 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] AttachModelCommand consumes  CALL_COMMAND fromClass=ShowModelCommand relatedClass=AttachModelCommand (cc657239-17b6-4f04-bef9-a57fcb3f5ee0) 
+2019-06-18 22:53:21,872 DEBUG [JavaFX Application Thread] o.j.a.s.d.u.d.DiagramView [DiagramView.java:99] Start the Sample View
+2019-06-18 22:53:21,872 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] AttachModelCommand handles  CALL_COMMAND fromClass=ShowModelCommand relatedClass=AttachModelCommand (cc657239-17b6-4f04-bef9-a57fcb3f5ee0) 
+2019-06-18 22:53:21,872 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] ShowModelCommand handles  CALL_COMMAND fromClass=ChainWaveCommand relatedClass=ShowModelCommand (5a8fe6e7-dd19-4583-af22-c020f4ba6a08) 
+2019-06-18 22:53:21,872 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] ChainWaveCommand handles  CALL_COMMAND relatedClass=ChainWaveCommand (f51e1f50-8514-42bf-9d9f-c50ea6d55c51) 
+Data=>java.util.List<org.jrebirth.af.api.wave.Wave>=[CALL_COMMAND fromClass=ChainWaveCommand relatedClass=ShowModelCommand (5a8fe6e7-dd19-4583-af22-c020f4ba6a08) ]
+2019-06-18 22:53:21,953 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>18|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+2019-06-18 22:53:21,954 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>19|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+2019-06-18 22:53:21,954 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>20|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+2019-06-18 22:53:21,954 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>21|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+2019-06-18 22:53:21,954 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>22|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.ChainWaveCommand|null|
+2019-06-18 22:53:21,955 INFO [Finalizer] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>23|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+2019-06-18 22:53:23,397 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>24|CREATE_WAVE|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:53:23,397 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (f21d3906-cbdb-405c-9b89-a0b3e1780ade) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=main
+2019-06-18 22:53:23,398 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>25|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|null|
+2019-06-18 22:53:23,399 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:53:23,399 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (f21d3906-cbdb-405c-9b89-a0b3e1780ade) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=main
+2019-06-18 22:53:23,400 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>26|CREATE_WAVE|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.core.wave.WaveBase|null|
+2019-06-18 22:53:23,400 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] CreateShapeCommand handles  CALL_COMMAND fromClass=DiagramModel relatedClass=CreateShapeCommand (f21d3906-cbdb-405c-9b89-a0b3e1780ade) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@37112228
+2019-06-18 22:53:23,401 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Send Wave CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (6240b3b0-8fd6-4e38-abb2-54ca1d56b5c0) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@37112228
+2019-06-18 22:53:23,401 INFO [JIT] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>27|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.undoredo.command.StackUpCommand|null|
+2019-06-18 22:53:23,403 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> StackUpCommand
+2019-06-18 22:53:23,403 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] StackUpCommand consumes  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (6240b3b0-8fd6-4e38-abb2-54ca1d56b5c0) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@37112228
+2019-06-18 22:53:23,404 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>28|ACCESS_SERVICE|org.jrebirth.af.undoredo.command.StackUpCommand|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+2019-06-18 22:53:23,404 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> CreateShapeCommand
+2019-06-18 22:53:23,404 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:284] CreateShapeCommand consumes  UNDEFINED (546c7a41-7d8a-4f83-a9e7-3446ab89ab84) 
+Data=>class java.lang.Boolean=false
+2019-06-18 22:53:23,408 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>29|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.state.StateModel|null|
+2019-06-18 22:53:23,409 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>30|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.diagram.ui.state.StateModel|null|
+2019-06-18 22:53:23,410 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by StateModel
+2019-06-18 22:53:23,411 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by StateModel
+2019-06-18 22:53:23,411 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by StateModel
+2019-06-18 22:53:23,411 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by StateModel
+2019-06-18 22:53:23,411 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_SHOW_VIEW  by StateModel
+2019-06-18 22:53:23,411 TRACE [JavaFX Application Thread] o.j.a.c.c.b.AbstractComponent [AbstractComponent.java:161] Listen DO_HIDE_VIEW  by StateModel
+2019-06-18 22:53:23,411 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_SHOW_VIEW  by StateModel
+2019-06-18 22:53:23,412 TRACE [JIT] o.j.a.c.c.AbstractJrbRunnable [AbstractJrbRunnable.java:77] Run> Listen DO_HIDE_VIEW  by StateModel
+2019-06-18 22:53:23,415 INFO [JavaFX Application Thread] o.j.a.c.f.GlobalFacadeBase [GlobalFacadeBase.java:149] JREvent>>31|ACCESS_MODEL|org.jrebirth.af.showcase.diagram.command.CreateShapeCommand|org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel|null|
+2019-06-18 22:53:23,416 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] CreateShapeCommand handles  UNDEFINED (546c7a41-7d8a-4f83-a9e7-3446ab89ab84) 
+Data=>class java.lang.Boolean=false
+2019-06-18 22:53:23,417 TRACE [JavaFX Application Thread] o.j.a.c.c.AbstractBaseCommand [AbstractBaseCommand.java:296] StackUpCommand handles  CALL_COMMAND fromClass=CreateShapeCommand relatedClass=StackUpCommand (6240b3b0-8fd6-4e38-abb2-54ca1d56b5c0) 
+Data=>class org.jrebirth.af.showcase.diagram.bean.ShapeType=Stateclass java.lang.String=maininterface org.jrebirth.af.undoredo.command.Undoable=org.jrebirth.af.showcase.diagram.command.CreateShapeCommand@37112228
+2019-06-18 22:53:33,687 TRACE [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:288] Stopping DiagramApplication" 
+2019-06-18 22:53:37,689 TRACE [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:318] DiagramApplication has stopped successfully
+2019-06-18 22:54:42,991 TRACE [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:288] Stopping DiagramApplication" 
+2019-06-18 22:54:46,991 TRACE [JavaFX Application Thread] o.j.a.c.a.AbstractApplication [AbstractApplication.java:318] DiagramApplication has stopped successfully
