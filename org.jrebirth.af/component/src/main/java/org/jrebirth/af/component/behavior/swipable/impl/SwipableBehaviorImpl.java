@@ -23,7 +23,7 @@ public class SwipableBehaviorImpl extends AbstractModelBehavior<Swipable> implem
 
     }
 
-    public void onSwipe(final SwipeEvent event) {
+    private void onSwipe(final SwipeEvent event) {
 
         if (event.getTouchCount() == data().touchCount()) {
             System.err.println("SWIPEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE TWICE");
