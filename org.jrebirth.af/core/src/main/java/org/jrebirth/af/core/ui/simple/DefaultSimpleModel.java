@@ -86,14 +86,6 @@ public class DefaultSimpleModel<N extends Node> extends AbstractSimpleModel<N> {
      * {@inheritDoc}
      */
     @Override
-    protected void bindInternal() {
-        // Nothing to do yet
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void bind() {
         // Nothing to do yet
     }
