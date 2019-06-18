@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -77,20 +78,32 @@
 					<version>3.0.2</version>
 
 					<configuration>
-						<archive>
-							<manifestEntries>
-								<JavaFX-Version>2.0</JavaFX-Version>
-								<Main-Class>${appClass}</Main-Class>
-								<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
-							</manifestEntries>
-
-							<manifest>
-								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-								<addClasspath>true</addClasspath>
-							</manifest>
-						</archive>
+						<!-- <archive> <manifestEntries> <JavaFX-Version>2.0</JavaFX-Version> <Main-Class>${appClass}</Main-Class> <JavaFX-Application-Class>${appClass}</JavaFX-Application-Class> </manifestEntries> <manifest> 
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries> <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries> <addClasspath>true</addClasspath> </manifest> </archive> -->
 					</configuration>
+				</plugin>
+
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>3.1.1</version>
+					<executions>
+						<execution>
+							<id>copy-dependencies</id>
+							<phase>package</phase>
+							<goals>
+								<goal>copy-dependencies</goal>
+							</goals>
+							<configuration>
+							<!-- <includeScope>runtime</includeScope> -->
+								<outputDirectory>${project.build.directory}/lib</outputDirectory>
+					<!-- 			<overWriteReleases>false</overWriteReleases>
+								<overWriteSnapshots>false</overWriteSnapshots>
+								<overWriteIfNewer>true</overWriteIfNewer> -->
+							</configuration>
+						</execution>
+					</executions>
 				</plugin>
 
 			</plugins>

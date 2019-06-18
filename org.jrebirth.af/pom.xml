@@ -32,7 +32,7 @@
 		<maven.version>3.5.4</maven.version>
 
 		<surefire.version>2.18.1</surefire.version>
-		<slf4j.version>1.8.0-beta2</slf4j.version>
+		<slf4j.version>1.8.0-beta4</slf4j.version>
 		<openjfx.version>11.0.2</openjfx.version>
 
 	</properties>
@@ -165,12 +165,16 @@
 			<!-- <plugin> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> <version>1.1</version> <executions> <execution> <id>initialize-doxia-include-macro</id> Use "initialize" 
 				when the 'site' was not given as 'phase'. phase>initialize</phase <phase>pre-site</phase> <goals> <goal>initialize</goal> </goals> </execution> </executions> </plugin> -->
 
-			<!-- Add Headless test engine, require open-jfx-monocle.jar deployed into jdk/jre/lib/ext -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M3</version>
-			</plugin>
+			 <!-- Add Headless test engine, require open-jfx-monocle.jar deployed into jdk/jre/lib/ext -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M3</version>
+                <configuration>
+                    <forkCount>0</forkCount> <!-- changed this to 0 -->
+                    <reuseForks>false</reuseForks>
+                </configuration>
+            </plugin>
 				
 			<plugin>
 				<groupId>org.jacoco</groupId>

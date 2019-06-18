@@ -87,13 +87,13 @@
 								<!--<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class> -->
 							</manifestEntries>
 
-							<manifest>
+				<!-- 			<manifest>
 								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 								<addClasspath>true</addClasspath>
 								<classpathLayoutType>custom</classpathLayoutType>
 								<customClasspathLayout>${artifact.groupId}-${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}</customClasspathLayout>
-							</manifest>
+							</manifest> -->
 						</archive>
 					</configuration>
 				</plugin>
@@ -168,98 +168,7 @@
 					</executions>
 				</plugin>
 
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>webstart-maven-plugin</artifactId>
-					<version>1.0-beta-6</version>
-
-					<dependencies>
-						<dependency>
-							<groupId>org.codehaus.mojo</groupId>
-							<artifactId>keytool-api-1.7</artifactId>
-							<version>1.4</version>
-						</dependency>
-						<dependency>
-							<groupId>org.codehaus.mojo</groupId>
-							<artifactId>webstart-pack200-impl</artifactId>
-							<version>1.0-beta-6</version>
-						</dependency>
-					</dependencies>
-
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>jnlp-inline</goal>
-							</goals>
-						</execution>
-					</executions>
-
-					<configuration>
-
-						<filenameMapping>full</filenameMapping>
-
-						<updateManifestEntries>
-							<Application-Name>${project.name}</Application-Name>
-							<Trusted-Library>true</Trusted-Library>
-							<Permissions>${permissions}</Permissions>
-							<Codebase>${codebase}</Codebase>
-							<Trusted-Only>true</Trusted-Only>
-						</updateManifestEntries>
-
-
-						<jnlpFiles>${archiveName}.jnlp</jnlpFiles>
-						<excludeTransitive>false</excludeTransitive>
-
-						<libPath>lib</libPath>
-						<codebase>${codebase}</codebase>
-
-						<jnlp>
-							<outputFile>${archiveName}.jnlp</outputFile>
-							<mainClass>${appClass}</mainClass>
-							<offlineAllowed>true</offlineAllowed>
-							<allPermissions>true</allPermissions>
-						</jnlp>
-
-						<sign>
-							<keystore>${keystore}</keystore>
-							<keypass>${keypass}</keypass>
-							<storepass>${storepass}</storepass>
-							<storetype>${storetype}</storetype>
-
-							<alias>${keyalias}</alias>
-
-							<validity>360</validity>
-							<dnameCn>JRebirth Self-signed Certificate</dnameCn>
-							<dnameOu>JRebirth OSS</dnameOu>
-							<dnameO>JRebirth</dnameO>
-							<dnameL>Toulouse</dnameL>
-							<dnameSt>Haute-Garonne</dnameSt>
-							<dnameC>FR</dnameC>
-							<verify>true</verify>
-
-							<keystoreConfig>
-								<delete>${deletekeystore}</delete>
-								<gen>${genkeystore}</gen>
-							</keystoreConfig>
-
-						</sign>
-
-						<unsignAlreadySignedJars>true</unsignAlreadySignedJars>
-
-						<pack200>
-							<enabled>true</enabled>
-						</pack200>
-						<gzip>true</gzip>
-						<archive>${project.build.directory}/${archiveName}-${project.version}.zip</archive>
-
-						<outputJarVersions>false</outputJarVersions>
-
-						<install>false</install>
-						<verbose>true</verbose>
-					</configuration>
-
-				</plugin>
+				
 
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -293,50 +202,33 @@
 	<profiles>
 
 		<profile>
-			<id>WebStart</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>webstart-maven-plugin</artifactId>
-					</plugin>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>wagon-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>deploy-webstart-archive</id>
-								<phase>site-deploy</phase>
-								<goals>
-									<goal>upload-single</goal>
-								</goals>
-								<configuration>
-									<fromFile>${project.build.directory}/${archiveName}-${project.version}.zip</fromFile>
-									<toFile>${deployPath}/${archiveName}-${project.version}.zip</toFile>
-								</configuration>
-							</execution>
-							<execution>
-								<id>deploy-webstart-jnlp</id>
-								<phase>site-deploy</phase>
-								<goals>
-									<goal>upload</goal>
-								</goals>
-								<configuration>
-									<fromDir>${project.build.directory}/jnlp</fromDir>
-									<toDir>${deployPath}/jnlp</toDir>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
 			<id>AutoJar</id>
 			<build>
 				<plugins>
-					<plugin>
+				
+				<plugin>
+        <!-- NOTE: We don't need a groupId specification because the group is
+             org.apache.maven.plugins ...which is assumed by default.
+         -->
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.1.1</version>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id> <!-- this is used for inheritance merges -->
+            <phase>package</phase> <!-- bind to the packaging phase -->
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        </plugin>
+				
+		<!-- 			<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-jar-plugin</artifactId>
 					</plugin>
@@ -360,7 +252,7 @@
 								</configuration>
 							</execution>
 						</executions>
-					</plugin>
+					</plugin> -->
 				</plugins>
 			</build>
 		</profile>
