@@ -17,16 +17,15 @@
  */
 package org.jrebirth.af.showcase.diagram.ui.diagram;
 
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.core.ui.AbstractView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
-
-import org.jrebirth.af.api.exception.CoreException;
-import org.jrebirth.af.core.ui.AbstractView;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>UndoView</strong>. hold a graphical editor and a toolbar with undo/redo buttons.

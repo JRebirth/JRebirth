@@ -17,8 +17,6 @@
  */
 package org.jrebirth.af.showcase.diagram.ui.diagram;
 
-import javafx.scene.input.MouseEvent;
-
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.DefaultController;
 import org.jrebirth.af.core.wave.WBuilder;
@@ -27,9 +25,10 @@ import org.jrebirth.af.showcase.diagram.bean.ShapeType;
 import org.jrebirth.af.showcase.diagram.command.CreateShapeCommand;
 import org.jrebirth.af.undoredo.command.RedoCommand;
 import org.jrebirth.af.undoredo.command.UndoCommand;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javafx.scene.input.MouseEvent;
 
 /**
  * The class <strong>UndoController</strong>.

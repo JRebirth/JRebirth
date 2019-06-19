@@ -2,6 +2,7 @@ package org.jrebirth.af.component.behavior.selectable;
 
 import java.io.Serializable;
 
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
 import org.jrebirth.af.api.component.behavior.annotation.BehaviorDataFor;

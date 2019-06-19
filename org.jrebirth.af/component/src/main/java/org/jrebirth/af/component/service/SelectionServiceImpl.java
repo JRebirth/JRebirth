@@ -24,6 +24,7 @@ public class SelectionServiceImpl extends DefaultService implements SelectionSer
             if (toggle) {
                 this.selectedModels.remove(model);
             } else {
+            	this.selectedModels.stream().forEach(m -> m.getBehavior(SelectableBehavior.class).unselect());
                 this.selectedModels.clear();
                 this.selectedModels.add(model);
             }

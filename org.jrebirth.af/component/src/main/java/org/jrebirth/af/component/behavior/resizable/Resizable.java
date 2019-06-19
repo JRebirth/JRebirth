@@ -2,6 +2,7 @@ package org.jrebirth.af.component.behavior.resizable;
 
 import java.io.Serializable;
 
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
 import org.jrebirth.af.api.component.behavior.annotation.BehaviorDataFor;
@@ -15,7 +16,7 @@ public class Resizable extends BehaviorDataBase implements Serializable {
 
     private Model model;
 
-    private Shape shape;
+    private Pane shape;
 
     public static Resizable of() {
         return new Resizable();
@@ -30,11 +31,11 @@ public class Resizable extends BehaviorDataBase implements Serializable {
         return this;
     }
 
-    public Shape shape() {
+    public Pane shape() {
         return this.shape;
     }
 
-    public Resizable shape(final Shape shape) {
+    public Resizable shape(final Pane shape) {
         this.shape = shape;
         return this;
     }

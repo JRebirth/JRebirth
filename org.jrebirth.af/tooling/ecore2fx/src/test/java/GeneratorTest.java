@@ -18,7 +18,7 @@ public class GeneratorTest {
             sourceFolder.delete();
         }
 
-        g.generate(new File("target/generated-sources"), new File("src/test/resources/Message.ecore"));
+        g.generate(new File("target/generated-sources"), new File("src/test/resources/Message.ecore"), false);
     }
 
 }

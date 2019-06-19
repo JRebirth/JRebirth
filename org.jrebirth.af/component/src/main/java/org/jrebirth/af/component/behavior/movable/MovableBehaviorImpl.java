@@ -26,6 +26,7 @@ public class MovableBehaviorImpl extends AbstractModelBehavior<Movable> implemen
     }
 
     public void mousePressed(final MouseEvent t) {
+    	System.err.println("move pressed " + data().model());
         this.sourceX = t.getSceneX();
         this.sourceY = t.getSceneY();
     }

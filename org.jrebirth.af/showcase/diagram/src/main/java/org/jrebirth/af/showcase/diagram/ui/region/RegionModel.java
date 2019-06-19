@@ -1,27 +1,56 @@
 package org.jrebirth.af.showcase.diagram.ui.region;
 
+
+
+import org.jrebirth.af.component.behavior.movable.Movable;
+import org.jrebirth.af.component.behavior.selectable.Selectable;
+import org.jrebirth.af.core.ui.simple.DefaultSimpleModel;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import org.jrebirth.af.core.ui.simple.DefaultSimpleModel;
-
 public class RegionModel extends DefaultSimpleModel<Pane> {
 
-    @Override
-    protected void initSimpleView() {
-        super.initSimpleView();
+	private Rectangle shape;
+	
+	@Override
+	protected void initModel() {
+		super.initModel();
+		
+	}
+	
+	
 
-        final Rectangle r = new Rectangle();
-        r.setFill(Color.TRANSPARENT);
-        r.setStroke(Color.BLACK);
-        r.setArcHeight(10.0);
-        r.setArcWidth(10.0);
+	@Override
+	protected void bind() {
+		addBehavior(Selectable.of().model(this).shape(this.shape));
+		addBehavior(Movable.of().model(this));
+	}
 
-        r.setWidth(600);
-        r.setHeight(400);
 
-        node().getChildren().add(r);
-    }
+
+	@Override
+	protected void initSimpleView() {
+		super.initSimpleView();
+		
+		shape = new Rectangle();
+		shape.setFill(Color.TRANSPARENT);
+		shape.setStroke(Color.BLACK);
+		shape.setArcHeight(10.0);
+		shape.setArcWidth(10.0);
+		
+		shape.setWidth(600);
+		shape.setHeight(400);
+		
+		
+		node().getChildren().add(shape);
+	}
+	
+	@Override
+	public String toString() {
+		return key().key();
+	}
+
 
 }

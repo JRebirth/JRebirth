@@ -17,14 +17,14 @@
  */
 package org.jrebirth.af.showcase.diagram;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.application.DefaultApplication;
 import org.jrebirth.af.showcase.diagram.resource.DiagramStyles;
 import org.jrebirth.af.showcase.diagram.ui.diagram.DiagramModel;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 
 /**
  * The class <strong>UndoApplication</strong> is used to demonstrated Undo/Redo features.

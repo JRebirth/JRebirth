@@ -3,6 +3,7 @@ package org.jrebirth.af.component.behavior.selectable;
 import java.util.NoSuchElementException;
 
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 import org.jrebirth.af.api.annotation.Link;
 import org.jrebirth.af.api.annotation.PriorityLevel;
@@ -26,6 +27,7 @@ public class SelectableBehaviorImpl extends AbstractModelBehavior<Selectable> im
         } catch (final NoSuchElementException e) {
             this.resizableBehavior = data().model().getBehavior(ResizableBehavior.class);
         }
+        System.err.println("select pressed");
         data().shape().addEventFilter(MouseEvent.MOUSE_PRESSED, this::onToggle);
 
     }
@@ -47,7 +49,8 @@ public class SelectableBehaviorImpl extends AbstractModelBehavior<Selectable> im
 
     @Override
     public void unselect() {
-        data().shape().setStrokeWidth(1.0);
+        //data().shape().setStrokeWidth(1.0);
+        data().shape().setStroke(Color.BLACK);
         if (this.resizableBehavior != null) {
             this.resizableBehavior.hideHandles();
         }
@@ -55,7 +58,8 @@ public class SelectableBehaviorImpl extends AbstractModelBehavior<Selectable> im
 
     @Override
     public void select() {
-        data().shape().setStrokeWidth(3.0);
+        //data().shape().setStrokeWidth(3.0);
+        data().shape().setStroke(Color.RED);
         if (this.resizableBehavior != null) {
             this.resizableBehavior.showHandles();
         }
