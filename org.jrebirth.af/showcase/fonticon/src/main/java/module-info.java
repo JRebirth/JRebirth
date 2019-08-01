@@ -14,7 +14,7 @@ module org.jrebirth.af.showcase.fonticon {
     requires org.jrebirth.af.iconfont.bridge.emojione;
     requires org.jrebirth.af.iconfont.bridge.typicons;
     requires org.jrebirth.af.iconfont.bridge.weathericons;
-    requires org.jrebirth.af.iconfont.bridge.fontawesome;
+    requires org.jrebirth.af.iconfont.bridge.fontawesome ;
 
     requires javafx.base;
     requires javafx.controls;

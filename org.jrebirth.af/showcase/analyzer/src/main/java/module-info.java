@@ -22,6 +22,8 @@ module org.jrebirth.af.showcase.analyzer {
     requires javafx.graphics;
 
     requires org.jrebirth.af.core;
+    
+    opens org.jrebirth.af.showcase.analyzer.ui.workbench;
 
     requires org.slf4j;
 }
