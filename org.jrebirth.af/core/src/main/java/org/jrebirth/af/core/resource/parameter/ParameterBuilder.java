@@ -136,7 +136,7 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
 
             }
 
-        } catch (final IOException e) {
+        } catch (final Exception e) {
             LOGGER.error(CONF_READING_ERROR, custConfFileName);
         }
 

@@ -15,6 +15,20 @@
 	<name>JRAF RI</name>
 	<description>JRebirth Application Framework Reference Implementation</description>
 
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<outputDirectory>${project.build.outputDirectory}/org/jrebirth/af/core</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
 	<dependencies>
 
 		<dependency>

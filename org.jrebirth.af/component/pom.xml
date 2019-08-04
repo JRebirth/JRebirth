@@ -17,8 +17,15 @@
 	<description>Convenient JRebirth Components to use with JRAF</description>
 
 	<build>
-
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<outputDirectory>${project.build.outputDirectory}/org/jrebirth/af/component</outputDirectory>
+				</configuration>
+			</plugin>
+			
 			<plugin>
 
 				<groupId>org.apache.maven.plugins</groupId>

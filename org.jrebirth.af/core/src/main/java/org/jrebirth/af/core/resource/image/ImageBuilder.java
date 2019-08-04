@@ -56,10 +56,10 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
         Image image = null;
         if (jrImage instanceof RelImage) {
             // Build the requested relative image
-            image = buildLocalImage((RelImage) jrImage, false);
+            image = buildLocalImage(imageItem, (RelImage) jrImage, false);
         } else if (jrImage instanceof AbsImage) {
             // Build the requested absolute image
-            image = buildLocalImage((AbsImage) jrImage, true);
+            image = buildLocalImage(imageItem, (AbsImage) jrImage, true);
         } else if (jrImage instanceof WebImage) {
             // Build the requested web image
             image = buildWebImage((WebImage) jrImage);
@@ -91,7 +91,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      *
      * @return the JavaFX image object
      */
-    private Image buildLocalImage(final AbstractBaseImage jrImage, final boolean skipImagesFolder) {
+    private Image buildLocalImage(final ImageItem imageItem, final AbstractBaseImage jrImage, final boolean skipImagesFolder) {
         final StringBuilder sb = new StringBuilder();
 
         if (jrImage.path() != null && !jrImage.path().isEmpty()) {
@@ -103,7 +103,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
         if (jrImage.extension() != null) {
             sb.append(jrImage.extension());
         }
-        return loadImage(sb.toString(), skipImagesFolder);
+        return loadImage(imageItem, sb.toString(), skipImagesFolder);
     }
 
     /**
@@ -135,7 +135,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      *
      * @return the image loaded
      */
-    private Image loadImage(final String resourceName, final boolean skipImagesFolder) {
+    private Image loadImage(final ImageItem imageItem, final String resourceName, final boolean skipImagesFolder) {
         Image image = null;
 
         final List<String> imagePaths = skipImagesFolder ? Collections.singletonList("") : ResourceParameters.IMAGE_FOLDER.get();
@@ -145,7 +145,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             if (!imagePath.isEmpty()) {
                 imagePath += Resources.PATH_SEP;
             }
-            final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(imagePath + resourceName);
+            final InputStream imageInputStream = imageItem.getClass().getModule().getClassLoader().getResourceAsStream(imagePath + resourceName);
             if (imageInputStream != null) {
                 image = new Image(imageInputStream);
             }
