@@ -16,6 +16,7 @@
 	<description>Base files to build a JavaFX slide's presentation</description>
 
 	<properties>
+		<modulePath>org/jrebirth/af/presentation</modulePath>
 		<jaxb.version>2.3.0</jaxb.version>
 	</properties>
 

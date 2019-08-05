@@ -19,8 +19,8 @@
 	<properties>
 
 		<jnlpFilename>Todos-Showcase.jnlp</jnlpFilename>
-		<appClass>org.jrebirth.af.showcase.wave.TodosApplication</appClass>
-
+		<appClass>org.jrebirth.af.showcase.todos.TodosApplication</appClass>
+		<modulePath>org/jrebirth/af/showcase/todos</modulePath>
 	</properties>
 
 	<build>

@@ -11,6 +11,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -44,7 +45,7 @@ public class ListContentView extends DefaultView<ListContentModel, BorderPane, L
         doneColumn.setMaxWidth(40);
         doneColumn.setMinWidth(40);
         doneColumn.setCellValueFactory(cdf -> cdf.getValue().pDone());
-        //doneColumn.setCellFactory(tc -> new CheckBoxTableCell<>());
+        doneColumn.setCellFactory(tc -> new CheckBoxTableCell<>());
 
         final TableColumn<Todo, String> textColumn = new TableColumn<>("Text");
         textColumn.setId(TEXT_COLUMN);

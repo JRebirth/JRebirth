@@ -11,6 +11,15 @@ open module org.jrebirth.af.showcase.todos {
     exports org.jrebirth.af.showcase.todos.ui.content.list;
     exports org.jrebirth.af.showcase.todos.ui.status;
     exports org.jrebirth.af.showcase.todos.ui.header;
+    exports org.jrebirth.af.showcase.todos.ui.content.table;
+    exports org.jrebirth.af.showcase.todos.service;
+    
+    //opens org.jrebirth.af.showcase.todos.ui.header to org.jrebirth.af.core;
+    //opens org.jrebirth.af.showcase.todos.ui.main to org.jrebirth.af.core;
+    //opens org.jrebirth.af.showcase.todos.ui.content.table to org.jrebirth.af.core;
+    //opens org.jrebirth.af.showcase.todos.ui.content.list to org.jrebirth.af.core;
+    
+    //opens org.jrebirth.af.showcase.todos.images to org.jrebirth.af.core;
     
     requires javafx.base;
     requires javafx.controls;

@@ -16,4 +16,8 @@
 	<description>Bridge to use Weather Icons</description>
 	<url>http://www.jrebirth.org</url>
 
+	<properties>
+		<modulePath>org/jrebirth/af/iconfontbridge/weathericons</modulePath>
+	</properties>
+	
 </project>

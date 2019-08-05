@@ -14,6 +14,10 @@
 	<name>Transition</name>
 	<description>A set of beautiful &amp; powerful transition</description>
 
+	<properties>
+		<modulePath>org/jrebirth/af/transition</modulePath>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>

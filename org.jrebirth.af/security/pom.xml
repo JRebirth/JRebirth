@@ -11,14 +11,18 @@
 	<name>Security</name>
 	<description>Provides classes used to manage Security concerns.</description>
 
+	<properties>
+		<modulePath>org/jrebirth/af/security</modulePath>
+	</properties>
+
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
 			<version>11.0.0-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
@@ -26,7 +30,7 @@
 			<classifier>4ide</classifier>
 			<optional>true</optional>
 		</dependency>
-		
+
 	</dependencies>
-	
+
 </project>

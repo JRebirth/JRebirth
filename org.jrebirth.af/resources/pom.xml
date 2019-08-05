@@ -9,4 +9,9 @@
   <artifactId>resources</artifactId>
   <name>JRAF Resources</name>
   <description>Module embedding default resoruces for JRebirth Application Framework</description>
+  
+  <properties>
+  	<modulePath>org/jrebirth/af/resources</modulePath>
+  </properties>
+  
 </project>

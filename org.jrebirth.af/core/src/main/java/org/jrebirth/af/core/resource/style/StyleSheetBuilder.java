@@ -17,6 +17,7 @@
  */
 package org.jrebirth.af.core.resource.style;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
@@ -54,7 +55,7 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
         URL cssURL = null;
         if (ssp instanceof StyleSheet) {
             // Build the requested font
-            cssURL = buildStyleSheetUrl((StyleSheet) ssp);
+            cssURL = buildStyleSheetUrl(ssi, (StyleSheet) ssp);
         }
         return cssURL;
     }
@@ -66,7 +67,7 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
      *
      * @return the JavaFX image object
      */
-    private URL buildStyleSheetUrl(final StyleSheet ss) {
+    private URL buildStyleSheetUrl(final StyleSheetItem ssi, final StyleSheet ss) {
 
         final StringBuilder sb = new StringBuilder();
 
@@ -80,7 +81,7 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
             sb.append(CSS_EXT);
         }
 
-        return buildUrl(sb.toString(), ss.skipStylesFolder());
+        return buildUrl(ssi,sb.toString(), ss.skipStylesFolder());
     }
 
     /**
@@ -92,7 +93,7 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
      *
      * @return the stylesheet url
      */
-    private URL buildUrl(final String styleSheetPath, final boolean skipStylesFolder) {
+    private URL buildUrl(final StyleSheetItem ssi, final String styleSheetPath, final boolean skipStylesFolder) {
 
         URL cssResource = null;
 
@@ -104,7 +105,9 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
             if (!stylePath.isEmpty()) {
                 stylePath += Resources.PATH_SEP;
             }
-            cssResource = Thread.currentThread().getContextClassLoader().getResource(stylePath + styleSheetPath);
+            
+            Module m = ssi.getClass().getModule();
+            cssResource = m.getClassLoader().getResource(m.getName().replace(".", "/") + "/"+stylePath + styleSheetPath);
         }
 
         if (cssResource == null) {

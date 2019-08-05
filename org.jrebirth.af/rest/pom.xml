@@ -9,15 +9,19 @@
 	<artifactId>rest</artifactId>
 	<name>Rest Services</name>
 	<description>Provides base classes for calling remote rest services</description>
-	
+
+	<properties>
+		<modulePath>org/jrebirth/af/rest</modulePath>
+	</properties>
+
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
 			<version>11.0.0-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>

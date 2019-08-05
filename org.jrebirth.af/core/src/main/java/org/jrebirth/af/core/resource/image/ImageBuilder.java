@@ -28,6 +28,7 @@ import javafx.scene.text.Text;
 import org.jrebirth.af.api.resource.builder.ResourceBuilder;
 import org.jrebirth.af.api.resource.image.ImageItem;
 import org.jrebirth.af.api.resource.image.ImageParams;
+import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthImages;
@@ -76,7 +77,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             WritableImage img = new WritableImage(30, 30);
             final Text text = new Text();
             text.setText("N/A");
-            img = text.snapshot(null, img);
+            JRebirth.runIntoJATSync(()-> text.snapshot(null, img), 1000);
             image = img;
         }
 
@@ -145,7 +146,9 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             if (!imagePath.isEmpty()) {
                 imagePath += Resources.PATH_SEP;
             }
-            final InputStream imageInputStream = imageItem.getClass().getModule().getClassLoader().getResourceAsStream(imagePath + resourceName);
+            
+            Module m = imageItem.getClass().getModule();
+            final InputStream imageInputStream = m.getClassLoader().getResourceAsStream(m.getName().replace(".", "/") + "/"+ imagePath + resourceName);
             if (imageInputStream != null) {
                 image = new Image(imageInputStream);
             }

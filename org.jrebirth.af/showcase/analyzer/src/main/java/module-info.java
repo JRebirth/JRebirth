@@ -3,7 +3,7 @@
  * 
  * @author Sébastien Bordes
  */
-module org.jrebirth.af.showcase.analyzer {
+open module org.jrebirth.af.showcase.analyzer {
 
     exports org.jrebirth.af.showcase.analyzer.ui.controls;
     exports org.jrebirth.af.showcase.analyzer.ui.editor.ball;
@@ -23,7 +23,7 @@ module org.jrebirth.af.showcase.analyzer {
 
     requires org.jrebirth.af.core;
     
-    opens org.jrebirth.af.showcase.analyzer.ui.workbench;
+    //opens org.jrebirth.af.showcase.analyzer.ui.workbench;
 
     requires org.slf4j;
 }

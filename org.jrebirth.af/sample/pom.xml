@@ -20,6 +20,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<modulePath>org/jrebirth/af/sample</modulePath>
 	</properties>
 
 	<organization>
@@ -28,7 +29,6 @@
 	</organization>
 
 	<build>
-
 		<resources>
 			<resource>
 				<filtering>false</filtering>
@@ -96,7 +96,7 @@
 								<goal>copy-dependencies</goal>
 							</goals>
 							<configuration>
-							<!-- <includeScope>runtime</includeScope> -->
+								<!-- <includeScope>runtime</includeScope> -->
 								<outputDirectory>${project.build.directory}/lib</outputDirectory>
 					<!-- 			<overWriteReleases>false</overWriteReleases>
 								<overWriteSnapshots>false</overWriteSnapshots>
