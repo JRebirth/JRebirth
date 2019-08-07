@@ -3,7 +3,7 @@
  * 
  * @author Sébastien Bordes
  */
-module org.jrebirth.af.iconfont.bridge.typicons {
+open module org.jrebirth.af.iconfontbridge.typicons {
     exports org.jrebirth.af.iconfontbridge.typicons;
 
     requires transitive org.jrebirth.af.api;

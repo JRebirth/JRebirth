@@ -3,7 +3,7 @@
  * 
  * @author Sébastien Bordes
  */
-module org.jrebirth.af.iconfont.bridge.fontawesome {
+open module org.jrebirth.af.iconfontbridge.fontawesome {
 
     exports org.jrebirth.af.iconfontbridge.fontawesome;
 

@@ -35,7 +35,7 @@ import org.jrebirth.af.core.log.JRebirthMarkers;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.util.ClasspathUtility;
-
+import org.jrebirth.af.core.util.ModuleUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -120,6 +120,11 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
     private void readPropertiesFile(final String rbFilename) {
 
         final File rbFile = new File(rbFilename);
+        
+//        int last = rbFilename.lastIndexOf("/");
+//        String moduleName = rbFilename.substring(0, last > -1 ? last : rbFilename.length());
+//        moduleName =moduleName.replaceAll("/", ".");
+//        Module m = ModuleUtility.find(moduleName);
 
         final String rbName = rbFile.getName().substring(0, rbFile.getName().lastIndexOf(".properties"));
 
@@ -129,7 +134,11 @@ public final class MessageBuilder extends AbstractResourceBuilder<MessageItem, M
 
             LOGGER.info(JRebirthMarkers.MESSAGE, "Store ResourceBundle : {} ", rbName);
             try {
-                this.resourceBundles.add(ResourceBundle.getBundle(rbName));
+//            	if(m != null) {
+//            		this.resourceBundles.add(ResourceBundle.getBundle(rbName, m));
+//            	}else {
+            		this.resourceBundles.add(ResourceBundle.getBundle(rbName));
+//            	}
             } catch (final MissingResourceException e) {
                 LOGGER.error(JRebirthMarkers.MESSAGE, "{} Resource Bundle not found", rbName);
             }

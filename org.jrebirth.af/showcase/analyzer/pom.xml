@@ -22,7 +22,7 @@
 		<archiveName>JRebirthAnalyzer</archiveName>
 		<exeIcon>src/main/resources/JRebirth_64x64.ico</exeIcon>
 		<appClass>org.jrebirth.af.showcase.analyzer.JRebirthAnalyzer</appClass>
-
+		<resources.base.path>org/jrebirth/af/showcase/analyzer</resources.base.path>
 	</properties>
 
 	<build>

@@ -34,6 +34,14 @@ import org.jrebirth.af.api.resource.builder.ResourceBuilder;
 @FunctionalInterface
 public interface ResourceItem<I, P, R> {
 
+    default I module(Module module) {
+        return null;
+    }
+	
+    default Module module() {
+        return null;
+    }
+    
     /**
      * Attach the resource parameter.
      *

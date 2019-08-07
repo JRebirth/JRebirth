@@ -12,7 +12,7 @@
 
 	<name>Processor</name>
 	<description>Processor used to create Module.xml file</description>
-
+	
 	<build>
 
 		<finalName>${project.artifactId}-${project.version}</finalName>

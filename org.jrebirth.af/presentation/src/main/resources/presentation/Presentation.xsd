@@ -2,8 +2,8 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.jrebirth.org/Presentation" xmlns:tns="http://www.jrebirth.org/Presentation"
 	elementFormDefault="qualified">
 
-	<element name="presentation" type="Presentation" />
-<!--
+	<element name="presentation" type="tns:Presentation" />
+	
 	<complexType name="Presentation">
 
 		<all>
@@ -11,10 +11,11 @@
 			<element name="date" minOccurs="0" maxOccurs="1" type="string"></element>
 			<element name="place" minOccurs="0" maxOccurs="1" type="string"></element>
 			<element name="event" minOccurs="0" maxOccurs="1" type="string"></element>
-			<element name="speakers" type="tns:SpeakerList" minOccurs="0" maxOccurs="1"></element>
+ 			<element name="speakers" type="tns:SpeakerList" minOccurs="0" maxOccurs="1"></element>
 			<element name="slides" type="tns:SlideList" minOccurs="0" maxOccurs="1"></element>
 		</all>
 	</complexType>
+
 
 	<complexType name="SpeakerList">
 		<sequence>
@@ -101,6 +102,6 @@
 			<enumeration value="TileIn60k" />
 			<enumeration value="TileOut60k" />
 		</restriction>
-	</simpleType>-->
+	</simpleType>
 
 </schema>

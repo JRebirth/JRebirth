@@ -17,7 +17,7 @@
 	<url>http://www.jrebirth.org</url>
 
 	<properties>
-		<modulePath>org/jrebirth/af/iconfontbridge/icons525</modulePath>
+		<resources.base.path>org/jrebirth/af/iconfontbridge/icons525</resources.base.path>
 	</properties>
 	
 </project>

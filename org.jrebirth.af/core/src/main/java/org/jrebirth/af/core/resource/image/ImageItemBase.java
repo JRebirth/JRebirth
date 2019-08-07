@@ -39,6 +39,8 @@ public interface ImageItemBase extends ImageItem {
     default ResourceBuilder<ImageItem, ImageParams, Image> builder() {
         return ResourceBuilders.IMAGE_BUILDER;
     }
+    
+
 
     /**
      * The class <strong>Relative</strong> class is use to build and register {@link RelImage} params.

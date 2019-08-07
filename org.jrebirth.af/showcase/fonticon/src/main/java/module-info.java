@@ -1,5 +1,5 @@
 /**
- * The class <strong>module-info</strong>. TODO To complete
+ * The module <strong>Font Icon ShowCase</strong>.
  * 
  * @author Sébastien Bordes
  */
@@ -10,11 +10,13 @@ module org.jrebirth.af.showcase.fonticon {
     exports org.jrebirth.af.showcase.fonticon.ui.main;
 
     requires org.jrebirth.af.component;
-    requires org.jrebirth.af.iconfont.bridge.icons525;
-    requires org.jrebirth.af.iconfont.bridge.emojione;
-    requires org.jrebirth.af.iconfont.bridge.typicons;
-    requires org.jrebirth.af.iconfont.bridge.weathericons;
-    requires org.jrebirth.af.iconfont.bridge.fontawesome ;
+    requires org.jrebirth.af.iconfontbridge.icons525;
+    requires org.jrebirth.af.iconfontbridge.emojione;
+    requires org.jrebirth.af.iconfontbridge.typicons;
+    requires org.jrebirth.af.iconfontbridge.weathericons;
+    requires org.jrebirth.af.iconfontbridge.fontawesome ;
+    
+	provides org.jrebirth.af.api.module.ModuleStarter with org.jrebirth.af.showcase.fonticon.FonticonModuleStarter;
 
     requires javafx.base;
     requires javafx.controls;

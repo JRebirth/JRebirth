@@ -17,20 +17,9 @@
 
 
 	<properties>
-
-		<jnlpFilename>UndoRedo-Showcase.jnlp</jnlpFilename>
-		<appClass>org.jrebirth.af.showcase.undoredo.UndoRedoApplication</appClass>
-
+		<appClass>${project.groupId}.${project.artifactId}.UndoRedoApplication</appClass>
+		<resources.base.path>org/jrebirth/af/showcase/undoredo</resources.base.path>
 	</properties>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>webstart-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 	<dependencies>
 

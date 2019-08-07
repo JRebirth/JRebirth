@@ -21,6 +21,11 @@ module org.jrebirth.af.component {
     exports org.jrebirth.af.component.resources;
     exports org.jrebirth.af.component.behavior.dockable.impl;
 
+    opens org.jrebirth.af.component.ui.tab to org.jrebirth.af.core;
+    opens org.jrebirth.af.component.ui.dock to org.jrebirth.af.core;
+    opens org.jrebirth.af.component.ui.stack to org.jrebirth.af.core;
+    opens org.jrebirth.af.component.ui.workbench to org.jrebirth.af.core;
+    
     requires java.desktop;
     requires javafx.base;
     requires javafx.controls;

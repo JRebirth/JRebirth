@@ -17,19 +17,12 @@
 	<url>http://www.jrebirth.org/apps/Todos.html</url>
 
 	<properties>
-
-		<jnlpFilename>Todos-Showcase.jnlp</jnlpFilename>
 		<appClass>org.jrebirth.af.showcase.todos.TodosApplication</appClass>
-		<modulePath>org/jrebirth/af/showcase/todos</modulePath>
+		<resources.base.path>org/jrebirth/af/showcase/todos</resources.base.path>
 	</properties>
 
 	<build>
 		<plugins>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>webstart-maven-plugin</artifactId>
-			</plugin>
 <!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -62,6 +55,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>

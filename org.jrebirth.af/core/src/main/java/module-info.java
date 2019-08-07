@@ -63,5 +63,5 @@ module org.jrebirth.af.core {
     exports org.jrebirth.af.core.ui;
     exports org.jrebirth.af.core.resource.font;
     exports org.jrebirth.af.core.service;
-
+    
 }

@@ -20,7 +20,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<modulePath>org/jrebirth/af/sample</modulePath>
+		<resources.base.path>org/jrebirth/af/sample</resources.base.path>
 	</properties>
 
 	<organization>

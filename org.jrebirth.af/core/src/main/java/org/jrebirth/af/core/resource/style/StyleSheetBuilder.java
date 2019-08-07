@@ -28,7 +28,7 @@ import org.jrebirth.af.api.resource.style.StyleSheetParams;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
-
+import org.jrebirth.af.core.util.ModuleUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -106,8 +106,7 @@ public final class StyleSheetBuilder extends AbstractResourceBuilder<StyleSheetI
                 stylePath += Resources.PATH_SEP;
             }
             
-            Module m = ssi.getClass().getModule();
-            cssResource = m.getClassLoader().getResource(m.getName().replace(".", "/") + "/"+stylePath + styleSheetPath);
+            cssResource = ModuleUtility.getResourceAsURL(ssi, stylePath, styleSheetPath);
         }
 
         if (cssResource == null) {

@@ -10,10 +10,6 @@
 	<name>Rest Services</name>
 	<description>Provides base classes for calling remote rest services</description>
 
-	<properties>
-		<modulePath>org/jrebirth/af/rest</modulePath>
-	</properties>
-
 	<dependencies>
 
 		<dependency>

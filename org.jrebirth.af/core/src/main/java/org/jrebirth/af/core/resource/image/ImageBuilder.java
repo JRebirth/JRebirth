@@ -33,7 +33,7 @@ import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthImages;
 import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
-
+import org.jrebirth.af.core.util.ModuleUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,7 +67,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
         }
 
         // Try to get the default image when an image is not found
-        if (image == null && !ResourceParameters.NOT_AVAILABLE_IMAGE_NAME.equals(jrImage.name())) {
+        if (image == null && ResourceParameters.NOT_AVAILABLE_IMAGE.get() != null  && !ResourceParameters.NOT_AVAILABLE_IMAGE.get().name().equals(jrImage.name())) {
             // Return the default image
             image = JRebirthImages.NOT_AVAILABLE.get();
         }
@@ -147,8 +147,8 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
                 imagePath += Resources.PATH_SEP;
             }
             
-            Module m = imageItem.getClass().getModule();
-            final InputStream imageInputStream = m.getClassLoader().getResourceAsStream(m.getName().replace(".", "/") + "/"+ imagePath + resourceName);
+            final InputStream imageInputStream = ModuleUtility.getResourceAsStream(imageItem, imagePath, resourceName);
+
             if (imageInputStream != null) {
                 image = new Image(imageInputStream);
             }

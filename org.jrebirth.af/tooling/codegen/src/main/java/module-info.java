@@ -10,8 +10,5 @@ module org.jrebirth.af.tooling.codegen {
     exports org.jrebirth.af.tooling.codegen.generator;
     requires roaster.api;
     requires chunk.templates;
-//
-//    requires roaster.api;
-//    requires roaster.jdt;
     
 }

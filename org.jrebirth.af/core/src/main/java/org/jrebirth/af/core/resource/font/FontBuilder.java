@@ -28,7 +28,7 @@ import org.jrebirth.af.api.resource.font.FontParams;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractVariantResourceBuilder;
 import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
-
+import org.jrebirth.af.core.util.ModuleUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,7 +63,7 @@ public final class FontBuilder extends AbstractVariantResourceBuilder<FontItem, 
         Font font = null;
         if (jrFont instanceof RealFont) {
             // Build the requested font
-            font = buildRealFont((RealFont) jrFont);
+            font = buildRealFont(fontItem, (RealFont) jrFont);
         } else if (jrFont instanceof FamilyFont) {
             // Build a family like font
             font = buildFamilyFont((FamilyFont) jrFont);
@@ -81,8 +81,8 @@ public final class FontBuilder extends AbstractVariantResourceBuilder<FontItem, 
      *
      * @return the javafx font
      */
-    private Font buildRealFont(final RealFont rFont) {
-        checkFontStatus(rFont);
+    private Font buildRealFont(final FontItem fontItem, final RealFont rFont) {
+        checkFontStatus(fontItem, rFont);
         return Font.font(transformFontName(rFont.name().name()), rFont.size());
     }
 
@@ -123,7 +123,7 @@ public final class FontBuilder extends AbstractVariantResourceBuilder<FontItem, 
      *
      * @param fontParams the name of the font to load
      */
-    private void checkFontStatus(final FontParams fontParams) {
+    private void checkFontStatus(final FontItem fontItem, final FontParams fontParams) {
 
         // Try to load system fonts
         final List<String> fonts = Font.getFontNames(transformFontName(fontParams.name().name()));
@@ -136,7 +136,7 @@ public final class FontBuilder extends AbstractVariantResourceBuilder<FontItem, 
             final List<String> fontPaths = fontParams instanceof RealFont && ((RealFont) fontParams).skipFontsFolder()
                     ? Collections.singletonList("")
                     : ResourceParameters.FONT_FOLDER.get();
-
+                    
             for (int i = 0; i < fontPaths.size() && font == null; i++) {
 
                 String fontPath = fontPaths.get(i);
@@ -145,16 +145,16 @@ public final class FontBuilder extends AbstractVariantResourceBuilder<FontItem, 
                 }
 
                 // This variable will hold the 2 alternative font names
-                fontName = fontPath + transformFontName(fontParams.name().name()) + "." + fontParams.extension();
+                fontName = /*fontPath +*/ transformFontName(fontParams.name().name()) + "." + fontParams.extension();
 
                 LOGGER.trace("Try to load Transformed Font  {}", fontName);
-                font = Font.loadFont(Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), fontParams.size());
+                font = Font.loadFont(ModuleUtility.getResourceAsStream(fontItem, fontPath, fontName), fontParams.size());
 
                 // The font name contains '_' in its file name to replace ' '
                 if (font == null) {
-                    fontName = fontPath + fontParams.name().name() + "." + fontParams.extension();
+                    fontName = /*fontPath +*/ fontParams.name().name() + "." + fontParams.extension();
                     LOGGER.trace("Try to load Raw Font  {}", fontName);
-                    font = Font.loadFont(Thread.currentThread().getContextClassLoader().getResourceAsStream(fontName), fontParams.size());
+                    font = Font.loadFont(ModuleUtility.getResourceAsStream(fontItem, fontPath, fontName), fontParams.size());
 
                     if (font != null) {
                         // Raw font has been loaded

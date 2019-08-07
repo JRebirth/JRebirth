@@ -3,12 +3,13 @@
  * 
  * @author Sébastien Bordes
  */
-module org.jrebirth.af.showcase.undoredo {
+open module org.jrebirth.af.showcase.undoredo {
 
     
     requires javafx.base;
     requires javafx.controls;
     requires javafx.graphics;
+    requires javafx.fxml;
 
     requires org.jrebirth.af.core;
     requires org.jrebirth.af.undoredo;
@@ -18,4 +19,6 @@ module org.jrebirth.af.showcase.undoredo {
     exports org.jrebirth.af.showcase.undoredo;
     exports org.jrebirth.af.showcase.undoredo.ui;
     exports org.jrebirth.af.showcase.undoredo.command;
+    
+    provides org.jrebirth.af.api.module.ModuleStarter with org.jrebirth.af.showcase.undoredo.UndoredoModuleStarter;
 }

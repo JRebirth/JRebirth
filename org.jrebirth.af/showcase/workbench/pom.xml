@@ -16,23 +16,10 @@
 	<description>Showcase application used to show Workbench features</description>
 	<url>http://www.jrebirth.org/apps/FXML.html</url>
 
-
 	<properties>
-
-		<jnlpFilename>FXML-Showcase.jnlp</jnlpFilename>
 		<appClass>org.jrebirth.af.showcase.fxml.FXMLApplication</appClass>
-
+		<resources.base.path>org/jrebirth/af/showcase/workbench</resources.base.path>
 	</properties>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>webstart-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
 
 	<dependencies>
 	

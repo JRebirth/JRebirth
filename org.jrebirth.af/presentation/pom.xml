@@ -16,34 +16,33 @@
 	<description>Base files to build a JavaFX slide's presentation</description>
 
 	<properties>
-		<modulePath>org/jrebirth/af/presentation</modulePath>
-		<jaxb.version>2.3.0</jaxb.version>
+		<jaxb.version>2.3.1</jaxb.version>
 	</properties>
 
 	<build>
 		<plugins>
-		
-		<plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <release>11</release>
-                </configuration>
-            </plugin>
-		
-		
+
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<release>11</release>
+				</configuration>
+			</plugin>
+
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>2.4</version>
-                <executions>
-                    <execution>
-                        <id>xjc</id>
-                        <goals>
-                            <goal>xjc</goal>
-                        </goals>
-                    </execution>
-                </executions>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>2.5.0</version>
+				<executions>
+					<execution>
+						<id>xjc</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
 
 				<configuration>
 					<sources>
@@ -56,35 +55,18 @@
 
 				</configuration>
 
-            <dependencies>
-                <dependency>
-                    <groupId>org.glassfish.jaxb</groupId>
-                    <artifactId>jaxb-jxc</artifactId>
-                    <version>2.3.1</version>
-                </dependency>
-                <dependency>
-                    <groupId>javax.activation</groupId>
-                    <artifactId>javax.activation-api</artifactId>
-                    <version>1.2.0</version>
-                </dependency>
-                <dependency>
-                    <groupId>javax.xml.bind</groupId>
-                    <artifactId>jaxb-api</artifactId>
-                    <version>2.4.0-b180725.0427</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.glassfish.jaxb</groupId>
-                    <artifactId>jaxb-runtime</artifactId>
-                    <version>2.4.0-b180725.0644</version>
-                </dependency>
-            </dependencies>
-				<!--<dependencies>
-					 <dependency> <groupId>javax.xml.bind</groupId> <artifactId>jaxb-api</artifactId> 
-						<version>2.4.0-b180830.0359</version> </dependency> <dependency> <groupId>com.sun.xml.bind</groupId> 
-						<artifactId>jaxb-impl</artifactId> <version>2.2.5-b10</version> </dependency> 
-						<dependency> <groupId>javax.activation</groupId> <artifactId>javax.activation-api</artifactId> 
-						<version>1.2.0</version> </dependency> 
-				</dependencies>-->
+				<dependencies>
+					<dependency>
+						<groupId>javax.xml.bind</groupId>
+						<artifactId>jaxb-api</artifactId>
+						<version>${jaxb.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.glassfish.jaxb</groupId>
+						<artifactId>jaxb-runtime</artifactId>
+						<version>${jaxb.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
@@ -103,53 +85,17 @@
 			<version>${openjfx.version}</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>javax.xml.bind</groupId> <artifactId>jaxb-api</artifactId> 
-			<version>${jaxb.version}</version> </dependency> <dependency> <groupId>com.sun.xml.bind</groupId> 
-			<artifactId>jaxb-core</artifactId> <version>${jaxb.version}</version> </dependency> 
-			<dependency> <groupId>com.sun.xml.bind</groupId> <artifactId>jaxb-impl</artifactId> 
-			<version>${jaxb.version}</version> </dependency> -->
-		<!-- <dependency> <groupId>com.sun.activation</groupId> <artifactId>javax.activation</artifactId> 
-			<version>1.2.0</version> </dependency> -->
-
-<!-- 		<dependency>
+		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
-			<version>2.4.0-b180725.0427</version>
+			<version>${jaxb.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<version>2.3.0</version>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>${jaxb.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>javax.activation</groupId>
-			<artifactId>javax.activation-api</artifactId>
-			<version>1.2.0</version>
-		</dependency> -->
-		<!-- <dependency> <groupId>javax.xml.bind</groupId> <artifactId>jaxb-api</artifactId> 
-			<version>2.3.0</version> </dependency> <dependency> <groupId>org.glassfish.jaxb</groupId> 
-			<artifactId>jaxb-runtime</artifactId> <version>2.3.0</version> <scope>runtime</scope> 
-			</dependency> <dependency> <groupId>javax.activation</groupId> <artifactId>javax.activation-api</artifactId> 
-			<version>1.2.0</version> </dependency> -->
-			
-			
-			        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.0</version>
-        </dependency>        
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>2.3.2</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.activation</groupId>
-            <artifactId>jakarta.activation</artifactId>
-            <version>1.2.1</version>
-            <scope>runtime</scope>
-        </dependency>
+
 	</dependencies>
 
 </project>

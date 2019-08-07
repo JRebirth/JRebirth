@@ -11,10 +11,6 @@
 	<name>Security</name>
 	<description>Provides classes used to manage Security concerns.</description>
 
-	<properties>
-		<modulePath>org/jrebirth/af/security</modulePath>
-	</properties>
-
 	<dependencies>
 
 		<dependency>

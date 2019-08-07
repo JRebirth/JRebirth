@@ -39,14 +39,14 @@
 
 	<modules>
 		<module>api</module>
- 		<module>preloader</module>
+		<module>preloader</module>
 		<module>core</module>
 		<module>tooling</module>
 		<module>processor</module>
 		<module>component</module>
-		<!-- <module>archetype</module> -->
+		<module>archetype</module>
 		<module>sample</module>
-		<!-- <module>presentation</module> -->
+		<module>presentation</module>
 		<module>transition</module>
 		<module>dialog</module>
 		<module>fxform</module>
@@ -113,36 +113,77 @@
 
 		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, it's not yet implemented: see MNG-2216 -->
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
+		<resources>
+
+			<!-- Move All Resources stored with Java Sources -->
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/java</directory>
+				<includes>
+					<include>**/*.fxml</include>
+					<include>**/*.properties</include>
+					<include>**/*.txt</include>
+				</includes>
+			</resource>
+
+			<!-- Move All Resources (except Fonts) to Module folder with filtering -->
+			<resource>
+				<filtering>true</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<targetPath>${project.build.outputDirectory}/${resources.base.path}</targetPath>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<excludes>
+					<exclude>root/**</exclude>
+					<exclude>**/*.ttf</exclude>
+					<exclude>**/*.otf</exclude>
+					<exclude>**/*.ico</exclude>
+				</excludes>
+			</resource>
+
+			<!-- Move All Fonts to Module folder without filtering -->
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<targetPath>${project.build.outputDirectory}/${resources.base.path}</targetPath>
+				<includes>
+					<include>**/*.ttf</include>
+					<include>**/*.otf</include>
+					<include>**/*.ico</include>
+				</includes>
+			</resource>
+
+			<!-- Move All Resources that shall be at Root level into Jar (ie: META-INF folder) -->
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/resources/root</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
 
 		<plugins>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>3.8.1</version>
 				<configuration>
 					<source>11</source>
 					<target>11</target>
 					<release>11</release>
 				</configuration>
-<!-- 				<dependencies>
-					<dependency>
-						<groupId>org.ow2.asm</groupId>
-						<artifactId>asm</artifactId>
-						<version>6.2</version> Use newer version of ASM
-					</dependency>
-				</dependencies> -->
+				<!-- <dependencies> <dependency> <groupId>org.ow2.asm</groupId> <artifactId>asm</artifactId> <version>6.2</version> Use newer version of ASM </dependency> </dependencies> -->
 			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-					<outputDirectory>${project.build.outputDirectory}/${modulePath}</outputDirectory>
-				</configuration>
-			</plugin>
-			
 			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-project-info-reports-plugin</artifactId> <version>2.7</version> <dependencies> <dependency> <groupId>org.apache.maven.shared</groupId> 
 				<artifactId>maven-shared-jar</artifactId> <version>1.1</version> <exclusions> <exclusion> <groupId>org.apache.bcel</groupId> <artifactId>bcel</artifactId> </exclusion> </exclusions> </dependency> <dependency> 
 				<groupId>com.google.code.findbugs</groupId> <artifactId>bcel-findbugs</artifactId> <version>6.0</version> </dependency> </dependencies> </plugin> -->
@@ -168,17 +209,17 @@
 			<!-- <plugin> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> <version>1.1</version> <executions> <execution> <id>initialize-doxia-include-macro</id> Use "initialize" 
 				when the 'site' was not given as 'phase'. phase>initialize</phase <phase>pre-site</phase> <goals> <goal>initialize</goal> </goals> </execution> </executions> </plugin> -->
 
-			 <!-- Add Headless test engine, require open-jfx-monocle.jar deployed into jdk/jre/lib/ext -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M3</version>
-                <configuration>
-                    <forkCount>0</forkCount> <!-- changed this to 0 -->
-                    <reuseForks>false</reuseForks>
-                </configuration>
-            </plugin>
-				
+			<!-- Add Headless test engine, require open-jfx-monocle.jar deployed into jdk/jre/lib/ext -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M3</version>
+				<configuration>
+					<forkCount>0</forkCount> <!-- changed this to 0 -->
+					<reuseForks>false</reuseForks>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -199,12 +240,12 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
-        <groupId>org.sonarsource.scanner.maven</groupId>
-        <artifactId>sonar-maven-plugin</artifactId>
-        <version>3.6.0.1398</version>
-      </plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.6.0.1398</version>
+			</plugin>
 
 			<!-- Project Quality -->
 			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>sonar-maven-plugin</artifactId> <version>2.5</version> </plugin> -->
@@ -217,6 +258,9 @@
 				<version>2.10</version>
 			</extension>
 		</extensions>
+
+
+
 
 	</build>
 
@@ -248,11 +292,7 @@
 					</reportsDirectories>
 				</configuration>
 			</plugin>
-<!-- 			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.0</version>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId> <version>0.8.0</version> </plugin> -->
 		</plugins>
 	</reporting>
 

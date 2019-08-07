@@ -3,7 +3,7 @@
  * 
  * @author Sébastien Bordes
  */
-module org.jrebirth.af.iconfont.bridge.weathericons {
+open module org.jrebirth.af.iconfontbridge.weathericons {
     exports org.jrebirth.af.iconfontbridge.weathericons;
 
     requires transitive org.jrebirth.af.api;

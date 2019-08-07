@@ -6,7 +6,7 @@
 		<version>11.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
-	
+
 	<groupId>org.jrebirth.af.tooling</groupId>
 	<artifactId>ecore2fx</artifactId>
 	<name>Ecore to FX</name>
@@ -25,7 +25,7 @@
 			<artifactId>guava</artifactId>
 			<version>27.0.1-jre</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.common</artifactId>

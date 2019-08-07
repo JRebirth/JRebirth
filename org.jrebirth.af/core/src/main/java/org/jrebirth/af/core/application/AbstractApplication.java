@@ -59,6 +59,7 @@ import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
 import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
 import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.util.ModuleUtility;
 import org.jrebirth.af.preloader.JRebirthPreloader;
 
 //import com.sun.javafx.application.LauncherImpl;
@@ -508,7 +509,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         // TODO to be rewritten with ImageSet Resource when available
         return StageParameters.APPLICATION_ICONS.get()
                                                 .stream()
-                                                .map(p -> Resources.create(p).get())
+                                                .map(p -> Resources.create(p).module(ModuleUtility.find("org.jrebirth.af.resources")).get())
                                                 .collect(Collectors.toList());
     }
 

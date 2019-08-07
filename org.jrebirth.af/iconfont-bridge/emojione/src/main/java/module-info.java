@@ -3,7 +3,7 @@
  * 
  * @author Sébastien Bordes
  */
-module org.jrebirth.af.iconfont.bridge.emojione {
+open module org.jrebirth.af.iconfontbridge.emojione {
     exports org.jrebirth.af.iconfontbridge.emojione;
 
     requires transitive org.jrebirth.af.api;

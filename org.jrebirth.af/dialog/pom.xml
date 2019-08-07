@@ -13,10 +13,6 @@
 	<name>JRAF Dialog</name>
 	<description>Provide classes to manage dialog opening.</description>
 	
-	<properties>
-		<modulePath>org/jrebirth/af/dialog</modulePath>
-	</properties>
-
 	<dependencies>
 
 		<dependency>

@@ -1,5 +1,5 @@
 /**
- * The class <strong>module-info</strong>. TODO To complete
+ * The class <strong>Todos Showcase Module</strong>. 
  * 
  * @author Sébastien Bordes
  */
@@ -18,19 +18,18 @@ open module org.jrebirth.af.showcase.todos {
     //opens org.jrebirth.af.showcase.todos.ui.main to org.jrebirth.af.core;
     //opens org.jrebirth.af.showcase.todos.ui.content.table to org.jrebirth.af.core;
     //opens org.jrebirth.af.showcase.todos.ui.content.list to org.jrebirth.af.core;
-    
     //opens org.jrebirth.af.showcase.todos.images to org.jrebirth.af.core;
+
+    provides org.jrebirth.af.api.module.ModuleStarter with org.jrebirth.af.showcase.todos.TodosModuleStarter;
     
     requires javafx.base;
     requires javafx.controls;
+    requires javafx.fxml;
     requires javafx.graphics;
 
     requires org.jrebirth.af.core;
+    requires org.jrebirth.af.iconfontbridge.fontawesome;
     
-    requires org.jrebirth.af.iconfont.bridge.fontawesome;
-    
-    uses org.jrebirth.af.api.module.ModuleStarter;
-    provides org.jrebirth.af.api.module.ModuleStarter with org.jrebirth.af.showcase.todos.TodosModuleStarter;
 
     requires org.slf4j;
 }

@@ -20,9 +20,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<modulePath>org/jrebirth/af/preloader</modulePath>
+		<resources.base.path>org/jrebirth/af/preloader</resources.base.path>
 	</properties>
-
+	
 	<dependencies>
 
 		<dependency>

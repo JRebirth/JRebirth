@@ -26,6 +26,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.Model;
@@ -161,7 +162,8 @@ public final class FXMLUtils implements FXMLMessages {
         }
         if (fxmlUrl == null) {
             // Try to load the resource from the full path org/jrebirth/core/ui/Test.fxml
-            fxmlUrl = Thread.currentThread().getContextClassLoader().getResource(fxmlPath);
+            fxmlUrl = model.getClass().getClassLoader().getResource(fxmlPath);
+            // FIXME TODO standardize without path ?? ModuleUtility.getResourceAsURL(model, "", fxmlPath);
         }
 
         return fxmlUrl;

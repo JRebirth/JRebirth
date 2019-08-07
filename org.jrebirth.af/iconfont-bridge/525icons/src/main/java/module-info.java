@@ -3,7 +3,7 @@
  * 
  * @author Sébastien Bordes
  */
-module org.jrebirth.af.iconfont.bridge.icons525 {
+open module org.jrebirth.af.iconfontbridge.icons525 {
 
     exports org.jrebirth.af.iconfontbridge.icons525;
 

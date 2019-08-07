@@ -17,10 +17,8 @@
 	<url>http://www.jrebirth.org/apps/FontIcon.html</url>
 
 	<properties>
-
-		<jnlpFilename>FontIcon-Showcase.jnlp</jnlpFilename>
 		<appClass>org.jrebirth.af.showcase.fonticon.FontIconApplication</appClass>
-
+		<resources.base.path>org/jrebirth/af/showcase/fonticon</resources.base.path>
 	</properties>
 
 <!-- 	<build>
