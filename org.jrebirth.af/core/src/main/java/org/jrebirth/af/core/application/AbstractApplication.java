@@ -28,6 +28,7 @@ import javafx.application.Application;
 import javafx.application.Preloader;
 import javafx.application.Preloader.ProgressNotification;
 import javafx.scene.Scene;
+import javafx.scene.SceneAntialiasing;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -123,9 +124,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * @param args arguments passed to java command line
      */
     protected static void preloadAndLaunch(final Class<? extends Application> appClass, final Class<? extends Preloader> preloaderClass, final String... args) {
-        //LauncherImpl.launchApplication(appClass, preloaderClass, args);
+        // LauncherImpl.launchApplication(appClass, preloaderClass, args);
         // Waiting for patch
-        Application.launch(appClass, /*preloaderClass,*/ args);
+        Application.launch(appClass, /* preloaderClass, */ args);
     }
 
     /**
@@ -554,7 +555,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         final Scene scene = new Scene(buildRootPane(),
                                       StageParameters.APPLICATION_SCENE_WIDTH.get(),
                                       StageParameters.APPLICATION_SCENE_HEIGHT.get(),
-                                      JRebirthColors.SCENE_BG_COLOR.get());
+                                      true,
+                                      SceneAntialiasing.BALANCED);
+        scene.setFill(JRebirthColors.SCENE_BG_COLOR.get());
 
         return scene;
     }
