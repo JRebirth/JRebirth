@@ -10,6 +10,26 @@
 	<name>Rest Services</name>
 	<description>Provides base classes for calling remote rest services</description>
 
+	<build>
+		<plugins>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.jrebirth.af</groupId>
+							<artifactId>processor</artifactId>
+							<version>11.0.0-SNAPSHOT</version>
+							<classifier>4ide</classifier>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
 	<dependencies>
 
 		<dependency>
