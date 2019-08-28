@@ -461,7 +461,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
         final URL styleSheetURL = styleSheetItem.get();
         if (styleSheetURL == null) {
-            LOGGER.error(CSS_LOADING_ERROR, styleSheetItem.toString(), ResourceParameters.STYLE_FOLDER.get());
+          //  LOGGER.error(CSS_LOADING_ERROR, styleSheetItem.toString(), ResourceParameters.STYLE_FOLDER.get());
         } else {
             scene.getStylesheets().add(styleSheetURL.toExternalForm());
         }
@@ -510,8 +510,12 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         // TODO to be rewritten with ImageSet Resource when available
         return StageParameters.APPLICATION_ICONS.get()
                                                 .stream()
-                                                .map(p -> Resources.create(p).module(ModuleUtility.find("org.jrebirth.af.resources")).get())
+                                                .map(p -> Resources.create(p).module(getStageIconsModule()).get())
                                                 .collect(Collectors.toList());
+    }
+
+    protected Module getStageIconsModule() {
+        return this.getClass().getModule();//ModuleUtility.find("org.jrebirth.af.resources");
     }
 
     /**
