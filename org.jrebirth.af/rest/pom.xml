@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.jrebirth</groupId>
@@ -10,9 +11,14 @@
 	<name>Rest Services</name>
 	<description>Provides base classes for calling remote rest services</description>
 
+	<properties>
+		<jaxb.api.version>2.3.2</jaxb.api.version>
+		<jaxb.impl.version>2.3.2</jaxb.impl.version>
+		<activation.api.version>1.2.1</activation.api.version>
+	</properties>
 	<build>
 		<plugins>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -29,7 +35,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<dependencies>
 
 		<dependency>
@@ -46,10 +52,25 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- <dependency> <groupId>javax.ws.rs</groupId> <artifactId>javax.ws.rs-api</artifactId> <version>2.1</version> </dependency> -->
+
 		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.1</version>
+			<groupId>jakarta.ws.rs</groupId>
+			<artifactId>jakarta.ws.rs-api</artifactId>
+			<version>2.1.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>${jaxb.api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.activation</groupId>
+			<artifactId>jakarta.activation-api</artifactId>
+			<version>${activation.api.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
