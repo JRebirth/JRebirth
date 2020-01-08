@@ -49,10 +49,11 @@
 					<jlinkImageName>JRebirthDemo</jlinkImageName>
 					<jlinkZipName>JRebirthDemoApp</jlinkZipName>
 					<mainClass>${project.groupId}.${project.artifactId}/${appClass}</mainClass>
+					<bindServices>true</bindServices>
 				</configuration>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<phase>deploy</phase>
 						<goals>
 							<goal>jlink</goal>
 						</goals>
@@ -331,6 +332,12 @@
 			<version>${openjfx.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.3.0-alpha4</version>		
+		</dependency>
+		
 	</dependencies>
 
 </project>

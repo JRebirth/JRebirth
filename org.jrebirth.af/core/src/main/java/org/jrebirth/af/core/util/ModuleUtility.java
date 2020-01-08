@@ -18,7 +18,9 @@
 package org.jrebirth.af.core.util;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import org.jrebirth.af.api.resource.ResourceItem;
 import org.slf4j.Logger;
@@ -56,20 +58,36 @@ public final class ModuleUtility implements UtilMessages {
 
     public static InputStream getResourceAsStream(Object object, String resourcePath, String resourceName) {
         Module m = getModule(object);
-        InputStream is = m.getClassLoader().getResourceAsStream(m.getName().replace(".", "/") + "/" + resourcePath + resourceName);
-        if(is == null) {
-        	LOGGER.error("Resource : {} not found into module folder: {}", resourceName, resourcePath);
-        }
-        return is;
+        String path = getResourcePath(resourcePath, resourceName, m);
+        InputStream is = null;
+		try {
+			is = m.getClassLoader().getResourceAsStream( URLEncoder.encode(path, "UTF-8"));
+			if(is == null) {
+				LOGGER.error("Resource : {} not found into module folder: {}", resourceName, resourcePath);
+			}
+		} catch (UnsupportedEncodingException e) {
+			LOGGER.error("Impossible to encode path " + path, e);
+		}
+		return is;
     }
+
+	private static String getResourcePath(String resourcePath, String resourceName, Module m) {
+		return m.getName().replace(".", "/") + "/" + resourcePath + resourceName;
+	}
 
     public static URL getResourceAsURL(Object object, String resourcePath, String resourceName) {
         Module m = getModule(object);
-        URL url = m.getClassLoader().getResource(m.getName().replace(".", "/") + "/" + resourcePath + resourceName);
-        if(url == null) {
-        	LOGGER.error("Resource : {} not found into module folder: {}", resourceName, resourcePath);
-        }
-        return url;
+        String path = getResourcePath(resourcePath, resourceName, m);
+        URL url =null;
+		try {
+			url = m.getClassLoader().getResource(URLEncoder.encode(path, "UTF-8"));
+			if(url == null) {
+				LOGGER.error("Resource : {} not found into module folder: {}", resourceName, resourcePath);
+			}
+		} catch (UnsupportedEncodingException e) {
+			LOGGER.error("Impossible to encode path " + path, e);
+		}
+		return url;
     }
 
 	public static Module find(String moduleName) {
