@@ -40,11 +40,12 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.0.13</version>
+			<version>1.2.3</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<!-- Dependency used at compile time to manage Java Webstart classpath scan If this jar is not available the related code will not be called -->
+		<!--
 		<dependency>
 			<groupId>javax.jnlp</groupId>
 			<artifactId>jnlp-api</artifactId>
@@ -60,7 +61,7 @@
 			<scope>system</scope>
 			<systemPath>${java.home}/lib/deploy.jar</systemPath>
 		</dependency>
-
+		-->
 		<dependency>
 			<groupId>org.testfx</groupId>
 			<artifactId>testfx-core</artifactId>
@@ -69,10 +70,24 @@
 		</dependency>
 
 		<dependency>
+		    <groupId>org.testfx</groupId>
+		    <artifactId>testfx-junit</artifactId>
+		    <version>4.0.15-alpha</version>
+		    <scope>test</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.testfx</groupId>
-			<artifactId>testfx-junit</artifactId>
-			<version>4.0.1-alpha</version>
+			<artifactId>testfx-core</artifactId>
+			<version>4.0.16-alpha</version>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.testfx</groupId>
+		    <artifactId>openjfx-monocle</artifactId>
+		    <version>8u76-b04</version>
+		    <scope>test</scope>
 		</dependency>
 
 	</dependencies>

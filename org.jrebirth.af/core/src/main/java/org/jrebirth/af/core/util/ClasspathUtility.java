@@ -35,8 +35,8 @@ import java.util.zip.ZipFile;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 
-import com.sun.javaws.jnl.JARDesc;
-import com.sun.jnlp.JNLPClassLoaderIf;
+//import com.sun.javaws.jnl.JARDesc;
+//import com.sun.jnlp.JNLPClassLoaderIf;
 
 /**
  * The class <strong>ClassUtility</strong>.
@@ -78,7 +78,7 @@ public final class ClasspathUtility implements UtilMessages {
         final List<String> resources = new ArrayList<>();
 
         final ClassLoader cl = Thread.currentThread().getContextClassLoader();
-
+/*
         if (hasJavaWebstartLibrary() && cl instanceof JNLPClassLoaderIf) {
 
             LOGGER.log(USE_JNLP_CLASSLOADER);
@@ -100,7 +100,7 @@ public final class ClasspathUtility implements UtilMessages {
             }
 
         } else {
-
+*/
             LOGGER.log(USE_DEFAULT_CLASSLOADER);
 
             final String[] classpathEntries = CLASSPATH.split(CLASSPATH_SEPARATOR);
@@ -108,7 +108,7 @@ public final class ClasspathUtility implements UtilMessages {
                 // Parse the classpath entry and apply the given pattern as filter
                 resources.addAll(getResources(urlEntry, searchPattern, false));
             }
-        }
+       // }
 
         // Sort resources
         Collections.sort(resources);
