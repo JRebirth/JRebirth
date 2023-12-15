@@ -72,4 +72,8 @@ public interface CoreParameters {
      */
     ParameterItem<String> WAVE_HANDLER_PREFIX = create("waveHandlerPrefix", "DO_");
 
+    /**
+     * Determine if the models will be instantly released when its root node will be removed from its parent
+     */
+    ParameterItem<Boolean> AUTO_RELEASE_MODELS = create("autoReleaseModels", false);
 }
