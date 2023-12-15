@@ -30,7 +30,10 @@ import org.jrebirth.af.api.ui.annotation.CreateViewIntoJAT;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.component.behavior.AbstractBehavioredComponent;
 import org.jrebirth.af.core.concurrent.JRebirth;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.util.ClassUtility;
+
+import java.util.Optional;
 
 /**
  *
@@ -229,11 +232,13 @@ public abstract class AbstractBaseModel<M extends Model> extends AbstractBehavio
      */
     protected void attachParentListener() {
 
-        final AutoRelease ar = ClassUtility.getLastClassAnnotation(this.getClass(), AutoRelease.class);
+        final Optional<AutoRelease> autoReleaseAnnotation = Optional.ofNullable(ClassUtility.getLastClassAnnotation(this.getClass(), AutoRelease.class));
 
-        // Only manage automatic release when the annotation exists with true value
-        if (ar != null && ar.value() && node() != null) { // TODO check rootnode null when using NullView
+        // Use @AutoRelease if present, otherwise use check in core parameters (false by default)
+        boolean autoRelease = autoReleaseAnnotation.map(AutoRelease::value).orElseGet(CoreParameters.AUTO_RELEASE_MODELS::get);
+        autoRelease &= node() != null;
 
+        if (autoRelease) {
             // Allow to release the model if the root business object doesn't exist anymore
             node().parentProperty().addListener(new ChangeListener<Node>() {
 
