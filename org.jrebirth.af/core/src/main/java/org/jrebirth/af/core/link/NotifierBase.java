@@ -275,14 +275,13 @@ public class NotifierBase extends AbstractGlobalReady implements Notifier, LinkM
             if (CoreParameters.DEVELOPER_MODE.get()) {
                 this.unprocessedWaveHandler.manageUnprocessedWave(NO_WAVE_LISTENER.getText(wave.waveType().toString()), wave);
             }
+
+            // Mark the wave as Handled when there is no subscription
+            if (!wave.isRelated()) {
+                LOGGER.info(NOTIFIER_HANDLES, wave.toString());
+                wave.status(Status.Handled);
+            }
         }
-
-        // The current wave will be marked as Handled when all Wave Handlers will be terminated
-        // if(!wave.isRelated()){
-        // LOGGER.info(NOTIFIER_HANDLES, wave.toString());
-        // wave.status(Status.Handled);
-        // }
-
     }
 
     /**
