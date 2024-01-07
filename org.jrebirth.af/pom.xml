@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.jrebirth</groupId>
 		<artifactId>organization</artifactId>
-		<version>2.1.1</version>
+		<version>4.0.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>af</artifactId>
-	<version>8.7.0-SNAPSHOT</version>
+	<version>9.0.0-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 	<name>JRebirth Application Framework</name>
 
 	<url>http://sites.jrebirth.org/org.jrebirth-${project.version}</url>
 
-	<description>JRebirth is an Application Framework dedicated to JavaFX 2+ technology.</description>
+	<description>JRebirth is an Application Framework dedicated to JavaFX 2+
+		technology.</description>
 	<inceptionYear>2011</inceptionYear>
 
 	<properties>
+
 		<EclipseDay-version>3.0.0</EclipseDay-version>
 		<Breizhcamp-version>3.0.0</Breizhcamp-version>
 		<EclipseCON-version>3.0.0</EclipseCON-version>
@@ -27,6 +31,14 @@
 		<Jaf-version>3.0.0</Jaf-version>
 		<MasteringTables-version>3.0.0</MasteringTables-version>
 		<ComparisonTool-version>1.0.0-SNAPSHOT</ComparisonTool-version>
+
+		<maven.version>3.9.5</maven.version>
+
+		<openjfx.version>21.0.1</openjfx.version>
+
+		<surefire.version>2.18.1</surefire.version>
+		<slf4j.version>2.0.10</slf4j.version>
+
 	</properties>
 
 	<modules>
@@ -104,7 +116,8 @@
 
 	<build>
 
-		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, it's not yet implemented: see MNG-2216 -->
+		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the
+		future, it's not yet implemented: see MNG-2216 -->
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
 
 		<plugins>
@@ -112,10 +125,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>21</source>
+					<target>21</target>
 				</configuration>
 			</plugin>
 
@@ -144,11 +156,27 @@
 				</dependencies>
 
 			</plugin>
-			<!-- <plugin> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-book-maven-plugin</artifactId> <version>1.3-SNAPSHOT</version> <executions> <execution> <phase>pre-site</phase> <goals> <goal>render-books</goal> 
-				</goals> </execution> </executions> <configuration> <books> <book> <directory>src/site/markdown/doc</directory> <descriptor>src/site/jrebirth-book.xml</descriptor> <formats> <format> <id>latex</id> </format> 
-				<format> <id>xdoc</id> </format> <format> <id>pdf</id> </format> <format> <id>rtf</id> </format> </formats> </book> </books> </configuration> <dependencies> <dependency> <groupId>org.apache.maven.doxia</groupId> 
-				<artifactId>doxia-core</artifactId> <version>1.7</version> </dependency> <dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-fml</artifactId> <version>1.7</version> </dependency> 
-				<dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-markdown</artifactId> <version>1.7</version> </dependency> <dependency> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> 
+			<!-- <plugin> <groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-book-maven-plugin</artifactId>
+			<version>1.3-SNAPSHOT</version> <executions> <execution>
+			<phase>pre-site</phase> <goals> <goal>render-books</goal> 
+				</goals> </execution> </executions> <configuration> <books> <book>
+			<directory>src/site/markdown/doc</directory>
+			<descriptor>src/site/jrebirth-book.xml</descriptor> <formats>
+			<format> <id>latex</id> </format> 
+				<format> <id>xdoc</id> </format> <format> <id>pdf</id> </format> <format>
+			<id>rtf</id> </format> </formats> </book> </books> </configuration>
+			<dependencies> <dependency>
+			<groupId>org.apache.maven.doxia</groupId> 
+				<artifactId>doxia-core</artifactId> <version>1.7</version> </dependency>
+			<dependency> <groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-module-fml</artifactId> <version>1.7</version>
+			</dependency> 
+				<dependency> <groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-module-markdown</artifactId>
+			<version>1.7</version> </dependency> <dependency>
+			<groupId>org.tinyjee.dim</groupId>
+			<artifactId>doxia-include-macro</artifactId> 
 				<version>1.1</version> </dependency> </dependencies> </plugin> -->
 
 			<plugin>
@@ -157,7 +185,8 @@
 				<version>3.5.1</version>
 
 				<executions>
-					<!-- <execution> <id>attach-sites</id> <goals> <goal>jar</goal> </goals> </execution> -->
+					<!-- <execution> <id>attach-sites</id> <goals>
+					<goal>jar</goal> </goals> </execution> -->
 					<execution>
 						<id>build-sites</id>
 						<phase>site</phase>
@@ -167,7 +196,9 @@
 							<goal>stage</goal>
 						</goals>
 					</execution>
-					<!-- <execution> <id>package-sites</id> <phase>package</phase> <goals> <goal>jar</goal> </goals> </execution> -->
+					<!-- <execution> <id>package-sites</id>
+					<phase>package</phase> <goals> <goal>jar</goal> </goals>
+					</execution> -->
 					<execution>
 						<id>deploy-sites</id>
 						<phase>site-deploy</phase>
@@ -221,8 +252,14 @@
 			</plugin>
 
 			<!-- Copy UML Class Diagram -->
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> <executions> <execution> <id>UML recopy</id> <phase>pre-site</phase> <configuration> <tasks> <copy 
-				todir="${project.build.directory}/site/doc/uml/"> <fileset dir="${basedir}/src/main/uml/*.png" /> </copy> </tasks> </configuration> <goals> <goal>run</goal> </goals> </execution> </executions> </plugin> -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-antrun-plugin</artifactId> <executions>
+			<execution> <id>UML recopy</id> <phase>pre-site</phase>
+			<configuration> <tasks> <copy 
+				todir="${project.build.directory}/site/doc/uml/"> <fileset
+			dir="${basedir}/src/main/uml/*.png" /> </copy> </tasks>
+			</configuration> <goals> <goal>run</goal> </goals> </execution>
+			</executions> </plugin> -->
 
 			<plugin>
 				<groupId>org.tinyjee.dim</groupId>
@@ -231,7 +268,8 @@
 				<executions>
 					<execution>
 						<id>initialize-doxia-include-macro</id>
-						<!-- Use "initialize" when the 'site' was not given as 'phase'. -->
+						<!-- Use "initialize" when the 'site' was not given as
+						'phase'. -->
 						<!-- phase>initialize</phase -->
 						<phase>pre-site</phase>
 						<goals>
@@ -241,21 +279,30 @@
 				</executions>
 			</plugin>
 
-			<!-- Add Headless test engine, require open-jfx-monocle.jar deployed into jdk/jre/lib/ext -->
+			<!-- Add Headless test engine, require open-jfx-monocle.jar deployed
+			into jdk/jre/lib/ext -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.20.1</version>
+				<version>3.2.3</version>
 				<configuration>
+					<useModulePath>false</useModulePath>
 					<argLine>${argLine} -Dtestfx.robot=glass -Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw</argLine>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.junit.jupiter</groupId>
+						<artifactId>junit-jupiter-engine</artifactId>
+						<version>5.9.1</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 
 			<!-- Code coverage -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.0</version>
+				<version>0.8.11</version>
 				<executions>
 					<execution>
 						<id>default-prepare-agent</id>
@@ -323,18 +370,13 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.0</version>
+				<version>0.8.11</version>
 			</plugin>
 		</plugins>
 	</reporting>
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.13.2</version>
-			</dependency>
 			<dependency>
 				<groupId>org.easytesting</groupId>
 				<artifactId>fest-assert</artifactId>
@@ -345,8 +387,16 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.10.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.10.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -360,7 +410,8 @@
 		<site>
 			<id>JRebirth_Sites</id>
 			<name>JRebirth Sites</name>
-			<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url>
+			<url>
+				scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-${project.version}</url>
 		</site>
 	</distributionManagement>
 
@@ -372,11 +423,13 @@
 				<!-- Release repository -->
 				<repositoryId>bintray-jrebirth-JRebirth-JRebirthAF</repositoryId>
 				<repositoryName>jrebirth-JRebirth-JRebirthAF</repositoryName>
-				<repositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirthAF/</repositoryUrl>
+				<repositoryUrl>
+					https://api.bintray.com/maven/jrebirth/JRebirth/JRebirthAF/</repositoryUrl>
 				<!-- Snapshot repository -->
 				<snapshotRepositoryId>bintray-jrebirth-JRebirth-JRebirthAF</snapshotRepositoryId>
 				<snapshotRepositoryName>jrebirth-JRebirth-JRebirthAF</snapshotRepositoryName>
-				<snapshotRepositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirthAF/</snapshotRepositoryUrl>
+				<snapshotRepositoryUrl>
+					https://api.bintray.com/maven/jrebirth/JRebirth/JRebirthAF/</snapshotRepositoryUrl>
 			</properties>
 		</profile>
 	</profiles>

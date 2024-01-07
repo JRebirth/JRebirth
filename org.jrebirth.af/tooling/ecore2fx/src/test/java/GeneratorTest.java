@@ -1,8 +1,7 @@
 import java.io.File;
 
 import org.jrebirth.tooling.ecore2fx.Ecore2FXGenerator;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class GeneratorTest {
 

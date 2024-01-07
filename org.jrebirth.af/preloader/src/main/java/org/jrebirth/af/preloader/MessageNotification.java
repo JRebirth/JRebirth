@@ -17,13 +17,14 @@
  */
 package org.jrebirth.af.preloader;
 
+
 import javafx.application.Application;
-import javafx.application.Preloader.PreloaderNotification;
+import javafx.application.Preloader;
 
 /**
  * The Class MessageNotification.
  */
-public class MessageNotification implements PreloaderNotification {
+public class MessageNotification implements Preloader.PreloaderNotification {
 
     /** The message. */
     private final String message;

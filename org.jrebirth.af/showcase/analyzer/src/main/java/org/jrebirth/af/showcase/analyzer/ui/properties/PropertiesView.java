@@ -19,7 +19,6 @@ package org.jrebirth.af.showcase.analyzer.ui.properties;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.HBoxBuilder;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -58,7 +57,7 @@ public final class PropertiesView extends DefaultView<PropertiesModel, VBox, Pro
 
         node().setMinWidth(200);
 
-        final HBox hbox = HBoxBuilder.create().build();
+        final HBox hbox = new HBox();
         final Label label = new Label("Node Name :");
         this.nodeName = new Text();
         hbox.getChildren().addAll(label, this.nodeName);

@@ -26,9 +26,8 @@ import org.jrebirth.af.tooling.codegen.bean.Class;
 import org.jrebirth.af.tooling.codegen.bean.Operation;
 import org.jrebirth.af.tooling.codegen.bean.Parameter;
 import org.jrebirth.af.tooling.codegen.bean.Property;
-import org.jrebirth.af.tooling.codegen.bean.TypedDefinition;
 import org.jrebirth.af.tooling.codegen.generator.Generators;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BeanTest {
 

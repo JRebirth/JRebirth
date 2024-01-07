@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.jrebirth</groupId>
 		<artifactId>af</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
+		<version>9.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -19,30 +19,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-		<storepass>storepass</storepass>
-		<storetype>JKS</storetype>
-		<keyalias>keyalias</keyalias>
-		<keypass>keypass</keypass>
-
-		<deletekeystore>true</deletekeystore>
-		<genkeystore>true</genkeystore>
-
-		<permissions>all-permissions</permissions> <!-- or sandbox -->
-		<deployUrl>http://apps.jrebirth.org</deployUrl>
-		<deployPath>${project.artifactId}/${project.version}</deployPath>
-		<codebase>${deployUrl}/${deployPath}</codebase>
-
-		<jnlpFilename>sample.jnlp</jnlpFilename>
-		<preloaderClass>org.jrebirth.af.preloader.JRebirthPreloader</preloaderClass>
-		<appClass>org.jrebirth.af.sample.SampleApplication</appClass>
-
-		<appletWidth>1024</appletWidth>
-		<appletHeight>768</appletHeight>
-
-		<updateCheck>background</updateCheck>
-		<updatePolicy>prompt-update</updatePolicy>
-
+		<resources.base.path>org/jrebirth/af/sample</resources.base.path>
 	</properties>
 
 	<organization>
@@ -51,7 +28,6 @@
 	</organization>
 
 	<build>
-
 		<resources>
 			<resource>
 				<filtering>false</filtering>
@@ -86,10 +62,11 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.1</version>
+					<version>3.8.0</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
+						<source>21</source>
+						<target>21</target>
+						<release>21</release>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
@@ -97,123 +74,34 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.4</version>
+					<version>3.0.2</version>
 
 					<configuration>
-						<archive>
-							<manifestEntries>
-								<JavaFX-Version>2.0</JavaFX-Version>
-								<Main-Class>${appClass}</Main-Class>
-								<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
-							</manifestEntries>
-
-							<manifest>
-								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-								<addClasspath>true</addClasspath>
-							</manifest>
-						</archive>
+						<!-- <archive> <manifestEntries> <JavaFX-Version>2.0</JavaFX-Version> <Main-Class>${appClass}</Main-Class> <JavaFX-Application-Class>${appClass}</JavaFX-Application-Class> </manifestEntries> <manifest> 
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries> <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries> <addClasspath>true</addClasspath> </manifest> </archive> -->
 					</configuration>
 				</plugin>
 
+
 				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>webstart-maven-plugin</artifactId>
-					<version>1.0-beta-6</version>
-
-					<dependencies>
-						<dependency>
-							<groupId>org.codehaus.mojo</groupId>
-							<artifactId>keytool-api-1.7</artifactId>
-							<version>1.4</version>
-						</dependency>
-						<dependency>
-							<groupId>org.codehaus.mojo</groupId>
-							<artifactId>webstart-pack200-impl</artifactId>
-							<version>1.0-beta-6</version>
-						</dependency>
-					</dependencies>
-
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>3.1.1</version>
 					<executions>
 						<execution>
 							<phase>package</phase>
 							<goals>
-								<goal>jnlp-inline</goal>
+								<goal>copy-dependencies</goal>
 							</goals>
+							<configuration>
+								<!-- <includeScope>runtime</includeScope> -->
+								<outputDirectory>${project.build.directory}/lib</outputDirectory>
+					<!-- 			<overWriteReleases>false</overWriteReleases>
+								<overWriteSnapshots>false</overWriteSnapshots>
+								<overWriteIfNewer>true</overWriteIfNewer> -->
+							</configuration>
 						</execution>
 					</executions>
-
-					<configuration>
-
-						<filenameMapping>full</filenameMapping>
-
-						<updateManifestEntries>
-							<Application-Name>${project.name}</Application-Name>
-							<Trusted-Library>true</Trusted-Library>
-							<Permissions>${permissions}</Permissions>
-							<Codebase>${codebase}</Codebase>
-							<Trusted-Only>true</Trusted-Only>
-						</updateManifestEntries>
-
-
-						<jnlpFiles>${jrebirth.jnlp.filename}</jnlpFiles>
-						<excludeTransitive>false</excludeTransitive>
-
-						<libPath>lib</libPath>
-						<codebase>${codebase}</codebase>
-
-						<jnlp>
-							<outputFile>${jnlpFilename}</outputFile>
-							<mainClass>${appClass}</mainClass>
-							<offlineAllowed>true</offlineAllowed>
-							<allPermissions>true</allPermissions>
-						</jnlp>
-
-						<sign>
-							<keystore>${keystore}</keystore>
-							<keypass>${keypass}</keypass>
-							<storepass>${storepass}</storepass>
-							<storetype>${storetype}</storetype>
-
-							<alias>${keyalias}</alias>
-
-							<validity>360</validity>
-							<dnameCn>JRebirth Self-signed Certificate</dnameCn>
-							<dnameOu>JRebirth OSS</dnameOu>
-							<dnameO>JRebirth</dnameO>
-							<dnameL>Toulouse</dnameL>
-							<dnameSt>Haute-Garonne</dnameSt>
-							<dnameC>FR</dnameC>
-							<verify>true</verify>
-
-							<keystoreConfig>
-								<delete>${deletekeystore}</delete>
-								<gen>${genkeystore}</gen>
-							</keystoreConfig>
-
-						</sign>
-
-						<unsignAlreadySignedJars>true</unsignAlreadySignedJars>
-
-						<pack200>
-							<enabled>true</enabled>
-						</pack200>
-						<gzip>true</gzip>
-
-						<outputJarVersions>false</outputJarVersions>
-
-						<install>false</install>
-						<verbose>true</verbose>
-					</configuration>
-
-				</plugin>
-
-
-				<!-- Project Quality -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>sonar-maven-plugin</artifactId>
-					<version>2.5</version>
 				</plugin>
 
 			</plugins>
@@ -233,19 +121,19 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
+			<version>1.4.14</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>preloader</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -17,6 +17,7 @@
  */
 package org.jrebirth.af.core.resource.image;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
@@ -28,11 +29,12 @@ import javafx.scene.text.Text;
 import org.jrebirth.af.api.resource.builder.ResourceBuilder;
 import org.jrebirth.af.api.resource.image.ImageItem;
 import org.jrebirth.af.api.resource.image.ImageParams;
+import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.resource.Resources;
 import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthImages;
 import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
-
+import org.jrebirth.af.core.util.ModuleUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,17 +58,17 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
         Image image = null;
         if (jrImage instanceof RelImage) {
             // Build the requested relative image
-            image = buildLocalImage((RelImage) jrImage, false);
+            image = buildLocalImage(imageItem, (RelImage) jrImage, false);
         } else if (jrImage instanceof AbsImage) {
             // Build the requested absolute image
-            image = buildLocalImage((AbsImage) jrImage, true);
+            image = buildLocalImage(imageItem, (AbsImage) jrImage, true);
         } else if (jrImage instanceof WebImage) {
             // Build the requested web image
             image = buildWebImage((WebImage) jrImage);
         }
 
         // Try to get the default image when an image is not found
-        if (image == null && !ResourceParameters.NOT_AVAILABLE_IMAGE_NAME.equals(jrImage.name())) {
+        if (image == null && ResourceParameters.NOT_AVAILABLE_IMAGE.get() != null  && !ResourceParameters.NOT_AVAILABLE_IMAGE.get().name().equals(jrImage.name())) {
             // Return the default image
             image = JRebirthImages.NOT_AVAILABLE.get();
         }
@@ -76,7 +78,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             WritableImage img = new WritableImage(30, 30);
             final Text text = new Text();
             text.setText("N/A");
-            img = text.snapshot(null, img);
+            JRebirth.runIntoJATSync(()-> text.snapshot(null, img), 1000);
             image = img;
         }
 
@@ -91,7 +93,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      *
      * @return the JavaFX image object
      */
-    private Image buildLocalImage(final AbstractBaseImage jrImage, final boolean skipImagesFolder) {
+    private Image buildLocalImage(final ImageItem imageItem, final AbstractBaseImage jrImage, final boolean skipImagesFolder) {
         final StringBuilder sb = new StringBuilder();
 
         if (jrImage.path() != null && !jrImage.path().isEmpty()) {
@@ -102,8 +104,8 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
 
         if (jrImage.extension() != null) {
             sb.append(jrImage.extension());
-        }
-        return loadImage(sb.toString(), skipImagesFolder);
+        }        
+        return loadImage(imageItem, sb.toString(), skipImagesFolder);
     }
 
     /**
@@ -135,7 +137,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
      *
      * @return the image loaded
      */
-    private Image loadImage(final String resourceName, final boolean skipImagesFolder) {
+    private Image loadImage(final ImageItem imageItem, final String resourceName, final boolean skipImagesFolder) {
         Image image = null;
 
         final List<String> imagePaths = skipImagesFolder ? Collections.singletonList("") : ResourceParameters.IMAGE_FOLDER.get();
@@ -145,7 +147,9 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             if (!imagePath.isEmpty()) {
                 imagePath += Resources.PATH_SEP;
             }
-            final InputStream imageInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(imagePath + resourceName);
+            
+            final InputStream imageInputStream = ModuleUtility.getResourceAsStream(imageItem, imagePath, resourceName);
+
             if (imageInputStream != null) {
                 image = new Image(imageInputStream);
             }

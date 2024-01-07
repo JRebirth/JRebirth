@@ -18,9 +18,7 @@
 package org.jrebirth.af.core.ui.annotation;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBuilder;
 import javafx.scene.layout.VBox;
-
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.ui.annotation.OnRotate;
 import org.jrebirth.af.api.ui.annotation.OnSwipe;
@@ -81,13 +79,19 @@ public final class AnnotationView extends DefaultView<AnnotationModel, VBox, Ann
 
         node().setMinWidth(200);
 
-        this.swipeVerticalButton = ButtonBuilder.create().text("Swipe Vertical Button").build();
-        this.swipeHorizontalButton = ButtonBuilder.create().text("Swipe Horizontal Button").build();
-        this.swipeAllButton = ButtonBuilder.create().text("Swipe All Button").build();
+        this.swipeVerticalButton = new Button();
+        this.swipeVerticalButton.setText("Swipe Vertical Button");
+        this.swipeHorizontalButton = new Button();
+        this.swipeHorizontalButton.setText("Swipe Horizontal Button");
+        this.swipeAllButton = new Button();
+        this.swipeAllButton.setText("Swipe All Button");
 
-        this.rotateAllButton = ButtonBuilder.create().text("Rotate All Button").build();
-        this.rotateButton = ButtonBuilder.create().text("Rotate Button").build();
-        this.rotateStartFinishButton = ButtonBuilder.create().text("Rotate Started & Finished Button").build();
+        this.rotateAllButton = new Button();
+        this.rotateAllButton.setText("Rotate All Button");
+        this.rotateButton = new Button();
+        this.rotateButton.setText("Rotate Button");
+        this.rotateStartFinishButton = new Button();
+        this.rotateStartFinishButton.setText("Rotate Started & Finished Button");
 
         node().getChildren().add(this.swipeVerticalButton);
     }

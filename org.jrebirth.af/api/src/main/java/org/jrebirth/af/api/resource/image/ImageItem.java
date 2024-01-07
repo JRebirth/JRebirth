@@ -44,5 +44,5 @@ public interface ImageItem extends ResourceItem<ImageItem, ImageParams, Image> {
     default Image get() {
         return builder().get(this);
     }
-
+    
 }

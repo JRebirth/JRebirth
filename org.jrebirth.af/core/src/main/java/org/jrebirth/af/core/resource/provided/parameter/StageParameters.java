@@ -27,6 +27,7 @@ import org.jrebirth.af.api.resource.image.ImageParams;
 import org.jrebirth.af.api.resource.parameter.ParameterItem;
 import org.jrebirth.af.core.resource.color.WebColor;
 import org.jrebirth.af.core.resource.provided.JRebirthImages;
+import org.jrebirth.af.core.resource.provided.ResourcesImages;
 
 /**
  * The class <strong>StageParameters</strong>.
@@ -46,11 +47,11 @@ public interface StageParameters {
      * "JRebirth_16x16.png,JRebirth_32x32.png,JRebirth_64x64.png,JRebirth_128x128.png,JRebirth_256x256.png"
      */
     ParameterItem<List<ImageParams>> APPLICATION_ICONS = create("applicationIcons", Arrays.asList(
-                                                                                                  JRebirthImages.JR_LOGO_16.param(),
-                                                                                                  JRebirthImages.JR_LOGO_32.param(),
-                                                                                                  JRebirthImages.JR_LOGO_64.param(),
-                                                                                                  JRebirthImages.JR_LOGO_128.param(),
-                                                                                                  JRebirthImages.JR_LOGO_256.param()));
+                                                                                                  ResourcesImages.JR_LOGO_16.param(),
+                                                                                                  ResourcesImages.JR_LOGO_32.param(),
+                                                                                                  ResourcesImages.JR_LOGO_64.param(),
+                                                                                                  ResourcesImages.JR_LOGO_128.param(),
+                                                                                                  ResourcesImages.JR_LOGO_256.param()));
 
     /**
      * The <code>APPLICATION_NAME</code> field is used to define title of the application displayed by stage window.<br />

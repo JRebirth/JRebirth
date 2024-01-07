@@ -7,7 +7,6 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jrebirth.af.showcase.fxml.ui.embedded.EmbeddedFXMLController">
 <center>
   <VBox prefHeight="120.0" prefWidth="600.0">
@@ -17,7 +16,15 @@
           <Font name="System Bold" size="16.0" />
         </font>
       </Label>
-      <TextArea prefHeight="225.0" prefWidth="600.0" text="This page is composed by:&#10;- A main Model =&gt; EmbeddedModel&#10;- A main View =&gt; EmbeddedView (aka ModelView) with a root node [AnchorPane]&#10;- A main Controller =&gt; EmbeddedController (aka ModelController)&#10;&#10;- An embeddedFXML file + properties =&gt; Embedded.fxml + Embedded.properties&#10;- A FXML Controller class =&gt; EmbeddedFXMLController&#10;&#10;The FXML file is loaded into main model and attached to the view root node" wrapText="true" />
+      <TextArea prefHeight="225.0" prefWidth="600.0" text="This page is composed by:&#10;- A main Model =&gt; EmbeddedModel&#10;- A main View =&gt; EmbeddedView (aka ModelView) with a root node [AnchorPane]&#10;- A main Controller =&gt; EmbeddedController (aka ModelController)&#10;&#10;- An embeddedFXML file + properties =&gt; Embedded.fxml + Embedded.properties&#10;- A FXML Controller class =&gt; EmbeddedFXMLController&#10;&#10;The FXML file is loaded into main model and attached to the view root node&#10;&#10;Salut evan" wrapText="true" />
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ColorPicker layoutX="135.0" layoutY="49.0" />
+                  <ChoiceBox layoutX="135.0" layoutY="88.0" prefWidth="150.0" />
+                  <CheckBox layoutX="139.0" layoutY="124.0" mnemonicParsing="false" text="CheckBox" />
+                  <Label layoutX="22.0" layoutY="53.0" text="Choic de la couleur" />
+               </children>
+            </Pane>
     </children>
   </VBox>
 </center>

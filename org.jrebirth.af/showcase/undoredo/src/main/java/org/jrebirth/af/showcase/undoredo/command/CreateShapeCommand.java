@@ -19,9 +19,8 @@ package org.jrebirth.af.showcase.undoredo.command;
 
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.CircleBuilder;
-import javafx.scene.shape.RectangleBuilder;
-
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import org.jrebirth.af.api.concurrent.RunInto;
 import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.wave.Wave;
@@ -61,13 +60,27 @@ public class CreateShapeCommand extends DefaultUndoableCommand<WaveBean> {
         // Build a node according to the shape type
         switch (this.shapeType) {
             case Circle:
-                this.createdNode = CircleBuilder.create().fill(Color.BLUE).layoutX(60).layoutY(60).radius(30).build();
+                this.createdNode = new Circle();
+                ((Circle)this.createdNode).setFill(Color.BLUE);
+                this.createdNode.setLayoutY(60);
+                this.createdNode.setLayoutY(60);
+                ((Circle)this.createdNode).setRadius(30);
                 break;
             case Square:
-                this.createdNode = RectangleBuilder.create().fill(Color.BLUEVIOLET).layoutX(50).layoutY(100).width(30).height(30).build();
+                this.createdNode = new Rectangle();
+                ((Rectangle) this.createdNode).setFill(Color.BLUEVIOLET);
+                this.createdNode.setLayoutX(50);
+                this.createdNode.setLayoutY(100);
+                ((Rectangle) this.createdNode).setWidth(30);
+                ((Rectangle) this.createdNode).setHeight(30);
                 break;
             case Rectangle:
-                this.createdNode = RectangleBuilder.create().fill(Color.AZURE).layoutX(100).layoutY(150).width(30).height(15).build();
+                this.createdNode = new Rectangle();
+                ((Rectangle) this.createdNode).setFill(Color.AZURE);
+                this.createdNode.setLayoutX(100);
+                this.createdNode.setLayoutY(150);
+                ((Rectangle) this.createdNode).setWidth(30);
+                ((Rectangle) this.createdNode).setHeight(15);
                 break;
         }
 

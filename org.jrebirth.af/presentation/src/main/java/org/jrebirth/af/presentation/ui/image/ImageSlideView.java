@@ -21,13 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
-import javafx.animation.FadeTransitionBuilder;
-import javafx.animation.ParallelTransition;
-import javafx.animation.ParallelTransitionBuilder;
-import javafx.animation.PauseTransitionBuilder;
-import javafx.animation.SequentialTransitionBuilder;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -36,9 +30,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.RectangleBuilder;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import org.jrebirth.af.api.exception.CoreException;
@@ -103,12 +96,13 @@ public final class ImageSlideView extends
         if (model().getSlide().getShowAnimation() == null ||
                 !"TileIn".equalsIgnoreCase(model().getSlide().getShowAnimation().value())
                         && !"TileIn60k".equalsIgnoreCase(model().getSlide().getShowAnimation().value())) {
-
-            node().getChildren().add(ImageViewBuilder.create()
-                                                            .image(this.image)
-                                                            .layoutX(0).layoutY(0)
-                                                            .fitWidth(this.image.getWidth()).fitHeight(this.image.getHeight())
-                                                            .build());
+            ImageView imageView = new ImageView();
+            imageView.setImage(this.image);
+            imageView.setLayoutX(0);
+            imageView.setLayoutY(0);
+            imageView.setFitWidth(this.image.getWidth());
+            imageView.setFitHeight(this.image.getHeight());
+            node().getChildren().add(imageView);
 
             // getRootNode().setOpacity(0);
 
@@ -158,12 +152,8 @@ public final class ImageSlideView extends
                 n.setOpacity(0.0);
             }
             this.tilePerRow = 5;
-
-            final ParallelTransition st = ParallelTransitionBuilder.create().children(
-                                                                                      getTileTransition(),
-                                                                                      getSlideLabelTransition(Duration.millis(1200)))
-                                                                   .build();
-
+            ParallelTransition st = new ParallelTransition();
+            st.getChildren().setAll(getTileTransition(), getSlideLabelTransition(Duration.millis(1200)));
             st.play();
         } else if (model().getSlide().getShowAnimation() != null && AnimationType.TILE_IN_60_K == model().getSlide().getShowAnimation()) {
             for (final Node n : node().getChildren()) {
@@ -171,10 +161,8 @@ public final class ImageSlideView extends
             }
             this.tilePerRow = 50;
 
-            final ParallelTransition st = ParallelTransitionBuilder.create().children(
-                                                                                      getTileTransition(),
-                                                                                      getSlideLabelTransition(Duration.millis(1200)))
-                                                                   .build();
+            final ParallelTransition st = new ParallelTransition();
+            st.getChildren().setAll(getTileTransition(), getSlideLabelTransition(Duration.millis(1200)));
 
             st.play();
         } else {
@@ -188,12 +176,13 @@ public final class ImageSlideView extends
      * @return
      */
     private FadeTransition getSlideLabelTransition(final Duration gap) {
-        return FadeTransitionBuilder.create()
-                                    .node(this.slideLabel)
-                                    .delay(gap)
-                                    .duration(Duration.millis(1200))
-                                    .fromValue(0).toValue(1)
-                                    .build();
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setNode(this.slideLabel);
+        fadeTransition.setDelay(gap);
+        fadeTransition.setDuration(Duration.millis(1200));
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        return fadeTransition;
     }
 
     /**
@@ -201,11 +190,11 @@ public final class ImageSlideView extends
      */
     Animation getFadeTransition() {
         if (this.fadeTransition == null) {
-            this.fadeTransition = FadeTransitionBuilder.create()
-                                                       .node(node())
-                                                       .fromValue(0).toValue(1)
-                                                       .duration(Duration.seconds(1))
-                                                       .build();
+            this.fadeTransition = new FadeTransition();
+            ((FadeTransition) this.fadeTransition).setNode(node());
+            ((FadeTransition) this.fadeTransition).setFromValue(0);
+            ((FadeTransition) this.fadeTransition).setToValue(1);
+            ((FadeTransition) this.fadeTransition).setDuration(Duration.seconds(1));
         }
         return this.fadeTransition;
     }
@@ -228,34 +217,32 @@ public final class ImageSlideView extends
             for (double x = 0; x < width; x += tileWidth) {
                 for (double y = 0; y < height; y += tileHeight) {
 
-                    final ImageView iv = ImageViewBuilder
-                                                         .create()
-                                                         .image(getImage())
-                                                         .clip(RectangleBuilder.create().x(x).y(y)
-                                                                               .width(tileWidth).height(tileHeight)
-                                                                               .build())
-                                                         .opacity(0.0).layoutX(x)
-                                                         .layoutY(y).build();
+                    final ImageView iv = new ImageView();
+                    iv.setImage(getImage());
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.setX(x);
+                    rectangle.setY(y);
+                    rectangle.setWidth(tileWidth);
+                    rectangle.setHeight(tileHeight);
+                    iv.setClip(rectangle);
+                    iv.setOpacity(0.0);
+                    iv.setLayoutX(x);
+                    iv.setLayoutY(y);
 
                     node().getChildren().add(iv);
-
-                    fades.add(SequentialTransitionBuilder
-                                                         .create()
-                                                         .children(
-                                                                   PauseTransitionBuilder.create()
-                                                                                         .duration(getRandomDuration())
-                                                                                         .build(),
-                                                                   FadeTransitionBuilder.create().node(iv)
-                                                                                        .fromValue(0.0).toValue(1.0)
-                                                                                        .duration(getRandomDuration())
-                                                                                        .build())
-                                                         .build());
+                    PauseTransition pauseTransition = new PauseTransition();
+                    pauseTransition.setDuration(getRandomDuration());
+                    FadeTransition fadeTransition = new FadeTransition();
+                    fadeTransition.setFromValue(0.0);
+                    fadeTransition.setToValue(1.0);
+                    fadeTransition.setDuration(getRandomDuration());
+                    fades.add(new SequentialTransition(pauseTransition, fadeTransition));
 
                 }
 
             }
-            this.tileTransition = ParallelTransitionBuilder.create()
-                                                           .children(fades).build();
+            this.tileTransition = new ParallelTransition();
+            ((ParallelTransition) this.tileTransition).getChildren().setAll(fades);
 
             this.tileTransition.setOnFinished(new EventHandler<ActionEvent>() {
 

@@ -522,7 +522,7 @@ public final class ClassUtility implements UtilMessages {
 
         try {
             // store current visibility
-            final boolean accessible = method.isAccessible();
+            final boolean accessible = method.canAccess(instance);
 
             // let it accessible anyway
             method.setAccessible(true);
@@ -553,7 +553,7 @@ public final class ClassUtility implements UtilMessages {
 
         try {
             // store current visibility
-            final boolean accessible = field.isAccessible();
+            final boolean accessible = field.canAccess(instance);
 
             // let it accessible anyway
             field.setAccessible(true);
@@ -583,7 +583,7 @@ public final class ClassUtility implements UtilMessages {
         Object value = null;
         try {
             // store current visibility
-            final boolean accessible = field.isAccessible();
+            final boolean accessible = field.canAccess(instance);
 
             // let it accessible anyway
             field.setAccessible(true);

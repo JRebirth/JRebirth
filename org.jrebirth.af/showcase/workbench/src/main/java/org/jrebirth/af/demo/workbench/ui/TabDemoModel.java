@@ -1,12 +1,8 @@
 package org.jrebirth.af.demo.workbench.ui;
 
-import javafx.scene.layout.BorderPane;
-
 import org.jrebirth.af.api.module.Register;
 import org.jrebirth.af.api.ui.ModuleModel;
 import org.jrebirth.af.component.behavior.dockable.data.Dockable;
-import org.jrebirth.af.component.command.tab.AddTabCommand;
-import org.jrebirth.af.component.command.tab.TabWaveBean;
 import org.jrebirth.af.component.ui.beans.DockPaneConfig;
 import org.jrebirth.af.component.ui.beans.DockPaneOrientation;
 import org.jrebirth.af.component.ui.beans.TabbedPaneConfig;
@@ -14,6 +10,8 @@ import org.jrebirth.af.component.ui.beans.TabbedPaneOrientation;
 import org.jrebirth.af.component.ui.dock.DockPaneModel;
 import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.ui.simple.DefaultSimpleModel;
+
+import javafx.scene.layout.BorderPane;
 
 @Register(value = ModuleModel.class)
 public class TabDemoModel extends DefaultSimpleModel<BorderPane> implements ModuleModel {

@@ -28,6 +28,7 @@ import javafx.application.Application;
 import javafx.application.Preloader;
 import javafx.application.Preloader.ProgressNotification;
 import javafx.scene.Scene;
+import javafx.scene.SceneAntialiasing;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -59,9 +60,10 @@ import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
 import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
 import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.util.ModuleUtility;
 import org.jrebirth.af.preloader.JRebirthPreloader;
 
-import com.sun.javafx.application.LauncherImpl;
+//import com.sun.javafx.application.LauncherImpl;
 
 /**
  *
@@ -122,7 +124,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
      * @param args arguments passed to java command line
      */
     protected static void preloadAndLaunch(final Class<? extends Application> appClass, final Class<? extends Preloader> preloaderClass, final String... args) {
-        LauncherImpl.launchApplication(appClass, preloaderClass, args);
+        // LauncherImpl.launchApplication(appClass, preloaderClass, args);
+        // Waiting for patch
+        Application.launch(appClass, /* preloaderClass, */ args);
     }
 
     /**
@@ -457,7 +461,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
 
         final URL styleSheetURL = styleSheetItem.get();
         if (styleSheetURL == null) {
-            LOGGER.error(CSS_LOADING_ERROR, styleSheetItem.toString(), ResourceParameters.STYLE_FOLDER.get());
+          //  LOGGER.error(CSS_LOADING_ERROR, styleSheetItem.toString(), ResourceParameters.STYLE_FOLDER.get());
         } else {
             scene.getStylesheets().add(styleSheetURL.toExternalForm());
         }
@@ -506,8 +510,12 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         // TODO to be rewritten with ImageSet Resource when available
         return StageParameters.APPLICATION_ICONS.get()
                                                 .stream()
-                                                .map(p -> Resources.create(p).get())
+                                                .map(p -> Resources.create(p).module(getStageIconsModule()).get())
                                                 .collect(Collectors.toList());
+    }
+
+    protected Module getStageIconsModule() {
+        return ModuleUtility.find("org.jrebirth.af.resources");
     }
 
     /**
@@ -551,7 +559,9 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
         final Scene scene = new Scene(buildRootPane(),
                                       StageParameters.APPLICATION_SCENE_WIDTH.get(),
                                       StageParameters.APPLICATION_SCENE_HEIGHT.get(),
-                                      JRebirthColors.SCENE_BG_COLOR.get());
+                                      true,
+                                      SceneAntialiasing.BALANCED);
+        scene.setFill(JRebirthColors.SCENE_BG_COLOR.get());
 
         return scene;
     }

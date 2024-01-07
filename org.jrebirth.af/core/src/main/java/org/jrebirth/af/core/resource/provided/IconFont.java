@@ -51,7 +51,7 @@ public interface IconFont {
      * @return the unique font item with default size
      */
     static FontItem buildItem(final Class<? extends IconFont> iconFontClass, final FontExtension fontExtension) {
-        return Resources.create(new RealFont(new CustomFontName(iconFontClass.getSimpleName()), 16, fontExtension));
+        return Resources.create(new RealFont(new CustomFontName(iconFontClass.getSimpleName()), 16, fontExtension)).module(iconFontClass.getModule());
     }
 
     /**
@@ -64,7 +64,7 @@ public interface IconFont {
      * @return the unique font item with default size
      */
     static FontItem buildItem(final String fontName, final Class<? extends IconFont> iconFontClass, final FontExtension fontExtension) {
-        return Resources.create(new RealFont(new CustomFontName(fontName), 16, fontExtension));
+        return Resources.create(new RealFont(new CustomFontName(fontName), 16, fontExtension)).module(iconFontClass.getModule());
     }
 
     /**

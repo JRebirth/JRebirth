@@ -3,32 +3,73 @@
 	<parent>
 		<groupId>org.jrebirth</groupId>
 		<artifactId>af</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
+		<version>9.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.jrebirth.af</groupId>
 	<artifactId>rest</artifactId>
 	<name>Rest Services</name>
 	<description>Provides base classes for calling remote rest services</description>
-	
+
+	<properties>
+		<jaxb.api.version>2.3.2</jaxb.api.version>
+		<jaxb.impl.version>2.3.2</jaxb.impl.version>
+		<activation.api.version>1.2.1</activation.api.version>
+	</properties>
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.jrebirth.af</groupId>
+							<artifactId>processor</artifactId>
+							<version>${project.version}</version>
+							<classifier>4ide</classifier>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.jrebirth.af</groupId>
-			<artifactId>processor</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
-			<scope>provided</scope>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.1</version>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>processor</artifactId>
+			<version>${project.version}</version>
+			<classifier>4ide</classifier>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- <dependency> <groupId>javax.ws.rs</groupId> <artifactId>javax.ws.rs-api</artifactId> <version>2.1</version> </dependency> -->
+
+		<dependency>
+			<groupId>jakarta.ws.rs</groupId>
+			<artifactId>jakarta.ws.rs-api</artifactId>
+			<version>2.1.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>${jaxb.api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.activation</groupId>
+			<artifactId>jakarta.activation-api</artifactId>
+			<version>${activation.api.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>

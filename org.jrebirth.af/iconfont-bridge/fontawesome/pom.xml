@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>iconfont-bridge</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
+		<version>9.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -16,4 +16,8 @@
 	<description>Bridge to use FontAwesome</description>
 	<url>http://www.jrebirth.org</url>
 
+	<properties>
+		<resources.base.path>org/jrebirth/af/iconfontbridge/fontawesome</resources.base.path>
+	</properties>
+	
 </project>

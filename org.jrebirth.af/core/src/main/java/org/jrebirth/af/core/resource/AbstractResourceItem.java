@@ -12,6 +12,8 @@ public abstract class AbstractResourceItem<I, P extends ResourceParams, R> imple
 
     /** The unique identifier of the font item. */
     private int uid;
+    
+	private Module module = null;
 
     /**
      * Gets the uid.
@@ -32,5 +34,17 @@ public abstract class AbstractResourceItem<I, P extends ResourceParams, R> imple
         this.uid = uid;
         return (I) this;
     }
+    
+	@SuppressWarnings("unchecked")
+	@Override
+	public I module(Module module) {
+		this.module = module;
+    	return (I) this;
+	}
+    
+	@Override
+	public Module module() {
+		return module;
+	}
 
 }

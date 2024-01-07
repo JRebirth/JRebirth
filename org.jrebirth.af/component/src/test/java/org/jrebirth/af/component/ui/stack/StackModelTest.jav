@@ -2,10 +2,7 @@ package org.jrebirth.af.component.ui.stack;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
-import javafx.scene.Node;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-
+import org.fest.assertions.Assert;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
@@ -16,15 +13,15 @@ import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
 import org.jrebirth.af.core.key.Key;
 import org.jrebirth.af.core.test.AbstractBorderPaneTest;
 import org.jrebirth.af.core.wave.WBuilder;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Assert;
-import org.junit.FixMethodOrder;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
+import javafx.scene.Node;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@Ignore("Fails on CI Server")
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@Disabled("Fails on CI Server")
 public class StackModelTest extends AbstractBorderPaneTest {
 
     private void check(final Wave wave, final String value) {

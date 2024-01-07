@@ -19,9 +19,8 @@ package org.jrebirth.af.showcase.undoredo.ui;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPaneBuilder;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.PaneBuilder;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.AbstractView;
@@ -81,11 +80,10 @@ public final class UndoView extends AbstractView<UndoModel, BorderPane, UndoCont
         this.addSquareButton = new Button("Add Square");
         this.addRectangleButton = new Button("Add Rectangle");
 
-        node().setTop(FlowPaneBuilder.create()
-                                     .children(this.undoButton, this.redoButton, this.addCircleButton, this.addSquareButton, this.addRectangleButton)
-                                     .build());
+        node().setTop(new FlowPane(this.undoButton, this.redoButton, this.addCircleButton, this.addSquareButton, this.addRectangleButton));
 
-        this.editor = PaneBuilder.create().style("-fx-background-color:beige").build();
+        this.editor = new Pane();
+        this.editor.setStyle("-fx-background-color:beige");
 
         node().setCenter(this.editor);
 

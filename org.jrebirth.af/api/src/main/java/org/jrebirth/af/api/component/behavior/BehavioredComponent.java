@@ -17,6 +17,8 @@
  */
 package org.jrebirth.af.api.component.behavior;
 
+import java.util.List;
+
 import org.jrebirth.af.api.component.basic.Component;
 
 /**
@@ -67,6 +69,15 @@ public interface BehavioredComponent<C extends Component<C>> extends Component<C
      * @return the Behavior instance attached to the component
      */
     <BD extends BehaviorData, B extends Behavior<BD, ?>> B getBehavior(final Class<B> behaviorClass);
+
+    /**
+     * Return the list of {@link BehaviorAware} filtered using given parameter.
+     * 
+     * @param awareClass the class that shall be implemented by behaviors returned
+     * 
+     * @return the list of {@link BehaviorAware}
+     */
+    <BA extends BehaviorAware> List<BA> getBehaviorsAware(final Class<BA> awareClass);
 
     /**
      * Return the {@link BehaviorData} used by the given Behavior type.

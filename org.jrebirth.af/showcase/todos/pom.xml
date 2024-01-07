@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
+		<version>9.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -17,19 +17,12 @@
 	<url>http://www.jrebirth.org/apps/Todos.html</url>
 
 	<properties>
-
-		<jnlpFilename>Todos-Showcase.jnlp</jnlpFilename>
-		<appClass>org.jrebirth.af.showcase.wave.TodosApplication</appClass>
-
+		<appClass>org.jrebirth.af.showcase.todos.TodosApplication</appClass>
+		<resources.base.path></resources.base.path><!--org/jrebirth/af/showcase/todos-->
 	</properties>
 
 	<build>
 		<plugins>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>webstart-maven-plugin</artifactId>
-			</plugin>
 <!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -43,10 +36,11 @@
 			<plugin>
 				<groupId>org.jrebirth.af.tooling</groupId>
 				<artifactId>jrebirth-maven-plugin</artifactId>
-				<version>8.7.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<configuration>
 					<ecoreFile>model/Todos.ecore</ecoreFile>
 					<outputDirectory>${project.build.directory}/generated-sources/model</outputDirectory>
+					<outputKind>custom</outputKind>
 				</configuration>
 				<executions>
 					<execution>
@@ -61,6 +55,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>
@@ -83,14 +78,14 @@
  		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.iconfont-bridge</groupId>
 			<artifactId>fontawesome</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

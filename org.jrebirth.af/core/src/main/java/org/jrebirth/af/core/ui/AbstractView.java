@@ -17,9 +17,6 @@
  */
 package org.jrebirth.af.core.ui;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-
 import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -27,12 +24,9 @@ import javafx.event.EventTarget;
 import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.PaneBuilder;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Window;
-
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.facade.JRebirthEventType;
 import org.jrebirth.af.api.log.JRLogger;
@@ -50,6 +44,9 @@ import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.handler.AnnotationEventHandler;
 import org.jrebirth.af.core.util.ClassUtility;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 
 /**
  *
@@ -141,10 +138,10 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
      * @param ce the CoreException to display
      */
     private void buildErrorNode(final CoreException ce) {
-        final TextArea ta = TextAreaBuilder.create()
-                                           .text(ce.getMessage())
-                                           .build();
-        this.errorNode = PaneBuilder.create().children(ta).build();
+        final TextArea ta = new TextArea();
+        ta.setText(ce.getMessage());
+        this.errorNode = new Pane();
+        errorNode.getChildren().setAll(ta);
     }
 
     /**
@@ -243,16 +240,15 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
                 // If a property was private, it must set to accessible = false after processing action
                 boolean needToHide = false;
                 // For private properties, set them accessible temporary
-                if (!f.isAccessible()) {
+                if (!f.canAccess(this)) {
                     f.setAccessible(true);
                     needToHide = true;
                 }
-
                 // Process all existing annotation for the current field
                 processAnnotations(f);
 
                 // Reset the property visibility
-                if (needToHide && f.isAccessible()) {
+                if (needToHide && f.canAccess(this)) {
                     f.setAccessible(false);
                 }
             }

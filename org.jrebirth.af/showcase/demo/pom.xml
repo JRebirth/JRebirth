@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
+		<version>9.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -21,60 +21,47 @@
 
 		<archiveName>JRebirthDemo</archiveName>
 		<exeIcon>src/main/resources/images/JRebirth_64x64.ico</exeIcon>
-		<appClass>org.jrebirth.af.showcase.demo.JRebirthDemo</appClass>
 
-		<appletWidth>800</appletWidth>
-		<appletHeight>600</appletHeight>
 
+		<appClass>${project.groupId}.${project.artifactId}.JRebirthDemo</appClass>
+		<resources.base.path>org/jrebirth/af/showcase/demo</resources.base.path>
 	</properties>
-
 
 	<build>
 
-		<resources>
-			<resource>
-				<filtering>false</filtering>
-				<directory>${basedir}/src/main/java</directory>
-				<includes>
-					<include>**/*.fxml</include>
-					<include>**/*.properties</include>
-					<include>**/*.txt</include>
-				</includes>
-			</resource>
-			<resource>
-				<filtering>true</filtering>
-				<directory>${basedir}/src/main/resources</directory>
-				<includes>
-					<include>**/*.*</include>
-				</includes>
-				<excludes>
-					<exclude>**/*.ttf</exclude>
-					<exclude>**/*.ico</exclude>
-				</excludes>
-			</resource>
-			<resource>
-				<filtering>false</filtering>
-				<directory>${basedir}/src/main/resources</directory>
-				<includes>
-					<include>**/*.ttf</include>
-					<include>**/*.ico</include>
-				</includes>
-			</resource>
-		</resources>
+		<plugins>
+
+			<plugin>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<version>0.0.3</version>
+				<configuration>
+				
+					<stripDebug>true</stripDebug>
+					<compress>2</compress>
+					<noHeaderFiles>true</noHeaderFiles>
+					<noManPages>true</noManPages>
+					<launcher>JRebirthDemo</launcher>
+					<jlinkImageName>JRebirthDemo</jlinkImageName>
+					<jlinkZipName>JRebirthDemoApp</jlinkZipName>
+					<mainClass>${project.groupId}.${project.artifactId}/${appClass}</mainClass>
+					<bindServices>true</bindServices>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>deploy</phase>
+						<goals>
+							<goal>jlink</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
 
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.3</version>
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-
+			
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
@@ -83,18 +70,15 @@
 					<configuration>
 						<archive>
 							<manifestEntries>
-								<JavaFX-Version>8.0</JavaFX-Version>
+								<JavaFX-Version>11.0.0</JavaFX-Version>
 								<Main-Class>${appClass}</Main-Class>
 								<!--<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class> -->
 							</manifestEntries>
 
-							<manifest>
-								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-								<addClasspath>true</addClasspath>
-								<classpathLayoutType>custom</classpathLayoutType>
-								<customClasspathLayout>${artifact.groupId}-${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}</customClasspathLayout>
-							</manifest>
+							<!-- <manifest> <addDefaultImplementationEntries>true</addDefaultImplementationEntries> 
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries> <addClasspath>true</addClasspath> 
+								<classpathLayoutType>custom</classpathLayoutType> <customClasspathLayout>${artifact.groupId}-${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}</customClasspathLayout> 
+								</manifest> -->
 						</archive>
 					</configuration>
 				</plugin>
@@ -115,13 +99,15 @@
 						<shadedArtifactAttached>false</shadedArtifactAttached>
 						<shadedClassifierName>shaded</shadedClassifierName>
 						<transformers>
-							<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<transformer
+								implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 								<mainClass>${appClass}</mainClass>
 								<manifestEntries>
 									<Class-Path>.</Class-Path>
 								</manifestEntries>
 							</transformer>
-							<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+							<transformer
+								implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 						</transformers>
 						<finalName>${archiveName}-${project.version}</finalName>
 					</configuration>
@@ -169,98 +155,7 @@
 					</executions>
 				</plugin>
 
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>webstart-maven-plugin</artifactId>
-					<version>1.0-beta-6</version>
 
-					<dependencies>
-						<dependency>
-							<groupId>org.codehaus.mojo</groupId>
-							<artifactId>keytool-api-1.7</artifactId>
-							<version>1.4</version>
-						</dependency>
-						<dependency>
-							<groupId>org.codehaus.mojo</groupId>
-							<artifactId>webstart-pack200-impl</artifactId>
-							<version>1.0-beta-6</version>
-						</dependency>
-					</dependencies>
-
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>jnlp-inline</goal>
-							</goals>
-						</execution>
-					</executions>
-
-					<configuration>
-
-						<filenameMapping>full</filenameMapping>
-
-						<updateManifestEntries>
-							<Application-Name>${project.name}</Application-Name>
-							<Trusted-Library>true</Trusted-Library>
-							<Permissions>${permissions}</Permissions>
-							<Codebase>${codebase}</Codebase>
-							<Trusted-Only>true</Trusted-Only>
-						</updateManifestEntries>
-
-
-						<jnlpFiles>${archiveName}.jnlp</jnlpFiles>
-						<excludeTransitive>false</excludeTransitive>
-
-						<libPath>lib</libPath>
-						<codebase>${codebase}</codebase>
-
-						<jnlp>
-							<outputFile>${archiveName}.jnlp</outputFile>
-							<mainClass>${appClass}</mainClass>
-							<offlineAllowed>true</offlineAllowed>
-							<allPermissions>true</allPermissions>
-						</jnlp>
-
-						<sign>
-							<keystore>${keystore}</keystore>
-							<keypass>${keypass}</keypass>
-							<storepass>${storepass}</storepass>
-							<storetype>${storetype}</storetype>
-
-							<alias>${keyalias}</alias>
-
-							<validity>360</validity>
-							<dnameCn>JRebirth Self-signed Certificate</dnameCn>
-							<dnameOu>JRebirth OSS</dnameOu>
-							<dnameO>JRebirth</dnameO>
-							<dnameL>Toulouse</dnameL>
-							<dnameSt>Haute-Garonne</dnameSt>
-							<dnameC>FR</dnameC>
-							<verify>true</verify>
-
-							<keystoreConfig>
-								<delete>${deletekeystore}</delete>
-								<gen>${genkeystore}</gen>
-							</keystoreConfig>
-
-						</sign>
-
-						<unsignAlreadySignedJars>true</unsignAlreadySignedJars>
-
-						<pack200>
-							<enabled>true</enabled>
-						</pack200>
-						<gzip>true</gzip>
-						<archive>${project.build.directory}/${archiveName}-${project.version}.zip</archive>
-
-						<outputJarVersions>false</outputJarVersions>
-
-						<install>false</install>
-						<verbose>true</verbose>
-					</configuration>
-
-				</plugin>
 
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -294,74 +189,38 @@
 	<profiles>
 
 		<profile>
-			<id>WebStart</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>webstart-maven-plugin</artifactId>
-					</plugin>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>wagon-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>deploy-webstart-archive</id>
-								<phase>site-deploy</phase>
-								<goals>
-									<goal>upload-single</goal>
-								</goals>
-								<configuration>
-									<fromFile>${project.build.directory}/${archiveName}-${project.version}.zip</fromFile>
-									<toFile>${deployPath}/${archiveName}-${project.version}.zip</toFile>
-								</configuration>
-							</execution>
-							<execution>
-								<id>deploy-webstart-jnlp</id>
-								<phase>site-deploy</phase>
-								<goals>
-									<goal>upload</goal>
-								</goals>
-								<configuration>
-									<fromDir>${project.build.directory}/jnlp</fromDir>
-									<toDir>${deployPath}/jnlp</toDir>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
 			<id>AutoJar</id>
 			<build>
 				<plugins>
+
 					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-jar-plugin</artifactId>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-shade-plugin</artifactId>
-					</plugin>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>wagon-maven-plugin</artifactId>
+						<!-- NOTE: We don't need a groupId specification because the group 
+							is org.apache.maven.plugins ...which is assumed by default. -->
+						<artifactId>maven-assembly-plugin</artifactId>
+						<version>3.1.1</version>
+						<configuration>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
 						<executions>
 							<execution>
-								<id>deploy-self-jar</id>
-								<phase>site-deploy</phase>
+								<id>make-assembly</id> <!-- this is used for inheritance merges -->
+								<phase>package</phase> <!-- bind to the packaging phase -->
 								<goals>
-									<goal>upload-single</goal>
+									<goal>single</goal>
 								</goals>
-								<configuration>
-									<fromFile>${project.build.directory}/${archiveName}-${project.version}.jar</fromFile>
-									<toFile>${deployPath}/${archiveName}-${project.version}.jar</toFile>
-								</configuration>
 							</execution>
 						</executions>
 					</plugin>
+
+					<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jar-plugin</artifactId> 
+						</plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-shade-plugin</artifactId> 
+						</plugin> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>wagon-maven-plugin</artifactId> 
+						<executions> <execution> <id>deploy-self-jar</id> <phase>site-deploy</phase> 
+						<goals> <goal>upload-single</goal> </goals> <configuration> <fromFile>${project.build.directory}/${archiveName}-${project.version}.jar</fromFile> 
+						<toFile>${deployPath}/${archiveName}-${project.version}.jar</toFile> </configuration> 
+						</execution> </executions> </plugin> -->
 				</plugins>
 			</build>
 		</profile>
@@ -400,46 +259,81 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<!-- Modules -->
 		<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>resources</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>undoredo</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>fxml</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>todos</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>fonticon</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>wave</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>workbench</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
+ 		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-base</artifactId>
+			<version>${openjfx.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-graphics</artifactId>
+			<version>${openjfx.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>${openjfx.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>${openjfx.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.3.0-alpha4</version>		
+		</dependency>
+		
 	</dependencies>
 
 </project>

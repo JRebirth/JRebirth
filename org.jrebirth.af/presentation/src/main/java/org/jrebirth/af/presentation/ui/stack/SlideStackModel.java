@@ -22,7 +22,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
-import javafx.animation.ParallelTransitionBuilder;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -208,7 +207,7 @@ public final class SlideStackModel extends DefaultModel<SlideStackModel, SlideSt
      * @return the animation to show
      */
     private ParallelTransition buildSlideTransition(final boolean isReverse, final SlideModel<SlideStep> previousSlideModel, final SlideModel<SlideStep> selectedSlideModel) {
-        final ParallelTransition slideAnimation = ParallelTransitionBuilder.create().build();
+        final ParallelTransition slideAnimation = new ParallelTransition();
 
         if (previousSlideModel != null) {
             final Animation a = isReverse ? previousSlideModel.getShowAnimation() : previousSlideModel.getHideAnimation();

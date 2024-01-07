@@ -17,7 +17,6 @@
  */
 package org.jrebirth.af.processor;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,13 +43,6 @@ import javax.tools.FileObject;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
 
-import org.jrebirth.af.api.annotation.Preload;
-import org.jrebirth.af.api.annotation.PriorityLevel;
-import org.jrebirth.af.api.module.BootComponent;
-import org.jrebirth.af.api.module.Register;
-import org.jrebirth.af.api.module.RegistrationPoint;
-import org.jrebirth.af.core.module.AbstractModuleStarter;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -58,7 +50,13 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
-import org.jboss.forge.roaster.model.util.Formatter;
+import org.jrebirth.af.api.annotation.Preload;
+import org.jrebirth.af.api.annotation.PriorityLevel;
+import org.jrebirth.af.api.module.BootComponent;
+import org.jrebirth.af.api.module.ModuleStarter;
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.module.RegistrationPoint;
+import org.jrebirth.af.core.module.AbstractModuleStarter;
 
 /**
  * The Class ComponentProcessor.
@@ -70,6 +68,9 @@ public class ComponentProcessor extends AbstractProcessor {
     private static final String MODULE_STARTER_CLASS_PROPERTY = "moduleStarterClass";
     private static final String FORMATTER_PROPERTIES_FILE = "/org.eclipse.jdt.core.prefs";
     private static final String MODULE_STARTER_SPI_PATH = "META-INF/services/org.jrebirth.af.api.module.ModuleStarter";
+    private static final String POM_XML = "pom.xml";
+    private static final String TARGET = "target";
+    private static final String FAKE_FILE = "fake.file";
 
     /**
      * {@inheritDoc}
@@ -181,7 +182,8 @@ public class ComponentProcessor extends AbstractProcessor {
 
             final Properties prefs = new Properties();
             prefs.load(this.getClass().getResourceAsStream(FORMATTER_PROPERTIES_FILE));
-            final String formattedSource = Formatter.format(prefs, javaClass);
+            //final String formattedSource =  Formatter.format(prefs, javaClass.toString());
+            final String formattedSource =  javaClass.toString();
 
             // System.out.println(formattedSource);
 
@@ -330,39 +332,18 @@ public class ComponentProcessor extends AbstractProcessor {
         return name;
     }
 
-    private String getProjectPath() {
-        try {
-
-            final JavaFileObject generationForPath = processingEnv.getFiler().createSourceFile("PathFinder");
-            final Writer writer = generationForPath.openWriter();
-            final String sourcePath = generationForPath.toUri().getPath();
-            writer.close();
-
-            // generationForPath.delete();
-
-            return sourcePath.substring(0, sourcePath.indexOf("/target"));
-        } catch (final IOException e) {
-            processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING, "Unable to determine source file path!");
-        }
-
-        return "";
-    }
-
     private String getModuleStarterNameFromMaven(ProcessingEnvironment processingEnv) throws IOException, NoSuchFieldException, IllegalAccessException, XmlPullParserException {
 
-        /*
-         * final Field f = processingEnv.getClass().getDeclaredField("options"); f.setAccessible(true); final Object options = f.get(processingEnv); final Field ff =
-         * options.getClass().getDeclaredField("values"); ff.setAccessible(true); final Map opt = (Map) ff.get(options); final String outputClasses = (String) opt.get("-d"); String baseDir =
-         * outputClasses.substring(0, outputClasses.indexOf("target"));
-         */
-
-        final String baseDir = getProjectPath() + "/";
+        final FileObject fo = processingEnv.getFiler().getResource(StandardLocation.CLASS_OUTPUT, "", FAKE_FILE);
+        final String path = fo.getName().substring(0, fo.getName().lastIndexOf(TARGET));
         final MavenXpp3Reader pomReader = new MavenXpp3Reader();
-        final Model model = pomReader.read(new FileReader(new File(baseDir + "pom.xml")));
 
-        final String pkg = model.getGroupId() + "." + model.getArtifactId();
-        final String starterName = StringUtils.capitalize(model.getArtifactId()) + "ModuleStarter";
-        return pkg + "." + starterName;
+        try (FileReader fr = new FileReader(path + POM_XML)) {
+            final Model model = pomReader.read(fr);
+            final String pkg = model.getGroupId() + "." + model.getArtifactId();
+            final String starterName = StringUtils.capitalize(model.getArtifactId()) + ModuleStarter.class.getSimpleName();
+            return pkg + "." + starterName;
+        }
     }
 
 }

@@ -17,16 +17,10 @@
  */
 package org.jrebirth.af.core.ui.fxml;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.text.TextBuilder;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
-
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.Model;
@@ -35,6 +29,11 @@ import org.jrebirth.af.api.ui.fxml.FXMLControllerFactory;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.provided.parameter.ExtensionParameters;
 import org.jrebirth.af.core.util.ParameterUtility;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 /**
  * The class <strong>FXMLUtils</strong>.
@@ -119,7 +118,7 @@ public final class FXMLUtils implements FXMLMessages {
         try {
             error = fxmlLoader.getLocation() == null;
             if (error) {
-                node = TextBuilder.create().text(FXML_ERROR_NODE_LABEL.getText(fxmlPath)).build();
+                node = new Text(FXML_ERROR_NODE_LABEL.getText(fxmlPath));
             } else {
                 node = (Node) fxmlLoader.load(fxmlLoader.getLocation().openStream());
             }
@@ -163,6 +162,8 @@ public final class FXMLUtils implements FXMLMessages {
         if (fxmlUrl == null) {
             // Try to load the resource from the full path org/jrebirth/core/ui/Test.fxml
             fxmlUrl = Thread.currentThread().getContextClassLoader().getResource(fxmlPath);
+            //fxmlUrl = model.getClass().getClassLoader().getResource(fxmlPath);
+            // FIXME TODO standardize without path ?? ModuleUtility.getResourceAsURL(model, "", fxmlPath);
         }
 
         return fxmlUrl;

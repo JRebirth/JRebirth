@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
+		<version>9.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -17,32 +17,21 @@
 
 
 	<properties>
-
-		<jnlpFilename>UndoRedo-Showcase.jnlp</jnlpFilename>
-		<appClass>org.jrebirth.af.showcase.undoredo.UndoRedoApplication</appClass>
-
+		<appClass>${project.groupId}.${project.artifactId}.UndoRedoApplication</appClass>
+		<resources.base.path>org/jrebirth/af/showcase/undoredo</resources.base.path>
 	</properties>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>webstart-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 	<dependencies>
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>undoredo</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

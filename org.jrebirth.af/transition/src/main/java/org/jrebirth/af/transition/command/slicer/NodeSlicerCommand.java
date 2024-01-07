@@ -28,15 +28,15 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.image.WritableImage;
-import javafx.scene.shape.RectangleBuilder;
+import javafx.scene.shape.Rectangle;
 
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.service.DefaultService;
 import org.jrebirth.af.core.wave.WBuilder;
 import org.jrebirth.af.core.wave.WaveBase;
 import org.jrebirth.af.transition.slicer.TransitionWaves;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -69,7 +69,7 @@ public class NodeSlicerCommand extends DefaultService {
     private final IntegerProperty tileHeightProperty = new SimpleIntegerProperty();
 
     /** The image property. */
-    private final ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
+    private final ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>();
 
     /** The slices. */
     private final List<ImageView> slices = new ArrayList<>();
@@ -255,20 +255,14 @@ public class NodeSlicerCommand extends DefaultService {
             for (double y = 0; y < height; y += getTileHeight()) {
 
                 // TODO OPTIMIZE
-                final ImageView iv = ImageViewBuilder
-                                                     .create()
-                                                     .image(getImage())
-                                                     .clip(RectangleBuilder.create()
-                                                                           .x(x)
-                                                                           .y(y)
-                                                                           .width(getTileWidth())
-                                                                           .height(getTileHeight())
-                                                                           .build())
-                                                     .opacity(1.0)
-                                                     .scaleX(0.9) // TODO
-                                                     .layoutX(x)
-                                                     .layoutY(y)
-                                                     .build();
+                final ImageView iv = new ImageView(getImage());
+
+                final Rectangle rect = new Rectangle(x, y, getTileWidth(), getTileHeight());
+                iv.setClip(rect);
+                iv.setOpacity(1.0);
+                iv.setScaleX(0.9); // TODO
+                iv.setLayoutX(x);
+                iv.setLayoutY(y);
 
                 this.slices.add(iv);
             }

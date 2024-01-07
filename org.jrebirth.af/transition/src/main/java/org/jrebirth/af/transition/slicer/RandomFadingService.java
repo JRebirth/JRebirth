@@ -23,7 +23,6 @@ import java.util.List;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.TimelineBuilder;
 import javafx.beans.property.DoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -120,9 +119,8 @@ public class RandomFadingService extends DefaultService {
             // }
         }
 
-        this.timeline = TimelineBuilder.create()
-                                       .keyFrames(keyFrames)
-                                       .build();
+        this.timeline = new Timeline();
+        timeline.getKeyFrames().addAll(keyFrames);
 
     }
 

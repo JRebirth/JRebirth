@@ -19,10 +19,12 @@ package org.jrebirth.af.core.component.behavior;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.jrebirth.af.api.annotation.SkipAnnotation;
 import org.jrebirth.af.api.component.basic.Component;
 import org.jrebirth.af.api.component.behavior.Behavior;
+import org.jrebirth.af.api.component.behavior.BehaviorAware;
 import org.jrebirth.af.api.component.behavior.BehaviorData;
 import org.jrebirth.af.api.component.behavior.BehavioredComponent;
 import org.jrebirth.af.api.key.UniqueKey;
@@ -149,6 +151,18 @@ public abstract class AbstractBehavioredComponent<C extends BehavioredComponent<
         }
 
         return behavior;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public <BA extends BehaviorAware> List<BA> getBehaviorsAware(final Class<BA> awareClass) {
+        return this.behaviors.values().stream()
+                             .flatMap(List::stream)
+                             .filter(b -> awareClass.isAssignableFrom(b.getClass()))
+                             .map(awareClass::cast)
+                             .collect(Collectors.toList());
     }
 
     /**
