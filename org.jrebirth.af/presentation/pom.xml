@@ -44,10 +44,10 @@
 
 				<configuration>
 					<sources>
-						<source>${basedir}/src/main/resources/presentation/Presentation.xsd</source>
+						<source>src/main/resources/presentation/Presentation.xsd</source>
 					</sources>
 					<packageName>org.jrebirth.af.presentation.model</packageName>
-					<outputDirectory>${basedir}/target/generated-sources</outputDirectory>
+					<outputDirectory>target/generated-sources</outputDirectory>
 
 					<failOnNoSchemas>false</failOnNoSchemas>
 
