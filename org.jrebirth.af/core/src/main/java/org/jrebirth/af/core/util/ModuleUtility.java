@@ -72,11 +72,12 @@ public final class ModuleUtility implements UtilMessages {
 
 	public static URL getResourceAsURL(Object object, String resourcePath, String resourceName) {
 		Module m = getModule(object);
-		URL url = m.getClassLoader().getResource(resourcePath + resourceName);
+		String path = resourcePath + resourceName;
+		URL url = m.getClassLoader().getResource(path);
 		if (url == null) {
 			LOGGER.error("Resource : {} not found into module folder: {}", resourceName, resourcePath);
 		}
-		return url;
+		return url; 
 	}
 
 	public static Module find(String moduleName) {
