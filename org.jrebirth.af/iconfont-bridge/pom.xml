@@ -4,8 +4,7 @@
 	<parent>
 		<artifactId>af</artifactId>
 		<groupId>org.jrebirth</groupId>
-		<version>8.7.0-SNAPSHOT</version>
-		<relativePath>..</relativePath>
+		<version>${jrebirth.version}</version>
 	</parent>
 
 	<groupId>org.jrebirth.af</groupId>
@@ -96,19 +95,19 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
+			<version>1.3.14</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>

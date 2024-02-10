@@ -3,8 +3,7 @@
 	<parent>
 		<groupId>org.jrebirth</groupId>
 		<artifactId>af</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
-		<relativePath>..</relativePath>
+		<version>${jrebirth.version}</version>
 	</parent>
 
 	<groupId>org.jrebirth.af</groupId>
@@ -19,13 +18,13 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>api</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>preloader</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -33,14 +32,14 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>resources</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
+			<version>1.3.14</version>
 			<scope>provided</scope>
 		</dependency>
 

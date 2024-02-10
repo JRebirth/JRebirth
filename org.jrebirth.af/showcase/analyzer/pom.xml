@@ -3,8 +3,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
-		<relativePath>..</relativePath>
+		<version>${jrebirth.version}</version>
 	</parent>
 	
 	<groupId>org.jrebirth.af.showcase</groupId>
@@ -147,7 +146,7 @@
 								</classPath>
 								<icon>${exeIcon}</icon>
 								<jre>
-									<minVersion>1.8.0</minVersion>
+									<minVersion>11</minVersion>
 									<jdkPreference>preferJre</jdkPreference>
 								</jre>
 								<versionInfo>
@@ -398,7 +397,7 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

@@ -5,8 +5,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>tooling</artifactId>
-		<version>8.7.0-SNAPSHOT</version>
-		<relativePath>..</relativePath>
+		<version>${jrebirth.version}</version>
 	</parent>
 
 	<groupId>org.jrebirth.af.tooling</groupId>
@@ -50,7 +49,7 @@
 		<dependency>
 			<groupId>org.jrebirth.af.tooling</groupId>
 			<artifactId>ecore2fx</artifactId>
-			<version>8.7.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		
 	</dependencies>
