@@ -18,6 +18,7 @@
 package org.jrebirth.af.core.resource.builder;
 
 import java.lang.ref.SoftReference;
+import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -41,13 +42,13 @@ import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
 public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P extends ResourceParams, R> implements ResourceBuilder<I, P, R> {
 
     /** The resource weak Map. */
-    private final Map<I, P> paramsMap = new WeakHashMap<>();
+    private final Map<I, P> paramsMap = Collections.synchronizedMap(new WeakHashMap<>());
 
     /**
      * The resource weak Map.<br />
      * SoftReference can be kept longer in memory depending on the -client or -server jvm argument and on Xms and Xms values.
      */
-    protected final Map<String, SoftReference<R>> resourceMap = new WeakHashMap<>();
+    protected final Map<String, SoftReference<R>> resourceMap = Collections.synchronizedMap(new WeakHashMap<>());
 
     /**
      * {@inheritDoc}
@@ -93,7 +94,7 @@ public abstract class AbstractResourceBuilder<I extends ResourceItem<?, ?, ?>, P
         // Retrieve the resource weak reference from the map
         final SoftReference<R> resourceSoftRef = this.resourceMap.get(paramsKey);
 
-        // Warning the gc can collect gthe resource between the test and the getter call so we have to get the resource immediately
+        // Warning the gc can collect the resource between the test and the getter call so we have to get the resource immediately
         // and test it instead of testing the reference value
 
         // The resourceSoftRef may be null if nobody use it
