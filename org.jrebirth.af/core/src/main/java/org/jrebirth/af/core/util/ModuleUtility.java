@@ -17,15 +17,13 @@
  */
 package org.jrebirth.af.core.util;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLEncoder;
-
 import org.jrebirth.af.api.resource.ResourceItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 /**
  * The class <strong>ClassUtility</strong>.
@@ -74,15 +72,9 @@ public final class ModuleUtility implements UtilMessages {
 
 	public static URL getResourceAsURL(Object object, String resourcePath, String resourceName) {
 		Module m = getModule(object);
-		String path = resourcePath + resourceName;
-		URL url = null;
-		try {
-			url = m.getClassLoader().getResource(URLEncoder.encode(path, "UTF-8"));
-			if (url == null) {
-				LOGGER.error("Resource : {} not found into module folder: {}", resourceName, resourcePath);
-			}
-		} catch (UnsupportedEncodingException e) {
-			LOGGER.error("Impossible to encode path " + path, e);
+		URL url = m.getClassLoader().getResource(resourcePath + resourceName);
+		if (url == null) {
+			LOGGER.error("Resource : {} not found into module folder: {}", resourceName, resourcePath);
 		}
 		return url;
 	}
