@@ -126,7 +126,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     protected static void preloadAndLaunch(final Class<? extends Application> appClass, final Class<? extends Preloader> preloaderClass, final String... args) {
         // LauncherImpl.launchApplication(appClass, preloaderClass, args);
         // Waiting for patch
-        Application.launch(appClass, /* preloaderClass, */ args);
+    	System.setProperty("javafx.preloader", preloaderClass.getName());
+        Application.launch(appClass, args);
     }
 
     /**

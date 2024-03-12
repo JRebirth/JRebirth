@@ -57,7 +57,7 @@ public final class ModuleUtility implements UtilMessages {
 
 	public static InputStream getResourceAsStream(Object object, String resourcePath, String resourceName) {
 		Module m = getModule(object);
-		String path = resourcePath + resourceName;
+		String path = m.getName().replace(".", "/") + "/" + resourcePath + resourceName;
 		InputStream is = null;
 		try {
 			is = m.getResourceAsStream(path);

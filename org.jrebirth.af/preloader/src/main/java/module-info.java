@@ -7,4 +7,6 @@ module org.jrebirth.af.preloader {
     exports org.jrebirth.af.preloader;
 
     requires javafx.controls;
+    
+    opens org.jrebirth.af.preloader.images;
 }

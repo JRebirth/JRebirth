@@ -10,4 +10,8 @@
 	<name>JRAF Resources</name>
 	<description>Module embedding default resources for JRebirth Application Framework</description>
 
+	<properties>
+		<resources.base.path>org/jrebirth/af/resources</resources.base.path>
+	</properties>
+	
 </project>

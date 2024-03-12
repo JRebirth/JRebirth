@@ -17,6 +17,9 @@
  */
 package org.jrebirth.af.preloader;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import javafx.animation.ScaleTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -47,9 +50,9 @@ public class JRebirthPreloader extends AbstractJRebirthPreloader {
         final StackPane p = new StackPane();
         p.setStyle("-fx-background-color: transparent;");
 
-        final ImageView logo = new ImageView(new Image("JRebirth_Title.png"));
-        p.getChildren().add(logo);
-        StackPane.setAlignment(logo, Pos.CENTER);
+    	final ImageView logo = new ImageView(new Image("org/jrebirth/af/preloader/images/JRebirth_Title.png"));
+    	p.getChildren().add(logo);
+    	StackPane.setAlignment(logo, Pos.CENTER);
 
         this.progressBar = new ProgressBar(0.0);
         this.progressBar.setPrefSize(460, 20);
