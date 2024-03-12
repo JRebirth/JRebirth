@@ -5,7 +5,5 @@
  */
 module org.jrebirth.af.resources {
 
-    //exports org.jrebirth.af.resources;
-    //exports org.jrebirth.af.resources.images;
-	opens org.jrebirth.af.resources.images;
+	opens images;
 }
