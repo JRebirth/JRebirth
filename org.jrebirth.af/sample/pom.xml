@@ -135,6 +135,12 @@
 			<artifactId>preloader</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.jrebirth.af</groupId>
+			<artifactId>resources</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 
 </project>

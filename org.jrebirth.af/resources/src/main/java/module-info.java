@@ -3,7 +3,6 @@
  * 
  * @author Sébastien Bordes
  */
-module org.jrebirth.af.resources {
+open module org.jrebirth.af.resources {
 
-	opens images;
 }

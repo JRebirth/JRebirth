@@ -52,7 +52,7 @@ public enum ResourcesImages implements ImageEnum {
      */
     @Override
     public Module module() {
-        return ModuleUtility.find("org.jrebirth.af.resources.images");
+        return ModuleUtility.find("org.jrebirth.af.resources");
     }
 
 }

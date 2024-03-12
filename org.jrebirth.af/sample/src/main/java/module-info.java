@@ -17,6 +17,8 @@ module org.jrebirth.af.sample {
 	requires javafx.controls;
 
     requires org.jrebirth.af.core;
+    requires org.jrebirth.af.preloader;
+    requires org.jrebirth.af.resources;
 
     requires org.slf4j;
 }
