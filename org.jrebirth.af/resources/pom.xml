@@ -8,6 +8,6 @@
 	<groupId>org.jrebirth.af</groupId>
 	<artifactId>resources</artifactId>
 	<name>JRAF Resources</name>
-	<description>Module embedding default resoruces for JRebirth Application Framework</description>
+	<description>Module embedding default resources for JRebirth Application Framework</description>
 
 </project>

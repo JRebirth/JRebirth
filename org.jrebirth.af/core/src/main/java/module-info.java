@@ -9,6 +9,7 @@ module org.jrebirth.af.core {
 
     requires transitive org.jrebirth.af.api;
     requires org.jrebirth.af.preloader;
+    requires org.jrebirth.af.resources;
 
     requires static ch.qos.logback.classic;
     requires static ch.qos.logback.core;

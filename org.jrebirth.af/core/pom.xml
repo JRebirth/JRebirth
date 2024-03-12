@@ -50,7 +50,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Optionnal dependency storing resources, can be exluded from dependency list -->
+		<!-- Optional dependency storing resources, can be excluded from dependency list -->
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>resources</artifactId>
