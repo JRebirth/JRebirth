@@ -1,7 +1,6 @@
 package org.jrebirth.af.rest.service.impl;
 
-import javax.ws.rs.client.WebTarget;
-
+import jakarta.ws.rs.client.WebTarget;
 import org.jrebirth.af.api.annotation.Link;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.service.AbstractService;

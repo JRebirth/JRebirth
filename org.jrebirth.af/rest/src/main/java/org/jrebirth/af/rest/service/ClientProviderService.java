@@ -1,7 +1,6 @@
 package org.jrebirth.af.rest.service;
 
-import javax.ws.rs.client.Client;
-
+import jakarta.ws.rs.client.Client;
 import org.jrebirth.af.api.module.RegistrationPoint;
 import org.jrebirth.af.api.service.Service;
 

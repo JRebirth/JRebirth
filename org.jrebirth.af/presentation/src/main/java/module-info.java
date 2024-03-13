@@ -10,7 +10,7 @@ open module org.jrebirth.af.presentation {
 	requires org.jrebirth.af.api;
     requires org.jrebirth.af.core;
 
-    requires java.xml.bind;
+    requires jakarta.xml.bind;
     
     requires org.slf4j;
 

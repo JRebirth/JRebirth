@@ -12,7 +12,7 @@ module org.jrebirth.af.rest {
     opens org.jrebirth.af.rest.service to org.jrebirth.af.core;
     opens org.jrebirth.af.rest.service.impl to org.jrebirth.af.core;
 
-    requires java.ws.rs;
+    requires jakarta.ws.rs;
     requires javafx.base;
     requires org.jrebirth.af.api;
     requires org.jrebirth.af.core;

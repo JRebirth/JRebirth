@@ -39,6 +39,10 @@
 		<surefire.version>2.18.1</surefire.version>
 		<slf4j.version>2.0.10</slf4j.version>
 
+		<jaxb.api.version>4.0.2</jaxb.api.version>
+		<jaxb.runtime.version>4.0.5</jaxb.runtime.version>
+		<jakarta.activation-api.version>2.1.3</jakarta.activation-api.version>
+		<jaxb.maven.plugin.version>4.0.3</jaxb.maven.plugin.version>
 	</properties>
 
 	<modules>
