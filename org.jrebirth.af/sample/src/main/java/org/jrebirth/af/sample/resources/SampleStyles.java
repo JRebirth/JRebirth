@@ -11,6 +11,6 @@ import org.jrebirth.af.core.resource.style.StyleSheet;
 public interface SampleStyles {
 
     /** The application main style sheet. */
-    StyleSheetItem MAIN = create(new StyleSheet("sample"));
+    StyleSheetItem MAIN = create(new StyleSheet("sample")).module(SampleStyles.class.getModule());
 
 }

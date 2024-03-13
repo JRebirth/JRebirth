@@ -41,6 +41,7 @@
 			<resource>
 				<filtering>true</filtering>
 				<directory>${basedir}/src/main/resources</directory>
+				<targetPath>${resources.base.path}</targetPath>
 				<includes>
 					<include>**/*.*</include>
 				</includes>
@@ -51,6 +52,7 @@
 			<resource>
 				<filtering>false</filtering>
 				<directory>${basedir}/src/main/resources</directory>
+				<targetPath>${resources.base.path}</targetPath>
 				<includes>
 					<include>**/*.ttf</include>
 				</includes>

@@ -9,7 +9,7 @@ import org.jrebirth.af.api.resource.font.FontName;
  */
 public enum SampleFontNames implements FontName {
 
-    /** The Dink font. */
-    DINk;
+    /** The NYALA font. */
+    nyala;
 
 }

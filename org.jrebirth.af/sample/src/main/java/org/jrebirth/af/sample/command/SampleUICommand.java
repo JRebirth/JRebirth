@@ -1,14 +1,15 @@
 package org.jrebirth.af.sample.command;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.WaveBean;
 import org.jrebirth.af.core.command.single.ui.DefaultUIBeanCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * The class <strong>SampleUICommand</strong> use to update the user interface.

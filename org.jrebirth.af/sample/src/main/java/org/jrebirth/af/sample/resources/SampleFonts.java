@@ -13,6 +13,6 @@ import org.jrebirth.af.core.resource.font.RealFont;
 public interface SampleFonts {
 
     /** The splash font. */
-    FontItem SPLASH = create(new RealFont(SampleFontNames.DINk, 24));
+    FontItem SPLASH = create(new RealFont(SampleFontNames.nyala, 36)).module(SampleFonts.class.getModule());
 
 }

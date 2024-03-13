@@ -1,7 +1,5 @@
 package org.jrebirth.af.sample.ui;
 
-import javafx.scene.input.MouseEvent;
-
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.core.ui.AbstractController;
 import org.jrebirth.af.core.ui.adapter.DefaultMouseAdapter;
@@ -11,6 +9,8 @@ import org.jrebirth.af.sample.command.SamplePoolCommand;
 import org.jrebirth.af.sample.command.SampleUICommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javafx.scene.input.MouseEvent;
 
 /**
  * The class <strong>SampleController</strong>.
