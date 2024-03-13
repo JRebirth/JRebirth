@@ -1,20 +1,17 @@
 package org.jrebirth.af.rest.service.impl;
 
-import java.util.List;
-
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.core.GenericType;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.contract.WaveType;
 import org.jrebirth.af.core.wave.JRebirthItems;
 import org.jrebirth.af.core.wave.WBuilder;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class AbstractCRUDRestService<O extends Object> extends AbstractRestService implements CRUDRestService<O> {
 
@@ -62,7 +59,7 @@ public class AbstractCRUDRestService<O extends Object> extends AbstractRestServi
                                                        .request(MediaType.APPLICATION_XML)
                                                        .post(Entity.xml(object));
 
-        return updateResponse.getStatusInfo() == Status.OK;
+        return updateResponse.getStatusInfo() == Response.Status.OK;
     }
 
     /**
@@ -75,7 +72,7 @@ public class AbstractCRUDRestService<O extends Object> extends AbstractRestServi
                                                        .request(MediaType.APPLICATION_XML)
                                                        .put(Entity.xml(object));
 
-        return updateResponse.getStatusInfo() == Status.OK;
+        return updateResponse.getStatusInfo() == Response.Status.OK;
     }
 
     /**
@@ -90,7 +87,7 @@ public class AbstractCRUDRestService<O extends Object> extends AbstractRestServi
                                                        .request(MediaType.APPLICATION_XML)
                                                        .delete();
 
-        return deleteResponse.getStatusInfo() == Status.OK;
+        return deleteResponse.getStatusInfo() == Response.Status.OK;
     }
 
     /**

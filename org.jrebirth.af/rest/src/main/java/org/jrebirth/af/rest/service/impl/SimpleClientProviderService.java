@@ -1,8 +1,7 @@
 package org.jrebirth.af.rest.service.impl;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
 import org.jrebirth.af.api.annotation.OnRelease;
 import org.jrebirth.af.api.module.Register;
 import org.jrebirth.af.api.wave.Wave;

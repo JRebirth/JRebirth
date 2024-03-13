@@ -10,11 +10,6 @@
 	<name>Rest Services</name>
 	<description>Provides base classes for calling remote rest services</description>
 
-	<properties>
-		<jaxb.api.version>2.3.2</jaxb.api.version>
-		<jaxb.impl.version>2.3.2</jaxb.impl.version>
-		<activation.api.version>1.2.1</activation.api.version>
-	</properties>
 	<build>
 		<plugins>
 
@@ -56,7 +51,7 @@
 		<dependency>
 			<groupId>jakarta.ws.rs</groupId>
 			<artifactId>jakarta.ws.rs-api</artifactId>
-			<version>2.1.5</version>
+			<version>3.1.0</version>
 		</dependency>
 
 		<dependency>
@@ -68,7 +63,7 @@
 		<dependency>
 			<groupId>jakarta.activation</groupId>
 			<artifactId>jakarta.activation-api</artifactId>
-			<version>${activation.api.version}</version>
+			<version>${jakarta.activation-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
