@@ -57,7 +57,12 @@ public final class ModuleUtility implements UtilMessages {
 
 	public static InputStream getResourceAsStream(Object object, String resourcePath, String resourceName) {
 		Module m = getModule(object);
-		String path = m.getName().replace(".", "/") + "/" + resourcePath + resourceName;
+		String path;
+		if (m.isNamed()) {
+			path = m.getName().replace(".", "/") + "/" + resourcePath + resourceName;
+		} else {
+			path = resourcePath + resourceName;
+		}
 		InputStream is = null;
 		try {
 			is = m.getResourceAsStream(path);
@@ -72,12 +77,17 @@ public final class ModuleUtility implements UtilMessages {
 
 	public static URL getResourceAsURL(Object object, String resourcePath, String resourceName) {
 		Module m = getModule(object);
-		String path = m.getName().replace(".", "/") + "/" + resourcePath + resourceName;
+		String path;
+		if (m.isNamed()) {
+			path = m.getName().replace(".", "/") + "/" + resourcePath + resourceName;
+		} else {
+			path = resourcePath + resourceName;
+		}
 		URL url = m.getClassLoader().getResource(path);
 		if (url == null) {
 			LOGGER.error("Resource : {} not found into module folder: {}", resourceName, resourcePath);
 		}
-		return url; 
+		return url;
 	}
 
 	public static Module find(String moduleName) {
