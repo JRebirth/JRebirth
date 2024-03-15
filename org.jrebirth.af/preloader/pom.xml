@@ -25,21 +25,11 @@
 	</properties>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
 			<version>${openjfx.version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.10.1</version>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
-
 
 </project>
