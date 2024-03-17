@@ -15,15 +15,6 @@
 
 	<build>
 		<plugins>
-
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
-				<configuration>
-					<release>21</release>
-				</configuration>
-			</plugin>
-
 			<plugin>
 				<groupId>org.jvnet.jaxb</groupId>
 				<artifactId>jaxb-maven-plugin</artifactId>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -19,7 +21,15 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
 		<resources.base.path>org/jrebirth/af/sample</resources.base.path>
+		<vendor>JRebirth</vendor>
+		<appName>JRebirth Sample</appName>
+		<archiveName>JRebirthSample</archiveName>
+		<exeIcon>src/main/resources/JRebirth.ico</exeIcon>
+		<mainModule>org.jrebirth.af.sample</mainModule>
+		<appClass>org.jrebirth.af.sample.SampleApplication</appClass>
+		<appVersion>9.0.0</appVersion>
 	</properties>
 
 	<organization>
@@ -59,56 +69,6 @@
 			</resource>
 		</resources>
 
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
-					<configuration>
-						<source>21</source>
-						<target>21</target>
-						<release>21</release>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
-
-					<configuration>
-						<!-- <archive> <manifestEntries> <JavaFX-Version>2.0</JavaFX-Version> <Main-Class>${appClass}</Main-Class> <JavaFX-Application-Class>${appClass}</JavaFX-Application-Class> </manifestEntries> <manifest> 
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries> <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries> <addClasspath>true</addClasspath> </manifest> </archive> -->
-					</configuration>
-				</plugin>
-
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-dependency-plugin</artifactId>
-					<version>3.1.1</version>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>copy-dependencies</goal>
-							</goals>
-							<configuration>
-								<!-- <includeScope>runtime</includeScope> -->
-								<outputDirectory>${project.build.directory}/lib</outputDirectory>
-					<!-- 			<overWriteReleases>false</overWriteReleases>
-								<overWriteSnapshots>false</overWriteSnapshots>
-								<overWriteIfNewer>true</overWriteIfNewer> -->
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-
-			</plugins>
-		</pluginManagement>
-
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
@@ -137,12 +97,88 @@
 			<artifactId>preloader</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>resources</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>APP</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.openjfx</groupId>
+						<artifactId>javafx-maven-plugin</artifactId>
+						<version>0.0.5</version>
+						<configuration>
+							<compress>2</compress>
+							<noHeaderFiles>true</noHeaderFiles>
+							<stripDebug>true</stripDebug>
+							<noManPages>true</noManPages>
+							<launcher>${archiveName}</launcher>
+							<mainClass>${appClass}</mainClass>
+							<jlinkImageName>${archiveName}</jlinkImageName>
+							<jlinkZipName>${archiveName}</jlinkZipName>
+						</configuration>
+						<executions>
+							<execution>
+								<id>Link-Modules</id>
+								<phase>package</phase>
+								<goals>
+									<goal>jlink</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>com.github.akman</groupId>
+						<artifactId>jpackage-maven-plugin</artifactId>
+						<version>0.1.5</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.ow2.asm</groupId>
+								<artifactId>asm</artifactId>
+								<version>9.6</version>
+							</dependency>
+						</dependencies>
+
+						<configuration>
+							<javaoptions>-Dfile.encoding=UTF-8 -Xms256m -Xmx512m</javaoptions>
+							<resourcedir>src/main/jpackage</resourcedir>
+							<type>EXE</type>
+							<dest>target/installer</dest>
+							<name>${appName}-Installer</name>
+							<appversion>${appVersion}</appversion>
+							<copyright>Copyright JRebirth 2024</copyright>
+							<description>JRebirth Sample Application</description>
+							<vendor>${vendor}</vendor>
+							<installdir>${vendor}/${appName}</installdir>
+							<icon>${exeIcon}</icon>
+							<runtimeimage>target/${archiveName}</runtimeimage>
+							<module>${mainModule}/${appClass}</module>
+							<winmenu>true</winmenu>
+							<windirchooser>true</windirchooser>
+							<winmenugroup>${vendor}</winmenugroup>
+							<winshortcut>true</winshortcut>
+						</configuration>
+						<executions>
+							<execution>
+								<id>Package-App</id>
+								<phase>install</phase>
+								<goals>
+									<goal>jpackage</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
