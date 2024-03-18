@@ -57,7 +57,7 @@
 		<dependency>
 			<groupId>io.github.classgraph</groupId>
 			<artifactId>classgraph</artifactId>
-			<version>4.8.12</version>
+			<version>4.8.168</version>
 		</dependency>
 
 		<!-- Dependency used at compile time to manage Java Webstart classpath scan If this jar is not available the related code will not be called -->

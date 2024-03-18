@@ -24,8 +24,8 @@ public class NullApplicationConfigurationTest extends JRebirthApplicationTest<Nu
     public void checkNullConf() {
 
         // Check that default value is used not those of properties file
-        Assert.assertEquals(new Integer(800), StageParameters.APPLICATION_SCENE_WIDTH.get());
-        Assert.assertEquals(new Integer(600), StageParameters.APPLICATION_SCENE_HEIGHT.get());
+        Assert.assertEquals(Integer.valueOf(800), StageParameters.APPLICATION_SCENE_WIDTH.get());
+        Assert.assertEquals(Integer.valueOf(600), StageParameters.APPLICATION_SCENE_HEIGHT.get());
 
     }
 
