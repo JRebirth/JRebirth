@@ -12,7 +12,6 @@ import org.jrebirth.af.core.application.DefaultApplication;
  * @author Sébastien Bordes
  */
 @Configuration(value = ".*-jrebirth", extension = "properties", schedule = 60)
-// @Configuration
 public class FullConfApplication extends DefaultApplication<Pane> {
 
     /**

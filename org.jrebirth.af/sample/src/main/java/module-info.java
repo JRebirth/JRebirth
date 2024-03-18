@@ -11,6 +11,7 @@ module org.jrebirth.af.sample {
     exports org.jrebirth.af.sample.resources;
     exports org.jrebirth.af.sample.service;
 
+    opens org.jrebirth.af.sample;
     opens org.jrebirth.af.sample.styles;
     opens org.jrebirth.af.sample.fonts;
 

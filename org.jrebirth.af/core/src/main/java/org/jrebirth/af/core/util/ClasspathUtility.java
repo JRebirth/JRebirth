@@ -17,6 +17,11 @@
  */
 package org.jrebirth.af.core.util;
 
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ScanResult;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.core.log.JRLoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,12 +31,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
-
-import org.jrebirth.af.api.log.JRLogger;
-import org.jrebirth.af.core.log.JRLoggerFactory;
-
-import io.github.classgraph.ClassGraph;
-import io.github.classgraph.ScanResult;
 
 /**
  * The class <strong>ClassUtility</strong>.
@@ -72,8 +71,7 @@ public final class ClasspathUtility implements UtilMessages {
 
         final List<String> resources = new ArrayList<>();
 
-        try (ScanResult scanResult = new ClassGraph()
-                                                     .whitelistPaths("/").scan()) {
+        try (ScanResult scanResult = new ClassGraph().acceptPaths("/").scan()) {
             resources.addAll(scanResult.getResourcesMatchingPattern(searchPattern).asMap().keySet());
         }
         // Sort resources
@@ -83,7 +81,7 @@ public final class ClasspathUtility implements UtilMessages {
     }
 
     /**
-     * TRy to load a custom resource file.
+     * Try to load a custom resource file.
      *
      * @param custConfFileName the custom resource file to load
      *
@@ -91,11 +89,9 @@ public final class ClasspathUtility implements UtilMessages {
      */
     public static InputStream loadInputStream(final String custConfFileName) {
         InputStream is = null;
-        
-        ClassLoader cl = ModuleLayer.boot().findLoader("org.jrebirth.af.core");
-        
+
         final File resourceFile = new File(custConfFileName);
-        // Check if the file could be find
+        // Check if the file can be found
         if (resourceFile.exists()) {
             try {
                 is = new FileInputStream(resourceFile);
@@ -104,7 +100,7 @@ public final class ClasspathUtility implements UtilMessages {
             }
         } else {
             // Otherwise try to load from context classloader
-            is = cl.getResourceAsStream(custConfFileName);
+            is = Thread.currentThread().getContextClassLoader().getResourceAsStream(custConfFileName);
         }
 
         return is;
