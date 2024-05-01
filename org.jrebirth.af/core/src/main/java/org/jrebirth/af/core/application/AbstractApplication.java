@@ -17,23 +17,13 @@
  */
 package org.jrebirth.af.core.application;
 
+import java.io.File;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.stream.Collectors;
-
-import javafx.application.Application;
-import javafx.application.Preloader;
-import javafx.application.Preloader.ProgressNotification;
-import javafx.scene.Scene;
-import javafx.scene.SceneAntialiasing;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import org.jrebirth.af.api.application.Configuration;
 import org.jrebirth.af.api.application.JRebirthApplication;
@@ -54,6 +44,7 @@ import org.jrebirth.af.core.exception.handler.PoolUncaughtExceptionHandler;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.Resources;
+import org.jrebirth.af.core.resource.parameter.ParameterMessages;
 import org.jrebirth.af.core.resource.provided.JRebirthColors;
 import org.jrebirth.af.core.resource.provided.JRebirthStyles;
 import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
@@ -62,6 +53,17 @@ import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
 import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.ModuleUtility;
 import org.jrebirth.af.preloader.JRebirthPreloader;
+
+import javafx.application.Application;
+import javafx.application.Preloader;
+import javafx.application.Preloader.ProgressNotification;
+import javafx.scene.Scene;
+import javafx.scene.SceneAntialiasing;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 //import com.sun.javafx.application.LauncherImpl;
 
@@ -82,6 +84,8 @@ import org.jrebirth.af.preloader.JRebirthPreloader;
 @Localized(".*_rb")
 public abstract class AbstractApplication<P extends Pane> extends Application
 		implements JRebirthApplication<P>, ApplicationMessages {
+
+	private static final String JREBIRTH_CONFIGURATION_FOLDER = "jrebirth.configurationFolder";
 
 	/** Default parameter replacement string. */
 	private static final String PARAM = "{}";
@@ -129,8 +133,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application
 	 */
 	protected static void preloadAndLaunch(final Class<? extends Application> appClass,
 			final Class<? extends Preloader> preloaderClass, final String... args) {
-		// LauncherImpl.launchApplication(appClass, preloaderClass, args);
-		// Waiting for patch
 		System.setProperty("javafx.preloader", preloaderClass.getName());
 		Application.launch(appClass, args);
 	}
@@ -186,10 +188,8 @@ public abstract class AbstractApplication<P extends Pane> extends Application
 			// Attach exception handlers
 			initializeExceptionHandler();
 
-			// Start the JRebirthThread, if an error occurred it will be processed by
-			// predefined handler
-			// It will create all facades and trigger the pre and post boot waves and will
-			// alost attach the first model view
+			// Start the JRebirthThread, if an error occurred it will be processed by predefined handler.
+			// It will create all facades and trigger the pre and post boot waves and will almost attach the first model view
 			jrt.prepare(this);
 			notifyPreloader(new ProgressNotification(0.6));
 
@@ -270,8 +270,18 @@ public abstract class AbstractApplication<P extends Pane> extends Application
 		final Configuration conf = ClassUtility.getLastClassAnnotation(this.getClass(), Configuration.class);
 
 		// Conf variable cannot be null because it was defined in this class
-		// It's possible to discard default behaviour by setting an empty string to the
-		// value.
+		// It's possible to discard default behaviour by setting an empty string to the value.
+		
+		String externalFolder = getParameters().getNamed().get(JREBIRTH_CONFIGURATION_FOLDER);
+		if(externalFolder != null && !externalFolder.isEmpty()) {
+			File configurationFolder = new File(".", externalFolder);
+			if(configurationFolder.exists() && configurationFolder.isDirectory()) {
+				ResourceBuilders.PARAMETER_BUILDER.searchConfigurationFiles(configurationFolder, conf.value(), conf.extension());		
+				return;
+			}else {
+				LOGGER.log(CONF_FOLDER_NOT_FOUND, externalFolder);
+			}
+		}
 
 		// launch the configuration search engine
 		ResourceBuilders.PARAMETER_BUILDER.searchConfigurationFiles(conf.value(), conf.extension());
@@ -287,8 +297,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application
 		final Localized local = ClassUtility.getLastClassAnnotation(this.getClass(), Localized.class);
 
 		// Conf variable cannot be null because it was defined in this class
-		// It's possible to discard default behavior by setting an empty string to the
-		// value.
+		// It's possible to discard default behavior by setting an empty string to the value.
 
 		// launch the configuration search engine
 		ResourceBuilders.MESSAGE_BUILDER.searchMessagesFiles(local.value());
@@ -321,8 +330,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application
 				// Try to stop the JRebirth Thread
 				JRebirthThread.getThread().close();
 
-				// Wait parameterized delay before retrying to close if the thread is still
-				// alive
+				// Wait parameterized delay before retrying to close if the thread is still alive
 				Thread.sleep(firstTime ? CoreParameters.CLOSE_RETRY_DELAY_FIRST.get()
 						: CoreParameters.CLOSE_RETRY_DELAY_OTHER.get());
 
@@ -386,8 +394,7 @@ public abstract class AbstractApplication<P extends Pane> extends Application
 		final KeyCode fullKeyCode = fullScreenKeyCode();
 		final KeyCode iconKeyCode = iconifiedKeyCode();
 
-		// Attach the handler only if necessary, these 2 method can be overridden to
-		// return null
+		// Attach the handler only if necessary, these 2 method can be overridden to return null
 		if (fullKeyCode != null && iconKeyCode != null) {
 
 			this.scene.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
@@ -410,7 +417,6 @@ public abstract class AbstractApplication<P extends Pane> extends Application
 
 		// Add the default Style Sheet if none have been added
 		manageDefaultStyleSheet(this.scene);
-
 	}
 
 	/**

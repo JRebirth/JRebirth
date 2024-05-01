@@ -49,6 +49,9 @@ public interface ApplicationMessages extends MessageContainer {
     /** "Error while starting the application {0} : ". */
     MessageItem START_ERROR = create(new LogMessage("jrebirth.application.startError", JRLevel.Error, JRebirthMarkers.APPLICATION));
 
+    /** "Configuration folder not found {0} using application arguments '--jrebirth.configurationFolder=<confFolder>'.". */
+    MessageItem CONF_FOLDER_NOT_FOUND = create(new LogMessage("jrebirth.parameter.extraClassPathNotFound", JRLevel.Warn, JRebirthMarkers.APPLICATION));
+        
     /** "Stopping {0}" . */
     MessageItem STOP_APPLICATION = create(new LogMessage("jrebirth.application.stopApplication", JRLevel.Trace, JRebirthMarkers.APPLICATION));
 

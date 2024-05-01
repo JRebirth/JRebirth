@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2024
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,6 @@
  */
 package org.jrebirth.af.core.resource.image;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
@@ -35,12 +34,13 @@ import org.jrebirth.af.core.resource.builder.AbstractResourceBuilder;
 import org.jrebirth.af.core.resource.provided.JRebirthImages;
 import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
 import org.jrebirth.af.core.util.ModuleUtility;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>ImageBuilder</strong>.
- *
+ * 
  * Class used to manage images with weak reference.
  *
  * @author Sébastien Bordes
@@ -68,7 +68,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
         }
 
         // Try to get the default image when an image is not found
-        if (image == null && ResourceParameters.NOT_AVAILABLE_IMAGE.get() != null  && !ResourceParameters.NOT_AVAILABLE_IMAGE.get().name().equals(jrImage.name())) {
+        if (image == null && ResourceParameters.NOT_AVAILABLE_IMAGE.get() != null && !ResourceParameters.NOT_AVAILABLE_IMAGE.get().name().equals(jrImage.name())) {
             // Return the default image
             image = JRebirthImages.NOT_AVAILABLE.get();
         }
@@ -78,7 +78,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             WritableImage img = new WritableImage(30, 30);
             final Text text = new Text();
             text.setText("N/A");
-            JRebirth.runIntoJATSync(()-> text.snapshot(null, img), 1000);
+            JRebirth.runIntoJATSync(() -> text.snapshot(null, img), 1000);
             image = img;
         }
 
@@ -104,7 +104,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
 
         if (jrImage.extension() != null) {
             sb.append(jrImage.extension());
-        }        
+        }
         return loadImage(imageItem, sb.toString(), skipImagesFolder);
     }
 
@@ -147,7 +147,7 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             if (!imagePath.isEmpty()) {
                 imagePath += Resources.PATH_SEP;
             }
-            
+
             final InputStream imageInputStream = ModuleUtility.getResourceAsStream(imageItem, imagePath, resourceName);
 
             if (imageInputStream != null) {

@@ -17,15 +17,23 @@
  */
 package org.jrebirth.af.core.resource.parameter;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.resource.builder.ResourceBuilder;
@@ -76,6 +84,22 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
      * @param wildcard the regex wildcard (must not be null)
      * @param extension the file extension without the first dot (ie: properties) (must not be null)
      */
+    public void searchConfigurationFiles(final File configurationFolder, final String wildcard, final String extension) {
+
+        // Store parameters
+        this.configurationFileWildcard = wildcard;
+        this.configurationFileExtension = extension;
+
+        // Search and analyze all properties files available
+        readPropertiesFiles(configurationFolder);
+    }
+    
+    /**
+     * Search configuration files according to the parameters provided.
+     *
+     * @param wildcard the regex wildcard (must not be null)
+     * @param extension the file extension without the first dot (ie: properties) (must not be null)
+     */
     public void searchConfigurationFiles(final String wildcard, final String extension) {
 
         // Store parameters
@@ -87,9 +111,33 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
     }
 
     /**
+	 * Read all configuration files available into the application classpath.
+	 */
+	private void readPropertiesFiles() {
+	
+	    if (this.configurationFileWildcard.isEmpty() || this.configurationFileExtension.isEmpty()) {
+	        // Skip configuration loading
+	        LOGGER.log(SKIP_CONF_LOADING);
+	
+	    } else {
+	        // Assemble the regex pattern
+	        final Pattern filePattern = Pattern.compile(this.configurationFileWildcard + "\\." + this.configurationFileExtension);
+	
+	        // Retrieve all resources from default classpath
+	        final Collection<String> list = ClasspathUtility.getClasspathResources(filePattern);
+	
+	        LOGGER.log(CONFIG_FOUND, list.size(), list.size() > 1 ? "s" : "");
+	
+	        for (final String confFilename : list) {
+	            readPropertiesFile(confFilename);
+	        }
+	    }
+	}
+
+	/**
      * Read all configuration files available into the application classpath.
      */
-    private void readPropertiesFiles() {
+    private void readPropertiesFiles(File configurationFolder) {
 
         if (this.configurationFileWildcard.isEmpty() || this.configurationFileExtension.isEmpty()) {
             // Skip configuration loading
@@ -99,17 +147,61 @@ public final class ParameterBuilder extends AbstractResourceBuilder<ParameterIte
             // Assemble the regex pattern
             final Pattern filePattern = Pattern.compile(this.configurationFileWildcard + "\\." + this.configurationFileExtension);
 
+            LOGGER.log(USE_CONFIG_FOLDER, configurationFolder.toString());
+            
             // Retrieve all resources from default classpath
-            final Collection<String> list = ClasspathUtility.getClasspathResources(filePattern);
+            try (Stream<Path> stream = Files.walk(Paths.get(configurationFolder.toURI()), 4)) {
+                List<String> list  = stream
+                  .filter(f -> !Files.isDirectory(f))
+                  .map(Path::getFileName)
+                  .map(Path::toString)
+                  .filter(s -> filePattern.matcher(s).matches())
+                  .collect(Collectors.toList());
+                
+                LOGGER.log(CONFIG_FOUND, list.size(), list.size() > 1 ? "s" : "");
 
-            LOGGER.log(CONFIG_FOUND, list.size(), list.size() > 1 ? "s" : "");
-
-            for (final String confFilename : list) {
-                readPropertiesFile(confFilename);
-            }
+                for (final String confFilename : list) {
+                    readPropertiesFile(configurationFolder, confFilename);
+                }
+                
+            } catch (IOException e) {
+            	 LOGGER.log(ERROR_WHILE_PARSING_CONFIG_FOLDER, configurationFolder.toString(), e);
+			}
         }
     }
+    
+    /**
+     * Read a customized configuration file to load parameters values.
+     *
+     * @param custConfFileName the file to load
+     */
+    private void readPropertiesFile(final File configurationFolder, final String custConfFileName) {
 
+        final Properties p = new Properties();
+
+        LOGGER.log(READ_CONF_FILE, custConfFileName);
+
+        try (InputStream is = new FileInputStream(configurationFolder.getAbsolutePath()+"/"+custConfFileName)) {
+
+            // Read the properties file
+            p.load(is);
+
+            for (final Map.Entry<Object, Object> entry : p.entrySet()) {
+                if (this.propertiesParametersMap.containsKey(entry.getKey())) {
+                    LOGGER.log(UPDATE_PARAMETER, entry.getKey(), entry.getValue());
+                } else {
+                    LOGGER.log(STORE_PARAMETER, entry.getKey(), entry.getValue());
+                }
+                storePropertiesParameter(entry);
+
+            }
+
+        } catch (final Exception e) {
+            LOGGER.error(CONF_READING_ERROR, custConfFileName);
+        }
+
+    }
+    
     /**
      * Read a customized configuration file to load parameters values.
      *

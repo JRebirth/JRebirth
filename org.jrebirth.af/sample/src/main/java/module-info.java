@@ -25,4 +25,6 @@ module org.jrebirth.af.sample {
     requires org.jrebirth.af.resources;
 
     requires org.slf4j;
+    
+    requires ch.qos.logback.classic;
 }

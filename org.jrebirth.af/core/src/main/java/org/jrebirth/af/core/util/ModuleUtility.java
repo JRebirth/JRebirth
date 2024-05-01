@@ -1,14 +1,14 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2024
  * Contact : sebastien.bordes@jrebirth.org
- * <p>
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,19 +17,20 @@
  */
 package org.jrebirth.af.core.util;
 
-import org.jrebirth.af.api.resource.ResourceItem;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+
+import org.jrebirth.af.api.resource.ResourceItem;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <strong>ClassUtility</strong>.
  *
  * Some Useful class utilities to perform introspection.
- *
+ * 
  * @author Sébastien Bordes
  */
 public final class ModuleUtility implements UtilMessages {
@@ -67,7 +68,7 @@ public final class ModuleUtility implements UtilMessages {
 		try {
 			is = m.getResourceAsStream(path);
 			if (is == null) {
-				LOGGER.error("Resource : {} not found into module folder: {}", resourceName, resourcePath);
+                LOGGER.error("Resource : {} not found into folder: {} of module {}", resourceName, resourcePath, m != null ? m.getName() : "<Module not found>");
 			}
 		} catch (IOException e) {
 			LOGGER.error("Impossible to encode path " + path, e);

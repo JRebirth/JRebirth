@@ -21,12 +21,12 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
+
 		<resources.base.path>org/jrebirth/af/sample</resources.base.path>
 		<vendor>JRebirth</vendor>
 		<appName>JRebirth Sample</appName>
 		<archiveName>JRebirthSample</archiveName>
-		<exeIcon>src/main/resources/JRebirth.ico</exeIcon>
+		<exeIcon>src/main/jpackage/JRebirth.ico</exeIcon>
 		<mainModule>org.jrebirth.af.sample</mainModule>
 		<appClass>org.jrebirth.af.sample.SampleApplication</appClass>
 		<appVersion>9.0.0</appVersion>
@@ -84,6 +84,7 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>1.4.14</version>
+			<!--<scope>runtime</scope>-->
 		</dependency>
 
 		<dependency>
@@ -110,7 +111,7 @@
 			<id>APP</id>
 			<build>
 				<plugins>
-					<plugin>
+<!--					<plugin>
 						<groupId>org.openjfx</groupId>
 						<artifactId>javafx-maven-plugin</artifactId>
 						<version>0.0.5</version>
@@ -120,11 +121,12 @@
 							<stripDebug>true</stripDebug>
 							<noManPages>true</noManPages>
 							<launcher>${archiveName}</launcher>
+							<bindServices>true</bindServices>
 							<mainClass>${appClass}</mainClass>
 							<jlinkImageName>${archiveName}</jlinkImageName>
 							<jlinkZipName>${archiveName}</jlinkZipName>
 						</configuration>
-						<executions>
+										<executions>
 							<execution>
 								<id>Link-Modules</id>
 								<phase>package</phase>
@@ -133,6 +135,49 @@
 								</goals>
 							</execution>
 						</executions>
+					</plugin>-->
+
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>3.3.1</version>
+						<executions>
+							<execution>
+								<id>copy-resources</id>
+								<!-- here the phase you need -->
+								<phase>package</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>
+										${project.build.directory}/${archiveName}/conf</outputDirectory>
+									<resources>
+										<resource>
+											<directory>src/main/jpackage</directory>
+											<filtering>true</filtering>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<version>3.6.1</version>
+						<executions>
+							<execution>
+								<id>copy</id>
+								<phase>package</phase>
+								<goals>
+									<goal>copy-dependencies</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<includeScope>compile</includeScope>
+						</configuration>
 					</plugin>
 
 					<plugin>
@@ -148,23 +193,84 @@
 						</dependencies>
 
 						<configuration>
+
+							<addlaunchers>
+								<addlauncher>
+									<name>launcher1</name>
+									<!--<file>config/jpackage/launcher1.properties</file>
+    <module>mainModule1Name/mainClass1Name</module>-->
+									<!-- <mainjar>mainJar1.jar</mainjar>
+    <mainclass>mainClass1Name</mainclass>-->
+									<arguments>
+										-Dlogback.configurationFile=conf/logback.xml</arguments>
+									<javaoptions>-Xms128m -Xmx1024m</javaoptions>
+									<!--  <appversion>1.0.1</appversion>-->
+									<!--
+									<icon>config/jpackage/launcher1.ico</icon>-->
+									<winconsole>true</winconsole>
+								</addlauncher>
+							</addlaunchers>
+
+
 							<javaoptions>-Dfile.encoding=UTF-8 -Xms256m -Xmx512m</javaoptions>
 							<resourcedir>src/main/jpackage</resourcedir>
 							<type>EXE</type>
 							<dest>target/installer</dest>
-							<name>${appName}-Installer</name>
+							<name>${appName}</name>
 							<appversion>${appVersion}</appversion>
 							<copyright>Copyright JRebirth 2024</copyright>
 							<description>JRebirth Sample Application</description>
+
+
 							<vendor>${vendor}</vendor>
 							<installdir>${vendor}/${appName}</installdir>
 							<icon>${exeIcon}</icon>
-							<runtimeimage>target/${archiveName}</runtimeimage>
+
+							<runtimePathOption>MODULEPATH</runtimePathOption>
+							<modulepath>
+								<pathelements>
+									<pathelement>
+										${project.build.directory}/${project.groupId}.${project.artifactId}-${project.version}.${project.packaging}</pathelement>
+								</pathelements>
+								<dependencysets>
+									<dependencyset>
+										<includeoutput>false</includeoutput>
+										<excludeautomatic>false</excludeautomatic>
+										<includenames>
+											<includename>.*</includename>
+										</includenames>
+										<excludenames>
+											<excludename>javafx\..+Empty</excludename>
+										</excludenames>
+									</dependencyset>
+								</dependencysets>
+
+
+								<filesets>
+									<fileset>
+										<directory>
+											${project.build.directory}/dependency</directory>
+										<excludes>
+											<exclude>**/javafx*</exclude>
+										</excludes>
+										<includes>
+											<include>**/javafx*-win.jar</include>
+										</includes>
+										<followSymlinks>false</followSymlinks>
+									</fileset>
+								</filesets>
+							</modulepath>
+							<!--<runtimeimage>target/${archiveName}</runtimeimage>-->
+
+
 							<module>${mainModule}/${appClass}</module>
 							<winmenu>true</winmenu>
 							<windirchooser>true</windirchooser>
 							<winmenugroup>${vendor}</winmenugroup>
 							<winshortcut>true</winshortcut>
+							<winconsole>true</winconsole>
+
+
 						</configuration>
 						<executions>
 							<execution>

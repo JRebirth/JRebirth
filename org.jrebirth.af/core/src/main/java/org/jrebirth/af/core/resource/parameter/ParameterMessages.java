@@ -39,7 +39,13 @@ public interface ParameterMessages extends MessageContainer {
 
     /** "{0} configuration file{1} found.". */
     MessageItem CONFIG_FOUND = create(new LogMessage("jrebirth.parameter.configFound", JRLevel.Info, JRebirthMarkers.PARAMETER));
+    
+    /** "Use configuration folder: {0}.". */
+    MessageItem USE_CONFIG_FOLDER = create(new LogMessage("jrebirth.parameter.useConfigurationFolder", JRLevel.Info, JRebirthMarkers.PARAMETER));
 
+    /** "Error while parsing configuration folder: {0}.". */
+    MessageItem ERROR_WHILE_PARSING_CONFIG_FOLDER = create(new LogMessage("jrebirth.parameter.errorParsingConfigurationFolder", JRLevel.Error, JRebirthMarkers.PARAMETER));
+    
     /** "Read configuration file : {0} ". */
     MessageItem READ_CONF_FILE = create(new LogMessage("jrebirth.parameter.readConfFile", JRLevel.Info, JRebirthMarkers.PARAMETER));
 

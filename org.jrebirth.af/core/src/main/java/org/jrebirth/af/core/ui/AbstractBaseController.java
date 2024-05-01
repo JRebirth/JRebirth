@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2024
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -160,9 +160,9 @@ public abstract class AbstractBaseController<M extends Model, V extends View<M, 
     protected final void addAdapter(final EventAdapter eventAdapter) throws CoreException {
 
         if (eventAdapter instanceof AbstractDefaultAdapter) {
-            ((AbstractDefaultAdapter) eventAdapter).controller(this);
+            ((AbstractDefaultAdapter<AbstractBaseController<?,?>>) eventAdapter).controller(this);
         }
-
+ 
         // Parse all event to find the right to manage
         for (final EventAdapter.Linker linker : EventAdapter.Linker.values()) {
             if (linker.adapterClass().isAssignableFrom(eventAdapter.getClass())) {
