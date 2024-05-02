@@ -29,14 +29,14 @@ public interface JRebirthEvent {
     /**
      * @return Returns the sequence number.
      */
-    int sequence();
+    long sequence();
 
     /**
      * @param sequence The sequence to set.
      *
      * @return the current JRebirthEvent
      */
-    JRebirthEvent sequence(final int sequence);
+    JRebirthEvent sequence(final long sequence);
 
     /**
      * @return Returns the eventType.

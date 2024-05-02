@@ -85,7 +85,7 @@ public class GlobalFacadeBase implements GlobalFacade, FacadeMessages {
     private final IJRebirthThreadPoolExecutor highPriorityExecutorService;
 
     /** The index of JRebirth events. */
-    private int eventSequence;
+    private long eventSequence;
 
     /**
      * Default Constructor. Initialize all facades.

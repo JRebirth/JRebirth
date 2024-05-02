@@ -32,7 +32,7 @@ import org.jrebirth.af.core.util.ClassUtility;
 public final class JRebirthEventBase implements JRebirthEvent {
 
     /** The sequence number. */
-    private int sequence;
+    private long sequence;
 
     /** The type of the event. */
     private JRebirthEventType eventType;
@@ -55,7 +55,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * @param target the target of the event
      * @param eventData the data of the event
      */
-    public JRebirthEventBase(final int sequence, final JRebirthEventType eventType, final String source, final String target, final String... eventData) {
+    public JRebirthEventBase(final long sequence, final JRebirthEventType eventType, final String source, final String target, final String... eventData) {
         this.sequence = sequence;
         this.eventType = eventType;
         this.source = source;
@@ -78,7 +78,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * {@inheritDoc}
      */
     @Override
-    public int sequence() {
+    public long sequence() {
         return this.sequence;
     }
 
@@ -86,7 +86,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
      * {@inheritDoc}
      */
     @Override
-    public JRebirthEvent sequence(final int sequence) {
+    public JRebirthEvent sequence(final long sequence) {
         this.sequence = sequence;
         return this;
     }
@@ -181,7 +181,7 @@ public final class JRebirthEventBase implements JRebirthEvent {
     private void parseString(final String eventSerialized) {
         final StringTokenizer st = new StringTokenizer(eventSerialized, ClassUtility.SEPARATOR);
         if (st.countTokens() >= 5) {
-            sequence(Integer.parseInt(st.nextToken()))
+            sequence(Long.parseLong(st.nextToken()))
                                                       .eventType(JRebirthEventType.valueOf(st.nextToken()))
                                                       .source(st.nextToken())
                                                       .target(st.nextToken())
