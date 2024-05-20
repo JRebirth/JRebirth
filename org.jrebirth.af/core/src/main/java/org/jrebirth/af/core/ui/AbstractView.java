@@ -47,6 +47,7 @@ import org.jrebirth.af.core.util.ClassUtility;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 /**
  *
@@ -240,7 +241,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
                 // If a property was private, it must set to accessible = false after processing action
                 boolean needToHide = false;
                 // For private properties, set them accessible temporary
-                if (!f.canAccess(this)) {
+                if (!f.canAccess(Modifier.isStatic(f.getModifiers()) ? null : this)) {
                     f.setAccessible(true);
                     needToHide = true;
                 }
@@ -248,7 +249,7 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
                 processAnnotations(f);
 
                 // Reset the property visibility
-                if (needToHide && f.canAccess(this)) {
+                if (needToHide && f.canAccess(Modifier.isStatic(f.getModifiers()) ? null : this)) {
                     f.setAccessible(false);
                 }
             }
