@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2016
+ * Copyright JRebirth.org © 2011-2024
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.object.ModelDescriptor;
 import org.jrebirth.af.api.wave.Wave;
 
 /**
@@ -63,6 +64,13 @@ public interface JRebirthApplication<P extends Pane> {
      * @return the class of the first UI Model to launch it must extend the {@link Model}
      */
     Class<? extends Model> firstModelClass();
+
+    /**
+     * This method must be implemented to customize the first UI Model displayed.
+     *
+     * @return an instance of @ModelDescriptor
+     */
+    ModelDescriptor<?, ?> firstModelDescriptor();
 
     /**
      * Provides key parts for the first model.

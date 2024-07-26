@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2024
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -56,24 +56,24 @@ public class StackModel extends DefaultObjectModel<StackModel, StackView, StackC
     protected void initModel() {
 
         // Listen StackWaves to be aware of any changes
-        listen(new DefaultWaveChecker<>(StackWaves.STACK_NAME, getStackName()), StackWaves.SHOW_PAGE_MODEL);
-        listen(new ClassWaveChecker<>(StackWaves.PAGE_ENUM, getPageEnumClass()), StackWaves.SHOW_PAGE_ENUM);
+        listen(new DefaultWaveChecker<>(StackWaves.STACK_NAME, getStackName()), StackWaves.SHOW_STACK_MODEL);
+        listen(new ClassWaveChecker<>(StackWaves.STACK_ITEM, getStackItemClass()), StackWaves.SHOW_STACK_ITEM);
     }
 
     /**
      * Show page.
      *
-     * Called when model received a SHOW_PAGE wave type.
+     * Called when model received a SHOW_STACK_MODEL wave type.
      *
-     * @param pageModelKey the modelKey for the page to show
-     * @param stackName the unique string tha t identify the stack
+     * @param stackModelKey the modelKey for the item to show
+     * @param stackName the unique string that identify the stack
      *
      * @param wave the wave
      */
-    public void doShowPageModel(final UniqueKey<? extends Model> pageModelKey, final String stackName, final Wave wave) {
+    public void doShowStackModel(final UniqueKey<? extends Model> stackModelKey, final String stackName, final Wave wave) {
 
         if (getStackName() != null && getStackName().equals(stackName)) {
-            showPage(pageModelKey, wave);
+            showPage(stackModelKey, wave);
         }
 
     }
@@ -81,33 +81,33 @@ public class StackModel extends DefaultObjectModel<StackModel, StackView, StackC
     /**
      * Show page.
      *
-     * Called when model received a SHOW_PAGE wave type.
+     * Called when model received a SHOW_STACK_ITEM wave type.
      *
-     * @param pageEnum the page enum for the model to show
+     * @param stackItem the stack item for the model to show
      * @param wave the wave
      */
-    public void doShowPageEnum(final PageEnum pageEnum, final Wave wave) {
+    public void doShowStackItem(final StackItem stackItem, final Wave wave) {
 
-        LOGGER.info("Show Page Enum: " + pageEnum.toString());
-        if (getPageEnumClass() != null && getPageEnumClass().equals(pageEnum.getClass())) {
-            showPage(pageEnum.getModelKey(), wave);
+        LOGGER.info("Show Page Enum: " + stackItem.toString());
+        if (getStackItemClass() != null && getStackItemClass().equals(stackItem.getClass())) {
+            showPage(stackItem.getModelKey(), wave);
         }
     }
 
     /**
      * Returns the page enum class associated to this model.
      *
-     * Checks the modelObject and return it only if it extends {@link PageEnum}
+     * Checks the modelObject and return it only if it extends {@link StackItem}
      *
      * @return the page enum class
      */
     @SuppressWarnings("unchecked")
-    private Class<PageEnum> getPageEnumClass() {
-        Class<PageEnum> res = null;
-        if (object() != null && object().pageEnumClass() != null) {
-            res = (Class<PageEnum>) object().pageEnumClass();
-        } else if (getFirstKeyPart() instanceof Class && PageEnum.class.isAssignableFrom((Class<?>) getFirstKeyPart())) {
-            res = (Class<PageEnum>) getFirstKeyPart();
+    private Class<StackItem> getStackItemClass() {
+        Class<StackItem> res = null;
+        if (object() != null && object().stackItemClass() != null) {
+            res = (Class<StackItem>) object().stackItemClass();
+        } else if (getFirstKeyPart() instanceof Class && StackItem.class.isAssignableFrom((Class<?>) getFirstKeyPart())) {
+            res = (Class<StackItem>) getFirstKeyPart();
         }
         return res;
     }
@@ -132,7 +132,7 @@ public class StackModel extends DefaultObjectModel<StackModel, StackView, StackC
     /**
      * Private method used to show another page.
      *
-     * @param pageModelKey the mdoelKey for the page to show
+     * @param pageModelKey the modelKey for the stack item to show
      */
     private void showPage(final UniqueKey<? extends Model> pageModelKey, final Wave wave) {
         if (pageModelKey != null && !pageModelKey.equals(this.currentModelKey)) {
@@ -183,12 +183,12 @@ public class StackModel extends DefaultObjectModel<StackModel, StackView, StackC
         // On redisplay show the start page only if no page is displayed
         if (this.currentModelKey == null) {
             // Manage default page for Page Enum
-            if (getPageEnumClass() != null && getPageEnumClass().isEnum() && getPageEnumClass().getEnumConstants().length > 0) {
-                doShowPageEnum(getPageEnumClass().getEnumConstants()[0], null);
+            if (getStackItemClass() != null && getStackItemClass().isEnum() && getStackItemClass().getEnumConstants().length > 0) {
+                doShowStackItem(getStackItemClass().getEnumConstants()[0], null);
             }
             // Manage default page for pageModelKey
             if (getDefaultPageModelKey() != null) {
-                doShowPageModel(getDefaultPageModelKey(), getStackName(), null);
+                doShowStackModel(getDefaultPageModelKey(), getStackName(), null);
             }
         }
     }

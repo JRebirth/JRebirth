@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2024
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,8 +26,8 @@ import javafx.scene.Node;
 
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.object.ModelDescriptor;
 import org.jrebirth.af.api.wave.WaveBean;
-import org.jrebirth.af.core.ui.object.ModelConfig;
 
 /**
  * The class <strong>DisplayModelWaveBean</strong>.
@@ -40,7 +40,7 @@ public class DisplayModelWaveBean implements WaveBean {
     private UniqueKey<? extends Model> showModelKey;
 
     /** The show model data. */
-    private ModelConfig<? extends Model, ?> showModelData;
+    private ModelDescriptor<? extends Model, ?> showModelData;
 
     /** The hide model key. */
     private UniqueKey<? extends Model> hideModelKey;
@@ -105,19 +105,19 @@ public class DisplayModelWaveBean implements WaveBean {
      *
      * @return the show model data
      */
-    public ModelConfig<? extends Model, ?> showModelData() {
+    public ModelDescriptor<? extends Model, ?> showModelData() {
         return this.showModelData;
     }
 
     /**
      * Sets the show model data.
      *
-     * @param showModelData the new show model data
+     * @param showModelDescriptor the new show model data
      *
      * @return the DisplayModeWavebean instance being configured
      */
-    public DisplayModelWaveBean showModelData(final ModelConfig<? extends Model, ?> showModelData) {
-        this.showModelData = showModelData;
+    public DisplayModelWaveBean showModelData(final ModelDescriptor<? extends Model, ?> showModelDescriptor) {
+        this.showModelData = showModelDescriptor;
         return this;
     }
 

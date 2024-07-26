@@ -43,6 +43,12 @@
 			<artifactId>codegen</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.openjfx</groupId>
+		    <artifactId>javafx-base</artifactId>
+		    <version>${openjfx.version}</version>
+		</dependency>
 
 
 	</dependencies>

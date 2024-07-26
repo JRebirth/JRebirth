@@ -1,3 +1,20 @@
+/**
+ * Get more info at : www.jrebirth.org .
+ * Copyright JRebirth.org © 2011-2024
+ * Contact : sebastien.bordes@jrebirth.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.jrebirth.af.component.ui.stack;
 
 import org.jrebirth.af.api.key.UniqueKey;
@@ -23,26 +40,22 @@ public interface StackWaves {
     WaveItemBase<String> STACK_NAME = new WaveItemBase<String>() {
     };
 
-    /** The Enum class that list all pages displayable into the stack. */
-    // WaveItem<Class<? extends PageEnum>> STACK_PAGES = new WaveItem<Class<? extends PageEnum>>() {
-    // };
-
     /** The page to display (model class descriptor). */
-    WaveItemBase<UniqueKey<? extends Model>> PAGE_MODEL_KEY = new WaveItemBase<UniqueKey<? extends Model>>() {
+    WaveItemBase<UniqueKey<? extends Model>> STACK_ITEM_KEY = new WaveItemBase<UniqueKey<? extends Model>>() {
     };
 
     /** The page to display (enum descriptor). */
-    WaveItemBase<PageEnum> PAGE_ENUM = new WaveItemBase<PageEnum>() {
+    WaveItemBase<StackItem> STACK_ITEM = new WaveItemBase<StackItem>() {
     };
 
     /*****************************************************************************************************/
     /** _________________________________________Wave Types.____________________________________________ */
     /*****************************************************************************************************/
 
-    /** Show Page (with Model) action. */
-    WaveType SHOW_PAGE_MODEL = WBuilder.waveType("SHOW_PAGE_MODEL").items(PAGE_MODEL_KEY, STACK_NAME);
+    /** Show Stack element using Model action. */
+    WaveType SHOW_STACK_MODEL = WBuilder.waveType("SHOW_STACK_MODEL").items(STACK_ITEM_KEY, STACK_NAME);
 
-    /** Show Page (with Enum) action. */
-    WaveType SHOW_PAGE_ENUM = WBuilder.waveType("SHOW_PAGE_ENUM").items(PAGE_ENUM/* , STACK_PAGES */);
+    /** Show Stack Item action. */
+    WaveType SHOW_STACK_ITEM = WBuilder.waveType("SHOW_STACK_ITEM").items(STACK_ITEM);
 
 }

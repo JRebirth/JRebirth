@@ -7,7 +7,7 @@ import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.component.ui.beans.StackConfig;
-import org.jrebirth.af.core.application.apps.BorderPaneModel;
+import cBorderPaneModel;
 import org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean;
 import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
 import org.jrebirth.af.core.key.Key;
@@ -169,16 +169,16 @@ public class StackModelTest extends AbstractBorderPaneTest {
 
         Wave wave = null;
 
-        wave = model.sendWave(StackWaves.SHOW_PAGE_ENUM, WBuilder.waveData(StackWaves.PAGE_ENUM, values[1]));
+        wave = model.sendWave(StackWaves.SHOW_STACK_ITEM, WBuilder.waveData(StackWaves.STACK_ITEM, values[1]));
         check(wave, "2");
 
-        wave = model.sendWave(StackWaves.SHOW_PAGE_ENUM, WBuilder.waveData(StackWaves.PAGE_ENUM, values[2]));
+        wave = model.sendWave(StackWaves.SHOW_STACK_ITEM, WBuilder.waveData(StackWaves.STACK_ITEM, values[2]));
         check(wave, "3");
 
-        wave = model.sendWave(StackWaves.SHOW_PAGE_ENUM, WBuilder.waveData(StackWaves.PAGE_ENUM, values[3]));
+        wave = model.sendWave(StackWaves.SHOW_STACK_ITEM, WBuilder.waveData(StackWaves.STACK_ITEM, values[3]));
         check(wave, "4");
 
-        wave = model.sendWave(StackWaves.SHOW_PAGE_ENUM, WBuilder.waveData(StackWaves.PAGE_ENUM, values[0]));
+        wave = model.sendWave(StackWaves.SHOW_STACK_ITEM, WBuilder.waveData(StackWaves.STACK_ITEM, values[0]));
         check(wave, "1");
     }
 

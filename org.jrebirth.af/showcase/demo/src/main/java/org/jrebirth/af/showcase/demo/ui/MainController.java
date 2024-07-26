@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2024
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -57,11 +57,11 @@ public final class MainController extends DefaultController<MainModel, MainView>
 
         final Optional<Button> b = getTarget(event, Button.class);
 
-        final Optional<UniqueKey<? extends Model>> data = getUserData(b, StackWaves.PAGE_MODEL_KEY);
+        final Optional<UniqueKey<? extends Model>> data = getUserData(b, StackWaves.STACK_ITEM_KEY);
 
         if (data.isPresent()) {
-            model().sendWave(StackWaves.SHOW_PAGE_MODEL,
-                             WBuilder.waveData(StackWaves.PAGE_MODEL_KEY, data.get()),
+            model().sendWave(StackWaves.SHOW_STACK_MODEL,
+                             WBuilder.waveData(StackWaves.STACK_ITEM_KEY, data.get()),
                              WBuilder.waveData(StackWaves.STACK_NAME, "DemoStack"));
 
         }

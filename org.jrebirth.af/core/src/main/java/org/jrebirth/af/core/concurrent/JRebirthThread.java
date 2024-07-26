@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2024
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,6 +33,7 @@ import org.jrebirth.af.api.facade.GlobalFacade;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.object.ModelDescriptor;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.basic.showmodel.DisplayModelWaveBean;
 import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
@@ -294,10 +295,13 @@ public final class JRebirthThread extends Thread implements ConcurrentMessages {
         if (this.application != null && this.application.rootNode() != null && this.application.firstModelClass() != null) {
 
             final UniqueKey<? extends Model> modelKey = Key.create(this.application.firstModelClass(), this.application.firstModelOptionalData(), this.application.firstModelKeyParts());
+            ModelDescriptor<?, ?> modelData = this.application.firstModelDescriptor();
+
             firstWave = WBuilder.callCommand(ShowModelCommand.class).waveBean(
                                                                               DisplayModelWaveBean.create()
                                                                                                   .childrenPlaceHolder(this.application.rootNode().getChildren())
-                                                                                                  .showModelKey(modelKey));
+                                                                                                  .showModelKey(modelKey)
+                                                                                                  .showModelData(modelData));
             //
             //
             // ShowModelWaveBuilder.create()

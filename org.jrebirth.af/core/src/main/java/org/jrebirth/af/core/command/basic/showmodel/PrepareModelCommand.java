@@ -1,6 +1,6 @@
 /**
  * Get more info at : www.jrebirth.org .
- * Copyright JRebirth.org © 2011-2013
+ * Copyright JRebirth.org © 2011-2024
  * Contact : sebastien.bordes@jrebirth.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,10 +20,10 @@ package org.jrebirth.af.core.command.basic.showmodel;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.key.UniqueKey;
 import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.object.ModelDescriptor;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.core.command.single.pool.DefaultPoolBeanCommand;
 import org.jrebirth.af.core.key.Key;
-import org.jrebirth.af.core.ui.object.ModelConfig;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class PrepareModelCommand extends DefaultPoolBeanCommand<DisplayModelWave
         // final Object[] keyPart = getWaveBean(wave).getKeyPart() == null ? null : getWaveBean(wave).getKeyPart().toArray();
 
         final DisplayModelWaveBean wb = waveBean(wave);
-        final ModelConfig<?, ?> data = wb.showModelData();
+        final ModelDescriptor<?, ?> data = wb.showModelData();
 
         final UniqueKey<? extends Model> showModelKey = data != null ? Key.create(data.modelClass(), data) : wb.showModelKey();
 

@@ -34,9 +34,8 @@ module org.jrebirth.af.component {
     requires javafx.graphics;
     requires static javafx.swing;
     
-    requires org.jrebirth.af.api;
     requires org.jrebirth.af.preloader;
-    requires org.jrebirth.af.core;
-    
+    requires transitive org.jrebirth.af.api;
+    requires transitive org.jrebirth.af.core;
     
 }
