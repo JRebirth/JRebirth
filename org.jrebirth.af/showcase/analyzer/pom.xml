@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
-		<version>9.0.0-SNAPSHOT</version>
+		<version>9.0.0</version>
 		<relativePath>..</relativePath>
 	</parent>
 	
@@ -97,15 +97,13 @@
 						<shadedArtifactAttached>false</shadedArtifactAttached>
 						<shadedClassifierName>shaded</shadedClassifierName>
 						<transformers>
-							<transformer
-								implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 								<mainClass>${appClass}</mainClass>
 								<manifestEntries>
 									<Class-Path>.</Class-Path>
 								</manifestEntries>
 							</transformer>
-							<transformer
-								implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+							<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 						</transformers>
 						<finalName>${archiveName}-${project.version}</finalName>
 					</configuration>
