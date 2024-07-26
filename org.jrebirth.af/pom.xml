@@ -23,6 +23,7 @@
 	<inceptionYear>2011</inceptionYear>
 
 	<properties>
+		<project.scm.id>github</project.scm.id>
 
 		<EclipseDay-version>3.0.0</EclipseDay-version>
 		<Breizhcamp-version>3.0.0</Breizhcamp-version>
@@ -34,7 +35,7 @@
 
 		<maven.version>3.9.5</maven.version>
 
-		<releaseVersion>21</releaseVersion>
+		<compilerReleaseVersion>21</compilerReleaseVersion>
 		<openjfx.version>21.0.1</openjfx.version>
 
 		<surefire.version>3.2.5</surefire.version>
@@ -82,7 +83,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/JRebirth/JRebirth.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth.git</developerConnection>
-		<url>https://github.com/JRebirth/JRebirth/tree/8.x-dev</url>
+		<url>https://github.com/JRebirth/JRebirth/tree/9.x-dev</url>
 	</scm>
 
 	<licenses>
@@ -141,7 +142,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<release>${releaseVersion}</release>
+					<release>${compilerReleaseVersion}</release>
 				</configuration>
 			</plugin>
 
