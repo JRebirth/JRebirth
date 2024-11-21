@@ -17,14 +17,15 @@
  */
 package org.jrebirth.af.core.application;
 
-import java.io.File;
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ServiceLoader;
-import java.util.stream.Collectors;
-
+import javafx.application.Application;
+import javafx.application.Preloader;
+import javafx.application.Preloader.ProgressNotification;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import org.jrebirth.af.api.application.Configuration;
 import org.jrebirth.af.api.application.JRebirthApplication;
 import org.jrebirth.af.api.application.Localized;
@@ -44,7 +45,6 @@ import org.jrebirth.af.core.exception.handler.PoolUncaughtExceptionHandler;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.Resources;
-import org.jrebirth.af.core.resource.parameter.ParameterMessages;
 import org.jrebirth.af.core.resource.provided.JRebirthColors;
 import org.jrebirth.af.core.resource.provided.JRebirthStyles;
 import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
@@ -54,16 +54,13 @@ import org.jrebirth.af.core.util.ClassUtility;
 import org.jrebirth.af.core.util.ModuleUtility;
 import org.jrebirth.af.preloader.JRebirthPreloader;
 
-import javafx.application.Application;
-import javafx.application.Preloader;
-import javafx.application.Preloader.ProgressNotification;
-import javafx.scene.Scene;
-import javafx.scene.SceneAntialiasing;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import java.io.File;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ServiceLoader;
+import java.util.stream.Collectors;
 
 //import com.sun.javafx.application.LauncherImpl;
 
@@ -575,8 +572,13 @@ public abstract class AbstractApplication<P extends Pane> extends Application
 	 */
 	protected final Scene buildScene() throws CoreException {
 
-		final Scene scene = new Scene(buildRootPane(), StageParameters.APPLICATION_SCENE_WIDTH.get(),
-				StageParameters.APPLICATION_SCENE_HEIGHT.get(), true, SceneAntialiasing.BALANCED);
+		final Scene scene = new Scene(
+				buildRootPane(),
+				StageParameters.APPLICATION_SCENE_WIDTH.get(),
+				StageParameters.APPLICATION_SCENE_HEIGHT.get(),
+				StageParameters.APPLICATION_DEPTH_BUFFER.get(),
+				StageParameters.APPLICATION_SCENE_ANTIALIASING.get()
+		);
 		scene.setFill(JRebirthColors.SCENE_BG_COLOR.get());
 
 		return scene;
