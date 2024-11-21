@@ -17,17 +17,16 @@
  */
 package org.jrebirth.af.core.resource.provided.parameter;
 
-import static org.jrebirth.af.core.resource.Resources.create;
+import javafx.scene.SceneAntialiasing;
+import org.jrebirth.af.api.resource.image.ImageParams;
+import org.jrebirth.af.api.resource.parameter.ParameterItem;
+import org.jrebirth.af.core.resource.color.WebColor;
+import org.jrebirth.af.core.resource.provided.ResourcesImages;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.jrebirth.af.api.resource.image.ImageParams;
-//import org.jrebirth.af.api.resource.image.ImageParams;
-import org.jrebirth.af.api.resource.parameter.ParameterItem;
-import org.jrebirth.af.core.resource.color.WebColor;
-import org.jrebirth.af.core.resource.provided.JRebirthImages;
-import org.jrebirth.af.core.resource.provided.ResourcesImages;
+import static org.jrebirth.af.core.resource.Resources.create;
 
 /**
  * The class <strong>StageParameters</strong>.
@@ -69,6 +68,12 @@ public interface StageParameters {
 
     /** The application scene height. */
     ParameterItem<Integer> APPLICATION_SCENE_HEIGHT = create("applicationSceneHeight", 600);
+
+    /** The application scene depth buffer. */
+    ParameterItem<Boolean> APPLICATION_DEPTH_BUFFER = create("applicationDepthBuffer", false);
+
+    /** The application scene antialiasing. */
+    ParameterItem<SceneAntialiasing> APPLICATION_SCENE_ANTIALIASING = create("applicationSceneAntialiasing", SceneAntialiasing.DISABLED);
 
     /** The application scene background color. */
     ParameterItem<WebColor> APPLICATION_SCENE_BG_COLOR = create("applicationSceneBgColor", new WebColor("000000", 0.0));
