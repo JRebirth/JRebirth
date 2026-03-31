@@ -8,5 +8,5 @@ open module org.jrebirth.af.iconfontbridge.icons525 {
     exports org.jrebirth.af.iconfontbridge.icons525;
 
     requires transitive org.jrebirth.af.api;
-    requires transitive org.jrebirth.af.core;
+    requires org.jrebirth.af.core;
 }

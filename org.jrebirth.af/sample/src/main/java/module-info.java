@@ -13,10 +13,5 @@ module org.jrebirth.af.sample {
 
     opens org.jrebirth.af.sample.ui;
     
-    requires javafx.graphics;
-	requires javafx.controls;
-
     requires org.jrebirth.af.core;
-
-    requires org.slf4j;
 }

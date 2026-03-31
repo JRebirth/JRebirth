@@ -1,4 +1,4 @@
-package org.jrebirth.af.demo.workbench.ui;
+package org.jrebirth.af.showcase.workbench.ui;
 
 import javafx.scene.text.Text;
 

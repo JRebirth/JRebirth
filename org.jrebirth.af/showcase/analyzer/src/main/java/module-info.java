@@ -17,13 +17,6 @@ open module org.jrebirth.af.showcase.analyzer {
     exports org.jrebirth.af.showcase.analyzer.ui.properties;
     exports org.jrebirth.af.showcase.analyzer;
 
-    requires javafx.base;
-    requires javafx.controls;
-    requires javafx.graphics;
-
+    requires org.jrebirth.af.api;
     requires org.jrebirth.af.core;
-    
-    //opens org.jrebirth.af.showcase.analyzer.ui.workbench;
-
-    requires org.slf4j;
 }

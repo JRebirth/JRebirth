@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jrebirth.af.demo.workbench.resources;
+package org.jrebirth.af.showcase.workbench.resources;
 
 import static org.jrebirth.af.core.resource.Resources.create;
 

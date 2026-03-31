@@ -26,11 +26,8 @@ module org.jrebirth.af.component {
     opens org.jrebirth.af.component.ui.stack to org.jrebirth.af.core;
     opens org.jrebirth.af.component.ui.workbench to org.jrebirth.af.core;
     
-    requires java.desktop;
-    requires javafx.base;
-    requires javafx.controls;
-    requires javafx.graphics;
     requires org.jrebirth.af.api;
+    // Preloader is optionally used by application at startup
     requires org.jrebirth.af.preloader;
     requires org.jrebirth.af.core;
     

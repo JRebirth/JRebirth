@@ -11,10 +11,6 @@ module org.jrebirth.af.dialog {
 	requires org.jrebirth.af.api;
     requires org.jrebirth.af.core;
 
-    requires javafx.controls;
-
-    requires org.slf4j;
-
     requires SimpleDialogFX;
 
 }
