@@ -14,7 +14,6 @@ module org.jrebirth.af.rest {
 
     requires java.ws.rs;
     requires javafx.base;
-    requires org.jrebirth.af.api;
     requires org.jrebirth.af.core;
     requires org.slf4j;
     

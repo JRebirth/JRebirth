@@ -11,7 +11,6 @@ module org.jrebirth.af.processor {
     requires transitive maven.model;
     requires transitive plexus.utils;
 
-    requires transitive org.jrebirth.af.api;
     requires transitive org.jrebirth.af.core;
     requires roaster.api;
     //requires roaster.jdt;

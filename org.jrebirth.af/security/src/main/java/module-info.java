@@ -10,6 +10,5 @@ module org.jrebirth.af.security {
     exports org.jrebirth.af.security.service;
     exports org.jrebirth.af.security.behavior;
 
-    requires org.jrebirth.af.api;
     requires org.jrebirth.af.core;
 }

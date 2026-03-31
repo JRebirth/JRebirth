@@ -12,7 +12,6 @@ open module org.jrebirth.af.showcase.demo {
     requires javafx.controls;
     requires javafx.graphics;
     
-    requires org.jrebirth.af.api;
     requires org.jrebirth.af.component;
     requires org.jrebirth.af.core;
     

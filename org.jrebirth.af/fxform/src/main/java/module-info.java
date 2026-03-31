@@ -10,7 +10,6 @@ module org.jrebirth.af.fxform {
     requires javafx.controls;
     requires javafx.graphics;
 
-    requires org.jrebirth.af.api;
     requires org.jrebirth.af.core;
 
     requires org.slf4j;

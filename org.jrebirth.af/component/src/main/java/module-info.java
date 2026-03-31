@@ -30,7 +30,6 @@ module org.jrebirth.af.component {
     requires javafx.base;
     requires javafx.controls;
     requires javafx.graphics;
-    requires org.jrebirth.af.api;
     requires org.jrebirth.af.preloader;
     requires org.jrebirth.af.core;
     
