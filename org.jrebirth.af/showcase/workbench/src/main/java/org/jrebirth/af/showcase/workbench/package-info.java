@@ -3,4 +3,4 @@
  *
  * @author Sébastien Bordes
  */
-package org.jrebirth.af.demo.workbench;
+package org.jrebirth.af.showcase.workbench;

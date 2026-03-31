@@ -7,5 +7,5 @@ open module org.jrebirth.af.iconfontbridge.weathericons {
     exports org.jrebirth.af.iconfontbridge.weathericons;
 
     requires transitive org.jrebirth.af.api;
-    requires transitive org.jrebirth.af.core;
+    requires org.jrebirth.af.core;
 }

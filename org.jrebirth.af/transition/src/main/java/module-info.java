@@ -9,9 +9,4 @@ module org.jrebirth.af.transition {
 
 	requires org.jrebirth.af.api;
     requires org.jrebirth.af.core;
-
-    requires javafx.base;
-    requires javafx.graphics;
-
-    requires org.slf4j;
 }
