@@ -9,6 +9,5 @@ module org.jrebirth.af.undoredo {
     //exports org.jrebirth.af.undoredo;
 
     requires javafx.base;
-    requires org.jrebirth.af.api;
     requires org.jrebirth.af.core;
 }
