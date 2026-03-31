@@ -11,7 +11,6 @@ module org.jrebirth.af.processor {
     requires maven.model;
     requires plexus.utils;
 
-    requires org.jrebirth.af.api;
     requires org.jrebirth.af.core;
     requires roaster.api;
     //requires roaster.jdt;
