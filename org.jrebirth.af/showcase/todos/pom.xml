@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
-		<version>11.0.0-SNAPSHOT</version>
+		<version>12.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -36,7 +36,7 @@
 			<plugin>
 				<groupId>org.jrebirth.af.tooling</groupId>
 				<artifactId>jrebirth-maven-plugin</artifactId>
-				<version>11.0.0-SNAPSHOT</version>
+				<version>12.0.0-SNAPSHOT</version>
 				<configuration>
 					<ecoreFile>model/Todos.ecore</ecoreFile>
 					<outputDirectory>${project.build.directory}/generated-sources/model</outputDirectory>
@@ -78,14 +78,14 @@
  		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.iconfont-bridge</groupId>
 			<artifactId>fontawesome</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

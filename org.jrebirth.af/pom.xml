@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>af</artifactId>
-	<version>11.0.0-SNAPSHOT</version>
+	<version>12.0.0-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 	<name>JRebirth Application Framework</name>
@@ -33,7 +33,7 @@
 
 		<surefire.version>2.18.1</surefire.version>
 		<slf4j.version>1.8.0-beta4</slf4j.version>
-		<openjfx.version>11.0.2</openjfx.version>
+		<openjfx.version>26</openjfx.version>
 
 	</properties>
 
@@ -177,9 +177,9 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<source>11</source>
-					<target>11</target>
-					<release>11</release>
+					<source>24</source>
+					<target>24</target>
+					<release>24</release>
 				</configuration>
 				<!-- <dependencies> <dependency> <groupId>org.ow2.asm</groupId> <artifactId>asm</artifactId> <version>6.2</version> Use newer version of ASM </dependency> </dependencies> -->
 			</plugin>
