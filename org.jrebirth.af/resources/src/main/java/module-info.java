@@ -3,7 +3,7 @@
  * 
  * @author Sébastien Bordes
  */
-open module org.jrebirth.af.resources {
+module org.jrebirth.af.resources {
 
     //exports org.jrebirth.af.resources;
     //exports org.jrebirth.af.resources.images;

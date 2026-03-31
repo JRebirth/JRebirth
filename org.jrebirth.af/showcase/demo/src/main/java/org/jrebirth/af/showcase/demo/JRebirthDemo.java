@@ -29,7 +29,7 @@ import javafx.stage.Stage;
 import org.jrebirth.af.api.resource.ResourceItem;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.core.application.DefaultApplication;
-import org.jrebirth.af.demo.workbench.resources.WorkbenchStyles;
+import org.jrebirth.af.showcase.workbench.resources.WorkbenchStyles;
 import org.jrebirth.af.showcase.demo.resources.DemoStyles;
 import org.jrebirth.af.showcase.demo.ui.MainModel;
 

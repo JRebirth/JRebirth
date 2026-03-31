@@ -1,4 +1,4 @@
-package org.jrebirth.af.demo.workbench;
+package org.jrebirth.af.showcase.workbench;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -6,8 +6,8 @@ import javafx.scene.layout.StackPane;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.component.resources.ComponentStyles;
 import org.jrebirth.af.core.application.DefaultApplication;
-import org.jrebirth.af.demo.workbench.resources.WorkbenchStyles;
-import org.jrebirth.af.demo.workbench.ui.TabDemoModel;
+import org.jrebirth.af.showcase.workbench.resources.WorkbenchStyles;
+import org.jrebirth.af.showcase.workbench.ui.TabDemoModel;
 
 /**
  * The class <strong>WorkbenchApplication</strong>.
