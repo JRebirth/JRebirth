@@ -21,7 +21,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.4</version>
+					<version>${maven.assembly.plugin.version}</version>
 				<executions>
 					<execution>
 						<id>build-assembly</id>
@@ -42,7 +42,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>wagon-maven-plugin</artifactId>
-				<version>1.0</version>
+					<version>${wagon.maven.plugin.version}</version>
 				<executions>
 					<execution>
 						<id>deploy-webstart-archive</id>

@@ -98,7 +98,13 @@ public class Ecore2FXGenerator {
 
             JavaType<?> javaType = null;
             if (temp.exists()) {
-                javaType = Roaster.parse(temp);
+                // Generated-sources content must be rebuilt deterministically on each run.
+                // Re-parsing an already generated class makes generators append duplicate members.
+                final boolean generatedOutput = output.getAbsolutePath()
+                                                      .contains(File.separator + "target" + File.separator + "generated-sources");
+                if (!generatedOutput) {
+                    javaType = Roaster.parse(temp);
+                }
             }
 
             if (bean instanceof org.jrebirth.af.tooling.codegen.bean.Enum) {

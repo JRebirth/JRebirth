@@ -25,12 +25,12 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>component</artifactId>
-			<version>12.0.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>12.0.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

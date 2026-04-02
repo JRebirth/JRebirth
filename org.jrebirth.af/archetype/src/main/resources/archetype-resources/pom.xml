@@ -13,6 +13,12 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>25</java.version>
+		<openjfx.version>26</openjfx.version>
+		<maven.compiler.plugin.version>3.15.0</maven.compiler.plugin.version>
+		<maven.jar.plugin.version>3.5.0</maven.jar.plugin.version>
+		<wagon.ftp.version>3.5.3</wagon.ftp.version>
+		<sonar.maven.plugin.version>5.5.0.6356</sonar.maven.plugin.version>
 
 		<storepass>storepass</storepass>
 		<storetype>JKS</storetype>
@@ -81,9 +87,9 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
+					<version>${maven.compiler.plugin.version}</version>
 					<configuration>
-						<release>24</release>
+						<release>${java.version}</release>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
@@ -91,12 +97,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.4</version>
+					<version>${maven.jar.plugin.version}</version>
 
 					<configuration>
 						<archive>
 							<manifestEntries>
-								<JavaFX-Version>26</JavaFX-Version>
+								<JavaFX-Version>${openjfx.version}</JavaFX-Version>
 								<Main-Class>${appClass}</Main-Class>
 								<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class>
 							</manifestEntries>
@@ -207,7 +213,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
-					<version>2.5</version>
+					<version>${sonar.maven.plugin.version}</version>
 				</plugin>
 
 			</plugins>
@@ -217,7 +223,7 @@
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ftp</artifactId>
-				<version>2.2</version>
+				<version>${wagon.ftp.version}</version>
 			</extension>
 		</extensions>
 	</build>
@@ -227,19 +233,18 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.0.13</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>12.0.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>preloader</artifactId>
-			<version>12.0.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

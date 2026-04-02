@@ -33,9 +33,9 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
+					<version>${maven.compiler.plugin.version}</version>
 					<configuration>
-						<release>24</release>
+						<release>${java.version}</release>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
@@ -47,7 +47,7 @@
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ftp</artifactId>
-				<version>2.2</version>
+				<version>${wagon.ftp.version}</version>
 			</extension>
 		</extensions>
 	</build>
@@ -57,25 +57,23 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.0.13</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>12.0.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		
 <!-- 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>12.0.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency> -->
