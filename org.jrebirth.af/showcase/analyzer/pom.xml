@@ -63,11 +63,11 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
+					<version>${maven.compiler.plugin.version}</version>
 					<configuration>
-						<source>24</source>
-						<target>24</target>
-						<release>24</release>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<release>${java.version}</release>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
@@ -75,12 +75,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.5</version>
+					<version>${maven.jar.plugin.version}</version>
 
 					<configuration>
 						<archive>
 							<manifestEntries>
-								<JavaFX-Version>26</JavaFX-Version>
+								<JavaFX-Version>${openjfx.version}</JavaFX-Version>
 								<Main-Class>${appClass}</Main-Class>
 								<!--<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class> -->
 							</manifestEntries>
@@ -99,7 +99,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-shade-plugin</artifactId>
-					<version>3.1.1</version>
+					<version>${maven.shade.plugin.version}</version>
 					<executions>
 						<execution>
 							<phase>package</phase>
@@ -125,7 +125,7 @@
 				<plugin>
 					<groupId>com.akathist.maven.plugins.launch4j</groupId>
 					<artifactId>launch4j-maven-plugin</artifactId>
-					<version>1.7.12</version>
+					<version>${launch4j.maven.plugin.version}</version>
 					<executions>
 						<execution>
 							<id>l4j-clui</id>
@@ -145,7 +145,7 @@
 								</classPath>
 								<icon>${exeIcon}</icon>
 								<jre>
-									<minVersion>24</minVersion>
+									<minVersion>${java.version}</minVersion>
 									<jdkPreference>preferJre</jdkPreference>
 								</jre>
 								<versionInfo>
@@ -168,7 +168,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>wagon-maven-plugin</artifactId>
-					<version>1.0</version>
+					<version>${wagon.maven.plugin.version}</version>
 					<configuration>
 						<serverId>JRebirth_Sites</serverId>
 						<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/apps</url>
@@ -182,13 +182,13 @@
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ftp</artifactId>
-				<version>2.2</version>
+				<version>${wagon.ftp.version}</version>
 			</extension>
 
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ssh</artifactId>
-				<version>3.0.0</version>
+				<version>${wagon.ssh.version}</version>
 			</extension>
 
 		</extensions>
@@ -263,7 +263,7 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>12.0.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

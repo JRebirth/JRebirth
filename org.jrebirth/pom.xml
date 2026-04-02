@@ -12,8 +12,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.release>24</maven.compiler.release>
-		<java.version>24</java.version>
+		<maven.compiler.release>25</maven.compiler.release>
+		<java.version>25</java.version>
 	</properties>
 
 	<build>
@@ -22,7 +22,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
-					<version>3.5.0</version>
+					<version>3.6.2</version>
 					<executions>
 						<execution>
 							<id>enforce-java</id>
@@ -32,8 +32,8 @@
 							<configuration>
 								<rules>
 									<requireJavaVersion>
-										<version>[24,)</version>
-										<message>JRebirth 12 requires Java 24 or newer.</message>
+										<version>[25,)</version>
+										<message>JRebirth 12 requires Java 25 or newer.</message>
 									</requireJavaVersion>
 								</rules>
 							</configuration>
