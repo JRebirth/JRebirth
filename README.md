@@ -42,7 +42,7 @@ This repository targets **Java 25**, **JavaFX 26**, and **JRebirth AF 12.0.0-SNA
         <version>8.6.0</version>
     </dependency>
 
-To depend on this **12.x** line, build and install from source (`mvn clean install`), then use:
+To depend on this **12.x** line, build and install from source (`./mvnw clean install` from `org.jrebirth.af`), then use:
 
     <dependency>
         <groupId>org.jrebirth.af</groupId>
@@ -56,12 +56,20 @@ Documentation is available [here](http://www.jrebirth.org/doc/Toc.html).
 
 ## Build it
 
-Requires [Git](http://git-scm.com/), **JDK 25** or newer, [Apache Maven](http://maven.apache.org/) **3.9+** (the build is validated against Maven 3.9.11).
+Requires [Git](http://git-scm.com/), **JDK 25** or newer, and **Apache Maven 3.9.11** or newer.
+
+The reactor under `org.jrebirth.af` ships a **Maven Wrapper** (`mvnw` / `mvnw.cmd`) that downloads and uses Maven **3.9.11**, so you do not need a global Maven install for day-to-day builds:
 
     git clone https://github.com/JRebirth/JRebirth.git
     cd JRebirth/org.jrebirth.af
-    mvn clean install
+    ./mvnw clean install
 
-To skip test compilation and execution for the full reactor (for example if a tooling module fails test compile), use:
+`maven-enforcer-plugin` runs on the build and fails fast if **Java** is older than 25 or **Maven** is older than 3.9.11 (when you invoke a system `mvn` instead of the wrapper).
 
-    mvn clean install -Dmaven.test.skip=true
+To skip test compilation and execution for the full reactor:
+
+    ./mvnw clean install -Dmaven.test.skip=true
+
+To regenerate the wrapper after changing the pinned Maven version, run from `org.jrebirth.af` (use `-Denforcer.skip=true` if your JDK is below 25 and you only need to refresh wrapper files):
+
+    mvn -Denforcer.skip=true -N wrapper:wrapper -Dmaven=3.9.11
