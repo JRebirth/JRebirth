@@ -36,7 +36,8 @@ public interface TestParameters {
     ParameterItem<String> TEST_STRING_PARAM_1 = create(new ObjectParameter<>("paramA", "fonts"));
     ParameterItem<String> TEST_STRING_PARAM_2 = create(new ObjectParameter<>("paramB", "fontsFolder"));
     ParameterItem<String> TEST_STRING_PARAM_3 = create("fontsFolderFake", "font");
-    ParameterItem<String> TEST_STRING_PARAM_4 = create("fontsFolder", "font");
+    /** Key must not collide with {@link org.jrebirth.af.core.resource.provided.parameter.ResourceParameters#FONT_FOLDER} cache key. */
+    ParameterItem<String> TEST_STRING_PARAM_4 = create("testJrebirthFontsFolder", "font");
 
     /**************************************************************************************/
     /** ______________________________Integer Parameters.________________________________ */

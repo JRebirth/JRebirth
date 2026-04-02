@@ -2,36 +2,50 @@
 <project>
 	<repositories>
 		<repository>
+			<id>central</id>
+			<name>Maven Central</name>
+			<url>https://repo1.maven.org/maven2</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-			<id>central</id>
-			<name>libs-release</name>
-			<url>http://oss.jfrog.org/artifactory/libs-release</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
 		</repository>
 		<repository>
-			<snapshots />
-			<id>snapshots</id>
-			<name>libs-snapshot</name>
-			<url>http://oss.jfrog.org/artifactory/libs-snapshot</url>
+			<id>jrebirth-snapshot</id>
+			<name>JRebirth snapshot repository</name>
+			<url>https://repo.jrebirth.org/libs-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
 		</repository>
 	</repositories>
 	<pluginRepositories>
-		<pluginRepositories>
-			<pluginRepository>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-				<id>central</id>
-				<name>plugins-release</name>
-				<url>http://oss.jfrog.org/artifactory/plugins-release</url>
-			</pluginRepository>
-			<pluginRepository>
-				<snapshots />
-				<id>snapshots</id>
-				<name>plugins-snapshot</name>
-				<url>http://oss.jfrog.org/artifactory/plugins-snapshot</url>
-			</pluginRepository>
-		</pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Maven Central</name>
+			<url>https://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>jrebirth-plugin-snapshot</id>
+			<name>JRebirth plugin snapshots</name>
+			<url>https://repo.jrebirth.org/plugins-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
 	</pluginRepositories>
 </project>

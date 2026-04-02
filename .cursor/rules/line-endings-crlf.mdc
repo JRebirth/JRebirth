@@ -1,0 +1,15 @@
+---
+description: Text files use Windows line endings (CRLF)
+globs: org.jrebirth.af/**
+alwaysApply: false
+---
+
+# Line endings (CRLF)
+
+All **text** sources under `org.jrebirth.af` must use Windows-style line endings: **CRLF** (`\r\n`), not LF alone.
+
+- When creating or editing files, save with CRLF.
+- Do not convert binary assets (images, fonts, jars, compiled classes).
+- `org.jrebirth.af/.gitattributes` enforces `eol=crlf` for Git checkouts on this tree.
+
+If a file shows as changed only for line endings, normalize to CRLF rather than reverting to LF.

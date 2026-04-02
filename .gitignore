@@ -1,0 +1,34 @@
+# --- Maven (recursive) ---
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# --- Eclipse / annotation processing ---
+bin/
+.apt_generated/
+
+# --- Site build artifacts (generated under attached-includes/css) ---
+org.jrebirth.af/src/site/resources/attached-includes/css/shCoreDefault.css
+org.jrebirth.af/src/site/resources/attached-includes/css/shCoreDefault.css.gz
+
+# --- Logs & tooling output ---
+velocity.log
+JRebirthTest.log
+JRebirthDemo.log
+JRebirthAnalyzer.log
+JRebirthComponentTest.log
+Sample.log
+
+# --- Generated EMF / local templates (previously ignored per-module) ---
+demo.etd
+events.etd
+
+# --- Local keystores ---
+jrebirth.jks
+yourkey.jks

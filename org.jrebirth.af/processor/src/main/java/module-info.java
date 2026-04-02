@@ -6,7 +6,6 @@
 module org.jrebirth.af.processor {
     exports org.jrebirth.af.processor;
 
-    requires commons.lang3;
     requires transitive java.compiler;
     requires maven.model;
     requires plexus.utils;

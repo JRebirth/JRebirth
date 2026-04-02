@@ -61,16 +61,24 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Optional: JRebirthApplicationTest (main) for downstream UI tests; not pulled transitively. -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<optional>true</optional>
+		</dependency>
+
 		<dependency>
 			<groupId>org.testfx</groupId>
 			<artifactId>testfx-core</artifactId>
-			<scope>test</scope>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.testfx</groupId>
 			<artifactId>testfx-junit</artifactId>
-			<scope>test</scope>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>

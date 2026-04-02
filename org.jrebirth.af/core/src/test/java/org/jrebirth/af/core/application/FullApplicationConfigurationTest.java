@@ -1,6 +1,7 @@
 package org.jrebirth.af.core.application;
 
 import org.jrebirth.af.core.application.apps.FullConfApplication;
+import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
 
 import org.junit.Assert;
@@ -17,6 +18,9 @@ public class FullApplicationConfigurationTest extends JRebirthApplicationTest<Fu
 
     @BeforeClass
     public static void startUp() throws Exception {
+        // Clear overrides from other tests; FullConfApplication then merges full-jrebirth.properties.
+        ResourceBuilders.PARAMETER_BUILDER.define(StageParameters.APPLICATION_SCENE_WIDTH, 1024);
+        ResourceBuilders.PARAMETER_BUILDER.define(StageParameters.APPLICATION_SCENE_HEIGHT, 768);
         ApplicationTest.launch(FullConfApplication.class);
     }
 

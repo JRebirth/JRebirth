@@ -6,8 +6,7 @@
 	<parent>
 		<groupId>org.jrebirth</groupId>
 		<artifactId>organization</artifactId>
-		<version>12.0.0-SNAPSHOT</version>
-		<relativePath>../org.jrebirth/pom.xml</relativePath>
+		<version>6.0.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>af</artifactId>
@@ -50,6 +49,7 @@
 		<chunk.templates.version>3.6.2</chunk.templates.version>
 
 		<maven.compiler.plugin.version>3.15.0</maven.compiler.plugin.version>
+		<maven.clean.plugin.version>3.5.0</maven.clean.plugin.version>
 		<maven.resources.plugin.version>3.5.0</maven.resources.plugin.version>
 		<maven.enforcer.plugin.version>3.6.2</maven.enforcer.plugin.version>
 		<maven.javadoc.plugin.version>3.12.0</maven.javadoc.plugin.version>
@@ -67,6 +67,18 @@
 		<wagon.maven.plugin.version>3.0.0</wagon.maven.plugin.version>
 		<jaxb2.maven.plugin.version>4.1.0</jaxb2.maven.plugin.version>
 		<build.helper.maven.plugin.version>3.6.1</build.helper.maven.plugin.version>
+
+		<central.publishing.maven.plugin.version>0.10.0</central.publishing.maven.plugin.version>
+		<maven.source.plugin.version>3.3.1</maven.source.plugin.version>
+		<maven.gpg.plugin.version>3.2.8</maven.gpg.plugin.version>
+
+		<!-- Maven Central Portal: override in ~/.m2/settings.xml <profiles> if needed (see Sonatype docs). -->
+		<central.publishing.serverId>central</central.publishing.serverId>
+		<central.publishing.autoPublish>false</central.publishing.autoPublish>
+		<central.publishing.waitUntil>validated</central.publishing.waitUntil>
+
+		<!-- GnuPG binary; override in ~/.m2/settings.xml if Maven cannot find gpg (Windows: full path to gpg.exe). -->
+		<gpg.executable>gpg</gpg.executable>
 
 		<wagon.ftp.version>3.5.3</wagon.ftp.version>
 		<wagon.ssh.version>3.5.3</wagon.ssh.version>
@@ -219,6 +231,21 @@
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<version>${build.helper.maven.plugin.version}</version>
 				</plugin>
+				<plugin>
+					<groupId>org.sonatype.central</groupId>
+					<artifactId>central-publishing-maven-plugin</artifactId>
+					<version>${central.publishing.maven.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${maven.source.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>${maven.gpg.plugin.version}</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 
@@ -277,6 +304,15 @@
 		</resources>
 
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${maven.clean.plugin.version}</version>
+				<configuration>
+					<retryOnError>true</retryOnError>
+				</configuration>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -541,19 +577,72 @@
 	</distributionManagement>
 
 	<profiles>
-		<!-- Override Bintray profile to use another Bintray Package -->
+
+		<!-- https://central.sonatype.org/publish/publish-portal-maven/ -->
 		<profile>
-			<id>Bintray</id>
-			<properties>
-				<!-- Release repository -->
-				<repositoryId>bintray-jrebirth-JRebirth-JRebirthAF</repositoryId>
-				<repositoryName>jrebirth-JRebirth-JRebirthAF</repositoryName>
-				<repositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirthAF/</repositoryUrl>
-				<!-- Snapshot repository -->
-				<snapshotRepositoryId>bintray-jrebirth-JRebirth-JRebirthAF</snapshotRepositoryId>
-				<snapshotRepositoryName>jrebirth-JRebirth-JRebirthAF</snapshotRepositoryName>
-				<snapshotRepositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirthAF/</snapshotRepositoryUrl>
-			</properties>
+			<id>deploy-central</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.central</groupId>
+						<artifactId>central-publishing-maven-plugin</artifactId>
+						<extensions>true</extensions>
+						<inherited>false</inherited>
+						<configuration>
+							<publishingServerId>${central.publishing.serverId}</publishingServerId>
+							<autoPublish>${central.publishing.autoPublish}</autoPublish>
+							<waitUntil>${central.publishing.waitUntil}</waitUntil>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${maven.javadoc.plugin.version}</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<doclint>none</doclint>
+							<failOnError>false</failOnError>
+							<quiet>true</quiet>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<passphraseServerId>gpg.passphrase</passphraseServerId>
+							<gpgExecutable>${gpg.executable}</gpgExecutable>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 

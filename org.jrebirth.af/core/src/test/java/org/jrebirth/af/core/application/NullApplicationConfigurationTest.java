@@ -1,6 +1,7 @@
 package org.jrebirth.af.core.application;
 
 import org.jrebirth.af.core.application.apps.NullConfApplication;
+import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
 
 import org.junit.Assert;
@@ -17,6 +18,9 @@ public class NullApplicationConfigurationTest extends JRebirthApplicationTest<Nu
 
     @BeforeClass
     public static void startUp() throws Exception {
+        // Other tests may have loaded properties into the shared builder; @Configuration("") skips reload.
+        ResourceBuilders.PARAMETER_BUILDER.define(StageParameters.APPLICATION_SCENE_WIDTH, 800);
+        ResourceBuilders.PARAMETER_BUILDER.define(StageParameters.APPLICATION_SCENE_HEIGHT, 600);
         ApplicationTest.launch(NullConfApplication.class);
     }
 

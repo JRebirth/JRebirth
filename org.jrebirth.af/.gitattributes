@@ -1,0 +1,18 @@
+# Windows-compatible line endings for this subtree
+* text=auto eol=crlf
+
+# Binary / non-text (do not apply CRLF normalization)
+*.jar binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.pdf binary
+*.zip binary
+*.class binary

@@ -9,7 +9,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>8.7.0-SNAPSHOT</version>
-			<repository>http://oss.jfrog.org/simple/oss-snapshot-local</repository>
+			<repository>https://repo.jrebirth.org/libs-snapshot</repository>
 			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
 		</archetype>
 
@@ -19,7 +19,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>8.6.0</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
 		</archetype>
 		
@@ -27,7 +27,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>8.5.0</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
 		</archetype>
 
@@ -35,7 +35,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>8.0.5</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
 		</archetype>
 		
@@ -43,7 +43,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>8.0.4</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
 		</archetype>
 		
@@ -51,7 +51,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>8.0.3</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
 		</archetype>
 		
@@ -59,7 +59,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>8.0.2</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
 		</archetype>
 		
@@ -67,7 +67,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>8.0.1</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
 		</archetype>
 		
@@ -75,7 +75,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>8.0.0</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
 		</archetype>
 	
@@ -83,7 +83,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>7.7.5</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
 		</archetype>
 
@@ -91,7 +91,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>7.7.3</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX application using JRebirth Framework</description>
 		</archetype>
 	
@@ -99,7 +99,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>7.7.2</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
 
@@ -107,7 +107,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>7.7.1</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
 
@@ -115,7 +115,7 @@
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>archetype</artifactId>
 			<version>7.7.0</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
 
@@ -123,7 +123,7 @@
 			<groupId>org.jrebirth</groupId>
 			<artifactId>archetype</artifactId>
 			<version>0.7.6</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>		
 		
@@ -131,7 +131,7 @@
 			<groupId>org.jrebirth</groupId>
 			<artifactId>archetype</artifactId>
 			<version>0.7.5</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
 
@@ -139,7 +139,7 @@
 			<groupId>org.jrebirth</groupId>
 			<artifactId>archetype</artifactId>
 			<version>0.7.4</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>		
 
@@ -147,7 +147,7 @@
 			<groupId>org.jrebirth</groupId>
 			<artifactId>archetype</artifactId>
 			<version>0.7.3</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
 	
@@ -155,7 +155,7 @@
 			<groupId>org.jrebirth</groupId>
 			<artifactId>archetype</artifactId>
 			<version>0.7.2</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
 
@@ -163,7 +163,7 @@
 			<groupId>org.jrebirth</groupId>
 			<artifactId>archetype</artifactId>
 			<version>0.7.1</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
 
@@ -171,7 +171,7 @@
 			<groupId>org.jrebirth</groupId>
 			<artifactId>archetype</artifactId>
 			<version>0.7.0</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
 		
@@ -179,7 +179,7 @@
 			<groupId>org.jrebirth</groupId>
 			<artifactId>archetype</artifactId>
 			<version>0.6.0</version>
-			<repository>http://oss.jfrog.org/simple/oss-release-local</repository>
+			<repository>https://repo1.maven.org/maven2</repository>
 			<description>JRebirth archetype for creating a new JavaFX 2 application using JRebirth Framework</description>
 		</archetype>
 
