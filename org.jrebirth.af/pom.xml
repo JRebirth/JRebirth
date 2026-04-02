@@ -71,6 +71,11 @@
 		<wagon.ftp.version>3.5.3</wagon.ftp.version>
 		<wagon.ssh.version>3.5.3</wagon.ssh.version>
 
+		<central.publishing.maven.plugin.version>0.10.0</central.publishing.maven.plugin.version>
+		<maven.gpg.plugin.version>3.2.8</maven.gpg.plugin.version>
+		<maven.deploy.plugin.version>3.1.4</maven.deploy.plugin.version>
+		<maven.source.plugin.version>3.3.1</maven.source.plugin.version>
+
 	</properties>
 
 	<modules>
@@ -106,17 +111,16 @@
 	</ciManagement>
 
 	<scm>
-		<connection>scm:git:git://github.com/JRebirth/JRebirth.git</connection>
+		<connection>scm:git:https://github.com/JRebirth/JRebirth.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth.git</developerConnection>
-		<url>https://github.com/JRebirth/JRebirth/tree/8.x-dev</url>
+		<url>https://github.com/JRebirth/JRebirth/tree/12.x-dev</url>
 	</scm>
 
 	<licenses>
 		<license>
-			<name>Apache License</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<name>The Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
 			<distribution>repo</distribution>
-			<comments>Version 2.0, January 2004</comments>
 		</license>
 	</licenses>
 
@@ -125,9 +129,9 @@
 			<id>jr1</id>
 			<name>Bordes Sébastien</name>
 			<email>seb@jrebirth.org</email>
-			<url>blog.jrebirth.org</url>
+			<url>http://blog.jrebirth.org</url>
 			<organization>JRebirth</organization>
-			<organizationUrl>www.jrebirth.org</organizationUrl>
+			<organizationUrl>http://www.jrebirth.org</organizationUrl>
 			<roles>
 				<role>JRebirth Designer</role>
 			</roles>
@@ -136,9 +140,9 @@
 			<id>jr2</id>
 			<name>Bordes Céline</name>
 			<email>celine@jrebirth.org</email>
-			<url>www.jrebirth.org</url>
+			<url>http://www.jrebirth.org</url>
 			<organization>JRebirth</organization>
-			<organizationUrl>www.jrebirth.org</organizationUrl>
+			<organizationUrl>http://www.jrebirth.org</organizationUrl>
 			<roles>
 				<role>Graphic Designer</role>
 			</roles>
@@ -218,6 +222,26 @@
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<version>${build.helper.maven.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${maven.source.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>${maven.gpg.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${maven.deploy.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonatype.central</groupId>
+					<artifactId>central-publishing-maven-plugin</artifactId>
+					<version>${central.publishing.maven.plugin.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -554,6 +578,89 @@
 				<snapshotRepositoryName>jrebirth-JRebirth-JRebirthAF</snapshotRepositoryName>
 				<snapshotRepositoryUrl>https://api.bintray.com/maven/jrebirth/JRebirth/JRebirthAF/</snapshotRepositoryUrl>
 			</properties>
+		</profile>
+
+		<!--
+			Maven Central via Sonatype Central Publisher Portal:
+			https://central.sonatype.org/publish/publish-portal-maven/
+
+			Prerequisites: release version (not -SNAPSHOT) for OSS sync; server id "central" in settings.xml
+			(portal user token); GPG key (https://central.sonatype.org/publish/gpg/).
+
+			Publish parent POM when needed:
+			  cd ../org.jrebirth && mvn -Pcentral-publish clean deploy
+
+			Example:
+			  mvn -Pcentral-publish -Dmaven.test.skip=true clean deploy
+
+			Dry run (bundle only, no upload): -DskipPublishing=true
+		-->
+		<profile>
+			<id>central-publish</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<phase>package</phase>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${maven.javadoc.plugin.version}</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<phase>package</phase>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<configuration>
+									<failOnError>false</failOnError>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<configuration>
+							<deployAtEnd>true</deployAtEnd>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.central</groupId>
+						<artifactId>central-publishing-maven-plugin</artifactId>
+						<extensions>true</extensions>
+						<inherited>false</inherited>
+						<configuration>
+							<publishingServerId>central</publishingServerId>
+							<deploymentName>JRebirth AF ${project.version}</deploymentName>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 
