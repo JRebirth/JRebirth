@@ -116,7 +116,7 @@
 			<artifactId>processor</artifactId>
 			<version>${project.version}</version>
 			<classifier>4ide</classifier>
-			<optional>true</optional>
+			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
