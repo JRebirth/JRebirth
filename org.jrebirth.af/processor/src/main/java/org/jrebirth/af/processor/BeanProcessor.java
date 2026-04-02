@@ -53,7 +53,7 @@ import org.jboss.forge.roaster.model.source.JavaClassSource;
 /**
  * The Class BeanProcessor.
  */
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_25)
 public class BeanProcessor extends AbstractProcessor {
 
     /**

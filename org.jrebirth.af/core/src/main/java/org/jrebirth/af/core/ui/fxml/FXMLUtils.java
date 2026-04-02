@@ -30,6 +30,7 @@ import javafx.util.Callback;
 import org.jrebirth.af.api.exception.CoreRuntimeException;
 import org.jrebirth.af.api.log.JRLogger;
 import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.fxml.FXMLModel;
 import org.jrebirth.af.api.ui.fxml.FXMLController;
 import org.jrebirth.af.api.ui.fxml.FXMLControllerFactory;
 import org.jrebirth.af.core.log.JRLoggerFactory;
@@ -108,7 +109,8 @@ public final class FXMLUtils implements FXMLMessages {
 
         try {
             if (bundlePath != null) {
-                fxmlLoader.setResources(ResourceBundle.getBundle(bundlePath));
+                final String baseName = toResourceBundleBaseName(bundlePath);
+                fxmlLoader.setResources(ResourceBundle.getBundle(baseName));
             }
         } catch (final MissingResourceException e) {
             LOGGER.log(MISSING_RESOURCE_BUNDLE, e, bundlePath);
@@ -155,17 +157,25 @@ public final class FXMLUtils implements FXMLMessages {
      */
     private static <M extends Model> URL convertFxmlUrl(final M model, final String fxmlPath) {
         URL fxmlUrl = null;
-        // Replace all '.' separator by path separator '/'
         if (model != null) {
-            // Try to load the resource from the same path as the model class
             fxmlUrl = model.getClass().getResource(fxmlPath);
         }
         if (fxmlUrl == null) {
-            // Try to load the resource from the full path org/jrebirth/core/ui/Test.fxml
-            fxmlUrl = model.getClass().getClassLoader().getResource(fxmlPath);
-            // FIXME TODO standardize without path ?? ModuleUtility.getResourceAsURL(model, "", fxmlPath);
+            ClassLoader cl = model != null ? model.getClass().getClassLoader() : Thread.currentThread().getContextClassLoader();
+            if (cl == null) {
+                cl = ClassLoader.getSystemClassLoader();
+            }
+            fxmlUrl = cl.getResource(fxmlPath);
         }
 
         return fxmlUrl;
+    }
+
+    /**
+     * Normalize a bundle path for {@link ResourceBundle#getBundle(String)} (strip {@code rb:}, use dotted base names).
+     */
+    private static String toResourceBundleBaseName(final String bundlePath) {
+        String base = bundlePath.startsWith(FXMLModel.KEYPART_RB_PREFIX) ? bundlePath.substring(FXMLModel.KEYPART_RB_PREFIX.length()) : bundlePath;
+        return base.replace('/', '.');
     }
 }

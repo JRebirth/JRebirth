@@ -16,6 +16,15 @@
 	<description>JRebirth Archetype used to build a new fresh application</description>
 
 	<build>
+		<!-- Parent POM puts resources under ${resources.base.path}; archetypes need META-INF/maven and archetype-resources at jar root. -->
+		<!-- filtering=false keeps ${groupId} etc. in template files for archetype:generate. -->
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+			</resource>
+		</resources>
+
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.archetype</groupId>

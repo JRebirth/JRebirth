@@ -515,7 +515,12 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     }
 
     protected Module getStageIconsModule() {
-        return this.getClass().getModule();//ModuleUtility.find("org.jrebirth.af.resources");
+        final Module appModule = this.getClass().getModule();
+        if (appModule.isNamed()) {
+            return appModule;
+        }
+        final Module resources = ModuleUtility.find("org.jrebirth.af.resources");
+        return resources != null ? resources : appModule;
     }
 
     /**

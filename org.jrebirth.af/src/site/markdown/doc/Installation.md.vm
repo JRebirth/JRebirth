@@ -59,16 +59,13 @@ Maven Repositories
 Choose your destiny ! 
 ...and finish brillantly your wonderful application :)
     
-All JRebirth libraries are pushed to several repositories and you must choose how you want to retrieve them.
-They are pushed in this order :
+All JRebirth libraries are available from several repositories; pick what fits your build.
 
-1. <a href="#ojo">OJO, Open Source Repository hosted by JFrog and powered by Artifactory (Snapshots and Releases)</a>
-   <a href="http://oss.jfrog.org">oss.jfrog.org</a>
+1. <a href="#central">Maven Central</a> (default for releases)
 2. <a href="#bintray">Our public repository powered by Bintray (Only Releases, On demand Jenkins build)</a>  
 3. <a href="#jcenter">JCenter Bintray repository (Only Releases, Superset of Maven Central)</a>  
-4. <a href="#repo">Our internal repository powered by Artifactory (could be offline)</a> 
-5. <a href="#central">Maven Central, all releases are synchronized with Central repository</a> 
-6. <a href="#hybrid">Any subset of all available repositories</a>
+4. <a href="#repo">JRebirth repository at repo.jrebirth.org (releases and snapshots; may be offline)</a> 
+5. <a href="#hybrid">Combined profile (multiple repositories)</a>
 
 
 *JRebirth is published on Maven Central repository with the help of Bintray synchronization (without having to modify your pom files).*
@@ -76,42 +73,21 @@ If you don't want to bother yourself with all these settings, you should just pr
 
 
 
-When searching the latest versio of JRebirth, the first location to check is **OJO** because Releases and Snapshots are pushed automatically to it, so check it out first !
+For **snapshots**, use <a href="#repo">repo.jrebirth.org</a> or build JRebirth from source.
 
-Let's have a macro look on all these alternatives.
+<a name="extra-repos-pom" />
+### Extra repositories in pom.xml
 
-<a name="ojo" />
-OJO Repo
---------------------------
-    
-JRebirth is firstly pushed to OJO ([oss.jfrog.org/simple/oss-release-local/org/jrebirth/](http://oss.jfrog.org/simple/oss-release-local/org/jrebirth/)
-- Open Source Software repo provided by JFrog as an artifactory instance ).
+Add this to your **pom.xml** if you need JRebirth snapshot builds in addition to Maven Central (not required for stable releases on Central).
 
-
-You have 2 ways to plug your maven build to this server:
-1. <a href="#ojopom">Add a repositories section into the pom.xml of your project.</a>
-2. <a href="#ojosettings">Add a profile section into your settings.xml</a>
-    
-    
-<a name="ojopom" />
-### OJO into Pom.xml
-
-You can simply add this declaration into your **pom.xml** file to let Maven downloading all JRebirth dependencies.
-    
-A lot of people don't recommend to put repositories declaration into pom files, because a Maven build should only depend on Maven Central dependencies without any third library repositories.
-    
-JRebirth is not pushed yet on Maven Central repo, so this snippet does the trick to start to work.
-    
 <!-- MACRO{include|source=../includes/Pom_Repositories.xml}-->
 
 <!-- |snippet=xp://repositories -->
 
-<a name="ojosettings" />
-### OJO into Settings.xml
+<a name="extra-repos-settings" />
+### Extra repositories in settings.xml
 
-This way is so far better but has an important drawback, your build won't work if you don't use the right profile.
-    
-So you should share this declaration somewhere in order to let your project 'buildable' by other contributors.
+Prefer declaring repositories in **settings.xml** so the POM stays Central-only for contributors who do not need snapshots.
 
 <!-- MACRO{include|source=../includes/OJO_Profile_Settings.xml}-->
 
@@ -176,11 +152,9 @@ JRebirth artifacts are synchronized with Central since 7.7.0 version.
 Hybrid Configuration
 -------------------------------
 
-You can add both OJO, JCenter, and JRebirth Artifactory repositories, if you want to be up-to-date at any time.
+You can combine Maven Central, JCenter, and the JRebirth repository if you want maximum flexibility.
 
-
-If you just want to deal with stable release use only OJO (Release repo) or JCenter.
-If sometimes you need to test a Snapshot version use OJO (Snapshot repo) and our Artifactory instance or ask us a custom build.
+For stable releases, Maven Central or JCenter is enough. For snapshot dependencies, add **repo.jrebirth.org** (see snippets above) or build from source.
 
 
  <a name="AllInOneProfile" />

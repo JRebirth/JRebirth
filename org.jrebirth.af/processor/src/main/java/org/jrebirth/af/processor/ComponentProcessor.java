@@ -43,7 +43,6 @@ import javax.tools.FileObject;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -61,7 +60,7 @@ import org.jrebirth.af.core.module.AbstractModuleStarter;
 /**
  * The Class ComponentProcessor.
  */
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_25)
 public class ComponentProcessor extends AbstractProcessor {
 
     private static final String JREBIRTH_PROPERTIES_PATH = "jrebirth.properties";
@@ -341,9 +340,17 @@ public class ComponentProcessor extends AbstractProcessor {
         try (FileReader fr = new FileReader(path + POM_XML)) {
             final Model model = pomReader.read(fr);
             final String pkg = model.getGroupId() + "." + model.getArtifactId();
-            final String starterName = StringUtils.capitalize(model.getArtifactId()) + ModuleStarter.class.getSimpleName();
+            final String starterName = capitalize(model.getArtifactId()) + ModuleStarter.class.getSimpleName();
             return pkg + "." + starterName;
         }
+    }
+
+    /** Title-cases the first character only; null and empty unchanged. */
+    private static String capitalize(final String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        return Character.toTitleCase(str.charAt(0)) + str.substring(1);
     }
 
 }

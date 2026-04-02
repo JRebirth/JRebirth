@@ -91,9 +91,16 @@ public final class ClasspathUtility implements UtilMessages {
      */
     public static InputStream loadInputStream(final String custConfFileName) {
         InputStream is = null;
-        
-        ClassLoader cl = ModuleLayer.boot().findLoader("org.jrebirth.af.core");
-        
+
+        final java.lang.Module self = ClasspathUtility.class.getModule();
+        ClassLoader cl = self.isNamed() ? self.getClassLoader() : ClasspathUtility.class.getClassLoader();
+        if (cl == null) {
+            cl = Thread.currentThread().getContextClassLoader();
+        }
+        if (cl == null) {
+            cl = ClassLoader.getSystemClassLoader();
+        }
+
         final File resourceFile = new File(custConfFileName);
         // Check if the file could be find
         if (resourceFile.exists()) {

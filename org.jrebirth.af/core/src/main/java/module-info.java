@@ -15,6 +15,9 @@ module org.jrebirth.af.core {
 
     requires io.github.classgraph;
 
+    requires static junit;
+    requires static org.testfx;
+
     uses org.jrebirth.af.api.module.ModuleStarter;
     provides org.jrebirth.af.api.module.ModuleStarter with org.jrebirth.af.core.module.CoreStarter;
     
@@ -49,6 +52,7 @@ module org.jrebirth.af.core {
     exports org.jrebirth.af.core.component.basic;
     exports org.jrebirth.af.core.resource.color;
     exports org.jrebirth.af.core.application;
+    opens org.jrebirth.af.core.application.apps;
     exports org.jrebirth.af.core.key;
     exports org.jrebirth.af.core.command.single;
     exports org.jrebirth.af.core.resource.parameter;

@@ -46,6 +46,8 @@
 				<excludes>
 					<exclude>**/*.ttf</exclude>
 					<exclude>**/*.ico</exclude>
+					<!-- JNLP may use legacy single-byte encoding; UTF-8 filtering throws MalformedInputException. -->
+					<exclude>**/*.jnlp</exclude>
 				</excludes>
 			</resource>
 			<resource>
@@ -54,6 +56,7 @@
 				<includes>
 					<include>**/*.ttf</include>
 					<include>**/*.ico</include>
+					<include>**/*.jnlp</include>
 				</includes>
 			</resource>
 		</resources>

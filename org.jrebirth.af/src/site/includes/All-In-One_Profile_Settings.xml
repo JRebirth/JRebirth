@@ -12,14 +12,8 @@
 						<enabled>false</enabled>
 					</snapshots>
 					<id>central</id>
-					<name>libs-release</name>
-					<url>http://oss.jfrog.org/artifactory/libs-release</url>
-				</repository>
-				<repository>
-					<snapshots />
-					<id>snapshots</id>
-					<name>libs-snapshot</name>
-					<url>http://oss.jfrog.org/artifactory/libs-snapshot</url>
+					<name>Maven Central</name>
+					<url>https://repo1.maven.org/maven2</url>
 				</repository>
 				<repository>
 					<snapshots>
@@ -27,7 +21,7 @@
 					</snapshots>
 					<id>jcenter</id>
 					<name>bintray</name>
-					<url>http://jcenter.bintray.com</url>
+					<url>https://jcenter.bintray.com</url>
 				</repository>
 				<repository>
 					<snapshots>
@@ -35,7 +29,7 @@
 					</snapshots>
 					<id>jrebirth-release</id>
 					<name>libs-release</name>
-					<url>http://repo.jrebirth.org/libs-release</url>
+					<url>https://repo.jrebirth.org/libs-release</url>
 				</repository>
 				<repository>
 					<snapshots>
@@ -43,7 +37,7 @@
 					</snapshots>
 					<id>jrebirth-snapshot</id>
 					<name>libs-snapshot</name>
-					<url>http://repo.jrebirth.org/libs-snapshot</url>
+					<url>https://repo.jrebirth.org/libs-snapshot</url>
 				</repository>
 			</repositories>
 			<pluginRepositories>
@@ -52,14 +46,8 @@
 						<enabled>false</enabled>
 					</snapshots>
 					<id>central</id>
-					<name>plugins-release</name>
-					<url>http://oss.jfrog.org/artifactory/plugins-release</url>
-				</pluginRepository>
-				<pluginRepository>
-					<snapshots />
-					<id>snapshots</id>
-					<name>plugins-snapshot</name>
-					<url>http://oss.jfrog.org/artifactory/plugins-snapshot</url>
+					<name>Maven Central</name>
+					<url>https://repo1.maven.org/maven2</url>
 				</pluginRepository>
 				<pluginRepository>
 					<snapshots>
@@ -67,7 +55,7 @@
 					</snapshots>
 					<id>jcenter-plugin</id>
 					<name>bintray-plugins</name>
-					<url>http://jcenter.bintray.com</url>
+					<url>https://jcenter.bintray.com</url>
 				</pluginRepository>
 				<pluginRepository>
 					<snapshots>
@@ -75,7 +63,7 @@
 					</snapshots>
 					<id>jrebirth-plugin-release</id>
 					<name>plugins-release</name>
-					<url>http://repo.jrebirth.org/plugins-release</url>
+					<url>https://repo.jrebirth.org/plugins-release</url>
 				</pluginRepository>
 				<pluginRepository>
 					<snapshots>
@@ -83,7 +71,7 @@
 					</snapshots>
 					<id>jrebirth-plugin-snapshot</id>
 					<name>plugins-snapshot</name>
-					<url>http://repo.jrebirth.org/plugins-snapshot</url>
+					<url>https://repo.jrebirth.org/plugins-snapshot</url>
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>

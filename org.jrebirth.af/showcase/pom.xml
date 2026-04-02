@@ -20,6 +20,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<preloaderClass>org.jrebirth.af.preloader.JRebirthPreloader</preloaderClass>
 		<appClass>org.jrebirth.YourApplication</appClass>
+		<!-- Omit showcase apps from Maven Central / deploy (inherited by all showcase submodules). -->
+		<skipPublishing>true</skipPublishing>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven.source.skip>true</maven.source.skip>
+		<maven.javadoc.skip>true</maven.javadoc.skip>
+		<gpg.skip>true</gpg.skip>
 	</properties>
 
 	<modules>
@@ -96,7 +102,7 @@
 			<artifactId>core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+		 
 <!-- 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>

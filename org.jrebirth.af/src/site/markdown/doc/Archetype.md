@@ -52,7 +52,7 @@ Full Auto
 </a>
 mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DarchetypeGroupId=org.jrebirth.af
 -DarchetypeArtifactId=archetype
--DarchetypeVersion=${project.version} -DarchetypeRepository=http://oss.jfrog.org/artifactory/simple/oss-release-local/ -DgroupId=org.jrebirth.af -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
+-DarchetypeVersion=${project.version} -DgroupId=org.jrebirth.af -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
 -Dpackage=org.jrebirth.af.sample
 
 

@@ -10,8 +10,8 @@ open module org.jrebirth.af.presentation {
 	requires org.jrebirth.af.api;
     requires org.jrebirth.af.core;
 
-    // TODO: Migrate from javax.xml.bind to jakarta.xml.bind when upgrading JAXB
-    requires java.xml.bind;
+    requires jakarta.xml.bind;
+    requires jakarta.activation;
 
     exports org.jrebirth.af.presentation.ui.base;
     exports org.jrebirth.af.presentation.ui.qanda;
