@@ -13,9 +13,8 @@ Live feed is available on our [Blog](http://blog.jrebirth.org)
 
 ## Download & Build
 
-[ ![Download](https://api.bintray.com/packages/jrebirth/JRebirth/JRebirthAF/images/download.svg) ](https://bintray.com/jrebirth/JRebirth/JRebirthAF/_latestVersion)
+[![Maven Central](https://img.shields.io/maven-central/v/org.jrebirth.af/core.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/org.jrebirth.af/core)
 [![Build Status](http://ci.jrebirth.org/job/JRebirth-8x/badge/icon)](http://ci.jrebirth.org/job/JRebirth-8x/)
-
 
 ## Demo
 
@@ -33,12 +32,22 @@ Several Demos are available online :
 
 ## Use it
 
-Maven coordinates:
+This repository targets **Java 25**, **JavaFX 26**, and **JRebirth AF 12.0.0-SNAPSHOT** (see `org.jrebirth.af/pom.xml`).
+
+**Latest release on Maven Central** is **8.6.0** ([artifact search](https://central.sonatype.com/search?q=org.jrebirth.af)):
 
     <dependency>
         <groupId>org.jrebirth.af</groupId>
         <artifactId>core</artifactId>
         <version>8.6.0</version>
+    </dependency>
+
+To depend on this **12.x** line, build and install from source (`mvn clean install`), then use:
+
+    <dependency>
+        <groupId>org.jrebirth.af</groupId>
+        <artifactId>core</artifactId>
+        <version>12.0.0-SNAPSHOT</version>
     </dependency>
 
 ## Documentation
@@ -47,8 +56,12 @@ Documentation is available [here](http://www.jrebirth.org/doc/Toc.html).
 
 ## Build it
 
-Requires [Git](http://git-scm.com/), [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and [Maven](http://maven.apache.org/).
+Requires [Git](http://git-scm.com/), **JDK 25** or newer, [Apache Maven](http://maven.apache.org/) **3.9+** (the build is validated against Maven 3.9.11).
 
     git clone https://github.com/JRebirth/JRebirth.git
     cd JRebirth/org.jrebirth.af
     mvn clean install
+
+To skip test compilation and execution for the full reactor (for example if a tooling module fails test compile), use:
+
+    mvn clean install -Dmaven.test.skip=true
