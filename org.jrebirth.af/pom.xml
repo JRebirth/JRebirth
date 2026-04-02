@@ -30,12 +30,46 @@
 		<MasteringTables-version>3.0.0</MasteringTables-version>
 		<ComparisonTool-version>1.0.0-SNAPSHOT</ComparisonTool-version>
 
-		<maven.version>3.5.4</maven.version>
+		<maven.version>3.9.11</maven.version>
 
-		<surefire.version>2.18.1</surefire.version>
-		<slf4j.version>1.8.0-beta4</slf4j.version>
+		<surefire.version>3.5.5</surefire.version>
+		<slf4j.version>2.0.17</slf4j.version>
 		<openjfx.version>26</openjfx.version>
-		<java.version>24</java.version>
+		<java.version>25</java.version>
+
+		<junit.jupiter.version>5.14.3</junit.jupiter.version>
+		<logback.version>1.5.32</logback.version>
+		<classgraph.version>4.8.184</classgraph.version>
+		<testfx.version>4.0.18</testfx.version>
+		<testfx.monocle.version>jdk-11+26</testfx.monocle.version>
+		<guava.version>33.5.0-jre</guava.version>
+		<emf.common.version>2.45.0</emf.common.version>
+		<emf.ecore.version>2.42.0</emf.ecore.version>
+		<emf.ecore.xmi.version>2.40.0</emf.ecore.xmi.version>
+		<jakarta.ws.rs.version>2.1.6</jakarta.ws.rs.version>
+		<chunk.templates.version>3.6.2</chunk.templates.version>
+
+		<maven.compiler.plugin.version>3.15.0</maven.compiler.plugin.version>
+		<maven.resources.plugin.version>3.5.0</maven.resources.plugin.version>
+		<maven.enforcer.plugin.version>3.6.2</maven.enforcer.plugin.version>
+		<maven.javadoc.plugin.version>3.12.0</maven.javadoc.plugin.version>
+		<maven.jar.plugin.version>3.5.0</maven.jar.plugin.version>
+		<maven.shade.plugin.version>3.6.2</maven.shade.plugin.version>
+		<maven.dependency.plugin.version>3.10.0</maven.dependency.plugin.version>
+		<maven.assembly.plugin.version>3.8.0</maven.assembly.plugin.version>
+		<maven.archetype.plugin.version>3.4.1</maven.archetype.plugin.version>
+		<maven.plugin.plugin.version>3.15.2</maven.plugin.plugin.version>
+		<maven.invoker.plugin.version>3.9.1</maven.invoker.plugin.version>
+		<jacoco.version>0.8.14</jacoco.version>
+		<sonar.maven.plugin.version>5.5.0.6356</sonar.maven.plugin.version>
+		<javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
+		<launch4j.maven.plugin.version>2.7.0</launch4j.maven.plugin.version>
+		<wagon.maven.plugin.version>3.0.0</wagon.maven.plugin.version>
+		<jaxb2.maven.plugin.version>4.1.0</jaxb2.maven.plugin.version>
+		<build.helper.maven.plugin.version>3.6.1</build.helper.maven.plugin.version>
+
+		<wagon.ftp.version>3.5.3</wagon.ftp.version>
+		<wagon.ssh.version>3.5.3</wagon.ssh.version>
 
 	</properties>
 
@@ -112,6 +146,82 @@
 	</developers>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<release>${java.version}</release>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${maven.jar.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>${maven.shade.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${maven.dependency.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${maven.assembly.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-archetype-plugin</artifactId>
+					<version>${maven.archetype.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-plugin-plugin</artifactId>
+					<version>${maven.plugin.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-invoker-plugin</artifactId>
+					<version>${maven.invoker.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx-maven-plugin</artifactId>
+				<version>${javafx.maven.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>com.akathist.maven.plugins.launch4j</groupId>
+					<artifactId>launch4j-maven-plugin</artifactId>
+					<version>${launch4j.maven.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>wagon-maven-plugin</artifactId>
+					<version>${wagon.maven.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>jaxb2-maven-plugin</artifactId>
+					<version>${jaxb2.maven.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${build.helper.maven.plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 
 		<!-- Still not working 05/10/2011 NOTE: This is just a vision for the future, it's not yet implemented: see MNG-2216 -->
 		<!--<sourceEncoding>UTF-8</sourceEncoding> -->
@@ -171,13 +281,13 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.1.0</version>
+				<version>${maven.resources.plugin.version}</version>
 			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>${maven.compiler.plugin.version}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -189,17 +299,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>3.5.0</version>
+				<version>${maven.enforcer.plugin.version}</version>
 				<executions>
 					<execution>
-						<id>enforce-java-24</id>
+						<id>enforce-java-25</id>
 						<goals>
 							<goal>enforce</goal>
 						</goals>
 						<configuration>
 							<rules>
 								<requireJavaVersion>
-									<version>[24,)</version>
+									<version>[25,)</version>
 								</requireJavaVersion>
 							</rules>
 						</configuration>
@@ -236,7 +346,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M3</version>
+				<version>${surefire.version}</version>
 				<configuration>
 					<forkCount>0</forkCount> <!-- changed this to 0 -->
 					<reuseForks>false</reuseForks>
@@ -246,7 +356,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.3</version>
+				<version>${jacoco.version}</version>
 				<executions>
 					<execution>
 						<id>default-prepare-agent</id>
@@ -267,7 +377,7 @@
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
-				<version>3.6.0.1398</version>
+				<version>${sonar.maven.plugin.version}</version>
 			</plugin>
 
 			<!-- Project Quality -->
@@ -278,7 +388,7 @@
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ssh</artifactId>
-				<version>2.10</version>
+				<version>${wagon.ssh.version}</version>
 			</extension>
 		</extensions>
 
@@ -292,7 +402,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.1.0</version>
+				<version>${maven.javadoc.plugin.version}</version>
 				<reportSets>
 					<reportSet>
 						<reports>
@@ -324,9 +434,93 @@
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-api</artifactId>
-				<version>5.3.1</version>
+				<version>${junit.jupiter.version}</version>
 			</dependency>
-			<!-- <dependency> <groupId>org.easytesting</groupId> <artifactId>fest-assert</artifactId> <version>1.4</version> </dependency> -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-base</artifactId>
+				<version>${openjfx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-graphics</artifactId>
+				<version>${openjfx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-controls</artifactId>
+				<version>${openjfx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-fxml</artifactId>
+				<version>${openjfx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-web</artifactId>
+				<version>${openjfx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.classgraph</groupId>
+				<artifactId>classgraph</artifactId>
+				<version>${classgraph.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.testfx</groupId>
+				<artifactId>testfx-core</artifactId>
+				<version>${testfx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.testfx</groupId>
+				<artifactId>testfx-junit</artifactId>
+				<version>${testfx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.testfx</groupId>
+				<artifactId>openjfx-monocle</artifactId>
+				<version>${testfx.monocle.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.emf</groupId>
+				<artifactId>org.eclipse.emf.common</artifactId>
+				<version>${emf.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.emf</groupId>
+				<artifactId>org.eclipse.emf.ecore</artifactId>
+				<version>${emf.ecore.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.emf</groupId>
+				<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+				<version>${emf.ecore.xmi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jakarta.ws.rs</groupId>
+				<artifactId>jakarta.ws.rs-api</artifactId>
+				<version>${jakarta.ws.rs.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.x5dev</groupId>
+				<artifactId>chunk-templates</artifactId>
+				<version>${chunk.templates.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
