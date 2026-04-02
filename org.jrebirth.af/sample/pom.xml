@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.jrebirth</groupId>
 		<artifactId>af</artifactId>
-		<version>11.0.0-SNAPSHOT</version>
+		<version>12.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -65,9 +65,9 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.0</version>
 					<configuration>
-						<source>11</source>
-						<target>11</target>
-						<release>11</release>
+						<source>24</source>
+						<target>24</target>
+						<release>24</release>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
@@ -129,13 +129,13 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>preloader</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

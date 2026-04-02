@@ -6,11 +6,12 @@
 	<parent>
 		<groupId>org.jrebirth</groupId>
 		<artifactId>organization</artifactId>
-		<version>2.1.1</version>
+		<version>12.0.0-SNAPSHOT</version>
+		<relativePath>../org.jrebirth/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>af</artifactId>
-	<version>11.0.0-SNAPSHOT</version>
+	<version>12.0.0-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 	<name>JRebirth Application Framework</name>
@@ -33,7 +34,8 @@
 
 		<surefire.version>2.18.1</surefire.version>
 		<slf4j.version>1.8.0-beta4</slf4j.version>
-		<openjfx.version>11.0.2</openjfx.version>
+		<openjfx.version>26</openjfx.version>
+		<java.version>24</java.version>
 
 	</properties>
 
@@ -177,11 +179,32 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<source>11</source>
-					<target>11</target>
-					<release>11</release>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<release>${java.version}</release>
 				</configuration>
 				<!-- <dependencies> <dependency> <groupId>org.ow2.asm</groupId> <artifactId>asm</artifactId> <version>6.2</version> Use newer version of ASM </dependency> </dependencies> -->
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>3.5.0</version>
+				<executions>
+					<execution>
+						<id>enforce-java-24</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireJavaVersion>
+									<version>[24,)</version>
+								</requireJavaVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 
 			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-project-info-reports-plugin</artifactId> <version>2.7</version> <dependencies> <dependency> <groupId>org.apache.maven.shared</groupId> 
