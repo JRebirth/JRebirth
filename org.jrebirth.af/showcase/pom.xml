@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>af</artifactId>
 		<groupId>org.jrebirth</groupId>
-		<version>11.0.0-SNAPSHOT</version>
+		<version>12.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -45,7 +45,7 @@
 						<path>
 							<groupId>org.jrebirth.af</groupId>
 							<artifactId>processor</artifactId>
-							<version>11.0.0-SNAPSHOT</version>
+							<version>12.0.0-SNAPSHOT</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
@@ -59,9 +59,9 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.0</version>
 					<configuration>
-						<source>11</source>
-						<target>11</target>
-						<release>11</release>
+						<source>24</source>
+						<target>24</target>
+						<release>24</release>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
@@ -89,19 +89,19 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>preloader</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 		
 <!-- 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency> -->
@@ -109,13 +109,13 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>component</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 			<classifier>4ide</classifier>
 			<optional>true</optional>
 		</dependency>

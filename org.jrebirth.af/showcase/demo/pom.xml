@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
-		<version>11.0.0-SNAPSHOT</version>
+		<version>12.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -74,7 +74,7 @@
 					<configuration>
 						<archive>
 							<manifestEntries>
-								<JavaFX-Version>11.0.0</JavaFX-Version>
+								<JavaFX-Version>26.0.0</JavaFX-Version>
 								<Main-Class>${appClass}</Main-Class>
 								<!--<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class> -->
 							</manifestEntries>
@@ -139,7 +139,7 @@
 								</classPath>
 								<icon>${exeIcon}</icon>
 								<jre>
-									<minVersion>1.8.0</minVersion>
+									<minVersion>24</minVersion>
 									<jdkPreference>preferJre</jdkPreference>
 								</jre>
 								<versionInfo>
@@ -263,7 +263,7 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -271,41 +271,41 @@
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>resources</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>undoredo</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>fxml</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>todos</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>fonticon</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>wave</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jrebirth.af.showcase</groupId>
 			<artifactId>workbench</artifactId>
-			<version>11.0.0-SNAPSHOT</version>
+			<version>12.0.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
