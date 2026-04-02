@@ -65,3 +65,29 @@ Requires [Git](http://git-scm.com/), **JDK 25** or newer, [Apache Maven](http://
 To skip test compilation and execution for the full reactor (for example if a tooling module fails test compile), use:
 
     mvn clean install -Dmaven.test.skip=true
+
+## Publish to Maven Central
+
+The build changes live on branch **`cursor/maven-central-pom-only`** (pull request against `12.x-dev`). After that PR is merged, the following applies.
+
+Releases are uploaded with the [Sonatype Central Publisher Portal](https://central.sonatype.org/publish/publish-portal-maven/) using `central-publishing-maven-plugin`. Activate the `central-publish` profile, use a **release** version (not `-SNAPSHOT`), and configure `~/.m2/settings.xml` with a server id **`central`** and your [portal user token](https://central.sonatype.org/publish/generate-portal-token/). You also need a [GPG key](https://central.sonatype.org/publish/gpg/) for signing.
+
+    cd org.jrebirth.af
+    mvn -Pcentral-publish -Dmaven.test.skip=true clean deploy
+
+When you publish a new `org.jrebirth:organization` parent, run the same profile from `org.jrebirth`:
+
+    cd org.jrebirth
+    mvn -Pcentral-publish clean deploy
+
+### Dry run (inspect the deployment bundle)
+
+To build the same artifacts and **Central bundle** without uploading to the portal, set **`skipPublishing`** (see [Sonatype: skipPublishing](https://central.sonatype.org/publish/publish-portal-maven/#skipPublishing)):
+
+    cd org.jrebirth.af
+    mvn -Pcentral-publish -DskipPublishing=true -Dmaven.test.skip=true clean deploy
+
+Then review:
+
+- **`org.jrebirth.af/target/central-publishing/central-bundle.zip`** — unzip to inspect the full deployment
+- **`*/target/central-staging/`** under each module — staged files before bundling
