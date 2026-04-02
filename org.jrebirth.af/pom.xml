@@ -130,9 +130,9 @@
 			<id>jr1</id>
 			<name>Bordes Sébastien</name>
 			<email>seb@jrebirth.org</email>
-			<url>https://blog.jrebirth.org</url>
+			<url>http://blog.jrebirth.org</url>
 			<organization>JRebirth</organization>
-			<organizationUrl>https://www.jrebirth.org</organizationUrl>
+			<organizationUrl>http://www.jrebirth.org</organizationUrl>
 			<roles>
 				<role>JRebirth Designer</role>
 			</roles>
@@ -141,9 +141,9 @@
 			<id>jr2</id>
 			<name>Bordes Céline</name>
 			<email>celine@jrebirth.org</email>
-			<url>https://www.jrebirth.org</url>
+			<url>http://www.jrebirth.org</url>
 			<organization>JRebirth</organization>
-			<organizationUrl>https://www.jrebirth.org</organizationUrl>
+			<organizationUrl>http://www.jrebirth.org</organizationUrl>
 			<roles>
 				<role>Graphic Designer</role>
 			</roles>
