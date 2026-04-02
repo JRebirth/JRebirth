@@ -9,11 +9,41 @@
 	<version>12.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>JRebirth Organization Parent</name>
+	<description>Maven parent POM for the JRebirth project (coordinates and shared build defaults).</description>
+	<url>https://www.jrebirth.org</url>
+
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>jr1</id>
+			<name>Bordes Sébastien</name>
+			<email>seb@jrebirth.org</email>
+			<url>https://blog.jrebirth.org</url>
+			<organization>JRebirth</organization>
+			<organizationUrl>https://www.jrebirth.org</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:https://github.com/JRebirth/JRebirth.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth.git</developerConnection>
+		<url>https://github.com/JRebirth/JRebirth/tree/12.x-dev</url>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.release>25</maven.compiler.release>
 		<java.version>25</java.version>
+		<central.publishing.maven.plugin.version>0.10.0</central.publishing.maven.plugin.version>
+		<maven.gpg.plugin.version>3.2.8</maven.gpg.plugin.version>
+		<maven.deploy.plugin.version>3.1.4</maven.deploy.plugin.version>
 	</properties>
 
 	<build>
@@ -43,4 +73,54 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<!--
+		Publish this parent POM to Maven Central (Sonatype Central Publisher Portal).
+		https://central.sonatype.org/publish/publish-portal-maven/
+
+		mvn -Pcentral-publish clean deploy
+
+		Configure ~/.m2/settings.xml with server id "central" (user token from the portal).
+	-->
+	<profiles>
+		<profile>
+			<id>central-publish</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven.gpg.plugin.version}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<version>${maven.deploy.plugin.version}</version>
+						<configuration>
+							<deployAtEnd>true</deployAtEnd>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.central</groupId>
+						<artifactId>central-publishing-maven-plugin</artifactId>
+						<version>${central.publishing.maven.plugin.version}</version>
+						<extensions>true</extensions>
+						<configuration>
+							<publishingServerId>central</publishingServerId>
+							<deploymentName>${project.groupId}:${project.artifactId}:${project.version}</deploymentName>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
