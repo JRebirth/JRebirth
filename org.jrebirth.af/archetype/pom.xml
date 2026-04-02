@@ -15,12 +15,17 @@
 	<name>Application Archetype</name>
 	<description>JRebirth Archetype used to build a new fresh application</description>
 
+	<properties>
+		<!-- Keep archetype resources at target/classes root for maven-archetype-plugin:jar checks. -->
+		<resources.base.path></resources.base.path>
+	</properties>
+
 	<build>
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.archetype</groupId>
 				<artifactId>archetype-packaging</artifactId>
-				<version>2.2</version>
+				<version>${maven.archetype.plugin.version}</version>
 			</extension>
 		</extensions>
 

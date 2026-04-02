@@ -43,7 +43,6 @@ import javax.tools.FileObject;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -341,7 +340,9 @@ public class ComponentProcessor extends AbstractProcessor {
         try (FileReader fr = new FileReader(path + POM_XML)) {
             final Model model = pomReader.read(fr);
             final String pkg = model.getGroupId() + "." + model.getArtifactId();
-            final String starterName = StringUtils.capitalize(model.getArtifactId()) + ModuleStarter.class.getSimpleName();
+            final String artifactId = model.getArtifactId();
+            final String starterName =
+                    Character.toUpperCase(artifactId.charAt(0)) + artifactId.substring(1) + ModuleStarter.class.getSimpleName();
             return pkg + "." + starterName;
         }
     }

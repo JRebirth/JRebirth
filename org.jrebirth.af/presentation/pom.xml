@@ -16,7 +16,8 @@
 	<description>Base files to build a JavaFX slide's presentation</description>
 
 	<properties>
-		<jaxb.version>2.3.1</jaxb.version>
+		<jakarta.xml.bind.api.version>4.0.5</jakarta.xml.bind.api.version>
+		<jaxb.runtime.version>4.0.7</jaxb.runtime.version>
 	</properties>
 
 	<build>
@@ -56,14 +57,14 @@
 
 				<dependencies>
 					<dependency>
-						<groupId>javax.xml.bind</groupId>
-						<artifactId>jaxb-api</artifactId>
-						<version>${jaxb.version}</version>
+						<groupId>jakarta.xml.bind</groupId>
+						<artifactId>jakarta.xml.bind-api</artifactId>
+						<version>${jakarta.xml.bind.api.version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.glassfish.jaxb</groupId>
 						<artifactId>jaxb-runtime</artifactId>
-						<version>${jaxb.version}</version>
+						<version>${jaxb.runtime.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -84,14 +85,14 @@
 		</dependency>
 
 		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>${jaxb.version}</version>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>${jakarta.xml.bind.api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
-			<version>${jaxb.version}</version>
+			<version>${jaxb.runtime.version}</version>
 		</dependency>
 
 	</dependencies>

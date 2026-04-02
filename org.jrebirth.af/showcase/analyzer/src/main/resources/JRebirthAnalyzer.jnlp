@@ -2,7 +2,7 @@
 <jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="JRebirthAnalyzer.jnlp">
   <information>
     <title>JRebirth Analyzer</title>
-    <vendor>Sébastien Bordes</vendor>
+    <vendor>Sebastien Bordes</vendor>
     <description>JRebirth Analyzer application.</description>
     <offline-allowed/>
   </information>
