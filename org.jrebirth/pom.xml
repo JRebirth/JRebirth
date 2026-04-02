@@ -14,6 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.release>25</maven.compiler.release>
 		<java.version>25</java.version>
+		<maven.version>3.9.11</maven.version>
 	</properties>
 
 	<build>
@@ -35,6 +36,10 @@
 										<version>[25,)</version>
 										<message>JRebirth 12 requires Java 25 or newer.</message>
 									</requireJavaVersion>
+									<requireMavenVersion>
+										<version>[${maven.version},)</version>
+										<message>JRebirth 12 requires Apache Maven ${maven.version} or newer.</message>
+									</requireMavenVersion>
 								</rules>
 							</configuration>
 						</execution>
@@ -42,5 +47,11 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+			</plugin>
+		</plugins>
 	</build>
 </project>
