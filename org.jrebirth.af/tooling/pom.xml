@@ -22,8 +22,9 @@
 
 	<modules>
 		<module>codegen</module>
-		<module>jrebirth-maven-plugin</module>
 		<module>ecore2fx</module>
+		<module>text2fx</module>
+		<module>jrebirth-maven-plugin</module>
 	</modules>
 
 </project>
