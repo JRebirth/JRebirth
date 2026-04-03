@@ -53,6 +53,12 @@
 			<artifactId>ecore2fx</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.jrebirth.af.tooling</groupId>
+			<artifactId>text2fx</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		
        <dependency>
             <groupId>org.apache.maven</groupId>
