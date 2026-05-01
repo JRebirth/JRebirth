@@ -25,11 +25,9 @@ import org.jrebirth.af.api.ui.annotation.RootNodeClass;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.DefaultView;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;

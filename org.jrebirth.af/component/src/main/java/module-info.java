@@ -29,6 +29,7 @@ module org.jrebirth.af.component {
     // Preloader is optionally used by application at startup
     requires org.jrebirth.af.preloader;
     requires org.jrebirth.af.core;
+	requires javafx.graphics;
     
     
 }

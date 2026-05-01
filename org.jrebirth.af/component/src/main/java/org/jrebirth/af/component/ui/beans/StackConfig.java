@@ -39,5 +39,15 @@ public class StackConfig extends ModelConfig<StackModel, StackConfig> {
         this.pageEnumClass = pageEnumClass;
         return this;
     }
+    
+    @Override
+    public String toString() {
+        if(pageEnumClass!= null) {
+        	return this.modelClass.getName() + "|" + this.pageEnumClass;
+        }else if(stackName != null) {
+        	return this.modelClass.getName() + "|" + this.stackName;
+        }
+        return super.toString();
+    }
 
 }
