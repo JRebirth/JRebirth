@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>525icons icon browser</title>
+  <style>
+    body{font-family:Arial,sans-serif;margin:0;background:#f7f7f8;color:#222}
+    header{position:sticky;top:0;background:#fff;border-bottom:1px solid #ddd;padding:12px 16px;z-index:1}
+    .meta{font-size:13px;color:#555;margin-top:4px}
+    .toolbar{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+    input,select{padding:8px;font-size:14px}
+    main{padding:16px}
+    .group{margin-bottom:24px}
+    .group h2{margin:0 0 10px 0;font-size:18px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+    .card{background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px;min-height:96px}
+    .icon{font-size:28px;line-height:1}
+    .name{font-size:12px;margin-top:8px;word-break:break-all}
+    .code{font-family:Consolas,monospace;font-size:11px;color:#666;margin-top:4px}
+    .warn{padding:10px;background:#fff4e5;border:1px solid #ffd8a8;border-radius:8px;color:#8a5a00;margin-top:10px}
+  </style>
+</head>
+<body>
+  <header>
+    <strong>525icons icon browser</strong>
+    <div class="meta">Groups <span id="groupCount"></span> - Icons <span id="iconCount"></span> - Fonts <span id="fontCount"></span></div>
+    <div class="toolbar">
+      <input id="search" placeholder="Filter icons by name..." />
+      <select id="groupFilter"><option value="">All groups</option></select>
+      <select id="fontFilter"></select>
+    </div>
+    <div id="fontWarn" class="warn" style="display:none">No local TTF/OTF file found in this module; preview may use fallback fonts.</div>
+  </header>
+  <main id="root"></main>
+  <script src="./icons-data.js"></script>
+  <script>
+    const data=window.ICON_DATA||{groups:[],fonts:[],module:'unknown',total:0};
+    document.getElementById('groupCount').textContent=data.groups.length;
+    document.getElementById('iconCount').textContent=data.total;
+    document.getElementById('fontCount').textContent=data.fonts.length;
+    const groupFilter=document.getElementById('groupFilter');
+    for(const g of data.groups){ const o=document.createElement('option'); o.value=g.group; o.textContent=`${g.group} (${g.count})`; groupFilter.appendChild(o); }
+    const fontFilter=document.getElementById('fontFilter');
+    if(data.fonts.length===0){
+      const o=document.createElement('option'); o.value=''; o.textContent='No local font'; fontFilter.appendChild(o);
+      document.getElementById('fontWarn').style.display='block';
+    } else {
+      for(const f of data.fonts){
+        const face=document.createElement('style');
+        face.textContent=`@font-face{font-family:"${f.family}";src:url("${f.path}") format("truetype");font-weight:normal;font-style:normal;}`;
+        document.head.appendChild(face);
+        const o=document.createElement('option'); o.value=f.family; o.textContent=f.family; fontFilter.appendChild(o);
+      }
+    }
+    function glyph(cp){ return String.fromCodePoint(cp); }
+    function render(){
+      const q=document.getElementById('search').value.trim().toLowerCase();
+      const gf=groupFilter.value;
+      const ff=fontFilter.value;
+      const root=document.getElementById('root'); root.innerHTML='';
+      for(const g of data.groups){
+        if(gf && g.group!==gf) continue;
+        const icons=g.icons.filter(i=>!q||i.name.toLowerCase().includes(q));
+        if(!icons.length) continue;
+        const sec=document.createElement('section'); sec.className='group';
+        const h2=document.createElement('h2'); h2.textContent=`${g.group} (${icons.length}/${g.count})`; sec.appendChild(h2);
+        const grid=document.createElement('div'); grid.className='grid';
+        for(const i of icons){
+          const card=document.createElement('article'); card.className='card';
+          const icon=document.createElement('div'); icon.className='icon'; if(ff) icon.style.fontFamily=ff; icon.textContent=glyph(i.codepoint);
+          const name=document.createElement('div'); name.className='name'; name.textContent=i.name;
+          const code=document.createElement('div'); code.className='code'; code.textContent='U+'+i.hex.toUpperCase();
+          card.appendChild(icon); card.appendChild(name); card.appendChild(code); grid.appendChild(card);
+        }
+        sec.appendChild(grid); root.appendChild(sec);
+      }
+    }
+    document.getElementById('search').addEventListener('input',render);
+    groupFilter.addEventListener('change',render);
+    fontFilter.addEventListener('change',render);
+    render();
+  </script>
+</body>
+</html>

@@ -1,12 +1,13 @@
 package org.jrebirth.af.iconfontbridge.typicons;
 
+import org.jrebirth.af.api.resource.font.FontExtension;
 import org.jrebirth.af.api.resource.font.FontItem;
 import org.jrebirth.af.core.resource.provided.IconFont;
 
 /**
  * Typicons IconFont.
- * 
- * @author Sébastien Bordes
+ *
+ * Generated from typicons.font 2.1.2.
  */
 public enum Typicons implements IconFont {
 
@@ -985,11 +986,11 @@ public enum Typicons implements IconFont {
     /** weather_windy. */
     weather_windy("\ue144"),
 
-    /** wifi_outline. */
-    wifi_outline("\ue145"),
+    /** wi_fi_outline. */
+    wi_fi_outline("\ue145"),
 
-    /** wifi. */
-    wifi("\ue146"),
+    /** wi_fi. */
+    wi_fi("\ue146"),
 
     /** wine. */
     wine("\ue147"),
@@ -1018,35 +1019,29 @@ public enum Typicons implements IconFont {
     /** zoom. */
     zoom("\ue14f");
 
+    /** Source version used to generate this icon set. */
+    public static final String VERSION = "2.1.2";
+
+    /** Number of generated icons. */
+    public static final int ICON_COUNT = 336;
+
     /** The font item giving access to font resource. */
-    private static final FontItem ITEM = IconFont.buildItem(Typicons.class);
+    private static final FontItem ITEM = IconFont.buildItem("Typicons", Typicons.class, FontExtension.TTF);
 
     /** The char code designating the icon. */
-    private String charCode;
+    private final String charCode;
 
-    /**
-     * Default Constructor.
-     *
-     * @param charCode the char code designating the icon
-     */
-    private Typicons(final String charCode) {
+    Typicons(final String charCode) {
         this.charCode = charCode;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String charCode() {
         return this.charCode;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public FontItem item() {
         return ITEM;
     }
-
 }

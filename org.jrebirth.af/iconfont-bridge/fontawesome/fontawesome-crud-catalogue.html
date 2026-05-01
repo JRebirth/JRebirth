@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Catalogue Font Awesome Free 6.7.2 - CRUD / UI / Broadcast</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    @font-face {
+      font-family: "Font Awesome 6 Free";
+      src: url("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/webfonts/fa-solid-900.ttf") format("truetype");
+      font-weight: 900;
+      font-style: normal;
+      font-display: block;
+    }
+
+    @font-face {
+      font-family: "Font Awesome 6 Free Regular";
+      src: url("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/webfonts/fa-regular-400.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: block;
+    }
+
+    @font-face {
+      font-family: "Font Awesome 6 Brands";
+      src: url("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/webfonts/fa-brands-400.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: block;
+    }
+
+    :root {
+      --ink: #14213d;
+      --muted: #667085;
+      --line: #e5e7eb;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --accent: #0a1f44;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 32px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    header { margin-bottom: 28px; }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      margin: 32px 0 12px;
+      font-size: 22px;
+    }
+
+    p {
+      color: var(--muted);
+      max-width: 960px;
+      line-height: 1.55;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      background: #eef2f7;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    code {
+      font-family: Consolas, monospace;
+      background: #eef2f7;
+      padding: 2px 5px;
+      border-radius: 5px;
+      font-size: 0.9em;
+    }
+
+    a {
+      color: #0b5fff;
+      word-break: break-all;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .icon-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .glyph {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: #eef2f7;
+      color: var(--accent);
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      font-size: 24px;
+    }
+
+    .meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .meta strong { font-size: 15px; }
+
+    .meta small,
+    .meta span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .note {
+      padding: 14px 16px;
+      border-left: 4px solid var(--accent);
+      background: white;
+      border-radius: 10px;
+      margin: 16px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Catalogue Font Awesome Free 6.7.2</h1>
+    <p>
+      Catalogue HTML pour générateur d’UI : fichiers TTF, noms d’icônes, codes Unicode et rendu visuel.
+      Cette page utilise directement les polices TTF depuis jsDelivr.
+    </p>
+  </header>
+
+  <section>
+    <h2>Fonts TTF disponibles</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Famille</th>
+          <th>Fichier</th>
+          <th>Lien direct</th>
+          <th>Poids</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Font Awesome 6 Free Solid</strong></td><td><code>fa-solid-900.ttf</code></td><td><a href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/webfonts/fa-solid-900.ttf">https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/webfonts/fa-solid-900.ttf</a></td><td>900</td><td>Icônes principales CRUD/UI</td></tr>
+<tr><td><strong>Font Awesome 6 Free Regular</strong></td><td><code>fa-regular-400.ttf</code></td><td><a href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/webfonts/fa-regular-400.ttf">https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/webfonts/fa-regular-400.ttf</a></td><td>400</td><td>Icônes contours / documents</td></tr>
+<tr><td><strong>Font Awesome 6 Brands</strong></td><td><code>fa-brands-400.ttf</code></td><td><a href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/webfonts/fa-brands-400.ttf">https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/webfonts/fa-brands-400.ttf</a></td><td>400</td><td>Logos et marques</td></tr>
+<tr><td><strong>Font Awesome v4 Compatibility</strong></td><td><code>fa-v4compatibility.ttf</code></td><td><a href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/webfonts/fa-v4compatibility.ttf">https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/webfonts/fa-v4compatibility.ttf</a></td><td>900</td><td>Compatibilité anciens noms v4</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Icônes CRUD / formulaires / broadcast</h2>
+    <div class="note">
+      En JavaFX ou dans ton générateur, utilise surtout <code>fa-solid-900.ttf</code> avec la famille
+      <code>Font Awesome 6 Free</code> et le poids <code>900</code>.
+    </div>
+    <div class="grid">
+      <article class="icon-card">
+  <div class="glyph">&#xf15b;</div>
+  <div class="meta">
+    <strong>Nouveau</strong>
+    <code>file</code>
+    <small>Unicode: <code>\uF15B</code> / HTML: <code>&amp;#xf15b;</code></small>
+    <span>Créer un nouvel élément</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#x2b;</div>
+  <div class="meta">
+    <strong>Ajouter</strong>
+    <code>plus</code>
+    <small>Unicode: <code>\u2B</code> / HTML: <code>&amp;#x2b;</code></small>
+    <span>Ajouter</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf234;</div>
+  <div class="meta">
+    <strong>Ajouter utilisateur</strong>
+    <code>user-plus</code>
+    <small>Unicode: <code>\uF234</code> / HTML: <code>&amp;#xf234;</code></small>
+    <span>Créer un utilisateur</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf044;</div>
+  <div class="meta">
+    <strong>Modifier</strong>
+    <code>pen-to-square</code>
+    <small>Unicode: <code>\uF044</code> / HTML: <code>&amp;#xf044;</code></small>
+    <span>Éditer</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf1f8;</div>
+  <div class="meta">
+    <strong>Supprimer</strong>
+    <code>trash</code>
+    <small>Unicode: <code>\uF1F8</code> / HTML: <code>&amp;#xf1f8;</code></small>
+    <span>Supprimer</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf0c7;</div>
+  <div class="meta">
+    <strong>Sauver</strong>
+    <code>floppy-disk</code>
+    <small>Unicode: <code>\uF0C7</code> / HTML: <code>&amp;#xf0c7;</code></small>
+    <span>Enregistrer</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf0c7;</div>
+  <div class="meta">
+    <strong>Sauver et nouveau</strong>
+    <code>floppy-disk + plus</code>
+    <small>Unicode: <code>\uF0C7</code> / HTML: <code>&amp;#xf0c7;</code></small>
+    <span>À combiner avec plus</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf021;</div>
+  <div class="meta">
+    <strong>Rafraîchir</strong>
+    <code>arrows-rotate</code>
+    <small>Unicode: <code>\uF021</code> / HTML: <code>&amp;#xf021;</code></small>
+    <span>Recharger les données</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf002;</div>
+  <div class="meta">
+    <strong>Rechercher</strong>
+    <code>magnifying-glass</code>
+    <small>Unicode: <code>\uF002</code> / HTML: <code>&amp;#xf002;</code></small>
+    <span>Recherche</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf0b0;</div>
+  <div class="meta">
+    <strong>Filtrer</strong>
+    <code>filter</code>
+    <small>Unicode: <code>\uF0B0</code> / HTML: <code>&amp;#xf0b0;</code></small>
+    <span>Filtre de liste</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf00c;</div>
+  <div class="meta">
+    <strong>Valider</strong>
+    <code>check</code>
+    <small>Unicode: <code>\uF00C</code> / HTML: <code>&amp;#xf00c;</code></small>
+    <span>Confirmer</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf00d;</div>
+  <div class="meta">
+    <strong>Annuler / Fermer</strong>
+    <code>xmark</code>
+    <small>Unicode: <code>\uF00D</code> / HTML: <code>&amp;#xf00d;</code></small>
+    <span>Fermer / annuler</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf060;</div>
+  <div class="meta">
+    <strong>Retour</strong>
+    <code>arrow-left</code>
+    <small>Unicode: <code>\uF060</code> / HTML: <code>&amp;#xf060;</code></small>
+    <span>Retour écran précédent</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf061;</div>
+  <div class="meta">
+    <strong>Suivant</strong>
+    <code>arrow-right</code>
+    <small>Unicode: <code>\uF061</code> / HTML: <code>&amp;#xf061;</code></small>
+    <span>Écran suivant</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf56f;</div>
+  <div class="meta">
+    <strong>Importer</strong>
+    <code>file-import</code>
+    <small>Unicode: <code>\uF56F</code> / HTML: <code>&amp;#xf56f;</code></small>
+    <span>Importer fichier</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf56e;</div>
+  <div class="meta">
+    <strong>Exporter</strong>
+    <code>file-export</code>
+    <small>Unicode: <code>\uF56E</code> / HTML: <code>&amp;#xf56e;</code></small>
+    <span>Exporter fichier</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf019;</div>
+  <div class="meta">
+    <strong>Télécharger</strong>
+    <code>download</code>
+    <small>Unicode: <code>\uF019</code> / HTML: <code>&amp;#xf019;</code></small>
+    <span>Download</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf093;</div>
+  <div class="meta">
+    <strong>Envoyer</strong>
+    <code>upload</code>
+    <small>Unicode: <code>\uF093</code> / HTML: <code>&amp;#xf093;</code></small>
+    <span>Upload</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf013;</div>
+  <div class="meta">
+    <strong>Paramètres</strong>
+    <code>gear</code>
+    <small>Unicode: <code>\uF013</code> / HTML: <code>&amp;#xf013;</code></small>
+    <span>Configuration</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf015;</div>
+  <div class="meta">
+    <strong>Accueil</strong>
+    <code>house</code>
+    <small>Unicode: <code>\uF015</code> / HTML: <code>&amp;#xf015;</code></small>
+    <span>Accueil</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf625;</div>
+  <div class="meta">
+    <strong>Tableau de bord</strong>
+    <code>gauge-high</code>
+    <small>Unicode: <code>\uF625</code> / HTML: <code>&amp;#xf625;</code></small>
+    <span>Dashboard</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf007;</div>
+  <div class="meta">
+    <strong>Utilisateur</strong>
+    <code>user</code>
+    <small>Unicode: <code>\uF007</code> / HTML: <code>&amp;#xf007;</code></small>
+    <span>Personne</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf0c0;</div>
+  <div class="meta">
+    <strong>Utilisateurs</strong>
+    <code>users</code>
+    <small>Unicode: <code>\uF0C0</code> / HTML: <code>&amp;#xf0c0;</code></small>
+    <span>Groupe</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf1ad;</div>
+  <div class="meta">
+    <strong>Club / Organisation</strong>
+    <code>building</code>
+    <small>Unicode: <code>\uF1AD</code> / HTML: <code>&amp;#xf1ad;</code></small>
+    <span>Structure</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf3c5;</div>
+  <div class="meta">
+    <strong>Adresse</strong>
+    <code>location-dot</code>
+    <small>Unicode: <code>\uF3C5</code> / HTML: <code>&amp;#xf3c5;</code></small>
+    <span>Lieu</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf095;</div>
+  <div class="meta">
+    <strong>Téléphone</strong>
+    <code>phone</code>
+    <small>Unicode: <code>\uF095</code> / HTML: <code>&amp;#xf095;</code></small>
+    <span>Contact téléphone</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf0e0;</div>
+  <div class="meta">
+    <strong>Email</strong>
+    <code>envelope</code>
+    <small>Unicode: <code>\uF0E0</code> / HTML: <code>&amp;#xf0e0;</code></small>
+    <span>Email</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf073;</div>
+  <div class="meta">
+    <strong>Calendrier</strong>
+    <code>calendar-days</code>
+    <small>Unicode: <code>\uF073</code> / HTML: <code>&amp;#xf073;</code></small>
+    <span>Date / planning</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf017;</div>
+  <div class="meta">
+    <strong>Horloge</strong>
+    <code>clock</code>
+    <small>Unicode: <code>\uF017</code> / HTML: <code>&amp;#xf017;</code></small>
+    <span>Temps</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf15c;</div>
+  <div class="meta">
+    <strong>Document</strong>
+    <code>file-lines</code>
+    <small>Unicode: <code>\uF15C</code> / HTML: <code>&amp;#xf15c;</code></small>
+    <span>Document</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf07b;</div>
+  <div class="meta">
+    <strong>Dossier</strong>
+    <code>folder</code>
+    <small>Unicode: <code>\uF07B</code> / HTML: <code>&amp;#xf07b;</code></small>
+    <span>Répertoire</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf187;</div>
+  <div class="meta">
+    <strong>Archive</strong>
+    <code>box-archive</code>
+    <small>Unicode: <code>\uF187</code> / HTML: <code>&amp;#xf187;</code></small>
+    <span>Archive</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf02f;</div>
+  <div class="meta">
+    <strong>Imprimer</strong>
+    <code>print</code>
+    <small>Unicode: <code>\uF02F</code> / HTML: <code>&amp;#xf02f;</code></small>
+    <span>Impression</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf26c;</div>
+  <div class="meta">
+    <strong>TV / écran</strong>
+    <code>tv</code>
+    <small>Unicode: <code>\uF26C</code> / HTML: <code>&amp;#xf26c;</code></small>
+    <span>Affichage TV</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf519;</div>
+  <div class="meta">
+    <strong>Broadcast</strong>
+    <code>tower-broadcast</code>
+    <small>Unicode: <code>\uF519</code> / HTML: <code>&amp;#xf519;</code></small>
+    <span>Diffusion / émission</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf012;</div>
+  <div class="meta">
+    <strong>Signal</strong>
+    <code>signal</code>
+    <small>Unicode: <code>\uF012</code> / HTML: <code>&amp;#xf012;</code></small>
+    <span>Signal réseau</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf09e;</div>
+  <div class="meta">
+    <strong>Flux RSS</strong>
+    <code>rss</code>
+    <small>Unicode: <code>\uF09E</code> / HTML: <code>&amp;#xf09e;</code></small>
+    <span>Flux / live</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf2ce;</div>
+  <div class="meta">
+    <strong>Podcast</strong>
+    <code>podcast</code>
+    <small>Unicode: <code>\uF2CE</code> / HTML: <code>&amp;#xf2ce;</code></small>
+    <span>Audio broadcast</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf03d;</div>
+  <div class="meta">
+    <strong>Vidéo</strong>
+    <code>video</code>
+    <small>Unicode: <code>\uF03D</code> / HTML: <code>&amp;#xf03d;</code></small>
+    <span>Vidéo</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf130;</div>
+  <div class="meta">
+    <strong>Micro</strong>
+    <code>microphone</code>
+    <small>Unicode: <code>\uF130</code> / HTML: <code>&amp;#xf130;</code></small>
+    <span>Micro</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf030;</div>
+  <div class="meta">
+    <strong>Caméra</strong>
+    <code>camera</code>
+    <small>Unicode: <code>\uF030</code> / HTML: <code>&amp;#xf030;</code></small>
+    <span>Photo / caméra</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf091;</div>
+  <div class="meta">
+    <strong>Trophée</strong>
+    <code>trophy</code>
+    <small>Unicode: <code>\uF091</code> / HTML: <code>&amp;#xf091;</code></small>
+    <span>Compétition</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf5a2;</div>
+  <div class="meta">
+    <strong>Médaille</strong>
+    <code>medal</code>
+    <small>Unicode: <code>\uF5A2</code> / HTML: <code>&amp;#xf5a2;</code></small>
+    <span>Récompense</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf071;</div>
+  <div class="meta">
+    <strong>Alerte</strong>
+    <code>triangle-exclamation</code>
+    <small>Unicode: <code>\uF071</code> / HTML: <code>&amp;#xf071;</code></small>
+    <span>Warning</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf05a;</div>
+  <div class="meta">
+    <strong>Info</strong>
+    <code>circle-info</code>
+    <small>Unicode: <code>\uF05A</code> / HTML: <code>&amp;#xf05a;</code></small>
+    <span>Information</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf057;</div>
+  <div class="meta">
+    <strong>Erreur</strong>
+    <code>circle-xmark</code>
+    <small>Unicode: <code>\uF057</code> / HTML: <code>&amp;#xf057;</code></small>
+    <span>Erreur</span>
+  </div>
+</article>
+<article class="icon-card">
+  <div class="glyph">&#xf058;</div>
+  <div class="meta">
+    <strong>Succès</strong>
+    <code>circle-check</code>
+    <small>Unicode: <code>\uF058</code> / HTML: <code>&amp;#xf058;</code></small>
+    <span>Succès</span>
+  </div>
+</article>
+    </div>
+  </section>
+</body>
+</html>

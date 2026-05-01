@@ -1,6 +1,7 @@
 package org.jrebirth.af.iconfontbridge.fontawesome;
 
 import org.jrebirth.af.api.resource.font.FontItem;
+import org.jrebirth.af.api.resource.font.FontExtension;
 import org.jrebirth.af.core.resource.provided.IconFont;
 
 /**
@@ -2036,7 +2037,7 @@ public enum FontAwesome implements IconFont {
     meetup("\uf2e0");
 
     /** The font item giving access to font resource. */
-    private static final FontItem ITEM = IconFont.buildItem(FontAwesome.class);
+    private static final FontItem ITEM = IconFont.buildItem("fa-v4compatibility", FontAwesome.class, FontExtension.TTF);
 
     /** The char code designating the icon. */
     private String charCode;
