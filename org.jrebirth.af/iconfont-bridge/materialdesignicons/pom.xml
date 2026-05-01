@@ -9,16 +9,16 @@
 	</parent>
 
 	<groupId>org.jrebirth.af.iconfont-bridge</groupId>
-	<artifactId>typicons</artifactId>
+	<artifactId>materialdesignicons</artifactId>
 	<packaging>jar</packaging>
 
-	<name>IconFont Typicons</name>
-	<description>Bridge to use Typicons</description>
+	<name>IconFont MaterialDesignIcons</name>
+	<description>Bridge to use Material Design Icons</description>
 	<url>http://www.jrebirth.org</url>
 
 	<properties>
-		<resources.base.path>org/jrebirth/af/iconfontbridge/typicons</resources.base.path>
-		<typicons.version>2.1.2</typicons.version>
+		<resources.base.path>org/jrebirth/af/iconfontbridge/materialdesignicons</resources.base.path>
+		<materialdesignicons.version>3.0.1</materialdesignicons.version>
 	</properties>
-	
+
 </project>

@@ -18,6 +18,7 @@
 
 	<properties>
 		<resources.base.path>org/jrebirth/af/iconfontbridge/fontawesome</resources.base.path>
+		<fontawesome.version>6.7.2</fontawesome.version>
 	</properties>
 	
 </project>

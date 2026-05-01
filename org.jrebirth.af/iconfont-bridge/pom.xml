@@ -20,6 +20,7 @@
 
 	<modules>
 		<module>fontawesome</module>
+		<module>materialdesignicons</module>
 		<module>weathericons</module>
 		<module>525icons</module>
 		<module>emojione</module>
