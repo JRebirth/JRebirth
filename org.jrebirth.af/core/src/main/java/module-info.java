@@ -52,7 +52,6 @@ module org.jrebirth.af.core {
     exports org.jrebirth.af.core.component.basic;
     exports org.jrebirth.af.core.resource.color;
     exports org.jrebirth.af.core.application;
-    opens org.jrebirth.af.core.application.apps;
     exports org.jrebirth.af.core.key;
     exports org.jrebirth.af.core.command.single;
     exports org.jrebirth.af.core.resource.parameter;

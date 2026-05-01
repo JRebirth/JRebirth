@@ -18,9 +18,7 @@
 package org.jrebirth.af.core.util;
 
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.lang.Module;
 import java.lang.ModuleLayer;
 import java.util.Optional;
@@ -62,17 +60,12 @@ public final class ModuleUtility implements UtilMessages {
     public static InputStream getResourceAsStream(Object object, String resourcePath, String resourceName) {
         Module m = getModule(object);
         String path = getResourcePath(resourcePath, resourceName, m);
-        InputStream is = null;
-		try {
-			ClassLoader cl = classLoaderForModule(m, object);
-			is = cl.getResourceAsStream( URLEncoder.encode(path, "UTF-8"));
-			if(is == null) {
-				LOGGER.error("Resource : {} not found into module folder: {}", resourceName, resourcePath);
-			}
-		} catch (UnsupportedEncodingException e) {
-			LOGGER.error("Impossible to encode path " + path, e);
-		}
-		return is;
+        final ClassLoader cl = classLoaderForModule(m, object);
+        final InputStream is = cl.getResourceAsStream(path);
+        if (is == null) {
+            LOGGER.error("Resource : {} not found into module folder: {}", resourceName, path);
+        }
+        return is;
     }
 
 	private static String getResourcePath(String resourcePath, String resourceName, Module m) {
@@ -85,17 +78,12 @@ public final class ModuleUtility implements UtilMessages {
     public static URL getResourceAsURL(Object object, String resourcePath, String resourceName) {
         Module m = getModule(object);
         String path = getResourcePath(resourcePath, resourceName, m);
-        URL url =null;
-		try {
-			ClassLoader cl = classLoaderForModule(m, object);
-			url = cl.getResource(URLEncoder.encode(path, "UTF-8"));
-			if(url == null) {
-				LOGGER.error("Resource : {} not found into module folder: {}", resourceName, resourcePath);
-			}
-		} catch (UnsupportedEncodingException e) {
-			LOGGER.error("Impossible to encode path " + path, e);
-		}
-		return url;
+        final ClassLoader cl = classLoaderForModule(m, object);
+        final URL url = cl.getResource(path);
+        if (url == null) {
+            LOGGER.error("Resource : {} not found into module folder: {}", resourceName, path);
+        }
+        return url;
     }
 
 	private static ClassLoader classLoaderForModule(Module m, Object contextObject) {

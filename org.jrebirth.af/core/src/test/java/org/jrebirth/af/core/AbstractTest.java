@@ -1,8 +1,8 @@
 package org.jrebirth.af.core.test;
 
 import org.jrebirth.af.api.facade.GlobalFacade;
-import org.jrebirth.af.core.application.JRebirthApplicationTest;
 import org.jrebirth.af.core.application.apps.EmptyTestApplication;
+import org.jrebirth.af.core.application.apps.JRebirthApplicationTest;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.jrebirth.af.core.ui.Showable;
 

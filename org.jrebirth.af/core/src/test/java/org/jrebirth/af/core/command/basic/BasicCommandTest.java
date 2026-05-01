@@ -6,8 +6,8 @@ import org.jrebirth.af.api.command.Command;
 import org.jrebirth.af.api.facade.GlobalFacade;
 import org.jrebirth.af.api.wave.Wave;
 import org.jrebirth.af.api.wave.Wave.Status;
-import org.jrebirth.af.core.application.JRebirthApplicationTest;
 import org.jrebirth.af.core.application.apps.EmptyTestApplication;
+import org.jrebirth.af.core.application.apps.JRebirthApplicationTest;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
 import org.jrebirth.af.core.wave.DefaultWaveListener;
 
