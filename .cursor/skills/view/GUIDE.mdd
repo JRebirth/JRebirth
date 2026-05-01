@@ -1,0 +1,16 @@
+# Create View
+
+## Goal
+Compose the scene graph cleanly.
+
+## Put in View
+- panes, controls, labels, tables, forms
+- visual structure
+- simple binding hookup to model properties
+- styling hooks
+
+## Keep out
+- domain decisions
+- persistence
+- backend calls
+- heavy imperative workflow

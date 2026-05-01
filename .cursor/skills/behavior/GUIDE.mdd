@@ -1,0 +1,12 @@
+# Create Behavior
+
+## Use when
+A very small reusable piece of logic appears in several places.
+
+## Good uses
+- repeated formatting helper tied to feature interaction
+- tiny reusable interaction helper
+
+## Avoid
+- using behavior as a dump zone
+- putting business workflow there

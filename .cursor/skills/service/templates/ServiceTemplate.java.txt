@@ -1,0 +1,3 @@
+public final class ${Name}Service {
+    // backend or long work
+}

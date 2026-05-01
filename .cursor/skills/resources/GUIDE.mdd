@@ -1,0 +1,10 @@
+# Create Resources
+
+## Goal
+Centralize shared UI resources and avoid magic constants.
+
+## Typical content
+- labels and text keys
+- image and icon references
+- CSS references
+- spacing, sizes, colors

@@ -1,0 +1,11 @@
+# Avoid anti-patterns
+
+## Smells
+- `Platform.runLater` used as architecture glue
+- raw thread creation for routine flows
+- heavy logic in controllers
+- business state hidden in views
+- global facade access everywhere
+
+## Fix path
+Find the missing JRebirth role, then move the code to it.
