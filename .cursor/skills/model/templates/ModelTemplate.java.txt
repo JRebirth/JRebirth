@@ -1,0 +1,3 @@
+public final class ${Name}Model {
+    // state and bindings
+}

@@ -1,0 +1,13 @@
+# Use Waves
+
+## Purpose
+Send messages between decoupled parts without creating tight direct dependencies.
+
+## Good uses
+- cross-feature notifications
+- app-wide refresh triggers
+- decoupled orchestration
+
+## Bad uses
+- local call that could be a normal method
+- replacing every direct collaboration with message passing

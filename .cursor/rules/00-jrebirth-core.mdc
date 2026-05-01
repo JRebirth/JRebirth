@@ -1,0 +1,19 @@
+---
+description: JRebirth core architecture and role split
+alwaysApply: true
+---
+# JRebirth core
+
+Use JRebirth patterns first, plain JavaFX patterns second.
+
+Keep role split strict:
+- Application boots and configures the shell.
+- Model owns UI state, bindings, and interaction logic.
+- View builds nodes and delegates user actions.
+- Controller wires MVC events.
+- Command performs actions.
+- Service handles long-running or backend work.
+- Wave carries messages.
+- Behavior is small shared cross-cutting logic.
+
+Before creating or refactoring JRebirth code, read the matching skill.

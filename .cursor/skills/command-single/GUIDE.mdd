@@ -1,0 +1,13 @@
+# Create Single Command
+
+## Use when
+One explicit action must be executed and named clearly.
+
+## Examples
+- save editor
+- refresh ranking
+- open detail screen
+- import file
+
+## Keep command small
+If it starts to orchestrate many asynchronous steps or backend concerns, pair it with a service.

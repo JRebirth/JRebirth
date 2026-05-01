@@ -1,0 +1,17 @@
+---
+description: Trigger skill-first refactor behavior for legacy JavaFX code
+globs:
+  - "**/*.java"
+alwaysApply: false
+---
+# Refactor trigger
+
+If code smells like legacy JavaFX inside a JRebirth app:
+- identify the missing JRebirth role split
+- move state into Model
+- move node creation into View
+- move event wiring into Controller
+- move actions into Command or Service
+- move cross-feature messaging into Waves
+
+Use the legacy refactor skill before editing many files.

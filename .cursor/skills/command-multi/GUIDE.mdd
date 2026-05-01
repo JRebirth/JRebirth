@@ -1,0 +1,10 @@
+# Create Multi Command
+
+## Use when
+A feature needs a named sequence of smaller actions.
+
+## Good case
+One user action must trigger several existing commands in a known order.
+
+## Bad case
+Using multi-command as a giant place for everything.

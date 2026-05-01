@@ -1,0 +1,10 @@
+# Bridge to Spring
+
+## Goal
+Keep JRebirth client clean while consuming Spring-side services or APIs.
+
+## Rules
+- UI layer never manipulates JPA entities.
+- Network/backend calls stay in dedicated service or gateway code.
+- DTOs stay plain.
+- FXO stays client-side only.
