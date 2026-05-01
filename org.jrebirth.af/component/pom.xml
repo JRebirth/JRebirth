@@ -74,6 +74,11 @@
 			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-graphics</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
