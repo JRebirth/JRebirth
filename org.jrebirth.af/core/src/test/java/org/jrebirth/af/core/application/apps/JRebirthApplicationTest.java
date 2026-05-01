@@ -1,4 +1,4 @@
-package org.jrebirth.af.core.application;
+package org.jrebirth.af.core.application.apps;
 
 import java.lang.reflect.Field;
 
@@ -9,6 +9,7 @@ import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.service.Service;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.application.DefaultApplication;
 import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
 

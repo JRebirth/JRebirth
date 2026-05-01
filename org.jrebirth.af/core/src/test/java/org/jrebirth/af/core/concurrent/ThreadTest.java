@@ -8,8 +8,7 @@ import org.jrebirth.af.api.annotation.PriorityLevel;
 import org.jrebirth.af.api.concurrent.JRebirthRunnable;
 import org.jrebirth.af.api.concurrent.RunType;
 import org.jrebirth.af.api.exception.JRebirthThreadException;
-import org.jrebirth.af.core.application.JRebirthApplicationTest;
-
+import org.jrebirth.af.core.application.apps.JRebirthApplicationTest;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;

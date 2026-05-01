@@ -1,6 +1,7 @@
 package org.jrebirth.af.core.application;
 
 import org.jrebirth.af.core.application.apps.FullConfApplication;
+import org.jrebirth.af.core.application.apps.JRebirthApplicationTest;
 import org.jrebirth.af.core.resource.ResourceBuilders;
 import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
 

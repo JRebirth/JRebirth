@@ -3,9 +3,9 @@ package org.jrebirth.af.core.test;
 import javafx.scene.layout.BorderPane;
 
 import org.jrebirth.af.api.facade.GlobalFacade;
-import org.jrebirth.af.core.application.JRebirthApplicationTest;
 import org.jrebirth.af.core.application.apps.BorderPaneModel;
 import org.jrebirth.af.core.application.apps.BorderPaneTestApplication;
+import org.jrebirth.af.core.application.apps.JRebirthApplicationTest;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
 
 import org.junit.BeforeClass;
