@@ -63,7 +63,7 @@ public final class ModuleUtility implements UtilMessages {
         final ClassLoader cl = classLoaderForModule(m, object);
         final InputStream is = cl.getResourceAsStream(path);
         if (is == null) {
-            LOGGER.error("Resource : {} not found into module folder: {}", resourceName, path);
+            LOGGER.error("Resource : {} not found into '{}' module folder: {}", resourceName, m.getName(), path);
         }
         return is;
     }
@@ -81,7 +81,7 @@ public final class ModuleUtility implements UtilMessages {
         final ClassLoader cl = classLoaderForModule(m, object);
         final URL url = cl.getResource(path);
         if (url == null) {
-            LOGGER.error("Resource : {} not found into module folder: {}", resourceName, path);
+            LOGGER.error("Resource : {} not found into '{}' module folder: {}", resourceName, m.getName(), path);
         }
         return url;
     }

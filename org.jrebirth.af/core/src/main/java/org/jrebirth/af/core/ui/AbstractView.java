@@ -19,20 +19,12 @@ package org.jrebirth.af.core.ui;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.net.URL;
 
-import javafx.animation.Animation;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventTarget;
-import javafx.scene.Node;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Window;
 import org.jrebirth.af.api.exception.CoreException;
 import org.jrebirth.af.api.facade.JRebirthEventType;
 import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.resource.style.StyleSheetItem;
 import org.jrebirth.af.api.ui.Controller;
 import org.jrebirth.af.api.ui.Model;
 import org.jrebirth.af.api.ui.NullController;
@@ -47,6 +39,17 @@ import org.jrebirth.af.core.concurrent.JRebirth;
 import org.jrebirth.af.core.log.JRLoggerFactory;
 import org.jrebirth.af.core.ui.handler.AnnotationEventHandler;
 import org.jrebirth.af.core.util.ClassUtility;
+
+import javafx.animation.Animation;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventTarget;
+import javafx.scene.Node;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Window;
 
 /**
  *
@@ -438,6 +441,24 @@ public abstract class AbstractView<M extends Model, N extends Node, C extends Co
         return this.errorNode;
     }
 
+    
+    /**
+     * Attach a new CSS file to the scene using the default classloader.
+     *
+     * @param scene the scene that will hold this new CSS file
+     * @param styleSheetItem the stylesheet item to add
+     */
+    protected void addCSS(final StyleSheetItem styleSheetItem) {
+
+        final URL styleSheetURL = styleSheetItem.get();
+        if (styleSheetURL == null) {
+          //  LOGGER.error(CSS_LOADING_ERROR, styleSheetItem.toString(), ResourceParameters.STYLE_FOLDER.get());
+        } else {
+        	pane().getStylesheets().add(styleSheetURL.toExternalForm());
+        }
+
+    }
+    
     /**
      * Initialize the view.
      *

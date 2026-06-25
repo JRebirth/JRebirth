@@ -1,15 +1,14 @@
-package org.jrebirth.af.core.test;
-
-import javafx.scene.layout.BorderPane;
+package org.jrebirth.af.core;
 
 import org.jrebirth.af.api.facade.GlobalFacade;
 import org.jrebirth.af.core.application.apps.BorderPaneModel;
 import org.jrebirth.af.core.application.apps.BorderPaneTestApplication;
 import org.jrebirth.af.core.application.apps.JRebirthApplicationTest;
 import org.jrebirth.af.core.concurrent.JRebirthThread;
-
 import org.junit.BeforeClass;
 import org.testfx.framework.junit.ApplicationTest;
+
+import javafx.scene.layout.BorderPane;
 
 /**
  * The class <strong>AbstractBorderPaneTest</strong>.
