@@ -32,18 +32,18 @@ flowchart LR
     Controller -->|may trigger action| Command
 
     View -->|annotated controls| Controller
-    View <--> |binds and observes| Model
+    View <-->|binds and observes| Model
 
-    Model -->|callCommand(...)| Command
+    Model -->|callCommand| Command
     Command -->|uses when work is slow or external| Service
     Service --> External
     Service -->|result wave| Wave
 
-    Model -->|sendWave(...)| Wave
-    Command -->|sendWave(...)| Wave
-    Wave -->|@OnWave| Model
-    Wave -->|@OnWave| Service
-    Wave -->|@OnWave| Command
+    Model -->|sendWave| Wave
+    Command -->|sendWave| Wave
+    Wave -->|OnWave| Model
+    Wave -->|OnWave| Service
+    Wave -->|OnWave| Command
 
     Behavior -. attaches via behavior data .-> Model
     Behavior -. augments small shared interaction .-> View
