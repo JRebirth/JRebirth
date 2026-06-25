@@ -1,4 +1,4 @@
-<head>
+﻿<head>
 <![CDATA[
 	<title>Configure Logging</title>
 	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
@@ -32,7 +32,15 @@ I choose to add dependency to slf4j-api :
 
 This API is lightweight because the jar is near to 10 kb.
 
-<!-- MACRO{include|highlight-theme=eclipse|source=../includes/Logging_Dependencies.xml|snippet=xp:/dependencies/dependency[1]|first-line=1}-->
+Add the SLF4J API to your `pom.xml`:
+
+```xml
+<dependency>
+	<groupid>org.slf4j</groupid>
+	<artifactid>slf4j-api</artifactid>
+	<version>1.7.5</version>
+</dependency>
+```
 
 
 The slf4j api allow to declare logger for JRebirth Framework but doesn't provide any logger implementation.
@@ -57,7 +65,13 @@ There are 3 implementations available:
 
 To avoid this error message to appear you can add the No-OPeration dependency, it will log nothing but avoid the previous error message:
 
-<!-- MACRO{include|source=../includes/Logging_Dependencies.xml|snippet=xp:/dependencies/dependency[2]|set-first-line=1}-->
+```xml
+<dependency>
+	<groupid>org.slf4j</groupid>
+	<artifactid>slf4j-nop</artifactid>
+	<version>1.7.5</version>
+</dependency>
+```
 
 
 ### LOGback
@@ -68,11 +82,42 @@ It was finely integrated because it was written by the same team as slf4j.
 LOGBack jars are quite heavy and weight more than 800 kb so it could be a problem for tiny applications.
 To use it you must add this dependency into your pom.xml :
 
-<!-- MACRO{include|source=../includes/Logging_Dependencies.xml|snippet=xp:/dependencies/dependency[3]|set-first-line=1}-->
+```xml
+<dependency>
+	<groupid>ch.qos.logback</groupid>
+	<artifactid>logback-classic</artifactid>
+	<version>1.0.13</version>
+</dependency>
+```
 
-Then you must add a configuration file like this one into the application classpath:
+Then you must add a configuration file like this one into the application classpath (from the JRebirth Analyzer showcase):
 
-<!-- MACRO{include|source=../../../showcase/analyzer/src/main/resources/logback.xml}-->
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>JRebirthAnalyzer.log</file>
+		<encoder>
+			<pattern>%date %level [%thread{6}] %logger{10} [%file:%line] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+		<!-- %level %msg%n -->
+			<pattern>%level [%thread] %file:%line - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+	<root level="trace">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+
+</configuration>
+```
 		
 
 ### SimpleLogger
@@ -81,7 +126,13 @@ If you don't want to embed 800 kb of jar to provide logging feature you	can use 
 
 You just have to add this dependency to your pom.xml:
 
-<!-- MACRO{include|source=../includes/Logging_Dependencies.xml|snippet=xp:/dependencies/dependency[4]|set-first-line=1}-->
+```xml
+<dependency>
+	<groupid>org.slf4j</groupid>
+	<artifactid>slf4j-simple</artifactid>
+	<version>1.7.5</version>
+</dependency>
+```
 		
 
 JRebirth Logs
@@ -108,17 +159,108 @@ Note that you can still use your logger basic features.
 </div>
 
 
-JRebirth provides its own LoggerFactory that you can initialize like this:
+JRebirth provides its own LoggerFactory that you can initialize like this (from `JRebirthThread`, which also implements a message container interface):
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java|snippet=re:JRLoggerFactory.getLogger|snippet-start-offset=1}-->
 
-Then you can log your message like this:
+```java
+public final class JRebirthThread extends Thread implements ConcurrentMessages {
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java|snippet=re:LOGGER\.}-->
+    /** The class logger. */
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(JRebirthThread.class);
+```
+
+Then you can log your message like this, using a `MessageItem` constant declared on the message container interface:
+
+
+```java
+public void runIntoJTP(final JRebirthRunnable runnable) {
+
+    if (getFacade().executorService().checkAvailability(runnable.priority())) {
+        getFacade().executorService().execute(runnable);
+        LOGGER.log(JTP_QUEUED, runnable.toString());
+    } else {
+        getFacade().highPriorityExecutorService().execute(runnable);
+        LOGGER.log(HPTP_QUEUED, runnable.toString());
+    }
+
+}
+```
 
 All these log messages are store into an interface implemented by the class to let them accessible
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/ConcurrentMessages.java|snippet=aj:ConcurrentMessages}-->
+
+```java
+package org.jrebirth.af.core.concurrent;
+
+import static org.jrebirth.af.core.resource.Resources.create;
+
+import org.jrebirth.af.api.resource.i18n.JRLevel;
+import org.jrebirth.af.api.resource.i18n.MessageItem;
+import org.jrebirth.af.core.log.JRebirthMarkers;
+import org.jrebirth.af.core.resource.i18n.LogMessage;
+import org.jrebirth.af.core.resource.i18n.MessageContainer;
+
+/**
+ * The class <strong>ConcurrentMessages</strong>.
+ *
+ * Messages used by the Concurrent package.
+ *
+ * @author Sébastien Bordes
+ */
+public interface ConcurrentMessages extends MessageContainer {
+
+    /** JRebirthThread. */
+
+    /** "Runnable submitted to JTP with hashCode={0}" . */
+    MessageItem JTP_QUEUED = create(new LogMessage("jrebirth.concurrent.jtpQueued", JRLevel.Trace, JRebirthMarkers.CONCURRENT));
+
+    /** "Runnable submitted to HPTP with hashCode={0}" . */
+    MessageItem HPTP_QUEUED = create(new LogMessage("jrebirth.concurrent.hptpQueued", JRLevel.Trace, JRebirthMarkers.CONCURRENT));
+
+    /** "An exception occurred during JRebirth BootUp" . */
+    MessageItem BOOT_UP_ERROR = create(new LogMessage("jrebirth.concurrent.bootUpError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
+
+    /** "An exception occurred into the JRebirth Thread". */
+    MessageItem JIT_ERROR = create(new LogMessage("jrebirth.concurrent.jitError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
+
+    /** "An error occurred while shutting down the application ". */
+    MessageItem SHUTDOWN_ERROR = create(new LogMessage("jrebirth.concurrent.shutdownError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
+
+    /** AbstractJrbRunnable. */
+
+    /** "Run> {0}". */
+    MessageItem RUN_IT = create(new LogMessage("jrebirth.concurrent.runIt", JRLevel.Trace, JRebirthMarkers.CONCURRENT));
+
+    /** "Thread error : {0} ". */
+    MessageItem THREAD_ERROR = create(new LogMessage("jrebirth.concurrent.threadError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
+
+    /** JRebirthThreadPoolExecutor. */
+
+    /** "JTP returned an error" . */
+    MessageItem JTP_ERROR = create(new LogMessage("jrebirth.concurrent.jtpError", JRLevel.Error, JRebirthMarkers.CONCURRENT));
+
+    /** "JTP returned an error with rootCause =>". */
+    MessageItem JTP_ERROR_EXPLANATION = create(new LogMessage("jrebirth.concurrent.jtpErrorExplanation", JRLevel.Error, JRebirthMarkers.CONCURRENT));
+
+    /** "Future (hashcode={}) returned object : {0}". */
+    MessageItem FUTURE_DONE = create(new LogMessage("jrebirth.concurrent.futureDone", JRLevel.Trace, JRebirthMarkers.CONCURRENT));
+
+}
+```
+
+
+## Event Tracking
+
+JRebirth can log component lifecycle events (creation, access, destruction) and wave flows for analysis by the JRebirth Analyzer tool.
+
+To enable, configure these loggers in your `logback.xml`:
+
+```xml
+<logger name="org.jrebirth.af.core.facade" level="TRACE"/>
+<logger name="org.jrebirth.af.core.link" level="TRACE"/>
+```
+
+The output format matches the Analyzer's EDT file parser. Redirect to a file appender for post-mortem analysis.
 
 ]]#
 

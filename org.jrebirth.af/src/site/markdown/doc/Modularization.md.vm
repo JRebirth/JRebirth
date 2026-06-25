@@ -1,4 +1,4 @@
-<head>
+﻿<head>
 <![CDATA[
 <title>Thread</title>
 <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />]]>
@@ -13,6 +13,51 @@
 
 #[[
 
+## In 30 seconds
+
+Mark contracts with **@RegistrationPoint**, implementations with **@Register**, startup components with **@BootComponent**. The compile-time processor generates a **ModuleStarter** and SPI entry; JPMS modules `provides ModuleStarter with …GeneratedStarter`.
+
+Quick Start
+---------------------
+
+Modularization uses **core** plus the compile-time **processor** artifact. Annotate your module; the processor generates a `ModuleStarter` and SPI file.
+
+```xml
+<dependency>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>core</artifactId>
+    <version>${jrebirth.version}</version>
+</dependency>
+
+<!-- Annotation processor (compiler plugin path) -->
+<path>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>processor</artifactId>
+    <version>${jrebirth.version}</version>
+    <classifier>4ide</classifier>
+</path>
+```
+
+**Minimal example — self-describing module (Todos showcase):**
+
+```java
+@RegistrationPoint
+public interface TodoService extends Service {
+    boolean doAdd(StringProperty text, Wave wave);
+}
+
+@Register(value = TodoService.class)
+public class TodoServiceImpl extends DefaultService implements TodoService {
+    @Override
+    public boolean doAdd(StringProperty text, Wave wave) {
+        todoList.addTodo(Todo.of().text(text.getValue()).done(false));
+        return true;
+    }
+}
+```
+
+In `module-info.java`, declare `provides ModuleStarter with …TodosModuleStarter;` — the starter class is generated at compile time.
+
 
 Modularization
 ====================
@@ -20,7 +65,18 @@ Modularization
 Module overview
 ---------------------
 
+JRebirth supports modular applications through a combination of **JPMS** (`module-info.java`) and a **compile-time annotation processor** that generates bootstrap code for each module.
 
+A module is typically packaged as a separate JAR that contributes Commands, Services, Models, or Behaviors to the host application. Thanks to the annotation-driven approach, modules are self-describing: the host application does not need to know implementation details &mdash; it only depends on interfaces.
+
+The key moving parts are:
+
+* **@RegistrationPoint** &mdash; marks an interface as an extensible contract.
+* **@Register** &mdash; binds an implementation to a registration point.
+* **@BootComponent** &mdash; declares a component to instantiate at startup.
+* **@Preload** &mdash; forces a class to be loaded early (e.g. to register WaveTypes).
+* **ComponentProcessor** &mdash; the annotation processor that scans the above and generates a **ModuleStarter** class plus the SPI service file.
+* **ModuleStarter / AbstractModuleStarter** &mdash; the runtime SPI that the engine calls during boot.
 
 <div class="uml">
 	<a href="uml/Module.png" rel="lightbox" title="Module Class Diagram">
@@ -33,13 +89,259 @@ Module overview
 Component Registration
 -----------------------
 
-Each extensible component shall be registered using one **@RegistrationPoint** and one or many **@Register** declaration.
+Each extensible component shall be registered using one **@RegistrationPoint** and one or many **@Register** declarations.
+
+### @RegistrationPoint ###
+
+Place this annotation on an **interface** that extends `Component` (e.g. a Service or Model contract). It declares that this type can have pluggable implementations provided by any module.
+
+* `exclusive` (default `true`) &mdash; when true, only the single highest-priority implementation is resolved at runtime. Set to `false` to allow multiple co-existing implementations.
+* `reverse` (default `false`) &mdash; when true, lower-priority implementations are returned first.
+
+
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.SOURCE)
+@Documented
+public @interface RegistrationPoint {
+
+    boolean exclusive() default true;
+
+    boolean reverse() default false;
+}
+```
+
+### @Register ###
+
+Place this annotation on an **implementation class** to bind it to its registration-point interface.
+
+* `value` &mdash; the interface class being implemented.
+* `priority` &mdash; a `PriorityLevel` enum (`Lowest`, `Lower`, `Normal`, `High`, `Highest`, &hellip;) that determines selection order.
+* `weight` &mdash; an additional integer (0&ndash;999) for fine-grained ordering within the same priority level.
+
+
+```java
+/**
+ * The Interface Register.
+ */
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.SOURCE)
+@Documented
+public @interface Register {
+
+    /**
+     * Value.
+     *
+     * @return the class
+     */
+    Class<?> value() default Class.class;
+
+    /**
+     * Priority.
+     *
+     * @return the registration priority
+     */
+    PriorityLevel priority() default PriorityLevel.None;
+
+    /**
+     * Additional Weight to perform priority calculation.
+     *
+     * Shall be strictly lower than 1000
+     *
+     * @return the registration priority
+     */
+    int weight() default 0;
+
+}
+```
+
+### Example ###
+
+The Todos showcase defines a `TodoService` contract and its implementation:
+
+
+```java
+@RegistrationPoint
+public interface TodoService extends Service {
+
+    WaveType DO_ADD = waveType("ADD")
+        .items(TODO_STRING)
+        .returnItem(JRebirthItems.booleanItem)
+        .returnAction("ADDED");
+
+    boolean doAdd(final StringProperty text, final Wave wave);
+}
+```
+
+```java
+@Register(value = TodoService.class)
+public class TodoServiceImpl extends DefaultService implements TodoService {
+
+    private final TodoList todoList = new TodoList();
+
+    @Override
+    public boolean doAdd(final StringProperty text, final Wave wave) {
+        todoList.addTodo(Todo.of().text(text.getValue()).done(false));
+        return true;
+    }
+}
+```
+
+
+@BootComponent
+-----------------------
+
+Annotate a component class with **@BootComponent** to have it automatically instantiated when the module starts. The annotation processor adds a `bootComponent(MyComponent.class)` call to the generated `ModuleStarter.start()` method.
+
+This is useful for components that must be alive from the very beginning (e.g. a global service that listens for waves at application startup).
+
+
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.SOURCE)
+@Documented
+public @interface BootComponent {
+
+}
+```
+
+
+@Preload
+-----------------------
+
+The **@Preload** annotation forces a class to be loaded by the classloader early in the module startup sequence. This triggers static initializers, which is particularly useful for classes that define **WaveType** constants or register resources via JRebirth builders.
+
+When a class annotated with `@Preload` is detected, the processor generates a `preloadClass(MyClass.class)` call in the starter.
+
+
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface Preload {
+
+}
+```
+
+
+ModuleStarter
+-----------------------
+
+**ModuleStarter** is the SPI interface that the JRebirth engine discovers and invokes during application boot. Each module provides exactly one implementation.
+
+The interface defines:
+
+* `start()` &mdash; called by the engine to let the module register its components.
+* `priority()` &mdash; controls the order in which modules are started (higher values start first, default is 0).
+
+
+```java
+@FunctionalInterface
+public interface ModuleStarter {
+
+    /**
+     * This method will be called when all modules are started during application boot up.
+     */
+    void start();
+
+    /**
+     * Priority used to launch Modules according to custom order.
+     * 
+     * The higher priority value will be called first.
+     * 
+     * @return the module priority from 0 to Integer.MAX_VALUE.
+     */
+    default int priority() {
+        return 0;
+    }
+}
+```
+
+The framework provides **AbstractModuleStarter** (in the `core` module) as the base class for generated starters. It offers helper methods:
+
+* `define(interfaceClass, exclusive, reverse)` &mdash; declares a registration point.
+* `register(interfaceClass, implClass, priority, weight)` &mdash; registers an implementation.
+* `bootComponent(componentClass)` &mdash; retrieves a component from its facade to force instantiation.
+* `preloadClass(objectClass)` &mdash; forces classloading of the given type.
 
 
 Module Auto-loading
 ---------------------
 
-To automate management of modules, JRebirth uses an annotation processor (at compilation time).
+To automate module management, JRebirth uses the **ComponentProcessor** annotation processor at compilation time.
+
+### What the processor does ###
+
+The `ComponentProcessor` (in the `processor` module) is registered for four annotation types: `@Register`, `@RegistrationPoint`, `@BootComponent`, and `@Preload`. During compilation it:
+
+1. Scans all annotated elements in the current compilation unit.
+2. Generates a **ModuleStarter implementation class** (extending `AbstractModuleStarter`) whose `start()` method calls `define()`, `register()`, `bootComponent()`, and `preloadClass()` for every annotated element found.
+3. Generates the **SPI service file** at `META-INF/services/org.jrebirth.af.api.module.ModuleStarter` containing the fully-qualified name of the generated starter class.
+
+The starter class name is derived from the Maven `groupId` and `artifactId` of the module (read from `pom.xml`), or from a `moduleStarterClass` property in `jrebirth.properties` if present.
+
+
+```java
+@Override
+public Set<String> getSupportedAnnotationTypes() {
+    return Set.of(
+        Preload.class.getName(),
+        BootComponent.class.getName(),
+        Register.class.getName(),
+        RegistrationPoint.class.getName());
+}
+
+@Override
+public boolean process(final Set<? extends TypeElement> annotations,
+                       final RoundEnvironment roundEnv) {
+    if (roundEnv.processingOver()) {
+        return false;
+    }
+    // collect @Register, @RegistrationPoint, @BootComponent, @Preload
+    // → generate ModuleStarter + SPI file
+    return true;
+}
+```
+
+### Generated output example ###
+
+For the Todos showcase, the processor generates `TodosModuleStarter`:
+
+
+```java
+public class TodosModuleStarter extends AbstractModuleStarter {
+
+    @Override
+    public void start() {
+        define(TodoService.class, true, false);
+        register(TodoService.class, TodoServiceImpl.class, PriorityLevel.Normal, 0);
+        bootComponent(DialogDaemonCommand.class);  // example from another module
+    }
+}
+```
+
+Inspect `target/generated-sources/annotations/` after compilation for the actual generated class in your project.
+
+
+JPMS Integration
+---------------------
+
+When using Java Platform Module System (`module-info.java`), each JRebirth module must:
+
+* **`requires`** `org.jrebirth.af.api` and `org.jrebirth.af.core` (plus any other framework modules it depends on).
+* **`exports`** packages containing public API types (interfaces, Models, Services) that other modules need.
+* **`provides`** `org.jrebirth.af.api.module.ModuleStarter` **`with`** the generated starter class, so that `ServiceLoader` can discover it at runtime.
+
+Here is an example from the Todos showcase:
+
+
+```java
+    provides org.jrebirth.af.api.module.ModuleStarter with org.jrebirth.af.showcase.todos.TodosModuleStarter;
+```
+
+Using `open module` simplifies reflection access (useful during development), but for production you can selectively `opens` packages to `org.jrebirth.af.core` instead.
+
 
 ]]#
 

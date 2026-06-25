@@ -363,20 +363,20 @@
 				<dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-markdown</artifactId> <version>1.7</version> </dependency> <dependency> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> 
 				<version>1.1</version> </dependency> </dependencies> </plugin> -->
 
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-site-plugin</artifactId> <version>3.5.1</version> <executions> <execution> <id>attach-sites</id> <goals> <goal>jar</goal> 
-				</goals> </execution> <execution> <id>build-sites</id> <phase>site</phase> <goals> <goal>site</goal> <goal>jar</goal> <goal>stage</goal> </goals> </execution> <execution> <id>package-sites</id> <phase>package</phase> 
-				<goals> <goal>jar</goal> </goals> </execution> <execution> <id>deploy-sites</id> <phase>site-deploy</phase> <goals> <goal>stage-deploy</goal> </goals> </execution> </executions> <configuration> <stagingDirectory>${project.build.directory}/staging-site</stagingDirectory> 
-				<stagingSiteURL>${project.distributionManagement.site.url}</stagingSiteURL> <inputEncoding>UTF-8</inputEncoding> <outputEncoding>UTF-8</outputEncoding> </configuration> <dependencies> <dependency> <groupId>org.apache.maven.doxia</groupId> 
-				<artifactId>doxia-site-renderer</artifactId> <version>1.7.1</version> </dependency> <dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-core</artifactId> <version>1.7</version> </dependency> 
-				<dependency> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-ssh</artifactId> <version>2.10</version> </dependency> <dependency> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> 
-				<version>1.1</version> </dependency> <dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-markdown</artifactId> <version>1.7</version> </dependency> <dependency> <groupId>org.asciidoctor</groupId> 
-				<artifactId>asciidoctor-maven-plugin</artifactId> <version>1.5.5</version> </dependency> </dependencies> </plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>4.0.0-M13</version>
+				<configuration>
+					<inputEncoding>UTF-8</inputEncoding>
+					<outputEncoding>UTF-8</outputEncoding>
+				</configuration>
+			</plugin>
 			<!-- Copy UML Class Diagram -->
 			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> <executions> <execution> <id>UML recopy</id> <phase>pre-site</phase> <configuration> <tasks> <copy 
 				todir="${project.build.directory}/site/doc/uml/"> <fileset dir="${basedir}/src/main/uml/*.png" /> </copy> </tasks> </configuration> <goals> <goal>run</goal> </goals> </execution> </executions> </plugin> -->
 
-			<!-- <plugin> <groupId>org.tinyjee.dim</groupId> <artifactId>doxia-include-macro</artifactId> <version>1.1</version> <executions> <execution> <id>initialize-doxia-include-macro</id> Use "initialize" 
-				when the 'site' was not given as 'phase'. phase>initialize</phase <phase>pre-site</phase> <goals> <goal>initialize</goal> </goals> </execution> </executions> </plugin> -->
+			<!-- doxia-include-macro is loaded as a maven-site-plugin dependency (no standalone execution needed) -->
 
 			<!-- Add Headless test engine, require open-jfx-monocle.jar deployed into jdk/jre/lib/ext -->
 			<plugin>

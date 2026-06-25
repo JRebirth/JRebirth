@@ -1,4 +1,4 @@
-<head>
+﻿<head>
 <![CDATA[
 	<title>Command</title>
 	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
@@ -17,6 +17,19 @@
 
 Command Overview
 =========================
+
+## In 30 seconds
+
+A **Command** is a one-shot action (load file, show model, attach UI). Get it from any component with `getCommand(MyCommand.class).run()`, or trigger it indirectly with `callCommand` / `linkCommand` / waves. Pick the thread with `@RunInto` or base classes (`DefaultUICommand` = JAT, `DefaultPoolCommand` = JTP).
+
+## How to use
+
+1. Create a class extending `DefaultCommand`, `DefaultUICommand`, or `DefaultPoolCommand` (or bean variants).
+2. Implement `initCommand()` for setup and `perform(Wave)` for the action body.
+3. Annotate with `@RunInto(RunType.JAT|JIT|JTP)` if you do not use a default base class.
+4. Trigger from a Model, Service, or another Command: `getCommand(MyCommand.class).run()`.
+5. From a View Controller, wire UI events with `linkCommand(node, eventType, MyCommand.class, waveData...)`.
+6. For multi-step flows, extend `DefaultMultiBeanCommand` and list sub-commands in `defineSubCommand()`.
 
 A command is an atomic reusable action that could be triggered from anywhere.
 There are two kinds of Commands:
@@ -42,6 +55,24 @@ JRebirth engine will serialize their instantiation and their startup but they wi
 JAT and JIT will process command one after the other. JTP will act in the same manner but internal engine will dispatch all actions to its pooled threads (by default {2 x Number of CPU core} slots are available by Thread Pool).
 
 
+Minimal single command:
+
+```java
+@RunInto(RunType.JIT)
+public class LogActionCommand extends DefaultCommand {
+
+    @Override
+    protected void perform(final Wave wave) {
+        LOGGER.info("Action executed");
+    }
+}
+```
+
+- `DefaultCommand` — runs on **JIT** by default (via class annotation).
+- `perform(Wave)` — only mandatory method; called once per `run()`.
+- Trigger with `getCommand(LogActionCommand.class).run()` from any component.
+
+
 MultiCommand
 -------------------------
 
@@ -49,7 +80,43 @@ MultiCommand provides the ability to run some Single Commands sequentially (even
 
 Hereafter you will find an example of MultiCommand used to display a model UI:
 
-<!-- MACRO{include|highlight-theme=eclipse|source=core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/ShowModelCommand.java|snippet=aj:org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand}-->
+
+```java
+package org.jrebirth.af.core.command.basic.showmodel;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.core.command.multi.DefaultMultiBeanCommand;
+
+/**
+ * The class <strong>ShowModelCommand</strong>.
+ *
+ * Run into JIT and is sequential
+ *
+ * @author Sébastien Bordes
+ */
+public class ShowModelCommand extends DefaultMultiBeanCommand<DisplayModelWaveBean> {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<UniqueKey<? extends Command>> defineSubCommand() {
+        return Arrays.asList(
+                             getCommandKey(PrepareModelCommand.class),
+                             getCommandKey(AttachModelCommand.class));
+    }
+
+}
+```
+
+- `extends DefaultMultiBeanCommand<DisplayModelWaveBean>` — multi-step command sharing one wave bean type.
+- `defineSubCommand()` — ordered list of child commands; `ShowModelCommand` runs prepare then attach.
+- `getCommandKey(PrepareModelCommand.class)` — resolves each sub-command's registration key from the facade.
+- Sub-commands keep their own `@RunInto` / base-class thread (JTP for prepare, JAT for attach).
 
 The multi command code will be run into JIT, but its sub-command will be run respectively into JTP and JAT (according to their own configuration).
 
@@ -89,14 +156,37 @@ You just need to call the **getCommand** method to build an instance. You can pr
 
 <!-- {include |source=core/src/main/java/org/jrebirth/af/core/facade/AbstractFacade.java|snippet=re:E retrieve" /> } -->
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/link/CommandReady.java|snippet=re:getCommand}-->
+
+```java
+    <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart);
+```
+
+- `getCommand(Class, keyPart...)` — retrieves or creates a command from CommandFacade.
+- Optional key parts distinguish multiple instances of the same command class.
+
 
 Once you have retrieved your command, you can store it with a strong reference to avoid GC collecting it. Your command life will depend on the lifetime of your strong reference.
 Thus you will be able to configure directly your command properties.
 Finally to trigger it you must call its **run()** method.
 The <a class="apiMethod" href="../apidocs/org/jrebirth/af/core/command/AbstractBaseCommand.html#perform-org.jrebirth.af.api.wave.Wave-">perform</a> method of the command will be executed into the [Thread Type](Thread.html#Threading_overview) chosen (JAT, JIT, JTP) by the Command declaration.
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/command/Command.java|snippet=re:run\(\)}-->
+Minimal direct trigger from a Model:
+
+```java
+@Override
+protected void initModel() {
+    getCommand(OpenFileCommand.class).run();
+}
+```
+
+- `getCommand(OpenFileCommand.class)` — retrieves (or creates) the command instance from the CommandFacade.
+- `.run()` — schedules `perform(Wave)` on the thread declared for that command class.
+
+```java
+    Wave run();
+```
+
+- `run()` — returns the wave used for this execution (useful for chaining or debugging).
 
 **Be careful**: As explained [here](#key) each call to **getCommand** could retrieve the same *OR* another instance of the command class depending on key parts provided and instance's strong references. (in this case no timestamp is added to the command key)
 
@@ -108,9 +198,23 @@ You can trigger a command execution by calling **callCommand** from any componen
 
 You can provide some parameters into **WaveData** that will be hold by the wave and so available into the command.
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/component/basic/AbstractComponent.java|snippet=re:callCommand}-->
+
+```java
+    public final Wave callCommand(final Class<? extends CommandBean<? extends WaveBean>> commandClass, final WaveBean waveBean, final WaveBean... waveBeans) {
+```
+
+- `callCommand(Class, WaveBean, ...)` — indirect trigger via JIT; command runs on its own thread.
+- Accepts a primary bean plus optional extra beans for chained command data.
+
 
 You can also provide a **WaveBean** object to store all data.
+
+```java
+callCommand(ShowModelCommand.class, displayModelWaveBean);
+```
+
+- `callCommand` — schedules command creation/run via JIT; command then runs on its own thread.
+- `WaveBean` — typed bag of properties instead of raw `WaveData` varargs.
 
 <a name="link"></a>
 ### Convenient Link method
@@ -121,7 +225,15 @@ This method is useful to declare with only one line of code the call of a comman
 
 It's also possible to add a callback function, in example to manage double-click detection (see **LinkedCallback**).
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/controls/ControlsController.java|snippet=re:linkCommand}-->
+
+```java
+        linkCommand(view().getOpenButton(), MouseEvent.MOUSE_CLICKED, OpenEventTrackerFileCommand.class, CHECK_MOUSE_SINGLE_CLICK);
+```
+
+- `view().getOpenButton()` — JavaFX node in the View (Controller has `view()` accessor).
+- `MouseEvent.MOUSE_CLICKED` — JavaFX event type that fires the command.
+- `OpenEventTrackerFileCommand.class` — command class resolved from CommandFacade.
+- `CHECK_MOUSE_SINGLE_CLICK` — optional `WaveData` / callback to filter events (e.g. ignore double-click).
 
 
 <a name="messaging"></a>
@@ -134,6 +246,24 @@ You can manage custom methods called by reflection to handle waves and can you c
 More information is available in [Notifier &amp; Component page](Notifier.html).
 
 Be careful, commands can handle asynchronous wave only if they haven't been collected by the Garbage Collector! So you need to create a instance and to keep a strong references on it somewhere.
+
+
+```java
+@Override
+protected void initCommand() {
+    listen(MyWaves.DO_SAVE);
+    // keep this command instance alive while listening
+}
+
+@Override
+protected void perform(final Wave wave) {
+    // default path when no doXxx handler matches
+}
+```
+
+- `listen(...)` in `initCommand()` — command reacts to waves while the instance is retained.
+- Hold a strong reference (`getCommand(...)` stored in a Model field) or the listener is GC'd.
+- `perform(Wave)` — fallback when wave handling is not delegated to a `doXxx` method.
 
 
 Command Properties
@@ -168,13 +298,26 @@ The top-level annotation will be systematically used overriding lower ones and a
 #### Annotation usage
 
 To run a command into the JAT (JavaFX Application Thread), use this annotation :
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/command/single/ui/DefaultUICommand.java|snippet=re:@RunInto}-->
+
+```java
+@RunInto(RunType.JAT)
+```
+
+- `RunType.JAT` — JavaFX Application Thread; required for direct scene/node updates.
+- `RunType.JIT` — JRebirth Internal Thread; messaging-safe, not for UI nodes in scene.
+- `RunType.JTP` — thread pool slot; long I/O or CPU work off UI and JIT.
 
 To run a command into the JIT (JRebirth Internal Thread), use this annotation :
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/command/single/internal/DefaultCommand.java|snippet=re:@RunInto}-->
+
+```java
+@RunInto(RunType.JIT)
+```
 
 To run a command into JTP (JRebirth Thread Pool, the command will be run into a slot), use this annotation :
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/command/single/pool/DefaultPoolCommand.java|snippet=re:@RunInto}-->
+
+```java
+@RunInto(RunType.JTP)
+```
 
 
 <a name="inheritance"></a>
@@ -182,28 +325,49 @@ To run a command into JTP (JRebirth Thread Pool, the command will be run into a 
 
 To run a command into the JAT (JavaFX Application Thread), extends the *DefaultUICommand* class :
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/AttachModelCommand.java|snippet=re:extends DefaultUIBeanCommand}-->
+
+```java
+public class AttachModelCommand extends DefaultUIBeanCommand<DisplayModelWaveBean> {
+```
+
+- `DefaultUICommand` / `DefaultUIBeanCommand` — `@RunInto(JAT)` baked in for scene updates.
 
 
 To run a command into the JIT (JRebirth Internal Thread), extends the *DefaultCommand* class :
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/command/basic/ChainWaveCommand.java|snippet=re:extends DefaultCommand}-->
 
-*(implementation of WaveListener is optional)*
+```java
+public class ChainWaveCommand extends DefaultCommand implements WaveListener {
+```
+
+- `DefaultCommand` — runs on **JIT**; base for messaging-safe atomic commands.
+- `WaveListener` — optional; receive all waves in `processWave` in addition to `doXxx` handlers.
 
 
 To run a command into JTP (JRebirth Thread Pool, the command will be run into a slot), extends the *DefaultPoolCommand* class :
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/command/basic/showmodel/PrepareModelCommand.java|snippet=re:extends DefaultPoolBeanCommand}-->
+
+```java
+public class PrepareModelCommand extends DefaultPoolBeanCommand<DisplayModelWaveBean> {
+```
+
+- `DefaultPoolCommand` / `DefaultPoolBeanCommand` — runs on **JTP** for I/O or CPU-heavy work.
+
 
 #### Constructor argument usage
 
 It's also possible to define the runType (The thread which will handle the command) by passing **RunType**, each descendant classes of **AbstractBaseCommand** offer at least one constructor allowing this enum value to the command constructor.
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/command/AbstractBaseCommand.java|snippet=re:RunType runType}-->
+
+```java
+    public AbstractBaseCommand(final RunType runType, final PriorityLevel priority) {
+```
+
+- Constructor `RunType` — alternative to `@RunInto` when subclassing `AbstractBaseCommand` directly.
+- Annotation wins over constructor; constructor wins over the base-class default.
 
 
-<a name="key"></a> 
+<a name="key"></a>
 ### Component Key
 
 The component key as described in the [Facade page](Facades.html) allow storing unique commands.
@@ -223,6 +387,26 @@ Command are run in a custom thread in 3 steps:
 
 Only the **perform** method must be implemented to execute your action.
 
+Minimal custom command:
+
+```java
+@RunInto(RunType.JTP)
+public class LoadDataCommand extends DefaultCommand {
+
+    @Override
+    protected void initCommand() { /* optional setup */ }
+
+    @Override
+    protected void perform(final Wave wave) {
+        // long work on JTP — send result via sendWave when done
+    }
+}
+```
+
+- `@RunInto(JTP)` — runs `perform` on a thread-pool slot, not on the JavaFX thread.
+- `initCommand()` — called once when the command instance is prepared (register waves here if needed).
+- `perform(Wave)` — your action; may read `wave` data or an attached `WaveBean`.
+
 
 <a name="wavebean"></a> 
 ### Wave Bean
@@ -232,7 +416,29 @@ A **WaveBean** is a Java Bean that allow carrying a lot of named properties into
 Command Classes can declare a generic type that allow to cast the Wave Bean into the right one, it allows to use *getWaveBean().getMyProperty()* into source code which is more convenient than parsing **WaveData** (but it implies to create a dedicated Java Class).
 
 
-<a name="props"></a> 
+```java
+public class OpenFileCommand extends DefaultPoolBeanCommand<OpenFileWaveBean> {
+
+    @Override
+    protected void perform(final Wave wave) {
+        final File file = getWaveBean().getFile();
+        // ...
+    }
+}
+
+public class OpenFileWaveBean implements WaveBean {
+    private File file;
+    public File getFile() { return file; }
+    public void setFile(final File file) { this.file = file; }
+}
+```
+
+- `DefaultPoolBeanCommand<OpenFileWaveBean>` — generic binds the bean type for typed access.
+- `getWaveBean()` — cast-free access inside `perform`; populated by `callCommand` or `linkCommand`.
+- Prefer beans when a command carries more than two or three parameters.
+
+
+<a name="props"></a>
 ### Custom properties
 
 Each command is a simple Java Object, you can add fields or JavaFX Properties to help configuring your execution code.
@@ -241,11 +447,45 @@ You must pay attention that these values will be kept until the command is dispo
 For example you can attach a command to a **Model** and launch it several times while updating command's properties.
 
 
+```java
+private final SaveCommand saveCommand = getCommand(SaveCommand.class);
+
+void saveDraft() {
+    saveCommand.setDraft(true);
+    saveCommand.run();
+}
+
+void saveFinal() {
+    saveCommand.setDraft(false);
+    saveCommand.run();
+}
+```
+
+- Store `getCommand(...)` in a field — strong reference keeps the instance and its custom properties.
+- Configure fields/properties on the command before each `run()` for reusable commands.
+
+
 <!-- Parent Command  When you use a command into a **MultiCommand** , this property will hold a strong reference to it.   -->
+
+
+
+## Built-in Commands
+
+JRebirth provides several ready-to-use commands:
+
+| Command | Purpose | Thread |
+|---------|---------|--------|
+| `ShowModelCommand` | Display a model's view (prepare + attach) | JIT → JTP → JAT |
+| `ShowFadingModelCommand` | Show with fade transition | JIT → JTP → JAT |
+| `FadeInOutCommand` | Fade a node in or out | JAT |
+| `ChainWaveCommand` | Execute a list of waves sequentially | JIT |
+| `AttachModelCommand` | Attach a model's node to a parent | JAT |
+| `DetachModelCommand` | Remove a model's node from parent | JAT |
+| `PrepareModelCommand` | Build model's view off-screen | JTP |
 
 ]]#
 
 #if( !$all )
-parse("TocList.vm")
+#parse("TocList.vm")
 #displayFooterToc("Commands")
 #end

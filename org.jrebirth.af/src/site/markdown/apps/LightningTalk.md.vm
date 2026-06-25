@@ -6,7 +6,7 @@
 #set( $keywords = "JavaFX 2.2 Demo Application Presentation" )
 #set( $description = "JavaFX 2.2 Demo Application Presentation JRebirth Framework Lightning Talk" )
 
-#set( $version = "${LightningTalk-version}")
+#set( $version = "$LightningTalk-version")
 #set( $path = "lightningtalk")
 #set( $archiveName = "LightningTalk")
 #set( $downloadName = "Lightning Talk")

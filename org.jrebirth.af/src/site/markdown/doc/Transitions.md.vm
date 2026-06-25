@@ -1,0 +1,298 @@
+﻿<head>
+<![CDATA[
+    <title>Transitions</title>
+    <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
+]]>
+</head>
+
+<div id="catcherTitle">Transitions</div>
+<div id="catcherContent">Animated model switching and advanced visual node transitions</div>
+
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end
+
+#[[
+
+## In 30 seconds
+
+JRebirth animates page switches with **ShowFadingModelCommand** (core): show model → cross-fade → detach old node. Use `appendChild(false)` on `DisplayModelWaveBean`. The optional **transition** module slices nodes into tiles for splash effects (`NodeSlicerCommand`, `SlidingDoorService`, `RandomFadingService`).
+
+Quick Start
+=========================
+
+Model navigation transitions ship with **core** (no extra dependency). Advanced tile-slicer effects require the **transition** module.
+
+```xml
+<!-- Core transitions (ShowFadingModelCommand) — already on classpath with core -->
+<dependency>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>core</artifactId>
+    <version>${jrebirth.version}</version>
+</dependency>
+
+<!-- Optional: node slicer transitions (SlidingDoorService, RandomFadingService) -->
+<dependency>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>transition</artifactId>
+    <version>${jrebirth.version}</version>
+</dependency>
+```
+
+**Minimal example — fade between two pages in a StackPane:**
+
+```java
+// StackModel calls this internally; you can also trigger it directly:
+DisplayModelWaveBean waveBean = DisplayModelWaveBean.create()
+    .childrenPlaceHolder(stackPane.getChildren())
+    .appendChild(false)   // insert new node behind old one for cross-fade
+    .showModelKey(Key.create(NewPageModel.class))
+    .hideModelKey(currentModelKey);
+
+callCommand(ShowFadingModelCommand.class, waveBean);
+```
+
+**Minimal example — sliding-door reveal (transition module):**
+
+```java
+@Override
+protected void initInnerComponents() {
+    NodeSlicerCommand slicer = getService(NodeSlicerCommand.class, "Splash");
+    slicer.setImage(Resources.create(new RelImage("splash.png")).get());
+    slicer.setTileWidth(4);
+    slicer.setTileHeight(600);
+    slicer.sliceNode(null, null);
+
+    SlidingDoorService door = getService(SlidingDoorService.class, "Splash");
+    door.setNodes(slicer.getSlices());
+    door.setNodeDelay(6);
+    door.doIt();
+    door.getFullTransition().play();
+}
+```
+
+The transition module test `TransitionModel` wires slicer + both services in `initInnerComponents()`:
+
+```java
+imageSlicerService = getService(NodeSlicerCommand.class, "Properties");
+imageSlicerService.setImage(Resources.create(new RelImage("Properties.png")).get());
+imageSlicerService.setTileHeight(600);
+imageSlicerService.setTileWidth(4);
+imageSlicerService.sliceNode(null, null);
+
+slidingDoorService = getService(SlidingDoorService.class, "Properties");
+slidingDoorService.setNodeDelay(4);
+slidingDoorService.setNodes(imageSlicerService.getSlices());
+slidingDoorService.doIt();
+```
+
+
+Transitions Overview
+=========================
+
+JRebirth provides transition effects at two levels:
+
+* **Model Navigation Transitions (Core)** — Production-ready fading transitions for switching displayed models within a container (e.g. `StackModel` page navigation).
+* **Node Slicer Transitions (transition module)** — Experimental advanced visual effects that slice nodes into tile grids for creative animations.
+
+
+Model Navigation Transitions (Core)
+==========================================
+
+The core module includes built-in commands for animating model switches. These are the recommended way to transition between pages or panels with smooth fading effects.
+
+### ShowFadingModelCommand
+
+A `MultiCommand` that orchestrates the full model-switch sequence:
+
+1. `ShowModelCommand` — Prepares and attaches the new model's node.
+2. `FadeTransitionCommand` — Runs a parallel fade (old node fades out, new node fades in).
+3. `DetachModelCommand` — Removes the old node after the animation completes.
+
+
+```java
+// ShowFadingModelCommand — sequential MultiCommand (JIT)
+@Override
+protected List<UniqueKey<? extends Command>> defineSubCommand() {
+    return Arrays.asList(
+        getCommandKey(ShowModelCommand.class),
+        getCommandKey(FadeTransitionCommand.class),
+        getCommandKey(DetachModelCommand.class));
+}
+```
+
+`ShowFadingModelCommand` chains three commands. Always pass `appendChild(false)` on the wave bean so the new node sits **behind** the old one during the cross-fade.
+
+### FadeTransitionCommand
+
+Handles the actual JavaFX animation. It creates a `ParallelTransition` with two `FadeTransition` instances:
+
+* Old node: opacity 1.0 → 0.0 (600ms)
+* New node: opacity 0.0 → 1.0 (600ms)
+
+Once the animation completes, the old node is removed from the container.
+
+
+```java
+@RunInto(RunType.JAT)
+public class FadeTransitionCommand extends AbstractSingleCommand<DisplayModelWaveBean> {
+
+    @Override
+    protected void perform(final Wave wave) {
+        Node oldNode = waveBean(wave).hideModel() == null ? null : waveBean(wave).hideModel().node();
+        final Node newNode = waveBean(wave).showModel() == null ? null : waveBean(wave).showModel().node();
+
+        if (oldNode != null || newNode != null) {
+            final ParallelTransition animation = new ParallelTransition();
+
+            if (oldNode != null) {
+                final FadeTransition ft = new FadeTransition(Duration.millis(600), oldNode);
+                ft.setFromValue(1.0);
+                ft.setToValue(0.0);
+                animation.getChildren().add(ft);
+            }
+            if (newNode != null) {
+                final FadeTransition ft = new FadeTransition(Duration.millis(600), newNode);
+                ft.setFromValue(0.0);
+                ft.setToValue(1.0);
+                animation.getChildren().add(ft);
+            }
+
+            final Node oldNodeLink = oldNode;
+            animation.setOnFinished(event -> {
+                if (oldNodeLink != null) {
+                    waveBean(wave).childrenPlaceHolder().remove(oldNodeLink);
+                }
+                waveBean(wave).showModel().doShowView(wave);
+            });
+            animation.playFromStart();
+        }
+    }
+}
+```
+
+`@RunInto(RunType.JAT)` runs the animation on the JavaFX thread. On completion, the old node is removed from the stack and `doShowView` activates the new model.
+
+### Using ShowFadingModelCommand
+
+To trigger a fading model transition programmatically, build a `DisplayModelWaveBean` and call the command:
+
+```java
+DisplayModelWaveBean waveBean = DisplayModelWaveBean.create()
+    .childrenPlaceHolder(stackPane.getChildren())
+    .appendChild(false)
+    .showModelKey(Key.create(NewPageModel.class))
+    .hideModelKey(currentModelKey);
+
+callCommand(ShowFadingModelCommand.class, waveBean);
+```
+
+The `StackModel` component uses this command internally whenever you navigate between pages — you get fading transitions for free when using `StackModel` with `PageEnum`.
+
+
+Node Slicer Transitions (transition module)
+=================================================
+
+The `transition` module provides experimental services for advanced visual effects. These work by slicing a node (or image) into a grid of tiles and animating each tile independently.
+
+### SlidingDoorService
+
+Applies a staggered translate animation to a grid of node tiles, producing a "sliding door" reveal effect.
+
+
+```java
+// SlidingDoorService — staggered translate per tile
+public void doIt() {
+    final ParallelTransition parallel = new ParallelTransition();
+    int i = 0;
+    for (final Node node : this.nodes) {
+        final TranslateTransition tt = new TranslateTransition();
+        tt.setDelay(Duration.millis(i * getNodeDelay()));
+        tt.setNode(node);
+        tt.setByY(1000);
+        tt.setDuration(getTranslateDuration());
+        tt.setInterpolator(Interpolator.EASE_IN);
+        parallel.getChildren().add(tt);
+        i++;
+    }
+    this.fullTransition = new SequentialTransition(parallel);
+}
+// slidingDoorService.getFullTransition().play();
+```
+
+Each tile receives a staggered `TranslateTransition` based on `nodeDelay`. The result is wrapped in a `SequentialTransition` you play via `getFullTransition().play()`.
+
+Configuration properties:
+
+| Property | Description | Default |
+|----------|-------------|---------|
+| `nodeDelay` | Delay increment between each tile's animation start (ms) | 4 |
+| `slidingType` | Direction of the slide (e.g. `FromBottomLeft`, `FromTopRight`) | `FromBottomLeft` |
+| `translateDuration` | Duration of each tile's translate animation | 500ms |
+
+Supported `SlidingType` values:
+
+* `FromBottomLeft`, `FromBottomRight`, `FromTopLeft`, `FromTopRight`
+* `FromLeftBottom`, `FromRightBottom`, `FromLeftTop`, `FromRightTop`
+* `FromHorizontalMiddle`, `FromVerticalMiddle`
+
+### RandomFadingService
+
+Shuffles the tile order randomly and fades them in sequence using a `Timeline` with `KeyFrame` entries, creating a randomized reveal effect.
+
+
+```java
+public void doIt() {
+    Collections.shuffle(this.nodes);
+    final List<KeyFrame> keyFrames = new ArrayList<>();
+    long d = 100;
+    for (final Node node : this.nodes) {
+        d += 1000;
+        keyFrames.add(new KeyFrame(Duration.millis(d),
+            new KeyValue(node.opacityProperty(), 1.0)));
+    }
+    this.timeline = new Timeline();
+    timeline.getKeyFrames().addAll(keyFrames);
+}
+// After doIt(): timeline.play();
+```
+
+Tiles are shuffled, then a `Timeline` fades each tile's opacity in sequence. Call `doIt()` after `setNodes()`, then play `getTimeline()`.
+
+### Using Node Slicer Transitions
+
+The typical workflow for slicer transitions:
+
+1. **Slice the node** — Use `NodeSlicerCommand` to split a source node into a grid of `ImageView` tiles.
+2. **Configure a service** — Set up `SlidingDoorService` or `RandomFadingService` with your tile nodes.
+3. **Play the transition** — Call `doIt()` on the service, then play the resulting transition.
+
+```java
+SlidingDoorService service = getService(SlidingDoorService.class);
+service.setNodes(tileNodes);
+service.setNodeDelay(6);
+service.setSlidingType(SlidingType.FromTopLeft);
+service.doIt();
+service.getFullTransition().play();
+```
+
+These effects are best suited for splash screens, presentation transitions, or creative UI animations rather than standard page navigation.
+
+
+Choosing the Right Transition
+====================================
+
+| Use Case | Recommended Approach |
+|----------|---------------------|
+| Page navigation in StackModel | `ShowFadingModelCommand` (automatic) |
+| Custom model switching | `ShowFadingModelCommand` with `DisplayModelWaveBean` |
+| Splash / reveal effects | `SlidingDoorService` or `RandomFadingService` |
+| Standard JavaFX animations | Use JavaFX `Transition` API directly in your View |
+
+
+]]#
+
+#if( !$all )
+#parse("TocList.vm")
+#displayFooterToc("Transitions")
+#end

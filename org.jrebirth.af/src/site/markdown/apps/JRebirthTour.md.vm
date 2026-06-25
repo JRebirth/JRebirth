@@ -6,7 +6,7 @@
 #set( $keywords = "JavaFX 2 JavaFX 8 Demo Application Presentation JRebirth Framework Tour" )
 #set( $description = "JavaFX 2 JavaFX 8 Demo Application Presentation JRebirth Framework Tour" )
 
-#set( $version = "${Jaf-version}")
+#set( $version = "$Jaf-version")
 #set( $path = "jaf")
 #set( $archiveName = "JRebirthTour")
 #set( $downloadName = "JRebirth Tour")

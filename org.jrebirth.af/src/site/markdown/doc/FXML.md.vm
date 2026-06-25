@@ -1,0 +1,350 @@
+﻿<head>
+<![CDATA[
+    <title>FXML Integration</title>
+    <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
+]]>
+</head>
+
+<div id="catcherTitle">FXML Integration</div>
+<div id="catcherContent">Mix FXML with JRebirth MVC in multiple ways</div>
+
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end
+
+#[[
+
+## In 30 seconds
+
+FXML integrates via **DefaultFXMLModel** (FXML is the view), **embedded FXMLItem** in a Java View, **hybrid** key parts (`KEYPART_FXML_PREFIX`), or **fx:include** with sub-controllers. Controllers extend **AbstractFXMLController** to call `model()`.
+
+Quick Start
+=========================
+
+FXML support is built into **core**. Add the **component** module if you use `StackModel` for FXML showcase-style navigation.
+
+```xml
+<dependency>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>core</artifactId>
+    <version>${jrebirth.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>component</artifactId>
+    <version>${jrebirth.version}</version>
+</dependency>
+```
+
+**Minimal example — standalone FXML model (no Java View class):**
+
+```java
+// Model — FXML loaded by convention: Standalone.fxml in same package
+public class StandaloneModel extends DefaultFXMLModel<StandaloneModel> {
+    @Override
+    protected void initModel() { }
+}
+
+// Controller — access the owning model via model()
+public class StandaloneController extends AbstractFXMLController<StandaloneModel, View<StandaloneModel, ?, ?>> {
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        model().titleProperty().set("Hello from FXML");
+    }
+}
+```
+
+Place `Standalone.fxml` next to the model on the classpath with `fx:controller` pointing to `StandaloneController`.
+
+
+FXML Overview
+=========================
+
+JRebirth provides first-class support for integrating FXML files into its component architecture.
+You can use FXML in several ways depending on how much control you need over the Java-side view logic:
+
+* **Standalone (FXMLModel)** — Model loads FXML directly; no Java View class needed.
+* **Embedded** — Full MVC pattern (Model + View + Controller) where the View loads FXML and embeds it in its node tree.
+* **Hybrid** — `DefaultFXMLModel` with custom key parts pointing to a specific FXML path.
+* **Included** — FXML files using `<fx:include>` to compose sub-views, with sub-controllers accessing the parent model.
+
+All approaches leverage JRebirth's `AbstractFXMLController` which gives FXML controllers transparent access to the owning Model.
+
+
+FXMLModel (Standalone)
+=========================
+
+The simplest way to use FXML with JRebirth. Your Model extends `DefaultFXMLModel` and JRebirth automatically loads the FXML file matching the model's package and class name (without the "Model" suffix).
+
+No separate Java View class is required — the FXML **is** the view. The FXML controller should extend `AbstractFXMLController` to gain access to `model()`.
+
+
+```java
+// FXML path resolved by convention: StandaloneModel → Standalone.fxml (same package)
+public class StandaloneModel extends DefaultFXMLModel<StandaloneModel> {
+    @Override
+    protected void initModel() { }
+}
+```
+
+For `org.jrebirth.af.showcase.fxml.ui.standalone.StandaloneModel`, JRebirth loads `Standalone.fxml` from the same package on the classpath. Set `fx:controller` to your `AbstractFXMLController` subclass.
+
+**Controller accessing the model:**
+
+```java
+public class StandaloneController extends AbstractFXMLController<StandaloneModel, View<StandaloneModel, ?, ?>> {
+
+    @FXML private Label titleLabel;
+
+    @Override
+    public void initialize(final URL url, final ResourceBundle resource) {
+        titleLabel.setText("Standalone FXML page");
+    }
+}
+```
+
+
+Embedded FXML
+=========================
+
+When you need a full MVC split (Model + View + Controller) but still want to use FXML for part of the view, you can **embed** FXML nodes into a Java-built View.
+
+The View declares an `FXMLItem` resource and calls `.get()` or `.getNew()` to obtain FXML component instances which are then added to the node tree.
+
+### Model
+
+
+```java
+public class EmbeddedModel extends DefaultModel<EmbeddedModel, EmbeddedView> {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initModel() {
+        // Nothing to do yet
+        super.initModel();
+
+    }
+
+}
+```
+
+### View
+
+
+```java
+public class EmbeddedView extends DefaultView<EmbeddedModel, BorderPane, EmbeddedController> {
+
+    private static FXMLItem ROOT_EMBEDDED_FXML = Resources.create(new FXML("org.jrebirth.af.showcase.fxml.ui.embedded", "Embedded"));
+
+    private VBox box;
+
+    public EmbeddedView(final EmbeddedModel model) {
+        super(model);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initView() {
+        super.initView();
+
+        this.box = new VBox();
+        this.box.setAlignment(Pos.CENTER);
+
+        final ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPrefSize(600, 600);
+        scrollPane.setContent(this.box);
+
+        node().setCenter(scrollPane);
+
+        addNode(EmbeddedView.ROOT_EMBEDDED_FXML.get().node());
+
+        // Load 2 more instance
+        addNode(EmbeddedView.ROOT_EMBEDDED_FXML.getNew().node());
+        addNode(EmbeddedView.ROOT_EMBEDDED_FXML.getNew().node());
+
+    }
+
+    public void addNode(final Node node) {
+
+        this.box.getChildren().add(node);
+
+    }
+
+}
+```
+
+Key points:
+
+* `Resources.create(new FXML("package.path", "Name"))` declares an FXML resource item.
+* `.get()` retrieves (or creates) the singleton instance.
+* `.getNew()` always creates a fresh instance — useful for multiple copies of the same FXML component.
+
+
+Hybrid FXML
+=========================
+
+The Hybrid approach uses `DefaultFXMLModel` but overrides the default FXML file path using key parts. This lets you reuse a single Model class to load different FXML files.
+
+
+```java
+public class HybridModel extends DefaultFXMLModel<HybridModel> {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initModel() {
+        // Nothing to do yet
+    }
+
+}
+```
+
+The FXML path is passed as a key part when retrieving the model:
+
+```java
+Key.create(HybridModel.class, FXMLModel.KEYPART_FXML_PREFIX + "org.jrebirth.af.showcase.fxml.ui.hybrid.Hybrid")
+```
+
+The `KEYPART_FXML_PREFIX` constant signals to JRebirth that the key part value represents an FXML resource path rather than a normal component key.
+
+**PageEnum wiring (FXML showcase):**
+
+```java
+public enum FXMLPage implements PageEnum {
+    StandaloneFxml, IncludedFxml, ViewEmbeddedFxml, HybridFxml;
+
+    @Override
+    public UniqueKey<? extends Model> getModelKey() {
+        switch (this) {
+            case StandaloneFxml:
+                return Key.create(StandaloneModel.class);
+            case HybridFxml:
+                return Key.create(HybridModel.class,
+                    FXMLModel.KEYPART_FXML_PREFIX + "org.jrebirth.af.showcase.fxml.ui.hybrid.Hybrid");
+            case IncludedFxml:
+                return Key.create(IncludedModel.class, new LoremIpsum());
+            default:
+                return Key.create(EmbeddedModel.class);
+        }
+    }
+}
+```
+
+
+Included FXML
+=========================
+
+When your FXML uses `<fx:include>` to compose sub-views, JRebirth automatically propagates the parent model to sub-controllers. Sub-controllers extending `AbstractFXMLController` can call `model()` to access the same Model instance as the parent.
+
+
+```java
+public class IncludedModel extends DefaultFXMLModel<IncludedModel> {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initModel() {
+        // Nothing to do yet
+    }
+
+}
+```
+
+You can also pass a custom object (e.g. a data bean) as a key part to make it available in the model:
+
+```java
+Key.create(IncludedModel.class, new LoremIpsum())
+```
+
+
+FXMLController
+=========================
+
+JRebirth provides `AbstractFXMLController` as the base class for all FXML controllers. It implements `Initializable` and gives you:
+
+* `model()` — access to the owning JRebirth Model.
+* `view()` — access to the Model's View (when one exists).
+
+Your FXML controllers should extend this class instead of implementing `Initializable` directly:
+
+```java
+public class MyController extends AbstractFXMLController<MyModel, MyView> {
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        super.initialize(url, rb);
+        // Custom initialization
+    }
+}
+```
+
+This bridges the gap between JavaFX's FXML controller mechanism and JRebirth's component architecture.
+
+
+FXML Application Example
+=========================
+
+Here is how the FXML showcase application is bootstrapped, demonstrating the standard JRebirth application entry point:
+
+
+```java
+public final class FXMLApplication extends DefaultApplication<StackPane> {
+
+    /**
+     * Application launcher.
+     *
+     * @param args the command line arguments
+     */
+    public static void main(final String... args) {
+        Application.launch(FXMLApplication.class, args);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Class<? extends Model> firstModelClass() {
+        return FXMLShowCaseModel.class;
+    }
+
+}
+```
+
+The `firstModelClass()` method returns the root model of the application, which in this case uses a `StackModel` to navigate between the different FXML integration examples (Standalone, Embedded, Hybrid, Included).
+
+
+FXML Resources
+=========================
+
+JRebirth provides `FXMLItem` for typed, reusable FXML resource declarations. This approach is preferred over raw `FXMLLoader` usage because:
+
+* Resources are managed by JRebirth's resource engine (caching, lifecycle).
+* FXML paths are declared once and referenced by a typed constant.
+* Module boundaries (JPMS) are respected via the resource API.
+
+Declaration pattern:
+
+```java
+private static FXMLItem MY_FXML = Resources.create(new FXML("com.example.ui", "MyComponent"));
+```
+
+Usage:
+
+```java
+Node fxmlNode = MY_FXML.get().node();        // Singleton instance
+Node freshNode = MY_FXML.getNew().node();    // New instance each time
+```
+
+
+]]#
+
+#if( !$all )
+#parse("TocList.vm")
+#displayFooterToc("FXML")
+#end

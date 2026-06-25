@@ -1,0 +1,312 @@
+﻿<head>
+<![CDATA[
+    <title>JRebirth Showcase - Wave Communication</title>
+    <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
+]]>
+</head>
+
+<div id="catcherTitle">Wave Showcase</div>
+<div id="catcherContent">Inter-model wave communication across multiple Stages</div>
+
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+
+#[[
+
+# Wave Communication Showcase
+
+The Wave showcase demonstrates JRebirth's inter-model messaging system.
+It shows how two models — running in different `Stage` windows — can communicate through waves without holding direct references to each other.
+This is one of the simplest and most instructive showcases: the entire application is just a handful of files, but it illustrates the foundational messaging pattern that every JRebirth application relies on.
+
+
+## Application Entry Point
+
+The application is minimal — a single `DefaultApplication` subclass that points to `MainModel`.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.wave;
+
+import javafx.scene.layout.StackPane;
+
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.core.application.DefaultApplication;
+import org.jrebirth.af.showcase.wave.ui.main.MainModel;
+
+public class WaveApplication extends DefaultApplication<StackPane> {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public Class<? extends Model> firstModelClass() {
+        return MainModel.class;
+    }
+
+}
+```
+
+#[[
+
+No stylesheets, no resource preloading — just the bare minimum to launch the first model.
+
+
+## Defining Wave Types — WWaves
+
+Before any model can send or receive waves, the wave types must be declared.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.wave.ui;
+
+import org.jrebirth.af.api.annotation.Preload;
+import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.wave.WBuilder;
+
+@Preload
+public interface WWaves {
+
+    String CHANGE = "CHANGE";
+
+    WaveType CHANGE_WT = WBuilder.waveType(CHANGE);
+
+}
+```
+
+#[[
+
+This interface defines a single wave type: `CHANGE_WT`.
+The `@Preload` annotation ensures that the static fields are initialized before any model starts listening, avoiding class-loading race conditions.
+
+The `CHANGE` string constant serves as the wave's action name.
+By convention, when a model listens for this wave type, JRebirth will route it to a method named `doChange(Wave)`.
+The `@OnWave` annotation provides an alternative, annotation-driven approach.
+
+
+## MainModel — Receiving Waves with @OnWave
+
+The main model uses an FXML-based view and listens for incoming `CHANGE` waves.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.wave.ui.main;
+
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.ui.ModuleModel;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.annotation.OnWave;
+import org.jrebirth.af.core.ui.fxml.DefaultFXMLModel;
+import org.jrebirth.af.showcase.wave.ui.WWaves;
+
+@Register(value = ModuleModel.class)
+public class MainModel extends DefaultFXMLModel<MainModel> implements ModuleModel {
+
+    @OnWave(WWaves.CHANGE)
+    protected void whatyouwant(Wave wave) {
+        getFXMLController().txtMessage.setText("Wave received : " + wave.waveType().action());
+    }
+
+    @Override
+    public String moduleName() {
+        return "Wave";
+    }
+
+    @Override
+    public MainController getFXMLController() {
+        return (MainController) super.getFXMLController();
+    }
+
+}
+```
+
+#[[
+
+### How @OnWave works
+
+The `@OnWave(WWaves.CHANGE)` annotation on `whatyouwant()` tells the framework:
+"When a wave with action `CHANGE` arrives, call this method."
+
+The method name does **not** need to follow the `doXxx` convention when using `@OnWave` — you can name it anything.
+Inside the handler, the model updates the FXML controller's text field to show that the wave was received.
+
+Notice that `MainModel` extends `DefaultFXMLModel` — the view is defined in an FXML file, and the controller is an `AbstractFXMLController` subclass.
+The `getFXMLController()` override provides typed access to the controller.
+
+
+## MainController — Opening a Second Stage
+
+The FXML controller creates and shows a second window containing `SecondModel`.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.wave.ui.main;
+
+import org.jrebirth.af.api.ui.View;
+import org.jrebirth.af.core.ui.fxml.AbstractFXMLController;
+import org.jrebirth.af.showcase.wave.ui.second.SecondModel;
+
+import javafx.event.ActionEvent;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+public final class MainController extends AbstractFXMLController<MainModel, View<MainModel, ?, ?>> {
+
+    public TextField txtMessage;
+
+    private Stage stage;
+
+    public void onOk(ActionEvent actionEvent) {
+        if (stage == null) {
+            stage = new Stage();
+            stage.setScene(new Scene((Parent) model().getModel(SecondModel.class).node(), 600, 400));
+        }
+        stage.show();
+    }
+
+}
+```
+
+#[[
+
+When the user clicks the "OK" button in the main window, `onOk` creates a new `Stage` and populates it with `SecondModel`'s node.
+The key line is:
+
+```java
+model().getModel(SecondModel.class).node()
+```
+
+This retrieves (or creates) the `SecondModel` singleton through JRebirth's facade and obtains its root JavaFX node.
+The second model lives in a different `Stage`, but it is managed by the **same** JRebirth facade — which is why waves can flow between them.
+
+
+## SecondModel — Listening and Logging
+
+The secondary model listens for the same `CHANGE_WT` wave type and logs when it receives one.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.wave.ui.second;
+
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.ui.fxml.DefaultFXMLModel;
+import org.jrebirth.af.showcase.wave.ui.WWaves;
+
+public class SecondModel extends DefaultFXMLModel<SecondModel> {
+
+    @Override
+    protected void initModel() {
+        listen(WWaves.CHANGE_WT);
+    }
+
+    public void doChange(final Wave wave) {
+        System.out.println("SecondPageModel " + wave.waveType().action());
+    }
+}
+```
+
+#[[
+
+Here the listening is done imperatively in `initModel()` via `listen(WWaves.CHANGE_WT)`.
+By convention, when a wave with action `"CHANGE"` arrives, JRebirth calls `doChange(Wave)`.
+
+This demonstrates the **two ways to listen for waves**:
+
+| Approach | Example | Naming rule |
+|----------|---------|-------------|
+| `@OnWave("ACTION")` on a method | `MainModel.whatyouwant()` | Any method name |
+| `listen(waveType)` in `initModel()` | `SecondModel.doChange()` | Must be `doXxx` matching the action |
+
+Both work identically — `@OnWave` is more declarative, while `listen()` is useful when you need to conditionally subscribe.
+
+
+## SecondController — Sending Waves
+
+The second window's controller sends waves back to the main model.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.wave.ui.second;
+
+import javafx.event.ActionEvent;
+
+import org.jrebirth.af.api.ui.View;
+import org.jrebirth.af.core.ui.fxml.AbstractFXMLController;
+import org.jrebirth.af.showcase.wave.ui.WWaves;
+import org.jrebirth.af.showcase.wave.ui.main.MainController;
+import org.jrebirth.af.showcase.wave.ui.main.MainModel;
+
+public class SecondController extends AbstractFXMLController<SecondModel, View<SecondModel, ?, ?>> {
+
+    public void onSayHello(ActionEvent actionEvent) {
+        final MainController controller = model().getModel(MainModel.class).getFXMLController();
+        controller.txtMessage.setText("Hello, world");
+    }
+
+    public void onButton2(ActionEvent actionEvent) {
+        model().sendWave(WWaves.CHANGE_WT);
+    }
+}
+```
+
+#[[
+
+Two buttons demonstrate two different communication patterns:
+
+### Direct model access — `onSayHello`
+
+```java
+model().getModel(MainModel.class).getFXMLController().txtMessage.setText("Hello, world");
+```
+
+This reaches across models via the facade, gets the `MainModel`, and directly modifies its controller's UI field.
+While this works, it creates a **tight coupling** between the two models — `SecondController` must know about `MainModel`'s internal controller structure.
+
+### Wave-based communication — `onButton2`
+
+```java
+model().sendWave(WWaves.CHANGE_WT);
+```
+
+This sends a `CHANGE` wave into the JRebirth message bus.
+Any model that is listening for `CHANGE_WT` will receive it — `MainModel` (via `@OnWave`) and `SecondModel` itself (via `listen()`), both.
+
+The sender does not know or care who is listening.
+This is the **recommended** approach: loosely coupled, testable, and extensible.
+
+
+## Multi-Stage Communication
+
+A key takeaway from this showcase is that **waves cross Stage boundaries transparently**.
+The main model and the second model live in different JavaFX `Stage` windows, but they share the same JRebirth facade.
+When `SecondController` sends a wave, it reaches `MainModel` in the other window without any special plumbing.
+
+This makes waves ideal for building multi-window applications — tool windows, floating panels, preferences dialogs — where components need to communicate without knowing each other's window hierarchy.
+
+
+## Key Patterns Summary
+
+| Pattern | Where | Why |
+|---------|-------|-----|
+| `@Preload` on wave interface | `WWaves` | Ensure wave types are initialized before models start |
+| `@OnWave` annotation | `MainModel` | Declarative, name-independent wave listening |
+| `listen()` + naming convention | `SecondModel` | Imperative wave subscription with `doXxx` dispatch |
+| `sendWave()` | `SecondController` | Fire-and-forget decoupled messaging |
+| `DefaultFXMLModel` | `MainModel`, `SecondModel` | FXML-backed models with typed controller access |
+| Cross-Stage waves | Entire app | Transparent messaging between windows via shared facade |
+
+]]#

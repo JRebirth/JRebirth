@@ -6,7 +6,7 @@
 #set( $keywords = "Bundle Version Compare Artifact Qualifier Updated Upgraded Downgraded Same Missing New" )
 #set( $description = "Comparison Tool will help you to compare bundles from 2 folders to find differences" )
 
-#set( $version = "${ComparisonTool-version}")
+#set( $version = "$ComparisonTool-version")
 #set( $path = "comparisontool")
 #set( $archiveName = "ComparisonTool")
 #set( $downloadName = "Comparison Tool")

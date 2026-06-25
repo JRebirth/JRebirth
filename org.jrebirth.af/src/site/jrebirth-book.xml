@@ -9,15 +9,11 @@
 			<id>Introduction</id>
 			<title>Introduction</title>
 			<sections>
-				<section>
-					<id>Introduction</id>
-				</section>
-				<section>
-					<id>releaseNotes</id>
-				</section>
-				<section>
-					<id>license</id>
-				</section>
+				<section><id>Introduction</id></section>
+				<section><id>Installation</id></section>
+				<section><id>Overview</id></section>
+				<section><id>releaseNotes</id></section>
+				<section><id>license</id></section>
 			</sections>
 		</chapter>
 
@@ -25,16 +21,50 @@
 			<id>Core</id>
 			<title>JRebirth Core</title>
 			<sections>
-				<!-- <section> <id>Installation</id> </section> -->
-				<section>
-					<id>Application</id>
-				</section>
-				<section>
-					<id>Thread</id>
-				</section>
-				<section>
-					<id>Logging</id>
-				</section>
+				<section><id>Application</id></section>
+				<section><id>Thread</id></section>
+				<section><id>Logging</id></section>
+				<section><id>Component</id></section>
+				<section><id>Facades</id></section>
+				<section><id>Modularization</id></section>
+			</sections>
+		</chapter>
+
+		<chapter>
+			<id>Communication</id>
+			<title>Communication</title>
+			<sections>
+				<section><id>Notifier</id></section>
+				<section><id>Wave</id></section>
+				<section><id>Commands</id></section>
+				<section><id>Services</id></section>
+			</sections>
+		</chapter>
+
+		<chapter>
+			<id>UserInterface</id>
+			<title>User Interface</title>
+			<sections>
+				<section><id>Ui</id></section>
+				<section><id>FXML</id></section>
+				<section><id>Behavior</id></section>
+				<section><id>Resources</id></section>
+			</sections>
+		</chapter>
+
+		<chapter>
+			<id>Extensions</id>
+			<title>Extension Modules</title>
+			<sections>
+				<section><id>ComponentLibrary</id></section>
+				<section><id>UndoRedo</id></section>
+				<section><id>Transitions</id></section>
+				<section><id>REST</id></section>
+				<section><id>Security</id></section>
+				<section><id>Dialog</id></section>
+				<section><id>Form</id></section>
+				<section><id>IconFont</id></section>
+				<section><id>Tooling</id></section>
 			</sections>
 		</chapter>
 

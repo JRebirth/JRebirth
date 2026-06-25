@@ -1,0 +1,718 @@
+﻿<head>
+<![CDATA[
+    <title>JRebirth Showcase - Todos</title>
+    <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
+]]>
+</head>
+
+<div id="catcherTitle">Todos Showcase</div>
+<div id="catcherContent">A TodoMVC-style CRUD application built with JRebirth patterns</div>
+
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+
+#[[
+
+# Todos Showcase
+
+The Todos showcase is a TodoMVC-style application that demonstrates how to build a realistic CRUD application with JRebirth.
+It covers inner-component composition, service-based data management, wave-driven communication, resource declarations, and Ecore-based code generation — all in a single cohesive example.
+
+
+## Application Bootstrap
+
+Every JRebirth application starts with a class extending `DefaultApplication`.
+The Todos application is minimal: it declares `MainModel` as the first displayed model and loads its stylesheet at scene level.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.todos;
+
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.core.application.DefaultApplication;
+import org.jrebirth.af.showcase.todos.resource.TodosStyles;
+import org.jrebirth.af.showcase.todos.ui.main.MainModel;
+
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+
+public class TodosApplication extends DefaultApplication<StackPane> {
+
+    public static void main(final String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public Class<? extends Model> firstModelClass() {
+        return MainModel.class;
+    }
+
+    @Override
+    protected void customizeScene(final Scene scene) {
+        super.customizeScene(scene);
+        addCSS(scene, TodosStyles.MAIN);
+    }
+
+}
+```
+
+#[[
+
+`firstModelClass()` tells the framework which Model to instantiate and display when the application opens.
+`addCSS(scene, TodosStyles.MAIN)` attaches a `StyleSheetItem` to the scene — JRebirth resolves the actual CSS file from the classpath automatically.
+
+
+## Architecture — MainModel and Inner Components
+
+The UI is structured as a **MainModel** that composes three inner components: a header for input, a content area for the list, and a status bar for filtering.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.todos.ui.main;
+
+import org.jrebirth.af.api.annotation.Link;
+import org.jrebirth.af.api.component.basic.InnerComponent;
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.ui.ModuleModel;
+import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.showcase.todos.ui.content.ContentModel;
+import org.jrebirth.af.showcase.todos.ui.header.HeaderModel;
+import org.jrebirth.af.showcase.todos.ui.status.StatusModel;
+
+@Register(value = ModuleModel.class)
+public class MainModel extends DefaultModel<MainModel, MainView> implements ModuleModel {
+
+    /** The Expression UI inner component. */
+    @Link
+    protected InnerComponent<HeaderModel> headerModel;
+
+    /** The Content UI inner component. */
+    @Link
+    protected InnerComponent<ContentModel> contentModel;
+
+    /** The Status UI inner component. */
+    @Link
+    protected InnerComponent<StatusModel> statusModel;
+
+    /** Provides getter to model. */
+
+    HeaderModel headerModel() {
+        return this.headerModel.get();
+    }
+
+    ContentModel contentModel() {
+        return this.contentModel.get();
+    }
+
+    StatusModel statusModel() {
+        return this.statusModel.get();
+    }
+
+    @Override
+    public String moduleName() {
+        return "Todos";
+    }
+
+}
+```
+
+#[[
+
+### How inner components work
+
+Each field annotated with `@Link` and typed `InnerComponent<T>` is automatically resolved by the framework.
+When you call `this.headerModel.get()`, JRebirth lazily creates (or retrieves) the `HeaderModel` singleton and returns it.
+The parent `MainModel` owns the lifecycle of its children — they are created when needed and released when the parent is released.
+
+The `MainView` then assembles the three inner component nodes into a `BorderPane`:
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.todos.ui.main;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+
+import org.jrebirth.af.core.ui.DefaultView;
+import org.jrebirth.af.showcase.todos.resource.TodosImages;
+
+public class MainView extends DefaultView<MainModel, BorderPane, MainController> {
+
+    private BorderPane borderPane;
+
+    public MainView(final MainModel model) {
+        super(model);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initView() {
+        super.initView();
+
+        StackPane sp = new StackPane();
+        sp.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(4), new Insets(0))));
+        final ImageView appName = new ImageView(TodosImages.HEADER_LOGO.get());
+        StackPane.setAlignment(appName, Pos.CENTER);
+        sp.getChildren().add(appName);
+        node().setTop(sp);
+
+        this.borderPane = new BorderPane();
+        node().setCenter(this.borderPane);
+
+        this.borderPane.setTop(model().headerModel().node());
+        this.borderPane.setCenter(model().contentModel().node());
+        this.borderPane.setBottom(model().statusModel().node());
+
+    }
+
+    /**
+     * @return Returns the borderPane.
+     */
+    BorderPane borderPane() {
+        return this.borderPane;
+    }
+}
+```
+
+#[[
+
+This pattern keeps model composition declarative while the view handles only layout.
+
+
+## The ContentModel Interface and Multiple Implementations
+
+One of the most powerful patterns shown here is **multiple implementations of a single interface, selected by priority**.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.todos.ui.content;
+
+import javafx.collections.transformation.FilteredList;
+
+import org.jrebirth.af.api.module.RegistrationPoint;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.annotation.OnWave;
+import org.jrebirth.af.showcase.todos.bean.Todo;
+import org.jrebirth.af.showcase.todos.ui.WWaves;
+
+
+@RegistrationPoint
+public interface ContentModel extends Model {
+
+    FilteredList<Todo> getFilteredList();
+
+    void setFilterId(final Object id);
+
+    @OnWave(WWaves.UPDATE_STATUS)
+    void updateStatus(Wave wave);
+
+    void refresh();
+}
+```
+
+#[[
+
+`ContentModel` is an interface marked with `@RegistrationPoint`, meaning the framework treats it as an injection point.
+Two concrete implementations register against it with different priorities:
+
+- `TableContentModel` — uses a `TableView`, registered with `PriorityLevel.High`
+- `ListContentModel` — uses a custom list layout, registered with `PriorityLevel.Lower`
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.todos.ui.content.table;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.FilteredList;
+import javafx.scene.layout.Pane;
+
+import org.jrebirth.af.api.annotation.Link;
+import org.jrebirth.af.api.annotation.PriorityLevel;
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.annotation.OnWave;
+import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.showcase.todos.bean.Todo;
+import org.jrebirth.af.showcase.todos.service.TodoService;
+import org.jrebirth.af.showcase.todos.ui.WWaves;
+import org.jrebirth.af.showcase.todos.ui.content.ContentModel;
+import org.jrebirth.af.showcase.todos.ui.status.FilterKind;
+
+@Register(value = ContentModel.class, priority = PriorityLevel.High)
+public class TableContentModel extends DefaultModel<TableContentModel, TableContentView> implements ContentModel {
+
+    @Link
+    private TodoService todoService;
+
+    private FilterKind filterId = FilterKind.All;
+
+    private FilteredList<Todo> filteredList;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initModel() {
+        super.initModel();
+
+    }
+
+    @Override
+    protected void bind() {
+        super.bind();
+
+        filteredList = new FilteredList<>(this.todoService.getTodoList().pTodo(), this::filter);
+        view().getTable().setItems(filteredList);
+    }
+
+    /**
+     * @return Returns the filteredList.
+     */
+    @Override
+    public FilteredList<Todo> getFilteredList() {
+        return filteredList;
+    }
+
+    private boolean filter(Todo t) {
+
+        switch (this.filterId) {
+            case Done:
+                return t.done();
+            case Undone:
+                return !t.done();
+            default:
+                return true;
+        }
+    }
+
+    @Override
+    public void setFilterId(final Object id) {
+        filterId = (FilterKind) id;
+    }
+
+    @Override
+    protected void showView() {
+        super.showView();
+
+        view().getTable().widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> obs, Number oldValue, Number newValue) {
+                final Pane header = (Pane) view().getTable().lookup("TableHeaderRow");
+                if (header.isVisible()) {
+    // ...
+```
+
+#[[
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.todos.ui.content.list;
+
+import org.jrebirth.af.api.annotation.Link;
+import org.jrebirth.af.api.annotation.PriorityLevel;
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.annotation.OnWave;
+import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.showcase.todos.bean.Todo;
+import org.jrebirth.af.showcase.todos.service.TodoService;
+import org.jrebirth.af.showcase.todos.ui.WWaves;
+import org.jrebirth.af.showcase.todos.ui.content.ContentModel;
+import org.jrebirth.af.showcase.todos.ui.status.FilterKind;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.FilteredList;
+import javafx.scene.layout.Pane;
+
+@Register(value = ContentModel.class, priority = PriorityLevel.Lower)
+public class ListContentModel extends DefaultModel<ListContentModel, ListContentView> implements ContentModel {
+
+    @Link
+    private TodoService todoService;
+
+    private FilterKind filterId = FilterKind.All;
+
+    private FilteredList<Todo> filteredList;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initModel() {
+        super.initModel();
+
+    }
+
+    @Override
+    protected void bind() {
+        super.bind();
+
+        this.filteredList = new FilteredList<>(this.todoService.getTodoList().pTodo(), this::filter);
+        view().getTable().setItems(this.filteredList);
+    }
+
+    /**
+     * @return Returns the filteredList.
+     */
+    @Override
+    public FilteredList<Todo> getFilteredList() {
+        return this.filteredList;
+    }
+
+    private boolean filter(final Todo t) {
+
+        switch (this.filterId) {
+            case Done:
+                return t.done();
+            case Undone:
+                return !t.done();
+            default:
+                return true;
+        }
+    }
+
+    @Override
+    public void setFilterId(final Object id) {
+        this.filterId = (FilterKind) id;
+    }
+
+    @Override
+    protected void showView() {
+        super.showView();
+
+        view().getTable().widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(final ObservableValue<? extends Number> obs, final Number oldValue, final Number newValue) {
+                final Pane header = (Pane) view().getTable().lookup("TableHeaderRow");
+                if (header.isVisible()) {
+    // ...
+```
+
+#[[
+
+When `MainModel` declares `InnerComponent<ContentModel>`, the framework resolves the implementation with the **highest** priority — `TableContentModel` in this case.
+To switch to the list view, simply change the priority levels.
+This mechanism allows you to swap UI implementations without modifying any consumer code.
+
+Both implementations share the same pattern:
+
+1. `@Link` the `TodoService` to access data
+2. In `bind()`, create a `FilteredList` wrapping the service's observable list and set it on the view's table/list
+3. Listen for `UPDATE_STATUS` waves to refresh the filter predicate
+
+
+## Service Layer — TodoService
+
+The service layer follows the JRebirth interface/implementation split.
+The interface declares wave contracts; the implementation does the work.
+
+### The interface
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.todos.service;
+
+import static org.jrebirth.af.core.wave.WBuilder.waveType;
+
+import org.jrebirth.af.api.module.RegistrationPoint;
+import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.contract.WaveItem;
+import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.wave.JRebirthItems;
+import org.jrebirth.af.core.wave.WaveItemBase;
+import org.jrebirth.af.showcase.todos.bean.Todo;
+import org.jrebirth.af.showcase.todos.bean.TodoList;
+
+import javafx.beans.property.StringProperty;
+
+/**
+ * The interface <strong>TodoService</strong>.
+ *
+ * @author Sébastien Bordes
+ */
+@RegistrationPoint
+public interface TodoService extends Service {
+
+    String ADDED = "ADDED";
+
+    String REMOVED = "REMOVED";
+
+    WaveItem<StringProperty> TODO_STRING = new WaveItemBase<StringProperty>() {
+    };
+
+    WaveItem<Todo> TODO = new WaveItemBase<Todo>() {
+    };
+
+    // WaveItem<List<TodoList>> RESULT = new WaveItemBase<List<TodoList>>() {
+    // };
+
+    WaveType DO_ADD = waveType("ADD")
+                                     .items(TODO_STRING)
+                                     .returnItem(JRebirthItems.booleanItem)
+                                     .returnAction(ADDED);
+
+    WaveType DO_REMOVE = waveType("REMOVE")
+                                           .items(TODO)
+                                           .returnItem(JRebirthItems.booleanItem)
+                                           .returnAction(REMOVED);
+
+    boolean doAdd(final StringProperty text, final Wave wave);
+
+    boolean doRemove(final Todo todo, final Wave wave);
+
+    TodoList getTodoList();
+}
+```
+
+#[[
+
+Key elements:
+
+- **`@RegistrationPoint`** marks this as the injection target — consumers `@Link` the interface, not the implementation.
+- **`WaveItem`** declarations (`TODO_STRING`, `TODO`) define the typed payload slots carried by waves.
+- **`WaveType`** declarations (`DO_ADD`, `DO_REMOVE`) define the wave contracts, including which items they carry and what they return.
+- The `returnAction(ADDED)` clause means that after `doAdd` completes, JRebirth automatically fires a return wave with action name `"ADDED"`, carrying the boolean result.
+
+### The implementation
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.todos.service;
+
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.service.DefaultService;
+import org.jrebirth.af.showcase.todos.bean.Todo;
+import org.jrebirth.af.showcase.todos.bean.TodoList;
+
+import javafx.beans.property.StringProperty;
+
+@Register(value = TodoService.class)
+public class TodoServiceImpl extends DefaultService implements TodoService {
+
+    private final TodoList todoList = new TodoList();
+
+    /**
+     * @return Returns the todoList.
+     */
+    @Override
+    public TodoList getTodoList() {
+        return this.todoList;
+    }
+
+    @Override
+    public boolean doAdd(final StringProperty text, final Wave wave) {
+
+        this.todoList.addTodo(Todo.of().text(text.getValue()).done(false));
+
+        return true;
+    }
+
+    @Override
+    public boolean doRemove(final Todo todo, final Wave wave) {
+
+        this.todoList.removeTodo(todo);
+
+        return true;
+    }
+
+}
+```
+
+#[[
+
+`@Register(value = TodoService.class)` tells the framework to register this class under the `TodoService` interface.
+Any component that does `@Link private TodoService todoService;` will receive this implementation.
+
+The `doAdd` and `doRemove` methods follow the JRebirth naming convention: a `WaveType` named `DO_ADD` maps to a method `doAdd`.
+The framework dispatches incoming waves to the matching method automatically.
+
+
+## Wave Communication — WWaves
+
+Application-level wave types are gathered in a `WWaves` interface.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.todos.ui;
+
+import org.jrebirth.af.api.annotation.Preload;
+import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.wave.WBuilder;
+
+@Preload
+public interface WWaves {
+
+    String UPDATE_STATUS = "UPDATE_STATUS";
+    WaveType UPDATE_STATUS_WT = WBuilder.waveType(UPDATE_STATUS);
+}
+```
+
+#[[
+
+The `@Preload` annotation tells JRebirth to initialize this interface's static fields at startup, before any model is created.
+This avoids class-loading race conditions.
+
+`UPDATE_STATUS_WT` is a simple notification wave with no payload.
+When the status bar filter changes, it sends this wave; both `TableContentModel` and `ListContentModel` listen for it via `@OnWave(WWaves.UPDATE_STATUS)` and refresh their filtered views.
+
+### Wave flow in action
+
+Here is the typical lifecycle of an "add todo" operation:
+
+1. User types text in the header and presses Enter.
+2. `HeaderController` captures the key event and delegates to `HeaderModel`.
+3. `HeaderModel` calls `todoService.doAdd(text, wave)` — but since `doAdd` is a wave-type method, it actually sends a `DO_ADD` wave.
+4. `TodoServiceImpl.doAdd()` executes on the JRebirth Thread Pool, adds the `Todo` to the `TodoList`.
+5. The `TodoList` (generated from Ecore) is an observable list — the `TableView` / list view updates automatically.
+6. The return wave `ADDED` fires, and any listener can react.
+
+
+## Resource Declarations
+
+JRebirth provides enum-based resource management for fonts, images, and stylesheets.
+Resources are resolved from the classpath using a convention-over-configuration approach.
+
+### Fonts
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.todos.resource;
+
+import org.jrebirth.af.api.resource.font.FontExtension;
+import org.jrebirth.af.core.resource.font.FontEnum;
+
+/**
+ * The TodosFonts enumeration providing all fonts.
+ */
+public enum TodosFonts implements FontEnum {
+
+    // @formatter:off
+
+    /** The font used to display delete icon. */
+    DELETE {{ real(TodosFontNames.fontello, 16.0, FontExtension.TTF); }};
+
+}
+```
+
+#[[
+
+### Images
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.todos.resource;
+
+import org.jrebirth.af.api.resource.image.ImageExtension;
+import org.jrebirth.af.core.resource.image.ImageEnum;
+
+/**
+ * The MTImages enumeration providing all images.
+ */
+public enum TodosImages implements ImageEnum {
+
+    // @formatter:off
+
+    /** The Header logo. */
+    HEADER_LOGO     {{ rel("Todos", ImageExtension.PNG); }};
+
+}
+```
+
+#[[
+
+### Stylesheets
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.todos.resource;
+
+import static org.jrebirth.af.core.resource.Resources.create;
+
+import org.jrebirth.af.api.resource.style.StyleSheetItem;
+import org.jrebirth.af.core.resource.style.StyleSheet;
+
+public interface TodosStyles {
+
+    /** The application main style sheet. */
+    StyleSheetItem MAIN = create(new StyleSheet("Main"));
+
+}
+```
+
+#[[
+
+Each resource type follows the same pattern:
+
+- Declare an `enum` (or `interface` for stylesheets) that implements the corresponding JRebirth resource type (`FontEnum`, `ImageEnum`, `StyleSheetItem`).
+- Use the initializer block to specify the resource name, extension, and any parameters (font size, image path, etc.).
+- Reference the resource in code via the enum constant — e.g., `TodosImages.HEADER_LOGO.get()` returns a JavaFX `Image`.
+
+JRebirth handles classpath resolution, caching, and JPMS module boundaries transparently.
+
+
+## Ecore Code Generation
+
+The `Todo` and `TodoList` beans are not written by hand — they are generated from an Ecore model.
+
+The `Todos.ecore` file defines two classes:
+
+- **`Todo`** with `text` (String) and `done` (boolean) attributes
+- **`TodoList`** with a multi-valued `todo` reference to `Todo`
+
+The `jrebirth-maven-plugin` transforms this Ecore model into JavaFX beans with full property support:
+each attribute becomes a JavaFX `Property` (e.g., `textProperty()`, `doneProperty()`),
+and list references become `ObservableList` fields (e.g., `pTodo()` returns an `ObservableList<Todo>`).
+
+This is why the `FilteredList` in the content models can wrap `todoService.getTodoList().pTodo()` directly — it's a live observable list.
+
+
+## Key Patterns Summary
+
+| Pattern | Where | Why |
+|---------|-------|-----|
+| Inner components (`@Link InnerComponent<T>`) | `MainModel` | Compose UI from independent, lifecycle-managed sub-models |
+| Interface + `@Register` | `TodoService` / `TodoServiceImpl` | Decouple contract from implementation; enable DI |
+| Multiple implementations via priority | `TableContentModel` / `ListContentModel` | Swap UI implementations without changing consumers |
+| Wave contracts (`WaveType`, `WaveItem`) | `TodoService`, `WWaves` | Type-safe, decoupled asynchronous messaging |
+| `@OnWave` annotation | `ListContentModel.updateStatus()` | Declarative wave listening on model methods |
+| Resource enums | `TodosFonts`, `TodosImages`, `TodosStyles` | Classpath-resolved, cached, JPMS-aware resources |
+| Ecore → JavaFX beans | `Todos.ecore` → `Todo`, `TodoList` | Generated observable beans with property support |
+
+]]#

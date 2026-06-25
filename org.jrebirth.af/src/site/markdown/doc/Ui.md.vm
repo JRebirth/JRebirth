@@ -1,4 +1,4 @@
-<head>
+﻿<head>
 <![CDATA[
 	<title> User Interface</title>
 	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />]]>
@@ -16,6 +16,18 @@
         
 UI Roles
 ===========
+
+## In 30 seconds
+
+**Model** owns UI state, waves, and bindings. **View** builds JavaFX nodes. **Controller** wires events (often via `linkCommand`). Extend `DefaultModel<Model, View>` — the framework creates View and Controller from generics. Put logic in the Model, nodes in the View, clicks in the Controller.
+
+## How to use
+
+1. Create `MyModel extends DefaultModel<MyModel, MyView>` and implement `initModel()`, `bind()`, optional `processWave`.
+2. Create `MyView extends AbstractView<MyModel, RootPane, MyController>` and build nodes in `initView()` / `bootView()`.
+3. Create `MyController extends AbstractController<MyModel, MyView>` and attach handlers with `linkCommand` / `linkWave`.
+4. Register the Model key when showing it: `getModel(MyModel.class)` or `ShowModelCommand` with a parent placeholder.
+5. Keep business rules and service calls in the Model; avoid heavy logic in View or Controller.
 
 The User Interface layer is composed by three main parts :
 
@@ -42,6 +54,29 @@ Models
 Model are JRebirth Components, they are retrievable from UiFacade and they can be dynamically attached to any placeholder.
 They are able to listen Wave and to communicate with other components.
 
+
+```java
+public final class CounterModel extends DefaultModel<CounterModel, CounterView> {
+
+    private final IntegerProperty count = new SimpleIntegerProperty(0);
+
+    @Override
+    protected void initModel() {
+        listen(CounterWaves.DO_INCREMENT);
+    }
+
+    public void doIncrement(final Wave wave) {
+        count.set(count.get() + 1);
+    }
+
+    public IntegerProperty countProperty() { return count; }
+}
+```
+
+- Model holds state (`countProperty`) and wave handlers — not the View.
+- `listen(...)` in `initModel()` — registers for incoming waves on JIT, handlers run on JAT.
+
+
 Models store business objects with custom method that allow to bound an object to a model and then to use its internal properties to bound them to UI widget.
 
 Models' aim is to manage UI lifecycle and communication, you can place into some part of your business logic. 
@@ -51,6 +86,30 @@ Views
 
 Views are automatically created by Models according to generic type used, their main objectives is to build and wrap the graphical root Node.
 
+
+```java
+public final class CounterView extends AbstractView<CounterModel, BorderPane, CounterController> {
+
+    private Label counterLabel;
+
+    public CounterView(final CounterModel model) throws CoreException {
+        super(model);
+    }
+
+    @Override
+    protected void initView() {
+        counterLabel = new Label();
+        node().setCenter(counterLabel);
+    }
+
+    Label counterLabel() { return counterLabel; }
+}
+```
+
+- View builds nodes only — expose package getters (`counterLabel()`) for Model bindings.
+- `node()` — typed root pane (`BorderPane` here) created from the generic type parameter.
+
+
 You can manage Model-View interaction in both direction: Model-to-View by adding some 'package' Node getters into the view (preferred way for binding declarations), or View-to-Model by adding some 'package' methods into Model (only for some call).
 
 
@@ -58,6 +117,25 @@ Controllers
 ---------------
 
 Controllers are dedicated to manage event handling by providing several ways to facilitate developers' life. They are automatically created by the view according to generic type used.
+
+
+```java
+public final class CounterController extends DefaultController<CounterModel, CounterView> {
+
+    public CounterController(final CounterView view) throws CoreException {
+        super(view);
+    }
+
+    @Override
+    protected void initEventHandlers() throws CoreException {
+        linkCommand(view().incrementButton(), MouseEvent.MOUSE_CLICKED, IncrementCommand.class);
+    }
+}
+```
+
+- Controller wires UI events — delegates actions to Commands/Services/Waves via `link*` methods.
+- No business rules here; call `model()` only for simple coordination, not heavy logic.
+
 
 Event Handler can be attached from View-to-Controller, or from Controller-to-View (preferred way, to centralize event handlers declarations).
 
@@ -97,7 +175,77 @@ The goal of Models is to retrieve data from other layers, and to define Business
 
 The Model automatically build its attached view (except SimpleModel).
 
-<!-- MACRO{include|source=sample/src/main/java/org/jrebirth/af/sample/ui/SampleModel.java|snippet=aj:SampleModel|highlight-theme=eclipse} -->
+
+```java
+@Override
+protected void bind() {
+    view().counterLabel().textProperty().bind(countProperty().asString());
+}
+```
+
+- `bind()` — JavaFX property bindings between Model state and View widgets.
+- Call `view().counterLabel()` — package-visible getter on the View.
+
+
+```java
+package org.jrebirth.af.sample.ui;
+
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.ui.DefaultModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * The class <strong>SampleModel</strong>.
+ *
+ * @author
+ */
+public final class SampleModel extends DefaultModel<SampleModel, SampleView> {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SampleModel.class);
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initModel() {
+        LOGGER.debug("Init Sample Model");
+        // Put the code to initialize your model here
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initInnerComponents() {
+        // Put the code to initialize inner models here (if any)
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void bind() {
+        // Put the code to manage model object binding (if any)
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void processWave(final Wave wave) {
+        // Process a wave action, you must listen the wave type before
+    }
+
+}
+```
+
+- `DefaultModel<SampleModel, SampleView>` — self-type + View type; framework wires View/Controller from generics.
+- `initModel()` — register `listen(...)`, initial state, non-UI setup.
+- `initInnerComponents()` — attach child Models (tabs, panels).
+- `bind()` — JavaFX property bindings between model state and `view()` widgets.
+- `processWave(Wave)` — fallback handler when you prefer one method over many `doXxx` methods.
 
 
 Views Overview
@@ -119,23 +267,922 @@ The View's initialization code perform several operations:
 
 If the construction fails, mainly due to Controller error, a custom error Node is created in order to display the stack trace of the exception.			
 
-<!-- MACRO{include|source=sample/src/main/java/org/jrebirth/af/sample/ui/SampleView.java} -->
+
+```java
+package org.jrebirth.af.sample.ui;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.ui.annotation.OnMouse;
+import org.jrebirth.af.api.ui.annotation.type.Mouse;
+import org.jrebirth.af.core.ui.AbstractView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * The class <strong>SampleView</strong>.
+ *
+ * @author
+ */
+public final class SampleView extends AbstractView<SampleModel, BorderPane, SampleController> {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SampleView.class);
+
+    /** Button used to trigger the SampleCommand. */
+    @OnMouse(Mouse.Clicked)
+    public Button defaultCommand;
+
+    /** Button used to trigger the SampleUICommand. */
+    private Button uiCommand;
+
+    /** Button used to trigger the SamplePoolCommand. */
+    private Button pooledCommand;
+
+    /**
+     * Default Constructor.
+     *
+     * @param model the controls view model
+     *
+     * @throws CoreException if build fails
+     */
+    public SampleView(final SampleModel model) throws CoreException {
+        super(model);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initView() {
+
+        this.defaultCommand = new Button("Trigger a default Command into JIT");
+        this.uiCommand = new Button("Trigger an UI Command into JAT");
+        this.pooledCommand = new Button("Trigger a pooled Command into JTP");
+        
+        node().setCenter(new Label("JRebirth Sample"));
+
+        final FlowPane fp = new FlowPane();
+        fp.getChildren().addAll(this.defaultCommand,
+                                this.uiCommand,
+                                this.pooledCommand);
+        node().setBottom(fp);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void bootView() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void start() {
+        LOGGER.debug("Start the Sample View");
+        // Custom code to process when the view is displayed the first time
+    }
+    // ...
+```
+
+- `AbstractView<SampleModel, BorderPane, SampleController>` — Model type, root pane type, Controller type.
+- `initView()` — construct widgets and add them to `node()` (the root `BorderPane`).
+- `@OnMouse(Mouse.Clicked)` — declarative wiring; Controller can also use `linkCommand`.
+- `node().setCenter(...)` — layout API on the typed root node returned by `node()`.
+
 <!--|snippet=aj:..SampleView-->
 
 
 Annotation Event Handler
 --------------------------
-		
+
+Views can use annotations on `Node` fields to automatically wire JavaFX event handlers to the Controller.
+This removes the need for boilerplate `addEventHandler` calls.
+
+The available annotations include `@OnMouse`, `@OnKey`, `@OnAction`, `@OnSwipe`, `@OnDrag`, `@OnRotate`, and `@OnTouch`.
+Each annotation specifies the event sub-type to listen for.
+
+For example, annotating a `Button` field with `@OnMouse(Mouse.Clicked)`:
+
+```java
+@OnMouse(Mouse.Clicked)
+public Button defaultCommand;
+```
+
+- Field annotation — framework wires the node to a Controller handler at View init.
+- `@OnMouse(Mouse.Clicked)` — fires on single click; see `@OnKey`, `@OnAction`, etc.
+
+
+When the View is initialized, the framework scans all annotated fields, resolves the matching Controller handler method, and attaches the JavaFX event handler automatically.
+
+The Controller method name is derived by convention: `on` + *fieldName* + *EventType*.
+For instance, a field named `myButton` with `@OnMouse(Mouse.Clicked)` will call `controller().onMyButtonMouseClicked(MouseEvent)`.
+
+If no field-specific name is needed, the annotation uses a default handler. In the example above with `defaultCommand`, the handler is `onMouseClicked(MouseEvent)` in the Controller.
+
+Here is the annotation used in the sample View:
+
+
+```java
+package org.jrebirth.af.sample.ui;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.ui.annotation.OnMouse;
+import org.jrebirth.af.api.ui.annotation.type.Mouse;
+import org.jrebirth.af.core.ui.AbstractView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * The class <strong>SampleView</strong>.
+ *
+ * @author
+ */
+public final class SampleView extends AbstractView<SampleModel, BorderPane, SampleController> {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SampleView.class);
+
+    /** Button used to trigger the SampleCommand. */
+    @OnMouse(Mouse.Clicked)
+    public Button defaultCommand;
+
+    /** Button used to trigger the SampleUICommand. */
+    private Button uiCommand;
+
+    /** Button used to trigger the SamplePoolCommand. */
+    private Button pooledCommand;
+
+    /**
+     * Default Constructor.
+     *
+     * @param model the controls view model
+     *
+     * @throws CoreException if build fails
+     */
+    public SampleView(final SampleModel model) throws CoreException {
+        super(model);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initView() {
+
+        this.defaultCommand = new Button("Trigger a default Command into JIT");
+        this.uiCommand = new Button("Trigger an UI Command into JAT");
+        this.pooledCommand = new Button("Trigger a pooled Command into JTP");
+        
+        node().setCenter(new Label("JRebirth Sample"));
+
+        final FlowPane fp = new FlowPane();
+        fp.getChildren().addAll(this.defaultCommand,
+                                this.uiCommand,
+                                this.pooledCommand);
+        node().setBottom(fp);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void bootView() {
+        // Nothing to do yet
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void start() {
+        LOGGER.debug("Start the Sample View");
+        // Custom code to process when the view is displayed the first time
+    }
+    // ...
+```
+
+And the corresponding handler in the Controller:
+
+
+```java
+    void onMouseClicked(final MouseEvent event) {
+
+        LOGGER.debug("MouseClicked => Call Sample Command");
+
+        // Manage Default Command Button
+        model().getCommand(SampleCommand.class).run();
+
+    }
+```
+
+- `onMouseClicked` — default handler for `@OnMouse(Mouse.Clicked)` on `defaultCommand`.
+- `model().getCommand(...).run()` — Controller delegates to Command via the Model facade.
 
 
 Controllers
 =============
 
-<!-- MACRO{include|source=sample/src/main/java/org/jrebirth/af/sample/ui/SampleController.java} -->
-<!-- |snippet=aj:public final class SampleController -->
-	
+Controllers are dedicated to managing event handling for a View. They centralize all user-interaction wiring and delegate business actions to the Model (or to Commands and Services through the Model).
+
+A Controller is automatically created by the View, resolved through the generic type declared in the View class header.
+
+
+```java
+public interface Controller<M extends Model, V extends View<M, ?, ?>> {
+
+    /**
+     * @return Returns the view.
+     */
+    V view();
+
+    /**
+     * @return Returns the root node.
+     */
+    Node node();
+
+    /**
+     * @return Returns the model.
+     */
+    M model();
+
+    /**
+     * Activate the controller by initializing all event handler.
+     *
+     * Must be called after children initialization.
+     *
+     * @throws CoreException if activation fails
+     */
+    void activate() throws CoreException;
+
+}
+```
+
+
+- `view()` — access the typed View to read nodes and package getters.
+- `model()` — access the Model for commands, services, and waves.
+- `activate()` — called after View build; runs `initEventAdapters()` then `initEventHandlers()`.
+
+
+Controller Lifecycle
+--------------------------
+
+The Controller lifecycle follows these steps:
+
+1. **Construction** — The View instantiates the Controller, passing itself as constructor argument.
+2. **initEventAdapters()** — Called to set up adapter-based event wiring (link methods).
+3. **initEventHandlers()** — Called to set up handler-based or direct event wiring.
+4. **activate()** — Called after the View's nodes are fully built and ready. This is the entry point where all event handler declarations take effect.
+
+The `activate()` method orchestrates the two initialization phases and must be called after children nodes are created.
+
+
+Event Handler Wiring
+--------------------------
+
+The preferred approach is **Controller-to-View** wiring: the Controller reads View nodes through package-visible getters and attaches event handlers declaratively. JRebirth provides several `link*` methods for this purpose.
+
+### linkCommand
+
+`linkCommand` wires a JavaFX event on a node directly to a Command class. When the event fires, the Command is called via the Model:
+
+
+```java
+package org.jrebirth.af.core.ui;
+
+import java.util.Optional;
+import java.util.function.Supplier;
+
+import javafx.event.Event;
+import javafx.scene.Node;
+import javafx.util.Callback;
+
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.command.CommandBean;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.View;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveItem;
+import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
+import org.jrebirth.af.core.ui.adapter.EventAdapter;
+import org.jrebirth.af.core.ui.handler.AbstractNamedEventHandler;
+import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.wave.JRebirthWaves;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The abstract class <strong>AbstractController</strong>.
+ *
+ * Base implementation of the controller.
+ *
+ * @author Sébastien Bordes
+ *
+ * @param <M> the class type of the model of the view controlled
+ * @param <V> the class type of the view controlled
+ */
+public abstract class AbstractController<M extends Model, V extends View<M, ?, ?>> extends AbstractBaseController<M, V> {
+
+    /**
+     * Default Constructor.
+     *
+     * @param view the controlled view
+     *
+     * @throws CoreException if an error occurred while creating event handlers
+     */
+    public AbstractController(final V view) throws CoreException {
+        super(view);
+    }
+
+    /**
+     * Link the creation of a wave to an event triggered on a node.
+     *
+     * This method doesn't use any callback function to trigger the launch the wave.
+     *
+     * @param node the node to follow
+     * @param eventType the type of the event to follow
+     * @param waveType the type of the wave to create
+     * @param waveData additional Wave data
+     *
+     * @param <E> The type of JavaFX Event to track
+     */
+    protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveType waveType,
+            final WaveData<?>... waveData) {
+
+        linkWave(node, eventType, waveType, null, waveData);
+    }
+
+    /**
+     * Link the creation of a wave to an event triggered on a node.
+     *
+     * @param node the node to follow
+     * @param eventType the type of the event to follow
+     * @param waveType the type of the wave to create
+     * @param callback the call back to use to check if the wave can be sent
+     * @param waveData additional Wave data
+     *
+     * @param <E> The type of JavaFX Event to track
+     */
+    // ...
+```
+
+Example from the Analyzer showcase — a mouse click on the *Open* button triggers `OpenEventTrackerFileCommand`:
+
+
+```java
+package org.jrebirth.af.showcase.analyzer.ui.controls;
+
+import javafx.scene.input.MouseEvent;
+
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.core.ui.DefaultController;
+import org.jrebirth.af.core.ui.EventFilter;
+import org.jrebirth.af.showcase.analyzer.command.OpenEventTrackerFileCommand;
+import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
+
+/**
+ * The class <strong>ControlsController</strong>.
+ *
+ * @author Sébastien Bordes
+ */
+public final class ControlsController extends DefaultController<ControlsModel, ControlsView> implements EventFilter {
+
+    /* implements MouseAdapter */
+
+    /**
+     * Default Constructor.
+     *
+     * @param view the view to control
+     *
+     * @throws CoreException if an error occurred while creating event handlers
+     */
+    public ControlsController(final ControlsView view) throws CoreException {
+        super(view);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initEventHandlers() throws CoreException {
+
+        linkCommand(view().getOpenButton(), MouseEvent.MOUSE_CLICKED, OpenEventTrackerFileCommand.class, CHECK_MOUSE_SINGLE_CLICK);
+
+        linkWave(view().getUnloadButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_UNLOAD);
+        linkWave(view().getPlayPauseButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_PLAY);
+        linkWave(view().getBackwardButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_PREVIOUS);
+        linkWave(view().getForwardButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_NEXT);
+        linkWave(view().getStopButton(), MouseEvent.MOUSE_CLICKED, EditorWaves.DO_STOP);
+
+        // Register mouse clicked handler
+        // getView().getOpenButton().setOnMouseClicked(getMouseHandler());
+        // getView().getUnloadButton().setOnMouseClicked(getMouseHandler());
+        // getView().getPlayPauseButton().setOnMouseClicked(getMouseHandler());
+        // getView().getForwardButton().setOnMouseClicked(getMouseHandler());
+        // getView().getBackwardButton().setOnMouseClicked(getMouseHandler());
+        // getView().getStopButton().setOnMouseClicked(getMouseHandler());
+    }
+
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public void mouseClicked(final MouseEvent mouseEvent) {
+    // if (mouseEvent.getSource().equals(getView().getOpenButton())) {
+    //
+    // // Call the command synchronously
+    // getModel().callCommand(OpenEventTrackerFileCommand.class);
+    //
+    // } else if (mouseEvent.getSource().equals(getView().getUnloadButton())) {
+    //
+    // getModel().send(EditorWaves.DO_UNLOAD);
+    //
+    // } else if (mouseEvent.getSource().equals(getView().getPlayPauseButton())) {
+    //
+    // getModel().send(EditorWaves.DO_PLAY);
+    //
+    // } else if (mouseEvent.getSource().equals(getView().getForwardButton())) {
+    //
+    // getModel().send(EditorWaves.DO_NEXT);
+    //
+    // } else if (mouseEvent.getSource().equals(getView().getBackwardButton())) {
+    //
+    // getModel().send(EditorWaves.DO_PREVIOUS);
+    //
+    // } else if (mouseEvent.getSource().equals(getView().getStopButton())) {
+    // ...
+```
+
+### linkWave
+
+`linkWave` wires a JavaFX event on a node to send a Wave with a given WaveType. Any component that listens for that WaveType will receive the Wave:
+
+
+```java
+package org.jrebirth.af.core.ui;
+
+import java.util.Optional;
+import java.util.function.Supplier;
+
+import javafx.event.Event;
+import javafx.scene.Node;
+import javafx.util.Callback;
+
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.command.CommandBean;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.exception.CoreRuntimeException;
+import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.ui.View;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveItem;
+import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
+import org.jrebirth.af.core.ui.adapter.EventAdapter;
+import org.jrebirth.af.core.ui.handler.AbstractNamedEventHandler;
+import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.wave.JRebirthWaves;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The abstract class <strong>AbstractController</strong>.
+ *
+ * Base implementation of the controller.
+ *
+ * @author Sébastien Bordes
+ *
+ * @param <M> the class type of the model of the view controlled
+ * @param <V> the class type of the view controlled
+ */
+public abstract class AbstractController<M extends Model, V extends View<M, ?, ?>> extends AbstractBaseController<M, V> {
+
+    /**
+     * Default Constructor.
+     *
+     * @param view the controlled view
+     *
+     * @throws CoreException if an error occurred while creating event handlers
+     */
+    public AbstractController(final V view) throws CoreException {
+        super(view);
+    }
+
+    /**
+     * Link the creation of a wave to an event triggered on a node.
+     *
+     * This method doesn't use any callback function to trigger the launch the wave.
+     *
+     * @param node the node to follow
+     * @param eventType the type of the event to follow
+     * @param waveType the type of the wave to create
+     * @param waveData additional Wave data
+     *
+     * @param <E> The type of JavaFX Event to track
+     */
+    protected <E extends Event> void linkWave(final Node node, final javafx.event.EventType<E> eventType, final WaveType waveType,
+            final WaveData<?>... waveData) {
+
+        linkWave(node, eventType, waveType, null, waveData);
+    }
+
+    /**
+     * Link the creation of a wave to an event triggered on a node.
+     *
+     * @param node the node to follow
+     * @param eventType the type of the event to follow
+     * @param waveType the type of the wave to create
+     * @param callback the call back to use to check if the wave can be sent
+     * @param waveData additional Wave data
+     *
+     * @param <E> The type of JavaFX Event to track
+     */
+    // ...
+```
+
+### linkUi
+
+`linkUi` wires a JavaFX event to attach another Model's node into a placeholder in the current View:
+
+```java
+linkUi(view().getContentPane(), MouseEvent.MOUSE_CLICKED, DetailModel.class,
+    WBuilder.waveData(JRebirthWaves.ATTACH_UI_NODE_PLACEHOLDER, view().getDetailHolder()));
+```
+
+- `linkUi(node, event, ModelClass, waveData...)` — on event, attaches target Model's node into the placeholder.
+- Uses built-in **Attach Ui** wave group; always processed on JAT.
+
+
+### linkService
+
+`linkService` wires a JavaFX event to call a Service method:
+
+```java
+linkService(view().getRefreshButton(), MouseEvent.MOUSE_CLICKED,
+    DataService.class, DataService.DO_LOAD_DATA);
+```
+
+- `linkService(node, event, ServiceClass, WaveType)` — fires `returnData` when the event occurs.
+- Equivalent to calling the service from the Model, but wired declaratively from the Controller.
+
+
+All `link*` methods accept an optional `Callback<E, Boolean>` parameter that acts as a gate — the action is performed only when the callback returns `true`.
+
+
 Adapters & Handlers
 --------------------------
+
+Controllers can implement **adapter interfaces** that provide a full set of event-handling methods for a given event family. Each adapter interface has a corresponding **handler** class that delegates events to the adapter methods.
+
+Available adapter / handler pairs:
+
+| Adapter Interface | Handler Class | Event Family |
+|-------------------|---------------|--------------|
+| `MouseAdapter`    | `MouseHandler`    | Mouse events (clicked, pressed, released, moved, dragged…) |
+| `KeyAdapter`      | `KeyHandler`      | Key events (pressed, released, typed) |
+| `ActionAdapter`   | `ActionHandler`   | ActionEvent |
+| `DragAdapter`     | `DragHandler`     | Drag events (detected, over, dropped, entered, exited…) |
+| `RotateAdapter`   | `RotateHandler`   | Rotate gesture events |
+| `SwipeAdapter`    | `SwipeHandler`    | Swipe gesture events |
+| `TouchAdapter`    | `TouchHandler`    | Touch events |
+
+To use an adapter, have the Controller implement the interface (or extend a `Default*Adapter`) and override only the methods you need. Then register the adapter with `addAdapter()`:
+
+
+```java
+package org.jrebirth.af.sample.ui;
+
+import javafx.scene.input.MouseEvent;
+
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.core.ui.AbstractController;
+import org.jrebirth.af.core.ui.adapter.DefaultMouseAdapter;
+import org.jrebirth.af.core.wave.WBuilder;
+import org.jrebirth.af.sample.command.SampleCommand;
+import org.jrebirth.af.sample.command.SamplePoolCommand;
+import org.jrebirth.af.sample.command.SampleUICommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * The class <strong>SampleController</strong>.
+ *
+ * @author
+ */
+public final class SampleController extends AbstractController<SampleModel, SampleView> {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SampleController.class);
+
+    /**
+     * Default Constructor.
+     *
+     * @param view the view to control
+     *
+     * @throws CoreException if an error occurred while creating event handlers
+     */
+    public SampleController(final SampleView view) throws CoreException {
+        super(view);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initEventAdapters() throws CoreException {
+
+        // Manage Ui Command Button
+        linkCommand(view().getUiCommand(), MouseEvent.MOUSE_CLICKED, SampleUICommand.class);
+
+        // Use the inner class
+        addAdapter(new SampleMouseAdapter());
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initEventHandlers() throws CoreException {
+        // Listen events
+
+        // Manage Pooled Command Button
+        view().getPooledCommand().setOnMouseClicked(getHandler(MouseEvent.MOUSE_CLICKED));
+    }
+
+    /**
+     * Manage Mouse click of widget that have annotation.
+     *
+     * @param event the mouse event
+     */
+    void onMouseClicked(final MouseEvent event) {
+
+        LOGGER.debug("MouseClicked => Call Sample Command");
+
+        // Manage Default Command Button
+        model().getCommand(SampleCommand.class).run();
+
+    }
+
+    /**
+     * The class <strong>SampleMouseAdapter</strong>.
+     */
+    private class SampleMouseAdapter extends DefaultMouseAdapter<SampleController> {
+
+        @Override
+    // ...
+```
+
+The inner class `SampleMouseAdapter` demonstrates a custom adapter that overrides `mouseClicked`:
+
+
+```java
+    private class SampleMouseAdapter extends DefaultMouseAdapter<SampleController> {
+
+        @Override
+        public void mouseClicked(final MouseEvent mouseEvent) {
+            super.mouseClicked(mouseEvent);
+
+            LOGGER.debug("MouseClicked => Call Sample Pool Command");
+
+            model().sendWave(WBuilder.callCommand(SamplePoolCommand.class));
+        }
+
+    }
+```
+
+The handler is then attached to the node. For example, to get the MouseHandler for `MOUSE_CLICKED`:
+
+```java
+view().getPooledCommand().setOnMouseClicked(getHandler(MouseEvent.MOUSE_CLICKED));
+```
+
+- `getHandler(EventType)` — returns the shared handler that delegates to registered adapters.
+- Attach after nodes exist — typically in `initEventHandlers()`.
+
+
+Controller Annotations
+--------------------------
+
+As an alternative to adapters or manual wiring, Controller methods can be annotated with `@OnAction`, `@OnMouse`, `@OnKey`, etc. to receive specific events by convention.
+
+This is the Controller-side counterpart to the View field annotations described earlier. The framework scans annotated methods and wires them to the appropriate View nodes.
+
+
+Direct Event Handling
+--------------------------
+
+For complete control, you can use `addHandler(node, EventType, handler)` to attach any custom JavaFX `EventHandler` to a node. This is useful for one-off event handling that doesn't fit the adapter or annotation patterns.
+
+Full sample Controller
+--------------------------
+
+Here is the complete sample Controller showing all three approaches — `linkCommand`, adapters, and direct handlers:
+
+
+```java
+public final class SampleController extends AbstractController<SampleModel, SampleView> {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SampleController.class);
+
+    /**
+     * Default Constructor.
+     *
+     * @param view the view to control
+     *
+     * @throws CoreException if an error occurred while creating event handlers
+     */
+    public SampleController(final SampleView view) throws CoreException {
+        super(view);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initEventAdapters() throws CoreException {
+
+        // Manage Ui Command Button
+        linkCommand(view().getUiCommand(), MouseEvent.MOUSE_CLICKED, SampleUICommand.class);
+
+        // Use the inner class
+        addAdapter(new SampleMouseAdapter());
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initEventHandlers() throws CoreException {
+        // Listen events
+
+        // Manage Pooled Command Button
+        view().getPooledCommand().setOnMouseClicked(getHandler(MouseEvent.MOUSE_CLICKED));
+    }
+
+    /**
+     * Manage Mouse click of widget that have annotation.
+     *
+     * @param event the mouse event
+     */
+    void onMouseClicked(final MouseEvent event) {
+
+        LOGGER.debug("MouseClicked => Call Sample Command");
+
+        // Manage Default Command Button
+        model().getCommand(SampleCommand.class).run();
+
+    }
+
+    /**
+     * The class <strong>SampleMouseAdapter</strong>.
+     */
+    private class SampleMouseAdapter extends DefaultMouseAdapter<SampleController> {
+
+        @Override
+        public void mouseClicked(final MouseEvent mouseEvent) {
+            super.mouseClicked(mouseEvent);
+
+            LOGGER.debug("MouseClicked => Call Sample Pool Command");
+
+            model().sendWave(WBuilder.callCommand(SamplePoolCommand.class));
+        }
+
+    }
+
+}
+```
+
+Another example from the Undo/Redo showcase, demonstrating `linkCommand` with additional `WaveData`:
+
+
+```java
+public final class UndoController extends DefaultController<UndoModel, UndoView> {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(UndoController.class);
+
+    /**
+     * Default Constructor.
+     *
+     * @param view the view to control
+     *
+     * @throws CoreException if an error occurred while creating event handlers
+     */
+    public UndoController(final UndoView view) throws CoreException {
+        super(view);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initEventAdapters() throws CoreException {
+
+        // Manage Ui Command Button
+        linkCommand(view().getUndoButton(), MouseEvent.MOUSE_CLICKED, UndoCommand.class, UndoModel.stackName);
+        linkCommand(view().getRedoButton(), MouseEvent.MOUSE_CLICKED, RedoCommand.class, UndoModel.stackName);
+
+        linkCommand(view().getAddCircleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WBuilder.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Circle), UndoModel.stackName);
+        linkCommand(view().getAddSquareButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WBuilder.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Square), UndoModel.stackName);
+        linkCommand(view().getAddRectangleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WBuilder.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Rectangle), UndoModel.stackName);
+
+    }
+
+}
+```
+
+
+SimpleModel
+=============
+
+When the UI is simple or generated entirely in code, creating separate View and Controller classes is unnecessary boilerplate.
+JRebirth provides `DefaultSimpleModel` (and `DefaultSimpleObjectModel<N, O>`) for this use case.
+
+With a SimpleModel:
+
+* There is no separate View or Controller class.
+* The root node is created directly according to the generic type.
+* UI initialization happens in `initSimpleView()` instead of a View's `initView()`.
+* Event handling can be done directly inside the model or with inline JavaFX handlers.
+
+This pattern is ideal for leaf UI components, tab content, generated layouts, or quick prototypes.
+
+
+```java
+public class SimpleModel extends DefaultSimpleObjectModel<Text, String> {
+
+    @Override
+    protected void initSimpleView() {
+
+        node().setText(object());
+
+    }
+
+}
+```
+
+- `DefaultSimpleObjectModel<Text, String>` — node type `Text`, bound object type `String`.
+- `initSimpleView()` — replaces separate View class; `node()` is the auto-created root.
+
+
+In this example, `DefaultSimpleObjectModel<Text, String>` creates a `Text` node automatically. The `initSimpleView()` method sets the text value from the bound object — no View or Controller needed.
+
+To use a SimpleModel, declare it with its node type:
+
+```java
+public class MySimpleModel extends DefaultSimpleModel<VBox> {
+
+    @Override
+    protected void initSimpleView() {
+        node().getChildren().addAll(
+            new Label("Hello"),
+            new Button("Click me")
+        );
+    }
+}
+```
+
+- `DefaultSimpleModel<VBox>` — root node type only; no bound business object.
+- Ideal for leaf panels, tabs, or prototypes without full MVC boilerplate.
+
+
+Or with a bound business object:
+
+```java
+public class ItemModel extends DefaultSimpleObjectModel<Label, Item> {
+
+    @Override
+    protected void initSimpleView() {
+        node().setText(object().getName());
+    }
+}
+```
+
+- `object()` — current bound `Item`; refresh UI when the model object changes.
+- Combine with `bind()` overrides on `DefaultSimpleObjectModel` for property-driven updates.
+
 
 ]]#
 

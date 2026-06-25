@@ -1,4 +1,4 @@
-= JRebirth Components
+﻿= JRebirth Components
 
 == Components definition
 
@@ -42,7 +42,90 @@ The *listen* method takinf a **Method** as parameter is used in conjuction with 
 
 Please note that if developerMode *(developerMode=true)* is activated, **Wave** contract will be checked at runtime and will throw an exception if errors are detected in order to let developers fix it as soon as possible, this detection is only performed when *listen* methods are called.
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/component/basic/Component.java|snippet=re:(listen\()\|(unlisten)} -->
+
+```java
+package org.jrebirth.af.api.component.basic;
+
+import java.lang.reflect.Method;
+
+import org.jrebirth.af.api.facade.FacadeReady;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.api.wave.checker.WaveChecker;
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveType;
+
+/**
+ * The interface <strong>EnhancedComponent</strong>.
+ *
+ * Define the contract used to manage waves.
+ *
+ * @author Sébastien Bordes
+ *
+ * @param <R> A type that implements FacadeReady
+ */
+public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveType... waveType);
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * The wave checker is used to filter the wave if the checker returns false
+     *
+     * @param waveChecker the wave checker used to forward the wave only if the checker return true
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveChecker waveChecker, final WaveType... waveType);
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * The wave checker is used to filter the wave if the checker returns false
+     *
+     * @param waveChecker the wave checker used to forward the wave only if the checker return true
+     * @param method the annotated method concerned
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveChecker waveChecker, final Method method, final WaveType... waveType);
+
+    /**
+     * Stop to listen the type of wave for the current component.
+     *
+     * @param waveTypes the type(s) to stop to listen
+     */
+    void unlisten(final WaveType... waveTypes);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param wave the wave to send
+     */
+    void sendWave(final Wave wave);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param waveType the type of wave to send
+     * @param waveBean the wave bean
+     *
+    // ...
+```
 
 You can learn more about [Wave](Wave.html) and [Notifier](Notifier.html) on their dedicated documentation pages.
 
@@ -50,42 +133,212 @@ You can learn more about [Wave](Wave.html) and [Notifier](Notifier.html) on thei
 
 Any **Component** is able to emit a new **Wave** and let the **Notifier** dispath it to registered **Component**.
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/component/basic/Component.java|snippet=re:(sendWave\()} -->
+
+```java
+    void sendWave(final Wave wave);
+```
 
 === Parenthood
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/component/basic/Component.java|snippet=re:(rootComponent\()\|(findInnerComponent)} -->
+
+```java
+package org.jrebirth.af.api.component.basic;
+
+import java.lang.reflect.Method;
+
+import org.jrebirth.af.api.facade.FacadeReady;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.api.wave.checker.WaveChecker;
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveType;
+
+/**
+ * The interface <strong>EnhancedComponent</strong>.
+ *
+ * Define the contract used to manage waves.
+ *
+ * @author Sébastien Bordes
+ *
+ * @param <R> A type that implements FacadeReady
+ */
+public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveType... waveType);
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * The wave checker is used to filter the wave if the checker returns false
+     *
+     * @param waveChecker the wave checker used to forward the wave only if the checker return true
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveChecker waveChecker, final WaveType... waveType);
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * The wave checker is used to filter the wave if the checker returns false
+     *
+     * @param waveChecker the wave checker used to forward the wave only if the checker return true
+     * @param method the annotated method concerned
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveChecker waveChecker, final Method method, final WaveType... waveType);
+
+    /**
+     * Stop to listen the type of wave for the current component.
+     *
+     * @param waveTypes the type(s) to stop to listen
+     */
+    void unlisten(final WaveType... waveTypes);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param wave the wave to send
+     */
+    void sendWave(final Wave wave);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param waveType the type of wave to send
+     * @param waveBean the wave bean
+     *
+    // ...
+```
 
 === Ready for Facade usage
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/facade/FacadeReady.java|snippet=re:(setup\()\|(release\()} -->
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/facade/FacadeReady.java|snippet=re:(localfacade\()} -->
+```java
+package org.jrebirth.af.api.facade;
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/facade/FacadeReady.java|snippet=re:(key\()} -->
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.api.link.ModelReady;
+
+/**
+ * The interface <strong>FacadeReady</strong>.
+ *
+ * This interface let the object to be managed into its facade type.
+ *
+ * @author Sébastien Bordes
+ *
+ * @param <R> A type that implements FacadeReady
+ */
+public interface FacadeReady<R extends FacadeReady<R>> extends ModelReady {
+
+    /**
+     * Launch the initialization of the component.
+     *
+     * This method is always called into JIT
+     *
+     * @throws CoreException if the initialization fails
+     */
+    void setup() throws CoreException;
+
+    /**
+     * Return the local facade used to manage singleton.
+     *
+     * @return the local facade
+     */
+    LocalFacade<R> localFacade();
+
+    /**
+     * Attach the local facade for this object type.
+     *
+     * @param localFacade the local facade to set
+     */
+    void localFacade(final LocalFacade<R> localFacade);
+
+    /**
+     * @return Returns the key.
+     */
+    UniqueKey<R> key();
+
+    /**
+     * @param key The key to set.
+     */
+    void key(final UniqueKey<R> key);
+
+    /**
+     * Release the component by deleting this key used by the WeakHashMap.
+     *
+     * @return true if the release has been performed and false when the released has been rejected/delayed
+     */
+    boolean release();
+
+}
+```
+
+
+```java
+    LocalFacade<R> localFacade();
+```
+
+
+```java
+    UniqueKey<R> key();
+```
 
 
 === Ready for Command usage
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/link/CommandReady.java|snippet=re:(getCommand)} -->
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/link/CommandReady.java|snippet=re:(callCommand)} -->
+```java
+    <C extends Command> C getCommand(final Class<C> clazz, final Object... keyPart);
+```
+
+
+```java
+    Wave callCommand(final Class<? extends Command> commandClass, final WaveData<?>... data);
+```
 
 
 === Ready for Service usage
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/link/ServiceReady.java|snippet=re:(getService)} -->
+
+```java
+    <S extends Service> S getService(final Class<S> clazz, final Object... keyPart);
+```
 
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/link/ServiceReady.java|snippet=re:(returnData)} -->
+
+```java
+    <WB extends WaveBean> Wave returnData(final Class<? extends Service> serviceClass, final WaveType waveType, final WB waveBean);
+```
 
 
 ### Ready for Model usage
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/link/ModelReady.java|snippet=re:(getModel)} -->
+
+```java
+    <M extends Model> M getModel(final Class<M> clazz, final Object... keyPart);
+```
 
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/link/ModelReady.java|snippet=re:(attachUi)} -->
+
+```java
+    <WB extends WaveBean> Wave attachUi(final Class<? extends Model> modelClass, final WB waveBean);
+```
 
 
 

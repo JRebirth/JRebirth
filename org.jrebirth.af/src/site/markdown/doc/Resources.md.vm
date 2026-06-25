@@ -1,4 +1,4 @@
-<head>
+﻿<head>
 <![CDATA[
 	<title>Resources</title>
 	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
@@ -14,6 +14,41 @@
 
 #[[
 
+## In 30 seconds
+
+Declare static **ResourceItem** fields with `Resources.create(ResourceParam)` (images, fonts, CSS, FXML). Call `.get()` for cached heavyweight objects stored weakly. Prefer interface “enum” groupings and `@Preload` for fonts referenced from CSS.
+
+Quick Start
+---------------------
+
+Resources are part of **core**. Declare typed `ResourceItem` constants and call `.get()` to obtain cached heavyweight objects (images, fonts, CSS, FXML).
+
+```xml
+<dependency>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>core</artifactId>
+    <version>${jrebirth.version}</version>
+</dependency>
+```
+
+**Minimal example — load an image and a stylesheet:**
+
+```java
+import static org.jrebirth.af.core.resource.Resources.create;
+
+public interface AppResources {
+    ImageItem LOGO = create(new RelImage("images/logo.png"));
+    StyleSheetItem MAIN = create(new StyleSheet("application"));
+}
+
+// In Application.preInit() or View.initView():
+Image logo = AppResources.LOGO.get();
+addCSS(scene, AppResources.MAIN);
+```
+
+Resources are stored weakly and rebuilt on demand when memory is reclaimed.
+
+
 Resources
 =========================
 
@@ -25,8 +60,8 @@ The JRebirth Framework provides an useful way to deal with your local resources,
 * Parameters
 * CSS
 * FXML
-* AudioClip (WIP)
-* Media (WIP)
+* AudioClip (planned)
+* Media (planned)
 
 These resources can consume a lot of memory if you don't dispose them (especially big images and fonts) when you stop using them. 
 JRebirth provides a mechanism to store them weakly and to rebuild them if necessary in order to	use the less memory as required.
@@ -44,9 +79,18 @@ This one is linked by a **ResourceItem** to facilitate its usage.
 Resource loading
 ----------------------
 
-Heavyweight resource object can be retrieved by calling the _get()_ method of **ResourceItem**.
-If the resource was already loaded it is retrieved from cache otherwise it's loaded another time and stored weakly.
-When system goes low memory, all resrouces not strictly retained by a Component or a **Scene**'s node will elligible for garbage collection to release some bits. 
+Heavyweight resource objects are retrieved by calling the `get()` method of **ResourceItem**.
+If the resource was already loaded it is retrieved from cache; otherwise it is loaded and stored weakly.
+When the system is low on memory, resources not retained by a Component or a **Scene** node become eligible for garbage collection.
+
+```java
+// Declarative — preferred for static assets
+ColorItem accent = Resources.create(new WebColor("0088D3"));
+Color c = accent.get();
+
+// Dynamic — anonymous ResourceItem, still cached by path
+Image dynamic = Resources.create(new RelImage(item.getImagePath())).get();
+```
 
 ResourceItem
 -----------------
@@ -67,10 +111,18 @@ It's better to have an interface per resource type to avoid big file that blends
 Another interesting trick, is to add a static import on related static Resource.create method to shorten the resource declaration (Ctrl+Shift+M with Eclipse).
 	
 Static import declaration:
-<!-- MACRO {include|highlight-theme=eclipse|source=core/src/test/java/org/jrebirth/af/core/resource/color/TestColors.java|snippet=re:import static|snippet-start-offset=1}-->
+
+```java
+
+import static org.jrebirth.af.core.resource.Resources.create;
+```
 
 Example of Web color declaration:
-<!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/color/TestColors.java|snippet=re:TEST_COLOR_WEB_1|snippet-start-offset=1}-->
+
+```java
+
+    ColorItem TEST_COLOR_WEB_1 = create(new WebColor("0088D3"));
+```
 
 <a name="enum"></a>
 ### With Enumeration
@@ -78,7 +130,26 @@ Example of Web color declaration:
 The other way to declare is a little bit complex, it implies to create an _enum_ that implements a **ResourceItem** interface.
 But it requires to add use a custom syntax to use default method.
 
-<!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/color/EnumColors.java|snippet=aj:..EnumColors}-->
+
+```java
+public enum EnumColors implements ColorEnum {
+
+    // @formatter:off
+
+    /** Color for slide title, white. */
+    SLIDE_TITLE {{ web("FFFFFF", 1.0); }},
+
+    /** Color for blue shape, xxx. */
+    SHAPE_BLUE{{ web("3495CE", 1.0); }},
+
+    /** Color for drop shadow, black. */
+    DROP_SHADOW{{ web("000000", 0.8); }},
+
+    /** Color for inner shadow, white. */
+    INNER_SHADOW{{ web("FFFFFE", 0.3); }};
+
+}
+```
 
 Severals default methods exist, at least one per **ResourceParams** to create.
 
@@ -89,9 +160,28 @@ Severals default methods exist, at least one per **ResourceParams** to create.
 We can load dynamicalli resource by creating "anonymous" **ResourceItem**, the resource will be kept within cache if memory is not constrained otherwise it will be deleted.
 Another call with the same path will hit the cache and the image will be only stored once, but created as many times as deleted and retrieved again.
 
-<!-- MACRO {include|source=presentation/src/main/java/org/jrebirth/af/presentation/ui/template/AbstractTemplateView.java|snippet=re:new RelImage}-->
+
+```java
+            final Image image = Resources.create(new RelImage(item.getImage())).get();
+```
 
 In this sample _item.getImage()_ return the relative srtring path of the image.
+
+
+### With @Preload
+
+Resource enums annotated with `@Preload` are automatically loaded during application startup (in the preInit phase). This is useful for fonts that CSS references — they must be available before stylesheets are applied.
+
+
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface Preload {
+
+}
+```
 
 
 Samples
@@ -100,17 +190,87 @@ Samples
 ### Color
 
 For example to manage web color, (basic hexadecimal string #00CC00), you have to use this declaration:
-<!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/color/TestColors.java|snippet=re:TEST_COLOR_WEB_1|snippet-start-offset=1}-->
+
+```java
+
+    ColorItem TEST_COLOR_WEB_1 = create(new WebColor("0088D3"));
+```
 
 
 ### Font
 
 For example to manage the **Turtles** font, you have to use this declaration:
-<!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/font/TestFonts.java|snippet=re:TEST_REAL_FONT_1|snippet-start-offset=1}-->
+
+```java
+
+    FontItem TEST_REAL_FONT_1 = create(new RealFont(TestFontNames.Turtles, 10.0));
+```
 
 Hereafter the enumeration that stores font names.
 
-<!-- MACRO {include|source=core/src/test/java/org/jrebirth/af/core/resource/font/TestFontNames.java|snippet=aj:..TestFontNames}-->
+
+```java
+public enum TestFontNames implements FontName {
+
+    /** Turtles. */
+    Turtles,
+
+    /** Report 1942. */
+    Report_1942,
+}
+```
+
+
+### StyleSheet
+
+Stylesheets are declared as `StyleSheetItem` and loaded via `addCSS()`:
+
+
+```java
+public interface SampleStyles {
+
+    /** The application main style sheet. */
+    StyleSheetItem MAIN = create(new StyleSheet("sample"));
+
+}
+```
+
+Apply to the scene from your Application class:
+
+```java
+@Override
+protected void preInit() {
+    addCSS(getScene(), SampleStyles.MAIN);
+}
+```
+
+Or apply locally from a View:
+
+```java
+@Override
+protected void initView() {
+    addCSS(SampleStyles.LOCAL);
+}
+```
+
+### Image ###
+
+```java
+import static org.jrebirth.af.core.resource.Resources.create;
+
+ImageItem BANNER = create(new RelImage("images/banner.png"));
+
+// Usage:
+Image img = BANNER.get();
+myImageView.setImage(img);
+```
+
+Relative paths resolve from the declaring class's package on the classpath.
+
+
+### AudioClip &amp; Media
+
+These resource types (`AudioClipItem`, `MediaItem`) are defined in the JRebirth API but not yet implemented in core. They are planned for a future release and will follow the same ResourceItem/ResourceParam pattern as other resources.
 
 ]]#
 

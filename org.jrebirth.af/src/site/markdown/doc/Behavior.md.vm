@@ -1,4 +1,4 @@
-<head>
+﻿<head>
 <![CDATA[
     <title>Behavior</title>
     <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
@@ -18,10 +18,25 @@
 Behavior
 ==============
 
+## In 30 seconds
 
+A **Behavior** adds cross-cutting logic (docking, gestures, security) to any **BehavioredComponent** without subclassing. Define a `Behavior` interface, a `BehaviorData` class (`@BehaviorDataFor`), attach data to the component — the **BehaviorFacade** creates and wires behaviors at runtime.
+
+## How to use
+
+1. Create `MyBehavior extends Behavior<MyData, MyModel>` (interface + `@RegistrationPoint`).
+2. Create `MyData extends BehaviorDataBase` with `@BehaviorDataFor(MyBehavior.class)`.
+3. Implement `MyBehaviorImpl extends AbstractBehavior<MyData, MyModel>`.
+4. Attach from the Model: `addBehavior(MyData.class)` or add data in `initModel()`.
+5. Behaviors listen/send waves like any component; detach when the host component is released.
 
 Overview
 ---------------------
+
+Behaviors are pluggable, cross-cutting logic units that can be attached to and detached from any **BehavioredComponent** at runtime.
+They extend a component's capabilities through composition rather than inheritance, keeping your Models, Services, and Commands focused on their primary role while behaviors handle orthogonal concerns like docking, security, or gesture handling.
+
+A Behavior is itself a JRebirth **Component**: it is managed by the **BehaviorFacade**, participates in the Wave messaging system, and follows the standard component lifecycle.
 
 <span style="text-decoration: underline;">Short UML Diagram:</span>
 
@@ -32,8 +47,409 @@ Overview
 </div>
 
 
+Behavior Interface
+---------------------
+
+The **Behavior** interface defines the contract that every behavior must fulfil. It is parameterized by:
+
+* **D** &mdash; the **BehaviorData** type that carries configuration and state for this behavior.
+* **C** &mdash; the **BehavioredComponent** type to which this behavior can be attached.
+
+The interface exposes two accessors:
+
+* `data()` &mdash; returns the **BehaviorData** instance bound to this behavior.
+* `component()` &mdash; returns the owning component.
+
+
+```java
+public interface Behavior<D extends BehaviorData, C extends BehavioredComponent<C>> extends Component<Behavior<?, ?>> {
+
+    /**
+     * Gets the {@link BehaviorData} used by this Behavior.
+     *
+     * @return the behavior data
+     */
+    D data();
+
+    /**
+     * Gets the {@link EnhancedComponent} concerned by this Behavior.
+     *
+     * @return the component
+     */
+    C component();
+
+}
+```
+
+- `Behavior<D, C>` — `D` = configuration data, `C` = host component type (Model, Command, …).
+- `data()` — read/write behavior configuration supplied at attach time.
+- `component()` — the owning `BehavioredComponent` this behavior augments.
+
+
 Behavior Data
 ============================
+
+**BehaviorData** is the data holder associated with a behavior. It carries configuration and runtime state that the behavior needs to operate.
+
+A single BehaviorData can reference one or more **Behavior** classes via the `getBehaviors()` method. This means that adding a BehaviorData to a component can trigger the creation of several related behaviors at once.
+
+
+```java
+@FunctionalInterface
+public interface BehaviorData {
+
+    List<Class<? extends Behavior<?, ?>>> getBehaviors();
+
+}
+```
+
+- `getBehaviors()` — lists behavior interfaces to create when this data is attached.
+- Override `getCustomBehaviors()` on `AbstractBehaviorData` for programmatic additions.
+
+
+The framework provides **AbstractBehaviorData** (in the `core` module) as a convenient base class. It automatically collects behavior references declared via:
+
+1. The `getCustomBehaviors()` template method (override to add programmatic references).
+2. The **@BehaviorDataFor** annotation placed on the data class itself.
+
+**BehaviorDataBase** extends `AbstractBehaviorData` with an empty `getCustomBehaviors()` list, making it the simplest starting point for custom data classes.
+
+
+### @BehaviorDataFor Annotation ###
+
+This annotation links a BehaviorData class to its Behavior interface at the type level:
+
+
+```java
+@BehaviorDataFor(DockableBehavior.class)
+public class Dockable extends BehaviorDataBase { /* ... */ }
+```
+
+- `@BehaviorDataFor(DockableBehavior.class)` — one data class maps to one behavior interface.
+- At `addBehavior(data)` the framework reads this annotation to instantiate behaviors.
+
+
+Creating a Custom Behavior
+============================
+
+Creating a behavior requires three artifacts: an **interface**, an **implementation**, and a **data class**.
+
+### 1. Define the Behavior Interface ###
+
+Create an interface extending `Behavior<YourData, TargetComponent>`. Mark it with **@RegistrationPoint** so it can participate in the modular registration system:
+
+
+```java
+@RegistrationPoint(exclusive = true)
+public interface DockableBehavior extends Behavior<Dockable, Model> {
+
+    default String modelName() {
+        return getClass().getSimpleName().replaceAll("Model", "");
+    }
+
+    default Image modelIcon() {
+        return ComponentImages.DefaultDockableIcon.get();
+    }
+}
+```
+
+- `@RegistrationPoint` — exposes the behavior to the modular registration / facade system.
+- `Behavior<Dockable, Model>` — this behavior only attaches to `Model` hosts.
+- Default methods — optional API on the behavior interface (icons, labels, etc.).
+
+### 2. Define the BehaviorData ###
+
+Create a data class extending `BehaviorDataBase` and annotate it with **@BehaviorDataFor** to bind it to the behavior interface:
+
+
+```java
+@BehaviorDataFor(DockableBehavior.class)
+public class Dockable extends BehaviorDataBase implements Serializable {
+
+    /** The generated serial version uid. */
+    private static final long serialVersionUID = 8137109665415403740L;
+
+    private String name;
+
+    private UniqueKey<? extends Model> modelKey;
+
+    public static Dockable create() {
+        return new Dockable();
+    }
+
+    public String name() {
+        return this.name;
+    }
+
+    public Dockable name(final String name) {
+        this.name = name;
+        return this;
+    }
+
+    public UniqueKey<? extends Model> modelKey() {
+        return this.modelKey;
+    }
+
+    public Dockable modelKey(final UniqueKey<? extends Model> modelKey) {
+        this.modelKey = modelKey;
+        if (!this.modelKey.optionalData().contains(this)) {
+            this.modelKey.optionalData().add(this);
+        }
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName()).append(" [");
+        sb.append(this.name).append(" ").append(this.modelKey.key()).append("]");
+        return sb.toString();
+    }
+
+}
+```
+
+- `@BehaviorDataFor(DockableBehavior.class)` — links data class to behavior implementation.
+- `BehaviorDataBase` — collects behavior classes from annotation + `getCustomBehaviors()`.
+- Fluent setters (`name()`, `modelKey()`) — configuration passed when attaching to a Model.
+
+### 3. Implement the Behavior ###
+
+Extend **AbstractBehavior** (or **AbstractModelBehavior** for Model-aware behaviors) and annotate with **@Register** to wire the implementation to its interface:
+
+
+```java
+@Register(value = DockableBehavior.class, priority = PriorityLevel.Normal)
+public class DockableBehaviorImpl extends AbstractModelBehavior<Dockable> implements DockableBehavior {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String modelName() {
+        return data().name();
+    }
+
+    @Override
+    public void initBehavior() {
+        // Nothing to init
+    }
+
+    @Override
+    protected void initInnerComponents() {
+    }
+
+}
+```
+
+- `@Register(DockableBehavior.class)` — binds implementation to interface for facade lookup.
+- `AbstractModelBehavior<Dockable>` — Model-specific base; provides `model()` helpers.
+- `initBehavior()` — startup hook once `data()` and `component()` are wired.
+- `data().name()` — read configuration supplied when the behavior was attached.
+
+The `initBehavior()` method is called once the behavior is fully initialized (data and component references are resolved). Use it to set up listeners, bindings, or any startup logic.
+
+
+Attaching Behaviors to Components
+============================
+
+Behaviors are attached to any component implementing the **BehavioredComponent** interface (all standard Models, Services, and Commands qualify).
+
+### Programmatic Attachment ###
+
+You can attach a behavior at any point during a component's lifecycle:
+
+* **By Behavior class** &mdash; `addBehavior(MyBehavior.class)` creates the behavior with default data.
+* **By BehaviorData** &mdash; `addBehavior(myDataInstance)` creates all behaviors referenced by the data.
+
+```java
+@Override
+protected void initModel() {
+    addBehavior(Dockable.create().name("Tools").modelKey(getModelKey()));
+    final DockableBehavior dock = getBehavior(DockableBehavior.class);
+}
+```
+
+- `addBehavior(data)` — creates every behavior listed on the `BehaviorData` instance.
+- `getBehavior(DockableBehavior.class)` — typed access after attach; same lifecycle as host Model.
+
+Once attached, you can query and access behaviors:
+
+* `hasBehavior(MyBehavior.class)` &mdash; checks if the behavior is present.
+* `getBehavior(MyBehavior.class)` &mdash; retrieves the behavior instance.
+* `getBehaviorData(MyBehavior.class)` &mdash; retrieves the data bound to a behavior.
+* `getBehaviorsAware(MyAwareInterface.class)` &mdash; retrieves all behaviors implementing a given aware interface.
+
+
+```java
+public interface BehavioredComponent<C extends Component<C>> extends Component<C> {
+
+    /**
+     * Return true if the component contains the {@link Behavior} class provided.
+     *
+     * @param behaviorClass the class of the {@link Behavior} to check
+     *
+     * @return true if the component has got this behavior
+     */
+    boolean hasBehavior(final Class<? extends Behavior<?, ?>> behaviorClass);
+
+    /**
+     * Add a behavior to the component by providing the {@link Behavior} class.
+     *
+     * @param behaviorClass the class of the behavior to add
+     *
+     * @return the current component to chain method call
+     */
+    <BD extends BehaviorData, B extends Behavior<BD, ?>> C addBehavior(final Class<B> behaviorClass);
+
+    /**
+     * Add a behavior to the component by providing a {@link BehaviorData}.
+     *
+     * The BehaviorData allow to add several {@link Behavior} if many of them rare reference by the BehaviorData.
+     *
+     * @param data the Behavior Data that references Behavior classes to add
+     *
+     * @return the current component to chain method call
+     */
+    <BD extends BehaviorData> C addBehavior(final BD data);
+
+    /**
+     * Return the {@link Behavior} instance created for the given Behavior type.
+     *
+     * @param behaviorClass the Behavior type to get
+     *
+     * @return the Behavior instance attached to the component
+     */
+    <BD extends BehaviorData, B extends Behavior<BD, ?>> B getBehavior(final Class<B> behaviorClass);
+
+    /**
+     * Return the list of {@link BehaviorAware} filtered using given parameter.
+     * 
+     * @param awareClass the class that shall be implemented by behaviors returned
+     * 
+     * @return the list of {@link BehaviorAware}
+     */
+    <BA extends BehaviorAware> List<BA> getBehaviorsAware(final Class<BA> awareClass);
+
+    /**
+     * Return the {@link BehaviorData} used by the given Behavior type.
+     *
+     * @param behaviorClass the Behavior type that use the searched data
+     *
+     * @return the Behavior Data used by the given Behavior
+     */
+    <BD extends BehaviorData, B extends Behavior<BD, ?>> BD getBehaviorData(final Class<B> behaviorClass);
+
+}
+```
+
+
+Built-in Behaviors
+============================
+
+JRebirth ships several ready-to-use behaviors in the `component` and `security` modules.
+
+### DockableBehavior ###
+
+The **DockableBehavior** (in the `component` module) makes a Model dockable within a tabbed or panel-based layout. Each dockable component exposes a `modelName()` and `modelIcon()` used by the docking container.
+
+Its data class, **Dockable**, carries the panel name and a `UniqueKey` pointing to the Model to display.
+
+
+```java
+@RegistrationPoint(exclusive = true)
+public interface DockableBehavior extends Behavior<Dockable, Model> {
+
+    default String modelName() {
+        return getClass().getSimpleName().replaceAll("Model", "");
+    }
+
+    default Image modelIcon() {
+        return ComponentImages.DefaultDockableIcon.get();
+    }
+}
+```
+
+
+```java
+@BehaviorDataFor(DockableBehavior.class)
+public class Dockable extends BehaviorDataBase implements Serializable {
+
+    /** The generated serial version uid. */
+    private static final long serialVersionUID = 8137109665415403740L;
+
+    private String name;
+
+    private UniqueKey<? extends Model> modelKey;
+
+    public static Dockable create() {
+        return new Dockable();
+    }
+
+    public String name() {
+        return this.name;
+    }
+
+    public Dockable name(final String name) {
+        this.name = name;
+        return this;
+    }
+
+    public UniqueKey<? extends Model> modelKey() {
+        return this.modelKey;
+    }
+
+    public Dockable modelKey(final UniqueKey<? extends Model> modelKey) {
+        this.modelKey = modelKey;
+        if (!this.modelKey.optionalData().contains(this)) {
+            this.modelKey.optionalData().add(this);
+        }
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName()).append(" [");
+        sb.append(this.name).append(" ").append(this.modelKey.key()).append("]");
+        return sb.toString();
+    }
+
+}
+```
+
+### SecurityBehavior ###
+
+The **SecurityBehavior** (in the `security` module) adds access-control capabilities to a Model. It relies on a **Securable** data class to store security metadata such as permission names.
+
+
+```java
+@RegistrationPoint(exclusive = true)
+public interface SecurityBehavior extends Behavior<Securable, Model> {
+
+}
+```
+
+
+```java
+@Register(value = SecurityBehavior.class, priority = PriorityLevel.Normal)
+public class SecurityBehaviorImpl extends AbstractBehavior<Securable, Model> implements SecurityBehavior {
+
+    @Override
+    public void initBehavior() {
+        // check permissions, listen security waves, etc.
+    }
+
+    @Override
+    protected void initInnerComponents() {
+    }
+}
+```
+
+- `Securable` data carries permission metadata attached to the host Model.
+- `initBehavior()` — enforce access rules or register security-related wave listeners.
+
+
     
 ]]#
 

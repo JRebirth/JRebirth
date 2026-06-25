@@ -1,0 +1,363 @@
+﻿<head>
+<![CDATA[
+    <title>REST</title>
+    <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
+]]>
+</head>
+
+<div id="catcherTitle">REST Module</div>
+<div id="catcherContent">Integrate REST APIs into JRebirth applications.</div>
+
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end
+
+#[[
+
+## In 30 seconds
+
+Declare a service extending **AbstractCRUDRestService** with `@RestTarget` / `@RestPath`. JAX-RS `Client` comes from **ClientProviderService**. Call `doGetObjects`, `doCreateObject`, etc. on a background thread, or listen for generated wave types in `initWave()`.
+
+Quick Start
+---------------------
+
+Add the REST module and declare a typed service. REST calls run on background threads via the standard JRebirth Service lifecycle.
+
+```xml
+<dependency>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>rest</artifactId>
+    <version>${jrebirth.version}</version>
+</dependency>
+```
+
+**Minimal example — CRUD service for a `Planet` resource:**
+
+```java
+@RestTarget(value = "http://localhost:8080/JRebirth")
+@RestPath("planets")
+public class PlanetRestService extends AbstractCRUDRestService<Planet> {
+
+    @Override
+    public Class<Planet> objectClass() {
+        return Planet.class;
+    }
+}
+```
+
+**Trigger a GET from any component:**
+
+```java
+PlanetRestService service = getService(PlanetRestService.class);
+List<Planet> planets = service.doGetObjects(null);
+```
+
+Configure server defaults in `jrebirth.properties` when you omit parts of `@RestTarget` (see RestParameters below).
+
+
+REST
+==============
+
+
+Overview
+---------------------
+
+The JRebirth REST module (`org.jrebirth.af:rest`) provides a service-based approach to communicating with REST APIs from JavaFX applications. It integrates with JAX-RS clients and follows the standard JRebirth Service lifecycle, allowing REST calls to be triggered via Waves and executed on background threads without blocking the JavaFX Application Thread.
+
+Key features:
+
+* Annotation-driven server and path configuration
+* Pluggable JAX-RS Client provider
+* Abstract base classes for generic and CRUD-specific REST services
+* Configuration via JRebirth ParameterItems
+
+
+AbstractRestService
+---------------------
+
+**AbstractRestService** is the base class for all REST services. It extends `AbstractService` and handles HTTP client lifecycle management. During initialization, it:
+
+1. Reads the `@RestTarget` annotation to build the base URL.
+2. Reads the `@RestPath` annotation to determine the local path segment.
+3. Obtains a JAX-RS `Client` instance from the linked `ClientProviderService`.
+
+Subclasses must implement `initWave()` to register the WaveTypes they handle.
+
+
+```java
+@Override
+protected void initService() {
+    final RestTarget rt = ClassUtility.getLastClassAnnotation(this.getClass(), RestTarget.class);
+    final StringBuilder url = new StringBuilder();
+    if (rt != null && rt.value() != null) {
+        url.append(rt.value());
+    } else {
+        url.append(rt.protocol().name())
+           .append("://").append(rt.address())
+           .append(":").append(rt.port())
+           .append("/").append(rt.path());
+    }
+    baseWebTarget = clientProvider.client().target(url.toString());
+
+    final RestPath rp = ClassUtility.getLastClassAnnotation(this.getClass(), RestPath.class);
+    if (rp != null) {
+        localPath = rp.value();
+    }
+    initWave();
+}
+
+protected WebTarget webTarget() {
+    return baseWebTarget().path(localPath());
+}
+```
+
+`initService()` resolves the base URL from `@RestTarget` (full `value()` or decomposed parts with `RestParameters` fallbacks), then applies `@RestPath` through `webTarget()`.
+
+AbstractCRUDRestService
+---------------------
+
+**AbstractCRUDRestService** extends `AbstractRestService` and provides a complete set of CRUD operations on a typed resource. It implements the `CRUDRestService<O>` interface with the following operations:
+
+* `doCreateObject(O object, Wave wave)` &mdash; sends a POST request to create a resource.
+* `doUpdateObject(O object, Wave wave)` &mdash; sends a PUT request to update a resource.
+* `doDeleteObject(Object object, Wave wave)` &mdash; sends a DELETE request to remove a resource.
+* `doGetObject(Integer id, Wave wave)` &mdash; sends a GET request to retrieve a single resource.
+* `doGetObjects(Wave wave)` &mdash; sends a GET request to retrieve all resources.
+
+
+```java
+@Override
+public List<O> doGetObjects(final Wave wave) {
+    return baseWebTarget()
+        .request(MediaType.APPLICATION_XML)
+        .get(genericList);
+}
+
+@Override
+public boolean doCreateObject(O object, final Wave wave) {
+    final Response response = baseWebTarget()
+        .request(MediaType.APPLICATION_XML)
+        .post(Entity.xml(object));
+    return response.getStatusInfo() == Status.OK;
+}
+```
+
+Override `objectClass()` and optionally `localPath()` / `initWave()` to register wave listeners. HTTP verbs map to JAX-RS calls on `baseWebTarget()` or `webTarget()`.
+
+
+CRUDRestService Interface
+---------------------
+
+The **CRUDRestService** interface defines the contract for CRUD operations and declares wave item constants used for wave communication:
+
+
+```java
+public interface CRUDRestService<O extends Object> extends Service {
+
+    /** The Wave Item Element. */
+    WaveItem<Object> ELEMENT = new WaveItemBase<Object>() {
+    };
+
+    String CREATE_OBJECT_PREFIX = "CREATE_OBJECT_";
+
+    String OBJECT_CREATED_PREFIX = "OBJECT_CREATED_";
+
+    // WaveType DO_CREATE_OBJECT = WBuilder.waveType(CREATE_OBJECT)
+    // .returnAction(OBJECT_CREATED)
+    // .items(ELEMENT)
+    // .returnItem(JRebirthItems.booleanItem);
+
+    String UPDATE_OBJECT_PREFIX = "UPDATE_OBJECT_";
+
+    String OBJECT_UPDATED_PREFIX = "OBJECT_UPDATED_";
+
+    // WaveType DO_UPDATE_OBJECT = WBuilder.waveType(UPDATE_OBJECT)
+    // .returnAction(OBJECT_UPDATED)
+    // .items(ELEMENT)
+    // .returnItem(JRebirthItems.booleanItem);
+
+    // @OnWave(CREATE_OBJECT)
+    // @Priority(PriorityLevel.Normal)
+    boolean doCreateObject(O object, final Wave wave);
+
+    // @OnWave(UPDATE_OBJECT)
+    // @Priority(PriorityLevel.Normal)
+    boolean doUpdateObject(O object, final Wave wave);
+
+    // @OnWave(CREATE_OBJECT)
+    // @Priority(PriorityLevel.Normal)
+    boolean doDeleteObject(O object, final Wave wave);
+
+    // @OnWave(CREATE_OBJECT)
+    // @Priority(PriorityLevel.Normal)
+    O doGetObject(Integer id, final Wave wave);
+
+    // @OnWave(CREATE_OBJECT)
+    // @Priority(PriorityLevel.Normal)
+    List<O> doGetObjects(final Wave wave);
+
+}
+```
+
+
+@RestTarget
+---------------------
+
+The **@RestTarget** annotation defines the target server URL for a REST service. It supports two modes:
+
+* **Full URL** &mdash; set `value()` to the complete base URL string.
+* **Decomposed** &mdash; specify individual parts: `protocol()`, `address()`, `port()`, and `path()`.
+
+When individual parts are not specified, they fall back to `RestParameters` defaults.
+
+
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface RestTarget {
+
+    enum Protocol {
+        http, https
+    }
+
+    String value();
+
+    Protocol protocol() default Protocol.http;
+
+    String address() default "";
+
+    int port() default 80;
+
+    String path() default "";
+
+}
+```
+
+
+@RestPath
+---------------------
+
+The **@RestPath** annotation defines the local endpoint path appended to the base URL for a specific REST service.
+
+
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface RestPath {
+
+    String value();
+
+}
+```
+
+
+ClientProviderService
+---------------------
+
+The **ClientProviderService** interface defines the contract for providing JAX-RS `Client` instances. The default implementation, **SimpleClientProviderService**, creates a standard JAX-RS client on initialization and closes it when the service is released.
+
+It is registered with `@Register(ClientProviderService.class)` so it can be replaced by a custom implementation if needed.
+
+
+```java
+@Register(ClientProviderService.class)
+public class SimpleClientProviderService extends AbstractService implements ClientProviderService {
+
+    private Client client;
+
+    @Override
+    public Client client() {
+        return client;
+    }
+
+    @Override
+    protected void initService() {
+        client = ClientBuilder.newClient();
+    }
+
+    /**
+     * When the service is released close the client.
+     */
+    @OnRelease
+    public void closeClient() {
+        client.close();
+    }
+
+    @Override
+    protected void processWave(Wave wave) {
+        // Nothing to do yet
+    }
+
+    @Override
+    protected void initInnerComponents() {
+        // Nothing to do yet
+    }
+
+}
+```
+
+
+RestParameters
+---------------------
+
+**RestParameters** provides configurable default values for REST server connection properties. These are used as fallbacks when `@RestTarget` attributes are not explicitly set:
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `DEFAULT_REST_SERVER_PROTOCOL` | `http` | Protocol (http/https) |
+| `DEFAULT_REST_SERVER_ADDRESS` | `localhost` | Server hostname |
+| `DEFAULT_REST_SERVER_PORT` | `8080` | Server port |
+| `DEFAULT_REST_SERVER_PATH` | `JRebirth` | Base context path |
+
+These can be overridden in your application's `jrebirth.properties` file.
+
+
+Usage Example
+---------------------
+
+### Step 1 — Define the resource type ###
+
+```java
+public class Planet {
+    private String name;
+    // getters / setters
+}
+```
+
+### Step 2 — Declare the REST service ###
+
+```java
+@RestTarget(protocol = Protocol.http, address = "localhost", port = 8080, path = "JRebirth")
+@RestPath("planets")
+public class PlanetRestService extends AbstractCRUDRestService<Planet> {
+
+    @Override
+    public Class<Planet> objectClass() {
+        return Planet.class;
+    }
+}
+```
+
+### Step 3 — Call from a Model or Service ###
+
+```java
+@Override
+protected void initModel() {
+    PlanetRestService planets = getService(PlanetRestService.class);
+    List<Planet> all = planets.doGetObjects(null);
+}
+```
+
+Wave-driven usage is also supported: override `initWave()` in your subclass to `listen()` for the generated `DO_CREATE_OBJECT`, `DO_GET_OBJECTS`, etc. wave types.
+
+
+]]#
+
+#if( !$all )
+#parse("TocList.vm")
+#displayFooterToc("REST")
+#end

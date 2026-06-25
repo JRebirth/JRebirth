@@ -1,4 +1,4 @@
-<head>
+﻿<head>
 <![CDATA[
 	<title>Notifier &amp; Components</title>
 	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
@@ -18,6 +18,18 @@
 Messaging engine
 =========================
 
+## In 30 seconds
+
+The **Notifier** is JRebirth's event bus on **JIT**. Components **listen** to `WaveType`s during `initModel` / `initService` / `initCommand`, then **sendWave** to notify others. No direct references between Models and Services are required.
+
+## How to use
+
+1. Define `WaveType` and `WaveItem` constants (see [Wave](Wave.html) page).
+2. In the listener, call `listen(MyWaves.DO_SOMETHING)` inside the right `initXxx()` method.
+3. Add a handler method (`doSomething(...)`) matching the wave contract, ending with `Wave wave`.
+4. From any component, dispatch with `sendWave(MyWaves.DO_SOMETHING, WBuilder.waveData(MyWaves.ITEM, data))`.
+5. Call `unlisten(...)` when the component no longer needs those events (Models are auto-unlistened on release).
+
 JRebirth provides its own event bus to manage asynchronous communication between all components.
 Synchronous communication can be achieved by using direct method call.
 
@@ -29,14 +41,659 @@ Synchronous communication can be achieved by using direct method call.
 </div>
 
 
-Notifier aim
----------------
+Notifier Overview
+-----------------------
 
 JRebirth has got its own Notification Engine to allow each component to communicate with each other.
 All these communications are processed into a dedicated thread described [before](Thread.html).
-The notification engine uses custom objects to transport data : Waves.
+The notification engine uses custom objects to transport data: Waves.
 
-We will have an overview of them within the next section.
+The **Notifier** is JRebirth's internal event bus, running on JIT (JRebirth Internal Thread).
+It dispatches **Wave** objects to any component that has registered interest in a particular **WaveType**.
+This decoupled messaging system ensures that Models, Services, and Commands can interact without holding direct references to one another.
+
+The typical flow is:
+
+1. A component **registers** (listens) for one or more WaveTypes.
+2. Another component **sends** a Wave carrying a WaveType and optional data.
+3. The Notifier finds every component that listens for that WaveType and invokes the matching handler method.
+
+
+Registering for Waves
+-----------------------
+
+To receive Waves, a component must call `listen(WaveType...)` during its initialization phase.
+For a Model this is typically done inside `initModel()`, for a Service inside `initService()`, and for a Command inside `initCommand()`.
+
+The `listen` method is defined in the `Component` interface:
+
+
+```java
+package org.jrebirth.af.api.component.basic;
+
+import java.lang.reflect.Method;
+
+import org.jrebirth.af.api.facade.FacadeReady;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.api.wave.checker.WaveChecker;
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveType;
+
+/**
+ * The interface <strong>EnhancedComponent</strong>.
+ *
+ * Define the contract used to manage waves.
+ *
+ * @author Sébastien Bordes
+ *
+ * @param <R> A type that implements FacadeReady
+ */
+public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveType... waveType);
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * The wave checker is used to filter the wave if the checker returns false
+     *
+     * @param waveChecker the wave checker used to forward the wave only if the checker return true
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveChecker waveChecker, final WaveType... waveType);
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * The wave checker is used to filter the wave if the checker returns false
+     *
+     * @param waveChecker the wave checker used to forward the wave only if the checker return true
+     * @param method the annotated method concerned
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveChecker waveChecker, final Method method, final WaveType... waveType);
+
+    /**
+     * Stop to listen the type of wave for the current component.
+     *
+     * @param waveTypes the type(s) to stop to listen
+     */
+    void unlisten(final WaveType... waveTypes);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param wave the wave to send
+     */
+    void sendWave(final Wave wave);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param waveType the type of wave to send
+     * @param waveBean the wave bean
+     *
+    // ...
+```
+
+You can listen for several WaveTypes at once:
+
+```java
+@Override
+protected void initModel() {
+    listen(MyWaves.DO_ACTION_A, MyWaves.DO_ACTION_B);
+}
+```
+
+- `initModel()` — correct hook for Models; Services use `initService()`, Commands use `initCommand()`.
+- `listen(...)` — registers this component with the Notifier (strong reference until `unlisten`).
+- Multiple `WaveType`s — one registration call for all events this component handles.
+
+When `listen` is called, the component registers itself with the Notifier for the given WaveType(s).
+The Notifier holds a **strong reference** to the component, so it will not be garbage-collected as long as it remains registered.
+
+Here is a real-world example from the Analyzer showcase:
+
+
+```java
+package org.jrebirth.af.showcase.analyzer.ui.controls;
+
+import java.util.List;
+
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.ui.DefaultModel;
+import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;
+import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
+
+/**
+ * The class <strong>ControlsModel</strong>.
+ *
+ * @author Sébastien Bordes
+ */
+public final class ControlsModel extends DefaultModel<ControlsModel, ControlsView> {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initModel() {
+        listen(LoadEdtFileService.DO_LOAD_EVENTS.returnWaveType());
+        listen(EditorWaves.DO_UNLOAD);
+    }
+
+    /**
+     * Call when event are loaded.
+     *
+     * @param eventList the list of events loaded
+     *
+     * @param wave the wave received
+     */
+    public void doEventsLoaded(final List<JRebirthEvent> eventList, final Wave wave) {
+        view().activateButtons(!eventList.isEmpty());
+    }
+
+    /**
+     * Call when event are loaded.
+     *
+     * @param wave the wave received
+     */
+    public void doUnload(final Wave wave) {
+        view().activateButtons(false);
+    }
+}
+```
+
+- `listen(...returnWaveType())` — service return waves use `.returnWaveType()` on the entry `WaveType`.
+- `doEventsLoaded(List, Wave)` — name from return action `EVENTS_LOADED`; updates View via `view()`.
+- `doUnload(Wave)` — parameterless action wave; only the trailing `Wave` argument is required.
+
+The handler method name is derived from the WaveType action. For example, if the WaveType action is `DO_LOAD_EVENTS`, the handler method must be named `doEventsLoaded` (camelCase, matching the action string).
+
+
+```java
+    public void doEventsLoaded(final List<JRebirthEvent> eventList, final Wave wave) {
+        view().activateButtons(!eventList.isEmpty());
+    }
+```
+
+
+Unregistering
+-----------------------
+
+To stop receiving Waves, call `unlisten(WaveType...)`.
+This removes the component from the Notifier and releases the strong reference, preventing potential memory leaks.
+
+
+```java
+    void unlisten(final WaveType... waveTypes);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param wave the wave to send
+     */
+    void sendWave(final Wave wave);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param waveType the type of wave to send
+     * @param waveBean the wave bean
+     *
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
+     */
+    <WB extends WaveBean> Wave sendWave(final WaveType waveType, final WB waveBean);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param waveType the type of wave to send
+     * @param waveData the data (key-value
+     *
+     * @return the wave created and sent to JIT, be careful when you use a strong reference it can hold a lot of objects
+     */
+    Wave sendWave(final WaveType waveType, final WaveData<?>... waveData);
+
+    /**
+     * Return the root component (for inner component).
+     *
+     * @return the root component of the inner component
+     */
+    Component<?> rootComponent();
+
+    /**
+     * Define the root component for an inner component.
+     *
+     * @param rootComponent The root component to set.
+     */
+    void rootComponent(final Component<?> rootComponent);
+
+    // /**
+    // * Add an inner component.
+    // *
+    // * It will instantiate the component from the right Facade and store it into the current component.
+    // *
+    // * Shall be called from {@link AbstractComponent}.initInnerComponent (protected API)
+```
+
+```java
+@Override
+protected void unlistenOnDispose() {
+    unlisten(MyWaves.DO_REFRESH);
+}
+```
+
+- `unlisten(WaveType...)` — removes this component from the Notifier for those types.
+- Models are auto-unlistened on release; call explicitly for long-lived components that change behavior.
+
+
+Sending Waves
+-----------------------
+
+Any component can send a Wave via the `sendWave` methods defined on the `Component` interface:
+
+
+```java
+package org.jrebirth.af.api.component.basic;
+
+import java.lang.reflect.Method;
+
+import org.jrebirth.af.api.facade.FacadeReady;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.api.wave.checker.WaveChecker;
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveType;
+
+/**
+ * The interface <strong>EnhancedComponent</strong>.
+ *
+ * Define the contract used to manage waves.
+ *
+ * @author Sébastien Bordes
+ *
+ * @param <R> A type that implements FacadeReady
+ */
+public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveType... waveType);
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * The wave checker is used to filter the wave if the checker returns false
+     *
+     * @param waveChecker the wave checker used to forward the wave only if the checker return true
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveChecker waveChecker, final WaveType... waveType);
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * The wave checker is used to filter the wave if the checker returns false
+     *
+     * @param waveChecker the wave checker used to forward the wave only if the checker return true
+     * @param method the annotated method concerned
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveChecker waveChecker, final Method method, final WaveType... waveType);
+
+    /**
+     * Stop to listen the type of wave for the current component.
+     *
+     * @param waveTypes the type(s) to stop to listen
+     */
+    void unlisten(final WaveType... waveTypes);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param wave the wave to send
+     */
+    void sendWave(final Wave wave);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param waveType the type of wave to send
+     * @param waveBean the wave bean
+     *
+    // ...
+```
+
+There are several ways to send a Wave:
+
+**1. Using WaveType + WaveData**
+
+```java
+sendWave(MyWaves.DO_REFRESH, WBuilder.waveData(MyWaves.ITEM, selectedItem));
+```
+
+- `sendWave(waveType, waveData...)` — builds the wave and posts it to JIT for dispatch.
+- `WBuilder.waveData(item, value)` — pairs a `WaveItem` key with the payload value.
+
+**2. Using WaveType + WaveBean**
+
+```java
+sendWave(MyWaves.DO_REFRESH, myWaveBean);
+```
+
+- `sendWave(waveType, waveBean)` — typed bean instead of varargs `WaveData`; good for many fields.
+
+
+**3. Using a pre-built Wave with WBuilder**
+
+The `WBuilder` fluent API offers a convenient way to create and configure Waves before sending them:
+
+```java
+sendWave(WBuilder.callCommand(MyCommand.class));
+```
+
+- `WBuilder.callCommand(Class)` — builds a **Call Command** wave ready to send.
+- Equivalent to `callCommand(MyCommand.class)` but useful when chaining waves.
+
+
+How to use — end-to-end
+---------------------------
+
+1. Define `WaveType` + `WaveItem` constants in a shared interface.
+2. In the receiver: `listen(waveType)` inside `initModel` / `initService` / `initCommand`.
+3. Add handler method (`doActionName(...)`) matching items + trailing `Wave`.
+4. In the sender: `sendWave(waveType, WBuilder.waveData(item, value))`.
+5. Call `unlisten` when the receiver should stop reacting.
+
+Wave Dispatching
+-----------------------
+
+When a Wave is sent, the following sequence occurs:
+
+1. The Wave is queued on JIT (JRebirth Internal Thread).
+2. The Notifier looks up all components registered for the Wave's `WaveType`.
+3. For each registered component, the Notifier resolves the handler method by convention:
+   - The WaveType has an **action** name (e.g. `"DO_MY_ACTION"`).
+   - The action name is converted to camelCase: `doMyAction`.
+   - The Notifier calls this method via reflection, passing the Wave and any typed data items.
+4. If a `WaveChecker` is registered for that component + WaveType pair, it is evaluated first — the handler is invoked only when the checker returns `true`.
+
+This convention-over-configuration approach keeps handler wiring completely declarative.
+
+
+@OnWave Annotation
+-----------------------
+
+As an alternative to calling `listen()` manually, you can annotate a method with `@OnWave`.
+The framework will auto-register the component for the specified WaveType at startup.
+
+The annotation accepts a single **value** attribute matching the WaveType action string:
+
+```java
+@OnWave("MY_ACTION")
+protected void myMethod(Wave wave) {
+    // handle wave
+}
+```
+
+- `@OnWave("MY_ACTION")` — auto-registers at startup; method name is free.
+- Value must match the `WaveType` action string exactly.
+
+
+The method name is free — only the annotation value must match the WaveType action.
+`@OnWave` is repeatable, so a single method can listen for multiple WaveTypes.
+
+Here is a real example from the Wave showcase:
+
+
+```java
+@Register(value = ModuleModel.class)
+public class MainModel extends DefaultFXMLModel<MainModel> implements ModuleModel {
+
+    @OnWave(WWaves.CHANGE)
+    protected void whatyouwant(Wave wave) {
+        getFXMLController().txtMessage.setText("Wave received : " + wave.waveType().action());
+    }
+
+    @Override
+    public String moduleName() {
+        return "Wave";
+    }
+
+    @Override
+    public MainController getFXMLController() {
+        return (MainController) super.getFXMLController();
+    }
+
+}
+```
+
+- `@OnWave(WWaves.CHANGE)` — listens without calling `listen()` in `initModel()`.
+- Method name (`whatyouwant`) is arbitrary; only the annotation value matters.
+- `wave.waveType().action()` — inspect which action was received at runtime.
+
+
+JRebirth itself uses `@OnWave` internally for built-in UI actions (see *Built-in WaveTypes* below):
+
+```java
+@OnWave(WaveConstants.SHOW_VIEW)
+void doShowView(final Wave wave);
+
+@OnWave(WaveConstants.HIDE_VIEW)
+void doHideView(final Wave wave);
+```
+
+- Built into the `Model` interface — every Model handles show/hide automatically.
+- Trigger visibility from any component with `WBuilder.showModel(...)` / hide waves.
+
+
+WaveChecker
+-----------------------
+
+A `WaveChecker` lets you filter incoming Waves for a specific component.
+Only Waves for which the checker returns `true` are dispatched to the handler method.
+
+`WaveChecker` is a `@FunctionalInterface` extending `Callback<Wave, Boolean>`:
+
+
+```java
+@FunctionalInterface
+public interface WaveChecker extends Callback<Wave, Boolean> {
+
+}
+```
+
+- `WaveChecker` — functional interface: `boolean call(Wave wave)`.
+- Return `true` to dispatch to the handler; `false` skips this listener for that wave.
+
+
+You register a checker with the overloaded `listen` method:
+
+
+```java
+package org.jrebirth.af.api.component.basic;
+
+import java.lang.reflect.Method;
+
+import org.jrebirth.af.api.facade.FacadeReady;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.api.wave.checker.WaveChecker;
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveType;
+
+/**
+ * The interface <strong>EnhancedComponent</strong>.
+ *
+ * Define the contract used to manage waves.
+ *
+ * @author Sébastien Bordes
+ *
+ * @param <R> A type that implements FacadeReady
+ */
+public interface Component<R extends FacadeReady<R>> extends FacadeReady<R> {
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveType... waveType);
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * The wave checker is used to filter the wave if the checker returns false
+     *
+     * @param waveChecker the wave checker used to forward the wave only if the checker return true
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveChecker waveChecker, final WaveType... waveType);
+
+    /**
+     * Begin to listen the type of wave for the current component.
+     *
+     * Wave Contract will be checked if {@link org.jrebirth.af.core.resource.provided.JRebirthParameters.DEVELOPER_MODE} parameter is true
+     *
+     * The wave checker is used to filter the wave if the checker returns false
+     *
+     * @param waveChecker the wave checker used to forward the wave only if the checker return true
+     * @param method the annotated method concerned
+     * @param waveType the type(s) to listen
+     */
+    void listen(final WaveChecker waveChecker, final Method method, final WaveType... waveType);
+
+    /**
+     * Stop to listen the type of wave for the current component.
+     *
+     * @param waveTypes the type(s) to stop to listen
+     */
+    void unlisten(final WaveType... waveTypes);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param wave the wave to send
+     */
+    void sendWave(final Wave wave);
+
+    /**
+     * Send a wave to the notifier.
+     *
+     * The wave will automatically be sent from JRebirthThread.
+     *
+     * @param waveType the type of wave to send
+     * @param waveBean the wave bean
+     *
+    // ...
+```
+
+Example — listen only if the Wave carries a non-null data item:
+
+```java
+listen(wave -> wave.contains(MyWaves.ITEM), MyWaves.DO_REFRESH);
+```
+
+
+Threading
+-----------------------
+
+By default, wave handler methods run on the thread natural to the component type:
+
+| Component Type | Default Thread |
+|----------------|----------------|
+| Model          | JAT (JavaFX Application Thread) |
+| Service        | JTP (JRebirth Thread Pool) |
+| Command        | Depends on command type (JIT, JAT, or JTP) |
+
+You can override the default thread for any handler method with the `@RunInto` annotation:
+
+```java
+@RunInto(RunType.JTP)
+public void doHeavyComputation(final Wave wave) {
+    // runs in the thread pool instead of JAT
+}
+```
+
+- `@RunInto(JTP)` — override default handler thread for this method only.
+- Models default to JAT; Services default to JIT — use when work must move off that thread.
+
+
+Available `RunType` values: **JAT**, **JAT_SYNC**, **JIT**, **JIT_SYNC**, **JTP**, **JTP_SYNC**, **SAME**.
+
+You can also set a runnable priority:
+
+```java
+@RunInto(value = RunType.JTP, priority = PriorityLevel.Highest)
+public void doCriticalTask(final Wave wave) { ... }
+```
+
+- `priority = PriorityLevel.Highest` — prefer HPTP slot when JTP is busy.
+- Combine with `@RunInto(JTP)` for time-sensitive background handlers.
+
+
+Built-in WaveTypes
+-----------------------
+
+JRebirth ships with several built-in WaveTypes defined in `WaveConstants` and used across the framework:
+
+| Constant                        | Purpose |
+|---------------------------------|---------|
+| `WaveConstants.SHOW_VIEW`       | Show a Model's root node in the scene graph |
+| `WaveConstants.HIDE_VIEW`       | Hide a Model's root node from the scene graph |
+| `WaveConstants.RETURN_VOID`     | Used internally for void-returning service tasks |
+
+Models automatically listen for `SHOW_VIEW` and `HIDE_VIEW` through the `@OnWave` annotations declared on the `Model` interface, so you can trigger view visibility from any component:
+
+```java
+sendWave(WBuilder.showModel(TargetModel.class, myPlaceholder));
+```
+
+- `WBuilder.showModel(Class, Node)` — shows the Model's root node inside `myPlaceholder`.
+- Uses built-in `SHOW_VIEW` wave; always processed on JAT.
+
 
 ]]#
 
