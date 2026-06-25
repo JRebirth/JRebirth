@@ -1,3 +1,0 @@
-public final class ${Name}Controller {
-    // event wiring
-}

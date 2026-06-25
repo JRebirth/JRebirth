@@ -1,0 +1,30 @@
+package ${pkg};
+
+import java.io.Serializable;
+
+import org.jrebirth.af.api.component.behavior.annotation.BehaviorDataFor;
+import org.jrebirth.af.core.component.behavior.BehaviorDataBase;
+
+/**
+ * ${Name} behavior configuration.
+ */
+@BehaviorDataFor(${Name}Behavior.class)
+public final class ${Name}BehaviorData extends BehaviorDataBase implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private boolean enabled = true;
+
+    public static ${Name}BehaviorData create() {
+        return new ${Name}BehaviorData();
+    }
+
+    public boolean enabled() {
+        return this.enabled;
+    }
+
+    public ${Name}BehaviorData enabled(final boolean enabled) {
+        this.enabled = enabled;
+        return this;
+    }
+}

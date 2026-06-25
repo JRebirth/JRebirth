@@ -1,0 +1,51 @@
+package ${pkg};
+
+import java.util.Collections;
+import java.util.List;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+import org.jrebirth.af.api.resource.ResourceItem;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.core.application.DefaultApplication;
+
+/**
+ * ${Name} application entry point. Boots and configures the shell only.
+ */
+public final class ${Name}Application extends DefaultApplication<StackPane> {
+
+    public static void main(final String... args) {
+        Application.launch(${Name}Application.class, args);
+    }
+
+    /** First model shown at startup. */
+    @Override
+    public Class<? extends Model> firstModelClass() {
+        return ${Name}Model.class;
+    }
+
+    @Override
+    protected String applicationTitle() {
+        return "${Name}";
+    }
+
+    /** Attach global stylesheets here, e.g. addCSS(scene, ${Name}Styles.MAIN). */
+    @Override
+    protected void customizeScene(final Scene scene) {
+        super.customizeScene(scene);
+    }
+
+    @Override
+    protected void customizeStage(final Stage stage) {
+        stage.centerOnScreen();
+    }
+
+    /** Resources to preload before the first model is shown. */
+    @Override
+    protected List<? extends ResourceItem<?, ?, ?>> getResourceToPreload() {
+        return Collections.emptyList();
+    }
+}

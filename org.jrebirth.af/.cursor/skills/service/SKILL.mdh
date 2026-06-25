@@ -1,0 +1,34 @@
+---
+name: service
+description: >-
+  Create a JRebirth Service for slow, external, backend, or integration work
+  (REST, DB gateway, file import/export, heavy computation). Use to keep long
+  work out of Model, View, and Controller.
+---
+# Create Service
+
+Service does long-running or external work, off the UI logic.
+
+## Use when
+
+Work is slow, external, backend-facing, or integration-heavy:
+
+- REST client call
+- Spring bridge call
+- file import or export
+- report generation
+- expensive computation
+
+## Keep out
+
+- visual node building
+- trivial UI event handling
+
+## Key API
+
+- split into an interface plus a `DefaultService` implementation, registered with `@Register(value = FooService.class)`.
+- expose `WaveItem<T>` and `WaveType` constants on the interface for typed payloads.
+- name action methods `doXxx(payload, Wave)` so they bind to waves.
+- return results or send a result wave; never touch the scene graph directly.
+
+Template: `templates/ServiceTemplate.java.txt`.

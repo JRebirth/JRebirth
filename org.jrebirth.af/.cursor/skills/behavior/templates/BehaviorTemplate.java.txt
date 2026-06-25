@@ -1,0 +1,17 @@
+package ${pkg};
+
+import org.jrebirth.af.api.component.behavior.Behavior;
+import org.jrebirth.af.api.module.RegistrationPoint;
+import org.jrebirth.af.api.ui.Model;
+
+/**
+ * ${Name} behavior contract. Keep this focused on one reusable interaction concern.
+ */
+@RegistrationPoint
+public interface ${Name}Behavior extends Behavior<${Name}BehaviorData, Model> {
+
+    /**
+     * Apply the reusable behavior action.
+     */
+    void apply${Name}();
+}

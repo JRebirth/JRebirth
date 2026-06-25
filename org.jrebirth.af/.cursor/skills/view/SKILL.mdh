@@ -1,0 +1,32 @@
+---
+name: view
+description: >-
+  Build a JRebirth View (scene graph, controls, bindings, view-local CSS).
+  Use when composing nodes for a feature, or attaching a stylesheet to a view.
+---
+# Create View
+
+View builds nodes and composes the scene graph cleanly.
+
+## Put in View
+
+- panes, controls, labels, tables, forms
+- visual structure
+- simple binding hookup to model properties
+- styling hooks
+
+## Keep out
+
+- business rules
+- persistent or complex state
+- persistence and backend calls
+- heavy imperative workflow
+
+## Key API
+
+- extend `DefaultView<M, Pane, C>`; build nodes in `initView()`; expose controls with package accessors.
+- annotate action controls with `@OnAction` so the Controller receives events.
+- attach view-local stylesheets with `addCSS(StyleSheetItem)` from the view (adds to `pane().getStylesheets()`).
+- build the item with `Resources.create(new StyleSheet("basename"))`, plus `.module(...)` when needed. This is the one-argument form; the `addCSS(scene, ...)` form stays in the Application.
+
+Template: `templates/ViewTemplate.java.txt`.

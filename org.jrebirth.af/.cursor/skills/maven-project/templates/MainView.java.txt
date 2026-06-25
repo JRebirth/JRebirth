@@ -1,0 +1,20 @@
+package ${basePackage}.ui;
+
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.core.ui.DefaultView;
+
+public final class MainView extends DefaultView<MainModel, BorderPane, MainController> {
+
+    public MainView(final MainModel model) throws CoreException {
+        super(model);
+    }
+
+    @Override
+    protected void initView() {
+        node().setPrefSize(800, 600);
+        node().setCenter(new Label("${applicationTitle}"));
+    }
+}

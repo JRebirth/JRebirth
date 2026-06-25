@@ -1,0 +1,22 @@
+---
+description: JRebirth core architecture and role split
+alwaysApply: true
+---
+<!-- gen .mdh -->
+
+# JRebirth core
+
+When repository uses JRebirth, reach framework's own patterns before fall back plain JavaFX
+
+Keep responsibility every role strictly separated:
+
+- Application boots program configures shell
+- Model owns UI state bindings interaction logic
+- View builds nodes delegates user actions
+- Controller wires MVC events together
+- Command performs one discrete action
+- Service handles long-running or backend work
+- Wave carries message between components
+- Behavior holds small piece shared cross-cutting logic
+
+Before create or refactor any JRebirth code read matching skill first

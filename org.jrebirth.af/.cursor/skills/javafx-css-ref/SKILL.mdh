@@ -1,0 +1,28 @@
+---
+name: javafx-css-ref
+description: >-
+  Verify JavaFX CSS rules, selectors, pseudo-classes, and property names against
+  the official reference. Use when the user asks to validate or fix JavaFX CSS
+  or inline JavaFX styles.
+---
+# JavaFX CSS reference checker
+
+Use when the user asks to verify JavaFX CSS rules against official documentation.
+
+## Source of truth
+
+- https://openjfx.io/javadoc/26/javafx.graphics/javafx/scene/doc-files/cssref.html
+
+## Workflow
+
+1. Read the target CSS or inline JavaFX style from the user files.
+2. Fetch the JavaFX CSS reference page.
+3. Check each requested rule against the reference: selector validity, property name, value syntax, and control-specific scope.
+4. Return findings in three blocks: valid, invalid or doubtful, concrete corrections.
+5. If the version is ambiguous, ask which JavaFX version to target; default to the reference URL version.
+
+## Output style
+
+- keep answers short and actionable.
+- quote the exact CSS fragment when reporting an issue.
+- prefer minimal corrections that preserve user intent.

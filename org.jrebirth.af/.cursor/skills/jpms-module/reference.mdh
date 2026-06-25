@@ -1,0 +1,61 @@
+# JRebirth JPMS module-info reference
+
+Detailed reference for the jpms-module skill. Real examples come from the JRebirth showcase and the multi-module ezDojo client.
+
+## Anatomy of a directive
+
+- `requires X;` compile and run against module X.
+- `requires transitive X;` re-export X to anyone that requires this module. Use when an exported type exposes X (a public method returning a `javafx.controls` node, a Jackson type, etc.).
+- `requires static X;` compile-only (annotation processors, optional deps).
+- `exports pkg;` make public API of pkg readable at compile and run time.
+- `exports pkg to M;` qualified export to module M only.
+- `opens pkg;` allow deep reflection (and resource access) on pkg at run time.
+- `opens pkg to M;` qualified open to module M only.
+- `uses S;` this module consumes ServiceLoader service S.
+- `provides S with Impl;` this module supplies S.
+- `open module name { ... }` opens every package; you then never write `opens`.
+
+## JRebirth-specific rules
+
+1. Reflection: core builds Model, View, Controller, Command, Service, and resource enums reflectively. Their packages must be open to `org.jrebirth.af.core`. Whole-module `open module` is the easy path; per-package `opens ... to org.jrebirth.af.core` is the strict path.
+2. FXML: a `DefaultFXMLModel` controller package must be open to `javafx.fxml` too; `open module` covers it, otherwise add `opens controllerPkg to javafx.fxml;` and `requires javafx.fxml;`.
+3. ModuleStarter: the processor generates `XModuleStarter` per module; declare exactly one `provides org.jrebirth.af.api.module.ModuleStarter with X;`. Missing provider means the module is not started by JRebirth.
+4. JRebirth `@Register` / `@RegistrationPoint` services are resolved by JRebirth internally. Do NOT map them to JPMS `provides`/`uses`.
+
+## JavaFX requires matrix
+
+| Need | requires |
+|------|----------|
+| controls, layout, scene | `javafx.controls` (pulls graphics, base) |
+| FXML loading | `javafx.fxml` |
+| WebView / HTMLEditor | `javafx.web` |
+| SwingNode / BufferedImage bridge | `javafx.swing` |
+| media playback | `javafx.media` |
+
+`javafx.graphics` and `javafx.base` usually arrive transitively through `javafx.controls` and through `org.jrebirth.af.core`.
+
+## Resources (images, css, i18n)
+
+Typed JRebirth resource enums load via the module. If a resource package is reflected or read across module boundaries, keep it open (covered by `open module`). Prefer the `client-resources` skill for the resource-loading rules; this skill only covers the module-info side.
+
+## Real examples (read before editing a similar module)
+
+- showcase feature, fully open: `org.jrebirth.af/showcase/todos/src/main/java/module-info.java` — `open module`, `requires api + core`, `provides ModuleStarter`.
+- minimal feature: `org.jrebirth.af/showcase/wave/src/main/java/module-info.java`.
+- complex app shell: `ezDojo/client/app/src/main/java/module-info.java` — many requires, `requires transitive` on shared common, broad exports, commented per-package opens kept as documentation.
+- shared common library: `ezDojo/client/common/src/main/java/module-info.java` — `requires transitive` for leaked JRebirth and JavaFX types.
+- strict feature (not open): `ezDojo/client/club/src/main/java/module-info.java` — plain `module` with explicit `opens ui.* to org.jrebirth.af.core` and `provides ModuleStarter`.
+- ServiceLoader SPI: `ezDojo/client/launcher/src/main/java/module-info.java` — `uses`/`provides` a `UIProvider`, `opens` to the JAXB runtime.
+- plain DTO/shared module (no JRebirth, no UI): `ezDojo/shared/src/main/java/module-info.java`.
+
+## Troubleshooting
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| `IllegalAccessException` / `cannot access ... module does not open` at startup | component package not open to core | `open module`, or `opens pkg to org.jrebirth.af.core;` |
+| FXML `LoadException` reflective access | controller package not open to `javafx.fxml` | open it to `javafx.fxml` (or whole module) |
+| `XModuleStarter` does not resolve | annotation processor did not run | put the JRebirth processor on the annotation-processor path, rebuild |
+| Module loads but JRebirth never starts it | no `provides ModuleStarter` | add the provides line |
+| `ServiceConfigurationError` | SPI declared in `uses` but `provides` missing or impl not public no-arg | add/fix `provides S with Impl;` |
+| split package error | same package in two modules | merge or rename the package |
+| `module not found: javafx.*` | JavaFX module not required or not on module path | add the `requires javafx.*` and the JavaFX modules to the run config |

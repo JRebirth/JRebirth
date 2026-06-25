@@ -1,0 +1,36 @@
+---
+name: jrebirth-core
+description: >-
+  Decide which JRebirth role a piece of code belongs to before writing it.
+  Use when starting any JRebirth work, when roles feel blurred, or when plain
+  JavaFX habits (runLater, raw threads, state in views) start leaking in.
+---
+# JRebirth core
+
+Use a stable role split so the codebase stays predictable and easy to evolve.
+
+## Main rule
+
+Before writing code, ask: is this Application, Model, View, Controller, Command, Service, Wave, or Behavior?
+
+## Ownership
+
+- Application: startup, shell, stage and scene customization.
+- Model: app state, JavaFX properties, bindings, orchestration of UI interactions.
+- View: node construction and visual composition.
+- Controller: MVC event hookup.
+- Command: explicit action execution.
+- Service: long-running, backend, or integration work.
+- Wave: decoupled communication.
+- Behavior: tiny reusable cross-cutting logic.
+
+## Anti-drift checks
+
+- If a View holds business rules, move them to Model.
+- If a Controller owns persistent state, move it to Model.
+- If a Model performs backend I/O directly, move it to a Service.
+- If `runLater` shows up everywhere, the architecture is leaking.
+
+Read the matching role skill before creating or refactoring that role.
+
+For the complete wB-CSMVC role map, see `../mvc-feature/reference.md`.

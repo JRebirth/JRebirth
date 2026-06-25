@@ -1,0 +1,11 @@
+package ${basePackage}.ui;
+
+import org.jrebirth.af.core.ui.DefaultModel;
+
+public final class MainModel extends DefaultModel<MainModel, MainView> {
+
+    @Override
+    protected void initModel() {
+        // Initialize model state here.
+    }
+}

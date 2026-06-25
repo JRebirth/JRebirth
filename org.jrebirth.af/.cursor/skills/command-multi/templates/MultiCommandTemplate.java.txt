@@ -1,0 +1,26 @@
+package ${pkg};
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.key.UniqueKey;
+import org.jrebirth.af.core.command.multi.DefaultMultiCommand;
+
+/**
+ * ${Name} multi command. Runs a named, ordered sequence of existing commands.
+ */
+public final class ${Name}MultiCommand extends DefaultMultiCommand {
+
+    public ${Name}MultiCommand() {
+        super();
+        setSequential(true);
+    }
+
+    @Override
+    protected List<UniqueKey<? extends Command>> defineSubCommand() {
+        return Arrays.asList(
+                             getCommandKey(FirstCommand.class),
+                             getCommandKey(SecondCommand.class));
+    }
+}

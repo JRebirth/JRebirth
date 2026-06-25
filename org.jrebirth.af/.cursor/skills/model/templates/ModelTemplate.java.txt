@@ -1,0 +1,29 @@
+package ${pkg};
+
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.annotation.OnWave;
+import org.jrebirth.af.core.ui.DefaultModel;
+
+/**
+ * ${Name} model. Owns state, bindings, and interaction orchestration.
+ */
+public final class ${Name}Model extends DefaultModel<${Name}Model, ${Name}View> {
+
+    // Link sibling models with @Link
+    // @Link
+    // private OtherModel otherModel;
+
+    /** Set up properties and bindings once the view exists. */
+    @Override
+    protected void bind() {
+        super.bind();
+        // view().someControl().textProperty().bind(...);
+    }
+
+    /** React to a wave. Emit with sendWave(${Name}Waves.SOMETHING_WT). */
+    @OnWave(${Name}Waves.SOMETHING)
+    protected void onSomething(final Wave wave) {
+        // handle message, then optionally:
+        // callCommand(${Name}Command.class, WBuilder.waveData(${Name}Waves.ITEM, value));
+    }
+}

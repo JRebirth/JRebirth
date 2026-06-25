@@ -1,0 +1,12 @@
+open module ${moduleName} {
+
+    exports ${basePackage};
+    exports ${basePackage}.ui;
+    exports ${basePackage}.resources;
+
+    provides org.jrebirth.af.api.module.ModuleStarter with ${basePackage}.${starterClass};
+
+    requires javafx.controls;
+    requires org.jrebirth.af.api;
+    requires org.jrebirth.af.core;
+}
