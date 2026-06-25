@@ -117,7 +117,7 @@
   <text x="888" y="550" class="edge-text">result wave</text>
 
   <path d="M870 325 L830 325 L830 375 L810 375" class="edge"/>
-  <text x="842" y="310" class="edge-text">@OnWave</text>
+  <text x="842" y="310" class="edge-text">OnWave</text>
 
   <path d="M965 295 L965 210" class="edge-dash"/>
   <text x="1010" y="255" class="edge-text">decoupled</text>
