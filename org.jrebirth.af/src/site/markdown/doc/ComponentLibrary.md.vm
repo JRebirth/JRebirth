@@ -1,0 +1,470 @@
+﻿<head>
+<![CDATA[
+    <title>Component Library</title>
+    <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
+]]>
+</head>
+
+<div id="catcherTitle">Component Library</div>
+<div id="catcherContent">Ready-made UI containers: Stack, Tabs, Dock, and Workbench</div>
+
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end
+
+#[[
+
+## In 30 seconds
+
+The **component** module ships layout Models: **StackModel** (fading page stack), **TabbedPaneModel**, **DockPaneModel**, **WorkbenchModel**. Configure with fluent `*Config` beans and navigate via waves (`StackWaves`, `TabbedPaneModel.ADD`, etc.).
+
+Quick Start
+=========================
+
+Add the component module and attach a `StackModel` with a `PageEnum` for animated page navigation.
+
+```xml
+<dependency>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>component</artifactId>
+    <version>${jrebirth.version}</version>
+</dependency>
+```
+
+**Minimal example — stack with enum-driven pages (FXML showcase pattern):**
+
+```java
+@Override
+protected void initModel() {
+    InnerComponent<StackModel> stack = CBuilder.innerComponent(StackModel.class, FXMLPage.class);
+    this.stackModel = findInnerComponent(stack);
+}
+
+@Override
+protected void showView() {
+    view().node().setCenter(this.stackModel.node());
+}
+
+// Navigate to another page:
+sendWave(WBuilder.wave()
+    .waveType(StackWaves.SHOW_PAGE_ENUM)
+    .addDatas(WBuilder.waveData(StackWaves.PAGE_ENUM, FXMLPage.HybridFxml)));
+```
+
+`StackModel` uses `ShowFadingModelCommand` internally — page switches fade automatically.
+
+
+Component Library Overview
+=================================
+
+The `component` module provides reusable, configurable UI container models that cover common application layout patterns:
+
+* **StackModel** — Page-based navigation with animated transitions.
+* **TabbedPaneModel** — Tabbed container with drag-and-drop tab reordering.
+* **DockPaneModel** — Dockable panel layout with configurable orientation.
+* **WorkbenchModel** — IDE-style workbench combining dock panes and tabs.
+
+Each container is configured via a dedicated configuration bean and communicates through JRebirth waves.
+
+
+StackModel
+=========================
+
+`StackModel` manages a `StackPane` that shows one child Model at a time. It uses `ShowFadingModelCommand` for animated transitions between pages.
+
+
+```java
+@Override
+protected void initModel() {
+    listen(new DefaultWaveChecker<>(StackWaves.STACK_NAME, getStackName()), StackWaves.SHOW_PAGE_MODEL);
+    listen(new ClassWaveChecker<>(StackWaves.PAGE_ENUM, getPageEnumClass()), StackWaves.SHOW_PAGE_ENUM);
+}
+
+public void doShowPageEnum(final PageEnum pageEnum, final Wave wave) {
+    if (getPageEnumClass() != null && getPageEnumClass().equals(pageEnum.getClass())) {
+        showPage(pageEnum.getModelKey(), wave);
+    }
+}
+
+private void showPage(final UniqueKey<? extends Model> pageModelKey, final Wave wave) {
+    if (pageModelKey != null && !pageModelKey.equals(this.currentModelKey)) {
+        final DisplayModelWaveBean waveBean = DisplayModelWaveBean.create()
+            .childrenPlaceHolder(view().node().getChildren())
+            .appendChild(false)
+            .showModelKey(pageModelKey)
+            .hideModelKey(this.currentModelKey);
+        this.currentModelKey = waveBean.showModelKey();
+        sendWave(WBuilder.callCommand(ShowFadingModelCommand.class).waveBean(waveBean).relatedWave(wave));
+    }
+}
+```
+
+`showPage` builds the wave bean with `appendChild(false)` and fires `ShowFadingModelCommand` — this is where cross-fade transitions run.
+
+### PageEnum
+
+Pages are mapped via a `PageEnum` that associates enum constants with Model keys:
+
+```java
+public enum MyPages implements PageEnum {
+    Home, Settings, Profile;
+
+    @Override
+    public UniqueKey<? extends Model> getModelKey() {
+        switch (this) {
+            case Home:     return Key.create(HomeModel.class);
+            case Settings: return Key.create(SettingsModel.class);
+            case Profile:  return Key.create(ProfileModel.class);
+            default:       return Key.create(HomeModel.class);
+        }
+    }
+}
+```
+
+### StackWaves
+
+Navigation is triggered by sending waves defined in `StackWaves`:
+
+
+```java
+public interface StackWaves {
+
+    /*****************************************************************************************************/
+    /** _________________________________________Wave Items.____________________________________________ */
+    /*****************************************************************************************************/
+
+    /** The name of the stack concerned. */
+    WaveItemBase<String> STACK_NAME = new WaveItemBase<String>() {
+    };
+
+    /** The Enum class that list all pages displayable into the stack. */
+    // WaveItem<Class<? extends PageEnum>> STACK_PAGES = new WaveItem<Class<? extends PageEnum>>() {
+    // };
+
+    /** The page to display (model class descriptor). */
+    WaveItemBase<UniqueKey<? extends Model>> PAGE_MODEL_KEY = new WaveItemBase<UniqueKey<? extends Model>>() {
+    };
+
+    /** The page to display (enum descriptor). */
+    WaveItemBase<PageEnum> PAGE_ENUM = new WaveItemBase<PageEnum>() {
+    };
+
+    /*****************************************************************************************************/
+    /** _________________________________________Wave Types.____________________________________________ */
+    /*****************************************************************************************************/
+
+    /** Show Page (with Model) action. */
+    WaveType SHOW_PAGE_MODEL = WBuilder.waveType("SHOW_PAGE_MODEL").items(PAGE_MODEL_KEY, STACK_NAME);
+
+    /** Show Page (with Enum) action. */
+    WaveType SHOW_PAGE_ENUM = WBuilder.waveType("SHOW_PAGE_ENUM").items(PAGE_ENUM/* , STACK_PAGES */);
+
+}
+```
+
+Available wave types:
+
+| WaveType | Parameters | Description |
+|----------|-----------|-------------|
+| `SHOW_PAGE_MODEL` | `PAGE_MODEL_KEY`, `STACK_NAME` | Show a page by its model key |
+| `SHOW_PAGE_ENUM` | `PAGE_ENUM` | Show a page by its enum constant |
+
+### Using StackModel
+
+To create and configure a `StackModel`:
+
+```java
+InnerComponent<StackModel> stack = CBuilder.innerComponent(StackModel.class, MyPages.class);
+StackModel stackModel = findInnerComponent(stack);
+```
+
+To navigate programmatically:
+
+```java
+sendWave(WBuilder.wave()
+    .waveType(StackWaves.SHOW_PAGE_ENUM)
+    .addDatas(WBuilder.waveData(StackWaves.PAGE_ENUM, MyPages.Settings)));
+```
+
+The first enum constant is automatically shown when the stack is first displayed.
+
+### Configuration
+
+`StackConfig` allows you to set:
+
+* `stackName()` — Unique identifier for the stack (enables multiple stacks in the same app).
+* `pageEnumClass()` — The `PageEnum` class that maps page IDs to model keys.
+
+
+TabbedPaneModel
+=========================
+
+`TabbedPaneModel` provides a tabbed container with support for drag-and-drop tab reordering and animated tab insertion/removal.
+
+
+```java
+public static WaveType ADD = WBuilder.waveType("ADD_TAB").items(TAB);
+public static WaveType REMOVE = WBuilder.waveType("REMOVE_TAB").items(TAB);
+
+@Override
+protected void initModel() {
+    final WaveChecker waveChecker = wave ->
+        ObjectUtility.equalsOrBothNull(wave.get(TAB_KEY), object().id());
+    listen(waveChecker, ADD);
+    listen(waveChecker, REMOVE);
+}
+
+@Override
+protected void bind() {
+    object().tabs().addListener(this::onTabsChanged);
+}
+```
+
+Tab insertions and removals run through `SequentialTransition` on the JAT. Filter waves with `TabbedPaneModel.TAB_KEY` matching `TabbedPaneConfig.id()`.
+
+
+### Adding Tabs
+
+Tabs are added via waves or programmatically using `Dockable` instances:
+
+```java
+Dockable tab = Dockable.create()
+    .modelKey(Key.create(MyContentModel.class))
+    .name("My Tab");
+
+sendWave(WBuilder.wave()
+    .waveType(TabbedPaneModel.ADD)
+    .addDatas(
+        WBuilder.waveData(TabbedPaneModel.TAB, tab),
+        WBuilder.waveData(TabbedPaneModel.TAB_KEY, "myTabbedPane")));
+```
+
+### Configuration
+
+`TabbedPaneConfig` allows you to set:
+
+* `id()` — Unique identifier for this tabbed pane.
+* `orientation()` — Tab bar position: `TabbedPaneOrientation.top`, `bottom`, `left`, or `right`.
+* `tabs()` — Initial list of `Dockable` tabs.
+* `styleClass()` — CSS style class applied to the container.
+
+
+DockPaneModel
+=========================
+
+`DockPaneModel` provides a dockable panel layout that splits space between child panes. Child panes can be other `DockPaneModel` instances (for nesting) or `TabbedPaneModel` instances.
+
+
+```java
+public static WaveType ADD = WBuilder.waveType("ADD_PART").items(MODEL);
+
+@Override
+protected void initModel() {
+    listen(wave -> ObjectUtility.equalsOrBothNull(wave.get(DOCK_KEY), object().id()), ADD, REMOVE);
+    for (final PartConfig<?, ?> pc : object().panes()) {
+        callCommand(AddDockCommand.class,
+            DockWaveBean.create().dockConfig(object()).parts(pc));
+    }
+}
+
+private void onPanesChanged(final ListChangeListener.Change<? extends PartConfig<?, ?>> change) {
+    while (change.next()) {
+        if (change.wasRemoved()) {
+            callCommand(RemoveDockCommand.class, DockWaveBean.create().dockConfig(object())
+                .parts(change.getRemoved().toArray(new PartConfig[0])));
+        }
+        if (change.wasAdded()) {
+            callCommand(AddDockCommand.class, DockWaveBean.create().dockConfig(object())
+                .parts(change.getList().get(change.getFrom())));
+        }
+    }
+}
+```
+
+Pane list changes dispatch `AddDockCommand` / `RemoveDockCommand`. Nest `DockPaneConfig` entries inside `panes()` for multi-level splits.
+
+
+### Configuration
+
+`DockPaneConfig` allows you to set:
+
+* `id()` — Unique identifier for this dock pane.
+* `orientation()` — `DockPaneOrientation.horizontal` or `vertical` (split direction).
+* `panes()` — Child `PartConfig` instances (can be nested `DockPaneConfig` or `TabbedPaneConfig`).
+
+### Adding/Removing Parts
+
+Parts are managed via `AddDockCommand` / `RemoveDockCommand` or through the wave system:
+
+```java
+sendWave(WBuilder.wave()
+    .waveType(DockPaneModel.ADD)
+    .addDatas(
+        WBuilder.waveData(DockPaneModel.MODEL, myModel),
+        WBuilder.waveData(DockPaneModel.DOCK_KEY, "myDock")));
+```
+
+
+WorkbenchModel
+=========================
+
+`WorkbenchModel` provides an IDE-style workbench layout. It combines `DockPaneModel` and `TabbedPaneModel` into a configurable multi-panel workspace.
+
+
+`WorkbenchModel` is a thin wrapper; real workbench layouts are composed from nested `DockPaneModel` and `TabbedPaneModel` instances. The workbench showcase `TabDemoModel` builds a 2×2 grid by nesting `DockPaneConfig` and `TabbedPaneConfig`:
+
+```java
+final DockPaneModel rootDock = getModel(DockPaneModel.class,
+    DockPaneConfig.create()
+        .id("RootDock")
+        .orientation(DockPaneOrientation.vertical)
+        .panes(topDockConfig, bottomDockConfig));
+node().setCenter(rootDock.node());
+```
+
+Each quadrant wraps a `TabbedPaneConfig` with its own tab orientation (`top`, `right`, `bottom`, `left`). See the full listing below.
+
+
+### Example: Building a Workbench
+
+The showcase demonstrates how to compose a complex workbench layout using nested dock panes and tabbed panes:
+
+
+```java
+@Register(value = ModuleModel.class)
+public class TabDemoModel extends DefaultSimpleModel<BorderPane> implements ModuleModel {
+
+	private boolean done = false;
+
+	@Override
+	protected void initSimpleView() {
+		super.initSimpleView();
+
+		final String topLeft = "TopLeft";
+		final String topRight = "TopRight";
+		final String bottomLeft = "BottomLeft";
+		final String bottomRight = "BottomRight";
+		final DockPaneModel rootDock = getModel(DockPaneModel.class,
+				DockPaneConfig.create()
+						.id("RootDock")
+						.orientation(DockPaneOrientation.vertical)
+						.panes(
+								DockPaneConfig.create()
+										.id("TopDock")
+										.orientation(DockPaneOrientation.horizontal)
+										.panes(
+												DockPaneConfig.create()
+														.id(topLeft+"Dock")
+														.orientation(DockPaneOrientation.horizontal)
+														.panes(TabbedPaneConfig.create()
+																.id(topLeft)
+																.styleClass("Top Left")
+																.orientation(TabbedPaneOrientation.top)
+																.tabs(
+																		dockable("1"),
+																		dockable("2"),
+																		dockable("3"),
+																		dockable("4"),
+																		dockable("5"),
+																		dockable("6")
+																		)),
+												DockPaneConfig.create()
+														.id(topRight+"Dock")
+														.orientation(DockPaneOrientation.horizontal)
+														.panes(TabbedPaneConfig.create()
+																.id(topRight)
+																.styleClass("Top Right")
+																.orientation(TabbedPaneOrientation.right)
+																.tabs(
+																		dockable("7"),
+																		dockable("8"),
+																		dockable("9")
+																		))),
+								DockPaneConfig.create()
+										.id("BottomDock")
+										.orientation(DockPaneOrientation.horizontal)
+										.panes(
+												DockPaneConfig.create()
+														.id(bottomLeft+"Dock")
+														.orientation(DockPaneOrientation.horizontal)
+														.panes(TabbedPaneConfig.create()
+																.id(bottomLeft)
+																.styleClass("Bottom Left")
+																.orientation(TabbedPaneOrientation.bottom)
+																.tabs(
+																		dockable("15"),
+																		dockable("16")
+																		)),
+												DockPaneConfig.create()
+														.id(bottomRight+"Dock")
+														.orientation(DockPaneOrientation.horizontal)
+														.panes(TabbedPaneConfig.create()
+																.id(bottomRight)
+																.styleClass("Bottom Right")
+																.orientation(TabbedPaneOrientation.left)
+																.tabs(
+																		dockable("10"),
+																		dockable("11"),
+																		dockable("12"),
+																		dockable("13"),
+																		dockable("14")
+																		)
+																))));
+		node().setCenter(rootDock.node());
+	}
+}
+```
+
+This example creates a 2x2 grid layout:
+
+* **Top-left**: Tabbed pane with tabs on top
+* **Top-right**: Tabbed pane with tabs on the right
+* **Bottom-left**: Tabbed pane with tabs on the bottom
+* **Bottom-right**: Tabbed pane with tabs on the left
+
+Each section is wrapped in nested `DockPaneConfig` instances to control the split directions.
+
+
+Configuration Beans
+=========================
+
+All component containers use configuration beans that follow a fluent builder pattern:
+
+### StackConfig
+
+```java
+StackConfig.create()
+    .stackName("main")
+    .pageEnumClass(MyPages.class)
+```
+
+### TabbedPaneConfig
+
+```java
+TabbedPaneConfig.create()
+    .id("editor")
+    .orientation(TabbedPaneOrientation.top)
+    .styleClass("editor-tabs")
+    .tabs(dockable1, dockable2)
+```
+
+### DockPaneConfig
+
+```java
+DockPaneConfig.create()
+    .id("rootDock")
+    .orientation(DockPaneOrientation.vertical)
+    .panes(topConfig, bottomConfig)
+```
+
+### PartConfig
+
+`PartConfig` is the common supertype for all pane configurations (`TabbedPaneConfig`, `DockPaneConfig`). It allows heterogeneous nesting of container types within a dock layout.
+
+
+]]#
+
+#if( !$all )
+#parse("TocList.vm")
+#displayFooterToc("ComponentLibrary")
+#end

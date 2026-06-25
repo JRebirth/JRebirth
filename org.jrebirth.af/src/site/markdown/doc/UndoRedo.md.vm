@@ -1,0 +1,440 @@
+﻿<head>
+<![CDATA[
+    <title>Undo / Redo</title>
+    <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
+]]>
+</head>
+
+<div id="catcherTitle">Undo / Redo</div>
+<div id="catcherContent">Complete undo/redo system based on the Command pattern with named stacks</div>
+
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end
+
+#[[
+
+
+Undo/Redo Overview
+=========================
+
+JRebirth provides a complete undo/redo module (`undoredo`) built on top of the Command pattern. It manages parallel stacks of undoable commands, allowing multiple independent undo histories identified by name.
+
+
+Quick Start
+=========================
+
+Follow these steps to add undo/redo to an existing JRebirth application:
+
+1. **Add the Maven dependency** for the `undoredo` module (it transitively pulls in `core`):
+
+```xml
+<dependency>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>undoredo</artifactId>
+    <version>${jrebirth.version}</version>
+</dependency>
+```
+
+2. **Create an undoable command** by extending `DefaultUndoableCommand` and implementing `init`, `undo`, and `redo`.
+3. **Wire action buttons** to your command, passing a stack name as `WaveData` (see `UndoRedoWaves.STACK_NAME` below).
+4. **Wire undo/redo buttons** to `UndoCommand` and `RedoCommand` with the same stack name.
+
+Minimal controller wiring (from the showcase):
+
+```java
+// Shared stack name for all commands on this editor
+static final WaveData<String> stackName =
+        WBuilder.waveData(UndoRedoWaves.STACK_NAME, "main");
+
+// Undo / redo buttons
+linkCommand(view().getUndoButton(), MouseEvent.MOUSE_CLICKED, UndoCommand.class, stackName);
+linkCommand(view().getRedoButton(), MouseEvent.MOUSE_CLICKED, RedoCommand.class, stackName);
+
+// Action that registers itself on the stack automatically
+linkCommand(view().getAddButton(), MouseEvent.MOUSE_CLICKED, MyUndoableCommand.class, stackName);
+```
+
+When the user triggers `MyUndoableCommand`, `AbstractUndoableCommand` captures state in `init()`, registers the command on the named stack, and calls `redo()`. Undo and redo buttons pop from the stacks managed by `UndoRedoService`.
+
+
+The system revolves around these key elements:
+
+* **Undoable** — Marker interface for commands that support undo/redo.
+* **AbstractUndoableCommand** — Base class that implements the undo/redo lifecycle.
+* **UndoRedoService** — Maintains the command stack and the undone stack.
+* **StackUpCommand** — Registers a new undoable command on a named stack and executes its `redo()`.
+* **UndoCommand / RedoCommand** — Pop commands from respective stacks and invoke `undo()` or `redo()`.
+
+
+Undoable Interface
+=========================
+
+`Undoable` is the marker interface that any command must implement (directly or via `AbstractUndoableCommand`) to participate in the undo/redo system. It extends `Command`, so any undoable command is also a regular JRebirth command.
+
+
+AbstractUndoableCommand
+=========================
+
+This is the base class for all undoable commands. It handles the undo/redo lifecycle automatically:
+
+1. **First execution**: calls `init(Wave)` to capture state, then delegates to `StackUpCommand` which calls `redo()`.
+2. **Subsequent calls with UNDO_REDO flag**: dispatches to either `undo()` or `redo()` based on the boolean flag.
+
+
+```java
+/**
+ * The Class AbstractUndoableCommand is the base class for all other undoable command.
+ *
+ * @param <WB> The WaveBean type used for this command (by default you can use the WaveBean interface)
+ *
+ * @author Sébastien Bordes
+ */
+public abstract class AbstractUndoableCommand<WB extends WaveBean> extends AbstractSingleCommand<WB> implements Undoable<WB> {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void perform(final Wave wave) throws CommandException {
+
+        // Get the undo/redo flag to know which action to perform
+        if (wave.contains(UndoRedoWaves.UNDO_REDO)) {
+
+            // The flag is true perform undo action
+            if (wave.get(UndoRedoWaves.UNDO_REDO)) {
+                undo();
+            } else {
+                // The flag is false perform redo action
+                redo();
+            }
+
+        } else {
+
+            // If the flag is not set we must initialize the command
+            init(wave);
+            // Get existing wave data
+            final List<WaveData<?>> data = wave.waveDatas();
+            // and add the undoable command
+            data.add(WBuilder.waveData(UndoRedoWaves.UNDOABLE_COMMAND, this));
+            // in order to register it into the right command stack
+            callCommand(StackUpCommand.class, data.toArray(new WaveDataBase[data.size()]));
+        }
+
+    }
+
+    /**
+     * Initialize the command internal properties to be able to undo or redo the command.
+     *
+     * @param wave the wave
+     */
+    protected abstract void init(final Wave wave);
+
+    /**
+     * Undo the command.
+     */
+    protected abstract void undo();
+
+    /**
+     * Do or Redo the command.
+     */
+    protected abstract void redo();
+
+}
+```
+
+Subclasses must implement three abstract methods:
+
+* `init(Wave wave)` — Capture initial state from the wave data (called once on first execution).
+* `undo()` — Reverse the action.
+* `redo()` — Apply (or re-apply) the action.
+
+
+UndoRedoWaves
+=========================
+
+The `UndoRedoWaves` interface defines the `WaveItem` constants used to carry undo/redo data through waves:
+
+
+```java
+/**
+ * The Interface UndoRedoWaves used to define WaveItems used by undo/Redo waves.
+ */
+public interface UndoRedoWaves {
+
+    /** The name ot the undeo/redo stack to use. */
+    WaveItemBase<String> STACK_NAME = new WaveItemBase<String>() {
+    };
+
+    /** The undo redo flag to indicate if we must process the {@link AbstractUndoableCommand}.undo method or {@link AbstractUndoableCommand}.redo. */
+    WaveItemBase<Boolean> UNDO_REDO = new WaveItemBase<Boolean>() {
+    };
+
+    /** The {@link Undoable} command. */
+    WaveItemBase<Undoable> UNDOABLE_COMMAND = new WaveItemBase<Undoable>() {
+    };
+
+}
+```
+
+* `STACK_NAME` — Identifies which named stack to operate on.
+* `UNDO_REDO` — Boolean flag: `true` = undo, `false` = redo.
+* `UNDOABLE_COMMAND` — The undoable command instance being stacked.
+
+
+UndoRedoService
+=========================
+
+The `UndoRedoService` is the core engine of the undo/redo system. It maintains two synchronized lists per stack instance:
+
+* **commandStack** — Commands that have been executed (available for undo).
+* **undoneStack** — Commands that have been undone (available for redo).
+
+Each named stack is a separate `UndoRedoService` instance, keyed by the stack name string.
+
+The service keeps two synchronized lists per stack: executed commands (`commandStack`) and undone commands (`undoneStack`). The three public methods below move commands between stacks and dispatch `undo()` or `redo()` on the affected command:
+
+
+```java
+public class UndoRedoService extends DefaultService {
+
+    /** The command stack. */
+    private final List<Undoable> commandStack = Collections.synchronizedList(new ArrayList<Undoable>());
+
+    /** The commands that have been undone. */
+    private final List<Undoable> undoneStack = Collections.synchronizedList(new ArrayList<Undoable>());
+
+    /**
+     * Stack up a command.
+     *
+     * Move internal index and execute the command by triggering a Redo Wave Command
+     *
+     * @param command the command
+     */
+    public void stackUp(final Undoable command) {
+
+        // Stack up the command
+        this.commandStack.add(command);
+
+        // Call the redo method of the Undoable command
+        this.commandStack.get(this.commandStack.size() - 1)
+                         .run(WBuilder.wave().addDatas(WBuilder.waveData(UndoRedoWaves.UNDO_REDO, false)));
+    }
+
+    /**
+     * Undo the last command.
+     */
+    public void undo() {
+
+        // If there is at least one command left to undo
+        if (this.commandStack.size() > 0) {
+            // Here put the last command on the undone stack
+            this.undoneStack.add(this.commandStack.get(this.commandStack.size() - 1));
+            // here remove the last command of the command stack
+            this.commandStack.remove(this.commandStack.get(this.commandStack.size() - 1));
+            // Call Undo method
+            this.undoneStack.get(this.undoneStack.size() - 1)
+                            .run(WBuilder.wave().addDatas(WBuilder.waveData(UndoRedoWaves.UNDO_REDO, true)));
+        } else {
+            // begin of stack, do nothing
+            LOGGER.info("No more command to undo, begin of stack");
+        }
+    }
+
+    /**
+     * Redo the last command that was undo-ed.
+     */
+    public void redo() {
+
+        // If there is at least one command to redo
+        if (this.undoneStack.size() > 0) {
+            // add the last undone command on the command stack
+            this.commandStack.add(this.undoneStack.get(this.undoneStack.size() - 1));
+            // remove the command to redo of the undone stack.
+            this.undoneStack.remove(this.undoneStack.size() - 1);
+            // Call Redo method
+            this.commandStack.get(this.commandStack.size() - 1)
+                             .run(WBuilder.wave().addDatas(WBuilder.waveData(UndoRedoWaves.UNDO_REDO, false)));
+        } else {
+            // End of stack, do nothing
+            LOGGER.info("No more command to redo, end of stack");
+        }
+    }
+
+}
+```
+
+### Stack operations
+
+| Operation | Effect |
+|-----------|--------|
+| `stackUp(command)` | Adds command to commandStack, calls `redo()` |
+| `undo()` | Moves top of commandStack to undoneStack, calls `undo()` |
+| `redo()` | Moves top of undoneStack back to commandStack, calls `redo()` |
+
+
+StackUpCommand
+=========================
+
+`StackUpCommand` is the internal command that registers an undoable command on the appropriate named stack. It extracts the stack name and undoable command from the wave, then calls `UndoRedoService.stackUp()`.
+
+This command is called automatically by `AbstractUndoableCommand.perform()` — you rarely need to invoke it directly.
+
+
+UndoCommand / RedoCommand
+=========================
+
+These are the commands you wire to UI buttons:
+
+* **UndoCommand** — Retrieves the `UndoRedoService` for the given stack name and calls `undo()`.
+* **RedoCommand** — Retrieves the `UndoRedoService` for the given stack name and calls `redo()`.
+
+Both commands read the stack name from `UndoRedoWaves.STACK_NAME` in the incoming wave.
+
+
+Usage Example
+=========================
+
+### Creating an Undoable Command
+
+Here is a concrete example from the showcase that creates shapes on a canvas with full undo/redo support:
+
+
+```java
+/**
+ * The Class CreateShapeCommand is used to create a node and add it to the graphical editor.
+ */
+@RunInto(RunType.JAT)
+public class CreateShapeCommand extends DefaultUndoableCommand<WaveBean> {
+
+    /** The shape type. */
+    private ShapeType shapeType;
+
+    /** The created node. */
+    private Node createdNode;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void init(final Wave wave) {
+        this.shapeType = wave.get(UndoAppWaves.SHAPE_TYPE);
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void redo() {
+
+        // Build a node according to the shape type
+        switch (this.shapeType) {
+            case Circle:
+                this.createdNode = new Circle();
+                ((Circle)this.createdNode).setFill(Color.BLUE);
+                this.createdNode.setLayoutY(60);
+                this.createdNode.setLayoutY(60);
+                ((Circle)this.createdNode).setRadius(30);
+                break;
+            case Square:
+                this.createdNode = new Rectangle();
+                ((Rectangle) this.createdNode).setFill(Color.BLUEVIOLET);
+                this.createdNode.setLayoutX(50);
+                this.createdNode.setLayoutY(100);
+                ((Rectangle) this.createdNode).setWidth(30);
+                ((Rectangle) this.createdNode).setHeight(30);
+                break;
+            case Rectangle:
+                this.createdNode = new Rectangle();
+                ((Rectangle) this.createdNode).setFill(Color.AZURE);
+                this.createdNode.setLayoutX(100);
+                this.createdNode.setLayoutY(150);
+                ((Rectangle) this.createdNode).setWidth(30);
+                ((Rectangle) this.createdNode).setHeight(15);
+                break;
+        }
+
+        // Add to editor
+        getModel(UndoModel.class).addShape(this.createdNode);
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void undo() {
+
+        // Remove from editor
+        getModel(UndoModel.class).removeShape(this.createdNode);
+
+    }
+
+}
+```
+
+Key points:
+
+* The `@RunInto(RunType.JAT)` annotation ensures the command runs on the JavaFX Application Thread (since it manipulates nodes).
+* `init()` captures the shape type from the wave.
+* `redo()` creates the node and adds it to the editor.
+* `undo()` removes the node from the editor.
+
+### Wiring Undo/Redo to the UI
+
+The controller uses `linkCommand` to bind buttons to `UndoCommand`, `RedoCommand`, and the custom `CreateShapeCommand`:
+
+
+```java
+public final class UndoController extends DefaultController<UndoModel, UndoView> {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(UndoController.class);
+
+    /**
+     * Default Constructor.
+     *
+     * @param view the view to control
+     *
+     * @throws CoreException if an error occurred while creating event handlers
+     */
+    public UndoController(final UndoView view) throws CoreException {
+        super(view);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initEventAdapters() throws CoreException {
+
+        // Manage Ui Command Button
+        linkCommand(view().getUndoButton(), MouseEvent.MOUSE_CLICKED, UndoCommand.class, UndoModel.stackName);
+        linkCommand(view().getRedoButton(), MouseEvent.MOUSE_CLICKED, RedoCommand.class, UndoModel.stackName);
+
+        linkCommand(view().getAddCircleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WBuilder.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Circle), UndoModel.stackName);
+        linkCommand(view().getAddSquareButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WBuilder.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Square), UndoModel.stackName);
+        linkCommand(view().getAddRectangleButton(), MouseEvent.MOUSE_CLICKED, CreateShapeCommand.class, WBuilder.waveData(UndoAppWaves.SHAPE_TYPE, ShapeType.Rectangle), UndoModel.stackName);
+
+    }
+
+}
+```
+
+Notice how the stack name (`UndoModel.stackName`) is passed as wave data to every command invocation, ensuring all operations target the same named stack.
+
+### Summary Pattern
+
+1. Create a command extending `DefaultUndoableCommand` (or `AbstractUndoableCommand`).
+2. Override `init(Wave)`, `undo()`, and `redo()`.
+3. Wire action buttons to your custom command (it auto-registers on the stack).
+4. Wire undo/redo buttons to `UndoCommand` / `RedoCommand` with the stack name as `WaveData`.
+
+
+]]#
+
+#if( !$all )
+#parse("TocList.vm")
+#displayFooterToc("UndoRedo")
+#end

@@ -21,7 +21,7 @@ Overview
 How does JRebirth work ?
 ------------------------------
 
-JRebirth uses a **WB-CS-MVC** pattern with 7 main layers of abstractions:
+JRebirth uses a **wB-CS-Mvc** pattern with 7 main layers of abstractions:
 
 * Wave
 * Behavior
@@ -33,6 +33,8 @@ JRebirth uses a **WB-CS-MVC** pattern with 7 main layers of abstractions:
 	
 
 The illustration below shows 5 of them (Waves and Behaviors are not shown).
+
+Behaviors are the fourth kind of component, providing pluggable cross-cutting logic that can be attached to any other component. [Learn more about Behaviors](Behavior.html)
 
 <div class="uml">
 	<a title="JRebirth Overview" rel="lightbox" href="uml/JRebirth_WCS_MVC.png">
@@ -98,7 +100,7 @@ ServiceFacade and Services
 Service (**S**) Components are used to communicate with others Applications (like a Server), to perform long tasks (computations).
 It can use Spring HttpRequests, Web Services, Restlets, files or whatever you want. Service's methods are called into a dedicated thread pool, and their results are sent to other Components that have declared they are interested in. It also manages the thread in which the receiver will process the result.
 
-[Learn more about Services](Service.html)
+[Learn more about Services](Services.html)
 
 
 UiFacade and Models
@@ -129,6 +131,22 @@ Controller (**C**) elements are not Components, they are used to manage the View
 A controller can implements custom Adapters to manage events (like MouseAdapter) and link its built-in Handler to the View's nodes (like MouseHandler).
 Or it can simply implement custom methods if annotations are used.
 They also provide a set of convenient methods used to perform common event handling, ie: sending a wave when a button click is performed.
+
+
+Extension Modules
+---------------------
+
+JRebirth ships additional modules that extend the core framework:
+
+* **Component Library** — reusable UI components: StackModel, TabbedPane, DockPane, Workbench. [Learn more](Component.html)
+* **UndoRedo** — command-based undo/redo stack. [Learn more](UndoRedo.html)
+* **Transitions** — predefined JavaFX animations. [Learn more](Transition.html)
+* **REST** — declarative HTTP/REST client integration. [Learn more](Rest.html)
+* **Security** — authentication and authorization support. [Learn more](Security.html)
+* **Dialog** — standard dialog management. [Learn more](Dialog.html)
+* **Form** — form binding and validation. [Learn more](Form.html)
+* **IconFont** — FontAwesome, Icomoon, and custom icon font bridges. [Learn more](FontIcon.html)
+* **Tooling** — Maven plugin for code generation and scaffolding. [Learn more](Tooling.html)
 
 ]]#
 

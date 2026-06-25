@@ -1,0 +1,291 @@
+﻿<head>
+<![CDATA[
+    <title>IconFont</title>
+    <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
+]]>
+</head>
+
+<div id="catcherTitle">Icon Font Bridge</div>
+<div id="catcherContent">Type-safe icon fonts for JavaFX applications.</div>
+
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end
+
+#[[
+
+## In 30 seconds
+
+Icon font bridges expose type-safe enums implementing **IconFont**. Call `FontAwesome.home.use(button, 18)` — font and glyph text are applied in one step. Each font is a separate Maven artifact under `org.jrebirth.af.iconfont-bridge`.
+
+Quick Start
+---------------------
+
+Add an icon-font bridge artifact and call `use()` on any JavaFX `Labeled` control.
+
+```xml
+<dependency>
+    <groupId>org.jrebirth.af.iconfont-bridge</groupId>
+    <artifactId>fontawesome</artifactId>
+    <version>${jrebirth.version}</version>
+</dependency>
+```
+
+**Minimal example — icon on a Button in a View:**
+
+```java
+@Override
+protected void initView() {
+    Button saveBtn = new Button();
+    FontAwesome.floppy_o.use(saveBtn, 18.0);
+    node().getChildren().add(saveBtn);
+}
+```
+
+Each enum constant implements `IconFont` and maps to a unicode glyph bundled with the bridge module. No magic strings or manual font loading required.
+
+
+IconFont
+==============
+
+
+Overview
+---------------------
+
+JRebirth provides **bridge modules** for popular icon fonts, allowing type-safe icon usage in JavaFX applications. Instead of referencing icons by magic strings or unicode code points scattered throughout your code, you use strongly-typed enum constants that are checked at compile time.
+
+Each icon font is packaged as a separate Maven artifact under `org.jrebirth.af.iconfont-bridge`, making it easy to include only the fonts you need.
+
+
+Available Icon Font Bridges
+---------------------
+
+| Artifact | Enum Class | Icons |
+|----------|-----------|-------|
+| `fontawesome` | `FontAwesome` | 600+ general-purpose icons |
+| `emojione` | `EmojiOne` | Emoji icons |
+| `icons525` | `Icons525` | 525 UI icons |
+| `typicons` | `Typicons` | Typicons icon set |
+| `weathericons` | `WeatherIcons` | Weather-themed icons |
+
+
+IconFont Interface
+---------------------
+
+Every icon font enum implements the **IconFont** interface from `org.jrebirth.af.core.resource.provided`. This interface provides:
+
+* `charCode()` &mdash; returns the unicode character representing the icon.
+* `item()` &mdash; returns the `FontItem` resource for loading the font at a given size.
+* `use(Labeled l)` &mdash; applies the icon to any JavaFX `Labeled` control (Button, Label, etc.).
+* `use(Labeled l, double fontSize)` &mdash; applies the icon with a custom font size.
+* `name()` &mdash; returns the enum constant name.
+
+The `use()` methods set both the font and the text content in one call, making icon application a single-line operation.
+
+
+```java
+public enum FontAwesome implements IconFont {
+
+    glass("\uf000"),
+    music("\uf001"),
+    search("\uf002"),
+    heart("\uf004"),
+    home("\uf015"),
+    check("\uf00c"),
+    remove("\uf00d"), close("\uf00d"), times("\uf00d"),
+    gear("\uf013"), cog("\uf013");
+
+    private final String charCode;
+
+    private FontAwesome(final String charCode) {
+        this.charCode = charCode;
+    }
+
+    @Override
+    public String charCode() {
+        return this.charCode;
+    }
+
+    @Override
+    public FontItem item() {
+        return ITEM;
+    }
+}
+```
+
+Each constant stores its unicode escape. Alias names (`close`, `times`, `cog`) share glyphs. Call `FontAwesome.search.use(button)` to apply font and text in one step.
+
+
+Usage Pattern
+---------------------
+
+### Adding a Dependency ###
+
+Add the desired icon font bridge to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.jrebirth.af.iconfont-bridge</groupId>
+    <artifactId>fontawesome</artifactId>
+    <version>${jrebirth.version}</version>
+</dependency>
+```
+
+### Applying an Icon ###
+
+Reference the enum constant and call `use()` on any `Labeled` node:
+
+```java
+Label iconLabel = new Label();
+FontAwesome.home.use(iconLabel);
+
+Button searchBtn = new Button();
+FontAwesome.search.use(searchBtn, 24.0);
+```
+
+### Using in a View ###
+
+In a JRebirth View, icons are typically applied during `initView()`:
+
+```java
+@Override
+protected void initView() {
+    Label navIcon = new Label();
+    FontAwesome.bars.use(navIcon);
+    node().getChildren().add(navIcon);
+}
+```
+
+
+FontIcon Showcase
+---------------------
+
+The JRebirth showcase includes a **FontIcon** module that displays all available icons from each font in a tabbed, scrollable browser. It demonstrates how to use `IconFont` enums with `TabbedPaneModel` for an interactive catalog.
+
+### FontIconView ###
+
+The showcase view creates a tile grid for each icon in a font, displaying both the icon glyph and its name:
+
+
+```java
+public class FontIconView extends DefaultView<FontIconModel, ScrollPane, NullController> {
+
+    public FontIconView(final FontIconModel model) {
+        super(model);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initView() {
+
+        node().setFitToWidth(true);
+        node().setFitToHeight(true);
+
+        final FlowPane pane = new FlowPane(Orientation.HORIZONTAL);
+        pane.setPadding(new Insets(10));
+        pane.setHgap(4.0);
+        pane.setVgap(4.0);
+
+        pane.setAlignment(Pos.CENTER);
+
+        pane.maxWidthProperty().bind(((Region) node().getParent()).widthProperty());
+
+        final Class<? extends IconFont> c = model().object();
+        Stream.of(c.getEnumConstants()).filter(c::isInstance).map(c::cast).forEach(iconFont -> pane.getChildren().add(buildTile(iconFont)));
+
+        // pane.setStyle("-fx-background-color:blue;");
+        node().setContent(pane);
+    }
+
+    private Node buildTile(final IconFont iconFont) {
+        final VBox box = new VBox();
+        box.setAlignment(Pos.CENTER);
+        box.setPrefSize(100, 50);
+
+        final Label icon = new Label();
+        iconFont.use(icon);
+        icon.setPadding(new Insets(4));
+        icon.setAlignment(Pos.CENTER);
+        VBox.setVgrow(icon, Priority.ALWAYS);
+
+        final Label text = new Label(iconFont.name());
+        text.setAlignment(Pos.BOTTOM_CENTER);
+        VBox.setVgrow(text, Priority.SOMETIMES);
+
+        text.setTooltip(new Tooltip(iconFont.name()));
+
+        box.getChildren().addAll(icon, text);
+
+        // box.setStyle("-fx-background-color:red;");
+        return box;
+    }
+
+}
+```
+
+### MainModel ###
+
+The showcase main model assembles tabs for each available icon font (FontAwesome, EmojiOne, Icons525, WeatherIcons, Typicons):
+
+
+```java
+@Register(value = ModuleModel.class)
+public class MainModel extends DefaultSimpleModel<BorderPane> implements ModuleModel {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initModel() {
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initSimpleView() {
+
+    	final FadeInOutWaveBean fiowb = FadeInOutWaveBean.create().showDuration(Duration.millis(4000));
+
+        final Stream<Dockable> tabs = Stream.of(FontAwesome.class, EmojiOne.class, Icons525.class, WeatherIcons.class, Typicons.class)
+                                            .map(c -> Dockable.create()
+                                                              .name(c.getSimpleName())
+                                                              .modelKey(Key.createMulti(FontIconModel.class, c)));
+
+        final TabbedPaneConfig cfg = TabbedPaneConfig.create()
+                                                     .id("FontIcon")
+                                                     .tabs(tabs.toArray(Dockable[]::new));
+
+        attachUi(TabbedPaneModel.class, WBuilder.buildUiData(node().centerProperty(), fiowb, Collections.singletonList(cfg)).toArray(new WaveData[0]));
+    }
+
+    @Override
+    public String moduleName() {
+        return "FontIcon";
+    }
+
+}
+```
+
+
+JPMS Module Configuration
+---------------------
+
+When using JPMS (Java Platform Module System), ensure your `module-info.java` opens or requires the icon font bridge module:
+
+```java
+requires org.jrebirth.af.iconfontbridge.fontawesome;
+```
+
+The font files are bundled as resources within each bridge module and are loaded automatically via the JRebirth resource system.
+
+
+]]#
+
+#if( !$all )
+#parse("TocList.vm")
+#displayFooterToc("IconFont")
+#end

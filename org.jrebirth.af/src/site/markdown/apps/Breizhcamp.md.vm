@@ -6,7 +6,7 @@
 #set( $keywords = "JavaFX 2 Demo Application Presentation" )
 #set( $description = "JavaFX 2 Demo Application Presentation JRebirth Framework Breizhcamp Talk" )
 
-#set( $version = "${Breizhcamp-version}")
+#set( $version = "$Breizhcamp-version")
 #set( $path = "javafx2")
 #set( $archiveName = "Breizhcamp")
 #set( $downloadName = "JavaFX Presentation")

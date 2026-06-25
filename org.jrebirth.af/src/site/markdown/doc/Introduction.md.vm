@@ -42,7 +42,9 @@ The name was readily found:
 
 
 Everything began on a local SVN and then was pushed on <a href="https://github.com/JRebirth/JRebirth">Github</a> on Feb 22, 2012, few days after my first talk about JavaFX (2).
-		
+
+Since those early days, JRebirth has evolved significantly. It now supports Java 11+ with full JPMS modularization, runs on Java 25 and JavaFX 26, and ships a growing ecosystem of extension modules: REST client integration, Security, Form binding, UndoRedo, a reusable Component library (StackModel, TabbedPane, DockPane, Workbench), IconFont bridges (FontAwesome, Icomoon), and build-time tooling.
+
 
 ## JRebirth Objectives
 
@@ -75,8 +77,10 @@ Main features of JRebirth Application Framework are:
 2. Avoid memory leak
 3. Maintain a good SoC
 4. Be the more convenient as possible for developers
-5. Be lightweight and modularizable
+5. Be lightweight and modularizable — leveraging JPMS modules for strong encapsulation and an annotation processor for auto-wiring components
 6. Follow OSS spirit and Java Best Practices
+7. Provide reusable UI components (tabs, dock, workbench, stack navigation)
+8. Integrate with build tooling (Maven plugin for code generation)
 
 ]]#
 

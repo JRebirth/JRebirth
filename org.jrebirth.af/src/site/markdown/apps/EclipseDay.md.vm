@@ -6,7 +6,7 @@
 #set( $keywords = "JavaFX 2 Demo Application Presentation EclipseDay" )
 #set( $description = "JavaFX 2 Demo Application Presentation JRebirth Framework EclipseDay Talk" )
 
-#set( $version = "${EclipseDay-version}")
+#set( $version = "$EclipseDay-version")
 #set( $path = "eclipseday")
 #set( $archiveName = "EclipseDayToulouse")
 #set( $downloadName = "EclipseDay Presentation")

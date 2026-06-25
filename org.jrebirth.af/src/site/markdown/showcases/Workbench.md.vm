@@ -1,0 +1,301 @@
+﻿<head>
+<![CDATA[
+    <title>JRebirth Showcase - Workbench</title>
+    <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
+]]>
+</head>
+
+<div id="catcherTitle">Workbench Showcase</div>
+<div id="catcherContent">Dockable tabbed layout using JRebirth's component module</div>
+
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+
+#[[
+
+# Workbench Showcase
+
+The Workbench showcase demonstrates how to build an IDE-style dockable tabbed layout using JRebirth's **component** module.
+It creates a four-quadrant window where each quadrant holds a tab pane, and tabs can be dragged between panes.
+The entire layout is defined declaratively through configuration beans — no manual `SplitPane` or `TabPane` wiring required.
+
+
+## Application Setup
+
+The application class loads two stylesheets: the component module's built-in styles and the application's own customizations.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.workbench;
+
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.component.resources.ComponentStyles;
+import org.jrebirth.af.core.application.DefaultApplication;
+import org.jrebirth.af.showcase.workbench.resources.WorkbenchStyles;
+import org.jrebirth.af.showcase.workbench.ui.TabDemoModel;
+
+/**
+ * The class <strong>WorkbenchApplication</strong>.
+ *
+ * @author
+ */
+public final class WorkbenchApplication extends DefaultApplication<StackPane> {
+
+    /**
+     * Application launcher.
+     *
+     * @param args the command line arguments
+     */
+    public static void main(final String... args) {
+        launch(WorkbenchApplication.class, args);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Class<? extends Model> firstModelClass() {
+        return TabDemoModel.class;
+    }
+
+    @Override
+    protected void customizeScene(final Scene scene) {
+        super.customizeScene(scene);
+
+        addCSS(scene, ComponentStyles.DEFAULT);
+        addCSS(scene, WorkbenchStyles.DEFAULT);
+    }
+
+}
+```
+
+#[[
+
+Notice that `ComponentStyles.DEFAULT` is loaded first — this provides the base CSS for dock panes and tabs.
+`WorkbenchStyles.DEFAULT` layers application-specific styling on top.
+Both are `StyleSheetItem` constants, resolved from the classpath by JRebirth's resource system.
+
+
+## TabDemoModel — Declarative Layout
+
+The heart of this showcase is `TabDemoModel`, which builds a complete 4-quadrant layout in a single method using nested configuration beans.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.workbench.ui;
+
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.ui.ModuleModel;
+import org.jrebirth.af.component.behavior.dockable.data.Dockable;
+import org.jrebirth.af.component.ui.beans.DockPaneConfig;
+import org.jrebirth.af.component.ui.beans.DockPaneOrientation;
+import org.jrebirth.af.component.ui.beans.TabbedPaneConfig;
+import org.jrebirth.af.component.ui.beans.TabbedPaneOrientation;
+import org.jrebirth.af.component.ui.dock.DockPaneModel;
+import org.jrebirth.af.core.key.Key;
+import org.jrebirth.af.core.ui.simple.DefaultSimpleModel;
+
+import javafx.scene.layout.BorderPane;
+
+@Register(value = ModuleModel.class)
+public class TabDemoModel extends DefaultSimpleModel<BorderPane> implements ModuleModel {
+
+	private boolean done = false;
+
+	@Override
+	protected void initSimpleView() {
+		super.initSimpleView();
+
+		final String topLeft = "TopLeft";
+		final String topRight = "TopRight";
+		final String bottomLeft = "BottomLeft";
+		final String bottomRight = "BottomRight";
+		final DockPaneModel rootDock = getModel(DockPaneModel.class,
+				DockPaneConfig.create()
+						.id("RootDock")
+						.orientation(DockPaneOrientation.vertical)
+						.panes(
+								DockPaneConfig.create()
+										.id("TopDock")
+										.orientation(DockPaneOrientation.horizontal)
+										.panes(
+												DockPaneConfig.create()
+														.id(topLeft+"Dock")
+														.orientation(DockPaneOrientation.horizontal)
+														.panes(TabbedPaneConfig.create()
+																.id(topLeft)
+																.styleClass("Top Left")
+																.orientation(TabbedPaneOrientation.top)
+																.tabs(
+																		dockable("1"),
+																		dockable("2"),
+																		dockable("3"),
+																		dockable("4"),
+																		dockable("5"),
+																		dockable("6")
+																		)),
+												DockPaneConfig.create()
+														.id(topRight+"Dock")
+														.orientation(DockPaneOrientation.horizontal)
+														.panes(TabbedPaneConfig.create()
+																.id(topRight)
+																.styleClass("Top Right")
+																.orientation(TabbedPaneOrientation.right)
+																.tabs(
+																		dockable("7"),
+																		dockable("8"),
+																		dockable("9")
+																		))),
+								DockPaneConfig.create()
+										.id("BottomDock")
+										.orientation(DockPaneOrientation.horizontal)
+										.panes(
+												DockPaneConfig.create()
+														.id(bottomLeft+"Dock")
+														.orientation(DockPaneOrientation.horizontal)
+														.panes(TabbedPaneConfig.create()
+																.id(bottomLeft)
+																.styleClass("Bottom Left")
+																.orientation(TabbedPaneOrientation.bottom)
+																.tabs(
+																		dockable("15"),
+																		dockable("16")
+																		)),
+												DockPaneConfig.create()
+    // ...
+```
+
+#[[
+
+### Understanding the configuration tree
+
+The layout is expressed as a tree of three configuration types:
+
+- **`DockPaneConfig`** — splits space horizontally or vertically, containing other dock panes or tabbed panes
+- **`TabbedPaneConfig`** — holds a tab strip with dockable content, controlling tab orientation (top, bottom, left, right)
+- **`Dockable`** — wraps a model key and a display name to create a single tab
+
+Here is the structure built by `initSimpleView()`:
+
+```
+RootDock (vertical)
+├── TopDock (horizontal)
+│   ├── TopLeftDock → TabbedPane (tabs on top)    [Tab1..Tab6]
+│   └── TopRightDock → TabbedPane (tabs on right) [Tab7..Tab9]
+└── BottomDock (horizontal)
+    ├── BottomLeftDock → TabbedPane (tabs on bottom) [Tab15..Tab16]
+    └── BottomRightDock → TabbedPane (tabs on left)  [Tab10..Tab14]
+```
+
+### Building the tree step by step
+
+**1. Create a root dock pane with vertical orientation:**
+
+```java
+DockPaneConfig.create()
+    .id("RootDock")
+    .orientation(DockPaneOrientation.vertical)
+    .panes(/* child dock panes */)
+```
+
+This splits the window into a top half and a bottom half.
+
+**2. Each half is a horizontal dock pane containing two tabbed areas:**
+
+```java
+DockPaneConfig.create()
+    .id("TopDock")
+    .orientation(DockPaneOrientation.horizontal)
+    .panes(/* left tabbed pane, right tabbed pane */)
+```
+
+**3. Each leaf dock pane contains a `TabbedPaneConfig`:**
+
+```java
+TabbedPaneConfig.create()
+    .id("TopLeft")
+    .styleClass("Top Left")
+    .orientation(TabbedPaneOrientation.top)
+    .tabs(dockable("1"), dockable("2"), ...)
+```
+
+The `orientation` controls where the tab strip appears (top, bottom, left, or right of the content area).
+Each quadrant in this demo uses a different orientation to illustrate all four options.
+
+**4. Each tab wraps a model via `Dockable`:**
+
+```java
+private Dockable dockable(String modelKey) {
+    return Dockable.create()
+        .modelKey(Key.create(SimpleModel.class, "Tab" + modelKey))
+        .name("Tab" + modelKey);
+}
+```
+
+The `modelKey` uses a `Key` with a string qualifier, so each tab gets a distinct `SimpleModel` instance identified by its name.
+
+### Retrieving and displaying the layout
+
+After building the configuration tree, a single call retrieves the fully assembled layout:
+
+```java
+final DockPaneModel rootDock = getModel(DockPaneModel.class, rootConfig);
+node().setCenter(rootDock.node());
+```
+
+`DockPaneModel` recursively processes the configuration, creating all nested dock panes, tabbed panes, and tab content models.
+The result is a complete, interactive docking layout — all from one declarative description.
+
+
+## SimpleModel — Lightweight Tab Content
+
+Each tab is backed by a `SimpleModel` — the lightest possible JRebirth model.
+
+]]#
+
+
+```java
+package org.jrebirth.af.showcase.workbench.ui;
+
+import javafx.scene.text.Text;
+
+import org.jrebirth.af.core.ui.simple.DefaultSimpleObjectModel;
+
+public class SimpleModel extends DefaultSimpleObjectModel<Text, String> {
+
+    @Override
+    protected void initSimpleView() {
+
+        node().setText(object());
+
+    }
+
+}
+```
+
+#[[
+
+`DefaultSimpleObjectModel<Text, String>` is a model that uses a `Text` node directly (no separate View class) and carries a `String` object.
+The `object()` method returns the string qualifier passed through the `Key` — so `Tab1`, `Tab2`, etc. — which is displayed as the tab content.
+
+In a real application, you would replace `SimpleModel` with your actual content models (editors, panels, tool windows) while keeping the same docking infrastructure.
+
+
+## Key Patterns Summary
+
+| Pattern | Where | Why |
+|---------|-------|-----|
+| Declarative layout via config beans | `TabDemoModel.initSimpleView()` | Build complex docking layouts without procedural `SplitPane` management |
+| `DockPaneConfig` nesting | Layout tree | Recursive horizontal/vertical splitting with arbitrary depth |
+| `TabbedPaneConfig` orientations | Four quadrants | Tab strip placement — top, right, bottom, left |
+| `Dockable` wrapping | Tab creation | Bind a model key + display name to create draggable tabs |
+| `DefaultSimpleObjectModel` | `SimpleModel` | Minimal model for tab content with inline node creation |
+| `StyleSheetItem` layering | `WorkbenchApplication` | Combine framework and app styles via `addCSS` |
+
+]]#

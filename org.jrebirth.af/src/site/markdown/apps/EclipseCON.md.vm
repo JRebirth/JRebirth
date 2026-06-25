@@ -6,7 +6,7 @@
 #set( $keywords = "JavaFx 2 Demo Application Presentation JRebirth Framework EclipseCON France 2013 Workshop" )
 #set( $description = "JavaFx 2 Demo Application Presentation JRebirth Framework EclipseCON France 2013 Workshop" )
 
-#set( $version = "${EclipseCON-version}")
+#set( $version = "$EclipseCON-version")
 #set( $path = "eclipsecon")
 #set( $archiveName = "EclipseCON")
 #set( $downloadName = "EclipseCON Presentation")

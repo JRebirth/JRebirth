@@ -16,6 +16,18 @@
 Thread Management
 ====================
 
+## In 30 seconds
+
+**JAT** = JavaFX UI thread (update displayed nodes). **JIT** = JRebirth messaging (waves, listen/send). **JTP/HPTP** = background pools (heavy work). Commands/Services pick threads via `@RunInto` or base classes. From non-component code use `JRebirth.runIntoJAT(...)`, `runIntoJIT(...)`, `runIntoJTP(...)`.
+
+## How to use
+
+1. UI updates on nodes in the scene → JAT (`DefaultUICommand`, `@RunInto(JAT)`).
+2. Wave listen/send and notifier work → JIT (automatic for `listen` / `sendWave`).
+3. File I/O, parsing, remote calls → JTP (`DefaultPoolCommand`, `@RunInto(JTP)`).
+4. Service task methods run on JTP by default; return waves to Models are handled on JAT.
+5. Stuck on the wrong thread? Use `JRebirth.runIntoJAT(() -> { ... })` — not raw `Platform.runLater` as a pattern.
+
 Threading overview
 ---------------------
 
@@ -67,11 +79,35 @@ It's the equivalent of the former EDT (Event Dispatch Thread) in Swing.
 If you try to update a node attached to the main JavaFX scene outside it you will obtain an ugly Exception.
 
 
+```java
+// Wrong — may throw if label is in the scene
+statusLabel.setText("Done");
+
+// Right — marshal to JAT from JTP or JIT
+JRebirth.runIntoJAT(() -> statusLabel.setText("Done"));
+```
+
+- Any mutation on nodes attached to the displayed scene must run on **JAT**.
+
+
 ### JIT
 
 **JRebirth Internal Thread** is the internal thread of JRebirth Application Framework.
 It will be used to host the communication engine between all JRebirth Components.
 If you start a long task into it it will freeze all communication tasks because all runnable added will be executed synchronously according to FIFO rule (First-In First-Out).
+
+
+```java
+// Safe on JIT — register listeners, send waves
+listen(MyWaves.DO_REFRESH);
+sendWave(MyWaves.DO_REFRESH);
+
+// Risky on JIT — blocks all messaging until perform() returns
+getCommand(HeavyCommand.class).run();
+```
+
+- `listen` / `sendWave` belong on **JIT** — the Notifier rejects calls from other threads.
+- Never run long work directly on JIT; use JTP commands or services instead.
 
 
 ### JTP
@@ -80,13 +116,48 @@ If you start a long task into it it will freeze all communication tasks because 
 Moreover any JRebirth internal configuration must be performed into JIT (ie: listen a WaveType).
 
 
+```java
+@RunInto(RunType.JTP)
+public class ParseFileCommand extends DefaultCommand {
+
+    @Override
+    protected void perform(final Wave wave) {
+        final List<String> lines = readAllLines(pathFrom(wave));
+        sendWave(MyWaves.DO_LINES_LOADED, WBuilder.waveData(MyWaves.LINES, lines));
+    }
+}
+```
+
+- `@RunInto(JTP)` — file I/O and parsing off UI and JIT.
+- Return results via `sendWave` — Model listeners receive them on JAT automatically.
+
+
 ### HPTP
 
 **High Priority Thread Pool** has been added to be able to assign a priority to a long task.
 On small platform or when using very long task, the JTP can be overloaded and we should create an higher priority task to trigger an User interface refresh.
 The HPTP will be used to trigger higher priority task when JTP is full.
 It has same settings than JTP.
-	
+
+
+### Quick Reference
+
+| Task | Thread | How |
+|------|--------|-----|
+| Update displayed node | JAT | `@RunInto(JAT)` or `DefaultUICommand` |
+| Send/receive waves | JIT | automatic for listen/sendWave |
+| Heavy computation | JTP | `@RunInto(JTP)` or `DefaultPoolCommand` |
+| Priority task | HPTP | `@Priority(PriorityLevel.Highest)` on service |
+| From non-component code | any | `JRebirth.runIntoJAT(...)`, `JRebirth.runIntoJIT(...)`, `JRebirth.runIntoJTP(...)` |
+
+Example — update a label from background work:
+
+```java
+JRebirth.runIntoJAT(() -> statusLabel.setText("Done"));
+```
+
+- `runIntoJAT` — marshals the runnable onto the JavaFX Application Thread (safe for scene nodes).
+- Use after JTP/IO completes; never touch attached nodes from JTP directly.
 
 Thread Rules
 ---------------
@@ -137,6 +208,14 @@ Examples
 
 When you are into the JIT you can use _JRebirth.runIntoJAT_ that call internally _Platform.runLater_ to perform UI updates.
 
+```java
+JRebirth.runIntoJAT(() -> view().statusLabel().setText("Ready"));
+```
+
+- `runIntoJAT(Runnable)` — preferred over raw `Platform.runLater` in JRebirth apps.
+- Call from JIT/JTP after async work completes.
+
+
 JRebirth Framework offers some default commands to do the trick (*DefaultUiCommand*).
 Moreover if you send a *Wave* with a *WaveType* listened by a model, it will be automatically processed into the JAT (Cool JRebirth Magic).
 
@@ -149,6 +228,19 @@ Moreover if you send a *Wave* with a *WaveType* listened by a model, it will be 
 
 When you are in the JAT you must use _JRebirth.runIntoJIT_ that call internally _JRebirthThread.runLater_ to run tasks into the core thread.
 You can also use _JRebirth.runIntoJTP_ to run task within a slot of available thread pool.
+
+
+```java
+// From JAT — schedule messaging work on JIT
+JRebirth.runIntoJIT(() -> sendWave(MyWaves.DO_BACKGROUND_START));
+
+// From JAT — offload heavy work to JTP
+JRebirth.runIntoJTP(() -> parseLargeFile(file));
+```
+
+- `runIntoJIT` — wave registration and `sendWave` must not run on JAT directly.
+- `runIntoJTP` — background work without blocking the UI thread.
+
 
 JRebirth Framework offers some default commands to force to run into JIT &amp; JTP (*DefaultCommand* and *DefaultPoolCommand*).
 You can also send a wave that will trigger a command, or call a service into another thread that JAT.
@@ -163,6 +255,18 @@ You can use custom methods:
 - JRebirth.runIntoJTPSync
 
 Each will wait synchronously the end of the task run within the wanted thread.
+
+
+```java
+JRebirth.runIntoJATSync(() -> {
+    previewPane.getChildren().setAll(buildPreviewNodes());
+});
+// continues on calling thread only after JAT work completes
+```
+
+- Sync variants block the caller until the target thread finishes — use sparingly.
+- Prefer async `runIntoJAT` + return wave for service-style flows.
+
 
 Use Case
 ------------------
@@ -188,6 +292,19 @@ The default behavior is:
 - attachUI => always into JAT
 - returnData => always into JTP
 - callCommand => Depends on Command called
+
+Use `@RunInto(value = RunType.JAT)` on your wave handler method to override the default thread. For example, a Service method that needs to update UI directly can be annotated with `@RunInto(RunType.JAT)` to force execution on the JavaFX Application Thread regardless of the component's default behavior.
+
+```java
+@RunInto(RunType.JAT)
+public void doUpdateLabel(final String text, final Wave wave) {
+    view().statusLabel().setText(text);
+}
+```
+
+- Overrides default handler thread (Models → JAT by default; Services → JIT).
+- Still declare `listen(...)` or `@OnWave` — annotation only affects where the handler body runs.
+
 
 ]]#
 

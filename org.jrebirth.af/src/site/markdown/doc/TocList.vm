@@ -1,21 +1,31 @@
 #set( $items = [
-    {"link":"Introduction",	"name":"Introduction"},
-    {"link":"Installation",	"name":"Installation"},
-    {"link":"Overview",		"name":"Framework Overview"},
-    {"link":"Application",	"name":"Create your first Application"}, 
-    {"link":"Thread",		"name":"Thread Management"},
-    {"link":"Logging",		"name":"Configure Logging system"},
-    {"link":"Component",	"name":"Create your Components"},
-    {"link":"Facades",		"name":"How Facades work"},
-    {"link":"Modularization","name":"Modularize your code"},
-    {"link":"Notifier",		"name":"Notifier"},
-	{"link":"Wave",			"name":"Wave"},
-    {"link":"Commands",		"name":"Commands"},
-    {"link":"Services",		"name":"Services"},
-    {"link":"Ui",			"name":"User Interface"},
-    {"link":"Behavior",		"name":"Behaviors"},
-    {"link":"Resources",	"name":"Resources"}
-	] ) 
+    {"link":"Introduction",			"name":"Introduction"},
+    {"link":"Installation",			"name":"Installation"},
+    {"link":"Overview",				"name":"Framework Overview"},
+    {"link":"Application",			"name":"Create your first Application"},
+    {"link":"Thread",				"name":"Thread Management"},
+    {"link":"Logging",				"name":"Configure Logging system"},
+    {"link":"Component",			"name":"Create your Components"},
+    {"link":"Facades",				"name":"How Facades work"},
+    {"link":"Modularization",		"name":"Modularize your code"},
+    {"link":"Notifier",				"name":"Notifier"},
+    {"link":"Wave",					"name":"Wave"},
+    {"link":"Commands",				"name":"Commands"},
+    {"link":"Services",				"name":"Services"},
+    {"link":"Ui",					"name":"User Interface"},
+    {"link":"FXML",					"name":"FXML Integration"},
+    {"link":"Behavior",				"name":"Behaviors"},
+    {"link":"Resources",			"name":"Resources"},
+    {"link":"ComponentLibrary",		"name":"Component Library"},
+    {"link":"UndoRedo",				"name":"Undo / Redo"},
+    {"link":"Transitions",			"name":"Transitions"},
+    {"link":"REST",					"name":"REST Client"},
+    {"link":"Security",				"name":"Security"},
+    {"link":"Dialog",				"name":"Dialogs"},
+    {"link":"Form",					"name":"Form Generation"},
+    {"link":"IconFont",				"name":"Icon Fonts"},
+    {"link":"Tooling",				"name":"Build Tooling"}
+    ] ) 
 	
 	
 #*
@@ -36,14 +46,20 @@
 *#
 #macro( displayFooterToc $fileName )
 
+	#set($foundIndex = false)
+	#set($indexVal = 0)
+	#set($counter = 0)
 	#foreach( $item in $items )
 		#if ($item.link == $fileName)
-			#set($index = $velocityCount - 1)
+			#set($foundIndex = true)
+			#set($indexVal = $counter)
 		#end
+		#set($counter = $counter + 1)
 	#end
 	
-	#set( $previous = $index - 1 )
-	#set( $next = $index + 1 )
+#if( $foundIndex )
+	#set( $previous = $indexVal - 1 )
+	#set( $next = $indexVal + 1 )
 	
 <div class="bottomLinks">
 #if( $previous >= 0 )
@@ -60,5 +76,6 @@
 		<a href="Toc.html">TOC</a>
 	</div>
 </div>
+#end
 
 #end

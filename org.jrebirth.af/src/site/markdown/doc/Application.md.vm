@@ -1,4 +1,4 @@
-<head>
+﻿<head>
 <![CDATA[
     <title>Application</title>
     <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
@@ -16,6 +16,17 @@
 
 # Application
 
+## In 30 seconds
+
+Extend `DefaultApplication`, launch with `preloadAndLaunch(args)`, and point `firstModelClass()` at your first screen Model. JRebirth boots the engine, preloader, scene, and attaches that Model on the JavaFX thread.
+
+## How to use
+
+1. Create a class extending `DefaultApplication<YourRootPane>` (root pane type = scene root, e.g. `StackPane`).
+2. Add `public static void main(String... args) { preloadAndLaunch(args); }` as the application entry point.
+3. Override `firstModelClass()` and return the Model class shown at startup (mandatory).
+4. Optionally override `customizeStage`, `customizeScene` (CSS via `addCSS`), and `getResourceToPreload`.
+5. Run your Application class as the JavaFX main class from the IDE or Maven `javafx:run`.
 
 ## Overview
 
@@ -38,15 +49,189 @@ Its aim is to automatically start the JRebirth underlying Application Framework 
 To trigger the start-up of your JavaFX application you must add a _static void main_ method
 in order to call one of the static protected method provided :
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java|snippet=re:(void launchNow)\|(void preloadAndLaunch)} -->
+
+```java
+package org.jrebirth.af.core.application;
+
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ServiceLoader;
+import java.util.stream.Collectors;
+
+import javafx.application.Application;
+import javafx.application.Preloader;
+import javafx.application.Preloader.ProgressNotification;
+import javafx.scene.Scene;
+import javafx.scene.SceneAntialiasing;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+import org.jrebirth.af.api.application.Configuration;
+import org.jrebirth.af.api.application.JRebirthApplication;
+import org.jrebirth.af.api.application.Localized;
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.api.log.JRLogger;
+import org.jrebirth.af.api.module.ModuleStarter;
+import org.jrebirth.af.api.resource.ResourceItem;
+import org.jrebirth.af.api.resource.style.StyleSheetItem;
+import org.jrebirth.af.api.ui.ModuleModel;
+import org.jrebirth.af.core.component.factory.RegistrationPointItemBase;
+import org.jrebirth.af.core.concurrent.JRebirth;
+import org.jrebirth.af.core.concurrent.JRebirthThread;
+import org.jrebirth.af.core.exception.handler.DefaultUncaughtExceptionHandler;
+import org.jrebirth.af.core.exception.handler.JatUncaughtExceptionHandler;
+import org.jrebirth.af.core.exception.handler.JitUncaughtExceptionHandler;
+import org.jrebirth.af.core.exception.handler.PoolUncaughtExceptionHandler;
+import org.jrebirth.af.core.log.JRLoggerFactory;
+import org.jrebirth.af.core.resource.ResourceBuilders;
+import org.jrebirth.af.core.resource.Resources;
+import org.jrebirth.af.core.resource.provided.JRebirthColors;
+import org.jrebirth.af.core.resource.provided.JRebirthStyles;
+import org.jrebirth.af.core.resource.provided.parameter.CoreParameters;
+import org.jrebirth.af.core.resource.provided.parameter.ResourceParameters;
+import org.jrebirth.af.core.resource.provided.parameter.StageParameters;
+import org.jrebirth.af.core.util.ClassUtility;
+import org.jrebirth.af.core.util.ModuleUtility;
+import org.jrebirth.af.preloader.JRebirthPreloader;
+
+//import com.sun.javafx.application.LauncherImpl;
+
+/**
+ *
+ * The abstract class <strong>AbstractApplication</strong> is the base class of a JRebirth Application.
+ *
+ * This the class to extend if you want to build an application using JRebirth WCS-MVC (Wave-Command-Service-Model-View-Controller).
+ *
+ * @author Sébastien Bordes
+ *
+ * @param <P> The root node of the stage, must extends Pane to allow children management
+ */
+@Configuration(".*jrebirth")
+@Localized(".*_rb")
+public abstract class AbstractApplication<P extends Pane> extends Application implements JRebirthApplication<P>, ApplicationMessages {
+
+    /** Default parameter replacement string. */
+    private static final String PARAM = "{}";
+
+    /** The default suffix for Application main class. */
+    private static final String APP_SUFFIX_CLASSNAME = "Application";
+
+    /** The class logger. */
+    private static final JRLogger LOGGER = JRLoggerFactory.getLogger(AbstractApplication.class);
+
+    /** The application primary stage. */
+    private transient Stage stage;
+
+    /** The application scene. */
+    private transient Scene scene;
+
+    /** The root node of the scene built by reflection. */
+    // ...
+```
 
 In example, **SampleApplication** will be launched with default JRebirth preloader (Application and Preloader classes are omitted) like below:
 
-<!-- MACRO{include|source=sample/src/main/java/org/jrebirth/af/sample/SampleApplication.java|snippet=aj:..SampleApplication.main(..)|highlight-theme=eclipse} -->
+
+```java
+    public static void main(final String... args) {
+        preloadAndLaunch(args);
+    }
+```
+
+- `main` — standard Java entry point; delegates startup to JRebirth.
+- `preloadAndLaunch(args)` — boots JavaFX, runs the default or configured preloader, then starts your `AbstractApplication` subclass.
 
 If you want to use the **JRebirthPreloader**, you must include the JRebirth preloader artifact to your pom.xml file
 
-<!-- MACRO{include|source=sample/pom.xml|first-line=1} -->
+
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.jrebirth</groupId>
+		<artifactId>af</artifactId>
+		<version>12.0.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<groupId>org.jrebirth.af</groupId>
+	<artifactId>sample</artifactId>
+	<packaging>jar</packaging>
+
+	<name>Sample Application</name>
+	<url>http://www.sample.org</url>
+	<description>Built with JRebirth Framework</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<resources.base.path>org/jrebirth/af/sample</resources.base.path>
+	</properties>
+
+	<organization>
+		<name>JRebirth</name>
+		<url>http://www.jrebirth.org</url>
+	</organization>
+
+	<build>
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/java</directory>
+				<includes>
+					<include>**/*.fxml</include>
+					<include>**/*.properties</include>
+					<include>**/*.txt</include>
+				</includes>
+			</resource>
+			<resource>
+				<filtering>true</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.ttf</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.ttf</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.compiler.plugin.version}</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<release>${java.version}</release>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${maven.jar.plugin.version}</version>
+
+					<configuration>
+    // ...
+```
 <!-- snippet=xp:dependencies/dependency[1] -->
 
 You can create your own **Preloader** class, JRebirth send only **ProgressNotification** with two kind of values:
@@ -56,9 +241,108 @@ You can create your own **Preloader** class, JRebirth send only **ProgressNotifi
 
 Hereafter you have the default <a class="apiClass" href="../apidocs/org/jrebirth/af/preloader/JRebirthPreloader.html">JRebirthPreloader</a> implementation.
 
-<!-- MACRO{include|source=preloader/src/main/java/org/jrebirth/af/preloader/JRebirthPreloader.java|snippet=aj:org.jrebirth.af.preloader.JRebirthPreloader} -->
+
+```java
+package org.jrebirth.af.preloader;
+
+import javafx.animation.ScaleTransition;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+/**
+ *
+ * The class <strong>JRebirthPreloader</strong> is the default implementation that show a JRebirth logo with a progress bar.
+ *
+ * @author Sébastien Bordes
+ */
+public class JRebirthPreloader extends AbstractJRebirthPreloader {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Scene createPreloaderScene() {
+
+        final StackPane p = new StackPane();
+        p.setStyle("-fx-background-color: transparent;");
+
+        final ImageView logo = new ImageView(new Image("JRebirth_Title.png"));
+        p.getChildren().add(logo);
+        StackPane.setAlignment(logo, Pos.CENTER);
+
+        this.progressBar = new ProgressBar(0.0);
+        this.progressBar.setPrefSize(460, 20);
+        p.getChildren().add(this.progressBar);
+        StackPane.setAlignment(this.progressBar, Pos.BOTTOM_CENTER);
+        StackPane.setMargin(this.progressBar, new Insets(30));
+
+        this.messageText = new Text("Loading");
+        p.getChildren().add(this.messageText);
+        StackPane.setAlignment(this.messageText, Pos.BOTTOM_CENTER);
+        StackPane.setMargin(this.messageText, new Insets(10));
+
+        final Scene scene = new Scene(p, 600, 200, Color.TRANSPARENT);
+        return scene;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void hideStage() {
+        final Stage stage = this.preloaderStage;
+
+        final ScaleTransition st = new ScaleTransition();
+        st.setFromX(1.0);
+        st.setToX(0.0);
+        st.setDuration(Duration.millis(400));
+        st.setNode(stage.getScene().getRoot());
+        st.setOnFinished(actionEvent -> stage.hide());
+        st.play();
+    }
+
+    public static void main(String... args) {
+        launch(args);
+    }
+
+}
+```
+
+- `createPreloaderScene()` — builds the splash UI (logo, progress bar, status text).
+- `hideStage()` — plays a scale-out animation before closing the preloader window.
+- `ProgressNotification` with a `double` (0.0–1.0) drives the bar; an `int` (> 1) selects a message id for `messageText`.
 
 You can extends the <a class="apiClass" href="../apidocs/org/jrebirth/af/preloader/AbstractJRebirthPreloader.html">AbstractJRebirthPreloader</a> to just have to populate your scene within _createPreloaderScene_ method, and to add a nice animation used to hide the preloader stage within _hideStage_ method.
+
+Minimal custom preloader:
+
+```java
+public final class MyPreloader extends AbstractJRebirthPreloader {
+
+    @Override
+    protected Scene createPreloaderScene() {
+        final StackPane root = new StackPane(new ProgressBar(0));
+        return new Scene(root, 400, 120);
+    }
+
+    @Override
+    protected void hideStage() {
+        preloaderStage.hide();
+    }
+}
+```
+
+- Extend `AbstractJRebirthPreloader` — only implement scene creation and hide animation.
+- Register the class in `preloadAndLaunch(MyPreloader.class, args)` or Maven `javafx.preloader` property when not using the default.
 
 
 ## Application Customization
@@ -81,7 +365,83 @@ Please note that one method is **mandatory** ! You must define a first Model Cla
 If you have used the Maven archetype _org.jrebirth.archetype_ you have obtained this source code (otherwise that you can copy-paste it):
 
 
-<!-- MACRO{include|source=sample/src/main/java/org/jrebirth/af/sample/SampleApplication.java|snippet=aj:SampleApplication} -->
+
+```java
+package org.jrebirth.af.sample;
+
+import java.util.Arrays;
+import java.util.List;
+
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+import org.jrebirth.af.api.resource.ResourceItem;
+import org.jrebirth.af.api.resource.font.FontItem;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.core.application.DefaultApplication;
+import org.jrebirth.af.sample.resources.SampleFonts;
+import org.jrebirth.af.sample.resources.SampleStyles;
+import org.jrebirth.af.sample.ui.SampleModel;
+
+/**
+ * The class <strong>SampleApplication</strong>.
+ *
+ * @author
+ */
+public final class SampleApplication extends DefaultApplication<StackPane> {
+
+    /**
+     * Application launcher.
+     *
+     * @param args the command line arguments
+     */
+    public static void main(final String... args) {
+        preloadAndLaunch(args);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Class<? extends Model> firstModelClass() {
+        return SampleModel.class;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customizeStage(final Stage stage) {
+        stage.setFullScreen(false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customizeScene(final Scene scene) {
+        addCSS(scene, SampleStyles.MAIN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<? extends ResourceItem<?, ?, ?>> getResourceToPreload() {
+        return Arrays.asList(new FontItem[] {
+                SampleFonts.SPLASH,
+        });
+    }
+
+}
+```
+
+- `extends DefaultApplication<StackPane>` — root scene node type; framework instantiates this pane automatically.
+- `preloadAndLaunch(args)` — recommended launcher (preloader + JRebirth engine).
+- `firstModelClass()` — **mandatory**; first screen Model attached to the root pane after boot.
+- `customizeStage` / `customizeScene` — hook to resize, title, key bindings, and `addCSS` stylesheets.
+- `getResourceToPreload()` — fonts/images loaded before first paint (needed for CSS `@font-face`).
 
 The SampleModel.class is shown and explained into the [Ui](Ui.html#Models) page.
 
@@ -93,11 +453,48 @@ This node will be instantiated automatically by the framework and could be acces
 You must define it in the class definition as generic type, this type must extend **Pane** class.
 
 
+```java
+public final class MyApp extends DefaultApplication<StackPane> {
+    // Framework instantiates StackPane as scene root — access via getRootNode()
+}
+```
+
+- Generic type parameter — root pane class (`StackPane`, `BorderPane`, …); must extend `Pane`.
+- `getRootNode()` — protected accessor to the auto-created root after startup.
+
+
 ### First Model Class
 
 The method _Class<? extends Model> firstModelClass()_ is mandatory to define which UI model will be attached to the root node of the scene.
 
+```java
+@Override
+public Class<? extends Model> firstModelClass() {
+    return MainWorkbenchModel.class;
+}
+```
+
+- Return type — any `Model` subclass; its View is built off-screen on **JTP**, then attached on **JAT**.
+
 This first model will be created into the JRebirth Thread Pool (JTP), then it will be attached to the root node into the JavaFX Application Thread (JAT).
+
+
+### First Model Descriptor
+
+As an alternative to `firstModelClass()`, you can override `firstModelDescriptor()` to provide a `ModelDescriptor` with additional configuration. This is useful when your first model needs configuration data (e.g., StackModel with a StackConfig):
+
+
+```java
+@Override
+public ModelDescriptor firstModelDescriptor() {
+    return ModelDescriptor.of(MainWorkbenchModel.class)
+        .withData(StackConfig.builder().initialTab("home").build());
+}
+```
+
+- `firstModelDescriptor()` — alternative to `firstModelClass()` when the first Model needs constructor/config data.
+- `ModelDescriptor.of(Class)` — names the Model class to instantiate at startup.
+- `.withData(...)` — passes configuration consumed by the Model during `setup()`.
 
 
 ### Application Title
@@ -109,10 +506,34 @@ By default it will retrieve values from properties file (default is _jrebirth.pr
 - applicationVersion=1.0
 
 
+```java
+@Override
+protected String applicationTitle() {
+    return "My App — v1.2";
+}
+```
+
+- `applicationTitle()` — window title and OS task-bar label; override to skip property lookup.
+- Return a plain string; the framework sets it on the primary `Stage` during startup.
+
 
 ### Stage customization
 
 The first stage object is provided by the JavaFX launcher, the method _void customizeStage(final Stage stage)_ allows doing some stage customizations.
+
+
+```java
+@Override
+protected void customizeStage(final Stage stage) {
+    stage.setTitle(applicationTitle());
+    stage.setMaximized(true);
+    stage.centerOnScreen();
+}
+```
+
+- `customizeStage(Stage)` — hook after the primary stage exists, before it is shown.
+- Safe place for size, position, icons, and fullscreen policy — not for attaching Models.
+
 
 ### Scene customization
 
@@ -132,13 +553,32 @@ For example you can listen some key binding to perform a global action.
 The Presentation application uses it to listen &lt;Ctrl&gt; + &lt;+&gt; and &lt;Ctrl&gt; + &lt;-&gt; key combo to zoom in/out the whole scene.
 
 
-This method is also useful to attach a stylesheet to the scene like this :
-- _scene.getStylesheets().add(loadCSS("style/sample.css"));_
+This method is also useful to attach a stylesheet to the scene. The modern approach uses a `StyleSheetItem` resource:
+- `addCSS(scene, MyStyles.MAIN);`
+
+This pattern delegates resource resolution to the JRebirth resource engine and is JPMS-compatible. The older `scene.getStylesheets().add(loadCSS("style/sample.css"))` still works but is discouraged in modular applications.
+
+
+```java
+@Override
+protected void customizeScene(final Scene scene) {
+    addCSS(scene, SampleStyles.MAIN);
+    scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+        if (e.isControlDown() && e.getCode() == KeyCode.PLUS) {
+            zoomIn();
+        }
+    });
+}
+```
+
+- `addCSS(scene, StyleSheetItem)` — preferred way to load CSS via the resource engine (JPMS-safe).
+- `customizeScene(Scene)` — runs after `buildScene()`; use for global key bindings and scene-level styling.
+- Keep node mutations minimal here; attach Models through `firstModelClass()` / waves instead.
 
 
 ### Resources preloading
 
-XXX TODO review with @Preload
+The **@Preload** annotation can be used on resource enum classes to automatically register them for preloading. This replaces the need to manually list resources in `getResourceToPreload()`. Simply annotate your resource enum with `@Preload` and the framework will discover and load those resources during the pre-init phase.
 
 Custom case for fonts:
 JavaFX applications are able to use fonts through programmatic declarations or with CSS declaration (in .css files. or inline).
@@ -151,6 +591,18 @@ is explained in the custom topic: Managing Fonts.
 
 
 The method _List&lt;ResourceEnum&gt; getResourceToPreload()_ is used to preload resources to allow them to be used earlier (ie font in CSS declaration). They are loaded at boot in the same time than stylesheets.
+
+
+```java
+@Override
+protected List<? extends ResourceItem<?, ?, ?>> getResourceToPreload() {
+    return Arrays.asList(SampleFonts.MAIN, SampleImages.LOGO);
+}
+```
+
+- `getResourceToPreload()` — fonts/images loaded during pre-init so CSS `@font-face` resolves on first paint.
+- Prefer `@Preload` on resource enums when every member of the enum should load at boot.
+
 
 ### Running Waves
 
@@ -173,20 +625,131 @@ Don't forget that you can chain your waves if you need to do more than one thing
 
 <span style="text-decoration: underline;">JRebirth Analyzer example :</span>
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/JRebirthAnalyzer.java|snippet=aj:..JRebirthAnalyzer.getPostBootWaveList(..)} -->
+
+```java
+package org.jrebirth.af.showcase.analyzer;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+import org.jrebirth.af.api.resource.ResourceItem;
+import org.jrebirth.af.api.ui.Model;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveGroup;
+import org.jrebirth.af.core.application.DefaultApplication;
+import org.jrebirth.af.core.wave.WBuilder;
+import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;
+import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
+import org.jrebirth.af.showcase.analyzer.ui.workbench.WorkbenchModel;
+
+/**
+ * The class <strong>JRebirthAnalyzer</strong>.
+ *
+ * The application that demonstrate how to use JRebirth Framework.
+ *
+ * It also allows showing all JRebirth events.
+ *
+ * @author Sébastien Bordes
+ */
+public final class JRebirthAnalyzer extends DefaultApplication<StackPane> {
+
+    /**
+     * Application launcher.
+     *
+     * @param args the command line arguments
+     */
+    public static void main(final String... args) {
+        Application.launch(JRebirthAnalyzer.class, args);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Class<? extends Model> firstModelClass() {
+        return WorkbenchModel.class;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String applicationTitle() {
+        return "JavaFX 2.0 - JRebirth Event Analyzer";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customizeScene(final Scene scene) {
+        scene.getStylesheets().add("css/analyzer.css");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void customizeStage(final Stage stage) {
+        // Center the stage
+        stage.centerOnScreen();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Wave> postBootWaveList() {
+    // ...
+```
+
+Minimal boot waves (open a file passed on the command line):
+
+```java
+@Override
+protected List<Wave> postBootWaveList() {
+    final String path = getParameters().getNamed().get("file");
+    if (path == null) {
+        return Collections.emptyList();
+    }
+    return Collections.singletonList(
+        WBuilder.of(MyWaves.DO_OPEN)
+            .data(WBuilder.waveData(MyWaves.FILE, new File(path)))
+            .build());
+}
+```
+
+- `postBootWaveList()` — waves processed after the first Model is attached; safe to touch Application APIs.
+- `getParameters().getNamed()` — reads `--file=...` style CLI arguments from JavaFX.
+- `WBuilder.of(...).data(...).build()` — builds a wave you can chain with other boot tasks.
 
 
 ### Default key shortcuts
 
 The AbstractApplication class is using two defaults hotkey:
 
-- <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java|snippet=re:(KeyCode fullScreenKeyCode)} -->
-_KeyCode fullScreenKeyCode()_ => to go to to fullscreen mode (default is <**F10**>)
+```java
+@Override
+protected KeyCode fullScreenKeyCode() {
+    return KeyCode.F11; // default is F10; return null to disable
+}
 
-- <!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java|snippet=re:(KeyCode iconifiedKeyCode)} -->
-_KeyCode iconifiedKeyCode()_ => to go to iconified mode (default is <**F11**>)
+@Override
+protected KeyCode iconifiedKeyCode() {
+    return null; // disable minimize shortcut
+}
+```
 
-These methods could be overridden if you want to change them, you can avoid these shortcut by returning _null_.
+- `fullScreenKeyCode()` — hotkey toggling fullscreen (default **F10**); return `null` to disable.
+- `iconifiedKeyCode()` — hotkey iconifying the stage (default **F11**); return `null` to disable.
+- Overrides apply globally to the primary stage created by the Application class.
 
 
 ### Exception Manager
@@ -196,13 +759,37 @@ JRebirth creates its own uncaught exception handlers in order to log exceptions 
 It's possible to customize them by overriding methods listed hereafter:
 
 - Exception handler of the JavaFX Application Thread
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java|snippet=re:(UncaughtExceptionHandler getJatUncaughtExceptionHandler)} -->
+
+```java
+@Override
+protected UncaughtExceptionHandler getJatUncaughtExceptionHandler() {
+    return new JatUncaughtExceptionHandler(this);
+}
+```
+
+- `getJatUncaughtExceptionHandler()` — catches uncaught exceptions on the JavaFX Application Thread.
 
 - Exception handler of the JRebirth Internal Thread
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java|snippet=re:(UncaughtExceptionHandler getJitUncaughtExceptionHandler)} -->
+
+```java
+@Override
+protected UncaughtExceptionHandler getJitUncaughtExceptionHandler() {
+    return new JitUncaughtExceptionHandler(this);
+}
+```
+
+- `getJitUncaughtExceptionHandler()` — catches uncaught exceptions on JIT (messaging thread).
 
 - Default Exception handler of all other threads
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java|snippet=re:(UncaughtExceptionHandler getDefaultUncaughtExceptionHandler)} -->
+
+```java
+@Override
+protected UncaughtExceptionHandler getDefaultUncaughtExceptionHandler() {
+    return new DefaultUncaughtExceptionHandler(this);
+}
+```
+
+- `getDefaultUncaughtExceptionHandler()` — fallback for JTP slots and other pooled threads.
 
 
 
@@ -227,15 +814,32 @@ The Initialization phase is composed by:
 
 Customizable steps are handled by 2 methods to override:
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java|snippet=re:void preInit\(\)|snippet-start-offset=3} -->
 
-You can use _notifyPreloader(new ProgressNotification(PROGRESS))_ method where PROGRESS value is between 0.11 and 0.29 in order to update finely the progression.
-You can also display custom message (understandable by your preloader) by calling _notifyPreloader(new ProgressNotification(MESSAGE_ID))_ where MESSAGE_ID is 200 or 300.
+```java
+@Override
+protected void preInit() {
+    notifyPreloader(new ProgressNotification(0.15));
+    // custom work between 10% and 30% of boot progress
+    notifyPreloader(new ProgressNotification(200)); // custom message id
+}
+```
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java|snippet=re:void postInit\(\)|snippet-start-offset=3} -->
+- `preInit()` — runs during init phase (10–30% progress); use for early custom setup.
+- `notifyPreloader(ProgressNotification(double))` — fine-grained bar update (0.11–0.29).
+- `notifyPreloader(ProgressNotification(int))` — message id understood by your preloader (e.g. 200, 300).
 
-You can use _notifyPreloader(new ProgressNotification(PROGRESS))_ method where PROGRESS value is between 0.71 and 0.89 in order to update finely the progression.
-You can also display custom message (understandable by your preloader) by calling _notifyPreloader(new ProgressNotification(MESSAGE_ID))_ where MESSAGE_ID is 800 or 900.
+
+```java
+@Override
+protected void postInit() {
+    notifyPreloader(new ProgressNotification(0.75));
+    // custom work between 70% and 90% of boot progress
+    notifyPreloader(new ProgressNotification(800)); // custom message id
+}
+```
+
+- `postInit()` — runs late in init (70–90% progress), after fonts/CSS preload.
+- Progress doubles use range 0.71–0.89; message ids 800 or 900 for custom preloader text.
 
 
 ### Start Phase
@@ -254,13 +858,26 @@ JRebirth provides a configuration engine that allow to parse configuration files
 Your application class can use the dedicated **@Configuration** annotation.
 The **AbstractApplication** class use a default one:
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java|snippet=re:(@Configuration)} -->
+
+```java
+@Configuration(".*jrebirth")
+```
+
+- Default on `AbstractApplication` — loads `*-jrebirth.properties` from the classpath.
+- Matched files inject parameters into the application at startup.
+
 
 Hereafter you have a full annotation usage:
 
 
-<!-- MACRO{include|source=core/src/test/java/org/jrebirth/af/core/application/apps/FullConfApplication.java|snippet=re:(@Configuration)} -->
 
+```java
+@Configuration(value = ".*-jrebirth", extension = "properties", schedule = 60)
+```
+
+- `value = ".*-jrebirth"` — regex filter; matches files like `myapp-jrebirth.properties`.
+- `extension = "properties"` — file suffix without the dot.
+- `schedule = 60` — optional reload check interval in seconds (0 = no hot reload).
 
 This annotation has 3 properties:
 - value
@@ -301,7 +918,12 @@ It's possible to avoid configuration mechanism, for example if you want to use y
 
 You can disable it by setting an empty **@Configuration** annotation.
 
-<!-- MACRO{include|source=core/src/test/java/org/jrebirth/af/core/application/apps/NullConfApplication.java|snippet=re:(@Configuration)} -->
+
+```java
+@Configuration
+```
+
+- Empty `@Configuration` — disables automatic configuration file scanning.
 
 
 # Manage Localization
@@ -315,7 +937,13 @@ It parses properties files and inject values into application.
 Your application class can use the dedicated **@Localized** annotation.
 The **AbstractApplication** class use a default one:
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/application/AbstractApplication.java|snippet=re:(@Localized)} -->
+
+```java
+@Localized(".*_rb")
+```
+
+- `@Localized(".*_rb")` — loads `MyMessages_rb.properties`, `MyMessages_fr_rb.properties`, etc.
+- Place message bundles on the classpath; keys become available through the resource engine.
 
 
 This annotation has 2 properties:
@@ -346,7 +974,12 @@ It's possible to avoid localization mechanism, for example if you want to improv
 
 You can disable it by setting an empty **@Localized** annotation.
 
-<!-- MACRO{include|source=core/src/test/java/org/jrebirth/af/core/application/apps/NullConfApplication.java|snippet=re:(@Localized)} -->
+
+```java
+@Localized
+```
+
+- Empty `@Localized` — disables i18n bundle scanning (useful for headless or performance-sensitive apps).
 
 ]]#
 

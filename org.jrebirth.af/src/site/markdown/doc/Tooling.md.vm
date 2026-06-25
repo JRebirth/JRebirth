@@ -1,0 +1,561 @@
+﻿<head>
+<![CDATA[
+    <title>Tooling</title>
+    <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
+]]>
+</head>
+
+<div id="catcherTitle">Tooling</div>
+<div id="catcherContent">Maven plugin and annotation processors for code generation.</div>
+
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end
+
+#[[
+
+## In 30 seconds
+
+**jrebirth-maven-plugin** generates Java from `.ecore` or `.model` DSL files at `generate-sources`. The **processor** artifact emits `ModuleStarter` + SPI from `@Register` / `@BootComponent` / `@Preload`. Enable both in a normal `mvn compile`.
+
+Quick Start
+---------------------
+
+Enable compile-time code generation with the Maven plugin and annotation processor. Both run during a normal `mvn compile`.
+
+```xml
+<!-- Maven plugin: generate sources from .ecore or .model DSL files -->
+<plugin>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>jrebirth-maven-plugin</artifactId>
+    <version>${jrebirth.version}</version>
+    <executions>
+        <execution>
+            <goals><goal>text2fx</goal></goals>
+            <configuration>
+                <modelFile>src/main/resources/domain.model</modelFile>
+                <generator>javafx</generator>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+
+<!-- Annotation processor: ModuleStarter + @Bean implementations -->
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <configuration>
+        <annotationProcessorPaths>
+            <path>
+                <groupId>org.jrebirth.af</groupId>
+                <artifactId>processor</artifactId>
+                <version>${jrebirth.version}</version>
+                <classifier>4ide</classifier>
+            </path>
+        </annotationProcessorPaths>
+    </configuration>
+</plugin>
+```
+
+**Minimal example — module auto-registration at compile time:**
+
+```java
+@RegistrationPoint
+public interface TodoService extends Service { /* ... */ }
+
+@Register(value = TodoService.class)
+public class TodoServiceImpl extends DefaultService implements TodoService { /* ... */ }
+```
+
+After compilation, inspect `target/generated-sources/annotations/` for the generated `*ModuleStarter` and `META-INF/services/org.jrebirth.af.api.module.ModuleStarter`.
+
+
+Tooling
+==============
+
+
+Overview
+---------------------
+
+JRebirth provides build-time tooling for code generation and module bootstrapping. This includes:
+
+* **jrebirth-maven-plugin** &mdash; Maven goals for generating Java sources from EMF Ecore models or text DSL files.
+* **Annotation Processors** &mdash; compile-time processors that generate `ModuleStarter` classes and bean implementations from annotations.
+
+Together, these tools reduce boilerplate and ensure consistent code generation aligned with JRebirth conventions.
+
+
+Maven Plugin
+==============
+
+The `jrebirth-maven-plugin` provides two goals for source generation, both bound to the `generate-sources` phase by default.
+
+
+ecore2fx Goal
+---------------------
+
+The **ecore2fx** goal generates JavaFX-friendly model types from EMF `.ecore` files. It uses the `Ecore2FXGenerator` to transform an XMI model definition into Java source files.
+
+### Parameters ###
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `ecoreFile` | `Model.ecore` | Path to the `.ecore` model file (relative to project base or absolute) |
+| `outputKind` | `generated` | Output strategy: `generated` (target/generated-sources), `src` (main source dir), or `custom` |
+| `outputDirectory` | `${project.build.directory}/generated-sources` | Used when `outputKind` is `custom` |
+
+### POM Configuration ###
+
+```xml
+<plugin>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>jrebirth-maven-plugin</artifactId>
+    <version>${jrebirth.version}</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>ecore2fx</goal>
+            </goals>
+            <configuration>
+                <ecoreFile>src/main/resources/MyModel.ecore</ecoreFile>
+                <outputKind>generated</outputKind>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
+
+```java
+@Mojo(name = "ecore2fx", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+public class Ecore2FXMojo extends AbstractMojo {
+
+    enum OutputKind {
+        generated, src, custom
+    }
+
+    @Parameter(defaultValue = "${project}", required = true, readonly = true)
+    private MavenProject project;
+
+    /**
+     * Ecore model file (XMI), relative to the project base directory unless absolute.
+     */
+    @Parameter(defaultValue = "Model.ecore", property = "jrebirth.ecoreFile", required = true)
+    private File ecoreFile;
+
+    /**
+     * {@code generated} → {@code target/generated-sources}; {@code src} → main source directory;
+     * {@code custom} → {@link #outputDirectory}.
+     */
+    @Parameter(defaultValue = "generated")
+    private OutputKind outputKind;
+
+    /**
+     * Used when {@code outputKind} is {@code custom}.
+     */
+    @Parameter(defaultValue = "${project.build.directory}/generated-sources")
+    private File outputDirectory;
+
+    @Override
+    public void execute() throws MojoExecutionException {
+        final File model = this.ecoreFile.isAbsolute() ? this.ecoreFile : new File(this.project.getBasedir(), this.ecoreFile.getPath());
+        if (!model.isFile()) {
+            throw new MojoExecutionException("Ecore file not found: " + model.getAbsolutePath());
+        }
+
+        final File out = resolveOutputFolder();
+        getLog().info("Ecore2FX: model=" + model.getAbsolutePath() + " -> " + out.getAbsolutePath());
+
+        try {
+            new Ecore2FXGenerator().generate(out, model);
+        } catch (final RuntimeException e) {
+            throw new MojoExecutionException("Ecore2FX generation failed: " + e.getMessage(), e);
+        }
+    }
+
+    private File resolveOutputFolder() {
+        return switch (this.outputKind) {
+            case generated -> new File(this.project.getBuild().getDirectory(), "generated-sources");
+            case src -> new File(this.project.getBuild().getSourceDirectory());
+            case custom -> this.outputDirectory;
+        };
+    }
+
+}
+```
+
+
+text2fx Goal
+---------------------
+
+The **text2fx** goal generates Java sources from a text DSL (`.model` files). It supports two generator modes: plain POJO beans or JavaFX property-based beans.
+
+### Parameters ###
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `modelFile` | (required) | Path to the `.model` DSL file |
+| `generator` | `javafx` | Generator mode: `pojo` (classic getters/setters) or `javafx` (JavaFX properties) |
+| `javaFxAccessorPrefixes` | `false` | When `javafx`: use `getX`/`setX`/`isX` instead of fluent `x()`/`x(value)` |
+| `outputKind` | `generated` | Output strategy: `generated`, `src`, or `custom` |
+| `outputDirectory` | `${project.build.directory}/generated-sources/text2fx` | Used when `outputKind` is `custom` |
+
+### POM Configuration ###
+
+```xml
+<plugin>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>jrebirth-maven-plugin</artifactId>
+    <version>${jrebirth.version}</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>text2fx</goal>
+            </goals>
+            <configuration>
+                <modelFile>src/main/resources/domain.model</modelFile>
+                <generator>javafx</generator>
+                <javaFxAccessorPrefixes>false</javaFxAccessorPrefixes>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
+
+```java
+@Mojo(name = "text2fx", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+public class Text2FxMojo extends AbstractMojo {
+
+    private enum OutputKind {
+        generated, src, custom
+    }
+
+    public enum GeneratorKind {
+        /** Classic JavaBean getters/setters (void setters). */
+        pojo,
+        /** JavaFX properties + fluent or prefixed accessors. */
+        javafx
+    }
+
+    @Parameter(defaultValue = "${project}", readonly = true, required = true)
+    private MavenProject project;
+
+    /**
+     * Input model file (DSL).
+     */
+    @Parameter(property = "jrebirth.text2fx.modelFile", required = true)
+    private File modelFile;
+
+    /**
+     * {@code pojo} or {@code javafx}.
+     */
+    @Parameter(defaultValue = "javafx", property = "jrebirth.text2fx.generator")
+    private GeneratorKind generator;
+
+    /**
+     * When {@link #generator} is {@code javafx}: use {@code getX}/{@code setX}/{@code isX} instead of fluent {@code x()}/{@code x(value)}.
+     */
+    @Parameter(defaultValue = "false", property = "jrebirth.text2fx.javaFxAccessorPrefixes")
+    private boolean javaFxAccessorPrefixes;
+
+    @Parameter(defaultValue = "generated")
+    private OutputKind outputKind;
+
+    @Parameter(defaultValue = "${project.build.directory}/generated-sources/text2fx")
+    private File outputDirectory;
+
+    @Override
+    public void execute() throws MojoExecutionException {
+        if (!modelFile.isFile()) {
+            throw new MojoExecutionException("Text2FX model file not found: " + modelFile.getAbsolutePath());
+        }
+
+        final File out = resolveOutputFolder();
+        out.mkdirs();
+
+        final Model model;
+        try {
+            model = new ModelParser().parse(Path.of(modelFile.toURI()));
+        } catch (IOException e) {
+            throw new MojoExecutionException("Failed to read model file: " + modelFile, e);
+        } catch (IllegalArgumentException e) {
+            throw new MojoExecutionException("Invalid model: " + e.getMessage(), e);
+        }
+
+        final Path outputRoot = Path.of(out.toURI());
+        try {
+            switch (generator) {
+                case pojo -> new JavaGenerator().generate(model, outputRoot);
+                case javafx -> new JavaFXGenerator(javaFxAccessorPrefixes).generate(model, outputRoot);
+            }
+        } catch (IOException e) {
+            throw new MojoExecutionException("Code generation failed", e);
+        }
+
+        project.addCompileSourceRoot(out.getAbsolutePath());
+        getLog().info("Text2FX generated sources into " + out.getAbsolutePath() + " (" + generator
+                + (generator == GeneratorKind.javafx ? ", javaFxAccessorPrefixes=" + javaFxAccessorPrefixes : "") + ")");
+    }
+
+    private File resolveOutputFolder() {
+        return switch (this.outputKind) {
+            case generated -> new File(project.getBuild().getDirectory(), "generated-sources/text2fx");
+            case src -> new File(project.getBuild().getSourceDirectory());
+            case custom -> this.outputDirectory;
+        };
+    }
+}
+```
+
+The goal parses the DSL with `ModelParser`, then delegates to `JavaGenerator` (POJO) or `JavaFXGenerator` (property beans). Generated sources are added as a compile root automatically.
+
+**Example `.model` DSL fragment** (input to `text2fx`):
+
+```
+package com.example.domain
+
+class Person {
+    String firstName
+    String lastName
+    int age
+}
+```
+
+Running `text2fx` with `generator=javafx` produces property-based beans under `target/generated-sources/text2fx/`.
+
+
+Annotation Processors
+==============
+
+
+ComponentProcessor
+---------------------
+
+The **ComponentProcessor** processes the following annotations at compile time:
+
+* `@Register` &mdash; registers a component implementation for an interface.
+* `@RegistrationPoint` &mdash; declares an interface as a registration point (with exclusivity and reverse options).
+* `@BootComponent` &mdash; marks a component to be started automatically at application boot.
+* `@Preload` &mdash; marks a class for eager loading.
+
+From these annotations, it generates:
+
+1. A **ModuleStarter** class (extending `AbstractModuleStarter`) with a `start()` method that calls `define()`, `register()`, `preloadClass()`, and `bootComponent()` for each annotated element.
+2. An **SPI file** at `META-INF/services/org.jrebirth.af.api.module.ModuleStarter` so the module is auto-discovered at runtime.
+
+The generated class name is derived from the Maven `groupId` and `artifactId` in the project's `pom.xml`, or from a `moduleStarterClass` property in `jrebirth.properties`.
+
+
+```java
+/**
+ * The Class ComponentProcessor.
+ */
+@SupportedSourceVersion(SourceVersion.RELEASE_25)
+public class ComponentProcessor extends AbstractProcessor {
+
+    private static final String JREBIRTH_PROPERTIES_PATH = "jrebirth.properties";
+    private static final String MODULE_STARTER_CLASS_PROPERTY = "moduleStarterClass";
+    private static final String FORMATTER_PROPERTIES_FILE = "/org.eclipse.jdt.core.prefs";
+    private static final String MODULE_STARTER_SPI_PATH = "META-INF/services/org.jrebirth.af.api.module.ModuleStarter";
+    private static final String POM_XML = "pom.xml";
+    private static final String TARGET = "target";
+    private static final String FAKE_FILE = "fake.file";
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public synchronized void init(final ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<String> getSupportedAnnotationTypes() {
+
+        return new HashSet<>(Arrays.asList(Preload.class.getName(), BootComponent.class.getName(), Register.class.getName(), RegistrationPoint.class.getName()));
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
+        if (roundEnv.processingOver()) {
+            return false;
+        }
+
+        final Map<Class<?>, Set<? extends Element>> annotationMap = new HashMap<>();
+        annotationMap.put(Preload.class, roundEnv.getElementsAnnotatedWith(Preload.class));
+        annotationMap.put(BootComponent.class, roundEnv.getElementsAnnotatedWith(BootComponent.class));
+        annotationMap.put(RegistrationPoint.class, roundEnv.getElementsAnnotatedWith(RegistrationPoint.class));
+        annotationMap.put(Register.class, roundEnv.getElementsAnnotatedWith(Register.class));
+
+        if (!annotationMap.get(BootComponent.class).isEmpty() ||
+                !annotationMap.get(RegistrationPoint.class).isEmpty() ||
+                !annotationMap.get(Register.class).isEmpty() ||
+                !annotationMap.get(Preload.class).isEmpty()) {
+
+            final String moduleName = createModuleStarter(annotationMap, this.processingEnv);
+            createSPIFile(moduleName);
+        }
+
+        return true;
+    }
+
+    private void createSPIFile(String moduleName) {
+        try {
+            final FileObject fo = this.processingEnv.getFiler()
+                .createResource(StandardLocation.CLASS_OUTPUT, "", MODULE_STARTER_SPI_PATH);
+            final Writer writer = fo.openWriter();
+            writer.write(moduleName);
+            writer.close();
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
+
+When any registration annotation is present, the processor emits a `ModuleStarter` subclass and writes its FQN to the SPI file for `ServiceLoader` discovery at runtime.
+
+
+BeanProcessor
+---------------------
+
+The **BeanProcessor** processes the `@Bean` annotation. When placed on a class or interface, it generates a concrete POJO implementation with:
+
+* Private fields for each declared method/field.
+* Getter and setter methods.
+* Proper package placement matching the source.
+
+This is used by the Dialog module (e.g., `DialogWaveBean`) and other modules to generate implementation classes from interface definitions.
+
+
+```java
+/**
+ * The Class BeanProcessor.
+ */
+@SupportedSourceVersion(SourceVersion.RELEASE_25)
+public class BeanProcessor extends AbstractProcessor {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public synchronized void init(final ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<String> getSupportedAnnotationTypes() {
+
+        return new HashSet<>(Arrays.asList(Bean.class.getName()));
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
+
+        final Map<String, VariableElement> fields = new ConcurrentHashMap<>();
+
+        final Map<String, ExecutableElement> methods = new ConcurrentHashMap<>();
+
+        for (final Element element : roundEnv.getElementsAnnotatedWith(Bean.class)) {
+
+            if (element.getKind() == ElementKind.CLASS) {
+
+                final Bean bean = element.getAnnotation(Bean.class);
+
+                final Class beanDef = new Class();
+
+                final TypeElement classElement = (TypeElement) element;
+                final PackageElement packageElement = (PackageElement) classElement.getEnclosingElement();
+
+                this.processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "annotated class: " + classElement.getQualifiedName(), element);
+
+                // fqClassName = classElement.getQualifiedName().toString();
+                beanDef.name(bean.value());
+                beanDef._package(org.jrebirth.af.tooling.codegen.bean.Package.create().qualifiedName(packageElement.getQualifiedName().toString()));
+
+                final Class td = new Class();
+                td.qualifiedName(classElement.getQualifiedName().toString());
+
+                beanDef.setSuperType(td);
+
+                for (final Element child : classElement.getEnclosedElements()) {
+
+                    if (child.getKind() == ElementKind.METHOD) {
+
+                        final ExecutableElement method = (ExecutableElement) child;
+
+                        final Property propertyDef = new Property();
+                        propertyDef.type(Class.of(method.getReturnType().toString()));
+                        propertyDef.name(method.getSimpleName().toString());
+                        beanDef.properties().add(propertyDef);
+
+                    } else if (child.getKind().isField()) {
+
+                        final VariableElement field = (VariableElement) child;
+
+                        final Property propertyDef = new Property();
+                        propertyDef.type(Class.of(getClassName(field)));
+                        propertyDef.name(field.getSimpleName().toString());
+                        beanDef.properties().add(propertyDef);
+
+                    }
+                }
+
+                generateBeanClass(beanDef);
+            }
+        }
+
+        return true;
+    }
+}
+```
+
+For each `@Bean`-annotated interface, the processor generates a concrete POJO with private fields and getters/setters. The Dialog module's `DialogWaveBean` follows this pattern.
+
+
+Enabling Annotation Processors
+---------------------
+
+To enable JRebirth annotation processors in your build, add the `processor` artifact (with classifier `4ide`) as an annotation processor path:
+
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <configuration>
+        <annotationProcessorPaths>
+            <path>
+                <groupId>org.jrebirth.af</groupId>
+                <artifactId>processor</artifactId>
+                <version>${jrebirth.version}</version>
+                <classifier>4ide</classifier>
+            </path>
+        </annotationProcessorPaths>
+    </configuration>
+</plugin>
+```
+
+The processors run automatically during compilation and produce generated sources in the configured output directory.
+
+
+]]#
+
+#if( !$all )
+#parse("TocList.vm")
+#displayFooterToc("Tooling")
+#end

@@ -6,7 +6,7 @@
 #set( $keywords = "JavaFX Mind Game Mastering Tables" )
 #set( $description = "JavaFX Mind Game Mastering Tables" )
 
-#set( $version = "${MasteringTables-version}")
+#set( $version = "$MasteringTables-version")
 #set( $path = "masteringtables")
 #set( $archiveName = "MasteringTables")
 #set( $downloadName = "Mastering Tables")
@@ -32,3 +32,341 @@
 			
 
 #parse("Presentation.vm")
+
+#[[
+
+---
+
+# Architecture Walkthrough
+
+Mastering Tables is a complete JRebirth application that exercises almost every framework pattern: Commands for orchestration, Services for background computation, Waves for game-loop messaging, StackModel for page navigation, inner components for UI composition, and resource enums for fonts, images, and styles.
+
+This section walks through the architecture as a learning guide.
+
+
+## Application Bootstrap
+
+The entry point extends `DefaultApplication` and uses `StackModel` as its first model — a component-module model that manages a stack of full-screen pages.
+
+```java
+public final class MTApplication extends DefaultApplication<StackPane> {
+
+    public static void main(final String... args) {
+        preloadAndLaunch(args);
+    }
+
+    @Override
+    public Class<? extends Model> firstModelClass() {
+        return StackModel.class;
+    }
+
+    @Override
+    public ModelDescriptor<?, ?> firstModelDescriptor() {
+        return StackConfig.create().stackItemClass(Page.class);
+    }
+
+    @Override
+    protected void customizeScene(final Scene scene) {
+        addCSS(scene, MTStyles.MAIN);
+        addCSS(scene, MTStyles.MENU);
+    }
+
+    @Override
+    protected List<? extends ResourceItem<?, ?, ?>> getResourceToPreload() {
+        return Arrays.asList(new FontItem[] {
+                MTFonts.EXPRESSION,
+                MTFonts.COUNTER,
+        });
+    }
+}
+```
+
+Key points:
+
+- **`firstModelDescriptor()`** passes a `StackConfig` that tells `StackModel` which enum class provides the page definitions (`Page.class`).
+- **`customizeScene()`** loads two stylesheets via `StyleSheetItem` constants — no hardcoded paths.
+- **`getResourceToPreload()`** pre-loads fonts during startup so they are available by the time the splash screen finishes.
+
+
+## Page Navigation with StackModel
+
+Navigation between the four screens is handled by the `Page` enum, which implements `StackItem`.
+
+```java
+public enum Page implements StackItem {
+
+    Splash,
+    GameMenu,
+    Game,
+    Result;
+
+    @Override
+    public UniqueKey<? extends Model> getModelKey() {
+        return switch (this) {
+            case Splash -> Key.create(SplashModel.class);
+            case Game -> Key.create(GameModel.class);
+            case Result -> Key.create(ResultModel.class,
+                JRebirthThread.getThread().getFacade()
+                    .uiFacade().retrieve(Key.create(GameModel.class)).object());
+            case GameMenu -> Key.createSingle(GameMenuModel.class);
+        };
+    }
+}
+```
+
+Each enum constant maps to a model class.
+To navigate, any component sends a `StackWaves.SHOW_STACK_ITEM` wave carrying the target `Page` value:
+
+```java
+sendWave(StackWaves.SHOW_STACK_ITEM,
+         WBuilder.waveData(StackWaves.STACK_ITEM, Page.GameMenu));
+```
+
+The `StackModel` listens for this wave and swaps the displayed model accordingly.
+This keeps navigation fully decoupled — neither the sender nor the target page knows about each other.
+
+
+## Async Startup — Splash → Service → Menu
+
+The startup flow demonstrates Command → Service orchestration:
+
+**1. SplashModel** is the first page shown.
+When its view appears, it calls a command and passes its progress bar:
+
+```java
+@RootNodeId("SplashPanel")
+public class SplashModel extends DefaultSimpleModel<BorderPane> {
+
+    private ProgressBar loadingBar;
+
+    @Override
+    protected void showView() {
+        callCommand(DisplayGameMenu.class,
+            WBuilder.waveData(JRebirthWaves.PROGRESS_BAR, getLoadingBar()));
+    }
+}
+```
+
+**2. DisplayGameMenu** command forwards the progress bar to the service and listens for the result:
+
+```java
+public class DisplayGameMenu extends DefaultCommand {
+
+    @Override
+    protected void perform(final Wave wave) {
+        returnData(ExpressionBuilderService.class,
+                   ExpressionBuilderService.DO_BUILD_TABLES,
+                   wave.getData(JRebirthWaves.PROGRESS_BAR));
+    }
+
+    @OnWave(ExpressionBuilderService.TABLES_BUILT)
+    @RunInto(value = RunType.JTP, priority = PriorityLevel.High)
+    public void doTablesBuilt(final Wave wave) {
+        sendWave(StackWaves.SHOW_STACK_ITEM,
+                 WBuilder.waveData(StackWaves.STACK_ITEM, Page.GameMenu));
+    }
+}
+```
+
+**3. ExpressionBuilderServiceImpl** runs on a background thread, generating all math tables while updating the progress bar:
+
+```java
+@Register(value = ExpressionBuilderService.class, priority = PriorityLevel.Normal)
+public final class ExpressionBuilderServiceImpl extends DefaultService
+        implements ExpressionBuilderService {
+
+    @Override
+    @Priority(PriorityLevel.Highest)
+    public void doBuildTables(final Wave wave) throws InterruptedException {
+        final int allItems = 12 * 12 * 3 + 12 * 13;
+        int counter = 0;
+        updateProgress(wave, 0, allItems);
+
+        for (int left = 1; left <= 12; left++) {
+            for (int right = 1; right <= 12; right++) {
+                multiplicationTable.add(Expression.create()
+                    .left(left).operator("×").right(right)
+                    .result(left * right));
+                // ... addition, division tables ...
+                counter += 3;
+                updateProgress(wave, counter, allItems);
+            }
+        }
+        // ... subtraction table ...
+    }
+}
+```
+
+The `updateProgress` call automatically updates the `ProgressBar` attached to the wave — the service does not need a reference to any UI component.
+When the service method returns, JRebirth fires a `TABLES_BUILT` return wave, which the command catches via `@OnWave` and triggers navigation to the game menu.
+
+
+## Wave-Driven Game Loop
+
+Once the player starts a game, the flow is driven entirely by waves defined in `MTWaves`:
+
+```java
+@Preload
+public interface MTWaves extends Preloadable {
+
+    WaveItem<Expression> EXPRESSION = new WaveItemBase<Expression>() {};
+    WaveItem<List<Expression>> GAME_LIST = new WaveItemBase<List<Expression>>() {};
+
+    WaveType START_GAME = waveType(START_GAME_CODE).items(GAME_LIST);
+    WaveType FINISH_GAME = waveType("FINISH_GAME");
+    WaveType DISPLAY_EXPRESSION = waveType("DISPLAY_EXPRESSION").items(EXPRESSION);
+    WaveType REGISTER_SUCCESS = waveType("REGISTER_SUCCESS").items(EXPRESSION);
+    WaveType REGISTER_FAILURE = waveType("REGISTER_FAILURE").items(EXPRESSION);
+}
+```
+
+### The game loop in GameModel
+
+```java
+public class GameModel extends DefaultObjectModel<GameModel, GameView, Game> {
+
+    @Link
+    protected InnerComponent<ExpressionModel> expressionModel;
+
+    @OnWave(MTWaves.START_GAME_CODE)
+    public void doStartGame(final List<Expression> expressionList, final Wave wave) {
+        object().setIndex(0);
+        object().setSuccessCount(0);
+        object().setFailureCount(0);
+        object().getGameList().clear();
+        object().getGameList().addAll(expressionList);
+
+        view().startTimer();
+
+        sendWave(MTWaves.DISPLAY_EXPRESSION,
+                 waveData(MTWaves.EXPRESSION, object().getCurrentExpression()));
+    }
+
+    public void doRegisterSuccess(final Expression expression, final Wave wave) {
+        object().setSuccessCount(object().getSuccessCount() + 1);
+        object().setIndex(object().getIndex() + 1);
+
+        if (object().hasMoreExpression()) {
+            sendWave(MTWaves.DISPLAY_EXPRESSION,
+                     waveData(MTWaves.EXPRESSION, object().getCurrentExpression()));
+        } else {
+            view().stopTimer();
+            sendWave(StackWaves.SHOW_STACK_ITEM,
+                     WBuilder.waveData(StackWaves.STACK_ITEM, Page.Result));
+        }
+    }
+
+    public void doRegisterFailure(final Expression expression, final Wave wave) {
+        object().setFailureCount(object().getFailureCount() + 1);
+    }
+}
+```
+
+The game loop works like this:
+
+1. `CreateGameContent` command builds a shuffled list of expressions from the service's tables and sends `START_GAME`.
+2. `GameModel.doStartGame()` resets counters, stores the list, and sends `DISPLAY_EXPRESSION` with the first expression.
+3. `ExpressionModel` (an inner component) receives `DISPLAY_EXPRESSION` via `@OnWave` and shows the expression.
+4. When the player types the correct answer, `ExpressionModel` sends `REGISTER_SUCCESS`.
+5. `GameModel.doRegisterSuccess()` increments the counter and either sends the next `DISPLAY_EXPRESSION` or navigates to the `Result` page.
+6. Wrong answers trigger `REGISTER_FAILURE`, incrementing the failure counter.
+
+No model calls another model directly — the entire game loop flows through waves.
+
+### Inner component: ExpressionModel
+
+`ExpressionModel` is declared as an inner component of `GameModel`:
+
+```java
+@Link
+protected InnerComponent<ExpressionModel> expressionModel;
+```
+
+It uses JavaFX property bindings to display the current expression:
+
+```java
+@Override
+protected void bind() {
+    view().getLeftOperand().textProperty().bind(object().leftProperty().asString());
+    view().getOperator().textProperty().bind(object().operatorProperty());
+    view().getRightOperand().textProperty().bind(object().rightProperty().asString());
+}
+
+@OnWave("DISPLAY_EXPRESSION")
+public void doDisplayExpression(final Expression expression, final Wave wave) {
+    object(expression);
+    view().getShowExpression().play();
+}
+```
+
+When a new expression arrives via wave, `object(expression)` replaces the model object, and the bindings update the view automatically.
+
+
+## Resource Declarations
+
+Mastering Tables uses JRebirth's enum-based resource system for all assets.
+
+### Stylesheets
+
+```java
+public interface MTStyles {
+    StyleSheetItem MAIN = create(new StyleSheet("mt")).module(MTStyles.class.getModule());
+    StyleSheetItem MENU = create(new StyleSheet("menu")).module(MTStyles.class.getModule());
+}
+```
+
+The `.module()` call ensures correct classpath resolution under JPMS.
+
+### Fonts
+
+```java
+public enum MTFonts implements FontEnum {
+    EXPRESSION {{ real(MTFontNames.nyala, 130.0, FontExtension.TTF); }},
+    COUNTER {{ real(MTFontNames.nyala, 50.0, FontExtension.TTF); }};
+
+    @Override
+    public Module module() {
+        return MTImages.class.getModule();
+    }
+}
+```
+
+The `real()` initializer specifies font name, size, and file extension.
+These fonts are preloaded via `getResourceToPreload()` in the application class, making them available from CSS before any view is created.
+
+### Images
+
+```java
+public enum MTImages implements ImageEnum {
+    MT_TITLE          {{ rel("Title", ImageExtension.PNG); }},
+    POWERED_BY        {{ rel("PoweredBy", ImageExtension.PNG); }},
+    RESULT_MONSTER    {{ rel("Result_Monster", ImageExtension.PNG); }},
+    RESULT_SUCCESS_ICON {{ rel("Result_Success_Icon", ImageExtension.PNG); }},
+    RESULT_FAILURE_ICON {{ rel("Result_Failure_Icon", ImageExtension.PNG); }};
+
+    @Override
+    public Module module() {
+        return MTImages.class.getModule();
+    }
+}
+```
+
+`rel()` declares a relative path — JRebirth resolves it against the module's resource root.
+Using `MTImages.MT_TITLE.get()` anywhere in the app returns a cached `Image` instance.
+
+
+## Key Patterns Summary
+
+| Pattern | Where | What it teaches |
+|---------|-------|-----------------|
+| `StackModel` + `Page` enum | Navigation | Decoupled full-screen page switching via waves |
+| Command → Service chaining | `DisplayGameMenu` → `ExpressionBuilderService` | Async startup with progress reporting |
+| Wave-driven game loop | `MTWaves`, `GameModel`, `ExpressionModel` | Loosely coupled event flow without direct model references |
+| Inner components | `GameModel` → `ExpressionModel` | Lifecycle-managed child models embedded in a parent |
+| `@OnWave` annotation | `GameModel`, `ExpressionModel`, `DisplayGameMenu` | Declarative wave listening |
+| `DefaultObjectModel` | `GameModel`, `ExpressionModel`, `GameMenuModel` | Models carrying a typed data object with property bindings |
+| Resource enums | `MTStyles`, `MTFonts`, `MTImages` | JPMS-aware, cached, type-safe resource management |
+| Font preloading | `MTApplication.getResourceToPreload()` | Ensure fonts are available before CSS needs them |
+| `@Register` + `@RegistrationPoint` | `ExpressionBuilderService` | Interface-based service registration and injection |
+
+]]#

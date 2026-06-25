@@ -1,0 +1,267 @@
+﻿<head>
+<![CDATA[
+    <title>Security</title>
+    <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
+]]>
+</head>
+
+<div id="catcherTitle">Security Module</div>
+<div id="catcherContent">Behavior-based security for UI components.</div>
+
+#if(!$all)
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+#end
+
+#[[
+
+## In 30 seconds
+
+Attach **Securable** behavior data to a Model; a registered **SecurityBehavior** consults **SecurityService** at init and adjusts visibility or disable state. The default `SecurityBehaviorImpl` is a stub — register your own `@Register(SecurityBehavior.class)` implementation for real policy.
+
+Quick Start
+---------------------
+
+Add the security module and attach a `Securable` behavior data to any Model. A `SecurityBehavior` implementation consults your `SecurityService` and applies the result to the UI.
+
+```xml
+<dependency>
+    <groupId>org.jrebirth.af</groupId>
+    <artifactId>security</artifactId>
+    <version>${jrebirth.version}</version>
+</dependency>
+```
+
+**Minimal example — hide a panel when the user lacks permission:**
+
+```java
+public class AdminDashboardModel extends DefaultModel<AdminDashboardModel, AdminDashboardView> {
+
+    @Override
+    protected void initModel() {
+        addBehavior(Securable.create().name("admin.dashboard"));
+    }
+}
+
+@Register(SecurityService.class)
+public class MySecurityService extends AbstractService implements SecurityService {
+    // connect to your auth backend; return grants for current user
+}
+
+@Register(value = SecurityBehavior.class, priority = PriorityLevel.Normal)
+public class MySecurityBehavior extends AbstractBehavior<Securable, Model>
+        implements SecurityBehavior {
+
+    @Override
+    public void initBehavior() {
+        Securable data = getBehaviorData();
+        SecurityService security = getService(SecurityService.class);
+        boolean allowed = /* check data.name() against security */;
+        node().setVisible(allowed);
+        node().setDisable(!allowed);
+    }
+}
+```
+
+Replace the placeholder authorization check with your real policy. The default `SecurityBehaviorImpl` is a no-op stub you override via `@Register`.
+
+
+Security
+==============
+
+
+Overview
+---------------------
+
+The JRebirth Security module provides a **Behavior-based** approach to securing UI components. Rather than embedding security logic directly in Models or Views, you attach a `SecurityBehavior` to any `BehavioredComponent`. The behavior inspects the associated `Securable` data and interacts with a `SecurityService` to determine whether the component should be shown/hidden, enabled/disabled, or otherwise restricted.
+
+This design keeps security concerns decoupled from business logic and allows consistent access-control policies across the entire application.
+
+
+Architecture
+---------------------
+
+The security module follows a three-tier pattern:
+
+1. **SecurityBehavior** &mdash; the pluggable behavior attached to a Model.
+2. **Securable** &mdash; the BehaviorData carrying security metadata (permission name, roles, etc.).
+3. **SecurityService** &mdash; the service contract for authentication and authorization decisions.
+
+The typical flow:
+
+```java
+// 1) Model declares what to protect
+@Override
+protected void initModel() {
+    addBehavior(Securable.create().name("admin.dashboard"));
+}
+
+// 2) Behavior enforces policy at init
+@Override
+public void initBehavior() {
+    Securable data = getBehaviorData();
+    SecurityService auth = getService(SecurityService.class);
+    boolean allowed = auth.isGranted(data.name()); // method on your SecurityService impl
+    node().setVisible(allowed);
+    node().setDisable(!allowed);
+}
+```
+
+
+SecurityBehavior
+---------------------
+
+The **SecurityBehavior** interface extends `Behavior<Securable, Model>` and is annotated with `@RegistrationPoint(exclusive = true)`, meaning only one security behavior implementation can be active at a time.
+
+
+```java
+@RegistrationPoint(exclusive = true)
+public interface SecurityBehavior extends Behavior<Securable, Model> {
+
+}
+```
+
+
+SecurityBehaviorImpl
+---------------------
+
+**SecurityBehaviorImpl** is the default implementation, extending `AbstractBehavior<Securable, Model>`. Override `initBehavior()` to query `SecurityService` and show/hide or enable/disable the model's node.
+
+
+```java
+public class SecurityBehaviorImpl extends AbstractBehavior<Securable, Model>
+        implements SecurityBehavior {
+
+    @Override
+    public void initBehavior() {
+        // Default stub — no UI changes; override via @Register
+    }
+}
+```
+
+Register a custom behavior to replace the stub:
+
+```java
+@Register(value = SecurityBehavior.class, priority = PriorityLevel.Normal)
+public class AppSecurityBehavior extends AbstractBehavior<Securable, Model>
+        implements SecurityBehavior {
+
+    @Override
+    public void initBehavior() {
+        Securable data = getBehaviorData();
+        boolean ok = getService(SecurityService.class).isGranted(data.name());
+        node().setVisible(ok);
+        node().setDisable(!ok);
+    }
+}
+```
+
+
+Securable
+---------------------
+
+**Securable** is the BehaviorData class annotated with `@BehaviorDataFor(SecurityBehavior.class)`. It carries security configuration for the component it is attached to. The `name` property identifies the permission or resource being secured.
+
+Use the fluent builder pattern to create instances:
+
+```java
+Securable.create().name("admin.dashboard")
+```
+
+
+```java
+@BehaviorDataFor(SecurityBehavior.class)
+public class Securable extends BehaviorDataBase implements Serializable {
+
+    /** The generated serial version uid. */
+    private static final long serialVersionUID = -2309831247976039337L;
+
+    /** . */
+    private String name;
+
+    public static Securable create() {
+        return new Securable();
+    }
+
+    public String name() {
+        return this.name;
+    }
+
+    public Securable name(final String name) {
+        this.name = name;
+        return this;
+    }
+
+}
+```
+
+
+SecurityService
+---------------------
+
+**SecurityService** extends the JRebirth `Service` interface and serves as the contract for authentication and authorization logic. Implement this interface to connect to your security backend (LDAP, OAuth, custom token service, etc.).
+
+
+```java
+public interface SecurityService extends Service {
+    // Add your auth API (e.g. boolean isGranted(String key))
+}
+```
+
+Implement and register your backend connector:
+
+```java
+@Register(SecurityService.class)
+public class LdapSecurityService extends AbstractService implements SecurityService {
+    public boolean isGranted(String permissionKey) {
+        return currentUser().hasPermission(permissionKey);
+    }
+}
+```
+
+Usage Pattern
+---------------------
+
+### Attaching Security to a Model ###
+
+In your Model's initialization, add a `Securable` data instance:
+
+```java
+addBehavior(Securable.create().name("my.permission.key"));
+```
+
+This triggers the `SecurityBehavior` to be created and attached. The behavior then:
+
+1. Retrieves the `Securable` data.
+2. Calls the `SecurityService` to check if the current user has the required permission.
+3. Applies the result to the UI (show/hide, enable/disable).
+
+### Implementing SecurityService ###
+
+Create a class implementing `SecurityService` and register it:
+
+```java
+@Register(SecurityService.class)
+public class MySecurityService extends AbstractService implements SecurityService {
+    // Implement authentication/authorization logic
+}
+```
+
+### Replacing the Default Behavior ###
+
+Since `SecurityBehavior` uses `@RegistrationPoint(exclusive = true)`, registering your own implementation with a higher priority will replace the default:
+
+```java
+@Register(value = SecurityBehavior.class, priority = PriorityLevel.Normal)
+public class CustomSecurityBehavior extends AbstractBehavior<Securable, Model>
+        implements SecurityBehavior {
+    // Custom security enforcement
+}
+```
+
+
+]]#
+
+#if( !$all )
+#parse("TocList.vm")
+#displayFooterToc("Security")
+#end

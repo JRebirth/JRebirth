@@ -1,4 +1,4 @@
-<head>
+﻿<head>
 <![CDATA[
 	<title>Services</title>
 	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
@@ -16,6 +16,19 @@
      
 Services
 =========================
+
+## In 30 seconds
+
+A **Service** runs long or async work off the UI thread. Define entry/return `WaveType`s on the service interface, implement the task method, register with `listen(...)` or `@OnWave`, then call `returnData(Service.class, WAVE_TYPE, waveData...)`. Results arrive as a return wave your Model listens for.
+
+## How to use
+
+1. Create a service **interface** extending `Service` with `WaveType` constants (`.items(...).returnAction(...).returnItem(...)`).
+2. Declare the task method on the interface (name matches the wave action, e.g. `doLoadEvents` for `LOAD_EVENTS`).
+3. Implement the interface in a class extending `DefaultService`; register in `initService()` with `listen(DO_XXX)` or use `@OnWave` on the interface.
+4. Implement the task body; use `updateProgress` / `updateMessage` when needed.
+5. From a Model (or other component), call `returnData(MyService.class, MyService.DO_TASK, WBuilder.waveData(...))`.
+6. In the caller's `initModel()`, `listen(MyService.DO_TASK.returnWaveType())` and add a handler method (e.g. `doTaskCompleted(...)`).
 
 Overview
 -------------
@@ -62,19 +75,53 @@ Defining Wave Types
 
 This is the *WaveType* used to process a Wave generated anywhere into the application.
 
-<!-- MACRO{include|highlight-theme=eclipse|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java|snippet=re:DO_LOAD_EVENTS \=|snippet-start-offset=1|snippet-end-offset=3}-->
+
+```java
+WaveType DO_LOAD_EVENTS = WBuilder.waveType("LOAD_EVENTS")
+    .items(EditorWaves.EVENTS_FILE)
+    .returnAction("EVENTS_LOADED")
+    .returnItem(EditorWaves.EVENTS);
+```
+
+- Full entry contract on the service interface — one constant defines call + return waves.
+- `.items(...)` — input parameters; `.returnAction` / `.returnItem` — completion contract.
+
 
 This **WaveType** uses only one **WaveItem** to store the file that must be loaded.
 WaveItem wrap the type of the object we want to use, thus it's possible to check that API contract isn't broken.
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java|snippet=re:EVENTS_FILE =|snippet-start-offset=1|snippet-end-offset=1}-->
+Minimal entry `WaveType` on a service interface:
+
+```java
+WaveType DO_LOAD = WBuilder.waveType("LOAD")
+    .items(MyWaves.INPUT_FILE)
+    .returnAction("LOADED")
+    .returnItem(MyWaves.RESULT_LIST);
+```
+
+- `waveType("LOAD")` — action name; handler method will be `doLoad(...)`.
+- `.items(...)` — input parameters carried by the call wave.
+- `.returnAction("LOADED")` — name of the completion wave (`doLoaded(...)` handler).
+- `.returnItem(...)` — typed slot for the value returned from the task method.
 
 ### Exit Point Wave Type
 
 The return Wave Type is automatically created with by the using the _returnAction_ value with _returnItem_ as **WaveItem**.
 The code above will generate a **WaveType** that uses only one WaveItem to store the list of events loaded from the given file.
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java|snippet=re:EVENTS =|snippet-start-offset=1|snippet-end-offset=1}-->
+
+```java
+// Generated return type — listen with:
+listen(LoadEdtFileService.DO_LOAD_EVENTS.returnWaveType());
+
+public void doEventsLoaded(final List<JRebirthEvent> events, final Wave wave) {
+    // handler for return action EVENTS_LOADED
+}
+```
+
+- `.returnWaveType()` — accessor on the entry `WaveType` for the auto-generated completion wave.
+- Handler name comes from `returnAction` (`EVENTS_LOADED` → `doEventsLoaded`).
+
 
 Task Registration
 -------------------
@@ -83,8 +130,97 @@ Each Task requires to be registered in order to generate the right WaveType that
 	
 This registration must be done into the JRebirth's Component **void initService()** method like this:
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/impl/LoadEdtFileServiceImpl.java|snippet=aj:....LoadEdtFileServiceImpl.initService(..)|highlight-lines=grep:listen}-->
-	<!--|snippet-start-offset=3" />-->
+
+```java
+package org.jrebirth.af.showcase.analyzer.service.impl;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jrebirth.af.api.annotation.PriorityLevel;
+import org.jrebirth.af.api.concurrent.Priority;
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.facade.JRebirthEventBase;
+import org.jrebirth.af.core.log.JRebirthMarkers;
+import org.jrebirth.af.core.service.DefaultService;
+import org.jrebirth.af.core.service.ServiceUtility;
+import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * The class <strong>LoadEdtFileServiceImpl</strong> is the basic implementation used to load a log file.
+ *
+ * @author Sébastien Bordes
+ */
+@Register(value = LoadEdtFileService.class, priority = PriorityLevel.Low)
+public class LoadEdtFileServiceImpl extends DefaultService implements LoadEdtFileService {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoadEdtFileServiceImpl.class);
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initService() {
+
+        listen(DO_LOAD_EVENTS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Priority(PriorityLevel.High)
+    public List<JRebirthEvent> doLoadEvents(final File selecteFile, final Wave wave) {
+
+        final List<JRebirthEvent> eventList = new ArrayList<>();
+
+        updateMessage(wave, "Parsing events");
+
+        // Get number of line to calculate the task progression
+        final int totalLines = ServiceUtility.countFileLines(selecteFile);
+
+        try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));) {
+            int processedLines = 0;
+
+            String strLine = br.readLine();
+
+            // Read File Line By Line
+            while (strLine != null) {
+                processedLines++;
+
+                updateProgress(wave, processedLines, totalLines);
+
+                if (strLine.contains(JRebirthMarkers.JREVENT.getName())) {
+                    // Convert the string to a JRebirth event and add it to the list
+                    addEvent(eventList, strLine.substring(strLine.indexOf(">>") + 2));
+                }
+
+                // Read the next line to process
+                strLine = br.readLine();
+            }
+
+        } catch (final IOException e) {
+            LOGGER.error("Error while processing event file", e);
+        }
+        return eventList;
+    }
+}
+```
+
+- `listen(DO_LOAD_EVENTS)` — registers the task with the Notifier (JIT during `initService()`).
+- `doLoadEvents(File, Wave)` — runs on JTP; return value is sent on the return wave automatically.
+- `updateMessage` / `updateProgress` — optional UI feedback linked to the source wave.
+
 
 If you don't declare the return	**WaveType** a exception will be thrown at runtime when trying to send back the Service Task output.
 
@@ -92,15 +228,131 @@ If your Service Task doesn't return anything (void return) you can dismiss this 
 
 You can also register your service task by putting **@OnWave** annoation using the action name of the **WaveType**. A best practice is to add annoation within interface methods, thus all implementations can avoid to use _listen_ methods.
 
+**Alternative:** You can use the `@OnWave` annotation on the service interface method instead of manually calling `listen()`. This is the recommended approach as it keeps the contract visible in the interface definition.
+
+
+```java
+public interface MyService extends Service {
+
+    WaveType DO_COMPUTE = WBuilder.waveType("COMPUTE")
+        .items(MyWaves.INPUT)
+        .returnAction("COMPUTED")
+        .returnItem(MyWaves.OUTPUT);
+
+    @OnWave("COMPUTE")
+    @Priority(PriorityLevel.Normal)
+    String doCompute(String input, Wave wave);
+}
+```
+
+- `@OnWave("COMPUTE")` on the interface — impl skips `listen()` in `initService()`.
+- Task method signature still defines parameters and return type for the contract checker.
+
 
 Perform the Job!
 -------------------
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/impl/LoadEdtFileServiceImpl.java|snippet=aj:....LoadEdtFileServiceImpl.doLoadEvents(..)|snippet-start-offset=8}-->
+
+```java
+package org.jrebirth.af.showcase.analyzer.service.impl;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jrebirth.af.api.annotation.PriorityLevel;
+import org.jrebirth.af.api.concurrent.Priority;
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.facade.JRebirthEventBase;
+import org.jrebirth.af.core.log.JRebirthMarkers;
+import org.jrebirth.af.core.service.DefaultService;
+import org.jrebirth.af.core.service.ServiceUtility;
+import org.jrebirth.af.showcase.analyzer.service.LoadEdtFileService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * The class <strong>LoadEdtFileServiceImpl</strong> is the basic implementation used to load a log file.
+ *
+ * @author Sébastien Bordes
+ */
+@Register(value = LoadEdtFileService.class, priority = PriorityLevel.Low)
+public class LoadEdtFileServiceImpl extends DefaultService implements LoadEdtFileService {
+
+    /** The class logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoadEdtFileServiceImpl.class);
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initService() {
+
+        listen(DO_LOAD_EVENTS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Priority(PriorityLevel.High)
+    public List<JRebirthEvent> doLoadEvents(final File selecteFile, final Wave wave) {
+
+        final List<JRebirthEvent> eventList = new ArrayList<>();
+
+        updateMessage(wave, "Parsing events");
+
+        // Get number of line to calculate the task progression
+        final int totalLines = ServiceUtility.countFileLines(selecteFile);
+
+        try (BufferedReader br = new BufferedReader(new FileReader(selecteFile));) {
+            int processedLines = 0;
+
+            String strLine = br.readLine();
+
+            // Read File Line By Line
+            while (strLine != null) {
+                processedLines++;
+
+                updateProgress(wave, processedLines, totalLines);
+
+                if (strLine.contains(JRebirthMarkers.JREVENT.getName())) {
+                    // Convert the string to a JRebirth event and add it to the list
+                    addEvent(eventList, strLine.substring(strLine.indexOf(">>") + 2));
+                }
+
+                // Read the next line to process
+                strLine = br.readLine();
+            }
+
+        } catch (final IOException e) {
+            LOGGER.error("Error while processing event file", e);
+        }
+        return eventList;
+    }
+}
+```
+
+- Return the task result from the method — framework wraps it into the return wave.
+- Long loops should call `updateProgress(wave, current, total)` to keep UI responsive.
 
 
 How to use the Service Feature
 ===================================
+
+Follow these steps end-to-end:
+
+1. Define service interface + `WaveType` (entry + return items).
+2. Implement task method + `initService()` registration.
+3. From Model: `returnData(...)` to start the task.
+4. `listen(entry.returnWaveType())` on the caller.
+5. Implement `doXxxCompleted(...)` handler to apply the result on JAT.
 
 Call the Service
 --------------------
@@ -114,8 +366,17 @@ It takes at least 2 mandatory arguments:
 
 
 Hereafter you will fin an example of service call with only one arguments passed:
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/command/OpenEventTrackerFileCommand.java|snippet=re:returnData|snippet-end-offset=2}-->
 
+```java
+            returnData(LoadEdtFileService.class,
+                       LoadEdtFileService.DO_LOAD_EVENTS,
+                       WBuilder.waveData(EditorWaves.EVENTS_FILE, selected));
+```
+
+- `returnData(...)` — asynchronous service call; does not block the caller on JTP work.
+- First argument — service interface class (facade lookup).
+- Second argument — entry `WaveType` (`DO_LOAD_EVENTS`).
+- `WBuilder.waveData(...)` — wraps the `File` input required by the wave contract.
 
 Process the Service Result
 --------------------------------
@@ -137,7 +398,17 @@ This call must be done into one of the following method according to component u
 
 Each initXXX method is called into JRebirth Internal Thread by ready method.
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/controls/ControlsModel.java|snippet=aj:..ControlsModel.initModel(..)}-->
+
+```java
+    @Override
+    protected void initModel() {
+        listen(LoadEdtFileService.DO_LOAD_EVENTS.returnWaveType());
+        listen(EditorWaves.DO_UNLOAD);
+    }
+```
+
+- `.returnWaveType()` — listen for the **completion** wave emitted when the service task finishes.
+- Register in `initModel` / `initService` / `initCommand` — must run on JIT during component `ready`.
 
 Add a method that suits the **WaveType** convention.
 
@@ -147,8 +418,16 @@ Method parameters must be compliant with Wave Items defined into the Wave Type.
 
 A final parameter must be added, the Wave itself taht could be useful to get extra data, for example when chained waves are used.
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/controls/ControlsModel.java|snippet=aj:..ControlsModel.doEventsLoaded(..)}-->
 
+```java
+    public void doEventsLoaded(final List<JRebirthEvent> eventList, final Wave wave) {
+        view().activateButtons(!eventList.isEmpty());
+    }
+```
+
+- `doEventsLoaded` — derived from return action `EVENTS_LOADED` on the service `WaveType`.
+- First parameters — one per `WaveItem` on the return type (`List<JRebirthEvent>` here).
+- `Wave wave` — always last; gives access to progress, chaining, or source context.
 
 Threading
 =============
@@ -167,7 +446,22 @@ By default the **Priority** is set to PriorityLevel.Low (a level below Normal) t
 
 Its possible to increase or decrease this value by adding an annotation on the Service Feature method like this:
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java|snippet=re:doLoadEvents|snippet-start-offset=1}-->
+
+```java
+@Override
+@Priority(PriorityLevel.High)
+public List<JRebirthEvent> doLoadEvents(final File selectedFile, final Wave wave) {
+    // High priority → prefer HPTP when JTP is saturated
+}
+```
+
+- `@Priority(PriorityLevel.High)` — task may run on **HPTP** instead of default **JTP**.
+- Default is `PriorityLevel.Low` — service tasks yield to commands and other JTP work.
+
+
+### TaskTrackerService
+
+JRebirth provides a built-in `TaskTrackerService` that monitors all running service tasks. It can be used to display a global progress indicator or to track background operations. Connect a UI component to the TaskTrackerService to show real-time task status across the entire application.
 
 
 Follow Task progression
@@ -178,11 +472,39 @@ In both cases you must provide the wave provided as a method argument, it will b
 
 You can update the message test by calling this method:
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/impl/LoadEdtFileServiceImpl.java|snippet=re:updateMessage}-->
+
+```java
+updateMessage(wave, "Parsing events");
+```
+
+- `updateMessage(wave, text)` — updates linked status text for this task (if UI is wired).
+
 
 You can update progress bar indicator by calling this method:
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/impl/LoadEdtFileServiceImpl.java|snippet=re:updateProgress}-->
+
+```java
+updateProgress(wave, processedLines, totalLines);
+```
+
+- `updateProgress(wave, workDone, totalWork)` — drives an associated progress bar (0–1 internally).
+
+
+If your Service Task returns void (no result to send back), use `JRebirthItems.voidItem` as the returnItem. This still generates a completion wave so listeners know the task finished.
+
+
+```java
+WaveType DO_CLEANUP = WBuilder.waveType("CLEANUP")
+    .returnAction("CLEANUP_DONE")
+    .returnItem(JRebirthItems.voidItem);
+
+public void doCleanup(final Wave wave) { /* no return value */ }
+
+public void doCleanupDone(final Wave wave) { /* task finished */ }
+```
+
+- `JRebirthItems.voidItem` — void return still emits a completion wave.
+- Caller listens with `DO_CLEANUP.returnWaveType()` and implements `doCleanupDone(Wave)`.
 
 ]]#
 

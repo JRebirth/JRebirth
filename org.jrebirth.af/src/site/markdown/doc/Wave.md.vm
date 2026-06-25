@@ -1,4 +1,4 @@
-<head>
+﻿<head>
 <![CDATA[
 	<title>Wave</title>
 	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
@@ -16,6 +16,18 @@
        
 Wave Overview
 =========================
+
+## In 30 seconds
+
+A **Wave** is a message between JRebirth components. It carries a **WaveType** (contract: action name + `WaveItem`s) and optional data. Components **listen** for types and handle them via `doXxx(...)` methods or `processWave`. Build types with `WBuilder.waveType("ACTION").items(...)` and send with `sendWave`.
+
+## How to use
+
+1. Create a waves interface (e.g. `MyWaves`) with `WaveType` and `WaveItemBase<T>` constants.
+2. In the emitter, call `sendWave(MyWaves.DO_ACTION, WBuilder.waveData(MyWaves.ITEM, value))`.
+3. In the receiver's `initModel()` / `initService()` / `initCommand()`, call `listen(MyWaves.DO_ACTION)`.
+4. Add a handler method named from the action (`DO_REFRESH` → `doRefresh(...)`) with parameters matching `WaveItem`s, plus a final `Wave wave` argument.
+5. For services, chain return waves with `.returnAction(...).returnItem(...)` on the entry `WaveType`.
 
 What's a Wave
 -------------------
@@ -43,6 +55,27 @@ There are 4 main group of waves :
 4. Undefined : to handle all other waves, the wave type must be defined
 
 
+```java
+// Call a command from any component
+sendWave(WBuilder.callCommand(ShowModelCommand.class));
+
+// Call a service task (async; result arrives as return wave)
+returnData(LoadEdtFileService.class, LoadEdtFileService.DO_LOAD_EVENTS,
+    WBuilder.waveData(EditorWaves.EVENTS_FILE, file));
+
+// Attach another Model's node into a placeholder
+sendWave(WBuilder.showModel(DetailModel.class, view().contentPane()));
+
+// Custom application wave
+sendWave(MyWaves.DO_REFRESH, WBuilder.waveData(MyWaves.ITEM, selection));
+```
+
+- `WBuilder.callCommand(...)` — **Call Command** group; runs the command on its configured thread.
+- `returnData(...)` — **Call Service** group; task runs on JTP, completion wave follows.
+- `WBuilder.showModel(...)` — **Attach Ui** group; always processed on JAT.
+- Custom `WaveType` constants — **Undefined** group; your own contracts via `listen` / `doXxx` handlers.
+
+
 ### Wave Item
 
 A wave item designate a Java type (precisely a generic type that can be for example: List&lt;String&gt;).
@@ -54,15 +87,177 @@ This is the only way to reference a generic type at compile time.
 
 Wave items are used by Wave Type to describe an api contract.
 
-<!-- MACRO{include|highlight-theme=eclipse|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java|snippet=aj:..EVENTS_FILE|snippet-start-offset=1|snippet-end-offset=1} -->
+
+```java
+package org.jrebirth.af.showcase.analyzer.ui.editor;
+
+import java.io.File;
+import java.util.List;
+
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.wave.WBuilder;
+import org.jrebirth.af.core.wave.WaveItemBase;
+
+/**
+ * The class <strong>EditorWaves</strong>.
+ *
+ * @author Sébastien Bordes
+ */
+public interface EditorWaves {
+
+    /*************************************************************************/
+    /** Wave Types **/
+    /*************************************************************************/
+
+    /** Trigger a Unload wave. */
+    WaveType DO_UNLOAD = WBuilder.waveType("UNLOAD");
+
+    /** Trigger a Play wave. */
+    WaveType DO_PLAY = WBuilder.waveType("PLAY");
+
+    /** Trigger a Next wave. */
+    WaveType DO_NEXT = WBuilder.waveType("NEXT");
+
+    /** Trigger a Previous wave. */
+    WaveType DO_PREVIOUS = WBuilder.waveType("PREVIOUS");
+
+    /** Trigger a Stop wave. */
+    WaveType DO_STOP = WBuilder.waveType("STOP");
+
+    /** The WaveType key usabe by OnWave annotation. */
+    String DO_SELECT_EVENT_ACTION = "EVENT_SELECTED";
+
+    /** Wave used to display info into the properties view. */
+    WaveType DO_SELECT_EVENT = WBuilder.waveType(DO_SELECT_EVENT_ACTION);
+
+    /** Wave type used to return the event currently processed. */
+    WaveType RE_EVENT_PROCESSED = WBuilder.waveType("EVENT_PROCESSED");
+
+    /*************************************************************************/
+    /** Wave Items **/
+    /*************************************************************************/
+
+    /** The file containing all events serialized. */
+    WaveItemBase<File> EVENTS_FILE = new WaveItemBase<File>() {
+    };
+
+    /** The name of the events. */
+    WaveItemBase<List<JRebirthEvent>> EVENTS = new WaveItemBase<List<JRebirthEvent>>() {
+    };
+
+    /** An event unserialized. */
+    WaveItemBase<JRebirthEvent> EVENT = new WaveItemBase<JRebirthEvent>() {
+    };
+
+}
+```
+
+- `DO_UNLOAD = WBuilder.waveType("UNLOAD")` — action-only wave (no payload items).
+- `WaveItemBase<File> EVENTS_FILE` — typed slot; anonymous subclass captures generic type at compile time.
+- Handler naming — `DO_SELECT_EVENT` → method `doSelectEvent(...)` (camelCase from action string).
 
 Wave items can also be used to define the unique identifier of a value wrapped into a WaveData wrapper stored into a wave.
 	
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/wave/JRebirthWaves.java|snippet=aj:..SERVICE_TASK|snippet-start-offset=1}-->
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/service/AbstractService.java|snippet=re:(SERVICE_TASK,\ ).*$|snippet-start-offset=1}-->
+```java
+package org.jrebirth.af.core.wave;
 
-			
+import static org.jrebirth.af.core.wave.WBuilder.waveType;
+
+import java.util.List;
+
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.ProgressBar;
+
+import org.jrebirth.af.api.annotation.Preload;
+import org.jrebirth.af.api.command.Command;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.WaveBean;
+import org.jrebirth.af.api.wave.WaveConstants;
+import org.jrebirth.af.api.wave.contract.WaveData;
+import org.jrebirth.af.api.wave.contract.WaveItem;
+import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand;
+import org.jrebirth.af.core.service.ServiceTaskBase;
+
+/**
+ * The class <strong>JRebirthWaves</strong> stores some predefined {@link WaveItem} and {@link WaveType}.
+ *
+ * This class will be preloaded to allow registration of {@link WaveType} into {@link WaveTypeRegistry}.
+ *
+ * @author Sébastien Bordes
+ */
+@Preload
+public interface JRebirthWaves {
+
+    /********************************/
+    /** WaveItem related to UI */
+    /********************************/
+
+    /** The waveItem that hold the attached node. */
+    WaveItem<ObjectProperty<Node>> ATTACH_UI_NODE_PLACEHOLDER = new WaveItemBase<ObjectProperty<Node>>() {
+    };
+
+    /** The waveItem that hold the children list of the parent node. */
+    WaveItem<ObservableList<Node>> ADD_UI_CHILDREN_PLACEHOLDER = new WaveItemBase<ObservableList<Node>>() {
+    };
+
+    /** This item allow to use another Command to attach a model into another one, it replaces the default {@link ShowModelCommand}. */
+    WaveItem<Class<? extends Command>> SHOW_MODEL_COMMAND = new WaveItemBase<Class<? extends Command>>() {
+    };
+
+    /** This item allow to define Key Parts. */
+    WaveItem<List<?>> KEY_PARTS = new WaveItemBase<List<?>>() {
+    };
+
+    /** This item is used to store several {@link WaveBean} into a wave. */
+    WaveItem<List<WaveBean>> EXTRA_WAVE_BEANS = new WaveItemBase<List<WaveBean>>() {
+    };
+
+    /********************************/
+    /** WaveItem related to Command */
+    /********************************/
+
+    /** The waveItem that hold the list of wave to be executed back to back. */
+    WaveItem<List<Wave>> CHAINED_WAVES = new WaveItemBase<List<Wave>>() {
+    };
+
+    /** The waveItem that indicates if command instance must be reused or if another must created. Default value is false. */
+    WaveItem<Boolean> REUSE_COMMAND = new WaveItemBase<Boolean>() {
+    };
+
+    /** The waveItem that indicates if command instance must be run synchronously. Default value is false. */
+    WaveItem<Boolean> FORCE_SYNC_COMMAND = new WaveItemBase<Boolean>() {
+    };
+
+    /********************************/
+    /** WaveData related to Command */
+    /********************************/
+
+    /** This WaveData allows to reuse a command instead of creating another one using an unique key timestamp. */
+    WaveData<Boolean> REUSE = WBuilder.waveData(REUSE_COMMAND, true);
+    // ...
+```
+
+
+- `ATTACH_UI_NODE_PLACEHOLDER` — target property where a child Model node is attached.
+- `SHOW_MODEL_COMMAND` — optional override of the default `ShowModelCommand` class.
+- `REUSE` — `WaveData` preset telling the engine to reuse an existing command instance.
+
+
+```java
+sourceWave.addDatas(WBuilder.waveData(JRebirthWaves.SERVICE_TASK, task));
+```
+
+- `addDatas(...)` — append extra `WaveData` entries to an existing wave before dispatch.
+- `JRebirthWaves.SERVICE_TASK` — framework slot linking a wave to its running service task.
+
+
 ### Wave Type
 
 The wave type is where black magic resides. It defines a contract between the emitter (the one who creates the wave) and the receiver (the one who handles the waves).
@@ -72,11 +267,123 @@ A *WaveType* has a unique name and a set of *WaveItem* objects. It must be creat
 
 * Into an Interface to define wave contract (here without argument)
 
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/ui/editor/EditorWaves.java|snippet=aj:..DO_UNLOAD|snippet-start-offset=1}-->
+
+```java
+package org.jrebirth.af.showcase.analyzer.ui.editor;
+
+import java.io.File;
+import java.util.List;
+
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.wave.WBuilder;
+import org.jrebirth.af.core.wave.WaveItemBase;
+
+/**
+ * The class <strong>EditorWaves</strong>.
+ *
+ * @author Sébastien Bordes
+ */
+public interface EditorWaves {
+
+    /*************************************************************************/
+    /** Wave Types **/
+    /*************************************************************************/
+
+    /** Trigger a Unload wave. */
+    WaveType DO_UNLOAD = WBuilder.waveType("UNLOAD");
+
+    /** Trigger a Play wave. */
+    WaveType DO_PLAY = WBuilder.waveType("PLAY");
+
+    /** Trigger a Next wave. */
+    WaveType DO_NEXT = WBuilder.waveType("NEXT");
+
+    /** Trigger a Previous wave. */
+    WaveType DO_PREVIOUS = WBuilder.waveType("PREVIOUS");
+
+    /** Trigger a Stop wave. */
+    WaveType DO_STOP = WBuilder.waveType("STOP");
+
+    /** The WaveType key usabe by OnWave annotation. */
+    String DO_SELECT_EVENT_ACTION = "EVENT_SELECTED";
+
+    /** Wave used to display info into the properties view. */
+    WaveType DO_SELECT_EVENT = WBuilder.waveType(DO_SELECT_EVENT_ACTION);
+
+    /** Wave type used to return the event currently processed. */
+    WaveType RE_EVENT_PROCESSED = WBuilder.waveType("EVENT_PROCESSED");
+
+    /*************************************************************************/
+    /** Wave Items **/
+    /*************************************************************************/
+
+    /** The file containing all events serialized. */
+    WaveItemBase<File> EVENTS_FILE = new WaveItemBase<File>() {
+    };
+
+    /** The name of the events. */
+    WaveItemBase<List<JRebirthEvent>> EVENTS = new WaveItemBase<List<JRebirthEvent>>() {
+    };
+
+    /** An event unserialized. */
+    WaveItemBase<JRebirthEvent> EVENT = new WaveItemBase<JRebirthEvent>() {
+    };
+
+}
+```
 
 * Into a service class (here with on argument) :
 	
-<!-- MACRO{include|source=showcase/analyzer/src/main/java/org/jrebirth/af/showcase/analyzer/service/LoadEdtFileService.java|snippet=aj:..DO_LOAD_EVENTS|snippet-start-offset=1}-->
+
+```java
+package org.jrebirth.af.showcase.analyzer.service;
+
+import java.io.File;
+import java.util.List;
+
+import org.jrebirth.af.api.annotation.PriorityLevel;
+import org.jrebirth.af.api.concurrent.Priority;
+import org.jrebirth.af.api.facade.JRebirthEvent;
+import org.jrebirth.af.api.module.RegistrationPoint;
+import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.wave.WBuilder;
+import org.jrebirth.af.showcase.analyzer.ui.editor.EditorWaves;
+
+/**
+ * The class <strong>LoadEdtFileService</strong>.
+ *
+ * @author Sébastien Bordes
+ */
+@RegistrationPoint(exclusive = true)
+public interface LoadEdtFileService extends Service {
+
+    /** Wave type use to load events. */
+    WaveType DO_LOAD_EVENTS = WBuilder.waveType("LOAD_EVENTS")
+                                      .items(EditorWaves.EVENTS_FILE)
+                                      .returnAction("EVENTS_LOADED")
+                                      .returnItem(EditorWaves.EVENTS);
+
+    /**
+     * Parse the event file.
+     *
+     * @param selecteFile the event file selected
+     * @param wave the wave that trigger the action
+     *
+     * @return the list of loaded events
+     */
+    @Priority(PriorityLevel.High)
+    List<JRebirthEvent> doLoadEvents(final File selecteFile, final Wave wave);
+
+}
+```
+
+- `DO_LOAD_EVENTS = waveType("LOAD_EVENTS").items(...).returnAction(...).returnItem(...)` — full service contract in one constant.
+- `.items(EditorWaves.EVENTS_FILE)` — input `File` passed to `doLoadEvents`.
+- `.returnAction("EVENTS_LOADED")` — completion wave action; handler is `doEventsLoaded(...)`.
+- `@Priority(PriorityLevel.High)` — optional; runs the task on HPTP when JTP is saturated.
 
 
 ### WaveType name
@@ -91,10 +398,35 @@ _A best practice is to store them within static final field or within an interfa
 Each **WaveItem** will be passed to the method as an argument.
 
 
+```java
+// Contract: DO_SAVE with FILE item → doSave(File file, Wave wave)
+WaveType DO_SAVE = WBuilder.waveType("SAVE").items(MyWaves.FILE);
+
+public void doSave(final File file, final Wave wave) {
+    // file matches MyWaves.FILE; wave is always last
+}
+```
+
+- Method parameters follow `WaveItem` order declared on the `WaveType`.
+- Action `SAVE` maps to handler name `doSave` (prefix `do` + camelCase action).
+- Final parameter is always the source `Wave`.
+
+
 ### Wave argument
 
 Each wave procesing method must add a least argument : the source wave, thus it will be possible to know the handling context for this method call.
 The wave argument is useful to access to wave bean or other information like source wave.
+
+
+```java
+public void doRefresh(final String filter, final Wave wave) {
+    final Object source = wave.source();
+    final Optional<String> extra = wave.get(MyWaves.FILTER);
+}
+```
+
+- `wave.source()` — component that sent the wave (useful for routing or logging).
+- `wave.get(WaveItem)` — read optional data not declared as method parameters.
 
 
 Wave Lifecycle
@@ -112,15 +444,111 @@ Wave lifecycle are defined by the *Status* enumeration:
 8. Destroyed : the wave is available for garbage collection
 
 
+```java
+// Typical path: build → send → handler runs → consumed
+final Wave wave = sendWave(MyWaves.DO_GREET, WBuilder.waveData(MyWaves.NAME, "World"));
+// wave.status() progresses: SENT → PROCESSING → CONSUMED → HANDLED → DESTROYED
+```
+
+- `sendWave(...)` — transitions the wave to **Sent** and queues it on JIT.
+- Notifier dispatch moves it to **Processing**, then **Consumed** after handlers/commands run.
+- Failed waves surface exceptions; **Destroyed** means the wave can be garbage-collected.
+
+
 Chained Wave
 ------------------
 
 It's possible to chain command by using the	**ChainWaveCommand** class. A sample is used into the _JRebirthThread.bootUp()_ method.
 
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/concurrent/JRebirthThread.java|highlight-theme=eclipse}-->
+```java
+sendWave(WBuilder.of(JRebirthWaves.CHAINED_WAVES)
+    .data(WBuilder.waveData(JRebirthWaves.CHAINED_WAVES, Arrays.asList(
+        WBuilder.callCommand(PrepareModelCommand.class),
+        WBuilder.callCommand(AttachModelCommand.class))))
+    .build());
+```
 
-<!-- snippet=aj:..bootUp() -->
+- `CHAINED_WAVES` — built-in item holding a `List<Wave>` executed sequentially.
+- `ChainWaveCommand` — runs each wave in order, respecting each command's thread.
+- Use when several commands must complete before the next step (show-model flow, boot tasks).
+
+
+## WBuilder API
+
+JRebirth provides a fluent builder for constructing waves:
+
+
+```java
+WaveType type = WBuilder.waveType("MY_ACTION")
+    .items(MyWaves.ITEM_A, MyWaves.ITEM_B);
+
+WaveData<String> data = WBuilder.waveData(MyWaves.ITEM_A, "value");
+Wave wave = WBuilder.of(type).data(data).build();
+sendWave(wave);
+```
+
+- `WBuilder.waveType(name)` — start defining a `WaveType` contract.
+- `.items(...)` — attach typed slots to the contract.
+- `WBuilder.of(type).data(...).build()` — assemble a wave before sending.
+
+
+Common usage patterns:
+
+- `WBuilder.callCommand(CommandClass.class)` — create a wave that triggers a command
+- `WBuilder.waveType(name).items(waveItem1, waveItem2)` — define a WaveType
+- `WBuilder.waveData(waveItem, value)` — create WaveData for a specific item
+
+Minimal send/listen example:
+
+```java
+// MyWaves.java
+WaveType DO_GREET = WBuilder.waveType("GREET").items(MyWaves.NAME);
+WaveItemBase<String> NAME = new WaveItemBase<String>() { };
+
+// Model — initModel()
+listen(MyWaves.DO_GREET);
+sendWave(MyWaves.DO_GREET, WBuilder.waveData(MyWaves.NAME, "World"));
+
+public void doGreet(final String name, final Wave wave) {
+    LOGGER.info("Hello {}", name);
+}
+```
+
+- `listen(DO_GREET)` — registers this Model with the Notifier on JIT.
+- `sendWave(..., waveData)` — builds and dispatches the wave to all listeners.
+- `doGreet(String, Wave)` — name derived from action `GREET`; last arg is always the source wave.
+
+
+## @OnWave Annotation
+
+Instead of manually calling `listen(waveType)`, you can annotate handler methods with `@OnWave`.
+The annotation value must match the WaveType action name.
+
+
+```java
+@OnWave("REFRESH")
+public void doRefresh(final Wave wave) { /* ... */ }
+```
+
+- `@OnWave("REFRESH")` — action string must match `WaveType` action name (alternative to `listen()`).
+- Can be placed on interface methods so all implementations inherit the contract.
+
+
+```java
+// Interface — contract visible to all implementations
+public interface RefreshWaves {
+    String REFRESH = "REFRESH";
+    WaveType DO_REFRESH = WBuilder.waveType(REFRESH);
+
+    @OnWave(REFRESH)
+    void doRefresh(Wave wave);
+}
+```
+
+- Declare `@OnWave` on the interface — implementations auto-register without `listen()`.
+- Keep the action string in a `String` constant shared with `WaveType` definition.
+
 
 ]]#
 

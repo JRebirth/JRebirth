@@ -1,4 +1,4 @@
-<head>
+﻿<head>
 <![CDATA[
 	<title>Understand Facades</title>
 	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
@@ -16,6 +16,18 @@
   
 Facade(s)
 =========================
+
+## In 30 seconds
+
+The **GlobalFacade** (from your Application) owns **UiFacade**, **CommandFacade**, **ServiceFacade**, and **BehaviorFacade**. Each facade stores components by `UniqueKey` (class = singleton, extra key parts = multiton). Use `getModel`, `getCommand`, `getService` — never `new` top-level components yourself.
+
+## How to use
+
+1. From any `FacadeReady` component, call `globalFacade()` to reach the global facade.
+2. Retrieve UI: `getModel(MyModel.class)` or `getModel(MyModel.class, keyPart)`.
+3. Run actions: `getCommand(MyCommand.class).run()`.
+4. Async work: `returnData(MyService.class, MyService.DO_TASK, waveData...)`.
+5. Behaviors: attach via the BehaviorFacade through `BehavioredComponent` APIs on Models/Commands/Services.
 
 JRebirth provides 4+1 **Facade**s used to manage its dedicated pattern **wB-CS-Mvc**.
 
@@ -63,14 +75,45 @@ It allows to manage the three main facades (+extra one):
 
 The __GlobaleFacadeBase__ allows to get each of these facades by calling appropriate getters:
 
-<!-- MACRO{include|highlight-theme=eclipse|source=api/src/main/java/org/jrebirth/af/api/facade/GlobalFacade.java|snippet=re:LocalFacade}-->
+
+```java
+    LocalFacade<Model> uiFacade();
+```
+
+- `uiFacade()` — accessor on GlobalFacade for all UI Models (same pattern for `commandFacade()`, `serviceFacade()`).
+
+Minimal retrieval from a Model:
+
+```java
+// Same thread as caller — use only for quick synchronous access
+final OtherModel other = getModel(OtherModel.class);
+other.refresh();
+
+getCommand(SaveCommand.class).run();
+returnData(FileService.class, FileService.DO_SAVE, WBuilder.waveData(FileWaves.FILE, file));
+```
+
+- `getModel(Class)` — UiFacade lookup; creates instance on first access if absent.
+- `getCommand(Class).run()` — CommandFacade; runs on the command's configured thread.
+- `returnData(...)` — ServiceFacade async task; result arrives as a return wave.
 
 This link is bidirectionnal because global facade is accessible from the 3 main facades by calling :
 
 - *getGlobalFacade()* (each facade extends the __AbstractGlobalReady__ abstract class which implement __GlobalReady__ interface.
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/facade/GlobalReady.java|snippet=re:getGlobalFacade}-->
 
+```java
+package org.jrebirth.af.api.facade;
+
+@FunctionalInterface
+public interface GlobalReady {
+
+    GlobalFacade globalFacade();
+}
+```
+
+- `GlobalReady` — implemented by all facades and components with facade access.
+- `globalFacade()` — entry point to Ui/Command/Service/Behavior facades.
 
 
 Local Facades
@@ -89,7 +132,15 @@ Each Facade can manage its components (also called readyObject) throught some pu
 * exists : check if the component is already registered, it could be released
 * retrieve : used to get a component (build and register it if needed)
 
-<!-- MACRO{include|source=api/src/main/java/org/jrebirth/af/api/facade/Facade.java|snippet=re:E extends R}-->
+
+```java
+    <E extends R> void register(final UniqueKey<E> uniqueKey, final E readyObject);
+```
+
+- `register(key, instance)` — store a pre-built component under an explicit key.
+- `retrieve(key)` / `getModel` / `getCommand` — fetch existing or create-and-register.
+- `exists(key)` — check registration without creating.
+- `unregister(key)` — drop from facade; component may be GC'd if nothing else holds it.
 
 
 Component Key
@@ -105,23 +156,73 @@ Each Component (b-CSM) are registered into the facade using a [UniqueKey](../api
 The simplest key is the [ClassKey](../apidocs/org/jrebirth/af/core/key/ClassKey.html), it's only composed by the class object of the component, thus the can only be stored once into the facade (=singleton).
 
 
+```java
+// Singleton — one CounterModel for the whole application
+final CounterModel model = getModel(CounterModel.class);
+```
+
+- `getModel(Class)` — uses `ClassKey`; second retrieve returns the same instance.
+- Same pattern for `getCommand(MyCommand.class)` and `getService(MyService.class)`.
+
+
 ### MultitonKey
 
 The [MultitonKey](../apidocs/org/jrebirth/af/core/key/MultitonKey.html) uses also the class of the component but add a variable part to be able to store several instances of a same Component.
+
+
+```java
+// Multiton — one EditorModel per document id
+final EditorModel doc1 = getModel(EditorModel.class, "doc-1");
+final EditorModel doc2 = getModel(EditorModel.class, "doc-2");
+```
+
+- Extra key parts distinguish instances of the same component class.
+- Key parts are concatenated via `toString()` — use stable, unique identifiers.
+
 
 ### Convenient Builder
 
 JRebirth API has got a lot of methods that take the Component Class with additional objects as key parts, but the API also provides a convenient class used to build key.
 
-<!-- MACRO{include|source=core/src/main/java/org/jrebirth/af/core/key/Key.java|snippet=re:static}-->
-	
+
+```java
+    static <C> UniqueKey<C> create(final Class<C> clazz, final Object... keyPart);
+```
+
+- `create(MyModel.class)` — singleton key (class only).
+- `create(MyModel.class, "tab-1")` — multiton: several `MyModel` instances keyed by `"tab-1"`.
+- Key parts are serialized via `toString()` — use stable, unique values.
+
+### Component Lifecycle
+
+When a component is retrieved from its facade:
+
+1. **retrieve()** — if not cached, creates a new instance
+2. **setup()** — initializes the component (calls `initCommand`/`initService`/`initModel`)
+3. **ready** — component is active and can receive waves
+4. **release()** — component is deregistered and eligible for GC
+
+Components with wave listeners are strongly referenced by the Notifier and won't be collected until `unlisten()` is called or the component is explicitly released.
+
+
+```java
+// Typical lifecycle from a Model
+final DetailModel detail = getModel(DetailModel.class, itemId);
+detail.refresh(item);          // ready — can send/receive waves
+// ...
+globalFacade().uiFacade().release(detail.getModelKey());  // explicit cleanup
+```
+
+- First `getModel` → **retrieve** + **setup** + **ready**.
+- `release(key)` — deregister from facade; Notifier drops listeners if component releases properly.
+
 
 Provide Tracking
 --------------------
 
 JRebirth allows to track all creation &amp; finalization of each component (Command, Service, Model, Behavior) and also track the emission of waves and their path.
 	
-They are logged in order to be processed later by the JRebirthAnalyzer tool.
+These events are logged using the JRebirth event tracking framework. The JRebirth Analyzer application can load and replay these log files to visualize component creation, access patterns, and wave flows. Enable tracking by configuring the `org.jrebirth.af.core.facade` logger at TRACE level.
 
 ]]#
 
