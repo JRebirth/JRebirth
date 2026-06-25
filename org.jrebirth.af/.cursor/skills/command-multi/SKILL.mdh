@@ -1,0 +1,29 @@
+---
+name: command-multi
+description: >-
+  Create a multi command that runs a named, ordered sequence of smaller JRebirth
+  commands. Use when one user action must trigger several existing commands in a
+  known order.
+---
+# Create Multi Command
+
+A multi command is a named sequence of smaller commands.
+
+## Use when
+
+A feature needs one user action to trigger several existing commands in a known order.
+
+## Good case
+
+Compose existing commands into an ordered chain.
+
+## Bad case
+
+Using a multi command as a giant dumping ground for everything.
+
+## Key API
+
+- extend the multi command base and declare the chain of command classes to run in order.
+- pass shared data through the wave or a `WaveBean`.
+
+Template: `templates/MultiCommandTemplate.java.txt`.

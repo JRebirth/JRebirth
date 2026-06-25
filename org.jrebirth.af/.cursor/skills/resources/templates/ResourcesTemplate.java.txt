@@ -1,0 +1,30 @@
+// ---- ${Name}Images.java --------------------------------------------------
+package ${pkg};
+
+import org.jrebirth.af.api.resource.image.ImageExtension;
+import org.jrebirth.af.core.resource.image.ImageEnum;
+
+/**
+ * ${Name} images. Read with ${Name}Images.LOGO.get().
+ */
+public enum ${Name}Images implements ImageEnum {
+
+    LOGO {{ rel("Logo", ImageExtension.PNG); }};
+}
+
+// ---- ${Name}Styles.java --------------------------------------------------
+package ${pkg};
+
+import static org.jrebirth.af.core.resource.Resources.create;
+
+import org.jrebirth.af.api.resource.style.StyleSheetItem;
+import org.jrebirth.af.core.resource.style.StyleSheet;
+
+/**
+ * ${Name} stylesheets. Add with addCSS(scene, ${Name}Styles.MAIN) in the Application,
+ * or addCSS(${Name}Styles.MAIN) from a View.
+ */
+public interface ${Name}Styles {
+
+    StyleSheetItem MAIN = create(new StyleSheet("${Name}"));
+}

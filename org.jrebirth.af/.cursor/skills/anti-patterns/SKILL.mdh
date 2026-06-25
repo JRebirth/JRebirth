@@ -1,0 +1,20 @@
+---
+name: anti-patterns
+description: >-
+  Spot and fix JRebirth anti-patterns (runLater glue, raw threads, logic in
+  controllers, state in views, global facade abuse). Use when reviewing or
+  cleaning up JRebirth code that smells like plain JavaFX.
+---
+# Avoid anti-patterns
+
+## Smells
+
+- `Platform.runLater` used as architecture glue
+- raw thread creation for routine flows
+- heavy logic in controllers
+- business state hidden in views
+- `globalFacade` access everywhere
+
+## Fix path
+
+Find the missing JRebirth role, then move the code to it. See the jrebirth-core and refactor-legacy skills.

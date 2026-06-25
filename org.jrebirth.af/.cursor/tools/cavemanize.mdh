@@ -1,0 +1,49 @@
+# Caveman skills convention
+
+This `.cursor` tree keeps two layers for every rule and skill document.
+
+## Layers
+
+- `*.mdh` (markdown-human) is the **source of truth**. Write normal, readable English here.
+- The Cursor-facing file is **generated** and token-minimal ("caveman"). Never edit it by hand.
+
+## Generation map
+
+The generator picks the output extension from the location of the source:
+
+- a `*.mdh` under `.cursor/rules/` compiles to `*.mdc` (a Cursor rule).
+- any other `*.mdh` compiles to `*.md` (`SKILL.md`, `reference.md`, this doc, etc.).
+
+## What is preserved
+
+The squeeze only touches plain prose. These are kept verbatim:
+
+- YAML frontmatter (so rule `description`/`globs` and skill `name`/`description` still match).
+- fenced code blocks and inline `code`.
+- markdown links and tables.
+- identifiers, CamelCase, ALLCAPS, symbols, numbers.
+- negations and logic words: no, not, never, if, then, when, use, make, put, keep, move.
+
+Only articles, copulas, and filler prepositions are dropped, and plain words are lowercased.
+
+## Workflow
+
+1. Edit the relevant `*.mdh` source.
+2. Run the generator from the repo so siblings refresh.
+3. Commit both the `*.mdh` source and the generated file together.
+
+```bash
+py .cursor/tools/cavemanize.py
+```
+
+Verify nothing is stale (good for a pre-commit or CI check):
+
+```bash
+py .cursor/tools/cavemanize.py --check
+```
+
+Process a single source:
+
+```bash
+py .cursor/tools/cavemanize.py --file .cursor/skills/model/SKILL.mdh
+```

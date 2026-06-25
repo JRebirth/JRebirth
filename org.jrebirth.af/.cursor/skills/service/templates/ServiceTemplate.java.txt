@@ -1,0 +1,48 @@
+// ---- ${Name}Service.java -------------------------------------------------
+package ${pkg};
+
+import static org.jrebirth.af.core.wave.WBuilder.waveType;
+
+import org.jrebirth.af.api.module.RegistrationPoint;
+import org.jrebirth.af.api.service.Service;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.api.wave.contract.WaveItem;
+import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.wave.JRebirthItems;
+import org.jrebirth.af.core.wave.WaveItemBase;
+
+/**
+ * ${Name} service contract. Slow, external, or backend work.
+ */
+@RegistrationPoint
+public interface ${Name}Service extends Service {
+
+    String DONE = "DONE";
+
+    WaveItem<String> INPUT = new WaveItemBase<String>() {
+    };
+
+    WaveType DO_WORK = waveType("WORK")
+                                       .items(INPUT)
+                                       .returnItem(JRebirthItems.booleanItem)
+                                       .returnAction(DONE);
+
+    boolean doWork(final String input, final Wave wave);
+}
+
+// ---- ${Name}ServiceImpl.java ---------------------------------------------
+package ${pkg};
+
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.service.DefaultService;
+
+@Register(value = ${Name}Service.class)
+public class ${Name}ServiceImpl extends DefaultService implements ${Name}Service {
+
+    @Override
+    public boolean doWork(final String input, final Wave wave) {
+        // perform the slow or backend work here, never touch the scene graph
+        return true;
+    }
+}

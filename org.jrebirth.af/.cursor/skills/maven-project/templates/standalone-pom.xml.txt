@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>${groupId}</groupId>
+    <artifactId>${artifactId}</artifactId>
+    <version>${version}</version>
+    <packaging>jar</packaging>
+
+    <name>${name}</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>${javaRelease}</maven.compiler.release>
+        <jrebirth.version>${jrebirthVersion}</jrebirth.version>
+        <javafx.version>${javafxVersion}</javafx.version>
+        <main.module>${moduleName}</main.module>
+        <main.class>${moduleName}/${applicationClass}</main.class>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jrebirth.af</groupId>
+            <artifactId>api</artifactId>
+            <version>${jrebirth.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jrebirth.af</groupId>
+            <artifactId>core</artifactId>
+            <version>${jrebirth.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jrebirth.af</groupId>
+            <artifactId>preloader</artifactId>
+            <version>${jrebirth.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jrebirth.af</groupId>
+            <artifactId>processor</artifactId>
+            <version>${jrebirth.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logbackVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${mavenCompilerPluginVersion}</version>
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>${javafxMavenPluginVersion}</version>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

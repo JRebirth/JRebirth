@@ -1,0 +1,10 @@
+package ${basePackage}.resources;
+
+import org.jrebirth.af.core.resource.style.StyleSheetEnum;
+
+public enum ${stylesClass} implements StyleSheetEnum {
+
+    DEFAULT {{
+        ss("${styleSheetBaseName}");
+    }};
+}

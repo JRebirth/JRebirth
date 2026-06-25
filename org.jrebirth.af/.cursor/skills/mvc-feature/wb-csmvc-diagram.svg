@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="720" viewBox="0 0 1120 720" role="img" aria-labelledby="title desc">
+  <title id="title">JRebirth wB-CSMVC design pattern</title>
+  <desc id="desc">Diagram showing the JRebirth wB-CSMVC pattern with View above Model and separated connections.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .bg { fill: #ffffff; }
+      .title { font: 700 28px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 15px Arial, sans-serif; fill: #475569; }
+      .component-frame { fill: #ecfeff; stroke: #0891b2; stroke-width: 2; rx: 12; }
+      .component-title { font: 700 15px Arial, sans-serif; fill: #0e7490; }
+      .box { fill: #f8fafc; stroke: #94a3b8; stroke-width: 2; rx: 8; }
+      .mvc { fill: #eff6ff; stroke: #2563eb; }
+      .action { fill: #f0fdf4; stroke: #16a34a; }
+      .message { fill: #fff7ed; stroke: #ea580c; }
+      .helper { fill: #fdf2f8; stroke: #db2777; }
+      .external { fill: #f1f5f9; stroke: #64748b; }
+      .label { font: 700 18px Arial, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .small { font: 400 13px Arial, sans-serif; fill: #334155; text-anchor: middle; }
+      .edge { fill: none; stroke: #475569; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-blue { fill: none; stroke: #2563eb; stroke-width: 2; marker-end: url(#arrow-blue); }
+      .edge-dash { fill: none; stroke: #db2777; stroke-width: 2; stroke-dasharray: 7 5; marker-end: url(#arrow); }
+      .edge-text { font: 400 12px Arial, sans-serif; fill: #334155; text-anchor: middle; }
+      .legend-title { font: 700 14px Arial, sans-serif; fill: #0f172a; }
+      .legend { font: 400 12px Arial, sans-serif; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1120" height="720"/>
+  <text x="560" y="44" class="title">JRebirth wB-CSMVC</text>
+  <text x="560" y="68" class="subtitle">Waves + Behaviors + Commands + Services around Model, View, Controller</text>
+
+  <rect x="275" y="88" width="810" height="545" class="component-frame"/>
+  <text x="295" y="112" class="component-title">JRebirth Component</text>
+
+  <rect x="80" y="225" width="150" height="76" class="box"/>
+  <text x="155" y="255" class="label">User</text>
+  <text x="155" y="277" class="small">gesture</text>
+
+  <rect x="300" y="200" width="185" height="116" class="box mvc"/>
+  <text x="392" y="236" class="label">Controller</text>
+  <text x="392" y="260" class="small">event hookup</text>
+  <text x="392" y="280" class="small">gesture translation</text>
+
+  <rect x="590" y="110" width="220" height="100" class="box mvc"/>
+  <text x="700" y="145" class="label">View</text>
+  <text x="700" y="169" class="small">scene graph</text>
+  <text x="700" y="189" class="small">controls and visual structure</text>
+
+  <rect x="590" y="295" width="220" height="116" class="box mvc"/>
+  <text x="700" y="331" class="label">Model</text>
+  <text x="700" y="355" class="small">state, properties</text>
+  <text x="700" y="375" class="small">bindings, orchestration</text>
+
+  <rect x="300" y="455" width="185" height="100" class="box action"/>
+  <text x="392" y="490" class="label">Command</text>
+  <text x="392" y="514" class="small">explicit named action</text>
+  <text x="392" y="534" class="small">callCommand(...)</text>
+
+  <rect x="590" y="515" width="220" height="100" class="box action"/>
+  <text x="700" y="550" class="label">Service</text>
+  <text x="700" y="574" class="small">slow or external work</text>
+  <text x="700" y="594" class="small">backend/integration</text>
+
+  <rect x="80" y="515" width="150" height="100" class="box external"/>
+  <text x="155" y="550" class="label">External</text>
+  <text x="155" y="574" class="small">backend, files</text>
+  <text x="155" y="594" class="small">integration boundary</text>
+
+  <rect x="870" y="295" width="190" height="100" class="box message"/>
+  <text x="965" y="330" class="label">Wave</text>
+  <text x="965" y="354" class="small">typed decoupled</text>
+  <text x="965" y="374" class="small">messages and payloads</text>
+
+  <rect x="870" y="110" width="190" height="100" class="box helper"/>
+  <text x="965" y="145" class="label">Behavior</text>
+  <text x="965" y="169" class="small">tiny reusable</text>
+  <text x="965" y="189" class="small">interaction helper</text>
+
+  <path d="M230 263 L300 263" class="edge"/>
+  <text x="265" y="248" class="edge-text">gesture</text>
+
+  <path d="M485 258 L560 258 L560 353 L590 353" class="edge"/>
+  <text x="535" y="244" class="edge-text">delegates intent</text>
+
+  <path d="M590 160 L515 160 L515 228 L485 228" class="edge"/>
+  <text x="540" y="145" class="edge-text">annotated controls</text>
+
+  <path d="M700 210 L700 295" class="edge-blue"/>
+  <path d="M675 295 L675 210" class="edge-blue"/>
+  <text x="758" y="256" class="edge-text">binds and observes</text>
+
+  <path d="M590 383 L520 383 L520 505 L485 505" class="edge"/>
+  <text x="545" y="430" class="edge-text">callCommand(...)</text>
+
+  <path d="M392 316 L392 455" class="edge"/>
+  <text x="443" y="388" class="edge-text">may trigger</text>
+
+  <path d="M485 505 L590 565" class="edge"/>
+  <text x="535" y="552" class="edge-text">uses service</text>
+
+  <path d="M590 565 L230 565" class="edge"/>
+  <text x="410" y="550" class="edge-text">external work</text>
+
+  <path d="M810 345 L870 345" class="edge"/>
+  <text x="840" y="329" class="edge-text">sendWave(...)</text>
+
+  <path d="M485 470 L845 470 L845 380 L870 380" class="edge"/>
+  <text x="665" y="456" class="edge-text">sendWave(...)</text>
+
+  <path d="M810 565 L930 565 L930 395" class="edge"/>
+  <text x="888" y="550" class="edge-text">result wave</text>
+
+  <path d="M870 325 L830 325 L830 375 L810 375" class="edge"/>
+  <text x="842" y="310" class="edge-text">@OnWave</text>
+
+  <path d="M965 295 L965 210" class="edge-dash"/>
+  <text x="1010" y="255" class="edge-text">decoupled</text>
+
+  <path d="M870 160 L810 160" class="edge-dash"/>
+  <text x="840" y="145" class="edge-text">attach via data</text>
+
+  <path d="M870 190 L810 325" class="edge-dash"/>
+  <text x="864" y="258" class="edge-text">small helper</text>
+
+  <rect x="82" y="645" width="956" height="42" fill="#f8fafc" stroke="#cbd5e1" rx="8"/>
+  <text x="105" y="670" class="legend-title">Rule:</text>
+  <text x="148" y="670" class="legend">Model owns state, View owns nodes, Controller wires events, Command names actions, Service handles external work, Wave decouples, Behavior stays tiny.</text>
+</svg>

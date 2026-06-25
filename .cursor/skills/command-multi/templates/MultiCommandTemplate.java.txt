@@ -1,3 +1,0 @@
-public final class ${Name}MultiCommand {
-    // sequence of commands
-}

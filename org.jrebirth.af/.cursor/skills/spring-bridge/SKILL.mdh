@@ -1,0 +1,18 @@
+---
+name: spring-bridge
+description: >-
+  Keep a JRebirth client clean while consuming Spring-side services or APIs.
+  Use when wiring backend calls, mapping DTO and FXO, or deciding where network
+  and entity code may live.
+---
+# Bridge to Spring
+
+Keep the JRebirth client clean while consuming Spring-side services or APIs.
+
+## Rules
+
+- the UI layer never manipulates JPA entities.
+- network and backend calls stay in a dedicated Service or gateway.
+- DTOs stay plain.
+- FXO stays client-side only.
+- map DTO and FXO cleanly across the boundary.

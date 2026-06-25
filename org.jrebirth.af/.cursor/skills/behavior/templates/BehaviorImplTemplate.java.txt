@@ -1,0 +1,22 @@
+package ${pkg};
+
+import org.jrebirth.af.api.module.Register;
+import org.jrebirth.af.core.component.behavior.AbstractModelBehavior;
+
+/**
+ * Default ${Name} behavior implementation.
+ */
+@Register(value = ${Name}Behavior.class)
+public final class ${Name}BehaviorImpl extends AbstractModelBehavior<${Name}BehaviorData> implements ${Name}Behavior {
+
+    @Override
+    protected void initBehavior() {
+        // Read configuration from data() and bind/install listeners on component() or getRootNode().
+        // Keep references removable if this behavior later gains an explicit release lifecycle.
+    }
+
+    @Override
+    public void apply${Name}() {
+        // Use data() for settings and component() / getRootNode() for the target model and node.
+    }
+}

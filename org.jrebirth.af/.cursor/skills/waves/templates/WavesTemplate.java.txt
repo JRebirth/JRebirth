@@ -1,0 +1,24 @@
+package ${pkg};
+
+import org.jrebirth.af.api.annotation.Preload;
+import org.jrebirth.af.api.wave.contract.WaveItem;
+import org.jrebirth.af.api.wave.contract.WaveType;
+import org.jrebirth.af.core.wave.WBuilder;
+import org.jrebirth.af.core.wave.WaveItemBase;
+
+/**
+ * ${Name} wave contract. Decoupled messages for the ${Name} feature.
+ *
+ * Emit with sendWave(${Name}Waves.CHANGE_WT); receive with @OnWave(${Name}Waves.CHANGE).
+ */
+@Preload
+public interface ${Name}Waves {
+
+    String CHANGE = "CHANGE";
+
+    WaveType CHANGE_WT = WBuilder.waveType(CHANGE);
+
+    /** Typed payload key carried by the wave. */
+    WaveItem<String> ITEM = new WaveItemBase<String>() {
+    };
+}

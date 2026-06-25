@@ -1,0 +1,35 @@
+---
+name: application
+description: >-
+  Create the JRebirth/JavaFX application entry point and shell configuration.
+  Use when bootstrapping a new app, choosing the first model, or customizing the
+  stage, scene, and preloaded resources.
+---
+# Create Application
+
+The Application is the entry point only. It boots and configures the shell.
+
+## Keep here
+
+- bootstrap and launch flow
+- first model selection
+- stage title, icons, and shell configuration
+- scene customization and global CSS
+
+## Keep out
+
+- business logic
+- feature orchestration
+- controller-style event code
+- backend access
+
+## Key API
+
+- extend `DefaultApplication<StackPane>` (or the chosen root pane type).
+- choose the entry model in `firstModelClass()`.
+- set the title in `applicationTitle()`.
+- add global stylesheets in `customizeScene(scene)` with `addCSS(scene, SomeStyles.DEFAULT)`.
+- tune the window in `customizeStage(stage)`.
+- list preloaded resources in `getResourceToPreload()`.
+
+Template: `templates/ApplicationTemplate.java.txt`.

@@ -1,0 +1,38 @@
+---
+name: model
+description: >-
+  Create or extend a JRebirth Model (state, bindings, orchestration).
+  Use when a feature needs properties, selection, validation state, or when it
+  triggers commands and services.
+---
+# Create Model
+
+Model owns state, bindings, and interaction logic. It is the brain of a feature.
+
+## Use when
+
+A feature needs state, bindings, selection, validation state, or UI orchestration.
+
+## Put in Model
+
+- JavaFX properties
+- computed bindings
+- selection, form, and filter state
+- validation flags
+- command or service triggering
+
+## Keep out
+
+- raw node construction
+- large backend logic
+- low-level controller event boilerplate
+
+## Key API
+
+- extend `DefaultModel<M, V>`, or `DefaultFXMLModel<M>` when the view is FXML.
+- link sibling models with the `@Link` annotation.
+- set up bindings in `bind()`.
+- react to messages with `@OnWave(SomeWaves.WT)`; emit with `sendWave(...)`.
+- run actions with `callCommand(SomeCommand.class, WBuilder.waveData(ITEM, value))`.
+
+Template: `templates/ModelTemplate.java.txt`.

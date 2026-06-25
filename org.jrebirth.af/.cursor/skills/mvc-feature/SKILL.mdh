@@ -1,0 +1,27 @@
+---
+name: mvc-feature
+description: >-
+  Scaffold a complete JRebirth MVC feature (screen, editor, dashboard, panel).
+  Use when a new self-contained UI unit needs Model, View, Controller, and
+  optionally Commands, Services, and Waves.
+---
+# Create full MVC feature
+
+A new screen, editor, dashboard, or panel needs its own coherent JRebirth structure.
+
+## Standard pack
+
+- Model
+- View
+- Controller
+- one or more Commands if named actions exist
+- one or more Services if external or slow work exists
+- Waves only if decoupled messaging is needed
+
+## Order
+
+Start with the Model contract, then the View skeleton, then Controller wiring, then Commands and Services.
+
+Use the per-role skills (model, view, controller, command-single, command-multi, service, waves) for each part.
+
+Reference: `reference.md` contains the wB-CSMVC diagram and role direction rules. Use `wb-csmvc-diagram.svg` when Mermaid rendering is not available.

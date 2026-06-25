@@ -1,0 +1,34 @@
+---
+name: update-site-doc
+description: >-
+  Update JRebirth Maven Site documentation when framework code changes.
+  Use when adding or modifying API, commands, services, models, modules,
+  annotations, or any public-facing JRebirth feature, or when asked to write or
+  fix documentation pages.
+---
+# Update JRebirth Site Documentation
+
+Keep the Maven Site docs in sync with framework code.
+
+## Location
+
+All doc pages live under `org.jrebirth.af/src/site/markdown/doc/`.
+Format: Markdown plus Velocity (`.md.vm`).
+
+## Sync checklist (when code changes)
+
+1. Identify which doc page covers the changed module or feature.
+2. If no page exists, create one.
+3. Update or add `MACRO{include}` snippets pointing to the changed source files.
+4. Verify snippet selectors still match; method or class renames break `aj:` selectors.
+5. Update prose to reflect new behavior, parameters, or annotations.
+6. If a new module is added, also update `TocList.vm`, `site.xml`, and `jrebirth-book.xml`.
+
+## Style rules
+
+- write clear, direct prose; avoid filler.
+- use `**bold**` for a class or annotation name on first mention.
+- keep code snippets from real source via `MACRO{include}`, not hand-written.
+- body content goes inside a `#[[ ]]#` block to prevent Velocity parsing.
+
+For the page template, snippet selector syntax, new-page steps, and the module-to-page map, see `reference.md`.

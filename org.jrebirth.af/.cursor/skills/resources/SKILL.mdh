@@ -1,0 +1,25 @@
+---
+name: resources
+description: >-
+  Centralize shared JRebirth UI resources (images, fonts, styles, labels, sizes,
+  colors) through resource enums and items. Use when adding assets or replacing
+  magic constants and raw getResource strings.
+---
+# Create Resources
+
+Centralize shared UI resources and avoid magic constants.
+
+## Typical content
+
+- label and text keys
+- image and icon references
+- CSS references
+- spacing, sizes, and colors
+
+## Key API
+
+- images: an enum implementing `ImageEnum`, each entry calling `rel("basename", ImageExtension.PNG)`; read with `.get()`.
+- styles: a `StyleSheetItem` from `Resources.create(new StyleSheet("Main"))`.
+- prefer typed resource enums over raw `getResource("/path")` strings, so JPMS module access stays correct.
+
+Template: `templates/ResourcesTemplate.java.txt`.

@@ -1,0 +1,32 @@
+package ${pkg};
+
+import javafx.event.ActionEvent;
+
+import org.jrebirth.af.api.exception.CoreException;
+import org.jrebirth.af.core.ui.DefaultController;
+
+/**
+ * ${Name} controller. Wires user gestures to the model, commands, or services.
+ */
+public final class ${Name}Controller extends DefaultController<${Name}Model, ${Name}View> {
+
+    public ${Name}Controller(final ${Name}View view) throws CoreException {
+        super(view);
+    }
+
+    @Override
+    protected void initEventAdapters() throws CoreException {
+        super.initEventAdapters();
+        // Bridge an event straight to a service:
+        // linkService(view().someField(), KeyEvent.KEY_RELEASED, FooService.class, FooService.DO_X,
+        //             event -> ..., WBuilder.waveData(FooService.ITEM, value));
+    }
+
+    /** @OnAction controls in the view route here. */
+    public void onAction(final ActionEvent event) {
+        if (event.getSource() == view().okButton()) {
+            // delegate to the model or trigger a command
+            // model().doSomething();
+        }
+    }
+}

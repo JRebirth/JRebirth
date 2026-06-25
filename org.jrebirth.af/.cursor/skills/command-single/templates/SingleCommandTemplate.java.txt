@@ -1,0 +1,20 @@
+package ${pkg};
+
+import org.jrebirth.af.api.wave.Wave;
+import org.jrebirth.af.core.command.single.internal.DefaultCommand;
+
+/**
+ * ${Name} command. One explicit, named action.
+ *
+ * Trigger with: callCommand(${Name}Command.class, WBuilder.waveData(${Name}Waves.ITEM, value));
+ * Use DefaultUICommand to run on the JavaFX thread, DefaultUndoableCommand when undoable.
+ */
+public final class ${Name}Command extends DefaultCommand {
+
+    @Override
+    public void perform(final Wave wave) {
+        // final SomeType value = wave.get(${Name}Waves.ITEM);
+        // do the work, then optionally chain:
+        // callCommand(NextCommand.class, WBuilder.waveData(${Name}Waves.ITEM, value));
+    }
+}

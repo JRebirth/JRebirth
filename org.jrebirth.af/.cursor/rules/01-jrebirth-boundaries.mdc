@@ -1,0 +1,19 @@
+---
+description: JRebirth boundaries and forbidden shortcuts
+alwaysApply: true
+---
+<!-- gen .mdh -->
+
+# JRebirth boundaries
+
+Always prefer mechanisms framework already provides over ad-hoc shortcuts
+
+The following shortcuts banned default:
+
+- no `new Thread` normal application flow
+- no `Platform.runLater` used design pattern
+- no heavy business logic placed inside View or Controller
+- no stateful bindings owned View when belong Model
+- no `localFacade().globalFacade()` except rare hard integration cases
+
+Whenever doubt stop use relevant skill

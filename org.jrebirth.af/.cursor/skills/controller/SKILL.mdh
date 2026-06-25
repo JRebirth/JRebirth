@@ -1,0 +1,31 @@
+---
+name: controller
+description: >-
+  Create a JRebirth Controller that wires user gestures to model, commands, or
+  services. Use when adding button, key, selection, or menu handlers.
+---
+# Create Controller
+
+Controller translates user gestures into calls toward model, commands, or services.
+
+## Good uses
+
+- button click wiring
+- key handlers
+- table selection listeners when not purely declarative
+- menu action hookup
+
+## Bad uses
+
+- business rules
+- persistent feature state
+- long methods that should become commands
+
+## Key API
+
+- extend `DefaultController<M, V>` with a `(V view)` constructor.
+- register adapters in `initEventAdapters()`.
+- bridge a node event straight to a service with `linkService(node, eventType, Service.class, WAVE, filter, waveData)`.
+- otherwise delegate to `model()` or trigger a command.
+
+Template: `templates/ControllerTemplate.java.txt`.
