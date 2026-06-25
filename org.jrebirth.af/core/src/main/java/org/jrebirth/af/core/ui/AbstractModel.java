@@ -81,7 +81,7 @@ public abstract class AbstractModel<M extends Model, V extends View<?, ?, ?>> ex
         if (key().value() instanceof List<?>) {
             for (final Object data : (List<?>) key().value()) {
                 if (data instanceof ModelConfig<?, ?>) {
-                    applyStyle((ModelConfig<?, ?>) key().value());
+                    applyStyle((ModelConfig<?, ?>) data);
                 }
             }
         }
