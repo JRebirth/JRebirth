@@ -5,7 +5,7 @@ description: >-
   (REST, DB gateway, file import/export, heavy computation). Use to keep long
   work out of Model, View, and Controller.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Create Service
 

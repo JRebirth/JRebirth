@@ -2,14 +2,14 @@
 description: Compact and human reference file convention
 alwaysApply: true
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
-# Compact reference files
+# Compact Reference Files
 
-Use compact files first to save context.
+Use compact files first save context
 
-- `.mdc` rules are compact model-facing rules.
-- `SKILL.md` and other `.md` skill/reference files are compact model-facing files.
-- `.mdh` files are human-readable source/counterpart files.
+- `.mdc` rule files compact model-facing rules
+- `SKILL.md` other `.md` skill/reference files compact model-facing files
+- `.mdh` files human-readable source or counterpart files
 
-When both compact and human files exist, read `.mdc` or `.md` during normal agent work. Open `.mdh` only when explicitly editing human prose or when compact content is insufficient.
+When both compact human files exist read `.mdc` or `.md` during normal agent work Open `.mdh` only when explicitly editing human-facing prose or when compact content not enough complete task safely

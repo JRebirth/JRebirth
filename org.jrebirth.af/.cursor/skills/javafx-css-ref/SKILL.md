@@ -5,7 +5,7 @@ description: >-
   the official reference. Use when the user asks to validate or fix JavaFX CSS
   or inline JavaFX styles.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # JavaFX CSS reference checker
 

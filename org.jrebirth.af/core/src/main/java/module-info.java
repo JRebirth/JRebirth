@@ -6,6 +6,9 @@
 module org.jrebirth.af.core {
 
     requires transitive javafx.controls;
+    requires javafx.swing;
+    requires java.desktop;
+    requires static com.twelvemonkeys.imageio.webp;
 
     requires transitive org.jrebirth.af.api;
     requires org.jrebirth.af.preloader;

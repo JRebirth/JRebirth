@@ -5,7 +5,7 @@ description: >-
   Use when wiring backend calls, mapping DTO and FXO, or deciding where network
   and entity code may live.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Bridge Spring
 

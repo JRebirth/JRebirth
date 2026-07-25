@@ -6,7 +6,7 @@ description: >-
   annotations, or any public-facing JRebirth feature, or when asked to write or
   fix documentation pages.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Update JRebirth Site Documentation
 

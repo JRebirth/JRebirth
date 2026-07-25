@@ -1,0 +1,77 @@
+---
+name: jrebirth-processor-modules
+description: >-
+  Explain and implement JRebirth annotation processor module startup: generated
+  ModuleStarter classes, @Preload, @BootComponent, @RegistrationPoint,
+  @Register, JPMS provides declarations, ServiceLoader discovery, and
+  SPI-style component implementation management. Use when a module starter is
+  missing, generated source is unresolved, preloading does not happen, or
+  component implementations need registration and priority ordering.
+---
+<!-- gen .mdh -->
+
+# Use JRebirth processor modules
+
+Use for generated `*ModuleStarter`, startup preloading, JPMS provider, component registration
+
+## Read first
+
+- `processor/.../ComponentProcessor.java`
+- `core/.../module/AbstractModuleStarter.java`
+- `core/.../application/AbstractApplication.java`
+- `api/.../module/*.java`
+- generated starters under `target/generated-sources/annotations`
+- module-info examples with `provides org.jrebirth.af.api.module.ModuleStarter`
+
+## Processor contract
+
+`@Preload` -> `preloadClass(Target.class)`
+`@BootComponent` -> `bootComponent(Target.class)`
+`@RegistrationPoint(exclusive, reverse)` -> `define(Contract.class, exclusive, reverse)`
+`@Register(value = Contract.class, priority = ..., weight = ...)` -> `register(Contract.class, Impl.class, priority, weight)`
+
+If any exist processor generates `<CapitalizedArtifactId>ModuleStarter`, SPI file `META-INF/services/org.jrebirth.af.api.module.ModuleStarter`, `start()`.
+
+Override name:
+
+```properties
+moduleStarterClass=com.acme.feature.FeatureModuleStarter
+```
+
+## JPMS provider
+
+Named module must declare generated provider:
+
+```java
+open module com.acme.feature {
+    requires org.jrebirth.af.api;
+    requires org.jrebirth.af.core;
+    provides org.jrebirth.af.api.module.ModuleStarter with com.acme.feature.FeatureModuleStarter;
+}
+```
+
+Core has `uses ModuleStarter`; startup `preloadModules()` ServiceLoader loads starters sorts by class name calls `start()`
+
+If generated class unresolved confirm processor path rebuild inspect generated sources Do not hand-write first
+
+## Component SPI registration
+
+JRebirth internal registry not JPMS ServiceLoader:
+
+```java
+@RegistrationPoint(exclusive = true, reverse = false)
+public interface TodoService extends Service {}
+
+@Register(value = TodoService.class, priority = PriorityLevel.Normal)
+public final class TodoServiceImpl extends DefaultService implements TodoService {}
+```
+
+Generates `define(...)` and `register(...)`; ComponentFactory resolves by exclusive reverse priority weight
+
+Rules: contract gets `@RegistrationPoint`; implementation gets `@Register`; priority/weight only for competition; weight below `1000`; export/open packages as needed
+
+## Preload boot
+
+`@Preload` static wave/resource/builder holders. `@BootComponent` startup retrieve command service model through facade
+
+Checks: `mvn -pl <module> compile -Dmaven.test.skip=true`, inspect generated starter, module-info provider exact FQCN, expected calls, generated SPI file

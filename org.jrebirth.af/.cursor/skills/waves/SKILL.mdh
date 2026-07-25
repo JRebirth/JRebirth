@@ -25,6 +25,6 @@ Waves send messages between decoupled parts without tight direct dependencies.
 - declare a `@Preload` interface holding the wave contract.
 - a `String` name constant, then `WaveType NAME_WT = WBuilder.waveType(NAME)`.
 - typed payload keys as `WaveItem<T>` constants.
-- emit with `sendWave(NAME_WT)`; receive with `@OnWave(NAME_WT)`.
+- emit with `sendWave(NAME_WT)`; receive with `@OnWave(NAME)`.
 
 Template: `templates/WavesTemplate.java.txt`.

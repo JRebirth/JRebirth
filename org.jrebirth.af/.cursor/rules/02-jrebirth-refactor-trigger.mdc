@@ -4,7 +4,7 @@ globs:
   - "**/*.java"
 alwaysApply: false
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Refactor trigger
 

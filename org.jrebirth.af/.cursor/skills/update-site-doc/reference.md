@@ -1,4 +1,4 @@
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Site documentation reference
 

@@ -2,7 +2,7 @@
 description: JRebirth core architecture and role split
 alwaysApply: true
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # JRebirth core
 

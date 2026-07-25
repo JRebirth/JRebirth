@@ -5,7 +5,7 @@ description: >-
   Use when a feature needs properties, selection, validation state, or when it
   triggers commands and services.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Create Model
 

@@ -5,7 +5,7 @@ description: >-
   Use when a new self-contained UI unit needs Model, View, Controller, and
   optionally Commands, Services, and Waves.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Create full MVC feature
 

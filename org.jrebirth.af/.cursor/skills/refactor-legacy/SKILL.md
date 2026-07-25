@@ -5,7 +5,7 @@ description: >-
   Use before editing many files in an old JavaFX feature, or when a class mixes
   state, nodes, events, and actions.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Refactor legacy JavaFX JRebirth
 

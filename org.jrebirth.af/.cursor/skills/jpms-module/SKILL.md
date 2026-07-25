@@ -7,7 +7,7 @@ description: >-
   JavaFX or JRebirth reflection fails at runtime (IllegalAccessException, "does
   not open"), or when a module is not picked up (ModuleStarter missing).
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Manage JRebirth JPMS module-info
 

@@ -17,10 +17,17 @@
  */
 package org.jrebirth.af.core.resource.image;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import java.awt.image.BufferedImage;
+
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.text.Text;
@@ -150,13 +157,40 @@ public final class ImageBuilder extends AbstractResourceBuilder<ImageItem, Image
             final InputStream imageInputStream = ModuleUtility.getResourceAsStream(imageItem, imagePath, resourceName);
 
             if (imageInputStream != null) {
-                image = new Image(imageInputStream);
+                try (InputStream in = imageInputStream) {
+                    image = loadImageFromBytes(in.readAllBytes(), resourceName);
+                } catch (IOException e) {
+                    LOGGER.error("Image : {} could not be read from {}", resourceName, imagePath, e);
+                }
             }
         }
         if (image == null) {
             LOGGER.error("Image : {} not found into base folder: {}", resourceName, ResourceParameters.IMAGE_FOLDER.get());
         }
         return image;
+    }
+
+    private Image loadImageFromBytes(final byte[] bytes, final String sourceDescription) {
+        try {
+            final Image image = new Image(new ByteArrayInputStream(bytes));
+            if (!image.isError() && image.getWidth() > 0 && image.getHeight() > 0) {
+                return image;
+            }
+        } catch (Exception ignored) {
+            // Fall through to ImageIO fallback (WebP and other plugins).
+        }
+
+        try {
+            final BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(bytes));
+            if (bufferedImage == null) {
+                LOGGER.error("Unsupported image format: {}", sourceDescription);
+                return null;
+            }
+            return SwingFXUtils.toFXImage(bufferedImage, null);
+        } catch (IOException e) {
+            LOGGER.error("Could not load image: {}", sourceDescription, e);
+            return null;
+        }
     }
 
 }
