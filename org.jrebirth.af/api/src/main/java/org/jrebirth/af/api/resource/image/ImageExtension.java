@@ -35,7 +35,10 @@ public enum ImageExtension {
     JPG,
 
     /** The .gif image file extension. */
-    GIF;
+    GIF,
+
+    /** The .webp image file extension (ImageIO plugin). */
+    WEBP;
 
     /**
      * {@inheritDoc}

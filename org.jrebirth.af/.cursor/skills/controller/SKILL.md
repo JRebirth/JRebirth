@@ -4,7 +4,7 @@ description: >-
   Create a JRebirth Controller that wires user gestures to model, commands, or
   services. Use when adding button, key, selection, or menu handlers.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Create Controller
 

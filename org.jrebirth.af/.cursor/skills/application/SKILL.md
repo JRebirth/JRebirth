@@ -5,7 +5,7 @@ description: >-
   Use when bootstrapping a new app, choosing the first model, or customizing the
   stage, scene, and preloaded resources.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Create Application
 

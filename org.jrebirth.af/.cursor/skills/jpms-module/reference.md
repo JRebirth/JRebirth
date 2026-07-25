@@ -1,4 +1,4 @@
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # JRebirth JPMS module-info reference
 

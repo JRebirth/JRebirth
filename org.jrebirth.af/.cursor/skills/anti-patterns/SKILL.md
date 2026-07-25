@@ -5,7 +5,7 @@ description: >-
   controllers, state in views, global facade abuse). Use when reviewing or
   cleaning up JRebirth code that smells like plain JavaFX.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Avoid anti-patterns
 

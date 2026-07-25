@@ -15,6 +15,7 @@ Usage:
   py .cursor/tools/cavemanize.py            # generate every sibling from *.mdh
   py .cursor/tools/cavemanize.py --check    # exit 1 if any output is stale
   py .cursor/tools/cavemanize.py --file PATH.mdh
+  py .cursor/tools/cavemanize.py --bootstrap  # create missing .mdh from .md/.mdc, then generate
 """
 from __future__ import annotations
 
@@ -154,7 +155,7 @@ def cavemanize(text: str, src_name: str) -> str:
         out.append(sq)
         blank = False
 
-    marker = "<!-- gen .mdh -->"
+    marker = "<!-- gen from .mdh -->"
     parts: list[str] = []
     if front:
         parts.extend(front)
@@ -170,11 +171,48 @@ def iter_sources(root: Path):
     return sorted(p for p in root.rglob("*.mdh"))
 
 
+_GEN_MARKER = re.compile(r"^<!-- gen from \.mdh -->\s*\n?", re.MULTILINE)
+
+
+def _strip_gen_marker(text: str) -> str:
+    return _GEN_MARKER.sub("", text, count=1)
+
+
+def bootstrap_missing_sources(root: Path) -> list[Path]:
+    """Create .mdh sources from sibling .md / .mdc when no .mdh exists yet."""
+    created: list[Path] = []
+    for out in sorted(root.rglob("*")):
+        if out.suffix not in {".md", ".mdc"}:
+            continue
+        rel = out.relative_to(root)
+        if rel.parts and rel.parts[0] == "tools":
+            continue
+        src = out.with_suffix(".mdh")
+        if src.exists():
+            continue
+        text = out.read_text(encoding="utf-8")
+        src.write_text(_strip_gen_marker(text), encoding="utf-8")
+        created.append(src)
+        print(f"bootstrapped {src.relative_to(root)} from {out.relative_to(root)}")
+    return created
+
+
 def main(argv: list[str]) -> int:
     ap = argparse.ArgumentParser(description="Compile .mdh sources to caveman files.")
     ap.add_argument("--check", action="store_true", help="fail if any output is stale")
     ap.add_argument("--file", type=Path, help="process a single .mdh source")
+    ap.add_argument(
+        "--bootstrap",
+        action="store_true",
+        help="create missing .mdh from existing .md/.mdc under .cursor, then generate",
+    )
     args = ap.parse_args(argv)
+
+    if args.bootstrap:
+        if args.file or args.check:
+            print("--bootstrap cannot be combined with --file or --check", file=sys.stderr)
+            return 2
+        bootstrap_missing_sources(CURSOR_ROOT)
 
     sources = [args.file] if args.file else iter_sources(CURSOR_ROOT)
     stale: list[Path] = []

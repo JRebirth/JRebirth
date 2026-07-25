@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/archetype/src/main/resources/archetype-resources" includeSubdirectories="true" />
+    </excludeFromCompile>
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="typicons" />
+        <module name="codegen" />
+        <module name="materialdesignicons" />
+        <module name="resources" />
+        <module name="text2fx" />
+        <module name="fontawesome" />
+        <module name="sample" />
+        <module name="jrebirth-maven-plugin" />
+        <module name="transition" />
+        <module name="fxform" />
+        <module name="emojione" />
+        <module name="presentation" />
+        <module name="core" />
+        <module name="dialog" />
+        <module name="undoredo (2) (org.jrebirth.af)" />
+        <module name="security" />
+        <module name="archetype" />
+        <module name="weathericons" />
+        <module name="preloader" />
+        <module name="api" />
+        <module name="ecore2fx" />
+        <module name="525icons" />
+      </profile>
+      <profile name="Annotation profile for JRebirth Application Framework" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$PROJECT_DIR$/processor/target/classes" />
+          <entry name="$PROJECT_DIR$/api/target/classes" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-controls/26/javafx-controls-26.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-controls/26/javafx-controls-26-win.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-graphics/26/javafx-graphics-26.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-graphics/26/javafx-graphics-26-win.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-base/26/javafx-base-26.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-base/26/javafx-base-26-win.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-fxml/26/javafx-fxml-26.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-fxml/26/javafx-fxml-26-win.jar" />
+          <entry name="$PROJECT_DIR$/core/target/classes" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/io/github/classgraph/classgraph/4.8.184/classgraph-4.8.184.jar" />
+          <entry name="$PROJECT_DIR$/tooling/codegen/target/classes" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/jboss/forge/roaster/roaster-api/2.20.8.Final/roaster-api-2.20.8.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/jboss/forge/roaster/roaster-jdt/2.20.8.Final/roaster-jdt-2.20.8.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/com/x5dev/chunk-templates/3.6.2/chunk-templates-3.6.2.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/apache/maven/maven-model/3.9.11/maven-model-3.9.11.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/codehaus/plexus/plexus-utils/3.6.0/plexus-utils-3.6.0.jar" />
+          <entry name="$PROJECT_DIR$/processor/target/classes" />
+          <entry name="$PROJECT_DIR$/api/target/classes" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-controls/26/javafx-controls-26.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-controls/26/javafx-controls-26-win.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-graphics/26/javafx-graphics-26.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-graphics/26/javafx-graphics-26-win.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-base/26/javafx-base-26.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-base/26/javafx-base-26-win.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-fxml/26/javafx-fxml-26.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-fxml/26/javafx-fxml-26-win.jar" />
+          <entry name="$PROJECT_DIR$/core/target/classes" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/io/github/classgraph/classgraph/4.8.184/classgraph-4.8.184.jar" />
+          <entry name="$PROJECT_DIR$/tooling/codegen/target/classes" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/jboss/forge/roaster/roaster-api/2.20.8.Final/roaster-api-2.20.8.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/jboss/forge/roaster/roaster-jdt/2.20.8.Final/roaster-jdt-2.20.8.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/com/x5dev/chunk-templates/3.6.2/chunk-templates-3.6.2.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/apache/maven/maven-model/3.9.11/maven-model-3.9.11.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/codehaus/plexus/plexus-utils/3.6.0/plexus-utils-3.6.0.jar" />
+        </processorPath>
+        <module name="rest" />
+        <module name="fxml" />
+        <module name="component" />
+        <module name="undoredo (1) (org.jrebirth.af.showcase)" />
+        <module name="analyzer" />
+        <module name="todos" />
+        <module name="fonticon" />
+        <module name="workbench" />
+        <module name="demo" />
+        <module name="wave" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="codegen" options="--add-reads org.jrebirth.af.tooling.codegen=ALL-UNNAMED" />
+      <module name="processor" options="--add-reads org.jrebirth.af.processor=ALL-UNNAMED -proc:none" />
+    </option>
+  </component>
+</project>

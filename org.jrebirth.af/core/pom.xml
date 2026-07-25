@@ -51,6 +51,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-swing</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.twelvemonkeys.imageio</groupId>
+			<artifactId>imageio-webp</artifactId>
+			<version>3.13.1</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
 			<groupId>io.github.classgraph</groupId>
 			<artifactId>classgraph</artifactId>
 		</dependency>

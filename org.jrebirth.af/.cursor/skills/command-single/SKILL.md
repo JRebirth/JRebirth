@@ -5,7 +5,7 @@ description: >-
   refresh, load one thing, navigate). Use when a discrete action must be run and
   named clearly.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Create Single Command
 

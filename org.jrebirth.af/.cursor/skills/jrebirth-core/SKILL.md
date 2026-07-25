@@ -5,7 +5,7 @@ description: >-
   Use when starting any JRebirth work, when roles feel blurred, or when plain
   JavaFX habits (runLater, raw threads, state in views) start leaking in.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # JRebirth core
 
@@ -35,4 +35,4 @@ Before writing code ask: Application, Model, View, Controller, Command, Service,
 
 Read matching role skill before creating or refactoring role
 
-For complete wB-CSMVC role map see `../mvc-feature/reference.md`
+For complete wB-CSMVC role map see `../mvc-feature/reference.md`.

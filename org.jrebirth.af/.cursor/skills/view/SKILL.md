@@ -4,7 +4,7 @@ description: >-
   Build a JRebirth View (scene graph, controls, bindings, view-local CSS).
   Use when composing nodes for a feature, or attaching a stylesheet to a view.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Create View
 

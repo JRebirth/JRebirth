@@ -207,4 +207,15 @@ public class StackModel extends DefaultObjectModel<StackModel, StackView, StackC
         this.defaultPageModelKey = defaultPageModelKey;
     }
 
+    /**
+     * Clears displayed children and forgets the current page key so the next {@code SHOW_PAGE_*} recreates content.
+     * Used on logout to avoid leaking previous-session UI state.
+     */
+    public void resetStack() {
+        this.currentModelKey = null;
+        if (view() != null && view().node() != null) {
+            view().node().getChildren().clear();
+        }
+    }
+
 }

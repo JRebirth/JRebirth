@@ -5,7 +5,7 @@ description: >-
   commands. Use when one user action must trigger several existing commands in a
   known order.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Create Multi Command
 

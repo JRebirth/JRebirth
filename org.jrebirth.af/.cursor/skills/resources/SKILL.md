@@ -5,7 +5,7 @@ description: >-
   colors) through resource enums and items. Use when adding assets or replacing
   magic constants and raw getResource strings.
 ---
-<!-- gen .mdh -->
+<!-- gen from .mdh -->
 
 # Create Resources
 

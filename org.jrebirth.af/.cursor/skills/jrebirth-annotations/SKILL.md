@@ -1,0 +1,66 @@
+---
+name: jrebirth-annotations
+description: >-
+  Explain and implement JRebirth annotations: @OnWave/@OnWaves auto-listening,
+  UI event annotations, lifecycle hooks, @Preload, and annotation-driven
+  runtime wiring. Use when adding wave listeners, JavaFX event handlers,
+  model/controller annotations, lifecycle methods, or static wave/resource
+  holders that must be preloaded.
+---
+<!-- gen from .mdh -->
+
+<!-- gen .mdh -->
+
+# Use JRebirth annotations
+
+Use annotations framework integration points Check source first target retention differ
+
+## Read first
+
+- `api/.../wave/annotation/OnWave.java` `OnWaves.java`
+- `api/.../ui/annotation/*.java`
+- `api/.../annotation/*.java`
+- usages `core` `sample` `showcase`
+
+## Wave auto-listening
+
+`@OnWave("wave.name")` marks class or method auto-listener Runtime inherited repeatable TYPE METHOD
+
+Prefer holder:
+
+```java
+@Preload
+public interface WWaves {
+    String UPDATE_STATUS = "UPDATE_STATUS";
+    WaveType UPDATE_STATUS_WT = WBuilder.waveType(UPDATE_STATUS);
+}
+
+@OnWave(WWaves.UPDATE_STATUS)
+void updateStatus(final Wave wave) { }
+```
+
+Annotation uses string id `WaveType *_WT` registers wave during class init
+
+## Preload
+
+Add `@Preload` static wave/resource/builder holders Processor can generate `preloadClass(...)` See `jrebirth-processor-modules`
+
+## UI events
+
+Use `org.jrebirth.af.api.ui.annotation`: `@OnAction` `@OnMouse` `@OnKey` `@OnDrag` `@OnScroll` `@OnSwipe` `@OnTouch` `@OnRotate` `@OnZoom` `@OnWindow` `@OnFinished` `@OnEvent`
+
+Open declaration before writing handler match signature target retention
+
+## Lifecycle metadata
+
+Lifecycle: `@BeforeInit` `@AfterInit` `@OnRelease` `@Releasable` `@SkipAnnotation`
+
+Metadata: `@DisplayName` `@Description` `@Link`
+
+Many annotations runtime markers not compile processor
+
+## JPMS
+
+If reflection needed open package `org.jrebirth.af.core` or use `open module`; FXML may need `javafx.fxml`
+
+Rules: verify source mirror existing usage use string constants `@OnWave`, keep `WaveType *_WT`, preload holders keep opens consistent
