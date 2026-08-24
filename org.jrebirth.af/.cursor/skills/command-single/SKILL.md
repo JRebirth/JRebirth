@@ -29,10 +29,11 @@ One explicit action must run named clearly:
 
 ## Invocation
 
-Trigger any component (Model, Controller) `callCommand`, never `getCommand(...).run(...)`, bypasses wave pipeline
+Trigger any component (Model, Controller) `callCommand`, never `getCommand(...).run(...)`, bypasses wave pipeline Details: skill `command-invoke`.
 
 - Single payload: define `WaveItem<T>` command or shared waves class then `callCommand(FooCommand.class, WBuilder.waveData(FooCommand.ITEM, value))`. Avoid dedicated `WaveBean` one field
 - Multiple fields: use `WaveBean` static factory `FooWaveBean.of()` fluent setters then `callCommand(FooCommand.class, bean)`.
+- Prebuilt wave flags (e.g `FORCE_SYNC`): `sendWave(WBuilder.callCommand(FooCommand.class)...)`.
 
 ## Keep small
 

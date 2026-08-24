@@ -9,7 +9,8 @@ description: >-
 
 ## Smells
 
-- `Platform.runLater` used as architecture glue
+- `Platform.runLater` or `JRebirth.runInto*` used as architecture glue
+- `getCommand(...).run(...)` instead of `callCommand` / `sendWave(WBuilder.callCommand(...))`
 - raw thread creation for routine flows
 - heavy logic in controllers
 - business state hidden in views
@@ -17,4 +18,4 @@ description: >-
 
 ## Fix path
 
-Find the missing JRebirth role, then move the code to it. See the jrebirth-core and refactor-legacy skills.
+Find the missing JRebirth role, then move the code to it. For thread hops, use the `threading` skill. For Command triggering, use the `command-invoke` skill. See also jrebirth-core and refactor-legacy.

@@ -31,7 +31,7 @@ Before writing code ask: Application, Model, View, Controller, Command, Service,
 - If View holds business rules move them Model
 - If Controller owns persistent state move Model
 - If Model performs backend I/O directly move Service
-- If `runLater` shows up everywhere architecture leaking
+- If `runLater` or `JRebirth.runInto*` shows up everywhere architecture leaking — use `threading` skill
 
 Read matching role skill before creating or refactoring role
 
