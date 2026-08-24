@@ -29,7 +29,7 @@ Before writing code, ask: is this Application, Model, View, Controller, Command,
 - If a View holds business rules, move them to Model.
 - If a Controller owns persistent state, move it to Model.
 - If a Model performs backend I/O directly, move it to a Service.
-- If `runLater` shows up everywhere, the architecture is leaking.
+- If `runLater` or `JRebirth.runInto*` shows up everywhere, the architecture is leaking — use the `threading` skill.
 
 Read the matching role skill before creating or refactoring that role.
 

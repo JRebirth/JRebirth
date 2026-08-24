@@ -49,6 +49,8 @@
           <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-fxml/26/javafx-fxml-26.jar" />
           <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-fxml/26/javafx-fxml-26-win.jar" />
           <entry name="$PROJECT_DIR$/core/target/classes" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-swing/26/javafx-swing-26.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-swing/26/javafx-swing-26-win.jar" />
           <entry name="$PROJECT_DIR$/../../../CACHE/repository/io/github/classgraph/classgraph/4.8.184/classgraph-4.8.184.jar" />
           <entry name="$PROJECT_DIR$/tooling/codegen/target/classes" />
           <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/jboss/forge/roaster/roaster-api/2.20.8.Final/roaster-api-2.20.8.Final.jar" />
@@ -68,6 +70,8 @@
           <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-fxml/26/javafx-fxml-26.jar" />
           <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-fxml/26/javafx-fxml-26-win.jar" />
           <entry name="$PROJECT_DIR$/core/target/classes" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-swing/26/javafx-swing-26.jar" />
+          <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/openjfx/javafx-swing/26/javafx-swing-26-win.jar" />
           <entry name="$PROJECT_DIR$/../../../CACHE/repository/io/github/classgraph/classgraph/4.8.184/classgraph-4.8.184.jar" />
           <entry name="$PROJECT_DIR$/tooling/codegen/target/classes" />
           <entry name="$PROJECT_DIR$/../../../CACHE/repository/org/jboss/forge/roaster/roaster-api/2.20.8.Final/roaster-api-2.20.8.Final.jar" />
@@ -82,8 +86,8 @@
         <module name="undoredo (1) (org.jrebirth.af.showcase)" />
         <module name="analyzer" />
         <module name="todos" />
-        <module name="fonticon" />
         <module name="workbench" />
+        <module name="fonticon" />
         <module name="demo" />
         <module name="wave" />
       </profile>
