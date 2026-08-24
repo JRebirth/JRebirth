@@ -2,16 +2,22 @@
 description: JRebirth boundaries and forbidden shortcuts
 alwaysApply: true
 ---
-# JRebirth boundaries
+# JRebirth Boundaries
 
-Always prefer the mechanisms that the framework already provides over ad-hoc shortcuts.
+Always prefer the mechanisms that the framework already provides over ad-hoc shortcuts. JRebirth has thread management, wave-based messaging, and a role split precisely so that you do not need these shortcuts.
 
-The following shortcuts are banned by default:
+## Shortcuts that are banned by default
 
-- no `new Thread` for the normal application flow.
-- no `Platform.runLater` used as a design pattern.
-- no heavy business logic placed inside a View or a Controller.
-- no stateful bindings owned by a View when they belong to the Model.
-- no `localFacade().globalFacade()` except in rare, hard integration cases.
+- **No `new Thread(...)` in normal application flow.** JRebirth routes work through its internal thread manager. Creating raw threads bypasses that manager, breaks concurrency guarantees, and makes the lifecycle uncontrollable. Use a Service instead.
 
-Whenever you are in doubt, stop and use the relevant skill.
+- **No `Platform.runLater(...)` used as a design pattern.** A single `runLater` to fix a one-off edge case may be acceptable, but using it as a recurring pattern signals that UI state is being mutated from the wrong thread. Restructure to let the Model own the state and update it through waves or commands.
+
+- **No heavy business logic placed inside a View or a Controller.** Views build nodes; Controllers wire events. Business rules, validation, and orchestration belong in the Model or in Commands.
+
+- **No stateful bindings owned by a View when they belong to the Model.** If a binding outlives a single render pass or needs to be observed by other components, it belongs in the Model.
+
+- **No `localFacade().globalFacade()` access except in rare, hard integration cases.** Accessing the global facade directly breaks the component isolation that JRebirth provides. Communicate through Waves instead.
+
+## When in doubt
+
+Stop and read the relevant role skill before writing more code. A few minutes reading the skill is cheaper than refactoring a broken design later.

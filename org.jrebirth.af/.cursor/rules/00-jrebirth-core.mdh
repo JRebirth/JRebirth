@@ -2,19 +2,29 @@
 description: JRebirth core architecture and role split
 alwaysApply: true
 ---
-# JRebirth core
+# JRebirth Core Architecture
 
-When the repository uses JRebirth, reach for the framework's own patterns before you fall back on plain JavaFX.
+JRebirth is a JavaFX application framework that enforces a clear split of responsibilities. When working in a repository that uses JRebirth, always reach for the framework's built-in patterns before falling back on plain JavaFX idioms.
 
-Keep the responsibility of every role strictly separated:
+## The role split
 
-- the Application boots the program and configures the shell.
-- the Model owns the UI state, the bindings, and the interaction logic.
-- the View builds the nodes and delegates the user actions.
-- the Controller wires the MVC events together.
-- a Command performs one discrete action.
-- a Service handles long-running or backend work.
-- a Wave carries a message between components.
-- a Behavior holds a small piece of shared, cross-cutting logic.
+Each piece of code belongs to exactly one role. Keep these responsibilities strictly separated:
 
-Before you create or refactor any JRebirth code, read the matching skill first.
+- **Application** boots the program and configures the shell (stage, scene, global CSS, and preloaded resources). Nothing more.
+- **Model** owns the UI state, the JavaFX properties, the bindings, and the orchestration of UI interactions. It is the brain of a feature.
+- **View** builds the scene graph nodes and delegates user gestures to the Controller via annotations. It does not own state.
+- **Controller** wires the MVC events together. It translates user gestures into calls toward the Model, Commands, or Services.
+- **Command** performs one discrete, named action (save, refresh, load, navigate). It is stateless and short-lived.
+- **Service** handles long-running, backend, or integration work (REST calls, database gateways, file I/O). It runs off the UI thread.
+- **Wave** carries a typed message between components without direct dependencies. It is the decoupled communication bus.
+- **Behavior** holds a tiny piece of shared, cross-cutting interaction logic that appears in multiple places.
+
+## Why this matters
+
+When every class stays inside its role, the codebase is predictable, easy to test, and safe to evolve. When roles blur, features become hard to reason about and refactoring becomes expensive.
+
+## Before you write any JRebirth code
+
+Read the matching skill for the role you are working on. Each skill contains the key API, templates, and examples for that role.
+
+See `../mvc-feature/reference.md` for the complete wB-CSMVC role map and the flow diagram.

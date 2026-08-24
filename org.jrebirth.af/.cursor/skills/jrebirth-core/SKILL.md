@@ -7,32 +7,36 @@ description: >-
 ---
 <!-- gen .mdh -->
 
-# JRebirth core
+# JRebirth Core
 
-Use stable role split so codebase stays predictable easy evolve
+Use stable role split so codebase stays predictable easy evolve Every piece code belongs exactly one role
 
 ## Main rule
 
-Before writing code ask: Application, Model, View, Controller, Command, Service, Wave, or Behavior?
+Before writing any code ask: Application, Model, View, Controller, Command, Service, Wave, or Behavior?
 
-## Ownership
+## Role ownership
 
 - Application: startup shell stage scene customization
-- Model: app state JavaFX properties bindings orchestration UI interactions
-- View: node construction visual composition
-- Controller: MVC event hookup
-- Command: explicit action execution
+- Model: application state JavaFX properties bindings orchestration UI interactions
+- View: scene graph node construction visual composition
+- Controller: MVC event hookup — translating user gestures intent
+- Command: one explicit named action execution
 - Service: long-running, backend or integration work
-- Wave: decoupled communication
-- Behavior: tiny reusable cross-cutting logic
+- Wave: decoupled typed communication between components
+- Behavior: tiny genuinely reusable cross-cutting interaction logic
 
 ## Anti-drift checks
 
-- If View holds business rules move them Model
+Run checks before committing code JRebirth project:
+
+- If View holds business rules or validation logic move them Model
 - If Controller owns persistent state move Model
 - If Model performs backend I/O directly move Service
-- If `runLater` shows up everywhere architecture leaking
+- If `Platform.runLater` appears more than once feature code architecture leaking — restructure through waves services
 
-Read matching role skill before creating or refactoring role
+## Next step
 
-For complete wB-CSMVC role map see `../mvc-feature/reference.md`
+Read matching role skill before creating or refactoring role Each skill contains key API, templates examples role
+
+For complete wB-CSMVC role map flow diagram see `../mvc-feature/reference.md`.

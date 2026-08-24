@@ -7,23 +7,47 @@ description: >-
 ---
 <!-- gen .mdh -->
 
-# Create full MVC feature
+# Create Full MVC Feature
 
-A new screen editor dashboard or panel needs own coherent JRebirth structure
+A new screen editor dashboard or panel self-contained JRebirth unit Build coherent structure start so stays maintainable grows
 
 ## Standard pack
 
-- Model
-- View
-- Controller
-- one or more Commands if named actions exist
-- one or more Services if external or slow work exists
-- Waves only if decoupled messaging needed
+Every feature needs minimum:
 
-## Order
+- Model — owns state bindings orchestration
+- View — builds scene graph nodes exposes controls Controller
+- Controller — wires user gestures Model calls Commands, or Services
 
-Start Model contract then View skeleton then Controller wiring then Commands Services
+Add only when feature genuinely needs them:
 
-Use per-role skills (model, view controller command-single, command-multi, service waves) each part
+- Commands — one per named explicit action (save, delete navigate)
+- Services — one per external slow or integration boundary
+- Waves — only when communication another feature must decoupled
 
-Reference: `reference.md` contains wB-CSMVC diagram role direction rules Use `wb-csmvc-diagram.svg` when Mermaid rendering not available
+## Creation order
+
+Always define roles order so each layer can built one before it:
+
+1. Define Model contract: what state does feature own? What properties bindings does expose?
+2. Build View scene graph skeleton expose only controls Controller need
+3. Wire gestures Controller delegate Model or Commands
+4. Add Commands each explicit action
+5. Add Services external or long-running work
+6. Add Waves only where cross-feature, decoupled communication necessary
+
+## Per-role skills
+
+Use dedicated skill each role creating:
+
+- Model → `model` skill
+- View → `view` skill
+- Controller → `controller` skill
+- Single command → `command-single` skill
+- Ordered command chain → `command-multi` skill
+- Service → `service` skill
+- Waves → `waves` skill
+
+## Reference
+
+`reference.md` contains wB-CSMVC flow diagram direction rules Open `wb-csmvc-diagram.svg` when Mermaid rendering not available

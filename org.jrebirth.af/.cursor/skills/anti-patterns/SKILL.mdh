@@ -5,16 +5,56 @@ description: >-
   controllers, state in views, global facade abuse). Use when reviewing or
   cleaning up JRebirth code that smells like plain JavaFX.
 ---
-# Avoid anti-patterns
+# Avoid Anti-Patterns
 
-## Smells
+This skill helps you recognize and eliminate the most common JRebirth anti-patterns. Each one signals that a class has drifted outside its intended role.
 
-- `Platform.runLater` used as architecture glue
-- raw thread creation for routine flows
-- heavy logic in controllers
-- business state hidden in views
-- `globalFacade` access everywhere
+## Smells and their fixes
 
-## Fix path
+### `Platform.runLater` used as architecture glue
 
-Find the missing JRebirth role, then move the code to it. See the jrebirth-core and refactor-legacy skills.
+**What it looks like:** `Platform.runLater(() -> someModel.update(...))` scattered across services, background threads, or event handlers.
+
+**Why it is wrong:** JRebirth manages thread transitions internally through its Service and Wave mechanisms. Sprinkling `runLater` everywhere means the caller is manually compensating for a structural problem instead of using the framework correctly.
+
+**Fix:** Let the Service return a result wave. The Model listens with `@OnWave` and updates its properties on the correct thread automatically. Remove all `runLater` calls that compensate for direct Service or thread results.
+
+### Raw thread creation for routine flows
+
+**What it looks like:** `new Thread(() -> { ... }).start()` inside a Model, View, or Controller.
+
+**Why it is wrong:** Raw threads are unmanaged. They bypass JRebirth's internal thread pool, have no lifecycle, and can mutate state from any thread at any time.
+
+**Fix:** Extract the slow work into a Service. JRebirth routes Service calls to a background thread and brings results back through waves without any manual thread management.
+
+### Heavy logic in a Controller
+
+**What it looks like:** A Controller method that validates input, applies business rules, or orchestrates several operations.
+
+**Why it is wrong:** Controllers translate user gestures into intent. Business rules and orchestration belong in the Model (for state decisions) or in Commands (for explicit actions). A long Controller method is a sign that the intent is not being delegated.
+
+**Fix:** Extract the business logic into the Model or into a Command. The Controller should call `model().doSomething(...)` or `callCommand(SomeCommand.class, ...)` and nothing more.
+
+### Business state hidden in a View
+
+**What it looks like:** A View field that holds a list of items, a selected value, or a validation flag that other components might need.
+
+**Why it is wrong:** Views are transient. State in a View is invisible to the Model, cannot be bound to other components, and is lost when the View is rebuilt.
+
+**Fix:** Move the state into the Model as a JavaFX property. Bind the View control to `model().itemsProperty()` instead of storing it locally.
+
+### `globalFacade` access everywhere
+
+**What it looks like:** `localFacade().globalFacade().getXxx()` called from multiple components to reach a shared service or model.
+
+**Why it is wrong:** This creates tight coupling between components and bypasses the wave-based communication that keeps components independent.
+
+**Fix:** Use Waves to communicate across component boundaries. Send a wave from the originating component and let the target component subscribe with `@OnWave`. Reserve direct facade access for rare, hard integration cases where waves are impractical.
+
+## General fix path
+
+1. Find the missing JRebirth role (Model, Command, Service, Wave).
+2. Move the misplaced code to that role.
+3. Wire the communication through the correct mechanism (wave, command call, or model binding).
+
+See the `jrebirth-core` and `refactor-legacy` skills for the complete role map and migration order.

@@ -7,32 +7,39 @@ description: >-
 ---
 # Create Model
 
-Model owns state, bindings, and interaction logic. It is the brain of a feature.
+The Model is the brain of a feature. It owns state, maintains bindings, and orchestrates interactions between the View, Commands, Services, and Waves.
 
 ## Use when
 
-A feature needs state, bindings, selection, validation state, or UI orchestration.
+A feature needs any of the following:
 
-## Put in Model
+- Observable state that the View can bind to.
+- Selection, form, or filter state shared between components.
+- Validation flags or computed derived values.
+- Triggering Commands or Services in response to user intent or incoming waves.
 
-- JavaFX properties
-- computed bindings
-- selection, form, and filter state
-- validation flags
-- command or service triggering
+## What belongs in a Model
 
-## Keep out
+- JavaFX properties (`SimpleStringProperty`, `SimpleListProperty`, etc.).
+- Computed bindings derived from those properties.
+- Selection, form, and filter state.
+- Validation flags.
+- Logic that calls Commands (`callCommand(...)`) or Services.
+- Wave listeners annotated with `@OnWave`.
 
-- raw node construction
-- large backend logic
-- low-level controller event boilerplate
+## What does not belong in a Model
+
+- Raw scene graph node construction (belongs in the View).
+- Heavy backend logic or I/O (belongs in a Service).
+- Low-level UI event boilerplate (belongs in the Controller).
 
 ## Key API
 
-- extend `DefaultModel<M, V>`, or `DefaultFXMLModel<M>` when the view is FXML.
-- link sibling models with the `@Link` annotation.
-- set up bindings in `bind()`.
-- react to messages with `@OnWave(SomeWaves.WT)`; emit with `sendWave(...)`.
-- run actions with `callCommand(SomeCommand.class, WBuilder.waveData(ITEM, value))`.
+- Extend `DefaultModel<M, V>`, or `DefaultFXMLModel<M>` when the view is loaded from FXML.
+- Link sibling models with the `@Link` annotation.
+- Set up bindings in `bind()`.
+- React to incoming messages with `@OnWave(SomeWaves.WT)`.
+- Emit messages with `sendWave(...)`.
+- Run actions with `callCommand(SomeCommand.class, WBuilder.waveData(ITEM, value))`.
 
 Template: `templates/ModelTemplate.java.txt`.

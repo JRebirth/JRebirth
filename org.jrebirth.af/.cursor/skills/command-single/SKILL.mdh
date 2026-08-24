@@ -7,33 +7,36 @@ description: >-
 ---
 # Create Single Command
 
-A single command is one clear, named action.
+A single command encapsulates one clear, named action. It is stateless, short-lived, and does exactly one thing.
 
 ## Use when
 
-One explicit action must run and be named clearly:
+An explicit action must be run and named clearly:
 
-- save editor
-- refresh ranking
-- load one thing
-- open a detail screen
-- import a file
+- Save the editor content.
+- Refresh the ranking list.
+- Load a single item by ID.
+- Open a detail screen.
+- Import a file from disk.
+
+If the action has a clear name that a non-developer could understand, it belongs in a command.
 
 ## Key API
 
-- extend `DefaultCommand`; do the work in `perform(Wave)`.
-- use `DefaultUICommand` when the action must run on the JavaFX thread; `DefaultUndoableCommand` when it is undoable.
-- read payload with `wave.get(SomeWaves.ITEM)`.
+- Extend `DefaultCommand` and do the work in `perform(Wave)`.
+- Use `DefaultUICommand` when the action must run on the JavaFX thread (e.g., it updates a UI node directly).
+- Use `DefaultUndoableCommand` when the action must support undo/redo.
+- Read the payload from the wave with `wave.get(SomeWaves.ITEM)`.
 
 ## Invocation
 
-Trigger from any component (Model, Controller) with `callCommand`, never `getCommand(...).run(...)`, which bypasses the wave pipeline.
+Always trigger a command with `callCommand`, never `getCommand(...).run(...)` — direct invocation bypasses the wave pipeline and breaks the threading guarantees.
 
-- Single payload: define a `WaveItem<T>` on the command or a shared waves class, then `callCommand(FooCommand.class, WBuilder.waveData(FooCommand.ITEM, value))`. Avoid a dedicated `WaveBean` for one field.
-- Multiple fields: use a `WaveBean` with a static factory `FooWaveBean.of()` and fluent setters, then `callCommand(FooCommand.class, bean)`.
+- **Single payload:** define a `WaveItem<T>` on the command class or on a shared waves class, then call `callCommand(FooCommand.class, WBuilder.waveData(FooCommand.ITEM, value))`. Avoid a dedicated `WaveBean` for a single field.
+- **Multiple fields:** define a `WaveBean` with a static factory `FooWaveBean.of()` and fluent setters, then call `callCommand(FooCommand.class, bean)`.
 
-## Keep small
+## Keep it small
 
-If it starts orchestrating many async steps or backend concerns, pair it with a service.
+A single command should do one thing. If it starts orchestrating several async steps or direct backend concerns, pair it with a Service or split it into a multi command sequence.
 
 Template: `templates/SingleCommandTemplate.java.txt`.

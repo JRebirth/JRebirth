@@ -8,15 +8,19 @@ description: >-
 ---
 # Create JRebirth Maven Project
 
-Scaffold a Maven project that boots JRebirth cleanly and keeps MVC roles separated.
+Scaffold a Maven project that boots JRebirth cleanly, keeps MVC roles separated, and integrates correctly with JPMS.
 
-## Decide The Project Shape
+## Decide the project shape
 
-- For a repository module, inherit the nearest JRebirth parent POM and use `${project.version}` for JRebirth artifacts.
-- For a standalone app, use an explicit `jrebirth.version`, JavaFX dependencies, compiler configuration, and the JavaFX Maven plugin.
-- For a showcase module, follow the real examples in `showcase/demo` and `showcase/todos`.
+Before creating any files, choose the right shape:
 
-## Standard Files
+- **Repository module:** inherit the nearest JRebirth parent POM and use `${project.version}` for JRebirth artifacts. Do not hard-code versions.
+- **Standalone app:** use an explicit `jrebirth.version`, add JavaFX dependencies explicitly, configure the Maven compiler plugin, and add the JavaFX Maven plugin.
+- **Showcase module:** follow the real examples in `showcase/demo` and `showcase/todos` for the exact structure to copy.
+
+## Standard files
+
+Every new JRebirth module or application includes:
 
 - `pom.xml`
 - `src/main/java/module-info.java`
@@ -24,29 +28,28 @@ Scaffold a Maven project that boots JRebirth cleanly and keeps MVC roles separat
 - `src/main/java/<pkg>/ui/MainModel.java`
 - `src/main/java/<pkg>/ui/MainView.java`
 - `src/main/java/<pkg>/ui/MainController.java`
-- optional `src/main/java/<pkg>/resources/<App>Styles.java`
-- optional CSS/resource files under the matching package/resource path
+- Optional: `src/main/java/<pkg>/resources/<App>Styles.java`
+- Optional: CSS and resource files under the matching package or resource path.
 
 Templates live in `templates/`.
 
-## Required Dependencies
+## Required dependencies
 
 - `org.jrebirth.af:api`
 - `org.jrebirth.af:core`
-- `org.jrebirth.af:preloader` only when using JRebirth preloader startup.
-- `org.jrebirth.af:processor` as provided dependency or annotation processor when `ModuleStarter` generation is needed.
-- `javafx.controls`; add `javafx.fxml`, `javafx.web`, `javafx.media`, or `javafx.swing` only when the app uses them.
-- runtime logging such as `ch.qos.logback:logback-classic` for standalone apps.
+- `org.jrebirth.af:preloader` — only when using JRebirth preloader startup.
+- `org.jrebirth.af:processor` — as a provided dependency or annotation processor when `ModuleStarter` generation is needed.
+- `javafx.controls` — always required. Add `javafx.fxml`, `javafx.web`, `javafx.media`, or `javafx.swing` only when the application actually uses them.
+- A runtime logger such as `ch.qos.logback:logback-classic` for standalone apps.
 
-## JPMS Rules
+## JPMS rules
 
-- Use `open module ...` for the normal app/showcase path. It is simple and matches the showcase modules.
-- Export public app, UI, and resource packages as needed.
+- Use `open module ...` for the normal app or showcase path. It is the simplest approach and matches the showcase modules.
+- Export public application, UI, and resource packages as needed.
 - Require `org.jrebirth.af.api` and `org.jrebirth.af.core`.
-- Add `provides org.jrebirth.af.api.module.ModuleStarter with <pkg>.<Name>ModuleStarter;` for generated starter modules.
-- Do not hand-write `<Name>ModuleStarter`; the annotation processor generates it.
+- Add `provides org.jrebirth.af.api.module.ModuleStarter with <pkg>.<Name>ModuleStarter;` for the generated starter. Do not hand-write `<Name>ModuleStarter` — the annotation processor generates it.
 
-## MVC Scaffold
+## MVC scaffold
 
 - Application extends `DefaultApplication<StackPane>`.
 - `firstModelClass()` returns `MainModel.class`.
@@ -54,14 +57,15 @@ Templates live in `templates/`.
 - View extends `DefaultView<MainModel, BorderPane, MainController>` and builds JavaFX nodes.
 - Controller extends `DefaultController<MainModel, MainView>` and wires events to model calls, commands, services, or waves.
 
-## Checks
+## Checks before finishing
 
-- Keep business logic out of View and Controller.
+- Keep business logic out of the View and Controller.
 - Do not use raw threads or `Platform.runLater` as architecture.
-- Keep package names, module name, resource base path, and generated starter name consistent.
-- In this repository, verify with `mvn clean install -Dmaven.test.skip=true`; for a standalone generated project, use `mvn clean package`.
-- Launch a standalone JavaFX application with `mvn javafx:run`.
+- Keep the package names, module name, resource base path, and generated starter name consistent with each other.
+- In this repository, verify the build with `mvn clean install -Dmaven.test.skip=true`.
+- For a standalone generated project, verify with `mvn clean package`.
+- Launch a standalone app with `mvn javafx:run`.
 - Launch a repository module with `mvn javafx:run -pl <module-path> -Djavafx.mainClass=<module>/<appClass>`.
-- After creating an application, tell the user the exact build command and the exact launch command for that generated project.
+- After creating an application, always tell the user the exact build command and the exact launch command for the generated project, with the correct module name and class filled in.
 
 Use `reference.md` for project variants and `templates/` for scaffold files.

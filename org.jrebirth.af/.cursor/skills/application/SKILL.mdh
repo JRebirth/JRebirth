@@ -7,29 +7,32 @@ description: >-
 ---
 # Create Application
 
-The Application is the entry point only. It boots and configures the shell.
+The Application class is the entry point and nothing more. It boots the JRebirth runtime, configures the shell (stage, scene, global CSS), and hands control to the first Model. All feature logic lives elsewhere.
 
-## Keep here
+## What belongs here
 
-- bootstrap and launch flow
-- first model selection
-- stage title, icons, and shell configuration
-- scene customization and global CSS
+- Bootstrap and launch flow (`preloadAndLaunch(args)` in `main`).
+- The choice of the first Model class, returned by `firstModelClass()`.
+- Stage title and window icon configuration.
+- Scene customization and global CSS stylesheets.
+- The list of resources to preload before the UI appears.
 
-## Keep out
+## What does not belong here
 
-- business logic
-- feature orchestration
-- controller-style event code
-- backend access
+- Business logic of any kind.
+- Feature orchestration or state management.
+- Controller-style event handling.
+- Direct backend or service access.
+
+If you find yourself adding any of these, move them to the appropriate role (Model, Command, or Service).
 
 ## Key API
 
-- extend `DefaultApplication<StackPane>` (or the chosen root pane type).
-- choose the entry model in `firstModelClass()`.
-- set the title in `applicationTitle()`.
-- add global stylesheets in `customizeScene(scene)` with `addCSS(scene, SomeStyles.DEFAULT)`.
-- tune the window in `customizeStage(stage)`.
-- list preloaded resources in `getResourceToPreload()`.
+- Extend `DefaultApplication<StackPane>` (or whichever root pane type the shell uses).
+- Return the first Model class from `firstModelClass()`.
+- Set the window title in `applicationTitle()`.
+- Add global stylesheets in `customizeScene(scene)` with `addCSS(scene, SomeStyles.DEFAULT)`.
+- Tune the window in `customizeStage(stage)`.
+- List resources to preload in `getResourceToPreload()`.
 
 Template: `templates/ApplicationTemplate.java.txt`.

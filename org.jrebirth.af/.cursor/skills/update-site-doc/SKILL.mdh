@@ -8,27 +8,28 @@ description: >-
 ---
 # Update JRebirth Site Documentation
 
-Keep the Maven Site docs in sync with framework code.
+Keep the Maven Site documentation in sync whenever framework code changes. Documentation that drifts from the code confuses contributors and users.
 
 ## Location
 
-All doc pages live under `org.jrebirth.af/src/site/markdown/doc/`.
-Format: Markdown plus Velocity (`.md.vm`).
+All documentation pages live under `org.jrebirth.af/src/site/markdown/doc/`.
 
-## Sync checklist (when code changes)
+The format is Markdown with Velocity (`.md.vm`). Velocity macros control navigation, table of contents, and live code snippet includes.
 
-1. Identify which doc page covers the changed module or feature.
-2. If no page exists, create one.
+## Sync checklist (run through this when code changes)
+
+1. Identify which documentation page covers the changed module or feature. Use the module-to-page map in `reference.md`.
+2. If no page covers the change, create a new one.
 3. Update or add `MACRO{include}` snippets pointing to the changed source files.
-4. Verify snippet selectors still match; method or class renames break `aj:` selectors.
-5. Update prose to reflect new behavior, parameters, or annotations.
+4. Verify that snippet selectors still match. Method or class renames break `aj:` selectors — update them.
+5. Update the prose to reflect new behavior, new parameters, or changed annotations.
 6. If a new module is added, also update `TocList.vm`, `site.xml`, and `jrebirth-book.xml`.
 
 ## Style rules
 
-- write clear, direct prose; avoid filler.
-- use `**bold**` for a class or annotation name on first mention.
-- keep code snippets from real source via `MACRO{include}`, not hand-written.
-- body content goes inside a `#[[ ]]#` block to prevent Velocity parsing.
+- Write clear, direct prose. Avoid filler phrases like "it is important to note that" or "please be aware".
+- Use `**bold**` for a class or annotation name on its first mention in a section.
+- Keep code snippets sourced from real files via `MACRO{include}` rather than hand-written. This ensures examples stay accurate when the code changes.
+- Place body content inside a `#[[ ]]#` block to prevent Velocity from parsing it.
 
 For the page template, snippet selector syntax, new-page steps, and the module-to-page map, see `reference.md`.

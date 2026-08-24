@@ -1,48 +1,48 @@
-# Caveman skills convention
+# Caveman Skills Convention
 
-This `.cursor` tree keeps two layers for every rule and skill document.
+This `.cursor` tree keeps two layers for every rule and skill document. This convention lets humans maintain readable, well-explained source files while the agent works from compact, token-minimal copies.
 
 ## Layers
 
-- `*.mdh` (markdown-human) is the **source of truth**. Write normal, readable English here.
-- The Cursor-facing file is **generated** and token-minimal ("caveman"). Never edit it by hand.
+- `*.mdh` (markdown-human) is the **source of truth**. Write normal, readable English here. This is the file you edit when you want to update rules or skills.
+- The Cursor-facing file is **generated** and token-minimal ("caveman"). Never edit it by hand — run the generator instead.
 
 ## Generation map
 
-The generator picks the output extension from the location of the source:
+The generator picks the output extension based on the location of the source file:
 
-- a `*.mdh` under `.cursor/rules/` compiles to `*.mdc` (a Cursor rule).
-- any other `*.mdh` compiles to `*.md` (`SKILL.md`, `reference.md`, this doc, etc.).
+- A `*.mdh` under `.cursor/rules/` compiles to `*.mdc` — a Cursor rule file with a YAML frontmatter header.
+- Any other `*.mdh` compiles to `*.md` — a skill file, reference file, or tool documentation file (e.g., `SKILL.md`, `reference.md`).
 
-## What is preserved
+## What is preserved verbatim
 
-The squeeze only touches plain prose. These are kept verbatim:
+The squeeze only touches plain prose. These are kept exactly as written:
 
-- YAML frontmatter (so rule `description`/`globs` and skill `name`/`description` still match).
-- fenced code blocks and inline `code`.
-- markdown links and tables.
-- identifiers, CamelCase, ALLCAPS, symbols, numbers.
-- negations and logic words: no, not, never, if, then, when, use, make, put, keep, move.
+- YAML frontmatter, so rule `description`/`globs` and skill `name`/`description` remain correct.
+- Fenced code blocks and inline `code` spans.
+- Markdown links and tables.
+- Identifiers, CamelCase names, ALLCAPS constants, symbols, and numbers.
+- Negations and logic words: no, not, never, if, then, when, use, make, put, keep, move.
 
-Only articles, copulas, and filler prepositions are dropped, and plain words are lowercased.
+Only articles, copulas, and filler prepositions are dropped. Plain prose words are lowercased.
 
 ## Workflow
 
-1. Edit the relevant `*.mdh` source.
-2. Run the generator from the repo so siblings refresh.
+1. Edit the relevant `*.mdh` source file.
+2. Run the generator from the repository root so all siblings are refreshed at once.
 3. Commit both the `*.mdh` source and the generated file together.
 
 ```bash
 py .cursor/tools/cavemanize.py
 ```
 
-Verify nothing is stale (good for a pre-commit or CI check):
+Verify that no output is stale (useful as a pre-commit check or in CI):
 
 ```bash
 py .cursor/tools/cavemanize.py --check
 ```
 
-Process a single source:
+Process a single source file:
 
 ```bash
 py .cursor/tools/cavemanize.py --file .cursor/skills/model/SKILL.mdh

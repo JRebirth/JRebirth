@@ -6,27 +6,27 @@ description: >-
 ---
 # Create View
 
-View builds nodes and composes the scene graph cleanly.
+The View builds the scene graph and composes the visual structure of a feature. It is a pure rendering role: it constructs nodes, binds controls to Model properties, and exposes action controls for the Controller to wire.
 
-## Put in View
+## What belongs in a View
 
-- panes, controls, labels, tables, forms
-- visual structure
-- simple binding hookup to model properties
-- styling hooks
+- Panes, controls, labels, tables, forms, and other JavaFX nodes.
+- Visual structure and layout composition.
+- Simple binding hookup to Model properties (e.g., `label.textProperty().bind(model().nameProperty())`).
+- Styling hooks such as CSS class assignments.
 
-## Keep out
+## What does not belong in a View
 
-- business rules
-- persistent or complex state
-- persistence and backend calls
-- heavy imperative workflow
+- Business rules or validation logic (belongs in the Model).
+- Persistent or complex state (belongs in the Model).
+- Persistence and backend calls (belong in a Service).
+- Heavy imperative workflow or multi-step orchestration (belongs in a Command).
 
 ## Key API
 
-- extend `DefaultView<M, Pane, C>`; build nodes in `initView()`; expose controls with package accessors.
-- annotate action controls with `@OnAction` so the Controller receives events.
-- attach view-local stylesheets with `addCSS(StyleSheetItem)` from the view (adds to `pane().getStylesheets()`).
-- build the item with `Resources.create(new StyleSheet("basename"))`, plus `.module(...)` when needed. This is the one-argument form; the `addCSS(scene, ...)` form stays in the Application.
+- Extend `DefaultView<M, Pane, C>`. Build all nodes in `initView()`. Expose controls via package-private accessors so the Controller can wire them.
+- Annotate action controls with `@OnAction` so the Controller receives those events automatically.
+- Attach a view-local stylesheet with `addCSS(StyleSheetItem)` from inside the View. This adds the stylesheet to `pane().getStylesheets()`.
+- Build the `StyleSheetItem` with `Resources.create(new StyleSheet("basename"))`. Add `.module(...)` when the resource is in a different module. Use the one-argument `addCSS(StyleSheetItem)` form here; the two-argument `addCSS(scene, ...)` form is for the Application only.
 
 Template: `templates/ViewTemplate.java.txt`.

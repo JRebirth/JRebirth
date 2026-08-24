@@ -8,27 +8,27 @@ description: >-
 
 # Create View
 
-View builds nodes composes scene graph cleanly
+The View builds scene graph composes visual structure feature It pure rendering role: constructs nodes binds controls Model properties exposes action controls Controller wire
 
-## Put View
+## What belongs View
 
-- panes controls labels tables forms
-- visual structure
-- simple binding hookup model properties
-- styling hooks
+- Panes, controls labels tables forms other JavaFX nodes
+- Visual structure layout composition
+- Simple binding hookup Model properties (e.g., `label.textProperty().bind(model().nameProperty())`).
+- Styling hooks such CSS class assignments
 
-## Keep out
+## What does not belong View
 
-- business rules
-- persistent or complex state
-- persistence backend calls
-- heavy imperative workflow
+- Business rules or validation logic (belongs Model)
+- Persistent or complex state (belongs Model)
+- Persistence backend calls (belong Service)
+- Heavy imperative workflow or multi-step orchestration (belongs Command)
 
 ## Key API
 
-- extend `DefaultView<M, Pane, C>`; build nodes `initView()`; expose controls package accessors
-- annotate action controls `@OnAction` so Controller receives events
-- attach view-local stylesheets `addCSS(StyleSheetItem)` view (adds `pane().getStylesheets()`).
-- build item `Resources.create(new StyleSheet("basename"))`, plus `.module(...)` when needed This one-argument form `addCSS(scene, ...)` form stays Application
+- Extend `DefaultView<M, Pane, C>`. Build all nodes `initView()`. Expose controls via package-private accessors so Controller can wire them
+- Annotate action controls `@OnAction` so Controller receives events automatically
+- Attach view-local stylesheet `addCSS(StyleSheetItem)` inside View This adds stylesheet `pane().getStylesheets()`.
+- Build `StyleSheetItem` `Resources.create(new StyleSheet("basename"))`. Add `.module(...)` when resource different module Use one-argument `addCSS(StyleSheetItem)` form here two-argument `addCSS(scene, ...)` form Application only
 
 Template: `templates/ViewTemplate.java.txt`.

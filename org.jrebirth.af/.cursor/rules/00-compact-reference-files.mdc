@@ -4,12 +4,58 @@ alwaysApply: true
 ---
 <!-- gen .mdh -->
 
-# Compact reference files
+# Compact Reference Files
 
-Use compact files first to save context.
+This repository keeps two layers every rule skill document so humans can write review readable prose while agent works minimal token-efficient copy
 
-- `.mdc` rules are compact model-facing rules.
-- `SKILL.md` and other `.md` skill/reference files are compact model-facing files.
-- `.mdh` files are human-readable source/counterpart files.
+- `*.mdh` (markdown-human) source truth Write normal readable English here This file edit
+- The Cursor-facing file (`.mdc` rules `.md` skills) generated token-minimal ("caveman") Never edit hand run generator instead
 
-When both compact and human files exist, read `.mdc` or `.md` during normal agent work. Open `.mdh` only when explicitly editing human prose or when compact content is insufficient.
+## Why two layers?
+
+Agents consume many files single context window Compact files reduce token usage without losing meaning Humans need full prose understand intent spot errors maintain content over time The two layers serve different audiences without duplicating effort
+
+## Generation map
+
+The generator derives output path location source:
+
+- `*.mdh` under `.cursor/rules/` compiles `*.mdc` (a Cursor rule YAML frontmatter header)
+- any other `*.mdh` compiles `*.md` (a skill file reference file or tool doc)
+
+## What preserved verbatim
+
+The squeeze only touches plain prose words These kept exactly written:
+
+- YAML frontmatter so rule `description`/`globs` skill `name`/`description` remain unchanged
+- Fenced code blocks inline `code` spans
+- Markdown links tables
+- Identifiers, CamelCase names ALLCAPS constants symbols numbers
+- Negations logic words: no not never if then when use make put keep move
+
+Articles, copulas filler prepositions dropped Plain prose words lowercased
+
+## Workflow
+
+1. Edit relevant `*.mdh` source file
+2. Run generator repo root so all siblings refreshed
+3. Commit both `*.mdh` source generated file together
+
+```bash
+py .cursor/tools/cavemanize.py
+```
+
+Verify no output stale (useful pre-commit check or CI):
+
+```bash
+py .cursor/tools/cavemanize.py --check
+```
+
+Process single source file:
+
+```bash
+py .cursor/tools/cavemanize.py --file .cursor/skills/model/SKILL.mdh
+```
+
+## Reading rule agents
+
+When both compact human files exist read `.mdc` or `.md` during normal agent work Open `.mdh` only when explicitly editing human-readable prose or when compact content not sufficient complete task safely

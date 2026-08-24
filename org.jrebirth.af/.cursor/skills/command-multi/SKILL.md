@@ -9,23 +9,23 @@ description: >-
 
 # Create Multi Command
 
-A multi command named sequence smaller commands
+A multi command named sequence smaller commands It coordinates ordered chain existing commands without adding logic own
 
 ## Use when
 
-A feature needs one user action trigger several existing commands known order
+One user action must trigger several existing commands fixed known order Examples: "save publish" (SaveCommand → PublishCommand), "reset reload" (ClearCommand → LoadCommand)
 
 ## Good case
 
-Compose existing commands ordered chain
+Composing two or more already-written commands single named chain The multi command itself contains no business logic — only declares order
 
 ## Bad case
 
-Using multi command giant dumping ground everything
+Using multi command dumping ground ad-hoc logic If find yourself adding `if` statements or data transformation inside multi command split logic smaller single commands first
 
 ## Key API
 
-- extend multi command base declare chain command classes run order
-- pass shared data through wave or `WaveBean`.
+- Extend multi command base class declare ordered list command classes run
+- Pass shared data between commands through wave or `WaveBean` attached triggering wave
 
 Template: `templates/MultiCommandTemplate.java.txt`.

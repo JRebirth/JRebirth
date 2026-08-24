@@ -5,23 +5,47 @@ description: >-
   Use when a new self-contained UI unit needs Model, View, Controller, and
   optionally Commands, Services, and Waves.
 ---
-# Create full MVC feature
+# Create Full MVC Feature
 
-A new screen, editor, dashboard, or panel needs its own coherent JRebirth structure.
+A new screen, editor, dashboard, or panel is a self-contained JRebirth unit. Build it with a coherent structure from the start so it stays maintainable as it grows.
 
 ## Standard pack
 
-- Model
-- View
-- Controller
-- one or more Commands if named actions exist
-- one or more Services if external or slow work exists
-- Waves only if decoupled messaging is needed
+Every feature needs at minimum:
 
-## Order
+- **Model** — owns state, bindings, and orchestration.
+- **View** — builds scene graph nodes and exposes controls to the Controller.
+- **Controller** — wires user gestures to Model calls, Commands, or Services.
 
-Start with the Model contract, then the View skeleton, then Controller wiring, then Commands and Services.
+Add these only when the feature genuinely needs them:
 
-Use the per-role skills (model, view, controller, command-single, command-multi, service, waves) for each part.
+- **Commands** — one per named, explicit action (save, delete, navigate).
+- **Services** — one per external, slow, or integration boundary.
+- **Waves** — only when communication with another feature must be decoupled.
 
-Reference: `reference.md` contains the wB-CSMVC diagram and role direction rules. Use `wb-csmvc-diagram.svg` when Mermaid rendering is not available.
+## Creation order
+
+Always define the roles in this order so each layer can be built on the one before it:
+
+1. Define the Model contract: what state does this feature own? What properties and bindings does it expose?
+2. Build the View scene graph skeleton and expose only the controls the Controller will need.
+3. Wire gestures in the Controller and delegate to the Model or Commands.
+4. Add Commands for each explicit action.
+5. Add Services for external or long-running work.
+6. Add Waves only where cross-feature, decoupled communication is necessary.
+
+## Per-role skills
+
+Use the dedicated skill for each role you are creating:
+
+- Model → `model` skill
+- View → `view` skill
+- Controller → `controller` skill
+- Single command → `command-single` skill
+- Ordered command chain → `command-multi` skill
+- Service → `service` skill
+- Waves → `waves` skill
+
+## Reference
+
+`reference.md` contains the wB-CSMVC flow diagram and the direction rules. Open `wb-csmvc-diagram.svg` when Mermaid rendering is not available.

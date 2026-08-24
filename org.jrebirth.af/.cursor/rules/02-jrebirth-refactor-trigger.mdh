@@ -4,15 +4,29 @@ globs:
   - "**/*.java"
 alwaysApply: false
 ---
-# Refactor trigger
+# Refactor Trigger
 
-When a file smells like legacy JavaFX living inside a JRebirth application, restructure it step by step:
+When a Java file looks like legacy JavaFX living inside a JRebirth application — a class that mixes state, scene graph nodes, event handlers, and business logic — do not edit it piecemeal. Restructure it step by step using the JRebirth role split.
 
-- identify which part of the JRebirth role split is missing.
-- move the state into the Model.
-- move the node creation into the View.
-- move the event wiring into the Controller.
-- move the actions into a Command or a Service.
-- move the cross-feature messaging into the Waves.
+## Signs that a file needs refactoring
 
-Use the legacy refactor skill before you edit many files at once.
+- A single class holds fields for both UI nodes and application state.
+- Event handlers contain business logic instead of delegating to a Model or Command.
+- `Platform.runLater` or raw threads appear in the middle of feature code.
+- The class directly reads or writes a database, REST endpoint, or file.
+
+## Refactor steps
+
+1. Identify which part of the JRebirth role split is missing or misplaced.
+2. Move application state and bindings into the Model.
+3. Move scene graph node construction into the View.
+4. Move event wiring and gesture translation into the Controller.
+5. Extract explicit actions into Commands.
+6. Extract slow, external, or backend work into Services.
+7. Introduce Waves only where cross-feature communication is genuinely decoupled.
+
+## Safety rule
+
+Refactor incrementally. Split the work into small, reviewable steps so each change can be understood and verified independently. Do not rewrite everything in one pass.
+
+Use the `refactor-legacy` skill before editing many files at once.

@@ -5,17 +5,30 @@ description: >-
   Use before editing many files in an old JavaFX feature, or when a class mixes
   state, nodes, events, and actions.
 ---
-# Refactor legacy JavaFX to JRebirth
+# Refactor Legacy JavaFX to JRebirth
+
+Use this skill before touching a class that mixes responsibilities — state, node construction, event handling, and backend calls all in one place. Jumping straight into edits without a plan leads to larger and messier code.
+
+## When to use this skill
+
+- A class has fields for both UI nodes and application state.
+- A class handles events and also calls a REST endpoint or database.
+- A class uses `Platform.runLater` or raw `Thread` for routine work.
+- A feature has no clear Model, View, Controller split.
 
 ## Migration order
 
-1. Identify UI state and move it to Model.
-2. Isolate node construction into View.
-3. Move event hookup into Controller.
-4. Extract explicit actions into Commands.
-5. Extract slow or external work into Services.
-6. Introduce Waves only where decoupling is useful.
+Work through these steps in order. Complete each step before moving to the next one.
+
+1. **Extract UI state to a Model.** Move all application-level fields (lists, selections, form values, flags) to a new or existing Model as JavaFX properties. Bind the UI controls to those properties.
+2. **Isolate node construction into a View.** Move scene graph construction and layout into a View class. The View should only build nodes and expose the controls the Controller needs.
+3. **Move event hookup into a Controller.** Wire button clicks, key handlers, and selection listeners in the Controller. Each handler should be one or two lines that delegate to the Model or a Command.
+4. **Extract explicit actions into Commands.** Each named action (save, delete, navigate, import) becomes its own Command class. Replace inline logic with `callCommand(...)`.
+5. **Extract slow or external work into Services.** Any call that touches a database, REST endpoint, file, or runs for more than a few milliseconds belongs in a Service.
+6. **Introduce Waves for cross-feature communication.** Replace direct component-to-component calls with Waves only where decoupling is genuinely useful.
 
 ## Safety rule
 
-Refactor incrementally, not by rewriting everything blindly.
+Refactor incrementally. Complete and verify one step before starting the next. Each step should produce a working, testable state. Do not rewrite the entire class in one pass — the risk of introducing bugs is much higher, and the changes become too large to review.
+
+See the `anti-patterns` skill to recognize specific problems before you start.

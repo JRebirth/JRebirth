@@ -1,10 +1,12 @@
-# JRebirth Maven project reference
-
 <!-- gen .mdh -->
 
-## Repo module POM
+# JRebirth Maven Project Reference
 
-Use parent inheritance inside this repo.
+This reference gives exact shapes use when creating Maven project or module uses JRebirth AF
+
+## Repository Module POM
+
+Inside repository prefer parent inheritance `${project.version}` instead hard-coded JRebirth versions
 
 ```xml
 <parent>
@@ -15,7 +17,7 @@ Use parent inheritance inside this repo.
 </parent>
 ```
 
-Minimum dependencies:
+Minimum dependencies JRebirth module:
 
 ```xml
 <dependency>
@@ -31,9 +33,9 @@ Minimum dependencies:
 </dependency>
 ```
 
-## Standalone POM shape
+## Standalone POM Shape
 
-Use explicit versions and JavaFX plugin.
+For standalone project use explicit versions configure JavaFX Maven plugin
 
 ```xml
 <properties>
@@ -46,35 +48,37 @@ Use explicit versions and JavaFX plugin.
 </properties>
 ```
 
-Add `org.jrebirth.af:api`, `core`, optional `preloader`, `processor` provided, `org.openjfx:javafx-controls`, and `logback-classic`.
+Add `org.jrebirth.af:api`, `org.jrebirth.af:core`, optional `org.jrebirth.af:preloader`, `org.jrebirth.af:processor` provided scope `org.openjfx:javafx-controls`, runtime logger such `logback-classic`.
 
-## Build and launch
+## Build And Launch
 
-Standalone app:
+For standalone generated application:
 
 ```bash
 mvn clean package
 mvn javafx:run
 ```
 
-Repo module:
+For application module inside repository:
 
 ```bash
 mvn clean install -Dmaven.test.skip=true
 mvn javafx:run -pl <module-path> -Djavafx.mainClass=<module>/<appClass>
 ```
 
-Showcase demo example:
+For example showcase demo can launched with:
 
 ```bash
 mvn javafx:run -pl showcase/demo -Djavafx.mainClass=org.jrebirth.af.showcase.demo/org.jrebirth.af.showcase.demo.JRebirthDemo
 ```
 
-On Linux/Cloud with Xvfb, prefix launch with `DISPLAY=:1`. On Windows PowerShell, no `DISPLAY` prefix.
+On Linux or Cloud Agent VM Xvfb, prefix launch command `DISPLAY=:1`. On Windows PowerShell, do not use `DISPLAY` prefix
 
-After scaffolding, report exact commands with placeholders resolved.
+After scaffolding project agent should always report exact build command exact launch command generated module name module path application class filled in
 
 ## module-info.java
+
+Use `open module` ordinary application case so JRebirth can instantiate components reflectively
 
 ```java
 open module com.example.app {
@@ -90,6 +94,8 @@ open module com.example.app {
     requires org.jrebirth.af.core;
 }
 ```
+
+`ExampleModuleStarter` generated annotation processor Do not hand-write it
 
 ## Application
 
@@ -118,7 +124,7 @@ public final class ExampleApplication extends DefaultApplication<StackPane> {
 }
 ```
 
-## MVC skeleton
+## MVC Skeleton
 
 ```java
 public final class MainModel extends DefaultModel<MainModel, MainView> {
@@ -160,7 +166,7 @@ public enum ExampleStyles implements StyleSheetEnum {
 }
 ```
 
-Real examples:
+Real examples inspect before changing similar project:
 
 - `showcase/demo/src/main/java/org/jrebirth/af/showcase/demo/JRebirthDemo.java`
 - `showcase/demo/src/main/java/org/jrebirth/af/showcase/demo/ui/MainModel.java`

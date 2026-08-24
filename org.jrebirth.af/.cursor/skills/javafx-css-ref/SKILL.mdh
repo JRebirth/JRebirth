@@ -5,24 +5,28 @@ description: >-
   the official reference. Use when the user asks to validate or fix JavaFX CSS
   or inline JavaFX styles.
 ---
-# JavaFX CSS reference checker
+# JavaFX CSS Reference Checker
 
-Use when the user asks to verify JavaFX CSS rules against official documentation.
+Use this skill when the user asks to verify, fix, or validate JavaFX CSS rules against the official JavaFX CSS documentation. JavaFX CSS is not standard web CSS — properties, selectors, and value syntax differ significantly.
 
 ## Source of truth
 
+The official JavaFX CSS reference is available at:
+
 - https://openjfx.io/javadoc/26/javafx.graphics/javafx/scene/doc-files/cssref.html
+
+Always fetch the live reference page rather than relying on training data, since the reference changes between JavaFX versions.
 
 ## Workflow
 
-1. Read the target CSS or inline JavaFX style from the user files.
-2. Fetch the JavaFX CSS reference page.
-3. Check each requested rule against the reference: selector validity, property name, value syntax, and control-specific scope.
-4. Return findings in three blocks: valid, invalid or doubtful, concrete corrections.
-5. If the version is ambiguous, ask which JavaFX version to target; default to the reference URL version.
+1. Read the target CSS file or inline JavaFX style from the user's files.
+2. Fetch the JavaFX CSS reference page at the URL above.
+3. Check each rule against the reference: selector validity, property name spelling, value syntax, and whether the property applies to the control type being styled.
+4. Report findings in three blocks: **valid** rules, **invalid or doubtful** rules with reasons, and **concrete corrections** with corrected CSS.
+5. If the JavaFX version is ambiguous, ask which version to target. Default to the version in the reference URL.
 
 ## Output style
 
-- keep answers short and actionable.
-- quote the exact CSS fragment when reporting an issue.
-- prefer minimal corrections that preserve user intent.
+- Keep answers short and actionable.
+- Quote the exact CSS fragment when reporting an issue.
+- Prefer minimal corrections that preserve the user's intent.

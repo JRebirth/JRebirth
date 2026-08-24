@@ -7,24 +7,28 @@ description: >-
 ---
 <!-- gen .mdh -->
 
-# JavaFX CSS reference checker
+# JavaFX CSS Reference Checker
 
-Use when user asks verify JavaFX CSS rules against official documentation
+Use skill when user asks verify fix or validate JavaFX CSS rules against official JavaFX CSS documentation JavaFX CSS not standard web CSS — properties selectors value syntax differ significantly
 
 ## Source truth
 
+The official JavaFX CSS reference available at:
+
 - https://openjfx.io/javadoc/26/javafx.graphics/javafx/scene/doc-files/cssref.html
+
+Always fetch live reference page rather than relying training data since reference changes between JavaFX versions
 
 ## Workflow
 
-1. Read target CSS or inline JavaFX style user files
-2. Fetch JavaFX CSS reference page
-3. Check each requested rule against reference: selector validity property name value syntax control-specific scope
-4. Return findings three blocks: valid invalid or doubtful concrete corrections
-5. If version ambiguous ask JavaFX version target default reference URL version
+1. Read target CSS file or inline JavaFX style user's files
+2. Fetch JavaFX CSS reference page URL above
+3. Check each rule against reference: selector validity property name spelling value syntax whether property applies control type styled
+4. Report findings three blocks: valid rules invalid or doubtful rules reasons concrete corrections corrected CSS
+5. If JavaFX version ambiguous ask version target Default version reference URL
 
 ## Output style
 
-- keep answers short actionable
-- quote exact CSS fragment when reporting issue
-- prefer minimal corrections preserve user intent
+- Keep answers short actionable
+- Quote exact CSS fragment when reporting issue
+- Prefer minimal corrections preserve user's intent

@@ -9,33 +9,36 @@ description: >-
 
 # Create Single Command
 
-A single command one clear named action
+A single command encapsulates one clear named action It stateless short-lived, does exactly one thing
 
 ## Use when
 
-One explicit action must run named clearly:
+An explicit action must run named clearly:
 
-- save editor
-- refresh ranking
-- load one thing
-- open detail screen
-- import file
+- Save editor content
+- Refresh ranking list
+- Load single item ID
+- Open detail screen
+- Import file disk
+
+If action has clear name non-developer could understand belongs command
 
 ## Key API
 
-- extend `DefaultCommand`; do work `perform(Wave)`.
-- use `DefaultUICommand` when action must run JavaFX thread `DefaultUndoableCommand` when undoable
-- read payload `wave.get(SomeWaves.ITEM)`.
+- Extend `DefaultCommand` do work `perform(Wave)`.
+- Use `DefaultUICommand` when action must run JavaFX thread (e.g., updates UI node directly)
+- Use `DefaultUndoableCommand` when action must support undo/redo
+- Read payload wave `wave.get(SomeWaves.ITEM)`.
 
 ## Invocation
 
-Trigger any component (Model, Controller) `callCommand`, never `getCommand(...).run(...)`, bypasses wave pipeline
+Always trigger command `callCommand`, never `getCommand(...).run(...)` — direct invocation bypasses wave pipeline breaks threading guarantees
 
-- Single payload: define `WaveItem<T>` command or shared waves class then `callCommand(FooCommand.class, WBuilder.waveData(FooCommand.ITEM, value))`. Avoid dedicated `WaveBean` one field
-- Multiple fields: use `WaveBean` static factory `FooWaveBean.of()` fluent setters then `callCommand(FooCommand.class, bean)`.
+- Single payload: define `WaveItem<T>` command class or shared waves class then call `callCommand(FooCommand.class, WBuilder.waveData(FooCommand.ITEM, value))`. Avoid dedicated `WaveBean` single field
+- Multiple fields: define `WaveBean` static factory `FooWaveBean.of()` fluent setters then call `callCommand(FooCommand.class, bean)`.
 
 ## Keep small
 
-If starts orchestrating many async steps or backend concerns pair service
+A single command should do one thing If starts orchestrating several async steps or direct backend concerns pair Service or split multi command sequence
 
 Template: `templates/SingleCommandTemplate.java.txt`.

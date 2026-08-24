@@ -9,32 +9,39 @@ description: >-
 
 # Create Model
 
-Model owns state bindings interaction logic It brain feature
+The Model brain feature It owns state maintains bindings orchestrates interactions between View, Commands, Services, Waves
 
 ## Use when
 
-A feature needs state bindings selection validation state or UI orchestration
+A feature needs any following:
 
-## Put Model
+- Observable state View can bind to
+- Selection, form or filter state shared between components
+- Validation flags or computed derived values
+- Triggering Commands or Services response user intent or incoming waves
 
-- JavaFX properties
-- computed bindings
-- selection form filter state
-- validation flags
-- command or service triggering
+## What belongs Model
 
-## Keep out
+- JavaFX properties (`SimpleStringProperty`, `SimpleListProperty`, etc.)
+- Computed bindings derived properties
+- Selection, form filter state
+- Validation flags
+- Logic calls Commands (`callCommand(...)`) or Services
+- Wave listeners annotated `@OnWave`.
 
-- raw node construction
-- large backend logic
-- low-level controller event boilerplate
+## What does not belong Model
+
+- Raw scene graph node construction (belongs View)
+- Heavy backend logic or I/O (belongs Service)
+- Low-level UI event boilerplate (belongs Controller)
 
 ## Key API
 
-- extend `DefaultModel<M, V>`, or `DefaultFXMLModel<M>` when view FXML
-- link sibling models `@Link` annotation
-- set up bindings `bind()`.
-- react messages `@OnWave(SomeWaves.WT)`; emit `sendWave(...)`.
-- run actions `callCommand(SomeCommand.class, WBuilder.waveData(ITEM, value))`.
+- Extend `DefaultModel<M, V>`, or `DefaultFXMLModel<M>` when view loaded FXML
+- Link sibling models `@Link` annotation
+- Set up bindings `bind()`.
+- React incoming messages `@OnWave(SomeWaves.WT)`.
+- Emit messages `sendWave(...)`.
+- Run actions `callCommand(SomeCommand.class, WBuilder.waveData(ITEM, value))`.
 
 Template: `templates/ModelTemplate.java.txt`.

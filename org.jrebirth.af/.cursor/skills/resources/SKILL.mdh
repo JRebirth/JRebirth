@@ -7,19 +7,19 @@ description: >-
 ---
 # Create Resources
 
-Centralize shared UI resources and avoid magic constants.
+Centralize shared UI resources using typed JRebirth resource enums and items. Avoid magic constant strings and raw `getResource("/path")` calls, which break under JPMS and are invisible to the compiler.
 
 ## Typical content
 
-- label and text keys
-- image and icon references
-- CSS references
-- spacing, sizes, and colors
+- Label and text keys for internationalized or shared strings.
+- Image and icon references.
+- CSS stylesheet references.
+- Spacing, size, and color constants.
 
 ## Key API
 
-- images: an enum implementing `ImageEnum`, each entry calling `rel("basename", ImageExtension.PNG)`; read with `.get()`.
-- styles: a `StyleSheetItem` from `Resources.create(new StyleSheet("Main"))`.
-- prefer typed resource enums over raw `getResource("/path")` strings, so JPMS module access stays correct.
+- **Images:** create an enum implementing `ImageEnum`. Each entry calls `rel("basename", ImageExtension.PNG)`. Load the image at runtime with `.get()`.
+- **Stylesheets:** create a `StyleSheetItem` with `Resources.create(new StyleSheet("Main"))`. Attach it to a View with `addCSS(StyleSheetItem)` or to the Application scene with `addCSS(scene, StyleSheetItem)`.
+- Prefer typed resource enums over raw `getResource("/path")` strings everywhere, so that JPMS module access remains correct and paths are validated at compile time.
 
 Template: `templates/ResourcesTemplate.java.txt`.

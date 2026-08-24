@@ -7,24 +7,25 @@ description: >-
 ---
 # Use Waves
 
-Waves send messages between decoupled parts without tight direct dependencies.
+Waves carry typed messages between components that should not know about each other directly. Use them to decouple communication across feature boundaries.
 
 ## Good uses
 
-- cross-feature notifications
-- app-wide refresh triggers
-- decoupled orchestration
+- Cross-feature notifications (e.g., "an item was deleted" broadcast to multiple listeners).
+- App-wide refresh triggers when several components need to react to the same event.
+- Decoupled orchestration where the sender must not depend on the receiver.
 
 ## Bad uses
 
-- a local call that could be a normal method
-- replacing every direct collaboration with message passing
+- Replacing every direct collaboration with message passing. If component A always and only communicates with component B, a direct call or a shared Model property is simpler and clearer.
+- Using a Wave for a local call that could be a normal method invocation within the same component.
 
 ## Key API
 
-- declare a `@Preload` interface holding the wave contract.
-- a `String` name constant, then `WaveType NAME_WT = WBuilder.waveType(NAME)`.
-- typed payload keys as `WaveItem<T>` constants.
-- emit with `sendWave(NAME_WT)`; receive with `@OnWave(NAME_WT)`.
+- Declare a `@Preload` interface to hold the wave contract. This makes the wave types discoverable.
+- Declare a `String` name constant, then create the wave type: `WaveType NAME_WT = WBuilder.waveType(NAME)`.
+- Declare typed payload keys as `WaveItem<T>` constants on the same interface.
+- Emit a wave from any component with `sendWave(NAME_WT)` or `sendWave(NAME_WT, WBuilder.waveData(KEY, value))`.
+- Receive a wave in any component with `@OnWave(NAME_WT)` on a method.
 
 Template: `templates/WavesTemplate.java.txt`.

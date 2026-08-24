@@ -6,15 +6,29 @@ alwaysApply: false
 ---
 <!-- gen .mdh -->
 
-# Refactor trigger
+# Refactor Trigger
 
-When file smells like legacy JavaFX living inside JRebirth application restructure step step:
+When Java file looks like legacy JavaFX living inside JRebirth application — class mixes state scene graph nodes event handlers business logic — do not edit piecemeal Restructure step step using JRebirth role split
 
-- identify part JRebirth role split missing
-- move state Model
-- move node creation View
-- move event wiring Controller
-- move actions Command or Service
-- move cross-feature messaging Waves
+## Signs file needs refactoring
 
-Use legacy refactor skill before edit many files once
+- A single class holds fields both UI nodes application state
+- Event handlers contain business logic instead delegating Model or Command
+- `Platform.runLater` or raw threads appear middle feature code
+- The class directly reads or writes database REST endpoint or file
+
+## Refactor steps
+
+1. Identify part JRebirth role split missing or misplaced
+2. Move application state bindings Model
+3. Move scene graph node construction View
+4. Move event wiring gesture translation Controller
+5. Extract explicit actions Commands
+6. Extract slow external or backend work Services
+7. Introduce Waves only where cross-feature communication genuinely decoupled
+
+## Safety rule
+
+Refactor incrementally Split work small reviewable steps so each change can understood verified independently Do not rewrite everything one pass
+
+Use `refactor-legacy` skill before editing many files once

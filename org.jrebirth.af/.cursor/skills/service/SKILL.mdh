@@ -7,28 +7,29 @@ description: >-
 ---
 # Create Service
 
-Service does long-running or external work, off the UI logic.
+The Service handles work that is slow, external, or crosses a system boundary. It runs off the UI thread so the application stays responsive. Never put this kind of work in the Model, View, or Controller.
 
 ## Use when
 
-Work is slow, external, backend-facing, or integration-heavy:
+The work is any of the following:
 
-- REST client call
-- Spring bridge call
-- file import or export
-- report generation
-- expensive computation
+- A REST client call or HTTP request.
+- A Spring backend bridge call or RPC.
+- A file import or export operation.
+- A report or document generation task.
+- An expensive in-process computation.
 
-## Keep out
+## What does not belong in a Service
 
-- visual node building
-- trivial UI event handling
+- Scene graph node building (belongs in the View).
+- Trivial UI event handling (belongs in the Controller).
+- Business orchestration that calls other commands in sequence (use a multi command instead).
 
 ## Key API
 
-- split into an interface plus a `DefaultService` implementation, registered with `@Register(value = FooService.class)`.
-- expose `WaveItem<T>` and `WaveType` constants on the interface for typed payloads.
-- name action methods `doXxx(payload, Wave)` so they bind to waves.
-- return results or send a result wave; never touch the scene graph directly.
+- Split into an interface and a `DefaultService` implementation registered with `@Register(value = FooService.class)`.
+- Expose typed `WaveItem<T>` and `WaveType` constants on the interface for payload declaration.
+- Name action methods `doXxx(payload, Wave)` so they bind to the wave pipeline automatically.
+- Return results by sending a result wave. Never touch the scene graph directly from a Service.
 
 Template: `templates/ServiceTemplate.java.txt`.

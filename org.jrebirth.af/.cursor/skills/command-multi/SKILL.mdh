@@ -7,23 +7,23 @@ description: >-
 ---
 # Create Multi Command
 
-A multi command is a named sequence of smaller commands.
+A multi command is a named sequence of smaller commands. It coordinates an ordered chain of existing commands without adding logic of its own.
 
 ## Use when
 
-A feature needs one user action to trigger several existing commands in a known order.
+One user action must trigger several existing commands in a fixed, known order. Examples: "save and publish" (SaveCommand → PublishCommand), "reset and reload" (ClearCommand → LoadCommand).
 
 ## Good case
 
-Compose existing commands into an ordered chain.
+Composing two or more already-written commands into a single named chain. The multi command itself contains no business logic — it only declares the order.
 
 ## Bad case
 
-Using a multi command as a giant dumping ground for everything.
+Using a multi command as a dumping ground for ad-hoc logic. If you find yourself adding `if` statements or data transformation inside the multi command, split the logic into smaller single commands first.
 
 ## Key API
 
-- extend the multi command base and declare the chain of command classes to run in order.
-- pass shared data through the wave or a `WaveBean`.
+- Extend the multi command base class and declare the ordered list of command classes to run.
+- Pass shared data between commands through the wave or a `WaveBean` attached to the triggering wave.
 
 Template: `templates/MultiCommandTemplate.java.txt`.

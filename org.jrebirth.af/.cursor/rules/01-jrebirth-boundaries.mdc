@@ -4,16 +4,22 @@ alwaysApply: true
 ---
 <!-- gen .mdh -->
 
-# JRebirth boundaries
+# JRebirth Boundaries
 
-Always prefer mechanisms framework already provides over ad-hoc shortcuts
+Always prefer mechanisms framework already provides over ad-hoc shortcuts JRebirth has thread management wave-based messaging role split precisely so do not need shortcuts
 
-The following shortcuts banned default:
+## Shortcuts banned default
 
-- no `new Thread` normal application flow
-- no `Platform.runLater` used design pattern
-- no heavy business logic placed inside View or Controller
-- no stateful bindings owned View when belong Model
-- no `localFacade().globalFacade()` except rare hard integration cases
+- No `new Thread(...)` normal application flow JRebirth routes work through internal thread manager Creating raw threads bypasses manager breaks concurrency guarantees makes lifecycle uncontrollable Use Service instead
 
-Whenever doubt stop use relevant skill
+- No `Platform.runLater(...)` used design pattern A single `runLater` fix one-off edge case may acceptable but using recurring pattern signals UI state mutated wrong thread Restructure let Model own state update through waves or commands
+
+- No heavy business logic placed inside View or Controller Views build nodes Controllers wire events Business rules validation orchestration belong Model or Commands
+
+- No stateful bindings owned View when belong Model If binding outlives single render pass or needs observed other components belongs Model
+
+- No `localFacade().globalFacade()` access except rare hard integration cases Accessing global facade directly breaks component isolation JRebirth provides Communicate through Waves instead
+
+## When doubt
+
+Stop read relevant role skill before writing more code A few minutes reading skill cheaper than refactoring broken design later

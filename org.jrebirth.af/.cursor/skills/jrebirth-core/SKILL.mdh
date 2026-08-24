@@ -5,32 +5,36 @@ description: >-
   Use when starting any JRebirth work, when roles feel blurred, or when plain
   JavaFX habits (runLater, raw threads, state in views) start leaking in.
 ---
-# JRebirth core
+# JRebirth Core
 
-Use a stable role split so the codebase stays predictable and easy to evolve.
+Use a stable role split so the codebase stays predictable and easy to evolve. Every piece of code belongs to exactly one role.
 
 ## Main rule
 
-Before writing code, ask: is this Application, Model, View, Controller, Command, Service, Wave, or Behavior?
+Before writing any code, ask: is this Application, Model, View, Controller, Command, Service, Wave, or Behavior?
 
-## Ownership
+## Role ownership
 
-- Application: startup, shell, stage and scene customization.
-- Model: app state, JavaFX properties, bindings, orchestration of UI interactions.
-- View: node construction and visual composition.
-- Controller: MVC event hookup.
-- Command: explicit action execution.
-- Service: long-running, backend, or integration work.
-- Wave: decoupled communication.
-- Behavior: tiny reusable cross-cutting logic.
+- **Application:** startup, shell, stage, and scene customization.
+- **Model:** application state, JavaFX properties, bindings, and orchestration of UI interactions.
+- **View:** scene graph node construction and visual composition.
+- **Controller:** MVC event hookup — translating user gestures into intent.
+- **Command:** one explicit, named action execution.
+- **Service:** long-running, backend, or integration work.
+- **Wave:** decoupled, typed communication between components.
+- **Behavior:** tiny, genuinely reusable cross-cutting interaction logic.
 
 ## Anti-drift checks
 
-- If a View holds business rules, move them to Model.
-- If a Controller owns persistent state, move it to Model.
+Run these checks before committing code in a JRebirth project:
+
+- If a View holds business rules or validation logic, move them to the Model.
+- If a Controller owns persistent state, move it to the Model.
 - If a Model performs backend I/O directly, move it to a Service.
-- If `runLater` shows up everywhere, the architecture is leaking.
+- If `Platform.runLater` appears more than once in feature code, the architecture is leaking — restructure through waves and services.
 
-Read the matching role skill before creating or refactoring that role.
+## Next step
 
-For the complete wB-CSMVC role map, see `../mvc-feature/reference.md`.
+Read the matching role skill before creating or refactoring that role. Each skill contains the key API, templates, and examples for its role.
+
+For the complete wB-CSMVC role map and the flow diagram, see `../mvc-feature/reference.md`.

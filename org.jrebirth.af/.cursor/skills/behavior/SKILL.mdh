@@ -6,32 +6,33 @@ description: >-
 ---
 # Create Behavior
 
-A Behavior is a tiny reusable piece of cross-cutting logic.
+A Behavior is a tiny, self-contained piece of cross-cutting interaction logic that can be attached to multiple components. Think of it as a reusable mixin for a Model.
 
 ## Use when
 
-A very small reusable piece of logic appears in several places.
+The same small piece of interaction logic appears in several unrelated components and extracting it into a helper avoids duplicating the same boilerplate each time.
 
 ## Good uses
 
-- a repeated formatting helper tied to feature interaction
-- a tiny reusable interaction helper
+- A repeated formatting helper tied to user interaction (e.g., auto-select-all on focus).
+- A tiny reusable drag-and-drop or tooltip interaction applied to multiple views.
+- A small keyboard shortcut helper used across multiple panels.
 
 ## Avoid
 
-- using a behavior as a dump zone
-- putting business workflow in a behavior
-- faking a service or a command as a behavior
+- Using a Behavior as a dump zone for miscellaneous utilities.
+- Putting business workflow or orchestration logic in a Behavior. Those belong in a Command or Service.
+- Creating a Behavior that acts like a Service or a Command but is called a Behavior.
 
-If the logic grows, promote it to a Service or a Command instead.
+If the logic grows beyond a few lines or starts interacting with external systems, promote it to a Service or a Command instead.
 
 ## Key API
 
-- expose a behavior contract extending `Behavior<${Name}BehaviorData, Model>`.
-- register one implementation with `@Register(value = ${Name}Behavior.class)`.
-- keep setup in `initBehavior()` and read configuration from `data()`.
-- create a data class extending `BehaviorDataBase` and annotate it with `@BehaviorDataFor(${Name}Behavior.class)`.
-- attach the behavior by passing the data to a model key or behaviored component: `modelKey.optionalData().add(${Name}BehaviorData.create()...)`.
+- Expose a behavior contract by extending `Behavior<${Name}BehaviorData, Model>`.
+- Register one implementation with `@Register(value = ${Name}Behavior.class)`.
+- Keep setup in `initBehavior()` and read configuration from `data()`.
+- Create a data class extending `BehaviorDataBase` and annotate it with `@BehaviorDataFor(${Name}Behavior.class)`.
+- Attach the behavior by passing the data to a model key or behaviored component: `modelKey.optionalData().add(${Name}BehaviorData.create()...)`.
 
 Templates:
 

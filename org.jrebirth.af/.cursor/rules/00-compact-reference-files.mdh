@@ -4,10 +4,56 @@ alwaysApply: true
 ---
 # Compact Reference Files
 
-Use compact files first to save context.
+This repository keeps two layers for every rule and skill document so that humans can write and review readable prose while the agent works from a minimal, token-efficient copy.
 
-- `.mdc` rule files are compact, model-facing rules.
-- `SKILL.md` and other `.md` skill/reference files are compact, model-facing files.
-- `.mdh` files are the human-readable source or counterpart files.
+- `*.mdh` (markdown-human) is the **source of truth**. Write normal, readable English here. This is the file you edit.
+- The Cursor-facing file (`.mdc` for rules, `.md` for skills) is **generated** and token-minimal ("caveman"). Never edit it by hand; run the generator instead.
 
-When both compact and human files exist, read `.mdc` or `.md` during normal agent work. Open `.mdh` only when you are explicitly editing human-facing prose or when the compact content is not enough to complete the task safely.
+## Why two layers?
+
+Agents consume many files in a single context window. Compact files reduce token usage without losing meaning. Humans need full prose to understand intent, spot errors, and maintain content over time. The two layers serve different audiences without duplicating effort.
+
+## Generation map
+
+The generator derives the output path from the location of the source:
+
+- a `*.mdh` under `.cursor/rules/` compiles to `*.mdc` (a Cursor rule with a YAML frontmatter header).
+- any other `*.mdh` compiles to `*.md` (a skill file, reference file, or tool doc).
+
+## What is preserved verbatim
+
+The squeeze only touches plain prose words. These are kept exactly as written:
+
+- YAML frontmatter, so rule `description`/`globs` and skill `name`/`description` remain unchanged.
+- Fenced code blocks and inline `code` spans.
+- Markdown links and tables.
+- Identifiers, CamelCase names, ALLCAPS constants, symbols, and numbers.
+- Negations and logic words: no, not, never, if, then, when, use, make, put, keep, move.
+
+Articles, copulas, and filler prepositions are dropped. Plain prose words are lowercased.
+
+## Workflow
+
+1. Edit the relevant `*.mdh` source file.
+2. Run the generator from the repo root so all siblings are refreshed.
+3. Commit both the `*.mdh` source and the generated file together.
+
+```bash
+py .cursor/tools/cavemanize.py
+```
+
+Verify that no output is stale (useful as a pre-commit check or in CI):
+
+```bash
+py .cursor/tools/cavemanize.py --check
+```
+
+Process a single source file:
+
+```bash
+py .cursor/tools/cavemanize.py --file .cursor/skills/model/SKILL.mdh
+```
+
+## Reading rule for agents
+
+When both compact and human files exist, read `.mdc` or `.md` during normal agent work. Open `.mdh` only when you are explicitly editing the human-readable prose or when the compact content is not sufficient to complete the task safely.

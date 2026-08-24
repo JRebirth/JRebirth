@@ -4,19 +4,29 @@ alwaysApply: true
 ---
 <!-- gen .mdh -->
 
-# JRebirth core
+# JRebirth Core Architecture
 
-When repository uses JRebirth, reach framework's own patterns before fall back plain JavaFX
+JRebirth JavaFX application framework enforces clear split responsibilities When working repository uses JRebirth, always reach framework's built-in patterns before falling back plain JavaFX idioms
 
-Keep responsibility every role strictly separated:
+## The role split
 
-- Application boots program configures shell
-- Model owns UI state bindings interaction logic
-- View builds nodes delegates user actions
-- Controller wires MVC events together
-- Command performs one discrete action
-- Service handles long-running or backend work
-- Wave carries message between components
-- Behavior holds small piece shared cross-cutting logic
+Each piece code belongs exactly one role Keep responsibilities strictly separated:
 
-Before create or refactor any JRebirth code read matching skill first
+- Application boots program configures shell (stage, scene global CSS, preloaded resources) Nothing more
+- Model owns UI state JavaFX properties bindings orchestration UI interactions It brain feature
+- View builds scene graph nodes delegates user gestures Controller via annotations It does not own state
+- Controller wires MVC events together It translates user gestures calls toward Model, Commands, or Services
+- Command performs one discrete named action (save, refresh load navigate) It stateless short-lived
+- Service handles long-running, backend or integration work (REST calls database gateways file I/O) It runs off UI thread
+- Wave carries typed message between components without direct dependencies It decoupled communication bus
+- Behavior holds tiny piece shared cross-cutting interaction logic appears multiple places
+
+## Why matters
+
+When every class stays inside role codebase predictable easy test safe evolve When roles blur features become hard reason about refactoring becomes expensive
+
+## Before write any JRebirth code
+
+Read matching skill role working on Each skill contains key API, templates examples role
+
+See `../mvc-feature/reference.md` complete wB-CSMVC role map flow diagram

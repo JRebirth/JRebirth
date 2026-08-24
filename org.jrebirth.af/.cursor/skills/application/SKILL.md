@@ -9,29 +9,32 @@ description: >-
 
 # Create Application
 
-The Application entry point only It boots configures shell
+The Application class entry point nothing more It boots JRebirth runtime configures shell (stage, scene global CSS), hands control first Model All feature logic lives elsewhere
 
-## Keep here
+## What belongs here
 
-- bootstrap launch flow
-- first model selection
-- stage title icons shell configuration
-- scene customization global CSS
+- Bootstrap launch flow (`preloadAndLaunch(args)` `main`).
+- The choice first Model class returned `firstModelClass()`.
+- Stage title window icon configuration
+- Scene customization global CSS stylesheets
+- The list resources preload before UI appears
 
-## Keep out
+## What does not belong here
 
-- business logic
-- feature orchestration
-- controller-style event code
-- backend access
+- Business logic any kind
+- Feature orchestration or state management
+- Controller-style event handling
+- Direct backend or service access
+
+If find yourself adding any move them appropriate role (Model, Command, or Service)
 
 ## Key API
 
-- extend `DefaultApplication<StackPane>` (or chosen root pane type)
-- choose entry model `firstModelClass()`.
-- set title `applicationTitle()`.
-- add global stylesheets `customizeScene(scene)` `addCSS(scene, SomeStyles.DEFAULT)`.
-- tune window `customizeStage(stage)`.
-- list preloaded resources `getResourceToPreload()`.
+- Extend `DefaultApplication<StackPane>` (or whichever root pane type shell uses)
+- Return first Model class `firstModelClass()`.
+- Set window title `applicationTitle()`.
+- Add global stylesheets `customizeScene(scene)` `addCSS(scene, SomeStyles.DEFAULT)`.
+- Tune window `customizeStage(stage)`.
+- List resources preload `getResourceToPreload()`.
 
 Template: `templates/ApplicationTemplate.java.txt`.

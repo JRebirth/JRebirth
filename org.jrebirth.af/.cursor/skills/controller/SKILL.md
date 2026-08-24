@@ -8,26 +8,26 @@ description: >-
 
 # Create Controller
 
-Controller translates user gestures calls toward model commands or services
+The Controller translates raw user gestures intent It receives UI events decides what should happen delegates Model, Command, or Service It does not contain business logic
 
 ## Good uses
 
-- button click wiring
-- key handlers
-- table selection listeners when not purely declarative
-- menu action hookup
+- Wiring button click `callCommand(...)` or `model().doSomething(...)` call
+- Registering keyboard shortcuts mapping them commands
+- Listening table row selection updating Model's selected item property
+- Wiring menu action Command
 
 ## Bad uses
 
-- business rules
-- persistent feature state
-- long methods should become commands
+- Business rules or validation logic (move Model or Command)
+- Persistent feature state (move Model)
+- Long methods grow past few lines — extract them named Command instead
 
 ## Key API
 
-- extend `DefaultController<M, V>` `(V view)` constructor
-- register adapters `initEventAdapters()`.
-- bridge node event straight service `linkService(node, eventType, Service.class, WAVE, filter, waveData)`.
-- otherwise delegate `model()` or trigger command
+- Extend `DefaultController<M, V>` `(V view)` constructor
+- Register event adapters `initEventAdapters()`.
+- Bridge node event straight Service `linkService(node, eventType, Service.class, WAVE, filter, waveData)`.
+- For everything else delegate `model()` or trigger command `callCommand(...)`.
 
 Template: `templates/ControllerTemplate.java.txt`.
