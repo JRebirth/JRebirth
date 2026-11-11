@@ -15,6 +15,6 @@ jobs:
     with:
       java-version: "25"
       pom-path: org.jrebirth.af/pom.xml
-      # Skip test compile+run (showcase fxml tests break snapshot publish; jars still build)
-      maven-args: "-B -Pgithub-packages deploy -Dmaven.test.skip=true"
+      # Libraries only: skip showcase (jlink/demo apps) and tests; still publish iconfont-bridge etc.
+      maven-args: "-B -Pgithub-packages deploy -Dmaven.test.skip=true -pl !showcase"
     secrets: inherit
