@@ -123,8 +123,11 @@ jobs:
               -Dcentral.publishing.waitUntil=validated
             )
           fi
+          # ignorePublishedComponents: allow re-runs when parent POM (or some
+          # modules) already reached Central from a partial prior deploy.
           mvn -B -f "${POM}" -Pdeploy-central clean deploy \
             -DskipTests \
             -Dgpg.signer=bc \
+            -DignorePublishedComponents=true \
             -pl "${EXCLUDE_PL}" \
             "${EXTRA[@]}"
