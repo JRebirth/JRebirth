@@ -681,7 +681,9 @@
 						<groupId>org.sonatype.central</groupId>
 						<artifactId>central-publishing-maven-plugin</artifactId>
 						<extensions>true</extensions>
-						<inherited>false</inherited>
+						<!-- Must inherit to library modules. With inherited=false, children fall
+						     back to maven-deploy-plugin and fail on unresolved ${repositoryUrl}
+						     from organization distributionManagement (github-packages only). -->
 						<configuration>
 							<publishingServerId>${central.publishing.serverId}</publishingServerId>
 							<autoPublish>${central.publishing.autoPublish}</autoPublish>
