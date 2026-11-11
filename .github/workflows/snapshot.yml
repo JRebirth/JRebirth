@@ -32,9 +32,10 @@ jobs:
       - name: Deploy library SNAPSHOTs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # Quote -pl so bash never expands '!'. Skip showcase/sample/distribution (jlink demos).
+        # Excluding aggregator 'showcase' alone does NOT drop its children — list every path.
+        # Quote -pl so bash never expands '!'.
         run: |
           set +H
           mvn -B -f org.jrebirth.af/pom.xml -Pgithub-packages deploy \
             -Dmaven.test.skip=true \
-            -pl '!showcase,!sample,!distribution'
+            -pl '!sample,!distribution,!showcase,!showcase/demo,!showcase/analyzer,!showcase/undoredo,!showcase/fxml,!showcase/wave,!showcase/todos,!showcase/workbench,!showcase/fonticon'
