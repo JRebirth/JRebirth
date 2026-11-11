@@ -6,7 +6,7 @@
 #set( $keywords = "JavaFX Mind Game Mastering Tables" )
 #set( $description = "JavaFX Mind Game Mastering Tables" )
 
-#set( $version = "$MasteringTables-version")
+#set( $version = "$MasteringTablesVersion")
 #set( $path = "masteringtables")
 #set( $archiveName = "MasteringTables")
 #set( $downloadName = "Mastering Tables")
