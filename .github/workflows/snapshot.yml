@@ -15,6 +15,9 @@ jobs:
     with:
       java-version: "25"
       pom-path: org.jrebirth.af/pom.xml
-      # Libraries only: skip showcase (jlink/demo apps) and tests; still publish iconfont-bridge etc.
-      maven-args: "-B -Pgithub-packages deploy -Dmaven.test.skip=true -pl !showcase"
+      # Libraries only (no showcase/sample/distribution — jlink demos break Temurin CI images).
+      # Explicit -pl avoids bash '!' history expansion eating exclusions.
+      maven-args: >-
+        -B -Pgithub-packages deploy -Dmaven.test.skip=true
+        -pl api,preloader,resources,core,tooling,codegen,ecore2fx,text2fx,jrebirth-maven-plugin,processor,component,presentation,transition,dialog,fxform,undoredo,security,rest,archetype,iconfont-bridge,fontawesome,materialdesignicons,weathericons,525icons,emojione,typicons
     secrets: inherit
