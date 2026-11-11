@@ -23,6 +23,7 @@ The squeeze only touches plain prose. These are kept verbatim:
 - markdown links and tables.
 - identifiers, CamelCase, ALLCAPS, symbols, numbers.
 - negations and logic words: no, not, never, if, then, when, use, make, put, keep, move.
+- **source line endings** (CRLF or LF): generated siblings are written with the same newline sequence as the .mdh source. Never force LF on a CRLF tree (org.jrebirth.af/.gitattributes uses eol=crlf).
 
 Only articles, copulas, and filler prepositions are dropped, and plain words are lowercased.
 

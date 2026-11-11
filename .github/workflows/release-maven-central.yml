@@ -1,0 +1,130 @@
+name: Release to Maven Central
+
+# Publishes org.jrebirth:af and library modules to Sonatype Central.
+# Excludes sample, distribution, and all showcase/* (skipPublishing + -pl).
+# Same secrets as Organization-POM (CENTRAL_*, GPG_*).
+
+on:
+  push:
+    tags:
+      - "af-*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (e.g. 12.0.0). Sets all module versions before deploy."
+        required: true
+        type: string
+      auto_publish:
+        description: "Auto-publish on Central after validation"
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: maven-central-af
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      POM: org.jrebirth.af/pom.xml
+      CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+      CENTRAL_TOKEN: ${{ secrets.CENTRAL_TOKEN }}
+      MAVEN_GPG_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      # Belt-and-suspenders with skipPublishing on those modules.
+      EXCLUDE_PL: "!sample,!distribution,!showcase,!showcase/demo,!showcase/analyzer,!showcase/undoredo,!showcase/fxml,!showcase/wave,!showcase/todos,!showcase/workbench,!showcase/fonticon"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Preflight secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          fail=0
+          for name in CENTRAL_USERNAME CENTRAL_TOKEN MAVEN_GPG_KEY MAVEN_GPG_PASSPHRASE; do
+            val="${!name}"
+            if [[ -z "${val}" ]]; then
+              echo "::error::Secret/env ${name} is empty or missing in repo Actions secrets"
+              fail=1
+            else
+              echo "${name}: present (${#val} chars)"
+            fi
+          done
+          if [[ -n "${MAVEN_GPG_KEY}" ]] && ! grep -Eq 'BEGIN (PGP |OPENPGP )?PRIVATE KEY' <<< "${MAVEN_GPG_KEY}"; then
+            echo "::error::GPG_PRIVATE_KEY must be ASCII-armored (gpg --armor --export-secret-keys <KEYID>)"
+            fail=1
+          fi
+          exit "${fail}"
+
+      - name: Resolve release version
+        id: ver
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            VERSION="${{ inputs.version }}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+            VERSION="${TAG#af-}"
+          fi
+          if [[ -z "${VERSION}" || "${VERSION}" == *SNAPSHOT* ]]; then
+            echo "::error::Refusing SNAPSHOT or empty version: '${VERSION}'"
+            exit 1
+          fi
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Maven settings (GitHub Packages for parent resolution)
+        run: |
+          mkdir -p "$HOME/.m2"
+          curl -fsSL https://raw.githubusercontent.com/JRebirth/JRebirth-Organization-POM/master/.github/maven-settings.xml \
+            -o "$HOME/.m2/settings.xml"
+
+      - name: Set up JDK + Central credentials
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+          cache: maven
+          server-id: central
+          server-username: CENTRAL_USERNAME
+          server-password: CENTRAL_TOKEN
+          # Merges <server id=central> into existing settings without dropping Packages servers.
+
+      - name: Set POM versions (reactor)
+        run: >
+          mvn -f "${POM}" -B
+          org.codehaus.mojo:versions-maven-plugin:2.18.0:set
+          -DnewVersion=${{ steps.ver.outputs.version }}
+          -DprocessAllModules=true
+          -DgenerateBackupPoms=false
+
+      - name: Deploy libraries to Maven Central
+        env:
+          AUTO_PUBLISH: ${{ github.event_name != 'workflow_dispatch' || inputs.auto_publish }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +H
+          set -euo pipefail
+          EXTRA=()
+          if [[ "${AUTO_PUBLISH}" == "true" ]]; then
+            EXTRA+=(
+              -Dcentral.publishing.autoPublish=true
+              -Dcentral.publishing.waitUntil=published
+            )
+          else
+            EXTRA+=(
+              -Dcentral.publishing.autoPublish=false
+              -Dcentral.publishing.waitUntil=validated
+            )
+          fi
+          mvn -B -f "${POM}" -Pdeploy-central clean deploy \
+            -DskipTests \
+            -Dgpg.signer=bc \
+            -pl "${EXCLUDE_PL}" \
+            "${EXTRA[@]}"

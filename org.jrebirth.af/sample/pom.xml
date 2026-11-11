@@ -21,6 +21,12 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<resources.base.path>org/jrebirth/af/sample</resources.base.path>
+		<!-- Sample app — not published to Maven Central. -->
+		<skipPublishing>true</skipPublishing>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven.source.skip>true</maven.source.skip>
+		<maven.javadoc.skip>true</maven.javadoc.skip>
+		<gpg.skip>true</gpg.skip>
 	</properties>
 
 	<organization>

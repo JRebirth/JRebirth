@@ -14,6 +14,15 @@
 	<name>Distribution</name>
 	<description>Module used to package the full JRebirth distribution</description>
 
+	<properties>
+		<!-- Assembly aggregator — not published to Maven Central. -->
+		<skipPublishing>true</skipPublishing>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven.source.skip>true</maven.source.skip>
+		<maven.javadoc.skip>true</maven.javadoc.skip>
+		<gpg.skip>true</gpg.skip>
+	</properties>
+
 	<build>
 		<finalName>JRebirth-${project.version}</finalName>
 
