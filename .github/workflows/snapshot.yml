@@ -1,0 +1,20 @@
+name: Snapshot to GitHub Packages
+
+on:
+  push:
+    branches: [12.x-dev]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  snapshot:
+    uses: JRebirth/JRebirth-Organization-POM/.github/workflows/reusable-maven-snapshot.yml@master
+    with:
+      java-version: "25"
+      pom-path: org.jrebirth.af/pom.xml
+      # Skip tests on snapshot publish for speed; run verify locally / on PR later if needed
+      maven-args: "-B -Pgithub-packages deploy -DskipTests"
+    secrets: inherit
