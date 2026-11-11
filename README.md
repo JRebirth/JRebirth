@@ -13,8 +13,8 @@ Live feed is available on our [Blog](http://blog.jrebirth.org)
 
 ## Download & Build
 
-[![Maven Central](https://img.shields.io/maven-central/v/org.jrebirth.af/core.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/org.jrebirth.af/core)
-[![Build Status](http://ci.jrebirth.org/job/JRebirth-8x/badge/icon)](http://ci.jrebirth.org/job/JRebirth-8x/)
+[![Maven Central](https://img.shields.io/maven-central/v/org.jrebirth.af/core.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/org.jrebirth.af/core/12.0.0)
+[![Build Status](https://github.com/JRebirth/JRebirth/actions/workflows/snapshot.yml/badge.svg)](https://github.com/JRebirth/JRebirth/actions/workflows/snapshot.yml)
 
 ## Demo
 
@@ -32,23 +32,19 @@ Several Demos are available online :
 
 ## Use it
 
-This repository targets **Java 25**, **JavaFX 26**, and **JRebirth AF 12.0.0-SNAPSHOT** (see `org.jrebirth.af/pom.xml`).
+**Latest release on Maven Central** is **12.0.0** ([artifact](https://central.sonatype.com/artifact/org.jrebirth.af/core/12.0.0) · [all modules](https://central.sonatype.com/search?q=g:org.jrebirth.af+AND+v:12.0.0)).
 
-**Latest release on Maven Central** is **8.6.0** ([artifact search](https://central.sonatype.com/search?q=org.jrebirth.af)):
-
-    <dependency>
-        <groupId>org.jrebirth.af</groupId>
-        <artifactId>core</artifactId>
-        <version>8.6.0</version>
-    </dependency>
-
-To depend on this **12.x** line, build and install from source (`mvn clean install`), then use:
+It targets **Java 25** and **JavaFX 26**.
 
     <dependency>
         <groupId>org.jrebirth.af</groupId>
         <artifactId>core</artifactId>
-        <version>12.0.0-SNAPSHOT</version>
+        <version>12.0.0</version>
     </dependency>
+
+Optional companion modules use the same version, for example `preloader` and `processor` (`provided` scope for annotation processing).
+
+This repository’s development line may still be `12.0.0-SNAPSHOT` in `org.jrebirth.af/pom.xml`; for day-to-day work prefer the Central release above. To hack on unreleased code, build and install from source (`mvn clean install`), then depend on `12.0.0-SNAPSHOT`.
 
 ## Documentation
 
@@ -56,7 +52,7 @@ Documentation is available [here](http://www.jrebirth.org/doc/Toc.html).
 
 ## Build it
 
-Requires [Git](http://git-scm.com/), **JDK 25** or newer, [Apache Maven](http://maven.apache.org/) **3.9+** (the build is validated against Maven 3.9.11).
+Requires [Git](https://git-scm.com/), **JDK 25** or newer (bytecode release 25), [Apache Maven](https://maven.apache.org/) **3.9+** (validated against Maven 3.9.11), and a JDK that can resolve **OpenJFX 26** dependencies from Maven Central.
 
     git clone https://github.com/JRebirth/JRebirth.git
     cd JRebirth/org.jrebirth.af
