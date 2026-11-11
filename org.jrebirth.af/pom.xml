@@ -573,6 +573,78 @@
 
 	</dependencies>
 
+	<!-- Resolve organization parent + peer SNAPSHOTs from GitHub Packages (also listed in CI settings). -->
+	<repositories>
+		<repository>
+			<id>github-jrebirth-org</id>
+			<name>JRebirth Organization Packages</name>
+			<url>https://maven.pkg.github.com/JRebirth/JRebirth-Organization-POM</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>github-jrebirth-af</id>
+			<name>JRebirth AF Packages</name>
+			<url>https://maven.pkg.github.com/JRebirth/JRebirth</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>github-jrebirth-ria</id>
+			<name>JRebirth RIA Packages</name>
+			<url>https://maven.pkg.github.com/JRebirth/JRebirth-RIA-POM</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>github-jrebirth-org</id>
+			<name>JRebirth Organization Packages</name>
+			<url>https://maven.pkg.github.com/JRebirth/JRebirth-Organization-POM</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>github-jrebirth-af</id>
+			<name>JRebirth AF Packages</name>
+			<url>https://maven.pkg.github.com/JRebirth/JRebirth</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>github-jrebirth-ria</id>
+			<name>JRebirth RIA Packages</name>
+			<url>https://maven.pkg.github.com/JRebirth/JRebirth-RIA-POM</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<distributionManagement>
 		<site>
 			<id>JRebirth_Sites</id>
@@ -582,6 +654,19 @@
 	</distributionManagement>
 
 	<profiles>
+
+		<!-- Override organization github-packages URLs: AF artifacts publish under JRebirth/JRebirth -->
+		<profile>
+			<id>github-packages</id>
+			<properties>
+				<repositoryId>github</repositoryId>
+				<repositoryName>GitHub Packages Releases</repositoryName>
+				<repositoryUrl>https://maven.pkg.github.com/JRebirth/JRebirth</repositoryUrl>
+				<snapshotRepositoryId>github</snapshotRepositoryId>
+				<snapshotRepositoryName>GitHub Packages Snapshots</snapshotRepositoryName>
+				<snapshotRepositoryUrl>https://maven.pkg.github.com/JRebirth/JRebirth</snapshotRepositoryUrl>
+			</properties>
+		</profile>
 
 		<!-- https://central.sonatype.org/publish/publish-portal-maven/ -->
 		<profile>
