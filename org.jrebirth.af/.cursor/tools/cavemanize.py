@@ -9,7 +9,8 @@ Cursor reads only the generated siblings:
 The body prose is squeezed to "caveman" style (drop articles/copulas/fillers,
 lowercase plain words, strip sentence punctuation). Anything that carries meaning
 is preserved verbatim: YAML frontmatter, fenced code, inline `code`, links,
-tables, Identifiers/CamelCase/ALLCAPS, symbols, and negations (no/not/never...).
+tables, Identifiers/CamelCase/ALLCAPS, symbols, negations (no/not/never...), and
+source line endings (CRLF/LF) when writing generated siblings.
 
 Usage:
   py .cursor/tools/cavemanize.py            # generate every sibling from *.mdh
@@ -26,6 +27,29 @@ from pathlib import Path
 
 # Root = the .cursor directory that contains this tools/ folder.
 CURSOR_ROOT = Path(__file__).resolve().parent.parent
+
+def _detect_newline(path: Path) -> str:
+    """Return the dominant newline sequence used by an existing file."""
+    raw = path.read_bytes()
+    return "\r\n" if b"\r\n" in raw else "\n"
+
+
+def _read_text(path: Path) -> str:
+    """Read UTF-8 text as LF-normalized logical lines (BOM stripped)."""
+    raw = path.read_bytes()
+    if raw.startswith(b"\xef\xbb\xbf"):
+        raw = raw[3:]
+    return raw.decode("utf-8").replace("\r\n", "\n").replace("\r", "\n")
+
+
+def _write_text(path: Path, text: str, newline: str) -> None:
+    """Write UTF-8 text using the exact newline sequence (preserve CRLF/LF)."""
+    logical = text.replace("\r\n", "\n").replace("\r", "\n")
+    data = logical.encode("utf-8")
+    if newline == "\r\n":
+        data = data.replace(b"\n", b"\r\n")
+    path.write_bytes(data)
+
 
 # Filler words safe to drop. Negations and logic/imperative words are NOT here
 # on purpose (no, not, never, if, then, when, use, make, put, keep, move, ...).
@@ -190,8 +214,9 @@ def bootstrap_missing_sources(root: Path) -> list[Path]:
         src = out.with_suffix(".mdh")
         if src.exists():
             continue
-        text = out.read_text(encoding="utf-8")
-        src.write_text(_strip_gen_marker(text), encoding="utf-8")
+        newline = _detect_newline(out)
+        text = _read_text(out)
+        _write_text(src, _strip_gen_marker(text), newline)
         created.append(src)
         print(f"bootstrapped {src.relative_to(root)} from {out.relative_to(root)}")
     return created
@@ -222,15 +247,16 @@ def main(argv: list[str]) -> int:
         if src.suffix != ".mdh":
             print(f"skip (not .mdh): {src}", file=sys.stderr)
             continue
-        text = src.read_text(encoding="utf-8")
+        newline = _detect_newline(src)
+        text = _read_text(src)
         result = cavemanize(text, src.name)
         out = _out_path(src)
-        current = out.read_text(encoding="utf-8") if out.exists() else None
+        current = _read_text(out) if out.exists() else None
         if args.check:
             if current != result:
                 stale.append(out)
         elif current != result:
-            out.write_bytes(result.encode("utf-8"))
+            _write_text(out, result, newline)
             wrote += 1
             print(f"wrote {out.relative_to(CURSOR_ROOT)}")
 

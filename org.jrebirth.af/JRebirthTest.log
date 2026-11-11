@@ -2650,3 +2650,51 @@ java.util.MissingResourceException: Can't find bundle for base name fxml.third, 
 2026-06-14 10:10:03,746 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
 2026-06-14 10:10:04,187 ERROR [main] o.j.a.c.u.CheckerUtility [CheckerUtility.java:180] Broken Wave sent : UNDEFINED DO_TYPE_1 (0ab39f25-7be5-4dc1-b091-3e68564a4cf2) 
 2026-06-14 10:10:04,189 ERROR [main] o.j.a.c.u.CheckerUtility [CheckerUtility.java:180] Broken Wave sent : UNDEFINED DO_TYPE_2 (2613e56b-256b-438d-a6a1-1f0faec73848) 
+2026-10-31 16:13:04,862 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_16x16.png not found into 'null' module folder: images/JRebirth_16x16.png
+2026-10-31 16:13:04,870 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_16x16.png not found into 'null' module folder: imagesBis/JRebirth_16x16.png
+2026-10-31 16:13:04,871 ERROR [JavaFX Application Thread] o.j.a.c.r.i.ImageBuilder [ImageBuilder.java:168] Image : JRebirth_16x16.png not found into base folder: [images, imagesBis]
+2026-10-31 16:13:04,912 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_32x32.png not found into 'null' module folder: images/JRebirth_32x32.png
+2026-10-31 16:13:04,912 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_32x32.png not found into 'null' module folder: imagesBis/JRebirth_32x32.png
+2026-10-31 16:13:04,912 ERROR [JavaFX Application Thread] o.j.a.c.r.i.ImageBuilder [ImageBuilder.java:168] Image : JRebirth_32x32.png not found into base folder: [images, imagesBis]
+2026-10-31 16:13:04,913 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_64x64.png not found into 'null' module folder: images/JRebirth_64x64.png
+2026-10-31 16:13:04,913 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_64x64.png not found into 'null' module folder: imagesBis/JRebirth_64x64.png
+2026-10-31 16:13:04,914 ERROR [JavaFX Application Thread] o.j.a.c.r.i.ImageBuilder [ImageBuilder.java:168] Image : JRebirth_64x64.png not found into base folder: [images, imagesBis]
+2026-10-31 16:13:04,915 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_128x128.png not found into 'null' module folder: images/JRebirth_128x128.png
+2026-10-31 16:13:04,916 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_128x128.png not found into 'null' module folder: imagesBis/JRebirth_128x128.png
+2026-10-31 16:13:04,917 ERROR [JavaFX Application Thread] o.j.a.c.r.i.ImageBuilder [ImageBuilder.java:168] Image : JRebirth_128x128.png not found into base folder: [images, imagesBis]
+2026-10-31 16:13:04,917 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_256x256.png not found into 'null' module folder: images/JRebirth_256x256.png
+2026-10-31 16:13:04,917 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_256x256.png not found into 'null' module folder: imagesBis/JRebirth_256x256.png
+2026-10-31 16:13:04,917 ERROR [JavaFX Application Thread] o.j.a.c.r.i.ImageBuilder [ImageBuilder.java:168] Image : JRebirth_256x256.png not found into base folder: [images, imagesBis]
+2026-10-31 16:13:05,080 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:13:05,080 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:13:09,445 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:13:09,447 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:13:13,923 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:13:13,924 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:13:18,666 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:13:18,667 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:13:23,172 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:13:23,173 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:13:35,599 ERROR [main] o.j.a.c.f.AbstractFacade [AbstractFacade.java:130] Error while unlistening all WaveType for SwitchFullScreenCommand.
+2026-10-31 16:13:35,604 ERROR [main] o.j.a.c.f.AbstractFacade [AbstractFacade.java:130] Error while unlistening all WaveType for SwitchFullScreenCommand.
+2026-10-31 16:13:39,542 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:13:39,544 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:13:44,339 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:13:44,340 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:13:44,687 ERROR [main] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : logoBis.png not found into 'null' module folder: images/logoBis.png
+2026-10-31 16:13:48,964 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:13:48,966 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:13:58,206 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:13:58,208 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:14:07,711 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:14:07,713 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:14:12,589 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:14:12,591 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:14:17,632 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:14:17,633 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:14:22,151 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:14:22,153 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:14:28,344 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-10-31 16:14:28,346 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-10-31 16:14:28,877 ERROR [main] o.j.a.c.u.CheckerUtility [CheckerUtility.java:180] Broken Wave sent : UNDEFINED DO_TYPE_1 (917c1838-2d1f-4701-bad4-aa496f5f52b9) 
+2026-10-31 16:14:28,881 ERROR [main] o.j.a.c.u.CheckerUtility [CheckerUtility.java:180] Broken Wave sent : UNDEFINED DO_TYPE_2 (2bab67af-09fd-4c51-b9e0-c22468aacf6c) 
