@@ -42,7 +42,7 @@
 		<classgraph.version>4.8.184</classgraph.version>
 		<testfx.version>4.0.18</testfx.version>
 		<testfx.monocle.version>jdk-11+26</testfx.monocle.version>
-		<guava.version>33.5.0-jre</guava.version>
+		<guava.version>33.7.1-jre</guava.version>
 		<emf.common.version>2.45.0</emf.common.version>
 		<emf.ecore.version>2.42.0</emf.ecore.version>
 		<emf.ecore.xmi.version>2.40.0</emf.ecore.xmi.version>
