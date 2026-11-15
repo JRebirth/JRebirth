@@ -20,6 +20,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<preloaderClass>org.jrebirth.af.preloader.JRebirthPreloader</preloaderClass>
 		<appClass>org.jrebirth.YourApplication</appClass>
+		<mainModule>${project.groupId}.${project.artifactId}</mainModule>
+		<archiveName>${project.artifactId}</archiveName>
+		<deployPath>${project.artifactId}/${project.version}</deployPath>
+		<exeIcon>src/main/resources/images/JRebirth_64x64.ico</exeIcon>
 		<!-- Omit showcase apps from Maven Central / deploy (inherited by all showcase submodules). -->
 		<skipPublishing>true</skipPublishing>
 		<maven.deploy.skip>true</maven.deploy.skip>
@@ -51,7 +55,7 @@
 						<path>
 							<groupId>org.jrebirth.af</groupId>
 							<artifactId>processor</artifactId>
-							<version>12.0.0-SNAPSHOT</version>
+							<version>${project.version}</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
@@ -72,6 +76,81 @@
 					</configuration>
 				</plugin>
 
+				<plugin>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx-maven-plugin</artifactId>
+					<version>${javafx.maven.plugin.version}</version>
+					<configuration>
+						<stripDebug>true</stripDebug>
+						<compress>2</compress>
+						<noHeaderFiles>true</noHeaderFiles>
+						<noManPages>true</noManPages>
+						<launcher>${archiveName}</launcher>
+						<jlinkImageName>${archiveName}</jlinkImageName>
+						<jlinkZipName>${archiveName}</jlinkZipName>
+						<mainClass>${mainModule}/${appClass}</mainClass>
+						<bindServices>true</bindServices>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>${maven.shade.plugin.version}</version>
+					<configuration>
+						<shadedArtifactAttached>false</shadedArtifactAttached>
+						<transformers>
+							<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+								<mainClass>${appClass}</mainClass>
+							</transformer>
+							<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+						</transformers>
+						<finalName>${archiveName}-${project.version}</finalName>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>com.akathist.maven.plugins.launch4j</groupId>
+					<artifactId>launch4j-maven-plugin</artifactId>
+					<version>${launch4j.maven.plugin.version}</version>
+					<configuration>
+						<headerType>gui</headerType>
+						<jar>${project.build.directory}/${archiveName}-${project.version}.jar</jar>
+						<outfile>${project.build.directory}/${archiveName}-${project.version}.exe</outfile>
+						<downloadUrl>https://adoptium.net/</downloadUrl>
+						<classPath>
+							<mainClass>${appClass}</mainClass>
+							<addDependencies>false</addDependencies>
+						</classPath>
+						<icon>${exeIcon}</icon>
+						<jre>
+							<minVersion>${java.version}</minVersion>
+							<jdkPreference>preferJre</jdkPreference>
+						</jre>
+						<versionInfo>
+							<fileVersion>1.0.0.0</fileVersion>
+							<txtFileVersion>${project.version}</txtFileVersion>
+							<fileDescription>${project.name}</fileDescription>
+							<copyright>JRebirth</copyright>
+							<productVersion>1.0.0.0</productVersion>
+							<txtProductVersion>${project.version}</txtProductVersion>
+							<productName>${project.name}</productName>
+							<companyName>JRebirth</companyName>
+							<internalName>${archiveName}</internalName>
+							<originalFilename>${archiveName}.exe</originalFilename>
+						</versionInfo>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>wagon-maven-plugin</artifactId>
+					<version>${wagon.maven.plugin.version}</version>
+					<configuration>
+						<serverId>JRebirth_Sites</serverId>
+						<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/apps</url>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 
@@ -81,8 +160,25 @@
 				<artifactId>wagon-ftp</artifactId>
 				<version>${wagon.ftp.version}</version>
 			</extension>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>${wagon.ssh.version}</version>
+			</extension>
 		</extensions>
 	</build>
+
+	<!-- PackageApp / DeployApps live in jar submodules only (parent packaging=pom cannot jlink). -->
+	<profiles>
+		<profile>
+			<id>PackageApp</id>
+			<!-- no-op on aggregator; submodule POMs activate packaging plugins -->
+		</profile>
+		<profile>
+			<id>DeployApps</id>
+			<!-- no-op on aggregator; submodule POMs activate wagon uploads -->
+		</profile>
+	</profiles>
 
 	<dependencies>
 

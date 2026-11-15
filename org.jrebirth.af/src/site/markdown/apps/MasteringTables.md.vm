@@ -24,8 +24,10 @@
 
 #set( $isPresentation = false)
 #set( $hasZip = true)
-#set( $hasJar = true)
+#set( $hasJar = false)
 #set( $hasExe = true)
+
+#set( $screenshot = "masteringtables.png")
 
 #set( $githubRepoName = "GitHub MasteringTables repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/MasteringTables")

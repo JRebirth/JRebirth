@@ -13,7 +13,7 @@
         What is JRebirth ?
       </question>
       <answer>
-        <p>JRebirth is an Application Framework dedicated to JavaFX 2+ Java UI toolkit.</p>
+        <p>JRebirth is an Application Framework dedicated to the JavaFX UI toolkit (Java 25 / JavaFX 26 / JPMS).</p>
       </answer>
     </faq>
     

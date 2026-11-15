@@ -24,8 +24,10 @@
 
 #set( $isPresentation = true)
 #set( $hasZip = true)
-#set( $hasJar = true)
+#set( $hasJar = false)
 #set( $hasExe = true)
+
+#set( $screenshot = "jrebirthtour.png")
 
 #set( $githubRepoName = "GitHub JRebirth Tour Repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/JRebirth-Tour")

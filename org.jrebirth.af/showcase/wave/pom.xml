@@ -18,6 +18,10 @@
 
 	<properties>
 		<appClass>${project.groupId}.${project.artifactId}.WaveApplication</appClass>
+		<mainModule>org.jrebirth.af.showcase.wave</mainModule>
+		<archiveName>Wave</archiveName>
+		<deployPath>wave/${project.version}</deployPath>
+		<exeIcon>src/main/resources/images/JRebirth_64x64.ico</exeIcon>
 		<resources.base.path>org/jrebirth/af/showcase/wave</resources.base.path>
 	</properties>
 
@@ -30,4 +34,77 @@
 		</dependency>
 	</dependencies>
 
+<profiles>
+		<profile>
+			<id>PackageApp</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.openjfx</groupId>
+						<artifactId>javafx-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>jlink</id>
+								<phase>package</phase>
+								<goals><goal>jlink</goal></goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-shade-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>shade</id>
+								<phase>package</phase>
+								<goals><goal>shade</goal></goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>com.akathist.maven.plugins.launch4j</groupId>
+						<artifactId>launch4j-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>launch4j</id>
+								<phase>package</phase>
+								<goals><goal>launch4j</goal></goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>DeployApps</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>wagon-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>deploy-jlink-zip</id>
+								<phase>site-deploy</phase>
+								<goals><goal>upload-single</goal></goals>
+								<configuration>
+									<fromFile>${project.build.directory}/${archiveName}.zip</fromFile>
+									<toFile>${deployPath}/${archiveName}-${project.version}.zip</toFile>
+								</configuration>
+							</execution>
+							<execution>
+								<id>deploy-winexe</id>
+								<phase>site-deploy</phase>
+								<goals><goal>upload-single</goal></goals>
+								<configuration>
+									<fromFile>${project.build.directory}/${archiveName}-${project.version}.exe</fromFile>
+									<toFile>${deployPath}/${archiveName}-${project.version}.exe</toFile>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

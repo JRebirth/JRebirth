@@ -1,0 +1,30 @@
+
+#set( $title = "JRebirth Presentations" )
+#set( $author = "Sebastien Bordes" )
+#set( $date = "15/11/2026" )
+
+<head>
+<![CDATA[
+	<title>${title}</title>
+	<author>${author}</author>
+	<date>$date</date>
+	<meta name="description" content="JRebirth conference and meetup presentations — downloadable slide decks as desktop apps." />
+]]>
+</head>
+
+Presentations
+=============
+
+Conference and meetup slide decks powered by the JRebirth presentation module. Prefer the **ZIP** (bundled runtime via jlink): unzip, then run `bin/AppName.bat`.
+
+Desktop applications are listed on the [Apps](../apps/index.html) page.
+
+### All presentations
+
+| Presentation | Event / format |
+| --- | --- |
+| [**JRebirth Tour**](../apps/JRebirthTour.html) | Guided framework tour for meetups and workshops |
+| [**LightningTalk**](../apps/LightningTalk.html) | Short-format talk deck |
+| [**Breizhcamp**](../apps/Breizhcamp.html) | Breizhcamp conference presentation |
+| [**EclipseCON**](../apps/EclipseCON.html) | EclipseCON talk deck |
+| [**EclipseDay**](../apps/EclipseDay.html) | EclipseDay presentation |

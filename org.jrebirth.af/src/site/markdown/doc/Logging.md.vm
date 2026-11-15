@@ -27,7 +27,7 @@ Logging Facade
 --------------------
 		
 I choose to add dependency to slf4j-api :
-[Simple Logging Facade 4 Java)](http://www.slf4j.org/)
+[Simple Logging Facade 4 Java](https://www.slf4j.org/)
 
 
 This API is lightweight because the jar is near to 10 kb.
@@ -51,7 +51,7 @@ By default all logs are rejected and you will have this message into the Java co
 <p style="color: red;">
 SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See <a target="_blank" href="http://www.slf4j.org/codes.html#StaticLoggerBinder">http://www.slf4j.org/codes.html#StaticLoggerBinder</a> for further details.
+SLF4J: See <a target="_blank" href="https://www.slf4j.org/codes.html#StaticLoggerBinder">https://www.slf4j.org/codes.html#StaticLoggerBinder</a> for further details.
 </p>
 
 There are 3 implementations available:

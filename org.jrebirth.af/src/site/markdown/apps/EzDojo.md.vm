@@ -1,0 +1,35 @@
+
+#set( $title = "EzDojo - Real-world JRebirth desktop app" )
+#set( $author = "Sebastien Bordes" )
+#set( $date="11/14/2026")
+
+#set( $keywords = "EzDojo JRebirth JavaFX Desktop Application Club Management" )
+#set( $description = "EzDojo is a production desktop application built with JRebirth Application Framework 12" )
+
+#set( $version = "12.0.0")
+#set( $path = "ezdojo")
+#set( $archiveName = "EzDojo")
+#set( $downloadName = "EzDojo Manager")
+
+#set( $width = "1280")
+#set( $height = "800")
+
+#set( $sectionId = "EzDojo")
+#set( $sectionTitle = "EzDojo Manager")
+
+#set( $catcherTitle = "EzDojo — Built with JRebirth 12")
+#set( $catcherContent = "A real-world JavaFX desktop app powered by the JRebirth Application Framework")
+
+#set( $appDescription = "<p>EzDojo Manager is a production club-management desktop client built on <strong>JRebirth AF 12</strong> (JavaFX + JPMS). Use it to see the framework in a full product context — beyond demos and slides.</p><p>Downloads are hosted on the EzDojo product site (portable ZIP and Windows installer). The full source code is on GitHub.</p>")
+
+#set( $isPresentation = false)
+#set( $hasZip = false)
+#set( $hasJar = false)
+#set( $hasExe = false)
+#set( $externalDownload = true)
+#set( $externalZipUrl = "https://www.ezdojo.net/downloads/EzDojo-App-portable.zip")
+#set( $externalExeUrl = "https://www.ezdojo.net/downloads/EzDojo-Setup.exe")
+#set( $externalHomeUrl = "https://www.ezdojo.net/")
+#set( $screenshot = "ezdojo.png")
+
+#parse("Presentation.vm")

@@ -1,0 +1,34 @@
+
+#set( $title = "Todos Showcase" )
+#set( $author = "Sebastien Bordes" )
+#set( $date="11/14/2026")
+
+#set( $keywords = "JRebirth Todos Showcase" )
+#set( $description = "JRebirth Todos manager showcase application" )
+
+#set( $version = "${project.version}")
+#set( $path = "todos")
+#set( $archiveName = "Todos")
+#set( $downloadName = "Todos Showcase")
+
+#set( $width = "1024")
+#set( $height = "768")
+
+#set( $sectionId = "TodosShowcase")
+#set( $sectionTitle = "Todos Showcase")
+
+#set( $catcherTitle = "Todos Manager Showcase")
+#set( $catcherContent = "A sample todo application built with JRebirth")
+
+#set( $appDescription = "<p>This showcase is a Todo Manager demo built with JRebirth.</p>")
+
+#set( $isPresentation = false)
+#set( $hasZip = true)
+#set( $hasJar = false)
+#set( $hasExe = true)
+#set( $screenshot = "todos.png")
+
+#set( $githubRepoName = "GitHub Todos Showcase")
+#set( $githubRepoUrl = "https://github.com/JRebirth/JRebirth/tree/12.x-dev/org.jrebirth.af/showcase/todos")
+
+#parse("Presentation.vm")

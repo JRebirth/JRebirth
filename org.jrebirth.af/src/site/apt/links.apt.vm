@@ -9,43 +9,37 @@
 Useful links
 
 
- JRebirth provides 2 websites, one for latest development version and one for latest stable version.\
- The default website (<www>) is mapped to latest stable version to be sync with the latest released version.\
- The WorkInProgress web site (<wip>) provides latest changes, useful to track latest change or documentation additions.\
- All previous websites are still available for reference (<sites>).
+ JRebirth provides versioned Maven sites. The default website (\<www\>) is mapped to the latest stable documentation.
+ The WorkInProgress site (\<wip\>) tracks the development line. Previous generated sites remain available under \<sites\>.
 
 
 * All web sites
 
-	* Website for latest stable version: {{{http://www.jrebirth.org} www.jrebirth.org}}
+	* Website for latest stable version: {{{https://www.jrebirth.org} www.jrebirth.org}}
 
-	* Website for latest development version: {{{http://wip.jrebirth.org} wip.jrebirth.org}}
+	* Website for latest development version: {{{https://wip.jrebirth.org} wip.jrebirth.org}}
 
-	* List of all generated Websites: {{{http://sites.jrebirth.org} sites.jrebirth.org}}
+	* List of all generated Websites: {{{https://sites.jrebirth.org} sites.jrebirth.org}}
 
 * Javadoc
 
-	* Latest stable version (all modules mixed): {{{http://api.jrebirth.org} api.jrebirth.org}}
+	* Latest stable version (all modules mixed): {{{https://api.jrebirth.org} api.jrebirth.org}}
 
-	* Latest development version (all modules mixed): {{{http://wip-api.jrebirth.org} wip-api.jrebirth.org}}
+	* Latest development version (all modules mixed): {{{https://wip-api.jrebirth.org} wip-api.jrebirth.org}}
 
-	* Latest stable version of core module only: {{{http://api-core.jrebirth.org} api-core.jrebirth.org}}
+	* Latest stable version of core module only: {{{https://api-core.jrebirth.org} api-core.jrebirth.org}}
 
-	* Latest development version of core module only: {{{http://wip-api-core.jrebirth.org} wip-api-core.jrebirth.org}}
+	* Latest development version of core module only: {{{https://wip-api-core.jrebirth.org} wip-api-core.jrebirth.org}}
 
 
 * Software Factory
 
 	* Latest Source: {{{${project.scm.url}}${project.scm.url}}}
 
-	* Built with Jenkins: {{{${project.ciManagement.url}/lastSuccessfulBuild} ${project.ciManagement.url}}}
+	* Continuous Integration: {{{${project.ciManagement.url}} ${project.ciManagement.url}}}
 
-	* Checked by Sonar:  {{{http://quality.jrebirth.org/dashboard/index/1}quality.jrebirth.org}}
+	* Issue Tracker: {{{${project.issueManagement.url}} ${project.issueManagement.url}}}
 
-	* Distributed by Artifactory:  {{{http://repo.jrebirth.org/repo/org/jrebirth}repo.jrebirth.org}}
+	* Maven Central: {{{https://central.sonatype.com/search?q=g:org.jrebirth.af} central.sonatype.com}}
 
-	* Also available on Bintray Organization repo:  {{{https://bintray.com/jrebirth/JRebirth/JRebirthAF}bintray.com/jrebirth/JRebirth/JRebirthAF}}
-
-	* And JCenter (top level Bintray repository): {{{http://jcenter.bintray.com/org/jrebirth}jcenter.bintray.com}}
-	
-	* And obviously on Maven Central : {{{http://search.maven.org/#search|ga|1|g%3A%22org.jrebirth.af%22}search.maven.org}}
+	* GitHub Packages: {{{https://github.com/JRebirth/JRebirth/packages} github.com/JRebirth/JRebirth/packages}}
