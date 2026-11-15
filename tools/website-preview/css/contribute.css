@@ -1,46 +1,74 @@
-/*----------------------------------*/
-/*		Contribute Page				*/
-/*----------------------------------*/
+/* Contribute + Support — dark card grid (jr-docs) */
 
-div.soft h1 {
-    font-size: 15px;
+body.jr-docs .jr-contrib-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  margin: 1.75rem 0 0.5rem;
 }
-div.soft {
-	
-    background-color: #FFFFFF;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow: 0 4px 5px #666666;
-    float: left;
-    font-family: Verdana;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: normal;
-    height: 150px;
-    margin: 20px;
-    padding-left: 130px;
-    padding-right: 5px;
-    width: 30%;
-    background-position: 5px center;
-    background-repeat: no-repeat;
+
+body.jr-docs .jr-contrib-card {
+  margin: 0 !important;
+  padding: 1.25rem 1.3rem 1.35rem;
+  border-radius: 16px;
+  border: 1px solid rgba(49, 186, 255, 0.2);
+  background:
+    linear-gradient(165deg, rgba(14, 32, 54, 0.92), rgba(7, 15, 28, 0.96));
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+  float: none !important;
+  width: auto !important;
+  height: auto !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
 }
-div#jenkins {
-    background-image: url("../images/soft/jenkins.png");
+
+body.jr-docs .jr-contrib-card h3,
+body.jr-docs .jr-contrib-card h2 {
+  margin: 0 0 0.65rem !important;
+  color: #ffb447 !important;
+  font-size: 1.15rem !important;
 }
-div#sonar {
-    background-image: url("../images/soft/sonar.png");
+
+body.jr-docs .jr-contrib-card p {
+  margin: 0 0 0.7rem !important;
+  color: #c9d4e5;
+  font-size: 0.98rem;
 }
-div#artifactory {
-    background-image: url("../images/soft/artifactory.png");
+
+body.jr-docs .jr-contrib-card p:last-child {
+  margin-bottom: 0 !important;
 }
-div#github {
-    background-image: url("../images/soft/github.png");
+
+body.jr-docs .jr-contrib-card a {
+  color: #31baff;
+  font-weight: 600;
+  text-decoration: none;
+  word-break: break-word;
 }
-div#maven {
-    background-image: url("../images/soft/maven.png");
+
+body.jr-docs .jr-contrib-card a:hover {
+  text-decoration: underline;
+  color: #7ad4ff;
 }
-div#yourkit {
-    background-image: url("../images/soft/yourkit.png");
+
+body.jr-docs .jr-contrib-card code {
+  color: #ffb447;
+  background: rgba(255, 180, 71, 0.1);
+  padding: 0.12rem 0.4rem;
+  border-radius: 6px;
+  font-size: 0.88em;
 }
-div#structure101 {
-    background-image: url("../images/soft/structure101.png");
+
+/* lead paragraph under page title */
+body.jr-docs .jr-doc-shell > section > p:first-of-type,
+body.jr-docs .jr-doc-shell > p:first-of-type {
+  max-width: 52ch;
+  color: #9eb0c8;
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 760px) {
+  body.jr-docs .jr-contrib-grid {
+    grid-template-columns: 1fr;
+  }
 }

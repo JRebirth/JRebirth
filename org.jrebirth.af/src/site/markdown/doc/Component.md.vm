@@ -8,7 +8,7 @@
 <div id="catcherContent">Component allow reusability and provide good SoC</div>
 
 #if(!$all)
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc jr-sidebar-toc} -->
 #end   
 
 #include("_Component.md")

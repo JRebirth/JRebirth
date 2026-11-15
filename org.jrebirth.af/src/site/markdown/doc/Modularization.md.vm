@@ -1,4 +1,4 @@
-﻿<head>
+<head>
 <![CDATA[
 <title>Thread</title>
 <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />]]>
@@ -8,7 +8,7 @@
 <div id="catcherContent">How to modularize your application at runtime</div>
 
 #if(!$all)
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc jr-sidebar-toc} -->
 #end   
 
 #[[

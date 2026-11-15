@@ -9,7 +9,7 @@
 <div id="catcherContent">JRebirth Application Framework offers a very efficient pattern to build real Professional JavaFX applications.</div>
 
 #if(!$all)
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc jr-sidebar-toc} -->
 #end   
 
 #[[

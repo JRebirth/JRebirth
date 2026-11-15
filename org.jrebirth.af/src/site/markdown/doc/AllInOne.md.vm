@@ -1,7 +1,7 @@
 <div id="catcherTitle">JRebirth Application Framework Documentation</div>
 <div id="catcherContent">Learn how to use JRebirth to help you building sophisticated application in minutes.</div>
 
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc jr-sidebar-toc} -->
 
 #set( $all = true)
 
@@ -21,6 +21,7 @@
 #parse("Ui.md.vm")
 #parse("Behavior.md.vm")
 #parse("Resources.md.vm")
+#parse("ComponentLibrary.md.vm")
 
 
 <head>

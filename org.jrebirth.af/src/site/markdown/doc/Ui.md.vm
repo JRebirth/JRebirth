@@ -1,4 +1,4 @@
-﻿<head>
+<head>
 <![CDATA[
 	<title> User Interface</title>
 	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />]]>
@@ -9,7 +9,7 @@
 
 
 #if(!$all)
-<!-- MACRO{toc|section=0|fromDepth=0|toDepth=6|class=toc} -->
+<!-- MACRO{toc|section=0|fromDepth=0|toDepth=6|class=toc jr-sidebar-toc} -->
 #end   
 
 #[[

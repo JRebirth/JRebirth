@@ -26,7 +26,6 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd" name="JRebirth">
 		
 		<menu name="Apps">
 			<item name="All apps" href="apps/index.html" />
-			<item name="EzDojo" href="apps/EzDojo.html" />
 			<item name="Showcase Demo" href="apps/Demo.html" />
 			<item name="Mastering Tables" href="apps/MasteringTables.html" />
 			<item name="Comparison Tool" href="apps/ComparisonTool.html" />
@@ -73,9 +72,6 @@ http://maven.apache.org/xsd/decoration-1.3.0.xsd" name="JRebirth">
 			<item name="FXML" href="doc/FXML.html" />
 			<item name="Behaviors" href="doc/Behavior.html" />
 			<item name="Resources" href="doc/Resources.html" />
-		</menu>
-
-		<menu name="Extensions">
 			<item name="Component Library" href="doc/ComponentLibrary.html" />
 			<item name="Undo / Redo" href="doc/UndoRedo.html" />
 			<item name="Transitions" href="doc/Transitions.html" />
