@@ -8,7 +8,7 @@
 <div id="catcherContent">Writing concurrent application could be painful ! Not with JRebirth</div>
 
 #if(!$all)
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc jr-sidebar-toc} -->
 #end   
 
 #[[

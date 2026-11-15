@@ -19,7 +19,7 @@
 		<meta name="theme-color" content="#070f1c" />
 		<meta property="og:title" content="JRebirth — Build better JavaFX apps. Faster." />
 		<meta property="og:description" content="Less boilerplate. Clean architecture. More time to build." />
-		<meta property="og:image" content="images/brand/logo-lockup.png" />
+		<meta property="og:image" content="images/brand/JRebirth-logo-horizontal.webp" />
 		<link rel="stylesheet" type="text/css" href="css/landing.css" media="all" />
 		<script src="js/landing.js" defer="defer"></script>
 		<script src="js/wb-csmvc.js" defer="defer"></script>
@@ -34,7 +34,7 @@
 		<header class="jr-header" id="top">
 			<div class="jr-wrap jr-nav">
 				<a class="jr-brand" href="index.html" aria-label="JRebirth home">
-					<img class="jr-brand-logo" src="images/brand/logo-header.png" alt="JRebirth Application Framework" width="938" height="535" />
+					<img class="jr-brand-logo" src="images/brand/JRebirth-logo-horizontal.webp" srcset="images/brand/JRebirth-logo-horizontal-256.webp 256w, images/brand/JRebirth-logo-horizontal.webp 512w" sizes="(max-width: 760px) 160px, 280px" alt="JRebirth Application Framework" width="512" height="288" />
 				</a>
 				<button class="jr-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="jr-site-navigation">
 					<span></span><span></span><span></span>
@@ -61,7 +61,7 @@
 						<!-- Avoid &lt;picture&gt;/&lt;source&gt;: Maven Doxia xdoc turns &lt;source&gt; into a broken verbatim block.
 						     CSS swaps WebP variants: high-res default, 4K only on 4K viewports. -->
 						<img class="jr-hero-img jr-hero-img--high" src="images/brand/hero-flight-high.webp" alt="JRebirth Application Framework — fiery phoenix with abstract application UI" width="1024" height="512" />
-						<img class="jr-hero-img jr-hero-img--4k" src="images/brand/hero-flight-4k.webp" alt="JRebirth Application Framework — fiery phoenix with abstract application UI" width="1024" height="512" />
+						<img class="jr-hero-img jr-hero-img--4k" src="images/brand/hero-flight-4k.jpg" alt="JRebirth Application Framework — fiery phoenix with abstract application UI" width="1024" height="512" />
 					</figure>
 					<div class="jr-hero-overlay">
 						<div class="jr-hero-copy jr-hero-copy--top">
@@ -352,7 +352,7 @@
 							</div>
 						</div>
 						<div class="jr-closing-mark">
-							<img src="images/brand/logo-phoenix-rise.webp" alt="JRebirth Application Framework" width="512" height="512" />
+							<img src="images/brand/logo-header.webp" alt="JRebirth Application Framework" width="512" height="512" />
 						</div>
 					</div>
 				</div>
@@ -362,7 +362,7 @@
 		<footer class="jr-footer">
 			<div class="jr-wrap jr-footer-top">
 				<a class="jr-footer-brand" href="index.html" aria-label="JRebirth home">
-					<img class="jr-brand-logo" src="images/brand/logo-header.png" alt="JRebirth" width="938" height="535" />
+					<img class="jr-brand-logo" src="images/brand/JRebirth-logo-horizontal.webp" srcset="images/brand/JRebirth-logo-horizontal-256.webp 256w, images/brand/JRebirth-logo-horizontal.webp 512w" sizes="(max-width: 760px) 140px, 220px" alt="JRebirth" width="512" height="288" />
 				</a>
 				<p>Less boilerplate. Clean architecture. More time to build.</p>
 				<div class="jr-footer-links">
@@ -375,7 +375,20 @@
 				</div>
 			</div>
 			<div class="jr-wrap jr-footer-bottom">
-				<span>© JRebirth OSS · Open-source JavaFX application framework</span>
+#set( $tmpStr = "bootstrap" )
+#set( $strClass = $tmpStr.getClass() )
+#set( $dateClass = $strClass.forName("java.util.Date") )
+#set( $sdfClass = $strClass.forName("java.text.SimpleDateFormat") )
+#set( $dateCtor = $dateClass.getConstructor() )
+#set( $sdfCtor = $sdfClass.getConstructor($strClass) )
+#set( $jrNow = $dateCtor.newInstance() )
+#set( $jrYearFmt = $sdfCtor.newInstance("yyyy") )
+#set( $copyrightYear = $jrYearFmt.format($jrNow) )
+#set( $inceptionYear = $project.inceptionYear )
+#if( !$inceptionYear )
+#set( $inceptionYear = "2011" )
+#end
+				<span>JRebirth OSS © ${inceptionYear}-${copyrightYear} · Open-source JavaFX application framework</span>
 				<span>Version ${project.version}</span>
 			</div>
 		</footer>

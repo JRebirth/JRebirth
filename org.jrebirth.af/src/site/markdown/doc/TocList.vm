@@ -42,9 +42,9 @@
 #end
 
 #*
-## Display Foot links
+## Shared Previous / TOC / Next pager (top or bottom)
 *#
-#macro( displayFooterToc $fileName )
+#macro( docPager $fileName $cssClass )
 
 	#set($foundIndex = false)
 	#set($indexVal = 0)
@@ -56,26 +56,46 @@
 		#end
 		#set($counter = $counter + 1)
 	#end
-	
+
 #if( $foundIndex )
 	#set( $previous = $indexVal - 1 )
 	#set( $next = $indexVal + 1 )
-	
-<div class="bottomLinks">
+
+<div class="${cssClass}">
 #if( $previous >= 0 )
 	<div class="previousDocPage">
-		<a href="${items.get($previous).link}.html">${items.get($previous).name}</a>
-	</div>
-#end	
-#if( $next < $items.size() )
-	<div class="nextDocPage">
-		<a href="${items.get($next).link}.html">${items.get($next).name}</a>
+		<a href="${items.get($previous).link}.html">
+			<span class="jr-doc-nav-dir">Previous</span>
+			<span class="jr-doc-nav-title">${items.get($previous).name}</span>
+		</a>
 	</div>
 #end
 	<div class="tocDocPage">
-		<a href="Toc.html">TOC</a>
+		<a href="Toc.html">
+			<span class="jr-doc-nav-dir">Contents</span>
+			<span class="jr-doc-nav-title">TOC</span>
+		</a>
 	</div>
+#if( $next < $items.size() )
+	<div class="nextDocPage">
+		<a href="${items.get($next).link}.html">
+			<span class="jr-doc-nav-dir">Next</span>
+			<span class="jr-doc-nav-title">${items.get($next).name}</span>
+		</a>
+	</div>
+#end
 </div>
 #end
 
+#end
+
+#*
+## Display header + footer pagers
+*#
+#macro( displayHeaderToc $fileName )
+#docPager( $fileName "topLinks" )
+#end
+
+#macro( displayFooterToc $fileName )
+#docPager( $fileName "bottomLinks" )
 #end

@@ -153,9 +153,9 @@ body.jr-landing #page ol {
 }
 .jr-brand-logo {
   display: block;
-  height: 76px;
+  height: 64px;
   width: auto;
-  max-width: min(380px, 50vw);
+  max-width: min(320px, 52vw);
   object-fit: contain;
   object-position: left center;
   background: transparent;
@@ -163,8 +163,8 @@ body.jr-landing #page ol {
   filter: drop-shadow(0 4px 14px rgba(7, 15, 28, 0.55));
 }
 .jr-footer-brand .jr-brand-logo {
-  height: 44px;
-  max-width: 220px;
+  height: 48px;
+  max-width: min(240px, 55vw);
 }
 .jr-menu-toggle {
   display: none;
@@ -1152,10 +1152,8 @@ body.jr-landing #page ol {
   align-items: center;
   padding: 2rem;
   border-radius: 24px;
-  border: 1px solid rgba(255, 110, 32, 0.25);
-  background:
-    radial-gradient(circle at 85% 40%, rgba(255, 110, 32, 0.18), transparent 40%),
-    linear-gradient(135deg, rgba(14, 32, 54, 0.95), rgba(7, 15, 28, 0.95));
+  border: 1px solid rgba(49, 186, 255, 0.18);
+  background: linear-gradient(135deg, rgba(14, 32, 54, 0.95), rgba(7, 15, 28, 0.95));
 }
 .jr-closing-box p {
   color: var(--muted);
@@ -1164,7 +1162,7 @@ body.jr-landing #page ol {
 }
 .jr-closing-mark {
   justify-self: end;
-  width: min(280px, 46vw);
+  width: min(440px, 58vw);
   opacity: 1;
   background: transparent;
 }
@@ -1175,8 +1173,8 @@ body.jr-landing #page ol {
   object-fit: contain;
   background: transparent;
   border: 0;
-  border-radius: 12px;
-  filter: drop-shadow(0 14px 36px rgba(255, 110, 32, 0.4));
+  border-radius: 16px;
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.35));
 }
 
 /* Footer */
@@ -1314,6 +1312,7 @@ body.jr-landing #page ol {
   }
   .jr-closing-mark {
     justify-self: center;
+    width: min(360px, 72vw);
   }
 }
 

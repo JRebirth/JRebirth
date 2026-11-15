@@ -9,10 +9,13 @@
 <div id="catcherContent">Ready-made UI containers: Stack, Tabs, Dock, and Workbench</div>
 
 #if(!$all)
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc jr-sidebar-toc} -->
 #end
 
 #[[
+
+Component Library
+=========================
 
 ## In 30 seconds
 

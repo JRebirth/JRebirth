@@ -1,4 +1,4 @@
-﻿<head>
+<head>
 <![CDATA[
     <title>Undo / Redo</title>
     <link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all"/>
@@ -9,7 +9,7 @@
 <div id="catcherContent">Complete undo/redo system based on the Command pattern with named stacks</div>
 
 #if(!$all)
-<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc} -->
+<!-- MACRO{toc|section=0|fromDepth=1|toDepth=4|class=toc jr-sidebar-toc} -->
 #end
 
 #[[
