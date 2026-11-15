@@ -86,7 +86,7 @@
 					<version>${maven.plugin.plugin.version}</version>
 				<configuration>
 					<goalPrefix>jrebirth</goalPrefix>
-					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+					<skipErrorNoDescriptorsFound>false</skipErrorNoDescriptorsFound>
 
 				</configuration>
 				<executions>

@@ -1,0 +1,2 @@
+Erreur : impossible de trouver ou de charger la classe principale org.jrebirth.af.showcase.wave.WaveApplication
+Causé par : java.lang.ClassNotFoundException: org.jrebirth.af.showcase.wave.WaveApplication

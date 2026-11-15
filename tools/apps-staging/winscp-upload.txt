@@ -1,0 +1,19 @@
+option batch abort
+option confirm off
+open sftp://u39172299:JsDtPelm2p#15!:@s143909802.onlinehome.fr/ -hostkey=*
+lcd D:\DEV\GIT\JRebirth\tools\apps-staging
+cd /kunden/homepages/14/d143909784/htdocs/jrebirth/sites
+put -r site-org.jrebirth-12.0.0 org.jrebirth-12.0.0
+cd /kunden/homepages/14/d143909784/htdocs/jrebirth/apps
+put -r demo
+put -r analyzer
+put -r wave
+put -r fxml
+put -r undoredo
+put -r todos
+put -r fonticon
+put -r workbench
+put -r masteringtables
+put -r jaf
+put -r comparisontool
+exit

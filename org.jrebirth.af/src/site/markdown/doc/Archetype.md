@@ -50,7 +50,7 @@ Full Auto
 <a href="images/tuto/Maven_Archetype_CLI_OneLine.png" rel="lightbox">
 	![CLI OneLine](images/icons/view.gif)
 </a>
-mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DarchetypeGroupId=org.jrebirth.af
+mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=https://www.jrebirth.org/archetype/jrebirth-catalog.xml -DarchetypeGroupId=org.jrebirth.af
 -DarchetypeArtifactId=archetype
 -DarchetypeVersion=${project.version} -DgroupId=org.jrebirth.af -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
 -Dpackage=org.jrebirth.af.sample
@@ -59,7 +59,7 @@ mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=http://www.jre
 Interactive pre-filled
 ----------------------
 
-mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml -DgroupId=org.jrebirth.af -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
+mvn archetype:generate -DarchetypeCatalog=https://www.jrebirth.org/archetype/jrebirth-catalog.xml -DgroupId=org.jrebirth.af -DartifactId=sample -Dversion=1.0.0-SNAPSHOT
 -Dpackage=org.jrebirth.af.sample
 	
 
@@ -69,7 +69,7 @@ Full Interactive
 <a href="images/tuto/Maven_Archetype_CLI_interactive.png" rel="lightbox">
 	![CLI Interactive](images/icons/view.gif)
 </a>
-mvn archetype:generate -DarchetypeCatalog=http://www.jrebirth.org/archetype/jrebirth-catalog.xml
+mvn archetype:generate -DarchetypeCatalog=https://www.jrebirth.org/archetype/jrebirth-catalog.xml
 
 
 				

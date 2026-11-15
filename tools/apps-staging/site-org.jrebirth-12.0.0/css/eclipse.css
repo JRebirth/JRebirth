@@ -1,0 +1,59 @@
+.str {
+  color: #2a00ff;
+}
+.kwd {
+  font-weight: bold;
+  color: #7f0055;
+}
+.com {
+  color: #3f5fbf;
+}
+.typ {
+  color: #000000;
+}
+.lit {
+  color: #000000;
+}
+.pun {
+  color: #000000;
+}
+.pln {
+  color: #000000;
+}
+.tag {
+  color: #3f7f7f;
+}
+.atn {
+  color: #7f007f;
+}
+.atv {
+  font-style: italic;
+  color: #2a00ff;
+}
+.dec {
+  color: #000000;
+}
+pre.prettyprint {
+  border: 1px dashed #cccccc;
+  padding: 10px 5px;
+  tab-size: 4;
+  -o-tab-size: 4;
+  -moz-tab-size: 4;
+  background: #ffffff none repeat scroll 0%;
+}
+pre.prettyprint li:hover {
+  background: #e8f2fe none repeat scroll 0% 50%;
+}
+li code {
+  margin-left: 10px;
+}
+ol.linenums {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #cccccc;
+}
+li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9 {
+  list-style-type: decimal;
+}
+li.L1, li.L3, li.L5, li.L7, li.L9 {
+}

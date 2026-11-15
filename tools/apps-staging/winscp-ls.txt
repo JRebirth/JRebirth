@@ -1,0 +1,15 @@
+option batch abort
+option confirm off
+open "u39172299@jrebirth.org"
+pwd
+ls
+cd jrebirth
+ls
+cd sites
+ls
+cd org.jrebirth-12.0.0
+ls
+pwd
+cd /xoxi/www/jrebirth/apps
+ls
+exit

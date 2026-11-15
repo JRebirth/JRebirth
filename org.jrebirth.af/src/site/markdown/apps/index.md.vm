@@ -1,0 +1,41 @@
+
+#set( $title = "JRebirth Applications & Demos" )
+#set( $author = "Sebastien Bordes" )
+#set( $date = "15/11/2026" )
+
+<head>
+<![CDATA[
+	<title>${title}</title>
+	<author>${author}</author>
+	<date>$date</date>
+	<meta name="description" content="Download and try JRebirth applications and the modular Showcase Demo." />
+]]>
+</head>
+
+Applications &amp; Demos
+========================
+
+Portable downloads for Windows. Prefer the **ZIP** (bundled runtime via jlink): unzip, then run `bin/AppName.bat`.
+
+Conference slide decks live on the [Presentations](../presentations/index.html) page.
+
+### Apps
+
+| App | What it shows |
+| --- | --- |
+| [**EzDojo Manager**](EzDojo.html) | Real-world production desktop app built with JRebirth 12 |
+| [**Mastering Tables**](MasteringTables.html) | Rich table / data-grid sample |
+| [**Comparison Tool**](ComparisonTool.html) | Side-by-side comparison desktop tool |
+| [**Showcase Demo**](Demo.html) | Modular demo embedding Wave, Todos, Workbench, FXML, Undo/Redo, FontIcon |
+| [**Analyzer**](Analyzer.html) | Runtime wave analyzer |
+
+### Embedded in Showcase Demo
+
+These modules ship inside [Showcase Demo](Demo.html) — no separate home tiles:
+
+* [Wave](Wave.html)
+* [Todos](Todos.html)
+* [Workbench](Workbench.html)
+* [FXML](FXML.html)
+* [Undo / Redo](UndoRedo.html)
+* [FontIcon](FontIcon.html)

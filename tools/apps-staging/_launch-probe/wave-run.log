@@ -1,0 +1,36 @@
+11:18:28.321 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.i18n.MessageBuilder -- 1 Messages file found.
+11:18:28.326 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.i18n.MessageBuilder -- Store ResourceBundle : Messages_rb 
+11:18:28.364 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.parameter.ParameterBuilder -- 1 configuration file found.
+11:18:28.365 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.parameter.ParameterBuilder -- Read configuration file : org/jrebirth/af/showcase/wave/jrebirth.properties 
+11:18:28.372 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>0|CREATE_APPLICATION|null|org.jrebirth.af.showcase.wave.WaveApplication|null|
+11:18:28.374 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>1|CREATE_GLOBAL_FACADE|org.jrebirth.af.showcase.wave.WaveApplication|org.jrebirth.af.core.facade.GlobalFacadeBase|null|
+11:18:28.374 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>2|CREATE_NOTIFIER|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.link.NotifierBase|null|
+11:18:28.375 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>3|CREATE_COMMAND_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.CommandFacade|null|
+11:18:28.376 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>4|CREATE_SERVICE_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.ServiceFacade|null|
+11:18:28.376 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>5|CREATE_UI_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.UiFacade|null|
+11:18:28.376 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>6|CREATE_BEHAVIOR_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.BehaviorFacade|null|
+11:18:28.399 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : JRebirth_16x16.png not found into 'org.jrebirth.af.showcase.wave' module folder: org/jrebirth/af/showcase/wave/images/JRebirth_16x16.png
+11:18:28.399 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.image.ImageBuilder -- Image : JRebirth_16x16.png not found into base folder: [images]
+11:18:28.400 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : NotAvailableImage.png not found into 'org.jrebirth.af.core' module folder: org/jrebirth/af/core/images/NotAvailableImage.png
+11:18:28.400 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.image.ImageBuilder -- Image : NotAvailableImage.png not found into base folder: [images]
+11:18:28.577 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : JRebirth_32x32.png not found into 'org.jrebirth.af.showcase.wave' module folder: org/jrebirth/af/showcase/wave/images/JRebirth_32x32.png
+11:18:28.577 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.image.ImageBuilder -- Image : JRebirth_32x32.png not found into base folder: [images]
+11:18:28.577 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : JRebirth_64x64.png not found into 'org.jrebirth.af.showcase.wave' module folder: org/jrebirth/af/showcase/wave/images/JRebirth_64x64.png
+11:18:28.577 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.image.ImageBuilder -- Image : JRebirth_64x64.png not found into base folder: [images]
+11:18:28.578 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : JRebirth_128x128.png not found into 'org.jrebirth.af.showcase.wave' module folder: org/jrebirth/af/showcase/wave/images/JRebirth_128x128.png
+11:18:28.578 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.image.ImageBuilder -- Image : JRebirth_128x128.png not found into base folder: [images]
+11:18:28.578 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : JRebirth_256x256.png not found into 'org.jrebirth.af.showcase.wave' module folder: org/jrebirth/af/showcase/wave/images/JRebirth_256x256.png
+11:18:28.578 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.image.ImageBuilder -- Image : JRebirth_256x256.png not found into base folder: [images]
+11:18:28.620 [JavaFX Application Thread] WARN org.jrebirth.af.core.application.AbstractApplication -- No style sheet has been added to the scene, will link the default.css
+11:18:28.621 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : default/default.css not found into 'org.jrebirth.af.core' module folder: org/jrebirth/af/core/styles/default/default.css
+11:18:28.621 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.style.StyleSheetBuilder -- Style Sheet : default/default.css not found into base folder: [styles]
+11:18:28.659 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>7|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.ChainWaveCommand|null|
+11:18:28.671 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>8|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+11:18:28.672 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>9|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:18:28.673 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>10|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+11:18:28.675 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>11|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:18:28.678 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>12|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.wave.ui.main.MainModel|null|
+11:18:28.753 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>13|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:18:28.754 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>14|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+11:18:28.760 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>15|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:18:28.761 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>16|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|

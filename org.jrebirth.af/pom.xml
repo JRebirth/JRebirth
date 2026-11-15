@@ -15,9 +15,9 @@
 	<packaging>pom</packaging>
 	<name>JRebirth Application Framework</name>
 
-	<url>http://sites.jrebirth.org/org.jrebirth-${project.version}</url>
+	<url>https://sites.jrebirth.org/org.jrebirth-${project.version}</url>
 
-	<description>JRebirth is an Application Framework dedicated to JavaFX 2+ technology.</description>
+	<description>JRebirth is an Application Framework dedicated to JavaFX (Java 25 / JavaFX 26 / JPMS).</description>
 	<inceptionYear>2011</inceptionYear>
 
 	<properties>
@@ -26,9 +26,9 @@
 		<BreizhcampVersion>3.0.0</BreizhcampVersion>
 		<EclipseCONVersion>3.0.0</EclipseCONVersion>
 		<LightningTalkVersion>3.0.0</LightningTalkVersion>
-		<JafVersion>3.0.0</JafVersion>
+		<JafVersion>4.0.0</JafVersion>
 		<MasteringTablesVersion>4.0.0</MasteringTablesVersion>
-		<ComparisonToolVersion>2.0.0-SNAPSHOT</ComparisonToolVersion>
+		<ComparisonToolVersion>2.0.0</ComparisonToolVersion>
 
 		<maven.version>3.9.11</maven.version>
 
@@ -114,24 +114,24 @@
 
 	<issueManagement>
 		<system>GitHub Issue Tracker</system>
-		<url>http://bugs.jrebirth.org</url>
+		<url>https://github.com/JRebirth/JRebirth/issues</url>
 	</issueManagement>
 
 	<ciManagement>
-		<system>Jenkins</system>
-		<url>http://ci.jrebirth.org/job/JRebirth-8x/</url>
+		<system>GitHub Actions</system>
+		<url>https://github.com/JRebirth/JRebirth/actions</url>
 	</ciManagement>
 
 	<scm>
-		<connection>scm:git:git://github.com/JRebirth/JRebirth.git</connection>
+		<connection>scm:git:https://github.com/JRebirth/JRebirth.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/JRebirth/JRebirth.git</developerConnection>
-		<url>https://github.com/JRebirth/JRebirth/tree/8.x-dev</url>
+		<url>https://github.com/JRebirth/JRebirth/tree/12.x-dev</url>
 	</scm>
 
 	<licenses>
 		<license>
 			<name>Apache License</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
 			<distribution>repo</distribution>
 			<comments>Version 2.0, January 2004</comments>
 		</license>
@@ -142,9 +142,9 @@
 			<id>jr1</id>
 			<name>Bordes Sébastien</name>
 			<email>seb@jrebirth.org</email>
-			<url>blog.jrebirth.org</url>
+			<url>https://github.com/JRebirth/JRebirth</url>
 			<organization>JRebirth</organization>
-			<organizationUrl>www.jrebirth.org</organizationUrl>
+			<organizationUrl>https://www.jrebirth.org</organizationUrl>
 			<roles>
 				<role>JRebirth Designer</role>
 			</roles>
@@ -153,9 +153,9 @@
 			<id>jr2</id>
 			<name>Bordes Céline</name>
 			<email>celine@jrebirth.org</email>
-			<url>www.jrebirth.org</url>
+			<url>https://www.jrebirth.org</url>
 			<organization>JRebirth</organization>
-			<organizationUrl>www.jrebirth.org</organizationUrl>
+			<organizationUrl>https://www.jrebirth.org</organizationUrl>
 			<roles>
 				<role>Graphic Designer</role>
 			</roles>

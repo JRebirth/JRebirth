@@ -27,5 +27,5 @@ mvn -f org.jrebirth.af/pom.xml -B -Pdeploy-central clean deploy \
 
 ## GitHub Actions
 
-- Tag: `af-12.0.0`
+- Tag: `jrebirth-12.0.0`
 - Or workflow_dispatch with version `12.0.0`

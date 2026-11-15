@@ -1,0 +1,8 @@
+option batch abort
+option confirm off
+open "u39172299@home143909784.1and1-data.host"
+pwd
+ls /
+ls /jrebirth
+ls /jrebirth/sites
+exit

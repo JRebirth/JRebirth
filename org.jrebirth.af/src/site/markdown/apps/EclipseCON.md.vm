@@ -28,8 +28,10 @@
 
 #set( $isPresentation = true)
 #set( $hasZip = true)
-#set( $hasJar = true)
-#set( $hasExe = true)
+#set( $hasJar = false)
+#set( $hasExe = false)
+
+#set( $screenshot = "eclipsecon.png")
 
 #set( $githubRepoName = "GitHub EclipseCON-France repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/EclipseCON-France")

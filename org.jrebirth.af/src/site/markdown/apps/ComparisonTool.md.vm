@@ -11,8 +11,8 @@
 #set( $archiveName = "ComparisonTool")
 #set( $downloadName = "Comparison Tool")
 
-#set( $width = "800")
-#set( $height = "600")
+#set( $width = "1024")
+#set( $height = "710")
 
 #set( $sectionId = "ComparisonTool")
 #set( $sectionTitle = "Comparison Tool - Bundle utility")
@@ -24,8 +24,10 @@
 
 #set( $isPresentation = false)
 #set( $hasZip = true)
-#set( $hasJar = true)
+#set( $hasJar = false)
 #set( $hasExe = true)
+
+#set( $screenshot = "comparisontool.png")
 
 #set( $githubRepoName = "GitHub ComparisonTool repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/ComparisonTool")

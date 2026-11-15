@@ -24,8 +24,10 @@
 
 #set( $isPresentation = true)
 #set( $hasZip = true)
-#set( $hasJar = true)
-#set( $hasExe = true)
+#set( $hasJar = false)
+#set( $hasExe = false)
+
+#set( $screenshot = "lightningtalk.png")
 
 #set( $githubRepoName = "GitHub LightningTalk Repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/LightningTalk")

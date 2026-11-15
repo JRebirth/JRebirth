@@ -1,0 +1,22 @@
+div#header, div#navmenu, div#catcher, div.bottomLinks, div#footer, body > a{
+	display:none;
+}
+
+div#container {
+    background-color: transparent;
+    border-radius: inherit;
+    box-shadow: inherit;
+    margin: 0;
+    width: 100%;
+}
+
+div#page{
+    background-color: #FFFFFF;
+    margin: 0;
+    overflow: visible;
+    width: 100%;
+}
+
+img#docHeader{
+	display:block;
+}

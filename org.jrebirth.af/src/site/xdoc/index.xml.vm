@@ -1,284 +1,384 @@
 <!DOCTYPE document [
-  <!-- These are the entity sets for ISO Latin 1 characters for the XHTML -->
   <!ENTITY % HTMLlat1 PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
   %HTMLlat1;
-  <!-- These are the entity sets for special characters for the XHTML -->
   <!ENTITY % HTMLsymbol PUBLIC "-//W3C//ENTITIES Symbols for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
   %HTMLsymbol;
-  <!-- These are the entity sets for symbol characters for the XHTML -->
   <!ENTITY % HTMLspecial PUBLIC "-//W3C//ENTITIES Special for XHTML//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
   %HTMLspecial;
 ]>
-<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
 	<properties>
-		<title>Application Framework for JavaFX</title>
+		<title>Build better JavaFX apps. Faster.</title>
 	</properties>
 
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/homepage.css" media="all" />
-		
-		
-		<!-- Important Owl stylesheet -->
-	    <link rel="stylesheet" href="owl-carousel/owl.carousel.css" />
-	     
-	    <!-- Default Theme -->
-	    <link rel="stylesheet" href="owl-carousel/owl.theme.css" />
-	     
-	    <!-- jQuery 1.7+ -->
-	    <script src="js/jquery-1.9.1.min.js"></script>
-	     
-	    <!-- Include js plugin -->
-	    <script src="owl-carousel/owl.carousel.js"></script>
-	    
-	    <script type="text/javascript" src="js/carousel.js"></script>
-		
-		<script type="text/javascript" src="js/jquery.sticky.js"></script>
-		<script>
-		  $(document).ready(function(){
-		    $("#navmenu").sticky({topSpacing:-7});
-		  });
-		</script>
+		<meta name="description" content="JRebirth is an open-source JavaFX application framework for clean architecture, reusable components and simplified multithreading." />
+		<meta name="theme-color" content="#070f1c" />
+		<meta property="og:title" content="JRebirth — Build better JavaFX apps. Faster." />
+		<meta property="og:description" content="Less boilerplate. Clean architecture. More time to build." />
+		<meta property="og:image" content="images/brand/logo-lockup.png" />
+		<link rel="stylesheet" type="text/css" href="css/landing.css" media="all" />
+		<script src="js/landing.js" defer="defer"></script>
+		<script src="js/wb-csmvc.js" defer="defer"></script>
 	</head>
 
 	<body>
 
-    <div id="home_catcher" class="owl-carousel owl-theme">
-     
-	    <div class="item">
-    		<div class="catchLeft">
-				<h1 class="bigBlue">Outstanding
-				<br />
-				Application
-				<br />
-				Framework
-				</h1>
-			</div>
-			<div class="catchRight">
-				<p class="mediumOrange">
-				RIA Pattern providing perfect
-				<a title="Separation of Concerns" href="http://en.wikipedia.org/wiki/Separation_of_concerns" target="_blank">SoC</a>
-				<br />
-				Simplify Multithreaded Development
-				<br />
-				Built according to
-				<a title="KISS principle" href="http://en.wikipedia.org/wiki/KISS_principle" target="_blank">KISS principle</a>
-				<br />
-				Lightweight (lower than 110kb with Pack200)
-				<br />
-				<a title="Apache 2 Licensed" href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Free</a>
-				&amp;
-				<a title="Open Source Repository" href="https://github.com/JRebirth/JRebirth" target="_blank">Open Source</a>
-				Library
-				<br /> <!-- <a href="#" title="Click for more info">More Info</a> -->
-				</p>
-			</div>
-		</div>
-    	
-    	<div class="item">
-			<div class="catchLeft">
-				<h1 class="bigBlue">
-				No More Lags
-				<br />
-				No More Freezes
-				</h1>
-			</div>
-			<div class="catchRight">
-				<p class="mediumOrange">
-					Manage all multithreading concerns efficiently without pain
-					<br />
-					UI tasks are automatically handled into UI thread
-					<br />
-					Long tasks are performed Thread Pools
-					<br />
-					Event Bus has its own thread
-				</p>
-			</div>
-		</div>
-		
-		<div class="item">
-			<div class="catchLeft">
-				<h1 class="bigBlue">Avoid
-				<br />
-				Memory
-				<br />
-				Leaks
-				</h1>
-			</div>
-			<div class="catchRight">
-				<p class="mediumOrange">
-					Release all Components when necessary
-					<br />
-					Manage all resources (Color, Font, Image, CSS, FXML)
-					<br />
-					All errors are caught and traced
-				</p>
-			</div>
-		</div>
-		
-		<div class="item">
-			<div class="catchLeft">
-				<h1 class="bigBlue">Keep Your
-				<br />
-				Project
-				<br />
-				Well Organized
-				</h1>
-			</div>
-			<div class="catchRight">
-				<p class="mediumOrange">
-					Main concerns are divided into Components 
-					<br />
-					(Command Service Model)
-					<br />
-					Code can be shared among Components by using Behaviors
-					<br />
-					UI usage is highly flexible (w|wo FXML)
-					<br />
-					
-				</p>
-			</div>
-		</div>
-		
-		<div class="item">
-			<div class="catchLeft">
-				<h1 class="bigBlue">
-				Modular
-				<br />
-				but not
-				<br />
-				over-engineered
-				</h1>
-			</div>
-			<div class="catchRight">
-				<p class="mediumOrange">
-					Each Component can be overridden at runtime
-					<br />
-					Provide pluggable engine to enhance applications (branding)
-					<br />
-					UI usage is highly flexible (w|wo FXML)
-					<br />
-					
-				</p>
-			</div>
-		</div>
-		
-    </div>
+		<a class="jr-skip" href="#jr-main">Skip to content</a>
+		<div class="jr-ambient jr-ambient--a" aria-hidden="true"></div>
+		<div class="jr-ambient jr-ambient--b" aria-hidden="true"></div>
 
-		<div id="features"><!-- <h2>JRebirth, Write your JavaFX2 Application more simply !</h2> -->
-			JRebirth JavaFX Application Framework provides a
-			<strong>really simple way to write sophisticated and powerful RIA and Desktop applications</strong>.
-			By leveraging the best of previous RIA framework, we can deliver the ultimate one to work cleanly and efficiently with this
-			<strong>awesome API</strong>.
-			Check our
-			<a href="doc/Overview.html">overview page</a>
-			to see a diagram illustrating features and layers. Have also a look to
-			<a href="apps/JRebirthTour.html">JRebirth Tour</a> presentation  
-            which was built with <strong>JRebirth</strong> presentation engine.
+		<header class="jr-header" id="top">
+			<div class="jr-wrap jr-nav">
+				<a class="jr-brand" href="index.html" aria-label="JRebirth home">
+					<img class="jr-brand-logo" src="images/brand/logo-header.png" alt="JRebirth Application Framework" width="938" height="535" />
+				</a>
+				<button class="jr-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="jr-site-navigation">
+					<span></span><span></span><span></span>
+				</button>
+				<nav class="jr-nav-links" id="jr-site-navigation" aria-label="Main navigation">
+					<a href="index.html">Home</a>
+					<a href="apps/index.html">Apps</a>
+					<a href="presentations/index.html">Presentations</a>
+					<a href="doc/Archetype.html">Tutorial</a>
+					<a href="doc/Toc.html">Documentation</a>
+					<a href="faq.html">FAQ</a>
+					<a href="links.html">Useful links</a>
+					<a href="Support.html">Community</a>
+					<a class="jr-nav-cta" href="#get-started">Get from Maven</a>
+				</nav>
+			</div>
+		</header>
+
+		<div id="jr-main">
+			<div class="jr-hero" aria-labelledby="jr-hero-title">
+				<div class="jr-hero-bg" aria-hidden="true"></div>
+				<div class="jr-hero-stage">
+					<figure class="jr-hero-art">
+						<!-- Avoid &lt;picture&gt;/&lt;source&gt;: Maven Doxia xdoc turns &lt;source&gt; into a broken verbatim block.
+						     CSS swaps WebP variants: high-res default, 4K only on 4K viewports. -->
+						<img class="jr-hero-img jr-hero-img--high" src="images/brand/hero-flight-high.webp" alt="JRebirth Application Framework — fiery phoenix with abstract application UI" width="1024" height="512" />
+						<img class="jr-hero-img jr-hero-img--4k" src="images/brand/hero-flight-4k.webp" alt="JRebirth Application Framework — fiery phoenix with abstract application UI" width="1024" height="512" />
+					</figure>
+					<div class="jr-hero-overlay">
+						<div class="jr-hero-copy jr-hero-copy--top">
+							<div class="jr-eyebrow"><span class="jr-eyebrow-line"></span> The JavaFX Application Framework</div>
+							<p role="heading" aria-level="1" class="jr-h1" id="jr-hero-title">Build better <span class="jr-javafx">JavaFX</span> applications. <span class="jr-accent">Faster.</span></p>
+							<p class="jr-hero-tagline">Less boilerplate. Clean architecture. More time to build.</p>
+						</div>
+						<div class="jr-hero-copy jr-hero-copy--bottom">
+							<p class="jr-hero-description">An open source framework that helps you build JavaFX desktop applications with clean architecture, reusable components and efficient development workflows.</p>
+							<div class="jr-actions">
+								<a class="jr-btn jr-btn-primary" href="https://central.sonatype.com/artifact/org.jrebirth.af/core" target="_blank" rel="noopener noreferrer">Get from Maven Central <span aria-hidden="true">↗</span></a>
+								<a class="jr-btn jr-btn-outline" href="https://github.com/JRebirth/JRebirth" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+								<a class="jr-btn jr-btn-ghost" href="doc/Toc.html">Documentation</a>
+							</div>
+							<div class="jr-hero-meta" aria-label="Compatibility and license">
+								<span><b class="jr-dot"></b> Open source</span>
+								<span>Version ${project.version}</span>
+								<span>Java 25 · JavaFX 26</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="jr-signal" aria-label="Key JRebirth strengths">
+				<div class="jr-wrap jr-signal-grid">
+					<div class="jr-signal-item"><span class="jr-signal-icon" aria-hidden="true">◇</span><div><strong>Clean by design</strong><small>Separation of concerns</small></div></div>
+					<div class="jr-signal-item"><span class="jr-signal-icon" aria-hidden="true">⌘</span><div><strong>Built to scale</strong><small>Reusable components</small></div></div>
+					<div class="jr-signal-item"><span class="jr-signal-icon" aria-hidden="true">↝</span><div><strong>Less thread friction</strong><small>Commands &amp; services</small></div></div>
+					<div class="jr-signal-item"><span class="jr-signal-icon" aria-hidden="true">✦</span><div><strong>Open source</strong><small>Apache License 2.0</small></div></div>
+				</div>
+			</div>
+
+			<div class="jr-section" id="benefits">
+				<div class="jr-wrap">
+					<div class="jr-section-head">
+						<div>
+							<p class="jr-kicker">Why JRebirth</p>
+							<p role="heading" aria-level="2" class="jr-h2">Make the complex <span class="jr-gradient">feel simple.</span></p>
+						</div>
+						<p class="jr-section-intro">Spend less time wiring your application together and more time building the experience that matters.</p>
+					</div>
+					<div class="jr-features">
+						<div class="jr-feature">
+							<div class="jr-icon" aria-hidden="true">⧉</div>
+							<div class="jr-feature-number">01 / ARCHITECTURE</div>
+							<p role="heading" aria-level="3" class="jr-h3">Component-based architecture</p>
+							<p>Organize JavaFX features as focused components with clear boundaries that stay understandable as the project grows.</p>
+						</div>
+						<div class="jr-feature">
+							<div class="jr-icon" aria-hidden="true">⟳</div>
+							<div class="jr-feature-number">02 / CONCURRENCY</div>
+							<p role="heading" aria-level="3" class="jr-h3">Simple multithreading</p>
+							<p>Use commands, services and waves to structure work beyond the JavaFX application thread without drowning in plumbing.</p>
+						</div>
+						<div class="jr-feature">
+							<div class="jr-icon" aria-hidden="true">☰</div>
+							<div class="jr-feature-number">03 / DESIGN</div>
+							<p role="heading" aria-level="3" class="jr-h3">Clean separation of concerns</p>
+							<p>Keep presentation, application logic and long-running work in clearly defined roles with the wB-CSMvc pattern.</p>
+						</div>
+						<div class="jr-feature">
+							<div class="jr-icon" aria-hidden="true">▦</div>
+							<div class="jr-feature-number">04 / MODULARITY</div>
+							<p role="heading" aria-level="3" class="jr-h3">Reusable modules</p>
+							<p>Compose UI building blocks and share behaviors across features instead of rewriting the same wiring again.</p>
+						</div>
+						<div class="jr-feature">
+							<div class="jr-icon" aria-hidden="true">◉</div>
+							<div class="jr-feature-number">05 / COMMUNITY</div>
+							<p role="heading" aria-level="3" class="jr-h3">Open Source</p>
+							<p>Free under the Apache License 2.0, developed in the open on GitHub with demos, showcases and documentation.</p>
+						</div>
+						<div class="jr-feature">
+							<div class="jr-icon" aria-hidden="true">➤</div>
+							<div class="jr-feature-number">06 / PRODUCTIVITY</div>
+							<p role="heading" aria-level="3" class="jr-h3">JavaFX productivity</p>
+							<p>A focused framework guided by the KISS principle so you ship sophisticated desktop software with less boilerplate.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="jr-section" id="architecture">
+				<div class="jr-wrap">
+					<div class="jr-arch-intro">
+						<div class="jr-arch-copy">
+							<p class="jr-kicker">A better foundation</p>
+							<p role="heading" aria-level="2" class="jr-h2">Structure that <span class="jr-gradient">sets you free.</span></p>
+							<p>JRebirth uses the <strong>wB-CSMvc</strong> pattern to give every part of your application a clear responsibility. UI code stays focused on the interface; commands and services organize application work; behaviors cross-cut when needed; waves let components communicate.</p>
+						</div>
+						<div class="jr-arch-points">
+							<div><span class="jr-tiny-bullet"></span><span><b>Decoupled components</b><small>Features can evolve with less cross-component friction.</small></span></div>
+							<div><span class="jr-tiny-bullet"></span><span><b>Explicit responsibilities</b><small>Model, View and Controller each have their own job.</small></span></div>
+							<div><span class="jr-tiny-bullet"></span><span><b>Built-in coordination</b><small>Waves, commands and services help coordinate work.</small></span></div>
+						</div>
+						<a class="jr-text-link" href="doc/Overview.html">Explore the architecture overview <span aria-hidden="true">→</span></a>
+					</div>
+
+					<div class="jr-pyr" id="jr-wb-csmvc" aria-label="wB-CSMvc architecture built progressively from GlobalFacade">
+						<div class="jr-pyr-head">
+							<div class="jr-pyr-badge"><span class="jr-live-dot"></span> wB-CSMvc · Application → GF</div>
+							<div class="jr-pyr-toolbar">
+								<button type="button" class="jr-pyr-btn jr-pyr-btn--prev" aria-label="Previous step" title="Previous">◀</button>
+								<button type="button" class="jr-pyr-btn jr-pyr-btn--play">Play</button>
+								<button type="button" class="jr-pyr-btn jr-pyr-btn--next" aria-label="Next step" title="Next">▶</button>
+								<button type="button" class="jr-pyr-btn jr-pyr-btn--reset">Reset</button>
+								<span class="jr-pyr-progress">0 / 0</span>
+							</div>
+						</div>
+						<div class="jr-pyr-stage"></div>
+
+					<div class="jr-pyr-key" aria-label="Architecture legend">
+							<div class="jr-pyr-key-row">
+								<span class="jr-key"><i class="jr-key-dot jr-key-dot--bf"></i>BF BehaviorFacade</span>
+								<span class="jr-key"><i class="jr-key-dot jr-key-dot--cf"></i>CF CommandFacade</span>
+								<span class="jr-key"><i class="jr-key-dot jr-key-dot--sf"></i>SF ServiceFacade</span>
+								<span class="jr-key"><i class="jr-key-dot jr-key-dot--uf"></i>UF UiFacade</span>
+								<span class="jr-key"><i class="jr-key-dot jr-key-dot--gf"></i>GF GlobalFacade</span>
+								<span class="jr-key"><i class="jr-key-dot jr-key-dot--n"></i>N Notifier</span>
+							</div>
+							<div class="jr-pyr-key-row">
+								<span class="jr-key"><i class="jr-key-chip jr-key-chip--c">MC</i>MultiCommand</span>
+								<span class="jr-key"><i class="jr-key-chip jr-key-chip--c">SC</i>SimpleCommand</span>
+								<span class="jr-key"><i class="jr-key-chip jr-key-chip--s">S</i>Service</span>
+								<span class="jr-key"><i class="jr-key-chip jr-key-chip--m">M</i>Model</span>
+								<span class="jr-key"><i class="jr-key-chip jr-key-chip--ui">V/C</i>View · Controller</span>
+								<span class="jr-key"><i class="jr-key-chip jr-key-chip--ui">FXML</i>FXML · FXC</span>
+								<span class="jr-key"><i class="jr-key-beh jr-key-beh--c"></i><i class="jr-key-beh jr-key-beh--s"></i><i class="jr-key-beh jr-key-beh--m"></i>Behavior on C/S/M</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="jr-section" id="apps">
+				<div class="jr-wrap">
+					<div class="jr-section-head">
+						<p class="jr-kicker">Try it</p>
+						<p role="heading" aria-level="2" class="jr-h2">Apps &amp; <span class="jr-gradient">demos</span></p>
+						<p class="jr-section-intro">Standalone applications built with JRebirth. Wave, Todos, Workbench, FXML, Undo/Redo and FontIcon live inside the <a href="apps/Demo.html">Showcase Demo</a>.</p>
+					</div>
+					<div class="jr-apps">
+						<a class="jr-app" href="apps/EzDojo.html">
+							<img src="images/apps/ezdojo.png" alt="" width="640" height="400" />
+							<span class="jr-app-tag">Featured product</span>
+							<span class="jr-h3">EzDojo Manager</span>
+							<p>Real-world club management desktop app powered by JRebirth AF 12.</p>
+						</a>
+						<a class="jr-app" href="apps/MasteringTables.html">
+							<img src="images/apps/masteringtables.png" alt="" width="640" height="400" />
+							<span class="jr-app-tag">Application</span>
+							<span class="jr-h3">Mastering Tables</span>
+							<p>Table mastery sample — sorting, filtering and rich data grids.</p>
+						</a>
+						<a class="jr-app" href="apps/ComparisonTool.html">
+							<img src="images/apps/comparisontool.png" alt="" width="640" height="400" />
+							<span class="jr-app-tag">Application</span>
+							<span class="jr-h3">Comparison Tool</span>
+							<p>Side-by-side comparison UI built as a full desktop tool.</p>
+						</a>
+						<a class="jr-app" href="apps/Demo.html">
+							<img src="images/apps/demo.png" alt="" width="640" height="400" />
+							<span class="jr-app-tag">Showcase</span>
+							<span class="jr-h3">Showcase Demo</span>
+							<p>Modular launcher embedding Wave, Todos, Workbench, FXML, Undo/Redo and FontIcon.</p>
+						</a>
+					</div>
+					<div class="jr-actions" style="margin-top: 1.5rem;">
+						<a class="jr-btn jr-btn-outline" href="apps/index.html">Browse all apps</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="jr-section" id="presentations">
+				<div class="jr-wrap">
+					<div class="jr-section-head">
+						<p class="jr-kicker">Talks</p>
+						<p role="heading" aria-level="2" class="jr-h2">Presentations</p>
+						<p class="jr-section-intro">Conference and meetup slide decks powered by the JRebirth presentation module.</p>
+					</div>
+					<div class="jr-apps">
+						<a class="jr-app" href="apps/JRebirthTour.html">
+							<img src="images/apps/jrebirthtour.png" alt="" width="640" height="400" />
+							<span class="jr-app-tag">Presentation</span>
+							<span class="jr-h3">JRebirth Tour</span>
+							<p>Guided tour of the framework for meetups and workshops.</p>
+						</a>
+						<a class="jr-app" href="apps/LightningTalk.html">
+							<img src="images/apps/lightningtalk.png" alt="" width="640" height="400" />
+							<span class="jr-app-tag">Presentation</span>
+							<span class="jr-h3">LightningTalk</span>
+							<p>Short-format talk deck — slides as a native desktop app.</p>
+						</a>
+						<a class="jr-app" href="apps/Breizhcamp.html">
+							<img src="images/apps/breizhcamp.png" alt="" width="640" height="400" />
+							<span class="jr-app-tag">Presentation</span>
+							<span class="jr-h3">Breizhcamp</span>
+							<p>Breizhcamp conference presentation built with JRebirth.</p>
+						</a>
+						<a class="jr-app" href="apps/EclipseCON.html">
+							<img src="images/apps/eclipsecon.png" alt="" width="640" height="400" />
+							<span class="jr-app-tag">Presentation</span>
+							<span class="jr-h3">EclipseCON</span>
+							<p>EclipseCON talk deck showcasing the application framework.</p>
+						</a>
+					</div>
+					<div class="jr-actions" style="margin-top: 1.5rem;">
+						<a class="jr-btn jr-btn-outline" href="presentations/index.html">Browse all presentations</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="jr-section" id="get-started">
+				<div class="jr-wrap jr-starter-grid">
+					<div>
+						<p class="jr-kicker">Start building</p>
+						<p role="heading" aria-level="2" class="jr-h2">From idea to <span class="jr-gradient">JavaFX application.</span></p>
+						<p>Add JRebirth to your Java project with Maven, then explore the source and examples. The current release targets Java 25 and JavaFX 26.</p>
+						<div class="jr-actions">
+							<a class="jr-btn jr-btn-primary" href="https://central.sonatype.com/artifact/org.jrebirth.af/core" target="_blank" rel="noopener noreferrer">Maven Central <span aria-hidden="true">↗</span></a>
+							<a class="jr-btn jr-btn-outline" href="doc/Archetype.html">3-minute tutorial</a>
+							<a class="jr-btn jr-btn-ghost" href="apps/index.html">Try the demos</a>
+						</div>
+					</div>
+					<div class="jr-code-card">
+						<div class="jr-code-top">
+							<div class="jr-code-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+							<span>pom.xml</span>
+							<button type="button" class="jr-copy-btn" id="jr-copy-btn" title="Copy Maven snippet">Copy code</button>
+						</div>
+						<pre class="jr-code" id="jr-maven-code"><code><span class="jr-code-muted">&lt;!-- JRebirth Application Framework --&gt;</span>
+<span class="jr-code-blue">&lt;dependency&gt;</span>
+  <span class="jr-code-pink">&lt;groupId&gt;</span>org.jrebirth.af<span class="jr-code-pink">&lt;/groupId&gt;</span>
+  <span class="jr-code-pink">&lt;artifactId&gt;</span>core<span class="jr-code-pink">&lt;/artifactId&gt;</span>
+  <span class="jr-code-pink">&lt;version&gt;</span><span class="jr-code-orange">${project.version}</span><span class="jr-code-pink">&lt;/version&gt;</span>
+<span class="jr-code-blue">&lt;/dependency&gt;</span></code></pre>
+						<div class="jr-code-footer">
+							<span><span class="jr-live-dot"></span> Maven Central</span>
+							<span>Apache License 2.0</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="jr-section" id="guides">
+				<div class="jr-wrap">
+					<div class="jr-section-head">
+						<p class="jr-kicker">Guides &amp; resources</p>
+						<p role="heading" aria-level="2" class="jr-h2">Start fast, <span class="jr-gradient">stay oriented.</span></p>
+					</div>
+					<div class="jr-guides">
+						<a class="jr-guide" href="doc/Archetype.html">
+							<span class="jr-guide-kicker">Tutorial</span>
+							<span class="jr-h3">3-minute tutorial</span>
+							<p>Bootstrap a JRebirth app with the Maven archetype and run it in minutes.</p>
+						</a>
+						<a class="jr-guide" href="faq.html">
+							<span class="jr-guide-kicker">FAQ</span>
+							<span class="jr-h3">License &amp; FAQ</span>
+							<p>What JRebirth is, why use it, and answers to common project questions.</p>
+						</a>
+						<a class="jr-guide" href="links.html">
+							<span class="jr-guide-kicker">Links</span>
+							<span class="jr-h3">Useful links</span>
+							<p>Sites, Javadoc, Maven Central, CI, issues and the software factory.</p>
+						</a>
+						<a class="jr-guide" href="license.html">
+							<span class="jr-guide-kicker">License</span>
+							<span class="jr-h3">Apache License 2.0</span>
+							<p>Open-source terms, credits and how you can use JRebirth freely.</p>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="jr-section" id="resources">
+				<div class="jr-wrap">
+					<div class="jr-closing-box">
+						<div class="jr-closing-text">
+							<p class="jr-kicker">Build what's next</p>
+							<p role="heading" aria-level="2" class="jr-h2">Give your JavaFX ideas <span class="jr-gradient">room to rise.</span></p>
+							<p>A thoughtful foundation for sophisticated desktop software. Open source, component-oriented, and built for JavaFX developers.</p>
+							<div class="jr-actions">
+								<a class="jr-btn jr-btn-primary" href="https://github.com/JRebirth/JRebirth" target="_blank" rel="noopener noreferrer">Explore JRebirth <span aria-hidden="true">↗</span></a>
+								<a class="jr-btn jr-btn-outline" href="Contribute.html">Contribute</a>
+								<a class="jr-btn jr-btn-ghost" href="Support.html">Community</a>
+							</div>
+						</div>
+						<div class="jr-closing-mark">
+							<img src="images/brand/logo-phoenix-rise.webp" alt="JRebirth Application Framework" width="512" height="512" />
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
-		<div id="download" class="box">
-			<h1>
-				<a href="http://repo.jrebirth.org/repo/org/jrebirth">Download</a>
-			</h1>
-
-			<ul>
-				<li>
-					<a name="Maven Central" href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jrebirth.af%22">from Maven Central</a>
-                </li>
-				<li>
-					<a name="JCenter" href="http://jcenter.bintray.com/org/jrebirth/af">from JCenter</a>
-				</li>
-				<li>
-					<a href="http://apps.jrebirth.org/org.jrebirth.af/JRebirth-${project.version}.tar.gz">JRebirth ${project.version} .tar.gz</a>
-				</li>
-				#[[ <li>
-					<a href="http://apps.jrebirth.org/javafx2/${BreizhcampVersion}/Breizhcamp-${BreizhcampVersion}.zip">JavaFX Prez</a>
-				</li>
-				<li>
-					<a href="http://apps.jrebirth.org/jaf/${JafVersion}/JRebirthTour-${JafVersion}.zip">JRebirth Tour</a>
-				</li>
-				<li>
-					<a href="http://apps.jrebirth.org/masteringtables/${MasteringTablesVersion}/MasteringTables-${MasteringTablesVersion}.zip">Mastering Tables</a>
-				</li> ]]#
-			</ul>
-		</div>
-		
-		
-		<div id="twitter">
-			<div class="twitterFeed">
-            	<a id="twitlink1" class="twitter-timeline" href="https://twitter.com/JRebirthAF" >Tweets of @JRebirthAF</a>
-    			<script>//<![CDATA[
-    			document.getElementById("twitlink1").setAttribute("data-widget-id","313731797349441536");
-    			//]]></script>
-                <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		<footer class="jr-footer">
+			<div class="jr-wrap jr-footer-top">
+				<a class="jr-footer-brand" href="index.html" aria-label="JRebirth home">
+					<img class="jr-brand-logo" src="images/brand/logo-header.png" alt="JRebirth" width="938" height="535" />
+				</a>
+				<p>Less boilerplate. Clean architecture. More time to build.</p>
+				<div class="jr-footer-links">
+					<a href="doc/Archetype.html">Tutorial</a>
+					<a href="faq.html">FAQ</a>
+					<a href="links.html">Useful links</a>
+					<a href="license.html">License</a>
+					<a href="https://github.com/JRebirth/JRebirth" target="_blank" rel="noopener noreferrer">GitHub</a>
+					<a href="https://central.sonatype.com/artifact/org.jrebirth.af/core" target="_blank" rel="noopener noreferrer">Maven Central</a>
+				</div>
 			</div>
-			<div class="twitterFeed">
-            	<a id="twitlink2" class="twitter-timeline" href="https://twitter.com/JRebirthTeam" >Tweets of @JRebirthTeam</a>
-    			<script>//<![CDATA[
-    			document.getElementById("twitlink2").setAttribute("data-widget-id","356345521822121984");
-    			//]]></script>
+			<div class="jr-wrap jr-footer-bottom">
+				<span>© JRebirth OSS · Open-source JavaFX application framework</span>
+				<span>Version ${project.version}</span>
 			</div>
-			
-			<div class="twitterFeed">
-				<a id="twitlink3" class="twitter-timeline" href="https://twitter.com/search?q=%23jrebirth" >Tweets about "#jrebirth"</a>
-    			<script>//<![CDATA[
-    			document.getElementById("twitlink3").setAttribute("data-widget-id","356351856227790848");
-    			//]]></script>
-			</div>
-		</div>
-		
-	
-		<!-- id="ohloh" -->
-		<div id="ohloh">
-			
-			<div>
-				<script type="text/javascript" src="http://www.openhub.net/p/599672/widgets/project_thin_badge.js"></script>
-			</div>
-			<div>
-				<script type="text/javascript" src="http://www.openhub.net/p/599672/widgets/project_users_logo.js"></script>
-			</div>
-			
-			
-			<div id="pp">
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-    				<input type="hidden" name="cmd" value="_s-xclick"/>
-    				<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
-    				" />
-    				<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
-    				<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1" />
-				</form>		
-			</div>
-			
-		</div>
-
-		<div id="thanks" class="box">
-			<h1>Special Thanks</h1>
-			<p>
-			<a title="YourKit, Java Profiler" href="http://www.yourkit.com" target="_blank">YourKit</a>,
-			used for Memory &amp; CPU Java profiling with a free license.
-			</p>
-			<!--
-			<p>
-			<a title="Certum" href="http://www.certum.eu/certum/cert,offer_code_signing.xml" target="_blank">Certum</a>,
-			for offering us an Open Source <a href="http://www.certum.eu/certum/cert,offer_en_open_source_cs.xml">Code Signing Certificate</a>.
-			</p>-->
-			<p>
-			<a title="EJ Technologies" href="https://www.ej-technologies.com/" target="_blank">EJ Technologies</a>,
-			for offering us <a href="https://www.ej-technologies.com/products/jprofiler/overview.html">Install4j</a> &amp; <a href="https://www.ej-technologies.com/products/install4j/overview.html">JProfiler</a> licenses.
-			</p>
-			<p>
-			<a title="Jet Brains" href="http://www.jetbrains.com" target="_blank">Jet Brains</a>,
-			for offering us a free license of
-			<a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>.
-			</p>
-			<p>
-			<a title="Structure 101" href="http://www.structure101.com/" target="_blank">Structure101 guys</a>,
-			for offering us a free license of
-			<a href="http://structure101.com/products/#/refactor">ReStructure 101</a>.
-			</p>
-			
-		</div>
+		</footer>
 
 	</body>
-</document> 	
+</document>

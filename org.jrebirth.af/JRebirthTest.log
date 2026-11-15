@@ -2698,3 +2698,38 @@ java.util.MissingResourceException: Can't find bundle for base name fxml.third, 
 2026-10-31 16:14:28,346 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
 2026-10-31 16:14:28,877 ERROR [main] o.j.a.c.u.CheckerUtility [CheckerUtility.java:180] Broken Wave sent : UNDEFINED DO_TYPE_1 (917c1838-2d1f-4701-bad4-aa496f5f52b9) 
 2026-10-31 16:14:28,881 ERROR [main] o.j.a.c.u.CheckerUtility [CheckerUtility.java:180] Broken Wave sent : UNDEFINED DO_TYPE_2 (2bab67af-09fd-4c51-b9e0-c22468aacf6c) 
+2026-11-14 14:21:53,373 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_16x16.png not found into 'null' module folder: images/JRebirth_16x16.png
+2026-11-14 14:21:53,379 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_16x16.png not found into 'null' module folder: imagesBis/JRebirth_16x16.png
+2026-11-14 14:21:53,379 ERROR [JavaFX Application Thread] o.j.a.c.r.i.ImageBuilder [ImageBuilder.java:168] Image : JRebirth_16x16.png not found into base folder: [images, imagesBis]
+2026-11-14 14:21:53,392 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_32x32.png not found into 'null' module folder: images/JRebirth_32x32.png
+2026-11-14 14:21:53,392 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_32x32.png not found into 'null' module folder: imagesBis/JRebirth_32x32.png
+2026-11-14 14:21:53,392 ERROR [JavaFX Application Thread] o.j.a.c.r.i.ImageBuilder [ImageBuilder.java:168] Image : JRebirth_32x32.png not found into base folder: [images, imagesBis]
+2026-11-14 14:21:53,392 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_64x64.png not found into 'null' module folder: images/JRebirth_64x64.png
+2026-11-14 14:21:53,393 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_64x64.png not found into 'null' module folder: imagesBis/JRebirth_64x64.png
+2026-11-14 14:21:53,393 ERROR [JavaFX Application Thread] o.j.a.c.r.i.ImageBuilder [ImageBuilder.java:168] Image : JRebirth_64x64.png not found into base folder: [images, imagesBis]
+2026-11-14 14:21:53,393 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_128x128.png not found into 'null' module folder: images/JRebirth_128x128.png
+2026-11-14 14:21:53,393 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_128x128.png not found into 'null' module folder: imagesBis/JRebirth_128x128.png
+2026-11-14 14:21:53,393 ERROR [JavaFX Application Thread] o.j.a.c.r.i.ImageBuilder [ImageBuilder.java:168] Image : JRebirth_128x128.png not found into base folder: [images, imagesBis]
+2026-11-14 14:21:53,394 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_256x256.png not found into 'null' module folder: images/JRebirth_256x256.png
+2026-11-14 14:21:53,394 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:66] Resource : JRebirth_256x256.png not found into 'null' module folder: imagesBis/JRebirth_256x256.png
+2026-11-14 14:21:53,394 ERROR [JavaFX Application Thread] o.j.a.c.r.i.ImageBuilder [ImageBuilder.java:168] Image : JRebirth_256x256.png not found into base folder: [images, imagesBis]
+2026-11-14 14:21:53,495 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-11-14 14:21:53,495 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-11-14 14:21:57,701 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-11-14 14:21:57,702 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-11-14 14:22:02,013 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-11-14 14:22:02,019 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-11-14 14:22:06,583 ERROR [JavaFX Application Thread] o.j.a.c.u.ModuleUtility [ModuleUtility.java:84] Resource : default/default.css not found into 'null' module folder: styles/default/default.css
+2026-11-14 14:22:06,584 ERROR [JavaFX Application Thread] o.j.a.c.r.s.StyleSheetBuilder [StyleSheetBuilder.java:113] Style Sheet : default/default.css not found into base folder: [styles]
+2026-11-14 14:22:07,183 ERROR [main] o.j.a.c.f.AbstractFacade [AbstractFacade.java:130] Error while unlistening all WaveType for SwitchFullScreenCommand.
+2026-11-14 14:22:07,187 ERROR [main] o.j.a.c.f.AbstractFacade [AbstractFacade.java:130] Error while unlistening all WaveType for SwitchFullScreenCommand.
+2026-11-14 14:22:10,915 ERROR [JavaFX Application Thread] o.j.a.c.e.h.AbstractJrbUncaughtExceptionHandler [AbstractJrbUncaughtExceptionHandler.java:60] Uncaught Exception: Cannot invoke "org.jrebirth.af.api.application.JRebirthApplication.stop()" because the return value of "org.jrebirth.af.core.concurrent.JRebirthThread.getApplication()" is null
+java.lang.NullPointerException: Cannot invoke "org.jrebirth.af.api.application.JRebirthApplication.stop()" because the return value of "org.jrebirth.af.core.concurrent.JRebirthThread.getApplication()" is null
+	at org.jrebirth.af.core.application.apps.JRebirthApplicationTest.lambda$0(JRebirthApplicationTest.java:50)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:428)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:138)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:427)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:96)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:174)
+	at java.base/java.lang.Thread.run(Thread.java:1516)

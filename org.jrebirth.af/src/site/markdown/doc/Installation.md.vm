@@ -21,27 +21,22 @@ Installation
 Manual Download
 ----------------
 
-JRebirth is composed by a set of jar files, you just have to add them into your application classpath to use them.
+JRebirth is composed by a set of jar files; add them to your application classpath to use them.
     
-To get them you can download manually JRebirth distribution archive directly from the home page or here:
+You can download the distribution archive from the home page or here:
 [apps.jrebirth.org](http://apps.jrebirth.org/org.jrebirth.af/)
 
-This distribution mode will be improved in the future for those you don't want to deal with an artifact repository.
+You can also clone and build from source on [GitHub](https://github.com/JRebirth/JRebirth).
 
 
 <a name="Maven" />
 Maven Way
 -------------
     
-Currently the easy way to get all JRebirth jar files is to use maven convention.
+The easiest way to get JRebirth jars is Maven.
     
 
-You just need to add these dependencies into your pom.xml to begin to play with JRebirth Core features.
-The first one is an optional library used to manage logs.
-The second one is the core library of JRebirth Application Framework.
-The last one is used to displayed basic JRebirth Preloader.
-
-Add the following block inside your project `<dependencies>` section (as in the [sample application pom.xml](https://github.com/JRebirth/JRebirthAF/blob/master/sample/pom.xml)):
+Add these dependencies to your project `<dependencies>` section (see also the [sample application pom.xml](https://github.com/JRebirth/JRebirth/blob/12.x-dev/org.jrebirth.af/sample/pom.xml)):
 
 ```xml
 <dependencies>
@@ -50,7 +45,7 @@ Add the following block inside your project `<dependencies>` section (as in the 
 	<dependency>
 		<groupId>ch.qos.logback</groupId>
 		<artifactId>logback-classic</artifactId>
-		<version>1.0.13</version>
+		<version>1.5.32</version>
 	</dependency>
 
 	<dependency>
@@ -70,329 +65,51 @@ Add the following block inside your project `<dependencies>` section (as in the 
 
 Replace `${project.version}` with the JRebirth release you target (for example `12.0.0`), or inherit versions from the JRebirth parent POM as the sample project does.
 
-We will see in the next chapter how to configure your build to get all JRebirth dependencies. 
-
 <a name="MavenRepositories" />
 Maven Repositories
 ============================
 
-Choose your destiny ! 
-...and finish brillantly your wonderful application :)
-    
-All JRebirth libraries are available from several repositories; pick what fits your build.
+All stable JRebirth libraries are published to **Maven Central**. Snapshots are published to **GitHub Packages**.
 
-1. <a href="#central">Maven Central</a> (default for releases)
-2. <a href="#bintray">Our public repository powered by Bintray (Only Releases, On demand Jenkins build)</a>  
-3. <a href="#jcenter">JCenter Bintray repository (Only Releases, Superset of Maven Central)</a>  
-4. <a href="#repo">JRebirth repository at repo.jrebirth.org (releases and snapshots; may be offline)</a> 
-5. <a href="#hybrid">Combined profile (multiple repositories)</a>
+1. <a href="#central">Maven Central</a> — releases (default, no extra config)
+2. <a href="#github-packages">GitHub Packages</a> — snapshots of the current development line
+3. Build from source on [GitHub](https://github.com/JRebirth/JRebirth) when you need a local install
 
+> **Note:** Bintray and JCenter were shut down in 2022. Do not configure them. The old `repo.jrebirth.org` Artifactory is no longer the recommended source.
 
-*JRebirth is published on Maven Central repository with the help of Bintray synchronization (without having to modify your pom files).*
-If you don't want to bother yourself with all these settings, you should just proxy **JCenter** repository.
-
-
-
-For **snapshots**, use <a href="#repo">repo.jrebirth.org</a> or build JRebirth from source.
-
-<a name="extra-repos-pom" />
-### Extra repositories in pom.xml
-
-Add this to your **pom.xml** if you need JRebirth snapshot builds in addition to Maven Central (not required for stable releases on Central).
-
-```xml
-<repositories>
-	<repository>
-		<id>central</id>
-		<name>Maven Central</name>
-		<url>https://repo1.maven.org/maven2</url>
-		<snapshots>
-			<enabled>false</enabled>
-		</snapshots>
-		<releases>
-			<enabled>true</enabled>
-		</releases>
-	</repository>
-	<repository>
-		<id>jrebirth-snapshot</id>
-		<name>JRebirth snapshot repository</name>
-		<url>https://repo.jrebirth.org/libs-snapshot</url>
-		<snapshots>
-			<enabled>true</enabled>
-		</snapshots>
-		<releases>
-			<enabled>false</enabled>
-		</releases>
-	</repository>
-</repositories>
-<pluginRepositories>
-	<pluginRepository>
-		<id>central</id>
-		<name>Maven Central</name>
-		<url>https://repo1.maven.org/maven2</url>
-		<snapshots>
-			<enabled>false</enabled>
-		</snapshots>
-		<releases>
-			<enabled>true</enabled>
-		</releases>
-	</pluginRepository>
-	<pluginRepository>
-		<id>jrebirth-plugin-snapshot</id>
-		<name>JRebirth plugin snapshots</name>
-		<url>https://repo.jrebirth.org/plugins-snapshot</url>
-		<snapshots>
-			<enabled>true</enabled>
-		</snapshots>
-		<releases>
-			<enabled>false</enabled>
-		</releases>
-	</pluginRepository>
-</pluginRepositories>
-```
-
-<a name="extra-repos-settings" />
-### Extra repositories in settings.xml
-
-Prefer declaring repositories in **settings.xml** so the POM stays Central-only for contributors who do not need snapshots.
-
-Merge this profile into your user or enterprise `settings.xml` and activate it when you need snapshot artifacts:
-
-```xml
-<profiles>
-	<profile>
-		<id>JRebirth_Repositories</id>
-		<repositories>
-			<repository>
-				<id>central</id>
-				<name>Maven Central</name>
-				<url>https://repo1.maven.org/maven2</url>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-				<releases>
-					<enabled>true</enabled>
-				</releases>
-			</repository>
-			<repository>
-				<id>jrebirth-snapshot</id>
-				<name>JRebirth snapshot repository</name>
-				<url>https://repo.jrebirth.org/libs-snapshot</url>
-				<snapshots>
-					<enabled>true</enabled>
-				</snapshots>
-				<releases>
-					<enabled>false</enabled>
-				</releases>
-			</repository>
-		</repositories>
-		<pluginRepositories>
-			<pluginRepository>
-				<id>central</id>
-				<name>Maven Central</name>
-				<url>https://repo1.maven.org/maven2</url>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-				<releases>
-					<enabled>true</enabled>
-				</releases>
-			</pluginRepository>
-			<pluginRepository>
-				<id>jrebirth-plugin-snapshot</id>
-				<name>JRebirth plugin snapshots</name>
-				<url>https://repo.jrebirth.org/plugins-snapshot</url>
-				<snapshots>
-					<enabled>true</enabled>
-				</snapshots>
-				<releases>
-					<enabled>false</enabled>
-				</releases>
-			</pluginRepository>
-		</pluginRepositories>
-	</profile>
-</profiles>
-<activeProfiles>
-	<activeProfile>JRebirth_Repositories</activeProfile>
-</activeProfiles>
-```
-
-
-<a name="bintray" />
-Bintray (deprecated)
-----------------
-
-> **Note:** Bintray and JCenter were shut down in February 2022. These repositories are no longer available. Since version 8.x, JRebirth artifacts are published to **Maven Central**. No custom repository configuration is needed for stable releases.
-
-The historical Bintray and JCenter configuration sections are kept below for reference only and should not be used in new projects.
-
-
-<a name="jcenter" />
-JCenter (deprecated)
--------------------------
-
-JCenter was a social Java repository hosted on Bintray. It is no longer operational. Use Maven Central instead — no additional repository configuration is required.
-
-<a name="repo" />
-JRebirth Repo
--------------------------------
-    
-JRebirth has its own artifact repository (<a href="http://repo.jrebirth.org">repo.jrebirth.org</a>), but the server is not 7/7 24/24 ready due to energy savings. It could be offline when you need to recompile your application, so you shouldn't use it into your builds.
-It's mainly used as proxy for our developers, although it also hosts all JRebirth binaries (like Applications) that are not pushed on OJO or Bintray.
-
-
-You have 2 ways to plug your maven build to our server:
-1. Add a repositories section into the pom.xml of your project
-2. Add a profile section into your settings.xml
-    
-
-<a name="jrreposettings" />
-### JRebirth repo into Settings.xml
-
-It's also possible to add this declaration into the profile section of your user settings.xml or enterprise settings.xml:
-
-```xml
-<profiles>
-	<profile>
-		<id>JRebirth</id>
-		<repositories>
-			<repository>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-				<id>jrebirth-release</id>
-				<name>libs-release</name>
-				<url>http://repo.jrebirth.org/libs-release</url>
-			</repository>
-			<repository>
-				<snapshots />
-				<id>jrebirth-snapshot</id>
-				<name>libs-snapshot</name>
-				<url>http://repo.jrebirth.org/libs-snapshot</url>
-			</repository>
-		</repositories>
-		<pluginRepositories>
-			<pluginRepository>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-				<id>jrebirth-plugin-release</id>
-				<name>plugins-release</name>
-				<url>http://repo.jrebirth.org/plugins-release</url>
-			</pluginRepository>
-			<pluginRepository>
-				<snapshots />
-				<id>jrebirth-plugin-snapshot</id>
-				<name>plugins-snapshot</name>
-				<url>http://repo.jrebirth.org/plugins-snapshot</url>
-			</pluginRepository>
-		</pluginRepositories>
-	</profile>
-</profiles>
-<activeProfiles>
-	<activeProfile>JRebirth</activeProfile>
-</activeProfiles>
-```
-    
 <a name="central" />
 Maven Central
 ----------------------
     
-Maven Central is the default repository used by any Maven installation, so you don't have to configure something to be able to grab JRebirth artifacts.
-JRebirth artifacts are synchronized with Central since 7.7.0 version.
+Maven Central is the default repository used by any Maven installation. You do not need extra repository configuration for stable JRebirth releases.
 
-<a name="hybrid" />
-Hybrid Configuration
+Browse artifacts: [central.sonatype.com — org.jrebirth.af](https://central.sonatype.com/search?q=g:org.jrebirth.af)
+
+<a name="github-packages" />
+GitHub Packages (snapshots)
 -------------------------------
 
-You can combine Maven Central, JCenter, and the JRebirth repository if you want maximum flexibility.
-
-For stable releases, Maven Central or JCenter is enough. For snapshot dependencies, add **repo.jrebirth.org** (see snippets above) or build from source.
-
-
- <a name="AllInOneProfile" />
- ### All-In-One Profile
-
-Historical all-in-one profile combining Maven Central, JCenter, and JRebirth repositories (JCenter is deprecated; prefer Central + repo.jrebirth.org for snapshots):
+Snapshot builds of the `12.x-dev` line are published to GitHub Packages. Add a repository (and authentication for `github`) when you need snapshots:
 
 ```xml
-<profiles>
-	<profile>
-		<id>JRebirth_All-In-One</id>
-		<activation>
-			<activeByDefault>true</activeByDefault>
-		</activation>
-		<repositories>
-			<repository>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-				<id>central</id>
-				<name>Maven Central</name>
-				<url>https://repo1.maven.org/maven2</url>
-			</repository>
-			<repository>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-				<id>jcenter</id>
-				<name>bintray</name>
-				<url>https://jcenter.bintray.com</url>
-			</repository>
-			<repository>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-				<id>jrebirth-release</id>
-				<name>libs-release</name>
-				<url>https://repo.jrebirth.org/libs-release</url>
-			</repository>
-			<repository>
-				<snapshots>
-					<enabled>true</enabled>
-				</snapshots>
-				<id>jrebirth-snapshot</id>
-				<name>libs-snapshot</name>
-				<url>https://repo.jrebirth.org/libs-snapshot</url>
-			</repository>
-		</repositories>
-		<pluginRepositories>
-			<pluginRepository>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-				<id>central</id>
-				<name>Maven Central</name>
-				<url>https://repo1.maven.org/maven2</url>
-			</pluginRepository>
-			<pluginRepository>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-				<id>jcenter-plugin</id>
-				<name>bintray-plugins</name>
-				<url>https://jcenter.bintray.com</url>
-			</pluginRepository>
-			<pluginRepository>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-				<id>jrebirth-plugin-release</id>
-				<name>plugins-release</name>
-				<url>https://repo.jrebirth.org/plugins-release</url>
-			</pluginRepository>
-			<pluginRepository>
-				<snapshots>
-					<enabled>true</enabled>
-				</snapshots>
-				<id>jrebirth-plugin-snapshot</id>
-				<name>plugins-snapshot</name>
-				<url>https://repo.jrebirth.org/plugins-snapshot</url>
-			</pluginRepository>
-		</pluginRepositories>
-	</profile>
-</profiles>
+<repositories>
+	<repository>
+		<id>github</id>
+		<name>JRebirth GitHub Packages</name>
+		<url>https://maven.pkg.github.com/JRebirth/JRebirth</url>
+		<snapshots>
+			<enabled>true</enabled>
+		</snapshots>
+		<releases>
+			<enabled>true</enabled>
+		</releases>
+	</repository>
+</repositories>
 ```
+
+In `~/.m2/settings.xml`, configure a server with id `github` and a GitHub personal access token that can read packages. See [GitHub Packages documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry).
+
+Alternatively, clone the repository and run `mvn clean install` under `org.jrebirth.af`.
 
 
 ## JPMS Setup

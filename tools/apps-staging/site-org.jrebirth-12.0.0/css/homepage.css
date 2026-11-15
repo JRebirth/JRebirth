@@ -1,0 +1,86 @@
+﻿/*----------------------------------*/
+/*			Home Page				*/
+/*----------------------------------*/
+
+div#features {
+	float : left;
+	width:50%;	
+	
+	text-align:justify;
+	margin : 30px 15px;
+	padding:25px 40px;
+	
+	font-size:21px;
+	letter-spacing:0.1em;
+	
+	background-image:url("../images/quote-gauche.png"),url("../images/quote-droite.png");
+	background-position: left top, right 300px;
+	background-repeat:no-repeat, no-repeat;
+}
+
+div#mintuto{
+	float : left;
+	width:600px;	
+}
+
+div.box{
+	
+	margin : 30px 15px;
+	border: 1px solid #696;
+	padding: 5px 5px;
+	
+	border-radius: 10px;
+	box-shadow: #666  0px 4px 5px;
+}
+
+div#download,
+div#community{
+	text-align:center;	
+	font-variant:small-caps;
+	font-size:20px;
+
+	float : right;
+	
+	width:32%;
+	
+	color:#756f6b;
+	
+	background: #f9c667;
+	background: -moz-radial-gradient(center, ellipse cover, #f9c667 0%, #f79621 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#f9c667), color-stop(100%,#f79621));
+	background: -webkit-radial-gradient(center, ellipse cover, #f9c667 0%,#f79621 100%);
+	background: -o-radial-gradient(center, ellipse cover, #f9c667 0%,#f79621 100%);
+	background: -ms-radial-gradient(center, ellipse cover, #f9c667 0%,#f79621 100%);
+	background: radial-gradient(ellipse at center, #f9c667 0%,#f79621 100%);	
+}
+
+div#download a,
+div#community a {
+	
+	text-decoration:none;
+	color:#756f6b;
+}
+
+div#download ul,
+div#community ul{
+    list-style-image: none;
+	padding:0;
+}
+div#download ul li,
+div#community ul li{
+	list-style-type:none;
+	margin-bottom:8px;
+}
+
+div#download h1,
+div#community h1 {
+	margin: 10px 10px;
+}
+div#download ul,
+div#community ul {
+	margin:5px 10px;
+}
+
+div#community{
+	clear: right;
+}

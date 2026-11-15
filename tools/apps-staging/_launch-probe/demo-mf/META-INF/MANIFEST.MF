@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Created-By: Maven JAR Plugin 3.5.0
+Java-Version: 25
+Build-Jdk-Spec: 25
+JavaFX-Version: 26
+Main-Class: org.jrebirth.af.showcase.demo.JRebirthDemo
+Class-Path: .
+

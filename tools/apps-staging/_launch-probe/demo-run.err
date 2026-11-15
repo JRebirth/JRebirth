@@ -1,0 +1,3 @@
+Erreur : la méthode principale doit renvoyer une valeur de type void dans la classe {0}, 
+définissez la méthode principale comme suit :
+   public static void main(String[] args)

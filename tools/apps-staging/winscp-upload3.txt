@@ -1,0 +1,19 @@
+option batch abort
+option confirm off
+open "u39172299@home143909784.1and1-data.host"
+cd /homepages/14/d143909784/htdocs/jrebirth/sites
+lcd D:\DEV\GIT\JRebirth\tools\apps-staging
+put -transfer=binary site-org.jrebirth-12.0.0 org.jrebirth-12.0.0
+cd /homepages/14/d143909784/htdocs/jrebirth/apps
+put -transfer=binary demo
+put -transfer=binary analyzer
+put -transfer=binary wave
+put -transfer=binary fxml
+put -transfer=binary undoredo
+put -transfer=binary todos
+put -transfer=binary fonticon
+put -transfer=binary workbench
+put -transfer=binary masteringtables
+put -transfer=binary jaf
+put -transfer=binary comparisontool
+exit

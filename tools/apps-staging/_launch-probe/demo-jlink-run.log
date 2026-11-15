@@ -1,0 +1,409 @@
+11:24:38.975 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.i18n.MessageBuilder -- 1 Messages file found.
+11:24:38.979 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.i18n.MessageBuilder -- Store ResourceBundle : Messages_rb 
+11:24:39.022 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.parameter.ParameterBuilder -- 6 configuration files found.
+11:24:39.023 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.parameter.ParameterBuilder -- Read configuration file : org/jrebirth/af/showcase/fonticon/jrebirth.properties 
+11:24:39.026 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.parameter.ParameterBuilder -- Read configuration file : org/jrebirth/af/showcase/fxml/jrebirth.properties 
+11:24:39.027 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.parameter.ParameterBuilder -- Read configuration file : org/jrebirth/af/showcase/todos/jrebirth.properties 
+11:24:39.028 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.parameter.ParameterBuilder -- Read configuration file : org/jrebirth/af/showcase/undoredo/jrebirth.properties 
+11:24:39.029 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.parameter.ParameterBuilder -- Read configuration file : org/jrebirth/af/showcase/wave/jrebirth.properties 
+11:24:39.030 [JavaFX-Launcher] INFO org.jrebirth.af.core.resource.parameter.ParameterBuilder -- Read configuration file : org/jrebirth/af/showcase/workbench/jrebirth.properties 
+11:24:39.037 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>0|CREATE_APPLICATION|null|org.jrebirth.af.showcase.demo.JRebirthDemo|null|
+11:24:39.038 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>1|CREATE_GLOBAL_FACADE|org.jrebirth.af.showcase.demo.JRebirthDemo|org.jrebirth.af.core.facade.GlobalFacadeBase|null|
+11:24:39.039 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>2|CREATE_NOTIFIER|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.link.NotifierBase|null|
+11:24:39.039 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>3|CREATE_COMMAND_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.CommandFacade|null|
+11:24:39.040 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>4|CREATE_SERVICE_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.ServiceFacade|null|
+11:24:39.040 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>5|CREATE_UI_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.UiFacade|null|
+11:24:39.040 [JavaFX-Launcher] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>6|CREATE_BEHAVIOR_FACADE|org.jrebirth.af.core.facade.GlobalFacadeBase|org.jrebirth.af.core.facade.BehaviorFacade|null|
+11:24:39.071 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : JRebirth_16x16.png not found into 'org.jrebirth.af.showcase.demo' module folder: org/jrebirth/af/showcase/demo/images/JRebirth_16x16.png
+11:24:39.071 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.image.ImageBuilder -- Image : JRebirth_16x16.png not found into base folder: [images]
+11:24:39.071 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : NotAvailableImage.png not found into 'org.jrebirth.af.core' module folder: org/jrebirth/af/core/images/NotAvailableImage.png
+11:24:39.071 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.image.ImageBuilder -- Image : NotAvailableImage.png not found into base folder: [images]
+11:24:39.257 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : JRebirth_32x32.png not found into 'org.jrebirth.af.showcase.demo' module folder: org/jrebirth/af/showcase/demo/images/JRebirth_32x32.png
+11:24:39.258 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.image.ImageBuilder -- Image : JRebirth_32x32.png not found into base folder: [images]
+11:24:39.258 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : JRebirth_64x64.png not found into 'org.jrebirth.af.showcase.demo' module folder: org/jrebirth/af/showcase/demo/images/JRebirth_64x64.png
+11:24:39.258 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.image.ImageBuilder -- Image : JRebirth_64x64.png not found into base folder: [images]
+11:24:39.258 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : JRebirth_128x128.png not found into 'org.jrebirth.af.showcase.demo' module folder: org/jrebirth/af/showcase/demo/images/JRebirth_128x128.png
+11:24:39.258 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.image.ImageBuilder -- Image : JRebirth_128x128.png not found into base folder: [images]
+11:24:39.259 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : JRebirth_256x256.png not found into 'org.jrebirth.af.showcase.demo' module folder: org/jrebirth/af/showcase/demo/images/JRebirth_256x256.png
+11:24:39.259 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.image.ImageBuilder -- Image : JRebirth_256x256.png not found into base folder: [images]
+11:24:39.302 [JavaFX Application Thread] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : JRebirthWorkbenchDefault.css not found into 'org.jrebirth.af.core' module folder: org/jrebirth/af/core/styles/JRebirthWorkbenchDefault.css
+11:24:39.302 [JavaFX Application Thread] ERROR org.jrebirth.af.core.resource.style.StyleSheetBuilder -- Style Sheet : JRebirthWorkbenchDefault.css not found into base folder: [styles]
+11:24:39.342 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>7|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.ChainWaveCommand|null|
+11:24:39.353 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>8|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+11:24:39.355 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>9|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:24:39.356 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>10|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+11:24:39.358 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>11|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:24:39.360 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>12|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.demo.ui.MainModel|null|
+11:24:39.362 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>13|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.stack.StackModel|null|
+11:24:39.369 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>14|CREATE_VIEW|org.jrebirth.af.component.ui.stack.StackModel|org.jrebirth.af.component.ui.stack.StackView|null|
+11:24:39.372 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>15|CREATE_CONTROLLER|org.jrebirth.af.component.ui.stack.StackView|org.jrebirth.af.core.ui.DefaultController|null|
+11:24:39.376 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>16|ACCESS_MODEL|org.jrebirth.af.showcase.demo.ui.MainModel|org.jrebirth.af.api.ui.ModuleModel|null|
+11:24:39.379 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>17|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.TabDemoModel|null|
+11:24:39.379 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>18|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.wave.ui.main.MainModel|null|
+11:24:39.379 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>19|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.undoredo.ui.UndoModel|null|
+11:24:39.379 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>20|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.todos.ui.main.MainModel|null|
+11:24:39.379 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>21|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseModel|null|
+11:24:39.380 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>22|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.fonticon.ui.main.MainModel|null|
+11:24:39.384 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>23|ACCESS_MODEL|org.jrebirth.af.showcase.workbench.ui.TabDemoModel|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.385 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>24|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.387 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>25|CREATE_VIEW|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneView|null|
+11:24:39.388 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>26|CREATE_CONTROLLER|org.jrebirth.af.component.ui.dock.DockPaneView|org.jrebirth.af.component.ui.dock.DockPaneController|null|
+11:24:39.395 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>27|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+11:24:39.395 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>28|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:24:39.395 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>29|CREATE_WAVE|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.core.wave.WaveBase|null|
+11:24:39.401 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>30|CREATE_WAVE|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.core.wave.WaveBase|null|
+11:24:39.402 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>31|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.403 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>32|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.403 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>33|ACCESS_MODEL|org.jrebirth.af.component.command.dock.AddDockCommand|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.403 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>34|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.404 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>35|CREATE_VIEW|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneView|null|
+11:24:39.405 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>36|CREATE_CONTROLLER|org.jrebirth.af.component.ui.dock.DockPaneView|org.jrebirth.af.component.ui.dock.DockPaneController|null|
+11:24:39.405 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>37|CREATE_WAVE|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.core.wave.WaveBase|null|
+11:24:39.406 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>38|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.406 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>39|CREATE_WAVE|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.core.wave.WaveBase|null|
+11:24:39.407 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>40|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+Send Add  org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneModel|TopDock|
+11:24:39.416 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (453bc51b-20e3-4590-8769-b572e1cec494) 
+Data=>class java.lang.String=RootDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.dock.DockPaneModel@56996189
+11:24:39.416 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>41|ACCESS_MODEL|org.jrebirth.af.component.command.dock.AddDockCommand|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.417 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>42|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.417 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>43|CREATE_VIEW|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneView|null|
+11:24:39.418 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>44|CREATE_CONTROLLER|org.jrebirth.af.component.ui.dock.DockPaneView|org.jrebirth.af.component.ui.dock.DockPaneController|null|
+11:24:39.418 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>45|CREATE_WAVE|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.core.wave.WaveBase|null|
+11:24:39.418 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>46|CREATE_WAVE|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.core.wave.WaveBase|null|
+11:24:39.419 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>47|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+Send Add  org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneModel|BottomDock|
+11:24:39.420 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>48|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.421 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (bdbb4684-1369-4dce-a72e-3ab8a8316730) 
+Data=>class java.lang.String=RootDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.dock.DockPaneModel@4ca7561b
+11:24:39.447 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>49|ACCESS_MODEL|org.jrebirth.af.component.command.dock.AddDockCommand|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.447 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>50|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.448 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>51|CREATE_VIEW|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneView|null|
+11:24:39.448 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>52|CREATE_CONTROLLER|org.jrebirth.af.component.ui.dock.DockPaneView|org.jrebirth.af.component.ui.dock.DockPaneController|null|
+11:24:39.449 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>53|CREATE_WAVE|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.core.wave.WaveBase|null|
+11:24:39.449 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>54|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+Send Add  org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneModel|TopLeftDock|
+11:24:39.451 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (d2609c63-e313-4e12-967d-cb2ebb8ec814) 
+Data=>class java.lang.String=TopDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.dock.DockPaneModel@742803e2
+11:24:39.451 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>55|ACCESS_MODEL|org.jrebirth.af.component.command.dock.AddDockCommand|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.451 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>56|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.452 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>57|CREATE_VIEW|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneView|null|
+11:24:39.452 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>58|CREATE_CONTROLLER|org.jrebirth.af.component.ui.dock.DockPaneView|org.jrebirth.af.component.ui.dock.DockPaneController|null|
+11:24:39.453 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>59|CREATE_WAVE|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.core.wave.WaveBase|null|
+11:24:39.453 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>60|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+Send Add  org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneModel|TopRightDock|
+11:24:39.454 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (d18c927f-e9e1-444a-9fbe-0e2a6c3560a0) 
+Data=>class java.lang.String=TopDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.dock.DockPaneModel@60023500
+11:24:39.457 [JavaFX Application Thread] INFO org.jrebirth.af.core.wave.WaveBase -- NB handles : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (453bc51b-20e3-4590-8769-b572e1cec494) 
+Data=>class java.lang.String=RootDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.dock.DockPaneModel@56996189
+11:24:39.458 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>61|ACCESS_MODEL|org.jrebirth.af.component.command.dock.AddDockCommand|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.458 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>62|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.458 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>63|CREATE_VIEW|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneView|null|
+11:24:39.459 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>64|CREATE_CONTROLLER|org.jrebirth.af.component.ui.dock.DockPaneView|org.jrebirth.af.component.ui.dock.DockPaneController|null|
+11:24:39.460 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>65|CREATE_WAVE|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.core.wave.WaveBase|null|
+11:24:39.460 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>66|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+Send Add  org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneModel|BottomLeftDock|
+11:24:39.461 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (cffe91bf-78e7-4b0b-901e-2b71370e0d55) 
+Data=>class java.lang.String=BottomDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.dock.DockPaneModel@7a6baf90
+11:24:39.461 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>67|ACCESS_MODEL|org.jrebirth.af.component.command.dock.AddDockCommand|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.461 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>68|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.dock.DockPaneModel|null|
+11:24:39.462 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>69|CREATE_VIEW|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneView|null|
+11:24:39.462 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>70|CREATE_CONTROLLER|org.jrebirth.af.component.ui.dock.DockPaneView|org.jrebirth.af.component.ui.dock.DockPaneController|null|
+11:24:39.462 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>71|CREATE_WAVE|org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.core.wave.WaveBase|null|
+11:24:39.463 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>72|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+Send Add  org.jrebirth.af.component.ui.dock.DockPaneModel|org.jrebirth.af.component.ui.dock.DockPaneModel|BottomRightDock|
+11:24:39.464 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (37b0125c-93b9-4423-8273-271477f147ae) 
+Data=>class java.lang.String=BottomDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.dock.DockPaneModel@e757393
+11:24:39.464 [JavaFX Application Thread] INFO org.jrebirth.af.core.wave.WaveBase -- NB handles : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (bdbb4684-1369-4dce-a72e-3ab8a8316730) 
+Data=>class java.lang.String=RootDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.dock.DockPaneModel@4ca7561b
+11:24:39.464 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>73|ACCESS_MODEL|org.jrebirth.af.component.command.dock.AddDockCommand|org.jrebirth.af.component.ui.tab.TabbedPaneModel|null|
+11:24:39.465 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>74|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.tab.TabbedPaneModel|null|
+11:24:39.467 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>75|CREATE_VIEW|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.component.ui.tab.TabbedPaneView|null|
+11:24:39.468 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>76|CREATE_CONTROLLER|org.jrebirth.af.component.ui.tab.TabbedPaneView|org.jrebirth.af.component.ui.tab.TabbedPaneController|null|
+11:24:39.473 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>77|ACCESS_SERVICE|org.jrebirth.af.showcase.undoredo.ui.UndoModel|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+11:24:39.473 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>78|CREATE_SERVICE|org.jrebirth.af.core.facade.ServiceFacade|org.jrebirth.af.undoredo.service.UndoRedoService|null|
+11:24:39.475 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>79|CREATE_VIEW|org.jrebirth.af.showcase.undoredo.ui.UndoModel|org.jrebirth.af.showcase.undoredo.ui.UndoView|null|
+11:24:39.476 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>80|CREATE_CONTROLLER|org.jrebirth.af.showcase.undoredo.ui.UndoView|org.jrebirth.af.showcase.undoredo.ui.UndoController|null|
+11:24:39.479 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>81|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.479 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>82|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.480 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>83|CREATE_VIEW|org.jrebirth.af.showcase.todos.ui.main.MainModel|org.jrebirth.af.showcase.todos.ui.main.MainView|null|
+11:24:39.481 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>84|CREATE_CONTROLLER|org.jrebirth.af.showcase.todos.ui.main.MainView|org.jrebirth.af.showcase.todos.ui.main.MainController|null|
+11:24:39.481 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>85|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.482 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>86|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.482 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>87|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.483 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>88|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.483 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>89|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.483 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>90|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.485 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>91|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.485 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>92|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.485 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>93|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.486 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>94|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+Send Add  org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.component.ui.tab.TabbedPaneModel|TopLeft|
+11:24:39.488 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (55e68103-9e93-4595-9c62-cc39a0b9b6da) 
+Data=>class java.lang.String=TopLeftDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.tab.TabbedPaneModel@54e50979
+11:24:39.488 [JavaFX Application Thread] INFO org.jrebirth.af.core.wave.WaveBase -- NB handles : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (d2609c63-e313-4e12-967d-cb2ebb8ec814) 
+Data=>class java.lang.String=TopDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.dock.DockPaneModel@742803e2
+11:24:39.489 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>95|ACCESS_MODEL|org.jrebirth.af.component.command.dock.AddDockCommand|org.jrebirth.af.component.ui.tab.TabbedPaneModel|null|
+11:24:39.490 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>96|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.tab.TabbedPaneModel|null|
+11:24:39.490 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>97|CREATE_VIEW|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.component.ui.tab.TabbedPaneView|null|
+11:24:39.490 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>98|CREATE_CONTROLLER|org.jrebirth.af.component.ui.tab.TabbedPaneView|org.jrebirth.af.component.ui.tab.TabbedPaneController|null|
+11:24:39.492 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>99|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.todos.ui.header.HeaderModel|null|
+11:24:39.492 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>100|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.492 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>101|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.493 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>102|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.todos.ui.content.table.TableContentModel|null|
+11:24:39.493 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>103|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.493 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>104|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.todos.ui.content.list.ListContentModel|null|
+11:24:39.493 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>105|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.494 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>106|CREATE_SERVICE|org.jrebirth.af.core.facade.ServiceFacade|org.jrebirth.af.showcase.todos.service.TodoServiceImpl|null|
+11:24:39.494 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>107|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.494 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>108|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+Send Add  org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.component.ui.tab.TabbedPaneModel|TopRight|
+11:24:39.496 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (bd5a1162-6ea6-4a94-b1d4-8f5748cb9fa3) 
+Data=>class java.lang.String=TopRightDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.tab.TabbedPaneModel@2480cc72
+11:24:39.496 [JavaFX Application Thread] INFO org.jrebirth.af.core.wave.WaveBase -- NB handles : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (d18c927f-e9e1-444a-9fbe-0e2a6c3560a0) 
+Data=>class java.lang.String=TopDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.dock.DockPaneModel@60023500
+11:24:39.497 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>109|CREATE_VIEW|org.jrebirth.af.showcase.todos.ui.content.table.TableContentModel|org.jrebirth.af.showcase.todos.ui.content.table.TableContentView|null|
+11:24:39.500 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>110|DESTROY_COMMAND|null|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.500 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>111|DESTROY_COMMAND|null|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.500 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>112|CREATE_CONTROLLER|org.jrebirth.af.showcase.todos.ui.content.table.TableContentView|org.jrebirth.af.showcase.todos.ui.content.table.TableContentController|null|
+11:24:39.500 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>113|DESTROY_COMMAND|null|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.501 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>114|DESTROY_COMMAND|null|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.501 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>115|DESTROY_COMMAND|null|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.501 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>116|DESTROY_COMMAND|null|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.501 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>117|DESTROY_COMMAND|null|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.501 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>118|DESTROY_COMMAND|null|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.507 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>119|ACCESS_MODEL|org.jrebirth.af.component.command.dock.AddDockCommand|org.jrebirth.af.component.ui.tab.TabbedPaneModel|null|
+11:24:39.507 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>120|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.tab.TabbedPaneModel|null|
+11:24:39.508 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>121|CREATE_VIEW|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.component.ui.tab.TabbedPaneView|null|
+11:24:39.509 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>122|CREATE_CONTROLLER|org.jrebirth.af.component.ui.tab.TabbedPaneView|org.jrebirth.af.component.ui.tab.TabbedPaneController|null|
+11:24:39.510 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>123|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.510 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>124|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.511 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>125|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.512 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>126|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+Send Add  org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.component.ui.tab.TabbedPaneModel|BottomLeft|
+11:24:39.513 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (70513062-0f49-4f60-97e3-ea8783b268ff) 
+Data=>class java.lang.String=BottomLeftDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.tab.TabbedPaneModel@2aa700c5
+11:24:39.513 [JavaFX Application Thread] INFO org.jrebirth.af.core.wave.WaveBase -- NB handles : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (cffe91bf-78e7-4b0b-901e-2b71370e0d55) 
+Data=>class java.lang.String=BottomDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.dock.DockPaneModel@7a6baf90
+11:24:39.513 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>127|ACCESS_MODEL|org.jrebirth.af.component.command.dock.AddDockCommand|org.jrebirth.af.component.ui.tab.TabbedPaneModel|null|
+11:24:39.513 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>128|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.tab.TabbedPaneModel|null|
+11:24:39.514 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>129|CREATE_VIEW|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.component.ui.tab.TabbedPaneView|null|
+11:24:39.514 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>130|CREATE_CONTROLLER|org.jrebirth.af.component.ui.tab.TabbedPaneView|org.jrebirth.af.component.ui.tab.TabbedPaneController|null|
+11:24:39.515 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>131|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.515 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>132|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.515 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>133|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.516 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>134|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.516 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>135|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.516 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>136|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.517 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>137|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.517 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>138|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.517 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>139|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+11:24:39.518 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>140|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.workbench.ui.SimpleModel|null|
+Send Add  org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.component.ui.tab.TabbedPaneModel|BottomRight|
+11:24:39.519 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>141|CREATE_VIEW|org.jrebirth.af.showcase.todos.ui.content.list.ListContentModel|org.jrebirth.af.showcase.todos.ui.content.list.ListContentView|null|
+11:24:39.520 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (fcbe978f-2469-4cbe-a901-00a67a7e069d) 
+Data=>class java.lang.String=BottomRightDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.tab.TabbedPaneModel@2d06b825
+11:24:39.520 [JavaFX Application Thread] INFO org.jrebirth.af.core.wave.WaveBase -- NB handles : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (37b0125c-93b9-4423-8273-271477f147ae) 
+Data=>class java.lang.String=BottomDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.dock.DockPaneModel@e757393
+11:24:39.520 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>142|CREATE_CONTROLLER|org.jrebirth.af.showcase.todos.ui.content.list.ListContentView|org.jrebirth.af.showcase.todos.ui.content.list.ListContentController|null|
+11:24:39.520 [JavaFX Application Thread] INFO org.jrebirth.af.core.wave.WaveBase -- NB handles : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (55e68103-9e93-4595-9c62-cc39a0b9b6da) 
+Data=>class java.lang.String=TopLeftDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.tab.TabbedPaneModel@54e50979
+11:24:39.520 [JavaFX Application Thread] INFO org.jrebirth.af.core.wave.WaveBase -- NB handles : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (bd5a1162-6ea6-4a94-b1d4-8f5748cb9fa3) 
+Data=>class java.lang.String=TopRightDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.tab.TabbedPaneModel@2480cc72
+11:24:39.520 [JavaFX Application Thread] INFO org.jrebirth.af.core.wave.WaveBase -- NB handles : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (70513062-0f49-4f60-97e3-ea8783b268ff) 
+Data=>class java.lang.String=BottomLeftDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.tab.TabbedPaneModel@2aa700c5
+11:24:39.521 [JavaFX Application Thread] INFO org.jrebirth.af.core.wave.WaveBase -- NB handles : UNDEFINED fromClass=AddDockCommand relatedClass=DockPaneModel DO_ADD_PART (fcbe978f-2469-4cbe-a901-00a67a7e069d) 
+Data=>class java.lang.String=BottomRightDockinterface org.jrebirth.af.api.ui.Model=org.jrebirth.af.component.ui.tab.TabbedPaneModel@2d06b825
+11:24:39.523 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>143|CREATE_VIEW|org.jrebirth.af.showcase.todos.ui.header.HeaderModel|org.jrebirth.af.showcase.todos.ui.header.HeaderView|null|
+11:24:39.524 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>144|CREATE_CONTROLLER|org.jrebirth.af.showcase.todos.ui.header.HeaderView|org.jrebirth.af.showcase.todos.ui.header.HeaderController|null|
+11:24:39.535 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>145|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.todos.ui.status.StatusModel|null|
+11:24:39.536 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>146|CREATE_VIEW|org.jrebirth.af.showcase.todos.ui.status.StatusModel|org.jrebirth.af.showcase.todos.ui.status.StatusView|null|
+11:24:39.536 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>147|CREATE_CONTROLLER|org.jrebirth.af.showcase.todos.ui.status.StatusView|org.jrebirth.af.showcase.todos.ui.status.StatusController|null|
+11:24:39.539 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>148|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.stack.StackModel|null|
+11:24:39.540 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>149|CREATE_VIEW|org.jrebirth.af.component.ui.stack.StackModel|org.jrebirth.af.component.ui.stack.StackView|null|
+11:24:39.540 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>150|CREATE_CONTROLLER|org.jrebirth.af.component.ui.stack.StackView|org.jrebirth.af.core.ui.DefaultController|null|
+11:24:39.541 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>151|CREATE_VIEW|org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseModel|org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseView|null|
+11:24:39.541 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>152|CREATE_CONTROLLER|org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseView|org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseController|null|
+11:24:39.549 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>153|CREATE_WAVE|org.jrebirth.af.showcase.fonticon.ui.main.MainModel|org.jrebirth.af.core.wave.WaveBase|null|
+11:24:39.550 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>154|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+11:24:39.550 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>155|CREATE_VIEW|org.jrebirth.af.showcase.demo.ui.MainModel|org.jrebirth.af.showcase.demo.ui.MainView|null|
+11:24:39.550 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>156|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:24:39.550 [JTP Slot 1] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>157|CREATE_CONTROLLER|org.jrebirth.af.showcase.demo.ui.MainView|org.jrebirth.af.showcase.demo.ui.MainController|null|
+11:24:39.551 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>158|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+11:24:39.551 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>159|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:24:39.552 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>160|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+11:24:39.552 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>161|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.component.ui.tab.TabbedPaneModel|null|
+11:24:39.552 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>162|CREATE_VIEW|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.component.ui.tab.TabbedPaneView|null|
+11:24:39.553 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>163|CREATE_CONTROLLER|org.jrebirth.af.component.ui.tab.TabbedPaneView|org.jrebirth.af.component.ui.tab.TabbedPaneController|null|
+11:24:39.553 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>164|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|null|
+11:24:39.553 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>165|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|null|
+11:24:39.555 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>166|CREATE_VIEW|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconView|null|
+11:24:39.557 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>167|CREATE_WAVE|org.jrebirth.af.showcase.demo.ui.MainModel|org.jrebirth.af.core.wave.WaveBase|null|
+11:24:39.558 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=MainModel DO_SHOW_PAGE_MODEL (ea09c8d3-0566-402d-9c44-8ca2a3211f41) 
+Data=>org.jrebirth.af.api.key.UniqueKey<? extends org.jrebirth.af.api.ui.Model>=class org.jrebirth.af.showcase.workbench.ui.TabDemoModelclass java.lang.String=DemoStack
+11:24:39.745 [JTP Slot 2] INFO org.jrebirth.af.core.resource.font.FontBuilder -- fa-regular-400.ttf Transformed Font loaded
+11:24:39.779 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>168|DESTROY_COMMAND|null|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.779 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>169|DESTROY_COMMAND|null|org.jrebirth.af.component.command.dock.AddDockCommand|null|
+11:24:39.779 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>170|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:24:39.779 [JavaFX Application Thread] INFO org.jrebirth.af.component.ui.stack.StackModel -- Show Page Model: class org.jrebirth.af.showcase.workbench.ui.TabDemoModel
+11:24:39.780 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>171|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+11:24:39.780 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>172|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+11:24:39.780 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>173|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+11:24:39.780 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>174|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:24:39.781 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>175|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand|null|
+11:24:39.782 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>176|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+11:24:39.782 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>177|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:24:39.782 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>178|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+11:24:39.783 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>179|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+11:24:39.783 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>180|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+11:24:39.784 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>181|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+11:24:39.785 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>182|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:24:39.786 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>183|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+11:24:39.812 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>184|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+11:24:39.816 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>185|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+11:24:39.874 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>186|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:24:39.875 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>187|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+11:24:39.875 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>188|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+11:24:39.875 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>189|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+11:24:39.875 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>190|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+11:24:39.876 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>191|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+11:24:39.876 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>192|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+11:24:39.876 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>193|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+11:24:39.876 [Finalizer] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>194|DESTROY_COMMAND|null|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+11:24:39.941 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>195|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|null|
+11:24:39.942 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>196|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|null|
+11:24:39.942 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>197|CREATE_VIEW|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconView|null|
+11:24:39.975 [JTP Slot 2] INFO org.jrebirth.af.core.resource.font.FontBuilder -- EmojiOne.otf Transformed Font loaded
+11:24:40.081 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>198|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|null|
+11:24:40.081 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>199|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|null|
+11:24:40.082 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>200|CREATE_VIEW|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconView|null|
+11:24:40.085 [JTP Slot 2] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : 525Icons.ttf not found into 'org.jrebirth.af.iconfontbridge.icons525' module folder: org/jrebirth/af/iconfontbridge/icons525/fonts/525Icons.ttf
+11:24:40.086 [JTP Slot 2] ERROR org.jrebirth.af.core.util.ModuleUtility -- Resource : 525Icons.ttf not found into 'org.jrebirth.af.iconfontbridge.icons525' module folder: org/jrebirth/af/iconfontbridge/icons525/fonts/525Icons.ttf
+11:24:40.088 [JTP Slot 2] ERROR org.jrebirth.af.core.resource.font.FontBuilder -- Font : 525Icons.ttf not found into base folder: [fonts]
+11:24:40.133 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>201|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|null|
+11:24:40.134 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>202|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|null|
+11:24:40.134 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>203|CREATE_VIEW|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconView|null|
+11:24:40.139 [JTP Slot 2] INFO org.jrebirth.af.core.resource.font.FontBuilder -- Weather Icons.ttf Transformed Font loaded
+11:24:40.182 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>204|ACCESS_MODEL|org.jrebirth.af.component.ui.tab.TabbedPaneModel|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|null|
+11:24:40.182 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>205|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|null|
+11:24:40.183 [JTP Slot 2] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>206|CREATE_VIEW|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconModel|org.jrebirth.af.showcase.fonticon.ui.fonticon.FontIconView|null|
+11:24:40.187 [JTP Slot 2] INFO org.jrebirth.af.core.resource.font.FontBuilder -- Typicons.ttf Transformed Font loaded
+11:24:40.203 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>207|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+12:00:22.243 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>208|CREATE_WAVE|org.jrebirth.af.showcase.demo.ui.MainModel|org.jrebirth.af.core.wave.WaveBase|null|
+12:00:22.249 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=MainModel DO_SHOW_PAGE_MODEL (50d99aa1-fd7e-4b86-abee-1f75fd55dc6d) 
+Data=>org.jrebirth.af.api.key.UniqueKey<? extends org.jrebirth.af.api.ui.Model>=class org.jrebirth.af.showcase.workbench.ui.TabDemoModelclass java.lang.String=DemoStack
+12:00:22.249 [JavaFX Application Thread] DEBUG org.jrebirth.af.component.ui.stack.StackModel -- Page Model currently displayed: class org.jrebirth.af.showcase.workbench.ui.TabDemoModel
+12:00:22.249 [JavaFX Application Thread] INFO org.jrebirth.af.core.wave.WaveBase -- NB handles : UNDEFINED fromClass=MainModel DO_SHOW_PAGE_MODEL (50d99aa1-fd7e-4b86-abee-1f75fd55dc6d) 
+Data=>org.jrebirth.af.api.key.UniqueKey<? extends org.jrebirth.af.api.ui.Model>=class org.jrebirth.af.showcase.workbench.ui.TabDemoModelclass java.lang.String=DemoStack
+12:00:26.235 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>209|CREATE_WAVE|org.jrebirth.af.showcase.demo.ui.MainModel|org.jrebirth.af.core.wave.WaveBase|null|
+12:00:26.240 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=MainModel DO_SHOW_PAGE_MODEL (fc0c93e8-b833-4b52-9233-68b602f0e76b) 
+Data=>org.jrebirth.af.api.key.UniqueKey<? extends org.jrebirth.af.api.ui.Model>=class org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseModelclass java.lang.String=DemoStack
+12:00:26.240 [JavaFX Application Thread] INFO org.jrebirth.af.component.ui.stack.StackModel -- Show Page Model: class org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseModel
+12:00:26.240 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>210|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand|null|
+12:00:26.241 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>211|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+12:00:26.242 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>212|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+12:00:26.242 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>213|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+12:00:26.242 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>214|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+12:00:26.242 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>215|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+12:00:26.243 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>216|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+12:00:26.243 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>217|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+12:00:26.244 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>218|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+12:00:26.245 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>219|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+12:00:26.245 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>220|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+12:00:26.850 [JavaFX Application Thread] INFO org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand -- Remove BorderPane@2707a7a8 from stack container
+12:00:26.855 [JavaFX Application Thread] DEBUG org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseView -- Start the View and fire the first tab
+12:00:26.856 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>221|CREATE_WAVE|org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseModel|org.jrebirth.af.core.wave.WaveBase|null|
+12:00:26.856 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=FXMLShowCaseModel DO_SHOW_PAGE_ENUM (5cba6474-ba8b-4a19-b606-bb175e6a40e8) 
+Data=>interface org.jrebirth.af.component.ui.stack.PageEnum=ViewEmbeddedFxml
+12:00:26.857 [JavaFX Application Thread] INFO org.jrebirth.af.component.ui.stack.StackModel -- Show Page Enum: StandaloneFxml
+12:00:26.857 [JavaFX Application Thread] INFO org.jrebirth.af.component.ui.stack.StackModel -- Show Page Model: class org.jrebirth.af.showcase.fxml.ui.standalone.StandaloneModel
+12:00:26.857 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>222|ACCESS_COMMAND|org.jrebirth.af.component.ui.stack.StackModel|org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand|null|
+12:00:26.857 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>223|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand|null|
+12:00:26.857 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>224|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+12:00:26.857 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>225|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+12:00:26.858 [JTP Slot 5] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>226|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.fxml.ui.standalone.StandaloneModel|null|
+12:00:26.959 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>227|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+12:00:26.959 [JavaFX Application Thread] INFO org.jrebirth.af.component.ui.stack.StackModel -- Show Page Enum: ViewEmbeddedFxml
+12:00:26.960 [JavaFX Application Thread] INFO org.jrebirth.af.component.ui.stack.StackModel -- Show Page Model: class org.jrebirth.af.showcase.fxml.ui.embedded.EmbeddedModel
+12:00:27.061 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>228|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand|null|
+12:00:27.061 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>229|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+12:00:27.162 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>230|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+12:00:27.264 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>231|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+12:00:27.265 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>232|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+12:00:27.266 [JTP Slot 6] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>233|CREATE_MODEL|org.jrebirth.af.core.facade.UiFacade|org.jrebirth.af.showcase.fxml.ui.embedded.EmbeddedModel|null|
+12:00:27.267 [JTP Slot 6] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>234|CREATE_VIEW|org.jrebirth.af.showcase.fxml.ui.embedded.EmbeddedModel|org.jrebirth.af.showcase.fxml.ui.embedded.EmbeddedView|null|
+12:00:27.268 [JTP Slot 6] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>235|CREATE_CONTROLLER|org.jrebirth.af.showcase.fxml.ui.embedded.EmbeddedView|org.jrebirth.af.showcase.fxml.ui.embedded.EmbeddedController|null|
+12:00:27.282 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>236|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+12:00:27.283 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>237|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+12:00:27.284 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>238|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+12:00:27.890 [JavaFX Application Thread] INFO org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand -- Remove BorderPane@404eefe8 from stack container
+12:00:31.105 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>239|CREATE_WAVE|org.jrebirth.af.showcase.demo.ui.MainModel|org.jrebirth.af.core.wave.WaveBase|null|
+12:00:31.105 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=MainModel DO_SHOW_PAGE_MODEL (15afafa8-adda-4b73-a791-20e5f6042075) 
+Data=>org.jrebirth.af.api.key.UniqueKey<? extends org.jrebirth.af.api.ui.Model>=class org.jrebirth.af.showcase.fonticon.ui.main.MainModelclass java.lang.String=DemoStack
+12:00:31.105 [JavaFX Application Thread] INFO org.jrebirth.af.component.ui.stack.StackModel -- Show Page Model: class org.jrebirth.af.showcase.fonticon.ui.main.MainModel
+12:00:31.106 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>240|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand|null|
+12:00:31.106 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>241|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+12:00:31.107 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>242|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+12:00:31.107 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>243|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+12:00:31.108 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>244|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+12:00:31.265 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>245|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+12:00:31.266 [JavaFX Application Thread] DEBUG org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseView -- Hide the Sample View
+12:00:31.874 [JavaFX Application Thread] INFO org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand -- Remove AbstractView$1@7e6d868b from stack container
+12:00:32.297 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>246|CREATE_WAVE|org.jrebirth.af.showcase.demo.ui.MainModel|org.jrebirth.af.core.wave.WaveBase|null|
+12:00:32.302 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=MainModel DO_SHOW_PAGE_MODEL (aa90aeab-a6ed-46cb-9d7f-87d920716eea) 
+Data=>org.jrebirth.af.api.key.UniqueKey<? extends org.jrebirth.af.api.ui.Model>=class org.jrebirth.af.showcase.undoredo.ui.UndoModelclass java.lang.String=DemoStack
+12:00:32.302 [JavaFX Application Thread] INFO org.jrebirth.af.component.ui.stack.StackModel -- Show Page Model: class org.jrebirth.af.showcase.undoredo.ui.UndoModel
+12:00:32.303 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>247|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand|null|
+12:00:32.303 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>248|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+12:00:32.304 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>249|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+12:00:32.304 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>250|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+12:00:32.305 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>251|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+12:00:32.306 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>252|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+12:00:32.914 [JavaFX Application Thread] INFO org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand -- Remove BorderPane@759f66a0 from stack container
+12:00:32.915 [JavaFX Application Thread] DEBUG org.jrebirth.af.showcase.undoredo.ui.UndoView -- Start the Sample View
+12:00:33.135 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>253|CREATE_WAVE|org.jrebirth.af.showcase.demo.ui.MainModel|org.jrebirth.af.core.wave.WaveBase|null|
+12:00:33.135 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=MainModel DO_SHOW_PAGE_MODEL (adfce7e6-d7d2-4003-9f09-67163349db0d) 
+Data=>org.jrebirth.af.api.key.UniqueKey<? extends org.jrebirth.af.api.ui.Model>=class org.jrebirth.af.showcase.todos.ui.main.MainModelclass java.lang.String=DemoStack
+12:00:33.136 [JavaFX Application Thread] INFO org.jrebirth.af.component.ui.stack.StackModel -- Show Page Model: class org.jrebirth.af.showcase.todos.ui.main.MainModel
+12:00:33.136 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>254|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand|null|
+12:00:33.136 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>255|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+12:00:33.137 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>256|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+12:00:33.138 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>257|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+12:00:33.140 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>258|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+12:00:33.185 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>259|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+12:00:33.186 [JavaFX Application Thread] DEBUG org.jrebirth.af.showcase.undoredo.ui.UndoView -- Hide the Sample View
+12:00:33.794 [JavaFX Application Thread] INFO org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand -- Remove AbstractView$1@7697ec41 from stack container
+12:00:34.529 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>260|CREATE_WAVE|org.jrebirth.af.showcase.demo.ui.MainModel|org.jrebirth.af.core.wave.WaveBase|null|
+12:00:34.534 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=MainModel DO_SHOW_PAGE_MODEL (898b14f4-f719-4332-9ad9-42054e2f0c8f) 
+Data=>org.jrebirth.af.api.key.UniqueKey<? extends org.jrebirth.af.api.ui.Model>=class org.jrebirth.af.showcase.wave.ui.main.MainModelclass java.lang.String=DemoStack
+12:00:34.534 [JavaFX Application Thread] INFO org.jrebirth.af.component.ui.stack.StackModel -- Show Page Model: class org.jrebirth.af.showcase.wave.ui.main.MainModel
+12:00:34.535 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>261|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand|null|
+12:00:34.535 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>262|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+12:00:34.535 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>263|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+12:00:34.536 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>264|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+12:00:34.536 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>265|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+12:00:34.537 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>266|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+12:00:35.138 [JavaFX Application Thread] INFO org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand -- Remove AbstractView$1@2d949137 from stack container
+12:00:35.661 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>267|CREATE_WAVE|org.jrebirth.af.showcase.demo.ui.MainModel|org.jrebirth.af.core.wave.WaveBase|null|
+12:00:35.661 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=MainModel DO_SHOW_PAGE_MODEL (18b0418a-4977-4faa-8f77-bb62dcc13092) 
+Data=>org.jrebirth.af.api.key.UniqueKey<? extends org.jrebirth.af.api.ui.Model>=class org.jrebirth.af.showcase.workbench.ui.TabDemoModelclass java.lang.String=DemoStack
+12:00:35.661 [JavaFX Application Thread] INFO org.jrebirth.af.component.ui.stack.StackModel -- Show Page Model: class org.jrebirth.af.showcase.workbench.ui.TabDemoModel
+12:00:35.662 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>268|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand|null|
+12:00:35.662 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>269|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+12:00:35.662 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>270|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+12:00:35.663 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>271|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+12:00:35.663 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>272|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+12:00:35.665 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>273|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+12:00:36.274 [JavaFX Application Thread] INFO org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand -- Remove AnchorPane@14a04c43 from stack container
+12:00:37.893 [JavaFX Application Thread] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>274|CREATE_WAVE|org.jrebirth.af.showcase.demo.ui.MainModel|org.jrebirth.af.core.wave.WaveBase|null|
+12:00:37.898 [JIT] INFO org.jrebirth.af.core.link.NotifierBase -- NB consumes : UNDEFINED fromClass=MainModel DO_SHOW_PAGE_MODEL (aa64ee78-8187-4e7c-a3d3-e662281f64c9) 
+Data=>org.jrebirth.af.api.key.UniqueKey<? extends org.jrebirth.af.api.ui.Model>=class org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseModelclass java.lang.String=DemoStack
+12:00:37.898 [JavaFX Application Thread] INFO org.jrebirth.af.component.ui.stack.StackModel -- Show Page Model: class org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseModel
+12:00:37.899 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>275|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowFadingModelCommand|null|
+12:00:37.899 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>276|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.ShowModelCommand|null|
+12:00:37.899 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>277|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.PrepareModelCommand|null|
+12:00:37.900 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>278|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.AttachModelCommand|null|
+12:00:37.901 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>279|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand|null|
+12:00:37.901 [JIT] INFO org.jrebirth.af.core.facade.GlobalFacadeBase -- JREvent>>280|CREATE_COMMAND|org.jrebirth.af.core.facade.CommandFacade|org.jrebirth.af.core.command.basic.showmodel.DetachModelCommand|null|
+12:00:38.514 [JavaFX Application Thread] INFO org.jrebirth.af.core.command.basic.showmodel.FadeTransitionCommand -- Remove BorderPane@2707a7a8 from stack container
+12:00:38.519 [JavaFX Application Thread] DEBUG org.jrebirth.af.showcase.fxml.ui.main.FXMLShowCaseView -- Reload the Sample View

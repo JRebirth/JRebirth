@@ -7,7 +7,7 @@ name: Release to Maven Central
 on:
   push:
     tags:
-      - "af-*"
+      - "jrebirth-*"
   workflow_dispatch:
     inputs:
       version:
@@ -71,7 +71,7 @@ jobs:
             VERSION="${{ inputs.version }}"
           else
             TAG="${GITHUB_REF_NAME}"
-            VERSION="${TAG#af-}"
+            VERSION="${TAG#jrebirth-}"
           fi
           if [[ -z "${VERSION}" || "${VERSION}" == *SNAPSHOT* ]]; then
             echo "::error::Refusing SNAPSHOT or empty version: '${VERSION}'"

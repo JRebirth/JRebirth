@@ -17,32 +17,21 @@ How to get support or to give us some feedback
 Bugs Tracker
 ------------------------------
 
-We are using GitHub issue tracker to follow our bugs and features request.
-You can submit us your difficulties or your wishes.
+We use the GitHub issue tracker for bugs and feature requests.
+You can submit difficulties or wishes there.
 
-<a href="http://bugs.jrebirth.org/">http://bugs.jrebirth.org</a>
+[https://github.com/JRebirth/JRebirth/issues](https://github.com/JRebirth/JRebirth/issues)
 
-</div>
-
-<div class="hBlock">
-\#jrebirth IRC Channel
-------------------------------
-
-We are using an IRC channel to discuss about JRebirth roadmap and future orientation.
-Don't hesitate to join it if you want to participate or be informed.
-	
-<a href="http://webchat.freenode.net/?channels=#jrebirth">http://webchat.freenode.net/?channels=#jrebirth</a>
-	
 </div>
 
 <div class="hBlock">
 Users Google Group
 ------------------------------
 
-We are using Google groups to provide some support to interested users.
+We use Google Groups to provide support to interested users.
 Don't hesitate to post if you want some help.
 	
-<a href="http://groups.google.com/group/jrebirth-users">http://groups.google.com/group/jrebirth-users</a>
+[https://groups.google.com/group/jrebirth-users](https://groups.google.com/group/jrebirth-users)
 	
 </div>
 
@@ -50,9 +39,9 @@ Don't hesitate to post if you want some help.
 Developers Google Group
 ------------------------------
 
-We are using Google groups to exchange informations about the project.
-Don't hesitate to post new topic if you want to contribute.
+We use Google Groups to exchange information about the project.
+Don't hesitate to post a new topic if you want to contribute.
 	
-<a href="http://groups.google.com/group/jrebirth-developers">http://groups.google.com/group/jrebirth-developers</a>
+[https://groups.google.com/group/jrebirth-developers](https://groups.google.com/group/jrebirth-developers)
 	
 </div>

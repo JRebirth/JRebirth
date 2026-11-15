@@ -26,8 +26,10 @@
 
 #set( $isPresentation = true)
 #set( $hasZip = true)
-#set( $hasJar = true)
-#set( $hasExe = true)
+#set( $hasJar = false)
+#set( $hasExe = false)
+
+#set( $screenshot = "breizhcamp.png")
 
 #set( $githubRepoName = "GitHub JFX-Presentation Repository")
 #set( $githubRepoUrl = "https://github.com/JRebirth/JFX-Presentation")

@@ -177,7 +177,7 @@ If you want to use the **JRebirthPreloader**, you must include the JRebirth prel
 
 	<organization>
 		<name>JRebirth</name>
-		<url>http://www.jrebirth.org</url>
+		<url>https://www.jrebirth.org</url>
 	</organization>
 
 	<build>
