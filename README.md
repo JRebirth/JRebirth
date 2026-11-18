@@ -6,7 +6,7 @@ JRebirth Application Framework for JavaFX graphical toolkit
 
 A set of Showcase Applications are provided for code-centric documentation and they are used as integration test
 
-More information is available on our website : [www.jrebirth.org](http://www.jrebirth.org)
+More information is available on our website : [www.jrebirth.org](https://www.jrebirth.org)
 
 [![Join the chat at https://gitter.im/JRebirth/JRebirth](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/JRebirth/JRebirth?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
