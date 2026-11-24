@@ -473,7 +473,7 @@ public abstract class AbstractSlideModel<M extends AbstractSlideModel<M, V, S>, 
         fadeTransition.setFromValue(show ? 0.0 : 1.0);
         fadeTransition.setToValue(show ? 1.0 : 0.0);
         fadeTransition.setDuration(Duration.seconds(1));
-        parallelTransition.getChildren().setAll(parallelTransition, fadeTransition);
+        parallelTransition.getChildren().setAll(scaleTransition, fadeTransition);
         return parallelTransition;
     }
 

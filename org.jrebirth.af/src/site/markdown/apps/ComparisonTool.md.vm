@@ -1,4 +1,4 @@
-
+﻿
 #set( $title = "Comparison Tool - Compare your bundles" )
 #set( $author = "Sebastien Bordes" )
 #set( $date="11/11/2016")
@@ -25,7 +25,7 @@
 #set( $isPresentation = false)
 #set( $hasZip = true)
 #set( $hasJar = false)
-#set( $hasExe = true)
+#set( $hasExe = false)
 
 #set( $screenshot = "comparisontool.png")
 
@@ -34,3 +34,5 @@
 			
 
 #parse("Presentation.vm")
+
+

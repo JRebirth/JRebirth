@@ -15,15 +15,19 @@
 $sectionTitle
 =================================
 
+<div class="jr-app-detail">
 #if( $screenshot )
-<div class="app-screenshot" style="margin: 1.5em 0; text-align: center;">
+<figure class="app-screenshot app-screenshot--hero">
 <a href="../images/apps/${screenshot}" title="$downloadName screenshot">
-<img src="../images/apps/${screenshot}" alt="$downloadName screenshot" style="max-width: 100%; height: auto; border: 1px solid #ccc; box-shadow: 0 2px 8px rgba(0,0,0,0.15);" />
+<img src="../images/apps/${screenshot}" alt="$downloadName screenshot" width="1280" height="800" loading="lazy" />
 </a>
-</div>
+</figure>
 #end
 
+<div class="jr-app-detail-copy">
 $appDescription
+</div>
+</div>
 
 #if( $externalDownload )
 **Download and launch from the product site:**
@@ -43,7 +47,7 @@ $appDescription
 **Download (Windows):**
 
 #if( $hasZip )
-* <a href="http://apps.jrebirth.org/${path}/${version}/${archiveName}-${version}.zip">$downloadName (Portable ZIP — bundled runtime)</a>
+* <a href="${appsDownloadBase}/${path}/${version}/${archiveName}-${version}.zip">$downloadName (Portable ZIP — bundled runtime)</a>
 #end
 
 ### How to run on Windows
@@ -51,11 +55,11 @@ $appDescription
 #if( $hasZip )
 1. Download the **Portable ZIP**.
 2. Unzip the archive to a local folder.
-3. Open the unzipped folder and run **`bin/${archiveName}.bat`** (double-click, or from a terminal).
-4. Do **not** use a standalone `.exe` next to a `.jar` — that wrapper is legacy and fails on modular JPMS apps. The ZIP is the supported launch path.
+3. Open the unzipped folder (named **`${archiveName}`**).
+4. Double-click **`${archiveName}.exe`** (same layout as EzDojo portable: `AppName.exe`, `app/`, `runtime/`).
 #end
 
-Prefer the portable ZIP: it includes a custom runtime built with jlink, so no separate JDK install is required.
+Prefer the portable ZIP: it bundles a custom Java runtime via jpackage, so no separate JDK install is required.
 
 Press **F11** to toggle fullscreen.
 

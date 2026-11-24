@@ -12,7 +12,7 @@ More information is available on our website : [www.jrebirth.org](https://www.jr
 
 ## Download & Build
 
-[![Maven Central](https://img.shields.io/maven-central/v/org.jrebirth.af/core.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/org.jrebirth.af/core/12.0.0)
+[![Maven Central](https://img.shields.io/maven-central/v/org.jrebirth.af/core.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/org.jrebirth.af/core/12.0.1)
 [![Build Status](https://github.com/JRebirth/JRebirth/actions/workflows/snapshot.yml/badge.svg)](https://github.com/JRebirth/JRebirth/actions/workflows/snapshot.yml)
 
 ## Demo
@@ -31,19 +31,19 @@ Several Demos are available online :
 
 ## Use it
 
-**Latest release on Maven Central** is **12.0.0** ([artifact](https://central.sonatype.com/artifact/org.jrebirth.af/core/12.0.0) · [all modules](https://central.sonatype.com/search?q=g:org.jrebirth.af+AND+v:12.0.0)).
+**Latest release on Maven Central** is **12.0.1** ([artifact](https://central.sonatype.com/artifact/org.jrebirth.af/core/12.0.1) · [all modules](https://central.sonatype.com/search?q=g:org.jrebirth.af+AND+v:12.0.1)).
 
 It targets **Java 25** and **JavaFX 26**.
 
     <dependency>
         <groupId>org.jrebirth.af</groupId>
         <artifactId>core</artifactId>
-        <version>12.0.0</version>
+        <version>12.0.1</version>
     </dependency>
 
 Optional companion modules use the same version, for example `preloader` and `processor` (`provided` scope for annotation processing).
 
-The `12.x-dev` branch uses **`12.0.1-SNAPSHOT`** in `org.jrebirth.af/pom.xml` (GitHub Packages on push). For production builds, prefer the Central release above until **12.0.1** is published. To hack on unreleased code, `mvn -f org.jrebirth.af/pom.xml clean install` and depend on `12.0.1-SNAPSHOT`, or use the release skill under `org.jrebirth.af/.cursor/skills/release-version/`.
+The `12.x-dev` branch tracks the next **`-SNAPSHOT`** line in `org.jrebirth.af/pom.xml` (GitHub Packages on push). For production builds, use the Central release above. To hack on unreleased code, `mvn -f org.jrebirth.af/pom.xml clean install` and depend on the current SNAPSHOT, or use the release skill under `org.jrebirth.af/.cursor/skills/release-version/`.
 
 ## Documentation
 

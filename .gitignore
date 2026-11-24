@@ -17,7 +17,16 @@ bin/
 org.jrebirth.af/src/site/resources/attached-includes/css/shCoreDefault.css
 org.jrebirth.af/src/site/resources/attached-includes/css/shCoreDefault.css.gz
 
+# --- App / site upload staging (local only — never commit binaries) ---
+tools/apps-staging/*
+!tools/apps-staging/README.md
+
+# --- One-off local archives (never commit) ---
+/unused-*.zip
+
 # --- Logs & tooling output ---
+tools/*.log
+tools/app-smoke-results.csv
 velocity.log
 JRebirthTest.log
 JRebirthDemo.log

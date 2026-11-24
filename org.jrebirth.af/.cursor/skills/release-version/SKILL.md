@@ -76,13 +76,38 @@ mvn -f org.jrebirth.af/pom.xml site -N -Dmaven.javadoc.skip=true
 
 Public site path: `sites/org.jrebirth-${version}/` (hosted `https://sites.jrebirth.org/org.jrebirth-${version}/`).
 
-## Upload site + showcase apps (IONOS legacy)
+## Showcase apps (DMZ `apps.jrebirth.org`, never git)
+
+Portable app ZIPs not repository Site templates link `https://apps.jrebirth.org/{app}/{version}/{file}.zip` (POM property `appsDownloadBase`) — same pattern EZDojo desktop artefacts `downloads.ezdojo.net`.
+
+1. Build portable ZIPs (`showcase` `-Ppackage-portable` or external demo repos)
+2. Stage locally (gitignored):
 
 ```powershell
-powershell -File tools/upload-site-and-apps.ps1 -Version 12.0.1
+powershell -File tools/stage-jrebirth-apps.ps1
 ```
 
-`-Version` defaults `org.jrebirth.af/pom.xml` (SNAPSHOT suffix kept local artifact names remote showcase paths use same version string pass)
+3. Publish binaries DMZ (`publish-jrebirth-to-dmz.ps1` Hosting repository):
+
+```powershell
+powershell -File D:\DEV\GIT\Hosting\.cursor\skills\hosting\publish-static-jrebirth\scripts\publish-jrebirth-to-dmz.ps1 `
+  -AppsOnly -RemoteSiteVersion /var/www/sites/jrebirth.org/sites/org.jrebirth-12.0.1 -Apply
+```
+
+Docroot DMZ: `/var/www/sites/jrebirth.org/apps/` → public `apps.jrebirth.org`.
+
+## Site download ZIPs (AI kit + framework)
+
+Built Maven `pre-site` → `org.jrebirth.af/target/site/downloads/` (`jrebirth-ai-kit-*.zip`, `jrebirth-*.zip`). Ship Maven site `www` / `sites.jrebirth.org` (relative `downloads/` links), not via `apps.jrebirth.org`.
+
+## Upload site (DMZ preferred)
+
+```powershell
+powershell -File tools/stage-jrebirth-apps.ps1
+# Hosting publish: site + apps (see publish-jrebirth-to-dmz.ps1 -BuildSite if needed)
+```
+
+Legacy IONOS SCP: `tools/upload-site-and-apps.ps1` — avoid new releases use DMZ static vhosts instead
 
 ## Release checklist (Central — gated)
 

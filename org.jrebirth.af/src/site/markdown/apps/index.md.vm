@@ -1,7 +1,7 @@
 
 #set( $title = "JRebirth Applications & Demos" )
 #set( $author = "Sebastien Bordes" )
-#set( $date = "15/11/2026" )
+#set( $date = "24/11/2026" )
 
 <head>
 <![CDATA[
@@ -12,30 +12,93 @@
 ]]>
 </head>
 
+<div class="jr-apps-catalog">
+
 Applications &amp; Demos
 ========================
 
-Portable downloads for Windows. Prefer the **ZIP** (bundled runtime via jlink): unzip, then run `bin/AppName.bat`.
+Portable downloads for Windows. Prefer the **ZIP** (jpackage app-image with bundled runtime): unzip, then double-click `AppName.exe`.
+
+Application binaries are **not** stored in the JRebirth git repository. Maven site pages link to **[${appsDownloadBase}](${appsDownloadBase})** (DMZ static host, same idea as `downloads.ezdojo.net` for EZDojo). Publish ZIPs with Hosting `publish-jrebirth-to-dmz.ps1` after `tools/stage-jrebirth-apps.ps1`.
 
 Conference slide decks live on the [Presentations](../presentations/index.html) page.
 
-### Apps
+### Featured applications
 
-| App | What it shows |
-| --- | --- |
-| [**EzDojo Manager**](EzDojo.html) | Real-world production desktop app built with JRebirth 12 |
-| [**Mastering Tables**](MasteringTables.html) | Rich table / data-grid sample |
-| [**Comparison Tool**](ComparisonTool.html) | Side-by-side comparison desktop tool |
-| [**Showcase Demo**](Demo.html) | Modular demo embedding Wave, Todos, Workbench, FXML, Undo/Redo, FontIcon |
-| [**Analyzer**](Analyzer.html) | Runtime wave analyzer |
+<div class="jr-apps">
+<a class="jr-app" href="EzDojo.html">
+<img src="../images/apps/ezdojo.png" alt="" width="640" height="400" loading="lazy" />
+<span class="jr-app-tag">Featured product</span>
+<span class="jr-h3">EzDojo Manager</span>
+<p>Real-world club management desktop app powered by JRebirth AF 12.</p>
+</a>
+<a class="jr-app" href="MasteringTables.html">
+<img src="../images/apps/masteringtables.png" alt="" width="640" height="400" loading="lazy" />
+<span class="jr-app-tag">Application</span>
+<span class="jr-h3">Mastering Tables</span>
+<p>Rich table / data-grid sample exercising Commands, Services and Waves.</p>
+</a>
+<a class="jr-app" href="ComparisonTool.html">
+<img src="../images/apps/comparisontool.png" alt="" width="640" height="400" loading="lazy" />
+<span class="jr-app-tag">Application</span>
+<span class="jr-h3">Comparison Tool</span>
+<p>Side-by-side folder and bundle comparison desktop tool.</p>
+</a>
+<a class="jr-app" href="Demo.html">
+<img src="../images/apps/demo.png" alt="" width="640" height="400" loading="lazy" />
+<span class="jr-app-tag">Showcase</span>
+<span class="jr-h3">Showcase Demo</span>
+<p>Modular launcher embedding Wave, Todos, Workbench, FXML, Undo/Redo and FontIcon.</p>
+</a>
+<a class="jr-app" href="Analyzer.html">
+<img src="../images/apps/analyzer.png" alt="" width="640" height="400" loading="lazy" />
+<span class="jr-app-tag">Tool</span>
+<span class="jr-h3">Analyzer</span>
+<p>Runtime wave analyzer for debugging JRebirth applications.</p>
+</a>
+</div>
 
-### Embedded in Showcase Demo
+### Showcase modules (also in Demo)
 
-These modules ship inside [Showcase Demo](Demo.html) — no separate home tiles:
+<p class="jr-section-intro">Each module ships inside <a href="Demo.html">Showcase Demo</a> and has its own download page.</p>
 
-* [Wave](Wave.html)
-* [Todos](Todos.html)
-* [Workbench](Workbench.html)
-* [FXML](FXML.html)
-* [Undo / Redo](UndoRedo.html)
-* [FontIcon](FontIcon.html)
+<div class="jr-apps jr-apps--compact">
+<a class="jr-app" href="Wave.html">
+<img src="../images/apps/wave.png" alt="" width="640" height="400" loading="lazy" />
+<span class="jr-app-tag">Module</span>
+<span class="jr-h3">Wave</span>
+<p>JRebirth Wave communication engine.</p>
+</a>
+<a class="jr-app" href="Todos.html">
+<img src="../images/apps/todos.png" alt="" width="640" height="400" loading="lazy" />
+<span class="jr-app-tag">Module</span>
+<span class="jr-h3">Todos</span>
+<p>Todo manager sample application.</p>
+</a>
+<a class="jr-app" href="Workbench.html">
+<img src="../images/apps/workbench.png" alt="" width="640" height="400" loading="lazy" />
+<span class="jr-app-tag">Module</span>
+<span class="jr-h3">Workbench</span>
+<p>Component library and workbench layout.</p>
+</a>
+<a class="jr-app" href="FXML.html">
+<img src="../images/apps/fxml.png" alt="" width="640" height="400" loading="lazy" />
+<span class="jr-app-tag">Module</span>
+<span class="jr-h3">FXML</span>
+<p>FXML integration with JRebirth MVC.</p>
+</a>
+<a class="jr-app" href="UndoRedo.html">
+<img src="../images/apps/undoredo.png" alt="" width="640" height="400" loading="lazy" />
+<span class="jr-app-tag">Module</span>
+<span class="jr-h3">Undo / Redo</span>
+<p>Undo/redo stacks and commands.</p>
+</a>
+<a class="jr-app" href="FontIcon.html">
+<img src="../images/apps/fonticon.png" alt="" width="640" height="400" loading="lazy" />
+<span class="jr-app-tag">Module</span>
+<span class="jr-h3">FontIcon</span>
+<p>Icon font bridge modules gallery.</p>
+</a>
+</div>
+
+</div>

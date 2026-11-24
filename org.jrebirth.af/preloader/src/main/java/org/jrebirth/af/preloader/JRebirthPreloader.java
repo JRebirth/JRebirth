@@ -47,7 +47,8 @@ public class JRebirthPreloader extends AbstractJRebirthPreloader {
         final StackPane p = new StackPane();
         p.setStyle("-fx-background-color: transparent;");
 
-        final ImageView logo = new ImageView(new Image("JRebirth_Title.png"));
+        // JPMS / jpackage: load from this module package (not classpath root).
+        final ImageView logo = new ImageView(new Image(JRebirthPreloader.class.getResource("JRebirth_Title.png").toExternalForm()));
         p.getChildren().add(logo);
         StackPane.setAlignment(logo, Pos.CENTER);
 

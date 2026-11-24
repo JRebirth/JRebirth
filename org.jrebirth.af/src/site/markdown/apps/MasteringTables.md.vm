@@ -1,4 +1,4 @@
-
+﻿
 #set( $title = "Mastering Tables - Game for Kids" )
 #set( $author = "Sebastien Bordes" )
 #set( $date="05/06/2013")
@@ -25,7 +25,7 @@
 #set( $isPresentation = false)
 #set( $hasZip = true)
 #set( $hasJar = false)
-#set( $hasExe = true)
+#set( $hasExe = false)
 
 #set( $screenshot = "masteringtables.png")
 
@@ -372,3 +372,5 @@ Using `MTImages.MT_TITLE.get()` anywhere in the app returns a cached `Image` ins
 | `@Register` + `@RegistrationPoint` | `ExpressionBuilderService` | Interface-based service registration and injection |
 
 ]]#
+
+

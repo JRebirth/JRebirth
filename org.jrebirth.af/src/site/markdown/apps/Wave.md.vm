@@ -1,4 +1,4 @@
-
+﻿
 #set( $title = "Wave Showcase" )
 #set( $author = "Sebastien Bordes" )
 #set( $date="11/14/2026")
@@ -25,10 +25,12 @@
 #set( $isPresentation = false)
 #set( $hasZip = true)
 #set( $hasJar = false)
-#set( $hasExe = true)
+#set( $hasExe = false)
 #set( $screenshot = "wave.png")
 
 #set( $githubRepoName = "GitHub Wave Showcase")
 #set( $githubRepoUrl = "https://github.com/JRebirth/JRebirth/tree/12.x-dev/org.jrebirth.af/showcase/wave")
 
 #parse("Presentation.vm")
+
+

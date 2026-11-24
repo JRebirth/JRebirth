@@ -62,6 +62,7 @@ Templates live in `references/`.
 - In this repository, verify with `mvn clean install -Dmaven.test.skip=true`; for a standalone generated project, use `mvn clean package`.
 - Launch a standalone JavaFX application with `mvn javafx:run`.
 - Launch a repository module with `mvn javafx:run -pl <module-path> -Djavafx.mainClass=<module>/<appClass>`.
+- Portable Windows ZIP (jpackage app-image, `AppName.exe` + `app/` + `runtime/`): inherit `org.jrebirth:ria` **5.x**, copy `src/main/jpackage/build-windows.ps1` from RIA-POM, then `mvn -Ppackage-portable package`.
 - After creating an application, tell the user the exact build command and the exact launch command for that generated project.
 
 Use files under `references/` for project variants and `references/` for scaffold files.

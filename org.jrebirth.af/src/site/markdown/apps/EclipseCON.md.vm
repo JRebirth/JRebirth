@@ -23,7 +23,7 @@
 #set( $appDescription = '<p>This application has been shown during EclipseCON France 2013.</p>
 			<p>
 				You can download workshop files (Eclipse Juno + m2eclipse + efxclipse + Maven standalone + Jdk7u21) :
-				<a href="http://apps.jrebirth.org/eclipsecon/EclipseCON-Workshop.7z">EclipseCON Workshop</a>
+				<a href="${appsDownloadBase}/eclipsecon/EclipseCON-Workshop.7z">EclipseCON Workshop</a>
 			</p>')
 
 #set( $isPresentation = true)

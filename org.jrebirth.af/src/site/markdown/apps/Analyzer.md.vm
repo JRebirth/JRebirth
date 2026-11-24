@@ -1,4 +1,4 @@
-
+﻿
 #set( $title = "JRebirth Analyzer" )
 #set( $author = "Sebastien Bordes" )
 #set( $date="02/22/2013")
@@ -25,7 +25,7 @@
 #set( $isPresentation = false)
 #set( $hasZip = true)
 #set( $hasJar = false)
-#set( $hasExe = true)
+#set( $hasExe = false)
 
 #set( $screenshot = "analyzer.png")
 
@@ -33,3 +33,5 @@
 #set( $githubRepoUrl = "https://github.com/JRebirth/JRebirth/tree/12.x-dev/org.jrebirth.af/showcase/analyzer")
 			
 #parse("Presentation.vm")
+
+

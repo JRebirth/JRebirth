@@ -1,12 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
-		<version>12.0.1-SNAPSHOT</version>
+		<version>12.0.1</version>
 		<relativePath>..</relativePath>
 	</parent>
-	
+
 	<groupId>org.jrebirth.af.showcase</groupId>
 	<artifactId>analyzer</artifactId>
 	<packaging>jar</packaging>
@@ -16,9 +18,9 @@
 	<url>http://www.jrebirth.org/apps/Analyzer.html</url>
 
 	<properties>
-
+		
+		<jpackage.skip>false</jpackage.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
 		<archiveName>JRebirthAnalyzer</archiveName>
 		<mainModule>org.jrebirth.af.showcase.analyzer</mainModule>
 		<deployPath>analyzer/${project.version}</deployPath>
@@ -28,7 +30,6 @@
 	</properties>
 
 	<build>
-
 		<resources>
 			<resource>
 				<filtering>false</filtering>
@@ -48,7 +49,6 @@
 				<excludes>
 					<exclude>**/*.ttf</exclude>
 					<exclude>**/*.ico</exclude>
-					<!-- JNLP may use legacy single-byte encoding; UTF-8 filtering throws MalformedInputException. -->
 					<exclude>**/*.jnlp</exclude>
 				</excludes>
 			</resource>
@@ -62,281 +62,17 @@
 				</includes>
 			</resource>
 		</resources>
-
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${maven.compiler.plugin.version}</version>
-					<configuration>
-						<source>${java.version}</source>
-						<target>${java.version}</target>
-						<release>${java.version}</release>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>${maven.jar.plugin.version}</version>
-
-					<configuration>
-						<archive>
-							<manifestEntries>
-								<JavaFX-Version>${openjfx.version}</JavaFX-Version>
-								<Main-Class>${appClass}</Main-Class>
-								<!--<JavaFX-Application-Class>${appClass}</JavaFX-Application-Class> -->
-							</manifestEntries>
-
-							<manifest>
-								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-								<addClasspath>true</addClasspath>
-								<classpathLayoutType>custom</classpathLayoutType>
-								<customClasspathLayout>${artifact.groupId}-${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}</customClasspathLayout>
-							</manifest>
-						</archive>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-shade-plugin</artifactId>
-					<version>${maven.shade.plugin.version}</version>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>shade</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<shadedArtifactAttached>false</shadedArtifactAttached>
-						<shadedClassifierName>shaded</shadedClassifierName>
-						<transformers>
-							<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-								<mainClass>${appClass}</mainClass>
-								<manifestEntries>
-									<Class-Path>.</Class-Path>
-								</manifestEntries>
-							</transformer>
-						</transformers>
-						<finalName>${archiveName}-${project.version}</finalName>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>com.akathist.maven.plugins.launch4j</groupId>
-					<artifactId>launch4j-maven-plugin</artifactId>
-					<version>${launch4j.maven.plugin.version}</version>
-					<executions>
-						<execution>
-							<id>l4j-clui</id>
-							<phase>package</phase>
-							<goals>
-								<goal>launch4j</goal>
-							</goals>
-							<configuration>
-								<headerType>gui</headerType>
-								<jar>${project.build.directory}/${archiveName}-${project.version}.jar</jar>
-								<outfile>${project.build.directory}/${archiveName}-${project.version}.exe</outfile>
-								<downloadUrl>http://java.com/download</downloadUrl>
-								<classPath>
-									<mainClass>${appClass}</mainClass>
-									<addDependencies>false</addDependencies>
-									<preCp>.</preCp>
-								</classPath>
-								<icon>${exeIcon}</icon>
-								<jre>
-									<minVersion>${java.version}</minVersion>
-									<jdkPreference>preferJre</jdkPreference>
-								</jre>
-								<versionInfo>
-									<fileVersion>1.0.0.0</fileVersion>
-									<txtFileVersion>${project.version}</txtFileVersion>
-									<fileDescription>${project.name}</fileDescription>
-									<copyright>JRebirth 2016</copyright>
-									<productVersion>1.0.0.0</productVersion>
-									<txtProductVersion>1.0.0.0</txtProductVersion>
-									<productName>${project.name}</productName>
-									<companyName>JRebirth</companyName>
-									<internalName>${archiveName}</internalName>
-									<originalFilename>${archiveName}.exe</originalFilename>
-								</versionInfo>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>wagon-maven-plugin</artifactId>
-					<version>${wagon.maven.plugin.version}</version>
-					<configuration>
-						<serverId>JRebirth_Sites</serverId>
-						<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/apps</url>
-					</configuration>
-				</plugin>
-
-			</plugins>
-		</pluginManagement>
-
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ftp</artifactId>
-				<version>${wagon.ftp.version}</version>
-			</extension>
-
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh</artifactId>
-				<version>${wagon.ssh.version}</version>
-			</extension>
-
-		</extensions>
+		<plugins>
+			<plugin>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>${mainModule}/${appClass}</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
-	<profiles>
-
-		<profile>
-			<id>AutoJar</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-jar-plugin</artifactId>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-shade-plugin</artifactId>
-					</plugin>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>wagon-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>deploy-self-jar</id>
-								<phase>site-deploy</phase>
-								<goals>
-									<goal>upload-single</goal>
-								</goals>
-								<configuration>
-									<fromFile>${project.build.directory}/${archiveName}-${project.version}.jar</fromFile>
-									<toFile>${deployPath}/${archiveName}-${project.version}.jar</toFile>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>WinExe</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>com.akathist.maven.plugins.launch4j</groupId>
-						<artifactId>launch4j-maven-plugin</artifactId>
-					</plugin>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>wagon-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>deploy-winexe</id>
-								<phase>site-deploy</phase>
-								<goals>
-									<goal>upload-single</goal>
-								</goals>
-								<configuration>
-									<fromFile>${project.build.directory}/${archiveName}-${project.version}.exe</fromFile>
-									<toFile>${deployPath}/${archiveName}-${project.version}.exe</toFile>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>PackageApp</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.openjfx</groupId>
-						<artifactId>javafx-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>jlink</id>
-								<phase>package</phase>
-								<goals><goal>jlink</goal></goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-shade-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>shade</id>
-								<phase>package</phase>
-								<goals><goal>shade</goal></goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>com.akathist.maven.plugins.launch4j</groupId>
-						<artifactId>launch4j-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>launch4j</id>
-								<phase>package</phase>
-								<goals><goal>launch4j</goal></goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>DeployApps</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>wagon-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>deploy-jlink-zip</id>
-								<phase>site-deploy</phase>
-								<goals><goal>upload-single</goal></goals>
-								<configuration>
-									<fromFile>${project.build.directory}/${archiveName}.zip</fromFile>
-									<toFile>${deployPath}/${archiveName}-${project.version}.zip</toFile>
-								</configuration>
-							</execution>
-							<execution>
-								<id>deploy-winexe-package</id>
-								<phase>site-deploy</phase>
-								<goals><goal>upload-single</goal></goals>
-								<configuration>
-									<fromFile>${project.build.directory}/${archiveName}-${project.version}.exe</fromFile>
-									<toFile>${deployPath}/${archiveName}-${project.version}.exe</toFile>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-	
 	<dependencies>
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
@@ -345,5 +81,5 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
 </project>
+

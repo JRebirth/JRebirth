@@ -1,10 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<artifactId>af</artifactId>
 		<groupId>org.jrebirth</groupId>
-		<version>12.0.1-SNAPSHOT</version>
+		<version>12.0.1</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -14,7 +16,7 @@
 
 	<name>JRebirth Showcase</name>
 	<description>Set of Showcase Application for live documentation and used as integration test</description>
-	<url>http://www.jrebirth.org</url>
+	<url>https://www.jrebirth.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,7 +26,27 @@
 		<archiveName>${project.artifactId}</archiveName>
 		<deployPath>${project.artifactId}/${project.version}</deployPath>
 		<exeIcon>src/main/resources/images/JRebirth_64x64.ico</exeIcon>
-		<!-- Omit showcase apps from Maven Central / deploy (inherited by all showcase submodules). -->
+		<vendor>JRebirth</vendor>
+
+		<!-- Portable packaging (mirrors org.jrebirth:ria 5.x — showcase cannot use dual parent). -->
+		<jpackage.app.name>${archiveName}</jpackage.app.name>
+		<jpackage.app.version>12.0.1</jpackage.app.version>
+		<jpackage.vendor>${vendor}</jpackage.vendor>
+		<jpackage.module.name>${mainModule}</jpackage.module.name>
+		<jpackage.app.main.module>${mainModule}/${appClass}</jpackage.app.main.module>
+		<jpackage.module.path.dir>${project.build.directory}/jpms-app</jpackage.module.path.dir>
+		<jpackage.staging.dir>${project.build.directory}/jpackage-app-image</jpackage.staging.dir>
+		<jpackage.temp.dir>${project.build.directory}/jpackage-temp</jpackage.temp.dir>
+		<jpackage.portable.zip.name>${archiveName}-${project.version}.zip</jpackage.portable.zip.name>
+		<jpackage.icon>${basedir}/${exeIcon}</jpackage.icon>
+		<!-- Script lives under showcase/ (parent of each app module). -->
+		<jpackage.build.script>${project.parent.basedir}/src/main/jpackage/build-windows.ps1</jpackage.build.script>
+		<jrebirth.apps.stage.dir>${project.build.directory}/apps-upload</jrebirth.apps.stage.dir>
+
+		<!-- Aggregator is packaging=pom — skip jpackage here; jar children set false. -->
+		<jpackage.skip>true</jpackage.skip>
+
+		<!-- Omit showcase apps from Maven Central / deploy. -->
 		<skipPublishing>true</skipPublishing>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.source.skip>true</maven.source.skip>
@@ -45,7 +67,6 @@
 	</modules>
 
 	<build>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -61,7 +82,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -75,144 +96,195 @@
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
-
 				<plugin>
 					<groupId>org.openjfx</groupId>
 					<artifactId>javafx-maven-plugin</artifactId>
 					<version>${javafx.maven.plugin.version}</version>
 					<configuration>
-						<stripDebug>true</stripDebug>
-						<compress>2</compress>
-						<noHeaderFiles>true</noHeaderFiles>
-						<noManPages>true</noManPages>
-						<launcher>${archiveName}</launcher>
-						<jlinkImageName>${archiveName}</jlinkImageName>
-						<jlinkZipName>${archiveName}</jlinkZipName>
 						<mainClass>${mainModule}/${appClass}</mainClass>
-						<bindServices>true</bindServices>
 					</configuration>
 				</plugin>
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-shade-plugin</artifactId>
-					<version>${maven.shade.plugin.version}</version>
-					<configuration>
-						<shadedArtifactAttached>false</shadedArtifactAttached>
-						<transformers>
-							<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-								<mainClass>${appClass}</mainClass>
-							</transformer>
-							<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-						</transformers>
-						<finalName>${archiveName}-${project.version}</finalName>
-					</configuration>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${maven.dependency.plugin.version}</version>
 				</plugin>
-
 				<plugin>
-					<groupId>com.akathist.maven.plugins.launch4j</groupId>
-					<artifactId>launch4j-maven-plugin</artifactId>
-					<version>${launch4j.maven.plugin.version}</version>
-					<configuration>
-						<headerType>gui</headerType>
-						<jar>${project.build.directory}/${archiveName}-${project.version}.jar</jar>
-						<outfile>${project.build.directory}/${archiveName}-${project.version}.exe</outfile>
-						<downloadUrl>https://adoptium.net/</downloadUrl>
-						<classPath>
-							<mainClass>${appClass}</mainClass>
-							<addDependencies>false</addDependencies>
-						</classPath>
-						<icon>${exeIcon}</icon>
-						<jre>
-							<minVersion>${java.version}</minVersion>
-							<jdkPreference>preferJre</jdkPreference>
-						</jre>
-						<versionInfo>
-							<fileVersion>1.0.0.0</fileVersion>
-							<txtFileVersion>${project.version}</txtFileVersion>
-							<fileDescription>${project.name}</fileDescription>
-							<copyright>JRebirth</copyright>
-							<productVersion>1.0.0.0</productVersion>
-							<txtProductVersion>${project.version}</txtProductVersion>
-							<productName>${project.name}</productName>
-							<companyName>JRebirth</companyName>
-							<internalName>${archiveName}</internalName>
-							<originalFilename>${archiveName}.exe</originalFilename>
-						</versionInfo>
-					</configuration>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>3.1.0</version>
 				</plugin>
-
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>wagon-maven-plugin</artifactId>
-					<version>${wagon.maven.plugin.version}</version>
-					<configuration>
-						<serverId>JRebirth_Sites</serverId>
-						<url>scp://s143909802.onlinehome.fr/kunden/homepages/14/d143909784/htdocs/jrebirth/apps</url>
-					</configuration>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>3.5.0</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
-
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ftp</artifactId>
-				<version>${wagon.ftp.version}</version>
-			</extension>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh</artifactId>
-				<version>${wagon.ssh.version}</version>
-			</extension>
-		</extensions>
 	</build>
 
-	<!-- PackageApp / DeployApps live in jar submodules only (parent packaging=pom cannot jlink). -->
+	<!-- Profiles inherited by jar submodules (activate with -Ppackage-portable). -->
 	<profiles>
 		<profile>
-			<id>PackageApp</id>
-			<!-- no-op on aggregator; submodule POMs activate packaging plugins -->
+			<id>package-portable</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>clean-jpms-app-dir</id>
+								<phase>prepare-package</phase>
+								<goals><goal>run</goal></goals>
+								<configuration>
+									<skip>${jpackage.skip}</skip>
+									<target>
+										<delete dir="${jpackage.module.path.dir}" quiet="true" />
+										<mkdir dir="${jpackage.module.path.dir}" />
+									</target>
+								</configuration>
+							</execution>
+							<execution>
+								<id>stage-main-jar-for-jpms</id>
+								<phase>package</phase>
+								<goals><goal>run</goal></goals>
+								<configuration>
+									<skip>${jpackage.skip}</skip>
+									<target>
+										<copy
+											file="${project.build.directory}/${project.build.finalName}.jar"
+											todir="${jpackage.module.path.dir}"
+											overwrite="true"
+											failonerror="true" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-runtime-deps-for-jpms</id>
+								<phase>prepare-package</phase>
+								<goals><goal>copy-dependencies</goal></goals>
+								<configuration>
+									<skip>${jpackage.skip}</skip>
+									<outputDirectory>${jpackage.module.path.dir}</outputDirectory>
+									<includeScope>runtime</includeScope>
+									<!-- Avoid artifactId collisions (e.g. af:undoredo vs showcase:undoredo). -->
+									<prependGroupId>true</prependGroupId>
+									<!-- processor-*-4ide embeds javafx modules and breaks jpackage module path. -->
+									<excludeArtifactIds>processor</excludeArtifactIds>
+									<excludeClassifiers>4ide,tests</excludeClassifiers>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>jpackage-windows-portable</id>
+								<phase>package</phase>
+								<goals><goal>exec</goal></goals>
+								<configuration>
+									<skip>${jpackage.skip}</skip>
+									<executable>powershell.exe</executable>
+									<arguments>
+										<argument>-NoProfile</argument>
+										<argument>-ExecutionPolicy</argument>
+										<argument>Bypass</argument>
+										<argument>-File</argument>
+										<argument>${jpackage.build.script}</argument>
+										<argument>-Target</argument>
+										<argument>portable</argument>
+										<argument>-AppName</argument>
+										<argument>${jpackage.app.name}</argument>
+										<argument>-AppVersion</argument>
+										<argument>${jpackage.app.version}</argument>
+										<argument>-Vendor</argument>
+										<argument>${jpackage.vendor}</argument>
+										<argument>-ModuleName</argument>
+										<argument>${jpackage.module.name}</argument>
+										<argument>-ModulePathDir</argument>
+										<argument>${jpackage.module.path.dir}</argument>
+										<argument>-MainModule</argument>
+										<argument>${jpackage.app.main.module}</argument>
+										<argument>-StagingDir</argument>
+										<argument>${jpackage.staging.dir}</argument>
+										<argument>-TempDir</argument>
+										<argument>${jpackage.temp.dir}</argument>
+										<argument>-PortableZipName</argument>
+										<argument>${jpackage.portable.zip.name}</argument>
+										<argument>-BuildDirectory</argument>
+										<argument>${project.build.directory}</argument>
+										<argument>-IconPath</argument>
+										<argument>${jpackage.icon}</argument>
+										<argument>-JavaHome</argument>
+										<argument>${java.home}</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 		<profile>
-			<id>DeployApps</id>
-			<!-- no-op on aggregator; submodule POMs activate wagon uploads -->
+			<id>deploy-apps-jrebirth</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>stage-portable-zip-for-apps</id>
+								<phase>verify</phase>
+								<goals><goal>run</goal></goals>
+								<configuration>
+									<skip>${jpackage.skip}</skip>
+									<target>
+										<mkdir dir="${jrebirth.apps.stage.dir}/${deployPath}" />
+										<copy
+											file="${project.build.directory}/${jpackage.portable.zip.name}"
+											todir="${jrebirth.apps.stage.dir}/${deployPath}"
+											failonerror="true"
+											overwrite="true" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>preloader</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		 
-<!-- 		<dependency>
-			<groupId>org.jrebirth.af</groupId>
-			<artifactId>core</artifactId>
-			<version>${project.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency> -->
-		
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>component</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.jrebirth.af</groupId>
 			<artifactId>processor</artifactId>
@@ -220,19 +292,15 @@
 			<classifier>4ide</classifier>
 			<scope>provided</scope>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.testfx</groupId>
 			<artifactId>testfx-core</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.testfx</groupId>
 			<artifactId>testfx-junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
-
 </project>

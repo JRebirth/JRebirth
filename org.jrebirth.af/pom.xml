@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>af</artifactId>
-	<version>12.0.1-SNAPSHOT</version>
+	<version>12.0.1</version>
 
 	<packaging>pom</packaging>
 	<name>JRebirth Application Framework</name>
@@ -22,13 +22,16 @@
 
 	<properties>
 		<!-- CamelCase (no hyphens): Velocity treats $Foo-bar as $Foo minus bar. -->
-		<EclipseDayVersion>3.0.0</EclipseDayVersion>
+		<EclipseDayVersion>4.0.0</EclipseDayVersion>
+		<!-- Breizhcamp still ships 3.0.0 until JavaFX Builder APIs are migrated for JavaFX 26. -->
 		<BreizhcampVersion>3.0.0</BreizhcampVersion>
-		<EclipseCONVersion>3.0.0</EclipseCONVersion>
-		<LightningTalkVersion>3.0.0</LightningTalkVersion>
-		<JafVersion>4.0.0</JafVersion>
-		<MasteringTablesVersion>4.0.0</MasteringTablesVersion>
-		<ComparisonToolVersion>2.0.0</ComparisonToolVersion>
+		<EclipseCONVersion>4.0.0</EclipseCONVersion>
+		<LightningTalkVersion>4.0.0</LightningTalkVersion>
+		<JafVersion>5.0.0</JafVersion>
+		<MasteringTablesVersion>5.0.0</MasteringTablesVersion>
+		<ComparisonToolVersion>3.0.0</ComparisonToolVersion>
+		<!-- Public portable app binaries (DMZ static host — same pattern as downloads.ezdojo.net). -->
+		<appsDownloadBase>https://apps.jrebirth.org</appsDownloadBase>
 
 		<maven.version>3.9.11</maven.version>
 

@@ -91,7 +91,7 @@ public final class ImageSlideView extends
             node().getStyleClass().add(model().getSlide().getStyle());
         }
 
-        this.image = Resources.create(new RelImage(model().getImage())).get();
+        this.image = Resources.create(new RelImage(model().getImage())).module(getClass().getModule()).get();
 
         if (model().getSlide().getShowAnimation() == null ||
                 !"TileIn".equalsIgnoreCase(model().getSlide().getShowAnimation().value())
@@ -165,7 +165,7 @@ public final class ImageSlideView extends
             st.getChildren().setAll(getTileTransition(), getSlideLabelTransition(Duration.millis(1200)));
 
             st.play();
-        } else {
+        } else if (this.slideLabel != null) {
             getSlideLabelTransition(Duration.millis(0)).play();
         }
     }

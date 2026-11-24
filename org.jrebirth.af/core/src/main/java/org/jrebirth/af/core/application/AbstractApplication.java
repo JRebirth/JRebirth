@@ -514,12 +514,13 @@ public abstract class AbstractApplication<P extends Pane> extends Application im
     }
 
     protected Module getStageIconsModule() {
-        final Module appModule = this.getClass().getModule();
-        if (appModule.isNamed()) {
-            return appModule;
-        }
+        // Default APPLICATION_ICONS live in org.jrebirth.af.resources (optional dep). Prefer that
+        // module so named app modules are not probed for JRebirth_NxN.png they do not ship.
         final Module resources = ModuleUtility.find("org.jrebirth.af.resources");
-        return resources != null ? resources : appModule;
+        if (resources != null) {
+            return resources;
+        }
+        return this.getClass().getModule();
     }
 
     /**

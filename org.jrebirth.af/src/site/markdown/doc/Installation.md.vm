@@ -24,7 +24,7 @@ Manual Download
 JRebirth is composed by a set of jar files; add them to your application classpath to use them.
     
 You can download the distribution archive from the home page or here:
-[apps.jrebirth.org](http://apps.jrebirth.org/org.jrebirth.af/)
+[apps.jrebirth.org](${appsDownloadBase}/)
 
 You can also clone and build from source on [GitHub](https://github.com/JRebirth/JRebirth).
 

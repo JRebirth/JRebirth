@@ -26,6 +26,102 @@ body.jr-docs .app-screenshot img {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35) !important;
 }
 
+body.jr-docs .jr-app-detail {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0 0 1.5rem;
+}
+
+body.jr-docs .app-screenshot--hero {
+  margin: 0;
+  text-align: center;
+}
+
+body.jr-docs .app-screenshot--hero img {
+  width: 100%;
+  max-width: 920px;
+  height: auto;
+}
+
+body.jr-docs .jr-app-detail-copy p {
+  margin-top: 0;
+}
+
+/* App / presentation catalog grids (apps/index, presentations/index) */
+body.jr-docs .jr-apps-catalog .jr-section-intro {
+  color: #a8b8d0;
+  margin: 0.5rem 0 1.25rem;
+  max-width: 62ch;
+}
+
+body.jr-docs .jr-apps-catalog h3 {
+  margin: 2.25rem 0 1rem !important;
+  color: #ffb447 !important;
+}
+
+body.jr-docs .jr-apps-catalog .jr-apps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+}
+
+body.jr-docs .jr-apps-catalog .jr-apps--compact {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+body.jr-docs .jr-apps-catalog .jr-app {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.75rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(165deg, rgba(14, 32, 54, 0.72), rgba(7, 15, 28, 0.92));
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+body.jr-docs .jr-apps-catalog .jr-app:hover {
+  border-color: rgba(49, 186, 255, 0.45);
+  transform: translateY(-2px);
+}
+
+body.jr-docs .jr-apps-catalog .jr-app img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0a1628;
+}
+
+body.jr-docs .jr-apps-catalog .jr-app-tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffb447;
+  font-weight: 700;
+}
+
+body.jr-docs .jr-apps-catalog .jr-h3,
+body.jr-docs .jr-apps-catalog .jr-app h3 {
+  font-family: "Outfit", "Segoe UI", system-ui, sans-serif;
+  font-size: 1.05rem !important;
+  font-weight: 700;
+  margin: 0 !important;
+  color: #f5f7ff !important;
+}
+
+body.jr-docs .jr-apps-catalog .jr-app p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #a8b8d0;
+  line-height: 1.45;
+}
+
 body.jr-docs #container,
 body.jr-docs #page {
   width: 100% !important;

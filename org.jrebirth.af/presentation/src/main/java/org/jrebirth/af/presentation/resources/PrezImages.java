@@ -27,6 +27,8 @@ import org.jrebirth.af.core.resource.image.RelImage;
  */
 public interface PrezImages {
 
+    // module() left unset on purpose: ModuleUtility falls back across the app layer
+    // (HeaderLogo.png lives in each presentation app jar, not in af.presentation).
     ImageItem HEADER_LOGO = Resources.create(new RelImage("HeaderLogo", ImageExtension.PNG));
 
 }

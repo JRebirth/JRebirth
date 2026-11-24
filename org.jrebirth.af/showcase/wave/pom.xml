@@ -1,10 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.jrebirth.af</groupId>
 		<artifactId>showcase</artifactId>
-		<version>12.0.1-SNAPSHOT</version>
+		<version>12.0.1</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -17,6 +17,8 @@
 	<url>http://www.jrebirth.org/apps/Wave.html</url>
 
 	<properties>
+		
+		<jpackage.skip>false</jpackage.skip>
 		<appClass>${project.groupId}.${project.artifactId}.WaveApplication</appClass>
 		<mainModule>org.jrebirth.af.showcase.wave</mainModule>
 		<archiveName>Wave</archiveName>
@@ -33,78 +35,5 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
-<profiles>
-		<profile>
-			<id>PackageApp</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.openjfx</groupId>
-						<artifactId>javafx-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>jlink</id>
-								<phase>package</phase>
-								<goals><goal>jlink</goal></goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-shade-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>shade</id>
-								<phase>package</phase>
-								<goals><goal>shade</goal></goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>com.akathist.maven.plugins.launch4j</groupId>
-						<artifactId>launch4j-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>launch4j</id>
-								<phase>package</phase>
-								<goals><goal>launch4j</goal></goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>DeployApps</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>wagon-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>deploy-jlink-zip</id>
-								<phase>site-deploy</phase>
-								<goals><goal>upload-single</goal></goals>
-								<configuration>
-									<fromFile>${project.build.directory}/${archiveName}.zip</fromFile>
-									<toFile>${deployPath}/${archiveName}-${project.version}.zip</toFile>
-								</configuration>
-							</execution>
-							<execution>
-								<id>deploy-winexe</id>
-								<phase>site-deploy</phase>
-								<goals><goal>upload-single</goal></goals>
-								<configuration>
-									<fromFile>${project.build.directory}/${archiveName}-${project.version}.exe</fromFile>
-									<toFile>${deployPath}/${archiveName}-${project.version}.exe</toFile>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>
+

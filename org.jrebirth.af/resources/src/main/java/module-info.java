@@ -5,6 +5,6 @@
  */
 module org.jrebirth.af.resources {
 
-    //exports org.jrebirth.af.resources;
-    //exports org.jrebirth.af.resources.images;
+    // Allow ClassLoader-based lookups of packaged icons from other modules.
+    opens org.jrebirth.af.resources.images;
 }

@@ -228,33 +228,35 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
      */
     @Override
     public void reload() {
-        final ParallelTransition parallelTransition = new ParallelTransition();
-        final ScaleTransition scaleTransition = new ScaleTransition();
-        scaleTransition.setNode(this.circle);
-        scaleTransition.setDuration(Duration.millis(600));
-        scaleTransition.setFromY(0);
-        scaleTransition.setFromY(0);
-        scaleTransition.setToX(1);
-        scaleTransition.setToY(1);
-        final Timeline timeline = new Timeline();
-        timeline.setDelay(Duration.millis(200));
-        timeline.getKeyFrames().setAll(
-                                       new KeyFrame(Duration.millis(0), new KeyValue(this.rectangle.widthProperty(), 0)),
-                                       new KeyFrame(Duration.millis(600), new KeyValue(this.rectangle.widthProperty(), 90)));
-        final ParallelTransition parallelTransition1 = new ParallelTransition();
-        final RotateTransition rotateTransition = new RotateTransition();
+        // Restored from pre-JPMS Builder form: circle scale + rectangle timeline + slideContent rotate/scale, then play.
+        final ScaleTransition circleScale = new ScaleTransition(Duration.millis(600), this.circle);
+        circleScale.setFromX(0);
+        circleScale.setFromY(0);
+        circleScale.setToX(1);
+        circleScale.setToY(1);
 
-        rotateTransition.setFromAngle(-180);
-        rotateTransition.setToAngle(0);
-        final ScaleTransition scaleTransition1 = new ScaleTransition();
-        scaleTransition1.setDuration(Duration.millis(600));
-        scaleTransition1.setFromX(0);
-        scaleTransition1.setFromY(0);
-        scaleTransition1.setToX(1);
-        scaleTransition1.setToY(1);
-        parallelTransition1.setDelay(Duration.millis(400));
-        parallelTransition1.getChildren().setAll(rotateTransition, scaleTransition1);
-        parallelTransition.getChildren().setAll(scaleTransition, timeline, parallelTransition1);
+        final Timeline rectangleTimeline = new Timeline();
+        rectangleTimeline.setDelay(Duration.millis(200));
+        rectangleTimeline.getKeyFrames().setAll(
+                new KeyFrame(Duration.millis(0), new KeyValue(this.rectangle.widthProperty(), 0)),
+                new KeyFrame(Duration.millis(600), new KeyValue(this.rectangle.widthProperty(), 90)));
+
+        final RotateTransition contentRotate = new RotateTransition(Duration.millis(600));
+        contentRotate.setFromAngle(-180);
+        contentRotate.setToAngle(0);
+
+        final ScaleTransition contentScale = new ScaleTransition(Duration.millis(600));
+        contentScale.setFromX(0);
+        contentScale.setFromY(0);
+        contentScale.setToX(1);
+        contentScale.setToY(1);
+
+        final ParallelTransition contentReveal = new ParallelTransition(contentRotate, contentScale);
+        contentReveal.setDelay(Duration.millis(400));
+        contentReveal.setNode(this.slideContent); // applies node to children without an explicit target
+
+        final ParallelTransition reloadAnimation = new ParallelTransition(circleScale, rectangleTimeline, contentReveal);
+        reloadAnimation.play();
     }
 
     /**
@@ -485,7 +487,8 @@ public abstract class AbstractTemplateView<M extends AbstractTemplateModel<?, ?,
 
         } else if (item.getImage() != null) {
 
-            final Image image = Resources.create(new RelImage(item.getImage())).get();
+            // Bind to the concrete view module so resources.base.path / JPMS lookup succeeds
+            final Image image = Resources.create(new RelImage(item.getImage())).module(getClass().getModule()).get();
             final ImageView imageViewer = new ImageView();
             imageViewer.getStyleClass().add(ITEM_CLASS_PREFIX + item.getLevel());
             imageViewer.setImage(image);
