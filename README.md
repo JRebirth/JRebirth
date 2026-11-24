@@ -43,7 +43,7 @@ It targets **Java 25** and **JavaFX 26**.
 
 Optional companion modules use the same version, for example `preloader` and `processor` (`provided` scope for annotation processing).
 
-The `12.x-dev` branch tracks the next **`-SNAPSHOT`** line in `org.jrebirth.af/pom.xml` (GitHub Packages on push). For production builds, use the Central release above. To hack on unreleased code, `mvn -f org.jrebirth.af/pom.xml clean install` and depend on the current SNAPSHOT, or use the release skill under `org.jrebirth.af/.cursor/skills/release-version/`.
+The `12.x-dev` branch uses **`12.1.0-SNAPSHOT`** in `org.jrebirth.af/pom.xml` (GitHub Packages on push). For production builds, use the Central release above. To hack on unreleased code, `mvn -f org.jrebirth.af/pom.xml clean install` and depend on the current SNAPSHOT, or use the release skill under `org.jrebirth.af/.cursor/skills/release-version/`.
 
 ## Documentation
 
