@@ -1,0 +1,156 @@
+<head>
+<![CDATA[
+	<title>AI kit — vibecode with JRebirth</title>
+	<link rel="stylesheet" type="text/css" href="../css/shCoreEclipse.css" media="all" />
+]]>
+</head>
+
+<div id="catcherTitle">AI kit</div>
+<div id="catcherContent">Use JRebirth with coding agents without reinventing the architecture.</div>
+
+#if(!$all)
+#parse( "TocList.vm" )
+#displayHeaderToc( "AI-Kit" )
+#end
+
+#[[
+
+AI kit — vibecode with JRebirth
+===============================
+
+JRebirth ships an **AI kit**: a small set of files that tell coding agents how the framework expects you to structure an application. It works with Cursor, Claude Code, Codex, Copilot, and similar tools.
+
+You do not need to be an AI specialist. You do not need to memorize every JRebirth API either. Install the kit in your project, then ask the agent for a screen, a command, or a service in plain language.
+
+## What problem it solves
+
+Agents are good at producing JavaFX code. Left alone, they often invent patterns that fight JRebirth: `Platform.runLater` everywhere, business logic in controllers, or `getCommand(...).run(...)`.
+
+The kit gives them a fixed contract:
+
+- which role owns which code (Model, View, Controller, Command, Service, Wave, …)
+- how threading works (JavaFX thread vs background work)
+- how to message between components (Waves)
+- step-by-step skills for common tasks
+
+## What you install
+
+The kit lives in the JRebirth repository under `jrebirth-ai-kit/`:
+
+| File / folder | Role |
+|---------------|------|
+| `AGENTS.md` | Short, strict rules for any agent |
+| `CLAUDE.md` | Points Claude Code at `AGENTS.md` |
+| `.cursor/rules/jrebirth-core.mdc` | Cursor rule for `*.java` / `*.fxml` |
+| `skills/jrebirth-*/` | Task skills (`SKILL.md` + code samples in `references/`) |
+| `install.ps1` / `install.sh` | Copies or links the kit into your app |
+| `install-interactive.ps1` / `install-interactive.sh` | Same installer with prompts (target path, link, force) |
+
+One source of truth — no second maintained copy of the same skills elsewhere.
+
+]]#
+
+#set( $aiKitZip = "jrebirth-ai-kit-${project.version}.zip" )
+
+## Download the kit (ZIP)
+
+You can install without cloning the full JRebirth repository:
+
+1. Download **[${aiKitZip}](downloads/${aiKitZip})** from this site (rebuilt with each `${project.version}` site publish).
+2. Unzip anywhere on your machine.
+3. Run the interactive installer (recommended) or call `install` directly.
+
+**Windows (interactive)**
+
+```text
+Expand-Archive ${aiKitZip} -DestinationPath C:\tools
+cd C:\tools\jrebirth-ai-kit
+.\install-interactive.ps1
+```
+
+**Linux / macOS (interactive)**
+
+```text
+unzip ${aiKitZip} -d ~/tools
+cd ~/tools/jrebirth-ai-kit
+chmod +x install-interactive.sh install.sh
+./install-interactive.sh
+```
+
+The prompts ask for your **application project path** (where `AGENTS.md` and skills should land), whether to **symlink** skills, and whether to **force-replace** existing agent files.
+
+#[[
+
+## Install in your project (Git clone)
+
+From a clone of [JRebirth](https://github.com/JRebirth/JRebirth):
+
+**Windows**
+
+```text
+cd jrebirth-ai-kit
+.\install.ps1 -Target C:\path\to\your-app
+```
+
+**Linux / macOS**
+
+```text
+cd jrebirth-ai-kit
+chmod +x install.sh
+./install.sh /path/to/your-app
+```
+
+The installer puts `AGENTS.md` / `CLAUDE.md` at the root of your app (it asks before overwriting), installs the Cursor rule, and publishes skills under `.cursor/skills`, `.claude/skills`, `.codex/skills`, and `.agents/skills`.
+
+Use `--force` / `-Force` to replace existing agent files (a `.bak` is kept). Use `--link` / `-Link` to junction/symlink the skills folder instead of copying.
+
+Details and the full skill list: see `jrebirth-ai-kit/README.md` in the repository.
+
+## How to work with an agent
+
+1. Install the kit once in the app repo.
+2. Ask for a concrete feature in everyday language.
+3. Let the agent open the matching `jrebirth-*` skill before it writes code.
+4. Review the result like any other PR: roles, threading, and naming should match `AGENTS.md`.
+
+### Example prompts
+
+- “Scaffold a membership list screen with JRebirth MVC.”
+- “Add a SaveMembershipCommand and wire the Save button through the controller.”
+- “Load members from our REST API in a Service, then refresh the table with a wave.”
+- “This class mixes UI and HTTP calls — refactor it into JRebirth roles.”
+
+## Skills at a glance
+
+| You want to… | Skill |
+|--------------|--------|
+| Decide where code belongs | `jrebirth-core` |
+| Create a full screen | `jrebirth-create-mvc` |
+| Add Model / View / Controller | `jrebirth-create-model`, `…-view`, `…-controller` |
+| Add a Command or Service | `jrebirth-create-command`, `jrebirth-create-service` |
+| Call a Command safely | `jrebirth-invoke-command` |
+| Fix thread / `runLater` issues | `jrebirth-threading` |
+| Bootstrap a Maven app | `jrebirth-maven-project` |
+| Fix `module-info` / ModuleStarter | `jrebirth-jpms-module` |
+
+The README in the kit lists every skill with a sample prompt.
+
+## What this is not
+
+- Not a replacement for the [framework documentation](Toc.html).
+- Not a magic “generate my whole product” button — you still own design and review.
+- Not tied to one vendor: the same `AGENTS.md` and skills are meant for several agent tools.
+
+## Next steps
+
+- [3-minute Maven tutorial](Archetype.html)
+- [Framework overview](Overview.html)
+- [Thread management](Thread.html)
+- Kit source on GitHub: `jrebirth-ai-kit/` in the [JRebirth repository](https://github.com/JRebirth/JRebirth)
+
+]]#
+
+#if(!$all)
+#parse( "TocList.vm" )
+#displayFooterToc( "AI-Kit" )
+#end

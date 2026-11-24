@@ -16,4 +16,4 @@ The following shortcuts banned default:
 - no stateful bindings owned View when belong Model
 - no `localFacade().globalFacade()` except rare hard integration cases
 
-Whenever doubt stop use relevant skill
+Whenever doubt stop use relevant skill under `jrebirth-ai-kit/skills/` (for example `jrebirth-threading`, `jrebirth-anti-patterns`).

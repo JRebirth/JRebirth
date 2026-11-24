@@ -2,6 +2,7 @@
     {"link":"Introduction",			"name":"Introduction"},
     {"link":"Installation",			"name":"Installation"},
     {"link":"Overview",				"name":"Framework Overview"},
+    {"link":"AI-Kit",				"name":"AI kit"},
     {"link":"Application",			"name":"Create your first Application"},
     {"link":"Thread",				"name":"Thread Management"},
     {"link":"Logging",				"name":"Configure Logging system"},

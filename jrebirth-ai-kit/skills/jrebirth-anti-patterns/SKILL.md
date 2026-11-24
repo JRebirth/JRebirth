@@ -1,0 +1,22 @@
+﻿---
+name: jrebirth-anti-patterns
+description: >-
+  Spot and fix JRebirth anti-patterns (runLater glue, raw threads, logic in
+  controllers, state in views, global facade abuse). Use when reviewing or
+  cleaning up JRebirth code that smells like plain JavaFX.
+---
+# Avoid anti-patterns
+
+## Smells
+
+- `Platform.runLater` or `JRebirth.runInto*` used as architecture glue
+- `getCommand(...).run(...)` instead of `callCommand` / `sendWave(WBuilder.callCommand(...))`
+- raw thread creation for routine flows
+- heavy logic in controllers
+- business state hidden in views
+- `globalFacade` access everywhere
+
+## Fix path
+
+Find the missing JRebirth role, then move the code to it. For thread hops, use the `jrebirth-threading` skill. For Command triggering, use the `command-invoke` skill. See also jrebirth-core and jrebirth-refactor-legacy.
+

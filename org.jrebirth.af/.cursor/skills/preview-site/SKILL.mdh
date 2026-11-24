@@ -1,0 +1,69 @@
+---
+name: preview-site
+description: >-
+  Generate the JRebirth Maven marketing/docs site quickly and open a local
+  HTTP preview. Use when the user asks to build, regenerate, or preview
+  www.jrebirth.org pages (home, AI-Kit, doc), or after editing src/site.
+---
+# Preview JRebirth site (fast)
+
+Framework-only skill. Do **not** put this in `jrebirth-ai-kit` (app consumers do not need it).
+
+## Goal
+
+Regenerate `org.jrebirth.af/target/site` and serve it locally so the agent (or user) can check HTML/CSS without deploying.
+
+## Fast path (default)
+
+From repo root `JRebirth/`:
+
+```powershell
+powershell -File org.jrebirth.af/.cursor/skills/preview-site/scripts/preview-site.ps1
+```
+
+What the script does:
+
+1. Ensures the site skin is installed (`JRebirth-Skin` → local `.m2`) when missing.
+2. Runs **non-recursive** site build on the AF aggregator only (skips submodule sites + `distribution`).
+3. Starts a local static server on `http://127.0.0.1:4173/` via `py -3 -m http.server` (override with `-Port`).
+4. Prints the URLs for home + AI kit.
+
+On Windows, prefer the `py` launcher — the Microsoft Store `python` stub often exits with 9009.
+
+Flags:
+
+| Flag | Effect |
+|------|--------|
+| `-SkipBuild` | Only serve an existing `target/site` |
+| `-BuildOnly` | Generate site, do not start the server |
+| `-FullReactor` | Slower: `mvn site -pl '!distribution'` (all module sites) |
+| `-Port 4173` | HTTP port |
+| `-NoBrowser` | Do not call `Start-Process` on the home URL |
+
+## Manual Maven (same fast build)
+
+```powershell
+# once, if skin missing
+mvn -f D:\DEV\GIT\JRebirth-Skin\org.jrebirth.site.jrebirth-skin\pom.xml install -DskipTests
+
+cd D:\DEV\GIT\JRebirth\org.jrebirth.af
+mvn site -N
+```
+
+Output: `org.jrebirth.af/target/site/`  
+Key pages: `index.html`, `doc/AI-Kit.html`, `doc/Toc.html`.
+
+## Agent preview checklist
+
+After generate:
+
+1. Confirm `target/site/index.html` and `target/site/doc/AI-Kit.html` exist.
+2. Serve with the script (or `python -m http.server` from `target/site`).
+3. Open home → section `#ai-kit` → link to `doc/AI-Kit.html`.
+4. Open AI-Kit page → TOC pager + install commands readable.
+5. Fix content under `src/site/` (xdoc / markdown), then re-run with the script (omit `-SkipBuild`).
+
+## Related
+
+- Content authoring: `update-site-doc`
+- DMZ publish: Hosting skill `publish-static-jrebirth` (only when user asks to deploy)

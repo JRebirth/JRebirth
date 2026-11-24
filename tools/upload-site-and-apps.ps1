@@ -1,7 +1,7 @@
 ﻿#Requires -Version 5.1
 <#
 .SYNOPSIS
-  Upload AF Maven site (org.jrebirth-12.0.0) and Demo/Slides/showcase binaries to IONOS.
+  Upload AF Maven site (org.jrebirth-VERSION) and Demo/Slides/showcase binaries to IONOS.
 
 .NOTES
   Needs outbound TCP/22 (SCP) to s143909802.onlinehome.fr.
@@ -9,19 +9,29 @@
   Prefers PuTTY pscp.exe when available.
 #>
 param(
-  [string]$AfSiteDir = (Join-Path $PSScriptRoot "..\org.jrebirth.af\target\site"),
+  [string]$Version = "",
+  [string]$AfSiteDir = "",
   [string]$HostName = "home143909784.1and1-data.host",
-  [string]$RemoteSitesRoot = "/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-12.0.0",
+  [string]$RemoteSitesRoot = "",
   [string]$RemoteAppsRoot = "/homepages/14/d143909784/htdocs/jrebirth/apps",
   [string]$WinScpSession = "u39172299@home143909784.1and1-data.host",
   [string]$SettingsXml = "$env:USERPROFILE\.m2\settings.xml",
-  [string]$StagingRoot = (Join-Path $PSScriptRoot "..\tools\apps-staging"),
+  [string]$StagingRoot = (Join-Path $PSScriptRoot "apps-staging"),
+  [string]$JrebirthRoot = (Join-Path $PSScriptRoot "..\org.jrebirth.af"),
   [switch]$SiteOnly,
   [switch]$AppsOnly,
   [switch]$StageOnly
 )
 
 $ErrorActionPreference = "Stop"
+
+function Get-AfVersionFromPom {
+  param([string]$AfPomPath)
+  [xml]$xml = Get-Content -Raw -Path $AfPomPath
+  $v = $xml.project.version
+  if (-not $v) { throw "No <version> in $AfPomPath" }
+  return "$v".Trim()
+}
 
 function Get-JRebirthSitesCredential {
   param([string]$Path)
@@ -35,40 +45,51 @@ function Ensure-Dir([string]$Path) {
   if (-not (Test-Path $Path)) { New-Item -ItemType Directory -Force -Path $Path | Out-Null }
 }
 
+$AfRoot = (Resolve-Path $JrebirthRoot).Path
+$AfPom = Join-Path $AfRoot "pom.xml"
+if (-not $Version) { $Version = Get-AfVersionFromPom -AfPomPath $AfPom }
+if (-not $AfSiteDir) { $AfSiteDir = Join-Path $AfRoot "target\site" }
+if (-not $RemoteSitesRoot) {
+  $RemoteSitesRoot = "/homepages/14/d143909784/htdocs/jrebirth/sites/org.jrebirth-$Version"
+}
+Write-Host "AF version: $Version"
+Write-Host "Site dir:   $AfSiteDir"
+Write-Host "Remote site: $RemoteSitesRoot"
+
 # path under apps.jrebirth.org => local files to upload (zip/exe preferred names)
 $AppUploads = @(
-  @{ Remote = "demo/12.0.0"; Sources = @(
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\demo\target\JRebirthDemo.zip"
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\demo\target\JRebirthDemo-12.0.0.exe"
-    ); Rename = @{ "JRebirthDemo.zip" = "JRebirthDemo-12.0.0.zip" } }
-  @{ Remote = "analyzer/12.0.0"; Sources = @(
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\analyzer\target\JRebirthAnalyzer.zip"
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\analyzer\target\JRebirthAnalyzer-12.0.0.exe"
-    ); Rename = @{ "JRebirthAnalyzer.zip" = "JRebirthAnalyzer-12.0.0.zip" } }
-  @{ Remote = "wave/12.0.0"; Sources = @(
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\wave\target\Wave.zip"
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\wave\target\Wave-12.0.0.exe"
-    ); Rename = @{ "Wave.zip" = "Wave-12.0.0.zip" } }
-  @{ Remote = "fxml/12.0.0"; Sources = @(
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\fxml\target\FXML.zip"
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\fxml\target\FXML-12.0.0.exe"
-    ); Rename = @{ "FXML.zip" = "FXML-12.0.0.zip" } }
-  @{ Remote = "undoredo/12.0.0"; Sources = @(
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\undoredo\target\UndoRedo.zip"
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\undoredo\target\UndoRedo-12.0.0.exe"
-    ); Rename = @{ "UndoRedo.zip" = "UndoRedo-12.0.0.zip" } }
-  @{ Remote = "todos/12.0.0"; Sources = @(
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\todos\target\Todos.zip"
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\todos\target\Todos-12.0.0.exe"
-    ); Rename = @{ "Todos.zip" = "Todos-12.0.0.zip" } }
-  @{ Remote = "fonticon/12.0.0"; Sources = @(
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\fonticon\target\FontIcon.zip"
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\fonticon\target\FontIcon-12.0.0.exe"
-    ); Rename = @{ "FontIcon.zip" = "FontIcon-12.0.0.zip" } }
-  @{ Remote = "workbench/12.0.0"; Sources = @(
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\workbench\target\Workbench.zip"
-      "D:\DEV\GIT\JRebirth\org.jrebirth.af\showcase\workbench\target\Workbench-12.0.0.exe"
-    ); Rename = @{ "Workbench.zip" = "Workbench-12.0.0.zip" } }
+  @{ Remote = "demo/$Version"; Sources = @(
+      "$AfRoot\showcase\demo\target\JRebirthDemo.zip"
+      "$AfRoot\showcase\demo\target\JRebirthDemo-$Version.exe"
+    ); Rename = @{ "JRebirthDemo.zip" = "JRebirthDemo-$Version.zip" } }
+  @{ Remote = "analyzer/$Version"; Sources = @(
+      "$AfRoot\showcase\analyzer\target\JRebirthAnalyzer.zip"
+      "$AfRoot\showcase\analyzer\target\JRebirthAnalyzer-$Version.exe"
+    ); Rename = @{ "JRebirthAnalyzer.zip" = "JRebirthAnalyzer-$Version.zip" } }
+  @{ Remote = "wave/$Version"; Sources = @(
+      "$AfRoot\showcase\wave\target\Wave.zip"
+      "$AfRoot\showcase\wave\target\Wave-$Version.exe"
+    ); Rename = @{ "Wave.zip" = "Wave-$Version.zip" } }
+  @{ Remote = "fxml/$Version"; Sources = @(
+      "$AfRoot\showcase\fxml\target\FXML.zip"
+      "$AfRoot\showcase\fxml\target\FXML-$Version.exe"
+    ); Rename = @{ "FXML.zip" = "FXML-$Version.zip" } }
+  @{ Remote = "undoredo/$Version"; Sources = @(
+      "$AfRoot\showcase\undoredo\target\UndoRedo.zip"
+      "$AfRoot\showcase\undoredo\target\UndoRedo-$Version.exe"
+    ); Rename = @{ "UndoRedo.zip" = "UndoRedo-$Version.zip" } }
+  @{ Remote = "todos/$Version"; Sources = @(
+      "$AfRoot\showcase\todos\target\Todos.zip"
+      "$AfRoot\showcase\todos\target\Todos-$Version.exe"
+    ); Rename = @{ "Todos.zip" = "Todos-$Version.zip" } }
+  @{ Remote = "fonticon/$Version"; Sources = @(
+      "$AfRoot\showcase\fonticon\target\FontIcon.zip"
+      "$AfRoot\showcase\fonticon\target\FontIcon-$Version.exe"
+    ); Rename = @{ "FontIcon.zip" = "FontIcon-$Version.zip" } }
+  @{ Remote = "workbench/$Version"; Sources = @(
+      "$AfRoot\showcase\workbench\target\Workbench.zip"
+      "$AfRoot\showcase\workbench\target\Workbench-$Version.exe"
+    ); Rename = @{ "Workbench.zip" = "Workbench-$Version.zip" } }
   @{ Remote = "masteringtables/4.0.0"; Sources = @(
       "D:\DEV\GIT\MasteringTables\org.jrebirth.demo.masteringtables\target\MasteringTables.zip"
       "D:\DEV\GIT\MasteringTables\org.jrebirth.demo.masteringtables\target\apps-upload\MasteringTables-4.0.0.zip"
@@ -184,6 +205,6 @@ if (-not $SiteOnly) {
 }
 
 Write-Host "Done. Verify:"
-Write-Host "  http://sites.jrebirth.org/org.jrebirth-12.0.0/"
+Write-Host "  http://sites.jrebirth.org/org.jrebirth-$Version/"
 Write-Host "  http://www.jrebirth.org/apps/Demo.html"
-Write-Host "  http://apps.jrebirth.org/demo/12.0.0/"
+Write-Host "  http://apps.jrebirth.org/demo/$Version/"

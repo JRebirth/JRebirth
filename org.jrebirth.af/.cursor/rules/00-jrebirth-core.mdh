@@ -17,4 +17,6 @@ Keep the responsibility of every role strictly separated:
 - a Wave carries a message between components.
 - a Behavior holds a small piece of shared, cross-cutting logic.
 
-Before you create or refactor any JRebirth code, read the matching skill first.
+**Skills source of truth:** `jrebirth-ai-kit/skills/` at the JRebirth repository root (not a second copy here). Framework-only skill: `.cursor/skills/update-site-doc`.
+
+Before you create or refactor any JRebirth application code, read the matching `jrebirth-*` skill from the kit first.

@@ -26,7 +26,7 @@ Enable compile-time code generation with the Maven plugin and annotation process
 ```xml
 <!-- Maven plugin: generate sources from .ecore or .model DSL files -->
 <plugin>
-    <groupId>org.jrebirth.af</groupId>
+    <groupId>org.jrebirth.af.tooling</groupId>
     <artifactId>jrebirth-maven-plugin</artifactId>
     <version>${jrebirth.version}</version>
     <executions>
@@ -108,7 +108,7 @@ The **ecore2fx** goal generates JavaFX-friendly model types from EMF `.ecore` fi
 
 ```xml
 <plugin>
-    <groupId>org.jrebirth.af</groupId>
+    <groupId>org.jrebirth.af.tooling</groupId>
     <artifactId>jrebirth-maven-plugin</artifactId>
     <version>${jrebirth.version}</version>
     <executions>
@@ -204,7 +204,7 @@ The **text2fx** goal generates Java sources from a text DSL (`.model` files). It
 
 ```xml
 <plugin>
-    <groupId>org.jrebirth.af</groupId>
+    <groupId>org.jrebirth.af.tooling</groupId>
     <artifactId>jrebirth-maven-plugin</artifactId>
     <version>${jrebirth.version}</version>
     <executions>
