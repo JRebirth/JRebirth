@@ -1,0 +1,41 @@
+﻿---
+name: jrebirth-create-command
+description: >-
+  Create a single JRebirth Command for one explicit, named action (save,
+  refresh, load one thing, navigate). Use when a discrete action must be run and
+  named clearly.
+---
+# Create Single Command
+
+A single command is one clear, named action.
+
+## Use when
+
+One explicit action must run and be named clearly:
+
+- save editor
+- refresh ranking
+- load one thing
+- open a detail screen
+- import a file
+
+## Key API
+
+- extend `DefaultCommand`; do the work in `perform(Wave)`.
+- use `DefaultUICommand` when the action must run on the JavaFX thread; `DefaultUndoableCommand` when it is undoable.
+- read payload with `wave.get(SomeWaves.ITEM)`.
+
+## Invocation
+
+Trigger from any component (Model, Controller) with `callCommand`, never `getCommand(...).run(...)`, which bypasses the wave pipeline. Details: skill `jrebirth-invoke-command`.
+
+- Single payload: define a `WaveItem<T>` on the command or a shared waves class, then `callCommand(FooCommand.class, WBuilder.waveData(FooCommand.ITEM, value))`. Avoid a dedicated `WaveBean` for one field.
+- Multiple fields: use a `WaveBean` with a static factory `FooWaveBean.of()` and fluent setters, then `callCommand(FooCommand.class, bean)`.
+- Prebuilt wave with flags (e.g. `FORCE_SYNC`): `sendWave(WBuilder.callCommand(FooCommand.class)...)`.
+
+## Keep small
+
+If it starts orchestrating many async steps or backend concerns, pair it with a service.
+
+Reference template: `references/SingleCommandTemplate.java.txt`.
+

@@ -17,4 +17,4 @@ When file smells like legacy JavaFX living inside JRebirth application restructu
 - move actions Command or Service
 - move cross-feature messaging Waves
 
-Use legacy refactor skill before edit many files once
+Use `jrebirth-ai-kit/skills/jrebirth-refactor-legacy/SKILL.md` before editing many files once

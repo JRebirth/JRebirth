@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>af</artifactId>
-	<version>12.0.0</version>
+	<version>12.0.1-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 	<name>JRebirth Application Framework</name>
@@ -376,6 +376,46 @@
 					<inputEncoding>UTF-8</inputEncoding>
 					<outputEncoding>UTF-8</outputEncoding>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${maven.assembly.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>build-ai-kit-zip</id>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<attach>false</attach>
+							<appendAssemblyId>false</appendAssemblyId>
+							<finalName>jrebirth-ai-kit-${project.version}</finalName>
+							<descriptors>
+								<descriptor>src/assembly/ai-kit.xml</descriptor>
+							</descriptors>
+							<outputDirectory>${project.build.directory}/site/downloads</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>build-framework-bundle-zip</id>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<attach>false</attach>
+							<appendAssemblyId>false</appendAssemblyId>
+							<finalName>jrebirth-${project.version}</finalName>
+							<descriptors>
+								<descriptor>src/assembly/framework-bundle.xml</descriptor>
+							</descriptors>
+							<outputDirectory>${project.build.directory}/site/downloads</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<!-- Copy UML Class Diagram -->
 			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> <executions> <execution> <id>UML recopy</id> <phase>pre-site</phase> <configuration> <tasks> <copy 

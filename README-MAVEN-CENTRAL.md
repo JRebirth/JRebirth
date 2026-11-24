@@ -25,7 +25,17 @@ mvn -f org.jrebirth.af/pom.xml -B -Pdeploy-central clean deploy \
   -pl '!sample,!distribution,!showcase,!showcase/demo,!showcase/analyzer,!showcase/undoredo,!showcase/fxml,!showcase/wave,!showcase/todos,!showcase/workbench,!showcase/fonticon'
 ```
 
+## Development vs release
+
+- Branch `12.x-dev` uses a **`-SNAPSHOT`** version (e.g. `12.0.1-SNAPSHOT`); pushes deploy to **GitHub Packages** (`snapshot.yml`).
+- **Maven Central** publish requires an explicit maintainer decision. Do not tag or run the Central workflow without approval.
+- After Central release `X.Y.Z`, bump `12.x-dev` to the next snapshot (e.g. `12.0.2-SNAPSHOT`).
+
+Runbook: `org.jrebirth.af/.cursor/skills/release-version/SKILL.md`.
+
+**12.0.1** republishes `jrebirth-maven-plugin` with valid `text2fx` / `ecore2fx` goals (Central **12.0.0** plugin descriptor was empty).
+
 ## GitHub Actions
 
-- Tag: `jrebirth-12.0.0`
-- Or workflow_dispatch with version `12.0.0`
+- Tag: `jrebirth-X.Y.Z` (e.g. `jrebirth-12.0.1`)
+- Or workflow_dispatch with version `X.Y.Z` (no `SNAPSHOT`)

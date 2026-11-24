@@ -23,6 +23,7 @@ Format: Markdown plus Velocity (`.md.vm`).
 4. Verify snippet selectors still match; method or class renames break `aj:` selectors.
 5. Update prose to reflect new behavior, parameters, or annotations.
 6. If a new module is added, also update `TocList.vm`, `site.xml`, and `jrebirth-book.xml`.
+7. For AI / vibecoding docs, keep `doc/AI-Kit.md.vm` and the home `#ai-kit` section in sync with `jrebirth-ai-kit/README.md` (skills live only in the kit — do not duplicate them under `.cursor/skills`). Site downloads at `pre-site`: `jrebirth-ai-kit-${project.version}.zip` (`src/assembly/ai-kit.xml`) and `jrebirth-${project.version}.zip` (`src/assembly/framework-bundle.xml`). Link both from `xdoc/index.xml.vm` when the download strip changes.
 
 ## Style rules
 

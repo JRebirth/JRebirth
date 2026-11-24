@@ -20,7 +20,7 @@
 		<meta property="og:title" content="JRebirth — Build better JavaFX apps. Faster." />
 		<meta property="og:description" content="Less boilerplate. Clean architecture. More time to build." />
 		<meta property="og:image" content="images/brand/JRebirth-logo-horizontal.webp" />
-		<link rel="stylesheet" type="text/css" href="css/landing.css" media="all" />
+		<link rel="stylesheet" type="text/css" href="css/landing.css?v=nav-legibility1" media="all" />
 		<script src="js/landing.js" defer="defer"></script>
 		<script src="js/wb-csmvc.js" defer="defer"></script>
 	</head>
@@ -70,12 +70,12 @@
 							<p class="jr-hero-tagline">Less boilerplate. Clean architecture. More time to build.</p>
 						</div>
 						<div class="jr-hero-copy jr-hero-copy--bottom">
-							<p class="jr-hero-description">An open source framework that helps you build JavaFX desktop applications with clean architecture, reusable components and efficient development workflows.</p>
 							<div class="jr-actions">
 								<a class="jr-btn jr-btn-primary" href="https://central.sonatype.com/artifact/org.jrebirth.af/core" target="_blank" rel="noopener noreferrer">Get from Maven Central <span aria-hidden="true">↗</span></a>
 								<a class="jr-btn jr-btn-outline" href="https://github.com/JRebirth/JRebirth" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-								<a class="jr-btn jr-btn-ghost" href="doc/Toc.html">Documentation</a>
+								<a class="jr-btn jr-btn-agent" href="#ai-kit">Agent-ready</a>
 							</div>
+							<p class="jr-hero-description">An open source framework that helps you build JavaFX desktop applications with clean architecture, reusable components and efficient workflows — and accelerate development with AI agents through the Agent-ready kit.</p>
 							<div class="jr-hero-meta" aria-label="Compatibility and license">
 								<span><b class="jr-dot"></b> Open source</span>
 								<span>Version ${project.version}</span>
@@ -91,7 +91,8 @@
 					<div class="jr-signal-item"><span class="jr-signal-icon" aria-hidden="true">◇</span><div><strong>Clean by design</strong><small>Separation of concerns</small></div></div>
 					<div class="jr-signal-item"><span class="jr-signal-icon" aria-hidden="true">⌘</span><div><strong>Built to scale</strong><small>Reusable components</small></div></div>
 					<div class="jr-signal-item"><span class="jr-signal-icon" aria-hidden="true">↝</span><div><strong>Less thread friction</strong><small>Commands &amp; services</small></div></div>
-					<div class="jr-signal-item"><span class="jr-signal-icon" aria-hidden="true">✦</span><div><strong>Open source</strong><small>Apache License 2.0</small></div></div>
+					<a class="jr-signal-item" href="#ai-kit"><span class="jr-signal-icon" aria-hidden="true">✦</span><div><strong>Agent-ready</strong><small>AI kit &amp; skills</small></div></a>
+					<div class="jr-signal-item"><span class="jr-signal-icon" aria-hidden="true">◈</span><div><strong>Open source</strong><small>Apache License 2.0</small></div></div>
 				</div>
 			</div>
 
@@ -275,6 +276,44 @@
 				</div>
 			</div>
 
+			<div class="jr-section" id="ai-kit">
+				<div class="jr-wrap">
+					<div class="jr-section-head">
+						<div>
+							<p class="jr-kicker">Vibecode ready</p>
+							<p role="heading" aria-level="2" class="jr-h2">Build with agents, <span class="jr-gradient">keep the architecture.</span></p>
+						</div>
+						<p class="jr-section-intro">Install the JRebirth AI kit in your app repo. Cursor, Claude Code, Codex and friends get the same MVC, threading and Wave rules — so generated code stays on the rails.</p>
+					</div>
+					<div class="jr-features">
+						<div class="jr-feature">
+							<div class="jr-icon" aria-hidden="true">⧉</div>
+							<div class="jr-feature-number">01 / AGENTS.md</div>
+							<p role="heading" aria-level="3" class="jr-h3">Clear rules, any agent</p>
+							<p>A short contract: role split, JavaFX thread, Waves, naming. No vendor lock-in — one file every tool can follow.</p>
+						</div>
+						<div class="jr-feature">
+							<div class="jr-icon" aria-hidden="true">☰</div>
+							<div class="jr-feature-number">02 / SKILLS</div>
+							<p role="heading" aria-level="3" class="jr-h3">Task skills that match real work</p>
+							<p>Scaffold an MVC screen, add a Command or Service, fix threading — each step has a dedicated <code>jrebirth-*</code> skill.</p>
+						</div>
+						<div class="jr-feature">
+							<div class="jr-icon" aria-hidden="true">➤</div>
+							<div class="jr-feature-number">03 / INSTALL</div>
+							<p role="heading" aria-level="3" class="jr-h3">Drop into your project</p>
+							<p>Download the ZIP or run <code>install-interactive.ps1</code> / <code>install-interactive.sh</code> — they ask where your app lives, then install skills for Cursor, Claude, Codex and <code>.agents</code>.</p>
+						</div>
+					</div>
+					<div class="jr-actions" style="margin-top: 1.5rem;">
+						<a class="jr-btn jr-btn-primary" href="downloads/jrebirth-ai-kit-${project.version}.zip">Download AI kit (ZIP)</a>
+						<a class="jr-btn jr-btn-outline" href="downloads/jrebirth-${project.version}.zip">Framework libraries (ZIP)</a>
+						<a class="jr-btn jr-btn-outline" href="doc/AI-Kit.html">Read the AI kit guide</a>
+						<a class="jr-btn jr-btn-ghost" href="https://github.com/JRebirth/JRebirth/tree/12.x-dev/jrebirth-ai-kit" target="_blank" rel="noopener noreferrer">Browse on GitHub <span aria-hidden="true">↗</span></a>
+					</div>
+				</div>
+			</div>
+
 			<div class="jr-section" id="get-started">
 				<div class="jr-wrap jr-starter-grid">
 					<div>
@@ -284,7 +323,7 @@
 						<div class="jr-actions">
 							<a class="jr-btn jr-btn-primary" href="https://central.sonatype.com/artifact/org.jrebirth.af/core" target="_blank" rel="noopener noreferrer">Maven Central <span aria-hidden="true">↗</span></a>
 							<a class="jr-btn jr-btn-outline" href="doc/Archetype.html">3-minute tutorial</a>
-							<a class="jr-btn jr-btn-ghost" href="apps/index.html">Try the demos</a>
+							<a class="jr-btn jr-btn-ghost" href="doc/AI-Kit.html">AI kit</a>
 						</div>
 					</div>
 					<div class="jr-code-card">
@@ -314,6 +353,11 @@
 						<p role="heading" aria-level="2" class="jr-h2">Start fast, <span class="jr-gradient">stay oriented.</span></p>
 					</div>
 					<div class="jr-guides">
+						<a class="jr-guide" href="doc/AI-Kit.html">
+							<span class="jr-guide-kicker">AI</span>
+							<span class="jr-h3">AI kit &amp; vibecoding</span>
+							<p>Install agent skills so generated JavaFX code follows JRebirth MVC and threading.</p>
+						</a>
 						<a class="jr-guide" href="doc/Archetype.html">
 							<span class="jr-guide-kicker">Tutorial</span>
 							<span class="jr-h3">3-minute tutorial</span>
@@ -367,6 +411,7 @@
 				<p>Less boilerplate. Clean architecture. More time to build.</p>
 				<div class="jr-footer-links">
 					<a href="doc/Archetype.html">Tutorial</a>
+					<a href="doc/AI-Kit.html">AI kit</a>
 					<a href="faq.html">FAQ</a>
 					<a href="links.html">Useful links</a>
 					<a href="license.html">License</a>

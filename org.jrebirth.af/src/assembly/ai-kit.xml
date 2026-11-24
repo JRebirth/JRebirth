@@ -1,0 +1,25 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+
+	<id>ai-kit</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+
+	<includeBaseDirectory>true</includeBaseDirectory>
+	<baseDirectory>jrebirth-ai-kit</baseDirectory>
+
+	<fileSets>
+		<fileSet>
+			<directory>../jrebirth-ai-kit</directory>
+			<outputDirectory>/</outputDirectory>
+			<excludes>
+				<exclude>**/.git/**</exclude>
+				<exclude>**/.git</exclude>
+			</excludes>
+			<useDefaultExcludes>true</useDefaultExcludes>
+		</fileSet>
+	</fileSets>
+
+</assembly>

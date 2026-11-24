@@ -207,19 +207,29 @@ body.jr-landing #page ol {
   flex-wrap: wrap;
   justify-content: flex-end;
 }
-.jr-nav-links a {
-  color: var(--muted) !important;
+.jr-nav-links a:not(.jr-nav-cta) {
+  color: #f2f6ff !important;
   text-decoration: none;
   font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   padding: 0.35rem 0;
-  transition: color 0.15s ease;
-  text-shadow: 0 1px 10px rgba(7, 15, 28, 0.75);
+  transition: color 0.15s ease, text-shadow 0.15s ease;
+  -webkit-font-smoothing: antialiased;
+  text-shadow:
+    0 0 1px rgba(7, 15, 28, 0.98),
+    0 1px 2px rgba(7, 15, 28, 0.92),
+    0 2px 10px rgba(7, 15, 28, 0.88),
+    0 0 22px rgba(7, 15, 28, 0.55);
 }
-.jr-nav-links a:hover,
-.jr-nav-links a:focus-visible {
-  color: var(--text) !important;
+.jr-nav-links a:not(.jr-nav-cta):hover,
+.jr-nav-links a:not(.jr-nav-cta):focus-visible {
+  color: #ffffff !important;
+  text-shadow:
+    0 0 1px rgba(7, 15, 28, 1),
+    0 1px 3px rgba(7, 15, 28, 0.95),
+    0 2px 12px rgba(7, 15, 28, 0.9),
+    0 0 28px rgba(7, 15, 28, 0.6);
 }
 .jr-nav-cta {
   display: inline-flex !important;
@@ -229,13 +239,23 @@ body.jr-landing #page ol {
   padding: 0.55rem 1rem !important;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--orange), #ff8a3d);
-  color: #140b05 !important;
-  font-weight: 700 !important;
+  color: #120a04 !important;
+  font-weight: 800 !important;
+  font-size: 0.88rem;
+  letter-spacing: 0.03em;
+  -webkit-font-smoothing: antialiased;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.42),
+    0 0 1px rgba(0, 0, 0, 0.35);
   box-shadow: var(--shadow-glow);
 }
-.jr-nav-cta:hover {
+.jr-nav-cta:hover,
+.jr-nav-cta:focus-visible {
   filter: brightness(1.05);
-  color: #140b05 !important;
+  color: #0d0703 !important;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5),
+    0 0 1px rgba(0, 0, 0, 0.4);
 }
 
 /* Hero — fullscreen under transparent menu: wings under nav, tail under copy */
@@ -251,8 +271,11 @@ body.jr-landing #page ol {
 }
 .jr-hero-stage {
   position: relative;
+  box-sizing: border-box;
   width: 100%;
-  min-height: 100vh;
+  /* border-box so padding on the overlay does not push CTAs below the fold */
+  min-height: 100svh;
+  height: 100svh;
   overflow: hidden;
   background: var(--bg);
 }
@@ -294,15 +317,17 @@ body.jr-landing #page ol {
 .jr-hero-overlay {
   position: relative;
   z-index: 2;
-  min-height: 100vh;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.25rem;
   width: min(1120px, calc(100% - 2.5rem));
   margin-inline: auto;
-  /* top copy clears logo; bottom copy sits over the phoenix tail */
-  padding: 6.25rem 0 2.25rem;
+  /* bottom padding seats meta just above the blue/yellow energy line in the art */
+  padding: 6.25rem 0 clamp(2.1rem, 3.8vh, 2.75rem);
   pointer-events: none;
 }
 .jr-hero-copy {
@@ -318,24 +343,98 @@ body.jr-landing #page ol {
   text-shadow: 0 2px 18px rgba(7, 15, 28, 0.85);
 }
 .jr-hero-copy--bottom {
+  position: relative;
   align-self: flex-start;
-  /* sit on the tail area */
-  margin-bottom: 0.5rem;
-  padding: 0.85rem 1rem 0.85rem 0;
-  text-shadow: 0 2px 16px rgba(7, 15, 28, 0.85);
+  /* no box — soft vignette only so the phoenix stays visible */
+  margin-bottom: 0;
+  max-width: min(34rem, 44vw);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  text-shadow:
+    0 1px 2px rgba(7, 15, 28, 0.98),
+    0 2px 18px rgba(7, 15, 28, 0.92),
+    0 0 28px rgba(7, 15, 28, 0.8);
+}
+.jr-hero-copy--bottom::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -1.1rem -1.4rem -0.85rem -1.2rem;
+  background: radial-gradient(
+    ellipse 78% 72% at 28% 42%,
+    rgba(7, 15, 28, 0.58) 0%,
+    rgba(7, 15, 28, 0.28) 48%,
+    transparent 74%
+  );
+  pointer-events: none;
+}
+.jr-hero-copy--bottom .jr-actions {
+  margin-top: 0;
+  margin-bottom: 0.85rem;
+  max-width: none;
+  /* lift CTAs + blurb ~60px; meta stays on the energy line */
+  transform: translateY(-60px);
+}
+.jr-hero-copy--bottom .jr-hero-description {
+  color: #eef5ff;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  max-width: 44ch;
+  margin-bottom: 0.75rem !important;
+  transform: translateY(-60px);
+}
+.jr-hero-copy--bottom .jr-btn {
+  min-height: 2.6rem;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.92rem;
+  text-shadow: none;
+}
+/* GitHub: solid dark chip only (not a surrounding panel) */
+body.jr-landing #page .jr-hero-copy--bottom a.jr-btn-outline,
+.jr-hero-copy--bottom .jr-btn-outline {
+  background: rgba(7, 15, 28, 0.82) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  color: #f4f8ff !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+/* Agent-ready: dark chip + orange rim — stays readable over the phoenix flame */
+body.jr-landing #page .jr-hero-copy--bottom a.jr-btn-agent,
+.jr-hero-copy--bottom a.jr-btn-agent {
+  background: rgba(7, 15, 28, 0.88) !important;
+  border: 1px solid rgba(255, 168, 72, 0.9) !important;
+  color: #ffd19a !important;
+  box-shadow: 0 0 0 1px rgba(7, 15, 28, 0.45), 0 8px 22px rgba(0, 0, 0, 0.4);
+}
+body.jr-landing #page .jr-hero-copy--bottom a.jr-btn-agent:hover,
+.jr-hero-copy--bottom a.jr-btn-agent:hover {
+  background: rgba(18, 28, 46, 0.95) !important;
+  color: #ffe3bc !important;
+  filter: none;
+}
+.jr-hero-copy--bottom .jr-hero-meta {
+  margin-top: 0;
+  color: #d5e2f4;
+  font-size: 0.88rem;
 }
 .jr-hero-copy .jr-eyebrow {
   justify-content: flex-start;
 }
 .jr-hero-copy .jr-hero-description {
-  max-width: 42ch;
+  max-width: 46ch;
   margin-inline: 0 !important;
+  margin-bottom: 0.85rem !important;
 }
 .jr-hero-copy .jr-actions {
   justify-content: flex-start;
 }
 .jr-hero-copy .jr-hero-meta {
   justify-content: flex-start;
+  margin-bottom: 0;
 }
 .jr-eyebrow {
   display: inline-flex;
@@ -423,6 +522,19 @@ body.jr-landing #page ol {
   color: var(--blue) !important;
   background: var(--blue-dim);
 }
+/* Hero Agent-ready: solid chip — beat `body.jr-landing #page a` blue default */
+body.jr-landing #page a.jr-btn-agent,
+a.jr-btn-agent {
+  border: 1px solid rgba(255, 196, 120, 0.55) !important;
+  color: #fff4e6 !important;
+  background: linear-gradient(135deg, rgba(255, 110, 32, 0.95), rgba(255, 154, 60, 0.9)) !important;
+  box-shadow: 0 0 0 1px rgba(7, 15, 28, 0.35), 0 8px 24px rgba(255, 110, 32, 0.35);
+}
+body.jr-landing #page a.jr-btn-agent:hover,
+a.jr-btn-agent:hover {
+  filter: brightness(1.06);
+  color: #fffaf2 !important;
+}
 .jr-hero-meta {
   display: flex;
   flex-wrap: wrap;
@@ -451,13 +563,23 @@ body.jr-landing #page ol {
 }
 .jr-signal-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1.1rem;
 }
 .jr-signal-item {
   display: flex;
   align-items: flex-start;
   gap: 0.85rem;
+  text-decoration: none !important;
+  color: inherit;
+}
+a.jr-signal-item:hover strong,
+a.jr-signal-item:focus-visible strong {
+  color: var(--orange) !important;
+}
+a.jr-signal-item:hover small,
+a.jr-signal-item:focus-visible small {
+  color: var(--text);
 }
 .jr-signal-icon {
   flex: 0 0 auto;
@@ -1236,6 +1358,7 @@ body.jr-landing #page ol {
   }
   .jr-hero-stage {
     min-height: 0;
+    height: auto;
     overflow: visible;
     display: flex;
     flex-direction: column;
@@ -1282,6 +1405,7 @@ body.jr-landing #page ol {
   .jr-hero-copy--bottom {
     align-self: stretch;
     text-shadow: none;
+    max-width: none;
   }
   .jr-hero-copy .jr-eyebrow,
   .jr-hero-copy .jr-actions,
@@ -1376,9 +1500,11 @@ body.jr-landing #page ol {
   .jr-header.is-open .jr-nav-links {
     display: flex;
   }
-  .jr-nav-links a {
+  .jr-nav-links a:not(.jr-nav-cta) {
     padding: 0.7rem 0;
     border-bottom: 1px solid var(--line);
+    /* Dark mobile drawer — lighter shadow stack */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
   }
   .jr-nav-cta {
     margin: 0.75rem 0 0 !important;

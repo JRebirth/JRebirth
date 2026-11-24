@@ -1,6 +1,20 @@
 # AGENTS.md
 
-## Cursor Cloud specific instructions
+## JRebirth application architecture (all agents)
+
+For building or refactoring **applications** on JRebirth AF, follow the AI kit:
+
+- Kit root: [`jrebirth-ai-kit/`](jrebirth-ai-kit/)
+- Rules: [`jrebirth-ai-kit/AGENTS.md`](jrebirth-ai-kit/AGENTS.md)
+- Skills: [`jrebirth-ai-kit/skills/`](jrebirth-ai-kit/skills/)
+
+Install into a third-party app with `jrebirth-ai-kit/install.ps1` or `install.sh`.
+
+Framework-only Cursor skills: `org.jrebirth.af/.cursor/skills/update-site-doc/`, `preview-site/`, `release-version/` (versioning, site ZIPs, Central publish — only when the maintainer approves).
+
+---
+
+## Cursor Cloud — this repository
 
 ### Project overview
 

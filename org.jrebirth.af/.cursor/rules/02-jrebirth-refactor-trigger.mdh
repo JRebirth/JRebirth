@@ -6,13 +6,13 @@ alwaysApply: false
 ---
 # Refactor trigger
 
-When a file smells like legacy JavaFX living inside a JRebirth application, restructure it step by step:
+When a file smells like legacy JavaFX living inside a JRebirth application, restructure step by step:
 
-- identify which part of the JRebirth role split is missing.
-- move the state into the Model.
-- move the node creation into the View.
-- move the event wiring into the Controller.
-- move the actions into a Command or a Service.
-- move the cross-feature messaging into the Waves.
+- identify which part of the JRebirth role split is missing
+- move state to Model
+- move node creation to View
+- move event wiring to Controller
+- move actions to Command or Service
+- move cross-feature messaging to Waves
 
-Use the legacy refactor skill before you edit many files at once.
+Use `jrebirth-ai-kit/skills/jrebirth-refactor-legacy/SKILL.md` before editing many files at once.

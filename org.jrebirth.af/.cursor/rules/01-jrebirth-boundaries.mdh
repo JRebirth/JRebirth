@@ -4,14 +4,14 @@ alwaysApply: true
 ---
 # JRebirth boundaries
 
-Always prefer the mechanisms that the framework already provides over ad-hoc shortcuts.
+Always prefer mechanisms the framework already provides over ad-hoc shortcuts.
 
 The following shortcuts are banned by default:
 
-- no `new Thread` for the normal application flow.
-- no `Platform.runLater` used as a design pattern.
-- no heavy business logic placed inside a View or a Controller.
-- no stateful bindings owned by a View when they belong to the Model.
-- no `localFacade().globalFacade()` except in rare, hard integration cases.
+- no `new Thread` in normal application flow
+- no `Platform.runLater` used as a design pattern
+- no heavy business logic placed inside View or Controller
+- no stateful bindings owned by the View when they belong in the Model
+- no `localFacade().globalFacade()` except rare hard integration cases
 
-Whenever you are in doubt, stop and use the relevant skill.
+Whenever in doubt, stop and use the relevant skill under `jrebirth-ai-kit/skills/` (for example `jrebirth-threading`, `jrebirth-anti-patterns`).

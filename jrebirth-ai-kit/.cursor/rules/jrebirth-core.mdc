@@ -1,0 +1,17 @@
+---
+description: JRebirth AF architecture — read AGENTS.md and skills before Java/FXML work
+globs:
+  - "**/*.java"
+  - "**/*.fxml"
+alwaysApply: false
+---
+
+# JRebirth
+
+Before creating or changing JRebirth/JavaFX application code:
+
+1. Follow root `AGENTS.md` (MVC split, JAT rules, Waves, naming).
+2. Open the matching skill under `.cursor/skills/jrebirth-*/SKILL.md` (or `skills/` if this kit is opened directly).
+3. Prefer JRebirth roles over plain JavaFX shortcuts (`Platform.runLater`, raw threads, logic in controllers).
+
+Start with `jrebirth-core` when the role is unclear; use `jrebirth-create-mvc` for a full screen.

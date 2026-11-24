@@ -3,6 +3,16 @@
 Release Notes
 ==============
 
+12.0.1 — (pending Maven Central)
+-----------------------------------------
+
+This release fixes **jrebirth-maven-plugin** artifacts published as **12.0.0** on Maven Central, which shipped an empty mojo descriptor (`<mojos/>`) and omitted `text2fx` / `ecore2fx` goals. Version **12.0.1** rebuilds the plugin with descriptor validation (`PluginDescriptorGoalsTest`) and `skipErrorNoDescriptorsFound=false`.
+
+Site downloads for `${project.version}`:
+
+- `downloads/jrebirth-ai-kit-${project.version}.zip` — AI kit for coding agents
+- `downloads/jrebirth-${project.version}.zip` — library JARs (+ sources) for offline use
+
 8.6.0 - Release 2018-06-06
 -----------------------------------------
 
